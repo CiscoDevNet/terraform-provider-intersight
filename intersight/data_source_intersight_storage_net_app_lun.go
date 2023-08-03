@@ -233,6 +233,11 @@ func getStorageNetAppLunSchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"is_mapped": {
+			Description: "Reports if the LUN is mapped to one or more initiator groups.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"key": {
 			Description: "Unique identifier of LUN across data center.",
 			Type:        schema.TypeString,
@@ -863,6 +868,11 @@ func dataSourceStorageNetAppLunRead(c context.Context, d *schema.ResourceData, m
 		o.SetHost(x)
 	}
 
+	if v, ok := d.GetOk("is_mapped"); ok {
+		x := (v.(string))
+		o.SetIsMapped(x)
+	}
+
 	if v, ok := d.GetOk("key"); ok {
 		x := (v.(string))
 		o.SetKey(x)
@@ -1271,6 +1281,7 @@ func dataSourceStorageNetAppLunRead(c context.Context, d *schema.ResourceData, m
 				temp["events"] = flattenListStorageNetAppLunEventRelationship(s.GetEvents(), d)
 
 				temp["host"] = flattenListStorageNetAppInitiatorGroupRelationship(s.GetHost(), d)
+				temp["is_mapped"] = (s.GetIsMapped())
 				temp["key"] = (s.GetKey())
 				temp["mapped"] = (s.GetMapped())
 

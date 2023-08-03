@@ -119,6 +119,13 @@ func resourceFabricSwitchControlPolicy() *schema.Resource {
 				Optional:     true,
 				Default:      "end-host",
 			},
+			"fabric_pc_vhba_reset": {
+				Description:  "When enabled, a Registered State Change Notification (RSCN) is sent to the VIC adapter when any member port within the fabric port-channel goes down and vHBA would reset to restore the connection immediately. When disabled (default), vHBA reset is done only when all the members of a fabric port-channel are down.\n* `Disabled` - Admin configured Disabled State.\n* `Enabled` - Admin configured Enabled State.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"Disabled", "Enabled"}, false),
+				Optional:     true,
+				Default:      "Disabled",
+			},
 			"fc_switching_mode": {
 				Description:  "Enable or Disable FC End Host Switching Mode.\n* `end-host` - In end-host mode, the fabric interconnects appear to the upstream devices as end hosts with multiple links.In this mode, the switch does not run Spanning Tree Protocol and avoids loops by following a set of rules for traffic forwarding.In case of ethernet switching mode - Ethernet end-host mode is also known as Ethernet host virtualizer.\n* `switch` - In switch mode, the switch runs Spanning Tree Protocol to avoid loops, and broadcast and multicast packets are handled in the traditional way.This is the traditional switch mode.",
 				Type:         schema.TypeString,
@@ -642,6 +649,11 @@ func resourceFabricSwitchControlPolicyCreate(c context.Context, d *schema.Resour
 		o.SetEthernetSwitchingMode(x)
 	}
 
+	if v, ok := d.GetOk("fabric_pc_vhba_reset"); ok {
+		x := (v.(string))
+		o.SetFabricPcVhbaReset(x)
+	}
+
 	if v, ok := d.GetOk("fc_switching_mode"); ok {
 		x := (v.(string))
 		o.SetFcSwitchingMode(x)
@@ -942,6 +954,10 @@ func resourceFabricSwitchControlPolicyRead(c context.Context, d *schema.Resource
 		return diag.Errorf("error occurred while setting property EthernetSwitchingMode in FabricSwitchControlPolicy object: %s", err.Error())
 	}
 
+	if err := d.Set("fabric_pc_vhba_reset", (s.GetFabricPcVhbaReset())); err != nil {
+		return diag.Errorf("error occurred while setting property FabricPcVhbaReset in FabricSwitchControlPolicy object: %s", err.Error())
+	}
+
 	if err := d.Set("fc_switching_mode", (s.GetFcSwitchingMode())); err != nil {
 		return diag.Errorf("error occurred while setting property FcSwitchingMode in FabricSwitchControlPolicy object: %s", err.Error())
 	}
@@ -1043,6 +1059,12 @@ func resourceFabricSwitchControlPolicyUpdate(c context.Context, d *schema.Resour
 		v := d.Get("ethernet_switching_mode")
 		x := (v.(string))
 		o.SetEthernetSwitchingMode(x)
+	}
+
+	if d.HasChange("fabric_pc_vhba_reset") {
+		v := d.Get("fabric_pc_vhba_reset")
+		x := (v.(string))
+		o.SetFabricPcVhbaReset(x)
 	}
 
 	if d.HasChange("fc_switching_mode") {

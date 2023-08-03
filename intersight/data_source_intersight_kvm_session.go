@@ -121,7 +121,7 @@ func getKvmSessionSchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"kvm_launch_url_path": {
-			Description: "One time URL that is used to launch the KVM console.",
+			Description: "One time URL that is used to launch the vKVM console.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},

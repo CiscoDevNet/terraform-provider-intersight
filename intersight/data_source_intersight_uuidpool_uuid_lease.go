@@ -115,6 +115,11 @@ func getUuidpoolUuidLeaseSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"has_duplicate": {
+			Description: "HasDuplicate represents if there are other pools in which this id exists.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
 		"mod_time": {
 			Description: "The time when this managed object was last modified.",
 			Type:        schema.TypeString,
@@ -624,6 +629,11 @@ func dataSourceUuidpoolUuidLeaseRead(c context.Context, d *schema.ResourceData, 
 		o.SetDomainGroupMoid(x)
 	}
 
+	if v, ok := d.GetOkExists("has_duplicate"); ok {
+		x := (v.(bool))
+		o.SetHasDuplicate(x)
+	}
+
 	if v, ok := d.GetOk("mod_time"); ok {
 		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetModTime(x)
@@ -1062,6 +1072,7 @@ func dataSourceUuidpoolUuidLeaseRead(c context.Context, d *schema.ResourceData, 
 
 				temp["create_time"] = (s.GetCreateTime()).String()
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
+				temp["has_duplicate"] = (s.GetHasDuplicate())
 
 				temp["mod_time"] = (s.GetModTime()).String()
 				temp["moid"] = (s.GetMoid())

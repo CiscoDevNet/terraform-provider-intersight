@@ -174,6 +174,46 @@ func getHyperflexClusterSchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"capability": {
+			Description: "Capabilities and features supported in the HyperFlex cluster.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"encryption_supported": {
+						Description: "Specifies if encryption is supported in the HyperFlex cluster. The HyperFlex cluster supports self\nencrypting drives (SED).",
+						Type:        schema.TypeBool,
+						Optional:    true,
+					},
+					"iscsi_supported": {
+						Description: "Specifies if iSCSI is supported in the HyperFlex cluster. The HyperFlex cluster supports an iSCSI network,\niSCSI initiator groups, targets, and logical unit number (LUN).",
+						Type:        schema.TypeBool,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"replication_supported": {
+						Description: "Specifies if replication is supported in the HyperFlex cluster. \nThe HyperFlex cluster supports 1:1 disaster recovery and N:1 backup.",
+						Type:        schema.TypeBool,
+						Optional:    true,
+					},
+				},
+			},
+		},
 		"capacity_runway": {
 			Description: "The number of days remaining before the cluster's storage utilization reaches the recommended capacity limit of 76%.\nDefault value is math.MaxInt32 to indicate that the capacity runway is \"Unknown\" for a cluster that is not connected or with not sufficient data.",
 			Type:        schema.TypeInt,
@@ -369,7 +409,7 @@ func getHyperflexClusterSchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"hypervisor_type": {
-			Description: "Identifies the broad type of the underlying hypervisor.\n* `ESXi` - The hypervisor running on the HyperFlex cluster is a Vmware ESXi hypervisor of any version.\n* `HyperFlexAp` - The hypervisor of the virtualization platform is Cisco HyperFlex Application Platform.\n* `IWE` - The hypervisor of the virtualization platform is Cisco Intersight Workload Engine.\n* `Hyper-V` - The hypervisor running on the HyperFlex cluster is Microsoft Hyper-V.\n* `Unknown` - The hypervisor running on the HyperFlex cluster is not known.",
+			Description: "Identifies the broad type of the underlying hypervisor.\n* `ESXi` - The hypervisor running on the HyperFlex cluster is a Vmware ESXi hypervisor of any version.\n* `Hyper-V` - The hypervisor running on the HyperFlex cluster is Microsoft Hyper-V.\n* `Unknown` - The hypervisor running on the HyperFlex cluster is not known.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -432,6 +472,86 @@ func getHyperflexClusterSchema() map[string]*schema.Schema {
 			Description: "The user-provided name for this cluster to facilitate identification.",
 			Type:        schema.TypeString,
 			Optional:    true,
+		},
+		"network_configuration": {
+			Description: "The network configuration information of the HyperFlex cluster.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"cluster_data_ip": {
+						Description: "Cluster data IP of the HyperFlex cluster.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"cluster_management_ip": {
+						Description: "Cluster management IP of the HyperFlex cluster.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"data_default_gateway": {
+						Description: "Default gateway of the data network.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"data_jumbo_frame": {
+						Description: "Boolean value to indicate if jumboframes is enabled for storage-data network.",
+						Type:        schema.TypeBool,
+						Optional:    true,
+					},
+					"data_sub_netmask": {
+						Description: "Subnet mask of the data network.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"data_vlan_id": {
+						Description: "Data VLAN ID. Enter the correct VLAN tags if you are using trunk ports. The VLAN tags must be different when using trunk mode.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"live_migration_vlan_id": {
+						Description: "VLAN ID for virtual machine live migration.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"management_default_gateway": {
+						Description: "Default gateway of the management network.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"management_sub_netmask": {
+						Description: "Subnet mask of the management network.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"management_vlan_id": {
+						Description: "Management VLAN ID. Enter the correct VLAN tags if you are using trunk ports. The VLAN tags must be different when using trunk mode.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"vm_network_vlan_id": {
+						Description: "VM network VLAN ID. Used for VM data traffic.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+				},
+			},
 		},
 		"nodes": {
 			Description: "An array of relationships to hyperflexNode resources.",
@@ -1027,6 +1147,56 @@ func getHyperflexClusterSchema() map[string]*schema.Schema {
 			Type:        schema.TypeFloat,
 			Optional:    true,
 		},
+		"vcenter_configuration": {
+			Description: "The vCenter configuration information of the HyperFlex cluster.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"cluster_id": {
+						Description: "The vCenter compute cluster identifier for the HyperFlex Cluster.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"cluster_name": {
+						Description: "The vCenter compute cluster name for the HyperFlex cluster.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"datacenter_id": {
+						Description: "The identifier of the datacenter in vCenter that the HyperFlex cluster belongs to.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"datacenter_name": {
+						Description: "The name of the datacenter in vCenter that the HyperFlex cluster belongs to.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"url": {
+						Description: "The URL of the vCenter for this HyperFlex Cluster.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
 		"version_context": {
 			Description: "The versioning info for this managed object.",
 			Type:        schema.TypeList,
@@ -1180,7 +1350,7 @@ func getHyperflexClusterSchema() map[string]*schema.Schema {
 			},
 		},
 		"zone_type": {
-			Description: "The type of availability zone used by the cluster. Physical zones are always used in HyperFlex \nStretched Clusters. Logical zones may be used if a cluster has Logical Availability Zones (LAZ) \nenabled.\n* `UNKNOWN` - The type of zone configured on the HyperFlex cluster is not known.\n* `NOT_CONFIGURED` - The zone type is not configured.\n* `LOGICAL` - The zone is a logical zone created when the logical availability zones (LAZ) feature is enabled on the HyperFlex cluster.\n* `PHYSICAL` - The zone is a physical zone configured on a stretched HyperFlex cluster.",
+			Description: "The type of availability zone used by the cluster. Physical zones are always used in HyperFlex\nStretched Clusters. Logical zones may be used if a cluster has Logical Availability Zones (LAZ)\nenabled.\n* `UNKNOWN` - The type of zone configured on the HyperFlex cluster is not known.\n* `NOT_CONFIGURED` - The zone type is not configured.\n* `LOGICAL` - The zone is a logical zone created when the logical availability zones (LAZ) feature is enabled on the HyperFlex cluster.\n* `PHYSICAL` - The zone is a physical zone configured on a stretched HyperFlex cluster.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -1371,6 +1541,37 @@ func dataSourceHyperflexClusterRead(c context.Context, d *schema.ResourceData, m
 		if len(p) > 0 {
 			x := p[0]
 			o.SetAssociatedProfile(x)
+		}
+	}
+
+	if v, ok := d.GetOk("capability"); ok {
+		p := make([]models.HyperflexCapability, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.HyperflexCapability{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("hyperflex.Capability")
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			p = append(p, *o)
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetCapability(x)
 		}
 	}
 
@@ -1667,6 +1868,103 @@ func dataSourceHyperflexClusterRead(c context.Context, d *schema.ResourceData, m
 	if v, ok := d.GetOk("name"); ok {
 		x := (v.(string))
 		o.SetName(x)
+	}
+
+	if v, ok := d.GetOk("network_configuration"); ok {
+		p := make([]models.HyperflexNetworkConfiguration, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.HyperflexNetworkConfiguration{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("hyperflex.NetworkConfiguration")
+			if v, ok := l["cluster_data_ip"]; ok {
+				{
+					x := (v.(string))
+					o.SetClusterDataIp(x)
+				}
+			}
+			if v, ok := l["cluster_management_ip"]; ok {
+				{
+					x := (v.(string))
+					o.SetClusterManagementIp(x)
+				}
+			}
+			if v, ok := l["data_default_gateway"]; ok {
+				{
+					x := (v.(string))
+					o.SetDataDefaultGateway(x)
+				}
+			}
+			if v, ok := l["data_jumbo_frame"]; ok {
+				{
+					x := (v.(bool))
+					o.SetDataJumboFrame(x)
+				}
+			}
+			if v, ok := l["data_sub_netmask"]; ok {
+				{
+					x := (v.(string))
+					o.SetDataSubNetmask(x)
+				}
+			}
+			if v, ok := l["data_vlan_id"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetDataVlanId(x)
+				}
+			}
+			if v, ok := l["live_migration_vlan_id"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetLiveMigrationVlanId(x)
+				}
+			}
+			if v, ok := l["management_default_gateway"]; ok {
+				{
+					x := (v.(string))
+					o.SetManagementDefaultGateway(x)
+				}
+			}
+			if v, ok := l["management_sub_netmask"]; ok {
+				{
+					x := (v.(string))
+					o.SetManagementSubNetmask(x)
+				}
+			}
+			if v, ok := l["management_vlan_id"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetManagementVlanId(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["vm_network_vlan_id"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetVmNetworkVlanId(x)
+				}
+			}
+			p = append(p, *o)
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetNetworkConfiguration(x)
+		}
 	}
 
 	if v, ok := d.GetOk("nodes"); ok {
@@ -2137,6 +2435,37 @@ func dataSourceHyperflexClusterRead(c context.Context, d *schema.ResourceData, m
 		o.SetUtilizationTrendPercentage(x)
 	}
 
+	if v, ok := d.GetOk("vcenter_configuration"); ok {
+		p := make([]models.HyperflexVcenterConfiguration, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.HyperflexVcenterConfiguration{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("hyperflex.VcenterConfiguration")
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			p = append(p, *o)
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetVcenterConfiguration(x)
+		}
+	}
+
 	if v, ok := d.GetOk("version_context"); ok {
 		p := make([]models.MoVersionContext, 0, 1)
 		s := v.([]interface{})
@@ -2306,6 +2635,8 @@ func dataSourceHyperflexClusterRead(c context.Context, d *schema.ResourceData, m
 				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)
 
 				temp["associated_profile"] = flattenMapPolicyAbstractProfileRelationship(s.GetAssociatedProfile(), d)
+
+				temp["capability"] = flattenMapHyperflexCapability(s.GetCapability(), d)
 				temp["capacity_runway"] = (s.GetCapacityRunway())
 
 				temp["child_clusters"] = flattenListHyperflexBaseClusterRelationship(s.GetChildClusters(), d)
@@ -2341,6 +2672,8 @@ func dataSourceHyperflexClusterRead(c context.Context, d *schema.ResourceData, m
 				temp["moid"] = (s.GetMoid())
 				temp["name"] = (s.GetName())
 
+				temp["network_configuration"] = flattenMapHyperflexNetworkConfiguration(s.GetNetworkConfiguration(), d)
+
 				temp["nodes"] = flattenListHyperflexNodeRelationship(s.GetNodes(), d)
 				temp["ntp_servers"] = (s.GetNtpServers())
 				temp["object_type"] = (s.GetObjectType())
@@ -2372,6 +2705,8 @@ func dataSourceHyperflexClusterRead(c context.Context, d *schema.ResourceData, m
 				temp["uplink_speed"] = (s.GetUplinkSpeed())
 				temp["utilization_percentage"] = (s.GetUtilizationPercentage())
 				temp["utilization_trend_percentage"] = (s.GetUtilizationTrendPercentage())
+
+				temp["vcenter_configuration"] = flattenMapHyperflexVcenterConfiguration(s.GetVcenterConfiguration(), d)
 
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
 				temp["vm_count"] = (s.GetVmCount())

@@ -60,6 +60,11 @@ func getHyperflexClusterNetworkPolicySchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"cimc_management_mode": {
+			Description: "The mode configured on the CIMC management interface.\n* `OutOfBand` - The server uses out-of-band management, i.e. management traffic traverses through the management interfaces on the UCS Fabric Interconnects.\n* `InBand` - The server uses in-band management, i.e. management traffic traverses through the data uplink ports on the UCS Fabric Interconnects.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"class_id": {
 			Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 			Type:        schema.TypeString,
@@ -684,6 +689,11 @@ func dataSourceHyperflexClusterNetworkPolicyRead(c context.Context, d *schema.Re
 			x = append(x, models.MoMoRefAsMoBaseMoRelationship(o))
 		}
 		o.SetAncestors(x)
+	}
+
+	if v, ok := d.GetOk("cimc_management_mode"); ok {
+		x := (v.(string))
+		o.SetCimcManagementMode(x)
 	}
 
 	if v, ok := d.GetOk("class_id"); ok {
@@ -1331,6 +1341,7 @@ func dataSourceHyperflexClusterNetworkPolicyRead(c context.Context, d *schema.Re
 				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
 
 				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)
+				temp["cimc_management_mode"] = (s.GetCimcManagementMode())
 				temp["class_id"] = (s.GetClassId())
 
 				temp["cluster_profiles"] = flattenListHyperflexClusterProfileRelationship(s.GetClusterProfiles(), d)

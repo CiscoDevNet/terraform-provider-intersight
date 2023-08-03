@@ -601,6 +601,46 @@ func getHyperflexNodeSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"site_info": {
+			Description: "The site details of the HyperFlex node.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"name": {
+						Description: "The name of the site for stretch cluster.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"num_nodes": {
+						Description: "Number of nodes in the Zone.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"zone_uuid": {
+						Description: "The unique identifier of the zone for stretch cluster.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
 		"status": {
 			Description: "The status of the host. Indicates whether the hypervisor is online.\n* `UNKNOWN` - The host status cannot be determined.\n* `ONLINE` - The host is online and operational.\n* `OFFLINE` - The host is offline and is currently not participating in the HyperFlex cluster.\n* `INMAINTENANCE` - The host is not participating in the HyperFlex cluster because of a maintenance operation, such as firmware or data platform upgrade.\n* `DEGRADED` - The host is degraded and may not be performing in its full operational capacity.",
 			Type:        schema.TypeString,
@@ -1373,6 +1413,37 @@ func dataSourceHyperflexNodeRead(c context.Context, d *schema.ResourceData, meta
 		o.SetSharedScope(x)
 	}
 
+	if v, ok := d.GetOk("site_info"); ok {
+		p := make([]models.HyperflexSiteDetails, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.HyperflexSiteDetails{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("hyperflex.SiteDetails")
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			p = append(p, *o)
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetSiteInfo(x)
+		}
+	}
+
 	if v, ok := d.GetOk("status"); ok {
 		x := (v.(string))
 		o.SetStatus(x)
@@ -1573,6 +1644,8 @@ func dataSourceHyperflexNodeRead(c context.Context, d *schema.ResourceData, meta
 				temp["role"] = (s.GetRole())
 				temp["serial_number"] = (s.GetSerialNumber())
 				temp["shared_scope"] = (s.GetSharedScope())
+
+				temp["site_info"] = flattenMapHyperflexSiteDetails(s.GetSiteInfo(), d)
 				temp["status"] = (s.GetStatus())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)

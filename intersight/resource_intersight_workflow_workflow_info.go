@@ -1119,7 +1119,7 @@ func resourceWorkflowWorkflowInfo() *schema.Resource {
 							Default:     "workflow.WorkflowCtx",
 						},
 						"initiator_ctx": {
-							Description: "Details about initiator of the workflow.",
+							Description: "Details about initiator of the workflow. Any Intersight object resource can be set as the initiator of the workflow. For workflows executed by an Intersight service, an applicable service object will be set as the initiator. For example, during server profile deployment workflow, the server profile object will be set as the initiator by the system. For user created workflows, this field is optional and for workflows executed from Intersight workflow execution page, the workflow definition object will be set as the Initiator.",
 							Type:        schema.TypeList,
 							MaxItems:    1,
 							Optional:    true,
@@ -1229,7 +1229,7 @@ func resourceWorkflowWorkflowInfo() *schema.Resource {
 							},
 						},
 						"workflow_subtype": {
-							Description: "The subtype of the workflow.",
+							Description: "The subtype of the dynamic workflow. For example - Intersight services offer the following subtypes [Validate, Deploy, Import] for dynamic workflow of type serverconfig. This field is not applicable for user created workflows.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -1240,7 +1240,7 @@ func resourceWorkflowWorkflowInfo() *schema.Resource {
 								return
 							}},
 						"workflow_type": {
-							Description: "Type of the workflow being started. This can be any string for client services to distinguish workflow by type.",
+							Description: "Intersight services set the type of dynamic workflow that need to be built and executed. This field is not applicable for user created workflows. WorkflowType set as ServerConfig states that a dynamic workflow is executing tasks related to server configuration.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,

@@ -19,6 +19,7 @@ The following arguments can be used to get data of already created objects in In
 * `create_time`:(string) The time when this managed object was created. 
 * `description`:(string) Short description about the volume. 
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
+* `is_mapped`:(string) Reports if the LUN is mapped to one or more initiator groups. 
 * `key`:(string) Unique identifier of LUN across data center. 
 * `mapped`:(bool) Reports if the LUN is mapped to one or more initiator groups. 
 * `mod_time`:(string) The time when this managed object was last modified. 

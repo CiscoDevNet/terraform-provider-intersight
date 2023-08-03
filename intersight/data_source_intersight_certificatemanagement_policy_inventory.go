@@ -70,11 +70,6 @@ func getCertificatemanagementPolicyInventorySchema() map[string]*schema.Schema {
 						Optional:         true,
 						DiffSuppressFunc: SuppressDiffAdditionProps,
 					},
-					"cert_type": {
-						Description: "Certificate Type for the certificate management.\n* `None` - Set certificate on the selected end point .\n* `KMIPClient` - Set KMIP certificate on the selected end point.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
 					"certificate": {
 						Description: "Certificate that is used for verifying the authorization.",
 						Type:        schema.TypeList,
@@ -245,18 +240,8 @@ func getCertificatemanagementPolicyInventorySchema() map[string]*schema.Schema {
 						Type:        schema.TypeBool,
 						Optional:    true,
 					},
-					"is_privatekey_set": {
-						Description: "Indicates whether the value of the 'privatekey' property has been set.",
-						Type:        schema.TypeBool,
-						Optional:    true,
-					},
 					"object_type": {
 						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"privatekey": {
-						Description: "Private Key which is used to validate the certificate.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
@@ -650,12 +635,6 @@ func dataSourceCertificatemanagementPolicyInventoryRead(c context.Context, d *sc
 					}
 				}
 			}
-			if v, ok := l["cert_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetCertType(x)
-				}
-			}
 			if v, ok := l["certificate"]; ok {
 				{
 					p := make([]models.X509Certificate, 0, 1)
@@ -705,12 +684,6 @@ func dataSourceCertificatemanagementPolicyInventoryRead(c context.Context, d *sc
 				{
 					x := (v.(string))
 					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["privatekey"]; ok {
-				{
-					x := (v.(string))
-					o.SetPrivatekey(x)
 				}
 			}
 			x = append(x, *o)

@@ -6,10 +6,11 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "policy.PolicyStatus"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "policy.PolicyStatus"]
-**Moid** | Pointer to **string** | The object id of the policy being attached. | [optional] 
-**Reason** | Pointer to **string** | The reason for the status - it will be empty if status is ok or validating. If error, it will have the appropriate message indicating the reason for failure. | [optional] 
-**Status** | Pointer to **string** | Indicates if the policy attach/detach was successful or not. Values  -- ok, errored, validating. * &#x60;ok&#x60; - The policy attach/detach is successful. * &#x60;error&#x60; - The policy cannot be attached/detached due to an error. * &#x60;validating&#x60; - The policy preconfig validation is in progress. | [optional] [default to "ok"]
-**Type** | Pointer to **string** | The object type of the policy being attached. | [optional] 
+**ErrorMessages** | Pointer to [**[]PolicyPolicyError**](PolicyPolicyError.md) |  | [optional] 
+**Moid** | Pointer to **string** | The object identifier of the policy. | [optional] [readonly] 
+**Reason** | Pointer to **string** | The reason for the status - it will be empty if status is ok or validating. If error, it will have the appropriate message indicating the reason for failure. | [optional] [readonly] 
+**Status** | Pointer to **string** | Indicates if the policy association or validation was successful or not. Values  -- ok, errored, validating. * &#x60;ok&#x60; - The policy association or validation is successful. * &#x60;error&#x60; - The policy association or validation has failed. * &#x60;validating&#x60; - The policy association or validation is in progress. | [optional] [readonly] [default to "ok"]
+**Type** | Pointer to **string** | The object type of the policy. | [optional] [readonly] 
 
 ## Methods
 
@@ -70,6 +71,41 @@ and a boolean to check if the value has been set.
 SetObjectType sets ObjectType field to given value.
 
 
+### GetErrorMessages
+
+`func (o *PolicyPolicyStatus) GetErrorMessages() []PolicyPolicyError`
+
+GetErrorMessages returns the ErrorMessages field if non-nil, zero value otherwise.
+
+### GetErrorMessagesOk
+
+`func (o *PolicyPolicyStatus) GetErrorMessagesOk() (*[]PolicyPolicyError, bool)`
+
+GetErrorMessagesOk returns a tuple with the ErrorMessages field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetErrorMessages
+
+`func (o *PolicyPolicyStatus) SetErrorMessages(v []PolicyPolicyError)`
+
+SetErrorMessages sets ErrorMessages field to given value.
+
+### HasErrorMessages
+
+`func (o *PolicyPolicyStatus) HasErrorMessages() bool`
+
+HasErrorMessages returns a boolean if a field has been set.
+
+### SetErrorMessagesNil
+
+`func (o *PolicyPolicyStatus) SetErrorMessagesNil(b bool)`
+
+ SetErrorMessagesNil sets the value for ErrorMessages to be an explicit nil
+
+### UnsetErrorMessages
+`func (o *PolicyPolicyStatus) UnsetErrorMessages()`
+
+UnsetErrorMessages ensures that no value is present for ErrorMessages, not even an explicit nil
 ### GetMoid
 
 `func (o *PolicyPolicyStatus) GetMoid() string`

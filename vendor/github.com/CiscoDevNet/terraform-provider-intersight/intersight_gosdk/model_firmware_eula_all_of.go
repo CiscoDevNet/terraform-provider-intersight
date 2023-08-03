@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-11765
+API version: 1.0.11-13010
 Contact: intersight@cisco.com
 */
 
@@ -21,10 +21,18 @@ type FirmwareEulaAllOf struct {
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
-	// EULA acceptance status for the account.
+	// Overall acceptance status for the account, both EULA and K9.
 	Accepted *bool `json:"Accepted,omitempty"`
+	// Acceptance form content provided by cisco.com.
+	Content *string `json:"Content,omitempty"`
+	// EULA acceptance status for the account.
+	EulaAccepted *bool `json:"EulaAccepted,omitempty"`
 	// EULA acceptance form content provided by cisco.com.
-	Content              *string                 `json:"Content,omitempty"`
+	EulaContent *string `json:"EulaContent,omitempty"`
+	// K9 acceptance status for the account.
+	K9Accepted *bool `json:"K9Accepted,omitempty"`
+	// K9 acceptance form content provided by cisco.com.
+	K9Content            *string                 `json:"K9Content,omitempty"`
 	Account              *IamAccountRelationship `json:"Account,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
@@ -166,6 +174,134 @@ func (o *FirmwareEulaAllOf) SetContent(v string) {
 	o.Content = &v
 }
 
+// GetEulaAccepted returns the EulaAccepted field value if set, zero value otherwise.
+func (o *FirmwareEulaAllOf) GetEulaAccepted() bool {
+	if o == nil || o.EulaAccepted == nil {
+		var ret bool
+		return ret
+	}
+	return *o.EulaAccepted
+}
+
+// GetEulaAcceptedOk returns a tuple with the EulaAccepted field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FirmwareEulaAllOf) GetEulaAcceptedOk() (*bool, bool) {
+	if o == nil || o.EulaAccepted == nil {
+		return nil, false
+	}
+	return o.EulaAccepted, true
+}
+
+// HasEulaAccepted returns a boolean if a field has been set.
+func (o *FirmwareEulaAllOf) HasEulaAccepted() bool {
+	if o != nil && o.EulaAccepted != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetEulaAccepted gets a reference to the given bool and assigns it to the EulaAccepted field.
+func (o *FirmwareEulaAllOf) SetEulaAccepted(v bool) {
+	o.EulaAccepted = &v
+}
+
+// GetEulaContent returns the EulaContent field value if set, zero value otherwise.
+func (o *FirmwareEulaAllOf) GetEulaContent() string {
+	if o == nil || o.EulaContent == nil {
+		var ret string
+		return ret
+	}
+	return *o.EulaContent
+}
+
+// GetEulaContentOk returns a tuple with the EulaContent field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FirmwareEulaAllOf) GetEulaContentOk() (*string, bool) {
+	if o == nil || o.EulaContent == nil {
+		return nil, false
+	}
+	return o.EulaContent, true
+}
+
+// HasEulaContent returns a boolean if a field has been set.
+func (o *FirmwareEulaAllOf) HasEulaContent() bool {
+	if o != nil && o.EulaContent != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetEulaContent gets a reference to the given string and assigns it to the EulaContent field.
+func (o *FirmwareEulaAllOf) SetEulaContent(v string) {
+	o.EulaContent = &v
+}
+
+// GetK9Accepted returns the K9Accepted field value if set, zero value otherwise.
+func (o *FirmwareEulaAllOf) GetK9Accepted() bool {
+	if o == nil || o.K9Accepted == nil {
+		var ret bool
+		return ret
+	}
+	return *o.K9Accepted
+}
+
+// GetK9AcceptedOk returns a tuple with the K9Accepted field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FirmwareEulaAllOf) GetK9AcceptedOk() (*bool, bool) {
+	if o == nil || o.K9Accepted == nil {
+		return nil, false
+	}
+	return o.K9Accepted, true
+}
+
+// HasK9Accepted returns a boolean if a field has been set.
+func (o *FirmwareEulaAllOf) HasK9Accepted() bool {
+	if o != nil && o.K9Accepted != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetK9Accepted gets a reference to the given bool and assigns it to the K9Accepted field.
+func (o *FirmwareEulaAllOf) SetK9Accepted(v bool) {
+	o.K9Accepted = &v
+}
+
+// GetK9Content returns the K9Content field value if set, zero value otherwise.
+func (o *FirmwareEulaAllOf) GetK9Content() string {
+	if o == nil || o.K9Content == nil {
+		var ret string
+		return ret
+	}
+	return *o.K9Content
+}
+
+// GetK9ContentOk returns a tuple with the K9Content field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FirmwareEulaAllOf) GetK9ContentOk() (*string, bool) {
+	if o == nil || o.K9Content == nil {
+		return nil, false
+	}
+	return o.K9Content, true
+}
+
+// HasK9Content returns a boolean if a field has been set.
+func (o *FirmwareEulaAllOf) HasK9Content() bool {
+	if o != nil && o.K9Content != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetK9Content gets a reference to the given string and assigns it to the K9Content field.
+func (o *FirmwareEulaAllOf) SetK9Content(v string) {
+	o.K9Content = &v
+}
+
 // GetAccount returns the Account field value if set, zero value otherwise.
 func (o *FirmwareEulaAllOf) GetAccount() IamAccountRelationship {
 	if o == nil || o.Account == nil {
@@ -212,6 +348,18 @@ func (o FirmwareEulaAllOf) MarshalJSON() ([]byte, error) {
 	if o.Content != nil {
 		toSerialize["Content"] = o.Content
 	}
+	if o.EulaAccepted != nil {
+		toSerialize["EulaAccepted"] = o.EulaAccepted
+	}
+	if o.EulaContent != nil {
+		toSerialize["EulaContent"] = o.EulaContent
+	}
+	if o.K9Accepted != nil {
+		toSerialize["K9Accepted"] = o.K9Accepted
+	}
+	if o.K9Content != nil {
+		toSerialize["K9Content"] = o.K9Content
+	}
 	if o.Account != nil {
 		toSerialize["Account"] = o.Account
 	}
@@ -237,6 +385,10 @@ func (o *FirmwareEulaAllOf) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Accepted")
 		delete(additionalProperties, "Content")
+		delete(additionalProperties, "EulaAccepted")
+		delete(additionalProperties, "EulaContent")
+		delete(additionalProperties, "K9Accepted")
+		delete(additionalProperties, "K9Content")
 		delete(additionalProperties, "Account")
 		o.AdditionalProperties = additionalProperties
 	}

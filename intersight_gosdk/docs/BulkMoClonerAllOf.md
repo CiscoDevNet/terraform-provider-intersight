@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "bulk.MoCloner"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "bulk.MoCloner"]
+**ExcludeProperties** | Pointer to **[]string** |  | [optional] 
 **Responses** | Pointer to [**[]BulkRestResult**](BulkRestResult.md) |  | [optional] 
 **Sources** | Pointer to [**[]MoBaseMo**](MoBaseMo.md) |  | [optional] 
 **Targets** | Pointer to [**[]MoBaseMo**](MoBaseMo.md) |  | [optional] 
@@ -70,6 +71,41 @@ and a boolean to check if the value has been set.
 SetObjectType sets ObjectType field to given value.
 
 
+### GetExcludeProperties
+
+`func (o *BulkMoClonerAllOf) GetExcludeProperties() []string`
+
+GetExcludeProperties returns the ExcludeProperties field if non-nil, zero value otherwise.
+
+### GetExcludePropertiesOk
+
+`func (o *BulkMoClonerAllOf) GetExcludePropertiesOk() (*[]string, bool)`
+
+GetExcludePropertiesOk returns a tuple with the ExcludeProperties field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetExcludeProperties
+
+`func (o *BulkMoClonerAllOf) SetExcludeProperties(v []string)`
+
+SetExcludeProperties sets ExcludeProperties field to given value.
+
+### HasExcludeProperties
+
+`func (o *BulkMoClonerAllOf) HasExcludeProperties() bool`
+
+HasExcludeProperties returns a boolean if a field has been set.
+
+### SetExcludePropertiesNil
+
+`func (o *BulkMoClonerAllOf) SetExcludePropertiesNil(b bool)`
+
+ SetExcludePropertiesNil sets the value for ExcludeProperties to be an explicit nil
+
+### UnsetExcludeProperties
+`func (o *BulkMoClonerAllOf) UnsetExcludeProperties()`
+
+UnsetExcludeProperties ensures that no value is present for ExcludeProperties, not even an explicit nil
 ### GetResponses
 
 `func (o *BulkMoClonerAllOf) GetResponses() []BulkRestResult`

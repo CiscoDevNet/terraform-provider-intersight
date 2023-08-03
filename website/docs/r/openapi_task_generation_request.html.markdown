@@ -19,7 +19,7 @@ This complex property has following sub-properties:
   + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
 * `create_time`:(string)(ReadOnly) The time when this managed object was created. 
 * `domain_group_moid`:(string)(ReadOnly) The DomainGroup ID for this managed object. 
-* `endpoint_type`:(string) Indicates if target endpoint is external or internal. An endpoint is internal if the target is an Intersight resource. For instance, configuring an intersight object using a Task.* `External` - Denotes that the target endpoint is an external API endpoint* `Internal` - Denotes that the target endpoint is a Intersight API endpoint 
+* `endpoint_type`:(string) Indicates if target endpoint is external or internal. An endpoint is internal if the target is an Intersight resource. For instance, configuring an intersight object using a Task.* `External` - Denotes that the target endpoint is an external API endpoint.* `Internal` - Denotes that the target endpoint is a Intersight API endpoint. 
 * `failed_tasks`:(Array)
 This complex property has following sub-properties:
   + `name`:(string) Name of the task. 

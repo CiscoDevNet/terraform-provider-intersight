@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-11765
+API version: 1.0.11-13010
 Contact: intersight@cisco.com
 */
 
@@ -21,8 +21,16 @@ type MemoryUnitAllOf struct {
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
+	// This field displays the description of the DIMM.
+	Description *string `json:"Description,omitempty"`
+	// This field indicates whether the DIMM is supported on the server or not.
+	IsPlatformSupported *bool `json:"IsPlatformSupported,omitempty"`
 	// This represents the ID of a regular DIMM on a server.
-	MemoryId             *int64                               `json:"MemoryId,omitempty"`
+	MemoryId *int64 `json:"MemoryId,omitempty"`
+	// This field displays the part number of the DIMM.
+	PartNumber *string `json:"PartNumber,omitempty"`
+	// This field displays the product ID of the DIMM.
+	Pid                  *string                              `json:"Pid,omitempty"`
 	InventoryDeviceInfo  *InventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
 	MemoryArray          *MemoryArrayRelationship             `json:"MemoryArray,omitempty"`
 	RegisteredDevice     *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
@@ -102,6 +110,70 @@ func (o *MemoryUnitAllOf) SetObjectType(v string) {
 	o.ObjectType = v
 }
 
+// GetDescription returns the Description field value if set, zero value otherwise.
+func (o *MemoryUnitAllOf) GetDescription() string {
+	if o == nil || o.Description == nil {
+		var ret string
+		return ret
+	}
+	return *o.Description
+}
+
+// GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *MemoryUnitAllOf) GetDescriptionOk() (*string, bool) {
+	if o == nil || o.Description == nil {
+		return nil, false
+	}
+	return o.Description, true
+}
+
+// HasDescription returns a boolean if a field has been set.
+func (o *MemoryUnitAllOf) HasDescription() bool {
+	if o != nil && o.Description != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetDescription gets a reference to the given string and assigns it to the Description field.
+func (o *MemoryUnitAllOf) SetDescription(v string) {
+	o.Description = &v
+}
+
+// GetIsPlatformSupported returns the IsPlatformSupported field value if set, zero value otherwise.
+func (o *MemoryUnitAllOf) GetIsPlatformSupported() bool {
+	if o == nil || o.IsPlatformSupported == nil {
+		var ret bool
+		return ret
+	}
+	return *o.IsPlatformSupported
+}
+
+// GetIsPlatformSupportedOk returns a tuple with the IsPlatformSupported field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *MemoryUnitAllOf) GetIsPlatformSupportedOk() (*bool, bool) {
+	if o == nil || o.IsPlatformSupported == nil {
+		return nil, false
+	}
+	return o.IsPlatformSupported, true
+}
+
+// HasIsPlatformSupported returns a boolean if a field has been set.
+func (o *MemoryUnitAllOf) HasIsPlatformSupported() bool {
+	if o != nil && o.IsPlatformSupported != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetIsPlatformSupported gets a reference to the given bool and assigns it to the IsPlatformSupported field.
+func (o *MemoryUnitAllOf) SetIsPlatformSupported(v bool) {
+	o.IsPlatformSupported = &v
+}
+
 // GetMemoryId returns the MemoryId field value if set, zero value otherwise.
 func (o *MemoryUnitAllOf) GetMemoryId() int64 {
 	if o == nil || o.MemoryId == nil {
@@ -132,6 +204,70 @@ func (o *MemoryUnitAllOf) HasMemoryId() bool {
 // SetMemoryId gets a reference to the given int64 and assigns it to the MemoryId field.
 func (o *MemoryUnitAllOf) SetMemoryId(v int64) {
 	o.MemoryId = &v
+}
+
+// GetPartNumber returns the PartNumber field value if set, zero value otherwise.
+func (o *MemoryUnitAllOf) GetPartNumber() string {
+	if o == nil || o.PartNumber == nil {
+		var ret string
+		return ret
+	}
+	return *o.PartNumber
+}
+
+// GetPartNumberOk returns a tuple with the PartNumber field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *MemoryUnitAllOf) GetPartNumberOk() (*string, bool) {
+	if o == nil || o.PartNumber == nil {
+		return nil, false
+	}
+	return o.PartNumber, true
+}
+
+// HasPartNumber returns a boolean if a field has been set.
+func (o *MemoryUnitAllOf) HasPartNumber() bool {
+	if o != nil && o.PartNumber != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetPartNumber gets a reference to the given string and assigns it to the PartNumber field.
+func (o *MemoryUnitAllOf) SetPartNumber(v string) {
+	o.PartNumber = &v
+}
+
+// GetPid returns the Pid field value if set, zero value otherwise.
+func (o *MemoryUnitAllOf) GetPid() string {
+	if o == nil || o.Pid == nil {
+		var ret string
+		return ret
+	}
+	return *o.Pid
+}
+
+// GetPidOk returns a tuple with the Pid field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *MemoryUnitAllOf) GetPidOk() (*string, bool) {
+	if o == nil || o.Pid == nil {
+		return nil, false
+	}
+	return o.Pid, true
+}
+
+// HasPid returns a boolean if a field has been set.
+func (o *MemoryUnitAllOf) HasPid() bool {
+	if o != nil && o.Pid != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetPid gets a reference to the given string and assigns it to the Pid field.
+func (o *MemoryUnitAllOf) SetPid(v string) {
+	o.Pid = &v
 }
 
 // GetInventoryDeviceInfo returns the InventoryDeviceInfo field value if set, zero value otherwise.
@@ -238,8 +374,20 @@ func (o MemoryUnitAllOf) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["ObjectType"] = o.ObjectType
 	}
+	if o.Description != nil {
+		toSerialize["Description"] = o.Description
+	}
+	if o.IsPlatformSupported != nil {
+		toSerialize["IsPlatformSupported"] = o.IsPlatformSupported
+	}
 	if o.MemoryId != nil {
 		toSerialize["MemoryId"] = o.MemoryId
+	}
+	if o.PartNumber != nil {
+		toSerialize["PartNumber"] = o.PartNumber
+	}
+	if o.Pid != nil {
+		toSerialize["Pid"] = o.Pid
 	}
 	if o.InventoryDeviceInfo != nil {
 		toSerialize["InventoryDeviceInfo"] = o.InventoryDeviceInfo
@@ -270,7 +418,11 @@ func (o *MemoryUnitAllOf) UnmarshalJSON(bytes []byte) (err error) {
 	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
+		delete(additionalProperties, "Description")
+		delete(additionalProperties, "IsPlatformSupported")
 		delete(additionalProperties, "MemoryId")
+		delete(additionalProperties, "PartNumber")
+		delete(additionalProperties, "Pid")
 		delete(additionalProperties, "InventoryDeviceInfo")
 		delete(additionalProperties, "MemoryArray")
 		delete(additionalProperties, "RegisteredDevice")

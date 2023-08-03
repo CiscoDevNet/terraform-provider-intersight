@@ -679,6 +679,38 @@ func resourceServerProfile() *schema.Resource {
 					}
 					return
 				}},
+			"internal_reservation_references": {
+				Type:       schema.TypeList,
+				Optional:   true,
+				ConfigMode: schema.SchemaConfigModeAttr,
+				Computed:   true,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"additional_properties": {
+							Type:             schema.TypeString,
+							Optional:         true,
+							DiffSuppressFunc: SuppressDiffAdditionProps,
+						},
+						"class_id": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"object_type": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"reservation_moid": {
+							Description: "The moid of the reservation object.",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
+					},
+				},
+			},
 			"is_pmc_deployed_secure_passphrase_set": {
 				Description: "Indicates whether the value of the 'pmcDeployedSecurePassphrase' property has been set.",
 				Type:        schema.TypeBool,
@@ -1280,6 +1312,12 @@ func resourceServerProfile() *schema.Resource {
 				Optional:     true,
 				Default:      "instance",
 			},
+			"user_label": {
+				Description:  "User label assigned to the server profile.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.All(validation.StringMatch(regexp.MustCompile("^[ !#$%&\\(\\)\\*\\+,\\-\\./:;\\?@\\[\\]_\\{\\|\\}~a-zA-Z0-9]*$"), ""), validation.StringLenBetween(0, 64)),
+				Optional:     true,
+			},
 			"uuid": {
 				Description: "The UUID address that is assigned to the server based on the UUID pool.",
 				Type:        schema.TypeString,
@@ -1750,6 +1788,42 @@ func resourceServerProfileCreate(c context.Context, d *schema.ResourceData, meta
 		o.SetDescription(x)
 	}
 
+	if v, ok := d.GetOk("internal_reservation_references"); ok {
+		x := make([]models.PoolReservationReference, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := models.NewPoolReservationReferenceWithDefaults()
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("pool.ReservationReference")
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["reservation_moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetReservationMoid(x)
+				}
+			}
+			x = append(x, *o)
+		}
+		if len(x) > 0 {
+			o.SetInternalReservationReferences(x)
+		}
+	}
+
 	if v, ok := d.GetOk("leased_server"); ok {
 		p := make([]models.ComputePhysicalRelationship, 0, 1)
 		s := v.([]interface{})
@@ -2168,6 +2242,11 @@ func resourceServerProfileCreate(c context.Context, d *schema.ResourceData, meta
 		o.SetType(x)
 	}
 
+	if v, ok := d.GetOk("user_label"); ok {
+		x := (v.(string))
+		o.SetUserLabel(x)
+	}
+
 	if v, ok := d.GetOk("uuid_address_type"); ok {
 		x := (v.(string))
 		o.SetUuidAddressType(x)
@@ -2390,6 +2469,10 @@ func resourceServerProfileRead(c context.Context, d *schema.ResourceData, meta i
 		return diag.Errorf("error occurred while setting property DomainGroupMoid in ServerProfile object: %s", err.Error())
 	}
 
+	if err := d.Set("internal_reservation_references", flattenListPoolReservationReference(s.GetInternalReservationReferences(), d)); err != nil {
+		return diag.Errorf("error occurred while setting property InternalReservationReferences in ServerProfile object: %s", err.Error())
+	}
+
 	if err := d.Set("is_pmc_deployed_secure_passphrase_set", (s.GetIsPmcDeployedSecurePassphraseSet())); err != nil {
 		return diag.Errorf("error occurred while setting property IsPmcDeployedSecurePassphraseSet in ServerProfile object: %s", err.Error())
 	}
@@ -2488,6 +2571,10 @@ func resourceServerProfileRead(c context.Context, d *schema.ResourceData, meta i
 
 	if err := d.Set("type", (s.GetType())); err != nil {
 		return diag.Errorf("error occurred while setting property Type in ServerProfile object: %s", err.Error())
+	}
+
+	if err := d.Set("user_label", (s.GetUserLabel())); err != nil {
+		return diag.Errorf("error occurred while setting property UserLabel in ServerProfile object: %s", err.Error())
 	}
 
 	if err := d.Set("uuid", (s.GetUuid())); err != nil {
@@ -2730,6 +2817,41 @@ func resourceServerProfileUpdate(c context.Context, d *schema.ResourceData, meta
 		v := d.Get("description")
 		x := (v.(string))
 		o.SetDescription(x)
+	}
+
+	if d.HasChange("internal_reservation_references") {
+		v := d.Get("internal_reservation_references")
+		x := make([]models.PoolReservationReference, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := &models.PoolReservationReference{}
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("pool.ReservationReference")
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["reservation_moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetReservationMoid(x)
+				}
+			}
+			x = append(x, *o)
+		}
+		o.SetInternalReservationReferences(x)
 	}
 
 	if d.HasChange("leased_server") {
@@ -3157,6 +3279,12 @@ func resourceServerProfileUpdate(c context.Context, d *schema.ResourceData, meta
 		v := d.Get("type")
 		x := (v.(string))
 		o.SetType(x)
+	}
+
+	if d.HasChange("user_label") {
+		v := d.Get("user_label")
+		x := (v.(string))
+		o.SetUserLabel(x)
 	}
 
 	if d.HasChange("uuid_address_type") {

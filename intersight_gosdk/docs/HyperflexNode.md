@@ -23,6 +23,7 @@ Name | Type | Description | Notes
 **NodeUuid** | Pointer to **string** | The unique identifier of the HyperFlex node. | [optional] [readonly] 
 **Role** | Pointer to **string** | The role of the host in the HyperFlex cluster. Specifies whether this host is used for compute or for both compute and storage. * &#x60;UNKNOWN&#x60; - The role of the HyperFlex cluster node is not known. * &#x60;STORAGE&#x60; - The HyperFlex cluster node provides both storage and compute resources for the cluster. * &#x60;COMPUTE&#x60; - The HyperFlex cluster node provides compute resources for the cluster. | [optional] [readonly] [default to "UNKNOWN"]
 **SerialNumber** | Pointer to **string** | The serial of the host server. | [optional] [readonly] 
+**SiteInfo** | Pointer to [**NullableHyperflexSiteDetails**](HyperflexSiteDetails.md) |  | [optional] 
 **Status** | Pointer to **string** | The status of the host. Indicates whether the hypervisor is online. * &#x60;UNKNOWN&#x60; - The host status cannot be determined. * &#x60;ONLINE&#x60; - The host is online and operational. * &#x60;OFFLINE&#x60; - The host is offline and is currently not participating in the HyperFlex cluster. * &#x60;INMAINTENANCE&#x60; - The host is not participating in the HyperFlex cluster because of a maintenance operation, such as firmware or data platform upgrade. * &#x60;DEGRADED&#x60; - The host is degraded and may not be performing in its full operational capacity. | [optional] [readonly] [default to "UNKNOWN"]
 **Version** | Pointer to **string** | The version of the hypervisor running on the host. | [optional] [readonly] 
 **Cluster** | Pointer to [**HyperflexClusterRelationship**](HyperflexClusterRelationship.md) |  | [optional] 
@@ -574,6 +575,41 @@ SetSerialNumber sets SerialNumber field to given value.
 
 HasSerialNumber returns a boolean if a field has been set.
 
+### GetSiteInfo
+
+`func (o *HyperflexNode) GetSiteInfo() HyperflexSiteDetails`
+
+GetSiteInfo returns the SiteInfo field if non-nil, zero value otherwise.
+
+### GetSiteInfoOk
+
+`func (o *HyperflexNode) GetSiteInfoOk() (*HyperflexSiteDetails, bool)`
+
+GetSiteInfoOk returns a tuple with the SiteInfo field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSiteInfo
+
+`func (o *HyperflexNode) SetSiteInfo(v HyperflexSiteDetails)`
+
+SetSiteInfo sets SiteInfo field to given value.
+
+### HasSiteInfo
+
+`func (o *HyperflexNode) HasSiteInfo() bool`
+
+HasSiteInfo returns a boolean if a field has been set.
+
+### SetSiteInfoNil
+
+`func (o *HyperflexNode) SetSiteInfoNil(b bool)`
+
+ SetSiteInfoNil sets the value for SiteInfo to be an explicit nil
+
+### UnsetSiteInfo
+`func (o *HyperflexNode) UnsetSiteInfo()`
+
+UnsetSiteInfo ensures that no value is present for SiteInfo, not even an explicit nil
 ### GetStatus
 
 `func (o *HyperflexNode) GetStatus() string`

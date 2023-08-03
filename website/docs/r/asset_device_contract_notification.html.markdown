@@ -74,6 +74,7 @@ This complex property has following sub-properties:
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
 * `is_valid`:(bool) Validates if the device is a genuine Cisco device. Validated is done using the Cisco SN2INFO APIs. 
 * `item_type`:(string) Item type of this specific Cisco device. example \ Chassis\ . 
+* `last_date_of_support`:(string) The last date of hardware support for this device. 
 * `maintenance_purchase_order_number`:(string) Maintenance purchase order number for the Cisco device. 
 * `maintenance_sales_order_number`:(string) Maintenance sales order number for the Cisco device. 
 * `mod_time`:(string)(ReadOnly) The time when this managed object was last modified. 

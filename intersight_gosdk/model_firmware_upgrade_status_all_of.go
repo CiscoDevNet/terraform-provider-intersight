@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-11765
+API version: 1.0.11-13010
 Contact: intersight@cisco.com
 */
 
@@ -29,6 +29,8 @@ type FirmwareUpgradeStatusAllOf struct {
 	DownloadStage *string `json:"DownloadStage,omitempty"`
 	// The server power status after the upgrade request is submitted in the endpoint. * `none` - Server power status is none. * `powered on` - Server power status is powered on. * `powered off` - Server power status is powered off.
 	EpPowerStatus *string `json:"EpPowerStatus,omitempty"`
+	// The server power status before the upgrade request is submitted in the endpoint. * `none` - Server power status is none. * `powered on` - Server power status is powered on. * `powered off` - Server power status is powered off.
+	InitialPowerStatus *string `json:"InitialPowerStatus,omitempty"`
 	// The reason for the operation failure.
 	OverallError *string `json:"OverallError,omitempty"`
 	// The overall percentage of the operation.
@@ -60,6 +62,8 @@ func NewFirmwareUpgradeStatusAllOf(classId string, objectType string) *FirmwareU
 	this.ObjectType = objectType
 	var epPowerStatus string = "none"
 	this.EpPowerStatus = &epPowerStatus
+	var initialPowerStatus string = "none"
+	this.InitialPowerStatus = &initialPowerStatus
 	var overallstatus string = "none"
 	this.Overallstatus = &overallstatus
 	var pendingType string = "none"
@@ -78,6 +82,8 @@ func NewFirmwareUpgradeStatusAllOfWithDefaults() *FirmwareUpgradeStatusAllOf {
 	this.ObjectType = objectType
 	var epPowerStatus string = "none"
 	this.EpPowerStatus = &epPowerStatus
+	var initialPowerStatus string = "none"
+	this.InitialPowerStatus = &initialPowerStatus
 	var overallstatus string = "none"
 	this.Overallstatus = &overallstatus
 	var pendingType string = "none"
@@ -259,6 +265,38 @@ func (o *FirmwareUpgradeStatusAllOf) HasEpPowerStatus() bool {
 // SetEpPowerStatus gets a reference to the given string and assigns it to the EpPowerStatus field.
 func (o *FirmwareUpgradeStatusAllOf) SetEpPowerStatus(v string) {
 	o.EpPowerStatus = &v
+}
+
+// GetInitialPowerStatus returns the InitialPowerStatus field value if set, zero value otherwise.
+func (o *FirmwareUpgradeStatusAllOf) GetInitialPowerStatus() string {
+	if o == nil || o.InitialPowerStatus == nil {
+		var ret string
+		return ret
+	}
+	return *o.InitialPowerStatus
+}
+
+// GetInitialPowerStatusOk returns a tuple with the InitialPowerStatus field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FirmwareUpgradeStatusAllOf) GetInitialPowerStatusOk() (*string, bool) {
+	if o == nil || o.InitialPowerStatus == nil {
+		return nil, false
+	}
+	return o.InitialPowerStatus, true
+}
+
+// HasInitialPowerStatus returns a boolean if a field has been set.
+func (o *FirmwareUpgradeStatusAllOf) HasInitialPowerStatus() bool {
+	if o != nil && o.InitialPowerStatus != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetInitialPowerStatus gets a reference to the given string and assigns it to the InitialPowerStatus field.
+func (o *FirmwareUpgradeStatusAllOf) SetInitialPowerStatus(v string) {
+	o.InitialPowerStatus = &v
 }
 
 // GetOverallError returns the OverallError field value if set, zero value otherwise.
@@ -569,6 +607,9 @@ func (o FirmwareUpgradeStatusAllOf) MarshalJSON() ([]byte, error) {
 	if o.EpPowerStatus != nil {
 		toSerialize["EpPowerStatus"] = o.EpPowerStatus
 	}
+	if o.InitialPowerStatus != nil {
+		toSerialize["InitialPowerStatus"] = o.InitialPowerStatus
+	}
 	if o.OverallError != nil {
 		toSerialize["OverallError"] = o.OverallError
 	}
@@ -620,6 +661,7 @@ func (o *FirmwareUpgradeStatusAllOf) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "DownloadPercentage")
 		delete(additionalProperties, "DownloadStage")
 		delete(additionalProperties, "EpPowerStatus")
+		delete(additionalProperties, "InitialPowerStatus")
 		delete(additionalProperties, "OverallError")
 		delete(additionalProperties, "OverallPercentage")
 		delete(additionalProperties, "Overallstatus")

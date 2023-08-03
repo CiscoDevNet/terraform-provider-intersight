@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "storage.NetAppHighAvailability"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "storage.NetAppHighAvailability"]
+**AutoGivebackEnabled** | Pointer to **bool** | Specifies whether or not giveback is automatically initiated when the node that owns the storage is ready. | [optional] [readonly] 
 **Enabled** | Pointer to **bool** | Specifies whether or not storage failover is enabled. | [optional] [readonly] 
 **GivebackState** | Pointer to **string** | The state of the node that is giving storage back to its HA partner. * &#x60;unknown&#x60; - Default unknown giveback state. * &#x60;nothing_to_giveback&#x60; - The node has nothing to give back to its HA partner. * &#x60;not_attempted&#x60; - The node has not attempted to give back storage to its HA partner. * &#x60;in_progress&#x60; - The node is in progress of giving back storage to its HA partner. * &#x60;failed&#x60; - The node has failed to give back storage to its HA partner. | [optional] [readonly] [default to "unknown"]
 **PartnerModel** | Pointer to **string** | The model of the partner in this node&#39;s High Availability (HA) group. | [optional] [readonly] 
@@ -71,6 +72,31 @@ and a boolean to check if the value has been set.
 
 SetObjectType sets ObjectType field to given value.
 
+
+### GetAutoGivebackEnabled
+
+`func (o *StorageNetAppHighAvailabilityAllOf) GetAutoGivebackEnabled() bool`
+
+GetAutoGivebackEnabled returns the AutoGivebackEnabled field if non-nil, zero value otherwise.
+
+### GetAutoGivebackEnabledOk
+
+`func (o *StorageNetAppHighAvailabilityAllOf) GetAutoGivebackEnabledOk() (*bool, bool)`
+
+GetAutoGivebackEnabledOk returns a tuple with the AutoGivebackEnabled field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAutoGivebackEnabled
+
+`func (o *StorageNetAppHighAvailabilityAllOf) SetAutoGivebackEnabled(v bool)`
+
+SetAutoGivebackEnabled sets AutoGivebackEnabled field to given value.
+
+### HasAutoGivebackEnabled
+
+`func (o *StorageNetAppHighAvailabilityAllOf) HasAutoGivebackEnabled() bool`
+
+HasAutoGivebackEnabled returns a boolean if a field has been set.
 
 ### GetEnabled
 

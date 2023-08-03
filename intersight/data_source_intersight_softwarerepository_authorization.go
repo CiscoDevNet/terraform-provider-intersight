@@ -252,6 +252,11 @@ func getSoftwarerepositoryAuthorizationSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"nr_version": {
+			Description: "The Automated Software Distribution version of the authorization MO.\n* `V3` - The client is running Automated Software Distribution V3.\n* `V4` - The client is running Automated Software Distribution V4.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"version_context": {
 			Description: "The versioning info for this managed object.",
 			Type:        schema.TypeList,
@@ -671,6 +676,11 @@ func dataSourceSoftwarerepositoryAuthorizationRead(c context.Context, d *schema.
 		o.SetUserId(x)
 	}
 
+	if v, ok := d.GetOk("nr_version"); ok {
+		x := (v.(string))
+		o.SetVersion(x)
+	}
+
 	if v, ok := d.GetOk("version_context"); ok {
 		p := make([]models.MoVersionContext, 0, 1)
 		s := v.([]interface{})
@@ -806,6 +816,7 @@ func dataSourceSoftwarerepositoryAuthorizationRead(c context.Context, d *schema.
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
 				temp["user_id"] = (s.GetUserId())
+				temp["nr_version"] = (s.GetVersion())
 
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
 				softwarerepositoryAuthorizationResults = append(softwarerepositoryAuthorizationResults, temp)

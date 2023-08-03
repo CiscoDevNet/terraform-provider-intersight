@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **Bootable** | Pointer to **string** | This field identifies the disk drive as bootable if set to true. | [optional] [readonly] 
 **ConfigurationCheckpoint** | Pointer to **string** | The current configuration checkpoint of the physical disk. | [optional] [readonly] 
 **ConfigurationState** | Pointer to **string** | The current configuration state of the physical disk. | [optional] [readonly] 
+**Description** | Pointer to **string** | This field displays the description of the physical disk. | [optional] [readonly] 
 **DisabledForRemoval** | Pointer to **bool** | The physical disk is disabled for removal. | [optional] 
 **DiscoveredPath** | Pointer to **string** | The discovered path of the physical disk. | [optional] [readonly] 
 **DiskId** | Pointer to **string** | This field identifies the ID assigned to physical disks. | [optional] [readonly] 
@@ -22,6 +23,7 @@ Name | Type | Description | Notes
 **FdeCapable** | Pointer to **string** | Full-Disk Encryption capability parameter of the physical disk. | [optional] 
 **HotSpareType** | Pointer to **string** | Type of hotspare configured on the physical disk. | [optional] 
 **IndicatorLed** | Pointer to **string** | Status of the locator LED corresponding to the physical disk. | [optional] 
+**IsPlatformSupported** | Pointer to **bool** | This field indicates whether the physical disk is supported on the server or not. | [optional] [readonly] [default to true]
 **LinkSpeed** | Pointer to **string** | The speed of the link between the drive and the controller. | [optional] [readonly] 
 **LinkState** | Pointer to **string** | The current link state of the physical disk. | [optional] [readonly] 
 **MaximumOperatingTemperature** | Pointer to **int64** | Maximum operating temperature of drive in Celsius. | [optional] 
@@ -33,11 +35,12 @@ Name | Type | Description | Notes
 **OperQualifierReason** | Pointer to **string** | For certain states, indicates the reason why the operState is in that state. | [optional] [readonly] 
 **Operability** | Pointer to **string** | This field identifies the disk operability of the disk. | [optional] [readonly] 
 **OperatingTemperature** | Pointer to **int64** | Operating temperature of drive in Celsius. | [optional] 
+**PartNumber** | Pointer to **string** | This field displays the part number of the physical disk. | [optional] [readonly] 
 **PercentLifeLeft** | Pointer to **int64** | Percentage of write cycles remaining in a solid state drive (SSD). | [optional] 
 **PercentReservedCapacityConsumed** | Pointer to **int64** | Percentage of reserve capacity consumed. | [optional] 
 **PerformancePercent** | Pointer to **int64** | Performance at which the device operating expressed in percentage. | [optional] 
 **PhysicalBlockSize** | Pointer to **string** | The block size of the installed physical disk. | [optional] [readonly] 
-**Pid** | Pointer to **string** | This field identifies the Product ID for physicalDisk. | [optional] [readonly] 
+**Pid** | Pointer to **string** | This field displays the product ID of the physical disk. | [optional] [readonly] 
 **PowerCycleCount** | Pointer to **int64** | Number of powercycles the drive has undergone. | [optional] 
 **PowerOnHours** | Pointer to **int64** | Number of hours the drive has been powered on. | [optional] 
 **PowerOnHoursPercentage** | Pointer to **int64** | Percentage of life used based on five year life span of Cisco supported drives. | [optional] [readonly] 
@@ -248,6 +251,31 @@ SetConfigurationState sets ConfigurationState field to given value.
 `func (o *StoragePhysicalDisk) HasConfigurationState() bool`
 
 HasConfigurationState returns a boolean if a field has been set.
+
+### GetDescription
+
+`func (o *StoragePhysicalDisk) GetDescription() string`
+
+GetDescription returns the Description field if non-nil, zero value otherwise.
+
+### GetDescriptionOk
+
+`func (o *StoragePhysicalDisk) GetDescriptionOk() (*string, bool)`
+
+GetDescriptionOk returns a tuple with the Description field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDescription
+
+`func (o *StoragePhysicalDisk) SetDescription(v string)`
+
+SetDescription sets Description field to given value.
+
+### HasDescription
+
+`func (o *StoragePhysicalDisk) HasDescription() bool`
+
+HasDescription returns a boolean if a field has been set.
 
 ### GetDisabledForRemoval
 
@@ -524,6 +552,31 @@ SetIndicatorLed sets IndicatorLed field to given value.
 
 HasIndicatorLed returns a boolean if a field has been set.
 
+### GetIsPlatformSupported
+
+`func (o *StoragePhysicalDisk) GetIsPlatformSupported() bool`
+
+GetIsPlatformSupported returns the IsPlatformSupported field if non-nil, zero value otherwise.
+
+### GetIsPlatformSupportedOk
+
+`func (o *StoragePhysicalDisk) GetIsPlatformSupportedOk() (*bool, bool)`
+
+GetIsPlatformSupportedOk returns a tuple with the IsPlatformSupported field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsPlatformSupported
+
+`func (o *StoragePhysicalDisk) SetIsPlatformSupported(v bool)`
+
+SetIsPlatformSupported sets IsPlatformSupported field to given value.
+
+### HasIsPlatformSupported
+
+`func (o *StoragePhysicalDisk) HasIsPlatformSupported() bool`
+
+HasIsPlatformSupported returns a boolean if a field has been set.
+
 ### GetLinkSpeed
 
 `func (o *StoragePhysicalDisk) GetLinkSpeed() string`
@@ -798,6 +851,31 @@ SetOperatingTemperature sets OperatingTemperature field to given value.
 `func (o *StoragePhysicalDisk) HasOperatingTemperature() bool`
 
 HasOperatingTemperature returns a boolean if a field has been set.
+
+### GetPartNumber
+
+`func (o *StoragePhysicalDisk) GetPartNumber() string`
+
+GetPartNumber returns the PartNumber field if non-nil, zero value otherwise.
+
+### GetPartNumberOk
+
+`func (o *StoragePhysicalDisk) GetPartNumberOk() (*string, bool)`
+
+GetPartNumberOk returns a tuple with the PartNumber field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPartNumber
+
+`func (o *StoragePhysicalDisk) SetPartNumber(v string)`
+
+SetPartNumber sets PartNumber field to given value.
+
+### HasPartNumber
+
+`func (o *StoragePhysicalDisk) HasPartNumber() bool`
+
+HasPartNumber returns a boolean if a field has been set.
 
 ### GetPercentLifeLeft
 

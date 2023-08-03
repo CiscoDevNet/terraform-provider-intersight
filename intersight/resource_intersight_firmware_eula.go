@@ -22,7 +22,7 @@ func resourceFirmwareEula() *schema.Resource {
 		CustomizeDiff: CustomizeTagDiff,
 		Schema: map[string]*schema.Schema{
 			"accepted": {
-				Description: "EULA acceptance status for the account.",
+				Description: "Overall acceptance status for the account, both EULA and K9.",
 				Type:        schema.TypeBool,
 				Optional:    true,
 				Computed:    true,
@@ -150,7 +150,7 @@ func resourceFirmwareEula() *schema.Resource {
 				ForceNew:    true,
 			},
 			"content": {
-				Description: "EULA acceptance form content provided by cisco.com.",
+				Description: "Acceptance form content provided by cisco.com.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -175,6 +175,54 @@ func resourceFirmwareEula() *schema.Resource {
 			},
 			"domain_group_moid": {
 				Description: "The DomainGroup ID for this managed object.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+					if val != nil {
+						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+					}
+					return
+				}, ForceNew: true,
+			},
+			"eula_accepted": {
+				Description: "EULA acceptance status for the account.",
+				Type:        schema.TypeBool,
+				Optional:    true,
+				Computed:    true,
+				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+					if val != nil {
+						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+					}
+					return
+				}, ForceNew: true,
+			},
+			"eula_content": {
+				Description: "EULA acceptance form content provided by cisco.com.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+					if val != nil {
+						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+					}
+					return
+				}, ForceNew: true,
+			},
+			"k9_accepted": {
+				Description: "K9 acceptance status for the account.",
+				Type:        schema.TypeBool,
+				Optional:    true,
+				Computed:    true,
+				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+					if val != nil {
+						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+					}
+					return
+				}, ForceNew: true,
+			},
+			"k9_content": {
+				Description: "K9 acceptance form content provided by cisco.com.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -657,6 +705,22 @@ func resourceFirmwareEulaRead(c context.Context, d *schema.ResourceData, meta in
 
 	if err := d.Set("domain_group_moid", (s.GetDomainGroupMoid())); err != nil {
 		return diag.Errorf("error occurred while setting property DomainGroupMoid in FirmwareEula object: %s", err.Error())
+	}
+
+	if err := d.Set("eula_accepted", (s.GetEulaAccepted())); err != nil {
+		return diag.Errorf("error occurred while setting property EulaAccepted in FirmwareEula object: %s", err.Error())
+	}
+
+	if err := d.Set("eula_content", (s.GetEulaContent())); err != nil {
+		return diag.Errorf("error occurred while setting property EulaContent in FirmwareEula object: %s", err.Error())
+	}
+
+	if err := d.Set("k9_accepted", (s.GetK9Accepted())); err != nil {
+		return diag.Errorf("error occurred while setting property K9Accepted in FirmwareEula object: %s", err.Error())
+	}
+
+	if err := d.Set("k9_content", (s.GetK9Content())); err != nil {
+		return diag.Errorf("error occurred while setting property K9Content in FirmwareEula object: %s", err.Error())
 	}
 
 	if err := d.Set("mod_time", (s.GetModTime()).String()); err != nil {

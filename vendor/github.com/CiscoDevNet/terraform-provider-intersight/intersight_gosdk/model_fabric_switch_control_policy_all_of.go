@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-11765
+API version: 1.0.11-13010
 Contact: intersight@cisco.com
 */
 
@@ -23,6 +23,8 @@ type FabricSwitchControlPolicyAllOf struct {
 	ObjectType string `json:"ObjectType"`
 	// Enable or Disable Ethernet End Host Switching Mode. * `end-host` - In end-host mode, the fabric interconnects appear to the upstream devices as end hosts with multiple links.In this mode, the switch does not run Spanning Tree Protocol and avoids loops by following a set of rules for traffic forwarding.In case of ethernet switching mode - Ethernet end-host mode is also known as Ethernet host virtualizer. * `switch` - In switch mode, the switch runs Spanning Tree Protocol to avoid loops, and broadcast and multicast packets are handled in the traditional way.This is the traditional switch mode.
 	EthernetSwitchingMode *string `json:"EthernetSwitchingMode,omitempty"`
+	// When enabled, a Registered State Change Notification (RSCN) is sent to the VIC adapter when any member port within the fabric port-channel goes down and vHBA would reset to restore the connection immediately. When disabled (default), vHBA reset is done only when all the members of a fabric port-channel are down. * `Disabled` - Admin configured Disabled State. * `Enabled` - Admin configured Enabled State.
+	FabricPcVhbaReset *string `json:"FabricPcVhbaReset,omitempty"`
 	// Enable or Disable FC End Host Switching Mode. * `end-host` - In end-host mode, the fabric interconnects appear to the upstream devices as end hosts with multiple links.In this mode, the switch does not run Spanning Tree Protocol and avoids loops by following a set of rules for traffic forwarding.In case of ethernet switching mode - Ethernet end-host mode is also known as Ethernet host virtualizer. * `switch` - In switch mode, the switch runs Spanning Tree Protocol to avoid loops, and broadcast and multicast packets are handled in the traditional way.This is the traditional switch mode.
 	FcSwitchingMode  *string                        `json:"FcSwitchingMode,omitempty"`
 	MacAgingSettings NullableFabricMacAgingSettings `json:"MacAgingSettings,omitempty"`
@@ -49,6 +51,8 @@ func NewFabricSwitchControlPolicyAllOf(classId string, objectType string) *Fabri
 	this.ObjectType = objectType
 	var ethernetSwitchingMode string = "end-host"
 	this.EthernetSwitchingMode = &ethernetSwitchingMode
+	var fabricPcVhbaReset string = "Disabled"
+	this.FabricPcVhbaReset = &fabricPcVhbaReset
 	var fcSwitchingMode string = "end-host"
 	this.FcSwitchingMode = &fcSwitchingMode
 	var reservedVlanStartId int64 = 3915
@@ -69,6 +73,8 @@ func NewFabricSwitchControlPolicyAllOfWithDefaults() *FabricSwitchControlPolicyA
 	this.ObjectType = objectType
 	var ethernetSwitchingMode string = "end-host"
 	this.EthernetSwitchingMode = &ethernetSwitchingMode
+	var fabricPcVhbaReset string = "Disabled"
+	this.FabricPcVhbaReset = &fabricPcVhbaReset
 	var fcSwitchingMode string = "end-host"
 	this.FcSwitchingMode = &fcSwitchingMode
 	var reservedVlanStartId int64 = 3915
@@ -156,6 +162,38 @@ func (o *FabricSwitchControlPolicyAllOf) HasEthernetSwitchingMode() bool {
 // SetEthernetSwitchingMode gets a reference to the given string and assigns it to the EthernetSwitchingMode field.
 func (o *FabricSwitchControlPolicyAllOf) SetEthernetSwitchingMode(v string) {
 	o.EthernetSwitchingMode = &v
+}
+
+// GetFabricPcVhbaReset returns the FabricPcVhbaReset field value if set, zero value otherwise.
+func (o *FabricSwitchControlPolicyAllOf) GetFabricPcVhbaReset() string {
+	if o == nil || o.FabricPcVhbaReset == nil {
+		var ret string
+		return ret
+	}
+	return *o.FabricPcVhbaReset
+}
+
+// GetFabricPcVhbaResetOk returns a tuple with the FabricPcVhbaReset field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FabricSwitchControlPolicyAllOf) GetFabricPcVhbaResetOk() (*string, bool) {
+	if o == nil || o.FabricPcVhbaReset == nil {
+		return nil, false
+	}
+	return o.FabricPcVhbaReset, true
+}
+
+// HasFabricPcVhbaReset returns a boolean if a field has been set.
+func (o *FabricSwitchControlPolicyAllOf) HasFabricPcVhbaReset() bool {
+	if o != nil && o.FabricPcVhbaReset != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetFabricPcVhbaReset gets a reference to the given string and assigns it to the FabricPcVhbaReset field.
+func (o *FabricSwitchControlPolicyAllOf) SetFabricPcVhbaReset(v string) {
+	o.FabricPcVhbaReset = &v
 }
 
 // GetFcSwitchingMode returns the FcSwitchingMode field value if set, zero value otherwise.
@@ -416,6 +454,9 @@ func (o FabricSwitchControlPolicyAllOf) MarshalJSON() ([]byte, error) {
 	if o.EthernetSwitchingMode != nil {
 		toSerialize["EthernetSwitchingMode"] = o.EthernetSwitchingMode
 	}
+	if o.FabricPcVhbaReset != nil {
+		toSerialize["FabricPcVhbaReset"] = o.FabricPcVhbaReset
+	}
 	if o.FcSwitchingMode != nil {
 		toSerialize["FcSwitchingMode"] = o.FcSwitchingMode
 	}
@@ -458,6 +499,7 @@ func (o *FabricSwitchControlPolicyAllOf) UnmarshalJSON(bytes []byte) (err error)
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "EthernetSwitchingMode")
+		delete(additionalProperties, "FabricPcVhbaReset")
 		delete(additionalProperties, "FcSwitchingMode")
 		delete(additionalProperties, "MacAgingSettings")
 		delete(additionalProperties, "ReservedVlanStartId")

@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "iqnpool.Block"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "iqnpool.Block"]
 **IqnSuffixBlock** | Pointer to [**IqnpoolIqnSuffixBlock**](IqnpoolIqnSuffixBlock.md) |  | [optional] 
+**Prefix** | Pointer to **string** | Prefix of the IQN pool. IQN Address is constructed as &lt;prefix&gt;:&lt;suffix&gt;:&lt;number&gt;. | [optional] [readonly] 
 **Pool** | Pointer to [**IqnpoolPoolRelationship**](IqnpoolPoolRelationship.md) |  | [optional] 
 **Reservations** | Pointer to [**[]IqnpoolReservationRelationship**](IqnpoolReservationRelationship.md) | An array of relationships to iqnpoolReservation resources. | [optional] [readonly] 
 
@@ -93,6 +94,31 @@ SetIqnSuffixBlock sets IqnSuffixBlock field to given value.
 `func (o *IqnpoolBlockAllOf) HasIqnSuffixBlock() bool`
 
 HasIqnSuffixBlock returns a boolean if a field has been set.
+
+### GetPrefix
+
+`func (o *IqnpoolBlockAllOf) GetPrefix() string`
+
+GetPrefix returns the Prefix field if non-nil, zero value otherwise.
+
+### GetPrefixOk
+
+`func (o *IqnpoolBlockAllOf) GetPrefixOk() (*string, bool)`
+
+GetPrefixOk returns a tuple with the Prefix field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPrefix
+
+`func (o *IqnpoolBlockAllOf) SetPrefix(v string)`
+
+SetPrefix sets Prefix field to given value.
+
+### HasPrefix
+
+`func (o *IqnpoolBlockAllOf) HasPrefix() bool`
+
+HasPrefix returns a boolean if a field has been set.
 
 ### GetPool
 

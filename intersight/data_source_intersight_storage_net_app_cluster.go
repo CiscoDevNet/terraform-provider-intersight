@@ -205,6 +205,11 @@ func getStorageNetAppClusterSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"default_admin_locked": {
+			Description: "Indicates whether the default admin user is locked out.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
 		"device_mo_id": {
 			Description: "The database identifier of the registered device of an object.",
 			Type:        schema.TypeString,
@@ -258,6 +263,16 @@ func getStorageNetAppClusterSchema() map[string]*schema.Schema {
 					},
 				},
 			},
+		},
+		"fips_compliant": {
+			Description: "Indicates whether or not the software FIPS mode is enabled on the cluster.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
+		"insecure_ciphers": {
+			Description: "Number of SVMs on the cluster that use insecure ciphers.",
+			Type:        schema.TypeInt,
+			Optional:    true,
 		},
 		"is_upgraded": {
 			Description: "This field indicates the compute status of the catalog values for the associated component or hardware.",
@@ -893,6 +908,11 @@ func dataSourceStorageNetAppClusterRead(c context.Context, d *schema.ResourceDat
 		o.SetCreateTime(x)
 	}
 
+	if v, ok := d.GetOkExists("default_admin_locked"); ok {
+		x := (v.(bool))
+		o.SetDefaultAdminLocked(x)
+	}
+
 	if v, ok := d.GetOk("device_mo_id"); ok {
 		x := (v.(string))
 		o.SetDeviceMoId(x)
@@ -957,6 +977,16 @@ func dataSourceStorageNetAppClusterRead(c context.Context, d *schema.ResourceDat
 			x = append(x, models.MoMoRefAsStorageNetAppClusterEventRelationship(o))
 		}
 		o.SetEvents(x)
+	}
+
+	if v, ok := d.GetOkExists("fips_compliant"); ok {
+		x := (v.(bool))
+		o.SetFipsCompliant(x)
+	}
+
+	if v, ok := d.GetOkExists("insecure_ciphers"); ok {
+		x := int64(v.(int))
+		o.SetInsecureCiphers(x)
 	}
 
 	if v, ok := d.GetOkExists("is_upgraded"); ok {
@@ -1464,12 +1494,15 @@ func dataSourceStorageNetAppClusterRead(c context.Context, d *schema.ResourceDat
 				temp["cluster_health_status"] = (s.GetClusterHealthStatus())
 
 				temp["create_time"] = (s.GetCreateTime()).String()
+				temp["default_admin_locked"] = (s.GetDefaultAdminLocked())
 				temp["device_mo_id"] = (s.GetDeviceMoId())
 				temp["dn"] = (s.GetDn())
 				temp["dns_domains"] = (s.GetDnsDomains())
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
 
 				temp["events"] = flattenListStorageNetAppClusterEventRelationship(s.GetEvents(), d)
+				temp["fips_compliant"] = (s.GetFipsCompliant())
+				temp["insecure_ciphers"] = (s.GetInsecureCiphers())
 				temp["is_upgraded"] = (s.GetIsUpgraded())
 				temp["key"] = (s.GetKey())
 				temp["location"] = (s.GetLocation())

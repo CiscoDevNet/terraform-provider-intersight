@@ -238,6 +238,16 @@ func getStorageNetAppVolumeSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"flex_cache_endpoint_type": {
+			Description: "FlexCache endpoint type. The endpoint type can be the origin of a FlexCache volume, a FlexCache volume, or neither.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"is_object_store": {
+			Description: "Specifies whether the volume is provisioned for an object store server.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
 		"key": {
 			Description: "Unique identifier of a NetApp Volume across data center.",
 			Type:        schema.TypeString,
@@ -340,6 +350,11 @@ func getStorageNetAppVolumeSchema() map[string]*schema.Schema {
 		"shared_scope": {
 			Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
 			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"snapshot_autodelete_enabled": {
+			Description: "Specifies whether Snaphot copy autodelete is currently enabled on this volume.",
+			Type:        schema.TypeBool,
 			Optional:    true,
 		},
 		"snapshot_policy_name": {
@@ -868,6 +883,16 @@ func dataSourceStorageNetAppVolumeRead(c context.Context, d *schema.ResourceData
 		o.SetExportPolicyName(x)
 	}
 
+	if v, ok := d.GetOk("flex_cache_endpoint_type"); ok {
+		x := (v.(string))
+		o.SetFlexCacheEndpointType(x)
+	}
+
+	if v, ok := d.GetOkExists("is_object_store"); ok {
+		x := (v.(bool))
+		o.SetIsObjectStore(x)
+	}
+
 	if v, ok := d.GetOk("key"); ok {
 		x := (v.(string))
 		o.SetKey(x)
@@ -990,6 +1015,11 @@ func dataSourceStorageNetAppVolumeRead(c context.Context, d *schema.ResourceData
 	if v, ok := d.GetOk("shared_scope"); ok {
 		x := (v.(string))
 		o.SetSharedScope(x)
+	}
+
+	if v, ok := d.GetOkExists("snapshot_autodelete_enabled"); ok {
+		x := (v.(bool))
+		o.SetSnapshotAutodeleteEnabled(x)
 	}
 
 	if v, ok := d.GetOk("snapshot_policy_name"); ok {
@@ -1273,6 +1303,8 @@ func dataSourceStorageNetAppVolumeRead(c context.Context, d *schema.ResourceData
 
 				temp["events"] = flattenListStorageNetAppVolumeEventRelationship(s.GetEvents(), d)
 				temp["export_policy_name"] = (s.GetExportPolicyName())
+				temp["flex_cache_endpoint_type"] = (s.GetFlexCacheEndpointType())
+				temp["is_object_store"] = (s.GetIsObjectStore())
 				temp["key"] = (s.GetKey())
 
 				temp["mod_time"] = (s.GetModTime()).String()
@@ -1285,6 +1317,7 @@ func dataSourceStorageNetAppVolumeRead(c context.Context, d *schema.ResourceData
 
 				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
 				temp["shared_scope"] = (s.GetSharedScope())
+				temp["snapshot_autodelete_enabled"] = (s.GetSnapshotAutodeleteEnabled())
 				temp["snapshot_policy_name"] = (s.GetSnapshotPolicyName())
 				temp["snapshot_policy_uuid"] = (s.GetSnapshotPolicyUuid())
 				temp["snapshot_reserve_percent"] = (s.GetSnapshotReservePercent())

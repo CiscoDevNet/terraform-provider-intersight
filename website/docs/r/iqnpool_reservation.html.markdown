@@ -26,6 +26,9 @@ This complex property has following sub-properties:
 * `create_time`:(string)(ReadOnly) The time when this managed object was created. 
 * `domain_group_moid`:(string)(ReadOnly) The DomainGroup ID for this managed object. 
 * `identity`:(string) IQN identity to be reserved. 
+* `iqn_number`:(int)(ReadOnly) Number of the IQN address. IQN Address is constructed as <prefix>:<suffix>:<number>. 
+* `iqn_prefix`:(string)(ReadOnly) Prefix of the IQN address. IQN Address is constructed as <prefix>:<suffix>:<number>. 
+* `iqn_suffix`:(string)(ReadOnly) Suffix of the IQN address. IQN Address is constructed as <prefix>:<suffix>:<number>. 
 * `mod_time`:(string)(ReadOnly) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `organization`:(HashMap) - A reference to a organizationOrganization resource.When the $expand query parameter is specified, the referenced resource is returned inline. 

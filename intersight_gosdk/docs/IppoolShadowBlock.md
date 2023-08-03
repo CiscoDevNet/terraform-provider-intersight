@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **IpV6Block** | Pointer to [**IppoolIpV6Block**](IppoolIpV6Block.md) |  | [optional] 
 **Pool** | Pointer to [**IppoolShadowPoolRelationship**](IppoolShadowPoolRelationship.md) |  | [optional] 
 **Reservations** | Pointer to [**[]IppoolReservationRelationship**](IppoolReservationRelationship.md) | An array of relationships to ippoolReservation resources. | [optional] [readonly] 
+**Vrf** | Pointer to [**VrfVrfRelationship**](VrfVrfRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -206,6 +207,31 @@ HasReservations returns a boolean if a field has been set.
 `func (o *IppoolShadowBlock) UnsetReservations()`
 
 UnsetReservations ensures that no value is present for Reservations, not even an explicit nil
+### GetVrf
+
+`func (o *IppoolShadowBlock) GetVrf() VrfVrfRelationship`
+
+GetVrf returns the Vrf field if non-nil, zero value otherwise.
+
+### GetVrfOk
+
+`func (o *IppoolShadowBlock) GetVrfOk() (*VrfVrfRelationship, bool)`
+
+GetVrfOk returns a tuple with the Vrf field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetVrf
+
+`func (o *IppoolShadowBlock) SetVrf(v VrfVrfRelationship)`
+
+SetVrf sets Vrf field to given value.
+
+### HasVrf
+
+`func (o *IppoolShadowBlock) HasVrf() bool`
+
+HasVrf returns a boolean if a field has been set.
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

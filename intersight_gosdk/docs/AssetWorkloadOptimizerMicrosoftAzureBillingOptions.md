@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **BillingAccountId** | Pointer to **string** | The Microsoft Azure Billing Account ID. | [optional] 
 **CostExportName** | Pointer to **string** | Name of the Cost Export Data that exports cost management data. | [optional] 
 **TenantId** | Pointer to **string** | Id of the tenant used while authenticating the managed target. | [optional] 
+**UseCostExport** | Pointer to **bool** | For larger topologies, use cost export to fetch billed cost data. | [optional] [default to false]
 
 ## Methods
 
@@ -143,6 +144,31 @@ SetTenantId sets TenantId field to given value.
 `func (o *AssetWorkloadOptimizerMicrosoftAzureBillingOptions) HasTenantId() bool`
 
 HasTenantId returns a boolean if a field has been set.
+
+### GetUseCostExport
+
+`func (o *AssetWorkloadOptimizerMicrosoftAzureBillingOptions) GetUseCostExport() bool`
+
+GetUseCostExport returns the UseCostExport field if non-nil, zero value otherwise.
+
+### GetUseCostExportOk
+
+`func (o *AssetWorkloadOptimizerMicrosoftAzureBillingOptions) GetUseCostExportOk() (*bool, bool)`
+
+GetUseCostExportOk returns a tuple with the UseCostExport field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUseCostExport
+
+`func (o *AssetWorkloadOptimizerMicrosoftAzureBillingOptions) SetUseCostExport(v bool)`
+
+SetUseCostExport sets UseCostExport field to given value.
+
+### HasUseCostExport
+
+`func (o *AssetWorkloadOptimizerMicrosoftAzureBillingOptions) HasUseCostExport() bool`
+
+HasUseCostExport returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

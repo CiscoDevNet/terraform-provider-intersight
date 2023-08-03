@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "hyperflex.Cluster"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "hyperflex.Cluster"]
+**Capability** | Pointer to [**NullableHyperflexCapability**](HyperflexCapability.md) |  | [optional] 
 **ClusterType** | Pointer to **int64** | The storage type of this cluster (All Flash or Hybrid). | [optional] [readonly] 
 **ClusterUuid** | Pointer to **string** | The unique identifier for this HyperFlex cluster. | [optional] [readonly] 
 **DeviceId** | Pointer to **string** | The unique identifier of the device registration that represents this HyperFlex cluster&#39;s connection to Intersight. | [optional] [readonly] 
@@ -13,12 +14,14 @@ Name | Type | Description | Notes
 **EncryptionStatus** | Pointer to **string** | This captures the encryption status for a HyperFlex cluster. Currently it will have the status if HXA-CLU-0020 alarm is raised. In the future it can capture other details. | [optional] 
 **FltAggr** | Pointer to **int64** | The number of yellow (warning) and red (critical) alarms stored as an aggregate. The first 16 bits indicate the number of red alarms, and the last 16 bits contain the number of yellow alarms. | [optional] [readonly] 
 **HxdpBuildVersion** | Pointer to **string** | The version and build number of the HyperFlex Data Platform for this cluster. After a cluster upgrade, this version string will be updated on the next inventory cycle to reflect the newly installed version. | [optional] [readonly] 
+**NetworkConfiguration** | Pointer to [**NullableHyperflexNetworkConfiguration**](HyperflexNetworkConfiguration.md) |  | [optional] 
 **NtpServers** | Pointer to **[]string** |  | [optional] 
 **Summary** | Pointer to [**NullableHyperflexSummary**](HyperflexSummary.md) |  | [optional] 
 **UpgradeStatus** | Pointer to **string** | The upgrade status of the HyperFlex cluster. * &#x60;Unknown&#x60; - The upgrade status of the HyperFlex cluster could not be determined. * &#x60;Ok&#x60; - The upgrade of the HyperFlex cluster is complete. * &#x60;InProgress&#x60; - The upgrade of the HyperFlex cluster is in-progress. * &#x60;Failed&#x60; - The upgrade of the HyperFlex cluster has failed. * &#x60;Waiting&#x60; - The upgrade of the HyperFlex cluster is waiting to continue execution. | [optional] [readonly] [default to "Unknown"]
 **UplinkSpeed** | Pointer to **string** | The uplink speed information of the HyperFlex cluster. * &#x60;Unknown&#x60; - The uplink speed could not be determined. The physical servers are potentially not claimed. * &#x60;10G&#x60; - The uplink speed is 10G. * &#x60;1G&#x60; - The uplink speed is 1G. | [optional] [readonly] [default to "Unknown"]
+**VcenterConfiguration** | Pointer to [**NullableHyperflexVcenterConfiguration**](HyperflexVcenterConfiguration.md) |  | [optional] 
 **VmCount** | Pointer to **int64** | The number of virtual machines present on this cluster. | [optional] [readonly] 
-**ZoneType** | Pointer to **string** | The type of availability zone used by the cluster. Physical zones are always used in HyperFlex  Stretched Clusters. Logical zones may be used if a cluster has Logical Availability Zones (LAZ)  enabled. * &#x60;UNKNOWN&#x60; - The type of zone configured on the HyperFlex cluster is not known. * &#x60;NOT_CONFIGURED&#x60; - The zone type is not configured. * &#x60;LOGICAL&#x60; - The zone is a logical zone created when the logical availability zones (LAZ) feature is enabled on the HyperFlex cluster. * &#x60;PHYSICAL&#x60; - The zone is a physical zone configured on a stretched HyperFlex cluster. | [optional] [readonly] [default to "UNKNOWN"]
+**ZoneType** | Pointer to **string** | The type of availability zone used by the cluster. Physical zones are always used in HyperFlex Stretched Clusters. Logical zones may be used if a cluster has Logical Availability Zones (LAZ) enabled. * &#x60;UNKNOWN&#x60; - The type of zone configured on the HyperFlex cluster is not known. * &#x60;NOT_CONFIGURED&#x60; - The zone type is not configured. * &#x60;LOGICAL&#x60; - The zone is a logical zone created when the logical availability zones (LAZ) feature is enabled on the HyperFlex cluster. * &#x60;PHYSICAL&#x60; - The zone is a physical zone configured on a stretched HyperFlex cluster. | [optional] [readonly] [default to "UNKNOWN"]
 **Alarm** | Pointer to [**[]HyperflexAlarmRelationship**](HyperflexAlarmRelationship.md) | An array of relationships to hyperflexAlarm resources. | [optional] [readonly] 
 **Encryption** | Pointer to [**HyperflexEncryptionRelationship**](HyperflexEncryptionRelationship.md) |  | [optional] 
 **Health** | Pointer to [**HyperflexHealthRelationship**](HyperflexHealthRelationship.md) |  | [optional] 
@@ -89,6 +92,41 @@ and a boolean to check if the value has been set.
 SetObjectType sets ObjectType field to given value.
 
 
+### GetCapability
+
+`func (o *HyperflexClusterAllOf) GetCapability() HyperflexCapability`
+
+GetCapability returns the Capability field if non-nil, zero value otherwise.
+
+### GetCapabilityOk
+
+`func (o *HyperflexClusterAllOf) GetCapabilityOk() (*HyperflexCapability, bool)`
+
+GetCapabilityOk returns a tuple with the Capability field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCapability
+
+`func (o *HyperflexClusterAllOf) SetCapability(v HyperflexCapability)`
+
+SetCapability sets Capability field to given value.
+
+### HasCapability
+
+`func (o *HyperflexClusterAllOf) HasCapability() bool`
+
+HasCapability returns a boolean if a field has been set.
+
+### SetCapabilityNil
+
+`func (o *HyperflexClusterAllOf) SetCapabilityNil(b bool)`
+
+ SetCapabilityNil sets the value for Capability to be an explicit nil
+
+### UnsetCapability
+`func (o *HyperflexClusterAllOf) UnsetCapability()`
+
+UnsetCapability ensures that no value is present for Capability, not even an explicit nil
 ### GetClusterType
 
 `func (o *HyperflexClusterAllOf) GetClusterType() int64`
@@ -274,6 +312,41 @@ SetHxdpBuildVersion sets HxdpBuildVersion field to given value.
 
 HasHxdpBuildVersion returns a boolean if a field has been set.
 
+### GetNetworkConfiguration
+
+`func (o *HyperflexClusterAllOf) GetNetworkConfiguration() HyperflexNetworkConfiguration`
+
+GetNetworkConfiguration returns the NetworkConfiguration field if non-nil, zero value otherwise.
+
+### GetNetworkConfigurationOk
+
+`func (o *HyperflexClusterAllOf) GetNetworkConfigurationOk() (*HyperflexNetworkConfiguration, bool)`
+
+GetNetworkConfigurationOk returns a tuple with the NetworkConfiguration field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNetworkConfiguration
+
+`func (o *HyperflexClusterAllOf) SetNetworkConfiguration(v HyperflexNetworkConfiguration)`
+
+SetNetworkConfiguration sets NetworkConfiguration field to given value.
+
+### HasNetworkConfiguration
+
+`func (o *HyperflexClusterAllOf) HasNetworkConfiguration() bool`
+
+HasNetworkConfiguration returns a boolean if a field has been set.
+
+### SetNetworkConfigurationNil
+
+`func (o *HyperflexClusterAllOf) SetNetworkConfigurationNil(b bool)`
+
+ SetNetworkConfigurationNil sets the value for NetworkConfiguration to be an explicit nil
+
+### UnsetNetworkConfiguration
+`func (o *HyperflexClusterAllOf) UnsetNetworkConfiguration()`
+
+UnsetNetworkConfiguration ensures that no value is present for NetworkConfiguration, not even an explicit nil
 ### GetNtpServers
 
 `func (o *HyperflexClusterAllOf) GetNtpServers() []string`
@@ -394,6 +467,41 @@ SetUplinkSpeed sets UplinkSpeed field to given value.
 
 HasUplinkSpeed returns a boolean if a field has been set.
 
+### GetVcenterConfiguration
+
+`func (o *HyperflexClusterAllOf) GetVcenterConfiguration() HyperflexVcenterConfiguration`
+
+GetVcenterConfiguration returns the VcenterConfiguration field if non-nil, zero value otherwise.
+
+### GetVcenterConfigurationOk
+
+`func (o *HyperflexClusterAllOf) GetVcenterConfigurationOk() (*HyperflexVcenterConfiguration, bool)`
+
+GetVcenterConfigurationOk returns a tuple with the VcenterConfiguration field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetVcenterConfiguration
+
+`func (o *HyperflexClusterAllOf) SetVcenterConfiguration(v HyperflexVcenterConfiguration)`
+
+SetVcenterConfiguration sets VcenterConfiguration field to given value.
+
+### HasVcenterConfiguration
+
+`func (o *HyperflexClusterAllOf) HasVcenterConfiguration() bool`
+
+HasVcenterConfiguration returns a boolean if a field has been set.
+
+### SetVcenterConfigurationNil
+
+`func (o *HyperflexClusterAllOf) SetVcenterConfigurationNil(b bool)`
+
+ SetVcenterConfigurationNil sets the value for VcenterConfiguration to be an explicit nil
+
+### UnsetVcenterConfiguration
+`func (o *HyperflexClusterAllOf) UnsetVcenterConfiguration()`
+
+UnsetVcenterConfiguration ensures that no value is present for VcenterConfiguration, not even an explicit nil
 ### GetVmCount
 
 `func (o *HyperflexClusterAllOf) GetVmCount() int64`

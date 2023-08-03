@@ -232,6 +232,11 @@ func getStorageNetAppScheduleSchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"type": {
+			Description: "The type of the schedule (cron or interval).",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"uuid": {
 			Description: "Universally unique identifier of the schedule.",
 			Type:        schema.TypeString,
@@ -636,6 +641,11 @@ func dataSourceStorageNetAppScheduleRead(c context.Context, d *schema.ResourceDa
 		o.SetTags(x)
 	}
 
+	if v, ok := d.GetOk("type"); ok {
+		x := (v.(string))
+		o.SetType(x)
+	}
+
 	if v, ok := d.GetOk("uuid"); ok {
 		x := (v.(string))
 		o.SetUuid(x)
@@ -773,6 +783,7 @@ func dataSourceStorageNetAppScheduleRead(c context.Context, d *schema.ResourceDa
 				temp["shared_scope"] = (s.GetSharedScope())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
+				temp["type"] = (s.GetType())
 				temp["uuid"] = (s.GetUuid())
 
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)

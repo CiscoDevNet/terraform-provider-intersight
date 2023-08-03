@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "server.Profile"]
 **ConfigChangeContext** | Pointer to [**NullablePolicyConfigChangeContext**](PolicyConfigChangeContext.md) |  | [optional] 
 **ConfigChanges** | Pointer to [**NullablePolicyConfigChange**](PolicyConfigChange.md) |  | [optional] 
+**InternalReservationReferences** | Pointer to [**[]PoolReservationReference**](PoolReservationReference.md) |  | [optional] 
 **IsPmcDeployedSecurePassphraseSet** | Pointer to **bool** | Indicates whether the value of the &#39;pmcDeployedSecurePassphrase&#39; property has been set. | [optional] [readonly] [default to false]
 **PmcDeployedSecurePassphrase** | Pointer to **string** | Secure passphrase that is already deployed on all the Persistent Memory Modules on the server. This deployed passphrase is required during deploy of server profile if secure passphrase is changed or security is disabled in the attached persistent memory policy. | [optional] 
 **ReservationReferences** | Pointer to [**[]PoolReservationReference**](PoolReservationReference.md) |  | [optional] 
@@ -15,6 +16,7 @@ Name | Type | Description | Notes
 **ServerPreAssignBySerial** | Pointer to **string** | Serial number of the server that would be assigned to this pre-assigned Server Profile. It can be any string that adheres to the following constraints: It should start and end with an alphanumeric character. It cannot be more than 20 characters. | [optional] 
 **ServerPreAssignBySlot** | Pointer to [**NullableServerServerAssignTypeSlot**](ServerServerAssignTypeSlot.md) |  | [optional] 
 **StaticUuidAddress** | Pointer to **string** | The UUID address for the server must include UUID prefix xxxxxxxx-xxxx-xxxx along with the UUID suffix of format xxxx-xxxxxxxxxxxx. | [optional] 
+**UserLabel** | Pointer to **string** | User label assigned to the server profile. | [optional] 
 **Uuid** | Pointer to **string** | The UUID address that is assigned to the server based on the UUID pool. | [optional] [readonly] 
 **AssignedServer** | Pointer to [**ComputePhysicalRelationship**](ComputePhysicalRelationship.md) |  | [optional] 
 **AssociatedServer** | Pointer to [**ComputePhysicalRelationship**](ComputePhysicalRelationship.md) |  | [optional] 
@@ -156,6 +158,41 @@ HasConfigChanges returns a boolean if a field has been set.
 `func (o *ServerProfile) UnsetConfigChanges()`
 
 UnsetConfigChanges ensures that no value is present for ConfigChanges, not even an explicit nil
+### GetInternalReservationReferences
+
+`func (o *ServerProfile) GetInternalReservationReferences() []PoolReservationReference`
+
+GetInternalReservationReferences returns the InternalReservationReferences field if non-nil, zero value otherwise.
+
+### GetInternalReservationReferencesOk
+
+`func (o *ServerProfile) GetInternalReservationReferencesOk() (*[]PoolReservationReference, bool)`
+
+GetInternalReservationReferencesOk returns a tuple with the InternalReservationReferences field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetInternalReservationReferences
+
+`func (o *ServerProfile) SetInternalReservationReferences(v []PoolReservationReference)`
+
+SetInternalReservationReferences sets InternalReservationReferences field to given value.
+
+### HasInternalReservationReferences
+
+`func (o *ServerProfile) HasInternalReservationReferences() bool`
+
+HasInternalReservationReferences returns a boolean if a field has been set.
+
+### SetInternalReservationReferencesNil
+
+`func (o *ServerProfile) SetInternalReservationReferencesNil(b bool)`
+
+ SetInternalReservationReferencesNil sets the value for InternalReservationReferences to be an explicit nil
+
+### UnsetInternalReservationReferences
+`func (o *ServerProfile) UnsetInternalReservationReferences()`
+
+UnsetInternalReservationReferences ensures that no value is present for InternalReservationReferences, not even an explicit nil
 ### GetIsPmcDeployedSecurePassphraseSet
 
 `func (o *ServerProfile) GetIsPmcDeployedSecurePassphraseSet() bool`
@@ -350,6 +387,31 @@ SetStaticUuidAddress sets StaticUuidAddress field to given value.
 `func (o *ServerProfile) HasStaticUuidAddress() bool`
 
 HasStaticUuidAddress returns a boolean if a field has been set.
+
+### GetUserLabel
+
+`func (o *ServerProfile) GetUserLabel() string`
+
+GetUserLabel returns the UserLabel field if non-nil, zero value otherwise.
+
+### GetUserLabelOk
+
+`func (o *ServerProfile) GetUserLabelOk() (*string, bool)`
+
+GetUserLabelOk returns a tuple with the UserLabel field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUserLabel
+
+`func (o *ServerProfile) SetUserLabel(v string)`
+
+SetUserLabel sets UserLabel field to given value.
+
+### HasUserLabel
+
+`func (o *ServerProfile) HasUserLabel() bool`
+
+HasUserLabel returns a boolean if a field has been set.
 
 ### GetUuid
 

@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
+	"reflect"
 	"strconv"
 	"strings"
 	"time"
@@ -115,6 +116,15 @@ func resourceBulkMoCloner() *schema.Resource {
 						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
 					}
 					return
+				}, ForceNew: true,
+			},
+			"exclude_properties": {
+				Type:       schema.TypeList,
+				Optional:   true,
+				ConfigMode: schema.SchemaConfigModeAttr,
+				Computed:   true,
+				Elem: &schema.Schema{
+					Type: schema.TypeString,
 				}, ForceNew: true,
 			},
 			"mod_time": {
@@ -1915,6 +1925,19 @@ func resourceBulkMoClonerCreate(c context.Context, d *schema.ResourceData, meta 
 	}
 
 	o.SetClassId("bulk.MoCloner")
+
+	if v, ok := d.GetOk("exclude_properties"); ok {
+		x := make([]string, 0)
+		y := reflect.ValueOf(v)
+		for i := 0; i < y.Len(); i++ {
+			if y.Index(i).Interface() != nil {
+				x = append(x, y.Index(i).Interface().(string))
+			}
+		}
+		if len(x) > 0 {
+			o.SetExcludeProperties(x)
+		}
+	}
 
 	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))

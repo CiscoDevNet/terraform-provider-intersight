@@ -190,7 +190,7 @@ func getVnicEthVethInventorySchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"rate_limit": {
-			Description: "The value in Mbps (0-10G/40G/100G depending on Adapter Model) to use for limiting the data rate on the virtual interface. Setting this to zero will turn rate limiting off.",
+			Description: "The value in Mbps (0-10G/40G/100G depending on Adapter Model) to use for limiting the data rate on the virtual interface.",
 			Type:        schema.TypeInt,
 			Optional:    true,
 		},

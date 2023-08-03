@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-11765
+API version: 1.0.11-13010
 Contact: intersight@cisco.com
 */
 
@@ -29,7 +29,9 @@ type AssetWorkloadOptimizerMicrosoftAzureBillingOptions struct {
 	// Name of the Cost Export Data that exports cost management data.
 	CostExportName *string `json:"CostExportName,omitempty"`
 	// Id of the tenant used while authenticating the managed target.
-	TenantId             *string `json:"TenantId,omitempty"`
+	TenantId *string `json:"TenantId,omitempty"`
+	// For larger topologies, use cost export to fetch billed cost data.
+	UseCostExport        *bool `json:"UseCostExport,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -43,6 +45,8 @@ func NewAssetWorkloadOptimizerMicrosoftAzureBillingOptions(classId string, objec
 	this := AssetWorkloadOptimizerMicrosoftAzureBillingOptions{}
 	this.ClassId = classId
 	this.ObjectType = objectType
+	var useCostExport bool = false
+	this.UseCostExport = &useCostExport
 	return &this
 }
 
@@ -55,6 +59,8 @@ func NewAssetWorkloadOptimizerMicrosoftAzureBillingOptionsWithDefaults() *AssetW
 	this.ClassId = classId
 	var objectType string = "asset.WorkloadOptimizerMicrosoftAzureBillingOptions"
 	this.ObjectType = objectType
+	var useCostExport bool = false
+	this.UseCostExport = &useCostExport
 	return &this
 }
 
@@ -202,6 +208,38 @@ func (o *AssetWorkloadOptimizerMicrosoftAzureBillingOptions) SetTenantId(v strin
 	o.TenantId = &v
 }
 
+// GetUseCostExport returns the UseCostExport field value if set, zero value otherwise.
+func (o *AssetWorkloadOptimizerMicrosoftAzureBillingOptions) GetUseCostExport() bool {
+	if o == nil || o.UseCostExport == nil {
+		var ret bool
+		return ret
+	}
+	return *o.UseCostExport
+}
+
+// GetUseCostExportOk returns a tuple with the UseCostExport field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AssetWorkloadOptimizerMicrosoftAzureBillingOptions) GetUseCostExportOk() (*bool, bool) {
+	if o == nil || o.UseCostExport == nil {
+		return nil, false
+	}
+	return o.UseCostExport, true
+}
+
+// HasUseCostExport returns a boolean if a field has been set.
+func (o *AssetWorkloadOptimizerMicrosoftAzureBillingOptions) HasUseCostExport() bool {
+	if o != nil && o.UseCostExport != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetUseCostExport gets a reference to the given bool and assigns it to the UseCostExport field.
+func (o *AssetWorkloadOptimizerMicrosoftAzureBillingOptions) SetUseCostExport(v bool) {
+	o.UseCostExport = &v
+}
+
 func (o AssetWorkloadOptimizerMicrosoftAzureBillingOptions) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	serializedAssetServiceOptions, errAssetServiceOptions := json.Marshal(o.AssetServiceOptions)
@@ -227,6 +265,9 @@ func (o AssetWorkloadOptimizerMicrosoftAzureBillingOptions) MarshalJSON() ([]byt
 	if o.TenantId != nil {
 		toSerialize["TenantId"] = o.TenantId
 	}
+	if o.UseCostExport != nil {
+		toSerialize["UseCostExport"] = o.UseCostExport
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -247,6 +288,8 @@ func (o *AssetWorkloadOptimizerMicrosoftAzureBillingOptions) UnmarshalJSON(bytes
 		CostExportName *string `json:"CostExportName,omitempty"`
 		// Id of the tenant used while authenticating the managed target.
 		TenantId *string `json:"TenantId,omitempty"`
+		// For larger topologies, use cost export to fetch billed cost data.
+		UseCostExport *bool `json:"UseCostExport,omitempty"`
 	}
 
 	varAssetWorkloadOptimizerMicrosoftAzureBillingOptionsWithoutEmbeddedStruct := AssetWorkloadOptimizerMicrosoftAzureBillingOptionsWithoutEmbeddedStruct{}
@@ -259,6 +302,7 @@ func (o *AssetWorkloadOptimizerMicrosoftAzureBillingOptions) UnmarshalJSON(bytes
 		varAssetWorkloadOptimizerMicrosoftAzureBillingOptions.BillingAccountId = varAssetWorkloadOptimizerMicrosoftAzureBillingOptionsWithoutEmbeddedStruct.BillingAccountId
 		varAssetWorkloadOptimizerMicrosoftAzureBillingOptions.CostExportName = varAssetWorkloadOptimizerMicrosoftAzureBillingOptionsWithoutEmbeddedStruct.CostExportName
 		varAssetWorkloadOptimizerMicrosoftAzureBillingOptions.TenantId = varAssetWorkloadOptimizerMicrosoftAzureBillingOptionsWithoutEmbeddedStruct.TenantId
+		varAssetWorkloadOptimizerMicrosoftAzureBillingOptions.UseCostExport = varAssetWorkloadOptimizerMicrosoftAzureBillingOptionsWithoutEmbeddedStruct.UseCostExport
 		*o = AssetWorkloadOptimizerMicrosoftAzureBillingOptions(varAssetWorkloadOptimizerMicrosoftAzureBillingOptions)
 	} else {
 		return err
@@ -281,6 +325,7 @@ func (o *AssetWorkloadOptimizerMicrosoftAzureBillingOptions) UnmarshalJSON(bytes
 		delete(additionalProperties, "BillingAccountId")
 		delete(additionalProperties, "CostExportName")
 		delete(additionalProperties, "TenantId")
+		delete(additionalProperties, "UseCostExport")
 
 		// remove fields from embedded structs
 		reflectAssetServiceOptions := reflect.ValueOf(o.AssetServiceOptions)

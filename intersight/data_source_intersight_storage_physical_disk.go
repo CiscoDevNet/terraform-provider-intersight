@@ -95,6 +95,11 @@ func getStoragePhysicalDiskSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"description": {
+			Description: "This field displays the description of the physical disk.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"device_mo_id": {
 			Description: "The database identifier of the registered device of an object.",
 			Type:        schema.TypeString,
@@ -199,6 +204,11 @@ func getStoragePhysicalDiskSchema() map[string]*schema.Schema {
 					},
 				},
 			},
+		},
+		"is_platform_supported": {
+			Description: "This field indicates whether the physical disk is supported on the server or not.",
+			Type:        schema.TypeBool,
+			Optional:    true,
 		},
 		"is_upgraded": {
 			Description: "This field indicates the compute status of the catalog values for the associated component or hardware.",
@@ -355,6 +365,11 @@ func getStoragePhysicalDiskSchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"part_number": {
+			Description: "This field displays the part number of the physical disk.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"percent_life_left": {
 			Description: "Percentage of write cycles remaining in a solid state drive (SSD).",
 			Type:        schema.TypeInt,
@@ -444,7 +459,7 @@ func getStoragePhysicalDiskSchema() map[string]*schema.Schema {
 			},
 		},
 		"pid": {
-			Description: "This field identifies the Product ID for physicalDisk.",
+			Description: "This field displays the product ID of the physical disk.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -1023,6 +1038,11 @@ func dataSourceStoragePhysicalDiskRead(c context.Context, d *schema.ResourceData
 		o.SetCreateTime(x)
 	}
 
+	if v, ok := d.GetOk("description"); ok {
+		x := (v.(string))
+		o.SetDescription(x)
+	}
+
 	if v, ok := d.GetOk("device_mo_id"); ok {
 		x := (v.(string))
 		o.SetDeviceMoId(x)
@@ -1134,6 +1154,11 @@ func dataSourceStoragePhysicalDiskRead(c context.Context, d *schema.ResourceData
 			x := p[0]
 			o.SetInventoryDeviceInfo(x)
 		}
+	}
+
+	if v, ok := d.GetOkExists("is_platform_supported"); ok {
+		x := (v.(bool))
+		o.SetIsPlatformSupported(x)
 	}
 
 	if v, ok := d.GetOkExists("is_upgraded"); ok {
@@ -1311,6 +1336,11 @@ func dataSourceStoragePhysicalDiskRead(c context.Context, d *schema.ResourceData
 			x := p[0]
 			o.SetParent(x)
 		}
+	}
+
+	if v, ok := d.GetOk("part_number"); ok {
+		x := (v.(string))
+		o.SetPartNumber(x)
 	}
 
 	if v, ok := d.GetOkExists("percent_life_left"); ok {
@@ -1944,6 +1974,7 @@ func dataSourceStoragePhysicalDiskRead(c context.Context, d *schema.ResourceData
 				temp["configuration_state"] = (s.GetConfigurationState())
 
 				temp["create_time"] = (s.GetCreateTime()).String()
+				temp["description"] = (s.GetDescription())
 				temp["device_mo_id"] = (s.GetDeviceMoId())
 				temp["disabled_for_removal"] = (s.GetDisabledForRemoval())
 				temp["discovered_path"] = (s.GetDiscoveredPath())
@@ -1960,6 +1991,7 @@ func dataSourceStoragePhysicalDiskRead(c context.Context, d *schema.ResourceData
 				temp["indicator_led"] = (s.GetIndicatorLed())
 
 				temp["inventory_device_info"] = flattenMapInventoryDeviceInfoRelationship(s.GetInventoryDeviceInfo(), d)
+				temp["is_platform_supported"] = (s.GetIsPlatformSupported())
 				temp["is_upgraded"] = (s.GetIsUpgraded())
 				temp["link_speed"] = (s.GetLinkSpeed())
 				temp["link_state"] = (s.GetLinkState())
@@ -1982,6 +2014,7 @@ func dataSourceStoragePhysicalDiskRead(c context.Context, d *schema.ResourceData
 				temp["owners"] = (s.GetOwners())
 
 				temp["parent"] = flattenMapMoBaseMoRelationship(s.GetParent(), d)
+				temp["part_number"] = (s.GetPartNumber())
 				temp["percent_life_left"] = (s.GetPercentLifeLeft())
 				temp["percent_reserved_capacity_consumed"] = (s.GetPercentReservedCapacityConsumed())
 				temp["performance_percent"] = (s.GetPerformancePercent())

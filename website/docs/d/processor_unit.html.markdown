@@ -17,9 +17,11 @@ The following arguments can be used to get data of already created objects in In
 * `account_moid`:(string) The Account ID for this managed object. 
 * `architecture`:(string) The architecture of the installed processor. 
 * `create_time`:(string) The time when this managed object was created. 
+* `description`:(string) This field displays the description of the processor. 
 * `device_mo_id`:(string) The database identifier of the registered device of an object. 
 * `dn`:(string) The Distinguished Name unambiguously identifies an object in the system. 
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
+* `is_platform_supported`:(bool) This field indicates whether the processor is supported on the server or not. 
 * `is_upgraded`:(bool) This field indicates the compute status of the catalog values for the associated component or hardware. 
 * `mod_time`:(string) The time when this managed object was last modified. 
 * `model`:(string) This field displays the model number of the associated component or hardware. 
@@ -30,6 +32,8 @@ The following arguments can be used to get data of already created objects in In
 * `oper_power_state`:(string) The power state of the processor. 
 * `oper_state`:(string) The health indicator of the processor, 'OK' indicates the processor is operatinal. 
 * `operability`:(string) Operability state of the central processing unit. 
+* `part_number`:(string) This field displays the part number of the of the processor. 
+* `pid`:(string) This field displays the product ID of the processor. 
 * `presence`:(string) This field indicates the presence (equipped) or absence (absent) of the associated component or hardware. 
 * `processor_id`:(int) The ID number of a given processor. 
 * `revision`:(string) This field displays the revised version of the associated component or hardware (if any). 

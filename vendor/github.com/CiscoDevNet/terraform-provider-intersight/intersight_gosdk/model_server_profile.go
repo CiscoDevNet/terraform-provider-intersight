@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-11765
+API version: 1.0.11-13010
 Contact: intersight@cisco.com
 */
 
@@ -23,9 +23,10 @@ type ServerProfile struct {
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
-	ObjectType          string                            `json:"ObjectType"`
-	ConfigChangeContext NullablePolicyConfigChangeContext `json:"ConfigChangeContext,omitempty"`
-	ConfigChanges       NullablePolicyConfigChange        `json:"ConfigChanges,omitempty"`
+	ObjectType                    string                            `json:"ObjectType"`
+	ConfigChangeContext           NullablePolicyConfigChangeContext `json:"ConfigChangeContext,omitempty"`
+	ConfigChanges                 NullablePolicyConfigChange        `json:"ConfigChanges,omitempty"`
+	InternalReservationReferences []PoolReservationReference        `json:"InternalReservationReferences,omitempty"`
 	// Indicates whether the value of the 'pmcDeployedSecurePassphrase' property has been set.
 	IsPmcDeployedSecurePassphraseSet *bool `json:"IsPmcDeployedSecurePassphraseSet,omitempty"`
 	// Secure passphrase that is already deployed on all the Persistent Memory Modules on the server. This deployed passphrase is required during deploy of server profile if secure passphrase is changed or security is disabled in the attached persistent memory policy.
@@ -38,6 +39,8 @@ type ServerProfile struct {
 	ServerPreAssignBySlot   NullableServerServerAssignTypeSlot `json:"ServerPreAssignBySlot,omitempty"`
 	// The UUID address for the server must include UUID prefix xxxxxxxx-xxxx-xxxx along with the UUID suffix of format xxxx-xxxxxxxxxxxx.
 	StaticUuidAddress *string `json:"StaticUuidAddress,omitempty"`
+	// User label assigned to the server profile.
+	UserLabel *string `json:"UserLabel,omitempty"`
 	// The UUID address that is assigned to the server based on the UUID pool.
 	Uuid                 *string                       `json:"Uuid,omitempty"`
 	AssignedServer       *ComputePhysicalRelationship  `json:"AssignedServer,omitempty"`
@@ -224,6 +227,39 @@ func (o *ServerProfile) SetConfigChangesNil() {
 // UnsetConfigChanges ensures that no value is present for ConfigChanges, not even an explicit nil
 func (o *ServerProfile) UnsetConfigChanges() {
 	o.ConfigChanges.Unset()
+}
+
+// GetInternalReservationReferences returns the InternalReservationReferences field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ServerProfile) GetInternalReservationReferences() []PoolReservationReference {
+	if o == nil {
+		var ret []PoolReservationReference
+		return ret
+	}
+	return o.InternalReservationReferences
+}
+
+// GetInternalReservationReferencesOk returns a tuple with the InternalReservationReferences field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ServerProfile) GetInternalReservationReferencesOk() ([]PoolReservationReference, bool) {
+	if o == nil || o.InternalReservationReferences == nil {
+		return nil, false
+	}
+	return o.InternalReservationReferences, true
+}
+
+// HasInternalReservationReferences returns a boolean if a field has been set.
+func (o *ServerProfile) HasInternalReservationReferences() bool {
+	if o != nil && o.InternalReservationReferences != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetInternalReservationReferences gets a reference to the given []PoolReservationReference and assigns it to the InternalReservationReferences field.
+func (o *ServerProfile) SetInternalReservationReferences(v []PoolReservationReference) {
+	o.InternalReservationReferences = v
 }
 
 // GetIsPmcDeployedSecurePassphraseSet returns the IsPmcDeployedSecurePassphraseSet field value if set, zero value otherwise.
@@ -460,6 +496,38 @@ func (o *ServerProfile) HasStaticUuidAddress() bool {
 // SetStaticUuidAddress gets a reference to the given string and assigns it to the StaticUuidAddress field.
 func (o *ServerProfile) SetStaticUuidAddress(v string) {
 	o.StaticUuidAddress = &v
+}
+
+// GetUserLabel returns the UserLabel field value if set, zero value otherwise.
+func (o *ServerProfile) GetUserLabel() string {
+	if o == nil || o.UserLabel == nil {
+		var ret string
+		return ret
+	}
+	return *o.UserLabel
+}
+
+// GetUserLabelOk returns a tuple with the UserLabel field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ServerProfile) GetUserLabelOk() (*string, bool) {
+	if o == nil || o.UserLabel == nil {
+		return nil, false
+	}
+	return o.UserLabel, true
+}
+
+// HasUserLabel returns a boolean if a field has been set.
+func (o *ServerProfile) HasUserLabel() bool {
+	if o != nil && o.UserLabel != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetUserLabel gets a reference to the given string and assigns it to the UserLabel field.
+func (o *ServerProfile) SetUserLabel(v string) {
+	o.UserLabel = &v
 }
 
 // GetUuid returns the Uuid field value if set, zero value otherwise.
@@ -838,6 +906,9 @@ func (o ServerProfile) MarshalJSON() ([]byte, error) {
 	if o.ConfigChanges.IsSet() {
 		toSerialize["ConfigChanges"] = o.ConfigChanges.Get()
 	}
+	if o.InternalReservationReferences != nil {
+		toSerialize["InternalReservationReferences"] = o.InternalReservationReferences
+	}
 	if o.IsPmcDeployedSecurePassphraseSet != nil {
 		toSerialize["IsPmcDeployedSecurePassphraseSet"] = o.IsPmcDeployedSecurePassphraseSet
 	}
@@ -858,6 +929,9 @@ func (o ServerProfile) MarshalJSON() ([]byte, error) {
 	}
 	if o.StaticUuidAddress != nil {
 		toSerialize["StaticUuidAddress"] = o.StaticUuidAddress
+	}
+	if o.UserLabel != nil {
+		toSerialize["UserLabel"] = o.UserLabel
 	}
 	if o.Uuid != nil {
 		toSerialize["Uuid"] = o.Uuid
@@ -905,9 +979,10 @@ func (o *ServerProfile) UnmarshalJSON(bytes []byte) (err error) {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
-		ObjectType          string                            `json:"ObjectType"`
-		ConfigChangeContext NullablePolicyConfigChangeContext `json:"ConfigChangeContext,omitempty"`
-		ConfigChanges       NullablePolicyConfigChange        `json:"ConfigChanges,omitempty"`
+		ObjectType                    string                            `json:"ObjectType"`
+		ConfigChangeContext           NullablePolicyConfigChangeContext `json:"ConfigChangeContext,omitempty"`
+		ConfigChanges                 NullablePolicyConfigChange        `json:"ConfigChanges,omitempty"`
+		InternalReservationReferences []PoolReservationReference        `json:"InternalReservationReferences,omitempty"`
 		// Indicates whether the value of the 'pmcDeployedSecurePassphrase' property has been set.
 		IsPmcDeployedSecurePassphraseSet *bool `json:"IsPmcDeployedSecurePassphraseSet,omitempty"`
 		// Secure passphrase that is already deployed on all the Persistent Memory Modules on the server. This deployed passphrase is required during deploy of server profile if secure passphrase is changed or security is disabled in the attached persistent memory policy.
@@ -920,6 +995,8 @@ func (o *ServerProfile) UnmarshalJSON(bytes []byte) (err error) {
 		ServerPreAssignBySlot   NullableServerServerAssignTypeSlot `json:"ServerPreAssignBySlot,omitempty"`
 		// The UUID address for the server must include UUID prefix xxxxxxxx-xxxx-xxxx along with the UUID suffix of format xxxx-xxxxxxxxxxxx.
 		StaticUuidAddress *string `json:"StaticUuidAddress,omitempty"`
+		// User label assigned to the server profile.
+		UserLabel *string `json:"UserLabel,omitempty"`
 		// The UUID address that is assigned to the server based on the UUID pool.
 		Uuid                 *string                       `json:"Uuid,omitempty"`
 		AssignedServer       *ComputePhysicalRelationship  `json:"AssignedServer,omitempty"`
@@ -945,6 +1022,7 @@ func (o *ServerProfile) UnmarshalJSON(bytes []byte) (err error) {
 		varServerProfile.ObjectType = varServerProfileWithoutEmbeddedStruct.ObjectType
 		varServerProfile.ConfigChangeContext = varServerProfileWithoutEmbeddedStruct.ConfigChangeContext
 		varServerProfile.ConfigChanges = varServerProfileWithoutEmbeddedStruct.ConfigChanges
+		varServerProfile.InternalReservationReferences = varServerProfileWithoutEmbeddedStruct.InternalReservationReferences
 		varServerProfile.IsPmcDeployedSecurePassphraseSet = varServerProfileWithoutEmbeddedStruct.IsPmcDeployedSecurePassphraseSet
 		varServerProfile.PmcDeployedSecurePassphrase = varServerProfileWithoutEmbeddedStruct.PmcDeployedSecurePassphrase
 		varServerProfile.ReservationReferences = varServerProfileWithoutEmbeddedStruct.ReservationReferences
@@ -952,6 +1030,7 @@ func (o *ServerProfile) UnmarshalJSON(bytes []byte) (err error) {
 		varServerProfile.ServerPreAssignBySerial = varServerProfileWithoutEmbeddedStruct.ServerPreAssignBySerial
 		varServerProfile.ServerPreAssignBySlot = varServerProfileWithoutEmbeddedStruct.ServerPreAssignBySlot
 		varServerProfile.StaticUuidAddress = varServerProfileWithoutEmbeddedStruct.StaticUuidAddress
+		varServerProfile.UserLabel = varServerProfileWithoutEmbeddedStruct.UserLabel
 		varServerProfile.Uuid = varServerProfileWithoutEmbeddedStruct.Uuid
 		varServerProfile.AssignedServer = varServerProfileWithoutEmbeddedStruct.AssignedServer
 		varServerProfile.AssociatedServer = varServerProfileWithoutEmbeddedStruct.AssociatedServer
@@ -984,6 +1063,7 @@ func (o *ServerProfile) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "ConfigChangeContext")
 		delete(additionalProperties, "ConfigChanges")
+		delete(additionalProperties, "InternalReservationReferences")
 		delete(additionalProperties, "IsPmcDeployedSecurePassphraseSet")
 		delete(additionalProperties, "PmcDeployedSecurePassphrase")
 		delete(additionalProperties, "ReservationReferences")
@@ -991,6 +1071,7 @@ func (o *ServerProfile) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "ServerPreAssignBySerial")
 		delete(additionalProperties, "ServerPreAssignBySlot")
 		delete(additionalProperties, "StaticUuidAddress")
+		delete(additionalProperties, "UserLabel")
 		delete(additionalProperties, "Uuid")
 		delete(additionalProperties, "AssignedServer")
 		delete(additionalProperties, "AssociatedServer")

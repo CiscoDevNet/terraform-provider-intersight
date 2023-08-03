@@ -21,10 +21,12 @@ The following arguments can be used to get data of already created objects in In
 * `capacity`:(string) This represents the memory capacity in MiB of the memory unit on a server. 
 * `clock`:(string) This represents the clock of the memory unit on a server. 
 * `create_time`:(string) The time when this managed object was created. 
+* `description`:(string) This field displays the description of the DIMM. 
 * `device_mo_id`:(string) The database identifier of the registered device of an object. 
 * `dn`:(string) The Distinguished Name unambiguously identifies an object in the system. 
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
 * `form_factor`:(string) This represents the form factor of the memory unit on a server. 
+* `is_platform_supported`:(bool) This field indicates whether the DIMM is supported on the server or not. 
 * `is_upgraded`:(bool) This field indicates the compute status of the catalog values for the associated component or hardware. 
 * `latency`:(string) This represents the latency of the memory unit on a server. 
 * `location`:(string) This represents the location of the memory unit on a server. 
@@ -35,6 +37,8 @@ The following arguments can be used to get data of already created objects in In
 * `oper_power_state`:(string) This represents the operational power state of the memory unit on a server. 
 * `oper_state`:(string) This represents the operational state of the memory unit on a server. 
 * `operability`:(string) This represents the operability of the memory unit on a server. 
+* `part_number`:(string) This field displays the part number of the DIMM. 
+* `pid`:(string) This field displays the product ID of the DIMM. 
 * `presence`:(string) This field indicates the presence (equipped) or absence (absent) of the associated component or hardware. 
 * `revision`:(string) This field displays the revised version of the associated component or hardware (if any). 
 * `rn`:(string) The Relative Name uniquely identifies an object within a given context. 

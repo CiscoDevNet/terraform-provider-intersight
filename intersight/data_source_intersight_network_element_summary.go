@@ -230,6 +230,11 @@ func getNetworkElementSummarySchema() map[string]*schema.Schema {
 			Type:        schema.TypeInt,
 			Optional:    true,
 		},
+		"inter_cluster_link_state": {
+			Description: "The intercluster link state of the switch.\n* `Unknown` - The operational state of the link is not known.\n* `Up` - The operational state of the link is up.\n* `Down` - The operational state of the link is down.\n* `Degraded` - The link is operational but degraded. This state is applicable to port channels when any one of the member links is down.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"ipv4_address": {
 			Description: "IP version 4 address is saved in this property.",
 			Type:        schema.TypeString,
@@ -483,6 +488,11 @@ func getNetworkElementSummarySchema() map[string]*schema.Schema {
 					},
 				},
 			},
+		},
+		"reserved_vlan_start_id": {
+			Description: "The reserved VLAN start ID of the Network Element. A block of 128 VLANs are reserved for internal use and cannot be used for carrying network traffic.",
+			Type:        schema.TypeInt,
+			Optional:    true,
 		},
 		"revision": {
 			Description: "This field displays the revised version of the associated component or hardware (if any).",
@@ -917,6 +927,11 @@ func dataSourceNetworkElementSummaryRead(c context.Context, d *schema.ResourceDa
 		o.SetInbandVlan(x)
 	}
 
+	if v, ok := d.GetOk("inter_cluster_link_state"); ok {
+		x := (v.(string))
+		o.SetInterClusterLinkState(x)
+	}
+
 	if v, ok := d.GetOk("ipv4_address"); ok {
 		x := (v.(string))
 		o.SetIpv4Address(x)
@@ -1199,6 +1214,11 @@ func dataSourceNetworkElementSummaryRead(c context.Context, d *schema.ResourceDa
 		}
 	}
 
+	if v, ok := d.GetOkExists("reserved_vlan_start_id"); ok {
+		x := int64(v.(int))
+		o.SetReservedVlanStartId(x)
+	}
+
 	if v, ok := d.GetOk("revision"); ok {
 		x := (v.(string))
 		o.SetRevision(x)
@@ -1438,6 +1458,7 @@ func dataSourceNetworkElementSummaryRead(c context.Context, d *schema.ResourceDa
 				temp["inband_ip_gateway"] = (s.GetInbandIpGateway())
 				temp["inband_ip_mask"] = (s.GetInbandIpMask())
 				temp["inband_vlan"] = (s.GetInbandVlan())
+				temp["inter_cluster_link_state"] = (s.GetInterClusterLinkState())
 				temp["ipv4_address"] = (s.GetIpv4Address())
 				temp["is_upgraded"] = (s.GetIsUpgraded())
 				temp["management_mode"] = (s.GetManagementMode())
@@ -1475,6 +1496,7 @@ func dataSourceNetworkElementSummaryRead(c context.Context, d *schema.ResourceDa
 				temp["presence"] = (s.GetPresence())
 
 				temp["registered_device"] = flattenMapAssetDeviceRegistrationRelationship(s.GetRegisteredDevice(), d)
+				temp["reserved_vlan_start_id"] = (s.GetReservedVlanStartId())
 				temp["revision"] = (s.GetRevision())
 				temp["rn"] = (s.GetRn())
 				temp["serial"] = (s.GetSerial())

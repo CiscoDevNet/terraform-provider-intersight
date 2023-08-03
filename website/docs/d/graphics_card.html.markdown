@@ -17,6 +17,7 @@ The following arguments can be used to get data of already created objects in In
 * `account_moid`:(string) The Account ID for this managed object. 
 * `card_id`:(int) The id of the graphics card. 
 * `create_time`:(string) The time when this managed object was created. 
+* `description`:(string) This field displays the description of the Graphics Processing Unit. 
 * `device_id`:(int) The device id of the graphics card. 
 * `device_mo_id`:(string) The database identifier of the registered device of an object. 
 * `dn`:(string) The Distinguished Name unambiguously identifies an object in the system. 
@@ -24,6 +25,7 @@ The following arguments can be used to get data of already created objects in In
 * `expander_slot`:(string) The expander slot information of the card. 
 * `firmware_version`:(string) The firmware version of the graphics card. 
 * `gpu_id`:(string) The identifier of the graphics processor unit. 
+* `is_platform_supported`:(bool) This field indicates whether the Graphics Processing Unit is supported on the server or not. 
 * `is_upgraded`:(bool) This field indicates the compute status of the catalog values for the associated component or hardware. 
 * `mod_time`:(string) The time when this managed object was last modified. 
 * `mode`:(string) The current mode of the graphics card. 
@@ -31,9 +33,11 @@ The following arguments can be used to get data of already created objects in In
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `num_gpus`:(string) The number of controllers under each card. 
 * `oper_state`:(string) The current operational state of the graphics card. 
+* `part_number`:(string) This field displays the part number of the Graphics Processing Unit. 
 * `pci_address`:(string) The PCI address of the graphics card. 
 * `pci_address_list`:(string) This list contains the PCI address of all controllers for corresponding card. 
 * `pci_slot`:(string) The PCI slot name of the graphics card. 
+* `pid`:(string) This field displays the product ID of the Graphics Processing Unit. 
 * `presence`:(string) This field indicates the presence (equipped) or absence (absent) of the associated component or hardware. 
 * `revision`:(string) This field displays the revised version of the associated component or hardware (if any). 
 * `rn`:(string) The Relative Name uniquely identifies an object within a given context. 

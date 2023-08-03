@@ -163,7 +163,7 @@ This complex property has following sub-properties:
 * `wait_reason`:(string)(ReadOnly) Denotes the reason workflow is in waiting status.* `None` - Wait reason is none, which indicates there is no reason for the waiting state.* `GatherTasks` - Wait reason is gathering tasks, which indicates the workflow is in this state in order to gather tasks.* `Duplicate` - Wait reason is duplicate, which indicates the workflow is a duplicate of current running workflow.* `RateLimit` - Wait reason is rate limit, which indicates the workflow is rate limited by account/instance level throttling threshold.* `WaitTask` - Wait reason when there are one or more wait tasks in the workflow which are yet to receive a task status update.* `PendingRetryFailed` - Wait reason when the workflow is pending a RetryFailed action.* `WaitingToStart` - Workflow is waiting to start on workflow engine. 
 * `workflow_ctx`:(HashMap) - The workflow context which contains initiator and target information. 
 This complex property has following sub-properties:
-  + `initiator_ctx`:(HashMap) - Details about initiator of the workflow. 
+  + `initiator_ctx`:(HashMap) - Details about initiator of the workflow. Any Intersight object resource can be set as the initiator of the workflow. For workflows executed by an Intersight service, an applicable service object will be set as the initiator. For example, during server profile deployment workflow, the server profile object will be set as the initiator by the system. For user created workflows, this field is optional and for workflows executed from Intersight workflow execution page, the workflow definition object will be set as the Initiator. 
 This complex property has following sub-properties:
     + `initiator_moid`:(string) The moid of the Intersight managed object that initiated the workflow. 
     + `initiator_name`:(string) Name of the initiator who started the workflow. The initiator can be Intersight managed object that triggered the workflow. 
@@ -176,8 +176,8 @@ This complex property has following sub-properties:
     + `target_moid`:(string)(ReadOnly) Moid of the target Intersight managed object. 
     + `target_name`:(string)(ReadOnly) Name of the target instance. 
     + `target_type`:(string)(ReadOnly) Object type of the target Intersight managed object. 
-  + `workflow_subtype`:(string)(ReadOnly) The subtype of the workflow. 
-  + `workflow_type`:(string)(ReadOnly) Type of the workflow being started. This can be any string for client services to distinguish workflow by type. 
+  + `workflow_subtype`:(string)(ReadOnly) The subtype of the dynamic workflow. For example - Intersight services offer the following subtypes [Validate, Deploy, Import] for dynamic workflow of type serverconfig. This field is not applicable for user created workflows. 
+  + `workflow_type`:(string)(ReadOnly) Intersight services set the type of dynamic workflow that need to be built and executed. This field is not applicable for user created workflows. WorkflowType set as ServerConfig states that a dynamic workflow is executing tasks related to server configuration. 
 * `workflow_definition`:(HashMap) - A reference to a workflowWorkflowDefinition resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
 This complex property has following sub-properties:
   + `moid`:(string) The Moid of the referenced REST resource. 

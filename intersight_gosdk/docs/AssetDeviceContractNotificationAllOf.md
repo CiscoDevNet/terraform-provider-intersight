@@ -16,6 +16,7 @@ Name | Type | Description | Notes
 **EndUserGlobalUltimate** | Pointer to [**NullableAssetGlobalUltimate**](AssetGlobalUltimate.md) |  | [optional] 
 **IsValid** | Pointer to **bool** | Validates if the device is a genuine Cisco device. Validated is done using the Cisco SN2INFO APIs. | [optional] 
 **ItemType** | Pointer to **string** | Item type of this specific Cisco device. example \&quot;Chassis\&quot;. | [optional] 
+**LastDateOfSupport** | Pointer to **time.Time** | The last date of hardware support for this device. | [optional] 
 **MaintenancePurchaseOrderNumber** | Pointer to **string** | Maintenance purchase order number for the Cisco device. | [optional] 
 **MaintenanceSalesOrderNumber** | Pointer to **string** | Maintenance sales order number for the Cisco device. | [optional] 
 **Product** | Pointer to [**NullableAssetProductInformation**](AssetProductInformation.md) |  | [optional] 
@@ -371,6 +372,31 @@ SetItemType sets ItemType field to given value.
 `func (o *AssetDeviceContractNotificationAllOf) HasItemType() bool`
 
 HasItemType returns a boolean if a field has been set.
+
+### GetLastDateOfSupport
+
+`func (o *AssetDeviceContractNotificationAllOf) GetLastDateOfSupport() time.Time`
+
+GetLastDateOfSupport returns the LastDateOfSupport field if non-nil, zero value otherwise.
+
+### GetLastDateOfSupportOk
+
+`func (o *AssetDeviceContractNotificationAllOf) GetLastDateOfSupportOk() (*time.Time, bool)`
+
+GetLastDateOfSupportOk returns a tuple with the LastDateOfSupport field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLastDateOfSupport
+
+`func (o *AssetDeviceContractNotificationAllOf) SetLastDateOfSupport(v time.Time)`
+
+SetLastDateOfSupport sets LastDateOfSupport field to given value.
+
+### HasLastDateOfSupport
+
+`func (o *AssetDeviceContractNotificationAllOf) HasLastDateOfSupport() bool`
+
+HasLastDateOfSupport returns a boolean if a field has been set.
 
 ### GetMaintenancePurchaseOrderNumber
 

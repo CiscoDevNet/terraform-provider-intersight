@@ -585,7 +585,7 @@ func getVnicEthIfSchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"order": {
-			Description: "The order in which the virtual interface is brought up. The order assigned to an interface should be unique for all the Ethernet and Fibre-Channel interfaces on each PCI link on a VIC adapter. The maximum value of PCI order is limited by the number of virtual interfaces (Ethernet and Fibre-Channel) on each PCI link on a VIC adapter. All VIC adapters have a single PCI link except VIC 1385 which has two.",
+			Description: "The order in which the virtual interface is brought up. The order assigned to an interface should be unique for all the Ethernet and Fibre-Channel interfaces on each PCI link on a VIC adapter. The order should start from zero with no overlaps. The maximum value of PCI order is limited by the number of virtual interfaces (Ethernet and Fibre-Channel) on each PCI link on a VIC adapter. All VIC adapters have a single PCI link except VIC 1340, VIC 1380 and VIC 1385 which have two.",
 			Type:        schema.TypeInt,
 			Optional:    true,
 		},
@@ -708,6 +708,11 @@ func getVnicEthIfSchema() map[string]*schema.Schema {
 					"pci_link": {
 						Description: "The PCI Link used as transport for the virtual interface. PCI Link is only applicable for select Cisco UCS VIC 1300 models (UCSC-PCIE-C40Q-03, UCSB-MLOM-40G-03, UCSB-VIC-M83-8P) that support two PCI links. The value, if specified, for any other VIC model will be ignored.",
 						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"pci_link_assignment_mode": {
+						Description: "If the autoPciLink is disabled, the user can either choose to place the vNICs manually or based on a policy.If the autoPciLink is enabled, it will be set to None.\n* `Custom` - The user needs to specify the PCI Link manually.\n* `Load-Balanced` - The system will uniformly distribute the interfaces across the PCI Links.\n* `None` - Assignment is not applicable and will be set when the AutoPciLink is set to true.",
+						Type:        schema.TypeString,
 						Optional:    true,
 					},
 					"switch_id": {
@@ -1896,6 +1901,12 @@ func dataSourceVnicEthIfRead(c context.Context, d *schema.ResourceData, meta int
 				{
 					x := int64(v.(int))
 					o.SetPciLink(x)
+				}
+			}
+			if v, ok := l["pci_link_assignment_mode"]; ok {
+				{
+					x := (v.(string))
+					o.SetPciLinkAssignmentMode(x)
 				}
 			}
 			if v, ok := l["switch_id"]; ok {

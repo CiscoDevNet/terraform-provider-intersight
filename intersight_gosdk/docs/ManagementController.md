@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **Certificate** | Pointer to [**CertificatemanagementImc**](CertificatemanagementImc.md) |  | [optional] 
 **KmipClientCertificate** | Pointer to [**CertificatemanagementImc**](CertificatemanagementImc.md) |  | [optional] 
 **Model** | Pointer to **string** | Model of the endpoint that houses the management controller. | [optional] [readonly] 
+**RootCaCertificates** | Pointer to [**[]CertificatemanagementRootCaCertificate**](CertificatemanagementRootCaCertificate.md) |  | [optional] 
 **UemStreamAdminState** | Pointer to **string** | Desired state of the UEM stream. * &#x60;Disabled&#x60; - The UEM event channel is disabled. * &#x60;Enabled&#x60; - The UEM event channel is enabled. | [optional] [default to "Disabled"]
 **AdapterUnit** | Pointer to [**AdapterUnitRelationship**](AdapterUnitRelationship.md) |  | [optional] 
 **ComputeBlade** | Pointer to [**ComputeBladeRelationship**](ComputeBladeRelationship.md) |  | [optional] 
@@ -158,6 +159,41 @@ SetModel sets Model field to given value.
 
 HasModel returns a boolean if a field has been set.
 
+### GetRootCaCertificates
+
+`func (o *ManagementController) GetRootCaCertificates() []CertificatemanagementRootCaCertificate`
+
+GetRootCaCertificates returns the RootCaCertificates field if non-nil, zero value otherwise.
+
+### GetRootCaCertificatesOk
+
+`func (o *ManagementController) GetRootCaCertificatesOk() (*[]CertificatemanagementRootCaCertificate, bool)`
+
+GetRootCaCertificatesOk returns a tuple with the RootCaCertificates field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRootCaCertificates
+
+`func (o *ManagementController) SetRootCaCertificates(v []CertificatemanagementRootCaCertificate)`
+
+SetRootCaCertificates sets RootCaCertificates field to given value.
+
+### HasRootCaCertificates
+
+`func (o *ManagementController) HasRootCaCertificates() bool`
+
+HasRootCaCertificates returns a boolean if a field has been set.
+
+### SetRootCaCertificatesNil
+
+`func (o *ManagementController) SetRootCaCertificatesNil(b bool)`
+
+ SetRootCaCertificatesNil sets the value for RootCaCertificates to be an explicit nil
+
+### UnsetRootCaCertificates
+`func (o *ManagementController) UnsetRootCaCertificates()`
+
+UnsetRootCaCertificates ensures that no value is present for RootCaCertificates, not even an explicit nil
 ### GetUemStreamAdminState
 
 `func (o *ManagementController) GetUemStreamAdminState() string`
