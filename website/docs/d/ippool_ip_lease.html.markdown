@@ -18,6 +18,7 @@ The following arguments can be used to get data of already created objects in In
 * `allocation_type`:(string) Type of the lease allocation either static or dynamic (i.e via pool).* `dynamic` - Identifiers to be allocated by system.* `static` - Identifiers are assigned by the user. 
 * `create_time`:(string) The time when this managed object was created. 
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
+* `has_duplicate`:(bool) HasDuplicate represents if there are other pools in which this id exists. 
 * `ip_type`:(string) Type of the IP address requested.* `IPv4` - IP V4 address type requested.* `IPv6` - IP V6 address type requested. 
 * `ip_v4_address`:(string) IPv4 Address given as a lease to an external entity like server profiles. 
 * `ip_v6_address`:(string) IPv6 Address given as a lease to an external entity like server profiles. 

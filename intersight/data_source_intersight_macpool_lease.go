@@ -115,6 +115,11 @@ func getMacpoolLeaseSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"has_duplicate": {
+			Description: "HasDuplicate represents if there are other pools in which this id exists.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
 		"mac_address": {
 			Description: "MAC address allocated for pool-based allocation.",
 			Type:        schema.TypeString,
@@ -634,6 +639,11 @@ func dataSourceMacpoolLeaseRead(c context.Context, d *schema.ResourceData, meta 
 		o.SetDomainGroupMoid(x)
 	}
 
+	if v, ok := d.GetOkExists("has_duplicate"); ok {
+		x := (v.(bool))
+		o.SetHasDuplicate(x)
+	}
+
 	if v, ok := d.GetOk("mac_address"); ok {
 		x := (v.(string))
 		o.SetMacAddress(x)
@@ -1084,6 +1094,7 @@ func dataSourceMacpoolLeaseRead(c context.Context, d *schema.ResourceData, meta 
 
 				temp["create_time"] = (s.GetCreateTime()).String()
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
+				temp["has_duplicate"] = (s.GetHasDuplicate())
 				temp["mac_address"] = (s.GetMacAddress())
 
 				temp["mod_time"] = (s.GetModTime()).String()

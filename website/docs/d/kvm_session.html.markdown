@@ -19,7 +19,7 @@ The following arguments can be used to get data of already created objects in In
 * `create_time`:(string) The time when this managed object was created. 
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
 * `end_time`:(string) The time at which the session ended. 
-* `kvm_launch_url_path`:(string) One time URL that is used to launch the KVM console. 
+* `kvm_launch_url_path`:(string) One time URL that is used to launch the vKVM console. 
 * `kvm_session_id`:(string) Unique ID of the KVM Session URI. 
 * `mod_time`:(string) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 

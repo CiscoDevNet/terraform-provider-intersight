@@ -27,7 +27,7 @@ variable "iam_account_moid" {
 ```
 ## Argument Reference
 The following arguments are supported:
-* `accepted`:(bool)(ReadOnly) EULA acceptance status for the account. 
+* `accepted`:(bool)(ReadOnly) Overall acceptance status for the account, both EULA and K9. 
 * `account`:(HashMap) -(ReadOnly) A reference to a iamAccount resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
 This complex property has following sub-properties:
   + `moid`:(string) The Moid of the referenced REST resource. 
@@ -39,9 +39,13 @@ This complex property has following sub-properties:
   + `moid`:(string) The Moid of the referenced REST resource. 
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
   + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
-* `content`:(string)(ReadOnly) EULA acceptance form content provided by cisco.com. 
+* `content`:(string)(ReadOnly) Acceptance form content provided by cisco.com. 
 * `create_time`:(string)(ReadOnly) The time when this managed object was created. 
 * `domain_group_moid`:(string)(ReadOnly) The DomainGroup ID for this managed object. 
+* `eula_accepted`:(bool)(ReadOnly) EULA acceptance status for the account. 
+* `eula_content`:(string)(ReadOnly) EULA acceptance form content provided by cisco.com. 
+* `k9_accepted`:(bool)(ReadOnly) K9 acceptance status for the account. 
+* `k9_content`:(string)(ReadOnly) K9 acceptance form content provided by cisco.com. 
 * `mod_time`:(string)(ReadOnly) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `owners`:

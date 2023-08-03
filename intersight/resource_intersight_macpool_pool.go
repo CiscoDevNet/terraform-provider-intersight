@@ -79,7 +79,7 @@ func resourceMacpoolPool() *schema.Resource {
 				},
 			},
 			"assigned": {
-				Description: "Number of IDs that are currently assigned.",
+				Description: "Number of IDs that are currently assigned (in use).",
 				Type:        schema.TypeInt,
 				Optional:    true,
 				Computed:    true,
@@ -421,6 +421,17 @@ func resourceMacpoolPool() *schema.Resource {
 					},
 				},
 			},
+			"reserved": {
+				Description: "Number of IDs that are currently reserved (and not in use).",
+				Type:        schema.TypeInt,
+				Optional:    true,
+				Computed:    true,
+				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+					if val != nil {
+						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+					}
+					return
+				}},
 			"shared_scope": {
 				Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
 				Type:        schema.TypeString,
@@ -945,6 +956,10 @@ func resourceMacpoolPoolRead(c context.Context, d *schema.ResourceData, meta int
 
 	if err := d.Set("reservations", flattenListMacpoolReservationRelationship(s.GetReservations(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property Reservations in MacpoolPool object: %s", err.Error())
+	}
+
+	if err := d.Set("reserved", (s.GetReserved())); err != nil {
+		return diag.Errorf("error occurred while setting property Reserved in MacpoolPool object: %s", err.Error())
 	}
 
 	if err := d.Set("shared_scope", (s.GetSharedScope())); err != nil {

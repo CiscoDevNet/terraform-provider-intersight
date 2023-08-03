@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **Password** | Pointer to **string** | The password that will be used by Intersight to create OAuth2 tokens for interacting with the external repository, on the user account&#39;s behalf. | [optional] 
 **RepositoryType** | Pointer to **string** | The external repository for which this authorization has been provided. The only supported repository today is cisco.com. * &#x60;Cisco&#x60; - External repository hosted on cisco.com. * &#x60;IntersightCloud&#x60; - Repository hosted by the Intersight Cloud. * &#x60;LocalMachine&#x60; - The file is available on the local client machine. Used as an upload source type. * &#x60;NetworkShare&#x60; - External repository in the customer datacenter. This will typically be a file server. | [optional] [default to "Cisco"]
 **UserId** | Pointer to **string** | The username that will be used by Intersight to create OAuth2 tokens for interacting with the external repository, on the user account&#39;s behalf. | [optional] 
+**Version** | Pointer to **string** | The Automated Software Distribution version of the authorization MO. * &#x60;V3&#x60; - The client is running Automated Software Distribution V3. * &#x60;V4&#x60; - The client is running Automated Software Distribution V4. | [optional] [readonly] [default to "V3"]
 **Account** | Pointer to [**IamAccountRelationship**](IamAccountRelationship.md) |  | [optional] 
 
 ## Methods
@@ -196,6 +197,31 @@ SetUserId sets UserId field to given value.
 `func (o *SoftwarerepositoryAuthorization) HasUserId() bool`
 
 HasUserId returns a boolean if a field has been set.
+
+### GetVersion
+
+`func (o *SoftwarerepositoryAuthorization) GetVersion() string`
+
+GetVersion returns the Version field if non-nil, zero value otherwise.
+
+### GetVersionOk
+
+`func (o *SoftwarerepositoryAuthorization) GetVersionOk() (*string, bool)`
+
+GetVersionOk returns a tuple with the Version field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetVersion
+
+`func (o *SoftwarerepositoryAuthorization) SetVersion(v string)`
+
+SetVersion sets Version field to given value.
+
+### HasVersion
+
+`func (o *SoftwarerepositoryAuthorization) HasVersion() bool`
+
+HasVersion returns a boolean if a field has been set.
 
 ### GetAccount
 

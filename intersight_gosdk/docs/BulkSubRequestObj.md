@@ -10,14 +10,16 @@ Name | Type | Description | Notes
 **BodyString** | Pointer to **string** | The body of the sub-request in string format. | [optional] [readonly] 
 **ExecutionCompletionTime** | Pointer to **string** | The time at which processing of this request completed. | [optional] [readonly] 
 **ExecutionStartTime** | Pointer to **string** | The time at which processing of this request started. | [optional] [readonly] 
+**IsBulkMoOp** | Pointer to **bool** | For Async Bulk Mo Operations this flag will be set to true. | [optional] 
 **IsObjectPresent** | Pointer to **bool** | This flag indicates if an already existing object was found or not after execution of the action CheckObjectPresence. | [optional] [readonly] 
 **Result** | Pointer to [**NullableBulkApiResult**](BulkApiResult.md) |  | [optional] 
 **SkipDuplicates** | Pointer to **bool** | Skip the already present objects. The value from the Request. | [optional] [readonly] 
-**Status** | Pointer to **string** | The status of the request. * &#x60;Pending&#x60; - Indicates that the request is yet to be processed. * &#x60;ObjPresenceCheckInProgress&#x60; - Indicates that the checking for object presence is in progress. * &#x60;ObjPresenceCheckInComplete&#x60; - Indicates that the request is being processed. * &#x60;ObjPresenceCheckFailed&#x60; - Indicates that the checking for object presence failed. * &#x60;Processing&#x60; - Indicates that the request is being processed. * &#x60;TimedOut&#x60; - Indicates that the request processing timed out. * &#x60;Completed&#x60; - Indicates that the request processing is complete. * &#x60;Skipped&#x60; - Indicates that the request was skipped. | [optional] [readonly] [default to "Pending"]
+**Status** | Pointer to **string** | The status of the request. * &#x60;Pending&#x60; - Indicates that the request is yet to be processed. * &#x60;ObjPresenceCheckInProgress&#x60; - Indicates that the checking for object presence is in progress. * &#x60;ObjPresenceCheckInComplete&#x60; - Indicates that the request is being processed. * &#x60;ObjPresenceCheckFailed&#x60; - Indicates that the checking for object presence failed. * &#x60;Processing&#x60; - Indicates that the request is being processed. * &#x60;TimedOut&#x60; - Indicates that the request processing timed out. * &#x60;Failed&#x60; - Indicates that the request processing failed. * &#x60;Completed&#x60; - Indicates that the request processing is complete. * &#x60;Skipped&#x60; - Indicates that the request was skipped. | [optional] [readonly] [default to "Pending"]
 **SystemDefinedObjectDetected** | Pointer to **bool** | This flag indicates if the a system defined object was detected after execution of the action CheckObjectPresence. | [optional] [readonly] 
 **TargetMoid** | Pointer to **string** | Used with PATCH &amp; DELETE actions. The moid of an existing object instance. | [optional] 
 **Uri** | Pointer to **string** | The URI on which this bulk action is to be performed. | [optional] 
 **Verb** | Pointer to **string** | The type of operation to be performed. One of - Post (Create), Patch (Update) or Delete (Remove). * &#x60;POST&#x60; - Used to create a REST resource. * &#x60;PATCH&#x60; - Used to update a REST resource. * &#x60;DELETE&#x60; - Used to delete a REST resource. | [optional] [default to "POST"]
+**AsyncRequest** | Pointer to [**BulkResultRelationship**](BulkResultRelationship.md) |  | [optional] 
 **Request** | Pointer to [**BulkRequestRelationship**](BulkRequestRelationship.md) |  | [optional] 
 
 ## Methods
@@ -178,6 +180,31 @@ SetExecutionStartTime sets ExecutionStartTime field to given value.
 `func (o *BulkSubRequestObj) HasExecutionStartTime() bool`
 
 HasExecutionStartTime returns a boolean if a field has been set.
+
+### GetIsBulkMoOp
+
+`func (o *BulkSubRequestObj) GetIsBulkMoOp() bool`
+
+GetIsBulkMoOp returns the IsBulkMoOp field if non-nil, zero value otherwise.
+
+### GetIsBulkMoOpOk
+
+`func (o *BulkSubRequestObj) GetIsBulkMoOpOk() (*bool, bool)`
+
+GetIsBulkMoOpOk returns a tuple with the IsBulkMoOp field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsBulkMoOp
+
+`func (o *BulkSubRequestObj) SetIsBulkMoOp(v bool)`
+
+SetIsBulkMoOp sets IsBulkMoOp field to given value.
+
+### HasIsBulkMoOp
+
+`func (o *BulkSubRequestObj) HasIsBulkMoOp() bool`
+
+HasIsBulkMoOp returns a boolean if a field has been set.
 
 ### GetIsObjectPresent
 
@@ -388,6 +415,31 @@ SetVerb sets Verb field to given value.
 `func (o *BulkSubRequestObj) HasVerb() bool`
 
 HasVerb returns a boolean if a field has been set.
+
+### GetAsyncRequest
+
+`func (o *BulkSubRequestObj) GetAsyncRequest() BulkResultRelationship`
+
+GetAsyncRequest returns the AsyncRequest field if non-nil, zero value otherwise.
+
+### GetAsyncRequestOk
+
+`func (o *BulkSubRequestObj) GetAsyncRequestOk() (*BulkResultRelationship, bool)`
+
+GetAsyncRequestOk returns a tuple with the AsyncRequest field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAsyncRequest
+
+`func (o *BulkSubRequestObj) SetAsyncRequest(v BulkResultRelationship)`
+
+SetAsyncRequest sets AsyncRequest field to given value.
+
+### HasAsyncRequest
+
+`func (o *BulkSubRequestObj) HasAsyncRequest() bool`
+
+HasAsyncRequest returns a boolean if a field has been set.
 
 ### GetRequest
 

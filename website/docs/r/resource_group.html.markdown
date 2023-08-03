@@ -97,6 +97,7 @@ This complex property has following sub-properties:
 This complex property has following sub-properties:
   + `key`:(string) The string representation of a tag key. 
   + `value`:(string) The string representation of a tag value. 
+* `type`:(string)(ReadOnly) The type of this resource group. (Rbac, Licensing, solution).* `rbac` - These resource groups are used for multi-tenancy by assigning to organizations.* `licensing` - These resource groups are used to classify resources like servers to various groups which are associated to different license tiers.* `solution` - These resource groups are created for Flexpods. 
 * `version_context`:(HashMap) -(ReadOnly) The versioning info for this managed object. 
 This complex property has following sub-properties:
   + `interested_mos`:(Array)

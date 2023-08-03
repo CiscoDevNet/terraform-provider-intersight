@@ -61,7 +61,7 @@ func getResourcepoolPoolMemberSchema() map[string]*schema.Schema {
 			},
 		},
 		"assigned": {
-			Description: "Boolean to represent whether the ID is assigned or not.",
+			Description: "Boolean to represent whether the ID is in use.",
 			Type:        schema.TypeBool,
 			Optional:    true,
 		},

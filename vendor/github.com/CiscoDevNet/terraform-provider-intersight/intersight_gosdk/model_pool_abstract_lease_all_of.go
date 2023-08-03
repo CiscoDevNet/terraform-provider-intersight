@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-11765
+API version: 1.0.11-13010
 Contact: intersight@cisco.com
 */
 
@@ -22,7 +22,9 @@ type PoolAbstractLeaseAllOf struct {
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property. The enum values provides the list of concrete types that can be instantiated from this abstract type.
 	ObjectType string `json:"ObjectType"`
 	// Type of the lease allocation either static or dynamic (i.e via pool). * `dynamic` - Identifiers to be allocated by system. * `static` - Identifiers are assigned by the user.
-	AllocationType       *string `json:"AllocationType,omitempty"`
+	AllocationType *string `json:"AllocationType,omitempty"`
+	// HasDuplicate represents if there are other pools in which this id exists.
+	HasDuplicate         *bool `json:"HasDuplicate,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -38,6 +40,8 @@ func NewPoolAbstractLeaseAllOf(classId string, objectType string) *PoolAbstractL
 	this.ObjectType = objectType
 	var allocationType string = "dynamic"
 	this.AllocationType = &allocationType
+	var hasDuplicate bool = false
+	this.HasDuplicate = &hasDuplicate
 	return &this
 }
 
@@ -48,6 +52,8 @@ func NewPoolAbstractLeaseAllOfWithDefaults() *PoolAbstractLeaseAllOf {
 	this := PoolAbstractLeaseAllOf{}
 	var allocationType string = "dynamic"
 	this.AllocationType = &allocationType
+	var hasDuplicate bool = false
+	this.HasDuplicate = &hasDuplicate
 	return &this
 }
 
@@ -131,6 +137,38 @@ func (o *PoolAbstractLeaseAllOf) SetAllocationType(v string) {
 	o.AllocationType = &v
 }
 
+// GetHasDuplicate returns the HasDuplicate field value if set, zero value otherwise.
+func (o *PoolAbstractLeaseAllOf) GetHasDuplicate() bool {
+	if o == nil || o.HasDuplicate == nil {
+		var ret bool
+		return ret
+	}
+	return *o.HasDuplicate
+}
+
+// GetHasDuplicateOk returns a tuple with the HasDuplicate field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PoolAbstractLeaseAllOf) GetHasDuplicateOk() (*bool, bool) {
+	if o == nil || o.HasDuplicate == nil {
+		return nil, false
+	}
+	return o.HasDuplicate, true
+}
+
+// HasHasDuplicate returns a boolean if a field has been set.
+func (o *PoolAbstractLeaseAllOf) HasHasDuplicate() bool {
+	if o != nil && o.HasDuplicate != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetHasDuplicate gets a reference to the given bool and assigns it to the HasDuplicate field.
+func (o *PoolAbstractLeaseAllOf) SetHasDuplicate(v bool) {
+	o.HasDuplicate = &v
+}
+
 func (o PoolAbstractLeaseAllOf) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
@@ -141,6 +179,9 @@ func (o PoolAbstractLeaseAllOf) MarshalJSON() ([]byte, error) {
 	}
 	if o.AllocationType != nil {
 		toSerialize["AllocationType"] = o.AllocationType
+	}
+	if o.HasDuplicate != nil {
+		toSerialize["HasDuplicate"] = o.HasDuplicate
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -163,6 +204,7 @@ func (o *PoolAbstractLeaseAllOf) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "AllocationType")
+		delete(additionalProperties, "HasDuplicate")
 		o.AdditionalProperties = additionalProperties
 	}
 

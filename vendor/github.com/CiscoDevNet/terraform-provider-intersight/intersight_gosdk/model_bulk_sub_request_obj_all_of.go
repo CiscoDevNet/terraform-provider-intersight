@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-11765
+API version: 1.0.11-13010
 Contact: intersight@cisco.com
 */
 
@@ -28,12 +28,14 @@ type BulkSubRequestObjAllOf struct {
 	ExecutionCompletionTime *string `json:"ExecutionCompletionTime,omitempty"`
 	// The time at which processing of this request started.
 	ExecutionStartTime *string `json:"ExecutionStartTime,omitempty"`
+	// For Async Bulk Mo Operations this flag will be set to true.
+	IsBulkMoOp *bool `json:"IsBulkMoOp,omitempty"`
 	// This flag indicates if an already existing object was found or not after execution of the action CheckObjectPresence.
 	IsObjectPresent *bool                 `json:"IsObjectPresent,omitempty"`
 	Result          NullableBulkApiResult `json:"Result,omitempty"`
 	// Skip the already present objects. The value from the Request.
 	SkipDuplicates *bool `json:"SkipDuplicates,omitempty"`
-	// The status of the request. * `Pending` - Indicates that the request is yet to be processed. * `ObjPresenceCheckInProgress` - Indicates that the checking for object presence is in progress. * `ObjPresenceCheckInComplete` - Indicates that the request is being processed. * `ObjPresenceCheckFailed` - Indicates that the checking for object presence failed. * `Processing` - Indicates that the request is being processed. * `TimedOut` - Indicates that the request processing timed out. * `Completed` - Indicates that the request processing is complete. * `Skipped` - Indicates that the request was skipped.
+	// The status of the request. * `Pending` - Indicates that the request is yet to be processed. * `ObjPresenceCheckInProgress` - Indicates that the checking for object presence is in progress. * `ObjPresenceCheckInComplete` - Indicates that the request is being processed. * `ObjPresenceCheckFailed` - Indicates that the checking for object presence failed. * `Processing` - Indicates that the request is being processed. * `TimedOut` - Indicates that the request processing timed out. * `Failed` - Indicates that the request processing failed. * `Completed` - Indicates that the request processing is complete. * `Skipped` - Indicates that the request was skipped.
 	Status *string `json:"Status,omitempty"`
 	// This flag indicates if the a system defined object was detected after execution of the action CheckObjectPresence.
 	SystemDefinedObjectDetected *bool `json:"SystemDefinedObjectDetected,omitempty"`
@@ -43,6 +45,7 @@ type BulkSubRequestObjAllOf struct {
 	Uri *string `json:"Uri,omitempty"`
 	// The type of operation to be performed. One of - Post (Create), Patch (Update) or Delete (Remove). * `POST` - Used to create a REST resource. * `PATCH` - Used to update a REST resource. * `DELETE` - Used to delete a REST resource.
 	Verb                 *string                  `json:"Verb,omitempty"`
+	AsyncRequest         *BulkResultRelationship  `json:"AsyncRequest,omitempty"`
 	Request              *BulkRequestRelationship `json:"Request,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
@@ -250,6 +253,38 @@ func (o *BulkSubRequestObjAllOf) HasExecutionStartTime() bool {
 // SetExecutionStartTime gets a reference to the given string and assigns it to the ExecutionStartTime field.
 func (o *BulkSubRequestObjAllOf) SetExecutionStartTime(v string) {
 	o.ExecutionStartTime = &v
+}
+
+// GetIsBulkMoOp returns the IsBulkMoOp field value if set, zero value otherwise.
+func (o *BulkSubRequestObjAllOf) GetIsBulkMoOp() bool {
+	if o == nil || o.IsBulkMoOp == nil {
+		var ret bool
+		return ret
+	}
+	return *o.IsBulkMoOp
+}
+
+// GetIsBulkMoOpOk returns a tuple with the IsBulkMoOp field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BulkSubRequestObjAllOf) GetIsBulkMoOpOk() (*bool, bool) {
+	if o == nil || o.IsBulkMoOp == nil {
+		return nil, false
+	}
+	return o.IsBulkMoOp, true
+}
+
+// HasIsBulkMoOp returns a boolean if a field has been set.
+func (o *BulkSubRequestObjAllOf) HasIsBulkMoOp() bool {
+	if o != nil && o.IsBulkMoOp != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetIsBulkMoOp gets a reference to the given bool and assigns it to the IsBulkMoOp field.
+func (o *BulkSubRequestObjAllOf) SetIsBulkMoOp(v bool) {
+	o.IsBulkMoOp = &v
 }
 
 // GetIsObjectPresent returns the IsObjectPresent field value if set, zero value otherwise.
@@ -519,6 +554,38 @@ func (o *BulkSubRequestObjAllOf) SetVerb(v string) {
 	o.Verb = &v
 }
 
+// GetAsyncRequest returns the AsyncRequest field value if set, zero value otherwise.
+func (o *BulkSubRequestObjAllOf) GetAsyncRequest() BulkResultRelationship {
+	if o == nil || o.AsyncRequest == nil {
+		var ret BulkResultRelationship
+		return ret
+	}
+	return *o.AsyncRequest
+}
+
+// GetAsyncRequestOk returns a tuple with the AsyncRequest field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BulkSubRequestObjAllOf) GetAsyncRequestOk() (*BulkResultRelationship, bool) {
+	if o == nil || o.AsyncRequest == nil {
+		return nil, false
+	}
+	return o.AsyncRequest, true
+}
+
+// HasAsyncRequest returns a boolean if a field has been set.
+func (o *BulkSubRequestObjAllOf) HasAsyncRequest() bool {
+	if o != nil && o.AsyncRequest != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetAsyncRequest gets a reference to the given BulkResultRelationship and assigns it to the AsyncRequest field.
+func (o *BulkSubRequestObjAllOf) SetAsyncRequest(v BulkResultRelationship) {
+	o.AsyncRequest = &v
+}
+
 // GetRequest returns the Request field value if set, zero value otherwise.
 func (o *BulkSubRequestObjAllOf) GetRequest() BulkRequestRelationship {
 	if o == nil || o.Request == nil {
@@ -571,6 +638,9 @@ func (o BulkSubRequestObjAllOf) MarshalJSON() ([]byte, error) {
 	if o.ExecutionStartTime != nil {
 		toSerialize["ExecutionStartTime"] = o.ExecutionStartTime
 	}
+	if o.IsBulkMoOp != nil {
+		toSerialize["IsBulkMoOp"] = o.IsBulkMoOp
+	}
 	if o.IsObjectPresent != nil {
 		toSerialize["IsObjectPresent"] = o.IsObjectPresent
 	}
@@ -594,6 +664,9 @@ func (o BulkSubRequestObjAllOf) MarshalJSON() ([]byte, error) {
 	}
 	if o.Verb != nil {
 		toSerialize["Verb"] = o.Verb
+	}
+	if o.AsyncRequest != nil {
+		toSerialize["AsyncRequest"] = o.AsyncRequest
 	}
 	if o.Request != nil {
 		toSerialize["Request"] = o.Request
@@ -622,6 +695,7 @@ func (o *BulkSubRequestObjAllOf) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "BodyString")
 		delete(additionalProperties, "ExecutionCompletionTime")
 		delete(additionalProperties, "ExecutionStartTime")
+		delete(additionalProperties, "IsBulkMoOp")
 		delete(additionalProperties, "IsObjectPresent")
 		delete(additionalProperties, "Result")
 		delete(additionalProperties, "SkipDuplicates")
@@ -630,6 +704,7 @@ func (o *BulkSubRequestObjAllOf) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "TargetMoid")
 		delete(additionalProperties, "Uri")
 		delete(additionalProperties, "Verb")
+		delete(additionalProperties, "AsyncRequest")
 		delete(additionalProperties, "Request")
 		o.AdditionalProperties = additionalProperties
 	}

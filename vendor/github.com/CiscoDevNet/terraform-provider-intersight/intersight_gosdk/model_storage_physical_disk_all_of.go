@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-11765
+API version: 1.0.11-13010
 Contact: intersight@cisco.com
 */
 
@@ -31,6 +31,8 @@ type StoragePhysicalDiskAllOf struct {
 	ConfigurationCheckpoint *string `json:"ConfigurationCheckpoint,omitempty"`
 	// The current configuration state of the physical disk.
 	ConfigurationState *string `json:"ConfigurationState,omitempty"`
+	// This field displays the description of the physical disk.
+	Description *string `json:"Description,omitempty"`
 	// The physical disk is disabled for removal.
 	DisabledForRemoval *bool `json:"DisabledForRemoval,omitempty"`
 	// The discovered path of the physical disk.
@@ -53,6 +55,8 @@ type StoragePhysicalDiskAllOf struct {
 	HotSpareType *string `json:"HotSpareType,omitempty"`
 	// Status of the locator LED corresponding to the physical disk.
 	IndicatorLed *string `json:"IndicatorLed,omitempty"`
+	// This field indicates whether the physical disk is supported on the server or not.
+	IsPlatformSupported *bool `json:"IsPlatformSupported,omitempty"`
 	// The speed of the link between the drive and the controller.
 	LinkSpeed *string `json:"LinkSpeed,omitempty"`
 	// The current link state of the physical disk.
@@ -75,6 +79,8 @@ type StoragePhysicalDiskAllOf struct {
 	Operability *string `json:"Operability,omitempty"`
 	// Operating temperature of drive in Celsius.
 	OperatingTemperature *int64 `json:"OperatingTemperature,omitempty"`
+	// This field displays the part number of the physical disk.
+	PartNumber *string `json:"PartNumber,omitempty"`
 	// Percentage of write cycles remaining in a solid state drive (SSD).
 	PercentLifeLeft *int64 `json:"PercentLifeLeft,omitempty"`
 	// Percentage of reserve capacity consumed.
@@ -83,7 +89,7 @@ type StoragePhysicalDiskAllOf struct {
 	PerformancePercent *int64 `json:"PerformancePercent,omitempty"`
 	// The block size of the installed physical disk.
 	PhysicalBlockSize *string `json:"PhysicalBlockSize,omitempty"`
-	// This field identifies the Product ID for physicalDisk.
+	// This field displays the product ID of the physical disk.
 	Pid *string `json:"Pid,omitempty"`
 	// Number of powercycles the drive has undergone.
 	PowerCycleCount *int64 `json:"PowerCycleCount,omitempty"`
@@ -366,6 +372,38 @@ func (o *StoragePhysicalDiskAllOf) HasConfigurationState() bool {
 // SetConfigurationState gets a reference to the given string and assigns it to the ConfigurationState field.
 func (o *StoragePhysicalDiskAllOf) SetConfigurationState(v string) {
 	o.ConfigurationState = &v
+}
+
+// GetDescription returns the Description field value if set, zero value otherwise.
+func (o *StoragePhysicalDiskAllOf) GetDescription() string {
+	if o == nil || o.Description == nil {
+		var ret string
+		return ret
+	}
+	return *o.Description
+}
+
+// GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *StoragePhysicalDiskAllOf) GetDescriptionOk() (*string, bool) {
+	if o == nil || o.Description == nil {
+		return nil, false
+	}
+	return o.Description, true
+}
+
+// HasDescription returns a boolean if a field has been set.
+func (o *StoragePhysicalDiskAllOf) HasDescription() bool {
+	if o != nil && o.Description != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetDescription gets a reference to the given string and assigns it to the Description field.
+func (o *StoragePhysicalDiskAllOf) SetDescription(v string) {
+	o.Description = &v
 }
 
 // GetDisabledForRemoval returns the DisabledForRemoval field value if set, zero value otherwise.
@@ -720,6 +758,38 @@ func (o *StoragePhysicalDiskAllOf) SetIndicatorLed(v string) {
 	o.IndicatorLed = &v
 }
 
+// GetIsPlatformSupported returns the IsPlatformSupported field value if set, zero value otherwise.
+func (o *StoragePhysicalDiskAllOf) GetIsPlatformSupported() bool {
+	if o == nil || o.IsPlatformSupported == nil {
+		var ret bool
+		return ret
+	}
+	return *o.IsPlatformSupported
+}
+
+// GetIsPlatformSupportedOk returns a tuple with the IsPlatformSupported field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *StoragePhysicalDiskAllOf) GetIsPlatformSupportedOk() (*bool, bool) {
+	if o == nil || o.IsPlatformSupported == nil {
+		return nil, false
+	}
+	return o.IsPlatformSupported, true
+}
+
+// HasIsPlatformSupported returns a boolean if a field has been set.
+func (o *StoragePhysicalDiskAllOf) HasIsPlatformSupported() bool {
+	if o != nil && o.IsPlatformSupported != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetIsPlatformSupported gets a reference to the given bool and assigns it to the IsPlatformSupported field.
+func (o *StoragePhysicalDiskAllOf) SetIsPlatformSupported(v bool) {
+	o.IsPlatformSupported = &v
+}
+
 // GetLinkSpeed returns the LinkSpeed field value if set, zero value otherwise.
 func (o *StoragePhysicalDiskAllOf) GetLinkSpeed() string {
 	if o == nil || o.LinkSpeed == nil {
@@ -1070,6 +1140,38 @@ func (o *StoragePhysicalDiskAllOf) HasOperatingTemperature() bool {
 // SetOperatingTemperature gets a reference to the given int64 and assigns it to the OperatingTemperature field.
 func (o *StoragePhysicalDiskAllOf) SetOperatingTemperature(v int64) {
 	o.OperatingTemperature = &v
+}
+
+// GetPartNumber returns the PartNumber field value if set, zero value otherwise.
+func (o *StoragePhysicalDiskAllOf) GetPartNumber() string {
+	if o == nil || o.PartNumber == nil {
+		var ret string
+		return ret
+	}
+	return *o.PartNumber
+}
+
+// GetPartNumberOk returns a tuple with the PartNumber field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *StoragePhysicalDiskAllOf) GetPartNumberOk() (*string, bool) {
+	if o == nil || o.PartNumber == nil {
+		return nil, false
+	}
+	return o.PartNumber, true
+}
+
+// HasPartNumber returns a boolean if a field has been set.
+func (o *StoragePhysicalDiskAllOf) HasPartNumber() bool {
+	if o != nil && o.PartNumber != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetPartNumber gets a reference to the given string and assigns it to the PartNumber field.
+func (o *StoragePhysicalDiskAllOf) SetPartNumber(v string) {
+	o.PartNumber = &v
 }
 
 // GetPercentLifeLeft returns the PercentLifeLeft field value if set, zero value otherwise.
@@ -2090,6 +2192,9 @@ func (o StoragePhysicalDiskAllOf) MarshalJSON() ([]byte, error) {
 	if o.ConfigurationState != nil {
 		toSerialize["ConfigurationState"] = o.ConfigurationState
 	}
+	if o.Description != nil {
+		toSerialize["Description"] = o.Description
+	}
 	if o.DisabledForRemoval != nil {
 		toSerialize["DisabledForRemoval"] = o.DisabledForRemoval
 	}
@@ -2123,6 +2228,9 @@ func (o StoragePhysicalDiskAllOf) MarshalJSON() ([]byte, error) {
 	if o.IndicatorLed != nil {
 		toSerialize["IndicatorLed"] = o.IndicatorLed
 	}
+	if o.IsPlatformSupported != nil {
+		toSerialize["IsPlatformSupported"] = o.IsPlatformSupported
+	}
 	if o.LinkSpeed != nil {
 		toSerialize["LinkSpeed"] = o.LinkSpeed
 	}
@@ -2155,6 +2263,9 @@ func (o StoragePhysicalDiskAllOf) MarshalJSON() ([]byte, error) {
 	}
 	if o.OperatingTemperature != nil {
 		toSerialize["OperatingTemperature"] = o.OperatingTemperature
+	}
+	if o.PartNumber != nil {
+		toSerialize["PartNumber"] = o.PartNumber
 	}
 	if o.PercentLifeLeft != nil {
 		toSerialize["PercentLifeLeft"] = o.PercentLifeLeft
@@ -2274,6 +2385,7 @@ func (o *StoragePhysicalDiskAllOf) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "Bootable")
 		delete(additionalProperties, "ConfigurationCheckpoint")
 		delete(additionalProperties, "ConfigurationState")
+		delete(additionalProperties, "Description")
 		delete(additionalProperties, "DisabledForRemoval")
 		delete(additionalProperties, "DiscoveredPath")
 		delete(additionalProperties, "DiskId")
@@ -2285,6 +2397,7 @@ func (o *StoragePhysicalDiskAllOf) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "FdeCapable")
 		delete(additionalProperties, "HotSpareType")
 		delete(additionalProperties, "IndicatorLed")
+		delete(additionalProperties, "IsPlatformSupported")
 		delete(additionalProperties, "LinkSpeed")
 		delete(additionalProperties, "LinkState")
 		delete(additionalProperties, "MaximumOperatingTemperature")
@@ -2296,6 +2409,7 @@ func (o *StoragePhysicalDiskAllOf) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "OperQualifierReason")
 		delete(additionalProperties, "Operability")
 		delete(additionalProperties, "OperatingTemperature")
+		delete(additionalProperties, "PartNumber")
 		delete(additionalProperties, "PercentLifeLeft")
 		delete(additionalProperties, "PercentReservedCapacityConsumed")
 		delete(additionalProperties, "PerformancePercent")

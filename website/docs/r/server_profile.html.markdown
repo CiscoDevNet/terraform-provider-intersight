@@ -114,6 +114,15 @@ This complex property has following sub-properties:
 * `create_time`:(string)(ReadOnly) The time when this managed object was created. 
 * `description`:(string) Description of the profile. 
 * `domain_group_moid`:(string)(ReadOnly) The DomainGroup ID for this managed object. 
+* `internal_reservation_references`:(Array)
+This complex property has following sub-properties:
+  + `additional_properties`:(JSON as string) - Additional Properties as per object type, can be added as JSON using `jsonencode()`. Allowed Types are: [fcpool.ReservationReference](#fcpoolReservationReference)
+[ippool.ReservationReference](#ippoolReservationReference)
+[iqnpool.ReservationReference](#iqnpoolReservationReference)
+[macpool.ReservationReference](#macpoolReservationReference)
+[uuidpool.ReservationReference](#uuidpoolReservationReference)
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
+  + `reservation_moid`:(string) The moid of the reservation object. 
 * `is_pmc_deployed_secure_passphrase_set`:(bool)(ReadOnly) Indicates whether the value of the 'pmcDeployedSecurePassphrase' property has been set. 
 * `leased_server`:(HashMap) - A reference to a computePhysical resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
 This complex property has following sub-properties:
@@ -196,6 +205,7 @@ This complex property has following sub-properties:
   + `value`:(string) The string representation of a tag value. 
 * `target_platform`:(string) The platform for which the server profile is applicable. It can either be a server that is operating in standalone mode or which is attached to a Fabric Interconnect managed by Intersight.* `Standalone` - Servers which are operating in standalone mode i.e. not connected to a Fabric Interconnected.* `FIAttached` - Servers which are connected to a Fabric Interconnect that is managed by Intersight. 
 * `type`:(string) Defines the type of the profile. Accepted values are instance or template.* `instance` - The profile defines the configuration for a specific instance of a target. 
+* `user_label`:(string) User label assigned to the server profile. 
 * `uuid`:(string)(ReadOnly) The UUID address that is assigned to the server based on the UUID pool. 
 * `uuid_address_type`:(string) UUID address allocation type selected to assign an UUID address for the server.* `NONE` - The user did not assign any UUID address.* `STATIC` - The user assigns a static UUID address.* `POOL` - The user selects a pool from which the address will be leased. 
 * `uuid_lease`:(HashMap) -(ReadOnly) A reference to a uuidpoolUuidLease resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
@@ -237,6 +247,27 @@ $ terraform import intersight_server_profile.example 1234567890987654321abcde
 ```
 ## Allowed Types in `AdditionalProperties`
  
+### [fcpool.ReservationReference](#argument-reference)
+The reference to the reservation object.
+* `consumer_name`:(string) The consumer name for which the reserved fc pool would be used. 
+* `consumer_type`:(string) The consumer type for which the reserved fc pool would be used.* `Vhba` - FC reservation would be used by Vhba.* `WWNN` - FC reservation would be used by WWNN. 
+
+### [ippool.ReservationReference](#argument-reference)
+The reference to the reservation object.
+* `consumer_name`:(string) The consumer name for which the reserved IP would be used. 
+* `consumer_type`:(string) The consumer type for which the reserved IP would be used.* `OutofbandIpv4-Access` - IP reservation would be used for out of band management.* `InbandIpv4-Access` - IP reservation would be used for inband management.* `InbandIpv6-Access` - IP reservation would be used for inband management.* `ISCSI` - IP reservation would be used for ISCSI management. 
+
+### [iqnpool.ReservationReference](#argument-reference)
+The reference to the reservation object.
+
+### [macpool.ReservationReference](#argument-reference)
+The reference to the reservation object.
+* `consumer_name`:(string) The consumer name for which the reserved MAC would be used. 
+* `consumer_type`:(string) The consumer type for which the reserved MAC would be used.* `Vnic` - MAC reservation would be used by VNIC. 
+
+### [uuidpool.ReservationReference](#argument-reference)
+The reference to the reservation object.
+  
 ### [fcpool.ReservationReference](#argument-reference)
 The reference to the reservation object.
 * `consumer_name`:(string) The consumer name for which the reserved fc pool would be used. 

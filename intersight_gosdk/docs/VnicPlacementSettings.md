@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **AutoSlotId** | Pointer to **bool** | Enable or disable automatic assignment of the VIC slot ID. If enabled and the server has only one VIC, the same VIC is chosen for all the vNICs. If enabled and the server has multiple VICs, the vNIC/vHBA are deployed on the first VIC. The Slot ID determines the first VIC. MLOM is the first Slot ID and the ID increments to 2, 3, and so on. | [optional] [default to false]
 **Id** | Pointer to **string** | PCIe Slot where the VIC adapter is installed. Supported values are (1-15) and MLOM. | [optional] 
 **PciLink** | Pointer to **int64** | The PCI Link used as transport for the virtual interface. PCI Link is only applicable for select Cisco UCS VIC 1300 models (UCSC-PCIE-C40Q-03, UCSB-MLOM-40G-03, UCSB-VIC-M83-8P) that support two PCI links. The value, if specified, for any other VIC model will be ignored. | [optional] [default to 0]
+**PciLinkAssignmentMode** | Pointer to **string** | If the autoPciLink is disabled, the user can either choose to place the vNICs manually or based on a policy.If the autoPciLink is enabled, it will be set to None. * &#x60;Custom&#x60; - The user needs to specify the PCI Link manually. * &#x60;Load-Balanced&#x60; - The system will uniformly distribute the interfaces across the PCI Links. * &#x60;None&#x60; - Assignment is not applicable and will be set when the AutoPciLink is set to true. | [optional] [default to "Custom"]
 **SwitchId** | Pointer to **string** | The fabric port to which the vNICs will be associated. * &#x60;None&#x60; - Fabric Id is not set to either A or B for the standalone case where the server is not connected to Fabric Interconnects. The value &#39;None&#39; should be used. * &#x60;A&#x60; - Fabric A of the FI cluster. * &#x60;B&#x60; - Fabric B of the FI cluster. | [optional] [default to "None"]
 **Uplink** | Pointer to **int64** | Adapter port on which the virtual interface will be created. | [optional] 
 
@@ -171,6 +172,31 @@ SetPciLink sets PciLink field to given value.
 `func (o *VnicPlacementSettings) HasPciLink() bool`
 
 HasPciLink returns a boolean if a field has been set.
+
+### GetPciLinkAssignmentMode
+
+`func (o *VnicPlacementSettings) GetPciLinkAssignmentMode() string`
+
+GetPciLinkAssignmentMode returns the PciLinkAssignmentMode field if non-nil, zero value otherwise.
+
+### GetPciLinkAssignmentModeOk
+
+`func (o *VnicPlacementSettings) GetPciLinkAssignmentModeOk() (*string, bool)`
+
+GetPciLinkAssignmentModeOk returns a tuple with the PciLinkAssignmentMode field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPciLinkAssignmentMode
+
+`func (o *VnicPlacementSettings) SetPciLinkAssignmentMode(v string)`
+
+SetPciLinkAssignmentMode sets PciLinkAssignmentMode field to given value.
+
+### HasPciLinkAssignmentMode
+
+`func (o *VnicPlacementSettings) HasPciLinkAssignmentMode() bool`
+
+HasPciLinkAssignmentMode returns a boolean if a field has been set.
 
 ### GetSwitchId
 

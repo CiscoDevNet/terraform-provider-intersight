@@ -717,7 +717,7 @@ func resourceVnicEthIf() *schema.Resource {
 				Default:     "vnic.EthIf",
 			},
 			"order": {
-				Description: "The order in which the virtual interface is brought up. The order assigned to an interface should be unique for all the Ethernet and Fibre-Channel interfaces on each PCI link on a VIC adapter. The maximum value of PCI order is limited by the number of virtual interfaces (Ethernet and Fibre-Channel) on each PCI link on a VIC adapter. All VIC adapters have a single PCI link except VIC 1385 which has two.",
+				Description: "The order in which the virtual interface is brought up. The order assigned to an interface should be unique for all the Ethernet and Fibre-Channel interfaces on each PCI link on a VIC adapter. The order should start from zero with no overlaps. The maximum value of PCI order is limited by the number of virtual interfaces (Ethernet and Fibre-Channel) on each PCI link on a VIC adapter. All VIC adapters have a single PCI link except VIC 1340, VIC 1380 and VIC 1385 which have two.",
 				Type:        schema.TypeInt,
 				Optional:    true,
 			},
@@ -864,6 +864,13 @@ func resourceVnicEthIf() *schema.Resource {
 							ValidateFunc: validation.IntBetween(0, 1),
 							Optional:     true,
 							Default:      0,
+						},
+						"pci_link_assignment_mode": {
+							Description:  "If the autoPciLink is disabled, the user can either choose to place the vNICs manually or based on a policy.If the autoPciLink is enabled, it will be set to None.\n* `Custom` - The user needs to specify the PCI Link manually.\n* `Load-Balanced` - The system will uniformly distribute the interfaces across the PCI Links.\n* `None` - Assignment is not applicable and will be set when the AutoPciLink is set to true.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringInSlice([]string{"Custom", "Load-Balanced", "None"}, false),
+							Optional:     true,
+							Default:      "Custom",
 						},
 						"switch_id": {
 							Description:  "The fabric port to which the vNICs will be associated.\n* `None` - Fabric Id is not set to either A or B for the standalone case where the server is not connected to Fabric Interconnects. The value 'None' should be used.\n* `A` - Fabric A of the FI cluster.\n* `B` - Fabric B of the FI cluster.",
@@ -1860,6 +1867,12 @@ func resourceVnicEthIfCreate(c context.Context, d *schema.ResourceData, meta int
 				{
 					x := int64(v.(int))
 					o.SetPciLink(x)
+				}
+			}
+			if v, ok := l["pci_link_assignment_mode"]; ok {
+				{
+					x := (v.(string))
+					o.SetPciLinkAssignmentMode(x)
 				}
 			}
 			if v, ok := l["switch_id"]; ok {
@@ -2901,6 +2914,12 @@ func resourceVnicEthIfUpdate(c context.Context, d *schema.ResourceData, meta int
 				{
 					x := int64(v.(int))
 					o.SetPciLink(x)
+				}
+			}
+			if v, ok := l["pci_link_assignment_mode"]; ok {
+				{
+					x := (v.(string))
+					o.SetPciLinkAssignmentMode(x)
 				}
 			}
 			if v, ok := l["switch_id"]; ok {

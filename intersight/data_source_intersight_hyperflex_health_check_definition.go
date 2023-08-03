@@ -338,7 +338,7 @@ func getHyperflexHealthCheckDefinitionSchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"supported_hypervisor_type": {
-			Description: "Hypervisor type that the Health Check is supported on (All, if it is hypervisor agnostic).\n* `All` - The Health Check is hypervisor-agnostic.\n* `ESXi` - The Health Check is supported only on Vmware ESXi hypervisor of any version.\n* `` - The Health Check is supported only on Cisco HyperFlexAp platform.\n* `IWE` - The Health Check is supported only on Cisco IWE platform.\n* `HyperV` - The Health Check is supported only on Microsoft HyperV hypervisor.",
+			Description: "Hypervisor type that the Health Check is supported on (All, if it is hypervisor agnostic).\n* `All` - The Health Check is hypervisor-agnostic.\n* `ESXi` - The Health Check is supported only on Vmware ESXi hypervisor of any version.\n* `HyperV` - The Health Check is supported only on Microsoft HyperV hypervisor.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},

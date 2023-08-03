@@ -520,6 +520,34 @@ func getServerProfileSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"internal_reservation_references": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"reservation_moid": {
+						Description: "The moid of the reservation object.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
 		"is_pmc_deployed_secure_passphrase_set": {
 			Description: "Indicates whether the value of the 'pmcDeployedSecurePassphrase' property has been set.",
 			Type:        schema.TypeBool,
@@ -1018,6 +1046,11 @@ func getServerProfileSchema() map[string]*schema.Schema {
 		},
 		"type": {
 			Description: "Defines the type of the profile. Accepted values are instance or template.\n* `instance` - The profile defines the configuration for a specific instance of a target.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"user_label": {
+			Description: "User label assigned to the server profile.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -1771,6 +1804,40 @@ func dataSourceServerProfileRead(c context.Context, d *schema.ResourceData, meta
 		o.SetDomainGroupMoid(x)
 	}
 
+	if v, ok := d.GetOk("internal_reservation_references"); ok {
+		x := make([]models.PoolReservationReference, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := &models.PoolReservationReference{}
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("pool.ReservationReference")
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["reservation_moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetReservationMoid(x)
+				}
+			}
+			x = append(x, *o)
+		}
+		o.SetInternalReservationReferences(x)
+	}
+
 	if v, ok := d.GetOkExists("is_pmc_deployed_secure_passphrase_set"); ok {
 		x := (v.(bool))
 		o.SetIsPmcDeployedSecurePassphraseSet(x)
@@ -2376,6 +2443,11 @@ func dataSourceServerProfileRead(c context.Context, d *schema.ResourceData, meta
 		o.SetType(x)
 	}
 
+	if v, ok := d.GetOk("user_label"); ok {
+		x := (v.(string))
+		o.SetUserLabel(x)
+	}
+
 	if v, ok := d.GetOk("uuid"); ok {
 		x := (v.(string))
 		o.SetUuid(x)
@@ -2609,6 +2681,8 @@ func dataSourceServerProfileRead(c context.Context, d *schema.ResourceData, meta
 				temp["create_time"] = (s.GetCreateTime()).String()
 				temp["description"] = (s.GetDescription())
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
+
+				temp["internal_reservation_references"] = flattenListPoolReservationReference(s.GetInternalReservationReferences(), d)
 				temp["is_pmc_deployed_secure_passphrase_set"] = (s.GetIsPmcDeployedSecurePassphraseSet())
 
 				temp["leased_server"] = flattenMapComputePhysicalRelationship(s.GetLeasedServer(), d)
@@ -2648,6 +2722,7 @@ func dataSourceServerProfileRead(c context.Context, d *schema.ResourceData, meta
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
 				temp["target_platform"] = (s.GetTargetPlatform())
 				temp["type"] = (s.GetType())
+				temp["user_label"] = (s.GetUserLabel())
 				temp["uuid"] = (s.GetUuid())
 				temp["uuid_address_type"] = (s.GetUuidAddressType())
 

@@ -140,6 +140,11 @@ func getFirmwareUpgradeStatusSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"initial_power_status": {
+			Description: "The server power status before the upgrade request is submitted in the endpoint.\n* `none` - Server power status is none.\n* `powered on` - Server power status is powered on.\n* `powered off` - Server power status is powered off.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"mod_time": {
 			Description: "The time when this managed object was last modified.",
 			Type:        schema.TypeString,
@@ -638,6 +643,11 @@ func dataSourceFirmwareUpgradeStatusRead(c context.Context, d *schema.ResourceDa
 		o.SetEpPowerStatus(x)
 	}
 
+	if v, ok := d.GetOk("initial_power_status"); ok {
+		x := (v.(string))
+		o.SetInitialPowerStatus(x)
+	}
+
 	if v, ok := d.GetOk("mod_time"); ok {
 		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetModTime(x)
@@ -1032,6 +1042,7 @@ func dataSourceFirmwareUpgradeStatusRead(c context.Context, d *schema.ResourceDa
 				temp["download_retries"] = (s.GetDownloadRetries())
 				temp["download_stage"] = (s.GetDownloadStage())
 				temp["ep_power_status"] = (s.GetEpPowerStatus())
+				temp["initial_power_status"] = (s.GetInitialPowerStatus())
 
 				temp["mod_time"] = (s.GetModTime()).String()
 				temp["moid"] = (s.GetMoid())

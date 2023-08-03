@@ -61,7 +61,7 @@ func getResourcepoolPoolSchema() map[string]*schema.Schema {
 			},
 		},
 		"assigned": {
-			Description: "Number of IDs that are currently assigned.",
+			Description: "Number of IDs that are currently assigned (in use).",
 			Type:        schema.TypeInt,
 			Optional:    true,
 		},
@@ -222,6 +222,11 @@ func getResourcepoolPoolSchema() map[string]*schema.Schema {
 		"pool_type": {
 			Description: "The resource management type in the pool, it can be either static or dynamic.\n* `Static` - The resources in the pool will not be changed until user manually update it.\n* `Dynamic` - The resources in the pool will be updated dynamically based on the condition.",
 			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"reserved": {
+			Description: "Number of IDs that are currently reserved (and not in use).",
+			Type:        schema.TypeInt,
 			Optional:    true,
 		},
 		"resource_pool_parameters": {
@@ -696,6 +701,11 @@ func dataSourceResourcepoolPoolRead(c context.Context, d *schema.ResourceData, m
 		o.SetPoolType(x)
 	}
 
+	if v, ok := d.GetOkExists("reserved"); ok {
+		x := int64(v.(int))
+		o.SetReserved(x)
+	}
+
 	if v, ok := d.GetOk("resource_pool_parameters"); ok {
 		p := make([]models.ResourcepoolResourcePoolParameters, 0, 1)
 		s := v.([]interface{})
@@ -942,6 +952,7 @@ func dataSourceResourcepoolPoolRead(c context.Context, d *schema.ResourceData, m
 
 				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
 				temp["pool_type"] = (s.GetPoolType())
+				temp["reserved"] = (s.GetReserved())
 
 				temp["resource_pool_parameters"] = flattenMapResourcepoolResourcePoolParameters(s.GetResourcePoolParameters(), d)
 				temp["resource_type"] = (s.GetResourceType())

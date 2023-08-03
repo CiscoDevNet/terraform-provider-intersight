@@ -52,7 +52,8 @@ This complex property has following sub-properties:
   + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
 * `certificates`:(Array)
 This complex property has following sub-properties:
-  + `cert_type`:(string) Certificate Type for the certificate management.* `None` - Set certificate on the selected end point .* `KMIPClient` - Set KMIP certificate on the selected end point. 
+  + `additional_properties`:(JSON as string) - Additional Properties as per object type, can be added as JSON using `jsonencode()`. Allowed Types are: [certificatemanagement.Imc](#certificatemanagementImc)
+[certificatemanagement.RootCaCertificate](#certificatemanagementRootCaCertificate)
   + `certificate`:(HashMap) - Certificate that is used for verifying the authorization. 
 This complex property has following sub-properties:
     + `issuer`:(HashMap) -(ReadOnly) The X.509 distinguished name of the issuer of this certificate. 
@@ -90,9 +91,7 @@ This complex property has following sub-properties:
     + `state`:
                 (Array of schema.TypeString) -
   + `enabled`:(bool) Enable/Disable the certificate in Certificate Management policy. 
-  + `is_privatekey_set`:(bool)(ReadOnly) Indicates whether the value of the 'privatekey' property has been set. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
-  + `privatekey`:(string) Private Key which is used to validate the certificate. 
 * `create_time`:(string)(ReadOnly) The time when this managed object was created. 
 * `description`:(string) Description of the policy. 
 * `domain_group_moid`:(string)(ReadOnly) The DomainGroup ID for this managed object. 
@@ -149,4 +148,16 @@ This complex property has following sub-properties:
 `intersight_certificatemanagement_policy` can be imported using the Moid of the object, e.g.
 ```
 $ terraform import intersight_certificatemanagement_policy.example 1234567890987654321abcde
-``` 
+```
+## Allowed Types in `AdditionalProperties`
+ 
+### [certificatemanagement.Imc](#argument-reference)
+IMC certificate has both Certificate and private key that will be used for IMC.
+* `cert_type`:(string) Certificate Type for the certificate management.* `None` - Set certificate on the selected end point .* `KMIPClient` - Set KMIP certificate on the selected end point. 
+* `is_privatekey_set`:(bool)(ReadOnly) Indicates whether the value of the 'privatekey' property has been set. 
+* `privatekey`:(string) Private Key which is used to validate the certificate. 
+
+### [certificatemanagement.RootCaCertificate](#argument-reference)
+Root CA Certificate used for HTTPS server authentication.
+* `certificate_name`:(string) A name that helps identify a certificate. It can be any string that adheres to the following constraints. It should start and end with an alphanumeric character. It can have underscores and hyphens. It cannot be more than 30 characters. 
+  

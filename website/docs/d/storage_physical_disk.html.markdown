@@ -21,6 +21,7 @@ The following arguments can be used to get data of already created objects in In
 * `configuration_checkpoint`:(string) The current configuration checkpoint of the physical disk. 
 * `configuration_state`:(string) The current configuration state of the physical disk. 
 * `create_time`:(string) The time when this managed object was created. 
+* `description`:(string) This field displays the description of the physical disk. 
 * `device_mo_id`:(string) The database identifier of the registered device of an object. 
 * `disabled_for_removal`:(bool) The physical disk is disabled for removal. 
 * `discovered_path`:(string) The discovered path of the physical disk. 
@@ -35,6 +36,7 @@ The following arguments can be used to get data of already created objects in In
 * `fde_capable`:(string) Full-Disk Encryption capability parameter of the physical disk. 
 * `hot_spare_type`:(string) Type of hotspare configured on the physical disk. 
 * `indicator_led`:(string) Status of the locator LED corresponding to the physical disk. 
+* `is_platform_supported`:(bool) This field indicates whether the physical disk is supported on the server or not. 
 * `is_upgraded`:(bool) This field indicates the compute status of the catalog values for the associated component or hardware. 
 * `link_speed`:(string) The speed of the link between the drive and the controller. 
 * `link_state`:(string) The current link state of the physical disk. 
@@ -50,11 +52,12 @@ The following arguments can be used to get data of already created objects in In
 * `oper_qualifier_reason`:(string) For certain states, indicates the reason why the operState is in that state. 
 * `operability`:(string) This field identifies the disk operability of the disk. 
 * `operating_temperature`:(int) Operating temperature of drive in Celsius. 
+* `part_number`:(string) This field displays the part number of the physical disk. 
 * `percent_life_left`:(int) Percentage of write cycles remaining in a solid state drive (SSD). 
 * `percent_reserved_capacity_consumed`:(int) Percentage of reserve capacity consumed. 
 * `performance_percent`:(int) Performance at which the device operating expressed in percentage. 
 * `physical_block_size`:(string) The block size of the installed physical disk. 
-* `pid`:(string) This field identifies the Product ID for physicalDisk. 
+* `pid`:(string) This field displays the product ID of the physical disk. 
 * `power_cycle_count`:(int) Number of powercycles the drive has undergone. 
 * `power_on_hours`:(int) Number of hours the drive has been powered on. 
 * `power_on_hours_percentage`:(int) Percentage of life used based on five year life span of Cisco supported drives. 

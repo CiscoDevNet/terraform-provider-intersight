@@ -61,7 +61,7 @@ func getIppoolPoolSchema() map[string]*schema.Schema {
 			},
 		},
 		"assigned": {
-			Description: "Number of IDs that are currently assigned.",
+			Description: "Number of IDs that are currently assigned (in use).",
 			Type:        schema.TypeInt,
 			Optional:    true,
 		},
@@ -418,6 +418,11 @@ func getIppoolPoolSchema() map[string]*schema.Schema {
 					},
 				},
 			},
+		},
+		"reserved": {
+			Description: "Number of IDs that are currently reserved (and not in use).",
+			Type:        schema.TypeInt,
+			Optional:    true,
 		},
 		"shadow_pools": {
 			Description: "An array of relationships to ippoolShadowPool resources.",
@@ -1124,6 +1129,11 @@ func dataSourceIppoolPoolRead(c context.Context, d *schema.ResourceData, meta in
 		o.SetReservations(x)
 	}
 
+	if v, ok := d.GetOkExists("reserved"); ok {
+		x := int64(v.(int))
+		o.SetReserved(x)
+	}
+
 	if v, ok := d.GetOk("shadow_pools"); ok {
 		x := make([]models.IppoolShadowPoolRelationship, 0)
 		s := v.([]interface{})
@@ -1369,6 +1379,7 @@ func dataSourceIppoolPoolRead(c context.Context, d *schema.ResourceData, meta in
 				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
 
 				temp["reservations"] = flattenListIppoolReservationRelationship(s.GetReservations(), d)
+				temp["reserved"] = (s.GetReserved())
 
 				temp["shadow_pools"] = flattenListIppoolShadowPoolRelationship(s.GetShadowPools(), d)
 				temp["shared_scope"] = (s.GetSharedScope())

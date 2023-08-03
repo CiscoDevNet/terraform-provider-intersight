@@ -445,6 +445,17 @@ func resourceResourceGroup() *schema.Resource {
 					},
 				},
 			},
+			"type": {
+				Description: "The type of this resource group. (Rbac, Licensing, solution).\n* `rbac` - These resource groups are used for multi-tenancy by assigning to organizations.\n* `licensing` - These resource groups are used to classify resources like servers to various groups which are associated to different license tiers.\n* `solution` - These resource groups are created for Flexpods.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+					if val != nil {
+						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+					}
+					return
+				}},
 			"version_context": {
 				Description: "The versioning info for this managed object.",
 				Type:        schema.TypeList,
@@ -899,6 +910,10 @@ func resourceResourceGroupRead(c context.Context, d *schema.ResourceData, meta i
 
 	if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property Tags in ResourceGroup object: %s", err.Error())
+	}
+
+	if err := d.Set("type", (s.GetType())); err != nil {
+		return diag.Errorf("error occurred while setting property Type in ResourceGroup object: %s", err.Error())
 	}
 
 	if err := d.Set("version_context", flattenMapMoVersionContext(s.GetVersionContext(), d)); err != nil {

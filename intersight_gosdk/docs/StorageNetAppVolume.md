@@ -9,7 +9,10 @@ Name | Type | Description | Notes
 **AutosizeMode** | Pointer to **string** | The autosize mode for NetApp Volume. Modes can be off or grow or grow_shrink. * &#x60;off&#x60; - The volume will not grow or shrink in size in response to the amount of used space. * &#x60;grow&#x60; - The volume will automatically grow when used space in the volume is above the grow threshold. * &#x60;grow_shrink&#x60; - The volume will grow or shrink in size in response to the amount of used space. | [optional] [readonly] [default to "off"]
 **AvgPerformanceMetrics** | Pointer to [**StorageNetAppPerformanceMetricsAverage**](StorageNetAppPerformanceMetricsAverage.md) |  | [optional] 
 **ExportPolicyName** | Pointer to **string** | The name of the Export Policy. | [optional] [readonly] 
+**FlexCacheEndpointType** | Pointer to **string** | FlexCache endpoint type. The endpoint type can be the origin of a FlexCache volume, a FlexCache volume, or neither. | [optional] [readonly] 
+**IsObjectStore** | Pointer to **bool** | Specifies whether the volume is provisioned for an object store server. | [optional] [readonly] 
 **Key** | Pointer to **string** | Unique identifier of a NetApp Volume across data center. | [optional] [readonly] 
+**SnapshotAutodeleteEnabled** | Pointer to **bool** | Specifies whether Snaphot copy autodelete is currently enabled on this volume. | [optional] [readonly] 
 **SnapshotPolicyName** | Pointer to **string** | The name of the Snapshot Policy. | [optional] [readonly] 
 **SnapshotPolicyUuid** | Pointer to **string** | The UUID of the Snapshot Policy. | [optional] [readonly] 
 **SnapshotReservePercent** | Pointer to **int64** | The space that has been set aside as a reserve for Snapshot copy usage represented as a percent. | [optional] [readonly] 
@@ -158,6 +161,56 @@ SetExportPolicyName sets ExportPolicyName field to given value.
 
 HasExportPolicyName returns a boolean if a field has been set.
 
+### GetFlexCacheEndpointType
+
+`func (o *StorageNetAppVolume) GetFlexCacheEndpointType() string`
+
+GetFlexCacheEndpointType returns the FlexCacheEndpointType field if non-nil, zero value otherwise.
+
+### GetFlexCacheEndpointTypeOk
+
+`func (o *StorageNetAppVolume) GetFlexCacheEndpointTypeOk() (*string, bool)`
+
+GetFlexCacheEndpointTypeOk returns a tuple with the FlexCacheEndpointType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFlexCacheEndpointType
+
+`func (o *StorageNetAppVolume) SetFlexCacheEndpointType(v string)`
+
+SetFlexCacheEndpointType sets FlexCacheEndpointType field to given value.
+
+### HasFlexCacheEndpointType
+
+`func (o *StorageNetAppVolume) HasFlexCacheEndpointType() bool`
+
+HasFlexCacheEndpointType returns a boolean if a field has been set.
+
+### GetIsObjectStore
+
+`func (o *StorageNetAppVolume) GetIsObjectStore() bool`
+
+GetIsObjectStore returns the IsObjectStore field if non-nil, zero value otherwise.
+
+### GetIsObjectStoreOk
+
+`func (o *StorageNetAppVolume) GetIsObjectStoreOk() (*bool, bool)`
+
+GetIsObjectStoreOk returns a tuple with the IsObjectStore field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsObjectStore
+
+`func (o *StorageNetAppVolume) SetIsObjectStore(v bool)`
+
+SetIsObjectStore sets IsObjectStore field to given value.
+
+### HasIsObjectStore
+
+`func (o *StorageNetAppVolume) HasIsObjectStore() bool`
+
+HasIsObjectStore returns a boolean if a field has been set.
+
 ### GetKey
 
 `func (o *StorageNetAppVolume) GetKey() string`
@@ -182,6 +235,31 @@ SetKey sets Key field to given value.
 `func (o *StorageNetAppVolume) HasKey() bool`
 
 HasKey returns a boolean if a field has been set.
+
+### GetSnapshotAutodeleteEnabled
+
+`func (o *StorageNetAppVolume) GetSnapshotAutodeleteEnabled() bool`
+
+GetSnapshotAutodeleteEnabled returns the SnapshotAutodeleteEnabled field if non-nil, zero value otherwise.
+
+### GetSnapshotAutodeleteEnabledOk
+
+`func (o *StorageNetAppVolume) GetSnapshotAutodeleteEnabledOk() (*bool, bool)`
+
+GetSnapshotAutodeleteEnabledOk returns a tuple with the SnapshotAutodeleteEnabled field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSnapshotAutodeleteEnabled
+
+`func (o *StorageNetAppVolume) SetSnapshotAutodeleteEnabled(v bool)`
+
+SetSnapshotAutodeleteEnabled sets SnapshotAutodeleteEnabled field to given value.
+
+### HasSnapshotAutodeleteEnabled
+
+`func (o *StorageNetAppVolume) HasSnapshotAutodeleteEnabled() bool`
+
+HasSnapshotAutodeleteEnabled returns a boolean if a field has been set.
 
 ### GetSnapshotPolicyName
 

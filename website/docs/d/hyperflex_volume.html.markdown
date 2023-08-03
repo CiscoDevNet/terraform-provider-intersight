@@ -20,7 +20,6 @@ The following arguments can be used to get data of already created objects in In
 * `create_time`:(string) The time when this managed object was created. 
 * `description`:(string) Short description about the volume. 
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
-* `kubernetes_cluster_name`:(string) The name of the kubernetes cluster to which the volume is associated. 
 * `last_modified_time`:(string) Last modified time as UTC of the volume. 
 * `lun_uuid`:(string) UUID of LUN associated with the volume. 
 * `mod_time`:(string) The time when this managed object was last modified. 

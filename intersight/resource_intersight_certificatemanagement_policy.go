@@ -92,13 +92,6 @@ func resourceCertificatemanagementPolicy() *schema.Resource {
 							Optional:         true,
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
-						"cert_type": {
-							Description:  "Certificate Type for the certificate management.\n* `None` - Set certificate on the selected end point .\n* `KMIPClient` - Set KMIP certificate on the selected end point.",
-							Type:         schema.TypeString,
-							ValidateFunc: validation.StringInSlice([]string{"None", "KMIPClient"}, false),
-							Optional:     true,
-							Default:      "None",
-						},
 						"certificate": {
 							Description: "Certificate that is used for verifying the authorization.",
 							Type:        schema.TypeList,
@@ -341,7 +334,7 @@ func resourceCertificatemanagementPolicy() *schema.Resource {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 							Type:        schema.TypeString,
 							Optional:    true,
-							Default:     "certificatemanagement.Imc",
+							Computed:    true,
 						},
 						"enabled": {
 							Description: "Enable/Disable the certificate in Certificate Management policy.",
@@ -349,27 +342,11 @@ func resourceCertificatemanagementPolicy() *schema.Resource {
 							Optional:    true,
 							Default:     true,
 						},
-						"is_privatekey_set": {
-							Description: "Indicates whether the value of the 'privatekey' property has been set.",
-							Type:        schema.TypeBool,
-							Optional:    true,
-							Computed:    true,
-							ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
-								if val != nil {
-									warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
-								}
-								return
-							}},
 						"object_type": {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 							Type:        schema.TypeString,
 							Optional:    true,
-							Default:     "certificatemanagement.Imc",
-						},
-						"privatekey": {
-							Description: "Private Key which is used to validate the certificate.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Computed:    true,
 						},
 					},
 				},
@@ -829,12 +806,6 @@ func resourceCertificatemanagementPolicyCreate(c context.Context, d *schema.Reso
 					}
 				}
 			}
-			if v, ok := l["cert_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetCertType(x)
-				}
-			}
 			if v, ok := l["certificate"]; ok {
 				{
 					p := make([]models.X509Certificate, 0, 1)
@@ -884,12 +855,6 @@ func resourceCertificatemanagementPolicyCreate(c context.Context, d *schema.Reso
 				{
 					x := (v.(string))
 					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["privatekey"]; ok {
-				{
-					x := (v.(string))
-					o.SetPrivatekey(x)
 				}
 			}
 			x = append(x, *o)
@@ -1212,12 +1177,6 @@ func resourceCertificatemanagementPolicyUpdate(c context.Context, d *schema.Reso
 					}
 				}
 			}
-			if v, ok := l["cert_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetCertType(x)
-				}
-			}
 			if v, ok := l["certificate"]; ok {
 				{
 					p := make([]models.X509Certificate, 0, 1)
@@ -1267,12 +1226,6 @@ func resourceCertificatemanagementPolicyUpdate(c context.Context, d *schema.Reso
 				{
 					x := (v.(string))
 					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["privatekey"]; ok {
-				{
-					x := (v.(string))
-					o.SetPrivatekey(x)
 				}
 			}
 			x = append(x, *o)

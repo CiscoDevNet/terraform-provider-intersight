@@ -70,7 +70,8 @@ This complex property has following sub-properties:
   + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
 * `boot_devices`:(Array)
 This complex property has following sub-properties:
-  + `additional_properties`:(JSON as string) - Additional Properties as per object type, can be added as JSON using `jsonencode()`. Allowed Types are: [boot.Iscsi](#bootIscsi)
+  + `additional_properties`:(JSON as string) - Additional Properties as per object type, can be added as JSON using `jsonencode()`. Allowed Types are: [boot.Http](#bootHttp)
+[boot.Iscsi](#bootIscsi)
 [boot.LocalCdd](#bootLocalCdd)
 [boot.LocalDisk](#bootLocalDisk)
 [boot.Nvme](#bootNvme)
@@ -145,6 +146,32 @@ $ terraform import intersight_boot_precision_policy.example 1234567890987654321a
 ```
 ## Allowed Types in `AdditionalProperties`
  
+### [boot.Http](#argument-reference)
+Device type used in boot policy to boot from HTTP device.
+* `interface_name`:(string) The name of the underlying virtual ethernet interface used by the HTTP boot device. 
+* `interface_source`:(string) Lists the supported Interface Source for HTTP device. Supported values are \ name\  and \ mac\ .* `name` - Use interface name to select virtual ethernet interface.* `mac` - Use MAC address to select virtual ethernet interface.* `port` - Use port to select virtual ethernet interface. 
+* `ip_config_type`:(string) The IP config type to use during the HTTP boot process. For DHCP configuration, the IP address, DNS server, netmask and gateway details are obtained from DHCP server. For static configuration, please provide the IP address, DNS server, netmask, and gateway details.* `DHCP` - The type of the IP config is DHCP.* `Static` - The type of the IP config is Static. 
+* `ip_type`:(string) The IP address family type to use during the HTTP boot process.* `IPv4` - The type of the IP address is IPv4.* `IPv6` - The type of the IP address is IPv6. 
+* `mac_address`:(string) The MAC Address of the underlying virtual ethernet interface used by the HTTP boot device. 
+* `port`:(int) The Port ID of the adapter on which the underlying virtual ethernet interface is present. If no port is specified, the default value is -1. Supported values are 0 to 255. 
+* `protocol`:(string) Protocol to be used for HTTP boot. HTTPS require root certificate for authentication.* `HTTPS` - Secure HTTP protocol, certificate required for authentication.* `HTTP` - HTTP protocol without security certificate requirement. 
+* `slot`:(string) The slot ID of the adapter on which the underlying virtual ethernet interface is present. Supported values are ( 1 - 255, \ MLOM\ , \ L\ , \ L1\ , \ L2\ , \ OCP\ ). 
+* `static_ip_v4_settings`:(HashMap) - The static IP config settings to use during the HTTP boot process. 
+This complex property has following sub-properties:
+  + `dns_ip`:(string) IP address of DNS server. 
+  + `gateway_ip`:(string) IP address of default gateway. 
+  + `ip`:(string) Ipv4 static Internet Protocol address. 
+  + `network_mask`:(string) Network mask of the IP address. 
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+* `static_ip_v6_settings`:(HashMap) - The static IP config settings to use during the HTTP boot process. 
+This complex property has following sub-properties:
+  + `dns_ip`:(string) IP address of DNS server. 
+  + `gateway_ip`:(string) IP address of default gateway. 
+  + `ip`:(string) Ipv6 static Internet Protocol address. 
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+  + `prefix_length`:(int) A prefix length which masks the IP address and divides the IP address into network address and host address. 
+* `uri`:(string) Boot resource location in URI format. 
+
 ### [boot.Iscsi](#argument-reference)
 Device type used when booting from iSCSI boot device.
 * `bootloader`:(HashMap) - Details of the bootloader to be used during iSCSI boot. 
@@ -192,10 +219,10 @@ This complex property has following sub-properties:
 ### [boot.Pxe](#argument-reference)
 Device type used when booting from a PXE boot device.
 * `interface_name`:(string) The name of the underlying virtual ethernet interface used by the PXE boot device. 
-* `interface_source`:(string) Lists the supported Interface Source for PXE device. Supported values are \ name\  and \ mac\ .* `name` - Use interface name to select virtual ethernet interface.* `mac` - Use MAC address to select virtual ethernet interface.* `port` - Use port to select virtual ethernet interface. 
+* `interface_source`:(string) Lists the supported methods to provide network boot device configuration. Supported values are \ name\  and \ mac\ .* `name` - Use interface name to select virtual ethernet interface.* `mac` - Use MAC address to select virtual ethernet interface.* `port` - Use port to select virtual ethernet interface. 
 * `ip_type`:(string) The IP Address family type to use during the PXE Boot process.* `None` - Default value if IpType is not specified.* `IPv4` - The IPv4 address family type.* `IPv6` - The IPv6 address family type. 
 * `mac_address`:(string) The MAC Address of the underlying virtual ethernet interface used by the PXE boot device. 
-* `port`:(int) The Port ID of the adapter on which the underlying virtual ethernet interface is present. If no port is specified, the default value is -1. Supported values are -1 to 255. 
+* `port`:(int) The Port ID of the adapter on which the underlying virtual ethernet interface is present. If no port is specified, the default value is -1. Supported values are 0 to 255. 
 * `slot`:(string) The slot ID of the adapter on which the underlying virtual ethernet interface is present. Supported values are ( 1 - 255, \ MLOM\ , \ L\ , \ L1\ , \ L2\ , \ OCP\ ). 
 
 ### [boot.San](#argument-reference)

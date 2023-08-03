@@ -7,17 +7,21 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "graphics.Card"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "graphics.Card"]
 **CardId** | Pointer to **int64** | The id of the graphics card. | [optional] [readonly] 
+**Description** | Pointer to **string** | This field displays the description of the Graphics Processing Unit. | [optional] [readonly] 
 **DeviceId** | Pointer to **int64** | The device id of the graphics card. | [optional] [readonly] 
 **ExpanderSlot** | Pointer to **string** | The expander slot information of the card. | [optional] [readonly] 
 **FirmwareVersion** | Pointer to **string** | The firmware version of the graphics card. | [optional] [readonly] 
 **GpuId** | Pointer to **string** | The identifier of the graphics processor unit. | [optional] [readonly] 
+**IsPlatformSupported** | Pointer to **bool** | This field indicates whether the Graphics Processing Unit is supported on the server or not. | [optional] [readonly] [default to true]
 **Mode** | Pointer to **string** | The current mode of the graphics card. | [optional] [readonly] 
 **NumGpus** | Pointer to **string** | The number of controllers under each card. | [optional] 
 **OperReason** | Pointer to **[]string** |  | [optional] 
 **OperState** | Pointer to **string** | The current operational state of the graphics card. | [optional] [readonly] 
+**PartNumber** | Pointer to **string** | This field displays the part number of the Graphics Processing Unit. | [optional] [readonly] 
 **PciAddress** | Pointer to **string** | The PCI address of the graphics card. | [optional] [readonly] 
 **PciAddressList** | Pointer to **string** | This list contains the PCI address of all controllers for corresponding card. | [optional] [readonly] 
 **PciSlot** | Pointer to **string** | The PCI slot name of the graphics card. | [optional] [readonly] 
+**Pid** | Pointer to **string** | This field displays the product ID of the Graphics Processing Unit. | [optional] [readonly] 
 **SubDeviceId** | Pointer to **int64** | The sub device id of the graphics processor unit. | [optional] [readonly] 
 **SubVendorId** | Pointer to **int64** | The sub vendor id of the graphics processor unit. | [optional] [readonly] 
 **VendorId** | Pointer to **int64** | The vendor id of the graphics processor unit. | [optional] [readonly] 
@@ -114,6 +118,31 @@ SetCardId sets CardId field to given value.
 `func (o *GraphicsCardAllOf) HasCardId() bool`
 
 HasCardId returns a boolean if a field has been set.
+
+### GetDescription
+
+`func (o *GraphicsCardAllOf) GetDescription() string`
+
+GetDescription returns the Description field if non-nil, zero value otherwise.
+
+### GetDescriptionOk
+
+`func (o *GraphicsCardAllOf) GetDescriptionOk() (*string, bool)`
+
+GetDescriptionOk returns a tuple with the Description field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDescription
+
+`func (o *GraphicsCardAllOf) SetDescription(v string)`
+
+SetDescription sets Description field to given value.
+
+### HasDescription
+
+`func (o *GraphicsCardAllOf) HasDescription() bool`
+
+HasDescription returns a boolean if a field has been set.
 
 ### GetDeviceId
 
@@ -214,6 +243,31 @@ SetGpuId sets GpuId field to given value.
 `func (o *GraphicsCardAllOf) HasGpuId() bool`
 
 HasGpuId returns a boolean if a field has been set.
+
+### GetIsPlatformSupported
+
+`func (o *GraphicsCardAllOf) GetIsPlatformSupported() bool`
+
+GetIsPlatformSupported returns the IsPlatformSupported field if non-nil, zero value otherwise.
+
+### GetIsPlatformSupportedOk
+
+`func (o *GraphicsCardAllOf) GetIsPlatformSupportedOk() (*bool, bool)`
+
+GetIsPlatformSupportedOk returns a tuple with the IsPlatformSupported field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsPlatformSupported
+
+`func (o *GraphicsCardAllOf) SetIsPlatformSupported(v bool)`
+
+SetIsPlatformSupported sets IsPlatformSupported field to given value.
+
+### HasIsPlatformSupported
+
+`func (o *GraphicsCardAllOf) HasIsPlatformSupported() bool`
+
+HasIsPlatformSupported returns a boolean if a field has been set.
 
 ### GetMode
 
@@ -325,6 +379,31 @@ SetOperState sets OperState field to given value.
 
 HasOperState returns a boolean if a field has been set.
 
+### GetPartNumber
+
+`func (o *GraphicsCardAllOf) GetPartNumber() string`
+
+GetPartNumber returns the PartNumber field if non-nil, zero value otherwise.
+
+### GetPartNumberOk
+
+`func (o *GraphicsCardAllOf) GetPartNumberOk() (*string, bool)`
+
+GetPartNumberOk returns a tuple with the PartNumber field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPartNumber
+
+`func (o *GraphicsCardAllOf) SetPartNumber(v string)`
+
+SetPartNumber sets PartNumber field to given value.
+
+### HasPartNumber
+
+`func (o *GraphicsCardAllOf) HasPartNumber() bool`
+
+HasPartNumber returns a boolean if a field has been set.
+
 ### GetPciAddress
 
 `func (o *GraphicsCardAllOf) GetPciAddress() string`
@@ -399,6 +478,31 @@ SetPciSlot sets PciSlot field to given value.
 `func (o *GraphicsCardAllOf) HasPciSlot() bool`
 
 HasPciSlot returns a boolean if a field has been set.
+
+### GetPid
+
+`func (o *GraphicsCardAllOf) GetPid() string`
+
+GetPid returns the Pid field if non-nil, zero value otherwise.
+
+### GetPidOk
+
+`func (o *GraphicsCardAllOf) GetPidOk() (*string, bool)`
+
+GetPidOk returns a tuple with the Pid field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPid
+
+`func (o *GraphicsCardAllOf) SetPid(v string)`
+
+SetPid sets Pid field to given value.
+
+### HasPid
+
+`func (o *GraphicsCardAllOf) HasPid() bool`
+
+HasPid returns a boolean if a field has been set.
 
 ### GetSubDeviceId
 

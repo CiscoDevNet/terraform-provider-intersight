@@ -61,7 +61,12 @@ func getIqnpoolPoolMemberSchema() map[string]*schema.Schema {
 			},
 		},
 		"assigned": {
-			Description: "Boolean to represent whether the ID is assigned or not.",
+			Description: "Boolean to represent whether the ID is in use.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
+		"assigned_by_another": {
+			Description: "Boolean to represent whether the ID is used either statically or by another pool.",
 			Type:        schema.TypeBool,
 			Optional:    true,
 		},
@@ -151,7 +156,22 @@ func getIqnpoolPoolMemberSchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"iqn_address": {
-			Description: "IQN Address of this pool member.",
+			Description: "IQN Address of this pool member. It is constructed as <prefix>:<suffix>:<number>.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"iqn_number": {
+			Description: "Number of the IQN address. IQN Address is constructed as <prefix>:<suffix>:<number>.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"iqn_prefix": {
+			Description: "Prefix of the IQN address. IQN Address is constructed as <prefix>:<suffix>:<number>.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"iqn_suffix": {
+			Description: "Suffix of the IQN address. IQN Address is constructed as <prefix>:<suffix>:<number>.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -348,6 +368,11 @@ func getIqnpoolPoolMemberSchema() map[string]*schema.Schema {
 					},
 				},
 			},
+		},
+		"reserved": {
+			Description: "Boolean to represent whether the ID is reserved.",
+			Type:        schema.TypeBool,
+			Optional:    true,
 		},
 		"shared_scope": {
 			Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
@@ -571,6 +596,11 @@ func dataSourceIqnpoolPoolMemberRead(c context.Context, d *schema.ResourceData, 
 		o.SetAssigned(x)
 	}
 
+	if v, ok := d.GetOkExists("assigned_by_another"); ok {
+		x := (v.(bool))
+		o.SetAssignedByAnother(x)
+	}
+
 	if v, ok := d.GetOk("assigned_to_entity"); ok {
 		p := make([]models.MoBaseMoRelationship, 0, 1)
 		s := v.([]interface{})
@@ -675,6 +705,21 @@ func dataSourceIqnpoolPoolMemberRead(c context.Context, d *schema.ResourceData, 
 	if v, ok := d.GetOk("iqn_address"); ok {
 		x := (v.(string))
 		o.SetIqnAddress(x)
+	}
+
+	if v, ok := d.GetOkExists("iqn_number"); ok {
+		x := int64(v.(int))
+		o.SetIqnNumber(x)
+	}
+
+	if v, ok := d.GetOk("iqn_prefix"); ok {
+		x := (v.(string))
+		o.SetIqnPrefix(x)
+	}
+
+	if v, ok := d.GetOk("iqn_suffix"); ok {
+		x := (v.(string))
+		o.SetIqnSuffix(x)
 	}
 
 	if v, ok := d.GetOk("mod_time"); ok {
@@ -915,6 +960,11 @@ func dataSourceIqnpoolPoolMemberRead(c context.Context, d *schema.ResourceData, 
 		}
 	}
 
+	if v, ok := d.GetOkExists("reserved"); ok {
+		x := (v.(bool))
+		o.SetReserved(x)
+	}
+
 	if v, ok := d.GetOk("shared_scope"); ok {
 		x := (v.(string))
 		o.SetSharedScope(x)
@@ -1067,6 +1117,7 @@ func dataSourceIqnpoolPoolMemberRead(c context.Context, d *schema.ResourceData, 
 
 				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)
 				temp["assigned"] = (s.GetAssigned())
+				temp["assigned_by_another"] = (s.GetAssignedByAnother())
 
 				temp["assigned_to_entity"] = flattenMapMoBaseMoRelationship(s.GetAssignedToEntity(), d)
 
@@ -1076,6 +1127,9 @@ func dataSourceIqnpoolPoolMemberRead(c context.Context, d *schema.ResourceData, 
 				temp["create_time"] = (s.GetCreateTime()).String()
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
 				temp["iqn_address"] = (s.GetIqnAddress())
+				temp["iqn_number"] = (s.GetIqnNumber())
+				temp["iqn_prefix"] = (s.GetIqnPrefix())
+				temp["iqn_suffix"] = (s.GetIqnSuffix())
 
 				temp["mod_time"] = (s.GetModTime()).String()
 				temp["moid"] = (s.GetMoid())
@@ -1091,6 +1145,7 @@ func dataSourceIqnpoolPoolMemberRead(c context.Context, d *schema.ResourceData, 
 				temp["pool"] = flattenMapIqnpoolPoolRelationship(s.GetPool(), d)
 
 				temp["reservation"] = flattenMapIqnpoolReservationRelationship(s.GetReservation(), d)
+				temp["reserved"] = (s.GetReserved())
 				temp["shared_scope"] = (s.GetSharedScope())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)

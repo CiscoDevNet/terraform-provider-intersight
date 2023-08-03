@@ -39,6 +39,7 @@ The following arguments can be used to get data of already created objects in In
 * `inband_ip_gateway`:(string) The default gateway of the network Element inband management interface. 
 * `inband_ip_mask`:(string) The network mask of the network Element inband management interface. 
 * `inband_vlan`:(int) The VLAN ID of the network Element inband management interface. 
+* `inter_cluster_link_state`:(string) The intercluster link state of the switch.* `Unknown` - The operational state of the link is not known.* `Up` - The operational state of the link is up.* `Down` - The operational state of the link is down.* `Degraded` - The link is operational but degraded. This state is applicable to port channels when any one of the member links is down. 
 * `ipv4_address`:(string) IP version 4 address is saved in this property. 
 * `is_upgraded`:(bool) This field indicates the compute status of the catalog values for the associated component or hardware. 
 * `management_mode`:(string) The management mode of the fabric interconnect.* `IntersightStandalone` - Intersight Standalone mode of operation.* `UCSM` - Unified Computing System Manager mode of operation.* `Intersight` - Intersight managed mode of operation. 
@@ -67,6 +68,7 @@ The following arguments can be used to get data of already created objects in In
 * `out_of_band_mac`:(string) The MAC address of the network Element out-of-band management interface. 
 * `part_number`:(string) Part number of the switch. 
 * `presence`:(string) This field indicates the presence (equipped) or absence (absent) of the associated component or hardware. 
+* `reserved_vlan_start_id`:(int) The reserved VLAN start ID of the Network Element. A block of 128 VLANs are reserved for internal use and cannot be used for carrying network traffic. 
 * `revision`:(string) This field displays the revised version of the associated component or hardware (if any). 
 * `rn`:(string) The Relative Name uniquely identifies an object within a given context. 
 * `serial`:(string) This field displays the serial number of the associated component or hardware. 

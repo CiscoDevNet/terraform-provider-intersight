@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "storage.NetAppLun"]
 **AvgPerformanceMetrics** | Pointer to [**StorageNetAppPerformanceMetricsAverage**](StorageNetAppPerformanceMetricsAverage.md) |  | [optional] 
 **ContainerState** | Pointer to **string** | The state of the volume and aggregate that contain the LUN. LUNs are only available when their containers are available. | [optional] [readonly] 
+**IsMapped** | Pointer to **string** | Reports if the LUN is mapped to one or more initiator groups. | [optional] [readonly] 
 **Key** | Pointer to **string** | Unique identifier of LUN across data center. | [optional] [readonly] 
 **Mapped** | Pointer to **bool** | Reports if the LUN is mapped to one or more initiator groups. | [optional] [readonly] 
 **OsType** | Pointer to **string** | The operating system (OS) type for this LUN. * &#x60;Linux&#x60; - Family of open source Unix-like operating systems based on the Linux kernel. * &#x60;AIX&#x60; - Advanced Interactive Executive (AIX). * &#x60;HP-UX&#x60; - HP-UX is implementation of the Unix operating system, based on Unix System V. * &#x60;Hyper-V&#x60; - Windows Server 2008 or Windows Server 2012 Hyper-V. * &#x60;OpenVMS&#x60; - OpenVMS is multi-user, multiprocessing virtual memory-based operating system. * &#x60;Solaris&#x60; - Solaris is a Unix operating system. * &#x60;NetWare&#x60; - NetWare is a computer network operating system. * &#x60;VMware&#x60; - An enterprise-class, type-1 hypervisor developed by VMware for deploying and serving virtual computers. * &#x60;Windows&#x60; - Single-partition Windows disk using the Master Boot Record (MBR) partitioning style. * &#x60;Xen&#x60; - Xen is a type-1 hypervisor, providing services that allow multiple computer operating systems to execute on the same computer hardware concurrently. | [optional] [readonly] [default to "Linux"]
@@ -130,6 +131,31 @@ SetContainerState sets ContainerState field to given value.
 `func (o *StorageNetAppLunAllOf) HasContainerState() bool`
 
 HasContainerState returns a boolean if a field has been set.
+
+### GetIsMapped
+
+`func (o *StorageNetAppLunAllOf) GetIsMapped() string`
+
+GetIsMapped returns the IsMapped field if non-nil, zero value otherwise.
+
+### GetIsMappedOk
+
+`func (o *StorageNetAppLunAllOf) GetIsMappedOk() (*string, bool)`
+
+GetIsMappedOk returns a tuple with the IsMapped field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsMapped
+
+`func (o *StorageNetAppLunAllOf) SetIsMapped(v string)`
+
+SetIsMapped sets IsMapped field to given value.
+
+### HasIsMapped
+
+`func (o *StorageNetAppLunAllOf) HasIsMapped() bool`
+
+HasIsMapped returns a boolean if a field has been set.
 
 ### GetKey
 

@@ -29,6 +29,7 @@ Name | Type | Description | Notes
 **InbandIpGateway** | Pointer to **string** | The default gateway of the network Element inband management interface. | [optional] [readonly] 
 **InbandIpMask** | Pointer to **string** | The network mask of the network Element inband management interface. | [optional] [readonly] 
 **InbandVlan** | Pointer to **int64** | The VLAN ID of the network Element inband management interface. | [optional] [readonly] 
+**InterClusterLinkState** | Pointer to **string** | The intercluster link state of the switch. * &#x60;Unknown&#x60; - The operational state of the link is not known. * &#x60;Up&#x60; - The operational state of the link is up. * &#x60;Down&#x60; - The operational state of the link is down. * &#x60;Degraded&#x60; - The link is operational but degraded. This state is applicable to port channels when any one of the member links is down. | [optional] [readonly] [default to "Unknown"]
 **Ipv4Address** | Pointer to **string** | IP version 4 address is saved in this property. | [optional] [readonly] 
 **IsUpgraded** | Pointer to **bool** | This field indicates the compute status of the catalog values for the associated component or hardware. | [optional] [readonly] [default to false]
 **ManagementMode** | Pointer to **string** | The management mode of the fabric interconnect. * &#x60;IntersightStandalone&#x60; - Intersight Standalone mode of operation. * &#x60;UCSM&#x60; - Unified Computing System Manager mode of operation. * &#x60;Intersight&#x60; - Intersight managed mode of operation. | [optional] [readonly] [default to "IntersightStandalone"]
@@ -55,6 +56,7 @@ Name | Type | Description | Notes
 **OutOfBandMac** | Pointer to **string** | The MAC address of the network Element out-of-band management interface. | [optional] [readonly] 
 **PartNumber** | Pointer to **string** | Part number of the switch. | [optional] [readonly] 
 **Presence** | Pointer to **string** | This field indicates the presence (equipped) or absence (absent) of the associated component or hardware. | [optional] [readonly] 
+**ReservedVlanStartId** | Pointer to **int64** | The reserved VLAN start ID of the Network Element. A block of 128 VLANs are reserved for internal use and cannot be used for carrying network traffic. | [optional] [readonly] 
 **Revision** | Pointer to **string** | This field displays the revised version of the associated component or hardware (if any). | [optional] [readonly] 
 **Rn** | Pointer to **string** | The Relative Name uniquely identifies an object within a given context. | [optional] [readonly] 
 **Serial** | Pointer to **string** | This field displays the serial number of the associated component or hardware. | [optional] [readonly] 
@@ -713,6 +715,31 @@ SetInbandVlan sets InbandVlan field to given value.
 
 HasInbandVlan returns a boolean if a field has been set.
 
+### GetInterClusterLinkState
+
+`func (o *NetworkElementSummary) GetInterClusterLinkState() string`
+
+GetInterClusterLinkState returns the InterClusterLinkState field if non-nil, zero value otherwise.
+
+### GetInterClusterLinkStateOk
+
+`func (o *NetworkElementSummary) GetInterClusterLinkStateOk() (*string, bool)`
+
+GetInterClusterLinkStateOk returns a tuple with the InterClusterLinkState field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetInterClusterLinkState
+
+`func (o *NetworkElementSummary) SetInterClusterLinkState(v string)`
+
+SetInterClusterLinkState sets InterClusterLinkState field to given value.
+
+### HasInterClusterLinkState
+
+`func (o *NetworkElementSummary) HasInterClusterLinkState() bool`
+
+HasInterClusterLinkState returns a boolean if a field has been set.
+
 ### GetIpv4Address
 
 `func (o *NetworkElementSummary) GetIpv4Address() string`
@@ -1362,6 +1389,31 @@ SetPresence sets Presence field to given value.
 `func (o *NetworkElementSummary) HasPresence() bool`
 
 HasPresence returns a boolean if a field has been set.
+
+### GetReservedVlanStartId
+
+`func (o *NetworkElementSummary) GetReservedVlanStartId() int64`
+
+GetReservedVlanStartId returns the ReservedVlanStartId field if non-nil, zero value otherwise.
+
+### GetReservedVlanStartIdOk
+
+`func (o *NetworkElementSummary) GetReservedVlanStartIdOk() (*int64, bool)`
+
+GetReservedVlanStartIdOk returns a tuple with the ReservedVlanStartId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetReservedVlanStartId
+
+`func (o *NetworkElementSummary) SetReservedVlanStartId(v int64)`
+
+SetReservedVlanStartId sets ReservedVlanStartId field to given value.
+
+### HasReservedVlanStartId
+
+`func (o *NetworkElementSummary) HasReservedVlanStartId() bool`
+
+HasReservedVlanStartId returns a boolean if a field has been set.
 
 ### GetRevision
 

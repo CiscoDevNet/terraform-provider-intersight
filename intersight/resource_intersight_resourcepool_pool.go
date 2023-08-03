@@ -79,7 +79,7 @@ func resourceResourcepoolPool() *schema.Resource {
 				},
 			},
 			"assigned": {
-				Description: "Number of IDs that are currently assigned.",
+				Description: "Number of IDs that are currently assigned (in use).",
 				Type:        schema.TypeInt,
 				Optional:    true,
 				Computed:    true,
@@ -295,6 +295,17 @@ func resourceResourcepoolPool() *schema.Resource {
 				Optional:     true,
 				Default:      "Static",
 			},
+			"reserved": {
+				Description: "Number of IDs that are currently reserved (and not in use).",
+				Type:        schema.TypeInt,
+				Optional:    true,
+				Computed:    true,
+				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+					if val != nil {
+						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+					}
+					return
+				}},
 			"resource_pool_parameters": {
 				Description: "The pool specific parameters.",
 				Type:        schema.TypeList,
@@ -867,6 +878,10 @@ func resourceResourcepoolPoolRead(c context.Context, d *schema.ResourceData, met
 
 	if err := d.Set("pool_type", (s.GetPoolType())); err != nil {
 		return diag.Errorf("error occurred while setting property PoolType in ResourcepoolPool object: %s", err.Error())
+	}
+
+	if err := d.Set("reserved", (s.GetReserved())); err != nil {
+		return diag.Errorf("error occurred while setting property Reserved in ResourcepoolPool object: %s", err.Error())
 	}
 
 	if err := d.Set("resource_pool_parameters", flattenMapResourcepoolResourcePoolParameters(s.GetResourcePoolParameters(), d)); err != nil {

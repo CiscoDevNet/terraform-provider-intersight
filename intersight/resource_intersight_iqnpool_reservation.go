@@ -177,6 +177,42 @@ func resourceIqnpoolReservation() *schema.Resource {
 				Optional:     true,
 				ForceNew:     true,
 			},
+			"iqn_number": {
+				Description: "Number of the IQN address. IQN Address is constructed as <prefix>:<suffix>:<number>.",
+				Type:        schema.TypeInt,
+				Optional:    true,
+				Computed:    true,
+				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+					if val != nil {
+						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+					}
+					return
+				}, ForceNew: true,
+			},
+			"iqn_prefix": {
+				Description: "Prefix of the IQN address. IQN Address is constructed as <prefix>:<suffix>:<number>.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+					if val != nil {
+						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+					}
+					return
+				}, ForceNew: true,
+			},
+			"iqn_suffix": {
+				Description: "Suffix of the IQN address. IQN Address is constructed as <prefix>:<suffix>:<number>.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+					if val != nil {
+						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+					}
+					return
+				}, ForceNew: true,
+			},
 			"mod_time": {
 				Description: "The time when this managed object was last modified.",
 				Type:        schema.TypeString,
@@ -929,6 +965,18 @@ func resourceIqnpoolReservationRead(c context.Context, d *schema.ResourceData, m
 
 	if err := d.Set("identity", (s.GetIdentity())); err != nil {
 		return diag.Errorf("error occurred while setting property Identity in IqnpoolReservation object: %s", err.Error())
+	}
+
+	if err := d.Set("iqn_number", (s.GetIqnNumber())); err != nil {
+		return diag.Errorf("error occurred while setting property IqnNumber in IqnpoolReservation object: %s", err.Error())
+	}
+
+	if err := d.Set("iqn_prefix", (s.GetIqnPrefix())); err != nil {
+		return diag.Errorf("error occurred while setting property IqnPrefix in IqnpoolReservation object: %s", err.Error())
+	}
+
+	if err := d.Set("iqn_suffix", (s.GetIqnSuffix())); err != nil {
+		return diag.Errorf("error occurred while setting property IqnSuffix in IqnpoolReservation object: %s", err.Error())
 	}
 
 	if err := d.Set("mod_time", (s.GetModTime()).String()); err != nil {

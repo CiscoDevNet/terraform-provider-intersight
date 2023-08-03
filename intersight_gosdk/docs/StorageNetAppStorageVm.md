@@ -16,6 +16,7 @@ Name | Type | Description | Notes
 **IscsiEnabled** | Pointer to **bool** | Status for iSCSI protocol allowed to run on Vservers. | [optional] [readonly] 
 **Key** | Pointer to **string** | Unique identifier of VServer across data center. | [optional] [readonly] 
 **NameServers** | Pointer to **[]string** |  | [optional] 
+**NativeFpolicyCount** | Pointer to **int64** | The number of native FPolicy engines enabled on this SVM. | [optional] [readonly] 
 **NfsEnabled** | Pointer to **bool** | Status for Network File System Protocol ( NFS ) allowed to run on  Vservers. | [optional] [readonly] 
 **NvmeEnabled** | Pointer to **bool** | Status for NVME protocol allowed to run on Vservers. | [optional] [readonly] 
 **Subtype** | Pointer to **string** | SVM subtype (default, dp_destination, sync_source, or sync_destination). The SVM subtype sync_destination is created automatically when an SVM of subtype sync_source is created on the source MetroCluster cluster. | [optional] [readonly] 
@@ -362,6 +363,31 @@ HasNameServers returns a boolean if a field has been set.
 `func (o *StorageNetAppStorageVm) UnsetNameServers()`
 
 UnsetNameServers ensures that no value is present for NameServers, not even an explicit nil
+### GetNativeFpolicyCount
+
+`func (o *StorageNetAppStorageVm) GetNativeFpolicyCount() int64`
+
+GetNativeFpolicyCount returns the NativeFpolicyCount field if non-nil, zero value otherwise.
+
+### GetNativeFpolicyCountOk
+
+`func (o *StorageNetAppStorageVm) GetNativeFpolicyCountOk() (*int64, bool)`
+
+GetNativeFpolicyCountOk returns a tuple with the NativeFpolicyCount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNativeFpolicyCount
+
+`func (o *StorageNetAppStorageVm) SetNativeFpolicyCount(v int64)`
+
+SetNativeFpolicyCount sets NativeFpolicyCount field to given value.
+
+### HasNativeFpolicyCount
+
+`func (o *StorageNetAppStorageVm) HasNativeFpolicyCount() bool`
+
+HasNativeFpolicyCount returns a boolean if a field has been set.
+
 ### GetNfsEnabled
 
 `func (o *StorageNetAppStorageVm) GetNfsEnabled() bool`

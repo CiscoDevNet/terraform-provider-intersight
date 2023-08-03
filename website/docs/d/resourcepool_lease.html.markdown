@@ -19,6 +19,7 @@ The following arguments can be used to get data of already created objects in In
 * `create_time`:(string) The time when this managed object was created. 
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
 * `feature`:(string) Lease opertion applied for the feature. 
+* `has_duplicate`:(bool) HasDuplicate represents if there are other pools in which this id exists. 
 * `is_exclusive_at_assigned_entity`:(bool) Indicates whether a lease allocation is exclusive based on the Assigned Entity, if the AssignedEntity holds any lease then not allowed to create new lease later. 
 * `mod_time`:(string) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 

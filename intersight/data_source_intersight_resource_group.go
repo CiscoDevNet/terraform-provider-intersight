@@ -342,6 +342,11 @@ func getResourceGroupSchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"type": {
+			Description: "The type of this resource group. (Rbac, Licensing, solution).\n* `rbac` - These resource groups are used for multi-tenancy by assigning to organizations.\n* `licensing` - These resource groups are used to classify resources like servers to various groups which are associated to different license tiers.\n* `solution` - These resource groups are created for Flexpods.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"version_context": {
 			Description: "The versioning info for this managed object.",
 			Type:        schema.TypeList,
@@ -853,6 +858,11 @@ func dataSourceResourceGroupRead(c context.Context, d *schema.ResourceData, meta
 		o.SetTags(x)
 	}
 
+	if v, ok := d.GetOk("type"); ok {
+		x := (v.(string))
+		o.SetType(x)
+	}
+
 	if v, ok := d.GetOk("version_context"); ok {
 		p := make([]models.MoVersionContext, 0, 1)
 		s := v.([]interface{})
@@ -993,6 +1003,7 @@ func dataSourceResourceGroupRead(c context.Context, d *schema.ResourceData, meta
 				temp["shared_scope"] = (s.GetSharedScope())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
+				temp["type"] = (s.GetType())
 
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
 				resourceGroupResults = append(resourceGroupResults, temp)

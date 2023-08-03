@@ -27,8 +27,8 @@ func resourceLicenseLicenseReservationOp() *schema.Resource {
 				Type:        schema.TypeList,
 				MaxItems:    1,
 				Optional:    true,
-				ConfigMode:  schema.SchemaConfigModeAttr,
 				Computed:    true,
+				ConfigMode:  schema.SchemaConfigModeAttr,
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"additional_properties": {
@@ -513,48 +513,6 @@ func resourceLicenseLicenseReservationOpCreate(c context.Context, d *schema.Reso
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewLicenseLicenseReservationOpWithDefaults()
-	if v, ok := d.GetOk("account"); ok {
-		p := make([]models.IamAccountRelationship, 0, 1)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			l := s[i].(map[string]interface{})
-			o := models.NewMoMoRefWithDefaults()
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("mo.MoRef")
-			if v, ok := l["moid"]; ok {
-				{
-					x := (v.(string))
-					o.SetMoid(x)
-				}
-			}
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["selector"]; ok {
-				{
-					x := (v.(string))
-					o.SetSelector(x)
-				}
-			}
-			p = append(p, models.MoMoRefAsIamAccountRelationship(o))
-		}
-		if len(p) > 0 {
-			x := p[0]
-			o.SetAccount(x)
-		}
-	}
 
 	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
@@ -761,49 +719,6 @@ func resourceLicenseLicenseReservationOpUpdate(c context.Context, d *schema.Reso
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.LicenseLicenseReservationOp{}
-	if d.HasChange("account") {
-		v := d.Get("account")
-		p := make([]models.IamAccountRelationship, 0, 1)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			l := s[i].(map[string]interface{})
-			o := &models.MoMoRef{}
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("mo.MoRef")
-			if v, ok := l["moid"]; ok {
-				{
-					x := (v.(string))
-					o.SetMoid(x)
-				}
-			}
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["selector"]; ok {
-				{
-					x := (v.(string))
-					o.SetSelector(x)
-				}
-			}
-			p = append(p, models.MoMoRefAsIamAccountRelationship(o))
-		}
-		if len(p) > 0 {
-			x := p[0]
-			o.SetAccount(x)
-		}
-	}
 
 	if d.HasChange("additional_properties") {
 		v := d.Get("additional_properties")

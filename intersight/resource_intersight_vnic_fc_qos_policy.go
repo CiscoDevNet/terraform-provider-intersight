@@ -303,7 +303,7 @@ func resourceVnicFcQosPolicy() *schema.Resource {
 					return
 				}},
 			"rate_limit": {
-				Description:  "The value in Mbps to use for limiting the data rate on the virtual interface. Setting this to zero will turn rate limiting off.",
+				Description:  "The value in Mbps to use for limiting the data rate on the virtual interface.",
 				Type:         schema.TypeInt,
 				ValidateFunc: validation.IntBetween(0, 100000),
 				Optional:     true,

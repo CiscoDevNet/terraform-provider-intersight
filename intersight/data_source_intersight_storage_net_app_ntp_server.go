@@ -96,7 +96,7 @@ func getStorageNetAppNtpServerSchema() map[string]*schema.Schema {
 			},
 		},
 		"authentication_enabled": {
-			Description: "Indicates that NTP symmetric authentication is enabled.",
+			Description: "Indicates whether or not NTP symmetric authentication is enabled.",
 			Type:        schema.TypeBool,
 			Optional:    true,
 		},
@@ -122,6 +122,11 @@ func getStorageNetAppNtpServerSchema() map[string]*schema.Schema {
 		},
 		"domain_group_moid": {
 			Description: "The DomainGroup ID for this managed object.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"is_authentication_enabled": {
+			Description: "Indicates whether or not NTP symmetric authentication is enabled.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -514,6 +519,11 @@ func dataSourceStorageNetAppNtpServerRead(c context.Context, d *schema.ResourceD
 		o.SetDomainGroupMoid(x)
 	}
 
+	if v, ok := d.GetOk("is_authentication_enabled"); ok {
+		x := (v.(string))
+		o.SetIsAuthenticationEnabled(x)
+	}
+
 	if v, ok := d.GetOk("mod_time"); ok {
 		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetModTime(x)
@@ -793,6 +803,7 @@ func dataSourceStorageNetAppNtpServerRead(c context.Context, d *schema.ResourceD
 
 				temp["create_time"] = (s.GetCreateTime()).String()
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
+				temp["is_authentication_enabled"] = (s.GetIsAuthenticationEnabled())
 
 				temp["mod_time"] = (s.GetModTime()).String()
 				temp["moid"] = (s.GetMoid())

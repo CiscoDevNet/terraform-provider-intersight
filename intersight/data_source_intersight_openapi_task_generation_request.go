@@ -76,7 +76,7 @@ func getOpenapiTaskGenerationRequestSchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"endpoint_type": {
-			Description: "Indicates if target endpoint is external or internal. An endpoint is internal if the target is an Intersight resource. For instance, configuring an intersight object using a Task.\n* `External` - Denotes that the target endpoint is an external API endpoint\n* `Internal` - Denotes that the target endpoint is a Intersight API endpoint",
+			Description: "Indicates if target endpoint is external or internal. An endpoint is internal if the target is an Intersight resource. For instance, configuring an intersight object using a Task.\n* `External` - Denotes that the target endpoint is an external API endpoint.\n* `Internal` - Denotes that the target endpoint is a Intersight API endpoint.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},

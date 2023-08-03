@@ -75,8 +75,41 @@ func getServerConfigResultSchema() map[string]*schema.Schema {
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
+					"error_messages": {
+						Type:     schema.TypeList,
+						Optional: true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"message": {
+									Description: "Localized message based on the locale setting of the user's context giving the policy error description.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"type": {
+									Description: "The error type indicating the point of failure like policy attach/detach, placement computation (LCP/SCP) or license validation (LCP/SCP Qos).\nValues  -- attachErr, detachErr, computationErr, licenseErr.\n* `none` - None is set as default value when there is no error and status is ok.\n* `attachErr` - The policy attach has failed.\n* `detachErr` - The policy detach has failed.\n* `computationErr` - The policy specific computation has failed. For example, vNIC placement on Network Adapter in LanConnectivityPolicy.\n* `licenseErr` - The policy specific license enforcement has failed. For example, Cos property in EthernetQoS policy which is a subpolicyof LanConnectivityPolicy requires Advantage License. But if the server attached to the Server Profile does not have anAdvantage License then the license enforcement check would fail during LanConnectivityPolicy validation.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+							},
+						},
+					},
 					"moid": {
-						Description: "The object id of the policy being attached.",
+						Description: "The object identifier of the policy.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
@@ -91,12 +124,12 @@ func getServerConfigResultSchema() map[string]*schema.Schema {
 						Optional:    true,
 					},
 					"status": {
-						Description: "Indicates if the policy attach/detach was successful or not. Values  -- ok, errored, validating.\n* `ok` - The policy attach/detach is successful.\n* `error` - The policy cannot be attached/detached due to an error.\n* `validating` - The policy preconfig validation is in progress.",
+						Description: "Indicates if the policy association or validation was successful or not. Values  -- ok, errored, validating.\n* `ok` - The policy association or validation is successful.\n* `error` - The policy association or validation has failed.\n* `validating` - The policy association or validation is in progress.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
 					"type": {
-						Description: "The object type of the policy being attached.",
+						Description: "The object type of the policy.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
@@ -525,34 +558,41 @@ func dataSourceServerConfigResultRead(c context.Context, d *schema.ResourceData,
 				}
 			}
 			o.SetClassId("policy.PolicyStatus")
-			if v, ok := l["moid"]; ok {
+			if v, ok := l["error_messages"]; ok {
 				{
-					x := (v.(string))
-					o.SetMoid(x)
+					x := make([]models.PolicyPolicyError, 0)
+					s := v.([]interface{})
+					for i := 0; i < len(s); i++ {
+						o := models.NewPolicyPolicyErrorWithDefaults()
+						l := s[i].(map[string]interface{})
+						if v, ok := l["additional_properties"]; ok {
+							{
+								x := []byte(v.(string))
+								var x1 interface{}
+								err := json.Unmarshal(x, &x1)
+								if err == nil && x1 != nil {
+									o.AdditionalProperties = x1.(map[string]interface{})
+								}
+							}
+						}
+						o.SetClassId("policy.PolicyError")
+						if v, ok := l["object_type"]; ok {
+							{
+								x := (v.(string))
+								o.SetObjectType(x)
+							}
+						}
+						x = append(x, *o)
+					}
+					if len(x) > 0 {
+						o.SetErrorMessages(x)
+					}
 				}
 			}
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
 					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["reason"]; ok {
-				{
-					x := (v.(string))
-					o.SetReason(x)
-				}
-			}
-			if v, ok := l["status"]; ok {
-				{
-					x := (v.(string))
-					o.SetStatus(x)
-				}
-			}
-			if v, ok := l["type"]; ok {
-				{
-					x := (v.(string))
-					o.SetType(x)
 				}
 			}
 			x = append(x, *o)

@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **PerTypeCombinedSelector** | Pointer to [**[]ResourcePerTypeCombinedSelector**](ResourcePerTypeCombinedSelector.md) |  | [optional] 
 **Qualifier** | Pointer to **string** | Qualifier shall be used to specify if we want to organize resources using multiple resource group or single For an account, resource groups can be of only one of the above types. (Both the types are mutually exclusive for an account.). * &#x60;Allow-Selectors&#x60; - Resources will be added to resource groups based on ODATA filter. Multiple resource group can be created to organize resources. * &#x60;Allow-All&#x60; - All resources will become part of the Resource Group. Only one resource group can be created to organize resources. | [optional] [default to "Allow-Selectors"]
 **Selectors** | Pointer to [**[]ResourceSelector**](ResourceSelector.md) |  | [optional] 
+**Type** | Pointer to **string** | The type of this resource group. (Rbac, Licensing, solution). * &#x60;rbac&#x60; - These resource groups are used for multi-tenancy by assigning to organizations. * &#x60;licensing&#x60; - These resource groups are used to classify resources like servers to various groups which are associated to different license tiers. * &#x60;solution&#x60; - These resource groups are created for Flexpods. | [optional] [readonly] [default to "rbac"]
 **Account** | Pointer to [**IamAccountRelationship**](IamAccountRelationship.md) |  | [optional] 
 **Organizations** | Pointer to [**[]OrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) | An array of relationships to organizationOrganization resources. | [optional] 
 
@@ -218,6 +219,31 @@ HasSelectors returns a boolean if a field has been set.
 `func (o *ResourceGroup) UnsetSelectors()`
 
 UnsetSelectors ensures that no value is present for Selectors, not even an explicit nil
+### GetType
+
+`func (o *ResourceGroup) GetType() string`
+
+GetType returns the Type field if non-nil, zero value otherwise.
+
+### GetTypeOk
+
+`func (o *ResourceGroup) GetTypeOk() (*string, bool)`
+
+GetTypeOk returns a tuple with the Type field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetType
+
+`func (o *ResourceGroup) SetType(v string)`
+
+SetType sets Type field to given value.
+
+### HasType
+
+`func (o *ResourceGroup) HasType() bool`
+
+HasType returns a boolean if a field has been set.
+
 ### GetAccount
 
 `func (o *ResourceGroup) GetAccount() IamAccountRelationship`

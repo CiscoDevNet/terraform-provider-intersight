@@ -150,6 +150,11 @@ func getIppoolIpLeaseSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"has_duplicate": {
+			Description: "HasDuplicate represents if there are other pools in which this id exists.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
 		"ip_type": {
 			Description: "Type of the IP address requested.\n* `IPv4` - IP V4 address type requested.\n* `IPv6` - IP V6 address type requested.",
 			Type:        schema.TypeString,
@@ -847,6 +852,11 @@ func dataSourceIppoolIpLeaseRead(c context.Context, d *schema.ResourceData, meta
 		o.SetDomainGroupMoid(x)
 	}
 
+	if v, ok := d.GetOkExists("has_duplicate"); ok {
+		x := (v.(bool))
+		o.SetHasDuplicate(x)
+	}
+
 	if v, ok := d.GetOk("ip_type"); ok {
 		x := (v.(string))
 		o.SetIpType(x)
@@ -1462,6 +1472,7 @@ func dataSourceIppoolIpLeaseRead(c context.Context, d *schema.ResourceData, meta
 
 				temp["create_time"] = (s.GetCreateTime()).String()
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
+				temp["has_duplicate"] = (s.GetHasDuplicate())
 				temp["ip_type"] = (s.GetIpType())
 				temp["ip_v4_address"] = (s.GetIpV4Address())
 

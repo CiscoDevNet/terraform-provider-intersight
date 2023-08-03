@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-11765
+API version: 1.0.11-13010
 Contact: intersight@cisco.com
 */
 
@@ -29,8 +29,6 @@ type HyperflexVolume struct {
 	Capacity *int64 `json:"Capacity,omitempty"`
 	// Client (tenant) ID to which the volume belongs.
 	ClientId *string `json:"ClientId,omitempty"`
-	// The name of the kubernetes cluster to which the volume is associated.
-	KubernetesClusterName *string `json:"KubernetesClusterName,omitempty"`
 	// Last modified time as UTC of the volume.
 	LastModifiedTime *time.Time `json:"LastModifiedTime,omitempty"`
 	// UUID of LUN associated with the volume.
@@ -46,10 +44,9 @@ type HyperflexVolume struct {
 	// The mode of the HyperFlex volume. * `Block` - It is a Block virtual disk. * `Filesystem` - It is a File system virtual disk. * `` - Disk mode is either unknown or not supported.
 	VolumeMode *string `json:"VolumeMode,omitempty"`
 	// The type of the HyperFlex volume.
-	VolumeType           *string                                   `json:"VolumeType,omitempty"`
-	Cluster              *HyperflexClusterRelationship             `json:"Cluster,omitempty"`
-	IweVirtualDisk       *VirtualizationIweVirtualDiskRelationship `json:"IweVirtualDisk,omitempty"`
-	StorageContainer     *HyperflexStorageContainerRelationship    `json:"StorageContainer,omitempty"`
+	VolumeType           *string                                `json:"VolumeType,omitempty"`
+	Cluster              *HyperflexClusterRelationship          `json:"Cluster,omitempty"`
+	StorageContainer     *HyperflexStorageContainerRelationship `json:"StorageContainer,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -188,38 +185,6 @@ func (o *HyperflexVolume) HasClientId() bool {
 // SetClientId gets a reference to the given string and assigns it to the ClientId field.
 func (o *HyperflexVolume) SetClientId(v string) {
 	o.ClientId = &v
-}
-
-// GetKubernetesClusterName returns the KubernetesClusterName field value if set, zero value otherwise.
-func (o *HyperflexVolume) GetKubernetesClusterName() string {
-	if o == nil || o.KubernetesClusterName == nil {
-		var ret string
-		return ret
-	}
-	return *o.KubernetesClusterName
-}
-
-// GetKubernetesClusterNameOk returns a tuple with the KubernetesClusterName field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *HyperflexVolume) GetKubernetesClusterNameOk() (*string, bool) {
-	if o == nil || o.KubernetesClusterName == nil {
-		return nil, false
-	}
-	return o.KubernetesClusterName, true
-}
-
-// HasKubernetesClusterName returns a boolean if a field has been set.
-func (o *HyperflexVolume) HasKubernetesClusterName() bool {
-	if o != nil && o.KubernetesClusterName != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetKubernetesClusterName gets a reference to the given string and assigns it to the KubernetesClusterName field.
-func (o *HyperflexVolume) SetKubernetesClusterName(v string) {
-	o.KubernetesClusterName = &v
 }
 
 // GetLastModifiedTime returns the LastModifiedTime field value if set, zero value otherwise.
@@ -510,38 +475,6 @@ func (o *HyperflexVolume) SetCluster(v HyperflexClusterRelationship) {
 	o.Cluster = &v
 }
 
-// GetIweVirtualDisk returns the IweVirtualDisk field value if set, zero value otherwise.
-func (o *HyperflexVolume) GetIweVirtualDisk() VirtualizationIweVirtualDiskRelationship {
-	if o == nil || o.IweVirtualDisk == nil {
-		var ret VirtualizationIweVirtualDiskRelationship
-		return ret
-	}
-	return *o.IweVirtualDisk
-}
-
-// GetIweVirtualDiskOk returns a tuple with the IweVirtualDisk field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *HyperflexVolume) GetIweVirtualDiskOk() (*VirtualizationIweVirtualDiskRelationship, bool) {
-	if o == nil || o.IweVirtualDisk == nil {
-		return nil, false
-	}
-	return o.IweVirtualDisk, true
-}
-
-// HasIweVirtualDisk returns a boolean if a field has been set.
-func (o *HyperflexVolume) HasIweVirtualDisk() bool {
-	if o != nil && o.IweVirtualDisk != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetIweVirtualDisk gets a reference to the given VirtualizationIweVirtualDiskRelationship and assigns it to the IweVirtualDisk field.
-func (o *HyperflexVolume) SetIweVirtualDisk(v VirtualizationIweVirtualDiskRelationship) {
-	o.IweVirtualDisk = &v
-}
-
 // GetStorageContainer returns the StorageContainer field value if set, zero value otherwise.
 func (o *HyperflexVolume) GetStorageContainer() HyperflexStorageContainerRelationship {
 	if o == nil || o.StorageContainer == nil {
@@ -596,9 +529,6 @@ func (o HyperflexVolume) MarshalJSON() ([]byte, error) {
 	if o.ClientId != nil {
 		toSerialize["ClientId"] = o.ClientId
 	}
-	if o.KubernetesClusterName != nil {
-		toSerialize["KubernetesClusterName"] = o.KubernetesClusterName
-	}
 	if o.LastModifiedTime != nil {
 		toSerialize["LastModifiedTime"] = o.LastModifiedTime
 	}
@@ -626,9 +556,6 @@ func (o HyperflexVolume) MarshalJSON() ([]byte, error) {
 	if o.Cluster != nil {
 		toSerialize["Cluster"] = o.Cluster
 	}
-	if o.IweVirtualDisk != nil {
-		toSerialize["IweVirtualDisk"] = o.IweVirtualDisk
-	}
 	if o.StorageContainer != nil {
 		toSerialize["StorageContainer"] = o.StorageContainer
 	}
@@ -650,8 +577,6 @@ func (o *HyperflexVolume) UnmarshalJSON(bytes []byte) (err error) {
 		Capacity *int64 `json:"Capacity,omitempty"`
 		// Client (tenant) ID to which the volume belongs.
 		ClientId *string `json:"ClientId,omitempty"`
-		// The name of the kubernetes cluster to which the volume is associated.
-		KubernetesClusterName *string `json:"KubernetesClusterName,omitempty"`
 		// Last modified time as UTC of the volume.
 		LastModifiedTime *time.Time `json:"LastModifiedTime,omitempty"`
 		// UUID of LUN associated with the volume.
@@ -667,10 +592,9 @@ func (o *HyperflexVolume) UnmarshalJSON(bytes []byte) (err error) {
 		// The mode of the HyperFlex volume. * `Block` - It is a Block virtual disk. * `Filesystem` - It is a File system virtual disk. * `` - Disk mode is either unknown or not supported.
 		VolumeMode *string `json:"VolumeMode,omitempty"`
 		// The type of the HyperFlex volume.
-		VolumeType       *string                                   `json:"VolumeType,omitempty"`
-		Cluster          *HyperflexClusterRelationship             `json:"Cluster,omitempty"`
-		IweVirtualDisk   *VirtualizationIweVirtualDiskRelationship `json:"IweVirtualDisk,omitempty"`
-		StorageContainer *HyperflexStorageContainerRelationship    `json:"StorageContainer,omitempty"`
+		VolumeType       *string                                `json:"VolumeType,omitempty"`
+		Cluster          *HyperflexClusterRelationship          `json:"Cluster,omitempty"`
+		StorageContainer *HyperflexStorageContainerRelationship `json:"StorageContainer,omitempty"`
 	}
 
 	varHyperflexVolumeWithoutEmbeddedStruct := HyperflexVolumeWithoutEmbeddedStruct{}
@@ -682,7 +606,6 @@ func (o *HyperflexVolume) UnmarshalJSON(bytes []byte) (err error) {
 		varHyperflexVolume.ObjectType = varHyperflexVolumeWithoutEmbeddedStruct.ObjectType
 		varHyperflexVolume.Capacity = varHyperflexVolumeWithoutEmbeddedStruct.Capacity
 		varHyperflexVolume.ClientId = varHyperflexVolumeWithoutEmbeddedStruct.ClientId
-		varHyperflexVolume.KubernetesClusterName = varHyperflexVolumeWithoutEmbeddedStruct.KubernetesClusterName
 		varHyperflexVolume.LastModifiedTime = varHyperflexVolumeWithoutEmbeddedStruct.LastModifiedTime
 		varHyperflexVolume.LunUuid = varHyperflexVolumeWithoutEmbeddedStruct.LunUuid
 		varHyperflexVolume.SerialNumber = varHyperflexVolumeWithoutEmbeddedStruct.SerialNumber
@@ -692,7 +615,6 @@ func (o *HyperflexVolume) UnmarshalJSON(bytes []byte) (err error) {
 		varHyperflexVolume.VolumeMode = varHyperflexVolumeWithoutEmbeddedStruct.VolumeMode
 		varHyperflexVolume.VolumeType = varHyperflexVolumeWithoutEmbeddedStruct.VolumeType
 		varHyperflexVolume.Cluster = varHyperflexVolumeWithoutEmbeddedStruct.Cluster
-		varHyperflexVolume.IweVirtualDisk = varHyperflexVolumeWithoutEmbeddedStruct.IweVirtualDisk
 		varHyperflexVolume.StorageContainer = varHyperflexVolumeWithoutEmbeddedStruct.StorageContainer
 		*o = HyperflexVolume(varHyperflexVolume)
 	} else {
@@ -715,7 +637,6 @@ func (o *HyperflexVolume) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Capacity")
 		delete(additionalProperties, "ClientId")
-		delete(additionalProperties, "KubernetesClusterName")
 		delete(additionalProperties, "LastModifiedTime")
 		delete(additionalProperties, "LunUuid")
 		delete(additionalProperties, "SerialNumber")
@@ -725,7 +646,6 @@ func (o *HyperflexVolume) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "VolumeMode")
 		delete(additionalProperties, "VolumeType")
 		delete(additionalProperties, "Cluster")
-		delete(additionalProperties, "IweVirtualDisk")
 		delete(additionalProperties, "StorageContainer")
 
 		// remove fields from embedded structs

@@ -78,6 +78,17 @@ func resourceHyperflexClusterNetworkPolicy() *schema.Resource {
 					},
 				},
 			},
+			"cimc_management_mode": {
+				Description: "The mode configured on the CIMC management interface.\n* `OutOfBand` - The server uses out-of-band management, i.e. management traffic traverses through the management interfaces on the UCS Fabric Interconnects.\n* `InBand` - The server uses in-band management, i.e. management traffic traverses through the data uplink ports on the UCS Fabric Interconnects.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+					if val != nil {
+						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+					}
+					return
+				}},
 			"class_id": {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 				Type:        schema.TypeString,
@@ -1246,6 +1257,10 @@ func resourceHyperflexClusterNetworkPolicyRead(c context.Context, d *schema.Reso
 
 	if err := d.Set("ancestors", flattenListMoBaseMoRelationship(s.GetAncestors(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property Ancestors in HyperflexClusterNetworkPolicy object: %s", err.Error())
+	}
+
+	if err := d.Set("cimc_management_mode", (s.GetCimcManagementMode())); err != nil {
+		return diag.Errorf("error occurred while setting property CimcManagementMode in HyperflexClusterNetworkPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("class_id", (s.GetClassId())); err != nil {

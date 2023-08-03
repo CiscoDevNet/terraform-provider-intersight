@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
 **AllocationType** | Pointer to **string** | Type of the lease allocation either static or dynamic (i.e via pool). * &#x60;dynamic&#x60; - Identifiers to be allocated by system. * &#x60;static&#x60; - Identifiers are assigned by the user. | [optional] [default to "dynamic"]
+**HasDuplicate** | Pointer to **bool** | HasDuplicate represents if there are other pools in which this id exists. | [optional] [default to false]
 
 ## Methods
 
@@ -91,6 +92,31 @@ SetAllocationType sets AllocationType field to given value.
 `func (o *PoolAbstractLease) HasAllocationType() bool`
 
 HasAllocationType returns a boolean if a field has been set.
+
+### GetHasDuplicate
+
+`func (o *PoolAbstractLease) GetHasDuplicate() bool`
+
+GetHasDuplicate returns the HasDuplicate field if non-nil, zero value otherwise.
+
+### GetHasDuplicateOk
+
+`func (o *PoolAbstractLease) GetHasDuplicateOk() (*bool, bool)`
+
+GetHasDuplicateOk returns a tuple with the HasDuplicate field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetHasDuplicate
+
+`func (o *PoolAbstractLease) SetHasDuplicate(v bool)`
+
+SetHasDuplicate sets HasDuplicate field to given value.
+
+### HasHasDuplicate
+
+`func (o *PoolAbstractLease) HasHasDuplicate() bool`
+
+HasHasDuplicate returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
