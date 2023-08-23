@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-13010
+API version: 1.0.11-13376
 Contact: intersight@cisco.com
 */
 
@@ -26,6 +26,8 @@ type RecommendationPhysicalItem struct {
 	ObjectType string `json:"ObjectType"`
 	// Capacity of the physical entity added.
 	Capacity *int64 `json:"Capacity,omitempty"`
+	// Configuration path for the physical entity to be used when ordering it through the Cisco Commerce Workspace.
+	ConfigurationPath *string `json:"ConfigurationPath,omitempty"`
 	// Count of number of items/devices to be added.For example, number of disks to add on a node PhysicalItem in case of HyperFlex Cluster recommendation.
 	Count *int64 `json:"Count,omitempty"`
 	// If the PhysicalItem is new, this is set to true, else false.
@@ -152,6 +154,38 @@ func (o *RecommendationPhysicalItem) HasCapacity() bool {
 // SetCapacity gets a reference to the given int64 and assigns it to the Capacity field.
 func (o *RecommendationPhysicalItem) SetCapacity(v int64) {
 	o.Capacity = &v
+}
+
+// GetConfigurationPath returns the ConfigurationPath field value if set, zero value otherwise.
+func (o *RecommendationPhysicalItem) GetConfigurationPath() string {
+	if o == nil || o.ConfigurationPath == nil {
+		var ret string
+		return ret
+	}
+	return *o.ConfigurationPath
+}
+
+// GetConfigurationPathOk returns a tuple with the ConfigurationPath field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RecommendationPhysicalItem) GetConfigurationPathOk() (*string, bool) {
+	if o == nil || o.ConfigurationPath == nil {
+		return nil, false
+	}
+	return o.ConfigurationPath, true
+}
+
+// HasConfigurationPath returns a boolean if a field has been set.
+func (o *RecommendationPhysicalItem) HasConfigurationPath() bool {
+	if o != nil && o.ConfigurationPath != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetConfigurationPath gets a reference to the given string and assigns it to the ConfigurationPath field.
+func (o *RecommendationPhysicalItem) SetConfigurationPath(v string) {
+	o.ConfigurationPath = &v
 }
 
 // GetCount returns the Count field value if set, zero value otherwise.
@@ -526,6 +560,9 @@ func (o RecommendationPhysicalItem) MarshalJSON() ([]byte, error) {
 	if o.Capacity != nil {
 		toSerialize["Capacity"] = o.Capacity
 	}
+	if o.ConfigurationPath != nil {
+		toSerialize["ConfigurationPath"] = o.ConfigurationPath
+	}
 	if o.Count != nil {
 		toSerialize["Count"] = o.Count
 	}
@@ -575,6 +612,8 @@ func (o *RecommendationPhysicalItem) UnmarshalJSON(bytes []byte) (err error) {
 		ObjectType string `json:"ObjectType"`
 		// Capacity of the physical entity added.
 		Capacity *int64 `json:"Capacity,omitempty"`
+		// Configuration path for the physical entity to be used when ordering it through the Cisco Commerce Workspace.
+		ConfigurationPath *string `json:"ConfigurationPath,omitempty"`
 		// Count of number of items/devices to be added.For example, number of disks to add on a node PhysicalItem in case of HyperFlex Cluster recommendation.
 		Count *int64 `json:"Count,omitempty"`
 		// If the PhysicalItem is new, this is set to true, else false.
@@ -605,6 +644,7 @@ func (o *RecommendationPhysicalItem) UnmarshalJSON(bytes []byte) (err error) {
 		varRecommendationPhysicalItem.ClassId = varRecommendationPhysicalItemWithoutEmbeddedStruct.ClassId
 		varRecommendationPhysicalItem.ObjectType = varRecommendationPhysicalItemWithoutEmbeddedStruct.ObjectType
 		varRecommendationPhysicalItem.Capacity = varRecommendationPhysicalItemWithoutEmbeddedStruct.Capacity
+		varRecommendationPhysicalItem.ConfigurationPath = varRecommendationPhysicalItemWithoutEmbeddedStruct.ConfigurationPath
 		varRecommendationPhysicalItem.Count = varRecommendationPhysicalItemWithoutEmbeddedStruct.Count
 		varRecommendationPhysicalItem.IsNew = varRecommendationPhysicalItemWithoutEmbeddedStruct.IsNew
 		varRecommendationPhysicalItem.MaxCount = varRecommendationPhysicalItemWithoutEmbeddedStruct.MaxCount
@@ -636,6 +676,7 @@ func (o *RecommendationPhysicalItem) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Capacity")
+		delete(additionalProperties, "ConfigurationPath")
 		delete(additionalProperties, "Count")
 		delete(additionalProperties, "IsNew")
 		delete(additionalProperties, "MaxCount")

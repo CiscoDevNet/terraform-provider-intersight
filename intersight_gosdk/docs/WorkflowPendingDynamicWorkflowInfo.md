@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "workflow.PendingDynamicWorkflowInfo"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "workflow.PendingDynamicWorkflowInfo"]
-**Input** | Pointer to **interface{}** | The input data provided for workflow execution. | [optional] [readonly] 
+**Input** | Pointer to **interface{}** | The input for PendingDynamicWorkflowInfo is similar to workflowInfo besides the input is not fetched from workflow definition. | [optional] [readonly] 
 **Name** | Pointer to **string** | A name for the pending dynamic workflow. | [optional] 
 **Src** | Pointer to **string** | The src is workflow owner service. | [optional] [readonly] 
 **Status** | Pointer to **string** | The current status of the PendingDynamicWorkflowInfo. * &#x60;GatheringTasks&#x60; - Dynamic workflow is gathering tasks before workflow can start execution. * &#x60;Waiting&#x60; - Dynamic workflow is in waiting state and not yet started execution. * &#x60;RateLimit&#x60; - Dynamic workflow is rate limited and hasn&#39;t started execution. | [optional] [readonly] [default to "GatheringTasks"]

@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **Expiry** | Pointer to **time.Time** | The date and time when the access token expires. | [optional] [readonly] 
 **Issuer** | Pointer to **string** | Issuer of OAuth access token. | [optional] [readonly] 
 **RefreshExpiry** | Pointer to **time.Time** | The date and time when the refresh token expires. | [optional] [readonly] 
+**TokenOwner** | Pointer to **string** | The moid of the owner of the access token. | [optional] [readonly] 
 **Account** | Pointer to [**IamAccountRelationship**](IamAccountRelationship.md) |  | [optional] 
 
 ## Methods
@@ -170,6 +171,31 @@ SetRefreshExpiry sets RefreshExpiry field to given value.
 `func (o *OauthAccessTokenAllOf) HasRefreshExpiry() bool`
 
 HasRefreshExpiry returns a boolean if a field has been set.
+
+### GetTokenOwner
+
+`func (o *OauthAccessTokenAllOf) GetTokenOwner() string`
+
+GetTokenOwner returns the TokenOwner field if non-nil, zero value otherwise.
+
+### GetTokenOwnerOk
+
+`func (o *OauthAccessTokenAllOf) GetTokenOwnerOk() (*string, bool)`
+
+GetTokenOwnerOk returns a tuple with the TokenOwner field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTokenOwner
+
+`func (o *OauthAccessTokenAllOf) SetTokenOwner(v string)`
+
+SetTokenOwner sets TokenOwner field to given value.
+
+### HasTokenOwner
+
+`func (o *OauthAccessTokenAllOf) HasTokenOwner() bool`
+
+HasTokenOwner returns a boolean if a field has been set.
 
 ### GetAccount
 

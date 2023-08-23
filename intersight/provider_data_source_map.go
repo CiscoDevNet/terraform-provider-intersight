@@ -687,6 +687,7 @@ func GetDataSourceMapping() map[string]*schema.Resource {
 		"intersight_recommendation_hardware_expansion_request_item":          dataSourceRecommendationHardwareExpansionRequestItem(),
 		"intersight_recommendation_physical_item":                            dataSourceRecommendationPhysicalItem(),
 		"intersight_recommendation_purchase_order_estimate":                  dataSourceRecommendationPurchaseOrderEstimate(),
+		"intersight_recommendation_purchase_order_list":                      dataSourceRecommendationPurchaseOrderList(),
 		"intersight_recommendation_software_item":                            dataSourceRecommendationSoftwareItem(),
 		"intersight_recovery_backup_config_policy":                           dataSourceRecoveryBackupConfigPolicy(),
 		"intersight_recovery_backup_profile":                                 dataSourceRecoveryBackupProfile(),

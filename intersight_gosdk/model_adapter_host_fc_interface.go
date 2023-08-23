@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-13010
+API version: 1.0.11-13376
 Contact: intersight@cisco.com
 */
 
@@ -45,6 +45,8 @@ type AdapterHostFcInterface struct {
 	PeerDn *string `json:"PeerDn,omitempty"`
 	// Name given for San PinGroup.
 	PinGroupName *string `json:"PinGroupName,omitempty"`
+	// Identifier of the virtual fibre channel (Vfc) interface on the networking component (e.g., Fabric Interconnect) for the corresponding Host Fibre Channel Interface.
+	VifId *int64 `json:"VifId,omitempty"`
 	// The uniquely distinguishable user configured World Wide Node Name of the Host.
 	Wwnn *string `json:"Wwnn,omitempty"`
 	// The uniquely distinguishable user configured World Wide Port Name of the Host Fibre Channel Interface.
@@ -482,6 +484,38 @@ func (o *AdapterHostFcInterface) SetPinGroupName(v string) {
 	o.PinGroupName = &v
 }
 
+// GetVifId returns the VifId field value if set, zero value otherwise.
+func (o *AdapterHostFcInterface) GetVifId() int64 {
+	if o == nil || o.VifId == nil {
+		var ret int64
+		return ret
+	}
+	return *o.VifId
+}
+
+// GetVifIdOk returns a tuple with the VifId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AdapterHostFcInterface) GetVifIdOk() (*int64, bool) {
+	if o == nil || o.VifId == nil {
+		return nil, false
+	}
+	return o.VifId, true
+}
+
+// HasVifId returns a boolean if a field has been set.
+func (o *AdapterHostFcInterface) HasVifId() bool {
+	if o != nil && o.VifId != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetVifId gets a reference to the given int64 and assigns it to the VifId field.
+func (o *AdapterHostFcInterface) SetVifId(v int64) {
+	o.VifId = &v
+}
+
 // GetWwnn returns the Wwnn field value if set, zero value otherwise.
 func (o *AdapterHostFcInterface) GetWwnn() string {
 	if o == nil || o.Wwnn == nil {
@@ -723,6 +757,9 @@ func (o AdapterHostFcInterface) MarshalJSON() ([]byte, error) {
 	if o.PinGroupName != nil {
 		toSerialize["PinGroupName"] = o.PinGroupName
 	}
+	if o.VifId != nil {
+		toSerialize["VifId"] = o.VifId
+	}
 	if o.Wwnn != nil {
 		toSerialize["Wwnn"] = o.Wwnn
 	}
@@ -776,6 +813,8 @@ func (o *AdapterHostFcInterface) UnmarshalJSON(bytes []byte) (err error) {
 		PeerDn *string `json:"PeerDn,omitempty"`
 		// Name given for San PinGroup.
 		PinGroupName *string `json:"PinGroupName,omitempty"`
+		// Identifier of the virtual fibre channel (Vfc) interface on the networking component (e.g., Fabric Interconnect) for the corresponding Host Fibre Channel Interface.
+		VifId *int64 `json:"VifId,omitempty"`
 		// The uniquely distinguishable user configured World Wide Node Name of the Host.
 		Wwnn *string `json:"Wwnn,omitempty"`
 		// The uniquely distinguishable user configured World Wide Port Name of the Host Fibre Channel Interface.
@@ -804,6 +843,7 @@ func (o *AdapterHostFcInterface) UnmarshalJSON(bytes []byte) (err error) {
 		varAdapterHostFcInterface.OriginalWwpn = varAdapterHostFcInterfaceWithoutEmbeddedStruct.OriginalWwpn
 		varAdapterHostFcInterface.PeerDn = varAdapterHostFcInterfaceWithoutEmbeddedStruct.PeerDn
 		varAdapterHostFcInterface.PinGroupName = varAdapterHostFcInterfaceWithoutEmbeddedStruct.PinGroupName
+		varAdapterHostFcInterface.VifId = varAdapterHostFcInterfaceWithoutEmbeddedStruct.VifId
 		varAdapterHostFcInterface.Wwnn = varAdapterHostFcInterfaceWithoutEmbeddedStruct.Wwnn
 		varAdapterHostFcInterface.Wwpn = varAdapterHostFcInterfaceWithoutEmbeddedStruct.Wwpn
 		varAdapterHostFcInterface.AdapterUnit = varAdapterHostFcInterfaceWithoutEmbeddedStruct.AdapterUnit
@@ -840,6 +880,7 @@ func (o *AdapterHostFcInterface) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "OriginalWwpn")
 		delete(additionalProperties, "PeerDn")
 		delete(additionalProperties, "PinGroupName")
+		delete(additionalProperties, "VifId")
 		delete(additionalProperties, "Wwnn")
 		delete(additionalProperties, "Wwpn")
 		delete(additionalProperties, "AdapterUnit")

@@ -39,6 +39,7 @@ The following arguments can be used to get data of already created objects in In
 * `serial`:(string) This field displays the serial number of the associated component or hardware. 
 * `shared_scope`:(string) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
 * `vendor`:(string) This field displays the vendor information of the associated component or hardware. 
+* `vif_id`:(int) Identifier of the virtual fibre channel (Vfc) interface on the networking component (e.g., Fabric Interconnect) for the corresponding Host Fibre Channel Interface. 
 * `wwnn`:(string) The uniquely distinguishable user configured World Wide Node Name of the Host. 
 * `wwpn`:(string) The uniquely distinguishable user configured World Wide Port Name of the Host Fibre Channel Interface. 
  
