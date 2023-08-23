@@ -159,6 +159,7 @@ Name | Type | Description | Notes
 **OnboardScuStorageSupport** | Pointer to **string** | BIOS Token for setting Onboard SCU Storage Support configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;enabled&#x60; - Enables the BIOS setting. * &#x60;disabled&#x60; - Disables the BIOS setting. | [optional] [default to "platform-default"]
 **OnboardScuStorageSwStack** | Pointer to **string** | BIOS Token for setting Onboard SCU Storage SW Stack configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;Intel RSTe&#x60; - Value - Intel RSTe for configuring OnboardScuStorageSwStack token. * &#x60;LSI SW RAID&#x60; - Value - LSI SW RAID for configuring OnboardScuStorageSwStack token. | [optional] [default to "platform-default"]
 **OperationMode** | Pointer to **string** | BIOS Token for setting Operation Mode configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;Test Only&#x60; - Value - Test Only for configuring OperationMode token. * &#x60;Test and Repair&#x60; - Value - Test and Repair for configuring OperationMode token. | [optional] [default to "platform-default"]
+**OptimizedPowerMode** | Pointer to **string** | BIOS Token for setting Optimized Power Mode configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;enabled&#x60; - Enables the BIOS setting. * &#x60;disabled&#x60; - Disables the BIOS setting. | [optional] [default to "platform-default"]
 **OsBootWatchdogTimer** | Pointer to **string** | BIOS Token for setting OS Boot Watchdog Timer configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;enabled&#x60; - Enables the BIOS setting. * &#x60;disabled&#x60; - Disables the BIOS setting. | [optional] [default to "platform-default"]
 **OsBootWatchdogTimerPolicy** | Pointer to **string** | BIOS Token for setting OS Boot Watchdog Timer Policy configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;do-nothing&#x60; - Value - do-nothing for configuring OsBootWatchdogTimerPolicy token. * &#x60;power-off&#x60; - Value - power-off for configuring OsBootWatchdogTimerPolicy token. * &#x60;reset&#x60; - Value - reset for configuring OsBootWatchdogTimerPolicy token. | [optional] [default to "platform-default"]
 **OsBootWatchdogTimerTimeout** | Pointer to **string** | BIOS Token for setting OS Boot Watchdog Timer Timeout configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;5-minutes&#x60; - Value - 5-minutes for configuring OsBootWatchdogTimerTimeout token. * &#x60;10-minutes&#x60; - Value - 10-minutes for configuring OsBootWatchdogTimerTimeout token. * &#x60;15-minutes&#x60; - Value - 15-minutes for configuring OsBootWatchdogTimerTimeout token. * &#x60;20-minutes&#x60; - Value - 20-minutes for configuring OsBootWatchdogTimerTimeout token. | [optional] [default to "platform-default"]
@@ -204,6 +205,7 @@ Name | Type | Description | Notes
 **PopSupport** | Pointer to **string** | BIOS Token for setting Power ON Password configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;enabled&#x60; - Enables the BIOS setting. * &#x60;disabled&#x60; - Disables the BIOS setting. | [optional] [default to "platform-default"]
 **PostErrorPause** | Pointer to **string** | BIOS Token for setting POST Error Pause configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;enabled&#x60; - Enables the BIOS setting. * &#x60;disabled&#x60; - Disables the BIOS setting. | [optional] [default to "platform-default"]
 **PostPackageRepair** | Pointer to **string** | BIOS Token for setting Post Package Repair configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;Disabled&#x60; - Value - Disabled for configuring PostPackageRepair token. * &#x60;Hard PPR&#x60; - Value - Hard PPR for configuring PostPackageRepair token. | [optional] [default to "platform-default"]
+**PrmrrSize** | Pointer to **string** | BIOS Token for setting PRMRR Size configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;1G&#x60; - Value - 1G for configuring PrmrrSize token. * &#x60;2G&#x60; - Value - 2G for configuring PrmrrSize token. * &#x60;4G&#x60; - Value - 4G for configuring PrmrrSize token. * &#x60;8G&#x60; - Value - 8G for configuring PrmrrSize token. * &#x60;16G&#x60; - Value - 16G for configuring PrmrrSize token. * &#x60;32G&#x60; - Value - 32G for configuring PrmrrSize token. * &#x60;64G&#x60; - Value - 64G for configuring PrmrrSize token. * &#x60;128G&#x60; - Value - 128G for configuring PrmrrSize token. * &#x60;256G&#x60; - Value - 256G for configuring PrmrrSize token. * &#x60;512G&#x60; - Value - 512G for configuring PrmrrSize token. * &#x60;128M&#x60; - Value - 128M for configuring PrmrrSize token. * &#x60;256M&#x60; - Value - 256M for configuring PrmrrSize token. * &#x60;512M&#x60; - Value - 512M for configuring PrmrrSize token. * &#x60;Invalid Config.&#x60; - Value - Invalid Config for configuring PrmrrSize token. | [optional] [default to "platform-default"]
 **ProcessorC1e** | Pointer to **string** | BIOS Token for setting Processor C1E configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;enabled&#x60; - Enables the BIOS setting. * &#x60;disabled&#x60; - Disables the BIOS setting. | [optional] [default to "platform-default"]
 **ProcessorC3report** | Pointer to **string** | BIOS Token for setting Processor C3 Report configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;enabled&#x60; - Enables the BIOS setting. * &#x60;disabled&#x60; - Disables the BIOS setting. | [optional] [default to "platform-default"]
 **ProcessorC6report** | Pointer to **string** | BIOS Token for setting Processor C6 Report configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;enabled&#x60; - Enables the BIOS setting. * &#x60;disabled&#x60; - Disables the BIOS setting. | [optional] [default to "platform-default"]
@@ -4303,6 +4305,31 @@ SetOperationMode sets OperationMode field to given value.
 
 HasOperationMode returns a boolean if a field has been set.
 
+### GetOptimizedPowerMode
+
+`func (o *BiosPolicyAllOf) GetOptimizedPowerMode() string`
+
+GetOptimizedPowerMode returns the OptimizedPowerMode field if non-nil, zero value otherwise.
+
+### GetOptimizedPowerModeOk
+
+`func (o *BiosPolicyAllOf) GetOptimizedPowerModeOk() (*string, bool)`
+
+GetOptimizedPowerModeOk returns a tuple with the OptimizedPowerMode field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOptimizedPowerMode
+
+`func (o *BiosPolicyAllOf) SetOptimizedPowerMode(v string)`
+
+SetOptimizedPowerMode sets OptimizedPowerMode field to given value.
+
+### HasOptimizedPowerMode
+
+`func (o *BiosPolicyAllOf) HasOptimizedPowerMode() bool`
+
+HasOptimizedPowerMode returns a boolean if a field has been set.
+
 ### GetOsBootWatchdogTimer
 
 `func (o *BiosPolicyAllOf) GetOsBootWatchdogTimer() string`
@@ -5427,6 +5454,31 @@ SetPostPackageRepair sets PostPackageRepair field to given value.
 `func (o *BiosPolicyAllOf) HasPostPackageRepair() bool`
 
 HasPostPackageRepair returns a boolean if a field has been set.
+
+### GetPrmrrSize
+
+`func (o *BiosPolicyAllOf) GetPrmrrSize() string`
+
+GetPrmrrSize returns the PrmrrSize field if non-nil, zero value otherwise.
+
+### GetPrmrrSizeOk
+
+`func (o *BiosPolicyAllOf) GetPrmrrSizeOk() (*string, bool)`
+
+GetPrmrrSizeOk returns a tuple with the PrmrrSize field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPrmrrSize
+
+`func (o *BiosPolicyAllOf) SetPrmrrSize(v string)`
+
+SetPrmrrSize sets PrmrrSize field to given value.
+
+### HasPrmrrSize
+
+`func (o *BiosPolicyAllOf) HasPrmrrSize() bool`
+
+HasPrmrrSize returns a boolean if a field has been set.
 
 ### GetProcessorC1e
 

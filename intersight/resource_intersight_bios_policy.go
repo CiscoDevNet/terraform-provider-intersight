@@ -1213,6 +1213,13 @@ func resourceBiosPolicy() *schema.Resource {
 				Optional:     true,
 				Default:      "platform-default",
 			},
+			"optimized_power_mode": {
+				Description:  "BIOS Token for setting Optimized Power Mode configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `enabled` - Enables the BIOS setting.\n* `disabled` - Disables the BIOS setting.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"platform-default", "enabled", "disabled"}, false),
+				Optional:     true,
+				Default:      "platform-default",
+			},
 			"organization": {
 				Description: "A reference to a organizationOrganization resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
@@ -1653,6 +1660,13 @@ func resourceBiosPolicy() *schema.Resource {
 				Description:  "BIOS Token for setting Post Package Repair configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `Disabled` - Value - Disabled for configuring PostPackageRepair token.\n* `Hard PPR` - Value - Hard PPR for configuring PostPackageRepair token.",
 				Type:         schema.TypeString,
 				ValidateFunc: validation.StringInSlice([]string{"platform-default", "Disabled", "Hard PPR"}, false),
+				Optional:     true,
+				Default:      "platform-default",
+			},
+			"prmrr_size": {
+				Description:  "BIOS Token for setting PRMRR Size configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `1G` - Value - 1G for configuring PrmrrSize token.\n* `2G` - Value - 2G for configuring PrmrrSize token.\n* `4G` - Value - 4G for configuring PrmrrSize token.\n* `8G` - Value - 8G for configuring PrmrrSize token.\n* `16G` - Value - 16G for configuring PrmrrSize token.\n* `32G` - Value - 32G for configuring PrmrrSize token.\n* `64G` - Value - 64G for configuring PrmrrSize token.\n* `128G` - Value - 128G for configuring PrmrrSize token.\n* `256G` - Value - 256G for configuring PrmrrSize token.\n* `512G` - Value - 512G for configuring PrmrrSize token.\n* `128M` - Value - 128M for configuring PrmrrSize token.\n* `256M` - Value - 256M for configuring PrmrrSize token.\n* `512M` - Value - 512M for configuring PrmrrSize token.\n* `Invalid Config.` - Value - Invalid Config for configuring PrmrrSize token.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"platform-default", "1G", "2G", "4G", "8G", "16G", "32G", "64G", "128G", "256G", "512G", "128M", "256M", "512M", "Invalid Config."}, false),
 				Optional:     true,
 				Default:      "platform-default",
 			},
@@ -4171,6 +4185,11 @@ func resourceBiosPolicyCreate(c context.Context, d *schema.ResourceData, meta in
 		o.SetOperationMode(x)
 	}
 
+	if v, ok := d.GetOk("optimized_power_mode"); ok {
+		x := (v.(string))
+		o.SetOptimizedPowerMode(x)
+	}
+
 	if v, ok := d.GetOk("organization"); ok {
 		p := make([]models.OrganizationOrganizationRelationship, 0, 1)
 		s := v.([]interface{})
@@ -4437,6 +4456,11 @@ func resourceBiosPolicyCreate(c context.Context, d *schema.ResourceData, meta in
 	if v, ok := d.GetOk("post_package_repair"); ok {
 		x := (v.(string))
 		o.SetPostPackageRepair(x)
+	}
+
+	if v, ok := d.GetOk("prmrr_size"); ok {
+		x := (v.(string))
+		o.SetPrmrrSize(x)
 	}
 
 	if v, ok := d.GetOk("processor_c1e"); ok {
@@ -6288,6 +6312,10 @@ func resourceBiosPolicyRead(c context.Context, d *schema.ResourceData, meta inte
 		return diag.Errorf("error occurred while setting property OperationMode in BiosPolicy object: %s", err.Error())
 	}
 
+	if err := d.Set("optimized_power_mode", (s.GetOptimizedPowerMode())); err != nil {
+		return diag.Errorf("error occurred while setting property OptimizedPowerMode in BiosPolicy object: %s", err.Error())
+	}
+
 	if err := d.Set("organization", flattenMapOrganizationOrganizationRelationship(s.GetOrganization(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property Organization in BiosPolicy object: %s", err.Error())
 	}
@@ -6482,6 +6510,10 @@ func resourceBiosPolicyRead(c context.Context, d *schema.ResourceData, meta inte
 
 	if err := d.Set("post_package_repair", (s.GetPostPackageRepair())); err != nil {
 		return diag.Errorf("error occurred while setting property PostPackageRepair in BiosPolicy object: %s", err.Error())
+	}
+
+	if err := d.Set("prmrr_size", (s.GetPrmrrSize())); err != nil {
+		return diag.Errorf("error occurred while setting property PrmrrSize in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("processor_c1e", (s.GetProcessorC1e())); err != nil {
@@ -8309,6 +8341,12 @@ func resourceBiosPolicyUpdate(c context.Context, d *schema.ResourceData, meta in
 		o.SetOperationMode(x)
 	}
 
+	if d.HasChange("optimized_power_mode") {
+		v := d.Get("optimized_power_mode")
+		x := (v.(string))
+		o.SetOptimizedPowerMode(x)
+	}
+
 	if d.HasChange("organization") {
 		v := d.Get("organization")
 		p := make([]models.OrganizationOrganizationRelationship, 0, 1)
@@ -8621,6 +8659,12 @@ func resourceBiosPolicyUpdate(c context.Context, d *schema.ResourceData, meta in
 		v := d.Get("post_package_repair")
 		x := (v.(string))
 		o.SetPostPackageRepair(x)
+	}
+
+	if d.HasChange("prmrr_size") {
+		v := d.Get("prmrr_size")
+		x := (v.(string))
+		o.SetPrmrrSize(x)
 	}
 
 	if d.HasChange("processor_c1e") {

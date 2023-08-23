@@ -865,6 +865,11 @@ func getBiosPolicySchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"optimized_power_mode": {
+			Description: "BIOS Token for setting Optimized Power Mode configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `enabled` - Enables the BIOS setting.\n* `disabled` - Disables the BIOS setting.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"organization": {
 			Description: "A reference to a organizationOrganization resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 			Type:        schema.TypeList,
@@ -1196,6 +1201,11 @@ func getBiosPolicySchema() map[string]*schema.Schema {
 		},
 		"post_package_repair": {
 			Description: "BIOS Token for setting Post Package Repair configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `Disabled` - Value - Disabled for configuring PostPackageRepair token.\n* `Hard PPR` - Value - Hard PPR for configuring PostPackageRepair token.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"prmrr_size": {
+			Description: "BIOS Token for setting PRMRR Size configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `1G` - Value - 1G for configuring PrmrrSize token.\n* `2G` - Value - 2G for configuring PrmrrSize token.\n* `4G` - Value - 4G for configuring PrmrrSize token.\n* `8G` - Value - 8G for configuring PrmrrSize token.\n* `16G` - Value - 16G for configuring PrmrrSize token.\n* `32G` - Value - 32G for configuring PrmrrSize token.\n* `64G` - Value - 64G for configuring PrmrrSize token.\n* `128G` - Value - 128G for configuring PrmrrSize token.\n* `256G` - Value - 256G for configuring PrmrrSize token.\n* `512G` - Value - 512G for configuring PrmrrSize token.\n* `128M` - Value - 128M for configuring PrmrrSize token.\n* `256M` - Value - 256M for configuring PrmrrSize token.\n* `512M` - Value - 512M for configuring PrmrrSize token.\n* `Invalid Config.` - Value - Invalid Config for configuring PrmrrSize token.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -3315,6 +3325,11 @@ func dataSourceBiosPolicyRead(c context.Context, d *schema.ResourceData, meta in
 		o.SetOperationMode(x)
 	}
 
+	if v, ok := d.GetOk("optimized_power_mode"); ok {
+		x := (v.(string))
+		o.SetOptimizedPowerMode(x)
+	}
+
 	if v, ok := d.GetOk("organization"); ok {
 		p := make([]models.OrganizationOrganizationRelationship, 0, 1)
 		s := v.([]interface{})
@@ -3675,6 +3690,11 @@ func dataSourceBiosPolicyRead(c context.Context, d *schema.ResourceData, meta in
 	if v, ok := d.GetOk("post_package_repair"); ok {
 		x := (v.(string))
 		o.SetPostPackageRepair(x)
+	}
+
+	if v, ok := d.GetOk("prmrr_size"); ok {
+		x := (v.(string))
+		o.SetPrmrrSize(x)
 	}
 
 	if v, ok := d.GetOk("processor_c1e"); ok {
@@ -5091,6 +5111,7 @@ func dataSourceBiosPolicyRead(c context.Context, d *schema.ResourceData, meta in
 				temp["onboard_scu_storage_support"] = (s.GetOnboardScuStorageSupport())
 				temp["onboard_scu_storage_sw_stack"] = (s.GetOnboardScuStorageSwStack())
 				temp["operation_mode"] = (s.GetOperationMode())
+				temp["optimized_power_mode"] = (s.GetOptimizedPowerMode())
 
 				temp["organization"] = flattenMapOrganizationOrganizationRelationship(s.GetOrganization(), d)
 				temp["os_boot_watchdog_timer"] = (s.GetOsBootWatchdogTimer())
@@ -5143,6 +5164,7 @@ func dataSourceBiosPolicyRead(c context.Context, d *schema.ResourceData, meta in
 				temp["pop_support"] = (s.GetPopSupport())
 				temp["post_error_pause"] = (s.GetPostErrorPause())
 				temp["post_package_repair"] = (s.GetPostPackageRepair())
+				temp["prmrr_size"] = (s.GetPrmrrSize())
 				temp["processor_c1e"] = (s.GetProcessorC1e())
 				temp["processor_c3report"] = (s.GetProcessorC3report())
 				temp["processor_c6report"] = (s.GetProcessorC6report())

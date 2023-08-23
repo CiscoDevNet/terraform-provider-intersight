@@ -22,7 +22,7 @@ func getRecommendationCapacityRunwaySchema() map[string]*schema.Schema {
 		Optional:    true,
 	},
 		"additional_capacity": {
-			Description: "Additional capacity is the capacity which is needed more after exhausing all hardware on current cluster.",
+			Description: "Additional capacity is the capacity which is needed more after exhausting all hardware on current cluster.",
 			Type:        schema.TypeInt,
 			Optional:    true,
 		},

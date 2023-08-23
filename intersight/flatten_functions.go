@@ -10481,6 +10481,24 @@ func flattenMapComputeVmediaRelationship(p models.ComputeVmediaRelationship, d *
 	computevmediarelationships = append(computevmediarelationships, computevmediarelationship)
 	return computevmediarelationships
 }
+func flattenMapCondAlarmDefinitionRelationship(p models.CondAlarmDefinitionRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var condalarmdefinitionrelationships []map[string]interface{}
+	var ret models.CondAlarmDefinitionRelationship
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	x := p
+	item := x.MoMoRef
+	condalarmdefinitionrelationship := make(map[string]interface{})
+	condalarmdefinitionrelationship["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	condalarmdefinitionrelationship["class_id"] = item.GetClassId()
+	condalarmdefinitionrelationship["moid"] = item.GetMoid()
+	condalarmdefinitionrelationship["object_type"] = item.GetObjectType()
+	condalarmdefinitionrelationship["selector"] = item.GetSelector()
+
+	condalarmdefinitionrelationships = append(condalarmdefinitionrelationships, condalarmdefinitionrelationship)
+	return condalarmdefinitionrelationships
+}
 func flattenMapCondAlarmSummary(p models.CondAlarmSummary, d *schema.ResourceData) []map[string]interface{} {
 	var condalarmsummarys []map[string]interface{}
 	var ret models.CondAlarmSummary
@@ -15447,7 +15465,7 @@ func flattenMapKubernetesProxyConfig(p models.KubernetesProxyConfig, d *schema.R
 	kubernetesproxyconfig["hostname"] = item.GetHostname()
 	kubernetesproxyconfig["is_password_set"] = item.GetIsPasswordSet()
 	kubernetesproxyconfig["object_type"] = item.GetObjectType()
-	password_x, exists := d.GetOk("docker_http_proxy")
+	password_x, exists := d.GetOk("http_proxy")
 	if exists && password_x != nil {
 		password_y := password_x.([]interface{})[0].(map[string]interface{})
 		kubernetesproxyconfig["password"] = password_y["password"]

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-13010
+API version: 1.0.11-13376
 Contact: intersight@cisco.com
 */
 
@@ -327,6 +327,8 @@ type BiosPolicyAllOf struct {
 	OnboardScuStorageSwStack *string `json:"OnboardScuStorageSwStack,omitempty"`
 	// BIOS Token for setting Operation Mode configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Test Only` - Value - Test Only for configuring OperationMode token. * `Test and Repair` - Value - Test and Repair for configuring OperationMode token.
 	OperationMode *string `json:"OperationMode,omitempty"`
+	// BIOS Token for setting Optimized Power Mode configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
+	OptimizedPowerMode *string `json:"OptimizedPowerMode,omitempty"`
 	// BIOS Token for setting OS Boot Watchdog Timer configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
 	OsBootWatchdogTimer *string `json:"OsBootWatchdogTimer,omitempty"`
 	// BIOS Token for setting OS Boot Watchdog Timer Policy configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `do-nothing` - Value - do-nothing for configuring OsBootWatchdogTimerPolicy token. * `power-off` - Value - power-off for configuring OsBootWatchdogTimerPolicy token. * `reset` - Value - reset for configuring OsBootWatchdogTimerPolicy token.
@@ -417,6 +419,8 @@ type BiosPolicyAllOf struct {
 	PostErrorPause *string `json:"PostErrorPause,omitempty"`
 	// BIOS Token for setting Post Package Repair configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Disabled` - Value - Disabled for configuring PostPackageRepair token. * `Hard PPR` - Value - Hard PPR for configuring PostPackageRepair token.
 	PostPackageRepair *string `json:"PostPackageRepair,omitempty"`
+	// BIOS Token for setting PRMRR Size configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `1G` - Value - 1G for configuring PrmrrSize token. * `2G` - Value - 2G for configuring PrmrrSize token. * `4G` - Value - 4G for configuring PrmrrSize token. * `8G` - Value - 8G for configuring PrmrrSize token. * `16G` - Value - 16G for configuring PrmrrSize token. * `32G` - Value - 32G for configuring PrmrrSize token. * `64G` - Value - 64G for configuring PrmrrSize token. * `128G` - Value - 128G for configuring PrmrrSize token. * `256G` - Value - 256G for configuring PrmrrSize token. * `512G` - Value - 512G for configuring PrmrrSize token. * `128M` - Value - 128M for configuring PrmrrSize token. * `256M` - Value - 256M for configuring PrmrrSize token. * `512M` - Value - 512M for configuring PrmrrSize token. * `Invalid Config.` - Value - Invalid Config for configuring PrmrrSize token.
+	PrmrrSize *string `json:"PrmrrSize,omitempty"`
 	// BIOS Token for setting Processor C1E configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
 	ProcessorC1e *string `json:"ProcessorC1e,omitempty"`
 	// BIOS Token for setting Processor C3 Report configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
@@ -1163,6 +1167,8 @@ func NewBiosPolicyAllOf(classId string, objectType string) *BiosPolicyAllOf {
 	this.OnboardScuStorageSwStack = &onboardScuStorageSwStack
 	var operationMode string = "platform-default"
 	this.OperationMode = &operationMode
+	var optimizedPowerMode string = "platform-default"
+	this.OptimizedPowerMode = &optimizedPowerMode
 	var osBootWatchdogTimer string = "platform-default"
 	this.OsBootWatchdogTimer = &osBootWatchdogTimer
 	var osBootWatchdogTimerPolicy string = "platform-default"
@@ -1253,6 +1259,8 @@ func NewBiosPolicyAllOf(classId string, objectType string) *BiosPolicyAllOf {
 	this.PostErrorPause = &postErrorPause
 	var postPackageRepair string = "platform-default"
 	this.PostPackageRepair = &postPackageRepair
+	var prmrrSize string = "platform-default"
+	this.PrmrrSize = &prmrrSize
 	var processorC1e string = "platform-default"
 	this.ProcessorC1e = &processorC1e
 	var processorC3report string = "platform-default"
@@ -1995,6 +2003,8 @@ func NewBiosPolicyAllOfWithDefaults() *BiosPolicyAllOf {
 	this.OnboardScuStorageSwStack = &onboardScuStorageSwStack
 	var operationMode string = "platform-default"
 	this.OperationMode = &operationMode
+	var optimizedPowerMode string = "platform-default"
+	this.OptimizedPowerMode = &optimizedPowerMode
 	var osBootWatchdogTimer string = "platform-default"
 	this.OsBootWatchdogTimer = &osBootWatchdogTimer
 	var osBootWatchdogTimerPolicy string = "platform-default"
@@ -2085,6 +2095,8 @@ func NewBiosPolicyAllOfWithDefaults() *BiosPolicyAllOf {
 	this.PostErrorPause = &postErrorPause
 	var postPackageRepair string = "platform-default"
 	this.PostPackageRepair = &postPackageRepair
+	var prmrrSize string = "platform-default"
+	this.PrmrrSize = &prmrrSize
 	var processorC1e string = "platform-default"
 	this.ProcessorC1e = &processorC1e
 	var processorC3report string = "platform-default"
@@ -7456,6 +7468,38 @@ func (o *BiosPolicyAllOf) SetOperationMode(v string) {
 	o.OperationMode = &v
 }
 
+// GetOptimizedPowerMode returns the OptimizedPowerMode field value if set, zero value otherwise.
+func (o *BiosPolicyAllOf) GetOptimizedPowerMode() string {
+	if o == nil || o.OptimizedPowerMode == nil {
+		var ret string
+		return ret
+	}
+	return *o.OptimizedPowerMode
+}
+
+// GetOptimizedPowerModeOk returns a tuple with the OptimizedPowerMode field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BiosPolicyAllOf) GetOptimizedPowerModeOk() (*string, bool) {
+	if o == nil || o.OptimizedPowerMode == nil {
+		return nil, false
+	}
+	return o.OptimizedPowerMode, true
+}
+
+// HasOptimizedPowerMode returns a boolean if a field has been set.
+func (o *BiosPolicyAllOf) HasOptimizedPowerMode() bool {
+	if o != nil && o.OptimizedPowerMode != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetOptimizedPowerMode gets a reference to the given string and assigns it to the OptimizedPowerMode field.
+func (o *BiosPolicyAllOf) SetOptimizedPowerMode(v string) {
+	o.OptimizedPowerMode = &v
+}
+
 // GetOsBootWatchdogTimer returns the OsBootWatchdogTimer field value if set, zero value otherwise.
 func (o *BiosPolicyAllOf) GetOsBootWatchdogTimer() string {
 	if o == nil || o.OsBootWatchdogTimer == nil {
@@ -8894,6 +8938,38 @@ func (o *BiosPolicyAllOf) HasPostPackageRepair() bool {
 // SetPostPackageRepair gets a reference to the given string and assigns it to the PostPackageRepair field.
 func (o *BiosPolicyAllOf) SetPostPackageRepair(v string) {
 	o.PostPackageRepair = &v
+}
+
+// GetPrmrrSize returns the PrmrrSize field value if set, zero value otherwise.
+func (o *BiosPolicyAllOf) GetPrmrrSize() string {
+	if o == nil || o.PrmrrSize == nil {
+		var ret string
+		return ret
+	}
+	return *o.PrmrrSize
+}
+
+// GetPrmrrSizeOk returns a tuple with the PrmrrSize field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BiosPolicyAllOf) GetPrmrrSizeOk() (*string, bool) {
+	if o == nil || o.PrmrrSize == nil {
+		return nil, false
+	}
+	return o.PrmrrSize, true
+}
+
+// HasPrmrrSize returns a boolean if a field has been set.
+func (o *BiosPolicyAllOf) HasPrmrrSize() bool {
+	if o != nil && o.PrmrrSize != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetPrmrrSize gets a reference to the given string and assigns it to the PrmrrSize field.
+func (o *BiosPolicyAllOf) SetPrmrrSize(v string) {
+	o.PrmrrSize = &v
 }
 
 // GetProcessorC1e returns the ProcessorC1e field value if set, zero value otherwise.
@@ -16212,6 +16288,9 @@ func (o BiosPolicyAllOf) MarshalJSON() ([]byte, error) {
 	if o.OperationMode != nil {
 		toSerialize["OperationMode"] = o.OperationMode
 	}
+	if o.OptimizedPowerMode != nil {
+		toSerialize["OptimizedPowerMode"] = o.OptimizedPowerMode
+	}
 	if o.OsBootWatchdogTimer != nil {
 		toSerialize["OsBootWatchdogTimer"] = o.OsBootWatchdogTimer
 	}
@@ -16346,6 +16425,9 @@ func (o BiosPolicyAllOf) MarshalJSON() ([]byte, error) {
 	}
 	if o.PostPackageRepair != nil {
 		toSerialize["PostPackageRepair"] = o.PostPackageRepair
+	}
+	if o.PrmrrSize != nil {
+		toSerialize["PrmrrSize"] = o.PrmrrSize
 	}
 	if o.ProcessorC1e != nil {
 		toSerialize["ProcessorC1e"] = o.ProcessorC1e
@@ -17162,6 +17244,7 @@ func (o *BiosPolicyAllOf) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "OnboardScuStorageSupport")
 		delete(additionalProperties, "OnboardScuStorageSwStack")
 		delete(additionalProperties, "OperationMode")
+		delete(additionalProperties, "OptimizedPowerMode")
 		delete(additionalProperties, "OsBootWatchdogTimer")
 		delete(additionalProperties, "OsBootWatchdogTimerPolicy")
 		delete(additionalProperties, "OsBootWatchdogTimerTimeout")
@@ -17207,6 +17290,7 @@ func (o *BiosPolicyAllOf) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "PopSupport")
 		delete(additionalProperties, "PostErrorPause")
 		delete(additionalProperties, "PostPackageRepair")
+		delete(additionalProperties, "PrmrrSize")
 		delete(additionalProperties, "ProcessorC1e")
 		delete(additionalProperties, "ProcessorC3report")
 		delete(additionalProperties, "ProcessorC6report")

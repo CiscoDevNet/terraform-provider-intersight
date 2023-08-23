@@ -18,6 +18,8 @@ Name | Type | Description | Notes
 **PciAddr** | Pointer to **string** | The PCI address of the Host Ethernet Interface. | [optional] [readonly] 
 **PeerDn** | Pointer to **string** | The distinguished name of the peer endpoint connected to the Host Ethernet interface. | [optional] [readonly] 
 **PinGroupName** | Pointer to **string** | Name given for Lan PinGroup. | [optional] 
+**StandByVifId** | Pointer to **int64** | Identifier of the Standby virtual ethernet interface (Vethernet) on the networking component (e.g., Fabric Interconnect) for the corresponding Host Ethernet Interface (vNIC). | [optional] [readonly] 
+**VifId** | Pointer to **int64** | Identifier of the virtual ethernet interface (Vethernet) on the networking component (e.g., Fabric Interconnect) for the corresponding Host Ethernet Interface (vNIC). | [optional] [readonly] 
 **VirtualizationPreference** | Pointer to **string** | Virtualization Preference of the Host Ethernet Interface indicating if virtualization is enabled or not. | [optional] [readonly] 
 **VnicDn** | Pointer to **string** | The Virtual Ethernet Interface DN connected to the Host Ethernet Interface. | [optional] [readonly] 
 **AdapterUnit** | Pointer to [**AdapterUnitRelationship**](AdapterUnitRelationship.md) |  | [optional] 
@@ -393,6 +395,56 @@ SetPinGroupName sets PinGroupName field to given value.
 `func (o *AdapterHostEthInterface) HasPinGroupName() bool`
 
 HasPinGroupName returns a boolean if a field has been set.
+
+### GetStandByVifId
+
+`func (o *AdapterHostEthInterface) GetStandByVifId() int64`
+
+GetStandByVifId returns the StandByVifId field if non-nil, zero value otherwise.
+
+### GetStandByVifIdOk
+
+`func (o *AdapterHostEthInterface) GetStandByVifIdOk() (*int64, bool)`
+
+GetStandByVifIdOk returns a tuple with the StandByVifId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStandByVifId
+
+`func (o *AdapterHostEthInterface) SetStandByVifId(v int64)`
+
+SetStandByVifId sets StandByVifId field to given value.
+
+### HasStandByVifId
+
+`func (o *AdapterHostEthInterface) HasStandByVifId() bool`
+
+HasStandByVifId returns a boolean if a field has been set.
+
+### GetVifId
+
+`func (o *AdapterHostEthInterface) GetVifId() int64`
+
+GetVifId returns the VifId field if non-nil, zero value otherwise.
+
+### GetVifIdOk
+
+`func (o *AdapterHostEthInterface) GetVifIdOk() (*int64, bool)`
+
+GetVifIdOk returns a tuple with the VifId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetVifId
+
+`func (o *AdapterHostEthInterface) SetVifId(v int64)`
+
+SetVifId sets VifId field to given value.
+
+### HasVifId
+
+`func (o *AdapterHostEthInterface) HasVifId() bool`
+
+HasVifId returns a boolean if a field has been set.
 
 ### GetVirtualizationPreference
 

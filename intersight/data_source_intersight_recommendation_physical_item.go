@@ -140,6 +140,11 @@ func getRecommendationPhysicalItemSchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"configuration_path": {
+			Description: "Configuration path for the physical entity to be used when ordering it through the Cisco Commerce Workspace.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"nr_count": {
 			Description: "Count of number of items/devices to be added.For example, number of disks to add on a node PhysicalItem in case of HyperFlex Cluster recommendation.",
 			Type:        schema.TypeInt,
@@ -641,6 +646,11 @@ func dataSourceRecommendationPhysicalItemRead(c context.Context, d *schema.Resou
 		}
 	}
 
+	if v, ok := d.GetOk("configuration_path"); ok {
+		x := (v.(string))
+		o.SetConfigurationPath(x)
+	}
+
 	if v, ok := d.GetOkExists("nr_count"); ok {
 		x := int64(v.(int))
 		o.SetCount(x)
@@ -1012,6 +1022,7 @@ func dataSourceRecommendationPhysicalItemRead(c context.Context, d *schema.Resou
 				temp["class_id"] = (s.GetClassId())
 
 				temp["cluster_expansion"] = flattenMapRecommendationClusterExpansionRelationship(s.GetClusterExpansion(), d)
+				temp["configuration_path"] = (s.GetConfigurationPath())
 				temp["nr_count"] = (s.GetCount())
 
 				temp["create_time"] = (s.GetCreateTime()).String()

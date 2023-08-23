@@ -247,6 +247,11 @@ func getOauthAccessTokenSchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"token_owner": {
+			Description: "The moid of the owner of the access token.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"version_context": {
 			Description: "The versioning info for this managed object.",
 			Type:        schema.TypeList,
@@ -661,6 +666,11 @@ func dataSourceOauthAccessTokenRead(c context.Context, d *schema.ResourceData, m
 		o.SetTags(x)
 	}
 
+	if v, ok := d.GetOk("token_owner"); ok {
+		x := (v.(string))
+		o.SetTokenOwner(x)
+	}
+
 	if v, ok := d.GetOk("version_context"); ok {
 		p := make([]models.MoVersionContext, 0, 1)
 		s := v.([]interface{})
@@ -798,6 +808,7 @@ func dataSourceOauthAccessTokenRead(c context.Context, d *schema.ResourceData, m
 				temp["shared_scope"] = (s.GetSharedScope())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
+				temp["token_owner"] = (s.GetTokenOwner())
 
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
 				oauthAccessTokenResults = append(oauthAccessTokenResults, temp)

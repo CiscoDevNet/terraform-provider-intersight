@@ -490,7 +490,7 @@ func getWorkflowWorkflowDefinitionSchema() map[string]*schema.Schema {
 			},
 		},
 		"output_parameters": {
-			Description: "The output mappings for the workflow. The outputs for workflows will generally be task output variables that we want to export out at the end of the workflow. The format to specify the mapping is '${Source.output.JsonPath}', where 'Source' is the name of the task within the workflow. Any task output can be mapped to a workflow output as long as the types are compatible. It's followed by a JSON path expression to extract JSON fragment from source's output.",
+			Description: "The output mappings for the workflow. The schema for outputs of a workflow is defined using OutputDefinition. The outputs for workflows that we want to export out at the end of the workflow can be mapped from task outputs, workflow inputs, or workflow variables. Any task output, workflow input, or workflow variable can be mapped to a workflow output as long as the types are compatible. The format to specify the mapping is '${ 'workflow | <taskName>'. 'output |input | variable'.<name>[.<JsonPath>]}'. First, either the keyword 'workflow' or the name of the task in the workflow must be given. If a task name is used, then it must be followed by the keyword 'output', if the keyword workflow was used, then it must be followed by the keyword 'input' or 'variable'. Following this '<name>' must be the name of either input, output, or variable that must be mapped as workflow output. The last part of the mapping can be an optional <JsonPath> to extract specific fields on the data.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},

@@ -16,6 +16,7 @@ To access the ith object of the results obtained, use `data.intersight_recommend
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `account_moid`:(string) The Account ID for this managed object. 
 * `capacity`:(int) Capacity of the physical entity added. 
+* `configuration_path`:(string) Configuration path for the physical entity to be used when ordering it through the Cisco Commerce Workspace. 
 * `nr_count`:(int) Count of number of items/devices to be added.For example, number of disks to add on a node PhysicalItem in case of HyperFlex Cluster recommendation. 
 * `create_time`:(string) The time when this managed object was created. 
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 

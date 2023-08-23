@@ -459,6 +459,11 @@ func getAdapterHostEthInterfaceSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"stand_by_vif_id": {
+			Description: "Identifier of the Standby virtual ethernet interface (Vethernet) on the networking component (e.g., Fabric Interconnect) for the corresponding Host Ethernet Interface (vNIC).",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
 		"tags": {
 			Type:     schema.TypeList,
 			Optional: true,
@@ -594,6 +599,11 @@ func getAdapterHostEthInterfaceSchema() map[string]*schema.Schema {
 					},
 				},
 			},
+		},
+		"vif_id": {
+			Description: "Identifier of the virtual ethernet interface (Vethernet) on the networking component (e.g., Fabric Interconnect) for the corresponding Host Ethernet Interface (vNIC).",
+			Type:        schema.TypeInt,
+			Optional:    true,
 		},
 		"virtualization_preference": {
 			Description: "Virtualization Preference of the Host Ethernet Interface indicating if virtualization is enabled or not.",
@@ -1154,6 +1164,11 @@ func dataSourceAdapterHostEthInterfaceRead(c context.Context, d *schema.Resource
 		o.SetSharedScope(x)
 	}
 
+	if v, ok := d.GetOkExists("stand_by_vif_id"); ok {
+		x := int64(v.(int))
+		o.SetStandByVifId(x)
+	}
+
 	if v, ok := d.GetOk("tags"); ok {
 		x := make([]models.MoTag, 0)
 		s := v.([]interface{})
@@ -1261,6 +1276,11 @@ func dataSourceAdapterHostEthInterfaceRead(c context.Context, d *schema.Resource
 		}
 	}
 
+	if v, ok := d.GetOkExists("vif_id"); ok {
+		x := int64(v.(int))
+		o.SetVifId(x)
+	}
+
 	if v, ok := d.GetOk("virtualization_preference"); ok {
 		x := (v.(string))
 		o.SetVirtualizationPreference(x)
@@ -1352,10 +1372,12 @@ func dataSourceAdapterHostEthInterfaceRead(c context.Context, d *schema.Resource
 				temp["registered_device"] = flattenMapAssetDeviceRegistrationRelationship(s.GetRegisteredDevice(), d)
 				temp["rn"] = (s.GetRn())
 				temp["shared_scope"] = (s.GetSharedScope())
+				temp["stand_by_vif_id"] = (s.GetStandByVifId())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
 
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
+				temp["vif_id"] = (s.GetVifId())
 				temp["virtualization_preference"] = (s.GetVirtualizationPreference())
 				temp["vnic_dn"] = (s.GetVnicDn())
 				adapterHostEthInterfaceResults = append(adapterHostEthInterfaceResults, temp)

@@ -35,6 +35,8 @@ The following arguments can be used to get data of already created objects in In
 * `pin_group_name`:(string) Name given for Lan PinGroup. 
 * `rn`:(string) The Relative Name uniquely identifies an object within a given context. 
 * `shared_scope`:(string) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
+* `stand_by_vif_id`:(int) Identifier of the Standby virtual ethernet interface (Vethernet) on the networking component (e.g., Fabric Interconnect) for the corresponding Host Ethernet Interface (vNIC). 
+* `vif_id`:(int) Identifier of the virtual ethernet interface (Vethernet) on the networking component (e.g., Fabric Interconnect) for the corresponding Host Ethernet Interface (vNIC). 
 * `virtualization_preference`:(string) Virtualization Preference of the Host Ethernet Interface indicating if virtualization is enabled or not. 
 * `vnic_dn`:(string) The Virtual Ethernet Interface DN connected to the Host Ethernet Interface. 
  

@@ -580,6 +580,11 @@ func getAdapterHostFcInterfaceSchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"vif_id": {
+			Description: "Identifier of the virtual fibre channel (Vfc) interface on the networking component (e.g., Fabric Interconnect) for the corresponding Host Fibre Channel Interface.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
 		"wwnn": {
 			Description: "The uniquely distinguishable user configured World Wide Node Name of the Host.",
 			Type:        schema.TypeString,
@@ -1223,6 +1228,11 @@ func dataSourceAdapterHostFcInterfaceRead(c context.Context, d *schema.ResourceD
 		}
 	}
 
+	if v, ok := d.GetOkExists("vif_id"); ok {
+		x := int64(v.(int))
+		o.SetVifId(x)
+	}
+
 	if v, ok := d.GetOk("wwnn"); ok {
 		x := (v.(string))
 		o.SetWwnn(x)
@@ -1320,6 +1330,7 @@ func dataSourceAdapterHostFcInterfaceRead(c context.Context, d *schema.ResourceD
 				temp["vendor"] = (s.GetVendor())
 
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
+				temp["vif_id"] = (s.GetVifId())
 				temp["wwnn"] = (s.GetWwnn())
 				temp["wwpn"] = (s.GetWwpn())
 				adapterHostFcInterfaceResults = append(adapterHostFcInterfaceResults, temp)

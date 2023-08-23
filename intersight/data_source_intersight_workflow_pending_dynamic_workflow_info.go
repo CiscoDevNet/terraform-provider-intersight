@@ -76,7 +76,7 @@ func getWorkflowPendingDynamicWorkflowInfoSchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"input": {
-			Description: "The input data provided for workflow execution.",
+			Description: "The input for PendingDynamicWorkflowInfo is similar to workflowInfo besides the input is not fetched from workflow definition.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},

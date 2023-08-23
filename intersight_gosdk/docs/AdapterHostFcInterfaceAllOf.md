@@ -17,6 +17,7 @@ Name | Type | Description | Notes
 **OriginalWwpn** | Pointer to **string** | The uniquely distinguishable factory default World Wide Port Name of the Host Fibre Channel Interface. | [optional] [readonly] 
 **PeerDn** | Pointer to **string** | PeerPort Dn of Host Fibre Channel Interface. | [optional] [readonly] 
 **PinGroupName** | Pointer to **string** | Name given for San PinGroup. | [optional] 
+**VifId** | Pointer to **int64** | Identifier of the virtual fibre channel (Vfc) interface on the networking component (e.g., Fabric Interconnect) for the corresponding Host Fibre Channel Interface. | [optional] [readonly] 
 **Wwnn** | Pointer to **string** | The uniquely distinguishable user configured World Wide Node Name of the Host. | [optional] [readonly] 
 **Wwpn** | Pointer to **string** | The uniquely distinguishable user configured World Wide Port Name of the Host Fibre Channel Interface. | [optional] [readonly] 
 **AdapterUnit** | Pointer to [**AdapterUnitRelationship**](AdapterUnitRelationship.md) |  | [optional] 
@@ -367,6 +368,31 @@ SetPinGroupName sets PinGroupName field to given value.
 `func (o *AdapterHostFcInterfaceAllOf) HasPinGroupName() bool`
 
 HasPinGroupName returns a boolean if a field has been set.
+
+### GetVifId
+
+`func (o *AdapterHostFcInterfaceAllOf) GetVifId() int64`
+
+GetVifId returns the VifId field if non-nil, zero value otherwise.
+
+### GetVifIdOk
+
+`func (o *AdapterHostFcInterfaceAllOf) GetVifIdOk() (*int64, bool)`
+
+GetVifIdOk returns a tuple with the VifId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetVifId
+
+`func (o *AdapterHostFcInterfaceAllOf) SetVifId(v int64)`
+
+SetVifId sets VifId field to given value.
+
+### HasVifId
+
+`func (o *AdapterHostFcInterfaceAllOf) HasVifId() bool`
+
+HasVifId returns a boolean if a field has been set.
 
 ### GetWwnn
 

@@ -168,7 +168,7 @@ func getForecastInstanceSchema() map[string]*schema.Schema {
 			Elem: &schema.Resource{
 				Schema: map[string]*schema.Schema{
 					"accuracy": {
-						Description: "The standard error of the estimate is a measure of the accuracy of predictions from predective modeling.",
+						Description: "The standard error of the estimate is a measure of the accuracy of predictions from predictive modeling.",
 						Type:        schema.TypeFloat,
 						Optional:    true,
 					},

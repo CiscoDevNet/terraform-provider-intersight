@@ -6,9 +6,13 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "os.Distribution"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "os.Distribution"]
+**IsSupported** | Pointer to **bool** | An internal property that is used to denote if the OS Distribution is supported by Intersight for Automated Installation. | [optional] [readonly] 
+**Label** | Pointer to **string** | The label of the OS distribution such as ESXi, CentOS to be displayed. | [optional] 
 **Name** | Pointer to **string** | The name of the OS distribution such as ESXi, CentOS. | [optional] 
+**ScuSupported** | Pointer to **bool** | An internal property that is used to denote if the OS Distribution is supported by the Server Configuration Utility. | [optional] [readonly] 
 **SupportedEditions** | Pointer to **[]string** |  | [optional] 
 **Catalog** | Pointer to [**OsCatalogRelationship**](OsCatalogRelationship.md) |  | [optional] 
+**Vendor** | Pointer to [**HclOperatingSystemVendorRelationship**](HclOperatingSystemVendorRelationship.md) |  | [optional] 
 **Version** | Pointer to [**HclOperatingSystemRelationship**](HclOperatingSystemRelationship.md) |  | [optional] 
 
 ## Methods
@@ -70,6 +74,56 @@ and a boolean to check if the value has been set.
 SetObjectType sets ObjectType field to given value.
 
 
+### GetIsSupported
+
+`func (o *OsDistribution) GetIsSupported() bool`
+
+GetIsSupported returns the IsSupported field if non-nil, zero value otherwise.
+
+### GetIsSupportedOk
+
+`func (o *OsDistribution) GetIsSupportedOk() (*bool, bool)`
+
+GetIsSupportedOk returns a tuple with the IsSupported field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsSupported
+
+`func (o *OsDistribution) SetIsSupported(v bool)`
+
+SetIsSupported sets IsSupported field to given value.
+
+### HasIsSupported
+
+`func (o *OsDistribution) HasIsSupported() bool`
+
+HasIsSupported returns a boolean if a field has been set.
+
+### GetLabel
+
+`func (o *OsDistribution) GetLabel() string`
+
+GetLabel returns the Label field if non-nil, zero value otherwise.
+
+### GetLabelOk
+
+`func (o *OsDistribution) GetLabelOk() (*string, bool)`
+
+GetLabelOk returns a tuple with the Label field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLabel
+
+`func (o *OsDistribution) SetLabel(v string)`
+
+SetLabel sets Label field to given value.
+
+### HasLabel
+
+`func (o *OsDistribution) HasLabel() bool`
+
+HasLabel returns a boolean if a field has been set.
+
 ### GetName
 
 `func (o *OsDistribution) GetName() string`
@@ -94,6 +148,31 @@ SetName sets Name field to given value.
 `func (o *OsDistribution) HasName() bool`
 
 HasName returns a boolean if a field has been set.
+
+### GetScuSupported
+
+`func (o *OsDistribution) GetScuSupported() bool`
+
+GetScuSupported returns the ScuSupported field if non-nil, zero value otherwise.
+
+### GetScuSupportedOk
+
+`func (o *OsDistribution) GetScuSupportedOk() (*bool, bool)`
+
+GetScuSupportedOk returns a tuple with the ScuSupported field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetScuSupported
+
+`func (o *OsDistribution) SetScuSupported(v bool)`
+
+SetScuSupported sets ScuSupported field to given value.
+
+### HasScuSupported
+
+`func (o *OsDistribution) HasScuSupported() bool`
+
+HasScuSupported returns a boolean if a field has been set.
 
 ### GetSupportedEditions
 
@@ -154,6 +233,31 @@ SetCatalog sets Catalog field to given value.
 `func (o *OsDistribution) HasCatalog() bool`
 
 HasCatalog returns a boolean if a field has been set.
+
+### GetVendor
+
+`func (o *OsDistribution) GetVendor() HclOperatingSystemVendorRelationship`
+
+GetVendor returns the Vendor field if non-nil, zero value otherwise.
+
+### GetVendorOk
+
+`func (o *OsDistribution) GetVendorOk() (*HclOperatingSystemVendorRelationship, bool)`
+
+GetVendorOk returns a tuple with the Vendor field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetVendor
+
+`func (o *OsDistribution) SetVendor(v HclOperatingSystemVendorRelationship)`
+
+SetVendor sets Vendor field to given value.
+
+### HasVendor
+
+`func (o *OsDistribution) HasVendor() bool`
+
+HasVendor returns a boolean if a field has been set.
 
 ### GetVersion
 
