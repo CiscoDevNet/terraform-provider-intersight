@@ -25,9 +25,11 @@ Method | HTTP request | Description
 [**GetResourceSelectionCriteriaByMoid**](ResourceApi.md#GetResourceSelectionCriteriaByMoid) | **Get** /api/v1/resource/SelectionCriteria/{Moid} | Read a &#39;resource.SelectionCriteria&#39; resource.
 [**GetResourceSelectionCriteriaList**](ResourceApi.md#GetResourceSelectionCriteriaList) | **Get** /api/v1/resource/SelectionCriteria | Read a &#39;resource.SelectionCriteria&#39; resource.
 [**PatchResourceGroup**](ResourceApi.md#PatchResourceGroup) | **Patch** /api/v1/resource/Groups/{Moid} | Update a &#39;resource.Group&#39; resource.
+[**PatchResourceMembership**](ResourceApi.md#PatchResourceMembership) | **Patch** /api/v1/resource/Memberships/{Moid} | Update a &#39;resource.Membership&#39; resource.
 [**PatchResourceReservation**](ResourceApi.md#PatchResourceReservation) | **Patch** /api/v1/resource/Reservations/{Moid} | Update a &#39;resource.Reservation&#39; resource.
 [**PatchResourceSelectionCriteria**](ResourceApi.md#PatchResourceSelectionCriteria) | **Patch** /api/v1/resource/SelectionCriteria/{Moid} | Update a &#39;resource.SelectionCriteria&#39; resource.
 [**UpdateResourceGroup**](ResourceApi.md#UpdateResourceGroup) | **Post** /api/v1/resource/Groups/{Moid} | Update a &#39;resource.Group&#39; resource.
+[**UpdateResourceMembership**](ResourceApi.md#UpdateResourceMembership) | **Post** /api/v1/resource/Memberships/{Moid} | Update a &#39;resource.Membership&#39; resource.
 [**UpdateResourceReservation**](ResourceApi.md#UpdateResourceReservation) | **Post** /api/v1/resource/Reservations/{Moid} | Update a &#39;resource.Reservation&#39; resource.
 [**UpdateResourceSelectionCriteria**](ResourceApi.md#UpdateResourceSelectionCriteria) | **Post** /api/v1/resource/SelectionCriteria/{Moid} | Update a &#39;resource.SelectionCriteria&#39; resource.
 
@@ -1571,6 +1573,78 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## PatchResourceMembership
+
+> ResourceMembership PatchResourceMembership(ctx, moid).ResourceMembership(resourceMembership).IfMatch(ifMatch).Execute()
+
+Update a 'resource.Membership' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+    resourceMembership := *openapiclient.NewResourceMembership("ClassId_example", "ObjectType_example") // ResourceMembership | The 'resource.Membership' resource to update.
+    ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.ResourceApi.PatchResourceMembership(context.Background(), moid).ResourceMembership(resourceMembership).IfMatch(ifMatch).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `ResourceApi.PatchResourceMembership``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `PatchResourceMembership`: ResourceMembership
+    fmt.Fprintf(os.Stdout, "Response from `ResourceApi.PatchResourceMembership`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiPatchResourceMembershipRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **resourceMembership** | [**ResourceMembership**](ResourceMembership.md) | The &#39;resource.Membership&#39; resource to update. | 
+ **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
+
+### Return type
+
+[**ResourceMembership**](ResourceMembership.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json, application/json-patch+json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## PatchResourceReservation
 
 > ResourceReservation PatchResourceReservation(ctx, moid).ResourceReservation(resourceReservation).IfMatch(ifMatch).Execute()
@@ -1772,6 +1846,78 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**ResourceGroup**](ResourceGroup.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json, application/json-patch+json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## UpdateResourceMembership
+
+> ResourceMembership UpdateResourceMembership(ctx, moid).ResourceMembership(resourceMembership).IfMatch(ifMatch).Execute()
+
+Update a 'resource.Membership' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+    resourceMembership := *openapiclient.NewResourceMembership("ClassId_example", "ObjectType_example") // ResourceMembership | The 'resource.Membership' resource to update.
+    ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.ResourceApi.UpdateResourceMembership(context.Background(), moid).ResourceMembership(resourceMembership).IfMatch(ifMatch).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `ResourceApi.UpdateResourceMembership``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `UpdateResourceMembership`: ResourceMembership
+    fmt.Fprintf(os.Stdout, "Response from `ResourceApi.UpdateResourceMembership`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiUpdateResourceMembershipRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **resourceMembership** | [**ResourceMembership**](ResourceMembership.md) | The &#39;resource.Membership&#39; resource to update. | 
+ **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
+
+### Return type
+
+[**ResourceMembership**](ResourceMembership.md)
 
 ### Authorization
 

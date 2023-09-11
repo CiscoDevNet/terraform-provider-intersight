@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **Name** | Pointer to **string** | The name of this resource group. | [optional] 
 **PerTypeCombinedSelector** | Pointer to [**[]ResourcePerTypeCombinedSelector**](ResourcePerTypeCombinedSelector.md) |  | [optional] 
 **Qualifier** | Pointer to **string** | Qualifier shall be used to specify if we want to organize resources using multiple resource group or single For an account, resource groups can be of only one of the above types. (Both the types are mutually exclusive for an account.). * &#x60;Allow-Selectors&#x60; - Resources will be added to resource groups based on ODATA filter. Multiple resource group can be created to organize resources. * &#x60;Allow-All&#x60; - All resources will become part of the Resource Group. Only one resource group can be created to organize resources. | [optional] [default to "Allow-Selectors"]
+**Reevaluate** | Pointer to **bool** | Set Reevaluate to true to reevaluate the group members and memberships of this resource group. | [optional] 
 **Selectors** | Pointer to [**[]ResourceSelector**](ResourceSelector.md) |  | [optional] 
 **Type** | Pointer to **string** | The type of this resource group. (Rbac, Licensing, solution). * &#x60;rbac&#x60; - These resource groups are used for multi-tenancy by assigning to organizations. * &#x60;licensing&#x60; - These resource groups are used to classify resources like servers to various groups which are associated to different license tiers. * &#x60;solution&#x60; - These resource groups are created for Flexpods. | [optional] [readonly] [default to "rbac"]
 **Account** | Pointer to [**IamAccountRelationship**](IamAccountRelationship.md) |  | [optional] 
@@ -183,6 +184,31 @@ SetQualifier sets Qualifier field to given value.
 `func (o *ResourceGroupAllOf) HasQualifier() bool`
 
 HasQualifier returns a boolean if a field has been set.
+
+### GetReevaluate
+
+`func (o *ResourceGroupAllOf) GetReevaluate() bool`
+
+GetReevaluate returns the Reevaluate field if non-nil, zero value otherwise.
+
+### GetReevaluateOk
+
+`func (o *ResourceGroupAllOf) GetReevaluateOk() (*bool, bool)`
+
+GetReevaluateOk returns a tuple with the Reevaluate field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetReevaluate
+
+`func (o *ResourceGroupAllOf) SetReevaluate(v bool)`
+
+SetReevaluate sets Reevaluate field to given value.
+
+### HasReevaluate
+
+`func (o *ResourceGroupAllOf) HasReevaluate() bool`
+
+HasReevaluate returns a boolean if a field has been set.
 
 ### GetSelectors
 

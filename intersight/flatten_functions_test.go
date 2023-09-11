@@ -5885,6 +5885,30 @@ func TestFlattenListMetaRelationshipDefinition(t *testing.T) {
 		CheckError(t, err)
 	}
 }
+func TestFlattenListMetricsMetricCriterion(t *testing.T) {
+	p := []models.MetricsMetricCriterion{}
+	var d = &schema.ResourceData{}
+	c := `{"Aggregation":"Aggregation %d","ClassId":"metrics.MetricCriterion","Instrument":"Instrument %d","IsEnabled":true,"Metric":"Metric %d","MetricAggregation":"MetricAggregation %d","ObjectType":"metrics.MetricCriterion","TopLimit":32,"TopSort":"TopSort %d"}`
+
+	//test when the response is empty
+	ffOpEmpty := flattenListMetricsMetricCriterion(p, d)
+	if len(ffOpEmpty) != 0 {
+		t.Errorf("error: no elements should be present. Found %d elements", len(ffOpEmpty))
+	}
+	// test when response is available and resourceData is empty
+	for i := 1; i < 3; i++ {
+		x := models.MetricsMetricCriterion{}
+		err := x.UnmarshalJSON([]byte(strings.Replace(c, "%d", fmt.Sprint(i), -1)))
+		CheckError(t, err)
+		p = append(p, x)
+	}
+	ffOp := flattenListMetricsMetricCriterion(p, d)
+	expectedOp := []map[string]interface{}{{"aggregation": "Aggregation 1", "class_id": "metrics.MetricCriterion", "instrument": "Instrument 1", "is_enabled": true, "metric": "Metric 1", "metric_aggregation": "MetricAggregation 1", "object_type": "metrics.MetricCriterion", "top_limit": 32, "top_sort": "TopSort 1"}, {"aggregation": "Aggregation 2", "class_id": "metrics.MetricCriterion", "instrument": "Instrument 2", "is_enabled": true, "metric": "Metric 2", "metric_aggregation": "MetricAggregation 2", "object_type": "metrics.MetricCriterion", "top_limit": 32, "top_sort": "TopSort 2"}}
+	for i := 0; i < len(expectedOp); i++ {
+		err := compareMaps(expectedOp[i], ffOp[i], t)
+		CheckError(t, err)
+	}
+}
 func TestFlattenListMoBaseMo(t *testing.T) {
 	p := []models.MoBaseMo{}
 	var d = &schema.ResourceData{}

@@ -214,6 +214,11 @@ func getMetaDefinitionSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"owner": {
+			Description: "A value describing the owner for a given Managed Object, such as Account or Organization.\n* `System` - Any Managed Object with OwnerType as System is root for objects common to all accounts. Any object which inherits permissions from this object has owners as system and is common to all accounts. Objects with owner as system can only be read by user and modification is not allowed by user.\n* `Yes` - Any Managed Object with OwnerType as Yes is root for objects which need security filtering. Currently objects with owner yes are account and device registration. Any object with owner ''yes'' has self moid in owners and any objects which inherits permissions from this object has root object moid as owners. In user context, account filtering is enforced by providing access to objects with owner as account moid. In device context, device filtering is enforced by providing access to objects with owner as device moid.\n* `No` - Any Managed Object with OwnerType as No inherits base mo properties like owners, domain group moid, account moid, permission resources from inherit permission relation. Inherit permission relation could be with an object whose owner is system/organization/yes/no.\n* `Internal` - Any Managed Object with OwnerType as Internal is internal to system. Such Managed Objects cannot be accessed using REST APIs and can be created, updated or deleted in any security context.\n* `Organization` - Any Managed Object with OwnerType as Organization is contained under an organization like profiles, policies, user defined workflows. Implicitly an organization on-peer-delete relation is added in this object.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"owners": {
 			Type:     schema.TypeList,
 			Optional: true,
@@ -825,6 +830,11 @@ func dataSourceMetaDefinitionRead(c context.Context, d *schema.ResourceData, met
 		o.SetObjectType(x)
 	}
 
+	if v, ok := d.GetOk("owner"); ok {
+		x := (v.(string))
+		o.SetOwner(x)
+	}
+
 	if v, ok := d.GetOk("owners"); ok {
 		x := make([]string, 0)
 		y := reflect.ValueOf(v)
@@ -1192,6 +1202,7 @@ func dataSourceMetaDefinitionRead(c context.Context, d *schema.ResourceData, met
 				temp["name"] = (s.GetName())
 				temp["namespace"] = (s.GetNamespace())
 				temp["object_type"] = (s.GetObjectType())
+				temp["owner"] = (s.GetOwner())
 				temp["owners"] = (s.GetOwners())
 
 				temp["parent"] = flattenMapMoBaseMoRelationship(s.GetParent(), d)

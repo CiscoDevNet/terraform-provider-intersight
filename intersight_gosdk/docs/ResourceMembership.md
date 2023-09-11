@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "resource.Membership"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "resource.Membership"]
 **GroupPermissionRoles** | Pointer to [**[]IamGroupPermissionToRoles**](IamGroupPermissionToRoles.md) |  | [optional] 
+**Reevaluate** | Pointer to **bool** | Set Reevaluate to true to reevaluate the membership of a resource. | [optional] 
 **TargetApp** | Pointer to **string** | Name of the Service owning the resource. | [optional] [readonly] 
 **Holder** | Pointer to [**ResourceMembershipHolderRelationship**](ResourceMembershipHolderRelationship.md) |  | [optional] 
 **Resource** | Pointer to [**MoBaseMoRelationship**](MoBaseMoRelationship.md) |  | [optional] 
@@ -105,6 +106,31 @@ HasGroupPermissionRoles returns a boolean if a field has been set.
 `func (o *ResourceMembership) UnsetGroupPermissionRoles()`
 
 UnsetGroupPermissionRoles ensures that no value is present for GroupPermissionRoles, not even an explicit nil
+### GetReevaluate
+
+`func (o *ResourceMembership) GetReevaluate() bool`
+
+GetReevaluate returns the Reevaluate field if non-nil, zero value otherwise.
+
+### GetReevaluateOk
+
+`func (o *ResourceMembership) GetReevaluateOk() (*bool, bool)`
+
+GetReevaluateOk returns a tuple with the Reevaluate field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetReevaluate
+
+`func (o *ResourceMembership) SetReevaluate(v bool)`
+
+SetReevaluate sets Reevaluate field to given value.
+
+### HasReevaluate
+
+`func (o *ResourceMembership) HasReevaluate() bool`
+
+HasReevaluate returns a boolean if a field has been set.
+
 ### GetTargetApp
 
 `func (o *ResourceMembership) GetTargetApp() string`
