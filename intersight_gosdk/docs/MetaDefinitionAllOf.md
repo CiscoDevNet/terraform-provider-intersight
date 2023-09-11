@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **MetaType** | Pointer to **string** | Indicates whether the meta class is a complex type or managed object. * &#x60;ManagedObject&#x60; - The meta.Definition object describes a managed object. * &#x60;ComplexType&#x60; - The meta.Definition object describes a nested complex type within a managed object. | [optional] [readonly] [default to "ManagedObject"]
 **Name** | Pointer to **string** | The fully-qualified class name of the Managed Object or complex type. For example, \&quot;compute:Blade\&quot; where the Managed Object is \&quot;Blade\&quot; and the package is &#39;compute&#39;. | [optional] [readonly] 
 **Namespace** | Pointer to **string** | The namespace of the meta. | [optional] [readonly] 
+**Owner** | Pointer to **string** | A value describing the owner for a given Managed Object, such as Account or Organization. * &#x60;System&#x60; - Any Managed Object with OwnerType as System is root for objects common to all accounts. Any object which inherits permissions from this object has owners as system and is common to all accounts. Objects with owner as system can only be read by user and modification is not allowed by user. * &#x60;Yes&#x60; - Any Managed Object with OwnerType as Yes is root for objects which need security filtering. Currently objects with owner yes are account and device registration. Any object with owner &#39;&#39;yes&#39;&#39; has self moid in owners and any objects which inherits permissions from this object has root object moid as owners. In user context, account filtering is enforced by providing access to objects with owner as account moid. In device context, device filtering is enforced by providing access to objects with owner as device moid. * &#x60;No&#x60; - Any Managed Object with OwnerType as No inherits base mo properties like owners, domain group moid, account moid, permission resources from inherit permission relation. Inherit permission relation could be with an object whose owner is system/organization/yes/no. * &#x60;Internal&#x60; - Any Managed Object with OwnerType as Internal is internal to system. Such Managed Objects cannot be accessed using REST APIs and can be created, updated or deleted in any security context. * &#x60;Organization&#x60; - Any Managed Object with OwnerType as Organization is contained under an organization like profiles, policies, user defined workflows. Implicitly an organization on-peer-delete relation is added in this object. | [optional] [readonly] [default to "System"]
 **ParentClass** | Pointer to **string** | The fully-qualified name of the parent metaclass in the class inheritance hierarchy. | [optional] [readonly] 
 **PermissionSupported** | Pointer to **bool** | Boolean flag to specify whether instances of this class type can be specified in permissions for instance based access control. Permissions can be created for entire Intersight account or to a subset of resources (instance based access control). In the first release, permissions are supported for entire account or for a subset of organizations. | [optional] [readonly] 
 **Properties** | Pointer to [**[]MetaPropDefinition**](MetaPropDefinition.md) |  | [optional] 
@@ -321,6 +322,31 @@ SetNamespace sets Namespace field to given value.
 `func (o *MetaDefinitionAllOf) HasNamespace() bool`
 
 HasNamespace returns a boolean if a field has been set.
+
+### GetOwner
+
+`func (o *MetaDefinitionAllOf) GetOwner() string`
+
+GetOwner returns the Owner field if non-nil, zero value otherwise.
+
+### GetOwnerOk
+
+`func (o *MetaDefinitionAllOf) GetOwnerOk() (*string, bool)`
+
+GetOwnerOk returns a tuple with the Owner field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOwner
+
+`func (o *MetaDefinitionAllOf) SetOwner(v string)`
+
+SetOwner sets Owner field to given value.
+
+### HasOwner
+
+`func (o *MetaDefinitionAllOf) HasOwner() bool`
+
+HasOwner returns a boolean if a field has been set.
 
 ### GetParentClass
 

@@ -286,6 +286,11 @@ func getResourceGroupSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"reevaluate": {
+			Description: "Set Reevaluate to true to reevaluate the group members and memberships of this resource group.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
 		"selectors": {
 			Type:     schema.TypeList,
 			Optional: true,
@@ -786,6 +791,11 @@ func dataSourceResourceGroupRead(c context.Context, d *schema.ResourceData, meta
 		o.SetQualifier(x)
 	}
 
+	if v, ok := d.GetOkExists("reevaluate"); ok {
+		x := (v.(bool))
+		o.SetReevaluate(x)
+	}
+
 	if v, ok := d.GetOk("selectors"); ok {
 		x := make([]models.ResourceSelector, 0)
 		s := v.([]interface{})
@@ -998,6 +1008,7 @@ func dataSourceResourceGroupRead(c context.Context, d *schema.ResourceData, meta
 
 				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
 				temp["qualifier"] = (s.GetQualifier())
+				temp["reevaluate"] = (s.GetReevaluate())
 
 				temp["selectors"] = flattenListResourceSelector(s.GetSelectors(), d)
 				temp["shared_scope"] = (s.GetSharedScope())

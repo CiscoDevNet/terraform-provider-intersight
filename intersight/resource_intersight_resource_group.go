@@ -374,6 +374,11 @@ func resourceResourceGroup() *schema.Resource {
 				Optional:     true,
 				Default:      "Allow-Selectors",
 			},
+			"reevaluate": {
+				Description: "Set Reevaluate to true to reevaluate the group members and memberships of this resource group.",
+				Type:        schema.TypeBool,
+				Optional:    true,
+			},
 			"selectors": {
 				Type:       schema.TypeList,
 				Optional:   true,
@@ -722,6 +727,11 @@ func resourceResourceGroupCreate(c context.Context, d *schema.ResourceData, meta
 		o.SetQualifier(x)
 	}
 
+	if v, ok := d.GetOkExists("reevaluate"); ok {
+		x := (v.(bool))
+		o.SetReevaluate(x)
+	}
+
 	if v, ok := d.GetOk("selectors"); ok {
 		x := make([]models.ResourceSelector, 0)
 		s := v.([]interface{})
@@ -900,6 +910,10 @@ func resourceResourceGroupRead(c context.Context, d *schema.ResourceData, meta i
 		return diag.Errorf("error occurred while setting property Qualifier in ResourceGroup object: %s", err.Error())
 	}
 
+	if err := d.Set("reevaluate", (s.GetReevaluate())); err != nil {
+		return diag.Errorf("error occurred while setting property Reevaluate in ResourceGroup object: %s", err.Error())
+	}
+
 	if err := d.Set("selectors", flattenListResourceSelector(s.GetSelectors(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property Selectors in ResourceGroup object: %s", err.Error())
 	}
@@ -1037,6 +1051,12 @@ func resourceResourceGroupUpdate(c context.Context, d *schema.ResourceData, meta
 		v := d.Get("qualifier")
 		x := (v.(string))
 		o.SetQualifier(x)
+	}
+
+	if d.HasChange("reevaluate") {
+		v := d.Get("reevaluate")
+		x := (v.(bool))
+		o.SetReevaluate(x)
 	}
 
 	if d.HasChange("selectors") {

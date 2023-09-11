@@ -4830,6 +4830,29 @@ func flattenListMetaRelationshipDefinition(p []models.MetaRelationshipDefinition
 	}
 	return metarelationshipdefinitions
 }
+func flattenListMetricsMetricCriterion(p []models.MetricsMetricCriterion, d *schema.ResourceData) []map[string]interface{} {
+	var metricsmetriccriterions []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		metricsmetriccriterion := make(map[string]interface{})
+		metricsmetriccriterion["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+		metricsmetriccriterion["aggregation"] = item.GetAggregation()
+		metricsmetriccriterion["class_id"] = item.GetClassId()
+		metricsmetriccriterion["filters"] = item.GetFilters()
+		metricsmetriccriterion["groups"] = item.GetGroups()
+		metricsmetriccriterion["instrument"] = item.GetInstrument()
+		metricsmetriccriterion["is_enabled"] = item.GetIsEnabled()
+		metricsmetriccriterion["metric"] = item.GetMetric()
+		metricsmetriccriterion["metric_aggregation"] = item.GetMetricAggregation()
+		metricsmetriccriterion["object_type"] = item.GetObjectType()
+		metricsmetriccriterion["top_limit"] = item.GetTopLimit()
+		metricsmetriccriterion["top_sort"] = item.GetTopSort()
+		metricsmetriccriterions = append(metricsmetriccriterions, metricsmetriccriterion)
+	}
+	return metricsmetriccriterions
+}
 func flattenListMoBaseMo(p []models.MoBaseMo, d *schema.ResourceData) []map[string]interface{} {
 	var mobasemos []map[string]interface{}
 	if len(p) == 0 {
