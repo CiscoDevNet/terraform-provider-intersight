@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "iam.Idp"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "iam.Idp"]
 **DomainName** | Pointer to **string** | Email domain name of the user for this IdP. When a user enters an email during login in the Intersight home page, the IdP is picked by matching this domain name with the email domain name for authentication. | [optional] 
+**DomainNames** | Pointer to **[]string** |  | [optional] 
 **EnableSingleLogout** | Pointer to **bool** | Setting that indicates whether &#39;Single Logout (SLO)&#39; has been enabled for this IdP. | [optional] 
 **IdpEntityId** | Pointer to **string** | The Entity ID of the IdP. In SAML, the entity ID uniquely identifies the IdP or Service Provider. | [optional] [readonly] 
 **Metadata** | Pointer to **string** | SAML metadata of the IdP. | [optional] 
@@ -105,6 +106,41 @@ SetDomainName sets DomainName field to given value.
 
 HasDomainName returns a boolean if a field has been set.
 
+### GetDomainNames
+
+`func (o *IamIdpAllOf) GetDomainNames() []string`
+
+GetDomainNames returns the DomainNames field if non-nil, zero value otherwise.
+
+### GetDomainNamesOk
+
+`func (o *IamIdpAllOf) GetDomainNamesOk() (*[]string, bool)`
+
+GetDomainNamesOk returns a tuple with the DomainNames field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDomainNames
+
+`func (o *IamIdpAllOf) SetDomainNames(v []string)`
+
+SetDomainNames sets DomainNames field to given value.
+
+### HasDomainNames
+
+`func (o *IamIdpAllOf) HasDomainNames() bool`
+
+HasDomainNames returns a boolean if a field has been set.
+
+### SetDomainNamesNil
+
+`func (o *IamIdpAllOf) SetDomainNamesNil(b bool)`
+
+ SetDomainNamesNil sets the value for DomainNames to be an explicit nil
+
+### UnsetDomainNames
+`func (o *IamIdpAllOf) UnsetDomainNames()`
+
+UnsetDomainNames ensures that no value is present for DomainNames, not even an explicit nil
 ### GetEnableSingleLogout
 
 `func (o *IamIdpAllOf) GetEnableSingleLogout() bool`

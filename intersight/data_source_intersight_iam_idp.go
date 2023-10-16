@@ -115,6 +115,11 @@ func getIamIdpSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"domain_names": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Schema{
+				Type: schema.TypeString}},
 		"enable_single_logout": {
 			Description: "Setting that indicates whether 'Single Logout (SLO)' has been enabled for this IdP.",
 			Type:        schema.TypeBool,
@@ -720,6 +725,17 @@ func dataSourceIamIdpRead(c context.Context, d *schema.ResourceData, meta interf
 		o.SetDomainName(x)
 	}
 
+	if v, ok := d.GetOk("domain_names"); ok {
+		x := make([]string, 0)
+		y := reflect.ValueOf(v)
+		for i := 0; i < y.Len(); i++ {
+			if y.Index(i).Interface() != nil {
+				x = append(x, y.Index(i).Interface().(string))
+			}
+		}
+		o.SetDomainNames(x)
+	}
+
 	if v, ok := d.GetOkExists("enable_single_logout"); ok {
 		x := (v.(bool))
 		o.SetEnableSingleLogout(x)
@@ -1263,6 +1279,7 @@ func dataSourceIamIdpRead(c context.Context, d *schema.ResourceData, meta interf
 				temp["create_time"] = (s.GetCreateTime()).String()
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
 				temp["domain_name"] = (s.GetDomainName())
+				temp["domain_names"] = (s.GetDomainNames())
 				temp["enable_single_logout"] = (s.GetEnableSingleLogout())
 				temp["idp_entity_id"] = (s.GetIdpEntityId())
 

@@ -714,6 +714,17 @@ func resourceIamAccount() *schema.Resource {
 					}
 					return
 				}},
+			"single_admin_lockout": {
+				Description: "Indicates if the account is prone to lockout as it has only a single Account Administrator. \nAn account is prone to lockout if it has only one configured Account Administrator and no user groups configured that \ncan grant Account Administrator role to dynamic users.",
+				Type:        schema.TypeBool,
+				Optional:    true,
+				Computed:    true,
+				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+					if val != nil {
+						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+					}
+					return
+				}},
 			"status": {
 				Description: "Status of the account. To activate the Intersight account, claim a device to the account.",
 				Type:        schema.TypeString,
@@ -1125,6 +1136,10 @@ func resourceIamAccountRead(c context.Context, d *schema.ResourceData, meta inte
 
 	if err := d.Set("shared_scope", (s.GetSharedScope())); err != nil {
 		return diag.Errorf("error occurred while setting property SharedScope in IamAccount object: %s", err.Error())
+	}
+
+	if err := d.Set("single_admin_lockout", (s.GetSingleAdminLockout())); err != nil {
+		return diag.Errorf("error occurred while setting property SingleAdminLockout in IamAccount object: %s", err.Error())
 	}
 
 	if err := d.Set("status", (s.GetStatus())); err != nil {

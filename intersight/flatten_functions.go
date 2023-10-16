@@ -7907,22 +7907,6 @@ func flattenListWorkflowCatalogServiceRequestRelationship(p []models.WorkflowCat
 	}
 	return workflowcatalogservicerequestrelationships
 }
-func flattenListWorkflowDynamicWorkflowActionTaskList(p []models.WorkflowDynamicWorkflowActionTaskList, d *schema.ResourceData) []map[string]interface{} {
-	var workflowdynamicworkflowactiontasklists []map[string]interface{}
-	if len(p) == 0 {
-		return nil
-	}
-	for _, item := range p {
-		workflowdynamicworkflowactiontasklist := make(map[string]interface{})
-		workflowdynamicworkflowactiontasklist["action"] = item.GetAction()
-		workflowdynamicworkflowactiontasklist["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
-		workflowdynamicworkflowactiontasklist["class_id"] = item.GetClassId()
-		workflowdynamicworkflowactiontasklist["object_type"] = item.GetObjectType()
-		workflowdynamicworkflowactiontasklist["tasks"] = flattenAdditionalProperties(item.Tasks)
-		workflowdynamicworkflowactiontasklists = append(workflowdynamicworkflowactiontasklists, workflowdynamicworkflowactiontasklist)
-	}
-	return workflowdynamicworkflowactiontasklists
-}
 func flattenListWorkflowMessage(p []models.WorkflowMessage, d *schema.ResourceData) []map[string]interface{} {
 	var workflowmessages []map[string]interface{}
 	if len(p) == 0 {
@@ -14143,6 +14127,24 @@ func flattenMapIamSessionLimitsRelationship(p models.IamSessionLimitsRelationshi
 
 	iamsessionlimitsrelationships = append(iamsessionlimitsrelationships, iamsessionlimitsrelationship)
 	return iamsessionlimitsrelationships
+}
+func flattenMapIamSharingRuleRelationship(p models.IamSharingRuleRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var iamsharingrulerelationships []map[string]interface{}
+	var ret models.IamSharingRuleRelationship
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	x := p
+	item := x.MoMoRef
+	iamsharingrulerelationship := make(map[string]interface{})
+	iamsharingrulerelationship["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	iamsharingrulerelationship["class_id"] = item.GetClassId()
+	iamsharingrulerelationship["moid"] = item.GetMoid()
+	iamsharingrulerelationship["object_type"] = item.GetObjectType()
+	iamsharingrulerelationship["selector"] = item.GetSelector()
+
+	iamsharingrulerelationships = append(iamsharingrulerelationships, iamsharingrulerelationship)
+	return iamsharingrulerelationships
 }
 func flattenMapIamSystemRelationship(p models.IamSystemRelationship, d *schema.ResourceData) []map[string]interface{} {
 	var iamsystemrelationships []map[string]interface{}
@@ -21429,24 +21431,6 @@ func flattenMapWorkflowInternalProperties(p models.WorkflowInternalProperties, d
 
 	workflowinternalpropertiess = append(workflowinternalpropertiess, workflowinternalproperties)
 	return workflowinternalpropertiess
-}
-func flattenMapWorkflowPendingDynamicWorkflowInfoRelationship(p models.WorkflowPendingDynamicWorkflowInfoRelationship, d *schema.ResourceData) []map[string]interface{} {
-	var workflowpendingdynamicworkflowinforelationships []map[string]interface{}
-	var ret models.WorkflowPendingDynamicWorkflowInfoRelationship
-	if reflect.DeepEqual(ret, p) {
-		return nil
-	}
-	x := p
-	item := x.MoMoRef
-	workflowpendingdynamicworkflowinforelationship := make(map[string]interface{})
-	workflowpendingdynamicworkflowinforelationship["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
-	workflowpendingdynamicworkflowinforelationship["class_id"] = item.GetClassId()
-	workflowpendingdynamicworkflowinforelationship["moid"] = item.GetMoid()
-	workflowpendingdynamicworkflowinforelationship["object_type"] = item.GetObjectType()
-	workflowpendingdynamicworkflowinforelationship["selector"] = item.GetSelector()
-
-	workflowpendingdynamicworkflowinforelationships = append(workflowpendingdynamicworkflowinforelationships, workflowpendingdynamicworkflowinforelationship)
-	return workflowpendingdynamicworkflowinforelationships
 }
 func flattenMapWorkflowProperties(p models.WorkflowProperties, d *schema.ResourceData) []map[string]interface{} {
 	var workflowpropertiess []map[string]interface{}

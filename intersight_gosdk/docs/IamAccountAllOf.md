@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "iam.Account"]
 **Name** | Pointer to **string** | Name of the Intersight account. By default, name is same as the MoID of the account. | [optional] 
 **Regions** | Pointer to **[]string** |  | [optional] 
+**SingleAdminLockout** | Pointer to **bool** | Indicates if the account is prone to lockout as it has only a single Account Administrator.  An account is prone to lockout if it has only one configured Account Administrator and no user groups configured that  can grant Account Administrator role to dynamic users. | [optional] [readonly] 
 **Status** | Pointer to **string** | Status of the account. To activate the Intersight account, claim a device to the account. | [optional] [readonly] 
 **AppRegistrations** | Pointer to [**[]IamAppRegistrationRelationship**](IamAppRegistrationRelationship.md) | An array of relationships to iamAppRegistration resources. | [optional] [readonly] 
 **DomainGroups** | Pointer to [**[]IamDomainGroupRelationship**](IamDomainGroupRelationship.md) | An array of relationships to iamDomainGroup resources. | [optional] [readonly] 
@@ -141,6 +142,31 @@ HasRegions returns a boolean if a field has been set.
 `func (o *IamAccountAllOf) UnsetRegions()`
 
 UnsetRegions ensures that no value is present for Regions, not even an explicit nil
+### GetSingleAdminLockout
+
+`func (o *IamAccountAllOf) GetSingleAdminLockout() bool`
+
+GetSingleAdminLockout returns the SingleAdminLockout field if non-nil, zero value otherwise.
+
+### GetSingleAdminLockoutOk
+
+`func (o *IamAccountAllOf) GetSingleAdminLockoutOk() (*bool, bool)`
+
+GetSingleAdminLockoutOk returns a tuple with the SingleAdminLockout field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSingleAdminLockout
+
+`func (o *IamAccountAllOf) SetSingleAdminLockout(v bool)`
+
+SetSingleAdminLockout sets SingleAdminLockout field to given value.
+
+### HasSingleAdminLockout
+
+`func (o *IamAccountAllOf) HasSingleAdminLockout() bool`
+
+HasSingleAdminLockout returns a boolean if a field has been set.
+
 ### GetStatus
 
 `func (o *IamAccountAllOf) GetStatus() string`

@@ -566,17 +566,6 @@ func dataSourceServerConfigResultEntryRead(c context.Context, d *schema.Resource
 				}
 			}
 			o.SetClassId("policy.ConfigResultContext")
-			if v, ok := l["entity_data"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						x2 := x1.(map[string]interface{})
-						o.SetEntityData(x2)
-					}
-				}
-			}
 			if v, ok := l["entity_moid"]; ok {
 				{
 					x := (v.(string))

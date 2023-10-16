@@ -22,7 +22,7 @@ Name | Type | Description | Notes
 **Progress** | Pointer to **float32** | This field indicates percentage of workflow task completion based on the total number of tasks in the workflow. The total number of tasks in the workflow is calculated based on the longest path the workflow execution can take. So progress is calculated based on the percentage of tasks that completed out of the total number of tasks that could be executed. Progress is not a representation of the time taken to complete the workflow. A task is considered as completed if the task status is either \&quot;NO_OP\&quot; or \&quot;COMPLETED\&quot;. If the task status is \&quot;SKIP_TO_FAIL\&quot;, the workflow will be terminated and the progress of the workflow will be set to 100. | [optional] [readonly] 
 **Properties** | Pointer to [**NullableWorkflowWorkflowInfoProperties**](WorkflowWorkflowInfoProperties.md) |  | [optional] 
 **RetryFromTaskName** | Pointer to **string** | This field is required when RetryFromTask action is issued for a workflow that is in a &#39;final&#39; state. The workflow will be retried from the specified task. This field must specify a task name which is the unique name of the task within the workflow. The task name must be one of the tasks that were completed or failed in the previous run. It is not possible to retry a workflow from a task that wasn&#39;t run in the previous execution attempt. | [optional] 
-**Src** | Pointer to **string** | The source microservice name which is the owner of this workflow. | [optional] [readonly] 
+**Src** | Pointer to **string** | The source service that started the workflow execution and hence represents the owning service for this workflow. | [optional] [readonly] 
 **StartTime** | Pointer to **time.Time** | The time when the workflow was started for execution. | [optional] [readonly] 
 **Status** | Pointer to **string** | A status of the workflow (RUNNING, WAITING, COMPLETED, TIME_OUT, FAILED). | [optional] [readonly] 
 **SuccessWorkflowCleanupDuration** | Pointer to **int64** | The duration in hours after which the workflow info for successful workflow will be removed from database. The minimum is 1 hour, maximum is 365 days and default is 90 days. | [optional] [default to 2160]
@@ -37,7 +37,6 @@ Name | Type | Description | Notes
 **AssociatedObject** | Pointer to [**MoBaseMoRelationship**](MoBaseMoRelationship.md) |  | [optional] 
 **Organization** | Pointer to [**OrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
 **ParentTaskInfo** | Pointer to [**WorkflowTaskInfoRelationship**](WorkflowTaskInfoRelationship.md) |  | [optional] 
-**PendingDynamicWorkflowInfo** | Pointer to [**WorkflowPendingDynamicWorkflowInfoRelationship**](WorkflowPendingDynamicWorkflowInfoRelationship.md) |  | [optional] 
 **Permission** | Pointer to [**IamPermissionRelationship**](IamPermissionRelationship.md) |  | [optional] 
 **TaskInfos** | Pointer to [**[]WorkflowTaskInfoRelationship**](WorkflowTaskInfoRelationship.md) | An array of relationships to workflowTaskInfo resources. | [optional] [readonly] 
 **WorkflowDefinition** | Pointer to [**WorkflowWorkflowDefinitionRelationship**](WorkflowWorkflowDefinitionRelationship.md) |  | [optional] 
@@ -935,31 +934,6 @@ SetParentTaskInfo sets ParentTaskInfo field to given value.
 `func (o *WorkflowWorkflowInfoAllOf) HasParentTaskInfo() bool`
 
 HasParentTaskInfo returns a boolean if a field has been set.
-
-### GetPendingDynamicWorkflowInfo
-
-`func (o *WorkflowWorkflowInfoAllOf) GetPendingDynamicWorkflowInfo() WorkflowPendingDynamicWorkflowInfoRelationship`
-
-GetPendingDynamicWorkflowInfo returns the PendingDynamicWorkflowInfo field if non-nil, zero value otherwise.
-
-### GetPendingDynamicWorkflowInfoOk
-
-`func (o *WorkflowWorkflowInfoAllOf) GetPendingDynamicWorkflowInfoOk() (*WorkflowPendingDynamicWorkflowInfoRelationship, bool)`
-
-GetPendingDynamicWorkflowInfoOk returns a tuple with the PendingDynamicWorkflowInfo field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetPendingDynamicWorkflowInfo
-
-`func (o *WorkflowWorkflowInfoAllOf) SetPendingDynamicWorkflowInfo(v WorkflowPendingDynamicWorkflowInfoRelationship)`
-
-SetPendingDynamicWorkflowInfo sets PendingDynamicWorkflowInfo field to given value.
-
-### HasPendingDynamicWorkflowInfo
-
-`func (o *WorkflowWorkflowInfoAllOf) HasPendingDynamicWorkflowInfo() bool`
-
-HasPendingDynamicWorkflowInfo returns a boolean if a field has been set.
 
 ### GetPermission
 

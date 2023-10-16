@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **ChangePassword** | Pointer to **bool** | Denotes whether password has changed. | [optional] [readonly] 
 **Enabled** | Pointer to **bool** | Enables the user account on the endpoint. | [optional] 
 **IsPasswordSet** | Pointer to **bool** | Indicates whether the value of the &#39;password&#39; property has been set. | [optional] [readonly] [default to false]
-**Password** | Pointer to **string** | Valid login password of the user. | [optional] 
+**Password** | Pointer to **string** | The password must have a minimum of 8 and a maximum of 127 characters. For servers with IPMI user role enabled, the maximum length is limited to 20 characters. When strong password is enabled, must satisfy below requirements: A. The password must not contain the User&#39;s Name. B. The password must contain characters from three of the following four categories. 1) English uppercase characters (A through Z). 2) English lowercase characters (a through z). 3) Base 10 digits (0 through 9). 4) Non-alphabetic characters (! , @, #, $, %, ^, &amp;, *, -, _, +, &#x3D;). | [optional] 
 **EndPointRole** | Pointer to [**[]IamEndPointRoleRelationship**](IamEndPointRoleRelationship.md) | An array of relationships to iamEndPointRole resources. | [optional] 
 **EndPointUser** | Pointer to [**IamEndPointUserRelationship**](IamEndPointUserRelationship.md) |  | [optional] 
 **EndPointUserPolicy** | Pointer to [**IamEndPointUserPolicyRelationship**](IamEndPointUserPolicyRelationship.md) |  | [optional] 

@@ -619,34 +619,10 @@ func dataSourceEquipmentChassisIdentityRead(c context.Context, d *schema.Resourc
 				}
 			}
 			o.SetClassId("equipment.IoCardIdentity")
-			if v, ok := l["io_card_moid"]; ok {
-				{
-					x := (v.(string))
-					o.SetIoCardMoid(x)
-				}
-			}
-			if v, ok := l["module_id"]; ok {
-				{
-					x := int64(v.(int))
-					o.SetModuleId(x)
-				}
-			}
-			if v, ok := l["network_element_moid"]; ok {
-				{
-					x := (v.(string))
-					o.SetNetworkElementMoid(x)
-				}
-			}
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
 					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["switch_id"]; ok {
-				{
-					x := int64(v.(int))
-					o.SetSwitchId(x)
 				}
 			}
 			x = append(x, *o)

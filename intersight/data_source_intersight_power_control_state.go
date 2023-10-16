@@ -116,7 +116,7 @@ func getPowerControlStateSchema() map[string]*schema.Schema {
 			},
 		},
 		"extended_power_capacity": {
-			Description: "The status of extended power capacity mode of the chassis. If Enabled, this mode allows chassis available power to be increased by borrowing power from redundant power supplies.\n* `Enabled` - Set the value to Enabled.\n* `Disabled` - Set the value to Disabled.",
+			Description: "The status of extended power capacity mode of the chassis. If Enabled, this mode allows chassis available power to be increased by borrowing power from redundant power supplies.\n* `Enabled` - Set the value to Enabled.\n* `Disabled` - Set the value to Disabled.\n* `Not Applicable` - Set the value to Not Applicable.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},

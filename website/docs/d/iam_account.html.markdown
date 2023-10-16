@@ -21,5 +21,6 @@ The following arguments can be used to get data of already created objects in In
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `name`:(string) Name of the Intersight account. By default, name is same as the MoID of the account. 
 * `shared_scope`:(string) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
+* `single_admin_lockout`:(bool) Indicates if the account is prone to lockout as it has only a single Account Administrator. An account is prone to lockout if it has only one configured Account Administrator and no user groups configured that can grant Account Administrator role to dynamic users. 
 * `status`:(string) Status of the account. To activate the Intersight account, claim a device to the account. 
  
