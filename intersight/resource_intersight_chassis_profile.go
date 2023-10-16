@@ -208,6 +208,148 @@ func resourceChassisProfile() *schema.Resource {
 				Optional:    true,
 				Default:     "chassis.Profile",
 			},
+			"config_change_context": {
+				Description: "The configuration change state and results of the last change operation.",
+				Type:        schema.TypeList,
+				MaxItems:    1,
+				Optional:    true,
+				Computed:    true,
+				ConfigMode:  schema.SchemaConfigModeAttr,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"additional_properties": {
+							Type:             schema.TypeString,
+							Optional:         true,
+							DiffSuppressFunc: SuppressDiffAdditionProps,
+						},
+						"class_id": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Default:     "policy.ConfigChangeContext",
+						},
+						"config_change_error": {
+							Description: "Indicates reason for failure state of configChangeState.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+							ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+								if val != nil {
+									warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+								}
+								return
+							}},
+						"config_change_state": {
+							Description: "Indicates a profile's configuration change state. Used for tracking pending-changes and out-of-synch states.\n* `Ok` - Config change state represents Validation for change/drift is successful or is not applicable.\n* `Validating-change` - Config change state represents policy changes are being validated. This state starts when policy is changed and becomes different from deployed changes (Pending-changes).\n* `Validating-drift` - Config change state represents endpoint configuration changes are being validated. This state starts when endpoint is changed and endpoint configuration becomes different from policy configured changes (Out-of-sync).\n* `Change-failed` - Config change state represents there is internal error in calculating policy change.\n* `Drift-failed` - Config change state represents there is internal error in calculating endpoint configuraion drift.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+							ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+								if val != nil {
+									warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+								}
+								return
+							}},
+						"initial_config_context": {
+							Description: "Stores initial Configuration state. Used for reverting back to initial state of ConfigContext in case of validation failure.",
+							Type:        schema.TypeList,
+							MaxItems:    1,
+							Optional:    true,
+							Computed:    true,
+							ConfigMode:  schema.SchemaConfigModeAttr,
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"additional_properties": {
+										Type:             schema.TypeString,
+										Optional:         true,
+										DiffSuppressFunc: SuppressDiffAdditionProps,
+									},
+									"class_id": {
+										Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										Default:     "policy.ConfigContext",
+									},
+									"config_state": {
+										Description: "Indicates a profile's configuration deploying state. Values -- Assigned, Not-assigned, Associated, Pending-changes, Out-of-sync, Validating, Configuring, Failed.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										Computed:    true,
+										ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+											if val != nil {
+												warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+											}
+											return
+										}},
+									"config_state_summary": {
+										Description: "Indicates a profile's configuration deploying state. Values -- Assigned, Not-assigned, Associated, InConsistent, Validating, Configuring, Failed, Activating, UnConfiguring.\n* `None` - The default state is none.\n* `Not-assigned` - Server is not assigned to the profile.\n* `Assigned` - Server is assigned to the profile and the configurations are not yet deployed.\n* `Preparing` - Preparing to deploy the configuration.\n* `Validating` - Profile validation in progress.\n* `Configuring` - Profile deploy operation is in progress.\n* `UnConfiguring` - Server is unassigned and config cleanup is in progress.\n* `Analyzing` - Profile changes are being analyzed.\n* `Activating` - Configuration is being activated at the endpoint.\n* `Inconsistent` - Profile is inconsistent with the endpoint configuration.\n* `Associated` - The profile configuration has been applied to the endpoint and no inconsistencies have been detected.\n* `Failed` - The last action on the profile has failed.\n* `Not-complete` - Config import operation on the profile is not complete.\n* `Waiting-for-resource` - Waiting for the resource to be allocated for the profile.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										Computed:    true,
+										ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+											if val != nil {
+												warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+											}
+											return
+										}},
+									"config_type": {
+										Description: "The type of configuration running on the profile. Since profile deployments can configure multiple different settings, configType indicates which type of configuration is currently in progress.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										Computed:    true,
+										ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+											if val != nil {
+												warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+											}
+											return
+										}},
+									"control_action": {
+										Description: "System action to trigger the appropriate workflow. Values -- No_op, ConfigChange, Deploy, Unbind.",
+										Type:        schema.TypeString,
+										Optional:    true,
+									},
+									"error_state": {
+										Description: "Indicates a profile's error state. Values -- Validation-error (Static validation error), Pre-config-error (Runtime validation error), Config-error (Runtime configuration error).",
+										Type:        schema.TypeString,
+										Optional:    true,
+									},
+									"inconsistency_reason": {
+										Type:       schema.TypeList,
+										Optional:   true,
+										ConfigMode: schema.SchemaConfigModeAttr,
+										Computed:   true,
+										Elem: &schema.Schema{
+											Type: schema.TypeString,
+										}},
+									"object_type": {
+										Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										Default:     "policy.ConfigContext",
+									},
+									"oper_state": {
+										Description: "Combined state (configState, and operational state of the associated physical resource) to indicate the current state of the profile. Values -- n/a, Power-off, Pending-changes, Configuring, Ok, Failed.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										Computed:    true,
+										ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+											if val != nil {
+												warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+											}
+											return
+										}},
+								},
+							},
+						},
+						"object_type": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Default:     "policy.ConfigChangeContext",
+						},
+					},
+				},
+			},
 			"config_change_details": {
 				Description: "An array of relationships to chassisConfigChangeDetail resources.",
 				Type:        schema.TypeList,
@@ -1570,6 +1712,10 @@ func resourceChassisProfileRead(c context.Context, d *schema.ResourceData, meta 
 
 	if err := d.Set("class_id", (s.GetClassId())); err != nil {
 		return diag.Errorf("error occurred while setting property ClassId in ChassisProfile object: %s", err.Error())
+	}
+
+	if err := d.Set("config_change_context", flattenMapPolicyConfigChangeContext(s.GetConfigChangeContext(), d)); err != nil {
+		return diag.Errorf("error occurred while setting property ConfigChangeContext in ChassisProfile object: %s", err.Error())
 	}
 
 	if err := d.Set("config_change_details", flattenListChassisConfigChangeDetailRelationship(s.GetConfigChangeDetails(), d)); err != nil {

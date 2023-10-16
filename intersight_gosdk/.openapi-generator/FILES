@@ -3178,6 +3178,7 @@ docs/IamSharingRule.md
 docs/IamSharingRuleAllOf.md
 docs/IamSharingRuleList.md
 docs/IamSharingRuleListAllOf.md
+docs/IamSharingRuleRelationship.md
 docs/IamSharingRuleResponse.md
 docs/IamSsoSessionAttributes.md
 docs/IamSsoSessionAttributesAllOf.md
@@ -5158,6 +5159,11 @@ docs/ResourceSelectionCriteriaListAllOf.md
 docs/ResourceSelectionCriteriaResponse.md
 docs/ResourceSelector.md
 docs/ResourceSelectorAllOf.md
+docs/ResourceSharedResourcesInfoHolder.md
+docs/ResourceSharedResourcesInfoHolderAllOf.md
+docs/ResourceSharedResourcesInfoHolderList.md
+docs/ResourceSharedResourcesInfoHolderListAllOf.md
+docs/ResourceSharedResourcesInfoHolderResponse.md
 docs/ResourceSourceToPermissionResources.md
 docs/ResourceSourceToPermissionResourcesAllOf.md
 docs/ResourceSourceToPermissionResourcesHolder.md
@@ -6498,6 +6504,11 @@ docs/TerraformRunstateAllOf.md
 docs/ThermalApi.md
 docs/ThermalPolicy.md
 docs/ThermalPolicyAllOf.md
+docs/ThermalPolicyInventory.md
+docs/ThermalPolicyInventoryAllOf.md
+docs/ThermalPolicyInventoryList.md
+docs/ThermalPolicyInventoryListAllOf.md
+docs/ThermalPolicyInventoryResponse.md
 docs/ThermalPolicyList.md
 docs/ThermalPolicyListAllOf.md
 docs/ThermalPolicyResponse.md
@@ -7175,8 +7186,6 @@ docs/WorkflowDisplayMeta.md
 docs/WorkflowDisplayMetaAllOf.md
 docs/WorkflowDynamicTemplateParserDataType.md
 docs/WorkflowDynamicTemplateParserDataTypeAllOf.md
-docs/WorkflowDynamicWorkflowActionTaskList.md
-docs/WorkflowDynamicWorkflowActionTaskListAllOf.md
 docs/WorkflowEndTask.md
 docs/WorkflowEnumEntry.md
 docs/WorkflowEnumEntryAllOf.md
@@ -7232,12 +7241,6 @@ docs/WorkflowOperationTypePostDeployment.md
 docs/WorkflowOperationTypePostDeploymentAllOf.md
 docs/WorkflowParameterSet.md
 docs/WorkflowParameterSetAllOf.md
-docs/WorkflowPendingDynamicWorkflowInfo.md
-docs/WorkflowPendingDynamicWorkflowInfoAllOf.md
-docs/WorkflowPendingDynamicWorkflowInfoList.md
-docs/WorkflowPendingDynamicWorkflowInfoListAllOf.md
-docs/WorkflowPendingDynamicWorkflowInfoRelationship.md
-docs/WorkflowPendingDynamicWorkflowInfoResponse.md
 docs/WorkflowPowerShellApi.md
 docs/WorkflowPowerShellApiAllOf.md
 docs/WorkflowPowerShellBatchApiExecutor.md
@@ -10470,6 +10473,7 @@ model_iam_sharing_rule.go
 model_iam_sharing_rule_all_of.go
 model_iam_sharing_rule_list.go
 model_iam_sharing_rule_list_all_of.go
+model_iam_sharing_rule_relationship.go
 model_iam_sharing_rule_response.go
 model_iam_sso_session_attributes.go
 model_iam_sso_session_attributes_all_of.go
@@ -12415,6 +12419,11 @@ model_resource_selection_criteria_list_all_of.go
 model_resource_selection_criteria_response.go
 model_resource_selector.go
 model_resource_selector_all_of.go
+model_resource_shared_resources_info_holder.go
+model_resource_shared_resources_info_holder_all_of.go
+model_resource_shared_resources_info_holder_list.go
+model_resource_shared_resources_info_holder_list_all_of.go
+model_resource_shared_resources_info_holder_response.go
 model_resource_source_to_permission_resources.go
 model_resource_source_to_permission_resources_all_of.go
 model_resource_source_to_permission_resources_holder.go
@@ -13734,6 +13743,11 @@ model_terraform_runstate.go
 model_terraform_runstate_all_of.go
 model_thermal_policy.go
 model_thermal_policy_all_of.go
+model_thermal_policy_inventory.go
+model_thermal_policy_inventory_all_of.go
+model_thermal_policy_inventory_list.go
+model_thermal_policy_inventory_list_all_of.go
+model_thermal_policy_inventory_response.go
 model_thermal_policy_list.go
 model_thermal_policy_list_all_of.go
 model_thermal_policy_response.go
@@ -14401,8 +14415,6 @@ model_workflow_display_meta.go
 model_workflow_display_meta_all_of.go
 model_workflow_dynamic_template_parser_data_type.go
 model_workflow_dynamic_template_parser_data_type_all_of.go
-model_workflow_dynamic_workflow_action_task_list.go
-model_workflow_dynamic_workflow_action_task_list_all_of.go
 model_workflow_end_task.go
 model_workflow_enum_entry.go
 model_workflow_enum_entry_all_of.go
@@ -14458,12 +14470,6 @@ model_workflow_operation_type_post_deployment.go
 model_workflow_operation_type_post_deployment_all_of.go
 model_workflow_parameter_set.go
 model_workflow_parameter_set_all_of.go
-model_workflow_pending_dynamic_workflow_info.go
-model_workflow_pending_dynamic_workflow_info_all_of.go
-model_workflow_pending_dynamic_workflow_info_list.go
-model_workflow_pending_dynamic_workflow_info_list_all_of.go
-model_workflow_pending_dynamic_workflow_info_relationship.go
-model_workflow_pending_dynamic_workflow_info_response.go
 model_workflow_power_shell_api.go
 model_workflow_power_shell_api_all_of.go
 model_workflow_power_shell_batch_api_executor.go

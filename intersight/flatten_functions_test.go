@@ -10181,30 +10181,6 @@ func TestFlattenListWorkflowCatalogServiceRequestRelationship(t *testing.T) {
 		CheckError(t, err)
 	}
 }
-func TestFlattenListWorkflowDynamicWorkflowActionTaskList(t *testing.T) {
-	p := []models.WorkflowDynamicWorkflowActionTaskList{}
-	var d = &schema.ResourceData{}
-	c := `{"Action":"Action %d","ClassId":"workflow.DynamicWorkflowActionTaskList","ObjectType":"workflow.DynamicWorkflowActionTaskList"}`
-
-	//test when the response is empty
-	ffOpEmpty := flattenListWorkflowDynamicWorkflowActionTaskList(p, d)
-	if len(ffOpEmpty) != 0 {
-		t.Errorf("error: no elements should be present. Found %d elements", len(ffOpEmpty))
-	}
-	// test when response is available and resourceData is empty
-	for i := 1; i < 3; i++ {
-		x := models.WorkflowDynamicWorkflowActionTaskList{}
-		err := x.UnmarshalJSON([]byte(strings.Replace(c, "%d", fmt.Sprint(i), -1)))
-		CheckError(t, err)
-		p = append(p, x)
-	}
-	ffOp := flattenListWorkflowDynamicWorkflowActionTaskList(p, d)
-	expectedOp := []map[string]interface{}{{"action": "Action 1", "class_id": "workflow.DynamicWorkflowActionTaskList", "object_type": "workflow.DynamicWorkflowActionTaskList"}, {"action": "Action 2", "class_id": "workflow.DynamicWorkflowActionTaskList", "object_type": "workflow.DynamicWorkflowActionTaskList"}}
-	for i := 0; i < len(expectedOp); i++ {
-		err := compareMaps(expectedOp[i], ffOp[i], t)
-		CheckError(t, err)
-	}
-}
 func TestFlattenListWorkflowMessage(t *testing.T) {
 	p := []models.WorkflowMessage{}
 	var d = &schema.ResourceData{}
@@ -15355,6 +15331,24 @@ func TestFlattenMapIamSessionLimitsRelationship(t *testing.T) {
 	err := p.UnmarshalJSON([]byte(strings.Replace(c, "%d", "1", -1)))
 	CheckError(t, err)
 	ffOp := flattenMapIamSessionLimitsRelationship(p, d)[0]
+	expectedOp := map[string]interface{}{"class_id": "mo.MoRef", "moid": "Moid 1", "object_type": "mo.MoRef", "selector": "Selector 1"}
+	err = compareMaps(expectedOp, ffOp, t)
+	CheckError(t, err)
+}
+func TestFlattenMapIamSharingRuleRelationship(t *testing.T) {
+	p := models.IamSharingRuleRelationship{}
+	var d = &schema.ResourceData{}
+	c := `{"ClassId":"mo.MoRef","Moid":"Moid %d","ObjectType":"mo.MoRef","Selector":"Selector %d"}`
+
+	//test when the response is empty
+	ffOpEmpty := flattenMapIamSharingRuleRelationship(p, d)
+	if len(ffOpEmpty) != 0 {
+		t.Errorf("error: no elements should be present. Found %d elements", len(ffOpEmpty))
+	}
+	// test when response is available and resourceData is empty
+	err := p.UnmarshalJSON([]byte(strings.Replace(c, "%d", "1", -1)))
+	CheckError(t, err)
+	ffOp := flattenMapIamSharingRuleRelationship(p, d)[0]
 	expectedOp := map[string]interface{}{"class_id": "mo.MoRef", "moid": "Moid 1", "object_type": "mo.MoRef", "selector": "Selector 1"}
 	err = compareMaps(expectedOp, ffOp, t)
 	CheckError(t, err)
@@ -21818,24 +21812,6 @@ func TestFlattenMapWorkflowInternalProperties(t *testing.T) {
 	CheckError(t, err)
 	ffOp := flattenMapWorkflowInternalProperties(p, d)[0]
 	expectedOp := map[string]interface{}{"base_task_type": "BaseTaskType 1", "class_id": "workflow.InternalProperties", "internal": true, "object_type": "workflow.InternalProperties", "owner": "Owner 1"}
-	err = compareMaps(expectedOp, ffOp, t)
-	CheckError(t, err)
-}
-func TestFlattenMapWorkflowPendingDynamicWorkflowInfoRelationship(t *testing.T) {
-	p := models.WorkflowPendingDynamicWorkflowInfoRelationship{}
-	var d = &schema.ResourceData{}
-	c := `{"ClassId":"mo.MoRef","Moid":"Moid %d","ObjectType":"mo.MoRef","Selector":"Selector %d"}`
-
-	//test when the response is empty
-	ffOpEmpty := flattenMapWorkflowPendingDynamicWorkflowInfoRelationship(p, d)
-	if len(ffOpEmpty) != 0 {
-		t.Errorf("error: no elements should be present. Found %d elements", len(ffOpEmpty))
-	}
-	// test when response is available and resourceData is empty
-	err := p.UnmarshalJSON([]byte(strings.Replace(c, "%d", "1", -1)))
-	CheckError(t, err)
-	ffOp := flattenMapWorkflowPendingDynamicWorkflowInfoRelationship(p, d)[0]
-	expectedOp := map[string]interface{}{"class_id": "mo.MoRef", "moid": "Moid 1", "object_type": "mo.MoRef", "selector": "Selector 1"}
 	err = compareMaps(expectedOp, ffOp, t)
 	CheckError(t, err)
 }

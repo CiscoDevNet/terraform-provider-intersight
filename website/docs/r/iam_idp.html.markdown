@@ -59,6 +59,8 @@ This complex property has following sub-properties:
 * `create_time`:(string)(ReadOnly) The time when this managed object was created. 
 * `domain_group_moid`:(string)(ReadOnly) The DomainGroup ID for this managed object. 
 * `domain_name`:(string) Email domain name of the user for this IdP. When a user enters an email during login in the Intersight home page, the IdP is picked by matching this domain name with the email domain name for authentication. 
+* `domain_names`:
+                (Array of schema.TypeString) -
 * `enable_single_logout`:(bool) Setting that indicates whether 'Single Logout (SLO)' has been enabled for this IdP. 
 * `idp_entity_id`:(string)(ReadOnly) The Entity ID of the IdP. In SAML, the entity ID uniquely identifies the IdP or Service Provider. 
 * `ldap_policy`:(HashMap) -(ReadOnly) A reference to a iamLdapPolicy resource.When the $expand query parameter is specified, the referenced resource is returned inline. 

@@ -6,10 +6,10 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "equipment.IoCardIdentity"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "equipment.IoCardIdentity"]
-**IoCardMoid** | Pointer to **string** | MO Reference to equipmentIoCard MO in inventory service. | [optional] 
-**ModuleId** | Pointer to **int64** | IOM/MUX Module ID connected to the FI. | [optional] 
-**NetworkElementMoid** | Pointer to **string** | MO Reference to networkElement MO in inventory service. | [optional] 
-**SwitchId** | Pointer to **int64** | Switch ID to which IOM is connected, ID can be either 1 or 2, equalent to A or B. | [optional] 
+**IoCardMoid** | Pointer to **string** | MO Reference to equipmentIoCard MO in inventory service. | [optional] [readonly] 
+**ModuleId** | Pointer to **int64** | IOM/MUX Module ID connected to the FI. | [optional] [readonly] 
+**NetworkElementMoid** | Pointer to **string** | MO Reference to networkElement MO in inventory service. | [optional] [readonly] 
+**SwitchId** | Pointer to **int64** | Switch ID to which IOM is connected, ID can be either 1 or 2, equalent to A or B. | [optional] [readonly] 
 
 ## Methods
 

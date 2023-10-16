@@ -96,12 +96,16 @@ func resourceFabricPortOperation() *schema.Resource {
 				Default:     "fabric.PortOperation",
 			},
 			"config_state": {
-				Description:  "The configured state of these settings in the target chassis. The value is any one of Applied, Applying, Failed. Applied - This state denotes that the admin state changes are applied successfully in the target FI domain. Applying - This state denotes that the admin state changes are being applied in the target FI domain. Failed - This state denotes that the admin state changes could not be applied in the target FI domain.\n* `None` - Nil value when no action has been triggered by the user.\n* `Applied` - User configured settings are in applied state.\n* `Applying` - User settings are being applied on the target server.\n* `Failed` - User configured settings could not be applied.",
-				Type:         schema.TypeString,
-				ValidateFunc: validation.StringInSlice([]string{"None", "Applied", "Applying", "Failed"}, false),
-				Optional:     true,
-				Default:      "None",
-			},
+				Description: "The configured state of these settings in the target chassis. The value is any one of Applied, Applying, Failed. Applied - This state denotes that the admin state changes are applied successfully in the target FI domain. Applying - This state denotes that the admin state changes are being applied in the target FI domain. Failed - This state denotes that the admin state changes could not be applied in the target FI domain.\n* `None` - Nil value when no action has been triggered by the user.\n* `Applied` - User configured settings are in applied state.\n* `Applying` - User settings are being applied on the target server.\n* `Failed` - User configured settings could not be applied.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+					if val != nil {
+						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+					}
+					return
+				}},
 			"create_time": {
 				Description: "The time when this managed object was created.",
 				Type:        schema.TypeString,
@@ -505,11 +509,6 @@ func resourceFabricPortOperationCreate(c context.Context, d *schema.ResourceData
 
 	o.SetClassId("fabric.PortOperation")
 
-	if v, ok := d.GetOk("config_state"); ok {
-		x := (v.(string))
-		o.SetConfigState(x)
-	}
-
 	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
@@ -758,12 +757,6 @@ func resourceFabricPortOperationUpdate(c context.Context, d *schema.ResourceData
 	}
 
 	o.SetClassId("fabric.PortOperation")
-
-	if d.HasChange("config_state") {
-		v := d.Get("config_state")
-		x := (v.(string))
-		o.SetConfigState(x)
-	}
 
 	if d.HasChange("moid") {
 		v := d.Get("moid")

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-13515
+API version: 1.0.11-13892
 Contact: intersight@cisco.com
 */
 
@@ -24,9 +24,9 @@ type PowerPolicyInventory struct {
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
-	// Sets the Allocated Power Budget of the Chassis (in Watts). This field is only supported for Cisco UCS X series Chassis.
+	// Sets the allocated power budget of the chassis (in Watts).
 	AllocatedBudget *int64 `json:"AllocatedBudget,omitempty"`
-	// Sets the Dynamic Power Rebalancing mode of the Chassis. If enabled, this mode allows the chassis to dynamically reallocate the power between servers depending on their power usage. This option is only supported for Cisco UCS X series Chassis. * `Enabled` - Set the value to Enabled. * `Disabled` - Set the value to Disabled.
+	// Sets the dynamic power rebalancing mode of the chassis. If enabled, this mode allows the chassis to dynamically reallocate the power between servers depending on their power usage. * `Enabled` - Set the value to Enabled. * `Disabled` - Set the value to Disabled.
 	DynamicRebalancing *string `json:"DynamicRebalancing,omitempty"`
 	// Sets the Extended Power Capacity of the Chassis. If Enabled, this mode allows chassis available power to be increased by borrowing power from redundant power supplies.  This option is only supported for Cisco UCS X series Chassis. * `Enabled` - Set the value to Enabled. * `Disabled` - Set the value to Disabled.
 	ExtendedPowerCapacity *string `json:"ExtendedPowerCapacity,omitempty"`
@@ -36,7 +36,7 @@ type PowerPolicyInventory struct {
 	PowerProfiling *string `json:"PowerProfiling,omitempty"`
 	// Sets the Power Restore State of the Server. In the absence of Intersight connectivity, the chassis will use this policy  to recover the host power after a power loss event.  This field is only supported for Cisco UCS B series and X series servers. * `AlwaysOff` - Set the Power Restore Mode to Off. * `AlwaysOn` - Set the Power Restore Mode to On. * `LastState` - Set the Power Restore Mode to LastState.
 	PowerRestoreState *string `json:"PowerRestoreState,omitempty"`
-	// Sets the Power Save mode of the Chassis. If the requested power budget is less than available power capacity,  the additional PSUs not required to comply with redundancy policy are placed in Power Save mode. This option is only supported for Cisco UCS X series Chassis. * `Enabled` - Set the value to Enabled. * `Disabled` - Set the value to Disabled.
+	// Sets the power save mode of the chassis. If the requested power budget is less than available power capacity,  the additional PSUs not required to comply with redundancy policy are placed in power save mode. * `Enabled` - Set the value to Enabled. * `Disabled` - Set the value to Disabled.
 	PowerSaveMode *string `json:"PowerSaveMode,omitempty"`
 	// Sets the Power Redundancy Mode of the Chassis.  Redundancy Mode determines the number of PSUs the chassis keeps as redundant.  N+2 mode is only supported for Cisco UCS X series Chassis. * `Grid` - Grid Mode requires two power sources. If one source fails, the surviving PSUs connected to the other source provides power to the chassis. * `NotRedundant` - Power Manager turns on the minimum number of PSUs required to support chassis power requirements. No Redundant PSUs are maintained. * `N+1` - Power Manager turns on the minimum number of PSUs required to support chassis power requirements plus one additional PSU for redundancy. * `N+2` - Power Manager turns on the minimum number of PSUs required to support chassis power requirements plus two additional PSU for redundancy. This Mode is only supported for UCS X series Chassis.
 	RedundancyMode       *string               `json:"RedundancyMode,omitempty"`
@@ -462,9 +462,9 @@ func (o *PowerPolicyInventory) UnmarshalJSON(bytes []byte) (err error) {
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 		ObjectType string `json:"ObjectType"`
-		// Sets the Allocated Power Budget of the Chassis (in Watts). This field is only supported for Cisco UCS X series Chassis.
+		// Sets the allocated power budget of the chassis (in Watts).
 		AllocatedBudget *int64 `json:"AllocatedBudget,omitempty"`
-		// Sets the Dynamic Power Rebalancing mode of the Chassis. If enabled, this mode allows the chassis to dynamically reallocate the power between servers depending on their power usage. This option is only supported for Cisco UCS X series Chassis. * `Enabled` - Set the value to Enabled. * `Disabled` - Set the value to Disabled.
+		// Sets the dynamic power rebalancing mode of the chassis. If enabled, this mode allows the chassis to dynamically reallocate the power between servers depending on their power usage. * `Enabled` - Set the value to Enabled. * `Disabled` - Set the value to Disabled.
 		DynamicRebalancing *string `json:"DynamicRebalancing,omitempty"`
 		// Sets the Extended Power Capacity of the Chassis. If Enabled, this mode allows chassis available power to be increased by borrowing power from redundant power supplies.  This option is only supported for Cisco UCS X series Chassis. * `Enabled` - Set the value to Enabled. * `Disabled` - Set the value to Disabled.
 		ExtendedPowerCapacity *string `json:"ExtendedPowerCapacity,omitempty"`
@@ -474,7 +474,7 @@ func (o *PowerPolicyInventory) UnmarshalJSON(bytes []byte) (err error) {
 		PowerProfiling *string `json:"PowerProfiling,omitempty"`
 		// Sets the Power Restore State of the Server. In the absence of Intersight connectivity, the chassis will use this policy  to recover the host power after a power loss event.  This field is only supported for Cisco UCS B series and X series servers. * `AlwaysOff` - Set the Power Restore Mode to Off. * `AlwaysOn` - Set the Power Restore Mode to On. * `LastState` - Set the Power Restore Mode to LastState.
 		PowerRestoreState *string `json:"PowerRestoreState,omitempty"`
-		// Sets the Power Save mode of the Chassis. If the requested power budget is less than available power capacity,  the additional PSUs not required to comply with redundancy policy are placed in Power Save mode. This option is only supported for Cisco UCS X series Chassis. * `Enabled` - Set the value to Enabled. * `Disabled` - Set the value to Disabled.
+		// Sets the power save mode of the chassis. If the requested power budget is less than available power capacity,  the additional PSUs not required to comply with redundancy policy are placed in power save mode. * `Enabled` - Set the value to Enabled. * `Disabled` - Set the value to Disabled.
 		PowerSaveMode *string `json:"PowerSaveMode,omitempty"`
 		// Sets the Power Redundancy Mode of the Chassis.  Redundancy Mode determines the number of PSUs the chassis keeps as redundant.  N+2 mode is only supported for Cisco UCS X series Chassis. * `Grid` - Grid Mode requires two power sources. If one source fails, the surviving PSUs connected to the other source provides power to the chassis. * `NotRedundant` - Power Manager turns on the minimum number of PSUs required to support chassis power requirements. No Redundant PSUs are maintained. * `N+1` - Power Manager turns on the minimum number of PSUs required to support chassis power requirements plus one additional PSU for redundancy. * `N+2` - Power Manager turns on the minimum number of PSUs required to support chassis power requirements plus two additional PSU for redundancy. This Mode is only supported for UCS X series Chassis.
 		RedundancyMode *string               `json:"RedundancyMode,omitempty"`

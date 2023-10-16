@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-13515
+API version: 1.0.11-13892
 Contact: intersight@cisco.com
 */
 
@@ -22,7 +22,9 @@ type IamIdpAllOf struct {
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
 	// Email domain name of the user for this IdP. When a user enters an email during login in the Intersight home page, the IdP is picked by matching this domain name with the email domain name for authentication.
-	DomainName *string `json:"DomainName,omitempty"`
+	// Deprecated
+	DomainName  *string  `json:"DomainName,omitempty"`
+	DomainNames []string `json:"DomainNames,omitempty"`
 	// Setting that indicates whether 'Single Logout (SLO)' has been enabled for this IdP.
 	EnableSingleLogout *bool `json:"EnableSingleLogout,omitempty"`
 	// The Entity ID of the IdP. In SAML, the entity ID uniquely identifies the IdP or Service Provider.
@@ -127,6 +129,7 @@ func (o *IamIdpAllOf) SetObjectType(v string) {
 }
 
 // GetDomainName returns the DomainName field value if set, zero value otherwise.
+// Deprecated
 func (o *IamIdpAllOf) GetDomainName() string {
 	if o == nil || o.DomainName == nil {
 		var ret string
@@ -137,6 +140,7 @@ func (o *IamIdpAllOf) GetDomainName() string {
 
 // GetDomainNameOk returns a tuple with the DomainName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *IamIdpAllOf) GetDomainNameOk() (*string, bool) {
 	if o == nil || o.DomainName == nil {
 		return nil, false
@@ -154,8 +158,42 @@ func (o *IamIdpAllOf) HasDomainName() bool {
 }
 
 // SetDomainName gets a reference to the given string and assigns it to the DomainName field.
+// Deprecated
 func (o *IamIdpAllOf) SetDomainName(v string) {
 	o.DomainName = &v
+}
+
+// GetDomainNames returns the DomainNames field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *IamIdpAllOf) GetDomainNames() []string {
+	if o == nil {
+		var ret []string
+		return ret
+	}
+	return o.DomainNames
+}
+
+// GetDomainNamesOk returns a tuple with the DomainNames field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *IamIdpAllOf) GetDomainNamesOk() ([]string, bool) {
+	if o == nil || o.DomainNames == nil {
+		return nil, false
+	}
+	return o.DomainNames, true
+}
+
+// HasDomainNames returns a boolean if a field has been set.
+func (o *IamIdpAllOf) HasDomainNames() bool {
+	if o != nil && o.DomainNames != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetDomainNames gets a reference to the given []string and assigns it to the DomainNames field.
+func (o *IamIdpAllOf) SetDomainNames(v []string) {
+	o.DomainNames = v
 }
 
 // GetEnableSingleLogout returns the EnableSingleLogout field value if set, zero value otherwise.
@@ -589,6 +627,9 @@ func (o IamIdpAllOf) MarshalJSON() ([]byte, error) {
 	if o.DomainName != nil {
 		toSerialize["DomainName"] = o.DomainName
 	}
+	if o.DomainNames != nil {
+		toSerialize["DomainNames"] = o.DomainNames
+	}
 	if o.EnableSingleLogout != nil {
 		toSerialize["EnableSingleLogout"] = o.EnableSingleLogout
 	}
@@ -649,6 +690,7 @@ func (o *IamIdpAllOf) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "DomainName")
+		delete(additionalProperties, "DomainNames")
 		delete(additionalProperties, "EnableSingleLogout")
 		delete(additionalProperties, "IdpEntityId")
 		delete(additionalProperties, "Metadata")

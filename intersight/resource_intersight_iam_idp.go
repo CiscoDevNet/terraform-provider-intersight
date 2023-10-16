@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
+	"reflect"
 	"regexp"
 	"strings"
 
@@ -152,6 +153,17 @@ func resourceIamIdp() *schema.Resource {
 				ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$"), ""),
 				Optional:     true,
 			},
+			"domain_names": {
+				Type:       schema.TypeList,
+				MaxItems:   20,
+				MinItems:   0,
+				Optional:   true,
+				ConfigMode: schema.SchemaConfigModeAttr,
+				Computed:   true,
+				Elem: &schema.Schema{
+					Type:         schema.TypeString,
+					ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$"), ""),
+				}},
 			"enable_single_logout": {
 				Description: "Setting that indicates whether 'Single Logout (SLO)' has been enabled for this IdP.",
 				Type:        schema.TypeBool,
@@ -752,6 +764,19 @@ func resourceIamIdpCreate(c context.Context, d *schema.ResourceData, meta interf
 		o.SetDomainName(x)
 	}
 
+	if v, ok := d.GetOk("domain_names"); ok {
+		x := make([]string, 0)
+		y := reflect.ValueOf(v)
+		for i := 0; i < y.Len(); i++ {
+			if y.Index(i).Interface() != nil {
+				x = append(x, y.Index(i).Interface().(string))
+			}
+		}
+		if len(x) > 0 {
+			o.SetDomainNames(x)
+		}
+	}
+
 	if v, ok := d.GetOkExists("enable_single_logout"); ok {
 		x := (v.(bool))
 		o.SetEnableSingleLogout(x)
@@ -970,6 +995,10 @@ func resourceIamIdpRead(c context.Context, d *schema.ResourceData, meta interfac
 		return diag.Errorf("error occurred while setting property DomainName in IamIdp object: %s", err.Error())
 	}
 
+	if err := d.Set("domain_names", (s.GetDomainNames())); err != nil {
+		return diag.Errorf("error occurred while setting property DomainNames in IamIdp object: %s", err.Error())
+	}
+
 	if err := d.Set("enable_single_logout", (s.GetEnableSingleLogout())); err != nil {
 		return diag.Errorf("error occurred while setting property EnableSingleLogout in IamIdp object: %s", err.Error())
 	}
@@ -1081,6 +1110,18 @@ func resourceIamIdpUpdate(c context.Context, d *schema.ResourceData, meta interf
 		v := d.Get("domain_name")
 		x := (v.(string))
 		o.SetDomainName(x)
+	}
+
+	if d.HasChange("domain_names") {
+		v := d.Get("domain_names")
+		x := make([]string, 0)
+		y := reflect.ValueOf(v)
+		for i := 0; i < y.Len(); i++ {
+			if y.Index(i).Interface() != nil {
+				x = append(x, y.Index(i).Interface().(string))
+			}
+		}
+		o.SetDomainNames(x)
 	}
 
 	if d.HasChange("enable_single_logout") {

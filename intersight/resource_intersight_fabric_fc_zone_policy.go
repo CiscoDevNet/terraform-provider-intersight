@@ -157,7 +157,7 @@ func resourceFabricFcZonePolicy() *schema.Resource {
 						"wwpn": {
 							Description:  "WWPN that is a member of the FC zone.",
 							Type:         schema.TypeString,
-							ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|((^20|5[0-9a-fA-F]{1}):([0-9a-fA-F]{2}:){6}([0-9a-fA-F]{2})$)"), ""),
+							ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|([0-9a-fA-F]{2}:){7}[0-9a-fA-F]{2}$"), ""),
 							Optional:     true,
 						},
 					},

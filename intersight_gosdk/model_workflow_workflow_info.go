@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-13515
+API version: 1.0.11-13892
 Contact: intersight@cisco.com
 */
 
@@ -55,7 +55,7 @@ type WorkflowWorkflowInfo struct {
 	Properties NullableWorkflowWorkflowInfoProperties `json:"Properties,omitempty"`
 	// This field is required when RetryFromTask action is issued for a workflow that is in a 'final' state. The workflow will be retried from the specified task. This field must specify a task name which is the unique name of the task within the workflow. The task name must be one of the tasks that were completed or failed in the previous run. It is not possible to retry a workflow from a task that wasn't run in the previous execution attempt.
 	RetryFromTaskName *string `json:"RetryFromTaskName,omitempty"`
-	// The source microservice name which is the owner of this workflow.
+	// The source service that started the workflow execution and hence represents the owning service for this workflow.
 	Src *string `json:"Src,omitempty"`
 	// The time when the workflow was started for execution.
 	StartTime *time.Time `json:"StartTime,omitempty"`
@@ -74,14 +74,13 @@ type WorkflowWorkflowInfo struct {
 	// All the generated variables for the workflow. During workflow execution, the variables will be updated as per the variableParameters specified after each task execution.
 	Variable interface{} `json:"Variable,omitempty"`
 	// Denotes the reason workflow is in waiting status. * `None` - Wait reason is none, which indicates there is no reason for the waiting state. * `GatherTasks` - Wait reason is gathering tasks, which indicates the workflow is in this state in order to gather tasks. * `Duplicate` - Wait reason is duplicate, which indicates the workflow is a duplicate of current running workflow. * `RateLimit` - Wait reason is rate limit, which indicates the workflow is rate limited by account/instance level throttling threshold. * `WaitTask` - Wait reason when there are one or more wait tasks in the workflow which are yet to receive a task status update. * `PendingRetryFailed` - Wait reason when the workflow is pending a RetryFailed action. * `WaitingToStart` - Workflow is waiting to start on workflow engine.
-	WaitReason                 *string                                         `json:"WaitReason,omitempty"`
-	WorkflowCtx                NullableWorkflowWorkflowCtx                     `json:"WorkflowCtx,omitempty"`
-	Account                    *IamAccountRelationship                         `json:"Account,omitempty"`
-	AssociatedObject           *MoBaseMoRelationship                           `json:"AssociatedObject,omitempty"`
-	Organization               *OrganizationOrganizationRelationship           `json:"Organization,omitempty"`
-	ParentTaskInfo             *WorkflowTaskInfoRelationship                   `json:"ParentTaskInfo,omitempty"`
-	PendingDynamicWorkflowInfo *WorkflowPendingDynamicWorkflowInfoRelationship `json:"PendingDynamicWorkflowInfo,omitempty"`
-	Permission                 *IamPermissionRelationship                      `json:"Permission,omitempty"`
+	WaitReason       *string                               `json:"WaitReason,omitempty"`
+	WorkflowCtx      NullableWorkflowWorkflowCtx           `json:"WorkflowCtx,omitempty"`
+	Account          *IamAccountRelationship               `json:"Account,omitempty"`
+	AssociatedObject *MoBaseMoRelationship                 `json:"AssociatedObject,omitempty"`
+	Organization     *OrganizationOrganizationRelationship `json:"Organization,omitempty"`
+	ParentTaskInfo   *WorkflowTaskInfoRelationship         `json:"ParentTaskInfo,omitempty"`
+	Permission       *IamPermissionRelationship            `json:"Permission,omitempty"`
 	// An array of relationships to workflowTaskInfo resources.
 	TaskInfos            []WorkflowTaskInfoRelationship          `json:"TaskInfos,omitempty"`
 	WorkflowDefinition   *WorkflowWorkflowDefinitionRelationship `json:"WorkflowDefinition,omitempty"`
@@ -1191,38 +1190,6 @@ func (o *WorkflowWorkflowInfo) SetParentTaskInfo(v WorkflowTaskInfoRelationship)
 	o.ParentTaskInfo = &v
 }
 
-// GetPendingDynamicWorkflowInfo returns the PendingDynamicWorkflowInfo field value if set, zero value otherwise.
-func (o *WorkflowWorkflowInfo) GetPendingDynamicWorkflowInfo() WorkflowPendingDynamicWorkflowInfoRelationship {
-	if o == nil || o.PendingDynamicWorkflowInfo == nil {
-		var ret WorkflowPendingDynamicWorkflowInfoRelationship
-		return ret
-	}
-	return *o.PendingDynamicWorkflowInfo
-}
-
-// GetPendingDynamicWorkflowInfoOk returns a tuple with the PendingDynamicWorkflowInfo field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *WorkflowWorkflowInfo) GetPendingDynamicWorkflowInfoOk() (*WorkflowPendingDynamicWorkflowInfoRelationship, bool) {
-	if o == nil || o.PendingDynamicWorkflowInfo == nil {
-		return nil, false
-	}
-	return o.PendingDynamicWorkflowInfo, true
-}
-
-// HasPendingDynamicWorkflowInfo returns a boolean if a field has been set.
-func (o *WorkflowWorkflowInfo) HasPendingDynamicWorkflowInfo() bool {
-	if o != nil && o.PendingDynamicWorkflowInfo != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetPendingDynamicWorkflowInfo gets a reference to the given WorkflowPendingDynamicWorkflowInfoRelationship and assigns it to the PendingDynamicWorkflowInfo field.
-func (o *WorkflowWorkflowInfo) SetPendingDynamicWorkflowInfo(v WorkflowPendingDynamicWorkflowInfoRelationship) {
-	o.PendingDynamicWorkflowInfo = &v
-}
-
 // GetPermission returns the Permission field value if set, zero value otherwise.
 func (o *WorkflowWorkflowInfo) GetPermission() IamPermissionRelationship {
 	if o == nil || o.Permission == nil {
@@ -1429,9 +1396,6 @@ func (o WorkflowWorkflowInfo) MarshalJSON() ([]byte, error) {
 	if o.ParentTaskInfo != nil {
 		toSerialize["ParentTaskInfo"] = o.ParentTaskInfo
 	}
-	if o.PendingDynamicWorkflowInfo != nil {
-		toSerialize["PendingDynamicWorkflowInfo"] = o.PendingDynamicWorkflowInfo
-	}
 	if o.Permission != nil {
 		toSerialize["Permission"] = o.Permission
 	}
@@ -1485,7 +1449,7 @@ func (o *WorkflowWorkflowInfo) UnmarshalJSON(bytes []byte) (err error) {
 		Properties NullableWorkflowWorkflowInfoProperties `json:"Properties,omitempty"`
 		// This field is required when RetryFromTask action is issued for a workflow that is in a 'final' state. The workflow will be retried from the specified task. This field must specify a task name which is the unique name of the task within the workflow. The task name must be one of the tasks that were completed or failed in the previous run. It is not possible to retry a workflow from a task that wasn't run in the previous execution attempt.
 		RetryFromTaskName *string `json:"RetryFromTaskName,omitempty"`
-		// The source microservice name which is the owner of this workflow.
+		// The source service that started the workflow execution and hence represents the owning service for this workflow.
 		Src *string `json:"Src,omitempty"`
 		// The time when the workflow was started for execution.
 		StartTime *time.Time `json:"StartTime,omitempty"`
@@ -1504,14 +1468,13 @@ func (o *WorkflowWorkflowInfo) UnmarshalJSON(bytes []byte) (err error) {
 		// All the generated variables for the workflow. During workflow execution, the variables will be updated as per the variableParameters specified after each task execution.
 		Variable interface{} `json:"Variable,omitempty"`
 		// Denotes the reason workflow is in waiting status. * `None` - Wait reason is none, which indicates there is no reason for the waiting state. * `GatherTasks` - Wait reason is gathering tasks, which indicates the workflow is in this state in order to gather tasks. * `Duplicate` - Wait reason is duplicate, which indicates the workflow is a duplicate of current running workflow. * `RateLimit` - Wait reason is rate limit, which indicates the workflow is rate limited by account/instance level throttling threshold. * `WaitTask` - Wait reason when there are one or more wait tasks in the workflow which are yet to receive a task status update. * `PendingRetryFailed` - Wait reason when the workflow is pending a RetryFailed action. * `WaitingToStart` - Workflow is waiting to start on workflow engine.
-		WaitReason                 *string                                         `json:"WaitReason,omitempty"`
-		WorkflowCtx                NullableWorkflowWorkflowCtx                     `json:"WorkflowCtx,omitempty"`
-		Account                    *IamAccountRelationship                         `json:"Account,omitempty"`
-		AssociatedObject           *MoBaseMoRelationship                           `json:"AssociatedObject,omitempty"`
-		Organization               *OrganizationOrganizationRelationship           `json:"Organization,omitempty"`
-		ParentTaskInfo             *WorkflowTaskInfoRelationship                   `json:"ParentTaskInfo,omitempty"`
-		PendingDynamicWorkflowInfo *WorkflowPendingDynamicWorkflowInfoRelationship `json:"PendingDynamicWorkflowInfo,omitempty"`
-		Permission                 *IamPermissionRelationship                      `json:"Permission,omitempty"`
+		WaitReason       *string                               `json:"WaitReason,omitempty"`
+		WorkflowCtx      NullableWorkflowWorkflowCtx           `json:"WorkflowCtx,omitempty"`
+		Account          *IamAccountRelationship               `json:"Account,omitempty"`
+		AssociatedObject *MoBaseMoRelationship                 `json:"AssociatedObject,omitempty"`
+		Organization     *OrganizationOrganizationRelationship `json:"Organization,omitempty"`
+		ParentTaskInfo   *WorkflowTaskInfoRelationship         `json:"ParentTaskInfo,omitempty"`
+		Permission       *IamPermissionRelationship            `json:"Permission,omitempty"`
 		// An array of relationships to workflowTaskInfo resources.
 		TaskInfos          []WorkflowTaskInfoRelationship          `json:"TaskInfos,omitempty"`
 		WorkflowDefinition *WorkflowWorkflowDefinitionRelationship `json:"WorkflowDefinition,omitempty"`
@@ -1555,7 +1518,6 @@ func (o *WorkflowWorkflowInfo) UnmarshalJSON(bytes []byte) (err error) {
 		varWorkflowWorkflowInfo.AssociatedObject = varWorkflowWorkflowInfoWithoutEmbeddedStruct.AssociatedObject
 		varWorkflowWorkflowInfo.Organization = varWorkflowWorkflowInfoWithoutEmbeddedStruct.Organization
 		varWorkflowWorkflowInfo.ParentTaskInfo = varWorkflowWorkflowInfoWithoutEmbeddedStruct.ParentTaskInfo
-		varWorkflowWorkflowInfo.PendingDynamicWorkflowInfo = varWorkflowWorkflowInfoWithoutEmbeddedStruct.PendingDynamicWorkflowInfo
 		varWorkflowWorkflowInfo.Permission = varWorkflowWorkflowInfoWithoutEmbeddedStruct.Permission
 		varWorkflowWorkflowInfo.TaskInfos = varWorkflowWorkflowInfoWithoutEmbeddedStruct.TaskInfos
 		varWorkflowWorkflowInfo.WorkflowDefinition = varWorkflowWorkflowInfoWithoutEmbeddedStruct.WorkflowDefinition
@@ -1609,7 +1571,6 @@ func (o *WorkflowWorkflowInfo) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "AssociatedObject")
 		delete(additionalProperties, "Organization")
 		delete(additionalProperties, "ParentTaskInfo")
-		delete(additionalProperties, "PendingDynamicWorkflowInfo")
 		delete(additionalProperties, "Permission")
 		delete(additionalProperties, "TaskInfos")
 		delete(additionalProperties, "WorkflowDefinition")

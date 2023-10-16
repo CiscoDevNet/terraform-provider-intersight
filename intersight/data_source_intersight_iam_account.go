@@ -590,6 +590,11 @@ func getIamAccountSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"single_admin_lockout": {
+			Description: "Indicates if the account is prone to lockout as it has only a single Account Administrator. \nAn account is prone to lockout if it has only one configured Account Administrator and no user groups configured that \ncan grant Account Administrator role to dynamic users.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
 		"status": {
 			Description: "Status of the account. To activate the Intersight account, claim a device to the account.",
 			Type:        schema.TypeString,
@@ -1441,6 +1446,11 @@ func dataSourceIamAccountRead(c context.Context, d *schema.ResourceData, meta in
 		o.SetSharedScope(x)
 	}
 
+	if v, ok := d.GetOkExists("single_admin_lockout"); ok {
+		x := (v.(bool))
+		o.SetSingleAdminLockout(x)
+	}
+
 	if v, ok := d.GetOk("status"); ok {
 		x := (v.(string))
 		o.SetStatus(x)
@@ -1632,6 +1642,7 @@ func dataSourceIamAccountRead(c context.Context, d *schema.ResourceData, meta in
 
 				temp["session_limits"] = flattenMapIamSessionLimitsRelationship(s.GetSessionLimits(), d)
 				temp["shared_scope"] = (s.GetSharedScope())
+				temp["single_admin_lockout"] = (s.GetSingleAdminLockout())
 				temp["status"] = (s.GetStatus())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)

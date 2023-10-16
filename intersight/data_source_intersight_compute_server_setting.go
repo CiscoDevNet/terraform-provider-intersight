@@ -306,7 +306,7 @@ func getComputeServerSettingSchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"front_panel_lock_state": {
-			Description: "The allowed actions on the Front Panel Lock.\n* `Unlock` - Front Panel of the server is set to Unlocked state.\n* `Lock` - Front Panel of the server is set to Locked state.",
+			Description: "The allowed actions on the Front Panel Lock.\n* `None` - Front Panel of the server is set to None state. It is required so that the next frontPanelLockState operation can be triggered.\n* `Lock` - Front Panel of the server is set to Locked state.\n* `Unlock` - Front Panel of the server is set to Unlocked state.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
