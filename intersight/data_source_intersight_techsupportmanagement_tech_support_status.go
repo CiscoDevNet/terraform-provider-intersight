@@ -305,7 +305,7 @@ func getTechsupportmanagementTechSupportStatusSchema() map[string]*schema.Schema
 			Optional:    true,
 		},
 		"status": {
-			Description: "Status of techsupport collection. Valid values are Pending, CollectionInProgress, CollectionFailed, CollectionComplete, UploadPending, UploadInProgress, UploadPartsComplete, UploadFailed and Completed. The final status will be either CollectionFailed or UploadFailed if there is a failure and Completed if the request completed successfully and the file was uploaded to Intersight Storage Service. All the remaining status values indicates the progress of techsupport collection.",
+			Description: "Status of the techsupport collection. Valid values are Scheduled, Pending, CollectionInProgress, CollectionFailed, CollectionComplete, UploadPending, UploadInProgress, UploadPartsComplete, UploadPreparingNextFile, UploadFailed, TechsupportDownloadUrlCreationFailed, PartiallyCompleted, and Completed. The final status will be one of CollectionFailed, UploadFailed, or TechsupportDownloadUrlCreationFailed if there is a failure, Completed if the request completed successfully and the file (or files) were uploaded to Intersight Storage Service, or PartiallyCompleted if at least one file in a multiple file collection uploaded successfully. All the remaining status values indicates the progress of techsupport collection.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -371,6 +371,49 @@ func getTechsupportmanagementTechSupportStatusSchema() map[string]*schema.Schema
 			Description: "The Url to download the techsupport file.",
 			Type:        schema.TypeString,
 			Optional:    true,
+		},
+		"techsupport_files": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"file_name": {
+						Description: "The name of the techsupport file.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"file_size": {
+						Description: "Techsupport file size in bytes.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"techsupport_download_url": {
+						Description: "The Url to download the techsupport file.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"upload_status": {
+						Description: "The upload status of the techsupport file.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
 		},
 		"user_role": {
 			Description: "The name of the role granted to the user that issued the techsupport request.",
@@ -940,6 +983,34 @@ func dataSourceTechsupportmanagementTechSupportStatusRead(c context.Context, d *
 		o.SetTechsupportDownloadUrl(x)
 	}
 
+	if v, ok := d.GetOk("techsupport_files"); ok {
+		x := make([]models.TechsupportmanagementTechSupportFileInfo, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := &models.TechsupportmanagementTechSupportFileInfo{}
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("techsupportmanagement.TechSupportFileInfo")
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			x = append(x, *o)
+		}
+		o.SetTechsupportFiles(x)
+	}
+
 	if v, ok := d.GetOk("user_role"); ok {
 		x := (v.(string))
 		o.SetUserRole(x)
@@ -1091,6 +1162,8 @@ func dataSourceTechsupportmanagementTechSupportStatusRead(c context.Context, d *
 
 				temp["tech_support_request"] = flattenMapTechsupportmanagementTechSupportBundleRelationship(s.GetTechSupportRequest(), d)
 				temp["techsupport_download_url"] = (s.GetTechsupportDownloadUrl())
+
+				temp["techsupport_files"] = flattenListTechsupportmanagementTechSupportFileInfo(s.GetTechsupportFiles(), d)
 				temp["user_role"] = (s.GetUserRole())
 
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)

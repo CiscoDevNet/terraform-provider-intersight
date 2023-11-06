@@ -258,7 +258,7 @@ func getServerProfileSchema() map[string]*schema.Schema {
 									Optional:    true,
 								},
 								"config_state_summary": {
-									Description: "Indicates a profile's configuration deploying state. Values -- Assigned, Not-assigned, Associated, InConsistent, Validating, Configuring, Failed, Activating, UnConfiguring.\n* `None` - The default state is none.\n* `Not-assigned` - Server is not assigned to the profile.\n* `Assigned` - Server is assigned to the profile and the configurations are not yet deployed.\n* `Preparing` - Preparing to deploy the configuration.\n* `Validating` - Profile validation in progress.\n* `Configuring` - Profile deploy operation is in progress.\n* `UnConfiguring` - Server is unassigned and config cleanup is in progress.\n* `Analyzing` - Profile changes are being analyzed.\n* `Activating` - Configuration is being activated at the endpoint.\n* `Inconsistent` - Profile is inconsistent with the endpoint configuration.\n* `Associated` - The profile configuration has been applied to the endpoint and no inconsistencies have been detected.\n* `Failed` - The last action on the profile has failed.\n* `Not-complete` - Config import operation on the profile is not complete.\n* `Waiting-for-resource` - Waiting for the resource to be allocated for the profile.",
+									Description: "Indicates a profile's configuration deploying state. Values -- Assigned, Not-assigned, Associated, InConsistent, Validating, Configuring, Failed, Activating, UnConfiguring.\n* `None` - The default state is none.\n* `Not-assigned` - Server is not assigned to the profile.\n* `Assigned` - Server is assigned to the profile and the configurations are not yet deployed.\n* `Preparing` - Preparing to deploy the configuration.\n* `Validating` - Profile validation in progress.\n* `Configuring` - Profile deploy operation is in progress.\n* `UnConfiguring` - Server is unassigned and config cleanup is in progress.\n* `Analyzing` - Profile changes are being analyzed.\n* `Activating` - Configuration is being activated at the endpoint.\n* `Inconsistent` - Profile is inconsistent with the endpoint configuration.\n* `Associated` - The profile configuration has been applied to the endpoint and no inconsistencies have been detected.\n* `Failed` - The last action on the profile has failed.\n* `Not-complete` - Config import operation on the profile is not complete.\n* `Waiting-for-resource` - Waiting for the resource to be allocated for the profile.\n* `Partially-deployed` - The profile configuration has been applied on a subset of endpoints.",
 									Type:        schema.TypeString,
 									Optional:    true,
 								},
@@ -433,7 +433,7 @@ func getServerProfileSchema() map[string]*schema.Schema {
 						Optional:    true,
 					},
 					"config_state_summary": {
-						Description: "Indicates a profile's configuration deploying state. Values -- Assigned, Not-assigned, Associated, InConsistent, Validating, Configuring, Failed, Activating, UnConfiguring.\n* `None` - The default state is none.\n* `Not-assigned` - Server is not assigned to the profile.\n* `Assigned` - Server is assigned to the profile and the configurations are not yet deployed.\n* `Preparing` - Preparing to deploy the configuration.\n* `Validating` - Profile validation in progress.\n* `Configuring` - Profile deploy operation is in progress.\n* `UnConfiguring` - Server is unassigned and config cleanup is in progress.\n* `Analyzing` - Profile changes are being analyzed.\n* `Activating` - Configuration is being activated at the endpoint.\n* `Inconsistent` - Profile is inconsistent with the endpoint configuration.\n* `Associated` - The profile configuration has been applied to the endpoint and no inconsistencies have been detected.\n* `Failed` - The last action on the profile has failed.\n* `Not-complete` - Config import operation on the profile is not complete.\n* `Waiting-for-resource` - Waiting for the resource to be allocated for the profile.",
+						Description: "Indicates a profile's configuration deploying state. Values -- Assigned, Not-assigned, Associated, InConsistent, Validating, Configuring, Failed, Activating, UnConfiguring.\n* `None` - The default state is none.\n* `Not-assigned` - Server is not assigned to the profile.\n* `Assigned` - Server is assigned to the profile and the configurations are not yet deployed.\n* `Preparing` - Preparing to deploy the configuration.\n* `Validating` - Profile validation in progress.\n* `Configuring` - Profile deploy operation is in progress.\n* `UnConfiguring` - Server is unassigned and config cleanup is in progress.\n* `Analyzing` - Profile changes are being analyzed.\n* `Activating` - Configuration is being activated at the endpoint.\n* `Inconsistent` - Profile is inconsistent with the endpoint configuration.\n* `Associated` - The profile configuration has been applied to the endpoint and no inconsistencies have been detected.\n* `Failed` - The last action on the profile has failed.\n* `Not-complete` - Config import operation on the profile is not complete.\n* `Waiting-for-resource` - Waiting for the resource to be allocated for the profile.\n* `Partially-deployed` - The profile configuration has been applied on a subset of endpoints.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
@@ -507,6 +507,16 @@ func getServerProfileSchema() map[string]*schema.Schema {
 		},
 		"create_time": {
 			Description: "The time when this managed object was created.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"deploy_status": {
+			Description: "The status of the server profile indicating if deployment has been initiated on both fabric interconnects or not.\n* `None` - Switch profiles not deployed on either of the switches.\n* `Complete` - Both switch profiles of the cluster profile are deployed.\n* `Partial` - Only one of the switch profiles of the cluster profile is deployed.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"deployed_switches": {
+			Description: "The property which determines if the deployment should be skipped on any of the Fabric Interconnects. It is set based on the state of a fabric interconnect to Intersight before the deployment of the server proile begins.\n* `None` - Server profile configuration not deployed on either of the fabric interconnects.\n* `AB` - Server profile configuration deployed on both fabric interconnects.\n* `A` - Server profile configuration deployed on fabric interconnect A only.\n* `B` - Server profile configuration deployed on fabric interconnect B only.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -1794,6 +1804,16 @@ func dataSourceServerProfileRead(c context.Context, d *schema.ResourceData, meta
 		o.SetCreateTime(x)
 	}
 
+	if v, ok := d.GetOk("deploy_status"); ok {
+		x := (v.(string))
+		o.SetDeployStatus(x)
+	}
+
+	if v, ok := d.GetOk("deployed_switches"); ok {
+		x := (v.(string))
+		o.SetDeployedSwitches(x)
+	}
+
 	if v, ok := d.GetOk("description"); ok {
 		x := (v.(string))
 		o.SetDescription(x)
@@ -2679,6 +2699,8 @@ func dataSourceServerProfileRead(c context.Context, d *schema.ResourceData, meta
 				temp["config_result"] = flattenMapServerConfigResultRelationship(s.GetConfigResult(), d)
 
 				temp["create_time"] = (s.GetCreateTime()).String()
+				temp["deploy_status"] = (s.GetDeployStatus())
+				temp["deployed_switches"] = (s.GetDeployedSwitches())
 				temp["description"] = (s.GetDescription())
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
 

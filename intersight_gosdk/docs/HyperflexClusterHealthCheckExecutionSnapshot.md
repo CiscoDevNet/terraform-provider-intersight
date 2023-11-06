@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "hyperflex.ClusterHealthCheckExecutionSnapshot"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "hyperflex.ClusterHealthCheckExecutionSnapshot"]
+**ExecutionContext** | Pointer to **string** | The execution context of the HyperFlex health checks. * &#x60;UNKNOWN&#x60; - The current context of HyperFlex health check execution is unknown. * &#x60;WORKFLOW&#x60; - The HyperFlex health check execution is initiated through an orchestration workflow. * &#x60;SCHEDULED&#x60; - The HyperFlex health check execution is through a scheduled run. | [optional] [default to "UNKNOWN"]
 **Timestamp** | Pointer to **time.Time** | Timestamp of the last health check execution on the HyperFlex cluster. | [optional] 
 **HxCluster** | Pointer to [**HyperflexClusterRelationship**](HyperflexClusterRelationship.md) |  | [optional] 
 **RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
@@ -69,6 +70,31 @@ and a boolean to check if the value has been set.
 
 SetObjectType sets ObjectType field to given value.
 
+
+### GetExecutionContext
+
+`func (o *HyperflexClusterHealthCheckExecutionSnapshot) GetExecutionContext() string`
+
+GetExecutionContext returns the ExecutionContext field if non-nil, zero value otherwise.
+
+### GetExecutionContextOk
+
+`func (o *HyperflexClusterHealthCheckExecutionSnapshot) GetExecutionContextOk() (*string, bool)`
+
+GetExecutionContextOk returns a tuple with the ExecutionContext field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetExecutionContext
+
+`func (o *HyperflexClusterHealthCheckExecutionSnapshot) SetExecutionContext(v string)`
+
+SetExecutionContext sets ExecutionContext field to given value.
+
+### HasExecutionContext
+
+`func (o *HyperflexClusterHealthCheckExecutionSnapshot) HasExecutionContext() bool`
+
+HasExecutionContext returns a boolean if a field has been set.
 
 ### GetTimestamp
 

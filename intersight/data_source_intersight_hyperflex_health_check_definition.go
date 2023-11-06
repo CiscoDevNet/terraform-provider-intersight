@@ -366,7 +366,7 @@ func getHyperflexHealthCheckDefinitionSchema() map[string]*schema.Schema {
 			},
 		},
 		"target_execution_type": {
-			Description: "Indicates whether the health check is executed only on the leader node, or on all nodes in the HyperFlex cluster.\n* `EXECUTE_ON_LEADER_NODE` - Execute the health check script only on the HyperFlex cluster's leader node.\n* `EXECUTE_ON_ALL_NODES` - Execute health check on all nodes and aggregate the results.\n* `EXECUTE_ON_ALL_NODES_AND_AGGREGATE` - Execute the health check on all Nodes and perform custom aggregation.",
+			Description: "Indicates whether the health check is executed only on the leader node, or on all nodes in the HyperFlex cluster.\n* `EXECUTE_ON_LEADER_NODE` - Execute the health check script only on the HyperFlex cluster's leader node.\n* `EXECUTE_ON_ALL_NODES` - Execute health check on all nodes and aggregate the results.\n* `EXECUTE_ON_ALL_NODES_AND_AGGREGATE` - Execute the health check on all Nodes and perform custom aggregation.\n* `EXECUTE_ON_CURRENT_NODE` - The HyperFlex health check is executed on the node which receives the request.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},

@@ -210,6 +210,11 @@ func getComputePhysicalSummarySchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"front_panel_lock_state": {
+			Description: "The actual front panel state of the server.\n* `None` - Front Panel of the server is set to None state. It is required so that the next frontPanelLockState operation can be triggered.\n* `Lock` - Front Panel of the server is set to Locked state.\n* `Unlock` - Front Panel of the server is set to Unlocked state.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"hardware_uuid": {
 			Description: "The universally unique hardware identity of the server provided by the manufacturer.",
 			Type:        schema.TypeString,
@@ -1003,6 +1008,11 @@ func dataSourceComputePhysicalSummaryRead(c context.Context, d *schema.ResourceD
 		o.SetFirmware(x)
 	}
 
+	if v, ok := d.GetOk("front_panel_lock_state"); ok {
+		x := (v.(string))
+		o.SetFrontPanelLockState(x)
+	}
+
 	if v, ok := d.GetOk("hardware_uuid"); ok {
 		x := (v.(string))
 		o.SetHardwareUuid(x)
@@ -1597,6 +1607,7 @@ func dataSourceComputePhysicalSummaryRead(c context.Context, d *schema.ResourceD
 				temp["equipment_chassis"] = flattenMapEquipmentChassisRelationship(s.GetEquipmentChassis(), d)
 				temp["fault_summary"] = (s.GetFaultSummary())
 				temp["firmware"] = (s.GetFirmware())
+				temp["front_panel_lock_state"] = (s.GetFrontPanelLockState())
 				temp["hardware_uuid"] = (s.GetHardwareUuid())
 
 				temp["inventory_device_info"] = flattenMapInventoryDeviceInfoRelationship(s.GetInventoryDeviceInfo(), d)

@@ -6,8 +6,7 @@ description: |-
         The MO Merger interface facilitates merging of all or selected properties of any MO instance to one or more MO instances.
         The Sources array should contain the list of source MO instances as MoRef objects.
         The Targets array should contain the list of target MO instances as MoRef objects.
-        The TargetConfig property is applicable only for a merge operation. If a configuration action needs to be applied on all target MOs,
-        it can be specified using this property.
+        The TargetConfig property is applicable only for a merge operation. If a configuration action needs to be applied on all target MOs, it can be specified using this property.
 
 ---
 
@@ -15,8 +14,7 @@ description: |-
 The MO Merger interface facilitates merging of all or selected properties of any MO instance to one or more MO instances.
 The "Sources" array should contain the list of source MO instances as MoRef objects.
 The "Targets" array should contain the list of target MO instances as MoRef objects.
-The "TargetConfig" property is applicable only for a merge operation. If a configuration action needs to be applied on all target MOs,
-it can be specified using this property.
+The "TargetConfig" property is applicable only for a merge operation. If a configuration action needs to be applied on all target MOs, it can be specified using this property.
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(ReadOnly) The Account ID for this managed object. 

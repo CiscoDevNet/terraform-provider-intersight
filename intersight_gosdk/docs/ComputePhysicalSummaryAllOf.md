@@ -18,6 +18,7 @@ Name | Type | Description | Notes
 **Dn** | Pointer to **string** | The Distinguished Name unambiguously identifies an object in the system. | [optional] [readonly] 
 **FaultSummary** | Pointer to **int64** | The fault summary for the server. | [optional] [readonly] 
 **Firmware** | Pointer to **string** | The firmware version of the Cisco Integrated Management Controller (CIMC) for this server. | [optional] [readonly] 
+**FrontPanelLockState** | Pointer to **string** | The actual front panel state of the server. * &#x60;None&#x60; - Front Panel of the server is set to None state. It is required so that the next frontPanelLockState operation can be triggered. * &#x60;Lock&#x60; - Front Panel of the server is set to Locked state. * &#x60;Unlock&#x60; - Front Panel of the server is set to Unlocked state. | [optional] [readonly] [default to "None"]
 **HardwareUuid** | Pointer to **string** | The universally unique hardware identity of the server provided by the manufacturer. | [optional] [readonly] 
 **Ipv4Address** | Pointer to **string** | The IPv4 address configured on the management interface of the Integrated Management Controller. | [optional] [readonly] 
 **IsUpgraded** | Pointer to **bool** | This field indicates the compute status of the catalog values for the associated component or hardware. | [optional] [readonly] [default to false]
@@ -430,6 +431,31 @@ SetFirmware sets Firmware field to given value.
 `func (o *ComputePhysicalSummaryAllOf) HasFirmware() bool`
 
 HasFirmware returns a boolean if a field has been set.
+
+### GetFrontPanelLockState
+
+`func (o *ComputePhysicalSummaryAllOf) GetFrontPanelLockState() string`
+
+GetFrontPanelLockState returns the FrontPanelLockState field if non-nil, zero value otherwise.
+
+### GetFrontPanelLockStateOk
+
+`func (o *ComputePhysicalSummaryAllOf) GetFrontPanelLockStateOk() (*string, bool)`
+
+GetFrontPanelLockStateOk returns a tuple with the FrontPanelLockState field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFrontPanelLockState
+
+`func (o *ComputePhysicalSummaryAllOf) SetFrontPanelLockState(v string)`
+
+SetFrontPanelLockState sets FrontPanelLockState field to given value.
+
+### HasFrontPanelLockState
+
+`func (o *ComputePhysicalSummaryAllOf) HasFrontPanelLockState() bool`
+
+HasFrontPanelLockState returns a boolean if a field has been set.
 
 ### GetHardwareUuid
 

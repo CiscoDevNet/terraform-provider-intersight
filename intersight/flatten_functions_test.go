@@ -7085,6 +7085,126 @@ func TestFlattenListOsValidationInformation(t *testing.T) {
 		CheckError(t, err)
 	}
 }
+func TestFlattenListPartnerintegrationDcLogsRelationship(t *testing.T) {
+	p := []models.PartnerintegrationDcLogsRelationship{}
+	var d = &schema.ResourceData{}
+	c := `{"ClassId":"mo.MoRef","Moid":"Moid %d","ObjectType":"mo.MoRef","Selector":"Selector %d"}`
+
+	//test when the response is empty
+	ffOpEmpty := flattenListPartnerintegrationDcLogsRelationship(p, d)
+	if len(ffOpEmpty) != 0 {
+		t.Errorf("error: no elements should be present. Found %d elements", len(ffOpEmpty))
+	}
+	// test when response is available and resourceData is empty
+	for i := 1; i < 3; i++ {
+		x := models.PartnerintegrationDcLogsRelationship{}
+		err := x.UnmarshalJSON([]byte(strings.Replace(c, "%d", fmt.Sprint(i), -1)))
+		CheckError(t, err)
+		p = append(p, x)
+	}
+	ffOp := flattenListPartnerintegrationDcLogsRelationship(p, d)
+	expectedOp := []map[string]interface{}{{"class_id": "mo.MoRef", "moid": "Moid 1", "object_type": "mo.MoRef", "selector": "Selector 1"}, {"class_id": "mo.MoRef", "moid": "Moid 2", "object_type": "mo.MoRef", "selector": "Selector 2"}}
+	for i := 0; i < len(expectedOp); i++ {
+		err := compareMaps(expectedOp[i], ffOp[i], t)
+		CheckError(t, err)
+	}
+}
+func TestFlattenListPartnerintegrationDocIssuesRelationship(t *testing.T) {
+	p := []models.PartnerintegrationDocIssuesRelationship{}
+	var d = &schema.ResourceData{}
+	c := `{"ClassId":"mo.MoRef","Moid":"Moid %d","ObjectType":"mo.MoRef","Selector":"Selector %d"}`
+
+	//test when the response is empty
+	ffOpEmpty := flattenListPartnerintegrationDocIssuesRelationship(p, d)
+	if len(ffOpEmpty) != 0 {
+		t.Errorf("error: no elements should be present. Found %d elements", len(ffOpEmpty))
+	}
+	// test when response is available and resourceData is empty
+	for i := 1; i < 3; i++ {
+		x := models.PartnerintegrationDocIssuesRelationship{}
+		err := x.UnmarshalJSON([]byte(strings.Replace(c, "%d", fmt.Sprint(i), -1)))
+		CheckError(t, err)
+		p = append(p, x)
+	}
+	ffOp := flattenListPartnerintegrationDocIssuesRelationship(p, d)
+	expectedOp := []map[string]interface{}{{"class_id": "mo.MoRef", "moid": "Moid 1", "object_type": "mo.MoRef", "selector": "Selector 1"}, {"class_id": "mo.MoRef", "moid": "Moid 2", "object_type": "mo.MoRef", "selector": "Selector 2"}}
+	for i := 0; i < len(expectedOp); i++ {
+		err := compareMaps(expectedOp[i], ffOp[i], t)
+		CheckError(t, err)
+	}
+}
+func TestFlattenListPartnerintegrationEtlRelationship(t *testing.T) {
+	p := []models.PartnerintegrationEtlRelationship{}
+	var d = &schema.ResourceData{}
+	c := `{"ClassId":"mo.MoRef","Moid":"Moid %d","ObjectType":"mo.MoRef","Selector":"Selector %d"}`
+
+	//test when the response is empty
+	ffOpEmpty := flattenListPartnerintegrationEtlRelationship(p, d)
+	if len(ffOpEmpty) != 0 {
+		t.Errorf("error: no elements should be present. Found %d elements", len(ffOpEmpty))
+	}
+	// test when response is available and resourceData is empty
+	for i := 1; i < 3; i++ {
+		x := models.PartnerintegrationEtlRelationship{}
+		err := x.UnmarshalJSON([]byte(strings.Replace(c, "%d", fmt.Sprint(i), -1)))
+		CheckError(t, err)
+		p = append(p, x)
+	}
+	ffOp := flattenListPartnerintegrationEtlRelationship(p, d)
+	expectedOp := []map[string]interface{}{{"class_id": "mo.MoRef", "moid": "Moid 1", "object_type": "mo.MoRef", "selector": "Selector 1"}, {"class_id": "mo.MoRef", "moid": "Moid 2", "object_type": "mo.MoRef", "selector": "Selector 2"}}
+	for i := 0; i < len(expectedOp); i++ {
+		err := compareMaps(expectedOp[i], ffOp[i], t)
+		CheckError(t, err)
+	}
+}
+func TestFlattenListPartnerintegrationLogsRelationship(t *testing.T) {
+	p := []models.PartnerintegrationLogsRelationship{}
+	var d = &schema.ResourceData{}
+	c := `{"ClassId":"mo.MoRef","Moid":"Moid %d","ObjectType":"mo.MoRef","Selector":"Selector %d"}`
+
+	//test when the response is empty
+	ffOpEmpty := flattenListPartnerintegrationLogsRelationship(p, d)
+	if len(ffOpEmpty) != 0 {
+		t.Errorf("error: no elements should be present. Found %d elements", len(ffOpEmpty))
+	}
+	// test when response is available and resourceData is empty
+	for i := 1; i < 3; i++ {
+		x := models.PartnerintegrationLogsRelationship{}
+		err := x.UnmarshalJSON([]byte(strings.Replace(c, "%d", fmt.Sprint(i), -1)))
+		CheckError(t, err)
+		p = append(p, x)
+	}
+	ffOp := flattenListPartnerintegrationLogsRelationship(p, d)
+	expectedOp := []map[string]interface{}{{"class_id": "mo.MoRef", "moid": "Moid 1", "object_type": "mo.MoRef", "selector": "Selector 1"}, {"class_id": "mo.MoRef", "moid": "Moid 2", "object_type": "mo.MoRef", "selector": "Selector 2"}}
+	for i := 0; i < len(expectedOp); i++ {
+		err := compareMaps(expectedOp[i], ffOp[i], t)
+		CheckError(t, err)
+	}
+}
+func TestFlattenListPartnerintegrationModelRelationship(t *testing.T) {
+	p := []models.PartnerintegrationModelRelationship{}
+	var d = &schema.ResourceData{}
+	c := `{"ClassId":"mo.MoRef","Moid":"Moid %d","ObjectType":"mo.MoRef","Selector":"Selector %d"}`
+
+	//test when the response is empty
+	ffOpEmpty := flattenListPartnerintegrationModelRelationship(p, d)
+	if len(ffOpEmpty) != 0 {
+		t.Errorf("error: no elements should be present. Found %d elements", len(ffOpEmpty))
+	}
+	// test when response is available and resourceData is empty
+	for i := 1; i < 3; i++ {
+		x := models.PartnerintegrationModelRelationship{}
+		err := x.UnmarshalJSON([]byte(strings.Replace(c, "%d", fmt.Sprint(i), -1)))
+		CheckError(t, err)
+		p = append(p, x)
+	}
+	ffOp := flattenListPartnerintegrationModelRelationship(p, d)
+	expectedOp := []map[string]interface{}{{"class_id": "mo.MoRef", "moid": "Moid 1", "object_type": "mo.MoRef", "selector": "Selector 1"}, {"class_id": "mo.MoRef", "moid": "Moid 2", "object_type": "mo.MoRef", "selector": "Selector 2"}}
+	for i := 0; i < len(expectedOp); i++ {
+		err := compareMaps(expectedOp[i], ffOp[i], t)
+		CheckError(t, err)
+	}
+}
 func TestFlattenListPciCoprocessorCardRelationship(t *testing.T) {
 	p := []models.PciCoprocessorCardRelationship{}
 	var d = &schema.ResourceData{}
@@ -9528,6 +9648,30 @@ func TestFlattenListTamS3DataSource(t *testing.T) {
 	}
 	ffOp := flattenListTamS3DataSource(p, d)
 	expectedOp := []map[string]interface{}{{"class_id": "tam.S3DataSource", "name": "Name 1", "object_type": "tam.S3DataSource", "s3_path": "S3Path 1", "type": "Type 1"}, {"class_id": "tam.S3DataSource", "name": "Name 2", "object_type": "tam.S3DataSource", "s3_path": "S3Path 2", "type": "Type 2"}}
+	for i := 0; i < len(expectedOp); i++ {
+		err := compareMaps(expectedOp[i], ffOp[i], t)
+		CheckError(t, err)
+	}
+}
+func TestFlattenListTechsupportmanagementTechSupportFileInfo(t *testing.T) {
+	p := []models.TechsupportmanagementTechSupportFileInfo{}
+	var d = &schema.ResourceData{}
+	c := `{"ClassId":"techsupportmanagement.TechSupportFileInfo","FileName":"FileName %d","FileSize":32,"ObjectType":"techsupportmanagement.TechSupportFileInfo","TechsupportDownloadUrl":"TechsupportDownloadUrl %d","UploadStatus":"UploadStatus %d"}`
+
+	//test when the response is empty
+	ffOpEmpty := flattenListTechsupportmanagementTechSupportFileInfo(p, d)
+	if len(ffOpEmpty) != 0 {
+		t.Errorf("error: no elements should be present. Found %d elements", len(ffOpEmpty))
+	}
+	// test when response is available and resourceData is empty
+	for i := 1; i < 3; i++ {
+		x := models.TechsupportmanagementTechSupportFileInfo{}
+		err := x.UnmarshalJSON([]byte(strings.Replace(c, "%d", fmt.Sprint(i), -1)))
+		CheckError(t, err)
+		p = append(p, x)
+	}
+	ffOp := flattenListTechsupportmanagementTechSupportFileInfo(p, d)
+	expectedOp := []map[string]interface{}{{"class_id": "techsupportmanagement.TechSupportFileInfo", "file_name": "FileName 1", "file_size": 32, "object_type": "techsupportmanagement.TechSupportFileInfo", "techsupport_download_url": "TechsupportDownloadUrl 1", "upload_status": "UploadStatus 1"}, {"class_id": "techsupportmanagement.TechSupportFileInfo", "file_name": "FileName 2", "file_size": 32, "object_type": "techsupportmanagement.TechSupportFileInfo", "techsupport_download_url": "TechsupportDownloadUrl 2", "upload_status": "UploadStatus 2"}}
 	for i := 0; i < len(expectedOp); i++ {
 		err := compareMaps(expectedOp[i], ffOp[i], t)
 		CheckError(t, err)
@@ -17960,6 +18104,42 @@ func TestFlattenMapOsOperatingSystemParameters(t *testing.T) {
 	CheckError(t, err)
 	ffOp := flattenMapOsOperatingSystemParameters(p, d)[0]
 	expectedOp := map[string]interface{}{"class_id": "os.OperatingSystemParameters", "object_type": "os.OperatingSystemParameters"}
+	err = compareMaps(expectedOp, ffOp, t)
+	CheckError(t, err)
+}
+func TestFlattenMapPartnerintegrationDeviceConnectorRelationship(t *testing.T) {
+	p := models.PartnerintegrationDeviceConnectorRelationship{}
+	var d = &schema.ResourceData{}
+	c := `{"ClassId":"mo.MoRef","Moid":"Moid %d","ObjectType":"mo.MoRef","Selector":"Selector %d"}`
+
+	//test when the response is empty
+	ffOpEmpty := flattenMapPartnerintegrationDeviceConnectorRelationship(p, d)
+	if len(ffOpEmpty) != 0 {
+		t.Errorf("error: no elements should be present. Found %d elements", len(ffOpEmpty))
+	}
+	// test when response is available and resourceData is empty
+	err := p.UnmarshalJSON([]byte(strings.Replace(c, "%d", "1", -1)))
+	CheckError(t, err)
+	ffOp := flattenMapPartnerintegrationDeviceConnectorRelationship(p, d)[0]
+	expectedOp := map[string]interface{}{"class_id": "mo.MoRef", "moid": "Moid 1", "object_type": "mo.MoRef", "selector": "Selector 1"}
+	err = compareMaps(expectedOp, ffOp, t)
+	CheckError(t, err)
+}
+func TestFlattenMapPartnerintegrationInventoryRelationship(t *testing.T) {
+	p := models.PartnerintegrationInventoryRelationship{}
+	var d = &schema.ResourceData{}
+	c := `{"ClassId":"mo.MoRef","Moid":"Moid %d","ObjectType":"mo.MoRef","Selector":"Selector %d"}`
+
+	//test when the response is empty
+	ffOpEmpty := flattenMapPartnerintegrationInventoryRelationship(p, d)
+	if len(ffOpEmpty) != 0 {
+		t.Errorf("error: no elements should be present. Found %d elements", len(ffOpEmpty))
+	}
+	// test when response is available and resourceData is empty
+	err := p.UnmarshalJSON([]byte(strings.Replace(c, "%d", "1", -1)))
+	CheckError(t, err)
+	ffOp := flattenMapPartnerintegrationInventoryRelationship(p, d)[0]
+	expectedOp := map[string]interface{}{"class_id": "mo.MoRef", "moid": "Moid 1", "object_type": "mo.MoRef", "selector": "Selector 1"}
 	err = compareMaps(expectedOp, ffOp, t)
 	CheckError(t, err)
 }

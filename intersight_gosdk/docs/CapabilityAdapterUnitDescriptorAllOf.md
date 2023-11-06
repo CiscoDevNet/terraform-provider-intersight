@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **FibreChannelScsiIoqLimit** | Pointer to **int64** | The number of SCSI I/O Queue resources to allocate. | [optional] 
 **IsAzureQosSupported** | Pointer to **bool** | Indicates that the Azure Stack Host QoS feature is supported by this adapter. | [optional] [default to true]
 **IsGeneveSupported** | Pointer to **bool** | Indicates that the GENEVE offload feature is supported by this adapter. | [optional] [default to true]
+**IsSecureBootSupported** | Pointer to **bool** | Indicates support for secure boot. | [optional] [default to false]
 **MaxEthRxRingSize** | Pointer to **int64** | Maximum Ring Size value for vNIC Receive Queue. | [optional] [default to 4096]
 **MaxEthTxRingSize** | Pointer to **int64** | Maximum Ring Size value for vNIC Transmit Queue. | [optional] [default to 4096]
 **MaxRocev2Interfaces** | Pointer to **int64** | Maximum number of vNIC interfaces that can be RoCEv2 enabled. | [optional] [default to 2]
@@ -290,6 +291,31 @@ SetIsGeneveSupported sets IsGeneveSupported field to given value.
 `func (o *CapabilityAdapterUnitDescriptorAllOf) HasIsGeneveSupported() bool`
 
 HasIsGeneveSupported returns a boolean if a field has been set.
+
+### GetIsSecureBootSupported
+
+`func (o *CapabilityAdapterUnitDescriptorAllOf) GetIsSecureBootSupported() bool`
+
+GetIsSecureBootSupported returns the IsSecureBootSupported field if non-nil, zero value otherwise.
+
+### GetIsSecureBootSupportedOk
+
+`func (o *CapabilityAdapterUnitDescriptorAllOf) GetIsSecureBootSupportedOk() (*bool, bool)`
+
+GetIsSecureBootSupportedOk returns a tuple with the IsSecureBootSupported field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsSecureBootSupported
+
+`func (o *CapabilityAdapterUnitDescriptorAllOf) SetIsSecureBootSupported(v bool)`
+
+SetIsSecureBootSupported sets IsSecureBootSupported field to given value.
+
+### HasIsSecureBootSupported
+
+`func (o *CapabilityAdapterUnitDescriptorAllOf) HasIsSecureBootSupported() bool`
+
+HasIsSecureBootSupported returns a boolean if a field has been set.
 
 ### GetMaxEthRxRingSize
 
