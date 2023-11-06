@@ -7,6 +7,8 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "fabric.SwitchClusterProfile"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "fabric.SwitchClusterProfile"]
 **ConfigContext** | Pointer to [**NullablePolicyConfigContext**](PolicyConfigContext.md) |  | [optional] 
+**DeployStatus** | Pointer to **string** | Deploy status of the switch cluster profile indicating if deployment has been initiated on all the members of the cluster profile. * &#x60;None&#x60; - Switch profiles not deployed on either of the switches. * &#x60;Complete&#x60; - Both switch profiles of the cluster profile are deployed. * &#x60;Partial&#x60; - Only one of the switch profiles of the cluster profile is deployed. | [optional] [readonly] [default to "None"]
+**DeployedSwitches** | Pointer to **string** | Values indicating the switches on which the cluster profile has been deployed. 0 indicates that the profile has not been deployed on any switch, 1 indicates that the profile has been deployed on A, 2 indicates that it is deployed on B and 3 indicates that it is deployed on both. * &#x60;None&#x60; - Switch profiles not deployed on either of the fabric interconnects. * &#x60;A&#x60; - Switch profiles deployed only on fabric interconnect A. * &#x60;B&#x60; - Switch profiles deployed only on fabric interconnect B. * &#x60;AB&#x60; - Switch profiles deployed on both fabric interconnect A and B. | [optional] [readonly] [default to "None"]
 **SwitchProfilesCount** | Pointer to **int64** | Number of switch profiles that are part of this cluster profile. | [optional] [readonly] 
 **Organization** | Pointer to [**OrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
 **SwitchProfiles** | Pointer to [**[]FabricSwitchProfileRelationship**](FabricSwitchProfileRelationship.md) | An array of relationships to fabricSwitchProfile resources. | [optional] 
@@ -105,6 +107,56 @@ HasConfigContext returns a boolean if a field has been set.
 `func (o *FabricSwitchClusterProfile) UnsetConfigContext()`
 
 UnsetConfigContext ensures that no value is present for ConfigContext, not even an explicit nil
+### GetDeployStatus
+
+`func (o *FabricSwitchClusterProfile) GetDeployStatus() string`
+
+GetDeployStatus returns the DeployStatus field if non-nil, zero value otherwise.
+
+### GetDeployStatusOk
+
+`func (o *FabricSwitchClusterProfile) GetDeployStatusOk() (*string, bool)`
+
+GetDeployStatusOk returns a tuple with the DeployStatus field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDeployStatus
+
+`func (o *FabricSwitchClusterProfile) SetDeployStatus(v string)`
+
+SetDeployStatus sets DeployStatus field to given value.
+
+### HasDeployStatus
+
+`func (o *FabricSwitchClusterProfile) HasDeployStatus() bool`
+
+HasDeployStatus returns a boolean if a field has been set.
+
+### GetDeployedSwitches
+
+`func (o *FabricSwitchClusterProfile) GetDeployedSwitches() string`
+
+GetDeployedSwitches returns the DeployedSwitches field if non-nil, zero value otherwise.
+
+### GetDeployedSwitchesOk
+
+`func (o *FabricSwitchClusterProfile) GetDeployedSwitchesOk() (*string, bool)`
+
+GetDeployedSwitchesOk returns a tuple with the DeployedSwitches field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDeployedSwitches
+
+`func (o *FabricSwitchClusterProfile) SetDeployedSwitches(v string)`
+
+SetDeployedSwitches sets DeployedSwitches field to given value.
+
+### HasDeployedSwitches
+
+`func (o *FabricSwitchClusterProfile) HasDeployedSwitches() bool`
+
+HasDeployedSwitches returns a boolean if a field has been set.
+
 ### GetSwitchProfilesCount
 
 `func (o *FabricSwitchClusterProfile) GetSwitchProfilesCount() int64`

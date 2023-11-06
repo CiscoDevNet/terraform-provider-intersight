@@ -344,6 +344,21 @@ func resourceBulkMoDeepCloner() *schema.Resource {
 				},
 				ForceNew: true,
 			},
+			"reference_name_suffix": {
+				Description:  "Name suffix to be applied to all the MOs being cloned when ReferencePolicy chosen is CreateNew. Name can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-) or an underscore (_).",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^[a-zA-Z0-9_-]{1,64}$"), ""),
+				Optional:     true,
+				ForceNew:     true,
+			},
+			"reference_policy": {
+				Description:  "User selected reference clone behavior. Applies to all the MOs being cloned.\n* `ReuseAll` - Any policies in the destination organization whose name matches the policy referenced in the cloned policy will be attached. If no policyin the destination organization matches by name, a policy will be cloned with the same name.Pool references will always be matched by name. If not found, the pool will be cloned in the destination organization, but no identifierblocks will be created.\n* `CreateNew` - New policies will be created for the source and all the attached policies. If a policy of the same name and type already exists in thedestination organization or any organization from which it shares policies, a clone will be created with the provided suffix added to the name.Pool references will always be matched by name. If not found, the pool will be cloned in the destination organization, but no identifierblocks will be created.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"ReuseAll", "CreateNew"}, false),
+				Optional:     true,
+				Default:      "ReuseAll",
+				ForceNew:     true,
+			},
 			"shared_scope": {
 				Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
 				Type:        schema.TypeString,
@@ -1140,6 +1155,16 @@ func resourceBulkMoDeepClonerCreate(c context.Context, d *schema.ResourceData, m
 		}
 	}
 
+	if v, ok := d.GetOk("reference_name_suffix"); ok {
+		x := (v.(string))
+		o.SetReferenceNameSuffix(x)
+	}
+
+	if v, ok := d.GetOk("reference_policy"); ok {
+		x := (v.(string))
+		o.SetReferencePolicy(x)
+	}
+
 	if v, ok := d.GetOk("nr_source"); ok {
 		p := make([]models.MoMoRef, 0, 1)
 		s := v.([]interface{})
@@ -1393,6 +1418,14 @@ func resourceBulkMoDeepClonerRead(c context.Context, d *schema.ResourceData, met
 
 	if err := d.Set("permission_resources", flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property PermissionResources in BulkMoDeepCloner object: %s", err.Error())
+	}
+
+	if err := d.Set("reference_name_suffix", (s.GetReferenceNameSuffix())); err != nil {
+		return diag.Errorf("error occurred while setting property ReferenceNameSuffix in BulkMoDeepCloner object: %s", err.Error())
+	}
+
+	if err := d.Set("reference_policy", (s.GetReferencePolicy())); err != nil {
+		return diag.Errorf("error occurred while setting property ReferencePolicy in BulkMoDeepCloner object: %s", err.Error())
 	}
 
 	if err := d.Set("shared_scope", (s.GetSharedScope())); err != nil {

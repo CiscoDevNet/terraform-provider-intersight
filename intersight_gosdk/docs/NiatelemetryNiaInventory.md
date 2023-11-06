@@ -63,6 +63,7 @@ Name | Type | Description | Notes
 **SystemUpTime** | Pointer to **string** | The amount of time that the device being inventoried been up. | [optional] 
 **Version** | Pointer to **string** | Software version of device being inventoried. The various software version values for each device are available on cisco.com. | [optional] 
 **VniStatus** | Pointer to [**[]NiatelemetryVniStatus**](NiatelemetryVniStatus.md) |  | [optional] 
+**VpcPeerIpAddress** | Pointer to **string** | The TEP IP address of the node&#39;s vPC peer, if present. | [optional] 
 **LicenseState** | Pointer to [**NiatelemetryNiaLicenseStateRelationship**](NiatelemetryNiaLicenseStateRelationship.md) |  | [optional] 
 **RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
@@ -1660,6 +1661,31 @@ HasVniStatus returns a boolean if a field has been set.
 `func (o *NiatelemetryNiaInventory) UnsetVniStatus()`
 
 UnsetVniStatus ensures that no value is present for VniStatus, not even an explicit nil
+### GetVpcPeerIpAddress
+
+`func (o *NiatelemetryNiaInventory) GetVpcPeerIpAddress() string`
+
+GetVpcPeerIpAddress returns the VpcPeerIpAddress field if non-nil, zero value otherwise.
+
+### GetVpcPeerIpAddressOk
+
+`func (o *NiatelemetryNiaInventory) GetVpcPeerIpAddressOk() (*string, bool)`
+
+GetVpcPeerIpAddressOk returns a tuple with the VpcPeerIpAddress field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetVpcPeerIpAddress
+
+`func (o *NiatelemetryNiaInventory) SetVpcPeerIpAddress(v string)`
+
+SetVpcPeerIpAddress sets VpcPeerIpAddress field to given value.
+
+### HasVpcPeerIpAddress
+
+`func (o *NiatelemetryNiaInventory) HasVpcPeerIpAddress() bool`
+
+HasVpcPeerIpAddress returns a boolean if a field has been set.
+
 ### GetLicenseState
 
 `func (o *NiatelemetryNiaInventory) GetLicenseState() NiatelemetryNiaLicenseStateRelationship`

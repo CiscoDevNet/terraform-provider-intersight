@@ -195,6 +195,11 @@ func getFabricElementIdentitySchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"partial_deployment_status": {
+			Description: "Determines if there is partial configuration that has to be deployed on any of the server profiles associated with the server connected to the Fabric Interconnect in cases where one or more server profiles  was deployed when the Fabric Interconnect was down.\n* `None` - No configuration which is yet to be deployed.The default state of a fabric interconnect which does not have any pending deployment.\n* `Pending` - There is pending configuration which is yet to be deployed on the fabric interconnect.\n* `Deploying` - Pending configuration is being deployed on the fabric interconnect.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"permission_resources": {
 			Description: "An array of relationships to moBaseMo resources.",
 			Type:        schema.TypeList,
@@ -693,6 +698,11 @@ func dataSourceFabricElementIdentityRead(c context.Context, d *schema.ResourceDa
 		}
 	}
 
+	if v, ok := d.GetOk("partial_deployment_status"); ok {
+		x := (v.(string))
+		o.SetPartialDeploymentStatus(x)
+	}
+
 	if v, ok := d.GetOk("permission_resources"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
@@ -1009,6 +1019,7 @@ func dataSourceFabricElementIdentityRead(c context.Context, d *schema.ResourceDa
 				temp["owners"] = (s.GetOwners())
 
 				temp["parent"] = flattenMapMoBaseMoRelationship(s.GetParent(), d)
+				temp["partial_deployment_status"] = (s.GetPartialDeploymentStatus())
 
 				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
 

@@ -7,6 +7,8 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "bulk.MoDeepCloner"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "bulk.MoDeepCloner"]
 **ExcludeProperties** | Pointer to **[]string** |  | [optional] 
+**ReferenceNameSuffix** | Pointer to **string** | Name suffix to be applied to all the MOs being cloned when ReferencePolicy chosen is CreateNew. Name can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-) or an underscore (_). | [optional] 
+**ReferencePolicy** | Pointer to **string** | User selected reference clone behavior. Applies to all the MOs being cloned. * &#x60;ReuseAll&#x60; - Any policies in the destination organization whose name matches the policy referenced in the cloned policy will be attached. If no policyin the destination organization matches by name, a policy will be cloned with the same name.Pool references will always be matched by name. If not found, the pool will be cloned in the destination organization, but no identifierblocks will be created. * &#x60;CreateNew&#x60; - New policies will be created for the source and all the attached policies. If a policy of the same name and type already exists in thedestination organization or any organization from which it shares policies, a clone will be created with the provided suffix added to the name.Pool references will always be matched by name. If not found, the pool will be cloned in the destination organization, but no identifierblocks will be created. | [optional] [default to "ReuseAll"]
 **Source** | Pointer to [**MoMoRef**](MoMoRef.md) |  | [optional] 
 **Targets** | Pointer to [**[]MoBaseMo**](MoBaseMo.md) |  | [optional] 
 **WorkflowNameSuffix** | Pointer to **string** | A user friendly short name to identify the workflow, optionally. Name can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.), colon (:), space ( ), forward slash (/), comma or an underscore (_). | [optional] 
@@ -107,6 +109,56 @@ HasExcludeProperties returns a boolean if a field has been set.
 `func (o *BulkMoDeepClonerAllOf) UnsetExcludeProperties()`
 
 UnsetExcludeProperties ensures that no value is present for ExcludeProperties, not even an explicit nil
+### GetReferenceNameSuffix
+
+`func (o *BulkMoDeepClonerAllOf) GetReferenceNameSuffix() string`
+
+GetReferenceNameSuffix returns the ReferenceNameSuffix field if non-nil, zero value otherwise.
+
+### GetReferenceNameSuffixOk
+
+`func (o *BulkMoDeepClonerAllOf) GetReferenceNameSuffixOk() (*string, bool)`
+
+GetReferenceNameSuffixOk returns a tuple with the ReferenceNameSuffix field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetReferenceNameSuffix
+
+`func (o *BulkMoDeepClonerAllOf) SetReferenceNameSuffix(v string)`
+
+SetReferenceNameSuffix sets ReferenceNameSuffix field to given value.
+
+### HasReferenceNameSuffix
+
+`func (o *BulkMoDeepClonerAllOf) HasReferenceNameSuffix() bool`
+
+HasReferenceNameSuffix returns a boolean if a field has been set.
+
+### GetReferencePolicy
+
+`func (o *BulkMoDeepClonerAllOf) GetReferencePolicy() string`
+
+GetReferencePolicy returns the ReferencePolicy field if non-nil, zero value otherwise.
+
+### GetReferencePolicyOk
+
+`func (o *BulkMoDeepClonerAllOf) GetReferencePolicyOk() (*string, bool)`
+
+GetReferencePolicyOk returns a tuple with the ReferencePolicy field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetReferencePolicy
+
+`func (o *BulkMoDeepClonerAllOf) SetReferencePolicy(v string)`
+
+SetReferencePolicy sets ReferencePolicy field to given value.
+
+### HasReferencePolicy
+
+`func (o *BulkMoDeepClonerAllOf) HasReferencePolicy() bool`
+
+HasReferencePolicy returns a boolean if a field has been set.
+
 ### GetSource
 
 `func (o *BulkMoDeepClonerAllOf) GetSource() MoMoRef`

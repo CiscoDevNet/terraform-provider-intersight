@@ -5849,6 +5849,66 @@ func flattenListOsValidationInformation(p []models.OsValidationInformation, d *s
 	}
 	return osvalidationinformations
 }
+func flattenListPartnerintegrationDcLogsRelationship(p []models.PartnerintegrationDcLogsRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var partnerintegrationdclogsrelationships []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		item := item.MoMoRef
+		partnerintegrationdclogsrelationship := flattenMoMoRef(item)
+		partnerintegrationdclogsrelationships = append(partnerintegrationdclogsrelationships, partnerintegrationdclogsrelationship)
+	}
+	return partnerintegrationdclogsrelationships
+}
+func flattenListPartnerintegrationDocIssuesRelationship(p []models.PartnerintegrationDocIssuesRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var partnerintegrationdocissuesrelationships []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		item := item.MoMoRef
+		partnerintegrationdocissuesrelationship := flattenMoMoRef(item)
+		partnerintegrationdocissuesrelationships = append(partnerintegrationdocissuesrelationships, partnerintegrationdocissuesrelationship)
+	}
+	return partnerintegrationdocissuesrelationships
+}
+func flattenListPartnerintegrationEtlRelationship(p []models.PartnerintegrationEtlRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var partnerintegrationetlrelationships []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		item := item.MoMoRef
+		partnerintegrationetlrelationship := flattenMoMoRef(item)
+		partnerintegrationetlrelationships = append(partnerintegrationetlrelationships, partnerintegrationetlrelationship)
+	}
+	return partnerintegrationetlrelationships
+}
+func flattenListPartnerintegrationLogsRelationship(p []models.PartnerintegrationLogsRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var partnerintegrationlogsrelationships []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		item := item.MoMoRef
+		partnerintegrationlogsrelationship := flattenMoMoRef(item)
+		partnerintegrationlogsrelationships = append(partnerintegrationlogsrelationships, partnerintegrationlogsrelationship)
+	}
+	return partnerintegrationlogsrelationships
+}
+func flattenListPartnerintegrationModelRelationship(p []models.PartnerintegrationModelRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var partnerintegrationmodelrelationships []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		item := item.MoMoRef
+		partnerintegrationmodelrelationship := flattenMoMoRef(item)
+		partnerintegrationmodelrelationships = append(partnerintegrationmodelrelationships, partnerintegrationmodelrelationship)
+	}
+	return partnerintegrationmodelrelationships
+}
 func flattenListPciCoprocessorCardRelationship(p []models.PciCoprocessorCardRelationship, d *schema.ResourceData) []map[string]interface{} {
 	var pcicoprocessorcardrelationships []map[string]interface{}
 	if len(p) == 0 {
@@ -7428,6 +7488,24 @@ func flattenListTamS3DataSource(p []models.TamS3DataSource, d *schema.ResourceDa
 		tams3datasources = append(tams3datasources, tams3datasource)
 	}
 	return tams3datasources
+}
+func flattenListTechsupportmanagementTechSupportFileInfo(p []models.TechsupportmanagementTechSupportFileInfo, d *schema.ResourceData) []map[string]interface{} {
+	var techsupportmanagementtechsupportfileinfos []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		techsupportmanagementtechsupportfileinfo := make(map[string]interface{})
+		techsupportmanagementtechsupportfileinfo["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+		techsupportmanagementtechsupportfileinfo["class_id"] = item.GetClassId()
+		techsupportmanagementtechsupportfileinfo["file_name"] = item.GetFileName()
+		techsupportmanagementtechsupportfileinfo["file_size"] = item.GetFileSize()
+		techsupportmanagementtechsupportfileinfo["object_type"] = item.GetObjectType()
+		techsupportmanagementtechsupportfileinfo["techsupport_download_url"] = item.GetTechsupportDownloadUrl()
+		techsupportmanagementtechsupportfileinfo["upload_status"] = item.GetUploadStatus()
+		techsupportmanagementtechsupportfileinfos = append(techsupportmanagementtechsupportfileinfos, techsupportmanagementtechsupportfileinfo)
+	}
+	return techsupportmanagementtechsupportfileinfos
 }
 func flattenListTerraformCloudResource(p []models.TerraformCloudResource, d *schema.ResourceData) []map[string]interface{} {
 	var terraformcloudresources []map[string]interface{}
@@ -17364,6 +17442,42 @@ func flattenMapOsOperatingSystemParameters(p models.OsOperatingSystemParameters,
 
 	osoperatingsystemparameterss = append(osoperatingsystemparameterss, osoperatingsystemparameters)
 	return osoperatingsystemparameterss
+}
+func flattenMapPartnerintegrationDeviceConnectorRelationship(p models.PartnerintegrationDeviceConnectorRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var partnerintegrationdeviceconnectorrelationships []map[string]interface{}
+	var ret models.PartnerintegrationDeviceConnectorRelationship
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	x := p
+	item := x.MoMoRef
+	partnerintegrationdeviceconnectorrelationship := make(map[string]interface{})
+	partnerintegrationdeviceconnectorrelationship["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	partnerintegrationdeviceconnectorrelationship["class_id"] = item.GetClassId()
+	partnerintegrationdeviceconnectorrelationship["moid"] = item.GetMoid()
+	partnerintegrationdeviceconnectorrelationship["object_type"] = item.GetObjectType()
+	partnerintegrationdeviceconnectorrelationship["selector"] = item.GetSelector()
+
+	partnerintegrationdeviceconnectorrelationships = append(partnerintegrationdeviceconnectorrelationships, partnerintegrationdeviceconnectorrelationship)
+	return partnerintegrationdeviceconnectorrelationships
+}
+func flattenMapPartnerintegrationInventoryRelationship(p models.PartnerintegrationInventoryRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var partnerintegrationinventoryrelationships []map[string]interface{}
+	var ret models.PartnerintegrationInventoryRelationship
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	x := p
+	item := x.MoMoRef
+	partnerintegrationinventoryrelationship := make(map[string]interface{})
+	partnerintegrationinventoryrelationship["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	partnerintegrationinventoryrelationship["class_id"] = item.GetClassId()
+	partnerintegrationinventoryrelationship["moid"] = item.GetMoid()
+	partnerintegrationinventoryrelationship["object_type"] = item.GetObjectType()
+	partnerintegrationinventoryrelationship["selector"] = item.GetSelector()
+
+	partnerintegrationinventoryrelationships = append(partnerintegrationinventoryrelationships, partnerintegrationinventoryrelationship)
+	return partnerintegrationinventoryrelationships
 }
 func flattenMapPciDeviceRelationship(p models.PciDeviceRelationship, d *schema.ResourceData) []map[string]interface{} {
 	var pcidevicerelationships []map[string]interface{}

@@ -197,6 +197,11 @@ func getCapabilityAdapterUnitDescriptorSchema() map[string]*schema.Schema {
 			Type:        schema.TypeBool,
 			Optional:    true,
 		},
+		"is_secure_boot_supported": {
+			Description: "Indicates support for secure boot.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
 		"max_eth_rx_ring_size": {
 			Description: "Maximum Ring Size value for vNIC Receive Queue.",
 			Type:        schema.TypeInt,
@@ -730,6 +735,11 @@ func dataSourceCapabilityAdapterUnitDescriptorRead(c context.Context, d *schema.
 		o.SetIsGeneveSupported(x)
 	}
 
+	if v, ok := d.GetOkExists("is_secure_boot_supported"); ok {
+		x := (v.(bool))
+		o.SetIsSecureBootSupported(x)
+	}
+
 	if v, ok := d.GetOkExists("max_eth_rx_ring_size"); ok {
 		x := int64(v.(int))
 		o.SetMaxEthRxRingSize(x)
@@ -1056,6 +1066,7 @@ func dataSourceCapabilityAdapterUnitDescriptorRead(c context.Context, d *schema.
 				temp["fibre_channel_scsi_ioq_limit"] = (s.GetFibreChannelScsiIoqLimit())
 				temp["is_azure_qos_supported"] = (s.GetIsAzureQosSupported())
 				temp["is_geneve_supported"] = (s.GetIsGeneveSupported())
+				temp["is_secure_boot_supported"] = (s.GetIsSecureBootSupported())
 				temp["max_eth_rx_ring_size"] = (s.GetMaxEthRxRingSize())
 				temp["max_eth_tx_ring_size"] = (s.GetMaxEthTxRingSize())
 				temp["max_rocev2_interfaces"] = (s.GetMaxRocev2Interfaces())

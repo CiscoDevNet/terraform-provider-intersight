@@ -239,6 +239,16 @@ func getBulkMoDeepClonerSchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"reference_name_suffix": {
+			Description: "Name suffix to be applied to all the MOs being cloned when ReferencePolicy chosen is CreateNew. Name can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-) or an underscore (_).",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"reference_policy": {
+			Description: "User selected reference clone behavior. Applies to all the MOs being cloned.\n* `ReuseAll` - Any policies in the destination organization whose name matches the policy referenced in the cloned policy will be attached. If no policyin the destination organization matches by name, a policy will be cloned with the same name.Pool references will always be matched by name. If not found, the pool will be cloned in the destination organization, but no identifierblocks will be created.\n* `CreateNew` - New policies will be created for the source and all the attached policies. If a policy of the same name and type already exists in thedestination organization or any organization from which it shares policies, a clone will be created with the provided suffix added to the name.Pool references will always be matched by name. If not found, the pool will be cloned in the destination organization, but no identifierblocks will be created.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"shared_scope": {
 			Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
 			Type:        schema.TypeString,
@@ -1014,6 +1024,16 @@ func dataSourceBulkMoDeepClonerRead(c context.Context, d *schema.ResourceData, m
 		o.SetPermissionResources(x)
 	}
 
+	if v, ok := d.GetOk("reference_name_suffix"); ok {
+		x := (v.(string))
+		o.SetReferenceNameSuffix(x)
+	}
+
+	if v, ok := d.GetOk("reference_policy"); ok {
+		x := (v.(string))
+		o.SetReferencePolicy(x)
+	}
+
 	if v, ok := d.GetOk("shared_scope"); ok {
 		x := (v.(string))
 		o.SetSharedScope(x)
@@ -1306,6 +1326,8 @@ func dataSourceBulkMoDeepClonerRead(c context.Context, d *schema.ResourceData, m
 				temp["parent"] = flattenMapMoBaseMoRelationship(s.GetParent(), d)
 
 				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
+				temp["reference_name_suffix"] = (s.GetReferenceNameSuffix())
+				temp["reference_policy"] = (s.GetReferencePolicy())
 				temp["shared_scope"] = (s.GetSharedScope())
 
 				temp["nr_source"] = flattenMapMoMoRef(s.GetSource(), d)

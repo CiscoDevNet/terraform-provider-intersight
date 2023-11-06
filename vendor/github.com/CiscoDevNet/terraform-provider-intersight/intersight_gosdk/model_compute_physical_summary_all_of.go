@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-13892
+API version: 1.0.11-14237
 Contact: intersight@cisco.com
 */
 
@@ -45,6 +45,8 @@ type ComputePhysicalSummaryAllOf struct {
 	FaultSummary *int64 `json:"FaultSummary,omitempty"`
 	// The firmware version of the Cisco Integrated Management Controller (CIMC) for this server.
 	Firmware *string `json:"Firmware,omitempty"`
+	// The actual front panel state of the server. * `None` - Front Panel of the server is set to None state. It is required so that the next frontPanelLockState operation can be triggered. * `Lock` - Front Panel of the server is set to Locked state. * `Unlock` - Front Panel of the server is set to Unlocked state.
+	FrontPanelLockState *string `json:"FrontPanelLockState,omitempty"`
 	// The universally unique hardware identity of the server provided by the manufacturer.
 	HardwareUuid *string `json:"HardwareUuid,omitempty"`
 	// The IPv4 address configured on the management interface of the Integrated Management Controller.
@@ -598,6 +600,38 @@ func (o *ComputePhysicalSummaryAllOf) HasFirmware() bool {
 // SetFirmware gets a reference to the given string and assigns it to the Firmware field.
 func (o *ComputePhysicalSummaryAllOf) SetFirmware(v string) {
 	o.Firmware = &v
+}
+
+// GetFrontPanelLockState returns the FrontPanelLockState field value if set, zero value otherwise.
+func (o *ComputePhysicalSummaryAllOf) GetFrontPanelLockState() string {
+	if o == nil || o.FrontPanelLockState == nil {
+		var ret string
+		return ret
+	}
+	return *o.FrontPanelLockState
+}
+
+// GetFrontPanelLockStateOk returns a tuple with the FrontPanelLockState field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ComputePhysicalSummaryAllOf) GetFrontPanelLockStateOk() (*string, bool) {
+	if o == nil || o.FrontPanelLockState == nil {
+		return nil, false
+	}
+	return o.FrontPanelLockState, true
+}
+
+// HasFrontPanelLockState returns a boolean if a field has been set.
+func (o *ComputePhysicalSummaryAllOf) HasFrontPanelLockState() bool {
+	if o != nil && o.FrontPanelLockState != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetFrontPanelLockState gets a reference to the given string and assigns it to the FrontPanelLockState field.
+func (o *ComputePhysicalSummaryAllOf) SetFrontPanelLockState(v string) {
+	o.FrontPanelLockState = &v
 }
 
 // GetHardwareUuid returns the HardwareUuid field value if set, zero value otherwise.
@@ -2022,6 +2056,9 @@ func (o ComputePhysicalSummaryAllOf) MarshalJSON() ([]byte, error) {
 	if o.Firmware != nil {
 		toSerialize["Firmware"] = o.Firmware
 	}
+	if o.FrontPanelLockState != nil {
+		toSerialize["FrontPanelLockState"] = o.FrontPanelLockState
+	}
 	if o.HardwareUuid != nil {
 		toSerialize["HardwareUuid"] = o.HardwareUuid
 	}
@@ -2183,6 +2220,7 @@ func (o *ComputePhysicalSummaryAllOf) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "Dn")
 		delete(additionalProperties, "FaultSummary")
 		delete(additionalProperties, "Firmware")
+		delete(additionalProperties, "FrontPanelLockState")
 		delete(additionalProperties, "HardwareUuid")
 		delete(additionalProperties, "Ipv4Address")
 		delete(additionalProperties, "IsUpgraded")

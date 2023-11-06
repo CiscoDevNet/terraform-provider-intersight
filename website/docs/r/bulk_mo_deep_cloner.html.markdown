@@ -4,10 +4,9 @@ layout: "intersight"
 page_title: "Intersight: intersight_bulk_mo_deep_cloner"
 description: |-
         The MODeepCloner interface facilitates making n number of deep copies of any resource instance which supports the CREATE operation.
-        The copy is limited to creating copies of only the child references of the resource.
         The MO to be cloned should be specified as an MoRef object in the Source.
         The Targets array should contain n JSON documents each compliant to RFC 7386.
-        For each target mo to be created, the user can specify the following -
+        For each target MO to be created, the user can specify the following -
         - new values for the identity properties, if applicable
         - new values for specific properties or references of the source MO which need to be overridden in the cloned object.
 
@@ -15,10 +14,9 @@ description: |-
 
 # Resource: intersight_bulk_mo_deep_cloner
 The MODeepCloner interface facilitates making n number of deep copies of any resource instance which supports the CREATE operation.
-The copy is limited to creating copies of only the child references of the resource.
 The MO to be cloned should be specified as an MoRef object in the "Source".
 The "Targets" array should contain n JSON documents each compliant to RFC 7386. 
-For each target mo to be created, the user can specify the following -
+For each target MO to be created, the user can specify the following -
 - new values for the identity properties, if applicable
 - new values for specific properties or references of the source MO which need to be overridden in the cloned object.
 ## Argument Reference
@@ -57,6 +55,8 @@ This complex property has following sub-properties:
   + `moid`:(string) The Moid of the referenced REST resource. 
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
   + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
+* `reference_name_suffix`:(string) Name suffix to be applied to all the MOs being cloned when ReferencePolicy chosen is CreateNew. Name can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-) or an underscore (_). 
+* `reference_policy`:(string) User selected reference clone behavior. Applies to all the MOs being cloned.* `ReuseAll` - Any policies in the destination organization whose name matches the policy referenced in the cloned policy will be attached. If no policyin the destination organization matches by name, a policy will be cloned with the same name.Pool references will always be matched by name. If not found, the pool will be cloned in the destination organization, but no identifierblocks will be created.* `CreateNew` - New policies will be created for the source and all the attached policies. If a policy of the same name and type already exists in thedestination organization or any organization from which it shares policies, a clone will be created with the provided suffix added to the name.Pool references will always be matched by name. If not found, the pool will be cloned in the destination organization, but no identifierblocks will be created. 
 * `shared_scope`:(string)(ReadOnly) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
 * `nr_source`:(HashMap) - MoRef of the source instance. 
 This complex property has following sub-properties:

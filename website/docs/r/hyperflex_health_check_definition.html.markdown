@@ -86,7 +86,7 @@ This complex property has following sub-properties:
 This complex property has following sub-properties:
   + `key`:(string) The string representation of a tag key. 
   + `value`:(string) The string representation of a tag value. 
-* `target_execution_type`:(string) Indicates whether the health check is executed only on the leader node, or on all nodes in the HyperFlex cluster.* `EXECUTE_ON_LEADER_NODE` - Execute the health check script only on the HyperFlex cluster's leader node.* `EXECUTE_ON_ALL_NODES` - Execute health check on all nodes and aggregate the results.* `EXECUTE_ON_ALL_NODES_AND_AGGREGATE` - Execute the health check on all Nodes and perform custom aggregation. 
+* `target_execution_type`:(string) Indicates whether the health check is executed only on the leader node, or on all nodes in the HyperFlex cluster.* `EXECUTE_ON_LEADER_NODE` - Execute the health check script only on the HyperFlex cluster's leader node.* `EXECUTE_ON_ALL_NODES` - Execute health check on all nodes and aggregate the results.* `EXECUTE_ON_ALL_NODES_AND_AGGREGATE` - Execute the health check on all Nodes and perform custom aggregation.* `EXECUTE_ON_CURRENT_NODE` - The HyperFlex health check is executed on the node which receives the request. 
 * `timeout`:(int) Health check script execution timeout. 
 * `unsupported_hyper_flex_versions`:
                 (Array of schema.TypeString) -

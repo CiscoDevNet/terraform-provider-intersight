@@ -253,6 +253,12 @@ func resourceCapabilityAdapterUnitDescriptor() *schema.Resource {
 				Optional:    true,
 				Default:     true,
 			},
+			"is_secure_boot_supported": {
+				Description: "Indicates support for secure boot.",
+				Type:        schema.TypeBool,
+				Optional:    true,
+				Default:     false,
+			},
 			"max_eth_rx_ring_size": {
 				Description: "Maximum Ring Size value for vNIC Receive Queue.",
 				Type:        schema.TypeInt,
@@ -795,6 +801,11 @@ func resourceCapabilityAdapterUnitDescriptorCreate(c context.Context, d *schema.
 		o.SetIsGeneveSupported(x)
 	}
 
+	if v, ok := d.GetOkExists("is_secure_boot_supported"); ok {
+		x := (v.(bool))
+		o.SetIsSecureBootSupported(x)
+	}
+
 	if v, ok := d.GetOkExists("max_eth_rx_ring_size"); ok {
 		x := int64(v.(int))
 		o.SetMaxEthRxRingSize(x)
@@ -984,6 +995,10 @@ func resourceCapabilityAdapterUnitDescriptorRead(c context.Context, d *schema.Re
 
 	if err := d.Set("is_geneve_supported", (s.GetIsGeneveSupported())); err != nil {
 		return diag.Errorf("error occurred while setting property IsGeneveSupported in CapabilityAdapterUnitDescriptor object: %s", err.Error())
+	}
+
+	if err := d.Set("is_secure_boot_supported", (s.GetIsSecureBootSupported())); err != nil {
+		return diag.Errorf("error occurred while setting property IsSecureBootSupported in CapabilityAdapterUnitDescriptor object: %s", err.Error())
 	}
 
 	if err := d.Set("max_eth_rx_ring_size", (s.GetMaxEthRxRingSize())); err != nil {
@@ -1255,6 +1270,12 @@ func resourceCapabilityAdapterUnitDescriptorUpdate(c context.Context, d *schema.
 		v := d.Get("is_geneve_supported")
 		x := (v.(bool))
 		o.SetIsGeneveSupported(x)
+	}
+
+	if d.HasChange("is_secure_boot_supported") {
+		v := d.Get("is_secure_boot_supported")
+		x := (v.(bool))
+		o.SetIsSecureBootSupported(x)
 	}
 
 	if d.HasChange("max_eth_rx_ring_size") {

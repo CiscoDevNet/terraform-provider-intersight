@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-13892
+API version: 1.0.11-14237
 Contact: intersight@cisco.com
 */
 
@@ -37,10 +37,11 @@ type TechsupportmanagementTechSupportStatus struct {
 	RelayStatus *string `json:"RelayStatus,omitempty"`
 	// The time at which the techsupport request was initiated.
 	RequestTs *time.Time `json:"RequestTs,omitempty"`
-	// Status of techsupport collection. Valid values are Pending, CollectionInProgress, CollectionFailed, CollectionComplete, UploadPending, UploadInProgress, UploadPartsComplete, UploadFailed and Completed. The final status will be either CollectionFailed or UploadFailed if there is a failure and Completed if the request completed successfully and the file was uploaded to Intersight Storage Service. All the remaining status values indicates the progress of techsupport collection.
+	// Status of the techsupport collection. Valid values are Scheduled, Pending, CollectionInProgress, CollectionFailed, CollectionComplete, UploadPending, UploadInProgress, UploadPartsComplete, UploadPreparingNextFile, UploadFailed, TechsupportDownloadUrlCreationFailed, PartiallyCompleted, and Completed. The final status will be one of CollectionFailed, UploadFailed, or TechsupportDownloadUrlCreationFailed if there is a failure, Completed if the request completed successfully and the file (or files) were uploaded to Intersight Storage Service, or PartiallyCompleted if at least one file in a multiple file collection uploaded successfully. All the remaining status values indicates the progress of techsupport collection.
 	Status *string `json:"Status,omitempty"`
 	// The Url to download the techsupport file.
-	TechsupportDownloadUrl *string `json:"TechsupportDownloadUrl,omitempty"`
+	TechsupportDownloadUrl *string                                    `json:"TechsupportDownloadUrl,omitempty"`
+	TechsupportFiles       []TechsupportmanagementTechSupportFileInfo `json:"TechsupportFiles,omitempty"`
 	// The name of the role granted to the user that issued the techsupport request.
 	UserRole             *string                                             `json:"UserRole,omitempty"`
 	ClusterMember        *AssetClusterMemberRelationship                     `json:"ClusterMember,omitempty"`
@@ -379,6 +380,39 @@ func (o *TechsupportmanagementTechSupportStatus) SetTechsupportDownloadUrl(v str
 	o.TechsupportDownloadUrl = &v
 }
 
+// GetTechsupportFiles returns the TechsupportFiles field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *TechsupportmanagementTechSupportStatus) GetTechsupportFiles() []TechsupportmanagementTechSupportFileInfo {
+	if o == nil {
+		var ret []TechsupportmanagementTechSupportFileInfo
+		return ret
+	}
+	return o.TechsupportFiles
+}
+
+// GetTechsupportFilesOk returns a tuple with the TechsupportFiles field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *TechsupportmanagementTechSupportStatus) GetTechsupportFilesOk() ([]TechsupportmanagementTechSupportFileInfo, bool) {
+	if o == nil || o.TechsupportFiles == nil {
+		return nil, false
+	}
+	return o.TechsupportFiles, true
+}
+
+// HasTechsupportFiles returns a boolean if a field has been set.
+func (o *TechsupportmanagementTechSupportStatus) HasTechsupportFiles() bool {
+	if o != nil && o.TechsupportFiles != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetTechsupportFiles gets a reference to the given []TechsupportmanagementTechSupportFileInfo and assigns it to the TechsupportFiles field.
+func (o *TechsupportmanagementTechSupportStatus) SetTechsupportFiles(v []TechsupportmanagementTechSupportFileInfo) {
+	o.TechsupportFiles = v
+}
+
 // GetUserRole returns the UserRole field value if set, zero value otherwise.
 func (o *TechsupportmanagementTechSupportStatus) GetUserRole() string {
 	if o == nil || o.UserRole == nil {
@@ -579,6 +613,9 @@ func (o TechsupportmanagementTechSupportStatus) MarshalJSON() ([]byte, error) {
 	if o.TechsupportDownloadUrl != nil {
 		toSerialize["TechsupportDownloadUrl"] = o.TechsupportDownloadUrl
 	}
+	if o.TechsupportFiles != nil {
+		toSerialize["TechsupportFiles"] = o.TechsupportFiles
+	}
 	if o.UserRole != nil {
 		toSerialize["UserRole"] = o.UserRole
 	}
@@ -620,10 +657,11 @@ func (o *TechsupportmanagementTechSupportStatus) UnmarshalJSON(bytes []byte) (er
 		RelayStatus *string `json:"RelayStatus,omitempty"`
 		// The time at which the techsupport request was initiated.
 		RequestTs *time.Time `json:"RequestTs,omitempty"`
-		// Status of techsupport collection. Valid values are Pending, CollectionInProgress, CollectionFailed, CollectionComplete, UploadPending, UploadInProgress, UploadPartsComplete, UploadFailed and Completed. The final status will be either CollectionFailed or UploadFailed if there is a failure and Completed if the request completed successfully and the file was uploaded to Intersight Storage Service. All the remaining status values indicates the progress of techsupport collection.
+		// Status of the techsupport collection. Valid values are Scheduled, Pending, CollectionInProgress, CollectionFailed, CollectionComplete, UploadPending, UploadInProgress, UploadPartsComplete, UploadPreparingNextFile, UploadFailed, TechsupportDownloadUrlCreationFailed, PartiallyCompleted, and Completed. The final status will be one of CollectionFailed, UploadFailed, or TechsupportDownloadUrlCreationFailed if there is a failure, Completed if the request completed successfully and the file (or files) were uploaded to Intersight Storage Service, or PartiallyCompleted if at least one file in a multiple file collection uploaded successfully. All the remaining status values indicates the progress of techsupport collection.
 		Status *string `json:"Status,omitempty"`
 		// The Url to download the techsupport file.
-		TechsupportDownloadUrl *string `json:"TechsupportDownloadUrl,omitempty"`
+		TechsupportDownloadUrl *string                                    `json:"TechsupportDownloadUrl,omitempty"`
+		TechsupportFiles       []TechsupportmanagementTechSupportFileInfo `json:"TechsupportFiles,omitempty"`
 		// The name of the role granted to the user that issued the techsupport request.
 		UserRole           *string                                             `json:"UserRole,omitempty"`
 		ClusterMember      *AssetClusterMemberRelationship                     `json:"ClusterMember,omitempty"`
@@ -647,6 +685,7 @@ func (o *TechsupportmanagementTechSupportStatus) UnmarshalJSON(bytes []byte) (er
 		varTechsupportmanagementTechSupportStatus.RequestTs = varTechsupportmanagementTechSupportStatusWithoutEmbeddedStruct.RequestTs
 		varTechsupportmanagementTechSupportStatus.Status = varTechsupportmanagementTechSupportStatusWithoutEmbeddedStruct.Status
 		varTechsupportmanagementTechSupportStatus.TechsupportDownloadUrl = varTechsupportmanagementTechSupportStatusWithoutEmbeddedStruct.TechsupportDownloadUrl
+		varTechsupportmanagementTechSupportStatus.TechsupportFiles = varTechsupportmanagementTechSupportStatusWithoutEmbeddedStruct.TechsupportFiles
 		varTechsupportmanagementTechSupportStatus.UserRole = varTechsupportmanagementTechSupportStatusWithoutEmbeddedStruct.UserRole
 		varTechsupportmanagementTechSupportStatus.ClusterMember = varTechsupportmanagementTechSupportStatusWithoutEmbeddedStruct.ClusterMember
 		varTechsupportmanagementTechSupportStatus.DeviceRegistration = varTechsupportmanagementTechSupportStatusWithoutEmbeddedStruct.DeviceRegistration
@@ -679,6 +718,7 @@ func (o *TechsupportmanagementTechSupportStatus) UnmarshalJSON(bytes []byte) (er
 		delete(additionalProperties, "RequestTs")
 		delete(additionalProperties, "Status")
 		delete(additionalProperties, "TechsupportDownloadUrl")
+		delete(additionalProperties, "TechsupportFiles")
 		delete(additionalProperties, "UserRole")
 		delete(additionalProperties, "ClusterMember")
 		delete(additionalProperties, "DeviceRegistration")
