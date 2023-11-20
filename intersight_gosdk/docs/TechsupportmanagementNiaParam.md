@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **Period** | Pointer to **int64** | Number of days for which to collect techsupport. | [optional] [default to 2]
 **Pids** | Pointer to **[]string** |  | [optional] 
 **SerialNumbers** | Pointer to **[]string** |  | [optional] 
+**UpgradeLogs** | Pointer to **bool** | UpgradeLogs controls the inclusion of upgrade logs in tech support bundles. | [optional] 
 
 ## Methods
 
@@ -268,6 +269,31 @@ HasSerialNumbers returns a boolean if a field has been set.
 `func (o *TechsupportmanagementNiaParam) UnsetSerialNumbers()`
 
 UnsetSerialNumbers ensures that no value is present for SerialNumbers, not even an explicit nil
+### GetUpgradeLogs
+
+`func (o *TechsupportmanagementNiaParam) GetUpgradeLogs() bool`
+
+GetUpgradeLogs returns the UpgradeLogs field if non-nil, zero value otherwise.
+
+### GetUpgradeLogsOk
+
+`func (o *TechsupportmanagementNiaParam) GetUpgradeLogsOk() (*bool, bool)`
+
+GetUpgradeLogsOk returns a tuple with the UpgradeLogs field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUpgradeLogs
+
+`func (o *TechsupportmanagementNiaParam) SetUpgradeLogs(v bool)`
+
+SetUpgradeLogs sets UpgradeLogs field to given value.
+
+### HasUpgradeLogs
+
+`func (o *TechsupportmanagementNiaParam) HasUpgradeLogs() bool`
+
+HasUpgradeLogs returns a boolean if a field has been set.
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

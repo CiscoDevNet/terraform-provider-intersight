@@ -19,7 +19,7 @@ The following arguments can be used to get data of already created objects in In
 * `cleanup_time`:(string) The time when the workflow info will be removed from the database. When WorkflowInfo is created, cleanup time will be set to 181 days. As the workflow progresses through different states the cleanup time can be updated. A cleanup time of 0 means the workflow is not scheduled for cleanup. An active workflow that continues to schedule & run tasks can run for any amount of time and there is no upper bound for such workflows. Workflows that are not actively running, say in Paused or Waiting states will be removed after 181 days. 
 * `create_time`:(string) The time when this managed object was created. 
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
-* `email`:(string) The email address of the user who started this workflow. 
+* `email`:(string) The email address of the user who started this workflow. In the case of LDAP users, this field can hold either a username or an email. 
 * `end_time`:(string) The time when the workflow reached a final state. 
 * `failed_workflow_cleanup_duration`:(int) The duration in hours after which the workflow info for failed, terminated or timed out workflow will be removed from database. The minimum is 1 hour, maximum is 365 days and default is 90 days. 
 * `inst_id`:(string) A workflow instance Id which is the unique identified for the workflow execution. 

@@ -1,110 +1,110 @@
-# HyperflexHealthCheckScriptDownloaderResponse
+# ApplianceBackupRotateDataResponse
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ObjectType** | **string** | A discriminator value to disambiguate the schema of a HTTP GET response body. | 
-**Count** | Pointer to **int32** | The total number of &#39;hyperflex.HealthCheckScriptDownloader&#39; resources matching the request, accross all pages. The &#39;Count&#39; attribute is included when the HTTP GET request includes the &#39;$inlinecount&#39; parameter. | [optional] 
+**Count** | Pointer to **int32** | The total number of &#39;appliance.BackupRotateData&#39; resources matching the request, accross all pages. The &#39;Count&#39; attribute is included when the HTTP GET request includes the &#39;$inlinecount&#39; parameter. | [optional] 
 **Results** | Pointer to [**[]MoTagKeySummary**](MoTagKeySummary.md) |  | [optional] 
 
 ## Methods
 
-### NewHyperflexHealthCheckScriptDownloaderResponse
+### NewApplianceBackupRotateDataResponse
 
-`func NewHyperflexHealthCheckScriptDownloaderResponse(objectType string, ) *HyperflexHealthCheckScriptDownloaderResponse`
+`func NewApplianceBackupRotateDataResponse(objectType string, ) *ApplianceBackupRotateDataResponse`
 
-NewHyperflexHealthCheckScriptDownloaderResponse instantiates a new HyperflexHealthCheckScriptDownloaderResponse object
+NewApplianceBackupRotateDataResponse instantiates a new ApplianceBackupRotateDataResponse object
 This constructor will assign default values to properties that have it defined,
 and makes sure properties required by API are set, but the set of arguments
 will change when the set of required properties is changed
 
-### NewHyperflexHealthCheckScriptDownloaderResponseWithDefaults
+### NewApplianceBackupRotateDataResponseWithDefaults
 
-`func NewHyperflexHealthCheckScriptDownloaderResponseWithDefaults() *HyperflexHealthCheckScriptDownloaderResponse`
+`func NewApplianceBackupRotateDataResponseWithDefaults() *ApplianceBackupRotateDataResponse`
 
-NewHyperflexHealthCheckScriptDownloaderResponseWithDefaults instantiates a new HyperflexHealthCheckScriptDownloaderResponse object
+NewApplianceBackupRotateDataResponseWithDefaults instantiates a new ApplianceBackupRotateDataResponse object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
 ### GetObjectType
 
-`func (o *HyperflexHealthCheckScriptDownloaderResponse) GetObjectType() string`
+`func (o *ApplianceBackupRotateDataResponse) GetObjectType() string`
 
 GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
 
 ### GetObjectTypeOk
 
-`func (o *HyperflexHealthCheckScriptDownloaderResponse) GetObjectTypeOk() (*string, bool)`
+`func (o *ApplianceBackupRotateDataResponse) GetObjectTypeOk() (*string, bool)`
 
 GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetObjectType
 
-`func (o *HyperflexHealthCheckScriptDownloaderResponse) SetObjectType(v string)`
+`func (o *ApplianceBackupRotateDataResponse) SetObjectType(v string)`
 
 SetObjectType sets ObjectType field to given value.
 
 
 ### GetCount
 
-`func (o *HyperflexHealthCheckScriptDownloaderResponse) GetCount() int32`
+`func (o *ApplianceBackupRotateDataResponse) GetCount() int32`
 
 GetCount returns the Count field if non-nil, zero value otherwise.
 
 ### GetCountOk
 
-`func (o *HyperflexHealthCheckScriptDownloaderResponse) GetCountOk() (*int32, bool)`
+`func (o *ApplianceBackupRotateDataResponse) GetCountOk() (*int32, bool)`
 
 GetCountOk returns a tuple with the Count field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetCount
 
-`func (o *HyperflexHealthCheckScriptDownloaderResponse) SetCount(v int32)`
+`func (o *ApplianceBackupRotateDataResponse) SetCount(v int32)`
 
 SetCount sets Count field to given value.
 
 ### HasCount
 
-`func (o *HyperflexHealthCheckScriptDownloaderResponse) HasCount() bool`
+`func (o *ApplianceBackupRotateDataResponse) HasCount() bool`
 
 HasCount returns a boolean if a field has been set.
 
 ### GetResults
 
-`func (o *HyperflexHealthCheckScriptDownloaderResponse) GetResults() []MoTagKeySummary`
+`func (o *ApplianceBackupRotateDataResponse) GetResults() []MoTagKeySummary`
 
 GetResults returns the Results field if non-nil, zero value otherwise.
 
 ### GetResultsOk
 
-`func (o *HyperflexHealthCheckScriptDownloaderResponse) GetResultsOk() (*[]MoTagKeySummary, bool)`
+`func (o *ApplianceBackupRotateDataResponse) GetResultsOk() (*[]MoTagKeySummary, bool)`
 
 GetResultsOk returns a tuple with the Results field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetResults
 
-`func (o *HyperflexHealthCheckScriptDownloaderResponse) SetResults(v []MoTagKeySummary)`
+`func (o *ApplianceBackupRotateDataResponse) SetResults(v []MoTagKeySummary)`
 
 SetResults sets Results field to given value.
 
 ### HasResults
 
-`func (o *HyperflexHealthCheckScriptDownloaderResponse) HasResults() bool`
+`func (o *ApplianceBackupRotateDataResponse) HasResults() bool`
 
 HasResults returns a boolean if a field has been set.
 
 ### SetResultsNil
 
-`func (o *HyperflexHealthCheckScriptDownloaderResponse) SetResultsNil(b bool)`
+`func (o *ApplianceBackupRotateDataResponse) SetResultsNil(b bool)`
 
  SetResultsNil sets the value for Results to be an explicit nil
 
 ### UnsetResults
-`func (o *HyperflexHealthCheckScriptDownloaderResponse) UnsetResults()`
+`func (o *ApplianceBackupRotateDataResponse) UnsetResults()`
 
 UnsetResults ensures that no value is present for Results, not even an explicit nil
 

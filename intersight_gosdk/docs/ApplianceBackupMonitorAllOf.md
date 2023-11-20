@@ -6,7 +6,9 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "appliance.BackupMonitor"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "appliance.BackupMonitor"]
-**LastBackupStatus** | Pointer to **string** | Status of the most recent Intersight Appliance backup. * &#x60;BackupFound&#x60; - Backup is successful and complete. * &#x60;BackupFailed&#x60; - The current Backup failed. * &#x60;BackupOutdated&#x60; - Backup is old and outdated. | [optional] [readonly] [default to "BackupFound"]
+**Filename** | Pointer to **string** | Filename of the backup for the backup monitor. | [optional] [readonly] 
+**LastBackupRotationStatus** | Pointer to **string** | Status of the oldest Intersight Appliance backup cleanup. * &#x60;BackupFound&#x60; - Backup is successful and complete. * &#x60;BackupFailed&#x60; - The current Backup failed. * &#x60;BackupOutdated&#x60; - Backup is old and outdated. * &#x60;BackupCleanupFailed&#x60; - Cleanup of the old backup has failed. | [optional] [readonly] [default to "BackupFound"]
+**LastBackupStatus** | Pointer to **string** | Status of the most recent Intersight Appliance backup. * &#x60;BackupFound&#x60; - Backup is successful and complete. * &#x60;BackupFailed&#x60; - The current Backup failed. * &#x60;BackupOutdated&#x60; - Backup is old and outdated. * &#x60;BackupCleanupFailed&#x60; - Cleanup of the old backup has failed. | [optional] [readonly] [default to "BackupFound"]
 **Account** | Pointer to [**IamAccountRelationship**](IamAccountRelationship.md) |  | [optional] 
 
 ## Methods
@@ -67,6 +69,56 @@ and a boolean to check if the value has been set.
 
 SetObjectType sets ObjectType field to given value.
 
+
+### GetFilename
+
+`func (o *ApplianceBackupMonitorAllOf) GetFilename() string`
+
+GetFilename returns the Filename field if non-nil, zero value otherwise.
+
+### GetFilenameOk
+
+`func (o *ApplianceBackupMonitorAllOf) GetFilenameOk() (*string, bool)`
+
+GetFilenameOk returns a tuple with the Filename field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFilename
+
+`func (o *ApplianceBackupMonitorAllOf) SetFilename(v string)`
+
+SetFilename sets Filename field to given value.
+
+### HasFilename
+
+`func (o *ApplianceBackupMonitorAllOf) HasFilename() bool`
+
+HasFilename returns a boolean if a field has been set.
+
+### GetLastBackupRotationStatus
+
+`func (o *ApplianceBackupMonitorAllOf) GetLastBackupRotationStatus() string`
+
+GetLastBackupRotationStatus returns the LastBackupRotationStatus field if non-nil, zero value otherwise.
+
+### GetLastBackupRotationStatusOk
+
+`func (o *ApplianceBackupMonitorAllOf) GetLastBackupRotationStatusOk() (*string, bool)`
+
+GetLastBackupRotationStatusOk returns a tuple with the LastBackupRotationStatus field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLastBackupRotationStatus
+
+`func (o *ApplianceBackupMonitorAllOf) SetLastBackupRotationStatus(v string)`
+
+SetLastBackupRotationStatus sets LastBackupRotationStatus field to given value.
+
+### HasLastBackupRotationStatus
+
+`func (o *ApplianceBackupMonitorAllOf) HasLastBackupRotationStatus() bool`
+
+HasLastBackupRotationStatus returns a boolean if a field has been set.
 
 ### GetLastBackupStatus
 

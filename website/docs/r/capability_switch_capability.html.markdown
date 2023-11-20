@@ -49,6 +49,7 @@ This complex property has following sub-properties:
 * `max_slots`:(int)(ReadOnly) Maximum allowed physical slots on this switch. 
 * `min_version_with_breakout_support`:(string)(ReadOnly) Minimum firmware version supported for breakout ports on this switch. 
 * `min_version_with_locator_led_support`:(string)(ReadOnly) Minimum firmware version supported for locator leds on this switch. 
+* `min_version_with_neg_auto25g`:(string)(ReadOnly) Minimum firmware version supported for 'negotiate auto 25000' port admin speed on this switch. 
 * `mod_time`:(string)(ReadOnly) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `name`:(string) An unique identifer for a capability descriptor. 
@@ -182,6 +183,7 @@ This complex property has following sub-properties:
   + `start_port_id`:(int) Starting Port ID in this range of ports. 
   + `start_slot_id`:(int) Starting Slot ID in this range of ports. 
 * `unified_rule`:(string)(ReadOnly) The Slider rule for Unified ports on this switch. 
+* `uplink_admin_port_speed_neg_auto25_gbps_supported`:(bool)(ReadOnly) 'Negotiate Auto 25000' admin speed support on this switch for port or port-channelwith Ethernet Uplink/Appliance/FCoE Uplink roles. 
 * `version_context`:(HashMap) -(ReadOnly) The versioning info for this managed object. 
 This complex property has following sub-properties:
   + `interested_mos`:(Array)

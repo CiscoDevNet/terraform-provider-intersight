@@ -156,7 +156,7 @@ func getWorkflowWorkflowInfoSchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"email": {
-			Description: "The email address of the user who started this workflow.",
+			Description: "The email address of the user who started this workflow. In the case of LDAP users, this field can hold either a username or an email.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},

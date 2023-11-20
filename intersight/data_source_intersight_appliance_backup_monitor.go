@@ -110,8 +110,18 @@ func getApplianceBackupMonitorSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"filename": {
+			Description: "Filename of the backup for the backup monitor.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"last_backup_rotation_status": {
+			Description: "Status of the oldest Intersight Appliance backup cleanup.\n* `BackupFound` - Backup is successful and complete.\n* `BackupFailed` - The current Backup failed.\n* `BackupOutdated` - Backup is old and outdated.\n* `BackupCleanupFailed` - Cleanup of the old backup has failed.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"last_backup_status": {
-			Description: "Status of the most recent Intersight Appliance backup.\n* `BackupFound` - Backup is successful and complete.\n* `BackupFailed` - The current Backup failed.\n* `BackupOutdated` - Backup is old and outdated.",
+			Description: "Status of the most recent Intersight Appliance backup.\n* `BackupFound` - Backup is successful and complete.\n* `BackupFailed` - The current Backup failed.\n* `BackupOutdated` - Backup is old and outdated.\n* `BackupCleanupFailed` - Cleanup of the old backup has failed.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -479,6 +489,16 @@ func dataSourceApplianceBackupMonitorRead(c context.Context, d *schema.ResourceD
 		o.SetDomainGroupMoid(x)
 	}
 
+	if v, ok := d.GetOk("filename"); ok {
+		x := (v.(string))
+		o.SetFilename(x)
+	}
+
+	if v, ok := d.GetOk("last_backup_rotation_status"); ok {
+		x := (v.(string))
+		o.SetLastBackupRotationStatus(x)
+	}
+
 	if v, ok := d.GetOk("last_backup_status"); ok {
 		x := (v.(string))
 		o.SetLastBackupStatus(x)
@@ -750,6 +770,8 @@ func dataSourceApplianceBackupMonitorRead(c context.Context, d *schema.ResourceD
 
 				temp["create_time"] = (s.GetCreateTime()).String()
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
+				temp["filename"] = (s.GetFilename())
+				temp["last_backup_rotation_status"] = (s.GetLastBackupRotationStatus())
 				temp["last_backup_status"] = (s.GetLastBackupStatus())
 
 				temp["mod_time"] = (s.GetModTime()).String()

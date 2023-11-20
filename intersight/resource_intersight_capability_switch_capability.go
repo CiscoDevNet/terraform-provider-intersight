@@ -252,6 +252,17 @@ func resourceCapabilitySwitchCapability() *schema.Resource {
 					}
 					return
 				}},
+			"min_version_with_neg_auto25g": {
+				Description: "Minimum firmware version supported for 'negotiate auto 25000' port admin speed on this switch.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+					if val != nil {
+						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+					}
+					return
+				}},
 			"mod_time": {
 				Description: "The time when this managed object was last modified.",
 				Type:        schema.TypeString,
@@ -1151,6 +1162,17 @@ func resourceCapabilitySwitchCapability() *schema.Resource {
 			"unified_rule": {
 				Description: "The Slider rule for Unified ports on this switch.",
 				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+					if val != nil {
+						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+					}
+					return
+				}},
+			"uplink_admin_port_speed_neg_auto25_gbps_supported": {
+				Description: "'Negotiate Auto 25000' admin speed support on this switch for port or port-channel\nwith Ethernet Uplink/Appliance/FCoE Uplink roles.",
+				Type:        schema.TypeBool,
 				Optional:    true,
 				Computed:    true,
 				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
@@ -2146,6 +2168,10 @@ func resourceCapabilitySwitchCapabilityRead(c context.Context, d *schema.Resourc
 		return diag.Errorf("error occurred while setting property MinVersionWithLocatorLedSupport in CapabilitySwitchCapability object: %s", err.Error())
 	}
 
+	if err := d.Set("min_version_with_neg_auto25g", (s.GetMinVersionWithNegAuto25g())); err != nil {
+		return diag.Errorf("error occurred while setting property MinVersionWithNegAuto25g in CapabilitySwitchCapability object: %s", err.Error())
+	}
+
 	if err := d.Set("mod_time", (s.GetModTime()).String()); err != nil {
 		return diag.Errorf("error occurred while setting property ModTime in CapabilitySwitchCapability object: %s", err.Error())
 	}
@@ -2256,6 +2282,10 @@ func resourceCapabilitySwitchCapabilityRead(c context.Context, d *schema.Resourc
 
 	if err := d.Set("unified_rule", (s.GetUnifiedRule())); err != nil {
 		return diag.Errorf("error occurred while setting property UnifiedRule in CapabilitySwitchCapability object: %s", err.Error())
+	}
+
+	if err := d.Set("uplink_admin_port_speed_neg_auto25_gbps_supported", (s.GetUplinkAdminPortSpeedNegAuto25GbpsSupported())); err != nil {
+		return diag.Errorf("error occurred while setting property UplinkAdminPortSpeedNegAuto25GbpsSupported in CapabilitySwitchCapability object: %s", err.Error())
 	}
 
 	if err := d.Set("version_context", flattenMapMoVersionContext(s.GetVersionContext(), d)); err != nil {

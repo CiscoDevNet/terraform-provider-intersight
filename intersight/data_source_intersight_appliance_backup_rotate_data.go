@@ -14,13 +14,48 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
-func getHyperflexHealthCheckScriptDownloaderSchema() map[string]*schema.Schema {
+func getApplianceBackupRotateDataSchema() map[string]*schema.Schema {
 	var schemaMap = make(map[string]*schema.Schema)
-	schemaMap = map[string]*schema.Schema{"account_moid": {
-		Description: "The Account ID for this managed object.",
-		Type:        schema.TypeString,
+	schemaMap = map[string]*schema.Schema{"account": {
+		Description: "A reference to a iamAccount resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+		Type:        schema.TypeList,
+		MaxItems:    1,
 		Optional:    true,
+		Elem: &schema.Resource{
+			Schema: map[string]*schema.Schema{
+				"additional_properties": {
+					Type:             schema.TypeString,
+					Optional:         true,
+					DiffSuppressFunc: SuppressDiffAdditionProps,
+				},
+				"class_id": {
+					Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+					Type:        schema.TypeString,
+					Optional:    true,
+				},
+				"moid": {
+					Description: "The Moid of the referenced REST resource.",
+					Type:        schema.TypeString,
+					Optional:    true,
+				},
+				"object_type": {
+					Description: "The fully-qualified name of the remote type referred by this relationship.",
+					Type:        schema.TypeString,
+					Optional:    true,
+				},
+				"selector": {
+					Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+					Type:        schema.TypeString,
+					Optional:    true,
+				},
+			},
+		},
 	},
+		"account_moid": {
+			Description: "The Account ID for this managed object.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"additional_properties": {
 			Type:             schema.TypeString,
 			Optional:         true,
@@ -60,6 +95,11 @@ func getHyperflexHealthCheckScriptDownloaderSchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"backup_time": {
+			Description: "The time at which the backup was taken.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"class_id": {
 			Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 			Type:        schema.TypeString,
@@ -75,8 +115,8 @@ func getHyperflexHealthCheckScriptDownloaderSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
-		"file_name": {
-			Description: "Filename of the health check package file, folder will be handled by api.",
+		"filename": {
+			Description: "Backup filename to backup or restore.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -169,9 +209,24 @@ func getHyperflexHealthCheckScriptDownloaderSchema() map[string]*schema.Schema {
 				},
 			},
 		},
-		"presigned_url": {
-			Description: "The presigned URL from server to download this health check package file.",
+		"protocol": {
+			Description: "Communication protocol used by the file server (e.g. scp, sftp, or CIFS).\n* `scp` - Secure Copy Protocol (SCP) to access the file server.\n* `sftp` - SSH File Transfer Protocol (SFTP) to access file server.\n* `cifs` - Common Internet File System (CIFS) Protocol to access file server.",
 			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"remote_host": {
+			Description: "Hostname of the remote file server.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"remote_path": {
+			Description: "File server directory or share name to copy the file.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"remote_port": {
+			Description: "Remote TCP port on the file server (e.g. 22 for scp).",
+			Type:        schema.TypeInt,
 			Optional:    true,
 		},
 		"shared_scope": {
@@ -201,6 +256,11 @@ func getHyperflexHealthCheckScriptDownloaderSchema() map[string]*schema.Schema {
 					},
 				},
 			},
+		},
+		"username": {
+			Description: "Username to authenticate the fileserver.",
+			Type:        schema.TypeString,
+			Optional:    true,
 		},
 		"version_context": {
 			Description: "The versioning info for this managed object.",
@@ -319,24 +379,67 @@ func getHyperflexHealthCheckScriptDownloaderSchema() map[string]*schema.Schema {
 	return schemaMap
 }
 
-func dataSourceHyperflexHealthCheckScriptDownloader() *schema.Resource {
-	var subSchema = getHyperflexHealthCheckScriptDownloaderSchema()
-	var model = getHyperflexHealthCheckScriptDownloaderSchema()
+func dataSourceApplianceBackupRotateData() *schema.Resource {
+	var subSchema = getApplianceBackupRotateDataSchema()
+	var model = getApplianceBackupRotateDataSchema()
 	model["results"] = &schema.Schema{
 		Type:     schema.TypeList,
 		Elem:     &schema.Resource{Schema: subSchema},
 		Computed: true,
 	}
 	return &schema.Resource{
-		ReadContext: dataSourceHyperflexHealthCheckScriptDownloaderRead,
+		ReadContext: dataSourceApplianceBackupRotateDataRead,
 		Schema:      model}
 }
 
-func dataSourceHyperflexHealthCheckScriptDownloaderRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
+func dataSourceApplianceBackupRotateDataRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
-	var o = &models.HyperflexHealthCheckScriptDownloader{}
+	var o = &models.ApplianceBackupRotateData{}
+	if v, ok := d.GetOk("account"); ok {
+		p := make([]models.IamAccountRelationship, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.MoMoRef{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			p = append(p, models.MoMoRefAsIamAccountRelationship(o))
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetAccount(x)
+		}
+	}
+
 	if v, ok := d.GetOk("account_moid"); ok {
 		x := (v.(string))
 		o.SetAccountMoid(x)
@@ -391,6 +494,11 @@ func dataSourceHyperflexHealthCheckScriptDownloaderRead(c context.Context, d *sc
 		o.SetAncestors(x)
 	}
 
+	if v, ok := d.GetOk("backup_time"); ok {
+		x, _ := time.Parse(time.RFC1123, v.(string))
+		o.SetBackupTime(x)
+	}
+
 	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
 		o.SetClassId(x)
@@ -406,9 +514,9 @@ func dataSourceHyperflexHealthCheckScriptDownloaderRead(c context.Context, d *sc
 		o.SetDomainGroupMoid(x)
 	}
 
-	if v, ok := d.GetOk("file_name"); ok {
+	if v, ok := d.GetOk("filename"); ok {
 		x := (v.(string))
-		o.SetFileName(x)
+		o.SetFilename(x)
 	}
 
 	if v, ok := d.GetOk("mod_time"); ok {
@@ -520,9 +628,24 @@ func dataSourceHyperflexHealthCheckScriptDownloaderRead(c context.Context, d *sc
 		o.SetPermissionResources(x)
 	}
 
-	if v, ok := d.GetOk("presigned_url"); ok {
+	if v, ok := d.GetOk("protocol"); ok {
 		x := (v.(string))
-		o.SetPresignedUrl(x)
+		o.SetProtocol(x)
+	}
+
+	if v, ok := d.GetOk("remote_host"); ok {
+		x := (v.(string))
+		o.SetRemoteHost(x)
+	}
+
+	if v, ok := d.GetOk("remote_path"); ok {
+		x := (v.(string))
+		o.SetRemotePath(x)
+	}
+
+	if v, ok := d.GetOkExists("remote_port"); ok {
+		x := int64(v.(int))
+		o.SetRemotePort(x)
 	}
 
 	if v, ok := d.GetOk("shared_scope"); ok {
@@ -561,6 +684,11 @@ func dataSourceHyperflexHealthCheckScriptDownloaderRead(c context.Context, d *sc
 			x = append(x, *o)
 		}
 		o.SetTags(x)
+	}
+
+	if v, ok := d.GetOk("username"); ok {
+		x := (v.(string))
+		o.SetUsername(x)
 	}
 
 	if v, ok := d.GetOk("version_context"); ok {
@@ -639,48 +767,52 @@ func dataSourceHyperflexHealthCheckScriptDownloaderRead(c context.Context, d *sc
 
 	data, err := o.MarshalJSON()
 	if err != nil {
-		return diag.Errorf("json marshal of HyperflexHealthCheckScriptDownloader object failed with error : %s", err.Error())
+		return diag.Errorf("json marshal of ApplianceBackupRotateData object failed with error : %s", err.Error())
 	}
-	countResponse, _, responseErr := conn.ApiClient.HyperflexApi.GetHyperflexHealthCheckScriptDownloaderList(conn.ctx).Filter(getRequestParams(data)).Count(true).Execute()
+	countResponse, _, responseErr := conn.ApiClient.ApplianceApi.GetApplianceBackupRotateDataList(conn.ctx).Filter(getRequestParams(data)).Count(true).Execute()
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
 			responseErr := responseErr.(*models.GenericOpenAPIError)
-			return diag.Errorf("error occurred while fetching count of HyperflexHealthCheckScriptDownloader: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+			return diag.Errorf("error occurred while fetching count of ApplianceBackupRotateData: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
-		return diag.Errorf("error occurred while fetching count of HyperflexHealthCheckScriptDownloader: %s", responseErr.Error())
+		return diag.Errorf("error occurred while fetching count of ApplianceBackupRotateData: %s", responseErr.Error())
 	}
 	count := countResponse.MoDocumentCount.GetCount()
 	if count == 0 {
-		return diag.Errorf("your query for HyperflexHealthCheckScriptDownloader data source did not return any results. Please change your search criteria and try again")
+		return diag.Errorf("your query for ApplianceBackupRotateData data source did not return any results. Please change your search criteria and try again")
 	}
 	var i int32
-	var hyperflexHealthCheckScriptDownloaderResults = make([]map[string]interface{}, 0, 0)
+	var applianceBackupRotateDataResults = make([]map[string]interface{}, 0, 0)
 	for i = 0; i < count; i += 100 {
-		resMo, _, responseErr := conn.ApiClient.HyperflexApi.GetHyperflexHealthCheckScriptDownloaderList(conn.ctx).Filter(getRequestParams(data)).Top(100).Skip(i).Execute()
+		resMo, _, responseErr := conn.ApiClient.ApplianceApi.GetApplianceBackupRotateDataList(conn.ctx).Filter(getRequestParams(data)).Top(100).Skip(i).Execute()
 		if responseErr != nil {
 			errorType := fmt.Sprintf("%T", responseErr)
 			if strings.Contains(errorType, "GenericOpenAPIError") {
 				responseErr := responseErr.(*models.GenericOpenAPIError)
-				return diag.Errorf("error occurred while fetching HyperflexHealthCheckScriptDownloader: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+				return diag.Errorf("error occurred while fetching ApplianceBackupRotateData: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 			}
-			return diag.Errorf("error occurred while fetching HyperflexHealthCheckScriptDownloader: %s", responseErr.Error())
+			return diag.Errorf("error occurred while fetching ApplianceBackupRotateData: %s", responseErr.Error())
 		}
-		results := resMo.HyperflexHealthCheckScriptDownloaderList.GetResults()
+		results := resMo.ApplianceBackupRotateDataList.GetResults()
 		switch reflect.TypeOf(results).Kind() {
 		case reflect.Slice:
 			for k := 0; k < len(results); k++ {
 				var s = results[k]
 				var temp = make(map[string]interface{})
+
+				temp["account"] = flattenMapIamAccountRelationship(s.GetAccount(), d)
 				temp["account_moid"] = (s.GetAccountMoid())
 				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
 
 				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)
+
+				temp["backup_time"] = (s.GetBackupTime()).String()
 				temp["class_id"] = (s.GetClassId())
 
 				temp["create_time"] = (s.GetCreateTime()).String()
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
-				temp["file_name"] = (s.GetFileName())
+				temp["filename"] = (s.GetFilename())
 
 				temp["mod_time"] = (s.GetModTime()).String()
 				temp["moid"] = (s.GetMoid())
@@ -690,20 +822,24 @@ func dataSourceHyperflexHealthCheckScriptDownloaderRead(c context.Context, d *sc
 				temp["parent"] = flattenMapMoBaseMoRelationship(s.GetParent(), d)
 
 				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
-				temp["presigned_url"] = (s.GetPresignedUrl())
+				temp["protocol"] = (s.GetProtocol())
+				temp["remote_host"] = (s.GetRemoteHost())
+				temp["remote_path"] = (s.GetRemotePath())
+				temp["remote_port"] = (s.GetRemotePort())
 				temp["shared_scope"] = (s.GetSharedScope())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
+				temp["username"] = (s.GetUsername())
 
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
-				hyperflexHealthCheckScriptDownloaderResults = append(hyperflexHealthCheckScriptDownloaderResults, temp)
+				applianceBackupRotateDataResults = append(applianceBackupRotateDataResults, temp)
 			}
 		}
 	}
-	log.Println("length of results: ", len(hyperflexHealthCheckScriptDownloaderResults))
-	if err := d.Set("results", hyperflexHealthCheckScriptDownloaderResults); err != nil {
+	log.Println("length of results: ", len(applianceBackupRotateDataResults))
+	if err := d.Set("results", applianceBackupRotateDataResults); err != nil {
 		return diag.Errorf("error occurred while setting results: %s", err.Error())
 	}
-	d.SetId(hyperflexHealthCheckScriptDownloaderResults[0]["moid"].(string))
+	d.SetId(applianceBackupRotateDataResults[0]["moid"].(string))
 	return de
 }

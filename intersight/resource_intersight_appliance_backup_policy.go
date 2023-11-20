@@ -297,9 +297,9 @@ func resourceApplianceBackupPolicy() *schema.Resource {
 				},
 			},
 			"protocol": {
-				Description:  "Communication protocol used by the file server (e.g. scp or sftp).\n* `scp` - Secure Copy Protocol (SCP) to access the file server.\n* `sftp` - SSH File Transfer Protocol (SFTP) to access file server.",
+				Description:  "Communication protocol used by the file server (e.g. scp, sftp, or CIFS).\n* `scp` - Secure Copy Protocol (SCP) to access the file server.\n* `sftp` - SSH File Transfer Protocol (SFTP) to access file server.\n* `cifs` - Common Internet File System (CIFS) Protocol to access file server.",
 				Type:         schema.TypeString,
-				ValidateFunc: validation.StringInSlice([]string{"scp", "sftp"}, false),
+				ValidateFunc: validation.StringInSlice([]string{"scp", "sftp", "cifs"}, false),
 				Optional:     true,
 				Default:      "scp",
 			},
@@ -309,14 +309,26 @@ func resourceApplianceBackupPolicy() *schema.Resource {
 				Optional:    true,
 			},
 			"remote_path": {
-				Description:  "File server directory to copy the file.",
+				Description:  "File server directory or share name to copy the file.",
 				Type:         schema.TypeString,
-				ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^(/[^/ ]*)+/?$"), ""),
+				ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^[^`]+$"), ""),
 				Optional:     true,
 			},
 			"remote_port": {
 				Description: "Remote TCP port on the file server (e.g. 22 for scp).",
 				Type:        schema.TypeInt,
+				Optional:    true,
+			},
+			"retention_count": {
+				Description:  "The number of backups before earliest backup is overwritten. Requires cleanup policy to be enabled.",
+				Type:         schema.TypeInt,
+				ValidateFunc: validation.IntBetween(1, 100),
+				Optional:     true,
+				Default:      1,
+			},
+			"retention_policy_enabled": {
+				Description: "If backup rotate policy is set, older backups will automatically be overwritten. The number of backups before overwriting is defined by the retentionCount property.",
+				Type:        schema.TypeBool,
 				Optional:    true,
 			},
 			"schedule": {
@@ -690,6 +702,16 @@ func resourceApplianceBackupPolicyCreate(c context.Context, d *schema.ResourceDa
 		o.SetRemotePort(x)
 	}
 
+	if v, ok := d.GetOkExists("retention_count"); ok {
+		x := int64(v.(int))
+		o.SetRetentionCount(x)
+	}
+
+	if v, ok := d.GetOkExists("retention_policy_enabled"); ok {
+		x := (v.(bool))
+		o.SetRetentionPolicyEnabled(x)
+	}
+
 	if v, ok := d.GetOk("schedule"); ok {
 		p := make([]models.OnpremSchedule, 0, 1)
 		s := v.([]interface{})
@@ -922,6 +944,14 @@ func resourceApplianceBackupPolicyRead(c context.Context, d *schema.ResourceData
 		return diag.Errorf("error occurred while setting property RemotePort in ApplianceBackupPolicy object: %s", err.Error())
 	}
 
+	if err := d.Set("retention_count", (s.GetRetentionCount())); err != nil {
+		return diag.Errorf("error occurred while setting property RetentionCount in ApplianceBackupPolicy object: %s", err.Error())
+	}
+
+	if err := d.Set("retention_policy_enabled", (s.GetRetentionPolicyEnabled())); err != nil {
+		return diag.Errorf("error occurred while setting property RetentionPolicyEnabled in ApplianceBackupPolicy object: %s", err.Error())
+	}
+
 	if err := d.Set("schedule", flattenMapOnpremSchedule(s.GetSchedule(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property Schedule in ApplianceBackupPolicy object: %s", err.Error())
 	}
@@ -1056,6 +1086,18 @@ func resourceApplianceBackupPolicyUpdate(c context.Context, d *schema.ResourceDa
 		v := d.Get("remote_port")
 		x := int64(v.(int))
 		o.SetRemotePort(x)
+	}
+
+	if d.HasChange("retention_count") {
+		v := d.Get("retention_count")
+		x := int64(v.(int))
+		o.SetRetentionCount(x)
+	}
+
+	if d.HasChange("retention_policy_enabled") {
+		v := d.Get("retention_policy_enabled")
+		x := (v.(bool))
+		o.SetRetentionPolicyEnabled(x)
 	}
 
 	if d.HasChange("schedule") {

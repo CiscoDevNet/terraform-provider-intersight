@@ -26,6 +26,7 @@ The following arguments can be used to get data of already created objects in In
 * `max_slots`:(int) Maximum allowed physical slots on this switch. 
 * `min_version_with_breakout_support`:(string) Minimum firmware version supported for breakout ports on this switch. 
 * `min_version_with_locator_led_support`:(string) Minimum firmware version supported for locator leds on this switch. 
+* `min_version_with_neg_auto25g`:(string) Minimum firmware version supported for 'negotiate auto 25000' port admin speed on this switch. 
 * `mod_time`:(string) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `name`:(string) An unique identifer for a capability descriptor. 
@@ -34,5 +35,6 @@ The following arguments can be used to get data of already created objects in In
 * `shared_scope`:(string) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
 * `sku`:(string) SKU information for Switch/Fabric-Interconnect. 
 * `unified_rule`:(string) The Slider rule for Unified ports on this switch. 
+* `uplink_admin_port_speed_neg_auto25_gbps_supported`:(bool) 'Negotiate Auto 25000' admin speed support on this switch for port or port-channelwith Ethernet Uplink/Appliance/FCoE Uplink roles. 
 * `vid`:(string) VID information for Switch/Fabric-Interconnect. 
  

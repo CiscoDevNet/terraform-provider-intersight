@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-14237
+API version: 1.0.11-14430
 Contact: intersight@cisco.com
 */
 
@@ -42,17 +42,19 @@ type CapabilitySwitchCapability struct {
 	// Minimum firmware version supported for breakout ports on this switch.
 	MinVersionWithBreakoutSupport *string `json:"MinVersionWithBreakoutSupport,omitempty"`
 	// Minimum firmware version supported for locator leds on this switch.
-	MinVersionWithLocatorLedSupport *string                               `json:"MinVersionWithLocatorLedSupport,omitempty"`
-	NetworkLimits                   NullableCapabilitySwitchNetworkLimits `json:"NetworkLimits,omitempty"`
-	PortsSupporting100gSpeed        []CapabilityPortRange                 `json:"PortsSupporting100gSpeed,omitempty"`
-	PortsSupporting10gSpeed         []CapabilityPortRange                 `json:"PortsSupporting10gSpeed,omitempty"`
-	PortsSupporting1gSpeed          []CapabilityPortRange                 `json:"PortsSupporting1gSpeed,omitempty"`
-	PortsSupporting25gSpeed         []CapabilityPortRange                 `json:"PortsSupporting25gSpeed,omitempty"`
-	PortsSupporting40gSpeed         []CapabilityPortRange                 `json:"PortsSupporting40gSpeed,omitempty"`
-	PortsSupportingBreakout         []CapabilityPortRange                 `json:"PortsSupportingBreakout,omitempty"`
-	PortsSupportingFcoe             []CapabilityPortRange                 `json:"PortsSupportingFcoe,omitempty"`
-	PortsSupportingServerRole       []CapabilityPortRange                 `json:"PortsSupportingServerRole,omitempty"`
-	ReservedVsans                   []CapabilityPortRange                 `json:"ReservedVsans,omitempty"`
+	MinVersionWithLocatorLedSupport *string `json:"MinVersionWithLocatorLedSupport,omitempty"`
+	// Minimum firmware version supported for 'negotiate auto 25000' port admin speed on this switch.
+	MinVersionWithNegAuto25g  *string                               `json:"MinVersionWithNegAuto25g,omitempty"`
+	NetworkLimits             NullableCapabilitySwitchNetworkLimits `json:"NetworkLimits,omitempty"`
+	PortsSupporting100gSpeed  []CapabilityPortRange                 `json:"PortsSupporting100gSpeed,omitempty"`
+	PortsSupporting10gSpeed   []CapabilityPortRange                 `json:"PortsSupporting10gSpeed,omitempty"`
+	PortsSupporting1gSpeed    []CapabilityPortRange                 `json:"PortsSupporting1gSpeed,omitempty"`
+	PortsSupporting25gSpeed   []CapabilityPortRange                 `json:"PortsSupporting25gSpeed,omitempty"`
+	PortsSupporting40gSpeed   []CapabilityPortRange                 `json:"PortsSupporting40gSpeed,omitempty"`
+	PortsSupportingBreakout   []CapabilityPortRange                 `json:"PortsSupportingBreakout,omitempty"`
+	PortsSupportingFcoe       []CapabilityPortRange                 `json:"PortsSupportingFcoe,omitempty"`
+	PortsSupportingServerRole []CapabilityPortRange                 `json:"PortsSupportingServerRole,omitempty"`
+	ReservedVsans             []CapabilityPortRange                 `json:"ReservedVsans,omitempty"`
 	// Sereno Adaptor with Netflow support on this switch.
 	SerenoNetflowSupported        *bool                                 `json:"SerenoNetflowSupported,omitempty"`
 	ServerRoleSupportedOnBreakout []string                              `json:"ServerRoleSupportedOnBreakout,omitempty"`
@@ -61,8 +63,10 @@ type CapabilitySwitchCapability struct {
 	SystemLimits                  NullableCapabilitySwitchSystemLimits  `json:"SystemLimits,omitempty"`
 	UnifiedPorts                  []CapabilityPortRange                 `json:"UnifiedPorts,omitempty"`
 	// The Slider rule for Unified ports on this switch.
-	UnifiedRule          *string `json:"UnifiedRule,omitempty"`
-	AdditionalProperties map[string]interface{}
+	UnifiedRule *string `json:"UnifiedRule,omitempty"`
+	// 'Negotiate Auto 25000' admin speed support on this switch for port or port-channel with Ethernet Uplink/Appliance/FCoE Uplink roles.
+	UplinkAdminPortSpeedNegAuto25GbpsSupported *bool `json:"UplinkAdminPortSpeedNegAuto25GbpsSupported,omitempty"`
+	AdditionalProperties                       map[string]interface{}
 }
 
 type _CapabilitySwitchCapability CapabilitySwitchCapability
@@ -459,6 +463,38 @@ func (o *CapabilitySwitchCapability) HasMinVersionWithLocatorLedSupport() bool {
 // SetMinVersionWithLocatorLedSupport gets a reference to the given string and assigns it to the MinVersionWithLocatorLedSupport field.
 func (o *CapabilitySwitchCapability) SetMinVersionWithLocatorLedSupport(v string) {
 	o.MinVersionWithLocatorLedSupport = &v
+}
+
+// GetMinVersionWithNegAuto25g returns the MinVersionWithNegAuto25g field value if set, zero value otherwise.
+func (o *CapabilitySwitchCapability) GetMinVersionWithNegAuto25g() string {
+	if o == nil || o.MinVersionWithNegAuto25g == nil {
+		var ret string
+		return ret
+	}
+	return *o.MinVersionWithNegAuto25g
+}
+
+// GetMinVersionWithNegAuto25gOk returns a tuple with the MinVersionWithNegAuto25g field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CapabilitySwitchCapability) GetMinVersionWithNegAuto25gOk() (*string, bool) {
+	if o == nil || o.MinVersionWithNegAuto25g == nil {
+		return nil, false
+	}
+	return o.MinVersionWithNegAuto25g, true
+}
+
+// HasMinVersionWithNegAuto25g returns a boolean if a field has been set.
+func (o *CapabilitySwitchCapability) HasMinVersionWithNegAuto25g() bool {
+	if o != nil && o.MinVersionWithNegAuto25g != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetMinVersionWithNegAuto25g gets a reference to the given string and assigns it to the MinVersionWithNegAuto25g field.
+func (o *CapabilitySwitchCapability) SetMinVersionWithNegAuto25g(v string) {
+	o.MinVersionWithNegAuto25g = &v
 }
 
 // GetNetworkLimits returns the NetworkLimits field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -1050,6 +1086,38 @@ func (o *CapabilitySwitchCapability) SetUnifiedRule(v string) {
 	o.UnifiedRule = &v
 }
 
+// GetUplinkAdminPortSpeedNegAuto25GbpsSupported returns the UplinkAdminPortSpeedNegAuto25GbpsSupported field value if set, zero value otherwise.
+func (o *CapabilitySwitchCapability) GetUplinkAdminPortSpeedNegAuto25GbpsSupported() bool {
+	if o == nil || o.UplinkAdminPortSpeedNegAuto25GbpsSupported == nil {
+		var ret bool
+		return ret
+	}
+	return *o.UplinkAdminPortSpeedNegAuto25GbpsSupported
+}
+
+// GetUplinkAdminPortSpeedNegAuto25GbpsSupportedOk returns a tuple with the UplinkAdminPortSpeedNegAuto25GbpsSupported field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CapabilitySwitchCapability) GetUplinkAdminPortSpeedNegAuto25GbpsSupportedOk() (*bool, bool) {
+	if o == nil || o.UplinkAdminPortSpeedNegAuto25GbpsSupported == nil {
+		return nil, false
+	}
+	return o.UplinkAdminPortSpeedNegAuto25GbpsSupported, true
+}
+
+// HasUplinkAdminPortSpeedNegAuto25GbpsSupported returns a boolean if a field has been set.
+func (o *CapabilitySwitchCapability) HasUplinkAdminPortSpeedNegAuto25GbpsSupported() bool {
+	if o != nil && o.UplinkAdminPortSpeedNegAuto25GbpsSupported != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetUplinkAdminPortSpeedNegAuto25GbpsSupported gets a reference to the given bool and assigns it to the UplinkAdminPortSpeedNegAuto25GbpsSupported field.
+func (o *CapabilitySwitchCapability) SetUplinkAdminPortSpeedNegAuto25GbpsSupported(v bool) {
+	o.UplinkAdminPortSpeedNegAuto25GbpsSupported = &v
+}
+
 func (o CapabilitySwitchCapability) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	serializedCapabilitySwitchCapabilityDef, errCapabilitySwitchCapabilityDef := json.Marshal(o.CapabilitySwitchCapabilityDef)
@@ -1095,6 +1163,9 @@ func (o CapabilitySwitchCapability) MarshalJSON() ([]byte, error) {
 	}
 	if o.MinVersionWithLocatorLedSupport != nil {
 		toSerialize["MinVersionWithLocatorLedSupport"] = o.MinVersionWithLocatorLedSupport
+	}
+	if o.MinVersionWithNegAuto25g != nil {
+		toSerialize["MinVersionWithNegAuto25g"] = o.MinVersionWithNegAuto25g
 	}
 	if o.NetworkLimits.IsSet() {
 		toSerialize["NetworkLimits"] = o.NetworkLimits.Get()
@@ -1147,6 +1218,9 @@ func (o CapabilitySwitchCapability) MarshalJSON() ([]byte, error) {
 	if o.UnifiedRule != nil {
 		toSerialize["UnifiedRule"] = o.UnifiedRule
 	}
+	if o.UplinkAdminPortSpeedNegAuto25GbpsSupported != nil {
+		toSerialize["UplinkAdminPortSpeedNegAuto25GbpsSupported"] = o.UplinkAdminPortSpeedNegAuto25GbpsSupported
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -1179,17 +1253,19 @@ func (o *CapabilitySwitchCapability) UnmarshalJSON(bytes []byte) (err error) {
 		// Minimum firmware version supported for breakout ports on this switch.
 		MinVersionWithBreakoutSupport *string `json:"MinVersionWithBreakoutSupport,omitempty"`
 		// Minimum firmware version supported for locator leds on this switch.
-		MinVersionWithLocatorLedSupport *string                               `json:"MinVersionWithLocatorLedSupport,omitempty"`
-		NetworkLimits                   NullableCapabilitySwitchNetworkLimits `json:"NetworkLimits,omitempty"`
-		PortsSupporting100gSpeed        []CapabilityPortRange                 `json:"PortsSupporting100gSpeed,omitempty"`
-		PortsSupporting10gSpeed         []CapabilityPortRange                 `json:"PortsSupporting10gSpeed,omitempty"`
-		PortsSupporting1gSpeed          []CapabilityPortRange                 `json:"PortsSupporting1gSpeed,omitempty"`
-		PortsSupporting25gSpeed         []CapabilityPortRange                 `json:"PortsSupporting25gSpeed,omitempty"`
-		PortsSupporting40gSpeed         []CapabilityPortRange                 `json:"PortsSupporting40gSpeed,omitempty"`
-		PortsSupportingBreakout         []CapabilityPortRange                 `json:"PortsSupportingBreakout,omitempty"`
-		PortsSupportingFcoe             []CapabilityPortRange                 `json:"PortsSupportingFcoe,omitempty"`
-		PortsSupportingServerRole       []CapabilityPortRange                 `json:"PortsSupportingServerRole,omitempty"`
-		ReservedVsans                   []CapabilityPortRange                 `json:"ReservedVsans,omitempty"`
+		MinVersionWithLocatorLedSupport *string `json:"MinVersionWithLocatorLedSupport,omitempty"`
+		// Minimum firmware version supported for 'negotiate auto 25000' port admin speed on this switch.
+		MinVersionWithNegAuto25g  *string                               `json:"MinVersionWithNegAuto25g,omitempty"`
+		NetworkLimits             NullableCapabilitySwitchNetworkLimits `json:"NetworkLimits,omitempty"`
+		PortsSupporting100gSpeed  []CapabilityPortRange                 `json:"PortsSupporting100gSpeed,omitempty"`
+		PortsSupporting10gSpeed   []CapabilityPortRange                 `json:"PortsSupporting10gSpeed,omitempty"`
+		PortsSupporting1gSpeed    []CapabilityPortRange                 `json:"PortsSupporting1gSpeed,omitempty"`
+		PortsSupporting25gSpeed   []CapabilityPortRange                 `json:"PortsSupporting25gSpeed,omitempty"`
+		PortsSupporting40gSpeed   []CapabilityPortRange                 `json:"PortsSupporting40gSpeed,omitempty"`
+		PortsSupportingBreakout   []CapabilityPortRange                 `json:"PortsSupportingBreakout,omitempty"`
+		PortsSupportingFcoe       []CapabilityPortRange                 `json:"PortsSupportingFcoe,omitempty"`
+		PortsSupportingServerRole []CapabilityPortRange                 `json:"PortsSupportingServerRole,omitempty"`
+		ReservedVsans             []CapabilityPortRange                 `json:"ReservedVsans,omitempty"`
 		// Sereno Adaptor with Netflow support on this switch.
 		SerenoNetflowSupported        *bool                                 `json:"SerenoNetflowSupported,omitempty"`
 		ServerRoleSupportedOnBreakout []string                              `json:"ServerRoleSupportedOnBreakout,omitempty"`
@@ -1199,6 +1275,8 @@ func (o *CapabilitySwitchCapability) UnmarshalJSON(bytes []byte) (err error) {
 		UnifiedPorts                  []CapabilityPortRange                 `json:"UnifiedPorts,omitempty"`
 		// The Slider rule for Unified ports on this switch.
 		UnifiedRule *string `json:"UnifiedRule,omitempty"`
+		// 'Negotiate Auto 25000' admin speed support on this switch for port or port-channel with Ethernet Uplink/Appliance/FCoE Uplink roles.
+		UplinkAdminPortSpeedNegAuto25GbpsSupported *bool `json:"UplinkAdminPortSpeedNegAuto25GbpsSupported,omitempty"`
 	}
 
 	varCapabilitySwitchCapabilityWithoutEmbeddedStruct := CapabilitySwitchCapabilityWithoutEmbeddedStruct{}
@@ -1218,6 +1296,7 @@ func (o *CapabilitySwitchCapability) UnmarshalJSON(bytes []byte) (err error) {
 		varCapabilitySwitchCapability.MaxSlots = varCapabilitySwitchCapabilityWithoutEmbeddedStruct.MaxSlots
 		varCapabilitySwitchCapability.MinVersionWithBreakoutSupport = varCapabilitySwitchCapabilityWithoutEmbeddedStruct.MinVersionWithBreakoutSupport
 		varCapabilitySwitchCapability.MinVersionWithLocatorLedSupport = varCapabilitySwitchCapabilityWithoutEmbeddedStruct.MinVersionWithLocatorLedSupport
+		varCapabilitySwitchCapability.MinVersionWithNegAuto25g = varCapabilitySwitchCapabilityWithoutEmbeddedStruct.MinVersionWithNegAuto25g
 		varCapabilitySwitchCapability.NetworkLimits = varCapabilitySwitchCapabilityWithoutEmbeddedStruct.NetworkLimits
 		varCapabilitySwitchCapability.PortsSupporting100gSpeed = varCapabilitySwitchCapabilityWithoutEmbeddedStruct.PortsSupporting100gSpeed
 		varCapabilitySwitchCapability.PortsSupporting10gSpeed = varCapabilitySwitchCapabilityWithoutEmbeddedStruct.PortsSupporting10gSpeed
@@ -1235,6 +1314,7 @@ func (o *CapabilitySwitchCapability) UnmarshalJSON(bytes []byte) (err error) {
 		varCapabilitySwitchCapability.SystemLimits = varCapabilitySwitchCapabilityWithoutEmbeddedStruct.SystemLimits
 		varCapabilitySwitchCapability.UnifiedPorts = varCapabilitySwitchCapabilityWithoutEmbeddedStruct.UnifiedPorts
 		varCapabilitySwitchCapability.UnifiedRule = varCapabilitySwitchCapabilityWithoutEmbeddedStruct.UnifiedRule
+		varCapabilitySwitchCapability.UplinkAdminPortSpeedNegAuto25GbpsSupported = varCapabilitySwitchCapabilityWithoutEmbeddedStruct.UplinkAdminPortSpeedNegAuto25GbpsSupported
 		*o = CapabilitySwitchCapability(varCapabilitySwitchCapability)
 	} else {
 		return err
@@ -1264,6 +1344,7 @@ func (o *CapabilitySwitchCapability) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "MaxSlots")
 		delete(additionalProperties, "MinVersionWithBreakoutSupport")
 		delete(additionalProperties, "MinVersionWithLocatorLedSupport")
+		delete(additionalProperties, "MinVersionWithNegAuto25g")
 		delete(additionalProperties, "NetworkLimits")
 		delete(additionalProperties, "PortsSupporting100gSpeed")
 		delete(additionalProperties, "PortsSupporting10gSpeed")
@@ -1281,6 +1362,7 @@ func (o *CapabilitySwitchCapability) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "SystemLimits")
 		delete(additionalProperties, "UnifiedPorts")
 		delete(additionalProperties, "UnifiedRule")
+		delete(additionalProperties, "UplinkAdminPortSpeedNegAuto25GbpsSupported")
 
 		// remove fields from embedded structs
 		reflectCapabilitySwitchCapabilityDef := reflect.ValueOf(o.CapabilitySwitchCapabilityDef)
