@@ -330,9 +330,9 @@ func resourceApplianceRemoteFileImport() *schema.Resource {
 				ForceNew:    true,
 			},
 			"protocol": {
-				Description:  "Specifies if this is an scp or sftp request.\n* `scp` - Secure Copy Protocol (SCP) to access the file server.\n* `sftp` - SSH File Transfer Protocol (SFTP) to access file server.",
+				Description:  "Specifies if this is an scp or sftp request.\n* `scp` - Secure Copy Protocol (SCP) to access the file server.\n* `sftp` - SSH File Transfer Protocol (SFTP) to access file server.\n* `cifs` - Common Internet File System (CIFS) Protocol to access file server.",
 				Type:         schema.TypeString,
-				ValidateFunc: validation.StringInSlice([]string{"scp", "sftp"}, false),
+				ValidateFunc: validation.StringInSlice([]string{"scp", "sftp", "cifs"}, false),
 				Optional:     true,
 				Default:      "scp",
 				ForceNew:     true,

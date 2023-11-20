@@ -495,41 +495,11 @@ func dataSourceMonitoringHealthStatusRead(c context.Context, d *schema.ResourceD
 					}
 				}
 			}
-			if v, ok := l["category_label"]; ok {
-				{
-					x := (v.(string))
-					o.SetCategoryLabel(x)
-				}
-			}
 			o.SetClassId("monitoring.CategoryStatus")
-			if v, ok := l["deeplink"]; ok {
-				{
-					x := (v.(string))
-					o.SetDeeplink(x)
-				}
-			}
-			if v, ok := l["details"]; ok {
-				{
-					x := (v.(string))
-					o.SetDetails(x)
-				}
-			}
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
 					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["source_id"]; ok {
-				{
-					x := (v.(string))
-					o.SetSourceId(x)
-				}
-			}
-			if v, ok := l["status"]; ok {
-				{
-					x := (v.(string))
-					o.SetStatus(x)
 				}
 			}
 			x = append(x, *o)

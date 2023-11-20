@@ -83,10 +83,12 @@ This complex property has following sub-properties:
   + `moid`:(string) The Moid of the referenced REST resource. 
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
   + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
-* `protocol`:(string) Communication protocol used by the file server (e.g. scp or sftp).* `scp` - Secure Copy Protocol (SCP) to access the file server.* `sftp` - SSH File Transfer Protocol (SFTP) to access file server. 
+* `protocol`:(string) Communication protocol used by the file server (e.g. scp, sftp, or CIFS).* `scp` - Secure Copy Protocol (SCP) to access the file server.* `sftp` - SSH File Transfer Protocol (SFTP) to access file server.* `cifs` - Common Internet File System (CIFS) Protocol to access file server. 
 * `remote_host`:(string) Hostname of the remote file server. 
-* `remote_path`:(string) File server directory to copy the file. 
+* `remote_path`:(string) File server directory or share name to copy the file. 
 * `remote_port`:(int) Remote TCP port on the file server (e.g. 22 for scp). 
+* `retention_count`:(int) The number of backups before earliest backup is overwritten. Requires cleanup policy to be enabled. 
+* `retention_policy_enabled`:(bool) If backup rotate policy is set, older backups will automatically be overwritten. The number of backups before overwriting is defined by the retentionCount property. 
 * `schedule`:(HashMap) - Schedule to create a backup of the Intersight Appliance. Manualbackup field must be set to 'false' for this schedule to be active. 
 This complex property has following sub-properties:
   + `day_of_month`:(int) Schedule a task on a specific day of the month. Valid values are 1 through 31. If monthOfYear is specified, then dayOfMonth value must be valid for that month. DayOfMonth may not be set when dayOfWeek is specfied. 

@@ -8,6 +8,7 @@ Method | HTTP request | Description
 [**CreateResourceReservation**](ResourceApi.md#CreateResourceReservation) | **Post** /api/v1/resource/Reservations | Create a &#39;resource.Reservation&#39; resource.
 [**CreateResourceSelectionCriteria**](ResourceApi.md#CreateResourceSelectionCriteria) | **Post** /api/v1/resource/SelectionCriteria | Create a &#39;resource.SelectionCriteria&#39; resource.
 [**DeleteResourceGroup**](ResourceApi.md#DeleteResourceGroup) | **Delete** /api/v1/resource/Groups/{Moid} | Delete a &#39;resource.Group&#39; resource.
+[**DeleteResourceGroupMember**](ResourceApi.md#DeleteResourceGroupMember) | **Delete** /api/v1/resource/GroupMembers/{Moid} | Delete a &#39;resource.GroupMember&#39; resource.
 [**DeleteResourceReservation**](ResourceApi.md#DeleteResourceReservation) | **Delete** /api/v1/resource/Reservations/{Moid} | Delete a &#39;resource.Reservation&#39; resource.
 [**DeleteResourceSelectionCriteria**](ResourceApi.md#DeleteResourceSelectionCriteria) | **Delete** /api/v1/resource/SelectionCriteria/{Moid} | Delete a &#39;resource.SelectionCriteria&#39; resource.
 [**DeleteResourceSharedResourcesInfoHolder**](ResourceApi.md#DeleteResourceSharedResourcesInfoHolder) | **Delete** /api/v1/resource/SharedResourcesInfoHolders/{Moid} | Delete a &#39;resource.SharedResourcesInfoHolder&#39; resource.
@@ -284,6 +285,72 @@ Name | Type | Description  | Notes
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiDeleteResourceGroupRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## DeleteResourceGroupMember
+
+> DeleteResourceGroupMember(ctx, moid).Execute()
+
+Delete a 'resource.GroupMember' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.ResourceApi.DeleteResourceGroupMember(context.Background(), moid).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `ResourceApi.DeleteResourceGroupMember``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiDeleteResourceGroupMemberRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes

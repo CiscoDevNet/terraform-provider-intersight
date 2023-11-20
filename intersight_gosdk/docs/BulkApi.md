@@ -303,7 +303,7 @@ Name | Type | Description  | Notes
 
 ## CreateBulkRequest
 
-> BulkRequest CreateBulkRequest(ctx).BulkRequest(bulkRequest).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
+> BulkRequest CreateBulkRequest(ctx).BulkRequest(bulkRequest).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Prefer(prefer).Execute()
 
 Create a 'bulk.Request' resource.
 
@@ -323,10 +323,11 @@ func main() {
     bulkRequest := *openapiclient.NewBulkRequest("ClassId_example", "ObjectType_example") // BulkRequest | The 'bulk.Request' resource to create.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
     ifNoneMatch := "ifNoneMatch_example" // string | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn't happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource's ETag doesn't match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don't have to be identical byte for byte. (optional)
+    prefer := "respond-async" // string | The Prefer request header field is used to indicate that particular server behaviors are preferred  by the client but are not required for successful completion of the request.   The \"respond-async\" preference indicates that the client prefers the server to respond  asynchronously to a response. The Prefer header is described in RFC 7240. (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.BulkApi.CreateBulkRequest(context.Background()).BulkRequest(bulkRequest).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
+    resp, r, err := apiClient.BulkApi.CreateBulkRequest(context.Background()).BulkRequest(bulkRequest).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Prefer(prefer).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `BulkApi.CreateBulkRequest``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -350,6 +351,7 @@ Name | Type | Description  | Notes
  **bulkRequest** | [**BulkRequest**](BulkRequest.md) | The &#39;bulk.Request&#39; resource to create. | 
  **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
  **ifNoneMatch** | **string** | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn&#39;t happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource&#39;s ETag doesn&#39;t match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don&#39;t have to be identical byte for byte. | 
+ **prefer** | **string** | The Prefer request header field is used to indicate that particular server behaviors are preferred  by the client but are not required for successful completion of the request.   The \&quot;respond-async\&quot; preference indicates that the client prefers the server to respond  asynchronously to a response. The Prefer header is described in RFC 7240. | 
 
 ### Return type
 

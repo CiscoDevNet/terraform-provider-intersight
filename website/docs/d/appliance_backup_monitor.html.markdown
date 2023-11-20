@@ -19,7 +19,9 @@ The following arguments can be used to get data of already created objects in In
 * `account_moid`:(string) The Account ID for this managed object. 
 * `create_time`:(string) The time when this managed object was created. 
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
-* `last_backup_status`:(string) Status of the most recent Intersight Appliance backup.* `BackupFound` - Backup is successful and complete.* `BackupFailed` - The current Backup failed.* `BackupOutdated` - Backup is old and outdated. 
+* `filename`:(string) Filename of the backup for the backup monitor. 
+* `last_backup_rotation_status`:(string) Status of the oldest Intersight Appliance backup cleanup.* `BackupFound` - Backup is successful and complete.* `BackupFailed` - The current Backup failed.* `BackupOutdated` - Backup is old and outdated.* `BackupCleanupFailed` - Cleanup of the old backup has failed. 
+* `last_backup_status`:(string) Status of the most recent Intersight Appliance backup.* `BackupFound` - Backup is successful and complete.* `BackupFailed` - The current Backup failed.* `BackupOutdated` - Backup is old and outdated.* `BackupCleanupFailed` - Cleanup of the old backup has failed. 
 * `mod_time`:(string) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `shared_scope`:(string) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 

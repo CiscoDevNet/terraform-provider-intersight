@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-14237
+API version: 1.0.11-14430
 Contact: intersight@cisco.com
 */
 
@@ -747,6 +747,7 @@ type ApiCreateBulkRequestRequest struct {
 	bulkRequest *BulkRequest
 	ifMatch     *string
 	ifNoneMatch *string
+	prefer      *string
 }
 
 // The &#39;bulk.Request&#39; resource to create.
@@ -764,6 +765,12 @@ func (r ApiCreateBulkRequestRequest) IfMatch(ifMatch string) ApiCreateBulkReques
 // For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn&#39;t happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource&#39;s ETag doesn&#39;t match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don&#39;t have to be identical byte for byte.
 func (r ApiCreateBulkRequestRequest) IfNoneMatch(ifNoneMatch string) ApiCreateBulkRequestRequest {
 	r.ifNoneMatch = &ifNoneMatch
+	return r
+}
+
+// The Prefer request header field is used to indicate that particular server behaviors are preferred  by the client but are not required for successful completion of the request.   The \&quot;respond-async\&quot; preference indicates that the client prefers the server to respond  asynchronously to a response. The Prefer header is described in RFC 7240.
+func (r ApiCreateBulkRequestRequest) Prefer(prefer string) ApiCreateBulkRequestRequest {
+	r.prefer = &prefer
 	return r
 }
 
@@ -831,6 +838,9 @@ func (a *BulkApiService) CreateBulkRequestExecute(r ApiCreateBulkRequestRequest)
 	}
 	if r.ifNoneMatch != nil {
 		localVarHeaderParams["If-None-Match"] = parameterToString(*r.ifNoneMatch, "")
+	}
+	if r.prefer != nil {
+		localVarHeaderParams["Prefer"] = parameterToString(*r.prefer, "")
 	}
 	// body params
 	localVarPostBody = r.bulkRequest

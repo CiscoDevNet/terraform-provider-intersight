@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-14237
+API version: 1.0.11-14430
 Contact: intersight@cisco.com
 */
 
@@ -24,7 +24,11 @@ type ApplianceBackupMonitor struct {
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
-	// Status of the most recent Intersight Appliance backup. * `BackupFound` - Backup is successful and complete. * `BackupFailed` - The current Backup failed. * `BackupOutdated` - Backup is old and outdated.
+	// Filename of the backup for the backup monitor.
+	Filename *string `json:"Filename,omitempty"`
+	// Status of the oldest Intersight Appliance backup cleanup. * `BackupFound` - Backup is successful and complete. * `BackupFailed` - The current Backup failed. * `BackupOutdated` - Backup is old and outdated. * `BackupCleanupFailed` - Cleanup of the old backup has failed.
+	LastBackupRotationStatus *string `json:"LastBackupRotationStatus,omitempty"`
+	// Status of the most recent Intersight Appliance backup. * `BackupFound` - Backup is successful and complete. * `BackupFailed` - The current Backup failed. * `BackupOutdated` - Backup is old and outdated. * `BackupCleanupFailed` - Cleanup of the old backup has failed.
 	LastBackupStatus     *string                 `json:"LastBackupStatus,omitempty"`
 	Account              *IamAccountRelationship `json:"Account,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -101,6 +105,70 @@ func (o *ApplianceBackupMonitor) GetObjectTypeOk() (*string, bool) {
 // SetObjectType sets field value
 func (o *ApplianceBackupMonitor) SetObjectType(v string) {
 	o.ObjectType = v
+}
+
+// GetFilename returns the Filename field value if set, zero value otherwise.
+func (o *ApplianceBackupMonitor) GetFilename() string {
+	if o == nil || o.Filename == nil {
+		var ret string
+		return ret
+	}
+	return *o.Filename
+}
+
+// GetFilenameOk returns a tuple with the Filename field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ApplianceBackupMonitor) GetFilenameOk() (*string, bool) {
+	if o == nil || o.Filename == nil {
+		return nil, false
+	}
+	return o.Filename, true
+}
+
+// HasFilename returns a boolean if a field has been set.
+func (o *ApplianceBackupMonitor) HasFilename() bool {
+	if o != nil && o.Filename != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetFilename gets a reference to the given string and assigns it to the Filename field.
+func (o *ApplianceBackupMonitor) SetFilename(v string) {
+	o.Filename = &v
+}
+
+// GetLastBackupRotationStatus returns the LastBackupRotationStatus field value if set, zero value otherwise.
+func (o *ApplianceBackupMonitor) GetLastBackupRotationStatus() string {
+	if o == nil || o.LastBackupRotationStatus == nil {
+		var ret string
+		return ret
+	}
+	return *o.LastBackupRotationStatus
+}
+
+// GetLastBackupRotationStatusOk returns a tuple with the LastBackupRotationStatus field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ApplianceBackupMonitor) GetLastBackupRotationStatusOk() (*string, bool) {
+	if o == nil || o.LastBackupRotationStatus == nil {
+		return nil, false
+	}
+	return o.LastBackupRotationStatus, true
+}
+
+// HasLastBackupRotationStatus returns a boolean if a field has been set.
+func (o *ApplianceBackupMonitor) HasLastBackupRotationStatus() bool {
+	if o != nil && o.LastBackupRotationStatus != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetLastBackupRotationStatus gets a reference to the given string and assigns it to the LastBackupRotationStatus field.
+func (o *ApplianceBackupMonitor) SetLastBackupRotationStatus(v string) {
+	o.LastBackupRotationStatus = &v
 }
 
 // GetLastBackupStatus returns the LastBackupStatus field value if set, zero value otherwise.
@@ -183,6 +251,12 @@ func (o ApplianceBackupMonitor) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["ObjectType"] = o.ObjectType
 	}
+	if o.Filename != nil {
+		toSerialize["Filename"] = o.Filename
+	}
+	if o.LastBackupRotationStatus != nil {
+		toSerialize["LastBackupRotationStatus"] = o.LastBackupRotationStatus
+	}
 	if o.LastBackupStatus != nil {
 		toSerialize["LastBackupStatus"] = o.LastBackupStatus
 	}
@@ -203,7 +277,11 @@ func (o *ApplianceBackupMonitor) UnmarshalJSON(bytes []byte) (err error) {
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 		ObjectType string `json:"ObjectType"`
-		// Status of the most recent Intersight Appliance backup. * `BackupFound` - Backup is successful and complete. * `BackupFailed` - The current Backup failed. * `BackupOutdated` - Backup is old and outdated.
+		// Filename of the backup for the backup monitor.
+		Filename *string `json:"Filename,omitempty"`
+		// Status of the oldest Intersight Appliance backup cleanup. * `BackupFound` - Backup is successful and complete. * `BackupFailed` - The current Backup failed. * `BackupOutdated` - Backup is old and outdated. * `BackupCleanupFailed` - Cleanup of the old backup has failed.
+		LastBackupRotationStatus *string `json:"LastBackupRotationStatus,omitempty"`
+		// Status of the most recent Intersight Appliance backup. * `BackupFound` - Backup is successful and complete. * `BackupFailed` - The current Backup failed. * `BackupOutdated` - Backup is old and outdated. * `BackupCleanupFailed` - Cleanup of the old backup has failed.
 		LastBackupStatus *string                 `json:"LastBackupStatus,omitempty"`
 		Account          *IamAccountRelationship `json:"Account,omitempty"`
 	}
@@ -215,6 +293,8 @@ func (o *ApplianceBackupMonitor) UnmarshalJSON(bytes []byte) (err error) {
 		varApplianceBackupMonitor := _ApplianceBackupMonitor{}
 		varApplianceBackupMonitor.ClassId = varApplianceBackupMonitorWithoutEmbeddedStruct.ClassId
 		varApplianceBackupMonitor.ObjectType = varApplianceBackupMonitorWithoutEmbeddedStruct.ObjectType
+		varApplianceBackupMonitor.Filename = varApplianceBackupMonitorWithoutEmbeddedStruct.Filename
+		varApplianceBackupMonitor.LastBackupRotationStatus = varApplianceBackupMonitorWithoutEmbeddedStruct.LastBackupRotationStatus
 		varApplianceBackupMonitor.LastBackupStatus = varApplianceBackupMonitorWithoutEmbeddedStruct.LastBackupStatus
 		varApplianceBackupMonitor.Account = varApplianceBackupMonitorWithoutEmbeddedStruct.Account
 		*o = ApplianceBackupMonitor(varApplianceBackupMonitor)
@@ -236,6 +316,8 @@ func (o *ApplianceBackupMonitor) UnmarshalJSON(bytes []byte) (err error) {
 	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
+		delete(additionalProperties, "Filename")
+		delete(additionalProperties, "LastBackupRotationStatus")
 		delete(additionalProperties, "LastBackupStatus")
 		delete(additionalProperties, "Account")
 

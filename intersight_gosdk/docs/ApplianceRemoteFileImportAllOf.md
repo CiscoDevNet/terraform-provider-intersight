@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **Password** | Pointer to **string** | Password for remote requiest. | [optional] 
 **Path** | Pointer to **string** | The port that should be used for the remote request. | [optional] 
 **Port** | Pointer to **int64** | The port that should be used for the remote request. | [optional] 
-**Protocol** | Pointer to **string** | Specifies if this is an scp or sftp request. * &#x60;scp&#x60; - Secure Copy Protocol (SCP) to access the file server. * &#x60;sftp&#x60; - SSH File Transfer Protocol (SFTP) to access file server. | [optional] [default to "scp"]
+**Protocol** | Pointer to **string** | Specifies if this is an scp or sftp request. * &#x60;scp&#x60; - Secure Copy Protocol (SCP) to access the file server. * &#x60;sftp&#x60; - SSH File Transfer Protocol (SFTP) to access file server. * &#x60;cifs&#x60; - Common Internet File System (CIFS) Protocol to access file server. | [optional] [default to "scp"]
 **Username** | Pointer to **string** | The username for the remote request. | [optional] 
 **Account** | Pointer to [**IamAccountRelationship**](IamAccountRelationship.md) |  | [optional] 
 

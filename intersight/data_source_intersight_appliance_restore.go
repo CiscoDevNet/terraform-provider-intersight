@@ -230,7 +230,7 @@ func getApplianceRestoreSchema() map[string]*schema.Schema {
 			},
 		},
 		"protocol": {
-			Description: "Communication protocol used by the file server (e.g. scp or sftp).\n* `scp` - Secure Copy Protocol (SCP) to access the file server.\n* `sftp` - SSH File Transfer Protocol (SFTP) to access file server.",
+			Description: "Communication protocol used by the file server (e.g. scp, sftp, or CIFS).\n* `scp` - Secure Copy Protocol (SCP) to access the file server.\n* `sftp` - SSH File Transfer Protocol (SFTP) to access file server.\n* `cifs` - Common Internet File System (CIFS) Protocol to access file server.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -240,7 +240,7 @@ func getApplianceRestoreSchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"remote_path": {
-			Description: "File server directory to copy the file.",
+			Description: "File server directory or share name to copy the file.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -260,7 +260,7 @@ func getApplianceRestoreSchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"status": {
-			Description: "Status of the restore managed object.\n* `Started` - Backup or restore process has started.\n* `Created` - Backup or restore is in created state.\n* `Failed` - Backup or restore process has failed.\n* `Completed` - Backup or restore process has completed.\n* `Copied` - Backup file has been copied.",
+			Description: "Status of the restore managed object.\n* `Started` - Backup or restore process has started.\n* `Created` - Backup or restore is in created state.\n* `Failed` - Backup or restore process has failed.\n* `Completed` - Backup or restore process has completed.\n* `Copied` - Backup file has been copied.\n* `Cleanup Failed` - Cleanup of the old backup has failed.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},

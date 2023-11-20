@@ -163,6 +163,11 @@ func getCapabilitySwitchCapabilitySchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"min_version_with_neg_auto25g": {
+			Description: "Minimum firmware version supported for 'negotiate auto 25000' port admin speed on this switch.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"mod_time": {
 			Description: "The time when this managed object was last modified.",
 			Type:        schema.TypeString,
@@ -963,6 +968,11 @@ func getCapabilitySwitchCapabilitySchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"uplink_admin_port_speed_neg_auto25_gbps_supported": {
+			Description: "'Negotiate Auto 25000' admin speed support on this switch for port or port-channel\nwith Ethernet Uplink/Appliance/FCoE Uplink roles.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
 		"version_context": {
 			Description: "The versioning info for this managed object.",
 			Type:        schema.TypeList,
@@ -1267,6 +1277,11 @@ func dataSourceCapabilitySwitchCapabilityRead(c context.Context, d *schema.Resou
 	if v, ok := d.GetOk("min_version_with_locator_led_support"); ok {
 		x := (v.(string))
 		o.SetMinVersionWithLocatorLedSupport(x)
+	}
+
+	if v, ok := d.GetOk("min_version_with_neg_auto25g"); ok {
+		x := (v.(string))
+		o.SetMinVersionWithNegAuto25g(x)
 	}
 
 	if v, ok := d.GetOk("mod_time"); ok {
@@ -2243,6 +2258,11 @@ func dataSourceCapabilitySwitchCapabilityRead(c context.Context, d *schema.Resou
 		o.SetUnifiedRule(x)
 	}
 
+	if v, ok := d.GetOkExists("uplink_admin_port_speed_neg_auto25_gbps_supported"); ok {
+		x := (v.(bool))
+		o.SetUplinkAdminPortSpeedNegAuto25GbpsSupported(x)
+	}
+
 	if v, ok := d.GetOk("version_context"); ok {
 		p := make([]models.MoVersionContext, 0, 1)
 		s := v.([]interface{})
@@ -2376,6 +2396,7 @@ func dataSourceCapabilitySwitchCapabilityRead(c context.Context, d *schema.Resou
 				temp["max_slots"] = (s.GetMaxSlots())
 				temp["min_version_with_breakout_support"] = (s.GetMinVersionWithBreakoutSupport())
 				temp["min_version_with_locator_led_support"] = (s.GetMinVersionWithLocatorLedSupport())
+				temp["min_version_with_neg_auto25g"] = (s.GetMinVersionWithNegAuto25g())
 
 				temp["mod_time"] = (s.GetModTime()).String()
 				temp["moid"] = (s.GetMoid())
@@ -2422,6 +2443,7 @@ func dataSourceCapabilitySwitchCapabilityRead(c context.Context, d *schema.Resou
 
 				temp["unified_ports"] = flattenListCapabilityPortRange(s.GetUnifiedPorts(), d)
 				temp["unified_rule"] = (s.GetUnifiedRule())
+				temp["uplink_admin_port_speed_neg_auto25_gbps_supported"] = (s.GetUplinkAdminPortSpeedNegAuto25GbpsSupported())
 
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
 				temp["vid"] = (s.GetVid())
