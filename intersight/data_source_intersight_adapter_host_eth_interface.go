@@ -459,7 +459,47 @@ func getAdapterHostEthInterfaceSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
-		"stand_by_vif_id": {
+		"standby_oper_state": {
+			Description: "Standby Operational state of an Interface.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"standby_vethernet": {
+			Description: "A reference to a networkVethernet resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"standby_vif_id": {
 			Description: "Identifier of the Standby virtual ethernet interface (Vethernet) on the networking component (e.g., Fabric Interconnect) for the corresponding Host Ethernet Interface (vNIC).",
 			Type:        schema.TypeInt,
 			Optional:    true,
@@ -594,6 +634,46 @@ func getAdapterHostEthInterfaceSchema() map[string]*schema.Schema {
 					},
 					"version_type": {
 						Description: "Specifies type of version. Currently the only supported value is \"Configured\"\nthat is used to keep track of snapshots of policies and profiles that are intended\nto be configured to target endpoints.\n* `Modified` - Version created every time an object is modified.\n* `Configured` - Version created every time an object is configured to the service profile.\n* `Deployed` - Version created for objects related to a service profile when it is deployed.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"veth_action": {
+			Description: "The action to be performed on the vethernet corresponding to the vNIC.\n* `None` - Default value for vif operation.\n* `ResetConnectivity` - Resets connectivity on both active and passive vif.\n* `ResetConnectivityActive` - Resets connectivity on the active vif.\n* `ResetConnectivityPassive` - Resets connectivity on the passive vif.\n* `Enable` - Enables the vif on both the FIs.\n* `Disable` - Disables the vif on both the FIs.\n* `EnableActive` - Enables the corresponding active vif.\n* `EnablePassive` - Enables the corresponding standby vif.\n* `DisableActive` - Disables the corresponding active vif.\n* `DisablePassive` - Disables the corresponding standby vif.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"vethernet": {
+			Description: "A reference to a networkVethernet resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
@@ -1164,9 +1244,57 @@ func dataSourceAdapterHostEthInterfaceRead(c context.Context, d *schema.Resource
 		o.SetSharedScope(x)
 	}
 
-	if v, ok := d.GetOkExists("stand_by_vif_id"); ok {
+	if v, ok := d.GetOk("standby_oper_state"); ok {
+		x := (v.(string))
+		o.SetStandbyOperState(x)
+	}
+
+	if v, ok := d.GetOk("standby_vethernet"); ok {
+		p := make([]models.NetworkVethernetRelationship, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.MoMoRef{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			p = append(p, models.MoMoRefAsNetworkVethernetRelationship(o))
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetStandbyVethernet(x)
+		}
+	}
+
+	if v, ok := d.GetOkExists("standby_vif_id"); ok {
 		x := int64(v.(int))
-		o.SetStandByVifId(x)
+		o.SetStandbyVifId(x)
 	}
 
 	if v, ok := d.GetOk("tags"); ok {
@@ -1276,6 +1404,54 @@ func dataSourceAdapterHostEthInterfaceRead(c context.Context, d *schema.Resource
 		}
 	}
 
+	if v, ok := d.GetOk("veth_action"); ok {
+		x := (v.(string))
+		o.SetVethAction(x)
+	}
+
+	if v, ok := d.GetOk("vethernet"); ok {
+		p := make([]models.NetworkVethernetRelationship, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.MoMoRef{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			p = append(p, models.MoMoRefAsNetworkVethernetRelationship(o))
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetVethernet(x)
+		}
+	}
+
 	if v, ok := d.GetOkExists("vif_id"); ok {
 		x := int64(v.(int))
 		o.SetVifId(x)
@@ -1372,11 +1548,17 @@ func dataSourceAdapterHostEthInterfaceRead(c context.Context, d *schema.Resource
 				temp["registered_device"] = flattenMapAssetDeviceRegistrationRelationship(s.GetRegisteredDevice(), d)
 				temp["rn"] = (s.GetRn())
 				temp["shared_scope"] = (s.GetSharedScope())
-				temp["stand_by_vif_id"] = (s.GetStandByVifId())
+				temp["standby_oper_state"] = (s.GetStandbyOperState())
+
+				temp["standby_vethernet"] = flattenMapNetworkVethernetRelationship(s.GetStandbyVethernet(), d)
+				temp["standby_vif_id"] = (s.GetStandbyVifId())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
 
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
+				temp["veth_action"] = (s.GetVethAction())
+
+				temp["vethernet"] = flattenMapNetworkVethernetRelationship(s.GetVethernet(), d)
 				temp["vif_id"] = (s.GetVifId())
 				temp["virtualization_preference"] = (s.GetVirtualizationPreference())
 				temp["vnic_dn"] = (s.GetVnicDn())

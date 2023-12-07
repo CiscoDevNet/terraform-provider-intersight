@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-14430
+API version: 1.0.11-14628
 Contact: intersight@cisco.com
 */
 
@@ -32,7 +32,10 @@ type AaaAbstractAuditRecordAllOf struct {
 	// The body of the REST request that was received from a client to create or modify a REST resource, represented as a JSON document.
 	Request interface{} `json:"Request,omitempty"`
 	// The trace id of the request that was used to create, modify or delete a REST resource. A trace id is a unique identifier for one particular REST request. It may be used for troubleshooting purpose by the Intersight technical support team.
-	TraceId              *string `json:"TraceId,omitempty"`
+	TraceId   *string              `json:"TraceId,omitempty"`
+	UserAgent NullableAaaUserAgent `json:"UserAgent,omitempty"`
+	// The raw, string representation of the user agent of the request from the user-agent http request header.
+	UserAgentString      *string `json:"UserAgentString,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -303,6 +306,81 @@ func (o *AaaAbstractAuditRecordAllOf) SetTraceId(v string) {
 	o.TraceId = &v
 }
 
+// GetUserAgent returns the UserAgent field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *AaaAbstractAuditRecordAllOf) GetUserAgent() AaaUserAgent {
+	if o == nil || o.UserAgent.Get() == nil {
+		var ret AaaUserAgent
+		return ret
+	}
+	return *o.UserAgent.Get()
+}
+
+// GetUserAgentOk returns a tuple with the UserAgent field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *AaaAbstractAuditRecordAllOf) GetUserAgentOk() (*AaaUserAgent, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.UserAgent.Get(), o.UserAgent.IsSet()
+}
+
+// HasUserAgent returns a boolean if a field has been set.
+func (o *AaaAbstractAuditRecordAllOf) HasUserAgent() bool {
+	if o != nil && o.UserAgent.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetUserAgent gets a reference to the given NullableAaaUserAgent and assigns it to the UserAgent field.
+func (o *AaaAbstractAuditRecordAllOf) SetUserAgent(v AaaUserAgent) {
+	o.UserAgent.Set(&v)
+}
+
+// SetUserAgentNil sets the value for UserAgent to be an explicit nil
+func (o *AaaAbstractAuditRecordAllOf) SetUserAgentNil() {
+	o.UserAgent.Set(nil)
+}
+
+// UnsetUserAgent ensures that no value is present for UserAgent, not even an explicit nil
+func (o *AaaAbstractAuditRecordAllOf) UnsetUserAgent() {
+	o.UserAgent.Unset()
+}
+
+// GetUserAgentString returns the UserAgentString field value if set, zero value otherwise.
+func (o *AaaAbstractAuditRecordAllOf) GetUserAgentString() string {
+	if o == nil || o.UserAgentString == nil {
+		var ret string
+		return ret
+	}
+	return *o.UserAgentString
+}
+
+// GetUserAgentStringOk returns a tuple with the UserAgentString field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AaaAbstractAuditRecordAllOf) GetUserAgentStringOk() (*string, bool) {
+	if o == nil || o.UserAgentString == nil {
+		return nil, false
+	}
+	return o.UserAgentString, true
+}
+
+// HasUserAgentString returns a boolean if a field has been set.
+func (o *AaaAbstractAuditRecordAllOf) HasUserAgentString() bool {
+	if o != nil && o.UserAgentString != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetUserAgentString gets a reference to the given string and assigns it to the UserAgentString field.
+func (o *AaaAbstractAuditRecordAllOf) SetUserAgentString(v string) {
+	o.UserAgentString = &v
+}
+
 func (o AaaAbstractAuditRecordAllOf) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
@@ -328,6 +406,12 @@ func (o AaaAbstractAuditRecordAllOf) MarshalJSON() ([]byte, error) {
 	}
 	if o.TraceId != nil {
 		toSerialize["TraceId"] = o.TraceId
+	}
+	if o.UserAgent.IsSet() {
+		toSerialize["UserAgent"] = o.UserAgent.Get()
+	}
+	if o.UserAgentString != nil {
+		toSerialize["UserAgentString"] = o.UserAgentString
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -355,6 +439,8 @@ func (o *AaaAbstractAuditRecordAllOf) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "ObjectMoid")
 		delete(additionalProperties, "Request")
 		delete(additionalProperties, "TraceId")
+		delete(additionalProperties, "UserAgent")
+		delete(additionalProperties, "UserAgentString")
 		o.AdditionalProperties = additionalProperties
 	}
 

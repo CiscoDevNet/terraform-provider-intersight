@@ -359,6 +359,11 @@ func getCondAlarmSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"suppressed": {
+			Description: "Indicates whether the alarm is marked for suppression or not.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
 		"tags": {
 			Type:     schema.TypeList,
 			Optional: true,
@@ -914,6 +919,11 @@ func dataSourceCondAlarmRead(c context.Context, d *schema.ResourceData, meta int
 		o.SetSharedScope(x)
 	}
 
+	if v, ok := d.GetOkExists("suppressed"); ok {
+		x := (v.(bool))
+		o.SetSuppressed(x)
+	}
+
 	if v, ok := d.GetOk("tags"); ok {
 		x := make([]models.MoTag, 0)
 		s := v.([]interface{})
@@ -1100,6 +1110,7 @@ func dataSourceCondAlarmRead(c context.Context, d *schema.ResourceData, meta int
 				temp["registered_device"] = flattenMapAssetDeviceRegistrationRelationship(s.GetRegisteredDevice(), d)
 				temp["severity"] = (s.GetSeverity())
 				temp["shared_scope"] = (s.GetSharedScope())
+				temp["suppressed"] = (s.GetSuppressed())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
 

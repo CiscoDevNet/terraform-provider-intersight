@@ -63,6 +63,7 @@ func GetResourceMapping() map[string]*schema.Resource {
 		"intersight_chassis_profile":                                         resourceChassisProfile(),
 		"intersight_cloud_collect_inventory":                                 resourceCloudCollectInventory(),
 		"intersight_comm_http_proxy_policy":                                  resourceCommHttpProxyPolicy(),
+		"intersight_cond_alarm_suppression":                                  resourceCondAlarmSuppression(),
 		"intersight_connectorpack_connector_pack_upgrade":                    resourceConnectorpackConnectorPackUpgrade(),
 		"intersight_crd_custom_resource":                                     resourceCrdCustomResource(),
 		"intersight_deviceconnector_policy":                                  resourceDeviceconnectorPolicy(),

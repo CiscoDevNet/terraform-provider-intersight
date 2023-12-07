@@ -138,6 +138,39 @@ func resourceAssetTarget() *schema.Resource {
 							Optional:    true,
 							Default:     "asset.AlarmSummary",
 						},
+						"suppressed_critical": {
+							Description: "The count of active suppressed alarms that have severity type Critical.",
+							Type:        schema.TypeInt,
+							Optional:    true,
+							Computed:    true,
+							ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+								if val != nil {
+									warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+								}
+								return
+							}},
+						"suppressed_info": {
+							Description: "The count of active suppressed alarms that have severity type Info.",
+							Type:        schema.TypeInt,
+							Optional:    true,
+							Computed:    true,
+							ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+								if val != nil {
+									warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+								}
+								return
+							}},
+						"suppressed_warning": {
+							Description: "The count of active suppressed alarms that have severity type Warning.",
+							Type:        schema.TypeInt,
+							Optional:    true,
+							Computed:    true,
+							ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+								if val != nil {
+									warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+								}
+								return
+							}},
 						"warning": {
 							Description: "The count of active alarms that have severity type Warning.",
 							Type:        schema.TypeInt,

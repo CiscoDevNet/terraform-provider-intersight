@@ -17,6 +17,7 @@ Name | Type | Description | Notes
 **OriginalWwpn** | Pointer to **string** | The uniquely distinguishable factory default World Wide Port Name of the Host Fibre Channel Interface. | [optional] [readonly] 
 **PeerDn** | Pointer to **string** | PeerPort Dn of Host Fibre Channel Interface. | [optional] [readonly] 
 **PinGroupName** | Pointer to **string** | Name given for San PinGroup. | [optional] 
+**VfcAction** | Pointer to **string** | Denotes the action to be performed on the vfc corresponding to the vHBA. * &#x60;None&#x60; - Default value for vif operation. * &#x60;ResetConnectivity&#x60; - Resets connectivity on both active and passive vif. * &#x60;ResetConnectivityActive&#x60; - Resets connectivity on the active vif. * &#x60;ResetConnectivityPassive&#x60; - Resets connectivity on the passive vif. * &#x60;Enable&#x60; - Enables the vif on both the FIs. * &#x60;Disable&#x60; - Disables the vif on both the FIs. * &#x60;EnableActive&#x60; - Enables the corresponding active vif. * &#x60;EnablePassive&#x60; - Enables the corresponding standby vif. * &#x60;DisableActive&#x60; - Disables the corresponding active vif. * &#x60;DisablePassive&#x60; - Disables the corresponding standby vif. | [optional] [default to "None"]
 **VifId** | Pointer to **int64** | Identifier of the virtual fibre channel (Vfc) interface on the networking component (e.g., Fabric Interconnect) for the corresponding Host Fibre Channel Interface. | [optional] [readonly] 
 **Wwnn** | Pointer to **string** | The uniquely distinguishable user configured World Wide Node Name of the Host. | [optional] [readonly] 
 **Wwpn** | Pointer to **string** | The uniquely distinguishable user configured World Wide Port Name of the Host Fibre Channel Interface. | [optional] [readonly] 
@@ -24,6 +25,7 @@ Name | Type | Description | Notes
 **InventoryDeviceInfo** | Pointer to [**InventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
 **PinnedInterface** | Pointer to [**InventoryInterfaceRelationship**](InventoryInterfaceRelationship.md) |  | [optional] 
 **RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
+**Vfc** | Pointer to [**NetworkVfcRelationship**](NetworkVfcRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -369,6 +371,31 @@ SetPinGroupName sets PinGroupName field to given value.
 
 HasPinGroupName returns a boolean if a field has been set.
 
+### GetVfcAction
+
+`func (o *AdapterHostFcInterface) GetVfcAction() string`
+
+GetVfcAction returns the VfcAction field if non-nil, zero value otherwise.
+
+### GetVfcActionOk
+
+`func (o *AdapterHostFcInterface) GetVfcActionOk() (*string, bool)`
+
+GetVfcActionOk returns a tuple with the VfcAction field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetVfcAction
+
+`func (o *AdapterHostFcInterface) SetVfcAction(v string)`
+
+SetVfcAction sets VfcAction field to given value.
+
+### HasVfcAction
+
+`func (o *AdapterHostFcInterface) HasVfcAction() bool`
+
+HasVfcAction returns a boolean if a field has been set.
+
 ### GetVifId
 
 `func (o *AdapterHostFcInterface) GetVifId() int64`
@@ -543,6 +570,31 @@ SetRegisteredDevice sets RegisteredDevice field to given value.
 `func (o *AdapterHostFcInterface) HasRegisteredDevice() bool`
 
 HasRegisteredDevice returns a boolean if a field has been set.
+
+### GetVfc
+
+`func (o *AdapterHostFcInterface) GetVfc() NetworkVfcRelationship`
+
+GetVfc returns the Vfc field if non-nil, zero value otherwise.
+
+### GetVfcOk
+
+`func (o *AdapterHostFcInterface) GetVfcOk() (*NetworkVfcRelationship, bool)`
+
+GetVfcOk returns a tuple with the Vfc field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetVfc
+
+`func (o *AdapterHostFcInterface) SetVfc(v NetworkVfcRelationship)`
+
+SetVfc sets Vfc field to given value.
+
+### HasVfc
+
+`func (o *AdapterHostFcInterface) HasVfc() bool`
+
+HasVfc returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

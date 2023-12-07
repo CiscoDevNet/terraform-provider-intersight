@@ -63,6 +63,26 @@ func getEquipmentChassisSchema() map[string]*schema.Schema {
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
+					"suppressed": {
+						Description: "The flag that indicates whether suppression is enabled or not in the entity.",
+						Type:        schema.TypeBool,
+						Optional:    true,
+					},
+					"suppressed_critical": {
+						Description: "The count of active suppressed alarms that have severity type Critical.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"suppressed_info": {
+						Description: "The count of active suppressed alarms that have severity type Info.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"suppressed_warning": {
+						Description: "The count of active suppressed alarms that have severity type Warning.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
 					"warning": {
 						Description: "The count of alarms that have severity type Warning.",
 						Type:        schema.TypeInt,

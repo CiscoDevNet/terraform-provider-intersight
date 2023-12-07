@@ -186,14 +186,19 @@ func resourceCapabilityAdapterUnitDescriptor() *schema.Resource {
 							Default:     "capability.FeatureConfig",
 						},
 						"feature_name": {
-							Description:  "Name of the feature that identifies the specific adapter configuration.\n* `RoCEv2` - Capability indicator of the RDMA over Converged Ethernet (RoCE) feature version 2.\n* `RoCEv1` - Capability indicator of the RDMA over Converged Ethernet (RoCE) feature version 1.\n* `VMQ` - Capability indicator of the Virtual Machine Queue (VMQ) feature.\n* `VMMQ` - Capability indicator of the Virtual Machine Multi-Queue (VMMQ) feature.\n* `VMQInterrupts` - Capability indicator of the Virtual Machine Queue (VMQ) Interrupts feature.\n* `NVGRE` - Capability indicator of the Network Virtualization using Generic Routing Encapsulation (NVGRE) feature.\n* `ARFS` - Capability indicator of the Accelerated Receive Flow Steering (ARFS) feature.\n* `VXLAN` - Capability indicator of the Virtual Extensible LAN (VXLAN) feature.",
+							Description:  "Name of the feature that identifies the specific adapter configuration.\n* `RoCEv2` - Capability indicator of the RDMA over Converged Ethernet (RoCE) feature version 2.\n* `RoCEv1` - Capability indicator of the RDMA over Converged Ethernet (RoCE) feature version 1.\n* `VMQ` - Capability indicator of the Virtual Machine Queue (VMQ) feature.\n* `VMMQ` - Capability indicator of the Virtual Machine Multi-Queue (VMMQ) feature.\n* `VMQInterrupts` - Capability indicator of the Virtual Machine Queue (VMQ) Interrupts feature.\n* `NVGRE` - Capability indicator of the Network Virtualization using Generic Routing Encapsulation (NVGRE) feature.\n* `ARFS` - Capability indicator of the Accelerated Receive Flow Steering (ARFS) feature.\n* `VXLAN` - Capability indicator of the Virtual Extensible LAN (VXLAN) feature.\n* `usNIC` - Capability indicator of the User Space NIC (usNIC) feature.\n* `Advanced Filter` - Capability indicator of the Advanced Filter feature.\n* `Azure Stack Host QOS` - Capability indicator of the Azure Stack Host QOS feature.\n* `QinQ` - Capability indicator of the QinQ feature.",
 							Type:         schema.TypeString,
-							ValidateFunc: validation.StringInSlice([]string{"RoCEv2", "RoCEv1", "VMQ", "VMMQ", "VMQInterrupts", "NVGRE", "ARFS", "VXLAN"}, false),
+							ValidateFunc: validation.StringInSlice([]string{"RoCEv2", "RoCEv1", "VMQ", "VMMQ", "VMQInterrupts", "NVGRE", "ARFS", "VXLAN", "usNIC", "Advanced Filter", "Azure Stack Host QOS", "QinQ"}, false),
 							Optional:     true,
 							Default:      "RoCEv2",
 						},
+						"min_adapter_fw_version": {
+							Description: "Firmware version of Adapter from which support for this feature is available.",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
 						"min_fw_version": {
-							Description: "Firmware version from which support for this feature is available.",
+							Description: "Firmware version of BMC from which support for this feature is available.",
 							Type:        schema.TypeString,
 							Optional:    true,
 						},
@@ -228,6 +233,56 @@ func resourceCapabilityAdapterUnitDescriptor() *schema.Resource {
 								Type:         schema.TypeInt,
 								ValidateFunc: validation.IntInSlice([]int{4, 2, 3, 5}),
 							}},
+						"unsupported_feature_matrix": {
+							Type:       schema.TypeList,
+							Optional:   true,
+							ConfigMode: schema.SchemaConfigModeAttr,
+							Computed:   true,
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"additional_properties": {
+										Type:             schema.TypeString,
+										Optional:         true,
+										DiffSuppressFunc: SuppressDiffAdditionProps,
+									},
+									"class_id": {
+										Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										Default:     "capability.UnsupportedFeatureConfig",
+									},
+									"generation": {
+										Description:  "The adapter generations that support this feature.\n* `4` - Fourth generation adapters (14xx). The PIDs of these adapters end with the string 04.\n* `2` - Second generation VIC adapters (12xx). The PIDs of these adapters end with the string 02.\n* `3` - Third generation adapters (13xx). The PIDs of these adapters end with the string 03.\n* `5` - Fifth generation adapters (15xx). The PIDs of these adapters contain the V5 string.",
+										Type:         schema.TypeInt,
+										ValidateFunc: validation.IntInSlice([]int{4, 2, 3, 5}),
+										Optional:     true,
+										Default:      4,
+									},
+									"object_type": {
+										Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										Default:     "capability.UnsupportedFeatureConfig",
+									},
+									"unsupportd_features": {
+										Type:       schema.TypeList,
+										Optional:   true,
+										ConfigMode: schema.SchemaConfigModeAttr,
+										Computed:   true,
+										Elem: &schema.Schema{
+											Type:         schema.TypeString,
+											ValidateFunc: validation.StringInSlice([]string{"RoCEv2", "RoCEv1", "VMQ", "VMMQ", "VMQInterrupts", "NVGRE", "ARFS", "VXLAN", "usNIC", "Advanced Filter", "Azure Stack Host QOS", "QinQ"}, false),
+										}},
+								},
+							},
+						},
+						"validation_action": {
+							Description:  "Action to be taken when validation does not succeed.\n* `Error` - Stop workflow execution by throwing error.\n* `Skip` - Remove the feature from configuration and continue workflow execution.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringInSlice([]string{"Error", "Skip"}, false),
+							Optional:     true,
+							Default:      "Error",
+						},
 					},
 				},
 			},
@@ -720,6 +775,12 @@ func resourceCapabilityAdapterUnitDescriptorCreate(c context.Context, d *schema.
 					o.SetFeatureName(x)
 				}
 			}
+			if v, ok := l["min_adapter_fw_version"]; ok {
+				{
+					x := (v.(string))
+					o.SetMinAdapterFwVersion(x)
+				}
+			}
 			if v, ok := l["min_fw_version"]; ok {
 				{
 					x := (v.(string))
@@ -772,6 +833,63 @@ func resourceCapabilityAdapterUnitDescriptorCreate(c context.Context, d *schema.
 					if len(x) > 0 {
 						o.SetSupportedInGenerations(x)
 					}
+				}
+			}
+			if v, ok := l["unsupported_feature_matrix"]; ok {
+				{
+					x := make([]models.CapabilityUnsupportedFeatureConfig, 0)
+					s := v.([]interface{})
+					for i := 0; i < len(s); i++ {
+						o := models.NewCapabilityUnsupportedFeatureConfigWithDefaults()
+						l := s[i].(map[string]interface{})
+						if v, ok := l["additional_properties"]; ok {
+							{
+								x := []byte(v.(string))
+								var x1 interface{}
+								err := json.Unmarshal(x, &x1)
+								if err == nil && x1 != nil {
+									o.AdditionalProperties = x1.(map[string]interface{})
+								}
+							}
+						}
+						o.SetClassId("capability.UnsupportedFeatureConfig")
+						if v, ok := l["generation"]; ok {
+							{
+								x := int32(v.(int))
+								o.SetGeneration(x)
+							}
+						}
+						if v, ok := l["object_type"]; ok {
+							{
+								x := (v.(string))
+								o.SetObjectType(x)
+							}
+						}
+						if v, ok := l["unsupportd_features"]; ok {
+							{
+								x := make([]string, 0)
+								y := reflect.ValueOf(v)
+								for i := 0; i < y.Len(); i++ {
+									if y.Index(i).Interface() != nil {
+										x = append(x, y.Index(i).Interface().(string))
+									}
+								}
+								if len(x) > 0 {
+									o.SetUnsupportdFeatures(x)
+								}
+							}
+						}
+						x = append(x, *o)
+					}
+					if len(x) > 0 {
+						o.SetUnsupportedFeatureMatrix(x)
+					}
+				}
+			}
+			if v, ok := l["validation_action"]; ok {
+				{
+					x := (v.(string))
+					o.SetValidationAction(x)
 				}
 			}
 			x = append(x, *o)
@@ -1189,6 +1307,12 @@ func resourceCapabilityAdapterUnitDescriptorUpdate(c context.Context, d *schema.
 					o.SetFeatureName(x)
 				}
 			}
+			if v, ok := l["min_adapter_fw_version"]; ok {
+				{
+					x := (v.(string))
+					o.SetMinAdapterFwVersion(x)
+				}
+			}
 			if v, ok := l["min_fw_version"]; ok {
 				{
 					x := (v.(string))
@@ -1241,6 +1365,63 @@ func resourceCapabilityAdapterUnitDescriptorUpdate(c context.Context, d *schema.
 					if len(x) > 0 {
 						o.SetSupportedInGenerations(x)
 					}
+				}
+			}
+			if v, ok := l["unsupported_feature_matrix"]; ok {
+				{
+					x := make([]models.CapabilityUnsupportedFeatureConfig, 0)
+					s := v.([]interface{})
+					for i := 0; i < len(s); i++ {
+						o := models.NewCapabilityUnsupportedFeatureConfigWithDefaults()
+						l := s[i].(map[string]interface{})
+						if v, ok := l["additional_properties"]; ok {
+							{
+								x := []byte(v.(string))
+								var x1 interface{}
+								err := json.Unmarshal(x, &x1)
+								if err == nil && x1 != nil {
+									o.AdditionalProperties = x1.(map[string]interface{})
+								}
+							}
+						}
+						o.SetClassId("capability.UnsupportedFeatureConfig")
+						if v, ok := l["generation"]; ok {
+							{
+								x := int32(v.(int))
+								o.SetGeneration(x)
+							}
+						}
+						if v, ok := l["object_type"]; ok {
+							{
+								x := (v.(string))
+								o.SetObjectType(x)
+							}
+						}
+						if v, ok := l["unsupportd_features"]; ok {
+							{
+								x := make([]string, 0)
+								y := reflect.ValueOf(v)
+								for i := 0; i < y.Len(); i++ {
+									if y.Index(i).Interface() != nil {
+										x = append(x, y.Index(i).Interface().(string))
+									}
+								}
+								if len(x) > 0 {
+									o.SetUnsupportdFeatures(x)
+								}
+							}
+						}
+						x = append(x, *o)
+					}
+					if len(x) > 0 {
+						o.SetUnsupportedFeatureMatrix(x)
+					}
+				}
+			}
+			if v, ok := l["validation_action"]; ok {
+				{
+					x := (v.(string))
+					o.SetValidationAction(x)
 				}
 			}
 			x = append(x, *o)

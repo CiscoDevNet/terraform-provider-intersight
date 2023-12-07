@@ -61,6 +61,9 @@ This complex property has following sub-properties:
   + `health`:(string)(ReadOnly) Health of the managed end point. The highest severity computed from alarmSummary property is set as the health.* `Healthy` - The Enum value represents that the entity is healthy.* `Warning` - The Enum value Warning represents that the entity has one or more active warnings on it.* `Critical` - The Enum value Critical represents that the entity is in a critical state. 
   + `info`:(int)(ReadOnly) The count of active alarms that have severity type Info. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+  + `suppressed_critical`:(int)(ReadOnly) The count of active suppressed alarms that have severity type Critical. 
+  + `suppressed_info`:(int)(ReadOnly) The count of active suppressed alarms that have severity type Info. 
+  + `suppressed_warning`:(int)(ReadOnly) The count of active suppressed alarms that have severity type Warning. 
   + `warning`:(int)(ReadOnly) The count of active alarms that have severity type Warning. 
 * `ancestors`:(Array)(ReadOnly) An array of relationships to moBaseMo resources. 
 This complex property has following sub-properties:

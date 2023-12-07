@@ -54,6 +54,7 @@ This complex property has following sub-properties:
 * `elapsed_time`:(int)(ReadOnly) Elapsed time in seconds since the backup process has started. 
 * `end_time`:(string)(ReadOnly) End date and time of the backup process. 
 * `filename`:(string) Backup filename to backup or restore. 
+* `is_manual`:(bool)(ReadOnly) If true, represents a manual backup. Else represents a scheduled backup. 
 * `is_password_set`:(bool)(ReadOnly) Indicates whether the value of the 'password' property has been set. 
 * `messages`:
                 (Array of schema.TypeString) -

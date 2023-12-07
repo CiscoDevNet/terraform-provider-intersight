@@ -30,5 +30,6 @@ The following arguments can be used to get data of already created objects in In
 * `source_ip`:(string) The source IP of the client. 
 * `timestamp`:(string) The creation time of AuditRecordLocal, which is the time when the affected MO was created/modified/deleted. 
 * `trace_id`:(string) The trace id of the request that was used to create, modify or delete a REST resource.A trace id is a unique identifier for one particular REST request. It may be used for troubleshooting purposeby the Intersight technical support team. 
+* `user_agent_string`:(string) The raw, string representation of the user agent of the request from the user-agent http request header. 
 * `user_id_or_email`:(string) The userId or the email of the associated user that made the change. In case that user is later deleted, we still have some reference to the information. 
  

@@ -512,6 +512,19 @@ func resourceVnicEthNetworkPolicy() *schema.Resource {
 							Optional:    true,
 							Default:     "vnic.VlanSettings",
 						},
+						"qinq_enabled": {
+							Description: "Enable QinQ (802.1Q-in-802.1Q) Tunneling on the vNIC.",
+							Type:        schema.TypeBool,
+							Optional:    true,
+							Default:     false,
+						},
+						"qinq_vlan": {
+							Description:  "When activating VIC QinQ (802.1Q) Tunneling, a particular VLAN ID is set. In Access VLAN mode, this QinQ VLAN ID is established as the default VLAN.",
+							Type:         schema.TypeInt,
+							ValidateFunc: validation.IntBetween(2, 4093),
+							Optional:     true,
+							Default:      2,
+						},
 					},
 				},
 			},
@@ -675,6 +688,18 @@ func resourceVnicEthNetworkPolicyCreate(c context.Context, d *schema.ResourceDat
 				{
 					x := (v.(string))
 					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["qinq_enabled"]; ok {
+				{
+					x := (v.(bool))
+					o.SetQinqEnabled(x)
+				}
+			}
+			if v, ok := l["qinq_vlan"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetQinqVlan(x)
 				}
 			}
 			p = append(p, *o)
@@ -967,6 +992,18 @@ func resourceVnicEthNetworkPolicyUpdate(c context.Context, d *schema.ResourceDat
 				{
 					x := (v.(string))
 					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["qinq_enabled"]; ok {
+				{
+					x := (v.(bool))
+					o.SetQinqEnabled(x)
+				}
+			}
+			if v, ok := l["qinq_vlan"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetQinqVlan(x)
 				}
 			}
 			p = append(p, *o)

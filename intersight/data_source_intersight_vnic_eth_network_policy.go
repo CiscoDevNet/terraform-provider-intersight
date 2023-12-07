@@ -392,6 +392,16 @@ func getVnicEthNetworkPolicySchema() map[string]*schema.Schema {
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
+					"qinq_enabled": {
+						Description: "Enable QinQ (802.1Q-in-802.1Q) Tunneling on the vNIC.",
+						Type:        schema.TypeBool,
+						Optional:    true,
+					},
+					"qinq_vlan": {
+						Description: "When activating VIC QinQ (802.1Q) Tunneling, a particular VLAN ID is set. In Access VLAN mode, this QinQ VLAN ID is established as the default VLAN.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
 				},
 			},
 		},
@@ -804,6 +814,18 @@ func dataSourceVnicEthNetworkPolicyRead(c context.Context, d *schema.ResourceDat
 				{
 					x := (v.(string))
 					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["qinq_enabled"]; ok {
+				{
+					x := (v.(bool))
+					o.SetQinqEnabled(x)
+				}
+			}
+			if v, ok := l["qinq_vlan"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetQinqVlan(x)
 				}
 			}
 			p = append(p, *o)

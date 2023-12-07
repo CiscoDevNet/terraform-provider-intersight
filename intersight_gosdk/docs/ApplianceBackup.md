@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "appliance.Backup"]
 **ElapsedTime** | Pointer to **int64** | Elapsed time in seconds since the backup process has started. | [optional] [readonly] 
 **EndTime** | Pointer to **time.Time** | End date and time of the backup process. | [optional] [readonly] 
+**IsManual** | Pointer to **bool** | If true, represents a manual backup. Else represents a scheduled backup. | [optional] [readonly] 
 **IsPasswordSet** | Pointer to **bool** | Indicates whether the value of the &#39;password&#39; property has been set. | [optional] [readonly] [default to false]
 **Messages** | Pointer to **[]string** |  | [optional] 
 **Password** | Pointer to **string** | Password to authenticate the fileserver. | [optional] 
@@ -123,6 +124,31 @@ SetEndTime sets EndTime field to given value.
 `func (o *ApplianceBackup) HasEndTime() bool`
 
 HasEndTime returns a boolean if a field has been set.
+
+### GetIsManual
+
+`func (o *ApplianceBackup) GetIsManual() bool`
+
+GetIsManual returns the IsManual field if non-nil, zero value otherwise.
+
+### GetIsManualOk
+
+`func (o *ApplianceBackup) GetIsManualOk() (*bool, bool)`
+
+GetIsManualOk returns a tuple with the IsManual field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsManual
+
+`func (o *ApplianceBackup) SetIsManual(v bool)`
+
+SetIsManual sets IsManual field to given value.
+
+### HasIsManual
+
+`func (o *ApplianceBackup) HasIsManual() bool`
+
+HasIsManual returns a boolean if a field has been set.
 
 ### GetIsPasswordSet
 
