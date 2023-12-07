@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-14430
+API version: 1.0.11-14628
 Contact: intersight@cisco.com
 */
 
@@ -21,10 +21,14 @@ type FabricVlanSettingsAllOf struct {
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
-	// Allowed VLAN IDs of the virtual interface. A list of comma seperated VLAN ids and/or VLAN id ranges.
+	// Allowed VLAN IDs of the virtual interface. A list of comma separated VLAN ids and/or VLAN id ranges.
 	AllowedVlans *string `json:"AllowedVlans,omitempty"`
 	// Native VLAN ID of the virtual interface or the corresponding vethernet on the peer Fabric Interconnect to which the virtual interface is connected. If the native VLAN is not a part of the allowed VLANs, it will automatically be added to the list of allowed VLANs.
-	NativeVlan           *int64 `json:"NativeVlan,omitempty"`
+	NativeVlan *int64 `json:"NativeVlan,omitempty"`
+	// Enable QinQ (802.1Q-in-802.1Q) Tunneling on the vNIC.
+	QinqEnabled *bool `json:"QinqEnabled,omitempty"`
+	// Select the VLAN ID for VIC QinQ (802.1Q) Tunneling.
+	QinqVlan             *int64 `json:"QinqVlan,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -40,6 +44,10 @@ func NewFabricVlanSettingsAllOf(classId string, objectType string) *FabricVlanSe
 	this.ObjectType = objectType
 	var nativeVlan int64 = 1
 	this.NativeVlan = &nativeVlan
+	var qinqEnabled bool = false
+	this.QinqEnabled = &qinqEnabled
+	var qinqVlan int64 = 2
+	this.QinqVlan = &qinqVlan
 	return &this
 }
 
@@ -54,6 +62,10 @@ func NewFabricVlanSettingsAllOfWithDefaults() *FabricVlanSettingsAllOf {
 	this.ObjectType = objectType
 	var nativeVlan int64 = 1
 	this.NativeVlan = &nativeVlan
+	var qinqEnabled bool = false
+	this.QinqEnabled = &qinqEnabled
+	var qinqVlan int64 = 2
+	this.QinqVlan = &qinqVlan
 	return &this
 }
 
@@ -169,6 +181,70 @@ func (o *FabricVlanSettingsAllOf) SetNativeVlan(v int64) {
 	o.NativeVlan = &v
 }
 
+// GetQinqEnabled returns the QinqEnabled field value if set, zero value otherwise.
+func (o *FabricVlanSettingsAllOf) GetQinqEnabled() bool {
+	if o == nil || o.QinqEnabled == nil {
+		var ret bool
+		return ret
+	}
+	return *o.QinqEnabled
+}
+
+// GetQinqEnabledOk returns a tuple with the QinqEnabled field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FabricVlanSettingsAllOf) GetQinqEnabledOk() (*bool, bool) {
+	if o == nil || o.QinqEnabled == nil {
+		return nil, false
+	}
+	return o.QinqEnabled, true
+}
+
+// HasQinqEnabled returns a boolean if a field has been set.
+func (o *FabricVlanSettingsAllOf) HasQinqEnabled() bool {
+	if o != nil && o.QinqEnabled != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetQinqEnabled gets a reference to the given bool and assigns it to the QinqEnabled field.
+func (o *FabricVlanSettingsAllOf) SetQinqEnabled(v bool) {
+	o.QinqEnabled = &v
+}
+
+// GetQinqVlan returns the QinqVlan field value if set, zero value otherwise.
+func (o *FabricVlanSettingsAllOf) GetQinqVlan() int64 {
+	if o == nil || o.QinqVlan == nil {
+		var ret int64
+		return ret
+	}
+	return *o.QinqVlan
+}
+
+// GetQinqVlanOk returns a tuple with the QinqVlan field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FabricVlanSettingsAllOf) GetQinqVlanOk() (*int64, bool) {
+	if o == nil || o.QinqVlan == nil {
+		return nil, false
+	}
+	return o.QinqVlan, true
+}
+
+// HasQinqVlan returns a boolean if a field has been set.
+func (o *FabricVlanSettingsAllOf) HasQinqVlan() bool {
+	if o != nil && o.QinqVlan != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetQinqVlan gets a reference to the given int64 and assigns it to the QinqVlan field.
+func (o *FabricVlanSettingsAllOf) SetQinqVlan(v int64) {
+	o.QinqVlan = &v
+}
+
 func (o FabricVlanSettingsAllOf) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
@@ -182,6 +258,12 @@ func (o FabricVlanSettingsAllOf) MarshalJSON() ([]byte, error) {
 	}
 	if o.NativeVlan != nil {
 		toSerialize["NativeVlan"] = o.NativeVlan
+	}
+	if o.QinqEnabled != nil {
+		toSerialize["QinqEnabled"] = o.QinqEnabled
+	}
+	if o.QinqVlan != nil {
+		toSerialize["QinqVlan"] = o.QinqVlan
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -205,6 +287,8 @@ func (o *FabricVlanSettingsAllOf) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "AllowedVlans")
 		delete(additionalProperties, "NativeVlan")
+		delete(additionalProperties, "QinqEnabled")
+		delete(additionalProperties, "QinqVlan")
 		o.AdditionalProperties = additionalProperties
 	}
 

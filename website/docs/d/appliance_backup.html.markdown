@@ -24,6 +24,7 @@ The following arguments can be used to get data of already created objects in In
 * `elapsed_time`:(int) Elapsed time in seconds since the backup process has started. 
 * `end_time`:(string) End date and time of the backup process. 
 * `filename`:(string) Backup filename to backup or restore. 
+* `is_manual`:(bool) If true, represents a manual backup. Else represents a scheduled backup. 
 * `is_password_set`:(bool) Indicates whether the value of the 'password' property has been set. 
 * `mod_time`:(string) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 

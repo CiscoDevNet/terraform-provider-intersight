@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-14430
+API version: 1.0.11-14628
 Contact: intersight@cisco.com
 */
 
@@ -44,8 +44,12 @@ type AdapterHostEthInterfaceAllOf struct {
 	PeerDn *string `json:"PeerDn,omitempty"`
 	// Name given for Lan PinGroup.
 	PinGroupName *string `json:"PinGroupName,omitempty"`
+	// Standby Operational state of an Interface.
+	StandbyOperState *string `json:"StandbyOperState,omitempty"`
 	// Identifier of the Standby virtual ethernet interface (Vethernet) on the networking component (e.g., Fabric Interconnect) for the corresponding Host Ethernet Interface (vNIC).
-	StandByVifId *int64 `json:"StandByVifId,omitempty"`
+	StandbyVifId *int64 `json:"StandbyVifId,omitempty"`
+	// The action to be performed on the vethernet corresponding to the vNIC. * `None` - Default value for vif operation. * `ResetConnectivity` - Resets connectivity on both active and passive vif. * `ResetConnectivityActive` - Resets connectivity on the active vif. * `ResetConnectivityPassive` - Resets connectivity on the passive vif. * `Enable` - Enables the vif on both the FIs. * `Disable` - Disables the vif on both the FIs. * `EnableActive` - Enables the corresponding active vif. * `EnablePassive` - Enables the corresponding standby vif. * `DisableActive` - Disables the corresponding active vif. * `DisablePassive` - Disables the corresponding standby vif.
+	VethAction *string `json:"VethAction,omitempty"`
 	// Identifier of the virtual ethernet interface (Vethernet) on the networking component (e.g., Fabric Interconnect) for the corresponding Host Ethernet Interface (vNIC).
 	VifId *int64 `json:"VifId,omitempty"`
 	// Virtualization Preference of the Host Ethernet Interface indicating if virtualization is enabled or not.
@@ -56,6 +60,8 @@ type AdapterHostEthInterfaceAllOf struct {
 	InventoryDeviceInfo  *InventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
 	PinnedInterface      *InventoryInterfaceRelationship      `json:"PinnedInterface,omitempty"`
 	RegisteredDevice     *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+	StandbyVethernet     *NetworkVethernetRelationship        `json:"StandbyVethernet,omitempty"`
+	Vethernet            *NetworkVethernetRelationship        `json:"Vethernet,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -69,6 +75,8 @@ func NewAdapterHostEthInterfaceAllOf(classId string, objectType string) *Adapter
 	this := AdapterHostEthInterfaceAllOf{}
 	this.ClassId = classId
 	this.ObjectType = objectType
+	var vethAction string = "None"
+	this.VethAction = &vethAction
 	return &this
 }
 
@@ -81,6 +89,8 @@ func NewAdapterHostEthInterfaceAllOfWithDefaults() *AdapterHostEthInterfaceAllOf
 	this.ClassId = classId
 	var objectType string = "adapter.HostEthInterface"
 	this.ObjectType = objectType
+	var vethAction string = "None"
+	this.VethAction = &vethAction
 	return &this
 }
 
@@ -517,36 +527,100 @@ func (o *AdapterHostEthInterfaceAllOf) SetPinGroupName(v string) {
 	o.PinGroupName = &v
 }
 
-// GetStandByVifId returns the StandByVifId field value if set, zero value otherwise.
-func (o *AdapterHostEthInterfaceAllOf) GetStandByVifId() int64 {
-	if o == nil || o.StandByVifId == nil {
-		var ret int64
+// GetStandbyOperState returns the StandbyOperState field value if set, zero value otherwise.
+func (o *AdapterHostEthInterfaceAllOf) GetStandbyOperState() string {
+	if o == nil || o.StandbyOperState == nil {
+		var ret string
 		return ret
 	}
-	return *o.StandByVifId
+	return *o.StandbyOperState
 }
 
-// GetStandByVifIdOk returns a tuple with the StandByVifId field value if set, nil otherwise
+// GetStandbyOperStateOk returns a tuple with the StandbyOperState field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AdapterHostEthInterfaceAllOf) GetStandByVifIdOk() (*int64, bool) {
-	if o == nil || o.StandByVifId == nil {
+func (o *AdapterHostEthInterfaceAllOf) GetStandbyOperStateOk() (*string, bool) {
+	if o == nil || o.StandbyOperState == nil {
 		return nil, false
 	}
-	return o.StandByVifId, true
+	return o.StandbyOperState, true
 }
 
-// HasStandByVifId returns a boolean if a field has been set.
-func (o *AdapterHostEthInterfaceAllOf) HasStandByVifId() bool {
-	if o != nil && o.StandByVifId != nil {
+// HasStandbyOperState returns a boolean if a field has been set.
+func (o *AdapterHostEthInterfaceAllOf) HasStandbyOperState() bool {
+	if o != nil && o.StandbyOperState != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetStandByVifId gets a reference to the given int64 and assigns it to the StandByVifId field.
-func (o *AdapterHostEthInterfaceAllOf) SetStandByVifId(v int64) {
-	o.StandByVifId = &v
+// SetStandbyOperState gets a reference to the given string and assigns it to the StandbyOperState field.
+func (o *AdapterHostEthInterfaceAllOf) SetStandbyOperState(v string) {
+	o.StandbyOperState = &v
+}
+
+// GetStandbyVifId returns the StandbyVifId field value if set, zero value otherwise.
+func (o *AdapterHostEthInterfaceAllOf) GetStandbyVifId() int64 {
+	if o == nil || o.StandbyVifId == nil {
+		var ret int64
+		return ret
+	}
+	return *o.StandbyVifId
+}
+
+// GetStandbyVifIdOk returns a tuple with the StandbyVifId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AdapterHostEthInterfaceAllOf) GetStandbyVifIdOk() (*int64, bool) {
+	if o == nil || o.StandbyVifId == nil {
+		return nil, false
+	}
+	return o.StandbyVifId, true
+}
+
+// HasStandbyVifId returns a boolean if a field has been set.
+func (o *AdapterHostEthInterfaceAllOf) HasStandbyVifId() bool {
+	if o != nil && o.StandbyVifId != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetStandbyVifId gets a reference to the given int64 and assigns it to the StandbyVifId field.
+func (o *AdapterHostEthInterfaceAllOf) SetStandbyVifId(v int64) {
+	o.StandbyVifId = &v
+}
+
+// GetVethAction returns the VethAction field value if set, zero value otherwise.
+func (o *AdapterHostEthInterfaceAllOf) GetVethAction() string {
+	if o == nil || o.VethAction == nil {
+		var ret string
+		return ret
+	}
+	return *o.VethAction
+}
+
+// GetVethActionOk returns a tuple with the VethAction field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AdapterHostEthInterfaceAllOf) GetVethActionOk() (*string, bool) {
+	if o == nil || o.VethAction == nil {
+		return nil, false
+	}
+	return o.VethAction, true
+}
+
+// HasVethAction returns a boolean if a field has been set.
+func (o *AdapterHostEthInterfaceAllOf) HasVethAction() bool {
+	if o != nil && o.VethAction != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetVethAction gets a reference to the given string and assigns it to the VethAction field.
+func (o *AdapterHostEthInterfaceAllOf) SetVethAction(v string) {
+	o.VethAction = &v
 }
 
 // GetVifId returns the VifId field value if set, zero value otherwise.
@@ -773,6 +847,70 @@ func (o *AdapterHostEthInterfaceAllOf) SetRegisteredDevice(v AssetDeviceRegistra
 	o.RegisteredDevice = &v
 }
 
+// GetStandbyVethernet returns the StandbyVethernet field value if set, zero value otherwise.
+func (o *AdapterHostEthInterfaceAllOf) GetStandbyVethernet() NetworkVethernetRelationship {
+	if o == nil || o.StandbyVethernet == nil {
+		var ret NetworkVethernetRelationship
+		return ret
+	}
+	return *o.StandbyVethernet
+}
+
+// GetStandbyVethernetOk returns a tuple with the StandbyVethernet field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AdapterHostEthInterfaceAllOf) GetStandbyVethernetOk() (*NetworkVethernetRelationship, bool) {
+	if o == nil || o.StandbyVethernet == nil {
+		return nil, false
+	}
+	return o.StandbyVethernet, true
+}
+
+// HasStandbyVethernet returns a boolean if a field has been set.
+func (o *AdapterHostEthInterfaceAllOf) HasStandbyVethernet() bool {
+	if o != nil && o.StandbyVethernet != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetStandbyVethernet gets a reference to the given NetworkVethernetRelationship and assigns it to the StandbyVethernet field.
+func (o *AdapterHostEthInterfaceAllOf) SetStandbyVethernet(v NetworkVethernetRelationship) {
+	o.StandbyVethernet = &v
+}
+
+// GetVethernet returns the Vethernet field value if set, zero value otherwise.
+func (o *AdapterHostEthInterfaceAllOf) GetVethernet() NetworkVethernetRelationship {
+	if o == nil || o.Vethernet == nil {
+		var ret NetworkVethernetRelationship
+		return ret
+	}
+	return *o.Vethernet
+}
+
+// GetVethernetOk returns a tuple with the Vethernet field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AdapterHostEthInterfaceAllOf) GetVethernetOk() (*NetworkVethernetRelationship, bool) {
+	if o == nil || o.Vethernet == nil {
+		return nil, false
+	}
+	return o.Vethernet, true
+}
+
+// HasVethernet returns a boolean if a field has been set.
+func (o *AdapterHostEthInterfaceAllOf) HasVethernet() bool {
+	if o != nil && o.Vethernet != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetVethernet gets a reference to the given NetworkVethernetRelationship and assigns it to the Vethernet field.
+func (o *AdapterHostEthInterfaceAllOf) SetVethernet(v NetworkVethernetRelationship) {
+	o.Vethernet = &v
+}
+
 func (o AdapterHostEthInterfaceAllOf) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
@@ -817,8 +955,14 @@ func (o AdapterHostEthInterfaceAllOf) MarshalJSON() ([]byte, error) {
 	if o.PinGroupName != nil {
 		toSerialize["PinGroupName"] = o.PinGroupName
 	}
-	if o.StandByVifId != nil {
-		toSerialize["StandByVifId"] = o.StandByVifId
+	if o.StandbyOperState != nil {
+		toSerialize["StandbyOperState"] = o.StandbyOperState
+	}
+	if o.StandbyVifId != nil {
+		toSerialize["StandbyVifId"] = o.StandbyVifId
+	}
+	if o.VethAction != nil {
+		toSerialize["VethAction"] = o.VethAction
 	}
 	if o.VifId != nil {
 		toSerialize["VifId"] = o.VifId
@@ -840,6 +984,12 @@ func (o AdapterHostEthInterfaceAllOf) MarshalJSON() ([]byte, error) {
 	}
 	if o.RegisteredDevice != nil {
 		toSerialize["RegisteredDevice"] = o.RegisteredDevice
+	}
+	if o.StandbyVethernet != nil {
+		toSerialize["StandbyVethernet"] = o.StandbyVethernet
+	}
+	if o.Vethernet != nil {
+		toSerialize["Vethernet"] = o.Vethernet
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -873,7 +1023,9 @@ func (o *AdapterHostEthInterfaceAllOf) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "PciAddr")
 		delete(additionalProperties, "PeerDn")
 		delete(additionalProperties, "PinGroupName")
-		delete(additionalProperties, "StandByVifId")
+		delete(additionalProperties, "StandbyOperState")
+		delete(additionalProperties, "StandbyVifId")
+		delete(additionalProperties, "VethAction")
 		delete(additionalProperties, "VifId")
 		delete(additionalProperties, "VirtualizationPreference")
 		delete(additionalProperties, "VnicDn")
@@ -881,6 +1033,8 @@ func (o *AdapterHostEthInterfaceAllOf) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "InventoryDeviceInfo")
 		delete(additionalProperties, "PinnedInterface")
 		delete(additionalProperties, "RegisteredDevice")
+		delete(additionalProperties, "StandbyVethernet")
+		delete(additionalProperties, "Vethernet")
 		o.AdditionalProperties = additionalProperties
 	}
 

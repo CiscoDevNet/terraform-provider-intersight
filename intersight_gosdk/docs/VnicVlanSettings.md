@@ -9,6 +9,8 @@ Name | Type | Description | Notes
 **AllowedVlans** | Pointer to **string** | Allowed VLAN IDs of the virtual interface. | [optional] 
 **DefaultVlan** | Pointer to **int64** | Native VLAN ID of the virtual interface or the corresponding vethernet on the peer Fabric Interconnect to which the virtual interface is connected. Setting the ID to 0 will not associate any native VLAN to the traffic on the virtual interface. | [optional] [default to 0]
 **Mode** | Pointer to **string** | Option to determine if the port can carry single VLAN (Access) or multiple VLANs (Trunk) traffic. * &#x60;ACCESS&#x60; - An access port carries traffic only for a single VLAN on the interface. * &#x60;TRUNK&#x60; - A trunk port can have two or more VLANs configured on the interface. It can carry traffic for several VLANs simultaneously. | [optional] [default to "ACCESS"]
+**QinqEnabled** | Pointer to **bool** | Enable QinQ (802.1Q-in-802.1Q) Tunneling on the vNIC. | [optional] [default to false]
+**QinqVlan** | Pointer to **int64** | When activating VIC QinQ (802.1Q) Tunneling, a particular VLAN ID is set. In Access VLAN mode, this QinQ VLAN ID is established as the default VLAN. | [optional] [default to 2]
 
 ## Methods
 
@@ -143,6 +145,56 @@ SetMode sets Mode field to given value.
 `func (o *VnicVlanSettings) HasMode() bool`
 
 HasMode returns a boolean if a field has been set.
+
+### GetQinqEnabled
+
+`func (o *VnicVlanSettings) GetQinqEnabled() bool`
+
+GetQinqEnabled returns the QinqEnabled field if non-nil, zero value otherwise.
+
+### GetQinqEnabledOk
+
+`func (o *VnicVlanSettings) GetQinqEnabledOk() (*bool, bool)`
+
+GetQinqEnabledOk returns a tuple with the QinqEnabled field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetQinqEnabled
+
+`func (o *VnicVlanSettings) SetQinqEnabled(v bool)`
+
+SetQinqEnabled sets QinqEnabled field to given value.
+
+### HasQinqEnabled
+
+`func (o *VnicVlanSettings) HasQinqEnabled() bool`
+
+HasQinqEnabled returns a boolean if a field has been set.
+
+### GetQinqVlan
+
+`func (o *VnicVlanSettings) GetQinqVlan() int64`
+
+GetQinqVlan returns the QinqVlan field if non-nil, zero value otherwise.
+
+### GetQinqVlanOk
+
+`func (o *VnicVlanSettings) GetQinqVlanOk() (*int64, bool)`
+
+GetQinqVlanOk returns a tuple with the QinqVlan field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetQinqVlan
+
+`func (o *VnicVlanSettings) SetQinqVlan(v int64)`
+
+SetQinqVlan sets QinqVlan field to given value.
+
+### HasQinqVlan
+
+`func (o *VnicVlanSettings) HasQinqVlan() bool`
+
+HasQinqVlan returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

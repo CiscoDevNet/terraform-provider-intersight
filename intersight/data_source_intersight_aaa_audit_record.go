@@ -357,6 +357,66 @@ func getAaaAuditRecordSchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"user_agent": {
+			Description: "The parsed representation of the user agent of the request.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"os_family": {
+						Description: "The type of operating system that sent the request.\nNot applicable to Intersight SDK requests.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"os_version": {
+						Description: "The version of the operating system that sent the request.\nNot applicable for Intersight SDK requests.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"software_family": {
+						Description: "The type of client that made the request.\nFor browser requests, it is the specific browser that made the request (e.g. Chrome, Firefox, etc.).",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"software_subtype": {
+						Description: "The subtype of software that made the request.\nFor SDK requests, this is the programming language used in the SDK. For browser requests, this provides additional context on the client (e.g. if the client is running on a mobile device).",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"software_type": {
+						Description: "The type of application that made the request.\nThis can be a browser or some other software, such as an SDK.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"software_version": {
+						Description: "The version of the client that made the request.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"user_agent_string": {
+			Description: "The raw, string representation of the user agent of the request from the user-agent http request header.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"user_id_or_email": {
 			Description: "The userId or the email of the associated user that made the change. In case that user is later deleted, we still have some reference to the information.",
 			Type:        schema.TypeString,
@@ -912,6 +972,42 @@ func dataSourceAaaAuditRecordRead(c context.Context, d *schema.ResourceData, met
 		}
 	}
 
+	if v, ok := d.GetOk("user_agent"); ok {
+		p := make([]models.AaaUserAgent, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.AaaUserAgent{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("aaa.UserAgent")
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			p = append(p, *o)
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetUserAgent(x)
+		}
+	}
+
+	if v, ok := d.GetOk("user_agent_string"); ok {
+		x := (v.(string))
+		o.SetUserAgentString(x)
+	}
+
 	if v, ok := d.GetOk("user_id_or_email"); ok {
 		x := (v.(string))
 		o.SetUserIdOrEmail(x)
@@ -1065,6 +1161,9 @@ func dataSourceAaaAuditRecordRead(c context.Context, d *schema.ResourceData, met
 				temp["trace_id"] = (s.GetTraceId())
 
 				temp["user"] = flattenMapIamUserRelationship(s.GetUser(), d)
+
+				temp["user_agent"] = flattenMapAaaUserAgent(s.GetUserAgent(), d)
+				temp["user_agent_string"] = (s.GetUserAgentString())
 				temp["user_id_or_email"] = (s.GetUserIdOrEmail())
 
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)

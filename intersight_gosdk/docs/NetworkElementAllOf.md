@@ -74,6 +74,8 @@ Name | Type | Description | Notes
 **SupervisorCard** | Pointer to [**[]NetworkSupervisorCardRelationship**](NetworkSupervisorCardRelationship.md) | An array of relationships to networkSupervisorCard resources. | [optional] 
 **TopSystem** | Pointer to [**TopSystemRelationship**](TopSystemRelationship.md) |  | [optional] 
 **UcsmRunningFirmware** | Pointer to [**FirmwareRunningFirmwareRelationship**](FirmwareRunningFirmwareRelationship.md) |  | [optional] 
+**Veths** | Pointer to [**[]NetworkVethernetRelationship**](NetworkVethernetRelationship.md) | An array of relationships to networkVethernet resources. | [optional] [readonly] 
+**Vfcs** | Pointer to [**[]NetworkVfcRelationship**](NetworkVfcRelationship.md) | An array of relationships to networkVfc resources. | [optional] [readonly] 
 **VpcDomain** | Pointer to [**NetworkVpcDomainRelationship**](NetworkVpcDomainRelationship.md) |  | [optional] 
 **VpcMember** | Pointer to [**[]NetworkVpcMemberRelationship**](NetworkVpcMemberRelationship.md) | An array of relationships to networkVpcMember resources. | [optional] [readonly] 
 **VpcPeer** | Pointer to [**[]NetworkVpcPeerRelationship**](NetworkVpcPeerRelationship.md) | An array of relationships to networkVpcPeer resources. | [optional] [readonly] 
@@ -2028,6 +2030,76 @@ SetUcsmRunningFirmware sets UcsmRunningFirmware field to given value.
 
 HasUcsmRunningFirmware returns a boolean if a field has been set.
 
+### GetVeths
+
+`func (o *NetworkElementAllOf) GetVeths() []NetworkVethernetRelationship`
+
+GetVeths returns the Veths field if non-nil, zero value otherwise.
+
+### GetVethsOk
+
+`func (o *NetworkElementAllOf) GetVethsOk() (*[]NetworkVethernetRelationship, bool)`
+
+GetVethsOk returns a tuple with the Veths field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetVeths
+
+`func (o *NetworkElementAllOf) SetVeths(v []NetworkVethernetRelationship)`
+
+SetVeths sets Veths field to given value.
+
+### HasVeths
+
+`func (o *NetworkElementAllOf) HasVeths() bool`
+
+HasVeths returns a boolean if a field has been set.
+
+### SetVethsNil
+
+`func (o *NetworkElementAllOf) SetVethsNil(b bool)`
+
+ SetVethsNil sets the value for Veths to be an explicit nil
+
+### UnsetVeths
+`func (o *NetworkElementAllOf) UnsetVeths()`
+
+UnsetVeths ensures that no value is present for Veths, not even an explicit nil
+### GetVfcs
+
+`func (o *NetworkElementAllOf) GetVfcs() []NetworkVfcRelationship`
+
+GetVfcs returns the Vfcs field if non-nil, zero value otherwise.
+
+### GetVfcsOk
+
+`func (o *NetworkElementAllOf) GetVfcsOk() (*[]NetworkVfcRelationship, bool)`
+
+GetVfcsOk returns a tuple with the Vfcs field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetVfcs
+
+`func (o *NetworkElementAllOf) SetVfcs(v []NetworkVfcRelationship)`
+
+SetVfcs sets Vfcs field to given value.
+
+### HasVfcs
+
+`func (o *NetworkElementAllOf) HasVfcs() bool`
+
+HasVfcs returns a boolean if a field has been set.
+
+### SetVfcsNil
+
+`func (o *NetworkElementAllOf) SetVfcsNil(b bool)`
+
+ SetVfcsNil sets the value for Vfcs to be an explicit nil
+
+### UnsetVfcs
+`func (o *NetworkElementAllOf) UnsetVfcs()`
+
+UnsetVfcs ensures that no value is present for Vfcs, not even an explicit nil
 ### GetVpcDomain
 
 `func (o *NetworkElementAllOf) GetVpcDomain() NetworkVpcDomainRelationship`

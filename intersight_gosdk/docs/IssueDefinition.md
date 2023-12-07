@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **Name** | Pointer to **string** | An informational display name. | [optional] 
 **ProbableCause** | Pointer to **string** | An explanation of the likely causes of the detected issue. | [optional] 
 **Remediation** | Pointer to **string** | An explanation of the steps to perform to remediate the detected issue. | [optional] 
+**SystemClassifications** | Pointer to **[]string** |  | [optional] 
 
 ## Methods
 
@@ -206,6 +207,41 @@ SetRemediation sets Remediation field to given value.
 
 HasRemediation returns a boolean if a field has been set.
 
+### GetSystemClassifications
+
+`func (o *IssueDefinition) GetSystemClassifications() []string`
+
+GetSystemClassifications returns the SystemClassifications field if non-nil, zero value otherwise.
+
+### GetSystemClassificationsOk
+
+`func (o *IssueDefinition) GetSystemClassificationsOk() (*[]string, bool)`
+
+GetSystemClassificationsOk returns a tuple with the SystemClassifications field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSystemClassifications
+
+`func (o *IssueDefinition) SetSystemClassifications(v []string)`
+
+SetSystemClassifications sets SystemClassifications field to given value.
+
+### HasSystemClassifications
+
+`func (o *IssueDefinition) HasSystemClassifications() bool`
+
+HasSystemClassifications returns a boolean if a field has been set.
+
+### SetSystemClassificationsNil
+
+`func (o *IssueDefinition) SetSystemClassificationsNil(b bool)`
+
+ SetSystemClassificationsNil sets the value for SystemClassifications to be an explicit nil
+
+### UnsetSystemClassifications
+`func (o *IssueDefinition) UnsetSystemClassifications()`
+
+UnsetSystemClassifications ensures that no value is present for SystemClassifications, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

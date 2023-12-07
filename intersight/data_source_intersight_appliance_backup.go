@@ -125,6 +125,11 @@ func getApplianceBackupSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"is_manual": {
+			Description: "If true, represents a manual backup. Else represents a scheduled backup.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
 		"is_password_set": {
 			Description: "Indicates whether the value of the 'password' property has been set.",
 			Type:        schema.TypeBool,
@@ -554,6 +559,11 @@ func dataSourceApplianceBackupRead(c context.Context, d *schema.ResourceData, me
 		o.SetFilename(x)
 	}
 
+	if v, ok := d.GetOkExists("is_manual"); ok {
+		x := (v.(bool))
+		o.SetIsManual(x)
+	}
+
 	if v, ok := d.GetOkExists("is_password_set"); ok {
 		x := (v.(bool))
 		o.SetIsPasswordSet(x)
@@ -880,6 +890,7 @@ func dataSourceApplianceBackupRead(c context.Context, d *schema.ResourceData, me
 
 				temp["end_time"] = (s.GetEndTime()).String()
 				temp["filename"] = (s.GetFilename())
+				temp["is_manual"] = (s.GetIsManual())
 				temp["is_password_set"] = (s.GetIsPasswordSet())
 				temp["messages"] = (s.GetMessages())
 

@@ -6,8 +6,10 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "fabric.VlanSettings"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "fabric.VlanSettings"]
-**AllowedVlans** | Pointer to **string** | Allowed VLAN IDs of the virtual interface. A list of comma seperated VLAN ids and/or VLAN id ranges. | [optional] 
+**AllowedVlans** | Pointer to **string** | Allowed VLAN IDs of the virtual interface. A list of comma separated VLAN ids and/or VLAN id ranges. | [optional] 
 **NativeVlan** | Pointer to **int64** | Native VLAN ID of the virtual interface or the corresponding vethernet on the peer Fabric Interconnect to which the virtual interface is connected. If the native VLAN is not a part of the allowed VLANs, it will automatically be added to the list of allowed VLANs. | [optional] [default to 1]
+**QinqEnabled** | Pointer to **bool** | Enable QinQ (802.1Q-in-802.1Q) Tunneling on the vNIC. | [optional] [default to false]
+**QinqVlan** | Pointer to **int64** | Select the VLAN ID for VIC QinQ (802.1Q) Tunneling. | [optional] [default to 2]
 
 ## Methods
 
@@ -117,6 +119,56 @@ SetNativeVlan sets NativeVlan field to given value.
 `func (o *FabricVlanSettings) HasNativeVlan() bool`
 
 HasNativeVlan returns a boolean if a field has been set.
+
+### GetQinqEnabled
+
+`func (o *FabricVlanSettings) GetQinqEnabled() bool`
+
+GetQinqEnabled returns the QinqEnabled field if non-nil, zero value otherwise.
+
+### GetQinqEnabledOk
+
+`func (o *FabricVlanSettings) GetQinqEnabledOk() (*bool, bool)`
+
+GetQinqEnabledOk returns a tuple with the QinqEnabled field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetQinqEnabled
+
+`func (o *FabricVlanSettings) SetQinqEnabled(v bool)`
+
+SetQinqEnabled sets QinqEnabled field to given value.
+
+### HasQinqEnabled
+
+`func (o *FabricVlanSettings) HasQinqEnabled() bool`
+
+HasQinqEnabled returns a boolean if a field has been set.
+
+### GetQinqVlan
+
+`func (o *FabricVlanSettings) GetQinqVlan() int64`
+
+GetQinqVlan returns the QinqVlan field if non-nil, zero value otherwise.
+
+### GetQinqVlanOk
+
+`func (o *FabricVlanSettings) GetQinqVlanOk() (*int64, bool)`
+
+GetQinqVlanOk returns a tuple with the QinqVlan field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetQinqVlan
+
+`func (o *FabricVlanSettings) SetQinqVlan(v int64)`
+
+SetQinqVlan sets QinqVlan field to given value.
+
+### HasQinqVlan
+
+`func (o *FabricVlanSettings) HasQinqVlan() bool`
+
+HasQinqVlan returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
