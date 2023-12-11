@@ -23,6 +23,7 @@ resource "intersight_fabric_port_operation" "fabric_port_operation1" {
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(ReadOnly) The Account ID for this managed object. 
+* `admin_action`:(string) An operation that has to be perfomed on the switch or IOM port. Default value is None which means there will be no implicit port operation triggered.* `None` - No admin triggered action.* `ResetServerPortConfiguration` - Admin triggered operation to reset the server port to its original configuration. 
 * `admin_state`:(string) Admin configured state to disable the port.* `Enabled` - Admin configured Enabled State.* `Disabled` - Admin configured Disabled State. 
 * `aggregate_port_id`:(int) Breakout port Identifier of the Switch Interface.When a port is not configured as a breakout port, the aggregatePortId is set to 0, and unused.When a port is configured as a breakout port, the 'aggregatePortId' port number as labeled on the equipment,e.g. the id of the port on the switch. 
 * `ancestors`:(Array)(ReadOnly) An array of relationships to moBaseMo resources. 
@@ -30,9 +31,10 @@ This complex property has following sub-properties:
   + `moid`:(string) The Moid of the referenced REST resource. 
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
   + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
-* `config_state`:(string)(ReadOnly) The configured state of these settings in the target chassis. The value is any one of Applied, Applying, Failed. Applied - This state denotes that the admin state changes are applied successfully in the target FI domain. Applying - This state denotes that the admin state changes are being applied in the target FI domain. Failed - This state denotes that the admin state changes could not be applied in the target FI domain.* `None` - Nil value when no action has been triggered by the user.* `Applied` - User configured settings are in applied state.* `Applying` - User settings are being applied on the target server.* `Failed` - User configured settings could not be applied. 
+* `config_state`:(string) The configured state of these settings in the target chassis. The value is any one of Applied, Applying, Failed. Applied - This state denotes that the admin state changes are applied successfully in the target FI domain. Applying - This state denotes that the admin state changes are being applied in the target FI domain. Failed - This state denotes that the admin state changes could not be applied in the target FI domain.* `None` - Nil value when no action has been triggered by the user.* `Applied` - User configured settings are in applied state.* `Applying` - User settings are being applied on the target server.* `Failed` - User configured settings could not be applied. 
 * `create_time`:(string)(ReadOnly) The time when this managed object was created. 
 * `domain_group_moid`:(string)(ReadOnly) The DomainGroup ID for this managed object. 
+* `fex_id`:(int) FEX/IOM identifier to denote its Host ports in the format - FexId/SlotId/PortId. 
 * `mod_time`:(string)(ReadOnly) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `network_element`:(HashMap) - A reference to a networkElement resource.When the $expand query parameter is specified, the referenced resource is returned inline. 

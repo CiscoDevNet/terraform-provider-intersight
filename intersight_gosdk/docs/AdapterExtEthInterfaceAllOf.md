@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **ExtEthInterfaceId** | Pointer to **string** | Unique Identifier for an External Ethernet Interface within the adapter object. | [optional] [readonly] 
 **InterfaceType** | Pointer to **string** | Type of an External Ethernet Interface. | [optional] [readonly] 
 **MacAddress** | Pointer to **string** | MAC address of an External Ethernet Interface. | [optional] [readonly] 
+**OperReason** | Pointer to **[]string** |  | [optional] 
 **PeerAggrPortId** | Pointer to **int64** | Peer Aggregate Port Id attached to an External Ethernet Interface. | [optional] [readonly] 
 **PeerDn** | Pointer to **string** | DN of peer end-point attached to an External Ethernet Interface. | [optional] [readonly] 
 **PeerPortId** | Pointer to **int64** | Peer Port Id attached to an External Ethernet Interface. | [optional] [readonly] 
@@ -204,6 +205,41 @@ SetMacAddress sets MacAddress field to given value.
 
 HasMacAddress returns a boolean if a field has been set.
 
+### GetOperReason
+
+`func (o *AdapterExtEthInterfaceAllOf) GetOperReason() []string`
+
+GetOperReason returns the OperReason field if non-nil, zero value otherwise.
+
+### GetOperReasonOk
+
+`func (o *AdapterExtEthInterfaceAllOf) GetOperReasonOk() (*[]string, bool)`
+
+GetOperReasonOk returns a tuple with the OperReason field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOperReason
+
+`func (o *AdapterExtEthInterfaceAllOf) SetOperReason(v []string)`
+
+SetOperReason sets OperReason field to given value.
+
+### HasOperReason
+
+`func (o *AdapterExtEthInterfaceAllOf) HasOperReason() bool`
+
+HasOperReason returns a boolean if a field has been set.
+
+### SetOperReasonNil
+
+`func (o *AdapterExtEthInterfaceAllOf) SetOperReasonNil(b bool)`
+
+ SetOperReasonNil sets the value for OperReason to be an explicit nil
+
+### UnsetOperReason
+`func (o *AdapterExtEthInterfaceAllOf) UnsetOperReason()`
+
+UnsetOperReason ensures that no value is present for OperReason, not even an explicit nil
 ### GetPeerAggrPortId
 
 `func (o *AdapterExtEthInterfaceAllOf) GetPeerAggrPortId() int64`

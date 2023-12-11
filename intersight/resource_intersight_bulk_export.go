@@ -367,6 +367,17 @@ func resourceBulkExport() *schema.Resource {
 					},
 				},
 			},
+			"permission_id": {
+				Description: "The permission identifier which indicates the permission that current user has that will allow to start this export operation.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+					if val != nil {
+						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+					}
+					return
+				}},
 			"permission_resources": {
 				Description: "An array of relationships to moBaseMo resources.",
 				Type:        schema.TypeList,
@@ -466,6 +477,17 @@ func resourceBulkExport() *schema.Resource {
 					},
 				},
 			},
+			"user_id": {
+				Description: "The user identifier which indicates the user that started this export operation.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+					if val != nil {
+						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+					}
+					return
+				}},
 			"version_context": {
 				Description: "The versioning info for this managed object.",
 				Type:        schema.TypeList,
@@ -933,6 +955,10 @@ func resourceBulkExportRead(c context.Context, d *schema.ResourceData, meta inte
 		return diag.Errorf("error occurred while setting property Parent in BulkExport object: %s", err.Error())
 	}
 
+	if err := d.Set("permission_id", (s.GetPermissionId())); err != nil {
+		return diag.Errorf("error occurred while setting property PermissionId in BulkExport object: %s", err.Error())
+	}
+
 	if err := d.Set("permission_resources", flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property PermissionResources in BulkExport object: %s", err.Error())
 	}
@@ -951,6 +977,10 @@ func resourceBulkExportRead(c context.Context, d *schema.ResourceData, meta inte
 
 	if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property Tags in BulkExport object: %s", err.Error())
+	}
+
+	if err := d.Set("user_id", (s.GetUserId())); err != nil {
+		return diag.Errorf("error occurred while setting property UserId in BulkExport object: %s", err.Error())
 	}
 
 	if err := d.Set("version_context", flattenMapMoVersionContext(s.GetVersionContext(), d)); err != nil {

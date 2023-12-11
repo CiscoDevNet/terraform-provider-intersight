@@ -18,6 +18,8 @@ Name | Type | Description | Notes
 **PciAddr** | Pointer to **string** | The PCI address of the Host Ethernet Interface. | [optional] [readonly] 
 **PeerDn** | Pointer to **string** | The distinguished name of the peer endpoint connected to the Host Ethernet interface. | [optional] [readonly] 
 **PinGroupName** | Pointer to **string** | Name given for Lan PinGroup. | [optional] 
+**QinqEnabled** | Pointer to **bool** | Setting qinqEnabled to true if we have QinQ tagging enabled on the vNIC. | [optional] 
+**QinqVlan** | Pointer to **int64** | The VLAN ID for VIC QinQ (802.1Q) Tunneling. | [optional] [default to 2]
 **StandbyOperState** | Pointer to **string** | Standby Operational state of an Interface. | [optional] [readonly] 
 **StandbyVifId** | Pointer to **int64** | Identifier of the Standby virtual ethernet interface (Vethernet) on the networking component (e.g., Fabric Interconnect) for the corresponding Host Ethernet Interface (vNIC). | [optional] [readonly] 
 **VethAction** | Pointer to **string** | The action to be performed on the vethernet corresponding to the vNIC. * &#x60;None&#x60; - Default value for vif operation. * &#x60;ResetConnectivity&#x60; - Resets connectivity on both active and passive vif. * &#x60;ResetConnectivityActive&#x60; - Resets connectivity on the active vif. * &#x60;ResetConnectivityPassive&#x60; - Resets connectivity on the passive vif. * &#x60;Enable&#x60; - Enables the vif on both the FIs. * &#x60;Disable&#x60; - Disables the vif on both the FIs. * &#x60;EnableActive&#x60; - Enables the corresponding active vif. * &#x60;EnablePassive&#x60; - Enables the corresponding standby vif. * &#x60;DisableActive&#x60; - Disables the corresponding active vif. * &#x60;DisablePassive&#x60; - Disables the corresponding standby vif. | [optional] [default to "None"]
@@ -399,6 +401,56 @@ SetPinGroupName sets PinGroupName field to given value.
 `func (o *AdapterHostEthInterfaceAllOf) HasPinGroupName() bool`
 
 HasPinGroupName returns a boolean if a field has been set.
+
+### GetQinqEnabled
+
+`func (o *AdapterHostEthInterfaceAllOf) GetQinqEnabled() bool`
+
+GetQinqEnabled returns the QinqEnabled field if non-nil, zero value otherwise.
+
+### GetQinqEnabledOk
+
+`func (o *AdapterHostEthInterfaceAllOf) GetQinqEnabledOk() (*bool, bool)`
+
+GetQinqEnabledOk returns a tuple with the QinqEnabled field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetQinqEnabled
+
+`func (o *AdapterHostEthInterfaceAllOf) SetQinqEnabled(v bool)`
+
+SetQinqEnabled sets QinqEnabled field to given value.
+
+### HasQinqEnabled
+
+`func (o *AdapterHostEthInterfaceAllOf) HasQinqEnabled() bool`
+
+HasQinqEnabled returns a boolean if a field has been set.
+
+### GetQinqVlan
+
+`func (o *AdapterHostEthInterfaceAllOf) GetQinqVlan() int64`
+
+GetQinqVlan returns the QinqVlan field if non-nil, zero value otherwise.
+
+### GetQinqVlanOk
+
+`func (o *AdapterHostEthInterfaceAllOf) GetQinqVlanOk() (*int64, bool)`
+
+GetQinqVlanOk returns a tuple with the QinqVlan field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetQinqVlan
+
+`func (o *AdapterHostEthInterfaceAllOf) SetQinqVlan(v int64)`
+
+SetQinqVlan sets QinqVlan field to given value.
+
+### HasQinqVlan
+
+`func (o *AdapterHostEthInterfaceAllOf) HasQinqVlan() bool`
+
+HasQinqVlan returns a boolean if a field has been set.
 
 ### GetStandbyOperState
 

@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "connector.HttpRequest"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "connector.HttpRequest"]
-**AssetTargetMoid** | Pointer to **string** | The Target endpoint Moid which is used to fetch the previously persisted Target information in Intersight to create HTTP request along with any authentication info specifed. | [optional] 
+**AssetTargetMoid** | Pointer to **string** | The Target endpoint Moid which is used to fetch the previously persisted Target information in Intersight to create HTTP request along with any authentication info specified. | [optional] 
 **Body** | Pointer to **string** | Contents of the request body to send for PUT/PATCH/POST requests. | [optional] 
 **DialTimeout** | Pointer to **int64** | The timeout for establishing the TCP connection to the target host. If not set, the request timeout value is used. | [optional] 
 **EndpointMoid** | Pointer to **string** | The MO id of the asset.EndpointConnection this request is directed to. If set, plugin will insert connection details into the request, including credentials if defined. | [optional] 

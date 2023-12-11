@@ -6,12 +6,13 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "ether.NetworkPort"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "ether.NetworkPort"]
-**ModuleId** | Pointer to **int64** | Febric extender identifier for this port. | [optional] 
-**PeerDn** | Pointer to **string** | Peer DN for network host port of fabric extender. | [optional] 
-**PortId** | Pointer to **int64** | Switch physical port identifier. | [optional] 
-**SlotId** | Pointer to **int64** | Switch expansion slot module identifier. | [optional] 
+**ModuleId** | Pointer to **int64** | Febric extender identifier for this port. | [optional] [readonly] 
+**OperReason** | Pointer to **[]string** |  | [optional] 
+**PeerDn** | Pointer to **string** | Peer DN for network host port of fabric extender. | [optional] [readonly] 
+**PortId** | Pointer to **int64** | Switch physical port identifier. | [optional] [readonly] 
+**SlotId** | Pointer to **int64** | Switch expansion slot module identifier. | [optional] [readonly] 
 **Speed** | Pointer to **string** | Network Port operational speed of IO card or fabric extender. | [optional] [readonly] 
-**SwitchId** | Pointer to **string** | Switch Identifier that is local to a cluster. | [optional] 
+**SwitchId** | Pointer to **string** | Switch Identifier that is local to a cluster. | [optional] [readonly] 
 **EquipmentIoCardBase** | Pointer to [**EquipmentIoCardBaseRelationship**](EquipmentIoCardBaseRelationship.md) |  | [optional] 
 **RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
@@ -99,6 +100,41 @@ SetModuleId sets ModuleId field to given value.
 
 HasModuleId returns a boolean if a field has been set.
 
+### GetOperReason
+
+`func (o *EtherNetworkPortAllOf) GetOperReason() []string`
+
+GetOperReason returns the OperReason field if non-nil, zero value otherwise.
+
+### GetOperReasonOk
+
+`func (o *EtherNetworkPortAllOf) GetOperReasonOk() (*[]string, bool)`
+
+GetOperReasonOk returns a tuple with the OperReason field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOperReason
+
+`func (o *EtherNetworkPortAllOf) SetOperReason(v []string)`
+
+SetOperReason sets OperReason field to given value.
+
+### HasOperReason
+
+`func (o *EtherNetworkPortAllOf) HasOperReason() bool`
+
+HasOperReason returns a boolean if a field has been set.
+
+### SetOperReasonNil
+
+`func (o *EtherNetworkPortAllOf) SetOperReasonNil(b bool)`
+
+ SetOperReasonNil sets the value for OperReason to be an explicit nil
+
+### UnsetOperReason
+`func (o *EtherNetworkPortAllOf) UnsetOperReason()`
+
+UnsetOperReason ensures that no value is present for OperReason, not even an explicit nil
 ### GetPeerDn
 
 `func (o *EtherNetworkPortAllOf) GetPeerDn() string`

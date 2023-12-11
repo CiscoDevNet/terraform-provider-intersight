@@ -543,7 +543,7 @@ func getWorkflowWorkflowInfoSchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"status": {
-			Description: "A status of the workflow (RUNNING, WAITING, COMPLETED, TIME_OUT, FAILED).",
+			Description: "A status of the workflow (RUNNING, WAITING, COMPLETED, TIME_OUT, FAILED). The \"status\" field has been deprecated and is now replaced with the \"workflowStatus\" field.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -899,6 +899,11 @@ func getWorkflowWorkflowInfoSchema() map[string]*schema.Schema {
 					},
 				},
 			},
+		},
+		"workflow_status": {
+			Description: "The current state of the workflow execution instance. A draft workflow execution will be in NotStarted state and when \"Start\" action is issued then the workflow will move into Waiting state until the first task of the workflow is scheduled at which time it will move into InProgress state. When execution reaches a final state it move to either Completed, Failed or Terminated state. For more details look at the description for each state.\n* `NotStarted` - Initially all the workflow instances are at \"NotStarted\" state. A workflow can be drafted in this state by issuing Create action. When a workflow is in this state the inputs can be updated until the workflow is started.\n* `InProgress` - A workflow execution moves into \"InProgress\" state when the first task of the workflow is scheduled for execution and continues to remain in that state as long as there are tasks executing or yet to be scheduled for execution.\n* `Waiting` - Workflow can go to waiting state due to execution of wait task present in the workflow or the workflow has not started yet either due to duplicate workflow is running or due to workflow throttling. Once Workflow engine picks up the workflow for execution, it will move to in progress state.\n* `Completed` - A workflow execution moves into Completed state when the execution path of the workflow has reached the Success node in the workflow design and there are no more tasks to be executed. Completed is the final state for the workflow execution instance and no further actions are allowed on this workflow instance.\n* `Failed` - A workflow execution moves into a Failed state when the execution path of the workflow has reached the Failed node in the workflow design and there are no more tasks to be scheduled. A Failed node can be reached when the last executed task has failed or timed out and there are no further retries available for the task. Also as per the workflow design, the last executed task did not specify an OnFailure task to be executed and hence by default, the execution will reach the Failed node. Actions like \"Rerun\", \"RetryFailed\" and \"RetryFromTask\" can be issued on failed workflow instances. Please refer to the \"Action\" description for more details.\n* `Terminated` - A workflow execution moves to Terminated state when user issues a \"Cancel\" action or due to internal errors caused during workflow execution. e.g. - Task input transformation has failed. Terminated is a final state of the workflow, no further action are allowed on this workflow instance.\n* `Canceled` - A workflow execution moves to Canceled state when a user issues a \"Cancel\" action. Cancel is not a final state, the workflow engine will issue cancel to all the running tasks and then move the workflow to the \"Terminated\" state.\n* `Paused` - A workflow execution moves to Paused state when user issues a \"Pause\" action. When in paused state the current running task will complete its execution but no further tasks will be scheduled until the workflow is resumed. A paused workflow is resumed when the user issues a \"Resume\" action. Paused workflows can be canceled by user.",
+			Type:        schema.TypeString,
+			Optional:    true,
 		},
 	}
 	return schemaMap
@@ -1816,6 +1821,11 @@ func dataSourceWorkflowWorkflowInfoRead(c context.Context, d *schema.ResourceDat
 		}
 	}
 
+	if v, ok := d.GetOk("workflow_status"); ok {
+		x := (v.(string))
+		o.SetWorkflowStatus(x)
+	}
+
 	data, err := o.MarshalJSON()
 	if err != nil {
 		return diag.Errorf("json marshal of WorkflowWorkflowInfo object failed with error : %s", err.Error())
@@ -1920,6 +1930,7 @@ func dataSourceWorkflowWorkflowInfoRead(c context.Context, d *schema.ResourceDat
 				temp["workflow_ctx"] = flattenMapWorkflowWorkflowCtx(s.GetWorkflowCtx(), d)
 
 				temp["workflow_definition"] = flattenMapWorkflowWorkflowDefinitionRelationship(s.GetWorkflowDefinition(), d)
+				temp["workflow_status"] = (s.GetWorkflowStatus())
 				workflowWorkflowInfoResults = append(workflowWorkflowInfoResults, temp)
 			}
 		}

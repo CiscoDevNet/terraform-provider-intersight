@@ -175,6 +175,11 @@ func getEtherNetworkPortSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"oper_reason": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Schema{
+				Type: schema.TypeString}},
 		"oper_state": {
 			Description: "Operational state of an Interface.",
 			Type:        schema.TypeString,
@@ -702,6 +707,17 @@ func dataSourceEtherNetworkPortRead(c context.Context, d *schema.ResourceData, m
 		o.SetObjectType(x)
 	}
 
+	if v, ok := d.GetOk("oper_reason"); ok {
+		x := make([]string, 0)
+		y := reflect.ValueOf(v)
+		for i := 0; i < y.Len(); i++ {
+			if y.Index(i).Interface() != nil {
+				x = append(x, y.Index(i).Interface().(string))
+			}
+		}
+		o.SetOperReason(x)
+	}
+
 	if v, ok := d.GetOk("oper_state"); ok {
 		x := (v.(string))
 		o.SetOperState(x)
@@ -1083,6 +1099,7 @@ func dataSourceEtherNetworkPortRead(c context.Context, d *schema.ResourceData, m
 				temp["module_id"] = (s.GetModuleId())
 				temp["moid"] = (s.GetMoid())
 				temp["object_type"] = (s.GetObjectType())
+				temp["oper_reason"] = (s.GetOperReason())
 				temp["oper_state"] = (s.GetOperState())
 				temp["owners"] = (s.GetOwners())
 

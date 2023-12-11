@@ -33,6 +33,8 @@ The following arguments can be used to get data of already created objects in In
 * `pci_addr`:(string) The PCI address of the Host Ethernet Interface. 
 * `peer_dn`:(string) The distinguished name of the peer endpoint connected to the Host Ethernet interface. 
 * `pin_group_name`:(string) Name given for Lan PinGroup. 
+* `qinq_enabled`:(bool) Setting qinqEnabled to true if we have QinQ tagging enabled on the vNIC. 
+* `qinq_vlan`:(int) The VLAN ID for VIC QinQ (802.1Q) Tunneling. 
 * `rn`:(string) The Relative Name uniquely identifies an object within a given context. 
 * `shared_scope`:(string) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
 * `standby_oper_state`:(string) Standby Operational state of an Interface. 

@@ -6,8 +6,10 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "fabric.PortOperation"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "fabric.PortOperation"]
+**AdminAction** | Pointer to **string** | An operation that has to be perfomed on the switch or IOM port. Default value is None which means there will be no implicit port operation triggered. * &#x60;None&#x60; - No admin triggered action. * &#x60;ResetServerPortConfiguration&#x60; - Admin triggered operation to reset the server port to its original configuration. | [optional] [default to "None"]
 **AdminState** | Pointer to **string** | Admin configured state to disable the port. * &#x60;Enabled&#x60; - Admin configured Enabled State. * &#x60;Disabled&#x60; - Admin configured Disabled State. | [optional] [default to "Enabled"]
-**ConfigState** | Pointer to **string** | The configured state of these settings in the target chassis. The value is any one of Applied, Applying, Failed. Applied - This state denotes that the admin state changes are applied successfully in the target FI domain. Applying - This state denotes that the admin state changes are being applied in the target FI domain. Failed - This state denotes that the admin state changes could not be applied in the target FI domain. * &#x60;None&#x60; - Nil value when no action has been triggered by the user. * &#x60;Applied&#x60; - User configured settings are in applied state. * &#x60;Applying&#x60; - User settings are being applied on the target server. * &#x60;Failed&#x60; - User configured settings could not be applied. | [optional] [readonly] [default to "None"]
+**ConfigState** | Pointer to **string** | The configured state of these settings in the target chassis. The value is any one of Applied, Applying, Failed. Applied - This state denotes that the admin state changes are applied successfully in the target FI domain. Applying - This state denotes that the admin state changes are being applied in the target FI domain. Failed - This state denotes that the admin state changes could not be applied in the target FI domain. * &#x60;None&#x60; - Nil value when no action has been triggered by the user. * &#x60;Applied&#x60; - User configured settings are in applied state. * &#x60;Applying&#x60; - User settings are being applied on the target server. * &#x60;Failed&#x60; - User configured settings could not be applied. | [optional] [default to "None"]
+**FexId** | Pointer to **int64** | FEX/IOM identifier to denote its Host ports in the format - FexId/SlotId/PortId. | [optional] 
 **NetworkElement** | Pointer to [**NetworkElementRelationship**](NetworkElementRelationship.md) |  | [optional] 
 
 ## Methods
@@ -69,6 +71,31 @@ and a boolean to check if the value has been set.
 SetObjectType sets ObjectType field to given value.
 
 
+### GetAdminAction
+
+`func (o *FabricPortOperation) GetAdminAction() string`
+
+GetAdminAction returns the AdminAction field if non-nil, zero value otherwise.
+
+### GetAdminActionOk
+
+`func (o *FabricPortOperation) GetAdminActionOk() (*string, bool)`
+
+GetAdminActionOk returns a tuple with the AdminAction field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAdminAction
+
+`func (o *FabricPortOperation) SetAdminAction(v string)`
+
+SetAdminAction sets AdminAction field to given value.
+
+### HasAdminAction
+
+`func (o *FabricPortOperation) HasAdminAction() bool`
+
+HasAdminAction returns a boolean if a field has been set.
+
 ### GetAdminState
 
 `func (o *FabricPortOperation) GetAdminState() string`
@@ -118,6 +145,31 @@ SetConfigState sets ConfigState field to given value.
 `func (o *FabricPortOperation) HasConfigState() bool`
 
 HasConfigState returns a boolean if a field has been set.
+
+### GetFexId
+
+`func (o *FabricPortOperation) GetFexId() int64`
+
+GetFexId returns the FexId field if non-nil, zero value otherwise.
+
+### GetFexIdOk
+
+`func (o *FabricPortOperation) GetFexIdOk() (*int64, bool)`
+
+GetFexIdOk returns a tuple with the FexId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFexId
+
+`func (o *FabricPortOperation) SetFexId(v int64)`
+
+SetFexId sets FexId field to given value.
+
+### HasFexId
+
+`func (o *FabricPortOperation) HasFexId() bool`
+
+HasFexId returns a boolean if a field has been set.
 
 ### GetNetworkElement
 

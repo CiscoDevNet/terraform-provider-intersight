@@ -319,7 +319,7 @@ func getBulkExportedItemSchema() map[string]*schema.Schema {
 			},
 		},
 		"service_name": {
-			Description: "Name of the service that owns the item MO.",
+			Description: "Name of the target service that owns the item MO. Service responsible for handling exported item mo notifications.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
