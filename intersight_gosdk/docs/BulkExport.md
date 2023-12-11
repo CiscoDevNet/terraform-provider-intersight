@@ -12,8 +12,10 @@ Name | Type | Description | Notes
 **ImportOrder** | Pointer to **interface{}** | Contains the list of import order. | [optional] [readonly] 
 **Items** | Pointer to [**[]MoMoRef**](MoMoRef.md) |  | [optional] 
 **Name** | Pointer to **string** | An identifier for the export instance. Name can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-) or an underscore (_). | [optional] 
+**PermissionId** | Pointer to **string** | The permission identifier which indicates the permission that current user has that will allow to start this export operation. | [optional] [readonly] 
 **Status** | Pointer to **string** | Status of the export operation. * &#x60;&#x60; - The operation has not started. * &#x60;InProgress&#x60; - The operation is in progress. * &#x60;OrderInProgress&#x60; - The archive operation is in progress. * &#x60;Success&#x60; - The operation has succeeded. * &#x60;Failed&#x60; - The operation has failed. * &#x60;OperationTimedOut&#x60; - The operation has timed out. * &#x60;OperationCancelled&#x60; - The operation has been cancelled. * &#x60;CancelInProgress&#x60; - The operation is being cancelled. | [optional] [readonly] [default to ""]
 **StatusMessage** | Pointer to **string** | Status message associated with failures or progress indication. | [optional] [readonly] 
+**UserId** | Pointer to **string** | The user identifier which indicates the user that started this export operation. | [optional] [readonly] 
 **ExportedItems** | Pointer to [**[]BulkExportedItemRelationship**](BulkExportedItemRelationship.md) | An array of relationships to bulkExportedItem resources. | [optional] [readonly] 
 **Organization** | Pointer to [**OrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
 
@@ -256,6 +258,31 @@ SetName sets Name field to given value.
 
 HasName returns a boolean if a field has been set.
 
+### GetPermissionId
+
+`func (o *BulkExport) GetPermissionId() string`
+
+GetPermissionId returns the PermissionId field if non-nil, zero value otherwise.
+
+### GetPermissionIdOk
+
+`func (o *BulkExport) GetPermissionIdOk() (*string, bool)`
+
+GetPermissionIdOk returns a tuple with the PermissionId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPermissionId
+
+`func (o *BulkExport) SetPermissionId(v string)`
+
+SetPermissionId sets PermissionId field to given value.
+
+### HasPermissionId
+
+`func (o *BulkExport) HasPermissionId() bool`
+
+HasPermissionId returns a boolean if a field has been set.
+
 ### GetStatus
 
 `func (o *BulkExport) GetStatus() string`
@@ -305,6 +332,31 @@ SetStatusMessage sets StatusMessage field to given value.
 `func (o *BulkExport) HasStatusMessage() bool`
 
 HasStatusMessage returns a boolean if a field has been set.
+
+### GetUserId
+
+`func (o *BulkExport) GetUserId() string`
+
+GetUserId returns the UserId field if non-nil, zero value otherwise.
+
+### GetUserIdOk
+
+`func (o *BulkExport) GetUserIdOk() (*string, bool)`
+
+GetUserIdOk returns a tuple with the UserId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUserId
+
+`func (o *BulkExport) SetUserId(v string)`
+
+SetUserId sets UserId field to given value.
+
+### HasUserId
+
+`func (o *BulkExport) HasUserId() bool`
+
+HasUserId returns a boolean if a field has been set.
 
 ### GetExportedItems
 

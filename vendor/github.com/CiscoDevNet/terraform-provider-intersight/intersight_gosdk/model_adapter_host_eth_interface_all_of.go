@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-14628
+API version: 1.0.11-14828
 Contact: intersight@cisco.com
 */
 
@@ -44,6 +44,10 @@ type AdapterHostEthInterfaceAllOf struct {
 	PeerDn *string `json:"PeerDn,omitempty"`
 	// Name given for Lan PinGroup.
 	PinGroupName *string `json:"PinGroupName,omitempty"`
+	// Setting qinqEnabled to true if we have QinQ tagging enabled on the vNIC.
+	QinqEnabled *bool `json:"QinqEnabled,omitempty"`
+	// The VLAN ID for VIC QinQ (802.1Q) Tunneling.
+	QinqVlan *int64 `json:"QinqVlan,omitempty"`
 	// Standby Operational state of an Interface.
 	StandbyOperState *string `json:"StandbyOperState,omitempty"`
 	// Identifier of the Standby virtual ethernet interface (Vethernet) on the networking component (e.g., Fabric Interconnect) for the corresponding Host Ethernet Interface (vNIC).
@@ -75,6 +79,8 @@ func NewAdapterHostEthInterfaceAllOf(classId string, objectType string) *Adapter
 	this := AdapterHostEthInterfaceAllOf{}
 	this.ClassId = classId
 	this.ObjectType = objectType
+	var qinqVlan int64 = 2
+	this.QinqVlan = &qinqVlan
 	var vethAction string = "None"
 	this.VethAction = &vethAction
 	return &this
@@ -89,6 +95,8 @@ func NewAdapterHostEthInterfaceAllOfWithDefaults() *AdapterHostEthInterfaceAllOf
 	this.ClassId = classId
 	var objectType string = "adapter.HostEthInterface"
 	this.ObjectType = objectType
+	var qinqVlan int64 = 2
+	this.QinqVlan = &qinqVlan
 	var vethAction string = "None"
 	this.VethAction = &vethAction
 	return &this
@@ -527,6 +535,70 @@ func (o *AdapterHostEthInterfaceAllOf) SetPinGroupName(v string) {
 	o.PinGroupName = &v
 }
 
+// GetQinqEnabled returns the QinqEnabled field value if set, zero value otherwise.
+func (o *AdapterHostEthInterfaceAllOf) GetQinqEnabled() bool {
+	if o == nil || o.QinqEnabled == nil {
+		var ret bool
+		return ret
+	}
+	return *o.QinqEnabled
+}
+
+// GetQinqEnabledOk returns a tuple with the QinqEnabled field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AdapterHostEthInterfaceAllOf) GetQinqEnabledOk() (*bool, bool) {
+	if o == nil || o.QinqEnabled == nil {
+		return nil, false
+	}
+	return o.QinqEnabled, true
+}
+
+// HasQinqEnabled returns a boolean if a field has been set.
+func (o *AdapterHostEthInterfaceAllOf) HasQinqEnabled() bool {
+	if o != nil && o.QinqEnabled != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetQinqEnabled gets a reference to the given bool and assigns it to the QinqEnabled field.
+func (o *AdapterHostEthInterfaceAllOf) SetQinqEnabled(v bool) {
+	o.QinqEnabled = &v
+}
+
+// GetQinqVlan returns the QinqVlan field value if set, zero value otherwise.
+func (o *AdapterHostEthInterfaceAllOf) GetQinqVlan() int64 {
+	if o == nil || o.QinqVlan == nil {
+		var ret int64
+		return ret
+	}
+	return *o.QinqVlan
+}
+
+// GetQinqVlanOk returns a tuple with the QinqVlan field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AdapterHostEthInterfaceAllOf) GetQinqVlanOk() (*int64, bool) {
+	if o == nil || o.QinqVlan == nil {
+		return nil, false
+	}
+	return o.QinqVlan, true
+}
+
+// HasQinqVlan returns a boolean if a field has been set.
+func (o *AdapterHostEthInterfaceAllOf) HasQinqVlan() bool {
+	if o != nil && o.QinqVlan != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetQinqVlan gets a reference to the given int64 and assigns it to the QinqVlan field.
+func (o *AdapterHostEthInterfaceAllOf) SetQinqVlan(v int64) {
+	o.QinqVlan = &v
+}
+
 // GetStandbyOperState returns the StandbyOperState field value if set, zero value otherwise.
 func (o *AdapterHostEthInterfaceAllOf) GetStandbyOperState() string {
 	if o == nil || o.StandbyOperState == nil {
@@ -955,6 +1027,12 @@ func (o AdapterHostEthInterfaceAllOf) MarshalJSON() ([]byte, error) {
 	if o.PinGroupName != nil {
 		toSerialize["PinGroupName"] = o.PinGroupName
 	}
+	if o.QinqEnabled != nil {
+		toSerialize["QinqEnabled"] = o.QinqEnabled
+	}
+	if o.QinqVlan != nil {
+		toSerialize["QinqVlan"] = o.QinqVlan
+	}
 	if o.StandbyOperState != nil {
 		toSerialize["StandbyOperState"] = o.StandbyOperState
 	}
@@ -1023,6 +1101,8 @@ func (o *AdapterHostEthInterfaceAllOf) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "PciAddr")
 		delete(additionalProperties, "PeerDn")
 		delete(additionalProperties, "PinGroupName")
+		delete(additionalProperties, "QinqEnabled")
+		delete(additionalProperties, "QinqVlan")
 		delete(additionalProperties, "StandbyOperState")
 		delete(additionalProperties, "StandbyVifId")
 		delete(additionalProperties, "VethAction")

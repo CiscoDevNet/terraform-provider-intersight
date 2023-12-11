@@ -1,0 +1,98 @@
+# HyperflexStartReduceReSync
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "hyperflex.StartReduceReSync"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "hyperflex.StartReduceReSync"]
+**Operation** | Pointer to **string** | The cleanup operation to perform. * &#x60;NoOp&#x60; - Does not perform any operation when the API is called. * &#x60;StartReduceResync&#x60; - Start the execution of reduce re-sync and stale mirror cleanup for the HyperFlex clusters associated with the account. | [optional] [default to "NoOp"]
+
+## Methods
+
+### NewHyperflexStartReduceReSync
+
+`func NewHyperflexStartReduceReSync(classId string, objectType string, ) *HyperflexStartReduceReSync`
+
+NewHyperflexStartReduceReSync instantiates a new HyperflexStartReduceReSync object
+This constructor will assign default values to properties that have it defined,
+and makes sure properties required by API are set, but the set of arguments
+will change when the set of required properties is changed
+
+### NewHyperflexStartReduceReSyncWithDefaults
+
+`func NewHyperflexStartReduceReSyncWithDefaults() *HyperflexStartReduceReSync`
+
+NewHyperflexStartReduceReSyncWithDefaults instantiates a new HyperflexStartReduceReSync object
+This constructor will only assign default values to properties that have it defined,
+but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *HyperflexStartReduceReSync) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *HyperflexStartReduceReSync) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *HyperflexStartReduceReSync) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *HyperflexStartReduceReSync) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *HyperflexStartReduceReSync) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *HyperflexStartReduceReSync) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
+
+### GetOperation
+
+`func (o *HyperflexStartReduceReSync) GetOperation() string`
+
+GetOperation returns the Operation field if non-nil, zero value otherwise.
+
+### GetOperationOk
+
+`func (o *HyperflexStartReduceReSync) GetOperationOk() (*string, bool)`
+
+GetOperationOk returns a tuple with the Operation field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOperation
+
+`func (o *HyperflexStartReduceReSync) SetOperation(v string)`
+
+SetOperation sets Operation field to given value.
+
+### HasOperation
+
+`func (o *HyperflexStartReduceReSync) HasOperation() bool`
+
+HasOperation returns a boolean if a field has been set.
+
+
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+

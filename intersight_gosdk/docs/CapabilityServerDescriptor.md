@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "capability.ServerDescriptor"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "capability.ServerDescriptor"]
 **IsNcsiEnabled** | Pointer to **bool** | Indicates whether the CIMC to VIC side-band interface is enabled on the server. | [optional] 
+**MlomAdapterPcieSlotNumber** | Pointer to **int64** | Indicates PCIe Slot numerical value for each Server model MLOM slot. | [optional] 
 **ServerFormFactor** | Pointer to **string** | The form factor (blade/rack/etc) of the server. * &#x60;unknown&#x60; - The form factor of the server is unknown. * &#x60;blade&#x60; - Blade server form factor. * &#x60;rack&#x60; - Rack unit server form factor. | [optional] [readonly] [default to "unknown"]
 
 ## Methods
@@ -92,6 +93,31 @@ SetIsNcsiEnabled sets IsNcsiEnabled field to given value.
 `func (o *CapabilityServerDescriptor) HasIsNcsiEnabled() bool`
 
 HasIsNcsiEnabled returns a boolean if a field has been set.
+
+### GetMlomAdapterPcieSlotNumber
+
+`func (o *CapabilityServerDescriptor) GetMlomAdapterPcieSlotNumber() int64`
+
+GetMlomAdapterPcieSlotNumber returns the MlomAdapterPcieSlotNumber field if non-nil, zero value otherwise.
+
+### GetMlomAdapterPcieSlotNumberOk
+
+`func (o *CapabilityServerDescriptor) GetMlomAdapterPcieSlotNumberOk() (*int64, bool)`
+
+GetMlomAdapterPcieSlotNumberOk returns a tuple with the MlomAdapterPcieSlotNumber field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMlomAdapterPcieSlotNumber
+
+`func (o *CapabilityServerDescriptor) SetMlomAdapterPcieSlotNumber(v int64)`
+
+SetMlomAdapterPcieSlotNumber sets MlomAdapterPcieSlotNumber field to given value.
+
+### HasMlomAdapterPcieSlotNumber
+
+`func (o *CapabilityServerDescriptor) HasMlomAdapterPcieSlotNumber() bool`
+
+HasMlomAdapterPcieSlotNumber returns a boolean if a field has been set.
 
 ### GetServerFormFactor
 

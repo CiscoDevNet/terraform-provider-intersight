@@ -204,10 +204,11 @@ func resourceIamUserGroup() *schema.Resource {
 				ForceNew:    true,
 			},
 			"name": {
-				Description: "The name of the user group which the dynamic user belongs to.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				ForceNew:    true,
+				Description:  "The name of the user group which the dynamic user belongs to.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringLenBetween(1, 2048),
+				Optional:     true,
+				ForceNew:     true,
 			},
 			"object_type": {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",

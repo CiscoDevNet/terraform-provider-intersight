@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-14628
+API version: 1.0.11-14828
 Contact: intersight@cisco.com
 */
 
@@ -24,10 +24,14 @@ type FabricPortOperation struct {
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
+	// An operation that has to be perfomed on the switch or IOM port. Default value is None which means there will be no implicit port operation triggered. * `None` - No admin triggered action. * `ResetServerPortConfiguration` - Admin triggered operation to reset the server port to its original configuration.
+	AdminAction *string `json:"AdminAction,omitempty"`
 	// Admin configured state to disable the port. * `Enabled` - Admin configured Enabled State. * `Disabled` - Admin configured Disabled State.
 	AdminState *string `json:"AdminState,omitempty"`
 	// The configured state of these settings in the target chassis. The value is any one of Applied, Applying, Failed. Applied - This state denotes that the admin state changes are applied successfully in the target FI domain. Applying - This state denotes that the admin state changes are being applied in the target FI domain. Failed - This state denotes that the admin state changes could not be applied in the target FI domain. * `None` - Nil value when no action has been triggered by the user. * `Applied` - User configured settings are in applied state. * `Applying` - User settings are being applied on the target server. * `Failed` - User configured settings could not be applied.
-	ConfigState          *string                     `json:"ConfigState,omitempty"`
+	ConfigState *string `json:"ConfigState,omitempty"`
+	// FEX/IOM identifier to denote its Host ports in the format - FexId/SlotId/PortId.
+	FexId                *int64                      `json:"FexId,omitempty"`
 	NetworkElement       *NetworkElementRelationship `json:"NetworkElement,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
@@ -42,8 +46,12 @@ func NewFabricPortOperation(classId string, objectType string) *FabricPortOperat
 	this := FabricPortOperation{}
 	this.ClassId = classId
 	this.ObjectType = objectType
+	var adminAction string = "None"
+	this.AdminAction = &adminAction
 	var adminState string = "Enabled"
 	this.AdminState = &adminState
+	var configState string = "None"
+	this.ConfigState = &configState
 	return &this
 }
 
@@ -56,8 +64,12 @@ func NewFabricPortOperationWithDefaults() *FabricPortOperation {
 	this.ClassId = classId
 	var objectType string = "fabric.PortOperation"
 	this.ObjectType = objectType
+	var adminAction string = "None"
+	this.AdminAction = &adminAction
 	var adminState string = "Enabled"
 	this.AdminState = &adminState
+	var configState string = "None"
+	this.ConfigState = &configState
 	return &this
 }
 
@@ -107,6 +119,38 @@ func (o *FabricPortOperation) GetObjectTypeOk() (*string, bool) {
 // SetObjectType sets field value
 func (o *FabricPortOperation) SetObjectType(v string) {
 	o.ObjectType = v
+}
+
+// GetAdminAction returns the AdminAction field value if set, zero value otherwise.
+func (o *FabricPortOperation) GetAdminAction() string {
+	if o == nil || o.AdminAction == nil {
+		var ret string
+		return ret
+	}
+	return *o.AdminAction
+}
+
+// GetAdminActionOk returns a tuple with the AdminAction field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FabricPortOperation) GetAdminActionOk() (*string, bool) {
+	if o == nil || o.AdminAction == nil {
+		return nil, false
+	}
+	return o.AdminAction, true
+}
+
+// HasAdminAction returns a boolean if a field has been set.
+func (o *FabricPortOperation) HasAdminAction() bool {
+	if o != nil && o.AdminAction != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetAdminAction gets a reference to the given string and assigns it to the AdminAction field.
+func (o *FabricPortOperation) SetAdminAction(v string) {
+	o.AdminAction = &v
 }
 
 // GetAdminState returns the AdminState field value if set, zero value otherwise.
@@ -173,6 +217,38 @@ func (o *FabricPortOperation) SetConfigState(v string) {
 	o.ConfigState = &v
 }
 
+// GetFexId returns the FexId field value if set, zero value otherwise.
+func (o *FabricPortOperation) GetFexId() int64 {
+	if o == nil || o.FexId == nil {
+		var ret int64
+		return ret
+	}
+	return *o.FexId
+}
+
+// GetFexIdOk returns a tuple with the FexId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FabricPortOperation) GetFexIdOk() (*int64, bool) {
+	if o == nil || o.FexId == nil {
+		return nil, false
+	}
+	return o.FexId, true
+}
+
+// HasFexId returns a boolean if a field has been set.
+func (o *FabricPortOperation) HasFexId() bool {
+	if o != nil && o.FexId != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetFexId gets a reference to the given int64 and assigns it to the FexId field.
+func (o *FabricPortOperation) SetFexId(v int64) {
+	o.FexId = &v
+}
+
 // GetNetworkElement returns the NetworkElement field value if set, zero value otherwise.
 func (o *FabricPortOperation) GetNetworkElement() NetworkElementRelationship {
 	if o == nil || o.NetworkElement == nil {
@@ -221,11 +297,17 @@ func (o FabricPortOperation) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["ObjectType"] = o.ObjectType
 	}
+	if o.AdminAction != nil {
+		toSerialize["AdminAction"] = o.AdminAction
+	}
 	if o.AdminState != nil {
 		toSerialize["AdminState"] = o.AdminState
 	}
 	if o.ConfigState != nil {
 		toSerialize["ConfigState"] = o.ConfigState
+	}
+	if o.FexId != nil {
+		toSerialize["FexId"] = o.FexId
 	}
 	if o.NetworkElement != nil {
 		toSerialize["NetworkElement"] = o.NetworkElement
@@ -244,10 +326,14 @@ func (o *FabricPortOperation) UnmarshalJSON(bytes []byte) (err error) {
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 		ObjectType string `json:"ObjectType"`
+		// An operation that has to be perfomed on the switch or IOM port. Default value is None which means there will be no implicit port operation triggered. * `None` - No admin triggered action. * `ResetServerPortConfiguration` - Admin triggered operation to reset the server port to its original configuration.
+		AdminAction *string `json:"AdminAction,omitempty"`
 		// Admin configured state to disable the port. * `Enabled` - Admin configured Enabled State. * `Disabled` - Admin configured Disabled State.
 		AdminState *string `json:"AdminState,omitempty"`
 		// The configured state of these settings in the target chassis. The value is any one of Applied, Applying, Failed. Applied - This state denotes that the admin state changes are applied successfully in the target FI domain. Applying - This state denotes that the admin state changes are being applied in the target FI domain. Failed - This state denotes that the admin state changes could not be applied in the target FI domain. * `None` - Nil value when no action has been triggered by the user. * `Applied` - User configured settings are in applied state. * `Applying` - User settings are being applied on the target server. * `Failed` - User configured settings could not be applied.
-		ConfigState    *string                     `json:"ConfigState,omitempty"`
+		ConfigState *string `json:"ConfigState,omitempty"`
+		// FEX/IOM identifier to denote its Host ports in the format - FexId/SlotId/PortId.
+		FexId          *int64                      `json:"FexId,omitempty"`
 		NetworkElement *NetworkElementRelationship `json:"NetworkElement,omitempty"`
 	}
 
@@ -258,8 +344,10 @@ func (o *FabricPortOperation) UnmarshalJSON(bytes []byte) (err error) {
 		varFabricPortOperation := _FabricPortOperation{}
 		varFabricPortOperation.ClassId = varFabricPortOperationWithoutEmbeddedStruct.ClassId
 		varFabricPortOperation.ObjectType = varFabricPortOperationWithoutEmbeddedStruct.ObjectType
+		varFabricPortOperation.AdminAction = varFabricPortOperationWithoutEmbeddedStruct.AdminAction
 		varFabricPortOperation.AdminState = varFabricPortOperationWithoutEmbeddedStruct.AdminState
 		varFabricPortOperation.ConfigState = varFabricPortOperationWithoutEmbeddedStruct.ConfigState
+		varFabricPortOperation.FexId = varFabricPortOperationWithoutEmbeddedStruct.FexId
 		varFabricPortOperation.NetworkElement = varFabricPortOperationWithoutEmbeddedStruct.NetworkElement
 		*o = FabricPortOperation(varFabricPortOperation)
 	} else {
@@ -280,8 +368,10 @@ func (o *FabricPortOperation) UnmarshalJSON(bytes []byte) (err error) {
 	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
+		delete(additionalProperties, "AdminAction")
 		delete(additionalProperties, "AdminState")
 		delete(additionalProperties, "ConfigState")
+		delete(additionalProperties, "FexId")
 		delete(additionalProperties, "NetworkElement")
 
 		// remove fields from embedded structs

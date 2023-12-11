@@ -414,6 +414,16 @@ func getAdapterHostEthInterfaceSchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"qinq_enabled": {
+			Description: "Setting qinqEnabled to true if we have QinQ tagging enabled on the vNIC.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
+		"qinq_vlan": {
+			Description: "The VLAN ID for VIC QinQ (802.1Q) Tunneling.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
 		"registered_device": {
 			Description: "A reference to a assetDeviceRegistration resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 			Type:        schema.TypeList,
@@ -1191,6 +1201,16 @@ func dataSourceAdapterHostEthInterfaceRead(c context.Context, d *schema.Resource
 		}
 	}
 
+	if v, ok := d.GetOkExists("qinq_enabled"); ok {
+		x := (v.(bool))
+		o.SetQinqEnabled(x)
+	}
+
+	if v, ok := d.GetOkExists("qinq_vlan"); ok {
+		x := int64(v.(int))
+		o.SetQinqVlan(x)
+	}
+
 	if v, ok := d.GetOk("registered_device"); ok {
 		p := make([]models.AssetDeviceRegistrationRelationship, 0, 1)
 		s := v.([]interface{})
@@ -1544,6 +1564,8 @@ func dataSourceAdapterHostEthInterfaceRead(c context.Context, d *schema.Resource
 				temp["pin_group_name"] = (s.GetPinGroupName())
 
 				temp["pinned_interface"] = flattenMapInventoryInterfaceRelationship(s.GetPinnedInterface(), d)
+				temp["qinq_enabled"] = (s.GetQinqEnabled())
+				temp["qinq_vlan"] = (s.GetQinqVlan())
 
 				temp["registered_device"] = flattenMapAssetDeviceRegistrationRelationship(s.GetRegisteredDevice(), d)
 				temp["rn"] = (s.GetRn())

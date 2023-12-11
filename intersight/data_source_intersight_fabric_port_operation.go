@@ -26,6 +26,11 @@ func getFabricPortOperationSchema() map[string]*schema.Schema {
 			Optional:         true,
 			DiffSuppressFunc: SuppressDiffAdditionProps,
 		},
+		"admin_action": {
+			Description: "An operation that has to be perfomed on the switch or IOM port. Default value is None which means there will be no implicit port operation triggered.\n* `None` - No admin triggered action.\n* `ResetServerPortConfiguration` - Admin triggered operation to reset the server port to its original configuration.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"admin_state": {
 			Description: "Admin configured state to disable the port.\n* `Enabled` - Admin configured Enabled State.\n* `Disabled` - Admin configured Disabled State.",
 			Type:        schema.TypeString,
@@ -88,6 +93,11 @@ func getFabricPortOperationSchema() map[string]*schema.Schema {
 		"domain_group_moid": {
 			Description: "The DomainGroup ID for this managed object.",
 			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"fex_id": {
+			Description: "FEX/IOM identifier to denote its Host ports in the format - FexId/SlotId/PortId.",
+			Type:        schema.TypeInt,
 			Optional:    true,
 		},
 		"mod_time": {
@@ -401,6 +411,11 @@ func dataSourceFabricPortOperationRead(c context.Context, d *schema.ResourceData
 		}
 	}
 
+	if v, ok := d.GetOk("admin_action"); ok {
+		x := (v.(string))
+		o.SetAdminAction(x)
+	}
+
 	if v, ok := d.GetOk("admin_state"); ok {
 		x := (v.(string))
 		o.SetAdminState(x)
@@ -469,6 +484,11 @@ func dataSourceFabricPortOperationRead(c context.Context, d *schema.ResourceData
 	if v, ok := d.GetOk("domain_group_moid"); ok {
 		x := (v.(string))
 		o.SetDomainGroupMoid(x)
+	}
+
+	if v, ok := d.GetOkExists("fex_id"); ok {
+		x := int64(v.(int))
+		o.SetFexId(x)
 	}
 
 	if v, ok := d.GetOk("mod_time"); ok {
@@ -782,6 +802,7 @@ func dataSourceFabricPortOperationRead(c context.Context, d *schema.ResourceData
 				var temp = make(map[string]interface{})
 				temp["account_moid"] = (s.GetAccountMoid())
 				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
+				temp["admin_action"] = (s.GetAdminAction())
 				temp["admin_state"] = (s.GetAdminState())
 				temp["aggregate_port_id"] = (s.GetAggregatePortId())
 
@@ -791,6 +812,7 @@ func dataSourceFabricPortOperationRead(c context.Context, d *schema.ResourceData
 
 				temp["create_time"] = (s.GetCreateTime()).String()
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
+				temp["fex_id"] = (s.GetFexId())
 
 				temp["mod_time"] = (s.GetModTime()).String()
 				temp["moid"] = (s.GetMoid())

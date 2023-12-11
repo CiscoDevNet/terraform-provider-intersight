@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **BaseMacAddress** | Pointer to **string** | Original Base Mac address of an adapter unit. | [optional] [readonly] 
 **ConnectionStatus** | Pointer to **string** | Connectivity Status of adapter - A or B or AB. | [optional] [readonly] 
 **Integrated** | Pointer to **string** | Cisco Integrated adapter or other type. | [optional] [readonly] 
+**OperReason** | Pointer to **[]string** |  | [optional] 
 **OperState** | Pointer to **string** | Operational state of an adapter unit. | [optional] [readonly] 
 **Operability** | Pointer to **string** | Operability state of an adapter unit. | [optional] [readonly] 
 **PartNumber** | Pointer to **string** | Part number of an adapter unit. | [optional] [readonly] 
@@ -187,6 +188,41 @@ SetIntegrated sets Integrated field to given value.
 
 HasIntegrated returns a boolean if a field has been set.
 
+### GetOperReason
+
+`func (o *AdapterUnit) GetOperReason() []string`
+
+GetOperReason returns the OperReason field if non-nil, zero value otherwise.
+
+### GetOperReasonOk
+
+`func (o *AdapterUnit) GetOperReasonOk() (*[]string, bool)`
+
+GetOperReasonOk returns a tuple with the OperReason field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOperReason
+
+`func (o *AdapterUnit) SetOperReason(v []string)`
+
+SetOperReason sets OperReason field to given value.
+
+### HasOperReason
+
+`func (o *AdapterUnit) HasOperReason() bool`
+
+HasOperReason returns a boolean if a field has been set.
+
+### SetOperReasonNil
+
+`func (o *AdapterUnit) SetOperReasonNil(b bool)`
+
+ SetOperReasonNil sets the value for OperReason to be an explicit nil
+
+### UnsetOperReason
+`func (o *AdapterUnit) UnsetOperReason()`
+
+UnsetOperReason ensures that no value is present for OperReason, not even an explicit nil
 ### GetOperState
 
 `func (o *AdapterUnit) GetOperState() string`

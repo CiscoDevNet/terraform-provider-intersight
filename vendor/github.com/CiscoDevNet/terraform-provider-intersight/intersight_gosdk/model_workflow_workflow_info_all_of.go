@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-14628
+API version: 1.0.11-14828
 Contact: intersight@cisco.com
 */
 
@@ -56,7 +56,8 @@ type WorkflowWorkflowInfoAllOf struct {
 	Src *string `json:"Src,omitempty"`
 	// The time when the workflow was started for execution.
 	StartTime *time.Time `json:"StartTime,omitempty"`
-	// A status of the workflow (RUNNING, WAITING, COMPLETED, TIME_OUT, FAILED).
+	// A status of the workflow (RUNNING, WAITING, COMPLETED, TIME_OUT, FAILED). The \"status\" field has been deprecated and is now replaced with the \"workflowStatus\" field.
+	// Deprecated
 	Status *string `json:"Status,omitempty"`
 	// The duration in hours after which the workflow info for successful workflow will be removed from database. The minimum is 1 hour, maximum is 365 days and default is 90 days.
 	SuccessWorkflowCleanupDuration *int64 `json:"SuccessWorkflowCleanupDuration,omitempty"`
@@ -71,8 +72,10 @@ type WorkflowWorkflowInfoAllOf struct {
 	// All the generated variables for the workflow. During workflow execution, the variables will be updated as per the variableParameters specified after each task execution.
 	Variable interface{} `json:"Variable,omitempty"`
 	// Denotes the reason workflow is in waiting status. * `None` - Wait reason is none, which indicates there is no reason for the waiting state. * `GatherTasks` - Wait reason is gathering tasks, which indicates the workflow is in this state in order to gather tasks. * `Duplicate` - Wait reason is duplicate, which indicates the workflow is a duplicate of current running workflow. * `RateLimit` - Wait reason is rate limit, which indicates the workflow is rate limited by account/instance level throttling threshold. * `WaitTask` - Wait reason when there are one or more wait tasks in the workflow which are yet to receive a task status update. * `PendingRetryFailed` - Wait reason when the workflow is pending a RetryFailed action. * `WaitingToStart` - Workflow is waiting to start on workflow engine.
-	WaitReason       *string                               `json:"WaitReason,omitempty"`
-	WorkflowCtx      NullableWorkflowWorkflowCtx           `json:"WorkflowCtx,omitempty"`
+	WaitReason  *string                     `json:"WaitReason,omitempty"`
+	WorkflowCtx NullableWorkflowWorkflowCtx `json:"WorkflowCtx,omitempty"`
+	// The current state of the workflow execution instance. A draft workflow execution will be in NotStarted state and when \"Start\" action is issued then the workflow will move into Waiting state until the first task of the workflow is scheduled at which time it will move into InProgress state. When execution reaches a final state it move to either Completed, Failed or Terminated state. For more details look at the description for each state. * `NotStarted` - Initially all the workflow instances are at \"NotStarted\" state. A workflow can be drafted in this state by issuing Create action. When a workflow is in this state the inputs can be updated until the workflow is started. * `InProgress` - A workflow execution moves into \"InProgress\" state when the first task of the workflow is scheduled for execution and continues to remain in that state as long as there are tasks executing or yet to be scheduled for execution. * `Waiting` - Workflow can go to waiting state due to execution of wait task present in the workflow or the workflow has not started yet either due to duplicate workflow is running or due to workflow throttling. Once Workflow engine picks up the workflow for execution, it will move to in progress state. * `Completed` - A workflow execution moves into Completed state when the execution path of the workflow has reached the Success node in the workflow design and there are no more tasks to be executed. Completed is the final state for the workflow execution instance and no further actions are allowed on this workflow instance. * `Failed` - A workflow execution moves into a Failed state when the execution path of the workflow has reached the Failed node in the workflow design and there are no more tasks to be scheduled. A Failed node can be reached when the last executed task has failed or timed out and there are no further retries available for the task. Also as per the workflow design, the last executed task did not specify an OnFailure task to be executed and hence by default, the execution will reach the Failed node. Actions like \"Rerun\", \"RetryFailed\" and \"RetryFromTask\" can be issued on failed workflow instances. Please refer to the \"Action\" description for more details. * `Terminated` - A workflow execution moves to Terminated state when user issues a \"Cancel\" action or due to internal errors caused during workflow execution. e.g. - Task input transformation has failed. Terminated is a final state of the workflow, no further action are allowed on this workflow instance. * `Canceled` - A workflow execution moves to Canceled state when a user issues a \"Cancel\" action. Cancel is not a final state, the workflow engine will issue cancel to all the running tasks and then move the workflow to the \"Terminated\" state. * `Paused` - A workflow execution moves to Paused state when user issues a \"Pause\" action. When in paused state the current running task will complete its execution but no further tasks will be scheduled until the workflow is resumed. A paused workflow is resumed when the user issues a \"Resume\" action. Paused workflows can be canceled by user.
+	WorkflowStatus   *string                               `json:"WorkflowStatus,omitempty"`
 	Account          *IamAccountRelationship               `json:"Account,omitempty"`
 	AssociatedObject *MoBaseMoRelationship                 `json:"AssociatedObject,omitempty"`
 	Organization     *OrganizationOrganizationRelationship `json:"Organization,omitempty"`
@@ -760,6 +763,7 @@ func (o *WorkflowWorkflowInfoAllOf) SetStartTime(v time.Time) {
 }
 
 // GetStatus returns the Status field value if set, zero value otherwise.
+// Deprecated
 func (o *WorkflowWorkflowInfoAllOf) GetStatus() string {
 	if o == nil || o.Status == nil {
 		var ret string
@@ -770,6 +774,7 @@ func (o *WorkflowWorkflowInfoAllOf) GetStatus() string {
 
 // GetStatusOk returns a tuple with the Status field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *WorkflowWorkflowInfoAllOf) GetStatusOk() (*string, bool) {
 	if o == nil || o.Status == nil {
 		return nil, false
@@ -787,6 +792,7 @@ func (o *WorkflowWorkflowInfoAllOf) HasStatus() bool {
 }
 
 // SetStatus gets a reference to the given string and assigns it to the Status field.
+// Deprecated
 func (o *WorkflowWorkflowInfoAllOf) SetStatus(v string) {
 	o.Status = &v
 }
@@ -1057,6 +1063,38 @@ func (o *WorkflowWorkflowInfoAllOf) SetWorkflowCtxNil() {
 // UnsetWorkflowCtx ensures that no value is present for WorkflowCtx, not even an explicit nil
 func (o *WorkflowWorkflowInfoAllOf) UnsetWorkflowCtx() {
 	o.WorkflowCtx.Unset()
+}
+
+// GetWorkflowStatus returns the WorkflowStatus field value if set, zero value otherwise.
+func (o *WorkflowWorkflowInfoAllOf) GetWorkflowStatus() string {
+	if o == nil || o.WorkflowStatus == nil {
+		var ret string
+		return ret
+	}
+	return *o.WorkflowStatus
+}
+
+// GetWorkflowStatusOk returns a tuple with the WorkflowStatus field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *WorkflowWorkflowInfoAllOf) GetWorkflowStatusOk() (*string, bool) {
+	if o == nil || o.WorkflowStatus == nil {
+		return nil, false
+	}
+	return o.WorkflowStatus, true
+}
+
+// HasWorkflowStatus returns a boolean if a field has been set.
+func (o *WorkflowWorkflowInfoAllOf) HasWorkflowStatus() bool {
+	if o != nil && o.WorkflowStatus != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetWorkflowStatus gets a reference to the given string and assigns it to the WorkflowStatus field.
+func (o *WorkflowWorkflowInfoAllOf) SetWorkflowStatus(v string) {
+	o.WorkflowStatus = &v
 }
 
 // GetAccount returns the Account field value if set, zero value otherwise.
@@ -1373,6 +1411,9 @@ func (o WorkflowWorkflowInfoAllOf) MarshalJSON() ([]byte, error) {
 	if o.WorkflowCtx.IsSet() {
 		toSerialize["WorkflowCtx"] = o.WorkflowCtx.Get()
 	}
+	if o.WorkflowStatus != nil {
+		toSerialize["WorkflowStatus"] = o.WorkflowStatus
+	}
 	if o.Account != nil {
 		toSerialize["Account"] = o.Account
 	}
@@ -1441,6 +1482,7 @@ func (o *WorkflowWorkflowInfoAllOf) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "Variable")
 		delete(additionalProperties, "WaitReason")
 		delete(additionalProperties, "WorkflowCtx")
+		delete(additionalProperties, "WorkflowStatus")
 		delete(additionalProperties, "Account")
 		delete(additionalProperties, "AssociatedObject")
 		delete(additionalProperties, "Organization")

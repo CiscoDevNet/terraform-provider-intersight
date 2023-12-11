@@ -24,7 +24,7 @@ Name | Type | Description | Notes
 **RetryFromTaskName** | Pointer to **string** | This field is required when RetryFromTask action is issued for a workflow that is in a &#39;final&#39; state. The workflow will be retried from the specified task. This field must specify a task name which is the unique name of the task within the workflow. The task name must be one of the tasks that were completed or failed in the previous run. It is not possible to retry a workflow from a task that wasn&#39;t run in the previous execution attempt. | [optional] 
 **Src** | Pointer to **string** | The source service that started the workflow execution and hence represents the owning service for this workflow. | [optional] [readonly] 
 **StartTime** | Pointer to **time.Time** | The time when the workflow was started for execution. | [optional] [readonly] 
-**Status** | Pointer to **string** | A status of the workflow (RUNNING, WAITING, COMPLETED, TIME_OUT, FAILED). | [optional] [readonly] 
+**Status** | Pointer to **string** | A status of the workflow (RUNNING, WAITING, COMPLETED, TIME_OUT, FAILED). The \&quot;status\&quot; field has been deprecated and is now replaced with the \&quot;workflowStatus\&quot; field. | [optional] [readonly] 
 **SuccessWorkflowCleanupDuration** | Pointer to **int64** | The duration in hours after which the workflow info for successful workflow will be removed from database. The minimum is 1 hour, maximum is 365 days and default is 90 days. | [optional] [default to 2160]
 **TraceId** | Pointer to **string** | The trace id to keep track of workflow execution. | [optional] [readonly] 
 **Type** | Pointer to **string** | A type of the workflow (serverconfig, ansible_monitoring). | [optional] [readonly] 
@@ -33,6 +33,7 @@ Name | Type | Description | Notes
 **Variable** | Pointer to **interface{}** | All the generated variables for the workflow. During workflow execution, the variables will be updated as per the variableParameters specified after each task execution. | [optional] [readonly] 
 **WaitReason** | Pointer to **string** | Denotes the reason workflow is in waiting status. * &#x60;None&#x60; - Wait reason is none, which indicates there is no reason for the waiting state. * &#x60;GatherTasks&#x60; - Wait reason is gathering tasks, which indicates the workflow is in this state in order to gather tasks. * &#x60;Duplicate&#x60; - Wait reason is duplicate, which indicates the workflow is a duplicate of current running workflow. * &#x60;RateLimit&#x60; - Wait reason is rate limit, which indicates the workflow is rate limited by account/instance level throttling threshold. * &#x60;WaitTask&#x60; - Wait reason when there are one or more wait tasks in the workflow which are yet to receive a task status update. * &#x60;PendingRetryFailed&#x60; - Wait reason when the workflow is pending a RetryFailed action. * &#x60;WaitingToStart&#x60; - Workflow is waiting to start on workflow engine. | [optional] [readonly] [default to "None"]
 **WorkflowCtx** | Pointer to [**NullableWorkflowWorkflowCtx**](WorkflowWorkflowCtx.md) |  | [optional] 
+**WorkflowStatus** | Pointer to **string** | The current state of the workflow execution instance. A draft workflow execution will be in NotStarted state and when \&quot;Start\&quot; action is issued then the workflow will move into Waiting state until the first task of the workflow is scheduled at which time it will move into InProgress state. When execution reaches a final state it move to either Completed, Failed or Terminated state. For more details look at the description for each state. * &#x60;NotStarted&#x60; - Initially all the workflow instances are at \&quot;NotStarted\&quot; state. A workflow can be drafted in this state by issuing Create action. When a workflow is in this state the inputs can be updated until the workflow is started. * &#x60;InProgress&#x60; - A workflow execution moves into \&quot;InProgress\&quot; state when the first task of the workflow is scheduled for execution and continues to remain in that state as long as there are tasks executing or yet to be scheduled for execution. * &#x60;Waiting&#x60; - Workflow can go to waiting state due to execution of wait task present in the workflow or the workflow has not started yet either due to duplicate workflow is running or due to workflow throttling. Once Workflow engine picks up the workflow for execution, it will move to in progress state. * &#x60;Completed&#x60; - A workflow execution moves into Completed state when the execution path of the workflow has reached the Success node in the workflow design and there are no more tasks to be executed. Completed is the final state for the workflow execution instance and no further actions are allowed on this workflow instance. * &#x60;Failed&#x60; - A workflow execution moves into a Failed state when the execution path of the workflow has reached the Failed node in the workflow design and there are no more tasks to be scheduled. A Failed node can be reached when the last executed task has failed or timed out and there are no further retries available for the task. Also as per the workflow design, the last executed task did not specify an OnFailure task to be executed and hence by default, the execution will reach the Failed node. Actions like \&quot;Rerun\&quot;, \&quot;RetryFailed\&quot; and \&quot;RetryFromTask\&quot; can be issued on failed workflow instances. Please refer to the \&quot;Action\&quot; description for more details. * &#x60;Terminated&#x60; - A workflow execution moves to Terminated state when user issues a \&quot;Cancel\&quot; action or due to internal errors caused during workflow execution. e.g. - Task input transformation has failed. Terminated is a final state of the workflow, no further action are allowed on this workflow instance. * &#x60;Canceled&#x60; - A workflow execution moves to Canceled state when a user issues a \&quot;Cancel\&quot; action. Cancel is not a final state, the workflow engine will issue cancel to all the running tasks and then move the workflow to the \&quot;Terminated\&quot; state. * &#x60;Paused&#x60; - A workflow execution moves to Paused state when user issues a \&quot;Pause\&quot; action. When in paused state the current running task will complete its execution but no further tasks will be scheduled until the workflow is resumed. A paused workflow is resumed when the user issues a \&quot;Resume\&quot; action. Paused workflows can be canceled by user. | [optional] [readonly] [default to "NotStarted"]
 **Account** | Pointer to [**IamAccountRelationship**](IamAccountRelationship.md) |  | [optional] 
 **AssociatedObject** | Pointer to [**MoBaseMoRelationship**](MoBaseMoRelationship.md) |  | [optional] 
 **Organization** | Pointer to [**OrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
@@ -835,6 +836,31 @@ HasWorkflowCtx returns a boolean if a field has been set.
 `func (o *WorkflowWorkflowInfoAllOf) UnsetWorkflowCtx()`
 
 UnsetWorkflowCtx ensures that no value is present for WorkflowCtx, not even an explicit nil
+### GetWorkflowStatus
+
+`func (o *WorkflowWorkflowInfoAllOf) GetWorkflowStatus() string`
+
+GetWorkflowStatus returns the WorkflowStatus field if non-nil, zero value otherwise.
+
+### GetWorkflowStatusOk
+
+`func (o *WorkflowWorkflowInfoAllOf) GetWorkflowStatusOk() (*string, bool)`
+
+GetWorkflowStatusOk returns a tuple with the WorkflowStatus field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetWorkflowStatus
+
+`func (o *WorkflowWorkflowInfoAllOf) SetWorkflowStatus(v string)`
+
+SetWorkflowStatus sets WorkflowStatus field to given value.
+
+### HasWorkflowStatus
+
+`func (o *WorkflowWorkflowInfoAllOf) HasWorkflowStatus() bool`
+
+HasWorkflowStatus returns a boolean if a field has been set.
+
 ### GetAccount
 
 `func (o *WorkflowWorkflowInfoAllOf) GetAccount() IamAccountRelationship`
