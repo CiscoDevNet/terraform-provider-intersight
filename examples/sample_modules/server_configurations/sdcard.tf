@@ -6,7 +6,7 @@ resource "intersight_sdcard_policy" "tf_sdcard" {
     object_type = "organization.Organization"
   }
   partitions {
-    type        = "OS"
+    nr_type        = "OS"
     object_type = "sdcard.Partition"
 
     virtual_drives {
