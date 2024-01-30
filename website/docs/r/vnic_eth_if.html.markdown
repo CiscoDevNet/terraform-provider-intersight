@@ -197,6 +197,15 @@ This complex property has following sub-properties:
   + `moid`:(string) The Moid of the referenced REST resource. 
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
   + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
+* `sriov_settings`:(HashMap) - Single Root Input Output Virtualization (SR-IOV) Settings that enable one physical ethernet socket to appear as multiple NICs to the hypervisor. 
+This complex property has following sub-properties:
+  + `comp_count_per_vf`:(int) Completion Queue resources per Virtual Function (VF). 
+  + `enabled`:(bool) If enabled, sets Single Root Input Output Virtualization (SR-IOV) on this vNIC. 
+  + `int_count_per_vf`:(int) Interrupt Count resources per Virtual Function (VF). 
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+  + `rx_count_per_vf`:(int) Receive Queue resources per Virtual Function (VF). 
+  + `tx_count_per_vf`:(int) Transmit Queue resources per Virtual Function (VF). 
+  + `vf_count`:(int) Number of Virtual Functions (VF) to be created for this vNIC. Valid values are 1 to 64 when SR-IOV is enabled. 
 * `standby_vif_id`:(int)(ReadOnly) The Standby VIF Id is applicable for failover enabled vNICS. It should be the same as the channel number of the standby vethernet created on switch in order to set up the standby data path. 
 * `static_mac_address`:(string) The MAC address must be in hexadecimal format xx:xx:xx:xx:xx:xx.To ensure uniqueness of MACs in the LAN fabric, you are strongly encouraged to use thefollowing MAC prefix 00:25:B5:xx:xx:xx. 
 * `tags`:(Array)

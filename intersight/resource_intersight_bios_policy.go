@@ -282,16 +282,16 @@ func resourceBiosPolicy() *schema.Resource {
 				Default:      "platform-default",
 			},
 			"c1auto_demotion": {
-				Description:  "BIOS Token for setting C1 Auto Demotion configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `enabled` - Enables the BIOS setting.\n* `disabled` - Disables the BIOS setting.",
+				Description:  "BIOS Token for setting C1 Auto Demotion configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `Auto` - Value - Auto for configuring C1autoDemotion token.\n* `disabled` - Value - disabled for configuring C1autoDemotion token.\n* `enabled` - Value - enabled for configuring C1autoDemotion token.",
 				Type:         schema.TypeString,
-				ValidateFunc: validation.StringInSlice([]string{"platform-default", "enabled", "disabled"}, false),
+				ValidateFunc: validation.StringInSlice([]string{"platform-default", "Auto", "disabled", "enabled"}, false),
 				Optional:     true,
 				Default:      "platform-default",
 			},
 			"c1auto_un_demotion": {
-				Description:  "BIOS Token for setting C1 Auto UnDemotion configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `enabled` - Enables the BIOS setting.\n* `disabled` - Disables the BIOS setting.",
+				Description:  "BIOS Token for setting C1 Auto UnDemotion configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `Auto` - Value - Auto for configuring C1autoUnDemotion token.\n* `disabled` - Value - disabled for configuring C1autoUnDemotion token.\n* `enabled` - Value - enabled for configuring C1autoUnDemotion token.",
 				Type:         schema.TypeString,
-				ValidateFunc: validation.StringInSlice([]string{"platform-default", "enabled", "disabled"}, false),
+				ValidateFunc: validation.StringInSlice([]string{"platform-default", "Auto", "disabled", "enabled"}, false),
 				Optional:     true,
 				Default:      "platform-default",
 			},
@@ -758,6 +758,20 @@ func resourceBiosPolicy() *schema.Resource {
 			},
 			"enable_sgx": {
 				Description:  "BIOS Token for setting Software Guard Extensions  (SGX) configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `enabled` - Enables the BIOS setting.\n* `disabled` - Disables the BIOS setting.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"platform-default", "enabled", "disabled"}, false),
+				Optional:     true,
+				Default:      "platform-default",
+			},
+			"enable_tdx": {
+				Description:  "BIOS Token for setting Trust Domain Extension  (TDX) configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `enabled` - Enables the BIOS setting.\n* `disabled` - Disables the BIOS setting.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"platform-default", "enabled", "disabled"}, false),
+				Optional:     true,
+				Default:      "platform-default",
+			},
+			"enable_tdx_seamldr": {
+				Description:  "BIOS Token for setting TDX Secure Arbitration Mode  (SEAM) Loader configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `enabled` - Enables the BIOS setting.\n* `disabled` - Disables the BIOS setting.",
 				Type:         schema.TypeString,
 				ValidateFunc: validation.StringInSlice([]string{"platform-default", "enabled", "disabled"}, false),
 				Optional:     true,
@@ -1773,9 +1787,9 @@ func resourceBiosPolicy() *schema.Resource {
 				Default:      "platform-default",
 			},
 			"qpi_link_speed": {
-				Description:  "BIOS Token for setting UPI Link Frequency Select configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `10.4GT/s` - Value - 10.4GT/s for configuring QpiLinkSpeed token.\n* `11.2GT/s` - Value - 11.2GT/s for configuring QpiLinkSpeed token.\n* `12.8GT/s` - Value - 12.8GT/s for configuring QpiLinkSpeed token.\n* `14.4GT/s` - Value - 14.4GT/s for configuring QpiLinkSpeed token.\n* `16.0GT/s` - Value - 16.0GT/s for configuring QpiLinkSpeed token.\n* `9.6GT/s` - Value - 9.6GT/s for configuring QpiLinkSpeed token.\n* `Auto` - Value - Auto for configuring QpiLinkSpeed token.",
+				Description:  "BIOS Token for setting UPI Link Frequency Select configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `10.4GT/s` - Value - 10.4GT/s for configuring QpiLinkSpeed token.\n* `11.2GT/s` - Value - 11.2GT/s for configuring QpiLinkSpeed token.\n* `12.8GT/s` - Value - 12.8GT/s for configuring QpiLinkSpeed token.\n* `14.4GT/s` - Value - 14.4GT/s for configuring QpiLinkSpeed token.\n* `16.0GT/s` - Value - 16.0GT/s for configuring QpiLinkSpeed token.\n* `20.0GT/s` - Value - 20.0GT/s for configuring QpiLinkSpeed token.\n* `9.6GT/s` - Value - 9.6GT/s for configuring QpiLinkSpeed token.\n* `Auto` - Value - Auto for configuring QpiLinkSpeed token.",
 				Type:         schema.TypeString,
-				ValidateFunc: validation.StringInSlice([]string{"platform-default", "10.4GT/s", "11.2GT/s", "12.8GT/s", "14.4GT/s", "16.0GT/s", "9.6GT/s", "Auto"}, false),
+				ValidateFunc: validation.StringInSlice([]string{"platform-default", "10.4GT/s", "11.2GT/s", "12.8GT/s", "14.4GT/s", "16.0GT/s", "20.0GT/s", "9.6GT/s", "Auto"}, false),
 				Optional:     true,
 				Default:      "platform-default",
 			},
@@ -1921,6 +1935,13 @@ func resourceBiosPolicy() *schema.Resource {
 			},
 			"sha256pcr_bank": {
 				Description:  "BIOS Token for setting SHA256 PCR Bank configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `enabled` - Enables the BIOS setting.\n* `disabled` - Disables the BIOS setting.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"platform-default", "enabled", "disabled"}, false),
+				Optional:     true,
+				Default:      "platform-default",
+			},
+			"sha384pcr_bank": {
+				Description:  "BIOS Token for setting SHA384 PCR Bank configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `enabled` - Enables the BIOS setting.\n* `disabled` - Disables the BIOS setting.",
 				Type:         schema.TypeString,
 				ValidateFunc: validation.StringInSlice([]string{"platform-default", "enabled", "disabled"}, false),
 				Optional:     true,
@@ -3873,6 +3894,16 @@ func resourceBiosPolicyCreate(c context.Context, d *schema.ResourceData, meta in
 		o.SetEnableSgx(x)
 	}
 
+	if v, ok := d.GetOk("enable_tdx"); ok {
+		x := (v.(string))
+		o.SetEnableTdx(x)
+	}
+
+	if v, ok := d.GetOk("enable_tdx_seamldr"); ok {
+		x := (v.(string))
+		o.SetEnableTdxSeamldr(x)
+	}
+
 	if v, ok := d.GetOk("enable_tme"); ok {
 		x := (v.(string))
 		o.SetEnableTme(x)
@@ -4658,6 +4689,11 @@ func resourceBiosPolicyCreate(c context.Context, d *schema.ResourceData, meta in
 	if v, ok := d.GetOk("sha256pcr_bank"); ok {
 		x := (v.(string))
 		o.SetSha256pcrBank(x)
+	}
+
+	if v, ok := d.GetOk("sha384pcr_bank"); ok {
+		x := (v.(string))
+		o.SetSha384pcrBank(x)
 	}
 
 	if v, ok := d.GetOk("single_pctl_enable"); ok {
@@ -6056,6 +6092,14 @@ func resourceBiosPolicyRead(c context.Context, d *schema.ResourceData, meta inte
 		return diag.Errorf("error occurred while setting property EnableSgx in BiosPolicy object: %s", err.Error())
 	}
 
+	if err := d.Set("enable_tdx", (s.GetEnableTdx())); err != nil {
+		return diag.Errorf("error occurred while setting property EnableTdx in BiosPolicy object: %s", err.Error())
+	}
+
+	if err := d.Set("enable_tdx_seamldr", (s.GetEnableTdxSeamldr())); err != nil {
+		return diag.Errorf("error occurred while setting property EnableTdxSeamldr in BiosPolicy object: %s", err.Error())
+	}
+
 	if err := d.Set("enable_tme", (s.GetEnableTme())); err != nil {
 		return diag.Errorf("error occurred while setting property EnableTme in BiosPolicy object: %s", err.Error())
 	}
@@ -6642,6 +6686,10 @@ func resourceBiosPolicyRead(c context.Context, d *schema.ResourceData, meta inte
 
 	if err := d.Set("sha256pcr_bank", (s.GetSha256pcrBank())); err != nil {
 		return diag.Errorf("error occurred while setting property Sha256pcrBank in BiosPolicy object: %s", err.Error())
+	}
+
+	if err := d.Set("sha384pcr_bank", (s.GetSha384pcrBank())); err != nil {
+		return diag.Errorf("error occurred while setting property Sha384pcrBank in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("shared_scope", (s.GetSharedScope())); err != nil {
@@ -7967,6 +8015,18 @@ func resourceBiosPolicyUpdate(c context.Context, d *schema.ResourceData, meta in
 		o.SetEnableSgx(x)
 	}
 
+	if d.HasChange("enable_tdx") {
+		v := d.Get("enable_tdx")
+		x := (v.(string))
+		o.SetEnableTdx(x)
+	}
+
+	if d.HasChange("enable_tdx_seamldr") {
+		v := d.Get("enable_tdx_seamldr")
+		x := (v.(string))
+		o.SetEnableTdxSeamldr(x)
+	}
+
 	if d.HasChange("enable_tme") {
 		v := d.Get("enable_tme")
 		x := (v.(string))
@@ -8892,6 +8952,12 @@ func resourceBiosPolicyUpdate(c context.Context, d *schema.ResourceData, meta in
 		v := d.Get("sha256pcr_bank")
 		x := (v.(string))
 		o.SetSha256pcrBank(x)
+	}
+
+	if d.HasChange("sha384pcr_bank") {
+		v := d.Get("sha384pcr_bank")
+		x := (v.(string))
+		o.SetSha384pcrBank(x)
 	}
 
 	if d.HasChange("single_pctl_enable") {

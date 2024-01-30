@@ -2069,6 +2069,30 @@ func TestFlattenListCrdCustomResourceConfigProperty(t *testing.T) {
 		CheckError(t, err)
 	}
 }
+func TestFlattenListEquipmentChassisOperationStatus(t *testing.T) {
+	p := []models.EquipmentChassisOperationStatus{}
+	var d = &schema.ResourceData{}
+	c := `{"ClassId":"equipment.ChassisOperationStatus","ConfigState":"ConfigState %d","ObjectType":"equipment.ChassisOperationStatus","SlotId":32,"WorkflowId":"WorkflowId %d","WorkflowType":"WorkflowType %d"}`
+
+	//test when the response is empty
+	ffOpEmpty := flattenListEquipmentChassisOperationStatus(p, d)
+	if len(ffOpEmpty) != 0 {
+		t.Errorf("error: no elements should be present. Found %d elements", len(ffOpEmpty))
+	}
+	// test when response is available and resourceData is empty
+	for i := 1; i < 3; i++ {
+		x := models.EquipmentChassisOperationStatus{}
+		err := x.UnmarshalJSON([]byte(strings.Replace(c, "%d", fmt.Sprint(i), -1)))
+		CheckError(t, err)
+		p = append(p, x)
+	}
+	ffOp := flattenListEquipmentChassisOperationStatus(p, d)
+	expectedOp := []map[string]interface{}{{"class_id": "equipment.ChassisOperationStatus", "config_state": "ConfigState 1", "object_type": "equipment.ChassisOperationStatus", "slot_id": 32, "workflow_id": "WorkflowId 1", "workflow_type": "WorkflowType 1"}, {"class_id": "equipment.ChassisOperationStatus", "config_state": "ConfigState 2", "object_type": "equipment.ChassisOperationStatus", "slot_id": 32, "workflow_id": "WorkflowId 2", "workflow_type": "WorkflowType 2"}}
+	for i := 0; i < len(expectedOp); i++ {
+		err := compareMaps(expectedOp[i], ffOp[i], t)
+		CheckError(t, err)
+	}
+}
 func TestFlattenListEquipmentExpanderModuleRelationship(t *testing.T) {
 	p := []models.EquipmentExpanderModuleRelationship{}
 	var d = &schema.ResourceData{}
@@ -7925,6 +7949,30 @@ func TestFlattenListResourceSelector(t *testing.T) {
 		CheckError(t, err)
 	}
 }
+func TestFlattenListResourcepoolPoolRelationship(t *testing.T) {
+	p := []models.ResourcepoolPoolRelationship{}
+	var d = &schema.ResourceData{}
+	c := `{"ClassId":"mo.MoRef","Moid":"Moid %d","ObjectType":"mo.MoRef","Selector":"Selector %d"}`
+
+	//test when the response is empty
+	ffOpEmpty := flattenListResourcepoolPoolRelationship(p, d)
+	if len(ffOpEmpty) != 0 {
+		t.Errorf("error: no elements should be present. Found %d elements", len(ffOpEmpty))
+	}
+	// test when response is available and resourceData is empty
+	for i := 1; i < 3; i++ {
+		x := models.ResourcepoolPoolRelationship{}
+		err := x.UnmarshalJSON([]byte(strings.Replace(c, "%d", fmt.Sprint(i), -1)))
+		CheckError(t, err)
+		p = append(p, x)
+	}
+	ffOp := flattenListResourcepoolPoolRelationship(p, d)
+	expectedOp := []map[string]interface{}{{"class_id": "mo.MoRef", "moid": "Moid 1", "object_type": "mo.MoRef", "selector": "Selector 1"}, {"class_id": "mo.MoRef", "moid": "Moid 2", "object_type": "mo.MoRef", "selector": "Selector 2"}}
+	for i := 0; i < len(expectedOp); i++ {
+		err := compareMaps(expectedOp[i], ffOp[i], t)
+		CheckError(t, err)
+	}
+}
 func TestFlattenListSdcardPartition(t *testing.T) {
 	p := []models.SdcardPartition{}
 	var d = &schema.ResourceData{}
@@ -8288,7 +8336,7 @@ func TestFlattenListStorageBaseClusterRelationship(t *testing.T) {
 func TestFlattenListStorageBaseInitiator(t *testing.T) {
 	p := []models.StorageBaseInitiator{}
 	var d = &schema.ResourceData{}
-	c := `{"ClassId":"storage.BaseInitiator","Iqn":"Iqn %d","Name":"Name %d","ObjectType":"storage.BaseInitiator","Type":"Type %d","Wwn":"Wwn %d"}`
+	c := `{"ClassId":"storage.BaseInitiator","Iqn":"Iqn %d","Name":"Name %d","Nqn":"Nqn %d","ObjectType":"storage.BaseInitiator","Type":"Type %d","Wwn":"Wwn %d"}`
 
 	//test when the response is empty
 	ffOpEmpty := flattenListStorageBaseInitiator(p, d)
@@ -8303,7 +8351,7 @@ func TestFlattenListStorageBaseInitiator(t *testing.T) {
 		p = append(p, x)
 	}
 	ffOp := flattenListStorageBaseInitiator(p, d)
-	expectedOp := []map[string]interface{}{{"class_id": "storage.BaseInitiator", "iqn": "Iqn 1", "name": "Name 1", "object_type": "storage.BaseInitiator", "type": "Type 1", "wwn": "Wwn 1"}, {"class_id": "storage.BaseInitiator", "iqn": "Iqn 2", "name": "Name 2", "object_type": "storage.BaseInitiator", "type": "Type 2", "wwn": "Wwn 2"}}
+	expectedOp := []map[string]interface{}{{"class_id": "storage.BaseInitiator", "iqn": "Iqn 1", "name": "Name 1", "nqn": "Nqn 1", "object_type": "storage.BaseInitiator", "type": "Type 1", "wwn": "Wwn 1"}, {"class_id": "storage.BaseInitiator", "iqn": "Iqn 2", "name": "Name 2", "nqn": "Nqn 2", "object_type": "storage.BaseInitiator", "type": "Type 2", "wwn": "Wwn 2"}}
 	for i := 0; i < len(expectedOp); i++ {
 		err := compareMaps(expectedOp[i], ffOp[i], t)
 		CheckError(t, err)
@@ -8720,7 +8768,7 @@ func TestFlattenListStorageHitachiParityGroupRelationship(t *testing.T) {
 func TestFlattenListStorageHyperFlexIscsiInitiator(t *testing.T) {
 	p := []models.StorageHyperFlexIscsiInitiator{}
 	var d = &schema.ResourceData{}
-	c := `{"ClassId":"storage.HyperFlexIscsiInitiator","Iqn":"Iqn %d","Name":"Name %d","ObjectType":"storage.HyperFlexIscsiInitiator","Type":"Type %d","Wwn":"Wwn %d"}`
+	c := `{"ClassId":"storage.HyperFlexIscsiInitiator","Iqn":"Iqn %d","Name":"Name %d","Nqn":"Nqn %d","ObjectType":"storage.HyperFlexIscsiInitiator","Type":"Type %d","Wwn":"Wwn %d"}`
 
 	//test when the response is empty
 	ffOpEmpty := flattenListStorageHyperFlexIscsiInitiator(p, d)
@@ -8735,7 +8783,7 @@ func TestFlattenListStorageHyperFlexIscsiInitiator(t *testing.T) {
 		p = append(p, x)
 	}
 	ffOp := flattenListStorageHyperFlexIscsiInitiator(p, d)
-	expectedOp := []map[string]interface{}{{"class_id": "storage.HyperFlexIscsiInitiator", "iqn": "Iqn 1", "name": "Name 1", "object_type": "storage.HyperFlexIscsiInitiator", "type": "Type 1", "wwn": "Wwn 1"}, {"class_id": "storage.HyperFlexIscsiInitiator", "iqn": "Iqn 2", "name": "Name 2", "object_type": "storage.HyperFlexIscsiInitiator", "type": "Type 2", "wwn": "Wwn 2"}}
+	expectedOp := []map[string]interface{}{{"class_id": "storage.HyperFlexIscsiInitiator", "iqn": "Iqn 1", "name": "Name 1", "nqn": "Nqn 1", "object_type": "storage.HyperFlexIscsiInitiator", "type": "Type 1", "wwn": "Wwn 1"}, {"class_id": "storage.HyperFlexIscsiInitiator", "iqn": "Iqn 2", "name": "Name 2", "nqn": "Nqn 2", "object_type": "storage.HyperFlexIscsiInitiator", "type": "Type 2", "wwn": "Wwn 2"}}
 	for i := 0; i < len(expectedOp); i++ {
 		err := compareMaps(expectedOp[i], ffOp[i], t)
 		CheckError(t, err)
@@ -21932,6 +21980,24 @@ func TestFlattenMapVnicScsiQueueSettings(t *testing.T) {
 	CheckError(t, err)
 	ffOp := flattenMapVnicScsiQueueSettings(p, d)[0]
 	expectedOp := map[string]interface{}{"class_id": "vnic.ScsiQueueSettings", "nr_count": 32, "object_type": "vnic.ScsiQueueSettings", "ring_size": 32}
+	err = compareMaps(expectedOp, ffOp, t)
+	CheckError(t, err)
+}
+func TestFlattenMapVnicSriovSettings(t *testing.T) {
+	p := models.VnicSriovSettings{}
+	var d = &schema.ResourceData{}
+	c := `{"ClassId":"vnic.SriovSettings","CompCountPerVf":32,"Enabled":true,"IntCountPerVf":32,"ObjectType":"vnic.SriovSettings","RxCountPerVf":32,"TxCountPerVf":32,"VfCount":32}`
+
+	//test when the response is empty
+	ffOpEmpty := flattenMapVnicSriovSettings(p, d)
+	if len(ffOpEmpty) != 0 {
+		t.Errorf("error: no elements should be present. Found %d elements", len(ffOpEmpty))
+	}
+	// test when response is available and resourceData is empty
+	err := p.UnmarshalJSON([]byte(strings.Replace(c, "%d", "1", -1)))
+	CheckError(t, err)
+	ffOp := flattenMapVnicSriovSettings(p, d)[0]
+	expectedOp := map[string]interface{}{"class_id": "vnic.SriovSettings", "comp_count_per_vf": 32, "enabled": true, "int_count_per_vf": 32, "object_type": "vnic.SriovSettings", "rx_count_per_vf": 32, "tx_count_per_vf": 32, "vf_count": 32}
 	err = compareMaps(expectedOp, ffOp, t)
 	CheckError(t, err)
 }

@@ -772,6 +772,61 @@ func getVnicEthIfInventorySchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"sriov_settings": {
+			Description: "Single Root Input Output Virtualization (SR-IOV) Settings that enable one physical ethernet socket to appear as multiple NICs to the hypervisor.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"comp_count_per_vf": {
+						Description: "Completion Queue resources per Virtual Function (VF).",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"enabled": {
+						Description: "If enabled, sets Single Root Input Output Virtualization (SR-IOV) on this vNIC.",
+						Type:        schema.TypeBool,
+						Optional:    true,
+					},
+					"int_count_per_vf": {
+						Description: "Interrupt Count resources per Virtual Function (VF).",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"rx_count_per_vf": {
+						Description: "Receive Queue resources per Virtual Function (VF).",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"tx_count_per_vf": {
+						Description: "Transmit Queue resources per Virtual Function (VF).",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"vf_count": {
+						Description: "Number of Virtual Functions (VF) to be created for this vNIC. Valid values are 1 to 64 when SR-IOV is enabled.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+				},
+			},
+		},
 		"standby_vif_id": {
 			Description: "The Standby VIF Id is applicable for failover enabled vNICS. It should be the same as the channel number of the standby vethernet created on switch in order to set up the standby data path.",
 			Type:        schema.TypeInt,
@@ -1949,6 +2004,73 @@ func dataSourceVnicEthIfInventoryRead(c context.Context, d *schema.ResourceData,
 		o.SetSpVnics(x)
 	}
 
+	if v, ok := d.GetOk("sriov_settings"); ok {
+		p := make([]models.VnicSriovSettings, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.VnicSriovSettings{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("vnic.SriovSettings")
+			if v, ok := l["comp_count_per_vf"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetCompCountPerVf(x)
+				}
+			}
+			if v, ok := l["enabled"]; ok {
+				{
+					x := (v.(bool))
+					o.SetEnabled(x)
+				}
+			}
+			if v, ok := l["int_count_per_vf"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetIntCountPerVf(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["rx_count_per_vf"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetRxCountPerVf(x)
+				}
+			}
+			if v, ok := l["tx_count_per_vf"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetTxCountPerVf(x)
+				}
+			}
+			if v, ok := l["vf_count"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetVfCount(x)
+				}
+			}
+			p = append(p, *o)
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetSriovSettings(x)
+		}
+	}
+
 	if v, ok := d.GetOkExists("standby_vif_id"); ok {
 		x := int64(v.(int))
 		o.SetStandbyVifId(x)
@@ -2279,6 +2401,8 @@ func dataSourceVnicEthIfInventoryRead(c context.Context, d *schema.ResourceData,
 				temp["shared_scope"] = (s.GetSharedScope())
 
 				temp["sp_vnics"] = flattenListVnicEthIfInventoryRelationship(s.GetSpVnics(), d)
+
+				temp["sriov_settings"] = flattenMapVnicSriovSettings(s.GetSriovSettings(), d)
 				temp["standby_vif_id"] = (s.GetStandbyVifId())
 				temp["static_mac_address"] = (s.GetStaticMacAddress())
 

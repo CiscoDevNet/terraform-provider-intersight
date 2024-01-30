@@ -1587,6 +1587,8 @@ docs/EquipmentChassisOperationAllOf.md
 docs/EquipmentChassisOperationList.md
 docs/EquipmentChassisOperationListAllOf.md
 docs/EquipmentChassisOperationResponse.md
+docs/EquipmentChassisOperationStatus.md
+docs/EquipmentChassisOperationStatusAllOf.md
 docs/EquipmentChassisRelationship.md
 docs/EquipmentChassisResponse.md
 docs/EquipmentDeviceSummary.md
@@ -5215,6 +5217,8 @@ docs/RecoveryScheduleConfigPolicyList.md
 docs/RecoveryScheduleConfigPolicyListAllOf.md
 docs/RecoveryScheduleConfigPolicyRelationship.md
 docs/RecoveryScheduleConfigPolicyResponse.md
+docs/ResourceAbstractReservation.md
+docs/ResourceAbstractReservationAllOf.md
 docs/ResourceApi.md
 docs/ResourceGroup.md
 docs/ResourceGroupAllOf.md
@@ -5281,6 +5285,11 @@ docs/ResourcepoolLeaseResourceListAllOf.md
 docs/ResourcepoolLeaseResourceRelationship.md
 docs/ResourcepoolLeaseResourceResponse.md
 docs/ResourcepoolLeaseResponse.md
+docs/ResourcepoolMembershipReservation.md
+docs/ResourcepoolMembershipReservationAllOf.md
+docs/ResourcepoolMembershipReservationList.md
+docs/ResourcepoolMembershipReservationListAllOf.md
+docs/ResourcepoolMembershipReservationResponse.md
 docs/ResourcepoolPool.md
 docs/ResourcepoolPoolAllOf.md
 docs/ResourcepoolPoolList.md
@@ -7194,6 +7203,8 @@ docs/VnicScpStatusListAllOf.md
 docs/VnicScpStatusResponse.md
 docs/VnicScsiQueueSettings.md
 docs/VnicScsiQueueSettingsAllOf.md
+docs/VnicSriovSettings.md
+docs/VnicSriovSettingsAllOf.md
 docs/VnicTcpOffloadSettings.md
 docs/VnicTcpOffloadSettingsAllOf.md
 docs/VnicUsnicSettings.md
@@ -9007,6 +9018,8 @@ model_equipment_chassis_operation_all_of.go
 model_equipment_chassis_operation_list.go
 model_equipment_chassis_operation_list_all_of.go
 model_equipment_chassis_operation_response.go
+model_equipment_chassis_operation_status.go
+model_equipment_chassis_operation_status_all_of.go
 model_equipment_chassis_relationship.go
 model_equipment_chassis_response.go
 model_equipment_device_summary.go
@@ -12587,6 +12600,8 @@ model_recovery_schedule_config_policy_list.go
 model_recovery_schedule_config_policy_list_all_of.go
 model_recovery_schedule_config_policy_relationship.go
 model_recovery_schedule_config_policy_response.go
+model_resource_abstract_reservation.go
+model_resource_abstract_reservation_all_of.go
 model_resource_group.go
 model_resource_group_all_of.go
 model_resource_group_list.go
@@ -12651,6 +12666,11 @@ model_resourcepool_lease_resource_list_all_of.go
 model_resourcepool_lease_resource_relationship.go
 model_resourcepool_lease_resource_response.go
 model_resourcepool_lease_response.go
+model_resourcepool_membership_reservation.go
+model_resourcepool_membership_reservation_all_of.go
+model_resourcepool_membership_reservation_list.go
+model_resourcepool_membership_reservation_list_all_of.go
+model_resourcepool_membership_reservation_response.go
 model_resourcepool_pool.go
 model_resourcepool_pool_all_of.go
 model_resourcepool_pool_list.go
@@ -14536,6 +14556,8 @@ model_vnic_scp_status_list_all_of.go
 model_vnic_scp_status_response.go
 model_vnic_scsi_queue_settings.go
 model_vnic_scsi_queue_settings_all_of.go
+model_vnic_sriov_settings.go
+model_vnic_sriov_settings_all_of.go
 model_vnic_tcp_offload_settings.go
 model_vnic_tcp_offload_settings_all_of.go
 model_vnic_usnic_settings.go

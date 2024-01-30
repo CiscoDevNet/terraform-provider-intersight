@@ -978,6 +978,75 @@ func resourceVnicEthIf() *schema.Resource {
 					},
 				},
 			},
+			"sriov_settings": {
+				Description: "Single Root Input Output Virtualization (SR-IOV) Settings that enable one physical ethernet socket to appear as multiple NICs to the hypervisor.",
+				Type:        schema.TypeList,
+				MaxItems:    1,
+				Optional:    true,
+				ConfigMode:  schema.SchemaConfigModeAttr,
+				Computed:    true,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"additional_properties": {
+							Type:             schema.TypeString,
+							Optional:         true,
+							DiffSuppressFunc: SuppressDiffAdditionProps,
+						},
+						"class_id": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Default:     "vnic.SriovSettings",
+						},
+						"comp_count_per_vf": {
+							Description:  "Completion Queue resources per Virtual Function (VF).",
+							Type:         schema.TypeInt,
+							ValidateFunc: validation.IntBetween(1, 16),
+							Optional:     true,
+							Default:      5,
+						},
+						"enabled": {
+							Description: "If enabled, sets Single Root Input Output Virtualization (SR-IOV) on this vNIC.",
+							Type:        schema.TypeBool,
+							Optional:    true,
+						},
+						"int_count_per_vf": {
+							Description:  "Interrupt Count resources per Virtual Function (VF).",
+							Type:         schema.TypeInt,
+							ValidateFunc: validation.IntBetween(1, 16),
+							Optional:     true,
+							Default:      8,
+						},
+						"object_type": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Default:     "vnic.SriovSettings",
+						},
+						"rx_count_per_vf": {
+							Description:  "Receive Queue resources per Virtual Function (VF).",
+							Type:         schema.TypeInt,
+							ValidateFunc: validation.IntBetween(1, 8),
+							Optional:     true,
+							Default:      4,
+						},
+						"tx_count_per_vf": {
+							Description:  "Transmit Queue resources per Virtual Function (VF).",
+							Type:         schema.TypeInt,
+							ValidateFunc: validation.IntBetween(1, 8),
+							Optional:     true,
+							Default:      1,
+						},
+						"vf_count": {
+							Description:  "Number of Virtual Functions (VF) to be created for this vNIC. Valid values are 1 to 64 when SR-IOV is enabled.",
+							Type:         schema.TypeInt,
+							ValidateFunc: validation.IntBetween(1, 64),
+							Optional:     true,
+							Default:      64,
+						},
+					},
+				},
+			},
 			"standby_vif_id": {
 				Description: "The Standby VIF Id is applicable for failover enabled vNICS. It should be the same as the channel number of the standby vethernet created on switch in order to set up the standby data path.",
 				Type:        schema.TypeInt,
@@ -1938,6 +2007,73 @@ func resourceVnicEthIfCreate(c context.Context, d *schema.ResourceData, meta int
 		}
 	}
 
+	if v, ok := d.GetOk("sriov_settings"); ok {
+		p := make([]models.VnicSriovSettings, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := models.NewVnicSriovSettingsWithDefaults()
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("vnic.SriovSettings")
+			if v, ok := l["comp_count_per_vf"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetCompCountPerVf(x)
+				}
+			}
+			if v, ok := l["enabled"]; ok {
+				{
+					x := (v.(bool))
+					o.SetEnabled(x)
+				}
+			}
+			if v, ok := l["int_count_per_vf"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetIntCountPerVf(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["rx_count_per_vf"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetRxCountPerVf(x)
+				}
+			}
+			if v, ok := l["tx_count_per_vf"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetTxCountPerVf(x)
+				}
+			}
+			if v, ok := l["vf_count"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetVfCount(x)
+				}
+			}
+			p = append(p, *o)
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetSriovSettings(x)
+		}
+	}
+
 	if v, ok := d.GetOk("static_mac_address"); ok {
 		x := (v.(string))
 		o.SetStaticMacAddress(x)
@@ -2296,6 +2432,10 @@ func resourceVnicEthIfRead(c context.Context, d *schema.ResourceData, meta inter
 
 	if err := d.Set("sp_vnics", flattenListVnicEthIfRelationship(s.GetSpVnics(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property SpVnics in VnicEthIf object: %s", err.Error())
+	}
+
+	if err := d.Set("sriov_settings", flattenMapVnicSriovSettings(s.GetSriovSettings(), d)); err != nil {
+		return diag.Errorf("error occurred while setting property SriovSettings in VnicEthIf object: %s", err.Error())
 	}
 
 	if err := d.Set("standby_vif_id", (s.GetStandbyVifId())); err != nil {
@@ -2983,6 +3123,74 @@ func resourceVnicEthIfUpdate(c context.Context, d *schema.ResourceData, meta int
 		if len(p) > 0 {
 			x := p[0]
 			o.SetProfile(x)
+		}
+	}
+
+	if d.HasChange("sriov_settings") {
+		v := d.Get("sriov_settings")
+		p := make([]models.VnicSriovSettings, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.VnicSriovSettings{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("vnic.SriovSettings")
+			if v, ok := l["comp_count_per_vf"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetCompCountPerVf(x)
+				}
+			}
+			if v, ok := l["enabled"]; ok {
+				{
+					x := (v.(bool))
+					o.SetEnabled(x)
+				}
+			}
+			if v, ok := l["int_count_per_vf"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetIntCountPerVf(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["rx_count_per_vf"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetRxCountPerVf(x)
+				}
+			}
+			if v, ok := l["tx_count_per_vf"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetTxCountPerVf(x)
+				}
+			}
+			if v, ok := l["vf_count"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetVfCount(x)
+				}
+			}
+			p = append(p, *o)
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetSriovSettings(x)
 		}
 	}
 

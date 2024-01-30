@@ -17,6 +17,7 @@ Name | Type | Description | Notes
 **Order** | Pointer to **int64** | The order in which the virtual interface is brought up. The order assigned to an interface should be unique for all the Ethernet and Fibre-Channel interfaces on each PCI link on a VIC adapter. The order should start from zero with no overlaps. The maximum value of PCI order is limited by the number of virtual interfaces (Ethernet and Fibre-Channel) on each PCI link on a VIC adapter. All VIC adapters have a single PCI link except VIC 1340, VIC 1380 and VIC 1385 which have two. | [optional] 
 **PinGroupName** | Pointer to **string** | Pingroup name associated to vNIC for static pinning. LCP deploy will resolve pingroup name and fetches the correspoding uplink port/port channel to pin the vNIC traffic. | [optional] 
 **Placement** | Pointer to [**NullableVnicPlacementSettings**](VnicPlacementSettings.md) |  | [optional] 
+**SriovSettings** | Pointer to [**NullableVnicSriovSettings**](VnicSriovSettings.md) |  | [optional] 
 **StandbyVifId** | Pointer to **int64** | The Standby VIF Id is applicable for failover enabled vNICS. It should be the same as the channel number of the standby vethernet created on switch in order to set up the standby data path. | [optional] [readonly] 
 **StaticMacAddress** | Pointer to **string** | The MAC address must be in hexadecimal format xx:xx:xx:xx:xx:xx. To ensure uniqueness of MACs in the LAN fabric, you are strongly encouraged to use the following MAC prefix 00:25:B5:xx:xx:xx. | [optional] 
 **UsnicSettings** | Pointer to [**NullableVnicUsnicSettings**](VnicUsnicSettings.md) |  | [optional] 
@@ -400,6 +401,41 @@ HasPlacement returns a boolean if a field has been set.
 `func (o *VnicEthIfAllOf) UnsetPlacement()`
 
 UnsetPlacement ensures that no value is present for Placement, not even an explicit nil
+### GetSriovSettings
+
+`func (o *VnicEthIfAllOf) GetSriovSettings() VnicSriovSettings`
+
+GetSriovSettings returns the SriovSettings field if non-nil, zero value otherwise.
+
+### GetSriovSettingsOk
+
+`func (o *VnicEthIfAllOf) GetSriovSettingsOk() (*VnicSriovSettings, bool)`
+
+GetSriovSettingsOk returns a tuple with the SriovSettings field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSriovSettings
+
+`func (o *VnicEthIfAllOf) SetSriovSettings(v VnicSriovSettings)`
+
+SetSriovSettings sets SriovSettings field to given value.
+
+### HasSriovSettings
+
+`func (o *VnicEthIfAllOf) HasSriovSettings() bool`
+
+HasSriovSettings returns a boolean if a field has been set.
+
+### SetSriovSettingsNil
+
+`func (o *VnicEthIfAllOf) SetSriovSettingsNil(b bool)`
+
+ SetSriovSettingsNil sets the value for SriovSettings to be an explicit nil
+
+### UnsetSriovSettings
+`func (o *VnicEthIfAllOf) UnsetSriovSettings()`
+
+UnsetSriovSettings ensures that no value is present for SriovSettings, not even an explicit nil
 ### GetStandbyVifId
 
 `func (o *VnicEthIfAllOf) GetStandbyVifId() int64`

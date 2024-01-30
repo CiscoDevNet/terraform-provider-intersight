@@ -206,12 +206,12 @@ func getBiosPolicySchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"c1auto_demotion": {
-			Description: "BIOS Token for setting C1 Auto Demotion configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `enabled` - Enables the BIOS setting.\n* `disabled` - Disables the BIOS setting.",
+			Description: "BIOS Token for setting C1 Auto Demotion configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `Auto` - Value - Auto for configuring C1autoDemotion token.\n* `disabled` - Value - disabled for configuring C1autoDemotion token.\n* `enabled` - Value - enabled for configuring C1autoDemotion token.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
 		"c1auto_un_demotion": {
-			Description: "BIOS Token for setting C1 Auto UnDemotion configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `enabled` - Enables the BIOS setting.\n* `disabled` - Disables the BIOS setting.",
+			Description: "BIOS Token for setting C1 Auto UnDemotion configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `Auto` - Value - Auto for configuring C1autoUnDemotion token.\n* `disabled` - Value - disabled for configuring C1autoUnDemotion token.\n* `enabled` - Value - enabled for configuring C1autoUnDemotion token.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -542,6 +542,16 @@ func getBiosPolicySchema() map[string]*schema.Schema {
 		},
 		"enable_sgx": {
 			Description: "BIOS Token for setting Software Guard Extensions  (SGX) configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `enabled` - Enables the BIOS setting.\n* `disabled` - Disables the BIOS setting.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"enable_tdx": {
+			Description: "BIOS Token for setting Trust Domain Extension  (TDX) configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `enabled` - Enables the BIOS setting.\n* `disabled` - Disables the BIOS setting.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"enable_tdx_seamldr": {
+			Description: "BIOS Token for setting TDX Secure Arbitration Mode  (SEAM) Loader configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `enabled` - Enables the BIOS setting.\n* `disabled` - Disables the BIOS setting.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -1289,7 +1299,7 @@ func getBiosPolicySchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"qpi_link_speed": {
-			Description: "BIOS Token for setting UPI Link Frequency Select configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `10.4GT/s` - Value - 10.4GT/s for configuring QpiLinkSpeed token.\n* `11.2GT/s` - Value - 11.2GT/s for configuring QpiLinkSpeed token.\n* `12.8GT/s` - Value - 12.8GT/s for configuring QpiLinkSpeed token.\n* `14.4GT/s` - Value - 14.4GT/s for configuring QpiLinkSpeed token.\n* `16.0GT/s` - Value - 16.0GT/s for configuring QpiLinkSpeed token.\n* `9.6GT/s` - Value - 9.6GT/s for configuring QpiLinkSpeed token.\n* `Auto` - Value - Auto for configuring QpiLinkSpeed token.",
+			Description: "BIOS Token for setting UPI Link Frequency Select configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `10.4GT/s` - Value - 10.4GT/s for configuring QpiLinkSpeed token.\n* `11.2GT/s` - Value - 11.2GT/s for configuring QpiLinkSpeed token.\n* `12.8GT/s` - Value - 12.8GT/s for configuring QpiLinkSpeed token.\n* `14.4GT/s` - Value - 14.4GT/s for configuring QpiLinkSpeed token.\n* `16.0GT/s` - Value - 16.0GT/s for configuring QpiLinkSpeed token.\n* `20.0GT/s` - Value - 20.0GT/s for configuring QpiLinkSpeed token.\n* `9.6GT/s` - Value - 9.6GT/s for configuring QpiLinkSpeed token.\n* `Auto` - Value - Auto for configuring QpiLinkSpeed token.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -1395,6 +1405,11 @@ func getBiosPolicySchema() map[string]*schema.Schema {
 		},
 		"sha256pcr_bank": {
 			Description: "BIOS Token for setting SHA256 PCR Bank configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `enabled` - Enables the BIOS setting.\n* `disabled` - Disables the BIOS setting.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"sha384pcr_bank": {
+			Description: "BIOS Token for setting SHA384 PCR Bank configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `enabled` - Enables the BIOS setting.\n* `disabled` - Disables the BIOS setting.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -3005,6 +3020,16 @@ func dataSourceBiosPolicyRead(c context.Context, d *schema.ResourceData, meta in
 		o.SetEnableSgx(x)
 	}
 
+	if v, ok := d.GetOk("enable_tdx"); ok {
+		x := (v.(string))
+		o.SetEnableTdx(x)
+	}
+
+	if v, ok := d.GetOk("enable_tdx_seamldr"); ok {
+		x := (v.(string))
+		o.SetEnableTdxSeamldr(x)
+	}
+
 	if v, ok := d.GetOk("enable_tme"); ok {
 		x := (v.(string))
 		o.SetEnableTme(x)
@@ -3890,6 +3915,11 @@ func dataSourceBiosPolicyRead(c context.Context, d *schema.ResourceData, meta in
 	if v, ok := d.GetOk("sha256pcr_bank"); ok {
 		x := (v.(string))
 		o.SetSha256pcrBank(x)
+	}
+
+	if v, ok := d.GetOk("sha384pcr_bank"); ok {
+		x := (v.(string))
+		o.SetSha384pcrBank(x)
 	}
 
 	if v, ok := d.GetOk("shared_scope"); ok {
@@ -5046,6 +5076,8 @@ func dataSourceBiosPolicyRead(c context.Context, d *schema.ResourceData, meta in
 				temp["enable_mktme"] = (s.GetEnableMktme())
 				temp["enable_rmt"] = (s.GetEnableRmt())
 				temp["enable_sgx"] = (s.GetEnableSgx())
+				temp["enable_tdx"] = (s.GetEnableTdx())
+				temp["enable_tdx_seamldr"] = (s.GetEnableTdxSeamldr())
 				temp["enable_tme"] = (s.GetEnableTme())
 				temp["energy_efficient_turbo"] = (s.GetEnergyEfficientTurbo())
 				temp["eng_perf_tuning"] = (s.GetEngPerfTuning())
@@ -5198,6 +5230,7 @@ func dataSourceBiosPolicyRead(c context.Context, d *schema.ResourceData, meta in
 				temp["sgx_qos"] = (s.GetSgxQos())
 				temp["sha1pcr_bank"] = (s.GetSha1pcrBank())
 				temp["sha256pcr_bank"] = (s.GetSha256pcrBank())
+				temp["sha384pcr_bank"] = (s.GetSha384pcrBank())
 				temp["shared_scope"] = (s.GetSharedScope())
 				temp["single_pctl_enable"] = (s.GetSinglePctlEnable())
 				temp["slot10link_speed"] = (s.GetSlot10linkSpeed())

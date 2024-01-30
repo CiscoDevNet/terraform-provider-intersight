@@ -505,7 +505,7 @@ func resourceFabricEthNetworkGroupPolicy() *schema.Resource {
 							Default:     false,
 						},
 						"qinq_vlan": {
-							Description:  "Select the VLAN ID for VIC QinQ (802.1Q) Tunneling.",
+							Description:  "Select the VLAN ID for VIC QinQ (802.1Q-in-802.1Q) Tunneling.",
 							Type:         schema.TypeInt,
 							ValidateFunc: validation.IntBetween(2, 4093),
 							Optional:     true,

@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
+	"reflect"
 	"strings"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
@@ -90,6 +91,15 @@ func resourceHyperflexStartReduceReSync() *schema.Resource {
 				Optional:    true,
 				Default:     "hyperflex.StartReduceReSync",
 				ForceNew:    true,
+			},
+			"cluster_mo_ids": {
+				Type:       schema.TypeList,
+				Optional:   true,
+				ConfigMode: schema.SchemaConfigModeAttr,
+				Computed:   true,
+				Elem: &schema.Schema{
+					Type: schema.TypeString,
+				}, ForceNew: true,
 			},
 			"create_time": {
 				Description: "The time when this managed object was created.",
@@ -484,6 +494,19 @@ func resourceHyperflexStartReduceReSyncCreate(c context.Context, d *schema.Resou
 
 	o.SetClassId("hyperflex.StartReduceReSync")
 
+	if v, ok := d.GetOk("cluster_mo_ids"); ok {
+		x := make([]string, 0)
+		y := reflect.ValueOf(v)
+		for i := 0; i < y.Len(); i++ {
+			if y.Index(i).Interface() != nil {
+				x = append(x, y.Index(i).Interface().(string))
+			}
+		}
+		if len(x) > 0 {
+			o.SetClusterMoIds(x)
+		}
+	}
+
 	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
@@ -580,6 +603,10 @@ func resourceHyperflexStartReduceReSyncRead(c context.Context, d *schema.Resourc
 
 	if err := d.Set("class_id", (s.GetClassId())); err != nil {
 		return diag.Errorf("error occurred while setting property ClassId in HyperflexStartReduceReSync object: %s", err.Error())
+	}
+
+	if err := d.Set("cluster_mo_ids", (s.GetClusterMoIds())); err != nil {
+		return diag.Errorf("error occurred while setting property ClusterMoIds in HyperflexStartReduceReSync object: %s", err.Error())
 	}
 
 	if err := d.Set("create_time", (s.GetCreateTime()).String()); err != nil {

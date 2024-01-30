@@ -8,7 +8,8 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
 **Iqn** | Pointer to **string** | IQN (iSCSI qualified name). Can be up to 255 characters long and has the format iqn.yyyy-mm.naming-authority:unique name. | [optional] [readonly] 
 **Name** | Pointer to **string** | Name of the initiator represented in the storage array. | [optional] [readonly] 
-**Type** | Pointer to **string** | Initiator type, it can be FC or iSCSI. * &#x60;FC&#x60; - Fibre channel initiator type which contains WWN of an HBA on the host. * &#x60;iSCSI&#x60; - An iSCSI initiator type which contains the IQN (iSCSI Qualified Name) used by the host. * &#x60;Mixed&#x60; - Initiator type for systems using both FC and iSCSI connections. | [optional] [readonly] [default to "FC"]
+**Nqn** | Pointer to **string** | NQN (NVMe Qualified Name). Can be up to 223 characters long and has the format nqn.yyyy-mm.naming-authority:unique name. | [optional] [readonly] 
+**Type** | Pointer to **string** | Initiator type, it can be FC or iSCSI. * &#x60;FC&#x60; - Fibre channel initiator type which contains WWN of an HBA on the host. * &#x60;iSCSI&#x60; - An iSCSI initiator type which contains the IQN (iSCSI Qualified Name) used by the host. * &#x60;NVMe&#x60; - NVMe initiator type which contains the NQN (NVMe Qualified Name) used by the host. * &#x60;Mixed&#x60; - Initiator type for systems using both FC and iSCSI connections. | [optional] [readonly] [default to "FC"]
 **Wwn** | Pointer to **string** | World wide name, 128 bit address represented in hexadecimal notation. For example, 51:4f:0c:50:14:1f:af:01:51:4f:0c:51:14:1f:af:01. | [optional] [readonly] 
 
 ## Methods
@@ -119,6 +120,31 @@ SetName sets Name field to given value.
 `func (o *StorageBaseInitiatorAllOf) HasName() bool`
 
 HasName returns a boolean if a field has been set.
+
+### GetNqn
+
+`func (o *StorageBaseInitiatorAllOf) GetNqn() string`
+
+GetNqn returns the Nqn field if non-nil, zero value otherwise.
+
+### GetNqnOk
+
+`func (o *StorageBaseInitiatorAllOf) GetNqnOk() (*string, bool)`
+
+GetNqnOk returns a tuple with the Nqn field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNqn
+
+`func (o *StorageBaseInitiatorAllOf) SetNqn(v string)`
+
+SetNqn sets Nqn field to given value.
+
+### HasNqn
+
+`func (o *StorageBaseInitiatorAllOf) HasNqn() bool`
+
+HasNqn returns a boolean if a field has been set.
 
 ### GetType
 

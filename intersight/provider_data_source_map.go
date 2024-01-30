@@ -726,6 +726,7 @@ func GetDataSourceMapping() map[string]*schema.Resource {
 		"intersight_resource_shared_resources_info_holder":                   dataSourceResourceSharedResourcesInfoHolder(),
 		"intersight_resourcepool_lease":                                      dataSourceResourcepoolLease(),
 		"intersight_resourcepool_lease_resource":                             dataSourceResourcepoolLeaseResource(),
+		"intersight_resourcepool_membership_reservation":                     dataSourceResourcepoolMembershipReservation(),
 		"intersight_resourcepool_pool":                                       dataSourceResourcepoolPool(),
 		"intersight_resourcepool_pool_member":                                dataSourceResourcepoolPoolMember(),
 		"intersight_resourcepool_universe":                                   dataSourceResourcepoolUniverse(),

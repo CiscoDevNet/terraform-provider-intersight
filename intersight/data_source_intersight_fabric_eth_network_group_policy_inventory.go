@@ -393,7 +393,7 @@ func getFabricEthNetworkGroupPolicyInventorySchema() map[string]*schema.Schema {
 						Optional:    true,
 					},
 					"qinq_vlan": {
-						Description: "Select the VLAN ID for VIC QinQ (802.1Q) Tunneling.",
+						Description: "Select the VLAN ID for VIC QinQ (802.1Q-in-802.1Q) Tunneling.",
 						Type:        schema.TypeInt,
 						Optional:    true,
 					},

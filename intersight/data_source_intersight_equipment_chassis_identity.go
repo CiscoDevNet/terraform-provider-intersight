@@ -173,6 +173,11 @@ func getEquipmentChassisIdentitySchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"lifecycle_mod_time": {
+			Description: "The time when the last life cycle state change happened.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"mod_time": {
 			Description: "The time when this managed object was last modified.",
 			Type:        schema.TypeString,
@@ -185,6 +190,11 @@ func getEquipmentChassisIdentitySchema() map[string]*schema.Schema {
 		},
 		"moid": {
 			Description: "The unique identifier of this Managed Object instance.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"name": {
+			Description: "The name of the equipment for unique identification.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -635,6 +645,11 @@ func dataSourceEquipmentChassisIdentityRead(c context.Context, d *schema.Resourc
 		o.SetLifecycle(x)
 	}
 
+	if v, ok := d.GetOk("lifecycle_mod_time"); ok {
+		x, _ := time.Parse(time.RFC1123, v.(string))
+		o.SetLifecycleModTime(x)
+	}
+
 	if v, ok := d.GetOk("mod_time"); ok {
 		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetModTime(x)
@@ -648,6 +663,11 @@ func dataSourceEquipmentChassisIdentityRead(c context.Context, d *schema.Resourc
 	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
+	}
+
+	if v, ok := d.GetOk("name"); ok {
+		x := (v.(string))
+		o.SetName(x)
 	}
 
 	if v, ok := d.GetOk("object_type"); ok {
@@ -966,9 +986,12 @@ func dataSourceEquipmentChassisIdentityRead(c context.Context, d *schema.Resourc
 				temp["io_card_identity_list"] = flattenListEquipmentIoCardIdentity(s.GetIoCardIdentityList(), d)
 				temp["nr_lifecycle"] = (s.GetLifecycle())
 
+				temp["lifecycle_mod_time"] = (s.GetLifecycleModTime()).String()
+
 				temp["mod_time"] = (s.GetModTime()).String()
 				temp["model"] = (s.GetModel())
 				temp["moid"] = (s.GetMoid())
+				temp["name"] = (s.GetName())
 				temp["object_type"] = (s.GetObjectType())
 				temp["owners"] = (s.GetOwners())
 
