@@ -7,6 +7,8 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "equipment.ChassisOperation"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "equipment.ChassisOperation"]
 **AdminLocatorLedAction** | Pointer to **string** | User configured state of the locator LED for the Chassis. * &#x60;None&#x60; - No operation action for the Locator Led of an equipment. * &#x60;TurnOn&#x60; - Turn on the Locator Led of an equipment. * &#x60;TurnOff&#x60; - Turn off the Locator Led of an equipment. | [optional] [default to "None"]
+**AdminPowerCycleSlotId** | Pointer to **int64** | Slot id of the chassis slot that needs to be power cycled. | [optional] 
+**ChassisOperationStatus** | Pointer to [**[]EquipmentChassisOperationStatus**](EquipmentChassisOperationStatus.md) |  | [optional] 
 **ConfigState** | Pointer to **string** | The configured state of these settings in the target chassis. The value is any one of Applied, Applying, Failed. Applied - This state denotes that the settings are applied successfully in the target chassis. Applying - This state denotes that the settings are being applied in the target chassis. Failed - This state denotes that the settings could not be applied in the target chassis. * &#x60;None&#x60; - Nil value when no action has been triggered by the user. * &#x60;Applied&#x60; - User configured settings are in applied state. * &#x60;Applying&#x60; - User settings are being applied on the target server. * &#x60;Failed&#x60; - User configured settings could not be applied. | [optional] [readonly] [default to "None"]
 **Chassis** | Pointer to [**EquipmentChassisRelationship**](EquipmentChassisRelationship.md) |  | [optional] 
 **DeviceRegistration** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
@@ -95,6 +97,66 @@ SetAdminLocatorLedAction sets AdminLocatorLedAction field to given value.
 
 HasAdminLocatorLedAction returns a boolean if a field has been set.
 
+### GetAdminPowerCycleSlotId
+
+`func (o *EquipmentChassisOperationAllOf) GetAdminPowerCycleSlotId() int64`
+
+GetAdminPowerCycleSlotId returns the AdminPowerCycleSlotId field if non-nil, zero value otherwise.
+
+### GetAdminPowerCycleSlotIdOk
+
+`func (o *EquipmentChassisOperationAllOf) GetAdminPowerCycleSlotIdOk() (*int64, bool)`
+
+GetAdminPowerCycleSlotIdOk returns a tuple with the AdminPowerCycleSlotId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAdminPowerCycleSlotId
+
+`func (o *EquipmentChassisOperationAllOf) SetAdminPowerCycleSlotId(v int64)`
+
+SetAdminPowerCycleSlotId sets AdminPowerCycleSlotId field to given value.
+
+### HasAdminPowerCycleSlotId
+
+`func (o *EquipmentChassisOperationAllOf) HasAdminPowerCycleSlotId() bool`
+
+HasAdminPowerCycleSlotId returns a boolean if a field has been set.
+
+### GetChassisOperationStatus
+
+`func (o *EquipmentChassisOperationAllOf) GetChassisOperationStatus() []EquipmentChassisOperationStatus`
+
+GetChassisOperationStatus returns the ChassisOperationStatus field if non-nil, zero value otherwise.
+
+### GetChassisOperationStatusOk
+
+`func (o *EquipmentChassisOperationAllOf) GetChassisOperationStatusOk() (*[]EquipmentChassisOperationStatus, bool)`
+
+GetChassisOperationStatusOk returns a tuple with the ChassisOperationStatus field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetChassisOperationStatus
+
+`func (o *EquipmentChassisOperationAllOf) SetChassisOperationStatus(v []EquipmentChassisOperationStatus)`
+
+SetChassisOperationStatus sets ChassisOperationStatus field to given value.
+
+### HasChassisOperationStatus
+
+`func (o *EquipmentChassisOperationAllOf) HasChassisOperationStatus() bool`
+
+HasChassisOperationStatus returns a boolean if a field has been set.
+
+### SetChassisOperationStatusNil
+
+`func (o *EquipmentChassisOperationAllOf) SetChassisOperationStatusNil(b bool)`
+
+ SetChassisOperationStatusNil sets the value for ChassisOperationStatus to be an explicit nil
+
+### UnsetChassisOperationStatus
+`func (o *EquipmentChassisOperationAllOf) UnsetChassisOperationStatus()`
+
+UnsetChassisOperationStatus ensures that no value is present for ChassisOperationStatus, not even an explicit nil
 ### GetConfigState
 
 `func (o *EquipmentChassisOperationAllOf) GetConfigState() string`

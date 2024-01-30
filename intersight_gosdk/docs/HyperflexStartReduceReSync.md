@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "hyperflex.StartReduceReSync"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "hyperflex.StartReduceReSync"]
+**ClusterMoIds** | Pointer to **[]string** |  | [optional] 
 **Operation** | Pointer to **string** | The cleanup operation to perform. * &#x60;NoOp&#x60; - Does not perform any operation when the API is called. * &#x60;StartReduceResync&#x60; - Start the execution of reduce re-sync and stale mirror cleanup for the HyperFlex clusters associated with the account. | [optional] [default to "NoOp"]
 
 ## Methods
@@ -67,6 +68,41 @@ and a boolean to check if the value has been set.
 SetObjectType sets ObjectType field to given value.
 
 
+### GetClusterMoIds
+
+`func (o *HyperflexStartReduceReSync) GetClusterMoIds() []string`
+
+GetClusterMoIds returns the ClusterMoIds field if non-nil, zero value otherwise.
+
+### GetClusterMoIdsOk
+
+`func (o *HyperflexStartReduceReSync) GetClusterMoIdsOk() (*[]string, bool)`
+
+GetClusterMoIdsOk returns a tuple with the ClusterMoIds field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClusterMoIds
+
+`func (o *HyperflexStartReduceReSync) SetClusterMoIds(v []string)`
+
+SetClusterMoIds sets ClusterMoIds field to given value.
+
+### HasClusterMoIds
+
+`func (o *HyperflexStartReduceReSync) HasClusterMoIds() bool`
+
+HasClusterMoIds returns a boolean if a field has been set.
+
+### SetClusterMoIdsNil
+
+`func (o *HyperflexStartReduceReSync) SetClusterMoIdsNil(b bool)`
+
+ SetClusterMoIdsNil sets the value for ClusterMoIds to be an explicit nil
+
+### UnsetClusterMoIds
+`func (o *HyperflexStartReduceReSync) UnsetClusterMoIds()`
+
+UnsetClusterMoIds ensures that no value is present for ClusterMoIds, not even an explicit nil
 ### GetOperation
 
 `func (o *HyperflexStartReduceReSync) GetOperation() string`

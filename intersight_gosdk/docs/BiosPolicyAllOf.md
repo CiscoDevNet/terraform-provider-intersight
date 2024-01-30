@@ -35,8 +35,8 @@ Name | Type | Description | Notes
 **BootOptionRetry** | Pointer to **string** | BIOS Token for setting Boot Option Retry configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;enabled&#x60; - Enables the BIOS setting. * &#x60;disabled&#x60; - Disables the BIOS setting. | [optional] [default to "platform-default"]
 **BootPerformanceMode** | Pointer to **string** | BIOS Token for setting Boot Performance Mode configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;Max Efficient&#x60; - Value - Max Efficient for configuring BootPerformanceMode token. * &#x60;Max Performance&#x60; - Value - Max Performance for configuring BootPerformanceMode token. * &#x60;Set by Intel NM&#x60; - Value - Set by Intel NM for configuring BootPerformanceMode token. | [optional] [default to "platform-default"]
 **BurstAndPostponedRefresh** | Pointer to **string** | BIOS Token for setting Burst and Postponed Refresh configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;enabled&#x60; - Enables the BIOS setting. * &#x60;disabled&#x60; - Disables the BIOS setting. | [optional] [default to "platform-default"]
-**C1autoDemotion** | Pointer to **string** | BIOS Token for setting C1 Auto Demotion configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;enabled&#x60; - Enables the BIOS setting. * &#x60;disabled&#x60; - Disables the BIOS setting. | [optional] [default to "platform-default"]
-**C1autoUnDemotion** | Pointer to **string** | BIOS Token for setting C1 Auto UnDemotion configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;enabled&#x60; - Enables the BIOS setting. * &#x60;disabled&#x60; - Disables the BIOS setting. | [optional] [default to "platform-default"]
+**C1autoDemotion** | Pointer to **string** | BIOS Token for setting C1 Auto Demotion configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;Auto&#x60; - Value - Auto for configuring C1autoDemotion token. * &#x60;disabled&#x60; - Value - disabled for configuring C1autoDemotion token. * &#x60;enabled&#x60; - Value - enabled for configuring C1autoDemotion token. | [optional] [default to "platform-default"]
+**C1autoUnDemotion** | Pointer to **string** | BIOS Token for setting C1 Auto UnDemotion configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;Auto&#x60; - Value - Auto for configuring C1autoUnDemotion token. * &#x60;disabled&#x60; - Value - disabled for configuring C1autoUnDemotion token. * &#x60;enabled&#x60; - Value - enabled for configuring C1autoUnDemotion token. | [optional] [default to "platform-default"]
 **CbsCmnApbdis** | Pointer to **string** | BIOS Token for setting APBDIS configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;0&#x60; - Value - 0 for configuring CbsCmnApbdis token. * &#x60;1&#x60; - Value - 1 for configuring CbsCmnApbdis token. * &#x60;Auto&#x60; - Value - Auto for configuring CbsCmnApbdis token. | [optional] [default to "platform-default"]
 **CbsCmnCpuCpb** | Pointer to **string** | BIOS Token for setting Core Performance Boost configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;Auto&#x60; - Value - Auto for configuring CbsCmnCpuCpb token. * &#x60;disabled&#x60; - Value - disabled for configuring CbsCmnCpuCpb token. | [optional] [default to "platform-default"]
 **CbsCmnCpuGenDowncoreCtrl** | Pointer to **string** | BIOS Token for setting Downcore Control configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;Auto&#x60; - Value - Auto for configuring CbsCmnCpuGenDowncoreCtrl token. * &#x60;FOUR (2 + 2)&#x60; - Value - FOUR (2 + 2) for configuring CbsCmnCpuGenDowncoreCtrl token. * &#x60;FOUR (4 + 0)&#x60; - Value - FOUR (4 + 0) for configuring CbsCmnCpuGenDowncoreCtrl token. * &#x60;SIX (3 + 3)&#x60; - Value - SIX (3 + 3) for configuring CbsCmnCpuGenDowncoreCtrl token. * &#x60;THREE (3 + 0)&#x60; - Value - THREE (3 + 0) for configuring CbsCmnCpuGenDowncoreCtrl token. * &#x60;TWO (1 + 1)&#x60; - Value - TWO (1 + 1) for configuring CbsCmnCpuGenDowncoreCtrl token. * &#x60;TWO (2 + 0)&#x60; - Value - TWO (2 + 0) for configuring CbsCmnCpuGenDowncoreCtrl token. | [optional] [default to "platform-default"]
@@ -99,6 +99,8 @@ Name | Type | Description | Notes
 **EnableMktme** | Pointer to **string** | BIOS Token for setting Multikey Total Memory Encryption  (MK-TME) configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;enabled&#x60; - Enables the BIOS setting. * &#x60;disabled&#x60; - Disables the BIOS setting. | [optional] [default to "platform-default"]
 **EnableRmt** | Pointer to **string** | BIOS Token for setting Rank Margin Tool configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;enabled&#x60; - Enables the BIOS setting. * &#x60;disabled&#x60; - Disables the BIOS setting. | [optional] [default to "platform-default"]
 **EnableSgx** | Pointer to **string** | BIOS Token for setting Software Guard Extensions  (SGX) configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;enabled&#x60; - Enables the BIOS setting. * &#x60;disabled&#x60; - Disables the BIOS setting. | [optional] [default to "platform-default"]
+**EnableTdx** | Pointer to **string** | BIOS Token for setting Trust Domain Extension  (TDX) configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;enabled&#x60; - Enables the BIOS setting. * &#x60;disabled&#x60; - Disables the BIOS setting. | [optional] [default to "platform-default"]
+**EnableTdxSeamldr** | Pointer to **string** | BIOS Token for setting TDX Secure Arbitration Mode  (SEAM) Loader configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;enabled&#x60; - Enables the BIOS setting. * &#x60;disabled&#x60; - Disables the BIOS setting. | [optional] [default to "platform-default"]
 **EnableTme** | Pointer to **string** | BIOS Token for setting Total Memory Encryption  (TME) configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;enabled&#x60; - Enables the BIOS setting. * &#x60;disabled&#x60; - Disables the BIOS setting. | [optional] [default to "platform-default"]
 **EnergyEfficientTurbo** | Pointer to **string** | BIOS Token for setting Energy Efficient Turbo configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;enabled&#x60; - Enables the BIOS setting. * &#x60;disabled&#x60; - Disables the BIOS setting. | [optional] [default to "platform-default"]
 **EngPerfTuning** | Pointer to **string** | BIOS Token for setting Energy Performance Tuning configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;BIOS&#x60; - Value - BIOS for configuring EngPerfTuning token. * &#x60;OS&#x60; - Value - OS for configuring EngPerfTuning token. | [optional] [default to "platform-default"]
@@ -215,7 +217,7 @@ Name | Type | Description | Notes
 **PuttyKeyPad** | Pointer to **string** | BIOS Token for setting Putty KeyPad configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;ESCN&#x60; - Value - ESCN for configuring PuttyKeyPad token. * &#x60;LINUX&#x60; - Value - LINUX for configuring PuttyKeyPad token. * &#x60;SCO&#x60; - Value - SCO for configuring PuttyKeyPad token. * &#x60;VT100&#x60; - Value - VT100 for configuring PuttyKeyPad token. * &#x60;VT400&#x60; - Value - VT400 for configuring PuttyKeyPad token. * &#x60;XTERMR6&#x60; - Value - XTERMR6 for configuring PuttyKeyPad token. | [optional] [default to "platform-default"]
 **PwrPerfTuning** | Pointer to **string** | BIOS Token for setting Power Performance Tuning configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;bios&#x60; - Value - BIOS for configuring PwrPerfTuning token. * &#x60;os&#x60; - Value - os for configuring PwrPerfTuning token. * &#x60;peci&#x60; - Value - peci for configuring PwrPerfTuning token. | [optional] [default to "platform-default"]
 **QpiLinkFrequency** | Pointer to **string** | BIOS Token for setting QPI Link Frequency Select configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;6.4-gt/s&#x60; - Value - 6.4-gt/s for configuring QpiLinkFrequency token. * &#x60;7.2-gt/s&#x60; - Value - 7.2-gt/s for configuring QpiLinkFrequency token. * &#x60;8.0-gt/s&#x60; - Value - 8.0-gt/s for configuring QpiLinkFrequency token. * &#x60;9.6-gt/s&#x60; - Value - 9.6-gt/s for configuring QpiLinkFrequency token. * &#x60;auto&#x60; - Value - auto for configuring QpiLinkFrequency token. | [optional] [default to "platform-default"]
-**QpiLinkSpeed** | Pointer to **string** | BIOS Token for setting UPI Link Frequency Select configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;10.4GT/s&#x60; - Value - 10.4GT/s for configuring QpiLinkSpeed token. * &#x60;11.2GT/s&#x60; - Value - 11.2GT/s for configuring QpiLinkSpeed token. * &#x60;12.8GT/s&#x60; - Value - 12.8GT/s for configuring QpiLinkSpeed token. * &#x60;14.4GT/s&#x60; - Value - 14.4GT/s for configuring QpiLinkSpeed token. * &#x60;16.0GT/s&#x60; - Value - 16.0GT/s for configuring QpiLinkSpeed token. * &#x60;9.6GT/s&#x60; - Value - 9.6GT/s for configuring QpiLinkSpeed token. * &#x60;Auto&#x60; - Value - Auto for configuring QpiLinkSpeed token. | [optional] [default to "platform-default"]
+**QpiLinkSpeed** | Pointer to **string** | BIOS Token for setting UPI Link Frequency Select configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;10.4GT/s&#x60; - Value - 10.4GT/s for configuring QpiLinkSpeed token. * &#x60;11.2GT/s&#x60; - Value - 11.2GT/s for configuring QpiLinkSpeed token. * &#x60;12.8GT/s&#x60; - Value - 12.8GT/s for configuring QpiLinkSpeed token. * &#x60;14.4GT/s&#x60; - Value - 14.4GT/s for configuring QpiLinkSpeed token. * &#x60;16.0GT/s&#x60; - Value - 16.0GT/s for configuring QpiLinkSpeed token. * &#x60;20.0GT/s&#x60; - Value - 20.0GT/s for configuring QpiLinkSpeed token. * &#x60;9.6GT/s&#x60; - Value - 9.6GT/s for configuring QpiLinkSpeed token. * &#x60;Auto&#x60; - Value - Auto for configuring QpiLinkSpeed token. | [optional] [default to "platform-default"]
 **QpiSnoopMode** | Pointer to **string** | BIOS Token for setting QPI Snoop Mode configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;auto&#x60; - Value - auto for configuring QpiSnoopMode token. * &#x60;cluster-on-die&#x60; - Value - cluster-on-die for configuring QpiSnoopMode token. * &#x60;early-snoop&#x60; - Value - early-snoop for configuring QpiSnoopMode token. * &#x60;home-directory-snoop&#x60; - Value - home-directory-snoop for configuring QpiSnoopMode token. * &#x60;home-directory-snoop-with-osb&#x60; - Value - home-directory-snoop-with-osb for configuring QpiSnoopMode token. * &#x60;home-snoop&#x60; - Value - home-snoop for configuring QpiSnoopMode token. | [optional] [default to "platform-default"]
 **RankInterLeave** | Pointer to **string** | BIOS Token for setting Rank Interleaving configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;1-way&#x60; - Value - 1-way for configuring RankInterLeave token. * &#x60;2-way&#x60; - Value - 2-way for configuring RankInterLeave token. * &#x60;4-way&#x60; - Value - 4-way for configuring RankInterLeave token. * &#x60;8-way&#x60; - Value - 8-way for configuring RankInterLeave token. * &#x60;auto&#x60; - Value - auto for configuring RankInterLeave token. | [optional] [default to "platform-default"]
 **RedirectionAfterPost** | Pointer to **string** | BIOS Token for setting Redirection After BIOS POST configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;Always Enable&#x60; - Value - Always Enable for configuring RedirectionAfterPost token. * &#x60;Bootloader&#x60; - Value - Bootloader for configuring RedirectionAfterPost token. | [optional] [default to "platform-default"]
@@ -237,6 +239,7 @@ Name | Type | Description | Notes
 **SgxQos** | Pointer to **string** | BIOS Token for setting SGX QoS configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;enabled&#x60; - Enables the BIOS setting. * &#x60;disabled&#x60; - Disables the BIOS setting. | [optional] [default to "platform-default"]
 **Sha1pcrBank** | Pointer to **string** | BIOS Token for setting SHA-1 PCR Bank configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;enabled&#x60; - Enables the BIOS setting. * &#x60;disabled&#x60; - Disables the BIOS setting. | [optional] [default to "platform-default"]
 **Sha256pcrBank** | Pointer to **string** | BIOS Token for setting SHA256 PCR Bank configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;enabled&#x60; - Enables the BIOS setting. * &#x60;disabled&#x60; - Disables the BIOS setting. | [optional] [default to "platform-default"]
+**Sha384pcrBank** | Pointer to **string** | BIOS Token for setting SHA384 PCR Bank configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;enabled&#x60; - Enables the BIOS setting. * &#x60;disabled&#x60; - Disables the BIOS setting. | [optional] [default to "platform-default"]
 **SinglePctlEnable** | Pointer to **string** | BIOS Token for setting Single PCTL configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;No&#x60; - Value - No for configuring SinglePctlEnable token. * &#x60;Yes&#x60; - Value - Yes for configuring SinglePctlEnable token. | [optional] [default to "platform-default"]
 **Slot10linkSpeed** | Pointer to **string** | BIOS Token for setting PCIe Slot:10 Link Speed configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;Auto&#x60; - Value - Auto for configuring Slot10linkSpeed token. * &#x60;Disabled&#x60; - Value - Disabled for configuring Slot10linkSpeed token. * &#x60;GEN1&#x60; - Value - GEN1 for configuring Slot10linkSpeed token. * &#x60;GEN2&#x60; - Value - GEN2 for configuring Slot10linkSpeed token. * &#x60;GEN3&#x60; - Value - GEN3 for configuring Slot10linkSpeed token. | [optional] [default to "platform-default"]
 **Slot10state** | Pointer to **string** | BIOS Token for setting Slot 10 State configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;disabled&#x60; - Value - disabled for configuring Slot10state token. * &#x60;enabled&#x60; - Value - enabled for configuring Slot10state token. * &#x60;Legacy Only&#x60; - Value - Legacy Only for configuring Slot10state token. * &#x60;UEFI Only&#x60; - Value - UEFI Only for configuring Slot10state token. | [optional] [default to "platform-default"]
@@ -2804,6 +2807,56 @@ SetEnableSgx sets EnableSgx field to given value.
 `func (o *BiosPolicyAllOf) HasEnableSgx() bool`
 
 HasEnableSgx returns a boolean if a field has been set.
+
+### GetEnableTdx
+
+`func (o *BiosPolicyAllOf) GetEnableTdx() string`
+
+GetEnableTdx returns the EnableTdx field if non-nil, zero value otherwise.
+
+### GetEnableTdxOk
+
+`func (o *BiosPolicyAllOf) GetEnableTdxOk() (*string, bool)`
+
+GetEnableTdxOk returns a tuple with the EnableTdx field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEnableTdx
+
+`func (o *BiosPolicyAllOf) SetEnableTdx(v string)`
+
+SetEnableTdx sets EnableTdx field to given value.
+
+### HasEnableTdx
+
+`func (o *BiosPolicyAllOf) HasEnableTdx() bool`
+
+HasEnableTdx returns a boolean if a field has been set.
+
+### GetEnableTdxSeamldr
+
+`func (o *BiosPolicyAllOf) GetEnableTdxSeamldr() string`
+
+GetEnableTdxSeamldr returns the EnableTdxSeamldr field if non-nil, zero value otherwise.
+
+### GetEnableTdxSeamldrOk
+
+`func (o *BiosPolicyAllOf) GetEnableTdxSeamldrOk() (*string, bool)`
+
+GetEnableTdxSeamldrOk returns a tuple with the EnableTdxSeamldr field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEnableTdxSeamldr
+
+`func (o *BiosPolicyAllOf) SetEnableTdxSeamldr(v string)`
+
+SetEnableTdxSeamldr sets EnableTdxSeamldr field to given value.
+
+### HasEnableTdxSeamldr
+
+`func (o *BiosPolicyAllOf) HasEnableTdxSeamldr() bool`
+
+HasEnableTdxSeamldr returns a boolean if a field has been set.
 
 ### GetEnableTme
 
@@ -6254,6 +6307,31 @@ SetSha256pcrBank sets Sha256pcrBank field to given value.
 `func (o *BiosPolicyAllOf) HasSha256pcrBank() bool`
 
 HasSha256pcrBank returns a boolean if a field has been set.
+
+### GetSha384pcrBank
+
+`func (o *BiosPolicyAllOf) GetSha384pcrBank() string`
+
+GetSha384pcrBank returns the Sha384pcrBank field if non-nil, zero value otherwise.
+
+### GetSha384pcrBankOk
+
+`func (o *BiosPolicyAllOf) GetSha384pcrBankOk() (*string, bool)`
+
+GetSha384pcrBankOk returns a tuple with the Sha384pcrBank field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSha384pcrBank
+
+`func (o *BiosPolicyAllOf) SetSha384pcrBank(v string)`
+
+SetSha384pcrBank sets Sha384pcrBank field to given value.
+
+### HasSha384pcrBank
+
+`func (o *BiosPolicyAllOf) HasSha384pcrBank() bool`
+
+HasSha384pcrBank returns a boolean if a field has been set.
 
 ### GetSinglePctlEnable
 

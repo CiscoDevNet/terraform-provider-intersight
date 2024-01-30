@@ -1605,6 +1605,24 @@ func flattenListCrdCustomResourceConfigProperty(p []models.CrdCustomResourceConf
 	}
 	return crdcustomresourceconfigpropertys
 }
+func flattenListEquipmentChassisOperationStatus(p []models.EquipmentChassisOperationStatus, d *schema.ResourceData) []map[string]interface{} {
+	var equipmentchassisoperationstatuss []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		equipmentchassisoperationstatus := make(map[string]interface{})
+		equipmentchassisoperationstatus["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+		equipmentchassisoperationstatus["class_id"] = item.GetClassId()
+		equipmentchassisoperationstatus["config_state"] = item.GetConfigState()
+		equipmentchassisoperationstatus["object_type"] = item.GetObjectType()
+		equipmentchassisoperationstatus["slot_id"] = item.GetSlotId()
+		equipmentchassisoperationstatus["workflow_id"] = item.GetWorkflowId()
+		equipmentchassisoperationstatus["workflow_type"] = item.GetWorkflowType()
+		equipmentchassisoperationstatuss = append(equipmentchassisoperationstatuss, equipmentchassisoperationstatus)
+	}
+	return equipmentchassisoperationstatuss
+}
 func flattenListEquipmentExpanderModuleRelationship(p []models.EquipmentExpanderModuleRelationship, d *schema.ResourceData) []map[string]interface{} {
 	var equipmentexpandermodulerelationships []map[string]interface{}
 	if len(p) == 0 {
@@ -6337,6 +6355,18 @@ func flattenListResourceSelector(p []models.ResourceSelector, d *schema.Resource
 	}
 	return resourceselectors
 }
+func flattenListResourcepoolPoolRelationship(p []models.ResourcepoolPoolRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var resourcepoolpoolrelationships []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		item := item.MoMoRef
+		resourcepoolpoolrelationship := flattenMoMoRef(item)
+		resourcepoolpoolrelationships = append(resourcepoolpoolrelationships, resourcepoolpoolrelationship)
+	}
+	return resourcepoolpoolrelationships
+}
 func flattenListSdcardPartition(p []models.SdcardPartition, d *schema.ResourceData) []map[string]interface{} {
 	var sdcardpartitions []map[string]interface{}
 	if len(p) == 0 {
@@ -6630,6 +6660,7 @@ func flattenListStorageBaseInitiator(p []models.StorageBaseInitiator, d *schema.
 		storagebaseinitiator["class_id"] = item.GetClassId()
 		storagebaseinitiator["iqn"] = item.GetIqn()
 		storagebaseinitiator["name"] = item.GetName()
+		storagebaseinitiator["nqn"] = item.GetNqn()
 		storagebaseinitiator["object_type"] = item.GetObjectType()
 		storagebaseinitiator["type"] = item.GetType()
 		storagebaseinitiator["wwn"] = item.GetWwn()
@@ -6889,6 +6920,7 @@ func flattenListStorageHyperFlexIscsiInitiator(p []models.StorageHyperFlexIscsiI
 		storagehyperflexiscsiinitiator["ip_addresses"] = item.GetIpAddresses()
 		storagehyperflexiscsiinitiator["iqn"] = item.GetIqn()
 		storagehyperflexiscsiinitiator["name"] = item.GetName()
+		storagehyperflexiscsiinitiator["nqn"] = item.GetNqn()
 		storagehyperflexiscsiinitiator["object_type"] = item.GetObjectType()
 		storagehyperflexiscsiinitiator["type"] = item.GetType()
 		storagehyperflexiscsiinitiator["wwn"] = item.GetWwn()
@@ -15718,7 +15750,7 @@ func flattenMapKubernetesProxyConfig(p models.KubernetesProxyConfig, d *schema.R
 	kubernetesproxyconfig["hostname"] = item.GetHostname()
 	kubernetesproxyconfig["is_password_set"] = item.GetIsPasswordSet()
 	kubernetesproxyconfig["object_type"] = item.GetObjectType()
-	password_x, exists := d.GetOk("docker_http_proxy")
+	password_x, exists := d.GetOk("http_proxy")
 	if exists && password_x != nil {
 		password_y := password_x.([]interface{})[0].(map[string]interface{})
 		kubernetesproxyconfig["password"] = password_y["password"]
@@ -21448,6 +21480,27 @@ func flattenMapVnicScsiQueueSettings(p models.VnicScsiQueueSettings, d *schema.R
 
 	vnicscsiqueuesettingss = append(vnicscsiqueuesettingss, vnicscsiqueuesettings)
 	return vnicscsiqueuesettingss
+}
+func flattenMapVnicSriovSettings(p models.VnicSriovSettings, d *schema.ResourceData) []map[string]interface{} {
+	var vnicsriovsettingss []map[string]interface{}
+	var ret models.VnicSriovSettings
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	item := p
+	vnicsriovsettings := make(map[string]interface{})
+	vnicsriovsettings["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	vnicsriovsettings["class_id"] = item.GetClassId()
+	vnicsriovsettings["comp_count_per_vf"] = item.GetCompCountPerVf()
+	vnicsriovsettings["enabled"] = item.GetEnabled()
+	vnicsriovsettings["int_count_per_vf"] = item.GetIntCountPerVf()
+	vnicsriovsettings["object_type"] = item.GetObjectType()
+	vnicsriovsettings["rx_count_per_vf"] = item.GetRxCountPerVf()
+	vnicsriovsettings["tx_count_per_vf"] = item.GetTxCountPerVf()
+	vnicsriovsettings["vf_count"] = item.GetVfCount()
+
+	vnicsriovsettingss = append(vnicsriovsettingss, vnicsriovsettings)
+	return vnicsriovsettingss
 }
 func flattenMapVnicTcpOffloadSettings(p models.VnicTcpOffloadSettings, d *schema.ResourceData) []map[string]interface{} {
 	var vnictcpoffloadsettingss []map[string]interface{}

@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **AllowedVlans** | Pointer to **string** | Allowed VLAN IDs of the virtual interface. A list of comma separated VLAN ids and/or VLAN id ranges. | [optional] 
 **NativeVlan** | Pointer to **int64** | Native VLAN ID of the virtual interface or the corresponding vethernet on the peer Fabric Interconnect to which the virtual interface is connected. If the native VLAN is not a part of the allowed VLANs, it will automatically be added to the list of allowed VLANs. | [optional] [default to 1]
 **QinqEnabled** | Pointer to **bool** | Enable QinQ (802.1Q-in-802.1Q) Tunneling on the vNIC. | [optional] [default to false]
-**QinqVlan** | Pointer to **int64** | Select the VLAN ID for VIC QinQ (802.1Q) Tunneling. | [optional] [default to 2]
+**QinqVlan** | Pointer to **int64** | Select the VLAN ID for VIC QinQ (802.1Q-in-802.1Q) Tunneling. | [optional] [default to 2]
 
 ## Methods
 

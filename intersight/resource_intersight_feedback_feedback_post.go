@@ -207,7 +207,7 @@ func resourceFeedbackFeedbackPost() *schema.Resource {
 						"comment": {
 							Description:  "Text of the feedback as provided by the user, if it is a bug or a comment.",
 							Type:         schema.TypeString,
-							ValidateFunc: StringLenMaximum(1500),
+							ValidateFunc: StringLenMaximum(5000),
 							Optional:     true,
 							ForceNew:     true,
 						},

@@ -120,6 +120,11 @@ func getComputeBladeIdentitySchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"lifecycle_mod_time": {
+			Description: "The time when the last life cycle state change happened.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"managed_nodes": {
 			Description: "An array of relationships to computeBladeIdentity resources.",
 			Type:        schema.TypeList,
@@ -171,6 +176,11 @@ func getComputeBladeIdentitySchema() map[string]*schema.Schema {
 		},
 		"moid": {
 			Description: "The unique identifier of this Managed Object instance.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"name": {
+			Description: "The name of the equipment for unique identification.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -620,6 +630,11 @@ func dataSourceComputeBladeIdentityRead(c context.Context, d *schema.ResourceDat
 		o.SetLifecycle(x)
 	}
 
+	if v, ok := d.GetOk("lifecycle_mod_time"); ok {
+		x, _ := time.Parse(time.RFC1123, v.(string))
+		o.SetLifecycleModTime(x)
+	}
+
 	if v, ok := d.GetOk("managed_nodes"); ok {
 		x := make([]models.ComputeBladeIdentityRelationship, 0)
 		s := v.([]interface{})
@@ -678,6 +693,11 @@ func dataSourceComputeBladeIdentityRead(c context.Context, d *schema.ResourceDat
 	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
+	}
+
+	if v, ok := d.GetOk("name"); ok {
+		x := (v.(string))
+		o.SetName(x)
 	}
 
 	if v, ok := d.GetOk("object_type"); ok {
@@ -1050,12 +1070,15 @@ func dataSourceComputeBladeIdentityRead(c context.Context, d *schema.ResourceDat
 				temp["last_discovery_triggered"] = (s.GetLastDiscoveryTriggered())
 				temp["nr_lifecycle"] = (s.GetLifecycle())
 
+				temp["lifecycle_mod_time"] = (s.GetLifecycleModTime()).String()
+
 				temp["managed_nodes"] = flattenListComputeBladeIdentityRelationship(s.GetManagedNodes(), d)
 				temp["manager_slot_id"] = (s.GetManagerSlotId())
 
 				temp["mod_time"] = (s.GetModTime()).String()
 				temp["model"] = (s.GetModel())
 				temp["moid"] = (s.GetMoid())
+				temp["name"] = (s.GetName())
 				temp["object_type"] = (s.GetObjectType())
 				temp["owners"] = (s.GetOwners())
 

@@ -65,6 +65,11 @@ func getHyperflexStartReduceReSyncSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"cluster_mo_ids": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Schema{
+				Type: schema.TypeString}},
 		"create_time": {
 			Description: "The time when this managed object was created.",
 			Type:        schema.TypeString,
@@ -391,6 +396,17 @@ func dataSourceHyperflexStartReduceReSyncRead(c context.Context, d *schema.Resou
 		o.SetClassId(x)
 	}
 
+	if v, ok := d.GetOk("cluster_mo_ids"); ok {
+		x := make([]string, 0)
+		y := reflect.ValueOf(v)
+		for i := 0; i < y.Len(); i++ {
+			if y.Index(i).Interface() != nil {
+				x = append(x, y.Index(i).Interface().(string))
+			}
+		}
+		o.SetClusterMoIds(x)
+	}
+
 	if v, ok := d.GetOk("create_time"); ok {
 		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetCreateTime(x)
@@ -667,6 +683,7 @@ func dataSourceHyperflexStartReduceReSyncRead(c context.Context, d *schema.Resou
 
 				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)
 				temp["class_id"] = (s.GetClassId())
+				temp["cluster_mo_ids"] = (s.GetClusterMoIds())
 
 				temp["create_time"] = (s.GetCreateTime()).String()
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
