@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-11765
+API version: 1.0.11-14968
 Contact: intersight@cisco.com
 */
 
@@ -26,6 +26,8 @@ type StorageNetAppBaseSnapMirrorPolicy struct {
 	ObjectType string `json:"ObjectType"`
 	// Comment associated with the policy.
 	Comment *string `json:"Comment,omitempty"`
+	// Specifies whether all source Snapshot copies should be copied to the destination on a transfer rather than specifying specific retentions. It is applicable only to async policies.
+	CopyAllSourceSnapshots *bool `json:"CopyAllSourceSnapshots,omitempty"`
 	// Name of the NetApp SnapMirror policy.
 	Name *string `json:"Name,omitempty"`
 	// Identifies whether the SnapMirror policy is owned by the storage virtual machine or the cluster.
@@ -142,6 +144,38 @@ func (o *StorageNetAppBaseSnapMirrorPolicy) HasComment() bool {
 // SetComment gets a reference to the given string and assigns it to the Comment field.
 func (o *StorageNetAppBaseSnapMirrorPolicy) SetComment(v string) {
 	o.Comment = &v
+}
+
+// GetCopyAllSourceSnapshots returns the CopyAllSourceSnapshots field value if set, zero value otherwise.
+func (o *StorageNetAppBaseSnapMirrorPolicy) GetCopyAllSourceSnapshots() bool {
+	if o == nil || o.CopyAllSourceSnapshots == nil {
+		var ret bool
+		return ret
+	}
+	return *o.CopyAllSourceSnapshots
+}
+
+// GetCopyAllSourceSnapshotsOk returns a tuple with the CopyAllSourceSnapshots field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *StorageNetAppBaseSnapMirrorPolicy) GetCopyAllSourceSnapshotsOk() (*bool, bool) {
+	if o == nil || o.CopyAllSourceSnapshots == nil {
+		return nil, false
+	}
+	return o.CopyAllSourceSnapshots, true
+}
+
+// HasCopyAllSourceSnapshots returns a boolean if a field has been set.
+func (o *StorageNetAppBaseSnapMirrorPolicy) HasCopyAllSourceSnapshots() bool {
+	if o != nil && o.CopyAllSourceSnapshots != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetCopyAllSourceSnapshots gets a reference to the given bool and assigns it to the CopyAllSourceSnapshots field.
+func (o *StorageNetAppBaseSnapMirrorPolicy) SetCopyAllSourceSnapshots(v bool) {
+	o.CopyAllSourceSnapshots = &v
 }
 
 // GetName returns the Name field value if set, zero value otherwise.
@@ -387,6 +421,9 @@ func (o StorageNetAppBaseSnapMirrorPolicy) MarshalJSON() ([]byte, error) {
 	if o.Comment != nil {
 		toSerialize["Comment"] = o.Comment
 	}
+	if o.CopyAllSourceSnapshots != nil {
+		toSerialize["CopyAllSourceSnapshots"] = o.CopyAllSourceSnapshots
+	}
 	if o.Name != nil {
 		toSerialize["Name"] = o.Name
 	}
@@ -424,6 +461,8 @@ func (o *StorageNetAppBaseSnapMirrorPolicy) UnmarshalJSON(bytes []byte) (err err
 		ObjectType string `json:"ObjectType"`
 		// Comment associated with the policy.
 		Comment *string `json:"Comment,omitempty"`
+		// Specifies whether all source Snapshot copies should be copied to the destination on a transfer rather than specifying specific retentions. It is applicable only to async policies.
+		CopyAllSourceSnapshots *bool `json:"CopyAllSourceSnapshots,omitempty"`
 		// Name of the NetApp SnapMirror policy.
 		Name *string `json:"Name,omitempty"`
 		// Identifies whether the SnapMirror policy is owned by the storage virtual machine or the cluster.
@@ -448,6 +487,7 @@ func (o *StorageNetAppBaseSnapMirrorPolicy) UnmarshalJSON(bytes []byte) (err err
 		varStorageNetAppBaseSnapMirrorPolicy.ClassId = varStorageNetAppBaseSnapMirrorPolicyWithoutEmbeddedStruct.ClassId
 		varStorageNetAppBaseSnapMirrorPolicy.ObjectType = varStorageNetAppBaseSnapMirrorPolicyWithoutEmbeddedStruct.ObjectType
 		varStorageNetAppBaseSnapMirrorPolicy.Comment = varStorageNetAppBaseSnapMirrorPolicyWithoutEmbeddedStruct.Comment
+		varStorageNetAppBaseSnapMirrorPolicy.CopyAllSourceSnapshots = varStorageNetAppBaseSnapMirrorPolicyWithoutEmbeddedStruct.CopyAllSourceSnapshots
 		varStorageNetAppBaseSnapMirrorPolicy.Name = varStorageNetAppBaseSnapMirrorPolicyWithoutEmbeddedStruct.Name
 		varStorageNetAppBaseSnapMirrorPolicy.Scope = varStorageNetAppBaseSnapMirrorPolicyWithoutEmbeddedStruct.Scope
 		varStorageNetAppBaseSnapMirrorPolicy.SyncType = varStorageNetAppBaseSnapMirrorPolicyWithoutEmbeddedStruct.SyncType
@@ -475,6 +515,7 @@ func (o *StorageNetAppBaseSnapMirrorPolicy) UnmarshalJSON(bytes []byte) (err err
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Comment")
+		delete(additionalProperties, "CopyAllSourceSnapshots")
 		delete(additionalProperties, "Name")
 		delete(additionalProperties, "Scope")
 		delete(additionalProperties, "SyncType")

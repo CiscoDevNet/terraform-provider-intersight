@@ -1104,6 +1104,11 @@ func getNiatelemetryNiaInventorySchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"vpc_peer_ip_address": {
+			Description: "The TEP IP address of the node's vPC peer, if present.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 	}
 	return schemaMap
 }
@@ -2340,6 +2345,11 @@ func dataSourceNiatelemetryNiaInventoryRead(c context.Context, d *schema.Resourc
 		o.SetVniStatus(x)
 	}
 
+	if v, ok := d.GetOk("vpc_peer_ip_address"); ok {
+		x := (v.(string))
+		o.SetVpcPeerIpAddress(x)
+	}
+
 	data, err := o.MarshalJSON()
 	if err != nil {
 		return diag.Errorf("json marshal of NiatelemetryNiaInventory object failed with error : %s", err.Error())
@@ -2469,6 +2479,7 @@ func dataSourceNiatelemetryNiaInventoryRead(c context.Context, d *schema.Resourc
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
 
 				temp["vni_status"] = flattenListNiatelemetryVniStatus(s.GetVniStatus(), d)
+				temp["vpc_peer_ip_address"] = (s.GetVpcPeerIpAddress())
 				niatelemetryNiaInventoryResults = append(niatelemetryNiaInventoryResults, temp)
 			}
 		}

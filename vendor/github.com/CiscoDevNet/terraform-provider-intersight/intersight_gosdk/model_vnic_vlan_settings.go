@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-11765
+API version: 1.0.11-14968
 Contact: intersight@cisco.com
 */
 
@@ -29,7 +29,11 @@ type VnicVlanSettings struct {
 	// Native VLAN ID of the virtual interface or the corresponding vethernet on the peer Fabric Interconnect to which the virtual interface is connected. Setting the ID to 0 will not associate any native VLAN to the traffic on the virtual interface.
 	DefaultVlan *int64 `json:"DefaultVlan,omitempty"`
 	// Option to determine if the port can carry single VLAN (Access) or multiple VLANs (Trunk) traffic. * `ACCESS` - An access port carries traffic only for a single VLAN on the interface. * `TRUNK` - A trunk port can have two or more VLANs configured on the interface. It can carry traffic for several VLANs simultaneously.
-	Mode                 *string `json:"Mode,omitempty"`
+	Mode *string `json:"Mode,omitempty"`
+	// Enable QinQ (802.1Q-in-802.1Q) Tunneling on the vNIC.
+	QinqEnabled *bool `json:"QinqEnabled,omitempty"`
+	// When activating VIC QinQ (802.1Q-in-802.1Q) Tunneling, a particular VLAN ID is set. In Access VLAN mode, this QinQ VLAN ID is established as the default VLAN.
+	QinqVlan             *int64 `json:"QinqVlan,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -47,6 +51,10 @@ func NewVnicVlanSettings(classId string, objectType string) *VnicVlanSettings {
 	this.DefaultVlan = &defaultVlan
 	var mode string = "ACCESS"
 	this.Mode = &mode
+	var qinqEnabled bool = false
+	this.QinqEnabled = &qinqEnabled
+	var qinqVlan int64 = 2
+	this.QinqVlan = &qinqVlan
 	return &this
 }
 
@@ -63,6 +71,10 @@ func NewVnicVlanSettingsWithDefaults() *VnicVlanSettings {
 	this.DefaultVlan = &defaultVlan
 	var mode string = "ACCESS"
 	this.Mode = &mode
+	var qinqEnabled bool = false
+	this.QinqEnabled = &qinqEnabled
+	var qinqVlan int64 = 2
+	this.QinqVlan = &qinqVlan
 	return &this
 }
 
@@ -210,6 +222,70 @@ func (o *VnicVlanSettings) SetMode(v string) {
 	o.Mode = &v
 }
 
+// GetQinqEnabled returns the QinqEnabled field value if set, zero value otherwise.
+func (o *VnicVlanSettings) GetQinqEnabled() bool {
+	if o == nil || o.QinqEnabled == nil {
+		var ret bool
+		return ret
+	}
+	return *o.QinqEnabled
+}
+
+// GetQinqEnabledOk returns a tuple with the QinqEnabled field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *VnicVlanSettings) GetQinqEnabledOk() (*bool, bool) {
+	if o == nil || o.QinqEnabled == nil {
+		return nil, false
+	}
+	return o.QinqEnabled, true
+}
+
+// HasQinqEnabled returns a boolean if a field has been set.
+func (o *VnicVlanSettings) HasQinqEnabled() bool {
+	if o != nil && o.QinqEnabled != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetQinqEnabled gets a reference to the given bool and assigns it to the QinqEnabled field.
+func (o *VnicVlanSettings) SetQinqEnabled(v bool) {
+	o.QinqEnabled = &v
+}
+
+// GetQinqVlan returns the QinqVlan field value if set, zero value otherwise.
+func (o *VnicVlanSettings) GetQinqVlan() int64 {
+	if o == nil || o.QinqVlan == nil {
+		var ret int64
+		return ret
+	}
+	return *o.QinqVlan
+}
+
+// GetQinqVlanOk returns a tuple with the QinqVlan field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *VnicVlanSettings) GetQinqVlanOk() (*int64, bool) {
+	if o == nil || o.QinqVlan == nil {
+		return nil, false
+	}
+	return o.QinqVlan, true
+}
+
+// HasQinqVlan returns a boolean if a field has been set.
+func (o *VnicVlanSettings) HasQinqVlan() bool {
+	if o != nil && o.QinqVlan != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetQinqVlan gets a reference to the given int64 and assigns it to the QinqVlan field.
+func (o *VnicVlanSettings) SetQinqVlan(v int64) {
+	o.QinqVlan = &v
+}
+
 func (o VnicVlanSettings) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
@@ -235,6 +311,12 @@ func (o VnicVlanSettings) MarshalJSON() ([]byte, error) {
 	if o.Mode != nil {
 		toSerialize["Mode"] = o.Mode
 	}
+	if o.QinqEnabled != nil {
+		toSerialize["QinqEnabled"] = o.QinqEnabled
+	}
+	if o.QinqVlan != nil {
+		toSerialize["QinqVlan"] = o.QinqVlan
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -255,6 +337,10 @@ func (o *VnicVlanSettings) UnmarshalJSON(bytes []byte) (err error) {
 		DefaultVlan *int64 `json:"DefaultVlan,omitempty"`
 		// Option to determine if the port can carry single VLAN (Access) or multiple VLANs (Trunk) traffic. * `ACCESS` - An access port carries traffic only for a single VLAN on the interface. * `TRUNK` - A trunk port can have two or more VLANs configured on the interface. It can carry traffic for several VLANs simultaneously.
 		Mode *string `json:"Mode,omitempty"`
+		// Enable QinQ (802.1Q-in-802.1Q) Tunneling on the vNIC.
+		QinqEnabled *bool `json:"QinqEnabled,omitempty"`
+		// When activating VIC QinQ (802.1Q-in-802.1Q) Tunneling, a particular VLAN ID is set. In Access VLAN mode, this QinQ VLAN ID is established as the default VLAN.
+		QinqVlan *int64 `json:"QinqVlan,omitempty"`
 	}
 
 	varVnicVlanSettingsWithoutEmbeddedStruct := VnicVlanSettingsWithoutEmbeddedStruct{}
@@ -267,6 +353,8 @@ func (o *VnicVlanSettings) UnmarshalJSON(bytes []byte) (err error) {
 		varVnicVlanSettings.AllowedVlans = varVnicVlanSettingsWithoutEmbeddedStruct.AllowedVlans
 		varVnicVlanSettings.DefaultVlan = varVnicVlanSettingsWithoutEmbeddedStruct.DefaultVlan
 		varVnicVlanSettings.Mode = varVnicVlanSettingsWithoutEmbeddedStruct.Mode
+		varVnicVlanSettings.QinqEnabled = varVnicVlanSettingsWithoutEmbeddedStruct.QinqEnabled
+		varVnicVlanSettings.QinqVlan = varVnicVlanSettingsWithoutEmbeddedStruct.QinqVlan
 		*o = VnicVlanSettings(varVnicVlanSettings)
 	} else {
 		return err
@@ -289,6 +377,8 @@ func (o *VnicVlanSettings) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "AllowedVlans")
 		delete(additionalProperties, "DefaultVlan")
 		delete(additionalProperties, "Mode")
+		delete(additionalProperties, "QinqEnabled")
+		delete(additionalProperties, "QinqVlan")
 
 		// remove fields from embedded structs
 		reflectMoBaseComplexType := reflect.ValueOf(o.MoBaseComplexType)

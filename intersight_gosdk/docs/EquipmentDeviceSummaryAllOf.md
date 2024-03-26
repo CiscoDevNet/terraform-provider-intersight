@@ -6,15 +6,16 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "equipment.DeviceSummary"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "equipment.DeviceSummary"]
-**Dn** | Pointer to **string** | The distinguished name for the Network Element. | [optional] [readonly] 
-**Model** | Pointer to **string** | The model information of the Network Element. | [optional] [readonly] 
-**Serial** | Pointer to **string** | The serial number for the Network Element. | [optional] [readonly] 
-**SourceObjectType** | Pointer to **string** | The source object type of this view MO. | [optional] [readonly] 
+**Dn** | Pointer to **string** | The distinguished name that unambiguously identifies an object in the system. | [optional] [readonly] 
+**Model** | Pointer to **string** | This field identifies the model of the given component. | [optional] [readonly] 
+**Serial** | Pointer to **string** | This field identifies the serial number of the given component. | [optional] [readonly] 
+**SourceObjectType** | Pointer to **string** | The source object type of the given component. | [optional] [readonly] 
 **ComputeBlade** | Pointer to [**ComputeBladeRelationship**](ComputeBladeRelationship.md) |  | [optional] 
 **ComputeRackUnit** | Pointer to [**ComputeRackUnitRelationship**](ComputeRackUnitRelationship.md) |  | [optional] 
 **EquipmentChassis** | Pointer to [**EquipmentChassisRelationship**](EquipmentChassisRelationship.md) |  | [optional] 
 **EquipmentFex** | Pointer to [**EquipmentFexRelationship**](EquipmentFexRelationship.md) |  | [optional] 
 **InventoryDeviceInfo** | Pointer to [**InventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
+**InventoryParent** | Pointer to [**MoBaseMoRelationship**](MoBaseMoRelationship.md) |  | [optional] 
 **RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
 ## Methods
@@ -300,6 +301,31 @@ SetInventoryDeviceInfo sets InventoryDeviceInfo field to given value.
 `func (o *EquipmentDeviceSummaryAllOf) HasInventoryDeviceInfo() bool`
 
 HasInventoryDeviceInfo returns a boolean if a field has been set.
+
+### GetInventoryParent
+
+`func (o *EquipmentDeviceSummaryAllOf) GetInventoryParent() MoBaseMoRelationship`
+
+GetInventoryParent returns the InventoryParent field if non-nil, zero value otherwise.
+
+### GetInventoryParentOk
+
+`func (o *EquipmentDeviceSummaryAllOf) GetInventoryParentOk() (*MoBaseMoRelationship, bool)`
+
+GetInventoryParentOk returns a tuple with the InventoryParent field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetInventoryParent
+
+`func (o *EquipmentDeviceSummaryAllOf) SetInventoryParent(v MoBaseMoRelationship)`
+
+SetInventoryParent sets InventoryParent field to given value.
+
+### HasInventoryParent
+
+`func (o *EquipmentDeviceSummaryAllOf) HasInventoryParent() bool`
+
+HasInventoryParent returns a boolean if a field has been set.
 
 ### GetRegisteredDevice
 

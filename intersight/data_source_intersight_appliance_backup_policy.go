@@ -225,7 +225,7 @@ func getApplianceBackupPolicySchema() map[string]*schema.Schema {
 			},
 		},
 		"protocol": {
-			Description: "Communication protocol used by the file server (e.g. scp or sftp).\n* `scp` - Secure Copy Protocol (SCP) to access the file server.\n* `sftp` - SSH File Transfer Protocol (SFTP) to access file server.",
+			Description: "Communication protocol used by the file server (e.g. scp, sftp, or CIFS).\n* `scp` - Secure Copy Protocol (SCP) to access the file server.\n* `sftp` - SSH File Transfer Protocol (SFTP) to access file server.\n* `cifs` - Common Internet File System (CIFS) Protocol to access file server.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -235,13 +235,23 @@ func getApplianceBackupPolicySchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"remote_path": {
-			Description: "File server directory to copy the file.",
+			Description: "File server directory or share name to copy the file.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
 		"remote_port": {
 			Description: "Remote TCP port on the file server (e.g. 22 for scp).",
 			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"retention_count": {
+			Description: "The number of backups before earliest backup is overwritten. Requires cleanup policy to be enabled.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"retention_policy_enabled": {
+			Description: "If backup rotate policy is set, older backups will automatically be overwritten. The number of backups before overwriting is defined by the retentionCount property.",
+			Type:        schema.TypeBool,
 			Optional:    true,
 		},
 		"schedule": {
@@ -738,6 +748,16 @@ func dataSourceApplianceBackupPolicyRead(c context.Context, d *schema.ResourceDa
 		o.SetRemotePort(x)
 	}
 
+	if v, ok := d.GetOkExists("retention_count"); ok {
+		x := int64(v.(int))
+		o.SetRetentionCount(x)
+	}
+
+	if v, ok := d.GetOkExists("retention_policy_enabled"); ok {
+		x := (v.(bool))
+		o.SetRetentionPolicyEnabled(x)
+	}
+
 	if v, ok := d.GetOk("schedule"); ok {
 		p := make([]models.OnpremSchedule, 0, 1)
 		s := v.([]interface{})
@@ -991,6 +1011,8 @@ func dataSourceApplianceBackupPolicyRead(c context.Context, d *schema.ResourceDa
 				temp["remote_host"] = (s.GetRemoteHost())
 				temp["remote_path"] = (s.GetRemotePath())
 				temp["remote_port"] = (s.GetRemotePort())
+				temp["retention_count"] = (s.GetRetentionCount())
+				temp["retention_policy_enabled"] = (s.GetRetentionPolicyEnabled())
 
 				temp["schedule"] = flattenMapOnpremSchedule(s.GetSchedule(), d)
 				temp["shared_scope"] = (s.GetSharedScope())

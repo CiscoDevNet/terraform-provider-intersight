@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-11765
+API version: 1.0.11-14968
 Contact: intersight@cisco.com
 */
 
@@ -31,10 +31,14 @@ type BulkExportAllOf struct {
 	Items       []MoMoRef   `json:"Items,omitempty"`
 	// An identifier for the export instance. Name can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-) or an underscore (_).
 	Name *string `json:"Name,omitempty"`
+	// The permission identifier which indicates the permission that current user has that will allow to start this export operation.
+	PermissionId *string `json:"PermissionId,omitempty"`
 	// Status of the export operation. * `` - The operation has not started. * `InProgress` - The operation is in progress. * `OrderInProgress` - The archive operation is in progress. * `Success` - The operation has succeeded. * `Failed` - The operation has failed. * `OperationTimedOut` - The operation has timed out. * `OperationCancelled` - The operation has been cancelled. * `CancelInProgress` - The operation is being cancelled.
 	Status *string `json:"Status,omitempty"`
 	// Status message associated with failures or progress indication.
 	StatusMessage *string `json:"StatusMessage,omitempty"`
+	// The user identifier which indicates the user that started this export operation.
+	UserId *string `json:"UserId,omitempty"`
 	// An array of relationships to bulkExportedItem resources.
 	ExportedItems        []BulkExportedItemRelationship        `json:"ExportedItems,omitempty"`
 	Organization         *OrganizationOrganizationRelationship `json:"Organization,omitempty"`
@@ -317,6 +321,38 @@ func (o *BulkExportAllOf) SetName(v string) {
 	o.Name = &v
 }
 
+// GetPermissionId returns the PermissionId field value if set, zero value otherwise.
+func (o *BulkExportAllOf) GetPermissionId() string {
+	if o == nil || o.PermissionId == nil {
+		var ret string
+		return ret
+	}
+	return *o.PermissionId
+}
+
+// GetPermissionIdOk returns a tuple with the PermissionId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BulkExportAllOf) GetPermissionIdOk() (*string, bool) {
+	if o == nil || o.PermissionId == nil {
+		return nil, false
+	}
+	return o.PermissionId, true
+}
+
+// HasPermissionId returns a boolean if a field has been set.
+func (o *BulkExportAllOf) HasPermissionId() bool {
+	if o != nil && o.PermissionId != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetPermissionId gets a reference to the given string and assigns it to the PermissionId field.
+func (o *BulkExportAllOf) SetPermissionId(v string) {
+	o.PermissionId = &v
+}
+
 // GetStatus returns the Status field value if set, zero value otherwise.
 func (o *BulkExportAllOf) GetStatus() string {
 	if o == nil || o.Status == nil {
@@ -379,6 +415,38 @@ func (o *BulkExportAllOf) HasStatusMessage() bool {
 // SetStatusMessage gets a reference to the given string and assigns it to the StatusMessage field.
 func (o *BulkExportAllOf) SetStatusMessage(v string) {
 	o.StatusMessage = &v
+}
+
+// GetUserId returns the UserId field value if set, zero value otherwise.
+func (o *BulkExportAllOf) GetUserId() string {
+	if o == nil || o.UserId == nil {
+		var ret string
+		return ret
+	}
+	return *o.UserId
+}
+
+// GetUserIdOk returns a tuple with the UserId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BulkExportAllOf) GetUserIdOk() (*string, bool) {
+	if o == nil || o.UserId == nil {
+		return nil, false
+	}
+	return o.UserId, true
+}
+
+// HasUserId returns a boolean if a field has been set.
+func (o *BulkExportAllOf) HasUserId() bool {
+	if o != nil && o.UserId != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetUserId gets a reference to the given string and assigns it to the UserId field.
+func (o *BulkExportAllOf) SetUserId(v string) {
+	o.UserId = &v
 }
 
 // GetExportedItems returns the ExportedItems field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -472,11 +540,17 @@ func (o BulkExportAllOf) MarshalJSON() ([]byte, error) {
 	if o.Name != nil {
 		toSerialize["Name"] = o.Name
 	}
+	if o.PermissionId != nil {
+		toSerialize["PermissionId"] = o.PermissionId
+	}
 	if o.Status != nil {
 		toSerialize["Status"] = o.Status
 	}
 	if o.StatusMessage != nil {
 		toSerialize["StatusMessage"] = o.StatusMessage
+	}
+	if o.UserId != nil {
+		toSerialize["UserId"] = o.UserId
 	}
 	if o.ExportedItems != nil {
 		toSerialize["ExportedItems"] = o.ExportedItems
@@ -510,8 +584,10 @@ func (o *BulkExportAllOf) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "ImportOrder")
 		delete(additionalProperties, "Items")
 		delete(additionalProperties, "Name")
+		delete(additionalProperties, "PermissionId")
 		delete(additionalProperties, "Status")
 		delete(additionalProperties, "StatusMessage")
+		delete(additionalProperties, "UserId")
 		delete(additionalProperties, "ExportedItems")
 		delete(additionalProperties, "Organization")
 		o.AdditionalProperties = additionalProperties

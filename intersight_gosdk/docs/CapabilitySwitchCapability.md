@@ -16,6 +16,7 @@ Name | Type | Description | Notes
 **MaxSlots** | Pointer to **int64** | Maximum allowed physical slots on this switch. | [optional] [readonly] 
 **MinVersionWithBreakoutSupport** | Pointer to **string** | Minimum firmware version supported for breakout ports on this switch. | [optional] [readonly] 
 **MinVersionWithLocatorLedSupport** | Pointer to **string** | Minimum firmware version supported for locator leds on this switch. | [optional] [readonly] 
+**MinVersionWithNegAuto25g** | Pointer to **string** | Minimum firmware version supported for &#39;negotiate auto 25000&#39; port admin speed on this switch. | [optional] [readonly] 
 **NetworkLimits** | Pointer to [**NullableCapabilitySwitchNetworkLimits**](CapabilitySwitchNetworkLimits.md) |  | [optional] 
 **PortsSupporting100gSpeed** | Pointer to [**[]CapabilityPortRange**](CapabilityPortRange.md) |  | [optional] 
 **PortsSupporting10gSpeed** | Pointer to [**[]CapabilityPortRange**](CapabilityPortRange.md) |  | [optional] 
@@ -33,6 +34,7 @@ Name | Type | Description | Notes
 **SystemLimits** | Pointer to [**NullableCapabilitySwitchSystemLimits**](CapabilitySwitchSystemLimits.md) |  | [optional] 
 **UnifiedPorts** | Pointer to [**[]CapabilityPortRange**](CapabilityPortRange.md) |  | [optional] 
 **UnifiedRule** | Pointer to **string** | The Slider rule for Unified ports on this switch. | [optional] [readonly] 
+**UplinkAdminPortSpeedNegAuto25GbpsSupported** | Pointer to **bool** | &#39;Negotiate Auto 25000&#39; admin speed support on this switch for port or port-channel with Ethernet Uplink/Appliance/FCoE Uplink roles. | [optional] [readonly] 
 
 ## Methods
 
@@ -352,6 +354,31 @@ SetMinVersionWithLocatorLedSupport sets MinVersionWithLocatorLedSupport field to
 `func (o *CapabilitySwitchCapability) HasMinVersionWithLocatorLedSupport() bool`
 
 HasMinVersionWithLocatorLedSupport returns a boolean if a field has been set.
+
+### GetMinVersionWithNegAuto25g
+
+`func (o *CapabilitySwitchCapability) GetMinVersionWithNegAuto25g() string`
+
+GetMinVersionWithNegAuto25g returns the MinVersionWithNegAuto25g field if non-nil, zero value otherwise.
+
+### GetMinVersionWithNegAuto25gOk
+
+`func (o *CapabilitySwitchCapability) GetMinVersionWithNegAuto25gOk() (*string, bool)`
+
+GetMinVersionWithNegAuto25gOk returns a tuple with the MinVersionWithNegAuto25g field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMinVersionWithNegAuto25g
+
+`func (o *CapabilitySwitchCapability) SetMinVersionWithNegAuto25g(v string)`
+
+SetMinVersionWithNegAuto25g sets MinVersionWithNegAuto25g field to given value.
+
+### HasMinVersionWithNegAuto25g
+
+`func (o *CapabilitySwitchCapability) HasMinVersionWithNegAuto25g() bool`
+
+HasMinVersionWithNegAuto25g returns a boolean if a field has been set.
 
 ### GetNetworkLimits
 
@@ -927,6 +954,31 @@ SetUnifiedRule sets UnifiedRule field to given value.
 `func (o *CapabilitySwitchCapability) HasUnifiedRule() bool`
 
 HasUnifiedRule returns a boolean if a field has been set.
+
+### GetUplinkAdminPortSpeedNegAuto25GbpsSupported
+
+`func (o *CapabilitySwitchCapability) GetUplinkAdminPortSpeedNegAuto25GbpsSupported() bool`
+
+GetUplinkAdminPortSpeedNegAuto25GbpsSupported returns the UplinkAdminPortSpeedNegAuto25GbpsSupported field if non-nil, zero value otherwise.
+
+### GetUplinkAdminPortSpeedNegAuto25GbpsSupportedOk
+
+`func (o *CapabilitySwitchCapability) GetUplinkAdminPortSpeedNegAuto25GbpsSupportedOk() (*bool, bool)`
+
+GetUplinkAdminPortSpeedNegAuto25GbpsSupportedOk returns a tuple with the UplinkAdminPortSpeedNegAuto25GbpsSupported field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUplinkAdminPortSpeedNegAuto25GbpsSupported
+
+`func (o *CapabilitySwitchCapability) SetUplinkAdminPortSpeedNegAuto25GbpsSupported(v bool)`
+
+SetUplinkAdminPortSpeedNegAuto25GbpsSupported sets UplinkAdminPortSpeedNegAuto25GbpsSupported field to given value.
+
+### HasUplinkAdminPortSpeedNegAuto25GbpsSupported
+
+`func (o *CapabilitySwitchCapability) HasUplinkAdminPortSpeedNegAuto25GbpsSupported() bool`
+
+HasUplinkAdminPortSpeedNegAuto25GbpsSupported returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

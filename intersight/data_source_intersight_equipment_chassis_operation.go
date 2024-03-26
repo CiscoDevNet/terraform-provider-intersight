@@ -31,6 +31,11 @@ func getEquipmentChassisOperationSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"admin_power_cycle_slot_id": {
+			Description: "Slot id of the chassis slot that needs to be power cycled.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
 		"ancestors": {
 			Description: "An array of relationships to moBaseMo resources.",
 			Type:        schema.TypeList,
@@ -94,6 +99,49 @@ func getEquipmentChassisOperationSchema() map[string]*schema.Schema {
 					},
 					"selector": {
 						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"chassis_operation_status": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"config_state": {
+						Description: "The configured state of the settings in the target chassis. The value is any one of Applied, Applying or Failed. Applied - The state denotes that the settings are applied successfully in the target chassis. Applying - The state denotes that the settings are being applied in the target chassis. Failed - The state denotes that the settings could not be applied in the target chassis.\n* `None` - Nil value when no action has been triggered by the user.\n* `Applied` - User configured settings are in applied state.\n* `Applying` - User settings are being applied on the target server.\n* `Failed` - User configured settings could not be applied.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"slot_id": {
+						Description: "The slot id of the device within the chassis on which the chassis operation is performed.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"workflow_id": {
+						Description: "The workflow Id of the chassis operations workflow.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"workflow_type": {
+						Description: "The workflow type of the chassis operation workflow. This can be used to distinguish different chassis operations.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
@@ -426,6 +474,11 @@ func dataSourceEquipmentChassisOperationRead(c context.Context, d *schema.Resour
 		o.SetAdminLocatorLedAction(x)
 	}
 
+	if v, ok := d.GetOkExists("admin_power_cycle_slot_id"); ok {
+		x := int64(v.(int))
+		o.SetAdminPowerCycleSlotId(x)
+	}
+
 	if v, ok := d.GetOk("ancestors"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
@@ -507,6 +560,34 @@ func dataSourceEquipmentChassisOperationRead(c context.Context, d *schema.Resour
 			x := p[0]
 			o.SetChassis(x)
 		}
+	}
+
+	if v, ok := d.GetOk("chassis_operation_status"); ok {
+		x := make([]models.EquipmentChassisOperationStatus, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := &models.EquipmentChassisOperationStatus{}
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("equipment.ChassisOperationStatus")
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			x = append(x, *o)
+		}
+		o.SetChassisOperationStatus(x)
 	}
 
 	if v, ok := d.GetOk("class_id"); ok {
@@ -831,10 +912,13 @@ func dataSourceEquipmentChassisOperationRead(c context.Context, d *schema.Resour
 				temp["account_moid"] = (s.GetAccountMoid())
 				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
 				temp["admin_locator_led_action"] = (s.GetAdminLocatorLedAction())
+				temp["admin_power_cycle_slot_id"] = (s.GetAdminPowerCycleSlotId())
 
 				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)
 
 				temp["chassis"] = flattenMapEquipmentChassisRelationship(s.GetChassis(), d)
+
+				temp["chassis_operation_status"] = flattenListEquipmentChassisOperationStatus(s.GetChassisOperationStatus(), d)
 				temp["class_id"] = (s.GetClassId())
 				temp["config_state"] = (s.GetConfigState())
 

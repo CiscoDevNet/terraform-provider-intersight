@@ -148,6 +148,11 @@ func getResourcepoolLeaseSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"has_duplicate": {
+			Description: "HasDuplicate represents if there are other pools in which this id exists.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
 		"is_exclusive_at_assigned_entity": {
 			Description: "Indicates whether a lease allocation is exclusive based on the Assigned Entity, if the AssignedEntity holds any lease then not allowed to create new lease later.",
 			Type:        schema.TypeBool,
@@ -672,7 +677,7 @@ func getResourcepoolLeaseSchema() map[string]*schema.Schema {
 			},
 		},
 		"resource_type": {
-			Description: "The type of the resource present in the pool, example 'server' its combination of RackUnit and Blade.\n* `None` - The resource cannot consider for Resource Pool.\n* `Server` - Resource Pool holds the server kind of resources, example - RackServer, Blade.",
+			Description: "The type of resource present in the pool, such as 'server' can be a RackUnit or Blade.\n* `None` - The resource cannot consider for Resource Pool.\n* `Server` - Resource Pool holds the server kind of resources, example - RackServer, Blade.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -1028,6 +1033,11 @@ func dataSourceResourcepoolLeaseRead(c context.Context, d *schema.ResourceData, 
 	if v, ok := d.GetOk("feature"); ok {
 		x := (v.(string))
 		o.SetFeature(x)
+	}
+
+	if v, ok := d.GetOkExists("has_duplicate"); ok {
+		x := (v.(bool))
+		o.SetHasDuplicate(x)
 	}
 
 	if v, ok := d.GetOkExists("is_exclusive_at_assigned_entity"); ok {
@@ -1586,6 +1596,7 @@ func dataSourceResourcepoolLeaseRead(c context.Context, d *schema.ResourceData, 
 				temp["create_time"] = (s.GetCreateTime()).String()
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
 				temp["feature"] = (s.GetFeature())
+				temp["has_duplicate"] = (s.GetHasDuplicate())
 				temp["is_exclusive_at_assigned_entity"] = (s.GetIsExclusiveAtAssignedEntity())
 
 				temp["lease_parameters"] = flattenMapResourcepoolLeaseParameters(s.GetLeaseParameters(), d)

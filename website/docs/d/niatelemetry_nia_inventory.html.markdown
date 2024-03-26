@@ -66,4 +66,5 @@ The following arguments can be used to get data of already created objects in In
 * `software_download`:(string) Last software downloaded of device being inventoried. This determines if software download API was used. 
 * `system_up_time`:(string) The amount of time that the device being inventoried been up. 
 * `nr_version`:(string) Software version of device being inventoried. The various software version values for each device are available on cisco.com. 
+* `vpc_peer_ip_address`:(string) The TEP IP address of the node's vPC peer, if present. 
  

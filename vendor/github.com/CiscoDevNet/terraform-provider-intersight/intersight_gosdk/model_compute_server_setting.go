@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-11765
+API version: 1.0.11-14968
 Contact: intersight@cisco.com
 */
 
@@ -37,7 +37,7 @@ type ComputeServerSetting struct {
 	CollectSel *string `json:"CollectSel,omitempty"`
 	// The configured state of these settings in the target server. The value is any one of Applied, Applying, Failed. Applied - This state denotes that the settings are applied successfully in the target server. Applying - This state denotes that the settings are being applied in the target server. Failed - This state denotes that the settings could not be applied in the target server. * `Applied` - User configured settings are in applied state. * `Applying` - User settings are being applied on the target server. * `Scheduled` - User configured settings are scheduled to be applied. * `Failed` - User configured settings could not be applied.
 	ConfigState *string `json:"ConfigState,omitempty"`
-	// The allowed actions on the Front Panel Lock. * `Unlock` - Front Panel of the server is set to Unlocked state. * `Lock` - Front Panel of the server is set to Locked state.
+	// The allowed actions on the Front Panel Lock. * `None` - Front Panel of the server is set to None state. It is required so that the next frontPanelLockState operation can be triggered. * `Lock` - Front Panel of the server is set to Locked state. * `Unlock` - Front Panel of the server is set to Unlocked state.
 	FrontPanelLockState *string `json:"FrontPanelLockState,omitempty"`
 	// The allowed actions on the vKVM Reset. * `Ready` - Reset vKVM operation is allowed to be done on the server in this state. * `Reset` - The value that the UI/API needs to provide to trigger a Reset vKVM operation on a server.
 	KvmReset *string `json:"KvmReset,omitempty"`
@@ -82,7 +82,7 @@ func NewComputeServerSetting(classId string, objectType string) *ComputeServerSe
 	this.CmosReset = &cmosReset
 	var collectSel string = "Ready"
 	this.CollectSel = &collectSel
-	var frontPanelLockState string = "Unlock"
+	var frontPanelLockState string = "None"
 	this.FrontPanelLockState = &frontPanelLockState
 	var kvmReset string = "Ready"
 	this.KvmReset = &kvmReset
@@ -112,7 +112,7 @@ func NewComputeServerSettingWithDefaults() *ComputeServerSetting {
 	this.CmosReset = &cmosReset
 	var collectSel string = "Ready"
 	this.CollectSel = &collectSel
-	var frontPanelLockState string = "Unlock"
+	var frontPanelLockState string = "None"
 	this.FrontPanelLockState = &frontPanelLockState
 	var kvmReset string = "Ready"
 	this.KvmReset = &kvmReset
@@ -1086,7 +1086,7 @@ func (o *ComputeServerSetting) UnmarshalJSON(bytes []byte) (err error) {
 		CollectSel *string `json:"CollectSel,omitempty"`
 		// The configured state of these settings in the target server. The value is any one of Applied, Applying, Failed. Applied - This state denotes that the settings are applied successfully in the target server. Applying - This state denotes that the settings are being applied in the target server. Failed - This state denotes that the settings could not be applied in the target server. * `Applied` - User configured settings are in applied state. * `Applying` - User settings are being applied on the target server. * `Scheduled` - User configured settings are scheduled to be applied. * `Failed` - User configured settings could not be applied.
 		ConfigState *string `json:"ConfigState,omitempty"`
-		// The allowed actions on the Front Panel Lock. * `Unlock` - Front Panel of the server is set to Unlocked state. * `Lock` - Front Panel of the server is set to Locked state.
+		// The allowed actions on the Front Panel Lock. * `None` - Front Panel of the server is set to None state. It is required so that the next frontPanelLockState operation can be triggered. * `Lock` - Front Panel of the server is set to Locked state. * `Unlock` - Front Panel of the server is set to Unlocked state.
 		FrontPanelLockState *string `json:"FrontPanelLockState,omitempty"`
 		// The allowed actions on the vKVM Reset. * `Ready` - Reset vKVM operation is allowed to be done on the server in this state. * `Reset` - The value that the UI/API needs to provide to trigger a Reset vKVM operation on a server.
 		KvmReset *string `json:"KvmReset,omitempty"`

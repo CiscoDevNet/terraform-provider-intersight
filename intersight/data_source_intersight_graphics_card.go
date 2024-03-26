@@ -180,6 +180,11 @@ func getGraphicsCardSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"description": {
+			Description: "This field displays the description of the Graphics Processing Unit.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"device_id": {
 			Description: "The device id of the graphics card.",
 			Type:        schema.TypeInt,
@@ -284,6 +289,11 @@ func getGraphicsCardSchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"is_platform_supported": {
+			Description: "This field indicates whether the Graphics Processing Unit is supported on the server or not.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
 		"is_upgraded": {
 			Description: "This field indicates the compute status of the catalog values for the associated component or hardware.",
 			Type:        schema.TypeBool,
@@ -368,6 +378,11 @@ func getGraphicsCardSchema() map[string]*schema.Schema {
 					},
 				},
 			},
+		},
+		"part_number": {
+			Description: "This field displays the part number of the Graphics Processing Unit.",
+			Type:        schema.TypeString,
+			Optional:    true,
 		},
 		"pci_address": {
 			Description: "The PCI address of the graphics card.",
@@ -487,6 +502,11 @@ func getGraphicsCardSchema() map[string]*schema.Schema {
 					},
 				},
 			},
+		},
+		"pid": {
+			Description: "This field displays the product ID of the Graphics Processing Unit.",
+			Type:        schema.TypeString,
+			Optional:    true,
 		},
 		"presence": {
 			Description: "This field indicates the presence (equipped) or absence (absent) of the associated component or hardware.",
@@ -993,6 +1013,11 @@ func dataSourceGraphicsCardRead(c context.Context, d *schema.ResourceData, meta 
 		o.SetCreateTime(x)
 	}
 
+	if v, ok := d.GetOk("description"); ok {
+		x := (v.(string))
+		o.SetDescription(x)
+	}
+
 	if v, ok := d.GetOkExists("device_id"); ok {
 		x := int64(v.(int))
 		o.SetDeviceId(x)
@@ -1111,6 +1136,11 @@ func dataSourceGraphicsCardRead(c context.Context, d *schema.ResourceData, meta 
 		}
 	}
 
+	if v, ok := d.GetOkExists("is_platform_supported"); ok {
+		x := (v.(bool))
+		o.SetIsPlatformSupported(x)
+	}
+
 	if v, ok := d.GetOkExists("is_upgraded"); ok {
 		x := (v.(bool))
 		o.SetIsUpgraded(x)
@@ -1214,6 +1244,11 @@ func dataSourceGraphicsCardRead(c context.Context, d *schema.ResourceData, meta 
 			x := p[0]
 			o.SetParent(x)
 		}
+	}
+
+	if v, ok := d.GetOk("part_number"); ok {
+		x := (v.(string))
+		o.SetPartNumber(x)
 	}
 
 	if v, ok := d.GetOk("pci_address"); ok {
@@ -1355,6 +1390,11 @@ func dataSourceGraphicsCardRead(c context.Context, d *schema.ResourceData, meta 
 			x = append(x, models.MoMoRefAsMoBaseMoRelationship(o))
 		}
 		o.SetPermissionResources(x)
+	}
+
+	if v, ok := d.GetOk("pid"); ok {
+		x := (v.(string))
+		o.SetPid(x)
 	}
 
 	if v, ok := d.GetOk("presence"); ok {
@@ -1684,6 +1724,7 @@ func dataSourceGraphicsCardRead(c context.Context, d *schema.ResourceData, meta 
 				temp["compute_rack_unit"] = flattenMapComputeRackUnitRelationship(s.GetComputeRackUnit(), d)
 
 				temp["create_time"] = (s.GetCreateTime()).String()
+				temp["description"] = (s.GetDescription())
 				temp["device_id"] = (s.GetDeviceId())
 				temp["device_mo_id"] = (s.GetDeviceMoId())
 				temp["dn"] = (s.GetDn())
@@ -1695,6 +1736,7 @@ func dataSourceGraphicsCardRead(c context.Context, d *schema.ResourceData, meta 
 				temp["graphics_controllers"] = flattenListGraphicsControllerRelationship(s.GetGraphicsControllers(), d)
 
 				temp["inventory_device_info"] = flattenMapInventoryDeviceInfoRelationship(s.GetInventoryDeviceInfo(), d)
+				temp["is_platform_supported"] = (s.GetIsPlatformSupported())
 				temp["is_upgraded"] = (s.GetIsUpgraded())
 
 				temp["mod_time"] = (s.GetModTime()).String()
@@ -1708,6 +1750,7 @@ func dataSourceGraphicsCardRead(c context.Context, d *schema.ResourceData, meta 
 				temp["owners"] = (s.GetOwners())
 
 				temp["parent"] = flattenMapMoBaseMoRelationship(s.GetParent(), d)
+				temp["part_number"] = (s.GetPartNumber())
 				temp["pci_address"] = (s.GetPciAddress())
 				temp["pci_address_list"] = (s.GetPciAddressList())
 
@@ -1717,6 +1760,7 @@ func dataSourceGraphicsCardRead(c context.Context, d *schema.ResourceData, meta 
 				temp["pci_slot"] = (s.GetPciSlot())
 
 				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
+				temp["pid"] = (s.GetPid())
 				temp["presence"] = (s.GetPresence())
 
 				temp["previous_fru"] = flattenMapEquipmentFruRelationship(s.GetPreviousFru(), d)

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-11765
+API version: 1.0.11-14968
 Contact: intersight@cisco.com
 */
 
@@ -27,9 +27,12 @@ type StorageNetAppLun struct {
 	AvgPerformanceMetrics *StorageNetAppPerformanceMetricsAverage `json:"AvgPerformanceMetrics,omitempty"`
 	// The state of the volume and aggregate that contain the LUN. LUNs are only available when their containers are available.
 	ContainerState *string `json:"ContainerState,omitempty"`
+	// Reports if the LUN is mapped to one or more initiator groups.
+	IsMapped *string `json:"IsMapped,omitempty"`
 	// Unique identifier of LUN across data center.
 	Key *string `json:"Key,omitempty"`
 	// Reports if the LUN is mapped to one or more initiator groups.
+	// Deprecated
 	Mapped *bool `json:"Mapped,omitempty"`
 	// The operating system (OS) type for this LUN. * `Linux` - Family of open source Unix-like operating systems based on the Linux kernel. * `AIX` - Advanced Interactive Executive (AIX). * `HP-UX` - HP-UX is implementation of the Unix operating system, based on Unix System V. * `Hyper-V` - Windows Server 2008 or Windows Server 2012 Hyper-V. * `OpenVMS` - OpenVMS is multi-user, multiprocessing virtual memory-based operating system. * `Solaris` - Solaris is a Unix operating system. * `NetWare` - NetWare is a computer network operating system. * `VMware` - An enterprise-class, type-1 hypervisor developed by VMware for deploying and serving virtual computers. * `Windows` - Single-partition Windows disk using the Master Boot Record (MBR) partitioning style. * `Xen` - Xen is a type-1 hypervisor, providing services that allow multiple computer operating systems to execute on the same computer hardware concurrently.
 	OsType *string `json:"OsType,omitempty"`
@@ -191,6 +194,38 @@ func (o *StorageNetAppLun) SetContainerState(v string) {
 	o.ContainerState = &v
 }
 
+// GetIsMapped returns the IsMapped field value if set, zero value otherwise.
+func (o *StorageNetAppLun) GetIsMapped() string {
+	if o == nil || o.IsMapped == nil {
+		var ret string
+		return ret
+	}
+	return *o.IsMapped
+}
+
+// GetIsMappedOk returns a tuple with the IsMapped field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *StorageNetAppLun) GetIsMappedOk() (*string, bool) {
+	if o == nil || o.IsMapped == nil {
+		return nil, false
+	}
+	return o.IsMapped, true
+}
+
+// HasIsMapped returns a boolean if a field has been set.
+func (o *StorageNetAppLun) HasIsMapped() bool {
+	if o != nil && o.IsMapped != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetIsMapped gets a reference to the given string and assigns it to the IsMapped field.
+func (o *StorageNetAppLun) SetIsMapped(v string) {
+	o.IsMapped = &v
+}
+
 // GetKey returns the Key field value if set, zero value otherwise.
 func (o *StorageNetAppLun) GetKey() string {
 	if o == nil || o.Key == nil {
@@ -224,6 +259,7 @@ func (o *StorageNetAppLun) SetKey(v string) {
 }
 
 // GetMapped returns the Mapped field value if set, zero value otherwise.
+// Deprecated
 func (o *StorageNetAppLun) GetMapped() bool {
 	if o == nil || o.Mapped == nil {
 		var ret bool
@@ -234,6 +270,7 @@ func (o *StorageNetAppLun) GetMapped() bool {
 
 // GetMappedOk returns a tuple with the Mapped field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *StorageNetAppLun) GetMappedOk() (*bool, bool) {
 	if o == nil || o.Mapped == nil {
 		return nil, false
@@ -251,6 +288,7 @@ func (o *StorageNetAppLun) HasMapped() bool {
 }
 
 // SetMapped gets a reference to the given bool and assigns it to the Mapped field.
+// Deprecated
 func (o *StorageNetAppLun) SetMapped(v bool) {
 	o.Mapped = &v
 }
@@ -631,6 +669,9 @@ func (o StorageNetAppLun) MarshalJSON() ([]byte, error) {
 	if o.ContainerState != nil {
 		toSerialize["ContainerState"] = o.ContainerState
 	}
+	if o.IsMapped != nil {
+		toSerialize["IsMapped"] = o.IsMapped
+	}
 	if o.Key != nil {
 		toSerialize["Key"] = o.Key
 	}
@@ -687,9 +728,12 @@ func (o *StorageNetAppLun) UnmarshalJSON(bytes []byte) (err error) {
 		AvgPerformanceMetrics *StorageNetAppPerformanceMetricsAverage `json:"AvgPerformanceMetrics,omitempty"`
 		// The state of the volume and aggregate that contain the LUN. LUNs are only available when their containers are available.
 		ContainerState *string `json:"ContainerState,omitempty"`
+		// Reports if the LUN is mapped to one or more initiator groups.
+		IsMapped *string `json:"IsMapped,omitempty"`
 		// Unique identifier of LUN across data center.
 		Key *string `json:"Key,omitempty"`
 		// Reports if the LUN is mapped to one or more initiator groups.
+		// Deprecated
 		Mapped *bool `json:"Mapped,omitempty"`
 		// The operating system (OS) type for this LUN. * `Linux` - Family of open source Unix-like operating systems based on the Linux kernel. * `AIX` - Advanced Interactive Executive (AIX). * `HP-UX` - HP-UX is implementation of the Unix operating system, based on Unix System V. * `Hyper-V` - Windows Server 2008 or Windows Server 2012 Hyper-V. * `OpenVMS` - OpenVMS is multi-user, multiprocessing virtual memory-based operating system. * `Solaris` - Solaris is a Unix operating system. * `NetWare` - NetWare is a computer network operating system. * `VMware` - An enterprise-class, type-1 hypervisor developed by VMware for deploying and serving virtual computers. * `Windows` - Single-partition Windows disk using the Master Boot Record (MBR) partitioning style. * `Xen` - Xen is a type-1 hypervisor, providing services that allow multiple computer operating systems to execute on the same computer hardware concurrently.
 		OsType *string `json:"OsType,omitempty"`
@@ -722,6 +766,7 @@ func (o *StorageNetAppLun) UnmarshalJSON(bytes []byte) (err error) {
 		varStorageNetAppLun.ObjectType = varStorageNetAppLunWithoutEmbeddedStruct.ObjectType
 		varStorageNetAppLun.AvgPerformanceMetrics = varStorageNetAppLunWithoutEmbeddedStruct.AvgPerformanceMetrics
 		varStorageNetAppLun.ContainerState = varStorageNetAppLunWithoutEmbeddedStruct.ContainerState
+		varStorageNetAppLun.IsMapped = varStorageNetAppLunWithoutEmbeddedStruct.IsMapped
 		varStorageNetAppLun.Key = varStorageNetAppLunWithoutEmbeddedStruct.Key
 		varStorageNetAppLun.Mapped = varStorageNetAppLunWithoutEmbeddedStruct.Mapped
 		varStorageNetAppLun.OsType = varStorageNetAppLunWithoutEmbeddedStruct.OsType
@@ -756,6 +801,7 @@ func (o *StorageNetAppLun) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "AvgPerformanceMetrics")
 		delete(additionalProperties, "ContainerState")
+		delete(additionalProperties, "IsMapped")
 		delete(additionalProperties, "Key")
 		delete(additionalProperties, "Mapped")
 		delete(additionalProperties, "OsType")

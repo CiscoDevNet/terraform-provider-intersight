@@ -255,7 +255,7 @@ func getIamEndPointUserRoleInventorySchema() map[string]*schema.Schema {
 			},
 		},
 		"password": {
-			Description: "Valid login password of the user.",
+			Description: "The password must have a minimum of 8 and a maximum of 127 characters. For servers with IPMI user role enabled, the maximum length is limited to 20 characters. When strong password is enabled, must satisfy below requirements: A. The password must not contain the User's Name. B. The password must contain characters from three of the following four categories. 1) English uppercase characters (A through Z). 2) English lowercase characters (a through z). 3) Base 10 digits (0 through 9). 4) Non-alphabetic characters (! , @, #, $, %, ^, &, *, -, _, +, =).",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},

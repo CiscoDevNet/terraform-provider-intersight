@@ -283,6 +283,11 @@ func getStorageNetAppStorageVmSchema() map[string]*schema.Schema {
 			Optional: true,
 			Elem: &schema.Schema{
 				Type: schema.TypeString}},
+		"native_fpolicy_count": {
+			Description: "The number of native FPolicy engines enabled on this SVM.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
 		"nfs_enabled": {
 			Description: "Status for Network File System Protocol ( NFS ) allowed to run on  Vservers.",
 			Type:        schema.TypeBool,
@@ -851,6 +856,11 @@ func dataSourceStorageNetAppStorageVmRead(c context.Context, d *schema.ResourceD
 		o.SetNameServers(x)
 	}
 
+	if v, ok := d.GetOkExists("native_fpolicy_count"); ok {
+		x := int64(v.(int))
+		o.SetNativeFpolicyCount(x)
+	}
+
 	if v, ok := d.GetOkExists("nfs_enabled"); ok {
 		x := (v.(bool))
 		o.SetNfsEnabled(x)
@@ -1151,6 +1161,7 @@ func dataSourceStorageNetAppStorageVmRead(c context.Context, d *schema.ResourceD
 				temp["moid"] = (s.GetMoid())
 				temp["name"] = (s.GetName())
 				temp["name_servers"] = (s.GetNameServers())
+				temp["native_fpolicy_count"] = (s.GetNativeFpolicyCount())
 				temp["nfs_enabled"] = (s.GetNfsEnabled())
 				temp["nvme_enabled"] = (s.GetNvmeEnabled())
 				temp["object_type"] = (s.GetObjectType())

@@ -61,7 +61,7 @@ func getIppoolShadowPoolSchema() map[string]*schema.Schema {
 			},
 		},
 		"assigned": {
-			Description: "Number of IDs that are currently assigned.",
+			Description: "Number of IDs that are currently assigned (in use).",
 			Type:        schema.TypeInt,
 			Optional:    true,
 		},
@@ -452,6 +452,11 @@ func getIppoolShadowPoolSchema() map[string]*schema.Schema {
 					},
 				},
 			},
+		},
+		"reserved": {
+			Description: "Number of IDs that are currently reserved (and not in use).",
+			Type:        schema.TypeInt,
+			Optional:    true,
 		},
 		"shared_scope": {
 			Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
@@ -1199,6 +1204,11 @@ func dataSourceIppoolShadowPoolRead(c context.Context, d *schema.ResourceData, m
 		o.SetReservations(x)
 	}
 
+	if v, ok := d.GetOkExists("reserved"); ok {
+		x := int64(v.(int))
+		o.SetReserved(x)
+	}
+
 	if v, ok := d.GetOk("shared_scope"); ok {
 		x := (v.(string))
 		o.SetSharedScope(x)
@@ -1449,6 +1459,7 @@ func dataSourceIppoolShadowPoolRead(c context.Context, d *schema.ResourceData, m
 				temp["pool"] = flattenMapIppoolPoolRelationship(s.GetPool(), d)
 
 				temp["reservations"] = flattenListIppoolReservationRelationship(s.GetReservations(), d)
+				temp["reserved"] = (s.GetReserved())
 				temp["shared_scope"] = (s.GetSharedScope())
 				temp["size"] = (s.GetSize())
 

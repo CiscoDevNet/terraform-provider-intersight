@@ -285,6 +285,11 @@ func getBulkExportSchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"permission_id": {
+			Description: "The permission identifier which indicates the permission that current user has that will allow to start this export operation.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"permission_resources": {
 			Description: "An array of relationships to moBaseMo resources.",
 			Type:        schema.TypeList,
@@ -356,6 +361,11 @@ func getBulkExportSchema() map[string]*schema.Schema {
 					},
 				},
 			},
+		},
+		"user_id": {
+			Description: "The user identifier which indicates the user that started this export operation.",
+			Type:        schema.TypeString,
+			Optional:    true,
 		},
 		"version_context": {
 			Description: "The versioning info for this managed object.",
@@ -818,6 +828,11 @@ func dataSourceBulkExportRead(c context.Context, d *schema.ResourceData, meta in
 		}
 	}
 
+	if v, ok := d.GetOk("permission_id"); ok {
+		x := (v.(string))
+		o.SetPermissionId(x)
+	}
+
 	if v, ok := d.GetOk("permission_resources"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
@@ -904,6 +919,11 @@ func dataSourceBulkExportRead(c context.Context, d *schema.ResourceData, meta in
 			x = append(x, *o)
 		}
 		o.SetTags(x)
+	}
+
+	if v, ok := d.GetOk("user_id"); ok {
+		x := (v.(string))
+		o.SetUserId(x)
 	}
 
 	if v, ok := d.GetOk("version_context"); ok {
@@ -1042,6 +1062,7 @@ func dataSourceBulkExportRead(c context.Context, d *schema.ResourceData, meta in
 				temp["owners"] = (s.GetOwners())
 
 				temp["parent"] = flattenMapMoBaseMoRelationship(s.GetParent(), d)
+				temp["permission_id"] = (s.GetPermissionId())
 
 				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
 				temp["shared_scope"] = (s.GetSharedScope())
@@ -1049,6 +1070,7 @@ func dataSourceBulkExportRead(c context.Context, d *schema.ResourceData, meta in
 				temp["status_message"] = (s.GetStatusMessage())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
+				temp["user_id"] = (s.GetUserId())
 
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
 				bulkExportResults = append(bulkExportResults, temp)

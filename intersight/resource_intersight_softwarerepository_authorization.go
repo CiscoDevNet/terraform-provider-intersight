@@ -333,6 +333,17 @@ func resourceSoftwarerepositoryAuthorization() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
+			"nr_version": {
+				Description: "The Automated Software Distribution version of the authorization MO.\n* `V3` - The client is running Automated Software Distribution V3.\n* `V4` - The client is running Automated Software Distribution V4.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+					if val != nil {
+						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+					}
+					return
+				}},
 			"version_context": {
 				Description: "The versioning info for this managed object.",
 				Type:        schema.TypeList,
@@ -671,6 +682,10 @@ func resourceSoftwarerepositoryAuthorizationRead(c context.Context, d *schema.Re
 
 	if err := d.Set("user_id", (s.GetUserId())); err != nil {
 		return diag.Errorf("error occurred while setting property UserId in SoftwarerepositoryAuthorization object: %s", err.Error())
+	}
+
+	if err := d.Set("nr_version", (s.GetVersion())); err != nil {
+		return diag.Errorf("error occurred while setting property Version in SoftwarerepositoryAuthorization object: %s", err.Error())
 	}
 
 	if err := d.Set("version_context", flattenMapMoVersionContext(s.GetVersionContext(), d)); err != nil {

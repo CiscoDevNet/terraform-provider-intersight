@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "uuidpool.Block"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "uuidpool.Block"]
+**Prefix** | Pointer to **string** | Prefix of the UUID pool. UUID is constructed as &lt;prefix&gt;-&lt;suffix&gt;. | [optional] [readonly] 
 **UuidSuffixBlock** | Pointer to [**UuidpoolUuidBlock**](UuidpoolUuidBlock.md) |  | [optional] 
 **Pool** | Pointer to [**UuidpoolPoolRelationship**](UuidpoolPoolRelationship.md) |  | [optional] 
 **Reservations** | Pointer to [**[]UuidpoolReservationRelationship**](UuidpoolReservationRelationship.md) | An array of relationships to uuidpoolReservation resources. | [optional] [readonly] 
@@ -68,6 +69,31 @@ and a boolean to check if the value has been set.
 
 SetObjectType sets ObjectType field to given value.
 
+
+### GetPrefix
+
+`func (o *UuidpoolBlockAllOf) GetPrefix() string`
+
+GetPrefix returns the Prefix field if non-nil, zero value otherwise.
+
+### GetPrefixOk
+
+`func (o *UuidpoolBlockAllOf) GetPrefixOk() (*string, bool)`
+
+GetPrefixOk returns a tuple with the Prefix field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPrefix
+
+`func (o *UuidpoolBlockAllOf) SetPrefix(v string)`
+
+SetPrefix sets Prefix field to given value.
+
+### HasPrefix
+
+`func (o *UuidpoolBlockAllOf) HasPrefix() bool`
+
+HasPrefix returns a boolean if a field has been set.
 
 ### GetUuidSuffixBlock
 

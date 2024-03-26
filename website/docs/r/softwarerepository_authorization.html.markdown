@@ -67,6 +67,7 @@ This complex property has following sub-properties:
   + `key`:(string) The string representation of a tag key. 
   + `value`:(string) The string representation of a tag value. 
 * `user_id`:(string) The username that will be used by Intersight to create OAuth2 tokens for interacting with the external repository, on the user account's behalf. 
+* `nr_version`:(string)(ReadOnly) The Automated Software Distribution version of the authorization MO.* `V3` - The client is running Automated Software Distribution V3.* `V4` - The client is running Automated Software Distribution V4. 
 * `version_context`:(HashMap) -(ReadOnly) The versioning info for this managed object. 
 This complex property has following sub-properties:
   + `interested_mos`:(Array)

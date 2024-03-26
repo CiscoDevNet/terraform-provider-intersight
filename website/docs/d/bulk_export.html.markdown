@@ -24,7 +24,9 @@ The following arguments can be used to get data of already created objects in In
 * `mod_time`:(string) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `name`:(string) An identifier for the export instance. Name can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-) or an underscore (_). 
+* `permission_id`:(string) The permission identifier which indicates the permission that current user has that will allow to start this export operation. 
 * `shared_scope`:(string) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
 * `status`:(string) Status of the export operation.* `` - The operation has not started.* `InProgress` - The operation is in progress.* `OrderInProgress` - The archive operation is in progress.* `Success` - The operation has succeeded.* `Failed` - The operation has failed.* `OperationTimedOut` - The operation has timed out.* `OperationCancelled` - The operation has been cancelled.* `CancelInProgress` - The operation is being cancelled. 
 * `status_message`:(string) Status message associated with failures or progress indication. 
+* `user_id`:(string) The user identifier which indicates the user that started this export operation. 
  

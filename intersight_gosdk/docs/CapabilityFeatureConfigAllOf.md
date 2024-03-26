@@ -6,11 +6,14 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "capability.FeatureConfig"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "capability.FeatureConfig"]
-**FeatureName** | Pointer to **string** | Name of the feature that identifies the specific adapter configuration. * &#x60;RoCEv2&#x60; - Capability indicator of the RDMA over Converged Ethernet (RoCE) feature version 2. * &#x60;RoCEv1&#x60; - Capability indicator of the RDMA over Converged Ethernet (RoCE) feature version 1. * &#x60;VMQ&#x60; - Capability indicator of the Virtual Machine Queue (VMQ) feature. * &#x60;VMMQ&#x60; - Capability indicator of the Virtual Machine Multi-Queue (VMMQ) feature. * &#x60;VMQInterrupts&#x60; - Capability indicator of the Virtual Machine Queue (VMQ) Interrupts feature. * &#x60;NVGRE&#x60; - Capability indicator of the Network Virtualization using Generic Routing Encapsulation (NVGRE) feature. * &#x60;ARFS&#x60; - Capability indicator of the Accelerated Receive Flow Steering (ARFS) feature. * &#x60;VXLAN&#x60; - Capability indicator of the Virtual Extensible LAN (VXLAN) feature. | [optional] [default to "RoCEv2"]
-**MinFwVersion** | Pointer to **string** | Firmware version from which support for this feature is available. | [optional] 
+**FeatureName** | Pointer to **string** | Name of the feature that identifies the specific adapter configuration. * &#x60;RoCEv2&#x60; - Capability indicator of the RDMA over Converged Ethernet (RoCE) feature version 2. * &#x60;RoCEv1&#x60; - Capability indicator of the RDMA over Converged Ethernet (RoCE) feature version 1. * &#x60;VMQ&#x60; - Capability indicator of the Virtual Machine Queue (VMQ) feature. * &#x60;VMMQ&#x60; - Capability indicator of the Virtual Machine Multi-Queue (VMMQ) feature. * &#x60;VMQInterrupts&#x60; - Capability indicator of the Virtual Machine Queue (VMQ) Interrupts feature. * &#x60;NVGRE&#x60; - Capability indicator of the Network Virtualization using Generic Routing Encapsulation (NVGRE) feature. * &#x60;ARFS&#x60; - Capability indicator of the Accelerated Receive Flow Steering (ARFS) feature. * &#x60;VXLAN&#x60; - Capability indicator of the Virtual Extensible LAN (VXLAN) feature. * &#x60;usNIC&#x60; - Capability indicator of the User Space NIC (usNIC) feature. * &#x60;Advanced Filter&#x60; - Capability indicator of the Advanced Filter feature. * &#x60;Azure Stack Host QOS&#x60; - Capability indicator of the Azure Stack Host QOS feature. * &#x60;QinQ&#x60; - Capability indicator of the QinQ feature. * &#x60;SRIOV&#x60; - Capability indicator of the Single Root Input Output Virtualization (SR-IOV). | [optional] [default to "RoCEv2"]
+**MinAdapterFwVersion** | Pointer to **string** | Firmware version of Adapter from which support for this feature is available. | [optional] 
+**MinFwVersion** | Pointer to **string** | Firmware version of BMC from which support for this feature is available. | [optional] 
 **SupportedFwVersions** | Pointer to **[]string** |  | [optional] 
 **SupportedInAdapters** | Pointer to **[]string** |  | [optional] 
 **SupportedInGenerations** | Pointer to **[]int32** |  | [optional] 
+**UnsupportedFeatureMatrix** | Pointer to [**[]CapabilityUnsupportedFeatureConfig**](CapabilityUnsupportedFeatureConfig.md) |  | [optional] 
+**ValidationAction** | Pointer to **string** | Action to be taken when validation does not succeed. * &#x60;Error&#x60; - Stop workflow execution by throwing error. * &#x60;Skip&#x60; - Remove the feature from configuration and continue workflow execution. | [optional] [default to "Error"]
 
 ## Methods
 
@@ -95,6 +98,31 @@ SetFeatureName sets FeatureName field to given value.
 `func (o *CapabilityFeatureConfigAllOf) HasFeatureName() bool`
 
 HasFeatureName returns a boolean if a field has been set.
+
+### GetMinAdapterFwVersion
+
+`func (o *CapabilityFeatureConfigAllOf) GetMinAdapterFwVersion() string`
+
+GetMinAdapterFwVersion returns the MinAdapterFwVersion field if non-nil, zero value otherwise.
+
+### GetMinAdapterFwVersionOk
+
+`func (o *CapabilityFeatureConfigAllOf) GetMinAdapterFwVersionOk() (*string, bool)`
+
+GetMinAdapterFwVersionOk returns a tuple with the MinAdapterFwVersion field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMinAdapterFwVersion
+
+`func (o *CapabilityFeatureConfigAllOf) SetMinAdapterFwVersion(v string)`
+
+SetMinAdapterFwVersion sets MinAdapterFwVersion field to given value.
+
+### HasMinAdapterFwVersion
+
+`func (o *CapabilityFeatureConfigAllOf) HasMinAdapterFwVersion() bool`
+
+HasMinAdapterFwVersion returns a boolean if a field has been set.
 
 ### GetMinFwVersion
 
@@ -226,6 +254,66 @@ HasSupportedInGenerations returns a boolean if a field has been set.
 `func (o *CapabilityFeatureConfigAllOf) UnsetSupportedInGenerations()`
 
 UnsetSupportedInGenerations ensures that no value is present for SupportedInGenerations, not even an explicit nil
+### GetUnsupportedFeatureMatrix
+
+`func (o *CapabilityFeatureConfigAllOf) GetUnsupportedFeatureMatrix() []CapabilityUnsupportedFeatureConfig`
+
+GetUnsupportedFeatureMatrix returns the UnsupportedFeatureMatrix field if non-nil, zero value otherwise.
+
+### GetUnsupportedFeatureMatrixOk
+
+`func (o *CapabilityFeatureConfigAllOf) GetUnsupportedFeatureMatrixOk() (*[]CapabilityUnsupportedFeatureConfig, bool)`
+
+GetUnsupportedFeatureMatrixOk returns a tuple with the UnsupportedFeatureMatrix field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUnsupportedFeatureMatrix
+
+`func (o *CapabilityFeatureConfigAllOf) SetUnsupportedFeatureMatrix(v []CapabilityUnsupportedFeatureConfig)`
+
+SetUnsupportedFeatureMatrix sets UnsupportedFeatureMatrix field to given value.
+
+### HasUnsupportedFeatureMatrix
+
+`func (o *CapabilityFeatureConfigAllOf) HasUnsupportedFeatureMatrix() bool`
+
+HasUnsupportedFeatureMatrix returns a boolean if a field has been set.
+
+### SetUnsupportedFeatureMatrixNil
+
+`func (o *CapabilityFeatureConfigAllOf) SetUnsupportedFeatureMatrixNil(b bool)`
+
+ SetUnsupportedFeatureMatrixNil sets the value for UnsupportedFeatureMatrix to be an explicit nil
+
+### UnsetUnsupportedFeatureMatrix
+`func (o *CapabilityFeatureConfigAllOf) UnsetUnsupportedFeatureMatrix()`
+
+UnsetUnsupportedFeatureMatrix ensures that no value is present for UnsupportedFeatureMatrix, not even an explicit nil
+### GetValidationAction
+
+`func (o *CapabilityFeatureConfigAllOf) GetValidationAction() string`
+
+GetValidationAction returns the ValidationAction field if non-nil, zero value otherwise.
+
+### GetValidationActionOk
+
+`func (o *CapabilityFeatureConfigAllOf) GetValidationActionOk() (*string, bool)`
+
+GetValidationActionOk returns a tuple with the ValidationAction field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetValidationAction
+
+`func (o *CapabilityFeatureConfigAllOf) SetValidationAction(v string)`
+
+SetValidationAction sets ValidationAction field to given value.
+
+### HasValidationAction
+
+`func (o *CapabilityFeatureConfigAllOf) HasValidationAction() bool`
+
+HasValidationAction returns a boolean if a field has been set.
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

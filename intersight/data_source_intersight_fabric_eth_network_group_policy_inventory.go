@@ -368,7 +368,7 @@ func getFabricEthNetworkGroupPolicyInventorySchema() map[string]*schema.Schema {
 						DiffSuppressFunc: SuppressDiffAdditionProps,
 					},
 					"allowed_vlans": {
-						Description: "Allowed VLAN IDs of the virtual interface. A list of comma seperated VLAN ids and/or VLAN id ranges.",
+						Description: "Allowed VLAN IDs of the virtual interface. A list of comma separated VLAN ids and/or VLAN id ranges.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
@@ -385,6 +385,16 @@ func getFabricEthNetworkGroupPolicyInventorySchema() map[string]*schema.Schema {
 					"object_type": {
 						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"qinq_enabled": {
+						Description: "Enable QinQ (802.1Q-in-802.1Q) Tunneling on the vNIC.",
+						Type:        schema.TypeBool,
+						Optional:    true,
+					},
+					"qinq_vlan": {
+						Description: "Select the VLAN ID for VIC QinQ (802.1Q-in-802.1Q) Tunneling.",
+						Type:        schema.TypeInt,
 						Optional:    true,
 					},
 				},
@@ -793,6 +803,18 @@ func dataSourceFabricEthNetworkGroupPolicyInventoryRead(c context.Context, d *sc
 				{
 					x := (v.(string))
 					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["qinq_enabled"]; ok {
+				{
+					x := (v.(bool))
+					o.SetQinqEnabled(x)
+				}
+			}
+			if v, ok := l["qinq_vlan"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetQinqVlan(x)
 				}
 			}
 			p = append(p, *o)

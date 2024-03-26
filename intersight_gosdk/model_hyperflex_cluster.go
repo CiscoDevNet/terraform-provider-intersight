@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-11765
+API version: 1.0.11-14968
 Contact: intersight@cisco.com
 */
 
@@ -23,7 +23,8 @@ type HyperflexCluster struct {
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
-	ObjectType string `json:"ObjectType"`
+	ObjectType string                      `json:"ObjectType"`
+	Capability NullableHyperflexCapability `json:"Capability,omitempty"`
 	// The storage type of this cluster (All Flash or Hybrid).
 	// Deprecated
 	ClusterType *int64 `json:"ClusterType,omitempty"`
@@ -38,16 +39,18 @@ type HyperflexCluster struct {
 	// Deprecated
 	FltAggr *int64 `json:"FltAggr,omitempty"`
 	// The version and build number of the HyperFlex Data Platform for this cluster. After a cluster upgrade, this version string will be updated on the next inventory cycle to reflect the newly installed version.
-	HxdpBuildVersion *string                  `json:"HxdpBuildVersion,omitempty"`
-	NtpServers       []string                 `json:"NtpServers,omitempty"`
-	Summary          NullableHyperflexSummary `json:"Summary,omitempty"`
+	HxdpBuildVersion     *string                               `json:"HxdpBuildVersion,omitempty"`
+	NetworkConfiguration NullableHyperflexNetworkConfiguration `json:"NetworkConfiguration,omitempty"`
+	NtpServers           []string                              `json:"NtpServers,omitempty"`
+	Summary              NullableHyperflexSummary              `json:"Summary,omitempty"`
 	// The upgrade status of the HyperFlex cluster. * `Unknown` - The upgrade status of the HyperFlex cluster could not be determined. * `Ok` - The upgrade of the HyperFlex cluster is complete. * `InProgress` - The upgrade of the HyperFlex cluster is in-progress. * `Failed` - The upgrade of the HyperFlex cluster has failed. * `Waiting` - The upgrade of the HyperFlex cluster is waiting to continue execution.
 	UpgradeStatus *string `json:"UpgradeStatus,omitempty"`
 	// The uplink speed information of the HyperFlex cluster. * `Unknown` - The uplink speed could not be determined. The physical servers are potentially not claimed. * `10G` - The uplink speed is 10G. * `1G` - The uplink speed is 1G.
-	UplinkSpeed *string `json:"UplinkSpeed,omitempty"`
+	UplinkSpeed          *string                               `json:"UplinkSpeed,omitempty"`
+	VcenterConfiguration NullableHyperflexVcenterConfiguration `json:"VcenterConfiguration,omitempty"`
 	// The number of virtual machines present on this cluster.
 	VmCount *int64 `json:"VmCount,omitempty"`
-	// The type of availability zone used by the cluster. Physical zones are always used in HyperFlex  Stretched Clusters. Logical zones may be used if a cluster has Logical Availability Zones (LAZ)  enabled. * `UNKNOWN` - The type of zone configured on the HyperFlex cluster is not known. * `NOT_CONFIGURED` - The zone type is not configured. * `LOGICAL` - The zone is a logical zone created when the logical availability zones (LAZ) feature is enabled on the HyperFlex cluster. * `PHYSICAL` - The zone is a physical zone configured on a stretched HyperFlex cluster.
+	// The type of availability zone used by the cluster. Physical zones are always used in HyperFlex Stretched Clusters. Logical zones may be used if a cluster has Logical Availability Zones (LAZ) enabled. * `UNKNOWN` - The type of zone configured on the HyperFlex cluster is not known. * `NOT_CONFIGURED` - The zone type is not configured. * `LOGICAL` - The zone is a logical zone created when the logical availability zones (LAZ) feature is enabled on the HyperFlex cluster. * `PHYSICAL` - The zone is a physical zone configured on a stretched HyperFlex cluster.
 	ZoneType *string `json:"ZoneType,omitempty"`
 	// An array of relationships to hyperflexAlarm resources.
 	Alarm      []HyperflexAlarmRelationship     `json:"Alarm,omitempty"`
@@ -142,6 +145,49 @@ func (o *HyperflexCluster) GetObjectTypeOk() (*string, bool) {
 // SetObjectType sets field value
 func (o *HyperflexCluster) SetObjectType(v string) {
 	o.ObjectType = v
+}
+
+// GetCapability returns the Capability field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *HyperflexCluster) GetCapability() HyperflexCapability {
+	if o == nil || o.Capability.Get() == nil {
+		var ret HyperflexCapability
+		return ret
+	}
+	return *o.Capability.Get()
+}
+
+// GetCapabilityOk returns a tuple with the Capability field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *HyperflexCluster) GetCapabilityOk() (*HyperflexCapability, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Capability.Get(), o.Capability.IsSet()
+}
+
+// HasCapability returns a boolean if a field has been set.
+func (o *HyperflexCluster) HasCapability() bool {
+	if o != nil && o.Capability.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetCapability gets a reference to the given NullableHyperflexCapability and assigns it to the Capability field.
+func (o *HyperflexCluster) SetCapability(v HyperflexCapability) {
+	o.Capability.Set(&v)
+}
+
+// SetCapabilityNil sets the value for Capability to be an explicit nil
+func (o *HyperflexCluster) SetCapabilityNil() {
+	o.Capability.Set(nil)
+}
+
+// UnsetCapability ensures that no value is present for Capability, not even an explicit nil
+func (o *HyperflexCluster) UnsetCapability() {
+	o.Capability.Unset()
 }
 
 // GetClusterType returns the ClusterType field value if set, zero value otherwise.
@@ -375,6 +421,49 @@ func (o *HyperflexCluster) SetHxdpBuildVersion(v string) {
 	o.HxdpBuildVersion = &v
 }
 
+// GetNetworkConfiguration returns the NetworkConfiguration field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *HyperflexCluster) GetNetworkConfiguration() HyperflexNetworkConfiguration {
+	if o == nil || o.NetworkConfiguration.Get() == nil {
+		var ret HyperflexNetworkConfiguration
+		return ret
+	}
+	return *o.NetworkConfiguration.Get()
+}
+
+// GetNetworkConfigurationOk returns a tuple with the NetworkConfiguration field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *HyperflexCluster) GetNetworkConfigurationOk() (*HyperflexNetworkConfiguration, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.NetworkConfiguration.Get(), o.NetworkConfiguration.IsSet()
+}
+
+// HasNetworkConfiguration returns a boolean if a field has been set.
+func (o *HyperflexCluster) HasNetworkConfiguration() bool {
+	if o != nil && o.NetworkConfiguration.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetNetworkConfiguration gets a reference to the given NullableHyperflexNetworkConfiguration and assigns it to the NetworkConfiguration field.
+func (o *HyperflexCluster) SetNetworkConfiguration(v HyperflexNetworkConfiguration) {
+	o.NetworkConfiguration.Set(&v)
+}
+
+// SetNetworkConfigurationNil sets the value for NetworkConfiguration to be an explicit nil
+func (o *HyperflexCluster) SetNetworkConfigurationNil() {
+	o.NetworkConfiguration.Set(nil)
+}
+
+// UnsetNetworkConfiguration ensures that no value is present for NetworkConfiguration, not even an explicit nil
+func (o *HyperflexCluster) UnsetNetworkConfiguration() {
+	o.NetworkConfiguration.Unset()
+}
+
 // GetNtpServers returns the NtpServers field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *HyperflexCluster) GetNtpServers() []string {
 	if o == nil {
@@ -513,6 +602,49 @@ func (o *HyperflexCluster) HasUplinkSpeed() bool {
 // SetUplinkSpeed gets a reference to the given string and assigns it to the UplinkSpeed field.
 func (o *HyperflexCluster) SetUplinkSpeed(v string) {
 	o.UplinkSpeed = &v
+}
+
+// GetVcenterConfiguration returns the VcenterConfiguration field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *HyperflexCluster) GetVcenterConfiguration() HyperflexVcenterConfiguration {
+	if o == nil || o.VcenterConfiguration.Get() == nil {
+		var ret HyperflexVcenterConfiguration
+		return ret
+	}
+	return *o.VcenterConfiguration.Get()
+}
+
+// GetVcenterConfigurationOk returns a tuple with the VcenterConfiguration field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *HyperflexCluster) GetVcenterConfigurationOk() (*HyperflexVcenterConfiguration, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.VcenterConfiguration.Get(), o.VcenterConfiguration.IsSet()
+}
+
+// HasVcenterConfiguration returns a boolean if a field has been set.
+func (o *HyperflexCluster) HasVcenterConfiguration() bool {
+	if o != nil && o.VcenterConfiguration.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetVcenterConfiguration gets a reference to the given NullableHyperflexVcenterConfiguration and assigns it to the VcenterConfiguration field.
+func (o *HyperflexCluster) SetVcenterConfiguration(v HyperflexVcenterConfiguration) {
+	o.VcenterConfiguration.Set(&v)
+}
+
+// SetVcenterConfigurationNil sets the value for VcenterConfiguration to be an explicit nil
+func (o *HyperflexCluster) SetVcenterConfigurationNil() {
+	o.VcenterConfiguration.Set(nil)
+}
+
+// UnsetVcenterConfiguration ensures that no value is present for VcenterConfiguration, not even an explicit nil
+func (o *HyperflexCluster) UnsetVcenterConfiguration() {
+	o.VcenterConfiguration.Unset()
 }
 
 // GetVmCount returns the VmCount field value if set, zero value otherwise.
@@ -920,6 +1052,9 @@ func (o HyperflexCluster) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["ObjectType"] = o.ObjectType
 	}
+	if o.Capability.IsSet() {
+		toSerialize["Capability"] = o.Capability.Get()
+	}
 	if o.ClusterType != nil {
 		toSerialize["ClusterType"] = o.ClusterType
 	}
@@ -941,6 +1076,9 @@ func (o HyperflexCluster) MarshalJSON() ([]byte, error) {
 	if o.HxdpBuildVersion != nil {
 		toSerialize["HxdpBuildVersion"] = o.HxdpBuildVersion
 	}
+	if o.NetworkConfiguration.IsSet() {
+		toSerialize["NetworkConfiguration"] = o.NetworkConfiguration.Get()
+	}
 	if o.NtpServers != nil {
 		toSerialize["NtpServers"] = o.NtpServers
 	}
@@ -952,6 +1090,9 @@ func (o HyperflexCluster) MarshalJSON() ([]byte, error) {
 	}
 	if o.UplinkSpeed != nil {
 		toSerialize["UplinkSpeed"] = o.UplinkSpeed
+	}
+	if o.VcenterConfiguration.IsSet() {
+		toSerialize["VcenterConfiguration"] = o.VcenterConfiguration.Get()
 	}
 	if o.VmCount != nil {
 		toSerialize["VmCount"] = o.VmCount
@@ -1002,7 +1143,8 @@ func (o *HyperflexCluster) UnmarshalJSON(bytes []byte) (err error) {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
-		ObjectType string `json:"ObjectType"`
+		ObjectType string                      `json:"ObjectType"`
+		Capability NullableHyperflexCapability `json:"Capability,omitempty"`
 		// The storage type of this cluster (All Flash or Hybrid).
 		// Deprecated
 		ClusterType *int64 `json:"ClusterType,omitempty"`
@@ -1017,16 +1159,18 @@ func (o *HyperflexCluster) UnmarshalJSON(bytes []byte) (err error) {
 		// Deprecated
 		FltAggr *int64 `json:"FltAggr,omitempty"`
 		// The version and build number of the HyperFlex Data Platform for this cluster. After a cluster upgrade, this version string will be updated on the next inventory cycle to reflect the newly installed version.
-		HxdpBuildVersion *string                  `json:"HxdpBuildVersion,omitempty"`
-		NtpServers       []string                 `json:"NtpServers,omitempty"`
-		Summary          NullableHyperflexSummary `json:"Summary,omitempty"`
+		HxdpBuildVersion     *string                               `json:"HxdpBuildVersion,omitempty"`
+		NetworkConfiguration NullableHyperflexNetworkConfiguration `json:"NetworkConfiguration,omitempty"`
+		NtpServers           []string                              `json:"NtpServers,omitempty"`
+		Summary              NullableHyperflexSummary              `json:"Summary,omitempty"`
 		// The upgrade status of the HyperFlex cluster. * `Unknown` - The upgrade status of the HyperFlex cluster could not be determined. * `Ok` - The upgrade of the HyperFlex cluster is complete. * `InProgress` - The upgrade of the HyperFlex cluster is in-progress. * `Failed` - The upgrade of the HyperFlex cluster has failed. * `Waiting` - The upgrade of the HyperFlex cluster is waiting to continue execution.
 		UpgradeStatus *string `json:"UpgradeStatus,omitempty"`
 		// The uplink speed information of the HyperFlex cluster. * `Unknown` - The uplink speed could not be determined. The physical servers are potentially not claimed. * `10G` - The uplink speed is 10G. * `1G` - The uplink speed is 1G.
-		UplinkSpeed *string `json:"UplinkSpeed,omitempty"`
+		UplinkSpeed          *string                               `json:"UplinkSpeed,omitempty"`
+		VcenterConfiguration NullableHyperflexVcenterConfiguration `json:"VcenterConfiguration,omitempty"`
 		// The number of virtual machines present on this cluster.
 		VmCount *int64 `json:"VmCount,omitempty"`
-		// The type of availability zone used by the cluster. Physical zones are always used in HyperFlex  Stretched Clusters. Logical zones may be used if a cluster has Logical Availability Zones (LAZ)  enabled. * `UNKNOWN` - The type of zone configured on the HyperFlex cluster is not known. * `NOT_CONFIGURED` - The zone type is not configured. * `LOGICAL` - The zone is a logical zone created when the logical availability zones (LAZ) feature is enabled on the HyperFlex cluster. * `PHYSICAL` - The zone is a physical zone configured on a stretched HyperFlex cluster.
+		// The type of availability zone used by the cluster. Physical zones are always used in HyperFlex Stretched Clusters. Logical zones may be used if a cluster has Logical Availability Zones (LAZ) enabled. * `UNKNOWN` - The type of zone configured on the HyperFlex cluster is not known. * `NOT_CONFIGURED` - The zone type is not configured. * `LOGICAL` - The zone is a logical zone created when the logical availability zones (LAZ) feature is enabled on the HyperFlex cluster. * `PHYSICAL` - The zone is a physical zone configured on a stretched HyperFlex cluster.
 		ZoneType *string `json:"ZoneType,omitempty"`
 		// An array of relationships to hyperflexAlarm resources.
 		Alarm      []HyperflexAlarmRelationship     `json:"Alarm,omitempty"`
@@ -1052,6 +1196,7 @@ func (o *HyperflexCluster) UnmarshalJSON(bytes []byte) (err error) {
 		varHyperflexCluster := _HyperflexCluster{}
 		varHyperflexCluster.ClassId = varHyperflexClusterWithoutEmbeddedStruct.ClassId
 		varHyperflexCluster.ObjectType = varHyperflexClusterWithoutEmbeddedStruct.ObjectType
+		varHyperflexCluster.Capability = varHyperflexClusterWithoutEmbeddedStruct.Capability
 		varHyperflexCluster.ClusterType = varHyperflexClusterWithoutEmbeddedStruct.ClusterType
 		varHyperflexCluster.ClusterUuid = varHyperflexClusterWithoutEmbeddedStruct.ClusterUuid
 		varHyperflexCluster.DeviceId = varHyperflexClusterWithoutEmbeddedStruct.DeviceId
@@ -1059,10 +1204,12 @@ func (o *HyperflexCluster) UnmarshalJSON(bytes []byte) (err error) {
 		varHyperflexCluster.EncryptionStatus = varHyperflexClusterWithoutEmbeddedStruct.EncryptionStatus
 		varHyperflexCluster.FltAggr = varHyperflexClusterWithoutEmbeddedStruct.FltAggr
 		varHyperflexCluster.HxdpBuildVersion = varHyperflexClusterWithoutEmbeddedStruct.HxdpBuildVersion
+		varHyperflexCluster.NetworkConfiguration = varHyperflexClusterWithoutEmbeddedStruct.NetworkConfiguration
 		varHyperflexCluster.NtpServers = varHyperflexClusterWithoutEmbeddedStruct.NtpServers
 		varHyperflexCluster.Summary = varHyperflexClusterWithoutEmbeddedStruct.Summary
 		varHyperflexCluster.UpgradeStatus = varHyperflexClusterWithoutEmbeddedStruct.UpgradeStatus
 		varHyperflexCluster.UplinkSpeed = varHyperflexClusterWithoutEmbeddedStruct.UplinkSpeed
+		varHyperflexCluster.VcenterConfiguration = varHyperflexClusterWithoutEmbeddedStruct.VcenterConfiguration
 		varHyperflexCluster.VmCount = varHyperflexClusterWithoutEmbeddedStruct.VmCount
 		varHyperflexCluster.ZoneType = varHyperflexClusterWithoutEmbeddedStruct.ZoneType
 		varHyperflexCluster.Alarm = varHyperflexClusterWithoutEmbeddedStruct.Alarm
@@ -1094,6 +1241,7 @@ func (o *HyperflexCluster) UnmarshalJSON(bytes []byte) (err error) {
 	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
+		delete(additionalProperties, "Capability")
 		delete(additionalProperties, "ClusterType")
 		delete(additionalProperties, "ClusterUuid")
 		delete(additionalProperties, "DeviceId")
@@ -1101,10 +1249,12 @@ func (o *HyperflexCluster) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "EncryptionStatus")
 		delete(additionalProperties, "FltAggr")
 		delete(additionalProperties, "HxdpBuildVersion")
+		delete(additionalProperties, "NetworkConfiguration")
 		delete(additionalProperties, "NtpServers")
 		delete(additionalProperties, "Summary")
 		delete(additionalProperties, "UpgradeStatus")
 		delete(additionalProperties, "UplinkSpeed")
+		delete(additionalProperties, "VcenterConfiguration")
 		delete(additionalProperties, "VmCount")
 		delete(additionalProperties, "ZoneType")
 		delete(additionalProperties, "Alarm")

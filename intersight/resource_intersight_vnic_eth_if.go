@@ -717,7 +717,7 @@ func resourceVnicEthIf() *schema.Resource {
 				Default:     "vnic.EthIf",
 			},
 			"order": {
-				Description: "The order in which the virtual interface is brought up. The order assigned to an interface should be unique for all the Ethernet and Fibre-Channel interfaces on each PCI link on a VIC adapter. The maximum value of PCI order is limited by the number of virtual interfaces (Ethernet and Fibre-Channel) on each PCI link on a VIC adapter. All VIC adapters have a single PCI link except VIC 1385 which has two.",
+				Description: "The order in which the virtual interface is brought up. The order assigned to an interface should be unique for all the Ethernet and Fibre-Channel interfaces on each PCI link on a VIC adapter. The order should start from zero with no overlaps. The maximum value of PCI order is limited by the number of virtual interfaces (Ethernet and Fibre-Channel) on each PCI link on a VIC adapter. All VIC adapters have a single PCI link except VIC 1340, VIC 1380 and VIC 1385 which have two.",
 				Type:        schema.TypeInt,
 				Optional:    true,
 			},
@@ -865,6 +865,13 @@ func resourceVnicEthIf() *schema.Resource {
 							Optional:     true,
 							Default:      0,
 						},
+						"pci_link_assignment_mode": {
+							Description:  "If the autoPciLink is disabled, the user can either choose to place the vNICs manually or based on a policy.If the autoPciLink is enabled, it will be set to None.\n* `Custom` - The user needs to specify the PCI Link manually.\n* `Load-Balanced` - The system will uniformly distribute the interfaces across the PCI Links.\n* `None` - Assignment is not applicable and will be set when the AutoPciLink is set to true.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringInSlice([]string{"Custom", "Load-Balanced", "None"}, false),
+							Optional:     true,
+							Default:      "Custom",
+						},
 						"switch_id": {
 							Description:  "The fabric port to which the vNICs will be associated.\n* `None` - Fabric Id is not set to either A or B for the standalone case where the server is not connected to Fabric Interconnects. The value 'None' should be used.\n* `A` - Fabric A of the FI cluster.\n* `B` - Fabric B of the FI cluster.",
 							Type:         schema.TypeString,
@@ -967,6 +974,75 @@ func resourceVnicEthIf() *schema.Resource {
 							Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
 							Type:        schema.TypeString,
 							Optional:    true,
+						},
+					},
+				},
+			},
+			"sriov_settings": {
+				Description: "Single Root Input Output Virtualization (SR-IOV) Settings that enable one physical ethernet socket to appear as multiple NICs to the hypervisor.",
+				Type:        schema.TypeList,
+				MaxItems:    1,
+				Optional:    true,
+				ConfigMode:  schema.SchemaConfigModeAttr,
+				Computed:    true,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"additional_properties": {
+							Type:             schema.TypeString,
+							Optional:         true,
+							DiffSuppressFunc: SuppressDiffAdditionProps,
+						},
+						"class_id": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Default:     "vnic.SriovSettings",
+						},
+						"comp_count_per_vf": {
+							Description:  "Completion Queue resources per Virtual Function (VF).",
+							Type:         schema.TypeInt,
+							ValidateFunc: validation.IntBetween(1, 16),
+							Optional:     true,
+							Default:      5,
+						},
+						"enabled": {
+							Description: "If enabled, sets Single Root Input Output Virtualization (SR-IOV) on this vNIC.",
+							Type:        schema.TypeBool,
+							Optional:    true,
+						},
+						"int_count_per_vf": {
+							Description:  "Interrupt Count resources per Virtual Function (VF).",
+							Type:         schema.TypeInt,
+							ValidateFunc: validation.IntBetween(1, 16),
+							Optional:     true,
+							Default:      8,
+						},
+						"object_type": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Default:     "vnic.SriovSettings",
+						},
+						"rx_count_per_vf": {
+							Description:  "Receive Queue resources per Virtual Function (VF).",
+							Type:         schema.TypeInt,
+							ValidateFunc: validation.IntBetween(1, 8),
+							Optional:     true,
+							Default:      4,
+						},
+						"tx_count_per_vf": {
+							Description:  "Transmit Queue resources per Virtual Function (VF).",
+							Type:         schema.TypeInt,
+							ValidateFunc: validation.IntBetween(1, 8),
+							Optional:     true,
+							Default:      1,
+						},
+						"vf_count": {
+							Description:  "Number of Virtual Functions (VF) to be created for this vNIC. Valid values are 1 to 64 when SR-IOV is enabled.",
+							Type:         schema.TypeInt,
+							ValidateFunc: validation.IntBetween(1, 64),
+							Optional:     true,
+							Default:      64,
 						},
 					},
 				},
@@ -1862,6 +1938,12 @@ func resourceVnicEthIfCreate(c context.Context, d *schema.ResourceData, meta int
 					o.SetPciLink(x)
 				}
 			}
+			if v, ok := l["pci_link_assignment_mode"]; ok {
+				{
+					x := (v.(string))
+					o.SetPciLinkAssignmentMode(x)
+				}
+			}
 			if v, ok := l["switch_id"]; ok {
 				{
 					x := (v.(string))
@@ -1922,6 +2004,73 @@ func resourceVnicEthIfCreate(c context.Context, d *schema.ResourceData, meta int
 		if len(p) > 0 {
 			x := p[0]
 			o.SetProfile(x)
+		}
+	}
+
+	if v, ok := d.GetOk("sriov_settings"); ok {
+		p := make([]models.VnicSriovSettings, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := models.NewVnicSriovSettingsWithDefaults()
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("vnic.SriovSettings")
+			if v, ok := l["comp_count_per_vf"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetCompCountPerVf(x)
+				}
+			}
+			if v, ok := l["enabled"]; ok {
+				{
+					x := (v.(bool))
+					o.SetEnabled(x)
+				}
+			}
+			if v, ok := l["int_count_per_vf"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetIntCountPerVf(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["rx_count_per_vf"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetRxCountPerVf(x)
+				}
+			}
+			if v, ok := l["tx_count_per_vf"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetTxCountPerVf(x)
+				}
+			}
+			if v, ok := l["vf_count"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetVfCount(x)
+				}
+			}
+			p = append(p, *o)
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetSriovSettings(x)
 		}
 	}
 
@@ -2283,6 +2432,10 @@ func resourceVnicEthIfRead(c context.Context, d *schema.ResourceData, meta inter
 
 	if err := d.Set("sp_vnics", flattenListVnicEthIfRelationship(s.GetSpVnics(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property SpVnics in VnicEthIf object: %s", err.Error())
+	}
+
+	if err := d.Set("sriov_settings", flattenMapVnicSriovSettings(s.GetSriovSettings(), d)); err != nil {
+		return diag.Errorf("error occurred while setting property SriovSettings in VnicEthIf object: %s", err.Error())
 	}
 
 	if err := d.Set("standby_vif_id", (s.GetStandbyVifId())); err != nil {
@@ -2903,6 +3056,12 @@ func resourceVnicEthIfUpdate(c context.Context, d *schema.ResourceData, meta int
 					o.SetPciLink(x)
 				}
 			}
+			if v, ok := l["pci_link_assignment_mode"]; ok {
+				{
+					x := (v.(string))
+					o.SetPciLinkAssignmentMode(x)
+				}
+			}
 			if v, ok := l["switch_id"]; ok {
 				{
 					x := (v.(string))
@@ -2964,6 +3123,74 @@ func resourceVnicEthIfUpdate(c context.Context, d *schema.ResourceData, meta int
 		if len(p) > 0 {
 			x := p[0]
 			o.SetProfile(x)
+		}
+	}
+
+	if d.HasChange("sriov_settings") {
+		v := d.Get("sriov_settings")
+		p := make([]models.VnicSriovSettings, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.VnicSriovSettings{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("vnic.SriovSettings")
+			if v, ok := l["comp_count_per_vf"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetCompCountPerVf(x)
+				}
+			}
+			if v, ok := l["enabled"]; ok {
+				{
+					x := (v.(bool))
+					o.SetEnabled(x)
+				}
+			}
+			if v, ok := l["int_count_per_vf"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetIntCountPerVf(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["rx_count_per_vf"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetRxCountPerVf(x)
+				}
+			}
+			if v, ok := l["tx_count_per_vf"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetTxCountPerVf(x)
+				}
+			}
+			if v, ok := l["vf_count"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetVfCount(x)
+				}
+			}
+			p = append(p, *o)
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetSriovSettings(x)
 		}
 	}
 

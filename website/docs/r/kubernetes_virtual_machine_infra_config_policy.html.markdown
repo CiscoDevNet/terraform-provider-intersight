@@ -74,8 +74,6 @@ This complex property has following sub-properties:
   + `version_type`:(string)(ReadOnly) Specifies type of version. Currently the only supported value is \ Configured\ that is used to keep track of snapshots of policies and profiles that are intendedto be configured to target endpoints.* `Modified` - Version created every time an object is modified.* `Configured` - Version created every time an object is configured to the service profile.* `Deployed` - Version created for objects related to a service profile when it is deployed. 
 * `vm_config`:(HashMap) - Virtual machine infrastucture provider allocation properties. 
 This complex property has following sub-properties:
-  + `additional_properties`:(JSON as string) - Additional Properties as per object type, can be added as JSON using `jsonencode()`. Allowed Types are: [kubernetes.EsxiVirtualMachineInfraConfig](#kubernetesEsxiVirtualMachineInfraConfig)
-[kubernetes.HyperFlexApVirtualMachineInfraConfig](#kubernetesHyperFlexApVirtualMachineInfraConfig)
   + `interfaces`:
                 (Array of schema.TypeString) -
   + `network_interfaces`:(Array)
@@ -101,18 +99,4 @@ This complex property has following sub-properties:
 `intersight_kubernetes_virtual_machine_infra_config_policy` can be imported using the Moid of the object, e.g.
 ```
 $ terraform import intersight_kubernetes_virtual_machine_infra_config_policy.example 1234567890987654321abcde
-```
-## Allowed Types in `AdditionalProperties`
- 
-### [kubernetes.EsxiVirtualMachineInfraConfig](#argument-reference)
-Infrastructure provider allocation configuration for ESXi virtual machine Kubernetes nodes.
-* `cluster`:(string) Name of the vSphere cluster on which the virtual machines are created. 
-* `datastore`:(string) Name of the datasore on which the virtual machine disks are created. 
-* `is_passphrase_set`:(bool)(ReadOnly) Indicates whether the value of the 'passphrase' property has been set. 
-* `passphrase`:(string) Passphrase for the vcenter user. 
-* `resource_pool`:(string) Name of the vSphere resource pool on which the virtual machines are created. 
-
-### [kubernetes.HyperFlexApVirtualMachineInfraConfig](#argument-reference)
-Infrastructure provider allocation configuration for HyperFlex Application platform virtual machine Kubernetes nodes.
-* `disk_mode`:(string) Disk mode to use for volumes.* `Block` - It is a Block virtual disk.* `Filesystem` - It is a File system virtual disk.* `` - Disk mode is either unknown or not supported. 
-  
+``` 

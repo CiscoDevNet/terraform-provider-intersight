@@ -18,6 +18,7 @@ The following arguments can be used to get data of already created objects in In
 * `allocation_type`:(string) Type of the lease allocation either static or dynamic (i.e via pool).* `dynamic` - Identifiers to be allocated by system.* `static` - Identifiers are assigned by the user. 
 * `create_time`:(string) The time when this managed object was created. 
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
+* `has_duplicate`:(bool) HasDuplicate represents if there are other pools in which this id exists. 
 * `mod_time`:(string) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `pool_purpose`:(string) Purpose of this WWN pool. 

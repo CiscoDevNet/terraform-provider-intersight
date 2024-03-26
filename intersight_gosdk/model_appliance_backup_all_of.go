@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-11765
+API version: 1.0.11-14968
 Contact: intersight@cisco.com
 */
 
@@ -26,6 +26,8 @@ type ApplianceBackupAllOf struct {
 	ElapsedTime *int64 `json:"ElapsedTime,omitempty"`
 	// End date and time of the backup process.
 	EndTime *time.Time `json:"EndTime,omitempty"`
+	// If true, represents a manual backup. Else represents a scheduled backup.
+	IsManual *bool `json:"IsManual,omitempty"`
 	// Indicates whether the value of the 'password' property has been set.
 	IsPasswordSet *bool    `json:"IsPasswordSet,omitempty"`
 	Messages      []string `json:"Messages,omitempty"`
@@ -33,7 +35,7 @@ type ApplianceBackupAllOf struct {
 	Password *string `json:"Password,omitempty"`
 	// Start date and time of the backup process.
 	StartTime *time.Time `json:"StartTime,omitempty"`
-	// Status of the backup managed object. * `Started` - Backup or restore process has started. * `Created` - Backup or restore is in created state. * `Failed` - Backup or restore process has failed. * `Completed` - Backup or restore process has completed. * `Copied` - Backup file has been copied.
+	// Status of the backup managed object. * `Started` - Backup or restore process has started. * `Created` - Backup or restore is in created state. * `Failed` - Backup or restore process has failed. * `Completed` - Backup or restore process has completed. * `Copied` - Backup file has been copied. * `Cleanup Failed` - Cleanup of the old backup has failed.
 	Status               *string                 `json:"Status,omitempty"`
 	Account              *IamAccountRelationship `json:"Account,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -174,6 +176,38 @@ func (o *ApplianceBackupAllOf) HasEndTime() bool {
 // SetEndTime gets a reference to the given time.Time and assigns it to the EndTime field.
 func (o *ApplianceBackupAllOf) SetEndTime(v time.Time) {
 	o.EndTime = &v
+}
+
+// GetIsManual returns the IsManual field value if set, zero value otherwise.
+func (o *ApplianceBackupAllOf) GetIsManual() bool {
+	if o == nil || o.IsManual == nil {
+		var ret bool
+		return ret
+	}
+	return *o.IsManual
+}
+
+// GetIsManualOk returns a tuple with the IsManual field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ApplianceBackupAllOf) GetIsManualOk() (*bool, bool) {
+	if o == nil || o.IsManual == nil {
+		return nil, false
+	}
+	return o.IsManual, true
+}
+
+// HasIsManual returns a boolean if a field has been set.
+func (o *ApplianceBackupAllOf) HasIsManual() bool {
+	if o != nil && o.IsManual != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetIsManual gets a reference to the given bool and assigns it to the IsManual field.
+func (o *ApplianceBackupAllOf) SetIsManual(v bool) {
+	o.IsManual = &v
 }
 
 // GetIsPasswordSet returns the IsPasswordSet field value if set, zero value otherwise.
@@ -383,6 +417,9 @@ func (o ApplianceBackupAllOf) MarshalJSON() ([]byte, error) {
 	if o.EndTime != nil {
 		toSerialize["EndTime"] = o.EndTime
 	}
+	if o.IsManual != nil {
+		toSerialize["IsManual"] = o.IsManual
+	}
 	if o.IsPasswordSet != nil {
 		toSerialize["IsPasswordSet"] = o.IsPasswordSet
 	}
@@ -423,6 +460,7 @@ func (o *ApplianceBackupAllOf) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "ElapsedTime")
 		delete(additionalProperties, "EndTime")
+		delete(additionalProperties, "IsManual")
 		delete(additionalProperties, "IsPasswordSet")
 		delete(additionalProperties, "Messages")
 		delete(additionalProperties, "Password")

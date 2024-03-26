@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-11765
+API version: 1.0.11-14968
 Contact: intersight@cisco.com
 */
 
@@ -24,14 +24,19 @@ type CapabilityFeatureConfig struct {
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
-	// Name of the feature that identifies the specific adapter configuration. * `RoCEv2` - Capability indicator of the RDMA over Converged Ethernet (RoCE) feature version 2. * `RoCEv1` - Capability indicator of the RDMA over Converged Ethernet (RoCE) feature version 1. * `VMQ` - Capability indicator of the Virtual Machine Queue (VMQ) feature. * `VMMQ` - Capability indicator of the Virtual Machine Multi-Queue (VMMQ) feature. * `VMQInterrupts` - Capability indicator of the Virtual Machine Queue (VMQ) Interrupts feature. * `NVGRE` - Capability indicator of the Network Virtualization using Generic Routing Encapsulation (NVGRE) feature. * `ARFS` - Capability indicator of the Accelerated Receive Flow Steering (ARFS) feature. * `VXLAN` - Capability indicator of the Virtual Extensible LAN (VXLAN) feature.
+	// Name of the feature that identifies the specific adapter configuration. * `RoCEv2` - Capability indicator of the RDMA over Converged Ethernet (RoCE) feature version 2. * `RoCEv1` - Capability indicator of the RDMA over Converged Ethernet (RoCE) feature version 1. * `VMQ` - Capability indicator of the Virtual Machine Queue (VMQ) feature. * `VMMQ` - Capability indicator of the Virtual Machine Multi-Queue (VMMQ) feature. * `VMQInterrupts` - Capability indicator of the Virtual Machine Queue (VMQ) Interrupts feature. * `NVGRE` - Capability indicator of the Network Virtualization using Generic Routing Encapsulation (NVGRE) feature. * `ARFS` - Capability indicator of the Accelerated Receive Flow Steering (ARFS) feature. * `VXLAN` - Capability indicator of the Virtual Extensible LAN (VXLAN) feature. * `usNIC` - Capability indicator of the User Space NIC (usNIC) feature. * `Advanced Filter` - Capability indicator of the Advanced Filter feature. * `Azure Stack Host QOS` - Capability indicator of the Azure Stack Host QOS feature. * `QinQ` - Capability indicator of the QinQ feature. * `SRIOV` - Capability indicator of the Single Root Input Output Virtualization (SR-IOV).
 	FeatureName *string `json:"FeatureName,omitempty"`
-	// Firmware version from which support for this feature is available.
-	MinFwVersion           *string  `json:"MinFwVersion,omitempty"`
-	SupportedFwVersions    []string `json:"SupportedFwVersions,omitempty"`
-	SupportedInAdapters    []string `json:"SupportedInAdapters,omitempty"`
-	SupportedInGenerations []int32  `json:"SupportedInGenerations,omitempty"`
-	AdditionalProperties   map[string]interface{}
+	// Firmware version of Adapter from which support for this feature is available.
+	MinAdapterFwVersion *string `json:"MinAdapterFwVersion,omitempty"`
+	// Firmware version of BMC from which support for this feature is available.
+	MinFwVersion             *string                              `json:"MinFwVersion,omitempty"`
+	SupportedFwVersions      []string                             `json:"SupportedFwVersions,omitempty"`
+	SupportedInAdapters      []string                             `json:"SupportedInAdapters,omitempty"`
+	SupportedInGenerations   []int32                              `json:"SupportedInGenerations,omitempty"`
+	UnsupportedFeatureMatrix []CapabilityUnsupportedFeatureConfig `json:"UnsupportedFeatureMatrix,omitempty"`
+	// Action to be taken when validation does not succeed. * `Error` - Stop workflow execution by throwing error. * `Skip` - Remove the feature from configuration and continue workflow execution.
+	ValidationAction     *string `json:"ValidationAction,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CapabilityFeatureConfig CapabilityFeatureConfig
@@ -46,6 +51,8 @@ func NewCapabilityFeatureConfig(classId string, objectType string) *CapabilityFe
 	this.ObjectType = objectType
 	var featureName string = "RoCEv2"
 	this.FeatureName = &featureName
+	var validationAction string = "Error"
+	this.ValidationAction = &validationAction
 	return &this
 }
 
@@ -60,6 +67,8 @@ func NewCapabilityFeatureConfigWithDefaults() *CapabilityFeatureConfig {
 	this.ObjectType = objectType
 	var featureName string = "RoCEv2"
 	this.FeatureName = &featureName
+	var validationAction string = "Error"
+	this.ValidationAction = &validationAction
 	return &this
 }
 
@@ -141,6 +150,38 @@ func (o *CapabilityFeatureConfig) HasFeatureName() bool {
 // SetFeatureName gets a reference to the given string and assigns it to the FeatureName field.
 func (o *CapabilityFeatureConfig) SetFeatureName(v string) {
 	o.FeatureName = &v
+}
+
+// GetMinAdapterFwVersion returns the MinAdapterFwVersion field value if set, zero value otherwise.
+func (o *CapabilityFeatureConfig) GetMinAdapterFwVersion() string {
+	if o == nil || o.MinAdapterFwVersion == nil {
+		var ret string
+		return ret
+	}
+	return *o.MinAdapterFwVersion
+}
+
+// GetMinAdapterFwVersionOk returns a tuple with the MinAdapterFwVersion field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CapabilityFeatureConfig) GetMinAdapterFwVersionOk() (*string, bool) {
+	if o == nil || o.MinAdapterFwVersion == nil {
+		return nil, false
+	}
+	return o.MinAdapterFwVersion, true
+}
+
+// HasMinAdapterFwVersion returns a boolean if a field has been set.
+func (o *CapabilityFeatureConfig) HasMinAdapterFwVersion() bool {
+	if o != nil && o.MinAdapterFwVersion != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetMinAdapterFwVersion gets a reference to the given string and assigns it to the MinAdapterFwVersion field.
+func (o *CapabilityFeatureConfig) SetMinAdapterFwVersion(v string) {
+	o.MinAdapterFwVersion = &v
 }
 
 // GetMinFwVersion returns the MinFwVersion field value if set, zero value otherwise.
@@ -274,6 +315,71 @@ func (o *CapabilityFeatureConfig) SetSupportedInGenerations(v []int32) {
 	o.SupportedInGenerations = v
 }
 
+// GetUnsupportedFeatureMatrix returns the UnsupportedFeatureMatrix field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *CapabilityFeatureConfig) GetUnsupportedFeatureMatrix() []CapabilityUnsupportedFeatureConfig {
+	if o == nil {
+		var ret []CapabilityUnsupportedFeatureConfig
+		return ret
+	}
+	return o.UnsupportedFeatureMatrix
+}
+
+// GetUnsupportedFeatureMatrixOk returns a tuple with the UnsupportedFeatureMatrix field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *CapabilityFeatureConfig) GetUnsupportedFeatureMatrixOk() ([]CapabilityUnsupportedFeatureConfig, bool) {
+	if o == nil || o.UnsupportedFeatureMatrix == nil {
+		return nil, false
+	}
+	return o.UnsupportedFeatureMatrix, true
+}
+
+// HasUnsupportedFeatureMatrix returns a boolean if a field has been set.
+func (o *CapabilityFeatureConfig) HasUnsupportedFeatureMatrix() bool {
+	if o != nil && o.UnsupportedFeatureMatrix != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetUnsupportedFeatureMatrix gets a reference to the given []CapabilityUnsupportedFeatureConfig and assigns it to the UnsupportedFeatureMatrix field.
+func (o *CapabilityFeatureConfig) SetUnsupportedFeatureMatrix(v []CapabilityUnsupportedFeatureConfig) {
+	o.UnsupportedFeatureMatrix = v
+}
+
+// GetValidationAction returns the ValidationAction field value if set, zero value otherwise.
+func (o *CapabilityFeatureConfig) GetValidationAction() string {
+	if o == nil || o.ValidationAction == nil {
+		var ret string
+		return ret
+	}
+	return *o.ValidationAction
+}
+
+// GetValidationActionOk returns a tuple with the ValidationAction field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CapabilityFeatureConfig) GetValidationActionOk() (*string, bool) {
+	if o == nil || o.ValidationAction == nil {
+		return nil, false
+	}
+	return o.ValidationAction, true
+}
+
+// HasValidationAction returns a boolean if a field has been set.
+func (o *CapabilityFeatureConfig) HasValidationAction() bool {
+	if o != nil && o.ValidationAction != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetValidationAction gets a reference to the given string and assigns it to the ValidationAction field.
+func (o *CapabilityFeatureConfig) SetValidationAction(v string) {
+	o.ValidationAction = &v
+}
+
 func (o CapabilityFeatureConfig) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
@@ -293,6 +399,9 @@ func (o CapabilityFeatureConfig) MarshalJSON() ([]byte, error) {
 	if o.FeatureName != nil {
 		toSerialize["FeatureName"] = o.FeatureName
 	}
+	if o.MinAdapterFwVersion != nil {
+		toSerialize["MinAdapterFwVersion"] = o.MinAdapterFwVersion
+	}
 	if o.MinFwVersion != nil {
 		toSerialize["MinFwVersion"] = o.MinFwVersion
 	}
@@ -304,6 +413,12 @@ func (o CapabilityFeatureConfig) MarshalJSON() ([]byte, error) {
 	}
 	if o.SupportedInGenerations != nil {
 		toSerialize["SupportedInGenerations"] = o.SupportedInGenerations
+	}
+	if o.UnsupportedFeatureMatrix != nil {
+		toSerialize["UnsupportedFeatureMatrix"] = o.UnsupportedFeatureMatrix
+	}
+	if o.ValidationAction != nil {
+		toSerialize["ValidationAction"] = o.ValidationAction
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -319,13 +434,18 @@ func (o *CapabilityFeatureConfig) UnmarshalJSON(bytes []byte) (err error) {
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 		ObjectType string `json:"ObjectType"`
-		// Name of the feature that identifies the specific adapter configuration. * `RoCEv2` - Capability indicator of the RDMA over Converged Ethernet (RoCE) feature version 2. * `RoCEv1` - Capability indicator of the RDMA over Converged Ethernet (RoCE) feature version 1. * `VMQ` - Capability indicator of the Virtual Machine Queue (VMQ) feature. * `VMMQ` - Capability indicator of the Virtual Machine Multi-Queue (VMMQ) feature. * `VMQInterrupts` - Capability indicator of the Virtual Machine Queue (VMQ) Interrupts feature. * `NVGRE` - Capability indicator of the Network Virtualization using Generic Routing Encapsulation (NVGRE) feature. * `ARFS` - Capability indicator of the Accelerated Receive Flow Steering (ARFS) feature. * `VXLAN` - Capability indicator of the Virtual Extensible LAN (VXLAN) feature.
+		// Name of the feature that identifies the specific adapter configuration. * `RoCEv2` - Capability indicator of the RDMA over Converged Ethernet (RoCE) feature version 2. * `RoCEv1` - Capability indicator of the RDMA over Converged Ethernet (RoCE) feature version 1. * `VMQ` - Capability indicator of the Virtual Machine Queue (VMQ) feature. * `VMMQ` - Capability indicator of the Virtual Machine Multi-Queue (VMMQ) feature. * `VMQInterrupts` - Capability indicator of the Virtual Machine Queue (VMQ) Interrupts feature. * `NVGRE` - Capability indicator of the Network Virtualization using Generic Routing Encapsulation (NVGRE) feature. * `ARFS` - Capability indicator of the Accelerated Receive Flow Steering (ARFS) feature. * `VXLAN` - Capability indicator of the Virtual Extensible LAN (VXLAN) feature. * `usNIC` - Capability indicator of the User Space NIC (usNIC) feature. * `Advanced Filter` - Capability indicator of the Advanced Filter feature. * `Azure Stack Host QOS` - Capability indicator of the Azure Stack Host QOS feature. * `QinQ` - Capability indicator of the QinQ feature. * `SRIOV` - Capability indicator of the Single Root Input Output Virtualization (SR-IOV).
 		FeatureName *string `json:"FeatureName,omitempty"`
-		// Firmware version from which support for this feature is available.
-		MinFwVersion           *string  `json:"MinFwVersion,omitempty"`
-		SupportedFwVersions    []string `json:"SupportedFwVersions,omitempty"`
-		SupportedInAdapters    []string `json:"SupportedInAdapters,omitempty"`
-		SupportedInGenerations []int32  `json:"SupportedInGenerations,omitempty"`
+		// Firmware version of Adapter from which support for this feature is available.
+		MinAdapterFwVersion *string `json:"MinAdapterFwVersion,omitempty"`
+		// Firmware version of BMC from which support for this feature is available.
+		MinFwVersion             *string                              `json:"MinFwVersion,omitempty"`
+		SupportedFwVersions      []string                             `json:"SupportedFwVersions,omitempty"`
+		SupportedInAdapters      []string                             `json:"SupportedInAdapters,omitempty"`
+		SupportedInGenerations   []int32                              `json:"SupportedInGenerations,omitempty"`
+		UnsupportedFeatureMatrix []CapabilityUnsupportedFeatureConfig `json:"UnsupportedFeatureMatrix,omitempty"`
+		// Action to be taken when validation does not succeed. * `Error` - Stop workflow execution by throwing error. * `Skip` - Remove the feature from configuration and continue workflow execution.
+		ValidationAction *string `json:"ValidationAction,omitempty"`
 	}
 
 	varCapabilityFeatureConfigWithoutEmbeddedStruct := CapabilityFeatureConfigWithoutEmbeddedStruct{}
@@ -336,10 +456,13 @@ func (o *CapabilityFeatureConfig) UnmarshalJSON(bytes []byte) (err error) {
 		varCapabilityFeatureConfig.ClassId = varCapabilityFeatureConfigWithoutEmbeddedStruct.ClassId
 		varCapabilityFeatureConfig.ObjectType = varCapabilityFeatureConfigWithoutEmbeddedStruct.ObjectType
 		varCapabilityFeatureConfig.FeatureName = varCapabilityFeatureConfigWithoutEmbeddedStruct.FeatureName
+		varCapabilityFeatureConfig.MinAdapterFwVersion = varCapabilityFeatureConfigWithoutEmbeddedStruct.MinAdapterFwVersion
 		varCapabilityFeatureConfig.MinFwVersion = varCapabilityFeatureConfigWithoutEmbeddedStruct.MinFwVersion
 		varCapabilityFeatureConfig.SupportedFwVersions = varCapabilityFeatureConfigWithoutEmbeddedStruct.SupportedFwVersions
 		varCapabilityFeatureConfig.SupportedInAdapters = varCapabilityFeatureConfigWithoutEmbeddedStruct.SupportedInAdapters
 		varCapabilityFeatureConfig.SupportedInGenerations = varCapabilityFeatureConfigWithoutEmbeddedStruct.SupportedInGenerations
+		varCapabilityFeatureConfig.UnsupportedFeatureMatrix = varCapabilityFeatureConfigWithoutEmbeddedStruct.UnsupportedFeatureMatrix
+		varCapabilityFeatureConfig.ValidationAction = varCapabilityFeatureConfigWithoutEmbeddedStruct.ValidationAction
 		*o = CapabilityFeatureConfig(varCapabilityFeatureConfig)
 	} else {
 		return err
@@ -360,10 +483,13 @@ func (o *CapabilityFeatureConfig) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "FeatureName")
+		delete(additionalProperties, "MinAdapterFwVersion")
 		delete(additionalProperties, "MinFwVersion")
 		delete(additionalProperties, "SupportedFwVersions")
 		delete(additionalProperties, "SupportedInAdapters")
 		delete(additionalProperties, "SupportedInGenerations")
+		delete(additionalProperties, "UnsupportedFeatureMatrix")
+		delete(additionalProperties, "ValidationAction")
 
 		// remove fields from embedded structs
 		reflectMoBaseComplexType := reflect.ValueOf(o.MoBaseComplexType)

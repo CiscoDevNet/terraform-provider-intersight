@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-11765
+API version: 1.0.11-14968
 Contact: intersight@cisco.com
 */
 
@@ -21,19 +21,20 @@ type EquipmentDeviceSummaryAllOf struct {
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
-	// The distinguished name for the Network Element.
+	// The distinguished name that unambiguously identifies an object in the system.
 	Dn *string `json:"Dn,omitempty"`
-	// The model information of the Network Element.
+	// This field identifies the model of the given component.
 	Model *string `json:"Model,omitempty"`
-	// The serial number for the Network Element.
+	// This field identifies the serial number of the given component.
 	Serial *string `json:"Serial,omitempty"`
-	// The source object type of this view MO.
+	// The source object type of the given component.
 	SourceObjectType     *string                              `json:"SourceObjectType,omitempty"`
 	ComputeBlade         *ComputeBladeRelationship            `json:"ComputeBlade,omitempty"`
 	ComputeRackUnit      *ComputeRackUnitRelationship         `json:"ComputeRackUnit,omitempty"`
 	EquipmentChassis     *EquipmentChassisRelationship        `json:"EquipmentChassis,omitempty"`
 	EquipmentFex         *EquipmentFexRelationship            `json:"EquipmentFex,omitempty"`
 	InventoryDeviceInfo  *InventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
+	InventoryParent      *MoBaseMoRelationship                `json:"InventoryParent,omitempty"`
 	RegisteredDevice     *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
@@ -399,6 +400,38 @@ func (o *EquipmentDeviceSummaryAllOf) SetInventoryDeviceInfo(v InventoryDeviceIn
 	o.InventoryDeviceInfo = &v
 }
 
+// GetInventoryParent returns the InventoryParent field value if set, zero value otherwise.
+func (o *EquipmentDeviceSummaryAllOf) GetInventoryParent() MoBaseMoRelationship {
+	if o == nil || o.InventoryParent == nil {
+		var ret MoBaseMoRelationship
+		return ret
+	}
+	return *o.InventoryParent
+}
+
+// GetInventoryParentOk returns a tuple with the InventoryParent field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *EquipmentDeviceSummaryAllOf) GetInventoryParentOk() (*MoBaseMoRelationship, bool) {
+	if o == nil || o.InventoryParent == nil {
+		return nil, false
+	}
+	return o.InventoryParent, true
+}
+
+// HasInventoryParent returns a boolean if a field has been set.
+func (o *EquipmentDeviceSummaryAllOf) HasInventoryParent() bool {
+	if o != nil && o.InventoryParent != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetInventoryParent gets a reference to the given MoBaseMoRelationship and assigns it to the InventoryParent field.
+func (o *EquipmentDeviceSummaryAllOf) SetInventoryParent(v MoBaseMoRelationship) {
+	o.InventoryParent = &v
+}
+
 // GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise.
 func (o *EquipmentDeviceSummaryAllOf) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
 	if o == nil || o.RegisteredDevice == nil {
@@ -466,6 +499,9 @@ func (o EquipmentDeviceSummaryAllOf) MarshalJSON() ([]byte, error) {
 	if o.InventoryDeviceInfo != nil {
 		toSerialize["InventoryDeviceInfo"] = o.InventoryDeviceInfo
 	}
+	if o.InventoryParent != nil {
+		toSerialize["InventoryParent"] = o.InventoryParent
+	}
 	if o.RegisteredDevice != nil {
 		toSerialize["RegisteredDevice"] = o.RegisteredDevice
 	}
@@ -498,6 +534,7 @@ func (o *EquipmentDeviceSummaryAllOf) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "EquipmentChassis")
 		delete(additionalProperties, "EquipmentFex")
 		delete(additionalProperties, "InventoryDeviceInfo")
+		delete(additionalProperties, "InventoryParent")
 		delete(additionalProperties, "RegisteredDevice")
 		o.AdditionalProperties = additionalProperties
 	}

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-11765
+API version: 1.0.11-14968
 Contact: intersight@cisco.com
 */
 
@@ -59,8 +59,11 @@ type CondAlarmAllOf struct {
 	// The original severity when the alarm was first created. * `None` - The Enum value None represents that there is no severity. * `Info` - The Enum value Info represents the Informational level of severity. * `Critical` - The Enum value Critical represents the Critical level of severity. * `Warning` - The Enum value Warning represents the Warning level of severity. * `Cleared` - The Enum value Cleared represents that the alarm severity has been cleared.
 	OrigSeverity *string `json:"OrigSeverity,omitempty"`
 	// The severity of the alarm. Valid values are Critical, Warning, Info, and Cleared. * `None` - The Enum value None represents that there is no severity. * `Info` - The Enum value Info represents the Informational level of severity. * `Critical` - The Enum value Critical represents the Critical level of severity. * `Warning` - The Enum value Warning represents the Warning level of severity. * `Cleared` - The Enum value Cleared represents that the alarm severity has been cleared.
-	Severity             *string                              `json:"Severity,omitempty"`
+	Severity *string `json:"Severity,omitempty"`
+	// Indicates whether the alarm is marked for suppression or not.
+	Suppressed           *bool                                `json:"Suppressed,omitempty"`
 	AffectedMo           *MoBaseMoRelationship                `json:"AffectedMo,omitempty"`
+	Definition           *CondAlarmDefinitionRelationship     `json:"Definition,omitempty"`
 	RegisteredDevice     *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
@@ -698,6 +701,38 @@ func (o *CondAlarmAllOf) SetSeverity(v string) {
 	o.Severity = &v
 }
 
+// GetSuppressed returns the Suppressed field value if set, zero value otherwise.
+func (o *CondAlarmAllOf) GetSuppressed() bool {
+	if o == nil || o.Suppressed == nil {
+		var ret bool
+		return ret
+	}
+	return *o.Suppressed
+}
+
+// GetSuppressedOk returns a tuple with the Suppressed field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CondAlarmAllOf) GetSuppressedOk() (*bool, bool) {
+	if o == nil || o.Suppressed == nil {
+		return nil, false
+	}
+	return o.Suppressed, true
+}
+
+// HasSuppressed returns a boolean if a field has been set.
+func (o *CondAlarmAllOf) HasSuppressed() bool {
+	if o != nil && o.Suppressed != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetSuppressed gets a reference to the given bool and assigns it to the Suppressed field.
+func (o *CondAlarmAllOf) SetSuppressed(v bool) {
+	o.Suppressed = &v
+}
+
 // GetAffectedMo returns the AffectedMo field value if set, zero value otherwise.
 func (o *CondAlarmAllOf) GetAffectedMo() MoBaseMoRelationship {
 	if o == nil || o.AffectedMo == nil {
@@ -728,6 +763,38 @@ func (o *CondAlarmAllOf) HasAffectedMo() bool {
 // SetAffectedMo gets a reference to the given MoBaseMoRelationship and assigns it to the AffectedMo field.
 func (o *CondAlarmAllOf) SetAffectedMo(v MoBaseMoRelationship) {
 	o.AffectedMo = &v
+}
+
+// GetDefinition returns the Definition field value if set, zero value otherwise.
+func (o *CondAlarmAllOf) GetDefinition() CondAlarmDefinitionRelationship {
+	if o == nil || o.Definition == nil {
+		var ret CondAlarmDefinitionRelationship
+		return ret
+	}
+	return *o.Definition
+}
+
+// GetDefinitionOk returns a tuple with the Definition field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CondAlarmAllOf) GetDefinitionOk() (*CondAlarmDefinitionRelationship, bool) {
+	if o == nil || o.Definition == nil {
+		return nil, false
+	}
+	return o.Definition, true
+}
+
+// HasDefinition returns a boolean if a field has been set.
+func (o *CondAlarmAllOf) HasDefinition() bool {
+	if o != nil && o.Definition != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetDefinition gets a reference to the given CondAlarmDefinitionRelationship and assigns it to the Definition field.
+func (o *CondAlarmAllOf) SetDefinition(v CondAlarmDefinitionRelationship) {
+	o.Definition = &v
 }
 
 // GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise.
@@ -821,8 +888,14 @@ func (o CondAlarmAllOf) MarshalJSON() ([]byte, error) {
 	if o.Severity != nil {
 		toSerialize["Severity"] = o.Severity
 	}
+	if o.Suppressed != nil {
+		toSerialize["Suppressed"] = o.Suppressed
+	}
 	if o.AffectedMo != nil {
 		toSerialize["AffectedMo"] = o.AffectedMo
+	}
+	if o.Definition != nil {
+		toSerialize["Definition"] = o.Definition
 	}
 	if o.RegisteredDevice != nil {
 		toSerialize["RegisteredDevice"] = o.RegisteredDevice
@@ -864,7 +937,9 @@ func (o *CondAlarmAllOf) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "Name")
 		delete(additionalProperties, "OrigSeverity")
 		delete(additionalProperties, "Severity")
+		delete(additionalProperties, "Suppressed")
 		delete(additionalProperties, "AffectedMo")
+		delete(additionalProperties, "Definition")
 		delete(additionalProperties, "RegisteredDevice")
 		o.AdditionalProperties = additionalProperties
 	}

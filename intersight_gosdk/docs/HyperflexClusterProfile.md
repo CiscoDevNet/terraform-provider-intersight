@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **DataIpAddress** | Pointer to **string** | The storage data IP address for the HyperFlex cluster. | [optional] 
 **HostNamePrefix** | Pointer to **string** | The node name prefix that is used to automatically generate the default hostname for each server. A dash (-) will be appended to the prefix followed by the node number to form a hostname. This default naming scheme can be manually overridden in the node configuration. The maximum length of a prefix is 60, must only contain alphanumeric characters or dash (-), and must start with an alphanumeric character. | [optional] 
 **HypervisorControlIpAddress** | Pointer to **string** | The hypervisor control virtual IP address for the HyperFlex compute cluster that is used for node/pod management. | [optional] 
-**HypervisorType** | Pointer to **string** | The hypervisor type for the HyperFlex cluster. * &#x60;ESXi&#x60; - The hypervisor running on the HyperFlex cluster is a Vmware ESXi hypervisor of any version. * &#x60;HyperFlexAp&#x60; - The hypervisor of the virtualization platform is Cisco HyperFlex Application Platform. * &#x60;IWE&#x60; - The hypervisor of the virtualization platform is Cisco Intersight Workload Engine. * &#x60;Hyper-V&#x60; - The hypervisor running on the HyperFlex cluster is Microsoft Hyper-V. * &#x60;Unknown&#x60; - The hypervisor running on the HyperFlex cluster is not known. | [optional] [default to "ESXi"]
+**HypervisorType** | Pointer to **string** | The hypervisor type for the HyperFlex cluster. * &#x60;ESXi&#x60; - The hypervisor running on the HyperFlex cluster is a Vmware ESXi hypervisor of any version. * &#x60;Hyper-V&#x60; - The hypervisor running on the HyperFlex cluster is Microsoft Hyper-V. * &#x60;Unknown&#x60; - The hypervisor running on the HyperFlex cluster is not known. | [optional] [default to "ESXi"]
 **IsNicBased** | Pointer to **bool** | The NIC based setup being set/unset determined by inventory. | [optional] [readonly] [default to false]
 **MacAddressPrefix** | Pointer to **string** | The MAC address prefix in the form of 00:25:B5:XX. | [optional] 
 **MgmtIpAddress** | Pointer to **string** | The management IP address for the HyperFlex cluster. | [optional] 
@@ -24,7 +24,6 @@ Name | Type | Description | Notes
 **StorageType** | Pointer to **string** | The storage type used for the HyperFlex cluster (HyperFlex Storage or 3rd party). * &#x60;HyperFlexDp&#x60; - The type of storage is HyperFlex Data Platform. * &#x60;ThirdParty&#x60; - The type of storage is 3rd Party Storage (PureStorage, etc..). | [optional] [default to "HyperFlexDp"]
 **WwxnPrefix** | Pointer to **string** | The WWxN prefix in the form of 20:00:00:25:B5:XX. | [optional] 
 **AssociatedCluster** | Pointer to [**HyperflexClusterRelationship**](HyperflexClusterRelationship.md) |  | [optional] 
-**AssociatedComputeCluster** | Pointer to [**VirtualizationIweClusterRelationship**](VirtualizationIweClusterRelationship.md) |  | [optional] 
 **AutoSupport** | Pointer to [**HyperflexAutoSupportPolicyRelationship**](HyperflexAutoSupportPolicyRelationship.md) |  | [optional] 
 **ClusterNetwork** | Pointer to [**HyperflexClusterNetworkPolicyRelationship**](HyperflexClusterNetworkPolicyRelationship.md) |  | [optional] 
 **ClusterStorage** | Pointer to [**HyperflexClusterStoragePolicyRelationship**](HyperflexClusterStoragePolicyRelationship.md) |  | [optional] 
@@ -581,31 +580,6 @@ SetAssociatedCluster sets AssociatedCluster field to given value.
 `func (o *HyperflexClusterProfile) HasAssociatedCluster() bool`
 
 HasAssociatedCluster returns a boolean if a field has been set.
-
-### GetAssociatedComputeCluster
-
-`func (o *HyperflexClusterProfile) GetAssociatedComputeCluster() VirtualizationIweClusterRelationship`
-
-GetAssociatedComputeCluster returns the AssociatedComputeCluster field if non-nil, zero value otherwise.
-
-### GetAssociatedComputeClusterOk
-
-`func (o *HyperflexClusterProfile) GetAssociatedComputeClusterOk() (*VirtualizationIweClusterRelationship, bool)`
-
-GetAssociatedComputeClusterOk returns a tuple with the AssociatedComputeCluster field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetAssociatedComputeCluster
-
-`func (o *HyperflexClusterProfile) SetAssociatedComputeCluster(v VirtualizationIweClusterRelationship)`
-
-SetAssociatedComputeCluster sets AssociatedComputeCluster field to given value.
-
-### HasAssociatedComputeCluster
-
-`func (o *HyperflexClusterProfile) HasAssociatedComputeCluster() bool`
-
-HasAssociatedComputeCluster returns a boolean if a field has been set.
 
 ### GetAutoSupport
 

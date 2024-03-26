@@ -431,62 +431,6 @@ func resourceVirtualizationVirtualMachine() *schema.Resource {
 							Optional:     true,
 							Default:      "hdd",
 						},
-						"virtual_disk": {
-							Description: "Virtual disk configuration.",
-							Type:        schema.TypeList,
-							MaxItems:    1,
-							Optional:    true,
-							ConfigMode:  schema.SchemaConfigModeAttr,
-							Computed:    true,
-							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
-									"additional_properties": {
-										Type:             schema.TypeString,
-										Optional:         true,
-										DiffSuppressFunc: SuppressDiffAdditionProps,
-									},
-									"capacity": {
-										Description: "Disk capacity to be provided with units example - 10Gi.",
-										Type:        schema.TypeString,
-										Optional:    true,
-									},
-									"class_id": {
-										Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-										Type:        schema.TypeString,
-										Optional:    true,
-										Default:     "virtualization.VirtualDiskConfig",
-									},
-									"mode": {
-										Description:  "File mode of the disk, example - Filesystem, Block.\n* `Block` - It is a Block virtual disk.\n* `Filesystem` - It is a File system virtual disk.\n* `` - Disk mode is either unknown or not supported.",
-										Type:         schema.TypeString,
-										ValidateFunc: validation.StringInSlice([]string{"Block", "Filesystem", ""}, false),
-										Optional:     true,
-										Default:      "Block",
-									},
-									"object_type": {
-										Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
-										Type:        schema.TypeString,
-										Optional:    true,
-										Default:     "virtualization.VirtualDiskConfig",
-									},
-									"source_certs": {
-										Description: "Base64 encoded CA certificates of the https source to check against.",
-										Type:        schema.TypeString,
-										Optional:    true,
-									},
-									"source_disk_to_clone": {
-										Description: "Source disk name from where the clone is done.",
-										Type:        schema.TypeString,
-										Optional:    true,
-									},
-									"source_file_path": {
-										Description: "Disk image source for the virtual machine.",
-										Type:        schema.TypeString,
-										Optional:    true,
-									},
-								},
-							},
-						},
 						"virtual_disk_reference": {
 							Description: "Name of the existing virtual disk to be attached to the Virtual Machine.",
 							Type:        schema.TypeString,
@@ -607,7 +551,7 @@ func resourceVirtualizationVirtualMachine() *schema.Resource {
 				Optional:    true,
 			},
 			"hypervisor_type": {
-				Description: "Identifies the broad product type of the hypervisor but without any version information. It is here to easily identify the type of the virtual machine. There are other entities (Host, Cluster, etc.) that can be indirectly used to determine the hypervisor but a direct attribute makes it easier to work with.\n* `ESXi` - The hypervisor running on the HyperFlex cluster is a Vmware ESXi hypervisor of any version.\n* `HyperFlexAp` - The hypervisor of the virtualization platform is Cisco HyperFlex Application Platform.\n* `IWE` - The hypervisor of the virtualization platform is Cisco Intersight Workload Engine.\n* `Hyper-V` - The hypervisor running on the HyperFlex cluster is Microsoft Hyper-V.\n* `Unknown` - The hypervisor running on the HyperFlex cluster is not known.",
+				Description: "Identifies the broad product type of the hypervisor but without any version information. It is here to easily identify the type of the virtual machine. There are other entities (Host, Cluster, etc.) that can be indirectly used to determine the hypervisor but a direct attribute makes it easier to work with.\n* `ESXi` - The hypervisor running on the HyperFlex cluster is a Vmware ESXi hypervisor of any version.\n* `Hyper-V` - The hypervisor running on the HyperFlex cluster is Microsoft Hyper-V.\n* `Unknown` - The hypervisor running on the HyperFlex cluster is not known.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -859,7 +803,7 @@ func resourceVirtualizationVirtualMachine() *schema.Resource {
 				},
 			},
 			"memory": {
-				Description:  "Virtual machine memory in mebi bytes (one mebibyte 1MiB is 1048576 bytes, and 1KiB is 1024 bytes). Input must be a whole number and scientific notation is not acceptable. For example, enter 1730 and not 1.73e03. The limit of 4177920 translates to 3.9TiB.",
+				Description:  "Virtual machine memory in mebi bytes (one mebibyte, 1MiB, is 1048576 bytes, and 1KiB is 1024 bytes). Input must be a whole number and scientific notation is not acceptable. For example, enter 1730 and not 1.73e03. The limit of 4177920 translates to 3.9TiB.",
 				Type:         schema.TypeInt,
 				ValidateFunc: validation.IntBetween(1, 4177920),
 				Optional:     true,
@@ -1544,68 +1488,6 @@ func resourceVirtualizationVirtualMachineCreate(c context.Context, d *schema.Res
 				{
 					x := (v.(string))
 					o.SetType(x)
-				}
-			}
-			if v, ok := l["virtual_disk"]; ok {
-				{
-					p := make([]models.VirtualizationVirtualDiskConfig, 0, 1)
-					s := v.([]interface{})
-					for i := 0; i < len(s); i++ {
-						l := s[i].(map[string]interface{})
-						o := models.NewVirtualizationVirtualDiskConfigWithDefaults()
-						if v, ok := l["additional_properties"]; ok {
-							{
-								x := []byte(v.(string))
-								var x1 interface{}
-								err := json.Unmarshal(x, &x1)
-								if err == nil && x1 != nil {
-									o.AdditionalProperties = x1.(map[string]interface{})
-								}
-							}
-						}
-						if v, ok := l["capacity"]; ok {
-							{
-								x := (v.(string))
-								o.SetCapacity(x)
-							}
-						}
-						o.SetClassId("virtualization.VirtualDiskConfig")
-						if v, ok := l["mode"]; ok {
-							{
-								x := (v.(string))
-								o.SetMode(x)
-							}
-						}
-						if v, ok := l["object_type"]; ok {
-							{
-								x := (v.(string))
-								o.SetObjectType(x)
-							}
-						}
-						if v, ok := l["source_certs"]; ok {
-							{
-								x := (v.(string))
-								o.SetSourceCerts(x)
-							}
-						}
-						if v, ok := l["source_disk_to_clone"]; ok {
-							{
-								x := (v.(string))
-								o.SetSourceDiskToClone(x)
-							}
-						}
-						if v, ok := l["source_file_path"]; ok {
-							{
-								x := (v.(string))
-								o.SetSourceFilePath(x)
-							}
-						}
-						p = append(p, *o)
-					}
-					if len(p) > 0 {
-						x := p[0]
-						o.SetVirtualDisk(x)
-					}
 				}
 			}
 			if v, ok := l["virtual_disk_reference"]; ok {
@@ -2569,68 +2451,6 @@ func resourceVirtualizationVirtualMachineUpdate(c context.Context, d *schema.Res
 				{
 					x := (v.(string))
 					o.SetType(x)
-				}
-			}
-			if v, ok := l["virtual_disk"]; ok {
-				{
-					p := make([]models.VirtualizationVirtualDiskConfig, 0, 1)
-					s := v.([]interface{})
-					for i := 0; i < len(s); i++ {
-						l := s[i].(map[string]interface{})
-						o := models.NewVirtualizationVirtualDiskConfigWithDefaults()
-						if v, ok := l["additional_properties"]; ok {
-							{
-								x := []byte(v.(string))
-								var x1 interface{}
-								err := json.Unmarshal(x, &x1)
-								if err == nil && x1 != nil {
-									o.AdditionalProperties = x1.(map[string]interface{})
-								}
-							}
-						}
-						if v, ok := l["capacity"]; ok {
-							{
-								x := (v.(string))
-								o.SetCapacity(x)
-							}
-						}
-						o.SetClassId("virtualization.VirtualDiskConfig")
-						if v, ok := l["mode"]; ok {
-							{
-								x := (v.(string))
-								o.SetMode(x)
-							}
-						}
-						if v, ok := l["object_type"]; ok {
-							{
-								x := (v.(string))
-								o.SetObjectType(x)
-							}
-						}
-						if v, ok := l["source_certs"]; ok {
-							{
-								x := (v.(string))
-								o.SetSourceCerts(x)
-							}
-						}
-						if v, ok := l["source_disk_to_clone"]; ok {
-							{
-								x := (v.(string))
-								o.SetSourceDiskToClone(x)
-							}
-						}
-						if v, ok := l["source_file_path"]; ok {
-							{
-								x := (v.(string))
-								o.SetSourceFilePath(x)
-							}
-						}
-						p = append(p, *o)
-					}
-					if len(p) > 0 {
-						x := p[0]
-						o.SetVirtualDisk(x)
-					}
 				}
 			}
 			if v, ok := l["virtual_disk_reference"]; ok {

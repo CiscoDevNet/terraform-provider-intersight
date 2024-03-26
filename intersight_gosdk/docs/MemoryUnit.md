@@ -6,7 +6,11 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "memory.Unit"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "memory.Unit"]
+**Description** | Pointer to **string** | This field displays the description of the DIMM. | [optional] [readonly] 
+**IsPlatformSupported** | Pointer to **bool** | This field indicates whether the DIMM is supported on the server or not. | [optional] [readonly] [default to true]
 **MemoryId** | Pointer to **int64** | This represents the ID of a regular DIMM on a server. | [optional] [readonly] 
+**PartNumber** | Pointer to **string** | This field displays the part number of the DIMM. | [optional] [readonly] 
+**Pid** | Pointer to **string** | This field displays the product ID of the DIMM. | [optional] [readonly] 
 **InventoryDeviceInfo** | Pointer to [**InventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
 **MemoryArray** | Pointer to [**MemoryArrayRelationship**](MemoryArrayRelationship.md) |  | [optional] 
 **RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
@@ -70,6 +74,56 @@ and a boolean to check if the value has been set.
 SetObjectType sets ObjectType field to given value.
 
 
+### GetDescription
+
+`func (o *MemoryUnit) GetDescription() string`
+
+GetDescription returns the Description field if non-nil, zero value otherwise.
+
+### GetDescriptionOk
+
+`func (o *MemoryUnit) GetDescriptionOk() (*string, bool)`
+
+GetDescriptionOk returns a tuple with the Description field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDescription
+
+`func (o *MemoryUnit) SetDescription(v string)`
+
+SetDescription sets Description field to given value.
+
+### HasDescription
+
+`func (o *MemoryUnit) HasDescription() bool`
+
+HasDescription returns a boolean if a field has been set.
+
+### GetIsPlatformSupported
+
+`func (o *MemoryUnit) GetIsPlatformSupported() bool`
+
+GetIsPlatformSupported returns the IsPlatformSupported field if non-nil, zero value otherwise.
+
+### GetIsPlatformSupportedOk
+
+`func (o *MemoryUnit) GetIsPlatformSupportedOk() (*bool, bool)`
+
+GetIsPlatformSupportedOk returns a tuple with the IsPlatformSupported field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsPlatformSupported
+
+`func (o *MemoryUnit) SetIsPlatformSupported(v bool)`
+
+SetIsPlatformSupported sets IsPlatformSupported field to given value.
+
+### HasIsPlatformSupported
+
+`func (o *MemoryUnit) HasIsPlatformSupported() bool`
+
+HasIsPlatformSupported returns a boolean if a field has been set.
+
 ### GetMemoryId
 
 `func (o *MemoryUnit) GetMemoryId() int64`
@@ -94,6 +148,56 @@ SetMemoryId sets MemoryId field to given value.
 `func (o *MemoryUnit) HasMemoryId() bool`
 
 HasMemoryId returns a boolean if a field has been set.
+
+### GetPartNumber
+
+`func (o *MemoryUnit) GetPartNumber() string`
+
+GetPartNumber returns the PartNumber field if non-nil, zero value otherwise.
+
+### GetPartNumberOk
+
+`func (o *MemoryUnit) GetPartNumberOk() (*string, bool)`
+
+GetPartNumberOk returns a tuple with the PartNumber field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPartNumber
+
+`func (o *MemoryUnit) SetPartNumber(v string)`
+
+SetPartNumber sets PartNumber field to given value.
+
+### HasPartNumber
+
+`func (o *MemoryUnit) HasPartNumber() bool`
+
+HasPartNumber returns a boolean if a field has been set.
+
+### GetPid
+
+`func (o *MemoryUnit) GetPid() string`
+
+GetPid returns the Pid field if non-nil, zero value otherwise.
+
+### GetPidOk
+
+`func (o *MemoryUnit) GetPidOk() (*string, bool)`
+
+GetPidOk returns a tuple with the Pid field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPid
+
+`func (o *MemoryUnit) SetPid(v string)`
+
+SetPid sets Pid field to given value.
+
+### HasPid
+
+`func (o *MemoryUnit) HasPid() bool`
+
+HasPid returns a boolean if a field has been set.
 
 ### GetInventoryDeviceInfo
 

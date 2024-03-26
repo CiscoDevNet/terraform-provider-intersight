@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-11765
+API version: 1.0.11-14968
 Contact: intersight@cisco.com
 */
 
@@ -48,7 +48,8 @@ type HyperflexNodeAllOf struct {
 	// The role of the host in the HyperFlex cluster. Specifies whether this host is used for compute or for both compute and storage. * `UNKNOWN` - The role of the HyperFlex cluster node is not known. * `STORAGE` - The HyperFlex cluster node provides both storage and compute resources for the cluster. * `COMPUTE` - The HyperFlex cluster node provides compute resources for the cluster.
 	Role *string `json:"Role,omitempty"`
 	// The serial of the host server.
-	SerialNumber *string `json:"SerialNumber,omitempty"`
+	SerialNumber *string                      `json:"SerialNumber,omitempty"`
+	SiteInfo     NullableHyperflexSiteDetails `json:"SiteInfo,omitempty"`
 	// The status of the host. Indicates whether the hypervisor is online. * `UNKNOWN` - The host status cannot be determined. * `ONLINE` - The host is online and operational. * `OFFLINE` - The host is offline and is currently not participating in the HyperFlex cluster. * `INMAINTENANCE` - The host is not participating in the HyperFlex cluster because of a maintenance operation, such as firmware or data platform upgrade. * `DEGRADED` - The host is degraded and may not be performing in its full operational capacity.
 	Status *string `json:"Status,omitempty"`
 	// The version of the hypervisor running on the host.
@@ -734,6 +735,49 @@ func (o *HyperflexNodeAllOf) SetSerialNumber(v string) {
 	o.SerialNumber = &v
 }
 
+// GetSiteInfo returns the SiteInfo field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *HyperflexNodeAllOf) GetSiteInfo() HyperflexSiteDetails {
+	if o == nil || o.SiteInfo.Get() == nil {
+		var ret HyperflexSiteDetails
+		return ret
+	}
+	return *o.SiteInfo.Get()
+}
+
+// GetSiteInfoOk returns a tuple with the SiteInfo field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *HyperflexNodeAllOf) GetSiteInfoOk() (*HyperflexSiteDetails, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.SiteInfo.Get(), o.SiteInfo.IsSet()
+}
+
+// HasSiteInfo returns a boolean if a field has been set.
+func (o *HyperflexNodeAllOf) HasSiteInfo() bool {
+	if o != nil && o.SiteInfo.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetSiteInfo gets a reference to the given NullableHyperflexSiteDetails and assigns it to the SiteInfo field.
+func (o *HyperflexNodeAllOf) SetSiteInfo(v HyperflexSiteDetails) {
+	o.SiteInfo.Set(&v)
+}
+
+// SetSiteInfoNil sets the value for SiteInfo to be an explicit nil
+func (o *HyperflexNodeAllOf) SetSiteInfoNil() {
+	o.SiteInfo.Set(nil)
+}
+
+// UnsetSiteInfo ensures that no value is present for SiteInfo, not even an explicit nil
+func (o *HyperflexNodeAllOf) UnsetSiteInfo() {
+	o.SiteInfo.Unset()
+}
+
 // GetStatus returns the Status field value if set, zero value otherwise.
 func (o *HyperflexNodeAllOf) GetStatus() string {
 	if o == nil || o.Status == nil {
@@ -986,6 +1030,9 @@ func (o HyperflexNodeAllOf) MarshalJSON() ([]byte, error) {
 	if o.SerialNumber != nil {
 		toSerialize["SerialNumber"] = o.SerialNumber
 	}
+	if o.SiteInfo.IsSet() {
+		toSerialize["SiteInfo"] = o.SiteInfo.Get()
+	}
 	if o.Status != nil {
 		toSerialize["Status"] = o.Status
 	}
@@ -1041,6 +1088,7 @@ func (o *HyperflexNodeAllOf) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "NodeUuid")
 		delete(additionalProperties, "Role")
 		delete(additionalProperties, "SerialNumber")
+		delete(additionalProperties, "SiteInfo")
 		delete(additionalProperties, "Status")
 		delete(additionalProperties, "Version")
 		delete(additionalProperties, "Cluster")

@@ -120,6 +120,21 @@ func getIqnpoolReservationSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"iqn_number": {
+			Description: "Number of the IQN address. IQN Address is constructed as <prefix>:<suffix>:<number>.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"iqn_prefix": {
+			Description: "Prefix of the IQN address. IQN Address is constructed as <prefix>:<suffix>:<number>.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"iqn_suffix": {
+			Description: "Suffix of the IQN address. IQN Address is constructed as <prefix>:<suffix>:<number>.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"mod_time": {
 			Description: "The time when this managed object was last modified.",
 			Type:        schema.TypeString,
@@ -634,6 +649,21 @@ func dataSourceIqnpoolReservationRead(c context.Context, d *schema.ResourceData,
 		o.SetIdentity(x)
 	}
 
+	if v, ok := d.GetOkExists("iqn_number"); ok {
+		x := int64(v.(int))
+		o.SetIqnNumber(x)
+	}
+
+	if v, ok := d.GetOk("iqn_prefix"); ok {
+		x := (v.(string))
+		o.SetIqnPrefix(x)
+	}
+
+	if v, ok := d.GetOk("iqn_suffix"); ok {
+		x := (v.(string))
+		o.SetIqnSuffix(x)
+	}
+
 	if v, ok := d.GetOk("mod_time"); ok {
 		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetModTime(x)
@@ -1074,6 +1104,9 @@ func dataSourceIqnpoolReservationRead(c context.Context, d *schema.ResourceData,
 				temp["create_time"] = (s.GetCreateTime()).String()
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
 				temp["identity"] = (s.GetIdentity())
+				temp["iqn_number"] = (s.GetIqnNumber())
+				temp["iqn_prefix"] = (s.GetIqnPrefix())
+				temp["iqn_suffix"] = (s.GetIqnSuffix())
 
 				temp["mod_time"] = (s.GetModTime()).String()
 				temp["moid"] = (s.GetMoid())

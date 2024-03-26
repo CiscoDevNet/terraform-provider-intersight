@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-11765
+API version: 1.0.11-14968
 Contact: intersight@cisco.com
 */
 
@@ -24,11 +24,18 @@ type OsDistribution struct {
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
+	// An internal property that is used to denote if the OS Distribution is supported by Intersight for Automated Installation.
+	IsSupported *bool `json:"IsSupported,omitempty"`
+	// The label of the OS distribution such as ESXi, CentOS to be displayed.
+	Label *string `json:"Label,omitempty"`
 	// The name of the OS distribution such as ESXi, CentOS.
-	Name                 *string                         `json:"Name,omitempty"`
-	SupportedEditions    []string                        `json:"SupportedEditions,omitempty"`
-	Catalog              *OsCatalogRelationship          `json:"Catalog,omitempty"`
-	Version              *HclOperatingSystemRelationship `json:"Version,omitempty"`
+	Name *string `json:"Name,omitempty"`
+	// An internal property that is used to denote if the OS Distribution is supported by the Server Configuration Utility.
+	ScuSupported         *bool                                 `json:"ScuSupported,omitempty"`
+	SupportedEditions    []string                              `json:"SupportedEditions,omitempty"`
+	Catalog              *OsCatalogRelationship                `json:"Catalog,omitempty"`
+	Vendor               *HclOperatingSystemVendorRelationship `json:"Vendor,omitempty"`
+	Version              *HclOperatingSystemRelationship       `json:"Version,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -105,6 +112,70 @@ func (o *OsDistribution) SetObjectType(v string) {
 	o.ObjectType = v
 }
 
+// GetIsSupported returns the IsSupported field value if set, zero value otherwise.
+func (o *OsDistribution) GetIsSupported() bool {
+	if o == nil || o.IsSupported == nil {
+		var ret bool
+		return ret
+	}
+	return *o.IsSupported
+}
+
+// GetIsSupportedOk returns a tuple with the IsSupported field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *OsDistribution) GetIsSupportedOk() (*bool, bool) {
+	if o == nil || o.IsSupported == nil {
+		return nil, false
+	}
+	return o.IsSupported, true
+}
+
+// HasIsSupported returns a boolean if a field has been set.
+func (o *OsDistribution) HasIsSupported() bool {
+	if o != nil && o.IsSupported != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetIsSupported gets a reference to the given bool and assigns it to the IsSupported field.
+func (o *OsDistribution) SetIsSupported(v bool) {
+	o.IsSupported = &v
+}
+
+// GetLabel returns the Label field value if set, zero value otherwise.
+func (o *OsDistribution) GetLabel() string {
+	if o == nil || o.Label == nil {
+		var ret string
+		return ret
+	}
+	return *o.Label
+}
+
+// GetLabelOk returns a tuple with the Label field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *OsDistribution) GetLabelOk() (*string, bool) {
+	if o == nil || o.Label == nil {
+		return nil, false
+	}
+	return o.Label, true
+}
+
+// HasLabel returns a boolean if a field has been set.
+func (o *OsDistribution) HasLabel() bool {
+	if o != nil && o.Label != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetLabel gets a reference to the given string and assigns it to the Label field.
+func (o *OsDistribution) SetLabel(v string) {
+	o.Label = &v
+}
+
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *OsDistribution) GetName() string {
 	if o == nil || o.Name == nil {
@@ -135,6 +206,38 @@ func (o *OsDistribution) HasName() bool {
 // SetName gets a reference to the given string and assigns it to the Name field.
 func (o *OsDistribution) SetName(v string) {
 	o.Name = &v
+}
+
+// GetScuSupported returns the ScuSupported field value if set, zero value otherwise.
+func (o *OsDistribution) GetScuSupported() bool {
+	if o == nil || o.ScuSupported == nil {
+		var ret bool
+		return ret
+	}
+	return *o.ScuSupported
+}
+
+// GetScuSupportedOk returns a tuple with the ScuSupported field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *OsDistribution) GetScuSupportedOk() (*bool, bool) {
+	if o == nil || o.ScuSupported == nil {
+		return nil, false
+	}
+	return o.ScuSupported, true
+}
+
+// HasScuSupported returns a boolean if a field has been set.
+func (o *OsDistribution) HasScuSupported() bool {
+	if o != nil && o.ScuSupported != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetScuSupported gets a reference to the given bool and assigns it to the ScuSupported field.
+func (o *OsDistribution) SetScuSupported(v bool) {
+	o.ScuSupported = &v
 }
 
 // GetSupportedEditions returns the SupportedEditions field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -202,6 +305,38 @@ func (o *OsDistribution) SetCatalog(v OsCatalogRelationship) {
 	o.Catalog = &v
 }
 
+// GetVendor returns the Vendor field value if set, zero value otherwise.
+func (o *OsDistribution) GetVendor() HclOperatingSystemVendorRelationship {
+	if o == nil || o.Vendor == nil {
+		var ret HclOperatingSystemVendorRelationship
+		return ret
+	}
+	return *o.Vendor
+}
+
+// GetVendorOk returns a tuple with the Vendor field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *OsDistribution) GetVendorOk() (*HclOperatingSystemVendorRelationship, bool) {
+	if o == nil || o.Vendor == nil {
+		return nil, false
+	}
+	return o.Vendor, true
+}
+
+// HasVendor returns a boolean if a field has been set.
+func (o *OsDistribution) HasVendor() bool {
+	if o != nil && o.Vendor != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetVendor gets a reference to the given HclOperatingSystemVendorRelationship and assigns it to the Vendor field.
+func (o *OsDistribution) SetVendor(v HclOperatingSystemVendorRelationship) {
+	o.Vendor = &v
+}
+
 // GetVersion returns the Version field value if set, zero value otherwise.
 func (o *OsDistribution) GetVersion() HclOperatingSystemRelationship {
 	if o == nil || o.Version == nil {
@@ -250,14 +385,26 @@ func (o OsDistribution) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["ObjectType"] = o.ObjectType
 	}
+	if o.IsSupported != nil {
+		toSerialize["IsSupported"] = o.IsSupported
+	}
+	if o.Label != nil {
+		toSerialize["Label"] = o.Label
+	}
 	if o.Name != nil {
 		toSerialize["Name"] = o.Name
+	}
+	if o.ScuSupported != nil {
+		toSerialize["ScuSupported"] = o.ScuSupported
 	}
 	if o.SupportedEditions != nil {
 		toSerialize["SupportedEditions"] = o.SupportedEditions
 	}
 	if o.Catalog != nil {
 		toSerialize["Catalog"] = o.Catalog
+	}
+	if o.Vendor != nil {
+		toSerialize["Vendor"] = o.Vendor
 	}
 	if o.Version != nil {
 		toSerialize["Version"] = o.Version
@@ -276,11 +423,18 @@ func (o *OsDistribution) UnmarshalJSON(bytes []byte) (err error) {
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 		ObjectType string `json:"ObjectType"`
+		// An internal property that is used to denote if the OS Distribution is supported by Intersight for Automated Installation.
+		IsSupported *bool `json:"IsSupported,omitempty"`
+		// The label of the OS distribution such as ESXi, CentOS to be displayed.
+		Label *string `json:"Label,omitempty"`
 		// The name of the OS distribution such as ESXi, CentOS.
-		Name              *string                         `json:"Name,omitempty"`
-		SupportedEditions []string                        `json:"SupportedEditions,omitempty"`
-		Catalog           *OsCatalogRelationship          `json:"Catalog,omitempty"`
-		Version           *HclOperatingSystemRelationship `json:"Version,omitempty"`
+		Name *string `json:"Name,omitempty"`
+		// An internal property that is used to denote if the OS Distribution is supported by the Server Configuration Utility.
+		ScuSupported      *bool                                 `json:"ScuSupported,omitempty"`
+		SupportedEditions []string                              `json:"SupportedEditions,omitempty"`
+		Catalog           *OsCatalogRelationship                `json:"Catalog,omitempty"`
+		Vendor            *HclOperatingSystemVendorRelationship `json:"Vendor,omitempty"`
+		Version           *HclOperatingSystemRelationship       `json:"Version,omitempty"`
 	}
 
 	varOsDistributionWithoutEmbeddedStruct := OsDistributionWithoutEmbeddedStruct{}
@@ -290,9 +444,13 @@ func (o *OsDistribution) UnmarshalJSON(bytes []byte) (err error) {
 		varOsDistribution := _OsDistribution{}
 		varOsDistribution.ClassId = varOsDistributionWithoutEmbeddedStruct.ClassId
 		varOsDistribution.ObjectType = varOsDistributionWithoutEmbeddedStruct.ObjectType
+		varOsDistribution.IsSupported = varOsDistributionWithoutEmbeddedStruct.IsSupported
+		varOsDistribution.Label = varOsDistributionWithoutEmbeddedStruct.Label
 		varOsDistribution.Name = varOsDistributionWithoutEmbeddedStruct.Name
+		varOsDistribution.ScuSupported = varOsDistributionWithoutEmbeddedStruct.ScuSupported
 		varOsDistribution.SupportedEditions = varOsDistributionWithoutEmbeddedStruct.SupportedEditions
 		varOsDistribution.Catalog = varOsDistributionWithoutEmbeddedStruct.Catalog
+		varOsDistribution.Vendor = varOsDistributionWithoutEmbeddedStruct.Vendor
 		varOsDistribution.Version = varOsDistributionWithoutEmbeddedStruct.Version
 		*o = OsDistribution(varOsDistribution)
 	} else {
@@ -313,9 +471,13 @@ func (o *OsDistribution) UnmarshalJSON(bytes []byte) (err error) {
 	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
+		delete(additionalProperties, "IsSupported")
+		delete(additionalProperties, "Label")
 		delete(additionalProperties, "Name")
+		delete(additionalProperties, "ScuSupported")
 		delete(additionalProperties, "SupportedEditions")
 		delete(additionalProperties, "Catalog")
+		delete(additionalProperties, "Vendor")
 		delete(additionalProperties, "Version")
 
 		// remove fields from embedded structs

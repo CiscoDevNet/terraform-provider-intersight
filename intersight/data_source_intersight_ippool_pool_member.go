@@ -61,7 +61,12 @@ func getIppoolPoolMemberSchema() map[string]*schema.Schema {
 			},
 		},
 		"assigned": {
-			Description: "Boolean to represent whether the ID is assigned or not.",
+			Description: "Boolean to represent whether the ID is in use.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
+		"assigned_by_another": {
+			Description: "Boolean to represent whether the ID is used either statically or by another pool.",
 			Type:        schema.TypeBool,
 			Optional:    true,
 		},
@@ -359,6 +364,11 @@ func getIppoolPoolMemberSchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"reserved": {
+			Description: "Boolean to represent whether the ID is reserved.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
 		"shared_scope": {
 			Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
 			Type:        schema.TypeString,
@@ -579,6 +589,11 @@ func dataSourceIppoolPoolMemberRead(c context.Context, d *schema.ResourceData, m
 	if v, ok := d.GetOkExists("assigned"); ok {
 		x := (v.(bool))
 		o.SetAssigned(x)
+	}
+
+	if v, ok := d.GetOkExists("assigned_by_another"); ok {
+		x := (v.(bool))
+		o.SetAssignedByAnother(x)
 	}
 
 	if v, ok := d.GetOk("assigned_to_entity"); ok {
@@ -935,6 +950,11 @@ func dataSourceIppoolPoolMemberRead(c context.Context, d *schema.ResourceData, m
 		}
 	}
 
+	if v, ok := d.GetOkExists("reserved"); ok {
+		x := (v.(bool))
+		o.SetReserved(x)
+	}
+
 	if v, ok := d.GetOk("shared_scope"); ok {
 		x := (v.(string))
 		o.SetSharedScope(x)
@@ -1087,6 +1107,7 @@ func dataSourceIppoolPoolMemberRead(c context.Context, d *schema.ResourceData, m
 
 				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)
 				temp["assigned"] = (s.GetAssigned())
+				temp["assigned_by_another"] = (s.GetAssignedByAnother())
 
 				temp["assigned_to_entity"] = flattenMapMoBaseMoRelationship(s.GetAssignedToEntity(), d)
 				temp["class_id"] = (s.GetClassId())
@@ -1113,6 +1134,7 @@ func dataSourceIppoolPoolMemberRead(c context.Context, d *schema.ResourceData, m
 				temp["pool"] = flattenMapIppoolShadowPoolRelationship(s.GetPool(), d)
 
 				temp["reservation"] = flattenMapIppoolReservationRelationship(s.GetReservation(), d)
+				temp["reserved"] = (s.GetReserved())
 				temp["shared_scope"] = (s.GetSharedScope())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)

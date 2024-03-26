@@ -82,9 +82,11 @@ This complex property has following sub-properties:
   + `version_type`:(string)(ReadOnly) Specifies type of version. Currently the only supported value is \ Configured\ that is used to keep track of snapshots of policies and profiles that are intendedto be configured to target endpoints.* `Modified` - Version created every time an object is modified.* `Configured` - Version created every time an object is configured to the service profile.* `Deployed` - Version created for objects related to a service profile when it is deployed. 
 * `vlan_settings`:(HashMap) - VLAN configuration for the virtual interface. 
 This complex property has following sub-properties:
-  + `allowed_vlans`:(string) Allowed VLAN IDs of the virtual interface. A list of comma seperated VLAN ids and/or VLAN id ranges. 
+  + `allowed_vlans`:(string) Allowed VLAN IDs of the virtual interface. A list of comma separated VLAN ids and/or VLAN id ranges. 
   + `native_vlan`:(int) Native VLAN ID of the virtual interface or the corresponding vethernet on the peer Fabric Interconnect to which the virtual interface is connected. If the native VLAN is not a part of the allowed VLANs, it will automatically be added to the list of allowed VLANs. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+  + `qinq_enabled`:(bool) Enable QinQ (802.1Q-in-802.1Q) Tunneling on the vNIC. 
+  + `qinq_vlan`:(int) Select the VLAN ID for VIC QinQ (802.1Q-in-802.1Q) Tunneling. 
 
 
 ## Import

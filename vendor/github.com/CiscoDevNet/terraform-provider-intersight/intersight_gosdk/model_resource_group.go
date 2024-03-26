@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-11765
+API version: 1.0.11-14968
 Contact: intersight@cisco.com
 */
 
@@ -30,9 +30,13 @@ type ResourceGroup struct {
 	Name                    *string                           `json:"Name,omitempty"`
 	PerTypeCombinedSelector []ResourcePerTypeCombinedSelector `json:"PerTypeCombinedSelector,omitempty"`
 	// Qualifier shall be used to specify if we want to organize resources using multiple resource group or single For an account, resource groups can be of only one of the above types. (Both the types are mutually exclusive for an account.). * `Allow-Selectors` - Resources will be added to resource groups based on ODATA filter. Multiple resource group can be created to organize resources. * `Allow-All` - All resources will become part of the Resource Group. Only one resource group can be created to organize resources.
-	Qualifier *string                 `json:"Qualifier,omitempty"`
-	Selectors []ResourceSelector      `json:"Selectors,omitempty"`
-	Account   *IamAccountRelationship `json:"Account,omitempty"`
+	Qualifier *string `json:"Qualifier,omitempty"`
+	// Set Reevaluate to true to reevaluate the group members and memberships of this resource group.
+	Reevaluate *bool              `json:"Reevaluate,omitempty"`
+	Selectors  []ResourceSelector `json:"Selectors,omitempty"`
+	// The type of this resource group. (Rbac, Licensing, solution). * `rbac` - These resource groups are used for multi-tenancy by assigning to organizations. * `licensing` - These resource groups are used to classify resources like servers to various groups which are associated to different license tiers. * `solution` - These resource groups are created for Flexpods.
+	Type    *string                 `json:"Type,omitempty"`
+	Account *IamAccountRelationship `json:"Account,omitempty"`
 	// An array of relationships to organizationOrganization resources.
 	Organizations        []OrganizationOrganizationRelationship `json:"Organizations,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -244,6 +248,38 @@ func (o *ResourceGroup) SetQualifier(v string) {
 	o.Qualifier = &v
 }
 
+// GetReevaluate returns the Reevaluate field value if set, zero value otherwise.
+func (o *ResourceGroup) GetReevaluate() bool {
+	if o == nil || o.Reevaluate == nil {
+		var ret bool
+		return ret
+	}
+	return *o.Reevaluate
+}
+
+// GetReevaluateOk returns a tuple with the Reevaluate field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ResourceGroup) GetReevaluateOk() (*bool, bool) {
+	if o == nil || o.Reevaluate == nil {
+		return nil, false
+	}
+	return o.Reevaluate, true
+}
+
+// HasReevaluate returns a boolean if a field has been set.
+func (o *ResourceGroup) HasReevaluate() bool {
+	if o != nil && o.Reevaluate != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetReevaluate gets a reference to the given bool and assigns it to the Reevaluate field.
+func (o *ResourceGroup) SetReevaluate(v bool) {
+	o.Reevaluate = &v
+}
+
 // GetSelectors returns the Selectors field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ResourceGroup) GetSelectors() []ResourceSelector {
 	if o == nil {
@@ -275,6 +311,38 @@ func (o *ResourceGroup) HasSelectors() bool {
 // SetSelectors gets a reference to the given []ResourceSelector and assigns it to the Selectors field.
 func (o *ResourceGroup) SetSelectors(v []ResourceSelector) {
 	o.Selectors = v
+}
+
+// GetType returns the Type field value if set, zero value otherwise.
+func (o *ResourceGroup) GetType() string {
+	if o == nil || o.Type == nil {
+		var ret string
+		return ret
+	}
+	return *o.Type
+}
+
+// GetTypeOk returns a tuple with the Type field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ResourceGroup) GetTypeOk() (*string, bool) {
+	if o == nil || o.Type == nil {
+		return nil, false
+	}
+	return o.Type, true
+}
+
+// HasType returns a boolean if a field has been set.
+func (o *ResourceGroup) HasType() bool {
+	if o != nil && o.Type != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetType gets a reference to the given string and assigns it to the Type field.
+func (o *ResourceGroup) SetType(v string) {
+	o.Type = &v
 }
 
 // GetAccount returns the Account field value if set, zero value otherwise.
@@ -370,8 +438,14 @@ func (o ResourceGroup) MarshalJSON() ([]byte, error) {
 	if o.Qualifier != nil {
 		toSerialize["Qualifier"] = o.Qualifier
 	}
+	if o.Reevaluate != nil {
+		toSerialize["Reevaluate"] = o.Reevaluate
+	}
 	if o.Selectors != nil {
 		toSerialize["Selectors"] = o.Selectors
+	}
+	if o.Type != nil {
+		toSerialize["Type"] = o.Type
 	}
 	if o.Account != nil {
 		toSerialize["Account"] = o.Account
@@ -399,9 +473,13 @@ func (o *ResourceGroup) UnmarshalJSON(bytes []byte) (err error) {
 		Name                    *string                           `json:"Name,omitempty"`
 		PerTypeCombinedSelector []ResourcePerTypeCombinedSelector `json:"PerTypeCombinedSelector,omitempty"`
 		// Qualifier shall be used to specify if we want to organize resources using multiple resource group or single For an account, resource groups can be of only one of the above types. (Both the types are mutually exclusive for an account.). * `Allow-Selectors` - Resources will be added to resource groups based on ODATA filter. Multiple resource group can be created to organize resources. * `Allow-All` - All resources will become part of the Resource Group. Only one resource group can be created to organize resources.
-		Qualifier *string                 `json:"Qualifier,omitempty"`
-		Selectors []ResourceSelector      `json:"Selectors,omitempty"`
-		Account   *IamAccountRelationship `json:"Account,omitempty"`
+		Qualifier *string `json:"Qualifier,omitempty"`
+		// Set Reevaluate to true to reevaluate the group members and memberships of this resource group.
+		Reevaluate *bool              `json:"Reevaluate,omitempty"`
+		Selectors  []ResourceSelector `json:"Selectors,omitempty"`
+		// The type of this resource group. (Rbac, Licensing, solution). * `rbac` - These resource groups are used for multi-tenancy by assigning to organizations. * `licensing` - These resource groups are used to classify resources like servers to various groups which are associated to different license tiers. * `solution` - These resource groups are created for Flexpods.
+		Type    *string                 `json:"Type,omitempty"`
+		Account *IamAccountRelationship `json:"Account,omitempty"`
 		// An array of relationships to organizationOrganization resources.
 		Organizations []OrganizationOrganizationRelationship `json:"Organizations,omitempty"`
 	}
@@ -417,7 +495,9 @@ func (o *ResourceGroup) UnmarshalJSON(bytes []byte) (err error) {
 		varResourceGroup.Name = varResourceGroupWithoutEmbeddedStruct.Name
 		varResourceGroup.PerTypeCombinedSelector = varResourceGroupWithoutEmbeddedStruct.PerTypeCombinedSelector
 		varResourceGroup.Qualifier = varResourceGroupWithoutEmbeddedStruct.Qualifier
+		varResourceGroup.Reevaluate = varResourceGroupWithoutEmbeddedStruct.Reevaluate
 		varResourceGroup.Selectors = varResourceGroupWithoutEmbeddedStruct.Selectors
+		varResourceGroup.Type = varResourceGroupWithoutEmbeddedStruct.Type
 		varResourceGroup.Account = varResourceGroupWithoutEmbeddedStruct.Account
 		varResourceGroup.Organizations = varResourceGroupWithoutEmbeddedStruct.Organizations
 		*o = ResourceGroup(varResourceGroup)
@@ -443,7 +523,9 @@ func (o *ResourceGroup) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "Name")
 		delete(additionalProperties, "PerTypeCombinedSelector")
 		delete(additionalProperties, "Qualifier")
+		delete(additionalProperties, "Reevaluate")
 		delete(additionalProperties, "Selectors")
+		delete(additionalProperties, "Type")
 		delete(additionalProperties, "Account")
 		delete(additionalProperties, "Organizations")
 

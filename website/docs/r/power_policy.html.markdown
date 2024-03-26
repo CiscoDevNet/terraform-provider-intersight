@@ -12,7 +12,7 @@ Power Management policy models a configuration that can be applied to Chassis or
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(ReadOnly) The Account ID for this managed object. 
-* `allocated_budget`:(int) Sets the Allocated Power Budget of the Chassis (in Watts). This field is only supported for Cisco UCS X series Chassis. 
+* `allocated_budget`:(int) Sets the allocated power budget of the chassis (in Watts). 
 * `ancestors`:(Array)(ReadOnly) An array of relationships to moBaseMo resources. 
 This complex property has following sub-properties:
   + `moid`:(string) The Moid of the referenced REST resource. 
@@ -21,7 +21,7 @@ This complex property has following sub-properties:
 * `create_time`:(string)(ReadOnly) The time when this managed object was created. 
 * `description`:(string) Description of the policy. 
 * `domain_group_moid`:(string)(ReadOnly) The DomainGroup ID for this managed object. 
-* `dynamic_rebalancing`:(string) Sets the Dynamic Power Rebalancing mode of the Chassis. If enabled, this mode allows the chassis to dynamically reallocate the power between servers depending on their power usage. This option is only supported for Cisco UCS X series Chassis.* `Enabled` - Set the value to Enabled.* `Disabled` - Set the value to Disabled. 
+* `dynamic_rebalancing`:(string) Sets the dynamic power rebalancing mode of the chassis. If enabled, this mode allows the chassis to dynamically reallocate the power between servers depending on their power usage.* `Enabled` - Set the value to Enabled.* `Disabled` - Set the value to Disabled. 
 * `extended_power_capacity`:(string) Sets the Extended Power Capacity of the Chassis. If Enabled, this mode allows chassis available power to be increased by borrowing power from redundant power supplies.  This option is only supported for Cisco UCS X series Chassis.* `Enabled` - Set the value to Enabled.* `Disabled` - Set the value to Disabled. 
 * `mod_time`:(string)(ReadOnly) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
@@ -43,10 +43,10 @@ This complex property has following sub-properties:
   + `moid`:(string) The Moid of the referenced REST resource. 
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
   + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
-* `power_priority`:(string) Sets the Power Priority of the Server. This priority is used to determine the initial power allocation for servers. This field is only supported for Cisco UCS X series servers.* `Low` - Set the Power Priority to Low.* `Medium` - Set the Power Priority to Medium.* `High` - Set the Power Priority to High. 
+* `power_priority`:(string) Sets the Power Priority of the Server. This priority is used to determine the initial power allocation for servers. This field is only supported for Cisco UCS B series and X series servers.* `Low` - Set the Power Priority to Low.* `Medium` - Set the Power Priority to Medium.* `High` - Set the Power Priority to High. 
 * `power_profiling`:(string) Sets the Power Profiling of the Server. If Enabled, this field allows the power manager to run power profiling  utility to determine the power needs of the server.  This field is only supported for Cisco UCS X series servers.* `Enabled` - Set the value to Enabled.* `Disabled` - Set the value to Disabled. 
-* `power_restore_state`:(string) Sets the Power Restore State of the Server. In the absence of Intersight connectivity, the chassis will use this policy  to recover the host power after a power loss event.  This field is only supported for Cisco UCS X series servers.* `AlwaysOff` - Set the Power Restore Mode to Off.* `AlwaysOn` - Set the Power Restore Mode to On.* `LastState` - Set the Power Restore Mode to LastState. 
-* `power_save_mode`:(string) Sets the Power Save mode of the Chassis. If the requested power budget is less than available power\u00a0capacity,  the additional PSUs not required to comply with redundancy policy are placed in Power Save mode. This option is only supported for Cisco UCS X series Chassis.* `Enabled` - Set the value to Enabled.* `Disabled` - Set the value to Disabled. 
+* `power_restore_state`:(string) Sets the Power Restore State of the Server. In the absence of Intersight connectivity, the chassis will use this policy  to recover the host power after a power loss event.  This field is only supported for Cisco UCS B series and X series servers.* `AlwaysOff` - Set the Power Restore Mode to Off.* `AlwaysOn` - Set the Power Restore Mode to On.* `LastState` - Set the Power Restore Mode to LastState. 
+* `power_save_mode`:(string) Sets the power save mode of the chassis. If the requested power budget is less than available power capacity,  the additional PSUs not required to comply with redundancy policy are placed in power save mode.* `Enabled` - Set the value to Enabled.* `Disabled` - Set the value to Disabled. 
 * `profiles`:(Array) An array of relationships to policyAbstractConfigProfile resources. 
 This complex property has following sub-properties:
   + `moid`:(string) The Moid of the referenced REST resource. 

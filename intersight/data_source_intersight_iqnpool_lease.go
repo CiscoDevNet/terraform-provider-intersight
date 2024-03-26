@@ -115,8 +115,28 @@ func getIqnpoolLeaseSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"has_duplicate": {
+			Description: "HasDuplicate represents if there are other pools in which this id exists.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
 		"iqn_address": {
-			Description: "IQN address allocated for pool-based allocation \"prefix+suffix+number\".",
+			Description: "IQN address allocated for pool-based allocation. It is constructed as <prefix>:<suffix>:<number>.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"iqn_number": {
+			Description: "Number of the IQN address. IQN Address is constructed as <prefix>:<suffix>:<number>.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"iqn_prefix": {
+			Description: "Prefix of the IQN address. IQN Address is constructed as <prefix>:<suffix>:<number>.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"iqn_suffix": {
+			Description: "Suffix of the IQN address. IQN Address is constructed as <prefix>:<suffix>:<number>.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -624,9 +644,29 @@ func dataSourceIqnpoolLeaseRead(c context.Context, d *schema.ResourceData, meta 
 		o.SetDomainGroupMoid(x)
 	}
 
+	if v, ok := d.GetOkExists("has_duplicate"); ok {
+		x := (v.(bool))
+		o.SetHasDuplicate(x)
+	}
+
 	if v, ok := d.GetOk("iqn_address"); ok {
 		x := (v.(string))
 		o.SetIqnAddress(x)
+	}
+
+	if v, ok := d.GetOkExists("iqn_number"); ok {
+		x := int64(v.(int))
+		o.SetIqnNumber(x)
+	}
+
+	if v, ok := d.GetOk("iqn_prefix"); ok {
+		x := (v.(string))
+		o.SetIqnPrefix(x)
+	}
+
+	if v, ok := d.GetOk("iqn_suffix"); ok {
+		x := (v.(string))
+		o.SetIqnSuffix(x)
 	}
 
 	if v, ok := d.GetOk("mod_time"); ok {
@@ -1062,7 +1102,11 @@ func dataSourceIqnpoolLeaseRead(c context.Context, d *schema.ResourceData, meta 
 
 				temp["create_time"] = (s.GetCreateTime()).String()
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
+				temp["has_duplicate"] = (s.GetHasDuplicate())
 				temp["iqn_address"] = (s.GetIqnAddress())
+				temp["iqn_number"] = (s.GetIqnNumber())
+				temp["iqn_prefix"] = (s.GetIqnPrefix())
+				temp["iqn_suffix"] = (s.GetIqnSuffix())
 
 				temp["mod_time"] = (s.GetModTime()).String()
 				temp["moid"] = (s.GetMoid())

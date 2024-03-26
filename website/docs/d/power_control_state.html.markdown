@@ -18,7 +18,7 @@ The following arguments can be used to get data of already created objects in In
 * `allocated_power`:(int) This field identifies the allocated power on the chassis in Watts. 
 * `create_time`:(string) The time when this managed object was created. 
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
-* `extended_power_capacity`:(string) The status of extended power capacity mode of the chassis. If Enabled, this mode allows chassis available power to be increased by borrowing power from redundant power supplies.* `Enabled` - Set the value to Enabled.* `Disabled` - Set the value to Disabled. 
+* `extended_power_capacity`:(string) The status of extended power capacity mode of the chassis. If Enabled, this mode allows chassis available power to be increased by borrowing power from redundant power supplies.* `Enabled` - Set the value to Enabled.* `Disabled` - Set the value to Disabled.* `Not Applicable` - Set the value to Not Applicable. 
 * `grid_max_power`:(int) This field identifies the available power when PSUs are in grid mode in Watts. 
 * `max_required_power`:(int) This field identifies the maximum power required by the endpoint in Watts. 
 * `min_required_power`:(int) This field identifies the minimum power required by the endpoint in Watts. 

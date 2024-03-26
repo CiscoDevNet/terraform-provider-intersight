@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-11765
+API version: 1.0.11-14968
 Contact: intersight@cisco.com
 */
 
@@ -25,6 +25,8 @@ type ResourceMembership struct {
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType           string                      `json:"ObjectType"`
 	GroupPermissionRoles []IamGroupPermissionToRoles `json:"GroupPermissionRoles,omitempty"`
+	// Set Reevaluate to true to reevaluate the membership of a resource.
+	Reevaluate *bool `json:"Reevaluate,omitempty"`
 	// Name of the Service owning the resource.
 	TargetApp            *string                               `json:"TargetApp,omitempty"`
 	Holder               *ResourceMembershipHolderRelationship `json:"Holder,omitempty"`
@@ -136,6 +138,38 @@ func (o *ResourceMembership) HasGroupPermissionRoles() bool {
 // SetGroupPermissionRoles gets a reference to the given []IamGroupPermissionToRoles and assigns it to the GroupPermissionRoles field.
 func (o *ResourceMembership) SetGroupPermissionRoles(v []IamGroupPermissionToRoles) {
 	o.GroupPermissionRoles = v
+}
+
+// GetReevaluate returns the Reevaluate field value if set, zero value otherwise.
+func (o *ResourceMembership) GetReevaluate() bool {
+	if o == nil || o.Reevaluate == nil {
+		var ret bool
+		return ret
+	}
+	return *o.Reevaluate
+}
+
+// GetReevaluateOk returns a tuple with the Reevaluate field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ResourceMembership) GetReevaluateOk() (*bool, bool) {
+	if o == nil || o.Reevaluate == nil {
+		return nil, false
+	}
+	return o.Reevaluate, true
+}
+
+// HasReevaluate returns a boolean if a field has been set.
+func (o *ResourceMembership) HasReevaluate() bool {
+	if o != nil && o.Reevaluate != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetReevaluate gets a reference to the given bool and assigns it to the Reevaluate field.
+func (o *ResourceMembership) SetReevaluate(v bool) {
+	o.Reevaluate = &v
 }
 
 // GetTargetApp returns the TargetApp field value if set, zero value otherwise.
@@ -253,6 +287,9 @@ func (o ResourceMembership) MarshalJSON() ([]byte, error) {
 	if o.GroupPermissionRoles != nil {
 		toSerialize["GroupPermissionRoles"] = o.GroupPermissionRoles
 	}
+	if o.Reevaluate != nil {
+		toSerialize["Reevaluate"] = o.Reevaluate
+	}
 	if o.TargetApp != nil {
 		toSerialize["TargetApp"] = o.TargetApp
 	}
@@ -277,6 +314,8 @@ func (o *ResourceMembership) UnmarshalJSON(bytes []byte) (err error) {
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 		ObjectType           string                      `json:"ObjectType"`
 		GroupPermissionRoles []IamGroupPermissionToRoles `json:"GroupPermissionRoles,omitempty"`
+		// Set Reevaluate to true to reevaluate the membership of a resource.
+		Reevaluate *bool `json:"Reevaluate,omitempty"`
 		// Name of the Service owning the resource.
 		TargetApp *string                               `json:"TargetApp,omitempty"`
 		Holder    *ResourceMembershipHolderRelationship `json:"Holder,omitempty"`
@@ -291,6 +330,7 @@ func (o *ResourceMembership) UnmarshalJSON(bytes []byte) (err error) {
 		varResourceMembership.ClassId = varResourceMembershipWithoutEmbeddedStruct.ClassId
 		varResourceMembership.ObjectType = varResourceMembershipWithoutEmbeddedStruct.ObjectType
 		varResourceMembership.GroupPermissionRoles = varResourceMembershipWithoutEmbeddedStruct.GroupPermissionRoles
+		varResourceMembership.Reevaluate = varResourceMembershipWithoutEmbeddedStruct.Reevaluate
 		varResourceMembership.TargetApp = varResourceMembershipWithoutEmbeddedStruct.TargetApp
 		varResourceMembership.Holder = varResourceMembershipWithoutEmbeddedStruct.Holder
 		varResourceMembership.Resource = varResourceMembershipWithoutEmbeddedStruct.Resource
@@ -314,6 +354,7 @@ func (o *ResourceMembership) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "GroupPermissionRoles")
+		delete(additionalProperties, "Reevaluate")
 		delete(additionalProperties, "TargetApp")
 		delete(additionalProperties, "Holder")
 		delete(additionalProperties, "Resource")

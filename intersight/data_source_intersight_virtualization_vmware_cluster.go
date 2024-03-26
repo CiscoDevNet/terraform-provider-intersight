@@ -63,6 +63,21 @@ func getVirtualizationVmwareClusterSchema() map[string]*schema.Schema {
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
+					"suppressed_critical": {
+						Description: "The count of active suppressed alarms that have severity type Critical.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"suppressed_info": {
+						Description: "The count of active suppressed alarms that have severity type Info.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"suppressed_warning": {
+						Description: "The count of active suppressed alarms that have severity type Warning.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
 					"warning": {
 						Description: "The count of active alarms that have severity type Warning.",
 						Type:        schema.TypeInt,
@@ -166,7 +181,7 @@ func getVirtualizationVmwareClusterSchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"hypervisor_type": {
-			Description: "Identifies the broad type of the underlying hypervisor.\n* `ESXi` - The hypervisor running on the HyperFlex cluster is a Vmware ESXi hypervisor of any version.\n* `HyperFlexAp` - The hypervisor of the virtualization platform is Cisco HyperFlex Application Platform.\n* `IWE` - The hypervisor of the virtualization platform is Cisco Intersight Workload Engine.\n* `Hyper-V` - The hypervisor running on the HyperFlex cluster is Microsoft Hyper-V.\n* `Unknown` - The hypervisor running on the HyperFlex cluster is not known.",
+			Description: "Identifies the broad type of the underlying hypervisor.\n* `ESXi` - The hypervisor running on the HyperFlex cluster is a Vmware ESXi hypervisor of any version.\n* `Hyper-V` - The hypervisor running on the HyperFlex cluster is Microsoft Hyper-V.\n* `Unknown` - The hypervisor running on the HyperFlex cluster is not known.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},

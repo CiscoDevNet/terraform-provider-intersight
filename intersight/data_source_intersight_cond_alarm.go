@@ -160,6 +160,41 @@ func getCondAlarmSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"definition": {
+			Description: "A reference to a condAlarmDefinition resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
 		"description": {
 			Description: "A longer description of the alarm than the name. The description contains details of the component reporting the issue.",
 			Type:        schema.TypeString,
@@ -322,6 +357,11 @@ func getCondAlarmSchema() map[string]*schema.Schema {
 		"shared_scope": {
 			Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
 			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"suppressed": {
+			Description: "Indicates whether the alarm is marked for suppression or not.",
+			Type:        schema.TypeBool,
 			Optional:    true,
 		},
 		"tags": {
@@ -644,6 +684,49 @@ func dataSourceCondAlarmRead(c context.Context, d *schema.ResourceData, meta int
 		o.SetCreationTime(x)
 	}
 
+	if v, ok := d.GetOk("definition"); ok {
+		p := make([]models.CondAlarmDefinitionRelationship, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.MoMoRef{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			p = append(p, models.MoMoRefAsCondAlarmDefinitionRelationship(o))
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetDefinition(x)
+		}
+	}
+
 	if v, ok := d.GetOk("description"); ok {
 		x := (v.(string))
 		o.SetDescription(x)
@@ -836,6 +919,11 @@ func dataSourceCondAlarmRead(c context.Context, d *schema.ResourceData, meta int
 		o.SetSharedScope(x)
 	}
 
+	if v, ok := d.GetOkExists("suppressed"); ok {
+		x := (v.(bool))
+		o.SetSuppressed(x)
+	}
+
 	if v, ok := d.GetOk("tags"); ok {
 		x := make([]models.MoTag, 0)
 		s := v.([]interface{})
@@ -1000,6 +1088,8 @@ func dataSourceCondAlarmRead(c context.Context, d *schema.ResourceData, meta int
 				temp["create_time"] = (s.GetCreateTime()).String()
 
 				temp["creation_time"] = (s.GetCreationTime()).String()
+
+				temp["definition"] = flattenMapCondAlarmDefinitionRelationship(s.GetDefinition(), d)
 				temp["description"] = (s.GetDescription())
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
 
@@ -1020,6 +1110,7 @@ func dataSourceCondAlarmRead(c context.Context, d *schema.ResourceData, meta int
 				temp["registered_device"] = flattenMapAssetDeviceRegistrationRelationship(s.GetRegisteredDevice(), d)
 				temp["severity"] = (s.GetSeverity())
 				temp["shared_scope"] = (s.GetSharedScope())
+				temp["suppressed"] = (s.GetSuppressed())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
 

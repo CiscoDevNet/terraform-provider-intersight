@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-11765
+API version: 1.0.11-14968
 Contact: intersight@cisco.com
 */
 
@@ -28,7 +28,9 @@ type StorageBaseInitiator struct {
 	Iqn *string `json:"Iqn,omitempty"`
 	// Name of the initiator represented in the storage array.
 	Name *string `json:"Name,omitempty"`
-	// Initiator type, it can be FC or iSCSI. * `FC` - Fibre channel initiator type which contains WWN of an HBA on the host. * `iSCSI` - An iSCSI initiator type which contains the IQN (iSCSI Qualified Name) used by the host. * `Mixed` - Initiator type for systems using both FC and iSCSI connections.
+	// NQN (NVMe Qualified Name). Can be up to 223 characters long and has the format nqn.yyyy-mm.naming-authority:unique name.
+	Nqn *string `json:"Nqn,omitempty"`
+	// Initiator type, it can be FC or iSCSI. * `FC` - Fibre channel initiator type which contains WWN of an HBA on the host. * `iSCSI` - An iSCSI initiator type which contains the IQN (iSCSI Qualified Name) used by the host. * `NVMe` - NVMe initiator type which contains the NQN (NVMe Qualified Name) used by the host. * `Mixed` - Initiator type for systems using both FC and iSCSI connections.
 	Type *string `json:"Type,omitempty"`
 	// World wide name, 128 bit address represented in hexadecimal notation. For example, 51:4f:0c:50:14:1f:af:01:51:4f:0c:51:14:1f:af:01.
 	Wwn                  *string `json:"Wwn,omitempty"`
@@ -168,6 +170,38 @@ func (o *StorageBaseInitiator) SetName(v string) {
 	o.Name = &v
 }
 
+// GetNqn returns the Nqn field value if set, zero value otherwise.
+func (o *StorageBaseInitiator) GetNqn() string {
+	if o == nil || o.Nqn == nil {
+		var ret string
+		return ret
+	}
+	return *o.Nqn
+}
+
+// GetNqnOk returns a tuple with the Nqn field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *StorageBaseInitiator) GetNqnOk() (*string, bool) {
+	if o == nil || o.Nqn == nil {
+		return nil, false
+	}
+	return o.Nqn, true
+}
+
+// HasNqn returns a boolean if a field has been set.
+func (o *StorageBaseInitiator) HasNqn() bool {
+	if o != nil && o.Nqn != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetNqn gets a reference to the given string and assigns it to the Nqn field.
+func (o *StorageBaseInitiator) SetNqn(v string) {
+	o.Nqn = &v
+}
+
 // GetType returns the Type field value if set, zero value otherwise.
 func (o *StorageBaseInitiator) GetType() string {
 	if o == nil || o.Type == nil {
@@ -254,6 +288,9 @@ func (o StorageBaseInitiator) MarshalJSON() ([]byte, error) {
 	if o.Name != nil {
 		toSerialize["Name"] = o.Name
 	}
+	if o.Nqn != nil {
+		toSerialize["Nqn"] = o.Nqn
+	}
 	if o.Type != nil {
 		toSerialize["Type"] = o.Type
 	}
@@ -278,7 +315,9 @@ func (o *StorageBaseInitiator) UnmarshalJSON(bytes []byte) (err error) {
 		Iqn *string `json:"Iqn,omitempty"`
 		// Name of the initiator represented in the storage array.
 		Name *string `json:"Name,omitempty"`
-		// Initiator type, it can be FC or iSCSI. * `FC` - Fibre channel initiator type which contains WWN of an HBA on the host. * `iSCSI` - An iSCSI initiator type which contains the IQN (iSCSI Qualified Name) used by the host. * `Mixed` - Initiator type for systems using both FC and iSCSI connections.
+		// NQN (NVMe Qualified Name). Can be up to 223 characters long and has the format nqn.yyyy-mm.naming-authority:unique name.
+		Nqn *string `json:"Nqn,omitempty"`
+		// Initiator type, it can be FC or iSCSI. * `FC` - Fibre channel initiator type which contains WWN of an HBA on the host. * `iSCSI` - An iSCSI initiator type which contains the IQN (iSCSI Qualified Name) used by the host. * `NVMe` - NVMe initiator type which contains the NQN (NVMe Qualified Name) used by the host. * `Mixed` - Initiator type for systems using both FC and iSCSI connections.
 		Type *string `json:"Type,omitempty"`
 		// World wide name, 128 bit address represented in hexadecimal notation. For example, 51:4f:0c:50:14:1f:af:01:51:4f:0c:51:14:1f:af:01.
 		Wwn *string `json:"Wwn,omitempty"`
@@ -293,6 +332,7 @@ func (o *StorageBaseInitiator) UnmarshalJSON(bytes []byte) (err error) {
 		varStorageBaseInitiator.ObjectType = varStorageBaseInitiatorWithoutEmbeddedStruct.ObjectType
 		varStorageBaseInitiator.Iqn = varStorageBaseInitiatorWithoutEmbeddedStruct.Iqn
 		varStorageBaseInitiator.Name = varStorageBaseInitiatorWithoutEmbeddedStruct.Name
+		varStorageBaseInitiator.Nqn = varStorageBaseInitiatorWithoutEmbeddedStruct.Nqn
 		varStorageBaseInitiator.Type = varStorageBaseInitiatorWithoutEmbeddedStruct.Type
 		varStorageBaseInitiator.Wwn = varStorageBaseInitiatorWithoutEmbeddedStruct.Wwn
 		*o = StorageBaseInitiator(varStorageBaseInitiator)
@@ -316,6 +356,7 @@ func (o *StorageBaseInitiator) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Iqn")
 		delete(additionalProperties, "Name")
+		delete(additionalProperties, "Nqn")
 		delete(additionalProperties, "Type")
 		delete(additionalProperties, "Wwn")
 

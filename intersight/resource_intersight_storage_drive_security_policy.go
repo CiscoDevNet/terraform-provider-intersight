@@ -190,9 +190,10 @@ func resourceStorageDriveSecurityPolicy() *schema.Resource {
 													Default:     "storage.KmipAuthCredentials",
 												},
 												"password": {
-													Description: "The password for the KMIP server login.",
-													Type:        schema.TypeString,
-													Optional:    true,
+													Description:  "The password for the KMIP server login.",
+													Type:         schema.TypeString,
+													ValidateFunc: validation.StringMatch(regexp.MustCompile("[!\"#%&'\\(\\)\\*\\+,\\-\\./:;<>@\\[\\\\\\]\\^_`\\{\\|\\}~a-zA-Z0-9]{0,80}"), ""),
+													Optional:     true,
 												},
 												"use_authentication": {
 													Description: "Enables/disables the authentication for communicating with KMIP server. This flag enables the authentication which makes authentication mandatory.",
@@ -277,7 +278,7 @@ func resourceStorageDriveSecurityPolicy() *schema.Resource {
 												"timeout": {
 													Description:  "The timeout before which the KMIP client should connect.",
 													Type:         schema.TypeInt,
-													ValidateFunc: validation.IntBetween(1, 65),
+													ValidateFunc: validation.IntBetween(1, 250),
 													Optional:     true,
 													Default:      60,
 												},
@@ -330,7 +331,7 @@ func resourceStorageDriveSecurityPolicy() *schema.Resource {
 												"timeout": {
 													Description:  "The timeout before which the KMIP client should connect.",
 													Type:         schema.TypeInt,
-													ValidateFunc: validation.IntBetween(1, 65),
+													ValidateFunc: validation.IntBetween(1, 250),
 													Optional:     true,
 													Default:      60,
 												},

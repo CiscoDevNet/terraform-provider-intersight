@@ -15,7 +15,7 @@ All objects matching the filter criteria are fetched through pagination.
 To access the ith object of the results obtained, use `data.intersight_recommendation_capacity_runway.<custom_name>.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `account_moid`:(string) The Account ID for this managed object. 
-* `additional_capacity`:(int) Additional capacity is the capacity which is needed more after exhausing all hardware on current cluster. 
+* `additional_capacity`:(int) Additional capacity is the capacity which is needed more after exhausting all hardware on current cluster. 
 * `create_time`:(string) The time when this managed object was created. 
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
 * `last_updated_time`:(string) The time when the recommendation was last updated. 

@@ -474,7 +474,7 @@ func resourceFabricEthNetworkGroupPolicy() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"allowed_vlans": {
-							Description:  "Allowed VLAN IDs of the virtual interface. A list of comma seperated VLAN ids and/or VLAN id ranges.",
+							Description:  "Allowed VLAN IDs of the virtual interface. A list of comma separated VLAN ids and/or VLAN id ranges.",
 							Type:         schema.TypeString,
 							ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^((\\d+\\-\\d+)|(\\d+))(,((\\d+\\-\\d+)|(\\d+)))*$"), ""),
 							Optional:     true,
@@ -497,6 +497,19 @@ func resourceFabricEthNetworkGroupPolicy() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Default:     "fabric.VlanSettings",
+						},
+						"qinq_enabled": {
+							Description: "Enable QinQ (802.1Q-in-802.1Q) Tunneling on the vNIC.",
+							Type:        schema.TypeBool,
+							Optional:    true,
+							Default:     false,
+						},
+						"qinq_vlan": {
+							Description:  "Select the VLAN ID for VIC QinQ (802.1Q-in-802.1Q) Tunneling.",
+							Type:         schema.TypeInt,
+							ValidateFunc: validation.IntBetween(2, 4093),
+							Optional:     true,
+							Default:      2,
 						},
 					},
 				},
@@ -650,6 +663,18 @@ func resourceFabricEthNetworkGroupPolicyCreate(c context.Context, d *schema.Reso
 				{
 					x := (v.(string))
 					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["qinq_enabled"]; ok {
+				{
+					x := (v.(bool))
+					o.SetQinqEnabled(x)
+				}
+			}
+			if v, ok := l["qinq_vlan"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetQinqVlan(x)
 				}
 			}
 			p = append(p, *o)
@@ -926,6 +951,18 @@ func resourceFabricEthNetworkGroupPolicyUpdate(c context.Context, d *schema.Reso
 				{
 					x := (v.(string))
 					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["qinq_enabled"]; ok {
+				{
+					x := (v.(bool))
+					o.SetQinqEnabled(x)
+				}
+			}
+			if v, ok := l["qinq_vlan"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetQinqVlan(x)
 				}
 			}
 			p = append(p, *o)

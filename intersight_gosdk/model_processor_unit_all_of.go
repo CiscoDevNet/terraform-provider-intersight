@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-11765
+API version: 1.0.11-14968
 Contact: intersight@cisco.com
 */
 
@@ -23,6 +23,10 @@ type ProcessorUnitAllOf struct {
 	ObjectType string `json:"ObjectType"`
 	// The architecture of the installed processor.
 	Architecture *string `json:"Architecture,omitempty"`
+	// This field displays the description of the processor.
+	Description *string `json:"Description,omitempty"`
+	// This field indicates whether the processor is supported on the server or not.
+	IsPlatformSupported *bool `json:"IsPlatformSupported,omitempty"`
 	// The number of cores present in a given processor.
 	NumCores *int64 `json:"NumCores,omitempty"`
 	// The number of enabled cores in the installed processor.
@@ -36,6 +40,10 @@ type ProcessorUnitAllOf struct {
 	OperState *string `json:"OperState,omitempty"`
 	// Operability state of the central processing unit.
 	Operability *string `json:"Operability,omitempty"`
+	// This field displays the part number of the of the processor.
+	PartNumber *string `json:"PartNumber,omitempty"`
+	// This field displays the product ID of the processor.
+	Pid *string `json:"Pid,omitempty"`
 	// The ID number of a given processor.
 	ProcessorId *int64 `json:"ProcessorId,omitempty"`
 	// The socket ID of the installed processor.
@@ -158,6 +166,70 @@ func (o *ProcessorUnitAllOf) HasArchitecture() bool {
 // SetArchitecture gets a reference to the given string and assigns it to the Architecture field.
 func (o *ProcessorUnitAllOf) SetArchitecture(v string) {
 	o.Architecture = &v
+}
+
+// GetDescription returns the Description field value if set, zero value otherwise.
+func (o *ProcessorUnitAllOf) GetDescription() string {
+	if o == nil || o.Description == nil {
+		var ret string
+		return ret
+	}
+	return *o.Description
+}
+
+// GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ProcessorUnitAllOf) GetDescriptionOk() (*string, bool) {
+	if o == nil || o.Description == nil {
+		return nil, false
+	}
+	return o.Description, true
+}
+
+// HasDescription returns a boolean if a field has been set.
+func (o *ProcessorUnitAllOf) HasDescription() bool {
+	if o != nil && o.Description != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetDescription gets a reference to the given string and assigns it to the Description field.
+func (o *ProcessorUnitAllOf) SetDescription(v string) {
+	o.Description = &v
+}
+
+// GetIsPlatformSupported returns the IsPlatformSupported field value if set, zero value otherwise.
+func (o *ProcessorUnitAllOf) GetIsPlatformSupported() bool {
+	if o == nil || o.IsPlatformSupported == nil {
+		var ret bool
+		return ret
+	}
+	return *o.IsPlatformSupported
+}
+
+// GetIsPlatformSupportedOk returns a tuple with the IsPlatformSupported field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ProcessorUnitAllOf) GetIsPlatformSupportedOk() (*bool, bool) {
+	if o == nil || o.IsPlatformSupported == nil {
+		return nil, false
+	}
+	return o.IsPlatformSupported, true
+}
+
+// HasIsPlatformSupported returns a boolean if a field has been set.
+func (o *ProcessorUnitAllOf) HasIsPlatformSupported() bool {
+	if o != nil && o.IsPlatformSupported != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetIsPlatformSupported gets a reference to the given bool and assigns it to the IsPlatformSupported field.
+func (o *ProcessorUnitAllOf) SetIsPlatformSupported(v bool) {
+	o.IsPlatformSupported = &v
 }
 
 // GetNumCores returns the NumCores field value if set, zero value otherwise.
@@ -383,6 +455,70 @@ func (o *ProcessorUnitAllOf) HasOperability() bool {
 // SetOperability gets a reference to the given string and assigns it to the Operability field.
 func (o *ProcessorUnitAllOf) SetOperability(v string) {
 	o.Operability = &v
+}
+
+// GetPartNumber returns the PartNumber field value if set, zero value otherwise.
+func (o *ProcessorUnitAllOf) GetPartNumber() string {
+	if o == nil || o.PartNumber == nil {
+		var ret string
+		return ret
+	}
+	return *o.PartNumber
+}
+
+// GetPartNumberOk returns a tuple with the PartNumber field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ProcessorUnitAllOf) GetPartNumberOk() (*string, bool) {
+	if o == nil || o.PartNumber == nil {
+		return nil, false
+	}
+	return o.PartNumber, true
+}
+
+// HasPartNumber returns a boolean if a field has been set.
+func (o *ProcessorUnitAllOf) HasPartNumber() bool {
+	if o != nil && o.PartNumber != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetPartNumber gets a reference to the given string and assigns it to the PartNumber field.
+func (o *ProcessorUnitAllOf) SetPartNumber(v string) {
+	o.PartNumber = &v
+}
+
+// GetPid returns the Pid field value if set, zero value otherwise.
+func (o *ProcessorUnitAllOf) GetPid() string {
+	if o == nil || o.Pid == nil {
+		var ret string
+		return ret
+	}
+	return *o.Pid
+}
+
+// GetPidOk returns a tuple with the Pid field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ProcessorUnitAllOf) GetPidOk() (*string, bool) {
+	if o == nil || o.Pid == nil {
+		return nil, false
+	}
+	return o.Pid, true
+}
+
+// HasPid returns a boolean if a field has been set.
+func (o *ProcessorUnitAllOf) HasPid() bool {
+	if o != nil && o.Pid != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetPid gets a reference to the given string and assigns it to the Pid field.
+func (o *ProcessorUnitAllOf) SetPid(v string) {
+	o.Pid = &v
 }
 
 // GetProcessorId returns the ProcessorId field value if set, zero value otherwise.
@@ -748,6 +884,12 @@ func (o ProcessorUnitAllOf) MarshalJSON() ([]byte, error) {
 	if o.Architecture != nil {
 		toSerialize["Architecture"] = o.Architecture
 	}
+	if o.Description != nil {
+		toSerialize["Description"] = o.Description
+	}
+	if o.IsPlatformSupported != nil {
+		toSerialize["IsPlatformSupported"] = o.IsPlatformSupported
+	}
 	if o.NumCores != nil {
 		toSerialize["NumCores"] = o.NumCores
 	}
@@ -768,6 +910,12 @@ func (o ProcessorUnitAllOf) MarshalJSON() ([]byte, error) {
 	}
 	if o.Operability != nil {
 		toSerialize["Operability"] = o.Operability
+	}
+	if o.PartNumber != nil {
+		toSerialize["PartNumber"] = o.PartNumber
+	}
+	if o.Pid != nil {
+		toSerialize["Pid"] = o.Pid
 	}
 	if o.ProcessorId != nil {
 		toSerialize["ProcessorId"] = o.ProcessorId
@@ -823,6 +971,8 @@ func (o *ProcessorUnitAllOf) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Architecture")
+		delete(additionalProperties, "Description")
+		delete(additionalProperties, "IsPlatformSupported")
 		delete(additionalProperties, "NumCores")
 		delete(additionalProperties, "NumCoresEnabled")
 		delete(additionalProperties, "NumThreads")
@@ -830,6 +980,8 @@ func (o *ProcessorUnitAllOf) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "OperReason")
 		delete(additionalProperties, "OperState")
 		delete(additionalProperties, "Operability")
+		delete(additionalProperties, "PartNumber")
+		delete(additionalProperties, "Pid")
 		delete(additionalProperties, "ProcessorId")
 		delete(additionalProperties, "SocketDesignation")
 		delete(additionalProperties, "Speed")

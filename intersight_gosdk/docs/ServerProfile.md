@@ -8,6 +8,9 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "server.Profile"]
 **ConfigChangeContext** | Pointer to [**NullablePolicyConfigChangeContext**](PolicyConfigChangeContext.md) |  | [optional] 
 **ConfigChanges** | Pointer to [**NullablePolicyConfigChange**](PolicyConfigChange.md) |  | [optional] 
+**DeployStatus** | Pointer to **string** | The status of the server profile indicating if deployment has been initiated on both fabric interconnects or not. * &#x60;None&#x60; - Switch profiles not deployed on either of the switches. * &#x60;Complete&#x60; - Both switch profiles of the cluster profile are deployed. * &#x60;Partial&#x60; - Only one of the switch profiles of the cluster profile is deployed. | [optional] [readonly] [default to "None"]
+**DeployedSwitches** | Pointer to **string** | The property which determines if the deployment should be skipped on any of the Fabric Interconnects. It is set based on the state of a fabric interconnect to Intersight before the deployment of the server proile begins. * &#x60;None&#x60; - Server profile configuration not deployed on either of the fabric interconnects. * &#x60;AB&#x60; - Server profile configuration deployed on both fabric interconnects. * &#x60;A&#x60; - Server profile configuration deployed on fabric interconnect A only. * &#x60;B&#x60; - Server profile configuration deployed on fabric interconnect B only. | [optional] [readonly] [default to "None"]
+**InternalReservationReferences** | Pointer to [**[]PoolReservationReference**](PoolReservationReference.md) |  | [optional] 
 **IsPmcDeployedSecurePassphraseSet** | Pointer to **bool** | Indicates whether the value of the &#39;pmcDeployedSecurePassphrase&#39; property has been set. | [optional] [readonly] [default to false]
 **PmcDeployedSecurePassphrase** | Pointer to **string** | Secure passphrase that is already deployed on all the Persistent Memory Modules on the server. This deployed passphrase is required during deploy of server profile if secure passphrase is changed or security is disabled in the attached persistent memory policy. | [optional] 
 **ReservationReferences** | Pointer to [**[]PoolReservationReference**](PoolReservationReference.md) |  | [optional] 
@@ -15,6 +18,7 @@ Name | Type | Description | Notes
 **ServerPreAssignBySerial** | Pointer to **string** | Serial number of the server that would be assigned to this pre-assigned Server Profile. It can be any string that adheres to the following constraints: It should start and end with an alphanumeric character. It cannot be more than 20 characters. | [optional] 
 **ServerPreAssignBySlot** | Pointer to [**NullableServerServerAssignTypeSlot**](ServerServerAssignTypeSlot.md) |  | [optional] 
 **StaticUuidAddress** | Pointer to **string** | The UUID address for the server must include UUID prefix xxxxxxxx-xxxx-xxxx along with the UUID suffix of format xxxx-xxxxxxxxxxxx. | [optional] 
+**UserLabel** | Pointer to **string** | User label assigned to the server profile. | [optional] 
 **Uuid** | Pointer to **string** | The UUID address that is assigned to the server based on the UUID pool. | [optional] [readonly] 
 **AssignedServer** | Pointer to [**ComputePhysicalRelationship**](ComputePhysicalRelationship.md) |  | [optional] 
 **AssociatedServer** | Pointer to [**ComputePhysicalRelationship**](ComputePhysicalRelationship.md) |  | [optional] 
@@ -156,6 +160,91 @@ HasConfigChanges returns a boolean if a field has been set.
 `func (o *ServerProfile) UnsetConfigChanges()`
 
 UnsetConfigChanges ensures that no value is present for ConfigChanges, not even an explicit nil
+### GetDeployStatus
+
+`func (o *ServerProfile) GetDeployStatus() string`
+
+GetDeployStatus returns the DeployStatus field if non-nil, zero value otherwise.
+
+### GetDeployStatusOk
+
+`func (o *ServerProfile) GetDeployStatusOk() (*string, bool)`
+
+GetDeployStatusOk returns a tuple with the DeployStatus field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDeployStatus
+
+`func (o *ServerProfile) SetDeployStatus(v string)`
+
+SetDeployStatus sets DeployStatus field to given value.
+
+### HasDeployStatus
+
+`func (o *ServerProfile) HasDeployStatus() bool`
+
+HasDeployStatus returns a boolean if a field has been set.
+
+### GetDeployedSwitches
+
+`func (o *ServerProfile) GetDeployedSwitches() string`
+
+GetDeployedSwitches returns the DeployedSwitches field if non-nil, zero value otherwise.
+
+### GetDeployedSwitchesOk
+
+`func (o *ServerProfile) GetDeployedSwitchesOk() (*string, bool)`
+
+GetDeployedSwitchesOk returns a tuple with the DeployedSwitches field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDeployedSwitches
+
+`func (o *ServerProfile) SetDeployedSwitches(v string)`
+
+SetDeployedSwitches sets DeployedSwitches field to given value.
+
+### HasDeployedSwitches
+
+`func (o *ServerProfile) HasDeployedSwitches() bool`
+
+HasDeployedSwitches returns a boolean if a field has been set.
+
+### GetInternalReservationReferences
+
+`func (o *ServerProfile) GetInternalReservationReferences() []PoolReservationReference`
+
+GetInternalReservationReferences returns the InternalReservationReferences field if non-nil, zero value otherwise.
+
+### GetInternalReservationReferencesOk
+
+`func (o *ServerProfile) GetInternalReservationReferencesOk() (*[]PoolReservationReference, bool)`
+
+GetInternalReservationReferencesOk returns a tuple with the InternalReservationReferences field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetInternalReservationReferences
+
+`func (o *ServerProfile) SetInternalReservationReferences(v []PoolReservationReference)`
+
+SetInternalReservationReferences sets InternalReservationReferences field to given value.
+
+### HasInternalReservationReferences
+
+`func (o *ServerProfile) HasInternalReservationReferences() bool`
+
+HasInternalReservationReferences returns a boolean if a field has been set.
+
+### SetInternalReservationReferencesNil
+
+`func (o *ServerProfile) SetInternalReservationReferencesNil(b bool)`
+
+ SetInternalReservationReferencesNil sets the value for InternalReservationReferences to be an explicit nil
+
+### UnsetInternalReservationReferences
+`func (o *ServerProfile) UnsetInternalReservationReferences()`
+
+UnsetInternalReservationReferences ensures that no value is present for InternalReservationReferences, not even an explicit nil
 ### GetIsPmcDeployedSecurePassphraseSet
 
 `func (o *ServerProfile) GetIsPmcDeployedSecurePassphraseSet() bool`
@@ -350,6 +439,31 @@ SetStaticUuidAddress sets StaticUuidAddress field to given value.
 `func (o *ServerProfile) HasStaticUuidAddress() bool`
 
 HasStaticUuidAddress returns a boolean if a field has been set.
+
+### GetUserLabel
+
+`func (o *ServerProfile) GetUserLabel() string`
+
+GetUserLabel returns the UserLabel field if non-nil, zero value otherwise.
+
+### GetUserLabelOk
+
+`func (o *ServerProfile) GetUserLabelOk() (*string, bool)`
+
+GetUserLabelOk returns a tuple with the UserLabel field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUserLabel
+
+`func (o *ServerProfile) SetUserLabel(v string)`
+
+SetUserLabel sets UserLabel field to given value.
+
+### HasUserLabel
+
+`func (o *ServerProfile) HasUserLabel() bool`
+
+HasUserLabel returns a boolean if a field has been set.
 
 ### GetUuid
 

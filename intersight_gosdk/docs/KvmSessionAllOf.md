@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "kvm.Session"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "kvm.Session"]
-**KvmLaunchUrlPath** | Pointer to **string** | One time URL that is used to launch the KVM console. | [optional] 
+**KvmLaunchUrlPath** | Pointer to **string** | One time URL that is used to launch the vKVM console. | [optional] 
 **KvmSessionId** | Pointer to **string** | Unique ID of the KVM Session URI. | [optional] 
 **OneTimePassword** | Pointer to **string** | Temporary one-time password for vKVM access. | [optional] 
 **SsoSupported** | Pointer to **bool** | Indicates if vKVM SSO is supported on the server. | [optional] [readonly] 

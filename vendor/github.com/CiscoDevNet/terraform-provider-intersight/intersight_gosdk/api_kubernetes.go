@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-11765
+API version: 1.0.11-14968
 Contact: intersight@cisco.com
 */
 
@@ -1132,6 +1132,8 @@ CreateKubernetesBaremetalNodeProfile Create a 'kubernetes.BaremetalNodeProfile' 
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiCreateKubernetesBaremetalNodeProfileRequest
+
+Deprecated
 */
 func (a *KubernetesApiService) CreateKubernetesBaremetalNodeProfile(ctx context.Context) ApiCreateKubernetesBaremetalNodeProfileRequest {
 	return ApiCreateKubernetesBaremetalNodeProfileRequest{
@@ -1143,6 +1145,8 @@ func (a *KubernetesApiService) CreateKubernetesBaremetalNodeProfile(ctx context.
 // Execute executes the request
 //
 //	@return KubernetesBaremetalNodeProfile
+//
+// Deprecated
 func (a *KubernetesApiService) CreateKubernetesBaremetalNodeProfileExecute(r ApiCreateKubernetesBaremetalNodeProfileRequest) (*KubernetesBaremetalNodeProfile, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -4953,6 +4957,8 @@ DeleteKubernetesBaremetalNodeProfile Delete a 'kubernetes.BaremetalNodeProfile' 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param moid The unique Moid identifier of a resource instance.
 	@return ApiDeleteKubernetesBaremetalNodeProfileRequest
+
+Deprecated
 */
 func (a *KubernetesApiService) DeleteKubernetesBaremetalNodeProfile(ctx context.Context, moid string) ApiDeleteKubernetesBaremetalNodeProfileRequest {
 	return ApiDeleteKubernetesBaremetalNodeProfileRequest{
@@ -4963,6 +4969,7 @@ func (a *KubernetesApiService) DeleteKubernetesBaremetalNodeProfile(ctx context.
 }
 
 // Execute executes the request
+// Deprecated
 func (a *KubernetesApiService) DeleteKubernetesBaremetalNodeProfileExecute(r ApiDeleteKubernetesBaremetalNodeProfileRequest) (*http.Response, error) {
 	var (
 		localVarHTTPMethod = http.MethodDelete
@@ -10552,6 +10559,8 @@ GetKubernetesBaremetalNodeProfileByMoid Read a 'kubernetes.BaremetalNodeProfile'
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param moid The unique Moid identifier of a resource instance.
 	@return ApiGetKubernetesBaremetalNodeProfileByMoidRequest
+
+Deprecated
 */
 func (a *KubernetesApiService) GetKubernetesBaremetalNodeProfileByMoid(ctx context.Context, moid string) ApiGetKubernetesBaremetalNodeProfileByMoidRequest {
 	return ApiGetKubernetesBaremetalNodeProfileByMoidRequest{
@@ -10564,6 +10573,8 @@ func (a *KubernetesApiService) GetKubernetesBaremetalNodeProfileByMoid(ctx conte
 // Execute executes the request
 //
 //	@return KubernetesBaremetalNodeProfile
+//
+// Deprecated
 func (a *KubernetesApiService) GetKubernetesBaremetalNodeProfileByMoidExecute(r ApiGetKubernetesBaremetalNodeProfileByMoidRequest) (*KubernetesBaremetalNodeProfile, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -10776,6 +10787,8 @@ GetKubernetesBaremetalNodeProfileList Read a 'kubernetes.BaremetalNodeProfile' r
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiGetKubernetesBaremetalNodeProfileListRequest
+
+Deprecated
 */
 func (a *KubernetesApiService) GetKubernetesBaremetalNodeProfileList(ctx context.Context) ApiGetKubernetesBaremetalNodeProfileListRequest {
 	return ApiGetKubernetesBaremetalNodeProfileListRequest{
@@ -10787,6 +10800,8 @@ func (a *KubernetesApiService) GetKubernetesBaremetalNodeProfileList(ctx context
 // Execute executes the request
 //
 //	@return KubernetesBaremetalNodeProfileResponse
+//
+// Deprecated
 func (a *KubernetesApiService) GetKubernetesBaremetalNodeProfileListExecute(r ApiGetKubernetesBaremetalNodeProfileListRequest) (*KubernetesBaremetalNodeProfileResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -22512,6 +22527,8 @@ PatchKubernetesBaremetalNodeProfile Update a 'kubernetes.BaremetalNodeProfile' r
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param moid The unique Moid identifier of a resource instance.
 	@return ApiPatchKubernetesBaremetalNodeProfileRequest
+
+Deprecated
 */
 func (a *KubernetesApiService) PatchKubernetesBaremetalNodeProfile(ctx context.Context, moid string) ApiPatchKubernetesBaremetalNodeProfileRequest {
 	return ApiPatchKubernetesBaremetalNodeProfileRequest{
@@ -22524,6 +22541,8 @@ func (a *KubernetesApiService) PatchKubernetesBaremetalNodeProfile(ctx context.C
 // Execute executes the request
 //
 //	@return KubernetesBaremetalNodeProfile
+//
+// Deprecated
 func (a *KubernetesApiService) PatchKubernetesBaremetalNodeProfileExecute(r ApiPatchKubernetesBaremetalNodeProfileRequest) (*KubernetesBaremetalNodeProfile, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -26457,6 +26476,8 @@ UpdateKubernetesBaremetalNodeProfile Update a 'kubernetes.BaremetalNodeProfile' 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param moid The unique Moid identifier of a resource instance.
 	@return ApiUpdateKubernetesBaremetalNodeProfileRequest
+
+Deprecated
 */
 func (a *KubernetesApiService) UpdateKubernetesBaremetalNodeProfile(ctx context.Context, moid string) ApiUpdateKubernetesBaremetalNodeProfileRequest {
 	return ApiUpdateKubernetesBaremetalNodeProfileRequest{
@@ -26469,6 +26490,8 @@ func (a *KubernetesApiService) UpdateKubernetesBaremetalNodeProfile(ctx context.
 // Execute executes the request
 //
 //	@return KubernetesBaremetalNodeProfile
+//
+// Deprecated
 func (a *KubernetesApiService) UpdateKubernetesBaremetalNodeProfileExecute(r ApiUpdateKubernetesBaremetalNodeProfileRequest) (*KubernetesBaremetalNodeProfile, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost

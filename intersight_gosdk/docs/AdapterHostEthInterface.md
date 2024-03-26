@@ -18,12 +18,20 @@ Name | Type | Description | Notes
 **PciAddr** | Pointer to **string** | The PCI address of the Host Ethernet Interface. | [optional] [readonly] 
 **PeerDn** | Pointer to **string** | The distinguished name of the peer endpoint connected to the Host Ethernet interface. | [optional] [readonly] 
 **PinGroupName** | Pointer to **string** | Name given for Lan PinGroup. | [optional] 
+**QinqEnabled** | Pointer to **bool** | Setting qinqEnabled to true if we have QinQ tagging enabled on the vNIC. | [optional] 
+**QinqVlan** | Pointer to **int64** | The VLAN ID for VIC QinQ (802.1Q) Tunneling. | [optional] [default to 2]
+**StandbyOperState** | Pointer to **string** | Standby Operational state of an Interface. | [optional] [readonly] 
+**StandbyVifId** | Pointer to **int64** | Identifier of the Standby virtual ethernet interface (Vethernet) on the networking component (e.g., Fabric Interconnect) for the corresponding Host Ethernet Interface (vNIC). | [optional] [readonly] 
+**VethAction** | Pointer to **string** | The action to be performed on the vethernet corresponding to the vNIC. * &#x60;None&#x60; - Default value for vif operation. * &#x60;ResetConnectivity&#x60; - Resets connectivity on both active and passive vif. * &#x60;ResetConnectivityActive&#x60; - Resets connectivity on the active vif. * &#x60;ResetConnectivityPassive&#x60; - Resets connectivity on the passive vif. * &#x60;Enable&#x60; - Enables the vif on both the FIs. * &#x60;Disable&#x60; - Disables the vif on both the FIs. * &#x60;EnableActive&#x60; - Enables the corresponding active vif. * &#x60;EnablePassive&#x60; - Enables the corresponding standby vif. * &#x60;DisableActive&#x60; - Disables the corresponding active vif. * &#x60;DisablePassive&#x60; - Disables the corresponding standby vif. | [optional] [default to "None"]
+**VifId** | Pointer to **int64** | Identifier of the virtual ethernet interface (Vethernet) on the networking component (e.g., Fabric Interconnect) for the corresponding Host Ethernet Interface (vNIC). | [optional] [readonly] 
 **VirtualizationPreference** | Pointer to **string** | Virtualization Preference of the Host Ethernet Interface indicating if virtualization is enabled or not. | [optional] [readonly] 
 **VnicDn** | Pointer to **string** | The Virtual Ethernet Interface DN connected to the Host Ethernet Interface. | [optional] [readonly] 
 **AdapterUnit** | Pointer to [**AdapterUnitRelationship**](AdapterUnitRelationship.md) |  | [optional] 
 **InventoryDeviceInfo** | Pointer to [**InventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
 **PinnedInterface** | Pointer to [**InventoryInterfaceRelationship**](InventoryInterfaceRelationship.md) |  | [optional] 
 **RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
+**StandbyVethernet** | Pointer to [**NetworkVethernetRelationship**](NetworkVethernetRelationship.md) |  | [optional] 
+**Vethernet** | Pointer to [**NetworkVethernetRelationship**](NetworkVethernetRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -394,6 +402,156 @@ SetPinGroupName sets PinGroupName field to given value.
 
 HasPinGroupName returns a boolean if a field has been set.
 
+### GetQinqEnabled
+
+`func (o *AdapterHostEthInterface) GetQinqEnabled() bool`
+
+GetQinqEnabled returns the QinqEnabled field if non-nil, zero value otherwise.
+
+### GetQinqEnabledOk
+
+`func (o *AdapterHostEthInterface) GetQinqEnabledOk() (*bool, bool)`
+
+GetQinqEnabledOk returns a tuple with the QinqEnabled field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetQinqEnabled
+
+`func (o *AdapterHostEthInterface) SetQinqEnabled(v bool)`
+
+SetQinqEnabled sets QinqEnabled field to given value.
+
+### HasQinqEnabled
+
+`func (o *AdapterHostEthInterface) HasQinqEnabled() bool`
+
+HasQinqEnabled returns a boolean if a field has been set.
+
+### GetQinqVlan
+
+`func (o *AdapterHostEthInterface) GetQinqVlan() int64`
+
+GetQinqVlan returns the QinqVlan field if non-nil, zero value otherwise.
+
+### GetQinqVlanOk
+
+`func (o *AdapterHostEthInterface) GetQinqVlanOk() (*int64, bool)`
+
+GetQinqVlanOk returns a tuple with the QinqVlan field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetQinqVlan
+
+`func (o *AdapterHostEthInterface) SetQinqVlan(v int64)`
+
+SetQinqVlan sets QinqVlan field to given value.
+
+### HasQinqVlan
+
+`func (o *AdapterHostEthInterface) HasQinqVlan() bool`
+
+HasQinqVlan returns a boolean if a field has been set.
+
+### GetStandbyOperState
+
+`func (o *AdapterHostEthInterface) GetStandbyOperState() string`
+
+GetStandbyOperState returns the StandbyOperState field if non-nil, zero value otherwise.
+
+### GetStandbyOperStateOk
+
+`func (o *AdapterHostEthInterface) GetStandbyOperStateOk() (*string, bool)`
+
+GetStandbyOperStateOk returns a tuple with the StandbyOperState field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStandbyOperState
+
+`func (o *AdapterHostEthInterface) SetStandbyOperState(v string)`
+
+SetStandbyOperState sets StandbyOperState field to given value.
+
+### HasStandbyOperState
+
+`func (o *AdapterHostEthInterface) HasStandbyOperState() bool`
+
+HasStandbyOperState returns a boolean if a field has been set.
+
+### GetStandbyVifId
+
+`func (o *AdapterHostEthInterface) GetStandbyVifId() int64`
+
+GetStandbyVifId returns the StandbyVifId field if non-nil, zero value otherwise.
+
+### GetStandbyVifIdOk
+
+`func (o *AdapterHostEthInterface) GetStandbyVifIdOk() (*int64, bool)`
+
+GetStandbyVifIdOk returns a tuple with the StandbyVifId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStandbyVifId
+
+`func (o *AdapterHostEthInterface) SetStandbyVifId(v int64)`
+
+SetStandbyVifId sets StandbyVifId field to given value.
+
+### HasStandbyVifId
+
+`func (o *AdapterHostEthInterface) HasStandbyVifId() bool`
+
+HasStandbyVifId returns a boolean if a field has been set.
+
+### GetVethAction
+
+`func (o *AdapterHostEthInterface) GetVethAction() string`
+
+GetVethAction returns the VethAction field if non-nil, zero value otherwise.
+
+### GetVethActionOk
+
+`func (o *AdapterHostEthInterface) GetVethActionOk() (*string, bool)`
+
+GetVethActionOk returns a tuple with the VethAction field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetVethAction
+
+`func (o *AdapterHostEthInterface) SetVethAction(v string)`
+
+SetVethAction sets VethAction field to given value.
+
+### HasVethAction
+
+`func (o *AdapterHostEthInterface) HasVethAction() bool`
+
+HasVethAction returns a boolean if a field has been set.
+
+### GetVifId
+
+`func (o *AdapterHostEthInterface) GetVifId() int64`
+
+GetVifId returns the VifId field if non-nil, zero value otherwise.
+
+### GetVifIdOk
+
+`func (o *AdapterHostEthInterface) GetVifIdOk() (*int64, bool)`
+
+GetVifIdOk returns a tuple with the VifId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetVifId
+
+`func (o *AdapterHostEthInterface) SetVifId(v int64)`
+
+SetVifId sets VifId field to given value.
+
+### HasVifId
+
+`func (o *AdapterHostEthInterface) HasVifId() bool`
+
+HasVifId returns a boolean if a field has been set.
+
 ### GetVirtualizationPreference
 
 `func (o *AdapterHostEthInterface) GetVirtualizationPreference() string`
@@ -543,6 +701,56 @@ SetRegisteredDevice sets RegisteredDevice field to given value.
 `func (o *AdapterHostEthInterface) HasRegisteredDevice() bool`
 
 HasRegisteredDevice returns a boolean if a field has been set.
+
+### GetStandbyVethernet
+
+`func (o *AdapterHostEthInterface) GetStandbyVethernet() NetworkVethernetRelationship`
+
+GetStandbyVethernet returns the StandbyVethernet field if non-nil, zero value otherwise.
+
+### GetStandbyVethernetOk
+
+`func (o *AdapterHostEthInterface) GetStandbyVethernetOk() (*NetworkVethernetRelationship, bool)`
+
+GetStandbyVethernetOk returns a tuple with the StandbyVethernet field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStandbyVethernet
+
+`func (o *AdapterHostEthInterface) SetStandbyVethernet(v NetworkVethernetRelationship)`
+
+SetStandbyVethernet sets StandbyVethernet field to given value.
+
+### HasStandbyVethernet
+
+`func (o *AdapterHostEthInterface) HasStandbyVethernet() bool`
+
+HasStandbyVethernet returns a boolean if a field has been set.
+
+### GetVethernet
+
+`func (o *AdapterHostEthInterface) GetVethernet() NetworkVethernetRelationship`
+
+GetVethernet returns the Vethernet field if non-nil, zero value otherwise.
+
+### GetVethernetOk
+
+`func (o *AdapterHostEthInterface) GetVethernetOk() (*NetworkVethernetRelationship, bool)`
+
+GetVethernetOk returns a tuple with the Vethernet field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetVethernet
+
+`func (o *AdapterHostEthInterface) SetVethernet(v NetworkVethernetRelationship)`
+
+SetVethernet sets Vethernet field to given value.
+
+### HasVethernet
+
+`func (o *AdapterHostEthInterface) HasVethernet() bool`
+
+HasVethernet returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

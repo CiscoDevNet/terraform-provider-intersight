@@ -20,11 +20,14 @@ The following arguments can be used to get data of already created objects in In
 * `created_time`:(string) Storage container's creation time. 
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
 * `export_policy_name`:(string) The name of the Export Policy. 
+* `flex_cache_endpoint_type`:(string) FlexCache endpoint type. The endpoint type can be the origin of a FlexCache volume, a FlexCache volume, or neither. 
+* `is_object_store`:(bool) Specifies whether the volume is provisioned for an object store server. 
 * `key`:(string) Unique identifier of a NetApp Volume across data center. 
 * `mod_time`:(string) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `name`:(string) Name of the storage container. 
 * `shared_scope`:(string) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
+* `snapshot_autodelete_enabled`:(bool) Specifies whether Snaphot copy autodelete is currently enabled on this volume. 
 * `snapshot_policy_name`:(string) The name of the Snapshot Policy. 
 * `snapshot_policy_uuid`:(string) The UUID of the Snapshot Policy. 
 * `snapshot_reserve_percent`:(int) The space that has been set aside as a reserve for Snapshot copy usage represented as a percent. 

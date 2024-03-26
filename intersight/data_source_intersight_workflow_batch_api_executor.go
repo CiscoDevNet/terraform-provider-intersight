@@ -416,7 +416,7 @@ func getWorkflowBatchApiExecutorSchema() map[string]*schema.Schema {
 			},
 		},
 		"retry_from_failed_api": {
-			Description: "When an execution of a nth API in the Batch fails,\nRetry from falied API flag indicates if the execution should start from the nth API or the first API during task retry.\nBy default the value is set to false.",
+			Description: "When an execution of a nth API in the Batch fails,\nRetry from failed API flag indicates if the execution should start from the nth API or the first API during task retry.\nBy default the value is set to false.",
 			Type:        schema.TypeBool,
 			Optional:    true,
 		},

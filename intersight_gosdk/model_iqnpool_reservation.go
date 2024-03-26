@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-11765
+API version: 1.0.11-14968
 Contact: intersight@cisco.com
 */
 
@@ -25,7 +25,13 @@ type IqnpoolReservation struct {
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
 	// IQN identity to be reserved.
-	Identity             *string                               `json:"Identity,omitempty"`
+	Identity *string `json:"Identity,omitempty"`
+	// Number of the IQN address. IQN Address is constructed as <prefix>:<suffix>:<number>.
+	IqnNumber *int64 `json:"IqnNumber,omitempty"`
+	// Prefix of the IQN address. IQN Address is constructed as <prefix>:<suffix>:<number>.
+	IqnPrefix *string `json:"IqnPrefix,omitempty"`
+	// Suffix of the IQN address. IQN Address is constructed as <prefix>:<suffix>:<number>.
+	IqnSuffix            *string                               `json:"IqnSuffix,omitempty"`
 	Block                *IqnpoolBlockRelationship             `json:"Block,omitempty"`
 	Organization         *OrganizationOrganizationRelationship `json:"Organization,omitempty"`
 	Pool                 *IqnpoolPoolRelationship              `json:"Pool,omitempty"`
@@ -139,6 +145,102 @@ func (o *IqnpoolReservation) HasIdentity() bool {
 // SetIdentity gets a reference to the given string and assigns it to the Identity field.
 func (o *IqnpoolReservation) SetIdentity(v string) {
 	o.Identity = &v
+}
+
+// GetIqnNumber returns the IqnNumber field value if set, zero value otherwise.
+func (o *IqnpoolReservation) GetIqnNumber() int64 {
+	if o == nil || o.IqnNumber == nil {
+		var ret int64
+		return ret
+	}
+	return *o.IqnNumber
+}
+
+// GetIqnNumberOk returns a tuple with the IqnNumber field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *IqnpoolReservation) GetIqnNumberOk() (*int64, bool) {
+	if o == nil || o.IqnNumber == nil {
+		return nil, false
+	}
+	return o.IqnNumber, true
+}
+
+// HasIqnNumber returns a boolean if a field has been set.
+func (o *IqnpoolReservation) HasIqnNumber() bool {
+	if o != nil && o.IqnNumber != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetIqnNumber gets a reference to the given int64 and assigns it to the IqnNumber field.
+func (o *IqnpoolReservation) SetIqnNumber(v int64) {
+	o.IqnNumber = &v
+}
+
+// GetIqnPrefix returns the IqnPrefix field value if set, zero value otherwise.
+func (o *IqnpoolReservation) GetIqnPrefix() string {
+	if o == nil || o.IqnPrefix == nil {
+		var ret string
+		return ret
+	}
+	return *o.IqnPrefix
+}
+
+// GetIqnPrefixOk returns a tuple with the IqnPrefix field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *IqnpoolReservation) GetIqnPrefixOk() (*string, bool) {
+	if o == nil || o.IqnPrefix == nil {
+		return nil, false
+	}
+	return o.IqnPrefix, true
+}
+
+// HasIqnPrefix returns a boolean if a field has been set.
+func (o *IqnpoolReservation) HasIqnPrefix() bool {
+	if o != nil && o.IqnPrefix != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetIqnPrefix gets a reference to the given string and assigns it to the IqnPrefix field.
+func (o *IqnpoolReservation) SetIqnPrefix(v string) {
+	o.IqnPrefix = &v
+}
+
+// GetIqnSuffix returns the IqnSuffix field value if set, zero value otherwise.
+func (o *IqnpoolReservation) GetIqnSuffix() string {
+	if o == nil || o.IqnSuffix == nil {
+		var ret string
+		return ret
+	}
+	return *o.IqnSuffix
+}
+
+// GetIqnSuffixOk returns a tuple with the IqnSuffix field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *IqnpoolReservation) GetIqnSuffixOk() (*string, bool) {
+	if o == nil || o.IqnSuffix == nil {
+		return nil, false
+	}
+	return o.IqnSuffix, true
+}
+
+// HasIqnSuffix returns a boolean if a field has been set.
+func (o *IqnpoolReservation) HasIqnSuffix() bool {
+	if o != nil && o.IqnSuffix != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetIqnSuffix gets a reference to the given string and assigns it to the IqnSuffix field.
+func (o *IqnpoolReservation) SetIqnSuffix(v string) {
+	o.IqnSuffix = &v
 }
 
 // GetBlock returns the Block field value if set, zero value otherwise.
@@ -320,6 +422,15 @@ func (o IqnpoolReservation) MarshalJSON() ([]byte, error) {
 	if o.Identity != nil {
 		toSerialize["Identity"] = o.Identity
 	}
+	if o.IqnNumber != nil {
+		toSerialize["IqnNumber"] = o.IqnNumber
+	}
+	if o.IqnPrefix != nil {
+		toSerialize["IqnPrefix"] = o.IqnPrefix
+	}
+	if o.IqnSuffix != nil {
+		toSerialize["IqnSuffix"] = o.IqnSuffix
+	}
 	if o.Block != nil {
 		toSerialize["Block"] = o.Block
 	}
@@ -350,7 +461,13 @@ func (o *IqnpoolReservation) UnmarshalJSON(bytes []byte) (err error) {
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 		ObjectType string `json:"ObjectType"`
 		// IQN identity to be reserved.
-		Identity     *string                               `json:"Identity,omitempty"`
+		Identity *string `json:"Identity,omitempty"`
+		// Number of the IQN address. IQN Address is constructed as <prefix>:<suffix>:<number>.
+		IqnNumber *int64 `json:"IqnNumber,omitempty"`
+		// Prefix of the IQN address. IQN Address is constructed as <prefix>:<suffix>:<number>.
+		IqnPrefix *string `json:"IqnPrefix,omitempty"`
+		// Suffix of the IQN address. IQN Address is constructed as <prefix>:<suffix>:<number>.
+		IqnSuffix    *string                               `json:"IqnSuffix,omitempty"`
 		Block        *IqnpoolBlockRelationship             `json:"Block,omitempty"`
 		Organization *OrganizationOrganizationRelationship `json:"Organization,omitempty"`
 		Pool         *IqnpoolPoolRelationship              `json:"Pool,omitempty"`
@@ -366,6 +483,9 @@ func (o *IqnpoolReservation) UnmarshalJSON(bytes []byte) (err error) {
 		varIqnpoolReservation.ClassId = varIqnpoolReservationWithoutEmbeddedStruct.ClassId
 		varIqnpoolReservation.ObjectType = varIqnpoolReservationWithoutEmbeddedStruct.ObjectType
 		varIqnpoolReservation.Identity = varIqnpoolReservationWithoutEmbeddedStruct.Identity
+		varIqnpoolReservation.IqnNumber = varIqnpoolReservationWithoutEmbeddedStruct.IqnNumber
+		varIqnpoolReservation.IqnPrefix = varIqnpoolReservationWithoutEmbeddedStruct.IqnPrefix
+		varIqnpoolReservation.IqnSuffix = varIqnpoolReservationWithoutEmbeddedStruct.IqnSuffix
 		varIqnpoolReservation.Block = varIqnpoolReservationWithoutEmbeddedStruct.Block
 		varIqnpoolReservation.Organization = varIqnpoolReservationWithoutEmbeddedStruct.Organization
 		varIqnpoolReservation.Pool = varIqnpoolReservationWithoutEmbeddedStruct.Pool
@@ -391,6 +511,9 @@ func (o *IqnpoolReservation) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Identity")
+		delete(additionalProperties, "IqnNumber")
+		delete(additionalProperties, "IqnPrefix")
+		delete(additionalProperties, "IqnSuffix")
 		delete(additionalProperties, "Block")
 		delete(additionalProperties, "Organization")
 		delete(additionalProperties, "Pool")

@@ -721,6 +721,12 @@ func resourceAssetDeviceContractNotification() *schema.Resource {
 				Optional:    true,
 				ForceNew:    true,
 			},
+			"last_date_of_support": {
+				Description: "The last date of hardware support for this device.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				ForceNew:    true,
+			},
 			"maintenance_purchase_order_number": {
 				Description: "Maintenance purchase order number for the Cisco device.",
 				Type:        schema.TypeString,
@@ -1816,6 +1822,11 @@ func resourceAssetDeviceContractNotificationCreate(c context.Context, d *schema.
 	if v, ok := d.GetOk("item_type"); ok {
 		x := (v.(string))
 		o.SetItemType(x)
+	}
+
+	if v, ok := d.GetOk("last_date_of_support"); ok {
+		x, _ := time.Parse(time.RFC1123, v.(string))
+		o.SetLastDateOfSupport(x)
 	}
 
 	if v, ok := d.GetOk("maintenance_purchase_order_number"); ok {

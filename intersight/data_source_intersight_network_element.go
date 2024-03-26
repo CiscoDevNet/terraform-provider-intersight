@@ -73,6 +73,26 @@ func getNetworkElementSchema() map[string]*schema.Schema {
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
+					"suppressed": {
+						Description: "The flag that indicates whether suppression is enabled or not in the entity.",
+						Type:        schema.TypeBool,
+						Optional:    true,
+					},
+					"suppressed_critical": {
+						Description: "The count of active suppressed alarms that have severity type Critical.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"suppressed_info": {
+						Description: "The count of active suppressed alarms that have severity type Info.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"suppressed_warning": {
+						Description: "The count of active suppressed alarms that have severity type Warning.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
 					"warning": {
 						Description: "The count of alarms that have severity type Warning.",
 						Type:        schema.TypeInt,
@@ -485,6 +505,11 @@ func getNetworkElementSchema() map[string]*schema.Schema {
 		"inband_vlan": {
 			Description: "The VLAN ID of the network Element inband management interface.",
 			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"inter_cluster_link_state": {
+			Description: "The intercluster link state of the switch.\n* `Unknown` - The operational state of the link is not known.\n* `Up` - The operational state of the link is up.\n* `Down` - The operational state of the link is down.\n* `Degraded` - The link is operational but degraded. This state is applicable to port channels when any one of the member links is down.",
+			Type:        schema.TypeString,
 			Optional:    true,
 		},
 		"interface_list": {
@@ -1179,6 +1204,11 @@ func getNetworkElementSchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"reserved_vlan_start_id": {
+			Description: "The reserved VLAN start ID of the Network Element. A block of 128 VLANs are reserved for internal use and cannot be used for carrying network traffic.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
 		"revision": {
 			Description: "This field displays the revised version of the associated component or hardware (if any).",
 			Type:        schema.TypeString,
@@ -1541,6 +1571,74 @@ func getNetworkElementSchema() map[string]*schema.Schema {
 					},
 					"version_type": {
 						Description: "Specifies type of version. Currently the only supported value is \"Configured\"\nthat is used to keep track of snapshots of policies and profiles that are intended\nto be configured to target endpoints.\n* `Modified` - Version created every time an object is modified.\n* `Configured` - Version created every time an object is configured to the service profile.\n* `Deployed` - Version created for objects related to a service profile when it is deployed.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"veths": {
+			Description: "An array of relationships to networkVethernet resources.",
+			Type:        schema.TypeList,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"vfcs": {
+			Description: "An array of relationships to networkVfc resources.",
+			Type:        schema.TypeList,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
@@ -2219,6 +2317,11 @@ func dataSourceNetworkElementRead(c context.Context, d *schema.ResourceData, met
 	if v, ok := d.GetOkExists("inband_vlan"); ok {
 		x := int64(v.(int))
 		o.SetInbandVlan(x)
+	}
+
+	if v, ok := d.GetOk("inter_cluster_link_state"); ok {
+		x := (v.(string))
+		o.SetInterClusterLinkState(x)
 	}
 
 	if v, ok := d.GetOk("interface_list"); ok {
@@ -3039,6 +3142,11 @@ func dataSourceNetworkElementRead(c context.Context, d *schema.ResourceData, met
 		}
 	}
 
+	if v, ok := d.GetOkExists("reserved_vlan_start_id"); ok {
+		x := int64(v.(int))
+		o.SetReservedVlanStartId(x)
+	}
+
 	if v, ok := d.GetOk("revision"); ok {
 		x := (v.(string))
 		o.SetRevision(x)
@@ -3412,6 +3520,86 @@ func dataSourceNetworkElementRead(c context.Context, d *schema.ResourceData, met
 		}
 	}
 
+	if v, ok := d.GetOk("veths"); ok {
+		x := make([]models.NetworkVethernetRelationship, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := &models.MoMoRef{}
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			x = append(x, models.MoMoRefAsNetworkVethernetRelationship(o))
+		}
+		o.SetVeths(x)
+	}
+
+	if v, ok := d.GetOk("vfcs"); ok {
+		x := make([]models.NetworkVfcRelationship, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := &models.MoMoRef{}
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			x = append(x, models.MoMoRefAsNetworkVfcRelationship(o))
+		}
+		o.SetVfcs(x)
+	}
+
 	if v, ok := d.GetOk("vpc_domain"); ok {
 		p := make([]models.NetworkVpcDomainRelationship, 0, 1)
 		s := v.([]interface{})
@@ -3655,6 +3843,7 @@ func dataSourceNetworkElementRead(c context.Context, d *schema.ResourceData, met
 				temp["inband_ip_gateway"] = (s.GetInbandIpGateway())
 				temp["inband_ip_mask"] = (s.GetInbandIpMask())
 				temp["inband_vlan"] = (s.GetInbandVlan())
+				temp["inter_cluster_link_state"] = (s.GetInterClusterLinkState())
 
 				temp["interface_list"] = flattenListNetworkInterfaceListRelationship(s.GetInterfaceList(), d)
 
@@ -3711,6 +3900,7 @@ func dataSourceNetworkElementRead(c context.Context, d *schema.ResourceData, met
 				temp["psus"] = flattenListEquipmentPsuRelationship(s.GetPsus(), d)
 
 				temp["registered_device"] = flattenMapAssetDeviceRegistrationRelationship(s.GetRegisteredDevice(), d)
+				temp["reserved_vlan_start_id"] = (s.GetReservedVlanStartId())
 				temp["revision"] = (s.GetRevision())
 				temp["rn"] = (s.GetRn())
 
@@ -3737,6 +3927,10 @@ func dataSourceNetworkElementRead(c context.Context, d *schema.ResourceData, met
 				temp["nr_version"] = (s.GetVersion())
 
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
+
+				temp["veths"] = flattenListNetworkVethernetRelationship(s.GetVeths(), d)
+
+				temp["vfcs"] = flattenListNetworkVfcRelationship(s.GetVfcs(), d)
 
 				temp["vpc_domain"] = flattenMapNetworkVpcDomainRelationship(s.GetVpcDomain(), d)
 

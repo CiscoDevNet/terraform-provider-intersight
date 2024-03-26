@@ -10,7 +10,6 @@ Name | Type | Description | Notes
 **Name** | Pointer to **string** | Virtual machine network bridge name. | [optional] 
 **Order** | Pointer to **int64** | Priority order of the disk. | [optional] 
 **Type** | Pointer to **string** | Disk type hdd or cdrom for a virtual machine. * &#x60;hdd&#x60; - Allows the virtual machine to mount disk from hard disk drive (hdd) image. * &#x60;cdrom&#x60; - Allows the virtual machine to mount disk from compact disk (cd) image. | [optional] [default to "hdd"]
-**VirtualDisk** | Pointer to [**NullableVirtualizationVirtualDiskConfig**](VirtualizationVirtualDiskConfig.md) |  | [optional] 
 **VirtualDiskReference** | Pointer to **string** | Name of the existing virtual disk to be attached to the Virtual Machine. | [optional] 
 
 ## Methods
@@ -172,41 +171,6 @@ SetType sets Type field to given value.
 
 HasType returns a boolean if a field has been set.
 
-### GetVirtualDisk
-
-`func (o *VirtualizationVirtualMachineDiskAllOf) GetVirtualDisk() VirtualizationVirtualDiskConfig`
-
-GetVirtualDisk returns the VirtualDisk field if non-nil, zero value otherwise.
-
-### GetVirtualDiskOk
-
-`func (o *VirtualizationVirtualMachineDiskAllOf) GetVirtualDiskOk() (*VirtualizationVirtualDiskConfig, bool)`
-
-GetVirtualDiskOk returns a tuple with the VirtualDisk field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetVirtualDisk
-
-`func (o *VirtualizationVirtualMachineDiskAllOf) SetVirtualDisk(v VirtualizationVirtualDiskConfig)`
-
-SetVirtualDisk sets VirtualDisk field to given value.
-
-### HasVirtualDisk
-
-`func (o *VirtualizationVirtualMachineDiskAllOf) HasVirtualDisk() bool`
-
-HasVirtualDisk returns a boolean if a field has been set.
-
-### SetVirtualDiskNil
-
-`func (o *VirtualizationVirtualMachineDiskAllOf) SetVirtualDiskNil(b bool)`
-
- SetVirtualDiskNil sets the value for VirtualDisk to be an explicit nil
-
-### UnsetVirtualDisk
-`func (o *VirtualizationVirtualMachineDiskAllOf) UnsetVirtualDisk()`
-
-UnsetVirtualDisk ensures that no value is present for VirtualDisk, not even an explicit nil
 ### GetVirtualDiskReference
 
 `func (o *VirtualizationVirtualMachineDiskAllOf) GetVirtualDiskReference() string`

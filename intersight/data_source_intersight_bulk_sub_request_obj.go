@@ -60,6 +60,41 @@ func getBulkSubRequestObjSchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"async_request": {
+			Description: "A reference to a bulkResult resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
 		"body": {
 			Description: "The content to be used for creating or updating a MO.\nThis field would need to conform to the schema published for the object type that is being operated upon.",
 			Type:        schema.TypeList,
@@ -389,6 +424,11 @@ func getBulkSubRequestObjSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"is_bulk_mo_op": {
+			Description: "For Async Bulk Mo Operations this flag will be set to true.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
 		"is_object_present": {
 			Description: "This flag indicates if an already existing object was found or not after execution of the action CheckObjectPresence.",
 			Type:        schema.TypeBool,
@@ -559,7 +599,7 @@ func getBulkSubRequestObjSchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"status": {
-			Description: "The status of the request.\n* `Pending` - Indicates that the request is yet to be processed.\n* `ObjPresenceCheckInProgress` - Indicates that the checking for object presence is in progress.\n* `ObjPresenceCheckInComplete` - Indicates that the request is being processed.\n* `ObjPresenceCheckFailed` - Indicates that the checking for object presence failed.\n* `Processing` - Indicates that the request is being processed.\n* `TimedOut` - Indicates that the request processing timed out.\n* `Completed` - Indicates that the request processing is complete.\n* `Skipped` - Indicates that the request was skipped.",
+			Description: "The status of the request.\n* `Pending` - Indicates that the request is yet to be processed.\n* `ObjPresenceCheckInProgress` - Indicates that the checking for object presence is in progress.\n* `ObjPresenceCheckInComplete` - Indicates that the request is being processed.\n* `ObjPresenceCheckFailed` - Indicates that the checking for object presence failed.\n* `Processing` - Indicates that the request is being processed.\n* `TimedOut` - Indicates that the request processing timed out.\n* `Failed` - Indicates that the request processing failed.\n* `Completed` - Indicates that the request processing is complete.\n* `Skipped` - Indicates that the request was skipped.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -795,6 +835,49 @@ func dataSourceBulkSubRequestObjRead(c context.Context, d *schema.ResourceData, 
 		o.SetAncestors(x)
 	}
 
+	if v, ok := d.GetOk("async_request"); ok {
+		p := make([]models.BulkResultRelationship, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.MoMoRef{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			p = append(p, models.MoMoRefAsBulkResultRelationship(o))
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetAsyncRequest(x)
+		}
+	}
+
 	if v, ok := d.GetOk("body"); ok {
 		p := make([]models.MoBaseMo, 0, 1)
 		s := v.([]interface{})
@@ -896,6 +979,11 @@ func dataSourceBulkSubRequestObjRead(c context.Context, d *schema.ResourceData, 
 	if v, ok := d.GetOk("execution_start_time"); ok {
 		x := (v.(string))
 		o.SetExecutionStartTime(x)
+	}
+
+	if v, ok := d.GetOkExists("is_bulk_mo_op"); ok {
+		x := (v.(bool))
+		o.SetIsBulkMoOp(x)
 	}
 
 	if v, ok := d.GetOkExists("is_object_present"); ok {
@@ -1268,6 +1356,8 @@ func dataSourceBulkSubRequestObjRead(c context.Context, d *schema.ResourceData, 
 
 				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)
 
+				temp["async_request"] = flattenMapBulkResultRelationship(s.GetAsyncRequest(), d)
+
 				temp["body"] = flattenMapMoBaseMo(s.GetBody(), d)
 				temp["body_string"] = (s.GetBodyString())
 				temp["class_id"] = (s.GetClassId())
@@ -1276,6 +1366,7 @@ func dataSourceBulkSubRequestObjRead(c context.Context, d *schema.ResourceData, 
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
 				temp["execution_completion_time"] = (s.GetExecutionCompletionTime())
 				temp["execution_start_time"] = (s.GetExecutionStartTime())
+				temp["is_bulk_mo_op"] = (s.GetIsBulkMoOp())
 				temp["is_object_present"] = (s.GetIsObjectPresent())
 
 				temp["mod_time"] = (s.GetModTime()).String()

@@ -254,6 +254,11 @@ func getIqnpoolBlockSchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"prefix": {
+			Description: "Prefix of the IQN pool. IQN Address is constructed as <prefix>:<suffix>:<number>.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"reservations": {
 			Description: "An array of relationships to iqnpoolReservation resources.",
 			Type:        schema.TypeList,
@@ -737,6 +742,11 @@ func dataSourceIqnpoolBlockRead(c context.Context, d *schema.ResourceData, meta 
 		}
 	}
 
+	if v, ok := d.GetOk("prefix"); ok {
+		x := (v.(string))
+		o.SetPrefix(x)
+	}
+
 	if v, ok := d.GetOk("reservations"); ok {
 		x := make([]models.IqnpoolReservationRelationship, 0)
 		s := v.([]interface{})
@@ -947,6 +957,7 @@ func dataSourceIqnpoolBlockRead(c context.Context, d *schema.ResourceData, meta 
 				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
 
 				temp["pool"] = flattenMapIqnpoolPoolRelationship(s.GetPool(), d)
+				temp["prefix"] = (s.GetPrefix())
 
 				temp["reservations"] = flattenListIqnpoolReservationRelationship(s.GetReservations(), d)
 				temp["shared_scope"] = (s.GetSharedScope())

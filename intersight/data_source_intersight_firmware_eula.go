@@ -17,7 +17,7 @@ import (
 func getFirmwareEulaSchema() map[string]*schema.Schema {
 	var schemaMap = make(map[string]*schema.Schema)
 	schemaMap = map[string]*schema.Schema{"accepted": {
-		Description: "EULA acceptance status for the account.",
+		Description: "Overall acceptance status for the account, both EULA and K9.",
 		Type:        schema.TypeBool,
 		Optional:    true,
 	},
@@ -106,7 +106,7 @@ func getFirmwareEulaSchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"content": {
-			Description: "EULA acceptance form content provided by cisco.com.",
+			Description: "Acceptance form content provided by cisco.com.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -117,6 +117,26 @@ func getFirmwareEulaSchema() map[string]*schema.Schema {
 		},
 		"domain_group_moid": {
 			Description: "The DomainGroup ID for this managed object.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"eula_accepted": {
+			Description: "EULA acceptance status for the account.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
+		"eula_content": {
+			Description: "EULA acceptance form content provided by cisco.com.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"k9_accepted": {
+			Description: "K9 acceptance status for the account.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
+		"k9_content": {
+			Description: "K9 acceptance form content provided by cisco.com.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -494,6 +514,26 @@ func dataSourceFirmwareEulaRead(c context.Context, d *schema.ResourceData, meta 
 		o.SetDomainGroupMoid(x)
 	}
 
+	if v, ok := d.GetOkExists("eula_accepted"); ok {
+		x := (v.(bool))
+		o.SetEulaAccepted(x)
+	}
+
+	if v, ok := d.GetOk("eula_content"); ok {
+		x := (v.(string))
+		o.SetEulaContent(x)
+	}
+
+	if v, ok := d.GetOkExists("k9_accepted"); ok {
+		x := (v.(bool))
+		o.SetK9Accepted(x)
+	}
+
+	if v, ok := d.GetOk("k9_content"); ok {
+		x := (v.(string))
+		o.SetK9Content(x)
+	}
+
 	if v, ok := d.GetOk("mod_time"); ok {
 		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetModTime(x)
@@ -762,6 +802,10 @@ func dataSourceFirmwareEulaRead(c context.Context, d *schema.ResourceData, meta 
 
 				temp["create_time"] = (s.GetCreateTime()).String()
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
+				temp["eula_accepted"] = (s.GetEulaAccepted())
+				temp["eula_content"] = (s.GetEulaContent())
+				temp["k9_accepted"] = (s.GetK9Accepted())
+				temp["k9_content"] = (s.GetK9Content())
 
 				temp["mod_time"] = (s.GetModTime()).String()
 				temp["moid"] = (s.GetMoid())

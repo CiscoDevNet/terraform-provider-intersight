@@ -14,9 +14,10 @@ Name | Type | Description | Notes
 **MacAddress** | Pointer to **string** | The MAC address that is assigned to the vNIC based on the MAC pool that has been assigned to the LAN Connectivity Policy. | [optional] [readonly] 
 **MacAddressType** | Pointer to **string** | Type of allocation selected to assign a MAC address for the vnic. * &#x60;POOL&#x60; - The user selects a pool from which the mac/wwn address will be leased for the Virtual Interface. * &#x60;STATIC&#x60; - The user assigns a static mac/wwn address for the Virtual Interface. | [optional] [default to "POOL"]
 **Name** | Pointer to **string** | Name of the virtual ethernet interface. | [optional] 
-**Order** | Pointer to **int64** | The order in which the virtual interface is brought up. The order assigned to an interface should be unique for all the Ethernet and Fibre-Channel interfaces on each PCI link on a VIC adapter. The maximum value of PCI order is limited by the number of virtual interfaces (Ethernet and Fibre-Channel) on each PCI link on a VIC adapter. All VIC adapters have a single PCI link except VIC 1385 which has two. | [optional] 
+**Order** | Pointer to **int64** | The order in which the virtual interface is brought up. The order assigned to an interface should be unique for all the Ethernet and Fibre-Channel interfaces on each PCI link on a VIC adapter. The order should start from zero with no overlaps. The maximum value of PCI order is limited by the number of virtual interfaces (Ethernet and Fibre-Channel) on each PCI link on a VIC adapter. All VIC adapters have a single PCI link except VIC 1340, VIC 1380 and VIC 1385 which have two. | [optional] 
 **PinGroupName** | Pointer to **string** | Pingroup name associated to vNIC for static pinning. LCP deploy will resolve pingroup name and fetches the correspoding uplink port/port channel to pin the vNIC traffic. | [optional] 
 **Placement** | Pointer to [**NullableVnicPlacementSettings**](VnicPlacementSettings.md) |  | [optional] 
+**SriovSettings** | Pointer to [**NullableVnicSriovSettings**](VnicSriovSettings.md) |  | [optional] 
 **StandbyVifId** | Pointer to **int64** | The Standby VIF Id is applicable for failover enabled vNICS. It should be the same as the channel number of the standby vethernet created on switch in order to set up the standby data path. | [optional] [readonly] 
 **StaticMacAddress** | Pointer to **string** | The MAC address must be in hexadecimal format xx:xx:xx:xx:xx:xx. To ensure uniqueness of MACs in the LAN fabric, you are strongly encouraged to use the following MAC prefix 00:25:B5:xx:xx:xx. | [optional] 
 **UsnicSettings** | Pointer to [**NullableVnicUsnicSettings**](VnicUsnicSettings.md) |  | [optional] 
@@ -400,6 +401,41 @@ HasPlacement returns a boolean if a field has been set.
 `func (o *VnicEthIf) UnsetPlacement()`
 
 UnsetPlacement ensures that no value is present for Placement, not even an explicit nil
+### GetSriovSettings
+
+`func (o *VnicEthIf) GetSriovSettings() VnicSriovSettings`
+
+GetSriovSettings returns the SriovSettings field if non-nil, zero value otherwise.
+
+### GetSriovSettingsOk
+
+`func (o *VnicEthIf) GetSriovSettingsOk() (*VnicSriovSettings, bool)`
+
+GetSriovSettingsOk returns a tuple with the SriovSettings field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSriovSettings
+
+`func (o *VnicEthIf) SetSriovSettings(v VnicSriovSettings)`
+
+SetSriovSettings sets SriovSettings field to given value.
+
+### HasSriovSettings
+
+`func (o *VnicEthIf) HasSriovSettings() bool`
+
+HasSriovSettings returns a boolean if a field has been set.
+
+### SetSriovSettingsNil
+
+`func (o *VnicEthIf) SetSriovSettingsNil(b bool)`
+
+ SetSriovSettingsNil sets the value for SriovSettings to be an explicit nil
+
+### UnsetSriovSettings
+`func (o *VnicEthIf) UnsetSriovSettings()`
+
+UnsetSriovSettings ensures that no value is present for SriovSettings, not even an explicit nil
 ### GetStandbyVifId
 
 `func (o *VnicEthIf) GetStandbyVifId() int64`

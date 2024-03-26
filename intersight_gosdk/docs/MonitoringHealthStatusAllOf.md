@@ -7,9 +7,9 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "monitoring.HealthStatus"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "monitoring.HealthStatus"]
 **CategoryStatus** | Pointer to [**[]MonitoringCategoryStatus**](MonitoringCategoryStatus.md) |  | [optional] 
-**HealthDataSchemaVersion** | Pointer to **string** | Version of compliant health data API schema. | [optional] 
-**Source** | Pointer to **string** | Set as &#39;Intersight&#39;. Especially useful in cases such as when this API is consumed by an external dashboard. This field allows such dashboards to aggregate health status across multiple  sources (Intersight, Meraki etc.). | [optional] 
-**StatusTimeStamp** | Pointer to **time.Time** | Time stamp when the status was generated. The status reported by this API may lag the real time status by up to 5 minutes. | [optional] 
+**HealthDataSchemaVersion** | Pointer to **string** | Version of compliant health data API schema. | [optional] [readonly] 
+**Source** | Pointer to **string** | Set as &#39;Intersight&#39;. Especially useful in cases such as when this API is consumed by an external dashboard. This field allows such dashboards to aggregate health status across multiple  sources (Intersight, Meraki etc.). | [optional] [readonly] 
+**StatusTimeStamp** | Pointer to **time.Time** | Time stamp when the status was generated. The status reported by this API may lag the real time status by up to 5 minutes. | [optional] [readonly] 
 **Organization** | Pointer to [**OrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
 
 ## Methods

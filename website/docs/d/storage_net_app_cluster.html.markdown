@@ -17,9 +17,12 @@ The following arguments can be used to get data of already created objects in In
 * `account_moid`:(string) The Account ID for this managed object. 
 * `cluster_health_status`:(string) The health status of the cluster. Possible states are ok, ok-with-suppressed, degraded, and unreachable.* `Unreachable` - Cluster status is unreachable.* `OK` - Cluster status is either ok or ok-with-suppressed.* `Degraded` - Cluster status is degraded. 
 * `create_time`:(string) The time when this managed object was created. 
+* `default_admin_locked`:(bool) Indicates whether the default admin user is locked out. 
 * `device_mo_id`:(string) The database identifier of the registered device of an object. 
 * `dn`:(string) The Distinguished Name unambiguously identifies an object in the system. 
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
+* `fips_compliant`:(bool) Indicates whether or not the software FIPS mode is enabled on the cluster. 
+* `insecure_ciphers`:(int) Number of SVMs on the cluster that use insecure ciphers. 
 * `is_upgraded`:(bool) This field indicates the compute status of the catalog values for the associated component or hardware. 
 * `key`:(string) Unique identifier of NetApp Cluster across data center. 
 * `location`:(string) Location of the storage controller. 

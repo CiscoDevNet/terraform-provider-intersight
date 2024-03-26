@@ -180,6 +180,11 @@ func getProcessorUnitSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"description": {
+			Description: "This field displays the description of the processor.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"device_mo_id": {
 			Description: "The database identifier of the registered device of an object.",
 			Type:        schema.TypeString,
@@ -229,6 +234,11 @@ func getProcessorUnitSchema() map[string]*schema.Schema {
 					},
 				},
 			},
+		},
+		"is_platform_supported": {
+			Description: "This field indicates whether the processor is supported on the server or not.",
+			Type:        schema.TypeBool,
+			Optional:    true,
 		},
 		"is_upgraded": {
 			Description: "This field indicates the compute status of the catalog values for the associated component or hardware.",
@@ -365,6 +375,11 @@ func getProcessorUnitSchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"part_number": {
+			Description: "This field displays the part number of the of the processor.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"permission_resources": {
 			Description: "An array of relationships to moBaseMo resources.",
 			Type:        schema.TypeList,
@@ -398,6 +413,11 @@ func getProcessorUnitSchema() map[string]*schema.Schema {
 					},
 				},
 			},
+		},
+		"pid": {
+			Description: "This field displays the product ID of the processor.",
+			Type:        schema.TypeString,
+			Optional:    true,
 		},
 		"presence": {
 			Description: "This field indicates the presence (equipped) or absence (absent) of the associated component or hardware.",
@@ -880,6 +900,11 @@ func dataSourceProcessorUnitRead(c context.Context, d *schema.ResourceData, meta
 		o.SetCreateTime(x)
 	}
 
+	if v, ok := d.GetOk("description"); ok {
+		x := (v.(string))
+		o.SetDescription(x)
+	}
+
 	if v, ok := d.GetOk("device_mo_id"); ok {
 		x := (v.(string))
 		o.SetDeviceMoId(x)
@@ -936,6 +961,11 @@ func dataSourceProcessorUnitRead(c context.Context, d *schema.ResourceData, meta
 			x := p[0]
 			o.SetInventoryDeviceInfo(x)
 		}
+	}
+
+	if v, ok := d.GetOkExists("is_platform_supported"); ok {
+		x := (v.(bool))
+		o.SetIsPlatformSupported(x)
 	}
 
 	if v, ok := d.GetOkExists("is_upgraded"); ok {
@@ -1101,6 +1131,11 @@ func dataSourceProcessorUnitRead(c context.Context, d *schema.ResourceData, meta
 		}
 	}
 
+	if v, ok := d.GetOk("part_number"); ok {
+		x := (v.(string))
+		o.SetPartNumber(x)
+	}
+
 	if v, ok := d.GetOk("permission_resources"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
@@ -1139,6 +1174,11 @@ func dataSourceProcessorUnitRead(c context.Context, d *schema.ResourceData, meta
 			x = append(x, models.MoMoRefAsMoBaseMoRelationship(o))
 		}
 		o.SetPermissionResources(x)
+	}
+
+	if v, ok := d.GetOk("pid"); ok {
+		x := (v.(string))
+		o.SetPid(x)
 	}
 
 	if v, ok := d.GetOk("presence"); ok {
@@ -1438,11 +1478,13 @@ func dataSourceProcessorUnitRead(c context.Context, d *schema.ResourceData, meta
 				temp["compute_rack_unit"] = flattenMapComputeRackUnitRelationship(s.GetComputeRackUnit(), d)
 
 				temp["create_time"] = (s.GetCreateTime()).String()
+				temp["description"] = (s.GetDescription())
 				temp["device_mo_id"] = (s.GetDeviceMoId())
 				temp["dn"] = (s.GetDn())
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
 
 				temp["inventory_device_info"] = flattenMapInventoryDeviceInfoRelationship(s.GetInventoryDeviceInfo(), d)
+				temp["is_platform_supported"] = (s.GetIsPlatformSupported())
 				temp["is_upgraded"] = (s.GetIsUpgraded())
 
 				temp["mod_time"] = (s.GetModTime()).String()
@@ -1461,8 +1503,10 @@ func dataSourceProcessorUnitRead(c context.Context, d *schema.ResourceData, meta
 				temp["owners"] = (s.GetOwners())
 
 				temp["parent"] = flattenMapMoBaseMoRelationship(s.GetParent(), d)
+				temp["part_number"] = (s.GetPartNumber())
 
 				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
+				temp["pid"] = (s.GetPid())
 				temp["presence"] = (s.GetPresence())
 
 				temp["previous_fru"] = flattenMapEquipmentFruRelationship(s.GetPreviousFru(), d)

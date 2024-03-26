@@ -105,6 +105,11 @@ func getStorageNetAppClusterSnapMirrorPolicySchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"copy_all_source_snapshots": {
+			Description: "Specifies whether all source Snapshot copies should be copied to the destination on a transfer rather than specifying specific retentions. It is applicable only to async policies.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
 		"create_time": {
 			Description: "The time when this managed object was created.",
 			Type:        schema.TypeString,
@@ -509,6 +514,11 @@ func dataSourceStorageNetAppClusterSnapMirrorPolicyRead(c context.Context, d *sc
 		o.SetComment(x)
 	}
 
+	if v, ok := d.GetOkExists("copy_all_source_snapshots"); ok {
+		x := (v.(bool))
+		o.SetCopyAllSourceSnapshots(x)
+	}
+
 	if v, ok := d.GetOk("create_time"); ok {
 		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetCreateTime(x)
@@ -818,6 +828,7 @@ func dataSourceStorageNetAppClusterSnapMirrorPolicyRead(c context.Context, d *sc
 				temp["array"] = flattenMapStorageNetAppClusterRelationship(s.GetArray(), d)
 				temp["class_id"] = (s.GetClassId())
 				temp["comment"] = (s.GetComment())
+				temp["copy_all_source_snapshots"] = (s.GetCopyAllSourceSnapshots())
 
 				temp["create_time"] = (s.GetCreateTime()).String()
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())

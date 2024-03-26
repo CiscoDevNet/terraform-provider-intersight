@@ -7,7 +7,7 @@ description: |-
         The copy of the child objects of the resource is not supported currently, so the child references will not be copied in the clone.
         The MO to be cloned should be specified as an MoRef object in the Sources.
         The Targets array should contain n JSON documents each compliant to RFC 7386.
-        For each target mo to be created, the user can specify the following -
+        For each target MO to be created, the user can specify the following -
         - new values for the identity properties, if applicable
         - new values for specific properties or references of the source MO which need to be overridden in the cloned object.
 
@@ -18,7 +18,7 @@ The MO Cloner interface facilitates making n number of shallow copies of any res
 The copy of the child objects of the resource is not supported currently, so the child references will not be copied in the clone.
 The MO to be cloned should be specified as an MoRef object in the "Sources".
 The "Targets" array should contain n JSON documents each compliant to RFC 7386. 
-For each target mo to be created, the user can specify the following -
+For each target MO to be created, the user can specify the following -
 - new values for the identity properties, if applicable
 - new values for specific properties or references of the source MO which need to be overridden in the cloned object.
 ## Argument Reference
@@ -31,6 +31,8 @@ This complex property has following sub-properties:
   + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
 * `create_time`:(string)(ReadOnly) The time when this managed object was created. 
 * `domain_group_moid`:(string)(ReadOnly) The DomainGroup ID for this managed object. 
+* `exclude_properties`:
+                (Array of schema.TypeString) -
 * `mod_time`:(string)(ReadOnly) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `organization`:(HashMap) - A reference to a organizationOrganization resource.When the $expand query parameter is specified, the referenced resource is returned inline. 

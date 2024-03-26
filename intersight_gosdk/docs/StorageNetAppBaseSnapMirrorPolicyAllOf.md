@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
 **Comment** | Pointer to **string** | Comment associated with the policy. | [optional] [readonly] 
+**CopyAllSourceSnapshots** | Pointer to **bool** | Specifies whether all source Snapshot copies should be copied to the destination on a transfer rather than specifying specific retentions. It is applicable only to async policies. | [optional] [readonly] 
 **Name** | Pointer to **string** | Name of the NetApp SnapMirror policy. | [optional] [readonly] 
 **Scope** | Pointer to **string** | Identifies whether the SnapMirror policy is owned by the storage virtual machine or the cluster. | [optional] [readonly] 
 **SyncType** | Pointer to **string** | SnapMirror policy sync_type is either sync, strict_sync, or automated_failover. Property is applicable only to the policies of type \&quot;sync\&quot;. | [optional] [readonly] 
@@ -98,6 +99,31 @@ SetComment sets Comment field to given value.
 `func (o *StorageNetAppBaseSnapMirrorPolicyAllOf) HasComment() bool`
 
 HasComment returns a boolean if a field has been set.
+
+### GetCopyAllSourceSnapshots
+
+`func (o *StorageNetAppBaseSnapMirrorPolicyAllOf) GetCopyAllSourceSnapshots() bool`
+
+GetCopyAllSourceSnapshots returns the CopyAllSourceSnapshots field if non-nil, zero value otherwise.
+
+### GetCopyAllSourceSnapshotsOk
+
+`func (o *StorageNetAppBaseSnapMirrorPolicyAllOf) GetCopyAllSourceSnapshotsOk() (*bool, bool)`
+
+GetCopyAllSourceSnapshotsOk returns a tuple with the CopyAllSourceSnapshots field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCopyAllSourceSnapshots
+
+`func (o *StorageNetAppBaseSnapMirrorPolicyAllOf) SetCopyAllSourceSnapshots(v bool)`
+
+SetCopyAllSourceSnapshots sets CopyAllSourceSnapshots field to given value.
+
+### HasCopyAllSourceSnapshots
+
+`func (o *StorageNetAppBaseSnapMirrorPolicyAllOf) HasCopyAllSourceSnapshots() bool`
+
+HasCopyAllSourceSnapshots returns a boolean if a field has been set.
 
 ### GetName
 

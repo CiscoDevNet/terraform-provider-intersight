@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **AvailableMemory** | Pointer to **int64** | The amount of memory available on the server. | [optional] [readonly] 
 **BiosPostComplete** | Pointer to **bool** | The BIOS POST completion status of the server. | [optional] 
 **FaultSummary** | Pointer to **int64** | The fault summary for the server. | [optional] 
+**FrontPanelLockState** | Pointer to **string** | The actual front panel state of the server. * &#x60;None&#x60; - Front Panel of the server is set to None state. It is required so that the next frontPanelLockState operation can be triggered. * &#x60;Lock&#x60; - Front Panel of the server is set to Locked state. * &#x60;Unlock&#x60; - Front Panel of the server is set to Unlocked state. | [optional] [default to "None"]
 **HardwareUuid** | Pointer to **string** | The universally unique hardware identity of the server provided by the manufacturer. | [optional] 
 **KvmIpAddresses** | Pointer to [**[]ComputeIpAddress**](ComputeIpAddress.md) |  | [optional] 
 **KvmServerStateEnabled** | Pointer to **bool** | The KVM server state of the server. | [optional] [readonly] 
@@ -271,6 +272,31 @@ SetFaultSummary sets FaultSummary field to given value.
 `func (o *ComputePhysicalAllOf) HasFaultSummary() bool`
 
 HasFaultSummary returns a boolean if a field has been set.
+
+### GetFrontPanelLockState
+
+`func (o *ComputePhysicalAllOf) GetFrontPanelLockState() string`
+
+GetFrontPanelLockState returns the FrontPanelLockState field if non-nil, zero value otherwise.
+
+### GetFrontPanelLockStateOk
+
+`func (o *ComputePhysicalAllOf) GetFrontPanelLockStateOk() (*string, bool)`
+
+GetFrontPanelLockStateOk returns a tuple with the FrontPanelLockState field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFrontPanelLockState
+
+`func (o *ComputePhysicalAllOf) SetFrontPanelLockState(v string)`
+
+SetFrontPanelLockState sets FrontPanelLockState field to given value.
+
+### HasFrontPanelLockState
+
+`func (o *ComputePhysicalAllOf) HasFrontPanelLockState() bool`
+
+HasFrontPanelLockState returns a boolean if a field has been set.
 
 ### GetHardwareUuid
 

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-11765
+API version: 1.0.11-14968
 Contact: intersight@cisco.com
 */
 
@@ -32,10 +32,14 @@ type ApplianceBackupPolicy struct {
 	// Backup mode of the appliance. Automatic backups of the appliance are not initiated if this property is set to 'true' and the backup schedule field is ignored.
 	ManualBackup *bool `json:"ManualBackup,omitempty"`
 	// Password to authenticate the file server.
-	Password             *string                 `json:"Password,omitempty"`
-	Schedule             NullableOnpremSchedule  `json:"Schedule,omitempty"`
-	Account              *IamAccountRelationship `json:"Account,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Password *string `json:"Password,omitempty"`
+	// The number of backups before earliest backup is overwritten. Requires cleanup policy to be enabled.
+	RetentionCount *int64 `json:"RetentionCount,omitempty"`
+	// If backup rotate policy is set, older backups will automatically be overwritten. The number of backups before overwriting is defined by the retentionCount property.
+	RetentionPolicyEnabled *bool                   `json:"RetentionPolicyEnabled,omitempty"`
+	Schedule               NullableOnpremSchedule  `json:"Schedule,omitempty"`
+	Account                *IamAccountRelationship `json:"Account,omitempty"`
+	AdditionalProperties   map[string]interface{}
 }
 
 type _ApplianceBackupPolicy ApplianceBackupPolicy
@@ -50,6 +54,8 @@ func NewApplianceBackupPolicy(classId string, objectType string) *ApplianceBacku
 	this.ObjectType = objectType
 	var protocol string = "scp"
 	this.Protocol = &protocol
+	var retentionCount int64 = 1
+	this.RetentionCount = &retentionCount
 	return &this
 }
 
@@ -62,6 +68,8 @@ func NewApplianceBackupPolicyWithDefaults() *ApplianceBackupPolicy {
 	this.ClassId = classId
 	var objectType string = "appliance.BackupPolicy"
 	this.ObjectType = objectType
+	var retentionCount int64 = 1
+	this.RetentionCount = &retentionCount
 	return &this
 }
 
@@ -241,6 +249,70 @@ func (o *ApplianceBackupPolicy) SetPassword(v string) {
 	o.Password = &v
 }
 
+// GetRetentionCount returns the RetentionCount field value if set, zero value otherwise.
+func (o *ApplianceBackupPolicy) GetRetentionCount() int64 {
+	if o == nil || o.RetentionCount == nil {
+		var ret int64
+		return ret
+	}
+	return *o.RetentionCount
+}
+
+// GetRetentionCountOk returns a tuple with the RetentionCount field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ApplianceBackupPolicy) GetRetentionCountOk() (*int64, bool) {
+	if o == nil || o.RetentionCount == nil {
+		return nil, false
+	}
+	return o.RetentionCount, true
+}
+
+// HasRetentionCount returns a boolean if a field has been set.
+func (o *ApplianceBackupPolicy) HasRetentionCount() bool {
+	if o != nil && o.RetentionCount != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetRetentionCount gets a reference to the given int64 and assigns it to the RetentionCount field.
+func (o *ApplianceBackupPolicy) SetRetentionCount(v int64) {
+	o.RetentionCount = &v
+}
+
+// GetRetentionPolicyEnabled returns the RetentionPolicyEnabled field value if set, zero value otherwise.
+func (o *ApplianceBackupPolicy) GetRetentionPolicyEnabled() bool {
+	if o == nil || o.RetentionPolicyEnabled == nil {
+		var ret bool
+		return ret
+	}
+	return *o.RetentionPolicyEnabled
+}
+
+// GetRetentionPolicyEnabledOk returns a tuple with the RetentionPolicyEnabled field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ApplianceBackupPolicy) GetRetentionPolicyEnabledOk() (*bool, bool) {
+	if o == nil || o.RetentionPolicyEnabled == nil {
+		return nil, false
+	}
+	return o.RetentionPolicyEnabled, true
+}
+
+// HasRetentionPolicyEnabled returns a boolean if a field has been set.
+func (o *ApplianceBackupPolicy) HasRetentionPolicyEnabled() bool {
+	if o != nil && o.RetentionPolicyEnabled != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetRetentionPolicyEnabled gets a reference to the given bool and assigns it to the RetentionPolicyEnabled field.
+func (o *ApplianceBackupPolicy) SetRetentionPolicyEnabled(v bool) {
+	o.RetentionPolicyEnabled = &v
+}
+
 // GetSchedule returns the Schedule field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ApplianceBackupPolicy) GetSchedule() OnpremSchedule {
 	if o == nil || o.Schedule.Get() == nil {
@@ -344,6 +416,12 @@ func (o ApplianceBackupPolicy) MarshalJSON() ([]byte, error) {
 	if o.Password != nil {
 		toSerialize["Password"] = o.Password
 	}
+	if o.RetentionCount != nil {
+		toSerialize["RetentionCount"] = o.RetentionCount
+	}
+	if o.RetentionPolicyEnabled != nil {
+		toSerialize["RetentionPolicyEnabled"] = o.RetentionPolicyEnabled
+	}
 	if o.Schedule.IsSet() {
 		toSerialize["Schedule"] = o.Schedule.Get()
 	}
@@ -371,9 +449,13 @@ func (o *ApplianceBackupPolicy) UnmarshalJSON(bytes []byte) (err error) {
 		// Backup mode of the appliance. Automatic backups of the appliance are not initiated if this property is set to 'true' and the backup schedule field is ignored.
 		ManualBackup *bool `json:"ManualBackup,omitempty"`
 		// Password to authenticate the file server.
-		Password *string                 `json:"Password,omitempty"`
-		Schedule NullableOnpremSchedule  `json:"Schedule,omitempty"`
-		Account  *IamAccountRelationship `json:"Account,omitempty"`
+		Password *string `json:"Password,omitempty"`
+		// The number of backups before earliest backup is overwritten. Requires cleanup policy to be enabled.
+		RetentionCount *int64 `json:"RetentionCount,omitempty"`
+		// If backup rotate policy is set, older backups will automatically be overwritten. The number of backups before overwriting is defined by the retentionCount property.
+		RetentionPolicyEnabled *bool                   `json:"RetentionPolicyEnabled,omitempty"`
+		Schedule               NullableOnpremSchedule  `json:"Schedule,omitempty"`
+		Account                *IamAccountRelationship `json:"Account,omitempty"`
 	}
 
 	varApplianceBackupPolicyWithoutEmbeddedStruct := ApplianceBackupPolicyWithoutEmbeddedStruct{}
@@ -387,6 +469,8 @@ func (o *ApplianceBackupPolicy) UnmarshalJSON(bytes []byte) (err error) {
 		varApplianceBackupPolicy.IsPasswordSet = varApplianceBackupPolicyWithoutEmbeddedStruct.IsPasswordSet
 		varApplianceBackupPolicy.ManualBackup = varApplianceBackupPolicyWithoutEmbeddedStruct.ManualBackup
 		varApplianceBackupPolicy.Password = varApplianceBackupPolicyWithoutEmbeddedStruct.Password
+		varApplianceBackupPolicy.RetentionCount = varApplianceBackupPolicyWithoutEmbeddedStruct.RetentionCount
+		varApplianceBackupPolicy.RetentionPolicyEnabled = varApplianceBackupPolicyWithoutEmbeddedStruct.RetentionPolicyEnabled
 		varApplianceBackupPolicy.Schedule = varApplianceBackupPolicyWithoutEmbeddedStruct.Schedule
 		varApplianceBackupPolicy.Account = varApplianceBackupPolicyWithoutEmbeddedStruct.Account
 		*o = ApplianceBackupPolicy(varApplianceBackupPolicy)
@@ -412,6 +496,8 @@ func (o *ApplianceBackupPolicy) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "IsPasswordSet")
 		delete(additionalProperties, "ManualBackup")
 		delete(additionalProperties, "Password")
+		delete(additionalProperties, "RetentionCount")
+		delete(additionalProperties, "RetentionPolicyEnabled")
 		delete(additionalProperties, "Schedule")
 		delete(additionalProperties, "Account")
 

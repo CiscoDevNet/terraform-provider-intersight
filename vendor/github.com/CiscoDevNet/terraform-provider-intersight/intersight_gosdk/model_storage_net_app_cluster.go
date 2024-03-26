@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-11765
+API version: 1.0.11-14968
 Contact: intersight@cisco.com
 */
 
@@ -28,8 +28,14 @@ type StorageNetAppCluster struct {
 	AvgPerformanceMetrics *StorageNetAppPerformanceMetricsAverage       `json:"AvgPerformanceMetrics,omitempty"`
 	ClusterEfficiency     NullableStorageNetAppStorageClusterEfficiency `json:"ClusterEfficiency,omitempty"`
 	// The health status of the cluster. Possible states are ok, ok-with-suppressed, degraded, and unreachable. * `Unreachable` - Cluster status is unreachable. * `OK` - Cluster status is either ok or ok-with-suppressed. * `Degraded` - Cluster status is degraded.
-	ClusterHealthStatus *string  `json:"ClusterHealthStatus,omitempty"`
-	DnsDomains          []string `json:"DnsDomains,omitempty"`
+	ClusterHealthStatus *string `json:"ClusterHealthStatus,omitempty"`
+	// Indicates whether the default admin user is locked out.
+	DefaultAdminLocked *bool    `json:"DefaultAdminLocked,omitempty"`
+	DnsDomains         []string `json:"DnsDomains,omitempty"`
+	// Indicates whether or not the software FIPS mode is enabled on the cluster.
+	FipsCompliant *bool `json:"FipsCompliant,omitempty"`
+	// Number of SVMs on the cluster that use insecure ciphers.
+	InsecureCiphers *int64 `json:"InsecureCiphers,omitempty"`
 	// Unique identifier of NetApp Cluster across data center.
 	Key *string `json:"Key,omitempty"`
 	// Location of the storage controller.
@@ -276,6 +282,38 @@ func (o *StorageNetAppCluster) SetClusterHealthStatus(v string) {
 	o.ClusterHealthStatus = &v
 }
 
+// GetDefaultAdminLocked returns the DefaultAdminLocked field value if set, zero value otherwise.
+func (o *StorageNetAppCluster) GetDefaultAdminLocked() bool {
+	if o == nil || o.DefaultAdminLocked == nil {
+		var ret bool
+		return ret
+	}
+	return *o.DefaultAdminLocked
+}
+
+// GetDefaultAdminLockedOk returns a tuple with the DefaultAdminLocked field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *StorageNetAppCluster) GetDefaultAdminLockedOk() (*bool, bool) {
+	if o == nil || o.DefaultAdminLocked == nil {
+		return nil, false
+	}
+	return o.DefaultAdminLocked, true
+}
+
+// HasDefaultAdminLocked returns a boolean if a field has been set.
+func (o *StorageNetAppCluster) HasDefaultAdminLocked() bool {
+	if o != nil && o.DefaultAdminLocked != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetDefaultAdminLocked gets a reference to the given bool and assigns it to the DefaultAdminLocked field.
+func (o *StorageNetAppCluster) SetDefaultAdminLocked(v bool) {
+	o.DefaultAdminLocked = &v
+}
+
 // GetDnsDomains returns the DnsDomains field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *StorageNetAppCluster) GetDnsDomains() []string {
 	if o == nil {
@@ -307,6 +345,70 @@ func (o *StorageNetAppCluster) HasDnsDomains() bool {
 // SetDnsDomains gets a reference to the given []string and assigns it to the DnsDomains field.
 func (o *StorageNetAppCluster) SetDnsDomains(v []string) {
 	o.DnsDomains = v
+}
+
+// GetFipsCompliant returns the FipsCompliant field value if set, zero value otherwise.
+func (o *StorageNetAppCluster) GetFipsCompliant() bool {
+	if o == nil || o.FipsCompliant == nil {
+		var ret bool
+		return ret
+	}
+	return *o.FipsCompliant
+}
+
+// GetFipsCompliantOk returns a tuple with the FipsCompliant field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *StorageNetAppCluster) GetFipsCompliantOk() (*bool, bool) {
+	if o == nil || o.FipsCompliant == nil {
+		return nil, false
+	}
+	return o.FipsCompliant, true
+}
+
+// HasFipsCompliant returns a boolean if a field has been set.
+func (o *StorageNetAppCluster) HasFipsCompliant() bool {
+	if o != nil && o.FipsCompliant != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetFipsCompliant gets a reference to the given bool and assigns it to the FipsCompliant field.
+func (o *StorageNetAppCluster) SetFipsCompliant(v bool) {
+	o.FipsCompliant = &v
+}
+
+// GetInsecureCiphers returns the InsecureCiphers field value if set, zero value otherwise.
+func (o *StorageNetAppCluster) GetInsecureCiphers() int64 {
+	if o == nil || o.InsecureCiphers == nil {
+		var ret int64
+		return ret
+	}
+	return *o.InsecureCiphers
+}
+
+// GetInsecureCiphersOk returns a tuple with the InsecureCiphers field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *StorageNetAppCluster) GetInsecureCiphersOk() (*int64, bool) {
+	if o == nil || o.InsecureCiphers == nil {
+		return nil, false
+	}
+	return o.InsecureCiphers, true
+}
+
+// HasInsecureCiphers returns a boolean if a field has been set.
+func (o *StorageNetAppCluster) HasInsecureCiphers() bool {
+	if o != nil && o.InsecureCiphers != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetInsecureCiphers gets a reference to the given int64 and assigns it to the InsecureCiphers field.
+func (o *StorageNetAppCluster) SetInsecureCiphers(v int64) {
+	o.InsecureCiphers = &v
 }
 
 // GetKey returns the Key field value if set, zero value otherwise.
@@ -725,8 +827,17 @@ func (o StorageNetAppCluster) MarshalJSON() ([]byte, error) {
 	if o.ClusterHealthStatus != nil {
 		toSerialize["ClusterHealthStatus"] = o.ClusterHealthStatus
 	}
+	if o.DefaultAdminLocked != nil {
+		toSerialize["DefaultAdminLocked"] = o.DefaultAdminLocked
+	}
 	if o.DnsDomains != nil {
 		toSerialize["DnsDomains"] = o.DnsDomains
+	}
+	if o.FipsCompliant != nil {
+		toSerialize["FipsCompliant"] = o.FipsCompliant
+	}
+	if o.InsecureCiphers != nil {
+		toSerialize["InsecureCiphers"] = o.InsecureCiphers
 	}
 	if o.Key != nil {
 		toSerialize["Key"] = o.Key
@@ -782,8 +893,14 @@ func (o *StorageNetAppCluster) UnmarshalJSON(bytes []byte) (err error) {
 		AvgPerformanceMetrics *StorageNetAppPerformanceMetricsAverage       `json:"AvgPerformanceMetrics,omitempty"`
 		ClusterEfficiency     NullableStorageNetAppStorageClusterEfficiency `json:"ClusterEfficiency,omitempty"`
 		// The health status of the cluster. Possible states are ok, ok-with-suppressed, degraded, and unreachable. * `Unreachable` - Cluster status is unreachable. * `OK` - Cluster status is either ok or ok-with-suppressed. * `Degraded` - Cluster status is degraded.
-		ClusterHealthStatus *string  `json:"ClusterHealthStatus,omitempty"`
-		DnsDomains          []string `json:"DnsDomains,omitempty"`
+		ClusterHealthStatus *string `json:"ClusterHealthStatus,omitempty"`
+		// Indicates whether the default admin user is locked out.
+		DefaultAdminLocked *bool    `json:"DefaultAdminLocked,omitempty"`
+		DnsDomains         []string `json:"DnsDomains,omitempty"`
+		// Indicates whether or not the software FIPS mode is enabled on the cluster.
+		FipsCompliant *bool `json:"FipsCompliant,omitempty"`
+		// Number of SVMs on the cluster that use insecure ciphers.
+		InsecureCiphers *int64 `json:"InsecureCiphers,omitempty"`
 		// Unique identifier of NetApp Cluster across data center.
 		Key *string `json:"Key,omitempty"`
 		// Location of the storage controller.
@@ -817,7 +934,10 @@ func (o *StorageNetAppCluster) UnmarshalJSON(bytes []byte) (err error) {
 		varStorageNetAppCluster.AvgPerformanceMetrics = varStorageNetAppClusterWithoutEmbeddedStruct.AvgPerformanceMetrics
 		varStorageNetAppCluster.ClusterEfficiency = varStorageNetAppClusterWithoutEmbeddedStruct.ClusterEfficiency
 		varStorageNetAppCluster.ClusterHealthStatus = varStorageNetAppClusterWithoutEmbeddedStruct.ClusterHealthStatus
+		varStorageNetAppCluster.DefaultAdminLocked = varStorageNetAppClusterWithoutEmbeddedStruct.DefaultAdminLocked
 		varStorageNetAppCluster.DnsDomains = varStorageNetAppClusterWithoutEmbeddedStruct.DnsDomains
+		varStorageNetAppCluster.FipsCompliant = varStorageNetAppClusterWithoutEmbeddedStruct.FipsCompliant
+		varStorageNetAppCluster.InsecureCiphers = varStorageNetAppClusterWithoutEmbeddedStruct.InsecureCiphers
 		varStorageNetAppCluster.Key = varStorageNetAppClusterWithoutEmbeddedStruct.Key
 		varStorageNetAppCluster.Location = varStorageNetAppClusterWithoutEmbeddedStruct.Location
 		varStorageNetAppCluster.ManagementAddress = varStorageNetAppClusterWithoutEmbeddedStruct.ManagementAddress
@@ -853,7 +973,10 @@ func (o *StorageNetAppCluster) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "AvgPerformanceMetrics")
 		delete(additionalProperties, "ClusterEfficiency")
 		delete(additionalProperties, "ClusterHealthStatus")
+		delete(additionalProperties, "DefaultAdminLocked")
 		delete(additionalProperties, "DnsDomains")
+		delete(additionalProperties, "FipsCompliant")
+		delete(additionalProperties, "InsecureCiphers")
 		delete(additionalProperties, "Key")
 		delete(additionalProperties, "Location")
 		delete(additionalProperties, "ManagementAddress")

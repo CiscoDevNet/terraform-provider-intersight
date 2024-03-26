@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-11765
+API version: 1.0.11-14968
 Contact: intersight@cisco.com
 */
 
@@ -18,7 +18,7 @@ import (
 	"time"
 )
 
-// WorkflowWorkflowInfo Contains information for a workflow execution which is a runtime instance of workflow.
+// WorkflowWorkflowInfo Contains information for a workflow which is an execution instance of the workflow definition given in the relationship. The workflow definition will provide the schema of the inputs taken to start the workflow execution and the schema of the outputs generated at the end of successful workflow execution. The sequence of tasks to be executed is also provided in the workflow definition. For a workflow to successfully start execution the following properties must be provided- Name, AssociatedObject that carries the relationship to Organization under which the workflow must be executed, WorkflowDefinition, and Inputs with all the required data in order to start workflow execution.
 type WorkflowWorkflowInfo struct {
 	MoBaseMo
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
@@ -29,39 +29,40 @@ type WorkflowWorkflowInfo struct {
 	Action *string `json:"Action,omitempty"`
 	// The time when the workflow info will be removed from the database. When WorkflowInfo is created, cleanup time will be set to 181 days. As the workflow progresses through different states the cleanup time can be updated. A cleanup time of 0 means the workflow is not scheduled for cleanup. An active workflow that continues to schedule & run tasks can run for any amount of time and there is no upper bound for such workflows. Workflows that are not actively running, say in Paused or Waiting states will be removed after 181 days.
 	CleanupTime *time.Time `json:"CleanupTime,omitempty"`
-	// The email address of the user who started this workflow.
+	// The email address of the user who started this workflow. In the case of LDAP users, this field can hold either a username or an email.
 	Email *string `json:"Email,omitempty"`
 	// The time when the workflow reached a final state.
 	EndTime *time.Time `json:"EndTime,omitempty"`
-	// The duration in hours after which the workflow info for failed, terminated or timed out workflow will be removed from database.
+	// The duration in hours after which the workflow info for failed, terminated or timed out workflow will be removed from database. The minimum is 1 hour, maximum is 365 days and default is 90 days.
 	FailedWorkflowCleanupDuration *int64 `json:"FailedWorkflowCleanupDuration,omitempty"`
-	// The input data provided for the workflow execution.
+	// All the given inputs for the workflow. The schema for the inputs is defined in the InputDefinition section of the WorkflowDefinition. The InputDefinition will provide a list of input fields to be accepted, the associated datatype of the inputs and any additional constraints on the inputs. For more information please refer to InputDefinition property in the the the WorkflowDefinition resource. The inputs for a workflow are provided as a collection of key-value pairs, where key is the name of the input and value is any valid JSON data which conforms to the datatype of the input as specified in the InputDefinition. When the input passed into a workflow does not match the datatype or the constraints specified in the workflow definition, it will not be accepted. For example, if the InputDefinition specified that workflow must accept a string name 'key' and the value passed for key must adhere to a regex pattern. If Workflow was started with input where 'key' is not a string matching the regex pattern, an error will be generated and workflow will not start execution. During workflow definition design, the input passed into the workflow will be referred using the format 'workflow.input.<inputName>'. If the input is referred directly in a mapping it will be in the format '${workflow.input.<inputName>}' or inside a template mapping in the format '{{.global.workflow.input.<inputName>}}'.
 	Input interface{} `json:"Input,omitempty"`
 	// A workflow instance Id which is the unique identified for the workflow execution.
 	InstId *string `json:"InstId,omitempty"`
-	// Denotes if this workflow is internal and should be hidden from user view of running workflows.
+	// Denotes that an Intersight service started this workflow as internal and hence will not be shown in Intersight User Interface. Typically these are internal system maintenance workflows which are triggered by Intersight services.
 	Internal *bool `json:"Internal,omitempty"`
 	// The last action that was issued on the workflow is saved in this field. * `None` - No action is set, this is the default value for action field. * `Create` - Create a new instance of the workflow but it does not start the execution of the workflow. Use the Start action to start execution of the workflow. * `Start` - Start a new execution of the workflow. * `Pause` - Pause the workflow, this can only be issued on workflows that are in running state. A workflow can be paused for a maximum of 180 days, after 180 days the workflow will be terminated by the system. * `Resume` - Resume the workflow which was previously paused through pause action on the workflow. * `Rerun` - Rerun the workflow that has previously reached a failed state. The workflow is run from the beginning using inputs from previous execution. Completed and currently running workflows cannot be rerun. Workflows do not have to be marked for retry to use this action. * `Retry` - This action has been deprecated. Please use RetryFailed, Rerun or RetryFromTask action. Retry the workflow that has previously reached a final state and has the retryable property set to true. A running or waiting workflow cannot be retried. If the property retryFromTaskName is also passed along with this action, the workflow will be started from that specific task, otherwise the workflow will be restarted from the first task.  The task name in retryFromTaskName must be one of the tasks that completed or failed in the previous run. It is not possible to retry a workflow from a task which wasn't run in the previous iteration. * `RetryFailed` - Retry the workflow that has failed. A running or waiting workflow or a workflow that completed successfully cannot be retried. Only the tasks that failed in the previous run will be retried and the rest of workflow will be run. This action does not restart the workflow and also does not support retrying from a specific task. * `RetryFromTask` - Retry the workflow that has previously reached a failed state and has the retryable property set to true. A running or waiting workflow cannot be retried. RetryFromTaskName must be passed along with this action, and the workflow will be started from that specific task. The task name in RetryFromTaskName must be one of the tasks that was executed in the previous attempt. It is not possible to retry a workflow from a task that wasn't run in the previous execution attempt. * `Cancel` - Cancel the workflow that is in running or waiting state.
 	LastAction *string           `json:"LastAction,omitempty"`
 	Message    []WorkflowMessage `json:"Message,omitempty"`
 	// A name of the workflow execution instance.
 	Name *string `json:"Name,omitempty"`
-	// The output generated at the end of the workflow execution.
+	// All the generated outputs for the workflow. The schema for the outputs are defined in the OutputDefinition section of the WorkflowDefinition. The OutputDefinition will provide a list of output fields that could be generated after workflow execution is completed and the associated datatype of the outputs. For more information please refer to OutputDefinition property in WorkflowDefinition resource. The output for the workflow is generated as a collection of key-value pairs, where key is the name of the output and value is any valid JSON data which conforms to the datatype of output as specified in the OutputDefinition. During workflow definition design, if a workflow is included as a sub-workflow inside a parent workflow then the outputs generated by the sub-workflow can be used in the workflow design. For example, if workflow was included into parent workflow as 'SubWorkflowSample1', then that output can be referred as 'SubWorkflowSample1.output.<outputName>'. In the output is referred directly in a mapping it will be in the format '${SubWorkflowSample1.output.<outputName>}' or inside a template mapping will be in the format '{{SubWorkflowSample1.output.<outputName>}}'.
 	Output interface{} `json:"Output,omitempty"`
 	// Denotes the reason workflow is in paused status. * `None` - Pause reason is none, which indicates there is no reason for the pause state. * `TaskWithWarning` - Pause reason indicates the workflow is in this state due to a task that has a status as completed with warnings. * `SystemMaintenance` - Pause reason indicates the workflow is in this state based on actions of system admin for maintenance.
 	PauseReason *string `json:"PauseReason,omitempty"`
-	// The progress of a workflow is calculated based on the total number of tasks in the workflow and the number of tasks completed. A task is considered as completed if the task status is either \"NO_OP\" or \"COMPLETED\". If the task status is \"SKIP_TO_FAIL\", the workflow will be terminated and the progress of the workflow will be set to 100.
+	// This field indicates percentage of workflow task completion based on the total number of tasks in the workflow. The total number of tasks in the workflow is calculated based on the longest path the workflow execution can take. So progress is calculated based on the percentage of tasks that completed out of the total number of tasks that could be executed. Progress is not a representation of the time taken to complete the workflow. A task is considered as completed if the task status is either \"NO_OP\" or \"COMPLETED\". If the task status is \"SKIP_TO_FAIL\", the workflow will be terminated and the progress of the workflow will be set to 100.
 	Progress   *float32                               `json:"Progress,omitempty"`
 	Properties NullableWorkflowWorkflowInfoProperties `json:"Properties,omitempty"`
 	// This field is required when RetryFromTask action is issued for a workflow that is in a 'final' state. The workflow will be retried from the specified task. This field must specify a task name which is the unique name of the task within the workflow. The task name must be one of the tasks that were completed or failed in the previous run. It is not possible to retry a workflow from a task that wasn't run in the previous execution attempt.
 	RetryFromTaskName *string `json:"RetryFromTaskName,omitempty"`
-	// The source microservice name which is the owner of this workflow.
+	// The source service that started the workflow execution and hence represents the owning service for this workflow.
 	Src *string `json:"Src,omitempty"`
 	// The time when the workflow was started for execution.
 	StartTime *time.Time `json:"StartTime,omitempty"`
-	// A status of the workflow (RUNNING, WAITING, COMPLETED, TIME_OUT, FAILED).
+	// A status of the workflow (RUNNING, WAITING, COMPLETED, TIME_OUT, FAILED). The \"status\" field has been deprecated and is now replaced with the \"workflowStatus\" field.
+	// Deprecated
 	Status *string `json:"Status,omitempty"`
-	// The duration in hours after which the workflow info for successful workflow will be removed from database.
+	// The duration in hours after which the workflow info for successful workflow will be removed from database. The minimum is 1 hour, maximum is 365 days and default is 90 days.
 	SuccessWorkflowCleanupDuration *int64 `json:"SuccessWorkflowCleanupDuration,omitempty"`
 	// The trace id to keep track of workflow execution.
 	TraceId *string `json:"TraceId,omitempty"`
@@ -74,14 +75,15 @@ type WorkflowWorkflowInfo struct {
 	// All the generated variables for the workflow. During workflow execution, the variables will be updated as per the variableParameters specified after each task execution.
 	Variable interface{} `json:"Variable,omitempty"`
 	// Denotes the reason workflow is in waiting status. * `None` - Wait reason is none, which indicates there is no reason for the waiting state. * `GatherTasks` - Wait reason is gathering tasks, which indicates the workflow is in this state in order to gather tasks. * `Duplicate` - Wait reason is duplicate, which indicates the workflow is a duplicate of current running workflow. * `RateLimit` - Wait reason is rate limit, which indicates the workflow is rate limited by account/instance level throttling threshold. * `WaitTask` - Wait reason when there are one or more wait tasks in the workflow which are yet to receive a task status update. * `PendingRetryFailed` - Wait reason when the workflow is pending a RetryFailed action. * `WaitingToStart` - Workflow is waiting to start on workflow engine.
-	WaitReason                 *string                                         `json:"WaitReason,omitempty"`
-	WorkflowCtx                NullableWorkflowWorkflowCtx                     `json:"WorkflowCtx,omitempty"`
-	Account                    *IamAccountRelationship                         `json:"Account,omitempty"`
-	AssociatedObject           *MoBaseMoRelationship                           `json:"AssociatedObject,omitempty"`
-	Organization               *OrganizationOrganizationRelationship           `json:"Organization,omitempty"`
-	ParentTaskInfo             *WorkflowTaskInfoRelationship                   `json:"ParentTaskInfo,omitempty"`
-	PendingDynamicWorkflowInfo *WorkflowPendingDynamicWorkflowInfoRelationship `json:"PendingDynamicWorkflowInfo,omitempty"`
-	Permission                 *IamPermissionRelationship                      `json:"Permission,omitempty"`
+	WaitReason  *string                     `json:"WaitReason,omitempty"`
+	WorkflowCtx NullableWorkflowWorkflowCtx `json:"WorkflowCtx,omitempty"`
+	// The current state of the workflow execution instance. A draft workflow execution will be in NotStarted state and when \"Start\" action is issued then the workflow will move into Waiting state until the first task of the workflow is scheduled at which time it will move into InProgress state. When execution reaches a final state it move to either Completed, Failed or Terminated state. For more details look at the description for each state. * `NotStarted` - Initially all the workflow instances are at \"NotStarted\" state. A workflow can be drafted in this state by issuing Create action. When a workflow is in this state the inputs can be updated until the workflow is started. * `InProgress` - A workflow execution moves into \"InProgress\" state when the first task of the workflow is scheduled for execution and continues to remain in that state as long as there are tasks executing or yet to be scheduled for execution. * `Waiting` - Workflow can go to waiting state due to execution of wait task present in the workflow or the workflow has not started yet either due to duplicate workflow is running or due to workflow throttling. Once Workflow engine picks up the workflow for execution, it will move to in progress state. * `Completed` - A workflow execution moves into Completed state when the execution path of the workflow has reached the Success node in the workflow design and there are no more tasks to be executed. Completed is the final state for the workflow execution instance and no further actions are allowed on this workflow instance. * `Failed` - A workflow execution moves into a Failed state when the execution path of the workflow has reached the Failed node in the workflow design and there are no more tasks to be scheduled. A Failed node can be reached when the last executed task has failed or timed out and there are no further retries available for the task. Also as per the workflow design, the last executed task did not specify an OnFailure task to be executed and hence by default, the execution will reach the Failed node. Actions like \"Rerun\", \"RetryFailed\" and \"RetryFromTask\" can be issued on failed workflow instances. Please refer to the \"Action\" description for more details. * `Terminated` - A workflow execution moves to Terminated state when user issues a \"Cancel\" action or due to internal errors caused during workflow execution. e.g. - Task input transformation has failed. Terminated is a final state of the workflow, no further action are allowed on this workflow instance. * `Canceled` - A workflow execution moves to Canceled state when a user issues a \"Cancel\" action. Cancel is not a final state, the workflow engine will issue cancel to all the running tasks and then move the workflow to the \"Terminated\" state. * `Paused` - A workflow execution moves to Paused state when user issues a \"Pause\" action. When in paused state the current running task will complete its execution but no further tasks will be scheduled until the workflow is resumed. A paused workflow is resumed when the user issues a \"Resume\" action. Paused workflows can be canceled by user.
+	WorkflowStatus   *string                               `json:"WorkflowStatus,omitempty"`
+	Account          *IamAccountRelationship               `json:"Account,omitempty"`
+	AssociatedObject *MoBaseMoRelationship                 `json:"AssociatedObject,omitempty"`
+	Organization     *OrganizationOrganizationRelationship `json:"Organization,omitempty"`
+	ParentTaskInfo   *WorkflowTaskInfoRelationship         `json:"ParentTaskInfo,omitempty"`
+	Permission       *IamPermissionRelationship            `json:"Permission,omitempty"`
 	// An array of relationships to workflowTaskInfo resources.
 	TaskInfos            []WorkflowTaskInfoRelationship          `json:"TaskInfos,omitempty"`
 	WorkflowDefinition   *WorkflowWorkflowDefinitionRelationship `json:"WorkflowDefinition,omitempty"`
@@ -764,6 +766,7 @@ func (o *WorkflowWorkflowInfo) SetStartTime(v time.Time) {
 }
 
 // GetStatus returns the Status field value if set, zero value otherwise.
+// Deprecated
 func (o *WorkflowWorkflowInfo) GetStatus() string {
 	if o == nil || o.Status == nil {
 		var ret string
@@ -774,6 +777,7 @@ func (o *WorkflowWorkflowInfo) GetStatus() string {
 
 // GetStatusOk returns a tuple with the Status field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *WorkflowWorkflowInfo) GetStatusOk() (*string, bool) {
 	if o == nil || o.Status == nil {
 		return nil, false
@@ -791,6 +795,7 @@ func (o *WorkflowWorkflowInfo) HasStatus() bool {
 }
 
 // SetStatus gets a reference to the given string and assigns it to the Status field.
+// Deprecated
 func (o *WorkflowWorkflowInfo) SetStatus(v string) {
 	o.Status = &v
 }
@@ -1063,6 +1068,38 @@ func (o *WorkflowWorkflowInfo) UnsetWorkflowCtx() {
 	o.WorkflowCtx.Unset()
 }
 
+// GetWorkflowStatus returns the WorkflowStatus field value if set, zero value otherwise.
+func (o *WorkflowWorkflowInfo) GetWorkflowStatus() string {
+	if o == nil || o.WorkflowStatus == nil {
+		var ret string
+		return ret
+	}
+	return *o.WorkflowStatus
+}
+
+// GetWorkflowStatusOk returns a tuple with the WorkflowStatus field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *WorkflowWorkflowInfo) GetWorkflowStatusOk() (*string, bool) {
+	if o == nil || o.WorkflowStatus == nil {
+		return nil, false
+	}
+	return o.WorkflowStatus, true
+}
+
+// HasWorkflowStatus returns a boolean if a field has been set.
+func (o *WorkflowWorkflowInfo) HasWorkflowStatus() bool {
+	if o != nil && o.WorkflowStatus != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetWorkflowStatus gets a reference to the given string and assigns it to the WorkflowStatus field.
+func (o *WorkflowWorkflowInfo) SetWorkflowStatus(v string) {
+	o.WorkflowStatus = &v
+}
+
 // GetAccount returns the Account field value if set, zero value otherwise.
 func (o *WorkflowWorkflowInfo) GetAccount() IamAccountRelationship {
 	if o == nil || o.Account == nil {
@@ -1189,38 +1226,6 @@ func (o *WorkflowWorkflowInfo) HasParentTaskInfo() bool {
 // SetParentTaskInfo gets a reference to the given WorkflowTaskInfoRelationship and assigns it to the ParentTaskInfo field.
 func (o *WorkflowWorkflowInfo) SetParentTaskInfo(v WorkflowTaskInfoRelationship) {
 	o.ParentTaskInfo = &v
-}
-
-// GetPendingDynamicWorkflowInfo returns the PendingDynamicWorkflowInfo field value if set, zero value otherwise.
-func (o *WorkflowWorkflowInfo) GetPendingDynamicWorkflowInfo() WorkflowPendingDynamicWorkflowInfoRelationship {
-	if o == nil || o.PendingDynamicWorkflowInfo == nil {
-		var ret WorkflowPendingDynamicWorkflowInfoRelationship
-		return ret
-	}
-	return *o.PendingDynamicWorkflowInfo
-}
-
-// GetPendingDynamicWorkflowInfoOk returns a tuple with the PendingDynamicWorkflowInfo field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *WorkflowWorkflowInfo) GetPendingDynamicWorkflowInfoOk() (*WorkflowPendingDynamicWorkflowInfoRelationship, bool) {
-	if o == nil || o.PendingDynamicWorkflowInfo == nil {
-		return nil, false
-	}
-	return o.PendingDynamicWorkflowInfo, true
-}
-
-// HasPendingDynamicWorkflowInfo returns a boolean if a field has been set.
-func (o *WorkflowWorkflowInfo) HasPendingDynamicWorkflowInfo() bool {
-	if o != nil && o.PendingDynamicWorkflowInfo != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetPendingDynamicWorkflowInfo gets a reference to the given WorkflowPendingDynamicWorkflowInfoRelationship and assigns it to the PendingDynamicWorkflowInfo field.
-func (o *WorkflowWorkflowInfo) SetPendingDynamicWorkflowInfo(v WorkflowPendingDynamicWorkflowInfoRelationship) {
-	o.PendingDynamicWorkflowInfo = &v
 }
 
 // GetPermission returns the Permission field value if set, zero value otherwise.
@@ -1417,6 +1422,9 @@ func (o WorkflowWorkflowInfo) MarshalJSON() ([]byte, error) {
 	if o.WorkflowCtx.IsSet() {
 		toSerialize["WorkflowCtx"] = o.WorkflowCtx.Get()
 	}
+	if o.WorkflowStatus != nil {
+		toSerialize["WorkflowStatus"] = o.WorkflowStatus
+	}
 	if o.Account != nil {
 		toSerialize["Account"] = o.Account
 	}
@@ -1428,9 +1436,6 @@ func (o WorkflowWorkflowInfo) MarshalJSON() ([]byte, error) {
 	}
 	if o.ParentTaskInfo != nil {
 		toSerialize["ParentTaskInfo"] = o.ParentTaskInfo
-	}
-	if o.PendingDynamicWorkflowInfo != nil {
-		toSerialize["PendingDynamicWorkflowInfo"] = o.PendingDynamicWorkflowInfo
 	}
 	if o.Permission != nil {
 		toSerialize["Permission"] = o.Permission
@@ -1459,39 +1464,40 @@ func (o *WorkflowWorkflowInfo) UnmarshalJSON(bytes []byte) (err error) {
 		Action *string `json:"Action,omitempty"`
 		// The time when the workflow info will be removed from the database. When WorkflowInfo is created, cleanup time will be set to 181 days. As the workflow progresses through different states the cleanup time can be updated. A cleanup time of 0 means the workflow is not scheduled for cleanup. An active workflow that continues to schedule & run tasks can run for any amount of time and there is no upper bound for such workflows. Workflows that are not actively running, say in Paused or Waiting states will be removed after 181 days.
 		CleanupTime *time.Time `json:"CleanupTime,omitempty"`
-		// The email address of the user who started this workflow.
+		// The email address of the user who started this workflow. In the case of LDAP users, this field can hold either a username or an email.
 		Email *string `json:"Email,omitempty"`
 		// The time when the workflow reached a final state.
 		EndTime *time.Time `json:"EndTime,omitempty"`
-		// The duration in hours after which the workflow info for failed, terminated or timed out workflow will be removed from database.
+		// The duration in hours after which the workflow info for failed, terminated or timed out workflow will be removed from database. The minimum is 1 hour, maximum is 365 days and default is 90 days.
 		FailedWorkflowCleanupDuration *int64 `json:"FailedWorkflowCleanupDuration,omitempty"`
-		// The input data provided for the workflow execution.
+		// All the given inputs for the workflow. The schema for the inputs is defined in the InputDefinition section of the WorkflowDefinition. The InputDefinition will provide a list of input fields to be accepted, the associated datatype of the inputs and any additional constraints on the inputs. For more information please refer to InputDefinition property in the the the WorkflowDefinition resource. The inputs for a workflow are provided as a collection of key-value pairs, where key is the name of the input and value is any valid JSON data which conforms to the datatype of the input as specified in the InputDefinition. When the input passed into a workflow does not match the datatype or the constraints specified in the workflow definition, it will not be accepted. For example, if the InputDefinition specified that workflow must accept a string name 'key' and the value passed for key must adhere to a regex pattern. If Workflow was started with input where 'key' is not a string matching the regex pattern, an error will be generated and workflow will not start execution. During workflow definition design, the input passed into the workflow will be referred using the format 'workflow.input.<inputName>'. If the input is referred directly in a mapping it will be in the format '${workflow.input.<inputName>}' or inside a template mapping in the format '{{.global.workflow.input.<inputName>}}'.
 		Input interface{} `json:"Input,omitempty"`
 		// A workflow instance Id which is the unique identified for the workflow execution.
 		InstId *string `json:"InstId,omitempty"`
-		// Denotes if this workflow is internal and should be hidden from user view of running workflows.
+		// Denotes that an Intersight service started this workflow as internal and hence will not be shown in Intersight User Interface. Typically these are internal system maintenance workflows which are triggered by Intersight services.
 		Internal *bool `json:"Internal,omitempty"`
 		// The last action that was issued on the workflow is saved in this field. * `None` - No action is set, this is the default value for action field. * `Create` - Create a new instance of the workflow but it does not start the execution of the workflow. Use the Start action to start execution of the workflow. * `Start` - Start a new execution of the workflow. * `Pause` - Pause the workflow, this can only be issued on workflows that are in running state. A workflow can be paused for a maximum of 180 days, after 180 days the workflow will be terminated by the system. * `Resume` - Resume the workflow which was previously paused through pause action on the workflow. * `Rerun` - Rerun the workflow that has previously reached a failed state. The workflow is run from the beginning using inputs from previous execution. Completed and currently running workflows cannot be rerun. Workflows do not have to be marked for retry to use this action. * `Retry` - This action has been deprecated. Please use RetryFailed, Rerun or RetryFromTask action. Retry the workflow that has previously reached a final state and has the retryable property set to true. A running or waiting workflow cannot be retried. If the property retryFromTaskName is also passed along with this action, the workflow will be started from that specific task, otherwise the workflow will be restarted from the first task.  The task name in retryFromTaskName must be one of the tasks that completed or failed in the previous run. It is not possible to retry a workflow from a task which wasn't run in the previous iteration. * `RetryFailed` - Retry the workflow that has failed. A running or waiting workflow or a workflow that completed successfully cannot be retried. Only the tasks that failed in the previous run will be retried and the rest of workflow will be run. This action does not restart the workflow and also does not support retrying from a specific task. * `RetryFromTask` - Retry the workflow that has previously reached a failed state and has the retryable property set to true. A running or waiting workflow cannot be retried. RetryFromTaskName must be passed along with this action, and the workflow will be started from that specific task. The task name in RetryFromTaskName must be one of the tasks that was executed in the previous attempt. It is not possible to retry a workflow from a task that wasn't run in the previous execution attempt. * `Cancel` - Cancel the workflow that is in running or waiting state.
 		LastAction *string           `json:"LastAction,omitempty"`
 		Message    []WorkflowMessage `json:"Message,omitempty"`
 		// A name of the workflow execution instance.
 		Name *string `json:"Name,omitempty"`
-		// The output generated at the end of the workflow execution.
+		// All the generated outputs for the workflow. The schema for the outputs are defined in the OutputDefinition section of the WorkflowDefinition. The OutputDefinition will provide a list of output fields that could be generated after workflow execution is completed and the associated datatype of the outputs. For more information please refer to OutputDefinition property in WorkflowDefinition resource. The output for the workflow is generated as a collection of key-value pairs, where key is the name of the output and value is any valid JSON data which conforms to the datatype of output as specified in the OutputDefinition. During workflow definition design, if a workflow is included as a sub-workflow inside a parent workflow then the outputs generated by the sub-workflow can be used in the workflow design. For example, if workflow was included into parent workflow as 'SubWorkflowSample1', then that output can be referred as 'SubWorkflowSample1.output.<outputName>'. In the output is referred directly in a mapping it will be in the format '${SubWorkflowSample1.output.<outputName>}' or inside a template mapping will be in the format '{{SubWorkflowSample1.output.<outputName>}}'.
 		Output interface{} `json:"Output,omitempty"`
 		// Denotes the reason workflow is in paused status. * `None` - Pause reason is none, which indicates there is no reason for the pause state. * `TaskWithWarning` - Pause reason indicates the workflow is in this state due to a task that has a status as completed with warnings. * `SystemMaintenance` - Pause reason indicates the workflow is in this state based on actions of system admin for maintenance.
 		PauseReason *string `json:"PauseReason,omitempty"`
-		// The progress of a workflow is calculated based on the total number of tasks in the workflow and the number of tasks completed. A task is considered as completed if the task status is either \"NO_OP\" or \"COMPLETED\". If the task status is \"SKIP_TO_FAIL\", the workflow will be terminated and the progress of the workflow will be set to 100.
+		// This field indicates percentage of workflow task completion based on the total number of tasks in the workflow. The total number of tasks in the workflow is calculated based on the longest path the workflow execution can take. So progress is calculated based on the percentage of tasks that completed out of the total number of tasks that could be executed. Progress is not a representation of the time taken to complete the workflow. A task is considered as completed if the task status is either \"NO_OP\" or \"COMPLETED\". If the task status is \"SKIP_TO_FAIL\", the workflow will be terminated and the progress of the workflow will be set to 100.
 		Progress   *float32                               `json:"Progress,omitempty"`
 		Properties NullableWorkflowWorkflowInfoProperties `json:"Properties,omitempty"`
 		// This field is required when RetryFromTask action is issued for a workflow that is in a 'final' state. The workflow will be retried from the specified task. This field must specify a task name which is the unique name of the task within the workflow. The task name must be one of the tasks that were completed or failed in the previous run. It is not possible to retry a workflow from a task that wasn't run in the previous execution attempt.
 		RetryFromTaskName *string `json:"RetryFromTaskName,omitempty"`
-		// The source microservice name which is the owner of this workflow.
+		// The source service that started the workflow execution and hence represents the owning service for this workflow.
 		Src *string `json:"Src,omitempty"`
 		// The time when the workflow was started for execution.
 		StartTime *time.Time `json:"StartTime,omitempty"`
-		// A status of the workflow (RUNNING, WAITING, COMPLETED, TIME_OUT, FAILED).
+		// A status of the workflow (RUNNING, WAITING, COMPLETED, TIME_OUT, FAILED). The \"status\" field has been deprecated and is now replaced with the \"workflowStatus\" field.
+		// Deprecated
 		Status *string `json:"Status,omitempty"`
-		// The duration in hours after which the workflow info for successful workflow will be removed from database.
+		// The duration in hours after which the workflow info for successful workflow will be removed from database. The minimum is 1 hour, maximum is 365 days and default is 90 days.
 		SuccessWorkflowCleanupDuration *int64 `json:"SuccessWorkflowCleanupDuration,omitempty"`
 		// The trace id to keep track of workflow execution.
 		TraceId *string `json:"TraceId,omitempty"`
@@ -1504,14 +1510,15 @@ func (o *WorkflowWorkflowInfo) UnmarshalJSON(bytes []byte) (err error) {
 		// All the generated variables for the workflow. During workflow execution, the variables will be updated as per the variableParameters specified after each task execution.
 		Variable interface{} `json:"Variable,omitempty"`
 		// Denotes the reason workflow is in waiting status. * `None` - Wait reason is none, which indicates there is no reason for the waiting state. * `GatherTasks` - Wait reason is gathering tasks, which indicates the workflow is in this state in order to gather tasks. * `Duplicate` - Wait reason is duplicate, which indicates the workflow is a duplicate of current running workflow. * `RateLimit` - Wait reason is rate limit, which indicates the workflow is rate limited by account/instance level throttling threshold. * `WaitTask` - Wait reason when there are one or more wait tasks in the workflow which are yet to receive a task status update. * `PendingRetryFailed` - Wait reason when the workflow is pending a RetryFailed action. * `WaitingToStart` - Workflow is waiting to start on workflow engine.
-		WaitReason                 *string                                         `json:"WaitReason,omitempty"`
-		WorkflowCtx                NullableWorkflowWorkflowCtx                     `json:"WorkflowCtx,omitempty"`
-		Account                    *IamAccountRelationship                         `json:"Account,omitempty"`
-		AssociatedObject           *MoBaseMoRelationship                           `json:"AssociatedObject,omitempty"`
-		Organization               *OrganizationOrganizationRelationship           `json:"Organization,omitempty"`
-		ParentTaskInfo             *WorkflowTaskInfoRelationship                   `json:"ParentTaskInfo,omitempty"`
-		PendingDynamicWorkflowInfo *WorkflowPendingDynamicWorkflowInfoRelationship `json:"PendingDynamicWorkflowInfo,omitempty"`
-		Permission                 *IamPermissionRelationship                      `json:"Permission,omitempty"`
+		WaitReason  *string                     `json:"WaitReason,omitempty"`
+		WorkflowCtx NullableWorkflowWorkflowCtx `json:"WorkflowCtx,omitempty"`
+		// The current state of the workflow execution instance. A draft workflow execution will be in NotStarted state and when \"Start\" action is issued then the workflow will move into Waiting state until the first task of the workflow is scheduled at which time it will move into InProgress state. When execution reaches a final state it move to either Completed, Failed or Terminated state. For more details look at the description for each state. * `NotStarted` - Initially all the workflow instances are at \"NotStarted\" state. A workflow can be drafted in this state by issuing Create action. When a workflow is in this state the inputs can be updated until the workflow is started. * `InProgress` - A workflow execution moves into \"InProgress\" state when the first task of the workflow is scheduled for execution and continues to remain in that state as long as there are tasks executing or yet to be scheduled for execution. * `Waiting` - Workflow can go to waiting state due to execution of wait task present in the workflow or the workflow has not started yet either due to duplicate workflow is running or due to workflow throttling. Once Workflow engine picks up the workflow for execution, it will move to in progress state. * `Completed` - A workflow execution moves into Completed state when the execution path of the workflow has reached the Success node in the workflow design and there are no more tasks to be executed. Completed is the final state for the workflow execution instance and no further actions are allowed on this workflow instance. * `Failed` - A workflow execution moves into a Failed state when the execution path of the workflow has reached the Failed node in the workflow design and there are no more tasks to be scheduled. A Failed node can be reached when the last executed task has failed or timed out and there are no further retries available for the task. Also as per the workflow design, the last executed task did not specify an OnFailure task to be executed and hence by default, the execution will reach the Failed node. Actions like \"Rerun\", \"RetryFailed\" and \"RetryFromTask\" can be issued on failed workflow instances. Please refer to the \"Action\" description for more details. * `Terminated` - A workflow execution moves to Terminated state when user issues a \"Cancel\" action or due to internal errors caused during workflow execution. e.g. - Task input transformation has failed. Terminated is a final state of the workflow, no further action are allowed on this workflow instance. * `Canceled` - A workflow execution moves to Canceled state when a user issues a \"Cancel\" action. Cancel is not a final state, the workflow engine will issue cancel to all the running tasks and then move the workflow to the \"Terminated\" state. * `Paused` - A workflow execution moves to Paused state when user issues a \"Pause\" action. When in paused state the current running task will complete its execution but no further tasks will be scheduled until the workflow is resumed. A paused workflow is resumed when the user issues a \"Resume\" action. Paused workflows can be canceled by user.
+		WorkflowStatus   *string                               `json:"WorkflowStatus,omitempty"`
+		Account          *IamAccountRelationship               `json:"Account,omitempty"`
+		AssociatedObject *MoBaseMoRelationship                 `json:"AssociatedObject,omitempty"`
+		Organization     *OrganizationOrganizationRelationship `json:"Organization,omitempty"`
+		ParentTaskInfo   *WorkflowTaskInfoRelationship         `json:"ParentTaskInfo,omitempty"`
+		Permission       *IamPermissionRelationship            `json:"Permission,omitempty"`
 		// An array of relationships to workflowTaskInfo resources.
 		TaskInfos          []WorkflowTaskInfoRelationship          `json:"TaskInfos,omitempty"`
 		WorkflowDefinition *WorkflowWorkflowDefinitionRelationship `json:"WorkflowDefinition,omitempty"`
@@ -1551,11 +1558,11 @@ func (o *WorkflowWorkflowInfo) UnmarshalJSON(bytes []byte) (err error) {
 		varWorkflowWorkflowInfo.Variable = varWorkflowWorkflowInfoWithoutEmbeddedStruct.Variable
 		varWorkflowWorkflowInfo.WaitReason = varWorkflowWorkflowInfoWithoutEmbeddedStruct.WaitReason
 		varWorkflowWorkflowInfo.WorkflowCtx = varWorkflowWorkflowInfoWithoutEmbeddedStruct.WorkflowCtx
+		varWorkflowWorkflowInfo.WorkflowStatus = varWorkflowWorkflowInfoWithoutEmbeddedStruct.WorkflowStatus
 		varWorkflowWorkflowInfo.Account = varWorkflowWorkflowInfoWithoutEmbeddedStruct.Account
 		varWorkflowWorkflowInfo.AssociatedObject = varWorkflowWorkflowInfoWithoutEmbeddedStruct.AssociatedObject
 		varWorkflowWorkflowInfo.Organization = varWorkflowWorkflowInfoWithoutEmbeddedStruct.Organization
 		varWorkflowWorkflowInfo.ParentTaskInfo = varWorkflowWorkflowInfoWithoutEmbeddedStruct.ParentTaskInfo
-		varWorkflowWorkflowInfo.PendingDynamicWorkflowInfo = varWorkflowWorkflowInfoWithoutEmbeddedStruct.PendingDynamicWorkflowInfo
 		varWorkflowWorkflowInfo.Permission = varWorkflowWorkflowInfoWithoutEmbeddedStruct.Permission
 		varWorkflowWorkflowInfo.TaskInfos = varWorkflowWorkflowInfoWithoutEmbeddedStruct.TaskInfos
 		varWorkflowWorkflowInfo.WorkflowDefinition = varWorkflowWorkflowInfoWithoutEmbeddedStruct.WorkflowDefinition
@@ -1605,11 +1612,11 @@ func (o *WorkflowWorkflowInfo) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "Variable")
 		delete(additionalProperties, "WaitReason")
 		delete(additionalProperties, "WorkflowCtx")
+		delete(additionalProperties, "WorkflowStatus")
 		delete(additionalProperties, "Account")
 		delete(additionalProperties, "AssociatedObject")
 		delete(additionalProperties, "Organization")
 		delete(additionalProperties, "ParentTaskInfo")
-		delete(additionalProperties, "PendingDynamicWorkflowInfo")
 		delete(additionalProperties, "Permission")
 		delete(additionalProperties, "TaskInfos")
 		delete(additionalProperties, "WorkflowDefinition")

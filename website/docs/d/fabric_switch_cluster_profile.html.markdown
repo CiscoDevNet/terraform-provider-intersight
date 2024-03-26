@@ -16,6 +16,8 @@ To access the ith object of the results obtained, use `data.intersight_fabric_sw
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `account_moid`:(string) The Account ID for this managed object. 
 * `create_time`:(string) The time when this managed object was created. 
+* `deploy_status`:(string) Deploy status of the switch cluster profile indicating if deployment has been initiated on all the members of the cluster profile.* `None` - Switch profiles not deployed on either of the switches.* `Complete` - Both switch profiles of the cluster profile are deployed.* `Partial` - Only one of the switch profiles of the cluster profile is deployed. 
+* `deployed_switches`:(string) Values indicating the switches on which the cluster profile has been deployed. 0 indicates that the profile has not been deployed on any switch, 1 indicates that the profile has been deployed on A, 2 indicates that it is deployed on B and 3 indicates that it is deployed on both.* `None` - Switch profiles not deployed on either of the fabric interconnects.* `A` - Switch profiles deployed only on fabric interconnect A.* `B` - Switch profiles deployed only on fabric interconnect B.* `AB` - Switch profiles deployed on both fabric interconnect A and B. 
 * `description`:(string) Description of the profile. 
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
 * `mod_time`:(string) The time when this managed object was last modified. 

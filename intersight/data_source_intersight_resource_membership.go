@@ -290,6 +290,11 @@ func getResourceMembershipSchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"reevaluate": {
+			Description: "Set Reevaluate to true to reevaluate the membership of a resource.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
 		"resource": {
 			Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 			Type:        schema.TypeList,
@@ -785,6 +790,11 @@ func dataSourceResourceMembershipRead(c context.Context, d *schema.ResourceData,
 		o.SetPermissionResources(x)
 	}
 
+	if v, ok := d.GetOkExists("reevaluate"); ok {
+		x := (v.(bool))
+		o.SetReevaluate(x)
+	}
+
 	if v, ok := d.GetOk("resource"); ok {
 		p := make([]models.MoBaseMoRelationship, 0, 1)
 		s := v.([]interface{})
@@ -1001,6 +1011,7 @@ func dataSourceResourceMembershipRead(c context.Context, d *schema.ResourceData,
 				temp["parent"] = flattenMapMoBaseMoRelationship(s.GetParent(), d)
 
 				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
+				temp["reevaluate"] = (s.GetReevaluate())
 
 				temp["resource"] = flattenMapMoBaseMoRelationship(s.GetResource(), d)
 				temp["shared_scope"] = (s.GetSharedScope())

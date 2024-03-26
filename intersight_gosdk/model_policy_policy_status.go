@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-11765
+API version: 1.0.11-14968
 Contact: intersight@cisco.com
 */
 
@@ -17,20 +17,21 @@ import (
 	"strings"
 )
 
-// PolicyPolicyStatus The status descriptor for any policy attach/detach to/from a profile/template. It contains the policy details like moid and type and the status progress like validating, ok or errored. In case of an error, the error message is populated in reason.
+// PolicyPolicyStatus The status descriptor for any policy association or validation related to a profile/template. It contains the policy details like moid and type and the status progress like validating, ok or errored. In case of one or more errors, the error details are populated in errorMessages.
 type PolicyPolicyStatus struct {
 	MoBaseComplexType
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
-	ObjectType string `json:"ObjectType"`
-	// The object id of the policy being attached.
+	ObjectType    string              `json:"ObjectType"`
+	ErrorMessages []PolicyPolicyError `json:"ErrorMessages,omitempty"`
+	// The object identifier of the policy.
 	Moid *string `json:"Moid,omitempty"`
 	// The reason for the status - it will be empty if status is ok or validating. If error, it will have the appropriate message indicating the reason for failure.
 	Reason *string `json:"Reason,omitempty"`
-	// Indicates if the policy attach/detach was successful or not. Values  -- ok, errored, validating. * `ok` - The policy attach/detach is successful. * `error` - The policy cannot be attached/detached due to an error. * `validating` - The policy preconfig validation is in progress.
+	// Indicates if the policy association or validation was successful or not. Values  -- ok, errored, validating. * `ok` - The policy association or validation is successful. * `error` - The policy association or validation has failed. * `validating` - The policy association or validation is in progress.
 	Status *string `json:"Status,omitempty"`
-	// The object type of the policy being attached.
+	// The object type of the policy.
 	Type                 *string `json:"Type,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
@@ -45,8 +46,6 @@ func NewPolicyPolicyStatus(classId string, objectType string) *PolicyPolicyStatu
 	this := PolicyPolicyStatus{}
 	this.ClassId = classId
 	this.ObjectType = objectType
-	var status string = "ok"
-	this.Status = &status
 	return &this
 }
 
@@ -59,8 +58,6 @@ func NewPolicyPolicyStatusWithDefaults() *PolicyPolicyStatus {
 	this.ClassId = classId
 	var objectType string = "policy.PolicyStatus"
 	this.ObjectType = objectType
-	var status string = "ok"
-	this.Status = &status
 	return &this
 }
 
@@ -110,6 +107,39 @@ func (o *PolicyPolicyStatus) GetObjectTypeOk() (*string, bool) {
 // SetObjectType sets field value
 func (o *PolicyPolicyStatus) SetObjectType(v string) {
 	o.ObjectType = v
+}
+
+// GetErrorMessages returns the ErrorMessages field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *PolicyPolicyStatus) GetErrorMessages() []PolicyPolicyError {
+	if o == nil {
+		var ret []PolicyPolicyError
+		return ret
+	}
+	return o.ErrorMessages
+}
+
+// GetErrorMessagesOk returns a tuple with the ErrorMessages field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *PolicyPolicyStatus) GetErrorMessagesOk() ([]PolicyPolicyError, bool) {
+	if o == nil || o.ErrorMessages == nil {
+		return nil, false
+	}
+	return o.ErrorMessages, true
+}
+
+// HasErrorMessages returns a boolean if a field has been set.
+func (o *PolicyPolicyStatus) HasErrorMessages() bool {
+	if o != nil && o.ErrorMessages != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetErrorMessages gets a reference to the given []PolicyPolicyError and assigns it to the ErrorMessages field.
+func (o *PolicyPolicyStatus) SetErrorMessages(v []PolicyPolicyError) {
+	o.ErrorMessages = v
 }
 
 // GetMoid returns the Moid field value if set, zero value otherwise.
@@ -256,6 +286,9 @@ func (o PolicyPolicyStatus) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["ObjectType"] = o.ObjectType
 	}
+	if o.ErrorMessages != nil {
+		toSerialize["ErrorMessages"] = o.ErrorMessages
+	}
 	if o.Moid != nil {
 		toSerialize["Moid"] = o.Moid
 	}
@@ -281,14 +314,15 @@ func (o *PolicyPolicyStatus) UnmarshalJSON(bytes []byte) (err error) {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
-		ObjectType string `json:"ObjectType"`
-		// The object id of the policy being attached.
+		ObjectType    string              `json:"ObjectType"`
+		ErrorMessages []PolicyPolicyError `json:"ErrorMessages,omitempty"`
+		// The object identifier of the policy.
 		Moid *string `json:"Moid,omitempty"`
 		// The reason for the status - it will be empty if status is ok or validating. If error, it will have the appropriate message indicating the reason for failure.
 		Reason *string `json:"Reason,omitempty"`
-		// Indicates if the policy attach/detach was successful or not. Values  -- ok, errored, validating. * `ok` - The policy attach/detach is successful. * `error` - The policy cannot be attached/detached due to an error. * `validating` - The policy preconfig validation is in progress.
+		// Indicates if the policy association or validation was successful or not. Values  -- ok, errored, validating. * `ok` - The policy association or validation is successful. * `error` - The policy association or validation has failed. * `validating` - The policy association or validation is in progress.
 		Status *string `json:"Status,omitempty"`
-		// The object type of the policy being attached.
+		// The object type of the policy.
 		Type *string `json:"Type,omitempty"`
 	}
 
@@ -299,6 +333,7 @@ func (o *PolicyPolicyStatus) UnmarshalJSON(bytes []byte) (err error) {
 		varPolicyPolicyStatus := _PolicyPolicyStatus{}
 		varPolicyPolicyStatus.ClassId = varPolicyPolicyStatusWithoutEmbeddedStruct.ClassId
 		varPolicyPolicyStatus.ObjectType = varPolicyPolicyStatusWithoutEmbeddedStruct.ObjectType
+		varPolicyPolicyStatus.ErrorMessages = varPolicyPolicyStatusWithoutEmbeddedStruct.ErrorMessages
 		varPolicyPolicyStatus.Moid = varPolicyPolicyStatusWithoutEmbeddedStruct.Moid
 		varPolicyPolicyStatus.Reason = varPolicyPolicyStatusWithoutEmbeddedStruct.Reason
 		varPolicyPolicyStatus.Status = varPolicyPolicyStatusWithoutEmbeddedStruct.Status
@@ -322,6 +357,7 @@ func (o *PolicyPolicyStatus) UnmarshalJSON(bytes []byte) (err error) {
 	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
+		delete(additionalProperties, "ErrorMessages")
 		delete(additionalProperties, "Moid")
 		delete(additionalProperties, "Reason")
 		delete(additionalProperties, "Status")

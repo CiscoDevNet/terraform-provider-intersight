@@ -100,6 +100,11 @@ func getFabricElementIdentitySchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"lifecycle_mod_time": {
+			Description: "The time when the last life cycle state change happened.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"mod_time": {
 			Description: "The time when this managed object was last modified.",
 			Type:        schema.TypeString,
@@ -112,6 +117,11 @@ func getFabricElementIdentitySchema() map[string]*schema.Schema {
 		},
 		"moid": {
 			Description: "The unique identifier of this Managed Object instance.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"name": {
+			Description: "The name of the equipment for unique identification.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -194,6 +204,11 @@ func getFabricElementIdentitySchema() map[string]*schema.Schema {
 					},
 				},
 			},
+		},
+		"partial_deployment_status": {
+			Description: "Determines if there is partial configuration that has to be deployed on any of the server profiles associated with the server connected to the Fabric Interconnect in cases where one or more server profiles  was deployed when the Fabric Interconnect was down.\n* `None` - No configuration which is yet to be deployed.The default state of a fabric interconnect which does not have any pending deployment.\n* `Pending` - There is pending configuration which is yet to be deployed on the fabric interconnect.\n* `Deploying` - Pending configuration is being deployed on the fabric interconnect.",
+			Type:        schema.TypeString,
+			Optional:    true,
 		},
 		"permission_resources": {
 			Description: "An array of relationships to moBaseMo resources.",
@@ -576,6 +591,11 @@ func dataSourceFabricElementIdentityRead(c context.Context, d *schema.ResourceDa
 		o.SetLifecycle(x)
 	}
 
+	if v, ok := d.GetOk("lifecycle_mod_time"); ok {
+		x, _ := time.Parse(time.RFC1123, v.(string))
+		o.SetLifecycleModTime(x)
+	}
+
 	if v, ok := d.GetOk("mod_time"); ok {
 		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetModTime(x)
@@ -589,6 +609,11 @@ func dataSourceFabricElementIdentityRead(c context.Context, d *schema.ResourceDa
 	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
+	}
+
+	if v, ok := d.GetOk("name"); ok {
+		x := (v.(string))
+		o.SetName(x)
 	}
 
 	if v, ok := d.GetOk("network_element"); ok {
@@ -691,6 +716,11 @@ func dataSourceFabricElementIdentityRead(c context.Context, d *schema.ResourceDa
 			x := p[0]
 			o.SetParent(x)
 		}
+	}
+
+	if v, ok := d.GetOk("partial_deployment_status"); ok {
+		x := (v.(string))
+		o.SetPartialDeploymentStatus(x)
 	}
 
 	if v, ok := d.GetOk("permission_resources"); ok {
@@ -1000,15 +1030,19 @@ func dataSourceFabricElementIdentityRead(c context.Context, d *schema.ResourceDa
 				temp["identifier"] = (s.GetIdentifier())
 				temp["nr_lifecycle"] = (s.GetLifecycle())
 
+				temp["lifecycle_mod_time"] = (s.GetLifecycleModTime()).String()
+
 				temp["mod_time"] = (s.GetModTime()).String()
 				temp["model"] = (s.GetModel())
 				temp["moid"] = (s.GetMoid())
+				temp["name"] = (s.GetName())
 
 				temp["network_element"] = flattenMapNetworkElementRelationship(s.GetNetworkElement(), d)
 				temp["object_type"] = (s.GetObjectType())
 				temp["owners"] = (s.GetOwners())
 
 				temp["parent"] = flattenMapMoBaseMoRelationship(s.GetParent(), d)
+				temp["partial_deployment_status"] = (s.GetPartialDeploymentStatus())
 
 				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
 

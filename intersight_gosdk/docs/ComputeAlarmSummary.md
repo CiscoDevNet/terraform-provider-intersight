@@ -9,6 +9,10 @@ Name | Type | Description | Notes
 **Critical** | Pointer to **int64** | The count of alarms that have severity type Critical. | [optional] [readonly] 
 **Health** | Pointer to **string** | Health of the managed end point. The highest severity computed from alarmSummary property is set as the health. * &#x60;Healthy&#x60; - The Enum value represents that the entity is healthy. * &#x60;Warning&#x60; - The Enum value Warning represents that the entity has one or more active warnings on it. * &#x60;Critical&#x60; - The Enum value Critical represents that the entity is in a critical state. | [optional] [readonly] [default to "Healthy"]
 **Info** | Pointer to **int64** | The count of alarms that have severity type Info. | [optional] [readonly] 
+**Suppressed** | Pointer to **bool** | The flag that indicates whether suppression is enabled or not in the entity. | [optional] [readonly] 
+**SuppressedCritical** | Pointer to **int64** | The count of active suppressed alarms that have severity type Critical. | [optional] [readonly] 
+**SuppressedInfo** | Pointer to **int64** | The count of active suppressed alarms that have severity type Info. | [optional] [readonly] 
+**SuppressedWarning** | Pointer to **int64** | The count of active suppressed alarms that have severity type Warning. | [optional] [readonly] 
 **Warning** | Pointer to **int64** | The count of alarms that have severity type Warning. | [optional] [readonly] 
 
 ## Methods
@@ -144,6 +148,106 @@ SetInfo sets Info field to given value.
 `func (o *ComputeAlarmSummary) HasInfo() bool`
 
 HasInfo returns a boolean if a field has been set.
+
+### GetSuppressed
+
+`func (o *ComputeAlarmSummary) GetSuppressed() bool`
+
+GetSuppressed returns the Suppressed field if non-nil, zero value otherwise.
+
+### GetSuppressedOk
+
+`func (o *ComputeAlarmSummary) GetSuppressedOk() (*bool, bool)`
+
+GetSuppressedOk returns a tuple with the Suppressed field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSuppressed
+
+`func (o *ComputeAlarmSummary) SetSuppressed(v bool)`
+
+SetSuppressed sets Suppressed field to given value.
+
+### HasSuppressed
+
+`func (o *ComputeAlarmSummary) HasSuppressed() bool`
+
+HasSuppressed returns a boolean if a field has been set.
+
+### GetSuppressedCritical
+
+`func (o *ComputeAlarmSummary) GetSuppressedCritical() int64`
+
+GetSuppressedCritical returns the SuppressedCritical field if non-nil, zero value otherwise.
+
+### GetSuppressedCriticalOk
+
+`func (o *ComputeAlarmSummary) GetSuppressedCriticalOk() (*int64, bool)`
+
+GetSuppressedCriticalOk returns a tuple with the SuppressedCritical field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSuppressedCritical
+
+`func (o *ComputeAlarmSummary) SetSuppressedCritical(v int64)`
+
+SetSuppressedCritical sets SuppressedCritical field to given value.
+
+### HasSuppressedCritical
+
+`func (o *ComputeAlarmSummary) HasSuppressedCritical() bool`
+
+HasSuppressedCritical returns a boolean if a field has been set.
+
+### GetSuppressedInfo
+
+`func (o *ComputeAlarmSummary) GetSuppressedInfo() int64`
+
+GetSuppressedInfo returns the SuppressedInfo field if non-nil, zero value otherwise.
+
+### GetSuppressedInfoOk
+
+`func (o *ComputeAlarmSummary) GetSuppressedInfoOk() (*int64, bool)`
+
+GetSuppressedInfoOk returns a tuple with the SuppressedInfo field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSuppressedInfo
+
+`func (o *ComputeAlarmSummary) SetSuppressedInfo(v int64)`
+
+SetSuppressedInfo sets SuppressedInfo field to given value.
+
+### HasSuppressedInfo
+
+`func (o *ComputeAlarmSummary) HasSuppressedInfo() bool`
+
+HasSuppressedInfo returns a boolean if a field has been set.
+
+### GetSuppressedWarning
+
+`func (o *ComputeAlarmSummary) GetSuppressedWarning() int64`
+
+GetSuppressedWarning returns the SuppressedWarning field if non-nil, zero value otherwise.
+
+### GetSuppressedWarningOk
+
+`func (o *ComputeAlarmSummary) GetSuppressedWarningOk() (*int64, bool)`
+
+GetSuppressedWarningOk returns a tuple with the SuppressedWarning field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSuppressedWarning
+
+`func (o *ComputeAlarmSummary) SetSuppressedWarning(v int64)`
+
+SetSuppressedWarning sets SuppressedWarning field to given value.
+
+### HasSuppressedWarning
+
+`func (o *ComputeAlarmSummary) HasSuppressedWarning() bool`
+
+HasSuppressedWarning returns a boolean if a field has been set.
 
 ### GetWarning
 

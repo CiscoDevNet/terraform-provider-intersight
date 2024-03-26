@@ -27,7 +27,7 @@ func getPowerPolicyInventorySchema() map[string]*schema.Schema {
 			DiffSuppressFunc: SuppressDiffAdditionProps,
 		},
 		"allocated_budget": {
-			Description: "Sets the Allocated Power Budget of the Chassis (in Watts). This field is only supported for Cisco UCS X series Chassis.",
+			Description: "Sets the allocated power budget of the chassis (in Watts).",
 			Type:        schema.TypeInt,
 			Optional:    true,
 		},
@@ -91,7 +91,7 @@ func getPowerPolicyInventorySchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"dynamic_rebalancing": {
-			Description: "Sets the Dynamic Power Rebalancing mode of the Chassis. If enabled, this mode allows the chassis to dynamically reallocate the power between servers depending on their power usage. This option is only supported for Cisco UCS X series Chassis.\n* `Enabled` - Set the value to Enabled.\n* `Disabled` - Set the value to Disabled.",
+			Description: "Sets the dynamic power rebalancing mode of the chassis. If enabled, this mode allows the chassis to dynamically reallocate the power between servers depending on their power usage.\n* `Enabled` - Set the value to Enabled.\n* `Disabled` - Set the value to Disabled.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -195,7 +195,7 @@ func getPowerPolicyInventorySchema() map[string]*schema.Schema {
 			},
 		},
 		"power_priority": {
-			Description: "Sets the Power Priority of the Server. This priority is used to determine the initial power allocation for servers. This field is only supported for Cisco UCS X series servers.\n* `Low` - Set the Power Priority to Low.\n* `Medium` - Set the Power Priority to Medium.\n* `High` - Set the Power Priority to High.",
+			Description: "Sets the Power Priority of the Server. This priority is used to determine the initial power allocation for servers. This field is only supported for Cisco UCS B series and X series servers.\n* `Low` - Set the Power Priority to Low.\n* `Medium` - Set the Power Priority to Medium.\n* `High` - Set the Power Priority to High.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -205,12 +205,12 @@ func getPowerPolicyInventorySchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"power_restore_state": {
-			Description: "Sets the Power Restore State of the Server. In the absence of Intersight connectivity, the chassis will use this policy  to recover the host power after a power loss event.  This field is only supported for Cisco UCS X series servers.\n* `AlwaysOff` - Set the Power Restore Mode to Off.\n* `AlwaysOn` - Set the Power Restore Mode to On.\n* `LastState` - Set the Power Restore Mode to LastState.",
+			Description: "Sets the Power Restore State of the Server. In the absence of Intersight connectivity, the chassis will use this policy  to recover the host power after a power loss event.  This field is only supported for Cisco UCS B series and X series servers.\n* `AlwaysOff` - Set the Power Restore Mode to Off.\n* `AlwaysOn` - Set the Power Restore Mode to On.\n* `LastState` - Set the Power Restore Mode to LastState.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
 		"power_save_mode": {
-			Description: "Sets the Power Save mode of the Chassis. If the requested power budget is less than available power\u00a0capacity,  the additional PSUs not required to comply with redundancy policy are placed in Power Save mode. This option is only supported for Cisco UCS X series Chassis.\n* `Enabled` - Set the value to Enabled.\n* `Disabled` - Set the value to Disabled.",
+			Description: "Sets the power save mode of the chassis. If the requested power budget is less than available power capacity,  the additional PSUs not required to comply with redundancy policy are placed in power save mode.\n* `Enabled` - Set the value to Enabled.\n* `Disabled` - Set the value to Disabled.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},

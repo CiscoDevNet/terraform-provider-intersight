@@ -23,7 +23,9 @@ Name | Type | Description | Notes
 **Name** | Pointer to **string** | Uniquely identifies the type of alarm. For alarms originating from Intersight, this will be a descriptive name. For alarms that are mapped from faults, the name will be derived from fault properties. For example, alarms mapped from UCS faults will use a prefix of UCS and appended with the fault code. | [optional] [readonly] 
 **OrigSeverity** | Pointer to **string** | The original severity when the alarm was first created. * &#x60;None&#x60; - The Enum value None represents that there is no severity. * &#x60;Info&#x60; - The Enum value Info represents the Informational level of severity. * &#x60;Critical&#x60; - The Enum value Critical represents the Critical level of severity. * &#x60;Warning&#x60; - The Enum value Warning represents the Warning level of severity. * &#x60;Cleared&#x60; - The Enum value Cleared represents that the alarm severity has been cleared. | [optional] [readonly] [default to "None"]
 **Severity** | Pointer to **string** | The severity of the alarm. Valid values are Critical, Warning, Info, and Cleared. * &#x60;None&#x60; - The Enum value None represents that there is no severity. * &#x60;Info&#x60; - The Enum value Info represents the Informational level of severity. * &#x60;Critical&#x60; - The Enum value Critical represents the Critical level of severity. * &#x60;Warning&#x60; - The Enum value Warning represents the Warning level of severity. * &#x60;Cleared&#x60; - The Enum value Cleared represents that the alarm severity has been cleared. | [optional] [readonly] [default to "None"]
+**Suppressed** | Pointer to **bool** | Indicates whether the alarm is marked for suppression or not. | [optional] 
 **AffectedMo** | Pointer to [**MoBaseMoRelationship**](MoBaseMoRelationship.md) |  | [optional] 
+**Definition** | Pointer to [**CondAlarmDefinitionRelationship**](CondAlarmDefinitionRelationship.md) |  | [optional] 
 **RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
 ## Methods
@@ -510,6 +512,31 @@ SetSeverity sets Severity field to given value.
 
 HasSeverity returns a boolean if a field has been set.
 
+### GetSuppressed
+
+`func (o *CondAlarm) GetSuppressed() bool`
+
+GetSuppressed returns the Suppressed field if non-nil, zero value otherwise.
+
+### GetSuppressedOk
+
+`func (o *CondAlarm) GetSuppressedOk() (*bool, bool)`
+
+GetSuppressedOk returns a tuple with the Suppressed field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSuppressed
+
+`func (o *CondAlarm) SetSuppressed(v bool)`
+
+SetSuppressed sets Suppressed field to given value.
+
+### HasSuppressed
+
+`func (o *CondAlarm) HasSuppressed() bool`
+
+HasSuppressed returns a boolean if a field has been set.
+
 ### GetAffectedMo
 
 `func (o *CondAlarm) GetAffectedMo() MoBaseMoRelationship`
@@ -534,6 +561,31 @@ SetAffectedMo sets AffectedMo field to given value.
 `func (o *CondAlarm) HasAffectedMo() bool`
 
 HasAffectedMo returns a boolean if a field has been set.
+
+### GetDefinition
+
+`func (o *CondAlarm) GetDefinition() CondAlarmDefinitionRelationship`
+
+GetDefinition returns the Definition field if non-nil, zero value otherwise.
+
+### GetDefinitionOk
+
+`func (o *CondAlarm) GetDefinitionOk() (*CondAlarmDefinitionRelationship, bool)`
+
+GetDefinitionOk returns a tuple with the Definition field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDefinition
+
+`func (o *CondAlarm) SetDefinition(v CondAlarmDefinitionRelationship)`
+
+SetDefinition sets Definition field to given value.
+
+### HasDefinition
+
+`func (o *CondAlarm) HasDefinition() bool`
+
+HasDefinition returns a boolean if a field has been set.
 
 ### GetRegisteredDevice
 

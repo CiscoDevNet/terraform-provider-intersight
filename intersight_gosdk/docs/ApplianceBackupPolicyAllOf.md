@@ -10,6 +10,8 @@ Name | Type | Description | Notes
 **IsPasswordSet** | Pointer to **bool** | Indicates whether the value of the &#39;password&#39; property has been set. | [optional] [readonly] [default to false]
 **ManualBackup** | Pointer to **bool** | Backup mode of the appliance. Automatic backups of the appliance are not initiated if this property is set to &#39;true&#39; and the backup schedule field is ignored. | [optional] 
 **Password** | Pointer to **string** | Password to authenticate the file server. | [optional] 
+**RetentionCount** | Pointer to **int64** | The number of backups before earliest backup is overwritten. Requires cleanup policy to be enabled. | [optional] [default to 1]
+**RetentionPolicyEnabled** | Pointer to **bool** | If backup rotate policy is set, older backups will automatically be overwritten. The number of backups before overwriting is defined by the retentionCount property. | [optional] 
 **Schedule** | Pointer to [**NullableOnpremSchedule**](OnpremSchedule.md) |  | [optional] 
 **Account** | Pointer to [**IamAccountRelationship**](IamAccountRelationship.md) |  | [optional] 
 
@@ -171,6 +173,56 @@ SetPassword sets Password field to given value.
 `func (o *ApplianceBackupPolicyAllOf) HasPassword() bool`
 
 HasPassword returns a boolean if a field has been set.
+
+### GetRetentionCount
+
+`func (o *ApplianceBackupPolicyAllOf) GetRetentionCount() int64`
+
+GetRetentionCount returns the RetentionCount field if non-nil, zero value otherwise.
+
+### GetRetentionCountOk
+
+`func (o *ApplianceBackupPolicyAllOf) GetRetentionCountOk() (*int64, bool)`
+
+GetRetentionCountOk returns a tuple with the RetentionCount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRetentionCount
+
+`func (o *ApplianceBackupPolicyAllOf) SetRetentionCount(v int64)`
+
+SetRetentionCount sets RetentionCount field to given value.
+
+### HasRetentionCount
+
+`func (o *ApplianceBackupPolicyAllOf) HasRetentionCount() bool`
+
+HasRetentionCount returns a boolean if a field has been set.
+
+### GetRetentionPolicyEnabled
+
+`func (o *ApplianceBackupPolicyAllOf) GetRetentionPolicyEnabled() bool`
+
+GetRetentionPolicyEnabled returns the RetentionPolicyEnabled field if non-nil, zero value otherwise.
+
+### GetRetentionPolicyEnabledOk
+
+`func (o *ApplianceBackupPolicyAllOf) GetRetentionPolicyEnabledOk() (*bool, bool)`
+
+GetRetentionPolicyEnabledOk returns a tuple with the RetentionPolicyEnabled field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRetentionPolicyEnabled
+
+`func (o *ApplianceBackupPolicyAllOf) SetRetentionPolicyEnabled(v bool)`
+
+SetRetentionPolicyEnabled sets RetentionPolicyEnabled field to given value.
+
+### HasRetentionPolicyEnabled
+
+`func (o *ApplianceBackupPolicyAllOf) HasRetentionPolicyEnabled() bool`
+
+HasRetentionPolicyEnabled returns a boolean if a field has been set.
 
 ### GetSchedule
 

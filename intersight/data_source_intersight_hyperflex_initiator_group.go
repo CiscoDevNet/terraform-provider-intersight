@@ -150,13 +150,18 @@ func getHyperflexInitiatorGroupSchema() map[string]*schema.Schema {
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
+					"nqn": {
+						Description: "NQN (NVMe Qualified Name). Can be up to 223 characters long and has the format nqn.yyyy-mm.naming-authority:unique name.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
 					"object_type": {
 						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
 					"type": {
-						Description: "Initiator type, it can be FC or iSCSI.\n* `FC` - Fibre channel initiator type which contains WWN of an HBA on the host.\n* `iSCSI` - An iSCSI initiator type which contains the IQN (iSCSI Qualified Name) used by the host.\n* `Mixed` - Initiator type for systems using both FC and iSCSI connections.",
+						Description: "Initiator type, it can be FC or iSCSI.\n* `FC` - Fibre channel initiator type which contains WWN of an HBA on the host.\n* `iSCSI` - An iSCSI initiator type which contains the IQN (iSCSI Qualified Name) used by the host.\n* `NVMe` - NVMe initiator type which contains the NQN (NVMe Qualified Name) used by the host.\n* `Mixed` - Initiator type for systems using both FC and iSCSI connections.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},

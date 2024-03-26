@@ -8,7 +8,8 @@ Name | Type | Description | Notes
 **Fields** | Pointer to [**[]TelemetryDruidPostAggregator**](TelemetryDruidPostAggregator.md) | Fields processed by post aggregator | [optional] 
 **Name** | Pointer to **string** | Output name for the post-aggregator. | [optional] 
 **Fn** | Pointer to **string** |  | [optional] 
-**Ordering** | Pointer to **string** | Arithmetic post-aggregators may specify an ordering, which defines the order of resulting values when sorting results. This can be useful for topN queries for instance. If no ordering (or null) is specified, the default floating point ordering is used. numericFirst ordering always returns finite values first, followed by NaN, and infinite values last. | [optional] 
+**Ordering** | Pointer to **string** | Expression post-aggregators may specify an ordering, which defines the order of resulting values when sorting results. If no ordering (or null) is specified, the default floating point ordering is used. numericFirst ordering always returns finite values first, followed by NaN, and infinite values last. | [optional] 
+**Expression** | Pointer to **string** | The Druid expression. | [optional] 
 **FieldName** | Pointer to **string** | The name field value of the hyperUnique aggregator. | [optional] 
 **Value** | Pointer to **float64** | The numerical value. | [optional] 
 **Field** | Pointer to **string** | Post aggregator of type fieldAccess that refers to a thetaSketch aggregator or that of type thetaSketchSetOp. | [optional] 
@@ -153,6 +154,31 @@ SetOrdering sets Ordering field to given value.
 `func (o *TelemetryDruidPostAggregator) HasOrdering() bool`
 
 HasOrdering returns a boolean if a field has been set.
+
+### GetExpression
+
+`func (o *TelemetryDruidPostAggregator) GetExpression() string`
+
+GetExpression returns the Expression field if non-nil, zero value otherwise.
+
+### GetExpressionOk
+
+`func (o *TelemetryDruidPostAggregator) GetExpressionOk() (*string, bool)`
+
+GetExpressionOk returns a tuple with the Expression field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetExpression
+
+`func (o *TelemetryDruidPostAggregator) SetExpression(v string)`
+
+SetExpression sets Expression field to given value.
+
+### HasExpression
+
+`func (o *TelemetryDruidPostAggregator) HasExpression() bool`
+
+HasExpression returns a boolean if a field has been set.
 
 ### GetFieldName
 

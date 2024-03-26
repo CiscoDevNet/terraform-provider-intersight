@@ -7,6 +7,8 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "processor.Unit"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "processor.Unit"]
 **Architecture** | Pointer to **string** | The architecture of the installed processor. | [optional] [readonly] 
+**Description** | Pointer to **string** | This field displays the description of the processor. | [optional] [readonly] 
+**IsPlatformSupported** | Pointer to **bool** | This field indicates whether the processor is supported on the server or not. | [optional] [readonly] [default to true]
 **NumCores** | Pointer to **int64** | The number of cores present in a given processor. | [optional] [readonly] 
 **NumCoresEnabled** | Pointer to **string** | The number of enabled cores in the installed processor. | [optional] [readonly] 
 **NumThreads** | Pointer to **string** | The maximum number of threads available in the installed processor. | [optional] [readonly] 
@@ -14,6 +16,8 @@ Name | Type | Description | Notes
 **OperReason** | Pointer to **[]string** |  | [optional] 
 **OperState** | Pointer to **string** | The health indicator of the processor, &#39;OK&#39; indicates the processor is operatinal. | [optional] [readonly] 
 **Operability** | Pointer to **string** | Operability state of the central processing unit. | [optional] [readonly] 
+**PartNumber** | Pointer to **string** | This field displays the part number of the of the processor. | [optional] [readonly] 
+**Pid** | Pointer to **string** | This field displays the product ID of the processor. | [optional] [readonly] 
 **ProcessorId** | Pointer to **int64** | The ID number of a given processor. | [optional] [readonly] 
 **SocketDesignation** | Pointer to **string** | The socket ID of the installed processor. | [optional] [readonly] 
 **Speed** | Pointer to **float32** | The maximum speed of the installed processor in GHz. | [optional] [readonly] 
@@ -109,6 +113,56 @@ SetArchitecture sets Architecture field to given value.
 `func (o *ProcessorUnit) HasArchitecture() bool`
 
 HasArchitecture returns a boolean if a field has been set.
+
+### GetDescription
+
+`func (o *ProcessorUnit) GetDescription() string`
+
+GetDescription returns the Description field if non-nil, zero value otherwise.
+
+### GetDescriptionOk
+
+`func (o *ProcessorUnit) GetDescriptionOk() (*string, bool)`
+
+GetDescriptionOk returns a tuple with the Description field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDescription
+
+`func (o *ProcessorUnit) SetDescription(v string)`
+
+SetDescription sets Description field to given value.
+
+### HasDescription
+
+`func (o *ProcessorUnit) HasDescription() bool`
+
+HasDescription returns a boolean if a field has been set.
+
+### GetIsPlatformSupported
+
+`func (o *ProcessorUnit) GetIsPlatformSupported() bool`
+
+GetIsPlatformSupported returns the IsPlatformSupported field if non-nil, zero value otherwise.
+
+### GetIsPlatformSupportedOk
+
+`func (o *ProcessorUnit) GetIsPlatformSupportedOk() (*bool, bool)`
+
+GetIsPlatformSupportedOk returns a tuple with the IsPlatformSupported field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsPlatformSupported
+
+`func (o *ProcessorUnit) SetIsPlatformSupported(v bool)`
+
+SetIsPlatformSupported sets IsPlatformSupported field to given value.
+
+### HasIsPlatformSupported
+
+`func (o *ProcessorUnit) HasIsPlatformSupported() bool`
+
+HasIsPlatformSupported returns a boolean if a field has been set.
 
 ### GetNumCores
 
@@ -294,6 +348,56 @@ SetOperability sets Operability field to given value.
 `func (o *ProcessorUnit) HasOperability() bool`
 
 HasOperability returns a boolean if a field has been set.
+
+### GetPartNumber
+
+`func (o *ProcessorUnit) GetPartNumber() string`
+
+GetPartNumber returns the PartNumber field if non-nil, zero value otherwise.
+
+### GetPartNumberOk
+
+`func (o *ProcessorUnit) GetPartNumberOk() (*string, bool)`
+
+GetPartNumberOk returns a tuple with the PartNumber field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPartNumber
+
+`func (o *ProcessorUnit) SetPartNumber(v string)`
+
+SetPartNumber sets PartNumber field to given value.
+
+### HasPartNumber
+
+`func (o *ProcessorUnit) HasPartNumber() bool`
+
+HasPartNumber returns a boolean if a field has been set.
+
+### GetPid
+
+`func (o *ProcessorUnit) GetPid() string`
+
+GetPid returns the Pid field if non-nil, zero value otherwise.
+
+### GetPidOk
+
+`func (o *ProcessorUnit) GetPidOk() (*string, bool)`
+
+GetPidOk returns a tuple with the Pid field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPid
+
+`func (o *ProcessorUnit) SetPid(v string)`
+
+SetPid sets Pid field to given value.
+
+### HasPid
+
+`func (o *ProcessorUnit) HasPid() bool`
+
+HasPid returns a boolean if a field has been set.
 
 ### GetProcessorId
 

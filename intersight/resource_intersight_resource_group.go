@@ -374,6 +374,11 @@ func resourceResourceGroup() *schema.Resource {
 				Optional:     true,
 				Default:      "Allow-Selectors",
 			},
+			"reevaluate": {
+				Description: "Set Reevaluate to true to reevaluate the group members and memberships of this resource group.",
+				Type:        schema.TypeBool,
+				Optional:    true,
+			},
 			"selectors": {
 				Type:       schema.TypeList,
 				Optional:   true,
@@ -445,6 +450,17 @@ func resourceResourceGroup() *schema.Resource {
 					},
 				},
 			},
+			"type": {
+				Description: "The type of this resource group. (Rbac, Licensing, solution).\n* `rbac` - These resource groups are used for multi-tenancy by assigning to organizations.\n* `licensing` - These resource groups are used to classify resources like servers to various groups which are associated to different license tiers.\n* `solution` - These resource groups are created for Flexpods.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+					if val != nil {
+						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+					}
+					return
+				}},
 			"version_context": {
 				Description: "The versioning info for this managed object.",
 				Type:        schema.TypeList,
@@ -711,6 +727,11 @@ func resourceResourceGroupCreate(c context.Context, d *schema.ResourceData, meta
 		o.SetQualifier(x)
 	}
 
+	if v, ok := d.GetOkExists("reevaluate"); ok {
+		x := (v.(bool))
+		o.SetReevaluate(x)
+	}
+
 	if v, ok := d.GetOk("selectors"); ok {
 		x := make([]models.ResourceSelector, 0)
 		s := v.([]interface{})
@@ -889,6 +910,10 @@ func resourceResourceGroupRead(c context.Context, d *schema.ResourceData, meta i
 		return diag.Errorf("error occurred while setting property Qualifier in ResourceGroup object: %s", err.Error())
 	}
 
+	if err := d.Set("reevaluate", (s.GetReevaluate())); err != nil {
+		return diag.Errorf("error occurred while setting property Reevaluate in ResourceGroup object: %s", err.Error())
+	}
+
 	if err := d.Set("selectors", flattenListResourceSelector(s.GetSelectors(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property Selectors in ResourceGroup object: %s", err.Error())
 	}
@@ -899,6 +924,10 @@ func resourceResourceGroupRead(c context.Context, d *schema.ResourceData, meta i
 
 	if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property Tags in ResourceGroup object: %s", err.Error())
+	}
+
+	if err := d.Set("type", (s.GetType())); err != nil {
+		return diag.Errorf("error occurred while setting property Type in ResourceGroup object: %s", err.Error())
 	}
 
 	if err := d.Set("version_context", flattenMapMoVersionContext(s.GetVersionContext(), d)); err != nil {
@@ -1022,6 +1051,12 @@ func resourceResourceGroupUpdate(c context.Context, d *schema.ResourceData, meta
 		v := d.Get("qualifier")
 		x := (v.(string))
 		o.SetQualifier(x)
+	}
+
+	if d.HasChange("reevaluate") {
+		v := d.Get("reevaluate")
+		x := (v.(bool))
+		o.SetReevaluate(x)
 	}
 
 	if d.HasChange("selectors") {

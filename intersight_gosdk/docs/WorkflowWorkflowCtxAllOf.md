@@ -8,8 +8,8 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "workflow.WorkflowCtx"]
 **InitiatorCtx** | Pointer to [**NullableWorkflowInitiatorContext**](WorkflowInitiatorContext.md) |  | [optional] 
 **TargetCtxList** | Pointer to [**[]WorkflowTargetContext**](WorkflowTargetContext.md) |  | [optional] 
-**WorkflowSubtype** | Pointer to **string** | The subtype of the workflow. | [optional] [readonly] 
-**WorkflowType** | Pointer to **string** | Type of the workflow being started. This can be any string for client services to distinguish workflow by type. | [optional] [readonly] 
+**WorkflowSubtype** | Pointer to **string** | The subtype of the dynamic workflow. For example - Intersight services offer the following subtypes [Validate, Deploy, Import] for dynamic workflow of type serverconfig. This field is not applicable for user created workflows. | [optional] [readonly] 
+**WorkflowType** | Pointer to **string** | Intersight services set the type of dynamic workflow that need to be built and executed. This field is not applicable for user created workflows. WorkflowType set as ServerConfig states that a dynamic workflow is executing tasks related to server configuration. | [optional] [readonly] 
 
 ## Methods
 

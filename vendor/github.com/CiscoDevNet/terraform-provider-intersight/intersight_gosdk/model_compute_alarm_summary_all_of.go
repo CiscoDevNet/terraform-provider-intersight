@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-11765
+API version: 1.0.11-14968
 Contact: intersight@cisco.com
 */
 
@@ -27,6 +27,14 @@ type ComputeAlarmSummaryAllOf struct {
 	Health *string `json:"Health,omitempty"`
 	// The count of alarms that have severity type Info.
 	Info *int64 `json:"Info,omitempty"`
+	// The flag that indicates whether suppression is enabled or not in the entity.
+	Suppressed *bool `json:"Suppressed,omitempty"`
+	// The count of active suppressed alarms that have severity type Critical.
+	SuppressedCritical *int64 `json:"SuppressedCritical,omitempty"`
+	// The count of active suppressed alarms that have severity type Info.
+	SuppressedInfo *int64 `json:"SuppressedInfo,omitempty"`
+	// The count of active suppressed alarms that have severity type Warning.
+	SuppressedWarning *int64 `json:"SuppressedWarning,omitempty"`
 	// The count of alarms that have severity type Warning.
 	Warning              *int64 `json:"Warning,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -201,6 +209,134 @@ func (o *ComputeAlarmSummaryAllOf) SetInfo(v int64) {
 	o.Info = &v
 }
 
+// GetSuppressed returns the Suppressed field value if set, zero value otherwise.
+func (o *ComputeAlarmSummaryAllOf) GetSuppressed() bool {
+	if o == nil || o.Suppressed == nil {
+		var ret bool
+		return ret
+	}
+	return *o.Suppressed
+}
+
+// GetSuppressedOk returns a tuple with the Suppressed field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ComputeAlarmSummaryAllOf) GetSuppressedOk() (*bool, bool) {
+	if o == nil || o.Suppressed == nil {
+		return nil, false
+	}
+	return o.Suppressed, true
+}
+
+// HasSuppressed returns a boolean if a field has been set.
+func (o *ComputeAlarmSummaryAllOf) HasSuppressed() bool {
+	if o != nil && o.Suppressed != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetSuppressed gets a reference to the given bool and assigns it to the Suppressed field.
+func (o *ComputeAlarmSummaryAllOf) SetSuppressed(v bool) {
+	o.Suppressed = &v
+}
+
+// GetSuppressedCritical returns the SuppressedCritical field value if set, zero value otherwise.
+func (o *ComputeAlarmSummaryAllOf) GetSuppressedCritical() int64 {
+	if o == nil || o.SuppressedCritical == nil {
+		var ret int64
+		return ret
+	}
+	return *o.SuppressedCritical
+}
+
+// GetSuppressedCriticalOk returns a tuple with the SuppressedCritical field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ComputeAlarmSummaryAllOf) GetSuppressedCriticalOk() (*int64, bool) {
+	if o == nil || o.SuppressedCritical == nil {
+		return nil, false
+	}
+	return o.SuppressedCritical, true
+}
+
+// HasSuppressedCritical returns a boolean if a field has been set.
+func (o *ComputeAlarmSummaryAllOf) HasSuppressedCritical() bool {
+	if o != nil && o.SuppressedCritical != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetSuppressedCritical gets a reference to the given int64 and assigns it to the SuppressedCritical field.
+func (o *ComputeAlarmSummaryAllOf) SetSuppressedCritical(v int64) {
+	o.SuppressedCritical = &v
+}
+
+// GetSuppressedInfo returns the SuppressedInfo field value if set, zero value otherwise.
+func (o *ComputeAlarmSummaryAllOf) GetSuppressedInfo() int64 {
+	if o == nil || o.SuppressedInfo == nil {
+		var ret int64
+		return ret
+	}
+	return *o.SuppressedInfo
+}
+
+// GetSuppressedInfoOk returns a tuple with the SuppressedInfo field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ComputeAlarmSummaryAllOf) GetSuppressedInfoOk() (*int64, bool) {
+	if o == nil || o.SuppressedInfo == nil {
+		return nil, false
+	}
+	return o.SuppressedInfo, true
+}
+
+// HasSuppressedInfo returns a boolean if a field has been set.
+func (o *ComputeAlarmSummaryAllOf) HasSuppressedInfo() bool {
+	if o != nil && o.SuppressedInfo != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetSuppressedInfo gets a reference to the given int64 and assigns it to the SuppressedInfo field.
+func (o *ComputeAlarmSummaryAllOf) SetSuppressedInfo(v int64) {
+	o.SuppressedInfo = &v
+}
+
+// GetSuppressedWarning returns the SuppressedWarning field value if set, zero value otherwise.
+func (o *ComputeAlarmSummaryAllOf) GetSuppressedWarning() int64 {
+	if o == nil || o.SuppressedWarning == nil {
+		var ret int64
+		return ret
+	}
+	return *o.SuppressedWarning
+}
+
+// GetSuppressedWarningOk returns a tuple with the SuppressedWarning field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ComputeAlarmSummaryAllOf) GetSuppressedWarningOk() (*int64, bool) {
+	if o == nil || o.SuppressedWarning == nil {
+		return nil, false
+	}
+	return o.SuppressedWarning, true
+}
+
+// HasSuppressedWarning returns a boolean if a field has been set.
+func (o *ComputeAlarmSummaryAllOf) HasSuppressedWarning() bool {
+	if o != nil && o.SuppressedWarning != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetSuppressedWarning gets a reference to the given int64 and assigns it to the SuppressedWarning field.
+func (o *ComputeAlarmSummaryAllOf) SetSuppressedWarning(v int64) {
+	o.SuppressedWarning = &v
+}
+
 // GetWarning returns the Warning field value if set, zero value otherwise.
 func (o *ComputeAlarmSummaryAllOf) GetWarning() int64 {
 	if o == nil || o.Warning == nil {
@@ -250,6 +386,18 @@ func (o ComputeAlarmSummaryAllOf) MarshalJSON() ([]byte, error) {
 	if o.Info != nil {
 		toSerialize["Info"] = o.Info
 	}
+	if o.Suppressed != nil {
+		toSerialize["Suppressed"] = o.Suppressed
+	}
+	if o.SuppressedCritical != nil {
+		toSerialize["SuppressedCritical"] = o.SuppressedCritical
+	}
+	if o.SuppressedInfo != nil {
+		toSerialize["SuppressedInfo"] = o.SuppressedInfo
+	}
+	if o.SuppressedWarning != nil {
+		toSerialize["SuppressedWarning"] = o.SuppressedWarning
+	}
 	if o.Warning != nil {
 		toSerialize["Warning"] = o.Warning
 	}
@@ -276,6 +424,10 @@ func (o *ComputeAlarmSummaryAllOf) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "Critical")
 		delete(additionalProperties, "Health")
 		delete(additionalProperties, "Info")
+		delete(additionalProperties, "Suppressed")
+		delete(additionalProperties, "SuppressedCritical")
+		delete(additionalProperties, "SuppressedInfo")
+		delete(additionalProperties, "SuppressedWarning")
 		delete(additionalProperties, "Warning")
 		o.AdditionalProperties = additionalProperties
 	}

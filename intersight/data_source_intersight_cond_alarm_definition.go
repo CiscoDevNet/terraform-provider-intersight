@@ -302,6 +302,11 @@ func getCondAlarmDefinitionSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"system_classifications": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Schema{
+				Type: schema.TypeString}},
 		"tags": {
 			Type:     schema.TypeList,
 			Optional: true,
@@ -812,6 +817,17 @@ func dataSourceCondAlarmDefinitionRead(c context.Context, d *schema.ResourceData
 		o.SetSharedScope(x)
 	}
 
+	if v, ok := d.GetOk("system_classifications"); ok {
+		x := make([]string, 0)
+		y := reflect.ValueOf(v)
+		for i := 0; i < y.Len(); i++ {
+			if y.Index(i).Interface() != nil {
+				x = append(x, y.Index(i).Interface().(string))
+			}
+		}
+		o.SetSystemClassifications(x)
+	}
+
 	if v, ok := d.GetOk("tags"); ok {
 		x := make([]models.MoTag, 0)
 		s := v.([]interface{})
@@ -980,6 +996,7 @@ func dataSourceCondAlarmDefinitionRead(c context.Context, d *schema.ResourceData
 				temp["probable_cause"] = (s.GetProbableCause())
 				temp["remediation"] = (s.GetRemediation())
 				temp["shared_scope"] = (s.GetSharedScope())
+				temp["system_classifications"] = (s.GetSystemClassifications())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
 

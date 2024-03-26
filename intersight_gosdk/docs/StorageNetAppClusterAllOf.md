@@ -10,7 +10,10 @@ Name | Type | Description | Notes
 **AvgPerformanceMetrics** | Pointer to [**StorageNetAppPerformanceMetricsAverage**](StorageNetAppPerformanceMetricsAverage.md) |  | [optional] 
 **ClusterEfficiency** | Pointer to [**NullableStorageNetAppStorageClusterEfficiency**](StorageNetAppStorageClusterEfficiency.md) |  | [optional] 
 **ClusterHealthStatus** | Pointer to **string** | The health status of the cluster. Possible states are ok, ok-with-suppressed, degraded, and unreachable. * &#x60;Unreachable&#x60; - Cluster status is unreachable. * &#x60;OK&#x60; - Cluster status is either ok or ok-with-suppressed. * &#x60;Degraded&#x60; - Cluster status is degraded. | [optional] [readonly] [default to "Unreachable"]
+**DefaultAdminLocked** | Pointer to **bool** | Indicates whether the default admin user is locked out. | [optional] [readonly] 
 **DnsDomains** | Pointer to **[]string** |  | [optional] 
+**FipsCompliant** | Pointer to **bool** | Indicates whether or not the software FIPS mode is enabled on the cluster. | [optional] [readonly] 
+**InsecureCiphers** | Pointer to **int64** | Number of SVMs on the cluster that use insecure ciphers. | [optional] [readonly] 
 **Key** | Pointer to **string** | Unique identifier of NetApp Cluster across data center. | [optional] [readonly] 
 **Location** | Pointer to **string** | Location of the storage controller. | [optional] [readonly] 
 **ManagementAddress** | Pointer to **[]string** |  | [optional] 
@@ -203,6 +206,31 @@ SetClusterHealthStatus sets ClusterHealthStatus field to given value.
 
 HasClusterHealthStatus returns a boolean if a field has been set.
 
+### GetDefaultAdminLocked
+
+`func (o *StorageNetAppClusterAllOf) GetDefaultAdminLocked() bool`
+
+GetDefaultAdminLocked returns the DefaultAdminLocked field if non-nil, zero value otherwise.
+
+### GetDefaultAdminLockedOk
+
+`func (o *StorageNetAppClusterAllOf) GetDefaultAdminLockedOk() (*bool, bool)`
+
+GetDefaultAdminLockedOk returns a tuple with the DefaultAdminLocked field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDefaultAdminLocked
+
+`func (o *StorageNetAppClusterAllOf) SetDefaultAdminLocked(v bool)`
+
+SetDefaultAdminLocked sets DefaultAdminLocked field to given value.
+
+### HasDefaultAdminLocked
+
+`func (o *StorageNetAppClusterAllOf) HasDefaultAdminLocked() bool`
+
+HasDefaultAdminLocked returns a boolean if a field has been set.
+
 ### GetDnsDomains
 
 `func (o *StorageNetAppClusterAllOf) GetDnsDomains() []string`
@@ -238,6 +266,56 @@ HasDnsDomains returns a boolean if a field has been set.
 `func (o *StorageNetAppClusterAllOf) UnsetDnsDomains()`
 
 UnsetDnsDomains ensures that no value is present for DnsDomains, not even an explicit nil
+### GetFipsCompliant
+
+`func (o *StorageNetAppClusterAllOf) GetFipsCompliant() bool`
+
+GetFipsCompliant returns the FipsCompliant field if non-nil, zero value otherwise.
+
+### GetFipsCompliantOk
+
+`func (o *StorageNetAppClusterAllOf) GetFipsCompliantOk() (*bool, bool)`
+
+GetFipsCompliantOk returns a tuple with the FipsCompliant field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFipsCompliant
+
+`func (o *StorageNetAppClusterAllOf) SetFipsCompliant(v bool)`
+
+SetFipsCompliant sets FipsCompliant field to given value.
+
+### HasFipsCompliant
+
+`func (o *StorageNetAppClusterAllOf) HasFipsCompliant() bool`
+
+HasFipsCompliant returns a boolean if a field has been set.
+
+### GetInsecureCiphers
+
+`func (o *StorageNetAppClusterAllOf) GetInsecureCiphers() int64`
+
+GetInsecureCiphers returns the InsecureCiphers field if non-nil, zero value otherwise.
+
+### GetInsecureCiphersOk
+
+`func (o *StorageNetAppClusterAllOf) GetInsecureCiphersOk() (*int64, bool)`
+
+GetInsecureCiphersOk returns a tuple with the InsecureCiphers field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetInsecureCiphers
+
+`func (o *StorageNetAppClusterAllOf) SetInsecureCiphers(v int64)`
+
+SetInsecureCiphers sets InsecureCiphers field to given value.
+
+### HasInsecureCiphers
+
+`func (o *StorageNetAppClusterAllOf) HasInsecureCiphers() bool`
+
+HasInsecureCiphers returns a boolean if a field has been set.
+
 ### GetKey
 
 `func (o *StorageNetAppClusterAllOf) GetKey() string`

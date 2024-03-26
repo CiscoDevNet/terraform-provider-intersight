@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-11765
+API version: 1.0.11-14968
 Contact: intersight@cisco.com
 */
 
@@ -79,9 +79,9 @@ type BiosPolicyAllOf struct {
 	BootPerformanceMode *string `json:"BootPerformanceMode,omitempty"`
 	// BIOS Token for setting Burst and Postponed Refresh configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
 	BurstAndPostponedRefresh *string `json:"BurstAndPostponedRefresh,omitempty"`
-	// BIOS Token for setting C1 Auto Demotion configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
+	// BIOS Token for setting C1 Auto Demotion configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring C1autoDemotion token. * `disabled` - Value - disabled for configuring C1autoDemotion token. * `enabled` - Value - enabled for configuring C1autoDemotion token.
 	C1autoDemotion *string `json:"C1autoDemotion,omitempty"`
-	// BIOS Token for setting C1 Auto UnDemotion configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
+	// BIOS Token for setting C1 Auto UnDemotion configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring C1autoUnDemotion token. * `disabled` - Value - disabled for configuring C1autoUnDemotion token. * `enabled` - Value - enabled for configuring C1autoUnDemotion token.
 	C1autoUnDemotion *string `json:"C1autoUnDemotion,omitempty"`
 	// BIOS Token for setting APBDIS configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `0` - Value - 0 for configuring CbsCmnApbdis token. * `1` - Value - 1 for configuring CbsCmnApbdis token. * `Auto` - Value - Auto for configuring CbsCmnApbdis token.
 	CbsCmnApbdis *string `json:"CbsCmnApbdis,omitempty"`
@@ -207,6 +207,10 @@ type BiosPolicyAllOf struct {
 	EnableRmt *string `json:"EnableRmt,omitempty"`
 	// BIOS Token for setting Software Guard Extensions  (SGX) configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
 	EnableSgx *string `json:"EnableSgx,omitempty"`
+	// BIOS Token for setting Trust Domain Extension  (TDX) configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
+	EnableTdx *string `json:"EnableTdx,omitempty"`
+	// BIOS Token for setting TDX Secure Arbitration Mode  (SEAM) Loader configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
+	EnableTdxSeamldr *string `json:"EnableTdxSeamldr,omitempty"`
 	// BIOS Token for setting Total Memory Encryption  (TME) configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
 	EnableTme *string `json:"EnableTme,omitempty"`
 	// BIOS Token for setting Energy Efficient Turbo configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
@@ -327,6 +331,8 @@ type BiosPolicyAllOf struct {
 	OnboardScuStorageSwStack *string `json:"OnboardScuStorageSwStack,omitempty"`
 	// BIOS Token for setting Operation Mode configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Test Only` - Value - Test Only for configuring OperationMode token. * `Test and Repair` - Value - Test and Repair for configuring OperationMode token.
 	OperationMode *string `json:"OperationMode,omitempty"`
+	// BIOS Token for setting Optimized Power Mode configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
+	OptimizedPowerMode *string `json:"OptimizedPowerMode,omitempty"`
 	// BIOS Token for setting OS Boot Watchdog Timer configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
 	OsBootWatchdogTimer *string `json:"OsBootWatchdogTimer,omitempty"`
 	// BIOS Token for setting OS Boot Watchdog Timer Policy configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `do-nothing` - Value - do-nothing for configuring OsBootWatchdogTimerPolicy token. * `power-off` - Value - power-off for configuring OsBootWatchdogTimerPolicy token. * `reset` - Value - reset for configuring OsBootWatchdogTimerPolicy token.
@@ -417,6 +423,8 @@ type BiosPolicyAllOf struct {
 	PostErrorPause *string `json:"PostErrorPause,omitempty"`
 	// BIOS Token for setting Post Package Repair configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Disabled` - Value - Disabled for configuring PostPackageRepair token. * `Hard PPR` - Value - Hard PPR for configuring PostPackageRepair token.
 	PostPackageRepair *string `json:"PostPackageRepair,omitempty"`
+	// BIOS Token for setting PRMRR Size configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `1G` - Value - 1G for configuring PrmrrSize token. * `2G` - Value - 2G for configuring PrmrrSize token. * `4G` - Value - 4G for configuring PrmrrSize token. * `8G` - Value - 8G for configuring PrmrrSize token. * `16G` - Value - 16G for configuring PrmrrSize token. * `32G` - Value - 32G for configuring PrmrrSize token. * `64G` - Value - 64G for configuring PrmrrSize token. * `128G` - Value - 128G for configuring PrmrrSize token. * `256G` - Value - 256G for configuring PrmrrSize token. * `512G` - Value - 512G for configuring PrmrrSize token. * `128M` - Value - 128M for configuring PrmrrSize token. * `256M` - Value - 256M for configuring PrmrrSize token. * `512M` - Value - 512M for configuring PrmrrSize token. * `Invalid Config.` - Value - Invalid Config for configuring PrmrrSize token.
+	PrmrrSize *string `json:"PrmrrSize,omitempty"`
 	// BIOS Token for setting Processor C1E configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
 	ProcessorC1e *string `json:"ProcessorC1e,omitempty"`
 	// BIOS Token for setting Processor C3 Report configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
@@ -435,7 +443,7 @@ type BiosPolicyAllOf struct {
 	PwrPerfTuning *string `json:"PwrPerfTuning,omitempty"`
 	// BIOS Token for setting QPI Link Frequency Select configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `6.4-gt/s` - Value - 6.4-gt/s for configuring QpiLinkFrequency token. * `7.2-gt/s` - Value - 7.2-gt/s for configuring QpiLinkFrequency token. * `8.0-gt/s` - Value - 8.0-gt/s for configuring QpiLinkFrequency token. * `9.6-gt/s` - Value - 9.6-gt/s for configuring QpiLinkFrequency token. * `auto` - Value - auto for configuring QpiLinkFrequency token.
 	QpiLinkFrequency *string `json:"QpiLinkFrequency,omitempty"`
-	// BIOS Token for setting UPI Link Frequency Select configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `10.4GT/s` - Value - 10.4GT/s for configuring QpiLinkSpeed token. * `11.2GT/s` - Value - 11.2GT/s for configuring QpiLinkSpeed token. * `12.8GT/s` - Value - 12.8GT/s for configuring QpiLinkSpeed token. * `14.4GT/s` - Value - 14.4GT/s for configuring QpiLinkSpeed token. * `16.0GT/s` - Value - 16.0GT/s for configuring QpiLinkSpeed token. * `9.6GT/s` - Value - 9.6GT/s for configuring QpiLinkSpeed token. * `Auto` - Value - Auto for configuring QpiLinkSpeed token.
+	// BIOS Token for setting UPI Link Frequency Select configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `10.4GT/s` - Value - 10.4GT/s for configuring QpiLinkSpeed token. * `11.2GT/s` - Value - 11.2GT/s for configuring QpiLinkSpeed token. * `12.8GT/s` - Value - 12.8GT/s for configuring QpiLinkSpeed token. * `14.4GT/s` - Value - 14.4GT/s for configuring QpiLinkSpeed token. * `16.0GT/s` - Value - 16.0GT/s for configuring QpiLinkSpeed token. * `20.0GT/s` - Value - 20.0GT/s for configuring QpiLinkSpeed token. * `9.6GT/s` - Value - 9.6GT/s for configuring QpiLinkSpeed token. * `Auto` - Value - Auto for configuring QpiLinkSpeed token.
 	QpiLinkSpeed *string `json:"QpiLinkSpeed,omitempty"`
 	// BIOS Token for setting QPI Snoop Mode configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `auto` - Value - auto for configuring QpiSnoopMode token. * `cluster-on-die` - Value - cluster-on-die for configuring QpiSnoopMode token. * `early-snoop` - Value - early-snoop for configuring QpiSnoopMode token. * `home-directory-snoop` - Value - home-directory-snoop for configuring QpiSnoopMode token. * `home-directory-snoop-with-osb` - Value - home-directory-snoop-with-osb for configuring QpiSnoopMode token. * `home-snoop` - Value - home-snoop for configuring QpiSnoopMode token.
 	QpiSnoopMode *string `json:"QpiSnoopMode,omitempty"`
@@ -479,6 +487,8 @@ type BiosPolicyAllOf struct {
 	Sha1pcrBank *string `json:"Sha1pcrBank,omitempty"`
 	// BIOS Token for setting SHA256 PCR Bank configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
 	Sha256pcrBank *string `json:"Sha256pcrBank,omitempty"`
+	// BIOS Token for setting SHA384 PCR Bank configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
+	Sha384pcrBank *string `json:"Sha384pcrBank,omitempty"`
 	// BIOS Token for setting Single PCTL configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `No` - Value - No for configuring SinglePctlEnable token. * `Yes` - Value - Yes for configuring SinglePctlEnable token.
 	SinglePctlEnable *string `json:"SinglePctlEnable,omitempty"`
 	// BIOS Token for setting PCIe Slot:10 Link Speed configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring Slot10linkSpeed token. * `Disabled` - Value - Disabled for configuring Slot10linkSpeed token. * `GEN1` - Value - GEN1 for configuring Slot10linkSpeed token. * `GEN2` - Value - GEN2 for configuring Slot10linkSpeed token. * `GEN3` - Value - GEN3 for configuring Slot10linkSpeed token.
@@ -1043,6 +1053,10 @@ func NewBiosPolicyAllOf(classId string, objectType string) *BiosPolicyAllOf {
 	this.EnableRmt = &enableRmt
 	var enableSgx string = "platform-default"
 	this.EnableSgx = &enableSgx
+	var enableTdx string = "platform-default"
+	this.EnableTdx = &enableTdx
+	var enableTdxSeamldr string = "platform-default"
+	this.EnableTdxSeamldr = &enableTdxSeamldr
 	var enableTme string = "platform-default"
 	this.EnableTme = &enableTme
 	var energyEfficientTurbo string = "platform-default"
@@ -1163,6 +1177,8 @@ func NewBiosPolicyAllOf(classId string, objectType string) *BiosPolicyAllOf {
 	this.OnboardScuStorageSwStack = &onboardScuStorageSwStack
 	var operationMode string = "platform-default"
 	this.OperationMode = &operationMode
+	var optimizedPowerMode string = "platform-default"
+	this.OptimizedPowerMode = &optimizedPowerMode
 	var osBootWatchdogTimer string = "platform-default"
 	this.OsBootWatchdogTimer = &osBootWatchdogTimer
 	var osBootWatchdogTimerPolicy string = "platform-default"
@@ -1253,6 +1269,8 @@ func NewBiosPolicyAllOf(classId string, objectType string) *BiosPolicyAllOf {
 	this.PostErrorPause = &postErrorPause
 	var postPackageRepair string = "platform-default"
 	this.PostPackageRepair = &postPackageRepair
+	var prmrrSize string = "platform-default"
+	this.PrmrrSize = &prmrrSize
 	var processorC1e string = "platform-default"
 	this.ProcessorC1e = &processorC1e
 	var processorC3report string = "platform-default"
@@ -1315,6 +1333,8 @@ func NewBiosPolicyAllOf(classId string, objectType string) *BiosPolicyAllOf {
 	this.Sha1pcrBank = &sha1pcrBank
 	var sha256pcrBank string = "platform-default"
 	this.Sha256pcrBank = &sha256pcrBank
+	var sha384pcrBank string = "platform-default"
+	this.Sha384pcrBank = &sha384pcrBank
 	var singlePctlEnable string = "platform-default"
 	this.SinglePctlEnable = &singlePctlEnable
 	var slot10linkSpeed string = "platform-default"
@@ -1875,6 +1895,10 @@ func NewBiosPolicyAllOfWithDefaults() *BiosPolicyAllOf {
 	this.EnableRmt = &enableRmt
 	var enableSgx string = "platform-default"
 	this.EnableSgx = &enableSgx
+	var enableTdx string = "platform-default"
+	this.EnableTdx = &enableTdx
+	var enableTdxSeamldr string = "platform-default"
+	this.EnableTdxSeamldr = &enableTdxSeamldr
 	var enableTme string = "platform-default"
 	this.EnableTme = &enableTme
 	var energyEfficientTurbo string = "platform-default"
@@ -1995,6 +2019,8 @@ func NewBiosPolicyAllOfWithDefaults() *BiosPolicyAllOf {
 	this.OnboardScuStorageSwStack = &onboardScuStorageSwStack
 	var operationMode string = "platform-default"
 	this.OperationMode = &operationMode
+	var optimizedPowerMode string = "platform-default"
+	this.OptimizedPowerMode = &optimizedPowerMode
 	var osBootWatchdogTimer string = "platform-default"
 	this.OsBootWatchdogTimer = &osBootWatchdogTimer
 	var osBootWatchdogTimerPolicy string = "platform-default"
@@ -2085,6 +2111,8 @@ func NewBiosPolicyAllOfWithDefaults() *BiosPolicyAllOf {
 	this.PostErrorPause = &postErrorPause
 	var postPackageRepair string = "platform-default"
 	this.PostPackageRepair = &postPackageRepair
+	var prmrrSize string = "platform-default"
+	this.PrmrrSize = &prmrrSize
 	var processorC1e string = "platform-default"
 	this.ProcessorC1e = &processorC1e
 	var processorC3report string = "platform-default"
@@ -2147,6 +2175,8 @@ func NewBiosPolicyAllOfWithDefaults() *BiosPolicyAllOf {
 	this.Sha1pcrBank = &sha1pcrBank
 	var sha256pcrBank string = "platform-default"
 	this.Sha256pcrBank = &sha256pcrBank
+	var sha384pcrBank string = "platform-default"
+	this.Sha384pcrBank = &sha384pcrBank
 	var singlePctlEnable string = "platform-default"
 	this.SinglePctlEnable = &singlePctlEnable
 	var slot10linkSpeed string = "platform-default"
@@ -5536,6 +5566,70 @@ func (o *BiosPolicyAllOf) SetEnableSgx(v string) {
 	o.EnableSgx = &v
 }
 
+// GetEnableTdx returns the EnableTdx field value if set, zero value otherwise.
+func (o *BiosPolicyAllOf) GetEnableTdx() string {
+	if o == nil || o.EnableTdx == nil {
+		var ret string
+		return ret
+	}
+	return *o.EnableTdx
+}
+
+// GetEnableTdxOk returns a tuple with the EnableTdx field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BiosPolicyAllOf) GetEnableTdxOk() (*string, bool) {
+	if o == nil || o.EnableTdx == nil {
+		return nil, false
+	}
+	return o.EnableTdx, true
+}
+
+// HasEnableTdx returns a boolean if a field has been set.
+func (o *BiosPolicyAllOf) HasEnableTdx() bool {
+	if o != nil && o.EnableTdx != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetEnableTdx gets a reference to the given string and assigns it to the EnableTdx field.
+func (o *BiosPolicyAllOf) SetEnableTdx(v string) {
+	o.EnableTdx = &v
+}
+
+// GetEnableTdxSeamldr returns the EnableTdxSeamldr field value if set, zero value otherwise.
+func (o *BiosPolicyAllOf) GetEnableTdxSeamldr() string {
+	if o == nil || o.EnableTdxSeamldr == nil {
+		var ret string
+		return ret
+	}
+	return *o.EnableTdxSeamldr
+}
+
+// GetEnableTdxSeamldrOk returns a tuple with the EnableTdxSeamldr field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BiosPolicyAllOf) GetEnableTdxSeamldrOk() (*string, bool) {
+	if o == nil || o.EnableTdxSeamldr == nil {
+		return nil, false
+	}
+	return o.EnableTdxSeamldr, true
+}
+
+// HasEnableTdxSeamldr returns a boolean if a field has been set.
+func (o *BiosPolicyAllOf) HasEnableTdxSeamldr() bool {
+	if o != nil && o.EnableTdxSeamldr != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetEnableTdxSeamldr gets a reference to the given string and assigns it to the EnableTdxSeamldr field.
+func (o *BiosPolicyAllOf) SetEnableTdxSeamldr(v string) {
+	o.EnableTdxSeamldr = &v
+}
+
 // GetEnableTme returns the EnableTme field value if set, zero value otherwise.
 func (o *BiosPolicyAllOf) GetEnableTme() string {
 	if o == nil || o.EnableTme == nil {
@@ -7456,6 +7550,38 @@ func (o *BiosPolicyAllOf) SetOperationMode(v string) {
 	o.OperationMode = &v
 }
 
+// GetOptimizedPowerMode returns the OptimizedPowerMode field value if set, zero value otherwise.
+func (o *BiosPolicyAllOf) GetOptimizedPowerMode() string {
+	if o == nil || o.OptimizedPowerMode == nil {
+		var ret string
+		return ret
+	}
+	return *o.OptimizedPowerMode
+}
+
+// GetOptimizedPowerModeOk returns a tuple with the OptimizedPowerMode field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BiosPolicyAllOf) GetOptimizedPowerModeOk() (*string, bool) {
+	if o == nil || o.OptimizedPowerMode == nil {
+		return nil, false
+	}
+	return o.OptimizedPowerMode, true
+}
+
+// HasOptimizedPowerMode returns a boolean if a field has been set.
+func (o *BiosPolicyAllOf) HasOptimizedPowerMode() bool {
+	if o != nil && o.OptimizedPowerMode != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetOptimizedPowerMode gets a reference to the given string and assigns it to the OptimizedPowerMode field.
+func (o *BiosPolicyAllOf) SetOptimizedPowerMode(v string) {
+	o.OptimizedPowerMode = &v
+}
+
 // GetOsBootWatchdogTimer returns the OsBootWatchdogTimer field value if set, zero value otherwise.
 func (o *BiosPolicyAllOf) GetOsBootWatchdogTimer() string {
 	if o == nil || o.OsBootWatchdogTimer == nil {
@@ -8896,6 +9022,38 @@ func (o *BiosPolicyAllOf) SetPostPackageRepair(v string) {
 	o.PostPackageRepair = &v
 }
 
+// GetPrmrrSize returns the PrmrrSize field value if set, zero value otherwise.
+func (o *BiosPolicyAllOf) GetPrmrrSize() string {
+	if o == nil || o.PrmrrSize == nil {
+		var ret string
+		return ret
+	}
+	return *o.PrmrrSize
+}
+
+// GetPrmrrSizeOk returns a tuple with the PrmrrSize field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BiosPolicyAllOf) GetPrmrrSizeOk() (*string, bool) {
+	if o == nil || o.PrmrrSize == nil {
+		return nil, false
+	}
+	return o.PrmrrSize, true
+}
+
+// HasPrmrrSize returns a boolean if a field has been set.
+func (o *BiosPolicyAllOf) HasPrmrrSize() bool {
+	if o != nil && o.PrmrrSize != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetPrmrrSize gets a reference to the given string and assigns it to the PrmrrSize field.
+func (o *BiosPolicyAllOf) SetPrmrrSize(v string) {
+	o.PrmrrSize = &v
+}
+
 // GetProcessorC1e returns the ProcessorC1e field value if set, zero value otherwise.
 func (o *BiosPolicyAllOf) GetProcessorC1e() string {
 	if o == nil || o.ProcessorC1e == nil {
@@ -9886,6 +10044,38 @@ func (o *BiosPolicyAllOf) HasSha256pcrBank() bool {
 // SetSha256pcrBank gets a reference to the given string and assigns it to the Sha256pcrBank field.
 func (o *BiosPolicyAllOf) SetSha256pcrBank(v string) {
 	o.Sha256pcrBank = &v
+}
+
+// GetSha384pcrBank returns the Sha384pcrBank field value if set, zero value otherwise.
+func (o *BiosPolicyAllOf) GetSha384pcrBank() string {
+	if o == nil || o.Sha384pcrBank == nil {
+		var ret string
+		return ret
+	}
+	return *o.Sha384pcrBank
+}
+
+// GetSha384pcrBankOk returns a tuple with the Sha384pcrBank field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BiosPolicyAllOf) GetSha384pcrBankOk() (*string, bool) {
+	if o == nil || o.Sha384pcrBank == nil {
+		return nil, false
+	}
+	return o.Sha384pcrBank, true
+}
+
+// HasSha384pcrBank returns a boolean if a field has been set.
+func (o *BiosPolicyAllOf) HasSha384pcrBank() bool {
+	if o != nil && o.Sha384pcrBank != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetSha384pcrBank gets a reference to the given string and assigns it to the Sha384pcrBank field.
+func (o *BiosPolicyAllOf) SetSha384pcrBank(v string) {
+	o.Sha384pcrBank = &v
 }
 
 // GetSinglePctlEnable returns the SinglePctlEnable field value if set, zero value otherwise.
@@ -16032,6 +16222,12 @@ func (o BiosPolicyAllOf) MarshalJSON() ([]byte, error) {
 	if o.EnableSgx != nil {
 		toSerialize["EnableSgx"] = o.EnableSgx
 	}
+	if o.EnableTdx != nil {
+		toSerialize["EnableTdx"] = o.EnableTdx
+	}
+	if o.EnableTdxSeamldr != nil {
+		toSerialize["EnableTdxSeamldr"] = o.EnableTdxSeamldr
+	}
 	if o.EnableTme != nil {
 		toSerialize["EnableTme"] = o.EnableTme
 	}
@@ -16212,6 +16408,9 @@ func (o BiosPolicyAllOf) MarshalJSON() ([]byte, error) {
 	if o.OperationMode != nil {
 		toSerialize["OperationMode"] = o.OperationMode
 	}
+	if o.OptimizedPowerMode != nil {
+		toSerialize["OptimizedPowerMode"] = o.OptimizedPowerMode
+	}
 	if o.OsBootWatchdogTimer != nil {
 		toSerialize["OsBootWatchdogTimer"] = o.OsBootWatchdogTimer
 	}
@@ -16347,6 +16546,9 @@ func (o BiosPolicyAllOf) MarshalJSON() ([]byte, error) {
 	if o.PostPackageRepair != nil {
 		toSerialize["PostPackageRepair"] = o.PostPackageRepair
 	}
+	if o.PrmrrSize != nil {
+		toSerialize["PrmrrSize"] = o.PrmrrSize
+	}
 	if o.ProcessorC1e != nil {
 		toSerialize["ProcessorC1e"] = o.ProcessorC1e
 	}
@@ -16439,6 +16641,9 @@ func (o BiosPolicyAllOf) MarshalJSON() ([]byte, error) {
 	}
 	if o.Sha256pcrBank != nil {
 		toSerialize["Sha256pcrBank"] = o.Sha256pcrBank
+	}
+	if o.Sha384pcrBank != nil {
+		toSerialize["Sha384pcrBank"] = o.Sha384pcrBank
 	}
 	if o.SinglePctlEnable != nil {
 		toSerialize["SinglePctlEnable"] = o.SinglePctlEnable
@@ -17102,6 +17307,8 @@ func (o *BiosPolicyAllOf) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "EnableMktme")
 		delete(additionalProperties, "EnableRmt")
 		delete(additionalProperties, "EnableSgx")
+		delete(additionalProperties, "EnableTdx")
+		delete(additionalProperties, "EnableTdxSeamldr")
 		delete(additionalProperties, "EnableTme")
 		delete(additionalProperties, "EnergyEfficientTurbo")
 		delete(additionalProperties, "EngPerfTuning")
@@ -17162,6 +17369,7 @@ func (o *BiosPolicyAllOf) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "OnboardScuStorageSupport")
 		delete(additionalProperties, "OnboardScuStorageSwStack")
 		delete(additionalProperties, "OperationMode")
+		delete(additionalProperties, "OptimizedPowerMode")
 		delete(additionalProperties, "OsBootWatchdogTimer")
 		delete(additionalProperties, "OsBootWatchdogTimerPolicy")
 		delete(additionalProperties, "OsBootWatchdogTimerTimeout")
@@ -17207,6 +17415,7 @@ func (o *BiosPolicyAllOf) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "PopSupport")
 		delete(additionalProperties, "PostErrorPause")
 		delete(additionalProperties, "PostPackageRepair")
+		delete(additionalProperties, "PrmrrSize")
 		delete(additionalProperties, "ProcessorC1e")
 		delete(additionalProperties, "ProcessorC3report")
 		delete(additionalProperties, "ProcessorC6report")
@@ -17238,6 +17447,7 @@ func (o *BiosPolicyAllOf) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "SgxQos")
 		delete(additionalProperties, "Sha1pcrBank")
 		delete(additionalProperties, "Sha256pcrBank")
+		delete(additionalProperties, "Sha384pcrBank")
 		delete(additionalProperties, "SinglePctlEnable")
 		delete(additionalProperties, "Slot10linkSpeed")
 		delete(additionalProperties, "Slot10state")

@@ -6,7 +6,10 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "iqnpool.Lease"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "iqnpool.Lease"]
-**IqnAddress** | Pointer to **string** | IQN address allocated for pool-based allocation \&quot;prefix+suffix+number\&quot;. | [optional] 
+**IqnAddress** | Pointer to **string** | IQN address allocated for pool-based allocation. It is constructed as &lt;prefix&gt;:&lt;suffix&gt;:&lt;number&gt;. | [optional] 
+**IqnNumber** | Pointer to **int64** | Number of the IQN address. IQN Address is constructed as &lt;prefix&gt;:&lt;suffix&gt;:&lt;number&gt;. | [optional] [readonly] 
+**IqnPrefix** | Pointer to **string** | Prefix of the IQN address. IQN Address is constructed as &lt;prefix&gt;:&lt;suffix&gt;:&lt;number&gt;. | [optional] [readonly] 
+**IqnSuffix** | Pointer to **string** | Suffix of the IQN address. IQN Address is constructed as &lt;prefix&gt;:&lt;suffix&gt;:&lt;number&gt;. | [optional] [readonly] 
 **Reservation** | Pointer to [**IqnpoolReservationReference**](IqnpoolReservationReference.md) |  | [optional] 
 **AssignedToEntity** | Pointer to [**MoBaseMoRelationship**](MoBaseMoRelationship.md) |  | [optional] 
 **Pool** | Pointer to [**IqnpoolPoolRelationship**](IqnpoolPoolRelationship.md) |  | [optional] 
@@ -96,6 +99,81 @@ SetIqnAddress sets IqnAddress field to given value.
 `func (o *IqnpoolLease) HasIqnAddress() bool`
 
 HasIqnAddress returns a boolean if a field has been set.
+
+### GetIqnNumber
+
+`func (o *IqnpoolLease) GetIqnNumber() int64`
+
+GetIqnNumber returns the IqnNumber field if non-nil, zero value otherwise.
+
+### GetIqnNumberOk
+
+`func (o *IqnpoolLease) GetIqnNumberOk() (*int64, bool)`
+
+GetIqnNumberOk returns a tuple with the IqnNumber field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIqnNumber
+
+`func (o *IqnpoolLease) SetIqnNumber(v int64)`
+
+SetIqnNumber sets IqnNumber field to given value.
+
+### HasIqnNumber
+
+`func (o *IqnpoolLease) HasIqnNumber() bool`
+
+HasIqnNumber returns a boolean if a field has been set.
+
+### GetIqnPrefix
+
+`func (o *IqnpoolLease) GetIqnPrefix() string`
+
+GetIqnPrefix returns the IqnPrefix field if non-nil, zero value otherwise.
+
+### GetIqnPrefixOk
+
+`func (o *IqnpoolLease) GetIqnPrefixOk() (*string, bool)`
+
+GetIqnPrefixOk returns a tuple with the IqnPrefix field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIqnPrefix
+
+`func (o *IqnpoolLease) SetIqnPrefix(v string)`
+
+SetIqnPrefix sets IqnPrefix field to given value.
+
+### HasIqnPrefix
+
+`func (o *IqnpoolLease) HasIqnPrefix() bool`
+
+HasIqnPrefix returns a boolean if a field has been set.
+
+### GetIqnSuffix
+
+`func (o *IqnpoolLease) GetIqnSuffix() string`
+
+GetIqnSuffix returns the IqnSuffix field if non-nil, zero value otherwise.
+
+### GetIqnSuffixOk
+
+`func (o *IqnpoolLease) GetIqnSuffixOk() (*string, bool)`
+
+GetIqnSuffixOk returns a tuple with the IqnSuffix field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIqnSuffix
+
+`func (o *IqnpoolLease) SetIqnSuffix(v string)`
+
+SetIqnSuffix sets IqnSuffix field to given value.
+
+### HasIqnSuffix
+
+`func (o *IqnpoolLease) HasIqnSuffix() bool`
+
+HasIqnSuffix returns a boolean if a field has been set.
 
 ### GetReservation
 

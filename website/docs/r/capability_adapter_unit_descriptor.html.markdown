@@ -51,8 +51,9 @@ This complex property has following sub-properties:
 * `ethernet_port_speed`:(int) The port speed for ethernet ports in Mbps. 
 * `features`:(Array)
 This complex property has following sub-properties:
-  + `feature_name`:(string) Name of the feature that identifies the specific adapter configuration.* `RoCEv2` - Capability indicator of the RDMA over Converged Ethernet (RoCE) feature version 2.* `RoCEv1` - Capability indicator of the RDMA over Converged Ethernet (RoCE) feature version 1.* `VMQ` - Capability indicator of the Virtual Machine Queue (VMQ) feature.* `VMMQ` - Capability indicator of the Virtual Machine Multi-Queue (VMMQ) feature.* `VMQInterrupts` - Capability indicator of the Virtual Machine Queue (VMQ) Interrupts feature.* `NVGRE` - Capability indicator of the Network Virtualization using Generic Routing Encapsulation (NVGRE) feature.* `ARFS` - Capability indicator of the Accelerated Receive Flow Steering (ARFS) feature.* `VXLAN` - Capability indicator of the Virtual Extensible LAN (VXLAN) feature. 
-  + `min_fw_version`:(string) Firmware version from which support for this feature is available. 
+  + `feature_name`:(string) Name of the feature that identifies the specific adapter configuration.* `RoCEv2` - Capability indicator of the RDMA over Converged Ethernet (RoCE) feature version 2.* `RoCEv1` - Capability indicator of the RDMA over Converged Ethernet (RoCE) feature version 1.* `VMQ` - Capability indicator of the Virtual Machine Queue (VMQ) feature.* `VMMQ` - Capability indicator of the Virtual Machine Multi-Queue (VMMQ) feature.* `VMQInterrupts` - Capability indicator of the Virtual Machine Queue (VMQ) Interrupts feature.* `NVGRE` - Capability indicator of the Network Virtualization using Generic Routing Encapsulation (NVGRE) feature.* `ARFS` - Capability indicator of the Accelerated Receive Flow Steering (ARFS) feature.* `VXLAN` - Capability indicator of the Virtual Extensible LAN (VXLAN) feature.* `usNIC` - Capability indicator of the User Space NIC (usNIC) feature.* `Advanced Filter` - Capability indicator of the Advanced Filter feature.* `Azure Stack Host QOS` - Capability indicator of the Azure Stack Host QOS feature.* `QinQ` - Capability indicator of the QinQ feature.* `SRIOV` - Capability indicator of the Single Root Input Output Virtualization (SR-IOV). 
+  + `min_adapter_fw_version`:(string) Firmware version of Adapter from which support for this feature is available. 
+  + `min_fw_version`:(string) Firmware version of BMC from which support for this feature is available. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
   + `supported_fw_versions`:
                 (Array of schema.TypeString) -
@@ -60,10 +61,18 @@ This complex property has following sub-properties:
                 (Array of schema.TypeString) -
   + `supported_in_generations`:
                 (Array of schema.TypeInt) -
+  + `unsupported_feature_matrix`:(Array)
+This complex property has following sub-properties:
+    + `generation`:(int) The adapter generations that support this feature.* `4` - Fourth generation adapters (14xx). The PIDs of these adapters end with the string 04.* `2` - Second generation VIC adapters (12xx). The PIDs of these adapters end with the string 02.* `3` - Third generation adapters (13xx). The PIDs of these adapters end with the string 03.* `5` - Fifth generation adapters (15xx). The PIDs of these adapters contain the V5 string. 
+    + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+    + `unsupportd_features`:
+                (Array of schema.TypeString) -
+  + `validation_action`:(string) Action to be taken when validation does not succeed.* `Error` - Stop workflow execution by throwing error.* `Skip` - Remove the feature from configuration and continue workflow execution. 
 * `fibre_channel_port_speed`:(int) The port speed for fibre channel ports in Mbps. 
 * `fibre_channel_scsi_ioq_limit`:(int) The number of SCSI I/O Queue resources to allocate. 
 * `is_azure_qos_supported`:(bool) Indicates that the Azure Stack Host QoS feature is supported by this adapter. 
 * `is_geneve_supported`:(bool) Indicates that the GENEVE offload feature is supported by this adapter. 
+* `is_secure_boot_supported`:(bool) Indicates support for secure boot. 
 * `max_eth_rx_ring_size`:(int) Maximum Ring Size value for vNIC Receive Queue. 
 * `max_eth_tx_ring_size`:(int) Maximum Ring Size value for vNIC Transmit Queue. 
 * `max_rocev2_interfaces`:(int) Maximum number of vNIC interfaces that can be RoCEv2 enabled. 

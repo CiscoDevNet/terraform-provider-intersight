@@ -230,7 +230,7 @@ func getVnicFcQosPolicySchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"rate_limit": {
-			Description: "The value in Mbps to use for limiting the data rate on the virtual interface. Setting this to zero will turn rate limiting off.",
+			Description: "The value in Mbps to use for limiting the data rate on the virtual interface.",
 			Type:        schema.TypeInt,
 			Optional:    true,
 		},

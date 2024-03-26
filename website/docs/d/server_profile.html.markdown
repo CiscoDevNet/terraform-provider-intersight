@@ -17,6 +17,8 @@ The following arguments can be used to get data of already created objects in In
 * `account_moid`:(string) The Account ID for this managed object. 
 * `action`:(string) User initiated action. Each profile type has its own supported actions. For HyperFlex cluster profile, the supported actions are -- Validate, Deploy, Continue, Retry, Abort, Unassign For server profile, the support actions are -- Deploy, Unassign. 
 * `create_time`:(string) The time when this managed object was created. 
+* `deploy_status`:(string) The status of the server profile indicating if deployment has been initiated on both fabric interconnects or not.* `None` - Switch profiles not deployed on either of the switches.* `Complete` - Both switch profiles of the cluster profile are deployed.* `Partial` - Only one of the switch profiles of the cluster profile is deployed. 
+* `deployed_switches`:(string) The property which determines if the deployment should be skipped on any of the Fabric Interconnects. It is set based on the state of a fabric interconnect to Intersight before the deployment of the server proile begins.* `None` - Server profile configuration not deployed on either of the fabric interconnects.* `AB` - Server profile configuration deployed on both fabric interconnects.* `A` - Server profile configuration deployed on fabric interconnect A only.* `B` - Server profile configuration deployed on fabric interconnect B only. 
 * `description`:(string) Description of the profile. 
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
 * `is_pmc_deployed_secure_passphrase_set`:(bool) Indicates whether the value of the 'pmcDeployedSecurePassphrase' property has been set. 
@@ -30,6 +32,7 @@ The following arguments can be used to get data of already created objects in In
 * `static_uuid_address`:(string) The UUID address for the server must include UUID prefix xxxxxxxx-xxxx-xxxx along with the UUID suffix of format xxxx-xxxxxxxxxxxx. 
 * `target_platform`:(string) The platform for which the server profile is applicable. It can either be a server that is operating in standalone mode or which is attached to a Fabric Interconnect managed by Intersight.* `Standalone` - Servers which are operating in standalone mode i.e. not connected to a Fabric Interconnected.* `FIAttached` - Servers which are connected to a Fabric Interconnect that is managed by Intersight. 
 * `type`:(string) Defines the type of the profile. Accepted values are instance or template.* `instance` - The profile defines the configuration for a specific instance of a target. 
+* `user_label`:(string) User label assigned to the server profile. 
 * `uuid`:(string) The UUID address that is assigned to the server based on the UUID pool. 
 * `uuid_address_type`:(string) UUID address allocation type selected to assign an UUID address for the server.* `NONE` - The user did not assign any UUID address.* `STATIC` - The user assigns a static UUID address.* `POOL` - The user selects a pool from which the address will be leased. 
  

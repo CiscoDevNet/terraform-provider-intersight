@@ -125,6 +125,11 @@ func getApplianceBackupSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"is_manual": {
+			Description: "If true, represents a manual backup. Else represents a scheduled backup.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
 		"is_password_set": {
 			Description: "Indicates whether the value of the 'password' property has been set.",
 			Type:        schema.TypeBool,
@@ -230,7 +235,7 @@ func getApplianceBackupSchema() map[string]*schema.Schema {
 			},
 		},
 		"protocol": {
-			Description: "Communication protocol used by the file server (e.g. scp or sftp).\n* `scp` - Secure Copy Protocol (SCP) to access the file server.\n* `sftp` - SSH File Transfer Protocol (SFTP) to access file server.",
+			Description: "Communication protocol used by the file server (e.g. scp, sftp, or CIFS).\n* `scp` - Secure Copy Protocol (SCP) to access the file server.\n* `sftp` - SSH File Transfer Protocol (SFTP) to access file server.\n* `cifs` - Common Internet File System (CIFS) Protocol to access file server.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -240,7 +245,7 @@ func getApplianceBackupSchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"remote_path": {
-			Description: "File server directory to copy the file.",
+			Description: "File server directory or share name to copy the file.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -260,7 +265,7 @@ func getApplianceBackupSchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"status": {
-			Description: "Status of the backup managed object.\n* `Started` - Backup or restore process has started.\n* `Created` - Backup or restore is in created state.\n* `Failed` - Backup or restore process has failed.\n* `Completed` - Backup or restore process has completed.\n* `Copied` - Backup file has been copied.",
+			Description: "Status of the backup managed object.\n* `Started` - Backup or restore process has started.\n* `Created` - Backup or restore is in created state.\n* `Failed` - Backup or restore process has failed.\n* `Completed` - Backup or restore process has completed.\n* `Copied` - Backup file has been copied.\n* `Cleanup Failed` - Cleanup of the old backup has failed.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -552,6 +557,11 @@ func dataSourceApplianceBackupRead(c context.Context, d *schema.ResourceData, me
 	if v, ok := d.GetOk("filename"); ok {
 		x := (v.(string))
 		o.SetFilename(x)
+	}
+
+	if v, ok := d.GetOkExists("is_manual"); ok {
+		x := (v.(bool))
+		o.SetIsManual(x)
 	}
 
 	if v, ok := d.GetOkExists("is_password_set"); ok {
@@ -880,6 +890,7 @@ func dataSourceApplianceBackupRead(c context.Context, d *schema.ResourceData, me
 
 				temp["end_time"] = (s.GetEndTime()).String()
 				temp["filename"] = (s.GetFilename())
+				temp["is_manual"] = (s.GetIsManual())
 				temp["is_password_set"] = (s.GetIsPasswordSet())
 				temp["messages"] = (s.GetMessages())
 

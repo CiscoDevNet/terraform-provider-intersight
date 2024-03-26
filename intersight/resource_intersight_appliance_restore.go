@@ -28,8 +28,8 @@ func resourceApplianceRestore() *schema.Resource {
 				Type:        schema.TypeList,
 				MaxItems:    1,
 				Optional:    true,
-				ConfigMode:  schema.SchemaConfigModeAttr,
 				Computed:    true,
+				ConfigMode:  schema.SchemaConfigModeAttr,
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"additional_properties": {
@@ -349,9 +349,9 @@ func resourceApplianceRestore() *schema.Resource {
 				ForceNew: true,
 			},
 			"protocol": {
-				Description:  "Communication protocol used by the file server (e.g. scp or sftp).\n* `scp` - Secure Copy Protocol (SCP) to access the file server.\n* `sftp` - SSH File Transfer Protocol (SFTP) to access file server.",
+				Description:  "Communication protocol used by the file server (e.g. scp, sftp, or CIFS).\n* `scp` - Secure Copy Protocol (SCP) to access the file server.\n* `sftp` - SSH File Transfer Protocol (SFTP) to access file server.\n* `cifs` - Common Internet File System (CIFS) Protocol to access file server.",
 				Type:         schema.TypeString,
-				ValidateFunc: validation.StringInSlice([]string{"scp", "sftp"}, false),
+				ValidateFunc: validation.StringInSlice([]string{"scp", "sftp", "cifs"}, false),
 				Optional:     true,
 				Default:      "scp",
 				ForceNew:     true,
@@ -363,9 +363,9 @@ func resourceApplianceRestore() *schema.Resource {
 				ForceNew:    true,
 			},
 			"remote_path": {
-				Description:  "File server directory to copy the file.",
+				Description:  "File server directory or share name to copy the file.",
 				Type:         schema.TypeString,
-				ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^(/[^/ ]*)+/?$"), ""),
+				ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^[^`]+$"), ""),
 				Optional:     true,
 				ForceNew:     true,
 			},
@@ -400,7 +400,7 @@ func resourceApplianceRestore() *schema.Resource {
 				}, ForceNew: true,
 			},
 			"status": {
-				Description: "Status of the restore managed object.\n* `Started` - Backup or restore process has started.\n* `Created` - Backup or restore is in created state.\n* `Failed` - Backup or restore process has failed.\n* `Completed` - Backup or restore process has completed.\n* `Copied` - Backup file has been copied.",
+				Description: "Status of the restore managed object.\n* `Started` - Backup or restore process has started.\n* `Created` - Backup or restore is in created state.\n* `Failed` - Backup or restore process has failed.\n* `Completed` - Backup or restore process has completed.\n* `Copied` - Backup file has been copied.\n* `Cleanup Failed` - Cleanup of the old backup has failed.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -629,48 +629,6 @@ func resourceApplianceRestoreCreate(c context.Context, d *schema.ResourceData, m
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewApplianceRestoreWithDefaults()
-	if v, ok := d.GetOk("account"); ok {
-		p := make([]models.IamAccountRelationship, 0, 1)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			l := s[i].(map[string]interface{})
-			o := models.NewMoMoRefWithDefaults()
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("mo.MoRef")
-			if v, ok := l["moid"]; ok {
-				{
-					x := (v.(string))
-					o.SetMoid(x)
-				}
-			}
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["selector"]; ok {
-				{
-					x := (v.(string))
-					o.SetSelector(x)
-				}
-			}
-			p = append(p, models.MoMoRefAsIamAccountRelationship(o))
-		}
-		if len(p) > 0 {
-			x := p[0]
-			o.SetAccount(x)
-		}
-	}
 
 	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))

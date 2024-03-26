@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "hyperflex.ClusterNetworkPolicy"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "hyperflex.ClusterNetworkPolicy"]
+**CimcManagementMode** | Pointer to **string** | The mode configured on the CIMC management interface. * &#x60;OutOfBand&#x60; - The server uses out-of-band management, i.e. management traffic traverses through the management interfaces on the UCS Fabric Interconnects. * &#x60;InBand&#x60; - The server uses in-band management, i.e. management traffic traverses through the data uplink ports on the UCS Fabric Interconnects. | [optional] [readonly] [default to "OutOfBand"]
 **JumboFrame** | Pointer to **bool** | Enable or disable Jumbo Frames (MTU&#x3D;9000). Jumbo Frames are used by Storage Network, VM Migration Network. | [optional] 
 **KvmIpRange** | Pointer to [**NullableHyperflexIpAddrRange**](HyperflexIpAddrRange.md) |  | [optional] 
 **MacPrefixRange** | Pointer to [**NullableHyperflexMacAddrPrefixRange**](HyperflexMacAddrPrefixRange.md) |  | [optional] 
@@ -74,6 +75,31 @@ and a boolean to check if the value has been set.
 
 SetObjectType sets ObjectType field to given value.
 
+
+### GetCimcManagementMode
+
+`func (o *HyperflexClusterNetworkPolicy) GetCimcManagementMode() string`
+
+GetCimcManagementMode returns the CimcManagementMode field if non-nil, zero value otherwise.
+
+### GetCimcManagementModeOk
+
+`func (o *HyperflexClusterNetworkPolicy) GetCimcManagementModeOk() (*string, bool)`
+
+GetCimcManagementModeOk returns a tuple with the CimcManagementMode field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCimcManagementMode
+
+`func (o *HyperflexClusterNetworkPolicy) SetCimcManagementMode(v string)`
+
+SetCimcManagementMode sets CimcManagementMode field to given value.
+
+### HasCimcManagementMode
+
+`func (o *HyperflexClusterNetworkPolicy) HasCimcManagementMode() bool`
+
+HasCimcManagementMode returns a boolean if a field has been set.
 
 ### GetJumboFrame
 

@@ -102,6 +102,26 @@ func getComputeRackUnitSchema() map[string]*schema.Schema {
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
+					"suppressed": {
+						Description: "The flag that indicates whether suppression is enabled or not in the entity.",
+						Type:        schema.TypeBool,
+						Optional:    true,
+					},
+					"suppressed_critical": {
+						Description: "The count of active suppressed alarms that have severity type Critical.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"suppressed_info": {
+						Description: "The count of active suppressed alarms that have severity type Info.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"suppressed_warning": {
+						Description: "The count of active suppressed alarms that have severity type Warning.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
 					"warning": {
 						Description: "The count of alarms that have severity type Warning.",
 						Type:        schema.TypeInt,
@@ -913,6 +933,11 @@ func getComputeRackUnitSchema() map[string]*schema.Schema {
 		"fault_summary": {
 			Description: "The fault summary for the server.",
 			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"front_panel_lock_state": {
+			Description: "The actual front panel state of the server.\n* `None` - Front Panel of the server is set to None state. It is required so that the next frontPanelLockState operation can be triggered.\n* `Lock` - Front Panel of the server is set to Locked state.\n* `Unlock` - Front Panel of the server is set to Unlocked state.",
+			Type:        schema.TypeString,
 			Optional:    true,
 		},
 		"generic_inventory_holders": {
@@ -3076,6 +3101,11 @@ func dataSourceComputeRackUnitRead(c context.Context, d *schema.ResourceData, me
 		o.SetFaultSummary(x)
 	}
 
+	if v, ok := d.GetOk("front_panel_lock_state"); ok {
+		x := (v.(string))
+		o.SetFrontPanelLockState(x)
+	}
+
 	if v, ok := d.GetOk("generic_inventory_holders"); ok {
 		x := make([]models.InventoryGenericInventoryHolderRelationship, 0)
 		s := v.([]interface{})
@@ -4342,6 +4372,7 @@ func dataSourceComputeRackUnitRead(c context.Context, d *schema.ResourceData, me
 
 				temp["fanmodules"] = flattenListEquipmentFanModuleRelationship(s.GetFanmodules(), d)
 				temp["fault_summary"] = (s.GetFaultSummary())
+				temp["front_panel_lock_state"] = (s.GetFrontPanelLockState())
 
 				temp["generic_inventory_holders"] = flattenListInventoryGenericInventoryHolderRelationship(s.GetGenericInventoryHolders(), d)
 

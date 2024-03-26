@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "recommendation.CapacityRunway"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "recommendation.CapacityRunway"]
-**AdditionalCapacity** | Pointer to **int64** | Additional capacity is the capacity which is needed more after exhausing all hardware on current cluster. | [optional] [readonly] 
+**AdditionalCapacity** | Pointer to **int64** | Additional capacity is the capacity which is needed more after exhausting all hardware on current cluster. | [optional] [readonly] 
 **Period** | Pointer to **int64** | Number of months in future for which recommendation is provided for. | [optional] [readonly] 
 **Runway** | Pointer to **int64** | This represents the new runway, that is the number of days remaining before the cluster&#39;s storage utilization reaches the recommended capacity limit after the recommended hardware is added. | [optional] [readonly] 
 **TotalCapacity** | Pointer to **int64** | Total capacity of the cluster after the recommended hardware is added. | [optional] [readonly] 

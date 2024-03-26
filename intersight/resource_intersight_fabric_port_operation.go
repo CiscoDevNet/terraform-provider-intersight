@@ -38,6 +38,13 @@ func resourceFabricPortOperation() *schema.Resource {
 				Optional:         true,
 				DiffSuppressFunc: SuppressDiffAdditionProps,
 			},
+			"admin_action": {
+				Description:  "An operation that has to be perfomed on the switch or IOM port. Default value is None which means there will be no implicit port operation triggered.\n* `None` - No admin triggered action.\n* `ResetServerPortConfiguration` - Admin triggered operation to reset the server port to its original configuration.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"None", "ResetServerPortConfiguration"}, false),
+				Optional:     true,
+				Default:      "None",
+			},
 			"admin_state": {
 				Description:  "Admin configured state to disable the port.\n* `Enabled` - Admin configured Enabled State.\n* `Disabled` - Admin configured Disabled State.",
 				Type:         schema.TypeString,
@@ -124,6 +131,11 @@ func resourceFabricPortOperation() *schema.Resource {
 					}
 					return
 				}},
+			"fex_id": {
+				Description: "FEX/IOM identifier to denote its Host ports in the format - FexId/SlotId/PortId.",
+				Type:        schema.TypeInt,
+				Optional:    true,
+			},
 			"mod_time": {
 				Description: "The time when this managed object was last modified.",
 				Type:        schema.TypeString,
@@ -493,6 +505,11 @@ func resourceFabricPortOperationCreate(c context.Context, d *schema.ResourceData
 		}
 	}
 
+	if v, ok := d.GetOk("admin_action"); ok {
+		x := (v.(string))
+		o.SetAdminAction(x)
+	}
+
 	if v, ok := d.GetOk("admin_state"); ok {
 		x := (v.(string))
 		o.SetAdminState(x)
@@ -508,6 +525,11 @@ func resourceFabricPortOperationCreate(c context.Context, d *schema.ResourceData
 	if v, ok := d.GetOk("config_state"); ok {
 		x := (v.(string))
 		o.SetConfigState(x)
+	}
+
+	if v, ok := d.GetOkExists("fex_id"); ok {
+		x := int64(v.(int))
+		o.SetFexId(x)
 	}
 
 	if v, ok := d.GetOk("moid"); ok {
@@ -648,6 +670,10 @@ func resourceFabricPortOperationRead(c context.Context, d *schema.ResourceData, 
 		return diag.Errorf("error occurred while setting property AdditionalProperties in FabricPortOperation object: %s", err.Error())
 	}
 
+	if err := d.Set("admin_action", (s.GetAdminAction())); err != nil {
+		return diag.Errorf("error occurred while setting property AdminAction in FabricPortOperation object: %s", err.Error())
+	}
+
 	if err := d.Set("admin_state", (s.GetAdminState())); err != nil {
 		return diag.Errorf("error occurred while setting property AdminState in FabricPortOperation object: %s", err.Error())
 	}
@@ -674,6 +700,10 @@ func resourceFabricPortOperationRead(c context.Context, d *schema.ResourceData, 
 
 	if err := d.Set("domain_group_moid", (s.GetDomainGroupMoid())); err != nil {
 		return diag.Errorf("error occurred while setting property DomainGroupMoid in FabricPortOperation object: %s", err.Error())
+	}
+
+	if err := d.Set("fex_id", (s.GetFexId())); err != nil {
+		return diag.Errorf("error occurred while setting property FexId in FabricPortOperation object: %s", err.Error())
 	}
 
 	if err := d.Set("mod_time", (s.GetModTime()).String()); err != nil {
@@ -745,6 +775,12 @@ func resourceFabricPortOperationUpdate(c context.Context, d *schema.ResourceData
 		}
 	}
 
+	if d.HasChange("admin_action") {
+		v := d.Get("admin_action")
+		x := (v.(string))
+		o.SetAdminAction(x)
+	}
+
 	if d.HasChange("admin_state") {
 		v := d.Get("admin_state")
 		x := (v.(string))
@@ -763,6 +799,12 @@ func resourceFabricPortOperationUpdate(c context.Context, d *schema.ResourceData
 		v := d.Get("config_state")
 		x := (v.(string))
 		o.SetConfigState(x)
+	}
+
+	if d.HasChange("fex_id") {
+		v := d.Get("fex_id")
+		x := int64(v.(int))
+		o.SetFexId(x)
 	}
 
 	if d.HasChange("moid") {

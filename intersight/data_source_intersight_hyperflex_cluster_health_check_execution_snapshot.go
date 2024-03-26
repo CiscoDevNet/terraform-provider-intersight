@@ -75,6 +75,11 @@ func getHyperflexClusterHealthCheckExecutionSnapshotSchema() map[string]*schema.
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"execution_context": {
+			Description: "The execution context of the HyperFlex health checks.\n* `UNKNOWN` - The current context of HyperFlex health check execution is unknown.\n* `WORKFLOW` - The HyperFlex health check execution is initiated through an orchestration workflow.\n* `SCHEDULED` - The HyperFlex health check execution is through a scheduled run.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"hx_cluster": {
 			Description: "A reference to a hyperflexCluster resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 			Type:        schema.TypeList,
@@ -506,6 +511,11 @@ func dataSourceHyperflexClusterHealthCheckExecutionSnapshotRead(c context.Contex
 		o.SetDomainGroupMoid(x)
 	}
 
+	if v, ok := d.GetOk("execution_context"); ok {
+		x := (v.(string))
+		o.SetExecutionContext(x)
+	}
+
 	if v, ok := d.GetOk("hx_cluster"); ok {
 		p := make([]models.HyperflexClusterRelationship, 0, 1)
 		s := v.([]interface{})
@@ -904,6 +914,7 @@ func dataSourceHyperflexClusterHealthCheckExecutionSnapshotRead(c context.Contex
 
 				temp["create_time"] = (s.GetCreateTime()).String()
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
+				temp["execution_context"] = (s.GetExecutionContext())
 
 				temp["hx_cluster"] = flattenMapHyperflexClusterRelationship(s.GetHxCluster(), d)
 
