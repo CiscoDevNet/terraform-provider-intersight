@@ -26,6 +26,11 @@ func getIamApiKeySchema() map[string]*schema.Schema {
 			Optional:         true,
 			DiffSuppressFunc: SuppressDiffAdditionProps,
 		},
+		"admin_status": {
+			Description: "Used to trigger the enable or disable action on the API key. These actions change the status of an API key.\n* `enable` - Used to enable a disabled API key/App Registration. If the API key/App Registration is already expired, this action has no effect.\n* `disable` - Used to disable an active API key/App Registration. If the API key/App Registration is already expired, this action has no effect.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"ancestors": {
 			Description: "An array of relationships to moBaseMo resources.",
 			Type:        schema.TypeList,
@@ -75,9 +80,19 @@ func getIamApiKeySchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"expiry_date_time": {
+			Description: "The expiration date of the API key which is set at the time of creation of the key. Its value can only be assigned a date that falls within the range determined by the maximum expiration time configured at the account level. The expiry date can be edited to be earlier or later, provided it stays within the designated expiry period. This period is determined by adding the 'startTime' property of the API key to the maximum expiry time configured at the account level.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"hash_algorithm": {
 			Description: "The cryptographic hash algorithm to calculate the message digest.\n* `SHA256` - The SHA-256 cryptographic hash, as defined by NIST in FIPS 180-4.\n* `SHA384` - The SHA-384 cryptographic hash, as defined by NIST in FIPS 180-4.\n* `SHA512` - The SHA-512 cryptographic hash, as defined by NIST in FIPS 180-4.\n* `SHA512_224` - The SHA-512/224 cryptographic hash, as defined by NIST in FIPS 180-4.\n* `SHA512_256` - The SHA-512/256 cryptographic hash, as defined by NIST in FIPS 180-4.",
 			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"is_never_expiring": {
+			Description: "Used to mark the API key as a never-expiring API key.",
+			Type:        schema.TypeBool,
 			Optional:    true,
 		},
 		"key_spec": {
@@ -110,6 +125,16 @@ func getIamApiKeySchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"last_used_ip": {
+			Description: "The IP address from which the API key was last used.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"last_used_time": {
+			Description: "The time at which the API key was last used. It is updated every 24 hours.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"mod_time": {
 			Description: "The time when this managed object was last modified.",
 			Type:        schema.TypeString,
@@ -122,6 +147,11 @@ func getIamApiKeySchema() map[string]*schema.Schema {
 		},
 		"object_type": {
 			Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"oper_status": {
+			Description: "The current status of the API key that dictates the validity of the key.\n* `enabled` - An API key/App Registration having enabled status can be used for API invocation.\n* `disabled` - An API key/App Registration having disabled status cannot be used for API invocation.\n* `expired` - An API key/App Registration having expired status cannot be used for API invocation as the expiration date has passed.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -251,6 +281,11 @@ func getIamApiKeySchema() map[string]*schema.Schema {
 		},
 		"signing_algorithm": {
 			Description: "The signing algorithm used by the client to authenticate API requests to Intersight.\nThe signing algorithm must be compatible with the key generation specification.\n* `RSASSA-PKCS1-v1_5` - RSASSA-PKCS1-v1_5 is a RSA signature scheme specified in [RFC 8017](https://tools.ietf.org/html/rfc8017).RSASSA-PKCS1-v1_5 is included only for compatibility with existing applications.\n* `RSASSA-PSS` - RSASSA-PSS is a RSA signature scheme specified in [RFC 8017](https://tools.ietf.org/html/rfc8017).It combines the RSASP1 and RSAVP1 primitives with the EMSA-PSS encoding method.In the interest of increased robustness, RSASSA-PSS is required in new applications.\n* `Ed25519` - The Ed25519 signature algorithm, as specified in [RFC 8032](https://tools.ietf.org/html/rfc8032).Ed25519 is a public-key signature system with several attractive features, includingfast single-signature verification, very fast signing, fast key generation and high security level.\n* `Ecdsa` - The Elliptic Curve Digital Signature Standard (ECDSA), as defined by NIST in FIPS 186-4 and ANSI X9.62.The signature is encoded as a ASN.1 DER SEQUENCE with two INTEGERs (r and s), as defined in RFC3279.When using ECDSA signatures, configure the client to use the same signature encoding as specified on the server side.\n* `EcdsaP1363Format` - The Elliptic Curve Digital Signature Standard (ECDSA), as defined by NIST in FIPS 186-4 and ANSI X9.62.The signature is the raw concatenation of r and s, as defined in the ISO/IEC 7816-8 IEEE P.1363 standard.In that format, r and s are represented as unsigned, big endian numbers.Extra padding bytes (of value 0x00) is applied so that both r and s encodings have the same size.When using ECDSA signatures, configure the client to use the same signature encoding as specified on the server side.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"start_time": {
+			Description: "The timestamp at which an expiry date was first set on this API key. For expiring API keys, this field is same as the create time of the API key. For never-expiring API keys, this field is set initially to zero time value. If a never-expiry API key is later changed to have an expiration, the timestamp marking the start of this transition is recorded in this field.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -461,6 +496,11 @@ func dataSourceIamApiKeyRead(c context.Context, d *schema.ResourceData, meta int
 		}
 	}
 
+	if v, ok := d.GetOk("admin_status"); ok {
+		x := (v.(string))
+		o.SetAdminStatus(x)
+	}
+
 	if v, ok := d.GetOk("ancestors"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
@@ -516,9 +556,19 @@ func dataSourceIamApiKeyRead(c context.Context, d *schema.ResourceData, meta int
 		o.SetDomainGroupMoid(x)
 	}
 
+	if v, ok := d.GetOk("expiry_date_time"); ok {
+		x, _ := time.Parse(time.RFC1123, v.(string))
+		o.SetExpiryDateTime(x)
+	}
+
 	if v, ok := d.GetOk("hash_algorithm"); ok {
 		x := (v.(string))
 		o.SetHashAlgorithm(x)
+	}
+
+	if v, ok := d.GetOkExists("is_never_expiring"); ok {
+		x := (v.(bool))
+		o.SetIsNeverExpiring(x)
 	}
 
 	if v, ok := d.GetOk("key_spec"); ok {
@@ -552,6 +602,16 @@ func dataSourceIamApiKeyRead(c context.Context, d *schema.ResourceData, meta int
 		}
 	}
 
+	if v, ok := d.GetOk("last_used_ip"); ok {
+		x := (v.(string))
+		o.SetLastUsedIp(x)
+	}
+
+	if v, ok := d.GetOk("last_used_time"); ok {
+		x, _ := time.Parse(time.RFC1123, v.(string))
+		o.SetLastUsedTime(x)
+	}
+
 	if v, ok := d.GetOk("mod_time"); ok {
 		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetModTime(x)
@@ -565,6 +625,11 @@ func dataSourceIamApiKeyRead(c context.Context, d *schema.ResourceData, meta int
 	if v, ok := d.GetOk("object_type"); ok {
 		x := (v.(string))
 		o.SetObjectType(x)
+	}
+
+	if v, ok := d.GetOk("oper_status"); ok {
+		x := (v.(string))
+		o.SetOperStatus(x)
 	}
 
 	if v, ok := d.GetOk("owners"); ok {
@@ -722,6 +787,11 @@ func dataSourceIamApiKeyRead(c context.Context, d *schema.ResourceData, meta int
 	if v, ok := d.GetOk("signing_algorithm"); ok {
 		x := (v.(string))
 		o.SetSigningAlgorithm(x)
+	}
+
+	if v, ok := d.GetOk("start_time"); ok {
+		x, _ := time.Parse(time.RFC1123, v.(string))
+		o.SetStartTime(x)
 	}
 
 	if v, ok := d.GetOk("tags"); ok {
@@ -911,19 +981,27 @@ func dataSourceIamApiKeyRead(c context.Context, d *schema.ResourceData, meta int
 				var temp = make(map[string]interface{})
 				temp["account_moid"] = (s.GetAccountMoid())
 				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
+				temp["admin_status"] = (s.GetAdminStatus())
 
 				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)
 				temp["class_id"] = (s.GetClassId())
 
 				temp["create_time"] = (s.GetCreateTime()).String()
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
+
+				temp["expiry_date_time"] = (s.GetExpiryDateTime()).String()
 				temp["hash_algorithm"] = (s.GetHashAlgorithm())
+				temp["is_never_expiring"] = (s.GetIsNeverExpiring())
 
 				temp["key_spec"] = flattenMapPkixKeyGenerationSpec(s.GetKeySpec(), d)
+				temp["last_used_ip"] = (s.GetLastUsedIp())
+
+				temp["last_used_time"] = (s.GetLastUsedTime()).String()
 
 				temp["mod_time"] = (s.GetModTime()).String()
 				temp["moid"] = (s.GetMoid())
 				temp["object_type"] = (s.GetObjectType())
+				temp["oper_status"] = (s.GetOperStatus())
 				temp["owners"] = (s.GetOwners())
 
 				temp["parent"] = flattenMapMoBaseMoRelationship(s.GetParent(), d)
@@ -935,6 +1013,8 @@ func dataSourceIamApiKeyRead(c context.Context, d *schema.ResourceData, meta int
 				temp["purpose"] = (s.GetPurpose())
 				temp["shared_scope"] = (s.GetSharedScope())
 				temp["signing_algorithm"] = (s.GetSigningAlgorithm())
+
+				temp["start_time"] = (s.GetStartTime()).String()
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
 

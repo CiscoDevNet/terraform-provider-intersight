@@ -7,10 +7,12 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "storage.StoragePolicy"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "storage.StoragePolicy"]
 **DefaultDriveMode** | Pointer to **string** | All unconfigured drives will move to the selected state on deployment. Newly inserted drives will move to the selected state. Select Unconfigured Good option to retain the existing configuration. Select JBOD to move the unconfigured drives to JBOD state. Select RAID0 to create a RAID0 virtual drive on each of the unconfigured drives. If JBOD is selected, unconfigured drives will move to JBOD state on host reboot. This setting is applicable only to selected set of controllers on FI attached servers. * &#x60;UnconfiguredGood&#x60; - Newly inserted drives or on reboot, drives will remain the same state. * &#x60;Jbod&#x60; - Newly inserted drives or on reboot, drives will automatically move to JBOD state if drive state was UnconfiguredGood. * &#x60;RAID0&#x60; - Newly inserted drives or on reboot, virtual drives will be created, respective drives will move to Online state. | [optional] [default to "UnconfiguredGood"]
+**DirectAttachedNvmeSlots** | Pointer to **string** | Only U.3 NVMe drives has to be specified, entered slots will be moved to Direct attached mode. Allowed slots are 1-4, 101-104. Allowed value is a comma or hyphen separated number range. | [optional] 
 **GlobalHotSpares** | Pointer to **string** | A collection of disks that is to be used as hot spares, globally, for all the RAID groups. Allowed value is a number range separated by a comma or a hyphen. | [optional] 
 **M2VirtualDrive** | Pointer to [**NullableStorageM2VirtualDriveConfig**](StorageM2VirtualDriveConfig.md) |  | [optional] 
 **Raid0Drive** | Pointer to [**NullableStorageR0Drive**](StorageR0Drive.md) |  | [optional] 
-**SecureJbods** | Pointer to **string** | JBOD drives specified in this slot range will be encrypted. Allowed value is a comma or hyphen separated number range. Sample format is 1, 3 or 4-6, 8. | [optional] 
+**RaidAttachedNvmeSlots** | Pointer to **string** | Only U.3 NVMe drives has to be specified, entered slots will be moved to RAID attached mode. Allowed slots are 1-4, 101-104. Allowed value is a comma or hyphen separated number range. | [optional] 
+**SecureJbods** | Pointer to **string** | JBOD drives specified in this slot range will be encrypted. Allowed values are &#39;ALL&#39;, or a comma or hyphen separated number range. Sample format is ALL or 1, 3 or 4-6, 8. Setting the value to &#39;ALL&#39; will encrypt all the unused UnconfigureGood/JBOD disks. | [optional] 
 **UnusedDisksState** | Pointer to **string** | State to which drives, not used in this policy, are to be moved. NoChange will not change the drive state. No Change must be selected if Default Drive State is set to JBOD or RAID0. * &#x60;NoChange&#x60; - Drive state will not be modified by Storage Policy. * &#x60;UnconfiguredGood&#x60; - Unconfigured good state -ready to be added in a RAID group. * &#x60;Jbod&#x60; - JBOD state where the disks start showing up to Host OS. | [optional] [default to "NoChange"]
 **UseJbodForVdCreation** | Pointer to **bool** | Disks in JBOD State are used to create virtual drives. This setting must be disabled if Default Drive State is set to JBOD. | [optional] 
 **DriveGroup** | Pointer to [**[]StorageDriveGroupRelationship**](StorageDriveGroupRelationship.md) | An array of relationships to storageDriveGroup resources. | [optional] 
@@ -100,6 +102,31 @@ SetDefaultDriveMode sets DefaultDriveMode field to given value.
 `func (o *StorageStoragePolicyAllOf) HasDefaultDriveMode() bool`
 
 HasDefaultDriveMode returns a boolean if a field has been set.
+
+### GetDirectAttachedNvmeSlots
+
+`func (o *StorageStoragePolicyAllOf) GetDirectAttachedNvmeSlots() string`
+
+GetDirectAttachedNvmeSlots returns the DirectAttachedNvmeSlots field if non-nil, zero value otherwise.
+
+### GetDirectAttachedNvmeSlotsOk
+
+`func (o *StorageStoragePolicyAllOf) GetDirectAttachedNvmeSlotsOk() (*string, bool)`
+
+GetDirectAttachedNvmeSlotsOk returns a tuple with the DirectAttachedNvmeSlots field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDirectAttachedNvmeSlots
+
+`func (o *StorageStoragePolicyAllOf) SetDirectAttachedNvmeSlots(v string)`
+
+SetDirectAttachedNvmeSlots sets DirectAttachedNvmeSlots field to given value.
+
+### HasDirectAttachedNvmeSlots
+
+`func (o *StorageStoragePolicyAllOf) HasDirectAttachedNvmeSlots() bool`
+
+HasDirectAttachedNvmeSlots returns a boolean if a field has been set.
 
 ### GetGlobalHotSpares
 
@@ -196,6 +223,31 @@ HasRaid0Drive returns a boolean if a field has been set.
 `func (o *StorageStoragePolicyAllOf) UnsetRaid0Drive()`
 
 UnsetRaid0Drive ensures that no value is present for Raid0Drive, not even an explicit nil
+### GetRaidAttachedNvmeSlots
+
+`func (o *StorageStoragePolicyAllOf) GetRaidAttachedNvmeSlots() string`
+
+GetRaidAttachedNvmeSlots returns the RaidAttachedNvmeSlots field if non-nil, zero value otherwise.
+
+### GetRaidAttachedNvmeSlotsOk
+
+`func (o *StorageStoragePolicyAllOf) GetRaidAttachedNvmeSlotsOk() (*string, bool)`
+
+GetRaidAttachedNvmeSlotsOk returns a tuple with the RaidAttachedNvmeSlots field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRaidAttachedNvmeSlots
+
+`func (o *StorageStoragePolicyAllOf) SetRaidAttachedNvmeSlots(v string)`
+
+SetRaidAttachedNvmeSlots sets RaidAttachedNvmeSlots field to given value.
+
+### HasRaidAttachedNvmeSlots
+
+`func (o *StorageStoragePolicyAllOf) HasRaidAttachedNvmeSlots() bool`
+
+HasRaidAttachedNvmeSlots returns a boolean if a field has been set.
+
 ### GetSecureJbods
 
 `func (o *StorageStoragePolicyAllOf) GetSecureJbods() string`

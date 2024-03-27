@@ -61,6 +61,16 @@ func getIamResourceLimitsSchema() map[string]*schema.Schema {
 			Optional:         true,
 			DiffSuppressFunc: SuppressDiffAdditionProps,
 		},
+		"allow_api_keys_without_expiry": {
+			Description: "Boolean value used to decide whether API keys that never expire are allowed for the account. This allows creation of API keys which are perpetual which can used for specific applications where rotation of API keys are not feasible.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
+		"allow_app_registrations_without_expiry": {
+			Description: "Boolean value used to decide whether App Registration that never expire are allowed for the account.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
 		"ancestors": {
 			Description: "An array of relationships to moBaseMo resources.",
 			Type:        schema.TypeList,
@@ -108,6 +118,16 @@ func getIamResourceLimitsSchema() map[string]*schema.Schema {
 		"domain_group_moid": {
 			Description: "The DomainGroup ID for this managed object.",
 			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"max_api_key_expiry": {
+			Description: "The maximum expiration period (in seconds) allowed for API keys. The default value is 180 days or 15552000 seconds. It is shown to user in days for readability.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"max_app_registration_expiry": {
+			Description: "The maximum expiration period (in seconds) allowed for App Registration. The default value is 180 days or 15552000 seconds. It is shown to user in days for readability.",
+			Type:        schema.TypeInt,
 			Optional:    true,
 		},
 		"mod_time": {
@@ -424,6 +444,16 @@ func dataSourceIamResourceLimitsRead(c context.Context, d *schema.ResourceData, 
 		}
 	}
 
+	if v, ok := d.GetOkExists("allow_api_keys_without_expiry"); ok {
+		x := (v.(bool))
+		o.SetAllowApiKeysWithoutExpiry(x)
+	}
+
+	if v, ok := d.GetOkExists("allow_app_registrations_without_expiry"); ok {
+		x := (v.(bool))
+		o.SetAllowAppRegistrationsWithoutExpiry(x)
+	}
+
 	if v, ok := d.GetOk("ancestors"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
@@ -477,6 +507,16 @@ func dataSourceIamResourceLimitsRead(c context.Context, d *schema.ResourceData, 
 	if v, ok := d.GetOk("domain_group_moid"); ok {
 		x := (v.(string))
 		o.SetDomainGroupMoid(x)
+	}
+
+	if v, ok := d.GetOkExists("max_api_key_expiry"); ok {
+		x := int64(v.(int))
+		o.SetMaxApiKeyExpiry(x)
+	}
+
+	if v, ok := d.GetOkExists("max_app_registration_expiry"); ok {
+		x := int64(v.(int))
+		o.SetMaxAppRegistrationExpiry(x)
 	}
 
 	if v, ok := d.GetOk("mod_time"); ok {
@@ -744,12 +784,16 @@ func dataSourceIamResourceLimitsRead(c context.Context, d *schema.ResourceData, 
 				temp["account"] = flattenMapIamAccountRelationship(s.GetAccount(), d)
 				temp["account_moid"] = (s.GetAccountMoid())
 				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
+				temp["allow_api_keys_without_expiry"] = (s.GetAllowApiKeysWithoutExpiry())
+				temp["allow_app_registrations_without_expiry"] = (s.GetAllowAppRegistrationsWithoutExpiry())
 
 				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)
 				temp["class_id"] = (s.GetClassId())
 
 				temp["create_time"] = (s.GetCreateTime()).String()
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
+				temp["max_api_key_expiry"] = (s.GetMaxApiKeyExpiry())
+				temp["max_app_registration_expiry"] = (s.GetMaxAppRegistrationExpiry())
 
 				temp["mod_time"] = (s.GetModTime()).String()
 				temp["moid"] = (s.GetMoid())

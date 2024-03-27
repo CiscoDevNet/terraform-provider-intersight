@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **DceInterfaceSettings** | Pointer to [**[]AdapterDceInterfaceSettings**](AdapterDceInterfaceSettings.md) |  | [optional] 
 **EthSettings** | Pointer to [**NullableAdapterEthSettings**](AdapterEthSettings.md) |  | [optional] 
 **FcSettings** | Pointer to [**NullableAdapterFcSettings**](AdapterFcSettings.md) |  | [optional] 
+**PhysicalNicModeSettings** | Pointer to [**NullableAdapterPhysicalNicModeSettings**](AdapterPhysicalNicModeSettings.md) |  | [optional] 
 **PortChannelSettings** | Pointer to [**NullableAdapterPortChannelSettings**](AdapterPortChannelSettings.md) |  | [optional] 
 **SlotId** | Pointer to **string** | PCIe slot where the VIC adapter is installed. Supported values are (1-15) and MLOM. | [optional] 
 
@@ -176,6 +177,41 @@ HasFcSettings returns a boolean if a field has been set.
 `func (o *AdapterAdapterConfigAllOf) UnsetFcSettings()`
 
 UnsetFcSettings ensures that no value is present for FcSettings, not even an explicit nil
+### GetPhysicalNicModeSettings
+
+`func (o *AdapterAdapterConfigAllOf) GetPhysicalNicModeSettings() AdapterPhysicalNicModeSettings`
+
+GetPhysicalNicModeSettings returns the PhysicalNicModeSettings field if non-nil, zero value otherwise.
+
+### GetPhysicalNicModeSettingsOk
+
+`func (o *AdapterAdapterConfigAllOf) GetPhysicalNicModeSettingsOk() (*AdapterPhysicalNicModeSettings, bool)`
+
+GetPhysicalNicModeSettingsOk returns a tuple with the PhysicalNicModeSettings field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPhysicalNicModeSettings
+
+`func (o *AdapterAdapterConfigAllOf) SetPhysicalNicModeSettings(v AdapterPhysicalNicModeSettings)`
+
+SetPhysicalNicModeSettings sets PhysicalNicModeSettings field to given value.
+
+### HasPhysicalNicModeSettings
+
+`func (o *AdapterAdapterConfigAllOf) HasPhysicalNicModeSettings() bool`
+
+HasPhysicalNicModeSettings returns a boolean if a field has been set.
+
+### SetPhysicalNicModeSettingsNil
+
+`func (o *AdapterAdapterConfigAllOf) SetPhysicalNicModeSettingsNil(b bool)`
+
+ SetPhysicalNicModeSettingsNil sets the value for PhysicalNicModeSettings to be an explicit nil
+
+### UnsetPhysicalNicModeSettings
+`func (o *AdapterAdapterConfigAllOf) UnsetPhysicalNicModeSettings()`
+
+UnsetPhysicalNicModeSettings ensures that no value is present for PhysicalNicModeSettings, not even an explicit nil
 ### GetPortChannelSettings
 
 `func (o *AdapterAdapterConfigAllOf) GetPortChannelSettings() AdapterPortChannelSettings`

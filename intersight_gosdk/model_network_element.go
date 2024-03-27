@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-14968
+API version: 1.0.11-15711
 Contact: intersight@cisco.com
 */
 
@@ -24,7 +24,7 @@ type NetworkElement struct {
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
-	// Administratively configured state of Fabric Evacuation feature, for this switch.
+	// Administratively configured state of Fabric Evacuation feature, for this switch. * `` - Evacuation state of the switch is unknown. * `enabled` - Evacuation state of the switch is enabled. * `disabled` - Evacuation state of the switch is disabled. * `applying` - Evacuation state of the switch when evacuation is in progress. * `on` - Evacuation state of the switch is enabled. * `off` - Evacuation state of the switch is disabled. * `N/A` - Evacuation state of the switch is not applicable.
 	AdminEvacState *string `json:"AdminEvacState,omitempty"`
 	// The administrative state of the network Element inband management interface.
 	AdminInbandInterfaceState *string                     `json:"AdminInbandInterfaceState,omitempty"`
@@ -54,6 +54,8 @@ type NetworkElement struct {
 	FcMode *string `json:"FcMode,omitempty"`
 	// The user configured FC operational mode for this switch (End-Host or Switching). * `end-host` - In end-host mode, the fabric interconnects appear to the upstream devices as end hosts with multiple links.In this mode, the switch does not run Spanning Tree Protocol and avoids loops by following a set of rules for traffic forwarding.In case of ethernet switching mode - Ethernet end-host mode is also known as Ethernet host virtualizer. * `switch` - In switch mode, the switch runs Spanning Tree Protocol to avoid loops, and broadcast and multicast packets are handled in the traditional way.This is the traditional switch mode.
 	FcSwitchingMode *string `json:"FcSwitchingMode,omitempty"`
+	// The flag to check vulnerability with secure boot technology.
+	FpgaUpgradeNeeded *bool `json:"FpgaUpgradeNeeded,omitempty"`
 	// The IP address of the network Element inband management interface.
 	InbandIpAddress *string `json:"InbandIpAddress,omitempty"`
 	// The default gateway of the network Element inband management interface.
@@ -66,7 +68,7 @@ type NetworkElement struct {
 	InterClusterLinkState *string `json:"InterClusterLinkState,omitempty"`
 	// The management mode of the fabric interconnect. * `IntersightStandalone` - Intersight Standalone mode of operation. * `UCSM` - Unified Computing System Manager mode of operation. * `Intersight` - Intersight managed mode of operation.
 	ManagementMode *string `json:"ManagementMode,omitempty"`
-	// Operational state of the Fabric Evacuation feature, for this switch.
+	// Operational state of the Fabric Evacuation feature, for this switch. * `` - Evacuation state of the switch is unknown. * `enabled` - Evacuation state of the switch is enabled. * `disabled` - Evacuation state of the switch is disabled. * `applying` - Evacuation state of the switch when evacuation is in progress. * `on` - Evacuation state of the switch is enabled. * `off` - Evacuation state of the switch is disabled. * `N/A` - Evacuation state of the switch is not applicable.
 	OperEvacState *string `json:"OperEvacState,omitempty"`
 	// The switch's current overall operational/health state.
 	Operability *string `json:"Operability,omitempty"`
@@ -92,12 +94,16 @@ type NetworkElement struct {
 	OutOfBandMac *string `json:"OutOfBandMac,omitempty"`
 	// Part number of the switch.
 	PartNumber *string `json:"PartNumber,omitempty"`
+	// The flag to indicate the firmware of peer Fabric Interconnect is out of sync.
+	PeerFirmwareOutOfSync *bool `json:"PeerFirmwareOutOfSync,omitempty"`
 	// The reserved VLAN start ID of the Network Element. A block of 128 VLANs are reserved for internal use and cannot be used for carrying network traffic.
 	ReservedVlanStartId *int64 `json:"ReservedVlanStartId,omitempty"`
 	// The status of the switch.
 	Status *string `json:"Status,omitempty"`
 	// The Switch Id of the network Element.
 	SwitchId *string `json:"SwitchId,omitempty"`
+	// The name of switch profile associated with the switch.
+	SwitchProfileName *string `json:"SwitchProfileName,omitempty"`
 	// The Switch type that the network element is a part of. * `FabricInterconnect` - The default Switch type of UCSM and IMM mode devices. * `NexusDevice` - Switch type of Nexus devices. * `MDSDevice` - Switch type of Nexus MDS devices.
 	SwitchType *string `json:"SwitchType,omitempty"`
 	// System up time of the switch.
@@ -106,6 +112,8 @@ type NetworkElement struct {
 	Thermal *string `json:"Thermal,omitempty"`
 	// Total available memory on this switch platform.
 	TotalMemory *int64 `json:"TotalMemory,omitempty"`
+	// The user defined label assigned to the switch.
+	UserLabel *string `json:"UserLabel,omitempty"`
 	// Firmware version of the switch.
 	Version *string `json:"Version,omitempty"`
 	// An array of relationships to equipmentSwitchCard resources.
@@ -716,6 +724,38 @@ func (o *NetworkElement) SetFcSwitchingMode(v string) {
 	o.FcSwitchingMode = &v
 }
 
+// GetFpgaUpgradeNeeded returns the FpgaUpgradeNeeded field value if set, zero value otherwise.
+func (o *NetworkElement) GetFpgaUpgradeNeeded() bool {
+	if o == nil || o.FpgaUpgradeNeeded == nil {
+		var ret bool
+		return ret
+	}
+	return *o.FpgaUpgradeNeeded
+}
+
+// GetFpgaUpgradeNeededOk returns a tuple with the FpgaUpgradeNeeded field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NetworkElement) GetFpgaUpgradeNeededOk() (*bool, bool) {
+	if o == nil || o.FpgaUpgradeNeeded == nil {
+		return nil, false
+	}
+	return o.FpgaUpgradeNeeded, true
+}
+
+// HasFpgaUpgradeNeeded returns a boolean if a field has been set.
+func (o *NetworkElement) HasFpgaUpgradeNeeded() bool {
+	if o != nil && o.FpgaUpgradeNeeded != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetFpgaUpgradeNeeded gets a reference to the given bool and assigns it to the FpgaUpgradeNeeded field.
+func (o *NetworkElement) SetFpgaUpgradeNeeded(v bool) {
+	o.FpgaUpgradeNeeded = &v
+}
+
 // GetInbandIpAddress returns the InbandIpAddress field value if set, zero value otherwise.
 func (o *NetworkElement) GetInbandIpAddress() string {
 	if o == nil || o.InbandIpAddress == nil {
@@ -1324,6 +1364,38 @@ func (o *NetworkElement) SetPartNumber(v string) {
 	o.PartNumber = &v
 }
 
+// GetPeerFirmwareOutOfSync returns the PeerFirmwareOutOfSync field value if set, zero value otherwise.
+func (o *NetworkElement) GetPeerFirmwareOutOfSync() bool {
+	if o == nil || o.PeerFirmwareOutOfSync == nil {
+		var ret bool
+		return ret
+	}
+	return *o.PeerFirmwareOutOfSync
+}
+
+// GetPeerFirmwareOutOfSyncOk returns a tuple with the PeerFirmwareOutOfSync field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NetworkElement) GetPeerFirmwareOutOfSyncOk() (*bool, bool) {
+	if o == nil || o.PeerFirmwareOutOfSync == nil {
+		return nil, false
+	}
+	return o.PeerFirmwareOutOfSync, true
+}
+
+// HasPeerFirmwareOutOfSync returns a boolean if a field has been set.
+func (o *NetworkElement) HasPeerFirmwareOutOfSync() bool {
+	if o != nil && o.PeerFirmwareOutOfSync != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetPeerFirmwareOutOfSync gets a reference to the given bool and assigns it to the PeerFirmwareOutOfSync field.
+func (o *NetworkElement) SetPeerFirmwareOutOfSync(v bool) {
+	o.PeerFirmwareOutOfSync = &v
+}
+
 // GetReservedVlanStartId returns the ReservedVlanStartId field value if set, zero value otherwise.
 func (o *NetworkElement) GetReservedVlanStartId() int64 {
 	if o == nil || o.ReservedVlanStartId == nil {
@@ -1418,6 +1490,38 @@ func (o *NetworkElement) HasSwitchId() bool {
 // SetSwitchId gets a reference to the given string and assigns it to the SwitchId field.
 func (o *NetworkElement) SetSwitchId(v string) {
 	o.SwitchId = &v
+}
+
+// GetSwitchProfileName returns the SwitchProfileName field value if set, zero value otherwise.
+func (o *NetworkElement) GetSwitchProfileName() string {
+	if o == nil || o.SwitchProfileName == nil {
+		var ret string
+		return ret
+	}
+	return *o.SwitchProfileName
+}
+
+// GetSwitchProfileNameOk returns a tuple with the SwitchProfileName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NetworkElement) GetSwitchProfileNameOk() (*string, bool) {
+	if o == nil || o.SwitchProfileName == nil {
+		return nil, false
+	}
+	return o.SwitchProfileName, true
+}
+
+// HasSwitchProfileName returns a boolean if a field has been set.
+func (o *NetworkElement) HasSwitchProfileName() bool {
+	if o != nil && o.SwitchProfileName != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetSwitchProfileName gets a reference to the given string and assigns it to the SwitchProfileName field.
+func (o *NetworkElement) SetSwitchProfileName(v string) {
+	o.SwitchProfileName = &v
 }
 
 // GetSwitchType returns the SwitchType field value if set, zero value otherwise.
@@ -1546,6 +1650,38 @@ func (o *NetworkElement) HasTotalMemory() bool {
 // SetTotalMemory gets a reference to the given int64 and assigns it to the TotalMemory field.
 func (o *NetworkElement) SetTotalMemory(v int64) {
 	o.TotalMemory = &v
+}
+
+// GetUserLabel returns the UserLabel field value if set, zero value otherwise.
+func (o *NetworkElement) GetUserLabel() string {
+	if o == nil || o.UserLabel == nil {
+		var ret string
+		return ret
+	}
+	return *o.UserLabel
+}
+
+// GetUserLabelOk returns a tuple with the UserLabel field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NetworkElement) GetUserLabelOk() (*string, bool) {
+	if o == nil || o.UserLabel == nil {
+		return nil, false
+	}
+	return o.UserLabel, true
+}
+
+// HasUserLabel returns a boolean if a field has been set.
+func (o *NetworkElement) HasUserLabel() bool {
+	if o != nil && o.UserLabel != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetUserLabel gets a reference to the given string and assigns it to the UserLabel field.
+func (o *NetworkElement) SetUserLabel(v string) {
+	o.UserLabel = &v
 }
 
 // GetVersion returns the Version field value if set, zero value otherwise.
@@ -2717,6 +2853,9 @@ func (o NetworkElement) MarshalJSON() ([]byte, error) {
 	if o.FcSwitchingMode != nil {
 		toSerialize["FcSwitchingMode"] = o.FcSwitchingMode
 	}
+	if o.FpgaUpgradeNeeded != nil {
+		toSerialize["FpgaUpgradeNeeded"] = o.FpgaUpgradeNeeded
+	}
 	if o.InbandIpAddress != nil {
 		toSerialize["InbandIpAddress"] = o.InbandIpAddress
 	}
@@ -2774,6 +2913,9 @@ func (o NetworkElement) MarshalJSON() ([]byte, error) {
 	if o.PartNumber != nil {
 		toSerialize["PartNumber"] = o.PartNumber
 	}
+	if o.PeerFirmwareOutOfSync != nil {
+		toSerialize["PeerFirmwareOutOfSync"] = o.PeerFirmwareOutOfSync
+	}
 	if o.ReservedVlanStartId != nil {
 		toSerialize["ReservedVlanStartId"] = o.ReservedVlanStartId
 	}
@@ -2782,6 +2924,9 @@ func (o NetworkElement) MarshalJSON() ([]byte, error) {
 	}
 	if o.SwitchId != nil {
 		toSerialize["SwitchId"] = o.SwitchId
+	}
+	if o.SwitchProfileName != nil {
+		toSerialize["SwitchProfileName"] = o.SwitchProfileName
 	}
 	if o.SwitchType != nil {
 		toSerialize["SwitchType"] = o.SwitchType
@@ -2794,6 +2939,9 @@ func (o NetworkElement) MarshalJSON() ([]byte, error) {
 	}
 	if o.TotalMemory != nil {
 		toSerialize["TotalMemory"] = o.TotalMemory
+	}
+	if o.UserLabel != nil {
+		toSerialize["UserLabel"] = o.UserLabel
 	}
 	if o.Version != nil {
 		toSerialize["Version"] = o.Version
@@ -2911,7 +3059,7 @@ func (o *NetworkElement) UnmarshalJSON(bytes []byte) (err error) {
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 		ObjectType string `json:"ObjectType"`
-		// Administratively configured state of Fabric Evacuation feature, for this switch.
+		// Administratively configured state of Fabric Evacuation feature, for this switch. * `` - Evacuation state of the switch is unknown. * `enabled` - Evacuation state of the switch is enabled. * `disabled` - Evacuation state of the switch is disabled. * `applying` - Evacuation state of the switch when evacuation is in progress. * `on` - Evacuation state of the switch is enabled. * `off` - Evacuation state of the switch is disabled. * `N/A` - Evacuation state of the switch is not applicable.
 		AdminEvacState *string `json:"AdminEvacState,omitempty"`
 		// The administrative state of the network Element inband management interface.
 		AdminInbandInterfaceState *string                     `json:"AdminInbandInterfaceState,omitempty"`
@@ -2941,6 +3089,8 @@ func (o *NetworkElement) UnmarshalJSON(bytes []byte) (err error) {
 		FcMode *string `json:"FcMode,omitempty"`
 		// The user configured FC operational mode for this switch (End-Host or Switching). * `end-host` - In end-host mode, the fabric interconnects appear to the upstream devices as end hosts with multiple links.In this mode, the switch does not run Spanning Tree Protocol and avoids loops by following a set of rules for traffic forwarding.In case of ethernet switching mode - Ethernet end-host mode is also known as Ethernet host virtualizer. * `switch` - In switch mode, the switch runs Spanning Tree Protocol to avoid loops, and broadcast and multicast packets are handled in the traditional way.This is the traditional switch mode.
 		FcSwitchingMode *string `json:"FcSwitchingMode,omitempty"`
+		// The flag to check vulnerability with secure boot technology.
+		FpgaUpgradeNeeded *bool `json:"FpgaUpgradeNeeded,omitempty"`
 		// The IP address of the network Element inband management interface.
 		InbandIpAddress *string `json:"InbandIpAddress,omitempty"`
 		// The default gateway of the network Element inband management interface.
@@ -2953,7 +3103,7 @@ func (o *NetworkElement) UnmarshalJSON(bytes []byte) (err error) {
 		InterClusterLinkState *string `json:"InterClusterLinkState,omitempty"`
 		// The management mode of the fabric interconnect. * `IntersightStandalone` - Intersight Standalone mode of operation. * `UCSM` - Unified Computing System Manager mode of operation. * `Intersight` - Intersight managed mode of operation.
 		ManagementMode *string `json:"ManagementMode,omitempty"`
-		// Operational state of the Fabric Evacuation feature, for this switch.
+		// Operational state of the Fabric Evacuation feature, for this switch. * `` - Evacuation state of the switch is unknown. * `enabled` - Evacuation state of the switch is enabled. * `disabled` - Evacuation state of the switch is disabled. * `applying` - Evacuation state of the switch when evacuation is in progress. * `on` - Evacuation state of the switch is enabled. * `off` - Evacuation state of the switch is disabled. * `N/A` - Evacuation state of the switch is not applicable.
 		OperEvacState *string `json:"OperEvacState,omitempty"`
 		// The switch's current overall operational/health state.
 		Operability *string `json:"Operability,omitempty"`
@@ -2979,12 +3129,16 @@ func (o *NetworkElement) UnmarshalJSON(bytes []byte) (err error) {
 		OutOfBandMac *string `json:"OutOfBandMac,omitempty"`
 		// Part number of the switch.
 		PartNumber *string `json:"PartNumber,omitempty"`
+		// The flag to indicate the firmware of peer Fabric Interconnect is out of sync.
+		PeerFirmwareOutOfSync *bool `json:"PeerFirmwareOutOfSync,omitempty"`
 		// The reserved VLAN start ID of the Network Element. A block of 128 VLANs are reserved for internal use and cannot be used for carrying network traffic.
 		ReservedVlanStartId *int64 `json:"ReservedVlanStartId,omitempty"`
 		// The status of the switch.
 		Status *string `json:"Status,omitempty"`
 		// The Switch Id of the network Element.
 		SwitchId *string `json:"SwitchId,omitempty"`
+		// The name of switch profile associated with the switch.
+		SwitchProfileName *string `json:"SwitchProfileName,omitempty"`
 		// The Switch type that the network element is a part of. * `FabricInterconnect` - The default Switch type of UCSM and IMM mode devices. * `NexusDevice` - Switch type of Nexus devices. * `MDSDevice` - Switch type of Nexus MDS devices.
 		SwitchType *string `json:"SwitchType,omitempty"`
 		// System up time of the switch.
@@ -2993,6 +3147,8 @@ func (o *NetworkElement) UnmarshalJSON(bytes []byte) (err error) {
 		Thermal *string `json:"Thermal,omitempty"`
 		// Total available memory on this switch platform.
 		TotalMemory *int64 `json:"TotalMemory,omitempty"`
+		// The user defined label assigned to the switch.
+		UserLabel *string `json:"UserLabel,omitempty"`
 		// Firmware version of the switch.
 		Version *string `json:"Version,omitempty"`
 		// An array of relationships to equipmentSwitchCard resources.
@@ -3074,6 +3230,7 @@ func (o *NetworkElement) UnmarshalJSON(bytes []byte) (err error) {
 		varNetworkElement.FaultSummary = varNetworkElementWithoutEmbeddedStruct.FaultSummary
 		varNetworkElement.FcMode = varNetworkElementWithoutEmbeddedStruct.FcMode
 		varNetworkElement.FcSwitchingMode = varNetworkElementWithoutEmbeddedStruct.FcSwitchingMode
+		varNetworkElement.FpgaUpgradeNeeded = varNetworkElementWithoutEmbeddedStruct.FpgaUpgradeNeeded
 		varNetworkElement.InbandIpAddress = varNetworkElementWithoutEmbeddedStruct.InbandIpAddress
 		varNetworkElement.InbandIpGateway = varNetworkElementWithoutEmbeddedStruct.InbandIpGateway
 		varNetworkElement.InbandIpMask = varNetworkElementWithoutEmbeddedStruct.InbandIpMask
@@ -3093,13 +3250,16 @@ func (o *NetworkElement) UnmarshalJSON(bytes []byte) (err error) {
 		varNetworkElement.OutOfBandIpv6Prefix = varNetworkElementWithoutEmbeddedStruct.OutOfBandIpv6Prefix
 		varNetworkElement.OutOfBandMac = varNetworkElementWithoutEmbeddedStruct.OutOfBandMac
 		varNetworkElement.PartNumber = varNetworkElementWithoutEmbeddedStruct.PartNumber
+		varNetworkElement.PeerFirmwareOutOfSync = varNetworkElementWithoutEmbeddedStruct.PeerFirmwareOutOfSync
 		varNetworkElement.ReservedVlanStartId = varNetworkElementWithoutEmbeddedStruct.ReservedVlanStartId
 		varNetworkElement.Status = varNetworkElementWithoutEmbeddedStruct.Status
 		varNetworkElement.SwitchId = varNetworkElementWithoutEmbeddedStruct.SwitchId
+		varNetworkElement.SwitchProfileName = varNetworkElementWithoutEmbeddedStruct.SwitchProfileName
 		varNetworkElement.SwitchType = varNetworkElementWithoutEmbeddedStruct.SwitchType
 		varNetworkElement.SystemUpTime = varNetworkElementWithoutEmbeddedStruct.SystemUpTime
 		varNetworkElement.Thermal = varNetworkElementWithoutEmbeddedStruct.Thermal
 		varNetworkElement.TotalMemory = varNetworkElementWithoutEmbeddedStruct.TotalMemory
+		varNetworkElement.UserLabel = varNetworkElementWithoutEmbeddedStruct.UserLabel
 		varNetworkElement.Version = varNetworkElementWithoutEmbeddedStruct.Version
 		varNetworkElement.Cards = varNetworkElementWithoutEmbeddedStruct.Cards
 		varNetworkElement.CdpNeighbor = varNetworkElementWithoutEmbeddedStruct.CdpNeighbor
@@ -3167,6 +3327,7 @@ func (o *NetworkElement) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "FaultSummary")
 		delete(additionalProperties, "FcMode")
 		delete(additionalProperties, "FcSwitchingMode")
+		delete(additionalProperties, "FpgaUpgradeNeeded")
 		delete(additionalProperties, "InbandIpAddress")
 		delete(additionalProperties, "InbandIpGateway")
 		delete(additionalProperties, "InbandIpMask")
@@ -3186,13 +3347,16 @@ func (o *NetworkElement) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "OutOfBandIpv6Prefix")
 		delete(additionalProperties, "OutOfBandMac")
 		delete(additionalProperties, "PartNumber")
+		delete(additionalProperties, "PeerFirmwareOutOfSync")
 		delete(additionalProperties, "ReservedVlanStartId")
 		delete(additionalProperties, "Status")
 		delete(additionalProperties, "SwitchId")
+		delete(additionalProperties, "SwitchProfileName")
 		delete(additionalProperties, "SwitchType")
 		delete(additionalProperties, "SystemUpTime")
 		delete(additionalProperties, "Thermal")
 		delete(additionalProperties, "TotalMemory")
+		delete(additionalProperties, "UserLabel")
 		delete(additionalProperties, "Version")
 		delete(additionalProperties, "Cards")
 		delete(additionalProperties, "CdpNeighbor")

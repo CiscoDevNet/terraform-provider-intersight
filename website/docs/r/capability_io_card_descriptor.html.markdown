@@ -38,6 +38,7 @@ This complex property has following sub-properties:
   + `moid`:(string) The Moid of the referenced REST resource. 
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
   + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
+* `bif_port_num`:(int) Identifies the bif port number for the iocard module. 
 * `capabilities`:(Array) An array of relationships to capabilityCapability resources. 
 This complex property has following sub-properties:
   + `moid`:(string) The Moid of the referenced REST resource. 
@@ -46,11 +47,12 @@ This complex property has following sub-properties:
 * `create_time`:(string)(ReadOnly) The time when this managed object was created. 
 * `description`:(string) Detailed information about the endpoint. 
 * `domain_group_moid`:(string)(ReadOnly) The DomainGroup ID for this managed object. 
+* `is_ucsx_direct_io_card`:(bool) Identifies whether the iocard module is a part of the UCSX Direct chassis. 
 * `mod_time`:(string)(ReadOnly) The time when this managed object was last modified. 
 * `model`:(string) The model of the endpoint, for which this capability information is applicable. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `native_hif_port_channel_required`:(bool) Identifies whether host port-channel is required to be configured for the iocard module. 
-* `native_speed_master_port_num`:(int) Master port number for native speed configuration for the iocard module. 
+* `native_speed_master_port_num`:(int) Primary port number for native speed configuration for the iocard module. 
 * `num_hif_ports`:(int) Number of hif ports per blade for the iocard module. 
 * `owners`:
                 (Array of schema.TypeString) -(ReadOnly)
@@ -71,6 +73,8 @@ This complex property has following sub-properties:
   + `key`:(string) The string representation of a tag key. 
   + `value`:(string) The string representation of a tag value. 
 * `uif_connectivity`:(string) Connectivity information between UIF Uplink ports and IOM ports.* `inline` - UIF uplink ports and IOM ports are connected inline.* `cross-connected` - UIF uplink ports and IOM ports are cross-connected, a case in washington chassis. 
+* `unsupported_policies`:
+                (Array of schema.TypeString) -
 * `vendor`:(string) The vendor of the endpoint, for which this capability information is applicable. 
 * `nr_version`:(string) The firmware or software version of the endpoint, for which this capability information is applicable. 
 * `version_context`:(HashMap) -(ReadOnly) The versioning info for this managed object. 

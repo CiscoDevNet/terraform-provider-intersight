@@ -3,12 +3,12 @@ subcategory: "capability"
 layout: "intersight"
 page_title: "Intersight: intersight_capability_adapter_update_constraint_meta"
 description: |-
-        Internal meta-data to enable adapter update related constraints.
+        Internal meta-data to enable adapter unit update related constraints.
 
 ---
 
 # Data Source: intersight_capability_adapter_update_constraint_meta
-Internal meta-data to enable adapter update related constraints.
+Internal meta-data to enable adapter unit update related constraints.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

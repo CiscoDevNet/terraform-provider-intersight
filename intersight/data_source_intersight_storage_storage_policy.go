@@ -80,6 +80,11 @@ func getStorageStoragePolicySchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"direct_attached_nvme_slots": {
+			Description: "Only U.3 NVMe drives has to be specified, entered slots will be moved to Direct attached mode. Allowed slots are 1-4, 101-104. Allowed value is a comma or hyphen separated number range.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"domain_group_moid": {
 			Description: "The DomainGroup ID for this managed object.",
 			Type:        schema.TypeString,
@@ -149,6 +154,11 @@ func getStorageStoragePolicySchema() map[string]*schema.Schema {
 					"enable": {
 						Description: "If enabled, this will create a virtual drive on the M.2 RAID controller.",
 						Type:        schema.TypeBool,
+						Optional:    true,
+					},
+					"name": {
+						Description: "The name of the virtual drive. The name can be between 1 and 15 alphanumeric characters. Spaces or any special characters other than - (hyphen), _ (underscore), : (colon), and . (period) are not allowed. This field will be pre-populated with the default or user configured value which can be edited.",
+						Type:        schema.TypeString,
 						Optional:    true,
 					},
 					"object_type": {
@@ -412,8 +422,13 @@ func getStorageStoragePolicySchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"raid_attached_nvme_slots": {
+			Description: "Only U.3 NVMe drives has to be specified, entered slots will be moved to RAID attached mode. Allowed slots are 1-4, 101-104. Allowed value is a comma or hyphen separated number range.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"secure_jbods": {
-			Description: "JBOD drives specified in this slot range will be encrypted. Allowed value is a comma or hyphen separated number range. Sample format is 1, 3 or 4-6, 8.",
+			Description: "JBOD drives specified in this slot range will be encrypted. Allowed values are 'ALL', or a comma or hyphen separated number range. Sample format is ALL or 1, 3 or 4-6, 8. Setting the value to 'ALL' will encrypt all the unused UnconfigureGood/JBOD disks.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -664,6 +679,11 @@ func dataSourceStorageStoragePolicyRead(c context.Context, d *schema.ResourceDat
 		o.SetDescription(x)
 	}
 
+	if v, ok := d.GetOk("direct_attached_nvme_slots"); ok {
+		x := (v.(string))
+		o.SetDirectAttachedNvmeSlots(x)
+	}
+
 	if v, ok := d.GetOk("domain_group_moid"); ok {
 		x := (v.(string))
 		o.SetDomainGroupMoid(x)
@@ -741,6 +761,12 @@ func dataSourceStorageStoragePolicyRead(c context.Context, d *schema.ResourceDat
 				{
 					x := (v.(bool))
 					o.SetEnable(x)
+				}
+			}
+			if v, ok := l["name"]; ok {
+				{
+					x := (v.(string))
+					o.SetName(x)
 				}
 			}
 			if v, ok := l["object_type"]; ok {
@@ -1059,6 +1085,11 @@ func dataSourceStorageStoragePolicyRead(c context.Context, d *schema.ResourceDat
 		}
 	}
 
+	if v, ok := d.GetOk("raid_attached_nvme_slots"); ok {
+		x := (v.(string))
+		o.SetRaidAttachedNvmeSlots(x)
+	}
+
 	if v, ok := d.GetOk("secure_jbods"); ok {
 		x := (v.(string))
 		o.SetSecureJbods(x)
@@ -1230,6 +1261,7 @@ func dataSourceStorageStoragePolicyRead(c context.Context, d *schema.ResourceDat
 				temp["create_time"] = (s.GetCreateTime()).String()
 				temp["default_drive_mode"] = (s.GetDefaultDriveMode())
 				temp["description"] = (s.GetDescription())
+				temp["direct_attached_nvme_slots"] = (s.GetDirectAttachedNvmeSlots())
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
 
 				temp["drive_group"] = flattenListStorageDriveGroupRelationship(s.GetDriveGroup(), d)
@@ -1252,6 +1284,7 @@ func dataSourceStorageStoragePolicyRead(c context.Context, d *schema.ResourceDat
 				temp["profiles"] = flattenListPolicyAbstractConfigProfileRelationship(s.GetProfiles(), d)
 
 				temp["raid0_drive"] = flattenMapStorageR0Drive(s.GetRaid0Drive(), d)
+				temp["raid_attached_nvme_slots"] = (s.GetRaidAttachedNvmeSlots())
 				temp["secure_jbods"] = (s.GetSecureJbods())
 				temp["shared_scope"] = (s.GetSharedScope())
 

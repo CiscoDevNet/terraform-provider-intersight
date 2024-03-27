@@ -149,12 +149,12 @@ func getIamUserSchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"email": {
-			Description: "Email of the user. Users are added to Intersight using the email configured in the IdP.",
+			Description: "Email of the user. Remote users are added to Intersight using the email configured in the IdP.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
 		"first_name": {
-			Description: "First name of the user. This field is populated from the IdP attributes received after authentication.",
+			Description: "First name of the user. For remote users, this field is populated from the IdP attributes received after authentication.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -234,7 +234,7 @@ func getIamUserSchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"last_name": {
-			Description: "Last name of the user. This field is populated from the IdP attributes received after authentication.",
+			Description: "Last name of the user. For remote users, this field is populated from the IdP attributes received after authentication.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -278,6 +278,11 @@ func getIamUserSchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"locked_until": {
+			Description: "Time until which the user account will be locked out.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"mod_time": {
 			Description: "The time when this managed object was last modified.",
 			Type:        schema.TypeString,
@@ -289,7 +294,7 @@ func getIamUserSchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"name": {
-			Description: "Name as configured in the IdP.",
+			Description: "Name of the user. For remote users, it is the value as configured in the IdP.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -503,7 +508,7 @@ func getIamUserSchema() map[string]*schema.Schema {
 			},
 		},
 		"user_id_or_email": {
-			Description: "UserID or email as configured in the IdP.",
+			Description: "UserID or email of the user. For remote users, it is the value as configured in the IDP.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -960,6 +965,11 @@ func dataSourceIamUserRead(c context.Context, d *schema.ResourceData, meta inter
 		}
 	}
 
+	if v, ok := d.GetOk("locked_until"); ok {
+		x, _ := time.Parse(time.RFC1123, v.(string))
+		o.SetLockedUntil(x)
+	}
+
 	if v, ok := d.GetOk("mod_time"); ok {
 		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetModTime(x)
@@ -1382,6 +1392,8 @@ func dataSourceIamUserRead(c context.Context, d *schema.ResourceData, meta inter
 				temp["last_role_modified_time"] = (s.GetLastRoleModifiedTime()).String()
 
 				temp["local_user_password"] = flattenMapIamLocalUserPasswordRelationship(s.GetLocalUserPassword(), d)
+
+				temp["locked_until"] = (s.GetLockedUntil()).String()
 
 				temp["mod_time"] = (s.GetModTime()).String()
 				temp["moid"] = (s.GetMoid())

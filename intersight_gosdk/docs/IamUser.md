@@ -7,13 +7,14 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "iam.User"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "iam.User"]
 **ClientIpAddress** | Pointer to **string** | IP address from which the user last logged in to Intersight. | [optional] [readonly] 
-**Email** | Pointer to **string** | Email of the user. Users are added to Intersight using the email configured in the IdP. | [optional] 
-**FirstName** | Pointer to **string** | First name of the user. This field is populated from the IdP attributes received after authentication. | [optional] [readonly] 
+**Email** | Pointer to **string** | Email of the user. Remote users are added to Intersight using the email configured in the IdP. | [optional] 
+**FirstName** | Pointer to **string** | First name of the user. For remote users, this field is populated from the IdP attributes received after authentication. | [optional] 
 **LastLoginTime** | Pointer to **time.Time** | Last successful login time for user. | [optional] [readonly] 
-**LastName** | Pointer to **string** | Last name of the user. This field is populated from the IdP attributes received after authentication. | [optional] [readonly] 
+**LastName** | Pointer to **string** | Last name of the user. For remote users, this field is populated from the IdP attributes received after authentication. | [optional] 
 **LastRoleModifiedTime** | Pointer to **time.Time** | Last role modification time for user. | [optional] [readonly] 
-**Name** | Pointer to **string** | Name as configured in the IdP. | [optional] [readonly] 
-**UserIdOrEmail** | Pointer to **string** | UserID or email as configured in the IdP. | [optional] 
+**LockedUntil** | Pointer to **time.Time** | Time until which the user account will be locked out. | [optional] [readonly] 
+**Name** | Pointer to **string** | Name of the user. For remote users, it is the value as configured in the IdP. | [optional] [readonly] 
+**UserIdOrEmail** | Pointer to **string** | UserID or email of the user. For remote users, it is the value as configured in the IDP. | [optional] 
 **UserType** | Pointer to **string** | Type of the User. If a user is added manually by specifying the email address, or has logged in using groups, based on the IdP attributes received during authentication. If added manually, the user type will be static, otherwise dynamic. | [optional] [readonly] 
 **UserUniqueIdentifier** | Pointer to **string** | Unique id of the user used by the identity provider to store the user. | [optional] [readonly] 
 **ApiKeys** | Pointer to [**[]IamApiKeyRelationship**](IamApiKeyRelationship.md) | An array of relationships to iamApiKey resources. | [optional] [readonly] 
@@ -233,6 +234,31 @@ SetLastRoleModifiedTime sets LastRoleModifiedTime field to given value.
 `func (o *IamUser) HasLastRoleModifiedTime() bool`
 
 HasLastRoleModifiedTime returns a boolean if a field has been set.
+
+### GetLockedUntil
+
+`func (o *IamUser) GetLockedUntil() time.Time`
+
+GetLockedUntil returns the LockedUntil field if non-nil, zero value otherwise.
+
+### GetLockedUntilOk
+
+`func (o *IamUser) GetLockedUntilOk() (*time.Time, bool)`
+
+GetLockedUntilOk returns a tuple with the LockedUntil field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLockedUntil
+
+`func (o *IamUser) SetLockedUntil(v time.Time)`
+
+SetLockedUntil sets LockedUntil field to given value.
+
+### HasLockedUntil
+
+`func (o *IamUser) HasLockedUntil() bool`
+
+HasLockedUntil returns a boolean if a field has been set.
 
 ### GetName
 

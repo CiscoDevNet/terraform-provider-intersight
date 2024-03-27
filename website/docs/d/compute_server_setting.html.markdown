@@ -26,6 +26,7 @@ The following arguments can be used to get data of already created objects in In
 * `dn`:(string) The Distinguished Name unambiguously identifies an object in the system. 
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
 * `front_panel_lock_state`:(string) The allowed actions on the Front Panel Lock.* `None` - Front Panel of the server is set to None state. It is required so that the next frontPanelLockState operation can be triggered.* `Lock` - Front Panel of the server is set to Locked state.* `Unlock` - Front Panel of the server is set to Unlocked state. 
+* `host_init_configuration`:(string) The JSON formatted host initialization configuration containing the basic information for doing an initial boot. The information will be sent to CIMC and stored in host-init.json file on the server. The stored file can only be access using IPMI tool on the host OS. 
 * `kvm_reset`:(string) The allowed actions on the vKVM Reset.* `Ready` - Reset vKVM operation is allowed to be done on the server in this state.* `Reset` - The value that the UI/API needs to provide to trigger a Reset vKVM operation on a server. 
 * `mod_time`:(string) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 

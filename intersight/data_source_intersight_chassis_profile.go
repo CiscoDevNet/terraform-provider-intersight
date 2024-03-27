@@ -822,6 +822,11 @@ func getChassisProfileSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"user_label": {
+			Description: "User label assigned to the chassis profile.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"version_context": {
 			Description: "The versioning info for this managed object.",
 			Type:        schema.TypeList,
@@ -1857,6 +1862,11 @@ func dataSourceChassisProfileRead(c context.Context, d *schema.ResourceData, met
 		o.SetType(x)
 	}
 
+	if v, ok := d.GetOk("user_label"); ok {
+		x := (v.(string))
+		o.SetUserLabel(x)
+	}
+
 	if v, ok := d.GetOk("version_context"); ok {
 		p := make([]models.MoVersionContext, 0, 1)
 		s := v.([]interface{})
@@ -2019,6 +2029,7 @@ func dataSourceChassisProfileRead(c context.Context, d *schema.ResourceData, met
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
 				temp["target_platform"] = (s.GetTargetPlatform())
 				temp["type"] = (s.GetType())
+				temp["user_label"] = (s.GetUserLabel())
 
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
 				chassisProfileResults = append(chassisProfileResults, temp)

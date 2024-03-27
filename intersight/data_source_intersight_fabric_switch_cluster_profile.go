@@ -386,6 +386,11 @@ func getFabricSwitchClusterProfileSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"user_label": {
+			Description: "The user defined label assigned to the switch profile.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"version_context": {
 			Description: "The versioning info for this managed object.",
 			Type:        schema.TypeList,
@@ -950,6 +955,11 @@ func dataSourceFabricSwitchClusterProfileRead(c context.Context, d *schema.Resou
 		o.SetType(x)
 	}
 
+	if v, ok := d.GetOk("user_label"); ok {
+		x := (v.(string))
+		o.SetUserLabel(x)
+	}
+
 	if v, ok := d.GetOk("version_context"); ok {
 		p := make([]models.MoVersionContext, 0, 1)
 		s := v.([]interface{})
@@ -1093,6 +1103,7 @@ func dataSourceFabricSwitchClusterProfileRead(c context.Context, d *schema.Resou
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
 				temp["type"] = (s.GetType())
+				temp["user_label"] = (s.GetUserLabel())
 
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
 				fabricSwitchClusterProfileResults = append(fabricSwitchClusterProfileResults, temp)

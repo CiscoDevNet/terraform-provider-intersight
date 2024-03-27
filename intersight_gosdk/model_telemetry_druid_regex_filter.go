@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-14968
+API version: 1.0.11-15711
 Contact: intersight@cisco.com
 */
 
@@ -15,14 +15,14 @@ import (
 	"encoding/json"
 )
 
-// TelemetryDruidRegexFilter The selector filter matches a specific dimension with a specific value. Selector filters can be used as the base filters for more complex Boolean expressions of filters.
+// TelemetryDruidRegexFilter The regular expression filter is similar to the selector filter, but using regular expressions. It matches the specified dimension with the given pattern. Note that it is often more optimal to use a like filter instead of a regex for simple matching of prefixes.
 type TelemetryDruidRegexFilter struct {
-	// The filter type.
 	Type string `json:"type"`
-	// All filters except the \"spatial\" filter support extraction functions. An extraction function is defined by setting the \"extractionFn\" field on a filter. See Extraction function for more details on extraction functions. If specified, the extraction function will be used to transform input values before the filter is applied. The example below shows a selector filter combined with an extraction function. This filter will transform input values according to the values defined in the lookup map; transformed values will then be matched with the string \"bar_1\".
-	ExtractionFn         map[string]interface{} `json:"extractionFn,omitempty"`
-	Dimension            string                 `json:"dimension"`
-	Pattern              string                 `json:"pattern"`
+	// Input column or virtual column name to filter.
+	Dimension string `json:"dimension"`
+	// String pattern to match - any standard Java regular expression.
+	Pattern              string                            `json:"pattern"`
+	ExtractionFn         *TelemetryDruidExtractionFunction `json:"extractionFn,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -70,38 +70,6 @@ func (o *TelemetryDruidRegexFilter) GetTypeOk() (*string, bool) {
 // SetType sets field value
 func (o *TelemetryDruidRegexFilter) SetType(v string) {
 	o.Type = v
-}
-
-// GetExtractionFn returns the ExtractionFn field value if set, zero value otherwise.
-func (o *TelemetryDruidRegexFilter) GetExtractionFn() map[string]interface{} {
-	if o == nil || o.ExtractionFn == nil {
-		var ret map[string]interface{}
-		return ret
-	}
-	return o.ExtractionFn
-}
-
-// GetExtractionFnOk returns a tuple with the ExtractionFn field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *TelemetryDruidRegexFilter) GetExtractionFnOk() (map[string]interface{}, bool) {
-	if o == nil || o.ExtractionFn == nil {
-		return nil, false
-	}
-	return o.ExtractionFn, true
-}
-
-// HasExtractionFn returns a boolean if a field has been set.
-func (o *TelemetryDruidRegexFilter) HasExtractionFn() bool {
-	if o != nil && o.ExtractionFn != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetExtractionFn gets a reference to the given map[string]interface{} and assigns it to the ExtractionFn field.
-func (o *TelemetryDruidRegexFilter) SetExtractionFn(v map[string]interface{}) {
-	o.ExtractionFn = v
 }
 
 // GetDimension returns the Dimension field value
@@ -152,19 +120,51 @@ func (o *TelemetryDruidRegexFilter) SetPattern(v string) {
 	o.Pattern = v
 }
 
+// GetExtractionFn returns the ExtractionFn field value if set, zero value otherwise.
+func (o *TelemetryDruidRegexFilter) GetExtractionFn() TelemetryDruidExtractionFunction {
+	if o == nil || o.ExtractionFn == nil {
+		var ret TelemetryDruidExtractionFunction
+		return ret
+	}
+	return *o.ExtractionFn
+}
+
+// GetExtractionFnOk returns a tuple with the ExtractionFn field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TelemetryDruidRegexFilter) GetExtractionFnOk() (*TelemetryDruidExtractionFunction, bool) {
+	if o == nil || o.ExtractionFn == nil {
+		return nil, false
+	}
+	return o.ExtractionFn, true
+}
+
+// HasExtractionFn returns a boolean if a field has been set.
+func (o *TelemetryDruidRegexFilter) HasExtractionFn() bool {
+	if o != nil && o.ExtractionFn != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetExtractionFn gets a reference to the given TelemetryDruidExtractionFunction and assigns it to the ExtractionFn field.
+func (o *TelemetryDruidRegexFilter) SetExtractionFn(v TelemetryDruidExtractionFunction) {
+	o.ExtractionFn = &v
+}
+
 func (o TelemetryDruidRegexFilter) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
 		toSerialize["type"] = o.Type
-	}
-	if o.ExtractionFn != nil {
-		toSerialize["extractionFn"] = o.ExtractionFn
 	}
 	if true {
 		toSerialize["dimension"] = o.Dimension
 	}
 	if true {
 		toSerialize["pattern"] = o.Pattern
+	}
+	if o.ExtractionFn != nil {
+		toSerialize["extractionFn"] = o.ExtractionFn
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -185,9 +185,9 @@ func (o *TelemetryDruidRegexFilter) UnmarshalJSON(bytes []byte) (err error) {
 
 	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
 		delete(additionalProperties, "type")
-		delete(additionalProperties, "extractionFn")
 		delete(additionalProperties, "dimension")
 		delete(additionalProperties, "pattern")
+		delete(additionalProperties, "extractionFn")
 		o.AdditionalProperties = additionalProperties
 	}
 

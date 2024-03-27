@@ -60,6 +60,11 @@ func getCapabilityIoCardDescriptorSchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"bif_port_num": {
+			Description: "Identifies the bif port number for the iocard module.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
 		"capabilities": {
 			Description: "An array of relationships to capabilityCapability resources.",
 			Type:        schema.TypeList,
@@ -114,6 +119,11 @@ func getCapabilityIoCardDescriptorSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"is_ucsx_direct_io_card": {
+			Description: "Identifies whether the iocard module is a part of the UCSX Direct chassis.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
 		"mod_time": {
 			Description: "The time when this managed object was last modified.",
 			Type:        schema.TypeString,
@@ -135,7 +145,7 @@ func getCapabilityIoCardDescriptorSchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"native_speed_master_port_num": {
-			Description: "Master port number for native speed configuration for the iocard module.",
+			Description: "Primary port number for native speed configuration for the iocard module.",
 			Type:        schema.TypeInt,
 			Optional:    true,
 		},
@@ -261,6 +271,11 @@ func getCapabilityIoCardDescriptorSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"unsupported_policies": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Schema{
+				Type: schema.TypeString}},
 		"vendor": {
 			Description: "The vendor of the endpoint, for which this capability information is applicable.",
 			Type:        schema.TypeString,
@@ -460,6 +475,11 @@ func dataSourceCapabilityIoCardDescriptorRead(c context.Context, d *schema.Resou
 		o.SetAncestors(x)
 	}
 
+	if v, ok := d.GetOkExists("bif_port_num"); ok {
+		x := int64(v.(int))
+		o.SetBifPortNum(x)
+	}
+
 	if v, ok := d.GetOk("capabilities"); ok {
 		x := make([]models.CapabilityCapabilityRelationship, 0)
 		s := v.([]interface{})
@@ -518,6 +538,11 @@ func dataSourceCapabilityIoCardDescriptorRead(c context.Context, d *schema.Resou
 	if v, ok := d.GetOk("domain_group_moid"); ok {
 		x := (v.(string))
 		o.SetDomainGroupMoid(x)
+	}
+
+	if v, ok := d.GetOkExists("is_ucsx_direct_io_card"); ok {
+		x := (v.(bool))
+		o.SetIsUcsxDirectIoCard(x)
 	}
 
 	if v, ok := d.GetOk("mod_time"); ok {
@@ -697,6 +722,17 @@ func dataSourceCapabilityIoCardDescriptorRead(c context.Context, d *schema.Resou
 		o.SetUifConnectivity(x)
 	}
 
+	if v, ok := d.GetOk("unsupported_policies"); ok {
+		x := make([]string, 0)
+		y := reflect.ValueOf(v)
+		for i := 0; i < y.Len(); i++ {
+			if y.Index(i).Interface() != nil {
+				x = append(x, y.Index(i).Interface().(string))
+			}
+		}
+		o.SetUnsupportedPolicies(x)
+	}
+
 	if v, ok := d.GetOk("vendor"); ok {
 		x := (v.(string))
 		o.SetVendor(x)
@@ -820,6 +856,7 @@ func dataSourceCapabilityIoCardDescriptorRead(c context.Context, d *schema.Resou
 				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
 
 				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)
+				temp["bif_port_num"] = (s.GetBifPortNum())
 
 				temp["capabilities"] = flattenListCapabilityCapabilityRelationship(s.GetCapabilities(), d)
 				temp["class_id"] = (s.GetClassId())
@@ -827,6 +864,7 @@ func dataSourceCapabilityIoCardDescriptorRead(c context.Context, d *schema.Resou
 				temp["create_time"] = (s.GetCreateTime()).String()
 				temp["description"] = (s.GetDescription())
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
+				temp["is_ucsx_direct_io_card"] = (s.GetIsUcsxDirectIoCard())
 
 				temp["mod_time"] = (s.GetModTime()).String()
 				temp["model"] = (s.GetModel())
@@ -845,6 +883,7 @@ func dataSourceCapabilityIoCardDescriptorRead(c context.Context, d *schema.Resou
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
 				temp["uif_connectivity"] = (s.GetUifConnectivity())
+				temp["unsupported_policies"] = (s.GetUnsupportedPolicies())
 				temp["vendor"] = (s.GetVendor())
 				temp["nr_version"] = (s.GetVersion())
 

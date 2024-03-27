@@ -130,6 +130,11 @@ func resourceIppoolPool() *schema.Resource {
 					}
 					return
 				}},
+			"enable_block_level_subnet_config": {
+				Description: "Enables subnet configuration at the block level.",
+				Type:        schema.TypeBool,
+				Optional:    true,
+			},
 			"ip_v4_blocks": {
 				Type:       schema.TypeList,
 				Optional:   true,
@@ -153,6 +158,59 @@ func resourceIppoolPool() *schema.Resource {
 							Type:         schema.TypeString,
 							ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])$"), ""),
 							Optional:     true,
+						},
+						"ip_v4_config": {
+							Description: "Netmask, Gateway and DNS settings for IPv4 addresses.",
+							Type:        schema.TypeList,
+							MaxItems:    1,
+							Optional:    true,
+							ConfigMode:  schema.SchemaConfigModeAttr,
+							Computed:    true,
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"additional_properties": {
+										Type:             schema.TypeString,
+										Optional:         true,
+										DiffSuppressFunc: SuppressDiffAdditionProps,
+									},
+									"class_id": {
+										Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										Default:     "ippool.IpV4Config",
+									},
+									"gateway": {
+										Description:  "IP address of the default IPv4 gateway.",
+										Type:         schema.TypeString,
+										ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])$"), ""),
+										Optional:     true,
+									},
+									"netmask": {
+										Description:  "A subnet mask is a 32-bit number that masks an IP address and divides the IP address into network address and host address.",
+										Type:         schema.TypeString,
+										ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^(((255\\.){3}(255|254|252|248|240|224|192|128|0+))|((255\\.){2}(255|254|252|248|240|224|192|128|0+)\\.0)|((255\\.)(255|254|252|248|240|224|192|128|0+)(\\.0+){2})|((255|254|252|248|240|224|192|128|0+)(\\.0+){3}))$"), ""),
+										Optional:     true,
+									},
+									"object_type": {
+										Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										Default:     "ippool.IpV4Config",
+									},
+									"primary_dns": {
+										Description:  "IP Address of the primary Domain Name System (DNS) server.",
+										Type:         schema.TypeString,
+										ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])$"), ""),
+										Optional:     true,
+									},
+									"secondary_dns": {
+										Description:  "IP Address of the secondary Domain Name System (DNS) server.",
+										Type:         schema.TypeString,
+										ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])$"), ""),
+										Optional:     true,
+									},
+								},
+							},
 						},
 						"object_type": {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -263,6 +321,59 @@ func resourceIppoolPool() *schema.Resource {
 							Type:         schema.TypeString,
 							ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^(([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:[0-9A-Fa-f]{0,4}|:[0-9A-Fa-f]{1,4})?|(:[0-9A-Fa-f]{1,4}){0,2})|(:[0-9A-Fa-f]{1,4}){0,3})|(:[0-9A-Fa-f]{1,4}){0,4})|:(:[0-9A-Fa-f]{1,4}){0,5})((:[0-9A-Fa-f]{1,4}){2}|:(25[0-5]|(2[0-4]|1[0-9]|[1-9])?[0-9])(\\.(25[0-5]|(2[0-4]|1[0-9]|[1-9])?[0-9])){3})|(([0-9A-Fa-f]{1,4}:){1,6}|:):[0-9A-Fa-f]{0,4}|([0-9A-Fa-f]{1,4}:){7}:)$"), ""),
 							Optional:     true,
+						},
+						"ip_v6_config": {
+							Description: "Netmask, Gateway and DNS settings for IPv6 addresses.",
+							Type:        schema.TypeList,
+							MaxItems:    1,
+							Optional:    true,
+							ConfigMode:  schema.SchemaConfigModeAttr,
+							Computed:    true,
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"additional_properties": {
+										Type:             schema.TypeString,
+										Optional:         true,
+										DiffSuppressFunc: SuppressDiffAdditionProps,
+									},
+									"class_id": {
+										Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										Default:     "ippool.IpV6Config",
+									},
+									"gateway": {
+										Description:  "IP address of the default IPv6 gateway.",
+										Type:         schema.TypeString,
+										ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^(([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:[0-9A-Fa-f]{0,4}|:[0-9A-Fa-f]{1,4})?|(:[0-9A-Fa-f]{1,4}){0,2})|(:[0-9A-Fa-f]{1,4}){0,3})|(:[0-9A-Fa-f]{1,4}){0,4})|:(:[0-9A-Fa-f]{1,4}){0,5})((:[0-9A-Fa-f]{1,4}){2}|:(25[0-5]|(2[0-4]|1[0-9]|[1-9])?[0-9])(\\.(25[0-5]|(2[0-4]|1[0-9]|[1-9])?[0-9])){3})|(([0-9A-Fa-f]{1,4}:){1,6}|:):[0-9A-Fa-f]{0,4}|([0-9A-Fa-f]{1,4}:){7}:)$"), ""),
+										Optional:     true,
+									},
+									"object_type": {
+										Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										Default:     "ippool.IpV6Config",
+									},
+									"prefix": {
+										Description:  "A prefix length which masks the  IP address and divides the IP address into network address and host address.",
+										Type:         schema.TypeInt,
+										ValidateFunc: validation.IntBetween(0, 127),
+										Optional:     true,
+									},
+									"primary_dns": {
+										Description:  "IP Address of the primary Domain Name System (DNS) server.",
+										Type:         schema.TypeString,
+										ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^(([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:[0-9A-Fa-f]{0,4}|:[0-9A-Fa-f]{1,4})?|(:[0-9A-Fa-f]{1,4}){0,2})|(:[0-9A-Fa-f]{1,4}){0,3})|(:[0-9A-Fa-f]{1,4}){0,4})|:(:[0-9A-Fa-f]{1,4}){0,5})((:[0-9A-Fa-f]{1,4}){2}|:(25[0-5]|(2[0-4]|1[0-9]|[1-9])?[0-9])(\\.(25[0-5]|(2[0-4]|1[0-9]|[1-9])?[0-9])){3})|(([0-9A-Fa-f]{1,4}:){1,6}|:):[0-9A-Fa-f]{0,4}|([0-9A-Fa-f]{1,4}:){7}:)$"), ""),
+										Optional:     true,
+									},
+									"secondary_dns": {
+										Description:  "IP Address of the secondary Domain Name System (DNS) server.",
+										Type:         schema.TypeString,
+										ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^(([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:[0-9A-Fa-f]{0,4}|:[0-9A-Fa-f]{1,4})?|(:[0-9A-Fa-f]{1,4}){0,2})|(:[0-9A-Fa-f]{1,4}){0,3})|(:[0-9A-Fa-f]{1,4}){0,4})|:(:[0-9A-Fa-f]{1,4}){0,5})((:[0-9A-Fa-f]{1,4}){2}|:(25[0-5]|(2[0-4]|1[0-9]|[1-9])?[0-9])(\\.(25[0-5]|(2[0-4]|1[0-9]|[1-9])?[0-9])){3})|(([0-9A-Fa-f]{1,4}:){1,6}|:):[0-9A-Fa-f]{0,4}|([0-9A-Fa-f]{1,4}:){7}:)$"), ""),
+										Optional:     true,
+									},
+								},
+							},
 						},
 						"object_type": {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -860,6 +971,11 @@ func resourceIppoolPoolCreate(c context.Context, d *schema.ResourceData, meta in
 		o.SetDescription(x)
 	}
 
+	if v, ok := d.GetOkExists("enable_block_level_subnet_config"); ok {
+		x := (v.(bool))
+		o.SetEnableBlockLevelSubnetConfig(x)
+	}
+
 	if v, ok := d.GetOk("ip_v4_blocks"); ok {
 		x := make([]models.IppoolIpV4Block, 0)
 		s := v.([]interface{})
@@ -881,6 +997,62 @@ func resourceIppoolPoolCreate(c context.Context, d *schema.ResourceData, meta in
 				{
 					x := (v.(string))
 					o.SetFrom(x)
+				}
+			}
+			if v, ok := l["ip_v4_config"]; ok {
+				{
+					p := make([]models.IppoolIpV4Config, 0, 1)
+					s := v.([]interface{})
+					for i := 0; i < len(s); i++ {
+						l := s[i].(map[string]interface{})
+						o := models.NewIppoolIpV4ConfigWithDefaults()
+						if v, ok := l["additional_properties"]; ok {
+							{
+								x := []byte(v.(string))
+								var x1 interface{}
+								err := json.Unmarshal(x, &x1)
+								if err == nil && x1 != nil {
+									o.AdditionalProperties = x1.(map[string]interface{})
+								}
+							}
+						}
+						o.SetClassId("ippool.IpV4Config")
+						if v, ok := l["gateway"]; ok {
+							{
+								x := (v.(string))
+								o.SetGateway(x)
+							}
+						}
+						if v, ok := l["netmask"]; ok {
+							{
+								x := (v.(string))
+								o.SetNetmask(x)
+							}
+						}
+						if v, ok := l["object_type"]; ok {
+							{
+								x := (v.(string))
+								o.SetObjectType(x)
+							}
+						}
+						if v, ok := l["primary_dns"]; ok {
+							{
+								x := (v.(string))
+								o.SetPrimaryDns(x)
+							}
+						}
+						if v, ok := l["secondary_dns"]; ok {
+							{
+								x := (v.(string))
+								o.SetSecondaryDns(x)
+							}
+						}
+						p = append(p, *o)
+					}
+					if len(p) > 0 {
+						x := p[0]
+						o.SetIpV4Config(x)
+					}
 				}
 			}
 			if v, ok := l["object_type"]; ok {
@@ -984,6 +1156,62 @@ func resourceIppoolPoolCreate(c context.Context, d *schema.ResourceData, meta in
 				{
 					x := (v.(string))
 					o.SetFrom(x)
+				}
+			}
+			if v, ok := l["ip_v6_config"]; ok {
+				{
+					p := make([]models.IppoolIpV6Config, 0, 1)
+					s := v.([]interface{})
+					for i := 0; i < len(s); i++ {
+						l := s[i].(map[string]interface{})
+						o := models.NewIppoolIpV6ConfigWithDefaults()
+						if v, ok := l["additional_properties"]; ok {
+							{
+								x := []byte(v.(string))
+								var x1 interface{}
+								err := json.Unmarshal(x, &x1)
+								if err == nil && x1 != nil {
+									o.AdditionalProperties = x1.(map[string]interface{})
+								}
+							}
+						}
+						o.SetClassId("ippool.IpV6Config")
+						if v, ok := l["gateway"]; ok {
+							{
+								x := (v.(string))
+								o.SetGateway(x)
+							}
+						}
+						if v, ok := l["object_type"]; ok {
+							{
+								x := (v.(string))
+								o.SetObjectType(x)
+							}
+						}
+						if v, ok := l["prefix"]; ok {
+							{
+								x := int64(v.(int))
+								o.SetPrefix(x)
+							}
+						}
+						if v, ok := l["primary_dns"]; ok {
+							{
+								x := (v.(string))
+								o.SetPrimaryDns(x)
+							}
+						}
+						if v, ok := l["secondary_dns"]; ok {
+							{
+								x := (v.(string))
+								o.SetSecondaryDns(x)
+							}
+						}
+						p = append(p, *o)
+					}
+					if len(p) > 0 {
+						x := p[0]
+						o.SetIpV6Config(x)
+					}
 				}
 			}
 			if v, ok := l["object_type"]; ok {
@@ -1269,6 +1497,10 @@ func resourceIppoolPoolRead(c context.Context, d *schema.ResourceData, meta inte
 		return diag.Errorf("error occurred while setting property DomainGroupMoid in IppoolPool object: %s", err.Error())
 	}
 
+	if err := d.Set("enable_block_level_subnet_config", (s.GetEnableBlockLevelSubnetConfig())); err != nil {
+		return diag.Errorf("error occurred while setting property EnableBlockLevelSubnetConfig in IppoolPool object: %s", err.Error())
+	}
+
 	if err := d.Set("ip_v4_blocks", flattenListIppoolIpV4Block(s.GetIpV4Blocks(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property IpV4Blocks in IppoolPool object: %s", err.Error())
 	}
@@ -1396,6 +1628,12 @@ func resourceIppoolPoolUpdate(c context.Context, d *schema.ResourceData, meta in
 		o.SetDescription(x)
 	}
 
+	if d.HasChange("enable_block_level_subnet_config") {
+		v := d.Get("enable_block_level_subnet_config")
+		x := (v.(bool))
+		o.SetEnableBlockLevelSubnetConfig(x)
+	}
+
 	if d.HasChange("ip_v4_blocks") {
 		v := d.Get("ip_v4_blocks")
 		x := make([]models.IppoolIpV4Block, 0)
@@ -1418,6 +1656,62 @@ func resourceIppoolPoolUpdate(c context.Context, d *schema.ResourceData, meta in
 				{
 					x := (v.(string))
 					o.SetFrom(x)
+				}
+			}
+			if v, ok := l["ip_v4_config"]; ok {
+				{
+					p := make([]models.IppoolIpV4Config, 0, 1)
+					s := v.([]interface{})
+					for i := 0; i < len(s); i++ {
+						l := s[i].(map[string]interface{})
+						o := models.NewIppoolIpV4ConfigWithDefaults()
+						if v, ok := l["additional_properties"]; ok {
+							{
+								x := []byte(v.(string))
+								var x1 interface{}
+								err := json.Unmarshal(x, &x1)
+								if err == nil && x1 != nil {
+									o.AdditionalProperties = x1.(map[string]interface{})
+								}
+							}
+						}
+						o.SetClassId("ippool.IpV4Config")
+						if v, ok := l["gateway"]; ok {
+							{
+								x := (v.(string))
+								o.SetGateway(x)
+							}
+						}
+						if v, ok := l["netmask"]; ok {
+							{
+								x := (v.(string))
+								o.SetNetmask(x)
+							}
+						}
+						if v, ok := l["object_type"]; ok {
+							{
+								x := (v.(string))
+								o.SetObjectType(x)
+							}
+						}
+						if v, ok := l["primary_dns"]; ok {
+							{
+								x := (v.(string))
+								o.SetPrimaryDns(x)
+							}
+						}
+						if v, ok := l["secondary_dns"]; ok {
+							{
+								x := (v.(string))
+								o.SetSecondaryDns(x)
+							}
+						}
+						p = append(p, *o)
+					}
+					if len(p) > 0 {
+						x := p[0]
+						o.SetIpV4Config(x)
+					}
 				}
 			}
 			if v, ok := l["object_type"]; ok {
@@ -1521,6 +1815,62 @@ func resourceIppoolPoolUpdate(c context.Context, d *schema.ResourceData, meta in
 				{
 					x := (v.(string))
 					o.SetFrom(x)
+				}
+			}
+			if v, ok := l["ip_v6_config"]; ok {
+				{
+					p := make([]models.IppoolIpV6Config, 0, 1)
+					s := v.([]interface{})
+					for i := 0; i < len(s); i++ {
+						l := s[i].(map[string]interface{})
+						o := models.NewIppoolIpV6ConfigWithDefaults()
+						if v, ok := l["additional_properties"]; ok {
+							{
+								x := []byte(v.(string))
+								var x1 interface{}
+								err := json.Unmarshal(x, &x1)
+								if err == nil && x1 != nil {
+									o.AdditionalProperties = x1.(map[string]interface{})
+								}
+							}
+						}
+						o.SetClassId("ippool.IpV6Config")
+						if v, ok := l["gateway"]; ok {
+							{
+								x := (v.(string))
+								o.SetGateway(x)
+							}
+						}
+						if v, ok := l["object_type"]; ok {
+							{
+								x := (v.(string))
+								o.SetObjectType(x)
+							}
+						}
+						if v, ok := l["prefix"]; ok {
+							{
+								x := int64(v.(int))
+								o.SetPrefix(x)
+							}
+						}
+						if v, ok := l["primary_dns"]; ok {
+							{
+								x := (v.(string))
+								o.SetPrimaryDns(x)
+							}
+						}
+						if v, ok := l["secondary_dns"]; ok {
+							{
+								x := (v.(string))
+								o.SetSecondaryDns(x)
+							}
+						}
+						p = append(p, *o)
+					}
+					if len(p) > 0 {
+						x := p[0]
+						o.SetIpV6Config(x)
+					}
 				}
 			}
 			if v, ok := l["object_type"]; ok {

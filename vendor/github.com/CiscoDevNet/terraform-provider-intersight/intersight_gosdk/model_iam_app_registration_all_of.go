@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-14968
+API version: 1.0.11-15711
 Contact: intersight@cisco.com
 */
 
@@ -22,6 +22,8 @@ type IamAppRegistrationAllOf struct {
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
+	// Used to trigger the enable or disable action on the App Registration. These actions change the status of an App Registration. * `enable` - Used to enable a disabled API key/App Registration. If the API key/App Registration is already expired, this action has no effect. * `disable` - Used to disable an active API key/App Registration. If the API key/App Registration is already expired, this action has no effect.
+	AdminStatus *string `json:"AdminStatus,omitempty"`
 	// A unique identifier for the OAuth2 client application. The client ID is auto-generated when the AppRegistration object is created.
 	ClientId *string `json:"ClientId,omitempty"`
 	// App Registration name specified by user.
@@ -31,8 +33,18 @@ type IamAppRegistrationAllOf struct {
 	// The type of the OAuth2 client (public or confidential), as specified in https://tools.ietf.org/html/rfc6749#section-2.1. * `public` - Clients incapable of maintaining the confidentiality of their credentials.This includes clients executing on the device used by the resource owner,such as mobile applications, installed native application or a webbrowser-based application. * `confidential` - Clients capable of maintaining the confidentiality of their credentials.For example, this could be a client implemented on a secure server withrestricted access to the client credentials.To maintain the confidentiality of the OAuth2 credentials, two use cases areconsidered.1) The application is running as a service within Intersight. The application automatically   obtains the OAuth2 credentials when the application starts and the credentials are not   exposed to the end-user.   Because end-users (even account administrators) do not have access the OAuth2 credentials,   they cannot take the credentials with them when they leave their organization.2) The application is under the control of a \"trusted\" end-user. For example,   the end-user may create a native application running outside Intersight. The application   uses OAuth2 credentials to interact with the Intersight API. In that case, the Intersight   account administrator may generate OAuth2 credentials with a registered application   using \"client_credentials\" grant type.   In that case, the end-user is responsible for maintaining the confidentiality of the   OAuth2 credentials. If the end-user leaves the organization, you should revoke the   credentials and issue new Oauth2 credentials.Here is a possible workflow for handling OAuth2 tokens.1) User Alice (Intersight Account Administrator) logins to Intersight and deploys an Intersight   application that requires an OAuth2 token.2) Intersight automatically deploys the application. The application is assigned a OAuth2 token,   possibly linked to Alice. The application must NOT expose the OAuth2 secret to Alice, otherwise   Alice would be able to use the token after she leaves the company.3) The application can make API calls to Intersight using its assigned OAuth2 token. For example,   the application could make weekly scheduled API calls to Intersight.4) Separately, Alice may also get OAuth2 tokens that she can use to make API calls from the   Intersight SDK through the northbound API. In that case, Alice will get the associated OAuth2   secrets, but not the one assigned in step #2.5) Alice leaves the organization. The OAuth2 tokens assigned in step #2 must retain their validity   even after Alice has left the organization. Because the OAuth2 secrets were never shared with   Alice, there is no risk Alice can reuse the OAuth2 secrets.   On the other hand, the OAuth2 tokens assigned in step #4 must be invalidated because Alice had   the OAuth2 tokens in her possession.
 	ClientType *string `json:"ClientType,omitempty"`
 	// Description of the application.
-	Description  *string  `json:"Description,omitempty"`
-	GrantTypes   []string `json:"GrantTypes,omitempty"`
+	Description *string `json:"Description,omitempty"`
+	// The expiration date of the App Registration which is set at the time of its creation. Its value can only be assigned a date that falls within the range determined by the maximum expiration time configured at the account level. The expiry date can be edited to be earlier or later, provided it stays within the designated expiry period. This period is determined by adding the 'startTime' property of the App Registration to the maximum expiry time configured at the account level.
+	ExpiryDateTime *time.Time `json:"ExpiryDateTime,omitempty"`
+	GrantTypes     []string   `json:"GrantTypes,omitempty"`
+	// Used to mark the App Registration as a never-expiring App Registration.
+	IsNeverExpiring *bool `json:"IsNeverExpiring,omitempty"`
+	// The ip address from which the App Registration was last used.
+	LastUsedIp *string `json:"LastUsedIp,omitempty"`
+	// The time at which the App Registration was last used. It is updated every 24 hours.
+	LastUsedTime *time.Time `json:"LastUsedTime,omitempty"`
+	// The current status of the App Registration that dictates the validity of the app. * `enabled` - An API key/App Registration having enabled status can be used for API invocation. * `disabled` - An API key/App Registration having disabled status cannot be used for API invocation. * `expired` - An API key/App Registration having expired status cannot be used for API invocation as the expiration date has passed.
+	OperStatus   *string  `json:"OperStatus,omitempty"`
 	RedirectUris []string `json:"RedirectUris,omitempty"`
 	// Set value to true to renew the client-secret. Applicable to client_credentials grant type.
 	RenewClientSecret *bool    `json:"RenewClientSecret,omitempty"`
@@ -42,8 +54,10 @@ type IamAppRegistrationAllOf struct {
 	// Used to trigger update the revocationTimestamp value. If UI sent updating request with the Revoke value is true, then update RevocationTimestamp.
 	Revoke *bool `json:"Revoke,omitempty"`
 	// Set to true if consent screen needs to be shown during the OAuth login process. Applicable only for public AppRegistrations, means only 'authorization_code' grantType. Note that consent screen will be shown on each login.
-	ShowConsentScreen *bool                   `json:"ShowConsentScreen,omitempty"`
-	Account           *IamAccountRelationship `json:"Account,omitempty"`
+	ShowConsentScreen *bool `json:"ShowConsentScreen,omitempty"`
+	// The timestamp at which an expiry date was first set on this app registration.  For expiring App Registrations, this field is same as the create time of the App Registration. For never-expiring App Registrations, this field is set initially to zero time value. If a never-expiry App Registration is later changed to have an expiration, the timestamp marking the start of this transition is recorded in this field.
+	StartTime *time.Time              `json:"StartTime,omitempty"`
+	Account   *IamAccountRelationship `json:"Account,omitempty"`
 	// An array of relationships to iamOAuthToken resources.
 	OauthTokens []IamOAuthTokenRelationship `json:"OauthTokens,omitempty"`
 	Permission  *IamPermissionRelationship  `json:"Permission,omitempty"`
@@ -64,8 +78,12 @@ func NewIamAppRegistrationAllOf(classId string, objectType string) *IamAppRegist
 	this := IamAppRegistrationAllOf{}
 	this.ClassId = classId
 	this.ObjectType = objectType
+	var adminStatus string = "enable"
+	this.AdminStatus = &adminStatus
 	var clientType string = "public"
 	this.ClientType = &clientType
+	var isNeverExpiring bool = false
+	this.IsNeverExpiring = &isNeverExpiring
 	var renewClientSecret bool = false
 	this.RenewClientSecret = &renewClientSecret
 	var revoke bool = false
@@ -84,8 +102,12 @@ func NewIamAppRegistrationAllOfWithDefaults() *IamAppRegistrationAllOf {
 	this.ClassId = classId
 	var objectType string = "iam.AppRegistration"
 	this.ObjectType = objectType
+	var adminStatus string = "enable"
+	this.AdminStatus = &adminStatus
 	var clientType string = "public"
 	this.ClientType = &clientType
+	var isNeverExpiring bool = false
+	this.IsNeverExpiring = &isNeverExpiring
 	var renewClientSecret bool = false
 	this.RenewClientSecret = &renewClientSecret
 	var revoke bool = false
@@ -141,6 +163,38 @@ func (o *IamAppRegistrationAllOf) GetObjectTypeOk() (*string, bool) {
 // SetObjectType sets field value
 func (o *IamAppRegistrationAllOf) SetObjectType(v string) {
 	o.ObjectType = v
+}
+
+// GetAdminStatus returns the AdminStatus field value if set, zero value otherwise.
+func (o *IamAppRegistrationAllOf) GetAdminStatus() string {
+	if o == nil || o.AdminStatus == nil {
+		var ret string
+		return ret
+	}
+	return *o.AdminStatus
+}
+
+// GetAdminStatusOk returns a tuple with the AdminStatus field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *IamAppRegistrationAllOf) GetAdminStatusOk() (*string, bool) {
+	if o == nil || o.AdminStatus == nil {
+		return nil, false
+	}
+	return o.AdminStatus, true
+}
+
+// HasAdminStatus returns a boolean if a field has been set.
+func (o *IamAppRegistrationAllOf) HasAdminStatus() bool {
+	if o != nil && o.AdminStatus != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetAdminStatus gets a reference to the given string and assigns it to the AdminStatus field.
+func (o *IamAppRegistrationAllOf) SetAdminStatus(v string) {
+	o.AdminStatus = &v
 }
 
 // GetClientId returns the ClientId field value if set, zero value otherwise.
@@ -303,6 +357,38 @@ func (o *IamAppRegistrationAllOf) SetDescription(v string) {
 	o.Description = &v
 }
 
+// GetExpiryDateTime returns the ExpiryDateTime field value if set, zero value otherwise.
+func (o *IamAppRegistrationAllOf) GetExpiryDateTime() time.Time {
+	if o == nil || o.ExpiryDateTime == nil {
+		var ret time.Time
+		return ret
+	}
+	return *o.ExpiryDateTime
+}
+
+// GetExpiryDateTimeOk returns a tuple with the ExpiryDateTime field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *IamAppRegistrationAllOf) GetExpiryDateTimeOk() (*time.Time, bool) {
+	if o == nil || o.ExpiryDateTime == nil {
+		return nil, false
+	}
+	return o.ExpiryDateTime, true
+}
+
+// HasExpiryDateTime returns a boolean if a field has been set.
+func (o *IamAppRegistrationAllOf) HasExpiryDateTime() bool {
+	if o != nil && o.ExpiryDateTime != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetExpiryDateTime gets a reference to the given time.Time and assigns it to the ExpiryDateTime field.
+func (o *IamAppRegistrationAllOf) SetExpiryDateTime(v time.Time) {
+	o.ExpiryDateTime = &v
+}
+
 // GetGrantTypes returns the GrantTypes field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *IamAppRegistrationAllOf) GetGrantTypes() []string {
 	if o == nil {
@@ -334,6 +420,134 @@ func (o *IamAppRegistrationAllOf) HasGrantTypes() bool {
 // SetGrantTypes gets a reference to the given []string and assigns it to the GrantTypes field.
 func (o *IamAppRegistrationAllOf) SetGrantTypes(v []string) {
 	o.GrantTypes = v
+}
+
+// GetIsNeverExpiring returns the IsNeverExpiring field value if set, zero value otherwise.
+func (o *IamAppRegistrationAllOf) GetIsNeverExpiring() bool {
+	if o == nil || o.IsNeverExpiring == nil {
+		var ret bool
+		return ret
+	}
+	return *o.IsNeverExpiring
+}
+
+// GetIsNeverExpiringOk returns a tuple with the IsNeverExpiring field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *IamAppRegistrationAllOf) GetIsNeverExpiringOk() (*bool, bool) {
+	if o == nil || o.IsNeverExpiring == nil {
+		return nil, false
+	}
+	return o.IsNeverExpiring, true
+}
+
+// HasIsNeverExpiring returns a boolean if a field has been set.
+func (o *IamAppRegistrationAllOf) HasIsNeverExpiring() bool {
+	if o != nil && o.IsNeverExpiring != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetIsNeverExpiring gets a reference to the given bool and assigns it to the IsNeverExpiring field.
+func (o *IamAppRegistrationAllOf) SetIsNeverExpiring(v bool) {
+	o.IsNeverExpiring = &v
+}
+
+// GetLastUsedIp returns the LastUsedIp field value if set, zero value otherwise.
+func (o *IamAppRegistrationAllOf) GetLastUsedIp() string {
+	if o == nil || o.LastUsedIp == nil {
+		var ret string
+		return ret
+	}
+	return *o.LastUsedIp
+}
+
+// GetLastUsedIpOk returns a tuple with the LastUsedIp field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *IamAppRegistrationAllOf) GetLastUsedIpOk() (*string, bool) {
+	if o == nil || o.LastUsedIp == nil {
+		return nil, false
+	}
+	return o.LastUsedIp, true
+}
+
+// HasLastUsedIp returns a boolean if a field has been set.
+func (o *IamAppRegistrationAllOf) HasLastUsedIp() bool {
+	if o != nil && o.LastUsedIp != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetLastUsedIp gets a reference to the given string and assigns it to the LastUsedIp field.
+func (o *IamAppRegistrationAllOf) SetLastUsedIp(v string) {
+	o.LastUsedIp = &v
+}
+
+// GetLastUsedTime returns the LastUsedTime field value if set, zero value otherwise.
+func (o *IamAppRegistrationAllOf) GetLastUsedTime() time.Time {
+	if o == nil || o.LastUsedTime == nil {
+		var ret time.Time
+		return ret
+	}
+	return *o.LastUsedTime
+}
+
+// GetLastUsedTimeOk returns a tuple with the LastUsedTime field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *IamAppRegistrationAllOf) GetLastUsedTimeOk() (*time.Time, bool) {
+	if o == nil || o.LastUsedTime == nil {
+		return nil, false
+	}
+	return o.LastUsedTime, true
+}
+
+// HasLastUsedTime returns a boolean if a field has been set.
+func (o *IamAppRegistrationAllOf) HasLastUsedTime() bool {
+	if o != nil && o.LastUsedTime != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetLastUsedTime gets a reference to the given time.Time and assigns it to the LastUsedTime field.
+func (o *IamAppRegistrationAllOf) SetLastUsedTime(v time.Time) {
+	o.LastUsedTime = &v
+}
+
+// GetOperStatus returns the OperStatus field value if set, zero value otherwise.
+func (o *IamAppRegistrationAllOf) GetOperStatus() string {
+	if o == nil || o.OperStatus == nil {
+		var ret string
+		return ret
+	}
+	return *o.OperStatus
+}
+
+// GetOperStatusOk returns a tuple with the OperStatus field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *IamAppRegistrationAllOf) GetOperStatusOk() (*string, bool) {
+	if o == nil || o.OperStatus == nil {
+		return nil, false
+	}
+	return o.OperStatus, true
+}
+
+// HasOperStatus returns a boolean if a field has been set.
+func (o *IamAppRegistrationAllOf) HasOperStatus() bool {
+	if o != nil && o.OperStatus != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetOperStatus gets a reference to the given string and assigns it to the OperStatus field.
+func (o *IamAppRegistrationAllOf) SetOperStatus(v string) {
+	o.OperStatus = &v
 }
 
 // GetRedirectUris returns the RedirectUris field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -530,6 +744,38 @@ func (o *IamAppRegistrationAllOf) SetShowConsentScreen(v bool) {
 	o.ShowConsentScreen = &v
 }
 
+// GetStartTime returns the StartTime field value if set, zero value otherwise.
+func (o *IamAppRegistrationAllOf) GetStartTime() time.Time {
+	if o == nil || o.StartTime == nil {
+		var ret time.Time
+		return ret
+	}
+	return *o.StartTime
+}
+
+// GetStartTimeOk returns a tuple with the StartTime field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *IamAppRegistrationAllOf) GetStartTimeOk() (*time.Time, bool) {
+	if o == nil || o.StartTime == nil {
+		return nil, false
+	}
+	return o.StartTime, true
+}
+
+// HasStartTime returns a boolean if a field has been set.
+func (o *IamAppRegistrationAllOf) HasStartTime() bool {
+	if o != nil && o.StartTime != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetStartTime gets a reference to the given time.Time and assigns it to the StartTime field.
+func (o *IamAppRegistrationAllOf) SetStartTime(v time.Time) {
+	o.StartTime = &v
+}
+
 // GetAccount returns the Account field value if set, zero value otherwise.
 func (o *IamAppRegistrationAllOf) GetAccount() IamAccountRelationship {
 	if o == nil || o.Account == nil {
@@ -703,6 +949,9 @@ func (o IamAppRegistrationAllOf) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["ObjectType"] = o.ObjectType
 	}
+	if o.AdminStatus != nil {
+		toSerialize["AdminStatus"] = o.AdminStatus
+	}
 	if o.ClientId != nil {
 		toSerialize["ClientId"] = o.ClientId
 	}
@@ -718,8 +967,23 @@ func (o IamAppRegistrationAllOf) MarshalJSON() ([]byte, error) {
 	if o.Description != nil {
 		toSerialize["Description"] = o.Description
 	}
+	if o.ExpiryDateTime != nil {
+		toSerialize["ExpiryDateTime"] = o.ExpiryDateTime
+	}
 	if o.GrantTypes != nil {
 		toSerialize["GrantTypes"] = o.GrantTypes
+	}
+	if o.IsNeverExpiring != nil {
+		toSerialize["IsNeverExpiring"] = o.IsNeverExpiring
+	}
+	if o.LastUsedIp != nil {
+		toSerialize["LastUsedIp"] = o.LastUsedIp
+	}
+	if o.LastUsedTime != nil {
+		toSerialize["LastUsedTime"] = o.LastUsedTime
+	}
+	if o.OperStatus != nil {
+		toSerialize["OperStatus"] = o.OperStatus
 	}
 	if o.RedirectUris != nil {
 		toSerialize["RedirectUris"] = o.RedirectUris
@@ -738,6 +1002,9 @@ func (o IamAppRegistrationAllOf) MarshalJSON() ([]byte, error) {
 	}
 	if o.ShowConsentScreen != nil {
 		toSerialize["ShowConsentScreen"] = o.ShowConsentScreen
+	}
+	if o.StartTime != nil {
+		toSerialize["StartTime"] = o.StartTime
 	}
 	if o.Account != nil {
 		toSerialize["Account"] = o.Account
@@ -774,18 +1041,25 @@ func (o *IamAppRegistrationAllOf) UnmarshalJSON(bytes []byte) (err error) {
 	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
+		delete(additionalProperties, "AdminStatus")
 		delete(additionalProperties, "ClientId")
 		delete(additionalProperties, "ClientName")
 		delete(additionalProperties, "ClientSecret")
 		delete(additionalProperties, "ClientType")
 		delete(additionalProperties, "Description")
+		delete(additionalProperties, "ExpiryDateTime")
 		delete(additionalProperties, "GrantTypes")
+		delete(additionalProperties, "IsNeverExpiring")
+		delete(additionalProperties, "LastUsedIp")
+		delete(additionalProperties, "LastUsedTime")
+		delete(additionalProperties, "OperStatus")
 		delete(additionalProperties, "RedirectUris")
 		delete(additionalProperties, "RenewClientSecret")
 		delete(additionalProperties, "ResponseTypes")
 		delete(additionalProperties, "RevocationTimestamp")
 		delete(additionalProperties, "Revoke")
 		delete(additionalProperties, "ShowConsentScreen")
+		delete(additionalProperties, "StartTime")
 		delete(additionalProperties, "Account")
 		delete(additionalProperties, "OauthTokens")
 		delete(additionalProperties, "Permission")

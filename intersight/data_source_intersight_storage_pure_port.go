@@ -170,6 +170,11 @@ func getStoragePurePortSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"nqn": {
+			Description: "The NVMe Qualified Name (NQN) associated with the host for ethernet port.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"object_type": {
 			Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 			Type:        schema.TypeString,
@@ -662,6 +667,11 @@ func dataSourceStoragePurePortRead(c context.Context, d *schema.ResourceData, me
 		o.SetName(x)
 	}
 
+	if v, ok := d.GetOk("nqn"); ok {
+		x := (v.(string))
+		o.SetNqn(x)
+	}
+
 	if v, ok := d.GetOk("object_type"); ok {
 		x := (v.(string))
 		o.SetObjectType(x)
@@ -1004,6 +1014,7 @@ func dataSourceStoragePurePortRead(c context.Context, d *schema.ResourceData, me
 				temp["mod_time"] = (s.GetModTime()).String()
 				temp["moid"] = (s.GetMoid())
 				temp["name"] = (s.GetName())
+				temp["nqn"] = (s.GetNqn())
 				temp["object_type"] = (s.GetObjectType())
 				temp["owners"] = (s.GetOwners())
 

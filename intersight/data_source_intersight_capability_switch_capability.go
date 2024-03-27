@@ -138,6 +138,11 @@ func getCapabilitySwitchCapabilitySchema() map[string]*schema.Schema {
 			Type:        schema.TypeBool,
 			Optional:    true,
 		},
+		"imm_controls_vpcompression": {
+			Description: "VlanPort Compression is controlled by IMM.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
 		"locator_beacon_supported": {
 			Description: "Locator Beacon LED support on this switch.",
 			Type:        schema.TypeBool,
@@ -1252,6 +1257,11 @@ func dataSourceCapabilitySwitchCapabilityRead(c context.Context, d *schema.Resou
 	if v, ok := d.GetOkExists("fc_uplink_ports_auto_negotiation_supported"); ok {
 		x := (v.(bool))
 		o.SetFcUplinkPortsAutoNegotiationSupported(x)
+	}
+
+	if v, ok := d.GetOkExists("imm_controls_vpcompression"); ok {
+		x := (v.(bool))
+		o.SetImmControlsVpcompression(x)
 	}
 
 	if v, ok := d.GetOkExists("locator_beacon_supported"); ok {
@@ -2391,6 +2401,7 @@ func dataSourceCapabilitySwitchCapabilityRead(c context.Context, d *schema.Resou
 
 				temp["fc_end_host_mode_reserved_vsans"] = flattenListCapabilityPortRange(s.GetFcEndHostModeReservedVsans(), d)
 				temp["fc_uplink_ports_auto_negotiation_supported"] = (s.GetFcUplinkPortsAutoNegotiationSupported())
+				temp["imm_controls_vpcompression"] = (s.GetImmControlsVpcompression())
 				temp["locator_beacon_supported"] = (s.GetLocatorBeaconSupported())
 				temp["max_ports"] = (s.GetMaxPorts())
 				temp["max_slots"] = (s.GetMaxSlots())

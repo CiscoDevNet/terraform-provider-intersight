@@ -30,6 +30,7 @@ The following arguments can be used to get data of already created objects in In
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `name`:(string) Name of this host supplied by user. It is not the identity of the host. The name is subject to user manipulations. 
 * `network_adapter_count`:(int) The count of all network adapters attached to this host. 
+* `quarantine_mode`:(bool) Indicates if the host is in quarantine mode. Will be set to True, when in quarantine mode. 
 * `serial`:(string) Serial number of this host (internally generated). 
 * `shared_scope`:(string) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
 * `status`:(string) Host health status, as reported by the hypervisor platform.* `Unknown` - Entity status is unknown.* `Degraded` - State is degraded, and might impact normal operation of the entity.* `Critical` - Entity is in a critical state, impacting operations.* `Ok` - Entity status is in a stable state, operating normally. 

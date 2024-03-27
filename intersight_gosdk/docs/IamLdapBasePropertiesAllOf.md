@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **Domain** | Pointer to **string** | The IPv4 domain that all users must be in. | [optional] 
 **EnableEncryption** | Pointer to **bool** | If enabled, the endpoint encrypts all information it sends to the LDAP server. | [optional] 
 **EnableGroupAuthorization** | Pointer to **bool** | If enabled, user authorization is also done at the group level for LDAP users not in the local user database. | [optional] 
+**EnableNestedGroupSearch** | Pointer to **bool** | If enabled, an extended search walks the chain of ancestry all the way to the root and returns all the groups and subgroups, each of those groups belong to recursively. | [optional] [default to false]
 **Filter** | Pointer to **string** | Criteria to identify entries in search requests. | [optional] 
 **GroupAttribute** | Pointer to **string** | Groups to which an LDAP entry belongs. | [optional] 
 **IsPasswordSet** | Pointer to **bool** | Indicates whether the value of the &#39;password&#39; property has been set. | [optional] [readonly] [default to false]
@@ -253,6 +254,31 @@ SetEnableGroupAuthorization sets EnableGroupAuthorization field to given value.
 `func (o *IamLdapBasePropertiesAllOf) HasEnableGroupAuthorization() bool`
 
 HasEnableGroupAuthorization returns a boolean if a field has been set.
+
+### GetEnableNestedGroupSearch
+
+`func (o *IamLdapBasePropertiesAllOf) GetEnableNestedGroupSearch() bool`
+
+GetEnableNestedGroupSearch returns the EnableNestedGroupSearch field if non-nil, zero value otherwise.
+
+### GetEnableNestedGroupSearchOk
+
+`func (o *IamLdapBasePropertiesAllOf) GetEnableNestedGroupSearchOk() (*bool, bool)`
+
+GetEnableNestedGroupSearchOk returns a tuple with the EnableNestedGroupSearch field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEnableNestedGroupSearch
+
+`func (o *IamLdapBasePropertiesAllOf) SetEnableNestedGroupSearch(v bool)`
+
+SetEnableNestedGroupSearch sets EnableNestedGroupSearch field to given value.
+
+### HasEnableNestedGroupSearch
+
+`func (o *IamLdapBasePropertiesAllOf) HasEnableNestedGroupSearch() bool`
+
+HasEnableNestedGroupSearch returns a boolean if a field has been set.
 
 ### GetFilter
 

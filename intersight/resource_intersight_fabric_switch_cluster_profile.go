@@ -518,6 +518,12 @@ func resourceFabricSwitchClusterProfile() *schema.Resource {
 				Optional:     true,
 				Default:      "instance",
 			},
+			"user_label": {
+				Description:  "The user defined label assigned to the switch profile.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.All(validation.StringMatch(regexp.MustCompile("^[ !#$%&\\(\\)\\*\\+,\\-\\./:;\\?@\\[\\]_\\{\\|\\}~a-zA-Z0-9]*$"), ""), validation.StringLenBetween(0, 64)),
+				Optional:     true,
+			},
 			"version_context": {
 				Description: "The versioning info for this managed object.",
 				Type:        schema.TypeList,
@@ -875,6 +881,11 @@ func resourceFabricSwitchClusterProfileCreate(c context.Context, d *schema.Resou
 		o.SetType(x)
 	}
 
+	if v, ok := d.GetOk("user_label"); ok {
+		x := (v.(string))
+		o.SetUserLabel(x)
+	}
+
 	r := conn.ApiClient.FabricApi.CreateFabricSwitchClusterProfile(conn.ctx).FabricSwitchClusterProfile(*o)
 	resultMo, _, responseErr := r.Execute()
 	if responseErr != nil {
@@ -1004,6 +1015,10 @@ func resourceFabricSwitchClusterProfileRead(c context.Context, d *schema.Resourc
 
 	if err := d.Set("type", (s.GetType())); err != nil {
 		return diag.Errorf("error occurred while setting property Type in FabricSwitchClusterProfile object: %s", err.Error())
+	}
+
+	if err := d.Set("user_label", (s.GetUserLabel())); err != nil {
+		return diag.Errorf("error occurred while setting property UserLabel in FabricSwitchClusterProfile object: %s", err.Error())
 	}
 
 	if err := d.Set("version_context", flattenMapMoVersionContext(s.GetVersionContext(), d)); err != nil {
@@ -1220,6 +1235,12 @@ func resourceFabricSwitchClusterProfileUpdate(c context.Context, d *schema.Resou
 		v := d.Get("type")
 		x := (v.(string))
 		o.SetType(x)
+	}
+
+	if d.HasChange("user_label") {
+		v := d.Get("user_label")
+		x := (v.(string))
+		o.SetUserLabel(x)
 	}
 
 	r := conn.ApiClient.FabricApi.UpdateFabricSwitchClusterProfile(conn.ctx, d.Id()).FabricSwitchClusterProfile(*o)

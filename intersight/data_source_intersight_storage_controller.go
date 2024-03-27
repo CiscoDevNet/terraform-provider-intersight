@@ -333,6 +333,11 @@ func getStorageControllerSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"hybrid_slots_supported": {
+			Description: "U.3 Hybrid Slot Support of the Storage Controller.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"interface_type": {
 			Description: "Interface types are Sas, Sata, PCH.",
 			Type:        schema.TypeString,
@@ -1361,6 +1366,11 @@ func dataSourceStorageControllerRead(c context.Context, d *schema.ResourceData, 
 		o.SetHwRevision(x)
 	}
 
+	if v, ok := d.GetOk("hybrid_slots_supported"); ok {
+		x := (v.(string))
+		o.SetHybridSlotsSupported(x)
+	}
+
 	if v, ok := d.GetOk("interface_type"); ok {
 		x := (v.(string))
 		o.SetInterfaceType(x)
@@ -2106,6 +2116,7 @@ func dataSourceStorageControllerRead(c context.Context, d *schema.ResourceData, 
 				temp["ecc_bucket_leak_rate"] = (s.GetEccBucketLeakRate())
 				temp["foreign_config_present"] = (s.GetForeignConfigPresent())
 				temp["hw_revision"] = (s.GetHwRevision())
+				temp["hybrid_slots_supported"] = (s.GetHybridSlotsSupported())
 				temp["interface_type"] = (s.GetInterfaceType())
 
 				temp["inventory_device_info"] = flattenMapInventoryDeviceInfoRelationship(s.GetInventoryDeviceInfo(), d)

@@ -6,11 +6,14 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "iam.LocalUserPassword"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "iam.LocalUserPassword"]
-**CurrentPassword** | Pointer to **string** | User-entered passsord to be compared to password for change password function. | [optional] 
+**CurrentPassword** | Pointer to **string** | User-entered password to be compared to password for change password function. | [optional] 
+**InitialPassword** | Pointer to **string** | Initial password set for the local user for the first time when the local user gets created or when the password gets reset by the Account Administrator. | [optional] 
 **IsCurrentPasswordSet** | Pointer to **bool** | Indicates whether the value of the &#39;currentPassword&#39; property has been set. | [optional] [readonly] [default to false]
+**IsInitialPasswordSet** | Pointer to **bool** | Indicates whether the value of the &#39;initialPassword&#39; property has been set. | [optional] [readonly] [default to false]
 **IsNewPasswordSet** | Pointer to **bool** | Indicates whether the value of the &#39;newPassword&#39; property has been set. | [optional] [readonly] [default to false]
+**NeedPasswordReset** | Pointer to **bool** | Indicates whether the user should be prompted to reset their password. | [optional] [readonly] 
 **NewPassword** | Pointer to **string** | New password that the user&#39;s password should be changed to. | [optional] 
-**Password** | Pointer to **string** | User&#39;s current valid passsord. | [optional] 
+**Password** | Pointer to **string** | User&#39;s current valid password. | [optional] 
 **User** | Pointer to [**IamUserRelationship**](IamUserRelationship.md) |  | [optional] 
 
 ## Methods
@@ -97,6 +100,31 @@ SetCurrentPassword sets CurrentPassword field to given value.
 
 HasCurrentPassword returns a boolean if a field has been set.
 
+### GetInitialPassword
+
+`func (o *IamLocalUserPasswordAllOf) GetInitialPassword() string`
+
+GetInitialPassword returns the InitialPassword field if non-nil, zero value otherwise.
+
+### GetInitialPasswordOk
+
+`func (o *IamLocalUserPasswordAllOf) GetInitialPasswordOk() (*string, bool)`
+
+GetInitialPasswordOk returns a tuple with the InitialPassword field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetInitialPassword
+
+`func (o *IamLocalUserPasswordAllOf) SetInitialPassword(v string)`
+
+SetInitialPassword sets InitialPassword field to given value.
+
+### HasInitialPassword
+
+`func (o *IamLocalUserPasswordAllOf) HasInitialPassword() bool`
+
+HasInitialPassword returns a boolean if a field has been set.
+
 ### GetIsCurrentPasswordSet
 
 `func (o *IamLocalUserPasswordAllOf) GetIsCurrentPasswordSet() bool`
@@ -122,6 +150,31 @@ SetIsCurrentPasswordSet sets IsCurrentPasswordSet field to given value.
 
 HasIsCurrentPasswordSet returns a boolean if a field has been set.
 
+### GetIsInitialPasswordSet
+
+`func (o *IamLocalUserPasswordAllOf) GetIsInitialPasswordSet() bool`
+
+GetIsInitialPasswordSet returns the IsInitialPasswordSet field if non-nil, zero value otherwise.
+
+### GetIsInitialPasswordSetOk
+
+`func (o *IamLocalUserPasswordAllOf) GetIsInitialPasswordSetOk() (*bool, bool)`
+
+GetIsInitialPasswordSetOk returns a tuple with the IsInitialPasswordSet field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsInitialPasswordSet
+
+`func (o *IamLocalUserPasswordAllOf) SetIsInitialPasswordSet(v bool)`
+
+SetIsInitialPasswordSet sets IsInitialPasswordSet field to given value.
+
+### HasIsInitialPasswordSet
+
+`func (o *IamLocalUserPasswordAllOf) HasIsInitialPasswordSet() bool`
+
+HasIsInitialPasswordSet returns a boolean if a field has been set.
+
 ### GetIsNewPasswordSet
 
 `func (o *IamLocalUserPasswordAllOf) GetIsNewPasswordSet() bool`
@@ -146,6 +199,31 @@ SetIsNewPasswordSet sets IsNewPasswordSet field to given value.
 `func (o *IamLocalUserPasswordAllOf) HasIsNewPasswordSet() bool`
 
 HasIsNewPasswordSet returns a boolean if a field has been set.
+
+### GetNeedPasswordReset
+
+`func (o *IamLocalUserPasswordAllOf) GetNeedPasswordReset() bool`
+
+GetNeedPasswordReset returns the NeedPasswordReset field if non-nil, zero value otherwise.
+
+### GetNeedPasswordResetOk
+
+`func (o *IamLocalUserPasswordAllOf) GetNeedPasswordResetOk() (*bool, bool)`
+
+GetNeedPasswordResetOk returns a tuple with the NeedPasswordReset field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNeedPasswordReset
+
+`func (o *IamLocalUserPasswordAllOf) SetNeedPasswordReset(v bool)`
+
+SetNeedPasswordReset sets NeedPasswordReset field to given value.
+
+### HasNeedPasswordReset
+
+`func (o *IamLocalUserPasswordAllOf) HasNeedPasswordReset() bool`
+
+HasNeedPasswordReset returns a boolean if a field has been set.
 
 ### GetNewPassword
 

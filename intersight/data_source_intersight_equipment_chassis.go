@@ -919,6 +919,11 @@ func getEquipmentChassisSchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"user_label": {
+			Description: "The user defined label assigned to the chassis.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"vendor": {
 			Description: "This field displays the vendor information of the associated component or hardware.",
 			Type:        schema.TypeString,
@@ -2125,6 +2130,11 @@ func dataSourceEquipmentChassisRead(c context.Context, d *schema.ResourceData, m
 		o.SetTags(x)
 	}
 
+	if v, ok := d.GetOk("user_label"); ok {
+		x := (v.(string))
+		o.SetUserLabel(x)
+	}
+
 	if v, ok := d.GetOk("vendor"); ok {
 		x := (v.(string))
 		o.SetVendor(x)
@@ -2360,6 +2370,7 @@ func dataSourceEquipmentChassisRead(c context.Context, d *schema.ResourceData, m
 				temp["storage_enclosures"] = flattenListStorageEnclosureRelationship(s.GetStorageEnclosures(), d)
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
+				temp["user_label"] = (s.GetUserLabel())
 				temp["vendor"] = (s.GetVendor())
 
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)

@@ -474,6 +474,11 @@ func getOsBulkInstallInfoSchema() map[string]*schema.Schema {
 									Optional:         true,
 									DiffSuppressFunc: SuppressDiffAdditionProps,
 								},
+								"alternate_name_servers": {
+									Type:     schema.TypeList,
+									Optional: true,
+									Elem: &schema.Schema{
+										Type: schema.TypeString}},
 								"answer_file": {
 									Description: "If the source of the answers is a static file, the content of the file is stored as value\nin this property.\nThe value is mandatory only when the 'Source' property has been set to 'File'.",
 									Type:        schema.TypeString,

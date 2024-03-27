@@ -6,11 +6,14 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "capability.IoCardDescriptor"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "capability.IoCardDescriptor"]
+**BifPortNum** | Pointer to **int64** | Identifies the bif port number for the iocard module. | [optional] 
+**IsUcsxDirectIoCard** | Pointer to **bool** | Identifies whether the iocard module is a part of the UCSX Direct chassis. | [optional] [default to false]
 **NativeHifPortChannelRequired** | Pointer to **bool** | Identifies whether host port-channel is required to be configured for the iocard module. | [optional] [default to true]
-**NativeSpeedMasterPortNum** | Pointer to **int64** | Master port number for native speed configuration for the iocard module. | [optional] 
+**NativeSpeedMasterPortNum** | Pointer to **int64** | Primary port number for native speed configuration for the iocard module. | [optional] 
 **NumHifPorts** | Pointer to **int64** | Number of hif ports per blade for the iocard module. | [optional] 
 **Revision** | Pointer to **string** | Revision for the iocard module. | [optional] 
 **UifConnectivity** | Pointer to **string** | Connectivity information between UIF Uplink ports and IOM ports. * &#x60;inline&#x60; - UIF uplink ports and IOM ports are connected inline. * &#x60;cross-connected&#x60; - UIF uplink ports and IOM ports are cross-connected, a case in washington chassis. | [optional] [default to "inline"]
+**UnsupportedPolicies** | Pointer to **[]string** |  | [optional] 
 
 ## Methods
 
@@ -70,6 +73,56 @@ and a boolean to check if the value has been set.
 
 SetObjectType sets ObjectType field to given value.
 
+
+### GetBifPortNum
+
+`func (o *CapabilityIoCardDescriptorAllOf) GetBifPortNum() int64`
+
+GetBifPortNum returns the BifPortNum field if non-nil, zero value otherwise.
+
+### GetBifPortNumOk
+
+`func (o *CapabilityIoCardDescriptorAllOf) GetBifPortNumOk() (*int64, bool)`
+
+GetBifPortNumOk returns a tuple with the BifPortNum field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBifPortNum
+
+`func (o *CapabilityIoCardDescriptorAllOf) SetBifPortNum(v int64)`
+
+SetBifPortNum sets BifPortNum field to given value.
+
+### HasBifPortNum
+
+`func (o *CapabilityIoCardDescriptorAllOf) HasBifPortNum() bool`
+
+HasBifPortNum returns a boolean if a field has been set.
+
+### GetIsUcsxDirectIoCard
+
+`func (o *CapabilityIoCardDescriptorAllOf) GetIsUcsxDirectIoCard() bool`
+
+GetIsUcsxDirectIoCard returns the IsUcsxDirectIoCard field if non-nil, zero value otherwise.
+
+### GetIsUcsxDirectIoCardOk
+
+`func (o *CapabilityIoCardDescriptorAllOf) GetIsUcsxDirectIoCardOk() (*bool, bool)`
+
+GetIsUcsxDirectIoCardOk returns a tuple with the IsUcsxDirectIoCard field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsUcsxDirectIoCard
+
+`func (o *CapabilityIoCardDescriptorAllOf) SetIsUcsxDirectIoCard(v bool)`
+
+SetIsUcsxDirectIoCard sets IsUcsxDirectIoCard field to given value.
+
+### HasIsUcsxDirectIoCard
+
+`func (o *CapabilityIoCardDescriptorAllOf) HasIsUcsxDirectIoCard() bool`
+
+HasIsUcsxDirectIoCard returns a boolean if a field has been set.
 
 ### GetNativeHifPortChannelRequired
 
@@ -196,6 +249,41 @@ SetUifConnectivity sets UifConnectivity field to given value.
 
 HasUifConnectivity returns a boolean if a field has been set.
 
+### GetUnsupportedPolicies
+
+`func (o *CapabilityIoCardDescriptorAllOf) GetUnsupportedPolicies() []string`
+
+GetUnsupportedPolicies returns the UnsupportedPolicies field if non-nil, zero value otherwise.
+
+### GetUnsupportedPoliciesOk
+
+`func (o *CapabilityIoCardDescriptorAllOf) GetUnsupportedPoliciesOk() (*[]string, bool)`
+
+GetUnsupportedPoliciesOk returns a tuple with the UnsupportedPolicies field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUnsupportedPolicies
+
+`func (o *CapabilityIoCardDescriptorAllOf) SetUnsupportedPolicies(v []string)`
+
+SetUnsupportedPolicies sets UnsupportedPolicies field to given value.
+
+### HasUnsupportedPolicies
+
+`func (o *CapabilityIoCardDescriptorAllOf) HasUnsupportedPolicies() bool`
+
+HasUnsupportedPolicies returns a boolean if a field has been set.
+
+### SetUnsupportedPoliciesNil
+
+`func (o *CapabilityIoCardDescriptorAllOf) SetUnsupportedPoliciesNil(b bool)`
+
+ SetUnsupportedPoliciesNil sets the value for UnsupportedPolicies to be an explicit nil
+
+### UnsetUnsupportedPolicies
+`func (o *CapabilityIoCardDescriptorAllOf) UnsetUnsupportedPolicies()`
+
+UnsetUnsupportedPolicies ensures that no value is present for UnsupportedPolicies, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-14968
+API version: 1.0.11-15711
 Contact: intersight@cisco.com
 */
 
@@ -17,26 +17,29 @@ import (
 	"strings"
 )
 
-// StorageItem FI Local Storage information.
+// StorageItem The local Storage information.
 type StorageItem struct {
 	InventoryBase
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
-	// The alarmType of the Local storage in FI.
+	// The alarmType of the Local storage.
 	AlarmType *string `json:"AlarmType,omitempty"`
-	// The name of the Local storage in FI.
+	// The name of the Local storage.
 	Name *string `json:"Name,omitempty"`
-	// The operState of the Local storage in FI.
+	// The operState of the Local storage.
 	OperState *string `json:"OperState,omitempty"`
-	// The size (MB) of the Local storage in FI.
+	// The size (MiB) of the Local storage.
 	Size *string `json:"Size,omitempty"`
-	// The used percent of the Local storage in FI.
-	Used                 *string                              `json:"Used,omitempty"`
-	InventoryDeviceInfo  *InventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
-	NetworkElement       *NetworkElementRelationship          `json:"NetworkElement,omitempty"`
-	RegisteredDevice     *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+	// The used percent of the Local storage.
+	Used                   *string                              `json:"Used,omitempty"`
+	InventoryDeviceInfo    *InventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
+	NetworkElement         *NetworkElementRelationship          `json:"NetworkElement,omitempty"`
+	RegisteredDevice       *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+	StorageControllerDrive *StorageControllerDriveRelationship  `json:"StorageControllerDrive,omitempty"`
+	// An array of relationships to storageFileItem resources.
+	StorageFiles         []StorageFileItemRelationship `json:"StorageFiles,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -369,6 +372,71 @@ func (o *StorageItem) SetRegisteredDevice(v AssetDeviceRegistrationRelationship)
 	o.RegisteredDevice = &v
 }
 
+// GetStorageControllerDrive returns the StorageControllerDrive field value if set, zero value otherwise.
+func (o *StorageItem) GetStorageControllerDrive() StorageControllerDriveRelationship {
+	if o == nil || o.StorageControllerDrive == nil {
+		var ret StorageControllerDriveRelationship
+		return ret
+	}
+	return *o.StorageControllerDrive
+}
+
+// GetStorageControllerDriveOk returns a tuple with the StorageControllerDrive field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *StorageItem) GetStorageControllerDriveOk() (*StorageControllerDriveRelationship, bool) {
+	if o == nil || o.StorageControllerDrive == nil {
+		return nil, false
+	}
+	return o.StorageControllerDrive, true
+}
+
+// HasStorageControllerDrive returns a boolean if a field has been set.
+func (o *StorageItem) HasStorageControllerDrive() bool {
+	if o != nil && o.StorageControllerDrive != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetStorageControllerDrive gets a reference to the given StorageControllerDriveRelationship and assigns it to the StorageControllerDrive field.
+func (o *StorageItem) SetStorageControllerDrive(v StorageControllerDriveRelationship) {
+	o.StorageControllerDrive = &v
+}
+
+// GetStorageFiles returns the StorageFiles field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *StorageItem) GetStorageFiles() []StorageFileItemRelationship {
+	if o == nil {
+		var ret []StorageFileItemRelationship
+		return ret
+	}
+	return o.StorageFiles
+}
+
+// GetStorageFilesOk returns a tuple with the StorageFiles field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *StorageItem) GetStorageFilesOk() ([]StorageFileItemRelationship, bool) {
+	if o == nil || o.StorageFiles == nil {
+		return nil, false
+	}
+	return o.StorageFiles, true
+}
+
+// HasStorageFiles returns a boolean if a field has been set.
+func (o *StorageItem) HasStorageFiles() bool {
+	if o != nil && o.StorageFiles != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetStorageFiles gets a reference to the given []StorageFileItemRelationship and assigns it to the StorageFiles field.
+func (o *StorageItem) SetStorageFiles(v []StorageFileItemRelationship) {
+	o.StorageFiles = v
+}
+
 func (o StorageItem) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	serializedInventoryBase, errInventoryBase := json.Marshal(o.InventoryBase)
@@ -409,6 +477,12 @@ func (o StorageItem) MarshalJSON() ([]byte, error) {
 	if o.RegisteredDevice != nil {
 		toSerialize["RegisteredDevice"] = o.RegisteredDevice
 	}
+	if o.StorageControllerDrive != nil {
+		toSerialize["StorageControllerDrive"] = o.StorageControllerDrive
+	}
+	if o.StorageFiles != nil {
+		toSerialize["StorageFiles"] = o.StorageFiles
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -423,19 +497,22 @@ func (o *StorageItem) UnmarshalJSON(bytes []byte) (err error) {
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 		ObjectType string `json:"ObjectType"`
-		// The alarmType of the Local storage in FI.
+		// The alarmType of the Local storage.
 		AlarmType *string `json:"AlarmType,omitempty"`
-		// The name of the Local storage in FI.
+		// The name of the Local storage.
 		Name *string `json:"Name,omitempty"`
-		// The operState of the Local storage in FI.
+		// The operState of the Local storage.
 		OperState *string `json:"OperState,omitempty"`
-		// The size (MB) of the Local storage in FI.
+		// The size (MiB) of the Local storage.
 		Size *string `json:"Size,omitempty"`
-		// The used percent of the Local storage in FI.
-		Used                *string                              `json:"Used,omitempty"`
-		InventoryDeviceInfo *InventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
-		NetworkElement      *NetworkElementRelationship          `json:"NetworkElement,omitempty"`
-		RegisteredDevice    *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+		// The used percent of the Local storage.
+		Used                   *string                              `json:"Used,omitempty"`
+		InventoryDeviceInfo    *InventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
+		NetworkElement         *NetworkElementRelationship          `json:"NetworkElement,omitempty"`
+		RegisteredDevice       *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+		StorageControllerDrive *StorageControllerDriveRelationship  `json:"StorageControllerDrive,omitempty"`
+		// An array of relationships to storageFileItem resources.
+		StorageFiles []StorageFileItemRelationship `json:"StorageFiles,omitempty"`
 	}
 
 	varStorageItemWithoutEmbeddedStruct := StorageItemWithoutEmbeddedStruct{}
@@ -453,6 +530,8 @@ func (o *StorageItem) UnmarshalJSON(bytes []byte) (err error) {
 		varStorageItem.InventoryDeviceInfo = varStorageItemWithoutEmbeddedStruct.InventoryDeviceInfo
 		varStorageItem.NetworkElement = varStorageItemWithoutEmbeddedStruct.NetworkElement
 		varStorageItem.RegisteredDevice = varStorageItemWithoutEmbeddedStruct.RegisteredDevice
+		varStorageItem.StorageControllerDrive = varStorageItemWithoutEmbeddedStruct.StorageControllerDrive
+		varStorageItem.StorageFiles = varStorageItemWithoutEmbeddedStruct.StorageFiles
 		*o = StorageItem(varStorageItem)
 	} else {
 		return err
@@ -480,6 +559,8 @@ func (o *StorageItem) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "InventoryDeviceInfo")
 		delete(additionalProperties, "NetworkElement")
 		delete(additionalProperties, "RegisteredDevice")
+		delete(additionalProperties, "StorageControllerDrive")
+		delete(additionalProperties, "StorageFiles")
 
 		// remove fields from embedded structs
 		reflectInventoryBase := reflect.ValueOf(o.InventoryBase)

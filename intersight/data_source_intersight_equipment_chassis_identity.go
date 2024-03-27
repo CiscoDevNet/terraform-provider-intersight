@@ -145,6 +145,16 @@ func getEquipmentChassisIdentitySchema() map[string]*schema.Schema {
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
+					"nr_lifecycle": {
+						Description: "IO Card inventory lifecycle status.\n* `Unknown` - Default lifecycle state of a iocard. This should be an initial state when no state is defined for a specific iocard.\n* `Decommissioned` - Lifecycle state is set to this value after the chassis is successfully decommissioned.\n* `DiscoveryInProgress` - Lifecycle state is set to this value after the successful start of the iocard connection discovery process.\n* `DiscoveryFailed` - Lifecycle state is set to this value after the iocard connection discovery has failed.\n* `DiscoveryCompleted` - Lifecycle state is set to this value after the connection discovery of the iocard is completed successfully.\n* `None` - Lifecycle state is set to this value before the start of connection discovery and inventory collection process for a iocard.\n* `InventoryCompleted` - Lifecycle state is set to this value after the chassis inventory collection process is completed for a specific iocard.\n* `InventoryInProgress` - Lifecycle state is set to this value after successful  start of the chassis inventory collection process for a specific iocard.\n* `InventoryFailed` - Lifecycle state is set to this value after the chassis inventory collection process failed for a iocard.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"model": {
+						Description: "IO Card or intelligent fabric module model.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
 					"module_id": {
 						Description: "IOM/MUX Module ID connected to the FI.",
 						Type:        schema.TypeInt,
@@ -160,9 +170,19 @@ func getEquipmentChassisIdentitySchema() map[string]*schema.Schema {
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
+					"serial": {
+						Description: "IO Card or intelligent fabric module serial number.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
 					"switch_id": {
-						Description: "Switch ID to which IOM is connected, ID can be either 1 or 2, equalent to A or B.",
+						Description: "Identifier of the Switch where the IOM is connected. ID can be either 1 or 2, equivalent to A or B.",
 						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"vendor": {
+						Description: "IO Card or intelligent fabric module vendor.",
+						Type:        schema.TypeString,
 						Optional:    true,
 					},
 				},

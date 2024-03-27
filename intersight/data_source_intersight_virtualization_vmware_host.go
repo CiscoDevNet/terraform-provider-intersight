@@ -656,6 +656,11 @@ func getVirtualizationVmwareHostSchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"quarantine_mode": {
+			Description: "Indicates if the host is in quarantine mode. Will be set to True, when in quarantine mode.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
 		"registered_device": {
 			Description: "A reference to a assetDeviceRegistration resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 			Type:        schema.TypeList,
@@ -1737,6 +1742,11 @@ func dataSourceVirtualizationVmwareHostRead(c context.Context, d *schema.Resourc
 		}
 	}
 
+	if v, ok := d.GetOkExists("quarantine_mode"); ok {
+		x := (v.(bool))
+		o.SetQuarantineMode(x)
+	}
+
 	if v, ok := d.GetOk("registered_device"); ok {
 		p := make([]models.AssetDeviceRegistrationRelationship, 0, 1)
 		s := v.([]interface{})
@@ -2106,6 +2116,7 @@ func dataSourceVirtualizationVmwareHostRead(c context.Context, d *schema.Resourc
 				temp["processor_capacity"] = flattenMapVirtualizationComputeCapacity(s.GetProcessorCapacity(), d)
 
 				temp["product_info"] = flattenMapVirtualizationProductInfo(s.GetProductInfo(), d)
+				temp["quarantine_mode"] = (s.GetQuarantineMode())
 
 				temp["registered_device"] = flattenMapAssetDeviceRegistrationRelationship(s.GetRegisteredDevice(), d)
 

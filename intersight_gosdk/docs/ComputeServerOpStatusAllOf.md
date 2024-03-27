@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "compute.ServerOpStatus"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "compute.ServerOpStatus"]
 **ConfigState** | Pointer to **string** | The configured state of these settings in the target server. The value is any one of Applied, Applying, Failed. Applied - The state denotes that the settings are applied successfully in the target server. Applying - The state denotes that the settings are being applied in the target server. Failed - The state denotes that the settings could not be applied in the target server. * &#x60;Applied&#x60; - User configured settings are in applied state. * &#x60;Applying&#x60; - User settings are being applied on the target server. * &#x60;Scheduled&#x60; - User configured settings are scheduled to be applied. * &#x60;Failed&#x60; - User configured settings could not be applied. | [optional] [default to "Applied"]
+**WorkflowInfoMoid** | Pointer to **string** | The WorkflowInfoMo moid that is running. | [optional] [readonly] 
 **WorkflowType** | Pointer to **string** | The workflow type being started. The workflow name to distinguish workflow by type. | [optional] 
 
 ## Methods
@@ -92,6 +93,31 @@ SetConfigState sets ConfigState field to given value.
 `func (o *ComputeServerOpStatusAllOf) HasConfigState() bool`
 
 HasConfigState returns a boolean if a field has been set.
+
+### GetWorkflowInfoMoid
+
+`func (o *ComputeServerOpStatusAllOf) GetWorkflowInfoMoid() string`
+
+GetWorkflowInfoMoid returns the WorkflowInfoMoid field if non-nil, zero value otherwise.
+
+### GetWorkflowInfoMoidOk
+
+`func (o *ComputeServerOpStatusAllOf) GetWorkflowInfoMoidOk() (*string, bool)`
+
+GetWorkflowInfoMoidOk returns a tuple with the WorkflowInfoMoid field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetWorkflowInfoMoid
+
+`func (o *ComputeServerOpStatusAllOf) SetWorkflowInfoMoid(v string)`
+
+SetWorkflowInfoMoid sets WorkflowInfoMoid field to given value.
+
+### HasWorkflowInfoMoid
+
+`func (o *ComputeServerOpStatusAllOf) HasWorkflowInfoMoid() bool`
+
+HasWorkflowInfoMoid returns a boolean if a field has been set.
 
 ### GetWorkflowType
 

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-14968
+API version: 1.0.11-15711
 Contact: intersight@cisco.com
 */
 
@@ -21,6 +21,14 @@ type IamLocalUserPasswordPolicyAllOf struct {
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
+	// Determines if the user lock out feature must be enabled for the local admin user.
+	EnableLockOutForAdminUser *bool `json:"EnableLockOutForAdminUser,omitempty"`
+	// Seconds are tracked for consecutive incorrect login attempts. Users will be locked out if they exceed the max number of incorrect login attempts during this duration.
+	FailedLoginTrackerWindow *int64 `json:"FailedLoginTrackerWindow,omitempty"`
+	// The time period, in seconds, during which a user account will remain locked.
+	LockOutTimePeriod *int64 `json:"LockOutTimePeriod,omitempty"`
+	// Users will be locked out after exceeding the max consecutive incorrect login attempts allowed within the configured time duration.
+	MaxFailedLoginsAllowed *int64 `json:"MaxFailedLoginsAllowed,omitempty"`
 	// Minimum number of characters different from previous password.
 	MinCharDifference *int64 `json:"MinCharDifference,omitempty"`
 	// Minimum Days allowed between password change.
@@ -51,6 +59,14 @@ func NewIamLocalUserPasswordPolicyAllOf(classId string, objectType string) *IamL
 	this := IamLocalUserPasswordPolicyAllOf{}
 	this.ClassId = classId
 	this.ObjectType = objectType
+	var enableLockOutForAdminUser bool = false
+	this.EnableLockOutForAdminUser = &enableLockOutForAdminUser
+	var failedLoginTrackerWindow int64 = 1800
+	this.FailedLoginTrackerWindow = &failedLoginTrackerWindow
+	var lockOutTimePeriod int64 = 900
+	this.LockOutTimePeriod = &lockOutTimePeriod
+	var maxFailedLoginsAllowed int64 = 5
+	this.MaxFailedLoginsAllowed = &maxFailedLoginsAllowed
 	var minCharDifference int64 = 0
 	this.MinCharDifference = &minCharDifference
 	var minDaysBetweenPasswordChange int64 = 0
@@ -79,6 +95,14 @@ func NewIamLocalUserPasswordPolicyAllOfWithDefaults() *IamLocalUserPasswordPolic
 	this.ClassId = classId
 	var objectType string = "iam.LocalUserPasswordPolicy"
 	this.ObjectType = objectType
+	var enableLockOutForAdminUser bool = false
+	this.EnableLockOutForAdminUser = &enableLockOutForAdminUser
+	var failedLoginTrackerWindow int64 = 1800
+	this.FailedLoginTrackerWindow = &failedLoginTrackerWindow
+	var lockOutTimePeriod int64 = 900
+	this.LockOutTimePeriod = &lockOutTimePeriod
+	var maxFailedLoginsAllowed int64 = 5
+	this.MaxFailedLoginsAllowed = &maxFailedLoginsAllowed
 	var minCharDifference int64 = 0
 	this.MinCharDifference = &minCharDifference
 	var minDaysBetweenPasswordChange int64 = 0
@@ -144,6 +168,134 @@ func (o *IamLocalUserPasswordPolicyAllOf) GetObjectTypeOk() (*string, bool) {
 // SetObjectType sets field value
 func (o *IamLocalUserPasswordPolicyAllOf) SetObjectType(v string) {
 	o.ObjectType = v
+}
+
+// GetEnableLockOutForAdminUser returns the EnableLockOutForAdminUser field value if set, zero value otherwise.
+func (o *IamLocalUserPasswordPolicyAllOf) GetEnableLockOutForAdminUser() bool {
+	if o == nil || o.EnableLockOutForAdminUser == nil {
+		var ret bool
+		return ret
+	}
+	return *o.EnableLockOutForAdminUser
+}
+
+// GetEnableLockOutForAdminUserOk returns a tuple with the EnableLockOutForAdminUser field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *IamLocalUserPasswordPolicyAllOf) GetEnableLockOutForAdminUserOk() (*bool, bool) {
+	if o == nil || o.EnableLockOutForAdminUser == nil {
+		return nil, false
+	}
+	return o.EnableLockOutForAdminUser, true
+}
+
+// HasEnableLockOutForAdminUser returns a boolean if a field has been set.
+func (o *IamLocalUserPasswordPolicyAllOf) HasEnableLockOutForAdminUser() bool {
+	if o != nil && o.EnableLockOutForAdminUser != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetEnableLockOutForAdminUser gets a reference to the given bool and assigns it to the EnableLockOutForAdminUser field.
+func (o *IamLocalUserPasswordPolicyAllOf) SetEnableLockOutForAdminUser(v bool) {
+	o.EnableLockOutForAdminUser = &v
+}
+
+// GetFailedLoginTrackerWindow returns the FailedLoginTrackerWindow field value if set, zero value otherwise.
+func (o *IamLocalUserPasswordPolicyAllOf) GetFailedLoginTrackerWindow() int64 {
+	if o == nil || o.FailedLoginTrackerWindow == nil {
+		var ret int64
+		return ret
+	}
+	return *o.FailedLoginTrackerWindow
+}
+
+// GetFailedLoginTrackerWindowOk returns a tuple with the FailedLoginTrackerWindow field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *IamLocalUserPasswordPolicyAllOf) GetFailedLoginTrackerWindowOk() (*int64, bool) {
+	if o == nil || o.FailedLoginTrackerWindow == nil {
+		return nil, false
+	}
+	return o.FailedLoginTrackerWindow, true
+}
+
+// HasFailedLoginTrackerWindow returns a boolean if a field has been set.
+func (o *IamLocalUserPasswordPolicyAllOf) HasFailedLoginTrackerWindow() bool {
+	if o != nil && o.FailedLoginTrackerWindow != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetFailedLoginTrackerWindow gets a reference to the given int64 and assigns it to the FailedLoginTrackerWindow field.
+func (o *IamLocalUserPasswordPolicyAllOf) SetFailedLoginTrackerWindow(v int64) {
+	o.FailedLoginTrackerWindow = &v
+}
+
+// GetLockOutTimePeriod returns the LockOutTimePeriod field value if set, zero value otherwise.
+func (o *IamLocalUserPasswordPolicyAllOf) GetLockOutTimePeriod() int64 {
+	if o == nil || o.LockOutTimePeriod == nil {
+		var ret int64
+		return ret
+	}
+	return *o.LockOutTimePeriod
+}
+
+// GetLockOutTimePeriodOk returns a tuple with the LockOutTimePeriod field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *IamLocalUserPasswordPolicyAllOf) GetLockOutTimePeriodOk() (*int64, bool) {
+	if o == nil || o.LockOutTimePeriod == nil {
+		return nil, false
+	}
+	return o.LockOutTimePeriod, true
+}
+
+// HasLockOutTimePeriod returns a boolean if a field has been set.
+func (o *IamLocalUserPasswordPolicyAllOf) HasLockOutTimePeriod() bool {
+	if o != nil && o.LockOutTimePeriod != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetLockOutTimePeriod gets a reference to the given int64 and assigns it to the LockOutTimePeriod field.
+func (o *IamLocalUserPasswordPolicyAllOf) SetLockOutTimePeriod(v int64) {
+	o.LockOutTimePeriod = &v
+}
+
+// GetMaxFailedLoginsAllowed returns the MaxFailedLoginsAllowed field value if set, zero value otherwise.
+func (o *IamLocalUserPasswordPolicyAllOf) GetMaxFailedLoginsAllowed() int64 {
+	if o == nil || o.MaxFailedLoginsAllowed == nil {
+		var ret int64
+		return ret
+	}
+	return *o.MaxFailedLoginsAllowed
+}
+
+// GetMaxFailedLoginsAllowedOk returns a tuple with the MaxFailedLoginsAllowed field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *IamLocalUserPasswordPolicyAllOf) GetMaxFailedLoginsAllowedOk() (*int64, bool) {
+	if o == nil || o.MaxFailedLoginsAllowed == nil {
+		return nil, false
+	}
+	return o.MaxFailedLoginsAllowed, true
+}
+
+// HasMaxFailedLoginsAllowed returns a boolean if a field has been set.
+func (o *IamLocalUserPasswordPolicyAllOf) HasMaxFailedLoginsAllowed() bool {
+	if o != nil && o.MaxFailedLoginsAllowed != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetMaxFailedLoginsAllowed gets a reference to the given int64 and assigns it to the MaxFailedLoginsAllowed field.
+func (o *IamLocalUserPasswordPolicyAllOf) SetMaxFailedLoginsAllowed(v int64) {
+	o.MaxFailedLoginsAllowed = &v
 }
 
 // GetMinCharDifference returns the MinCharDifference field value if set, zero value otherwise.
@@ -442,6 +594,18 @@ func (o IamLocalUserPasswordPolicyAllOf) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["ObjectType"] = o.ObjectType
 	}
+	if o.EnableLockOutForAdminUser != nil {
+		toSerialize["EnableLockOutForAdminUser"] = o.EnableLockOutForAdminUser
+	}
+	if o.FailedLoginTrackerWindow != nil {
+		toSerialize["FailedLoginTrackerWindow"] = o.FailedLoginTrackerWindow
+	}
+	if o.LockOutTimePeriod != nil {
+		toSerialize["LockOutTimePeriod"] = o.LockOutTimePeriod
+	}
+	if o.MaxFailedLoginsAllowed != nil {
+		toSerialize["MaxFailedLoginsAllowed"] = o.MaxFailedLoginsAllowed
+	}
 	if o.MinCharDifference != nil {
 		toSerialize["MinCharDifference"] = o.MinCharDifference
 	}
@@ -489,6 +653,10 @@ func (o *IamLocalUserPasswordPolicyAllOf) UnmarshalJSON(bytes []byte) (err error
 	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
+		delete(additionalProperties, "EnableLockOutForAdminUser")
+		delete(additionalProperties, "FailedLoginTrackerWindow")
+		delete(additionalProperties, "LockOutTimePeriod")
+		delete(additionalProperties, "MaxFailedLoginsAllowed")
 		delete(additionalProperties, "MinCharDifference")
 		delete(additionalProperties, "MinDaysBetweenPasswordChange")
 		delete(additionalProperties, "MinLengthPassword")

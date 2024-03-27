@@ -110,6 +110,26 @@ func getIamLocalUserPasswordPolicySchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"enable_lock_out_for_admin_user": {
+			Description: "Determines if the user lock out feature must be enabled for the local admin user.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
+		"failed_login_tracker_window": {
+			Description: "Seconds are tracked for consecutive incorrect login attempts. Users will be locked out if they exceed the max number of incorrect login attempts during this duration.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"lock_out_time_period": {
+			Description: "The time period, in seconds, during which a user account will remain locked.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"max_failed_logins_allowed": {
+			Description: "Users will be locked out after exceeding the max consecutive incorrect login attempts allowed within the configured time duration.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
 		"min_char_difference": {
 			Description: "Minimum number of characters different from previous password.",
 			Type:        schema.TypeInt,
@@ -514,6 +534,26 @@ func dataSourceIamLocalUserPasswordPolicyRead(c context.Context, d *schema.Resou
 		o.SetDomainGroupMoid(x)
 	}
 
+	if v, ok := d.GetOkExists("enable_lock_out_for_admin_user"); ok {
+		x := (v.(bool))
+		o.SetEnableLockOutForAdminUser(x)
+	}
+
+	if v, ok := d.GetOkExists("failed_login_tracker_window"); ok {
+		x := int64(v.(int))
+		o.SetFailedLoginTrackerWindow(x)
+	}
+
+	if v, ok := d.GetOkExists("lock_out_time_period"); ok {
+		x := int64(v.(int))
+		o.SetLockOutTimePeriod(x)
+	}
+
+	if v, ok := d.GetOkExists("max_failed_logins_allowed"); ok {
+		x := int64(v.(int))
+		o.SetMaxFailedLoginsAllowed(x)
+	}
+
 	if v, ok := d.GetOkExists("min_char_difference"); ok {
 		x := int64(v.(int))
 		o.SetMinCharDifference(x)
@@ -820,6 +860,10 @@ func dataSourceIamLocalUserPasswordPolicyRead(c context.Context, d *schema.Resou
 
 				temp["create_time"] = (s.GetCreateTime()).String()
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
+				temp["enable_lock_out_for_admin_user"] = (s.GetEnableLockOutForAdminUser())
+				temp["failed_login_tracker_window"] = (s.GetFailedLoginTrackerWindow())
+				temp["lock_out_time_period"] = (s.GetLockOutTimePeriod())
+				temp["max_failed_logins_allowed"] = (s.GetMaxFailedLoginsAllowed())
 				temp["min_char_difference"] = (s.GetMinCharDifference())
 				temp["min_days_between_password_change"] = (s.GetMinDaysBetweenPasswordChange())
 				temp["min_length_password"] = (s.GetMinLengthPassword())

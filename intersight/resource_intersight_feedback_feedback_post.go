@@ -244,6 +244,19 @@ func resourceFeedbackFeedbackPost() *schema.Resource {
 							Default:     "feedback.FeedbackData",
 							ForceNew:    true,
 						},
+						"product_satisfaction_scale": {
+							Description:  "User's overall satisfaction with the product on a 0-10 scale.",
+							Type:         schema.TypeInt,
+							ValidateFunc: validation.IntBetween(0, 10),
+							Optional:     true,
+							ForceNew:     true,
+						},
+						"survey_completed": {
+							Description: "Indicates if the user completed the survey. True if completed, false otherwise.",
+							Type:        schema.TypeBool,
+							Optional:    true,
+							ForceNew:    true,
+						},
 						"trace_ids": {
 							Description: "Bunch of last traceId for reproducing user last activity.",
 							Type:        schema.TypeString,
@@ -251,9 +264,9 @@ func resourceFeedbackFeedbackPost() *schema.Resource {
 							ForceNew:    true,
 						},
 						"type": {
-							Description:  "Type of the feedback from user.\n* `Evaluation` - User's feedback classified as an evaluation.\n* `Bug` - User's feedback classified as a bug.",
+							Description:  "Type of the feedback from user.\n* `Evaluation` - User's feedback classified as an evaluation.\n* `Bug` - User's feedback classified as a bug.\n* `Survey` - User's response to a survey.",
 							Type:         schema.TypeString,
-							ValidateFunc: validation.StringInSlice([]string{"Evaluation", "Bug"}, false),
+							ValidateFunc: validation.StringInSlice([]string{"Evaluation", "Bug", "Survey"}, false),
 							Optional:     true,
 							Default:      "Evaluation",
 							ForceNew:     true,
@@ -694,6 +707,18 @@ func resourceFeedbackFeedbackPostCreate(c context.Context, d *schema.ResourceDat
 				{
 					x := (v.(string))
 					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["product_satisfaction_scale"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetProductSatisfactionScale(x)
+				}
+			}
+			if v, ok := l["survey_completed"]; ok {
+				{
+					x := (v.(bool))
+					o.SetSurveyCompleted(x)
 				}
 			}
 			if v, ok := l["trace_ids"]; ok {

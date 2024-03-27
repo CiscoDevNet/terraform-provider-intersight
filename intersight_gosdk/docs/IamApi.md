@@ -20,6 +20,7 @@ Method | HTTP request | Description
 [**CreateIamLdapGroup**](IamApi.md#CreateIamLdapGroup) | **Post** /api/v1/iam/LdapGroups | Create a &#39;iam.LdapGroup&#39; resource.
 [**CreateIamLdapPolicy**](IamApi.md#CreateIamLdapPolicy) | **Post** /api/v1/iam/LdapPolicies | Create a &#39;iam.LdapPolicy&#39; resource.
 [**CreateIamLdapProvider**](IamApi.md#CreateIamLdapProvider) | **Post** /api/v1/iam/LdapProviders | Create a &#39;iam.LdapProvider&#39; resource.
+[**CreateIamLocalUserPassword**](IamApi.md#CreateIamLocalUserPassword) | **Post** /api/v1/iam/LocalUserPasswords | Create a &#39;iam.LocalUserPassword&#39; resource.
 [**CreateIamPermission**](IamApi.md#CreateIamPermission) | **Post** /api/v1/iam/Permissions | Create a &#39;iam.Permission&#39; resource.
 [**CreateIamPrivateKeySpec**](IamApi.md#CreateIamPrivateKeySpec) | **Post** /api/v1/iam/PrivateKeySpecs | Create a &#39;iam.PrivateKeySpec&#39; resource.
 [**CreateIamQualifier**](IamApi.md#CreateIamQualifier) | **Post** /api/v1/iam/Qualifiers | Create a &#39;iam.Qualifier&#39; resource.
@@ -105,6 +106,8 @@ Method | HTTP request | Description
 [**GetIamLdapPolicyList**](IamApi.md#GetIamLdapPolicyList) | **Get** /api/v1/iam/LdapPolicies | Read a &#39;iam.LdapPolicy&#39; resource.
 [**GetIamLdapProviderByMoid**](IamApi.md#GetIamLdapProviderByMoid) | **Get** /api/v1/iam/LdapProviders/{Moid} | Read a &#39;iam.LdapProvider&#39; resource.
 [**GetIamLdapProviderList**](IamApi.md#GetIamLdapProviderList) | **Get** /api/v1/iam/LdapProviders | Read a &#39;iam.LdapProvider&#39; resource.
+[**GetIamLocalUserPasswordByMoid**](IamApi.md#GetIamLocalUserPasswordByMoid) | **Get** /api/v1/iam/LocalUserPasswords/{Moid} | Read a &#39;iam.LocalUserPassword&#39; resource.
+[**GetIamLocalUserPasswordList**](IamApi.md#GetIamLocalUserPasswordList) | **Get** /api/v1/iam/LocalUserPasswords | Read a &#39;iam.LocalUserPassword&#39; resource.
 [**GetIamLocalUserPasswordPolicyByMoid**](IamApi.md#GetIamLocalUserPasswordPolicyByMoid) | **Get** /api/v1/iam/LocalUserPasswordPolicies/{Moid} | Read a &#39;iam.LocalUserPasswordPolicy&#39; resource.
 [**GetIamLocalUserPasswordPolicyList**](IamApi.md#GetIamLocalUserPasswordPolicyList) | **Get** /api/v1/iam/LocalUserPasswordPolicies | Read a &#39;iam.LocalUserPasswordPolicy&#39; resource.
 [**GetIamOAuthTokenByMoid**](IamApi.md#GetIamOAuthTokenByMoid) | **Get** /api/v1/iam/OAuthTokens/{Moid} | Read a &#39;iam.OAuthToken&#39; resource.
@@ -172,6 +175,7 @@ Method | HTTP request | Description
 [**PatchIamPermission**](IamApi.md#PatchIamPermission) | **Patch** /api/v1/iam/Permissions/{Moid} | Update a &#39;iam.Permission&#39; resource.
 [**PatchIamPrivateKeySpec**](IamApi.md#PatchIamPrivateKeySpec) | **Patch** /api/v1/iam/PrivateKeySpecs/{Moid} | Update a &#39;iam.PrivateKeySpec&#39; resource.
 [**PatchIamQualifier**](IamApi.md#PatchIamQualifier) | **Patch** /api/v1/iam/Qualifiers/{Moid} | Update a &#39;iam.Qualifier&#39; resource.
+[**PatchIamResourceLimits**](IamApi.md#PatchIamResourceLimits) | **Patch** /api/v1/iam/ResourceLimits/{Moid} | Update a &#39;iam.ResourceLimits&#39; resource.
 [**PatchIamResourceRoles**](IamApi.md#PatchIamResourceRoles) | **Patch** /api/v1/iam/ResourceRoles/{Moid} | Update a &#39;iam.ResourceRoles&#39; resource.
 [**PatchIamSessionLimits**](IamApi.md#PatchIamSessionLimits) | **Patch** /api/v1/iam/SessionLimits/{Moid} | Update a &#39;iam.SessionLimits&#39; resource.
 [**PatchIamUser**](IamApi.md#PatchIamUser) | **Patch** /api/v1/iam/Users/{Moid} | Update a &#39;iam.User&#39; resource.
@@ -201,6 +205,7 @@ Method | HTTP request | Description
 [**UpdateIamPermission**](IamApi.md#UpdateIamPermission) | **Post** /api/v1/iam/Permissions/{Moid} | Update a &#39;iam.Permission&#39; resource.
 [**UpdateIamPrivateKeySpec**](IamApi.md#UpdateIamPrivateKeySpec) | **Post** /api/v1/iam/PrivateKeySpecs/{Moid} | Update a &#39;iam.PrivateKeySpec&#39; resource.
 [**UpdateIamQualifier**](IamApi.md#UpdateIamQualifier) | **Post** /api/v1/iam/Qualifiers/{Moid} | Update a &#39;iam.Qualifier&#39; resource.
+[**UpdateIamResourceLimits**](IamApi.md#UpdateIamResourceLimits) | **Post** /api/v1/iam/ResourceLimits/{Moid} | Update a &#39;iam.ResourceLimits&#39; resource.
 [**UpdateIamResourceRoles**](IamApi.md#UpdateIamResourceRoles) | **Post** /api/v1/iam/ResourceRoles/{Moid} | Update a &#39;iam.ResourceRoles&#39; resource.
 [**UpdateIamSessionLimits**](IamApi.md#UpdateIamSessionLimits) | **Post** /api/v1/iam/SessionLimits/{Moid} | Update a &#39;iam.SessionLimits&#39; resource.
 [**UpdateIamUser**](IamApi.md#UpdateIamUser) | **Post** /api/v1/iam/Users/{Moid} | Update a &#39;iam.User&#39; resource.
@@ -1283,6 +1288,74 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**IamLdapProvider**](IamLdapProvider.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## CreateIamLocalUserPassword
+
+> IamLocalUserPassword CreateIamLocalUserPassword(ctx).IamLocalUserPassword(iamLocalUserPassword).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
+
+Create a 'iam.LocalUserPassword' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    iamLocalUserPassword := *openapiclient.NewIamLocalUserPassword("ClassId_example", "ObjectType_example") // IamLocalUserPassword | The 'iam.LocalUserPassword' resource to create.
+    ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
+    ifNoneMatch := "ifNoneMatch_example" // string | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn't happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource's ETag doesn't match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don't have to be identical byte for byte. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.IamApi.CreateIamLocalUserPassword(context.Background()).IamLocalUserPassword(iamLocalUserPassword).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `IamApi.CreateIamLocalUserPassword``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `CreateIamLocalUserPassword`: IamLocalUserPassword
+    fmt.Fprintf(os.Stdout, "Response from `IamApi.CreateIamLocalUserPassword`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCreateIamLocalUserPasswordRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **iamLocalUserPassword** | [**IamLocalUserPassword**](IamLocalUserPassword.md) | The &#39;iam.LocalUserPassword&#39; resource to create. | 
+ **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
+ **ifNoneMatch** | **string** | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn&#39;t happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource&#39;s ETag doesn&#39;t match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don&#39;t have to be identical byte for byte. | 
+
+### Return type
+
+[**IamLocalUserPassword**](IamLocalUserPassword.md)
 
 ### Authorization
 
@@ -7428,6 +7501,158 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## GetIamLocalUserPasswordByMoid
+
+> IamLocalUserPassword GetIamLocalUserPasswordByMoid(ctx, moid).Execute()
+
+Read a 'iam.LocalUserPassword' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.IamApi.GetIamLocalUserPasswordByMoid(context.Background(), moid).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `IamApi.GetIamLocalUserPasswordByMoid``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetIamLocalUserPasswordByMoid`: IamLocalUserPassword
+    fmt.Fprintf(os.Stdout, "Response from `IamApi.GetIamLocalUserPasswordByMoid`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetIamLocalUserPasswordByMoidRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**IamLocalUserPassword**](IamLocalUserPassword.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetIamLocalUserPasswordList
+
+> IamLocalUserPasswordResponse GetIamLocalUserPasswordList(ctx).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+
+Read a 'iam.LocalUserPassword' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    filter := "$filter=CreateTime gt 2012-08-29T21:58:33Z" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
+    orderby := "$orderby=CreationTime" // string | Determines what properties are used to sort the collection of resources. (optional)
+    top := int32($top=10) // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
+    skip := int32($skip=100) // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
+    select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+    expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+    apply := "apply_example" // string | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e., the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. (optional)
+    count := false // bool | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. (optional)
+    inlinecount := "$inlinecount=true" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
+    at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
+    tags := "tags_example" // string | The 'tags' parameter is used to request a summary of the Tag utilization for this resource. When the 'tags' parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.IamApi.GetIamLocalUserPasswordList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `IamApi.GetIamLocalUserPasswordList``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetIamLocalUserPasswordList`: IamLocalUserPasswordResponse
+    fmt.Fprintf(os.Stdout, "Response from `IamApi.GetIamLocalUserPasswordList`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetIamLocalUserPasswordListRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **filter** | **string** | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). | [default to &quot;&quot;]
+ **orderby** | **string** | Determines what properties are used to sort the collection of resources. | 
+ **top** | **int32** | Specifies the maximum number of resources to return in the response. | [default to 100]
+ **skip** | **int32** | Specifies the number of resources to skip in the response. | [default to 0]
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **apply** | **string** | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e., the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. | 
+ **count** | **bool** | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. | 
+ **inlinecount** | **string** | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. | [default to &quot;allpages&quot;]
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
+ **tags** | **string** | The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. | 
+
+### Return type
+
+[**IamLocalUserPasswordResponse**](IamLocalUserPasswordResponse.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## GetIamLocalUserPasswordPolicyByMoid
 
 > IamLocalUserPasswordPolicy GetIamLocalUserPasswordPolicyByMoid(ctx, moid).Execute()
@@ -12428,6 +12653,78 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## PatchIamResourceLimits
+
+> IamResourceLimits PatchIamResourceLimits(ctx, moid).IamResourceLimits(iamResourceLimits).IfMatch(ifMatch).Execute()
+
+Update a 'iam.ResourceLimits' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+    iamResourceLimits := *openapiclient.NewIamResourceLimits("ClassId_example", "ObjectType_example") // IamResourceLimits | The 'iam.ResourceLimits' resource to update.
+    ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.IamApi.PatchIamResourceLimits(context.Background(), moid).IamResourceLimits(iamResourceLimits).IfMatch(ifMatch).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `IamApi.PatchIamResourceLimits``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `PatchIamResourceLimits`: IamResourceLimits
+    fmt.Fprintf(os.Stdout, "Response from `IamApi.PatchIamResourceLimits`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiPatchIamResourceLimitsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **iamResourceLimits** | [**IamResourceLimits**](IamResourceLimits.md) | The &#39;iam.ResourceLimits&#39; resource to update. | 
+ **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
+
+### Return type
+
+[**IamResourceLimits**](IamResourceLimits.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json, application/json-patch+json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## PatchIamResourceRoles
 
 > IamResourceRoles PatchIamResourceRoles(ctx, moid).IamResourceRoles(iamResourceRoles).IfMatch(ifMatch).Execute()
@@ -14501,6 +14798,78 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**IamQualifier**](IamQualifier.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json, application/json-patch+json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## UpdateIamResourceLimits
+
+> IamResourceLimits UpdateIamResourceLimits(ctx, moid).IamResourceLimits(iamResourceLimits).IfMatch(ifMatch).Execute()
+
+Update a 'iam.ResourceLimits' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+    iamResourceLimits := *openapiclient.NewIamResourceLimits("ClassId_example", "ObjectType_example") // IamResourceLimits | The 'iam.ResourceLimits' resource to update.
+    ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.IamApi.UpdateIamResourceLimits(context.Background(), moid).IamResourceLimits(iamResourceLimits).IfMatch(ifMatch).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `IamApi.UpdateIamResourceLimits``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `UpdateIamResourceLimits`: IamResourceLimits
+    fmt.Fprintf(os.Stdout, "Response from `IamApi.UpdateIamResourceLimits`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiUpdateIamResourceLimitsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **iamResourceLimits** | [**IamResourceLimits**](IamResourceLimits.md) | The &#39;iam.ResourceLimits&#39; resource to update. | 
+ **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
+
+### Return type
+
+[**IamResourceLimits**](IamResourceLimits.md)
 
 ### Authorization
 

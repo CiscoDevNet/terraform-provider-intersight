@@ -72,6 +72,7 @@ This complex property has following sub-properties:
   + `domain`:(string) The IPv4 domain that all users must be in. 
   + `enable_encryption`:(bool) If enabled, the endpoint encrypts all information it sends to the LDAP server. 
   + `enable_group_authorization`:(bool) If enabled, user authorization is also done at the group level for LDAP users not in the local user database. 
+  + `enable_nested_group_search`:(bool) If enabled, an extended search walks the chain of ancestry all the way to the root and returns all the groups and subgroups, each of those groups belong to recursively. 
   + `filter`:(string) Criteria to identify entries in search requests. 
   + `group_attribute`:(string) Groups to which an LDAP entry belongs. 
   + `is_password_set`:(bool)(ReadOnly) Indicates whether the value of the 'password' property has been set. 

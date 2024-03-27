@@ -7,6 +7,7 @@ Method | HTTP request | Description
 [**CreateAssetDeviceClaim**](AssetApi.md#CreateAssetDeviceClaim) | **Post** /api/v1/asset/DeviceClaims | Create a &#39;asset.DeviceClaim&#39; resource.
 [**CreateAssetDeviceContractNotification**](AssetApi.md#CreateAssetDeviceContractNotification) | **Post** /api/v1/asset/DeviceContractNotifications | Create a &#39;asset.DeviceContractNotification&#39; resource.
 [**CreateAssetTarget**](AssetApi.md#CreateAssetTarget) | **Post** /api/v1/asset/Targets | Create a &#39;asset.Target&#39; resource.
+[**DeleteAssetClusterMember**](AssetApi.md#DeleteAssetClusterMember) | **Delete** /api/v1/asset/ClusterMembers/{Moid} | Delete a &#39;asset.ClusterMember&#39; resource.
 [**DeleteAssetDeployment**](AssetApi.md#DeleteAssetDeployment) | **Delete** /api/v1/asset/Deployments/{Moid} | Delete a &#39;asset.Deployment&#39; resource.
 [**DeleteAssetDeploymentDevice**](AssetApi.md#DeleteAssetDeploymentDevice) | **Delete** /api/v1/asset/DeploymentDevices/{Moid} | Delete a &#39;asset.DeploymentDevice&#39; resource.
 [**DeleteAssetDeviceClaim**](AssetApi.md#DeleteAssetDeviceClaim) | **Delete** /api/v1/asset/DeviceClaims/{Moid} | Delete a &#39;asset.DeviceClaim&#39; resource.
@@ -245,6 +246,72 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## DeleteAssetClusterMember
+
+> DeleteAssetClusterMember(ctx, moid).Execute()
+
+Delete a 'asset.ClusterMember' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.AssetApi.DeleteAssetClusterMember(context.Background(), moid).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `AssetApi.DeleteAssetClusterMember``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiDeleteAssetClusterMemberRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

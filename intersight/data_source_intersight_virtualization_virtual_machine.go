@@ -632,7 +632,7 @@ func getVirtualizationVirtualMachineSchema() map[string]*schema.Schema {
 			},
 		},
 		"memory": {
-			Description: "Virtual machine memory in mebi bytes (one mebibyte, 1MiB, is 1048576 bytes, and 1KiB is 1024 bytes). Input must be a whole number and scientific notation is not acceptable. For example, enter 1730 and not 1.73e03. The limit of 4177920 translates to 3.9TiB.",
+			Description: "Virtual machine memory in mebi bytes (one mebibyte, 1MiB, is 1048576 bytes, and 1KiB is 1024 bytes). Input must be a whole number and scientific notation is not acceptable. For example, enter 1730 and not 1.73e03. No upper limit is enforced because hypervisors increase the limit in every release.",
 			Type:        schema.TypeInt,
 			Optional:    true,
 		},

@@ -215,7 +215,7 @@ This complex property has following sub-properties:
 * `usnic_settings`:(HashMap) - User Space NIC Settings that enable low-latency and higher throughput by bypassing the kernel layer when sending/receiving packets. 
 This complex property has following sub-properties:
   + `cos`:(int) Class of Service to be used for traffic on the usNIC. 
-  + `nr_count`:(int) Number of usNIC interfaces to be created. Valid values are 1 to 255 when the usNIC is enabled. When the usNIC is disabled, the default value is 0. 
+  + `nr_count`:(int) Number of usNIC interfaces to be created. When usNIC is enabled, the valid values are from 1 to 225. When usNIC is disabled, the default value is 0. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
   + `usnic_adapter_policy`:(string) Ethernet Adapter policy to be associated with the usNICs. 
 * `version_context`:(HashMap) -(ReadOnly) The versioning info for this managed object. 

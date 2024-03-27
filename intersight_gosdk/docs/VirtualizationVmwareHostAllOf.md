@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **IsSshEnabled** | Pointer to **bool** | True if SSH is enabled in the host, false otherwise. | [optional] 
 **NetworkAdapterCount** | Pointer to **int64** | The count of all network adapters attached to this host. | [optional] 
 **NtpServers** | Pointer to **[]string** |  | [optional] 
+**QuarantineMode** | Pointer to **bool** | Indicates if the host is in quarantine mode. Will be set to True, when in quarantine mode. | [optional] 
 **ResourceConsumed** | Pointer to [**NullableVirtualizationVmwareResourceConsumption**](VirtualizationVmwareResourceConsumption.md) |  | [optional] 
 **StorageAdapterCount** | Pointer to **int64** | The count of all storage adapters attached to this host. | [optional] 
 **TimeZone** | Pointer to **string** | Time zone this host is in. | [optional] 
@@ -305,6 +306,31 @@ HasNtpServers returns a boolean if a field has been set.
 `func (o *VirtualizationVmwareHostAllOf) UnsetNtpServers()`
 
 UnsetNtpServers ensures that no value is present for NtpServers, not even an explicit nil
+### GetQuarantineMode
+
+`func (o *VirtualizationVmwareHostAllOf) GetQuarantineMode() bool`
+
+GetQuarantineMode returns the QuarantineMode field if non-nil, zero value otherwise.
+
+### GetQuarantineModeOk
+
+`func (o *VirtualizationVmwareHostAllOf) GetQuarantineModeOk() (*bool, bool)`
+
+GetQuarantineModeOk returns a tuple with the QuarantineMode field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetQuarantineMode
+
+`func (o *VirtualizationVmwareHostAllOf) SetQuarantineMode(v bool)`
+
+SetQuarantineMode sets QuarantineMode field to given value.
+
+### HasQuarantineMode
+
+`func (o *VirtualizationVmwareHostAllOf) HasQuarantineMode() bool`
+
+HasQuarantineMode returns a boolean if a field has been set.
+
 ### GetResourceConsumed
 
 `func (o *VirtualizationVmwareHostAllOf) GetResourceConsumed() VirtualizationVmwareResourceConsumption`

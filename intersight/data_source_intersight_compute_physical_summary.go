@@ -478,6 +478,11 @@ func getComputePhysicalSummarySchema() map[string]*schema.Schema {
 			Optional: true,
 			Elem: &schema.Schema{
 				Type: schema.TypeString}},
+		"package_version": {
+			Description: "The package version of the Host Service Utility (HSU) for this server.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"parent": {
 			Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 			Type:        schema.TypeList,
@@ -1246,6 +1251,11 @@ func dataSourceComputePhysicalSummaryRead(c context.Context, d *schema.ResourceD
 		o.SetOwners(x)
 	}
 
+	if v, ok := d.GetOk("package_version"); ok {
+		x := (v.(string))
+		o.SetPackageVersion(x)
+	}
+
 	if v, ok := d.GetOk("parent"); ok {
 		p := make([]models.MoBaseMoRelationship, 0, 1)
 		s := v.([]interface{})
@@ -1659,6 +1669,7 @@ func dataSourceComputePhysicalSummaryRead(c context.Context, d *schema.ResourceD
 				temp["oper_state"] = (s.GetOperState())
 				temp["operability"] = (s.GetOperability())
 				temp["owners"] = (s.GetOwners())
+				temp["package_version"] = (s.GetPackageVersion())
 
 				temp["parent"] = flattenMapMoBaseMoRelationship(s.GetParent(), d)
 

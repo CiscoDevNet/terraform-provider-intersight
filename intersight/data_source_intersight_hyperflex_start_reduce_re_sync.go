@@ -202,6 +202,39 @@ func getHyperflexStartReduceReSyncSchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"target_details": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"account_mo_id": {
+						Description: "The customer account MoId.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"cluster_mo_ids": {
+						Type:     schema.TypeList,
+						Optional: true,
+						Elem: &schema.Schema{
+							Type: schema.TypeString}},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
 		"version_context": {
 			Description: "The versioning info for this managed object.",
 			Type:        schema.TypeList,
@@ -569,6 +602,48 @@ func dataSourceHyperflexStartReduceReSyncRead(c context.Context, d *schema.Resou
 		o.SetTags(x)
 	}
 
+	if v, ok := d.GetOk("target_details"); ok {
+		x := make([]models.HyperflexReSyncClusterMoIds, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := &models.HyperflexReSyncClusterMoIds{}
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("hyperflex.ReSyncClusterMoIds")
+			if v, ok := l["cluster_mo_ids"]; ok {
+				{
+					x := make([]string, 0)
+					y := reflect.ValueOf(v)
+					for i := 0; i < y.Len(); i++ {
+						if y.Index(i).Interface() != nil {
+							x = append(x, y.Index(i).Interface().(string))
+						}
+					}
+					if len(x) > 0 {
+						o.SetClusterMoIds(x)
+					}
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			x = append(x, *o)
+		}
+		o.SetTargetDetails(x)
+	}
+
 	if v, ok := d.GetOk("version_context"); ok {
 		p := make([]models.MoVersionContext, 0, 1)
 		s := v.([]interface{})
@@ -700,6 +775,8 @@ func dataSourceHyperflexStartReduceReSyncRead(c context.Context, d *schema.Resou
 				temp["shared_scope"] = (s.GetSharedScope())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
+
+				temp["target_details"] = flattenListHyperflexReSyncClusterMoIds(s.GetTargetDetails(), d)
 
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
 				hyperflexStartReduceReSyncResults = append(hyperflexStartReduceReSyncResults, temp)

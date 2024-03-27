@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
+	"reflect"
 	"strings"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
@@ -76,6 +77,11 @@ func resourceCapabilityIoCardDescriptor() *schema.Resource {
 						},
 					},
 				},
+			},
+			"bif_port_num": {
+				Description: "Identifies the bif port number for the iocard module.",
+				Type:        schema.TypeInt,
+				Optional:    true,
 			},
 			"capabilities": {
 				Description: "An array of relationships to capabilityCapability resources.",
@@ -149,6 +155,12 @@ func resourceCapabilityIoCardDescriptor() *schema.Resource {
 					}
 					return
 				}},
+			"is_ucsx_direct_io_card": {
+				Description: "Identifies whether the iocard module is a part of the UCSX Direct chassis.",
+				Type:        schema.TypeBool,
+				Optional:    true,
+				Default:     false,
+			},
 			"mod_time": {
 				Description: "The time when this managed object was last modified.",
 				Type:        schema.TypeString,
@@ -179,7 +191,7 @@ func resourceCapabilityIoCardDescriptor() *schema.Resource {
 				Default:     true,
 			},
 			"native_speed_master_port_num": {
-				Description: "Master port number for native speed configuration for the iocard module.",
+				Description: "Primary port number for native speed configuration for the iocard module.",
 				Type:        schema.TypeInt,
 				Optional:    true,
 			},
@@ -331,6 +343,14 @@ func resourceCapabilityIoCardDescriptor() *schema.Resource {
 				Optional:     true,
 				Default:      "inline",
 			},
+			"unsupported_policies": {
+				Type:       schema.TypeList,
+				Optional:   true,
+				ConfigMode: schema.SchemaConfigModeAttr,
+				Computed:   true,
+				Elem: &schema.Schema{
+					Type: schema.TypeString,
+				}},
 			"vendor": {
 				Description: "The vendor of the endpoint, for which this capability information is applicable.",
 				Type:        schema.TypeString,
@@ -511,6 +531,11 @@ func resourceCapabilityIoCardDescriptorCreate(c context.Context, d *schema.Resou
 		}
 	}
 
+	if v, ok := d.GetOkExists("bif_port_num"); ok {
+		x := int64(v.(int))
+		o.SetBifPortNum(x)
+	}
+
 	if v, ok := d.GetOk("capabilities"); ok {
 		x := make([]models.CapabilityCapabilityRelationship, 0)
 		s := v.([]interface{})
@@ -558,6 +583,11 @@ func resourceCapabilityIoCardDescriptorCreate(c context.Context, d *schema.Resou
 	if v, ok := d.GetOk("description"); ok {
 		x := (v.(string))
 		o.SetDescription(x)
+	}
+
+	if v, ok := d.GetOkExists("is_ucsx_direct_io_card"); ok {
+		x := (v.(bool))
+		o.SetIsUcsxDirectIoCard(x)
 	}
 
 	if v, ok := d.GetOk("model"); ok {
@@ -632,6 +662,19 @@ func resourceCapabilityIoCardDescriptorCreate(c context.Context, d *schema.Resou
 		o.SetUifConnectivity(x)
 	}
 
+	if v, ok := d.GetOk("unsupported_policies"); ok {
+		x := make([]string, 0)
+		y := reflect.ValueOf(v)
+		for i := 0; i < y.Len(); i++ {
+			if y.Index(i).Interface() != nil {
+				x = append(x, y.Index(i).Interface().(string))
+			}
+		}
+		if len(x) > 0 {
+			o.SetUnsupportedPolicies(x)
+		}
+	}
+
 	if v, ok := d.GetOk("vendor"); ok {
 		x := (v.(string))
 		o.SetVendor(x)
@@ -689,6 +732,10 @@ func resourceCapabilityIoCardDescriptorRead(c context.Context, d *schema.Resourc
 		return diag.Errorf("error occurred while setting property Ancestors in CapabilityIoCardDescriptor object: %s", err.Error())
 	}
 
+	if err := d.Set("bif_port_num", (s.GetBifPortNum())); err != nil {
+		return diag.Errorf("error occurred while setting property BifPortNum in CapabilityIoCardDescriptor object: %s", err.Error())
+	}
+
 	if err := d.Set("capabilities", flattenListCapabilityCapabilityRelationship(s.GetCapabilities(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property Capabilities in CapabilityIoCardDescriptor object: %s", err.Error())
 	}
@@ -707,6 +754,10 @@ func resourceCapabilityIoCardDescriptorRead(c context.Context, d *schema.Resourc
 
 	if err := d.Set("domain_group_moid", (s.GetDomainGroupMoid())); err != nil {
 		return diag.Errorf("error occurred while setting property DomainGroupMoid in CapabilityIoCardDescriptor object: %s", err.Error())
+	}
+
+	if err := d.Set("is_ucsx_direct_io_card", (s.GetIsUcsxDirectIoCard())); err != nil {
+		return diag.Errorf("error occurred while setting property IsUcsxDirectIoCard in CapabilityIoCardDescriptor object: %s", err.Error())
 	}
 
 	if err := d.Set("mod_time", (s.GetModTime()).String()); err != nil {
@@ -765,6 +816,10 @@ func resourceCapabilityIoCardDescriptorRead(c context.Context, d *schema.Resourc
 		return diag.Errorf("error occurred while setting property UifConnectivity in CapabilityIoCardDescriptor object: %s", err.Error())
 	}
 
+	if err := d.Set("unsupported_policies", (s.GetUnsupportedPolicies())); err != nil {
+		return diag.Errorf("error occurred while setting property UnsupportedPolicies in CapabilityIoCardDescriptor object: %s", err.Error())
+	}
+
 	if err := d.Set("vendor", (s.GetVendor())); err != nil {
 		return diag.Errorf("error occurred while setting property Vendor in CapabilityIoCardDescriptor object: %s", err.Error())
 	}
@@ -796,6 +851,12 @@ func resourceCapabilityIoCardDescriptorUpdate(c context.Context, d *schema.Resou
 		if err == nil && x1 != nil {
 			o.AdditionalProperties = x1.(map[string]interface{})
 		}
+	}
+
+	if d.HasChange("bif_port_num") {
+		v := d.Get("bif_port_num")
+		x := int64(v.(int))
+		o.SetBifPortNum(x)
 	}
 
 	if d.HasChange("capabilities") {
@@ -845,6 +906,12 @@ func resourceCapabilityIoCardDescriptorUpdate(c context.Context, d *schema.Resou
 		v := d.Get("description")
 		x := (v.(string))
 		o.SetDescription(x)
+	}
+
+	if d.HasChange("is_ucsx_direct_io_card") {
+		v := d.Get("is_ucsx_direct_io_card")
+		x := (v.(bool))
+		o.SetIsUcsxDirectIoCard(x)
 	}
 
 	if d.HasChange("model") {
@@ -923,6 +990,18 @@ func resourceCapabilityIoCardDescriptorUpdate(c context.Context, d *schema.Resou
 		v := d.Get("uif_connectivity")
 		x := (v.(string))
 		o.SetUifConnectivity(x)
+	}
+
+	if d.HasChange("unsupported_policies") {
+		v := d.Get("unsupported_policies")
+		x := make([]string, 0)
+		y := reflect.ValueOf(v)
+		for i := 0; i < y.Len(); i++ {
+			if y.Index(i).Interface() != nil {
+				x = append(x, y.Index(i).Interface().(string))
+			}
+		}
+		o.SetUnsupportedPolicies(x)
 	}
 
 	if d.HasChange("vendor") {

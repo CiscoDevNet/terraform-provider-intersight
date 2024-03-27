@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "hyperflex.StartReduceReSync"]
 **ClusterMoIds** | Pointer to **[]string** |  | [optional] 
 **Operation** | Pointer to **string** | The cleanup operation to perform. * &#x60;NoOp&#x60; - Does not perform any operation when the API is called. * &#x60;StartReduceResync&#x60; - Start the execution of reduce re-sync and stale mirror cleanup for the HyperFlex clusters associated with the account. | [optional] [default to "NoOp"]
+**TargetDetails** | Pointer to [**[]HyperflexReSyncClusterMoIds**](HyperflexReSyncClusterMoIds.md) |  | [optional] 
 
 ## Methods
 
@@ -128,6 +129,41 @@ SetOperation sets Operation field to given value.
 
 HasOperation returns a boolean if a field has been set.
 
+### GetTargetDetails
+
+`func (o *HyperflexStartReduceReSync) GetTargetDetails() []HyperflexReSyncClusterMoIds`
+
+GetTargetDetails returns the TargetDetails field if non-nil, zero value otherwise.
+
+### GetTargetDetailsOk
+
+`func (o *HyperflexStartReduceReSync) GetTargetDetailsOk() (*[]HyperflexReSyncClusterMoIds, bool)`
+
+GetTargetDetailsOk returns a tuple with the TargetDetails field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTargetDetails
+
+`func (o *HyperflexStartReduceReSync) SetTargetDetails(v []HyperflexReSyncClusterMoIds)`
+
+SetTargetDetails sets TargetDetails field to given value.
+
+### HasTargetDetails
+
+`func (o *HyperflexStartReduceReSync) HasTargetDetails() bool`
+
+HasTargetDetails returns a boolean if a field has been set.
+
+### SetTargetDetailsNil
+
+`func (o *HyperflexStartReduceReSync) SetTargetDetailsNil(b bool)`
+
+ SetTargetDetailsNil sets the value for TargetDetails to be an explicit nil
+
+### UnsetTargetDetails
+`func (o *HyperflexStartReduceReSync) UnsetTargetDetails()`
+
+UnsetTargetDetails ensures that no value is present for TargetDetails, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-14968
+API version: 1.0.11-15711
 Contact: intersight@cisco.com
 */
 
@@ -34,9 +34,11 @@ type VirtualizationVmwareHostAllOf struct {
 	// True if SSH is enabled in the host, false otherwise.
 	IsSshEnabled *bool `json:"IsSshEnabled,omitempty"`
 	// The count of all network adapters attached to this host.
-	NetworkAdapterCount *int64                                          `json:"NetworkAdapterCount,omitempty"`
-	NtpServers          []string                                        `json:"NtpServers,omitempty"`
-	ResourceConsumed    NullableVirtualizationVmwareResourceConsumption `json:"ResourceConsumed,omitempty"`
+	NetworkAdapterCount *int64   `json:"NetworkAdapterCount,omitempty"`
+	NtpServers          []string `json:"NtpServers,omitempty"`
+	// Indicates if the host is in quarantine mode. Will be set to True, when in quarantine mode.
+	QuarantineMode   *bool                                           `json:"QuarantineMode,omitempty"`
+	ResourceConsumed NullableVirtualizationVmwareResourceConsumption `json:"ResourceConsumed,omitempty"`
 	// The count of all storage adapters attached to this host.
 	StorageAdapterCount *int64 `json:"StorageAdapterCount,omitempty"`
 	// Time zone this host is in.
@@ -389,6 +391,38 @@ func (o *VirtualizationVmwareHostAllOf) HasNtpServers() bool {
 // SetNtpServers gets a reference to the given []string and assigns it to the NtpServers field.
 func (o *VirtualizationVmwareHostAllOf) SetNtpServers(v []string) {
 	o.NtpServers = v
+}
+
+// GetQuarantineMode returns the QuarantineMode field value if set, zero value otherwise.
+func (o *VirtualizationVmwareHostAllOf) GetQuarantineMode() bool {
+	if o == nil || o.QuarantineMode == nil {
+		var ret bool
+		return ret
+	}
+	return *o.QuarantineMode
+}
+
+// GetQuarantineModeOk returns a tuple with the QuarantineMode field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *VirtualizationVmwareHostAllOf) GetQuarantineModeOk() (*bool, bool) {
+	if o == nil || o.QuarantineMode == nil {
+		return nil, false
+	}
+	return o.QuarantineMode, true
+}
+
+// HasQuarantineMode returns a boolean if a field has been set.
+func (o *VirtualizationVmwareHostAllOf) HasQuarantineMode() bool {
+	if o != nil && o.QuarantineMode != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetQuarantineMode gets a reference to the given bool and assigns it to the QuarantineMode field.
+func (o *VirtualizationVmwareHostAllOf) SetQuarantineMode(v bool) {
+	o.QuarantineMode = &v
 }
 
 // GetResourceConsumed returns the ResourceConsumed field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -789,6 +823,9 @@ func (o VirtualizationVmwareHostAllOf) MarshalJSON() ([]byte, error) {
 	if o.NtpServers != nil {
 		toSerialize["NtpServers"] = o.NtpServers
 	}
+	if o.QuarantineMode != nil {
+		toSerialize["QuarantineMode"] = o.QuarantineMode
+	}
 	if o.ResourceConsumed.IsSet() {
 		toSerialize["ResourceConsumed"] = o.ResourceConsumed.Get()
 	}
@@ -850,6 +887,7 @@ func (o *VirtualizationVmwareHostAllOf) UnmarshalJSON(bytes []byte) (err error) 
 		delete(additionalProperties, "IsSshEnabled")
 		delete(additionalProperties, "NetworkAdapterCount")
 		delete(additionalProperties, "NtpServers")
+		delete(additionalProperties, "QuarantineMode")
 		delete(additionalProperties, "ResourceConsumed")
 		delete(additionalProperties, "StorageAdapterCount")
 		delete(additionalProperties, "TimeZone")

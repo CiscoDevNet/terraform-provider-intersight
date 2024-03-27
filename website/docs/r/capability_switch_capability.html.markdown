@@ -44,6 +44,7 @@ This complex property has following sub-properties:
   + `start_port_id`:(int) Starting Port ID in this range of ports. 
   + `start_slot_id`:(int) Starting Slot ID in this range of ports. 
 * `fc_uplink_ports_auto_negotiation_supported`:(bool)(ReadOnly) Fc Uplink ports auto negotiation speed support on this switch. 
+* `imm_controls_vpcompression`:(bool)(ReadOnly) VlanPort Compression is controlled by IMM. 
 * `locator_beacon_supported`:(bool)(ReadOnly) Locator Beacon LED support on this switch. 
 * `max_ports`:(int)(ReadOnly) Maximum allowed physical ports on this switch. 
 * `max_slots`:(int)(ReadOnly) Maximum allowed physical slots on this switch. 

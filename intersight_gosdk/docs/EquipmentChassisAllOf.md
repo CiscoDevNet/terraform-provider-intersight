@@ -11,19 +11,20 @@ Name | Type | Description | Notes
 **ConnectionPath** | Pointer to **string** | This field identifies the connectivity path for the chassis enclosure. | [optional] [readonly] 
 **ConnectionStatus** | Pointer to **string** | This field identifies the connectivity status for the chassis enclosure. | [optional] [readonly] 
 **Description** | Pointer to **string** | This field is to provide description for chassis model. | [optional] [readonly] 
-**FaultSummary** | Pointer to **int64** | This field summarizes the faults on the chassis enclosure. | [optional] 
+**FaultSummary** | Pointer to **int64** | This field summarizes the faults on the chassis enclosure. | [optional] [readonly] 
 **ManagementMode** | Pointer to **string** | The management mode of the blade server chassis. * &#x60;IntersightStandalone&#x60; - Intersight Standalone mode of operation. * &#x60;UCSM&#x60; - Unified Computing System Manager mode of operation. * &#x60;Intersight&#x60; - Intersight managed mode of operation. | [optional] [readonly] [default to "IntersightStandalone"]
 **Name** | Pointer to **string** | This field identifies the name for the chassis enclosure. | [optional] [readonly] 
 **OperReason** | Pointer to **[]string** |  | [optional] 
 **OperState** | Pointer to **string** | This field identifies the Chassis Operational State. | [optional] [readonly] 
 **PartNumber** | Pointer to **string** | Part Number identifier for the chassis enclosure. | [optional] [readonly] 
 **Pid** | Pointer to **string** | This field identifies the Product ID for the chassis enclosure. | [optional] [readonly] 
-**PlatformType** | Pointer to **string** | The platform type that the chassis is a part of. | [optional] 
+**PlatformType** | Pointer to **string** | The platform type that the chassis is a part of. | [optional] [readonly] 
 **ProductName** | Pointer to **string** | This field identifies the Product Name for the chassis enclosure. | [optional] [readonly] 
 **Sku** | Pointer to **string** | This field identifies the Stock Keeping Unit for the chassis enclosure. | [optional] [readonly] 
+**UserLabel** | Pointer to **string** | The user defined label assigned to the chassis. | [optional] 
 **Vid** | Pointer to **string** | This field identifies the Vendor ID for the chassis enclosure. | [optional] [readonly] 
 **Blades** | Pointer to [**[]ComputeBladeRelationship**](ComputeBladeRelationship.md) | An array of relationships to computeBlade resources. | [optional] [readonly] 
-**ExpanderModules** | Pointer to [**[]EquipmentExpanderModuleRelationship**](EquipmentExpanderModuleRelationship.md) | An array of relationships to equipmentExpanderModule resources. | [optional] 
+**ExpanderModules** | Pointer to [**[]EquipmentExpanderModuleRelationship**](EquipmentExpanderModuleRelationship.md) | An array of relationships to equipmentExpanderModule resources. | [optional] [readonly] 
 **FanControl** | Pointer to [**EquipmentFanControlRelationship**](EquipmentFanControlRelationship.md) |  | [optional] 
 **Fanmodules** | Pointer to [**[]EquipmentFanModuleRelationship**](EquipmentFanModuleRelationship.md) | An array of relationships to equipmentFanModule resources. | [optional] [readonly] 
 **InventoryDeviceInfo** | Pointer to [**InventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
@@ -37,7 +38,7 @@ Name | Type | Description | Notes
 **Sasexpanders** | Pointer to [**[]StorageSasExpanderRelationship**](StorageSasExpanderRelationship.md) | An array of relationships to storageSasExpander resources. | [optional] [readonly] 
 **Siocs** | Pointer to [**[]EquipmentSystemIoControllerRelationship**](EquipmentSystemIoControllerRelationship.md) | An array of relationships to equipmentSystemIoController resources. | [optional] [readonly] 
 **StorageEnclosures** | Pointer to [**[]StorageEnclosureRelationship**](StorageEnclosureRelationship.md) | An array of relationships to storageEnclosure resources. | [optional] [readonly] 
-**VirtualDriveContainer** | Pointer to [**[]StorageVirtualDriveContainerRelationship**](StorageVirtualDriveContainerRelationship.md) | An array of relationships to storageVirtualDriveContainer resources. | [optional] 
+**VirtualDriveContainer** | Pointer to [**[]StorageVirtualDriveContainerRelationship**](StorageVirtualDriveContainerRelationship.md) | An array of relationships to storageVirtualDriveContainer resources. | [optional] [readonly] 
 
 ## Methods
 
@@ -492,6 +493,31 @@ SetSku sets Sku field to given value.
 `func (o *EquipmentChassisAllOf) HasSku() bool`
 
 HasSku returns a boolean if a field has been set.
+
+### GetUserLabel
+
+`func (o *EquipmentChassisAllOf) GetUserLabel() string`
+
+GetUserLabel returns the UserLabel field if non-nil, zero value otherwise.
+
+### GetUserLabelOk
+
+`func (o *EquipmentChassisAllOf) GetUserLabelOk() (*string, bool)`
+
+GetUserLabelOk returns a tuple with the UserLabel field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUserLabel
+
+`func (o *EquipmentChassisAllOf) SetUserLabel(v string)`
+
+SetUserLabel sets UserLabel field to given value.
+
+### HasUserLabel
+
+`func (o *EquipmentChassisAllOf) HasUserLabel() bool`
+
+HasUserLabel returns a boolean if a field has been set.
 
 ### GetVid
 

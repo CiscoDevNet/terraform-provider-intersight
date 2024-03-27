@@ -27,7 +27,7 @@ func getNetworkElementSummarySchema() map[string]*schema.Schema {
 			DiffSuppressFunc: SuppressDiffAdditionProps,
 		},
 		"admin_evac_state": {
-			Description: "Administratively configured state of Fabric Evacuation feature, for this switch.",
+			Description: "Administratively configured state of Fabric Evacuation feature, for this switch.\n* `` - Evacuation state of the switch is unknown.\n* `enabled` - Evacuation state of the switch is enabled.\n* `disabled` - Evacuation state of the switch is disabled.\n* `applying` - Evacuation state of the switch when evacuation is in progress.\n* `on` - Evacuation state of the switch is enabled.\n* `off` - Evacuation state of the switch is disabled.\n* `N/A` - Evacuation state of the switch is not applicable.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -230,6 +230,11 @@ func getNetworkElementSummarySchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"fpga_upgrade_needed": {
+			Description: "The flag to check vulnerability with secure boot technology.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
 		"inband_ip_address": {
 			Description: "The IP address of the network Element inband management interface.",
 			Type:        schema.TypeString,
@@ -331,7 +336,7 @@ func getNetworkElementSummarySchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"oper_evac_state": {
-			Description: "Operational state of the Fabric Evacuation feature, for this switch.",
+			Description: "Operational state of the Fabric Evacuation feature, for this switch.\n* `` - Evacuation state of the switch is unknown.\n* `enabled` - Evacuation state of the switch is enabled.\n* `disabled` - Evacuation state of the switch is disabled.\n* `applying` - Evacuation state of the switch when evacuation is in progress.\n* `on` - Evacuation state of the switch is enabled.\n* `off` - Evacuation state of the switch is disabled.\n* `N/A` - Evacuation state of the switch is not applicable.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -433,6 +438,11 @@ func getNetworkElementSummarySchema() map[string]*schema.Schema {
 		"part_number": {
 			Description: "Part number of the switch.",
 			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"peer_firmware_out_of_sync": {
+			Description: "The flag to indicate the firmware of peer Fabric Interconnect is out of sync.",
+			Type:        schema.TypeBool,
 			Optional:    true,
 		},
 		"permission_resources": {
@@ -549,6 +559,11 @@ func getNetworkElementSummarySchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"switch_profile_name": {
+			Description: "The name of switch profile associated with the switch.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"switch_type": {
 			Description: "The Switch type that the network element is a part of.\n* `FabricInterconnect` - The default Switch type of UCSM and IMM mode devices.\n* `NexusDevice` - Switch type of Nexus devices.\n* `MDSDevice` - Switch type of Nexus MDS devices.",
 			Type:        schema.TypeString,
@@ -590,6 +605,11 @@ func getNetworkElementSummarySchema() map[string]*schema.Schema {
 		"total_memory": {
 			Description: "Total available memory on this switch platform.",
 			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"user_label": {
+			Description: "The user defined label assigned to the switch.",
+			Type:        schema.TypeString,
 			Optional:    true,
 		},
 		"vendor": {
@@ -927,6 +947,11 @@ func dataSourceNetworkElementSummaryRead(c context.Context, d *schema.ResourceDa
 		o.SetFirmwareVersion(x)
 	}
 
+	if v, ok := d.GetOkExists("fpga_upgrade_needed"); ok {
+		x := (v.(bool))
+		o.SetFpgaUpgradeNeeded(x)
+	}
+
 	if v, ok := d.GetOk("inband_ip_address"); ok {
 		x := (v.(string))
 		o.SetInbandIpAddress(x)
@@ -1146,6 +1171,11 @@ func dataSourceNetworkElementSummaryRead(c context.Context, d *schema.ResourceDa
 		o.SetPartNumber(x)
 	}
 
+	if v, ok := d.GetOkExists("peer_firmware_out_of_sync"); ok {
+		x := (v.(bool))
+		o.SetPeerFirmwareOutOfSync(x)
+	}
+
 	if v, ok := d.GetOk("permission_resources"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
@@ -1274,6 +1304,11 @@ func dataSourceNetworkElementSummaryRead(c context.Context, d *schema.ResourceDa
 		o.SetSwitchId(x)
 	}
 
+	if v, ok := d.GetOk("switch_profile_name"); ok {
+		x := (v.(string))
+		o.SetSwitchProfileName(x)
+	}
+
 	if v, ok := d.GetOk("switch_type"); ok {
 		x := (v.(string))
 		o.SetSwitchType(x)
@@ -1325,6 +1360,11 @@ func dataSourceNetworkElementSummaryRead(c context.Context, d *schema.ResourceDa
 	if v, ok := d.GetOkExists("total_memory"); ok {
 		x := int64(v.(int))
 		o.SetTotalMemory(x)
+	}
+
+	if v, ok := d.GetOk("user_label"); ok {
+		x := (v.(string))
+		o.SetUserLabel(x)
 	}
 
 	if v, ok := d.GetOk("vendor"); ok {
@@ -1474,6 +1514,7 @@ func dataSourceNetworkElementSummaryRead(c context.Context, d *schema.ResourceDa
 				temp["fc_switching_mode"] = (s.GetFcSwitchingMode())
 				temp["firmware"] = (s.GetFirmware())
 				temp["firmware_version"] = (s.GetFirmwareVersion())
+				temp["fpga_upgrade_needed"] = (s.GetFpgaUpgradeNeeded())
 				temp["inband_ip_address"] = (s.GetInbandIpAddress())
 				temp["inband_ip_gateway"] = (s.GetInbandIpGateway())
 				temp["inband_ip_mask"] = (s.GetInbandIpMask())
@@ -1511,6 +1552,7 @@ func dataSourceNetworkElementSummaryRead(c context.Context, d *schema.ResourceDa
 
 				temp["parent"] = flattenMapMoBaseMoRelationship(s.GetParent(), d)
 				temp["part_number"] = (s.GetPartNumber())
+				temp["peer_firmware_out_of_sync"] = (s.GetPeerFirmwareOutOfSync())
 
 				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
 				temp["presence"] = (s.GetPresence())
@@ -1524,12 +1566,14 @@ func dataSourceNetworkElementSummaryRead(c context.Context, d *schema.ResourceDa
 				temp["source_object_type"] = (s.GetSourceObjectType())
 				temp["status"] = (s.GetStatus())
 				temp["switch_id"] = (s.GetSwitchId())
+				temp["switch_profile_name"] = (s.GetSwitchProfileName())
 				temp["switch_type"] = (s.GetSwitchType())
 				temp["system_up_time"] = (s.GetSystemUpTime())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
 				temp["thermal"] = (s.GetThermal())
 				temp["total_memory"] = (s.GetTotalMemory())
+				temp["user_label"] = (s.GetUserLabel())
 				temp["vendor"] = (s.GetVendor())
 				temp["nr_version"] = (s.GetVersion())
 

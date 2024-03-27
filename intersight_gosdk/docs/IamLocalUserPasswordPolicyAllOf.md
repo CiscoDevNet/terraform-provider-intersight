@@ -6,6 +6,10 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "iam.LocalUserPasswordPolicy"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "iam.LocalUserPasswordPolicy"]
+**EnableLockOutForAdminUser** | Pointer to **bool** | Determines if the user lock out feature must be enabled for the local admin user. | [optional] [default to false]
+**FailedLoginTrackerWindow** | Pointer to **int64** | Seconds are tracked for consecutive incorrect login attempts. Users will be locked out if they exceed the max number of incorrect login attempts during this duration. | [optional] [default to 1800]
+**LockOutTimePeriod** | Pointer to **int64** | The time period, in seconds, during which a user account will remain locked. | [optional] [default to 900]
+**MaxFailedLoginsAllowed** | Pointer to **int64** | Users will be locked out after exceeding the max consecutive incorrect login attempts allowed within the configured time duration. | [optional] [default to 5]
 **MinCharDifference** | Pointer to **int64** | Minimum number of characters different from previous password. | [optional] [default to 0]
 **MinDaysBetweenPasswordChange** | Pointer to **int64** | Minimum Days allowed between password change. | [optional] [default to 0]
 **MinLengthPassword** | Pointer to **int64** | Minimum length of password. | [optional] [default to 8]
@@ -74,6 +78,106 @@ and a boolean to check if the value has been set.
 
 SetObjectType sets ObjectType field to given value.
 
+
+### GetEnableLockOutForAdminUser
+
+`func (o *IamLocalUserPasswordPolicyAllOf) GetEnableLockOutForAdminUser() bool`
+
+GetEnableLockOutForAdminUser returns the EnableLockOutForAdminUser field if non-nil, zero value otherwise.
+
+### GetEnableLockOutForAdminUserOk
+
+`func (o *IamLocalUserPasswordPolicyAllOf) GetEnableLockOutForAdminUserOk() (*bool, bool)`
+
+GetEnableLockOutForAdminUserOk returns a tuple with the EnableLockOutForAdminUser field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEnableLockOutForAdminUser
+
+`func (o *IamLocalUserPasswordPolicyAllOf) SetEnableLockOutForAdminUser(v bool)`
+
+SetEnableLockOutForAdminUser sets EnableLockOutForAdminUser field to given value.
+
+### HasEnableLockOutForAdminUser
+
+`func (o *IamLocalUserPasswordPolicyAllOf) HasEnableLockOutForAdminUser() bool`
+
+HasEnableLockOutForAdminUser returns a boolean if a field has been set.
+
+### GetFailedLoginTrackerWindow
+
+`func (o *IamLocalUserPasswordPolicyAllOf) GetFailedLoginTrackerWindow() int64`
+
+GetFailedLoginTrackerWindow returns the FailedLoginTrackerWindow field if non-nil, zero value otherwise.
+
+### GetFailedLoginTrackerWindowOk
+
+`func (o *IamLocalUserPasswordPolicyAllOf) GetFailedLoginTrackerWindowOk() (*int64, bool)`
+
+GetFailedLoginTrackerWindowOk returns a tuple with the FailedLoginTrackerWindow field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFailedLoginTrackerWindow
+
+`func (o *IamLocalUserPasswordPolicyAllOf) SetFailedLoginTrackerWindow(v int64)`
+
+SetFailedLoginTrackerWindow sets FailedLoginTrackerWindow field to given value.
+
+### HasFailedLoginTrackerWindow
+
+`func (o *IamLocalUserPasswordPolicyAllOf) HasFailedLoginTrackerWindow() bool`
+
+HasFailedLoginTrackerWindow returns a boolean if a field has been set.
+
+### GetLockOutTimePeriod
+
+`func (o *IamLocalUserPasswordPolicyAllOf) GetLockOutTimePeriod() int64`
+
+GetLockOutTimePeriod returns the LockOutTimePeriod field if non-nil, zero value otherwise.
+
+### GetLockOutTimePeriodOk
+
+`func (o *IamLocalUserPasswordPolicyAllOf) GetLockOutTimePeriodOk() (*int64, bool)`
+
+GetLockOutTimePeriodOk returns a tuple with the LockOutTimePeriod field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLockOutTimePeriod
+
+`func (o *IamLocalUserPasswordPolicyAllOf) SetLockOutTimePeriod(v int64)`
+
+SetLockOutTimePeriod sets LockOutTimePeriod field to given value.
+
+### HasLockOutTimePeriod
+
+`func (o *IamLocalUserPasswordPolicyAllOf) HasLockOutTimePeriod() bool`
+
+HasLockOutTimePeriod returns a boolean if a field has been set.
+
+### GetMaxFailedLoginsAllowed
+
+`func (o *IamLocalUserPasswordPolicyAllOf) GetMaxFailedLoginsAllowed() int64`
+
+GetMaxFailedLoginsAllowed returns the MaxFailedLoginsAllowed field if non-nil, zero value otherwise.
+
+### GetMaxFailedLoginsAllowedOk
+
+`func (o *IamLocalUserPasswordPolicyAllOf) GetMaxFailedLoginsAllowedOk() (*int64, bool)`
+
+GetMaxFailedLoginsAllowedOk returns a tuple with the MaxFailedLoginsAllowed field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMaxFailedLoginsAllowed
+
+`func (o *IamLocalUserPasswordPolicyAllOf) SetMaxFailedLoginsAllowed(v int64)`
+
+SetMaxFailedLoginsAllowed sets MaxFailedLoginsAllowed field to given value.
+
+### HasMaxFailedLoginsAllowed
+
+`func (o *IamLocalUserPasswordPolicyAllOf) HasMaxFailedLoginsAllowed() bool`
+
+HasMaxFailedLoginsAllowed returns a boolean if a field has been set.
 
 ### GetMinCharDifference
 

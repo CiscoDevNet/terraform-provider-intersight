@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-14968
+API version: 1.0.11-15711
 Contact: intersight@cisco.com
 */
 
@@ -24,13 +24,16 @@ type EquipmentIoCardOperation struct {
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
-	// User configured power state of the iomodule. * `None` - Placeholder default value for iom power state property. * `Reboot` - IO Module reboot state property value.
+	// User configured power state of the peer IO module. * `None` - Placeholder default value for iom power state property. * `Reboot` - IO Module reboot state property value.
+	AdminPeerPowerState *string `json:"AdminPeerPowerState,omitempty"`
+	// User configured power state of the IO module. * `None` - Placeholder default value for iom power state property. * `Reboot` - IO Module reboot state property value.
 	AdminPowerState *string `json:"AdminPowerState,omitempty"`
-	// The configured state of these settings in the target chassis. The value is any one of Applied, Applying, Failed. Applied - This state denotes that the settings are applied successfully in the target chassis iomodule. Applying - This state denotes that the settings are being applied in the target chassis iomodule. Failed - This state denotes that the settings could not be applied in the target chassis iomodule. * `None` - Nil value when no action has been triggered by the user. * `Applied` - User configured settings are in applied state. * `Applying` - User settings are being applied on the target server. * `Failed` - User configured settings could not be applied.
-	ConfigState          *string                              `json:"ConfigState,omitempty"`
-	DeviceRegistration   *AssetDeviceRegistrationRelationship `json:"DeviceRegistration,omitempty"`
-	IoCard               *EquipmentIoCardRelationship         `json:"IoCard,omitempty"`
-	AdditionalProperties map[string]interface{}
+	// The configured state of these settings in the target IO module. The value is any one of Applied, Applying, Failed. Applied - This state denotes that the settings are applied successfully in the target IO module. Applying - This state denotes that the settings are being applied in the target IO module. Failed - This state denotes that the settings could not be applied in the target IO module. * `None` - Nil value when no action has been triggered by the user. * `Applied` - User configured settings are in applied state. * `Applying` - User settings are being applied on the target server. * `Failed` - User configured settings could not be applied.
+	ConfigState           *string                              `json:"ConfigState,omitempty"`
+	IoCardOperationStatus []EquipmentIoCardOperationStatus     `json:"IoCardOperationStatus,omitempty"`
+	DeviceRegistration    *AssetDeviceRegistrationRelationship `json:"DeviceRegistration,omitempty"`
+	IoCard                *EquipmentIoCardRelationship         `json:"IoCard,omitempty"`
+	AdditionalProperties  map[string]interface{}
 }
 
 type _EquipmentIoCardOperation EquipmentIoCardOperation
@@ -43,6 +46,8 @@ func NewEquipmentIoCardOperation(classId string, objectType string) *EquipmentIo
 	this := EquipmentIoCardOperation{}
 	this.ClassId = classId
 	this.ObjectType = objectType
+	var adminPeerPowerState string = "None"
+	this.AdminPeerPowerState = &adminPeerPowerState
 	var adminPowerState string = "None"
 	this.AdminPowerState = &adminPowerState
 	return &this
@@ -57,6 +62,8 @@ func NewEquipmentIoCardOperationWithDefaults() *EquipmentIoCardOperation {
 	this.ClassId = classId
 	var objectType string = "equipment.IoCardOperation"
 	this.ObjectType = objectType
+	var adminPeerPowerState string = "None"
+	this.AdminPeerPowerState = &adminPeerPowerState
 	var adminPowerState string = "None"
 	this.AdminPowerState = &adminPowerState
 	return &this
@@ -108,6 +115,38 @@ func (o *EquipmentIoCardOperation) GetObjectTypeOk() (*string, bool) {
 // SetObjectType sets field value
 func (o *EquipmentIoCardOperation) SetObjectType(v string) {
 	o.ObjectType = v
+}
+
+// GetAdminPeerPowerState returns the AdminPeerPowerState field value if set, zero value otherwise.
+func (o *EquipmentIoCardOperation) GetAdminPeerPowerState() string {
+	if o == nil || o.AdminPeerPowerState == nil {
+		var ret string
+		return ret
+	}
+	return *o.AdminPeerPowerState
+}
+
+// GetAdminPeerPowerStateOk returns a tuple with the AdminPeerPowerState field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *EquipmentIoCardOperation) GetAdminPeerPowerStateOk() (*string, bool) {
+	if o == nil || o.AdminPeerPowerState == nil {
+		return nil, false
+	}
+	return o.AdminPeerPowerState, true
+}
+
+// HasAdminPeerPowerState returns a boolean if a field has been set.
+func (o *EquipmentIoCardOperation) HasAdminPeerPowerState() bool {
+	if o != nil && o.AdminPeerPowerState != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetAdminPeerPowerState gets a reference to the given string and assigns it to the AdminPeerPowerState field.
+func (o *EquipmentIoCardOperation) SetAdminPeerPowerState(v string) {
+	o.AdminPeerPowerState = &v
 }
 
 // GetAdminPowerState returns the AdminPowerState field value if set, zero value otherwise.
@@ -172,6 +211,39 @@ func (o *EquipmentIoCardOperation) HasConfigState() bool {
 // SetConfigState gets a reference to the given string and assigns it to the ConfigState field.
 func (o *EquipmentIoCardOperation) SetConfigState(v string) {
 	o.ConfigState = &v
+}
+
+// GetIoCardOperationStatus returns the IoCardOperationStatus field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *EquipmentIoCardOperation) GetIoCardOperationStatus() []EquipmentIoCardOperationStatus {
+	if o == nil {
+		var ret []EquipmentIoCardOperationStatus
+		return ret
+	}
+	return o.IoCardOperationStatus
+}
+
+// GetIoCardOperationStatusOk returns a tuple with the IoCardOperationStatus field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *EquipmentIoCardOperation) GetIoCardOperationStatusOk() ([]EquipmentIoCardOperationStatus, bool) {
+	if o == nil || o.IoCardOperationStatus == nil {
+		return nil, false
+	}
+	return o.IoCardOperationStatus, true
+}
+
+// HasIoCardOperationStatus returns a boolean if a field has been set.
+func (o *EquipmentIoCardOperation) HasIoCardOperationStatus() bool {
+	if o != nil && o.IoCardOperationStatus != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetIoCardOperationStatus gets a reference to the given []EquipmentIoCardOperationStatus and assigns it to the IoCardOperationStatus field.
+func (o *EquipmentIoCardOperation) SetIoCardOperationStatus(v []EquipmentIoCardOperationStatus) {
+	o.IoCardOperationStatus = v
 }
 
 // GetDeviceRegistration returns the DeviceRegistration field value if set, zero value otherwise.
@@ -254,11 +326,17 @@ func (o EquipmentIoCardOperation) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["ObjectType"] = o.ObjectType
 	}
+	if o.AdminPeerPowerState != nil {
+		toSerialize["AdminPeerPowerState"] = o.AdminPeerPowerState
+	}
 	if o.AdminPowerState != nil {
 		toSerialize["AdminPowerState"] = o.AdminPowerState
 	}
 	if o.ConfigState != nil {
 		toSerialize["ConfigState"] = o.ConfigState
+	}
+	if o.IoCardOperationStatus != nil {
+		toSerialize["IoCardOperationStatus"] = o.IoCardOperationStatus
 	}
 	if o.DeviceRegistration != nil {
 		toSerialize["DeviceRegistration"] = o.DeviceRegistration
@@ -280,12 +358,15 @@ func (o *EquipmentIoCardOperation) UnmarshalJSON(bytes []byte) (err error) {
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 		ObjectType string `json:"ObjectType"`
-		// User configured power state of the iomodule. * `None` - Placeholder default value for iom power state property. * `Reboot` - IO Module reboot state property value.
+		// User configured power state of the peer IO module. * `None` - Placeholder default value for iom power state property. * `Reboot` - IO Module reboot state property value.
+		AdminPeerPowerState *string `json:"AdminPeerPowerState,omitempty"`
+		// User configured power state of the IO module. * `None` - Placeholder default value for iom power state property. * `Reboot` - IO Module reboot state property value.
 		AdminPowerState *string `json:"AdminPowerState,omitempty"`
-		// The configured state of these settings in the target chassis. The value is any one of Applied, Applying, Failed. Applied - This state denotes that the settings are applied successfully in the target chassis iomodule. Applying - This state denotes that the settings are being applied in the target chassis iomodule. Failed - This state denotes that the settings could not be applied in the target chassis iomodule. * `None` - Nil value when no action has been triggered by the user. * `Applied` - User configured settings are in applied state. * `Applying` - User settings are being applied on the target server. * `Failed` - User configured settings could not be applied.
-		ConfigState        *string                              `json:"ConfigState,omitempty"`
-		DeviceRegistration *AssetDeviceRegistrationRelationship `json:"DeviceRegistration,omitempty"`
-		IoCard             *EquipmentIoCardRelationship         `json:"IoCard,omitempty"`
+		// The configured state of these settings in the target IO module. The value is any one of Applied, Applying, Failed. Applied - This state denotes that the settings are applied successfully in the target IO module. Applying - This state denotes that the settings are being applied in the target IO module. Failed - This state denotes that the settings could not be applied in the target IO module. * `None` - Nil value when no action has been triggered by the user. * `Applied` - User configured settings are in applied state. * `Applying` - User settings are being applied on the target server. * `Failed` - User configured settings could not be applied.
+		ConfigState           *string                              `json:"ConfigState,omitempty"`
+		IoCardOperationStatus []EquipmentIoCardOperationStatus     `json:"IoCardOperationStatus,omitempty"`
+		DeviceRegistration    *AssetDeviceRegistrationRelationship `json:"DeviceRegistration,omitempty"`
+		IoCard                *EquipmentIoCardRelationship         `json:"IoCard,omitempty"`
 	}
 
 	varEquipmentIoCardOperationWithoutEmbeddedStruct := EquipmentIoCardOperationWithoutEmbeddedStruct{}
@@ -295,8 +376,10 @@ func (o *EquipmentIoCardOperation) UnmarshalJSON(bytes []byte) (err error) {
 		varEquipmentIoCardOperation := _EquipmentIoCardOperation{}
 		varEquipmentIoCardOperation.ClassId = varEquipmentIoCardOperationWithoutEmbeddedStruct.ClassId
 		varEquipmentIoCardOperation.ObjectType = varEquipmentIoCardOperationWithoutEmbeddedStruct.ObjectType
+		varEquipmentIoCardOperation.AdminPeerPowerState = varEquipmentIoCardOperationWithoutEmbeddedStruct.AdminPeerPowerState
 		varEquipmentIoCardOperation.AdminPowerState = varEquipmentIoCardOperationWithoutEmbeddedStruct.AdminPowerState
 		varEquipmentIoCardOperation.ConfigState = varEquipmentIoCardOperationWithoutEmbeddedStruct.ConfigState
+		varEquipmentIoCardOperation.IoCardOperationStatus = varEquipmentIoCardOperationWithoutEmbeddedStruct.IoCardOperationStatus
 		varEquipmentIoCardOperation.DeviceRegistration = varEquipmentIoCardOperationWithoutEmbeddedStruct.DeviceRegistration
 		varEquipmentIoCardOperation.IoCard = varEquipmentIoCardOperationWithoutEmbeddedStruct.IoCard
 		*o = EquipmentIoCardOperation(varEquipmentIoCardOperation)
@@ -318,8 +401,10 @@ func (o *EquipmentIoCardOperation) UnmarshalJSON(bytes []byte) (err error) {
 	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
+		delete(additionalProperties, "AdminPeerPowerState")
 		delete(additionalProperties, "AdminPowerState")
 		delete(additionalProperties, "ConfigState")
+		delete(additionalProperties, "IoCardOperationStatus")
 		delete(additionalProperties, "DeviceRegistration")
 		delete(additionalProperties, "IoCard")
 

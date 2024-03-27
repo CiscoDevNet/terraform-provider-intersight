@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-14968
+API version: 1.0.11-15711
 Contact: intersight@cisco.com
 */
 
@@ -36,6 +36,8 @@ type ComputeServerSettingAllOf struct {
 	ConfigState *string `json:"ConfigState,omitempty"`
 	// The allowed actions on the Front Panel Lock. * `None` - Front Panel of the server is set to None state. It is required so that the next frontPanelLockState operation can be triggered. * `Lock` - Front Panel of the server is set to Locked state. * `Unlock` - Front Panel of the server is set to Unlocked state.
 	FrontPanelLockState *string `json:"FrontPanelLockState,omitempty"`
+	// The JSON formatted host initialization configuration containing the basic information for doing an initial boot. The information will be sent to CIMC and stored in host-init.json file on the server. The stored file can only be access using IPMI tool on the host OS.
+	HostInitConfiguration *string `json:"HostInitConfiguration,omitempty"`
 	// The allowed actions on the vKVM Reset. * `Ready` - Reset vKVM operation is allowed to be done on the server in this state. * `Reset` - The value that the UI/API needs to provide to trigger a Reset vKVM operation on a server.
 	KvmReset *string `json:"KvmReset,omitempty"`
 	// The property used to identify the name of the server it is associated with.
@@ -43,10 +45,12 @@ type ComputeServerSettingAllOf struct {
 	// The name of the device chosen by user for configuring One-Time Boot device.
 	OneTimeBootDevice             *string                                      `json:"OneTimeBootDevice,omitempty"`
 	PersistentMemoryOperation     NullableComputePersistentMemoryOperation     `json:"PersistentMemoryOperation,omitempty"`
+	PersonalitySetting            NullableComputePersonalitySetting            `json:"PersonalitySetting,omitempty"`
 	ServerConfig                  NullableComputeServerConfig                  `json:"ServerConfig,omitempty"`
 	ServerOpStatus                []ComputeServerOpStatus                      `json:"ServerOpStatus,omitempty"`
 	StorageControllerOperation    NullableComputeStorageControllerOperation    `json:"StorageControllerOperation,omitempty"`
 	StoragePhysicalDriveOperation NullableComputeStoragePhysicalDriveOperation `json:"StoragePhysicalDriveOperation,omitempty"`
+	StorageUtilityImageOperation  NullableComputeStorageUtilityImageOperation  `json:"StorageUtilityImageOperation,omitempty"`
 	StorageVirtualDriveOperation  NullableComputeStorageVirtualDriveOperation  `json:"StorageVirtualDriveOperation,omitempty"`
 	// Clear the configuration of TPM chip in the server. * `None` - Perform no action on the TPM. * `ClearTpm` - Clear the configuration and restore factory defaults of TPM chip in the server.
 	TpmReset *string `json:"TpmReset,omitempty"`
@@ -435,6 +439,38 @@ func (o *ComputeServerSettingAllOf) SetFrontPanelLockState(v string) {
 	o.FrontPanelLockState = &v
 }
 
+// GetHostInitConfiguration returns the HostInitConfiguration field value if set, zero value otherwise.
+func (o *ComputeServerSettingAllOf) GetHostInitConfiguration() string {
+	if o == nil || o.HostInitConfiguration == nil {
+		var ret string
+		return ret
+	}
+	return *o.HostInitConfiguration
+}
+
+// GetHostInitConfigurationOk returns a tuple with the HostInitConfiguration field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ComputeServerSettingAllOf) GetHostInitConfigurationOk() (*string, bool) {
+	if o == nil || o.HostInitConfiguration == nil {
+		return nil, false
+	}
+	return o.HostInitConfiguration, true
+}
+
+// HasHostInitConfiguration returns a boolean if a field has been set.
+func (o *ComputeServerSettingAllOf) HasHostInitConfiguration() bool {
+	if o != nil && o.HostInitConfiguration != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetHostInitConfiguration gets a reference to the given string and assigns it to the HostInitConfiguration field.
+func (o *ComputeServerSettingAllOf) SetHostInitConfiguration(v string) {
+	o.HostInitConfiguration = &v
+}
+
 // GetKvmReset returns the KvmReset field value if set, zero value otherwise.
 func (o *ComputeServerSettingAllOf) GetKvmReset() string {
 	if o == nil || o.KvmReset == nil {
@@ -572,6 +608,49 @@ func (o *ComputeServerSettingAllOf) SetPersistentMemoryOperationNil() {
 // UnsetPersistentMemoryOperation ensures that no value is present for PersistentMemoryOperation, not even an explicit nil
 func (o *ComputeServerSettingAllOf) UnsetPersistentMemoryOperation() {
 	o.PersistentMemoryOperation.Unset()
+}
+
+// GetPersonalitySetting returns the PersonalitySetting field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ComputeServerSettingAllOf) GetPersonalitySetting() ComputePersonalitySetting {
+	if o == nil || o.PersonalitySetting.Get() == nil {
+		var ret ComputePersonalitySetting
+		return ret
+	}
+	return *o.PersonalitySetting.Get()
+}
+
+// GetPersonalitySettingOk returns a tuple with the PersonalitySetting field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ComputeServerSettingAllOf) GetPersonalitySettingOk() (*ComputePersonalitySetting, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.PersonalitySetting.Get(), o.PersonalitySetting.IsSet()
+}
+
+// HasPersonalitySetting returns a boolean if a field has been set.
+func (o *ComputeServerSettingAllOf) HasPersonalitySetting() bool {
+	if o != nil && o.PersonalitySetting.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetPersonalitySetting gets a reference to the given NullableComputePersonalitySetting and assigns it to the PersonalitySetting field.
+func (o *ComputeServerSettingAllOf) SetPersonalitySetting(v ComputePersonalitySetting) {
+	o.PersonalitySetting.Set(&v)
+}
+
+// SetPersonalitySettingNil sets the value for PersonalitySetting to be an explicit nil
+func (o *ComputeServerSettingAllOf) SetPersonalitySettingNil() {
+	o.PersonalitySetting.Set(nil)
+}
+
+// UnsetPersonalitySetting ensures that no value is present for PersonalitySetting, not even an explicit nil
+func (o *ComputeServerSettingAllOf) UnsetPersonalitySetting() {
+	o.PersonalitySetting.Unset()
 }
 
 // GetServerConfig returns the ServerConfig field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -734,6 +813,49 @@ func (o *ComputeServerSettingAllOf) SetStoragePhysicalDriveOperationNil() {
 // UnsetStoragePhysicalDriveOperation ensures that no value is present for StoragePhysicalDriveOperation, not even an explicit nil
 func (o *ComputeServerSettingAllOf) UnsetStoragePhysicalDriveOperation() {
 	o.StoragePhysicalDriveOperation.Unset()
+}
+
+// GetStorageUtilityImageOperation returns the StorageUtilityImageOperation field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ComputeServerSettingAllOf) GetStorageUtilityImageOperation() ComputeStorageUtilityImageOperation {
+	if o == nil || o.StorageUtilityImageOperation.Get() == nil {
+		var ret ComputeStorageUtilityImageOperation
+		return ret
+	}
+	return *o.StorageUtilityImageOperation.Get()
+}
+
+// GetStorageUtilityImageOperationOk returns a tuple with the StorageUtilityImageOperation field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ComputeServerSettingAllOf) GetStorageUtilityImageOperationOk() (*ComputeStorageUtilityImageOperation, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.StorageUtilityImageOperation.Get(), o.StorageUtilityImageOperation.IsSet()
+}
+
+// HasStorageUtilityImageOperation returns a boolean if a field has been set.
+func (o *ComputeServerSettingAllOf) HasStorageUtilityImageOperation() bool {
+	if o != nil && o.StorageUtilityImageOperation.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetStorageUtilityImageOperation gets a reference to the given NullableComputeStorageUtilityImageOperation and assigns it to the StorageUtilityImageOperation field.
+func (o *ComputeServerSettingAllOf) SetStorageUtilityImageOperation(v ComputeStorageUtilityImageOperation) {
+	o.StorageUtilityImageOperation.Set(&v)
+}
+
+// SetStorageUtilityImageOperationNil sets the value for StorageUtilityImageOperation to be an explicit nil
+func (o *ComputeServerSettingAllOf) SetStorageUtilityImageOperationNil() {
+	o.StorageUtilityImageOperation.Set(nil)
+}
+
+// UnsetStorageUtilityImageOperation ensures that no value is present for StorageUtilityImageOperation, not even an explicit nil
+func (o *ComputeServerSettingAllOf) UnsetStorageUtilityImageOperation() {
+	o.StorageUtilityImageOperation.Unset()
 }
 
 // GetStorageVirtualDriveOperation returns the StorageVirtualDriveOperation field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -1003,6 +1125,9 @@ func (o ComputeServerSettingAllOf) MarshalJSON() ([]byte, error) {
 	if o.FrontPanelLockState != nil {
 		toSerialize["FrontPanelLockState"] = o.FrontPanelLockState
 	}
+	if o.HostInitConfiguration != nil {
+		toSerialize["HostInitConfiguration"] = o.HostInitConfiguration
+	}
 	if o.KvmReset != nil {
 		toSerialize["KvmReset"] = o.KvmReset
 	}
@@ -1015,6 +1140,9 @@ func (o ComputeServerSettingAllOf) MarshalJSON() ([]byte, error) {
 	if o.PersistentMemoryOperation.IsSet() {
 		toSerialize["PersistentMemoryOperation"] = o.PersistentMemoryOperation.Get()
 	}
+	if o.PersonalitySetting.IsSet() {
+		toSerialize["PersonalitySetting"] = o.PersonalitySetting.Get()
+	}
 	if o.ServerConfig.IsSet() {
 		toSerialize["ServerConfig"] = o.ServerConfig.Get()
 	}
@@ -1026,6 +1154,9 @@ func (o ComputeServerSettingAllOf) MarshalJSON() ([]byte, error) {
 	}
 	if o.StoragePhysicalDriveOperation.IsSet() {
 		toSerialize["StoragePhysicalDriveOperation"] = o.StoragePhysicalDriveOperation.Get()
+	}
+	if o.StorageUtilityImageOperation.IsSet() {
+		toSerialize["StorageUtilityImageOperation"] = o.StorageUtilityImageOperation.Get()
 	}
 	if o.StorageVirtualDriveOperation.IsSet() {
 		toSerialize["StorageVirtualDriveOperation"] = o.StorageVirtualDriveOperation.Get()
@@ -1076,14 +1207,17 @@ func (o *ComputeServerSettingAllOf) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "CollectSel")
 		delete(additionalProperties, "ConfigState")
 		delete(additionalProperties, "FrontPanelLockState")
+		delete(additionalProperties, "HostInitConfiguration")
 		delete(additionalProperties, "KvmReset")
 		delete(additionalProperties, "Name")
 		delete(additionalProperties, "OneTimeBootDevice")
 		delete(additionalProperties, "PersistentMemoryOperation")
+		delete(additionalProperties, "PersonalitySetting")
 		delete(additionalProperties, "ServerConfig")
 		delete(additionalProperties, "ServerOpStatus")
 		delete(additionalProperties, "StorageControllerOperation")
 		delete(additionalProperties, "StoragePhysicalDriveOperation")
+		delete(additionalProperties, "StorageUtilityImageOperation")
 		delete(additionalProperties, "StorageVirtualDriveOperation")
 		delete(additionalProperties, "TpmReset")
 		delete(additionalProperties, "TunneledKvmState")

@@ -21,6 +21,7 @@ The following arguments can be used to get data of already created objects in In
 * `dynamic_vifs_supported`:(bool) Dynamic VIFs support on this switch. 
 * `fan_modules_supported`:(bool) Fan Modules support on this switch. 
 * `fc_uplink_ports_auto_negotiation_supported`:(bool) Fc Uplink ports auto negotiation speed support on this switch. 
+* `imm_controls_vpcompression`:(bool) VlanPort Compression is controlled by IMM. 
 * `locator_beacon_supported`:(bool) Locator Beacon LED support on this switch. 
 * `max_ports`:(int) Maximum allowed physical ports on this switch. 
 * `max_slots`:(int) Maximum allowed physical slots on this switch. 

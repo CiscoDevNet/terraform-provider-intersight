@@ -110,6 +110,11 @@ func getOsInstallSchema() map[string]*schema.Schema {
 						Optional:         true,
 						DiffSuppressFunc: SuppressDiffAdditionProps,
 					},
+					"alternate_name_servers": {
+						Type:     schema.TypeList,
+						Optional: true,
+						Elem: &schema.Schema{
+							Type: schema.TypeString}},
 					"answer_file": {
 						Description: "If the source of the answers is a static file, the content of the file is stored as value\nin this property.\nThe value is mandatory only when the 'Source' property has been set to 'File'.",
 						Type:        schema.TypeString,
@@ -883,6 +888,20 @@ func dataSourceOsInstallRead(c context.Context, d *schema.ResourceData, meta int
 					err := json.Unmarshal(x, &x1)
 					if err == nil && x1 != nil {
 						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			if v, ok := l["alternate_name_servers"]; ok {
+				{
+					x := make([]string, 0)
+					y := reflect.ValueOf(v)
+					for i := 0; i < y.Len(); i++ {
+						if y.Index(i).Interface() != nil {
+							x = append(x, y.Index(i).Interface().(string))
+						}
+					}
+					if len(x) > 0 {
+						o.SetAlternateNameServers(x)
 					}
 				}
 			}
