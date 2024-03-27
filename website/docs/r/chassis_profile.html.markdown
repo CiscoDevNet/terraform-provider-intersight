@@ -160,6 +160,7 @@ This complex property has following sub-properties:
   + `value`:(string) The string representation of a tag value. 
 * `target_platform`:(string) The platform for which the chassis profile is applicable. It can either be a chassis that is operating in standalone mode or which is attached to a Fabric Interconnect managed by Intersight.* `FIAttached` - Chassis which are connected to a Fabric Interconnect that is managed by Intersight. 
 * `type`:(string) Defines the type of the profile. Accepted values are instance or template.* `instance` - The profile defines the configuration for a specific instance of a target. 
+* `user_label`:(string) User label assigned to the chassis profile. 
 * `version_context`:(HashMap) -(ReadOnly) The versioning info for this managed object. 
 This complex property has following sub-properties:
   + `interested_mos`:(Array)

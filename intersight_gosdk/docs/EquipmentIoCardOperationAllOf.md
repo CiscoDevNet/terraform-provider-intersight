@@ -6,8 +6,10 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "equipment.IoCardOperation"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "equipment.IoCardOperation"]
-**AdminPowerState** | Pointer to **string** | User configured power state of the iomodule. * &#x60;None&#x60; - Placeholder default value for iom power state property. * &#x60;Reboot&#x60; - IO Module reboot state property value. | [optional] [default to "None"]
-**ConfigState** | Pointer to **string** | The configured state of these settings in the target chassis. The value is any one of Applied, Applying, Failed. Applied - This state denotes that the settings are applied successfully in the target chassis iomodule. Applying - This state denotes that the settings are being applied in the target chassis iomodule. Failed - This state denotes that the settings could not be applied in the target chassis iomodule. * &#x60;None&#x60; - Nil value when no action has been triggered by the user. * &#x60;Applied&#x60; - User configured settings are in applied state. * &#x60;Applying&#x60; - User settings are being applied on the target server. * &#x60;Failed&#x60; - User configured settings could not be applied. | [optional] [readonly] [default to "None"]
+**AdminPeerPowerState** | Pointer to **string** | User configured power state of the peer IO module. * &#x60;None&#x60; - Placeholder default value for iom power state property. * &#x60;Reboot&#x60; - IO Module reboot state property value. | [optional] [default to "None"]
+**AdminPowerState** | Pointer to **string** | User configured power state of the IO module. * &#x60;None&#x60; - Placeholder default value for iom power state property. * &#x60;Reboot&#x60; - IO Module reboot state property value. | [optional] [default to "None"]
+**ConfigState** | Pointer to **string** | The configured state of these settings in the target IO module. The value is any one of Applied, Applying, Failed. Applied - This state denotes that the settings are applied successfully in the target IO module. Applying - This state denotes that the settings are being applied in the target IO module. Failed - This state denotes that the settings could not be applied in the target IO module. * &#x60;None&#x60; - Nil value when no action has been triggered by the user. * &#x60;Applied&#x60; - User configured settings are in applied state. * &#x60;Applying&#x60; - User settings are being applied on the target server. * &#x60;Failed&#x60; - User configured settings could not be applied. | [optional] [readonly] [default to "None"]
+**IoCardOperationStatus** | Pointer to [**[]EquipmentIoCardOperationStatus**](EquipmentIoCardOperationStatus.md) |  | [optional] 
 **DeviceRegistration** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 **IoCard** | Pointer to [**EquipmentIoCardRelationship**](EquipmentIoCardRelationship.md) |  | [optional] 
 
@@ -70,6 +72,31 @@ and a boolean to check if the value has been set.
 SetObjectType sets ObjectType field to given value.
 
 
+### GetAdminPeerPowerState
+
+`func (o *EquipmentIoCardOperationAllOf) GetAdminPeerPowerState() string`
+
+GetAdminPeerPowerState returns the AdminPeerPowerState field if non-nil, zero value otherwise.
+
+### GetAdminPeerPowerStateOk
+
+`func (o *EquipmentIoCardOperationAllOf) GetAdminPeerPowerStateOk() (*string, bool)`
+
+GetAdminPeerPowerStateOk returns a tuple with the AdminPeerPowerState field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAdminPeerPowerState
+
+`func (o *EquipmentIoCardOperationAllOf) SetAdminPeerPowerState(v string)`
+
+SetAdminPeerPowerState sets AdminPeerPowerState field to given value.
+
+### HasAdminPeerPowerState
+
+`func (o *EquipmentIoCardOperationAllOf) HasAdminPeerPowerState() bool`
+
+HasAdminPeerPowerState returns a boolean if a field has been set.
+
 ### GetAdminPowerState
 
 `func (o *EquipmentIoCardOperationAllOf) GetAdminPowerState() string`
@@ -120,6 +147,41 @@ SetConfigState sets ConfigState field to given value.
 
 HasConfigState returns a boolean if a field has been set.
 
+### GetIoCardOperationStatus
+
+`func (o *EquipmentIoCardOperationAllOf) GetIoCardOperationStatus() []EquipmentIoCardOperationStatus`
+
+GetIoCardOperationStatus returns the IoCardOperationStatus field if non-nil, zero value otherwise.
+
+### GetIoCardOperationStatusOk
+
+`func (o *EquipmentIoCardOperationAllOf) GetIoCardOperationStatusOk() (*[]EquipmentIoCardOperationStatus, bool)`
+
+GetIoCardOperationStatusOk returns a tuple with the IoCardOperationStatus field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIoCardOperationStatus
+
+`func (o *EquipmentIoCardOperationAllOf) SetIoCardOperationStatus(v []EquipmentIoCardOperationStatus)`
+
+SetIoCardOperationStatus sets IoCardOperationStatus field to given value.
+
+### HasIoCardOperationStatus
+
+`func (o *EquipmentIoCardOperationAllOf) HasIoCardOperationStatus() bool`
+
+HasIoCardOperationStatus returns a boolean if a field has been set.
+
+### SetIoCardOperationStatusNil
+
+`func (o *EquipmentIoCardOperationAllOf) SetIoCardOperationStatusNil(b bool)`
+
+ SetIoCardOperationStatusNil sets the value for IoCardOperationStatus to be an explicit nil
+
+### UnsetIoCardOperationStatus
+`func (o *EquipmentIoCardOperationAllOf) UnsetIoCardOperationStatus()`
+
+UnsetIoCardOperationStatus ensures that no value is present for IoCardOperationStatus, not even an explicit nil
 ### GetDeviceRegistration
 
 `func (o *EquipmentIoCardOperationAllOf) GetDeviceRegistration() AssetDeviceRegistrationRelationship`

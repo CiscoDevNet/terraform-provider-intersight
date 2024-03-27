@@ -108,6 +108,10 @@ This complex property has following sub-properties:
     + `fip_enabled`:(bool) Status of FIP protocol on the adapter interfaces. 
     + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+  + `physical_nic_mode_settings`:(HashMap) - Physical NIC Mode Settings for this adapter. 
+This complex property has following sub-properties:
+    + `enabled`:(bool) When Physical NIC Mode is enabled, up-link ports of the VIC are set to pass-through mode. This allows the host to transmit packets without any modification. When Physical NIC Mode is enabled, VLAN tagging of the packets will not happen. 
+    + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
   + `port_channel_settings`:(HashMap) - Port Channel settings for this adapter. 
 This complex property has following sub-properties:
     + `enabled`:(bool) When Port Channel is enabled, two vNICs and two vHBAs are available for use on the adapter card. When disabled, four vNICs and four vHBAs are available for use on the adapter card. Disabling port channel reboots the server. Port Channel is supported only for Cisco VIC 1455/1457 adapters. 

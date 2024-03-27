@@ -4,10 +4,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Type** | **string** | The filter type. | 
-**ExtractionFn** | Pointer to **map[string]interface{}** | All filters except the \&quot;spatial\&quot; filter support extraction functions. An extraction function is defined by setting the \&quot;extractionFn\&quot; field on a filter. See Extraction function for more details on extraction functions. If specified, the extraction function will be used to transform input values before the filter is applied. The example below shows a selector filter combined with an extraction function. This filter will transform input values according to the values defined in the lookup map; transformed values will then be matched with the string \&quot;bar_1\&quot;. | [optional] 
+**Type** | **string** |  | 
 **Dimension** | **string** | The name of a dimension. | 
 **Value** | **string** | The value of a dimension. | 
+**ExtractionFn** | Pointer to [**TelemetryDruidExtractionFunction**](TelemetryDruidExtractionFunction.md) |  | [optional] 
 
 ## Methods
 
@@ -48,31 +48,6 @@ and a boolean to check if the value has been set.
 SetType sets Type field to given value.
 
 
-### GetExtractionFn
-
-`func (o *TelemetryDruidSelectorFilter) GetExtractionFn() map[string]interface{}`
-
-GetExtractionFn returns the ExtractionFn field if non-nil, zero value otherwise.
-
-### GetExtractionFnOk
-
-`func (o *TelemetryDruidSelectorFilter) GetExtractionFnOk() (*map[string]interface{}, bool)`
-
-GetExtractionFnOk returns a tuple with the ExtractionFn field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetExtractionFn
-
-`func (o *TelemetryDruidSelectorFilter) SetExtractionFn(v map[string]interface{})`
-
-SetExtractionFn sets ExtractionFn field to given value.
-
-### HasExtractionFn
-
-`func (o *TelemetryDruidSelectorFilter) HasExtractionFn() bool`
-
-HasExtractionFn returns a boolean if a field has been set.
-
 ### GetDimension
 
 `func (o *TelemetryDruidSelectorFilter) GetDimension() string`
@@ -112,6 +87,31 @@ and a boolean to check if the value has been set.
 
 SetValue sets Value field to given value.
 
+
+### GetExtractionFn
+
+`func (o *TelemetryDruidSelectorFilter) GetExtractionFn() TelemetryDruidExtractionFunction`
+
+GetExtractionFn returns the ExtractionFn field if non-nil, zero value otherwise.
+
+### GetExtractionFnOk
+
+`func (o *TelemetryDruidSelectorFilter) GetExtractionFnOk() (*TelemetryDruidExtractionFunction, bool)`
+
+GetExtractionFnOk returns a tuple with the ExtractionFn field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetExtractionFn
+
+`func (o *TelemetryDruidSelectorFilter) SetExtractionFn(v TelemetryDruidExtractionFunction)`
+
+SetExtractionFn sets ExtractionFn field to given value.
+
+### HasExtractionFn
+
+`func (o *TelemetryDruidSelectorFilter) HasExtractionFn() bool`
+
+HasExtractionFn returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **ConfigChangeContext** | Pointer to [**NullablePolicyConfigChangeContext**](PolicyConfigChangeContext.md) |  | [optional] 
 **ConfigChanges** | Pointer to [**NullablePolicyConfigChange**](PolicyConfigChange.md) |  | [optional] 
 **TargetPlatform** | Pointer to **string** | The platform for which the chassis profile is applicable. It can either be a chassis that is operating in standalone mode or which is attached to a Fabric Interconnect managed by Intersight. * &#x60;FIAttached&#x60; - Chassis which are connected to a Fabric Interconnect that is managed by Intersight. | [optional] [default to "FIAttached"]
+**UserLabel** | Pointer to **string** | User label assigned to the chassis profile. | [optional] 
 **AssignedChassis** | Pointer to [**EquipmentChassisRelationship**](EquipmentChassisRelationship.md) |  | [optional] 
 **AssociatedChassis** | Pointer to [**EquipmentChassisRelationship**](EquipmentChassisRelationship.md) |  | [optional] 
 **ConfigChangeDetails** | Pointer to [**[]ChassisConfigChangeDetailRelationship**](ChassisConfigChangeDetailRelationship.md) | An array of relationships to chassisConfigChangeDetail resources. | [optional] [readonly] 
@@ -170,6 +171,31 @@ SetTargetPlatform sets TargetPlatform field to given value.
 `func (o *ChassisProfile) HasTargetPlatform() bool`
 
 HasTargetPlatform returns a boolean if a field has been set.
+
+### GetUserLabel
+
+`func (o *ChassisProfile) GetUserLabel() string`
+
+GetUserLabel returns the UserLabel field if non-nil, zero value otherwise.
+
+### GetUserLabelOk
+
+`func (o *ChassisProfile) GetUserLabelOk() (*string, bool)`
+
+GetUserLabelOk returns a tuple with the UserLabel field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUserLabel
+
+`func (o *ChassisProfile) SetUserLabel(v string)`
+
+SetUserLabel sets UserLabel field to given value.
+
+### HasUserLabel
+
+`func (o *ChassisProfile) HasUserLabel() bool`
+
+HasUserLabel returns a boolean if a field has been set.
 
 ### GetAssignedChassis
 

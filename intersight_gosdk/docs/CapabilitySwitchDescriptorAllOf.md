@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "capability.SwitchDescriptor"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "capability.SwitchDescriptor"]
 **ExpectedMemory** | Pointer to **int64** | The total expected memory for this hardware. | [optional] 
+**IsUcsxDirectSwitch** | Pointer to **bool** | Identifies whether Switch is part of UCSX Direct chassis. | [optional] [default to false]
 **Revision** | Pointer to **string** | Revision for the fabric interconnect. | [optional] 
 
 ## Methods
@@ -92,6 +93,31 @@ SetExpectedMemory sets ExpectedMemory field to given value.
 `func (o *CapabilitySwitchDescriptorAllOf) HasExpectedMemory() bool`
 
 HasExpectedMemory returns a boolean if a field has been set.
+
+### GetIsUcsxDirectSwitch
+
+`func (o *CapabilitySwitchDescriptorAllOf) GetIsUcsxDirectSwitch() bool`
+
+GetIsUcsxDirectSwitch returns the IsUcsxDirectSwitch field if non-nil, zero value otherwise.
+
+### GetIsUcsxDirectSwitchOk
+
+`func (o *CapabilitySwitchDescriptorAllOf) GetIsUcsxDirectSwitchOk() (*bool, bool)`
+
+GetIsUcsxDirectSwitchOk returns a tuple with the IsUcsxDirectSwitch field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsUcsxDirectSwitch
+
+`func (o *CapabilitySwitchDescriptorAllOf) SetIsUcsxDirectSwitch(v bool)`
+
+SetIsUcsxDirectSwitch sets IsUcsxDirectSwitch field to given value.
+
+### HasIsUcsxDirectSwitch
+
+`func (o *CapabilitySwitchDescriptorAllOf) HasIsUcsxDirectSwitch() bool`
+
+HasIsUcsxDirectSwitch returns a boolean if a field has been set.
 
 ### GetRevision
 

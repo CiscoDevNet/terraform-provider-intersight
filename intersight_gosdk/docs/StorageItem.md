@@ -6,14 +6,16 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "storage.Item"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "storage.Item"]
-**AlarmType** | Pointer to **string** | The alarmType of the Local storage in FI. | [optional] [readonly] 
-**Name** | Pointer to **string** | The name of the Local storage in FI. | [optional] [readonly] 
-**OperState** | Pointer to **string** | The operState of the Local storage in FI. | [optional] [readonly] 
-**Size** | Pointer to **string** | The size (MB) of the Local storage in FI. | [optional] [readonly] 
-**Used** | Pointer to **string** | The used percent of the Local storage in FI. | [optional] [readonly] 
+**AlarmType** | Pointer to **string** | The alarmType of the Local storage. | [optional] [readonly] 
+**Name** | Pointer to **string** | The name of the Local storage. | [optional] [readonly] 
+**OperState** | Pointer to **string** | The operState of the Local storage. | [optional] [readonly] 
+**Size** | Pointer to **string** | The size (MiB) of the Local storage. | [optional] [readonly] 
+**Used** | Pointer to **string** | The used percent of the Local storage. | [optional] [readonly] 
 **InventoryDeviceInfo** | Pointer to [**InventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
 **NetworkElement** | Pointer to [**NetworkElementRelationship**](NetworkElementRelationship.md) |  | [optional] 
 **RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
+**StorageControllerDrive** | Pointer to [**StorageControllerDriveRelationship**](StorageControllerDriveRelationship.md) |  | [optional] 
+**StorageFiles** | Pointer to [**[]StorageFileItemRelationship**](StorageFileItemRelationship.md) | An array of relationships to storageFileItem resources. | [optional] [readonly] 
 
 ## Methods
 
@@ -274,6 +276,66 @@ SetRegisteredDevice sets RegisteredDevice field to given value.
 
 HasRegisteredDevice returns a boolean if a field has been set.
 
+### GetStorageControllerDrive
+
+`func (o *StorageItem) GetStorageControllerDrive() StorageControllerDriveRelationship`
+
+GetStorageControllerDrive returns the StorageControllerDrive field if non-nil, zero value otherwise.
+
+### GetStorageControllerDriveOk
+
+`func (o *StorageItem) GetStorageControllerDriveOk() (*StorageControllerDriveRelationship, bool)`
+
+GetStorageControllerDriveOk returns a tuple with the StorageControllerDrive field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStorageControllerDrive
+
+`func (o *StorageItem) SetStorageControllerDrive(v StorageControllerDriveRelationship)`
+
+SetStorageControllerDrive sets StorageControllerDrive field to given value.
+
+### HasStorageControllerDrive
+
+`func (o *StorageItem) HasStorageControllerDrive() bool`
+
+HasStorageControllerDrive returns a boolean if a field has been set.
+
+### GetStorageFiles
+
+`func (o *StorageItem) GetStorageFiles() []StorageFileItemRelationship`
+
+GetStorageFiles returns the StorageFiles field if non-nil, zero value otherwise.
+
+### GetStorageFilesOk
+
+`func (o *StorageItem) GetStorageFilesOk() (*[]StorageFileItemRelationship, bool)`
+
+GetStorageFilesOk returns a tuple with the StorageFiles field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStorageFiles
+
+`func (o *StorageItem) SetStorageFiles(v []StorageFileItemRelationship)`
+
+SetStorageFiles sets StorageFiles field to given value.
+
+### HasStorageFiles
+
+`func (o *StorageItem) HasStorageFiles() bool`
+
+HasStorageFiles returns a boolean if a field has been set.
+
+### SetStorageFilesNil
+
+`func (o *StorageItem) SetStorageFilesNil(b bool)`
+
+ SetStorageFilesNil sets the value for StorageFiles to be an explicit nil
+
+### UnsetStorageFiles
+`func (o *StorageItem) UnsetStorageFiles()`
+
+UnsetStorageFiles ensures that no value is present for StorageFiles, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

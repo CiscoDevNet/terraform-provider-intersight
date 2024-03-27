@@ -47,9 +47,17 @@ This complex property has following sub-properties:
 * `create_time`:(string)(ReadOnly) The time when this managed object was created. 
 * `description`:(string) Description of the policy. 
 * `domain_group_moid`:(string)(ReadOnly) The DomainGroup ID for this managed object. 
+* `enable_block_level_subnet_config`:(bool) Enables subnet configuration at the block level. 
 * `ip_v4_blocks`:(Array)
 This complex property has following sub-properties:
   + `from`:(string) First IPv4 address of the block. 
+  + `ip_v4_config`:(HashMap) - Netmask, Gateway and DNS settings for IPv4 addresses. 
+This complex property has following sub-properties:
+    + `gateway`:(string) IP address of the default IPv4 gateway. 
+    + `netmask`:(string) A subnet mask is a 32-bit number that masks an IP address and divides the IP address into network address and host address. 
+    + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+    + `primary_dns`:(string) IP Address of the primary Domain Name System (DNS) server. 
+    + `secondary_dns`:(string) IP Address of the secondary Domain Name System (DNS) server. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
   + `size`:(int) Number of identifiers this block can hold. 
   + `to`:(string) Last IPv4 address of the block. 
@@ -63,6 +71,13 @@ This complex property has following sub-properties:
 * `ip_v6_blocks`:(Array)
 This complex property has following sub-properties:
   + `from`:(string) First IPv6 address of the block. 
+  + `ip_v6_config`:(HashMap) - Netmask, Gateway and DNS settings for IPv6 addresses. 
+This complex property has following sub-properties:
+    + `gateway`:(string) IP address of the default IPv6 gateway. 
+    + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+    + `prefix`:(int) A prefix length which masks the  IP address and divides the IP address into network address and host address. 
+    + `primary_dns`:(string) IP Address of the primary Domain Name System (DNS) server. 
+    + `secondary_dns`:(string) IP Address of the secondary Domain Name System (DNS) server. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
   + `size`:(int) Number of identifiers this block can hold. 
   + `to`:(string) Last IPv6 address of the block. 

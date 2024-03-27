@@ -83,6 +83,8 @@ This complex property has following sub-properties:
     + `value`:(JSON as string) Value for placeholder provided by user. 
   + `answers`:(HashMap) -(ReadOnly) Answers provided by user for the unattended OS installation. 
 This complex property has following sub-properties:
+    + `alternate_name_servers`:
+                (Array of schema.TypeString) -
     + `answer_file`:(string) If the source of the answers is a static file, the content of the file is stored as valuein this property.The value is mandatory only when the 'Source' property has been set to 'File'. 
     + `hostname`:(string) Hostname to be configured for the server in the OS. 
     + `ip_config_type`:(string) IP configuration type. Values are Static or Dynamic configuration of IP.In case of static IP configuration, IP address, gateway and other details needto be populated. In case of dynamic the IP configuration is obtained dynamicallyfrom DHCP.* `static` - In case of static IP configuraton, provide the details such as IP address, netmask, and gateway.* `DHCP` - In case of dynamic IP configuration, the IP address, netmask and gateway detailsare obtained from DHCP. 

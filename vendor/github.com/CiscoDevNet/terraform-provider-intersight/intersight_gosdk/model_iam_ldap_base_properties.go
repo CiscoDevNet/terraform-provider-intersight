@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-14968
+API version: 1.0.11-15711
 Contact: intersight@cisco.com
 */
 
@@ -38,6 +38,8 @@ type IamLdapBaseProperties struct {
 	EnableEncryption *bool `json:"EnableEncryption,omitempty"`
 	// If enabled, user authorization is also done at the group level for LDAP users not in the local user database.
 	EnableGroupAuthorization *bool `json:"EnableGroupAuthorization,omitempty"`
+	// If enabled, an extended search walks the chain of ancestry all the way to the root and returns all the groups and subgroups, each of those groups belong to recursively.
+	EnableNestedGroupSearch *bool `json:"EnableNestedGroupSearch,omitempty"`
 	// Criteria to identify entries in search requests.
 	Filter *string `json:"Filter,omitempty"`
 	// Groups to which an LDAP entry belongs.
@@ -65,6 +67,8 @@ func NewIamLdapBaseProperties(classId string, objectType string) *IamLdapBasePro
 	this.ObjectType = objectType
 	var bindMethod string = "LoginCredentials"
 	this.BindMethod = &bindMethod
+	var enableNestedGroupSearch bool = false
+	this.EnableNestedGroupSearch = &enableNestedGroupSearch
 	var nestedGroupSearchDepth int64 = 128
 	this.NestedGroupSearchDepth = &nestedGroupSearchDepth
 	var timeout int64 = 0
@@ -83,6 +87,8 @@ func NewIamLdapBasePropertiesWithDefaults() *IamLdapBaseProperties {
 	this.ObjectType = objectType
 	var bindMethod string = "LoginCredentials"
 	this.BindMethod = &bindMethod
+	var enableNestedGroupSearch bool = false
+	this.EnableNestedGroupSearch = &enableNestedGroupSearch
 	var nestedGroupSearchDepth int64 = 128
 	this.NestedGroupSearchDepth = &nestedGroupSearchDepth
 	var timeout int64 = 0
@@ -362,6 +368,38 @@ func (o *IamLdapBaseProperties) SetEnableGroupAuthorization(v bool) {
 	o.EnableGroupAuthorization = &v
 }
 
+// GetEnableNestedGroupSearch returns the EnableNestedGroupSearch field value if set, zero value otherwise.
+func (o *IamLdapBaseProperties) GetEnableNestedGroupSearch() bool {
+	if o == nil || o.EnableNestedGroupSearch == nil {
+		var ret bool
+		return ret
+	}
+	return *o.EnableNestedGroupSearch
+}
+
+// GetEnableNestedGroupSearchOk returns a tuple with the EnableNestedGroupSearch field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *IamLdapBaseProperties) GetEnableNestedGroupSearchOk() (*bool, bool) {
+	if o == nil || o.EnableNestedGroupSearch == nil {
+		return nil, false
+	}
+	return o.EnableNestedGroupSearch, true
+}
+
+// HasEnableNestedGroupSearch returns a boolean if a field has been set.
+func (o *IamLdapBaseProperties) HasEnableNestedGroupSearch() bool {
+	if o != nil && o.EnableNestedGroupSearch != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetEnableNestedGroupSearch gets a reference to the given bool and assigns it to the EnableNestedGroupSearch field.
+func (o *IamLdapBaseProperties) SetEnableNestedGroupSearch(v bool) {
+	o.EnableNestedGroupSearch = &v
+}
+
 // GetFilter returns the Filter field value if set, zero value otherwise.
 func (o *IamLdapBaseProperties) GetFilter() string {
 	if o == nil || o.Filter == nil {
@@ -591,6 +629,9 @@ func (o IamLdapBaseProperties) MarshalJSON() ([]byte, error) {
 	if o.EnableGroupAuthorization != nil {
 		toSerialize["EnableGroupAuthorization"] = o.EnableGroupAuthorization
 	}
+	if o.EnableNestedGroupSearch != nil {
+		toSerialize["EnableNestedGroupSearch"] = o.EnableNestedGroupSearch
+	}
 	if o.Filter != nil {
 		toSerialize["Filter"] = o.Filter
 	}
@@ -637,6 +678,8 @@ func (o *IamLdapBaseProperties) UnmarshalJSON(bytes []byte) (err error) {
 		EnableEncryption *bool `json:"EnableEncryption,omitempty"`
 		// If enabled, user authorization is also done at the group level for LDAP users not in the local user database.
 		EnableGroupAuthorization *bool `json:"EnableGroupAuthorization,omitempty"`
+		// If enabled, an extended search walks the chain of ancestry all the way to the root and returns all the groups and subgroups, each of those groups belong to recursively.
+		EnableNestedGroupSearch *bool `json:"EnableNestedGroupSearch,omitempty"`
 		// Criteria to identify entries in search requests.
 		Filter *string `json:"Filter,omitempty"`
 		// Groups to which an LDAP entry belongs.
@@ -665,6 +708,7 @@ func (o *IamLdapBaseProperties) UnmarshalJSON(bytes []byte) (err error) {
 		varIamLdapBaseProperties.Domain = varIamLdapBasePropertiesWithoutEmbeddedStruct.Domain
 		varIamLdapBaseProperties.EnableEncryption = varIamLdapBasePropertiesWithoutEmbeddedStruct.EnableEncryption
 		varIamLdapBaseProperties.EnableGroupAuthorization = varIamLdapBasePropertiesWithoutEmbeddedStruct.EnableGroupAuthorization
+		varIamLdapBaseProperties.EnableNestedGroupSearch = varIamLdapBasePropertiesWithoutEmbeddedStruct.EnableNestedGroupSearch
 		varIamLdapBaseProperties.Filter = varIamLdapBasePropertiesWithoutEmbeddedStruct.Filter
 		varIamLdapBaseProperties.GroupAttribute = varIamLdapBasePropertiesWithoutEmbeddedStruct.GroupAttribute
 		varIamLdapBaseProperties.IsPasswordSet = varIamLdapBasePropertiesWithoutEmbeddedStruct.IsPasswordSet
@@ -697,6 +741,7 @@ func (o *IamLdapBaseProperties) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "Domain")
 		delete(additionalProperties, "EnableEncryption")
 		delete(additionalProperties, "EnableGroupAuthorization")
+		delete(additionalProperties, "EnableNestedGroupSearch")
 		delete(additionalProperties, "Filter")
 		delete(additionalProperties, "GroupAttribute")
 		delete(additionalProperties, "IsPasswordSet")

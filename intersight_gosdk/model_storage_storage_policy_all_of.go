@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-14968
+API version: 1.0.11-15711
 Contact: intersight@cisco.com
 */
 
@@ -23,11 +23,15 @@ type StorageStoragePolicyAllOf struct {
 	ObjectType string `json:"ObjectType"`
 	// All unconfigured drives will move to the selected state on deployment. Newly inserted drives will move to the selected state. Select Unconfigured Good option to retain the existing configuration. Select JBOD to move the unconfigured drives to JBOD state. Select RAID0 to create a RAID0 virtual drive on each of the unconfigured drives. If JBOD is selected, unconfigured drives will move to JBOD state on host reboot. This setting is applicable only to selected set of controllers on FI attached servers. * `UnconfiguredGood` - Newly inserted drives or on reboot, drives will remain the same state. * `Jbod` - Newly inserted drives or on reboot, drives will automatically move to JBOD state if drive state was UnconfiguredGood. * `RAID0` - Newly inserted drives or on reboot, virtual drives will be created, respective drives will move to Online state.
 	DefaultDriveMode *string `json:"DefaultDriveMode,omitempty"`
+	// Only U.3 NVMe drives has to be specified, entered slots will be moved to Direct attached mode. Allowed slots are 1-4, 101-104. Allowed value is a comma or hyphen separated number range.
+	DirectAttachedNvmeSlots *string `json:"DirectAttachedNvmeSlots,omitempty"`
 	// A collection of disks that is to be used as hot spares, globally, for all the RAID groups. Allowed value is a number range separated by a comma or a hyphen.
 	GlobalHotSpares *string                             `json:"GlobalHotSpares,omitempty"`
 	M2VirtualDrive  NullableStorageM2VirtualDriveConfig `json:"M2VirtualDrive,omitempty"`
 	Raid0Drive      NullableStorageR0Drive              `json:"Raid0Drive,omitempty"`
-	// JBOD drives specified in this slot range will be encrypted. Allowed value is a comma or hyphen separated number range. Sample format is 1, 3 or 4-6, 8.
+	// Only U.3 NVMe drives has to be specified, entered slots will be moved to RAID attached mode. Allowed slots are 1-4, 101-104. Allowed value is a comma or hyphen separated number range.
+	RaidAttachedNvmeSlots *string `json:"RaidAttachedNvmeSlots,omitempty"`
+	// JBOD drives specified in this slot range will be encrypted. Allowed values are 'ALL', or a comma or hyphen separated number range. Sample format is ALL or 1, 3 or 4-6, 8. Setting the value to 'ALL' will encrypt all the unused UnconfigureGood/JBOD disks.
 	SecureJbods *string `json:"SecureJbods,omitempty"`
 	// State to which drives, not used in this policy, are to be moved. NoChange will not change the drive state. No Change must be selected if Default Drive State is set to JBOD or RAID0. * `NoChange` - Drive state will not be modified by Storage Policy. * `UnconfiguredGood` - Unconfigured good state -ready to be added in a RAID group. * `Jbod` - JBOD state where the disks start showing up to Host OS.
 	UnusedDisksState *string `json:"UnusedDisksState,omitempty"`
@@ -154,6 +158,38 @@ func (o *StorageStoragePolicyAllOf) SetDefaultDriveMode(v string) {
 	o.DefaultDriveMode = &v
 }
 
+// GetDirectAttachedNvmeSlots returns the DirectAttachedNvmeSlots field value if set, zero value otherwise.
+func (o *StorageStoragePolicyAllOf) GetDirectAttachedNvmeSlots() string {
+	if o == nil || o.DirectAttachedNvmeSlots == nil {
+		var ret string
+		return ret
+	}
+	return *o.DirectAttachedNvmeSlots
+}
+
+// GetDirectAttachedNvmeSlotsOk returns a tuple with the DirectAttachedNvmeSlots field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *StorageStoragePolicyAllOf) GetDirectAttachedNvmeSlotsOk() (*string, bool) {
+	if o == nil || o.DirectAttachedNvmeSlots == nil {
+		return nil, false
+	}
+	return o.DirectAttachedNvmeSlots, true
+}
+
+// HasDirectAttachedNvmeSlots returns a boolean if a field has been set.
+func (o *StorageStoragePolicyAllOf) HasDirectAttachedNvmeSlots() bool {
+	if o != nil && o.DirectAttachedNvmeSlots != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetDirectAttachedNvmeSlots gets a reference to the given string and assigns it to the DirectAttachedNvmeSlots field.
+func (o *StorageStoragePolicyAllOf) SetDirectAttachedNvmeSlots(v string) {
+	o.DirectAttachedNvmeSlots = &v
+}
+
 // GetGlobalHotSpares returns the GlobalHotSpares field value if set, zero value otherwise.
 func (o *StorageStoragePolicyAllOf) GetGlobalHotSpares() string {
 	if o == nil || o.GlobalHotSpares == nil {
@@ -270,6 +306,38 @@ func (o *StorageStoragePolicyAllOf) SetRaid0DriveNil() {
 // UnsetRaid0Drive ensures that no value is present for Raid0Drive, not even an explicit nil
 func (o *StorageStoragePolicyAllOf) UnsetRaid0Drive() {
 	o.Raid0Drive.Unset()
+}
+
+// GetRaidAttachedNvmeSlots returns the RaidAttachedNvmeSlots field value if set, zero value otherwise.
+func (o *StorageStoragePolicyAllOf) GetRaidAttachedNvmeSlots() string {
+	if o == nil || o.RaidAttachedNvmeSlots == nil {
+		var ret string
+		return ret
+	}
+	return *o.RaidAttachedNvmeSlots
+}
+
+// GetRaidAttachedNvmeSlotsOk returns a tuple with the RaidAttachedNvmeSlots field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *StorageStoragePolicyAllOf) GetRaidAttachedNvmeSlotsOk() (*string, bool) {
+	if o == nil || o.RaidAttachedNvmeSlots == nil {
+		return nil, false
+	}
+	return o.RaidAttachedNvmeSlots, true
+}
+
+// HasRaidAttachedNvmeSlots returns a boolean if a field has been set.
+func (o *StorageStoragePolicyAllOf) HasRaidAttachedNvmeSlots() bool {
+	if o != nil && o.RaidAttachedNvmeSlots != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetRaidAttachedNvmeSlots gets a reference to the given string and assigns it to the RaidAttachedNvmeSlots field.
+func (o *StorageStoragePolicyAllOf) SetRaidAttachedNvmeSlots(v string) {
+	o.RaidAttachedNvmeSlots = &v
 }
 
 // GetSecureJbods returns the SecureJbods field value if set, zero value otherwise.
@@ -477,6 +545,9 @@ func (o StorageStoragePolicyAllOf) MarshalJSON() ([]byte, error) {
 	if o.DefaultDriveMode != nil {
 		toSerialize["DefaultDriveMode"] = o.DefaultDriveMode
 	}
+	if o.DirectAttachedNvmeSlots != nil {
+		toSerialize["DirectAttachedNvmeSlots"] = o.DirectAttachedNvmeSlots
+	}
 	if o.GlobalHotSpares != nil {
 		toSerialize["GlobalHotSpares"] = o.GlobalHotSpares
 	}
@@ -485,6 +556,9 @@ func (o StorageStoragePolicyAllOf) MarshalJSON() ([]byte, error) {
 	}
 	if o.Raid0Drive.IsSet() {
 		toSerialize["Raid0Drive"] = o.Raid0Drive.Get()
+	}
+	if o.RaidAttachedNvmeSlots != nil {
+		toSerialize["RaidAttachedNvmeSlots"] = o.RaidAttachedNvmeSlots
 	}
 	if o.SecureJbods != nil {
 		toSerialize["SecureJbods"] = o.SecureJbods
@@ -525,9 +599,11 @@ func (o *StorageStoragePolicyAllOf) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "DefaultDriveMode")
+		delete(additionalProperties, "DirectAttachedNvmeSlots")
 		delete(additionalProperties, "GlobalHotSpares")
 		delete(additionalProperties, "M2VirtualDrive")
 		delete(additionalProperties, "Raid0Drive")
+		delete(additionalProperties, "RaidAttachedNvmeSlots")
 		delete(additionalProperties, "SecureJbods")
 		delete(additionalProperties, "UnusedDisksState")
 		delete(additionalProperties, "UseJbodForVdCreation")

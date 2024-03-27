@@ -302,6 +302,58 @@ func resourceHyperflexStartReduceReSync() *schema.Resource {
 				},
 				ForceNew: true,
 			},
+			"target_details": {
+				Type:       schema.TypeList,
+				Optional:   true,
+				ConfigMode: schema.SchemaConfigModeAttr,
+				Computed:   true,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"account_mo_id": {
+							Description: "The customer account MoId.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+							ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+								if val != nil {
+									warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+								}
+								return
+							}, ForceNew: true,
+						},
+						"additional_properties": {
+							Type:             schema.TypeString,
+							Optional:         true,
+							DiffSuppressFunc: SuppressDiffAdditionProps,
+							ForceNew:         true,
+						},
+						"class_id": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Default:     "hyperflex.ReSyncClusterMoIds",
+							ForceNew:    true,
+						},
+						"cluster_mo_ids": {
+							Type:       schema.TypeList,
+							Optional:   true,
+							ConfigMode: schema.SchemaConfigModeAttr,
+							Computed:   true,
+							Elem: &schema.Schema{
+								Type: schema.TypeString,
+							}, ForceNew: true,
+						},
+						"object_type": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Default:     "hyperflex.ReSyncClusterMoIds",
+							ForceNew:    true,
+						},
+					},
+				},
+				ForceNew: true,
+			},
 			"version_context": {
 				Description: "The versioning info for this managed object.",
 				Type:        schema.TypeList,
@@ -554,6 +606,50 @@ func resourceHyperflexStartReduceReSyncCreate(c context.Context, d *schema.Resou
 		}
 	}
 
+	if v, ok := d.GetOk("target_details"); ok {
+		x := make([]models.HyperflexReSyncClusterMoIds, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := models.NewHyperflexReSyncClusterMoIdsWithDefaults()
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("hyperflex.ReSyncClusterMoIds")
+			if v, ok := l["cluster_mo_ids"]; ok {
+				{
+					x := make([]string, 0)
+					y := reflect.ValueOf(v)
+					for i := 0; i < y.Len(); i++ {
+						if y.Index(i).Interface() != nil {
+							x = append(x, y.Index(i).Interface().(string))
+						}
+					}
+					if len(x) > 0 {
+						o.SetClusterMoIds(x)
+					}
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			x = append(x, *o)
+		}
+		if len(x) > 0 {
+			o.SetTargetDetails(x)
+		}
+	}
+
 	r := conn.ApiClient.HyperflexApi.CreateHyperflexStartReduceReSync(conn.ctx).HyperflexStartReduceReSync(*o)
 	resultMo, _, responseErr := r.Execute()
 	if responseErr != nil {
@@ -651,6 +747,10 @@ func resourceHyperflexStartReduceReSyncRead(c context.Context, d *schema.Resourc
 
 	if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property Tags in HyperflexStartReduceReSync object: %s", err.Error())
+	}
+
+	if err := d.Set("target_details", flattenListHyperflexReSyncClusterMoIds(s.GetTargetDetails(), d)); err != nil {
+		return diag.Errorf("error occurred while setting property TargetDetails in HyperflexStartReduceReSync object: %s", err.Error())
 	}
 
 	if err := d.Set("version_context", flattenMapMoVersionContext(s.GetVersionContext(), d)); err != nil {

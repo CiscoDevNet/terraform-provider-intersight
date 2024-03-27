@@ -61,6 +61,11 @@ func getEtherHostPortSchema() map[string]*schema.Schema {
 			Optional:         true,
 			DiffSuppressFunc: SuppressDiffAdditionProps,
 		},
+		"aggregate_port_id": {
+			Description: "Breakout port member in the fabric extender.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
 		"ancestors": {
 			Description: "An array of relationships to moBaseMo resources.",
 			Type:        schema.TypeList,
@@ -614,6 +619,11 @@ func dataSourceEtherHostPortRead(c context.Context, d *schema.ResourceData, meta
 		}
 	}
 
+	if v, ok := d.GetOkExists("aggregate_port_id"); ok {
+		x := int64(v.(int))
+		o.SetAggregatePortId(x)
+	}
+
 	if v, ok := d.GetOk("ancestors"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
@@ -1148,6 +1158,7 @@ func dataSourceEtherHostPortRead(c context.Context, d *schema.ResourceData, meta
 
 				temp["acknowledged_peer_interface"] = flattenMapPortInterfaceBaseRelationship(s.GetAcknowledgedPeerInterface(), d)
 				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
+				temp["aggregate_port_id"] = (s.GetAggregatePortId())
 
 				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)
 				temp["class_id"] = (s.GetClassId())

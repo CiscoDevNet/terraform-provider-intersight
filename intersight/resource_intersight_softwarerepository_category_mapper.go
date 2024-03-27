@@ -112,9 +112,9 @@ func resourceSoftwarerepositoryCategoryMapper() *schema.Resource {
 					return
 				}},
 			"file_type": {
-				Description:  "The type of distributable image, example huu, scu, driver, os.\n* `Distributable` - Stores firmware host utility images and fabric images.\n* `DriverDistributable` - Stores driver distributable images.\n* `ServerConfigurationUtilityDistributable` - Stores server configuration utility images.\n* `OperatingSystemFile` - Stores operating system iso images.\n* `HyperflexDistributable` - It stores HyperFlex images.",
+				Description:  "The type of distributable image, example huu, scu, driver, os.\n* `Distributable` - Stores firmware host utility images and fabric images.\n* `DriverDistributable` - Stores driver distributable images.\n* `ServerConfigurationUtilityDistributable` - Stores server configuration utility images.\n* `OperatingSystemFile` - Stores operating system iso images.\n* `HyperflexDistributable` - It stores HyperFlex images.\n* `HciDistributable` - It stores HCI images, such as bootstrap iso images.",
 				Type:         schema.TypeString,
-				ValidateFunc: validation.StringInSlice([]string{"Distributable", "DriverDistributable", "ServerConfigurationUtilityDistributable", "OperatingSystemFile", "HyperflexDistributable"}, false),
+				ValidateFunc: validation.StringInSlice([]string{"Distributable", "DriverDistributable", "ServerConfigurationUtilityDistributable", "OperatingSystemFile", "HyperflexDistributable", "HciDistributable"}, false),
 				Optional:     true,
 				Default:      "Distributable",
 			},

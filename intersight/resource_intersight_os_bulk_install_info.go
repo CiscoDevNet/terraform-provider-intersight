@@ -697,6 +697,15 @@ func resourceOsBulkInstallInfo() *schema.Resource {
 										DiffSuppressFunc: SuppressDiffAdditionProps,
 										ForceNew:         true,
 									},
+									"alternate_name_servers": {
+										Type:       schema.TypeList,
+										Optional:   true,
+										ConfigMode: schema.SchemaConfigModeAttr,
+										Computed:   true,
+										Elem: &schema.Schema{
+											Type: schema.TypeString,
+										}, ForceNew: true,
+									},
 									"answer_file": {
 										Description: "If the source of the answers is a static file, the content of the file is stored as value\nin this property.\nThe value is mandatory only when the 'Source' property has been set to 'File'.",
 										Type:        schema.TypeString,

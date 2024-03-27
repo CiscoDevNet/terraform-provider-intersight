@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **FanModulesSupported** | Pointer to **bool** | Fan Modules support on this switch. | [optional] [readonly] 
 **FcEndHostModeReservedVsans** | Pointer to [**[]CapabilityPortRange**](CapabilityPortRange.md) |  | [optional] 
 **FcUplinkPortsAutoNegotiationSupported** | Pointer to **bool** | Fc Uplink ports auto negotiation speed support on this switch. | [optional] [readonly] 
+**ImmControlsVpcompression** | Pointer to **bool** | VlanPort Compression is controlled by IMM. | [optional] [readonly] 
 **LocatorBeaconSupported** | Pointer to **bool** | Locator Beacon LED support on this switch. | [optional] [readonly] 
 **MaxPorts** | Pointer to **int64** | Maximum allowed physical ports on this switch. | [optional] [readonly] 
 **MaxSlots** | Pointer to **int64** | Maximum allowed physical slots on this switch. | [optional] [readonly] 
@@ -229,6 +230,31 @@ SetFcUplinkPortsAutoNegotiationSupported sets FcUplinkPortsAutoNegotiationSuppor
 `func (o *CapabilitySwitchCapability) HasFcUplinkPortsAutoNegotiationSupported() bool`
 
 HasFcUplinkPortsAutoNegotiationSupported returns a boolean if a field has been set.
+
+### GetImmControlsVpcompression
+
+`func (o *CapabilitySwitchCapability) GetImmControlsVpcompression() bool`
+
+GetImmControlsVpcompression returns the ImmControlsVpcompression field if non-nil, zero value otherwise.
+
+### GetImmControlsVpcompressionOk
+
+`func (o *CapabilitySwitchCapability) GetImmControlsVpcompressionOk() (*bool, bool)`
+
+GetImmControlsVpcompressionOk returns a tuple with the ImmControlsVpcompression field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetImmControlsVpcompression
+
+`func (o *CapabilitySwitchCapability) SetImmControlsVpcompression(v bool)`
+
+SetImmControlsVpcompression sets ImmControlsVpcompression field to given value.
+
+### HasImmControlsVpcompression
+
+`func (o *CapabilitySwitchCapability) HasImmControlsVpcompression() bool`
+
+HasImmControlsVpcompression returns a boolean if a field has been set.
 
 ### GetLocatorBeaconSupported
 

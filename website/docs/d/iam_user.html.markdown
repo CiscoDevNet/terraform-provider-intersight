@@ -18,16 +18,17 @@ The following arguments can be used to get data of already created objects in In
 * `client_ip_address`:(string) IP address from which the user last logged in to Intersight. 
 * `create_time`:(string) The time when this managed object was created. 
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
-* `email`:(string) Email of the user. Users are added to Intersight using the email configured in the IdP. 
-* `first_name`:(string) First name of the user. This field is populated from the IdP attributes received after authentication. 
+* `email`:(string) Email of the user. Remote users are added to Intersight using the email configured in the IdP. 
+* `first_name`:(string) First name of the user. For remote users, this field is populated from the IdP attributes received after authentication. 
 * `last_login_time`:(string) Last successful login time for user. 
-* `last_name`:(string) Last name of the user. This field is populated from the IdP attributes received after authentication. 
+* `last_name`:(string) Last name of the user. For remote users, this field is populated from the IdP attributes received after authentication. 
 * `last_role_modified_time`:(string) Last role modification time for user. 
+* `locked_until`:(string) Time until which the user account will be locked out. 
 * `mod_time`:(string) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
-* `name`:(string) Name as configured in the IdP. 
+* `name`:(string) Name of the user. For remote users, it is the value as configured in the IdP. 
 * `shared_scope`:(string) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
-* `user_id_or_email`:(string) UserID or email as configured in the IdP. 
+* `user_id_or_email`:(string) UserID or email of the user. For remote users, it is the value as configured in the IDP. 
 * `user_type`:(string) Type of the User. If a user is added manually by specifying the email address, or has logged in using groups, based on the IdP attributes received during authentication. If added manually, the user type will be static, otherwise dynamic. 
 * `user_unique_identifier`:(string) Unique id of the user used by the identity provider to store the user. 
  

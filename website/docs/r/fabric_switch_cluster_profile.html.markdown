@@ -84,6 +84,7 @@ This complex property has following sub-properties:
   + `key`:(string) The string representation of a tag key. 
   + `value`:(string) The string representation of a tag value. 
 * `type`:(string) Defines the type of the profile. Accepted values are instance or template.* `instance` - The profile defines the configuration for a specific instance of a target. 
+* `user_label`:(string) The user defined label assigned to the switch profile. 
 * `version_context`:(HashMap) -(ReadOnly) The versioning info for this managed object. 
 This complex property has following sub-properties:
   + `interested_mos`:(Array)

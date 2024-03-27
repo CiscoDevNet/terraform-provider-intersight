@@ -21,6 +21,7 @@ Name | Type | Description | Notes
 **Fanmodules** | Pointer to [**[]EquipmentFanModuleRelationship**](EquipmentFanModuleRelationship.md) | An array of relationships to equipmentFanModule resources. | [optional] [readonly] 
 **GenericInventoryHolders** | Pointer to [**[]InventoryGenericInventoryHolderRelationship**](InventoryGenericInventoryHolderRelationship.md) | An array of relationships to inventoryGenericInventoryHolder resources. | [optional] [readonly] 
 **GraphicsCards** | Pointer to [**[]GraphicsCardRelationship**](GraphicsCardRelationship.md) | An array of relationships to graphicsCard resources. | [optional] 
+**HybridDriveSlots** | Pointer to [**[]EquipmentHybridDriveSlotRelationship**](EquipmentHybridDriveSlotRelationship.md) | An array of relationships to equipmentHybridDriveSlot resources. | [optional] [readonly] 
 **InventoryDeviceInfo** | Pointer to [**InventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
 **LocatorLed** | Pointer to [**EquipmentLocatorLedRelationship**](EquipmentLocatorLedRelationship.md) |  | [optional] 
 **MemoryArrays** | Pointer to [**[]MemoryArrayRelationship**](MemoryArrayRelationship.md) | An array of relationships to memoryArray resources. | [optional] 
@@ -529,6 +530,41 @@ HasGraphicsCards returns a boolean if a field has been set.
 `func (o *ComputeRackUnitAllOf) UnsetGraphicsCards()`
 
 UnsetGraphicsCards ensures that no value is present for GraphicsCards, not even an explicit nil
+### GetHybridDriveSlots
+
+`func (o *ComputeRackUnitAllOf) GetHybridDriveSlots() []EquipmentHybridDriveSlotRelationship`
+
+GetHybridDriveSlots returns the HybridDriveSlots field if non-nil, zero value otherwise.
+
+### GetHybridDriveSlotsOk
+
+`func (o *ComputeRackUnitAllOf) GetHybridDriveSlotsOk() (*[]EquipmentHybridDriveSlotRelationship, bool)`
+
+GetHybridDriveSlotsOk returns a tuple with the HybridDriveSlots field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetHybridDriveSlots
+
+`func (o *ComputeRackUnitAllOf) SetHybridDriveSlots(v []EquipmentHybridDriveSlotRelationship)`
+
+SetHybridDriveSlots sets HybridDriveSlots field to given value.
+
+### HasHybridDriveSlots
+
+`func (o *ComputeRackUnitAllOf) HasHybridDriveSlots() bool`
+
+HasHybridDriveSlots returns a boolean if a field has been set.
+
+### SetHybridDriveSlotsNil
+
+`func (o *ComputeRackUnitAllOf) SetHybridDriveSlotsNil(b bool)`
+
+ SetHybridDriveSlotsNil sets the value for HybridDriveSlots to be an explicit nil
+
+### UnsetHybridDriveSlots
+`func (o *ComputeRackUnitAllOf) UnsetHybridDriveSlots()`
+
+UnsetHybridDriveSlots ensures that no value is present for HybridDriveSlots, not even an explicit nil
 ### GetInventoryDeviceInfo
 
 `func (o *ComputeRackUnitAllOf) GetInventoryDeviceInfo() InventoryDeviceInfoRelationship`

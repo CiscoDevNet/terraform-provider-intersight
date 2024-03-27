@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "ippool.IpV6Block"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "ippool.IpV6Block"]
 **From** | Pointer to **string** | First IPv6 address of the block. | [optional] 
+**IpV6Config** | Pointer to [**NullableIppoolIpV6Config**](IppoolIpV6Config.md) |  | [optional] 
 **To** | Pointer to **string** | Last IPv6 address of the block. | [optional] 
 
 ## Methods
@@ -93,6 +94,41 @@ SetFrom sets From field to given value.
 
 HasFrom returns a boolean if a field has been set.
 
+### GetIpV6Config
+
+`func (o *IppoolIpV6BlockAllOf) GetIpV6Config() IppoolIpV6Config`
+
+GetIpV6Config returns the IpV6Config field if non-nil, zero value otherwise.
+
+### GetIpV6ConfigOk
+
+`func (o *IppoolIpV6BlockAllOf) GetIpV6ConfigOk() (*IppoolIpV6Config, bool)`
+
+GetIpV6ConfigOk returns a tuple with the IpV6Config field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIpV6Config
+
+`func (o *IppoolIpV6BlockAllOf) SetIpV6Config(v IppoolIpV6Config)`
+
+SetIpV6Config sets IpV6Config field to given value.
+
+### HasIpV6Config
+
+`func (o *IppoolIpV6BlockAllOf) HasIpV6Config() bool`
+
+HasIpV6Config returns a boolean if a field has been set.
+
+### SetIpV6ConfigNil
+
+`func (o *IppoolIpV6BlockAllOf) SetIpV6ConfigNil(b bool)`
+
+ SetIpV6ConfigNil sets the value for IpV6Config to be an explicit nil
+
+### UnsetIpV6Config
+`func (o *IppoolIpV6BlockAllOf) UnsetIpV6Config()`
+
+UnsetIpV6Config ensures that no value is present for IpV6Config, not even an explicit nil
 ### GetTo
 
 `func (o *IppoolIpV6BlockAllOf) GetTo() string`

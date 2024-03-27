@@ -8,6 +8,7 @@ import (
 	"reflect"
 	"regexp"
 	"strings"
+	"time"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
@@ -79,6 +80,13 @@ func resourceIamAppRegistration() *schema.Resource {
 				Type:             schema.TypeString,
 				Optional:         true,
 				DiffSuppressFunc: SuppressDiffAdditionProps,
+			},
+			"admin_status": {
+				Description:  "Used to trigger the enable or disable action on the App Registration. These actions change the status of an App Registration.\n* `enable` - Used to enable a disabled API key/App Registration. If the API key/App Registration is already expired, this action has no effect.\n* `disable` - Used to disable an active API key/App Registration. If the API key/App Registration is already expired, this action has no effect.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"enable", "disable"}, false),
+				Optional:     true,
+				Default:      "enable",
 			},
 			"ancestors": {
 				Description: "An array of relationships to moBaseMo resources.",
@@ -180,6 +188,11 @@ func resourceIamAppRegistration() *schema.Resource {
 					}
 					return
 				}},
+			"expiry_date_time": {
+				Description: "The expiration date of the App Registration which is set at the time of its creation. Its value can only be assigned a date that falls within the range determined by the maximum expiration time configured at the account level. The expiry date can be edited to be earlier or later, provided it stays within the designated expiry period. This period is determined by adding the 'startTime' property of the App Registration to the maximum expiry time configured at the account level.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
 			"grant_types": {
 				Type:       schema.TypeList,
 				Optional:   true,
@@ -188,6 +201,34 @@ func resourceIamAppRegistration() *schema.Resource {
 				Elem: &schema.Schema{
 					Type:         schema.TypeString,
 					ValidateFunc: validation.StringInSlice([]string{"authorization_code", "refresh_token", "client_credentials", "implicit", "password", "urn:ietf:params:oauth:grant-type:jwt-bearer", "urn:ietf:params:oauth:grant-type:saml2-bearer"}, false),
+				}},
+			"is_never_expiring": {
+				Description: "Used to mark the App Registration as a never-expiring App Registration.",
+				Type:        schema.TypeBool,
+				Optional:    true,
+				Default:     false,
+			},
+			"last_used_ip": {
+				Description: "The ip address from which the App Registration was last used.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+					if val != nil {
+						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+					}
+					return
+				}},
+			"last_used_time": {
+				Description: "The time at which the App Registration was last used. It is updated every 24 hours.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+					if val != nil {
+						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+					}
+					return
 				}},
 			"mod_time": {
 				Description: "The time when this managed object was last modified.",
@@ -252,6 +293,17 @@ func resourceIamAppRegistration() *schema.Resource {
 				Optional:    true,
 				Default:     "iam.AppRegistration",
 			},
+			"oper_status": {
+				Description: "The current status of the App Registration that dictates the validity of the app.\n* `enabled` - An API key/App Registration having enabled status can be used for API invocation.\n* `disabled` - An API key/App Registration having disabled status cannot be used for API invocation.\n* `expired` - An API key/App Registration having expired status cannot be used for API invocation as the expiration date has passed.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+					if val != nil {
+						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+					}
+					return
+				}},
 			"owners": {
 				Type:       schema.TypeList,
 				Optional:   true,
@@ -476,6 +528,17 @@ func resourceIamAppRegistration() *schema.Resource {
 				Optional:    true,
 				Default:     false,
 			},
+			"start_time": {
+				Description: "The timestamp at which an expiry date was first set on this app registration. \nFor expiring App Registrations, this field is same as the create time of the App Registration.\nFor never-expiring App Registrations, this field is set initially to zero time value. If a never-expiry App Registration is later changed to have an expiration, the timestamp marking the start of this transition is recorded in this field.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+					if val != nil {
+						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+					}
+					return
+				}},
 			"tags": {
 				Type:       schema.TypeList,
 				Optional:   true,
@@ -713,6 +776,11 @@ func resourceIamAppRegistrationCreate(c context.Context, d *schema.ResourceData,
 		}
 	}
 
+	if v, ok := d.GetOk("admin_status"); ok {
+		x := (v.(string))
+		o.SetAdminStatus(x)
+	}
+
 	o.SetClassId("iam.AppRegistration")
 
 	if v, ok := d.GetOk("client_name"); ok {
@@ -735,6 +803,11 @@ func resourceIamAppRegistrationCreate(c context.Context, d *schema.ResourceData,
 		o.SetDescription(x)
 	}
 
+	if v, ok := d.GetOk("expiry_date_time"); ok {
+		x, _ := time.Parse(time.RFC1123, v.(string))
+		o.SetExpiryDateTime(x)
+	}
+
 	if v, ok := d.GetOk("grant_types"); ok {
 		x := make([]string, 0)
 		y := reflect.ValueOf(v)
@@ -746,6 +819,11 @@ func resourceIamAppRegistrationCreate(c context.Context, d *schema.ResourceData,
 		if len(x) > 0 {
 			o.SetGrantTypes(x)
 		}
+	}
+
+	if v, ok := d.GetOkExists("is_never_expiring"); ok {
+		x := (v.(bool))
+		o.SetIsNeverExpiring(x)
 	}
 
 	if v, ok := d.GetOk("moid"); ok {
@@ -920,6 +998,10 @@ func resourceIamAppRegistrationRead(c context.Context, d *schema.ResourceData, m
 		return diag.Errorf("error occurred while setting property AdditionalProperties in IamAppRegistration object: %s", err.Error())
 	}
 
+	if err := d.Set("admin_status", (s.GetAdminStatus())); err != nil {
+		return diag.Errorf("error occurred while setting property AdminStatus in IamAppRegistration object: %s", err.Error())
+	}
+
 	if err := d.Set("ancestors", flattenListMoBaseMoRelationship(s.GetAncestors(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property Ancestors in IamAppRegistration object: %s", err.Error())
 	}
@@ -956,8 +1038,24 @@ func resourceIamAppRegistrationRead(c context.Context, d *schema.ResourceData, m
 		return diag.Errorf("error occurred while setting property DomainGroupMoid in IamAppRegistration object: %s", err.Error())
 	}
 
+	if err := d.Set("expiry_date_time", (s.GetExpiryDateTime()).String()); err != nil {
+		return diag.Errorf("error occurred while setting property ExpiryDateTime in IamAppRegistration object: %s", err.Error())
+	}
+
 	if err := d.Set("grant_types", (s.GetGrantTypes())); err != nil {
 		return diag.Errorf("error occurred while setting property GrantTypes in IamAppRegistration object: %s", err.Error())
+	}
+
+	if err := d.Set("is_never_expiring", (s.GetIsNeverExpiring())); err != nil {
+		return diag.Errorf("error occurred while setting property IsNeverExpiring in IamAppRegistration object: %s", err.Error())
+	}
+
+	if err := d.Set("last_used_ip", (s.GetLastUsedIp())); err != nil {
+		return diag.Errorf("error occurred while setting property LastUsedIp in IamAppRegistration object: %s", err.Error())
+	}
+
+	if err := d.Set("last_used_time", (s.GetLastUsedTime()).String()); err != nil {
+		return diag.Errorf("error occurred while setting property LastUsedTime in IamAppRegistration object: %s", err.Error())
 	}
 
 	if err := d.Set("mod_time", (s.GetModTime()).String()); err != nil {
@@ -974,6 +1072,10 @@ func resourceIamAppRegistrationRead(c context.Context, d *schema.ResourceData, m
 
 	if err := d.Set("object_type", (s.GetObjectType())); err != nil {
 		return diag.Errorf("error occurred while setting property ObjectType in IamAppRegistration object: %s", err.Error())
+	}
+
+	if err := d.Set("oper_status", (s.GetOperStatus())); err != nil {
+		return diag.Errorf("error occurred while setting property OperStatus in IamAppRegistration object: %s", err.Error())
 	}
 
 	if err := d.Set("owners", (s.GetOwners())); err != nil {
@@ -1024,6 +1126,10 @@ func resourceIamAppRegistrationRead(c context.Context, d *schema.ResourceData, m
 		return diag.Errorf("error occurred while setting property ShowConsentScreen in IamAppRegistration object: %s", err.Error())
 	}
 
+	if err := d.Set("start_time", (s.GetStartTime()).String()); err != nil {
+		return diag.Errorf("error occurred while setting property StartTime in IamAppRegistration object: %s", err.Error())
+	}
+
 	if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property Tags in IamAppRegistration object: %s", err.Error())
 	}
@@ -1057,6 +1163,12 @@ func resourceIamAppRegistrationUpdate(c context.Context, d *schema.ResourceData,
 		}
 	}
 
+	if d.HasChange("admin_status") {
+		v := d.Get("admin_status")
+		x := (v.(string))
+		o.SetAdminStatus(x)
+	}
+
 	o.SetClassId("iam.AppRegistration")
 
 	if d.HasChange("client_name") {
@@ -1083,6 +1195,12 @@ func resourceIamAppRegistrationUpdate(c context.Context, d *schema.ResourceData,
 		o.SetDescription(x)
 	}
 
+	if d.HasChange("expiry_date_time") {
+		v := d.Get("expiry_date_time")
+		x, _ := time.Parse(time.RFC1123, v.(string))
+		o.SetExpiryDateTime(x)
+	}
+
 	if d.HasChange("grant_types") {
 		v := d.Get("grant_types")
 		x := make([]string, 0)
@@ -1093,6 +1211,12 @@ func resourceIamAppRegistrationUpdate(c context.Context, d *schema.ResourceData,
 			}
 		}
 		o.SetGrantTypes(x)
+	}
+
+	if d.HasChange("is_never_expiring") {
+		v := d.Get("is_never_expiring")
+		x := (v.(bool))
+		o.SetIsNeverExpiring(x)
 	}
 
 	if d.HasChange("moid") {

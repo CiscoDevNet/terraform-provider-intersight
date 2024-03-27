@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-14968
+API version: 1.0.11-15711
 Contact: intersight@cisco.com
 */
 
@@ -30,6 +30,8 @@ type CapabilitySwitchCapabilityAllOf struct {
 	FcEndHostModeReservedVsans []CapabilityPortRange `json:"FcEndHostModeReservedVsans,omitempty"`
 	// Fc Uplink ports auto negotiation speed support on this switch.
 	FcUplinkPortsAutoNegotiationSupported *bool `json:"FcUplinkPortsAutoNegotiationSupported,omitempty"`
+	// VlanPort Compression is controlled by IMM.
+	ImmControlsVpcompression *bool `json:"ImmControlsVpcompression,omitempty"`
 	// Locator Beacon LED support on this switch.
 	LocatorBeaconSupported *bool `json:"LocatorBeaconSupported,omitempty"`
 	// Maximum allowed physical ports on this switch.
@@ -298,6 +300,38 @@ func (o *CapabilitySwitchCapabilityAllOf) HasFcUplinkPortsAutoNegotiationSupport
 // SetFcUplinkPortsAutoNegotiationSupported gets a reference to the given bool and assigns it to the FcUplinkPortsAutoNegotiationSupported field.
 func (o *CapabilitySwitchCapabilityAllOf) SetFcUplinkPortsAutoNegotiationSupported(v bool) {
 	o.FcUplinkPortsAutoNegotiationSupported = &v
+}
+
+// GetImmControlsVpcompression returns the ImmControlsVpcompression field value if set, zero value otherwise.
+func (o *CapabilitySwitchCapabilityAllOf) GetImmControlsVpcompression() bool {
+	if o == nil || o.ImmControlsVpcompression == nil {
+		var ret bool
+		return ret
+	}
+	return *o.ImmControlsVpcompression
+}
+
+// GetImmControlsVpcompressionOk returns a tuple with the ImmControlsVpcompression field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CapabilitySwitchCapabilityAllOf) GetImmControlsVpcompressionOk() (*bool, bool) {
+	if o == nil || o.ImmControlsVpcompression == nil {
+		return nil, false
+	}
+	return o.ImmControlsVpcompression, true
+}
+
+// HasImmControlsVpcompression returns a boolean if a field has been set.
+func (o *CapabilitySwitchCapabilityAllOf) HasImmControlsVpcompression() bool {
+	if o != nil && o.ImmControlsVpcompression != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetImmControlsVpcompression gets a reference to the given bool and assigns it to the ImmControlsVpcompression field.
+func (o *CapabilitySwitchCapabilityAllOf) SetImmControlsVpcompression(v bool) {
+	o.ImmControlsVpcompression = &v
 }
 
 // GetLocatorBeaconSupported returns the LocatorBeaconSupported field value if set, zero value otherwise.
@@ -1136,6 +1170,9 @@ func (o CapabilitySwitchCapabilityAllOf) MarshalJSON() ([]byte, error) {
 	if o.FcUplinkPortsAutoNegotiationSupported != nil {
 		toSerialize["FcUplinkPortsAutoNegotiationSupported"] = o.FcUplinkPortsAutoNegotiationSupported
 	}
+	if o.ImmControlsVpcompression != nil {
+		toSerialize["ImmControlsVpcompression"] = o.ImmControlsVpcompression
+	}
 	if o.LocatorBeaconSupported != nil {
 		toSerialize["LocatorBeaconSupported"] = o.LocatorBeaconSupported
 	}
@@ -1233,6 +1270,7 @@ func (o *CapabilitySwitchCapabilityAllOf) UnmarshalJSON(bytes []byte) (err error
 		delete(additionalProperties, "FanModulesSupported")
 		delete(additionalProperties, "FcEndHostModeReservedVsans")
 		delete(additionalProperties, "FcUplinkPortsAutoNegotiationSupported")
+		delete(additionalProperties, "ImmControlsVpcompression")
 		delete(additionalProperties, "LocatorBeaconSupported")
 		delete(additionalProperties, "MaxPorts")
 		delete(additionalProperties, "MaxSlots")

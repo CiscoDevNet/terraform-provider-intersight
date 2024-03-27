@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-14968
+API version: 1.0.11-15711
 Contact: intersight@cisco.com
 */
 
@@ -24,15 +24,21 @@ type IamLocalUserPassword struct {
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
-	// User-entered passsord to be compared to password for change password function.
+	// User-entered password to be compared to password for change password function.
 	CurrentPassword *string `json:"CurrentPassword,omitempty"`
+	// Initial password set for the local user for the first time when the local user gets created or when the password gets reset by the Account Administrator.
+	InitialPassword *string `json:"InitialPassword,omitempty"`
 	// Indicates whether the value of the 'currentPassword' property has been set.
 	IsCurrentPasswordSet *bool `json:"IsCurrentPasswordSet,omitempty"`
+	// Indicates whether the value of the 'initialPassword' property has been set.
+	IsInitialPasswordSet *bool `json:"IsInitialPasswordSet,omitempty"`
 	// Indicates whether the value of the 'newPassword' property has been set.
 	IsNewPasswordSet *bool `json:"IsNewPasswordSet,omitempty"`
+	// Indicates whether the user should be prompted to reset their password.
+	NeedPasswordReset *bool `json:"NeedPasswordReset,omitempty"`
 	// New password that the user's password should be changed to.
 	NewPassword *string `json:"NewPassword,omitempty"`
-	// User's current valid passsord.
+	// User's current valid password.
 	Password             *string              `json:"Password,omitempty"`
 	User                 *IamUserRelationship `json:"User,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -143,6 +149,38 @@ func (o *IamLocalUserPassword) SetCurrentPassword(v string) {
 	o.CurrentPassword = &v
 }
 
+// GetInitialPassword returns the InitialPassword field value if set, zero value otherwise.
+func (o *IamLocalUserPassword) GetInitialPassword() string {
+	if o == nil || o.InitialPassword == nil {
+		var ret string
+		return ret
+	}
+	return *o.InitialPassword
+}
+
+// GetInitialPasswordOk returns a tuple with the InitialPassword field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *IamLocalUserPassword) GetInitialPasswordOk() (*string, bool) {
+	if o == nil || o.InitialPassword == nil {
+		return nil, false
+	}
+	return o.InitialPassword, true
+}
+
+// HasInitialPassword returns a boolean if a field has been set.
+func (o *IamLocalUserPassword) HasInitialPassword() bool {
+	if o != nil && o.InitialPassword != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetInitialPassword gets a reference to the given string and assigns it to the InitialPassword field.
+func (o *IamLocalUserPassword) SetInitialPassword(v string) {
+	o.InitialPassword = &v
+}
+
 // GetIsCurrentPasswordSet returns the IsCurrentPasswordSet field value if set, zero value otherwise.
 func (o *IamLocalUserPassword) GetIsCurrentPasswordSet() bool {
 	if o == nil || o.IsCurrentPasswordSet == nil {
@@ -175,6 +213,38 @@ func (o *IamLocalUserPassword) SetIsCurrentPasswordSet(v bool) {
 	o.IsCurrentPasswordSet = &v
 }
 
+// GetIsInitialPasswordSet returns the IsInitialPasswordSet field value if set, zero value otherwise.
+func (o *IamLocalUserPassword) GetIsInitialPasswordSet() bool {
+	if o == nil || o.IsInitialPasswordSet == nil {
+		var ret bool
+		return ret
+	}
+	return *o.IsInitialPasswordSet
+}
+
+// GetIsInitialPasswordSetOk returns a tuple with the IsInitialPasswordSet field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *IamLocalUserPassword) GetIsInitialPasswordSetOk() (*bool, bool) {
+	if o == nil || o.IsInitialPasswordSet == nil {
+		return nil, false
+	}
+	return o.IsInitialPasswordSet, true
+}
+
+// HasIsInitialPasswordSet returns a boolean if a field has been set.
+func (o *IamLocalUserPassword) HasIsInitialPasswordSet() bool {
+	if o != nil && o.IsInitialPasswordSet != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetIsInitialPasswordSet gets a reference to the given bool and assigns it to the IsInitialPasswordSet field.
+func (o *IamLocalUserPassword) SetIsInitialPasswordSet(v bool) {
+	o.IsInitialPasswordSet = &v
+}
+
 // GetIsNewPasswordSet returns the IsNewPasswordSet field value if set, zero value otherwise.
 func (o *IamLocalUserPassword) GetIsNewPasswordSet() bool {
 	if o == nil || o.IsNewPasswordSet == nil {
@@ -205,6 +275,38 @@ func (o *IamLocalUserPassword) HasIsNewPasswordSet() bool {
 // SetIsNewPasswordSet gets a reference to the given bool and assigns it to the IsNewPasswordSet field.
 func (o *IamLocalUserPassword) SetIsNewPasswordSet(v bool) {
 	o.IsNewPasswordSet = &v
+}
+
+// GetNeedPasswordReset returns the NeedPasswordReset field value if set, zero value otherwise.
+func (o *IamLocalUserPassword) GetNeedPasswordReset() bool {
+	if o == nil || o.NeedPasswordReset == nil {
+		var ret bool
+		return ret
+	}
+	return *o.NeedPasswordReset
+}
+
+// GetNeedPasswordResetOk returns a tuple with the NeedPasswordReset field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *IamLocalUserPassword) GetNeedPasswordResetOk() (*bool, bool) {
+	if o == nil || o.NeedPasswordReset == nil {
+		return nil, false
+	}
+	return o.NeedPasswordReset, true
+}
+
+// HasNeedPasswordReset returns a boolean if a field has been set.
+func (o *IamLocalUserPassword) HasNeedPasswordReset() bool {
+	if o != nil && o.NeedPasswordReset != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetNeedPasswordReset gets a reference to the given bool and assigns it to the NeedPasswordReset field.
+func (o *IamLocalUserPassword) SetNeedPasswordReset(v bool) {
+	o.NeedPasswordReset = &v
 }
 
 // GetNewPassword returns the NewPassword field value if set, zero value otherwise.
@@ -322,11 +424,20 @@ func (o IamLocalUserPassword) MarshalJSON() ([]byte, error) {
 	if o.CurrentPassword != nil {
 		toSerialize["CurrentPassword"] = o.CurrentPassword
 	}
+	if o.InitialPassword != nil {
+		toSerialize["InitialPassword"] = o.InitialPassword
+	}
 	if o.IsCurrentPasswordSet != nil {
 		toSerialize["IsCurrentPasswordSet"] = o.IsCurrentPasswordSet
 	}
+	if o.IsInitialPasswordSet != nil {
+		toSerialize["IsInitialPasswordSet"] = o.IsInitialPasswordSet
+	}
 	if o.IsNewPasswordSet != nil {
 		toSerialize["IsNewPasswordSet"] = o.IsNewPasswordSet
+	}
+	if o.NeedPasswordReset != nil {
+		toSerialize["NeedPasswordReset"] = o.NeedPasswordReset
 	}
 	if o.NewPassword != nil {
 		toSerialize["NewPassword"] = o.NewPassword
@@ -351,15 +462,21 @@ func (o *IamLocalUserPassword) UnmarshalJSON(bytes []byte) (err error) {
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 		ObjectType string `json:"ObjectType"`
-		// User-entered passsord to be compared to password for change password function.
+		// User-entered password to be compared to password for change password function.
 		CurrentPassword *string `json:"CurrentPassword,omitempty"`
+		// Initial password set for the local user for the first time when the local user gets created or when the password gets reset by the Account Administrator.
+		InitialPassword *string `json:"InitialPassword,omitempty"`
 		// Indicates whether the value of the 'currentPassword' property has been set.
 		IsCurrentPasswordSet *bool `json:"IsCurrentPasswordSet,omitempty"`
+		// Indicates whether the value of the 'initialPassword' property has been set.
+		IsInitialPasswordSet *bool `json:"IsInitialPasswordSet,omitempty"`
 		// Indicates whether the value of the 'newPassword' property has been set.
 		IsNewPasswordSet *bool `json:"IsNewPasswordSet,omitempty"`
+		// Indicates whether the user should be prompted to reset their password.
+		NeedPasswordReset *bool `json:"NeedPasswordReset,omitempty"`
 		// New password that the user's password should be changed to.
 		NewPassword *string `json:"NewPassword,omitempty"`
-		// User's current valid passsord.
+		// User's current valid password.
 		Password *string              `json:"Password,omitempty"`
 		User     *IamUserRelationship `json:"User,omitempty"`
 	}
@@ -372,8 +489,11 @@ func (o *IamLocalUserPassword) UnmarshalJSON(bytes []byte) (err error) {
 		varIamLocalUserPassword.ClassId = varIamLocalUserPasswordWithoutEmbeddedStruct.ClassId
 		varIamLocalUserPassword.ObjectType = varIamLocalUserPasswordWithoutEmbeddedStruct.ObjectType
 		varIamLocalUserPassword.CurrentPassword = varIamLocalUserPasswordWithoutEmbeddedStruct.CurrentPassword
+		varIamLocalUserPassword.InitialPassword = varIamLocalUserPasswordWithoutEmbeddedStruct.InitialPassword
 		varIamLocalUserPassword.IsCurrentPasswordSet = varIamLocalUserPasswordWithoutEmbeddedStruct.IsCurrentPasswordSet
+		varIamLocalUserPassword.IsInitialPasswordSet = varIamLocalUserPasswordWithoutEmbeddedStruct.IsInitialPasswordSet
 		varIamLocalUserPassword.IsNewPasswordSet = varIamLocalUserPasswordWithoutEmbeddedStruct.IsNewPasswordSet
+		varIamLocalUserPassword.NeedPasswordReset = varIamLocalUserPasswordWithoutEmbeddedStruct.NeedPasswordReset
 		varIamLocalUserPassword.NewPassword = varIamLocalUserPasswordWithoutEmbeddedStruct.NewPassword
 		varIamLocalUserPassword.Password = varIamLocalUserPasswordWithoutEmbeddedStruct.Password
 		varIamLocalUserPassword.User = varIamLocalUserPasswordWithoutEmbeddedStruct.User
@@ -397,8 +517,11 @@ func (o *IamLocalUserPassword) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "CurrentPassword")
+		delete(additionalProperties, "InitialPassword")
 		delete(additionalProperties, "IsCurrentPasswordSet")
+		delete(additionalProperties, "IsInitialPasswordSet")
 		delete(additionalProperties, "IsNewPasswordSet")
+		delete(additionalProperties, "NeedPasswordReset")
 		delete(additionalProperties, "NewPassword")
 		delete(additionalProperties, "Password")
 		delete(additionalProperties, "User")

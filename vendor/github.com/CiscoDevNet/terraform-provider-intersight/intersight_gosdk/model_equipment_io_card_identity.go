@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-14968
+API version: 1.0.11-15711
 Contact: intersight@cisco.com
 */
 
@@ -26,12 +26,20 @@ type EquipmentIoCardIdentity struct {
 	ObjectType string `json:"ObjectType"`
 	// MO Reference to equipmentIoCard MO in inventory service.
 	IoCardMoid *string `json:"IoCardMoid,omitempty"`
+	// IO Card inventory lifecycle status. * `Unknown` - Default lifecycle state of a iocard. This should be an initial state when no state is defined for a specific iocard. * `Decommissioned` - Lifecycle state is set to this value after the chassis is successfully decommissioned. * `DiscoveryInProgress` - Lifecycle state is set to this value after the successful start of the iocard connection discovery process. * `DiscoveryFailed` - Lifecycle state is set to this value after the iocard connection discovery has failed. * `DiscoveryCompleted` - Lifecycle state is set to this value after the connection discovery of the iocard is completed successfully. * `None` - Lifecycle state is set to this value before the start of connection discovery and inventory collection process for a iocard. * `InventoryCompleted` - Lifecycle state is set to this value after the chassis inventory collection process is completed for a specific iocard. * `InventoryInProgress` - Lifecycle state is set to this value after successful  start of the chassis inventory collection process for a specific iocard. * `InventoryFailed` - Lifecycle state is set to this value after the chassis inventory collection process failed for a iocard.
+	Lifecycle *string `json:"Lifecycle,omitempty"`
+	// IO Card or intelligent fabric module model.
+	Model *string `json:"Model,omitempty"`
 	// IOM/MUX Module ID connected to the FI.
 	ModuleId *int64 `json:"ModuleId,omitempty"`
 	// MO Reference to networkElement MO in inventory service.
 	NetworkElementMoid *string `json:"NetworkElementMoid,omitempty"`
-	// Switch ID to which IOM is connected, ID can be either 1 or 2, equalent to A or B.
-	SwitchId             *int64 `json:"SwitchId,omitempty"`
+	// IO Card or intelligent fabric module serial number.
+	Serial *string `json:"Serial,omitempty"`
+	// Identifier of the Switch where the IOM is connected. ID can be either 1 or 2, equivalent to A or B.
+	SwitchId *int64 `json:"SwitchId,omitempty"`
+	// IO Card or intelligent fabric module vendor.
+	Vendor               *string `json:"Vendor,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -140,6 +148,70 @@ func (o *EquipmentIoCardIdentity) SetIoCardMoid(v string) {
 	o.IoCardMoid = &v
 }
 
+// GetLifecycle returns the Lifecycle field value if set, zero value otherwise.
+func (o *EquipmentIoCardIdentity) GetLifecycle() string {
+	if o == nil || o.Lifecycle == nil {
+		var ret string
+		return ret
+	}
+	return *o.Lifecycle
+}
+
+// GetLifecycleOk returns a tuple with the Lifecycle field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *EquipmentIoCardIdentity) GetLifecycleOk() (*string, bool) {
+	if o == nil || o.Lifecycle == nil {
+		return nil, false
+	}
+	return o.Lifecycle, true
+}
+
+// HasLifecycle returns a boolean if a field has been set.
+func (o *EquipmentIoCardIdentity) HasLifecycle() bool {
+	if o != nil && o.Lifecycle != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetLifecycle gets a reference to the given string and assigns it to the Lifecycle field.
+func (o *EquipmentIoCardIdentity) SetLifecycle(v string) {
+	o.Lifecycle = &v
+}
+
+// GetModel returns the Model field value if set, zero value otherwise.
+func (o *EquipmentIoCardIdentity) GetModel() string {
+	if o == nil || o.Model == nil {
+		var ret string
+		return ret
+	}
+	return *o.Model
+}
+
+// GetModelOk returns a tuple with the Model field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *EquipmentIoCardIdentity) GetModelOk() (*string, bool) {
+	if o == nil || o.Model == nil {
+		return nil, false
+	}
+	return o.Model, true
+}
+
+// HasModel returns a boolean if a field has been set.
+func (o *EquipmentIoCardIdentity) HasModel() bool {
+	if o != nil && o.Model != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetModel gets a reference to the given string and assigns it to the Model field.
+func (o *EquipmentIoCardIdentity) SetModel(v string) {
+	o.Model = &v
+}
+
 // GetModuleId returns the ModuleId field value if set, zero value otherwise.
 func (o *EquipmentIoCardIdentity) GetModuleId() int64 {
 	if o == nil || o.ModuleId == nil {
@@ -204,6 +276,38 @@ func (o *EquipmentIoCardIdentity) SetNetworkElementMoid(v string) {
 	o.NetworkElementMoid = &v
 }
 
+// GetSerial returns the Serial field value if set, zero value otherwise.
+func (o *EquipmentIoCardIdentity) GetSerial() string {
+	if o == nil || o.Serial == nil {
+		var ret string
+		return ret
+	}
+	return *o.Serial
+}
+
+// GetSerialOk returns a tuple with the Serial field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *EquipmentIoCardIdentity) GetSerialOk() (*string, bool) {
+	if o == nil || o.Serial == nil {
+		return nil, false
+	}
+	return o.Serial, true
+}
+
+// HasSerial returns a boolean if a field has been set.
+func (o *EquipmentIoCardIdentity) HasSerial() bool {
+	if o != nil && o.Serial != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetSerial gets a reference to the given string and assigns it to the Serial field.
+func (o *EquipmentIoCardIdentity) SetSerial(v string) {
+	o.Serial = &v
+}
+
 // GetSwitchId returns the SwitchId field value if set, zero value otherwise.
 func (o *EquipmentIoCardIdentity) GetSwitchId() int64 {
 	if o == nil || o.SwitchId == nil {
@@ -236,6 +340,38 @@ func (o *EquipmentIoCardIdentity) SetSwitchId(v int64) {
 	o.SwitchId = &v
 }
 
+// GetVendor returns the Vendor field value if set, zero value otherwise.
+func (o *EquipmentIoCardIdentity) GetVendor() string {
+	if o == nil || o.Vendor == nil {
+		var ret string
+		return ret
+	}
+	return *o.Vendor
+}
+
+// GetVendorOk returns a tuple with the Vendor field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *EquipmentIoCardIdentity) GetVendorOk() (*string, bool) {
+	if o == nil || o.Vendor == nil {
+		return nil, false
+	}
+	return o.Vendor, true
+}
+
+// HasVendor returns a boolean if a field has been set.
+func (o *EquipmentIoCardIdentity) HasVendor() bool {
+	if o != nil && o.Vendor != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetVendor gets a reference to the given string and assigns it to the Vendor field.
+func (o *EquipmentIoCardIdentity) SetVendor(v string) {
+	o.Vendor = &v
+}
+
 func (o EquipmentIoCardIdentity) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
@@ -255,14 +391,26 @@ func (o EquipmentIoCardIdentity) MarshalJSON() ([]byte, error) {
 	if o.IoCardMoid != nil {
 		toSerialize["IoCardMoid"] = o.IoCardMoid
 	}
+	if o.Lifecycle != nil {
+		toSerialize["Lifecycle"] = o.Lifecycle
+	}
+	if o.Model != nil {
+		toSerialize["Model"] = o.Model
+	}
 	if o.ModuleId != nil {
 		toSerialize["ModuleId"] = o.ModuleId
 	}
 	if o.NetworkElementMoid != nil {
 		toSerialize["NetworkElementMoid"] = o.NetworkElementMoid
 	}
+	if o.Serial != nil {
+		toSerialize["Serial"] = o.Serial
+	}
 	if o.SwitchId != nil {
 		toSerialize["SwitchId"] = o.SwitchId
+	}
+	if o.Vendor != nil {
+		toSerialize["Vendor"] = o.Vendor
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -280,12 +428,20 @@ func (o *EquipmentIoCardIdentity) UnmarshalJSON(bytes []byte) (err error) {
 		ObjectType string `json:"ObjectType"`
 		// MO Reference to equipmentIoCard MO in inventory service.
 		IoCardMoid *string `json:"IoCardMoid,omitempty"`
+		// IO Card inventory lifecycle status. * `Unknown` - Default lifecycle state of a iocard. This should be an initial state when no state is defined for a specific iocard. * `Decommissioned` - Lifecycle state is set to this value after the chassis is successfully decommissioned. * `DiscoveryInProgress` - Lifecycle state is set to this value after the successful start of the iocard connection discovery process. * `DiscoveryFailed` - Lifecycle state is set to this value after the iocard connection discovery has failed. * `DiscoveryCompleted` - Lifecycle state is set to this value after the connection discovery of the iocard is completed successfully. * `None` - Lifecycle state is set to this value before the start of connection discovery and inventory collection process for a iocard. * `InventoryCompleted` - Lifecycle state is set to this value after the chassis inventory collection process is completed for a specific iocard. * `InventoryInProgress` - Lifecycle state is set to this value after successful  start of the chassis inventory collection process for a specific iocard. * `InventoryFailed` - Lifecycle state is set to this value after the chassis inventory collection process failed for a iocard.
+		Lifecycle *string `json:"Lifecycle,omitempty"`
+		// IO Card or intelligent fabric module model.
+		Model *string `json:"Model,omitempty"`
 		// IOM/MUX Module ID connected to the FI.
 		ModuleId *int64 `json:"ModuleId,omitempty"`
 		// MO Reference to networkElement MO in inventory service.
 		NetworkElementMoid *string `json:"NetworkElementMoid,omitempty"`
-		// Switch ID to which IOM is connected, ID can be either 1 or 2, equalent to A or B.
+		// IO Card or intelligent fabric module serial number.
+		Serial *string `json:"Serial,omitempty"`
+		// Identifier of the Switch where the IOM is connected. ID can be either 1 or 2, equivalent to A or B.
 		SwitchId *int64 `json:"SwitchId,omitempty"`
+		// IO Card or intelligent fabric module vendor.
+		Vendor *string `json:"Vendor,omitempty"`
 	}
 
 	varEquipmentIoCardIdentityWithoutEmbeddedStruct := EquipmentIoCardIdentityWithoutEmbeddedStruct{}
@@ -296,9 +452,13 @@ func (o *EquipmentIoCardIdentity) UnmarshalJSON(bytes []byte) (err error) {
 		varEquipmentIoCardIdentity.ClassId = varEquipmentIoCardIdentityWithoutEmbeddedStruct.ClassId
 		varEquipmentIoCardIdentity.ObjectType = varEquipmentIoCardIdentityWithoutEmbeddedStruct.ObjectType
 		varEquipmentIoCardIdentity.IoCardMoid = varEquipmentIoCardIdentityWithoutEmbeddedStruct.IoCardMoid
+		varEquipmentIoCardIdentity.Lifecycle = varEquipmentIoCardIdentityWithoutEmbeddedStruct.Lifecycle
+		varEquipmentIoCardIdentity.Model = varEquipmentIoCardIdentityWithoutEmbeddedStruct.Model
 		varEquipmentIoCardIdentity.ModuleId = varEquipmentIoCardIdentityWithoutEmbeddedStruct.ModuleId
 		varEquipmentIoCardIdentity.NetworkElementMoid = varEquipmentIoCardIdentityWithoutEmbeddedStruct.NetworkElementMoid
+		varEquipmentIoCardIdentity.Serial = varEquipmentIoCardIdentityWithoutEmbeddedStruct.Serial
 		varEquipmentIoCardIdentity.SwitchId = varEquipmentIoCardIdentityWithoutEmbeddedStruct.SwitchId
+		varEquipmentIoCardIdentity.Vendor = varEquipmentIoCardIdentityWithoutEmbeddedStruct.Vendor
 		*o = EquipmentIoCardIdentity(varEquipmentIoCardIdentity)
 	} else {
 		return err
@@ -319,9 +479,13 @@ func (o *EquipmentIoCardIdentity) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "IoCardMoid")
+		delete(additionalProperties, "Lifecycle")
+		delete(additionalProperties, "Model")
 		delete(additionalProperties, "ModuleId")
 		delete(additionalProperties, "NetworkElementMoid")
+		delete(additionalProperties, "Serial")
 		delete(additionalProperties, "SwitchId")
+		delete(additionalProperties, "Vendor")
 
 		// remove fields from embedded structs
 		reflectMoBaseComplexType := reflect.ValueOf(o.MoBaseComplexType)

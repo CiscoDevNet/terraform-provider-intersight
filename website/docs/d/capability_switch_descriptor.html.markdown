@@ -19,6 +19,7 @@ The following arguments can be used to get data of already created objects in In
 * `description`:(string) Detailed information about the endpoint. 
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
 * `expected_memory`:(int) The total expected memory for this hardware. 
+* `is_ucsx_direct_switch`:(bool) Identifies whether Switch is part of UCSX Direct chassis. 
 * `mod_time`:(string) The time when this managed object was last modified. 
 * `model`:(string) The model of the endpoint, for which this capability information is applicable. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 

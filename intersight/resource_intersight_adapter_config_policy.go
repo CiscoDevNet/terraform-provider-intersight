@@ -445,6 +445,41 @@ func resourceAdapterConfigPolicy() *schema.Resource {
 							Optional:    true,
 							Default:     "adapter.AdapterConfig",
 						},
+						"physical_nic_mode_settings": {
+							Description: "Physical NIC Mode Settings for this adapter.",
+							Type:        schema.TypeList,
+							MaxItems:    1,
+							Optional:    true,
+							ConfigMode:  schema.SchemaConfigModeAttr,
+							Computed:    true,
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"additional_properties": {
+										Type:             schema.TypeString,
+										Optional:         true,
+										DiffSuppressFunc: SuppressDiffAdditionProps,
+									},
+									"class_id": {
+										Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										Default:     "adapter.PhysicalNicModeSettings",
+									},
+									"enabled": {
+										Description: "When Physical NIC Mode is enabled, up-link ports of the VIC are set to pass-through mode. This allows the host to transmit packets without any modification. When Physical NIC Mode is enabled, VLAN tagging of the packets will not happen.",
+										Type:        schema.TypeBool,
+										Optional:    true,
+										Default:     false,
+									},
+									"object_type": {
+										Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										Default:     "adapter.PhysicalNicModeSettings",
+									},
+								},
+							},
+						},
 						"port_channel_settings": {
 							Description: "Port Channel settings for this adapter.",
 							Type:        schema.TypeList,
@@ -943,6 +978,44 @@ func resourceAdapterConfigPolicyCreate(c context.Context, d *schema.ResourceData
 					o.SetObjectType(x)
 				}
 			}
+			if v, ok := l["physical_nic_mode_settings"]; ok {
+				{
+					p := make([]models.AdapterPhysicalNicModeSettings, 0, 1)
+					s := v.([]interface{})
+					for i := 0; i < len(s); i++ {
+						l := s[i].(map[string]interface{})
+						o := models.NewAdapterPhysicalNicModeSettingsWithDefaults()
+						if v, ok := l["additional_properties"]; ok {
+							{
+								x := []byte(v.(string))
+								var x1 interface{}
+								err := json.Unmarshal(x, &x1)
+								if err == nil && x1 != nil {
+									o.AdditionalProperties = x1.(map[string]interface{})
+								}
+							}
+						}
+						o.SetClassId("adapter.PhysicalNicModeSettings")
+						if v, ok := l["enabled"]; ok {
+							{
+								x := (v.(bool))
+								o.SetEnabled(x)
+							}
+						}
+						if v, ok := l["object_type"]; ok {
+							{
+								x := (v.(string))
+								o.SetObjectType(x)
+							}
+						}
+						p = append(p, *o)
+					}
+					if len(p) > 0 {
+						x := p[0]
+						o.SetPhysicalNicModeSettings(x)
+					}
+				}
+			}
 			if v, ok := l["port_channel_settings"]; ok {
 				{
 					p := make([]models.AdapterPortChannelSettings, 0, 1)
@@ -1434,6 +1507,44 @@ func resourceAdapterConfigPolicyUpdate(c context.Context, d *schema.ResourceData
 				{
 					x := (v.(string))
 					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["physical_nic_mode_settings"]; ok {
+				{
+					p := make([]models.AdapterPhysicalNicModeSettings, 0, 1)
+					s := v.([]interface{})
+					for i := 0; i < len(s); i++ {
+						l := s[i].(map[string]interface{})
+						o := models.NewAdapterPhysicalNicModeSettingsWithDefaults()
+						if v, ok := l["additional_properties"]; ok {
+							{
+								x := []byte(v.(string))
+								var x1 interface{}
+								err := json.Unmarshal(x, &x1)
+								if err == nil && x1 != nil {
+									o.AdditionalProperties = x1.(map[string]interface{})
+								}
+							}
+						}
+						o.SetClassId("adapter.PhysicalNicModeSettings")
+						if v, ok := l["enabled"]; ok {
+							{
+								x := (v.(bool))
+								o.SetEnabled(x)
+							}
+						}
+						if v, ok := l["object_type"]; ok {
+							{
+								x := (v.(string))
+								o.SetObjectType(x)
+							}
+						}
+						p = append(p, *o)
+					}
+					if len(p) > 0 {
+						x := p[0]
+						o.SetPhysicalNicModeSettings(x)
+					}
 				}
 			}
 			if v, ok := l["port_channel_settings"]; ok {

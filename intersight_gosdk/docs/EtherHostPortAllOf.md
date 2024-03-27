@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "ether.HostPort"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "ether.HostPort"]
+**AggregatePortId** | Pointer to **int64** | Breakout port member in the fabric extender. | [optional] [readonly] 
 **ModuleId** | Pointer to **int64** | Fabric extender identifier for this port. | [optional] 
 **Speed** | Pointer to **string** | Host Port Speed of IO card or fabric extender. | [optional] [readonly] 
 **EquipmentIoCardBase** | Pointer to [**EquipmentIoCardBaseRelationship**](EquipmentIoCardBaseRelationship.md) |  | [optional] 
@@ -69,6 +70,31 @@ and a boolean to check if the value has been set.
 
 SetObjectType sets ObjectType field to given value.
 
+
+### GetAggregatePortId
+
+`func (o *EtherHostPortAllOf) GetAggregatePortId() int64`
+
+GetAggregatePortId returns the AggregatePortId field if non-nil, zero value otherwise.
+
+### GetAggregatePortIdOk
+
+`func (o *EtherHostPortAllOf) GetAggregatePortIdOk() (*int64, bool)`
+
+GetAggregatePortIdOk returns a tuple with the AggregatePortId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAggregatePortId
+
+`func (o *EtherHostPortAllOf) SetAggregatePortId(v int64)`
+
+SetAggregatePortId sets AggregatePortId field to given value.
+
+### HasAggregatePortId
+
+`func (o *EtherHostPortAllOf) HasAggregatePortId() bool`
+
+HasAggregatePortId returns a boolean if a field has been set.
 
 ### GetModuleId
 

@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **HclOsVendor** | Pointer to **string** | The OS Vendor for the managed object to validate normalized for querying HCL data. It is empty if we are missing this information. | [optional] [readonly] 
 **HclOsVersion** | Pointer to **string** | The OS Version for the managed object to validate normalized for querying HCL data. It is empty if we are missing this information. | [optional] [readonly] 
 **HclProcessor** | Pointer to **string** | The managed object&#39;s processor to validate if applicable normalized for querying HCL data. It is empty if we are missing this information. | [optional] [readonly] 
+**HclValidationTime** | Pointer to **time.Time** | The time at which the last HCL validation occurred. | [optional] [readonly] 
 **InvFirmwareVersion** | Pointer to **string** | The current CIMC version for the server as received from inventory. It is empty if we are missing this information. | [optional] [readonly] 
 **InvModel** | Pointer to **string** | The managed object&#39;s model to validate as received from the inventory. It is empty if we are missing this information. | [optional] [readonly] 
 **InvOsVendor** | Pointer to **string** | The OS Vendor for the managed object to validate as received from inventory. It is empty if we are missing this information. | [optional] [readonly] 
@@ -259,6 +260,31 @@ SetHclProcessor sets HclProcessor field to given value.
 `func (o *CondHclStatusAllOf) HasHclProcessor() bool`
 
 HasHclProcessor returns a boolean if a field has been set.
+
+### GetHclValidationTime
+
+`func (o *CondHclStatusAllOf) GetHclValidationTime() time.Time`
+
+GetHclValidationTime returns the HclValidationTime field if non-nil, zero value otherwise.
+
+### GetHclValidationTimeOk
+
+`func (o *CondHclStatusAllOf) GetHclValidationTimeOk() (*time.Time, bool)`
+
+GetHclValidationTimeOk returns a tuple with the HclValidationTime field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetHclValidationTime
+
+`func (o *CondHclStatusAllOf) SetHclValidationTime(v time.Time)`
+
+SetHclValidationTime sets HclValidationTime field to given value.
+
+### HasHclValidationTime
+
+`func (o *CondHclStatusAllOf) HasHclValidationTime() bool`
+
+HasHclValidationTime returns a boolean if a field has been set.
 
 ### GetInvFirmwareVersion
 

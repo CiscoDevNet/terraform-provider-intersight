@@ -26,6 +26,11 @@ func getEquipmentSwitchOperationSchema() map[string]*schema.Schema {
 			Optional:         true,
 			DiffSuppressFunc: SuppressDiffAdditionProps,
 		},
+		"admin_evac_state": {
+			Description: "Sets evacuation state of the switch. When evacuation is enabled, data traffic flowing through this switch will be suspended for all the servers. Fabric evacuation can be enabled during any maintenance activity on the switch in order to gracefully failover data flows to the peer switch.\n* `Disabled` - Admin configured Disabled State.\n* `Enabled` - Admin configured Enabled State.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"admin_locator_led_action": {
 			Description: "Action performed on the locator LED of the switch.\n* `None` - No operation action for the Locator Led of an equipment.\n* `TurnOn` - Turn on the Locator Led of an equipment.\n* `TurnOff` - Turn off the Locator Led of an equipment.",
 			Type:        schema.TypeString,
@@ -75,6 +80,11 @@ func getEquipmentSwitchOperationSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"config_evac_state": {
+			Description: "Captures the status of evacuation on this switch.\n* `None` - Nil value when no action has been triggered by the user.\n* `Applied` - User configured settings are in applied state.\n* `Applying` - User settings are being applied on the target server.\n* `Failed` - User configured settings could not be applied.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"create_time": {
 			Description: "The time when this managed object was created.",
 			Type:        schema.TypeString,
@@ -118,6 +128,11 @@ func getEquipmentSwitchOperationSchema() map[string]*schema.Schema {
 		"domain_group_moid": {
 			Description: "The DomainGroup ID for this managed object.",
 			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"force_evac": {
+			Description: "Evacuation is blocked by the system if it can cause a traffic outage in the domain. Select \"Force Evacuation\" only if system rejects the operation and you want to override that.",
+			Type:        schema.TypeBool,
 			Optional:    true,
 		},
 		"mod_time": {
@@ -421,6 +436,11 @@ func dataSourceEquipmentSwitchOperationRead(c context.Context, d *schema.Resourc
 		}
 	}
 
+	if v, ok := d.GetOk("admin_evac_state"); ok {
+		x := (v.(string))
+		o.SetAdminEvacState(x)
+	}
+
 	if v, ok := d.GetOk("admin_locator_led_action"); ok {
 		x := (v.(string))
 		o.SetAdminLocatorLedAction(x)
@@ -476,6 +496,11 @@ func dataSourceEquipmentSwitchOperationRead(c context.Context, d *schema.Resourc
 		o.SetClassId(x)
 	}
 
+	if v, ok := d.GetOk("config_evac_state"); ok {
+		x := (v.(string))
+		o.SetConfigEvacState(x)
+	}
+
 	if v, ok := d.GetOk("create_time"); ok {
 		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetCreateTime(x)
@@ -527,6 +552,11 @@ func dataSourceEquipmentSwitchOperationRead(c context.Context, d *schema.Resourc
 	if v, ok := d.GetOk("domain_group_moid"); ok {
 		x := (v.(string))
 		o.SetDomainGroupMoid(x)
+	}
+
+	if v, ok := d.GetOkExists("force_evac"); ok {
+		x := (v.(bool))
+		o.SetForceEvac(x)
 	}
 
 	if v, ok := d.GetOk("mod_time"); ok {
@@ -830,16 +860,19 @@ func dataSourceEquipmentSwitchOperationRead(c context.Context, d *schema.Resourc
 				var temp = make(map[string]interface{})
 				temp["account_moid"] = (s.GetAccountMoid())
 				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
+				temp["admin_evac_state"] = (s.GetAdminEvacState())
 				temp["admin_locator_led_action"] = (s.GetAdminLocatorLedAction())
 				temp["admin_locator_led_action_state"] = (s.GetAdminLocatorLedActionState())
 
 				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)
 				temp["class_id"] = (s.GetClassId())
+				temp["config_evac_state"] = (s.GetConfigEvacState())
 
 				temp["create_time"] = (s.GetCreateTime()).String()
 
 				temp["device_registration"] = flattenMapAssetDeviceRegistrationRelationship(s.GetDeviceRegistration(), d)
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
+				temp["force_evac"] = (s.GetForceEvac())
 
 				temp["mod_time"] = (s.GetModTime()).String()
 				temp["moid"] = (s.GetMoid())

@@ -154,6 +154,12 @@ func resourceCapabilitySwitchDescriptor() *schema.Resource {
 				Type:        schema.TypeInt,
 				Optional:    true,
 			},
+			"is_ucsx_direct_switch": {
+				Description: "Identifies whether Switch is part of UCSX Direct chassis.",
+				Type:        schema.TypeBool,
+				Optional:    true,
+				Default:     false,
+			},
 			"mod_time": {
 				Description: "The time when this managed object was last modified.",
 				Type:        schema.TypeString,
@@ -547,6 +553,11 @@ func resourceCapabilitySwitchDescriptorCreate(c context.Context, d *schema.Resou
 		o.SetExpectedMemory(x)
 	}
 
+	if v, ok := d.GetOkExists("is_ucsx_direct_switch"); ok {
+		x := (v.(bool))
+		o.SetIsUcsxDirectSwitch(x)
+	}
+
 	if v, ok := d.GetOk("model"); ok {
 		x := (v.(string))
 		o.SetModel(x)
@@ -680,6 +691,10 @@ func resourceCapabilitySwitchDescriptorRead(c context.Context, d *schema.Resourc
 		return diag.Errorf("error occurred while setting property ExpectedMemory in CapabilitySwitchDescriptor object: %s", err.Error())
 	}
 
+	if err := d.Set("is_ucsx_direct_switch", (s.GetIsUcsxDirectSwitch())); err != nil {
+		return diag.Errorf("error occurred while setting property IsUcsxDirectSwitch in CapabilitySwitchDescriptor object: %s", err.Error())
+	}
+
 	if err := d.Set("mod_time", (s.GetModTime()).String()); err != nil {
 		return diag.Errorf("error occurred while setting property ModTime in CapabilitySwitchDescriptor object: %s", err.Error())
 	}
@@ -806,6 +821,12 @@ func resourceCapabilitySwitchDescriptorUpdate(c context.Context, d *schema.Resou
 		v := d.Get("expected_memory")
 		x := int64(v.(int))
 		o.SetExpectedMemory(x)
+	}
+
+	if d.HasChange("is_ucsx_direct_switch") {
+		v := d.Get("is_ucsx_direct_switch")
+		x := (v.(bool))
+		o.SetIsUcsxDirectSwitch(x)
 	}
 
 	if d.HasChange("model") {

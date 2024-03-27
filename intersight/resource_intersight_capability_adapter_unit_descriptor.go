@@ -186,9 +186,9 @@ func resourceCapabilityAdapterUnitDescriptor() *schema.Resource {
 							Default:     "capability.FeatureConfig",
 						},
 						"feature_name": {
-							Description:  "Name of the feature that identifies the specific adapter configuration.\n* `RoCEv2` - Capability indicator of the RDMA over Converged Ethernet (RoCE) feature version 2.\n* `RoCEv1` - Capability indicator of the RDMA over Converged Ethernet (RoCE) feature version 1.\n* `VMQ` - Capability indicator of the Virtual Machine Queue (VMQ) feature.\n* `VMMQ` - Capability indicator of the Virtual Machine Multi-Queue (VMMQ) feature.\n* `VMQInterrupts` - Capability indicator of the Virtual Machine Queue (VMQ) Interrupts feature.\n* `NVGRE` - Capability indicator of the Network Virtualization using Generic Routing Encapsulation (NVGRE) feature.\n* `ARFS` - Capability indicator of the Accelerated Receive Flow Steering (ARFS) feature.\n* `VXLAN` - Capability indicator of the Virtual Extensible LAN (VXLAN) feature.\n* `usNIC` - Capability indicator of the User Space NIC (usNIC) feature.\n* `Advanced Filter` - Capability indicator of the Advanced Filter feature.\n* `Azure Stack Host QOS` - Capability indicator of the Azure Stack Host QOS feature.\n* `QinQ` - Capability indicator of the QinQ feature.\n* `SRIOV` - Capability indicator of the Single Root Input Output Virtualization (SR-IOV).",
+							Description:  "Name of the feature that identifies the specific adapter configuration.\n* `RoCEv2` - Capability indicator of the RDMA over Converged Ethernet (RoCE) feature version 2.\n* `RoCEv1` - Capability indicator of the RDMA over Converged Ethernet (RoCE) feature version 1.\n* `VMQ` - Capability indicator of the Virtual Machine Queue (VMQ) feature.\n* `VMMQ` - Capability indicator of the Virtual Machine Multi-Queue (VMMQ) feature.\n* `VMQInterrupts` - Capability indicator of the Virtual Machine Queue (VMQ) Interrupts feature.\n* `NVGRE` - Capability indicator of the Network Virtualization using Generic Routing Encapsulation (NVGRE) feature.\n* `ARFS` - Capability indicator of the Accelerated Receive Flow Steering (ARFS) feature.\n* `VXLAN` - Capability indicator of the Virtual Extensible LAN (VXLAN) feature.\n* `usNIC` - Capability indicator of the User Space NIC (usNIC) feature.\n* `Advanced Filter` - Capability indicator of the Advanced Filter feature.\n* `Azure Stack Host QOS` - Capability indicator of the Azure Stack Host QOS feature.\n* `GENEVE Offload` - Capability indicator of the Generic Network Virtualization Encapsulation (Geneve) Offload feature.\n* `QinQ` - Capability indicator of the QinQ feature.\n* `SRIOV` - Capability indicator of the Single Root Input Output Virtualization (SR-IOV).",
 							Type:         schema.TypeString,
-							ValidateFunc: validation.StringInSlice([]string{"RoCEv2", "RoCEv1", "VMQ", "VMMQ", "VMQInterrupts", "NVGRE", "ARFS", "VXLAN", "usNIC", "Advanced Filter", "Azure Stack Host QOS", "QinQ", "SRIOV"}, false),
+							ValidateFunc: validation.StringInSlice([]string{"RoCEv2", "RoCEv1", "VMQ", "VMMQ", "VMQInterrupts", "NVGRE", "ARFS", "VXLAN", "usNIC", "Advanced Filter", "Azure Stack Host QOS", "GENEVE Offload", "QinQ", "SRIOV"}, false),
 							Optional:     true,
 							Default:      "RoCEv2",
 						},
@@ -271,7 +271,7 @@ func resourceCapabilityAdapterUnitDescriptor() *schema.Resource {
 										Computed:   true,
 										Elem: &schema.Schema{
 											Type:         schema.TypeString,
-											ValidateFunc: validation.StringInSlice([]string{"RoCEv2", "RoCEv1", "VMQ", "VMMQ", "VMQInterrupts", "NVGRE", "ARFS", "VXLAN", "usNIC", "Advanced Filter", "Azure Stack Host QOS", "QinQ", "SRIOV"}, false),
+											ValidateFunc: validation.StringInSlice([]string{"RoCEv2", "RoCEv1", "VMQ", "VMMQ", "VMQInterrupts", "NVGRE", "ARFS", "VXLAN", "usNIC", "Advanced Filter", "Azure Stack Host QOS", "GENEVE Offload", "QinQ", "SRIOV"}, false),
 										}},
 								},
 							},

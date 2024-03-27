@@ -24,6 +24,7 @@ The following arguments can be used to get data of already created objects in In
 * `hcl_os_vendor`:(string) The OS Vendor for the managed object to validate normalized for querying HCL data. It is empty if we are missing this information. 
 * `hcl_os_version`:(string) The OS Version for the managed object to validate normalized for querying HCL data. It is empty if we are missing this information. 
 * `hcl_processor`:(string) The managed object's processor to validate if applicable normalized for querying HCL data. It is empty if we are missing this information. 
+* `hcl_validation_time`:(string) The time at which the last HCL validation occurred. 
 * `inv_firmware_version`:(string) The current CIMC version for the server as received from inventory. It is empty if we are missing this information. 
 * `inv_model`:(string) The managed object's model to validate as received from the inventory. It is empty if we are missing this information. 
 * `inv_os_vendor`:(string) The OS Vendor for the managed object to validate as received from inventory. It is empty if we are missing this information. 

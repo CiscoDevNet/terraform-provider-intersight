@@ -27,6 +27,7 @@ The following arguments can be used to get data of already created objects in In
 * `ecc_bucket_leak_rate`:(int) The ECC bucket leak rate for the Storage Controller in minutes. 
 * `foreign_config_present`:(bool) Storage controller has detected disks in foreign config. 
 * `hw_revision`:(string) The hardware revision of controller. 
+* `hybrid_slots_supported`:(string) U.3 Hybrid Slot Support of the Storage Controller. 
 * `interface_type`:(string) Interface types are Sas, Sata, PCH. 
 * `is_upgraded`:(bool) This field indicates the compute status of the catalog values for the associated component or hardware. 
 * `max_volumes_supported`:(int) Maximum virtual drives that can be created on this Storage Controller. 

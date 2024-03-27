@@ -197,6 +197,17 @@ func resourceCapabilitySwitchCapability() *schema.Resource {
 					}
 					return
 				}},
+			"imm_controls_vpcompression": {
+				Description: "VlanPort Compression is controlled by IMM.",
+				Type:        schema.TypeBool,
+				Optional:    true,
+				Computed:    true,
+				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+					if val != nil {
+						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+					}
+					return
+				}},
 			"locator_beacon_supported": {
 				Description: "Locator Beacon LED support on this switch.",
 				Type:        schema.TypeBool,
@@ -2146,6 +2157,10 @@ func resourceCapabilitySwitchCapabilityRead(c context.Context, d *schema.Resourc
 
 	if err := d.Set("fc_uplink_ports_auto_negotiation_supported", (s.GetFcUplinkPortsAutoNegotiationSupported())); err != nil {
 		return diag.Errorf("error occurred while setting property FcUplinkPortsAutoNegotiationSupported in CapabilitySwitchCapability object: %s", err.Error())
+	}
+
+	if err := d.Set("imm_controls_vpcompression", (s.GetImmControlsVpcompression())); err != nil {
+		return diag.Errorf("error occurred while setting property ImmControlsVpcompression in CapabilitySwitchCapability object: %s", err.Error())
 	}
 
 	if err := d.Set("locator_beacon_supported", (s.GetLocatorBeaconSupported())); err != nil {

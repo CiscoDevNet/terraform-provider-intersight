@@ -18,7 +18,7 @@ The following arguments can be used to get data of already created objects in In
 * `bucket_name`:(string) The S3 bucket name where the images are present, if source is external cloud store. 
 * `create_time`:(string) The time when this managed object was created. 
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
-* `file_type`:(string) The type of distributable image, example huu, scu, driver, os.* `Distributable` - Stores firmware host utility images and fabric images.* `DriverDistributable` - Stores driver distributable images.* `ServerConfigurationUtilityDistributable` - Stores server configuration utility images.* `OperatingSystemFile` - Stores operating system iso images.* `HyperflexDistributable` - It stores HyperFlex images. 
+* `file_type`:(string) The type of distributable image, example huu, scu, driver, os.* `Distributable` - Stores firmware host utility images and fabric images.* `DriverDistributable` - Stores driver distributable images.* `ServerConfigurationUtilityDistributable` - Stores server configuration utility images.* `OperatingSystemFile` - Stores operating system iso images.* `HyperflexDistributable` - It stores HyperFlex images.* `HciDistributable` - It stores HCI images, such as bootstrap iso images. 
 * `from_version`:(string) The version from which user can download images from amazon store, if source is external cloud store. 
 * `mdfid`:(string) The mdfid of the image provided by cisco.com. 
 * `mod_time`:(string) The time when this managed object was last modified. 

@@ -7,13 +7,13 @@ Name | Type | Description | Notes
 **Dimension** | **string** |  | 
 **OutputName** | **string** |  | 
 **OutputType** | **string** |  | [default to "STRING"]
-**ExtractionFn** | **map[string]interface{}** | All filters except the \&quot;spatial\&quot; filter support extraction functions. An extraction function is defined by setting the \&quot;extractionFn\&quot; field on a filter. See Extraction function for more details on extraction functions. If specified, the extraction function will be used to transform input values before the filter is applied. The example below shows a selector filter combined with an extraction function. This filter will transform input values according to the values defined in the lookup map; transformed values will then be matched with the string \&quot;bar_1\&quot;. | 
+**ExtractionFn** | [**TelemetryDruidExtractionFunction**](TelemetryDruidExtractionFunction.md) |  | 
 
 ## Methods
 
 ### NewTelemetryDruidExtractionDimensionSpecAllOf
 
-`func NewTelemetryDruidExtractionDimensionSpecAllOf(dimension string, outputName string, outputType string, extractionFn map[string]interface{}, ) *TelemetryDruidExtractionDimensionSpecAllOf`
+`func NewTelemetryDruidExtractionDimensionSpecAllOf(dimension string, outputName string, outputType string, extractionFn TelemetryDruidExtractionFunction, ) *TelemetryDruidExtractionDimensionSpecAllOf`
 
 NewTelemetryDruidExtractionDimensionSpecAllOf instantiates a new TelemetryDruidExtractionDimensionSpecAllOf object
 This constructor will assign default values to properties that have it defined,
@@ -90,20 +90,20 @@ SetOutputType sets OutputType field to given value.
 
 ### GetExtractionFn
 
-`func (o *TelemetryDruidExtractionDimensionSpecAllOf) GetExtractionFn() map[string]interface{}`
+`func (o *TelemetryDruidExtractionDimensionSpecAllOf) GetExtractionFn() TelemetryDruidExtractionFunction`
 
 GetExtractionFn returns the ExtractionFn field if non-nil, zero value otherwise.
 
 ### GetExtractionFnOk
 
-`func (o *TelemetryDruidExtractionDimensionSpecAllOf) GetExtractionFnOk() (*map[string]interface{}, bool)`
+`func (o *TelemetryDruidExtractionDimensionSpecAllOf) GetExtractionFnOk() (*TelemetryDruidExtractionFunction, bool)`
 
 GetExtractionFnOk returns a tuple with the ExtractionFn field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetExtractionFn
 
-`func (o *TelemetryDruidExtractionDimensionSpecAllOf) SetExtractionFn(v map[string]interface{})`
+`func (o *TelemetryDruidExtractionDimensionSpecAllOf) SetExtractionFn(v TelemetryDruidExtractionFunction)`
 
 SetExtractionFn sets ExtractionFn field to given value.
 

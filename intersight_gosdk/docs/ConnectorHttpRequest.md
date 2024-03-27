@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 **Header** | Pointer to **interface{}** | Collection of key/value pairs to set in the request header. | [optional] 
 **Internal** | Pointer to **bool** | The request is for an internal platform API that requires authentication to be inserted by the platform implementation. | [optional] 
 **Method** | Pointer to **string** | Method specifies the HTTP method (GET, POST, PUT, etc.). For client requests an empty string means GET. | [optional] 
-**Timeout** | Pointer to **int64** | The timeout for the HTTP request to complete, from connection establishment to response body read complete. If not set, a default timeout of five minutes is used. | [optional] 
+**Timeout** | Pointer to **int64** | The timeout for the HTTP request to complete, from connection establishment to response body read complete. If not set, a default timeout of four minutes is used. | [optional] 
 **Url** | Pointer to [**NullableConnectorUrl**](ConnectorUrl.md) |  | [optional] 
 
 ## Methods

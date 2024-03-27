@@ -42,6 +42,7 @@ Name | Type | Description | Notes
 **OperReason** | Pointer to **[]string** |  | [optional] 
 **OperState** | Pointer to **string** | The operational state of the server. | [optional] [readonly] 
 **Operability** | Pointer to **string** | The operability of the server. | [optional] [readonly] 
+**PackageVersion** | Pointer to **string** | The package version of the Host Service Utility (HSU) for this server. | [optional] [readonly] 
 **Personality** | Pointer to **string** | The Rack unit software Personality. | [optional] [readonly] 
 **PlatformType** | Pointer to **string** | The platform type of the registered device - whether managed by UCSM or operating in standalone mode. | [optional] [readonly] 
 **Presence** | Pointer to **string** | This field indicates the presence (equipped) or absence (absent) of the associated component or hardware. | [optional] [readonly] 
@@ -1051,6 +1052,31 @@ SetOperability sets Operability field to given value.
 `func (o *ComputePhysicalSummaryAllOf) HasOperability() bool`
 
 HasOperability returns a boolean if a field has been set.
+
+### GetPackageVersion
+
+`func (o *ComputePhysicalSummaryAllOf) GetPackageVersion() string`
+
+GetPackageVersion returns the PackageVersion field if non-nil, zero value otherwise.
+
+### GetPackageVersionOk
+
+`func (o *ComputePhysicalSummaryAllOf) GetPackageVersionOk() (*string, bool)`
+
+GetPackageVersionOk returns a tuple with the PackageVersion field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPackageVersion
+
+`func (o *ComputePhysicalSummaryAllOf) SetPackageVersion(v string)`
+
+SetPackageVersion sets PackageVersion field to given value.
+
+### HasPackageVersion
+
+`func (o *ComputePhysicalSummaryAllOf) HasPackageVersion() bool`
+
+HasPackageVersion returns a boolean if a field has been set.
 
 ### GetPersonality
 

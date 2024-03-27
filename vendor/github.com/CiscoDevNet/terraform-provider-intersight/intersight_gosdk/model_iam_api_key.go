@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-14968
+API version: 1.0.11-15711
 Contact: intersight@cisco.com
 */
 
@@ -15,6 +15,7 @@ import (
 	"encoding/json"
 	"reflect"
 	"strings"
+	"time"
 )
 
 // IamApiKey An API key is used to authenticate and authorize API requests sent by a client using the HTTP signature scheme. API keys can be used by unattended, daemon clients that need to send requests to Intersight programmatically. API keys are based on public key cryptography. To create an API key, the user must specify: 1. The purpose (description) of the API key, 2. The cryptographic hash algorithm, which is used to compute the digest of the body of HTTP requests, 3. The cryptographic parameters to generate a private/public key pair, e.g. RSA, ECDSA, EDDSA, key modulus, and 4. The signing algorithm, e.g. RSA PKCS v1.5, RSA PSS, ECDSA, EDDSA. The generated private key and public key are encoded in PEM format. The client owns the private key and is responsible for maintaining the confidentiality of the private key. The server holds the public key. The client must have a cryptographic provider compatible with the cryptographic parameters specified in the API key. For example, if you use the powershell SDK to write the client, make sure the appropriate cryptographic providers are installed on the local system. If you create an RSA key pair with modulus set to 2048, the client must support 2048-bit private keys. A maximum of 3 API keys per user is allowed. API keys are used to sign HTTP requests as follows: 1. A cryptographic digest of the body of the HTTP request is calculated using one of the supported cryptographic hash algorithms. 2. The value of the digest is base-64 encoded in the `Digest` HTTP header. 3. A signature is calculated as specified in the HTTP signature scheme, and the signature is added to the `Authorization` HTTP request header. All published Intersight SDKs support API keys.
@@ -24,15 +25,29 @@ type IamApiKey struct {
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
+	// Used to trigger the enable or disable action on the API key. These actions change the status of an API key. * `enable` - Used to enable a disabled API key/App Registration. If the API key/App Registration is already expired, this action has no effect. * `disable` - Used to disable an active API key/App Registration. If the API key/App Registration is already expired, this action has no effect.
+	AdminStatus *string `json:"AdminStatus,omitempty"`
+	// The expiration date of the API key which is set at the time of creation of the key. Its value can only be assigned a date that falls within the range determined by the maximum expiration time configured at the account level. The expiry date can be edited to be earlier or later, provided it stays within the designated expiry period. This period is determined by adding the 'startTime' property of the API key to the maximum expiry time configured at the account level.
+	ExpiryDateTime *time.Time `json:"ExpiryDateTime,omitempty"`
 	// The cryptographic hash algorithm to calculate the message digest. * `SHA256` - The SHA-256 cryptographic hash, as defined by NIST in FIPS 180-4. * `SHA384` - The SHA-384 cryptographic hash, as defined by NIST in FIPS 180-4. * `SHA512` - The SHA-512 cryptographic hash, as defined by NIST in FIPS 180-4. * `SHA512_224` - The SHA-512/224 cryptographic hash, as defined by NIST in FIPS 180-4. * `SHA512_256` - The SHA-512/256 cryptographic hash, as defined by NIST in FIPS 180-4.
-	HashAlgorithm *string                       `json:"HashAlgorithm,omitempty"`
-	KeySpec       NullablePkixKeyGenerationSpec `json:"KeySpec,omitempty"`
+	HashAlgorithm *string `json:"HashAlgorithm,omitempty"`
+	// Used to mark the API key as a never-expiring API key.
+	IsNeverExpiring *bool                         `json:"IsNeverExpiring,omitempty"`
+	KeySpec         NullablePkixKeyGenerationSpec `json:"KeySpec,omitempty"`
+	// The IP address from which the API key was last used.
+	LastUsedIp *string `json:"LastUsedIp,omitempty"`
+	// The time at which the API key was last used. It is updated every 24 hours.
+	LastUsedTime *time.Time `json:"LastUsedTime,omitempty"`
+	// The current status of the API key that dictates the validity of the key. * `enabled` - An API key/App Registration having enabled status can be used for API invocation. * `disabled` - An API key/App Registration having disabled status cannot be used for API invocation. * `expired` - An API key/App Registration having expired status cannot be used for API invocation as the expiration date has passed.
+	OperStatus *string `json:"OperStatus,omitempty"`
 	// Holds the private key for the API key.
 	PrivateKey *string `json:"PrivateKey,omitempty"`
 	// The purpose of the API Key.
 	Purpose *string `json:"Purpose,omitempty"`
 	// The signing algorithm used by the client to authenticate API requests to Intersight. The signing algorithm must be compatible with the key generation specification. * `RSASSA-PKCS1-v1_5` - RSASSA-PKCS1-v1_5 is a RSA signature scheme specified in [RFC 8017](https://tools.ietf.org/html/rfc8017).RSASSA-PKCS1-v1_5 is included only for compatibility with existing applications. * `RSASSA-PSS` - RSASSA-PSS is a RSA signature scheme specified in [RFC 8017](https://tools.ietf.org/html/rfc8017).It combines the RSASP1 and RSAVP1 primitives with the EMSA-PSS encoding method.In the interest of increased robustness, RSASSA-PSS is required in new applications. * `Ed25519` - The Ed25519 signature algorithm, as specified in [RFC 8032](https://tools.ietf.org/html/rfc8032).Ed25519 is a public-key signature system with several attractive features, includingfast single-signature verification, very fast signing, fast key generation and high security level. * `Ecdsa` - The Elliptic Curve Digital Signature Standard (ECDSA), as defined by NIST in FIPS 186-4 and ANSI X9.62.The signature is encoded as a ASN.1 DER SEQUENCE with two INTEGERs (r and s), as defined in RFC3279.When using ECDSA signatures, configure the client to use the same signature encoding as specified on the server side. * `EcdsaP1363Format` - The Elliptic Curve Digital Signature Standard (ECDSA), as defined by NIST in FIPS 186-4 and ANSI X9.62.The signature is the raw concatenation of r and s, as defined in the ISO/IEC 7816-8 IEEE P.1363 standard.In that format, r and s are represented as unsigned, big endian numbers.Extra padding bytes (of value 0x00) is applied so that both r and s encodings have the same size.When using ECDSA signatures, configure the client to use the same signature encoding as specified on the server side.
-	SigningAlgorithm     *string                    `json:"SigningAlgorithm,omitempty"`
+	SigningAlgorithm *string `json:"SigningAlgorithm,omitempty"`
+	// The timestamp at which an expiry date was first set on this API key. For expiring API keys, this field is same as the create time of the API key. For never-expiring API keys, this field is set initially to zero time value. If a never-expiry API key is later changed to have an expiration, the timestamp marking the start of this transition is recorded in this field.
+	StartTime            *time.Time                 `json:"StartTime,omitempty"`
 	Permission           *IamPermissionRelationship `json:"Permission,omitempty"`
 	User                 *IamUserRelationship       `json:"User,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -48,8 +63,12 @@ func NewIamApiKey(classId string, objectType string) *IamApiKey {
 	this := IamApiKey{}
 	this.ClassId = classId
 	this.ObjectType = objectType
+	var adminStatus string = "enable"
+	this.AdminStatus = &adminStatus
 	var hashAlgorithm string = "SHA256"
 	this.HashAlgorithm = &hashAlgorithm
+	var isNeverExpiring bool = false
+	this.IsNeverExpiring = &isNeverExpiring
 	var signingAlgorithm string = "RSASSA-PKCS1-v1_5"
 	this.SigningAlgorithm = &signingAlgorithm
 	return &this
@@ -64,8 +83,12 @@ func NewIamApiKeyWithDefaults() *IamApiKey {
 	this.ClassId = classId
 	var objectType string = "iam.ApiKey"
 	this.ObjectType = objectType
+	var adminStatus string = "enable"
+	this.AdminStatus = &adminStatus
 	var hashAlgorithm string = "SHA256"
 	this.HashAlgorithm = &hashAlgorithm
+	var isNeverExpiring bool = false
+	this.IsNeverExpiring = &isNeverExpiring
 	var signingAlgorithm string = "RSASSA-PKCS1-v1_5"
 	this.SigningAlgorithm = &signingAlgorithm
 	return &this
@@ -119,6 +142,70 @@ func (o *IamApiKey) SetObjectType(v string) {
 	o.ObjectType = v
 }
 
+// GetAdminStatus returns the AdminStatus field value if set, zero value otherwise.
+func (o *IamApiKey) GetAdminStatus() string {
+	if o == nil || o.AdminStatus == nil {
+		var ret string
+		return ret
+	}
+	return *o.AdminStatus
+}
+
+// GetAdminStatusOk returns a tuple with the AdminStatus field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *IamApiKey) GetAdminStatusOk() (*string, bool) {
+	if o == nil || o.AdminStatus == nil {
+		return nil, false
+	}
+	return o.AdminStatus, true
+}
+
+// HasAdminStatus returns a boolean if a field has been set.
+func (o *IamApiKey) HasAdminStatus() bool {
+	if o != nil && o.AdminStatus != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetAdminStatus gets a reference to the given string and assigns it to the AdminStatus field.
+func (o *IamApiKey) SetAdminStatus(v string) {
+	o.AdminStatus = &v
+}
+
+// GetExpiryDateTime returns the ExpiryDateTime field value if set, zero value otherwise.
+func (o *IamApiKey) GetExpiryDateTime() time.Time {
+	if o == nil || o.ExpiryDateTime == nil {
+		var ret time.Time
+		return ret
+	}
+	return *o.ExpiryDateTime
+}
+
+// GetExpiryDateTimeOk returns a tuple with the ExpiryDateTime field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *IamApiKey) GetExpiryDateTimeOk() (*time.Time, bool) {
+	if o == nil || o.ExpiryDateTime == nil {
+		return nil, false
+	}
+	return o.ExpiryDateTime, true
+}
+
+// HasExpiryDateTime returns a boolean if a field has been set.
+func (o *IamApiKey) HasExpiryDateTime() bool {
+	if o != nil && o.ExpiryDateTime != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetExpiryDateTime gets a reference to the given time.Time and assigns it to the ExpiryDateTime field.
+func (o *IamApiKey) SetExpiryDateTime(v time.Time) {
+	o.ExpiryDateTime = &v
+}
+
 // GetHashAlgorithm returns the HashAlgorithm field value if set, zero value otherwise.
 func (o *IamApiKey) GetHashAlgorithm() string {
 	if o == nil || o.HashAlgorithm == nil {
@@ -149,6 +236,38 @@ func (o *IamApiKey) HasHashAlgorithm() bool {
 // SetHashAlgorithm gets a reference to the given string and assigns it to the HashAlgorithm field.
 func (o *IamApiKey) SetHashAlgorithm(v string) {
 	o.HashAlgorithm = &v
+}
+
+// GetIsNeverExpiring returns the IsNeverExpiring field value if set, zero value otherwise.
+func (o *IamApiKey) GetIsNeverExpiring() bool {
+	if o == nil || o.IsNeverExpiring == nil {
+		var ret bool
+		return ret
+	}
+	return *o.IsNeverExpiring
+}
+
+// GetIsNeverExpiringOk returns a tuple with the IsNeverExpiring field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *IamApiKey) GetIsNeverExpiringOk() (*bool, bool) {
+	if o == nil || o.IsNeverExpiring == nil {
+		return nil, false
+	}
+	return o.IsNeverExpiring, true
+}
+
+// HasIsNeverExpiring returns a boolean if a field has been set.
+func (o *IamApiKey) HasIsNeverExpiring() bool {
+	if o != nil && o.IsNeverExpiring != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetIsNeverExpiring gets a reference to the given bool and assigns it to the IsNeverExpiring field.
+func (o *IamApiKey) SetIsNeverExpiring(v bool) {
+	o.IsNeverExpiring = &v
 }
 
 // GetKeySpec returns the KeySpec field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -192,6 +311,102 @@ func (o *IamApiKey) SetKeySpecNil() {
 // UnsetKeySpec ensures that no value is present for KeySpec, not even an explicit nil
 func (o *IamApiKey) UnsetKeySpec() {
 	o.KeySpec.Unset()
+}
+
+// GetLastUsedIp returns the LastUsedIp field value if set, zero value otherwise.
+func (o *IamApiKey) GetLastUsedIp() string {
+	if o == nil || o.LastUsedIp == nil {
+		var ret string
+		return ret
+	}
+	return *o.LastUsedIp
+}
+
+// GetLastUsedIpOk returns a tuple with the LastUsedIp field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *IamApiKey) GetLastUsedIpOk() (*string, bool) {
+	if o == nil || o.LastUsedIp == nil {
+		return nil, false
+	}
+	return o.LastUsedIp, true
+}
+
+// HasLastUsedIp returns a boolean if a field has been set.
+func (o *IamApiKey) HasLastUsedIp() bool {
+	if o != nil && o.LastUsedIp != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetLastUsedIp gets a reference to the given string and assigns it to the LastUsedIp field.
+func (o *IamApiKey) SetLastUsedIp(v string) {
+	o.LastUsedIp = &v
+}
+
+// GetLastUsedTime returns the LastUsedTime field value if set, zero value otherwise.
+func (o *IamApiKey) GetLastUsedTime() time.Time {
+	if o == nil || o.LastUsedTime == nil {
+		var ret time.Time
+		return ret
+	}
+	return *o.LastUsedTime
+}
+
+// GetLastUsedTimeOk returns a tuple with the LastUsedTime field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *IamApiKey) GetLastUsedTimeOk() (*time.Time, bool) {
+	if o == nil || o.LastUsedTime == nil {
+		return nil, false
+	}
+	return o.LastUsedTime, true
+}
+
+// HasLastUsedTime returns a boolean if a field has been set.
+func (o *IamApiKey) HasLastUsedTime() bool {
+	if o != nil && o.LastUsedTime != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetLastUsedTime gets a reference to the given time.Time and assigns it to the LastUsedTime field.
+func (o *IamApiKey) SetLastUsedTime(v time.Time) {
+	o.LastUsedTime = &v
+}
+
+// GetOperStatus returns the OperStatus field value if set, zero value otherwise.
+func (o *IamApiKey) GetOperStatus() string {
+	if o == nil || o.OperStatus == nil {
+		var ret string
+		return ret
+	}
+	return *o.OperStatus
+}
+
+// GetOperStatusOk returns a tuple with the OperStatus field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *IamApiKey) GetOperStatusOk() (*string, bool) {
+	if o == nil || o.OperStatus == nil {
+		return nil, false
+	}
+	return o.OperStatus, true
+}
+
+// HasOperStatus returns a boolean if a field has been set.
+func (o *IamApiKey) HasOperStatus() bool {
+	if o != nil && o.OperStatus != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetOperStatus gets a reference to the given string and assigns it to the OperStatus field.
+func (o *IamApiKey) SetOperStatus(v string) {
+	o.OperStatus = &v
 }
 
 // GetPrivateKey returns the PrivateKey field value if set, zero value otherwise.
@@ -290,6 +505,38 @@ func (o *IamApiKey) SetSigningAlgorithm(v string) {
 	o.SigningAlgorithm = &v
 }
 
+// GetStartTime returns the StartTime field value if set, zero value otherwise.
+func (o *IamApiKey) GetStartTime() time.Time {
+	if o == nil || o.StartTime == nil {
+		var ret time.Time
+		return ret
+	}
+	return *o.StartTime
+}
+
+// GetStartTimeOk returns a tuple with the StartTime field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *IamApiKey) GetStartTimeOk() (*time.Time, bool) {
+	if o == nil || o.StartTime == nil {
+		return nil, false
+	}
+	return o.StartTime, true
+}
+
+// HasStartTime returns a boolean if a field has been set.
+func (o *IamApiKey) HasStartTime() bool {
+	if o != nil && o.StartTime != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetStartTime gets a reference to the given time.Time and assigns it to the StartTime field.
+func (o *IamApiKey) SetStartTime(v time.Time) {
+	o.StartTime = &v
+}
+
 // GetPermission returns the Permission field value if set, zero value otherwise.
 func (o *IamApiKey) GetPermission() IamPermissionRelationship {
 	if o == nil || o.Permission == nil {
@@ -370,11 +617,29 @@ func (o IamApiKey) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["ObjectType"] = o.ObjectType
 	}
+	if o.AdminStatus != nil {
+		toSerialize["AdminStatus"] = o.AdminStatus
+	}
+	if o.ExpiryDateTime != nil {
+		toSerialize["ExpiryDateTime"] = o.ExpiryDateTime
+	}
 	if o.HashAlgorithm != nil {
 		toSerialize["HashAlgorithm"] = o.HashAlgorithm
 	}
+	if o.IsNeverExpiring != nil {
+		toSerialize["IsNeverExpiring"] = o.IsNeverExpiring
+	}
 	if o.KeySpec.IsSet() {
 		toSerialize["KeySpec"] = o.KeySpec.Get()
+	}
+	if o.LastUsedIp != nil {
+		toSerialize["LastUsedIp"] = o.LastUsedIp
+	}
+	if o.LastUsedTime != nil {
+		toSerialize["LastUsedTime"] = o.LastUsedTime
+	}
+	if o.OperStatus != nil {
+		toSerialize["OperStatus"] = o.OperStatus
 	}
 	if o.PrivateKey != nil {
 		toSerialize["PrivateKey"] = o.PrivateKey
@@ -384,6 +649,9 @@ func (o IamApiKey) MarshalJSON() ([]byte, error) {
 	}
 	if o.SigningAlgorithm != nil {
 		toSerialize["SigningAlgorithm"] = o.SigningAlgorithm
+	}
+	if o.StartTime != nil {
+		toSerialize["StartTime"] = o.StartTime
 	}
 	if o.Permission != nil {
 		toSerialize["Permission"] = o.Permission
@@ -405,17 +673,31 @@ func (o *IamApiKey) UnmarshalJSON(bytes []byte) (err error) {
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 		ObjectType string `json:"ObjectType"`
+		// Used to trigger the enable or disable action on the API key. These actions change the status of an API key. * `enable` - Used to enable a disabled API key/App Registration. If the API key/App Registration is already expired, this action has no effect. * `disable` - Used to disable an active API key/App Registration. If the API key/App Registration is already expired, this action has no effect.
+		AdminStatus *string `json:"AdminStatus,omitempty"`
+		// The expiration date of the API key which is set at the time of creation of the key. Its value can only be assigned a date that falls within the range determined by the maximum expiration time configured at the account level. The expiry date can be edited to be earlier or later, provided it stays within the designated expiry period. This period is determined by adding the 'startTime' property of the API key to the maximum expiry time configured at the account level.
+		ExpiryDateTime *time.Time `json:"ExpiryDateTime,omitempty"`
 		// The cryptographic hash algorithm to calculate the message digest. * `SHA256` - The SHA-256 cryptographic hash, as defined by NIST in FIPS 180-4. * `SHA384` - The SHA-384 cryptographic hash, as defined by NIST in FIPS 180-4. * `SHA512` - The SHA-512 cryptographic hash, as defined by NIST in FIPS 180-4. * `SHA512_224` - The SHA-512/224 cryptographic hash, as defined by NIST in FIPS 180-4. * `SHA512_256` - The SHA-512/256 cryptographic hash, as defined by NIST in FIPS 180-4.
-		HashAlgorithm *string                       `json:"HashAlgorithm,omitempty"`
-		KeySpec       NullablePkixKeyGenerationSpec `json:"KeySpec,omitempty"`
+		HashAlgorithm *string `json:"HashAlgorithm,omitempty"`
+		// Used to mark the API key as a never-expiring API key.
+		IsNeverExpiring *bool                         `json:"IsNeverExpiring,omitempty"`
+		KeySpec         NullablePkixKeyGenerationSpec `json:"KeySpec,omitempty"`
+		// The IP address from which the API key was last used.
+		LastUsedIp *string `json:"LastUsedIp,omitempty"`
+		// The time at which the API key was last used. It is updated every 24 hours.
+		LastUsedTime *time.Time `json:"LastUsedTime,omitempty"`
+		// The current status of the API key that dictates the validity of the key. * `enabled` - An API key/App Registration having enabled status can be used for API invocation. * `disabled` - An API key/App Registration having disabled status cannot be used for API invocation. * `expired` - An API key/App Registration having expired status cannot be used for API invocation as the expiration date has passed.
+		OperStatus *string `json:"OperStatus,omitempty"`
 		// Holds the private key for the API key.
 		PrivateKey *string `json:"PrivateKey,omitempty"`
 		// The purpose of the API Key.
 		Purpose *string `json:"Purpose,omitempty"`
 		// The signing algorithm used by the client to authenticate API requests to Intersight. The signing algorithm must be compatible with the key generation specification. * `RSASSA-PKCS1-v1_5` - RSASSA-PKCS1-v1_5 is a RSA signature scheme specified in [RFC 8017](https://tools.ietf.org/html/rfc8017).RSASSA-PKCS1-v1_5 is included only for compatibility with existing applications. * `RSASSA-PSS` - RSASSA-PSS is a RSA signature scheme specified in [RFC 8017](https://tools.ietf.org/html/rfc8017).It combines the RSASP1 and RSAVP1 primitives with the EMSA-PSS encoding method.In the interest of increased robustness, RSASSA-PSS is required in new applications. * `Ed25519` - The Ed25519 signature algorithm, as specified in [RFC 8032](https://tools.ietf.org/html/rfc8032).Ed25519 is a public-key signature system with several attractive features, includingfast single-signature verification, very fast signing, fast key generation and high security level. * `Ecdsa` - The Elliptic Curve Digital Signature Standard (ECDSA), as defined by NIST in FIPS 186-4 and ANSI X9.62.The signature is encoded as a ASN.1 DER SEQUENCE with two INTEGERs (r and s), as defined in RFC3279.When using ECDSA signatures, configure the client to use the same signature encoding as specified on the server side. * `EcdsaP1363Format` - The Elliptic Curve Digital Signature Standard (ECDSA), as defined by NIST in FIPS 186-4 and ANSI X9.62.The signature is the raw concatenation of r and s, as defined in the ISO/IEC 7816-8 IEEE P.1363 standard.In that format, r and s are represented as unsigned, big endian numbers.Extra padding bytes (of value 0x00) is applied so that both r and s encodings have the same size.When using ECDSA signatures, configure the client to use the same signature encoding as specified on the server side.
-		SigningAlgorithm *string                    `json:"SigningAlgorithm,omitempty"`
-		Permission       *IamPermissionRelationship `json:"Permission,omitempty"`
-		User             *IamUserRelationship       `json:"User,omitempty"`
+		SigningAlgorithm *string `json:"SigningAlgorithm,omitempty"`
+		// The timestamp at which an expiry date was first set on this API key. For expiring API keys, this field is same as the create time of the API key. For never-expiring API keys, this field is set initially to zero time value. If a never-expiry API key is later changed to have an expiration, the timestamp marking the start of this transition is recorded in this field.
+		StartTime  *time.Time                 `json:"StartTime,omitempty"`
+		Permission *IamPermissionRelationship `json:"Permission,omitempty"`
+		User       *IamUserRelationship       `json:"User,omitempty"`
 	}
 
 	varIamApiKeyWithoutEmbeddedStruct := IamApiKeyWithoutEmbeddedStruct{}
@@ -425,11 +707,18 @@ func (o *IamApiKey) UnmarshalJSON(bytes []byte) (err error) {
 		varIamApiKey := _IamApiKey{}
 		varIamApiKey.ClassId = varIamApiKeyWithoutEmbeddedStruct.ClassId
 		varIamApiKey.ObjectType = varIamApiKeyWithoutEmbeddedStruct.ObjectType
+		varIamApiKey.AdminStatus = varIamApiKeyWithoutEmbeddedStruct.AdminStatus
+		varIamApiKey.ExpiryDateTime = varIamApiKeyWithoutEmbeddedStruct.ExpiryDateTime
 		varIamApiKey.HashAlgorithm = varIamApiKeyWithoutEmbeddedStruct.HashAlgorithm
+		varIamApiKey.IsNeverExpiring = varIamApiKeyWithoutEmbeddedStruct.IsNeverExpiring
 		varIamApiKey.KeySpec = varIamApiKeyWithoutEmbeddedStruct.KeySpec
+		varIamApiKey.LastUsedIp = varIamApiKeyWithoutEmbeddedStruct.LastUsedIp
+		varIamApiKey.LastUsedTime = varIamApiKeyWithoutEmbeddedStruct.LastUsedTime
+		varIamApiKey.OperStatus = varIamApiKeyWithoutEmbeddedStruct.OperStatus
 		varIamApiKey.PrivateKey = varIamApiKeyWithoutEmbeddedStruct.PrivateKey
 		varIamApiKey.Purpose = varIamApiKeyWithoutEmbeddedStruct.Purpose
 		varIamApiKey.SigningAlgorithm = varIamApiKeyWithoutEmbeddedStruct.SigningAlgorithm
+		varIamApiKey.StartTime = varIamApiKeyWithoutEmbeddedStruct.StartTime
 		varIamApiKey.Permission = varIamApiKeyWithoutEmbeddedStruct.Permission
 		varIamApiKey.User = varIamApiKeyWithoutEmbeddedStruct.User
 		*o = IamApiKey(varIamApiKey)
@@ -451,11 +740,18 @@ func (o *IamApiKey) UnmarshalJSON(bytes []byte) (err error) {
 	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
+		delete(additionalProperties, "AdminStatus")
+		delete(additionalProperties, "ExpiryDateTime")
 		delete(additionalProperties, "HashAlgorithm")
+		delete(additionalProperties, "IsNeverExpiring")
 		delete(additionalProperties, "KeySpec")
+		delete(additionalProperties, "LastUsedIp")
+		delete(additionalProperties, "LastUsedTime")
+		delete(additionalProperties, "OperStatus")
 		delete(additionalProperties, "PrivateKey")
 		delete(additionalProperties, "Purpose")
 		delete(additionalProperties, "SigningAlgorithm")
+		delete(additionalProperties, "StartTime")
 		delete(additionalProperties, "Permission")
 		delete(additionalProperties, "User")
 

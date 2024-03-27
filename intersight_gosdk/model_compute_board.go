@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-14968
+API version: 1.0.11-15711
 Contact: intersight@cisco.com
 */
 
@@ -36,8 +36,10 @@ type ComputeBoard struct {
 	// An array of relationships to equipmentTpm resources.
 	EquipmentTpms []EquipmentTpmRelationship `json:"EquipmentTpms,omitempty"`
 	// An array of relationships to graphicsCard resources.
-	GraphicsCards       []GraphicsCardRelationship       `json:"GraphicsCards,omitempty"`
-	InventoryDeviceInfo *InventoryDeviceInfoRelationship `json:"InventoryDeviceInfo,omitempty"`
+	GraphicsCards []GraphicsCardRelationship `json:"GraphicsCards,omitempty"`
+	// An array of relationships to equipmentHybridDriveSlot resources.
+	HybridDriveSlots    []EquipmentHybridDriveSlotRelationship `json:"HybridDriveSlots,omitempty"`
+	InventoryDeviceInfo *InventoryDeviceInfoRelationship       `json:"InventoryDeviceInfo,omitempty"`
 	// An array of relationships to memoryArray resources.
 	MemoryArrays []MemoryArrayRelationship `json:"MemoryArrays,omitempty"`
 	// An array of relationships to pciCoprocessorCard resources.
@@ -50,6 +52,8 @@ type ComputeBoard struct {
 	RegisteredDevice *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	// An array of relationships to securityUnit resources.
 	SecurityUnits []SecurityUnitRelationship `json:"SecurityUnits,omitempty"`
+	// An array of relationships to storageControllerDrive resources.
+	StorageControllerDrives []StorageControllerDriveRelationship `json:"StorageControllerDrives,omitempty"`
 	// An array of relationships to storageController resources.
 	StorageControllers []StorageControllerRelationship `json:"StorageControllers,omitempty"`
 	// An array of relationships to storageFlexFlashController resources.
@@ -391,6 +395,39 @@ func (o *ComputeBoard) SetGraphicsCards(v []GraphicsCardRelationship) {
 	o.GraphicsCards = v
 }
 
+// GetHybridDriveSlots returns the HybridDriveSlots field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ComputeBoard) GetHybridDriveSlots() []EquipmentHybridDriveSlotRelationship {
+	if o == nil {
+		var ret []EquipmentHybridDriveSlotRelationship
+		return ret
+	}
+	return o.HybridDriveSlots
+}
+
+// GetHybridDriveSlotsOk returns a tuple with the HybridDriveSlots field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ComputeBoard) GetHybridDriveSlotsOk() ([]EquipmentHybridDriveSlotRelationship, bool) {
+	if o == nil || o.HybridDriveSlots == nil {
+		return nil, false
+	}
+	return o.HybridDriveSlots, true
+}
+
+// HasHybridDriveSlots returns a boolean if a field has been set.
+func (o *ComputeBoard) HasHybridDriveSlots() bool {
+	if o != nil && o.HybridDriveSlots != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetHybridDriveSlots gets a reference to the given []EquipmentHybridDriveSlotRelationship and assigns it to the HybridDriveSlots field.
+func (o *ComputeBoard) SetHybridDriveSlots(v []EquipmentHybridDriveSlotRelationship) {
+	o.HybridDriveSlots = v
+}
+
 // GetInventoryDeviceInfo returns the InventoryDeviceInfo field value if set, zero value otherwise.
 func (o *ComputeBoard) GetInventoryDeviceInfo() InventoryDeviceInfoRelationship {
 	if o == nil || o.InventoryDeviceInfo == nil {
@@ -652,6 +689,39 @@ func (o *ComputeBoard) SetSecurityUnits(v []SecurityUnitRelationship) {
 	o.SecurityUnits = v
 }
 
+// GetStorageControllerDrives returns the StorageControllerDrives field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ComputeBoard) GetStorageControllerDrives() []StorageControllerDriveRelationship {
+	if o == nil {
+		var ret []StorageControllerDriveRelationship
+		return ret
+	}
+	return o.StorageControllerDrives
+}
+
+// GetStorageControllerDrivesOk returns a tuple with the StorageControllerDrives field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ComputeBoard) GetStorageControllerDrivesOk() ([]StorageControllerDriveRelationship, bool) {
+	if o == nil || o.StorageControllerDrives == nil {
+		return nil, false
+	}
+	return o.StorageControllerDrives, true
+}
+
+// HasStorageControllerDrives returns a boolean if a field has been set.
+func (o *ComputeBoard) HasStorageControllerDrives() bool {
+	if o != nil && o.StorageControllerDrives != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetStorageControllerDrives gets a reference to the given []StorageControllerDriveRelationship and assigns it to the StorageControllerDrives field.
+func (o *ComputeBoard) SetStorageControllerDrives(v []StorageControllerDriveRelationship) {
+	o.StorageControllerDrives = v
+}
+
 // GetStorageControllers returns the StorageControllers field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ComputeBoard) GetStorageControllers() []StorageControllerRelationship {
 	if o == nil {
@@ -791,6 +861,9 @@ func (o ComputeBoard) MarshalJSON() ([]byte, error) {
 	if o.GraphicsCards != nil {
 		toSerialize["GraphicsCards"] = o.GraphicsCards
 	}
+	if o.HybridDriveSlots != nil {
+		toSerialize["HybridDriveSlots"] = o.HybridDriveSlots
+	}
 	if o.InventoryDeviceInfo != nil {
 		toSerialize["InventoryDeviceInfo"] = o.InventoryDeviceInfo
 	}
@@ -814,6 +887,9 @@ func (o ComputeBoard) MarshalJSON() ([]byte, error) {
 	}
 	if o.SecurityUnits != nil {
 		toSerialize["SecurityUnits"] = o.SecurityUnits
+	}
+	if o.StorageControllerDrives != nil {
+		toSerialize["StorageControllerDrives"] = o.StorageControllerDrives
 	}
 	if o.StorageControllers != nil {
 		toSerialize["StorageControllers"] = o.StorageControllers
@@ -850,8 +926,10 @@ func (o *ComputeBoard) UnmarshalJSON(bytes []byte) (err error) {
 		// An array of relationships to equipmentTpm resources.
 		EquipmentTpms []EquipmentTpmRelationship `json:"EquipmentTpms,omitempty"`
 		// An array of relationships to graphicsCard resources.
-		GraphicsCards       []GraphicsCardRelationship       `json:"GraphicsCards,omitempty"`
-		InventoryDeviceInfo *InventoryDeviceInfoRelationship `json:"InventoryDeviceInfo,omitempty"`
+		GraphicsCards []GraphicsCardRelationship `json:"GraphicsCards,omitempty"`
+		// An array of relationships to equipmentHybridDriveSlot resources.
+		HybridDriveSlots    []EquipmentHybridDriveSlotRelationship `json:"HybridDriveSlots,omitempty"`
+		InventoryDeviceInfo *InventoryDeviceInfoRelationship       `json:"InventoryDeviceInfo,omitempty"`
 		// An array of relationships to memoryArray resources.
 		MemoryArrays []MemoryArrayRelationship `json:"MemoryArrays,omitempty"`
 		// An array of relationships to pciCoprocessorCard resources.
@@ -864,6 +942,8 @@ func (o *ComputeBoard) UnmarshalJSON(bytes []byte) (err error) {
 		RegisteredDevice *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 		// An array of relationships to securityUnit resources.
 		SecurityUnits []SecurityUnitRelationship `json:"SecurityUnits,omitempty"`
+		// An array of relationships to storageControllerDrive resources.
+		StorageControllerDrives []StorageControllerDriveRelationship `json:"StorageControllerDrives,omitempty"`
 		// An array of relationships to storageController resources.
 		StorageControllers []StorageControllerRelationship `json:"StorageControllers,omitempty"`
 		// An array of relationships to storageFlexFlashController resources.
@@ -887,6 +967,7 @@ func (o *ComputeBoard) UnmarshalJSON(bytes []byte) (err error) {
 		varComputeBoard.ComputeRackUnit = varComputeBoardWithoutEmbeddedStruct.ComputeRackUnit
 		varComputeBoard.EquipmentTpms = varComputeBoardWithoutEmbeddedStruct.EquipmentTpms
 		varComputeBoard.GraphicsCards = varComputeBoardWithoutEmbeddedStruct.GraphicsCards
+		varComputeBoard.HybridDriveSlots = varComputeBoardWithoutEmbeddedStruct.HybridDriveSlots
 		varComputeBoard.InventoryDeviceInfo = varComputeBoardWithoutEmbeddedStruct.InventoryDeviceInfo
 		varComputeBoard.MemoryArrays = varComputeBoardWithoutEmbeddedStruct.MemoryArrays
 		varComputeBoard.PciCoprocessorCards = varComputeBoardWithoutEmbeddedStruct.PciCoprocessorCards
@@ -895,6 +976,7 @@ func (o *ComputeBoard) UnmarshalJSON(bytes []byte) (err error) {
 		varComputeBoard.Processors = varComputeBoardWithoutEmbeddedStruct.Processors
 		varComputeBoard.RegisteredDevice = varComputeBoardWithoutEmbeddedStruct.RegisteredDevice
 		varComputeBoard.SecurityUnits = varComputeBoardWithoutEmbeddedStruct.SecurityUnits
+		varComputeBoard.StorageControllerDrives = varComputeBoardWithoutEmbeddedStruct.StorageControllerDrives
 		varComputeBoard.StorageControllers = varComputeBoardWithoutEmbeddedStruct.StorageControllers
 		varComputeBoard.StorageFlexFlashControllers = varComputeBoardWithoutEmbeddedStruct.StorageFlexFlashControllers
 		varComputeBoard.StorageFlexUtilControllers = varComputeBoardWithoutEmbeddedStruct.StorageFlexUtilControllers
@@ -925,6 +1007,7 @@ func (o *ComputeBoard) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "ComputeRackUnit")
 		delete(additionalProperties, "EquipmentTpms")
 		delete(additionalProperties, "GraphicsCards")
+		delete(additionalProperties, "HybridDriveSlots")
 		delete(additionalProperties, "InventoryDeviceInfo")
 		delete(additionalProperties, "MemoryArrays")
 		delete(additionalProperties, "PciCoprocessorCards")
@@ -933,6 +1016,7 @@ func (o *ComputeBoard) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "Processors")
 		delete(additionalProperties, "RegisteredDevice")
 		delete(additionalProperties, "SecurityUnits")
+		delete(additionalProperties, "StorageControllerDrives")
 		delete(additionalProperties, "StorageControllers")
 		delete(additionalProperties, "StorageFlexFlashControllers")
 		delete(additionalProperties, "StorageFlexUtilControllers")

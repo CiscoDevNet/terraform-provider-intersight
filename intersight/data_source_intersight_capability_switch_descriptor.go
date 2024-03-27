@@ -119,6 +119,11 @@ func getCapabilitySwitchDescriptorSchema() map[string]*schema.Schema {
 			Type:        schema.TypeInt,
 			Optional:    true,
 		},
+		"is_ucsx_direct_switch": {
+			Description: "Identifies whether Switch is part of UCSX Direct chassis.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
 		"mod_time": {
 			Description: "The time when this managed object was last modified.",
 			Type:        schema.TypeString,
@@ -510,6 +515,11 @@ func dataSourceCapabilitySwitchDescriptorRead(c context.Context, d *schema.Resou
 		o.SetExpectedMemory(x)
 	}
 
+	if v, ok := d.GetOkExists("is_ucsx_direct_switch"); ok {
+		x := (v.(bool))
+		o.SetIsUcsxDirectSwitch(x)
+	}
+
 	if v, ok := d.GetOk("mod_time"); ok {
 		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetModTime(x)
@@ -798,6 +808,7 @@ func dataSourceCapabilitySwitchDescriptorRead(c context.Context, d *schema.Resou
 				temp["description"] = (s.GetDescription())
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
 				temp["expected_memory"] = (s.GetExpectedMemory())
+				temp["is_ucsx_direct_switch"] = (s.GetIsUcsxDirectSwitch())
 
 				temp["mod_time"] = (s.GetModTime()).String()
 				temp["model"] = (s.GetModel())

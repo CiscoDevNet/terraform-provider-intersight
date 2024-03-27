@@ -144,6 +144,11 @@ func getCondHclStatusSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"hcl_validation_time": {
+			Description: "The time at which the last HCL validation occurred.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"inv_firmware_version": {
 			Description: "The current CIMC version for the server as received from inventory. It is empty if we are missing this information.",
 			Type:        schema.TypeString,
@@ -655,6 +660,11 @@ func dataSourceCondHclStatusRead(c context.Context, d *schema.ResourceData, meta
 		o.SetHclProcessor(x)
 	}
 
+	if v, ok := d.GetOk("hcl_validation_time"); ok {
+		x, _ := time.Parse(time.RFC1123, v.(string))
+		o.SetHclValidationTime(x)
+	}
+
 	if v, ok := d.GetOk("inv_firmware_version"); ok {
 		x := (v.(string))
 		o.SetInvFirmwareVersion(x)
@@ -1059,6 +1069,8 @@ func dataSourceCondHclStatusRead(c context.Context, d *schema.ResourceData, meta
 				temp["hcl_os_vendor"] = (s.GetHclOsVendor())
 				temp["hcl_os_version"] = (s.GetHclOsVersion())
 				temp["hcl_processor"] = (s.GetHclProcessor())
+
+				temp["hcl_validation_time"] = (s.GetHclValidationTime()).String()
 				temp["inv_firmware_version"] = (s.GetInvFirmwareVersion())
 				temp["inv_model"] = (s.GetInvModel())
 				temp["inv_os_vendor"] = (s.GetInvOsVendor())

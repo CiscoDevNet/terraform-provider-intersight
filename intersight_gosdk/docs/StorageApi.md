@@ -13,6 +13,8 @@ Method | HTTP request | Description
 [**GetStorageBatteryBackupUnitByMoid**](StorageApi.md#GetStorageBatteryBackupUnitByMoid) | **Get** /api/v1/storage/BatteryBackupUnits/{Moid} | Read a &#39;storage.BatteryBackupUnit&#39; resource.
 [**GetStorageBatteryBackupUnitList**](StorageApi.md#GetStorageBatteryBackupUnitList) | **Get** /api/v1/storage/BatteryBackupUnits | Read a &#39;storage.BatteryBackupUnit&#39; resource.
 [**GetStorageControllerByMoid**](StorageApi.md#GetStorageControllerByMoid) | **Get** /api/v1/storage/Controllers/{Moid} | Read a &#39;storage.Controller&#39; resource.
+[**GetStorageControllerDriveByMoid**](StorageApi.md#GetStorageControllerDriveByMoid) | **Get** /api/v1/storage/ControllerDrives/{Moid} | Read a &#39;storage.ControllerDrive&#39; resource.
+[**GetStorageControllerDriveList**](StorageApi.md#GetStorageControllerDriveList) | **Get** /api/v1/storage/ControllerDrives | Read a &#39;storage.ControllerDrive&#39; resource.
 [**GetStorageControllerList**](StorageApi.md#GetStorageControllerList) | **Get** /api/v1/storage/Controllers | Read a &#39;storage.Controller&#39; resource.
 [**GetStorageDiskGroupByMoid**](StorageApi.md#GetStorageDiskGroupByMoid) | **Get** /api/v1/storage/DiskGroups/{Moid} | Read a &#39;storage.DiskGroup&#39; resource.
 [**GetStorageDiskGroupList**](StorageApi.md#GetStorageDiskGroupList) | **Get** /api/v1/storage/DiskGroups | Read a &#39;storage.DiskGroup&#39; resource.
@@ -28,6 +30,8 @@ Method | HTTP request | Description
 [**GetStorageEnclosureDiskSlotEpByMoid**](StorageApi.md#GetStorageEnclosureDiskSlotEpByMoid) | **Get** /api/v1/storage/EnclosureDiskSlotEps/{Moid} | Read a &#39;storage.EnclosureDiskSlotEp&#39; resource.
 [**GetStorageEnclosureDiskSlotEpList**](StorageApi.md#GetStorageEnclosureDiskSlotEpList) | **Get** /api/v1/storage/EnclosureDiskSlotEps | Read a &#39;storage.EnclosureDiskSlotEp&#39; resource.
 [**GetStorageEnclosureList**](StorageApi.md#GetStorageEnclosureList) | **Get** /api/v1/storage/Enclosures | Read a &#39;storage.Enclosure&#39; resource.
+[**GetStorageFileItemByMoid**](StorageApi.md#GetStorageFileItemByMoid) | **Get** /api/v1/storage/FileItems/{Moid} | Read a &#39;storage.FileItem&#39; resource.
+[**GetStorageFileItemList**](StorageApi.md#GetStorageFileItemList) | **Get** /api/v1/storage/FileItems | Read a &#39;storage.FileItem&#39; resource.
 [**GetStorageFlexFlashControllerByMoid**](StorageApi.md#GetStorageFlexFlashControllerByMoid) | **Get** /api/v1/storage/FlexFlashControllers/{Moid} | Read a &#39;storage.FlexFlashController&#39; resource.
 [**GetStorageFlexFlashControllerList**](StorageApi.md#GetStorageFlexFlashControllerList) | **Get** /api/v1/storage/FlexFlashControllers | Read a &#39;storage.FlexFlashController&#39; resource.
 [**GetStorageFlexFlashControllerPropsByMoid**](StorageApi.md#GetStorageFlexFlashControllerPropsByMoid) | **Get** /api/v1/storage/FlexFlashControllerProps/{Moid} | Read a &#39;storage.FlexFlashControllerProps&#39; resource.
@@ -176,12 +180,16 @@ Method | HTTP request | Description
 [**GetStorageNetAppVolumeList**](StorageApi.md#GetStorageNetAppVolumeList) | **Get** /api/v1/storage/NetAppVolumes | Read a &#39;storage.NetAppVolume&#39; resource.
 [**GetStorageNetAppVolumeSnapshotByMoid**](StorageApi.md#GetStorageNetAppVolumeSnapshotByMoid) | **Get** /api/v1/storage/NetAppVolumeSnapshots/{Moid} | Read a &#39;storage.NetAppVolumeSnapshot&#39; resource.
 [**GetStorageNetAppVolumeSnapshotList**](StorageApi.md#GetStorageNetAppVolumeSnapshotList) | **Get** /api/v1/storage/NetAppVolumeSnapshots | Read a &#39;storage.NetAppVolumeSnapshot&#39; resource.
+[**GetStorageNvmeRaidConfigurationByMoid**](StorageApi.md#GetStorageNvmeRaidConfigurationByMoid) | **Get** /api/v1/storage/NvmeRaidConfigurations/{Moid} | Read a &#39;storage.NvmeRaidConfiguration&#39; resource.
+[**GetStorageNvmeRaidConfigurationList**](StorageApi.md#GetStorageNvmeRaidConfigurationList) | **Get** /api/v1/storage/NvmeRaidConfigurations | Read a &#39;storage.NvmeRaidConfiguration&#39; resource.
 [**GetStoragePhysicalDiskByMoid**](StorageApi.md#GetStoragePhysicalDiskByMoid) | **Get** /api/v1/storage/PhysicalDisks/{Moid} | Read a &#39;storage.PhysicalDisk&#39; resource.
 [**GetStoragePhysicalDiskExtensionByMoid**](StorageApi.md#GetStoragePhysicalDiskExtensionByMoid) | **Get** /api/v1/storage/PhysicalDiskExtensions/{Moid} | Read a &#39;storage.PhysicalDiskExtension&#39; resource.
 [**GetStoragePhysicalDiskExtensionList**](StorageApi.md#GetStoragePhysicalDiskExtensionList) | **Get** /api/v1/storage/PhysicalDiskExtensions | Read a &#39;storage.PhysicalDiskExtension&#39; resource.
 [**GetStoragePhysicalDiskList**](StorageApi.md#GetStoragePhysicalDiskList) | **Get** /api/v1/storage/PhysicalDisks | Read a &#39;storage.PhysicalDisk&#39; resource.
 [**GetStoragePhysicalDiskUsageByMoid**](StorageApi.md#GetStoragePhysicalDiskUsageByMoid) | **Get** /api/v1/storage/PhysicalDiskUsages/{Moid} | Read a &#39;storage.PhysicalDiskUsage&#39; resource.
 [**GetStoragePhysicalDiskUsageList**](StorageApi.md#GetStoragePhysicalDiskUsageList) | **Get** /api/v1/storage/PhysicalDiskUsages | Read a &#39;storage.PhysicalDiskUsage&#39; resource.
+[**GetStoragePureArrayAlertsByMoid**](StorageApi.md#GetStoragePureArrayAlertsByMoid) | **Get** /api/v1/storage/PureArrayAlerts/{Moid} | Read a &#39;storage.PureArrayAlerts&#39; resource.
+[**GetStoragePureArrayAlertsList**](StorageApi.md#GetStoragePureArrayAlertsList) | **Get** /api/v1/storage/PureArrayAlerts | Read a &#39;storage.PureArrayAlerts&#39; resource.
 [**GetStoragePureArrayByMoid**](StorageApi.md#GetStoragePureArrayByMoid) | **Get** /api/v1/storage/PureArrays/{Moid} | Read a &#39;storage.PureArray&#39; resource.
 [**GetStoragePureArrayList**](StorageApi.md#GetStoragePureArrayList) | **Get** /api/v1/storage/PureArrays | Read a &#39;storage.PureArray&#39; resource.
 [**GetStoragePureControllerByMoid**](StorageApi.md#GetStoragePureControllerByMoid) | **Get** /api/v1/storage/PureControllers/{Moid} | Read a &#39;storage.PureController&#39; resource.
@@ -896,6 +904,158 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**StorageController**](StorageController.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetStorageControllerDriveByMoid
+
+> StorageControllerDrive GetStorageControllerDriveByMoid(ctx, moid).Execute()
+
+Read a 'storage.ControllerDrive' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.StorageApi.GetStorageControllerDriveByMoid(context.Background(), moid).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `StorageApi.GetStorageControllerDriveByMoid``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetStorageControllerDriveByMoid`: StorageControllerDrive
+    fmt.Fprintf(os.Stdout, "Response from `StorageApi.GetStorageControllerDriveByMoid`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetStorageControllerDriveByMoidRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**StorageControllerDrive**](StorageControllerDrive.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetStorageControllerDriveList
+
+> StorageControllerDriveResponse GetStorageControllerDriveList(ctx).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+
+Read a 'storage.ControllerDrive' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    filter := "$filter=CreateTime gt 2012-08-29T21:58:33Z" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
+    orderby := "$orderby=CreationTime" // string | Determines what properties are used to sort the collection of resources. (optional)
+    top := int32($top=10) // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
+    skip := int32($skip=100) // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
+    select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+    expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+    apply := "apply_example" // string | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e., the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. (optional)
+    count := false // bool | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. (optional)
+    inlinecount := "$inlinecount=true" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
+    at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
+    tags := "tags_example" // string | The 'tags' parameter is used to request a summary of the Tag utilization for this resource. When the 'tags' parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.StorageApi.GetStorageControllerDriveList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `StorageApi.GetStorageControllerDriveList``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetStorageControllerDriveList`: StorageControllerDriveResponse
+    fmt.Fprintf(os.Stdout, "Response from `StorageApi.GetStorageControllerDriveList`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetStorageControllerDriveListRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **filter** | **string** | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). | [default to &quot;&quot;]
+ **orderby** | **string** | Determines what properties are used to sort the collection of resources. | 
+ **top** | **int32** | Specifies the maximum number of resources to return in the response. | [default to 100]
+ **skip** | **int32** | Specifies the number of resources to skip in the response. | [default to 0]
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **apply** | **string** | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e., the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. | 
+ **count** | **bool** | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. | 
+ **inlinecount** | **string** | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. | [default to &quot;allpages&quot;]
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
+ **tags** | **string** | The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. | 
+
+### Return type
+
+[**StorageControllerDriveResponse**](StorageControllerDriveResponse.md)
 
 ### Authorization
 
@@ -2044,6 +2204,158 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**StorageEnclosureResponse**](StorageEnclosureResponse.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetStorageFileItemByMoid
+
+> StorageFileItem GetStorageFileItemByMoid(ctx, moid).Execute()
+
+Read a 'storage.FileItem' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.StorageApi.GetStorageFileItemByMoid(context.Background(), moid).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `StorageApi.GetStorageFileItemByMoid``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetStorageFileItemByMoid`: StorageFileItem
+    fmt.Fprintf(os.Stdout, "Response from `StorageApi.GetStorageFileItemByMoid`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetStorageFileItemByMoidRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**StorageFileItem**](StorageFileItem.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetStorageFileItemList
+
+> StorageFileItemResponse GetStorageFileItemList(ctx).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+
+Read a 'storage.FileItem' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    filter := "$filter=CreateTime gt 2012-08-29T21:58:33Z" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
+    orderby := "$orderby=CreationTime" // string | Determines what properties are used to sort the collection of resources. (optional)
+    top := int32($top=10) // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
+    skip := int32($skip=100) // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
+    select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+    expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+    apply := "apply_example" // string | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e., the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. (optional)
+    count := false // bool | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. (optional)
+    inlinecount := "$inlinecount=true" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
+    at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
+    tags := "tags_example" // string | The 'tags' parameter is used to request a summary of the Tag utilization for this resource. When the 'tags' parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.StorageApi.GetStorageFileItemList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `StorageApi.GetStorageFileItemList``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetStorageFileItemList`: StorageFileItemResponse
+    fmt.Fprintf(os.Stdout, "Response from `StorageApi.GetStorageFileItemList`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetStorageFileItemListRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **filter** | **string** | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). | [default to &quot;&quot;]
+ **orderby** | **string** | Determines what properties are used to sort the collection of resources. | 
+ **top** | **int32** | Specifies the maximum number of resources to return in the response. | [default to 100]
+ **skip** | **int32** | Specifies the number of resources to skip in the response. | [default to 0]
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **apply** | **string** | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e., the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. | 
+ **count** | **bool** | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. | 
+ **inlinecount** | **string** | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. | [default to &quot;allpages&quot;]
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
+ **tags** | **string** | The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. | 
+
+### Return type
+
+[**StorageFileItemResponse**](StorageFileItemResponse.md)
 
 ### Authorization
 
@@ -13307,6 +13619,158 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## GetStorageNvmeRaidConfigurationByMoid
+
+> StorageNvmeRaidConfiguration GetStorageNvmeRaidConfigurationByMoid(ctx, moid).Execute()
+
+Read a 'storage.NvmeRaidConfiguration' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.StorageApi.GetStorageNvmeRaidConfigurationByMoid(context.Background(), moid).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `StorageApi.GetStorageNvmeRaidConfigurationByMoid``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetStorageNvmeRaidConfigurationByMoid`: StorageNvmeRaidConfiguration
+    fmt.Fprintf(os.Stdout, "Response from `StorageApi.GetStorageNvmeRaidConfigurationByMoid`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetStorageNvmeRaidConfigurationByMoidRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**StorageNvmeRaidConfiguration**](StorageNvmeRaidConfiguration.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetStorageNvmeRaidConfigurationList
+
+> StorageNvmeRaidConfigurationResponse GetStorageNvmeRaidConfigurationList(ctx).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+
+Read a 'storage.NvmeRaidConfiguration' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    filter := "$filter=CreateTime gt 2012-08-29T21:58:33Z" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
+    orderby := "$orderby=CreationTime" // string | Determines what properties are used to sort the collection of resources. (optional)
+    top := int32($top=10) // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
+    skip := int32($skip=100) // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
+    select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+    expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+    apply := "apply_example" // string | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e., the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. (optional)
+    count := false // bool | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. (optional)
+    inlinecount := "$inlinecount=true" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
+    at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
+    tags := "tags_example" // string | The 'tags' parameter is used to request a summary of the Tag utilization for this resource. When the 'tags' parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.StorageApi.GetStorageNvmeRaidConfigurationList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `StorageApi.GetStorageNvmeRaidConfigurationList``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetStorageNvmeRaidConfigurationList`: StorageNvmeRaidConfigurationResponse
+    fmt.Fprintf(os.Stdout, "Response from `StorageApi.GetStorageNvmeRaidConfigurationList`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetStorageNvmeRaidConfigurationListRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **filter** | **string** | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). | [default to &quot;&quot;]
+ **orderby** | **string** | Determines what properties are used to sort the collection of resources. | 
+ **top** | **int32** | Specifies the maximum number of resources to return in the response. | [default to 100]
+ **skip** | **int32** | Specifies the number of resources to skip in the response. | [default to 0]
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **apply** | **string** | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e., the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. | 
+ **count** | **bool** | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. | 
+ **inlinecount** | **string** | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. | [default to &quot;allpages&quot;]
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
+ **tags** | **string** | The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. | 
+
+### Return type
+
+[**StorageNvmeRaidConfigurationResponse**](StorageNvmeRaidConfigurationResponse.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## GetStoragePhysicalDiskByMoid
 
 > StoragePhysicalDisk GetStoragePhysicalDiskByMoid(ctx, moid).Execute()
@@ -13748,6 +14212,158 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**StoragePhysicalDiskUsageResponse**](StoragePhysicalDiskUsageResponse.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetStoragePureArrayAlertsByMoid
+
+> StoragePureArrayAlerts GetStoragePureArrayAlertsByMoid(ctx, moid).Execute()
+
+Read a 'storage.PureArrayAlerts' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.StorageApi.GetStoragePureArrayAlertsByMoid(context.Background(), moid).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `StorageApi.GetStoragePureArrayAlertsByMoid``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetStoragePureArrayAlertsByMoid`: StoragePureArrayAlerts
+    fmt.Fprintf(os.Stdout, "Response from `StorageApi.GetStoragePureArrayAlertsByMoid`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetStoragePureArrayAlertsByMoidRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**StoragePureArrayAlerts**](StoragePureArrayAlerts.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetStoragePureArrayAlertsList
+
+> StoragePureArrayAlertsResponse GetStoragePureArrayAlertsList(ctx).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+
+Read a 'storage.PureArrayAlerts' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    filter := "$filter=CreateTime gt 2012-08-29T21:58:33Z" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
+    orderby := "$orderby=CreationTime" // string | Determines what properties are used to sort the collection of resources. (optional)
+    top := int32($top=10) // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
+    skip := int32($skip=100) // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
+    select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+    expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+    apply := "apply_example" // string | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e., the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. (optional)
+    count := false // bool | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. (optional)
+    inlinecount := "$inlinecount=true" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
+    at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
+    tags := "tags_example" // string | The 'tags' parameter is used to request a summary of the Tag utilization for this resource. When the 'tags' parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.StorageApi.GetStoragePureArrayAlertsList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `StorageApi.GetStoragePureArrayAlertsList``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetStoragePureArrayAlertsList`: StoragePureArrayAlertsResponse
+    fmt.Fprintf(os.Stdout, "Response from `StorageApi.GetStoragePureArrayAlertsList`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetStoragePureArrayAlertsListRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **filter** | **string** | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). | [default to &quot;&quot;]
+ **orderby** | **string** | Determines what properties are used to sort the collection of resources. | 
+ **top** | **int32** | Specifies the maximum number of resources to return in the response. | [default to 100]
+ **skip** | **int32** | Specifies the number of resources to skip in the response. | [default to 0]
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **apply** | **string** | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e., the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. | 
+ **count** | **bool** | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. | 
+ **inlinecount** | **string** | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. | [default to &quot;allpages&quot;]
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
+ **tags** | **string** | The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. | 
+
+### Return type
+
+[**StoragePureArrayAlertsResponse**](StoragePureArrayAlertsResponse.md)
 
 ### Authorization
 

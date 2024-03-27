@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **EccBucketLeakRate** | Pointer to **int64** | The ECC bucket leak rate for the Storage Controller in minutes. | [optional] 
 **ForeignConfigPresent** | Pointer to **bool** | Storage controller has detected disks in foreign config. | [optional] 
 **HwRevision** | Pointer to **string** | The hardware revision of controller. | [optional] [readonly] 
+**HybridSlotsSupported** | Pointer to **string** | U.3 Hybrid Slot Support of the Storage Controller. | [optional] [readonly] 
 **InterfaceType** | Pointer to **string** | Interface types are Sas, Sata, PCH. | [optional] 
 **MaxVolumesSupported** | Pointer to **int64** | Maximum virtual drives that can be created on this Storage Controller. | [optional] 
 **MemoryCorrectableErrors** | Pointer to **int64** | The number of memory correctable errors reported by the Storage Controller. | [optional] 
@@ -305,6 +306,31 @@ SetHwRevision sets HwRevision field to given value.
 `func (o *StorageControllerAllOf) HasHwRevision() bool`
 
 HasHwRevision returns a boolean if a field has been set.
+
+### GetHybridSlotsSupported
+
+`func (o *StorageControllerAllOf) GetHybridSlotsSupported() string`
+
+GetHybridSlotsSupported returns the HybridSlotsSupported field if non-nil, zero value otherwise.
+
+### GetHybridSlotsSupportedOk
+
+`func (o *StorageControllerAllOf) GetHybridSlotsSupportedOk() (*string, bool)`
+
+GetHybridSlotsSupportedOk returns a tuple with the HybridSlotsSupported field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetHybridSlotsSupported
+
+`func (o *StorageControllerAllOf) SetHybridSlotsSupported(v string)`
+
+SetHybridSlotsSupported sets HybridSlotsSupported field to given value.
+
+### HasHybridSlotsSupported
+
+`func (o *StorageControllerAllOf) HasHybridSlotsSupported() bool`
+
+HasHybridSlotsSupported returns a boolean if a field has been set.
 
 ### GetInterfaceType
 

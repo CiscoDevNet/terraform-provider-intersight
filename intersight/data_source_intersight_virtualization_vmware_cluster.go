@@ -334,6 +334,11 @@ func getVirtualizationVmwareClusterSchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"proactive_ha_enabled": {
+			Description: "Every cluster has an option to enable proactive HA in vCenter. Set to true when the vCenter admin has enabled proactive HA for the cluster.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
 		"processor_capacity": {
 			Description: "The capacity and usage information for CPU power on this cluster.",
 			Type:        schema.TypeList,
@@ -952,6 +957,11 @@ func dataSourceVirtualizationVmwareClusterRead(c context.Context, d *schema.Reso
 		o.SetPermissionResources(x)
 	}
 
+	if v, ok := d.GetOkExists("proactive_ha_enabled"); ok {
+		x := (v.(bool))
+		o.SetProactiveHaEnabled(x)
+	}
+
 	if v, ok := d.GetOk("processor_capacity"); ok {
 		p := make([]models.VirtualizationComputeCapacity, 0, 1)
 		s := v.([]interface{})
@@ -1271,6 +1281,7 @@ func dataSourceVirtualizationVmwareClusterRead(c context.Context, d *schema.Reso
 				temp["parent"] = flattenMapMoBaseMoRelationship(s.GetParent(), d)
 
 				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
+				temp["proactive_ha_enabled"] = (s.GetProactiveHaEnabled())
 
 				temp["processor_capacity"] = flattenMapVirtualizationComputeCapacity(s.GetProcessorCapacity(), d)
 

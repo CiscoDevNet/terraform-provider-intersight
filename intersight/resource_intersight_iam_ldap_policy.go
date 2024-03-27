@@ -179,6 +179,12 @@ func resourceIamLdapPolicy() *schema.Resource {
 							Type:        schema.TypeBool,
 							Optional:    true,
 						},
+						"enable_nested_group_search": {
+							Description: "If enabled, an extended search walks the chain of ancestry all the way to the root and returns all the groups and subgroups, each of those groups belong to recursively.",
+							Type:        schema.TypeBool,
+							Optional:    true,
+							Default:     false,
+						},
 						"filter": {
 							Description:  "Criteria to identify entries in search requests.",
 							Type:         schema.TypeString,
@@ -916,6 +922,12 @@ func resourceIamLdapPolicyCreate(c context.Context, d *schema.ResourceData, meta
 					o.SetEnableGroupAuthorization(x)
 				}
 			}
+			if v, ok := l["enable_nested_group_search"]; ok {
+				{
+					x := (v.(bool))
+					o.SetEnableNestedGroupSearch(x)
+				}
+			}
 			if v, ok := l["filter"]; ok {
 				{
 					x := (v.(string))
@@ -1534,6 +1546,12 @@ func resourceIamLdapPolicyUpdate(c context.Context, d *schema.ResourceData, meta
 				{
 					x := (v.(bool))
 					o.SetEnableGroupAuthorization(x)
+				}
+			}
+			if v, ok := l["enable_nested_group_search"]; ok {
+				{
+					x := (v.(bool))
+					o.SetEnableNestedGroupSearch(x)
 				}
 			}
 			if v, ok := l["filter"]; ok {

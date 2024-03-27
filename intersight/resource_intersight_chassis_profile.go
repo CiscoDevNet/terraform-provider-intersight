@@ -1042,6 +1042,12 @@ func resourceChassisProfile() *schema.Resource {
 				Optional:     true,
 				Default:      "instance",
 			},
+			"user_label": {
+				Description:  "User label assigned to the chassis profile.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.All(validation.StringMatch(regexp.MustCompile("^[ !#$%&\\(\\)\\*\\+,\\-\\./:;\\?@\\[\\]_\\{\\|\\}~a-zA-Z0-9]*$"), ""), validation.StringLenBetween(0, 64)),
+				Optional:     true,
+			},
 			"version_context": {
 				Description: "The versioning info for this managed object.",
 				Type:        schema.TypeList,
@@ -1598,6 +1604,11 @@ func resourceChassisProfileCreate(c context.Context, d *schema.ResourceData, met
 		o.SetType(x)
 	}
 
+	if v, ok := d.GetOk("user_label"); ok {
+		x := (v.(string))
+		o.SetUserLabel(x)
+	}
+
 	r := conn.ApiClient.ChassisApi.CreateChassisProfile(conn.ctx).ChassisProfile(*o)
 	resultMo, _, responseErr := r.Execute()
 	if responseErr != nil {
@@ -1812,6 +1823,10 @@ func resourceChassisProfileRead(c context.Context, d *schema.ResourceData, meta 
 
 	if err := d.Set("type", (s.GetType())); err != nil {
 		return diag.Errorf("error occurred while setting property Type in ChassisProfile object: %s", err.Error())
+	}
+
+	if err := d.Set("user_label", (s.GetUserLabel())); err != nil {
+		return diag.Errorf("error occurred while setting property UserLabel in ChassisProfile object: %s", err.Error())
 	}
 
 	if err := d.Set("version_context", flattenMapMoVersionContext(s.GetVersionContext(), d)); err != nil {
@@ -2224,6 +2239,12 @@ func resourceChassisProfileUpdate(c context.Context, d *schema.ResourceData, met
 		v := d.Get("type")
 		x := (v.(string))
 		o.SetType(x)
+	}
+
+	if d.HasChange("user_label") {
+		v := d.Get("user_label")
+		x := (v.(string))
+		o.SetUserLabel(x)
 	}
 
 	r := conn.ApiClient.ChassisApi.UpdateChassisProfile(conn.ctx, d.Id()).ChassisProfile(*o)

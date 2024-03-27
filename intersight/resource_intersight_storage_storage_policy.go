@@ -108,6 +108,12 @@ func resourceStorageStoragePolicy() *schema.Resource {
 				ValidateFunc: validation.All(validation.StringMatch(regexp.MustCompile("^$|^[a-zA-Z0-9]+[\\x00-\\xFF]*$"), ""), StringLenMaximum(1024)),
 				Optional:     true,
 			},
+			"direct_attached_nvme_slots": {
+				Description:  "Only U.3 NVMe drives has to be specified, entered slots will be moved to Direct attached mode. Allowed slots are 1-4, 101-104. Allowed value is a comma or hyphen separated number range.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^((\\d+\\-\\d+)|(\\d+))(,((\\d+\\-\\d+)|(\\d+)))*$"), ""),
+				Optional:     true,
+			},
 			"domain_group_moid": {
 				Description: "The DomainGroup ID for this managed object.",
 				Type:        schema.TypeString,
@@ -196,6 +202,13 @@ func resourceStorageStoragePolicy() *schema.Resource {
 							Type:        schema.TypeBool,
 							Optional:    true,
 							Default:     false,
+						},
+						"name": {
+							Description:  "The name of the virtual drive. The name can be between 1 and 15 alphanumeric characters. Spaces or any special characters other than - (hyphen), _ (underscore), : (colon), and . (period) are not allowed. This field will be pre-populated with the default or user configured value which can be edited.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.All(validation.StringMatch(regexp.MustCompile("^[a-zA-Z0-9\\-\\._:]*$"), ""), StringLenMaximum(15)),
+							Optional:     true,
+							Default:      "MStorBootVd",
 						},
 						"object_type": {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -519,10 +532,16 @@ func resourceStorageStoragePolicy() *schema.Resource {
 					},
 				},
 			},
-			"secure_jbods": {
-				Description:  "JBOD drives specified in this slot range will be encrypted. Allowed value is a comma or hyphen separated number range. Sample format is 1, 3 or 4-6, 8.",
+			"raid_attached_nvme_slots": {
+				Description:  "Only U.3 NVMe drives has to be specified, entered slots will be moved to RAID attached mode. Allowed slots are 1-4, 101-104. Allowed value is a comma or hyphen separated number range.",
 				Type:         schema.TypeString,
 				ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^((\\d+\\-\\d+)|(\\d+))(,((\\d+\\-\\d+)|(\\d+)))*$"), ""),
+				Optional:     true,
+			},
+			"secure_jbods": {
+				Description:  "JBOD drives specified in this slot range will be encrypted. Allowed values are 'ALL', or a comma or hyphen separated number range. Sample format is ALL or 1, 3 or 4-6, 8. Setting the value to 'ALL' will encrypt all the unused UnconfigureGood/JBOD disks.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^((((\\d+\\-\\d+)|(\\d+))(,((\\d+\\-\\d+)|(\\d+)))*)|(a|A)(l|L)(l|L))$"), ""),
 				Optional:     true,
 			},
 			"shared_scope": {
@@ -757,6 +776,11 @@ func resourceStorageStoragePolicyCreate(c context.Context, d *schema.ResourceDat
 		o.SetDescription(x)
 	}
 
+	if v, ok := d.GetOk("direct_attached_nvme_slots"); ok {
+		x := (v.(string))
+		o.SetDirectAttachedNvmeSlots(x)
+	}
+
 	if v, ok := d.GetOk("drive_group"); ok {
 		x := make([]models.StorageDriveGroupRelationship, 0)
 		s := v.([]interface{})
@@ -831,6 +855,12 @@ func resourceStorageStoragePolicyCreate(c context.Context, d *schema.ResourceDat
 				{
 					x := (v.(bool))
 					o.SetEnable(x)
+				}
+			}
+			if v, ok := l["name"]; ok {
+				{
+					x := (v.(string))
+					o.SetName(x)
 				}
 			}
 			if v, ok := l["object_type"]; ok {
@@ -1049,6 +1079,11 @@ func resourceStorageStoragePolicyCreate(c context.Context, d *schema.ResourceDat
 		}
 	}
 
+	if v, ok := d.GetOk("raid_attached_nvme_slots"); ok {
+		x := (v.(string))
+		o.SetRaidAttachedNvmeSlots(x)
+	}
+
 	if v, ok := d.GetOk("secure_jbods"); ok {
 		x := (v.(string))
 		o.SetSecureJbods(x)
@@ -1183,6 +1218,10 @@ func resourceStorageStoragePolicyRead(c context.Context, d *schema.ResourceData,
 		return diag.Errorf("error occurred while setting property Description in StorageStoragePolicy object: %s", err.Error())
 	}
 
+	if err := d.Set("direct_attached_nvme_slots", (s.GetDirectAttachedNvmeSlots())); err != nil {
+		return diag.Errorf("error occurred while setting property DirectAttachedNvmeSlots in StorageStoragePolicy object: %s", err.Error())
+	}
+
 	if err := d.Set("domain_group_moid", (s.GetDomainGroupMoid())); err != nil {
 		return diag.Errorf("error occurred while setting property DomainGroupMoid in StorageStoragePolicy object: %s", err.Error())
 	}
@@ -1237,6 +1276,10 @@ func resourceStorageStoragePolicyRead(c context.Context, d *schema.ResourceData,
 
 	if err := d.Set("raid0_drive", flattenMapStorageR0Drive(s.GetRaid0Drive(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property Raid0Drive in StorageStoragePolicy object: %s", err.Error())
+	}
+
+	if err := d.Set("raid_attached_nvme_slots", (s.GetRaidAttachedNvmeSlots())); err != nil {
+		return diag.Errorf("error occurred while setting property RaidAttachedNvmeSlots in StorageStoragePolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("secure_jbods", (s.GetSecureJbods())); err != nil {
@@ -1296,6 +1339,12 @@ func resourceStorageStoragePolicyUpdate(c context.Context, d *schema.ResourceDat
 		v := d.Get("description")
 		x := (v.(string))
 		o.SetDescription(x)
+	}
+
+	if d.HasChange("direct_attached_nvme_slots") {
+		v := d.Get("direct_attached_nvme_slots")
+		x := (v.(string))
+		o.SetDirectAttachedNvmeSlots(x)
 	}
 
 	if d.HasChange("drive_group") {
@@ -1373,6 +1422,12 @@ func resourceStorageStoragePolicyUpdate(c context.Context, d *schema.ResourceDat
 				{
 					x := (v.(bool))
 					o.SetEnable(x)
+				}
+			}
+			if v, ok := l["name"]; ok {
+				{
+					x := (v.(string))
+					o.SetName(x)
 				}
 			}
 			if v, ok := l["object_type"]; ok {
@@ -1592,6 +1647,12 @@ func resourceStorageStoragePolicyUpdate(c context.Context, d *schema.ResourceDat
 			x := p[0]
 			o.SetRaid0Drive(x)
 		}
+	}
+
+	if d.HasChange("raid_attached_nvme_slots") {
+		v := d.Get("raid_attached_nvme_slots")
+		x := (v.(string))
+		o.SetRaidAttachedNvmeSlots(x)
 	}
 
 	if d.HasChange("secure_jbods") {

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-14968
+API version: 1.0.11-15711
 Contact: intersight@cisco.com
 */
 
@@ -15,6 +15,7 @@ import (
 	"encoding/json"
 	"reflect"
 	"strings"
+	"time"
 )
 
 // CondHclStatus The HCL status of a managed object after we have validated the managed object components' firmware and drivers against the HCL.
@@ -38,6 +39,8 @@ type CondHclStatus struct {
 	HclOsVersion *string `json:"HclOsVersion,omitempty"`
 	// The managed object's processor to validate if applicable normalized for querying HCL data. It is empty if we are missing this information.
 	HclProcessor *string `json:"HclProcessor,omitempty"`
+	// The time at which the last HCL validation occurred.
+	HclValidationTime *time.Time `json:"HclValidationTime,omitempty"`
 	// The current CIMC version for the server as received from inventory. It is empty if we are missing this information.
 	InvFirmwareVersion *string `json:"InvFirmwareVersion,omitempty"`
 	// The managed object's model to validate as received from the inventory. It is empty if we are missing this information.
@@ -358,6 +361,38 @@ func (o *CondHclStatus) HasHclProcessor() bool {
 // SetHclProcessor gets a reference to the given string and assigns it to the HclProcessor field.
 func (o *CondHclStatus) SetHclProcessor(v string) {
 	o.HclProcessor = &v
+}
+
+// GetHclValidationTime returns the HclValidationTime field value if set, zero value otherwise.
+func (o *CondHclStatus) GetHclValidationTime() time.Time {
+	if o == nil || o.HclValidationTime == nil {
+		var ret time.Time
+		return ret
+	}
+	return *o.HclValidationTime
+}
+
+// GetHclValidationTimeOk returns a tuple with the HclValidationTime field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CondHclStatus) GetHclValidationTimeOk() (*time.Time, bool) {
+	if o == nil || o.HclValidationTime == nil {
+		return nil, false
+	}
+	return o.HclValidationTime, true
+}
+
+// HasHclValidationTime returns a boolean if a field has been set.
+func (o *CondHclStatus) HasHclValidationTime() bool {
+	if o != nil && o.HclValidationTime != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetHclValidationTime gets a reference to the given time.Time and assigns it to the HclValidationTime field.
+func (o *CondHclStatus) SetHclValidationTime(v time.Time) {
+	o.HclValidationTime = &v
 }
 
 // GetInvFirmwareVersion returns the InvFirmwareVersion field value if set, zero value otherwise.
@@ -782,6 +817,9 @@ func (o CondHclStatus) MarshalJSON() ([]byte, error) {
 	if o.HclProcessor != nil {
 		toSerialize["HclProcessor"] = o.HclProcessor
 	}
+	if o.HclValidationTime != nil {
+		toSerialize["HclValidationTime"] = o.HclValidationTime
+	}
 	if o.InvFirmwareVersion != nil {
 		toSerialize["InvFirmwareVersion"] = o.InvFirmwareVersion
 	}
@@ -846,6 +884,8 @@ func (o *CondHclStatus) UnmarshalJSON(bytes []byte) (err error) {
 		HclOsVersion *string `json:"HclOsVersion,omitempty"`
 		// The managed object's processor to validate if applicable normalized for querying HCL data. It is empty if we are missing this information.
 		HclProcessor *string `json:"HclProcessor,omitempty"`
+		// The time at which the last HCL validation occurred.
+		HclValidationTime *time.Time `json:"HclValidationTime,omitempty"`
 		// The current CIMC version for the server as received from inventory. It is empty if we are missing this information.
 		InvFirmwareVersion *string `json:"InvFirmwareVersion,omitempty"`
 		// The managed object's model to validate as received from the inventory. It is empty if we are missing this information.
@@ -884,6 +924,7 @@ func (o *CondHclStatus) UnmarshalJSON(bytes []byte) (err error) {
 		varCondHclStatus.HclOsVendor = varCondHclStatusWithoutEmbeddedStruct.HclOsVendor
 		varCondHclStatus.HclOsVersion = varCondHclStatusWithoutEmbeddedStruct.HclOsVersion
 		varCondHclStatus.HclProcessor = varCondHclStatusWithoutEmbeddedStruct.HclProcessor
+		varCondHclStatus.HclValidationTime = varCondHclStatusWithoutEmbeddedStruct.HclValidationTime
 		varCondHclStatus.InvFirmwareVersion = varCondHclStatusWithoutEmbeddedStruct.InvFirmwareVersion
 		varCondHclStatus.InvModel = varCondHclStatusWithoutEmbeddedStruct.InvModel
 		varCondHclStatus.InvOsVendor = varCondHclStatusWithoutEmbeddedStruct.InvOsVendor
@@ -922,6 +963,7 @@ func (o *CondHclStatus) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "HclOsVendor")
 		delete(additionalProperties, "HclOsVersion")
 		delete(additionalProperties, "HclProcessor")
+		delete(additionalProperties, "HclValidationTime")
 		delete(additionalProperties, "InvFirmwareVersion")
 		delete(additionalProperties, "InvModel")
 		delete(additionalProperties, "InvOsVendor")

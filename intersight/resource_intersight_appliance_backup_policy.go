@@ -320,11 +320,10 @@ func resourceApplianceBackupPolicy() *schema.Resource {
 				Optional:    true,
 			},
 			"retention_count": {
-				Description:  "The number of backups before earliest backup is overwritten. Requires cleanup policy to be enabled.",
-				Type:         schema.TypeInt,
-				ValidateFunc: validation.IntBetween(1, 100),
-				Optional:     true,
-				Default:      1,
+				Description: "The number of backups before earliest backup is overwritten. Requires cleanup policy to be enabled.",
+				Type:        schema.TypeInt,
+				Optional:    true,
+				Default:     1,
 			},
 			"retention_policy_enabled": {
 				Description: "If backup rotate policy is set, older backups will automatically be overwritten. The number of backups before overwriting is defined by the retentionCount property.",

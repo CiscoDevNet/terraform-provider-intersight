@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "storage.PurePort"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "storage.PurePort"]
 **Failover** | Pointer to **string** | Name of the port to which this port has failed over. | [optional] [readonly] 
+**Nqn** | Pointer to **string** | The NVMe Qualified Name (NQN) associated with the host for ethernet port. | [optional] [readonly] 
 **Portal** | Pointer to **string** | Ip address of iSCSI portal configured on the port. | [optional] [readonly] 
 **Array** | Pointer to [**StoragePureArrayRelationship**](StoragePureArrayRelationship.md) |  | [optional] 
 **Controller** | Pointer to [**StoragePureControllerRelationship**](StoragePureControllerRelationship.md) |  | [optional] 
@@ -95,6 +96,31 @@ SetFailover sets Failover field to given value.
 `func (o *StoragePurePortAllOf) HasFailover() bool`
 
 HasFailover returns a boolean if a field has been set.
+
+### GetNqn
+
+`func (o *StoragePurePortAllOf) GetNqn() string`
+
+GetNqn returns the Nqn field if non-nil, zero value otherwise.
+
+### GetNqnOk
+
+`func (o *StoragePurePortAllOf) GetNqnOk() (*string, bool)`
+
+GetNqnOk returns a tuple with the Nqn field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNqn
+
+`func (o *StoragePurePortAllOf) SetNqn(v string)`
+
+SetNqn sets Nqn field to given value.
+
+### HasNqn
+
+`func (o *StoragePurePortAllOf) HasNqn() bool`
+
+HasNqn returns a boolean if a field has been set.
 
 ### GetPortal
 

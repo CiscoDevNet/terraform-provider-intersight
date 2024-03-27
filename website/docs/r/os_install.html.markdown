@@ -89,6 +89,8 @@ This complex property has following sub-properties:
   + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
 * `answers`:(HashMap) - Answers provided by user for the unattended OS installation. 
 This complex property has following sub-properties:
+  + `alternate_name_servers`:
+                (Array of schema.TypeString) -
   + `answer_file`:(string) If the source of the answers is a static file, the content of the file is stored as valuein this property.The value is mandatory only when the 'Source' property has been set to 'File'. 
   + `hostname`:(string) Hostname to be configured for the server in the OS. 
   + `ip_config_type`:(string) IP configuration type. Values are Static or Dynamic configuration of IP.In case of static IP configuration, IP address, gateway and other details needto be populated. In case of dynamic the IP configuration is obtained dynamicallyfrom DHCP.* `static` - In case of static IP configuraton, provide the details such as IP address, netmask, and gateway.* `DHCP` - In case of dynamic IP configuration, the IP address, netmask and gateway detailsare obtained from DHCP. 

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-14968
+API version: 1.0.11-15711
 Contact: intersight@cisco.com
 */
 
@@ -23,6 +23,8 @@ type ComputeServerOpStatusAllOf struct {
 	ObjectType string `json:"ObjectType"`
 	// The configured state of these settings in the target server. The value is any one of Applied, Applying, Failed. Applied - The state denotes that the settings are applied successfully in the target server. Applying - The state denotes that the settings are being applied in the target server. Failed - The state denotes that the settings could not be applied in the target server. * `Applied` - User configured settings are in applied state. * `Applying` - User settings are being applied on the target server. * `Scheduled` - User configured settings are scheduled to be applied. * `Failed` - User configured settings could not be applied.
 	ConfigState *string `json:"ConfigState,omitempty"`
+	// The WorkflowInfoMo moid that is running.
+	WorkflowInfoMoid *string `json:"WorkflowInfoMoid,omitempty"`
 	// The workflow type being started. The workflow name to distinguish workflow by type.
 	WorkflowType         *string `json:"WorkflowType,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -137,6 +139,38 @@ func (o *ComputeServerOpStatusAllOf) SetConfigState(v string) {
 	o.ConfigState = &v
 }
 
+// GetWorkflowInfoMoid returns the WorkflowInfoMoid field value if set, zero value otherwise.
+func (o *ComputeServerOpStatusAllOf) GetWorkflowInfoMoid() string {
+	if o == nil || o.WorkflowInfoMoid == nil {
+		var ret string
+		return ret
+	}
+	return *o.WorkflowInfoMoid
+}
+
+// GetWorkflowInfoMoidOk returns a tuple with the WorkflowInfoMoid field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ComputeServerOpStatusAllOf) GetWorkflowInfoMoidOk() (*string, bool) {
+	if o == nil || o.WorkflowInfoMoid == nil {
+		return nil, false
+	}
+	return o.WorkflowInfoMoid, true
+}
+
+// HasWorkflowInfoMoid returns a boolean if a field has been set.
+func (o *ComputeServerOpStatusAllOf) HasWorkflowInfoMoid() bool {
+	if o != nil && o.WorkflowInfoMoid != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetWorkflowInfoMoid gets a reference to the given string and assigns it to the WorkflowInfoMoid field.
+func (o *ComputeServerOpStatusAllOf) SetWorkflowInfoMoid(v string) {
+	o.WorkflowInfoMoid = &v
+}
+
 // GetWorkflowType returns the WorkflowType field value if set, zero value otherwise.
 func (o *ComputeServerOpStatusAllOf) GetWorkflowType() string {
 	if o == nil || o.WorkflowType == nil {
@@ -180,6 +214,9 @@ func (o ComputeServerOpStatusAllOf) MarshalJSON() ([]byte, error) {
 	if o.ConfigState != nil {
 		toSerialize["ConfigState"] = o.ConfigState
 	}
+	if o.WorkflowInfoMoid != nil {
+		toSerialize["WorkflowInfoMoid"] = o.WorkflowInfoMoid
+	}
 	if o.WorkflowType != nil {
 		toSerialize["WorkflowType"] = o.WorkflowType
 	}
@@ -204,6 +241,7 @@ func (o *ComputeServerOpStatusAllOf) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "ConfigState")
+		delete(additionalProperties, "WorkflowInfoMoid")
 		delete(additionalProperties, "WorkflowType")
 		o.AdditionalProperties = additionalProperties
 	}

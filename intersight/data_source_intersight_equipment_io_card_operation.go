@@ -26,8 +26,13 @@ func getEquipmentIoCardOperationSchema() map[string]*schema.Schema {
 			Optional:         true,
 			DiffSuppressFunc: SuppressDiffAdditionProps,
 		},
+		"admin_peer_power_state": {
+			Description: "User configured power state of the peer IO module.\n* `None` - Placeholder default value for iom power state property.\n* `Reboot` - IO Module reboot state property value.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"admin_power_state": {
-			Description: "User configured power state of the iomodule.\n* `None` - Placeholder default value for iom power state property.\n* `Reboot` - IO Module reboot state property value.",
+			Description: "User configured power state of the IO module.\n* `None` - Placeholder default value for iom power state property.\n* `Reboot` - IO Module reboot state property value.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -71,7 +76,7 @@ func getEquipmentIoCardOperationSchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"config_state": {
-			Description: "The configured state of these settings in the target chassis. The value is any one of Applied, Applying, Failed. Applied - This state denotes that the settings are applied successfully in the target chassis iomodule. Applying - This state denotes that the settings are being applied in the target chassis iomodule. Failed - This state denotes that the settings could not be applied in the target chassis iomodule.\n* `None` - Nil value when no action has been triggered by the user.\n* `Applied` - User configured settings are in applied state.\n* `Applying` - User settings are being applied on the target server.\n* `Failed` - User configured settings could not be applied.",
+			Description: "The configured state of these settings in the target IO module. The value is any one of Applied, Applying, Failed. Applied - This state denotes that the settings are applied successfully in the target IO module. Applying - This state denotes that the settings are being applied in the target IO module. Failed - This state denotes that the settings could not be applied in the target IO module.\n* `None` - Nil value when no action has been triggered by the user.\n* `Applied` - User configured settings are in applied state.\n* `Applying` - User settings are being applied on the target server.\n* `Failed` - User configured settings could not be applied.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -149,6 +154,44 @@ func getEquipmentIoCardOperationSchema() map[string]*schema.Schema {
 					},
 					"selector": {
 						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"io_card_operation_status": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"config_state": {
+						Description: "The configured state of the settings in the target IO Card. The value is any one of Applied, Applying or Failed. Applied - The state denotes that the settings are applied successfully in the target IO Card. Applying - The state denotes that the settings are being applied in the target IO Card. Failed - The state denotes that the settings could not be applied in the target IO Card.\n* `None` - Nil value when no action has been triggered by the user.\n* `Applied` - User configured settings are in applied state.\n* `Applying` - User settings are being applied on the target server.\n* `Failed` - User configured settings could not be applied.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"workflow_id": {
+						Description: "The workflow Id of the IO Card operations workflow.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"workflow_type": {
+						Description: "The workflow type of the IO Card operation workflow. This can be used to distinguish different IO Card operations.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
@@ -421,6 +464,11 @@ func dataSourceEquipmentIoCardOperationRead(c context.Context, d *schema.Resourc
 		}
 	}
 
+	if v, ok := d.GetOk("admin_peer_power_state"); ok {
+		x := (v.(string))
+		o.SetAdminPeerPowerState(x)
+	}
+
 	if v, ok := d.GetOk("admin_power_state"); ok {
 		x := (v.(string))
 		o.SetAdminPowerState(x)
@@ -570,6 +618,34 @@ func dataSourceEquipmentIoCardOperationRead(c context.Context, d *schema.Resourc
 			x := p[0]
 			o.SetIoCard(x)
 		}
+	}
+
+	if v, ok := d.GetOk("io_card_operation_status"); ok {
+		x := make([]models.EquipmentIoCardOperationStatus, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := &models.EquipmentIoCardOperationStatus{}
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("equipment.IoCardOperationStatus")
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			x = append(x, *o)
+		}
+		o.SetIoCardOperationStatus(x)
 	}
 
 	if v, ok := d.GetOk("mod_time"); ok {
@@ -830,6 +906,7 @@ func dataSourceEquipmentIoCardOperationRead(c context.Context, d *schema.Resourc
 				var temp = make(map[string]interface{})
 				temp["account_moid"] = (s.GetAccountMoid())
 				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
+				temp["admin_peer_power_state"] = (s.GetAdminPeerPowerState())
 				temp["admin_power_state"] = (s.GetAdminPowerState())
 
 				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)
@@ -842,6 +919,8 @@ func dataSourceEquipmentIoCardOperationRead(c context.Context, d *schema.Resourc
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
 
 				temp["io_card"] = flattenMapEquipmentIoCardRelationship(s.GetIoCard(), d)
+
+				temp["io_card_operation_status"] = flattenListEquipmentIoCardOperationStatus(s.GetIoCardOperationStatus(), d)
 
 				temp["mod_time"] = (s.GetModTime()).String()
 				temp["moid"] = (s.GetMoid())

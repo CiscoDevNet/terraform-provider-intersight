@@ -41,6 +41,12 @@ This complex property has following sub-properties:
 This complex property has following sub-properties:
   + `key`:(string) The string representation of a tag key. 
   + `value`:(string) The string representation of a tag value. 
+* `target_details`:(Array)
+This complex property has following sub-properties:
+  + `account_mo_id`:(string)(ReadOnly) The customer account MoId. 
+  + `cluster_mo_ids`:
+                (Array of schema.TypeString) -
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
 * `version_context`:(HashMap) -(ReadOnly) The versioning info for this managed object. 
 This complex property has following sub-properties:
   + `interested_mos`:(Array)

@@ -144,6 +144,51 @@ func getIppoolShadowPoolSchema() map[string]*schema.Schema {
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
+					"ip_v4_config": {
+						Description: "Netmask, Gateway and DNS settings for IPv4 addresses.",
+						Type:        schema.TypeList,
+						MaxItems:    1,
+						Optional:    true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"gateway": {
+									Description: "IP address of the default IPv4 gateway.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"netmask": {
+									Description: "A subnet mask is a 32-bit number that masks an IP address and divides the IP address into network address and host address.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"primary_dns": {
+									Description: "IP Address of the primary Domain Name System (DNS) server.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"secondary_dns": {
+									Description: "IP Address of the secondary Domain Name System (DNS) server.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+							},
+						},
+					},
 					"object_type": {
 						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 						Type:        schema.TypeString,
@@ -226,6 +271,51 @@ func getIppoolShadowPoolSchema() map[string]*schema.Schema {
 						Description: "First IPv6 address of the block.",
 						Type:        schema.TypeString,
 						Optional:    true,
+					},
+					"ip_v6_config": {
+						Description: "Netmask, Gateway and DNS settings for IPv6 addresses.",
+						Type:        schema.TypeList,
+						MaxItems:    1,
+						Optional:    true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"gateway": {
+									Description: "IP address of the default IPv6 gateway.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"prefix": {
+									Description: "A prefix length which masks the  IP address and divides the IP address into network address and host address.",
+									Type:        schema.TypeInt,
+									Optional:    true,
+								},
+								"primary_dns": {
+									Description: "IP Address of the primary Domain Name System (DNS) server.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"secondary_dns": {
+									Description: "IP Address of the secondary Domain Name System (DNS) server.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+							},
+						},
 					},
 					"object_type": {
 						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -828,6 +918,62 @@ func dataSourceIppoolShadowPoolRead(c context.Context, d *schema.ResourceData, m
 					o.SetFrom(x)
 				}
 			}
+			if v, ok := l["ip_v4_config"]; ok {
+				{
+					p := make([]models.IppoolIpV4Config, 0, 1)
+					s := v.([]interface{})
+					for i := 0; i < len(s); i++ {
+						l := s[i].(map[string]interface{})
+						o := models.NewIppoolIpV4ConfigWithDefaults()
+						if v, ok := l["additional_properties"]; ok {
+							{
+								x := []byte(v.(string))
+								var x1 interface{}
+								err := json.Unmarshal(x, &x1)
+								if err == nil && x1 != nil {
+									o.AdditionalProperties = x1.(map[string]interface{})
+								}
+							}
+						}
+						o.SetClassId("ippool.IpV4Config")
+						if v, ok := l["gateway"]; ok {
+							{
+								x := (v.(string))
+								o.SetGateway(x)
+							}
+						}
+						if v, ok := l["netmask"]; ok {
+							{
+								x := (v.(string))
+								o.SetNetmask(x)
+							}
+						}
+						if v, ok := l["object_type"]; ok {
+							{
+								x := (v.(string))
+								o.SetObjectType(x)
+							}
+						}
+						if v, ok := l["primary_dns"]; ok {
+							{
+								x := (v.(string))
+								o.SetPrimaryDns(x)
+							}
+						}
+						if v, ok := l["secondary_dns"]; ok {
+							{
+								x := (v.(string))
+								o.SetSecondaryDns(x)
+							}
+						}
+						p = append(p, *o)
+					}
+					if len(p) > 0 {
+						x := p[0]
+						o.SetIpV4Config(x)
+					}
+				}
+			}
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
@@ -927,6 +1073,62 @@ func dataSourceIppoolShadowPoolRead(c context.Context, d *schema.ResourceData, m
 				{
 					x := (v.(string))
 					o.SetFrom(x)
+				}
+			}
+			if v, ok := l["ip_v6_config"]; ok {
+				{
+					p := make([]models.IppoolIpV6Config, 0, 1)
+					s := v.([]interface{})
+					for i := 0; i < len(s); i++ {
+						l := s[i].(map[string]interface{})
+						o := models.NewIppoolIpV6ConfigWithDefaults()
+						if v, ok := l["additional_properties"]; ok {
+							{
+								x := []byte(v.(string))
+								var x1 interface{}
+								err := json.Unmarshal(x, &x1)
+								if err == nil && x1 != nil {
+									o.AdditionalProperties = x1.(map[string]interface{})
+								}
+							}
+						}
+						o.SetClassId("ippool.IpV6Config")
+						if v, ok := l["gateway"]; ok {
+							{
+								x := (v.(string))
+								o.SetGateway(x)
+							}
+						}
+						if v, ok := l["object_type"]; ok {
+							{
+								x := (v.(string))
+								o.SetObjectType(x)
+							}
+						}
+						if v, ok := l["prefix"]; ok {
+							{
+								x := int64(v.(int))
+								o.SetPrefix(x)
+							}
+						}
+						if v, ok := l["primary_dns"]; ok {
+							{
+								x := (v.(string))
+								o.SetPrimaryDns(x)
+							}
+						}
+						if v, ok := l["secondary_dns"]; ok {
+							{
+								x := (v.(string))
+								o.SetSecondaryDns(x)
+							}
+						}
+						p = append(p, *o)
+					}
+					if len(p) > 0 {
+						x := p[0]
+						o.SetIpV6Config(x)
+					}
 				}
 			}
 			if v, ok := l["object_type"]; ok {

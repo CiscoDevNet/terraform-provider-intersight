@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "ippool.IpV4Block"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "ippool.IpV4Block"]
 **From** | Pointer to **string** | First IPv4 address of the block. | [optional] 
+**IpV4Config** | Pointer to [**NullableIppoolIpV4Config**](IppoolIpV4Config.md) |  | [optional] 
 **To** | Pointer to **string** | Last IPv4 address of the block. | [optional] 
 
 ## Methods
@@ -93,6 +94,41 @@ SetFrom sets From field to given value.
 
 HasFrom returns a boolean if a field has been set.
 
+### GetIpV4Config
+
+`func (o *IppoolIpV4BlockAllOf) GetIpV4Config() IppoolIpV4Config`
+
+GetIpV4Config returns the IpV4Config field if non-nil, zero value otherwise.
+
+### GetIpV4ConfigOk
+
+`func (o *IppoolIpV4BlockAllOf) GetIpV4ConfigOk() (*IppoolIpV4Config, bool)`
+
+GetIpV4ConfigOk returns a tuple with the IpV4Config field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIpV4Config
+
+`func (o *IppoolIpV4BlockAllOf) SetIpV4Config(v IppoolIpV4Config)`
+
+SetIpV4Config sets IpV4Config field to given value.
+
+### HasIpV4Config
+
+`func (o *IppoolIpV4BlockAllOf) HasIpV4Config() bool`
+
+HasIpV4Config returns a boolean if a field has been set.
+
+### SetIpV4ConfigNil
+
+`func (o *IppoolIpV4BlockAllOf) SetIpV4ConfigNil(b bool)`
+
+ SetIpV4ConfigNil sets the value for IpV4Config to be an explicit nil
+
+### UnsetIpV4Config
+`func (o *IppoolIpV4BlockAllOf) UnsetIpV4Config()`
+
+UnsetIpV4Config ensures that no value is present for IpV4Config, not even an explicit nil
 ### GetTo
 
 `func (o *IppoolIpV4BlockAllOf) GetTo() string`

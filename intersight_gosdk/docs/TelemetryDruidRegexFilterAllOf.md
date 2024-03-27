@@ -4,14 +4,16 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Dimension** | **string** |  | 
-**Pattern** | **string** |  | 
+**Type** | **string** |  | 
+**Dimension** | **string** | Input column or virtual column name to filter. | 
+**Pattern** | **string** | String pattern to match - any standard Java regular expression. | 
+**ExtractionFn** | Pointer to [**TelemetryDruidExtractionFunction**](TelemetryDruidExtractionFunction.md) |  | [optional] 
 
 ## Methods
 
 ### NewTelemetryDruidRegexFilterAllOf
 
-`func NewTelemetryDruidRegexFilterAllOf(dimension string, pattern string, ) *TelemetryDruidRegexFilterAllOf`
+`func NewTelemetryDruidRegexFilterAllOf(type_ string, dimension string, pattern string, ) *TelemetryDruidRegexFilterAllOf`
 
 NewTelemetryDruidRegexFilterAllOf instantiates a new TelemetryDruidRegexFilterAllOf object
 This constructor will assign default values to properties that have it defined,
@@ -25,6 +27,26 @@ will change when the set of required properties is changed
 NewTelemetryDruidRegexFilterAllOfWithDefaults instantiates a new TelemetryDruidRegexFilterAllOf object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetType
+
+`func (o *TelemetryDruidRegexFilterAllOf) GetType() string`
+
+GetType returns the Type field if non-nil, zero value otherwise.
+
+### GetTypeOk
+
+`func (o *TelemetryDruidRegexFilterAllOf) GetTypeOk() (*string, bool)`
+
+GetTypeOk returns a tuple with the Type field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetType
+
+`func (o *TelemetryDruidRegexFilterAllOf) SetType(v string)`
+
+SetType sets Type field to given value.
+
 
 ### GetDimension
 
@@ -65,6 +87,31 @@ and a boolean to check if the value has been set.
 
 SetPattern sets Pattern field to given value.
 
+
+### GetExtractionFn
+
+`func (o *TelemetryDruidRegexFilterAllOf) GetExtractionFn() TelemetryDruidExtractionFunction`
+
+GetExtractionFn returns the ExtractionFn field if non-nil, zero value otherwise.
+
+### GetExtractionFnOk
+
+`func (o *TelemetryDruidRegexFilterAllOf) GetExtractionFnOk() (*TelemetryDruidExtractionFunction, bool)`
+
+GetExtractionFnOk returns a tuple with the ExtractionFn field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetExtractionFn
+
+`func (o *TelemetryDruidRegexFilterAllOf) SetExtractionFn(v TelemetryDruidExtractionFunction)`
+
+SetExtractionFn sets ExtractionFn field to given value.
+
+### HasExtractionFn
+
+`func (o *TelemetryDruidRegexFilterAllOf) HasExtractionFn() bool`
+
+HasExtractionFn returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

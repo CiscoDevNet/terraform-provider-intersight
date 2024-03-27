@@ -310,6 +310,11 @@ func getComputeServerSettingSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"host_init_configuration": {
+			Description: "The JSON formatted host initialization configuration containing the basic information for doing an initial boot. The information will be sent to CIMC and stored in host-init.json file on the server. The stored file can only be access using IPMI tool on the host OS.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"kvm_reset": {
 			Description: "The allowed actions on the vKVM Reset.\n* `Ready` - Reset vKVM operation is allowed to be done on the server in this state.\n* `Reset` - The value that the UI/API needs to provide to trigger a Reset vKVM operation on a server.",
 			Type:        schema.TypeString,
@@ -522,6 +527,41 @@ func getComputeServerSettingSchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"personality_setting": {
+			Description: "The personality value to be set on the server. Any additional information like the hypervisor type, last update time can also be set through this server setting.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_information": {
+						Description: "Additional information to be set along with the personality value. This can include information like the\nhypervisor type, last update time etc..",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"personality": {
+						Description: "The personality value that is to be set for the server.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
 		"registered_device": {
 			Description: "A reference to a assetDeviceRegistration resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 			Type:        schema.TypeList,
@@ -692,6 +732,11 @@ func getComputeServerSettingSchema() map[string]*schema.Schema {
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
+					"workflow_info_moid": {
+						Description: "The WorkflowInfoMo moid that is running.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
 					"workflow_type": {
 						Description: "The workflow type being started. The workflow name to distinguish workflow by type.",
 						Type:        schema.TypeString,
@@ -814,6 +859,46 @@ func getComputeServerSettingSchema() map[string]*schema.Schema {
 								},
 							},
 						},
+					},
+				},
+			},
+		},
+		"storage_utility_image_operation": {
+			Description: "The storage utility image operation properties.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"action": {
+						Description: "Actions that can be performed by the storage utility.\n* `None` - No action by storage utility.\n* `Upload` - Upload action by storage utility.\n* `TurnOnImageVisibility` - Turn on image's visibility.\n* `TurnOffImageVisibility` - Turn off image's visibility.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"image_name": {
+						Description: "The image name this action operates on.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"image_type": {
+						Description: "The image type this action operates on.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
 					},
 				},
 			},
@@ -1238,6 +1323,11 @@ func dataSourceComputeServerSettingRead(c context.Context, d *schema.ResourceDat
 		o.SetFrontPanelLockState(x)
 	}
 
+	if v, ok := d.GetOk("host_init_configuration"); ok {
+		x := (v.(string))
+		o.SetHostInitConfiguration(x)
+	}
+
 	if v, ok := d.GetOk("kvm_reset"); ok {
 		x := (v.(string))
 		o.SetKvmReset(x)
@@ -1488,6 +1578,54 @@ func dataSourceComputeServerSettingRead(c context.Context, d *schema.ResourceDat
 		if len(p) > 0 {
 			x := p[0]
 			o.SetPersistentMemoryOperation(x)
+		}
+	}
+
+	if v, ok := d.GetOk("personality_setting"); ok {
+		p := make([]models.ComputePersonalitySetting, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.ComputePersonalitySetting{}
+			if v, ok := l["additional_information"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						x2 := x1.(map[string]interface{})
+						o.SetAdditionalInformation(x2)
+					}
+				}
+			}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("compute.PersonalitySetting")
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["personality"]; ok {
+				{
+					x := (v.(string))
+					o.SetPersonality(x)
+				}
+			}
+			p = append(p, *o)
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetPersonalitySetting(x)
 		}
 	}
 
@@ -1862,6 +2000,55 @@ func dataSourceComputeServerSettingRead(c context.Context, d *schema.ResourceDat
 		}
 	}
 
+	if v, ok := d.GetOk("storage_utility_image_operation"); ok {
+		p := make([]models.ComputeStorageUtilityImageOperation, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.ComputeStorageUtilityImageOperation{}
+			if v, ok := l["action"]; ok {
+				{
+					x := (v.(string))
+					o.SetAction(x)
+				}
+			}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("compute.StorageUtilityImageOperation")
+			if v, ok := l["image_name"]; ok {
+				{
+					x := (v.(string))
+					o.SetImageName(x)
+				}
+			}
+			if v, ok := l["image_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetImageType(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			p = append(p, *o)
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetStorageUtilityImageOperation(x)
+		}
+	}
+
 	if v, ok := d.GetOk("storage_virtual_drive_operation"); ok {
 		p := make([]models.ComputeStorageVirtualDriveOperation, 0, 1)
 		s := v.([]interface{})
@@ -2145,6 +2332,8 @@ func dataSourceComputeServerSettingRead(c context.Context, d *schema.ResourceDat
 				temp["storage_controller_operation"] = flattenMapComputeStorageControllerOperation(s.GetStorageControllerOperation(), d)
 
 				temp["storage_physical_drive_operation"] = flattenMapComputeStoragePhysicalDriveOperation(s.GetStoragePhysicalDriveOperation(), d)
+
+				temp["storage_utility_image_operation"] = flattenMapComputeStorageUtilityImageOperation(s.GetStorageUtilityImageOperation(), d)
 
 				temp["storage_virtual_drive_operation"] = flattenMapComputeStorageVirtualDriveOperation(s.GetStorageVirtualDriveOperation(), d)
 

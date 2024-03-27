@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "ippool.Pool"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "ippool.Pool"]
+**EnableBlockLevelSubnetConfig** | Pointer to **bool** | Enables subnet configuration at the block level. | [optional] 
 **IpV4Blocks** | Pointer to [**[]IppoolIpV4Block**](IppoolIpV4Block.md) |  | [optional] 
 **IpV4Config** | Pointer to [**NullableIppoolIpV4Config**](IppoolIpV4Config.md) |  | [optional] 
 **IpV6Blocks** | Pointer to [**[]IppoolIpV6Block**](IppoolIpV6Block.md) |  | [optional] 
@@ -76,6 +77,31 @@ and a boolean to check if the value has been set.
 
 SetObjectType sets ObjectType field to given value.
 
+
+### GetEnableBlockLevelSubnetConfig
+
+`func (o *IppoolPoolAllOf) GetEnableBlockLevelSubnetConfig() bool`
+
+GetEnableBlockLevelSubnetConfig returns the EnableBlockLevelSubnetConfig field if non-nil, zero value otherwise.
+
+### GetEnableBlockLevelSubnetConfigOk
+
+`func (o *IppoolPoolAllOf) GetEnableBlockLevelSubnetConfigOk() (*bool, bool)`
+
+GetEnableBlockLevelSubnetConfigOk returns a tuple with the EnableBlockLevelSubnetConfig field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEnableBlockLevelSubnetConfig
+
+`func (o *IppoolPoolAllOf) SetEnableBlockLevelSubnetConfig(v bool)`
+
+SetEnableBlockLevelSubnetConfig sets EnableBlockLevelSubnetConfig field to given value.
+
+### HasEnableBlockLevelSubnetConfig
+
+`func (o *IppoolPoolAllOf) HasEnableBlockLevelSubnetConfig() bool`
+
+HasEnableBlockLevelSubnetConfig returns a boolean if a field has been set.
 
 ### GetIpV4Blocks
 

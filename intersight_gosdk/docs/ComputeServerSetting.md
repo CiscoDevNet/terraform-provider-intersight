@@ -14,14 +14,17 @@ Name | Type | Description | Notes
 **CollectSel** | Pointer to **string** | Collect system event log from a server. * &#x60;Ready&#x60; - Collect system event log operation is allowed on the server in this state. * &#x60;Collect&#x60; - Trigger a collect system event log operation on a server. | [optional] [default to "Ready"]
 **ConfigState** | Pointer to **string** | The configured state of these settings in the target server. The value is any one of Applied, Applying, Failed. Applied - This state denotes that the settings are applied successfully in the target server. Applying - This state denotes that the settings are being applied in the target server. Failed - This state denotes that the settings could not be applied in the target server. * &#x60;Applied&#x60; - User configured settings are in applied state. * &#x60;Applying&#x60; - User settings are being applied on the target server. * &#x60;Scheduled&#x60; - User configured settings are scheduled to be applied. * &#x60;Failed&#x60; - User configured settings could not be applied. | [optional] [readonly] [default to "Applied"]
 **FrontPanelLockState** | Pointer to **string** | The allowed actions on the Front Panel Lock. * &#x60;None&#x60; - Front Panel of the server is set to None state. It is required so that the next frontPanelLockState operation can be triggered. * &#x60;Lock&#x60; - Front Panel of the server is set to Locked state. * &#x60;Unlock&#x60; - Front Panel of the server is set to Unlocked state. | [optional] [default to "None"]
+**HostInitConfiguration** | Pointer to **string** | The JSON formatted host initialization configuration containing the basic information for doing an initial boot. The information will be sent to CIMC and stored in host-init.json file on the server. The stored file can only be access using IPMI tool on the host OS. | [optional] 
 **KvmReset** | Pointer to **string** | The allowed actions on the vKVM Reset. * &#x60;Ready&#x60; - Reset vKVM operation is allowed to be done on the server in this state. * &#x60;Reset&#x60; - The value that the UI/API needs to provide to trigger a Reset vKVM operation on a server. | [optional] [default to "Ready"]
 **Name** | Pointer to **string** | The property used to identify the name of the server it is associated with. | [optional] [readonly] 
 **OneTimeBootDevice** | Pointer to **string** | The name of the device chosen by user for configuring One-Time Boot device. | [optional] 
 **PersistentMemoryOperation** | Pointer to [**NullableComputePersistentMemoryOperation**](ComputePersistentMemoryOperation.md) |  | [optional] 
+**PersonalitySetting** | Pointer to [**NullableComputePersonalitySetting**](ComputePersonalitySetting.md) |  | [optional] 
 **ServerConfig** | Pointer to [**NullableComputeServerConfig**](ComputeServerConfig.md) |  | [optional] 
 **ServerOpStatus** | Pointer to [**[]ComputeServerOpStatus**](ComputeServerOpStatus.md) |  | [optional] 
 **StorageControllerOperation** | Pointer to [**NullableComputeStorageControllerOperation**](ComputeStorageControllerOperation.md) |  | [optional] 
 **StoragePhysicalDriveOperation** | Pointer to [**NullableComputeStoragePhysicalDriveOperation**](ComputeStoragePhysicalDriveOperation.md) |  | [optional] 
+**StorageUtilityImageOperation** | Pointer to [**NullableComputeStorageUtilityImageOperation**](ComputeStorageUtilityImageOperation.md) |  | [optional] 
 **StorageVirtualDriveOperation** | Pointer to [**NullableComputeStorageVirtualDriveOperation**](ComputeStorageVirtualDriveOperation.md) |  | [optional] 
 **TpmReset** | Pointer to **string** | Clear the configuration of TPM chip in the server. * &#x60;None&#x60; - Perform no action on the TPM. * &#x60;ClearTpm&#x60; - Clear the configuration and restore factory defaults of TPM chip in the server. | [optional] [default to "None"]
 **TunneledKvmState** | Pointer to **string** | By default, the tunneled vKVM property appears in Ready state. The property can be configured by performing allowed actions. Once the property is configured, it reverts to Ready state. * &#x60;Ready&#x60; - Tunneled vKVM is ready to be configured on the server. * &#x60;Enable&#x60; - Tunneled vKVM is enabled for the server. * &#x60;Disable&#x60; - Tunneled vKVM is disabled for the server. | [optional] [default to "Ready"]
@@ -299,6 +302,31 @@ SetFrontPanelLockState sets FrontPanelLockState field to given value.
 
 HasFrontPanelLockState returns a boolean if a field has been set.
 
+### GetHostInitConfiguration
+
+`func (o *ComputeServerSetting) GetHostInitConfiguration() string`
+
+GetHostInitConfiguration returns the HostInitConfiguration field if non-nil, zero value otherwise.
+
+### GetHostInitConfigurationOk
+
+`func (o *ComputeServerSetting) GetHostInitConfigurationOk() (*string, bool)`
+
+GetHostInitConfigurationOk returns a tuple with the HostInitConfiguration field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetHostInitConfiguration
+
+`func (o *ComputeServerSetting) SetHostInitConfiguration(v string)`
+
+SetHostInitConfiguration sets HostInitConfiguration field to given value.
+
+### HasHostInitConfiguration
+
+`func (o *ComputeServerSetting) HasHostInitConfiguration() bool`
+
+HasHostInitConfiguration returns a boolean if a field has been set.
+
 ### GetKvmReset
 
 `func (o *ComputeServerSetting) GetKvmReset() string`
@@ -409,6 +437,41 @@ HasPersistentMemoryOperation returns a boolean if a field has been set.
 `func (o *ComputeServerSetting) UnsetPersistentMemoryOperation()`
 
 UnsetPersistentMemoryOperation ensures that no value is present for PersistentMemoryOperation, not even an explicit nil
+### GetPersonalitySetting
+
+`func (o *ComputeServerSetting) GetPersonalitySetting() ComputePersonalitySetting`
+
+GetPersonalitySetting returns the PersonalitySetting field if non-nil, zero value otherwise.
+
+### GetPersonalitySettingOk
+
+`func (o *ComputeServerSetting) GetPersonalitySettingOk() (*ComputePersonalitySetting, bool)`
+
+GetPersonalitySettingOk returns a tuple with the PersonalitySetting field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPersonalitySetting
+
+`func (o *ComputeServerSetting) SetPersonalitySetting(v ComputePersonalitySetting)`
+
+SetPersonalitySetting sets PersonalitySetting field to given value.
+
+### HasPersonalitySetting
+
+`func (o *ComputeServerSetting) HasPersonalitySetting() bool`
+
+HasPersonalitySetting returns a boolean if a field has been set.
+
+### SetPersonalitySettingNil
+
+`func (o *ComputeServerSetting) SetPersonalitySettingNil(b bool)`
+
+ SetPersonalitySettingNil sets the value for PersonalitySetting to be an explicit nil
+
+### UnsetPersonalitySetting
+`func (o *ComputeServerSetting) UnsetPersonalitySetting()`
+
+UnsetPersonalitySetting ensures that no value is present for PersonalitySetting, not even an explicit nil
 ### GetServerConfig
 
 `func (o *ComputeServerSetting) GetServerConfig() ComputeServerConfig`
@@ -549,6 +612,41 @@ HasStoragePhysicalDriveOperation returns a boolean if a field has been set.
 `func (o *ComputeServerSetting) UnsetStoragePhysicalDriveOperation()`
 
 UnsetStoragePhysicalDriveOperation ensures that no value is present for StoragePhysicalDriveOperation, not even an explicit nil
+### GetStorageUtilityImageOperation
+
+`func (o *ComputeServerSetting) GetStorageUtilityImageOperation() ComputeStorageUtilityImageOperation`
+
+GetStorageUtilityImageOperation returns the StorageUtilityImageOperation field if non-nil, zero value otherwise.
+
+### GetStorageUtilityImageOperationOk
+
+`func (o *ComputeServerSetting) GetStorageUtilityImageOperationOk() (*ComputeStorageUtilityImageOperation, bool)`
+
+GetStorageUtilityImageOperationOk returns a tuple with the StorageUtilityImageOperation field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStorageUtilityImageOperation
+
+`func (o *ComputeServerSetting) SetStorageUtilityImageOperation(v ComputeStorageUtilityImageOperation)`
+
+SetStorageUtilityImageOperation sets StorageUtilityImageOperation field to given value.
+
+### HasStorageUtilityImageOperation
+
+`func (o *ComputeServerSetting) HasStorageUtilityImageOperation() bool`
+
+HasStorageUtilityImageOperation returns a boolean if a field has been set.
+
+### SetStorageUtilityImageOperationNil
+
+`func (o *ComputeServerSetting) SetStorageUtilityImageOperationNil(b bool)`
+
+ SetStorageUtilityImageOperationNil sets the value for StorageUtilityImageOperation to be an explicit nil
+
+### UnsetStorageUtilityImageOperation
+`func (o *ComputeServerSetting) UnsetStorageUtilityImageOperation()`
+
+UnsetStorageUtilityImageOperation ensures that no value is present for StorageUtilityImageOperation, not even an explicit nil
 ### GetStorageVirtualDriveOperation
 
 `func (o *ComputeServerSetting) GetStorageVirtualDriveOperation() ComputeStorageVirtualDriveOperation`

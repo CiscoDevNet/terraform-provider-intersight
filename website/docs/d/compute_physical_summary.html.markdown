@@ -52,6 +52,7 @@ The following arguments can be used to get data of already created objects in In
 * `oper_power_state`:(string) The actual power state of the server. 
 * `oper_state`:(string) The operational state of the server. 
 * `operability`:(string) The operability of the server. 
+* `package_version`:(string) The package version of the Host Service Utility (HSU) for this server. 
 * `personality`:(string) The Rack unit software Personality. 
 * `platform_type`:(string) The platform type of the registered device - whether managed by UCSM or operating in standalone mode. 
 * `presence`:(string) This field indicates the presence (equipped) or absence (absent) of the associated component or hardware. 
