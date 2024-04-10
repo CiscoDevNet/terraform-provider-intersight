@@ -61,7 +61,7 @@ func getCapabilityAdapterUpdateConstraintMetaSchema() map[string]*schema.Schema 
 			},
 		},
 		"class_id": {
-			Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+			Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -106,7 +106,7 @@ func getCapabilityAdapterUpdateConstraintMetaSchema() map[string]*schema.Schema 
 			Optional:    true,
 		},
 		"object_type": {
-			Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+			Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -186,6 +186,11 @@ func getCapabilityAdapterUpdateConstraintMetaSchema() map[string]*schema.Schema 
 		},
 		"shared_scope": {
 			Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"supported_platform": {
+			Description: "Platform for which the constraint is to be enforced.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -555,6 +560,11 @@ func dataSourceCapabilityAdapterUpdateConstraintMetaRead(c context.Context, d *s
 		o.SetSharedScope(x)
 	}
 
+	if v, ok := d.GetOk("supported_platform"); ok {
+		x := (v.(string))
+		o.SetSupportedPlatform(x)
+	}
+
 	if v, ok := d.GetOk("supported_platforms"); ok {
 		x := make([]string, 0)
 		y := reflect.ValueOf(v)
@@ -730,6 +740,7 @@ func dataSourceCapabilityAdapterUpdateConstraintMetaRead(c context.Context, d *s
 
 				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
 				temp["shared_scope"] = (s.GetSharedScope())
+				temp["supported_platform"] = (s.GetSupportedPlatform())
 				temp["supported_platforms"] = (s.GetSupportedPlatforms())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
