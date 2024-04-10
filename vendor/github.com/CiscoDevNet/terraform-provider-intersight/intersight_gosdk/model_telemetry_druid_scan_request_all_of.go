@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-15711
+API version: 1.0.11-15830
 Contact: intersight@cisco.com
 */
 
@@ -20,7 +20,7 @@ type TelemetryDruidScanRequestAllOf struct {
 	DataSource TelemetryDruidDataSource `json:"dataSource"`
 	// A JSON Object representing ISO-8601 Intervals. This defines the time ranges to run the query over.
 	Intervals []string `json:"intervals"`
-	// How the results are represented, list, compactedList or valueVector. Currently only list is supported.
+	// How the results are represented, list or compactedList.
 	ResultFormat *string               `json:"resultFormat,omitempty"`
 	Filter       *TelemetryDruidFilter `json:"filter,omitempty"`
 	// A String array of dimensions and metrics to scan. If left empty, all dimensions and metrics are returned.
@@ -29,6 +29,8 @@ type TelemetryDruidScanRequestAllOf struct {
 	BatchSize *int32 `json:"batchSize,omitempty"`
 	// How many rows to return. If not specified, all rows will be returned.
 	Limit *int32 `json:"limit,omitempty"`
+	// Skip this many rows when returning results. Skipped rows will still need to be generated internally and then discarded, meaning that raising offsets to high values can cause queries to use additional resources. Together, \"limit\" and \"offset\" can be used to implement pagination. However, note that if the underlying datasource is modified in between page fetches in ways that affect overall query results, then the different pages will not necessarily align with each other.
+	Offset *int32 `json:"offset,omitempty"`
 	// The ordering of returned rows based on timestamp. \"ascending\", \"descending\", and \"none\" (default) are supported. Currently, \"ascending\" and \"descending\" are only supported for queries where the __time column is included in the columns field and the requirements outlined in the time ordering section are met.
 	Order *string `json:"order,omitempty"`
 	// Return results consistent with the legacy \"scan-query\" contrib extension. Defaults to the value set by druid.query.scan.legacy, which in turn defaults to false.
@@ -282,6 +284,38 @@ func (o *TelemetryDruidScanRequestAllOf) SetLimit(v int32) {
 	o.Limit = &v
 }
 
+// GetOffset returns the Offset field value if set, zero value otherwise.
+func (o *TelemetryDruidScanRequestAllOf) GetOffset() int32 {
+	if o == nil || o.Offset == nil {
+		var ret int32
+		return ret
+	}
+	return *o.Offset
+}
+
+// GetOffsetOk returns a tuple with the Offset field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TelemetryDruidScanRequestAllOf) GetOffsetOk() (*int32, bool) {
+	if o == nil || o.Offset == nil {
+		return nil, false
+	}
+	return o.Offset, true
+}
+
+// HasOffset returns a boolean if a field has been set.
+func (o *TelemetryDruidScanRequestAllOf) HasOffset() bool {
+	if o != nil && o.Offset != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetOffset gets a reference to the given int32 and assigns it to the Offset field.
+func (o *TelemetryDruidScanRequestAllOf) SetOffset(v int32) {
+	o.Offset = &v
+}
+
 // GetOrder returns the Order field value if set, zero value otherwise.
 func (o *TelemetryDruidScanRequestAllOf) GetOrder() string {
 	if o == nil || o.Order == nil {
@@ -401,6 +435,9 @@ func (o TelemetryDruidScanRequestAllOf) MarshalJSON() ([]byte, error) {
 	if o.Limit != nil {
 		toSerialize["limit"] = o.Limit
 	}
+	if o.Offset != nil {
+		toSerialize["offset"] = o.Offset
+	}
 	if o.Order != nil {
 		toSerialize["order"] = o.Order
 	}
@@ -435,6 +472,7 @@ func (o *TelemetryDruidScanRequestAllOf) UnmarshalJSON(bytes []byte) (err error)
 		delete(additionalProperties, "columns")
 		delete(additionalProperties, "batchSize")
 		delete(additionalProperties, "limit")
+		delete(additionalProperties, "offset")
 		delete(additionalProperties, "order")
 		delete(additionalProperties, "legacy")
 		delete(additionalProperties, "context")

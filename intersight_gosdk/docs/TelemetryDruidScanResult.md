@@ -4,9 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**SegmentId** | Pointer to **string** | The identifier for the row(s)&#39; segement | [optional] 
-**Columns** | Pointer to **[]string** | A list of columns returned in the row(s) | [optional] 
-**Events** | Pointer to **[]map[string]interface{}** | Row results | [optional] 
+**SegmentId** | Pointer to **string** | The identifier for the row(s)&#39; segment. | [optional] 
+**Columns** | Pointer to **[]string** | A list of columns returned in the row(s). | [optional] 
+**Events** | Pointer to **[]interface{}** | Row results. | [optional] 
 
 ## Methods
 
@@ -79,20 +79,20 @@ HasColumns returns a boolean if a field has been set.
 
 ### GetEvents
 
-`func (o *TelemetryDruidScanResult) GetEvents() []map[string]interface{}`
+`func (o *TelemetryDruidScanResult) GetEvents() []interface{}`
 
 GetEvents returns the Events field if non-nil, zero value otherwise.
 
 ### GetEventsOk
 
-`func (o *TelemetryDruidScanResult) GetEventsOk() (*[]map[string]interface{}, bool)`
+`func (o *TelemetryDruidScanResult) GetEventsOk() (*[]interface{}, bool)`
 
 GetEventsOk returns a tuple with the Events field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetEvents
 
-`func (o *TelemetryDruidScanResult) SetEvents(v []map[string]interface{})`
+`func (o *TelemetryDruidScanResult) SetEvents(v []interface{})`
 
 SetEvents sets Events field to given value.
 

@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "adapter.PhysicalNicModeSettings"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "adapter.PhysicalNicModeSettings"]
-**Enabled** | Pointer to **bool** | When Physical NIC Mode is enabled, up-link ports of the VIC are set to pass-through mode. This allows the host to transmit packets without any modification. When Physical NIC Mode is enabled, VLAN tagging of the packets will not happen. | [optional] [default to false]
+**PhyNicEnabled** | Pointer to **bool** | When Physical NIC Mode is enabled, up-link ports of the VIC are set to pass-through mode. This allows the host to transmit packets without any modification. When Physical NIC Mode is enabled, VLAN tagging of the packets will not happen. | [optional] [default to false]
 
 ## Methods
 
@@ -67,30 +67,30 @@ and a boolean to check if the value has been set.
 SetObjectType sets ObjectType field to given value.
 
 
-### GetEnabled
+### GetPhyNicEnabled
 
-`func (o *AdapterPhysicalNicModeSettings) GetEnabled() bool`
+`func (o *AdapterPhysicalNicModeSettings) GetPhyNicEnabled() bool`
 
-GetEnabled returns the Enabled field if non-nil, zero value otherwise.
+GetPhyNicEnabled returns the PhyNicEnabled field if non-nil, zero value otherwise.
 
-### GetEnabledOk
+### GetPhyNicEnabledOk
 
-`func (o *AdapterPhysicalNicModeSettings) GetEnabledOk() (*bool, bool)`
+`func (o *AdapterPhysicalNicModeSettings) GetPhyNicEnabledOk() (*bool, bool)`
 
-GetEnabledOk returns a tuple with the Enabled field if it's non-nil, zero value otherwise
+GetPhyNicEnabledOk returns a tuple with the PhyNicEnabled field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetEnabled
+### SetPhyNicEnabled
 
-`func (o *AdapterPhysicalNicModeSettings) SetEnabled(v bool)`
+`func (o *AdapterPhysicalNicModeSettings) SetPhyNicEnabled(v bool)`
 
-SetEnabled sets Enabled field to given value.
+SetPhyNicEnabled sets PhyNicEnabled field to given value.
 
-### HasEnabled
+### HasPhyNicEnabled
 
-`func (o *AdapterPhysicalNicModeSettings) HasEnabled() bool`
+`func (o *AdapterPhysicalNicModeSettings) HasPhyNicEnabled() bool`
 
-HasEnabled returns a boolean if a field has been set.
+HasPhyNicEnabled returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

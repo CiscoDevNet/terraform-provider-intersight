@@ -373,14 +373,14 @@ func getAdapterConfigPolicySchema() map[string]*schema.Schema {
 									Type:        schema.TypeString,
 									Optional:    true,
 								},
-								"enabled": {
-									Description: "When Physical NIC Mode is enabled, up-link ports of the VIC are set to pass-through mode. This allows the host to transmit packets without any modification. When Physical NIC Mode is enabled, VLAN tagging of the packets will not happen.",
-									Type:        schema.TypeBool,
-									Optional:    true,
-								},
 								"object_type": {
 									Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"phy_nic_enabled": {
+									Description: "When Physical NIC Mode is enabled, up-link ports of the VIC are set to pass-through mode. This allows the host to transmit packets without any modification. When Physical NIC Mode is enabled, VLAN tagging of the packets will not happen.",
+									Type:        schema.TypeBool,
 									Optional:    true,
 								},
 							},
@@ -1018,16 +1018,16 @@ func dataSourceAdapterConfigPolicyRead(c context.Context, d *schema.ResourceData
 							}
 						}
 						o.SetClassId("adapter.PhysicalNicModeSettings")
-						if v, ok := l["enabled"]; ok {
-							{
-								x := (v.(bool))
-								o.SetEnabled(x)
-							}
-						}
 						if v, ok := l["object_type"]; ok {
 							{
 								x := (v.(string))
 								o.SetObjectType(x)
+							}
+						}
+						if v, ok := l["phy_nic_enabled"]; ok {
+							{
+								x := (v.(bool))
+								o.SetPhyNicEnabled(x)
 							}
 						}
 						p = append(p, *o)
