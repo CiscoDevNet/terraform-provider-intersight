@@ -786,6 +786,11 @@ func getAdapterUnitSchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"vic_communicable": {
+			Description: "Records the current state of communication between the Virtual Interface Card (VIC) and the Cisco Integrated Management Controller (CIMC) on the server.\n* `Not Applicable` - Set the state of VIC communication to Not Applicable for other Platforms.\n* `Yes` - VIC is reachable from CIMC.\n* `No` - VIC is not reachable from CIMC.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"vid": {
 			Description: "Virtual Id of the adapter in the server.",
 			Type:        schema.TypeString,
@@ -1670,6 +1675,11 @@ func dataSourceAdapterUnitRead(c context.Context, d *schema.ResourceData, meta i
 		}
 	}
 
+	if v, ok := d.GetOk("vic_communicable"); ok {
+		x := (v.(string))
+		o.SetVicCommunicable(x)
+	}
+
 	if v, ok := d.GetOk("vid"); ok {
 		x := (v.(string))
 		o.SetVid(x)
@@ -1774,6 +1784,7 @@ func dataSourceAdapterUnitRead(c context.Context, d *schema.ResourceData, meta i
 				temp["vendor"] = (s.GetVendor())
 
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
+				temp["vic_communicable"] = (s.GetVicCommunicable())
 				temp["vid"] = (s.GetVid())
 				adapterUnitResults = append(adapterUnitResults, temp)
 			}

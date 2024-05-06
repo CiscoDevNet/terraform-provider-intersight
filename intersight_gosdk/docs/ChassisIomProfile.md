@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **ConfigChangeDetails** | Pointer to [**[]ChassisConfigChangeDetailRelationship**](ChassisConfigChangeDetailRelationship.md) | An array of relationships to chassisConfigChangeDetail resources. | [optional] [readonly] 
 **ConfigResult** | Pointer to [**ChassisConfigResultRelationship**](ChassisConfigResultRelationship.md) |  | [optional] 
 **Organization** | Pointer to [**OrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
-**Profile** | Pointer to [**ChassisProfileRelationship**](ChassisProfileRelationship.md) |  | [optional] 
+**Profile** | Pointer to [**ChassisBaseProfileRelationship**](ChassisBaseProfileRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -219,20 +219,20 @@ HasOrganization returns a boolean if a field has been set.
 
 ### GetProfile
 
-`func (o *ChassisIomProfile) GetProfile() ChassisProfileRelationship`
+`func (o *ChassisIomProfile) GetProfile() ChassisBaseProfileRelationship`
 
 GetProfile returns the Profile field if non-nil, zero value otherwise.
 
 ### GetProfileOk
 
-`func (o *ChassisIomProfile) GetProfileOk() (*ChassisProfileRelationship, bool)`
+`func (o *ChassisIomProfile) GetProfileOk() (*ChassisBaseProfileRelationship, bool)`
 
 GetProfileOk returns a tuple with the Profile field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetProfile
 
-`func (o *ChassisIomProfile) SetProfile(v ChassisProfileRelationship)`
+`func (o *ChassisIomProfile) SetProfile(v ChassisBaseProfileRelationship)`
 
 SetProfile sets Profile field to given value.
 

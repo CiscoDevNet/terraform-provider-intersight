@@ -9,10 +9,14 @@ Name | Type | Description | Notes
 **Error** | Pointer to **string** | Error message if any errors are encountered while fetching and validating Install targets for the server. | [optional] [readonly] 
 **InstallTargets** | Pointer to [**[]OsInstallTargetResponse**](OsInstallTargetResponse.md) |  | [optional] 
 **M2Jbod** | Pointer to [**[]OsPhysicalDiskResponse**](OsPhysicalDiskResponse.md) |  | [optional] 
+**M2NvmeRaidJbod** | Pointer to [**[]OsPhysicalDiskResponse**](OsPhysicalDiskResponse.md) |  | [optional] 
+**M2NvmeRaidVirtualDrives** | Pointer to [**[]OsVirtualDriveResponse**](OsVirtualDriveResponse.md) |  | [optional] 
 **M2VirtualDrives** | Pointer to [**[]OsVirtualDriveResponse**](OsVirtualDriveResponse.md) |  | [optional] 
 **MraidJbod** | Pointer to [**[]OsPhysicalDiskResponse**](OsPhysicalDiskResponse.md) |  | [optional] 
 **MraidVirtualDrives** | Pointer to [**[]OsVirtualDriveResponse**](OsVirtualDriveResponse.md) |  | [optional] 
+**MstorNvme** | Pointer to [**[]OsPhysicalDiskResponse**](OsPhysicalDiskResponse.md) |  | [optional] 
 **Src** | Pointer to **string** | Flag to denote the source of the request. If the call is from Orchestration UI, only the flat list of Install targets can be sent as response. | [optional] 
+**U2Nvme** | Pointer to [**[]OsPhysicalDiskResponse**](OsPhysicalDiskResponse.md) |  | [optional] 
 **Servers** | Pointer to [**[]ComputePhysicalRelationship**](ComputePhysicalRelationship.md) | An array of relationships to computePhysical resources. | [optional] 
 
 ## Methods
@@ -169,6 +173,76 @@ HasM2Jbod returns a boolean if a field has been set.
 `func (o *OsValidInstallTargetAllOf) UnsetM2Jbod()`
 
 UnsetM2Jbod ensures that no value is present for M2Jbod, not even an explicit nil
+### GetM2NvmeRaidJbod
+
+`func (o *OsValidInstallTargetAllOf) GetM2NvmeRaidJbod() []OsPhysicalDiskResponse`
+
+GetM2NvmeRaidJbod returns the M2NvmeRaidJbod field if non-nil, zero value otherwise.
+
+### GetM2NvmeRaidJbodOk
+
+`func (o *OsValidInstallTargetAllOf) GetM2NvmeRaidJbodOk() (*[]OsPhysicalDiskResponse, bool)`
+
+GetM2NvmeRaidJbodOk returns a tuple with the M2NvmeRaidJbod field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetM2NvmeRaidJbod
+
+`func (o *OsValidInstallTargetAllOf) SetM2NvmeRaidJbod(v []OsPhysicalDiskResponse)`
+
+SetM2NvmeRaidJbod sets M2NvmeRaidJbod field to given value.
+
+### HasM2NvmeRaidJbod
+
+`func (o *OsValidInstallTargetAllOf) HasM2NvmeRaidJbod() bool`
+
+HasM2NvmeRaidJbod returns a boolean if a field has been set.
+
+### SetM2NvmeRaidJbodNil
+
+`func (o *OsValidInstallTargetAllOf) SetM2NvmeRaidJbodNil(b bool)`
+
+ SetM2NvmeRaidJbodNil sets the value for M2NvmeRaidJbod to be an explicit nil
+
+### UnsetM2NvmeRaidJbod
+`func (o *OsValidInstallTargetAllOf) UnsetM2NvmeRaidJbod()`
+
+UnsetM2NvmeRaidJbod ensures that no value is present for M2NvmeRaidJbod, not even an explicit nil
+### GetM2NvmeRaidVirtualDrives
+
+`func (o *OsValidInstallTargetAllOf) GetM2NvmeRaidVirtualDrives() []OsVirtualDriveResponse`
+
+GetM2NvmeRaidVirtualDrives returns the M2NvmeRaidVirtualDrives field if non-nil, zero value otherwise.
+
+### GetM2NvmeRaidVirtualDrivesOk
+
+`func (o *OsValidInstallTargetAllOf) GetM2NvmeRaidVirtualDrivesOk() (*[]OsVirtualDriveResponse, bool)`
+
+GetM2NvmeRaidVirtualDrivesOk returns a tuple with the M2NvmeRaidVirtualDrives field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetM2NvmeRaidVirtualDrives
+
+`func (o *OsValidInstallTargetAllOf) SetM2NvmeRaidVirtualDrives(v []OsVirtualDriveResponse)`
+
+SetM2NvmeRaidVirtualDrives sets M2NvmeRaidVirtualDrives field to given value.
+
+### HasM2NvmeRaidVirtualDrives
+
+`func (o *OsValidInstallTargetAllOf) HasM2NvmeRaidVirtualDrives() bool`
+
+HasM2NvmeRaidVirtualDrives returns a boolean if a field has been set.
+
+### SetM2NvmeRaidVirtualDrivesNil
+
+`func (o *OsValidInstallTargetAllOf) SetM2NvmeRaidVirtualDrivesNil(b bool)`
+
+ SetM2NvmeRaidVirtualDrivesNil sets the value for M2NvmeRaidVirtualDrives to be an explicit nil
+
+### UnsetM2NvmeRaidVirtualDrives
+`func (o *OsValidInstallTargetAllOf) UnsetM2NvmeRaidVirtualDrives()`
+
+UnsetM2NvmeRaidVirtualDrives ensures that no value is present for M2NvmeRaidVirtualDrives, not even an explicit nil
 ### GetM2VirtualDrives
 
 `func (o *OsValidInstallTargetAllOf) GetM2VirtualDrives() []OsVirtualDriveResponse`
@@ -274,6 +348,41 @@ HasMraidVirtualDrives returns a boolean if a field has been set.
 `func (o *OsValidInstallTargetAllOf) UnsetMraidVirtualDrives()`
 
 UnsetMraidVirtualDrives ensures that no value is present for MraidVirtualDrives, not even an explicit nil
+### GetMstorNvme
+
+`func (o *OsValidInstallTargetAllOf) GetMstorNvme() []OsPhysicalDiskResponse`
+
+GetMstorNvme returns the MstorNvme field if non-nil, zero value otherwise.
+
+### GetMstorNvmeOk
+
+`func (o *OsValidInstallTargetAllOf) GetMstorNvmeOk() (*[]OsPhysicalDiskResponse, bool)`
+
+GetMstorNvmeOk returns a tuple with the MstorNvme field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMstorNvme
+
+`func (o *OsValidInstallTargetAllOf) SetMstorNvme(v []OsPhysicalDiskResponse)`
+
+SetMstorNvme sets MstorNvme field to given value.
+
+### HasMstorNvme
+
+`func (o *OsValidInstallTargetAllOf) HasMstorNvme() bool`
+
+HasMstorNvme returns a boolean if a field has been set.
+
+### SetMstorNvmeNil
+
+`func (o *OsValidInstallTargetAllOf) SetMstorNvmeNil(b bool)`
+
+ SetMstorNvmeNil sets the value for MstorNvme to be an explicit nil
+
+### UnsetMstorNvme
+`func (o *OsValidInstallTargetAllOf) UnsetMstorNvme()`
+
+UnsetMstorNvme ensures that no value is present for MstorNvme, not even an explicit nil
 ### GetSrc
 
 `func (o *OsValidInstallTargetAllOf) GetSrc() string`
@@ -299,6 +408,41 @@ SetSrc sets Src field to given value.
 
 HasSrc returns a boolean if a field has been set.
 
+### GetU2Nvme
+
+`func (o *OsValidInstallTargetAllOf) GetU2Nvme() []OsPhysicalDiskResponse`
+
+GetU2Nvme returns the U2Nvme field if non-nil, zero value otherwise.
+
+### GetU2NvmeOk
+
+`func (o *OsValidInstallTargetAllOf) GetU2NvmeOk() (*[]OsPhysicalDiskResponse, bool)`
+
+GetU2NvmeOk returns a tuple with the U2Nvme field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetU2Nvme
+
+`func (o *OsValidInstallTargetAllOf) SetU2Nvme(v []OsPhysicalDiskResponse)`
+
+SetU2Nvme sets U2Nvme field to given value.
+
+### HasU2Nvme
+
+`func (o *OsValidInstallTargetAllOf) HasU2Nvme() bool`
+
+HasU2Nvme returns a boolean if a field has been set.
+
+### SetU2NvmeNil
+
+`func (o *OsValidInstallTargetAllOf) SetU2NvmeNil(b bool)`
+
+ SetU2NvmeNil sets the value for U2Nvme to be an explicit nil
+
+### UnsetU2Nvme
+`func (o *OsValidInstallTargetAllOf) UnsetU2Nvme()`
+
+UnsetU2Nvme ensures that no value is present for U2Nvme, not even an explicit nil
 ### GetServers
 
 `func (o *OsValidInstallTargetAllOf) GetServers() []ComputePhysicalRelationship`

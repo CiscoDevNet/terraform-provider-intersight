@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "fabric.SystemQosPolicy"]
 **Classes** | Pointer to [**[]FabricQosClass**](FabricQosClass.md) |  | [optional] 
 **Organization** | Pointer to [**OrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
-**Profiles** | Pointer to [**[]FabricSwitchProfileRelationship**](FabricSwitchProfileRelationship.md) | An array of relationships to fabricSwitchProfile resources. | [optional] 
+**Profiles** | Pointer to [**[]FabricBaseSwitchProfileRelationship**](FabricBaseSwitchProfileRelationship.md) | An array of relationships to fabricBaseSwitchProfile resources. | [optional] 
 
 ## Methods
 
@@ -131,20 +131,20 @@ HasOrganization returns a boolean if a field has been set.
 
 ### GetProfiles
 
-`func (o *FabricSystemQosPolicy) GetProfiles() []FabricSwitchProfileRelationship`
+`func (o *FabricSystemQosPolicy) GetProfiles() []FabricBaseSwitchProfileRelationship`
 
 GetProfiles returns the Profiles field if non-nil, zero value otherwise.
 
 ### GetProfilesOk
 
-`func (o *FabricSystemQosPolicy) GetProfilesOk() (*[]FabricSwitchProfileRelationship, bool)`
+`func (o *FabricSystemQosPolicy) GetProfilesOk() (*[]FabricBaseSwitchProfileRelationship, bool)`
 
 GetProfilesOk returns a tuple with the Profiles field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetProfiles
 
-`func (o *FabricSystemQosPolicy) SetProfiles(v []FabricSwitchProfileRelationship)`
+`func (o *FabricSystemQosPolicy) SetProfiles(v []FabricBaseSwitchProfileRelationship)`
 
 SetProfiles sets Profiles field to given value.
 

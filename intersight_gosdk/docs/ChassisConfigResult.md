@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "chassis.ConfigResult"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "chassis.ConfigResult"]
 **IomProfile** | Pointer to [**ChassisIomProfileRelationship**](ChassisIomProfileRelationship.md) |  | [optional] 
-**Profile** | Pointer to [**ChassisProfileRelationship**](ChassisProfileRelationship.md) |  | [optional] 
+**Profile** | Pointer to [**ChassisBaseProfileRelationship**](ChassisBaseProfileRelationship.md) |  | [optional] 
 **ResultEntries** | Pointer to [**[]ChassisConfigResultEntryRelationship**](ChassisConfigResultEntryRelationship.md) | An array of relationships to chassisConfigResultEntry resources. | [optional] 
 
 ## Methods
@@ -96,20 +96,20 @@ HasIomProfile returns a boolean if a field has been set.
 
 ### GetProfile
 
-`func (o *ChassisConfigResult) GetProfile() ChassisProfileRelationship`
+`func (o *ChassisConfigResult) GetProfile() ChassisBaseProfileRelationship`
 
 GetProfile returns the Profile field if non-nil, zero value otherwise.
 
 ### GetProfileOk
 
-`func (o *ChassisConfigResult) GetProfileOk() (*ChassisProfileRelationship, bool)`
+`func (o *ChassisConfigResult) GetProfileOk() (*ChassisBaseProfileRelationship, bool)`
 
 GetProfileOk returns a tuple with the Profile field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetProfile
 
-`func (o *ChassisConfigResult) SetProfile(v ChassisProfileRelationship)`
+`func (o *ChassisConfigResult) SetProfile(v ChassisBaseProfileRelationship)`
 
 SetProfile sets Profile field to given value.
 

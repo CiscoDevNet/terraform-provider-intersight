@@ -17,8 +17,10 @@ The following arguments can be used to get data of already created objects in In
 * `account_moid`:(string) The Account ID for this managed object. 
 * `create_time`:(string) The time when this managed object was created. 
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
+* `exclude_relations`:(bool) Do not export relationships. 
 * `export_tags`:(bool) Specifies whether tags must be exported for item MO. 
 * `file_name`:(string) Name of the file corresponding to item MO. 
+* `include_org_identity`:(bool) Indicates that exported references for objects which are organization owned should include the organization reference along with the other identity properties. 
 * `mod_time`:(string) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `name`:(string) MO item identity (the moref corresponding to item) expressed as a string. 

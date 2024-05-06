@@ -6,8 +6,6 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "vnic.EthIf"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "vnic.EthIf"]
-**Cdn** | Pointer to [**NullableVnicCdn**](VnicCdn.md) |  | [optional] 
-**FailoverEnabled** | Pointer to **bool** | Enabling failover ensures that traffic from the vNIC automatically fails over to the secondary Fabric Interconnect, in case the specified Fabric Interconnect path goes down. Failover applies only to Cisco VICs that are connected to a Fabric Interconnect cluster. | [optional] [default to false]
 **IscsiIpV4AddressAllocationType** | Pointer to **string** | Static/Pool/DHCP Type of IP address allocated to the vNIC. It is derived from iSCSI boot policy IP Address type. * &#x60;None&#x60; - Type indicates that there is no IP associated to an vnic. * &#x60;DHCP&#x60; - The IP address is assigned using DHCP, if available. * &#x60;Static&#x60; - Static IPv4 address is assigned to the iSCSI boot interface based on the information entered in this area. * &#x60;Pool&#x60; - An IPv4 address is assigned to the iSCSI boot interface from the management IP address pool. | [optional] [readonly] [default to "None"]
 **IscsiIpV4Config** | Pointer to [**NullableIppoolIpV4Config**](IppoolIpV4Config.md) |  | [optional] 
 **IscsiIpv4Address** | Pointer to **string** | IP address associated to the vNIC. | [optional] [readonly] 
@@ -15,27 +13,21 @@ Name | Type | Description | Notes
 **MacAddressType** | Pointer to **string** | Type of allocation selected to assign a MAC address for the vnic. * &#x60;POOL&#x60; - The user selects a pool from which the mac/wwn address will be leased for the Virtual Interface. * &#x60;STATIC&#x60; - The user assigns a static mac/wwn address for the Virtual Interface. | [optional] [default to "POOL"]
 **Name** | Pointer to **string** | Name of the virtual ethernet interface. | [optional] 
 **Order** | Pointer to **int64** | The order in which the virtual interface is brought up. The order assigned to an interface should be unique for all the Ethernet and Fibre-Channel interfaces on each PCI link on a VIC adapter. The order should start from zero with no overlaps. The maximum value of PCI order is limited by the number of virtual interfaces (Ethernet and Fibre-Channel) on each PCI link on a VIC adapter. All VIC adapters have a single PCI link except VIC 1340, VIC 1380 and VIC 1385 which have two. | [optional] 
-**PinGroupName** | Pointer to **string** | Pingroup name associated to vNIC for static pinning. LCP deploy will resolve pingroup name and fetches the correspoding uplink port/port channel to pin the vNIC traffic. | [optional] 
+**OverriddenList** | Pointer to **[]string** |  | [optional] 
 **Placement** | Pointer to [**NullableVnicPlacementSettings**](VnicPlacementSettings.md) |  | [optional] 
-**SriovSettings** | Pointer to [**NullableVnicSriovSettings**](VnicSriovSettings.md) |  | [optional] 
 **StandbyVifId** | Pointer to **int64** | The Standby VIF Id is applicable for failover enabled vNICS. It should be the same as the channel number of the standby vethernet created on switch in order to set up the standby data path. | [optional] [readonly] 
 **StaticMacAddress** | Pointer to **string** | The MAC address must be in hexadecimal format xx:xx:xx:xx:xx:xx. To ensure uniqueness of MACs in the LAN fabric, you are strongly encouraged to use the following MAC prefix 00:25:B5:xx:xx:xx. | [optional] 
-**UsnicSettings** | Pointer to [**NullableVnicUsnicSettings**](VnicUsnicSettings.md) |  | [optional] 
+**TemplateActions** | Pointer to [**[]MotemplateActionEntry**](MotemplateActionEntry.md) |  | [optional] 
+**TemplateSyncErrors** | Pointer to [**[]MotemplateSyncError**](MotemplateSyncError.md) |  | [optional] 
+**TemplateSyncStatus** | Pointer to **string** | The sync status of the current MO wrt the attached Template MO. * &#x60;None&#x60; - The Enum value represents that the object is not attached to any template. * &#x60;OK&#x60; - The Enum value represents that the object values are in sync with attached template. * &#x60;Scheduled&#x60; - The Enum value represents that the object sync from attached template is scheduled from template. * &#x60;InProgress&#x60; - The Enum value represents that the object sync with the attached template is in progress. * &#x60;OutOfSync&#x60; - The Enum value represents that the object values are not in sync with attached template. | [optional] [readonly] [default to "None"]
 **VifId** | Pointer to **int64** | The Vif Id should be same as the channel number of the vethernet created on switch in order to set up the data path. The property is applicable only for FI attached servers where a vethernet is created on the switch for every vNIC. | [optional] [readonly] 
-**VmqSettings** | Pointer to [**NullableVnicVmqSettings**](VnicVmqSettings.md) |  | [optional] 
-**EthAdapterPolicy** | Pointer to [**VnicEthAdapterPolicyRelationship**](VnicEthAdapterPolicyRelationship.md) |  | [optional] 
-**EthNetworkPolicy** | Pointer to [**VnicEthNetworkPolicyRelationship**](VnicEthNetworkPolicyRelationship.md) |  | [optional] 
-**EthQosPolicy** | Pointer to [**VnicEthQosPolicyRelationship**](VnicEthQosPolicyRelationship.md) |  | [optional] 
-**FabricEthNetworkControlPolicy** | Pointer to [**FabricEthNetworkControlPolicyRelationship**](FabricEthNetworkControlPolicyRelationship.md) |  | [optional] 
-**FabricEthNetworkGroupPolicy** | Pointer to [**[]FabricEthNetworkGroupPolicyRelationship**](FabricEthNetworkGroupPolicyRelationship.md) | An array of relationships to fabricEthNetworkGroupPolicy resources. | [optional] 
 **IpLease** | Pointer to [**IppoolIpLeaseRelationship**](IppoolIpLeaseRelationship.md) |  | [optional] 
-**IscsiBootPolicy** | Pointer to [**VnicIscsiBootPolicyRelationship**](VnicIscsiBootPolicyRelationship.md) |  | [optional] 
 **LanConnectivityPolicy** | Pointer to [**VnicLanConnectivityPolicyRelationship**](VnicLanConnectivityPolicyRelationship.md) |  | [optional] 
 **LcpVnic** | Pointer to [**VnicEthIfRelationship**](VnicEthIfRelationship.md) |  | [optional] 
 **MacLease** | Pointer to [**MacpoolLeaseRelationship**](MacpoolLeaseRelationship.md) |  | [optional] 
-**MacPool** | Pointer to [**MacpoolPoolRelationship**](MacpoolPoolRelationship.md) |  | [optional] 
 **Profile** | Pointer to [**PolicyAbstractConfigProfileRelationship**](PolicyAbstractConfigProfileRelationship.md) |  | [optional] 
 **SpVnics** | Pointer to [**[]VnicEthIfRelationship**](VnicEthIfRelationship.md) | An array of relationships to vnicEthIf resources. | [optional] [readonly] 
+**SrcTemplate** | Pointer to [**VnicVnicTemplateRelationship**](VnicVnicTemplateRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -95,66 +87,6 @@ and a boolean to check if the value has been set.
 
 SetObjectType sets ObjectType field to given value.
 
-
-### GetCdn
-
-`func (o *VnicEthIf) GetCdn() VnicCdn`
-
-GetCdn returns the Cdn field if non-nil, zero value otherwise.
-
-### GetCdnOk
-
-`func (o *VnicEthIf) GetCdnOk() (*VnicCdn, bool)`
-
-GetCdnOk returns a tuple with the Cdn field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetCdn
-
-`func (o *VnicEthIf) SetCdn(v VnicCdn)`
-
-SetCdn sets Cdn field to given value.
-
-### HasCdn
-
-`func (o *VnicEthIf) HasCdn() bool`
-
-HasCdn returns a boolean if a field has been set.
-
-### SetCdnNil
-
-`func (o *VnicEthIf) SetCdnNil(b bool)`
-
- SetCdnNil sets the value for Cdn to be an explicit nil
-
-### UnsetCdn
-`func (o *VnicEthIf) UnsetCdn()`
-
-UnsetCdn ensures that no value is present for Cdn, not even an explicit nil
-### GetFailoverEnabled
-
-`func (o *VnicEthIf) GetFailoverEnabled() bool`
-
-GetFailoverEnabled returns the FailoverEnabled field if non-nil, zero value otherwise.
-
-### GetFailoverEnabledOk
-
-`func (o *VnicEthIf) GetFailoverEnabledOk() (*bool, bool)`
-
-GetFailoverEnabledOk returns a tuple with the FailoverEnabled field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetFailoverEnabled
-
-`func (o *VnicEthIf) SetFailoverEnabled(v bool)`
-
-SetFailoverEnabled sets FailoverEnabled field to given value.
-
-### HasFailoverEnabled
-
-`func (o *VnicEthIf) HasFailoverEnabled() bool`
-
-HasFailoverEnabled returns a boolean if a field has been set.
 
 ### GetIscsiIpV4AddressAllocationType
 
@@ -341,31 +273,41 @@ SetOrder sets Order field to given value.
 
 HasOrder returns a boolean if a field has been set.
 
-### GetPinGroupName
+### GetOverriddenList
 
-`func (o *VnicEthIf) GetPinGroupName() string`
+`func (o *VnicEthIf) GetOverriddenList() []string`
 
-GetPinGroupName returns the PinGroupName field if non-nil, zero value otherwise.
+GetOverriddenList returns the OverriddenList field if non-nil, zero value otherwise.
 
-### GetPinGroupNameOk
+### GetOverriddenListOk
 
-`func (o *VnicEthIf) GetPinGroupNameOk() (*string, bool)`
+`func (o *VnicEthIf) GetOverriddenListOk() (*[]string, bool)`
 
-GetPinGroupNameOk returns a tuple with the PinGroupName field if it's non-nil, zero value otherwise
+GetOverriddenListOk returns a tuple with the OverriddenList field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetPinGroupName
+### SetOverriddenList
 
-`func (o *VnicEthIf) SetPinGroupName(v string)`
+`func (o *VnicEthIf) SetOverriddenList(v []string)`
 
-SetPinGroupName sets PinGroupName field to given value.
+SetOverriddenList sets OverriddenList field to given value.
 
-### HasPinGroupName
+### HasOverriddenList
 
-`func (o *VnicEthIf) HasPinGroupName() bool`
+`func (o *VnicEthIf) HasOverriddenList() bool`
 
-HasPinGroupName returns a boolean if a field has been set.
+HasOverriddenList returns a boolean if a field has been set.
 
+### SetOverriddenListNil
+
+`func (o *VnicEthIf) SetOverriddenListNil(b bool)`
+
+ SetOverriddenListNil sets the value for OverriddenList to be an explicit nil
+
+### UnsetOverriddenList
+`func (o *VnicEthIf) UnsetOverriddenList()`
+
+UnsetOverriddenList ensures that no value is present for OverriddenList, not even an explicit nil
 ### GetPlacement
 
 `func (o *VnicEthIf) GetPlacement() VnicPlacementSettings`
@@ -401,41 +343,6 @@ HasPlacement returns a boolean if a field has been set.
 `func (o *VnicEthIf) UnsetPlacement()`
 
 UnsetPlacement ensures that no value is present for Placement, not even an explicit nil
-### GetSriovSettings
-
-`func (o *VnicEthIf) GetSriovSettings() VnicSriovSettings`
-
-GetSriovSettings returns the SriovSettings field if non-nil, zero value otherwise.
-
-### GetSriovSettingsOk
-
-`func (o *VnicEthIf) GetSriovSettingsOk() (*VnicSriovSettings, bool)`
-
-GetSriovSettingsOk returns a tuple with the SriovSettings field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetSriovSettings
-
-`func (o *VnicEthIf) SetSriovSettings(v VnicSriovSettings)`
-
-SetSriovSettings sets SriovSettings field to given value.
-
-### HasSriovSettings
-
-`func (o *VnicEthIf) HasSriovSettings() bool`
-
-HasSriovSettings returns a boolean if a field has been set.
-
-### SetSriovSettingsNil
-
-`func (o *VnicEthIf) SetSriovSettingsNil(b bool)`
-
- SetSriovSettingsNil sets the value for SriovSettings to be an explicit nil
-
-### UnsetSriovSettings
-`func (o *VnicEthIf) UnsetSriovSettings()`
-
-UnsetSriovSettings ensures that no value is present for SriovSettings, not even an explicit nil
 ### GetStandbyVifId
 
 `func (o *VnicEthIf) GetStandbyVifId() int64`
@@ -486,41 +393,101 @@ SetStaticMacAddress sets StaticMacAddress field to given value.
 
 HasStaticMacAddress returns a boolean if a field has been set.
 
-### GetUsnicSettings
+### GetTemplateActions
 
-`func (o *VnicEthIf) GetUsnicSettings() VnicUsnicSettings`
+`func (o *VnicEthIf) GetTemplateActions() []MotemplateActionEntry`
 
-GetUsnicSettings returns the UsnicSettings field if non-nil, zero value otherwise.
+GetTemplateActions returns the TemplateActions field if non-nil, zero value otherwise.
 
-### GetUsnicSettingsOk
+### GetTemplateActionsOk
 
-`func (o *VnicEthIf) GetUsnicSettingsOk() (*VnicUsnicSettings, bool)`
+`func (o *VnicEthIf) GetTemplateActionsOk() (*[]MotemplateActionEntry, bool)`
 
-GetUsnicSettingsOk returns a tuple with the UsnicSettings field if it's non-nil, zero value otherwise
+GetTemplateActionsOk returns a tuple with the TemplateActions field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetUsnicSettings
+### SetTemplateActions
 
-`func (o *VnicEthIf) SetUsnicSettings(v VnicUsnicSettings)`
+`func (o *VnicEthIf) SetTemplateActions(v []MotemplateActionEntry)`
 
-SetUsnicSettings sets UsnicSettings field to given value.
+SetTemplateActions sets TemplateActions field to given value.
 
-### HasUsnicSettings
+### HasTemplateActions
 
-`func (o *VnicEthIf) HasUsnicSettings() bool`
+`func (o *VnicEthIf) HasTemplateActions() bool`
 
-HasUsnicSettings returns a boolean if a field has been set.
+HasTemplateActions returns a boolean if a field has been set.
 
-### SetUsnicSettingsNil
+### SetTemplateActionsNil
 
-`func (o *VnicEthIf) SetUsnicSettingsNil(b bool)`
+`func (o *VnicEthIf) SetTemplateActionsNil(b bool)`
 
- SetUsnicSettingsNil sets the value for UsnicSettings to be an explicit nil
+ SetTemplateActionsNil sets the value for TemplateActions to be an explicit nil
 
-### UnsetUsnicSettings
-`func (o *VnicEthIf) UnsetUsnicSettings()`
+### UnsetTemplateActions
+`func (o *VnicEthIf) UnsetTemplateActions()`
 
-UnsetUsnicSettings ensures that no value is present for UsnicSettings, not even an explicit nil
+UnsetTemplateActions ensures that no value is present for TemplateActions, not even an explicit nil
+### GetTemplateSyncErrors
+
+`func (o *VnicEthIf) GetTemplateSyncErrors() []MotemplateSyncError`
+
+GetTemplateSyncErrors returns the TemplateSyncErrors field if non-nil, zero value otherwise.
+
+### GetTemplateSyncErrorsOk
+
+`func (o *VnicEthIf) GetTemplateSyncErrorsOk() (*[]MotemplateSyncError, bool)`
+
+GetTemplateSyncErrorsOk returns a tuple with the TemplateSyncErrors field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTemplateSyncErrors
+
+`func (o *VnicEthIf) SetTemplateSyncErrors(v []MotemplateSyncError)`
+
+SetTemplateSyncErrors sets TemplateSyncErrors field to given value.
+
+### HasTemplateSyncErrors
+
+`func (o *VnicEthIf) HasTemplateSyncErrors() bool`
+
+HasTemplateSyncErrors returns a boolean if a field has been set.
+
+### SetTemplateSyncErrorsNil
+
+`func (o *VnicEthIf) SetTemplateSyncErrorsNil(b bool)`
+
+ SetTemplateSyncErrorsNil sets the value for TemplateSyncErrors to be an explicit nil
+
+### UnsetTemplateSyncErrors
+`func (o *VnicEthIf) UnsetTemplateSyncErrors()`
+
+UnsetTemplateSyncErrors ensures that no value is present for TemplateSyncErrors, not even an explicit nil
+### GetTemplateSyncStatus
+
+`func (o *VnicEthIf) GetTemplateSyncStatus() string`
+
+GetTemplateSyncStatus returns the TemplateSyncStatus field if non-nil, zero value otherwise.
+
+### GetTemplateSyncStatusOk
+
+`func (o *VnicEthIf) GetTemplateSyncStatusOk() (*string, bool)`
+
+GetTemplateSyncStatusOk returns a tuple with the TemplateSyncStatus field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTemplateSyncStatus
+
+`func (o *VnicEthIf) SetTemplateSyncStatus(v string)`
+
+SetTemplateSyncStatus sets TemplateSyncStatus field to given value.
+
+### HasTemplateSyncStatus
+
+`func (o *VnicEthIf) HasTemplateSyncStatus() bool`
+
+HasTemplateSyncStatus returns a boolean if a field has been set.
+
 ### GetVifId
 
 `func (o *VnicEthIf) GetVifId() int64`
@@ -546,176 +513,6 @@ SetVifId sets VifId field to given value.
 
 HasVifId returns a boolean if a field has been set.
 
-### GetVmqSettings
-
-`func (o *VnicEthIf) GetVmqSettings() VnicVmqSettings`
-
-GetVmqSettings returns the VmqSettings field if non-nil, zero value otherwise.
-
-### GetVmqSettingsOk
-
-`func (o *VnicEthIf) GetVmqSettingsOk() (*VnicVmqSettings, bool)`
-
-GetVmqSettingsOk returns a tuple with the VmqSettings field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetVmqSettings
-
-`func (o *VnicEthIf) SetVmqSettings(v VnicVmqSettings)`
-
-SetVmqSettings sets VmqSettings field to given value.
-
-### HasVmqSettings
-
-`func (o *VnicEthIf) HasVmqSettings() bool`
-
-HasVmqSettings returns a boolean if a field has been set.
-
-### SetVmqSettingsNil
-
-`func (o *VnicEthIf) SetVmqSettingsNil(b bool)`
-
- SetVmqSettingsNil sets the value for VmqSettings to be an explicit nil
-
-### UnsetVmqSettings
-`func (o *VnicEthIf) UnsetVmqSettings()`
-
-UnsetVmqSettings ensures that no value is present for VmqSettings, not even an explicit nil
-### GetEthAdapterPolicy
-
-`func (o *VnicEthIf) GetEthAdapterPolicy() VnicEthAdapterPolicyRelationship`
-
-GetEthAdapterPolicy returns the EthAdapterPolicy field if non-nil, zero value otherwise.
-
-### GetEthAdapterPolicyOk
-
-`func (o *VnicEthIf) GetEthAdapterPolicyOk() (*VnicEthAdapterPolicyRelationship, bool)`
-
-GetEthAdapterPolicyOk returns a tuple with the EthAdapterPolicy field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetEthAdapterPolicy
-
-`func (o *VnicEthIf) SetEthAdapterPolicy(v VnicEthAdapterPolicyRelationship)`
-
-SetEthAdapterPolicy sets EthAdapterPolicy field to given value.
-
-### HasEthAdapterPolicy
-
-`func (o *VnicEthIf) HasEthAdapterPolicy() bool`
-
-HasEthAdapterPolicy returns a boolean if a field has been set.
-
-### GetEthNetworkPolicy
-
-`func (o *VnicEthIf) GetEthNetworkPolicy() VnicEthNetworkPolicyRelationship`
-
-GetEthNetworkPolicy returns the EthNetworkPolicy field if non-nil, zero value otherwise.
-
-### GetEthNetworkPolicyOk
-
-`func (o *VnicEthIf) GetEthNetworkPolicyOk() (*VnicEthNetworkPolicyRelationship, bool)`
-
-GetEthNetworkPolicyOk returns a tuple with the EthNetworkPolicy field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetEthNetworkPolicy
-
-`func (o *VnicEthIf) SetEthNetworkPolicy(v VnicEthNetworkPolicyRelationship)`
-
-SetEthNetworkPolicy sets EthNetworkPolicy field to given value.
-
-### HasEthNetworkPolicy
-
-`func (o *VnicEthIf) HasEthNetworkPolicy() bool`
-
-HasEthNetworkPolicy returns a boolean if a field has been set.
-
-### GetEthQosPolicy
-
-`func (o *VnicEthIf) GetEthQosPolicy() VnicEthQosPolicyRelationship`
-
-GetEthQosPolicy returns the EthQosPolicy field if non-nil, zero value otherwise.
-
-### GetEthQosPolicyOk
-
-`func (o *VnicEthIf) GetEthQosPolicyOk() (*VnicEthQosPolicyRelationship, bool)`
-
-GetEthQosPolicyOk returns a tuple with the EthQosPolicy field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetEthQosPolicy
-
-`func (o *VnicEthIf) SetEthQosPolicy(v VnicEthQosPolicyRelationship)`
-
-SetEthQosPolicy sets EthQosPolicy field to given value.
-
-### HasEthQosPolicy
-
-`func (o *VnicEthIf) HasEthQosPolicy() bool`
-
-HasEthQosPolicy returns a boolean if a field has been set.
-
-### GetFabricEthNetworkControlPolicy
-
-`func (o *VnicEthIf) GetFabricEthNetworkControlPolicy() FabricEthNetworkControlPolicyRelationship`
-
-GetFabricEthNetworkControlPolicy returns the FabricEthNetworkControlPolicy field if non-nil, zero value otherwise.
-
-### GetFabricEthNetworkControlPolicyOk
-
-`func (o *VnicEthIf) GetFabricEthNetworkControlPolicyOk() (*FabricEthNetworkControlPolicyRelationship, bool)`
-
-GetFabricEthNetworkControlPolicyOk returns a tuple with the FabricEthNetworkControlPolicy field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetFabricEthNetworkControlPolicy
-
-`func (o *VnicEthIf) SetFabricEthNetworkControlPolicy(v FabricEthNetworkControlPolicyRelationship)`
-
-SetFabricEthNetworkControlPolicy sets FabricEthNetworkControlPolicy field to given value.
-
-### HasFabricEthNetworkControlPolicy
-
-`func (o *VnicEthIf) HasFabricEthNetworkControlPolicy() bool`
-
-HasFabricEthNetworkControlPolicy returns a boolean if a field has been set.
-
-### GetFabricEthNetworkGroupPolicy
-
-`func (o *VnicEthIf) GetFabricEthNetworkGroupPolicy() []FabricEthNetworkGroupPolicyRelationship`
-
-GetFabricEthNetworkGroupPolicy returns the FabricEthNetworkGroupPolicy field if non-nil, zero value otherwise.
-
-### GetFabricEthNetworkGroupPolicyOk
-
-`func (o *VnicEthIf) GetFabricEthNetworkGroupPolicyOk() (*[]FabricEthNetworkGroupPolicyRelationship, bool)`
-
-GetFabricEthNetworkGroupPolicyOk returns a tuple with the FabricEthNetworkGroupPolicy field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetFabricEthNetworkGroupPolicy
-
-`func (o *VnicEthIf) SetFabricEthNetworkGroupPolicy(v []FabricEthNetworkGroupPolicyRelationship)`
-
-SetFabricEthNetworkGroupPolicy sets FabricEthNetworkGroupPolicy field to given value.
-
-### HasFabricEthNetworkGroupPolicy
-
-`func (o *VnicEthIf) HasFabricEthNetworkGroupPolicy() bool`
-
-HasFabricEthNetworkGroupPolicy returns a boolean if a field has been set.
-
-### SetFabricEthNetworkGroupPolicyNil
-
-`func (o *VnicEthIf) SetFabricEthNetworkGroupPolicyNil(b bool)`
-
- SetFabricEthNetworkGroupPolicyNil sets the value for FabricEthNetworkGroupPolicy to be an explicit nil
-
-### UnsetFabricEthNetworkGroupPolicy
-`func (o *VnicEthIf) UnsetFabricEthNetworkGroupPolicy()`
-
-UnsetFabricEthNetworkGroupPolicy ensures that no value is present for FabricEthNetworkGroupPolicy, not even an explicit nil
 ### GetIpLease
 
 `func (o *VnicEthIf) GetIpLease() IppoolIpLeaseRelationship`
@@ -740,31 +537,6 @@ SetIpLease sets IpLease field to given value.
 `func (o *VnicEthIf) HasIpLease() bool`
 
 HasIpLease returns a boolean if a field has been set.
-
-### GetIscsiBootPolicy
-
-`func (o *VnicEthIf) GetIscsiBootPolicy() VnicIscsiBootPolicyRelationship`
-
-GetIscsiBootPolicy returns the IscsiBootPolicy field if non-nil, zero value otherwise.
-
-### GetIscsiBootPolicyOk
-
-`func (o *VnicEthIf) GetIscsiBootPolicyOk() (*VnicIscsiBootPolicyRelationship, bool)`
-
-GetIscsiBootPolicyOk returns a tuple with the IscsiBootPolicy field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetIscsiBootPolicy
-
-`func (o *VnicEthIf) SetIscsiBootPolicy(v VnicIscsiBootPolicyRelationship)`
-
-SetIscsiBootPolicy sets IscsiBootPolicy field to given value.
-
-### HasIscsiBootPolicy
-
-`func (o *VnicEthIf) HasIscsiBootPolicy() bool`
-
-HasIscsiBootPolicy returns a boolean if a field has been set.
 
 ### GetLanConnectivityPolicy
 
@@ -841,31 +613,6 @@ SetMacLease sets MacLease field to given value.
 
 HasMacLease returns a boolean if a field has been set.
 
-### GetMacPool
-
-`func (o *VnicEthIf) GetMacPool() MacpoolPoolRelationship`
-
-GetMacPool returns the MacPool field if non-nil, zero value otherwise.
-
-### GetMacPoolOk
-
-`func (o *VnicEthIf) GetMacPoolOk() (*MacpoolPoolRelationship, bool)`
-
-GetMacPoolOk returns a tuple with the MacPool field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetMacPool
-
-`func (o *VnicEthIf) SetMacPool(v MacpoolPoolRelationship)`
-
-SetMacPool sets MacPool field to given value.
-
-### HasMacPool
-
-`func (o *VnicEthIf) HasMacPool() bool`
-
-HasMacPool returns a boolean if a field has been set.
-
 ### GetProfile
 
 `func (o *VnicEthIf) GetProfile() PolicyAbstractConfigProfileRelationship`
@@ -926,6 +673,31 @@ HasSpVnics returns a boolean if a field has been set.
 `func (o *VnicEthIf) UnsetSpVnics()`
 
 UnsetSpVnics ensures that no value is present for SpVnics, not even an explicit nil
+### GetSrcTemplate
+
+`func (o *VnicEthIf) GetSrcTemplate() VnicVnicTemplateRelationship`
+
+GetSrcTemplate returns the SrcTemplate field if non-nil, zero value otherwise.
+
+### GetSrcTemplateOk
+
+`func (o *VnicEthIf) GetSrcTemplateOk() (*VnicVnicTemplateRelationship, bool)`
+
+GetSrcTemplateOk returns a tuple with the SrcTemplate field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSrcTemplate
+
+`func (o *VnicEthIf) SetSrcTemplate(v VnicVnicTemplateRelationship)`
+
+SetSrcTemplate sets SrcTemplate field to given value.
+
+### HasSrcTemplate
+
+`func (o *VnicEthIf) HasSrcTemplate() bool`
+
+HasSrcTemplate returns a boolean if a field has been set.
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

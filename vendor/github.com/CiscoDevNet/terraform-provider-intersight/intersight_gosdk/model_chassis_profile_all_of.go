@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-15830
+API version: 1.0.11-16342
 Contact: intersight@cisco.com
 */
 
@@ -23,18 +23,13 @@ type ChassisProfileAllOf struct {
 	ObjectType          string                            `json:"ObjectType"`
 	ConfigChangeContext NullablePolicyConfigChangeContext `json:"ConfigChangeContext,omitempty"`
 	ConfigChanges       NullablePolicyConfigChange        `json:"ConfigChanges,omitempty"`
-	// The platform for which the chassis profile is applicable. It can either be a chassis that is operating in standalone mode or which is attached to a Fabric Interconnect managed by Intersight. * `FIAttached` - Chassis which are connected to a Fabric Interconnect that is managed by Intersight.
-	TargetPlatform *string `json:"TargetPlatform,omitempty"`
 	// User label assigned to the chassis profile.
 	UserLabel         *string                       `json:"UserLabel,omitempty"`
 	AssignedChassis   *EquipmentChassisRelationship `json:"AssignedChassis,omitempty"`
 	AssociatedChassis *EquipmentChassisRelationship `json:"AssociatedChassis,omitempty"`
 	// An array of relationships to chassisConfigChangeDetail resources.
 	ConfigChangeDetails []ChassisConfigChangeDetailRelationship `json:"ConfigChangeDetails,omitempty"`
-	ConfigResult        *ChassisConfigResultRelationship        `json:"ConfigResult,omitempty"`
-	// An array of relationships to chassisIomProfile resources.
-	IomProfiles  []ChassisIomProfileRelationship       `json:"IomProfiles,omitempty"`
-	Organization *OrganizationOrganizationRelationship `json:"Organization,omitempty"`
+	Organization        *OrganizationOrganizationRelationship   `json:"Organization,omitempty"`
 	// An array of relationships to workflowWorkflowInfo resources.
 	RunningWorkflows     []WorkflowWorkflowInfoRelationship `json:"RunningWorkflows,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -50,8 +45,6 @@ func NewChassisProfileAllOf(classId string, objectType string) *ChassisProfileAl
 	this := ChassisProfileAllOf{}
 	this.ClassId = classId
 	this.ObjectType = objectType
-	var targetPlatform string = "FIAttached"
-	this.TargetPlatform = &targetPlatform
 	return &this
 }
 
@@ -64,8 +57,6 @@ func NewChassisProfileAllOfWithDefaults() *ChassisProfileAllOf {
 	this.ClassId = classId
 	var objectType string = "chassis.Profile"
 	this.ObjectType = objectType
-	var targetPlatform string = "FIAttached"
-	this.TargetPlatform = &targetPlatform
 	return &this
 }
 
@@ -203,38 +194,6 @@ func (o *ChassisProfileAllOf) UnsetConfigChanges() {
 	o.ConfigChanges.Unset()
 }
 
-// GetTargetPlatform returns the TargetPlatform field value if set, zero value otherwise.
-func (o *ChassisProfileAllOf) GetTargetPlatform() string {
-	if o == nil || o.TargetPlatform == nil {
-		var ret string
-		return ret
-	}
-	return *o.TargetPlatform
-}
-
-// GetTargetPlatformOk returns a tuple with the TargetPlatform field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ChassisProfileAllOf) GetTargetPlatformOk() (*string, bool) {
-	if o == nil || o.TargetPlatform == nil {
-		return nil, false
-	}
-	return o.TargetPlatform, true
-}
-
-// HasTargetPlatform returns a boolean if a field has been set.
-func (o *ChassisProfileAllOf) HasTargetPlatform() bool {
-	if o != nil && o.TargetPlatform != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetTargetPlatform gets a reference to the given string and assigns it to the TargetPlatform field.
-func (o *ChassisProfileAllOf) SetTargetPlatform(v string) {
-	o.TargetPlatform = &v
-}
-
 // GetUserLabel returns the UserLabel field value if set, zero value otherwise.
 func (o *ChassisProfileAllOf) GetUserLabel() string {
 	if o == nil || o.UserLabel == nil {
@@ -364,71 +323,6 @@ func (o *ChassisProfileAllOf) SetConfigChangeDetails(v []ChassisConfigChangeDeta
 	o.ConfigChangeDetails = v
 }
 
-// GetConfigResult returns the ConfigResult field value if set, zero value otherwise.
-func (o *ChassisProfileAllOf) GetConfigResult() ChassisConfigResultRelationship {
-	if o == nil || o.ConfigResult == nil {
-		var ret ChassisConfigResultRelationship
-		return ret
-	}
-	return *o.ConfigResult
-}
-
-// GetConfigResultOk returns a tuple with the ConfigResult field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ChassisProfileAllOf) GetConfigResultOk() (*ChassisConfigResultRelationship, bool) {
-	if o == nil || o.ConfigResult == nil {
-		return nil, false
-	}
-	return o.ConfigResult, true
-}
-
-// HasConfigResult returns a boolean if a field has been set.
-func (o *ChassisProfileAllOf) HasConfigResult() bool {
-	if o != nil && o.ConfigResult != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetConfigResult gets a reference to the given ChassisConfigResultRelationship and assigns it to the ConfigResult field.
-func (o *ChassisProfileAllOf) SetConfigResult(v ChassisConfigResultRelationship) {
-	o.ConfigResult = &v
-}
-
-// GetIomProfiles returns the IomProfiles field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *ChassisProfileAllOf) GetIomProfiles() []ChassisIomProfileRelationship {
-	if o == nil {
-		var ret []ChassisIomProfileRelationship
-		return ret
-	}
-	return o.IomProfiles
-}
-
-// GetIomProfilesOk returns a tuple with the IomProfiles field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *ChassisProfileAllOf) GetIomProfilesOk() ([]ChassisIomProfileRelationship, bool) {
-	if o == nil || o.IomProfiles == nil {
-		return nil, false
-	}
-	return o.IomProfiles, true
-}
-
-// HasIomProfiles returns a boolean if a field has been set.
-func (o *ChassisProfileAllOf) HasIomProfiles() bool {
-	if o != nil && o.IomProfiles != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetIomProfiles gets a reference to the given []ChassisIomProfileRelationship and assigns it to the IomProfiles field.
-func (o *ChassisProfileAllOf) SetIomProfiles(v []ChassisIomProfileRelationship) {
-	o.IomProfiles = v
-}
-
 // GetOrganization returns the Organization field value if set, zero value otherwise.
 func (o *ChassisProfileAllOf) GetOrganization() OrganizationOrganizationRelationship {
 	if o == nil || o.Organization == nil {
@@ -508,9 +402,6 @@ func (o ChassisProfileAllOf) MarshalJSON() ([]byte, error) {
 	if o.ConfigChanges.IsSet() {
 		toSerialize["ConfigChanges"] = o.ConfigChanges.Get()
 	}
-	if o.TargetPlatform != nil {
-		toSerialize["TargetPlatform"] = o.TargetPlatform
-	}
 	if o.UserLabel != nil {
 		toSerialize["UserLabel"] = o.UserLabel
 	}
@@ -522,12 +413,6 @@ func (o ChassisProfileAllOf) MarshalJSON() ([]byte, error) {
 	}
 	if o.ConfigChangeDetails != nil {
 		toSerialize["ConfigChangeDetails"] = o.ConfigChangeDetails
-	}
-	if o.ConfigResult != nil {
-		toSerialize["ConfigResult"] = o.ConfigResult
-	}
-	if o.IomProfiles != nil {
-		toSerialize["IomProfiles"] = o.IomProfiles
 	}
 	if o.Organization != nil {
 		toSerialize["Organization"] = o.Organization
@@ -557,13 +442,10 @@ func (o *ChassisProfileAllOf) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "ConfigChangeContext")
 		delete(additionalProperties, "ConfigChanges")
-		delete(additionalProperties, "TargetPlatform")
 		delete(additionalProperties, "UserLabel")
 		delete(additionalProperties, "AssignedChassis")
 		delete(additionalProperties, "AssociatedChassis")
 		delete(additionalProperties, "ConfigChangeDetails")
-		delete(additionalProperties, "ConfigResult")
-		delete(additionalProperties, "IomProfiles")
 		delete(additionalProperties, "Organization")
 		delete(additionalProperties, "RunningWorkflows")
 		o.AdditionalProperties = additionalProperties

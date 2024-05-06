@@ -39,5 +39,6 @@ The following arguments can be used to get data of already created objects in In
 * `shared_scope`:(string) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
 * `thermal`:(string) Thermal state of an adapter unit. 
 * `vendor`:(string) This field displays the vendor information of the associated component or hardware. 
+* `vic_communicable`:(string) Records the current state of communication between the Virtual Interface Card (VIC) and the Cisco Integrated Management Controller (CIMC) on the server.* `Not Applicable` - Set the state of VIC communication to Not Applicable for other Platforms.* `Yes` - VIC is reachable from CIMC.* `No` - VIC is not reachable from CIMC. 
 * `vid`:(string) Virtual Id of the adapter in the server. 
  

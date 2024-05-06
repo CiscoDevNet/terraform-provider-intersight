@@ -15,9 +15,9 @@ Name | Type | Description | Notes
 **LocatorBeaconSupported** | Pointer to **bool** | Locator Beacon LED support on this switch. | [optional] [readonly] 
 **MaxPorts** | Pointer to **int64** | Maximum allowed physical ports on this switch. | [optional] [readonly] 
 **MaxSlots** | Pointer to **int64** | Maximum allowed physical slots on this switch. | [optional] [readonly] 
-**MinVersionWithBreakoutSupport** | Pointer to **string** | Minimum firmware version supported for breakout ports on this switch. | [optional] [readonly] 
-**MinVersionWithLocatorLedSupport** | Pointer to **string** | Minimum firmware version supported for locator leds on this switch. | [optional] [readonly] 
-**MinVersionWithNegAuto25g** | Pointer to **string** | Minimum firmware version supported for &#39;negotiate auto 25000&#39; port admin speed on this switch. | [optional] [readonly] 
+**MinVersionMapWithBreakoutSupport** | Pointer to [**NullableFirmwareVersionMap**](FirmwareVersionMap.md) |  | [optional] 
+**MinVersionMapWithLocatorLedSupport** | Pointer to [**NullableFirmwareVersionMap**](FirmwareVersionMap.md) |  | [optional] 
+**MinVersionMapWithNegAuto25gSupport** | Pointer to [**NullableFirmwareVersionMap**](FirmwareVersionMap.md) |  | [optional] 
 **NetworkLimits** | Pointer to [**NullableCapabilitySwitchNetworkLimits**](CapabilitySwitchNetworkLimits.md) |  | [optional] 
 **PortsSupporting100gSpeed** | Pointer to [**[]CapabilityPortRange**](CapabilityPortRange.md) |  | [optional] 
 **PortsSupporting10gSpeed** | Pointer to [**[]CapabilityPortRange**](CapabilityPortRange.md) |  | [optional] 
@@ -331,81 +331,111 @@ SetMaxSlots sets MaxSlots field to given value.
 
 HasMaxSlots returns a boolean if a field has been set.
 
-### GetMinVersionWithBreakoutSupport
+### GetMinVersionMapWithBreakoutSupport
 
-`func (o *CapabilitySwitchCapabilityAllOf) GetMinVersionWithBreakoutSupport() string`
+`func (o *CapabilitySwitchCapabilityAllOf) GetMinVersionMapWithBreakoutSupport() FirmwareVersionMap`
 
-GetMinVersionWithBreakoutSupport returns the MinVersionWithBreakoutSupport field if non-nil, zero value otherwise.
+GetMinVersionMapWithBreakoutSupport returns the MinVersionMapWithBreakoutSupport field if non-nil, zero value otherwise.
 
-### GetMinVersionWithBreakoutSupportOk
+### GetMinVersionMapWithBreakoutSupportOk
 
-`func (o *CapabilitySwitchCapabilityAllOf) GetMinVersionWithBreakoutSupportOk() (*string, bool)`
+`func (o *CapabilitySwitchCapabilityAllOf) GetMinVersionMapWithBreakoutSupportOk() (*FirmwareVersionMap, bool)`
 
-GetMinVersionWithBreakoutSupportOk returns a tuple with the MinVersionWithBreakoutSupport field if it's non-nil, zero value otherwise
+GetMinVersionMapWithBreakoutSupportOk returns a tuple with the MinVersionMapWithBreakoutSupport field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetMinVersionWithBreakoutSupport
+### SetMinVersionMapWithBreakoutSupport
 
-`func (o *CapabilitySwitchCapabilityAllOf) SetMinVersionWithBreakoutSupport(v string)`
+`func (o *CapabilitySwitchCapabilityAllOf) SetMinVersionMapWithBreakoutSupport(v FirmwareVersionMap)`
 
-SetMinVersionWithBreakoutSupport sets MinVersionWithBreakoutSupport field to given value.
+SetMinVersionMapWithBreakoutSupport sets MinVersionMapWithBreakoutSupport field to given value.
 
-### HasMinVersionWithBreakoutSupport
+### HasMinVersionMapWithBreakoutSupport
 
-`func (o *CapabilitySwitchCapabilityAllOf) HasMinVersionWithBreakoutSupport() bool`
+`func (o *CapabilitySwitchCapabilityAllOf) HasMinVersionMapWithBreakoutSupport() bool`
 
-HasMinVersionWithBreakoutSupport returns a boolean if a field has been set.
+HasMinVersionMapWithBreakoutSupport returns a boolean if a field has been set.
 
-### GetMinVersionWithLocatorLedSupport
+### SetMinVersionMapWithBreakoutSupportNil
 
-`func (o *CapabilitySwitchCapabilityAllOf) GetMinVersionWithLocatorLedSupport() string`
+`func (o *CapabilitySwitchCapabilityAllOf) SetMinVersionMapWithBreakoutSupportNil(b bool)`
 
-GetMinVersionWithLocatorLedSupport returns the MinVersionWithLocatorLedSupport field if non-nil, zero value otherwise.
+ SetMinVersionMapWithBreakoutSupportNil sets the value for MinVersionMapWithBreakoutSupport to be an explicit nil
 
-### GetMinVersionWithLocatorLedSupportOk
+### UnsetMinVersionMapWithBreakoutSupport
+`func (o *CapabilitySwitchCapabilityAllOf) UnsetMinVersionMapWithBreakoutSupport()`
 
-`func (o *CapabilitySwitchCapabilityAllOf) GetMinVersionWithLocatorLedSupportOk() (*string, bool)`
+UnsetMinVersionMapWithBreakoutSupport ensures that no value is present for MinVersionMapWithBreakoutSupport, not even an explicit nil
+### GetMinVersionMapWithLocatorLedSupport
 
-GetMinVersionWithLocatorLedSupportOk returns a tuple with the MinVersionWithLocatorLedSupport field if it's non-nil, zero value otherwise
+`func (o *CapabilitySwitchCapabilityAllOf) GetMinVersionMapWithLocatorLedSupport() FirmwareVersionMap`
+
+GetMinVersionMapWithLocatorLedSupport returns the MinVersionMapWithLocatorLedSupport field if non-nil, zero value otherwise.
+
+### GetMinVersionMapWithLocatorLedSupportOk
+
+`func (o *CapabilitySwitchCapabilityAllOf) GetMinVersionMapWithLocatorLedSupportOk() (*FirmwareVersionMap, bool)`
+
+GetMinVersionMapWithLocatorLedSupportOk returns a tuple with the MinVersionMapWithLocatorLedSupport field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetMinVersionWithLocatorLedSupport
+### SetMinVersionMapWithLocatorLedSupport
 
-`func (o *CapabilitySwitchCapabilityAllOf) SetMinVersionWithLocatorLedSupport(v string)`
+`func (o *CapabilitySwitchCapabilityAllOf) SetMinVersionMapWithLocatorLedSupport(v FirmwareVersionMap)`
 
-SetMinVersionWithLocatorLedSupport sets MinVersionWithLocatorLedSupport field to given value.
+SetMinVersionMapWithLocatorLedSupport sets MinVersionMapWithLocatorLedSupport field to given value.
 
-### HasMinVersionWithLocatorLedSupport
+### HasMinVersionMapWithLocatorLedSupport
 
-`func (o *CapabilitySwitchCapabilityAllOf) HasMinVersionWithLocatorLedSupport() bool`
+`func (o *CapabilitySwitchCapabilityAllOf) HasMinVersionMapWithLocatorLedSupport() bool`
 
-HasMinVersionWithLocatorLedSupport returns a boolean if a field has been set.
+HasMinVersionMapWithLocatorLedSupport returns a boolean if a field has been set.
 
-### GetMinVersionWithNegAuto25g
+### SetMinVersionMapWithLocatorLedSupportNil
 
-`func (o *CapabilitySwitchCapabilityAllOf) GetMinVersionWithNegAuto25g() string`
+`func (o *CapabilitySwitchCapabilityAllOf) SetMinVersionMapWithLocatorLedSupportNil(b bool)`
 
-GetMinVersionWithNegAuto25g returns the MinVersionWithNegAuto25g field if non-nil, zero value otherwise.
+ SetMinVersionMapWithLocatorLedSupportNil sets the value for MinVersionMapWithLocatorLedSupport to be an explicit nil
 
-### GetMinVersionWithNegAuto25gOk
+### UnsetMinVersionMapWithLocatorLedSupport
+`func (o *CapabilitySwitchCapabilityAllOf) UnsetMinVersionMapWithLocatorLedSupport()`
 
-`func (o *CapabilitySwitchCapabilityAllOf) GetMinVersionWithNegAuto25gOk() (*string, bool)`
+UnsetMinVersionMapWithLocatorLedSupport ensures that no value is present for MinVersionMapWithLocatorLedSupport, not even an explicit nil
+### GetMinVersionMapWithNegAuto25gSupport
 
-GetMinVersionWithNegAuto25gOk returns a tuple with the MinVersionWithNegAuto25g field if it's non-nil, zero value otherwise
+`func (o *CapabilitySwitchCapabilityAllOf) GetMinVersionMapWithNegAuto25gSupport() FirmwareVersionMap`
+
+GetMinVersionMapWithNegAuto25gSupport returns the MinVersionMapWithNegAuto25gSupport field if non-nil, zero value otherwise.
+
+### GetMinVersionMapWithNegAuto25gSupportOk
+
+`func (o *CapabilitySwitchCapabilityAllOf) GetMinVersionMapWithNegAuto25gSupportOk() (*FirmwareVersionMap, bool)`
+
+GetMinVersionMapWithNegAuto25gSupportOk returns a tuple with the MinVersionMapWithNegAuto25gSupport field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetMinVersionWithNegAuto25g
+### SetMinVersionMapWithNegAuto25gSupport
 
-`func (o *CapabilitySwitchCapabilityAllOf) SetMinVersionWithNegAuto25g(v string)`
+`func (o *CapabilitySwitchCapabilityAllOf) SetMinVersionMapWithNegAuto25gSupport(v FirmwareVersionMap)`
 
-SetMinVersionWithNegAuto25g sets MinVersionWithNegAuto25g field to given value.
+SetMinVersionMapWithNegAuto25gSupport sets MinVersionMapWithNegAuto25gSupport field to given value.
 
-### HasMinVersionWithNegAuto25g
+### HasMinVersionMapWithNegAuto25gSupport
 
-`func (o *CapabilitySwitchCapabilityAllOf) HasMinVersionWithNegAuto25g() bool`
+`func (o *CapabilitySwitchCapabilityAllOf) HasMinVersionMapWithNegAuto25gSupport() bool`
 
-HasMinVersionWithNegAuto25g returns a boolean if a field has been set.
+HasMinVersionMapWithNegAuto25gSupport returns a boolean if a field has been set.
 
+### SetMinVersionMapWithNegAuto25gSupportNil
+
+`func (o *CapabilitySwitchCapabilityAllOf) SetMinVersionMapWithNegAuto25gSupportNil(b bool)`
+
+ SetMinVersionMapWithNegAuto25gSupportNil sets the value for MinVersionMapWithNegAuto25gSupport to be an explicit nil
+
+### UnsetMinVersionMapWithNegAuto25gSupport
+`func (o *CapabilitySwitchCapabilityAllOf) UnsetMinVersionMapWithNegAuto25gSupport()`
+
+UnsetMinVersionMapWithNegAuto25gSupport ensures that no value is present for MinVersionMapWithNegAuto25gSupport, not even an explicit nil
 ### GetNetworkLimits
 
 `func (o *CapabilitySwitchCapabilityAllOf) GetNetworkLimits() CapabilitySwitchNetworkLimits`

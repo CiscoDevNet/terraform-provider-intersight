@@ -21,6 +21,11 @@ func getBulkResultSchema() map[string]*schema.Schema {
 		Type:        schema.TypeString,
 		Optional:    true,
 	},
+		"action_on_error": {
+			Description: "The action that will be performed when an error occurs during processing of the request.\n* `Stop` - Stop the processing of the request after the first error.\n* `Proceed` - Proceed with the processing of the request even when an error occurs.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"additional_properties": {
 			Type:             schema.TypeString,
 			Optional:         true,
@@ -66,7 +71,7 @@ func getBulkResultSchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"completion_time": {
-			Description: "The timestamp in UTC when the request processing completed.",
+			Description: "The timestamp in UTC when the request processing is completed.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -80,8 +85,78 @@ func getBulkResultSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"mo_cloner": {
+			Description: "A reference to a bulkMoCloner resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
 		"mo_deep_cloner": {
 			Description: "A reference to a bulkMoDeepCloner resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"mo_merger": {
+			Description: "A reference to a bulkMoMerger resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 			Type:        schema.TypeList,
 			MaxItems:    1,
 			Optional:    true,
@@ -244,6 +319,11 @@ func getBulkResultSchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"request": {
+			Description: "The individual request to be executed asynchronously.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"request_received_time": {
 			Description: "The timestamp in UTC when the request was received.",
 			Type:        schema.TypeString,
@@ -289,7 +369,7 @@ func getBulkResultSchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"status": {
-			Description: "The processing status of the request.\n* `NotStarted` - Indicates that the request processing has not begun yet.\n* `ObjPresenceCheckInProgress` - Indicates that the object presence check is in progress for this request.\n* `ObjPresenceCheckComplete` - Indicates that the object presence check is complete.\n* `ExecutionInProgress` - Indicates that the request processing is in progress.\n* `Completed` - Indicates that the request processing has been completed successfully.\n* `Failed` - Indicates that the processing of this request failed.\n* `TimedOut` - Indicates that the request processing timed out.",
+			Description: "The processing status of the request.\n* `NotStarted` - Indicates that the request processing has not begun yet.\n* `ObjPresenceCheckInProgress` - Indicates that the object presence check is in progress for this request.\n* `ObjPresenceCheckComplete` - Indicates that the object presence check is complete.\n* `ExecutionInProgress` - Indicates that the request processing is in progress.\n* `Completed` - Indicates that the request processing has been completed successfully.\n* `CompletedWithErrors` - Indicates that the request processing has one or more failed subrequests.\n* `Failed` - Indicates that the processing of this request failed.\n* `TimedOut` - Indicates that the request processing timed out.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -501,6 +581,11 @@ func dataSourceBulkResultRead(c context.Context, d *schema.ResourceData, meta in
 		o.SetAccountMoid(x)
 	}
 
+	if v, ok := d.GetOk("action_on_error"); ok {
+		x := (v.(string))
+		o.SetActionOnError(x)
+	}
+
 	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
 		var x1 interface{}
@@ -570,6 +655,49 @@ func dataSourceBulkResultRead(c context.Context, d *schema.ResourceData, meta in
 		o.SetDomainGroupMoid(x)
 	}
 
+	if v, ok := d.GetOk("mo_cloner"); ok {
+		p := make([]models.BulkMoClonerRelationship, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.MoMoRef{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			p = append(p, models.MoMoRefAsBulkMoClonerRelationship(o))
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetMoCloner(x)
+		}
+	}
+
 	if v, ok := d.GetOk("mo_deep_cloner"); ok {
 		p := make([]models.BulkMoDeepClonerRelationship, 0, 1)
 		s := v.([]interface{})
@@ -610,6 +738,49 @@ func dataSourceBulkResultRead(c context.Context, d *schema.ResourceData, meta in
 		if len(p) > 0 {
 			x := p[0]
 			o.SetMoDeepCloner(x)
+		}
+	}
+
+	if v, ok := d.GetOk("mo_merger"); ok {
+		p := make([]models.BulkMoMergerRelationship, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.MoMoRef{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			p = append(p, models.MoMoRefAsBulkMoMergerRelationship(o))
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetMoMerger(x)
 		}
 	}
 
@@ -768,6 +939,16 @@ func dataSourceBulkResultRead(c context.Context, d *schema.ResourceData, meta in
 			x = append(x, models.MoMoRefAsMoBaseMoRelationship(o))
 		}
 		o.SetPermissionResources(x)
+	}
+
+	if v, ok := d.GetOk("request"); ok {
+		x := []byte(v.(string))
+		var x1 interface{}
+		err := json.Unmarshal(x, &x1)
+		if err == nil && x1 != nil {
+			x2 := x1.(map[string]interface{})
+			o.SetRequest(x2)
+		}
 	}
 
 	if v, ok := d.GetOk("request_received_time"); ok {
@@ -1021,6 +1202,7 @@ func dataSourceBulkResultRead(c context.Context, d *schema.ResourceData, meta in
 				var s = results[k]
 				var temp = make(map[string]interface{})
 				temp["account_moid"] = (s.GetAccountMoid())
+				temp["action_on_error"] = (s.GetActionOnError())
 				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
 
 				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)
@@ -1031,7 +1213,11 @@ func dataSourceBulkResultRead(c context.Context, d *schema.ResourceData, meta in
 				temp["create_time"] = (s.GetCreateTime()).String()
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
 
+				temp["mo_cloner"] = flattenMapBulkMoClonerRelationship(s.GetMoCloner(), d)
+
 				temp["mo_deep_cloner"] = flattenMapBulkMoDeepClonerRelationship(s.GetMoDeepCloner(), d)
+
+				temp["mo_merger"] = flattenMapBulkMoMergerRelationship(s.GetMoMerger(), d)
 
 				temp["mod_time"] = (s.GetModTime()).String()
 				temp["moid"] = (s.GetMoid())
@@ -1044,6 +1230,7 @@ func dataSourceBulkResultRead(c context.Context, d *schema.ResourceData, meta in
 				temp["parent"] = flattenMapMoBaseMoRelationship(s.GetParent(), d)
 
 				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
+				temp["request"] = flattenAdditionalProperties(s.GetRequest())
 
 				temp["request_received_time"] = (s.GetRequestReceivedTime()).String()
 

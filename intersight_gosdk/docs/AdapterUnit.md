@@ -17,6 +17,7 @@ Name | Type | Description | Notes
 **PciSlot** | Pointer to **string** | PCIe slot of the adapter in the server. | [optional] [readonly] 
 **Power** | Pointer to **string** | Power state of an adapter unit. | [optional] [readonly] 
 **Thermal** | Pointer to **string** | Thermal state of an adapter unit. | [optional] [readonly] 
+**VicCommunicable** | Pointer to **string** | Records the current state of communication between the Virtual Interface Card (VIC) and the Cisco Integrated Management Controller (CIMC) on the server. * &#x60;Not Applicable&#x60; - Set the state of VIC communication to Not Applicable for other Platforms. * &#x60;Yes&#x60; - VIC is reachable from CIMC. * &#x60;No&#x60; - VIC is not reachable from CIMC. | [optional] [readonly] [default to "Not Applicable"]
 **Vid** | Pointer to **string** | Virtual Id of the adapter in the server. | [optional] [readonly] 
 **AdapterUnitExpander** | Pointer to [**AdapterUnitExpanderRelationship**](AdapterUnitExpanderRelationship.md) |  | [optional] 
 **ComputeBlade** | Pointer to [**ComputeBladeRelationship**](ComputeBladeRelationship.md) |  | [optional] 
@@ -372,6 +373,31 @@ SetThermal sets Thermal field to given value.
 `func (o *AdapterUnit) HasThermal() bool`
 
 HasThermal returns a boolean if a field has been set.
+
+### GetVicCommunicable
+
+`func (o *AdapterUnit) GetVicCommunicable() string`
+
+GetVicCommunicable returns the VicCommunicable field if non-nil, zero value otherwise.
+
+### GetVicCommunicableOk
+
+`func (o *AdapterUnit) GetVicCommunicableOk() (*string, bool)`
+
+GetVicCommunicableOk returns a tuple with the VicCommunicable field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetVicCommunicable
+
+`func (o *AdapterUnit) SetVicCommunicable(v string)`
+
+SetVicCommunicable sets VicCommunicable field to given value.
+
+### HasVicCommunicable
+
+`func (o *AdapterUnit) HasVicCommunicable() bool`
+
+HasVicCommunicable returns a boolean if a field has been set.
 
 ### GetVid
 

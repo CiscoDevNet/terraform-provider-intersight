@@ -75,6 +75,16 @@ func getBulkExportedItemSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"exclude_peers": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Schema{
+				Type: schema.TypeString}},
+		"exclude_relations": {
+			Description: "Do not export relationships.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
 		"export": {
 			Description: "A reference to a bulkExport resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 			Type:        schema.TypeList,
@@ -118,6 +128,11 @@ func getBulkExportedItemSchema() map[string]*schema.Schema {
 		"file_name": {
 			Description: "Name of the file corresponding to item MO.",
 			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"include_org_identity": {
+			Description: "Indicates that exported references for objects which are organization owned should include the organization reference along with the other identity properties.",
+			Type:        schema.TypeBool,
 			Optional:    true,
 		},
 		"item": {
@@ -570,6 +585,22 @@ func dataSourceBulkExportedItemRead(c context.Context, d *schema.ResourceData, m
 		o.SetDomainGroupMoid(x)
 	}
 
+	if v, ok := d.GetOk("exclude_peers"); ok {
+		x := make([]string, 0)
+		y := reflect.ValueOf(v)
+		for i := 0; i < y.Len(); i++ {
+			if y.Index(i).Interface() != nil {
+				x = append(x, y.Index(i).Interface().(string))
+			}
+		}
+		o.SetExcludePeers(x)
+	}
+
+	if v, ok := d.GetOkExists("exclude_relations"); ok {
+		x := (v.(bool))
+		o.SetExcludeRelations(x)
+	}
+
 	if v, ok := d.GetOk("export"); ok {
 		p := make([]models.BulkExportRelationship, 0, 1)
 		s := v.([]interface{})
@@ -621,6 +652,11 @@ func dataSourceBulkExportedItemRead(c context.Context, d *schema.ResourceData, m
 	if v, ok := d.GetOk("file_name"); ok {
 		x := (v.(string))
 		o.SetFileName(x)
+	}
+
+	if v, ok := d.GetOkExists("include_org_identity"); ok {
+		x := (v.(bool))
+		o.SetIncludeOrgIdentity(x)
 	}
 
 	if v, ok := d.GetOk("item"); ok {
@@ -1038,10 +1074,13 @@ func dataSourceBulkExportedItemRead(c context.Context, d *schema.ResourceData, m
 
 				temp["create_time"] = (s.GetCreateTime()).String()
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
+				temp["exclude_peers"] = (s.GetExcludePeers())
+				temp["exclude_relations"] = (s.GetExcludeRelations())
 
 				temp["export"] = flattenMapBulkExportRelationship(s.GetExport(), d)
 				temp["export_tags"] = (s.GetExportTags())
 				temp["file_name"] = (s.GetFileName())
+				temp["include_org_identity"] = (s.GetIncludeOrgIdentity())
 
 				temp["item"] = flattenMapMoMoRef(s.GetItem(), d)
 

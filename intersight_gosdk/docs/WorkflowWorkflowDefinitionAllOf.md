@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "workflow.WorkflowDefinition"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "workflow.WorkflowDefinition"]
+**CreateUser** | Pointer to **string** | The user identifier who created or cloned the workflow definition. | [optional] [readonly] 
 **DefaultVersion** | Pointer to **bool** | When true this will be the workflow version that is used when a specific workflow definition version is not specified. The default version is used when user executes a workflow without specifying a version or when workflow is included in another workflow without a specific version. The very first workflow definition created with a name will be set as the default version, after that user can explicitly set any version of the workflow definition as the default version. | [optional] 
 **Description** | Pointer to **string** | The description for this workflow. | [optional] 
 **InputDefinition** | Pointer to [**[]WorkflowBaseDataType**](WorkflowBaseDataType.md) |  | [optional] 
@@ -14,6 +15,7 @@ Name | Type | Description | Notes
 **LicenseEntitlement** | Pointer to **string** | License entitlement required to run this workflow. It is calculated based on the highest license requirement of all its tasks. * &#x60;Base&#x60; - Base as a License type. It is default license type. * &#x60;Essential&#x60; - Essential as a License type. * &#x60;Standard&#x60; - Standard as a License type. * &#x60;Advantage&#x60; - Advantage as a License type. * &#x60;Premier&#x60; - Premier as a License type. * &#x60;IWO-Essential&#x60; - IWO-Essential as a License type. * &#x60;IWO-Advantage&#x60; - IWO-Advantage as a License type. * &#x60;IWO-Premier&#x60; - IWO-Premier as a License type. * &#x60;IKS-Advantage&#x60; - IKS-Advantage as a License type. * &#x60;INC-Premier-1GFixed&#x60; - Premier 1G Fixed license tier for Intersight Nexus Cloud. * &#x60;INC-Premier-10GFixed&#x60; - Premier 10G Fixed license tier for Intersight Nexus Cloud. * &#x60;INC-Premier-100GFixed&#x60; - Premier 100G Fixed license tier for Intersight Nexus Cloud. * &#x60;INC-Premier-Mod4Slot&#x60; - Premier Modular 4 slot license tier for Intersight Nexus Cloud. * &#x60;INC-Premier-Mod8Slot&#x60; - Premier Modular 8 slot license tier for Intersight Nexus Cloud. * &#x60;INC-Premier-D2OpsFixed&#x60; - Premier D2Ops fixed license tier for Intersight Nexus Cloud. * &#x60;INC-Premier-D2OpsMod&#x60; - Premier D2Ops modular license tier for Intersight Nexus Cloud. * &#x60;INC-Premier-CentralizedMod8Slot&#x60; - Premier modular license tier of switch type CentralizedMod8Slot for Intersight Nexus Cloud. * &#x60;INC-Premier-DistributedMod8Slot&#x60; - Premier modular license tier of switch type DistributedMod8Slot for Intersight Nexus Cloud. * &#x60;IntersightTrial&#x60; - Virtual dummy license type to indicate trial. Used for UI display of trial mode Intersight tiers. * &#x60;IWOTrial&#x60; - Virtual dummy license type to indicate trial. Used for UI display of trial mode IKS tiers. * &#x60;IKSTrial&#x60; - Virtual dummy license type to indicate trial. Used for UI display of trial mode IWO tiers. * &#x60;INCTrial&#x60; - Virtual dummy license type to indicate trial. Used for UI display of trial mode Nexus tiers. | [optional] [readonly] [default to "Base"]
 **MaxTaskCount** | Pointer to **int64** | The maximum number of tasks that can be executed on this workflow. | [optional] [readonly] 
 **MaxWorkerTaskCount** | Pointer to **int64** | The maximum number of external (worker) tasks that can be executed on this workflow. | [optional] [readonly] 
+**ModUser** | Pointer to **string** | The user identifier who last updated the workflow definition. | [optional] [readonly] 
 **Name** | Pointer to **string** | The name for this workflow. You can have multiple versions of the workflow with the same name. Name can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.) or an underscore (_). | [optional] 
 **OutputDefinition** | Pointer to [**[]WorkflowBaseDataType**](WorkflowBaseDataType.md) |  | [optional] 
 **OutputParameters** | Pointer to **interface{}** | The output mappings for the workflow. The schema for outputs of a workflow is defined using OutputDefinition. The outputs for workflows that we want to export out at the end of the workflow can be mapped from task outputs, workflow inputs, or workflow variables. Any task output, workflow input, or workflow variable can be mapped to a workflow output as long as the types are compatible. The format to specify the mapping is &#39;${ &#39;workflow | &lt;taskName&gt;&#39;. &#39;output |input | variable&#39;.&lt;name&gt;[.&lt;JsonPath&gt;]}&#39;. First, either the keyword &#39;workflow&#39; or the name of the task in the workflow must be given. If a task name is used, then it must be followed by the keyword &#39;output&#39;, if the keyword workflow was used, then it must be followed by the keyword &#39;input&#39; or &#39;variable&#39;. Following this &#39;&lt;name&gt;&#39; must be the name of either input, output, or variable that must be mapped as workflow output. The last part of the mapping can be an optional &lt;JsonPath&gt; to extract specific fields on the data. | [optional] 
@@ -86,6 +88,31 @@ and a boolean to check if the value has been set.
 
 SetObjectType sets ObjectType field to given value.
 
+
+### GetCreateUser
+
+`func (o *WorkflowWorkflowDefinitionAllOf) GetCreateUser() string`
+
+GetCreateUser returns the CreateUser field if non-nil, zero value otherwise.
+
+### GetCreateUserOk
+
+`func (o *WorkflowWorkflowDefinitionAllOf) GetCreateUserOk() (*string, bool)`
+
+GetCreateUserOk returns a tuple with the CreateUser field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCreateUser
+
+`func (o *WorkflowWorkflowDefinitionAllOf) SetCreateUser(v string)`
+
+SetCreateUser sets CreateUser field to given value.
+
+### HasCreateUser
+
+`func (o *WorkflowWorkflowDefinitionAllOf) HasCreateUser() bool`
+
+HasCreateUser returns a boolean if a field has been set.
 
 ### GetDefaultVersion
 
@@ -306,6 +333,31 @@ SetMaxWorkerTaskCount sets MaxWorkerTaskCount field to given value.
 `func (o *WorkflowWorkflowDefinitionAllOf) HasMaxWorkerTaskCount() bool`
 
 HasMaxWorkerTaskCount returns a boolean if a field has been set.
+
+### GetModUser
+
+`func (o *WorkflowWorkflowDefinitionAllOf) GetModUser() string`
+
+GetModUser returns the ModUser field if non-nil, zero value otherwise.
+
+### GetModUserOk
+
+`func (o *WorkflowWorkflowDefinitionAllOf) GetModUserOk() (*string, bool)`
+
+GetModUserOk returns a tuple with the ModUser field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetModUser
+
+`func (o *WorkflowWorkflowDefinitionAllOf) SetModUser(v string)`
+
+SetModUser sets ModUser field to given value.
+
+### HasModUser
+
+`func (o *WorkflowWorkflowDefinitionAllOf) HasModUser() bool`
+
+HasModUser returns a boolean if a field has been set.
 
 ### GetName
 

@@ -7,12 +7,12 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "marketplace.UseCaseLocale"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "marketplace.UseCaseLocale"]
 **Automations** | Pointer to [**[]MarketplaceUseCaseAutomation**](MarketplaceUseCaseAutomation.md) |  | [optional] 
-**Contents** | Pointer to **string** | The string field to hold the contents value | [optional] 
-**Description** | Pointer to **string** | The string field to hold the description value | [optional] 
-**Icon** | Pointer to **string** | A base64-encoded image for the use case | [optional] 
-**Locale** | Pointer to **string** | The string field to hold the locale | [optional] 
-**Name** | Pointer to **string** | The string field to hold the name value | [optional] 
-**Summary** | Pointer to **string** | The string field to hold the summary value | [optional] 
+**Contents** | Pointer to **string** | The string field to hold the contents value. | [optional] 
+**Description** | Pointer to **string** | The string field to hold the description value. | [optional] 
+**Icon** | Pointer to **string** | A base64-encoded image for the use case. | [optional] 
+**Locale** | Pointer to **string** | The string field to hold the locale. | [optional] 
+**Name** | Pointer to **string** | The string field to hold the name value. | [optional] 
+**Summary** | Pointer to **string** | The string field to hold the summary value. | [optional] 
 
 ## Methods
 

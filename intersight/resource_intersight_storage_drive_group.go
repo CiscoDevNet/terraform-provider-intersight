@@ -639,9 +639,9 @@ func resourceStorageDriveGroup() *schema.Resource {
 							Optional:    true,
 						},
 						"name": {
-							Description:  "The name of the virtual drive. The name can be between 1 and 15 alphanumeric characters. Spaces or any special characters other than - (hyphen), _ (underscore), : (colon), and . (period) are not allowed.",
+							Description:  "The name of the virtual drive. The name can be between 1 and 15 alphanumeric characters. Spaces or any special characters other than - (hyphen) and _ (underscore) are not allowed.",
 							Type:         schema.TypeString,
-							ValidateFunc: validation.All(validation.StringMatch(regexp.MustCompile("^[a-zA-Z0-9\\-\\._:]*$"), ""), StringLenMaximum(15)),
+							ValidateFunc: validation.All(validation.StringMatch(regexp.MustCompile("^[a-zA-Z0-9\\-_]*$"), ""), StringLenMaximum(15)),
 							Optional:     true,
 						},
 						"object_type": {

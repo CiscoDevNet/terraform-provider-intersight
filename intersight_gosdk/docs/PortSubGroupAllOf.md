@@ -9,6 +9,8 @@ Name | Type | Description | Notes
 **AggregatePortId** | Pointer to **int64** | Breakout port member in the Fabric Interconnect. | [optional] [readonly] 
 **SlotId** | Pointer to **int64** | Switch expansion slot module identifier. | [optional] [readonly] 
 **Transport** | Pointer to **string** | Type of port sub-group. Values are Eth or Fc. | [optional] [readonly] 
+**EquipmentIoCardBase** | Pointer to [**EquipmentIoCardBaseRelationship**](EquipmentIoCardBaseRelationship.md) |  | [optional] 
+**EtherHostPorts** | Pointer to [**[]EtherHostPortRelationship**](EtherHostPortRelationship.md) | An array of relationships to etherHostPort resources. | [optional] [readonly] 
 **EthernetPorts** | Pointer to [**[]EtherPhysicalPortRelationship**](EtherPhysicalPortRelationship.md) | An array of relationships to etherPhysicalPort resources. | [optional] [readonly] 
 **FcPorts** | Pointer to [**[]FcPhysicalPortRelationship**](FcPhysicalPortRelationship.md) | An array of relationships to fcPhysicalPort resources. | [optional] [readonly] 
 **InventoryDeviceInfo** | Pointer to [**InventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
@@ -149,6 +151,66 @@ SetTransport sets Transport field to given value.
 
 HasTransport returns a boolean if a field has been set.
 
+### GetEquipmentIoCardBase
+
+`func (o *PortSubGroupAllOf) GetEquipmentIoCardBase() EquipmentIoCardBaseRelationship`
+
+GetEquipmentIoCardBase returns the EquipmentIoCardBase field if non-nil, zero value otherwise.
+
+### GetEquipmentIoCardBaseOk
+
+`func (o *PortSubGroupAllOf) GetEquipmentIoCardBaseOk() (*EquipmentIoCardBaseRelationship, bool)`
+
+GetEquipmentIoCardBaseOk returns a tuple with the EquipmentIoCardBase field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEquipmentIoCardBase
+
+`func (o *PortSubGroupAllOf) SetEquipmentIoCardBase(v EquipmentIoCardBaseRelationship)`
+
+SetEquipmentIoCardBase sets EquipmentIoCardBase field to given value.
+
+### HasEquipmentIoCardBase
+
+`func (o *PortSubGroupAllOf) HasEquipmentIoCardBase() bool`
+
+HasEquipmentIoCardBase returns a boolean if a field has been set.
+
+### GetEtherHostPorts
+
+`func (o *PortSubGroupAllOf) GetEtherHostPorts() []EtherHostPortRelationship`
+
+GetEtherHostPorts returns the EtherHostPorts field if non-nil, zero value otherwise.
+
+### GetEtherHostPortsOk
+
+`func (o *PortSubGroupAllOf) GetEtherHostPortsOk() (*[]EtherHostPortRelationship, bool)`
+
+GetEtherHostPortsOk returns a tuple with the EtherHostPorts field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEtherHostPorts
+
+`func (o *PortSubGroupAllOf) SetEtherHostPorts(v []EtherHostPortRelationship)`
+
+SetEtherHostPorts sets EtherHostPorts field to given value.
+
+### HasEtherHostPorts
+
+`func (o *PortSubGroupAllOf) HasEtherHostPorts() bool`
+
+HasEtherHostPorts returns a boolean if a field has been set.
+
+### SetEtherHostPortsNil
+
+`func (o *PortSubGroupAllOf) SetEtherHostPortsNil(b bool)`
+
+ SetEtherHostPortsNil sets the value for EtherHostPorts to be an explicit nil
+
+### UnsetEtherHostPorts
+`func (o *PortSubGroupAllOf) UnsetEtherHostPorts()`
+
+UnsetEtherHostPorts ensures that no value is present for EtherHostPorts, not even an explicit nil
 ### GetEthernetPorts
 
 `func (o *PortSubGroupAllOf) GetEthernetPorts() []EtherPhysicalPortRelationship`

@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "fabric.EthNetworkPolicy"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "fabric.EthNetworkPolicy"]
 **Organization** | Pointer to [**OrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
-**Profiles** | Pointer to [**[]FabricSwitchProfileRelationship**](FabricSwitchProfileRelationship.md) | An array of relationships to fabricSwitchProfile resources. | [optional] 
+**Profiles** | Pointer to [**[]FabricBaseSwitchProfileRelationship**](FabricBaseSwitchProfileRelationship.md) | An array of relationships to fabricBaseSwitchProfile resources. | [optional] 
 
 ## Methods
 
@@ -95,20 +95,20 @@ HasOrganization returns a boolean if a field has been set.
 
 ### GetProfiles
 
-`func (o *FabricEthNetworkPolicy) GetProfiles() []FabricSwitchProfileRelationship`
+`func (o *FabricEthNetworkPolicy) GetProfiles() []FabricBaseSwitchProfileRelationship`
 
 GetProfiles returns the Profiles field if non-nil, zero value otherwise.
 
 ### GetProfilesOk
 
-`func (o *FabricEthNetworkPolicy) GetProfilesOk() (*[]FabricSwitchProfileRelationship, bool)`
+`func (o *FabricEthNetworkPolicy) GetProfilesOk() (*[]FabricBaseSwitchProfileRelationship, bool)`
 
 GetProfilesOk returns a tuple with the Profiles field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetProfiles
 
-`func (o *FabricEthNetworkPolicy) SetProfiles(v []FabricSwitchProfileRelationship)`
+`func (o *FabricEthNetworkPolicy) SetProfiles(v []FabricBaseSwitchProfileRelationship)`
 
 SetProfiles sets Profiles field to given value.
 

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-15830
+API version: 1.0.11-16342
 Contact: intersight@cisco.com
 */
 
@@ -28,14 +28,14 @@ type FabricSwitchControlPolicyAllOf struct {
 	// Enable or Disable FC End Host Switching Mode. * `end-host` - In end-host mode, the fabric interconnects appear to the upstream devices as end hosts with multiple links.In this mode, the switch does not run Spanning Tree Protocol and avoids loops by following a set of rules for traffic forwarding.In case of ethernet switching mode - Ethernet end-host mode is also known as Ethernet host virtualizer. * `switch` - In switch mode, the switch runs Spanning Tree Protocol to avoid loops, and broadcast and multicast packets are handled in the traditional way.This is the traditional switch mode.
 	FcSwitchingMode  *string                        `json:"FcSwitchingMode,omitempty"`
 	MacAgingSettings NullableFabricMacAgingSettings `json:"MacAgingSettings,omitempty"`
-	// The starting ID for VLANs reserved for internal use within the Fabric Interconnect. This VLAN ID is the starting ID of  a contiguous block of 128 VLANs that cannot be configured for user data.  This range of VLANs cannot be configured in  VLAN policy. If this property is not configured, VLAN range 3915 - 4042 is reserved for internal use by default.
+	// The starting ID for VLANs reserved for internal use within the Fabric Interconnect. This VLAN ID is the starting ID of a contiguous block of 128 VLANs that cannot be configured for user data.  This range of VLANs cannot be configured in VLAN policy. If this property is not configured, VLAN range 3915 - 4042 is reserved for internal use by default.
 	ReservedVlanStartId *int64                           `json:"ReservedVlanStartId,omitempty"`
 	UdldSettings        NullableFabricUdldGlobalSettings `json:"UdldSettings,omitempty"`
-	// To enable or disable the VLAN port count optimization.
+	// To enable or disable the VLAN port count optimization. This feature will always be enabled for Cisco UCS Fabric Interconnect 9108 100G.
 	VlanPortOptimizationEnabled *bool                                 `json:"VlanPortOptimizationEnabled,omitempty"`
 	Organization                *OrganizationOrganizationRelationship `json:"Organization,omitempty"`
-	// An array of relationships to fabricSwitchProfile resources.
-	Profiles             []FabricSwitchProfileRelationship `json:"Profiles,omitempty"`
+	// An array of relationships to fabricBaseSwitchProfile resources.
+	Profiles             []FabricBaseSwitchProfileRelationship `json:"Profiles,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -411,9 +411,9 @@ func (o *FabricSwitchControlPolicyAllOf) SetOrganization(v OrganizationOrganizat
 }
 
 // GetProfiles returns the Profiles field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *FabricSwitchControlPolicyAllOf) GetProfiles() []FabricSwitchProfileRelationship {
+func (o *FabricSwitchControlPolicyAllOf) GetProfiles() []FabricBaseSwitchProfileRelationship {
 	if o == nil {
-		var ret []FabricSwitchProfileRelationship
+		var ret []FabricBaseSwitchProfileRelationship
 		return ret
 	}
 	return o.Profiles
@@ -422,7 +422,7 @@ func (o *FabricSwitchControlPolicyAllOf) GetProfiles() []FabricSwitchProfileRela
 // GetProfilesOk returns a tuple with the Profiles field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *FabricSwitchControlPolicyAllOf) GetProfilesOk() ([]FabricSwitchProfileRelationship, bool) {
+func (o *FabricSwitchControlPolicyAllOf) GetProfilesOk() ([]FabricBaseSwitchProfileRelationship, bool) {
 	if o == nil || o.Profiles == nil {
 		return nil, false
 	}
@@ -438,8 +438,8 @@ func (o *FabricSwitchControlPolicyAllOf) HasProfiles() bool {
 	return false
 }
 
-// SetProfiles gets a reference to the given []FabricSwitchProfileRelationship and assigns it to the Profiles field.
-func (o *FabricSwitchControlPolicyAllOf) SetProfiles(v []FabricSwitchProfileRelationship) {
+// SetProfiles gets a reference to the given []FabricBaseSwitchProfileRelationship and assigns it to the Profiles field.
+func (o *FabricSwitchControlPolicyAllOf) SetProfiles(v []FabricBaseSwitchProfileRelationship) {
 	o.Profiles = v
 }
 

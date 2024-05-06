@@ -6,10 +6,11 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "asset.SudiInfo"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "asset.SudiInfo"]
-**Pid** | Pointer to **string** | The device model (PID) extracted from the X.509 SUDI Leaf Certificate. | [optional] 
-**SerialNumber** | Pointer to **string** | The device SerialNumber extracted from the X.509 SUDI Leaf Certificate. | [optional] 
-**Signature** | Pointer to **string** | The signature is obtained by taking the base64 encoding of the Serial Number + PID + Status, taking the SHA256 hash and then signing with the SUDI X.509 Leaf Certificate. | [optional] 
-**Status** | Pointer to **string** | The validation status of the device. * &#x60;DeviceStatusUnknown&#x60; - SUDI validation is done on the establishment of a connection. Before a device connects or after it disconnects, the SUDI validation status is set to this value. * &#x60;Verified&#x60; - The device returned a valid PID, Serial Number, Status and X.509 Leaf Certificate. The certificate signing chain was validated. * &#x60;CertificateValidationFailed&#x60; - Validation of the certificate signing chain failed. * &#x60;UnsupportedFirmware&#x60; - The firmware version of the Cisco IMC that is installed does not contain the SUDI APIs needed to perform validation. * &#x60;UnsupportedHardware&#x60; - The device is a model that does not contain a Trust Anchor Module (TAM) and thus cannot be validated. * &#x60;DeviceNotResponding&#x60; - A request was sent to the device, but no response was received. | [optional] [default to "DeviceStatusUnknown"]
+**Pid** | Pointer to **string** | The device model (PID) extracted from the X.509 SUDI leaf certificate. | [optional] [readonly] 
+**SerialNumber** | Pointer to **string** | The device SerialNumber extracted from the X.509 SUDI leaf certificate. | [optional] [readonly] 
+**Signature** | Pointer to **string** | The base64-encoding of a SUDI signature, signed with the provided Trust Anchor Module (TAM) private key and signatureScheme. | [optional] [readonly] 
+**Status** | Pointer to **string** | The validation status of the device. * &#x60;DeviceStatusUnknown&#x60; - SUDI validation is done on the establishment of a connection. Before a device connects or after it disconnects, the SUDI validation status is set to this value. * &#x60;Verified&#x60; - The SUDI signature and certificate have been validated by the device. The device PID, Serial Number, Status and X.509 certificates were validated by a Trusted Anchor Module. The Intersight services have not cross-validated the SUDI signature. * &#x60;EndToEndVerified&#x60; - The SUDI signature and certificate have been validated by the device and by the Intersight services. The device PID, Serial Number, Status and X.509 certificates were validated by a Trusted Anchor Module. * &#x60;CertificateValidationFailed&#x60; - Validation of the certificate signing chain failed. * &#x60;UnsupportedSignatureScheme&#x60; - The SUDI signature scheme is not supported. * &#x60;SignatureValidationFailed&#x60; - Validation of the SUDI signature has failed. * &#x60;UnsupportedFirmware&#x60; - The firmware version of the Cisco IMC that is installed does not contain the SUDI APIs needed to perform validation. * &#x60;UnsupportedHardware&#x60; - The device is a model that does not contain a Trust Anchor Module (TAM) and thus cannot be validated. * &#x60;DeviceError&#x60; - The device returned an error when it received a SUDIrequrest request. * &#x60;DeviceNotResponding&#x60; - A request was sent to the device, but no response was received. * &#x60;InvalidSignatureEncoding&#x60; - The encoding of the SUDI signature is invalid. * &#x60;MissingSignature&#x60; - The SUDI signature is missing. * &#x60;MissingSignatureScheme&#x60; - The SUDI signature scheme is missing. * &#x60;MissingCertificate&#x60; - The SUDI certificate is missing. * &#x60;InvalidCertificateEncoding&#x60; - The encoding of the SUDI certificate is invalid. * &#x60;InvalidIdentity&#x60; - The model or serial number of the device is either missing or does not match the certificate attributes. * &#x60;Suspect&#x60; - The DC claims the SUDI has been verified, but there is no way to validate the claim. | [optional] [readonly] [default to "DeviceStatusUnknown"]
+**StatusDetails** | Pointer to **string** | The detailed validation status of the device, such as an error message explaining why the validation failed. | [optional] [readonly] 
 **SudiCertificate** | Pointer to [**NullableX509Certificate**](X509Certificate.md) |  | [optional] 
 
 ## Methods
@@ -170,6 +171,31 @@ SetStatus sets Status field to given value.
 `func (o *AssetSudiInfoAllOf) HasStatus() bool`
 
 HasStatus returns a boolean if a field has been set.
+
+### GetStatusDetails
+
+`func (o *AssetSudiInfoAllOf) GetStatusDetails() string`
+
+GetStatusDetails returns the StatusDetails field if non-nil, zero value otherwise.
+
+### GetStatusDetailsOk
+
+`func (o *AssetSudiInfoAllOf) GetStatusDetailsOk() (*string, bool)`
+
+GetStatusDetailsOk returns a tuple with the StatusDetails field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStatusDetails
+
+`func (o *AssetSudiInfoAllOf) SetStatusDetails(v string)`
+
+SetStatusDetails sets StatusDetails field to given value.
+
+### HasStatusDetails
+
+`func (o *AssetSudiInfoAllOf) HasStatusDetails() bool`
+
+HasStatusDetails returns a boolean if a field has been set.
 
 ### GetSudiCertificate
 

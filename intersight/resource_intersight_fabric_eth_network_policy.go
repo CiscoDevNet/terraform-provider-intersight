@@ -271,7 +271,7 @@ func resourceFabricEthNetworkPolicy() *schema.Resource {
 				},
 			},
 			"profiles": {
-				Description: "An array of relationships to fabricSwitchProfile resources.",
+				Description: "An array of relationships to fabricBaseSwitchProfile resources.",
 				Type:        schema.TypeList,
 				Optional:    true,
 				ConfigMode:  schema.SchemaConfigModeAttr,
@@ -580,7 +580,7 @@ func resourceFabricEthNetworkPolicyCreate(c context.Context, d *schema.ResourceD
 	}
 
 	if v, ok := d.GetOk("profiles"); ok {
-		x := make([]models.FabricSwitchProfileRelationship, 0)
+		x := make([]models.FabricBaseSwitchProfileRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
 			o := models.NewMoMoRefWithDefaults()
@@ -614,7 +614,7 @@ func resourceFabricEthNetworkPolicyCreate(c context.Context, d *schema.ResourceD
 					o.SetSelector(x)
 				}
 			}
-			x = append(x, models.MoMoRefAsFabricSwitchProfileRelationship(o))
+			x = append(x, models.MoMoRefAsFabricBaseSwitchProfileRelationship(o))
 		}
 		if len(x) > 0 {
 			o.SetProfiles(x)
@@ -751,7 +751,7 @@ func resourceFabricEthNetworkPolicyRead(c context.Context, d *schema.ResourceDat
 		return diag.Errorf("error occurred while setting property PermissionResources in FabricEthNetworkPolicy object: %s", err.Error())
 	}
 
-	if err := d.Set("profiles", flattenListFabricSwitchProfileRelationship(s.GetProfiles(), d)); err != nil {
+	if err := d.Set("profiles", flattenListFabricBaseSwitchProfileRelationship(s.GetProfiles(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property Profiles in FabricEthNetworkPolicy object: %s", err.Error())
 	}
 
@@ -856,7 +856,7 @@ func resourceFabricEthNetworkPolicyUpdate(c context.Context, d *schema.ResourceD
 
 	if d.HasChange("profiles") {
 		v := d.Get("profiles")
-		x := make([]models.FabricSwitchProfileRelationship, 0)
+		x := make([]models.FabricBaseSwitchProfileRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
 			o := &models.MoMoRef{}
@@ -890,7 +890,7 @@ func resourceFabricEthNetworkPolicyUpdate(c context.Context, d *schema.ResourceD
 					o.SetSelector(x)
 				}
 			}
-			x = append(x, models.MoMoRefAsFabricSwitchProfileRelationship(o))
+			x = append(x, models.MoMoRefAsFabricBaseSwitchProfileRelationship(o))
 		}
 		o.SetProfiles(x)
 	}

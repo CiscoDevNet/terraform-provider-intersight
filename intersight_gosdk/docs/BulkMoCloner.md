@@ -10,6 +10,8 @@ Name | Type | Description | Notes
 **Responses** | Pointer to [**[]BulkRestResult**](BulkRestResult.md) |  | [optional] 
 **Sources** | Pointer to [**[]MoBaseMo**](MoBaseMo.md) |  | [optional] 
 **Targets** | Pointer to [**[]MoBaseMo**](MoBaseMo.md) |  | [optional] 
+**WorkflowNameSuffix** | Pointer to **string** | A user-friendly short name to identify the workflow. Name can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.), colon (:), space ( ), forward slash (/), comma or an underscore (_). | [optional] 
+**AsyncResult** | Pointer to [**BulkResultRelationship**](BulkResultRelationship.md) |  | [optional] 
 **Organization** | Pointer to [**OrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
 
 ## Methods
@@ -211,6 +213,56 @@ HasTargets returns a boolean if a field has been set.
 `func (o *BulkMoCloner) UnsetTargets()`
 
 UnsetTargets ensures that no value is present for Targets, not even an explicit nil
+### GetWorkflowNameSuffix
+
+`func (o *BulkMoCloner) GetWorkflowNameSuffix() string`
+
+GetWorkflowNameSuffix returns the WorkflowNameSuffix field if non-nil, zero value otherwise.
+
+### GetWorkflowNameSuffixOk
+
+`func (o *BulkMoCloner) GetWorkflowNameSuffixOk() (*string, bool)`
+
+GetWorkflowNameSuffixOk returns a tuple with the WorkflowNameSuffix field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetWorkflowNameSuffix
+
+`func (o *BulkMoCloner) SetWorkflowNameSuffix(v string)`
+
+SetWorkflowNameSuffix sets WorkflowNameSuffix field to given value.
+
+### HasWorkflowNameSuffix
+
+`func (o *BulkMoCloner) HasWorkflowNameSuffix() bool`
+
+HasWorkflowNameSuffix returns a boolean if a field has been set.
+
+### GetAsyncResult
+
+`func (o *BulkMoCloner) GetAsyncResult() BulkResultRelationship`
+
+GetAsyncResult returns the AsyncResult field if non-nil, zero value otherwise.
+
+### GetAsyncResultOk
+
+`func (o *BulkMoCloner) GetAsyncResultOk() (*BulkResultRelationship, bool)`
+
+GetAsyncResultOk returns a tuple with the AsyncResult field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAsyncResult
+
+`func (o *BulkMoCloner) SetAsyncResult(v BulkResultRelationship)`
+
+SetAsyncResult sets AsyncResult field to given value.
+
+### HasAsyncResult
+
+`func (o *BulkMoCloner) HasAsyncResult() bool`
+
+HasAsyncResult returns a boolean if a field has been set.
+
 ### GetOrganization
 
 `func (o *BulkMoCloner) GetOrganization() OrganizationOrganizationRelationship`

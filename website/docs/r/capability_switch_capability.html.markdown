@@ -48,9 +48,21 @@ This complex property has following sub-properties:
 * `locator_beacon_supported`:(bool)(ReadOnly) Locator Beacon LED support on this switch. 
 * `max_ports`:(int)(ReadOnly) Maximum allowed physical ports on this switch. 
 * `max_slots`:(int)(ReadOnly) Maximum allowed physical slots on this switch. 
-* `min_version_with_breakout_support`:(string)(ReadOnly) Minimum firmware version supported for breakout ports on this switch. 
-* `min_version_with_locator_led_support`:(string)(ReadOnly) Minimum firmware version supported for locator leds on this switch. 
-* `min_version_with_neg_auto25g`:(string)(ReadOnly) Minimum firmware version supported for 'negotiate auto 25000' port admin speed on this switch. 
+* `min_version_map_with_breakout_support`:(HashMap) -(ReadOnly) Minimum firmware version supported for breakout ports on this switch. 
+This complex property has following sub-properties:
+  + `bundle_version`:(string)(ReadOnly) Bundle version. Usually the first released bundle containing the specific device firmware version. 
+  + `device_firmware_version`:(string)(ReadOnly) Bundled device firmware version. 
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+* `min_version_map_with_locator_led_support`:(HashMap) -(ReadOnly) Minimum firmware version supported for locator leds on this switch. 
+This complex property has following sub-properties:
+  + `bundle_version`:(string)(ReadOnly) Bundle version. Usually the first released bundle containing the specific device firmware version. 
+  + `device_firmware_version`:(string)(ReadOnly) Bundled device firmware version. 
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+* `min_version_map_with_neg_auto25g_support`:(HashMap) -(ReadOnly) Minimum firmware version supported for 'negotiate auto 25000' port admin speed on this switch. 
+This complex property has following sub-properties:
+  + `bundle_version`:(string)(ReadOnly) Bundle version. Usually the first released bundle containing the specific device firmware version. 
+  + `device_firmware_version`:(string)(ReadOnly) Bundled device firmware version. 
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
 * `mod_time`:(string)(ReadOnly) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `name`:(string) An unique identifer for a capability descriptor. 

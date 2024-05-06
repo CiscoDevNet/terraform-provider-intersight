@@ -65,6 +65,69 @@ func getFabricSwitchClusterProfileSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"cluster_assignments": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"network_element": {
+						Description: "The network element that is to be assigned to the cloned switch profile.",
+						Type:        schema.TypeList,
+						MaxItems:    1,
+						Optional:    true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"moid": {
+									Description: "The Moid of the referenced REST resource.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the remote type referred by this relationship.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"selector": {
+									Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+							},
+						},
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"source_switch_profile_or_template_name": {
+						Description: "Name of the source SwitchProfile or SwitchProfileTemplate whose clone has to be assigned to the network element mentioned in NetworkElement property under ClusterAssignments.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
 		"config_context": {
 			Description: "This provides consolidated configuration context of all the switch profiles referred by Switch Cluster Profile.",
 			Type:        schema.TypeList,
@@ -585,6 +648,84 @@ func dataSourceFabricSwitchClusterProfileRead(c context.Context, d *schema.Resou
 		o.SetClassId(x)
 	}
 
+	if v, ok := d.GetOk("cluster_assignments"); ok {
+		x := make([]models.FabricClusterAssignment, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := &models.FabricClusterAssignment{}
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("fabric.ClusterAssignment")
+			if v, ok := l["network_element"]; ok {
+				{
+					p := make([]models.MoMoRef, 0, 1)
+					s := v.([]interface{})
+					for i := 0; i < len(s); i++ {
+						l := s[i].(map[string]interface{})
+						o := models.NewMoMoRefWithDefaults()
+						if v, ok := l["additional_properties"]; ok {
+							{
+								x := []byte(v.(string))
+								var x1 interface{}
+								err := json.Unmarshal(x, &x1)
+								if err == nil && x1 != nil {
+									o.AdditionalProperties = x1.(map[string]interface{})
+								}
+							}
+						}
+						o.SetClassId("mo.MoRef")
+						if v, ok := l["moid"]; ok {
+							{
+								x := (v.(string))
+								o.SetMoid(x)
+							}
+						}
+						if v, ok := l["object_type"]; ok {
+							{
+								x := (v.(string))
+								o.SetObjectType(x)
+							}
+						}
+						if v, ok := l["selector"]; ok {
+							{
+								x := (v.(string))
+								o.SetSelector(x)
+							}
+						}
+						p = append(p, *o)
+					}
+					if len(p) > 0 {
+						x := p[0]
+						o.SetNetworkElement(x)
+					}
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["source_switch_profile_or_template_name"]; ok {
+				{
+					x := (v.(string))
+					o.SetSourceSwitchProfileOrTemplateName(x)
+				}
+			}
+			x = append(x, *o)
+		}
+		o.SetClusterAssignments(x)
+	}
+
 	if v, ok := d.GetOk("config_context"); ok {
 		p := make([]models.PolicyConfigContext, 0, 1)
 		s := v.([]interface{})
@@ -1074,6 +1215,8 @@ func dataSourceFabricSwitchClusterProfileRead(c context.Context, d *schema.Resou
 
 				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)
 				temp["class_id"] = (s.GetClassId())
+
+				temp["cluster_assignments"] = flattenListFabricClusterAssignment(s.GetClusterAssignments(), d)
 
 				temp["config_context"] = flattenMapPolicyConfigContext(s.GetConfigContext(), d)
 

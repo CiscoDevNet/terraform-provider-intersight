@@ -16,6 +16,7 @@ To access the ith object of the results obtained, use `data.intersight_workflow_
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `account_moid`:(string) The Account ID for this managed object. 
 * `create_time`:(string) The time when this managed object was created. 
+* `create_user`:(string) The user identifier who created or cloned the workflow definition. 
 * `default_version`:(bool) When true this will be the workflow version that is used when a specific workflow definition version is not specified. The default version is used when user executes a workflow without specifying a version or when workflow is included in another workflow without a specific version. The very first workflow definition created with a name will be set as the default version, after that user can explicitly set any version of the workflow definition as the default version. 
 * `description`:(string) The description for this workflow. 
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
@@ -24,6 +25,7 @@ The following arguments can be used to get data of already created objects in In
 * `max_task_count`:(int) The maximum number of tasks that can be executed on this workflow. 
 * `max_worker_task_count`:(int) The maximum number of external (worker) tasks that can be executed on this workflow. 
 * `mod_time`:(string) The time when this managed object was last modified. 
+* `mod_user`:(string) The user identifier who last updated the workflow definition. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `name`:(string) The name for this workflow. You can have multiple versions of the workflow with the same name. Name can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.) or an underscore (_). 
 * `shared_scope`:(string) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 

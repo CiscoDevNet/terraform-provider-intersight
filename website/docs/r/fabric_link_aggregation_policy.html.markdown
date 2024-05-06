@@ -9,6 +9,22 @@ description: |-
 
 # Resource: intersight_fabric_link_aggregation_policy
 A policy to configure the link settings for all the port channels (including LACP).
+## Usage Example
+### Resource Creation
+
+```hcl
+resource "intersight_fabric_link_aggregation_policy" "fabric_link_aggregation_policy1" {
+    name               = "fabric_link_aggregation_policy1"
+    suspend_individual = "false"
+    lacp_rate          = "normal"
+
+  organization {
+    object_type = "organization.Organization"
+    moid        = var.organization
+  }
+}
+```
+
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(ReadOnly) The Account ID for this managed object. 

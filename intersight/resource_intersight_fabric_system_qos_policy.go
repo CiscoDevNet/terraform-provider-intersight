@@ -349,7 +349,7 @@ func resourceFabricSystemQosPolicy() *schema.Resource {
 				},
 			},
 			"profiles": {
-				Description: "An array of relationships to fabricSwitchProfile resources.",
+				Description: "An array of relationships to fabricBaseSwitchProfile resources.",
 				Type:        schema.TypeList,
 				Optional:    true,
 				ConfigMode:  schema.SchemaConfigModeAttr,
@@ -736,7 +736,7 @@ func resourceFabricSystemQosPolicyCreate(c context.Context, d *schema.ResourceDa
 	}
 
 	if v, ok := d.GetOk("profiles"); ok {
-		x := make([]models.FabricSwitchProfileRelationship, 0)
+		x := make([]models.FabricBaseSwitchProfileRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
 			o := models.NewMoMoRefWithDefaults()
@@ -770,7 +770,7 @@ func resourceFabricSystemQosPolicyCreate(c context.Context, d *schema.ResourceDa
 					o.SetSelector(x)
 				}
 			}
-			x = append(x, models.MoMoRefAsFabricSwitchProfileRelationship(o))
+			x = append(x, models.MoMoRefAsFabricBaseSwitchProfileRelationship(o))
 		}
 		if len(x) > 0 {
 			o.SetProfiles(x)
@@ -911,7 +911,7 @@ func resourceFabricSystemQosPolicyRead(c context.Context, d *schema.ResourceData
 		return diag.Errorf("error occurred while setting property PermissionResources in FabricSystemQosPolicy object: %s", err.Error())
 	}
 
-	if err := d.Set("profiles", flattenListFabricSwitchProfileRelationship(s.GetProfiles(), d)); err != nil {
+	if err := d.Set("profiles", flattenListFabricBaseSwitchProfileRelationship(s.GetProfiles(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property Profiles in FabricSystemQosPolicy object: %s", err.Error())
 	}
 
@@ -1093,7 +1093,7 @@ func resourceFabricSystemQosPolicyUpdate(c context.Context, d *schema.ResourceDa
 
 	if d.HasChange("profiles") {
 		v := d.Get("profiles")
-		x := make([]models.FabricSwitchProfileRelationship, 0)
+		x := make([]models.FabricBaseSwitchProfileRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
 			o := &models.MoMoRef{}
@@ -1127,7 +1127,7 @@ func resourceFabricSystemQosPolicyUpdate(c context.Context, d *schema.ResourceDa
 					o.SetSelector(x)
 				}
 			}
-			x = append(x, models.MoMoRefAsFabricSwitchProfileRelationship(o))
+			x = append(x, models.MoMoRefAsFabricBaseSwitchProfileRelationship(o))
 		}
 		o.SetProfiles(x)
 	}

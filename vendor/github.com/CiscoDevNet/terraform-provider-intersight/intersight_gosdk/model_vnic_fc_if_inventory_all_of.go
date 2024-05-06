@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-15830
+API version: 1.0.11-16342
 Contact: intersight@cisco.com
 */
 
@@ -24,14 +24,19 @@ type VnicFcIfInventoryAllOf struct {
 	// Name of the virtual fibre channel interface.
 	Name *string `json:"Name,omitempty"`
 	// The order in which the virtual interface is brought up. The order assigned to an interface should be unique for all the Ethernet and Fibre-Channel interfaces on each PCI link on a VIC adapter. The order should start from zero with no overlaps. The maximum value of PCI order is limited by the number of virtual interfaces (Ethernet and Fibre-Channel) on each PCI link on a VIC adapter. All VIC adapters have a single PCI link except VIC 1340, VIC 1380 and VIC 1385 which have two.
-	Order *int64 `json:"Order,omitempty"`
+	Order          *int64   `json:"Order,omitempty"`
+	OverriddenList []string `json:"OverriddenList,omitempty"`
 	// Enables retention of LUN ID associations in memory until they are manually cleared.
 	PersistentBindings *bool `json:"PersistentBindings,omitempty"`
 	// Pingroup name associated to vfc for static pinning. SCP deploy will resolve pingroup name and fetches the correspoding uplink port/port channel to pin the vfc traffic.
 	PinGroupName *string                       `json:"PinGroupName,omitempty"`
 	Placement    NullableVnicPlacementSettings `json:"Placement,omitempty"`
 	// The WWPN address must be in hexadecimal format xx:xx:xx:xx:xx:xx:xx:xx. Allowed ranges are 20:00:00:00:00:00:00:00 to 20:FF:FF:FF:FF:FF:FF:FF or from 50:00:00:00:00:00:00:00 to 5F:FF:FF:FF:FF:FF:FF:FF. To ensure uniqueness of WWN's in the SAN fabric, you are strongly encouraged to use the WWN prefix - 20:00:00:25:B5:xx:xx:xx.
-	StaticWwpnAddress *string `json:"StaticWwpnAddress,omitempty"`
+	StaticWwpnAddress  *string                 `json:"StaticWwpnAddress,omitempty"`
+	TemplateActions    []MotemplateActionEntry `json:"TemplateActions,omitempty"`
+	TemplateSyncErrors []MotemplateSyncError   `json:"TemplateSyncErrors,omitempty"`
+	// The sync status of the current MO wrt the attached Template MO. * `None` - The Enum value represents that the object is not attached to any template. * `OK` - The Enum value represents that the object values are in sync with attached template. * `Scheduled` - The Enum value represents that the object sync from attached template is scheduled from template. * `InProgress` - The Enum value represents that the object sync with the attached template is in progress. * `OutOfSync` - The Enum value represents that the object values are not in sync with attached template.
+	TemplateSyncStatus *string `json:"TemplateSyncStatus,omitempty"`
 	// VHBA Type configuration for SAN Connectivity Policy. This configuration is supported only on Cisco VIC 14XX series and higher series of adapters. * `fc-initiator` - The default value set for vHBA Type Configuration. Fc-initiator specifies vHBA as a consumer of storage. Enables SCSI commands to transfer data and status information between host and target storage systems. * `fc-nvme-initiator` - Fc-nvme-initiator specifies vHBA as a consumer of storage. Enables NVMe-based message commands to transfer data and status information between host and target storage systems. * `fc-nvme-target` - Fc-nvme-target specifies vHBA as a provider of storage volumes to initiators. Enables NVMe-based message commands to transfer data and status information between host and target storage systems. Currently tech-preview, only enabled with an asynchronous driver. * `fc-target` - Fc-target specifies vHBA as a provider of storage volumes to initiators. Enables SCSI commands to transfer data and status information between host and target storage systems. fc-target is enabled only with an asynchronous driver.
 	Type *string `json:"Type,omitempty"`
 	// This should be the same as the channel number of the vfc created on switch in order to set up the data path. The property is applicable only for FI attached servers where a vfc is created on the switch for every vHBA.
@@ -49,6 +54,7 @@ type VnicFcIfInventoryAllOf struct {
 	ScpVhba               *VnicFcIfInventoryRelationship                  `json:"ScpVhba,omitempty"`
 	// An array of relationships to vnicFcIfInventory resources.
 	SpVhbas              []VnicFcIfInventoryRelationship `json:"SpVhbas,omitempty"`
+	SrcTemplate          *VnicVhbaTemplateRelationship   `json:"SrcTemplate,omitempty"`
 	WwpnLease            *FcpoolLeaseRelationship        `json:"WwpnLease,omitempty"`
 	WwpnPool             *FcpoolPoolRelationship         `json:"WwpnPool,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -191,6 +197,39 @@ func (o *VnicFcIfInventoryAllOf) SetOrder(v int64) {
 	o.Order = &v
 }
 
+// GetOverriddenList returns the OverriddenList field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *VnicFcIfInventoryAllOf) GetOverriddenList() []string {
+	if o == nil {
+		var ret []string
+		return ret
+	}
+	return o.OverriddenList
+}
+
+// GetOverriddenListOk returns a tuple with the OverriddenList field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *VnicFcIfInventoryAllOf) GetOverriddenListOk() ([]string, bool) {
+	if o == nil || o.OverriddenList == nil {
+		return nil, false
+	}
+	return o.OverriddenList, true
+}
+
+// HasOverriddenList returns a boolean if a field has been set.
+func (o *VnicFcIfInventoryAllOf) HasOverriddenList() bool {
+	if o != nil && o.OverriddenList != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetOverriddenList gets a reference to the given []string and assigns it to the OverriddenList field.
+func (o *VnicFcIfInventoryAllOf) SetOverriddenList(v []string) {
+	o.OverriddenList = v
+}
+
 // GetPersistentBindings returns the PersistentBindings field value if set, zero value otherwise.
 func (o *VnicFcIfInventoryAllOf) GetPersistentBindings() bool {
 	if o == nil || o.PersistentBindings == nil {
@@ -328,6 +367,104 @@ func (o *VnicFcIfInventoryAllOf) HasStaticWwpnAddress() bool {
 // SetStaticWwpnAddress gets a reference to the given string and assigns it to the StaticWwpnAddress field.
 func (o *VnicFcIfInventoryAllOf) SetStaticWwpnAddress(v string) {
 	o.StaticWwpnAddress = &v
+}
+
+// GetTemplateActions returns the TemplateActions field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *VnicFcIfInventoryAllOf) GetTemplateActions() []MotemplateActionEntry {
+	if o == nil {
+		var ret []MotemplateActionEntry
+		return ret
+	}
+	return o.TemplateActions
+}
+
+// GetTemplateActionsOk returns a tuple with the TemplateActions field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *VnicFcIfInventoryAllOf) GetTemplateActionsOk() ([]MotemplateActionEntry, bool) {
+	if o == nil || o.TemplateActions == nil {
+		return nil, false
+	}
+	return o.TemplateActions, true
+}
+
+// HasTemplateActions returns a boolean if a field has been set.
+func (o *VnicFcIfInventoryAllOf) HasTemplateActions() bool {
+	if o != nil && o.TemplateActions != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetTemplateActions gets a reference to the given []MotemplateActionEntry and assigns it to the TemplateActions field.
+func (o *VnicFcIfInventoryAllOf) SetTemplateActions(v []MotemplateActionEntry) {
+	o.TemplateActions = v
+}
+
+// GetTemplateSyncErrors returns the TemplateSyncErrors field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *VnicFcIfInventoryAllOf) GetTemplateSyncErrors() []MotemplateSyncError {
+	if o == nil {
+		var ret []MotemplateSyncError
+		return ret
+	}
+	return o.TemplateSyncErrors
+}
+
+// GetTemplateSyncErrorsOk returns a tuple with the TemplateSyncErrors field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *VnicFcIfInventoryAllOf) GetTemplateSyncErrorsOk() ([]MotemplateSyncError, bool) {
+	if o == nil || o.TemplateSyncErrors == nil {
+		return nil, false
+	}
+	return o.TemplateSyncErrors, true
+}
+
+// HasTemplateSyncErrors returns a boolean if a field has been set.
+func (o *VnicFcIfInventoryAllOf) HasTemplateSyncErrors() bool {
+	if o != nil && o.TemplateSyncErrors != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetTemplateSyncErrors gets a reference to the given []MotemplateSyncError and assigns it to the TemplateSyncErrors field.
+func (o *VnicFcIfInventoryAllOf) SetTemplateSyncErrors(v []MotemplateSyncError) {
+	o.TemplateSyncErrors = v
+}
+
+// GetTemplateSyncStatus returns the TemplateSyncStatus field value if set, zero value otherwise.
+func (o *VnicFcIfInventoryAllOf) GetTemplateSyncStatus() string {
+	if o == nil || o.TemplateSyncStatus == nil {
+		var ret string
+		return ret
+	}
+	return *o.TemplateSyncStatus
+}
+
+// GetTemplateSyncStatusOk returns a tuple with the TemplateSyncStatus field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *VnicFcIfInventoryAllOf) GetTemplateSyncStatusOk() (*string, bool) {
+	if o == nil || o.TemplateSyncStatus == nil {
+		return nil, false
+	}
+	return o.TemplateSyncStatus, true
+}
+
+// HasTemplateSyncStatus returns a boolean if a field has been set.
+func (o *VnicFcIfInventoryAllOf) HasTemplateSyncStatus() bool {
+	if o != nil && o.TemplateSyncStatus != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetTemplateSyncStatus gets a reference to the given string and assigns it to the TemplateSyncStatus field.
+func (o *VnicFcIfInventoryAllOf) SetTemplateSyncStatus(v string) {
+	o.TemplateSyncStatus = &v
 }
 
 // GetType returns the Type field value if set, zero value otherwise.
@@ -684,6 +821,38 @@ func (o *VnicFcIfInventoryAllOf) SetSpVhbas(v []VnicFcIfInventoryRelationship) {
 	o.SpVhbas = v
 }
 
+// GetSrcTemplate returns the SrcTemplate field value if set, zero value otherwise.
+func (o *VnicFcIfInventoryAllOf) GetSrcTemplate() VnicVhbaTemplateRelationship {
+	if o == nil || o.SrcTemplate == nil {
+		var ret VnicVhbaTemplateRelationship
+		return ret
+	}
+	return *o.SrcTemplate
+}
+
+// GetSrcTemplateOk returns a tuple with the SrcTemplate field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *VnicFcIfInventoryAllOf) GetSrcTemplateOk() (*VnicVhbaTemplateRelationship, bool) {
+	if o == nil || o.SrcTemplate == nil {
+		return nil, false
+	}
+	return o.SrcTemplate, true
+}
+
+// HasSrcTemplate returns a boolean if a field has been set.
+func (o *VnicFcIfInventoryAllOf) HasSrcTemplate() bool {
+	if o != nil && o.SrcTemplate != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetSrcTemplate gets a reference to the given VnicVhbaTemplateRelationship and assigns it to the SrcTemplate field.
+func (o *VnicFcIfInventoryAllOf) SetSrcTemplate(v VnicVhbaTemplateRelationship) {
+	o.SrcTemplate = &v
+}
+
 // GetWwpnLease returns the WwpnLease field value if set, zero value otherwise.
 func (o *VnicFcIfInventoryAllOf) GetWwpnLease() FcpoolLeaseRelationship {
 	if o == nil || o.WwpnLease == nil {
@@ -762,6 +931,9 @@ func (o VnicFcIfInventoryAllOf) MarshalJSON() ([]byte, error) {
 	if o.Order != nil {
 		toSerialize["Order"] = o.Order
 	}
+	if o.OverriddenList != nil {
+		toSerialize["OverriddenList"] = o.OverriddenList
+	}
 	if o.PersistentBindings != nil {
 		toSerialize["PersistentBindings"] = o.PersistentBindings
 	}
@@ -773,6 +945,15 @@ func (o VnicFcIfInventoryAllOf) MarshalJSON() ([]byte, error) {
 	}
 	if o.StaticWwpnAddress != nil {
 		toSerialize["StaticWwpnAddress"] = o.StaticWwpnAddress
+	}
+	if o.TemplateActions != nil {
+		toSerialize["TemplateActions"] = o.TemplateActions
+	}
+	if o.TemplateSyncErrors != nil {
+		toSerialize["TemplateSyncErrors"] = o.TemplateSyncErrors
+	}
+	if o.TemplateSyncStatus != nil {
+		toSerialize["TemplateSyncStatus"] = o.TemplateSyncStatus
 	}
 	if o.Type != nil {
 		toSerialize["Type"] = o.Type
@@ -807,6 +988,9 @@ func (o VnicFcIfInventoryAllOf) MarshalJSON() ([]byte, error) {
 	if o.SpVhbas != nil {
 		toSerialize["SpVhbas"] = o.SpVhbas
 	}
+	if o.SrcTemplate != nil {
+		toSerialize["SrcTemplate"] = o.SrcTemplate
+	}
 	if o.WwpnLease != nil {
 		toSerialize["WwpnLease"] = o.WwpnLease
 	}
@@ -835,10 +1019,14 @@ func (o *VnicFcIfInventoryAllOf) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Name")
 		delete(additionalProperties, "Order")
+		delete(additionalProperties, "OverriddenList")
 		delete(additionalProperties, "PersistentBindings")
 		delete(additionalProperties, "PinGroupName")
 		delete(additionalProperties, "Placement")
 		delete(additionalProperties, "StaticWwpnAddress")
+		delete(additionalProperties, "TemplateActions")
+		delete(additionalProperties, "TemplateSyncErrors")
+		delete(additionalProperties, "TemplateSyncStatus")
 		delete(additionalProperties, "Type")
 		delete(additionalProperties, "VifId")
 		delete(additionalProperties, "Wwpn")
@@ -850,6 +1038,7 @@ func (o *VnicFcIfInventoryAllOf) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "SanConnectivityPolicy")
 		delete(additionalProperties, "ScpVhba")
 		delete(additionalProperties, "SpVhbas")
+		delete(additionalProperties, "SrcTemplate")
 		delete(additionalProperties, "WwpnLease")
 		delete(additionalProperties, "WwpnPool")
 		o.AdditionalProperties = additionalProperties

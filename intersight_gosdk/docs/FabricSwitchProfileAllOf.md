@@ -11,7 +11,6 @@ Name | Type | Description | Notes
 **AssignedSwitch** | Pointer to [**NetworkElementRelationship**](NetworkElementRelationship.md) |  | [optional] 
 **AssociatedSwitch** | Pointer to [**NetworkElementRelationship**](NetworkElementRelationship.md) |  | [optional] 
 **ConfigChangeDetails** | Pointer to [**[]FabricConfigChangeDetailRelationship**](FabricConfigChangeDetailRelationship.md) | An array of relationships to fabricConfigChangeDetail resources. | [optional] [readonly] 
-**ConfigResult** | Pointer to [**FabricConfigResultRelationship**](FabricConfigResultRelationship.md) |  | [optional] 
 **RunningWorkflows** | Pointer to [**[]WorkflowWorkflowInfoRelationship**](WorkflowWorkflowInfoRelationship.md) | An array of relationships to workflowWorkflowInfo resources. | [optional] [readonly] 
 **SwitchClusterProfile** | Pointer to [**FabricSwitchClusterProfileRelationship**](FabricSwitchClusterProfileRelationship.md) |  | [optional] 
 
@@ -229,31 +228,6 @@ HasConfigChangeDetails returns a boolean if a field has been set.
 `func (o *FabricSwitchProfileAllOf) UnsetConfigChangeDetails()`
 
 UnsetConfigChangeDetails ensures that no value is present for ConfigChangeDetails, not even an explicit nil
-### GetConfigResult
-
-`func (o *FabricSwitchProfileAllOf) GetConfigResult() FabricConfigResultRelationship`
-
-GetConfigResult returns the ConfigResult field if non-nil, zero value otherwise.
-
-### GetConfigResultOk
-
-`func (o *FabricSwitchProfileAllOf) GetConfigResultOk() (*FabricConfigResultRelationship, bool)`
-
-GetConfigResultOk returns a tuple with the ConfigResult field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetConfigResult
-
-`func (o *FabricSwitchProfileAllOf) SetConfigResult(v FabricConfigResultRelationship)`
-
-SetConfigResult sets ConfigResult field to given value.
-
-### HasConfigResult
-
-`func (o *FabricSwitchProfileAllOf) HasConfigResult() bool`
-
-HasConfigResult returns a boolean if a field has been set.
-
 ### GetRunningWorkflows
 
 `func (o *FabricSwitchProfileAllOf) GetRunningWorkflows() []WorkflowWorkflowInfoRelationship`

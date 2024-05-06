@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-15830
+API version: 1.0.11-16342
 Contact: intersight@cisco.com
 */
 
@@ -21,6 +21,8 @@ type WorkflowWorkflowDefinitionAllOf struct {
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
+	// The user identifier who created or cloned the workflow definition.
+	CreateUser *string `json:"CreateUser,omitempty"`
 	// When true this will be the workflow version that is used when a specific workflow definition version is not specified. The default version is used when user executes a workflow without specifying a version or when workflow is included in another workflow without a specific version. The very first workflow definition created with a name will be set as the default version, after that user can explicitly set any version of the workflow definition as the default version.
 	DefaultVersion *bool `json:"DefaultVersion,omitempty"`
 	// The description for this workflow.
@@ -35,6 +37,8 @@ type WorkflowWorkflowDefinitionAllOf struct {
 	MaxTaskCount *int64 `json:"MaxTaskCount,omitempty"`
 	// The maximum number of external (worker) tasks that can be executed on this workflow.
 	MaxWorkerTaskCount *int64 `json:"MaxWorkerTaskCount,omitempty"`
+	// The user identifier who last updated the workflow definition.
+	ModUser *string `json:"ModUser,omitempty"`
 	// The name for this workflow. You can have multiple versions of the workflow with the same name. Name can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.) or an underscore (_).
 	Name             *string                `json:"Name,omitempty"`
 	OutputDefinition []WorkflowBaseDataType `json:"OutputDefinition,omitempty"`
@@ -130,6 +134,38 @@ func (o *WorkflowWorkflowDefinitionAllOf) GetObjectTypeOk() (*string, bool) {
 // SetObjectType sets field value
 func (o *WorkflowWorkflowDefinitionAllOf) SetObjectType(v string) {
 	o.ObjectType = v
+}
+
+// GetCreateUser returns the CreateUser field value if set, zero value otherwise.
+func (o *WorkflowWorkflowDefinitionAllOf) GetCreateUser() string {
+	if o == nil || o.CreateUser == nil {
+		var ret string
+		return ret
+	}
+	return *o.CreateUser
+}
+
+// GetCreateUserOk returns a tuple with the CreateUser field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *WorkflowWorkflowDefinitionAllOf) GetCreateUserOk() (*string, bool) {
+	if o == nil || o.CreateUser == nil {
+		return nil, false
+	}
+	return o.CreateUser, true
+}
+
+// HasCreateUser returns a boolean if a field has been set.
+func (o *WorkflowWorkflowDefinitionAllOf) HasCreateUser() bool {
+	if o != nil && o.CreateUser != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetCreateUser gets a reference to the given string and assigns it to the CreateUser field.
+func (o *WorkflowWorkflowDefinitionAllOf) SetCreateUser(v string) {
+	o.CreateUser = &v
 }
 
 // GetDefaultVersion returns the DefaultVersion field value if set, zero value otherwise.
@@ -388,6 +424,38 @@ func (o *WorkflowWorkflowDefinitionAllOf) HasMaxWorkerTaskCount() bool {
 // SetMaxWorkerTaskCount gets a reference to the given int64 and assigns it to the MaxWorkerTaskCount field.
 func (o *WorkflowWorkflowDefinitionAllOf) SetMaxWorkerTaskCount(v int64) {
 	o.MaxWorkerTaskCount = &v
+}
+
+// GetModUser returns the ModUser field value if set, zero value otherwise.
+func (o *WorkflowWorkflowDefinitionAllOf) GetModUser() string {
+	if o == nil || o.ModUser == nil {
+		var ret string
+		return ret
+	}
+	return *o.ModUser
+}
+
+// GetModUserOk returns a tuple with the ModUser field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *WorkflowWorkflowDefinitionAllOf) GetModUserOk() (*string, bool) {
+	if o == nil || o.ModUser == nil {
+		return nil, false
+	}
+	return o.ModUser, true
+}
+
+// HasModUser returns a boolean if a field has been set.
+func (o *WorkflowWorkflowDefinitionAllOf) HasModUser() bool {
+	if o != nil && o.ModUser != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetModUser gets a reference to the given string and assigns it to the ModUser field.
+func (o *WorkflowWorkflowDefinitionAllOf) SetModUser(v string) {
+	o.ModUser = &v
 }
 
 // GetName returns the Name field value if set, zero value otherwise.
@@ -842,6 +910,9 @@ func (o WorkflowWorkflowDefinitionAllOf) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["ObjectType"] = o.ObjectType
 	}
+	if o.CreateUser != nil {
+		toSerialize["CreateUser"] = o.CreateUser
+	}
 	if o.DefaultVersion != nil {
 		toSerialize["DefaultVersion"] = o.DefaultVersion
 	}
@@ -865,6 +936,9 @@ func (o WorkflowWorkflowDefinitionAllOf) MarshalJSON() ([]byte, error) {
 	}
 	if o.MaxWorkerTaskCount != nil {
 		toSerialize["MaxWorkerTaskCount"] = o.MaxWorkerTaskCount
+	}
+	if o.ModUser != nil {
+		toSerialize["ModUser"] = o.ModUser
 	}
 	if o.Name != nil {
 		toSerialize["Name"] = o.Name
@@ -925,6 +999,7 @@ func (o *WorkflowWorkflowDefinitionAllOf) UnmarshalJSON(bytes []byte) (err error
 	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
+		delete(additionalProperties, "CreateUser")
 		delete(additionalProperties, "DefaultVersion")
 		delete(additionalProperties, "Description")
 		delete(additionalProperties, "InputDefinition")
@@ -933,6 +1008,7 @@ func (o *WorkflowWorkflowDefinitionAllOf) UnmarshalJSON(bytes []byte) (err error
 		delete(additionalProperties, "LicenseEntitlement")
 		delete(additionalProperties, "MaxTaskCount")
 		delete(additionalProperties, "MaxWorkerTaskCount")
+		delete(additionalProperties, "ModUser")
 		delete(additionalProperties, "Name")
 		delete(additionalProperties, "OutputDefinition")
 		delete(additionalProperties, "OutputParameters")

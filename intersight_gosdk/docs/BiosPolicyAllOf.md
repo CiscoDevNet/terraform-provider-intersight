@@ -38,32 +38,57 @@ Name | Type | Description | Notes
 **C1autoDemotion** | Pointer to **string** | BIOS Token for setting C1 Auto Demotion configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;Auto&#x60; - Value - Auto for configuring C1autoDemotion token. * &#x60;disabled&#x60; - Value - disabled for configuring C1autoDemotion token. * &#x60;enabled&#x60; - Value - enabled for configuring C1autoDemotion token. | [optional] [default to "platform-default"]
 **C1autoUnDemotion** | Pointer to **string** | BIOS Token for setting C1 Auto UnDemotion configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;Auto&#x60; - Value - Auto for configuring C1autoUnDemotion token. * &#x60;disabled&#x60; - Value - disabled for configuring C1autoUnDemotion token. * &#x60;enabled&#x60; - Value - enabled for configuring C1autoUnDemotion token. | [optional] [default to "platform-default"]
 **CbsCmnApbdis** | Pointer to **string** | BIOS Token for setting APBDIS configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;0&#x60; - Value - 0 for configuring CbsCmnApbdis token. * &#x60;1&#x60; - Value - 1 for configuring CbsCmnApbdis token. * &#x60;Auto&#x60; - Value - Auto for configuring CbsCmnApbdis token. | [optional] [default to "platform-default"]
+**CbsCmnApbdisDfPstateRs** | Pointer to **string** | BIOS Token for setting Fixed SOC P-State SP5 F19h configuration (0 - 2 P State). | [optional] [default to "platform-default"]
+**CbsCmnCpuAvx512** | Pointer to **string** | BIOS Token for setting AVX512 configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;Auto&#x60; - Value - Auto for configuring CbsCmnCpuAvx512 token. * &#x60;disabled&#x60; - Value - disabled for configuring CbsCmnCpuAvx512 token. * &#x60;enabled&#x60; - Value - enabled for configuring CbsCmnCpuAvx512 token. | [optional] [default to "platform-default"]
 **CbsCmnCpuCpb** | Pointer to **string** | BIOS Token for setting Core Performance Boost configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;Auto&#x60; - Value - Auto for configuring CbsCmnCpuCpb token. * &#x60;disabled&#x60; - Value - disabled for configuring CbsCmnCpuCpb token. | [optional] [default to "platform-default"]
 **CbsCmnCpuGenDowncoreCtrl** | Pointer to **string** | BIOS Token for setting Downcore Control configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;Auto&#x60; - Value - Auto for configuring CbsCmnCpuGenDowncoreCtrl token. * &#x60;FOUR (2 + 2)&#x60; - Value - FOUR (2 + 2) for configuring CbsCmnCpuGenDowncoreCtrl token. * &#x60;FOUR (4 + 0)&#x60; - Value - FOUR (4 + 0) for configuring CbsCmnCpuGenDowncoreCtrl token. * &#x60;SIX (3 + 3)&#x60; - Value - SIX (3 + 3) for configuring CbsCmnCpuGenDowncoreCtrl token. * &#x60;THREE (3 + 0)&#x60; - Value - THREE (3 + 0) for configuring CbsCmnCpuGenDowncoreCtrl token. * &#x60;TWO (1 + 1)&#x60; - Value - TWO (1 + 1) for configuring CbsCmnCpuGenDowncoreCtrl token. * &#x60;TWO (2 + 0)&#x60; - Value - TWO (2 + 0) for configuring CbsCmnCpuGenDowncoreCtrl token. | [optional] [default to "platform-default"]
 **CbsCmnCpuGlobalCstateCtrl** | Pointer to **string** | BIOS Token for setting Global C State Control configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;Auto&#x60; - Value - Auto for configuring CbsCmnCpuGlobalCstateCtrl token. * &#x60;disabled&#x60; - Value - disabled for configuring CbsCmnCpuGlobalCstateCtrl token. * &#x60;enabled&#x60; - Value - enabled for configuring CbsCmnCpuGlobalCstateCtrl token. | [optional] [default to "platform-default"]
 **CbsCmnCpuL1streamHwPrefetcher** | Pointer to **string** | BIOS Token for setting L1 Stream HW Prefetcher configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;Auto&#x60; - Value - Auto for configuring CbsCmnCpuL1streamHwPrefetcher token. * &#x60;disabled&#x60; - Value - disabled for configuring CbsCmnCpuL1streamHwPrefetcher token. * &#x60;enabled&#x60; - Value - enabled for configuring CbsCmnCpuL1streamHwPrefetcher token. | [optional] [default to "platform-default"]
 **CbsCmnCpuL2streamHwPrefetcher** | Pointer to **string** | BIOS Token for setting L2 Stream HW Prefetcher configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;Auto&#x60; - Value - Auto for configuring CbsCmnCpuL2streamHwPrefetcher token. * &#x60;disabled&#x60; - Value - disabled for configuring CbsCmnCpuL2streamHwPrefetcher token. * &#x60;enabled&#x60; - Value - enabled for configuring CbsCmnCpuL2streamHwPrefetcher token. | [optional] [default to "platform-default"]
+**CbsCmnCpuSevAsidSpaceLimit** | Pointer to **string** | BIOS Token for setting SEV-ES ASID Space Limit configuration (1 - 1007 ASIDs). | [optional] [default to "platform-default"]
 **CbsCmnCpuSmee** | Pointer to **string** | BIOS Token for setting CPU SMEE configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;Auto&#x60; - Value - Auto for configuring CbsCmnCpuSmee token. * &#x60;disabled&#x60; - Value - disabled for configuring CbsCmnCpuSmee token. * &#x60;enabled&#x60; - Value - enabled for configuring CbsCmnCpuSmee token. | [optional] [default to "platform-default"]
 **CbsCmnCpuStreamingStoresCtrl** | Pointer to **string** | BIOS Token for setting Streaming Stores Control configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;Auto&#x60; - Value - Auto for configuring CbsCmnCpuStreamingStoresCtrl token. * &#x60;disabled&#x60; - Value - disabled for configuring CbsCmnCpuStreamingStoresCtrl token. * &#x60;enabled&#x60; - Value - enabled for configuring CbsCmnCpuStreamingStoresCtrl token. | [optional] [default to "platform-default"]
 **CbsCmnDeterminismSlider** | Pointer to **string** | BIOS Token for setting Determinism Slider configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;Auto&#x60; - Value - Auto for configuring CbsCmnDeterminismSlider token. * &#x60;Performance&#x60; - Value - Performance for configuring CbsCmnDeterminismSlider token. * &#x60;Power&#x60; - Value - Power for configuring CbsCmnDeterminismSlider token. | [optional] [default to "platform-default"]
+**CbsCmnEdcControlThrottle** | Pointer to **string** | BIOS Token for setting EDC Control Throttle configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;Auto&#x60; - Value - Auto for configuring CbsCmnEdcControlThrottle token. * &#x60;disabled&#x60; - Value - disabled for configuring CbsCmnEdcControlThrottle token. * &#x60;enabled&#x60; - Value - enabled for configuring CbsCmnEdcControlThrottle token. | [optional] [default to "platform-default"]
 **CbsCmnEfficiencyModeEn** | Pointer to **string** | BIOS Token for setting Efficiency Mode Enable configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;Auto&#x60; - Value - Auto for configuring CbsCmnEfficiencyModeEn token. * &#x60;Enabled&#x60; - Value - Enabled for configuring CbsCmnEfficiencyModeEn token. | [optional] [default to "platform-default"]
+**CbsCmnEfficiencyModeEnRs** | Pointer to **string** | BIOS Token for setting Power Profile Selection F19h configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;Balanced Memory Performance Mode&#x60; - Value - Balanced Memory Performance Mode for configuring CbsCmnEfficiencyModeEnRs token. * &#x60;Efficiency Mode&#x60; - Value - Efficiency Mode for configuring CbsCmnEfficiencyModeEnRs token. * &#x60;High Performance Mode&#x60; - Value - High Performance Mode for configuring CbsCmnEfficiencyModeEnRs token. * &#x60;Maximum IO Performance Mode&#x60; - Value - Maximum IO Performance Mode for configuring CbsCmnEfficiencyModeEnRs token. | [optional] [default to "platform-default"]
 **CbsCmnFixedSocPstate** | Pointer to **string** | BIOS Token for setting Fixed SOC P-State configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;Auto&#x60; - Value - Auto for configuring CbsCmnFixedSocPstate token. * &#x60;P0&#x60; - Value - P0 for configuring CbsCmnFixedSocPstate token. * &#x60;P1&#x60; - Value - P1 for configuring CbsCmnFixedSocPstate token. * &#x60;P2&#x60; - Value - P2 for configuring CbsCmnFixedSocPstate token. * &#x60;P3&#x60; - Value - P3 for configuring CbsCmnFixedSocPstate token. | [optional] [default to "platform-default"]
 **CbsCmnGnbNbIommu** | Pointer to **string** | BIOS Token for setting IOMMU configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;Auto&#x60; - Value - Auto for configuring CbsCmnGnbNbIommu token. * &#x60;disabled&#x60; - Value - disabled for configuring CbsCmnGnbNbIommu token. * &#x60;enabled&#x60; - Value - enabled for configuring CbsCmnGnbNbIommu token. | [optional] [default to "platform-default"]
 **CbsCmnGnbSmuDfCstates** | Pointer to **string** | BIOS Token for setting DF C-States configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;Auto&#x60; - Value - Auto for configuring CbsCmnGnbSmuDfCstates token. * &#x60;disabled&#x60; - Value - disabled for configuring CbsCmnGnbSmuDfCstates token. * &#x60;enabled&#x60; - Value - enabled for configuring CbsCmnGnbSmuDfCstates token. | [optional] [default to "platform-default"]
+**CbsCmnGnbSmuDffoRs** | Pointer to **string** | BIOS Token for setting DF PState Frequency Optimizer configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;Auto&#x60; - Value - Auto for configuring CbsCmnGnbSmuDffoRs token. * &#x60;disabled&#x60; - Value - disabled for configuring CbsCmnGnbSmuDffoRs token. * &#x60;enabled&#x60; - Value - enabled for configuring CbsCmnGnbSmuDffoRs token. | [optional] [default to "platform-default"]
+**CbsCmnGnbSmuDlwmSupport** | Pointer to **string** | BIOS Token for setting DLWM Support configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;Auto&#x60; - Value - Auto for configuring CbsCmnGnbSmuDlwmSupport token. * &#x60;disabled&#x60; - Value - disabled for configuring CbsCmnGnbSmuDlwmSupport token. * &#x60;enabled&#x60; - Value - enabled for configuring CbsCmnGnbSmuDlwmSupport token. | [optional] [default to "platform-default"]
 **CbsCmnGnbSmucppc** | Pointer to **string** | BIOS Token for setting CPPC configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;Auto&#x60; - Value - Auto for configuring CbsCmnGnbSmucppc token. * &#x60;disabled&#x60; - Value - disabled for configuring CbsCmnGnbSmucppc token. * &#x60;enabled&#x60; - Value - enabled for configuring CbsCmnGnbSmucppc token. | [optional] [default to "platform-default"]
 **CbsCmnMemCtrlBankGroupSwapDdr4** | Pointer to **string** | BIOS Token for setting Bank Group Swap configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;Auto&#x60; - Value - Auto for configuring CbsCmnMemCtrlBankGroupSwapDdr4 token. * &#x60;disabled&#x60; - Value - disabled for configuring CbsCmnMemCtrlBankGroupSwapDdr4 token. * &#x60;enabled&#x60; - Value - enabled for configuring CbsCmnMemCtrlBankGroupSwapDdr4 token. | [optional] [default to "platform-default"]
-**CbsCmnMemMapBankInterleaveDdr4** | Pointer to **string** | BIOS Token for setting Chipset Interleave configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;Auto&#x60; - Value - Auto for configuring CbsCmnMemMapBankInterleaveDdr4 token. * &#x60;disabled&#x60; - Value - disabled for configuring CbsCmnMemMapBankInterleaveDdr4 token. | [optional] [default to "platform-default"]
+**CbsCmnMemCtrllerPwrDnEnDdr** | Pointer to **string** | BIOS Token for setting Power Down Enable configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;Auto&#x60; - Value - Auto for configuring CbsCmnMemCtrllerPwrDnEnDdr token. * &#x60;disabled&#x60; - Value - disabled for configuring CbsCmnMemCtrllerPwrDnEnDdr token. * &#x60;enabled&#x60; - Value - enabled for configuring CbsCmnMemCtrllerPwrDnEnDdr token. | [optional] [default to "platform-default"]
+**CbsCmnMemDramRefreshRate** | Pointer to **string** | BIOS Token for setting DRAM Refresh Rate configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;3.9 usec&#x60; - Value - 3.9 usec for configuring CbsCmnMemDramRefreshRate token. * &#x60;7.8 usec&#x60; - Value - 7.8 usec for configuring CbsCmnMemDramRefreshRate token. | [optional] [default to "platform-default"]
+**CbsCmnMemMapBankInterleaveDdr4** | Pointer to **string** | BIOS Token for setting Chipset Interleave configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;Auto&#x60; - Value - Auto for configuring CbsCmnMemMapBankInterleaveDdr4 token. * &#x60;disabled&#x60; - Value - disabled for configuring CbsCmnMemMapBankInterleaveDdr4 token. * &#x60;enabled&#x60; - Value - enabled for configuring CbsCmnMemMapBankInterleaveDdr4 token. | [optional] [default to "platform-default"]
+**CbsCmnMemSpeedDdr47xx2** | Pointer to **string** | BIOS Token for setting Memory Clock Speed 7xx2 configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;667MHz&#x60; - Value - 667MHz for configuring CbsCmnMemSpeedDdr47xx2 token. * &#x60;800MHz&#x60; - Value - 800MHz for configuring CbsCmnMemSpeedDdr47xx2 token. * &#x60;933MHz&#x60; - Value - 933MHz for configuring CbsCmnMemSpeedDdr47xx2 token. * &#x60;1067MHz&#x60; - Value - 1067MHz for configuring CbsCmnMemSpeedDdr47xx2 token. * &#x60;1200MHz&#x60; - Value - 1200MHz for configuring CbsCmnMemSpeedDdr47xx2 token. * &#x60;1333MHz&#x60; - Value - 1333MHz for configuring CbsCmnMemSpeedDdr47xx2 token. * &#x60;1467MHz&#x60; - Value - 1467MHz for configuring CbsCmnMemSpeedDdr47xx2 token. * &#x60;1600MHz&#x60; - Value - 1600MHz for configuring CbsCmnMemSpeedDdr47xx2 token. * &#x60;Auto&#x60; - Value - Auto for configuring CbsCmnMemSpeedDdr47xx2 token. | [optional] [default to "platform-default"]
+**CbsCmnMemSpeedDdr47xx3** | Pointer to **string** | BIOS Token for setting Memory Clock Speed 7xx3 configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;400MHz&#x60; - Value - 400MHz for configuring CbsCmnMemSpeedDdr47xx3 token. * &#x60;800MHz&#x60; - Value - 800MHz for configuring CbsCmnMemSpeedDdr47xx3 token. * &#x60;933MHz&#x60; - Value - 933MHz for configuring CbsCmnMemSpeedDdr47xx3 token. * &#x60;1067MHz&#x60; - Value - 1067MHz for configuring CbsCmnMemSpeedDdr47xx3 token. * &#x60;1200MHz&#x60; - Value - 1200MHz for configuring CbsCmnMemSpeedDdr47xx3 token. * &#x60;1333MHz&#x60; - Value - 1333MHz for configuring CbsCmnMemSpeedDdr47xx3 token. * &#x60;1467MHz&#x60; - Value - 1467MHz for configuring CbsCmnMemSpeedDdr47xx3 token. * &#x60;1600MHz&#x60; - Value - 1600MHz for configuring CbsCmnMemSpeedDdr47xx3 token. * &#x60;1633MHz&#x60; - Value - 1633MHz for configuring CbsCmnMemSpeedDdr47xx3 token. * &#x60;1667MHz&#x60; - Value - 1667MHz for configuring CbsCmnMemSpeedDdr47xx3 token. * &#x60;1700MHz&#x60; - Value - 1700MHz for configuring CbsCmnMemSpeedDdr47xx3 token. * &#x60;1733MHz&#x60; - Value - 1733MHz for configuring CbsCmnMemSpeedDdr47xx3 token. * &#x60;1767MHz&#x60; - Value - 1767MHz for configuring CbsCmnMemSpeedDdr47xx3 token. * &#x60;1800MHz&#x60; - Value - 1800MHz for configuring CbsCmnMemSpeedDdr47xx3 token. * &#x60;Auto&#x60; - Value - Auto for configuring CbsCmnMemSpeedDdr47xx3 token. | [optional] [default to "platform-default"]
+**CbsCmnPreferredIo7xx2** | Pointer to **string** | BIOS Token for setting Preferred IO 7xx2 configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;Auto&#x60; - Value - Auto for configuring CbsCmnPreferredIo7xx2 token. * &#x60;Manual&#x60; - Value - Manual for configuring CbsCmnPreferredIo7xx2 token. | [optional] [default to "platform-default"]
+**CbsCmnPreferredIo7xx3** | Pointer to **string** | BIOS Token for setting Preferred IO 7xx3 configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;Auto&#x60; - Value - Auto for configuring CbsCmnPreferredIo7xx3 token. * &#x60;Bus&#x60; - Value - Bus for configuring CbsCmnPreferredIo7xx3 token. | [optional] [default to "platform-default"]
 **CbsCmncTdpCtl** | Pointer to **string** | BIOS Token for setting cTDP Control configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;Auto&#x60; - Value - Auto for configuring CbsCmncTdpCtl token. * &#x60;Manual&#x60; - Value - Manual for configuring CbsCmncTdpCtl token. | [optional] [default to "platform-default"]
-**CbsCpuCcdCtrlSsp** | Pointer to **string** | BIOS Token for setting CCD Control configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;2 CCDs&#x60; - Value - 2 CCDs for configuring CbsCpuCcdCtrlSsp token. * &#x60;3 CCDs&#x60; - Value - 3 CCDs for configuring CbsCpuCcdCtrlSsp token. * &#x60;4 CCDs&#x60; - Value - 4 CCDs for configuring CbsCpuCcdCtrlSsp token. * &#x60;6 CCDs&#x60; - Value - 6 CCDs for configuring CbsCpuCcdCtrlSsp token. * &#x60;Auto&#x60; - Value - Auto for configuring CbsCpuCcdCtrlSsp token. | [optional] [default to "platform-default"]
+**CbsCmnxGmiForceLinkWidthRs** | Pointer to **string** | BIOS Token for setting xGMI Force Link Width configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;0&#x60; - Value - 0 for configuring CbsCmnxGmiForceLinkWidthRs token. * &#x60;1&#x60; - Value - 1 for configuring CbsCmnxGmiForceLinkWidthRs token. * &#x60;2&#x60; - Value - 2 for configuring CbsCmnxGmiForceLinkWidthRs token. * &#x60;Auto&#x60; - Value - Auto for configuring CbsCmnxGmiForceLinkWidthRs token. | [optional] [default to "platform-default"]
+**CbsCpuCcdCtrlSsp** | Pointer to **string** | BIOS Token for setting CCD Control configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;2 CCDs&#x60; - Value - 2 CCDs for configuring CbsCpuCcdCtrlSsp token. * &#x60;3 CCDs&#x60; - Value - 3 CCDs for configuring CbsCpuCcdCtrlSsp token. * &#x60;4 CCDs&#x60; - Value - 4 CCDs for configuring CbsCpuCcdCtrlSsp token. * &#x60;6 CCDs&#x60; - Value - 6 CCDs for configuring CbsCpuCcdCtrlSsp token. * &#x60;8 CCDs&#x60; - Value - 8 CCDs for configuring CbsCpuCcdCtrlSsp token. * &#x60;10 CCDs&#x60; - Value - 10 CCDs for configuring CbsCpuCcdCtrlSsp token. * &#x60;Auto&#x60; - Value - Auto for configuring CbsCpuCcdCtrlSsp token. | [optional] [default to "platform-default"]
 **CbsCpuCoreCtrl** | Pointer to **string** | BIOS Token for setting CPU Downcore control configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;Auto&#x60; - Value - Auto for configuring CbsCpuCoreCtrl token. * &#x60;FIVE (5 + 0)&#x60; - Value - FIVE (5 + 0) for configuring CbsCpuCoreCtrl token. * &#x60;FOUR (4 + 0)&#x60; - Value - FOUR (4 + 0) for configuring CbsCpuCoreCtrl token. * &#x60;ONE (1 + 0)&#x60; - Value - ONE (1 + 0) for configuring CbsCpuCoreCtrl token. * &#x60;SEVEN (7 + 0)&#x60; - Value - SEVEN (7 + 0) for configuring CbsCpuCoreCtrl token. * &#x60;SIX (6 + 0)&#x60; - Value - SIX (6 + 0) for configuring CbsCpuCoreCtrl token. * &#x60;THREE (3 + 0)&#x60; - Value - THREE (3 + 0) for configuring CbsCpuCoreCtrl token. * &#x60;TWO (2 + 0)&#x60; - Value - TWO (2 + 0) for configuring CbsCpuCoreCtrl token. | [optional] [default to "platform-default"]
+**CbsCpuDownCoreCtrlBergamo** | Pointer to **string** | BIOS Token for setting Downcore Control configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;Auto&#x60; - Value - Auto for configuring CbsCpuDownCoreCtrlBergamo token. * &#x60;EIGHT (4 + 4)&#x60; - Value - EIGHT (4 + 4) for configuring CbsCpuDownCoreCtrlBergamo token. * &#x60;FOUR (2 + 2)&#x60; - Value - FOUR (2 + 2) for configuring CbsCpuDownCoreCtrlBergamo token. * &#x60;FOURTEEN (7 + 7)&#x60; - Value - FOURTEEN (7 + 7) for configuring CbsCpuDownCoreCtrlBergamo token. * &#x60;SIX (3 + 3)&#x60; - Value - SIX (3 + 3) for configuring CbsCpuDownCoreCtrlBergamo token. * &#x60;TEN (5 + 5)&#x60; - Value - TEN (5 + 5) for configuring CbsCpuDownCoreCtrlBergamo token. * &#x60;TWELVE (6 + 6)&#x60; - Value - TWELVE (6 + 6) for configuring CbsCpuDownCoreCtrlBergamo token. * &#x60;TWO (1 + 1)&#x60; - Value - TWO (1 + 1) for configuring CbsCpuDownCoreCtrlBergamo token. | [optional] [default to "platform-default"]
+**CbsCpuDownCoreCtrlGenoa** | Pointer to **string** | BIOS Token for setting CPU Downcore control F19 M10h-1Fh configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;Auto&#x60; - Value - Auto for configuring CbsCpuDownCoreCtrlGenoa token. * &#x60;FIVE (5 + 0)&#x60; - Value - FIVE (5 + 0) for configuring CbsCpuDownCoreCtrlGenoa token. * &#x60;FOUR (4 + 0)&#x60; - Value - FOUR (4 + 0) for configuring CbsCpuDownCoreCtrlGenoa token. * &#x60;ONE (1 + 0)&#x60; - Value - ONE (1 + 0) for configuring CbsCpuDownCoreCtrlGenoa token. * &#x60;SEVEN (7 + 0)&#x60; - Value - SEVEN (7 + 0) for configuring CbsCpuDownCoreCtrlGenoa token. * &#x60;SIX (6 + 0)&#x60; - Value - SIX (6 + 0) for configuring CbsCpuDownCoreCtrlGenoa token. * &#x60;THREE (3 + 0)&#x60; - Value - THREE (3 + 0) for configuring CbsCpuDownCoreCtrlGenoa token. * &#x60;TWO (2 + 0)&#x60; - Value - TWO (2 + 0) for configuring CbsCpuDownCoreCtrlGenoa token. | [optional] [default to "platform-default"]
 **CbsCpuSmtCtrl** | Pointer to **string** | BIOS Token for setting CPU SMT Mode configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;Auto&#x60; - Value - Auto for configuring CbsCpuSmtCtrl token. * &#x60;disabled&#x60; - Value - disabled for configuring CbsCpuSmtCtrl token. * &#x60;enabled&#x60; - Value - enabled for configuring CbsCpuSmtCtrl token. | [optional] [default to "platform-default"]
+**CbsDbgCpuGenCpuWdt** | Pointer to **string** | BIOS Token for setting Core Watchdog Timer Enable configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;Auto&#x60; - Value - Auto for configuring CbsDbgCpuGenCpuWdt token. * &#x60;disabled&#x60; - Value - disabled for configuring CbsDbgCpuGenCpuWdt token. * &#x60;enabled&#x60; - Value - enabled for configuring CbsDbgCpuGenCpuWdt token. | [optional] [default to "platform-default"]
+**CbsDbgCpuLapicMode** | Pointer to **string** | BIOS Token for setting Local APIC Mode configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;Auto&#x60; - Value - Auto for configuring CbsDbgCpuLapicMode token. * &#x60;Compatibility&#x60; - Value - Compatibility for configuring CbsDbgCpuLapicMode token. * &#x60;X2APIC&#x60; - Value - X2APIC for configuring CbsDbgCpuLapicMode token. * &#x60;XAPIC&#x60; - Value - XAPIC for configuring CbsDbgCpuLapicMode token. | [optional] [default to "platform-default"]
+**CbsDbgCpuLapicMode7xx2** | Pointer to **string** | BIOS Token for setting Local APIC Mode 7xx2 configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;Auto&#x60; - Value - Auto for configuring CbsDbgCpuLapicMode7xx2 token. * &#x60;X2APIC&#x60; - Value - X2APIC for configuring CbsDbgCpuLapicMode7xx2 token. * &#x60;XAPIC&#x60; - Value - XAPIC for configuring CbsDbgCpuLapicMode7xx2 token. | [optional] [default to "platform-default"]
+**CbsDbgCpuLapicMode7xx3** | Pointer to **string** | BIOS Token for setting Local APIC Mode 7xx3 configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;Auto&#x60; - Value - Auto for configuring CbsDbgCpuLapicMode7xx3 token. * &#x60;Compatibility&#x60; - Value - Compatibility for configuring CbsDbgCpuLapicMode7xx3 token. * &#x60;X2APIC&#x60; - Value - X2APIC for configuring CbsDbgCpuLapicMode7xx3 token. * &#x60;XAPIC&#x60; - Value - XAPIC for configuring CbsDbgCpuLapicMode7xx3 token. | [optional] [default to "platform-default"]
 **CbsDbgCpuSnpMemCover** | Pointer to **string** | BIOS Token for setting SNP Memory Coverage configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;Auto&#x60; - Value - Auto for configuring CbsDbgCpuSnpMemCover token. * &#x60;Custom&#x60; - Value - Custom for configuring CbsDbgCpuSnpMemCover token. * &#x60;disabled&#x60; - Value - disabled for configuring CbsDbgCpuSnpMemCover token. * &#x60;enabled&#x60; - Value - enabled for configuring CbsDbgCpuSnpMemCover token. | [optional] [default to "platform-default"]
 **CbsDbgCpuSnpMemSizeCover** | Pointer to **string** | BIOS Token for setting SNP Memory Size to Cover in MiB configuration (0 - 1048576 MiB). | [optional] [default to "platform-default"]
+**CbsDfCmn4linkMaxXgmiSpeed** | Pointer to **string** | BIOS Token for setting 4-link xGMI max speed configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;20Gbps&#x60; - Value - 20Gbps for configuring CbsDfCmn4linkMaxXgmiSpeed token. * &#x60;25Gbps&#x60; - Value - 25Gbps for configuring CbsDfCmn4linkMaxXgmiSpeed token. * &#x60;32Gbps&#x60; - Value - 32Gbps for configuring CbsDfCmn4linkMaxXgmiSpeed token. * &#x60;Auto&#x60; - Value - Auto for configuring CbsDfCmn4linkMaxXgmiSpeed token. | [optional] [default to "platform-default"]
 **CbsDfCmnAcpiSratL3numa** | Pointer to **string** | BIOS Token for setting ACPI SRAT L3 Cache As NUMA Domain configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;Auto&#x60; - Value - Auto for configuring CbsDfCmnAcpiSratL3numa token. * &#x60;disabled&#x60; - Value - disabled for configuring CbsDfCmnAcpiSratL3numa token. * &#x60;enabled&#x60; - Value - enabled for configuring CbsDfCmnAcpiSratL3numa token. | [optional] [default to "platform-default"]
 **CbsDfCmnDramNps** | Pointer to **string** | BIOS Token for setting NUMA Nodes per Socket configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;Auto&#x60; - Value - Auto for configuring CbsDfCmnDramNps token. * &#x60;NPS0&#x60; - Value - NPS0 for configuring CbsDfCmnDramNps token. * &#x60;NPS1&#x60; - Value - NPS1 for configuring CbsDfCmnDramNps token. * &#x60;NPS2&#x60; - Value - NPS2 for configuring CbsDfCmnDramNps token. * &#x60;NPS4&#x60; - Value - NPS4 for configuring CbsDfCmnDramNps token. | [optional] [default to "platform-default"]
+**CbsDfCmnDramScrubTime** | Pointer to **string** | BIOS Token for setting DRAM Scrub Time configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;1 hour&#x60; - Value - 1 hour for configuring CbsDfCmnDramScrubTime token. * &#x60;4 hours&#x60; - Value - 4 hours for configuring CbsDfCmnDramScrubTime token. * &#x60;6 hours&#x60; - Value - 6 hours for configuring CbsDfCmnDramScrubTime token. * &#x60;8 hours&#x60; - Value - 8 hours for configuring CbsDfCmnDramScrubTime token. * &#x60;12 hours&#x60; - Value - 12 hours for configuring CbsDfCmnDramScrubTime token. * &#x60;16 hours&#x60; - Value - 16 hours for configuring CbsDfCmnDramScrubTime token. * &#x60;24 hours&#x60; - Value - 24 hours for configuring CbsDfCmnDramScrubTime token. * &#x60;48 hours&#x60; - Value - 48 hours for configuring CbsDfCmnDramScrubTime token. * &#x60;Auto&#x60; - Value - Auto for configuring CbsDfCmnDramScrubTime token. * &#x60;Disabled&#x60; - Value - Disabled for configuring CbsDfCmnDramScrubTime token. | [optional] [default to "platform-default"]
 **CbsDfCmnMemIntlv** | Pointer to **string** | BIOS Token for setting AMD Memory Interleaving configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;Auto&#x60; - Value - Auto for configuring CbsDfCmnMemIntlv token. * &#x60;Channel&#x60; - Value - Channel for configuring CbsDfCmnMemIntlv token. * &#x60;Die&#x60; - Value - Die for configuring CbsDfCmnMemIntlv token. * &#x60;None&#x60; - Value - None for configuring CbsDfCmnMemIntlv token. * &#x60;Socket&#x60; - Value - Socket for configuring CbsDfCmnMemIntlv token. | [optional] [default to "platform-default"]
+**CbsDfCmnMemIntlvControl** | Pointer to **string** | BIOS Token for setting Memory Interleaving configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;Auto&#x60; - Value - Auto for configuring CbsDfCmnMemIntlvControl token. * &#x60;disabled&#x60; - Value - disabled for configuring CbsDfCmnMemIntlvControl token. * &#x60;enabled&#x60; - Value - enabled for configuring CbsDfCmnMemIntlvControl token. | [optional] [default to "platform-default"]
 **CbsDfCmnMemIntlvSize** | Pointer to **string** | BIOS Token for setting AMD Memory Interleaving Size configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;256 Bytes&#x60; - Value - 256 Bytes for configuring CbsDfCmnMemIntlvSize token. * &#x60;512 Bytes&#x60; - Value - 512 Bytes for configuring CbsDfCmnMemIntlvSize token. * &#x60;1 KB&#x60; - Value - 1 KiB for configuring CbsDfCmnMemIntlvSize token. * &#x60;2 KB&#x60; - Value - 2 KiB for configuring CbsDfCmnMemIntlvSize token. * &#x60;4 KB&#x60; - Value - 4 KiB for configuring CbsDfCmnMemIntlvSize token. * &#x60;Auto&#x60; - Value - Auto for configuring CbsDfCmnMemIntlvSize token. | [optional] [default to "platform-default"]
-**CbsSevSnpSupport** | Pointer to **string** | BIOS Token for setting SEV-SNP Support configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;enabled&#x60; - Enables the BIOS setting. * &#x60;disabled&#x60; - Disables the BIOS setting. | [optional] [default to "platform-default"]
+**CbsDfDbgXgmiLinkCfg** | Pointer to **string** | BIOS Token for setting xGMI Link Configuration configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;2 xGMI Links&#x60; - Value - 2 xGMI Links for configuring CbsDfDbgXgmiLinkCfg token. * &#x60;3 xGMI Links&#x60; - Value - 3 xGMI Links for configuring CbsDfDbgXgmiLinkCfg token. * &#x60;4 xGMI Links&#x60; - Value - 4 xGMI Links for configuring CbsDfDbgXgmiLinkCfg token. * &#x60;Auto&#x60; - Value - Auto for configuring CbsDfDbgXgmiLinkCfg token. | [optional] [default to "platform-default"]
+**CbsGnbDbgPcieTbtSupport** | Pointer to **string** | BIOS Token for setting PCIe Ten Bit Tag Support configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;Auto&#x60; - Value - Auto for configuring CbsGnbDbgPcieTbtSupport token. * &#x60;disabled&#x60; - Value - disabled for configuring CbsGnbDbgPcieTbtSupport token. * &#x60;enabled&#x60; - Value - enabled for configuring CbsGnbDbgPcieTbtSupport token. | [optional] [default to "platform-default"]
+**CbsSevSnpSupport** | Pointer to **string** | BIOS Token for setting SEV-SNP Support configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;Auto&#x60; - Value - Auto for configuring CbsSevSnpSupport token. * &#x60;disabled&#x60; - Value - disabled for configuring CbsSevSnpSupport token. * &#x60;enabled&#x60; - Value - enabled for configuring CbsSevSnpSupport token. | [optional] [default to "platform-default"]
 **CdnEnable** | Pointer to **string** | BIOS Token for setting Consistent Device Naming configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;enabled&#x60; - Enables the BIOS setting. * &#x60;disabled&#x60; - Disables the BIOS setting. | [optional] [default to "platform-default"]
 **CdnSupport** | Pointer to **string** | BIOS Token for setting CDN Support for LOM configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;disabled&#x60; - Value - disabled for configuring CdnSupport token. * &#x60;enabled&#x60; - Value - enabled for configuring CdnSupport token. * &#x60;LOMs Only&#x60; - Value - LOMs Only for configuring CdnSupport token. | [optional] [default to "platform-default"]
 **ChannelInterLeave** | Pointer to **string** | BIOS Token for setting Channel Interleaving configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;1-way&#x60; - Value - 1-way for configuring ChannelInterLeave token. * &#x60;2-way&#x60; - Value - 2-way for configuring ChannelInterLeave token. * &#x60;3-way&#x60; - Value - 3-way for configuring ChannelInterLeave token. * &#x60;4-way&#x60; - Value - 4-way for configuring ChannelInterLeave token. * &#x60;auto&#x60; - Value - auto for configuring ChannelInterLeave token. | [optional] [default to "platform-default"]
@@ -88,6 +113,7 @@ Name | Type | Description | Notes
 **CrfastgoConfig** | Pointer to **string** | BIOS Token for setting CR FastGo Config configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;Auto&#x60; - Value - Auto for configuring CrfastgoConfig token. * &#x60;Default&#x60; - Value - Default for configuring CrfastgoConfig token. * &#x60;Disable optimization&#x60; - Value - Disable optimization for configuring CrfastgoConfig token. * &#x60;Enable optimization&#x60; - Value - Enable optimization for configuring CrfastgoConfig token. * &#x60;Option 1&#x60; - Value - Option 1 for configuring CrfastgoConfig token. * &#x60;Option 2&#x60; - Value - Option 2 for configuring CrfastgoConfig token. * &#x60;Option 3&#x60; - Value - Option 3 for configuring CrfastgoConfig token. * &#x60;Option 4&#x60; - Value - Option 4 for configuring CrfastgoConfig token. * &#x60;Option 5&#x60; - Value - Option 5 for configuring CrfastgoConfig token. | [optional] [default to "platform-default"]
 **DcpmmFirmwareDowngrade** | Pointer to **string** | BIOS Token for setting DCPMM Firmware Downgrade configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;enabled&#x60; - Enables the BIOS setting. * &#x60;disabled&#x60; - Disables the BIOS setting. | [optional] [default to "platform-default"]
 **DemandScrub** | Pointer to **string** | BIOS Token for setting Demand Scrub configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;enabled&#x60; - Enables the BIOS setting. * &#x60;disabled&#x60; - Disables the BIOS setting. | [optional] [default to "platform-default"]
+**DfxOsbEn** | Pointer to **string** | BIOS Token for setting DFX OSB configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;Auto&#x60; - Value - Auto for configuring DfxOsbEn token. * &#x60;disabled&#x60; - Value - disabled for configuring DfxOsbEn token. * &#x60;enabled&#x60; - Value - enabled for configuring DfxOsbEn token. | [optional] [default to "platform-default"]
 **DirectCacheAccess** | Pointer to **string** | BIOS Token for setting Direct Cache Access Support configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;auto&#x60; - Value - auto for configuring DirectCacheAccess token. * &#x60;disabled&#x60; - Value - disabled for configuring DirectCacheAccess token. * &#x60;enabled&#x60; - Value - enabled for configuring DirectCacheAccess token. | [optional] [default to "platform-default"]
 **DmaCtrlOptIn** | Pointer to **string** | BIOS Token for setting DMA Control Opt-In Flag configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;enabled&#x60; - Enables the BIOS setting. * &#x60;disabled&#x60; - Disables the BIOS setting. | [optional] [default to "platform-default"]
 **DramClockThrottling** | Pointer to **string** | BIOS Token for setting DRAM Clock Throttling configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;Auto&#x60; - Value - Auto for configuring DramClockThrottling token. * &#x60;Balanced&#x60; - Value - Balanced for configuring DramClockThrottling token. * &#x60;Energy Efficient&#x60; - Value - Energy Efficient for configuring DramClockThrottling token. * &#x60;Performance&#x60; - Value - Performance for configuring DramClockThrottling token. | [optional] [default to "platform-default"]
@@ -126,6 +152,7 @@ Name | Type | Description | Notes
 **IntelVtdInterruptRemapping** | Pointer to **string** | BIOS Token for setting Intel (R) VT-d Interrupt Remapping configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;enabled&#x60; - Enables the BIOS setting. * &#x60;disabled&#x60; - Disables the BIOS setting. | [optional] [default to "platform-default"]
 **IntelVtdPassThroughDmaSupport** | Pointer to **string** | BIOS Token for setting Intel (R) VT-d PassThrough DMA Support configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;enabled&#x60; - Enables the BIOS setting. * &#x60;disabled&#x60; - Disables the BIOS setting. | [optional] [default to "platform-default"]
 **IntelVtdatsSupport** | Pointer to **string** | BIOS Token for setting Intel VTD ATS Support configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;enabled&#x60; - Enables the BIOS setting. * &#x60;disabled&#x60; - Disables the BIOS setting. | [optional] [default to "platform-default"]
+**IoatConfigCpm** | Pointer to **string** | BIOS Token for setting IOAT Configuration configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;enabled&#x60; - Enables the BIOS setting. * &#x60;disabled&#x60; - Disables the BIOS setting. | [optional] [default to "platform-default"]
 **IohErrorEnable** | Pointer to **string** | BIOS Token for setting IIO Error Enable configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;No&#x60; - Value - No for configuring IohErrorEnable token. * &#x60;Yes&#x60; - Value - Yes for configuring IohErrorEnable token. | [optional] [default to "platform-default"]
 **IohResource** | Pointer to **string** | BIOS Token for setting IOH Resource Allocation configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;IOH0 24k IOH1 40k&#x60; - Value - IOH0 24k IOH1 40k for configuring IohResource token. * &#x60;IOH0 32k IOH1 32k&#x60; - Value - IOH0 32k IOH1 32k for configuring IohResource token. * &#x60;IOH0 40k IOH1 24k&#x60; - Value - IOH0 40k IOH1 24k for configuring IohResource token. * &#x60;IOH0 48k IOH1 16k&#x60; - Value - IOH0 48k IOH1 16k for configuring IohResource token. * &#x60;IOH0 56k IOH1 8k&#x60; - Value - IOH0 56k IOH1 8k for configuring IohResource token. | [optional] [default to "platform-default"]
 **IpPrefetch** | Pointer to **string** | BIOS Token for setting DCU IP Prefetcher configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;enabled&#x60; - Enables the BIOS setting. * &#x60;disabled&#x60; - Disables the BIOS setting. | [optional] [default to "platform-default"]
@@ -153,6 +180,8 @@ Name | Type | Description | Notes
 **MemoryThermalThrottling** | Pointer to **string** | BIOS Token for setting Memory Thermal Throttling Mode configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;CLTT with PECI&#x60; - Value - CLTT with PECI for configuring MemoryThermalThrottling token. * &#x60;Disabled&#x60; - Value - Disabled for configuring MemoryThermalThrottling token. | [optional] [default to "platform-default"]
 **MirroringMode** | Pointer to **string** | BIOS Token for setting Mirroring Mode configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;inter-socket&#x60; - Value - inter-socket for configuring MirroringMode token. * &#x60;intra-socket&#x60; - Value - intra-socket for configuring MirroringMode token. | [optional] [default to "platform-default"]
 **MmcfgBase** | Pointer to **string** | BIOS Token for setting MMCFG BASE configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;1 GB&#x60; - Value - 1 GiB for configuring MmcfgBase token. * &#x60;2 GB&#x60; - Value - 2 GiB for configuring MmcfgBase token. * &#x60;2.5 GB&#x60; - Value - 2.5 GiB for configuring MmcfgBase token. * &#x60;3 GB&#x60; - Value - 3 GiB for configuring MmcfgBase token. * &#x60;Auto&#x60; - Value - Auto for configuring MmcfgBase token. | [optional] [default to "platform-default"]
+**MmiohBase** | Pointer to **string** | BIOS Token for setting MMIO High Base configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;512G&#x60; - Value - 512G for configuring MmiohBase token. * &#x60;1T&#x60; - Value - 1T for configuring MmiohBase token. * &#x60;2T&#x60; - Value - 2T for configuring MmiohBase token. * &#x60;4T&#x60; - Value - 4T for configuring MmiohBase token. * &#x60;16T&#x60; - Value - 16T for configuring MmiohBase token. * &#x60;24T&#x60; - Value - 24T for configuring MmiohBase token. * &#x60;32T&#x60; - Value - 32T for configuring MmiohBase token. * &#x60;40T&#x60; - Value - 40T for configuring MmiohBase token. * &#x60;56T&#x60; - Value - 56T for configuring MmiohBase token. | [optional] [default to "platform-default"]
+**MmiohSize** | Pointer to **string** | BIOS Token for setting MMIO High Granularity Size configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;1G&#x60; - Value - 1G for configuring MmiohSize token. * &#x60;4G&#x60; - Value - 4G for configuring MmiohSize token. * &#x60;16G&#x60; - Value - 16G for configuring MmiohSize token. * &#x60;64G&#x60; - Value - 64G for configuring MmiohSize token. * &#x60;256G&#x60; - Value - 256G for configuring MmiohSize token. * &#x60;1024G&#x60; - Value - 1024G for configuring MmiohSize token. | [optional] [default to "platform-default"]
 **NetworkStack** | Pointer to **string** | BIOS Token for setting Network Stack configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;enabled&#x60; - Enables the BIOS setting. * &#x60;disabled&#x60; - Disables the BIOS setting. | [optional] [default to "platform-default"]
 **NumaOptimized** | Pointer to **string** | BIOS Token for setting NUMA Optimized configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;enabled&#x60; - Enables the BIOS setting. * &#x60;disabled&#x60; - Disables the BIOS setting. | [optional] [default to "platform-default"]
 **NvmdimmPerformConfig** | Pointer to **string** | BIOS Token for setting NVM Performance Setting configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;BW Optimized&#x60; - Value - BW Optimized for configuring NvmdimmPerformConfig token. * &#x60;Balanced Profile&#x60; - Value - Balanced Profile for configuring NvmdimmPerformConfig token. * &#x60;Latency Optimized&#x60; - Value - Latency Optimized for configuring NvmdimmPerformConfig token. | [optional] [default to "platform-default"]
@@ -189,7 +218,7 @@ Name | Type | Description | Notes
 **PcieSlotMraid1optionRom** | Pointer to **string** | BIOS Token for setting MRAID1 OptionROM configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;enabled&#x60; - Enables the BIOS setting. * &#x60;disabled&#x60; - Disables the BIOS setting. | [optional] [default to "platform-default"]
 **PcieSlotMraid2linkSpeed** | Pointer to **string** | BIOS Token for setting MRAID2 Link Speed configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;Auto&#x60; - Value - Auto for configuring PcieSlotMraid2linkSpeed token. * &#x60;Disabled&#x60; - Value - Disabled for configuring PcieSlotMraid2linkSpeed token. * &#x60;GEN1&#x60; - Value - GEN1 for configuring PcieSlotMraid2linkSpeed token. * &#x60;GEN2&#x60; - Value - GEN2 for configuring PcieSlotMraid2linkSpeed token. * &#x60;GEN3&#x60; - Value - GEN3 for configuring PcieSlotMraid2linkSpeed token. * &#x60;GEN4&#x60; - Value - GEN4 for configuring PcieSlotMraid2linkSpeed token. * &#x60;GEN5&#x60; - Value - GEN5 for configuring PcieSlotMraid2linkSpeed token. | [optional] [default to "platform-default"]
 **PcieSlotMraid2optionRom** | Pointer to **string** | BIOS Token for setting MRAID2 OptionROM configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;enabled&#x60; - Enables the BIOS setting. * &#x60;disabled&#x60; - Disables the BIOS setting. | [optional] [default to "platform-default"]
-**PcieSlotMstorraidLinkSpeed** | Pointer to **string** | BIOS Token for setting PCIe Slot MSTOR Link Speed configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;Auto&#x60; - Value - Auto for configuring PcieSlotMstorraidLinkSpeed token. * &#x60;Disabled&#x60; - Value - Disabled for configuring PcieSlotMstorraidLinkSpeed token. * &#x60;GEN1&#x60; - Value - GEN1 for configuring PcieSlotMstorraidLinkSpeed token. * &#x60;GEN2&#x60; - Value - GEN2 for configuring PcieSlotMstorraidLinkSpeed token. * &#x60;GEN3&#x60; - Value - GEN3 for configuring PcieSlotMstorraidLinkSpeed token. * &#x60;GEN4&#x60; - Value - GEN4 for configuring PcieSlotMstorraidLinkSpeed token. | [optional] [default to "platform-default"]
+**PcieSlotMstorraidLinkSpeed** | Pointer to **string** | BIOS Token for setting PCIe Slot MSTOR Link Speed configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;Auto&#x60; - Value - Auto for configuring PcieSlotMstorraidLinkSpeed token. * &#x60;Disabled&#x60; - Value - Disabled for configuring PcieSlotMstorraidLinkSpeed token. * &#x60;GEN1&#x60; - Value - GEN1 for configuring PcieSlotMstorraidLinkSpeed token. * &#x60;GEN2&#x60; - Value - GEN2 for configuring PcieSlotMstorraidLinkSpeed token. * &#x60;GEN3&#x60; - Value - GEN3 for configuring PcieSlotMstorraidLinkSpeed token. * &#x60;GEN4&#x60; - Value - GEN4 for configuring PcieSlotMstorraidLinkSpeed token. * &#x60;GEN5&#x60; - Value - GEN5 for configuring PcieSlotMstorraidLinkSpeed token. | [optional] [default to "platform-default"]
 **PcieSlotMstorraidOptionRom** | Pointer to **string** | BIOS Token for setting PCIe Slot MSTOR RAID OptionROM configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;enabled&#x60; - Enables the BIOS setting. * &#x60;disabled&#x60; - Disables the BIOS setting. | [optional] [default to "platform-default"]
 **PcieSlotNvme1linkSpeed** | Pointer to **string** | BIOS Token for setting NVME 1 Link Speed configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;Auto&#x60; - Value - Auto for configuring PcieSlotNvme1linkSpeed token. * &#x60;Disabled&#x60; - Value - Disabled for configuring PcieSlotNvme1linkSpeed token. * &#x60;GEN1&#x60; - Value - GEN1 for configuring PcieSlotNvme1linkSpeed token. * &#x60;GEN2&#x60; - Value - GEN2 for configuring PcieSlotNvme1linkSpeed token. * &#x60;GEN3&#x60; - Value - GEN3 for configuring PcieSlotNvme1linkSpeed token. | [optional] [default to "platform-default"]
 **PcieSlotNvme1optionRom** | Pointer to **string** | BIOS Token for setting NVME 1 OptionROM configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;enabled&#x60; - Enables the BIOS setting. * &#x60;disabled&#x60; - Disables the BIOS setting. | [optional] [default to "platform-default"]
@@ -207,7 +236,7 @@ Name | Type | Description | Notes
 **PopSupport** | Pointer to **string** | BIOS Token for setting Power ON Password configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;enabled&#x60; - Enables the BIOS setting. * &#x60;disabled&#x60; - Disables the BIOS setting. | [optional] [default to "platform-default"]
 **PostErrorPause** | Pointer to **string** | BIOS Token for setting POST Error Pause configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;enabled&#x60; - Enables the BIOS setting. * &#x60;disabled&#x60; - Disables the BIOS setting. | [optional] [default to "platform-default"]
 **PostPackageRepair** | Pointer to **string** | BIOS Token for setting Post Package Repair configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;Disabled&#x60; - Value - Disabled for configuring PostPackageRepair token. * &#x60;Hard PPR&#x60; - Value - Hard PPR for configuring PostPackageRepair token. | [optional] [default to "platform-default"]
-**PrmrrSize** | Pointer to **string** | BIOS Token for setting PRMRR Size configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;1G&#x60; - Value - 1G for configuring PrmrrSize token. * &#x60;2G&#x60; - Value - 2G for configuring PrmrrSize token. * &#x60;4G&#x60; - Value - 4G for configuring PrmrrSize token. * &#x60;8G&#x60; - Value - 8G for configuring PrmrrSize token. * &#x60;16G&#x60; - Value - 16G for configuring PrmrrSize token. * &#x60;32G&#x60; - Value - 32G for configuring PrmrrSize token. * &#x60;64G&#x60; - Value - 64G for configuring PrmrrSize token. * &#x60;128G&#x60; - Value - 128G for configuring PrmrrSize token. * &#x60;256G&#x60; - Value - 256G for configuring PrmrrSize token. * &#x60;512G&#x60; - Value - 512G for configuring PrmrrSize token. * &#x60;128M&#x60; - Value - 128M for configuring PrmrrSize token. * &#x60;256M&#x60; - Value - 256M for configuring PrmrrSize token. * &#x60;512M&#x60; - Value - 512M for configuring PrmrrSize token. * &#x60;Invalid Config.&#x60; - Value - Invalid Config for configuring PrmrrSize token. | [optional] [default to "platform-default"]
+**PrmrrSize** | Pointer to **string** | BIOS Token for setting PRMRR Size configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;1G&#x60; - Value - 1G for configuring PrmrrSize token. * &#x60;2G&#x60; - Value - 2G for configuring PrmrrSize token. * &#x60;4G&#x60; - Value - 4G for configuring PrmrrSize token. * &#x60;8G&#x60; - Value - 8G for configuring PrmrrSize token. * &#x60;16G&#x60; - Value - 16G for configuring PrmrrSize token. * &#x60;32G&#x60; - Value - 32G for configuring PrmrrSize token. * &#x60;64G&#x60; - Value - 64G for configuring PrmrrSize token. * &#x60;128G&#x60; - Value - 128G for configuring PrmrrSize token. * &#x60;256G&#x60; - Value - 256G for configuring PrmrrSize token. * &#x60;512G&#x60; - Value - 512G for configuring PrmrrSize token. * &#x60;128M&#x60; - Value - 128M for configuring PrmrrSize token. * &#x60;256M&#x60; - Value - 256M for configuring PrmrrSize token. * &#x60;512M&#x60; - Value - 512M for configuring PrmrrSize token. * &#x60;Auto&#x60; - Value - Auto for configuring PrmrrSize token. * &#x60;Invalid Config.&#x60; - Value - Invalid Config for configuring PrmrrSize token. | [optional] [default to "platform-default"]
 **ProcessorC1e** | Pointer to **string** | BIOS Token for setting Processor C1E configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;enabled&#x60; - Enables the BIOS setting. * &#x60;disabled&#x60; - Disables the BIOS setting. | [optional] [default to "platform-default"]
 **ProcessorC3report** | Pointer to **string** | BIOS Token for setting Processor C3 Report configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;enabled&#x60; - Enables the BIOS setting. * &#x60;disabled&#x60; - Disables the BIOS setting. | [optional] [default to "platform-default"]
 **ProcessorC6report** | Pointer to **string** | BIOS Token for setting Processor C6 Report configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;enabled&#x60; - Enables the BIOS setting. * &#x60;disabled&#x60; - Disables the BIOS setting. | [optional] [default to "platform-default"]
@@ -221,9 +250,12 @@ Name | Type | Description | Notes
 **QpiSnoopMode** | Pointer to **string** | BIOS Token for setting QPI Snoop Mode configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;auto&#x60; - Value - auto for configuring QpiSnoopMode token. * &#x60;cluster-on-die&#x60; - Value - cluster-on-die for configuring QpiSnoopMode token. * &#x60;early-snoop&#x60; - Value - early-snoop for configuring QpiSnoopMode token. * &#x60;home-directory-snoop&#x60; - Value - home-directory-snoop for configuring QpiSnoopMode token. * &#x60;home-directory-snoop-with-osb&#x60; - Value - home-directory-snoop-with-osb for configuring QpiSnoopMode token. * &#x60;home-snoop&#x60; - Value - home-snoop for configuring QpiSnoopMode token. | [optional] [default to "platform-default"]
 **RankInterLeave** | Pointer to **string** | BIOS Token for setting Rank Interleaving configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;1-way&#x60; - Value - 1-way for configuring RankInterLeave token. * &#x60;2-way&#x60; - Value - 2-way for configuring RankInterLeave token. * &#x60;4-way&#x60; - Value - 4-way for configuring RankInterLeave token. * &#x60;8-way&#x60; - Value - 8-way for configuring RankInterLeave token. * &#x60;auto&#x60; - Value - auto for configuring RankInterLeave token. | [optional] [default to "platform-default"]
 **RedirectionAfterPost** | Pointer to **string** | BIOS Token for setting Redirection After BIOS POST configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;Always Enable&#x60; - Value - Always Enable for configuring RedirectionAfterPost token. * &#x60;Bootloader&#x60; - Value - Bootloader for configuring RedirectionAfterPost token. | [optional] [default to "platform-default"]
+**ResizeBarSupport** | Pointer to **string** | BIOS Token for setting Re-Size BAR Support configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;enabled&#x60; - Enables the BIOS setting. * &#x60;disabled&#x60; - Disables the BIOS setting. | [optional] [default to "platform-default"]
+**RuntimePostPackageRepair** | Pointer to **string** | BIOS Token for setting Runtime Post Package Repair configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;enabled&#x60; - Enables the BIOS setting. * &#x60;disabled&#x60; - Disables the BIOS setting. | [optional] [default to "platform-default"]
 **SataModeSelect** | Pointer to **string** | BIOS Token for setting SATA Mode configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;AHCI&#x60; - Value - AHCI for configuring SataModeSelect token. * &#x60;Disabled&#x60; - Value - Disabled for configuring SataModeSelect token. * &#x60;LSI SW RAID&#x60; - Value - LSI SW RAID for configuring SataModeSelect token. | [optional] [default to "platform-default"]
 **SelectMemoryRasConfiguration** | Pointer to **string** | BIOS Token for setting Memory RAS Configuration configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;adddc-sparing&#x60; - Value - adddc-sparing for configuring SelectMemoryRasConfiguration token. * &#x60;lockstep&#x60; - Value - lockstep for configuring SelectMemoryRasConfiguration token. * &#x60;maximum-performance&#x60; - Value - maximum-performance for configuring SelectMemoryRasConfiguration token. * &#x60;mirror-mode-1lm&#x60; - Value - mirror-mode-1lm for configuring SelectMemoryRasConfiguration token. * &#x60;mirroring&#x60; - Value - mirroring for configuring SelectMemoryRasConfiguration token. * &#x60;partial-mirror-mode-1lm&#x60; - Value - partial-mirror-mode-1lm for configuring SelectMemoryRasConfiguration token. * &#x60;sparing&#x60; - Value - sparing for configuring SelectMemoryRasConfiguration token. | [optional] [default to "platform-default"]
 **SelectPprType** | Pointer to **string** | BIOS Token for setting PPR Type configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;disabled&#x60; - Value - disabled for configuring SelectPprType token. * &#x60;Hard PPR&#x60; - Value - Hard PPR for configuring SelectPprType token. * &#x60;Soft PPR&#x60; - Value - Soft PPR for configuring SelectPprType token. | [optional] [default to "platform-default"]
+**SerialMux** | Pointer to **string** | BIOS Token for setting Serial Mux configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;enabled&#x60; - Enables the BIOS setting. * &#x60;disabled&#x60; - Disables the BIOS setting. | [optional] [default to "platform-default"]
 **SerialPortAenable** | Pointer to **string** | BIOS Token for setting Serial A Enable configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;enabled&#x60; - Enables the BIOS setting. * &#x60;disabled&#x60; - Disables the BIOS setting. | [optional] [default to "platform-default"]
 **Sev** | Pointer to **string** | BIOS Token for setting Secured Encrypted Virtualization configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;253 ASIDs&#x60; - Value - 253 ASIDs for configuring Sev token. * &#x60;509 ASIDs&#x60; - Value - 509 ASIDs for configuring Sev token. * &#x60;Auto&#x60; - Value - Auto for configuring Sev token. | [optional] [default to "platform-default"]
 **SgxAutoRegistrationAgent** | Pointer to **string** | BIOS Token for setting SGX Auto MP Registration Agent configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;enabled&#x60; - Enables the BIOS setting. * &#x60;disabled&#x60; - Disables the BIOS setting. | [optional] [default to "platform-default"]
@@ -1283,6 +1315,56 @@ SetCbsCmnApbdis sets CbsCmnApbdis field to given value.
 
 HasCbsCmnApbdis returns a boolean if a field has been set.
 
+### GetCbsCmnApbdisDfPstateRs
+
+`func (o *BiosPolicyAllOf) GetCbsCmnApbdisDfPstateRs() string`
+
+GetCbsCmnApbdisDfPstateRs returns the CbsCmnApbdisDfPstateRs field if non-nil, zero value otherwise.
+
+### GetCbsCmnApbdisDfPstateRsOk
+
+`func (o *BiosPolicyAllOf) GetCbsCmnApbdisDfPstateRsOk() (*string, bool)`
+
+GetCbsCmnApbdisDfPstateRsOk returns a tuple with the CbsCmnApbdisDfPstateRs field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCbsCmnApbdisDfPstateRs
+
+`func (o *BiosPolicyAllOf) SetCbsCmnApbdisDfPstateRs(v string)`
+
+SetCbsCmnApbdisDfPstateRs sets CbsCmnApbdisDfPstateRs field to given value.
+
+### HasCbsCmnApbdisDfPstateRs
+
+`func (o *BiosPolicyAllOf) HasCbsCmnApbdisDfPstateRs() bool`
+
+HasCbsCmnApbdisDfPstateRs returns a boolean if a field has been set.
+
+### GetCbsCmnCpuAvx512
+
+`func (o *BiosPolicyAllOf) GetCbsCmnCpuAvx512() string`
+
+GetCbsCmnCpuAvx512 returns the CbsCmnCpuAvx512 field if non-nil, zero value otherwise.
+
+### GetCbsCmnCpuAvx512Ok
+
+`func (o *BiosPolicyAllOf) GetCbsCmnCpuAvx512Ok() (*string, bool)`
+
+GetCbsCmnCpuAvx512Ok returns a tuple with the CbsCmnCpuAvx512 field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCbsCmnCpuAvx512
+
+`func (o *BiosPolicyAllOf) SetCbsCmnCpuAvx512(v string)`
+
+SetCbsCmnCpuAvx512 sets CbsCmnCpuAvx512 field to given value.
+
+### HasCbsCmnCpuAvx512
+
+`func (o *BiosPolicyAllOf) HasCbsCmnCpuAvx512() bool`
+
+HasCbsCmnCpuAvx512 returns a boolean if a field has been set.
+
 ### GetCbsCmnCpuCpb
 
 `func (o *BiosPolicyAllOf) GetCbsCmnCpuCpb() string`
@@ -1408,6 +1490,31 @@ SetCbsCmnCpuL2streamHwPrefetcher sets CbsCmnCpuL2streamHwPrefetcher field to giv
 
 HasCbsCmnCpuL2streamHwPrefetcher returns a boolean if a field has been set.
 
+### GetCbsCmnCpuSevAsidSpaceLimit
+
+`func (o *BiosPolicyAllOf) GetCbsCmnCpuSevAsidSpaceLimit() string`
+
+GetCbsCmnCpuSevAsidSpaceLimit returns the CbsCmnCpuSevAsidSpaceLimit field if non-nil, zero value otherwise.
+
+### GetCbsCmnCpuSevAsidSpaceLimitOk
+
+`func (o *BiosPolicyAllOf) GetCbsCmnCpuSevAsidSpaceLimitOk() (*string, bool)`
+
+GetCbsCmnCpuSevAsidSpaceLimitOk returns a tuple with the CbsCmnCpuSevAsidSpaceLimit field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCbsCmnCpuSevAsidSpaceLimit
+
+`func (o *BiosPolicyAllOf) SetCbsCmnCpuSevAsidSpaceLimit(v string)`
+
+SetCbsCmnCpuSevAsidSpaceLimit sets CbsCmnCpuSevAsidSpaceLimit field to given value.
+
+### HasCbsCmnCpuSevAsidSpaceLimit
+
+`func (o *BiosPolicyAllOf) HasCbsCmnCpuSevAsidSpaceLimit() bool`
+
+HasCbsCmnCpuSevAsidSpaceLimit returns a boolean if a field has been set.
+
 ### GetCbsCmnCpuSmee
 
 `func (o *BiosPolicyAllOf) GetCbsCmnCpuSmee() string`
@@ -1483,6 +1590,31 @@ SetCbsCmnDeterminismSlider sets CbsCmnDeterminismSlider field to given value.
 
 HasCbsCmnDeterminismSlider returns a boolean if a field has been set.
 
+### GetCbsCmnEdcControlThrottle
+
+`func (o *BiosPolicyAllOf) GetCbsCmnEdcControlThrottle() string`
+
+GetCbsCmnEdcControlThrottle returns the CbsCmnEdcControlThrottle field if non-nil, zero value otherwise.
+
+### GetCbsCmnEdcControlThrottleOk
+
+`func (o *BiosPolicyAllOf) GetCbsCmnEdcControlThrottleOk() (*string, bool)`
+
+GetCbsCmnEdcControlThrottleOk returns a tuple with the CbsCmnEdcControlThrottle field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCbsCmnEdcControlThrottle
+
+`func (o *BiosPolicyAllOf) SetCbsCmnEdcControlThrottle(v string)`
+
+SetCbsCmnEdcControlThrottle sets CbsCmnEdcControlThrottle field to given value.
+
+### HasCbsCmnEdcControlThrottle
+
+`func (o *BiosPolicyAllOf) HasCbsCmnEdcControlThrottle() bool`
+
+HasCbsCmnEdcControlThrottle returns a boolean if a field has been set.
+
 ### GetCbsCmnEfficiencyModeEn
 
 `func (o *BiosPolicyAllOf) GetCbsCmnEfficiencyModeEn() string`
@@ -1507,6 +1639,31 @@ SetCbsCmnEfficiencyModeEn sets CbsCmnEfficiencyModeEn field to given value.
 `func (o *BiosPolicyAllOf) HasCbsCmnEfficiencyModeEn() bool`
 
 HasCbsCmnEfficiencyModeEn returns a boolean if a field has been set.
+
+### GetCbsCmnEfficiencyModeEnRs
+
+`func (o *BiosPolicyAllOf) GetCbsCmnEfficiencyModeEnRs() string`
+
+GetCbsCmnEfficiencyModeEnRs returns the CbsCmnEfficiencyModeEnRs field if non-nil, zero value otherwise.
+
+### GetCbsCmnEfficiencyModeEnRsOk
+
+`func (o *BiosPolicyAllOf) GetCbsCmnEfficiencyModeEnRsOk() (*string, bool)`
+
+GetCbsCmnEfficiencyModeEnRsOk returns a tuple with the CbsCmnEfficiencyModeEnRs field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCbsCmnEfficiencyModeEnRs
+
+`func (o *BiosPolicyAllOf) SetCbsCmnEfficiencyModeEnRs(v string)`
+
+SetCbsCmnEfficiencyModeEnRs sets CbsCmnEfficiencyModeEnRs field to given value.
+
+### HasCbsCmnEfficiencyModeEnRs
+
+`func (o *BiosPolicyAllOf) HasCbsCmnEfficiencyModeEnRs() bool`
+
+HasCbsCmnEfficiencyModeEnRs returns a boolean if a field has been set.
 
 ### GetCbsCmnFixedSocPstate
 
@@ -1583,6 +1740,56 @@ SetCbsCmnGnbSmuDfCstates sets CbsCmnGnbSmuDfCstates field to given value.
 
 HasCbsCmnGnbSmuDfCstates returns a boolean if a field has been set.
 
+### GetCbsCmnGnbSmuDffoRs
+
+`func (o *BiosPolicyAllOf) GetCbsCmnGnbSmuDffoRs() string`
+
+GetCbsCmnGnbSmuDffoRs returns the CbsCmnGnbSmuDffoRs field if non-nil, zero value otherwise.
+
+### GetCbsCmnGnbSmuDffoRsOk
+
+`func (o *BiosPolicyAllOf) GetCbsCmnGnbSmuDffoRsOk() (*string, bool)`
+
+GetCbsCmnGnbSmuDffoRsOk returns a tuple with the CbsCmnGnbSmuDffoRs field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCbsCmnGnbSmuDffoRs
+
+`func (o *BiosPolicyAllOf) SetCbsCmnGnbSmuDffoRs(v string)`
+
+SetCbsCmnGnbSmuDffoRs sets CbsCmnGnbSmuDffoRs field to given value.
+
+### HasCbsCmnGnbSmuDffoRs
+
+`func (o *BiosPolicyAllOf) HasCbsCmnGnbSmuDffoRs() bool`
+
+HasCbsCmnGnbSmuDffoRs returns a boolean if a field has been set.
+
+### GetCbsCmnGnbSmuDlwmSupport
+
+`func (o *BiosPolicyAllOf) GetCbsCmnGnbSmuDlwmSupport() string`
+
+GetCbsCmnGnbSmuDlwmSupport returns the CbsCmnGnbSmuDlwmSupport field if non-nil, zero value otherwise.
+
+### GetCbsCmnGnbSmuDlwmSupportOk
+
+`func (o *BiosPolicyAllOf) GetCbsCmnGnbSmuDlwmSupportOk() (*string, bool)`
+
+GetCbsCmnGnbSmuDlwmSupportOk returns a tuple with the CbsCmnGnbSmuDlwmSupport field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCbsCmnGnbSmuDlwmSupport
+
+`func (o *BiosPolicyAllOf) SetCbsCmnGnbSmuDlwmSupport(v string)`
+
+SetCbsCmnGnbSmuDlwmSupport sets CbsCmnGnbSmuDlwmSupport field to given value.
+
+### HasCbsCmnGnbSmuDlwmSupport
+
+`func (o *BiosPolicyAllOf) HasCbsCmnGnbSmuDlwmSupport() bool`
+
+HasCbsCmnGnbSmuDlwmSupport returns a boolean if a field has been set.
+
 ### GetCbsCmnGnbSmucppc
 
 `func (o *BiosPolicyAllOf) GetCbsCmnGnbSmucppc() string`
@@ -1633,6 +1840,56 @@ SetCbsCmnMemCtrlBankGroupSwapDdr4 sets CbsCmnMemCtrlBankGroupSwapDdr4 field to g
 
 HasCbsCmnMemCtrlBankGroupSwapDdr4 returns a boolean if a field has been set.
 
+### GetCbsCmnMemCtrllerPwrDnEnDdr
+
+`func (o *BiosPolicyAllOf) GetCbsCmnMemCtrllerPwrDnEnDdr() string`
+
+GetCbsCmnMemCtrllerPwrDnEnDdr returns the CbsCmnMemCtrllerPwrDnEnDdr field if non-nil, zero value otherwise.
+
+### GetCbsCmnMemCtrllerPwrDnEnDdrOk
+
+`func (o *BiosPolicyAllOf) GetCbsCmnMemCtrllerPwrDnEnDdrOk() (*string, bool)`
+
+GetCbsCmnMemCtrllerPwrDnEnDdrOk returns a tuple with the CbsCmnMemCtrllerPwrDnEnDdr field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCbsCmnMemCtrllerPwrDnEnDdr
+
+`func (o *BiosPolicyAllOf) SetCbsCmnMemCtrllerPwrDnEnDdr(v string)`
+
+SetCbsCmnMemCtrllerPwrDnEnDdr sets CbsCmnMemCtrllerPwrDnEnDdr field to given value.
+
+### HasCbsCmnMemCtrllerPwrDnEnDdr
+
+`func (o *BiosPolicyAllOf) HasCbsCmnMemCtrllerPwrDnEnDdr() bool`
+
+HasCbsCmnMemCtrllerPwrDnEnDdr returns a boolean if a field has been set.
+
+### GetCbsCmnMemDramRefreshRate
+
+`func (o *BiosPolicyAllOf) GetCbsCmnMemDramRefreshRate() string`
+
+GetCbsCmnMemDramRefreshRate returns the CbsCmnMemDramRefreshRate field if non-nil, zero value otherwise.
+
+### GetCbsCmnMemDramRefreshRateOk
+
+`func (o *BiosPolicyAllOf) GetCbsCmnMemDramRefreshRateOk() (*string, bool)`
+
+GetCbsCmnMemDramRefreshRateOk returns a tuple with the CbsCmnMemDramRefreshRate field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCbsCmnMemDramRefreshRate
+
+`func (o *BiosPolicyAllOf) SetCbsCmnMemDramRefreshRate(v string)`
+
+SetCbsCmnMemDramRefreshRate sets CbsCmnMemDramRefreshRate field to given value.
+
+### HasCbsCmnMemDramRefreshRate
+
+`func (o *BiosPolicyAllOf) HasCbsCmnMemDramRefreshRate() bool`
+
+HasCbsCmnMemDramRefreshRate returns a boolean if a field has been set.
+
 ### GetCbsCmnMemMapBankInterleaveDdr4
 
 `func (o *BiosPolicyAllOf) GetCbsCmnMemMapBankInterleaveDdr4() string`
@@ -1658,6 +1915,106 @@ SetCbsCmnMemMapBankInterleaveDdr4 sets CbsCmnMemMapBankInterleaveDdr4 field to g
 
 HasCbsCmnMemMapBankInterleaveDdr4 returns a boolean if a field has been set.
 
+### GetCbsCmnMemSpeedDdr47xx2
+
+`func (o *BiosPolicyAllOf) GetCbsCmnMemSpeedDdr47xx2() string`
+
+GetCbsCmnMemSpeedDdr47xx2 returns the CbsCmnMemSpeedDdr47xx2 field if non-nil, zero value otherwise.
+
+### GetCbsCmnMemSpeedDdr47xx2Ok
+
+`func (o *BiosPolicyAllOf) GetCbsCmnMemSpeedDdr47xx2Ok() (*string, bool)`
+
+GetCbsCmnMemSpeedDdr47xx2Ok returns a tuple with the CbsCmnMemSpeedDdr47xx2 field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCbsCmnMemSpeedDdr47xx2
+
+`func (o *BiosPolicyAllOf) SetCbsCmnMemSpeedDdr47xx2(v string)`
+
+SetCbsCmnMemSpeedDdr47xx2 sets CbsCmnMemSpeedDdr47xx2 field to given value.
+
+### HasCbsCmnMemSpeedDdr47xx2
+
+`func (o *BiosPolicyAllOf) HasCbsCmnMemSpeedDdr47xx2() bool`
+
+HasCbsCmnMemSpeedDdr47xx2 returns a boolean if a field has been set.
+
+### GetCbsCmnMemSpeedDdr47xx3
+
+`func (o *BiosPolicyAllOf) GetCbsCmnMemSpeedDdr47xx3() string`
+
+GetCbsCmnMemSpeedDdr47xx3 returns the CbsCmnMemSpeedDdr47xx3 field if non-nil, zero value otherwise.
+
+### GetCbsCmnMemSpeedDdr47xx3Ok
+
+`func (o *BiosPolicyAllOf) GetCbsCmnMemSpeedDdr47xx3Ok() (*string, bool)`
+
+GetCbsCmnMemSpeedDdr47xx3Ok returns a tuple with the CbsCmnMemSpeedDdr47xx3 field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCbsCmnMemSpeedDdr47xx3
+
+`func (o *BiosPolicyAllOf) SetCbsCmnMemSpeedDdr47xx3(v string)`
+
+SetCbsCmnMemSpeedDdr47xx3 sets CbsCmnMemSpeedDdr47xx3 field to given value.
+
+### HasCbsCmnMemSpeedDdr47xx3
+
+`func (o *BiosPolicyAllOf) HasCbsCmnMemSpeedDdr47xx3() bool`
+
+HasCbsCmnMemSpeedDdr47xx3 returns a boolean if a field has been set.
+
+### GetCbsCmnPreferredIo7xx2
+
+`func (o *BiosPolicyAllOf) GetCbsCmnPreferredIo7xx2() string`
+
+GetCbsCmnPreferredIo7xx2 returns the CbsCmnPreferredIo7xx2 field if non-nil, zero value otherwise.
+
+### GetCbsCmnPreferredIo7xx2Ok
+
+`func (o *BiosPolicyAllOf) GetCbsCmnPreferredIo7xx2Ok() (*string, bool)`
+
+GetCbsCmnPreferredIo7xx2Ok returns a tuple with the CbsCmnPreferredIo7xx2 field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCbsCmnPreferredIo7xx2
+
+`func (o *BiosPolicyAllOf) SetCbsCmnPreferredIo7xx2(v string)`
+
+SetCbsCmnPreferredIo7xx2 sets CbsCmnPreferredIo7xx2 field to given value.
+
+### HasCbsCmnPreferredIo7xx2
+
+`func (o *BiosPolicyAllOf) HasCbsCmnPreferredIo7xx2() bool`
+
+HasCbsCmnPreferredIo7xx2 returns a boolean if a field has been set.
+
+### GetCbsCmnPreferredIo7xx3
+
+`func (o *BiosPolicyAllOf) GetCbsCmnPreferredIo7xx3() string`
+
+GetCbsCmnPreferredIo7xx3 returns the CbsCmnPreferredIo7xx3 field if non-nil, zero value otherwise.
+
+### GetCbsCmnPreferredIo7xx3Ok
+
+`func (o *BiosPolicyAllOf) GetCbsCmnPreferredIo7xx3Ok() (*string, bool)`
+
+GetCbsCmnPreferredIo7xx3Ok returns a tuple with the CbsCmnPreferredIo7xx3 field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCbsCmnPreferredIo7xx3
+
+`func (o *BiosPolicyAllOf) SetCbsCmnPreferredIo7xx3(v string)`
+
+SetCbsCmnPreferredIo7xx3 sets CbsCmnPreferredIo7xx3 field to given value.
+
+### HasCbsCmnPreferredIo7xx3
+
+`func (o *BiosPolicyAllOf) HasCbsCmnPreferredIo7xx3() bool`
+
+HasCbsCmnPreferredIo7xx3 returns a boolean if a field has been set.
+
 ### GetCbsCmncTdpCtl
 
 `func (o *BiosPolicyAllOf) GetCbsCmncTdpCtl() string`
@@ -1682,6 +2039,31 @@ SetCbsCmncTdpCtl sets CbsCmncTdpCtl field to given value.
 `func (o *BiosPolicyAllOf) HasCbsCmncTdpCtl() bool`
 
 HasCbsCmncTdpCtl returns a boolean if a field has been set.
+
+### GetCbsCmnxGmiForceLinkWidthRs
+
+`func (o *BiosPolicyAllOf) GetCbsCmnxGmiForceLinkWidthRs() string`
+
+GetCbsCmnxGmiForceLinkWidthRs returns the CbsCmnxGmiForceLinkWidthRs field if non-nil, zero value otherwise.
+
+### GetCbsCmnxGmiForceLinkWidthRsOk
+
+`func (o *BiosPolicyAllOf) GetCbsCmnxGmiForceLinkWidthRsOk() (*string, bool)`
+
+GetCbsCmnxGmiForceLinkWidthRsOk returns a tuple with the CbsCmnxGmiForceLinkWidthRs field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCbsCmnxGmiForceLinkWidthRs
+
+`func (o *BiosPolicyAllOf) SetCbsCmnxGmiForceLinkWidthRs(v string)`
+
+SetCbsCmnxGmiForceLinkWidthRs sets CbsCmnxGmiForceLinkWidthRs field to given value.
+
+### HasCbsCmnxGmiForceLinkWidthRs
+
+`func (o *BiosPolicyAllOf) HasCbsCmnxGmiForceLinkWidthRs() bool`
+
+HasCbsCmnxGmiForceLinkWidthRs returns a boolean if a field has been set.
 
 ### GetCbsCpuCcdCtrlSsp
 
@@ -1733,6 +2115,56 @@ SetCbsCpuCoreCtrl sets CbsCpuCoreCtrl field to given value.
 
 HasCbsCpuCoreCtrl returns a boolean if a field has been set.
 
+### GetCbsCpuDownCoreCtrlBergamo
+
+`func (o *BiosPolicyAllOf) GetCbsCpuDownCoreCtrlBergamo() string`
+
+GetCbsCpuDownCoreCtrlBergamo returns the CbsCpuDownCoreCtrlBergamo field if non-nil, zero value otherwise.
+
+### GetCbsCpuDownCoreCtrlBergamoOk
+
+`func (o *BiosPolicyAllOf) GetCbsCpuDownCoreCtrlBergamoOk() (*string, bool)`
+
+GetCbsCpuDownCoreCtrlBergamoOk returns a tuple with the CbsCpuDownCoreCtrlBergamo field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCbsCpuDownCoreCtrlBergamo
+
+`func (o *BiosPolicyAllOf) SetCbsCpuDownCoreCtrlBergamo(v string)`
+
+SetCbsCpuDownCoreCtrlBergamo sets CbsCpuDownCoreCtrlBergamo field to given value.
+
+### HasCbsCpuDownCoreCtrlBergamo
+
+`func (o *BiosPolicyAllOf) HasCbsCpuDownCoreCtrlBergamo() bool`
+
+HasCbsCpuDownCoreCtrlBergamo returns a boolean if a field has been set.
+
+### GetCbsCpuDownCoreCtrlGenoa
+
+`func (o *BiosPolicyAllOf) GetCbsCpuDownCoreCtrlGenoa() string`
+
+GetCbsCpuDownCoreCtrlGenoa returns the CbsCpuDownCoreCtrlGenoa field if non-nil, zero value otherwise.
+
+### GetCbsCpuDownCoreCtrlGenoaOk
+
+`func (o *BiosPolicyAllOf) GetCbsCpuDownCoreCtrlGenoaOk() (*string, bool)`
+
+GetCbsCpuDownCoreCtrlGenoaOk returns a tuple with the CbsCpuDownCoreCtrlGenoa field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCbsCpuDownCoreCtrlGenoa
+
+`func (o *BiosPolicyAllOf) SetCbsCpuDownCoreCtrlGenoa(v string)`
+
+SetCbsCpuDownCoreCtrlGenoa sets CbsCpuDownCoreCtrlGenoa field to given value.
+
+### HasCbsCpuDownCoreCtrlGenoa
+
+`func (o *BiosPolicyAllOf) HasCbsCpuDownCoreCtrlGenoa() bool`
+
+HasCbsCpuDownCoreCtrlGenoa returns a boolean if a field has been set.
+
 ### GetCbsCpuSmtCtrl
 
 `func (o *BiosPolicyAllOf) GetCbsCpuSmtCtrl() string`
@@ -1757,6 +2189,106 @@ SetCbsCpuSmtCtrl sets CbsCpuSmtCtrl field to given value.
 `func (o *BiosPolicyAllOf) HasCbsCpuSmtCtrl() bool`
 
 HasCbsCpuSmtCtrl returns a boolean if a field has been set.
+
+### GetCbsDbgCpuGenCpuWdt
+
+`func (o *BiosPolicyAllOf) GetCbsDbgCpuGenCpuWdt() string`
+
+GetCbsDbgCpuGenCpuWdt returns the CbsDbgCpuGenCpuWdt field if non-nil, zero value otherwise.
+
+### GetCbsDbgCpuGenCpuWdtOk
+
+`func (o *BiosPolicyAllOf) GetCbsDbgCpuGenCpuWdtOk() (*string, bool)`
+
+GetCbsDbgCpuGenCpuWdtOk returns a tuple with the CbsDbgCpuGenCpuWdt field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCbsDbgCpuGenCpuWdt
+
+`func (o *BiosPolicyAllOf) SetCbsDbgCpuGenCpuWdt(v string)`
+
+SetCbsDbgCpuGenCpuWdt sets CbsDbgCpuGenCpuWdt field to given value.
+
+### HasCbsDbgCpuGenCpuWdt
+
+`func (o *BiosPolicyAllOf) HasCbsDbgCpuGenCpuWdt() bool`
+
+HasCbsDbgCpuGenCpuWdt returns a boolean if a field has been set.
+
+### GetCbsDbgCpuLapicMode
+
+`func (o *BiosPolicyAllOf) GetCbsDbgCpuLapicMode() string`
+
+GetCbsDbgCpuLapicMode returns the CbsDbgCpuLapicMode field if non-nil, zero value otherwise.
+
+### GetCbsDbgCpuLapicModeOk
+
+`func (o *BiosPolicyAllOf) GetCbsDbgCpuLapicModeOk() (*string, bool)`
+
+GetCbsDbgCpuLapicModeOk returns a tuple with the CbsDbgCpuLapicMode field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCbsDbgCpuLapicMode
+
+`func (o *BiosPolicyAllOf) SetCbsDbgCpuLapicMode(v string)`
+
+SetCbsDbgCpuLapicMode sets CbsDbgCpuLapicMode field to given value.
+
+### HasCbsDbgCpuLapicMode
+
+`func (o *BiosPolicyAllOf) HasCbsDbgCpuLapicMode() bool`
+
+HasCbsDbgCpuLapicMode returns a boolean if a field has been set.
+
+### GetCbsDbgCpuLapicMode7xx2
+
+`func (o *BiosPolicyAllOf) GetCbsDbgCpuLapicMode7xx2() string`
+
+GetCbsDbgCpuLapicMode7xx2 returns the CbsDbgCpuLapicMode7xx2 field if non-nil, zero value otherwise.
+
+### GetCbsDbgCpuLapicMode7xx2Ok
+
+`func (o *BiosPolicyAllOf) GetCbsDbgCpuLapicMode7xx2Ok() (*string, bool)`
+
+GetCbsDbgCpuLapicMode7xx2Ok returns a tuple with the CbsDbgCpuLapicMode7xx2 field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCbsDbgCpuLapicMode7xx2
+
+`func (o *BiosPolicyAllOf) SetCbsDbgCpuLapicMode7xx2(v string)`
+
+SetCbsDbgCpuLapicMode7xx2 sets CbsDbgCpuLapicMode7xx2 field to given value.
+
+### HasCbsDbgCpuLapicMode7xx2
+
+`func (o *BiosPolicyAllOf) HasCbsDbgCpuLapicMode7xx2() bool`
+
+HasCbsDbgCpuLapicMode7xx2 returns a boolean if a field has been set.
+
+### GetCbsDbgCpuLapicMode7xx3
+
+`func (o *BiosPolicyAllOf) GetCbsDbgCpuLapicMode7xx3() string`
+
+GetCbsDbgCpuLapicMode7xx3 returns the CbsDbgCpuLapicMode7xx3 field if non-nil, zero value otherwise.
+
+### GetCbsDbgCpuLapicMode7xx3Ok
+
+`func (o *BiosPolicyAllOf) GetCbsDbgCpuLapicMode7xx3Ok() (*string, bool)`
+
+GetCbsDbgCpuLapicMode7xx3Ok returns a tuple with the CbsDbgCpuLapicMode7xx3 field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCbsDbgCpuLapicMode7xx3
+
+`func (o *BiosPolicyAllOf) SetCbsDbgCpuLapicMode7xx3(v string)`
+
+SetCbsDbgCpuLapicMode7xx3 sets CbsDbgCpuLapicMode7xx3 field to given value.
+
+### HasCbsDbgCpuLapicMode7xx3
+
+`func (o *BiosPolicyAllOf) HasCbsDbgCpuLapicMode7xx3() bool`
+
+HasCbsDbgCpuLapicMode7xx3 returns a boolean if a field has been set.
 
 ### GetCbsDbgCpuSnpMemCover
 
@@ -1808,6 +2340,31 @@ SetCbsDbgCpuSnpMemSizeCover sets CbsDbgCpuSnpMemSizeCover field to given value.
 
 HasCbsDbgCpuSnpMemSizeCover returns a boolean if a field has been set.
 
+### GetCbsDfCmn4linkMaxXgmiSpeed
+
+`func (o *BiosPolicyAllOf) GetCbsDfCmn4linkMaxXgmiSpeed() string`
+
+GetCbsDfCmn4linkMaxXgmiSpeed returns the CbsDfCmn4linkMaxXgmiSpeed field if non-nil, zero value otherwise.
+
+### GetCbsDfCmn4linkMaxXgmiSpeedOk
+
+`func (o *BiosPolicyAllOf) GetCbsDfCmn4linkMaxXgmiSpeedOk() (*string, bool)`
+
+GetCbsDfCmn4linkMaxXgmiSpeedOk returns a tuple with the CbsDfCmn4linkMaxXgmiSpeed field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCbsDfCmn4linkMaxXgmiSpeed
+
+`func (o *BiosPolicyAllOf) SetCbsDfCmn4linkMaxXgmiSpeed(v string)`
+
+SetCbsDfCmn4linkMaxXgmiSpeed sets CbsDfCmn4linkMaxXgmiSpeed field to given value.
+
+### HasCbsDfCmn4linkMaxXgmiSpeed
+
+`func (o *BiosPolicyAllOf) HasCbsDfCmn4linkMaxXgmiSpeed() bool`
+
+HasCbsDfCmn4linkMaxXgmiSpeed returns a boolean if a field has been set.
+
 ### GetCbsDfCmnAcpiSratL3numa
 
 `func (o *BiosPolicyAllOf) GetCbsDfCmnAcpiSratL3numa() string`
@@ -1858,6 +2415,31 @@ SetCbsDfCmnDramNps sets CbsDfCmnDramNps field to given value.
 
 HasCbsDfCmnDramNps returns a boolean if a field has been set.
 
+### GetCbsDfCmnDramScrubTime
+
+`func (o *BiosPolicyAllOf) GetCbsDfCmnDramScrubTime() string`
+
+GetCbsDfCmnDramScrubTime returns the CbsDfCmnDramScrubTime field if non-nil, zero value otherwise.
+
+### GetCbsDfCmnDramScrubTimeOk
+
+`func (o *BiosPolicyAllOf) GetCbsDfCmnDramScrubTimeOk() (*string, bool)`
+
+GetCbsDfCmnDramScrubTimeOk returns a tuple with the CbsDfCmnDramScrubTime field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCbsDfCmnDramScrubTime
+
+`func (o *BiosPolicyAllOf) SetCbsDfCmnDramScrubTime(v string)`
+
+SetCbsDfCmnDramScrubTime sets CbsDfCmnDramScrubTime field to given value.
+
+### HasCbsDfCmnDramScrubTime
+
+`func (o *BiosPolicyAllOf) HasCbsDfCmnDramScrubTime() bool`
+
+HasCbsDfCmnDramScrubTime returns a boolean if a field has been set.
+
 ### GetCbsDfCmnMemIntlv
 
 `func (o *BiosPolicyAllOf) GetCbsDfCmnMemIntlv() string`
@@ -1883,6 +2465,31 @@ SetCbsDfCmnMemIntlv sets CbsDfCmnMemIntlv field to given value.
 
 HasCbsDfCmnMemIntlv returns a boolean if a field has been set.
 
+### GetCbsDfCmnMemIntlvControl
+
+`func (o *BiosPolicyAllOf) GetCbsDfCmnMemIntlvControl() string`
+
+GetCbsDfCmnMemIntlvControl returns the CbsDfCmnMemIntlvControl field if non-nil, zero value otherwise.
+
+### GetCbsDfCmnMemIntlvControlOk
+
+`func (o *BiosPolicyAllOf) GetCbsDfCmnMemIntlvControlOk() (*string, bool)`
+
+GetCbsDfCmnMemIntlvControlOk returns a tuple with the CbsDfCmnMemIntlvControl field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCbsDfCmnMemIntlvControl
+
+`func (o *BiosPolicyAllOf) SetCbsDfCmnMemIntlvControl(v string)`
+
+SetCbsDfCmnMemIntlvControl sets CbsDfCmnMemIntlvControl field to given value.
+
+### HasCbsDfCmnMemIntlvControl
+
+`func (o *BiosPolicyAllOf) HasCbsDfCmnMemIntlvControl() bool`
+
+HasCbsDfCmnMemIntlvControl returns a boolean if a field has been set.
+
 ### GetCbsDfCmnMemIntlvSize
 
 `func (o *BiosPolicyAllOf) GetCbsDfCmnMemIntlvSize() string`
@@ -1907,6 +2514,56 @@ SetCbsDfCmnMemIntlvSize sets CbsDfCmnMemIntlvSize field to given value.
 `func (o *BiosPolicyAllOf) HasCbsDfCmnMemIntlvSize() bool`
 
 HasCbsDfCmnMemIntlvSize returns a boolean if a field has been set.
+
+### GetCbsDfDbgXgmiLinkCfg
+
+`func (o *BiosPolicyAllOf) GetCbsDfDbgXgmiLinkCfg() string`
+
+GetCbsDfDbgXgmiLinkCfg returns the CbsDfDbgXgmiLinkCfg field if non-nil, zero value otherwise.
+
+### GetCbsDfDbgXgmiLinkCfgOk
+
+`func (o *BiosPolicyAllOf) GetCbsDfDbgXgmiLinkCfgOk() (*string, bool)`
+
+GetCbsDfDbgXgmiLinkCfgOk returns a tuple with the CbsDfDbgXgmiLinkCfg field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCbsDfDbgXgmiLinkCfg
+
+`func (o *BiosPolicyAllOf) SetCbsDfDbgXgmiLinkCfg(v string)`
+
+SetCbsDfDbgXgmiLinkCfg sets CbsDfDbgXgmiLinkCfg field to given value.
+
+### HasCbsDfDbgXgmiLinkCfg
+
+`func (o *BiosPolicyAllOf) HasCbsDfDbgXgmiLinkCfg() bool`
+
+HasCbsDfDbgXgmiLinkCfg returns a boolean if a field has been set.
+
+### GetCbsGnbDbgPcieTbtSupport
+
+`func (o *BiosPolicyAllOf) GetCbsGnbDbgPcieTbtSupport() string`
+
+GetCbsGnbDbgPcieTbtSupport returns the CbsGnbDbgPcieTbtSupport field if non-nil, zero value otherwise.
+
+### GetCbsGnbDbgPcieTbtSupportOk
+
+`func (o *BiosPolicyAllOf) GetCbsGnbDbgPcieTbtSupportOk() (*string, bool)`
+
+GetCbsGnbDbgPcieTbtSupportOk returns a tuple with the CbsGnbDbgPcieTbtSupport field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCbsGnbDbgPcieTbtSupport
+
+`func (o *BiosPolicyAllOf) SetCbsGnbDbgPcieTbtSupport(v string)`
+
+SetCbsGnbDbgPcieTbtSupport sets CbsGnbDbgPcieTbtSupport field to given value.
+
+### HasCbsGnbDbgPcieTbtSupport
+
+`func (o *BiosPolicyAllOf) HasCbsGnbDbgPcieTbtSupport() bool`
+
+HasCbsGnbDbgPcieTbtSupport returns a boolean if a field has been set.
 
 ### GetCbsSevSnpSupport
 
@@ -2532,6 +3189,31 @@ SetDemandScrub sets DemandScrub field to given value.
 `func (o *BiosPolicyAllOf) HasDemandScrub() bool`
 
 HasDemandScrub returns a boolean if a field has been set.
+
+### GetDfxOsbEn
+
+`func (o *BiosPolicyAllOf) GetDfxOsbEn() string`
+
+GetDfxOsbEn returns the DfxOsbEn field if non-nil, zero value otherwise.
+
+### GetDfxOsbEnOk
+
+`func (o *BiosPolicyAllOf) GetDfxOsbEnOk() (*string, bool)`
+
+GetDfxOsbEnOk returns a tuple with the DfxOsbEn field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDfxOsbEn
+
+`func (o *BiosPolicyAllOf) SetDfxOsbEn(v string)`
+
+SetDfxOsbEn sets DfxOsbEn field to given value.
+
+### HasDfxOsbEn
+
+`func (o *BiosPolicyAllOf) HasDfxOsbEn() bool`
+
+HasDfxOsbEn returns a boolean if a field has been set.
 
 ### GetDirectCacheAccess
 
@@ -3483,6 +4165,31 @@ SetIntelVtdatsSupport sets IntelVtdatsSupport field to given value.
 
 HasIntelVtdatsSupport returns a boolean if a field has been set.
 
+### GetIoatConfigCpm
+
+`func (o *BiosPolicyAllOf) GetIoatConfigCpm() string`
+
+GetIoatConfigCpm returns the IoatConfigCpm field if non-nil, zero value otherwise.
+
+### GetIoatConfigCpmOk
+
+`func (o *BiosPolicyAllOf) GetIoatConfigCpmOk() (*string, bool)`
+
+GetIoatConfigCpmOk returns a tuple with the IoatConfigCpm field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIoatConfigCpm
+
+`func (o *BiosPolicyAllOf) SetIoatConfigCpm(v string)`
+
+SetIoatConfigCpm sets IoatConfigCpm field to given value.
+
+### HasIoatConfigCpm
+
+`func (o *BiosPolicyAllOf) HasIoatConfigCpm() bool`
+
+HasIoatConfigCpm returns a boolean if a field has been set.
+
 ### GetIohErrorEnable
 
 `func (o *BiosPolicyAllOf) GetIohErrorEnable() string`
@@ -4157,6 +4864,56 @@ SetMmcfgBase sets MmcfgBase field to given value.
 `func (o *BiosPolicyAllOf) HasMmcfgBase() bool`
 
 HasMmcfgBase returns a boolean if a field has been set.
+
+### GetMmiohBase
+
+`func (o *BiosPolicyAllOf) GetMmiohBase() string`
+
+GetMmiohBase returns the MmiohBase field if non-nil, zero value otherwise.
+
+### GetMmiohBaseOk
+
+`func (o *BiosPolicyAllOf) GetMmiohBaseOk() (*string, bool)`
+
+GetMmiohBaseOk returns a tuple with the MmiohBase field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMmiohBase
+
+`func (o *BiosPolicyAllOf) SetMmiohBase(v string)`
+
+SetMmiohBase sets MmiohBase field to given value.
+
+### HasMmiohBase
+
+`func (o *BiosPolicyAllOf) HasMmiohBase() bool`
+
+HasMmiohBase returns a boolean if a field has been set.
+
+### GetMmiohSize
+
+`func (o *BiosPolicyAllOf) GetMmiohSize() string`
+
+GetMmiohSize returns the MmiohSize field if non-nil, zero value otherwise.
+
+### GetMmiohSizeOk
+
+`func (o *BiosPolicyAllOf) GetMmiohSizeOk() (*string, bool)`
+
+GetMmiohSizeOk returns a tuple with the MmiohSize field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMmiohSize
+
+`func (o *BiosPolicyAllOf) SetMmiohSize(v string)`
+
+SetMmiohSize sets MmiohSize field to given value.
+
+### HasMmiohSize
+
+`func (o *BiosPolicyAllOf) HasMmiohSize() bool`
+
+HasMmiohSize returns a boolean if a field has been set.
 
 ### GetNetworkStack
 
@@ -5858,6 +6615,56 @@ SetRedirectionAfterPost sets RedirectionAfterPost field to given value.
 
 HasRedirectionAfterPost returns a boolean if a field has been set.
 
+### GetResizeBarSupport
+
+`func (o *BiosPolicyAllOf) GetResizeBarSupport() string`
+
+GetResizeBarSupport returns the ResizeBarSupport field if non-nil, zero value otherwise.
+
+### GetResizeBarSupportOk
+
+`func (o *BiosPolicyAllOf) GetResizeBarSupportOk() (*string, bool)`
+
+GetResizeBarSupportOk returns a tuple with the ResizeBarSupport field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetResizeBarSupport
+
+`func (o *BiosPolicyAllOf) SetResizeBarSupport(v string)`
+
+SetResizeBarSupport sets ResizeBarSupport field to given value.
+
+### HasResizeBarSupport
+
+`func (o *BiosPolicyAllOf) HasResizeBarSupport() bool`
+
+HasResizeBarSupport returns a boolean if a field has been set.
+
+### GetRuntimePostPackageRepair
+
+`func (o *BiosPolicyAllOf) GetRuntimePostPackageRepair() string`
+
+GetRuntimePostPackageRepair returns the RuntimePostPackageRepair field if non-nil, zero value otherwise.
+
+### GetRuntimePostPackageRepairOk
+
+`func (o *BiosPolicyAllOf) GetRuntimePostPackageRepairOk() (*string, bool)`
+
+GetRuntimePostPackageRepairOk returns a tuple with the RuntimePostPackageRepair field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRuntimePostPackageRepair
+
+`func (o *BiosPolicyAllOf) SetRuntimePostPackageRepair(v string)`
+
+SetRuntimePostPackageRepair sets RuntimePostPackageRepair field to given value.
+
+### HasRuntimePostPackageRepair
+
+`func (o *BiosPolicyAllOf) HasRuntimePostPackageRepair() bool`
+
+HasRuntimePostPackageRepair returns a boolean if a field has been set.
+
 ### GetSataModeSelect
 
 `func (o *BiosPolicyAllOf) GetSataModeSelect() string`
@@ -5932,6 +6739,31 @@ SetSelectPprType sets SelectPprType field to given value.
 `func (o *BiosPolicyAllOf) HasSelectPprType() bool`
 
 HasSelectPprType returns a boolean if a field has been set.
+
+### GetSerialMux
+
+`func (o *BiosPolicyAllOf) GetSerialMux() string`
+
+GetSerialMux returns the SerialMux field if non-nil, zero value otherwise.
+
+### GetSerialMuxOk
+
+`func (o *BiosPolicyAllOf) GetSerialMuxOk() (*string, bool)`
+
+GetSerialMuxOk returns a tuple with the SerialMux field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSerialMux
+
+`func (o *BiosPolicyAllOf) SetSerialMux(v string)`
+
+SetSerialMux sets SerialMux field to given value.
+
+### HasSerialMux
+
+`func (o *BiosPolicyAllOf) HasSerialMux() bool`
+
+HasSerialMux returns a boolean if a field has been set.
 
 ### GetSerialPortAenable
 

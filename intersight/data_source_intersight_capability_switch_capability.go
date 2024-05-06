@@ -158,20 +158,110 @@ func getCapabilitySwitchCapabilitySchema() map[string]*schema.Schema {
 			Type:        schema.TypeInt,
 			Optional:    true,
 		},
-		"min_version_with_breakout_support": {
+		"min_version_map_with_breakout_support": {
 			Description: "Minimum firmware version supported for breakout ports on this switch.",
-			Type:        schema.TypeString,
+			Type:        schema.TypeList,
+			MaxItems:    1,
 			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"bundle_version": {
+						Description: "Bundle version. Usually the first released bundle containing the specific device firmware version.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"device_firmware_version": {
+						Description: "Bundled device firmware version.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
 		},
-		"min_version_with_locator_led_support": {
+		"min_version_map_with_locator_led_support": {
 			Description: "Minimum firmware version supported for locator leds on this switch.",
-			Type:        schema.TypeString,
+			Type:        schema.TypeList,
+			MaxItems:    1,
 			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"bundle_version": {
+						Description: "Bundle version. Usually the first released bundle containing the specific device firmware version.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"device_firmware_version": {
+						Description: "Bundled device firmware version.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
 		},
-		"min_version_with_neg_auto25g": {
+		"min_version_map_with_neg_auto25g_support": {
 			Description: "Minimum firmware version supported for 'negotiate auto 25000' port admin speed on this switch.",
-			Type:        schema.TypeString,
+			Type:        schema.TypeList,
+			MaxItems:    1,
 			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"bundle_version": {
+						Description: "Bundle version. Usually the first released bundle containing the specific device firmware version.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"device_firmware_version": {
+						Description: "Bundled device firmware version.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
 		},
 		"mod_time": {
 			Description: "The time when this managed object was last modified.",
@@ -1279,19 +1369,97 @@ func dataSourceCapabilitySwitchCapabilityRead(c context.Context, d *schema.Resou
 		o.SetMaxSlots(x)
 	}
 
-	if v, ok := d.GetOk("min_version_with_breakout_support"); ok {
-		x := (v.(string))
-		o.SetMinVersionWithBreakoutSupport(x)
+	if v, ok := d.GetOk("min_version_map_with_breakout_support"); ok {
+		p := make([]models.FirmwareVersionMap, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.FirmwareVersionMap{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("firmware.VersionMap")
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			p = append(p, *o)
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetMinVersionMapWithBreakoutSupport(x)
+		}
 	}
 
-	if v, ok := d.GetOk("min_version_with_locator_led_support"); ok {
-		x := (v.(string))
-		o.SetMinVersionWithLocatorLedSupport(x)
+	if v, ok := d.GetOk("min_version_map_with_locator_led_support"); ok {
+		p := make([]models.FirmwareVersionMap, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.FirmwareVersionMap{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("firmware.VersionMap")
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			p = append(p, *o)
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetMinVersionMapWithLocatorLedSupport(x)
+		}
 	}
 
-	if v, ok := d.GetOk("min_version_with_neg_auto25g"); ok {
-		x := (v.(string))
-		o.SetMinVersionWithNegAuto25g(x)
+	if v, ok := d.GetOk("min_version_map_with_neg_auto25g_support"); ok {
+		p := make([]models.FirmwareVersionMap, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.FirmwareVersionMap{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("firmware.VersionMap")
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			p = append(p, *o)
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetMinVersionMapWithNegAuto25gSupport(x)
+		}
 	}
 
 	if v, ok := d.GetOk("mod_time"); ok {
@@ -2405,9 +2573,12 @@ func dataSourceCapabilitySwitchCapabilityRead(c context.Context, d *schema.Resou
 				temp["locator_beacon_supported"] = (s.GetLocatorBeaconSupported())
 				temp["max_ports"] = (s.GetMaxPorts())
 				temp["max_slots"] = (s.GetMaxSlots())
-				temp["min_version_with_breakout_support"] = (s.GetMinVersionWithBreakoutSupport())
-				temp["min_version_with_locator_led_support"] = (s.GetMinVersionWithLocatorLedSupport())
-				temp["min_version_with_neg_auto25g"] = (s.GetMinVersionWithNegAuto25g())
+
+				temp["min_version_map_with_breakout_support"] = flattenMapFirmwareVersionMap(s.GetMinVersionMapWithBreakoutSupport(), d)
+
+				temp["min_version_map_with_locator_led_support"] = flattenMapFirmwareVersionMap(s.GetMinVersionMapWithLocatorLedSupport(), d)
+
+				temp["min_version_map_with_neg_auto25g_support"] = flattenMapFirmwareVersionMap(s.GetMinVersionMapWithNegAuto25gSupport(), d)
 
 				temp["mod_time"] = (s.GetModTime()).String()
 				temp["moid"] = (s.GetMoid())

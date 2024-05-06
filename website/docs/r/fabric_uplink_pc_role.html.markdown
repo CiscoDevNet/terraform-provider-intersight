@@ -14,6 +14,7 @@ Object sent by user to configure a ethernet uplink port-channel on the collectio
 
 ```hcl
 resource "intersight_fabric_uplink_pc_role" "fabric_uplink_pc_role1" {
+  pc_id               = 100
   ports {
     port_id           = 1
     aggregate_port_id = 0
@@ -40,6 +41,7 @@ variable "fabric_port_policy" {
   description = "Fabric port policy Moid"
 }
 ```
+
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(ReadOnly) The Account ID for this managed object. 

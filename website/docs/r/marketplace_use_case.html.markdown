@@ -17,34 +17,34 @@ This complex property has following sub-properties:
   + `moid`:(string) The Moid of the referenced REST resource. 
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
   + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
+* `catalog`:(HashMap) - A reference to a workflowCatalog resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
+This complex property has following sub-properties:
+  + `moid`:(string) The Moid of the referenced REST resource. 
+  + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
+  + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
 * `create_time`:(string)(ReadOnly) The time when this managed object was created. 
 * `dependencies`:(Array)
 This complex property has following sub-properties:
-  + `name`:(string) The string field to hold the key name 
+  + `name`:(string) The string field to hold the key name. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
-  + `nr_version`:(string) The string field to hold the value 
+  + `nr_version`:(string) The string field to hold the value. 
 * `domain_group_moid`:(string)(ReadOnly) The DomainGroup ID for this managed object. 
 * `locales`:(Array)
 This complex property has following sub-properties:
   + `automations`:(Array)
 This complex property has following sub-properties:
-    + `description`:(string) A description for the automation 
-    + `name`:(string) A name for the automation 
+    + `description`:(string) A description for the automation. 
+    + `name`:(string) A name for the automation. 
     + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
-  + `contents`:(string) The string field to hold the contents value 
-  + `description`:(string) The string field to hold the description value 
-  + `icon`:(string) A base64-encoded image for the use case 
-  + `locale`:(string) The string field to hold the locale 
-  + `name`:(string) The string field to hold the name value 
+  + `contents`:(string) The string field to hold the contents value. 
+  + `description`:(string) The string field to hold the description value. 
+  + `icon`:(string) A base64-encoded image for the use case. 
+  + `locale`:(string) The string field to hold the locale. 
+  + `name`:(string) The string field to hold the name value. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
-  + `summary`:(string) The string field to hold the summary value 
+  + `summary`:(string) The string field to hold the summary value. 
 * `mod_time`:(string)(ReadOnly) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
-* `organization`:(HashMap) - A reference to a organizationOrganization resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
-This complex property has following sub-properties:
-  + `moid`:(string) The Moid of the referenced REST resource. 
-  + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
-  + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
 * `owners`:
                 (Array of schema.TypeString) -(ReadOnly)
 * `parent`:(HashMap) -(ReadOnly) A reference to a moBaseMo resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
@@ -62,6 +62,7 @@ This complex property has following sub-properties:
 This complex property has following sub-properties:
   + `key`:(string) The string representation of a tag key. 
   + `value`:(string) The string representation of a tag value. 
+* `unique_name`:(string) A unique identifier is used to prevent duplicates. 
 * `version_context`:(HashMap) -(ReadOnly) The versioning info for this managed object. 
 This complex property has following sub-properties:
   + `interested_mos`:(Array)

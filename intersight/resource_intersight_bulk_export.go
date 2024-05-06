@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
+	"reflect"
 	"regexp"
 	"strings"
 
@@ -113,6 +114,19 @@ func resourceBulkExport() *schema.Resource {
 					}
 					return
 				}},
+			"exclude_peers": {
+				Type:       schema.TypeList,
+				Optional:   true,
+				ConfigMode: schema.SchemaConfigModeAttr,
+				Computed:   true,
+				Elem: &schema.Schema{
+					Type: schema.TypeString,
+				}},
+			"exclude_relations": {
+				Description: "Used to specify that none of the relationships should be exported.",
+				Type:        schema.TypeBool,
+				Optional:    true,
+			},
 			"export_tags": {
 				Description: "Specifies whether tags must be exported and will be considered for all the items MOs.",
 				Type:        schema.TypeBool,
@@ -209,6 +223,11 @@ func resourceBulkExport() *schema.Resource {
 					}
 					return
 				}},
+			"include_org_identity": {
+				Description: "Indicates that exported references for objects which are organization owned should include the organization reference along with the other identity properties.",
+				Type:        schema.TypeBool,
+				Optional:    true,
+			},
 			"items": {
 				Type:       schema.TypeList,
 				Optional:   true,
@@ -665,6 +684,24 @@ func resourceBulkExportCreate(c context.Context, d *schema.ResourceData, meta in
 
 	o.SetClassId("bulk.Export")
 
+	if v, ok := d.GetOk("exclude_peers"); ok {
+		x := make([]string, 0)
+		y := reflect.ValueOf(v)
+		for i := 0; i < y.Len(); i++ {
+			if y.Index(i).Interface() != nil {
+				x = append(x, y.Index(i).Interface().(string))
+			}
+		}
+		if len(x) > 0 {
+			o.SetExcludePeers(x)
+		}
+	}
+
+	if v, ok := d.GetOkExists("exclude_relations"); ok {
+		x := (v.(bool))
+		o.SetExcludeRelations(x)
+	}
+
 	if v, ok := d.GetOkExists("export_tags"); ok {
 		x := (v.(bool))
 		o.SetExportTags(x)
@@ -710,6 +747,11 @@ func resourceBulkExportCreate(c context.Context, d *schema.ResourceData, meta in
 		if len(x) > 0 {
 			o.SetExportedObjects(x)
 		}
+	}
+
+	if v, ok := d.GetOkExists("include_org_identity"); ok {
+		x := (v.(bool))
+		o.SetIncludeOrgIdentity(x)
 	}
 
 	if v, ok := d.GetOk("items"); ok {
@@ -907,6 +949,14 @@ func resourceBulkExportRead(c context.Context, d *schema.ResourceData, meta inte
 		return diag.Errorf("error occurred while setting property DomainGroupMoid in BulkExport object: %s", err.Error())
 	}
 
+	if err := d.Set("exclude_peers", (s.GetExcludePeers())); err != nil {
+		return diag.Errorf("error occurred while setting property ExcludePeers in BulkExport object: %s", err.Error())
+	}
+
+	if err := d.Set("exclude_relations", (s.GetExcludeRelations())); err != nil {
+		return diag.Errorf("error occurred while setting property ExcludeRelations in BulkExport object: %s", err.Error())
+	}
+
 	if err := d.Set("export_tags", (s.GetExportTags())); err != nil {
 		return diag.Errorf("error occurred while setting property ExportTags in BulkExport object: %s", err.Error())
 	}
@@ -921,6 +971,10 @@ func resourceBulkExportRead(c context.Context, d *schema.ResourceData, meta inte
 
 	if err := d.Set("import_order", flattenAdditionalProperties(s.GetImportOrder())); err != nil {
 		return diag.Errorf("error occurred while setting property ImportOrder in BulkExport object: %s", err.Error())
+	}
+
+	if err := d.Set("include_org_identity", (s.GetIncludeOrgIdentity())); err != nil {
+		return diag.Errorf("error occurred while setting property IncludeOrgIdentity in BulkExport object: %s", err.Error())
 	}
 
 	if err := d.Set("items", flattenListMoMoRef(s.GetItems(), d)); err != nil {
@@ -1016,6 +1070,24 @@ func resourceBulkExportUpdate(c context.Context, d *schema.ResourceData, meta in
 
 	o.SetClassId("bulk.Export")
 
+	if d.HasChange("exclude_peers") {
+		v := d.Get("exclude_peers")
+		x := make([]string, 0)
+		y := reflect.ValueOf(v)
+		for i := 0; i < y.Len(); i++ {
+			if y.Index(i).Interface() != nil {
+				x = append(x, y.Index(i).Interface().(string))
+			}
+		}
+		o.SetExcludePeers(x)
+	}
+
+	if d.HasChange("exclude_relations") {
+		v := d.Get("exclude_relations")
+		x := (v.(bool))
+		o.SetExcludeRelations(x)
+	}
+
 	if d.HasChange("export_tags") {
 		v := d.Get("export_tags")
 		x := (v.(bool))
@@ -1061,6 +1133,12 @@ func resourceBulkExportUpdate(c context.Context, d *schema.ResourceData, meta in
 			x = append(x, *o)
 		}
 		o.SetExportedObjects(x)
+	}
+
+	if d.HasChange("include_org_identity") {
+		v := d.Get("include_org_identity")
+		x := (v.(bool))
+		o.SetIncludeOrgIdentity(x)
 	}
 
 	if d.HasChange("items") {

@@ -251,7 +251,7 @@ func getFabricConfigResultSchema() map[string]*schema.Schema {
 			},
 		},
 		"profile": {
-			Description: "A reference to a fabricSwitchProfile resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+			Description: "A reference to a fabricBaseSwitchProfile resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 			Type:        schema.TypeList,
 			MaxItems:    1,
 			Optional:    true,
@@ -735,7 +735,7 @@ func dataSourceFabricConfigResultRead(c context.Context, d *schema.ResourceData,
 	}
 
 	if v, ok := d.GetOk("profile"); ok {
-		p := make([]models.FabricSwitchProfileRelationship, 0, 1)
+		p := make([]models.FabricBaseSwitchProfileRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
 			l := s[i].(map[string]interface{})
@@ -769,7 +769,7 @@ func dataSourceFabricConfigResultRead(c context.Context, d *schema.ResourceData,
 					o.SetSelector(x)
 				}
 			}
-			p = append(p, models.MoMoRefAsFabricSwitchProfileRelationship(o))
+			p = append(p, models.MoMoRefAsFabricBaseSwitchProfileRelationship(o))
 		}
 		if len(p) > 0 {
 			x := p[0]
@@ -991,7 +991,7 @@ func dataSourceFabricConfigResultRead(c context.Context, d *schema.ResourceData,
 
 				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
 
-				temp["profile"] = flattenMapFabricSwitchProfileRelationship(s.GetProfile(), d)
+				temp["profile"] = flattenMapFabricBaseSwitchProfileRelationship(s.GetProfile(), d)
 
 				temp["result_entries"] = flattenListFabricConfigResultEntryRelationship(s.GetResultEntries(), d)
 				temp["shared_scope"] = (s.GetSharedScope())

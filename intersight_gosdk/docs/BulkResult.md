@@ -6,13 +6,17 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "bulk.Result"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "bulk.Result"]
-**CompletionTime** | Pointer to **time.Time** | The timestamp in UTC when the request processing completed. | [optional] [readonly] 
+**ActionOnError** | Pointer to **string** | The action that will be performed when an error occurs during processing of the request. * &#x60;Stop&#x60; - Stop the processing of the request after the first error. * &#x60;Proceed&#x60; - Proceed with the processing of the request even when an error occurs. | [optional] [readonly] [default to "Stop"]
+**CompletionTime** | Pointer to **time.Time** | The timestamp in UTC when the request processing is completed. | [optional] [readonly] 
 **NumSubRequests** | Pointer to **int64** | The number of subrequests received in this request. | [optional] [readonly] 
+**Request** | Pointer to **interface{}** | The individual request to be executed asynchronously. | [optional] 
 **RequestReceivedTime** | Pointer to **time.Time** | The timestamp in UTC when the request was received. | [optional] [readonly] 
-**Status** | Pointer to **string** | The processing status of the request. * &#x60;NotStarted&#x60; - Indicates that the request processing has not begun yet. * &#x60;ObjPresenceCheckInProgress&#x60; - Indicates that the object presence check is in progress for this request. * &#x60;ObjPresenceCheckComplete&#x60; - Indicates that the object presence check is complete. * &#x60;ExecutionInProgress&#x60; - Indicates that the request processing is in progress. * &#x60;Completed&#x60; - Indicates that the request processing has been completed successfully. * &#x60;Failed&#x60; - Indicates that the processing of this request failed. * &#x60;TimedOut&#x60; - Indicates that the request processing timed out. | [optional] [readonly] [default to "NotStarted"]
+**Status** | Pointer to **string** | The processing status of the request. * &#x60;NotStarted&#x60; - Indicates that the request processing has not begun yet. * &#x60;ObjPresenceCheckInProgress&#x60; - Indicates that the object presence check is in progress for this request. * &#x60;ObjPresenceCheckComplete&#x60; - Indicates that the object presence check is complete. * &#x60;ExecutionInProgress&#x60; - Indicates that the request processing is in progress. * &#x60;Completed&#x60; - Indicates that the request processing has been completed successfully. * &#x60;CompletedWithErrors&#x60; - Indicates that the request processing has one or more failed subrequests. * &#x60;Failed&#x60; - Indicates that the processing of this request failed. * &#x60;TimedOut&#x60; - Indicates that the request processing timed out. | [optional] [readonly] [default to "NotStarted"]
 **StatusMessage** | Pointer to **string** | The status message shows the error details in human readable format when the request goes to failed state. No additional information is shown for success case. | [optional] [readonly] 
 **Uri** | Pointer to **string** | The URI on which this async operation is being performed. | [optional] [readonly] 
+**MoCloner** | Pointer to [**BulkMoClonerRelationship**](BulkMoClonerRelationship.md) |  | [optional] 
 **MoDeepCloner** | Pointer to [**BulkMoDeepClonerRelationship**](BulkMoDeepClonerRelationship.md) |  | [optional] 
+**MoMerger** | Pointer to [**BulkMoMergerRelationship**](BulkMoMergerRelationship.md) |  | [optional] 
 **Organization** | Pointer to [**OrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
 **Results** | Pointer to [**[]BulkSubRequestObjRelationship**](BulkSubRequestObjRelationship.md) | An array of relationships to bulkSubRequestObj resources. | [optional] [readonly] 
 **WorkflowInfo** | Pointer to [**WorkflowWorkflowInfoRelationship**](WorkflowWorkflowInfoRelationship.md) |  | [optional] 
@@ -76,6 +80,31 @@ and a boolean to check if the value has been set.
 SetObjectType sets ObjectType field to given value.
 
 
+### GetActionOnError
+
+`func (o *BulkResult) GetActionOnError() string`
+
+GetActionOnError returns the ActionOnError field if non-nil, zero value otherwise.
+
+### GetActionOnErrorOk
+
+`func (o *BulkResult) GetActionOnErrorOk() (*string, bool)`
+
+GetActionOnErrorOk returns a tuple with the ActionOnError field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetActionOnError
+
+`func (o *BulkResult) SetActionOnError(v string)`
+
+SetActionOnError sets ActionOnError field to given value.
+
+### HasActionOnError
+
+`func (o *BulkResult) HasActionOnError() bool`
+
+HasActionOnError returns a boolean if a field has been set.
+
 ### GetCompletionTime
 
 `func (o *BulkResult) GetCompletionTime() time.Time`
@@ -126,6 +155,41 @@ SetNumSubRequests sets NumSubRequests field to given value.
 
 HasNumSubRequests returns a boolean if a field has been set.
 
+### GetRequest
+
+`func (o *BulkResult) GetRequest() interface{}`
+
+GetRequest returns the Request field if non-nil, zero value otherwise.
+
+### GetRequestOk
+
+`func (o *BulkResult) GetRequestOk() (*interface{}, bool)`
+
+GetRequestOk returns a tuple with the Request field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRequest
+
+`func (o *BulkResult) SetRequest(v interface{})`
+
+SetRequest sets Request field to given value.
+
+### HasRequest
+
+`func (o *BulkResult) HasRequest() bool`
+
+HasRequest returns a boolean if a field has been set.
+
+### SetRequestNil
+
+`func (o *BulkResult) SetRequestNil(b bool)`
+
+ SetRequestNil sets the value for Request to be an explicit nil
+
+### UnsetRequest
+`func (o *BulkResult) UnsetRequest()`
+
+UnsetRequest ensures that no value is present for Request, not even an explicit nil
 ### GetRequestReceivedTime
 
 `func (o *BulkResult) GetRequestReceivedTime() time.Time`
@@ -226,6 +290,31 @@ SetUri sets Uri field to given value.
 
 HasUri returns a boolean if a field has been set.
 
+### GetMoCloner
+
+`func (o *BulkResult) GetMoCloner() BulkMoClonerRelationship`
+
+GetMoCloner returns the MoCloner field if non-nil, zero value otherwise.
+
+### GetMoClonerOk
+
+`func (o *BulkResult) GetMoClonerOk() (*BulkMoClonerRelationship, bool)`
+
+GetMoClonerOk returns a tuple with the MoCloner field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMoCloner
+
+`func (o *BulkResult) SetMoCloner(v BulkMoClonerRelationship)`
+
+SetMoCloner sets MoCloner field to given value.
+
+### HasMoCloner
+
+`func (o *BulkResult) HasMoCloner() bool`
+
+HasMoCloner returns a boolean if a field has been set.
+
 ### GetMoDeepCloner
 
 `func (o *BulkResult) GetMoDeepCloner() BulkMoDeepClonerRelationship`
@@ -250,6 +339,31 @@ SetMoDeepCloner sets MoDeepCloner field to given value.
 `func (o *BulkResult) HasMoDeepCloner() bool`
 
 HasMoDeepCloner returns a boolean if a field has been set.
+
+### GetMoMerger
+
+`func (o *BulkResult) GetMoMerger() BulkMoMergerRelationship`
+
+GetMoMerger returns the MoMerger field if non-nil, zero value otherwise.
+
+### GetMoMergerOk
+
+`func (o *BulkResult) GetMoMergerOk() (*BulkMoMergerRelationship, bool)`
+
+GetMoMergerOk returns a tuple with the MoMerger field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMoMerger
+
+`func (o *BulkResult) SetMoMerger(v BulkMoMergerRelationship)`
+
+SetMoMerger sets MoMerger field to given value.
+
+### HasMoMerger
+
+`func (o *BulkResult) HasMoMerger() bool`
+
+HasMoMerger returns a boolean if a field has been set.
 
 ### GetOrganization
 

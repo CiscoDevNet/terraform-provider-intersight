@@ -19,8 +19,13 @@ resource "intersight_fabric_uplink_role" "fabric_uplink_role1" {
   slot_id           = 4
   admin_speed       = "Auto"
   fec               = "Auto"
+  port_policy {
+    moid        = intersight_fabric_port_policy.fabric_port_policy1.moid
+    object_type = "fabric.PortPolicy"
+  }
 }
 ```
+
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(ReadOnly) The Account ID for this managed object. 

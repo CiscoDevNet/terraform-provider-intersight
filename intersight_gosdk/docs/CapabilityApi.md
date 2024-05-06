@@ -31,6 +31,7 @@ Method | HTTP request | Description
 [**CreateCapabilitySiocModuleManufacturingDef**](CapabilityApi.md#CreateCapabilitySiocModuleManufacturingDef) | **Post** /api/v1/capability/SiocModuleManufacturingDefs | Create a &#39;capability.SiocModuleManufacturingDef&#39; resource.
 [**CreateCapabilitySwitchCapability**](CapabilityApi.md#CreateCapabilitySwitchCapability) | **Post** /api/v1/capability/SwitchCapabilities | Create a &#39;capability.SwitchCapability&#39; resource.
 [**CreateCapabilitySwitchDescriptor**](CapabilityApi.md#CreateCapabilitySwitchDescriptor) | **Post** /api/v1/capability/SwitchDescriptors | Create a &#39;capability.SwitchDescriptor&#39; resource.
+[**CreateCapabilitySwitchEquipmentInfo**](CapabilityApi.md#CreateCapabilitySwitchEquipmentInfo) | **Post** /api/v1/capability/SwitchEquipmentInfos | Create a &#39;capability.SwitchEquipmentInfo&#39; resource.
 [**CreateCapabilitySwitchManufacturingDef**](CapabilityApi.md#CreateCapabilitySwitchManufacturingDef) | **Post** /api/v1/capability/SwitchManufacturingDefs | Create a &#39;capability.SwitchManufacturingDef&#39; resource.
 [**DeleteCapabilityActionsMetaData**](CapabilityApi.md#DeleteCapabilityActionsMetaData) | **Delete** /api/v1/capability/ActionsMetaData/{Moid} | Delete a &#39;capability.ActionsMetaData&#39; resource.
 [**DeleteCapabilityAdapterDeprecatedDef**](CapabilityApi.md#DeleteCapabilityAdapterDeprecatedDef) | **Delete** /api/v1/capability/AdapterDeprecatedDefs/{Moid} | Delete a &#39;capability.AdapterDeprecatedDef&#39; resource.
@@ -59,6 +60,7 @@ Method | HTTP request | Description
 [**DeleteCapabilitySiocModuleManufacturingDef**](CapabilityApi.md#DeleteCapabilitySiocModuleManufacturingDef) | **Delete** /api/v1/capability/SiocModuleManufacturingDefs/{Moid} | Delete a &#39;capability.SiocModuleManufacturingDef&#39; resource.
 [**DeleteCapabilitySwitchCapability**](CapabilityApi.md#DeleteCapabilitySwitchCapability) | **Delete** /api/v1/capability/SwitchCapabilities/{Moid} | Delete a &#39;capability.SwitchCapability&#39; resource.
 [**DeleteCapabilitySwitchDescriptor**](CapabilityApi.md#DeleteCapabilitySwitchDescriptor) | **Delete** /api/v1/capability/SwitchDescriptors/{Moid} | Delete a &#39;capability.SwitchDescriptor&#39; resource.
+[**DeleteCapabilitySwitchEquipmentInfo**](CapabilityApi.md#DeleteCapabilitySwitchEquipmentInfo) | **Delete** /api/v1/capability/SwitchEquipmentInfos/{Moid} | Delete a &#39;capability.SwitchEquipmentInfo&#39; resource.
 [**DeleteCapabilitySwitchManufacturingDef**](CapabilityApi.md#DeleteCapabilitySwitchManufacturingDef) | **Delete** /api/v1/capability/SwitchManufacturingDefs/{Moid} | Delete a &#39;capability.SwitchManufacturingDef&#39; resource.
 [**GetCapabilityActionsMetaDataByMoid**](CapabilityApi.md#GetCapabilityActionsMetaDataByMoid) | **Get** /api/v1/capability/ActionsMetaData/{Moid} | Read a &#39;capability.ActionsMetaData&#39; resource.
 [**GetCapabilityActionsMetaDataList**](CapabilityApi.md#GetCapabilityActionsMetaDataList) | **Get** /api/v1/capability/ActionsMetaData | Read a &#39;capability.ActionsMetaData&#39; resource.
@@ -140,8 +142,12 @@ Method | HTTP request | Description
 [**GetCapabilitySwitchCapabilityList**](CapabilityApi.md#GetCapabilitySwitchCapabilityList) | **Get** /api/v1/capability/SwitchCapabilities | Read a &#39;capability.SwitchCapability&#39; resource.
 [**GetCapabilitySwitchDescriptorByMoid**](CapabilityApi.md#GetCapabilitySwitchDescriptorByMoid) | **Get** /api/v1/capability/SwitchDescriptors/{Moid} | Read a &#39;capability.SwitchDescriptor&#39; resource.
 [**GetCapabilitySwitchDescriptorList**](CapabilityApi.md#GetCapabilitySwitchDescriptorList) | **Get** /api/v1/capability/SwitchDescriptors | Read a &#39;capability.SwitchDescriptor&#39; resource.
+[**GetCapabilitySwitchEquipmentInfoByMoid**](CapabilityApi.md#GetCapabilitySwitchEquipmentInfoByMoid) | **Get** /api/v1/capability/SwitchEquipmentInfos/{Moid} | Read a &#39;capability.SwitchEquipmentInfo&#39; resource.
+[**GetCapabilitySwitchEquipmentInfoList**](CapabilityApi.md#GetCapabilitySwitchEquipmentInfoList) | **Get** /api/v1/capability/SwitchEquipmentInfos | Read a &#39;capability.SwitchEquipmentInfo&#39; resource.
 [**GetCapabilitySwitchManufacturingDefByMoid**](CapabilityApi.md#GetCapabilitySwitchManufacturingDefByMoid) | **Get** /api/v1/capability/SwitchManufacturingDefs/{Moid} | Read a &#39;capability.SwitchManufacturingDef&#39; resource.
 [**GetCapabilitySwitchManufacturingDefList**](CapabilityApi.md#GetCapabilitySwitchManufacturingDefList) | **Get** /api/v1/capability/SwitchManufacturingDefs | Read a &#39;capability.SwitchManufacturingDef&#39; resource.
+[**GetCapabilityTemplateCatalogByMoid**](CapabilityApi.md#GetCapabilityTemplateCatalogByMoid) | **Get** /api/v1/capability/TemplateCatalogs/{Moid} | Read a &#39;capability.TemplateCatalog&#39; resource.
+[**GetCapabilityTemplateCatalogList**](CapabilityApi.md#GetCapabilityTemplateCatalogList) | **Get** /api/v1/capability/TemplateCatalogs | Read a &#39;capability.TemplateCatalog&#39; resource.
 [**PatchCapabilityActionsMetaData**](CapabilityApi.md#PatchCapabilityActionsMetaData) | **Patch** /api/v1/capability/ActionsMetaData/{Moid} | Update a &#39;capability.ActionsMetaData&#39; resource.
 [**PatchCapabilityAdapterDeprecatedDef**](CapabilityApi.md#PatchCapabilityAdapterDeprecatedDef) | **Patch** /api/v1/capability/AdapterDeprecatedDefs/{Moid} | Update a &#39;capability.AdapterDeprecatedDef&#39; resource.
 [**PatchCapabilityAdapterUnitDescriptor**](CapabilityApi.md#PatchCapabilityAdapterUnitDescriptor) | **Patch** /api/v1/capability/AdapterUnitDescriptors/{Moid} | Update a &#39;capability.AdapterUnitDescriptor&#39; resource.
@@ -170,6 +176,7 @@ Method | HTTP request | Description
 [**PatchCapabilitySiocModuleManufacturingDef**](CapabilityApi.md#PatchCapabilitySiocModuleManufacturingDef) | **Patch** /api/v1/capability/SiocModuleManufacturingDefs/{Moid} | Update a &#39;capability.SiocModuleManufacturingDef&#39; resource.
 [**PatchCapabilitySwitchCapability**](CapabilityApi.md#PatchCapabilitySwitchCapability) | **Patch** /api/v1/capability/SwitchCapabilities/{Moid} | Update a &#39;capability.SwitchCapability&#39; resource.
 [**PatchCapabilitySwitchDescriptor**](CapabilityApi.md#PatchCapabilitySwitchDescriptor) | **Patch** /api/v1/capability/SwitchDescriptors/{Moid} | Update a &#39;capability.SwitchDescriptor&#39; resource.
+[**PatchCapabilitySwitchEquipmentInfo**](CapabilityApi.md#PatchCapabilitySwitchEquipmentInfo) | **Patch** /api/v1/capability/SwitchEquipmentInfos/{Moid} | Update a &#39;capability.SwitchEquipmentInfo&#39; resource.
 [**PatchCapabilitySwitchManufacturingDef**](CapabilityApi.md#PatchCapabilitySwitchManufacturingDef) | **Patch** /api/v1/capability/SwitchManufacturingDefs/{Moid} | Update a &#39;capability.SwitchManufacturingDef&#39; resource.
 [**UpdateCapabilityActionsMetaData**](CapabilityApi.md#UpdateCapabilityActionsMetaData) | **Post** /api/v1/capability/ActionsMetaData/{Moid} | Update a &#39;capability.ActionsMetaData&#39; resource.
 [**UpdateCapabilityAdapterDeprecatedDef**](CapabilityApi.md#UpdateCapabilityAdapterDeprecatedDef) | **Post** /api/v1/capability/AdapterDeprecatedDefs/{Moid} | Update a &#39;capability.AdapterDeprecatedDef&#39; resource.
@@ -199,6 +206,7 @@ Method | HTTP request | Description
 [**UpdateCapabilitySiocModuleManufacturingDef**](CapabilityApi.md#UpdateCapabilitySiocModuleManufacturingDef) | **Post** /api/v1/capability/SiocModuleManufacturingDefs/{Moid} | Update a &#39;capability.SiocModuleManufacturingDef&#39; resource.
 [**UpdateCapabilitySwitchCapability**](CapabilityApi.md#UpdateCapabilitySwitchCapability) | **Post** /api/v1/capability/SwitchCapabilities/{Moid} | Update a &#39;capability.SwitchCapability&#39; resource.
 [**UpdateCapabilitySwitchDescriptor**](CapabilityApi.md#UpdateCapabilitySwitchDescriptor) | **Post** /api/v1/capability/SwitchDescriptors/{Moid} | Update a &#39;capability.SwitchDescriptor&#39; resource.
+[**UpdateCapabilitySwitchEquipmentInfo**](CapabilityApi.md#UpdateCapabilitySwitchEquipmentInfo) | **Post** /api/v1/capability/SwitchEquipmentInfos/{Moid} | Update a &#39;capability.SwitchEquipmentInfo&#39; resource.
 [**UpdateCapabilitySwitchManufacturingDef**](CapabilityApi.md#UpdateCapabilitySwitchManufacturingDef) | **Post** /api/v1/capability/SwitchManufacturingDefs/{Moid} | Update a &#39;capability.SwitchManufacturingDef&#39; resource.
 
 
@@ -2024,6 +2032,74 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**CapabilitySwitchDescriptor**](CapabilitySwitchDescriptor.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## CreateCapabilitySwitchEquipmentInfo
+
+> CapabilitySwitchEquipmentInfo CreateCapabilitySwitchEquipmentInfo(ctx).CapabilitySwitchEquipmentInfo(capabilitySwitchEquipmentInfo).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
+
+Create a 'capability.SwitchEquipmentInfo' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    capabilitySwitchEquipmentInfo := *openapiclient.NewCapabilitySwitchEquipmentInfo("ClassId_example", "ObjectType_example") // CapabilitySwitchEquipmentInfo | The 'capability.SwitchEquipmentInfo' resource to create.
+    ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
+    ifNoneMatch := "ifNoneMatch_example" // string | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn't happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource's ETag doesn't match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don't have to be identical byte for byte. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.CapabilityApi.CreateCapabilitySwitchEquipmentInfo(context.Background()).CapabilitySwitchEquipmentInfo(capabilitySwitchEquipmentInfo).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `CapabilityApi.CreateCapabilitySwitchEquipmentInfo``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `CreateCapabilitySwitchEquipmentInfo`: CapabilitySwitchEquipmentInfo
+    fmt.Fprintf(os.Stdout, "Response from `CapabilityApi.CreateCapabilitySwitchEquipmentInfo`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCreateCapabilitySwitchEquipmentInfoRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **capabilitySwitchEquipmentInfo** | [**CapabilitySwitchEquipmentInfo**](CapabilitySwitchEquipmentInfo.md) | The &#39;capability.SwitchEquipmentInfo&#39; resource to create. | 
+ **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
+ **ifNoneMatch** | **string** | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn&#39;t happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource&#39;s ETag doesn&#39;t match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don&#39;t have to be identical byte for byte. | 
+
+### Return type
+
+[**CapabilitySwitchEquipmentInfo**](CapabilitySwitchEquipmentInfo.md)
 
 ### Authorization
 
@@ -3865,6 +3941,72 @@ Name | Type | Description  | Notes
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiDeleteCapabilitySwitchDescriptorRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## DeleteCapabilitySwitchEquipmentInfo
+
+> DeleteCapabilitySwitchEquipmentInfo(ctx, moid).Execute()
+
+Delete a 'capability.SwitchEquipmentInfo' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.CapabilityApi.DeleteCapabilitySwitchEquipmentInfo(context.Background(), moid).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `CapabilityApi.DeleteCapabilitySwitchEquipmentInfo``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiDeleteCapabilitySwitchEquipmentInfoRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -10035,6 +10177,158 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## GetCapabilitySwitchEquipmentInfoByMoid
+
+> CapabilitySwitchEquipmentInfo GetCapabilitySwitchEquipmentInfoByMoid(ctx, moid).Execute()
+
+Read a 'capability.SwitchEquipmentInfo' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.CapabilityApi.GetCapabilitySwitchEquipmentInfoByMoid(context.Background(), moid).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `CapabilityApi.GetCapabilitySwitchEquipmentInfoByMoid``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetCapabilitySwitchEquipmentInfoByMoid`: CapabilitySwitchEquipmentInfo
+    fmt.Fprintf(os.Stdout, "Response from `CapabilityApi.GetCapabilitySwitchEquipmentInfoByMoid`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetCapabilitySwitchEquipmentInfoByMoidRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**CapabilitySwitchEquipmentInfo**](CapabilitySwitchEquipmentInfo.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetCapabilitySwitchEquipmentInfoList
+
+> CapabilitySwitchEquipmentInfoResponse GetCapabilitySwitchEquipmentInfoList(ctx).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+
+Read a 'capability.SwitchEquipmentInfo' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    filter := "$filter=CreateTime gt 2012-08-29T21:58:33Z" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
+    orderby := "$orderby=CreationTime" // string | Determines what properties are used to sort the collection of resources. (optional)
+    top := int32($top=10) // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
+    skip := int32($skip=100) // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
+    select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+    expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+    apply := "apply_example" // string | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e., the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. (optional)
+    count := false // bool | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. (optional)
+    inlinecount := "$inlinecount=true" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
+    at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
+    tags := "tags_example" // string | The 'tags' parameter is used to request a summary of the Tag utilization for this resource. When the 'tags' parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.CapabilityApi.GetCapabilitySwitchEquipmentInfoList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `CapabilityApi.GetCapabilitySwitchEquipmentInfoList``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetCapabilitySwitchEquipmentInfoList`: CapabilitySwitchEquipmentInfoResponse
+    fmt.Fprintf(os.Stdout, "Response from `CapabilityApi.GetCapabilitySwitchEquipmentInfoList`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetCapabilitySwitchEquipmentInfoListRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **filter** | **string** | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). | [default to &quot;&quot;]
+ **orderby** | **string** | Determines what properties are used to sort the collection of resources. | 
+ **top** | **int32** | Specifies the maximum number of resources to return in the response. | [default to 100]
+ **skip** | **int32** | Specifies the number of resources to skip in the response. | [default to 0]
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **apply** | **string** | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e., the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. | 
+ **count** | **bool** | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. | 
+ **inlinecount** | **string** | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. | [default to &quot;allpages&quot;]
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
+ **tags** | **string** | The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. | 
+
+### Return type
+
+[**CapabilitySwitchEquipmentInfoResponse**](CapabilitySwitchEquipmentInfoResponse.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## GetCapabilitySwitchManufacturingDefByMoid
 
 > CapabilitySwitchManufacturingDef GetCapabilitySwitchManufacturingDefByMoid(ctx, moid).Execute()
@@ -10172,6 +10466,158 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**CapabilitySwitchManufacturingDefResponse**](CapabilitySwitchManufacturingDefResponse.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetCapabilityTemplateCatalogByMoid
+
+> CapabilityTemplateCatalog GetCapabilityTemplateCatalogByMoid(ctx, moid).Execute()
+
+Read a 'capability.TemplateCatalog' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.CapabilityApi.GetCapabilityTemplateCatalogByMoid(context.Background(), moid).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `CapabilityApi.GetCapabilityTemplateCatalogByMoid``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetCapabilityTemplateCatalogByMoid`: CapabilityTemplateCatalog
+    fmt.Fprintf(os.Stdout, "Response from `CapabilityApi.GetCapabilityTemplateCatalogByMoid`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetCapabilityTemplateCatalogByMoidRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**CapabilityTemplateCatalog**](CapabilityTemplateCatalog.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetCapabilityTemplateCatalogList
+
+> CapabilityTemplateCatalogResponse GetCapabilityTemplateCatalogList(ctx).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+
+Read a 'capability.TemplateCatalog' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    filter := "$filter=CreateTime gt 2012-08-29T21:58:33Z" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
+    orderby := "$orderby=CreationTime" // string | Determines what properties are used to sort the collection of resources. (optional)
+    top := int32($top=10) // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
+    skip := int32($skip=100) // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
+    select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+    expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+    apply := "apply_example" // string | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e., the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. (optional)
+    count := false // bool | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. (optional)
+    inlinecount := "$inlinecount=true" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
+    at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
+    tags := "tags_example" // string | The 'tags' parameter is used to request a summary of the Tag utilization for this resource. When the 'tags' parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.CapabilityApi.GetCapabilityTemplateCatalogList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `CapabilityApi.GetCapabilityTemplateCatalogList``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetCapabilityTemplateCatalogList`: CapabilityTemplateCatalogResponse
+    fmt.Fprintf(os.Stdout, "Response from `CapabilityApi.GetCapabilityTemplateCatalogList`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetCapabilityTemplateCatalogListRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **filter** | **string** | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). | [default to &quot;&quot;]
+ **orderby** | **string** | Determines what properties are used to sort the collection of resources. | 
+ **top** | **int32** | Specifies the maximum number of resources to return in the response. | [default to 100]
+ **skip** | **int32** | Specifies the number of resources to skip in the response. | [default to 0]
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **apply** | **string** | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e., the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. | 
+ **count** | **bool** | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. | 
+ **inlinecount** | **string** | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. | [default to &quot;allpages&quot;]
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
+ **tags** | **string** | The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. | 
+
+### Return type
+
+[**CapabilityTemplateCatalogResponse**](CapabilityTemplateCatalogResponse.md)
 
 ### Authorization
 
@@ -12188,6 +12634,78 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**CapabilitySwitchDescriptor**](CapabilitySwitchDescriptor.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json, application/json-patch+json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## PatchCapabilitySwitchEquipmentInfo
+
+> CapabilitySwitchEquipmentInfo PatchCapabilitySwitchEquipmentInfo(ctx, moid).CapabilitySwitchEquipmentInfo(capabilitySwitchEquipmentInfo).IfMatch(ifMatch).Execute()
+
+Update a 'capability.SwitchEquipmentInfo' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+    capabilitySwitchEquipmentInfo := *openapiclient.NewCapabilitySwitchEquipmentInfo("ClassId_example", "ObjectType_example") // CapabilitySwitchEquipmentInfo | The 'capability.SwitchEquipmentInfo' resource to update.
+    ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.CapabilityApi.PatchCapabilitySwitchEquipmentInfo(context.Background(), moid).CapabilitySwitchEquipmentInfo(capabilitySwitchEquipmentInfo).IfMatch(ifMatch).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `CapabilityApi.PatchCapabilitySwitchEquipmentInfo``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `PatchCapabilitySwitchEquipmentInfo`: CapabilitySwitchEquipmentInfo
+    fmt.Fprintf(os.Stdout, "Response from `CapabilityApi.PatchCapabilitySwitchEquipmentInfo`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiPatchCapabilitySwitchEquipmentInfoRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **capabilitySwitchEquipmentInfo** | [**CapabilitySwitchEquipmentInfo**](CapabilitySwitchEquipmentInfo.md) | The &#39;capability.SwitchEquipmentInfo&#39; resource to update. | 
+ **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
+
+### Return type
+
+[**CapabilitySwitchEquipmentInfo**](CapabilitySwitchEquipmentInfo.md)
 
 ### Authorization
 
@@ -14276,6 +14794,78 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**CapabilitySwitchDescriptor**](CapabilitySwitchDescriptor.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json, application/json-patch+json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## UpdateCapabilitySwitchEquipmentInfo
+
+> CapabilitySwitchEquipmentInfo UpdateCapabilitySwitchEquipmentInfo(ctx, moid).CapabilitySwitchEquipmentInfo(capabilitySwitchEquipmentInfo).IfMatch(ifMatch).Execute()
+
+Update a 'capability.SwitchEquipmentInfo' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+    capabilitySwitchEquipmentInfo := *openapiclient.NewCapabilitySwitchEquipmentInfo("ClassId_example", "ObjectType_example") // CapabilitySwitchEquipmentInfo | The 'capability.SwitchEquipmentInfo' resource to update.
+    ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.CapabilityApi.UpdateCapabilitySwitchEquipmentInfo(context.Background(), moid).CapabilitySwitchEquipmentInfo(capabilitySwitchEquipmentInfo).IfMatch(ifMatch).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `CapabilityApi.UpdateCapabilitySwitchEquipmentInfo``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `UpdateCapabilitySwitchEquipmentInfo`: CapabilitySwitchEquipmentInfo
+    fmt.Fprintf(os.Stdout, "Response from `CapabilityApi.UpdateCapabilitySwitchEquipmentInfo`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiUpdateCapabilitySwitchEquipmentInfoRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **capabilitySwitchEquipmentInfo** | [**CapabilitySwitchEquipmentInfo**](CapabilitySwitchEquipmentInfo.md) | The &#39;capability.SwitchEquipmentInfo&#39; resource to update. | 
+ **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
+
+### Return type
+
+[**CapabilitySwitchEquipmentInfo**](CapabilitySwitchEquipmentInfo.md)
 
 ### Authorization
 

@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **ControllerDn** | Pointer to **string** | This defines the characteristics of a specific storage controller. | [optional] [readonly] 
 **DedicatedHotSpare** | Pointer to **string** | This defines the characteristics of a specific virtual drive. | [optional] [readonly] 
 **DiskCachePolicy** | Pointer to **string** | This defines the characteristics of a specific virtual drive. | [optional] [readonly] 
-**Name** | Pointer to **string** | The name of the virtual drive. The name can be between 1 and 15 alphanumeric characters. Spaces or any special characters other than - (hyphen), _ (underscore), : (colon), and . (period) are not allowed. | [optional] [readonly] 
+**Name** | Pointer to **string** | The name of the virtual drive. The name can be between 1 and 15 alphanumeric characters. Spaces or any special characters other than - (hyphen) and _ (underscore) are not allowed. | [optional] [readonly] 
 **RaidLevel** | Pointer to **string** | This defines the characteristics of a specific virtual drive. | [optional] [readonly] 
 **ReadPolicy** | Pointer to **string** | This defines the characteristics of a specific virtual drive. | [optional] [readonly] 
 **SelfEncrypt** | Pointer to **string** | This defines the characteristics of a specific virtual drive. | [optional] [readonly] 

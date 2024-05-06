@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-15830
+API version: 1.0.11-16342
 Contact: intersight@cisco.com
 */
 
@@ -49,7 +49,9 @@ type EquipmentIoCardBase struct {
 	HostPorts      []EtherHostPortRelationship       `json:"HostPorts,omitempty"`
 	MgmtController *ManagementControllerRelationship `json:"MgmtController,omitempty"`
 	// An array of relationships to etherNetworkPort resources.
-	NetworkPorts         []EtherNetworkPortRelationship `json:"NetworkPorts,omitempty"`
+	NetworkPorts []EtherNetworkPortRelationship `json:"NetworkPorts,omitempty"`
+	// An array of relationships to portSubGroup resources.
+	SubGroup             []PortSubGroupRelationship `json:"SubGroup,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -573,6 +575,39 @@ func (o *EquipmentIoCardBase) SetNetworkPorts(v []EtherNetworkPortRelationship) 
 	o.NetworkPorts = v
 }
 
+// GetSubGroup returns the SubGroup field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *EquipmentIoCardBase) GetSubGroup() []PortSubGroupRelationship {
+	if o == nil {
+		var ret []PortSubGroupRelationship
+		return ret
+	}
+	return o.SubGroup
+}
+
+// GetSubGroupOk returns a tuple with the SubGroup field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *EquipmentIoCardBase) GetSubGroupOk() ([]PortSubGroupRelationship, bool) {
+	if o == nil || o.SubGroup == nil {
+		return nil, false
+	}
+	return o.SubGroup, true
+}
+
+// HasSubGroup returns a boolean if a field has been set.
+func (o *EquipmentIoCardBase) HasSubGroup() bool {
+	if o != nil && o.SubGroup != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetSubGroup gets a reference to the given []PortSubGroupRelationship and assigns it to the SubGroup field.
+func (o *EquipmentIoCardBase) SetSubGroup(v []PortSubGroupRelationship) {
+	o.SubGroup = v
+}
+
 func (o EquipmentIoCardBase) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	serializedEquipmentBase, errEquipmentBase := json.Marshal(o.EquipmentBase)
@@ -631,6 +666,9 @@ func (o EquipmentIoCardBase) MarshalJSON() ([]byte, error) {
 	if o.NetworkPorts != nil {
 		toSerialize["NetworkPorts"] = o.NetworkPorts
 	}
+	if o.SubGroup != nil {
+		toSerialize["SubGroup"] = o.SubGroup
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -671,6 +709,8 @@ func (o *EquipmentIoCardBase) UnmarshalJSON(bytes []byte) (err error) {
 		MgmtController *ManagementControllerRelationship `json:"MgmtController,omitempty"`
 		// An array of relationships to etherNetworkPort resources.
 		NetworkPorts []EtherNetworkPortRelationship `json:"NetworkPorts,omitempty"`
+		// An array of relationships to portSubGroup resources.
+		SubGroup []PortSubGroupRelationship `json:"SubGroup,omitempty"`
 	}
 
 	varEquipmentIoCardBaseWithoutEmbeddedStruct := EquipmentIoCardBaseWithoutEmbeddedStruct{}
@@ -694,6 +734,7 @@ func (o *EquipmentIoCardBase) UnmarshalJSON(bytes []byte) (err error) {
 		varEquipmentIoCardBase.HostPorts = varEquipmentIoCardBaseWithoutEmbeddedStruct.HostPorts
 		varEquipmentIoCardBase.MgmtController = varEquipmentIoCardBaseWithoutEmbeddedStruct.MgmtController
 		varEquipmentIoCardBase.NetworkPorts = varEquipmentIoCardBaseWithoutEmbeddedStruct.NetworkPorts
+		varEquipmentIoCardBase.SubGroup = varEquipmentIoCardBaseWithoutEmbeddedStruct.SubGroup
 		*o = EquipmentIoCardBase(varEquipmentIoCardBase)
 	} else {
 		return err
@@ -727,6 +768,7 @@ func (o *EquipmentIoCardBase) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "HostPorts")
 		delete(additionalProperties, "MgmtController")
 		delete(additionalProperties, "NetworkPorts")
+		delete(additionalProperties, "SubGroup")
 
 		// remove fields from embedded structs
 		reflectEquipmentBase := reflect.ValueOf(o.EquipmentBase)

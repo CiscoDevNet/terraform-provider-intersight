@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-15830
+API version: 1.0.11-16342
 Contact: intersight@cisco.com
 */
 
@@ -88,6 +88,10 @@ type BiosPolicy struct {
 	C1autoUnDemotion *string `json:"C1autoUnDemotion,omitempty"`
 	// BIOS Token for setting APBDIS configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `0` - Value - 0 for configuring CbsCmnApbdis token. * `1` - Value - 1 for configuring CbsCmnApbdis token. * `Auto` - Value - Auto for configuring CbsCmnApbdis token.
 	CbsCmnApbdis *string `json:"CbsCmnApbdis,omitempty"`
+	// BIOS Token for setting Fixed SOC P-State SP5 F19h configuration (0 - 2 P State).
+	CbsCmnApbdisDfPstateRs *string `json:"CbsCmnApbdisDfPstateRs,omitempty"`
+	// BIOS Token for setting AVX512 configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsCmnCpuAvx512 token. * `disabled` - Value - disabled for configuring CbsCmnCpuAvx512 token. * `enabled` - Value - enabled for configuring CbsCmnCpuAvx512 token.
+	CbsCmnCpuAvx512 *string `json:"CbsCmnCpuAvx512,omitempty"`
 	// BIOS Token for setting Core Performance Boost configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsCmnCpuCpb token. * `disabled` - Value - disabled for configuring CbsCmnCpuCpb token.
 	CbsCmnCpuCpb *string `json:"CbsCmnCpuCpb,omitempty"`
 	// BIOS Token for setting Downcore Control configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsCmnCpuGenDowncoreCtrl token. * `FOUR (2 + 2)` - Value - FOUR (2 + 2) for configuring CbsCmnCpuGenDowncoreCtrl token. * `FOUR (4 + 0)` - Value - FOUR (4 + 0) for configuring CbsCmnCpuGenDowncoreCtrl token. * `SIX (3 + 3)` - Value - SIX (3 + 3) for configuring CbsCmnCpuGenDowncoreCtrl token. * `THREE (3 + 0)` - Value - THREE (3 + 0) for configuring CbsCmnCpuGenDowncoreCtrl token. * `TWO (1 + 1)` - Value - TWO (1 + 1) for configuring CbsCmnCpuGenDowncoreCtrl token. * `TWO (2 + 0)` - Value - TWO (2 + 0) for configuring CbsCmnCpuGenDowncoreCtrl token.
@@ -98,47 +102,93 @@ type BiosPolicy struct {
 	CbsCmnCpuL1streamHwPrefetcher *string `json:"CbsCmnCpuL1streamHwPrefetcher,omitempty"`
 	// BIOS Token for setting L2 Stream HW Prefetcher configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsCmnCpuL2streamHwPrefetcher token. * `disabled` - Value - disabled for configuring CbsCmnCpuL2streamHwPrefetcher token. * `enabled` - Value - enabled for configuring CbsCmnCpuL2streamHwPrefetcher token.
 	CbsCmnCpuL2streamHwPrefetcher *string `json:"CbsCmnCpuL2streamHwPrefetcher,omitempty"`
+	// BIOS Token for setting SEV-ES ASID Space Limit configuration (1 - 1007 ASIDs).
+	CbsCmnCpuSevAsidSpaceLimit *string `json:"CbsCmnCpuSevAsidSpaceLimit,omitempty"`
 	// BIOS Token for setting CPU SMEE configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsCmnCpuSmee token. * `disabled` - Value - disabled for configuring CbsCmnCpuSmee token. * `enabled` - Value - enabled for configuring CbsCmnCpuSmee token.
 	CbsCmnCpuSmee *string `json:"CbsCmnCpuSmee,omitempty"`
 	// BIOS Token for setting Streaming Stores Control configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsCmnCpuStreamingStoresCtrl token. * `disabled` - Value - disabled for configuring CbsCmnCpuStreamingStoresCtrl token. * `enabled` - Value - enabled for configuring CbsCmnCpuStreamingStoresCtrl token.
 	CbsCmnCpuStreamingStoresCtrl *string `json:"CbsCmnCpuStreamingStoresCtrl,omitempty"`
 	// BIOS Token for setting Determinism Slider configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsCmnDeterminismSlider token. * `Performance` - Value - Performance for configuring CbsCmnDeterminismSlider token. * `Power` - Value - Power for configuring CbsCmnDeterminismSlider token.
 	CbsCmnDeterminismSlider *string `json:"CbsCmnDeterminismSlider,omitempty"`
+	// BIOS Token for setting EDC Control Throttle configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsCmnEdcControlThrottle token. * `disabled` - Value - disabled for configuring CbsCmnEdcControlThrottle token. * `enabled` - Value - enabled for configuring CbsCmnEdcControlThrottle token.
+	CbsCmnEdcControlThrottle *string `json:"CbsCmnEdcControlThrottle,omitempty"`
 	// BIOS Token for setting Efficiency Mode Enable configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsCmnEfficiencyModeEn token. * `Enabled` - Value - Enabled for configuring CbsCmnEfficiencyModeEn token.
 	CbsCmnEfficiencyModeEn *string `json:"CbsCmnEfficiencyModeEn,omitempty"`
+	// BIOS Token for setting Power Profile Selection F19h configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Balanced Memory Performance Mode` - Value - Balanced Memory Performance Mode for configuring CbsCmnEfficiencyModeEnRs token. * `Efficiency Mode` - Value - Efficiency Mode for configuring CbsCmnEfficiencyModeEnRs token. * `High Performance Mode` - Value - High Performance Mode for configuring CbsCmnEfficiencyModeEnRs token. * `Maximum IO Performance Mode` - Value - Maximum IO Performance Mode for configuring CbsCmnEfficiencyModeEnRs token.
+	CbsCmnEfficiencyModeEnRs *string `json:"CbsCmnEfficiencyModeEnRs,omitempty"`
 	// BIOS Token for setting Fixed SOC P-State configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsCmnFixedSocPstate token. * `P0` - Value - P0 for configuring CbsCmnFixedSocPstate token. * `P1` - Value - P1 for configuring CbsCmnFixedSocPstate token. * `P2` - Value - P2 for configuring CbsCmnFixedSocPstate token. * `P3` - Value - P3 for configuring CbsCmnFixedSocPstate token.
 	CbsCmnFixedSocPstate *string `json:"CbsCmnFixedSocPstate,omitempty"`
 	// BIOS Token for setting IOMMU configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsCmnGnbNbIommu token. * `disabled` - Value - disabled for configuring CbsCmnGnbNbIommu token. * `enabled` - Value - enabled for configuring CbsCmnGnbNbIommu token.
 	CbsCmnGnbNbIommu *string `json:"CbsCmnGnbNbIommu,omitempty"`
 	// BIOS Token for setting DF C-States configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsCmnGnbSmuDfCstates token. * `disabled` - Value - disabled for configuring CbsCmnGnbSmuDfCstates token. * `enabled` - Value - enabled for configuring CbsCmnGnbSmuDfCstates token.
 	CbsCmnGnbSmuDfCstates *string `json:"CbsCmnGnbSmuDfCstates,omitempty"`
+	// BIOS Token for setting DF PState Frequency Optimizer configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsCmnGnbSmuDffoRs token. * `disabled` - Value - disabled for configuring CbsCmnGnbSmuDffoRs token. * `enabled` - Value - enabled for configuring CbsCmnGnbSmuDffoRs token.
+	CbsCmnGnbSmuDffoRs *string `json:"CbsCmnGnbSmuDffoRs,omitempty"`
+	// BIOS Token for setting DLWM Support configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsCmnGnbSmuDlwmSupport token. * `disabled` - Value - disabled for configuring CbsCmnGnbSmuDlwmSupport token. * `enabled` - Value - enabled for configuring CbsCmnGnbSmuDlwmSupport token.
+	CbsCmnGnbSmuDlwmSupport *string `json:"CbsCmnGnbSmuDlwmSupport,omitempty"`
 	// BIOS Token for setting CPPC configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsCmnGnbSmucppc token. * `disabled` - Value - disabled for configuring CbsCmnGnbSmucppc token. * `enabled` - Value - enabled for configuring CbsCmnGnbSmucppc token.
 	CbsCmnGnbSmucppc *string `json:"CbsCmnGnbSmucppc,omitempty"`
 	// BIOS Token for setting Bank Group Swap configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsCmnMemCtrlBankGroupSwapDdr4 token. * `disabled` - Value - disabled for configuring CbsCmnMemCtrlBankGroupSwapDdr4 token. * `enabled` - Value - enabled for configuring CbsCmnMemCtrlBankGroupSwapDdr4 token.
 	CbsCmnMemCtrlBankGroupSwapDdr4 *string `json:"CbsCmnMemCtrlBankGroupSwapDdr4,omitempty"`
-	// BIOS Token for setting Chipset Interleave configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsCmnMemMapBankInterleaveDdr4 token. * `disabled` - Value - disabled for configuring CbsCmnMemMapBankInterleaveDdr4 token.
+	// BIOS Token for setting Power Down Enable configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsCmnMemCtrllerPwrDnEnDdr token. * `disabled` - Value - disabled for configuring CbsCmnMemCtrllerPwrDnEnDdr token. * `enabled` - Value - enabled for configuring CbsCmnMemCtrllerPwrDnEnDdr token.
+	CbsCmnMemCtrllerPwrDnEnDdr *string `json:"CbsCmnMemCtrllerPwrDnEnDdr,omitempty"`
+	// BIOS Token for setting DRAM Refresh Rate configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `3.9 usec` - Value - 3.9 usec for configuring CbsCmnMemDramRefreshRate token. * `7.8 usec` - Value - 7.8 usec for configuring CbsCmnMemDramRefreshRate token.
+	CbsCmnMemDramRefreshRate *string `json:"CbsCmnMemDramRefreshRate,omitempty"`
+	// BIOS Token for setting Chipset Interleave configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsCmnMemMapBankInterleaveDdr4 token. * `disabled` - Value - disabled for configuring CbsCmnMemMapBankInterleaveDdr4 token. * `enabled` - Value - enabled for configuring CbsCmnMemMapBankInterleaveDdr4 token.
 	CbsCmnMemMapBankInterleaveDdr4 *string `json:"CbsCmnMemMapBankInterleaveDdr4,omitempty"`
+	// BIOS Token for setting Memory Clock Speed 7xx2 configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `667MHz` - Value - 667MHz for configuring CbsCmnMemSpeedDdr47xx2 token. * `800MHz` - Value - 800MHz for configuring CbsCmnMemSpeedDdr47xx2 token. * `933MHz` - Value - 933MHz for configuring CbsCmnMemSpeedDdr47xx2 token. * `1067MHz` - Value - 1067MHz for configuring CbsCmnMemSpeedDdr47xx2 token. * `1200MHz` - Value - 1200MHz for configuring CbsCmnMemSpeedDdr47xx2 token. * `1333MHz` - Value - 1333MHz for configuring CbsCmnMemSpeedDdr47xx2 token. * `1467MHz` - Value - 1467MHz for configuring CbsCmnMemSpeedDdr47xx2 token. * `1600MHz` - Value - 1600MHz for configuring CbsCmnMemSpeedDdr47xx2 token. * `Auto` - Value - Auto for configuring CbsCmnMemSpeedDdr47xx2 token.
+	CbsCmnMemSpeedDdr47xx2 *string `json:"CbsCmnMemSpeedDdr47xx2,omitempty"`
+	// BIOS Token for setting Memory Clock Speed 7xx3 configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `400MHz` - Value - 400MHz for configuring CbsCmnMemSpeedDdr47xx3 token. * `800MHz` - Value - 800MHz for configuring CbsCmnMemSpeedDdr47xx3 token. * `933MHz` - Value - 933MHz for configuring CbsCmnMemSpeedDdr47xx3 token. * `1067MHz` - Value - 1067MHz for configuring CbsCmnMemSpeedDdr47xx3 token. * `1200MHz` - Value - 1200MHz for configuring CbsCmnMemSpeedDdr47xx3 token. * `1333MHz` - Value - 1333MHz for configuring CbsCmnMemSpeedDdr47xx3 token. * `1467MHz` - Value - 1467MHz for configuring CbsCmnMemSpeedDdr47xx3 token. * `1600MHz` - Value - 1600MHz for configuring CbsCmnMemSpeedDdr47xx3 token. * `1633MHz` - Value - 1633MHz for configuring CbsCmnMemSpeedDdr47xx3 token. * `1667MHz` - Value - 1667MHz for configuring CbsCmnMemSpeedDdr47xx3 token. * `1700MHz` - Value - 1700MHz for configuring CbsCmnMemSpeedDdr47xx3 token. * `1733MHz` - Value - 1733MHz for configuring CbsCmnMemSpeedDdr47xx3 token. * `1767MHz` - Value - 1767MHz for configuring CbsCmnMemSpeedDdr47xx3 token. * `1800MHz` - Value - 1800MHz for configuring CbsCmnMemSpeedDdr47xx3 token. * `Auto` - Value - Auto for configuring CbsCmnMemSpeedDdr47xx3 token.
+	CbsCmnMemSpeedDdr47xx3 *string `json:"CbsCmnMemSpeedDdr47xx3,omitempty"`
+	// BIOS Token for setting Preferred IO 7xx2 configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsCmnPreferredIo7xx2 token. * `Manual` - Value - Manual for configuring CbsCmnPreferredIo7xx2 token.
+	CbsCmnPreferredIo7xx2 *string `json:"CbsCmnPreferredIo7xx2,omitempty"`
+	// BIOS Token for setting Preferred IO 7xx3 configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsCmnPreferredIo7xx3 token. * `Bus` - Value - Bus for configuring CbsCmnPreferredIo7xx3 token.
+	CbsCmnPreferredIo7xx3 *string `json:"CbsCmnPreferredIo7xx3,omitempty"`
 	// BIOS Token for setting cTDP Control configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsCmncTdpCtl token. * `Manual` - Value - Manual for configuring CbsCmncTdpCtl token.
 	CbsCmncTdpCtl *string `json:"CbsCmncTdpCtl,omitempty"`
-	// BIOS Token for setting CCD Control configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `2 CCDs` - Value - 2 CCDs for configuring CbsCpuCcdCtrlSsp token. * `3 CCDs` - Value - 3 CCDs for configuring CbsCpuCcdCtrlSsp token. * `4 CCDs` - Value - 4 CCDs for configuring CbsCpuCcdCtrlSsp token. * `6 CCDs` - Value - 6 CCDs for configuring CbsCpuCcdCtrlSsp token. * `Auto` - Value - Auto for configuring CbsCpuCcdCtrlSsp token.
+	// BIOS Token for setting xGMI Force Link Width configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `0` - Value - 0 for configuring CbsCmnxGmiForceLinkWidthRs token. * `1` - Value - 1 for configuring CbsCmnxGmiForceLinkWidthRs token. * `2` - Value - 2 for configuring CbsCmnxGmiForceLinkWidthRs token. * `Auto` - Value - Auto for configuring CbsCmnxGmiForceLinkWidthRs token.
+	CbsCmnxGmiForceLinkWidthRs *string `json:"CbsCmnxGmiForceLinkWidthRs,omitempty"`
+	// BIOS Token for setting CCD Control configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `2 CCDs` - Value - 2 CCDs for configuring CbsCpuCcdCtrlSsp token. * `3 CCDs` - Value - 3 CCDs for configuring CbsCpuCcdCtrlSsp token. * `4 CCDs` - Value - 4 CCDs for configuring CbsCpuCcdCtrlSsp token. * `6 CCDs` - Value - 6 CCDs for configuring CbsCpuCcdCtrlSsp token. * `8 CCDs` - Value - 8 CCDs for configuring CbsCpuCcdCtrlSsp token. * `10 CCDs` - Value - 10 CCDs for configuring CbsCpuCcdCtrlSsp token. * `Auto` - Value - Auto for configuring CbsCpuCcdCtrlSsp token.
 	CbsCpuCcdCtrlSsp *string `json:"CbsCpuCcdCtrlSsp,omitempty"`
 	// BIOS Token for setting CPU Downcore control configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsCpuCoreCtrl token. * `FIVE (5 + 0)` - Value - FIVE (5 + 0) for configuring CbsCpuCoreCtrl token. * `FOUR (4 + 0)` - Value - FOUR (4 + 0) for configuring CbsCpuCoreCtrl token. * `ONE (1 + 0)` - Value - ONE (1 + 0) for configuring CbsCpuCoreCtrl token. * `SEVEN (7 + 0)` - Value - SEVEN (7 + 0) for configuring CbsCpuCoreCtrl token. * `SIX (6 + 0)` - Value - SIX (6 + 0) for configuring CbsCpuCoreCtrl token. * `THREE (3 + 0)` - Value - THREE (3 + 0) for configuring CbsCpuCoreCtrl token. * `TWO (2 + 0)` - Value - TWO (2 + 0) for configuring CbsCpuCoreCtrl token.
 	CbsCpuCoreCtrl *string `json:"CbsCpuCoreCtrl,omitempty"`
+	// BIOS Token for setting Downcore Control configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsCpuDownCoreCtrlBergamo token. * `EIGHT (4 + 4)` - Value - EIGHT (4 + 4) for configuring CbsCpuDownCoreCtrlBergamo token. * `FOUR (2 + 2)` - Value - FOUR (2 + 2) for configuring CbsCpuDownCoreCtrlBergamo token. * `FOURTEEN (7 + 7)` - Value - FOURTEEN (7 + 7) for configuring CbsCpuDownCoreCtrlBergamo token. * `SIX (3 + 3)` - Value - SIX (3 + 3) for configuring CbsCpuDownCoreCtrlBergamo token. * `TEN (5 + 5)` - Value - TEN (5 + 5) for configuring CbsCpuDownCoreCtrlBergamo token. * `TWELVE (6 + 6)` - Value - TWELVE (6 + 6) for configuring CbsCpuDownCoreCtrlBergamo token. * `TWO (1 + 1)` - Value - TWO (1 + 1) for configuring CbsCpuDownCoreCtrlBergamo token.
+	CbsCpuDownCoreCtrlBergamo *string `json:"CbsCpuDownCoreCtrlBergamo,omitempty"`
+	// BIOS Token for setting CPU Downcore control F19 M10h-1Fh configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsCpuDownCoreCtrlGenoa token. * `FIVE (5 + 0)` - Value - FIVE (5 + 0) for configuring CbsCpuDownCoreCtrlGenoa token. * `FOUR (4 + 0)` - Value - FOUR (4 + 0) for configuring CbsCpuDownCoreCtrlGenoa token. * `ONE (1 + 0)` - Value - ONE (1 + 0) for configuring CbsCpuDownCoreCtrlGenoa token. * `SEVEN (7 + 0)` - Value - SEVEN (7 + 0) for configuring CbsCpuDownCoreCtrlGenoa token. * `SIX (6 + 0)` - Value - SIX (6 + 0) for configuring CbsCpuDownCoreCtrlGenoa token. * `THREE (3 + 0)` - Value - THREE (3 + 0) for configuring CbsCpuDownCoreCtrlGenoa token. * `TWO (2 + 0)` - Value - TWO (2 + 0) for configuring CbsCpuDownCoreCtrlGenoa token.
+	CbsCpuDownCoreCtrlGenoa *string `json:"CbsCpuDownCoreCtrlGenoa,omitempty"`
 	// BIOS Token for setting CPU SMT Mode configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsCpuSmtCtrl token. * `disabled` - Value - disabled for configuring CbsCpuSmtCtrl token. * `enabled` - Value - enabled for configuring CbsCpuSmtCtrl token.
 	CbsCpuSmtCtrl *string `json:"CbsCpuSmtCtrl,omitempty"`
+	// BIOS Token for setting Core Watchdog Timer Enable configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsDbgCpuGenCpuWdt token. * `disabled` - Value - disabled for configuring CbsDbgCpuGenCpuWdt token. * `enabled` - Value - enabled for configuring CbsDbgCpuGenCpuWdt token.
+	CbsDbgCpuGenCpuWdt *string `json:"CbsDbgCpuGenCpuWdt,omitempty"`
+	// BIOS Token for setting Local APIC Mode configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsDbgCpuLapicMode token. * `Compatibility` - Value - Compatibility for configuring CbsDbgCpuLapicMode token. * `X2APIC` - Value - X2APIC for configuring CbsDbgCpuLapicMode token. * `XAPIC` - Value - XAPIC for configuring CbsDbgCpuLapicMode token.
+	CbsDbgCpuLapicMode *string `json:"CbsDbgCpuLapicMode,omitempty"`
+	// BIOS Token for setting Local APIC Mode 7xx2 configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsDbgCpuLapicMode7xx2 token. * `X2APIC` - Value - X2APIC for configuring CbsDbgCpuLapicMode7xx2 token. * `XAPIC` - Value - XAPIC for configuring CbsDbgCpuLapicMode7xx2 token.
+	CbsDbgCpuLapicMode7xx2 *string `json:"CbsDbgCpuLapicMode7xx2,omitempty"`
+	// BIOS Token for setting Local APIC Mode 7xx3 configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsDbgCpuLapicMode7xx3 token. * `Compatibility` - Value - Compatibility for configuring CbsDbgCpuLapicMode7xx3 token. * `X2APIC` - Value - X2APIC for configuring CbsDbgCpuLapicMode7xx3 token. * `XAPIC` - Value - XAPIC for configuring CbsDbgCpuLapicMode7xx3 token.
+	CbsDbgCpuLapicMode7xx3 *string `json:"CbsDbgCpuLapicMode7xx3,omitempty"`
 	// BIOS Token for setting SNP Memory Coverage configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsDbgCpuSnpMemCover token. * `Custom` - Value - Custom for configuring CbsDbgCpuSnpMemCover token. * `disabled` - Value - disabled for configuring CbsDbgCpuSnpMemCover token. * `enabled` - Value - enabled for configuring CbsDbgCpuSnpMemCover token.
 	CbsDbgCpuSnpMemCover *string `json:"CbsDbgCpuSnpMemCover,omitempty"`
 	// BIOS Token for setting SNP Memory Size to Cover in MiB configuration (0 - 1048576 MiB).
 	CbsDbgCpuSnpMemSizeCover *string `json:"CbsDbgCpuSnpMemSizeCover,omitempty"`
+	// BIOS Token for setting 4-link xGMI max speed configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `20Gbps` - Value - 20Gbps for configuring CbsDfCmn4linkMaxXgmiSpeed token. * `25Gbps` - Value - 25Gbps for configuring CbsDfCmn4linkMaxXgmiSpeed token. * `32Gbps` - Value - 32Gbps for configuring CbsDfCmn4linkMaxXgmiSpeed token. * `Auto` - Value - Auto for configuring CbsDfCmn4linkMaxXgmiSpeed token.
+	CbsDfCmn4linkMaxXgmiSpeed *string `json:"CbsDfCmn4linkMaxXgmiSpeed,omitempty"`
 	// BIOS Token for setting ACPI SRAT L3 Cache As NUMA Domain configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsDfCmnAcpiSratL3numa token. * `disabled` - Value - disabled for configuring CbsDfCmnAcpiSratL3numa token. * `enabled` - Value - enabled for configuring CbsDfCmnAcpiSratL3numa token.
 	CbsDfCmnAcpiSratL3numa *string `json:"CbsDfCmnAcpiSratL3numa,omitempty"`
 	// BIOS Token for setting NUMA Nodes per Socket configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsDfCmnDramNps token. * `NPS0` - Value - NPS0 for configuring CbsDfCmnDramNps token. * `NPS1` - Value - NPS1 for configuring CbsDfCmnDramNps token. * `NPS2` - Value - NPS2 for configuring CbsDfCmnDramNps token. * `NPS4` - Value - NPS4 for configuring CbsDfCmnDramNps token.
 	CbsDfCmnDramNps *string `json:"CbsDfCmnDramNps,omitempty"`
+	// BIOS Token for setting DRAM Scrub Time configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `1 hour` - Value - 1 hour for configuring CbsDfCmnDramScrubTime token. * `4 hours` - Value - 4 hours for configuring CbsDfCmnDramScrubTime token. * `6 hours` - Value - 6 hours for configuring CbsDfCmnDramScrubTime token. * `8 hours` - Value - 8 hours for configuring CbsDfCmnDramScrubTime token. * `12 hours` - Value - 12 hours for configuring CbsDfCmnDramScrubTime token. * `16 hours` - Value - 16 hours for configuring CbsDfCmnDramScrubTime token. * `24 hours` - Value - 24 hours for configuring CbsDfCmnDramScrubTime token. * `48 hours` - Value - 48 hours for configuring CbsDfCmnDramScrubTime token. * `Auto` - Value - Auto for configuring CbsDfCmnDramScrubTime token. * `Disabled` - Value - Disabled for configuring CbsDfCmnDramScrubTime token.
+	CbsDfCmnDramScrubTime *string `json:"CbsDfCmnDramScrubTime,omitempty"`
 	// BIOS Token for setting AMD Memory Interleaving configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsDfCmnMemIntlv token. * `Channel` - Value - Channel for configuring CbsDfCmnMemIntlv token. * `Die` - Value - Die for configuring CbsDfCmnMemIntlv token. * `None` - Value - None for configuring CbsDfCmnMemIntlv token. * `Socket` - Value - Socket for configuring CbsDfCmnMemIntlv token.
 	CbsDfCmnMemIntlv *string `json:"CbsDfCmnMemIntlv,omitempty"`
+	// BIOS Token for setting Memory Interleaving configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsDfCmnMemIntlvControl token. * `disabled` - Value - disabled for configuring CbsDfCmnMemIntlvControl token. * `enabled` - Value - enabled for configuring CbsDfCmnMemIntlvControl token.
+	CbsDfCmnMemIntlvControl *string `json:"CbsDfCmnMemIntlvControl,omitempty"`
 	// BIOS Token for setting AMD Memory Interleaving Size configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `256 Bytes` - Value - 256 Bytes for configuring CbsDfCmnMemIntlvSize token. * `512 Bytes` - Value - 512 Bytes for configuring CbsDfCmnMemIntlvSize token. * `1 KB` - Value - 1 KiB for configuring CbsDfCmnMemIntlvSize token. * `2 KB` - Value - 2 KiB for configuring CbsDfCmnMemIntlvSize token. * `4 KB` - Value - 4 KiB for configuring CbsDfCmnMemIntlvSize token. * `Auto` - Value - Auto for configuring CbsDfCmnMemIntlvSize token.
 	CbsDfCmnMemIntlvSize *string `json:"CbsDfCmnMemIntlvSize,omitempty"`
-	// BIOS Token for setting SEV-SNP Support configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
+	// BIOS Token for setting xGMI Link Configuration configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `2 xGMI Links` - Value - 2 xGMI Links for configuring CbsDfDbgXgmiLinkCfg token. * `3 xGMI Links` - Value - 3 xGMI Links for configuring CbsDfDbgXgmiLinkCfg token. * `4 xGMI Links` - Value - 4 xGMI Links for configuring CbsDfDbgXgmiLinkCfg token. * `Auto` - Value - Auto for configuring CbsDfDbgXgmiLinkCfg token.
+	CbsDfDbgXgmiLinkCfg *string `json:"CbsDfDbgXgmiLinkCfg,omitempty"`
+	// BIOS Token for setting PCIe Ten Bit Tag Support configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsGnbDbgPcieTbtSupport token. * `disabled` - Value - disabled for configuring CbsGnbDbgPcieTbtSupport token. * `enabled` - Value - enabled for configuring CbsGnbDbgPcieTbtSupport token.
+	CbsGnbDbgPcieTbtSupport *string `json:"CbsGnbDbgPcieTbtSupport,omitempty"`
+	// BIOS Token for setting SEV-SNP Support configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsSevSnpSupport token. * `disabled` - Value - disabled for configuring CbsSevSnpSupport token. * `enabled` - Value - enabled for configuring CbsSevSnpSupport token.
 	CbsSevSnpSupport *string `json:"CbsSevSnpSupport,omitempty"`
 	// BIOS Token for setting Consistent Device Naming configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
 	CdnEnable *string `json:"CdnEnable,omitempty"`
@@ -188,6 +238,8 @@ type BiosPolicy struct {
 	DcpmmFirmwareDowngrade *string `json:"DcpmmFirmwareDowngrade,omitempty"`
 	// BIOS Token for setting Demand Scrub configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
 	DemandScrub *string `json:"DemandScrub,omitempty"`
+	// BIOS Token for setting DFX OSB configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring DfxOsbEn token. * `disabled` - Value - disabled for configuring DfxOsbEn token. * `enabled` - Value - enabled for configuring DfxOsbEn token.
+	DfxOsbEn *string `json:"DfxOsbEn,omitempty"`
 	// BIOS Token for setting Direct Cache Access Support configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `auto` - Value - auto for configuring DirectCacheAccess token. * `disabled` - Value - disabled for configuring DirectCacheAccess token. * `enabled` - Value - enabled for configuring DirectCacheAccess token.
 	DirectCacheAccess *string `json:"DirectCacheAccess,omitempty"`
 	// BIOS Token for setting DMA Control Opt-In Flag configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
@@ -264,6 +316,8 @@ type BiosPolicy struct {
 	IntelVtdPassThroughDmaSupport *string `json:"IntelVtdPassThroughDmaSupport,omitempty"`
 	// BIOS Token for setting Intel VTD ATS Support configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
 	IntelVtdatsSupport *string `json:"IntelVtdatsSupport,omitempty"`
+	// BIOS Token for setting IOAT Configuration configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
+	IoatConfigCpm *string `json:"IoatConfigCpm,omitempty"`
 	// BIOS Token for setting IIO Error Enable configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `No` - Value - No for configuring IohErrorEnable token. * `Yes` - Value - Yes for configuring IohErrorEnable token.
 	IohErrorEnable *string `json:"IohErrorEnable,omitempty"`
 	// BIOS Token for setting IOH Resource Allocation configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `IOH0 24k IOH1 40k` - Value - IOH0 24k IOH1 40k for configuring IohResource token. * `IOH0 32k IOH1 32k` - Value - IOH0 32k IOH1 32k for configuring IohResource token. * `IOH0 40k IOH1 24k` - Value - IOH0 40k IOH1 24k for configuring IohResource token. * `IOH0 48k IOH1 16k` - Value - IOH0 48k IOH1 16k for configuring IohResource token. * `IOH0 56k IOH1 8k` - Value - IOH0 56k IOH1 8k for configuring IohResource token.
@@ -318,6 +372,10 @@ type BiosPolicy struct {
 	MirroringMode *string `json:"MirroringMode,omitempty"`
 	// BIOS Token for setting MMCFG BASE configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `1 GB` - Value - 1 GiB for configuring MmcfgBase token. * `2 GB` - Value - 2 GiB for configuring MmcfgBase token. * `2.5 GB` - Value - 2.5 GiB for configuring MmcfgBase token. * `3 GB` - Value - 3 GiB for configuring MmcfgBase token. * `Auto` - Value - Auto for configuring MmcfgBase token.
 	MmcfgBase *string `json:"MmcfgBase,omitempty"`
+	// BIOS Token for setting MMIO High Base configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `512G` - Value - 512G for configuring MmiohBase token. * `1T` - Value - 1T for configuring MmiohBase token. * `2T` - Value - 2T for configuring MmiohBase token. * `4T` - Value - 4T for configuring MmiohBase token. * `16T` - Value - 16T for configuring MmiohBase token. * `24T` - Value - 24T for configuring MmiohBase token. * `32T` - Value - 32T for configuring MmiohBase token. * `40T` - Value - 40T for configuring MmiohBase token. * `56T` - Value - 56T for configuring MmiohBase token.
+	MmiohBase *string `json:"MmiohBase,omitempty"`
+	// BIOS Token for setting MMIO High Granularity Size configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `1G` - Value - 1G for configuring MmiohSize token. * `4G` - Value - 4G for configuring MmiohSize token. * `16G` - Value - 16G for configuring MmiohSize token. * `64G` - Value - 64G for configuring MmiohSize token. * `256G` - Value - 256G for configuring MmiohSize token. * `1024G` - Value - 1024G for configuring MmiohSize token.
+	MmiohSize *string `json:"MmiohSize,omitempty"`
 	// BIOS Token for setting Network Stack configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
 	NetworkStack *string `json:"NetworkStack,omitempty"`
 	// BIOS Token for setting NUMA Optimized configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
@@ -390,7 +448,7 @@ type BiosPolicy struct {
 	PcieSlotMraid2linkSpeed *string `json:"PcieSlotMraid2linkSpeed,omitempty"`
 	// BIOS Token for setting MRAID2 OptionROM configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
 	PcieSlotMraid2optionRom *string `json:"PcieSlotMraid2optionRom,omitempty"`
-	// BIOS Token for setting PCIe Slot MSTOR Link Speed configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring PcieSlotMstorraidLinkSpeed token. * `Disabled` - Value - Disabled for configuring PcieSlotMstorraidLinkSpeed token. * `GEN1` - Value - GEN1 for configuring PcieSlotMstorraidLinkSpeed token. * `GEN2` - Value - GEN2 for configuring PcieSlotMstorraidLinkSpeed token. * `GEN3` - Value - GEN3 for configuring PcieSlotMstorraidLinkSpeed token. * `GEN4` - Value - GEN4 for configuring PcieSlotMstorraidLinkSpeed token.
+	// BIOS Token for setting PCIe Slot MSTOR Link Speed configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring PcieSlotMstorraidLinkSpeed token. * `Disabled` - Value - Disabled for configuring PcieSlotMstorraidLinkSpeed token. * `GEN1` - Value - GEN1 for configuring PcieSlotMstorraidLinkSpeed token. * `GEN2` - Value - GEN2 for configuring PcieSlotMstorraidLinkSpeed token. * `GEN3` - Value - GEN3 for configuring PcieSlotMstorraidLinkSpeed token. * `GEN4` - Value - GEN4 for configuring PcieSlotMstorraidLinkSpeed token. * `GEN5` - Value - GEN5 for configuring PcieSlotMstorraidLinkSpeed token.
 	PcieSlotMstorraidLinkSpeed *string `json:"PcieSlotMstorraidLinkSpeed,omitempty"`
 	// BIOS Token for setting PCIe Slot MSTOR RAID OptionROM configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
 	PcieSlotMstorraidOptionRom *string `json:"PcieSlotMstorraidOptionRom,omitempty"`
@@ -426,7 +484,7 @@ type BiosPolicy struct {
 	PostErrorPause *string `json:"PostErrorPause,omitempty"`
 	// BIOS Token for setting Post Package Repair configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Disabled` - Value - Disabled for configuring PostPackageRepair token. * `Hard PPR` - Value - Hard PPR for configuring PostPackageRepair token.
 	PostPackageRepair *string `json:"PostPackageRepair,omitempty"`
-	// BIOS Token for setting PRMRR Size configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `1G` - Value - 1G for configuring PrmrrSize token. * `2G` - Value - 2G for configuring PrmrrSize token. * `4G` - Value - 4G for configuring PrmrrSize token. * `8G` - Value - 8G for configuring PrmrrSize token. * `16G` - Value - 16G for configuring PrmrrSize token. * `32G` - Value - 32G for configuring PrmrrSize token. * `64G` - Value - 64G for configuring PrmrrSize token. * `128G` - Value - 128G for configuring PrmrrSize token. * `256G` - Value - 256G for configuring PrmrrSize token. * `512G` - Value - 512G for configuring PrmrrSize token. * `128M` - Value - 128M for configuring PrmrrSize token. * `256M` - Value - 256M for configuring PrmrrSize token. * `512M` - Value - 512M for configuring PrmrrSize token. * `Invalid Config.` - Value - Invalid Config for configuring PrmrrSize token.
+	// BIOS Token for setting PRMRR Size configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `1G` - Value - 1G for configuring PrmrrSize token. * `2G` - Value - 2G for configuring PrmrrSize token. * `4G` - Value - 4G for configuring PrmrrSize token. * `8G` - Value - 8G for configuring PrmrrSize token. * `16G` - Value - 16G for configuring PrmrrSize token. * `32G` - Value - 32G for configuring PrmrrSize token. * `64G` - Value - 64G for configuring PrmrrSize token. * `128G` - Value - 128G for configuring PrmrrSize token. * `256G` - Value - 256G for configuring PrmrrSize token. * `512G` - Value - 512G for configuring PrmrrSize token. * `128M` - Value - 128M for configuring PrmrrSize token. * `256M` - Value - 256M for configuring PrmrrSize token. * `512M` - Value - 512M for configuring PrmrrSize token. * `Auto` - Value - Auto for configuring PrmrrSize token. * `Invalid Config.` - Value - Invalid Config for configuring PrmrrSize token.
 	PrmrrSize *string `json:"PrmrrSize,omitempty"`
 	// BIOS Token for setting Processor C1E configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
 	ProcessorC1e *string `json:"ProcessorC1e,omitempty"`
@@ -454,12 +512,18 @@ type BiosPolicy struct {
 	RankInterLeave *string `json:"RankInterLeave,omitempty"`
 	// BIOS Token for setting Redirection After BIOS POST configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Always Enable` - Value - Always Enable for configuring RedirectionAfterPost token. * `Bootloader` - Value - Bootloader for configuring RedirectionAfterPost token.
 	RedirectionAfterPost *string `json:"RedirectionAfterPost,omitempty"`
+	// BIOS Token for setting Re-Size BAR Support configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
+	ResizeBarSupport *string `json:"ResizeBarSupport,omitempty"`
+	// BIOS Token for setting Runtime Post Package Repair configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
+	RuntimePostPackageRepair *string `json:"RuntimePostPackageRepair,omitempty"`
 	// BIOS Token for setting SATA Mode configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `AHCI` - Value - AHCI for configuring SataModeSelect token. * `Disabled` - Value - Disabled for configuring SataModeSelect token. * `LSI SW RAID` - Value - LSI SW RAID for configuring SataModeSelect token.
 	SataModeSelect *string `json:"SataModeSelect,omitempty"`
 	// BIOS Token for setting Memory RAS Configuration configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `adddc-sparing` - Value - adddc-sparing for configuring SelectMemoryRasConfiguration token. * `lockstep` - Value - lockstep for configuring SelectMemoryRasConfiguration token. * `maximum-performance` - Value - maximum-performance for configuring SelectMemoryRasConfiguration token. * `mirror-mode-1lm` - Value - mirror-mode-1lm for configuring SelectMemoryRasConfiguration token. * `mirroring` - Value - mirroring for configuring SelectMemoryRasConfiguration token. * `partial-mirror-mode-1lm` - Value - partial-mirror-mode-1lm for configuring SelectMemoryRasConfiguration token. * `sparing` - Value - sparing for configuring SelectMemoryRasConfiguration token.
 	SelectMemoryRasConfiguration *string `json:"SelectMemoryRasConfiguration,omitempty"`
 	// BIOS Token for setting PPR Type configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `disabled` - Value - disabled for configuring SelectPprType token. * `Hard PPR` - Value - Hard PPR for configuring SelectPprType token. * `Soft PPR` - Value - Soft PPR for configuring SelectPprType token.
 	SelectPprType *string `json:"SelectPprType,omitempty"`
+	// BIOS Token for setting Serial Mux configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
+	SerialMux *string `json:"SerialMux,omitempty"`
 	// BIOS Token for setting Serial A Enable configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
 	SerialPortAenable *string `json:"SerialPortAenable,omitempty"`
 	// BIOS Token for setting Secured Encrypted Virtualization configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `253 ASIDs` - Value - 253 ASIDs for configuring Sev token. * `509 ASIDs` - Value - 509 ASIDs for configuring Sev token. * `Auto` - Value - Auto for configuring Sev token.
@@ -934,6 +998,10 @@ func NewBiosPolicy(classId string, objectType string) *BiosPolicy {
 	this.C1autoUnDemotion = &c1autoUnDemotion
 	var cbsCmnApbdis string = "platform-default"
 	this.CbsCmnApbdis = &cbsCmnApbdis
+	var cbsCmnApbdisDfPstateRs string = "platform-default"
+	this.CbsCmnApbdisDfPstateRs = &cbsCmnApbdisDfPstateRs
+	var cbsCmnCpuAvx512 string = "platform-default"
+	this.CbsCmnCpuAvx512 = &cbsCmnCpuAvx512
 	var cbsCmnCpuCpb string = "platform-default"
 	this.CbsCmnCpuCpb = &cbsCmnCpuCpb
 	var cbsCmnCpuGenDowncoreCtrl string = "platform-default"
@@ -944,46 +1012,92 @@ func NewBiosPolicy(classId string, objectType string) *BiosPolicy {
 	this.CbsCmnCpuL1streamHwPrefetcher = &cbsCmnCpuL1streamHwPrefetcher
 	var cbsCmnCpuL2streamHwPrefetcher string = "platform-default"
 	this.CbsCmnCpuL2streamHwPrefetcher = &cbsCmnCpuL2streamHwPrefetcher
+	var cbsCmnCpuSevAsidSpaceLimit string = "platform-default"
+	this.CbsCmnCpuSevAsidSpaceLimit = &cbsCmnCpuSevAsidSpaceLimit
 	var cbsCmnCpuSmee string = "platform-default"
 	this.CbsCmnCpuSmee = &cbsCmnCpuSmee
 	var cbsCmnCpuStreamingStoresCtrl string = "platform-default"
 	this.CbsCmnCpuStreamingStoresCtrl = &cbsCmnCpuStreamingStoresCtrl
 	var cbsCmnDeterminismSlider string = "platform-default"
 	this.CbsCmnDeterminismSlider = &cbsCmnDeterminismSlider
+	var cbsCmnEdcControlThrottle string = "platform-default"
+	this.CbsCmnEdcControlThrottle = &cbsCmnEdcControlThrottle
 	var cbsCmnEfficiencyModeEn string = "platform-default"
 	this.CbsCmnEfficiencyModeEn = &cbsCmnEfficiencyModeEn
+	var cbsCmnEfficiencyModeEnRs string = "platform-default"
+	this.CbsCmnEfficiencyModeEnRs = &cbsCmnEfficiencyModeEnRs
 	var cbsCmnFixedSocPstate string = "platform-default"
 	this.CbsCmnFixedSocPstate = &cbsCmnFixedSocPstate
 	var cbsCmnGnbNbIommu string = "platform-default"
 	this.CbsCmnGnbNbIommu = &cbsCmnGnbNbIommu
 	var cbsCmnGnbSmuDfCstates string = "platform-default"
 	this.CbsCmnGnbSmuDfCstates = &cbsCmnGnbSmuDfCstates
+	var cbsCmnGnbSmuDffoRs string = "platform-default"
+	this.CbsCmnGnbSmuDffoRs = &cbsCmnGnbSmuDffoRs
+	var cbsCmnGnbSmuDlwmSupport string = "platform-default"
+	this.CbsCmnGnbSmuDlwmSupport = &cbsCmnGnbSmuDlwmSupport
 	var cbsCmnGnbSmucppc string = "platform-default"
 	this.CbsCmnGnbSmucppc = &cbsCmnGnbSmucppc
 	var cbsCmnMemCtrlBankGroupSwapDdr4 string = "platform-default"
 	this.CbsCmnMemCtrlBankGroupSwapDdr4 = &cbsCmnMemCtrlBankGroupSwapDdr4
+	var cbsCmnMemCtrllerPwrDnEnDdr string = "platform-default"
+	this.CbsCmnMemCtrllerPwrDnEnDdr = &cbsCmnMemCtrllerPwrDnEnDdr
+	var cbsCmnMemDramRefreshRate string = "platform-default"
+	this.CbsCmnMemDramRefreshRate = &cbsCmnMemDramRefreshRate
 	var cbsCmnMemMapBankInterleaveDdr4 string = "platform-default"
 	this.CbsCmnMemMapBankInterleaveDdr4 = &cbsCmnMemMapBankInterleaveDdr4
+	var cbsCmnMemSpeedDdr47xx2 string = "platform-default"
+	this.CbsCmnMemSpeedDdr47xx2 = &cbsCmnMemSpeedDdr47xx2
+	var cbsCmnMemSpeedDdr47xx3 string = "platform-default"
+	this.CbsCmnMemSpeedDdr47xx3 = &cbsCmnMemSpeedDdr47xx3
+	var cbsCmnPreferredIo7xx2 string = "platform-default"
+	this.CbsCmnPreferredIo7xx2 = &cbsCmnPreferredIo7xx2
+	var cbsCmnPreferredIo7xx3 string = "platform-default"
+	this.CbsCmnPreferredIo7xx3 = &cbsCmnPreferredIo7xx3
 	var cbsCmncTdpCtl string = "platform-default"
 	this.CbsCmncTdpCtl = &cbsCmncTdpCtl
+	var cbsCmnxGmiForceLinkWidthRs string = "platform-default"
+	this.CbsCmnxGmiForceLinkWidthRs = &cbsCmnxGmiForceLinkWidthRs
 	var cbsCpuCcdCtrlSsp string = "platform-default"
 	this.CbsCpuCcdCtrlSsp = &cbsCpuCcdCtrlSsp
 	var cbsCpuCoreCtrl string = "platform-default"
 	this.CbsCpuCoreCtrl = &cbsCpuCoreCtrl
+	var cbsCpuDownCoreCtrlBergamo string = "platform-default"
+	this.CbsCpuDownCoreCtrlBergamo = &cbsCpuDownCoreCtrlBergamo
+	var cbsCpuDownCoreCtrlGenoa string = "platform-default"
+	this.CbsCpuDownCoreCtrlGenoa = &cbsCpuDownCoreCtrlGenoa
 	var cbsCpuSmtCtrl string = "platform-default"
 	this.CbsCpuSmtCtrl = &cbsCpuSmtCtrl
+	var cbsDbgCpuGenCpuWdt string = "platform-default"
+	this.CbsDbgCpuGenCpuWdt = &cbsDbgCpuGenCpuWdt
+	var cbsDbgCpuLapicMode string = "platform-default"
+	this.CbsDbgCpuLapicMode = &cbsDbgCpuLapicMode
+	var cbsDbgCpuLapicMode7xx2 string = "platform-default"
+	this.CbsDbgCpuLapicMode7xx2 = &cbsDbgCpuLapicMode7xx2
+	var cbsDbgCpuLapicMode7xx3 string = "platform-default"
+	this.CbsDbgCpuLapicMode7xx3 = &cbsDbgCpuLapicMode7xx3
 	var cbsDbgCpuSnpMemCover string = "platform-default"
 	this.CbsDbgCpuSnpMemCover = &cbsDbgCpuSnpMemCover
 	var cbsDbgCpuSnpMemSizeCover string = "platform-default"
 	this.CbsDbgCpuSnpMemSizeCover = &cbsDbgCpuSnpMemSizeCover
+	var cbsDfCmn4linkMaxXgmiSpeed string = "platform-default"
+	this.CbsDfCmn4linkMaxXgmiSpeed = &cbsDfCmn4linkMaxXgmiSpeed
 	var cbsDfCmnAcpiSratL3numa string = "platform-default"
 	this.CbsDfCmnAcpiSratL3numa = &cbsDfCmnAcpiSratL3numa
 	var cbsDfCmnDramNps string = "platform-default"
 	this.CbsDfCmnDramNps = &cbsDfCmnDramNps
+	var cbsDfCmnDramScrubTime string = "platform-default"
+	this.CbsDfCmnDramScrubTime = &cbsDfCmnDramScrubTime
 	var cbsDfCmnMemIntlv string = "platform-default"
 	this.CbsDfCmnMemIntlv = &cbsDfCmnMemIntlv
+	var cbsDfCmnMemIntlvControl string = "platform-default"
+	this.CbsDfCmnMemIntlvControl = &cbsDfCmnMemIntlvControl
 	var cbsDfCmnMemIntlvSize string = "platform-default"
 	this.CbsDfCmnMemIntlvSize = &cbsDfCmnMemIntlvSize
+	var cbsDfDbgXgmiLinkCfg string = "platform-default"
+	this.CbsDfDbgXgmiLinkCfg = &cbsDfDbgXgmiLinkCfg
+	var cbsGnbDbgPcieTbtSupport string = "platform-default"
+	this.CbsGnbDbgPcieTbtSupport = &cbsGnbDbgPcieTbtSupport
 	var cbsSevSnpSupport string = "platform-default"
 	this.CbsSevSnpSupport = &cbsSevSnpSupport
 	var cdnEnable string = "platform-default"
@@ -1034,6 +1148,8 @@ func NewBiosPolicy(classId string, objectType string) *BiosPolicy {
 	this.DcpmmFirmwareDowngrade = &dcpmmFirmwareDowngrade
 	var demandScrub string = "platform-default"
 	this.DemandScrub = &demandScrub
+	var dfxOsbEn string = "platform-default"
+	this.DfxOsbEn = &dfxOsbEn
 	var directCacheAccess string = "platform-default"
 	this.DirectCacheAccess = &directCacheAccess
 	var dmaCtrlOptIn string = "platform-default"
@@ -1110,6 +1226,8 @@ func NewBiosPolicy(classId string, objectType string) *BiosPolicy {
 	this.IntelVtdPassThroughDmaSupport = &intelVtdPassThroughDmaSupport
 	var intelVtdatsSupport string = "platform-default"
 	this.IntelVtdatsSupport = &intelVtdatsSupport
+	var ioatConfigCpm string = "platform-default"
+	this.IoatConfigCpm = &ioatConfigCpm
 	var iohErrorEnable string = "platform-default"
 	this.IohErrorEnable = &iohErrorEnable
 	var iohResource string = "platform-default"
@@ -1164,6 +1282,10 @@ func NewBiosPolicy(classId string, objectType string) *BiosPolicy {
 	this.MirroringMode = &mirroringMode
 	var mmcfgBase string = "platform-default"
 	this.MmcfgBase = &mmcfgBase
+	var mmiohBase string = "platform-default"
+	this.MmiohBase = &mmiohBase
+	var mmiohSize string = "platform-default"
+	this.MmiohSize = &mmiohSize
 	var networkStack string = "platform-default"
 	this.NetworkStack = &networkStack
 	var numaOptimized string = "platform-default"
@@ -1300,12 +1422,18 @@ func NewBiosPolicy(classId string, objectType string) *BiosPolicy {
 	this.RankInterLeave = &rankInterLeave
 	var redirectionAfterPost string = "platform-default"
 	this.RedirectionAfterPost = &redirectionAfterPost
+	var resizeBarSupport string = "platform-default"
+	this.ResizeBarSupport = &resizeBarSupport
+	var runtimePostPackageRepair string = "platform-default"
+	this.RuntimePostPackageRepair = &runtimePostPackageRepair
 	var sataModeSelect string = "platform-default"
 	this.SataModeSelect = &sataModeSelect
 	var selectMemoryRasConfiguration string = "platform-default"
 	this.SelectMemoryRasConfiguration = &selectMemoryRasConfiguration
 	var selectPprType string = "platform-default"
 	this.SelectPprType = &selectPprType
+	var serialMux string = "platform-default"
+	this.SerialMux = &serialMux
 	var serialPortAenable string = "platform-default"
 	this.SerialPortAenable = &serialPortAenable
 	var sev string = "platform-default"
@@ -1776,6 +1904,10 @@ func NewBiosPolicyWithDefaults() *BiosPolicy {
 	this.C1autoUnDemotion = &c1autoUnDemotion
 	var cbsCmnApbdis string = "platform-default"
 	this.CbsCmnApbdis = &cbsCmnApbdis
+	var cbsCmnApbdisDfPstateRs string = "platform-default"
+	this.CbsCmnApbdisDfPstateRs = &cbsCmnApbdisDfPstateRs
+	var cbsCmnCpuAvx512 string = "platform-default"
+	this.CbsCmnCpuAvx512 = &cbsCmnCpuAvx512
 	var cbsCmnCpuCpb string = "platform-default"
 	this.CbsCmnCpuCpb = &cbsCmnCpuCpb
 	var cbsCmnCpuGenDowncoreCtrl string = "platform-default"
@@ -1786,46 +1918,92 @@ func NewBiosPolicyWithDefaults() *BiosPolicy {
 	this.CbsCmnCpuL1streamHwPrefetcher = &cbsCmnCpuL1streamHwPrefetcher
 	var cbsCmnCpuL2streamHwPrefetcher string = "platform-default"
 	this.CbsCmnCpuL2streamHwPrefetcher = &cbsCmnCpuL2streamHwPrefetcher
+	var cbsCmnCpuSevAsidSpaceLimit string = "platform-default"
+	this.CbsCmnCpuSevAsidSpaceLimit = &cbsCmnCpuSevAsidSpaceLimit
 	var cbsCmnCpuSmee string = "platform-default"
 	this.CbsCmnCpuSmee = &cbsCmnCpuSmee
 	var cbsCmnCpuStreamingStoresCtrl string = "platform-default"
 	this.CbsCmnCpuStreamingStoresCtrl = &cbsCmnCpuStreamingStoresCtrl
 	var cbsCmnDeterminismSlider string = "platform-default"
 	this.CbsCmnDeterminismSlider = &cbsCmnDeterminismSlider
+	var cbsCmnEdcControlThrottle string = "platform-default"
+	this.CbsCmnEdcControlThrottle = &cbsCmnEdcControlThrottle
 	var cbsCmnEfficiencyModeEn string = "platform-default"
 	this.CbsCmnEfficiencyModeEn = &cbsCmnEfficiencyModeEn
+	var cbsCmnEfficiencyModeEnRs string = "platform-default"
+	this.CbsCmnEfficiencyModeEnRs = &cbsCmnEfficiencyModeEnRs
 	var cbsCmnFixedSocPstate string = "platform-default"
 	this.CbsCmnFixedSocPstate = &cbsCmnFixedSocPstate
 	var cbsCmnGnbNbIommu string = "platform-default"
 	this.CbsCmnGnbNbIommu = &cbsCmnGnbNbIommu
 	var cbsCmnGnbSmuDfCstates string = "platform-default"
 	this.CbsCmnGnbSmuDfCstates = &cbsCmnGnbSmuDfCstates
+	var cbsCmnGnbSmuDffoRs string = "platform-default"
+	this.CbsCmnGnbSmuDffoRs = &cbsCmnGnbSmuDffoRs
+	var cbsCmnGnbSmuDlwmSupport string = "platform-default"
+	this.CbsCmnGnbSmuDlwmSupport = &cbsCmnGnbSmuDlwmSupport
 	var cbsCmnGnbSmucppc string = "platform-default"
 	this.CbsCmnGnbSmucppc = &cbsCmnGnbSmucppc
 	var cbsCmnMemCtrlBankGroupSwapDdr4 string = "platform-default"
 	this.CbsCmnMemCtrlBankGroupSwapDdr4 = &cbsCmnMemCtrlBankGroupSwapDdr4
+	var cbsCmnMemCtrllerPwrDnEnDdr string = "platform-default"
+	this.CbsCmnMemCtrllerPwrDnEnDdr = &cbsCmnMemCtrllerPwrDnEnDdr
+	var cbsCmnMemDramRefreshRate string = "platform-default"
+	this.CbsCmnMemDramRefreshRate = &cbsCmnMemDramRefreshRate
 	var cbsCmnMemMapBankInterleaveDdr4 string = "platform-default"
 	this.CbsCmnMemMapBankInterleaveDdr4 = &cbsCmnMemMapBankInterleaveDdr4
+	var cbsCmnMemSpeedDdr47xx2 string = "platform-default"
+	this.CbsCmnMemSpeedDdr47xx2 = &cbsCmnMemSpeedDdr47xx2
+	var cbsCmnMemSpeedDdr47xx3 string = "platform-default"
+	this.CbsCmnMemSpeedDdr47xx3 = &cbsCmnMemSpeedDdr47xx3
+	var cbsCmnPreferredIo7xx2 string = "platform-default"
+	this.CbsCmnPreferredIo7xx2 = &cbsCmnPreferredIo7xx2
+	var cbsCmnPreferredIo7xx3 string = "platform-default"
+	this.CbsCmnPreferredIo7xx3 = &cbsCmnPreferredIo7xx3
 	var cbsCmncTdpCtl string = "platform-default"
 	this.CbsCmncTdpCtl = &cbsCmncTdpCtl
+	var cbsCmnxGmiForceLinkWidthRs string = "platform-default"
+	this.CbsCmnxGmiForceLinkWidthRs = &cbsCmnxGmiForceLinkWidthRs
 	var cbsCpuCcdCtrlSsp string = "platform-default"
 	this.CbsCpuCcdCtrlSsp = &cbsCpuCcdCtrlSsp
 	var cbsCpuCoreCtrl string = "platform-default"
 	this.CbsCpuCoreCtrl = &cbsCpuCoreCtrl
+	var cbsCpuDownCoreCtrlBergamo string = "platform-default"
+	this.CbsCpuDownCoreCtrlBergamo = &cbsCpuDownCoreCtrlBergamo
+	var cbsCpuDownCoreCtrlGenoa string = "platform-default"
+	this.CbsCpuDownCoreCtrlGenoa = &cbsCpuDownCoreCtrlGenoa
 	var cbsCpuSmtCtrl string = "platform-default"
 	this.CbsCpuSmtCtrl = &cbsCpuSmtCtrl
+	var cbsDbgCpuGenCpuWdt string = "platform-default"
+	this.CbsDbgCpuGenCpuWdt = &cbsDbgCpuGenCpuWdt
+	var cbsDbgCpuLapicMode string = "platform-default"
+	this.CbsDbgCpuLapicMode = &cbsDbgCpuLapicMode
+	var cbsDbgCpuLapicMode7xx2 string = "platform-default"
+	this.CbsDbgCpuLapicMode7xx2 = &cbsDbgCpuLapicMode7xx2
+	var cbsDbgCpuLapicMode7xx3 string = "platform-default"
+	this.CbsDbgCpuLapicMode7xx3 = &cbsDbgCpuLapicMode7xx3
 	var cbsDbgCpuSnpMemCover string = "platform-default"
 	this.CbsDbgCpuSnpMemCover = &cbsDbgCpuSnpMemCover
 	var cbsDbgCpuSnpMemSizeCover string = "platform-default"
 	this.CbsDbgCpuSnpMemSizeCover = &cbsDbgCpuSnpMemSizeCover
+	var cbsDfCmn4linkMaxXgmiSpeed string = "platform-default"
+	this.CbsDfCmn4linkMaxXgmiSpeed = &cbsDfCmn4linkMaxXgmiSpeed
 	var cbsDfCmnAcpiSratL3numa string = "platform-default"
 	this.CbsDfCmnAcpiSratL3numa = &cbsDfCmnAcpiSratL3numa
 	var cbsDfCmnDramNps string = "platform-default"
 	this.CbsDfCmnDramNps = &cbsDfCmnDramNps
+	var cbsDfCmnDramScrubTime string = "platform-default"
+	this.CbsDfCmnDramScrubTime = &cbsDfCmnDramScrubTime
 	var cbsDfCmnMemIntlv string = "platform-default"
 	this.CbsDfCmnMemIntlv = &cbsDfCmnMemIntlv
+	var cbsDfCmnMemIntlvControl string = "platform-default"
+	this.CbsDfCmnMemIntlvControl = &cbsDfCmnMemIntlvControl
 	var cbsDfCmnMemIntlvSize string = "platform-default"
 	this.CbsDfCmnMemIntlvSize = &cbsDfCmnMemIntlvSize
+	var cbsDfDbgXgmiLinkCfg string = "platform-default"
+	this.CbsDfDbgXgmiLinkCfg = &cbsDfDbgXgmiLinkCfg
+	var cbsGnbDbgPcieTbtSupport string = "platform-default"
+	this.CbsGnbDbgPcieTbtSupport = &cbsGnbDbgPcieTbtSupport
 	var cbsSevSnpSupport string = "platform-default"
 	this.CbsSevSnpSupport = &cbsSevSnpSupport
 	var cdnEnable string = "platform-default"
@@ -1876,6 +2054,8 @@ func NewBiosPolicyWithDefaults() *BiosPolicy {
 	this.DcpmmFirmwareDowngrade = &dcpmmFirmwareDowngrade
 	var demandScrub string = "platform-default"
 	this.DemandScrub = &demandScrub
+	var dfxOsbEn string = "platform-default"
+	this.DfxOsbEn = &dfxOsbEn
 	var directCacheAccess string = "platform-default"
 	this.DirectCacheAccess = &directCacheAccess
 	var dmaCtrlOptIn string = "platform-default"
@@ -1952,6 +2132,8 @@ func NewBiosPolicyWithDefaults() *BiosPolicy {
 	this.IntelVtdPassThroughDmaSupport = &intelVtdPassThroughDmaSupport
 	var intelVtdatsSupport string = "platform-default"
 	this.IntelVtdatsSupport = &intelVtdatsSupport
+	var ioatConfigCpm string = "platform-default"
+	this.IoatConfigCpm = &ioatConfigCpm
 	var iohErrorEnable string = "platform-default"
 	this.IohErrorEnable = &iohErrorEnable
 	var iohResource string = "platform-default"
@@ -2006,6 +2188,10 @@ func NewBiosPolicyWithDefaults() *BiosPolicy {
 	this.MirroringMode = &mirroringMode
 	var mmcfgBase string = "platform-default"
 	this.MmcfgBase = &mmcfgBase
+	var mmiohBase string = "platform-default"
+	this.MmiohBase = &mmiohBase
+	var mmiohSize string = "platform-default"
+	this.MmiohSize = &mmiohSize
 	var networkStack string = "platform-default"
 	this.NetworkStack = &networkStack
 	var numaOptimized string = "platform-default"
@@ -2142,12 +2328,18 @@ func NewBiosPolicyWithDefaults() *BiosPolicy {
 	this.RankInterLeave = &rankInterLeave
 	var redirectionAfterPost string = "platform-default"
 	this.RedirectionAfterPost = &redirectionAfterPost
+	var resizeBarSupport string = "platform-default"
+	this.ResizeBarSupport = &resizeBarSupport
+	var runtimePostPackageRepair string = "platform-default"
+	this.RuntimePostPackageRepair = &runtimePostPackageRepair
 	var sataModeSelect string = "platform-default"
 	this.SataModeSelect = &sataModeSelect
 	var selectMemoryRasConfiguration string = "platform-default"
 	this.SelectMemoryRasConfiguration = &selectMemoryRasConfiguration
 	var selectPprType string = "platform-default"
 	this.SelectPprType = &selectPprType
+	var serialMux string = "platform-default"
+	this.SerialMux = &serialMux
 	var serialPortAenable string = "platform-default"
 	this.SerialPortAenable = &serialPortAenable
 	var sev string = "platform-default"
@@ -3617,6 +3809,70 @@ func (o *BiosPolicy) SetCbsCmnApbdis(v string) {
 	o.CbsCmnApbdis = &v
 }
 
+// GetCbsCmnApbdisDfPstateRs returns the CbsCmnApbdisDfPstateRs field value if set, zero value otherwise.
+func (o *BiosPolicy) GetCbsCmnApbdisDfPstateRs() string {
+	if o == nil || o.CbsCmnApbdisDfPstateRs == nil {
+		var ret string
+		return ret
+	}
+	return *o.CbsCmnApbdisDfPstateRs
+}
+
+// GetCbsCmnApbdisDfPstateRsOk returns a tuple with the CbsCmnApbdisDfPstateRs field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BiosPolicy) GetCbsCmnApbdisDfPstateRsOk() (*string, bool) {
+	if o == nil || o.CbsCmnApbdisDfPstateRs == nil {
+		return nil, false
+	}
+	return o.CbsCmnApbdisDfPstateRs, true
+}
+
+// HasCbsCmnApbdisDfPstateRs returns a boolean if a field has been set.
+func (o *BiosPolicy) HasCbsCmnApbdisDfPstateRs() bool {
+	if o != nil && o.CbsCmnApbdisDfPstateRs != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetCbsCmnApbdisDfPstateRs gets a reference to the given string and assigns it to the CbsCmnApbdisDfPstateRs field.
+func (o *BiosPolicy) SetCbsCmnApbdisDfPstateRs(v string) {
+	o.CbsCmnApbdisDfPstateRs = &v
+}
+
+// GetCbsCmnCpuAvx512 returns the CbsCmnCpuAvx512 field value if set, zero value otherwise.
+func (o *BiosPolicy) GetCbsCmnCpuAvx512() string {
+	if o == nil || o.CbsCmnCpuAvx512 == nil {
+		var ret string
+		return ret
+	}
+	return *o.CbsCmnCpuAvx512
+}
+
+// GetCbsCmnCpuAvx512Ok returns a tuple with the CbsCmnCpuAvx512 field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BiosPolicy) GetCbsCmnCpuAvx512Ok() (*string, bool) {
+	if o == nil || o.CbsCmnCpuAvx512 == nil {
+		return nil, false
+	}
+	return o.CbsCmnCpuAvx512, true
+}
+
+// HasCbsCmnCpuAvx512 returns a boolean if a field has been set.
+func (o *BiosPolicy) HasCbsCmnCpuAvx512() bool {
+	if o != nil && o.CbsCmnCpuAvx512 != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetCbsCmnCpuAvx512 gets a reference to the given string and assigns it to the CbsCmnCpuAvx512 field.
+func (o *BiosPolicy) SetCbsCmnCpuAvx512(v string) {
+	o.CbsCmnCpuAvx512 = &v
+}
+
 // GetCbsCmnCpuCpb returns the CbsCmnCpuCpb field value if set, zero value otherwise.
 func (o *BiosPolicy) GetCbsCmnCpuCpb() string {
 	if o == nil || o.CbsCmnCpuCpb == nil {
@@ -3777,6 +4033,38 @@ func (o *BiosPolicy) SetCbsCmnCpuL2streamHwPrefetcher(v string) {
 	o.CbsCmnCpuL2streamHwPrefetcher = &v
 }
 
+// GetCbsCmnCpuSevAsidSpaceLimit returns the CbsCmnCpuSevAsidSpaceLimit field value if set, zero value otherwise.
+func (o *BiosPolicy) GetCbsCmnCpuSevAsidSpaceLimit() string {
+	if o == nil || o.CbsCmnCpuSevAsidSpaceLimit == nil {
+		var ret string
+		return ret
+	}
+	return *o.CbsCmnCpuSevAsidSpaceLimit
+}
+
+// GetCbsCmnCpuSevAsidSpaceLimitOk returns a tuple with the CbsCmnCpuSevAsidSpaceLimit field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BiosPolicy) GetCbsCmnCpuSevAsidSpaceLimitOk() (*string, bool) {
+	if o == nil || o.CbsCmnCpuSevAsidSpaceLimit == nil {
+		return nil, false
+	}
+	return o.CbsCmnCpuSevAsidSpaceLimit, true
+}
+
+// HasCbsCmnCpuSevAsidSpaceLimit returns a boolean if a field has been set.
+func (o *BiosPolicy) HasCbsCmnCpuSevAsidSpaceLimit() bool {
+	if o != nil && o.CbsCmnCpuSevAsidSpaceLimit != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetCbsCmnCpuSevAsidSpaceLimit gets a reference to the given string and assigns it to the CbsCmnCpuSevAsidSpaceLimit field.
+func (o *BiosPolicy) SetCbsCmnCpuSevAsidSpaceLimit(v string) {
+	o.CbsCmnCpuSevAsidSpaceLimit = &v
+}
+
 // GetCbsCmnCpuSmee returns the CbsCmnCpuSmee field value if set, zero value otherwise.
 func (o *BiosPolicy) GetCbsCmnCpuSmee() string {
 	if o == nil || o.CbsCmnCpuSmee == nil {
@@ -3873,6 +4161,38 @@ func (o *BiosPolicy) SetCbsCmnDeterminismSlider(v string) {
 	o.CbsCmnDeterminismSlider = &v
 }
 
+// GetCbsCmnEdcControlThrottle returns the CbsCmnEdcControlThrottle field value if set, zero value otherwise.
+func (o *BiosPolicy) GetCbsCmnEdcControlThrottle() string {
+	if o == nil || o.CbsCmnEdcControlThrottle == nil {
+		var ret string
+		return ret
+	}
+	return *o.CbsCmnEdcControlThrottle
+}
+
+// GetCbsCmnEdcControlThrottleOk returns a tuple with the CbsCmnEdcControlThrottle field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BiosPolicy) GetCbsCmnEdcControlThrottleOk() (*string, bool) {
+	if o == nil || o.CbsCmnEdcControlThrottle == nil {
+		return nil, false
+	}
+	return o.CbsCmnEdcControlThrottle, true
+}
+
+// HasCbsCmnEdcControlThrottle returns a boolean if a field has been set.
+func (o *BiosPolicy) HasCbsCmnEdcControlThrottle() bool {
+	if o != nil && o.CbsCmnEdcControlThrottle != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetCbsCmnEdcControlThrottle gets a reference to the given string and assigns it to the CbsCmnEdcControlThrottle field.
+func (o *BiosPolicy) SetCbsCmnEdcControlThrottle(v string) {
+	o.CbsCmnEdcControlThrottle = &v
+}
+
 // GetCbsCmnEfficiencyModeEn returns the CbsCmnEfficiencyModeEn field value if set, zero value otherwise.
 func (o *BiosPolicy) GetCbsCmnEfficiencyModeEn() string {
 	if o == nil || o.CbsCmnEfficiencyModeEn == nil {
@@ -3903,6 +4223,38 @@ func (o *BiosPolicy) HasCbsCmnEfficiencyModeEn() bool {
 // SetCbsCmnEfficiencyModeEn gets a reference to the given string and assigns it to the CbsCmnEfficiencyModeEn field.
 func (o *BiosPolicy) SetCbsCmnEfficiencyModeEn(v string) {
 	o.CbsCmnEfficiencyModeEn = &v
+}
+
+// GetCbsCmnEfficiencyModeEnRs returns the CbsCmnEfficiencyModeEnRs field value if set, zero value otherwise.
+func (o *BiosPolicy) GetCbsCmnEfficiencyModeEnRs() string {
+	if o == nil || o.CbsCmnEfficiencyModeEnRs == nil {
+		var ret string
+		return ret
+	}
+	return *o.CbsCmnEfficiencyModeEnRs
+}
+
+// GetCbsCmnEfficiencyModeEnRsOk returns a tuple with the CbsCmnEfficiencyModeEnRs field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BiosPolicy) GetCbsCmnEfficiencyModeEnRsOk() (*string, bool) {
+	if o == nil || o.CbsCmnEfficiencyModeEnRs == nil {
+		return nil, false
+	}
+	return o.CbsCmnEfficiencyModeEnRs, true
+}
+
+// HasCbsCmnEfficiencyModeEnRs returns a boolean if a field has been set.
+func (o *BiosPolicy) HasCbsCmnEfficiencyModeEnRs() bool {
+	if o != nil && o.CbsCmnEfficiencyModeEnRs != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetCbsCmnEfficiencyModeEnRs gets a reference to the given string and assigns it to the CbsCmnEfficiencyModeEnRs field.
+func (o *BiosPolicy) SetCbsCmnEfficiencyModeEnRs(v string) {
+	o.CbsCmnEfficiencyModeEnRs = &v
 }
 
 // GetCbsCmnFixedSocPstate returns the CbsCmnFixedSocPstate field value if set, zero value otherwise.
@@ -4001,6 +4353,70 @@ func (o *BiosPolicy) SetCbsCmnGnbSmuDfCstates(v string) {
 	o.CbsCmnGnbSmuDfCstates = &v
 }
 
+// GetCbsCmnGnbSmuDffoRs returns the CbsCmnGnbSmuDffoRs field value if set, zero value otherwise.
+func (o *BiosPolicy) GetCbsCmnGnbSmuDffoRs() string {
+	if o == nil || o.CbsCmnGnbSmuDffoRs == nil {
+		var ret string
+		return ret
+	}
+	return *o.CbsCmnGnbSmuDffoRs
+}
+
+// GetCbsCmnGnbSmuDffoRsOk returns a tuple with the CbsCmnGnbSmuDffoRs field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BiosPolicy) GetCbsCmnGnbSmuDffoRsOk() (*string, bool) {
+	if o == nil || o.CbsCmnGnbSmuDffoRs == nil {
+		return nil, false
+	}
+	return o.CbsCmnGnbSmuDffoRs, true
+}
+
+// HasCbsCmnGnbSmuDffoRs returns a boolean if a field has been set.
+func (o *BiosPolicy) HasCbsCmnGnbSmuDffoRs() bool {
+	if o != nil && o.CbsCmnGnbSmuDffoRs != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetCbsCmnGnbSmuDffoRs gets a reference to the given string and assigns it to the CbsCmnGnbSmuDffoRs field.
+func (o *BiosPolicy) SetCbsCmnGnbSmuDffoRs(v string) {
+	o.CbsCmnGnbSmuDffoRs = &v
+}
+
+// GetCbsCmnGnbSmuDlwmSupport returns the CbsCmnGnbSmuDlwmSupport field value if set, zero value otherwise.
+func (o *BiosPolicy) GetCbsCmnGnbSmuDlwmSupport() string {
+	if o == nil || o.CbsCmnGnbSmuDlwmSupport == nil {
+		var ret string
+		return ret
+	}
+	return *o.CbsCmnGnbSmuDlwmSupport
+}
+
+// GetCbsCmnGnbSmuDlwmSupportOk returns a tuple with the CbsCmnGnbSmuDlwmSupport field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BiosPolicy) GetCbsCmnGnbSmuDlwmSupportOk() (*string, bool) {
+	if o == nil || o.CbsCmnGnbSmuDlwmSupport == nil {
+		return nil, false
+	}
+	return o.CbsCmnGnbSmuDlwmSupport, true
+}
+
+// HasCbsCmnGnbSmuDlwmSupport returns a boolean if a field has been set.
+func (o *BiosPolicy) HasCbsCmnGnbSmuDlwmSupport() bool {
+	if o != nil && o.CbsCmnGnbSmuDlwmSupport != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetCbsCmnGnbSmuDlwmSupport gets a reference to the given string and assigns it to the CbsCmnGnbSmuDlwmSupport field.
+func (o *BiosPolicy) SetCbsCmnGnbSmuDlwmSupport(v string) {
+	o.CbsCmnGnbSmuDlwmSupport = &v
+}
+
 // GetCbsCmnGnbSmucppc returns the CbsCmnGnbSmucppc field value if set, zero value otherwise.
 func (o *BiosPolicy) GetCbsCmnGnbSmucppc() string {
 	if o == nil || o.CbsCmnGnbSmucppc == nil {
@@ -4065,6 +4481,70 @@ func (o *BiosPolicy) SetCbsCmnMemCtrlBankGroupSwapDdr4(v string) {
 	o.CbsCmnMemCtrlBankGroupSwapDdr4 = &v
 }
 
+// GetCbsCmnMemCtrllerPwrDnEnDdr returns the CbsCmnMemCtrllerPwrDnEnDdr field value if set, zero value otherwise.
+func (o *BiosPolicy) GetCbsCmnMemCtrllerPwrDnEnDdr() string {
+	if o == nil || o.CbsCmnMemCtrllerPwrDnEnDdr == nil {
+		var ret string
+		return ret
+	}
+	return *o.CbsCmnMemCtrllerPwrDnEnDdr
+}
+
+// GetCbsCmnMemCtrllerPwrDnEnDdrOk returns a tuple with the CbsCmnMemCtrllerPwrDnEnDdr field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BiosPolicy) GetCbsCmnMemCtrllerPwrDnEnDdrOk() (*string, bool) {
+	if o == nil || o.CbsCmnMemCtrllerPwrDnEnDdr == nil {
+		return nil, false
+	}
+	return o.CbsCmnMemCtrllerPwrDnEnDdr, true
+}
+
+// HasCbsCmnMemCtrllerPwrDnEnDdr returns a boolean if a field has been set.
+func (o *BiosPolicy) HasCbsCmnMemCtrllerPwrDnEnDdr() bool {
+	if o != nil && o.CbsCmnMemCtrllerPwrDnEnDdr != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetCbsCmnMemCtrllerPwrDnEnDdr gets a reference to the given string and assigns it to the CbsCmnMemCtrllerPwrDnEnDdr field.
+func (o *BiosPolicy) SetCbsCmnMemCtrllerPwrDnEnDdr(v string) {
+	o.CbsCmnMemCtrllerPwrDnEnDdr = &v
+}
+
+// GetCbsCmnMemDramRefreshRate returns the CbsCmnMemDramRefreshRate field value if set, zero value otherwise.
+func (o *BiosPolicy) GetCbsCmnMemDramRefreshRate() string {
+	if o == nil || o.CbsCmnMemDramRefreshRate == nil {
+		var ret string
+		return ret
+	}
+	return *o.CbsCmnMemDramRefreshRate
+}
+
+// GetCbsCmnMemDramRefreshRateOk returns a tuple with the CbsCmnMemDramRefreshRate field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BiosPolicy) GetCbsCmnMemDramRefreshRateOk() (*string, bool) {
+	if o == nil || o.CbsCmnMemDramRefreshRate == nil {
+		return nil, false
+	}
+	return o.CbsCmnMemDramRefreshRate, true
+}
+
+// HasCbsCmnMemDramRefreshRate returns a boolean if a field has been set.
+func (o *BiosPolicy) HasCbsCmnMemDramRefreshRate() bool {
+	if o != nil && o.CbsCmnMemDramRefreshRate != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetCbsCmnMemDramRefreshRate gets a reference to the given string and assigns it to the CbsCmnMemDramRefreshRate field.
+func (o *BiosPolicy) SetCbsCmnMemDramRefreshRate(v string) {
+	o.CbsCmnMemDramRefreshRate = &v
+}
+
 // GetCbsCmnMemMapBankInterleaveDdr4 returns the CbsCmnMemMapBankInterleaveDdr4 field value if set, zero value otherwise.
 func (o *BiosPolicy) GetCbsCmnMemMapBankInterleaveDdr4() string {
 	if o == nil || o.CbsCmnMemMapBankInterleaveDdr4 == nil {
@@ -4097,6 +4577,134 @@ func (o *BiosPolicy) SetCbsCmnMemMapBankInterleaveDdr4(v string) {
 	o.CbsCmnMemMapBankInterleaveDdr4 = &v
 }
 
+// GetCbsCmnMemSpeedDdr47xx2 returns the CbsCmnMemSpeedDdr47xx2 field value if set, zero value otherwise.
+func (o *BiosPolicy) GetCbsCmnMemSpeedDdr47xx2() string {
+	if o == nil || o.CbsCmnMemSpeedDdr47xx2 == nil {
+		var ret string
+		return ret
+	}
+	return *o.CbsCmnMemSpeedDdr47xx2
+}
+
+// GetCbsCmnMemSpeedDdr47xx2Ok returns a tuple with the CbsCmnMemSpeedDdr47xx2 field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BiosPolicy) GetCbsCmnMemSpeedDdr47xx2Ok() (*string, bool) {
+	if o == nil || o.CbsCmnMemSpeedDdr47xx2 == nil {
+		return nil, false
+	}
+	return o.CbsCmnMemSpeedDdr47xx2, true
+}
+
+// HasCbsCmnMemSpeedDdr47xx2 returns a boolean if a field has been set.
+func (o *BiosPolicy) HasCbsCmnMemSpeedDdr47xx2() bool {
+	if o != nil && o.CbsCmnMemSpeedDdr47xx2 != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetCbsCmnMemSpeedDdr47xx2 gets a reference to the given string and assigns it to the CbsCmnMemSpeedDdr47xx2 field.
+func (o *BiosPolicy) SetCbsCmnMemSpeedDdr47xx2(v string) {
+	o.CbsCmnMemSpeedDdr47xx2 = &v
+}
+
+// GetCbsCmnMemSpeedDdr47xx3 returns the CbsCmnMemSpeedDdr47xx3 field value if set, zero value otherwise.
+func (o *BiosPolicy) GetCbsCmnMemSpeedDdr47xx3() string {
+	if o == nil || o.CbsCmnMemSpeedDdr47xx3 == nil {
+		var ret string
+		return ret
+	}
+	return *o.CbsCmnMemSpeedDdr47xx3
+}
+
+// GetCbsCmnMemSpeedDdr47xx3Ok returns a tuple with the CbsCmnMemSpeedDdr47xx3 field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BiosPolicy) GetCbsCmnMemSpeedDdr47xx3Ok() (*string, bool) {
+	if o == nil || o.CbsCmnMemSpeedDdr47xx3 == nil {
+		return nil, false
+	}
+	return o.CbsCmnMemSpeedDdr47xx3, true
+}
+
+// HasCbsCmnMemSpeedDdr47xx3 returns a boolean if a field has been set.
+func (o *BiosPolicy) HasCbsCmnMemSpeedDdr47xx3() bool {
+	if o != nil && o.CbsCmnMemSpeedDdr47xx3 != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetCbsCmnMemSpeedDdr47xx3 gets a reference to the given string and assigns it to the CbsCmnMemSpeedDdr47xx3 field.
+func (o *BiosPolicy) SetCbsCmnMemSpeedDdr47xx3(v string) {
+	o.CbsCmnMemSpeedDdr47xx3 = &v
+}
+
+// GetCbsCmnPreferredIo7xx2 returns the CbsCmnPreferredIo7xx2 field value if set, zero value otherwise.
+func (o *BiosPolicy) GetCbsCmnPreferredIo7xx2() string {
+	if o == nil || o.CbsCmnPreferredIo7xx2 == nil {
+		var ret string
+		return ret
+	}
+	return *o.CbsCmnPreferredIo7xx2
+}
+
+// GetCbsCmnPreferredIo7xx2Ok returns a tuple with the CbsCmnPreferredIo7xx2 field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BiosPolicy) GetCbsCmnPreferredIo7xx2Ok() (*string, bool) {
+	if o == nil || o.CbsCmnPreferredIo7xx2 == nil {
+		return nil, false
+	}
+	return o.CbsCmnPreferredIo7xx2, true
+}
+
+// HasCbsCmnPreferredIo7xx2 returns a boolean if a field has been set.
+func (o *BiosPolicy) HasCbsCmnPreferredIo7xx2() bool {
+	if o != nil && o.CbsCmnPreferredIo7xx2 != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetCbsCmnPreferredIo7xx2 gets a reference to the given string and assigns it to the CbsCmnPreferredIo7xx2 field.
+func (o *BiosPolicy) SetCbsCmnPreferredIo7xx2(v string) {
+	o.CbsCmnPreferredIo7xx2 = &v
+}
+
+// GetCbsCmnPreferredIo7xx3 returns the CbsCmnPreferredIo7xx3 field value if set, zero value otherwise.
+func (o *BiosPolicy) GetCbsCmnPreferredIo7xx3() string {
+	if o == nil || o.CbsCmnPreferredIo7xx3 == nil {
+		var ret string
+		return ret
+	}
+	return *o.CbsCmnPreferredIo7xx3
+}
+
+// GetCbsCmnPreferredIo7xx3Ok returns a tuple with the CbsCmnPreferredIo7xx3 field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BiosPolicy) GetCbsCmnPreferredIo7xx3Ok() (*string, bool) {
+	if o == nil || o.CbsCmnPreferredIo7xx3 == nil {
+		return nil, false
+	}
+	return o.CbsCmnPreferredIo7xx3, true
+}
+
+// HasCbsCmnPreferredIo7xx3 returns a boolean if a field has been set.
+func (o *BiosPolicy) HasCbsCmnPreferredIo7xx3() bool {
+	if o != nil && o.CbsCmnPreferredIo7xx3 != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetCbsCmnPreferredIo7xx3 gets a reference to the given string and assigns it to the CbsCmnPreferredIo7xx3 field.
+func (o *BiosPolicy) SetCbsCmnPreferredIo7xx3(v string) {
+	o.CbsCmnPreferredIo7xx3 = &v
+}
+
 // GetCbsCmncTdpCtl returns the CbsCmncTdpCtl field value if set, zero value otherwise.
 func (o *BiosPolicy) GetCbsCmncTdpCtl() string {
 	if o == nil || o.CbsCmncTdpCtl == nil {
@@ -4127,6 +4735,38 @@ func (o *BiosPolicy) HasCbsCmncTdpCtl() bool {
 // SetCbsCmncTdpCtl gets a reference to the given string and assigns it to the CbsCmncTdpCtl field.
 func (o *BiosPolicy) SetCbsCmncTdpCtl(v string) {
 	o.CbsCmncTdpCtl = &v
+}
+
+// GetCbsCmnxGmiForceLinkWidthRs returns the CbsCmnxGmiForceLinkWidthRs field value if set, zero value otherwise.
+func (o *BiosPolicy) GetCbsCmnxGmiForceLinkWidthRs() string {
+	if o == nil || o.CbsCmnxGmiForceLinkWidthRs == nil {
+		var ret string
+		return ret
+	}
+	return *o.CbsCmnxGmiForceLinkWidthRs
+}
+
+// GetCbsCmnxGmiForceLinkWidthRsOk returns a tuple with the CbsCmnxGmiForceLinkWidthRs field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BiosPolicy) GetCbsCmnxGmiForceLinkWidthRsOk() (*string, bool) {
+	if o == nil || o.CbsCmnxGmiForceLinkWidthRs == nil {
+		return nil, false
+	}
+	return o.CbsCmnxGmiForceLinkWidthRs, true
+}
+
+// HasCbsCmnxGmiForceLinkWidthRs returns a boolean if a field has been set.
+func (o *BiosPolicy) HasCbsCmnxGmiForceLinkWidthRs() bool {
+	if o != nil && o.CbsCmnxGmiForceLinkWidthRs != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetCbsCmnxGmiForceLinkWidthRs gets a reference to the given string and assigns it to the CbsCmnxGmiForceLinkWidthRs field.
+func (o *BiosPolicy) SetCbsCmnxGmiForceLinkWidthRs(v string) {
+	o.CbsCmnxGmiForceLinkWidthRs = &v
 }
 
 // GetCbsCpuCcdCtrlSsp returns the CbsCpuCcdCtrlSsp field value if set, zero value otherwise.
@@ -4193,6 +4833,70 @@ func (o *BiosPolicy) SetCbsCpuCoreCtrl(v string) {
 	o.CbsCpuCoreCtrl = &v
 }
 
+// GetCbsCpuDownCoreCtrlBergamo returns the CbsCpuDownCoreCtrlBergamo field value if set, zero value otherwise.
+func (o *BiosPolicy) GetCbsCpuDownCoreCtrlBergamo() string {
+	if o == nil || o.CbsCpuDownCoreCtrlBergamo == nil {
+		var ret string
+		return ret
+	}
+	return *o.CbsCpuDownCoreCtrlBergamo
+}
+
+// GetCbsCpuDownCoreCtrlBergamoOk returns a tuple with the CbsCpuDownCoreCtrlBergamo field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BiosPolicy) GetCbsCpuDownCoreCtrlBergamoOk() (*string, bool) {
+	if o == nil || o.CbsCpuDownCoreCtrlBergamo == nil {
+		return nil, false
+	}
+	return o.CbsCpuDownCoreCtrlBergamo, true
+}
+
+// HasCbsCpuDownCoreCtrlBergamo returns a boolean if a field has been set.
+func (o *BiosPolicy) HasCbsCpuDownCoreCtrlBergamo() bool {
+	if o != nil && o.CbsCpuDownCoreCtrlBergamo != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetCbsCpuDownCoreCtrlBergamo gets a reference to the given string and assigns it to the CbsCpuDownCoreCtrlBergamo field.
+func (o *BiosPolicy) SetCbsCpuDownCoreCtrlBergamo(v string) {
+	o.CbsCpuDownCoreCtrlBergamo = &v
+}
+
+// GetCbsCpuDownCoreCtrlGenoa returns the CbsCpuDownCoreCtrlGenoa field value if set, zero value otherwise.
+func (o *BiosPolicy) GetCbsCpuDownCoreCtrlGenoa() string {
+	if o == nil || o.CbsCpuDownCoreCtrlGenoa == nil {
+		var ret string
+		return ret
+	}
+	return *o.CbsCpuDownCoreCtrlGenoa
+}
+
+// GetCbsCpuDownCoreCtrlGenoaOk returns a tuple with the CbsCpuDownCoreCtrlGenoa field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BiosPolicy) GetCbsCpuDownCoreCtrlGenoaOk() (*string, bool) {
+	if o == nil || o.CbsCpuDownCoreCtrlGenoa == nil {
+		return nil, false
+	}
+	return o.CbsCpuDownCoreCtrlGenoa, true
+}
+
+// HasCbsCpuDownCoreCtrlGenoa returns a boolean if a field has been set.
+func (o *BiosPolicy) HasCbsCpuDownCoreCtrlGenoa() bool {
+	if o != nil && o.CbsCpuDownCoreCtrlGenoa != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetCbsCpuDownCoreCtrlGenoa gets a reference to the given string and assigns it to the CbsCpuDownCoreCtrlGenoa field.
+func (o *BiosPolicy) SetCbsCpuDownCoreCtrlGenoa(v string) {
+	o.CbsCpuDownCoreCtrlGenoa = &v
+}
+
 // GetCbsCpuSmtCtrl returns the CbsCpuSmtCtrl field value if set, zero value otherwise.
 func (o *BiosPolicy) GetCbsCpuSmtCtrl() string {
 	if o == nil || o.CbsCpuSmtCtrl == nil {
@@ -4223,6 +4927,134 @@ func (o *BiosPolicy) HasCbsCpuSmtCtrl() bool {
 // SetCbsCpuSmtCtrl gets a reference to the given string and assigns it to the CbsCpuSmtCtrl field.
 func (o *BiosPolicy) SetCbsCpuSmtCtrl(v string) {
 	o.CbsCpuSmtCtrl = &v
+}
+
+// GetCbsDbgCpuGenCpuWdt returns the CbsDbgCpuGenCpuWdt field value if set, zero value otherwise.
+func (o *BiosPolicy) GetCbsDbgCpuGenCpuWdt() string {
+	if o == nil || o.CbsDbgCpuGenCpuWdt == nil {
+		var ret string
+		return ret
+	}
+	return *o.CbsDbgCpuGenCpuWdt
+}
+
+// GetCbsDbgCpuGenCpuWdtOk returns a tuple with the CbsDbgCpuGenCpuWdt field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BiosPolicy) GetCbsDbgCpuGenCpuWdtOk() (*string, bool) {
+	if o == nil || o.CbsDbgCpuGenCpuWdt == nil {
+		return nil, false
+	}
+	return o.CbsDbgCpuGenCpuWdt, true
+}
+
+// HasCbsDbgCpuGenCpuWdt returns a boolean if a field has been set.
+func (o *BiosPolicy) HasCbsDbgCpuGenCpuWdt() bool {
+	if o != nil && o.CbsDbgCpuGenCpuWdt != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetCbsDbgCpuGenCpuWdt gets a reference to the given string and assigns it to the CbsDbgCpuGenCpuWdt field.
+func (o *BiosPolicy) SetCbsDbgCpuGenCpuWdt(v string) {
+	o.CbsDbgCpuGenCpuWdt = &v
+}
+
+// GetCbsDbgCpuLapicMode returns the CbsDbgCpuLapicMode field value if set, zero value otherwise.
+func (o *BiosPolicy) GetCbsDbgCpuLapicMode() string {
+	if o == nil || o.CbsDbgCpuLapicMode == nil {
+		var ret string
+		return ret
+	}
+	return *o.CbsDbgCpuLapicMode
+}
+
+// GetCbsDbgCpuLapicModeOk returns a tuple with the CbsDbgCpuLapicMode field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BiosPolicy) GetCbsDbgCpuLapicModeOk() (*string, bool) {
+	if o == nil || o.CbsDbgCpuLapicMode == nil {
+		return nil, false
+	}
+	return o.CbsDbgCpuLapicMode, true
+}
+
+// HasCbsDbgCpuLapicMode returns a boolean if a field has been set.
+func (o *BiosPolicy) HasCbsDbgCpuLapicMode() bool {
+	if o != nil && o.CbsDbgCpuLapicMode != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetCbsDbgCpuLapicMode gets a reference to the given string and assigns it to the CbsDbgCpuLapicMode field.
+func (o *BiosPolicy) SetCbsDbgCpuLapicMode(v string) {
+	o.CbsDbgCpuLapicMode = &v
+}
+
+// GetCbsDbgCpuLapicMode7xx2 returns the CbsDbgCpuLapicMode7xx2 field value if set, zero value otherwise.
+func (o *BiosPolicy) GetCbsDbgCpuLapicMode7xx2() string {
+	if o == nil || o.CbsDbgCpuLapicMode7xx2 == nil {
+		var ret string
+		return ret
+	}
+	return *o.CbsDbgCpuLapicMode7xx2
+}
+
+// GetCbsDbgCpuLapicMode7xx2Ok returns a tuple with the CbsDbgCpuLapicMode7xx2 field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BiosPolicy) GetCbsDbgCpuLapicMode7xx2Ok() (*string, bool) {
+	if o == nil || o.CbsDbgCpuLapicMode7xx2 == nil {
+		return nil, false
+	}
+	return o.CbsDbgCpuLapicMode7xx2, true
+}
+
+// HasCbsDbgCpuLapicMode7xx2 returns a boolean if a field has been set.
+func (o *BiosPolicy) HasCbsDbgCpuLapicMode7xx2() bool {
+	if o != nil && o.CbsDbgCpuLapicMode7xx2 != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetCbsDbgCpuLapicMode7xx2 gets a reference to the given string and assigns it to the CbsDbgCpuLapicMode7xx2 field.
+func (o *BiosPolicy) SetCbsDbgCpuLapicMode7xx2(v string) {
+	o.CbsDbgCpuLapicMode7xx2 = &v
+}
+
+// GetCbsDbgCpuLapicMode7xx3 returns the CbsDbgCpuLapicMode7xx3 field value if set, zero value otherwise.
+func (o *BiosPolicy) GetCbsDbgCpuLapicMode7xx3() string {
+	if o == nil || o.CbsDbgCpuLapicMode7xx3 == nil {
+		var ret string
+		return ret
+	}
+	return *o.CbsDbgCpuLapicMode7xx3
+}
+
+// GetCbsDbgCpuLapicMode7xx3Ok returns a tuple with the CbsDbgCpuLapicMode7xx3 field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BiosPolicy) GetCbsDbgCpuLapicMode7xx3Ok() (*string, bool) {
+	if o == nil || o.CbsDbgCpuLapicMode7xx3 == nil {
+		return nil, false
+	}
+	return o.CbsDbgCpuLapicMode7xx3, true
+}
+
+// HasCbsDbgCpuLapicMode7xx3 returns a boolean if a field has been set.
+func (o *BiosPolicy) HasCbsDbgCpuLapicMode7xx3() bool {
+	if o != nil && o.CbsDbgCpuLapicMode7xx3 != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetCbsDbgCpuLapicMode7xx3 gets a reference to the given string and assigns it to the CbsDbgCpuLapicMode7xx3 field.
+func (o *BiosPolicy) SetCbsDbgCpuLapicMode7xx3(v string) {
+	o.CbsDbgCpuLapicMode7xx3 = &v
 }
 
 // GetCbsDbgCpuSnpMemCover returns the CbsDbgCpuSnpMemCover field value if set, zero value otherwise.
@@ -4289,6 +5121,38 @@ func (o *BiosPolicy) SetCbsDbgCpuSnpMemSizeCover(v string) {
 	o.CbsDbgCpuSnpMemSizeCover = &v
 }
 
+// GetCbsDfCmn4linkMaxXgmiSpeed returns the CbsDfCmn4linkMaxXgmiSpeed field value if set, zero value otherwise.
+func (o *BiosPolicy) GetCbsDfCmn4linkMaxXgmiSpeed() string {
+	if o == nil || o.CbsDfCmn4linkMaxXgmiSpeed == nil {
+		var ret string
+		return ret
+	}
+	return *o.CbsDfCmn4linkMaxXgmiSpeed
+}
+
+// GetCbsDfCmn4linkMaxXgmiSpeedOk returns a tuple with the CbsDfCmn4linkMaxXgmiSpeed field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BiosPolicy) GetCbsDfCmn4linkMaxXgmiSpeedOk() (*string, bool) {
+	if o == nil || o.CbsDfCmn4linkMaxXgmiSpeed == nil {
+		return nil, false
+	}
+	return o.CbsDfCmn4linkMaxXgmiSpeed, true
+}
+
+// HasCbsDfCmn4linkMaxXgmiSpeed returns a boolean if a field has been set.
+func (o *BiosPolicy) HasCbsDfCmn4linkMaxXgmiSpeed() bool {
+	if o != nil && o.CbsDfCmn4linkMaxXgmiSpeed != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetCbsDfCmn4linkMaxXgmiSpeed gets a reference to the given string and assigns it to the CbsDfCmn4linkMaxXgmiSpeed field.
+func (o *BiosPolicy) SetCbsDfCmn4linkMaxXgmiSpeed(v string) {
+	o.CbsDfCmn4linkMaxXgmiSpeed = &v
+}
+
 // GetCbsDfCmnAcpiSratL3numa returns the CbsDfCmnAcpiSratL3numa field value if set, zero value otherwise.
 func (o *BiosPolicy) GetCbsDfCmnAcpiSratL3numa() string {
 	if o == nil || o.CbsDfCmnAcpiSratL3numa == nil {
@@ -4353,6 +5217,38 @@ func (o *BiosPolicy) SetCbsDfCmnDramNps(v string) {
 	o.CbsDfCmnDramNps = &v
 }
 
+// GetCbsDfCmnDramScrubTime returns the CbsDfCmnDramScrubTime field value if set, zero value otherwise.
+func (o *BiosPolicy) GetCbsDfCmnDramScrubTime() string {
+	if o == nil || o.CbsDfCmnDramScrubTime == nil {
+		var ret string
+		return ret
+	}
+	return *o.CbsDfCmnDramScrubTime
+}
+
+// GetCbsDfCmnDramScrubTimeOk returns a tuple with the CbsDfCmnDramScrubTime field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BiosPolicy) GetCbsDfCmnDramScrubTimeOk() (*string, bool) {
+	if o == nil || o.CbsDfCmnDramScrubTime == nil {
+		return nil, false
+	}
+	return o.CbsDfCmnDramScrubTime, true
+}
+
+// HasCbsDfCmnDramScrubTime returns a boolean if a field has been set.
+func (o *BiosPolicy) HasCbsDfCmnDramScrubTime() bool {
+	if o != nil && o.CbsDfCmnDramScrubTime != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetCbsDfCmnDramScrubTime gets a reference to the given string and assigns it to the CbsDfCmnDramScrubTime field.
+func (o *BiosPolicy) SetCbsDfCmnDramScrubTime(v string) {
+	o.CbsDfCmnDramScrubTime = &v
+}
+
 // GetCbsDfCmnMemIntlv returns the CbsDfCmnMemIntlv field value if set, zero value otherwise.
 func (o *BiosPolicy) GetCbsDfCmnMemIntlv() string {
 	if o == nil || o.CbsDfCmnMemIntlv == nil {
@@ -4385,6 +5281,38 @@ func (o *BiosPolicy) SetCbsDfCmnMemIntlv(v string) {
 	o.CbsDfCmnMemIntlv = &v
 }
 
+// GetCbsDfCmnMemIntlvControl returns the CbsDfCmnMemIntlvControl field value if set, zero value otherwise.
+func (o *BiosPolicy) GetCbsDfCmnMemIntlvControl() string {
+	if o == nil || o.CbsDfCmnMemIntlvControl == nil {
+		var ret string
+		return ret
+	}
+	return *o.CbsDfCmnMemIntlvControl
+}
+
+// GetCbsDfCmnMemIntlvControlOk returns a tuple with the CbsDfCmnMemIntlvControl field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BiosPolicy) GetCbsDfCmnMemIntlvControlOk() (*string, bool) {
+	if o == nil || o.CbsDfCmnMemIntlvControl == nil {
+		return nil, false
+	}
+	return o.CbsDfCmnMemIntlvControl, true
+}
+
+// HasCbsDfCmnMemIntlvControl returns a boolean if a field has been set.
+func (o *BiosPolicy) HasCbsDfCmnMemIntlvControl() bool {
+	if o != nil && o.CbsDfCmnMemIntlvControl != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetCbsDfCmnMemIntlvControl gets a reference to the given string and assigns it to the CbsDfCmnMemIntlvControl field.
+func (o *BiosPolicy) SetCbsDfCmnMemIntlvControl(v string) {
+	o.CbsDfCmnMemIntlvControl = &v
+}
+
 // GetCbsDfCmnMemIntlvSize returns the CbsDfCmnMemIntlvSize field value if set, zero value otherwise.
 func (o *BiosPolicy) GetCbsDfCmnMemIntlvSize() string {
 	if o == nil || o.CbsDfCmnMemIntlvSize == nil {
@@ -4415,6 +5343,70 @@ func (o *BiosPolicy) HasCbsDfCmnMemIntlvSize() bool {
 // SetCbsDfCmnMemIntlvSize gets a reference to the given string and assigns it to the CbsDfCmnMemIntlvSize field.
 func (o *BiosPolicy) SetCbsDfCmnMemIntlvSize(v string) {
 	o.CbsDfCmnMemIntlvSize = &v
+}
+
+// GetCbsDfDbgXgmiLinkCfg returns the CbsDfDbgXgmiLinkCfg field value if set, zero value otherwise.
+func (o *BiosPolicy) GetCbsDfDbgXgmiLinkCfg() string {
+	if o == nil || o.CbsDfDbgXgmiLinkCfg == nil {
+		var ret string
+		return ret
+	}
+	return *o.CbsDfDbgXgmiLinkCfg
+}
+
+// GetCbsDfDbgXgmiLinkCfgOk returns a tuple with the CbsDfDbgXgmiLinkCfg field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BiosPolicy) GetCbsDfDbgXgmiLinkCfgOk() (*string, bool) {
+	if o == nil || o.CbsDfDbgXgmiLinkCfg == nil {
+		return nil, false
+	}
+	return o.CbsDfDbgXgmiLinkCfg, true
+}
+
+// HasCbsDfDbgXgmiLinkCfg returns a boolean if a field has been set.
+func (o *BiosPolicy) HasCbsDfDbgXgmiLinkCfg() bool {
+	if o != nil && o.CbsDfDbgXgmiLinkCfg != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetCbsDfDbgXgmiLinkCfg gets a reference to the given string and assigns it to the CbsDfDbgXgmiLinkCfg field.
+func (o *BiosPolicy) SetCbsDfDbgXgmiLinkCfg(v string) {
+	o.CbsDfDbgXgmiLinkCfg = &v
+}
+
+// GetCbsGnbDbgPcieTbtSupport returns the CbsGnbDbgPcieTbtSupport field value if set, zero value otherwise.
+func (o *BiosPolicy) GetCbsGnbDbgPcieTbtSupport() string {
+	if o == nil || o.CbsGnbDbgPcieTbtSupport == nil {
+		var ret string
+		return ret
+	}
+	return *o.CbsGnbDbgPcieTbtSupport
+}
+
+// GetCbsGnbDbgPcieTbtSupportOk returns a tuple with the CbsGnbDbgPcieTbtSupport field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BiosPolicy) GetCbsGnbDbgPcieTbtSupportOk() (*string, bool) {
+	if o == nil || o.CbsGnbDbgPcieTbtSupport == nil {
+		return nil, false
+	}
+	return o.CbsGnbDbgPcieTbtSupport, true
+}
+
+// HasCbsGnbDbgPcieTbtSupport returns a boolean if a field has been set.
+func (o *BiosPolicy) HasCbsGnbDbgPcieTbtSupport() bool {
+	if o != nil && o.CbsGnbDbgPcieTbtSupport != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetCbsGnbDbgPcieTbtSupport gets a reference to the given string and assigns it to the CbsGnbDbgPcieTbtSupport field.
+func (o *BiosPolicy) SetCbsGnbDbgPcieTbtSupport(v string) {
+	o.CbsGnbDbgPcieTbtSupport = &v
 }
 
 // GetCbsSevSnpSupport returns the CbsSevSnpSupport field value if set, zero value otherwise.
@@ -5215,6 +6207,38 @@ func (o *BiosPolicy) HasDemandScrub() bool {
 // SetDemandScrub gets a reference to the given string and assigns it to the DemandScrub field.
 func (o *BiosPolicy) SetDemandScrub(v string) {
 	o.DemandScrub = &v
+}
+
+// GetDfxOsbEn returns the DfxOsbEn field value if set, zero value otherwise.
+func (o *BiosPolicy) GetDfxOsbEn() string {
+	if o == nil || o.DfxOsbEn == nil {
+		var ret string
+		return ret
+	}
+	return *o.DfxOsbEn
+}
+
+// GetDfxOsbEnOk returns a tuple with the DfxOsbEn field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BiosPolicy) GetDfxOsbEnOk() (*string, bool) {
+	if o == nil || o.DfxOsbEn == nil {
+		return nil, false
+	}
+	return o.DfxOsbEn, true
+}
+
+// HasDfxOsbEn returns a boolean if a field has been set.
+func (o *BiosPolicy) HasDfxOsbEn() bool {
+	if o != nil && o.DfxOsbEn != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetDfxOsbEn gets a reference to the given string and assigns it to the DfxOsbEn field.
+func (o *BiosPolicy) SetDfxOsbEn(v string) {
+	o.DfxOsbEn = &v
 }
 
 // GetDirectCacheAccess returns the DirectCacheAccess field value if set, zero value otherwise.
@@ -6433,6 +7457,38 @@ func (o *BiosPolicy) SetIntelVtdatsSupport(v string) {
 	o.IntelVtdatsSupport = &v
 }
 
+// GetIoatConfigCpm returns the IoatConfigCpm field value if set, zero value otherwise.
+func (o *BiosPolicy) GetIoatConfigCpm() string {
+	if o == nil || o.IoatConfigCpm == nil {
+		var ret string
+		return ret
+	}
+	return *o.IoatConfigCpm
+}
+
+// GetIoatConfigCpmOk returns a tuple with the IoatConfigCpm field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BiosPolicy) GetIoatConfigCpmOk() (*string, bool) {
+	if o == nil || o.IoatConfigCpm == nil {
+		return nil, false
+	}
+	return o.IoatConfigCpm, true
+}
+
+// HasIoatConfigCpm returns a boolean if a field has been set.
+func (o *BiosPolicy) HasIoatConfigCpm() bool {
+	if o != nil && o.IoatConfigCpm != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetIoatConfigCpm gets a reference to the given string and assigns it to the IoatConfigCpm field.
+func (o *BiosPolicy) SetIoatConfigCpm(v string) {
+	o.IoatConfigCpm = &v
+}
+
 // GetIohErrorEnable returns the IohErrorEnable field value if set, zero value otherwise.
 func (o *BiosPolicy) GetIohErrorEnable() string {
 	if o == nil || o.IohErrorEnable == nil {
@@ -7295,6 +8351,70 @@ func (o *BiosPolicy) HasMmcfgBase() bool {
 // SetMmcfgBase gets a reference to the given string and assigns it to the MmcfgBase field.
 func (o *BiosPolicy) SetMmcfgBase(v string) {
 	o.MmcfgBase = &v
+}
+
+// GetMmiohBase returns the MmiohBase field value if set, zero value otherwise.
+func (o *BiosPolicy) GetMmiohBase() string {
+	if o == nil || o.MmiohBase == nil {
+		var ret string
+		return ret
+	}
+	return *o.MmiohBase
+}
+
+// GetMmiohBaseOk returns a tuple with the MmiohBase field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BiosPolicy) GetMmiohBaseOk() (*string, bool) {
+	if o == nil || o.MmiohBase == nil {
+		return nil, false
+	}
+	return o.MmiohBase, true
+}
+
+// HasMmiohBase returns a boolean if a field has been set.
+func (o *BiosPolicy) HasMmiohBase() bool {
+	if o != nil && o.MmiohBase != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetMmiohBase gets a reference to the given string and assigns it to the MmiohBase field.
+func (o *BiosPolicy) SetMmiohBase(v string) {
+	o.MmiohBase = &v
+}
+
+// GetMmiohSize returns the MmiohSize field value if set, zero value otherwise.
+func (o *BiosPolicy) GetMmiohSize() string {
+	if o == nil || o.MmiohSize == nil {
+		var ret string
+		return ret
+	}
+	return *o.MmiohSize
+}
+
+// GetMmiohSizeOk returns a tuple with the MmiohSize field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BiosPolicy) GetMmiohSizeOk() (*string, bool) {
+	if o == nil || o.MmiohSize == nil {
+		return nil, false
+	}
+	return o.MmiohSize, true
+}
+
+// HasMmiohSize returns a boolean if a field has been set.
+func (o *BiosPolicy) HasMmiohSize() bool {
+	if o != nil && o.MmiohSize != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetMmiohSize gets a reference to the given string and assigns it to the MmiohSize field.
+func (o *BiosPolicy) SetMmiohSize(v string) {
+	o.MmiohSize = &v
 }
 
 // GetNetworkStack returns the NetworkStack field value if set, zero value otherwise.
@@ -9473,6 +10593,70 @@ func (o *BiosPolicy) SetRedirectionAfterPost(v string) {
 	o.RedirectionAfterPost = &v
 }
 
+// GetResizeBarSupport returns the ResizeBarSupport field value if set, zero value otherwise.
+func (o *BiosPolicy) GetResizeBarSupport() string {
+	if o == nil || o.ResizeBarSupport == nil {
+		var ret string
+		return ret
+	}
+	return *o.ResizeBarSupport
+}
+
+// GetResizeBarSupportOk returns a tuple with the ResizeBarSupport field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BiosPolicy) GetResizeBarSupportOk() (*string, bool) {
+	if o == nil || o.ResizeBarSupport == nil {
+		return nil, false
+	}
+	return o.ResizeBarSupport, true
+}
+
+// HasResizeBarSupport returns a boolean if a field has been set.
+func (o *BiosPolicy) HasResizeBarSupport() bool {
+	if o != nil && o.ResizeBarSupport != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetResizeBarSupport gets a reference to the given string and assigns it to the ResizeBarSupport field.
+func (o *BiosPolicy) SetResizeBarSupport(v string) {
+	o.ResizeBarSupport = &v
+}
+
+// GetRuntimePostPackageRepair returns the RuntimePostPackageRepair field value if set, zero value otherwise.
+func (o *BiosPolicy) GetRuntimePostPackageRepair() string {
+	if o == nil || o.RuntimePostPackageRepair == nil {
+		var ret string
+		return ret
+	}
+	return *o.RuntimePostPackageRepair
+}
+
+// GetRuntimePostPackageRepairOk returns a tuple with the RuntimePostPackageRepair field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BiosPolicy) GetRuntimePostPackageRepairOk() (*string, bool) {
+	if o == nil || o.RuntimePostPackageRepair == nil {
+		return nil, false
+	}
+	return o.RuntimePostPackageRepair, true
+}
+
+// HasRuntimePostPackageRepair returns a boolean if a field has been set.
+func (o *BiosPolicy) HasRuntimePostPackageRepair() bool {
+	if o != nil && o.RuntimePostPackageRepair != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetRuntimePostPackageRepair gets a reference to the given string and assigns it to the RuntimePostPackageRepair field.
+func (o *BiosPolicy) SetRuntimePostPackageRepair(v string) {
+	o.RuntimePostPackageRepair = &v
+}
+
 // GetSataModeSelect returns the SataModeSelect field value if set, zero value otherwise.
 func (o *BiosPolicy) GetSataModeSelect() string {
 	if o == nil || o.SataModeSelect == nil {
@@ -9567,6 +10751,38 @@ func (o *BiosPolicy) HasSelectPprType() bool {
 // SetSelectPprType gets a reference to the given string and assigns it to the SelectPprType field.
 func (o *BiosPolicy) SetSelectPprType(v string) {
 	o.SelectPprType = &v
+}
+
+// GetSerialMux returns the SerialMux field value if set, zero value otherwise.
+func (o *BiosPolicy) GetSerialMux() string {
+	if o == nil || o.SerialMux == nil {
+		var ret string
+		return ret
+	}
+	return *o.SerialMux
+}
+
+// GetSerialMuxOk returns a tuple with the SerialMux field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BiosPolicy) GetSerialMuxOk() (*string, bool) {
+	if o == nil || o.SerialMux == nil {
+		return nil, false
+	}
+	return o.SerialMux, true
+}
+
+// HasSerialMux returns a boolean if a field has been set.
+func (o *BiosPolicy) HasSerialMux() bool {
+	if o != nil && o.SerialMux != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetSerialMux gets a reference to the given string and assigns it to the SerialMux field.
+func (o *BiosPolicy) SetSerialMux(v string) {
+	o.SerialMux = &v
 }
 
 // GetSerialPortAenable returns the SerialPortAenable field value if set, zero value otherwise.
@@ -16050,6 +17266,12 @@ func (o BiosPolicy) MarshalJSON() ([]byte, error) {
 	if o.CbsCmnApbdis != nil {
 		toSerialize["CbsCmnApbdis"] = o.CbsCmnApbdis
 	}
+	if o.CbsCmnApbdisDfPstateRs != nil {
+		toSerialize["CbsCmnApbdisDfPstateRs"] = o.CbsCmnApbdisDfPstateRs
+	}
+	if o.CbsCmnCpuAvx512 != nil {
+		toSerialize["CbsCmnCpuAvx512"] = o.CbsCmnCpuAvx512
+	}
 	if o.CbsCmnCpuCpb != nil {
 		toSerialize["CbsCmnCpuCpb"] = o.CbsCmnCpuCpb
 	}
@@ -16065,6 +17287,9 @@ func (o BiosPolicy) MarshalJSON() ([]byte, error) {
 	if o.CbsCmnCpuL2streamHwPrefetcher != nil {
 		toSerialize["CbsCmnCpuL2streamHwPrefetcher"] = o.CbsCmnCpuL2streamHwPrefetcher
 	}
+	if o.CbsCmnCpuSevAsidSpaceLimit != nil {
+		toSerialize["CbsCmnCpuSevAsidSpaceLimit"] = o.CbsCmnCpuSevAsidSpaceLimit
+	}
 	if o.CbsCmnCpuSmee != nil {
 		toSerialize["CbsCmnCpuSmee"] = o.CbsCmnCpuSmee
 	}
@@ -16074,8 +17299,14 @@ func (o BiosPolicy) MarshalJSON() ([]byte, error) {
 	if o.CbsCmnDeterminismSlider != nil {
 		toSerialize["CbsCmnDeterminismSlider"] = o.CbsCmnDeterminismSlider
 	}
+	if o.CbsCmnEdcControlThrottle != nil {
+		toSerialize["CbsCmnEdcControlThrottle"] = o.CbsCmnEdcControlThrottle
+	}
 	if o.CbsCmnEfficiencyModeEn != nil {
 		toSerialize["CbsCmnEfficiencyModeEn"] = o.CbsCmnEfficiencyModeEn
+	}
+	if o.CbsCmnEfficiencyModeEnRs != nil {
+		toSerialize["CbsCmnEfficiencyModeEnRs"] = o.CbsCmnEfficiencyModeEnRs
 	}
 	if o.CbsCmnFixedSocPstate != nil {
 		toSerialize["CbsCmnFixedSocPstate"] = o.CbsCmnFixedSocPstate
@@ -16086,17 +17317,44 @@ func (o BiosPolicy) MarshalJSON() ([]byte, error) {
 	if o.CbsCmnGnbSmuDfCstates != nil {
 		toSerialize["CbsCmnGnbSmuDfCstates"] = o.CbsCmnGnbSmuDfCstates
 	}
+	if o.CbsCmnGnbSmuDffoRs != nil {
+		toSerialize["CbsCmnGnbSmuDffoRs"] = o.CbsCmnGnbSmuDffoRs
+	}
+	if o.CbsCmnGnbSmuDlwmSupport != nil {
+		toSerialize["CbsCmnGnbSmuDlwmSupport"] = o.CbsCmnGnbSmuDlwmSupport
+	}
 	if o.CbsCmnGnbSmucppc != nil {
 		toSerialize["CbsCmnGnbSmucppc"] = o.CbsCmnGnbSmucppc
 	}
 	if o.CbsCmnMemCtrlBankGroupSwapDdr4 != nil {
 		toSerialize["CbsCmnMemCtrlBankGroupSwapDdr4"] = o.CbsCmnMemCtrlBankGroupSwapDdr4
 	}
+	if o.CbsCmnMemCtrllerPwrDnEnDdr != nil {
+		toSerialize["CbsCmnMemCtrllerPwrDnEnDdr"] = o.CbsCmnMemCtrllerPwrDnEnDdr
+	}
+	if o.CbsCmnMemDramRefreshRate != nil {
+		toSerialize["CbsCmnMemDramRefreshRate"] = o.CbsCmnMemDramRefreshRate
+	}
 	if o.CbsCmnMemMapBankInterleaveDdr4 != nil {
 		toSerialize["CbsCmnMemMapBankInterleaveDdr4"] = o.CbsCmnMemMapBankInterleaveDdr4
 	}
+	if o.CbsCmnMemSpeedDdr47xx2 != nil {
+		toSerialize["CbsCmnMemSpeedDdr47xx2"] = o.CbsCmnMemSpeedDdr47xx2
+	}
+	if o.CbsCmnMemSpeedDdr47xx3 != nil {
+		toSerialize["CbsCmnMemSpeedDdr47xx3"] = o.CbsCmnMemSpeedDdr47xx3
+	}
+	if o.CbsCmnPreferredIo7xx2 != nil {
+		toSerialize["CbsCmnPreferredIo7xx2"] = o.CbsCmnPreferredIo7xx2
+	}
+	if o.CbsCmnPreferredIo7xx3 != nil {
+		toSerialize["CbsCmnPreferredIo7xx3"] = o.CbsCmnPreferredIo7xx3
+	}
 	if o.CbsCmncTdpCtl != nil {
 		toSerialize["CbsCmncTdpCtl"] = o.CbsCmncTdpCtl
+	}
+	if o.CbsCmnxGmiForceLinkWidthRs != nil {
+		toSerialize["CbsCmnxGmiForceLinkWidthRs"] = o.CbsCmnxGmiForceLinkWidthRs
 	}
 	if o.CbsCpuCcdCtrlSsp != nil {
 		toSerialize["CbsCpuCcdCtrlSsp"] = o.CbsCpuCcdCtrlSsp
@@ -16104,8 +17362,26 @@ func (o BiosPolicy) MarshalJSON() ([]byte, error) {
 	if o.CbsCpuCoreCtrl != nil {
 		toSerialize["CbsCpuCoreCtrl"] = o.CbsCpuCoreCtrl
 	}
+	if o.CbsCpuDownCoreCtrlBergamo != nil {
+		toSerialize["CbsCpuDownCoreCtrlBergamo"] = o.CbsCpuDownCoreCtrlBergamo
+	}
+	if o.CbsCpuDownCoreCtrlGenoa != nil {
+		toSerialize["CbsCpuDownCoreCtrlGenoa"] = o.CbsCpuDownCoreCtrlGenoa
+	}
 	if o.CbsCpuSmtCtrl != nil {
 		toSerialize["CbsCpuSmtCtrl"] = o.CbsCpuSmtCtrl
+	}
+	if o.CbsDbgCpuGenCpuWdt != nil {
+		toSerialize["CbsDbgCpuGenCpuWdt"] = o.CbsDbgCpuGenCpuWdt
+	}
+	if o.CbsDbgCpuLapicMode != nil {
+		toSerialize["CbsDbgCpuLapicMode"] = o.CbsDbgCpuLapicMode
+	}
+	if o.CbsDbgCpuLapicMode7xx2 != nil {
+		toSerialize["CbsDbgCpuLapicMode7xx2"] = o.CbsDbgCpuLapicMode7xx2
+	}
+	if o.CbsDbgCpuLapicMode7xx3 != nil {
+		toSerialize["CbsDbgCpuLapicMode7xx3"] = o.CbsDbgCpuLapicMode7xx3
 	}
 	if o.CbsDbgCpuSnpMemCover != nil {
 		toSerialize["CbsDbgCpuSnpMemCover"] = o.CbsDbgCpuSnpMemCover
@@ -16113,17 +17389,32 @@ func (o BiosPolicy) MarshalJSON() ([]byte, error) {
 	if o.CbsDbgCpuSnpMemSizeCover != nil {
 		toSerialize["CbsDbgCpuSnpMemSizeCover"] = o.CbsDbgCpuSnpMemSizeCover
 	}
+	if o.CbsDfCmn4linkMaxXgmiSpeed != nil {
+		toSerialize["CbsDfCmn4linkMaxXgmiSpeed"] = o.CbsDfCmn4linkMaxXgmiSpeed
+	}
 	if o.CbsDfCmnAcpiSratL3numa != nil {
 		toSerialize["CbsDfCmnAcpiSratL3numa"] = o.CbsDfCmnAcpiSratL3numa
 	}
 	if o.CbsDfCmnDramNps != nil {
 		toSerialize["CbsDfCmnDramNps"] = o.CbsDfCmnDramNps
 	}
+	if o.CbsDfCmnDramScrubTime != nil {
+		toSerialize["CbsDfCmnDramScrubTime"] = o.CbsDfCmnDramScrubTime
+	}
 	if o.CbsDfCmnMemIntlv != nil {
 		toSerialize["CbsDfCmnMemIntlv"] = o.CbsDfCmnMemIntlv
 	}
+	if o.CbsDfCmnMemIntlvControl != nil {
+		toSerialize["CbsDfCmnMemIntlvControl"] = o.CbsDfCmnMemIntlvControl
+	}
 	if o.CbsDfCmnMemIntlvSize != nil {
 		toSerialize["CbsDfCmnMemIntlvSize"] = o.CbsDfCmnMemIntlvSize
+	}
+	if o.CbsDfDbgXgmiLinkCfg != nil {
+		toSerialize["CbsDfDbgXgmiLinkCfg"] = o.CbsDfDbgXgmiLinkCfg
+	}
+	if o.CbsGnbDbgPcieTbtSupport != nil {
+		toSerialize["CbsGnbDbgPcieTbtSupport"] = o.CbsGnbDbgPcieTbtSupport
 	}
 	if o.CbsSevSnpSupport != nil {
 		toSerialize["CbsSevSnpSupport"] = o.CbsSevSnpSupport
@@ -16199,6 +17490,9 @@ func (o BiosPolicy) MarshalJSON() ([]byte, error) {
 	}
 	if o.DemandScrub != nil {
 		toSerialize["DemandScrub"] = o.DemandScrub
+	}
+	if o.DfxOsbEn != nil {
+		toSerialize["DfxOsbEn"] = o.DfxOsbEn
 	}
 	if o.DirectCacheAccess != nil {
 		toSerialize["DirectCacheAccess"] = o.DirectCacheAccess
@@ -16314,6 +17608,9 @@ func (o BiosPolicy) MarshalJSON() ([]byte, error) {
 	if o.IntelVtdatsSupport != nil {
 		toSerialize["IntelVtdatsSupport"] = o.IntelVtdatsSupport
 	}
+	if o.IoatConfigCpm != nil {
+		toSerialize["IoatConfigCpm"] = o.IoatConfigCpm
+	}
 	if o.IohErrorEnable != nil {
 		toSerialize["IohErrorEnable"] = o.IohErrorEnable
 	}
@@ -16394,6 +17691,12 @@ func (o BiosPolicy) MarshalJSON() ([]byte, error) {
 	}
 	if o.MmcfgBase != nil {
 		toSerialize["MmcfgBase"] = o.MmcfgBase
+	}
+	if o.MmiohBase != nil {
+		toSerialize["MmiohBase"] = o.MmiohBase
+	}
+	if o.MmiohSize != nil {
+		toSerialize["MmiohSize"] = o.MmiohSize
 	}
 	if o.NetworkStack != nil {
 		toSerialize["NetworkStack"] = o.NetworkStack
@@ -16599,6 +17902,12 @@ func (o BiosPolicy) MarshalJSON() ([]byte, error) {
 	if o.RedirectionAfterPost != nil {
 		toSerialize["RedirectionAfterPost"] = o.RedirectionAfterPost
 	}
+	if o.ResizeBarSupport != nil {
+		toSerialize["ResizeBarSupport"] = o.ResizeBarSupport
+	}
+	if o.RuntimePostPackageRepair != nil {
+		toSerialize["RuntimePostPackageRepair"] = o.RuntimePostPackageRepair
+	}
 	if o.SataModeSelect != nil {
 		toSerialize["SataModeSelect"] = o.SataModeSelect
 	}
@@ -16607,6 +17916,9 @@ func (o BiosPolicy) MarshalJSON() ([]byte, error) {
 	}
 	if o.SelectPprType != nil {
 		toSerialize["SelectPprType"] = o.SelectPprType
+	}
+	if o.SerialMux != nil {
+		toSerialize["SerialMux"] = o.SerialMux
 	}
 	if o.SerialPortAenable != nil {
 		toSerialize["SerialPortAenable"] = o.SerialPortAenable
@@ -17283,6 +18595,10 @@ func (o *BiosPolicy) UnmarshalJSON(bytes []byte) (err error) {
 		C1autoUnDemotion *string `json:"C1autoUnDemotion,omitempty"`
 		// BIOS Token for setting APBDIS configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `0` - Value - 0 for configuring CbsCmnApbdis token. * `1` - Value - 1 for configuring CbsCmnApbdis token. * `Auto` - Value - Auto for configuring CbsCmnApbdis token.
 		CbsCmnApbdis *string `json:"CbsCmnApbdis,omitempty"`
+		// BIOS Token for setting Fixed SOC P-State SP5 F19h configuration (0 - 2 P State).
+		CbsCmnApbdisDfPstateRs *string `json:"CbsCmnApbdisDfPstateRs,omitempty"`
+		// BIOS Token for setting AVX512 configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsCmnCpuAvx512 token. * `disabled` - Value - disabled for configuring CbsCmnCpuAvx512 token. * `enabled` - Value - enabled for configuring CbsCmnCpuAvx512 token.
+		CbsCmnCpuAvx512 *string `json:"CbsCmnCpuAvx512,omitempty"`
 		// BIOS Token for setting Core Performance Boost configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsCmnCpuCpb token. * `disabled` - Value - disabled for configuring CbsCmnCpuCpb token.
 		CbsCmnCpuCpb *string `json:"CbsCmnCpuCpb,omitempty"`
 		// BIOS Token for setting Downcore Control configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsCmnCpuGenDowncoreCtrl token. * `FOUR (2 + 2)` - Value - FOUR (2 + 2) for configuring CbsCmnCpuGenDowncoreCtrl token. * `FOUR (4 + 0)` - Value - FOUR (4 + 0) for configuring CbsCmnCpuGenDowncoreCtrl token. * `SIX (3 + 3)` - Value - SIX (3 + 3) for configuring CbsCmnCpuGenDowncoreCtrl token. * `THREE (3 + 0)` - Value - THREE (3 + 0) for configuring CbsCmnCpuGenDowncoreCtrl token. * `TWO (1 + 1)` - Value - TWO (1 + 1) for configuring CbsCmnCpuGenDowncoreCtrl token. * `TWO (2 + 0)` - Value - TWO (2 + 0) for configuring CbsCmnCpuGenDowncoreCtrl token.
@@ -17293,47 +18609,93 @@ func (o *BiosPolicy) UnmarshalJSON(bytes []byte) (err error) {
 		CbsCmnCpuL1streamHwPrefetcher *string `json:"CbsCmnCpuL1streamHwPrefetcher,omitempty"`
 		// BIOS Token for setting L2 Stream HW Prefetcher configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsCmnCpuL2streamHwPrefetcher token. * `disabled` - Value - disabled for configuring CbsCmnCpuL2streamHwPrefetcher token. * `enabled` - Value - enabled for configuring CbsCmnCpuL2streamHwPrefetcher token.
 		CbsCmnCpuL2streamHwPrefetcher *string `json:"CbsCmnCpuL2streamHwPrefetcher,omitempty"`
+		// BIOS Token for setting SEV-ES ASID Space Limit configuration (1 - 1007 ASIDs).
+		CbsCmnCpuSevAsidSpaceLimit *string `json:"CbsCmnCpuSevAsidSpaceLimit,omitempty"`
 		// BIOS Token for setting CPU SMEE configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsCmnCpuSmee token. * `disabled` - Value - disabled for configuring CbsCmnCpuSmee token. * `enabled` - Value - enabled for configuring CbsCmnCpuSmee token.
 		CbsCmnCpuSmee *string `json:"CbsCmnCpuSmee,omitempty"`
 		// BIOS Token for setting Streaming Stores Control configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsCmnCpuStreamingStoresCtrl token. * `disabled` - Value - disabled for configuring CbsCmnCpuStreamingStoresCtrl token. * `enabled` - Value - enabled for configuring CbsCmnCpuStreamingStoresCtrl token.
 		CbsCmnCpuStreamingStoresCtrl *string `json:"CbsCmnCpuStreamingStoresCtrl,omitempty"`
 		// BIOS Token for setting Determinism Slider configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsCmnDeterminismSlider token. * `Performance` - Value - Performance for configuring CbsCmnDeterminismSlider token. * `Power` - Value - Power for configuring CbsCmnDeterminismSlider token.
 		CbsCmnDeterminismSlider *string `json:"CbsCmnDeterminismSlider,omitempty"`
+		// BIOS Token for setting EDC Control Throttle configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsCmnEdcControlThrottle token. * `disabled` - Value - disabled for configuring CbsCmnEdcControlThrottle token. * `enabled` - Value - enabled for configuring CbsCmnEdcControlThrottle token.
+		CbsCmnEdcControlThrottle *string `json:"CbsCmnEdcControlThrottle,omitempty"`
 		// BIOS Token for setting Efficiency Mode Enable configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsCmnEfficiencyModeEn token. * `Enabled` - Value - Enabled for configuring CbsCmnEfficiencyModeEn token.
 		CbsCmnEfficiencyModeEn *string `json:"CbsCmnEfficiencyModeEn,omitempty"`
+		// BIOS Token for setting Power Profile Selection F19h configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Balanced Memory Performance Mode` - Value - Balanced Memory Performance Mode for configuring CbsCmnEfficiencyModeEnRs token. * `Efficiency Mode` - Value - Efficiency Mode for configuring CbsCmnEfficiencyModeEnRs token. * `High Performance Mode` - Value - High Performance Mode for configuring CbsCmnEfficiencyModeEnRs token. * `Maximum IO Performance Mode` - Value - Maximum IO Performance Mode for configuring CbsCmnEfficiencyModeEnRs token.
+		CbsCmnEfficiencyModeEnRs *string `json:"CbsCmnEfficiencyModeEnRs,omitempty"`
 		// BIOS Token for setting Fixed SOC P-State configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsCmnFixedSocPstate token. * `P0` - Value - P0 for configuring CbsCmnFixedSocPstate token. * `P1` - Value - P1 for configuring CbsCmnFixedSocPstate token. * `P2` - Value - P2 for configuring CbsCmnFixedSocPstate token. * `P3` - Value - P3 for configuring CbsCmnFixedSocPstate token.
 		CbsCmnFixedSocPstate *string `json:"CbsCmnFixedSocPstate,omitempty"`
 		// BIOS Token for setting IOMMU configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsCmnGnbNbIommu token. * `disabled` - Value - disabled for configuring CbsCmnGnbNbIommu token. * `enabled` - Value - enabled for configuring CbsCmnGnbNbIommu token.
 		CbsCmnGnbNbIommu *string `json:"CbsCmnGnbNbIommu,omitempty"`
 		// BIOS Token for setting DF C-States configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsCmnGnbSmuDfCstates token. * `disabled` - Value - disabled for configuring CbsCmnGnbSmuDfCstates token. * `enabled` - Value - enabled for configuring CbsCmnGnbSmuDfCstates token.
 		CbsCmnGnbSmuDfCstates *string `json:"CbsCmnGnbSmuDfCstates,omitempty"`
+		// BIOS Token for setting DF PState Frequency Optimizer configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsCmnGnbSmuDffoRs token. * `disabled` - Value - disabled for configuring CbsCmnGnbSmuDffoRs token. * `enabled` - Value - enabled for configuring CbsCmnGnbSmuDffoRs token.
+		CbsCmnGnbSmuDffoRs *string `json:"CbsCmnGnbSmuDffoRs,omitempty"`
+		// BIOS Token for setting DLWM Support configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsCmnGnbSmuDlwmSupport token. * `disabled` - Value - disabled for configuring CbsCmnGnbSmuDlwmSupport token. * `enabled` - Value - enabled for configuring CbsCmnGnbSmuDlwmSupport token.
+		CbsCmnGnbSmuDlwmSupport *string `json:"CbsCmnGnbSmuDlwmSupport,omitempty"`
 		// BIOS Token for setting CPPC configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsCmnGnbSmucppc token. * `disabled` - Value - disabled for configuring CbsCmnGnbSmucppc token. * `enabled` - Value - enabled for configuring CbsCmnGnbSmucppc token.
 		CbsCmnGnbSmucppc *string `json:"CbsCmnGnbSmucppc,omitempty"`
 		// BIOS Token for setting Bank Group Swap configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsCmnMemCtrlBankGroupSwapDdr4 token. * `disabled` - Value - disabled for configuring CbsCmnMemCtrlBankGroupSwapDdr4 token. * `enabled` - Value - enabled for configuring CbsCmnMemCtrlBankGroupSwapDdr4 token.
 		CbsCmnMemCtrlBankGroupSwapDdr4 *string `json:"CbsCmnMemCtrlBankGroupSwapDdr4,omitempty"`
-		// BIOS Token for setting Chipset Interleave configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsCmnMemMapBankInterleaveDdr4 token. * `disabled` - Value - disabled for configuring CbsCmnMemMapBankInterleaveDdr4 token.
+		// BIOS Token for setting Power Down Enable configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsCmnMemCtrllerPwrDnEnDdr token. * `disabled` - Value - disabled for configuring CbsCmnMemCtrllerPwrDnEnDdr token. * `enabled` - Value - enabled for configuring CbsCmnMemCtrllerPwrDnEnDdr token.
+		CbsCmnMemCtrllerPwrDnEnDdr *string `json:"CbsCmnMemCtrllerPwrDnEnDdr,omitempty"`
+		// BIOS Token for setting DRAM Refresh Rate configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `3.9 usec` - Value - 3.9 usec for configuring CbsCmnMemDramRefreshRate token. * `7.8 usec` - Value - 7.8 usec for configuring CbsCmnMemDramRefreshRate token.
+		CbsCmnMemDramRefreshRate *string `json:"CbsCmnMemDramRefreshRate,omitempty"`
+		// BIOS Token for setting Chipset Interleave configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsCmnMemMapBankInterleaveDdr4 token. * `disabled` - Value - disabled for configuring CbsCmnMemMapBankInterleaveDdr4 token. * `enabled` - Value - enabled for configuring CbsCmnMemMapBankInterleaveDdr4 token.
 		CbsCmnMemMapBankInterleaveDdr4 *string `json:"CbsCmnMemMapBankInterleaveDdr4,omitempty"`
+		// BIOS Token for setting Memory Clock Speed 7xx2 configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `667MHz` - Value - 667MHz for configuring CbsCmnMemSpeedDdr47xx2 token. * `800MHz` - Value - 800MHz for configuring CbsCmnMemSpeedDdr47xx2 token. * `933MHz` - Value - 933MHz for configuring CbsCmnMemSpeedDdr47xx2 token. * `1067MHz` - Value - 1067MHz for configuring CbsCmnMemSpeedDdr47xx2 token. * `1200MHz` - Value - 1200MHz for configuring CbsCmnMemSpeedDdr47xx2 token. * `1333MHz` - Value - 1333MHz for configuring CbsCmnMemSpeedDdr47xx2 token. * `1467MHz` - Value - 1467MHz for configuring CbsCmnMemSpeedDdr47xx2 token. * `1600MHz` - Value - 1600MHz for configuring CbsCmnMemSpeedDdr47xx2 token. * `Auto` - Value - Auto for configuring CbsCmnMemSpeedDdr47xx2 token.
+		CbsCmnMemSpeedDdr47xx2 *string `json:"CbsCmnMemSpeedDdr47xx2,omitempty"`
+		// BIOS Token for setting Memory Clock Speed 7xx3 configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `400MHz` - Value - 400MHz for configuring CbsCmnMemSpeedDdr47xx3 token. * `800MHz` - Value - 800MHz for configuring CbsCmnMemSpeedDdr47xx3 token. * `933MHz` - Value - 933MHz for configuring CbsCmnMemSpeedDdr47xx3 token. * `1067MHz` - Value - 1067MHz for configuring CbsCmnMemSpeedDdr47xx3 token. * `1200MHz` - Value - 1200MHz for configuring CbsCmnMemSpeedDdr47xx3 token. * `1333MHz` - Value - 1333MHz for configuring CbsCmnMemSpeedDdr47xx3 token. * `1467MHz` - Value - 1467MHz for configuring CbsCmnMemSpeedDdr47xx3 token. * `1600MHz` - Value - 1600MHz for configuring CbsCmnMemSpeedDdr47xx3 token. * `1633MHz` - Value - 1633MHz for configuring CbsCmnMemSpeedDdr47xx3 token. * `1667MHz` - Value - 1667MHz for configuring CbsCmnMemSpeedDdr47xx3 token. * `1700MHz` - Value - 1700MHz for configuring CbsCmnMemSpeedDdr47xx3 token. * `1733MHz` - Value - 1733MHz for configuring CbsCmnMemSpeedDdr47xx3 token. * `1767MHz` - Value - 1767MHz for configuring CbsCmnMemSpeedDdr47xx3 token. * `1800MHz` - Value - 1800MHz for configuring CbsCmnMemSpeedDdr47xx3 token. * `Auto` - Value - Auto for configuring CbsCmnMemSpeedDdr47xx3 token.
+		CbsCmnMemSpeedDdr47xx3 *string `json:"CbsCmnMemSpeedDdr47xx3,omitempty"`
+		// BIOS Token for setting Preferred IO 7xx2 configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsCmnPreferredIo7xx2 token. * `Manual` - Value - Manual for configuring CbsCmnPreferredIo7xx2 token.
+		CbsCmnPreferredIo7xx2 *string `json:"CbsCmnPreferredIo7xx2,omitempty"`
+		// BIOS Token for setting Preferred IO 7xx3 configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsCmnPreferredIo7xx3 token. * `Bus` - Value - Bus for configuring CbsCmnPreferredIo7xx3 token.
+		CbsCmnPreferredIo7xx3 *string `json:"CbsCmnPreferredIo7xx3,omitempty"`
 		// BIOS Token for setting cTDP Control configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsCmncTdpCtl token. * `Manual` - Value - Manual for configuring CbsCmncTdpCtl token.
 		CbsCmncTdpCtl *string `json:"CbsCmncTdpCtl,omitempty"`
-		// BIOS Token for setting CCD Control configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `2 CCDs` - Value - 2 CCDs for configuring CbsCpuCcdCtrlSsp token. * `3 CCDs` - Value - 3 CCDs for configuring CbsCpuCcdCtrlSsp token. * `4 CCDs` - Value - 4 CCDs for configuring CbsCpuCcdCtrlSsp token. * `6 CCDs` - Value - 6 CCDs for configuring CbsCpuCcdCtrlSsp token. * `Auto` - Value - Auto for configuring CbsCpuCcdCtrlSsp token.
+		// BIOS Token for setting xGMI Force Link Width configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `0` - Value - 0 for configuring CbsCmnxGmiForceLinkWidthRs token. * `1` - Value - 1 for configuring CbsCmnxGmiForceLinkWidthRs token. * `2` - Value - 2 for configuring CbsCmnxGmiForceLinkWidthRs token. * `Auto` - Value - Auto for configuring CbsCmnxGmiForceLinkWidthRs token.
+		CbsCmnxGmiForceLinkWidthRs *string `json:"CbsCmnxGmiForceLinkWidthRs,omitempty"`
+		// BIOS Token for setting CCD Control configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `2 CCDs` - Value - 2 CCDs for configuring CbsCpuCcdCtrlSsp token. * `3 CCDs` - Value - 3 CCDs for configuring CbsCpuCcdCtrlSsp token. * `4 CCDs` - Value - 4 CCDs for configuring CbsCpuCcdCtrlSsp token. * `6 CCDs` - Value - 6 CCDs for configuring CbsCpuCcdCtrlSsp token. * `8 CCDs` - Value - 8 CCDs for configuring CbsCpuCcdCtrlSsp token. * `10 CCDs` - Value - 10 CCDs for configuring CbsCpuCcdCtrlSsp token. * `Auto` - Value - Auto for configuring CbsCpuCcdCtrlSsp token.
 		CbsCpuCcdCtrlSsp *string `json:"CbsCpuCcdCtrlSsp,omitempty"`
 		// BIOS Token for setting CPU Downcore control configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsCpuCoreCtrl token. * `FIVE (5 + 0)` - Value - FIVE (5 + 0) for configuring CbsCpuCoreCtrl token. * `FOUR (4 + 0)` - Value - FOUR (4 + 0) for configuring CbsCpuCoreCtrl token. * `ONE (1 + 0)` - Value - ONE (1 + 0) for configuring CbsCpuCoreCtrl token. * `SEVEN (7 + 0)` - Value - SEVEN (7 + 0) for configuring CbsCpuCoreCtrl token. * `SIX (6 + 0)` - Value - SIX (6 + 0) for configuring CbsCpuCoreCtrl token. * `THREE (3 + 0)` - Value - THREE (3 + 0) for configuring CbsCpuCoreCtrl token. * `TWO (2 + 0)` - Value - TWO (2 + 0) for configuring CbsCpuCoreCtrl token.
 		CbsCpuCoreCtrl *string `json:"CbsCpuCoreCtrl,omitempty"`
+		// BIOS Token for setting Downcore Control configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsCpuDownCoreCtrlBergamo token. * `EIGHT (4 + 4)` - Value - EIGHT (4 + 4) for configuring CbsCpuDownCoreCtrlBergamo token. * `FOUR (2 + 2)` - Value - FOUR (2 + 2) for configuring CbsCpuDownCoreCtrlBergamo token. * `FOURTEEN (7 + 7)` - Value - FOURTEEN (7 + 7) for configuring CbsCpuDownCoreCtrlBergamo token. * `SIX (3 + 3)` - Value - SIX (3 + 3) for configuring CbsCpuDownCoreCtrlBergamo token. * `TEN (5 + 5)` - Value - TEN (5 + 5) for configuring CbsCpuDownCoreCtrlBergamo token. * `TWELVE (6 + 6)` - Value - TWELVE (6 + 6) for configuring CbsCpuDownCoreCtrlBergamo token. * `TWO (1 + 1)` - Value - TWO (1 + 1) for configuring CbsCpuDownCoreCtrlBergamo token.
+		CbsCpuDownCoreCtrlBergamo *string `json:"CbsCpuDownCoreCtrlBergamo,omitempty"`
+		// BIOS Token for setting CPU Downcore control F19 M10h-1Fh configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsCpuDownCoreCtrlGenoa token. * `FIVE (5 + 0)` - Value - FIVE (5 + 0) for configuring CbsCpuDownCoreCtrlGenoa token. * `FOUR (4 + 0)` - Value - FOUR (4 + 0) for configuring CbsCpuDownCoreCtrlGenoa token. * `ONE (1 + 0)` - Value - ONE (1 + 0) for configuring CbsCpuDownCoreCtrlGenoa token. * `SEVEN (7 + 0)` - Value - SEVEN (7 + 0) for configuring CbsCpuDownCoreCtrlGenoa token. * `SIX (6 + 0)` - Value - SIX (6 + 0) for configuring CbsCpuDownCoreCtrlGenoa token. * `THREE (3 + 0)` - Value - THREE (3 + 0) for configuring CbsCpuDownCoreCtrlGenoa token. * `TWO (2 + 0)` - Value - TWO (2 + 0) for configuring CbsCpuDownCoreCtrlGenoa token.
+		CbsCpuDownCoreCtrlGenoa *string `json:"CbsCpuDownCoreCtrlGenoa,omitempty"`
 		// BIOS Token for setting CPU SMT Mode configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsCpuSmtCtrl token. * `disabled` - Value - disabled for configuring CbsCpuSmtCtrl token. * `enabled` - Value - enabled for configuring CbsCpuSmtCtrl token.
 		CbsCpuSmtCtrl *string `json:"CbsCpuSmtCtrl,omitempty"`
+		// BIOS Token for setting Core Watchdog Timer Enable configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsDbgCpuGenCpuWdt token. * `disabled` - Value - disabled for configuring CbsDbgCpuGenCpuWdt token. * `enabled` - Value - enabled for configuring CbsDbgCpuGenCpuWdt token.
+		CbsDbgCpuGenCpuWdt *string `json:"CbsDbgCpuGenCpuWdt,omitempty"`
+		// BIOS Token for setting Local APIC Mode configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsDbgCpuLapicMode token. * `Compatibility` - Value - Compatibility for configuring CbsDbgCpuLapicMode token. * `X2APIC` - Value - X2APIC for configuring CbsDbgCpuLapicMode token. * `XAPIC` - Value - XAPIC for configuring CbsDbgCpuLapicMode token.
+		CbsDbgCpuLapicMode *string `json:"CbsDbgCpuLapicMode,omitempty"`
+		// BIOS Token for setting Local APIC Mode 7xx2 configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsDbgCpuLapicMode7xx2 token. * `X2APIC` - Value - X2APIC for configuring CbsDbgCpuLapicMode7xx2 token. * `XAPIC` - Value - XAPIC for configuring CbsDbgCpuLapicMode7xx2 token.
+		CbsDbgCpuLapicMode7xx2 *string `json:"CbsDbgCpuLapicMode7xx2,omitempty"`
+		// BIOS Token for setting Local APIC Mode 7xx3 configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsDbgCpuLapicMode7xx3 token. * `Compatibility` - Value - Compatibility for configuring CbsDbgCpuLapicMode7xx3 token. * `X2APIC` - Value - X2APIC for configuring CbsDbgCpuLapicMode7xx3 token. * `XAPIC` - Value - XAPIC for configuring CbsDbgCpuLapicMode7xx3 token.
+		CbsDbgCpuLapicMode7xx3 *string `json:"CbsDbgCpuLapicMode7xx3,omitempty"`
 		// BIOS Token for setting SNP Memory Coverage configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsDbgCpuSnpMemCover token. * `Custom` - Value - Custom for configuring CbsDbgCpuSnpMemCover token. * `disabled` - Value - disabled for configuring CbsDbgCpuSnpMemCover token. * `enabled` - Value - enabled for configuring CbsDbgCpuSnpMemCover token.
 		CbsDbgCpuSnpMemCover *string `json:"CbsDbgCpuSnpMemCover,omitempty"`
 		// BIOS Token for setting SNP Memory Size to Cover in MiB configuration (0 - 1048576 MiB).
 		CbsDbgCpuSnpMemSizeCover *string `json:"CbsDbgCpuSnpMemSizeCover,omitempty"`
+		// BIOS Token for setting 4-link xGMI max speed configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `20Gbps` - Value - 20Gbps for configuring CbsDfCmn4linkMaxXgmiSpeed token. * `25Gbps` - Value - 25Gbps for configuring CbsDfCmn4linkMaxXgmiSpeed token. * `32Gbps` - Value - 32Gbps for configuring CbsDfCmn4linkMaxXgmiSpeed token. * `Auto` - Value - Auto for configuring CbsDfCmn4linkMaxXgmiSpeed token.
+		CbsDfCmn4linkMaxXgmiSpeed *string `json:"CbsDfCmn4linkMaxXgmiSpeed,omitempty"`
 		// BIOS Token for setting ACPI SRAT L3 Cache As NUMA Domain configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsDfCmnAcpiSratL3numa token. * `disabled` - Value - disabled for configuring CbsDfCmnAcpiSratL3numa token. * `enabled` - Value - enabled for configuring CbsDfCmnAcpiSratL3numa token.
 		CbsDfCmnAcpiSratL3numa *string `json:"CbsDfCmnAcpiSratL3numa,omitempty"`
 		// BIOS Token for setting NUMA Nodes per Socket configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsDfCmnDramNps token. * `NPS0` - Value - NPS0 for configuring CbsDfCmnDramNps token. * `NPS1` - Value - NPS1 for configuring CbsDfCmnDramNps token. * `NPS2` - Value - NPS2 for configuring CbsDfCmnDramNps token. * `NPS4` - Value - NPS4 for configuring CbsDfCmnDramNps token.
 		CbsDfCmnDramNps *string `json:"CbsDfCmnDramNps,omitempty"`
+		// BIOS Token for setting DRAM Scrub Time configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `1 hour` - Value - 1 hour for configuring CbsDfCmnDramScrubTime token. * `4 hours` - Value - 4 hours for configuring CbsDfCmnDramScrubTime token. * `6 hours` - Value - 6 hours for configuring CbsDfCmnDramScrubTime token. * `8 hours` - Value - 8 hours for configuring CbsDfCmnDramScrubTime token. * `12 hours` - Value - 12 hours for configuring CbsDfCmnDramScrubTime token. * `16 hours` - Value - 16 hours for configuring CbsDfCmnDramScrubTime token. * `24 hours` - Value - 24 hours for configuring CbsDfCmnDramScrubTime token. * `48 hours` - Value - 48 hours for configuring CbsDfCmnDramScrubTime token. * `Auto` - Value - Auto for configuring CbsDfCmnDramScrubTime token. * `Disabled` - Value - Disabled for configuring CbsDfCmnDramScrubTime token.
+		CbsDfCmnDramScrubTime *string `json:"CbsDfCmnDramScrubTime,omitempty"`
 		// BIOS Token for setting AMD Memory Interleaving configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsDfCmnMemIntlv token. * `Channel` - Value - Channel for configuring CbsDfCmnMemIntlv token. * `Die` - Value - Die for configuring CbsDfCmnMemIntlv token. * `None` - Value - None for configuring CbsDfCmnMemIntlv token. * `Socket` - Value - Socket for configuring CbsDfCmnMemIntlv token.
 		CbsDfCmnMemIntlv *string `json:"CbsDfCmnMemIntlv,omitempty"`
+		// BIOS Token for setting Memory Interleaving configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsDfCmnMemIntlvControl token. * `disabled` - Value - disabled for configuring CbsDfCmnMemIntlvControl token. * `enabled` - Value - enabled for configuring CbsDfCmnMemIntlvControl token.
+		CbsDfCmnMemIntlvControl *string `json:"CbsDfCmnMemIntlvControl,omitempty"`
 		// BIOS Token for setting AMD Memory Interleaving Size configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `256 Bytes` - Value - 256 Bytes for configuring CbsDfCmnMemIntlvSize token. * `512 Bytes` - Value - 512 Bytes for configuring CbsDfCmnMemIntlvSize token. * `1 KB` - Value - 1 KiB for configuring CbsDfCmnMemIntlvSize token. * `2 KB` - Value - 2 KiB for configuring CbsDfCmnMemIntlvSize token. * `4 KB` - Value - 4 KiB for configuring CbsDfCmnMemIntlvSize token. * `Auto` - Value - Auto for configuring CbsDfCmnMemIntlvSize token.
 		CbsDfCmnMemIntlvSize *string `json:"CbsDfCmnMemIntlvSize,omitempty"`
-		// BIOS Token for setting SEV-SNP Support configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
+		// BIOS Token for setting xGMI Link Configuration configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `2 xGMI Links` - Value - 2 xGMI Links for configuring CbsDfDbgXgmiLinkCfg token. * `3 xGMI Links` - Value - 3 xGMI Links for configuring CbsDfDbgXgmiLinkCfg token. * `4 xGMI Links` - Value - 4 xGMI Links for configuring CbsDfDbgXgmiLinkCfg token. * `Auto` - Value - Auto for configuring CbsDfDbgXgmiLinkCfg token.
+		CbsDfDbgXgmiLinkCfg *string `json:"CbsDfDbgXgmiLinkCfg,omitempty"`
+		// BIOS Token for setting PCIe Ten Bit Tag Support configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsGnbDbgPcieTbtSupport token. * `disabled` - Value - disabled for configuring CbsGnbDbgPcieTbtSupport token. * `enabled` - Value - enabled for configuring CbsGnbDbgPcieTbtSupport token.
+		CbsGnbDbgPcieTbtSupport *string `json:"CbsGnbDbgPcieTbtSupport,omitempty"`
+		// BIOS Token for setting SEV-SNP Support configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsSevSnpSupport token. * `disabled` - Value - disabled for configuring CbsSevSnpSupport token. * `enabled` - Value - enabled for configuring CbsSevSnpSupport token.
 		CbsSevSnpSupport *string `json:"CbsSevSnpSupport,omitempty"`
 		// BIOS Token for setting Consistent Device Naming configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
 		CdnEnable *string `json:"CdnEnable,omitempty"`
@@ -17383,6 +18745,8 @@ func (o *BiosPolicy) UnmarshalJSON(bytes []byte) (err error) {
 		DcpmmFirmwareDowngrade *string `json:"DcpmmFirmwareDowngrade,omitempty"`
 		// BIOS Token for setting Demand Scrub configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
 		DemandScrub *string `json:"DemandScrub,omitempty"`
+		// BIOS Token for setting DFX OSB configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring DfxOsbEn token. * `disabled` - Value - disabled for configuring DfxOsbEn token. * `enabled` - Value - enabled for configuring DfxOsbEn token.
+		DfxOsbEn *string `json:"DfxOsbEn,omitempty"`
 		// BIOS Token for setting Direct Cache Access Support configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `auto` - Value - auto for configuring DirectCacheAccess token. * `disabled` - Value - disabled for configuring DirectCacheAccess token. * `enabled` - Value - enabled for configuring DirectCacheAccess token.
 		DirectCacheAccess *string `json:"DirectCacheAccess,omitempty"`
 		// BIOS Token for setting DMA Control Opt-In Flag configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
@@ -17459,6 +18823,8 @@ func (o *BiosPolicy) UnmarshalJSON(bytes []byte) (err error) {
 		IntelVtdPassThroughDmaSupport *string `json:"IntelVtdPassThroughDmaSupport,omitempty"`
 		// BIOS Token for setting Intel VTD ATS Support configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
 		IntelVtdatsSupport *string `json:"IntelVtdatsSupport,omitempty"`
+		// BIOS Token for setting IOAT Configuration configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
+		IoatConfigCpm *string `json:"IoatConfigCpm,omitempty"`
 		// BIOS Token for setting IIO Error Enable configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `No` - Value - No for configuring IohErrorEnable token. * `Yes` - Value - Yes for configuring IohErrorEnable token.
 		IohErrorEnable *string `json:"IohErrorEnable,omitempty"`
 		// BIOS Token for setting IOH Resource Allocation configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `IOH0 24k IOH1 40k` - Value - IOH0 24k IOH1 40k for configuring IohResource token. * `IOH0 32k IOH1 32k` - Value - IOH0 32k IOH1 32k for configuring IohResource token. * `IOH0 40k IOH1 24k` - Value - IOH0 40k IOH1 24k for configuring IohResource token. * `IOH0 48k IOH1 16k` - Value - IOH0 48k IOH1 16k for configuring IohResource token. * `IOH0 56k IOH1 8k` - Value - IOH0 56k IOH1 8k for configuring IohResource token.
@@ -17513,6 +18879,10 @@ func (o *BiosPolicy) UnmarshalJSON(bytes []byte) (err error) {
 		MirroringMode *string `json:"MirroringMode,omitempty"`
 		// BIOS Token for setting MMCFG BASE configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `1 GB` - Value - 1 GiB for configuring MmcfgBase token. * `2 GB` - Value - 2 GiB for configuring MmcfgBase token. * `2.5 GB` - Value - 2.5 GiB for configuring MmcfgBase token. * `3 GB` - Value - 3 GiB for configuring MmcfgBase token. * `Auto` - Value - Auto for configuring MmcfgBase token.
 		MmcfgBase *string `json:"MmcfgBase,omitempty"`
+		// BIOS Token for setting MMIO High Base configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `512G` - Value - 512G for configuring MmiohBase token. * `1T` - Value - 1T for configuring MmiohBase token. * `2T` - Value - 2T for configuring MmiohBase token. * `4T` - Value - 4T for configuring MmiohBase token. * `16T` - Value - 16T for configuring MmiohBase token. * `24T` - Value - 24T for configuring MmiohBase token. * `32T` - Value - 32T for configuring MmiohBase token. * `40T` - Value - 40T for configuring MmiohBase token. * `56T` - Value - 56T for configuring MmiohBase token.
+		MmiohBase *string `json:"MmiohBase,omitempty"`
+		// BIOS Token for setting MMIO High Granularity Size configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `1G` - Value - 1G for configuring MmiohSize token. * `4G` - Value - 4G for configuring MmiohSize token. * `16G` - Value - 16G for configuring MmiohSize token. * `64G` - Value - 64G for configuring MmiohSize token. * `256G` - Value - 256G for configuring MmiohSize token. * `1024G` - Value - 1024G for configuring MmiohSize token.
+		MmiohSize *string `json:"MmiohSize,omitempty"`
 		// BIOS Token for setting Network Stack configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
 		NetworkStack *string `json:"NetworkStack,omitempty"`
 		// BIOS Token for setting NUMA Optimized configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
@@ -17585,7 +18955,7 @@ func (o *BiosPolicy) UnmarshalJSON(bytes []byte) (err error) {
 		PcieSlotMraid2linkSpeed *string `json:"PcieSlotMraid2linkSpeed,omitempty"`
 		// BIOS Token for setting MRAID2 OptionROM configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
 		PcieSlotMraid2optionRom *string `json:"PcieSlotMraid2optionRom,omitempty"`
-		// BIOS Token for setting PCIe Slot MSTOR Link Speed configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring PcieSlotMstorraidLinkSpeed token. * `Disabled` - Value - Disabled for configuring PcieSlotMstorraidLinkSpeed token. * `GEN1` - Value - GEN1 for configuring PcieSlotMstorraidLinkSpeed token. * `GEN2` - Value - GEN2 for configuring PcieSlotMstorraidLinkSpeed token. * `GEN3` - Value - GEN3 for configuring PcieSlotMstorraidLinkSpeed token. * `GEN4` - Value - GEN4 for configuring PcieSlotMstorraidLinkSpeed token.
+		// BIOS Token for setting PCIe Slot MSTOR Link Speed configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring PcieSlotMstorraidLinkSpeed token. * `Disabled` - Value - Disabled for configuring PcieSlotMstorraidLinkSpeed token. * `GEN1` - Value - GEN1 for configuring PcieSlotMstorraidLinkSpeed token. * `GEN2` - Value - GEN2 for configuring PcieSlotMstorraidLinkSpeed token. * `GEN3` - Value - GEN3 for configuring PcieSlotMstorraidLinkSpeed token. * `GEN4` - Value - GEN4 for configuring PcieSlotMstorraidLinkSpeed token. * `GEN5` - Value - GEN5 for configuring PcieSlotMstorraidLinkSpeed token.
 		PcieSlotMstorraidLinkSpeed *string `json:"PcieSlotMstorraidLinkSpeed,omitempty"`
 		// BIOS Token for setting PCIe Slot MSTOR RAID OptionROM configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
 		PcieSlotMstorraidOptionRom *string `json:"PcieSlotMstorraidOptionRom,omitempty"`
@@ -17621,7 +18991,7 @@ func (o *BiosPolicy) UnmarshalJSON(bytes []byte) (err error) {
 		PostErrorPause *string `json:"PostErrorPause,omitempty"`
 		// BIOS Token for setting Post Package Repair configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Disabled` - Value - Disabled for configuring PostPackageRepair token. * `Hard PPR` - Value - Hard PPR for configuring PostPackageRepair token.
 		PostPackageRepair *string `json:"PostPackageRepair,omitempty"`
-		// BIOS Token for setting PRMRR Size configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `1G` - Value - 1G for configuring PrmrrSize token. * `2G` - Value - 2G for configuring PrmrrSize token. * `4G` - Value - 4G for configuring PrmrrSize token. * `8G` - Value - 8G for configuring PrmrrSize token. * `16G` - Value - 16G for configuring PrmrrSize token. * `32G` - Value - 32G for configuring PrmrrSize token. * `64G` - Value - 64G for configuring PrmrrSize token. * `128G` - Value - 128G for configuring PrmrrSize token. * `256G` - Value - 256G for configuring PrmrrSize token. * `512G` - Value - 512G for configuring PrmrrSize token. * `128M` - Value - 128M for configuring PrmrrSize token. * `256M` - Value - 256M for configuring PrmrrSize token. * `512M` - Value - 512M for configuring PrmrrSize token. * `Invalid Config.` - Value - Invalid Config for configuring PrmrrSize token.
+		// BIOS Token for setting PRMRR Size configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `1G` - Value - 1G for configuring PrmrrSize token. * `2G` - Value - 2G for configuring PrmrrSize token. * `4G` - Value - 4G for configuring PrmrrSize token. * `8G` - Value - 8G for configuring PrmrrSize token. * `16G` - Value - 16G for configuring PrmrrSize token. * `32G` - Value - 32G for configuring PrmrrSize token. * `64G` - Value - 64G for configuring PrmrrSize token. * `128G` - Value - 128G for configuring PrmrrSize token. * `256G` - Value - 256G for configuring PrmrrSize token. * `512G` - Value - 512G for configuring PrmrrSize token. * `128M` - Value - 128M for configuring PrmrrSize token. * `256M` - Value - 256M for configuring PrmrrSize token. * `512M` - Value - 512M for configuring PrmrrSize token. * `Auto` - Value - Auto for configuring PrmrrSize token. * `Invalid Config.` - Value - Invalid Config for configuring PrmrrSize token.
 		PrmrrSize *string `json:"PrmrrSize,omitempty"`
 		// BIOS Token for setting Processor C1E configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
 		ProcessorC1e *string `json:"ProcessorC1e,omitempty"`
@@ -17649,12 +19019,18 @@ func (o *BiosPolicy) UnmarshalJSON(bytes []byte) (err error) {
 		RankInterLeave *string `json:"RankInterLeave,omitempty"`
 		// BIOS Token for setting Redirection After BIOS POST configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Always Enable` - Value - Always Enable for configuring RedirectionAfterPost token. * `Bootloader` - Value - Bootloader for configuring RedirectionAfterPost token.
 		RedirectionAfterPost *string `json:"RedirectionAfterPost,omitempty"`
+		// BIOS Token for setting Re-Size BAR Support configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
+		ResizeBarSupport *string `json:"ResizeBarSupport,omitempty"`
+		// BIOS Token for setting Runtime Post Package Repair configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
+		RuntimePostPackageRepair *string `json:"RuntimePostPackageRepair,omitempty"`
 		// BIOS Token for setting SATA Mode configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `AHCI` - Value - AHCI for configuring SataModeSelect token. * `Disabled` - Value - Disabled for configuring SataModeSelect token. * `LSI SW RAID` - Value - LSI SW RAID for configuring SataModeSelect token.
 		SataModeSelect *string `json:"SataModeSelect,omitempty"`
 		// BIOS Token for setting Memory RAS Configuration configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `adddc-sparing` - Value - adddc-sparing for configuring SelectMemoryRasConfiguration token. * `lockstep` - Value - lockstep for configuring SelectMemoryRasConfiguration token. * `maximum-performance` - Value - maximum-performance for configuring SelectMemoryRasConfiguration token. * `mirror-mode-1lm` - Value - mirror-mode-1lm for configuring SelectMemoryRasConfiguration token. * `mirroring` - Value - mirroring for configuring SelectMemoryRasConfiguration token. * `partial-mirror-mode-1lm` - Value - partial-mirror-mode-1lm for configuring SelectMemoryRasConfiguration token. * `sparing` - Value - sparing for configuring SelectMemoryRasConfiguration token.
 		SelectMemoryRasConfiguration *string `json:"SelectMemoryRasConfiguration,omitempty"`
 		// BIOS Token for setting PPR Type configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `disabled` - Value - disabled for configuring SelectPprType token. * `Hard PPR` - Value - Hard PPR for configuring SelectPprType token. * `Soft PPR` - Value - Soft PPR for configuring SelectPprType token.
 		SelectPprType *string `json:"SelectPprType,omitempty"`
+		// BIOS Token for setting Serial Mux configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
+		SerialMux *string `json:"SerialMux,omitempty"`
 		// BIOS Token for setting Serial A Enable configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
 		SerialPortAenable *string `json:"SerialPortAenable,omitempty"`
 		// BIOS Token for setting Secured Encrypted Virtualization configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `253 ASIDs` - Value - 253 ASIDs for configuring Sev token. * `509 ASIDs` - Value - 509 ASIDs for configuring Sev token. * `Auto` - Value - Auto for configuring Sev token.
@@ -18093,31 +19469,56 @@ func (o *BiosPolicy) UnmarshalJSON(bytes []byte) (err error) {
 		varBiosPolicy.C1autoDemotion = varBiosPolicyWithoutEmbeddedStruct.C1autoDemotion
 		varBiosPolicy.C1autoUnDemotion = varBiosPolicyWithoutEmbeddedStruct.C1autoUnDemotion
 		varBiosPolicy.CbsCmnApbdis = varBiosPolicyWithoutEmbeddedStruct.CbsCmnApbdis
+		varBiosPolicy.CbsCmnApbdisDfPstateRs = varBiosPolicyWithoutEmbeddedStruct.CbsCmnApbdisDfPstateRs
+		varBiosPolicy.CbsCmnCpuAvx512 = varBiosPolicyWithoutEmbeddedStruct.CbsCmnCpuAvx512
 		varBiosPolicy.CbsCmnCpuCpb = varBiosPolicyWithoutEmbeddedStruct.CbsCmnCpuCpb
 		varBiosPolicy.CbsCmnCpuGenDowncoreCtrl = varBiosPolicyWithoutEmbeddedStruct.CbsCmnCpuGenDowncoreCtrl
 		varBiosPolicy.CbsCmnCpuGlobalCstateCtrl = varBiosPolicyWithoutEmbeddedStruct.CbsCmnCpuGlobalCstateCtrl
 		varBiosPolicy.CbsCmnCpuL1streamHwPrefetcher = varBiosPolicyWithoutEmbeddedStruct.CbsCmnCpuL1streamHwPrefetcher
 		varBiosPolicy.CbsCmnCpuL2streamHwPrefetcher = varBiosPolicyWithoutEmbeddedStruct.CbsCmnCpuL2streamHwPrefetcher
+		varBiosPolicy.CbsCmnCpuSevAsidSpaceLimit = varBiosPolicyWithoutEmbeddedStruct.CbsCmnCpuSevAsidSpaceLimit
 		varBiosPolicy.CbsCmnCpuSmee = varBiosPolicyWithoutEmbeddedStruct.CbsCmnCpuSmee
 		varBiosPolicy.CbsCmnCpuStreamingStoresCtrl = varBiosPolicyWithoutEmbeddedStruct.CbsCmnCpuStreamingStoresCtrl
 		varBiosPolicy.CbsCmnDeterminismSlider = varBiosPolicyWithoutEmbeddedStruct.CbsCmnDeterminismSlider
+		varBiosPolicy.CbsCmnEdcControlThrottle = varBiosPolicyWithoutEmbeddedStruct.CbsCmnEdcControlThrottle
 		varBiosPolicy.CbsCmnEfficiencyModeEn = varBiosPolicyWithoutEmbeddedStruct.CbsCmnEfficiencyModeEn
+		varBiosPolicy.CbsCmnEfficiencyModeEnRs = varBiosPolicyWithoutEmbeddedStruct.CbsCmnEfficiencyModeEnRs
 		varBiosPolicy.CbsCmnFixedSocPstate = varBiosPolicyWithoutEmbeddedStruct.CbsCmnFixedSocPstate
 		varBiosPolicy.CbsCmnGnbNbIommu = varBiosPolicyWithoutEmbeddedStruct.CbsCmnGnbNbIommu
 		varBiosPolicy.CbsCmnGnbSmuDfCstates = varBiosPolicyWithoutEmbeddedStruct.CbsCmnGnbSmuDfCstates
+		varBiosPolicy.CbsCmnGnbSmuDffoRs = varBiosPolicyWithoutEmbeddedStruct.CbsCmnGnbSmuDffoRs
+		varBiosPolicy.CbsCmnGnbSmuDlwmSupport = varBiosPolicyWithoutEmbeddedStruct.CbsCmnGnbSmuDlwmSupport
 		varBiosPolicy.CbsCmnGnbSmucppc = varBiosPolicyWithoutEmbeddedStruct.CbsCmnGnbSmucppc
 		varBiosPolicy.CbsCmnMemCtrlBankGroupSwapDdr4 = varBiosPolicyWithoutEmbeddedStruct.CbsCmnMemCtrlBankGroupSwapDdr4
+		varBiosPolicy.CbsCmnMemCtrllerPwrDnEnDdr = varBiosPolicyWithoutEmbeddedStruct.CbsCmnMemCtrllerPwrDnEnDdr
+		varBiosPolicy.CbsCmnMemDramRefreshRate = varBiosPolicyWithoutEmbeddedStruct.CbsCmnMemDramRefreshRate
 		varBiosPolicy.CbsCmnMemMapBankInterleaveDdr4 = varBiosPolicyWithoutEmbeddedStruct.CbsCmnMemMapBankInterleaveDdr4
+		varBiosPolicy.CbsCmnMemSpeedDdr47xx2 = varBiosPolicyWithoutEmbeddedStruct.CbsCmnMemSpeedDdr47xx2
+		varBiosPolicy.CbsCmnMemSpeedDdr47xx3 = varBiosPolicyWithoutEmbeddedStruct.CbsCmnMemSpeedDdr47xx3
+		varBiosPolicy.CbsCmnPreferredIo7xx2 = varBiosPolicyWithoutEmbeddedStruct.CbsCmnPreferredIo7xx2
+		varBiosPolicy.CbsCmnPreferredIo7xx3 = varBiosPolicyWithoutEmbeddedStruct.CbsCmnPreferredIo7xx3
 		varBiosPolicy.CbsCmncTdpCtl = varBiosPolicyWithoutEmbeddedStruct.CbsCmncTdpCtl
+		varBiosPolicy.CbsCmnxGmiForceLinkWidthRs = varBiosPolicyWithoutEmbeddedStruct.CbsCmnxGmiForceLinkWidthRs
 		varBiosPolicy.CbsCpuCcdCtrlSsp = varBiosPolicyWithoutEmbeddedStruct.CbsCpuCcdCtrlSsp
 		varBiosPolicy.CbsCpuCoreCtrl = varBiosPolicyWithoutEmbeddedStruct.CbsCpuCoreCtrl
+		varBiosPolicy.CbsCpuDownCoreCtrlBergamo = varBiosPolicyWithoutEmbeddedStruct.CbsCpuDownCoreCtrlBergamo
+		varBiosPolicy.CbsCpuDownCoreCtrlGenoa = varBiosPolicyWithoutEmbeddedStruct.CbsCpuDownCoreCtrlGenoa
 		varBiosPolicy.CbsCpuSmtCtrl = varBiosPolicyWithoutEmbeddedStruct.CbsCpuSmtCtrl
+		varBiosPolicy.CbsDbgCpuGenCpuWdt = varBiosPolicyWithoutEmbeddedStruct.CbsDbgCpuGenCpuWdt
+		varBiosPolicy.CbsDbgCpuLapicMode = varBiosPolicyWithoutEmbeddedStruct.CbsDbgCpuLapicMode
+		varBiosPolicy.CbsDbgCpuLapicMode7xx2 = varBiosPolicyWithoutEmbeddedStruct.CbsDbgCpuLapicMode7xx2
+		varBiosPolicy.CbsDbgCpuLapicMode7xx3 = varBiosPolicyWithoutEmbeddedStruct.CbsDbgCpuLapicMode7xx3
 		varBiosPolicy.CbsDbgCpuSnpMemCover = varBiosPolicyWithoutEmbeddedStruct.CbsDbgCpuSnpMemCover
 		varBiosPolicy.CbsDbgCpuSnpMemSizeCover = varBiosPolicyWithoutEmbeddedStruct.CbsDbgCpuSnpMemSizeCover
+		varBiosPolicy.CbsDfCmn4linkMaxXgmiSpeed = varBiosPolicyWithoutEmbeddedStruct.CbsDfCmn4linkMaxXgmiSpeed
 		varBiosPolicy.CbsDfCmnAcpiSratL3numa = varBiosPolicyWithoutEmbeddedStruct.CbsDfCmnAcpiSratL3numa
 		varBiosPolicy.CbsDfCmnDramNps = varBiosPolicyWithoutEmbeddedStruct.CbsDfCmnDramNps
+		varBiosPolicy.CbsDfCmnDramScrubTime = varBiosPolicyWithoutEmbeddedStruct.CbsDfCmnDramScrubTime
 		varBiosPolicy.CbsDfCmnMemIntlv = varBiosPolicyWithoutEmbeddedStruct.CbsDfCmnMemIntlv
+		varBiosPolicy.CbsDfCmnMemIntlvControl = varBiosPolicyWithoutEmbeddedStruct.CbsDfCmnMemIntlvControl
 		varBiosPolicy.CbsDfCmnMemIntlvSize = varBiosPolicyWithoutEmbeddedStruct.CbsDfCmnMemIntlvSize
+		varBiosPolicy.CbsDfDbgXgmiLinkCfg = varBiosPolicyWithoutEmbeddedStruct.CbsDfDbgXgmiLinkCfg
+		varBiosPolicy.CbsGnbDbgPcieTbtSupport = varBiosPolicyWithoutEmbeddedStruct.CbsGnbDbgPcieTbtSupport
 		varBiosPolicy.CbsSevSnpSupport = varBiosPolicyWithoutEmbeddedStruct.CbsSevSnpSupport
 		varBiosPolicy.CdnEnable = varBiosPolicyWithoutEmbeddedStruct.CdnEnable
 		varBiosPolicy.CdnSupport = varBiosPolicyWithoutEmbeddedStruct.CdnSupport
@@ -18143,6 +19544,7 @@ func (o *BiosPolicy) UnmarshalJSON(bytes []byte) (err error) {
 		varBiosPolicy.CrfastgoConfig = varBiosPolicyWithoutEmbeddedStruct.CrfastgoConfig
 		varBiosPolicy.DcpmmFirmwareDowngrade = varBiosPolicyWithoutEmbeddedStruct.DcpmmFirmwareDowngrade
 		varBiosPolicy.DemandScrub = varBiosPolicyWithoutEmbeddedStruct.DemandScrub
+		varBiosPolicy.DfxOsbEn = varBiosPolicyWithoutEmbeddedStruct.DfxOsbEn
 		varBiosPolicy.DirectCacheAccess = varBiosPolicyWithoutEmbeddedStruct.DirectCacheAccess
 		varBiosPolicy.DmaCtrlOptIn = varBiosPolicyWithoutEmbeddedStruct.DmaCtrlOptIn
 		varBiosPolicy.DramClockThrottling = varBiosPolicyWithoutEmbeddedStruct.DramClockThrottling
@@ -18181,6 +19583,7 @@ func (o *BiosPolicy) UnmarshalJSON(bytes []byte) (err error) {
 		varBiosPolicy.IntelVtdInterruptRemapping = varBiosPolicyWithoutEmbeddedStruct.IntelVtdInterruptRemapping
 		varBiosPolicy.IntelVtdPassThroughDmaSupport = varBiosPolicyWithoutEmbeddedStruct.IntelVtdPassThroughDmaSupport
 		varBiosPolicy.IntelVtdatsSupport = varBiosPolicyWithoutEmbeddedStruct.IntelVtdatsSupport
+		varBiosPolicy.IoatConfigCpm = varBiosPolicyWithoutEmbeddedStruct.IoatConfigCpm
 		varBiosPolicy.IohErrorEnable = varBiosPolicyWithoutEmbeddedStruct.IohErrorEnable
 		varBiosPolicy.IohResource = varBiosPolicyWithoutEmbeddedStruct.IohResource
 		varBiosPolicy.IpPrefetch = varBiosPolicyWithoutEmbeddedStruct.IpPrefetch
@@ -18208,6 +19611,8 @@ func (o *BiosPolicy) UnmarshalJSON(bytes []byte) (err error) {
 		varBiosPolicy.MemoryThermalThrottling = varBiosPolicyWithoutEmbeddedStruct.MemoryThermalThrottling
 		varBiosPolicy.MirroringMode = varBiosPolicyWithoutEmbeddedStruct.MirroringMode
 		varBiosPolicy.MmcfgBase = varBiosPolicyWithoutEmbeddedStruct.MmcfgBase
+		varBiosPolicy.MmiohBase = varBiosPolicyWithoutEmbeddedStruct.MmiohBase
+		varBiosPolicy.MmiohSize = varBiosPolicyWithoutEmbeddedStruct.MmiohSize
 		varBiosPolicy.NetworkStack = varBiosPolicyWithoutEmbeddedStruct.NetworkStack
 		varBiosPolicy.NumaOptimized = varBiosPolicyWithoutEmbeddedStruct.NumaOptimized
 		varBiosPolicy.NvmdimmPerformConfig = varBiosPolicyWithoutEmbeddedStruct.NvmdimmPerformConfig
@@ -18276,9 +19681,12 @@ func (o *BiosPolicy) UnmarshalJSON(bytes []byte) (err error) {
 		varBiosPolicy.QpiSnoopMode = varBiosPolicyWithoutEmbeddedStruct.QpiSnoopMode
 		varBiosPolicy.RankInterLeave = varBiosPolicyWithoutEmbeddedStruct.RankInterLeave
 		varBiosPolicy.RedirectionAfterPost = varBiosPolicyWithoutEmbeddedStruct.RedirectionAfterPost
+		varBiosPolicy.ResizeBarSupport = varBiosPolicyWithoutEmbeddedStruct.ResizeBarSupport
+		varBiosPolicy.RuntimePostPackageRepair = varBiosPolicyWithoutEmbeddedStruct.RuntimePostPackageRepair
 		varBiosPolicy.SataModeSelect = varBiosPolicyWithoutEmbeddedStruct.SataModeSelect
 		varBiosPolicy.SelectMemoryRasConfiguration = varBiosPolicyWithoutEmbeddedStruct.SelectMemoryRasConfiguration
 		varBiosPolicy.SelectPprType = varBiosPolicyWithoutEmbeddedStruct.SelectPprType
+		varBiosPolicy.SerialMux = varBiosPolicyWithoutEmbeddedStruct.SerialMux
 		varBiosPolicy.SerialPortAenable = varBiosPolicyWithoutEmbeddedStruct.SerialPortAenable
 		varBiosPolicy.Sev = varBiosPolicyWithoutEmbeddedStruct.Sev
 		varBiosPolicy.SgxAutoRegistrationAgent = varBiosPolicyWithoutEmbeddedStruct.SgxAutoRegistrationAgent
@@ -18529,31 +19937,56 @@ func (o *BiosPolicy) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "C1autoDemotion")
 		delete(additionalProperties, "C1autoUnDemotion")
 		delete(additionalProperties, "CbsCmnApbdis")
+		delete(additionalProperties, "CbsCmnApbdisDfPstateRs")
+		delete(additionalProperties, "CbsCmnCpuAvx512")
 		delete(additionalProperties, "CbsCmnCpuCpb")
 		delete(additionalProperties, "CbsCmnCpuGenDowncoreCtrl")
 		delete(additionalProperties, "CbsCmnCpuGlobalCstateCtrl")
 		delete(additionalProperties, "CbsCmnCpuL1streamHwPrefetcher")
 		delete(additionalProperties, "CbsCmnCpuL2streamHwPrefetcher")
+		delete(additionalProperties, "CbsCmnCpuSevAsidSpaceLimit")
 		delete(additionalProperties, "CbsCmnCpuSmee")
 		delete(additionalProperties, "CbsCmnCpuStreamingStoresCtrl")
 		delete(additionalProperties, "CbsCmnDeterminismSlider")
+		delete(additionalProperties, "CbsCmnEdcControlThrottle")
 		delete(additionalProperties, "CbsCmnEfficiencyModeEn")
+		delete(additionalProperties, "CbsCmnEfficiencyModeEnRs")
 		delete(additionalProperties, "CbsCmnFixedSocPstate")
 		delete(additionalProperties, "CbsCmnGnbNbIommu")
 		delete(additionalProperties, "CbsCmnGnbSmuDfCstates")
+		delete(additionalProperties, "CbsCmnGnbSmuDffoRs")
+		delete(additionalProperties, "CbsCmnGnbSmuDlwmSupport")
 		delete(additionalProperties, "CbsCmnGnbSmucppc")
 		delete(additionalProperties, "CbsCmnMemCtrlBankGroupSwapDdr4")
+		delete(additionalProperties, "CbsCmnMemCtrllerPwrDnEnDdr")
+		delete(additionalProperties, "CbsCmnMemDramRefreshRate")
 		delete(additionalProperties, "CbsCmnMemMapBankInterleaveDdr4")
+		delete(additionalProperties, "CbsCmnMemSpeedDdr47xx2")
+		delete(additionalProperties, "CbsCmnMemSpeedDdr47xx3")
+		delete(additionalProperties, "CbsCmnPreferredIo7xx2")
+		delete(additionalProperties, "CbsCmnPreferredIo7xx3")
 		delete(additionalProperties, "CbsCmncTdpCtl")
+		delete(additionalProperties, "CbsCmnxGmiForceLinkWidthRs")
 		delete(additionalProperties, "CbsCpuCcdCtrlSsp")
 		delete(additionalProperties, "CbsCpuCoreCtrl")
+		delete(additionalProperties, "CbsCpuDownCoreCtrlBergamo")
+		delete(additionalProperties, "CbsCpuDownCoreCtrlGenoa")
 		delete(additionalProperties, "CbsCpuSmtCtrl")
+		delete(additionalProperties, "CbsDbgCpuGenCpuWdt")
+		delete(additionalProperties, "CbsDbgCpuLapicMode")
+		delete(additionalProperties, "CbsDbgCpuLapicMode7xx2")
+		delete(additionalProperties, "CbsDbgCpuLapicMode7xx3")
 		delete(additionalProperties, "CbsDbgCpuSnpMemCover")
 		delete(additionalProperties, "CbsDbgCpuSnpMemSizeCover")
+		delete(additionalProperties, "CbsDfCmn4linkMaxXgmiSpeed")
 		delete(additionalProperties, "CbsDfCmnAcpiSratL3numa")
 		delete(additionalProperties, "CbsDfCmnDramNps")
+		delete(additionalProperties, "CbsDfCmnDramScrubTime")
 		delete(additionalProperties, "CbsDfCmnMemIntlv")
+		delete(additionalProperties, "CbsDfCmnMemIntlvControl")
 		delete(additionalProperties, "CbsDfCmnMemIntlvSize")
+		delete(additionalProperties, "CbsDfDbgXgmiLinkCfg")
+		delete(additionalProperties, "CbsGnbDbgPcieTbtSupport")
 		delete(additionalProperties, "CbsSevSnpSupport")
 		delete(additionalProperties, "CdnEnable")
 		delete(additionalProperties, "CdnSupport")
@@ -18579,6 +20012,7 @@ func (o *BiosPolicy) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "CrfastgoConfig")
 		delete(additionalProperties, "DcpmmFirmwareDowngrade")
 		delete(additionalProperties, "DemandScrub")
+		delete(additionalProperties, "DfxOsbEn")
 		delete(additionalProperties, "DirectCacheAccess")
 		delete(additionalProperties, "DmaCtrlOptIn")
 		delete(additionalProperties, "DramClockThrottling")
@@ -18617,6 +20051,7 @@ func (o *BiosPolicy) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "IntelVtdInterruptRemapping")
 		delete(additionalProperties, "IntelVtdPassThroughDmaSupport")
 		delete(additionalProperties, "IntelVtdatsSupport")
+		delete(additionalProperties, "IoatConfigCpm")
 		delete(additionalProperties, "IohErrorEnable")
 		delete(additionalProperties, "IohResource")
 		delete(additionalProperties, "IpPrefetch")
@@ -18644,6 +20079,8 @@ func (o *BiosPolicy) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "MemoryThermalThrottling")
 		delete(additionalProperties, "MirroringMode")
 		delete(additionalProperties, "MmcfgBase")
+		delete(additionalProperties, "MmiohBase")
+		delete(additionalProperties, "MmiohSize")
 		delete(additionalProperties, "NetworkStack")
 		delete(additionalProperties, "NumaOptimized")
 		delete(additionalProperties, "NvmdimmPerformConfig")
@@ -18712,9 +20149,12 @@ func (o *BiosPolicy) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "QpiSnoopMode")
 		delete(additionalProperties, "RankInterLeave")
 		delete(additionalProperties, "RedirectionAfterPost")
+		delete(additionalProperties, "ResizeBarSupport")
+		delete(additionalProperties, "RuntimePostPackageRepair")
 		delete(additionalProperties, "SataModeSelect")
 		delete(additionalProperties, "SelectMemoryRasConfiguration")
 		delete(additionalProperties, "SelectPprType")
+		delete(additionalProperties, "SerialMux")
 		delete(additionalProperties, "SerialPortAenable")
 		delete(additionalProperties, "Sev")
 		delete(additionalProperties, "SgxAutoRegistrationAgent")

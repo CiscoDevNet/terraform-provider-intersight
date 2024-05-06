@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-15830
+API version: 1.0.11-16342
 Contact: intersight@cisco.com
 */
 
@@ -25,14 +25,18 @@ type OsValidInstallTarget struct {
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
 	// Error message if any errors are encountered while fetching and validating Install targets for the server.
-	Error              *string                   `json:"Error,omitempty"`
-	InstallTargets     []OsInstallTargetResponse `json:"InstallTargets,omitempty"`
-	M2Jbod             []OsPhysicalDiskResponse  `json:"M2Jbod,omitempty"`
-	M2VirtualDrives    []OsVirtualDriveResponse  `json:"M2VirtualDrives,omitempty"`
-	MraidJbod          []OsPhysicalDiskResponse  `json:"MraidJbod,omitempty"`
-	MraidVirtualDrives []OsVirtualDriveResponse  `json:"MraidVirtualDrives,omitempty"`
+	Error                   *string                   `json:"Error,omitempty"`
+	InstallTargets          []OsInstallTargetResponse `json:"InstallTargets,omitempty"`
+	M2Jbod                  []OsPhysicalDiskResponse  `json:"M2Jbod,omitempty"`
+	M2NvmeRaidJbod          []OsPhysicalDiskResponse  `json:"M2NvmeRaidJbod,omitempty"`
+	M2NvmeRaidVirtualDrives []OsVirtualDriveResponse  `json:"M2NvmeRaidVirtualDrives,omitempty"`
+	M2VirtualDrives         []OsVirtualDriveResponse  `json:"M2VirtualDrives,omitempty"`
+	MraidJbod               []OsPhysicalDiskResponse  `json:"MraidJbod,omitempty"`
+	MraidVirtualDrives      []OsVirtualDriveResponse  `json:"MraidVirtualDrives,omitempty"`
+	MstorNvme               []OsPhysicalDiskResponse  `json:"MstorNvme,omitempty"`
 	// Flag to denote the source of the request. If the call is from Orchestration UI, only the flat list of Install targets can be sent as response.
-	Src *string `json:"Src,omitempty"`
+	Src    *string                  `json:"Src,omitempty"`
+	U2Nvme []OsPhysicalDiskResponse `json:"U2Nvme,omitempty"`
 	// An array of relationships to computePhysical resources.
 	Servers              []ComputePhysicalRelationship `json:"Servers,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -209,6 +213,72 @@ func (o *OsValidInstallTarget) SetM2Jbod(v []OsPhysicalDiskResponse) {
 	o.M2Jbod = v
 }
 
+// GetM2NvmeRaidJbod returns the M2NvmeRaidJbod field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *OsValidInstallTarget) GetM2NvmeRaidJbod() []OsPhysicalDiskResponse {
+	if o == nil {
+		var ret []OsPhysicalDiskResponse
+		return ret
+	}
+	return o.M2NvmeRaidJbod
+}
+
+// GetM2NvmeRaidJbodOk returns a tuple with the M2NvmeRaidJbod field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *OsValidInstallTarget) GetM2NvmeRaidJbodOk() ([]OsPhysicalDiskResponse, bool) {
+	if o == nil || o.M2NvmeRaidJbod == nil {
+		return nil, false
+	}
+	return o.M2NvmeRaidJbod, true
+}
+
+// HasM2NvmeRaidJbod returns a boolean if a field has been set.
+func (o *OsValidInstallTarget) HasM2NvmeRaidJbod() bool {
+	if o != nil && o.M2NvmeRaidJbod != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetM2NvmeRaidJbod gets a reference to the given []OsPhysicalDiskResponse and assigns it to the M2NvmeRaidJbod field.
+func (o *OsValidInstallTarget) SetM2NvmeRaidJbod(v []OsPhysicalDiskResponse) {
+	o.M2NvmeRaidJbod = v
+}
+
+// GetM2NvmeRaidVirtualDrives returns the M2NvmeRaidVirtualDrives field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *OsValidInstallTarget) GetM2NvmeRaidVirtualDrives() []OsVirtualDriveResponse {
+	if o == nil {
+		var ret []OsVirtualDriveResponse
+		return ret
+	}
+	return o.M2NvmeRaidVirtualDrives
+}
+
+// GetM2NvmeRaidVirtualDrivesOk returns a tuple with the M2NvmeRaidVirtualDrives field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *OsValidInstallTarget) GetM2NvmeRaidVirtualDrivesOk() ([]OsVirtualDriveResponse, bool) {
+	if o == nil || o.M2NvmeRaidVirtualDrives == nil {
+		return nil, false
+	}
+	return o.M2NvmeRaidVirtualDrives, true
+}
+
+// HasM2NvmeRaidVirtualDrives returns a boolean if a field has been set.
+func (o *OsValidInstallTarget) HasM2NvmeRaidVirtualDrives() bool {
+	if o != nil && o.M2NvmeRaidVirtualDrives != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetM2NvmeRaidVirtualDrives gets a reference to the given []OsVirtualDriveResponse and assigns it to the M2NvmeRaidVirtualDrives field.
+func (o *OsValidInstallTarget) SetM2NvmeRaidVirtualDrives(v []OsVirtualDriveResponse) {
+	o.M2NvmeRaidVirtualDrives = v
+}
+
 // GetM2VirtualDrives returns the M2VirtualDrives field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *OsValidInstallTarget) GetM2VirtualDrives() []OsVirtualDriveResponse {
 	if o == nil {
@@ -308,6 +378,39 @@ func (o *OsValidInstallTarget) SetMraidVirtualDrives(v []OsVirtualDriveResponse)
 	o.MraidVirtualDrives = v
 }
 
+// GetMstorNvme returns the MstorNvme field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *OsValidInstallTarget) GetMstorNvme() []OsPhysicalDiskResponse {
+	if o == nil {
+		var ret []OsPhysicalDiskResponse
+		return ret
+	}
+	return o.MstorNvme
+}
+
+// GetMstorNvmeOk returns a tuple with the MstorNvme field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *OsValidInstallTarget) GetMstorNvmeOk() ([]OsPhysicalDiskResponse, bool) {
+	if o == nil || o.MstorNvme == nil {
+		return nil, false
+	}
+	return o.MstorNvme, true
+}
+
+// HasMstorNvme returns a boolean if a field has been set.
+func (o *OsValidInstallTarget) HasMstorNvme() bool {
+	if o != nil && o.MstorNvme != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetMstorNvme gets a reference to the given []OsPhysicalDiskResponse and assigns it to the MstorNvme field.
+func (o *OsValidInstallTarget) SetMstorNvme(v []OsPhysicalDiskResponse) {
+	o.MstorNvme = v
+}
+
 // GetSrc returns the Src field value if set, zero value otherwise.
 func (o *OsValidInstallTarget) GetSrc() string {
 	if o == nil || o.Src == nil {
@@ -338,6 +441,39 @@ func (o *OsValidInstallTarget) HasSrc() bool {
 // SetSrc gets a reference to the given string and assigns it to the Src field.
 func (o *OsValidInstallTarget) SetSrc(v string) {
 	o.Src = &v
+}
+
+// GetU2Nvme returns the U2Nvme field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *OsValidInstallTarget) GetU2Nvme() []OsPhysicalDiskResponse {
+	if o == nil {
+		var ret []OsPhysicalDiskResponse
+		return ret
+	}
+	return o.U2Nvme
+}
+
+// GetU2NvmeOk returns a tuple with the U2Nvme field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *OsValidInstallTarget) GetU2NvmeOk() ([]OsPhysicalDiskResponse, bool) {
+	if o == nil || o.U2Nvme == nil {
+		return nil, false
+	}
+	return o.U2Nvme, true
+}
+
+// HasU2Nvme returns a boolean if a field has been set.
+func (o *OsValidInstallTarget) HasU2Nvme() bool {
+	if o != nil && o.U2Nvme != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetU2Nvme gets a reference to the given []OsPhysicalDiskResponse and assigns it to the U2Nvme field.
+func (o *OsValidInstallTarget) SetU2Nvme(v []OsPhysicalDiskResponse) {
+	o.U2Nvme = v
 }
 
 // GetServers returns the Servers field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -398,6 +534,12 @@ func (o OsValidInstallTarget) MarshalJSON() ([]byte, error) {
 	if o.M2Jbod != nil {
 		toSerialize["M2Jbod"] = o.M2Jbod
 	}
+	if o.M2NvmeRaidJbod != nil {
+		toSerialize["M2NvmeRaidJbod"] = o.M2NvmeRaidJbod
+	}
+	if o.M2NvmeRaidVirtualDrives != nil {
+		toSerialize["M2NvmeRaidVirtualDrives"] = o.M2NvmeRaidVirtualDrives
+	}
 	if o.M2VirtualDrives != nil {
 		toSerialize["M2VirtualDrives"] = o.M2VirtualDrives
 	}
@@ -407,8 +549,14 @@ func (o OsValidInstallTarget) MarshalJSON() ([]byte, error) {
 	if o.MraidVirtualDrives != nil {
 		toSerialize["MraidVirtualDrives"] = o.MraidVirtualDrives
 	}
+	if o.MstorNvme != nil {
+		toSerialize["MstorNvme"] = o.MstorNvme
+	}
 	if o.Src != nil {
 		toSerialize["Src"] = o.Src
+	}
+	if o.U2Nvme != nil {
+		toSerialize["U2Nvme"] = o.U2Nvme
 	}
 	if o.Servers != nil {
 		toSerialize["Servers"] = o.Servers
@@ -428,14 +576,18 @@ func (o *OsValidInstallTarget) UnmarshalJSON(bytes []byte) (err error) {
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 		ObjectType string `json:"ObjectType"`
 		// Error message if any errors are encountered while fetching and validating Install targets for the server.
-		Error              *string                   `json:"Error,omitempty"`
-		InstallTargets     []OsInstallTargetResponse `json:"InstallTargets,omitempty"`
-		M2Jbod             []OsPhysicalDiskResponse  `json:"M2Jbod,omitempty"`
-		M2VirtualDrives    []OsVirtualDriveResponse  `json:"M2VirtualDrives,omitempty"`
-		MraidJbod          []OsPhysicalDiskResponse  `json:"MraidJbod,omitempty"`
-		MraidVirtualDrives []OsVirtualDriveResponse  `json:"MraidVirtualDrives,omitempty"`
+		Error                   *string                   `json:"Error,omitempty"`
+		InstallTargets          []OsInstallTargetResponse `json:"InstallTargets,omitempty"`
+		M2Jbod                  []OsPhysicalDiskResponse  `json:"M2Jbod,omitempty"`
+		M2NvmeRaidJbod          []OsPhysicalDiskResponse  `json:"M2NvmeRaidJbod,omitempty"`
+		M2NvmeRaidVirtualDrives []OsVirtualDriveResponse  `json:"M2NvmeRaidVirtualDrives,omitempty"`
+		M2VirtualDrives         []OsVirtualDriveResponse  `json:"M2VirtualDrives,omitempty"`
+		MraidJbod               []OsPhysicalDiskResponse  `json:"MraidJbod,omitempty"`
+		MraidVirtualDrives      []OsVirtualDriveResponse  `json:"MraidVirtualDrives,omitempty"`
+		MstorNvme               []OsPhysicalDiskResponse  `json:"MstorNvme,omitempty"`
 		// Flag to denote the source of the request. If the call is from Orchestration UI, only the flat list of Install targets can be sent as response.
-		Src *string `json:"Src,omitempty"`
+		Src    *string                  `json:"Src,omitempty"`
+		U2Nvme []OsPhysicalDiskResponse `json:"U2Nvme,omitempty"`
 		// An array of relationships to computePhysical resources.
 		Servers []ComputePhysicalRelationship `json:"Servers,omitempty"`
 	}
@@ -450,10 +602,14 @@ func (o *OsValidInstallTarget) UnmarshalJSON(bytes []byte) (err error) {
 		varOsValidInstallTarget.Error = varOsValidInstallTargetWithoutEmbeddedStruct.Error
 		varOsValidInstallTarget.InstallTargets = varOsValidInstallTargetWithoutEmbeddedStruct.InstallTargets
 		varOsValidInstallTarget.M2Jbod = varOsValidInstallTargetWithoutEmbeddedStruct.M2Jbod
+		varOsValidInstallTarget.M2NvmeRaidJbod = varOsValidInstallTargetWithoutEmbeddedStruct.M2NvmeRaidJbod
+		varOsValidInstallTarget.M2NvmeRaidVirtualDrives = varOsValidInstallTargetWithoutEmbeddedStruct.M2NvmeRaidVirtualDrives
 		varOsValidInstallTarget.M2VirtualDrives = varOsValidInstallTargetWithoutEmbeddedStruct.M2VirtualDrives
 		varOsValidInstallTarget.MraidJbod = varOsValidInstallTargetWithoutEmbeddedStruct.MraidJbod
 		varOsValidInstallTarget.MraidVirtualDrives = varOsValidInstallTargetWithoutEmbeddedStruct.MraidVirtualDrives
+		varOsValidInstallTarget.MstorNvme = varOsValidInstallTargetWithoutEmbeddedStruct.MstorNvme
 		varOsValidInstallTarget.Src = varOsValidInstallTargetWithoutEmbeddedStruct.Src
+		varOsValidInstallTarget.U2Nvme = varOsValidInstallTargetWithoutEmbeddedStruct.U2Nvme
 		varOsValidInstallTarget.Servers = varOsValidInstallTargetWithoutEmbeddedStruct.Servers
 		*o = OsValidInstallTarget(varOsValidInstallTarget)
 	} else {
@@ -477,10 +633,14 @@ func (o *OsValidInstallTarget) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "Error")
 		delete(additionalProperties, "InstallTargets")
 		delete(additionalProperties, "M2Jbod")
+		delete(additionalProperties, "M2NvmeRaidJbod")
+		delete(additionalProperties, "M2NvmeRaidVirtualDrives")
 		delete(additionalProperties, "M2VirtualDrives")
 		delete(additionalProperties, "MraidJbod")
 		delete(additionalProperties, "MraidVirtualDrives")
+		delete(additionalProperties, "MstorNvme")
 		delete(additionalProperties, "Src")
+		delete(additionalProperties, "U2Nvme")
 		delete(additionalProperties, "Servers")
 
 		// remove fields from embedded structs

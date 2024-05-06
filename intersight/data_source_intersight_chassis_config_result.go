@@ -286,7 +286,7 @@ func getChassisConfigResultSchema() map[string]*schema.Schema {
 			},
 		},
 		"profile": {
-			Description: "A reference to a chassisProfile resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+			Description: "A reference to a chassisBaseProfile resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 			Type:        schema.TypeList,
 			MaxItems:    1,
 			Optional:    true,
@@ -813,7 +813,7 @@ func dataSourceChassisConfigResultRead(c context.Context, d *schema.ResourceData
 	}
 
 	if v, ok := d.GetOk("profile"); ok {
-		p := make([]models.ChassisProfileRelationship, 0, 1)
+		p := make([]models.ChassisBaseProfileRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
 			l := s[i].(map[string]interface{})
@@ -847,7 +847,7 @@ func dataSourceChassisConfigResultRead(c context.Context, d *schema.ResourceData
 					o.SetSelector(x)
 				}
 			}
-			p = append(p, models.MoMoRefAsChassisProfileRelationship(o))
+			p = append(p, models.MoMoRefAsChassisBaseProfileRelationship(o))
 		}
 		if len(p) > 0 {
 			x := p[0]
@@ -1071,7 +1071,7 @@ func dataSourceChassisConfigResultRead(c context.Context, d *schema.ResourceData
 
 				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
 
-				temp["profile"] = flattenMapChassisProfileRelationship(s.GetProfile(), d)
+				temp["profile"] = flattenMapChassisBaseProfileRelationship(s.GetProfile(), d)
 
 				temp["result_entries"] = flattenListChassisConfigResultEntryRelationship(s.GetResultEntries(), d)
 				temp["shared_scope"] = (s.GetSharedScope())

@@ -8,7 +8,9 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "workflow.WorkflowProperties"]
 **Cloneable** | Pointer to **bool** | When set to false workflow is not cloneable. It is set to true only if Workflow is not internal and it does not have any internal tasks. | [optional] [readonly] [default to true]
 **EnableDebug** | Pointer to **bool** | Enabling this flag will capture request and response details as debug logs for tasks that are using workflow.BatchApi for implementation. For other tasks in the workflow which are not based on workflow.BatchApi logs will not be generated. | [optional] [default to false]
+**EnablePublishStatus** | Pointer to **bool** | This flag determines if this workflow publish status is enforced or not. | [optional] [default to false]
 **ExternalMeta** | Pointer to **bool** | When set to false the workflow is owned by the system and used for internal services. Such workflows cannot be directly used by external entities. | [optional] [readonly] [default to false]
+**PublishStatus** | Pointer to **string** | The workflow publish status (Draft, Published, Archived), this property is relevant only when enablePublishStatus is set to true. * &#x60;Draft&#x60; - The enum specifies the option as Draft which means the meta definition is being designed and tested. * &#x60;Published&#x60; - The enum specifies the option as Published which means the meta definition is ready for consumption. * &#x60;Archived&#x60; - The enum specifies the option as Archived which means the meta definition is archived and can no longer be consumed. | [optional] [default to "Draft"]
 **Retryable** | Pointer to **bool** | When set to true, the failed workflow executions from this workflow definition can be retried for up to 2 weeks since the last modification time. After two weeks of inactivity on the workflow execution, the option to retry the failed workflow will be disabled. | [optional] [default to false]
 **RollbackOnCancel** | Pointer to **bool** | When set to true, the changes are automatically rolled back if the workflow execution is canceled. | [optional] [default to false]
 **RollbackOnFailure** | Pointer to **bool** | When set to true, the changes are automatically rolled back if the workflow fails to execute. | [optional] [default to false]
@@ -123,6 +125,31 @@ SetEnableDebug sets EnableDebug field to given value.
 
 HasEnableDebug returns a boolean if a field has been set.
 
+### GetEnablePublishStatus
+
+`func (o *WorkflowWorkflowProperties) GetEnablePublishStatus() bool`
+
+GetEnablePublishStatus returns the EnablePublishStatus field if non-nil, zero value otherwise.
+
+### GetEnablePublishStatusOk
+
+`func (o *WorkflowWorkflowProperties) GetEnablePublishStatusOk() (*bool, bool)`
+
+GetEnablePublishStatusOk returns a tuple with the EnablePublishStatus field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEnablePublishStatus
+
+`func (o *WorkflowWorkflowProperties) SetEnablePublishStatus(v bool)`
+
+SetEnablePublishStatus sets EnablePublishStatus field to given value.
+
+### HasEnablePublishStatus
+
+`func (o *WorkflowWorkflowProperties) HasEnablePublishStatus() bool`
+
+HasEnablePublishStatus returns a boolean if a field has been set.
+
 ### GetExternalMeta
 
 `func (o *WorkflowWorkflowProperties) GetExternalMeta() bool`
@@ -147,6 +174,31 @@ SetExternalMeta sets ExternalMeta field to given value.
 `func (o *WorkflowWorkflowProperties) HasExternalMeta() bool`
 
 HasExternalMeta returns a boolean if a field has been set.
+
+### GetPublishStatus
+
+`func (o *WorkflowWorkflowProperties) GetPublishStatus() string`
+
+GetPublishStatus returns the PublishStatus field if non-nil, zero value otherwise.
+
+### GetPublishStatusOk
+
+`func (o *WorkflowWorkflowProperties) GetPublishStatusOk() (*string, bool)`
+
+GetPublishStatusOk returns a tuple with the PublishStatus field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPublishStatus
+
+`func (o *WorkflowWorkflowProperties) SetPublishStatus(v string)`
+
+SetPublishStatus sets PublishStatus field to given value.
+
+### HasPublishStatus
+
+`func (o *WorkflowWorkflowProperties) HasPublishStatus() bool`
+
+HasPublishStatus returns a boolean if a field has been set.
 
 ### GetRetryable
 

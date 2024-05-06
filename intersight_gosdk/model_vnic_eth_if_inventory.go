@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-15830
+API version: 1.0.11-16342
 Contact: intersight@cisco.com
 */
 
@@ -39,7 +39,8 @@ type VnicEthIfInventory struct {
 	// Name of the virtual ethernet interface.
 	Name *string `json:"Name,omitempty"`
 	// The order in which the virtual interface is brought up. The order assigned to an interface should be unique for all the Ethernet and Fibre-Channel interfaces on each PCI link on a VIC adapter. The order should start from zero with no overlaps. The maximum value of PCI order is limited by the number of virtual interfaces (Ethernet and Fibre-Channel) on each PCI link on a VIC adapter. All VIC adapters have a single PCI link except VIC 1340, VIC 1380 and VIC 1385 which have two.
-	Order *int64 `json:"Order,omitempty"`
+	Order          *int64   `json:"Order,omitempty"`
+	OverriddenList []string `json:"OverriddenList,omitempty"`
 	// Pingroup name associated to vNIC for static pinning. LCP deploy will resolve pingroup name and fetches the correspoding uplink port/port channel to pin the vNIC traffic.
 	PinGroupName  *string                       `json:"PinGroupName,omitempty"`
 	Placement     NullableVnicPlacementSettings `json:"Placement,omitempty"`
@@ -47,8 +48,12 @@ type VnicEthIfInventory struct {
 	// The Standby VIF Id is applicable for failover enabled vNICS. It should be the same as the channel number of the standby vethernet created on switch in order to set up the standby data path.
 	StandbyVifId *int64 `json:"StandbyVifId,omitempty"`
 	// The MAC address must be in hexadecimal format xx:xx:xx:xx:xx:xx. To ensure uniqueness of MACs in the LAN fabric, you are strongly encouraged to use the following MAC prefix 00:25:B5:xx:xx:xx.
-	StaticMacAddress *string                   `json:"StaticMacAddress,omitempty"`
-	UsnicSettings    NullableVnicUsnicSettings `json:"UsnicSettings,omitempty"`
+	StaticMacAddress   *string                 `json:"StaticMacAddress,omitempty"`
+	TemplateActions    []MotemplateActionEntry `json:"TemplateActions,omitempty"`
+	TemplateSyncErrors []MotemplateSyncError   `json:"TemplateSyncErrors,omitempty"`
+	// The sync status of the current MO wrt the attached Template MO. * `None` - The Enum value represents that the object is not attached to any template. * `OK` - The Enum value represents that the object values are in sync with attached template. * `Scheduled` - The Enum value represents that the object sync from attached template is scheduled from template. * `InProgress` - The Enum value represents that the object sync with the attached template is in progress. * `OutOfSync` - The Enum value represents that the object values are not in sync with attached template.
+	TemplateSyncStatus *string                   `json:"TemplateSyncStatus,omitempty"`
+	UsnicSettings      NullableVnicUsnicSettings `json:"UsnicSettings,omitempty"`
 	// The Vif Id should be same as the channel number of the vethernet created on switch in order to set up the data path. The property is applicable only for FI attached servers where a vethernet is created on the switch for every vNIC.
 	VifId                         *int64                                              `json:"VifId,omitempty"`
 	VmqSettings                   NullableVnicVmqSettings                             `json:"VmqSettings,omitempty"`
@@ -66,6 +71,7 @@ type VnicEthIfInventory struct {
 	MacPool                     *MacpoolPoolRelationship                           `json:"MacPool,omitempty"`
 	// An array of relationships to vnicEthIfInventory resources.
 	SpVnics              []VnicEthIfInventoryRelationship `json:"SpVnics,omitempty"`
+	SrcTemplate          *VnicVnicTemplateRelationship    `json:"SrcTemplate,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -452,6 +458,39 @@ func (o *VnicEthIfInventory) SetOrder(v int64) {
 	o.Order = &v
 }
 
+// GetOverriddenList returns the OverriddenList field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *VnicEthIfInventory) GetOverriddenList() []string {
+	if o == nil {
+		var ret []string
+		return ret
+	}
+	return o.OverriddenList
+}
+
+// GetOverriddenListOk returns a tuple with the OverriddenList field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *VnicEthIfInventory) GetOverriddenListOk() ([]string, bool) {
+	if o == nil || o.OverriddenList == nil {
+		return nil, false
+	}
+	return o.OverriddenList, true
+}
+
+// HasOverriddenList returns a boolean if a field has been set.
+func (o *VnicEthIfInventory) HasOverriddenList() bool {
+	if o != nil && o.OverriddenList != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetOverriddenList gets a reference to the given []string and assigns it to the OverriddenList field.
+func (o *VnicEthIfInventory) SetOverriddenList(v []string) {
+	o.OverriddenList = v
+}
+
 // GetPinGroupName returns the PinGroupName field value if set, zero value otherwise.
 func (o *VnicEthIfInventory) GetPinGroupName() string {
 	if o == nil || o.PinGroupName == nil {
@@ -632,6 +671,104 @@ func (o *VnicEthIfInventory) HasStaticMacAddress() bool {
 // SetStaticMacAddress gets a reference to the given string and assigns it to the StaticMacAddress field.
 func (o *VnicEthIfInventory) SetStaticMacAddress(v string) {
 	o.StaticMacAddress = &v
+}
+
+// GetTemplateActions returns the TemplateActions field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *VnicEthIfInventory) GetTemplateActions() []MotemplateActionEntry {
+	if o == nil {
+		var ret []MotemplateActionEntry
+		return ret
+	}
+	return o.TemplateActions
+}
+
+// GetTemplateActionsOk returns a tuple with the TemplateActions field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *VnicEthIfInventory) GetTemplateActionsOk() ([]MotemplateActionEntry, bool) {
+	if o == nil || o.TemplateActions == nil {
+		return nil, false
+	}
+	return o.TemplateActions, true
+}
+
+// HasTemplateActions returns a boolean if a field has been set.
+func (o *VnicEthIfInventory) HasTemplateActions() bool {
+	if o != nil && o.TemplateActions != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetTemplateActions gets a reference to the given []MotemplateActionEntry and assigns it to the TemplateActions field.
+func (o *VnicEthIfInventory) SetTemplateActions(v []MotemplateActionEntry) {
+	o.TemplateActions = v
+}
+
+// GetTemplateSyncErrors returns the TemplateSyncErrors field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *VnicEthIfInventory) GetTemplateSyncErrors() []MotemplateSyncError {
+	if o == nil {
+		var ret []MotemplateSyncError
+		return ret
+	}
+	return o.TemplateSyncErrors
+}
+
+// GetTemplateSyncErrorsOk returns a tuple with the TemplateSyncErrors field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *VnicEthIfInventory) GetTemplateSyncErrorsOk() ([]MotemplateSyncError, bool) {
+	if o == nil || o.TemplateSyncErrors == nil {
+		return nil, false
+	}
+	return o.TemplateSyncErrors, true
+}
+
+// HasTemplateSyncErrors returns a boolean if a field has been set.
+func (o *VnicEthIfInventory) HasTemplateSyncErrors() bool {
+	if o != nil && o.TemplateSyncErrors != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetTemplateSyncErrors gets a reference to the given []MotemplateSyncError and assigns it to the TemplateSyncErrors field.
+func (o *VnicEthIfInventory) SetTemplateSyncErrors(v []MotemplateSyncError) {
+	o.TemplateSyncErrors = v
+}
+
+// GetTemplateSyncStatus returns the TemplateSyncStatus field value if set, zero value otherwise.
+func (o *VnicEthIfInventory) GetTemplateSyncStatus() string {
+	if o == nil || o.TemplateSyncStatus == nil {
+		var ret string
+		return ret
+	}
+	return *o.TemplateSyncStatus
+}
+
+// GetTemplateSyncStatusOk returns a tuple with the TemplateSyncStatus field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *VnicEthIfInventory) GetTemplateSyncStatusOk() (*string, bool) {
+	if o == nil || o.TemplateSyncStatus == nil {
+		return nil, false
+	}
+	return o.TemplateSyncStatus, true
+}
+
+// HasTemplateSyncStatus returns a boolean if a field has been set.
+func (o *VnicEthIfInventory) HasTemplateSyncStatus() bool {
+	if o != nil && o.TemplateSyncStatus != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetTemplateSyncStatus gets a reference to the given string and assigns it to the TemplateSyncStatus field.
+func (o *VnicEthIfInventory) SetTemplateSyncStatus(v string) {
+	o.TemplateSyncStatus = &v
 }
 
 // GetUsnicSettings returns the UsnicSettings field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -1138,6 +1275,38 @@ func (o *VnicEthIfInventory) SetSpVnics(v []VnicEthIfInventoryRelationship) {
 	o.SpVnics = v
 }
 
+// GetSrcTemplate returns the SrcTemplate field value if set, zero value otherwise.
+func (o *VnicEthIfInventory) GetSrcTemplate() VnicVnicTemplateRelationship {
+	if o == nil || o.SrcTemplate == nil {
+		var ret VnicVnicTemplateRelationship
+		return ret
+	}
+	return *o.SrcTemplate
+}
+
+// GetSrcTemplateOk returns a tuple with the SrcTemplate field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *VnicEthIfInventory) GetSrcTemplateOk() (*VnicVnicTemplateRelationship, bool) {
+	if o == nil || o.SrcTemplate == nil {
+		return nil, false
+	}
+	return o.SrcTemplate, true
+}
+
+// HasSrcTemplate returns a boolean if a field has been set.
+func (o *VnicEthIfInventory) HasSrcTemplate() bool {
+	if o != nil && o.SrcTemplate != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetSrcTemplate gets a reference to the given VnicVnicTemplateRelationship and assigns it to the SrcTemplate field.
+func (o *VnicEthIfInventory) SetSrcTemplate(v VnicVnicTemplateRelationship) {
+	o.SrcTemplate = &v
+}
+
 func (o VnicEthIfInventory) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	serializedPolicyAbstractInventory, errPolicyAbstractInventory := json.Marshal(o.PolicyAbstractInventory)
@@ -1181,6 +1350,9 @@ func (o VnicEthIfInventory) MarshalJSON() ([]byte, error) {
 	if o.Order != nil {
 		toSerialize["Order"] = o.Order
 	}
+	if o.OverriddenList != nil {
+		toSerialize["OverriddenList"] = o.OverriddenList
+	}
 	if o.PinGroupName != nil {
 		toSerialize["PinGroupName"] = o.PinGroupName
 	}
@@ -1195,6 +1367,15 @@ func (o VnicEthIfInventory) MarshalJSON() ([]byte, error) {
 	}
 	if o.StaticMacAddress != nil {
 		toSerialize["StaticMacAddress"] = o.StaticMacAddress
+	}
+	if o.TemplateActions != nil {
+		toSerialize["TemplateActions"] = o.TemplateActions
+	}
+	if o.TemplateSyncErrors != nil {
+		toSerialize["TemplateSyncErrors"] = o.TemplateSyncErrors
+	}
+	if o.TemplateSyncStatus != nil {
+		toSerialize["TemplateSyncStatus"] = o.TemplateSyncStatus
 	}
 	if o.UsnicSettings.IsSet() {
 		toSerialize["UsnicSettings"] = o.UsnicSettings.Get()
@@ -1241,6 +1422,9 @@ func (o VnicEthIfInventory) MarshalJSON() ([]byte, error) {
 	if o.SpVnics != nil {
 		toSerialize["SpVnics"] = o.SpVnics
 	}
+	if o.SrcTemplate != nil {
+		toSerialize["SrcTemplate"] = o.SrcTemplate
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -1270,7 +1454,8 @@ func (o *VnicEthIfInventory) UnmarshalJSON(bytes []byte) (err error) {
 		// Name of the virtual ethernet interface.
 		Name *string `json:"Name,omitempty"`
 		// The order in which the virtual interface is brought up. The order assigned to an interface should be unique for all the Ethernet and Fibre-Channel interfaces on each PCI link on a VIC adapter. The order should start from zero with no overlaps. The maximum value of PCI order is limited by the number of virtual interfaces (Ethernet and Fibre-Channel) on each PCI link on a VIC adapter. All VIC adapters have a single PCI link except VIC 1340, VIC 1380 and VIC 1385 which have two.
-		Order *int64 `json:"Order,omitempty"`
+		Order          *int64   `json:"Order,omitempty"`
+		OverriddenList []string `json:"OverriddenList,omitempty"`
 		// Pingroup name associated to vNIC for static pinning. LCP deploy will resolve pingroup name and fetches the correspoding uplink port/port channel to pin the vNIC traffic.
 		PinGroupName  *string                       `json:"PinGroupName,omitempty"`
 		Placement     NullableVnicPlacementSettings `json:"Placement,omitempty"`
@@ -1278,8 +1463,12 @@ func (o *VnicEthIfInventory) UnmarshalJSON(bytes []byte) (err error) {
 		// The Standby VIF Id is applicable for failover enabled vNICS. It should be the same as the channel number of the standby vethernet created on switch in order to set up the standby data path.
 		StandbyVifId *int64 `json:"StandbyVifId,omitempty"`
 		// The MAC address must be in hexadecimal format xx:xx:xx:xx:xx:xx. To ensure uniqueness of MACs in the LAN fabric, you are strongly encouraged to use the following MAC prefix 00:25:B5:xx:xx:xx.
-		StaticMacAddress *string                   `json:"StaticMacAddress,omitempty"`
-		UsnicSettings    NullableVnicUsnicSettings `json:"UsnicSettings,omitempty"`
+		StaticMacAddress   *string                 `json:"StaticMacAddress,omitempty"`
+		TemplateActions    []MotemplateActionEntry `json:"TemplateActions,omitempty"`
+		TemplateSyncErrors []MotemplateSyncError   `json:"TemplateSyncErrors,omitempty"`
+		// The sync status of the current MO wrt the attached Template MO. * `None` - The Enum value represents that the object is not attached to any template. * `OK` - The Enum value represents that the object values are in sync with attached template. * `Scheduled` - The Enum value represents that the object sync from attached template is scheduled from template. * `InProgress` - The Enum value represents that the object sync with the attached template is in progress. * `OutOfSync` - The Enum value represents that the object values are not in sync with attached template.
+		TemplateSyncStatus *string                   `json:"TemplateSyncStatus,omitempty"`
+		UsnicSettings      NullableVnicUsnicSettings `json:"UsnicSettings,omitempty"`
 		// The Vif Id should be same as the channel number of the vethernet created on switch in order to set up the data path. The property is applicable only for FI attached servers where a vethernet is created on the switch for every vNIC.
 		VifId                         *int64                                              `json:"VifId,omitempty"`
 		VmqSettings                   NullableVnicVmqSettings                             `json:"VmqSettings,omitempty"`
@@ -1296,7 +1485,8 @@ func (o *VnicEthIfInventory) UnmarshalJSON(bytes []byte) (err error) {
 		MacLease                    *MacpoolLeaseRelationship                          `json:"MacLease,omitempty"`
 		MacPool                     *MacpoolPoolRelationship                           `json:"MacPool,omitempty"`
 		// An array of relationships to vnicEthIfInventory resources.
-		SpVnics []VnicEthIfInventoryRelationship `json:"SpVnics,omitempty"`
+		SpVnics     []VnicEthIfInventoryRelationship `json:"SpVnics,omitempty"`
+		SrcTemplate *VnicVnicTemplateRelationship    `json:"SrcTemplate,omitempty"`
 	}
 
 	varVnicEthIfInventoryWithoutEmbeddedStruct := VnicEthIfInventoryWithoutEmbeddedStruct{}
@@ -1315,11 +1505,15 @@ func (o *VnicEthIfInventory) UnmarshalJSON(bytes []byte) (err error) {
 		varVnicEthIfInventory.MacAddressType = varVnicEthIfInventoryWithoutEmbeddedStruct.MacAddressType
 		varVnicEthIfInventory.Name = varVnicEthIfInventoryWithoutEmbeddedStruct.Name
 		varVnicEthIfInventory.Order = varVnicEthIfInventoryWithoutEmbeddedStruct.Order
+		varVnicEthIfInventory.OverriddenList = varVnicEthIfInventoryWithoutEmbeddedStruct.OverriddenList
 		varVnicEthIfInventory.PinGroupName = varVnicEthIfInventoryWithoutEmbeddedStruct.PinGroupName
 		varVnicEthIfInventory.Placement = varVnicEthIfInventoryWithoutEmbeddedStruct.Placement
 		varVnicEthIfInventory.SriovSettings = varVnicEthIfInventoryWithoutEmbeddedStruct.SriovSettings
 		varVnicEthIfInventory.StandbyVifId = varVnicEthIfInventoryWithoutEmbeddedStruct.StandbyVifId
 		varVnicEthIfInventory.StaticMacAddress = varVnicEthIfInventoryWithoutEmbeddedStruct.StaticMacAddress
+		varVnicEthIfInventory.TemplateActions = varVnicEthIfInventoryWithoutEmbeddedStruct.TemplateActions
+		varVnicEthIfInventory.TemplateSyncErrors = varVnicEthIfInventoryWithoutEmbeddedStruct.TemplateSyncErrors
+		varVnicEthIfInventory.TemplateSyncStatus = varVnicEthIfInventoryWithoutEmbeddedStruct.TemplateSyncStatus
 		varVnicEthIfInventory.UsnicSettings = varVnicEthIfInventoryWithoutEmbeddedStruct.UsnicSettings
 		varVnicEthIfInventory.VifId = varVnicEthIfInventoryWithoutEmbeddedStruct.VifId
 		varVnicEthIfInventory.VmqSettings = varVnicEthIfInventoryWithoutEmbeddedStruct.VmqSettings
@@ -1335,6 +1529,7 @@ func (o *VnicEthIfInventory) UnmarshalJSON(bytes []byte) (err error) {
 		varVnicEthIfInventory.MacLease = varVnicEthIfInventoryWithoutEmbeddedStruct.MacLease
 		varVnicEthIfInventory.MacPool = varVnicEthIfInventoryWithoutEmbeddedStruct.MacPool
 		varVnicEthIfInventory.SpVnics = varVnicEthIfInventoryWithoutEmbeddedStruct.SpVnics
+		varVnicEthIfInventory.SrcTemplate = varVnicEthIfInventoryWithoutEmbeddedStruct.SrcTemplate
 		*o = VnicEthIfInventory(varVnicEthIfInventory)
 	} else {
 		return err
@@ -1363,11 +1558,15 @@ func (o *VnicEthIfInventory) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "MacAddressType")
 		delete(additionalProperties, "Name")
 		delete(additionalProperties, "Order")
+		delete(additionalProperties, "OverriddenList")
 		delete(additionalProperties, "PinGroupName")
 		delete(additionalProperties, "Placement")
 		delete(additionalProperties, "SriovSettings")
 		delete(additionalProperties, "StandbyVifId")
 		delete(additionalProperties, "StaticMacAddress")
+		delete(additionalProperties, "TemplateActions")
+		delete(additionalProperties, "TemplateSyncErrors")
+		delete(additionalProperties, "TemplateSyncStatus")
 		delete(additionalProperties, "UsnicSettings")
 		delete(additionalProperties, "VifId")
 		delete(additionalProperties, "VmqSettings")
@@ -1383,6 +1582,7 @@ func (o *VnicEthIfInventory) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "MacLease")
 		delete(additionalProperties, "MacPool")
 		delete(additionalProperties, "SpVnics")
+		delete(additionalProperties, "SrcTemplate")
 
 		// remove fields from embedded structs
 		reflectPolicyAbstractInventory := reflect.ValueOf(o.PolicyAbstractInventory)

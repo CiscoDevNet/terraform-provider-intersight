@@ -22,6 +22,9 @@ This complex property has following sub-properties:
   + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
 * `create_time`:(string)(ReadOnly) The time when this managed object was created. 
 * `domain_group_moid`:(string)(ReadOnly) The DomainGroup ID for this managed object. 
+* `exclude_peers`:
+                (Array of schema.TypeString) -
+* `exclude_relations`:(bool) Used to specify that none of the relationships should be exported. 
 * `export_tags`:(bool) Specifies whether tags must be exported and will be considered for all the items MOs. 
 * `exported_items`:(Array)(ReadOnly) An array of relationships to bulkExportedItem resources. 
 This complex property has following sub-properties:
@@ -34,6 +37,7 @@ This complex property has following sub-properties:
   + `uri`:(string) The URI on which this action is to be performed. 
   + `verb`:(string) The type of operation to be performed.One of - Post (Create), Patch (Update) or Delete (Remove).The value is used to override the top level verb.* `POST` - Used to create a REST resource.* `PATCH` - Used to update a REST resource.* `DELETE` - Used to delete a REST resource. 
 * `import_order`:(JSON as string)(ReadOnly) Contains the list of import order. 
+* `include_org_identity`:(bool) Indicates that exported references for objects which are organization owned should include the organization reference along with the other identity properties. 
 * `items`:(Array)
 This complex property has following sub-properties:
   + `moid`:(string) The Moid of the referenced REST resource. 

@@ -17,6 +17,8 @@ Method | HTTP request | Description
 [**CreateVnicIscsiStaticTargetPolicy**](VnicApi.md#CreateVnicIscsiStaticTargetPolicy) | **Post** /api/v1/vnic/IscsiStaticTargetPolicies | Create a &#39;vnic.IscsiStaticTargetPolicy&#39; resource.
 [**CreateVnicLanConnectivityPolicy**](VnicApi.md#CreateVnicLanConnectivityPolicy) | **Post** /api/v1/vnic/LanConnectivityPolicies | Create a &#39;vnic.LanConnectivityPolicy&#39; resource.
 [**CreateVnicSanConnectivityPolicy**](VnicApi.md#CreateVnicSanConnectivityPolicy) | **Post** /api/v1/vnic/SanConnectivityPolicies | Create a &#39;vnic.SanConnectivityPolicy&#39; resource.
+[**CreateVnicVhbaTemplate**](VnicApi.md#CreateVnicVhbaTemplate) | **Post** /api/v1/vnic/VhbaTemplates | Create a &#39;vnic.VhbaTemplate&#39; resource.
+[**CreateVnicVnicTemplate**](VnicApi.md#CreateVnicVnicTemplate) | **Post** /api/v1/vnic/VnicTemplates | Create a &#39;vnic.VnicTemplate&#39; resource.
 [**DeleteVnicEthAdapterPolicy**](VnicApi.md#DeleteVnicEthAdapterPolicy) | **Delete** /api/v1/vnic/EthAdapterPolicies/{Moid} | Delete a &#39;vnic.EthAdapterPolicy&#39; resource.
 [**DeleteVnicEthIf**](VnicApi.md#DeleteVnicEthIf) | **Delete** /api/v1/vnic/EthIfs/{Moid} | Delete a &#39;vnic.EthIf&#39; resource.
 [**DeleteVnicEthNetworkPolicy**](VnicApi.md#DeleteVnicEthNetworkPolicy) | **Delete** /api/v1/vnic/EthNetworkPolicies/{Moid} | Delete a &#39;vnic.EthNetworkPolicy&#39; resource.
@@ -30,6 +32,8 @@ Method | HTTP request | Description
 [**DeleteVnicIscsiStaticTargetPolicy**](VnicApi.md#DeleteVnicIscsiStaticTargetPolicy) | **Delete** /api/v1/vnic/IscsiStaticTargetPolicies/{Moid} | Delete a &#39;vnic.IscsiStaticTargetPolicy&#39; resource.
 [**DeleteVnicLanConnectivityPolicy**](VnicApi.md#DeleteVnicLanConnectivityPolicy) | **Delete** /api/v1/vnic/LanConnectivityPolicies/{Moid} | Delete a &#39;vnic.LanConnectivityPolicy&#39; resource.
 [**DeleteVnicSanConnectivityPolicy**](VnicApi.md#DeleteVnicSanConnectivityPolicy) | **Delete** /api/v1/vnic/SanConnectivityPolicies/{Moid} | Delete a &#39;vnic.SanConnectivityPolicy&#39; resource.
+[**DeleteVnicVhbaTemplate**](VnicApi.md#DeleteVnicVhbaTemplate) | **Delete** /api/v1/vnic/VhbaTemplates/{Moid} | Delete a &#39;vnic.VhbaTemplate&#39; resource.
+[**DeleteVnicVnicTemplate**](VnicApi.md#DeleteVnicVnicTemplate) | **Delete** /api/v1/vnic/VnicTemplates/{Moid} | Delete a &#39;vnic.VnicTemplate&#39; resource.
 [**GetVnicEthAdapterPolicyByMoid**](VnicApi.md#GetVnicEthAdapterPolicyByMoid) | **Get** /api/v1/vnic/EthAdapterPolicies/{Moid} | Read a &#39;vnic.EthAdapterPolicy&#39; resource.
 [**GetVnicEthAdapterPolicyInventoryByMoid**](VnicApi.md#GetVnicEthAdapterPolicyInventoryByMoid) | **Get** /api/v1/vnic/EthAdapterPolicyInventories/{Moid} | Read a &#39;vnic.EthAdapterPolicyInventory&#39; resource.
 [**GetVnicEthAdapterPolicyInventoryList**](VnicApi.md#GetVnicEthAdapterPolicyInventoryList) | **Get** /api/v1/vnic/EthAdapterPolicyInventories | Read a &#39;vnic.EthAdapterPolicyInventory&#39; resource.
@@ -94,6 +98,10 @@ Method | HTTP request | Description
 [**GetVnicSanConnectivityPolicyList**](VnicApi.md#GetVnicSanConnectivityPolicyList) | **Get** /api/v1/vnic/SanConnectivityPolicies | Read a &#39;vnic.SanConnectivityPolicy&#39; resource.
 [**GetVnicScpStatusByMoid**](VnicApi.md#GetVnicScpStatusByMoid) | **Get** /api/v1/vnic/ScpStatuses/{Moid} | Read a &#39;vnic.ScpStatus&#39; resource.
 [**GetVnicScpStatusList**](VnicApi.md#GetVnicScpStatusList) | **Get** /api/v1/vnic/ScpStatuses | Read a &#39;vnic.ScpStatus&#39; resource.
+[**GetVnicVhbaTemplateByMoid**](VnicApi.md#GetVnicVhbaTemplateByMoid) | **Get** /api/v1/vnic/VhbaTemplates/{Moid} | Read a &#39;vnic.VhbaTemplate&#39; resource.
+[**GetVnicVhbaTemplateList**](VnicApi.md#GetVnicVhbaTemplateList) | **Get** /api/v1/vnic/VhbaTemplates | Read a &#39;vnic.VhbaTemplate&#39; resource.
+[**GetVnicVnicTemplateByMoid**](VnicApi.md#GetVnicVnicTemplateByMoid) | **Get** /api/v1/vnic/VnicTemplates/{Moid} | Read a &#39;vnic.VnicTemplate&#39; resource.
+[**GetVnicVnicTemplateList**](VnicApi.md#GetVnicVnicTemplateList) | **Get** /api/v1/vnic/VnicTemplates | Read a &#39;vnic.VnicTemplate&#39; resource.
 [**PatchVnicEthAdapterPolicy**](VnicApi.md#PatchVnicEthAdapterPolicy) | **Patch** /api/v1/vnic/EthAdapterPolicies/{Moid} | Update a &#39;vnic.EthAdapterPolicy&#39; resource.
 [**PatchVnicEthIf**](VnicApi.md#PatchVnicEthIf) | **Patch** /api/v1/vnic/EthIfs/{Moid} | Update a &#39;vnic.EthIf&#39; resource.
 [**PatchVnicEthNetworkPolicy**](VnicApi.md#PatchVnicEthNetworkPolicy) | **Patch** /api/v1/vnic/EthNetworkPolicies/{Moid} | Update a &#39;vnic.EthNetworkPolicy&#39; resource.
@@ -107,6 +115,8 @@ Method | HTTP request | Description
 [**PatchVnicIscsiStaticTargetPolicy**](VnicApi.md#PatchVnicIscsiStaticTargetPolicy) | **Patch** /api/v1/vnic/IscsiStaticTargetPolicies/{Moid} | Update a &#39;vnic.IscsiStaticTargetPolicy&#39; resource.
 [**PatchVnicLanConnectivityPolicy**](VnicApi.md#PatchVnicLanConnectivityPolicy) | **Patch** /api/v1/vnic/LanConnectivityPolicies/{Moid} | Update a &#39;vnic.LanConnectivityPolicy&#39; resource.
 [**PatchVnicSanConnectivityPolicy**](VnicApi.md#PatchVnicSanConnectivityPolicy) | **Patch** /api/v1/vnic/SanConnectivityPolicies/{Moid} | Update a &#39;vnic.SanConnectivityPolicy&#39; resource.
+[**PatchVnicVhbaTemplate**](VnicApi.md#PatchVnicVhbaTemplate) | **Patch** /api/v1/vnic/VhbaTemplates/{Moid} | Update a &#39;vnic.VhbaTemplate&#39; resource.
+[**PatchVnicVnicTemplate**](VnicApi.md#PatchVnicVnicTemplate) | **Patch** /api/v1/vnic/VnicTemplates/{Moid} | Update a &#39;vnic.VnicTemplate&#39; resource.
 [**UpdateVnicEthAdapterPolicy**](VnicApi.md#UpdateVnicEthAdapterPolicy) | **Post** /api/v1/vnic/EthAdapterPolicies/{Moid} | Update a &#39;vnic.EthAdapterPolicy&#39; resource.
 [**UpdateVnicEthIf**](VnicApi.md#UpdateVnicEthIf) | **Post** /api/v1/vnic/EthIfs/{Moid} | Update a &#39;vnic.EthIf&#39; resource.
 [**UpdateVnicEthNetworkPolicy**](VnicApi.md#UpdateVnicEthNetworkPolicy) | **Post** /api/v1/vnic/EthNetworkPolicies/{Moid} | Update a &#39;vnic.EthNetworkPolicy&#39; resource.
@@ -120,6 +130,8 @@ Method | HTTP request | Description
 [**UpdateVnicIscsiStaticTargetPolicy**](VnicApi.md#UpdateVnicIscsiStaticTargetPolicy) | **Post** /api/v1/vnic/IscsiStaticTargetPolicies/{Moid} | Update a &#39;vnic.IscsiStaticTargetPolicy&#39; resource.
 [**UpdateVnicLanConnectivityPolicy**](VnicApi.md#UpdateVnicLanConnectivityPolicy) | **Post** /api/v1/vnic/LanConnectivityPolicies/{Moid} | Update a &#39;vnic.LanConnectivityPolicy&#39; resource.
 [**UpdateVnicSanConnectivityPolicy**](VnicApi.md#UpdateVnicSanConnectivityPolicy) | **Post** /api/v1/vnic/SanConnectivityPolicies/{Moid} | Update a &#39;vnic.SanConnectivityPolicy&#39; resource.
+[**UpdateVnicVhbaTemplate**](VnicApi.md#UpdateVnicVhbaTemplate) | **Post** /api/v1/vnic/VhbaTemplates/{Moid} | Update a &#39;vnic.VhbaTemplate&#39; resource.
+[**UpdateVnicVnicTemplate**](VnicApi.md#UpdateVnicVnicTemplate) | **Post** /api/v1/vnic/VnicTemplates/{Moid} | Update a &#39;vnic.VnicTemplate&#39; resource.
 
 
 
@@ -1007,6 +1019,142 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## CreateVnicVhbaTemplate
+
+> VnicVhbaTemplate CreateVnicVhbaTemplate(ctx).VnicVhbaTemplate(vnicVhbaTemplate).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
+
+Create a 'vnic.VhbaTemplate' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    vnicVhbaTemplate := *openapiclient.NewVnicVhbaTemplate("ClassId_example", "ObjectType_example") // VnicVhbaTemplate | The 'vnic.VhbaTemplate' resource to create.
+    ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
+    ifNoneMatch := "ifNoneMatch_example" // string | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn't happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource's ETag doesn't match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don't have to be identical byte for byte. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.VnicApi.CreateVnicVhbaTemplate(context.Background()).VnicVhbaTemplate(vnicVhbaTemplate).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `VnicApi.CreateVnicVhbaTemplate``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `CreateVnicVhbaTemplate`: VnicVhbaTemplate
+    fmt.Fprintf(os.Stdout, "Response from `VnicApi.CreateVnicVhbaTemplate`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCreateVnicVhbaTemplateRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **vnicVhbaTemplate** | [**VnicVhbaTemplate**](VnicVhbaTemplate.md) | The &#39;vnic.VhbaTemplate&#39; resource to create. | 
+ **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
+ **ifNoneMatch** | **string** | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn&#39;t happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource&#39;s ETag doesn&#39;t match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don&#39;t have to be identical byte for byte. | 
+
+### Return type
+
+[**VnicVhbaTemplate**](VnicVhbaTemplate.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## CreateVnicVnicTemplate
+
+> VnicVnicTemplate CreateVnicVnicTemplate(ctx).VnicVnicTemplate(vnicVnicTemplate).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
+
+Create a 'vnic.VnicTemplate' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    vnicVnicTemplate := *openapiclient.NewVnicVnicTemplate("ClassId_example", "ObjectType_example") // VnicVnicTemplate | The 'vnic.VnicTemplate' resource to create.
+    ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
+    ifNoneMatch := "ifNoneMatch_example" // string | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn't happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource's ETag doesn't match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don't have to be identical byte for byte. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.VnicApi.CreateVnicVnicTemplate(context.Background()).VnicVnicTemplate(vnicVnicTemplate).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `VnicApi.CreateVnicVnicTemplate``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `CreateVnicVnicTemplate`: VnicVnicTemplate
+    fmt.Fprintf(os.Stdout, "Response from `VnicApi.CreateVnicVnicTemplate`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCreateVnicVnicTemplateRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **vnicVnicTemplate** | [**VnicVnicTemplate**](VnicVnicTemplate.md) | The &#39;vnic.VnicTemplate&#39; resource to create. | 
+ **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
+ **ifNoneMatch** | **string** | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn&#39;t happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource&#39;s ETag doesn&#39;t match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don&#39;t have to be identical byte for byte. | 
+
+### Return type
+
+[**VnicVnicTemplate**](VnicVnicTemplate.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## DeleteVnicEthAdapterPolicy
 
 > DeleteVnicEthAdapterPolicy(ctx, moid).Execute()
@@ -1841,6 +1989,138 @@ Name | Type | Description  | Notes
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiDeleteVnicSanConnectivityPolicyRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## DeleteVnicVhbaTemplate
+
+> DeleteVnicVhbaTemplate(ctx, moid).Execute()
+
+Delete a 'vnic.VhbaTemplate' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.VnicApi.DeleteVnicVhbaTemplate(context.Background(), moid).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `VnicApi.DeleteVnicVhbaTemplate``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiDeleteVnicVhbaTemplateRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## DeleteVnicVnicTemplate
+
+> DeleteVnicVnicTemplate(ctx, moid).Execute()
+
+Delete a 'vnic.VnicTemplate' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.VnicApi.DeleteVnicVnicTemplate(context.Background(), moid).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `VnicApi.DeleteVnicVnicTemplate``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiDeleteVnicVnicTemplateRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -6729,6 +7009,310 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## GetVnicVhbaTemplateByMoid
+
+> VnicVhbaTemplate GetVnicVhbaTemplateByMoid(ctx, moid).Execute()
+
+Read a 'vnic.VhbaTemplate' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.VnicApi.GetVnicVhbaTemplateByMoid(context.Background(), moid).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `VnicApi.GetVnicVhbaTemplateByMoid``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetVnicVhbaTemplateByMoid`: VnicVhbaTemplate
+    fmt.Fprintf(os.Stdout, "Response from `VnicApi.GetVnicVhbaTemplateByMoid`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetVnicVhbaTemplateByMoidRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**VnicVhbaTemplate**](VnicVhbaTemplate.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetVnicVhbaTemplateList
+
+> VnicVhbaTemplateResponse GetVnicVhbaTemplateList(ctx).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+
+Read a 'vnic.VhbaTemplate' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    filter := "$filter=CreateTime gt 2012-08-29T21:58:33Z" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
+    orderby := "$orderby=CreationTime" // string | Determines what properties are used to sort the collection of resources. (optional)
+    top := int32($top=10) // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
+    skip := int32($skip=100) // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
+    select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+    expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+    apply := "apply_example" // string | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e., the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. (optional)
+    count := false // bool | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. (optional)
+    inlinecount := "$inlinecount=true" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
+    at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
+    tags := "tags_example" // string | The 'tags' parameter is used to request a summary of the Tag utilization for this resource. When the 'tags' parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.VnicApi.GetVnicVhbaTemplateList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `VnicApi.GetVnicVhbaTemplateList``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetVnicVhbaTemplateList`: VnicVhbaTemplateResponse
+    fmt.Fprintf(os.Stdout, "Response from `VnicApi.GetVnicVhbaTemplateList`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetVnicVhbaTemplateListRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **filter** | **string** | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). | [default to &quot;&quot;]
+ **orderby** | **string** | Determines what properties are used to sort the collection of resources. | 
+ **top** | **int32** | Specifies the maximum number of resources to return in the response. | [default to 100]
+ **skip** | **int32** | Specifies the number of resources to skip in the response. | [default to 0]
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **apply** | **string** | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e., the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. | 
+ **count** | **bool** | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. | 
+ **inlinecount** | **string** | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. | [default to &quot;allpages&quot;]
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
+ **tags** | **string** | The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. | 
+
+### Return type
+
+[**VnicVhbaTemplateResponse**](VnicVhbaTemplateResponse.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetVnicVnicTemplateByMoid
+
+> VnicVnicTemplate GetVnicVnicTemplateByMoid(ctx, moid).Execute()
+
+Read a 'vnic.VnicTemplate' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.VnicApi.GetVnicVnicTemplateByMoid(context.Background(), moid).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `VnicApi.GetVnicVnicTemplateByMoid``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetVnicVnicTemplateByMoid`: VnicVnicTemplate
+    fmt.Fprintf(os.Stdout, "Response from `VnicApi.GetVnicVnicTemplateByMoid`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetVnicVnicTemplateByMoidRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**VnicVnicTemplate**](VnicVnicTemplate.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetVnicVnicTemplateList
+
+> VnicVnicTemplateResponse GetVnicVnicTemplateList(ctx).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+
+Read a 'vnic.VnicTemplate' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    filter := "$filter=CreateTime gt 2012-08-29T21:58:33Z" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
+    orderby := "$orderby=CreationTime" // string | Determines what properties are used to sort the collection of resources. (optional)
+    top := int32($top=10) // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
+    skip := int32($skip=100) // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
+    select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+    expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+    apply := "apply_example" // string | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e., the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. (optional)
+    count := false // bool | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. (optional)
+    inlinecount := "$inlinecount=true" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
+    at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
+    tags := "tags_example" // string | The 'tags' parameter is used to request a summary of the Tag utilization for this resource. When the 'tags' parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.VnicApi.GetVnicVnicTemplateList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `VnicApi.GetVnicVnicTemplateList``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetVnicVnicTemplateList`: VnicVnicTemplateResponse
+    fmt.Fprintf(os.Stdout, "Response from `VnicApi.GetVnicVnicTemplateList`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetVnicVnicTemplateListRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **filter** | **string** | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). | [default to &quot;&quot;]
+ **orderby** | **string** | Determines what properties are used to sort the collection of resources. | 
+ **top** | **int32** | Specifies the maximum number of resources to return in the response. | [default to 100]
+ **skip** | **int32** | Specifies the number of resources to skip in the response. | [default to 0]
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **apply** | **string** | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e., the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. | 
+ **count** | **bool** | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. | 
+ **inlinecount** | **string** | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. | [default to &quot;allpages&quot;]
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
+ **tags** | **string** | The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. | 
+
+### Return type
+
+[**VnicVnicTemplateResponse**](VnicVnicTemplateResponse.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## PatchVnicEthAdapterPolicy
 
 > VnicEthAdapterPolicy PatchVnicEthAdapterPolicy(ctx, moid).VnicEthAdapterPolicy(vnicEthAdapterPolicy).IfMatch(ifMatch).Execute()
@@ -7665,6 +8249,150 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## PatchVnicVhbaTemplate
+
+> VnicVhbaTemplate PatchVnicVhbaTemplate(ctx, moid).VnicVhbaTemplate(vnicVhbaTemplate).IfMatch(ifMatch).Execute()
+
+Update a 'vnic.VhbaTemplate' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+    vnicVhbaTemplate := *openapiclient.NewVnicVhbaTemplate("ClassId_example", "ObjectType_example") // VnicVhbaTemplate | The 'vnic.VhbaTemplate' resource to update.
+    ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.VnicApi.PatchVnicVhbaTemplate(context.Background(), moid).VnicVhbaTemplate(vnicVhbaTemplate).IfMatch(ifMatch).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `VnicApi.PatchVnicVhbaTemplate``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `PatchVnicVhbaTemplate`: VnicVhbaTemplate
+    fmt.Fprintf(os.Stdout, "Response from `VnicApi.PatchVnicVhbaTemplate`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiPatchVnicVhbaTemplateRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **vnicVhbaTemplate** | [**VnicVhbaTemplate**](VnicVhbaTemplate.md) | The &#39;vnic.VhbaTemplate&#39; resource to update. | 
+ **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
+
+### Return type
+
+[**VnicVhbaTemplate**](VnicVhbaTemplate.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json, application/json-patch+json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## PatchVnicVnicTemplate
+
+> VnicVnicTemplate PatchVnicVnicTemplate(ctx, moid).VnicVnicTemplate(vnicVnicTemplate).IfMatch(ifMatch).Execute()
+
+Update a 'vnic.VnicTemplate' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+    vnicVnicTemplate := *openapiclient.NewVnicVnicTemplate("ClassId_example", "ObjectType_example") // VnicVnicTemplate | The 'vnic.VnicTemplate' resource to update.
+    ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.VnicApi.PatchVnicVnicTemplate(context.Background(), moid).VnicVnicTemplate(vnicVnicTemplate).IfMatch(ifMatch).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `VnicApi.PatchVnicVnicTemplate``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `PatchVnicVnicTemplate`: VnicVnicTemplate
+    fmt.Fprintf(os.Stdout, "Response from `VnicApi.PatchVnicVnicTemplate`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiPatchVnicVnicTemplateRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **vnicVnicTemplate** | [**VnicVnicTemplate**](VnicVnicTemplate.md) | The &#39;vnic.VnicTemplate&#39; resource to update. | 
+ **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
+
+### Return type
+
+[**VnicVnicTemplate**](VnicVnicTemplate.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json, application/json-patch+json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## UpdateVnicEthAdapterPolicy
 
 > VnicEthAdapterPolicy UpdateVnicEthAdapterPolicy(ctx, moid).VnicEthAdapterPolicy(vnicEthAdapterPolicy).IfMatch(ifMatch).Execute()
@@ -8586,6 +9314,150 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**VnicSanConnectivityPolicy**](VnicSanConnectivityPolicy.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json, application/json-patch+json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## UpdateVnicVhbaTemplate
+
+> VnicVhbaTemplate UpdateVnicVhbaTemplate(ctx, moid).VnicVhbaTemplate(vnicVhbaTemplate).IfMatch(ifMatch).Execute()
+
+Update a 'vnic.VhbaTemplate' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+    vnicVhbaTemplate := *openapiclient.NewVnicVhbaTemplate("ClassId_example", "ObjectType_example") // VnicVhbaTemplate | The 'vnic.VhbaTemplate' resource to update.
+    ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.VnicApi.UpdateVnicVhbaTemplate(context.Background(), moid).VnicVhbaTemplate(vnicVhbaTemplate).IfMatch(ifMatch).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `VnicApi.UpdateVnicVhbaTemplate``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `UpdateVnicVhbaTemplate`: VnicVhbaTemplate
+    fmt.Fprintf(os.Stdout, "Response from `VnicApi.UpdateVnicVhbaTemplate`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiUpdateVnicVhbaTemplateRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **vnicVhbaTemplate** | [**VnicVhbaTemplate**](VnicVhbaTemplate.md) | The &#39;vnic.VhbaTemplate&#39; resource to update. | 
+ **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
+
+### Return type
+
+[**VnicVhbaTemplate**](VnicVhbaTemplate.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json, application/json-patch+json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## UpdateVnicVnicTemplate
+
+> VnicVnicTemplate UpdateVnicVnicTemplate(ctx, moid).VnicVnicTemplate(vnicVnicTemplate).IfMatch(ifMatch).Execute()
+
+Update a 'vnic.VnicTemplate' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+    vnicVnicTemplate := *openapiclient.NewVnicVnicTemplate("ClassId_example", "ObjectType_example") // VnicVnicTemplate | The 'vnic.VnicTemplate' resource to update.
+    ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.VnicApi.UpdateVnicVnicTemplate(context.Background(), moid).VnicVnicTemplate(vnicVnicTemplate).IfMatch(ifMatch).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `VnicApi.UpdateVnicVnicTemplate``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `UpdateVnicVnicTemplate`: VnicVnicTemplate
+    fmt.Fprintf(os.Stdout, "Response from `VnicApi.UpdateVnicVnicTemplate`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiUpdateVnicVnicTemplateRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **vnicVnicTemplate** | [**VnicVnicTemplate**](VnicVnicTemplate.md) | The &#39;vnic.VnicTemplate&#39; resource to update. | 
+ **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
+
+### Return type
+
+[**VnicVnicTemplate**](VnicVnicTemplate.md)
 
 ### Authorization
 

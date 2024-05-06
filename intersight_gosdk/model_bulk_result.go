@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-15830
+API version: 1.0.11-16342
 Contact: intersight@cisco.com
 */
 
@@ -25,19 +25,25 @@ type BulkResult struct {
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
-	// The timestamp in UTC when the request processing completed.
+	// The action that will be performed when an error occurs during processing of the request. * `Stop` - Stop the processing of the request after the first error. * `Proceed` - Proceed with the processing of the request even when an error occurs.
+	ActionOnError *string `json:"ActionOnError,omitempty"`
+	// The timestamp in UTC when the request processing is completed.
 	CompletionTime *time.Time `json:"CompletionTime,omitempty"`
 	// The number of subrequests received in this request.
 	NumSubRequests *int64 `json:"NumSubRequests,omitempty"`
+	// The individual request to be executed asynchronously.
+	Request interface{} `json:"Request,omitempty"`
 	// The timestamp in UTC when the request was received.
 	RequestReceivedTime *time.Time `json:"RequestReceivedTime,omitempty"`
-	// The processing status of the request. * `NotStarted` - Indicates that the request processing has not begun yet. * `ObjPresenceCheckInProgress` - Indicates that the object presence check is in progress for this request. * `ObjPresenceCheckComplete` - Indicates that the object presence check is complete. * `ExecutionInProgress` - Indicates that the request processing is in progress. * `Completed` - Indicates that the request processing has been completed successfully. * `Failed` - Indicates that the processing of this request failed. * `TimedOut` - Indicates that the request processing timed out.
+	// The processing status of the request. * `NotStarted` - Indicates that the request processing has not begun yet. * `ObjPresenceCheckInProgress` - Indicates that the object presence check is in progress for this request. * `ObjPresenceCheckComplete` - Indicates that the object presence check is complete. * `ExecutionInProgress` - Indicates that the request processing is in progress. * `Completed` - Indicates that the request processing has been completed successfully. * `CompletedWithErrors` - Indicates that the request processing has one or more failed subrequests. * `Failed` - Indicates that the processing of this request failed. * `TimedOut` - Indicates that the request processing timed out.
 	Status *string `json:"Status,omitempty"`
 	// The status message shows the error details in human readable format when the request goes to failed state. No additional information is shown for success case.
 	StatusMessage *string `json:"StatusMessage,omitempty"`
 	// The URI on which this async operation is being performed.
 	Uri          *string                               `json:"Uri,omitempty"`
+	MoCloner     *BulkMoClonerRelationship             `json:"MoCloner,omitempty"`
 	MoDeepCloner *BulkMoDeepClonerRelationship         `json:"MoDeepCloner,omitempty"`
+	MoMerger     *BulkMoMergerRelationship             `json:"MoMerger,omitempty"`
 	Organization *OrganizationOrganizationRelationship `json:"Organization,omitempty"`
 	// An array of relationships to bulkSubRequestObj resources.
 	Results              []BulkSubRequestObjRelationship   `json:"Results,omitempty"`
@@ -118,6 +124,38 @@ func (o *BulkResult) SetObjectType(v string) {
 	o.ObjectType = v
 }
 
+// GetActionOnError returns the ActionOnError field value if set, zero value otherwise.
+func (o *BulkResult) GetActionOnError() string {
+	if o == nil || o.ActionOnError == nil {
+		var ret string
+		return ret
+	}
+	return *o.ActionOnError
+}
+
+// GetActionOnErrorOk returns a tuple with the ActionOnError field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BulkResult) GetActionOnErrorOk() (*string, bool) {
+	if o == nil || o.ActionOnError == nil {
+		return nil, false
+	}
+	return o.ActionOnError, true
+}
+
+// HasActionOnError returns a boolean if a field has been set.
+func (o *BulkResult) HasActionOnError() bool {
+	if o != nil && o.ActionOnError != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetActionOnError gets a reference to the given string and assigns it to the ActionOnError field.
+func (o *BulkResult) SetActionOnError(v string) {
+	o.ActionOnError = &v
+}
+
 // GetCompletionTime returns the CompletionTime field value if set, zero value otherwise.
 func (o *BulkResult) GetCompletionTime() time.Time {
 	if o == nil || o.CompletionTime == nil {
@@ -180,6 +218,39 @@ func (o *BulkResult) HasNumSubRequests() bool {
 // SetNumSubRequests gets a reference to the given int64 and assigns it to the NumSubRequests field.
 func (o *BulkResult) SetNumSubRequests(v int64) {
 	o.NumSubRequests = &v
+}
+
+// GetRequest returns the Request field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *BulkResult) GetRequest() interface{} {
+	if o == nil {
+		var ret interface{}
+		return ret
+	}
+	return o.Request
+}
+
+// GetRequestOk returns a tuple with the Request field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *BulkResult) GetRequestOk() (*interface{}, bool) {
+	if o == nil || o.Request == nil {
+		return nil, false
+	}
+	return &o.Request, true
+}
+
+// HasRequest returns a boolean if a field has been set.
+func (o *BulkResult) HasRequest() bool {
+	if o != nil && o.Request != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetRequest gets a reference to the given interface{} and assigns it to the Request field.
+func (o *BulkResult) SetRequest(v interface{}) {
+	o.Request = v
 }
 
 // GetRequestReceivedTime returns the RequestReceivedTime field value if set, zero value otherwise.
@@ -310,6 +381,38 @@ func (o *BulkResult) SetUri(v string) {
 	o.Uri = &v
 }
 
+// GetMoCloner returns the MoCloner field value if set, zero value otherwise.
+func (o *BulkResult) GetMoCloner() BulkMoClonerRelationship {
+	if o == nil || o.MoCloner == nil {
+		var ret BulkMoClonerRelationship
+		return ret
+	}
+	return *o.MoCloner
+}
+
+// GetMoClonerOk returns a tuple with the MoCloner field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BulkResult) GetMoClonerOk() (*BulkMoClonerRelationship, bool) {
+	if o == nil || o.MoCloner == nil {
+		return nil, false
+	}
+	return o.MoCloner, true
+}
+
+// HasMoCloner returns a boolean if a field has been set.
+func (o *BulkResult) HasMoCloner() bool {
+	if o != nil && o.MoCloner != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetMoCloner gets a reference to the given BulkMoClonerRelationship and assigns it to the MoCloner field.
+func (o *BulkResult) SetMoCloner(v BulkMoClonerRelationship) {
+	o.MoCloner = &v
+}
+
 // GetMoDeepCloner returns the MoDeepCloner field value if set, zero value otherwise.
 func (o *BulkResult) GetMoDeepCloner() BulkMoDeepClonerRelationship {
 	if o == nil || o.MoDeepCloner == nil {
@@ -340,6 +443,38 @@ func (o *BulkResult) HasMoDeepCloner() bool {
 // SetMoDeepCloner gets a reference to the given BulkMoDeepClonerRelationship and assigns it to the MoDeepCloner field.
 func (o *BulkResult) SetMoDeepCloner(v BulkMoDeepClonerRelationship) {
 	o.MoDeepCloner = &v
+}
+
+// GetMoMerger returns the MoMerger field value if set, zero value otherwise.
+func (o *BulkResult) GetMoMerger() BulkMoMergerRelationship {
+	if o == nil || o.MoMerger == nil {
+		var ret BulkMoMergerRelationship
+		return ret
+	}
+	return *o.MoMerger
+}
+
+// GetMoMergerOk returns a tuple with the MoMerger field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BulkResult) GetMoMergerOk() (*BulkMoMergerRelationship, bool) {
+	if o == nil || o.MoMerger == nil {
+		return nil, false
+	}
+	return o.MoMerger, true
+}
+
+// HasMoMerger returns a boolean if a field has been set.
+func (o *BulkResult) HasMoMerger() bool {
+	if o != nil && o.MoMerger != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetMoMerger gets a reference to the given BulkMoMergerRelationship and assigns it to the MoMerger field.
+func (o *BulkResult) SetMoMerger(v BulkMoMergerRelationship) {
+	o.MoMerger = &v
 }
 
 // GetOrganization returns the Organization field value if set, zero value otherwise.
@@ -455,11 +590,17 @@ func (o BulkResult) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["ObjectType"] = o.ObjectType
 	}
+	if o.ActionOnError != nil {
+		toSerialize["ActionOnError"] = o.ActionOnError
+	}
 	if o.CompletionTime != nil {
 		toSerialize["CompletionTime"] = o.CompletionTime
 	}
 	if o.NumSubRequests != nil {
 		toSerialize["NumSubRequests"] = o.NumSubRequests
+	}
+	if o.Request != nil {
+		toSerialize["Request"] = o.Request
 	}
 	if o.RequestReceivedTime != nil {
 		toSerialize["RequestReceivedTime"] = o.RequestReceivedTime
@@ -473,8 +614,14 @@ func (o BulkResult) MarshalJSON() ([]byte, error) {
 	if o.Uri != nil {
 		toSerialize["Uri"] = o.Uri
 	}
+	if o.MoCloner != nil {
+		toSerialize["MoCloner"] = o.MoCloner
+	}
 	if o.MoDeepCloner != nil {
 		toSerialize["MoDeepCloner"] = o.MoDeepCloner
+	}
+	if o.MoMerger != nil {
+		toSerialize["MoMerger"] = o.MoMerger
 	}
 	if o.Organization != nil {
 		toSerialize["Organization"] = o.Organization
@@ -499,19 +646,25 @@ func (o *BulkResult) UnmarshalJSON(bytes []byte) (err error) {
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 		ObjectType string `json:"ObjectType"`
-		// The timestamp in UTC when the request processing completed.
+		// The action that will be performed when an error occurs during processing of the request. * `Stop` - Stop the processing of the request after the first error. * `Proceed` - Proceed with the processing of the request even when an error occurs.
+		ActionOnError *string `json:"ActionOnError,omitempty"`
+		// The timestamp in UTC when the request processing is completed.
 		CompletionTime *time.Time `json:"CompletionTime,omitempty"`
 		// The number of subrequests received in this request.
 		NumSubRequests *int64 `json:"NumSubRequests,omitempty"`
+		// The individual request to be executed asynchronously.
+		Request interface{} `json:"Request,omitempty"`
 		// The timestamp in UTC when the request was received.
 		RequestReceivedTime *time.Time `json:"RequestReceivedTime,omitempty"`
-		// The processing status of the request. * `NotStarted` - Indicates that the request processing has not begun yet. * `ObjPresenceCheckInProgress` - Indicates that the object presence check is in progress for this request. * `ObjPresenceCheckComplete` - Indicates that the object presence check is complete. * `ExecutionInProgress` - Indicates that the request processing is in progress. * `Completed` - Indicates that the request processing has been completed successfully. * `Failed` - Indicates that the processing of this request failed. * `TimedOut` - Indicates that the request processing timed out.
+		// The processing status of the request. * `NotStarted` - Indicates that the request processing has not begun yet. * `ObjPresenceCheckInProgress` - Indicates that the object presence check is in progress for this request. * `ObjPresenceCheckComplete` - Indicates that the object presence check is complete. * `ExecutionInProgress` - Indicates that the request processing is in progress. * `Completed` - Indicates that the request processing has been completed successfully. * `CompletedWithErrors` - Indicates that the request processing has one or more failed subrequests. * `Failed` - Indicates that the processing of this request failed. * `TimedOut` - Indicates that the request processing timed out.
 		Status *string `json:"Status,omitempty"`
 		// The status message shows the error details in human readable format when the request goes to failed state. No additional information is shown for success case.
 		StatusMessage *string `json:"StatusMessage,omitempty"`
 		// The URI on which this async operation is being performed.
 		Uri          *string                               `json:"Uri,omitempty"`
+		MoCloner     *BulkMoClonerRelationship             `json:"MoCloner,omitempty"`
 		MoDeepCloner *BulkMoDeepClonerRelationship         `json:"MoDeepCloner,omitempty"`
+		MoMerger     *BulkMoMergerRelationship             `json:"MoMerger,omitempty"`
 		Organization *OrganizationOrganizationRelationship `json:"Organization,omitempty"`
 		// An array of relationships to bulkSubRequestObj resources.
 		Results      []BulkSubRequestObjRelationship   `json:"Results,omitempty"`
@@ -525,13 +678,17 @@ func (o *BulkResult) UnmarshalJSON(bytes []byte) (err error) {
 		varBulkResult := _BulkResult{}
 		varBulkResult.ClassId = varBulkResultWithoutEmbeddedStruct.ClassId
 		varBulkResult.ObjectType = varBulkResultWithoutEmbeddedStruct.ObjectType
+		varBulkResult.ActionOnError = varBulkResultWithoutEmbeddedStruct.ActionOnError
 		varBulkResult.CompletionTime = varBulkResultWithoutEmbeddedStruct.CompletionTime
 		varBulkResult.NumSubRequests = varBulkResultWithoutEmbeddedStruct.NumSubRequests
+		varBulkResult.Request = varBulkResultWithoutEmbeddedStruct.Request
 		varBulkResult.RequestReceivedTime = varBulkResultWithoutEmbeddedStruct.RequestReceivedTime
 		varBulkResult.Status = varBulkResultWithoutEmbeddedStruct.Status
 		varBulkResult.StatusMessage = varBulkResultWithoutEmbeddedStruct.StatusMessage
 		varBulkResult.Uri = varBulkResultWithoutEmbeddedStruct.Uri
+		varBulkResult.MoCloner = varBulkResultWithoutEmbeddedStruct.MoCloner
 		varBulkResult.MoDeepCloner = varBulkResultWithoutEmbeddedStruct.MoDeepCloner
+		varBulkResult.MoMerger = varBulkResultWithoutEmbeddedStruct.MoMerger
 		varBulkResult.Organization = varBulkResultWithoutEmbeddedStruct.Organization
 		varBulkResult.Results = varBulkResultWithoutEmbeddedStruct.Results
 		varBulkResult.WorkflowInfo = varBulkResultWithoutEmbeddedStruct.WorkflowInfo
@@ -554,13 +711,17 @@ func (o *BulkResult) UnmarshalJSON(bytes []byte) (err error) {
 	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
+		delete(additionalProperties, "ActionOnError")
 		delete(additionalProperties, "CompletionTime")
 		delete(additionalProperties, "NumSubRequests")
+		delete(additionalProperties, "Request")
 		delete(additionalProperties, "RequestReceivedTime")
 		delete(additionalProperties, "Status")
 		delete(additionalProperties, "StatusMessage")
 		delete(additionalProperties, "Uri")
+		delete(additionalProperties, "MoCloner")
 		delete(additionalProperties, "MoDeepCloner")
+		delete(additionalProperties, "MoMerger")
 		delete(additionalProperties, "Organization")
 		delete(additionalProperties, "Results")
 		delete(additionalProperties, "WorkflowInfo")

@@ -26,6 +26,7 @@ Name | Type | Description | Notes
 **StartTime** | Pointer to **time.Time** | The time when the workflow was started for execution. | [optional] [readonly] 
 **Status** | Pointer to **string** | A status of the workflow (RUNNING, WAITING, COMPLETED, TIME_OUT, FAILED). The \&quot;status\&quot; field has been deprecated and is now replaced with the \&quot;workflowStatus\&quot; field. | [optional] [readonly] 
 **SuccessWorkflowCleanupDuration** | Pointer to **int64** | The duration in hours after which the workflow info for successful workflow will be removed from database. The minimum is 1 hour, maximum is 365 days and default is 90 days. | [optional] [default to 2160]
+**TaskInfoUpdate** | Pointer to [**NullableWorkflowTaskInfoUpdate**](WorkflowTaskInfoUpdate.md) |  | [optional] 
 **TraceId** | Pointer to **string** | The trace id to keep track of workflow execution. | [optional] [readonly] 
 **Type** | Pointer to **string** | A type of the workflow (serverconfig, ansible_monitoring). | [optional] [readonly] 
 **UserActionRequired** | Pointer to **bool** | Property will be set when a user action is required on the workflow. This can be because the workflow is waiting for a wait task to be updated, workflow is paused or workflow launched by a configuration object has failed and needs to be retried in order to complete successfully. | [optional] [readonly] [default to false]
@@ -641,6 +642,41 @@ SetSuccessWorkflowCleanupDuration sets SuccessWorkflowCleanupDuration field to g
 
 HasSuccessWorkflowCleanupDuration returns a boolean if a field has been set.
 
+### GetTaskInfoUpdate
+
+`func (o *WorkflowWorkflowInfo) GetTaskInfoUpdate() WorkflowTaskInfoUpdate`
+
+GetTaskInfoUpdate returns the TaskInfoUpdate field if non-nil, zero value otherwise.
+
+### GetTaskInfoUpdateOk
+
+`func (o *WorkflowWorkflowInfo) GetTaskInfoUpdateOk() (*WorkflowTaskInfoUpdate, bool)`
+
+GetTaskInfoUpdateOk returns a tuple with the TaskInfoUpdate field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTaskInfoUpdate
+
+`func (o *WorkflowWorkflowInfo) SetTaskInfoUpdate(v WorkflowTaskInfoUpdate)`
+
+SetTaskInfoUpdate sets TaskInfoUpdate field to given value.
+
+### HasTaskInfoUpdate
+
+`func (o *WorkflowWorkflowInfo) HasTaskInfoUpdate() bool`
+
+HasTaskInfoUpdate returns a boolean if a field has been set.
+
+### SetTaskInfoUpdateNil
+
+`func (o *WorkflowWorkflowInfo) SetTaskInfoUpdateNil(b bool)`
+
+ SetTaskInfoUpdateNil sets the value for TaskInfoUpdate to be an explicit nil
+
+### UnsetTaskInfoUpdate
+`func (o *WorkflowWorkflowInfo) UnsetTaskInfoUpdate()`
+
+UnsetTaskInfoUpdate ensures that no value is present for TaskInfoUpdate, not even an explicit nil
 ### GetTraceId
 
 `func (o *WorkflowWorkflowInfo) GetTraceId() string`

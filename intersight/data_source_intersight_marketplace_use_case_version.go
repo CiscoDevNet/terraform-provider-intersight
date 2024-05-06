@@ -60,71 +60,8 @@ func getMarketplaceUseCaseVersionSchema() map[string]*schema.Schema {
 				},
 			},
 		},
-		"class_id": {
-			Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"create_time": {
-			Description: "The time when this managed object was created.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"domain_group_moid": {
-			Description: "The DomainGroup ID for this managed object.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"locales": {
-			Type:     schema.TypeList,
-			Optional: true,
-			Elem: &schema.Resource{
-				Schema: map[string]*schema.Schema{
-					"additional_properties": {
-						Type:             schema.TypeString,
-						Optional:         true,
-						DiffSuppressFunc: SuppressDiffAdditionProps,
-					},
-					"class_id": {
-						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"description": {
-						Description: "The string field to hold the description",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"locale": {
-						Description: "The string field to hold the locale",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"object_type": {
-						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-				},
-			},
-		},
-		"mod_time": {
-			Description: "The time when this managed object was last modified.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"moid": {
-			Description: "The unique identifier of this Managed Object instance.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"object_type": {
-			Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"organization": {
-			Description: "A reference to a organizationOrganization resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+		"catalog": {
+			Description: "A reference to a workflowCatalog resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 			Type:        schema.TypeList,
 			MaxItems:    1,
 			Optional:    true,
@@ -157,6 +94,69 @@ func getMarketplaceUseCaseVersionSchema() map[string]*schema.Schema {
 					},
 				},
 			},
+		},
+		"class_id": {
+			Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"create_time": {
+			Description: "The time when this managed object was created.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"domain_group_moid": {
+			Description: "The DomainGroup ID for this managed object.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"locales": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"description": {
+						Description: "The string field to hold the description.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"locale": {
+						Description: "The string field to hold the locale.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"mod_time": {
+			Description: "The time when this managed object was last modified.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"moid": {
+			Description: "The unique identifier of this Managed Object instance.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"object_type": {
+			Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+			Type:        schema.TypeString,
+			Optional:    true,
 		},
 		"owners": {
 			Type:     schema.TypeList,
@@ -253,12 +253,12 @@ func getMarketplaceUseCaseVersionSchema() map[string]*schema.Schema {
 						Optional:    true,
 					},
 					"resource_id": {
-						Description: "A string ID for each use case",
+						Description: "A string ID for each use case.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
 					"resource_type": {
-						Description: "A string resource type for each use case",
+						Description: "A string resource type for each use case.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
@@ -329,7 +329,7 @@ func getMarketplaceUseCaseVersionSchema() map[string]*schema.Schema {
 			},
 		},
 		"nr_version": {
-			Description: "A string version for each use case",
+			Description: "A string version for each use case.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -522,6 +522,49 @@ func dataSourceMarketplaceUseCaseVersionRead(c context.Context, d *schema.Resour
 		o.SetAncestors(x)
 	}
 
+	if v, ok := d.GetOk("catalog"); ok {
+		p := make([]models.WorkflowCatalogRelationship, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.MoMoRef{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			p = append(p, models.MoMoRefAsWorkflowCatalogRelationship(o))
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetCatalog(x)
+		}
+	}
+
 	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
 		o.SetClassId(x)
@@ -590,49 +633,6 @@ func dataSourceMarketplaceUseCaseVersionRead(c context.Context, d *schema.Resour
 	if v, ok := d.GetOk("object_type"); ok {
 		x := (v.(string))
 		o.SetObjectType(x)
-	}
-
-	if v, ok := d.GetOk("organization"); ok {
-		p := make([]models.OrganizationOrganizationRelationship, 0, 1)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			l := s[i].(map[string]interface{})
-			o := &models.MoMoRef{}
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("mo.MoRef")
-			if v, ok := l["moid"]; ok {
-				{
-					x := (v.(string))
-					o.SetMoid(x)
-				}
-			}
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["selector"]; ok {
-				{
-					x := (v.(string))
-					o.SetSelector(x)
-				}
-			}
-			p = append(p, models.MoMoRefAsOrganizationOrganizationRelationship(o))
-		}
-		if len(p) > 0 {
-			x := p[0]
-			o.SetOrganization(x)
-		}
 	}
 
 	if v, ok := d.GetOk("owners"); ok {
@@ -730,10 +730,10 @@ func dataSourceMarketplaceUseCaseVersionRead(c context.Context, d *schema.Resour
 	}
 
 	if v, ok := d.GetOk("resources"); ok {
-		x := make([]models.MarketplaceUseCaseVersionResources, 0)
+		x := make([]models.MarketplaceUseCaseVersionResource, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
-			o := &models.MarketplaceUseCaseVersionResources{}
+			o := &models.MarketplaceUseCaseVersionResource{}
 			l := s[i].(map[string]interface{})
 			if v, ok := l["additional_properties"]; ok {
 				{
@@ -745,7 +745,7 @@ func dataSourceMarketplaceUseCaseVersionRead(c context.Context, d *schema.Resour
 					}
 				}
 			}
-			o.SetClassId("marketplace.UseCaseVersionResources")
+			o.SetClassId("marketplace.UseCaseVersionResource")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
@@ -968,6 +968,8 @@ func dataSourceMarketplaceUseCaseVersionRead(c context.Context, d *schema.Resour
 				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
 
 				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)
+
+				temp["catalog"] = flattenMapWorkflowCatalogRelationship(s.GetCatalog(), d)
 				temp["class_id"] = (s.GetClassId())
 
 				temp["create_time"] = (s.GetCreateTime()).String()
@@ -978,15 +980,13 @@ func dataSourceMarketplaceUseCaseVersionRead(c context.Context, d *schema.Resour
 				temp["mod_time"] = (s.GetModTime()).String()
 				temp["moid"] = (s.GetMoid())
 				temp["object_type"] = (s.GetObjectType())
-
-				temp["organization"] = flattenMapOrganizationOrganizationRelationship(s.GetOrganization(), d)
 				temp["owners"] = (s.GetOwners())
 
 				temp["parent"] = flattenMapMoBaseMoRelationship(s.GetParent(), d)
 
 				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
 
-				temp["resources"] = flattenListMarketplaceUseCaseVersionResources(s.GetResources(), d)
+				temp["resources"] = flattenListMarketplaceUseCaseVersionResource(s.GetResources(), d)
 				temp["shared_scope"] = (s.GetSharedScope())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
