@@ -6,8 +6,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "marketplace.UseCaseAutomation"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "marketplace.UseCaseAutomation"]
-**Description** | Pointer to **string** | A description for the automation | [optional] 
-**Name** | Pointer to **string** | A name for the automation | [optional] 
+**Description** | Pointer to **string** | A description for the automation. | [optional] 
+**Name** | Pointer to **string** | A name for the automation. | [optional] 
 
 ## Methods
 

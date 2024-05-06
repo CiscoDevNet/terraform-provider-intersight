@@ -86,7 +86,7 @@ func getIpmioverlanPolicySchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"encryption_key": {
-			Description: "The encryption key to use for IPMI communication. It should have an even number of hexadecimal characters and not exceed 40 characters. Use “00” to disable encryption key use. This configuration is supported by all standalone rack servers. FI-attached rack servers with firmware at minimum of 4.2.3a support this configuration. FI-attached blade servers do not support an encryption key. IPMI commands using this key should append zeroes to the key to achieve a length of 40 characters.",
+			Description: "The encryption key to use for IPMI communication. It should have an even number of hexadecimal characters and not exceed 40 characters. Use “00” to disable encryption key use. This configuration is supported by all standalone rack servers. FI-attached rack servers with firmware at minimum of 4.2.3a support this configuration. FI-attached blade servers with firmware at minimum of 5.1.0.x support this configuration. IPMI commands using this key should append zeroes to the key to achieve a length of 40 characters.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},

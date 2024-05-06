@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "storage.NvmeDedicatedHotSpareConfiguration"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "storage.NvmeDedicatedHotSpareConfiguration"]
 **IsNewVd** | Pointer to **bool** | This defines if the vd does not exists at endpoint for specific storage controller per drive group. Only if it&#39;s false we will create dedicated hot spares for the existing vds. | [optional] [readonly] 
-**Name** | Pointer to **string** | The name of the virtual drive. The name can be between 1 and 15 alphanumeric characters. Spaces or any special characters other than - (hyphen), _ (underscore), : (colon), and . (period) are not allowed. | [optional] [readonly] 
+**Name** | Pointer to **string** | The name of the virtual drive. The name can be between 1 and 15 alphanumeric characters. Spaces or any special characters other than - (hyphen) and _ (underscore) are not allowed. | [optional] [readonly] 
 **Slot** | Pointer to **string** | Physical Disk Slot that is used as dedicated hot spare. | [optional] [readonly] 
 **VolumeDn** | Pointer to **string** | The volume dn of the dedicated hot spare, this will be unique for each dedicated hot spare. | [optional] [readonly] 
 

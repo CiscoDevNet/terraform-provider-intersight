@@ -7,6 +7,7 @@ description: |-
         The Sources array should contain the list of source MO instances as MoRef objects.
         The Targets array should contain the list of target MO instances as MoRef objects.
         The TargetConfig property is applicable only for a merge operation. If a configuration action needs to be applied on all target MOs, it can be specified using this property.
+        Currently this API is used to synchronize template update to all its derived instances for the Server Profile Templates, vNIC Templates and vHBA Templates.
 
 ---
 
@@ -15,10 +16,16 @@ The MO Merger interface facilitates merging of all or selected properties of any
 The "Sources" array should contain the list of source MO instances as MoRef objects.
 The "Targets" array should contain the list of target MO instances as MoRef objects.
 The "TargetConfig" property is applicable only for a merge operation. If a configuration action needs to be applied on all target MOs, it can be specified using this property.
+Currently this API is used to synchronize template update to all its derived instances for the Server Profile Templates, vNIC Templates and vHBA Templates.
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(ReadOnly) The Account ID for this managed object. 
 * `ancestors`:(Array)(ReadOnly) An array of relationships to moBaseMo resources. 
+This complex property has following sub-properties:
+  + `moid`:(string) The Moid of the referenced REST resource. 
+  + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
+  + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
+* `async_result`:(HashMap) -(ReadOnly) A reference to a bulkResult resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
 This complex property has following sub-properties:
   + `moid`:(string) The Moid of the referenced REST resource. 
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
@@ -260,6 +267,7 @@ This complex property has following sub-properties:
   + `timestamp`:(string)(ReadOnly) The time this versioned Managed Object was created. 
   + `nr_version`:(string)(ReadOnly) The version of the Managed Object, e.g. an incrementing number or a hash id. 
   + `version_type`:(string)(ReadOnly) Specifies type of version. Currently the only supported value is \ Configured\ that is used to keep track of snapshots of policies and profiles that are intendedto be configured to target endpoints.* `Modified` - Version created every time an object is modified.* `Configured` - Version created every time an object is configured to the service profile.* `Deployed` - Version created for objects related to a service profile when it is deployed. 
+* `workflow_name_suffix`:(string) A user-friendly short name to identify the workflow. Name can only contain letters (a-z, A-Z),numbers (0-9), hyphen (-), period (.), colon (:), space ( ), forward slash (/), comma or an underscore (_). 
 
 
 ## Import

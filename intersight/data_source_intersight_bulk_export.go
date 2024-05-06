@@ -80,6 +80,16 @@ func getBulkExportSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"exclude_peers": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Schema{
+				Type: schema.TypeString}},
+		"exclude_relations": {
+			Description: "Used to specify that none of the relationships should be exported.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
 		"export_tags": {
 			Description: "Specifies whether tags must be exported and will be considered for all the items MOs.",
 			Type:        schema.TypeBool,
@@ -155,6 +165,11 @@ func getBulkExportSchema() map[string]*schema.Schema {
 		"import_order": {
 			Description: "Contains the list of import order.",
 			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"include_org_identity": {
+			Description: "Indicates that exported references for objects which are organization owned should include the organization reference along with the other identity properties.",
+			Type:        schema.TypeBool,
 			Optional:    true,
 		},
 		"items": {
@@ -576,6 +591,22 @@ func dataSourceBulkExportRead(c context.Context, d *schema.ResourceData, meta in
 		o.SetDomainGroupMoid(x)
 	}
 
+	if v, ok := d.GetOk("exclude_peers"); ok {
+		x := make([]string, 0)
+		y := reflect.ValueOf(v)
+		for i := 0; i < y.Len(); i++ {
+			if y.Index(i).Interface() != nil {
+				x = append(x, y.Index(i).Interface().(string))
+			}
+		}
+		o.SetExcludePeers(x)
+	}
+
+	if v, ok := d.GetOkExists("exclude_relations"); ok {
+		x := (v.(bool))
+		o.SetExcludeRelations(x)
+	}
+
 	if v, ok := d.GetOkExists("export_tags"); ok {
 		x := (v.(bool))
 		o.SetExportTags(x)
@@ -669,6 +700,11 @@ func dataSourceBulkExportRead(c context.Context, d *schema.ResourceData, meta in
 			x2 := x1.(map[string]interface{})
 			o.SetImportOrder(x2)
 		}
+	}
+
+	if v, ok := d.GetOkExists("include_org_identity"); ok {
+		x := (v.(bool))
+		o.SetIncludeOrgIdentity(x)
 	}
 
 	if v, ok := d.GetOk("items"); ok {
@@ -1044,12 +1080,15 @@ func dataSourceBulkExportRead(c context.Context, d *schema.ResourceData, meta in
 
 				temp["create_time"] = (s.GetCreateTime()).String()
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
+				temp["exclude_peers"] = (s.GetExcludePeers())
+				temp["exclude_relations"] = (s.GetExcludeRelations())
 				temp["export_tags"] = (s.GetExportTags())
 
 				temp["exported_items"] = flattenListBulkExportedItemRelationship(s.GetExportedItems(), d)
 
 				temp["exported_objects"] = flattenListBulkSubRequest(s.GetExportedObjects(), d)
 				temp["import_order"] = flattenAdditionalProperties(s.GetImportOrder())
+				temp["include_org_identity"] = (s.GetIncludeOrgIdentity())
 
 				temp["items"] = flattenListMoMoRef(s.GetItems(), d)
 

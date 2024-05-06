@@ -8,13 +8,10 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "chassis.Profile"]
 **ConfigChangeContext** | Pointer to [**NullablePolicyConfigChangeContext**](PolicyConfigChangeContext.md) |  | [optional] 
 **ConfigChanges** | Pointer to [**NullablePolicyConfigChange**](PolicyConfigChange.md) |  | [optional] 
-**TargetPlatform** | Pointer to **string** | The platform for which the chassis profile is applicable. It can either be a chassis that is operating in standalone mode or which is attached to a Fabric Interconnect managed by Intersight. * &#x60;FIAttached&#x60; - Chassis which are connected to a Fabric Interconnect that is managed by Intersight. | [optional] [default to "FIAttached"]
 **UserLabel** | Pointer to **string** | User label assigned to the chassis profile. | [optional] 
 **AssignedChassis** | Pointer to [**EquipmentChassisRelationship**](EquipmentChassisRelationship.md) |  | [optional] 
 **AssociatedChassis** | Pointer to [**EquipmentChassisRelationship**](EquipmentChassisRelationship.md) |  | [optional] 
 **ConfigChangeDetails** | Pointer to [**[]ChassisConfigChangeDetailRelationship**](ChassisConfigChangeDetailRelationship.md) | An array of relationships to chassisConfigChangeDetail resources. | [optional] [readonly] 
-**ConfigResult** | Pointer to [**ChassisConfigResultRelationship**](ChassisConfigResultRelationship.md) |  | [optional] 
-**IomProfiles** | Pointer to [**[]ChassisIomProfileRelationship**](ChassisIomProfileRelationship.md) | An array of relationships to chassisIomProfile resources. | [optional] [readonly] 
 **Organization** | Pointer to [**OrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
 **RunningWorkflows** | Pointer to [**[]WorkflowWorkflowInfoRelationship**](WorkflowWorkflowInfoRelationship.md) | An array of relationships to workflowWorkflowInfo resources. | [optional] [readonly] 
 
@@ -147,31 +144,6 @@ HasConfigChanges returns a boolean if a field has been set.
 `func (o *ChassisProfileAllOf) UnsetConfigChanges()`
 
 UnsetConfigChanges ensures that no value is present for ConfigChanges, not even an explicit nil
-### GetTargetPlatform
-
-`func (o *ChassisProfileAllOf) GetTargetPlatform() string`
-
-GetTargetPlatform returns the TargetPlatform field if non-nil, zero value otherwise.
-
-### GetTargetPlatformOk
-
-`func (o *ChassisProfileAllOf) GetTargetPlatformOk() (*string, bool)`
-
-GetTargetPlatformOk returns a tuple with the TargetPlatform field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetTargetPlatform
-
-`func (o *ChassisProfileAllOf) SetTargetPlatform(v string)`
-
-SetTargetPlatform sets TargetPlatform field to given value.
-
-### HasTargetPlatform
-
-`func (o *ChassisProfileAllOf) HasTargetPlatform() bool`
-
-HasTargetPlatform returns a boolean if a field has been set.
-
 ### GetUserLabel
 
 `func (o *ChassisProfileAllOf) GetUserLabel() string`
@@ -282,66 +254,6 @@ HasConfigChangeDetails returns a boolean if a field has been set.
 `func (o *ChassisProfileAllOf) UnsetConfigChangeDetails()`
 
 UnsetConfigChangeDetails ensures that no value is present for ConfigChangeDetails, not even an explicit nil
-### GetConfigResult
-
-`func (o *ChassisProfileAllOf) GetConfigResult() ChassisConfigResultRelationship`
-
-GetConfigResult returns the ConfigResult field if non-nil, zero value otherwise.
-
-### GetConfigResultOk
-
-`func (o *ChassisProfileAllOf) GetConfigResultOk() (*ChassisConfigResultRelationship, bool)`
-
-GetConfigResultOk returns a tuple with the ConfigResult field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetConfigResult
-
-`func (o *ChassisProfileAllOf) SetConfigResult(v ChassisConfigResultRelationship)`
-
-SetConfigResult sets ConfigResult field to given value.
-
-### HasConfigResult
-
-`func (o *ChassisProfileAllOf) HasConfigResult() bool`
-
-HasConfigResult returns a boolean if a field has been set.
-
-### GetIomProfiles
-
-`func (o *ChassisProfileAllOf) GetIomProfiles() []ChassisIomProfileRelationship`
-
-GetIomProfiles returns the IomProfiles field if non-nil, zero value otherwise.
-
-### GetIomProfilesOk
-
-`func (o *ChassisProfileAllOf) GetIomProfilesOk() (*[]ChassisIomProfileRelationship, bool)`
-
-GetIomProfilesOk returns a tuple with the IomProfiles field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetIomProfiles
-
-`func (o *ChassisProfileAllOf) SetIomProfiles(v []ChassisIomProfileRelationship)`
-
-SetIomProfiles sets IomProfiles field to given value.
-
-### HasIomProfiles
-
-`func (o *ChassisProfileAllOf) HasIomProfiles() bool`
-
-HasIomProfiles returns a boolean if a field has been set.
-
-### SetIomProfilesNil
-
-`func (o *ChassisProfileAllOf) SetIomProfilesNil(b bool)`
-
- SetIomProfilesNil sets the value for IomProfiles to be an explicit nil
-
-### UnsetIomProfiles
-`func (o *ChassisProfileAllOf) UnsetIomProfiles()`
-
-UnsetIomProfiles ensures that no value is present for IomProfiles, not even an explicit nil
 ### GetOrganization
 
 `func (o *ChassisProfileAllOf) GetOrganization() OrganizationOrganizationRelationship`

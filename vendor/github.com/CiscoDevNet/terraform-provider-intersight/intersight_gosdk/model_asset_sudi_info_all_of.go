@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-15830
+API version: 1.0.11-16342
 Contact: intersight@cisco.com
 */
 
@@ -21,14 +21,16 @@ type AssetSudiInfoAllOf struct {
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
-	// The device model (PID) extracted from the X.509 SUDI Leaf Certificate.
+	// The device model (PID) extracted from the X.509 SUDI leaf certificate.
 	Pid *string `json:"Pid,omitempty"`
-	// The device SerialNumber extracted from the X.509 SUDI Leaf Certificate.
+	// The device SerialNumber extracted from the X.509 SUDI leaf certificate.
 	SerialNumber *string `json:"SerialNumber,omitempty"`
-	// The signature is obtained by taking the base64 encoding of the Serial Number + PID + Status, taking the SHA256 hash and then signing with the SUDI X.509 Leaf Certificate.
+	// The base64-encoding of a SUDI signature, signed with the provided Trust Anchor Module (TAM) private key and signatureScheme.
 	Signature *string `json:"Signature,omitempty"`
-	// The validation status of the device. * `DeviceStatusUnknown` - SUDI validation is done on the establishment of a connection. Before a device connects or after it disconnects, the SUDI validation status is set to this value. * `Verified` - The device returned a valid PID, Serial Number, Status and X.509 Leaf Certificate. The certificate signing chain was validated. * `CertificateValidationFailed` - Validation of the certificate signing chain failed. * `UnsupportedFirmware` - The firmware version of the Cisco IMC that is installed does not contain the SUDI APIs needed to perform validation. * `UnsupportedHardware` - The device is a model that does not contain a Trust Anchor Module (TAM) and thus cannot be validated. * `DeviceNotResponding` - A request was sent to the device, but no response was received.
-	Status               *string                 `json:"Status,omitempty"`
+	// The validation status of the device. * `DeviceStatusUnknown` - SUDI validation is done on the establishment of a connection. Before a device connects or after it disconnects, the SUDI validation status is set to this value. * `Verified` - The SUDI signature and certificate have been validated by the device. The device PID, Serial Number, Status and X.509 certificates were validated by a Trusted Anchor Module. The Intersight services have not cross-validated the SUDI signature. * `EndToEndVerified` - The SUDI signature and certificate have been validated by the device and by the Intersight services. The device PID, Serial Number, Status and X.509 certificates were validated by a Trusted Anchor Module. * `CertificateValidationFailed` - Validation of the certificate signing chain failed. * `UnsupportedSignatureScheme` - The SUDI signature scheme is not supported. * `SignatureValidationFailed` - Validation of the SUDI signature has failed. * `UnsupportedFirmware` - The firmware version of the Cisco IMC that is installed does not contain the SUDI APIs needed to perform validation. * `UnsupportedHardware` - The device is a model that does not contain a Trust Anchor Module (TAM) and thus cannot be validated. * `DeviceError` - The device returned an error when it received a SUDIrequrest request. * `DeviceNotResponding` - A request was sent to the device, but no response was received. * `InvalidSignatureEncoding` - The encoding of the SUDI signature is invalid. * `MissingSignature` - The SUDI signature is missing. * `MissingSignatureScheme` - The SUDI signature scheme is missing. * `MissingCertificate` - The SUDI certificate is missing. * `InvalidCertificateEncoding` - The encoding of the SUDI certificate is invalid. * `InvalidIdentity` - The model or serial number of the device is either missing or does not match the certificate attributes. * `Suspect` - The DC claims the SUDI has been verified, but there is no way to validate the claim.
+	Status *string `json:"Status,omitempty"`
+	// The detailed validation status of the device, such as an error message explaining why the validation failed.
+	StatusDetails        *string                 `json:"StatusDetails,omitempty"`
 	SudiCertificate      NullableX509Certificate `json:"SudiCertificate,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
@@ -43,8 +45,6 @@ func NewAssetSudiInfoAllOf(classId string, objectType string) *AssetSudiInfoAllO
 	this := AssetSudiInfoAllOf{}
 	this.ClassId = classId
 	this.ObjectType = objectType
-	var status string = "DeviceStatusUnknown"
-	this.Status = &status
 	return &this
 }
 
@@ -57,8 +57,6 @@ func NewAssetSudiInfoAllOfWithDefaults() *AssetSudiInfoAllOf {
 	this.ClassId = classId
 	var objectType string = "asset.SudiInfo"
 	this.ObjectType = objectType
-	var status string = "DeviceStatusUnknown"
-	this.Status = &status
 	return &this
 }
 
@@ -238,6 +236,38 @@ func (o *AssetSudiInfoAllOf) SetStatus(v string) {
 	o.Status = &v
 }
 
+// GetStatusDetails returns the StatusDetails field value if set, zero value otherwise.
+func (o *AssetSudiInfoAllOf) GetStatusDetails() string {
+	if o == nil || o.StatusDetails == nil {
+		var ret string
+		return ret
+	}
+	return *o.StatusDetails
+}
+
+// GetStatusDetailsOk returns a tuple with the StatusDetails field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AssetSudiInfoAllOf) GetStatusDetailsOk() (*string, bool) {
+	if o == nil || o.StatusDetails == nil {
+		return nil, false
+	}
+	return o.StatusDetails, true
+}
+
+// HasStatusDetails returns a boolean if a field has been set.
+func (o *AssetSudiInfoAllOf) HasStatusDetails() bool {
+	if o != nil && o.StatusDetails != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetStatusDetails gets a reference to the given string and assigns it to the StatusDetails field.
+func (o *AssetSudiInfoAllOf) SetStatusDetails(v string) {
+	o.StatusDetails = &v
+}
+
 // GetSudiCertificate returns the SudiCertificate field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *AssetSudiInfoAllOf) GetSudiCertificate() X509Certificate {
 	if o == nil || o.SudiCertificate.Get() == nil {
@@ -301,6 +331,9 @@ func (o AssetSudiInfoAllOf) MarshalJSON() ([]byte, error) {
 	if o.Status != nil {
 		toSerialize["Status"] = o.Status
 	}
+	if o.StatusDetails != nil {
+		toSerialize["StatusDetails"] = o.StatusDetails
+	}
 	if o.SudiCertificate.IsSet() {
 		toSerialize["SudiCertificate"] = o.SudiCertificate.Get()
 	}
@@ -328,6 +361,7 @@ func (o *AssetSudiInfoAllOf) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "SerialNumber")
 		delete(additionalProperties, "Signature")
 		delete(additionalProperties, "Status")
+		delete(additionalProperties, "StatusDetails")
 		delete(additionalProperties, "SudiCertificate")
 		o.AdditionalProperties = additionalProperties
 	}

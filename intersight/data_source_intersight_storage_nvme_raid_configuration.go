@@ -174,7 +174,7 @@ func getStorageNvmeRaidConfigurationSchema() map[string]*schema.Schema {
 									Optional:    true,
 								},
 								"name": {
-									Description: "The name of the virtual drive. The name can be between 1 and 15 alphanumeric characters. Spaces or any special characters other than - (hyphen), _ (underscore), : (colon), and . (period) are not allowed.",
+									Description: "The name of the virtual drive. The name can be between 1 and 15 alphanumeric characters. Spaces or any special characters other than - (hyphen) and _ (underscore) are not allowed.",
 									Type:        schema.TypeString,
 									Optional:    true,
 								},
@@ -242,7 +242,7 @@ func getStorageNvmeRaidConfigurationSchema() map[string]*schema.Schema {
 									Optional:    true,
 								},
 								"name": {
-									Description: "The name of the virtual drive. The name can be between 1 and 15 alphanumeric characters. Spaces or any special characters other than - (hyphen), _ (underscore), : (colon), and . (period) are not allowed.",
+									Description: "The name of the virtual drive. The name can be between 1 and 15 alphanumeric characters. Spaces or any special characters other than - (hyphen) and _ (underscore) are not allowed.",
 									Type:        schema.TypeString,
 									Optional:    true,
 								},

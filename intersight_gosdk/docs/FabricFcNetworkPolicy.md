@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "fabric.FcNetworkPolicy"]
 **EnableTrunking** | Pointer to **bool** | Enable or Disable Trunking on all of configured FC uplink ports. | [optional] 
 **Organization** | Pointer to [**OrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
-**Profiles** | Pointer to [**[]FabricSwitchProfileRelationship**](FabricSwitchProfileRelationship.md) | An array of relationships to fabricSwitchProfile resources. | [optional] 
+**Profiles** | Pointer to [**[]FabricBaseSwitchProfileRelationship**](FabricBaseSwitchProfileRelationship.md) | An array of relationships to fabricBaseSwitchProfile resources. | [optional] 
 
 ## Methods
 
@@ -121,20 +121,20 @@ HasOrganization returns a boolean if a field has been set.
 
 ### GetProfiles
 
-`func (o *FabricFcNetworkPolicy) GetProfiles() []FabricSwitchProfileRelationship`
+`func (o *FabricFcNetworkPolicy) GetProfiles() []FabricBaseSwitchProfileRelationship`
 
 GetProfiles returns the Profiles field if non-nil, zero value otherwise.
 
 ### GetProfilesOk
 
-`func (o *FabricFcNetworkPolicy) GetProfilesOk() (*[]FabricSwitchProfileRelationship, bool)`
+`func (o *FabricFcNetworkPolicy) GetProfilesOk() (*[]FabricBaseSwitchProfileRelationship, bool)`
 
 GetProfilesOk returns a tuple with the Profiles field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetProfiles
 
-`func (o *FabricFcNetworkPolicy) SetProfiles(v []FabricSwitchProfileRelationship)`
+`func (o *FabricFcNetworkPolicy) SetProfiles(v []FabricBaseSwitchProfileRelationship)`
 
 SetProfiles sets Profiles field to given value.
 

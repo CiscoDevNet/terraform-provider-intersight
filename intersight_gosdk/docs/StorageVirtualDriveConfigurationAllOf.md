@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "storage.VirtualDriveConfiguration"]
 **BootDrive** | Pointer to **bool** | This flag enables this virtual drive to be used as a boot drive. | [optional] 
 **ExpandToAvailable** | Pointer to **bool** | This flag enables the virtual drive to use all the space available in the disk group. When this flag is enabled, the size property is ignored. | [optional] 
-**Name** | Pointer to **string** | The name of the virtual drive. The name can be between 1 and 15 alphanumeric characters. Spaces or any special characters other than - (hyphen), _ (underscore), : (colon), and . (period) are not allowed. | [optional] 
+**Name** | Pointer to **string** | The name of the virtual drive. The name can be between 1 and 15 alphanumeric characters. Spaces or any special characters other than - (hyphen) and _ (underscore) are not allowed. | [optional] 
 **Size** | Pointer to **int64** | Virtual drive size in MebiBytes. Size is mandatory field except when the Expand to Available option is enabled. | [optional] 
 **VirtualDrivePolicy** | Pointer to [**NullableStorageVirtualDrivePolicy**](StorageVirtualDrivePolicy.md) |  | [optional] 
 

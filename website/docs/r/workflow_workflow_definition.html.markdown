@@ -90,6 +90,7 @@ This complex property has following sub-properties:
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
   + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
 * `create_time`:(string)(ReadOnly) The time when this managed object was created. 
+* `create_user`:(string)(ReadOnly) The user identifier who created or cloned the workflow definition. 
 * `default_version`:(bool) When true this will be the workflow version that is used when a specific workflow definition version is not specified. The default version is used when user executes a workflow without specifying a version or when workflow is included in another workflow without a specific version. The very first workflow definition created with a name will be set as the default version, after that user can explicitly set any version of the workflow definition as the default version. 
 * `description`:(string) The description for this workflow. 
 * `domain_group_moid`:(string)(ReadOnly) The DomainGroup ID for this managed object. 
@@ -134,6 +135,7 @@ This complex property has following sub-properties:
 * `max_task_count`:(int)(ReadOnly) The maximum number of tasks that can be executed on this workflow. 
 * `max_worker_task_count`:(int)(ReadOnly) The maximum number of external (worker) tasks that can be executed on this workflow. 
 * `mod_time`:(string)(ReadOnly) The time when this managed object was last modified. 
+* `mod_user`:(string)(ReadOnly) The user identifier who last updated the workflow definition. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `name`:(string) The name for this workflow. You can have multiple versions of the workflow with the same name. Name can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.) or an underscore (_). 
 * `output_definition`:(Array)
@@ -180,8 +182,10 @@ This complex property has following sub-properties:
 This complex property has following sub-properties:
   + `cloneable`:(bool)(ReadOnly) When set to false workflow is not cloneable. It is set to true only if Workflow is not internal and it does not have any internal tasks. 
   + `enable_debug`:(bool) Enabling this flag will capture request and response details as debug logs for tasks that are using workflow.BatchApi for implementation. For other tasks in the workflow which are not based on workflow.BatchApi logs will not be generated. 
+  + `enable_publish_status`:(bool) This flag determines if this workflow publish status is enforced or not. 
   + `external_meta`:(bool)(ReadOnly) When set to false the workflow is owned by the system and used for internal services. Such workflows cannot be directly used by external entities. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+  + `publish_status`:(string) The workflow publish status (Draft, Published, Archived), this property is relevant only when enablePublishStatus is set to true.* `Draft` - The enum specifies the option as Draft which means the meta definition is being designed and tested.* `Published` - The enum specifies the option as Published which means the meta definition is ready for consumption.* `Archived` - The enum specifies the option as Archived which means the meta definition is archived and can no longer be consumed. 
   + `retryable`:(bool) When set to true, the failed workflow executions from this workflow definition can be retried for up to 2 weeks since the last modification time. After two weeks of inactivity on the workflow execution, the option to retry the failed workflow will be disabled. 
   + `rollback_on_cancel`:(bool) When set to true, the changes are automatically rolled back if the workflow execution is canceled. 
   + `rollback_on_failure`:(bool) When set to true, the changes are automatically rolled back if the workflow fails to execute. 
@@ -711,9 +715,63 @@ A SuccessEndTask denotes the successful completion of a workflow.
 
 ### [workflow.WaitTask](#argument-reference)
 A WaitTask will remain in progress until marked success or failed by an external trigger. The timeout for wait task is 180 days, so a workflow can wait for task status update for upto 180 days. Currently the only supported means to update the task status is through an API that provides the status of the task runtime instance. Once the wait task status has been set the workflow will continue with the execution based on the task status.
+* `input_definition`:(Array)
+This complex property has following sub-properties:
+  + `additional_properties`:(JSON as string) - Additional Properties as per object type, can be added as JSON using `jsonencode()`. Allowed Types are: [workflow.ArrayDataType](#workflowArrayDataType)
+[workflow.CustomDataType](#workflowCustomDataType)
+[workflow.DynamicTemplateParserDataType](#workflowDynamicTemplateParserDataType)
+[workflow.MoInventoryDataType](#workflowMoInventoryDataType)
+[workflow.MoReferenceAutoDataType](#workflowMoReferenceAutoDataType)
+[workflow.MoReferenceDataType](#workflowMoReferenceDataType)
+[workflow.PrimitiveDataType](#workflowPrimitiveDataType)
+[workflow.TargetDataType](#workflowTargetDataType)
+  + `default`:(HashMap) - Default value for the data type. If default value was provided and the input was required the default value will be used as the input. 
+This complex property has following sub-properties:
+    + `is_value_set`:(bool)(ReadOnly) A flag that indicates whether a default value is given or not. This flag will be useful in case of the secure parameter where the value will be filtered out in API responses. 
+    + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+    + `override`:(bool) Override the default value provided for the data type. When true, allow the user to enter value for the data type. 
+    + `value`:(JSON as string) Default value for the data type. If default value was provided and the input was required the default value will be used as the input. 
+  + `description`:(string) Provide a detailed description of the data type. 
+  + `display_meta`:(HashMap) - Captures the meta data needed for displaying workflow data types in Intersight User Interface. 
+This complex property has following sub-properties:
+    + `inventory_selector`:(bool) Inventory selector specified for primitive data property should be used in Intersight User Interface. 
+    + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+    + `widget_type`:(string) Specify the widget type for data display.* `None` - Display none of the widget types.* `Radio` - Display the widget as a radio button.* `Dropdown` - Display the widget as a dropdown.* `GridSelector` - Display the widget as a selector.* `DrawerSelector` - Display the widget as a selector. 
+  + `input_parameters`:(JSON as string) JSON formatted mapping from other property of the definition to the current property. Input parameter mapping is supported only for custom data type property in workflow definition and custom data type definition. The format to specify mapping ina workflow definition when source property is of scalar types is '${workflow.input.property}'. The format to specify mapping when the source property is of object reference and mapping needs to be made to the property of the object is '${workflow.input.property.subproperty}'. The format to specify mapping in a custom data type definition is '${datatype.type.property}'. When the current property is of non-scalar type like composite custom data type, then mapping can be provided to the individual property of the custom data type like 'cdt_property:${workflow.input.property}'. 
+  + `label`:(string) Descriptive label for the data type. Label can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), space ( ), forward slash (/) or an underscore (_). The first and last character in label must be an alphanumeric character. 
+  + `name`:(string) Descriptive name for the data type. Name can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-) or an underscore (_). The first and last character in name must be an alphanumeric character. 
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
+  + `required`:(bool) Specifies whether this parameter is required. The field is applicable for task and workflow. 
 * `input_parameters`:(JSON as string) JSON formatted key-value pairs that define the inputs given to the task. Mapping for task inputs can be provided as either static values, direct mapping or advanced mapping using templates. The direct mapping can be specified as '${Source.< input | output | variable>.<JSONPath>}'. 'Source' can be either workflow or the name of an earlier task within the workflow. You can map the task input to either a workflow input, a task output or a variable. Golang template syntax is supported for advanced mapping. A simple flattened example is \ InputParameters\ :{ \ input1\ :\ ${workflow.variable.var1}\ , \ input2\ :\ prefixStr_{{.global.workflow.input.input1}}\  } where task input1 is mapped directly to variable var1 and task input2 is using a template to prefix a string to workflow input1 and then assign that value. 
 * `on_failure`:(string) This specifies the name of the next task to run if Task fails.  This is the unique name given to the task instance within the workflow. In a graph model, denotes an edge to another Task Node. 
 * `on_success`:(string) This specifies the name of the next task to run if Task succeeds.  This is the unique name given to the task instance within the workflow. In a graph model, denotes an edge to another Task Node. 
+* `output_definition`:(Array)
+This complex property has following sub-properties:
+  + `additional_properties`:(JSON as string) - Additional Properties as per object type, can be added as JSON using `jsonencode()`. Allowed Types are: [workflow.ArrayDataType](#workflowArrayDataType)
+[workflow.CustomDataType](#workflowCustomDataType)
+[workflow.DynamicTemplateParserDataType](#workflowDynamicTemplateParserDataType)
+[workflow.MoInventoryDataType](#workflowMoInventoryDataType)
+[workflow.MoReferenceAutoDataType](#workflowMoReferenceAutoDataType)
+[workflow.MoReferenceDataType](#workflowMoReferenceDataType)
+[workflow.PrimitiveDataType](#workflowPrimitiveDataType)
+[workflow.TargetDataType](#workflowTargetDataType)
+  + `default`:(HashMap) - Default value for the data type. If default value was provided and the input was required the default value will be used as the input. 
+This complex property has following sub-properties:
+    + `is_value_set`:(bool)(ReadOnly) A flag that indicates whether a default value is given or not. This flag will be useful in case of the secure parameter where the value will be filtered out in API responses. 
+    + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+    + `override`:(bool) Override the default value provided for the data type. When true, allow the user to enter value for the data type. 
+    + `value`:(JSON as string) Default value for the data type. If default value was provided and the input was required the default value will be used as the input. 
+  + `description`:(string) Provide a detailed description of the data type. 
+  + `display_meta`:(HashMap) - Captures the meta data needed for displaying workflow data types in Intersight User Interface. 
+This complex property has following sub-properties:
+    + `inventory_selector`:(bool) Inventory selector specified for primitive data property should be used in Intersight User Interface. 
+    + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+    + `widget_type`:(string) Specify the widget type for data display.* `None` - Display none of the widget types.* `Radio` - Display the widget as a radio button.* `Dropdown` - Display the widget as a dropdown.* `GridSelector` - Display the widget as a selector.* `DrawerSelector` - Display the widget as a selector. 
+  + `input_parameters`:(JSON as string) JSON formatted mapping from other property of the definition to the current property. Input parameter mapping is supported only for custom data type property in workflow definition and custom data type definition. The format to specify mapping ina workflow definition when source property is of scalar types is '${workflow.input.property}'. The format to specify mapping when the source property is of object reference and mapping needs to be made to the property of the object is '${workflow.input.property.subproperty}'. The format to specify mapping in a custom data type definition is '${datatype.type.property}'. When the current property is of non-scalar type like composite custom data type, then mapping can be provided to the individual property of the custom data type like 'cdt_property:${workflow.input.property}'. 
+  + `label`:(string) Descriptive label for the data type. Label can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), space ( ), forward slash (/) or an underscore (_). The first and last character in label must be an alphanumeric character. 
+  + `name`:(string) Descriptive name for the data type. Name can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-) or an underscore (_). The first and last character in name must be an alphanumeric character. 
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
+  + `required`:(bool) Specifies whether this parameter is required. The field is applicable for task and workflow. 
 * `prompts`:(Array)
 This complex property has following sub-properties:
   + `description`:(string) Description that give more details about what it means to pick this prompt option for the wait task. 

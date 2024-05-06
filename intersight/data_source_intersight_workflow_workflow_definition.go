@@ -140,6 +140,11 @@ func getWorkflowWorkflowDefinitionSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"create_user": {
+			Description: "The user identifier who created or cloned the workflow definition.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"default_version": {
 			Description: "When true this will be the workflow version that is used when a specific workflow definition version is not specified. The default version is used when user executes a workflow without specifying a version or when workflow is included in another workflow without a specific version. The very first workflow definition created with a name will be set as the default version, after that user can explicitly set any version of the workflow definition as the default version.",
 			Type:        schema.TypeBool,
@@ -348,6 +353,11 @@ func getWorkflowWorkflowDefinitionSchema() map[string]*schema.Schema {
 		},
 		"mod_time": {
 			Description: "The time when this managed object was last modified.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"mod_user": {
+			Description: "The user identifier who last updated the workflow definition.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -595,6 +605,11 @@ func getWorkflowWorkflowDefinitionSchema() map[string]*schema.Schema {
 						Type:        schema.TypeBool,
 						Optional:    true,
 					},
+					"enable_publish_status": {
+						Description: "This flag determines if this workflow publish status is enforced or not.",
+						Type:        schema.TypeBool,
+						Optional:    true,
+					},
 					"external_meta": {
 						Description: "When set to false the workflow is owned by the system and used for internal services. Such workflows cannot be directly used by external entities.",
 						Type:        schema.TypeBool,
@@ -602,6 +617,11 @@ func getWorkflowWorkflowDefinitionSchema() map[string]*schema.Schema {
 					},
 					"object_type": {
 						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"publish_status": {
+						Description: "The workflow publish status (Draft, Published, Archived), this property is relevant only when enablePublishStatus is set to true.\n* `Draft` - The enum specifies the option as Draft which means the meta definition is being designed and tested.\n* `Published` - The enum specifies the option as Published which means the meta definition is ready for consumption.\n* `Archived` - The enum specifies the option as Archived which means the meta definition is archived and can no longer be consumed.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
@@ -1258,6 +1278,11 @@ func dataSourceWorkflowWorkflowDefinitionRead(c context.Context, d *schema.Resou
 		o.SetCreateTime(x)
 	}
 
+	if v, ok := d.GetOk("create_user"); ok {
+		x := (v.(string))
+		o.SetCreateUser(x)
+	}
+
 	if v, ok := d.GetOkExists("default_version"); ok {
 		x := (v.(bool))
 		o.SetDefaultVersion(x)
@@ -1518,6 +1543,11 @@ func dataSourceWorkflowWorkflowDefinitionRead(c context.Context, d *schema.Resou
 	if v, ok := d.GetOk("mod_time"); ok {
 		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetModTime(x)
+	}
+
+	if v, ok := d.GetOk("mod_user"); ok {
+		x := (v.(string))
+		o.SetModUser(x)
 	}
 
 	if v, ok := d.GetOk("moid"); ok {
@@ -1818,10 +1848,22 @@ func dataSourceWorkflowWorkflowDefinitionRead(c context.Context, d *schema.Resou
 					o.SetEnableDebug(x)
 				}
 			}
+			if v, ok := l["enable_publish_status"]; ok {
+				{
+					x := (v.(bool))
+					o.SetEnablePublishStatus(x)
+				}
+			}
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
 					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["publish_status"]; ok {
+				{
+					x := (v.(string))
+					o.SetPublishStatus(x)
 				}
 			}
 			if v, ok := l["retryable"]; ok {
@@ -2390,6 +2432,7 @@ func dataSourceWorkflowWorkflowDefinitionRead(c context.Context, d *schema.Resou
 				temp["cloned_from"] = flattenMapWorkflowWorkflowDefinitionRelationship(s.GetClonedFrom(), d)
 
 				temp["create_time"] = (s.GetCreateTime()).String()
+				temp["create_user"] = (s.GetCreateUser())
 				temp["default_version"] = (s.GetDefaultVersion())
 				temp["description"] = (s.GetDescription())
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
@@ -2403,6 +2446,7 @@ func dataSourceWorkflowWorkflowDefinitionRead(c context.Context, d *schema.Resou
 				temp["max_worker_task_count"] = (s.GetMaxWorkerTaskCount())
 
 				temp["mod_time"] = (s.GetModTime()).String()
+				temp["mod_user"] = (s.GetModUser())
 				temp["moid"] = (s.GetMoid())
 				temp["name"] = (s.GetName())
 				temp["object_type"] = (s.GetObjectType())

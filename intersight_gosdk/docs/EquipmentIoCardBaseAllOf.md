@@ -20,6 +20,7 @@ Name | Type | Description | Notes
 **HostPorts** | Pointer to [**[]EtherHostPortRelationship**](EtherHostPortRelationship.md) | An array of relationships to etherHostPort resources. | [optional] 
 **MgmtController** | Pointer to [**ManagementControllerRelationship**](ManagementControllerRelationship.md) |  | [optional] 
 **NetworkPorts** | Pointer to [**[]EtherNetworkPortRelationship**](EtherNetworkPortRelationship.md) | An array of relationships to etherNetworkPort resources. | [optional] 
+**SubGroup** | Pointer to [**[]PortSubGroupRelationship**](PortSubGroupRelationship.md) | An array of relationships to portSubGroup resources. | [optional] [readonly] 
 
 ## Methods
 
@@ -460,6 +461,41 @@ HasNetworkPorts returns a boolean if a field has been set.
 `func (o *EquipmentIoCardBaseAllOf) UnsetNetworkPorts()`
 
 UnsetNetworkPorts ensures that no value is present for NetworkPorts, not even an explicit nil
+### GetSubGroup
+
+`func (o *EquipmentIoCardBaseAllOf) GetSubGroup() []PortSubGroupRelationship`
+
+GetSubGroup returns the SubGroup field if non-nil, zero value otherwise.
+
+### GetSubGroupOk
+
+`func (o *EquipmentIoCardBaseAllOf) GetSubGroupOk() (*[]PortSubGroupRelationship, bool)`
+
+GetSubGroupOk returns a tuple with the SubGroup field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSubGroup
+
+`func (o *EquipmentIoCardBaseAllOf) SetSubGroup(v []PortSubGroupRelationship)`
+
+SetSubGroup sets SubGroup field to given value.
+
+### HasSubGroup
+
+`func (o *EquipmentIoCardBaseAllOf) HasSubGroup() bool`
+
+HasSubGroup returns a boolean if a field has been set.
+
+### SetSubGroupNil
+
+`func (o *EquipmentIoCardBaseAllOf) SetSubGroupNil(b bool)`
+
+ SetSubGroupNil sets the value for SubGroup to be an explicit nil
+
+### UnsetSubGroup
+`func (o *EquipmentIoCardBaseAllOf) UnsetSubGroup()`
+
+UnsetSubGroup ensures that no value is present for SubGroup, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

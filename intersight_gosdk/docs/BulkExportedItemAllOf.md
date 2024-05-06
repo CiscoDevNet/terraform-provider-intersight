@@ -6,8 +6,11 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "bulk.ExportedItem"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "bulk.ExportedItem"]
+**ExcludePeers** | Pointer to **[]string** |  | [optional] 
+**ExcludeRelations** | Pointer to **bool** | Do not export relationships. | [optional] [readonly] 
 **ExportTags** | Pointer to **bool** | Specifies whether tags must be exported for item MO. | [optional] [readonly] [default to false]
 **FileName** | Pointer to **string** | Name of the file corresponding to item MO. | [optional] [readonly] 
+**IncludeOrgIdentity** | Pointer to **bool** | Indicates that exported references for objects which are organization owned should include the organization reference along with the other identity properties. | [optional] [readonly] 
 **Item** | Pointer to [**MoMoRef**](MoMoRef.md) |  | [optional] 
 **Name** | Pointer to **string** | MO item identity (the moref corresponding to item) expressed as a string. | [optional] [readonly] 
 **ServiceName** | Pointer to **string** | Name of the target service that owns the item MO. Service responsible for handling exported item mo notifications. | [optional] [readonly] 
@@ -77,6 +80,66 @@ and a boolean to check if the value has been set.
 SetObjectType sets ObjectType field to given value.
 
 
+### GetExcludePeers
+
+`func (o *BulkExportedItemAllOf) GetExcludePeers() []string`
+
+GetExcludePeers returns the ExcludePeers field if non-nil, zero value otherwise.
+
+### GetExcludePeersOk
+
+`func (o *BulkExportedItemAllOf) GetExcludePeersOk() (*[]string, bool)`
+
+GetExcludePeersOk returns a tuple with the ExcludePeers field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetExcludePeers
+
+`func (o *BulkExportedItemAllOf) SetExcludePeers(v []string)`
+
+SetExcludePeers sets ExcludePeers field to given value.
+
+### HasExcludePeers
+
+`func (o *BulkExportedItemAllOf) HasExcludePeers() bool`
+
+HasExcludePeers returns a boolean if a field has been set.
+
+### SetExcludePeersNil
+
+`func (o *BulkExportedItemAllOf) SetExcludePeersNil(b bool)`
+
+ SetExcludePeersNil sets the value for ExcludePeers to be an explicit nil
+
+### UnsetExcludePeers
+`func (o *BulkExportedItemAllOf) UnsetExcludePeers()`
+
+UnsetExcludePeers ensures that no value is present for ExcludePeers, not even an explicit nil
+### GetExcludeRelations
+
+`func (o *BulkExportedItemAllOf) GetExcludeRelations() bool`
+
+GetExcludeRelations returns the ExcludeRelations field if non-nil, zero value otherwise.
+
+### GetExcludeRelationsOk
+
+`func (o *BulkExportedItemAllOf) GetExcludeRelationsOk() (*bool, bool)`
+
+GetExcludeRelationsOk returns a tuple with the ExcludeRelations field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetExcludeRelations
+
+`func (o *BulkExportedItemAllOf) SetExcludeRelations(v bool)`
+
+SetExcludeRelations sets ExcludeRelations field to given value.
+
+### HasExcludeRelations
+
+`func (o *BulkExportedItemAllOf) HasExcludeRelations() bool`
+
+HasExcludeRelations returns a boolean if a field has been set.
+
 ### GetExportTags
 
 `func (o *BulkExportedItemAllOf) GetExportTags() bool`
@@ -126,6 +189,31 @@ SetFileName sets FileName field to given value.
 `func (o *BulkExportedItemAllOf) HasFileName() bool`
 
 HasFileName returns a boolean if a field has been set.
+
+### GetIncludeOrgIdentity
+
+`func (o *BulkExportedItemAllOf) GetIncludeOrgIdentity() bool`
+
+GetIncludeOrgIdentity returns the IncludeOrgIdentity field if non-nil, zero value otherwise.
+
+### GetIncludeOrgIdentityOk
+
+`func (o *BulkExportedItemAllOf) GetIncludeOrgIdentityOk() (*bool, bool)`
+
+GetIncludeOrgIdentityOk returns a tuple with the IncludeOrgIdentity field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIncludeOrgIdentity
+
+`func (o *BulkExportedItemAllOf) SetIncludeOrgIdentity(v bool)`
+
+SetIncludeOrgIdentity sets IncludeOrgIdentity field to given value.
+
+### HasIncludeOrgIdentity
+
+`func (o *BulkExportedItemAllOf) HasIncludeOrgIdentity() bool`
+
+HasIncludeOrgIdentity returns a boolean if a field has been set.
 
 ### GetItem
 

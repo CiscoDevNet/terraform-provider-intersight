@@ -20,7 +20,9 @@ The following arguments can be used to get data of already created objects in In
 * `action`:(string) Action to be performed on the export operation.* `Start` - Starts the export operation.* `Cancel` - Cancels the export operation that is in progress. 
 * `create_time`:(string) The time when this managed object was created. 
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
+* `exclude_relations`:(bool) Used to specify that none of the relationships should be exported. 
 * `export_tags`:(bool) Specifies whether tags must be exported and will be considered for all the items MOs. 
+* `include_org_identity`:(bool) Indicates that exported references for objects which are organization owned should include the organization reference along with the other identity properties. 
 * `mod_time`:(string) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `name`:(string) An identifier for the export instance. Name can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-) or an underscore (_). 

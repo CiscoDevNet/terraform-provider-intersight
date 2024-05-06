@@ -8,24 +8,21 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "vnic.FcIf"]
 **Name** | Pointer to **string** | Name of the virtual fibre channel interface. | [optional] 
 **Order** | Pointer to **int64** | The order in which the virtual interface is brought up. The order assigned to an interface should be unique for all the Ethernet and Fibre-Channel interfaces on each PCI link on a VIC adapter. The order should start from zero with no overlaps. The maximum value of PCI order is limited by the number of virtual interfaces (Ethernet and Fibre-Channel) on each PCI link on a VIC adapter. All VIC adapters have a single PCI link except VIC 1340, VIC 1380 and VIC 1385 which have two. | [optional] 
-**PersistentBindings** | Pointer to **bool** | Enables retention of LUN ID associations in memory until they are manually cleared. | [optional] 
-**PinGroupName** | Pointer to **string** | Pingroup name associated to vfc for static pinning. SCP deploy will resolve pingroup name and fetches the correspoding uplink port/port channel to pin the vfc traffic. | [optional] 
+**OverriddenList** | Pointer to **[]string** |  | [optional] 
 **Placement** | Pointer to [**NullableVnicPlacementSettings**](VnicPlacementSettings.md) |  | [optional] 
 **StaticWwpnAddress** | Pointer to **string** | The WWPN address must be in hexadecimal format xx:xx:xx:xx:xx:xx:xx:xx. Allowed ranges are 20:00:00:00:00:00:00:00 to 20:FF:FF:FF:FF:FF:FF:FF or from 50:00:00:00:00:00:00:00 to 5F:FF:FF:FF:FF:FF:FF:FF. To ensure uniqueness of WWN&#39;s in the SAN fabric, you are strongly encouraged to use the WWN prefix - 20:00:00:25:B5:xx:xx:xx. | [optional] 
-**Type** | Pointer to **string** | VHBA Type configuration for SAN Connectivity Policy. This configuration is supported only on Cisco VIC 14XX series and higher series of adapters. * &#x60;fc-initiator&#x60; - The default value set for vHBA Type Configuration. Fc-initiator specifies vHBA as a consumer of storage. Enables SCSI commands to transfer data and status information between host and target storage systems. * &#x60;fc-nvme-initiator&#x60; - Fc-nvme-initiator specifies vHBA as a consumer of storage. Enables NVMe-based message commands to transfer data and status information between host and target storage systems. * &#x60;fc-nvme-target&#x60; - Fc-nvme-target specifies vHBA as a provider of storage volumes to initiators. Enables NVMe-based message commands to transfer data and status information between host and target storage systems. Currently tech-preview, only enabled with an asynchronous driver. * &#x60;fc-target&#x60; - Fc-target specifies vHBA as a provider of storage volumes to initiators. Enables SCSI commands to transfer data and status information between host and target storage systems. fc-target is enabled only with an asynchronous driver. | [optional] [default to "fc-initiator"]
+**TemplateActions** | Pointer to [**[]MotemplateActionEntry**](MotemplateActionEntry.md) |  | [optional] 
+**TemplateSyncErrors** | Pointer to [**[]MotemplateSyncError**](MotemplateSyncError.md) |  | [optional] 
+**TemplateSyncStatus** | Pointer to **string** | The sync status of the current MO wrt the attached Template MO. * &#x60;None&#x60; - The Enum value represents that the object is not attached to any template. * &#x60;OK&#x60; - The Enum value represents that the object values are in sync with attached template. * &#x60;Scheduled&#x60; - The Enum value represents that the object sync from attached template is scheduled from template. * &#x60;InProgress&#x60; - The Enum value represents that the object sync with the attached template is in progress. * &#x60;OutOfSync&#x60; - The Enum value represents that the object values are not in sync with attached template. | [optional] [readonly] [default to "None"]
 **VifId** | Pointer to **int64** | This should be the same as the channel number of the vfc created on switch in order to set up the data path. The property is applicable only for FI attached servers where a vfc is created on the switch for every vHBA. | [optional] [readonly] 
 **Wwpn** | Pointer to **string** | The WWPN address that is assigned to the vHBA based on the wwn pool that has been assigned to the SAN Connectivity Policy. | [optional] [readonly] 
 **WwpnAddressType** | Pointer to **string** | Type of allocation selected to assign a WWPN address to the vhba. * &#x60;POOL&#x60; - The user selects a pool from which the mac/wwn address will be leased for the Virtual Interface. * &#x60;STATIC&#x60; - The user assigns a static mac/wwn address for the Virtual Interface. | [optional] [default to "POOL"]
-**FcAdapterPolicy** | Pointer to [**VnicFcAdapterPolicyRelationship**](VnicFcAdapterPolicyRelationship.md) |  | [optional] 
-**FcNetworkPolicy** | Pointer to [**VnicFcNetworkPolicyRelationship**](VnicFcNetworkPolicyRelationship.md) |  | [optional] 
-**FcQosPolicy** | Pointer to [**VnicFcQosPolicyRelationship**](VnicFcQosPolicyRelationship.md) |  | [optional] 
-**FcZonePolicies** | Pointer to [**[]FabricFcZonePolicyRelationship**](FabricFcZonePolicyRelationship.md) | An array of relationships to fabricFcZonePolicy resources. | [optional] 
 **Profile** | Pointer to [**PolicyAbstractConfigProfileRelationship**](PolicyAbstractConfigProfileRelationship.md) |  | [optional] 
 **SanConnectivityPolicy** | Pointer to [**VnicSanConnectivityPolicyRelationship**](VnicSanConnectivityPolicyRelationship.md) |  | [optional] 
 **ScpVhba** | Pointer to [**VnicFcIfRelationship**](VnicFcIfRelationship.md) |  | [optional] 
 **SpVhbas** | Pointer to [**[]VnicFcIfRelationship**](VnicFcIfRelationship.md) | An array of relationships to vnicFcIf resources. | [optional] [readonly] 
+**SrcTemplate** | Pointer to [**VnicVhbaTemplateRelationship**](VnicVhbaTemplateRelationship.md) |  | [optional] 
 **WwpnLease** | Pointer to [**FcpoolLeaseRelationship**](FcpoolLeaseRelationship.md) |  | [optional] 
-**WwpnPool** | Pointer to [**FcpoolPoolRelationship**](FcpoolPoolRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -136,56 +133,41 @@ SetOrder sets Order field to given value.
 
 HasOrder returns a boolean if a field has been set.
 
-### GetPersistentBindings
+### GetOverriddenList
 
-`func (o *VnicFcIfAllOf) GetPersistentBindings() bool`
+`func (o *VnicFcIfAllOf) GetOverriddenList() []string`
 
-GetPersistentBindings returns the PersistentBindings field if non-nil, zero value otherwise.
+GetOverriddenList returns the OverriddenList field if non-nil, zero value otherwise.
 
-### GetPersistentBindingsOk
+### GetOverriddenListOk
 
-`func (o *VnicFcIfAllOf) GetPersistentBindingsOk() (*bool, bool)`
+`func (o *VnicFcIfAllOf) GetOverriddenListOk() (*[]string, bool)`
 
-GetPersistentBindingsOk returns a tuple with the PersistentBindings field if it's non-nil, zero value otherwise
+GetOverriddenListOk returns a tuple with the OverriddenList field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetPersistentBindings
+### SetOverriddenList
 
-`func (o *VnicFcIfAllOf) SetPersistentBindings(v bool)`
+`func (o *VnicFcIfAllOf) SetOverriddenList(v []string)`
 
-SetPersistentBindings sets PersistentBindings field to given value.
+SetOverriddenList sets OverriddenList field to given value.
 
-### HasPersistentBindings
+### HasOverriddenList
 
-`func (o *VnicFcIfAllOf) HasPersistentBindings() bool`
+`func (o *VnicFcIfAllOf) HasOverriddenList() bool`
 
-HasPersistentBindings returns a boolean if a field has been set.
+HasOverriddenList returns a boolean if a field has been set.
 
-### GetPinGroupName
+### SetOverriddenListNil
 
-`func (o *VnicFcIfAllOf) GetPinGroupName() string`
+`func (o *VnicFcIfAllOf) SetOverriddenListNil(b bool)`
 
-GetPinGroupName returns the PinGroupName field if non-nil, zero value otherwise.
+ SetOverriddenListNil sets the value for OverriddenList to be an explicit nil
 
-### GetPinGroupNameOk
+### UnsetOverriddenList
+`func (o *VnicFcIfAllOf) UnsetOverriddenList()`
 
-`func (o *VnicFcIfAllOf) GetPinGroupNameOk() (*string, bool)`
-
-GetPinGroupNameOk returns a tuple with the PinGroupName field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetPinGroupName
-
-`func (o *VnicFcIfAllOf) SetPinGroupName(v string)`
-
-SetPinGroupName sets PinGroupName field to given value.
-
-### HasPinGroupName
-
-`func (o *VnicFcIfAllOf) HasPinGroupName() bool`
-
-HasPinGroupName returns a boolean if a field has been set.
-
+UnsetOverriddenList ensures that no value is present for OverriddenList, not even an explicit nil
 ### GetPlacement
 
 `func (o *VnicFcIfAllOf) GetPlacement() VnicPlacementSettings`
@@ -246,30 +228,100 @@ SetStaticWwpnAddress sets StaticWwpnAddress field to given value.
 
 HasStaticWwpnAddress returns a boolean if a field has been set.
 
-### GetType
+### GetTemplateActions
 
-`func (o *VnicFcIfAllOf) GetType() string`
+`func (o *VnicFcIfAllOf) GetTemplateActions() []MotemplateActionEntry`
 
-GetType returns the Type field if non-nil, zero value otherwise.
+GetTemplateActions returns the TemplateActions field if non-nil, zero value otherwise.
 
-### GetTypeOk
+### GetTemplateActionsOk
 
-`func (o *VnicFcIfAllOf) GetTypeOk() (*string, bool)`
+`func (o *VnicFcIfAllOf) GetTemplateActionsOk() (*[]MotemplateActionEntry, bool)`
 
-GetTypeOk returns a tuple with the Type field if it's non-nil, zero value otherwise
+GetTemplateActionsOk returns a tuple with the TemplateActions field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetType
+### SetTemplateActions
 
-`func (o *VnicFcIfAllOf) SetType(v string)`
+`func (o *VnicFcIfAllOf) SetTemplateActions(v []MotemplateActionEntry)`
 
-SetType sets Type field to given value.
+SetTemplateActions sets TemplateActions field to given value.
 
-### HasType
+### HasTemplateActions
 
-`func (o *VnicFcIfAllOf) HasType() bool`
+`func (o *VnicFcIfAllOf) HasTemplateActions() bool`
 
-HasType returns a boolean if a field has been set.
+HasTemplateActions returns a boolean if a field has been set.
+
+### SetTemplateActionsNil
+
+`func (o *VnicFcIfAllOf) SetTemplateActionsNil(b bool)`
+
+ SetTemplateActionsNil sets the value for TemplateActions to be an explicit nil
+
+### UnsetTemplateActions
+`func (o *VnicFcIfAllOf) UnsetTemplateActions()`
+
+UnsetTemplateActions ensures that no value is present for TemplateActions, not even an explicit nil
+### GetTemplateSyncErrors
+
+`func (o *VnicFcIfAllOf) GetTemplateSyncErrors() []MotemplateSyncError`
+
+GetTemplateSyncErrors returns the TemplateSyncErrors field if non-nil, zero value otherwise.
+
+### GetTemplateSyncErrorsOk
+
+`func (o *VnicFcIfAllOf) GetTemplateSyncErrorsOk() (*[]MotemplateSyncError, bool)`
+
+GetTemplateSyncErrorsOk returns a tuple with the TemplateSyncErrors field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTemplateSyncErrors
+
+`func (o *VnicFcIfAllOf) SetTemplateSyncErrors(v []MotemplateSyncError)`
+
+SetTemplateSyncErrors sets TemplateSyncErrors field to given value.
+
+### HasTemplateSyncErrors
+
+`func (o *VnicFcIfAllOf) HasTemplateSyncErrors() bool`
+
+HasTemplateSyncErrors returns a boolean if a field has been set.
+
+### SetTemplateSyncErrorsNil
+
+`func (o *VnicFcIfAllOf) SetTemplateSyncErrorsNil(b bool)`
+
+ SetTemplateSyncErrorsNil sets the value for TemplateSyncErrors to be an explicit nil
+
+### UnsetTemplateSyncErrors
+`func (o *VnicFcIfAllOf) UnsetTemplateSyncErrors()`
+
+UnsetTemplateSyncErrors ensures that no value is present for TemplateSyncErrors, not even an explicit nil
+### GetTemplateSyncStatus
+
+`func (o *VnicFcIfAllOf) GetTemplateSyncStatus() string`
+
+GetTemplateSyncStatus returns the TemplateSyncStatus field if non-nil, zero value otherwise.
+
+### GetTemplateSyncStatusOk
+
+`func (o *VnicFcIfAllOf) GetTemplateSyncStatusOk() (*string, bool)`
+
+GetTemplateSyncStatusOk returns a tuple with the TemplateSyncStatus field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTemplateSyncStatus
+
+`func (o *VnicFcIfAllOf) SetTemplateSyncStatus(v string)`
+
+SetTemplateSyncStatus sets TemplateSyncStatus field to given value.
+
+### HasTemplateSyncStatus
+
+`func (o *VnicFcIfAllOf) HasTemplateSyncStatus() bool`
+
+HasTemplateSyncStatus returns a boolean if a field has been set.
 
 ### GetVifId
 
@@ -346,116 +398,6 @@ SetWwpnAddressType sets WwpnAddressType field to given value.
 
 HasWwpnAddressType returns a boolean if a field has been set.
 
-### GetFcAdapterPolicy
-
-`func (o *VnicFcIfAllOf) GetFcAdapterPolicy() VnicFcAdapterPolicyRelationship`
-
-GetFcAdapterPolicy returns the FcAdapterPolicy field if non-nil, zero value otherwise.
-
-### GetFcAdapterPolicyOk
-
-`func (o *VnicFcIfAllOf) GetFcAdapterPolicyOk() (*VnicFcAdapterPolicyRelationship, bool)`
-
-GetFcAdapterPolicyOk returns a tuple with the FcAdapterPolicy field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetFcAdapterPolicy
-
-`func (o *VnicFcIfAllOf) SetFcAdapterPolicy(v VnicFcAdapterPolicyRelationship)`
-
-SetFcAdapterPolicy sets FcAdapterPolicy field to given value.
-
-### HasFcAdapterPolicy
-
-`func (o *VnicFcIfAllOf) HasFcAdapterPolicy() bool`
-
-HasFcAdapterPolicy returns a boolean if a field has been set.
-
-### GetFcNetworkPolicy
-
-`func (o *VnicFcIfAllOf) GetFcNetworkPolicy() VnicFcNetworkPolicyRelationship`
-
-GetFcNetworkPolicy returns the FcNetworkPolicy field if non-nil, zero value otherwise.
-
-### GetFcNetworkPolicyOk
-
-`func (o *VnicFcIfAllOf) GetFcNetworkPolicyOk() (*VnicFcNetworkPolicyRelationship, bool)`
-
-GetFcNetworkPolicyOk returns a tuple with the FcNetworkPolicy field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetFcNetworkPolicy
-
-`func (o *VnicFcIfAllOf) SetFcNetworkPolicy(v VnicFcNetworkPolicyRelationship)`
-
-SetFcNetworkPolicy sets FcNetworkPolicy field to given value.
-
-### HasFcNetworkPolicy
-
-`func (o *VnicFcIfAllOf) HasFcNetworkPolicy() bool`
-
-HasFcNetworkPolicy returns a boolean if a field has been set.
-
-### GetFcQosPolicy
-
-`func (o *VnicFcIfAllOf) GetFcQosPolicy() VnicFcQosPolicyRelationship`
-
-GetFcQosPolicy returns the FcQosPolicy field if non-nil, zero value otherwise.
-
-### GetFcQosPolicyOk
-
-`func (o *VnicFcIfAllOf) GetFcQosPolicyOk() (*VnicFcQosPolicyRelationship, bool)`
-
-GetFcQosPolicyOk returns a tuple with the FcQosPolicy field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetFcQosPolicy
-
-`func (o *VnicFcIfAllOf) SetFcQosPolicy(v VnicFcQosPolicyRelationship)`
-
-SetFcQosPolicy sets FcQosPolicy field to given value.
-
-### HasFcQosPolicy
-
-`func (o *VnicFcIfAllOf) HasFcQosPolicy() bool`
-
-HasFcQosPolicy returns a boolean if a field has been set.
-
-### GetFcZonePolicies
-
-`func (o *VnicFcIfAllOf) GetFcZonePolicies() []FabricFcZonePolicyRelationship`
-
-GetFcZonePolicies returns the FcZonePolicies field if non-nil, zero value otherwise.
-
-### GetFcZonePoliciesOk
-
-`func (o *VnicFcIfAllOf) GetFcZonePoliciesOk() (*[]FabricFcZonePolicyRelationship, bool)`
-
-GetFcZonePoliciesOk returns a tuple with the FcZonePolicies field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetFcZonePolicies
-
-`func (o *VnicFcIfAllOf) SetFcZonePolicies(v []FabricFcZonePolicyRelationship)`
-
-SetFcZonePolicies sets FcZonePolicies field to given value.
-
-### HasFcZonePolicies
-
-`func (o *VnicFcIfAllOf) HasFcZonePolicies() bool`
-
-HasFcZonePolicies returns a boolean if a field has been set.
-
-### SetFcZonePoliciesNil
-
-`func (o *VnicFcIfAllOf) SetFcZonePoliciesNil(b bool)`
-
- SetFcZonePoliciesNil sets the value for FcZonePolicies to be an explicit nil
-
-### UnsetFcZonePolicies
-`func (o *VnicFcIfAllOf) UnsetFcZonePolicies()`
-
-UnsetFcZonePolicies ensures that no value is present for FcZonePolicies, not even an explicit nil
 ### GetProfile
 
 `func (o *VnicFcIfAllOf) GetProfile() PolicyAbstractConfigProfileRelationship`
@@ -566,6 +508,31 @@ HasSpVhbas returns a boolean if a field has been set.
 `func (o *VnicFcIfAllOf) UnsetSpVhbas()`
 
 UnsetSpVhbas ensures that no value is present for SpVhbas, not even an explicit nil
+### GetSrcTemplate
+
+`func (o *VnicFcIfAllOf) GetSrcTemplate() VnicVhbaTemplateRelationship`
+
+GetSrcTemplate returns the SrcTemplate field if non-nil, zero value otherwise.
+
+### GetSrcTemplateOk
+
+`func (o *VnicFcIfAllOf) GetSrcTemplateOk() (*VnicVhbaTemplateRelationship, bool)`
+
+GetSrcTemplateOk returns a tuple with the SrcTemplate field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSrcTemplate
+
+`func (o *VnicFcIfAllOf) SetSrcTemplate(v VnicVhbaTemplateRelationship)`
+
+SetSrcTemplate sets SrcTemplate field to given value.
+
+### HasSrcTemplate
+
+`func (o *VnicFcIfAllOf) HasSrcTemplate() bool`
+
+HasSrcTemplate returns a boolean if a field has been set.
+
 ### GetWwpnLease
 
 `func (o *VnicFcIfAllOf) GetWwpnLease() FcpoolLeaseRelationship`
@@ -590,31 +557,6 @@ SetWwpnLease sets WwpnLease field to given value.
 `func (o *VnicFcIfAllOf) HasWwpnLease() bool`
 
 HasWwpnLease returns a boolean if a field has been set.
-
-### GetWwpnPool
-
-`func (o *VnicFcIfAllOf) GetWwpnPool() FcpoolPoolRelationship`
-
-GetWwpnPool returns the WwpnPool field if non-nil, zero value otherwise.
-
-### GetWwpnPoolOk
-
-`func (o *VnicFcIfAllOf) GetWwpnPoolOk() (*FcpoolPoolRelationship, bool)`
-
-GetWwpnPoolOk returns a tuple with the WwpnPool field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetWwpnPool
-
-`func (o *VnicFcIfAllOf) SetWwpnPool(v FcpoolPoolRelationship)`
-
-SetWwpnPool sets WwpnPool field to given value.
-
-### HasWwpnPool
-
-`func (o *VnicFcIfAllOf) HasWwpnPool() bool`
-
-HasWwpnPool returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

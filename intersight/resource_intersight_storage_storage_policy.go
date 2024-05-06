@@ -204,9 +204,9 @@ func resourceStorageStoragePolicy() *schema.Resource {
 							Default:     false,
 						},
 						"name": {
-							Description:  "The name of the virtual drive. The name can be between 1 and 15 alphanumeric characters. Spaces or any special characters other than - (hyphen), _ (underscore), : (colon), and . (period) are not allowed. This field will be pre-populated with the default or user configured value which can be edited.",
+							Description:  "The name of the virtual drive. The name can be between 1 and 15 alphanumeric characters. Spaces or any special characters other than - (hyphen) and _ (underscore) are not allowed. This field will be pre-populated with the default or user configured value which can be edited.",
 							Type:         schema.TypeString,
-							ValidateFunc: validation.All(validation.StringMatch(regexp.MustCompile("^[a-zA-Z0-9\\-\\._:]*$"), ""), StringLenMaximum(15)),
+							ValidateFunc: validation.All(validation.StringMatch(regexp.MustCompile("^[a-zA-Z0-9\\-_]*$"), ""), StringLenMaximum(15)),
 							Optional:     true,
 							Default:      "MStorBootVd",
 						},

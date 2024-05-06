@@ -723,7 +723,7 @@ func getBulkMoDeepClonerSchema() map[string]*schema.Schema {
 			},
 		},
 		"workflow_name_suffix": {
-			Description: "A user friendly short name to identify the workflow, optionally. Name can only contain letters (a-z, A-Z),\nnumbers (0-9), hyphen (-), period (.), colon (:), space ( ), forward slash (/), comma or an underscore (_).",
+			Description: "A user-friendly short name to identify the workflow. Name can only contain letters (a-z, A-Z),\nnumbers (0-9), hyphen (-), period (.), colon (:), space ( ), forward slash (/), comma or an underscore (_).",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},

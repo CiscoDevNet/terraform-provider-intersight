@@ -302,6 +302,20 @@ func resourceBiosPolicy() *schema.Resource {
 				Optional:     true,
 				Default:      "platform-default",
 			},
+			"cbs_cmn_apbdis_df_pstate_rs": {
+				Description:  "BIOS Token for setting Fixed SOC P-State SP5 F19h configuration (0 - 2 P State).",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringMatch(regexp.MustCompile("^([0-2])$|^(platform-default)$"), ""),
+				Optional:     true,
+				Default:      "platform-default",
+			},
+			"cbs_cmn_cpu_avx512": {
+				Description:  "BIOS Token for setting AVX512 configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `Auto` - Value - Auto for configuring CbsCmnCpuAvx512 token.\n* `disabled` - Value - disabled for configuring CbsCmnCpuAvx512 token.\n* `enabled` - Value - enabled for configuring CbsCmnCpuAvx512 token.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"platform-default", "Auto", "disabled", "enabled"}, false),
+				Optional:     true,
+				Default:      "platform-default",
+			},
 			"cbs_cmn_cpu_cpb": {
 				Description:  "BIOS Token for setting Core Performance Boost configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `Auto` - Value - Auto for configuring CbsCmnCpuCpb token.\n* `disabled` - Value - disabled for configuring CbsCmnCpuCpb token.",
 				Type:         schema.TypeString,
@@ -337,6 +351,13 @@ func resourceBiosPolicy() *schema.Resource {
 				Optional:     true,
 				Default:      "platform-default",
 			},
+			"cbs_cmn_cpu_sev_asid_space_limit": {
+				Description:  "BIOS Token for setting SEV-ES ASID Space Limit configuration (1 - 1007 ASIDs).",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringMatch(regexp.MustCompile("^([1-9]|[1-9]\\d|[1-9]\\d{2}|100[0-7])$|^(platform-default)$"), ""),
+				Optional:     true,
+				Default:      "platform-default",
+			},
 			"cbs_cmn_cpu_smee": {
 				Description:  "BIOS Token for setting CPU SMEE configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `Auto` - Value - Auto for configuring CbsCmnCpuSmee token.\n* `disabled` - Value - disabled for configuring CbsCmnCpuSmee token.\n* `enabled` - Value - enabled for configuring CbsCmnCpuSmee token.",
 				Type:         schema.TypeString,
@@ -358,10 +379,24 @@ func resourceBiosPolicy() *schema.Resource {
 				Optional:     true,
 				Default:      "platform-default",
 			},
+			"cbs_cmn_edc_control_throttle": {
+				Description:  "BIOS Token for setting EDC Control Throttle configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `Auto` - Value - Auto for configuring CbsCmnEdcControlThrottle token.\n* `disabled` - Value - disabled for configuring CbsCmnEdcControlThrottle token.\n* `enabled` - Value - enabled for configuring CbsCmnEdcControlThrottle token.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"platform-default", "Auto", "disabled", "enabled"}, false),
+				Optional:     true,
+				Default:      "platform-default",
+			},
 			"cbs_cmn_efficiency_mode_en": {
 				Description:  "BIOS Token for setting Efficiency Mode Enable configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `Auto` - Value - Auto for configuring CbsCmnEfficiencyModeEn token.\n* `Enabled` - Value - Enabled for configuring CbsCmnEfficiencyModeEn token.",
 				Type:         schema.TypeString,
 				ValidateFunc: validation.StringInSlice([]string{"platform-default", "Auto", "Enabled"}, false),
+				Optional:     true,
+				Default:      "platform-default",
+			},
+			"cbs_cmn_efficiency_mode_en_rs": {
+				Description:  "BIOS Token for setting Power Profile Selection F19h configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `Balanced Memory Performance Mode` - Value - Balanced Memory Performance Mode for configuring CbsCmnEfficiencyModeEnRs token.\n* `Efficiency Mode` - Value - Efficiency Mode for configuring CbsCmnEfficiencyModeEnRs token.\n* `High Performance Mode` - Value - High Performance Mode for configuring CbsCmnEfficiencyModeEnRs token.\n* `Maximum IO Performance Mode` - Value - Maximum IO Performance Mode for configuring CbsCmnEfficiencyModeEnRs token.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"platform-default", "Balanced Memory Performance Mode", "Efficiency Mode", "High Performance Mode", "Maximum IO Performance Mode"}, false),
 				Optional:     true,
 				Default:      "platform-default",
 			},
@@ -386,6 +421,20 @@ func resourceBiosPolicy() *schema.Resource {
 				Optional:     true,
 				Default:      "platform-default",
 			},
+			"cbs_cmn_gnb_smu_dffo_rs": {
+				Description:  "BIOS Token for setting DF PState Frequency Optimizer configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `Auto` - Value - Auto for configuring CbsCmnGnbSmuDffoRs token.\n* `disabled` - Value - disabled for configuring CbsCmnGnbSmuDffoRs token.\n* `enabled` - Value - enabled for configuring CbsCmnGnbSmuDffoRs token.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"platform-default", "Auto", "disabled", "enabled"}, false),
+				Optional:     true,
+				Default:      "platform-default",
+			},
+			"cbs_cmn_gnb_smu_dlwm_support": {
+				Description:  "BIOS Token for setting DLWM Support configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `Auto` - Value - Auto for configuring CbsCmnGnbSmuDlwmSupport token.\n* `disabled` - Value - disabled for configuring CbsCmnGnbSmuDlwmSupport token.\n* `enabled` - Value - enabled for configuring CbsCmnGnbSmuDlwmSupport token.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"platform-default", "Auto", "disabled", "enabled"}, false),
+				Optional:     true,
+				Default:      "platform-default",
+			},
 			"cbs_cmn_gnb_smucppc": {
 				Description:  "BIOS Token for setting CPPC configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `Auto` - Value - Auto for configuring CbsCmnGnbSmucppc token.\n* `disabled` - Value - disabled for configuring CbsCmnGnbSmucppc token.\n* `enabled` - Value - enabled for configuring CbsCmnGnbSmucppc token.",
 				Type:         schema.TypeString,
@@ -400,10 +449,52 @@ func resourceBiosPolicy() *schema.Resource {
 				Optional:     true,
 				Default:      "platform-default",
 			},
-			"cbs_cmn_mem_map_bank_interleave_ddr4": {
-				Description:  "BIOS Token for setting Chipset Interleave configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `Auto` - Value - Auto for configuring CbsCmnMemMapBankInterleaveDdr4 token.\n* `disabled` - Value - disabled for configuring CbsCmnMemMapBankInterleaveDdr4 token.",
+			"cbs_cmn_mem_ctrller_pwr_dn_en_ddr": {
+				Description:  "BIOS Token for setting Power Down Enable configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `Auto` - Value - Auto for configuring CbsCmnMemCtrllerPwrDnEnDdr token.\n* `disabled` - Value - disabled for configuring CbsCmnMemCtrllerPwrDnEnDdr token.\n* `enabled` - Value - enabled for configuring CbsCmnMemCtrllerPwrDnEnDdr token.",
 				Type:         schema.TypeString,
-				ValidateFunc: validation.StringInSlice([]string{"platform-default", "Auto", "disabled"}, false),
+				ValidateFunc: validation.StringInSlice([]string{"platform-default", "Auto", "disabled", "enabled"}, false),
+				Optional:     true,
+				Default:      "platform-default",
+			},
+			"cbs_cmn_mem_dram_refresh_rate": {
+				Description:  "BIOS Token for setting DRAM Refresh Rate configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `3.9 usec` - Value - 3.9 usec for configuring CbsCmnMemDramRefreshRate token.\n* `7.8 usec` - Value - 7.8 usec for configuring CbsCmnMemDramRefreshRate token.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"platform-default", "3.9 usec", "7.8 usec"}, false),
+				Optional:     true,
+				Default:      "platform-default",
+			},
+			"cbs_cmn_mem_map_bank_interleave_ddr4": {
+				Description:  "BIOS Token for setting Chipset Interleave configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `Auto` - Value - Auto for configuring CbsCmnMemMapBankInterleaveDdr4 token.\n* `disabled` - Value - disabled for configuring CbsCmnMemMapBankInterleaveDdr4 token.\n* `enabled` - Value - enabled for configuring CbsCmnMemMapBankInterleaveDdr4 token.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"platform-default", "Auto", "disabled", "enabled"}, false),
+				Optional:     true,
+				Default:      "platform-default",
+			},
+			"cbs_cmn_mem_speed_ddr47xx2": {
+				Description:  "BIOS Token for setting Memory Clock Speed 7xx2 configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `667MHz` - Value - 667MHz for configuring CbsCmnMemSpeedDdr47xx2 token.\n* `800MHz` - Value - 800MHz for configuring CbsCmnMemSpeedDdr47xx2 token.\n* `933MHz` - Value - 933MHz for configuring CbsCmnMemSpeedDdr47xx2 token.\n* `1067MHz` - Value - 1067MHz for configuring CbsCmnMemSpeedDdr47xx2 token.\n* `1200MHz` - Value - 1200MHz for configuring CbsCmnMemSpeedDdr47xx2 token.\n* `1333MHz` - Value - 1333MHz for configuring CbsCmnMemSpeedDdr47xx2 token.\n* `1467MHz` - Value - 1467MHz for configuring CbsCmnMemSpeedDdr47xx2 token.\n* `1600MHz` - Value - 1600MHz for configuring CbsCmnMemSpeedDdr47xx2 token.\n* `Auto` - Value - Auto for configuring CbsCmnMemSpeedDdr47xx2 token.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"platform-default", "667MHz", "800MHz", "933MHz", "1067MHz", "1200MHz", "1333MHz", "1467MHz", "1600MHz", "Auto"}, false),
+				Optional:     true,
+				Default:      "platform-default",
+			},
+			"cbs_cmn_mem_speed_ddr47xx3": {
+				Description:  "BIOS Token for setting Memory Clock Speed 7xx3 configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `400MHz` - Value - 400MHz for configuring CbsCmnMemSpeedDdr47xx3 token.\n* `800MHz` - Value - 800MHz for configuring CbsCmnMemSpeedDdr47xx3 token.\n* `933MHz` - Value - 933MHz for configuring CbsCmnMemSpeedDdr47xx3 token.\n* `1067MHz` - Value - 1067MHz for configuring CbsCmnMemSpeedDdr47xx3 token.\n* `1200MHz` - Value - 1200MHz for configuring CbsCmnMemSpeedDdr47xx3 token.\n* `1333MHz` - Value - 1333MHz for configuring CbsCmnMemSpeedDdr47xx3 token.\n* `1467MHz` - Value - 1467MHz for configuring CbsCmnMemSpeedDdr47xx3 token.\n* `1600MHz` - Value - 1600MHz for configuring CbsCmnMemSpeedDdr47xx3 token.\n* `1633MHz` - Value - 1633MHz for configuring CbsCmnMemSpeedDdr47xx3 token.\n* `1667MHz` - Value - 1667MHz for configuring CbsCmnMemSpeedDdr47xx3 token.\n* `1700MHz` - Value - 1700MHz for configuring CbsCmnMemSpeedDdr47xx3 token.\n* `1733MHz` - Value - 1733MHz for configuring CbsCmnMemSpeedDdr47xx3 token.\n* `1767MHz` - Value - 1767MHz for configuring CbsCmnMemSpeedDdr47xx3 token.\n* `1800MHz` - Value - 1800MHz for configuring CbsCmnMemSpeedDdr47xx3 token.\n* `Auto` - Value - Auto for configuring CbsCmnMemSpeedDdr47xx3 token.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"platform-default", "400MHz", "800MHz", "933MHz", "1067MHz", "1200MHz", "1333MHz", "1467MHz", "1600MHz", "1633MHz", "1667MHz", "1700MHz", "1733MHz", "1767MHz", "1800MHz", "Auto"}, false),
+				Optional:     true,
+				Default:      "platform-default",
+			},
+			"cbs_cmn_preferred_io7xx2": {
+				Description:  "BIOS Token for setting Preferred IO 7xx2 configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `Auto` - Value - Auto for configuring CbsCmnPreferredIo7xx2 token.\n* `Manual` - Value - Manual for configuring CbsCmnPreferredIo7xx2 token.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"platform-default", "Auto", "Manual"}, false),
+				Optional:     true,
+				Default:      "platform-default",
+			},
+			"cbs_cmn_preferred_io7xx3": {
+				Description:  "BIOS Token for setting Preferred IO 7xx3 configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `Auto` - Value - Auto for configuring CbsCmnPreferredIo7xx3 token.\n* `Bus` - Value - Bus for configuring CbsCmnPreferredIo7xx3 token.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"platform-default", "Auto", "Bus"}, false),
 				Optional:     true,
 				Default:      "platform-default",
 			},
@@ -414,10 +505,17 @@ func resourceBiosPolicy() *schema.Resource {
 				Optional:     true,
 				Default:      "platform-default",
 			},
-			"cbs_cpu_ccd_ctrl_ssp": {
-				Description:  "BIOS Token for setting CCD Control configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `2 CCDs` - Value - 2 CCDs for configuring CbsCpuCcdCtrlSsp token.\n* `3 CCDs` - Value - 3 CCDs for configuring CbsCpuCcdCtrlSsp token.\n* `4 CCDs` - Value - 4 CCDs for configuring CbsCpuCcdCtrlSsp token.\n* `6 CCDs` - Value - 6 CCDs for configuring CbsCpuCcdCtrlSsp token.\n* `Auto` - Value - Auto for configuring CbsCpuCcdCtrlSsp token.",
+			"cbs_cmnx_gmi_force_link_width_rs": {
+				Description:  "BIOS Token for setting xGMI Force Link Width configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `0` - Value - 0 for configuring CbsCmnxGmiForceLinkWidthRs token.\n* `1` - Value - 1 for configuring CbsCmnxGmiForceLinkWidthRs token.\n* `2` - Value - 2 for configuring CbsCmnxGmiForceLinkWidthRs token.\n* `Auto` - Value - Auto for configuring CbsCmnxGmiForceLinkWidthRs token.",
 				Type:         schema.TypeString,
-				ValidateFunc: validation.StringInSlice([]string{"platform-default", "2 CCDs", "3 CCDs", "4 CCDs", "6 CCDs", "Auto"}, false),
+				ValidateFunc: validation.StringInSlice([]string{"platform-default", "0", "1", "2", "Auto"}, false),
+				Optional:     true,
+				Default:      "platform-default",
+			},
+			"cbs_cpu_ccd_ctrl_ssp": {
+				Description:  "BIOS Token for setting CCD Control configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `2 CCDs` - Value - 2 CCDs for configuring CbsCpuCcdCtrlSsp token.\n* `3 CCDs` - Value - 3 CCDs for configuring CbsCpuCcdCtrlSsp token.\n* `4 CCDs` - Value - 4 CCDs for configuring CbsCpuCcdCtrlSsp token.\n* `6 CCDs` - Value - 6 CCDs for configuring CbsCpuCcdCtrlSsp token.\n* `8 CCDs` - Value - 8 CCDs for configuring CbsCpuCcdCtrlSsp token.\n* `10 CCDs` - Value - 10 CCDs for configuring CbsCpuCcdCtrlSsp token.\n* `Auto` - Value - Auto for configuring CbsCpuCcdCtrlSsp token.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"platform-default", "2 CCDs", "3 CCDs", "4 CCDs", "6 CCDs", "8 CCDs", "10 CCDs", "Auto"}, false),
 				Optional:     true,
 				Default:      "platform-default",
 			},
@@ -428,10 +526,52 @@ func resourceBiosPolicy() *schema.Resource {
 				Optional:     true,
 				Default:      "platform-default",
 			},
+			"cbs_cpu_down_core_ctrl_bergamo": {
+				Description:  "BIOS Token for setting Downcore Control configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `Auto` - Value - Auto for configuring CbsCpuDownCoreCtrlBergamo token.\n* `EIGHT (4 + 4)` - Value - EIGHT (4 + 4) for configuring CbsCpuDownCoreCtrlBergamo token.\n* `FOUR (2 + 2)` - Value - FOUR (2 + 2) for configuring CbsCpuDownCoreCtrlBergamo token.\n* `FOURTEEN (7 + 7)` - Value - FOURTEEN (7 + 7) for configuring CbsCpuDownCoreCtrlBergamo token.\n* `SIX (3 + 3)` - Value - SIX (3 + 3) for configuring CbsCpuDownCoreCtrlBergamo token.\n* `TEN (5 + 5)` - Value - TEN (5 + 5) for configuring CbsCpuDownCoreCtrlBergamo token.\n* `TWELVE (6 + 6)` - Value - TWELVE (6 + 6) for configuring CbsCpuDownCoreCtrlBergamo token.\n* `TWO (1 + 1)` - Value - TWO (1 + 1) for configuring CbsCpuDownCoreCtrlBergamo token.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"platform-default", "Auto", "EIGHT (4 + 4)", "FOUR (2 + 2)", "FOURTEEN (7 + 7)", "SIX (3 + 3)", "TEN (5 + 5)", "TWELVE (6 + 6)", "TWO (1 + 1)"}, false),
+				Optional:     true,
+				Default:      "platform-default",
+			},
+			"cbs_cpu_down_core_ctrl_genoa": {
+				Description:  "BIOS Token for setting CPU Downcore control F19 M10h-1Fh configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `Auto` - Value - Auto for configuring CbsCpuDownCoreCtrlGenoa token.\n* `FIVE (5 + 0)` - Value - FIVE (5 + 0) for configuring CbsCpuDownCoreCtrlGenoa token.\n* `FOUR (4 + 0)` - Value - FOUR (4 + 0) for configuring CbsCpuDownCoreCtrlGenoa token.\n* `ONE (1 + 0)` - Value - ONE (1 + 0) for configuring CbsCpuDownCoreCtrlGenoa token.\n* `SEVEN (7 + 0)` - Value - SEVEN (7 + 0) for configuring CbsCpuDownCoreCtrlGenoa token.\n* `SIX (6 + 0)` - Value - SIX (6 + 0) for configuring CbsCpuDownCoreCtrlGenoa token.\n* `THREE (3 + 0)` - Value - THREE (3 + 0) for configuring CbsCpuDownCoreCtrlGenoa token.\n* `TWO (2 + 0)` - Value - TWO (2 + 0) for configuring CbsCpuDownCoreCtrlGenoa token.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"platform-default", "Auto", "FIVE (5 + 0)", "FOUR (4 + 0)", "ONE (1 + 0)", "SEVEN (7 + 0)", "SIX (6 + 0)", "THREE (3 + 0)", "TWO (2 + 0)"}, false),
+				Optional:     true,
+				Default:      "platform-default",
+			},
 			"cbs_cpu_smt_ctrl": {
 				Description:  "BIOS Token for setting CPU SMT Mode configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `Auto` - Value - Auto for configuring CbsCpuSmtCtrl token.\n* `disabled` - Value - disabled for configuring CbsCpuSmtCtrl token.\n* `enabled` - Value - enabled for configuring CbsCpuSmtCtrl token.",
 				Type:         schema.TypeString,
 				ValidateFunc: validation.StringInSlice([]string{"platform-default", "Auto", "disabled", "enabled"}, false),
+				Optional:     true,
+				Default:      "platform-default",
+			},
+			"cbs_dbg_cpu_gen_cpu_wdt": {
+				Description:  "BIOS Token for setting Core Watchdog Timer Enable configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `Auto` - Value - Auto for configuring CbsDbgCpuGenCpuWdt token.\n* `disabled` - Value - disabled for configuring CbsDbgCpuGenCpuWdt token.\n* `enabled` - Value - enabled for configuring CbsDbgCpuGenCpuWdt token.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"platform-default", "Auto", "disabled", "enabled"}, false),
+				Optional:     true,
+				Default:      "platform-default",
+			},
+			"cbs_dbg_cpu_lapic_mode": {
+				Description:  "BIOS Token for setting Local APIC Mode configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `Auto` - Value - Auto for configuring CbsDbgCpuLapicMode token.\n* `Compatibility` - Value - Compatibility for configuring CbsDbgCpuLapicMode token.\n* `X2APIC` - Value - X2APIC for configuring CbsDbgCpuLapicMode token.\n* `XAPIC` - Value - XAPIC for configuring CbsDbgCpuLapicMode token.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"platform-default", "Auto", "Compatibility", "X2APIC", "XAPIC"}, false),
+				Optional:     true,
+				Default:      "platform-default",
+			},
+			"cbs_dbg_cpu_lapic_mode7xx2": {
+				Description:  "BIOS Token for setting Local APIC Mode 7xx2 configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `Auto` - Value - Auto for configuring CbsDbgCpuLapicMode7xx2 token.\n* `X2APIC` - Value - X2APIC for configuring CbsDbgCpuLapicMode7xx2 token.\n* `XAPIC` - Value - XAPIC for configuring CbsDbgCpuLapicMode7xx2 token.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"platform-default", "Auto", "X2APIC", "XAPIC"}, false),
+				Optional:     true,
+				Default:      "platform-default",
+			},
+			"cbs_dbg_cpu_lapic_mode7xx3": {
+				Description:  "BIOS Token for setting Local APIC Mode 7xx3 configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `Auto` - Value - Auto for configuring CbsDbgCpuLapicMode7xx3 token.\n* `Compatibility` - Value - Compatibility for configuring CbsDbgCpuLapicMode7xx3 token.\n* `X2APIC` - Value - X2APIC for configuring CbsDbgCpuLapicMode7xx3 token.\n* `XAPIC` - Value - XAPIC for configuring CbsDbgCpuLapicMode7xx3 token.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"platform-default", "Auto", "Compatibility", "X2APIC", "XAPIC"}, false),
 				Optional:     true,
 				Default:      "platform-default",
 			},
@@ -449,6 +589,13 @@ func resourceBiosPolicy() *schema.Resource {
 				Optional:     true,
 				Default:      "platform-default",
 			},
+			"cbs_df_cmn4link_max_xgmi_speed": {
+				Description:  "BIOS Token for setting 4-link xGMI max speed configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `20Gbps` - Value - 20Gbps for configuring CbsDfCmn4linkMaxXgmiSpeed token.\n* `25Gbps` - Value - 25Gbps for configuring CbsDfCmn4linkMaxXgmiSpeed token.\n* `32Gbps` - Value - 32Gbps for configuring CbsDfCmn4linkMaxXgmiSpeed token.\n* `Auto` - Value - Auto for configuring CbsDfCmn4linkMaxXgmiSpeed token.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"platform-default", "20Gbps", "25Gbps", "32Gbps", "Auto"}, false),
+				Optional:     true,
+				Default:      "platform-default",
+			},
 			"cbs_df_cmn_acpi_srat_l3numa": {
 				Description:  "BIOS Token for setting ACPI SRAT L3 Cache As NUMA Domain configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `Auto` - Value - Auto for configuring CbsDfCmnAcpiSratL3numa token.\n* `disabled` - Value - disabled for configuring CbsDfCmnAcpiSratL3numa token.\n* `enabled` - Value - enabled for configuring CbsDfCmnAcpiSratL3numa token.",
 				Type:         schema.TypeString,
@@ -463,10 +610,24 @@ func resourceBiosPolicy() *schema.Resource {
 				Optional:     true,
 				Default:      "platform-default",
 			},
+			"cbs_df_cmn_dram_scrub_time": {
+				Description:  "BIOS Token for setting DRAM Scrub Time configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `1 hour` - Value - 1 hour for configuring CbsDfCmnDramScrubTime token.\n* `4 hours` - Value - 4 hours for configuring CbsDfCmnDramScrubTime token.\n* `6 hours` - Value - 6 hours for configuring CbsDfCmnDramScrubTime token.\n* `8 hours` - Value - 8 hours for configuring CbsDfCmnDramScrubTime token.\n* `12 hours` - Value - 12 hours for configuring CbsDfCmnDramScrubTime token.\n* `16 hours` - Value - 16 hours for configuring CbsDfCmnDramScrubTime token.\n* `24 hours` - Value - 24 hours for configuring CbsDfCmnDramScrubTime token.\n* `48 hours` - Value - 48 hours for configuring CbsDfCmnDramScrubTime token.\n* `Auto` - Value - Auto for configuring CbsDfCmnDramScrubTime token.\n* `Disabled` - Value - Disabled for configuring CbsDfCmnDramScrubTime token.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"platform-default", "1 hour", "4 hours", "6 hours", "8 hours", "12 hours", "16 hours", "24 hours", "48 hours", "Auto", "Disabled"}, false),
+				Optional:     true,
+				Default:      "platform-default",
+			},
 			"cbs_df_cmn_mem_intlv": {
 				Description:  "BIOS Token for setting AMD Memory Interleaving configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `Auto` - Value - Auto for configuring CbsDfCmnMemIntlv token.\n* `Channel` - Value - Channel for configuring CbsDfCmnMemIntlv token.\n* `Die` - Value - Die for configuring CbsDfCmnMemIntlv token.\n* `None` - Value - None for configuring CbsDfCmnMemIntlv token.\n* `Socket` - Value - Socket for configuring CbsDfCmnMemIntlv token.",
 				Type:         schema.TypeString,
 				ValidateFunc: validation.StringInSlice([]string{"platform-default", "Auto", "Channel", "Die", "None", "Socket"}, false),
+				Optional:     true,
+				Default:      "platform-default",
+			},
+			"cbs_df_cmn_mem_intlv_control": {
+				Description:  "BIOS Token for setting Memory Interleaving configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `Auto` - Value - Auto for configuring CbsDfCmnMemIntlvControl token.\n* `disabled` - Value - disabled for configuring CbsDfCmnMemIntlvControl token.\n* `enabled` - Value - enabled for configuring CbsDfCmnMemIntlvControl token.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"platform-default", "Auto", "disabled", "enabled"}, false),
 				Optional:     true,
 				Default:      "platform-default",
 			},
@@ -477,10 +638,24 @@ func resourceBiosPolicy() *schema.Resource {
 				Optional:     true,
 				Default:      "platform-default",
 			},
-			"cbs_sev_snp_support": {
-				Description:  "BIOS Token for setting SEV-SNP Support configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `enabled` - Enables the BIOS setting.\n* `disabled` - Disables the BIOS setting.",
+			"cbs_df_dbg_xgmi_link_cfg": {
+				Description:  "BIOS Token for setting xGMI Link Configuration configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `2 xGMI Links` - Value - 2 xGMI Links for configuring CbsDfDbgXgmiLinkCfg token.\n* `3 xGMI Links` - Value - 3 xGMI Links for configuring CbsDfDbgXgmiLinkCfg token.\n* `4 xGMI Links` - Value - 4 xGMI Links for configuring CbsDfDbgXgmiLinkCfg token.\n* `Auto` - Value - Auto for configuring CbsDfDbgXgmiLinkCfg token.",
 				Type:         schema.TypeString,
-				ValidateFunc: validation.StringInSlice([]string{"platform-default", "enabled", "disabled"}, false),
+				ValidateFunc: validation.StringInSlice([]string{"platform-default", "2 xGMI Links", "3 xGMI Links", "4 xGMI Links", "Auto"}, false),
+				Optional:     true,
+				Default:      "platform-default",
+			},
+			"cbs_gnb_dbg_pcie_tbt_support": {
+				Description:  "BIOS Token for setting PCIe Ten Bit Tag Support configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `Auto` - Value - Auto for configuring CbsGnbDbgPcieTbtSupport token.\n* `disabled` - Value - disabled for configuring CbsGnbDbgPcieTbtSupport token.\n* `enabled` - Value - enabled for configuring CbsGnbDbgPcieTbtSupport token.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"platform-default", "Auto", "disabled", "enabled"}, false),
+				Optional:     true,
+				Default:      "platform-default",
+			},
+			"cbs_sev_snp_support": {
+				Description:  "BIOS Token for setting SEV-SNP Support configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `Auto` - Value - Auto for configuring CbsSevSnpSupport token.\n* `disabled` - Value - disabled for configuring CbsSevSnpSupport token.\n* `enabled` - Value - enabled for configuring CbsSevSnpSupport token.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"platform-default", "Auto", "disabled", "enabled"}, false),
 				Optional:     true,
 				Default:      "platform-default",
 			},
@@ -674,6 +849,13 @@ func resourceBiosPolicy() *schema.Resource {
 				Type:         schema.TypeString,
 				ValidateFunc: validation.All(validation.StringMatch(regexp.MustCompile("^$|^[a-zA-Z0-9]+[\\x00-\\xFF]*$"), ""), StringLenMaximum(1024)),
 				Optional:     true,
+			},
+			"dfx_osb_en": {
+				Description:  "BIOS Token for setting DFX OSB configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `Auto` - Value - Auto for configuring DfxOsbEn token.\n* `disabled` - Value - disabled for configuring DfxOsbEn token.\n* `enabled` - Value - enabled for configuring DfxOsbEn token.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"platform-default", "Auto", "disabled", "enabled"}, false),
+				Optional:     true,
+				Default:      "platform-default",
 			},
 			"direct_cache_access": {
 				Description:  "BIOS Token for setting Direct Cache Access Support configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `auto` - Value - auto for configuring DirectCacheAccess token.\n* `disabled` - Value - disabled for configuring DirectCacheAccess token.\n* `enabled` - Value - enabled for configuring DirectCacheAccess token.",
@@ -952,6 +1134,13 @@ func resourceBiosPolicy() *schema.Resource {
 				Optional:     true,
 				Default:      "platform-default",
 			},
+			"ioat_config_cpm": {
+				Description:  "BIOS Token for setting IOAT Configuration configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `enabled` - Enables the BIOS setting.\n* `disabled` - Disables the BIOS setting.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"platform-default", "enabled", "disabled"}, false),
+				Optional:     true,
+				Default:      "platform-default",
+			},
 			"ioh_error_enable": {
 				Description:  "BIOS Token for setting IIO Error Enable configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `No` - Value - No for configuring IohErrorEnable token.\n* `Yes` - Value - Yes for configuring IohErrorEnable token.",
 				Type:         schema.TypeString,
@@ -1138,6 +1327,20 @@ func resourceBiosPolicy() *schema.Resource {
 				Description:  "BIOS Token for setting MMCFG BASE configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `1 GB` - Value - 1 GiB for configuring MmcfgBase token.\n* `2 GB` - Value - 2 GiB for configuring MmcfgBase token.\n* `2.5 GB` - Value - 2.5 GiB for configuring MmcfgBase token.\n* `3 GB` - Value - 3 GiB for configuring MmcfgBase token.\n* `Auto` - Value - Auto for configuring MmcfgBase token.",
 				Type:         schema.TypeString,
 				ValidateFunc: validation.StringInSlice([]string{"platform-default", "1 GB", "2 GB", "2.5 GB", "3 GB", "Auto"}, false),
+				Optional:     true,
+				Default:      "platform-default",
+			},
+			"mmioh_base": {
+				Description:  "BIOS Token for setting MMIO High Base configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `512G` - Value - 512G for configuring MmiohBase token.\n* `1T` - Value - 1T for configuring MmiohBase token.\n* `2T` - Value - 2T for configuring MmiohBase token.\n* `4T` - Value - 4T for configuring MmiohBase token.\n* `16T` - Value - 16T for configuring MmiohBase token.\n* `24T` - Value - 24T for configuring MmiohBase token.\n* `32T` - Value - 32T for configuring MmiohBase token.\n* `40T` - Value - 40T for configuring MmiohBase token.\n* `56T` - Value - 56T for configuring MmiohBase token.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"platform-default", "512G", "1T", "2T", "4T", "16T", "24T", "32T", "40T", "56T"}, false),
+				Optional:     true,
+				Default:      "platform-default",
+			},
+			"mmioh_size": {
+				Description:  "BIOS Token for setting MMIO High Granularity Size configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `1G` - Value - 1G for configuring MmiohSize token.\n* `4G` - Value - 4G for configuring MmiohSize token.\n* `16G` - Value - 16G for configuring MmiohSize token.\n* `64G` - Value - 64G for configuring MmiohSize token.\n* `256G` - Value - 256G for configuring MmiohSize token.\n* `1024G` - Value - 1024G for configuring MmiohSize token.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"platform-default", "1G", "4G", "16G", "64G", "256G", "1024G"}, false),
 				Optional:     true,
 				Default:      "platform-default",
 			},
@@ -1513,9 +1716,9 @@ func resourceBiosPolicy() *schema.Resource {
 				Default:      "platform-default",
 			},
 			"pcie_slot_mstorraid_link_speed": {
-				Description:  "BIOS Token for setting PCIe Slot MSTOR Link Speed configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `Auto` - Value - Auto for configuring PcieSlotMstorraidLinkSpeed token.\n* `Disabled` - Value - Disabled for configuring PcieSlotMstorraidLinkSpeed token.\n* `GEN1` - Value - GEN1 for configuring PcieSlotMstorraidLinkSpeed token.\n* `GEN2` - Value - GEN2 for configuring PcieSlotMstorraidLinkSpeed token.\n* `GEN3` - Value - GEN3 for configuring PcieSlotMstorraidLinkSpeed token.\n* `GEN4` - Value - GEN4 for configuring PcieSlotMstorraidLinkSpeed token.",
+				Description:  "BIOS Token for setting PCIe Slot MSTOR Link Speed configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `Auto` - Value - Auto for configuring PcieSlotMstorraidLinkSpeed token.\n* `Disabled` - Value - Disabled for configuring PcieSlotMstorraidLinkSpeed token.\n* `GEN1` - Value - GEN1 for configuring PcieSlotMstorraidLinkSpeed token.\n* `GEN2` - Value - GEN2 for configuring PcieSlotMstorraidLinkSpeed token.\n* `GEN3` - Value - GEN3 for configuring PcieSlotMstorraidLinkSpeed token.\n* `GEN4` - Value - GEN4 for configuring PcieSlotMstorraidLinkSpeed token.\n* `GEN5` - Value - GEN5 for configuring PcieSlotMstorraidLinkSpeed token.",
 				Type:         schema.TypeString,
-				ValidateFunc: validation.StringInSlice([]string{"platform-default", "Auto", "Disabled", "GEN1", "GEN2", "GEN3", "GEN4"}, false),
+				ValidateFunc: validation.StringInSlice([]string{"platform-default", "Auto", "Disabled", "GEN1", "GEN2", "GEN3", "GEN4", "GEN5"}, false),
 				Optional:     true,
 				Default:      "platform-default",
 			},
@@ -1678,9 +1881,9 @@ func resourceBiosPolicy() *schema.Resource {
 				Default:      "platform-default",
 			},
 			"prmrr_size": {
-				Description:  "BIOS Token for setting PRMRR Size configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `1G` - Value - 1G for configuring PrmrrSize token.\n* `2G` - Value - 2G for configuring PrmrrSize token.\n* `4G` - Value - 4G for configuring PrmrrSize token.\n* `8G` - Value - 8G for configuring PrmrrSize token.\n* `16G` - Value - 16G for configuring PrmrrSize token.\n* `32G` - Value - 32G for configuring PrmrrSize token.\n* `64G` - Value - 64G for configuring PrmrrSize token.\n* `128G` - Value - 128G for configuring PrmrrSize token.\n* `256G` - Value - 256G for configuring PrmrrSize token.\n* `512G` - Value - 512G for configuring PrmrrSize token.\n* `128M` - Value - 128M for configuring PrmrrSize token.\n* `256M` - Value - 256M for configuring PrmrrSize token.\n* `512M` - Value - 512M for configuring PrmrrSize token.\n* `Invalid Config.` - Value - Invalid Config for configuring PrmrrSize token.",
+				Description:  "BIOS Token for setting PRMRR Size configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `1G` - Value - 1G for configuring PrmrrSize token.\n* `2G` - Value - 2G for configuring PrmrrSize token.\n* `4G` - Value - 4G for configuring PrmrrSize token.\n* `8G` - Value - 8G for configuring PrmrrSize token.\n* `16G` - Value - 16G for configuring PrmrrSize token.\n* `32G` - Value - 32G for configuring PrmrrSize token.\n* `64G` - Value - 64G for configuring PrmrrSize token.\n* `128G` - Value - 128G for configuring PrmrrSize token.\n* `256G` - Value - 256G for configuring PrmrrSize token.\n* `512G` - Value - 512G for configuring PrmrrSize token.\n* `128M` - Value - 128M for configuring PrmrrSize token.\n* `256M` - Value - 256M for configuring PrmrrSize token.\n* `512M` - Value - 512M for configuring PrmrrSize token.\n* `Auto` - Value - Auto for configuring PrmrrSize token.\n* `Invalid Config.` - Value - Invalid Config for configuring PrmrrSize token.",
 				Type:         schema.TypeString,
-				ValidateFunc: validation.StringInSlice([]string{"platform-default", "1G", "2G", "4G", "8G", "16G", "32G", "64G", "128G", "256G", "512G", "128M", "256M", "512M", "Invalid Config."}, false),
+				ValidateFunc: validation.StringInSlice([]string{"platform-default", "1G", "2G", "4G", "8G", "16G", "32G", "64G", "128G", "256G", "512G", "128M", "256M", "512M", "Auto", "Invalid Config."}, false),
 				Optional:     true,
 				Default:      "platform-default",
 			},
@@ -1814,6 +2017,20 @@ func resourceBiosPolicy() *schema.Resource {
 				Optional:     true,
 				Default:      "platform-default",
 			},
+			"resize_bar_support": {
+				Description:  "BIOS Token for setting Re-Size BAR Support configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `enabled` - Enables the BIOS setting.\n* `disabled` - Disables the BIOS setting.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"platform-default", "enabled", "disabled"}, false),
+				Optional:     true,
+				Default:      "platform-default",
+			},
+			"runtime_post_package_repair": {
+				Description:  "BIOS Token for setting Runtime Post Package Repair configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `enabled` - Enables the BIOS setting.\n* `disabled` - Disables the BIOS setting.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"platform-default", "enabled", "disabled"}, false),
+				Optional:     true,
+				Default:      "platform-default",
+			},
 			"sata_mode_select": {
 				Description:  "BIOS Token for setting SATA Mode configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `AHCI` - Value - AHCI for configuring SataModeSelect token.\n* `Disabled` - Value - Disabled for configuring SataModeSelect token.\n* `LSI SW RAID` - Value - LSI SW RAID for configuring SataModeSelect token.",
 				Type:         schema.TypeString,
@@ -1832,6 +2049,13 @@ func resourceBiosPolicy() *schema.Resource {
 				Description:  "BIOS Token for setting PPR Type configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `disabled` - Value - disabled for configuring SelectPprType token.\n* `Hard PPR` - Value - Hard PPR for configuring SelectPprType token.\n* `Soft PPR` - Value - Soft PPR for configuring SelectPprType token.",
 				Type:         schema.TypeString,
 				ValidateFunc: validation.StringInSlice([]string{"platform-default", "disabled", "Hard PPR", "Soft PPR"}, false),
+				Optional:     true,
+				Default:      "platform-default",
+			},
+			"serial_mux": {
+				Description:  "BIOS Token for setting Serial Mux configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `enabled` - Enables the BIOS setting.\n* `disabled` - Disables the BIOS setting.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"platform-default", "enabled", "disabled"}, false),
 				Optional:     true,
 				Default:      "platform-default",
 			},
@@ -3582,6 +3806,16 @@ func resourceBiosPolicyCreate(c context.Context, d *schema.ResourceData, meta in
 		o.SetCbsCmnApbdis(x)
 	}
 
+	if v, ok := d.GetOk("cbs_cmn_apbdis_df_pstate_rs"); ok {
+		x := (v.(string))
+		o.SetCbsCmnApbdisDfPstateRs(x)
+	}
+
+	if v, ok := d.GetOk("cbs_cmn_cpu_avx512"); ok {
+		x := (v.(string))
+		o.SetCbsCmnCpuAvx512(x)
+	}
+
 	if v, ok := d.GetOk("cbs_cmn_cpu_cpb"); ok {
 		x := (v.(string))
 		o.SetCbsCmnCpuCpb(x)
@@ -3607,6 +3841,11 @@ func resourceBiosPolicyCreate(c context.Context, d *schema.ResourceData, meta in
 		o.SetCbsCmnCpuL2streamHwPrefetcher(x)
 	}
 
+	if v, ok := d.GetOk("cbs_cmn_cpu_sev_asid_space_limit"); ok {
+		x := (v.(string))
+		o.SetCbsCmnCpuSevAsidSpaceLimit(x)
+	}
+
 	if v, ok := d.GetOk("cbs_cmn_cpu_smee"); ok {
 		x := (v.(string))
 		o.SetCbsCmnCpuSmee(x)
@@ -3622,9 +3861,19 @@ func resourceBiosPolicyCreate(c context.Context, d *schema.ResourceData, meta in
 		o.SetCbsCmnDeterminismSlider(x)
 	}
 
+	if v, ok := d.GetOk("cbs_cmn_edc_control_throttle"); ok {
+		x := (v.(string))
+		o.SetCbsCmnEdcControlThrottle(x)
+	}
+
 	if v, ok := d.GetOk("cbs_cmn_efficiency_mode_en"); ok {
 		x := (v.(string))
 		o.SetCbsCmnEfficiencyModeEn(x)
+	}
+
+	if v, ok := d.GetOk("cbs_cmn_efficiency_mode_en_rs"); ok {
+		x := (v.(string))
+		o.SetCbsCmnEfficiencyModeEnRs(x)
 	}
 
 	if v, ok := d.GetOk("cbs_cmn_fixed_soc_pstate"); ok {
@@ -3642,6 +3891,16 @@ func resourceBiosPolicyCreate(c context.Context, d *schema.ResourceData, meta in
 		o.SetCbsCmnGnbSmuDfCstates(x)
 	}
 
+	if v, ok := d.GetOk("cbs_cmn_gnb_smu_dffo_rs"); ok {
+		x := (v.(string))
+		o.SetCbsCmnGnbSmuDffoRs(x)
+	}
+
+	if v, ok := d.GetOk("cbs_cmn_gnb_smu_dlwm_support"); ok {
+		x := (v.(string))
+		o.SetCbsCmnGnbSmuDlwmSupport(x)
+	}
+
 	if v, ok := d.GetOk("cbs_cmn_gnb_smucppc"); ok {
 		x := (v.(string))
 		o.SetCbsCmnGnbSmucppc(x)
@@ -3652,14 +3911,49 @@ func resourceBiosPolicyCreate(c context.Context, d *schema.ResourceData, meta in
 		o.SetCbsCmnMemCtrlBankGroupSwapDdr4(x)
 	}
 
+	if v, ok := d.GetOk("cbs_cmn_mem_ctrller_pwr_dn_en_ddr"); ok {
+		x := (v.(string))
+		o.SetCbsCmnMemCtrllerPwrDnEnDdr(x)
+	}
+
+	if v, ok := d.GetOk("cbs_cmn_mem_dram_refresh_rate"); ok {
+		x := (v.(string))
+		o.SetCbsCmnMemDramRefreshRate(x)
+	}
+
 	if v, ok := d.GetOk("cbs_cmn_mem_map_bank_interleave_ddr4"); ok {
 		x := (v.(string))
 		o.SetCbsCmnMemMapBankInterleaveDdr4(x)
 	}
 
+	if v, ok := d.GetOk("cbs_cmn_mem_speed_ddr47xx2"); ok {
+		x := (v.(string))
+		o.SetCbsCmnMemSpeedDdr47xx2(x)
+	}
+
+	if v, ok := d.GetOk("cbs_cmn_mem_speed_ddr47xx3"); ok {
+		x := (v.(string))
+		o.SetCbsCmnMemSpeedDdr47xx3(x)
+	}
+
+	if v, ok := d.GetOk("cbs_cmn_preferred_io7xx2"); ok {
+		x := (v.(string))
+		o.SetCbsCmnPreferredIo7xx2(x)
+	}
+
+	if v, ok := d.GetOk("cbs_cmn_preferred_io7xx3"); ok {
+		x := (v.(string))
+		o.SetCbsCmnPreferredIo7xx3(x)
+	}
+
 	if v, ok := d.GetOk("cbs_cmnc_tdp_ctl"); ok {
 		x := (v.(string))
 		o.SetCbsCmncTdpCtl(x)
+	}
+
+	if v, ok := d.GetOk("cbs_cmnx_gmi_force_link_width_rs"); ok {
+		x := (v.(string))
+		o.SetCbsCmnxGmiForceLinkWidthRs(x)
 	}
 
 	if v, ok := d.GetOk("cbs_cpu_ccd_ctrl_ssp"); ok {
@@ -3672,9 +3966,39 @@ func resourceBiosPolicyCreate(c context.Context, d *schema.ResourceData, meta in
 		o.SetCbsCpuCoreCtrl(x)
 	}
 
+	if v, ok := d.GetOk("cbs_cpu_down_core_ctrl_bergamo"); ok {
+		x := (v.(string))
+		o.SetCbsCpuDownCoreCtrlBergamo(x)
+	}
+
+	if v, ok := d.GetOk("cbs_cpu_down_core_ctrl_genoa"); ok {
+		x := (v.(string))
+		o.SetCbsCpuDownCoreCtrlGenoa(x)
+	}
+
 	if v, ok := d.GetOk("cbs_cpu_smt_ctrl"); ok {
 		x := (v.(string))
 		o.SetCbsCpuSmtCtrl(x)
+	}
+
+	if v, ok := d.GetOk("cbs_dbg_cpu_gen_cpu_wdt"); ok {
+		x := (v.(string))
+		o.SetCbsDbgCpuGenCpuWdt(x)
+	}
+
+	if v, ok := d.GetOk("cbs_dbg_cpu_lapic_mode"); ok {
+		x := (v.(string))
+		o.SetCbsDbgCpuLapicMode(x)
+	}
+
+	if v, ok := d.GetOk("cbs_dbg_cpu_lapic_mode7xx2"); ok {
+		x := (v.(string))
+		o.SetCbsDbgCpuLapicMode7xx2(x)
+	}
+
+	if v, ok := d.GetOk("cbs_dbg_cpu_lapic_mode7xx3"); ok {
+		x := (v.(string))
+		o.SetCbsDbgCpuLapicMode7xx3(x)
 	}
 
 	if v, ok := d.GetOk("cbs_dbg_cpu_snp_mem_cover"); ok {
@@ -3687,6 +4011,11 @@ func resourceBiosPolicyCreate(c context.Context, d *schema.ResourceData, meta in
 		o.SetCbsDbgCpuSnpMemSizeCover(x)
 	}
 
+	if v, ok := d.GetOk("cbs_df_cmn4link_max_xgmi_speed"); ok {
+		x := (v.(string))
+		o.SetCbsDfCmn4linkMaxXgmiSpeed(x)
+	}
+
 	if v, ok := d.GetOk("cbs_df_cmn_acpi_srat_l3numa"); ok {
 		x := (v.(string))
 		o.SetCbsDfCmnAcpiSratL3numa(x)
@@ -3697,14 +4026,34 @@ func resourceBiosPolicyCreate(c context.Context, d *schema.ResourceData, meta in
 		o.SetCbsDfCmnDramNps(x)
 	}
 
+	if v, ok := d.GetOk("cbs_df_cmn_dram_scrub_time"); ok {
+		x := (v.(string))
+		o.SetCbsDfCmnDramScrubTime(x)
+	}
+
 	if v, ok := d.GetOk("cbs_df_cmn_mem_intlv"); ok {
 		x := (v.(string))
 		o.SetCbsDfCmnMemIntlv(x)
 	}
 
+	if v, ok := d.GetOk("cbs_df_cmn_mem_intlv_control"); ok {
+		x := (v.(string))
+		o.SetCbsDfCmnMemIntlvControl(x)
+	}
+
 	if v, ok := d.GetOk("cbs_df_cmn_mem_intlv_size"); ok {
 		x := (v.(string))
 		o.SetCbsDfCmnMemIntlvSize(x)
+	}
+
+	if v, ok := d.GetOk("cbs_df_dbg_xgmi_link_cfg"); ok {
+		x := (v.(string))
+		o.SetCbsDfDbgXgmiLinkCfg(x)
+	}
+
+	if v, ok := d.GetOk("cbs_gnb_dbg_pcie_tbt_support"); ok {
+		x := (v.(string))
+		o.SetCbsGnbDbgPcieTbtSupport(x)
 	}
 
 	if v, ok := d.GetOk("cbs_sev_snp_support"); ok {
@@ -3837,6 +4186,11 @@ func resourceBiosPolicyCreate(c context.Context, d *schema.ResourceData, meta in
 	if v, ok := d.GetOk("description"); ok {
 		x := (v.(string))
 		o.SetDescription(x)
+	}
+
+	if v, ok := d.GetOk("dfx_osb_en"); ok {
+		x := (v.(string))
+		o.SetDfxOsbEn(x)
 	}
 
 	if v, ok := d.GetOk("direct_cache_access"); ok {
@@ -4029,6 +4383,11 @@ func resourceBiosPolicyCreate(c context.Context, d *schema.ResourceData, meta in
 		o.SetIntelVtdatsSupport(x)
 	}
 
+	if v, ok := d.GetOk("ioat_config_cpm"); ok {
+		x := (v.(string))
+		o.SetIoatConfigCpm(x)
+	}
+
 	if v, ok := d.GetOk("ioh_error_enable"); ok {
 		x := (v.(string))
 		o.SetIohErrorEnable(x)
@@ -4162,6 +4521,16 @@ func resourceBiosPolicyCreate(c context.Context, d *schema.ResourceData, meta in
 	if v, ok := d.GetOk("mmcfg_base"); ok {
 		x := (v.(string))
 		o.SetMmcfgBase(x)
+	}
+
+	if v, ok := d.GetOk("mmioh_base"); ok {
+		x := (v.(string))
+		o.SetMmiohBase(x)
+	}
+
+	if v, ok := d.GetOk("mmioh_size"); ok {
+		x := (v.(string))
+		o.SetMmiohSize(x)
 	}
 
 	if v, ok := d.GetOk("moid"); ok {
@@ -4601,6 +4970,16 @@ func resourceBiosPolicyCreate(c context.Context, d *schema.ResourceData, meta in
 		o.SetRedirectionAfterPost(x)
 	}
 
+	if v, ok := d.GetOk("resize_bar_support"); ok {
+		x := (v.(string))
+		o.SetResizeBarSupport(x)
+	}
+
+	if v, ok := d.GetOk("runtime_post_package_repair"); ok {
+		x := (v.(string))
+		o.SetRuntimePostPackageRepair(x)
+	}
+
 	if v, ok := d.GetOk("sata_mode_select"); ok {
 		x := (v.(string))
 		o.SetSataModeSelect(x)
@@ -4614,6 +4993,11 @@ func resourceBiosPolicyCreate(c context.Context, d *schema.ResourceData, meta in
 	if v, ok := d.GetOk("select_ppr_type"); ok {
 		x := (v.(string))
 		o.SetSelectPprType(x)
+	}
+
+	if v, ok := d.GetOk("serial_mux"); ok {
+		x := (v.(string))
+		o.SetSerialMux(x)
 	}
 
 	if v, ok := d.GetOk("serial_port_aenable"); ok {
@@ -5832,6 +6216,14 @@ func resourceBiosPolicyRead(c context.Context, d *schema.ResourceData, meta inte
 		return diag.Errorf("error occurred while setting property CbsCmnApbdis in BiosPolicy object: %s", err.Error())
 	}
 
+	if err := d.Set("cbs_cmn_apbdis_df_pstate_rs", (s.GetCbsCmnApbdisDfPstateRs())); err != nil {
+		return diag.Errorf("error occurred while setting property CbsCmnApbdisDfPstateRs in BiosPolicy object: %s", err.Error())
+	}
+
+	if err := d.Set("cbs_cmn_cpu_avx512", (s.GetCbsCmnCpuAvx512())); err != nil {
+		return diag.Errorf("error occurred while setting property CbsCmnCpuAvx512 in BiosPolicy object: %s", err.Error())
+	}
+
 	if err := d.Set("cbs_cmn_cpu_cpb", (s.GetCbsCmnCpuCpb())); err != nil {
 		return diag.Errorf("error occurred while setting property CbsCmnCpuCpb in BiosPolicy object: %s", err.Error())
 	}
@@ -5852,6 +6244,10 @@ func resourceBiosPolicyRead(c context.Context, d *schema.ResourceData, meta inte
 		return diag.Errorf("error occurred while setting property CbsCmnCpuL2streamHwPrefetcher in BiosPolicy object: %s", err.Error())
 	}
 
+	if err := d.Set("cbs_cmn_cpu_sev_asid_space_limit", (s.GetCbsCmnCpuSevAsidSpaceLimit())); err != nil {
+		return diag.Errorf("error occurred while setting property CbsCmnCpuSevAsidSpaceLimit in BiosPolicy object: %s", err.Error())
+	}
+
 	if err := d.Set("cbs_cmn_cpu_smee", (s.GetCbsCmnCpuSmee())); err != nil {
 		return diag.Errorf("error occurred while setting property CbsCmnCpuSmee in BiosPolicy object: %s", err.Error())
 	}
@@ -5864,8 +6260,16 @@ func resourceBiosPolicyRead(c context.Context, d *schema.ResourceData, meta inte
 		return diag.Errorf("error occurred while setting property CbsCmnDeterminismSlider in BiosPolicy object: %s", err.Error())
 	}
 
+	if err := d.Set("cbs_cmn_edc_control_throttle", (s.GetCbsCmnEdcControlThrottle())); err != nil {
+		return diag.Errorf("error occurred while setting property CbsCmnEdcControlThrottle in BiosPolicy object: %s", err.Error())
+	}
+
 	if err := d.Set("cbs_cmn_efficiency_mode_en", (s.GetCbsCmnEfficiencyModeEn())); err != nil {
 		return diag.Errorf("error occurred while setting property CbsCmnEfficiencyModeEn in BiosPolicy object: %s", err.Error())
+	}
+
+	if err := d.Set("cbs_cmn_efficiency_mode_en_rs", (s.GetCbsCmnEfficiencyModeEnRs())); err != nil {
+		return diag.Errorf("error occurred while setting property CbsCmnEfficiencyModeEnRs in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("cbs_cmn_fixed_soc_pstate", (s.GetCbsCmnFixedSocPstate())); err != nil {
@@ -5880,6 +6284,14 @@ func resourceBiosPolicyRead(c context.Context, d *schema.ResourceData, meta inte
 		return diag.Errorf("error occurred while setting property CbsCmnGnbSmuDfCstates in BiosPolicy object: %s", err.Error())
 	}
 
+	if err := d.Set("cbs_cmn_gnb_smu_dffo_rs", (s.GetCbsCmnGnbSmuDffoRs())); err != nil {
+		return diag.Errorf("error occurred while setting property CbsCmnGnbSmuDffoRs in BiosPolicy object: %s", err.Error())
+	}
+
+	if err := d.Set("cbs_cmn_gnb_smu_dlwm_support", (s.GetCbsCmnGnbSmuDlwmSupport())); err != nil {
+		return diag.Errorf("error occurred while setting property CbsCmnGnbSmuDlwmSupport in BiosPolicy object: %s", err.Error())
+	}
+
 	if err := d.Set("cbs_cmn_gnb_smucppc", (s.GetCbsCmnGnbSmucppc())); err != nil {
 		return diag.Errorf("error occurred while setting property CbsCmnGnbSmucppc in BiosPolicy object: %s", err.Error())
 	}
@@ -5888,12 +6300,40 @@ func resourceBiosPolicyRead(c context.Context, d *schema.ResourceData, meta inte
 		return diag.Errorf("error occurred while setting property CbsCmnMemCtrlBankGroupSwapDdr4 in BiosPolicy object: %s", err.Error())
 	}
 
+	if err := d.Set("cbs_cmn_mem_ctrller_pwr_dn_en_ddr", (s.GetCbsCmnMemCtrllerPwrDnEnDdr())); err != nil {
+		return diag.Errorf("error occurred while setting property CbsCmnMemCtrllerPwrDnEnDdr in BiosPolicy object: %s", err.Error())
+	}
+
+	if err := d.Set("cbs_cmn_mem_dram_refresh_rate", (s.GetCbsCmnMemDramRefreshRate())); err != nil {
+		return diag.Errorf("error occurred while setting property CbsCmnMemDramRefreshRate in BiosPolicy object: %s", err.Error())
+	}
+
 	if err := d.Set("cbs_cmn_mem_map_bank_interleave_ddr4", (s.GetCbsCmnMemMapBankInterleaveDdr4())); err != nil {
 		return diag.Errorf("error occurred while setting property CbsCmnMemMapBankInterleaveDdr4 in BiosPolicy object: %s", err.Error())
 	}
 
+	if err := d.Set("cbs_cmn_mem_speed_ddr47xx2", (s.GetCbsCmnMemSpeedDdr47xx2())); err != nil {
+		return diag.Errorf("error occurred while setting property CbsCmnMemSpeedDdr47xx2 in BiosPolicy object: %s", err.Error())
+	}
+
+	if err := d.Set("cbs_cmn_mem_speed_ddr47xx3", (s.GetCbsCmnMemSpeedDdr47xx3())); err != nil {
+		return diag.Errorf("error occurred while setting property CbsCmnMemSpeedDdr47xx3 in BiosPolicy object: %s", err.Error())
+	}
+
+	if err := d.Set("cbs_cmn_preferred_io7xx2", (s.GetCbsCmnPreferredIo7xx2())); err != nil {
+		return diag.Errorf("error occurred while setting property CbsCmnPreferredIo7xx2 in BiosPolicy object: %s", err.Error())
+	}
+
+	if err := d.Set("cbs_cmn_preferred_io7xx3", (s.GetCbsCmnPreferredIo7xx3())); err != nil {
+		return diag.Errorf("error occurred while setting property CbsCmnPreferredIo7xx3 in BiosPolicy object: %s", err.Error())
+	}
+
 	if err := d.Set("cbs_cmnc_tdp_ctl", (s.GetCbsCmncTdpCtl())); err != nil {
 		return diag.Errorf("error occurred while setting property CbsCmncTdpCtl in BiosPolicy object: %s", err.Error())
+	}
+
+	if err := d.Set("cbs_cmnx_gmi_force_link_width_rs", (s.GetCbsCmnxGmiForceLinkWidthRs())); err != nil {
+		return diag.Errorf("error occurred while setting property CbsCmnxGmiForceLinkWidthRs in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("cbs_cpu_ccd_ctrl_ssp", (s.GetCbsCpuCcdCtrlSsp())); err != nil {
@@ -5904,8 +6344,32 @@ func resourceBiosPolicyRead(c context.Context, d *schema.ResourceData, meta inte
 		return diag.Errorf("error occurred while setting property CbsCpuCoreCtrl in BiosPolicy object: %s", err.Error())
 	}
 
+	if err := d.Set("cbs_cpu_down_core_ctrl_bergamo", (s.GetCbsCpuDownCoreCtrlBergamo())); err != nil {
+		return diag.Errorf("error occurred while setting property CbsCpuDownCoreCtrlBergamo in BiosPolicy object: %s", err.Error())
+	}
+
+	if err := d.Set("cbs_cpu_down_core_ctrl_genoa", (s.GetCbsCpuDownCoreCtrlGenoa())); err != nil {
+		return diag.Errorf("error occurred while setting property CbsCpuDownCoreCtrlGenoa in BiosPolicy object: %s", err.Error())
+	}
+
 	if err := d.Set("cbs_cpu_smt_ctrl", (s.GetCbsCpuSmtCtrl())); err != nil {
 		return diag.Errorf("error occurred while setting property CbsCpuSmtCtrl in BiosPolicy object: %s", err.Error())
+	}
+
+	if err := d.Set("cbs_dbg_cpu_gen_cpu_wdt", (s.GetCbsDbgCpuGenCpuWdt())); err != nil {
+		return diag.Errorf("error occurred while setting property CbsDbgCpuGenCpuWdt in BiosPolicy object: %s", err.Error())
+	}
+
+	if err := d.Set("cbs_dbg_cpu_lapic_mode", (s.GetCbsDbgCpuLapicMode())); err != nil {
+		return diag.Errorf("error occurred while setting property CbsDbgCpuLapicMode in BiosPolicy object: %s", err.Error())
+	}
+
+	if err := d.Set("cbs_dbg_cpu_lapic_mode7xx2", (s.GetCbsDbgCpuLapicMode7xx2())); err != nil {
+		return diag.Errorf("error occurred while setting property CbsDbgCpuLapicMode7xx2 in BiosPolicy object: %s", err.Error())
+	}
+
+	if err := d.Set("cbs_dbg_cpu_lapic_mode7xx3", (s.GetCbsDbgCpuLapicMode7xx3())); err != nil {
+		return diag.Errorf("error occurred while setting property CbsDbgCpuLapicMode7xx3 in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("cbs_dbg_cpu_snp_mem_cover", (s.GetCbsDbgCpuSnpMemCover())); err != nil {
@@ -5916,6 +6380,10 @@ func resourceBiosPolicyRead(c context.Context, d *schema.ResourceData, meta inte
 		return diag.Errorf("error occurred while setting property CbsDbgCpuSnpMemSizeCover in BiosPolicy object: %s", err.Error())
 	}
 
+	if err := d.Set("cbs_df_cmn4link_max_xgmi_speed", (s.GetCbsDfCmn4linkMaxXgmiSpeed())); err != nil {
+		return diag.Errorf("error occurred while setting property CbsDfCmn4linkMaxXgmiSpeed in BiosPolicy object: %s", err.Error())
+	}
+
 	if err := d.Set("cbs_df_cmn_acpi_srat_l3numa", (s.GetCbsDfCmnAcpiSratL3numa())); err != nil {
 		return diag.Errorf("error occurred while setting property CbsDfCmnAcpiSratL3numa in BiosPolicy object: %s", err.Error())
 	}
@@ -5924,12 +6392,28 @@ func resourceBiosPolicyRead(c context.Context, d *schema.ResourceData, meta inte
 		return diag.Errorf("error occurred while setting property CbsDfCmnDramNps in BiosPolicy object: %s", err.Error())
 	}
 
+	if err := d.Set("cbs_df_cmn_dram_scrub_time", (s.GetCbsDfCmnDramScrubTime())); err != nil {
+		return diag.Errorf("error occurred while setting property CbsDfCmnDramScrubTime in BiosPolicy object: %s", err.Error())
+	}
+
 	if err := d.Set("cbs_df_cmn_mem_intlv", (s.GetCbsDfCmnMemIntlv())); err != nil {
 		return diag.Errorf("error occurred while setting property CbsDfCmnMemIntlv in BiosPolicy object: %s", err.Error())
 	}
 
+	if err := d.Set("cbs_df_cmn_mem_intlv_control", (s.GetCbsDfCmnMemIntlvControl())); err != nil {
+		return diag.Errorf("error occurred while setting property CbsDfCmnMemIntlvControl in BiosPolicy object: %s", err.Error())
+	}
+
 	if err := d.Set("cbs_df_cmn_mem_intlv_size", (s.GetCbsDfCmnMemIntlvSize())); err != nil {
 		return diag.Errorf("error occurred while setting property CbsDfCmnMemIntlvSize in BiosPolicy object: %s", err.Error())
+	}
+
+	if err := d.Set("cbs_df_dbg_xgmi_link_cfg", (s.GetCbsDfDbgXgmiLinkCfg())); err != nil {
+		return diag.Errorf("error occurred while setting property CbsDfDbgXgmiLinkCfg in BiosPolicy object: %s", err.Error())
+	}
+
+	if err := d.Set("cbs_gnb_dbg_pcie_tbt_support", (s.GetCbsGnbDbgPcieTbtSupport())); err != nil {
+		return diag.Errorf("error occurred while setting property CbsGnbDbgPcieTbtSupport in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("cbs_sev_snp_support", (s.GetCbsSevSnpSupport())); err != nil {
@@ -6042,6 +6526,10 @@ func resourceBiosPolicyRead(c context.Context, d *schema.ResourceData, meta inte
 
 	if err := d.Set("description", (s.GetDescription())); err != nil {
 		return diag.Errorf("error occurred while setting property Description in BiosPolicy object: %s", err.Error())
+	}
+
+	if err := d.Set("dfx_osb_en", (s.GetDfxOsbEn())); err != nil {
+		return diag.Errorf("error occurred while setting property DfxOsbEn in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("direct_cache_access", (s.GetDirectCacheAccess())); err != nil {
@@ -6200,6 +6688,10 @@ func resourceBiosPolicyRead(c context.Context, d *schema.ResourceData, meta inte
 		return diag.Errorf("error occurred while setting property IntelVtdatsSupport in BiosPolicy object: %s", err.Error())
 	}
 
+	if err := d.Set("ioat_config_cpm", (s.GetIoatConfigCpm())); err != nil {
+		return diag.Errorf("error occurred while setting property IoatConfigCpm in BiosPolicy object: %s", err.Error())
+	}
+
 	if err := d.Set("ioh_error_enable", (s.GetIohErrorEnable())); err != nil {
 		return diag.Errorf("error occurred while setting property IohErrorEnable in BiosPolicy object: %s", err.Error())
 	}
@@ -6306,6 +6798,14 @@ func resourceBiosPolicyRead(c context.Context, d *schema.ResourceData, meta inte
 
 	if err := d.Set("mmcfg_base", (s.GetMmcfgBase())); err != nil {
 		return diag.Errorf("error occurred while setting property MmcfgBase in BiosPolicy object: %s", err.Error())
+	}
+
+	if err := d.Set("mmioh_base", (s.GetMmiohBase())); err != nil {
+		return diag.Errorf("error occurred while setting property MmiohBase in BiosPolicy object: %s", err.Error())
+	}
+
+	if err := d.Set("mmioh_size", (s.GetMmiohSize())); err != nil {
+		return diag.Errorf("error occurred while setting property MmiohSize in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("mod_time", (s.GetModTime()).String()); err != nil {
@@ -6616,6 +7116,14 @@ func resourceBiosPolicyRead(c context.Context, d *schema.ResourceData, meta inte
 		return diag.Errorf("error occurred while setting property RedirectionAfterPost in BiosPolicy object: %s", err.Error())
 	}
 
+	if err := d.Set("resize_bar_support", (s.GetResizeBarSupport())); err != nil {
+		return diag.Errorf("error occurred while setting property ResizeBarSupport in BiosPolicy object: %s", err.Error())
+	}
+
+	if err := d.Set("runtime_post_package_repair", (s.GetRuntimePostPackageRepair())); err != nil {
+		return diag.Errorf("error occurred while setting property RuntimePostPackageRepair in BiosPolicy object: %s", err.Error())
+	}
+
 	if err := d.Set("sata_mode_select", (s.GetSataModeSelect())); err != nil {
 		return diag.Errorf("error occurred while setting property SataModeSelect in BiosPolicy object: %s", err.Error())
 	}
@@ -6626,6 +7134,10 @@ func resourceBiosPolicyRead(c context.Context, d *schema.ResourceData, meta inte
 
 	if err := d.Set("select_ppr_type", (s.GetSelectPprType())); err != nil {
 		return diag.Errorf("error occurred while setting property SelectPprType in BiosPolicy object: %s", err.Error())
+	}
+
+	if err := d.Set("serial_mux", (s.GetSerialMux())); err != nil {
+		return diag.Errorf("error occurred while setting property SerialMux in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("serial_port_aenable", (s.GetSerialPortAenable())); err != nil {
@@ -7641,6 +8153,18 @@ func resourceBiosPolicyUpdate(c context.Context, d *schema.ResourceData, meta in
 		o.SetCbsCmnApbdis(x)
 	}
 
+	if d.HasChange("cbs_cmn_apbdis_df_pstate_rs") {
+		v := d.Get("cbs_cmn_apbdis_df_pstate_rs")
+		x := (v.(string))
+		o.SetCbsCmnApbdisDfPstateRs(x)
+	}
+
+	if d.HasChange("cbs_cmn_cpu_avx512") {
+		v := d.Get("cbs_cmn_cpu_avx512")
+		x := (v.(string))
+		o.SetCbsCmnCpuAvx512(x)
+	}
+
 	if d.HasChange("cbs_cmn_cpu_cpb") {
 		v := d.Get("cbs_cmn_cpu_cpb")
 		x := (v.(string))
@@ -7671,6 +8195,12 @@ func resourceBiosPolicyUpdate(c context.Context, d *schema.ResourceData, meta in
 		o.SetCbsCmnCpuL2streamHwPrefetcher(x)
 	}
 
+	if d.HasChange("cbs_cmn_cpu_sev_asid_space_limit") {
+		v := d.Get("cbs_cmn_cpu_sev_asid_space_limit")
+		x := (v.(string))
+		o.SetCbsCmnCpuSevAsidSpaceLimit(x)
+	}
+
 	if d.HasChange("cbs_cmn_cpu_smee") {
 		v := d.Get("cbs_cmn_cpu_smee")
 		x := (v.(string))
@@ -7689,10 +8219,22 @@ func resourceBiosPolicyUpdate(c context.Context, d *schema.ResourceData, meta in
 		o.SetCbsCmnDeterminismSlider(x)
 	}
 
+	if d.HasChange("cbs_cmn_edc_control_throttle") {
+		v := d.Get("cbs_cmn_edc_control_throttle")
+		x := (v.(string))
+		o.SetCbsCmnEdcControlThrottle(x)
+	}
+
 	if d.HasChange("cbs_cmn_efficiency_mode_en") {
 		v := d.Get("cbs_cmn_efficiency_mode_en")
 		x := (v.(string))
 		o.SetCbsCmnEfficiencyModeEn(x)
+	}
+
+	if d.HasChange("cbs_cmn_efficiency_mode_en_rs") {
+		v := d.Get("cbs_cmn_efficiency_mode_en_rs")
+		x := (v.(string))
+		o.SetCbsCmnEfficiencyModeEnRs(x)
 	}
 
 	if d.HasChange("cbs_cmn_fixed_soc_pstate") {
@@ -7713,6 +8255,18 @@ func resourceBiosPolicyUpdate(c context.Context, d *schema.ResourceData, meta in
 		o.SetCbsCmnGnbSmuDfCstates(x)
 	}
 
+	if d.HasChange("cbs_cmn_gnb_smu_dffo_rs") {
+		v := d.Get("cbs_cmn_gnb_smu_dffo_rs")
+		x := (v.(string))
+		o.SetCbsCmnGnbSmuDffoRs(x)
+	}
+
+	if d.HasChange("cbs_cmn_gnb_smu_dlwm_support") {
+		v := d.Get("cbs_cmn_gnb_smu_dlwm_support")
+		x := (v.(string))
+		o.SetCbsCmnGnbSmuDlwmSupport(x)
+	}
+
 	if d.HasChange("cbs_cmn_gnb_smucppc") {
 		v := d.Get("cbs_cmn_gnb_smucppc")
 		x := (v.(string))
@@ -7725,16 +8279,58 @@ func resourceBiosPolicyUpdate(c context.Context, d *schema.ResourceData, meta in
 		o.SetCbsCmnMemCtrlBankGroupSwapDdr4(x)
 	}
 
+	if d.HasChange("cbs_cmn_mem_ctrller_pwr_dn_en_ddr") {
+		v := d.Get("cbs_cmn_mem_ctrller_pwr_dn_en_ddr")
+		x := (v.(string))
+		o.SetCbsCmnMemCtrllerPwrDnEnDdr(x)
+	}
+
+	if d.HasChange("cbs_cmn_mem_dram_refresh_rate") {
+		v := d.Get("cbs_cmn_mem_dram_refresh_rate")
+		x := (v.(string))
+		o.SetCbsCmnMemDramRefreshRate(x)
+	}
+
 	if d.HasChange("cbs_cmn_mem_map_bank_interleave_ddr4") {
 		v := d.Get("cbs_cmn_mem_map_bank_interleave_ddr4")
 		x := (v.(string))
 		o.SetCbsCmnMemMapBankInterleaveDdr4(x)
 	}
 
+	if d.HasChange("cbs_cmn_mem_speed_ddr47xx2") {
+		v := d.Get("cbs_cmn_mem_speed_ddr47xx2")
+		x := (v.(string))
+		o.SetCbsCmnMemSpeedDdr47xx2(x)
+	}
+
+	if d.HasChange("cbs_cmn_mem_speed_ddr47xx3") {
+		v := d.Get("cbs_cmn_mem_speed_ddr47xx3")
+		x := (v.(string))
+		o.SetCbsCmnMemSpeedDdr47xx3(x)
+	}
+
+	if d.HasChange("cbs_cmn_preferred_io7xx2") {
+		v := d.Get("cbs_cmn_preferred_io7xx2")
+		x := (v.(string))
+		o.SetCbsCmnPreferredIo7xx2(x)
+	}
+
+	if d.HasChange("cbs_cmn_preferred_io7xx3") {
+		v := d.Get("cbs_cmn_preferred_io7xx3")
+		x := (v.(string))
+		o.SetCbsCmnPreferredIo7xx3(x)
+	}
+
 	if d.HasChange("cbs_cmnc_tdp_ctl") {
 		v := d.Get("cbs_cmnc_tdp_ctl")
 		x := (v.(string))
 		o.SetCbsCmncTdpCtl(x)
+	}
+
+	if d.HasChange("cbs_cmnx_gmi_force_link_width_rs") {
+		v := d.Get("cbs_cmnx_gmi_force_link_width_rs")
+		x := (v.(string))
+		o.SetCbsCmnxGmiForceLinkWidthRs(x)
 	}
 
 	if d.HasChange("cbs_cpu_ccd_ctrl_ssp") {
@@ -7749,10 +8345,46 @@ func resourceBiosPolicyUpdate(c context.Context, d *schema.ResourceData, meta in
 		o.SetCbsCpuCoreCtrl(x)
 	}
 
+	if d.HasChange("cbs_cpu_down_core_ctrl_bergamo") {
+		v := d.Get("cbs_cpu_down_core_ctrl_bergamo")
+		x := (v.(string))
+		o.SetCbsCpuDownCoreCtrlBergamo(x)
+	}
+
+	if d.HasChange("cbs_cpu_down_core_ctrl_genoa") {
+		v := d.Get("cbs_cpu_down_core_ctrl_genoa")
+		x := (v.(string))
+		o.SetCbsCpuDownCoreCtrlGenoa(x)
+	}
+
 	if d.HasChange("cbs_cpu_smt_ctrl") {
 		v := d.Get("cbs_cpu_smt_ctrl")
 		x := (v.(string))
 		o.SetCbsCpuSmtCtrl(x)
+	}
+
+	if d.HasChange("cbs_dbg_cpu_gen_cpu_wdt") {
+		v := d.Get("cbs_dbg_cpu_gen_cpu_wdt")
+		x := (v.(string))
+		o.SetCbsDbgCpuGenCpuWdt(x)
+	}
+
+	if d.HasChange("cbs_dbg_cpu_lapic_mode") {
+		v := d.Get("cbs_dbg_cpu_lapic_mode")
+		x := (v.(string))
+		o.SetCbsDbgCpuLapicMode(x)
+	}
+
+	if d.HasChange("cbs_dbg_cpu_lapic_mode7xx2") {
+		v := d.Get("cbs_dbg_cpu_lapic_mode7xx2")
+		x := (v.(string))
+		o.SetCbsDbgCpuLapicMode7xx2(x)
+	}
+
+	if d.HasChange("cbs_dbg_cpu_lapic_mode7xx3") {
+		v := d.Get("cbs_dbg_cpu_lapic_mode7xx3")
+		x := (v.(string))
+		o.SetCbsDbgCpuLapicMode7xx3(x)
 	}
 
 	if d.HasChange("cbs_dbg_cpu_snp_mem_cover") {
@@ -7767,6 +8399,12 @@ func resourceBiosPolicyUpdate(c context.Context, d *schema.ResourceData, meta in
 		o.SetCbsDbgCpuSnpMemSizeCover(x)
 	}
 
+	if d.HasChange("cbs_df_cmn4link_max_xgmi_speed") {
+		v := d.Get("cbs_df_cmn4link_max_xgmi_speed")
+		x := (v.(string))
+		o.SetCbsDfCmn4linkMaxXgmiSpeed(x)
+	}
+
 	if d.HasChange("cbs_df_cmn_acpi_srat_l3numa") {
 		v := d.Get("cbs_df_cmn_acpi_srat_l3numa")
 		x := (v.(string))
@@ -7779,16 +8417,40 @@ func resourceBiosPolicyUpdate(c context.Context, d *schema.ResourceData, meta in
 		o.SetCbsDfCmnDramNps(x)
 	}
 
+	if d.HasChange("cbs_df_cmn_dram_scrub_time") {
+		v := d.Get("cbs_df_cmn_dram_scrub_time")
+		x := (v.(string))
+		o.SetCbsDfCmnDramScrubTime(x)
+	}
+
 	if d.HasChange("cbs_df_cmn_mem_intlv") {
 		v := d.Get("cbs_df_cmn_mem_intlv")
 		x := (v.(string))
 		o.SetCbsDfCmnMemIntlv(x)
 	}
 
+	if d.HasChange("cbs_df_cmn_mem_intlv_control") {
+		v := d.Get("cbs_df_cmn_mem_intlv_control")
+		x := (v.(string))
+		o.SetCbsDfCmnMemIntlvControl(x)
+	}
+
 	if d.HasChange("cbs_df_cmn_mem_intlv_size") {
 		v := d.Get("cbs_df_cmn_mem_intlv_size")
 		x := (v.(string))
 		o.SetCbsDfCmnMemIntlvSize(x)
+	}
+
+	if d.HasChange("cbs_df_dbg_xgmi_link_cfg") {
+		v := d.Get("cbs_df_dbg_xgmi_link_cfg")
+		x := (v.(string))
+		o.SetCbsDfDbgXgmiLinkCfg(x)
+	}
+
+	if d.HasChange("cbs_gnb_dbg_pcie_tbt_support") {
+		v := d.Get("cbs_gnb_dbg_pcie_tbt_support")
+		x := (v.(string))
+		o.SetCbsGnbDbgPcieTbtSupport(x)
 	}
 
 	if d.HasChange("cbs_sev_snp_support") {
@@ -7947,6 +8609,12 @@ func resourceBiosPolicyUpdate(c context.Context, d *schema.ResourceData, meta in
 		v := d.Get("description")
 		x := (v.(string))
 		o.SetDescription(x)
+	}
+
+	if d.HasChange("dfx_osb_en") {
+		v := d.Get("dfx_osb_en")
+		x := (v.(string))
+		o.SetDfxOsbEn(x)
 	}
 
 	if d.HasChange("direct_cache_access") {
@@ -8177,6 +8845,12 @@ func resourceBiosPolicyUpdate(c context.Context, d *schema.ResourceData, meta in
 		o.SetIntelVtdatsSupport(x)
 	}
 
+	if d.HasChange("ioat_config_cpm") {
+		v := d.Get("ioat_config_cpm")
+		x := (v.(string))
+		o.SetIoatConfigCpm(x)
+	}
+
 	if d.HasChange("ioh_error_enable") {
 		v := d.Get("ioh_error_enable")
 		x := (v.(string))
@@ -8337,6 +9011,18 @@ func resourceBiosPolicyUpdate(c context.Context, d *schema.ResourceData, meta in
 		v := d.Get("mmcfg_base")
 		x := (v.(string))
 		o.SetMmcfgBase(x)
+	}
+
+	if d.HasChange("mmioh_base") {
+		v := d.Get("mmioh_base")
+		x := (v.(string))
+		o.SetMmiohBase(x)
+	}
+
+	if d.HasChange("mmioh_size") {
+		v := d.Get("mmioh_size")
+		x := (v.(string))
+		o.SetMmiohSize(x)
 	}
 
 	if d.HasChange("moid") {
@@ -8846,6 +9532,18 @@ func resourceBiosPolicyUpdate(c context.Context, d *schema.ResourceData, meta in
 		o.SetRedirectionAfterPost(x)
 	}
 
+	if d.HasChange("resize_bar_support") {
+		v := d.Get("resize_bar_support")
+		x := (v.(string))
+		o.SetResizeBarSupport(x)
+	}
+
+	if d.HasChange("runtime_post_package_repair") {
+		v := d.Get("runtime_post_package_repair")
+		x := (v.(string))
+		o.SetRuntimePostPackageRepair(x)
+	}
+
 	if d.HasChange("sata_mode_select") {
 		v := d.Get("sata_mode_select")
 		x := (v.(string))
@@ -8862,6 +9560,12 @@ func resourceBiosPolicyUpdate(c context.Context, d *schema.ResourceData, meta in
 		v := d.Get("select_ppr_type")
 		x := (v.(string))
 		o.SetSelectPprType(x)
+	}
+
+	if d.HasChange("serial_mux") {
+		v := d.Get("serial_mux")
+		x := (v.(string))
+		o.SetSerialMux(x)
 	}
 
 	if d.HasChange("serial_port_aenable") {

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-15830
+API version: 1.0.11-16342
 Contact: intersight@cisco.com
 */
 
@@ -28,8 +28,12 @@ type WorkflowWorkflowProperties struct {
 	Cloneable *bool `json:"Cloneable,omitempty"`
 	// Enabling this flag will capture request and response details as debug logs for tasks that are using workflow.BatchApi for implementation. For other tasks in the workflow which are not based on workflow.BatchApi logs will not be generated.
 	EnableDebug *bool `json:"EnableDebug,omitempty"`
+	// This flag determines if this workflow publish status is enforced or not.
+	EnablePublishStatus *bool `json:"EnablePublishStatus,omitempty"`
 	// When set to false the workflow is owned by the system and used for internal services. Such workflows cannot be directly used by external entities.
 	ExternalMeta *bool `json:"ExternalMeta,omitempty"`
+	// The workflow publish status (Draft, Published, Archived), this property is relevant only when enablePublishStatus is set to true. * `Draft` - The enum specifies the option as Draft which means the meta definition is being designed and tested. * `Published` - The enum specifies the option as Published which means the meta definition is ready for consumption. * `Archived` - The enum specifies the option as Archived which means the meta definition is archived and can no longer be consumed.
+	PublishStatus *string `json:"PublishStatus,omitempty"`
 	// When set to true, the failed workflow executions from this workflow definition can be retried for up to 2 weeks since the last modification time. After two weeks of inactivity on the workflow execution, the option to retry the failed workflow will be disabled.
 	Retryable *bool `json:"Retryable,omitempty"`
 	// When set to true, the changes are automatically rolled back if the workflow execution is canceled.
@@ -53,6 +57,10 @@ func NewWorkflowWorkflowProperties(classId string, objectType string) *WorkflowW
 	this.ObjectType = objectType
 	var enableDebug bool = false
 	this.EnableDebug = &enableDebug
+	var enablePublishStatus bool = false
+	this.EnablePublishStatus = &enablePublishStatus
+	var publishStatus string = "Draft"
+	this.PublishStatus = &publishStatus
 	var retryable bool = false
 	this.Retryable = &retryable
 	var rollbackOnCancel bool = false
@@ -75,6 +83,10 @@ func NewWorkflowWorkflowPropertiesWithDefaults() *WorkflowWorkflowProperties {
 	this.ObjectType = objectType
 	var enableDebug bool = false
 	this.EnableDebug = &enableDebug
+	var enablePublishStatus bool = false
+	this.EnablePublishStatus = &enablePublishStatus
+	var publishStatus string = "Draft"
+	this.PublishStatus = &publishStatus
 	var retryable bool = false
 	this.Retryable = &retryable
 	var rollbackOnCancel bool = false
@@ -198,6 +210,38 @@ func (o *WorkflowWorkflowProperties) SetEnableDebug(v bool) {
 	o.EnableDebug = &v
 }
 
+// GetEnablePublishStatus returns the EnablePublishStatus field value if set, zero value otherwise.
+func (o *WorkflowWorkflowProperties) GetEnablePublishStatus() bool {
+	if o == nil || o.EnablePublishStatus == nil {
+		var ret bool
+		return ret
+	}
+	return *o.EnablePublishStatus
+}
+
+// GetEnablePublishStatusOk returns a tuple with the EnablePublishStatus field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *WorkflowWorkflowProperties) GetEnablePublishStatusOk() (*bool, bool) {
+	if o == nil || o.EnablePublishStatus == nil {
+		return nil, false
+	}
+	return o.EnablePublishStatus, true
+}
+
+// HasEnablePublishStatus returns a boolean if a field has been set.
+func (o *WorkflowWorkflowProperties) HasEnablePublishStatus() bool {
+	if o != nil && o.EnablePublishStatus != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetEnablePublishStatus gets a reference to the given bool and assigns it to the EnablePublishStatus field.
+func (o *WorkflowWorkflowProperties) SetEnablePublishStatus(v bool) {
+	o.EnablePublishStatus = &v
+}
+
 // GetExternalMeta returns the ExternalMeta field value if set, zero value otherwise.
 func (o *WorkflowWorkflowProperties) GetExternalMeta() bool {
 	if o == nil || o.ExternalMeta == nil {
@@ -228,6 +272,38 @@ func (o *WorkflowWorkflowProperties) HasExternalMeta() bool {
 // SetExternalMeta gets a reference to the given bool and assigns it to the ExternalMeta field.
 func (o *WorkflowWorkflowProperties) SetExternalMeta(v bool) {
 	o.ExternalMeta = &v
+}
+
+// GetPublishStatus returns the PublishStatus field value if set, zero value otherwise.
+func (o *WorkflowWorkflowProperties) GetPublishStatus() string {
+	if o == nil || o.PublishStatus == nil {
+		var ret string
+		return ret
+	}
+	return *o.PublishStatus
+}
+
+// GetPublishStatusOk returns a tuple with the PublishStatus field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *WorkflowWorkflowProperties) GetPublishStatusOk() (*string, bool) {
+	if o == nil || o.PublishStatus == nil {
+		return nil, false
+	}
+	return o.PublishStatus, true
+}
+
+// HasPublishStatus returns a boolean if a field has been set.
+func (o *WorkflowWorkflowProperties) HasPublishStatus() bool {
+	if o != nil && o.PublishStatus != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetPublishStatus gets a reference to the given string and assigns it to the PublishStatus field.
+func (o *WorkflowWorkflowProperties) SetPublishStatus(v string) {
+	o.PublishStatus = &v
 }
 
 // GetRetryable returns the Retryable field value if set, zero value otherwise.
@@ -380,8 +456,14 @@ func (o WorkflowWorkflowProperties) MarshalJSON() ([]byte, error) {
 	if o.EnableDebug != nil {
 		toSerialize["EnableDebug"] = o.EnableDebug
 	}
+	if o.EnablePublishStatus != nil {
+		toSerialize["EnablePublishStatus"] = o.EnablePublishStatus
+	}
 	if o.ExternalMeta != nil {
 		toSerialize["ExternalMeta"] = o.ExternalMeta
+	}
+	if o.PublishStatus != nil {
+		toSerialize["PublishStatus"] = o.PublishStatus
 	}
 	if o.Retryable != nil {
 		toSerialize["Retryable"] = o.Retryable
@@ -413,8 +495,12 @@ func (o *WorkflowWorkflowProperties) UnmarshalJSON(bytes []byte) (err error) {
 		Cloneable *bool `json:"Cloneable,omitempty"`
 		// Enabling this flag will capture request and response details as debug logs for tasks that are using workflow.BatchApi for implementation. For other tasks in the workflow which are not based on workflow.BatchApi logs will not be generated.
 		EnableDebug *bool `json:"EnableDebug,omitempty"`
+		// This flag determines if this workflow publish status is enforced or not.
+		EnablePublishStatus *bool `json:"EnablePublishStatus,omitempty"`
 		// When set to false the workflow is owned by the system and used for internal services. Such workflows cannot be directly used by external entities.
 		ExternalMeta *bool `json:"ExternalMeta,omitempty"`
+		// The workflow publish status (Draft, Published, Archived), this property is relevant only when enablePublishStatus is set to true. * `Draft` - The enum specifies the option as Draft which means the meta definition is being designed and tested. * `Published` - The enum specifies the option as Published which means the meta definition is ready for consumption. * `Archived` - The enum specifies the option as Archived which means the meta definition is archived and can no longer be consumed.
+		PublishStatus *string `json:"PublishStatus,omitempty"`
 		// When set to true, the failed workflow executions from this workflow definition can be retried for up to 2 weeks since the last modification time. After two weeks of inactivity on the workflow execution, the option to retry the failed workflow will be disabled.
 		Retryable *bool `json:"Retryable,omitempty"`
 		// When set to true, the changes are automatically rolled back if the workflow execution is canceled.
@@ -434,7 +520,9 @@ func (o *WorkflowWorkflowProperties) UnmarshalJSON(bytes []byte) (err error) {
 		varWorkflowWorkflowProperties.ObjectType = varWorkflowWorkflowPropertiesWithoutEmbeddedStruct.ObjectType
 		varWorkflowWorkflowProperties.Cloneable = varWorkflowWorkflowPropertiesWithoutEmbeddedStruct.Cloneable
 		varWorkflowWorkflowProperties.EnableDebug = varWorkflowWorkflowPropertiesWithoutEmbeddedStruct.EnableDebug
+		varWorkflowWorkflowProperties.EnablePublishStatus = varWorkflowWorkflowPropertiesWithoutEmbeddedStruct.EnablePublishStatus
 		varWorkflowWorkflowProperties.ExternalMeta = varWorkflowWorkflowPropertiesWithoutEmbeddedStruct.ExternalMeta
+		varWorkflowWorkflowProperties.PublishStatus = varWorkflowWorkflowPropertiesWithoutEmbeddedStruct.PublishStatus
 		varWorkflowWorkflowProperties.Retryable = varWorkflowWorkflowPropertiesWithoutEmbeddedStruct.Retryable
 		varWorkflowWorkflowProperties.RollbackOnCancel = varWorkflowWorkflowPropertiesWithoutEmbeddedStruct.RollbackOnCancel
 		varWorkflowWorkflowProperties.RollbackOnFailure = varWorkflowWorkflowPropertiesWithoutEmbeddedStruct.RollbackOnFailure
@@ -460,7 +548,9 @@ func (o *WorkflowWorkflowProperties) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Cloneable")
 		delete(additionalProperties, "EnableDebug")
+		delete(additionalProperties, "EnablePublishStatus")
 		delete(additionalProperties, "ExternalMeta")
+		delete(additionalProperties, "PublishStatus")
 		delete(additionalProperties, "Retryable")
 		delete(additionalProperties, "RollbackOnCancel")
 		delete(additionalProperties, "RollbackOnFailure")

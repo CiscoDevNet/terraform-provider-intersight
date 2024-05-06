@@ -19,7 +19,7 @@ resource "intersight_uuidpool_pool" "uuidpool_pool1" {
   assignment_order = "default"
   prefix           = "123e4567-e89b-42d3"
   uuid_suffix_blocks {
-    class_id    = "uuidpool_UuidBlock"
+    class_id    = "uuidpool.UuidBlock"
     object_type = "uuidpool.UuidBlock"
     from        = "123e4567-e89b-42d3"
     to          = "123e4567-e89b-84e6"
@@ -36,6 +36,7 @@ variable "organization" {
   description = "value for organization"
 }
 ```
+
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(ReadOnly) The Account ID for this managed object. 

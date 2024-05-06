@@ -60,6 +60,41 @@ func getMarketplaceUseCaseSchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"catalog": {
+			Description: "A reference to a workflowCatalog resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
 		"class_id": {
 			Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 			Type:        schema.TypeString,
@@ -86,7 +121,7 @@ func getMarketplaceUseCaseSchema() map[string]*schema.Schema {
 						Optional:    true,
 					},
 					"name": {
-						Description: "The string field to hold the key name",
+						Description: "The string field to hold the key name.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
@@ -96,7 +131,7 @@ func getMarketplaceUseCaseSchema() map[string]*schema.Schema {
 						Optional:    true,
 					},
 					"nr_version": {
-						Description: "The string field to hold the value",
+						Description: "The string field to hold the value.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
@@ -134,12 +169,12 @@ func getMarketplaceUseCaseSchema() map[string]*schema.Schema {
 									Optional:    true,
 								},
 								"description": {
-									Description: "A description for the automation",
+									Description: "A description for the automation.",
 									Type:        schema.TypeString,
 									Optional:    true,
 								},
 								"name": {
-									Description: "A name for the automation",
+									Description: "A name for the automation.",
 									Type:        schema.TypeString,
 									Optional:    true,
 								},
@@ -157,27 +192,27 @@ func getMarketplaceUseCaseSchema() map[string]*schema.Schema {
 						Optional:    true,
 					},
 					"contents": {
-						Description: "The string field to hold the contents value",
+						Description: "The string field to hold the contents value.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
 					"description": {
-						Description: "The string field to hold the description value",
+						Description: "The string field to hold the description value.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
 					"icon": {
-						Description: "A base64-encoded image for the use case",
+						Description: "A base64-encoded image for the use case.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
 					"locale": {
-						Description: "The string field to hold the locale",
+						Description: "The string field to hold the locale.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
 					"name": {
-						Description: "The string field to hold the name value",
+						Description: "The string field to hold the name value.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
@@ -187,7 +222,7 @@ func getMarketplaceUseCaseSchema() map[string]*schema.Schema {
 						Optional:    true,
 					},
 					"summary": {
-						Description: "The string field to hold the summary value",
+						Description: "The string field to hold the summary value.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
@@ -208,41 +243,6 @@ func getMarketplaceUseCaseSchema() map[string]*schema.Schema {
 			Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 			Type:        schema.TypeString,
 			Optional:    true,
-		},
-		"organization": {
-			Description: "A reference to a organizationOrganization resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
-			Type:        schema.TypeList,
-			MaxItems:    1,
-			Optional:    true,
-			Elem: &schema.Resource{
-				Schema: map[string]*schema.Schema{
-					"additional_properties": {
-						Type:             schema.TypeString,
-						Optional:         true,
-						DiffSuppressFunc: SuppressDiffAdditionProps,
-					},
-					"class_id": {
-						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"moid": {
-						Description: "The Moid of the referenced REST resource.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"object_type": {
-						Description: "The fully-qualified name of the remote type referred by this relationship.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"selector": {
-						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-				},
-			},
 		},
 		"owners": {
 			Type:     schema.TypeList,
@@ -345,6 +345,11 @@ func getMarketplaceUseCaseSchema() map[string]*schema.Schema {
 					},
 				},
 			},
+		},
+		"unique_name": {
+			Description: "A unique identifier is used to prevent duplicates.",
+			Type:        schema.TypeString,
+			Optional:    true,
 		},
 		"version_context": {
 			Description: "The versioning info for this managed object.",
@@ -535,6 +540,49 @@ func dataSourceMarketplaceUseCaseRead(c context.Context, d *schema.ResourceData,
 		o.SetAncestors(x)
 	}
 
+	if v, ok := d.GetOk("catalog"); ok {
+		p := make([]models.WorkflowCatalogRelationship, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.MoMoRef{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			p = append(p, models.MoMoRefAsWorkflowCatalogRelationship(o))
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetCatalog(x)
+		}
+	}
+
 	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
 		o.SetClassId(x)
@@ -712,49 +760,6 @@ func dataSourceMarketplaceUseCaseRead(c context.Context, d *schema.ResourceData,
 		o.SetObjectType(x)
 	}
 
-	if v, ok := d.GetOk("organization"); ok {
-		p := make([]models.OrganizationOrganizationRelationship, 0, 1)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			l := s[i].(map[string]interface{})
-			o := &models.MoMoRef{}
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("mo.MoRef")
-			if v, ok := l["moid"]; ok {
-				{
-					x := (v.(string))
-					o.SetMoid(x)
-				}
-			}
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["selector"]; ok {
-				{
-					x := (v.(string))
-					o.SetSelector(x)
-				}
-			}
-			p = append(p, models.MoMoRefAsOrganizationOrganizationRelationship(o))
-		}
-		if len(p) > 0 {
-			x := p[0]
-			o.SetOrganization(x)
-		}
-	}
-
 	if v, ok := d.GetOk("owners"); ok {
 		x := make([]string, 0)
 		y := reflect.ValueOf(v)
@@ -887,6 +892,11 @@ func dataSourceMarketplaceUseCaseRead(c context.Context, d *schema.ResourceData,
 		o.SetTags(x)
 	}
 
+	if v, ok := d.GetOk("unique_name"); ok {
+		x := (v.(string))
+		o.SetUniqueName(x)
+	}
+
 	if v, ok := d.GetOk("version_context"); ok {
 		p := make([]models.MoVersionContext, 0, 1)
 		s := v.([]interface{})
@@ -1000,6 +1010,8 @@ func dataSourceMarketplaceUseCaseRead(c context.Context, d *schema.ResourceData,
 				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
 
 				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)
+
+				temp["catalog"] = flattenMapWorkflowCatalogRelationship(s.GetCatalog(), d)
 				temp["class_id"] = (s.GetClassId())
 
 				temp["create_time"] = (s.GetCreateTime()).String()
@@ -1012,8 +1024,6 @@ func dataSourceMarketplaceUseCaseRead(c context.Context, d *schema.ResourceData,
 				temp["mod_time"] = (s.GetModTime()).String()
 				temp["moid"] = (s.GetMoid())
 				temp["object_type"] = (s.GetObjectType())
-
-				temp["organization"] = flattenMapOrganizationOrganizationRelationship(s.GetOrganization(), d)
 				temp["owners"] = (s.GetOwners())
 
 				temp["parent"] = flattenMapMoBaseMoRelationship(s.GetParent(), d)
@@ -1022,6 +1032,7 @@ func dataSourceMarketplaceUseCaseRead(c context.Context, d *schema.ResourceData,
 				temp["shared_scope"] = (s.GetSharedScope())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
+				temp["unique_name"] = (s.GetUniqueName())
 
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
 				marketplaceUseCaseResults = append(marketplaceUseCaseResults, temp)

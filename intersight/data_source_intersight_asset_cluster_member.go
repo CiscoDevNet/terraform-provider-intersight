@@ -292,27 +292,32 @@ func getAssetClusterMemberSchema() map[string]*schema.Schema {
 						Optional:    true,
 					},
 					"pid": {
-						Description: "The device model (PID) extracted from the X.509 SUDI Leaf Certificate.",
+						Description: "The device model (PID) extracted from the X.509 SUDI leaf certificate.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
 					"serial_number": {
-						Description: "The device SerialNumber extracted from the X.509 SUDI Leaf Certificate.",
+						Description: "The device SerialNumber extracted from the X.509 SUDI leaf certificate.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
 					"signature": {
-						Description: "The signature is obtained by taking the base64 encoding of the Serial Number + PID + Status, taking the SHA256 hash and then signing with the SUDI X.509 Leaf Certificate.",
+						Description: "The base64-encoding of a SUDI signature, signed with the provided Trust Anchor Module (TAM) private key and signatureScheme.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
 					"status": {
-						Description: "The validation status of the device.\n* `DeviceStatusUnknown` - SUDI validation is done on the establishment of a connection. Before a device connects or after it disconnects, the SUDI validation status is set to this value.\n* `Verified` - The device returned a valid PID, Serial Number, Status and X.509 Leaf Certificate. The certificate signing chain was validated.\n* `CertificateValidationFailed` - Validation of the certificate signing chain failed.\n* `UnsupportedFirmware` - The firmware version of the Cisco IMC that is installed does not contain the SUDI APIs needed to perform validation.\n* `UnsupportedHardware` - The device is a model that does not contain a Trust Anchor Module (TAM) and thus cannot be validated.\n* `DeviceNotResponding` - A request was sent to the device, but no response was received.",
+						Description: "The validation status of the device.\n* `DeviceStatusUnknown` - SUDI validation is done on the establishment of a connection. Before a device connects or after it disconnects, the SUDI validation status is set to this value.\n* `Verified` - The SUDI signature and certificate have been validated by the device. The device PID, Serial Number, Status and X.509 certificates were validated by a Trusted Anchor Module. The Intersight services have not cross-validated the SUDI signature.\n* `EndToEndVerified` - The SUDI signature and certificate have been validated by the device and by the Intersight services. The device PID, Serial Number, Status and X.509 certificates were validated by a Trusted Anchor Module.\n* `CertificateValidationFailed` - Validation of the certificate signing chain failed.\n* `UnsupportedSignatureScheme` - The SUDI signature scheme is not supported.\n* `SignatureValidationFailed` - Validation of the SUDI signature has failed.\n* `UnsupportedFirmware` - The firmware version of the Cisco IMC that is installed does not contain the SUDI APIs needed to perform validation.\n* `UnsupportedHardware` - The device is a model that does not contain a Trust Anchor Module (TAM) and thus cannot be validated.\n* `DeviceError` - The device returned an error when it received a SUDIrequrest request.\n* `DeviceNotResponding` - A request was sent to the device, but no response was received.\n* `InvalidSignatureEncoding` - The encoding of the SUDI signature is invalid.\n* `MissingSignature` - The SUDI signature is missing.\n* `MissingSignatureScheme` - The SUDI signature scheme is missing.\n* `MissingCertificate` - The SUDI certificate is missing.\n* `InvalidCertificateEncoding` - The encoding of the SUDI certificate is invalid.\n* `InvalidIdentity` - The model or serial number of the device is either missing or does not match the certificate attributes.\n* `Suspect` - The DC claims the SUDI has been verified, but there is no way to validate the claim.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"status_details": {
+						Description: "The detailed validation status of the device, such as an error message explaining why the validation failed.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
 					"sudi_certificate": {
-						Description: "The X.509 SUDI Leaf Certificate from the Trust Anchor Module. The certificate is serialized in PEM format (Base64 encoded DER certificate).",
+						Description: "The X.509 SUDI leaf certificate from the Trust Anchor Module. The certificate is serialized in PEM format (Base64 encoded DER certificate).",
 						Type:        schema.TypeList,
 						MaxItems:    1,
 						Optional:    true,
@@ -944,68 +949,6 @@ func dataSourceAssetClusterMemberRead(c context.Context, d *schema.ResourceData,
 				{
 					x := (v.(string))
 					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["pid"]; ok {
-				{
-					x := (v.(string))
-					o.SetPid(x)
-				}
-			}
-			if v, ok := l["serial_number"]; ok {
-				{
-					x := (v.(string))
-					o.SetSerialNumber(x)
-				}
-			}
-			if v, ok := l["signature"]; ok {
-				{
-					x := (v.(string))
-					o.SetSignature(x)
-				}
-			}
-			if v, ok := l["status"]; ok {
-				{
-					x := (v.(string))
-					o.SetStatus(x)
-				}
-			}
-			if v, ok := l["sudi_certificate"]; ok {
-				{
-					p := make([]models.X509Certificate, 0, 1)
-					s := v.([]interface{})
-					for i := 0; i < len(s); i++ {
-						l := s[i].(map[string]interface{})
-						o := models.NewX509CertificateWithDefaults()
-						if v, ok := l["additional_properties"]; ok {
-							{
-								x := []byte(v.(string))
-								var x1 interface{}
-								err := json.Unmarshal(x, &x1)
-								if err == nil && x1 != nil {
-									o.AdditionalProperties = x1.(map[string]interface{})
-								}
-							}
-						}
-						o.SetClassId("x509.Certificate")
-						if v, ok := l["object_type"]; ok {
-							{
-								x := (v.(string))
-								o.SetObjectType(x)
-							}
-						}
-						if v, ok := l["pem_certificate"]; ok {
-							{
-								x := (v.(string))
-								o.SetPemCertificate(x)
-							}
-						}
-						p = append(p, *o)
-					}
-					if len(p) > 0 {
-						x := p[0]
-						o.SetSudiCertificate(x)
-					}
 				}
 			}
 			p = append(p, *o)

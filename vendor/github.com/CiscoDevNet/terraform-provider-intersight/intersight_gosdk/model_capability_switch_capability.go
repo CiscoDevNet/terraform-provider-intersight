@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-15830
+API version: 1.0.11-16342
 Contact: intersight@cisco.com
 */
 
@@ -40,23 +40,20 @@ type CapabilitySwitchCapability struct {
 	// Maximum allowed physical ports on this switch.
 	MaxPorts *int64 `json:"MaxPorts,omitempty"`
 	// Maximum allowed physical slots on this switch.
-	MaxSlots *int64 `json:"MaxSlots,omitempty"`
-	// Minimum firmware version supported for breakout ports on this switch.
-	MinVersionWithBreakoutSupport *string `json:"MinVersionWithBreakoutSupport,omitempty"`
-	// Minimum firmware version supported for locator leds on this switch.
-	MinVersionWithLocatorLedSupport *string `json:"MinVersionWithLocatorLedSupport,omitempty"`
-	// Minimum firmware version supported for 'negotiate auto 25000' port admin speed on this switch.
-	MinVersionWithNegAuto25g  *string                               `json:"MinVersionWithNegAuto25g,omitempty"`
-	NetworkLimits             NullableCapabilitySwitchNetworkLimits `json:"NetworkLimits,omitempty"`
-	PortsSupporting100gSpeed  []CapabilityPortRange                 `json:"PortsSupporting100gSpeed,omitempty"`
-	PortsSupporting10gSpeed   []CapabilityPortRange                 `json:"PortsSupporting10gSpeed,omitempty"`
-	PortsSupporting1gSpeed    []CapabilityPortRange                 `json:"PortsSupporting1gSpeed,omitempty"`
-	PortsSupporting25gSpeed   []CapabilityPortRange                 `json:"PortsSupporting25gSpeed,omitempty"`
-	PortsSupporting40gSpeed   []CapabilityPortRange                 `json:"PortsSupporting40gSpeed,omitempty"`
-	PortsSupportingBreakout   []CapabilityPortRange                 `json:"PortsSupportingBreakout,omitempty"`
-	PortsSupportingFcoe       []CapabilityPortRange                 `json:"PortsSupportingFcoe,omitempty"`
-	PortsSupportingServerRole []CapabilityPortRange                 `json:"PortsSupportingServerRole,omitempty"`
-	ReservedVsans             []CapabilityPortRange                 `json:"ReservedVsans,omitempty"`
+	MaxSlots                           *int64                                `json:"MaxSlots,omitempty"`
+	MinVersionMapWithBreakoutSupport   NullableFirmwareVersionMap            `json:"MinVersionMapWithBreakoutSupport,omitempty"`
+	MinVersionMapWithLocatorLedSupport NullableFirmwareVersionMap            `json:"MinVersionMapWithLocatorLedSupport,omitempty"`
+	MinVersionMapWithNegAuto25gSupport NullableFirmwareVersionMap            `json:"MinVersionMapWithNegAuto25gSupport,omitempty"`
+	NetworkLimits                      NullableCapabilitySwitchNetworkLimits `json:"NetworkLimits,omitempty"`
+	PortsSupporting100gSpeed           []CapabilityPortRange                 `json:"PortsSupporting100gSpeed,omitempty"`
+	PortsSupporting10gSpeed            []CapabilityPortRange                 `json:"PortsSupporting10gSpeed,omitempty"`
+	PortsSupporting1gSpeed             []CapabilityPortRange                 `json:"PortsSupporting1gSpeed,omitempty"`
+	PortsSupporting25gSpeed            []CapabilityPortRange                 `json:"PortsSupporting25gSpeed,omitempty"`
+	PortsSupporting40gSpeed            []CapabilityPortRange                 `json:"PortsSupporting40gSpeed,omitempty"`
+	PortsSupportingBreakout            []CapabilityPortRange                 `json:"PortsSupportingBreakout,omitempty"`
+	PortsSupportingFcoe                []CapabilityPortRange                 `json:"PortsSupportingFcoe,omitempty"`
+	PortsSupportingServerRole          []CapabilityPortRange                 `json:"PortsSupportingServerRole,omitempty"`
+	ReservedVsans                      []CapabilityPortRange                 `json:"ReservedVsans,omitempty"`
 	// Sereno Adaptor with Netflow support on this switch.
 	SerenoNetflowSupported        *bool                                 `json:"SerenoNetflowSupported,omitempty"`
 	ServerRoleSupportedOnBreakout []string                              `json:"ServerRoleSupportedOnBreakout,omitempty"`
@@ -435,100 +432,133 @@ func (o *CapabilitySwitchCapability) SetMaxSlots(v int64) {
 	o.MaxSlots = &v
 }
 
-// GetMinVersionWithBreakoutSupport returns the MinVersionWithBreakoutSupport field value if set, zero value otherwise.
-func (o *CapabilitySwitchCapability) GetMinVersionWithBreakoutSupport() string {
-	if o == nil || o.MinVersionWithBreakoutSupport == nil {
-		var ret string
+// GetMinVersionMapWithBreakoutSupport returns the MinVersionMapWithBreakoutSupport field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *CapabilitySwitchCapability) GetMinVersionMapWithBreakoutSupport() FirmwareVersionMap {
+	if o == nil || o.MinVersionMapWithBreakoutSupport.Get() == nil {
+		var ret FirmwareVersionMap
 		return ret
 	}
-	return *o.MinVersionWithBreakoutSupport
+	return *o.MinVersionMapWithBreakoutSupport.Get()
 }
 
-// GetMinVersionWithBreakoutSupportOk returns a tuple with the MinVersionWithBreakoutSupport field value if set, nil otherwise
+// GetMinVersionMapWithBreakoutSupportOk returns a tuple with the MinVersionMapWithBreakoutSupport field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CapabilitySwitchCapability) GetMinVersionWithBreakoutSupportOk() (*string, bool) {
-	if o == nil || o.MinVersionWithBreakoutSupport == nil {
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *CapabilitySwitchCapability) GetMinVersionMapWithBreakoutSupportOk() (*FirmwareVersionMap, bool) {
+	if o == nil {
 		return nil, false
 	}
-	return o.MinVersionWithBreakoutSupport, true
+	return o.MinVersionMapWithBreakoutSupport.Get(), o.MinVersionMapWithBreakoutSupport.IsSet()
 }
 
-// HasMinVersionWithBreakoutSupport returns a boolean if a field has been set.
-func (o *CapabilitySwitchCapability) HasMinVersionWithBreakoutSupport() bool {
-	if o != nil && o.MinVersionWithBreakoutSupport != nil {
+// HasMinVersionMapWithBreakoutSupport returns a boolean if a field has been set.
+func (o *CapabilitySwitchCapability) HasMinVersionMapWithBreakoutSupport() bool {
+	if o != nil && o.MinVersionMapWithBreakoutSupport.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetMinVersionWithBreakoutSupport gets a reference to the given string and assigns it to the MinVersionWithBreakoutSupport field.
-func (o *CapabilitySwitchCapability) SetMinVersionWithBreakoutSupport(v string) {
-	o.MinVersionWithBreakoutSupport = &v
+// SetMinVersionMapWithBreakoutSupport gets a reference to the given NullableFirmwareVersionMap and assigns it to the MinVersionMapWithBreakoutSupport field.
+func (o *CapabilitySwitchCapability) SetMinVersionMapWithBreakoutSupport(v FirmwareVersionMap) {
+	o.MinVersionMapWithBreakoutSupport.Set(&v)
 }
 
-// GetMinVersionWithLocatorLedSupport returns the MinVersionWithLocatorLedSupport field value if set, zero value otherwise.
-func (o *CapabilitySwitchCapability) GetMinVersionWithLocatorLedSupport() string {
-	if o == nil || o.MinVersionWithLocatorLedSupport == nil {
-		var ret string
+// SetMinVersionMapWithBreakoutSupportNil sets the value for MinVersionMapWithBreakoutSupport to be an explicit nil
+func (o *CapabilitySwitchCapability) SetMinVersionMapWithBreakoutSupportNil() {
+	o.MinVersionMapWithBreakoutSupport.Set(nil)
+}
+
+// UnsetMinVersionMapWithBreakoutSupport ensures that no value is present for MinVersionMapWithBreakoutSupport, not even an explicit nil
+func (o *CapabilitySwitchCapability) UnsetMinVersionMapWithBreakoutSupport() {
+	o.MinVersionMapWithBreakoutSupport.Unset()
+}
+
+// GetMinVersionMapWithLocatorLedSupport returns the MinVersionMapWithLocatorLedSupport field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *CapabilitySwitchCapability) GetMinVersionMapWithLocatorLedSupport() FirmwareVersionMap {
+	if o == nil || o.MinVersionMapWithLocatorLedSupport.Get() == nil {
+		var ret FirmwareVersionMap
 		return ret
 	}
-	return *o.MinVersionWithLocatorLedSupport
+	return *o.MinVersionMapWithLocatorLedSupport.Get()
 }
 
-// GetMinVersionWithLocatorLedSupportOk returns a tuple with the MinVersionWithLocatorLedSupport field value if set, nil otherwise
+// GetMinVersionMapWithLocatorLedSupportOk returns a tuple with the MinVersionMapWithLocatorLedSupport field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CapabilitySwitchCapability) GetMinVersionWithLocatorLedSupportOk() (*string, bool) {
-	if o == nil || o.MinVersionWithLocatorLedSupport == nil {
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *CapabilitySwitchCapability) GetMinVersionMapWithLocatorLedSupportOk() (*FirmwareVersionMap, bool) {
+	if o == nil {
 		return nil, false
 	}
-	return o.MinVersionWithLocatorLedSupport, true
+	return o.MinVersionMapWithLocatorLedSupport.Get(), o.MinVersionMapWithLocatorLedSupport.IsSet()
 }
 
-// HasMinVersionWithLocatorLedSupport returns a boolean if a field has been set.
-func (o *CapabilitySwitchCapability) HasMinVersionWithLocatorLedSupport() bool {
-	if o != nil && o.MinVersionWithLocatorLedSupport != nil {
+// HasMinVersionMapWithLocatorLedSupport returns a boolean if a field has been set.
+func (o *CapabilitySwitchCapability) HasMinVersionMapWithLocatorLedSupport() bool {
+	if o != nil && o.MinVersionMapWithLocatorLedSupport.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetMinVersionWithLocatorLedSupport gets a reference to the given string and assigns it to the MinVersionWithLocatorLedSupport field.
-func (o *CapabilitySwitchCapability) SetMinVersionWithLocatorLedSupport(v string) {
-	o.MinVersionWithLocatorLedSupport = &v
+// SetMinVersionMapWithLocatorLedSupport gets a reference to the given NullableFirmwareVersionMap and assigns it to the MinVersionMapWithLocatorLedSupport field.
+func (o *CapabilitySwitchCapability) SetMinVersionMapWithLocatorLedSupport(v FirmwareVersionMap) {
+	o.MinVersionMapWithLocatorLedSupport.Set(&v)
 }
 
-// GetMinVersionWithNegAuto25g returns the MinVersionWithNegAuto25g field value if set, zero value otherwise.
-func (o *CapabilitySwitchCapability) GetMinVersionWithNegAuto25g() string {
-	if o == nil || o.MinVersionWithNegAuto25g == nil {
-		var ret string
+// SetMinVersionMapWithLocatorLedSupportNil sets the value for MinVersionMapWithLocatorLedSupport to be an explicit nil
+func (o *CapabilitySwitchCapability) SetMinVersionMapWithLocatorLedSupportNil() {
+	o.MinVersionMapWithLocatorLedSupport.Set(nil)
+}
+
+// UnsetMinVersionMapWithLocatorLedSupport ensures that no value is present for MinVersionMapWithLocatorLedSupport, not even an explicit nil
+func (o *CapabilitySwitchCapability) UnsetMinVersionMapWithLocatorLedSupport() {
+	o.MinVersionMapWithLocatorLedSupport.Unset()
+}
+
+// GetMinVersionMapWithNegAuto25gSupport returns the MinVersionMapWithNegAuto25gSupport field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *CapabilitySwitchCapability) GetMinVersionMapWithNegAuto25gSupport() FirmwareVersionMap {
+	if o == nil || o.MinVersionMapWithNegAuto25gSupport.Get() == nil {
+		var ret FirmwareVersionMap
 		return ret
 	}
-	return *o.MinVersionWithNegAuto25g
+	return *o.MinVersionMapWithNegAuto25gSupport.Get()
 }
 
-// GetMinVersionWithNegAuto25gOk returns a tuple with the MinVersionWithNegAuto25g field value if set, nil otherwise
+// GetMinVersionMapWithNegAuto25gSupportOk returns a tuple with the MinVersionMapWithNegAuto25gSupport field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CapabilitySwitchCapability) GetMinVersionWithNegAuto25gOk() (*string, bool) {
-	if o == nil || o.MinVersionWithNegAuto25g == nil {
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *CapabilitySwitchCapability) GetMinVersionMapWithNegAuto25gSupportOk() (*FirmwareVersionMap, bool) {
+	if o == nil {
 		return nil, false
 	}
-	return o.MinVersionWithNegAuto25g, true
+	return o.MinVersionMapWithNegAuto25gSupport.Get(), o.MinVersionMapWithNegAuto25gSupport.IsSet()
 }
 
-// HasMinVersionWithNegAuto25g returns a boolean if a field has been set.
-func (o *CapabilitySwitchCapability) HasMinVersionWithNegAuto25g() bool {
-	if o != nil && o.MinVersionWithNegAuto25g != nil {
+// HasMinVersionMapWithNegAuto25gSupport returns a boolean if a field has been set.
+func (o *CapabilitySwitchCapability) HasMinVersionMapWithNegAuto25gSupport() bool {
+	if o != nil && o.MinVersionMapWithNegAuto25gSupport.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetMinVersionWithNegAuto25g gets a reference to the given string and assigns it to the MinVersionWithNegAuto25g field.
-func (o *CapabilitySwitchCapability) SetMinVersionWithNegAuto25g(v string) {
-	o.MinVersionWithNegAuto25g = &v
+// SetMinVersionMapWithNegAuto25gSupport gets a reference to the given NullableFirmwareVersionMap and assigns it to the MinVersionMapWithNegAuto25gSupport field.
+func (o *CapabilitySwitchCapability) SetMinVersionMapWithNegAuto25gSupport(v FirmwareVersionMap) {
+	o.MinVersionMapWithNegAuto25gSupport.Set(&v)
+}
+
+// SetMinVersionMapWithNegAuto25gSupportNil sets the value for MinVersionMapWithNegAuto25gSupport to be an explicit nil
+func (o *CapabilitySwitchCapability) SetMinVersionMapWithNegAuto25gSupportNil() {
+	o.MinVersionMapWithNegAuto25gSupport.Set(nil)
+}
+
+// UnsetMinVersionMapWithNegAuto25gSupport ensures that no value is present for MinVersionMapWithNegAuto25gSupport, not even an explicit nil
+func (o *CapabilitySwitchCapability) UnsetMinVersionMapWithNegAuto25gSupport() {
+	o.MinVersionMapWithNegAuto25gSupport.Unset()
 }
 
 // GetNetworkLimits returns the NetworkLimits field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -1195,14 +1225,14 @@ func (o CapabilitySwitchCapability) MarshalJSON() ([]byte, error) {
 	if o.MaxSlots != nil {
 		toSerialize["MaxSlots"] = o.MaxSlots
 	}
-	if o.MinVersionWithBreakoutSupport != nil {
-		toSerialize["MinVersionWithBreakoutSupport"] = o.MinVersionWithBreakoutSupport
+	if o.MinVersionMapWithBreakoutSupport.IsSet() {
+		toSerialize["MinVersionMapWithBreakoutSupport"] = o.MinVersionMapWithBreakoutSupport.Get()
 	}
-	if o.MinVersionWithLocatorLedSupport != nil {
-		toSerialize["MinVersionWithLocatorLedSupport"] = o.MinVersionWithLocatorLedSupport
+	if o.MinVersionMapWithLocatorLedSupport.IsSet() {
+		toSerialize["MinVersionMapWithLocatorLedSupport"] = o.MinVersionMapWithLocatorLedSupport.Get()
 	}
-	if o.MinVersionWithNegAuto25g != nil {
-		toSerialize["MinVersionWithNegAuto25g"] = o.MinVersionWithNegAuto25g
+	if o.MinVersionMapWithNegAuto25gSupport.IsSet() {
+		toSerialize["MinVersionMapWithNegAuto25gSupport"] = o.MinVersionMapWithNegAuto25gSupport.Get()
 	}
 	if o.NetworkLimits.IsSet() {
 		toSerialize["NetworkLimits"] = o.NetworkLimits.Get()
@@ -1288,23 +1318,20 @@ func (o *CapabilitySwitchCapability) UnmarshalJSON(bytes []byte) (err error) {
 		// Maximum allowed physical ports on this switch.
 		MaxPorts *int64 `json:"MaxPorts,omitempty"`
 		// Maximum allowed physical slots on this switch.
-		MaxSlots *int64 `json:"MaxSlots,omitempty"`
-		// Minimum firmware version supported for breakout ports on this switch.
-		MinVersionWithBreakoutSupport *string `json:"MinVersionWithBreakoutSupport,omitempty"`
-		// Minimum firmware version supported for locator leds on this switch.
-		MinVersionWithLocatorLedSupport *string `json:"MinVersionWithLocatorLedSupport,omitempty"`
-		// Minimum firmware version supported for 'negotiate auto 25000' port admin speed on this switch.
-		MinVersionWithNegAuto25g  *string                               `json:"MinVersionWithNegAuto25g,omitempty"`
-		NetworkLimits             NullableCapabilitySwitchNetworkLimits `json:"NetworkLimits,omitempty"`
-		PortsSupporting100gSpeed  []CapabilityPortRange                 `json:"PortsSupporting100gSpeed,omitempty"`
-		PortsSupporting10gSpeed   []CapabilityPortRange                 `json:"PortsSupporting10gSpeed,omitempty"`
-		PortsSupporting1gSpeed    []CapabilityPortRange                 `json:"PortsSupporting1gSpeed,omitempty"`
-		PortsSupporting25gSpeed   []CapabilityPortRange                 `json:"PortsSupporting25gSpeed,omitempty"`
-		PortsSupporting40gSpeed   []CapabilityPortRange                 `json:"PortsSupporting40gSpeed,omitempty"`
-		PortsSupportingBreakout   []CapabilityPortRange                 `json:"PortsSupportingBreakout,omitempty"`
-		PortsSupportingFcoe       []CapabilityPortRange                 `json:"PortsSupportingFcoe,omitempty"`
-		PortsSupportingServerRole []CapabilityPortRange                 `json:"PortsSupportingServerRole,omitempty"`
-		ReservedVsans             []CapabilityPortRange                 `json:"ReservedVsans,omitempty"`
+		MaxSlots                           *int64                                `json:"MaxSlots,omitempty"`
+		MinVersionMapWithBreakoutSupport   NullableFirmwareVersionMap            `json:"MinVersionMapWithBreakoutSupport,omitempty"`
+		MinVersionMapWithLocatorLedSupport NullableFirmwareVersionMap            `json:"MinVersionMapWithLocatorLedSupport,omitempty"`
+		MinVersionMapWithNegAuto25gSupport NullableFirmwareVersionMap            `json:"MinVersionMapWithNegAuto25gSupport,omitempty"`
+		NetworkLimits                      NullableCapabilitySwitchNetworkLimits `json:"NetworkLimits,omitempty"`
+		PortsSupporting100gSpeed           []CapabilityPortRange                 `json:"PortsSupporting100gSpeed,omitempty"`
+		PortsSupporting10gSpeed            []CapabilityPortRange                 `json:"PortsSupporting10gSpeed,omitempty"`
+		PortsSupporting1gSpeed             []CapabilityPortRange                 `json:"PortsSupporting1gSpeed,omitempty"`
+		PortsSupporting25gSpeed            []CapabilityPortRange                 `json:"PortsSupporting25gSpeed,omitempty"`
+		PortsSupporting40gSpeed            []CapabilityPortRange                 `json:"PortsSupporting40gSpeed,omitempty"`
+		PortsSupportingBreakout            []CapabilityPortRange                 `json:"PortsSupportingBreakout,omitempty"`
+		PortsSupportingFcoe                []CapabilityPortRange                 `json:"PortsSupportingFcoe,omitempty"`
+		PortsSupportingServerRole          []CapabilityPortRange                 `json:"PortsSupportingServerRole,omitempty"`
+		ReservedVsans                      []CapabilityPortRange                 `json:"ReservedVsans,omitempty"`
 		// Sereno Adaptor with Netflow support on this switch.
 		SerenoNetflowSupported        *bool                                 `json:"SerenoNetflowSupported,omitempty"`
 		ServerRoleSupportedOnBreakout []string                              `json:"ServerRoleSupportedOnBreakout,omitempty"`
@@ -1334,9 +1361,9 @@ func (o *CapabilitySwitchCapability) UnmarshalJSON(bytes []byte) (err error) {
 		varCapabilitySwitchCapability.LocatorBeaconSupported = varCapabilitySwitchCapabilityWithoutEmbeddedStruct.LocatorBeaconSupported
 		varCapabilitySwitchCapability.MaxPorts = varCapabilitySwitchCapabilityWithoutEmbeddedStruct.MaxPorts
 		varCapabilitySwitchCapability.MaxSlots = varCapabilitySwitchCapabilityWithoutEmbeddedStruct.MaxSlots
-		varCapabilitySwitchCapability.MinVersionWithBreakoutSupport = varCapabilitySwitchCapabilityWithoutEmbeddedStruct.MinVersionWithBreakoutSupport
-		varCapabilitySwitchCapability.MinVersionWithLocatorLedSupport = varCapabilitySwitchCapabilityWithoutEmbeddedStruct.MinVersionWithLocatorLedSupport
-		varCapabilitySwitchCapability.MinVersionWithNegAuto25g = varCapabilitySwitchCapabilityWithoutEmbeddedStruct.MinVersionWithNegAuto25g
+		varCapabilitySwitchCapability.MinVersionMapWithBreakoutSupport = varCapabilitySwitchCapabilityWithoutEmbeddedStruct.MinVersionMapWithBreakoutSupport
+		varCapabilitySwitchCapability.MinVersionMapWithLocatorLedSupport = varCapabilitySwitchCapabilityWithoutEmbeddedStruct.MinVersionMapWithLocatorLedSupport
+		varCapabilitySwitchCapability.MinVersionMapWithNegAuto25gSupport = varCapabilitySwitchCapabilityWithoutEmbeddedStruct.MinVersionMapWithNegAuto25gSupport
 		varCapabilitySwitchCapability.NetworkLimits = varCapabilitySwitchCapabilityWithoutEmbeddedStruct.NetworkLimits
 		varCapabilitySwitchCapability.PortsSupporting100gSpeed = varCapabilitySwitchCapabilityWithoutEmbeddedStruct.PortsSupporting100gSpeed
 		varCapabilitySwitchCapability.PortsSupporting10gSpeed = varCapabilitySwitchCapabilityWithoutEmbeddedStruct.PortsSupporting10gSpeed
@@ -1383,9 +1410,9 @@ func (o *CapabilitySwitchCapability) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "LocatorBeaconSupported")
 		delete(additionalProperties, "MaxPorts")
 		delete(additionalProperties, "MaxSlots")
-		delete(additionalProperties, "MinVersionWithBreakoutSupport")
-		delete(additionalProperties, "MinVersionWithLocatorLedSupport")
-		delete(additionalProperties, "MinVersionWithNegAuto25g")
+		delete(additionalProperties, "MinVersionMapWithBreakoutSupport")
+		delete(additionalProperties, "MinVersionMapWithLocatorLedSupport")
+		delete(additionalProperties, "MinVersionMapWithNegAuto25gSupport")
 		delete(additionalProperties, "NetworkLimits")
 		delete(additionalProperties, "PortsSupporting100gSpeed")
 		delete(additionalProperties, "PortsSupporting10gSpeed")

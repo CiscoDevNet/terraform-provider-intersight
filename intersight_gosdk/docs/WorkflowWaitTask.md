@@ -6,6 +6,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "workflow.WaitTask"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "workflow.WaitTask"]
+**InputDefinition** | Pointer to [**[]WorkflowBaseDataType**](WorkflowBaseDataType.md) |  | [optional] 
+**OutputDefinition** | Pointer to [**[]WorkflowBaseDataType**](WorkflowBaseDataType.md) |  | [optional] 
 **Prompts** | Pointer to [**[]WorkflowWaitTaskPrompt**](WorkflowWaitTaskPrompt.md) |  | [optional] 
 
 ## Methods
@@ -67,6 +69,76 @@ and a boolean to check if the value has been set.
 SetObjectType sets ObjectType field to given value.
 
 
+### GetInputDefinition
+
+`func (o *WorkflowWaitTask) GetInputDefinition() []WorkflowBaseDataType`
+
+GetInputDefinition returns the InputDefinition field if non-nil, zero value otherwise.
+
+### GetInputDefinitionOk
+
+`func (o *WorkflowWaitTask) GetInputDefinitionOk() (*[]WorkflowBaseDataType, bool)`
+
+GetInputDefinitionOk returns a tuple with the InputDefinition field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetInputDefinition
+
+`func (o *WorkflowWaitTask) SetInputDefinition(v []WorkflowBaseDataType)`
+
+SetInputDefinition sets InputDefinition field to given value.
+
+### HasInputDefinition
+
+`func (o *WorkflowWaitTask) HasInputDefinition() bool`
+
+HasInputDefinition returns a boolean if a field has been set.
+
+### SetInputDefinitionNil
+
+`func (o *WorkflowWaitTask) SetInputDefinitionNil(b bool)`
+
+ SetInputDefinitionNil sets the value for InputDefinition to be an explicit nil
+
+### UnsetInputDefinition
+`func (o *WorkflowWaitTask) UnsetInputDefinition()`
+
+UnsetInputDefinition ensures that no value is present for InputDefinition, not even an explicit nil
+### GetOutputDefinition
+
+`func (o *WorkflowWaitTask) GetOutputDefinition() []WorkflowBaseDataType`
+
+GetOutputDefinition returns the OutputDefinition field if non-nil, zero value otherwise.
+
+### GetOutputDefinitionOk
+
+`func (o *WorkflowWaitTask) GetOutputDefinitionOk() (*[]WorkflowBaseDataType, bool)`
+
+GetOutputDefinitionOk returns a tuple with the OutputDefinition field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOutputDefinition
+
+`func (o *WorkflowWaitTask) SetOutputDefinition(v []WorkflowBaseDataType)`
+
+SetOutputDefinition sets OutputDefinition field to given value.
+
+### HasOutputDefinition
+
+`func (o *WorkflowWaitTask) HasOutputDefinition() bool`
+
+HasOutputDefinition returns a boolean if a field has been set.
+
+### SetOutputDefinitionNil
+
+`func (o *WorkflowWaitTask) SetOutputDefinitionNil(b bool)`
+
+ SetOutputDefinitionNil sets the value for OutputDefinition to be an explicit nil
+
+### UnsetOutputDefinition
+`func (o *WorkflowWaitTask) UnsetOutputDefinition()`
+
+UnsetOutputDefinition ensures that no value is present for OutputDefinition, not even an explicit nil
 ### GetPrompts
 
 `func (o *WorkflowWaitTask) GetPrompts() []WorkflowWaitTaskPrompt`

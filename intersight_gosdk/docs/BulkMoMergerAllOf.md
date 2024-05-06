@@ -11,6 +11,8 @@ Name | Type | Description | Notes
 **Sources** | Pointer to [**[]MoBaseMo**](MoBaseMo.md) |  | [optional] 
 **TargetConfig** | Pointer to [**MoBaseMo**](MoBaseMo.md) |  | [optional] 
 **Targets** | Pointer to [**[]MoBaseMo**](MoBaseMo.md) |  | [optional] 
+**WorkflowNameSuffix** | Pointer to **string** | A user-friendly short name to identify the workflow. Name can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.), colon (:), space ( ), forward slash (/), comma or an underscore (_). | [optional] 
+**AsyncResult** | Pointer to [**BulkResultRelationship**](BulkResultRelationship.md) |  | [optional] 
 **Organization** | Pointer to [**OrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
 
 ## Methods
@@ -227,6 +229,56 @@ HasTargets returns a boolean if a field has been set.
 `func (o *BulkMoMergerAllOf) UnsetTargets()`
 
 UnsetTargets ensures that no value is present for Targets, not even an explicit nil
+### GetWorkflowNameSuffix
+
+`func (o *BulkMoMergerAllOf) GetWorkflowNameSuffix() string`
+
+GetWorkflowNameSuffix returns the WorkflowNameSuffix field if non-nil, zero value otherwise.
+
+### GetWorkflowNameSuffixOk
+
+`func (o *BulkMoMergerAllOf) GetWorkflowNameSuffixOk() (*string, bool)`
+
+GetWorkflowNameSuffixOk returns a tuple with the WorkflowNameSuffix field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetWorkflowNameSuffix
+
+`func (o *BulkMoMergerAllOf) SetWorkflowNameSuffix(v string)`
+
+SetWorkflowNameSuffix sets WorkflowNameSuffix field to given value.
+
+### HasWorkflowNameSuffix
+
+`func (o *BulkMoMergerAllOf) HasWorkflowNameSuffix() bool`
+
+HasWorkflowNameSuffix returns a boolean if a field has been set.
+
+### GetAsyncResult
+
+`func (o *BulkMoMergerAllOf) GetAsyncResult() BulkResultRelationship`
+
+GetAsyncResult returns the AsyncResult field if non-nil, zero value otherwise.
+
+### GetAsyncResultOk
+
+`func (o *BulkMoMergerAllOf) GetAsyncResultOk() (*BulkResultRelationship, bool)`
+
+GetAsyncResultOk returns a tuple with the AsyncResult field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAsyncResult
+
+`func (o *BulkMoMergerAllOf) SetAsyncResult(v BulkResultRelationship)`
+
+SetAsyncResult sets AsyncResult field to given value.
+
+### HasAsyncResult
+
+`func (o *BulkMoMergerAllOf) HasAsyncResult() bool`
+
+HasAsyncResult returns a boolean if a field has been set.
+
 ### GetOrganization
 
 `func (o *BulkMoMergerAllOf) GetOrganization() OrganizationOrganizationRelationship`

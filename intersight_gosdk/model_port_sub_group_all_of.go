@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-15830
+API version: 1.0.11-16342
 Contact: intersight@cisco.com
 */
 
@@ -26,7 +26,10 @@ type PortSubGroupAllOf struct {
 	// Switch expansion slot module identifier.
 	SlotId *int64 `json:"SlotId,omitempty"`
 	// Type of port sub-group. Values are Eth or Fc.
-	Transport *string `json:"Transport,omitempty"`
+	Transport           *string                          `json:"Transport,omitempty"`
+	EquipmentIoCardBase *EquipmentIoCardBaseRelationship `json:"EquipmentIoCardBase,omitempty"`
+	// An array of relationships to etherHostPort resources.
+	EtherHostPorts []EtherHostPortRelationship `json:"EtherHostPorts,omitempty"`
 	// An array of relationships to etherPhysicalPort resources.
 	EthernetPorts []EtherPhysicalPortRelationship `json:"EthernetPorts,omitempty"`
 	// An array of relationships to fcPhysicalPort resources.
@@ -204,6 +207,71 @@ func (o *PortSubGroupAllOf) HasTransport() bool {
 // SetTransport gets a reference to the given string and assigns it to the Transport field.
 func (o *PortSubGroupAllOf) SetTransport(v string) {
 	o.Transport = &v
+}
+
+// GetEquipmentIoCardBase returns the EquipmentIoCardBase field value if set, zero value otherwise.
+func (o *PortSubGroupAllOf) GetEquipmentIoCardBase() EquipmentIoCardBaseRelationship {
+	if o == nil || o.EquipmentIoCardBase == nil {
+		var ret EquipmentIoCardBaseRelationship
+		return ret
+	}
+	return *o.EquipmentIoCardBase
+}
+
+// GetEquipmentIoCardBaseOk returns a tuple with the EquipmentIoCardBase field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PortSubGroupAllOf) GetEquipmentIoCardBaseOk() (*EquipmentIoCardBaseRelationship, bool) {
+	if o == nil || o.EquipmentIoCardBase == nil {
+		return nil, false
+	}
+	return o.EquipmentIoCardBase, true
+}
+
+// HasEquipmentIoCardBase returns a boolean if a field has been set.
+func (o *PortSubGroupAllOf) HasEquipmentIoCardBase() bool {
+	if o != nil && o.EquipmentIoCardBase != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetEquipmentIoCardBase gets a reference to the given EquipmentIoCardBaseRelationship and assigns it to the EquipmentIoCardBase field.
+func (o *PortSubGroupAllOf) SetEquipmentIoCardBase(v EquipmentIoCardBaseRelationship) {
+	o.EquipmentIoCardBase = &v
+}
+
+// GetEtherHostPorts returns the EtherHostPorts field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *PortSubGroupAllOf) GetEtherHostPorts() []EtherHostPortRelationship {
+	if o == nil {
+		var ret []EtherHostPortRelationship
+		return ret
+	}
+	return o.EtherHostPorts
+}
+
+// GetEtherHostPortsOk returns a tuple with the EtherHostPorts field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *PortSubGroupAllOf) GetEtherHostPortsOk() ([]EtherHostPortRelationship, bool) {
+	if o == nil || o.EtherHostPorts == nil {
+		return nil, false
+	}
+	return o.EtherHostPorts, true
+}
+
+// HasEtherHostPorts returns a boolean if a field has been set.
+func (o *PortSubGroupAllOf) HasEtherHostPorts() bool {
+	if o != nil && o.EtherHostPorts != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetEtherHostPorts gets a reference to the given []EtherHostPortRelationship and assigns it to the EtherHostPorts field.
+func (o *PortSubGroupAllOf) SetEtherHostPorts(v []EtherHostPortRelationship) {
+	o.EtherHostPorts = v
 }
 
 // GetEthernetPorts returns the EthernetPorts field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -385,6 +453,12 @@ func (o PortSubGroupAllOf) MarshalJSON() ([]byte, error) {
 	if o.Transport != nil {
 		toSerialize["Transport"] = o.Transport
 	}
+	if o.EquipmentIoCardBase != nil {
+		toSerialize["EquipmentIoCardBase"] = o.EquipmentIoCardBase
+	}
+	if o.EtherHostPorts != nil {
+		toSerialize["EtherHostPorts"] = o.EtherHostPorts
+	}
 	if o.EthernetPorts != nil {
 		toSerialize["EthernetPorts"] = o.EthernetPorts
 	}
@@ -423,6 +497,8 @@ func (o *PortSubGroupAllOf) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "AggregatePortId")
 		delete(additionalProperties, "SlotId")
 		delete(additionalProperties, "Transport")
+		delete(additionalProperties, "EquipmentIoCardBase")
+		delete(additionalProperties, "EtherHostPorts")
 		delete(additionalProperties, "EthernetPorts")
 		delete(additionalProperties, "FcPorts")
 		delete(additionalProperties, "InventoryDeviceInfo")

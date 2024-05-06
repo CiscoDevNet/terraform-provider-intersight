@@ -335,7 +335,7 @@ func resourceFabricSwitchControlPolicy() *schema.Resource {
 				},
 			},
 			"profiles": {
-				Description: "An array of relationships to fabricSwitchProfile resources.",
+				Description: "An array of relationships to fabricBaseSwitchProfile resources.",
 				Type:        schema.TypeList,
 				Optional:    true,
 				ConfigMode:  schema.SchemaConfigModeAttr,
@@ -374,7 +374,7 @@ func resourceFabricSwitchControlPolicy() *schema.Resource {
 				},
 			},
 			"reserved_vlan_start_id": {
-				Description:  "The starting ID for VLANs reserved for internal use within the Fabric Interconnect. This VLAN ID is the starting ID of \na contiguous block of 128 VLANs that cannot be configured for user data.  This range of VLANs cannot be configured in \nVLAN policy.\nIf this property is not configured, VLAN range 3915 - 4042 is reserved for internal use by default.",
+				Description:  "The starting ID for VLANs reserved for internal use within the Fabric Interconnect. This VLAN ID is the starting ID of\na contiguous block of 128 VLANs that cannot be configured for user data.  This range of VLANs cannot be configured in\nVLAN policy.\nIf this property is not configured, VLAN range 3915 - 4042 is reserved for internal use by default.",
 				Type:         schema.TypeInt,
 				ValidateFunc: validation.IntBetween(2, 3915),
 				Optional:     true,
@@ -613,7 +613,7 @@ func resourceFabricSwitchControlPolicy() *schema.Resource {
 				},
 			},
 			"vlan_port_optimization_enabled": {
-				Description: "To enable or disable the VLAN port count optimization.",
+				Description: "To enable or disable the VLAN port count optimization. This feature will always be enabled for Cisco UCS Fabric Interconnect 9108 100G.",
 				Type:        schema.TypeBool,
 				Optional:    true,
 				Default:     false,
@@ -758,7 +758,7 @@ func resourceFabricSwitchControlPolicyCreate(c context.Context, d *schema.Resour
 	}
 
 	if v, ok := d.GetOk("profiles"); ok {
-		x := make([]models.FabricSwitchProfileRelationship, 0)
+		x := make([]models.FabricBaseSwitchProfileRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
 			o := models.NewMoMoRefWithDefaults()
@@ -792,7 +792,7 @@ func resourceFabricSwitchControlPolicyCreate(c context.Context, d *schema.Resour
 					o.SetSelector(x)
 				}
 			}
-			x = append(x, models.MoMoRefAsFabricSwitchProfileRelationship(o))
+			x = append(x, models.MoMoRefAsFabricBaseSwitchProfileRelationship(o))
 		}
 		if len(x) > 0 {
 			o.SetProfiles(x)
@@ -998,7 +998,7 @@ func resourceFabricSwitchControlPolicyRead(c context.Context, d *schema.Resource
 		return diag.Errorf("error occurred while setting property PermissionResources in FabricSwitchControlPolicy object: %s", err.Error())
 	}
 
-	if err := d.Set("profiles", flattenListFabricSwitchProfileRelationship(s.GetProfiles(), d)); err != nil {
+	if err := d.Set("profiles", flattenListFabricBaseSwitchProfileRelationship(s.GetProfiles(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property Profiles in FabricSwitchControlPolicy object: %s", err.Error())
 	}
 
@@ -1177,7 +1177,7 @@ func resourceFabricSwitchControlPolicyUpdate(c context.Context, d *schema.Resour
 
 	if d.HasChange("profiles") {
 		v := d.Get("profiles")
-		x := make([]models.FabricSwitchProfileRelationship, 0)
+		x := make([]models.FabricBaseSwitchProfileRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
 			o := &models.MoMoRef{}
@@ -1211,7 +1211,7 @@ func resourceFabricSwitchControlPolicyUpdate(c context.Context, d *schema.Resour
 					o.SetSelector(x)
 				}
 			}
-			x = append(x, models.MoMoRefAsFabricSwitchProfileRelationship(o))
+			x = append(x, models.MoMoRefAsFabricBaseSwitchProfileRelationship(o))
 		}
 		o.SetProfiles(x)
 	}

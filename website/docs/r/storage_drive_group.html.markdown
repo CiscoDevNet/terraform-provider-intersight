@@ -140,7 +140,7 @@ This complex property has following sub-properties:
 This complex property has following sub-properties:
   + `boot_drive`:(bool) This flag enables this virtual drive to be used as a boot drive. 
   + `expand_to_available`:(bool) This flag enables the virtual drive to use all the space available in the disk group. When this flag is enabled, the size property is ignored. 
-  + `name`:(string) The name of the virtual drive. The name can be between 1 and 15 alphanumeric characters. Spaces or any special characters other than - (hyphen), _ (underscore), : (colon), and . (period) are not allowed. 
+  + `name`:(string) The name of the virtual drive. The name can be between 1 and 15 alphanumeric characters. Spaces or any special characters other than - (hyphen) and _ (underscore) are not allowed. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
   + `size`:(int) Virtual drive size in MebiBytes. Size is mandatory field except when the Expand to Available option is enabled. 
   + `virtual_drive_policy`:(HashMap) - This defines the characteristics of a specific virtual drive. 

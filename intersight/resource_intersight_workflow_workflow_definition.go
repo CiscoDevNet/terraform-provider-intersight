@@ -177,6 +177,17 @@ func resourceWorkflowWorkflowDefinition() *schema.Resource {
 					}
 					return
 				}},
+			"create_user": {
+				Description: "The user identifier who created or cloned the workflow definition.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+					if val != nil {
+						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+					}
+					return
+				}},
 			"default_version": {
 				Description: "When true this will be the workflow version that is used when a specific workflow definition version is not specified. The default version is used when user executes a workflow without specifying a version or when workflow is included in another workflow without a specific version. The very first workflow definition created with a name will be set as the default version, after that user can explicitly set any version of the workflow definition as the default version.",
 				Type:        schema.TypeBool,
@@ -444,6 +455,17 @@ func resourceWorkflowWorkflowDefinition() *schema.Resource {
 				}},
 			"mod_time": {
 				Description: "The time when this managed object was last modified.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+					if val != nil {
+						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+					}
+					return
+				}},
+			"mod_user": {
+				Description: "The user identifier who last updated the workflow definition.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -748,6 +770,12 @@ func resourceWorkflowWorkflowDefinition() *schema.Resource {
 							Optional:    true,
 							Default:     false,
 						},
+						"enable_publish_status": {
+							Description: "This flag determines if this workflow publish status is enforced or not.",
+							Type:        schema.TypeBool,
+							Optional:    true,
+							Default:     false,
+						},
 						"external_meta": {
 							Description: "When set to false the workflow is owned by the system and used for internal services. Such workflows cannot be directly used by external entities.",
 							Type:        schema.TypeBool,
@@ -764,6 +792,13 @@ func resourceWorkflowWorkflowDefinition() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Default:     "workflow.WorkflowProperties",
+						},
+						"publish_status": {
+							Description:  "The workflow publish status (Draft, Published, Archived), this property is relevant only when enablePublishStatus is set to true.\n* `Draft` - The enum specifies the option as Draft which means the meta definition is being designed and tested.\n* `Published` - The enum specifies the option as Published which means the meta definition is ready for consumption.\n* `Archived` - The enum specifies the option as Archived which means the meta definition is archived and can no longer be consumed.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringInSlice([]string{"Draft", "Published", "Archived"}, false),
+							Optional:     true,
+							Default:      "Draft",
 						},
 						"retryable": {
 							Description: "When set to true, the failed workflow executions from this workflow definition can be retried for up to 2 weeks since the last modification time. After two weeks of inactivity on the workflow execution, the option to retry the failed workflow will be disabled.",
@@ -1891,10 +1926,22 @@ func resourceWorkflowWorkflowDefinitionCreate(c context.Context, d *schema.Resou
 					o.SetEnableDebug(x)
 				}
 			}
+			if v, ok := l["enable_publish_status"]; ok {
+				{
+					x := (v.(bool))
+					o.SetEnablePublishStatus(x)
+				}
+			}
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
 					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["publish_status"]; ok {
+				{
+					x := (v.(string))
+					o.SetPublishStatus(x)
 				}
 			}
 			if v, ok := l["retryable"]; ok {
@@ -2347,6 +2394,10 @@ func resourceWorkflowWorkflowDefinitionRead(c context.Context, d *schema.Resourc
 		return diag.Errorf("error occurred while setting property CreateTime in WorkflowWorkflowDefinition object: %s", err.Error())
 	}
 
+	if err := d.Set("create_user", (s.GetCreateUser())); err != nil {
+		return diag.Errorf("error occurred while setting property CreateUser in WorkflowWorkflowDefinition object: %s", err.Error())
+	}
+
 	if err := d.Set("default_version", (s.GetDefaultVersion())); err != nil {
 		return diag.Errorf("error occurred while setting property DefaultVersion in WorkflowWorkflowDefinition object: %s", err.Error())
 	}
@@ -2385,6 +2436,10 @@ func resourceWorkflowWorkflowDefinitionRead(c context.Context, d *schema.Resourc
 
 	if err := d.Set("mod_time", (s.GetModTime()).String()); err != nil {
 		return diag.Errorf("error occurred while setting property ModTime in WorkflowWorkflowDefinition object: %s", err.Error())
+	}
+
+	if err := d.Set("mod_user", (s.GetModUser())); err != nil {
+		return diag.Errorf("error occurred while setting property ModUser in WorkflowWorkflowDefinition object: %s", err.Error())
 	}
 
 	if err := d.Set("moid", (s.GetMoid())); err != nil {
@@ -2978,10 +3033,22 @@ func resourceWorkflowWorkflowDefinitionUpdate(c context.Context, d *schema.Resou
 					o.SetEnableDebug(x)
 				}
 			}
+			if v, ok := l["enable_publish_status"]; ok {
+				{
+					x := (v.(bool))
+					o.SetEnablePublishStatus(x)
+				}
+			}
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
 					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["publish_status"]; ok {
+				{
+					x := (v.(string))
+					o.SetPublishStatus(x)
 				}
 			}
 			if v, ok := l["retryable"]; ok {

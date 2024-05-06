@@ -215,7 +215,7 @@ func getFabricPortPolicySchema() map[string]*schema.Schema {
 			},
 		},
 		"profiles": {
-			Description: "An array of relationships to fabricSwitchProfile resources.",
+			Description: "An array of relationships to fabricBaseSwitchProfile resources.",
 			Type:        schema.TypeList,
 			Optional:    true,
 			Elem: &schema.Resource{
@@ -648,7 +648,7 @@ func dataSourceFabricPortPolicyRead(c context.Context, d *schema.ResourceData, m
 	}
 
 	if v, ok := d.GetOk("profiles"); ok {
-		x := make([]models.FabricSwitchProfileRelationship, 0)
+		x := make([]models.FabricBaseSwitchProfileRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
 			o := &models.MoMoRef{}
@@ -682,7 +682,7 @@ func dataSourceFabricPortPolicyRead(c context.Context, d *schema.ResourceData, m
 					o.SetSelector(x)
 				}
 			}
-			x = append(x, models.MoMoRefAsFabricSwitchProfileRelationship(o))
+			x = append(x, models.MoMoRefAsFabricBaseSwitchProfileRelationship(o))
 		}
 		o.SetProfiles(x)
 	}
@@ -857,7 +857,7 @@ func dataSourceFabricPortPolicyRead(c context.Context, d *schema.ResourceData, m
 
 				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
 
-				temp["profiles"] = flattenListFabricSwitchProfileRelationship(s.GetProfiles(), d)
+				temp["profiles"] = flattenListFabricBaseSwitchProfileRelationship(s.GetProfiles(), d)
 				temp["shared_scope"] = (s.GetSharedScope())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)

@@ -15,11 +15,15 @@ Name | Type | Description | Notes
 **MacAddressType** | Pointer to **string** | Type of allocation selected to assign a MAC address for the vnic. * &#x60;POOL&#x60; - The user selects a pool from which the mac/wwn address will be leased for the Virtual Interface. * &#x60;STATIC&#x60; - The user assigns a static mac/wwn address for the Virtual Interface. | [optional] [readonly] [default to "POOL"]
 **Name** | Pointer to **string** | Name of the virtual ethernet interface. | [optional] [readonly] 
 **Order** | Pointer to **int64** | The order in which the virtual interface is brought up. The order assigned to an interface should be unique for all the Ethernet and Fibre-Channel interfaces on each PCI link on a VIC adapter. The order should start from zero with no overlaps. The maximum value of PCI order is limited by the number of virtual interfaces (Ethernet and Fibre-Channel) on each PCI link on a VIC adapter. All VIC adapters have a single PCI link except VIC 1340, VIC 1380 and VIC 1385 which have two. | [optional] [readonly] 
+**OverriddenList** | Pointer to **[]string** |  | [optional] 
 **PinGroupName** | Pointer to **string** | Pingroup name associated to vNIC for static pinning. LCP deploy will resolve pingroup name and fetches the correspoding uplink port/port channel to pin the vNIC traffic. | [optional] [readonly] 
 **Placement** | Pointer to [**NullableVnicPlacementSettings**](VnicPlacementSettings.md) |  | [optional] 
 **SriovSettings** | Pointer to [**NullableVnicSriovSettings**](VnicSriovSettings.md) |  | [optional] 
 **StandbyVifId** | Pointer to **int64** | The Standby VIF Id is applicable for failover enabled vNICS. It should be the same as the channel number of the standby vethernet created on switch in order to set up the standby data path. | [optional] [readonly] 
 **StaticMacAddress** | Pointer to **string** | The MAC address must be in hexadecimal format xx:xx:xx:xx:xx:xx. To ensure uniqueness of MACs in the LAN fabric, you are strongly encouraged to use the following MAC prefix 00:25:B5:xx:xx:xx. | [optional] [readonly] 
+**TemplateActions** | Pointer to [**[]MotemplateActionEntry**](MotemplateActionEntry.md) |  | [optional] 
+**TemplateSyncErrors** | Pointer to [**[]MotemplateSyncError**](MotemplateSyncError.md) |  | [optional] 
+**TemplateSyncStatus** | Pointer to **string** | The sync status of the current MO wrt the attached Template MO. * &#x60;None&#x60; - The Enum value represents that the object is not attached to any template. * &#x60;OK&#x60; - The Enum value represents that the object values are in sync with attached template. * &#x60;Scheduled&#x60; - The Enum value represents that the object sync from attached template is scheduled from template. * &#x60;InProgress&#x60; - The Enum value represents that the object sync with the attached template is in progress. * &#x60;OutOfSync&#x60; - The Enum value represents that the object values are not in sync with attached template. | [optional] [readonly] [default to "None"]
 **UsnicSettings** | Pointer to [**NullableVnicUsnicSettings**](VnicUsnicSettings.md) |  | [optional] 
 **VifId** | Pointer to **int64** | The Vif Id should be same as the channel number of the vethernet created on switch in order to set up the data path. The property is applicable only for FI attached servers where a vethernet is created on the switch for every vNIC. | [optional] [readonly] 
 **VmqSettings** | Pointer to [**NullableVnicVmqSettings**](VnicVmqSettings.md) |  | [optional] 
@@ -35,6 +39,7 @@ Name | Type | Description | Notes
 **MacLease** | Pointer to [**MacpoolLeaseRelationship**](MacpoolLeaseRelationship.md) |  | [optional] 
 **MacPool** | Pointer to [**MacpoolPoolRelationship**](MacpoolPoolRelationship.md) |  | [optional] 
 **SpVnics** | Pointer to [**[]VnicEthIfInventoryRelationship**](VnicEthIfInventoryRelationship.md) | An array of relationships to vnicEthIfInventory resources. | [optional] [readonly] 
+**SrcTemplate** | Pointer to [**VnicVnicTemplateRelationship**](VnicVnicTemplateRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -340,6 +345,41 @@ SetOrder sets Order field to given value.
 
 HasOrder returns a boolean if a field has been set.
 
+### GetOverriddenList
+
+`func (o *VnicEthIfInventoryAllOf) GetOverriddenList() []string`
+
+GetOverriddenList returns the OverriddenList field if non-nil, zero value otherwise.
+
+### GetOverriddenListOk
+
+`func (o *VnicEthIfInventoryAllOf) GetOverriddenListOk() (*[]string, bool)`
+
+GetOverriddenListOk returns a tuple with the OverriddenList field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOverriddenList
+
+`func (o *VnicEthIfInventoryAllOf) SetOverriddenList(v []string)`
+
+SetOverriddenList sets OverriddenList field to given value.
+
+### HasOverriddenList
+
+`func (o *VnicEthIfInventoryAllOf) HasOverriddenList() bool`
+
+HasOverriddenList returns a boolean if a field has been set.
+
+### SetOverriddenListNil
+
+`func (o *VnicEthIfInventoryAllOf) SetOverriddenListNil(b bool)`
+
+ SetOverriddenListNil sets the value for OverriddenList to be an explicit nil
+
+### UnsetOverriddenList
+`func (o *VnicEthIfInventoryAllOf) UnsetOverriddenList()`
+
+UnsetOverriddenList ensures that no value is present for OverriddenList, not even an explicit nil
 ### GetPinGroupName
 
 `func (o *VnicEthIfInventoryAllOf) GetPinGroupName() string`
@@ -484,6 +524,101 @@ SetStaticMacAddress sets StaticMacAddress field to given value.
 `func (o *VnicEthIfInventoryAllOf) HasStaticMacAddress() bool`
 
 HasStaticMacAddress returns a boolean if a field has been set.
+
+### GetTemplateActions
+
+`func (o *VnicEthIfInventoryAllOf) GetTemplateActions() []MotemplateActionEntry`
+
+GetTemplateActions returns the TemplateActions field if non-nil, zero value otherwise.
+
+### GetTemplateActionsOk
+
+`func (o *VnicEthIfInventoryAllOf) GetTemplateActionsOk() (*[]MotemplateActionEntry, bool)`
+
+GetTemplateActionsOk returns a tuple with the TemplateActions field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTemplateActions
+
+`func (o *VnicEthIfInventoryAllOf) SetTemplateActions(v []MotemplateActionEntry)`
+
+SetTemplateActions sets TemplateActions field to given value.
+
+### HasTemplateActions
+
+`func (o *VnicEthIfInventoryAllOf) HasTemplateActions() bool`
+
+HasTemplateActions returns a boolean if a field has been set.
+
+### SetTemplateActionsNil
+
+`func (o *VnicEthIfInventoryAllOf) SetTemplateActionsNil(b bool)`
+
+ SetTemplateActionsNil sets the value for TemplateActions to be an explicit nil
+
+### UnsetTemplateActions
+`func (o *VnicEthIfInventoryAllOf) UnsetTemplateActions()`
+
+UnsetTemplateActions ensures that no value is present for TemplateActions, not even an explicit nil
+### GetTemplateSyncErrors
+
+`func (o *VnicEthIfInventoryAllOf) GetTemplateSyncErrors() []MotemplateSyncError`
+
+GetTemplateSyncErrors returns the TemplateSyncErrors field if non-nil, zero value otherwise.
+
+### GetTemplateSyncErrorsOk
+
+`func (o *VnicEthIfInventoryAllOf) GetTemplateSyncErrorsOk() (*[]MotemplateSyncError, bool)`
+
+GetTemplateSyncErrorsOk returns a tuple with the TemplateSyncErrors field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTemplateSyncErrors
+
+`func (o *VnicEthIfInventoryAllOf) SetTemplateSyncErrors(v []MotemplateSyncError)`
+
+SetTemplateSyncErrors sets TemplateSyncErrors field to given value.
+
+### HasTemplateSyncErrors
+
+`func (o *VnicEthIfInventoryAllOf) HasTemplateSyncErrors() bool`
+
+HasTemplateSyncErrors returns a boolean if a field has been set.
+
+### SetTemplateSyncErrorsNil
+
+`func (o *VnicEthIfInventoryAllOf) SetTemplateSyncErrorsNil(b bool)`
+
+ SetTemplateSyncErrorsNil sets the value for TemplateSyncErrors to be an explicit nil
+
+### UnsetTemplateSyncErrors
+`func (o *VnicEthIfInventoryAllOf) UnsetTemplateSyncErrors()`
+
+UnsetTemplateSyncErrors ensures that no value is present for TemplateSyncErrors, not even an explicit nil
+### GetTemplateSyncStatus
+
+`func (o *VnicEthIfInventoryAllOf) GetTemplateSyncStatus() string`
+
+GetTemplateSyncStatus returns the TemplateSyncStatus field if non-nil, zero value otherwise.
+
+### GetTemplateSyncStatusOk
+
+`func (o *VnicEthIfInventoryAllOf) GetTemplateSyncStatusOk() (*string, bool)`
+
+GetTemplateSyncStatusOk returns a tuple with the TemplateSyncStatus field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTemplateSyncStatus
+
+`func (o *VnicEthIfInventoryAllOf) SetTemplateSyncStatus(v string)`
+
+SetTemplateSyncStatus sets TemplateSyncStatus field to given value.
+
+### HasTemplateSyncStatus
+
+`func (o *VnicEthIfInventoryAllOf) HasTemplateSyncStatus() bool`
+
+HasTemplateSyncStatus returns a boolean if a field has been set.
 
 ### GetUsnicSettings
 
@@ -900,6 +1035,31 @@ HasSpVnics returns a boolean if a field has been set.
 `func (o *VnicEthIfInventoryAllOf) UnsetSpVnics()`
 
 UnsetSpVnics ensures that no value is present for SpVnics, not even an explicit nil
+### GetSrcTemplate
+
+`func (o *VnicEthIfInventoryAllOf) GetSrcTemplate() VnicVnicTemplateRelationship`
+
+GetSrcTemplate returns the SrcTemplate field if non-nil, zero value otherwise.
+
+### GetSrcTemplateOk
+
+`func (o *VnicEthIfInventoryAllOf) GetSrcTemplateOk() (*VnicVnicTemplateRelationship, bool)`
+
+GetSrcTemplateOk returns a tuple with the SrcTemplate field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSrcTemplate
+
+`func (o *VnicEthIfInventoryAllOf) SetSrcTemplate(v VnicVnicTemplateRelationship)`
+
+SetSrcTemplate sets SrcTemplate field to given value.
+
+### HasSrcTemplate
+
+`func (o *VnicEthIfInventoryAllOf) HasSrcTemplate() bool`
+
+HasSrcTemplate returns a boolean if a field has been set.
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

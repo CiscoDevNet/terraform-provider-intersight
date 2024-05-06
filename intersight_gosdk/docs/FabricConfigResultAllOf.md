@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "fabric.ConfigResult"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "fabric.ConfigResult"]
-**Profile** | Pointer to [**FabricSwitchProfileRelationship**](FabricSwitchProfileRelationship.md) |  | [optional] 
+**Profile** | Pointer to [**FabricBaseSwitchProfileRelationship**](FabricBaseSwitchProfileRelationship.md) |  | [optional] 
 **ResultEntries** | Pointer to [**[]FabricConfigResultEntryRelationship**](FabricConfigResultEntryRelationship.md) | An array of relationships to fabricConfigResultEntry resources. | [optional] 
 
 ## Methods
@@ -70,20 +70,20 @@ SetObjectType sets ObjectType field to given value.
 
 ### GetProfile
 
-`func (o *FabricConfigResultAllOf) GetProfile() FabricSwitchProfileRelationship`
+`func (o *FabricConfigResultAllOf) GetProfile() FabricBaseSwitchProfileRelationship`
 
 GetProfile returns the Profile field if non-nil, zero value otherwise.
 
 ### GetProfileOk
 
-`func (o *FabricConfigResultAllOf) GetProfileOk() (*FabricSwitchProfileRelationship, bool)`
+`func (o *FabricConfigResultAllOf) GetProfileOk() (*FabricBaseSwitchProfileRelationship, bool)`
 
 GetProfileOk returns a tuple with the Profile field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetProfile
 
-`func (o *FabricConfigResultAllOf) SetProfile(v FabricSwitchProfileRelationship)`
+`func (o *FabricConfigResultAllOf) SetProfile(v FabricBaseSwitchProfileRelationship)`
 
 SetProfile sets Profile field to given value.
 

@@ -7,9 +7,9 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "marketplace.UseCaseVersion"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "marketplace.UseCaseVersion"]
 **Locales** | Pointer to [**[]MarketplaceUseCaseVersionLocale**](MarketplaceUseCaseVersionLocale.md) |  | [optional] 
-**Resources** | Pointer to [**[]MarketplaceUseCaseVersionResources**](MarketplaceUseCaseVersionResources.md) |  | [optional] 
-**Version** | Pointer to **string** | A string version for each use case | [optional] 
-**Organization** | Pointer to [**OrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
+**Resources** | Pointer to [**[]MarketplaceUseCaseVersionResource**](MarketplaceUseCaseVersionResource.md) |  | [optional] 
+**Version** | Pointer to **string** | A string version for each use case. | [optional] 
+**Catalog** | Pointer to [**WorkflowCatalogRelationship**](WorkflowCatalogRelationship.md) |  | [optional] 
 **UseCase** | Pointer to [**MarketplaceUseCaseRelationship**](MarketplaceUseCaseRelationship.md) |  | [optional] 
 
 ## Methods
@@ -108,20 +108,20 @@ HasLocales returns a boolean if a field has been set.
 UnsetLocales ensures that no value is present for Locales, not even an explicit nil
 ### GetResources
 
-`func (o *MarketplaceUseCaseVersionAllOf) GetResources() []MarketplaceUseCaseVersionResources`
+`func (o *MarketplaceUseCaseVersionAllOf) GetResources() []MarketplaceUseCaseVersionResource`
 
 GetResources returns the Resources field if non-nil, zero value otherwise.
 
 ### GetResourcesOk
 
-`func (o *MarketplaceUseCaseVersionAllOf) GetResourcesOk() (*[]MarketplaceUseCaseVersionResources, bool)`
+`func (o *MarketplaceUseCaseVersionAllOf) GetResourcesOk() (*[]MarketplaceUseCaseVersionResource, bool)`
 
 GetResourcesOk returns a tuple with the Resources field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetResources
 
-`func (o *MarketplaceUseCaseVersionAllOf) SetResources(v []MarketplaceUseCaseVersionResources)`
+`func (o *MarketplaceUseCaseVersionAllOf) SetResources(v []MarketplaceUseCaseVersionResource)`
 
 SetResources sets Resources field to given value.
 
@@ -166,30 +166,30 @@ SetVersion sets Version field to given value.
 
 HasVersion returns a boolean if a field has been set.
 
-### GetOrganization
+### GetCatalog
 
-`func (o *MarketplaceUseCaseVersionAllOf) GetOrganization() OrganizationOrganizationRelationship`
+`func (o *MarketplaceUseCaseVersionAllOf) GetCatalog() WorkflowCatalogRelationship`
 
-GetOrganization returns the Organization field if non-nil, zero value otherwise.
+GetCatalog returns the Catalog field if non-nil, zero value otherwise.
 
-### GetOrganizationOk
+### GetCatalogOk
 
-`func (o *MarketplaceUseCaseVersionAllOf) GetOrganizationOk() (*OrganizationOrganizationRelationship, bool)`
+`func (o *MarketplaceUseCaseVersionAllOf) GetCatalogOk() (*WorkflowCatalogRelationship, bool)`
 
-GetOrganizationOk returns a tuple with the Organization field if it's non-nil, zero value otherwise
+GetCatalogOk returns a tuple with the Catalog field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetOrganization
+### SetCatalog
 
-`func (o *MarketplaceUseCaseVersionAllOf) SetOrganization(v OrganizationOrganizationRelationship)`
+`func (o *MarketplaceUseCaseVersionAllOf) SetCatalog(v WorkflowCatalogRelationship)`
 
-SetOrganization sets Organization field to given value.
+SetCatalog sets Catalog field to given value.
 
-### HasOrganization
+### HasCatalog
 
-`func (o *MarketplaceUseCaseVersionAllOf) HasOrganization() bool`
+`func (o *MarketplaceUseCaseVersionAllOf) HasCatalog() bool`
 
-HasOrganization returns a boolean if a field has been set.
+HasCatalog returns a boolean if a field has been set.
 
 ### GetUseCase
 

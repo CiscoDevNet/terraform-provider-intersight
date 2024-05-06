@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-15830
+API version: 1.0.11-16342
 Contact: intersight@cisco.com
 */
 
@@ -63,7 +63,8 @@ type WorkflowWorkflowInfo struct {
 	// Deprecated
 	Status *string `json:"Status,omitempty"`
 	// The duration in hours after which the workflow info for successful workflow will be removed from database. The minimum is 1 hour, maximum is 365 days and default is 90 days.
-	SuccessWorkflowCleanupDuration *int64 `json:"SuccessWorkflowCleanupDuration,omitempty"`
+	SuccessWorkflowCleanupDuration *int64                         `json:"SuccessWorkflowCleanupDuration,omitempty"`
+	TaskInfoUpdate                 NullableWorkflowTaskInfoUpdate `json:"TaskInfoUpdate,omitempty"`
 	// The trace id to keep track of workflow execution.
 	TraceId *string `json:"TraceId,omitempty"`
 	// A type of the workflow (serverconfig, ansible_monitoring).
@@ -832,6 +833,49 @@ func (o *WorkflowWorkflowInfo) SetSuccessWorkflowCleanupDuration(v int64) {
 	o.SuccessWorkflowCleanupDuration = &v
 }
 
+// GetTaskInfoUpdate returns the TaskInfoUpdate field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *WorkflowWorkflowInfo) GetTaskInfoUpdate() WorkflowTaskInfoUpdate {
+	if o == nil || o.TaskInfoUpdate.Get() == nil {
+		var ret WorkflowTaskInfoUpdate
+		return ret
+	}
+	return *o.TaskInfoUpdate.Get()
+}
+
+// GetTaskInfoUpdateOk returns a tuple with the TaskInfoUpdate field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *WorkflowWorkflowInfo) GetTaskInfoUpdateOk() (*WorkflowTaskInfoUpdate, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.TaskInfoUpdate.Get(), o.TaskInfoUpdate.IsSet()
+}
+
+// HasTaskInfoUpdate returns a boolean if a field has been set.
+func (o *WorkflowWorkflowInfo) HasTaskInfoUpdate() bool {
+	if o != nil && o.TaskInfoUpdate.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetTaskInfoUpdate gets a reference to the given NullableWorkflowTaskInfoUpdate and assigns it to the TaskInfoUpdate field.
+func (o *WorkflowWorkflowInfo) SetTaskInfoUpdate(v WorkflowTaskInfoUpdate) {
+	o.TaskInfoUpdate.Set(&v)
+}
+
+// SetTaskInfoUpdateNil sets the value for TaskInfoUpdate to be an explicit nil
+func (o *WorkflowWorkflowInfo) SetTaskInfoUpdateNil() {
+	o.TaskInfoUpdate.Set(nil)
+}
+
+// UnsetTaskInfoUpdate ensures that no value is present for TaskInfoUpdate, not even an explicit nil
+func (o *WorkflowWorkflowInfo) UnsetTaskInfoUpdate() {
+	o.TaskInfoUpdate.Unset()
+}
+
 // GetTraceId returns the TraceId field value if set, zero value otherwise.
 func (o *WorkflowWorkflowInfo) GetTraceId() string {
 	if o == nil || o.TraceId == nil {
@@ -1401,6 +1445,9 @@ func (o WorkflowWorkflowInfo) MarshalJSON() ([]byte, error) {
 	if o.SuccessWorkflowCleanupDuration != nil {
 		toSerialize["SuccessWorkflowCleanupDuration"] = o.SuccessWorkflowCleanupDuration
 	}
+	if o.TaskInfoUpdate.IsSet() {
+		toSerialize["TaskInfoUpdate"] = o.TaskInfoUpdate.Get()
+	}
 	if o.TraceId != nil {
 		toSerialize["TraceId"] = o.TraceId
 	}
@@ -1498,7 +1545,8 @@ func (o *WorkflowWorkflowInfo) UnmarshalJSON(bytes []byte) (err error) {
 		// Deprecated
 		Status *string `json:"Status,omitempty"`
 		// The duration in hours after which the workflow info for successful workflow will be removed from database. The minimum is 1 hour, maximum is 365 days and default is 90 days.
-		SuccessWorkflowCleanupDuration *int64 `json:"SuccessWorkflowCleanupDuration,omitempty"`
+		SuccessWorkflowCleanupDuration *int64                         `json:"SuccessWorkflowCleanupDuration,omitempty"`
+		TaskInfoUpdate                 NullableWorkflowTaskInfoUpdate `json:"TaskInfoUpdate,omitempty"`
 		// The trace id to keep track of workflow execution.
 		TraceId *string `json:"TraceId,omitempty"`
 		// A type of the workflow (serverconfig, ansible_monitoring).
@@ -1551,6 +1599,7 @@ func (o *WorkflowWorkflowInfo) UnmarshalJSON(bytes []byte) (err error) {
 		varWorkflowWorkflowInfo.StartTime = varWorkflowWorkflowInfoWithoutEmbeddedStruct.StartTime
 		varWorkflowWorkflowInfo.Status = varWorkflowWorkflowInfoWithoutEmbeddedStruct.Status
 		varWorkflowWorkflowInfo.SuccessWorkflowCleanupDuration = varWorkflowWorkflowInfoWithoutEmbeddedStruct.SuccessWorkflowCleanupDuration
+		varWorkflowWorkflowInfo.TaskInfoUpdate = varWorkflowWorkflowInfoWithoutEmbeddedStruct.TaskInfoUpdate
 		varWorkflowWorkflowInfo.TraceId = varWorkflowWorkflowInfoWithoutEmbeddedStruct.TraceId
 		varWorkflowWorkflowInfo.Type = varWorkflowWorkflowInfoWithoutEmbeddedStruct.Type
 		varWorkflowWorkflowInfo.UserActionRequired = varWorkflowWorkflowInfoWithoutEmbeddedStruct.UserActionRequired
@@ -1605,6 +1654,7 @@ func (o *WorkflowWorkflowInfo) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "StartTime")
 		delete(additionalProperties, "Status")
 		delete(additionalProperties, "SuccessWorkflowCleanupDuration")
+		delete(additionalProperties, "TaskInfoUpdate")
 		delete(additionalProperties, "TraceId")
 		delete(additionalProperties, "Type")
 		delete(additionalProperties, "UserActionRequired")

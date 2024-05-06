@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-15830
+API version: 1.0.11-16342
 Contact: intersight@cisco.com
 */
 
@@ -23,10 +23,12 @@ type MarketplaceUseCase struct {
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
-	ObjectType           string                                `json:"ObjectType"`
-	Dependencies         []MarketplaceUseCaseDependency        `json:"Dependencies,omitempty"`
-	Locales              []MarketplaceUseCaseLocale            `json:"Locales,omitempty"`
-	Organization         *OrganizationOrganizationRelationship `json:"Organization,omitempty"`
+	ObjectType   string                         `json:"ObjectType"`
+	Dependencies []MarketplaceUseCaseDependency `json:"Dependencies,omitempty"`
+	Locales      []MarketplaceUseCaseLocale     `json:"Locales,omitempty"`
+	// A unique identifier is used to prevent duplicates.
+	UniqueName           *string                      `json:"UniqueName,omitempty"`
+	Catalog              *WorkflowCatalogRelationship `json:"Catalog,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -169,36 +171,68 @@ func (o *MarketplaceUseCase) SetLocales(v []MarketplaceUseCaseLocale) {
 	o.Locales = v
 }
 
-// GetOrganization returns the Organization field value if set, zero value otherwise.
-func (o *MarketplaceUseCase) GetOrganization() OrganizationOrganizationRelationship {
-	if o == nil || o.Organization == nil {
-		var ret OrganizationOrganizationRelationship
+// GetUniqueName returns the UniqueName field value if set, zero value otherwise.
+func (o *MarketplaceUseCase) GetUniqueName() string {
+	if o == nil || o.UniqueName == nil {
+		var ret string
 		return ret
 	}
-	return *o.Organization
+	return *o.UniqueName
 }
 
-// GetOrganizationOk returns a tuple with the Organization field value if set, nil otherwise
+// GetUniqueNameOk returns a tuple with the UniqueName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *MarketplaceUseCase) GetOrganizationOk() (*OrganizationOrganizationRelationship, bool) {
-	if o == nil || o.Organization == nil {
+func (o *MarketplaceUseCase) GetUniqueNameOk() (*string, bool) {
+	if o == nil || o.UniqueName == nil {
 		return nil, false
 	}
-	return o.Organization, true
+	return o.UniqueName, true
 }
 
-// HasOrganization returns a boolean if a field has been set.
-func (o *MarketplaceUseCase) HasOrganization() bool {
-	if o != nil && o.Organization != nil {
+// HasUniqueName returns a boolean if a field has been set.
+func (o *MarketplaceUseCase) HasUniqueName() bool {
+	if o != nil && o.UniqueName != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetOrganization gets a reference to the given OrganizationOrganizationRelationship and assigns it to the Organization field.
-func (o *MarketplaceUseCase) SetOrganization(v OrganizationOrganizationRelationship) {
-	o.Organization = &v
+// SetUniqueName gets a reference to the given string and assigns it to the UniqueName field.
+func (o *MarketplaceUseCase) SetUniqueName(v string) {
+	o.UniqueName = &v
+}
+
+// GetCatalog returns the Catalog field value if set, zero value otherwise.
+func (o *MarketplaceUseCase) GetCatalog() WorkflowCatalogRelationship {
+	if o == nil || o.Catalog == nil {
+		var ret WorkflowCatalogRelationship
+		return ret
+	}
+	return *o.Catalog
+}
+
+// GetCatalogOk returns a tuple with the Catalog field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *MarketplaceUseCase) GetCatalogOk() (*WorkflowCatalogRelationship, bool) {
+	if o == nil || o.Catalog == nil {
+		return nil, false
+	}
+	return o.Catalog, true
+}
+
+// HasCatalog returns a boolean if a field has been set.
+func (o *MarketplaceUseCase) HasCatalog() bool {
+	if o != nil && o.Catalog != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetCatalog gets a reference to the given WorkflowCatalogRelationship and assigns it to the Catalog field.
+func (o *MarketplaceUseCase) SetCatalog(v WorkflowCatalogRelationship) {
+	o.Catalog = &v
 }
 
 func (o MarketplaceUseCase) MarshalJSON() ([]byte, error) {
@@ -223,8 +257,11 @@ func (o MarketplaceUseCase) MarshalJSON() ([]byte, error) {
 	if o.Locales != nil {
 		toSerialize["Locales"] = o.Locales
 	}
-	if o.Organization != nil {
-		toSerialize["Organization"] = o.Organization
+	if o.UniqueName != nil {
+		toSerialize["UniqueName"] = o.UniqueName
+	}
+	if o.Catalog != nil {
+		toSerialize["Catalog"] = o.Catalog
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -239,10 +276,12 @@ func (o *MarketplaceUseCase) UnmarshalJSON(bytes []byte) (err error) {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
-		ObjectType   string                                `json:"ObjectType"`
-		Dependencies []MarketplaceUseCaseDependency        `json:"Dependencies,omitempty"`
-		Locales      []MarketplaceUseCaseLocale            `json:"Locales,omitempty"`
-		Organization *OrganizationOrganizationRelationship `json:"Organization,omitempty"`
+		ObjectType   string                         `json:"ObjectType"`
+		Dependencies []MarketplaceUseCaseDependency `json:"Dependencies,omitempty"`
+		Locales      []MarketplaceUseCaseLocale     `json:"Locales,omitempty"`
+		// A unique identifier is used to prevent duplicates.
+		UniqueName *string                      `json:"UniqueName,omitempty"`
+		Catalog    *WorkflowCatalogRelationship `json:"Catalog,omitempty"`
 	}
 
 	varMarketplaceUseCaseWithoutEmbeddedStruct := MarketplaceUseCaseWithoutEmbeddedStruct{}
@@ -254,7 +293,8 @@ func (o *MarketplaceUseCase) UnmarshalJSON(bytes []byte) (err error) {
 		varMarketplaceUseCase.ObjectType = varMarketplaceUseCaseWithoutEmbeddedStruct.ObjectType
 		varMarketplaceUseCase.Dependencies = varMarketplaceUseCaseWithoutEmbeddedStruct.Dependencies
 		varMarketplaceUseCase.Locales = varMarketplaceUseCaseWithoutEmbeddedStruct.Locales
-		varMarketplaceUseCase.Organization = varMarketplaceUseCaseWithoutEmbeddedStruct.Organization
+		varMarketplaceUseCase.UniqueName = varMarketplaceUseCaseWithoutEmbeddedStruct.UniqueName
+		varMarketplaceUseCase.Catalog = varMarketplaceUseCaseWithoutEmbeddedStruct.Catalog
 		*o = MarketplaceUseCase(varMarketplaceUseCase)
 	} else {
 		return err
@@ -276,7 +316,8 @@ func (o *MarketplaceUseCase) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Dependencies")
 		delete(additionalProperties, "Locales")
-		delete(additionalProperties, "Organization")
+		delete(additionalProperties, "UniqueName")
+		delete(additionalProperties, "Catalog")
 
 		// remove fields from embedded structs
 		reflectMoBaseMo := reflect.ValueOf(o.MoBaseMo)

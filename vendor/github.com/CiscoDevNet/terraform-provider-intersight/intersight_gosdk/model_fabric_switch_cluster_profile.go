@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-15830
+API version: 1.0.11-16342
 Contact: intersight@cisco.com
 */
 
@@ -19,18 +19,17 @@ import (
 
 // FabricSwitchClusterProfile This specifies the configuration policies for a cluster of switches.
 type FabricSwitchClusterProfile struct {
-	PolicyAbstractProfile
+	FabricBaseClusterProfile
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
-	ObjectType    string                      `json:"ObjectType"`
-	ConfigContext NullablePolicyConfigContext `json:"ConfigContext,omitempty"`
+	ObjectType         string                      `json:"ObjectType"`
+	ClusterAssignments []FabricClusterAssignment   `json:"ClusterAssignments,omitempty"`
+	ConfigContext      NullablePolicyConfigContext `json:"ConfigContext,omitempty"`
 	// Deploy status of the switch cluster profile indicating if deployment has been initiated on all the members of the cluster profile. * `None` - Switch profiles not deployed on either of the switches. * `Complete` - Both switch profiles of the cluster profile are deployed. * `Partial` - Only one of the switch profiles of the cluster profile is deployed.
 	DeployStatus *string `json:"DeployStatus,omitempty"`
 	// Values indicating the switches on which the cluster profile has been deployed. 0 indicates that the profile has not been deployed on any switch, 1 indicates that the profile has been deployed on A, 2 indicates that it is deployed on B and 3 indicates that it is deployed on both. * `None` - Switch profiles not deployed on either of the fabric interconnects. * `A` - Switch profiles deployed only on fabric interconnect A. * `B` - Switch profiles deployed only on fabric interconnect B. * `AB` - Switch profiles deployed on both fabric interconnect A and B.
 	DeployedSwitches *string `json:"DeployedSwitches,omitempty"`
-	// Number of switch profiles that are part of this cluster profile.
-	SwitchProfilesCount *int64 `json:"SwitchProfilesCount,omitempty"`
 	// The user defined label assigned to the switch profile.
 	UserLabel    *string                               `json:"UserLabel,omitempty"`
 	Organization *OrganizationOrganizationRelationship `json:"Organization,omitempty"`
@@ -112,6 +111,39 @@ func (o *FabricSwitchClusterProfile) GetObjectTypeOk() (*string, bool) {
 // SetObjectType sets field value
 func (o *FabricSwitchClusterProfile) SetObjectType(v string) {
 	o.ObjectType = v
+}
+
+// GetClusterAssignments returns the ClusterAssignments field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *FabricSwitchClusterProfile) GetClusterAssignments() []FabricClusterAssignment {
+	if o == nil {
+		var ret []FabricClusterAssignment
+		return ret
+	}
+	return o.ClusterAssignments
+}
+
+// GetClusterAssignmentsOk returns a tuple with the ClusterAssignments field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *FabricSwitchClusterProfile) GetClusterAssignmentsOk() ([]FabricClusterAssignment, bool) {
+	if o == nil || o.ClusterAssignments == nil {
+		return nil, false
+	}
+	return o.ClusterAssignments, true
+}
+
+// HasClusterAssignments returns a boolean if a field has been set.
+func (o *FabricSwitchClusterProfile) HasClusterAssignments() bool {
+	if o != nil && o.ClusterAssignments != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetClusterAssignments gets a reference to the given []FabricClusterAssignment and assigns it to the ClusterAssignments field.
+func (o *FabricSwitchClusterProfile) SetClusterAssignments(v []FabricClusterAssignment) {
+	o.ClusterAssignments = v
 }
 
 // GetConfigContext returns the ConfigContext field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -221,38 +253,6 @@ func (o *FabricSwitchClusterProfile) SetDeployedSwitches(v string) {
 	o.DeployedSwitches = &v
 }
 
-// GetSwitchProfilesCount returns the SwitchProfilesCount field value if set, zero value otherwise.
-func (o *FabricSwitchClusterProfile) GetSwitchProfilesCount() int64 {
-	if o == nil || o.SwitchProfilesCount == nil {
-		var ret int64
-		return ret
-	}
-	return *o.SwitchProfilesCount
-}
-
-// GetSwitchProfilesCountOk returns a tuple with the SwitchProfilesCount field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *FabricSwitchClusterProfile) GetSwitchProfilesCountOk() (*int64, bool) {
-	if o == nil || o.SwitchProfilesCount == nil {
-		return nil, false
-	}
-	return o.SwitchProfilesCount, true
-}
-
-// HasSwitchProfilesCount returns a boolean if a field has been set.
-func (o *FabricSwitchClusterProfile) HasSwitchProfilesCount() bool {
-	if o != nil && o.SwitchProfilesCount != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetSwitchProfilesCount gets a reference to the given int64 and assigns it to the SwitchProfilesCount field.
-func (o *FabricSwitchClusterProfile) SetSwitchProfilesCount(v int64) {
-	o.SwitchProfilesCount = &v
-}
-
 // GetUserLabel returns the UserLabel field value if set, zero value otherwise.
 func (o *FabricSwitchClusterProfile) GetUserLabel() string {
 	if o == nil || o.UserLabel == nil {
@@ -352,19 +352,22 @@ func (o *FabricSwitchClusterProfile) SetSwitchProfiles(v []FabricSwitchProfileRe
 
 func (o FabricSwitchClusterProfile) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	serializedPolicyAbstractProfile, errPolicyAbstractProfile := json.Marshal(o.PolicyAbstractProfile)
-	if errPolicyAbstractProfile != nil {
-		return []byte{}, errPolicyAbstractProfile
+	serializedFabricBaseClusterProfile, errFabricBaseClusterProfile := json.Marshal(o.FabricBaseClusterProfile)
+	if errFabricBaseClusterProfile != nil {
+		return []byte{}, errFabricBaseClusterProfile
 	}
-	errPolicyAbstractProfile = json.Unmarshal([]byte(serializedPolicyAbstractProfile), &toSerialize)
-	if errPolicyAbstractProfile != nil {
-		return []byte{}, errPolicyAbstractProfile
+	errFabricBaseClusterProfile = json.Unmarshal([]byte(serializedFabricBaseClusterProfile), &toSerialize)
+	if errFabricBaseClusterProfile != nil {
+		return []byte{}, errFabricBaseClusterProfile
 	}
 	if true {
 		toSerialize["ClassId"] = o.ClassId
 	}
 	if true {
 		toSerialize["ObjectType"] = o.ObjectType
+	}
+	if o.ClusterAssignments != nil {
+		toSerialize["ClusterAssignments"] = o.ClusterAssignments
 	}
 	if o.ConfigContext.IsSet() {
 		toSerialize["ConfigContext"] = o.ConfigContext.Get()
@@ -374,9 +377,6 @@ func (o FabricSwitchClusterProfile) MarshalJSON() ([]byte, error) {
 	}
 	if o.DeployedSwitches != nil {
 		toSerialize["DeployedSwitches"] = o.DeployedSwitches
-	}
-	if o.SwitchProfilesCount != nil {
-		toSerialize["SwitchProfilesCount"] = o.SwitchProfilesCount
 	}
 	if o.UserLabel != nil {
 		toSerialize["UserLabel"] = o.UserLabel
@@ -400,14 +400,13 @@ func (o *FabricSwitchClusterProfile) UnmarshalJSON(bytes []byte) (err error) {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
-		ObjectType    string                      `json:"ObjectType"`
-		ConfigContext NullablePolicyConfigContext `json:"ConfigContext,omitempty"`
+		ObjectType         string                      `json:"ObjectType"`
+		ClusterAssignments []FabricClusterAssignment   `json:"ClusterAssignments,omitempty"`
+		ConfigContext      NullablePolicyConfigContext `json:"ConfigContext,omitempty"`
 		// Deploy status of the switch cluster profile indicating if deployment has been initiated on all the members of the cluster profile. * `None` - Switch profiles not deployed on either of the switches. * `Complete` - Both switch profiles of the cluster profile are deployed. * `Partial` - Only one of the switch profiles of the cluster profile is deployed.
 		DeployStatus *string `json:"DeployStatus,omitempty"`
 		// Values indicating the switches on which the cluster profile has been deployed. 0 indicates that the profile has not been deployed on any switch, 1 indicates that the profile has been deployed on A, 2 indicates that it is deployed on B and 3 indicates that it is deployed on both. * `None` - Switch profiles not deployed on either of the fabric interconnects. * `A` - Switch profiles deployed only on fabric interconnect A. * `B` - Switch profiles deployed only on fabric interconnect B. * `AB` - Switch profiles deployed on both fabric interconnect A and B.
 		DeployedSwitches *string `json:"DeployedSwitches,omitempty"`
-		// Number of switch profiles that are part of this cluster profile.
-		SwitchProfilesCount *int64 `json:"SwitchProfilesCount,omitempty"`
 		// The user defined label assigned to the switch profile.
 		UserLabel    *string                               `json:"UserLabel,omitempty"`
 		Organization *OrganizationOrganizationRelationship `json:"Organization,omitempty"`
@@ -422,10 +421,10 @@ func (o *FabricSwitchClusterProfile) UnmarshalJSON(bytes []byte) (err error) {
 		varFabricSwitchClusterProfile := _FabricSwitchClusterProfile{}
 		varFabricSwitchClusterProfile.ClassId = varFabricSwitchClusterProfileWithoutEmbeddedStruct.ClassId
 		varFabricSwitchClusterProfile.ObjectType = varFabricSwitchClusterProfileWithoutEmbeddedStruct.ObjectType
+		varFabricSwitchClusterProfile.ClusterAssignments = varFabricSwitchClusterProfileWithoutEmbeddedStruct.ClusterAssignments
 		varFabricSwitchClusterProfile.ConfigContext = varFabricSwitchClusterProfileWithoutEmbeddedStruct.ConfigContext
 		varFabricSwitchClusterProfile.DeployStatus = varFabricSwitchClusterProfileWithoutEmbeddedStruct.DeployStatus
 		varFabricSwitchClusterProfile.DeployedSwitches = varFabricSwitchClusterProfileWithoutEmbeddedStruct.DeployedSwitches
-		varFabricSwitchClusterProfile.SwitchProfilesCount = varFabricSwitchClusterProfileWithoutEmbeddedStruct.SwitchProfilesCount
 		varFabricSwitchClusterProfile.UserLabel = varFabricSwitchClusterProfileWithoutEmbeddedStruct.UserLabel
 		varFabricSwitchClusterProfile.Organization = varFabricSwitchClusterProfileWithoutEmbeddedStruct.Organization
 		varFabricSwitchClusterProfile.SwitchProfiles = varFabricSwitchClusterProfileWithoutEmbeddedStruct.SwitchProfiles
@@ -438,7 +437,7 @@ func (o *FabricSwitchClusterProfile) UnmarshalJSON(bytes []byte) (err error) {
 
 	err = json.Unmarshal(bytes, &varFabricSwitchClusterProfile)
 	if err == nil {
-		o.PolicyAbstractProfile = varFabricSwitchClusterProfile.PolicyAbstractProfile
+		o.FabricBaseClusterProfile = varFabricSwitchClusterProfile.FabricBaseClusterProfile
 	} else {
 		return err
 	}
@@ -448,18 +447,18 @@ func (o *FabricSwitchClusterProfile) UnmarshalJSON(bytes []byte) (err error) {
 	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
+		delete(additionalProperties, "ClusterAssignments")
 		delete(additionalProperties, "ConfigContext")
 		delete(additionalProperties, "DeployStatus")
 		delete(additionalProperties, "DeployedSwitches")
-		delete(additionalProperties, "SwitchProfilesCount")
 		delete(additionalProperties, "UserLabel")
 		delete(additionalProperties, "Organization")
 		delete(additionalProperties, "SwitchProfiles")
 
 		// remove fields from embedded structs
-		reflectPolicyAbstractProfile := reflect.ValueOf(o.PolicyAbstractProfile)
-		for i := 0; i < reflectPolicyAbstractProfile.Type().NumField(); i++ {
-			t := reflectPolicyAbstractProfile.Type().Field(i)
+		reflectFabricBaseClusterProfile := reflect.ValueOf(o.FabricBaseClusterProfile)
+		for i := 0; i < reflectFabricBaseClusterProfile.Type().NumField(); i++ {
+			t := reflectFabricBaseClusterProfile.Type().Field(i)
 
 			if jsonTag := t.Tag.Get("json"); jsonTag != "" {
 				fieldName := ""

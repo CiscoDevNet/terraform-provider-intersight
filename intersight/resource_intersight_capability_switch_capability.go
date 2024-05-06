@@ -241,39 +241,159 @@ func resourceCapabilitySwitchCapability() *schema.Resource {
 					}
 					return
 				}},
-			"min_version_with_breakout_support": {
+			"min_version_map_with_breakout_support": {
 				Description: "Minimum firmware version supported for breakout ports on this switch.",
-				Type:        schema.TypeString,
+				Type:        schema.TypeList,
+				MaxItems:    1,
 				Optional:    true,
 				Computed:    true,
-				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
-					if val != nil {
-						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
-					}
-					return
-				}},
-			"min_version_with_locator_led_support": {
+				ConfigMode:  schema.SchemaConfigModeAttr,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"additional_properties": {
+							Type:             schema.TypeString,
+							Optional:         true,
+							DiffSuppressFunc: SuppressDiffAdditionProps,
+						},
+						"bundle_version": {
+							Description: "Bundle version. Usually the first released bundle containing the specific device firmware version.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+							ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+								if val != nil {
+									warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+								}
+								return
+							}},
+						"class_id": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Default:     "firmware.VersionMap",
+						},
+						"device_firmware_version": {
+							Description: "Bundled device firmware version.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+							ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+								if val != nil {
+									warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+								}
+								return
+							}},
+						"object_type": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Default:     "firmware.VersionMap",
+						},
+					},
+				},
+			},
+			"min_version_map_with_locator_led_support": {
 				Description: "Minimum firmware version supported for locator leds on this switch.",
-				Type:        schema.TypeString,
+				Type:        schema.TypeList,
+				MaxItems:    1,
 				Optional:    true,
 				Computed:    true,
-				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
-					if val != nil {
-						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
-					}
-					return
-				}},
-			"min_version_with_neg_auto25g": {
+				ConfigMode:  schema.SchemaConfigModeAttr,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"additional_properties": {
+							Type:             schema.TypeString,
+							Optional:         true,
+							DiffSuppressFunc: SuppressDiffAdditionProps,
+						},
+						"bundle_version": {
+							Description: "Bundle version. Usually the first released bundle containing the specific device firmware version.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+							ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+								if val != nil {
+									warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+								}
+								return
+							}},
+						"class_id": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Default:     "firmware.VersionMap",
+						},
+						"device_firmware_version": {
+							Description: "Bundled device firmware version.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+							ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+								if val != nil {
+									warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+								}
+								return
+							}},
+						"object_type": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Default:     "firmware.VersionMap",
+						},
+					},
+				},
+			},
+			"min_version_map_with_neg_auto25g_support": {
 				Description: "Minimum firmware version supported for 'negotiate auto 25000' port admin speed on this switch.",
-				Type:        schema.TypeString,
+				Type:        schema.TypeList,
+				MaxItems:    1,
 				Optional:    true,
 				Computed:    true,
-				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
-					if val != nil {
-						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
-					}
-					return
-				}},
+				ConfigMode:  schema.SchemaConfigModeAttr,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"additional_properties": {
+							Type:             schema.TypeString,
+							Optional:         true,
+							DiffSuppressFunc: SuppressDiffAdditionProps,
+						},
+						"bundle_version": {
+							Description: "Bundle version. Usually the first released bundle containing the specific device firmware version.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+							ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+								if val != nil {
+									warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+								}
+								return
+							}},
+						"class_id": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Default:     "firmware.VersionMap",
+						},
+						"device_firmware_version": {
+							Description: "Bundled device firmware version.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+							ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+								if val != nil {
+									warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+								}
+								return
+							}},
+						"object_type": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Default:     "firmware.VersionMap",
+						},
+					},
+				},
+			},
 			"mod_time": {
 				Description: "The time when this managed object was last modified.",
 				Type:        schema.TypeString,
@@ -2175,16 +2295,16 @@ func resourceCapabilitySwitchCapabilityRead(c context.Context, d *schema.Resourc
 		return diag.Errorf("error occurred while setting property MaxSlots in CapabilitySwitchCapability object: %s", err.Error())
 	}
 
-	if err := d.Set("min_version_with_breakout_support", (s.GetMinVersionWithBreakoutSupport())); err != nil {
-		return diag.Errorf("error occurred while setting property MinVersionWithBreakoutSupport in CapabilitySwitchCapability object: %s", err.Error())
+	if err := d.Set("min_version_map_with_breakout_support", flattenMapFirmwareVersionMap(s.GetMinVersionMapWithBreakoutSupport(), d)); err != nil {
+		return diag.Errorf("error occurred while setting property MinVersionMapWithBreakoutSupport in CapabilitySwitchCapability object: %s", err.Error())
 	}
 
-	if err := d.Set("min_version_with_locator_led_support", (s.GetMinVersionWithLocatorLedSupport())); err != nil {
-		return diag.Errorf("error occurred while setting property MinVersionWithLocatorLedSupport in CapabilitySwitchCapability object: %s", err.Error())
+	if err := d.Set("min_version_map_with_locator_led_support", flattenMapFirmwareVersionMap(s.GetMinVersionMapWithLocatorLedSupport(), d)); err != nil {
+		return diag.Errorf("error occurred while setting property MinVersionMapWithLocatorLedSupport in CapabilitySwitchCapability object: %s", err.Error())
 	}
 
-	if err := d.Set("min_version_with_neg_auto25g", (s.GetMinVersionWithNegAuto25g())); err != nil {
-		return diag.Errorf("error occurred while setting property MinVersionWithNegAuto25g in CapabilitySwitchCapability object: %s", err.Error())
+	if err := d.Set("min_version_map_with_neg_auto25g_support", flattenMapFirmwareVersionMap(s.GetMinVersionMapWithNegAuto25gSupport(), d)); err != nil {
+		return diag.Errorf("error occurred while setting property MinVersionMapWithNegAuto25gSupport in CapabilitySwitchCapability object: %s", err.Error())
 	}
 
 	if err := d.Set("mod_time", (s.GetModTime()).String()); err != nil {
