@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the FirmwareDistributable type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &FirmwareDistributable{}
 
 // FirmwareDistributable An image distributed by Cisco.
 type FirmwareDistributable struct {
@@ -29,8 +33,8 @@ type FirmwareDistributable struct {
 	// The category into which the distributable falls into according to the supported platform series. For e.g.; C-Series/B-Series/Infrastructure.
 	ImageCategory *string `json:"ImageCategory,omitempty"`
 	// The source of the distributable. If it has been created by the user or system. * `System` - The distributable has been created by the System. * `User` - The distributable has been created by the User.
-	Origin               *string                                `json:"Origin,omitempty"`
-	Catalog              *SoftwarerepositoryCatalogRelationship `json:"Catalog,omitempty"`
+	Origin               *string                                       `json:"Origin,omitempty"`
+	Catalog              NullableSoftwarerepositoryCatalogRelationship `json:"Catalog,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -46,6 +50,8 @@ func NewFirmwareDistributable(classId string, objectType string) *FirmwareDistri
 	this.ObjectType = objectType
 	var importAction string = "None"
 	this.ImportAction = &importAction
+	var recommendedBuild string = "N"
+	this.RecommendedBuild = &recommendedBuild
 	var vendor string = "Cisco"
 	this.Vendor = &vendor
 	var origin string = "System"
@@ -117,7 +123,7 @@ func (o *FirmwareDistributable) SetObjectType(v string) {
 
 // GetFileLocation returns the FileLocation field value if set, zero value otherwise.
 func (o *FirmwareDistributable) GetFileLocation() string {
-	if o == nil || o.FileLocation == nil {
+	if o == nil || IsNil(o.FileLocation) {
 		var ret string
 		return ret
 	}
@@ -127,7 +133,7 @@ func (o *FirmwareDistributable) GetFileLocation() string {
 // GetFileLocationOk returns a tuple with the FileLocation field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FirmwareDistributable) GetFileLocationOk() (*string, bool) {
-	if o == nil || o.FileLocation == nil {
+	if o == nil || IsNil(o.FileLocation) {
 		return nil, false
 	}
 	return o.FileLocation, true
@@ -135,7 +141,7 @@ func (o *FirmwareDistributable) GetFileLocationOk() (*string, bool) {
 
 // HasFileLocation returns a boolean if a field has been set.
 func (o *FirmwareDistributable) HasFileLocation() bool {
-	if o != nil && o.FileLocation != nil {
+	if o != nil && !IsNil(o.FileLocation) {
 		return true
 	}
 
@@ -149,7 +155,7 @@ func (o *FirmwareDistributable) SetFileLocation(v string) {
 
 // GetImageCategory returns the ImageCategory field value if set, zero value otherwise.
 func (o *FirmwareDistributable) GetImageCategory() string {
-	if o == nil || o.ImageCategory == nil {
+	if o == nil || IsNil(o.ImageCategory) {
 		var ret string
 		return ret
 	}
@@ -159,7 +165,7 @@ func (o *FirmwareDistributable) GetImageCategory() string {
 // GetImageCategoryOk returns a tuple with the ImageCategory field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FirmwareDistributable) GetImageCategoryOk() (*string, bool) {
-	if o == nil || o.ImageCategory == nil {
+	if o == nil || IsNil(o.ImageCategory) {
 		return nil, false
 	}
 	return o.ImageCategory, true
@@ -167,7 +173,7 @@ func (o *FirmwareDistributable) GetImageCategoryOk() (*string, bool) {
 
 // HasImageCategory returns a boolean if a field has been set.
 func (o *FirmwareDistributable) HasImageCategory() bool {
-	if o != nil && o.ImageCategory != nil {
+	if o != nil && !IsNil(o.ImageCategory) {
 		return true
 	}
 
@@ -181,7 +187,7 @@ func (o *FirmwareDistributable) SetImageCategory(v string) {
 
 // GetOrigin returns the Origin field value if set, zero value otherwise.
 func (o *FirmwareDistributable) GetOrigin() string {
-	if o == nil || o.Origin == nil {
+	if o == nil || IsNil(o.Origin) {
 		var ret string
 		return ret
 	}
@@ -191,7 +197,7 @@ func (o *FirmwareDistributable) GetOrigin() string {
 // GetOriginOk returns a tuple with the Origin field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FirmwareDistributable) GetOriginOk() (*string, bool) {
-	if o == nil || o.Origin == nil {
+	if o == nil || IsNil(o.Origin) {
 		return nil, false
 	}
 	return o.Origin, true
@@ -199,7 +205,7 @@ func (o *FirmwareDistributable) GetOriginOk() (*string, bool) {
 
 // HasOrigin returns a boolean if a field has been set.
 func (o *FirmwareDistributable) HasOrigin() bool {
-	if o != nil && o.Origin != nil {
+	if o != nil && !IsNil(o.Origin) {
 		return true
 	}
 
@@ -211,75 +217,112 @@ func (o *FirmwareDistributable) SetOrigin(v string) {
 	o.Origin = &v
 }
 
-// GetCatalog returns the Catalog field value if set, zero value otherwise.
+// GetCatalog returns the Catalog field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *FirmwareDistributable) GetCatalog() SoftwarerepositoryCatalogRelationship {
-	if o == nil || o.Catalog == nil {
+	if o == nil || IsNil(o.Catalog.Get()) {
 		var ret SoftwarerepositoryCatalogRelationship
 		return ret
 	}
-	return *o.Catalog
+	return *o.Catalog.Get()
 }
 
 // GetCatalogOk returns a tuple with the Catalog field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *FirmwareDistributable) GetCatalogOk() (*SoftwarerepositoryCatalogRelationship, bool) {
-	if o == nil || o.Catalog == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Catalog, true
+	return o.Catalog.Get(), o.Catalog.IsSet()
 }
 
 // HasCatalog returns a boolean if a field has been set.
 func (o *FirmwareDistributable) HasCatalog() bool {
-	if o != nil && o.Catalog != nil {
+	if o != nil && o.Catalog.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetCatalog gets a reference to the given SoftwarerepositoryCatalogRelationship and assigns it to the Catalog field.
+// SetCatalog gets a reference to the given NullableSoftwarerepositoryCatalogRelationship and assigns it to the Catalog field.
 func (o *FirmwareDistributable) SetCatalog(v SoftwarerepositoryCatalogRelationship) {
-	o.Catalog = &v
+	o.Catalog.Set(&v)
+}
+
+// SetCatalogNil sets the value for Catalog to be an explicit nil
+func (o *FirmwareDistributable) SetCatalogNil() {
+	o.Catalog.Set(nil)
+}
+
+// UnsetCatalog ensures that no value is present for Catalog, not even an explicit nil
+func (o *FirmwareDistributable) UnsetCatalog() {
+	o.Catalog.Unset()
 }
 
 func (o FirmwareDistributable) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o FirmwareDistributable) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedFirmwareBaseDistributable, errFirmwareBaseDistributable := json.Marshal(o.FirmwareBaseDistributable)
 	if errFirmwareBaseDistributable != nil {
-		return []byte{}, errFirmwareBaseDistributable
+		return map[string]interface{}{}, errFirmwareBaseDistributable
 	}
 	errFirmwareBaseDistributable = json.Unmarshal([]byte(serializedFirmwareBaseDistributable), &toSerialize)
 	if errFirmwareBaseDistributable != nil {
-		return []byte{}, errFirmwareBaseDistributable
+		return map[string]interface{}{}, errFirmwareBaseDistributable
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.FileLocation != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.FileLocation) {
 		toSerialize["FileLocation"] = o.FileLocation
 	}
-	if o.ImageCategory != nil {
+	if !IsNil(o.ImageCategory) {
 		toSerialize["ImageCategory"] = o.ImageCategory
 	}
-	if o.Origin != nil {
+	if !IsNil(o.Origin) {
 		toSerialize["Origin"] = o.Origin
 	}
-	if o.Catalog != nil {
-		toSerialize["Catalog"] = o.Catalog
+	if o.Catalog.IsSet() {
+		toSerialize["Catalog"] = o.Catalog.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *FirmwareDistributable) UnmarshalJSON(bytes []byte) (err error) {
+func (o *FirmwareDistributable) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type FirmwareDistributableWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -290,13 +333,13 @@ func (o *FirmwareDistributable) UnmarshalJSON(bytes []byte) (err error) {
 		// The category into which the distributable falls into according to the supported platform series. For e.g.; C-Series/B-Series/Infrastructure.
 		ImageCategory *string `json:"ImageCategory,omitempty"`
 		// The source of the distributable. If it has been created by the user or system. * `System` - The distributable has been created by the System. * `User` - The distributable has been created by the User.
-		Origin  *string                                `json:"Origin,omitempty"`
-		Catalog *SoftwarerepositoryCatalogRelationship `json:"Catalog,omitempty"`
+		Origin  *string                                       `json:"Origin,omitempty"`
+		Catalog NullableSoftwarerepositoryCatalogRelationship `json:"Catalog,omitempty"`
 	}
 
 	varFirmwareDistributableWithoutEmbeddedStruct := FirmwareDistributableWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varFirmwareDistributableWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varFirmwareDistributableWithoutEmbeddedStruct)
 	if err == nil {
 		varFirmwareDistributable := _FirmwareDistributable{}
 		varFirmwareDistributable.ClassId = varFirmwareDistributableWithoutEmbeddedStruct.ClassId
@@ -312,7 +355,7 @@ func (o *FirmwareDistributable) UnmarshalJSON(bytes []byte) (err error) {
 
 	varFirmwareDistributable := _FirmwareDistributable{}
 
-	err = json.Unmarshal(bytes, &varFirmwareDistributable)
+	err = json.Unmarshal(data, &varFirmwareDistributable)
 	if err == nil {
 		o.FirmwareBaseDistributable = varFirmwareDistributable.FirmwareBaseDistributable
 	} else {
@@ -321,7 +364,7 @@ func (o *FirmwareDistributable) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "FileLocation")

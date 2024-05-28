@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the VnicEthNetworkPolicy type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &VnicEthNetworkPolicy{}
 
 // VnicEthNetworkPolicy An Ethernet Network policy determines if the port can carry single VLAN (Access) or multiple VLANs (Trunk) traffic. You can specify the VLAN to be associated with an Ethernet packet if no tag is found.
 type VnicEthNetworkPolicy struct {
@@ -26,9 +30,9 @@ type VnicEthNetworkPolicy struct {
 	ObjectType string `json:"ObjectType"`
 	// The platform for which the server profile is applicable. It can either be a server that is operating in standalone mode or which is attached to a Fabric Interconnect managed by Intersight. * `Standalone` - Servers which are operating in standalone mode i.e. not connected to a Fabric Interconnected. * `FIAttached` - Servers which are connected to a Fabric Interconnect that is managed by Intersight.
 	// Deprecated
-	TargetPlatform       *string                               `json:"TargetPlatform,omitempty"`
-	VlanSettings         NullableVnicVlanSettings              `json:"VlanSettings,omitempty"`
-	Organization         *OrganizationOrganizationRelationship `json:"Organization,omitempty"`
+	TargetPlatform       *string                                      `json:"TargetPlatform,omitempty"`
+	VlanSettings         NullableVnicVlanSettings                     `json:"VlanSettings,omitempty"`
+	Organization         NullableOrganizationOrganizationRelationship `json:"Organization,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -112,7 +116,7 @@ func (o *VnicEthNetworkPolicy) SetObjectType(v string) {
 // GetTargetPlatform returns the TargetPlatform field value if set, zero value otherwise.
 // Deprecated
 func (o *VnicEthNetworkPolicy) GetTargetPlatform() string {
-	if o == nil || o.TargetPlatform == nil {
+	if o == nil || IsNil(o.TargetPlatform) {
 		var ret string
 		return ret
 	}
@@ -123,7 +127,7 @@ func (o *VnicEthNetworkPolicy) GetTargetPlatform() string {
 // and a boolean to check if the value has been set.
 // Deprecated
 func (o *VnicEthNetworkPolicy) GetTargetPlatformOk() (*string, bool) {
-	if o == nil || o.TargetPlatform == nil {
+	if o == nil || IsNil(o.TargetPlatform) {
 		return nil, false
 	}
 	return o.TargetPlatform, true
@@ -131,7 +135,7 @@ func (o *VnicEthNetworkPolicy) GetTargetPlatformOk() (*string, bool) {
 
 // HasTargetPlatform returns a boolean if a field has been set.
 func (o *VnicEthNetworkPolicy) HasTargetPlatform() bool {
-	if o != nil && o.TargetPlatform != nil {
+	if o != nil && !IsNil(o.TargetPlatform) {
 		return true
 	}
 
@@ -146,7 +150,7 @@ func (o *VnicEthNetworkPolicy) SetTargetPlatform(v string) {
 
 // GetVlanSettings returns the VlanSettings field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *VnicEthNetworkPolicy) GetVlanSettings() VnicVlanSettings {
-	if o == nil || o.VlanSettings.Get() == nil {
+	if o == nil || IsNil(o.VlanSettings.Get()) {
 		var ret VnicVlanSettings
 		return ret
 	}
@@ -187,72 +191,109 @@ func (o *VnicEthNetworkPolicy) UnsetVlanSettings() {
 	o.VlanSettings.Unset()
 }
 
-// GetOrganization returns the Organization field value if set, zero value otherwise.
+// GetOrganization returns the Organization field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *VnicEthNetworkPolicy) GetOrganization() OrganizationOrganizationRelationship {
-	if o == nil || o.Organization == nil {
+	if o == nil || IsNil(o.Organization.Get()) {
 		var ret OrganizationOrganizationRelationship
 		return ret
 	}
-	return *o.Organization
+	return *o.Organization.Get()
 }
 
 // GetOrganizationOk returns a tuple with the Organization field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *VnicEthNetworkPolicy) GetOrganizationOk() (*OrganizationOrganizationRelationship, bool) {
-	if o == nil || o.Organization == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Organization, true
+	return o.Organization.Get(), o.Organization.IsSet()
 }
 
 // HasOrganization returns a boolean if a field has been set.
 func (o *VnicEthNetworkPolicy) HasOrganization() bool {
-	if o != nil && o.Organization != nil {
+	if o != nil && o.Organization.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetOrganization gets a reference to the given OrganizationOrganizationRelationship and assigns it to the Organization field.
+// SetOrganization gets a reference to the given NullableOrganizationOrganizationRelationship and assigns it to the Organization field.
 func (o *VnicEthNetworkPolicy) SetOrganization(v OrganizationOrganizationRelationship) {
-	o.Organization = &v
+	o.Organization.Set(&v)
+}
+
+// SetOrganizationNil sets the value for Organization to be an explicit nil
+func (o *VnicEthNetworkPolicy) SetOrganizationNil() {
+	o.Organization.Set(nil)
+}
+
+// UnsetOrganization ensures that no value is present for Organization, not even an explicit nil
+func (o *VnicEthNetworkPolicy) UnsetOrganization() {
+	o.Organization.Unset()
 }
 
 func (o VnicEthNetworkPolicy) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o VnicEthNetworkPolicy) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedPolicyAbstractPolicy, errPolicyAbstractPolicy := json.Marshal(o.PolicyAbstractPolicy)
 	if errPolicyAbstractPolicy != nil {
-		return []byte{}, errPolicyAbstractPolicy
+		return map[string]interface{}{}, errPolicyAbstractPolicy
 	}
 	errPolicyAbstractPolicy = json.Unmarshal([]byte(serializedPolicyAbstractPolicy), &toSerialize)
 	if errPolicyAbstractPolicy != nil {
-		return []byte{}, errPolicyAbstractPolicy
+		return map[string]interface{}{}, errPolicyAbstractPolicy
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.TargetPlatform != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.TargetPlatform) {
 		toSerialize["TargetPlatform"] = o.TargetPlatform
 	}
 	if o.VlanSettings.IsSet() {
 		toSerialize["VlanSettings"] = o.VlanSettings.Get()
 	}
-	if o.Organization != nil {
-		toSerialize["Organization"] = o.Organization
+	if o.Organization.IsSet() {
+		toSerialize["Organization"] = o.Organization.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *VnicEthNetworkPolicy) UnmarshalJSON(bytes []byte) (err error) {
+func (o *VnicEthNetworkPolicy) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type VnicEthNetworkPolicyWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -260,14 +301,14 @@ func (o *VnicEthNetworkPolicy) UnmarshalJSON(bytes []byte) (err error) {
 		ObjectType string `json:"ObjectType"`
 		// The platform for which the server profile is applicable. It can either be a server that is operating in standalone mode or which is attached to a Fabric Interconnect managed by Intersight. * `Standalone` - Servers which are operating in standalone mode i.e. not connected to a Fabric Interconnected. * `FIAttached` - Servers which are connected to a Fabric Interconnect that is managed by Intersight.
 		// Deprecated
-		TargetPlatform *string                               `json:"TargetPlatform,omitempty"`
-		VlanSettings   NullableVnicVlanSettings              `json:"VlanSettings,omitempty"`
-		Organization   *OrganizationOrganizationRelationship `json:"Organization,omitempty"`
+		TargetPlatform *string                                      `json:"TargetPlatform,omitempty"`
+		VlanSettings   NullableVnicVlanSettings                     `json:"VlanSettings,omitempty"`
+		Organization   NullableOrganizationOrganizationRelationship `json:"Organization,omitempty"`
 	}
 
 	varVnicEthNetworkPolicyWithoutEmbeddedStruct := VnicEthNetworkPolicyWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varVnicEthNetworkPolicyWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varVnicEthNetworkPolicyWithoutEmbeddedStruct)
 	if err == nil {
 		varVnicEthNetworkPolicy := _VnicEthNetworkPolicy{}
 		varVnicEthNetworkPolicy.ClassId = varVnicEthNetworkPolicyWithoutEmbeddedStruct.ClassId
@@ -282,7 +323,7 @@ func (o *VnicEthNetworkPolicy) UnmarshalJSON(bytes []byte) (err error) {
 
 	varVnicEthNetworkPolicy := _VnicEthNetworkPolicy{}
 
-	err = json.Unmarshal(bytes, &varVnicEthNetworkPolicy)
+	err = json.Unmarshal(data, &varVnicEthNetworkPolicy)
 	if err == nil {
 		o.PolicyAbstractPolicy = varVnicEthNetworkPolicy.PolicyAbstractPolicy
 	} else {
@@ -291,7 +332,7 @@ func (o *VnicEthNetworkPolicy) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "TargetPlatform")

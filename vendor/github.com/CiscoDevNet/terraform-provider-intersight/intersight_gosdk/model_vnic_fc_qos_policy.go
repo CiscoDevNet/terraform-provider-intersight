@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the VnicFcQosPolicy type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &VnicFcQosPolicy{}
 
 // VnicFcQosPolicy A Fibre Channel Quality of Service (QoS) policy assigns a system class to the outgoing traffic for a vHBA. This system class determines the quality of service for the outgoing traffic. For certain adapters additional controls can also be specified like burst and rate on the outgoing traffic.
 type VnicFcQosPolicy struct {
@@ -33,8 +37,8 @@ type VnicFcQosPolicy struct {
 	// The priortity matching the System QoS specified in the fabric profile. * `Best Effort` - QoS Priority for Best-effort traffic. * `FC` - QoS Priority for FC traffic. * `Platinum` - QoS Priority for Platinum traffic. * `Gold` - QoS Priority for Gold traffic. * `Silver` - QoS Priority for Silver traffic. * `Bronze` - QoS Priority for Bronze traffic.
 	Priority *string `json:"Priority,omitempty"`
 	// The value in Mbps to use for limiting the data rate on the virtual interface.
-	RateLimit            *int64                                `json:"RateLimit,omitempty"`
-	Organization         *OrganizationOrganizationRelationship `json:"Organization,omitempty"`
+	RateLimit            *int64                                       `json:"RateLimit,omitempty"`
+	Organization         NullableOrganizationOrganizationRelationship `json:"Organization,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -129,7 +133,7 @@ func (o *VnicFcQosPolicy) SetObjectType(v string) {
 
 // GetBurst returns the Burst field value if set, zero value otherwise.
 func (o *VnicFcQosPolicy) GetBurst() int64 {
-	if o == nil || o.Burst == nil {
+	if o == nil || IsNil(o.Burst) {
 		var ret int64
 		return ret
 	}
@@ -139,7 +143,7 @@ func (o *VnicFcQosPolicy) GetBurst() int64 {
 // GetBurstOk returns a tuple with the Burst field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VnicFcQosPolicy) GetBurstOk() (*int64, bool) {
-	if o == nil || o.Burst == nil {
+	if o == nil || IsNil(o.Burst) {
 		return nil, false
 	}
 	return o.Burst, true
@@ -147,7 +151,7 @@ func (o *VnicFcQosPolicy) GetBurstOk() (*int64, bool) {
 
 // HasBurst returns a boolean if a field has been set.
 func (o *VnicFcQosPolicy) HasBurst() bool {
-	if o != nil && o.Burst != nil {
+	if o != nil && !IsNil(o.Burst) {
 		return true
 	}
 
@@ -161,7 +165,7 @@ func (o *VnicFcQosPolicy) SetBurst(v int64) {
 
 // GetCos returns the Cos field value if set, zero value otherwise.
 func (o *VnicFcQosPolicy) GetCos() int64 {
-	if o == nil || o.Cos == nil {
+	if o == nil || IsNil(o.Cos) {
 		var ret int64
 		return ret
 	}
@@ -171,7 +175,7 @@ func (o *VnicFcQosPolicy) GetCos() int64 {
 // GetCosOk returns a tuple with the Cos field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VnicFcQosPolicy) GetCosOk() (*int64, bool) {
-	if o == nil || o.Cos == nil {
+	if o == nil || IsNil(o.Cos) {
 		return nil, false
 	}
 	return o.Cos, true
@@ -179,7 +183,7 @@ func (o *VnicFcQosPolicy) GetCosOk() (*int64, bool) {
 
 // HasCos returns a boolean if a field has been set.
 func (o *VnicFcQosPolicy) HasCos() bool {
-	if o != nil && o.Cos != nil {
+	if o != nil && !IsNil(o.Cos) {
 		return true
 	}
 
@@ -193,7 +197,7 @@ func (o *VnicFcQosPolicy) SetCos(v int64) {
 
 // GetMaxDataFieldSize returns the MaxDataFieldSize field value if set, zero value otherwise.
 func (o *VnicFcQosPolicy) GetMaxDataFieldSize() int64 {
-	if o == nil || o.MaxDataFieldSize == nil {
+	if o == nil || IsNil(o.MaxDataFieldSize) {
 		var ret int64
 		return ret
 	}
@@ -203,7 +207,7 @@ func (o *VnicFcQosPolicy) GetMaxDataFieldSize() int64 {
 // GetMaxDataFieldSizeOk returns a tuple with the MaxDataFieldSize field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VnicFcQosPolicy) GetMaxDataFieldSizeOk() (*int64, bool) {
-	if o == nil || o.MaxDataFieldSize == nil {
+	if o == nil || IsNil(o.MaxDataFieldSize) {
 		return nil, false
 	}
 	return o.MaxDataFieldSize, true
@@ -211,7 +215,7 @@ func (o *VnicFcQosPolicy) GetMaxDataFieldSizeOk() (*int64, bool) {
 
 // HasMaxDataFieldSize returns a boolean if a field has been set.
 func (o *VnicFcQosPolicy) HasMaxDataFieldSize() bool {
-	if o != nil && o.MaxDataFieldSize != nil {
+	if o != nil && !IsNil(o.MaxDataFieldSize) {
 		return true
 	}
 
@@ -225,7 +229,7 @@ func (o *VnicFcQosPolicy) SetMaxDataFieldSize(v int64) {
 
 // GetPriority returns the Priority field value if set, zero value otherwise.
 func (o *VnicFcQosPolicy) GetPriority() string {
-	if o == nil || o.Priority == nil {
+	if o == nil || IsNil(o.Priority) {
 		var ret string
 		return ret
 	}
@@ -235,7 +239,7 @@ func (o *VnicFcQosPolicy) GetPriority() string {
 // GetPriorityOk returns a tuple with the Priority field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VnicFcQosPolicy) GetPriorityOk() (*string, bool) {
-	if o == nil || o.Priority == nil {
+	if o == nil || IsNil(o.Priority) {
 		return nil, false
 	}
 	return o.Priority, true
@@ -243,7 +247,7 @@ func (o *VnicFcQosPolicy) GetPriorityOk() (*string, bool) {
 
 // HasPriority returns a boolean if a field has been set.
 func (o *VnicFcQosPolicy) HasPriority() bool {
-	if o != nil && o.Priority != nil {
+	if o != nil && !IsNil(o.Priority) {
 		return true
 	}
 
@@ -257,7 +261,7 @@ func (o *VnicFcQosPolicy) SetPriority(v string) {
 
 // GetRateLimit returns the RateLimit field value if set, zero value otherwise.
 func (o *VnicFcQosPolicy) GetRateLimit() int64 {
-	if o == nil || o.RateLimit == nil {
+	if o == nil || IsNil(o.RateLimit) {
 		var ret int64
 		return ret
 	}
@@ -267,7 +271,7 @@ func (o *VnicFcQosPolicy) GetRateLimit() int64 {
 // GetRateLimitOk returns a tuple with the RateLimit field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VnicFcQosPolicy) GetRateLimitOk() (*int64, bool) {
-	if o == nil || o.RateLimit == nil {
+	if o == nil || IsNil(o.RateLimit) {
 		return nil, false
 	}
 	return o.RateLimit, true
@@ -275,7 +279,7 @@ func (o *VnicFcQosPolicy) GetRateLimitOk() (*int64, bool) {
 
 // HasRateLimit returns a boolean if a field has been set.
 func (o *VnicFcQosPolicy) HasRateLimit() bool {
-	if o != nil && o.RateLimit != nil {
+	if o != nil && !IsNil(o.RateLimit) {
 		return true
 	}
 
@@ -287,81 +291,118 @@ func (o *VnicFcQosPolicy) SetRateLimit(v int64) {
 	o.RateLimit = &v
 }
 
-// GetOrganization returns the Organization field value if set, zero value otherwise.
+// GetOrganization returns the Organization field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *VnicFcQosPolicy) GetOrganization() OrganizationOrganizationRelationship {
-	if o == nil || o.Organization == nil {
+	if o == nil || IsNil(o.Organization.Get()) {
 		var ret OrganizationOrganizationRelationship
 		return ret
 	}
-	return *o.Organization
+	return *o.Organization.Get()
 }
 
 // GetOrganizationOk returns a tuple with the Organization field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *VnicFcQosPolicy) GetOrganizationOk() (*OrganizationOrganizationRelationship, bool) {
-	if o == nil || o.Organization == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Organization, true
+	return o.Organization.Get(), o.Organization.IsSet()
 }
 
 // HasOrganization returns a boolean if a field has been set.
 func (o *VnicFcQosPolicy) HasOrganization() bool {
-	if o != nil && o.Organization != nil {
+	if o != nil && o.Organization.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetOrganization gets a reference to the given OrganizationOrganizationRelationship and assigns it to the Organization field.
+// SetOrganization gets a reference to the given NullableOrganizationOrganizationRelationship and assigns it to the Organization field.
 func (o *VnicFcQosPolicy) SetOrganization(v OrganizationOrganizationRelationship) {
-	o.Organization = &v
+	o.Organization.Set(&v)
+}
+
+// SetOrganizationNil sets the value for Organization to be an explicit nil
+func (o *VnicFcQosPolicy) SetOrganizationNil() {
+	o.Organization.Set(nil)
+}
+
+// UnsetOrganization ensures that no value is present for Organization, not even an explicit nil
+func (o *VnicFcQosPolicy) UnsetOrganization() {
+	o.Organization.Unset()
 }
 
 func (o VnicFcQosPolicy) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o VnicFcQosPolicy) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedPolicyAbstractPolicy, errPolicyAbstractPolicy := json.Marshal(o.PolicyAbstractPolicy)
 	if errPolicyAbstractPolicy != nil {
-		return []byte{}, errPolicyAbstractPolicy
+		return map[string]interface{}{}, errPolicyAbstractPolicy
 	}
 	errPolicyAbstractPolicy = json.Unmarshal([]byte(serializedPolicyAbstractPolicy), &toSerialize)
 	if errPolicyAbstractPolicy != nil {
-		return []byte{}, errPolicyAbstractPolicy
+		return map[string]interface{}{}, errPolicyAbstractPolicy
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Burst != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Burst) {
 		toSerialize["Burst"] = o.Burst
 	}
-	if o.Cos != nil {
+	if !IsNil(o.Cos) {
 		toSerialize["Cos"] = o.Cos
 	}
-	if o.MaxDataFieldSize != nil {
+	if !IsNil(o.MaxDataFieldSize) {
 		toSerialize["MaxDataFieldSize"] = o.MaxDataFieldSize
 	}
-	if o.Priority != nil {
+	if !IsNil(o.Priority) {
 		toSerialize["Priority"] = o.Priority
 	}
-	if o.RateLimit != nil {
+	if !IsNil(o.RateLimit) {
 		toSerialize["RateLimit"] = o.RateLimit
 	}
-	if o.Organization != nil {
-		toSerialize["Organization"] = o.Organization
+	if o.Organization.IsSet() {
+		toSerialize["Organization"] = o.Organization.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *VnicFcQosPolicy) UnmarshalJSON(bytes []byte) (err error) {
+func (o *VnicFcQosPolicy) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type VnicFcQosPolicyWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -376,13 +417,13 @@ func (o *VnicFcQosPolicy) UnmarshalJSON(bytes []byte) (err error) {
 		// The priortity matching the System QoS specified in the fabric profile. * `Best Effort` - QoS Priority for Best-effort traffic. * `FC` - QoS Priority for FC traffic. * `Platinum` - QoS Priority for Platinum traffic. * `Gold` - QoS Priority for Gold traffic. * `Silver` - QoS Priority for Silver traffic. * `Bronze` - QoS Priority for Bronze traffic.
 		Priority *string `json:"Priority,omitempty"`
 		// The value in Mbps to use for limiting the data rate on the virtual interface.
-		RateLimit    *int64                                `json:"RateLimit,omitempty"`
-		Organization *OrganizationOrganizationRelationship `json:"Organization,omitempty"`
+		RateLimit    *int64                                       `json:"RateLimit,omitempty"`
+		Organization NullableOrganizationOrganizationRelationship `json:"Organization,omitempty"`
 	}
 
 	varVnicFcQosPolicyWithoutEmbeddedStruct := VnicFcQosPolicyWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varVnicFcQosPolicyWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varVnicFcQosPolicyWithoutEmbeddedStruct)
 	if err == nil {
 		varVnicFcQosPolicy := _VnicFcQosPolicy{}
 		varVnicFcQosPolicy.ClassId = varVnicFcQosPolicyWithoutEmbeddedStruct.ClassId
@@ -400,7 +441,7 @@ func (o *VnicFcQosPolicy) UnmarshalJSON(bytes []byte) (err error) {
 
 	varVnicFcQosPolicy := _VnicFcQosPolicy{}
 
-	err = json.Unmarshal(bytes, &varVnicFcQosPolicy)
+	err = json.Unmarshal(data, &varVnicFcQosPolicy)
 	if err == nil {
 		o.PolicyAbstractPolicy = varVnicFcQosPolicy.PolicyAbstractPolicy
 	} else {
@@ -409,7 +450,7 @@ func (o *VnicFcQosPolicy) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Burst")

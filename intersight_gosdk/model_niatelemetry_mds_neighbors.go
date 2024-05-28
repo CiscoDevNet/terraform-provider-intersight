@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the NiatelemetryMdsNeighbors type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &NiatelemetryMdsNeighbors{}
 
 // NiatelemetryMdsNeighbors MdsNeighbors object available per device scope for neighbor discovery.
 type NiatelemetryMdsNeighbors struct {
@@ -36,8 +40,8 @@ type NiatelemetryMdsNeighbors struct {
 	// Version of record being pushed. This determines what was the API version for data available from the device.
 	RecordVersion *string `json:"RecordVersion,omitempty"`
 	// Serial number of device being inventoried. The serial number is unique per device.
-	Serial               *string                              `json:"Serial,omitempty"`
-	RegisteredDevice     *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+	Serial               *string                                     `json:"Serial,omitempty"`
+	RegisteredDevice     NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -116,7 +120,7 @@ func (o *NiatelemetryMdsNeighbors) SetObjectType(v string) {
 
 // GetDeviceIp returns the DeviceIp field value if set, zero value otherwise.
 func (o *NiatelemetryMdsNeighbors) GetDeviceIp() string {
-	if o == nil || o.DeviceIp == nil {
+	if o == nil || IsNil(o.DeviceIp) {
 		var ret string
 		return ret
 	}
@@ -126,7 +130,7 @@ func (o *NiatelemetryMdsNeighbors) GetDeviceIp() string {
 // GetDeviceIpOk returns a tuple with the DeviceIp field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryMdsNeighbors) GetDeviceIpOk() (*string, bool) {
-	if o == nil || o.DeviceIp == nil {
+	if o == nil || IsNil(o.DeviceIp) {
 		return nil, false
 	}
 	return o.DeviceIp, true
@@ -134,7 +138,7 @@ func (o *NiatelemetryMdsNeighbors) GetDeviceIpOk() (*string, bool) {
 
 // HasDeviceIp returns a boolean if a field has been set.
 func (o *NiatelemetryMdsNeighbors) HasDeviceIp() bool {
-	if o != nil && o.DeviceIp != nil {
+	if o != nil && !IsNil(o.DeviceIp) {
 		return true
 	}
 
@@ -148,7 +152,7 @@ func (o *NiatelemetryMdsNeighbors) SetDeviceIp(v string) {
 
 // GetDeviceName returns the DeviceName field value if set, zero value otherwise.
 func (o *NiatelemetryMdsNeighbors) GetDeviceName() string {
-	if o == nil || o.DeviceName == nil {
+	if o == nil || IsNil(o.DeviceName) {
 		var ret string
 		return ret
 	}
@@ -158,7 +162,7 @@ func (o *NiatelemetryMdsNeighbors) GetDeviceName() string {
 // GetDeviceNameOk returns a tuple with the DeviceName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryMdsNeighbors) GetDeviceNameOk() (*string, bool) {
-	if o == nil || o.DeviceName == nil {
+	if o == nil || IsNil(o.DeviceName) {
 		return nil, false
 	}
 	return o.DeviceName, true
@@ -166,7 +170,7 @@ func (o *NiatelemetryMdsNeighbors) GetDeviceNameOk() (*string, bool) {
 
 // HasDeviceName returns a boolean if a field has been set.
 func (o *NiatelemetryMdsNeighbors) HasDeviceName() bool {
-	if o != nil && o.DeviceName != nil {
+	if o != nil && !IsNil(o.DeviceName) {
 		return true
 	}
 
@@ -180,7 +184,7 @@ func (o *NiatelemetryMdsNeighbors) SetDeviceName(v string) {
 
 // GetDeviceWwn returns the DeviceWwn field value if set, zero value otherwise.
 func (o *NiatelemetryMdsNeighbors) GetDeviceWwn() string {
-	if o == nil || o.DeviceWwn == nil {
+	if o == nil || IsNil(o.DeviceWwn) {
 		var ret string
 		return ret
 	}
@@ -190,7 +194,7 @@ func (o *NiatelemetryMdsNeighbors) GetDeviceWwn() string {
 // GetDeviceWwnOk returns a tuple with the DeviceWwn field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryMdsNeighbors) GetDeviceWwnOk() (*string, bool) {
-	if o == nil || o.DeviceWwn == nil {
+	if o == nil || IsNil(o.DeviceWwn) {
 		return nil, false
 	}
 	return o.DeviceWwn, true
@@ -198,7 +202,7 @@ func (o *NiatelemetryMdsNeighbors) GetDeviceWwnOk() (*string, bool) {
 
 // HasDeviceWwn returns a boolean if a field has been set.
 func (o *NiatelemetryMdsNeighbors) HasDeviceWwn() bool {
-	if o != nil && o.DeviceWwn != nil {
+	if o != nil && !IsNil(o.DeviceWwn) {
 		return true
 	}
 
@@ -223,7 +227,7 @@ func (o *NiatelemetryMdsNeighbors) GetNeighborInfo() []NiatelemetryMdsNeighborIn
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *NiatelemetryMdsNeighbors) GetNeighborInfoOk() ([]NiatelemetryMdsNeighborInfo, bool) {
-	if o == nil || o.NeighborInfo == nil {
+	if o == nil || IsNil(o.NeighborInfo) {
 		return nil, false
 	}
 	return o.NeighborInfo, true
@@ -231,7 +235,7 @@ func (o *NiatelemetryMdsNeighbors) GetNeighborInfoOk() ([]NiatelemetryMdsNeighbo
 
 // HasNeighborInfo returns a boolean if a field has been set.
 func (o *NiatelemetryMdsNeighbors) HasNeighborInfo() bool {
-	if o != nil && o.NeighborInfo != nil {
+	if o != nil && IsNil(o.NeighborInfo) {
 		return true
 	}
 
@@ -245,7 +249,7 @@ func (o *NiatelemetryMdsNeighbors) SetNeighborInfo(v []NiatelemetryMdsNeighborIn
 
 // GetRecordType returns the RecordType field value if set, zero value otherwise.
 func (o *NiatelemetryMdsNeighbors) GetRecordType() string {
-	if o == nil || o.RecordType == nil {
+	if o == nil || IsNil(o.RecordType) {
 		var ret string
 		return ret
 	}
@@ -255,7 +259,7 @@ func (o *NiatelemetryMdsNeighbors) GetRecordType() string {
 // GetRecordTypeOk returns a tuple with the RecordType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryMdsNeighbors) GetRecordTypeOk() (*string, bool) {
-	if o == nil || o.RecordType == nil {
+	if o == nil || IsNil(o.RecordType) {
 		return nil, false
 	}
 	return o.RecordType, true
@@ -263,7 +267,7 @@ func (o *NiatelemetryMdsNeighbors) GetRecordTypeOk() (*string, bool) {
 
 // HasRecordType returns a boolean if a field has been set.
 func (o *NiatelemetryMdsNeighbors) HasRecordType() bool {
-	if o != nil && o.RecordType != nil {
+	if o != nil && !IsNil(o.RecordType) {
 		return true
 	}
 
@@ -277,7 +281,7 @@ func (o *NiatelemetryMdsNeighbors) SetRecordType(v string) {
 
 // GetRecordVersion returns the RecordVersion field value if set, zero value otherwise.
 func (o *NiatelemetryMdsNeighbors) GetRecordVersion() string {
-	if o == nil || o.RecordVersion == nil {
+	if o == nil || IsNil(o.RecordVersion) {
 		var ret string
 		return ret
 	}
@@ -287,7 +291,7 @@ func (o *NiatelemetryMdsNeighbors) GetRecordVersion() string {
 // GetRecordVersionOk returns a tuple with the RecordVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryMdsNeighbors) GetRecordVersionOk() (*string, bool) {
-	if o == nil || o.RecordVersion == nil {
+	if o == nil || IsNil(o.RecordVersion) {
 		return nil, false
 	}
 	return o.RecordVersion, true
@@ -295,7 +299,7 @@ func (o *NiatelemetryMdsNeighbors) GetRecordVersionOk() (*string, bool) {
 
 // HasRecordVersion returns a boolean if a field has been set.
 func (o *NiatelemetryMdsNeighbors) HasRecordVersion() bool {
-	if o != nil && o.RecordVersion != nil {
+	if o != nil && !IsNil(o.RecordVersion) {
 		return true
 	}
 
@@ -309,7 +313,7 @@ func (o *NiatelemetryMdsNeighbors) SetRecordVersion(v string) {
 
 // GetSerial returns the Serial field value if set, zero value otherwise.
 func (o *NiatelemetryMdsNeighbors) GetSerial() string {
-	if o == nil || o.Serial == nil {
+	if o == nil || IsNil(o.Serial) {
 		var ret string
 		return ret
 	}
@@ -319,7 +323,7 @@ func (o *NiatelemetryMdsNeighbors) GetSerial() string {
 // GetSerialOk returns a tuple with the Serial field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryMdsNeighbors) GetSerialOk() (*string, bool) {
-	if o == nil || o.Serial == nil {
+	if o == nil || IsNil(o.Serial) {
 		return nil, false
 	}
 	return o.Serial, true
@@ -327,7 +331,7 @@ func (o *NiatelemetryMdsNeighbors) GetSerialOk() (*string, bool) {
 
 // HasSerial returns a boolean if a field has been set.
 func (o *NiatelemetryMdsNeighbors) HasSerial() bool {
-	if o != nil && o.Serial != nil {
+	if o != nil && !IsNil(o.Serial) {
 		return true
 	}
 
@@ -339,87 +343,124 @@ func (o *NiatelemetryMdsNeighbors) SetSerial(v string) {
 	o.Serial = &v
 }
 
-// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise.
+// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *NiatelemetryMdsNeighbors) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil || IsNil(o.RegisteredDevice.Get()) {
 		var ret AssetDeviceRegistrationRelationship
 		return ret
 	}
-	return *o.RegisteredDevice
+	return *o.RegisteredDevice.Get()
 }
 
 // GetRegisteredDeviceOk returns a tuple with the RegisteredDevice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *NiatelemetryMdsNeighbors) GetRegisteredDeviceOk() (*AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.RegisteredDevice, true
+	return o.RegisteredDevice.Get(), o.RegisteredDevice.IsSet()
 }
 
 // HasRegisteredDevice returns a boolean if a field has been set.
 func (o *NiatelemetryMdsNeighbors) HasRegisteredDevice() bool {
-	if o != nil && o.RegisteredDevice != nil {
+	if o != nil && o.RegisteredDevice.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRegisteredDevice gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
+// SetRegisteredDevice gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
 func (o *NiatelemetryMdsNeighbors) SetRegisteredDevice(v AssetDeviceRegistrationRelationship) {
-	o.RegisteredDevice = &v
+	o.RegisteredDevice.Set(&v)
+}
+
+// SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+func (o *NiatelemetryMdsNeighbors) SetRegisteredDeviceNil() {
+	o.RegisteredDevice.Set(nil)
+}
+
+// UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
+func (o *NiatelemetryMdsNeighbors) UnsetRegisteredDevice() {
+	o.RegisteredDevice.Unset()
 }
 
 func (o NiatelemetryMdsNeighbors) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o NiatelemetryMdsNeighbors) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.DeviceIp != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.DeviceIp) {
 		toSerialize["DeviceIp"] = o.DeviceIp
 	}
-	if o.DeviceName != nil {
+	if !IsNil(o.DeviceName) {
 		toSerialize["DeviceName"] = o.DeviceName
 	}
-	if o.DeviceWwn != nil {
+	if !IsNil(o.DeviceWwn) {
 		toSerialize["DeviceWwn"] = o.DeviceWwn
 	}
 	if o.NeighborInfo != nil {
 		toSerialize["NeighborInfo"] = o.NeighborInfo
 	}
-	if o.RecordType != nil {
+	if !IsNil(o.RecordType) {
 		toSerialize["RecordType"] = o.RecordType
 	}
-	if o.RecordVersion != nil {
+	if !IsNil(o.RecordVersion) {
 		toSerialize["RecordVersion"] = o.RecordVersion
 	}
-	if o.Serial != nil {
+	if !IsNil(o.Serial) {
 		toSerialize["Serial"] = o.Serial
 	}
-	if o.RegisteredDevice != nil {
-		toSerialize["RegisteredDevice"] = o.RegisteredDevice
+	if o.RegisteredDevice.IsSet() {
+		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *NiatelemetryMdsNeighbors) UnmarshalJSON(bytes []byte) (err error) {
+func (o *NiatelemetryMdsNeighbors) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type NiatelemetryMdsNeighborsWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -437,13 +478,13 @@ func (o *NiatelemetryMdsNeighbors) UnmarshalJSON(bytes []byte) (err error) {
 		// Version of record being pushed. This determines what was the API version for data available from the device.
 		RecordVersion *string `json:"RecordVersion,omitempty"`
 		// Serial number of device being inventoried. The serial number is unique per device.
-		Serial           *string                              `json:"Serial,omitempty"`
-		RegisteredDevice *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+		Serial           *string                                     `json:"Serial,omitempty"`
+		RegisteredDevice NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	}
 
 	varNiatelemetryMdsNeighborsWithoutEmbeddedStruct := NiatelemetryMdsNeighborsWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varNiatelemetryMdsNeighborsWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varNiatelemetryMdsNeighborsWithoutEmbeddedStruct)
 	if err == nil {
 		varNiatelemetryMdsNeighbors := _NiatelemetryMdsNeighbors{}
 		varNiatelemetryMdsNeighbors.ClassId = varNiatelemetryMdsNeighborsWithoutEmbeddedStruct.ClassId
@@ -463,7 +504,7 @@ func (o *NiatelemetryMdsNeighbors) UnmarshalJSON(bytes []byte) (err error) {
 
 	varNiatelemetryMdsNeighbors := _NiatelemetryMdsNeighbors{}
 
-	err = json.Unmarshal(bytes, &varNiatelemetryMdsNeighbors)
+	err = json.Unmarshal(data, &varNiatelemetryMdsNeighbors)
 	if err == nil {
 		o.MoBaseMo = varNiatelemetryMdsNeighbors.MoBaseMo
 	} else {
@@ -472,7 +513,7 @@ func (o *NiatelemetryMdsNeighbors) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "DeviceIp")

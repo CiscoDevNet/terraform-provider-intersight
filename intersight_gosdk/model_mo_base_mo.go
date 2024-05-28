@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,8 +13,12 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"time"
 )
+
+// checks if the MoBaseMo type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &MoBaseMo{}
 
 // MoBaseMo The base abstract class for all Cisco Intersight managed objects.
 type MoBaseMo struct {
@@ -38,8 +42,8 @@ type MoBaseMo struct {
 	Tags           []MoTag                  `json:"Tags,omitempty"`
 	VersionContext NullableMoVersionContext `json:"VersionContext,omitempty"`
 	// An array of relationships to moBaseMo resources.
-	Ancestors []MoBaseMoRelationship `json:"Ancestors,omitempty"`
-	Parent    *MoBaseMoRelationship  `json:"Parent,omitempty"`
+	Ancestors []MoBaseMoRelationship       `json:"Ancestors,omitempty"`
+	Parent    NullableMoBaseMoRelationship `json:"Parent,omitempty"`
 	// An array of relationships to moBaseMo resources.
 	PermissionResources []MoBaseMoRelationship `json:"PermissionResources,omitempty"`
 	// A set of display names for the MO resource. These names are calculated based on other properties of the MO and potentially properties of Ancestor MOs. Displaynames are intended as a way to provide a normalized user appropriate name for an MO, especially for MOs which do not have a 'Name' property, which is the case for much of the inventory discovered from managed targets. There are a limited number of keys, currently 'short' and 'hierarchical'. The value is an array and clients should use the first element of the array.
@@ -118,7 +122,7 @@ func (o *MoBaseMo) SetObjectType(v string) {
 
 // GetAccountMoid returns the AccountMoid field value if set, zero value otherwise.
 func (o *MoBaseMo) GetAccountMoid() string {
-	if o == nil || o.AccountMoid == nil {
+	if o == nil || IsNil(o.AccountMoid) {
 		var ret string
 		return ret
 	}
@@ -128,7 +132,7 @@ func (o *MoBaseMo) GetAccountMoid() string {
 // GetAccountMoidOk returns a tuple with the AccountMoid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *MoBaseMo) GetAccountMoidOk() (*string, bool) {
-	if o == nil || o.AccountMoid == nil {
+	if o == nil || IsNil(o.AccountMoid) {
 		return nil, false
 	}
 	return o.AccountMoid, true
@@ -136,7 +140,7 @@ func (o *MoBaseMo) GetAccountMoidOk() (*string, bool) {
 
 // HasAccountMoid returns a boolean if a field has been set.
 func (o *MoBaseMo) HasAccountMoid() bool {
-	if o != nil && o.AccountMoid != nil {
+	if o != nil && !IsNil(o.AccountMoid) {
 		return true
 	}
 
@@ -150,7 +154,7 @@ func (o *MoBaseMo) SetAccountMoid(v string) {
 
 // GetCreateTime returns the CreateTime field value if set, zero value otherwise.
 func (o *MoBaseMo) GetCreateTime() time.Time {
-	if o == nil || o.CreateTime == nil {
+	if o == nil || IsNil(o.CreateTime) {
 		var ret time.Time
 		return ret
 	}
@@ -160,7 +164,7 @@ func (o *MoBaseMo) GetCreateTime() time.Time {
 // GetCreateTimeOk returns a tuple with the CreateTime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *MoBaseMo) GetCreateTimeOk() (*time.Time, bool) {
-	if o == nil || o.CreateTime == nil {
+	if o == nil || IsNil(o.CreateTime) {
 		return nil, false
 	}
 	return o.CreateTime, true
@@ -168,7 +172,7 @@ func (o *MoBaseMo) GetCreateTimeOk() (*time.Time, bool) {
 
 // HasCreateTime returns a boolean if a field has been set.
 func (o *MoBaseMo) HasCreateTime() bool {
-	if o != nil && o.CreateTime != nil {
+	if o != nil && !IsNil(o.CreateTime) {
 		return true
 	}
 
@@ -182,7 +186,7 @@ func (o *MoBaseMo) SetCreateTime(v time.Time) {
 
 // GetDomainGroupMoid returns the DomainGroupMoid field value if set, zero value otherwise.
 func (o *MoBaseMo) GetDomainGroupMoid() string {
-	if o == nil || o.DomainGroupMoid == nil {
+	if o == nil || IsNil(o.DomainGroupMoid) {
 		var ret string
 		return ret
 	}
@@ -192,7 +196,7 @@ func (o *MoBaseMo) GetDomainGroupMoid() string {
 // GetDomainGroupMoidOk returns a tuple with the DomainGroupMoid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *MoBaseMo) GetDomainGroupMoidOk() (*string, bool) {
-	if o == nil || o.DomainGroupMoid == nil {
+	if o == nil || IsNil(o.DomainGroupMoid) {
 		return nil, false
 	}
 	return o.DomainGroupMoid, true
@@ -200,7 +204,7 @@ func (o *MoBaseMo) GetDomainGroupMoidOk() (*string, bool) {
 
 // HasDomainGroupMoid returns a boolean if a field has been set.
 func (o *MoBaseMo) HasDomainGroupMoid() bool {
-	if o != nil && o.DomainGroupMoid != nil {
+	if o != nil && !IsNil(o.DomainGroupMoid) {
 		return true
 	}
 
@@ -214,7 +218,7 @@ func (o *MoBaseMo) SetDomainGroupMoid(v string) {
 
 // GetModTime returns the ModTime field value if set, zero value otherwise.
 func (o *MoBaseMo) GetModTime() time.Time {
-	if o == nil || o.ModTime == nil {
+	if o == nil || IsNil(o.ModTime) {
 		var ret time.Time
 		return ret
 	}
@@ -224,7 +228,7 @@ func (o *MoBaseMo) GetModTime() time.Time {
 // GetModTimeOk returns a tuple with the ModTime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *MoBaseMo) GetModTimeOk() (*time.Time, bool) {
-	if o == nil || o.ModTime == nil {
+	if o == nil || IsNil(o.ModTime) {
 		return nil, false
 	}
 	return o.ModTime, true
@@ -232,7 +236,7 @@ func (o *MoBaseMo) GetModTimeOk() (*time.Time, bool) {
 
 // HasModTime returns a boolean if a field has been set.
 func (o *MoBaseMo) HasModTime() bool {
-	if o != nil && o.ModTime != nil {
+	if o != nil && !IsNil(o.ModTime) {
 		return true
 	}
 
@@ -246,7 +250,7 @@ func (o *MoBaseMo) SetModTime(v time.Time) {
 
 // GetMoid returns the Moid field value if set, zero value otherwise.
 func (o *MoBaseMo) GetMoid() string {
-	if o == nil || o.Moid == nil {
+	if o == nil || IsNil(o.Moid) {
 		var ret string
 		return ret
 	}
@@ -256,7 +260,7 @@ func (o *MoBaseMo) GetMoid() string {
 // GetMoidOk returns a tuple with the Moid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *MoBaseMo) GetMoidOk() (*string, bool) {
-	if o == nil || o.Moid == nil {
+	if o == nil || IsNil(o.Moid) {
 		return nil, false
 	}
 	return o.Moid, true
@@ -264,7 +268,7 @@ func (o *MoBaseMo) GetMoidOk() (*string, bool) {
 
 // HasMoid returns a boolean if a field has been set.
 func (o *MoBaseMo) HasMoid() bool {
-	if o != nil && o.Moid != nil {
+	if o != nil && !IsNil(o.Moid) {
 		return true
 	}
 
@@ -289,7 +293,7 @@ func (o *MoBaseMo) GetOwners() []string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *MoBaseMo) GetOwnersOk() ([]string, bool) {
-	if o == nil || o.Owners == nil {
+	if o == nil || IsNil(o.Owners) {
 		return nil, false
 	}
 	return o.Owners, true
@@ -297,7 +301,7 @@ func (o *MoBaseMo) GetOwnersOk() ([]string, bool) {
 
 // HasOwners returns a boolean if a field has been set.
 func (o *MoBaseMo) HasOwners() bool {
-	if o != nil && o.Owners != nil {
+	if o != nil && IsNil(o.Owners) {
 		return true
 	}
 
@@ -311,7 +315,7 @@ func (o *MoBaseMo) SetOwners(v []string) {
 
 // GetSharedScope returns the SharedScope field value if set, zero value otherwise.
 func (o *MoBaseMo) GetSharedScope() string {
-	if o == nil || o.SharedScope == nil {
+	if o == nil || IsNil(o.SharedScope) {
 		var ret string
 		return ret
 	}
@@ -321,7 +325,7 @@ func (o *MoBaseMo) GetSharedScope() string {
 // GetSharedScopeOk returns a tuple with the SharedScope field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *MoBaseMo) GetSharedScopeOk() (*string, bool) {
-	if o == nil || o.SharedScope == nil {
+	if o == nil || IsNil(o.SharedScope) {
 		return nil, false
 	}
 	return o.SharedScope, true
@@ -329,7 +333,7 @@ func (o *MoBaseMo) GetSharedScopeOk() (*string, bool) {
 
 // HasSharedScope returns a boolean if a field has been set.
 func (o *MoBaseMo) HasSharedScope() bool {
-	if o != nil && o.SharedScope != nil {
+	if o != nil && !IsNil(o.SharedScope) {
 		return true
 	}
 
@@ -354,7 +358,7 @@ func (o *MoBaseMo) GetTags() []MoTag {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *MoBaseMo) GetTagsOk() ([]MoTag, bool) {
-	if o == nil || o.Tags == nil {
+	if o == nil || IsNil(o.Tags) {
 		return nil, false
 	}
 	return o.Tags, true
@@ -362,7 +366,7 @@ func (o *MoBaseMo) GetTagsOk() ([]MoTag, bool) {
 
 // HasTags returns a boolean if a field has been set.
 func (o *MoBaseMo) HasTags() bool {
-	if o != nil && o.Tags != nil {
+	if o != nil && IsNil(o.Tags) {
 		return true
 	}
 
@@ -376,7 +380,7 @@ func (o *MoBaseMo) SetTags(v []MoTag) {
 
 // GetVersionContext returns the VersionContext field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *MoBaseMo) GetVersionContext() MoVersionContext {
-	if o == nil || o.VersionContext.Get() == nil {
+	if o == nil || IsNil(o.VersionContext.Get()) {
 		var ret MoVersionContext
 		return ret
 	}
@@ -430,7 +434,7 @@ func (o *MoBaseMo) GetAncestors() []MoBaseMoRelationship {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *MoBaseMo) GetAncestorsOk() ([]MoBaseMoRelationship, bool) {
-	if o == nil || o.Ancestors == nil {
+	if o == nil || IsNil(o.Ancestors) {
 		return nil, false
 	}
 	return o.Ancestors, true
@@ -438,7 +442,7 @@ func (o *MoBaseMo) GetAncestorsOk() ([]MoBaseMoRelationship, bool) {
 
 // HasAncestors returns a boolean if a field has been set.
 func (o *MoBaseMo) HasAncestors() bool {
-	if o != nil && o.Ancestors != nil {
+	if o != nil && IsNil(o.Ancestors) {
 		return true
 	}
 
@@ -450,36 +454,47 @@ func (o *MoBaseMo) SetAncestors(v []MoBaseMoRelationship) {
 	o.Ancestors = v
 }
 
-// GetParent returns the Parent field value if set, zero value otherwise.
+// GetParent returns the Parent field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *MoBaseMo) GetParent() MoBaseMoRelationship {
-	if o == nil || o.Parent == nil {
+	if o == nil || IsNil(o.Parent.Get()) {
 		var ret MoBaseMoRelationship
 		return ret
 	}
-	return *o.Parent
+	return *o.Parent.Get()
 }
 
 // GetParentOk returns a tuple with the Parent field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *MoBaseMo) GetParentOk() (*MoBaseMoRelationship, bool) {
-	if o == nil || o.Parent == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Parent, true
+	return o.Parent.Get(), o.Parent.IsSet()
 }
 
 // HasParent returns a boolean if a field has been set.
 func (o *MoBaseMo) HasParent() bool {
-	if o != nil && o.Parent != nil {
+	if o != nil && o.Parent.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetParent gets a reference to the given MoBaseMoRelationship and assigns it to the Parent field.
+// SetParent gets a reference to the given NullableMoBaseMoRelationship and assigns it to the Parent field.
 func (o *MoBaseMo) SetParent(v MoBaseMoRelationship) {
-	o.Parent = &v
+	o.Parent.Set(&v)
+}
+
+// SetParentNil sets the value for Parent to be an explicit nil
+func (o *MoBaseMo) SetParentNil() {
+	o.Parent.Set(nil)
+}
+
+// UnsetParent ensures that no value is present for Parent, not even an explicit nil
+func (o *MoBaseMo) UnsetParent() {
+	o.Parent.Unset()
 }
 
 // GetPermissionResources returns the PermissionResources field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -495,7 +510,7 @@ func (o *MoBaseMo) GetPermissionResources() []MoBaseMoRelationship {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *MoBaseMo) GetPermissionResourcesOk() ([]MoBaseMoRelationship, bool) {
-	if o == nil || o.PermissionResources == nil {
+	if o == nil || IsNil(o.PermissionResources) {
 		return nil, false
 	}
 	return o.PermissionResources, true
@@ -503,7 +518,7 @@ func (o *MoBaseMo) GetPermissionResourcesOk() ([]MoBaseMoRelationship, bool) {
 
 // HasPermissionResources returns a boolean if a field has been set.
 func (o *MoBaseMo) HasPermissionResources() bool {
-	if o != nil && o.PermissionResources != nil {
+	if o != nil && IsNil(o.PermissionResources) {
 		return true
 	}
 
@@ -528,7 +543,7 @@ func (o *MoBaseMo) GetDisplayNames() map[string][]string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *MoBaseMo) GetDisplayNamesOk() (*map[string][]string, bool) {
-	if o == nil || o.DisplayNames == nil {
+	if o == nil || IsNil(o.DisplayNames) {
 		return nil, false
 	}
 	return &o.DisplayNames, true
@@ -536,7 +551,7 @@ func (o *MoBaseMo) GetDisplayNamesOk() (*map[string][]string, bool) {
 
 // HasDisplayNames returns a boolean if a field has been set.
 func (o *MoBaseMo) HasDisplayNames() bool {
-	if o != nil && o.DisplayNames != nil {
+	if o != nil && IsNil(o.DisplayNames) {
 		return true
 	}
 
@@ -549,32 +564,36 @@ func (o *MoBaseMo) SetDisplayNames(v map[string][]string) {
 }
 
 func (o MoBaseMo) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o MoBaseMo) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.AccountMoid != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.AccountMoid) {
 		toSerialize["AccountMoid"] = o.AccountMoid
 	}
-	if o.CreateTime != nil {
+	if !IsNil(o.CreateTime) {
 		toSerialize["CreateTime"] = o.CreateTime
 	}
-	if o.DomainGroupMoid != nil {
+	if !IsNil(o.DomainGroupMoid) {
 		toSerialize["DomainGroupMoid"] = o.DomainGroupMoid
 	}
-	if o.ModTime != nil {
+	if !IsNil(o.ModTime) {
 		toSerialize["ModTime"] = o.ModTime
 	}
-	if o.Moid != nil {
+	if !IsNil(o.Moid) {
 		toSerialize["Moid"] = o.Moid
 	}
 	if o.Owners != nil {
 		toSerialize["Owners"] = o.Owners
 	}
-	if o.SharedScope != nil {
+	if !IsNil(o.SharedScope) {
 		toSerialize["SharedScope"] = o.SharedScope
 	}
 	if o.Tags != nil {
@@ -586,8 +605,8 @@ func (o MoBaseMo) MarshalJSON() ([]byte, error) {
 	if o.Ancestors != nil {
 		toSerialize["Ancestors"] = o.Ancestors
 	}
-	if o.Parent != nil {
-		toSerialize["Parent"] = o.Parent
+	if o.Parent.IsSet() {
+		toSerialize["Parent"] = o.Parent.Get()
 	}
 	if o.PermissionResources != nil {
 		toSerialize["PermissionResources"] = o.PermissionResources
@@ -600,19 +619,45 @@ func (o MoBaseMo) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *MoBaseMo) UnmarshalJSON(bytes []byte) (err error) {
+func (o *MoBaseMo) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	varMoBaseMo := _MoBaseMo{}
 
-	if err = json.Unmarshal(bytes, &varMoBaseMo); err == nil {
-		*o = MoBaseMo(varMoBaseMo)
+	err = json.Unmarshal(data, &varMoBaseMo)
+
+	if err != nil {
+		return err
 	}
+
+	*o = MoBaseMo(varMoBaseMo)
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "AccountMoid")

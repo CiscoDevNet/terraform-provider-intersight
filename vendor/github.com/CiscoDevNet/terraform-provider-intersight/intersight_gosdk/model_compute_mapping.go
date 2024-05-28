@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the ComputeMapping type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ComputeMapping{}
 
 // ComputeMapping Virtual Media image uploaded on the server.
 type ComputeMapping struct {
@@ -32,10 +36,10 @@ type ComputeMapping struct {
 	ImageName  *string  `json:"ImageName,omitempty"`
 	MediaTypes []string `json:"MediaTypes,omitempty"`
 	// Name of Virtual Media mapping assigne by server.
-	Name                 *string                              `json:"Name,omitempty"`
-	InventoryDeviceInfo  *InventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
-	RegisteredDevice     *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
-	Vmedia               *ComputeVmediaRelationship           `json:"Vmedia,omitempty"`
+	Name                 *string                                     `json:"Name,omitempty"`
+	InventoryDeviceInfo  NullableInventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
+	RegisteredDevice     NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+	Vmedia               NullableComputeVmediaRelationship           `json:"Vmedia,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -114,7 +118,7 @@ func (o *ComputeMapping) SetObjectType(v string) {
 
 // GetFileLocation returns the FileLocation field value if set, zero value otherwise.
 func (o *ComputeMapping) GetFileLocation() string {
-	if o == nil || o.FileLocation == nil {
+	if o == nil || IsNil(o.FileLocation) {
 		var ret string
 		return ret
 	}
@@ -124,7 +128,7 @@ func (o *ComputeMapping) GetFileLocation() string {
 // GetFileLocationOk returns a tuple with the FileLocation field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ComputeMapping) GetFileLocationOk() (*string, bool) {
-	if o == nil || o.FileLocation == nil {
+	if o == nil || IsNil(o.FileLocation) {
 		return nil, false
 	}
 	return o.FileLocation, true
@@ -132,7 +136,7 @@ func (o *ComputeMapping) GetFileLocationOk() (*string, bool) {
 
 // HasFileLocation returns a boolean if a field has been set.
 func (o *ComputeMapping) HasFileLocation() bool {
-	if o != nil && o.FileLocation != nil {
+	if o != nil && !IsNil(o.FileLocation) {
 		return true
 	}
 
@@ -146,7 +150,7 @@ func (o *ComputeMapping) SetFileLocation(v string) {
 
 // GetIdentifier returns the Identifier field value if set, zero value otherwise.
 func (o *ComputeMapping) GetIdentifier() string {
-	if o == nil || o.Identifier == nil {
+	if o == nil || IsNil(o.Identifier) {
 		var ret string
 		return ret
 	}
@@ -156,7 +160,7 @@ func (o *ComputeMapping) GetIdentifier() string {
 // GetIdentifierOk returns a tuple with the Identifier field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ComputeMapping) GetIdentifierOk() (*string, bool) {
-	if o == nil || o.Identifier == nil {
+	if o == nil || IsNil(o.Identifier) {
 		return nil, false
 	}
 	return o.Identifier, true
@@ -164,7 +168,7 @@ func (o *ComputeMapping) GetIdentifierOk() (*string, bool) {
 
 // HasIdentifier returns a boolean if a field has been set.
 func (o *ComputeMapping) HasIdentifier() bool {
-	if o != nil && o.Identifier != nil {
+	if o != nil && !IsNil(o.Identifier) {
 		return true
 	}
 
@@ -178,7 +182,7 @@ func (o *ComputeMapping) SetIdentifier(v string) {
 
 // GetImageName returns the ImageName field value if set, zero value otherwise.
 func (o *ComputeMapping) GetImageName() string {
-	if o == nil || o.ImageName == nil {
+	if o == nil || IsNil(o.ImageName) {
 		var ret string
 		return ret
 	}
@@ -188,7 +192,7 @@ func (o *ComputeMapping) GetImageName() string {
 // GetImageNameOk returns a tuple with the ImageName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ComputeMapping) GetImageNameOk() (*string, bool) {
-	if o == nil || o.ImageName == nil {
+	if o == nil || IsNil(o.ImageName) {
 		return nil, false
 	}
 	return o.ImageName, true
@@ -196,7 +200,7 @@ func (o *ComputeMapping) GetImageNameOk() (*string, bool) {
 
 // HasImageName returns a boolean if a field has been set.
 func (o *ComputeMapping) HasImageName() bool {
-	if o != nil && o.ImageName != nil {
+	if o != nil && !IsNil(o.ImageName) {
 		return true
 	}
 
@@ -221,7 +225,7 @@ func (o *ComputeMapping) GetMediaTypes() []string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ComputeMapping) GetMediaTypesOk() ([]string, bool) {
-	if o == nil || o.MediaTypes == nil {
+	if o == nil || IsNil(o.MediaTypes) {
 		return nil, false
 	}
 	return o.MediaTypes, true
@@ -229,7 +233,7 @@ func (o *ComputeMapping) GetMediaTypesOk() ([]string, bool) {
 
 // HasMediaTypes returns a boolean if a field has been set.
 func (o *ComputeMapping) HasMediaTypes() bool {
-	if o != nil && o.MediaTypes != nil {
+	if o != nil && IsNil(o.MediaTypes) {
 		return true
 	}
 
@@ -243,7 +247,7 @@ func (o *ComputeMapping) SetMediaTypes(v []string) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *ComputeMapping) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -253,7 +257,7 @@ func (o *ComputeMapping) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ComputeMapping) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -261,7 +265,7 @@ func (o *ComputeMapping) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *ComputeMapping) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -273,151 +277,210 @@ func (o *ComputeMapping) SetName(v string) {
 	o.Name = &v
 }
 
-// GetInventoryDeviceInfo returns the InventoryDeviceInfo field value if set, zero value otherwise.
+// GetInventoryDeviceInfo returns the InventoryDeviceInfo field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ComputeMapping) GetInventoryDeviceInfo() InventoryDeviceInfoRelationship {
-	if o == nil || o.InventoryDeviceInfo == nil {
+	if o == nil || IsNil(o.InventoryDeviceInfo.Get()) {
 		var ret InventoryDeviceInfoRelationship
 		return ret
 	}
-	return *o.InventoryDeviceInfo
+	return *o.InventoryDeviceInfo.Get()
 }
 
 // GetInventoryDeviceInfoOk returns a tuple with the InventoryDeviceInfo field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ComputeMapping) GetInventoryDeviceInfoOk() (*InventoryDeviceInfoRelationship, bool) {
-	if o == nil || o.InventoryDeviceInfo == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.InventoryDeviceInfo, true
+	return o.InventoryDeviceInfo.Get(), o.InventoryDeviceInfo.IsSet()
 }
 
 // HasInventoryDeviceInfo returns a boolean if a field has been set.
 func (o *ComputeMapping) HasInventoryDeviceInfo() bool {
-	if o != nil && o.InventoryDeviceInfo != nil {
+	if o != nil && o.InventoryDeviceInfo.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetInventoryDeviceInfo gets a reference to the given InventoryDeviceInfoRelationship and assigns it to the InventoryDeviceInfo field.
+// SetInventoryDeviceInfo gets a reference to the given NullableInventoryDeviceInfoRelationship and assigns it to the InventoryDeviceInfo field.
 func (o *ComputeMapping) SetInventoryDeviceInfo(v InventoryDeviceInfoRelationship) {
-	o.InventoryDeviceInfo = &v
+	o.InventoryDeviceInfo.Set(&v)
 }
 
-// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise.
+// SetInventoryDeviceInfoNil sets the value for InventoryDeviceInfo to be an explicit nil
+func (o *ComputeMapping) SetInventoryDeviceInfoNil() {
+	o.InventoryDeviceInfo.Set(nil)
+}
+
+// UnsetInventoryDeviceInfo ensures that no value is present for InventoryDeviceInfo, not even an explicit nil
+func (o *ComputeMapping) UnsetInventoryDeviceInfo() {
+	o.InventoryDeviceInfo.Unset()
+}
+
+// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ComputeMapping) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil || IsNil(o.RegisteredDevice.Get()) {
 		var ret AssetDeviceRegistrationRelationship
 		return ret
 	}
-	return *o.RegisteredDevice
+	return *o.RegisteredDevice.Get()
 }
 
 // GetRegisteredDeviceOk returns a tuple with the RegisteredDevice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ComputeMapping) GetRegisteredDeviceOk() (*AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.RegisteredDevice, true
+	return o.RegisteredDevice.Get(), o.RegisteredDevice.IsSet()
 }
 
 // HasRegisteredDevice returns a boolean if a field has been set.
 func (o *ComputeMapping) HasRegisteredDevice() bool {
-	if o != nil && o.RegisteredDevice != nil {
+	if o != nil && o.RegisteredDevice.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRegisteredDevice gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
+// SetRegisteredDevice gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
 func (o *ComputeMapping) SetRegisteredDevice(v AssetDeviceRegistrationRelationship) {
-	o.RegisteredDevice = &v
+	o.RegisteredDevice.Set(&v)
 }
 
-// GetVmedia returns the Vmedia field value if set, zero value otherwise.
+// SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+func (o *ComputeMapping) SetRegisteredDeviceNil() {
+	o.RegisteredDevice.Set(nil)
+}
+
+// UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
+func (o *ComputeMapping) UnsetRegisteredDevice() {
+	o.RegisteredDevice.Unset()
+}
+
+// GetVmedia returns the Vmedia field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ComputeMapping) GetVmedia() ComputeVmediaRelationship {
-	if o == nil || o.Vmedia == nil {
+	if o == nil || IsNil(o.Vmedia.Get()) {
 		var ret ComputeVmediaRelationship
 		return ret
 	}
-	return *o.Vmedia
+	return *o.Vmedia.Get()
 }
 
 // GetVmediaOk returns a tuple with the Vmedia field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ComputeMapping) GetVmediaOk() (*ComputeVmediaRelationship, bool) {
-	if o == nil || o.Vmedia == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Vmedia, true
+	return o.Vmedia.Get(), o.Vmedia.IsSet()
 }
 
 // HasVmedia returns a boolean if a field has been set.
 func (o *ComputeMapping) HasVmedia() bool {
-	if o != nil && o.Vmedia != nil {
+	if o != nil && o.Vmedia.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetVmedia gets a reference to the given ComputeVmediaRelationship and assigns it to the Vmedia field.
+// SetVmedia gets a reference to the given NullableComputeVmediaRelationship and assigns it to the Vmedia field.
 func (o *ComputeMapping) SetVmedia(v ComputeVmediaRelationship) {
-	o.Vmedia = &v
+	o.Vmedia.Set(&v)
+}
+
+// SetVmediaNil sets the value for Vmedia to be an explicit nil
+func (o *ComputeMapping) SetVmediaNil() {
+	o.Vmedia.Set(nil)
+}
+
+// UnsetVmedia ensures that no value is present for Vmedia, not even an explicit nil
+func (o *ComputeMapping) UnsetVmedia() {
+	o.Vmedia.Unset()
 }
 
 func (o ComputeMapping) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o ComputeMapping) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedInventoryBase, errInventoryBase := json.Marshal(o.InventoryBase)
 	if errInventoryBase != nil {
-		return []byte{}, errInventoryBase
+		return map[string]interface{}{}, errInventoryBase
 	}
 	errInventoryBase = json.Unmarshal([]byte(serializedInventoryBase), &toSerialize)
 	if errInventoryBase != nil {
-		return []byte{}, errInventoryBase
+		return map[string]interface{}{}, errInventoryBase
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.FileLocation != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.FileLocation) {
 		toSerialize["FileLocation"] = o.FileLocation
 	}
-	if o.Identifier != nil {
+	if !IsNil(o.Identifier) {
 		toSerialize["Identifier"] = o.Identifier
 	}
-	if o.ImageName != nil {
+	if !IsNil(o.ImageName) {
 		toSerialize["ImageName"] = o.ImageName
 	}
 	if o.MediaTypes != nil {
 		toSerialize["MediaTypes"] = o.MediaTypes
 	}
-	if o.Name != nil {
+	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
 	}
-	if o.InventoryDeviceInfo != nil {
-		toSerialize["InventoryDeviceInfo"] = o.InventoryDeviceInfo
+	if o.InventoryDeviceInfo.IsSet() {
+		toSerialize["InventoryDeviceInfo"] = o.InventoryDeviceInfo.Get()
 	}
-	if o.RegisteredDevice != nil {
-		toSerialize["RegisteredDevice"] = o.RegisteredDevice
+	if o.RegisteredDevice.IsSet() {
+		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
 	}
-	if o.Vmedia != nil {
-		toSerialize["Vmedia"] = o.Vmedia
+	if o.Vmedia.IsSet() {
+		toSerialize["Vmedia"] = o.Vmedia.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *ComputeMapping) UnmarshalJSON(bytes []byte) (err error) {
+func (o *ComputeMapping) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type ComputeMappingWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -431,15 +494,15 @@ func (o *ComputeMapping) UnmarshalJSON(bytes []byte) (err error) {
 		ImageName  *string  `json:"ImageName,omitempty"`
 		MediaTypes []string `json:"MediaTypes,omitempty"`
 		// Name of Virtual Media mapping assigne by server.
-		Name                *string                              `json:"Name,omitempty"`
-		InventoryDeviceInfo *InventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
-		RegisteredDevice    *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
-		Vmedia              *ComputeVmediaRelationship           `json:"Vmedia,omitempty"`
+		Name                *string                                     `json:"Name,omitempty"`
+		InventoryDeviceInfo NullableInventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
+		RegisteredDevice    NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+		Vmedia              NullableComputeVmediaRelationship           `json:"Vmedia,omitempty"`
 	}
 
 	varComputeMappingWithoutEmbeddedStruct := ComputeMappingWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varComputeMappingWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varComputeMappingWithoutEmbeddedStruct)
 	if err == nil {
 		varComputeMapping := _ComputeMapping{}
 		varComputeMapping.ClassId = varComputeMappingWithoutEmbeddedStruct.ClassId
@@ -459,7 +522,7 @@ func (o *ComputeMapping) UnmarshalJSON(bytes []byte) (err error) {
 
 	varComputeMapping := _ComputeMapping{}
 
-	err = json.Unmarshal(bytes, &varComputeMapping)
+	err = json.Unmarshal(data, &varComputeMapping)
 	if err == nil {
 		o.InventoryBase = varComputeMapping.InventoryBase
 	} else {
@@ -468,7 +531,7 @@ func (o *ComputeMapping) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "FileLocation")

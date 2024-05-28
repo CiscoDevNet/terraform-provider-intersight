@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the StorageHitachiDisk type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &StorageHitachiDisk{}
 
 // StorageHitachiDisk Disk entity associated with Hitachi storage array.
 type StorageHitachiDisk struct {
@@ -31,10 +35,10 @@ type StorageHitachiDisk struct {
 	// Drive type of the Hitachi Disk. * `N/A` - Drive Type is not available. * `SAS` - SAS stands for Serial Attached SCSI. * `SSD(MLC)` - SSD (MLC) stands for Multiple Level Cell. * `SSD(FMC)` - SSD (FMC) stands for Flash Memory Compressed. * `SSD(FMD)` - SSD (FMD) stands for Flash Module Drive. * `SSD(SLC)` - SSD (SLC) stands for Single Level Cell. * `SSD` - SSD stands for Solid-State Drive. * `SSD(RI)` - SSD (RI) stands for Read Intensive. * `SCM` - SCM stands for Storage Class Memory.
 	TypeDetail *string `json:"TypeDetail,omitempty"`
 	// Purpose for which the drive is used.
-	Usage                *string                                `json:"Usage,omitempty"`
-	Array                *StorageHitachiArrayRelationship       `json:"Array,omitempty"`
-	ParityGroup          *StorageHitachiParityGroupRelationship `json:"ParityGroup,omitempty"`
-	RegisteredDevice     *AssetDeviceRegistrationRelationship   `json:"RegisteredDevice,omitempty"`
+	Usage                *string                                       `json:"Usage,omitempty"`
+	Array                NullableStorageHitachiArrayRelationship       `json:"Array,omitempty"`
+	ParityGroup          NullableStorageHitachiParityGroupRelationship `json:"ParityGroup,omitempty"`
+	RegisteredDevice     NullableAssetDeviceRegistrationRelationship   `json:"RegisteredDevice,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -113,7 +117,7 @@ func (o *StorageHitachiDisk) SetObjectType(v string) {
 
 // GetDriveTypeCode returns the DriveTypeCode field value if set, zero value otherwise.
 func (o *StorageHitachiDisk) GetDriveTypeCode() string {
-	if o == nil || o.DriveTypeCode == nil {
+	if o == nil || IsNil(o.DriveTypeCode) {
 		var ret string
 		return ret
 	}
@@ -123,7 +127,7 @@ func (o *StorageHitachiDisk) GetDriveTypeCode() string {
 // GetDriveTypeCodeOk returns a tuple with the DriveTypeCode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageHitachiDisk) GetDriveTypeCodeOk() (*string, bool) {
-	if o == nil || o.DriveTypeCode == nil {
+	if o == nil || IsNil(o.DriveTypeCode) {
 		return nil, false
 	}
 	return o.DriveTypeCode, true
@@ -131,7 +135,7 @@ func (o *StorageHitachiDisk) GetDriveTypeCodeOk() (*string, bool) {
 
 // HasDriveTypeCode returns a boolean if a field has been set.
 func (o *StorageHitachiDisk) HasDriveTypeCode() bool {
-	if o != nil && o.DriveTypeCode != nil {
+	if o != nil && !IsNil(o.DriveTypeCode) {
 		return true
 	}
 
@@ -145,7 +149,7 @@ func (o *StorageHitachiDisk) SetDriveTypeCode(v string) {
 
 // GetParityGroupId returns the ParityGroupId field value if set, zero value otherwise.
 func (o *StorageHitachiDisk) GetParityGroupId() string {
-	if o == nil || o.ParityGroupId == nil {
+	if o == nil || IsNil(o.ParityGroupId) {
 		var ret string
 		return ret
 	}
@@ -155,7 +159,7 @@ func (o *StorageHitachiDisk) GetParityGroupId() string {
 // GetParityGroupIdOk returns a tuple with the ParityGroupId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageHitachiDisk) GetParityGroupIdOk() (*string, bool) {
-	if o == nil || o.ParityGroupId == nil {
+	if o == nil || IsNil(o.ParityGroupId) {
 		return nil, false
 	}
 	return o.ParityGroupId, true
@@ -163,7 +167,7 @@ func (o *StorageHitachiDisk) GetParityGroupIdOk() (*string, bool) {
 
 // HasParityGroupId returns a boolean if a field has been set.
 func (o *StorageHitachiDisk) HasParityGroupId() bool {
-	if o != nil && o.ParityGroupId != nil {
+	if o != nil && !IsNil(o.ParityGroupId) {
 		return true
 	}
 
@@ -177,7 +181,7 @@ func (o *StorageHitachiDisk) SetParityGroupId(v string) {
 
 // GetTypeDetail returns the TypeDetail field value if set, zero value otherwise.
 func (o *StorageHitachiDisk) GetTypeDetail() string {
-	if o == nil || o.TypeDetail == nil {
+	if o == nil || IsNil(o.TypeDetail) {
 		var ret string
 		return ret
 	}
@@ -187,7 +191,7 @@ func (o *StorageHitachiDisk) GetTypeDetail() string {
 // GetTypeDetailOk returns a tuple with the TypeDetail field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageHitachiDisk) GetTypeDetailOk() (*string, bool) {
-	if o == nil || o.TypeDetail == nil {
+	if o == nil || IsNil(o.TypeDetail) {
 		return nil, false
 	}
 	return o.TypeDetail, true
@@ -195,7 +199,7 @@ func (o *StorageHitachiDisk) GetTypeDetailOk() (*string, bool) {
 
 // HasTypeDetail returns a boolean if a field has been set.
 func (o *StorageHitachiDisk) HasTypeDetail() bool {
-	if o != nil && o.TypeDetail != nil {
+	if o != nil && !IsNil(o.TypeDetail) {
 		return true
 	}
 
@@ -209,7 +213,7 @@ func (o *StorageHitachiDisk) SetTypeDetail(v string) {
 
 // GetUsage returns the Usage field value if set, zero value otherwise.
 func (o *StorageHitachiDisk) GetUsage() string {
-	if o == nil || o.Usage == nil {
+	if o == nil || IsNil(o.Usage) {
 		var ret string
 		return ret
 	}
@@ -219,7 +223,7 @@ func (o *StorageHitachiDisk) GetUsage() string {
 // GetUsageOk returns a tuple with the Usage field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageHitachiDisk) GetUsageOk() (*string, bool) {
-	if o == nil || o.Usage == nil {
+	if o == nil || IsNil(o.Usage) {
 		return nil, false
 	}
 	return o.Usage, true
@@ -227,7 +231,7 @@ func (o *StorageHitachiDisk) GetUsageOk() (*string, bool) {
 
 // HasUsage returns a boolean if a field has been set.
 func (o *StorageHitachiDisk) HasUsage() bool {
-	if o != nil && o.Usage != nil {
+	if o != nil && !IsNil(o.Usage) {
 		return true
 	}
 
@@ -239,148 +243,207 @@ func (o *StorageHitachiDisk) SetUsage(v string) {
 	o.Usage = &v
 }
 
-// GetArray returns the Array field value if set, zero value otherwise.
+// GetArray returns the Array field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *StorageHitachiDisk) GetArray() StorageHitachiArrayRelationship {
-	if o == nil || o.Array == nil {
+	if o == nil || IsNil(o.Array.Get()) {
 		var ret StorageHitachiArrayRelationship
 		return ret
 	}
-	return *o.Array
+	return *o.Array.Get()
 }
 
 // GetArrayOk returns a tuple with the Array field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StorageHitachiDisk) GetArrayOk() (*StorageHitachiArrayRelationship, bool) {
-	if o == nil || o.Array == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Array, true
+	return o.Array.Get(), o.Array.IsSet()
 }
 
 // HasArray returns a boolean if a field has been set.
 func (o *StorageHitachiDisk) HasArray() bool {
-	if o != nil && o.Array != nil {
+	if o != nil && o.Array.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetArray gets a reference to the given StorageHitachiArrayRelationship and assigns it to the Array field.
+// SetArray gets a reference to the given NullableStorageHitachiArrayRelationship and assigns it to the Array field.
 func (o *StorageHitachiDisk) SetArray(v StorageHitachiArrayRelationship) {
-	o.Array = &v
+	o.Array.Set(&v)
 }
 
-// GetParityGroup returns the ParityGroup field value if set, zero value otherwise.
+// SetArrayNil sets the value for Array to be an explicit nil
+func (o *StorageHitachiDisk) SetArrayNil() {
+	o.Array.Set(nil)
+}
+
+// UnsetArray ensures that no value is present for Array, not even an explicit nil
+func (o *StorageHitachiDisk) UnsetArray() {
+	o.Array.Unset()
+}
+
+// GetParityGroup returns the ParityGroup field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *StorageHitachiDisk) GetParityGroup() StorageHitachiParityGroupRelationship {
-	if o == nil || o.ParityGroup == nil {
+	if o == nil || IsNil(o.ParityGroup.Get()) {
 		var ret StorageHitachiParityGroupRelationship
 		return ret
 	}
-	return *o.ParityGroup
+	return *o.ParityGroup.Get()
 }
 
 // GetParityGroupOk returns a tuple with the ParityGroup field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StorageHitachiDisk) GetParityGroupOk() (*StorageHitachiParityGroupRelationship, bool) {
-	if o == nil || o.ParityGroup == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.ParityGroup, true
+	return o.ParityGroup.Get(), o.ParityGroup.IsSet()
 }
 
 // HasParityGroup returns a boolean if a field has been set.
 func (o *StorageHitachiDisk) HasParityGroup() bool {
-	if o != nil && o.ParityGroup != nil {
+	if o != nil && o.ParityGroup.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetParityGroup gets a reference to the given StorageHitachiParityGroupRelationship and assigns it to the ParityGroup field.
+// SetParityGroup gets a reference to the given NullableStorageHitachiParityGroupRelationship and assigns it to the ParityGroup field.
 func (o *StorageHitachiDisk) SetParityGroup(v StorageHitachiParityGroupRelationship) {
-	o.ParityGroup = &v
+	o.ParityGroup.Set(&v)
 }
 
-// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise.
+// SetParityGroupNil sets the value for ParityGroup to be an explicit nil
+func (o *StorageHitachiDisk) SetParityGroupNil() {
+	o.ParityGroup.Set(nil)
+}
+
+// UnsetParityGroup ensures that no value is present for ParityGroup, not even an explicit nil
+func (o *StorageHitachiDisk) UnsetParityGroup() {
+	o.ParityGroup.Unset()
+}
+
+// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *StorageHitachiDisk) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil || IsNil(o.RegisteredDevice.Get()) {
 		var ret AssetDeviceRegistrationRelationship
 		return ret
 	}
-	return *o.RegisteredDevice
+	return *o.RegisteredDevice.Get()
 }
 
 // GetRegisteredDeviceOk returns a tuple with the RegisteredDevice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StorageHitachiDisk) GetRegisteredDeviceOk() (*AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.RegisteredDevice, true
+	return o.RegisteredDevice.Get(), o.RegisteredDevice.IsSet()
 }
 
 // HasRegisteredDevice returns a boolean if a field has been set.
 func (o *StorageHitachiDisk) HasRegisteredDevice() bool {
-	if o != nil && o.RegisteredDevice != nil {
+	if o != nil && o.RegisteredDevice.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRegisteredDevice gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
+// SetRegisteredDevice gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
 func (o *StorageHitachiDisk) SetRegisteredDevice(v AssetDeviceRegistrationRelationship) {
-	o.RegisteredDevice = &v
+	o.RegisteredDevice.Set(&v)
+}
+
+// SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+func (o *StorageHitachiDisk) SetRegisteredDeviceNil() {
+	o.RegisteredDevice.Set(nil)
+}
+
+// UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
+func (o *StorageHitachiDisk) UnsetRegisteredDevice() {
+	o.RegisteredDevice.Unset()
 }
 
 func (o StorageHitachiDisk) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o StorageHitachiDisk) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedStorageBaseArrayDisk, errStorageBaseArrayDisk := json.Marshal(o.StorageBaseArrayDisk)
 	if errStorageBaseArrayDisk != nil {
-		return []byte{}, errStorageBaseArrayDisk
+		return map[string]interface{}{}, errStorageBaseArrayDisk
 	}
 	errStorageBaseArrayDisk = json.Unmarshal([]byte(serializedStorageBaseArrayDisk), &toSerialize)
 	if errStorageBaseArrayDisk != nil {
-		return []byte{}, errStorageBaseArrayDisk
+		return map[string]interface{}{}, errStorageBaseArrayDisk
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.DriveTypeCode != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.DriveTypeCode) {
 		toSerialize["DriveTypeCode"] = o.DriveTypeCode
 	}
-	if o.ParityGroupId != nil {
+	if !IsNil(o.ParityGroupId) {
 		toSerialize["ParityGroupId"] = o.ParityGroupId
 	}
-	if o.TypeDetail != nil {
+	if !IsNil(o.TypeDetail) {
 		toSerialize["TypeDetail"] = o.TypeDetail
 	}
-	if o.Usage != nil {
+	if !IsNil(o.Usage) {
 		toSerialize["Usage"] = o.Usage
 	}
-	if o.Array != nil {
-		toSerialize["Array"] = o.Array
+	if o.Array.IsSet() {
+		toSerialize["Array"] = o.Array.Get()
 	}
-	if o.ParityGroup != nil {
-		toSerialize["ParityGroup"] = o.ParityGroup
+	if o.ParityGroup.IsSet() {
+		toSerialize["ParityGroup"] = o.ParityGroup.Get()
 	}
-	if o.RegisteredDevice != nil {
-		toSerialize["RegisteredDevice"] = o.RegisteredDevice
+	if o.RegisteredDevice.IsSet() {
+		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *StorageHitachiDisk) UnmarshalJSON(bytes []byte) (err error) {
+func (o *StorageHitachiDisk) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type StorageHitachiDiskWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -393,15 +456,15 @@ func (o *StorageHitachiDisk) UnmarshalJSON(bytes []byte) (err error) {
 		// Drive type of the Hitachi Disk. * `N/A` - Drive Type is not available. * `SAS` - SAS stands for Serial Attached SCSI. * `SSD(MLC)` - SSD (MLC) stands for Multiple Level Cell. * `SSD(FMC)` - SSD (FMC) stands for Flash Memory Compressed. * `SSD(FMD)` - SSD (FMD) stands for Flash Module Drive. * `SSD(SLC)` - SSD (SLC) stands for Single Level Cell. * `SSD` - SSD stands for Solid-State Drive. * `SSD(RI)` - SSD (RI) stands for Read Intensive. * `SCM` - SCM stands for Storage Class Memory.
 		TypeDetail *string `json:"TypeDetail,omitempty"`
 		// Purpose for which the drive is used.
-		Usage            *string                                `json:"Usage,omitempty"`
-		Array            *StorageHitachiArrayRelationship       `json:"Array,omitempty"`
-		ParityGroup      *StorageHitachiParityGroupRelationship `json:"ParityGroup,omitempty"`
-		RegisteredDevice *AssetDeviceRegistrationRelationship   `json:"RegisteredDevice,omitempty"`
+		Usage            *string                                       `json:"Usage,omitempty"`
+		Array            NullableStorageHitachiArrayRelationship       `json:"Array,omitempty"`
+		ParityGroup      NullableStorageHitachiParityGroupRelationship `json:"ParityGroup,omitempty"`
+		RegisteredDevice NullableAssetDeviceRegistrationRelationship   `json:"RegisteredDevice,omitempty"`
 	}
 
 	varStorageHitachiDiskWithoutEmbeddedStruct := StorageHitachiDiskWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varStorageHitachiDiskWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varStorageHitachiDiskWithoutEmbeddedStruct)
 	if err == nil {
 		varStorageHitachiDisk := _StorageHitachiDisk{}
 		varStorageHitachiDisk.ClassId = varStorageHitachiDiskWithoutEmbeddedStruct.ClassId
@@ -420,7 +483,7 @@ func (o *StorageHitachiDisk) UnmarshalJSON(bytes []byte) (err error) {
 
 	varStorageHitachiDisk := _StorageHitachiDisk{}
 
-	err = json.Unmarshal(bytes, &varStorageHitachiDisk)
+	err = json.Unmarshal(data, &varStorageHitachiDisk)
 	if err == nil {
 		o.StorageBaseArrayDisk = varStorageHitachiDisk.StorageBaseArrayDisk
 	} else {
@@ -429,7 +492,7 @@ func (o *StorageHitachiDisk) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "DriveTypeCode")

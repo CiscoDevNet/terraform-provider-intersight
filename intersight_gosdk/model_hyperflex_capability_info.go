@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the HyperflexCapabilityInfo type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &HyperflexCapabilityInfo{}
 
 // HyperflexCapabilityInfo A capabilityInfo is like a feature set and/or feature limit for different components of a HyperFlex Cluster. A set of constraints defines the rules, and the corresponding value either determines if the feature would work on a HyperFlex cluster with specific component set, or corresponds to a limit for a set of HyperFlex components. For example, \"minUcsVersion\" for HyperFlex version \"4.0.1a\" corresponds to \"3.2.3\" or \"minHxdpVersion\" for HyperFlex Upgrade operation is \"4.0.1a\" etc. This data can be captured as a capability and at run-time, decision can be made to proceed with the intended operation or not, or proceed with the intended operation with a value catered to specific feature sets.
 type HyperflexCapabilityInfo struct {
@@ -28,8 +32,8 @@ type HyperflexCapabilityInfo struct {
 	// Name of the capability or feature set consisting of a collection of constraint rules and value.
 	Name *string `json:"Name,omitempty"`
 	// Capability Value which is valid only iff all specified constraints match.
-	Value                *string                          `json:"Value,omitempty"`
-	AppCatalog           *HyperflexAppCatalogRelationship `json:"AppCatalog,omitempty"`
+	Value                *string                                 `json:"Value,omitempty"`
+	AppCatalog           NullableHyperflexAppCatalogRelationship `json:"AppCatalog,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -119,7 +123,7 @@ func (o *HyperflexCapabilityInfo) GetCapabilityConstraints() []HclConstraint {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *HyperflexCapabilityInfo) GetCapabilityConstraintsOk() ([]HclConstraint, bool) {
-	if o == nil || o.CapabilityConstraints == nil {
+	if o == nil || IsNil(o.CapabilityConstraints) {
 		return nil, false
 	}
 	return o.CapabilityConstraints, true
@@ -127,7 +131,7 @@ func (o *HyperflexCapabilityInfo) GetCapabilityConstraintsOk() ([]HclConstraint,
 
 // HasCapabilityConstraints returns a boolean if a field has been set.
 func (o *HyperflexCapabilityInfo) HasCapabilityConstraints() bool {
-	if o != nil && o.CapabilityConstraints != nil {
+	if o != nil && IsNil(o.CapabilityConstraints) {
 		return true
 	}
 
@@ -141,7 +145,7 @@ func (o *HyperflexCapabilityInfo) SetCapabilityConstraints(v []HclConstraint) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *HyperflexCapabilityInfo) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -151,7 +155,7 @@ func (o *HyperflexCapabilityInfo) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexCapabilityInfo) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -159,7 +163,7 @@ func (o *HyperflexCapabilityInfo) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *HyperflexCapabilityInfo) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -173,7 +177,7 @@ func (o *HyperflexCapabilityInfo) SetName(v string) {
 
 // GetValue returns the Value field value if set, zero value otherwise.
 func (o *HyperflexCapabilityInfo) GetValue() string {
-	if o == nil || o.Value == nil {
+	if o == nil || IsNil(o.Value) {
 		var ret string
 		return ret
 	}
@@ -183,7 +187,7 @@ func (o *HyperflexCapabilityInfo) GetValue() string {
 // GetValueOk returns a tuple with the Value field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexCapabilityInfo) GetValueOk() (*string, bool) {
-	if o == nil || o.Value == nil {
+	if o == nil || IsNil(o.Value) {
 		return nil, false
 	}
 	return o.Value, true
@@ -191,7 +195,7 @@ func (o *HyperflexCapabilityInfo) GetValueOk() (*string, bool) {
 
 // HasValue returns a boolean if a field has been set.
 func (o *HyperflexCapabilityInfo) HasValue() bool {
-	if o != nil && o.Value != nil {
+	if o != nil && !IsNil(o.Value) {
 		return true
 	}
 
@@ -203,75 +207,112 @@ func (o *HyperflexCapabilityInfo) SetValue(v string) {
 	o.Value = &v
 }
 
-// GetAppCatalog returns the AppCatalog field value if set, zero value otherwise.
+// GetAppCatalog returns the AppCatalog field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *HyperflexCapabilityInfo) GetAppCatalog() HyperflexAppCatalogRelationship {
-	if o == nil || o.AppCatalog == nil {
+	if o == nil || IsNil(o.AppCatalog.Get()) {
 		var ret HyperflexAppCatalogRelationship
 		return ret
 	}
-	return *o.AppCatalog
+	return *o.AppCatalog.Get()
 }
 
 // GetAppCatalogOk returns a tuple with the AppCatalog field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *HyperflexCapabilityInfo) GetAppCatalogOk() (*HyperflexAppCatalogRelationship, bool) {
-	if o == nil || o.AppCatalog == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.AppCatalog, true
+	return o.AppCatalog.Get(), o.AppCatalog.IsSet()
 }
 
 // HasAppCatalog returns a boolean if a field has been set.
 func (o *HyperflexCapabilityInfo) HasAppCatalog() bool {
-	if o != nil && o.AppCatalog != nil {
+	if o != nil && o.AppCatalog.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetAppCatalog gets a reference to the given HyperflexAppCatalogRelationship and assigns it to the AppCatalog field.
+// SetAppCatalog gets a reference to the given NullableHyperflexAppCatalogRelationship and assigns it to the AppCatalog field.
 func (o *HyperflexCapabilityInfo) SetAppCatalog(v HyperflexAppCatalogRelationship) {
-	o.AppCatalog = &v
+	o.AppCatalog.Set(&v)
+}
+
+// SetAppCatalogNil sets the value for AppCatalog to be an explicit nil
+func (o *HyperflexCapabilityInfo) SetAppCatalogNil() {
+	o.AppCatalog.Set(nil)
+}
+
+// UnsetAppCatalog ensures that no value is present for AppCatalog, not even an explicit nil
+func (o *HyperflexCapabilityInfo) UnsetAppCatalog() {
+	o.AppCatalog.Unset()
 }
 
 func (o HyperflexCapabilityInfo) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o HyperflexCapabilityInfo) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
 	if o.CapabilityConstraints != nil {
 		toSerialize["CapabilityConstraints"] = o.CapabilityConstraints
 	}
-	if o.Name != nil {
+	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
 	}
-	if o.Value != nil {
+	if !IsNil(o.Value) {
 		toSerialize["Value"] = o.Value
 	}
-	if o.AppCatalog != nil {
-		toSerialize["AppCatalog"] = o.AppCatalog
+	if o.AppCatalog.IsSet() {
+		toSerialize["AppCatalog"] = o.AppCatalog.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *HyperflexCapabilityInfo) UnmarshalJSON(bytes []byte) (err error) {
+func (o *HyperflexCapabilityInfo) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type HyperflexCapabilityInfoWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -281,13 +322,13 @@ func (o *HyperflexCapabilityInfo) UnmarshalJSON(bytes []byte) (err error) {
 		// Name of the capability or feature set consisting of a collection of constraint rules and value.
 		Name *string `json:"Name,omitempty"`
 		// Capability Value which is valid only iff all specified constraints match.
-		Value      *string                          `json:"Value,omitempty"`
-		AppCatalog *HyperflexAppCatalogRelationship `json:"AppCatalog,omitempty"`
+		Value      *string                                 `json:"Value,omitempty"`
+		AppCatalog NullableHyperflexAppCatalogRelationship `json:"AppCatalog,omitempty"`
 	}
 
 	varHyperflexCapabilityInfoWithoutEmbeddedStruct := HyperflexCapabilityInfoWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varHyperflexCapabilityInfoWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varHyperflexCapabilityInfoWithoutEmbeddedStruct)
 	if err == nil {
 		varHyperflexCapabilityInfo := _HyperflexCapabilityInfo{}
 		varHyperflexCapabilityInfo.ClassId = varHyperflexCapabilityInfoWithoutEmbeddedStruct.ClassId
@@ -303,7 +344,7 @@ func (o *HyperflexCapabilityInfo) UnmarshalJSON(bytes []byte) (err error) {
 
 	varHyperflexCapabilityInfo := _HyperflexCapabilityInfo{}
 
-	err = json.Unmarshal(bytes, &varHyperflexCapabilityInfo)
+	err = json.Unmarshal(data, &varHyperflexCapabilityInfo)
 	if err == nil {
 		o.MoBaseMo = varHyperflexCapabilityInfo.MoBaseMo
 	} else {
@@ -312,7 +353,7 @@ func (o *HyperflexCapabilityInfo) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "CapabilityConstraints")

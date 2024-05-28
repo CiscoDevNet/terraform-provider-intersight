@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the NiatelemetryFault type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &NiatelemetryFault{}
 
 // NiatelemetryFault Object is available at Fault scope in a fabric and provides details about a fault occurred.
 type NiatelemetryFault struct {
@@ -43,8 +47,8 @@ type NiatelemetryFault struct {
 	// The Site name represents an APIC cluster. Service Engine can onboard multiple APIC clusters/sites.
 	SiteName *string `json:"SiteName,omitempty"`
 	// Type of the fault present.
-	Type                 *string                              `json:"Type,omitempty"`
-	RegisteredDevice     *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+	Type                 *string                                     `json:"Type,omitempty"`
+	RegisteredDevice     NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -123,7 +127,7 @@ func (o *NiatelemetryFault) SetObjectType(v string) {
 
 // GetCause returns the Cause field value if set, zero value otherwise.
 func (o *NiatelemetryFault) GetCause() string {
-	if o == nil || o.Cause == nil {
+	if o == nil || IsNil(o.Cause) {
 		var ret string
 		return ret
 	}
@@ -133,7 +137,7 @@ func (o *NiatelemetryFault) GetCause() string {
 // GetCauseOk returns a tuple with the Cause field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryFault) GetCauseOk() (*string, bool) {
-	if o == nil || o.Cause == nil {
+	if o == nil || IsNil(o.Cause) {
 		return nil, false
 	}
 	return o.Cause, true
@@ -141,7 +145,7 @@ func (o *NiatelemetryFault) GetCauseOk() (*string, bool) {
 
 // HasCause returns a boolean if a field has been set.
 func (o *NiatelemetryFault) HasCause() bool {
-	if o != nil && o.Cause != nil {
+	if o != nil && !IsNil(o.Cause) {
 		return true
 	}
 
@@ -155,7 +159,7 @@ func (o *NiatelemetryFault) SetCause(v string) {
 
 // GetCode returns the Code field value if set, zero value otherwise.
 func (o *NiatelemetryFault) GetCode() string {
-	if o == nil || o.Code == nil {
+	if o == nil || IsNil(o.Code) {
 		var ret string
 		return ret
 	}
@@ -165,7 +169,7 @@ func (o *NiatelemetryFault) GetCode() string {
 // GetCodeOk returns a tuple with the Code field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryFault) GetCodeOk() (*string, bool) {
-	if o == nil || o.Code == nil {
+	if o == nil || IsNil(o.Code) {
 		return nil, false
 	}
 	return o.Code, true
@@ -173,7 +177,7 @@ func (o *NiatelemetryFault) GetCodeOk() (*string, bool) {
 
 // HasCode returns a boolean if a field has been set.
 func (o *NiatelemetryFault) HasCode() bool {
-	if o != nil && o.Code != nil {
+	if o != nil && !IsNil(o.Code) {
 		return true
 	}
 
@@ -187,7 +191,7 @@ func (o *NiatelemetryFault) SetCode(v string) {
 
 // GetCreatedTime returns the CreatedTime field value if set, zero value otherwise.
 func (o *NiatelemetryFault) GetCreatedTime() string {
-	if o == nil || o.CreatedTime == nil {
+	if o == nil || IsNil(o.CreatedTime) {
 		var ret string
 		return ret
 	}
@@ -197,7 +201,7 @@ func (o *NiatelemetryFault) GetCreatedTime() string {
 // GetCreatedTimeOk returns a tuple with the CreatedTime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryFault) GetCreatedTimeOk() (*string, bool) {
-	if o == nil || o.CreatedTime == nil {
+	if o == nil || IsNil(o.CreatedTime) {
 		return nil, false
 	}
 	return o.CreatedTime, true
@@ -205,7 +209,7 @@ func (o *NiatelemetryFault) GetCreatedTimeOk() (*string, bool) {
 
 // HasCreatedTime returns a boolean if a field has been set.
 func (o *NiatelemetryFault) HasCreatedTime() bool {
-	if o != nil && o.CreatedTime != nil {
+	if o != nil && !IsNil(o.CreatedTime) {
 		return true
 	}
 
@@ -219,7 +223,7 @@ func (o *NiatelemetryFault) SetCreatedTime(v string) {
 
 // GetDescription returns the Description field value if set, zero value otherwise.
 func (o *NiatelemetryFault) GetDescription() string {
-	if o == nil || o.Description == nil {
+	if o == nil || IsNil(o.Description) {
 		var ret string
 		return ret
 	}
@@ -229,7 +233,7 @@ func (o *NiatelemetryFault) GetDescription() string {
 // GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryFault) GetDescriptionOk() (*string, bool) {
-	if o == nil || o.Description == nil {
+	if o == nil || IsNil(o.Description) {
 		return nil, false
 	}
 	return o.Description, true
@@ -237,7 +241,7 @@ func (o *NiatelemetryFault) GetDescriptionOk() (*string, bool) {
 
 // HasDescription returns a boolean if a field has been set.
 func (o *NiatelemetryFault) HasDescription() bool {
-	if o != nil && o.Description != nil {
+	if o != nil && !IsNil(o.Description) {
 		return true
 	}
 
@@ -251,7 +255,7 @@ func (o *NiatelemetryFault) SetDescription(v string) {
 
 // GetDn returns the Dn field value if set, zero value otherwise.
 func (o *NiatelemetryFault) GetDn() string {
-	if o == nil || o.Dn == nil {
+	if o == nil || IsNil(o.Dn) {
 		var ret string
 		return ret
 	}
@@ -261,7 +265,7 @@ func (o *NiatelemetryFault) GetDn() string {
 // GetDnOk returns a tuple with the Dn field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryFault) GetDnOk() (*string, bool) {
-	if o == nil || o.Dn == nil {
+	if o == nil || IsNil(o.Dn) {
 		return nil, false
 	}
 	return o.Dn, true
@@ -269,7 +273,7 @@ func (o *NiatelemetryFault) GetDnOk() (*string, bool) {
 
 // HasDn returns a boolean if a field has been set.
 func (o *NiatelemetryFault) HasDn() bool {
-	if o != nil && o.Dn != nil {
+	if o != nil && !IsNil(o.Dn) {
 		return true
 	}
 
@@ -283,7 +287,7 @@ func (o *NiatelemetryFault) SetDn(v string) {
 
 // GetRecordType returns the RecordType field value if set, zero value otherwise.
 func (o *NiatelemetryFault) GetRecordType() string {
-	if o == nil || o.RecordType == nil {
+	if o == nil || IsNil(o.RecordType) {
 		var ret string
 		return ret
 	}
@@ -293,7 +297,7 @@ func (o *NiatelemetryFault) GetRecordType() string {
 // GetRecordTypeOk returns a tuple with the RecordType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryFault) GetRecordTypeOk() (*string, bool) {
-	if o == nil || o.RecordType == nil {
+	if o == nil || IsNil(o.RecordType) {
 		return nil, false
 	}
 	return o.RecordType, true
@@ -301,7 +305,7 @@ func (o *NiatelemetryFault) GetRecordTypeOk() (*string, bool) {
 
 // HasRecordType returns a boolean if a field has been set.
 func (o *NiatelemetryFault) HasRecordType() bool {
-	if o != nil && o.RecordType != nil {
+	if o != nil && !IsNil(o.RecordType) {
 		return true
 	}
 
@@ -315,7 +319,7 @@ func (o *NiatelemetryFault) SetRecordType(v string) {
 
 // GetRecordVersion returns the RecordVersion field value if set, zero value otherwise.
 func (o *NiatelemetryFault) GetRecordVersion() string {
-	if o == nil || o.RecordVersion == nil {
+	if o == nil || IsNil(o.RecordVersion) {
 		var ret string
 		return ret
 	}
@@ -325,7 +329,7 @@ func (o *NiatelemetryFault) GetRecordVersion() string {
 // GetRecordVersionOk returns a tuple with the RecordVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryFault) GetRecordVersionOk() (*string, bool) {
-	if o == nil || o.RecordVersion == nil {
+	if o == nil || IsNil(o.RecordVersion) {
 		return nil, false
 	}
 	return o.RecordVersion, true
@@ -333,7 +337,7 @@ func (o *NiatelemetryFault) GetRecordVersionOk() (*string, bool) {
 
 // HasRecordVersion returns a boolean if a field has been set.
 func (o *NiatelemetryFault) HasRecordVersion() bool {
-	if o != nil && o.RecordVersion != nil {
+	if o != nil && !IsNil(o.RecordVersion) {
 		return true
 	}
 
@@ -347,7 +351,7 @@ func (o *NiatelemetryFault) SetRecordVersion(v string) {
 
 // GetSeverity returns the Severity field value if set, zero value otherwise.
 func (o *NiatelemetryFault) GetSeverity() string {
-	if o == nil || o.Severity == nil {
+	if o == nil || IsNil(o.Severity) {
 		var ret string
 		return ret
 	}
@@ -357,7 +361,7 @@ func (o *NiatelemetryFault) GetSeverity() string {
 // GetSeverityOk returns a tuple with the Severity field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryFault) GetSeverityOk() (*string, bool) {
-	if o == nil || o.Severity == nil {
+	if o == nil || IsNil(o.Severity) {
 		return nil, false
 	}
 	return o.Severity, true
@@ -365,7 +369,7 @@ func (o *NiatelemetryFault) GetSeverityOk() (*string, bool) {
 
 // HasSeverity returns a boolean if a field has been set.
 func (o *NiatelemetryFault) HasSeverity() bool {
-	if o != nil && o.Severity != nil {
+	if o != nil && !IsNil(o.Severity) {
 		return true
 	}
 
@@ -379,7 +383,7 @@ func (o *NiatelemetryFault) SetSeverity(v string) {
 
 // GetSiteName returns the SiteName field value if set, zero value otherwise.
 func (o *NiatelemetryFault) GetSiteName() string {
-	if o == nil || o.SiteName == nil {
+	if o == nil || IsNil(o.SiteName) {
 		var ret string
 		return ret
 	}
@@ -389,7 +393,7 @@ func (o *NiatelemetryFault) GetSiteName() string {
 // GetSiteNameOk returns a tuple with the SiteName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryFault) GetSiteNameOk() (*string, bool) {
-	if o == nil || o.SiteName == nil {
+	if o == nil || IsNil(o.SiteName) {
 		return nil, false
 	}
 	return o.SiteName, true
@@ -397,7 +401,7 @@ func (o *NiatelemetryFault) GetSiteNameOk() (*string, bool) {
 
 // HasSiteName returns a boolean if a field has been set.
 func (o *NiatelemetryFault) HasSiteName() bool {
-	if o != nil && o.SiteName != nil {
+	if o != nil && !IsNil(o.SiteName) {
 		return true
 	}
 
@@ -411,7 +415,7 @@ func (o *NiatelemetryFault) SetSiteName(v string) {
 
 // GetType returns the Type field value if set, zero value otherwise.
 func (o *NiatelemetryFault) GetType() string {
-	if o == nil || o.Type == nil {
+	if o == nil || IsNil(o.Type) {
 		var ret string
 		return ret
 	}
@@ -421,7 +425,7 @@ func (o *NiatelemetryFault) GetType() string {
 // GetTypeOk returns a tuple with the Type field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryFault) GetTypeOk() (*string, bool) {
-	if o == nil || o.Type == nil {
+	if o == nil || IsNil(o.Type) {
 		return nil, false
 	}
 	return o.Type, true
@@ -429,7 +433,7 @@ func (o *NiatelemetryFault) GetTypeOk() (*string, bool) {
 
 // HasType returns a boolean if a field has been set.
 func (o *NiatelemetryFault) HasType() bool {
-	if o != nil && o.Type != nil {
+	if o != nil && !IsNil(o.Type) {
 		return true
 	}
 
@@ -441,96 +445,133 @@ func (o *NiatelemetryFault) SetType(v string) {
 	o.Type = &v
 }
 
-// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise.
+// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *NiatelemetryFault) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil || IsNil(o.RegisteredDevice.Get()) {
 		var ret AssetDeviceRegistrationRelationship
 		return ret
 	}
-	return *o.RegisteredDevice
+	return *o.RegisteredDevice.Get()
 }
 
 // GetRegisteredDeviceOk returns a tuple with the RegisteredDevice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *NiatelemetryFault) GetRegisteredDeviceOk() (*AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.RegisteredDevice, true
+	return o.RegisteredDevice.Get(), o.RegisteredDevice.IsSet()
 }
 
 // HasRegisteredDevice returns a boolean if a field has been set.
 func (o *NiatelemetryFault) HasRegisteredDevice() bool {
-	if o != nil && o.RegisteredDevice != nil {
+	if o != nil && o.RegisteredDevice.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRegisteredDevice gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
+// SetRegisteredDevice gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
 func (o *NiatelemetryFault) SetRegisteredDevice(v AssetDeviceRegistrationRelationship) {
-	o.RegisteredDevice = &v
+	o.RegisteredDevice.Set(&v)
+}
+
+// SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+func (o *NiatelemetryFault) SetRegisteredDeviceNil() {
+	o.RegisteredDevice.Set(nil)
+}
+
+// UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
+func (o *NiatelemetryFault) UnsetRegisteredDevice() {
+	o.RegisteredDevice.Unset()
 }
 
 func (o NiatelemetryFault) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o NiatelemetryFault) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Cause != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Cause) {
 		toSerialize["Cause"] = o.Cause
 	}
-	if o.Code != nil {
+	if !IsNil(o.Code) {
 		toSerialize["Code"] = o.Code
 	}
-	if o.CreatedTime != nil {
+	if !IsNil(o.CreatedTime) {
 		toSerialize["CreatedTime"] = o.CreatedTime
 	}
-	if o.Description != nil {
+	if !IsNil(o.Description) {
 		toSerialize["Description"] = o.Description
 	}
-	if o.Dn != nil {
+	if !IsNil(o.Dn) {
 		toSerialize["Dn"] = o.Dn
 	}
-	if o.RecordType != nil {
+	if !IsNil(o.RecordType) {
 		toSerialize["RecordType"] = o.RecordType
 	}
-	if o.RecordVersion != nil {
+	if !IsNil(o.RecordVersion) {
 		toSerialize["RecordVersion"] = o.RecordVersion
 	}
-	if o.Severity != nil {
+	if !IsNil(o.Severity) {
 		toSerialize["Severity"] = o.Severity
 	}
-	if o.SiteName != nil {
+	if !IsNil(o.SiteName) {
 		toSerialize["SiteName"] = o.SiteName
 	}
-	if o.Type != nil {
+	if !IsNil(o.Type) {
 		toSerialize["Type"] = o.Type
 	}
-	if o.RegisteredDevice != nil {
-		toSerialize["RegisteredDevice"] = o.RegisteredDevice
+	if o.RegisteredDevice.IsSet() {
+		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *NiatelemetryFault) UnmarshalJSON(bytes []byte) (err error) {
+func (o *NiatelemetryFault) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type NiatelemetryFaultWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -555,13 +596,13 @@ func (o *NiatelemetryFault) UnmarshalJSON(bytes []byte) (err error) {
 		// The Site name represents an APIC cluster. Service Engine can onboard multiple APIC clusters/sites.
 		SiteName *string `json:"SiteName,omitempty"`
 		// Type of the fault present.
-		Type             *string                              `json:"Type,omitempty"`
-		RegisteredDevice *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+		Type             *string                                     `json:"Type,omitempty"`
+		RegisteredDevice NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	}
 
 	varNiatelemetryFaultWithoutEmbeddedStruct := NiatelemetryFaultWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varNiatelemetryFaultWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varNiatelemetryFaultWithoutEmbeddedStruct)
 	if err == nil {
 		varNiatelemetryFault := _NiatelemetryFault{}
 		varNiatelemetryFault.ClassId = varNiatelemetryFaultWithoutEmbeddedStruct.ClassId
@@ -584,7 +625,7 @@ func (o *NiatelemetryFault) UnmarshalJSON(bytes []byte) (err error) {
 
 	varNiatelemetryFault := _NiatelemetryFault{}
 
-	err = json.Unmarshal(bytes, &varNiatelemetryFault)
+	err = json.Unmarshal(data, &varNiatelemetryFault)
 	if err == nil {
 		o.MoBaseMo = varNiatelemetryFault.MoBaseMo
 	} else {
@@ -593,7 +634,7 @@ func (o *NiatelemetryFault) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Cause")

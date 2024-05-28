@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,10 +13,14 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 	"time"
 )
+
+// checks if the SoftwarerepositoryCachedImage type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &SoftwarerepositoryCachedImage{}
 
 // SoftwarerepositoryCachedImage The image cached in the customer's datacenter.
 type SoftwarerepositoryCachedImage struct {
@@ -41,9 +45,9 @@ type SoftwarerepositoryCachedImage struct {
 	Path                *string  `json:"Path,omitempty"`
 	RegisteredWorkflows []string `json:"RegisteredWorkflows,omitempty"`
 	// The number of times this file has been used to copy or upgrade or install actions. Used by the cache monitoring process to determine the files to be evicted from the cache.
-	UsedCount            *int64                              `json:"UsedCount,omitempty"`
-	File                 *SoftwarerepositoryFileRelationship `json:"File,omitempty"`
-	NetworkElement       *NetworkElementRelationship         `json:"NetworkElement,omitempty"`
+	UsedCount            *int64                                     `json:"UsedCount,omitempty"`
+	File                 NullableSoftwarerepositoryFileRelationship `json:"File,omitempty"`
+	NetworkElement       NullableNetworkElementRelationship         `json:"NetworkElement,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -126,7 +130,7 @@ func (o *SoftwarerepositoryCachedImage) SetObjectType(v string) {
 
 // GetAction returns the Action field value if set, zero value otherwise.
 func (o *SoftwarerepositoryCachedImage) GetAction() string {
-	if o == nil || o.Action == nil {
+	if o == nil || IsNil(o.Action) {
 		var ret string
 		return ret
 	}
@@ -136,7 +140,7 @@ func (o *SoftwarerepositoryCachedImage) GetAction() string {
 // GetActionOk returns a tuple with the Action field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SoftwarerepositoryCachedImage) GetActionOk() (*string, bool) {
-	if o == nil || o.Action == nil {
+	if o == nil || IsNil(o.Action) {
 		return nil, false
 	}
 	return o.Action, true
@@ -144,7 +148,7 @@ func (o *SoftwarerepositoryCachedImage) GetActionOk() (*string, bool) {
 
 // HasAction returns a boolean if a field has been set.
 func (o *SoftwarerepositoryCachedImage) HasAction() bool {
-	if o != nil && o.Action != nil {
+	if o != nil && !IsNil(o.Action) {
 		return true
 	}
 
@@ -158,7 +162,7 @@ func (o *SoftwarerepositoryCachedImage) SetAction(v string) {
 
 // GetCacheState returns the CacheState field value if set, zero value otherwise.
 func (o *SoftwarerepositoryCachedImage) GetCacheState() string {
-	if o == nil || o.CacheState == nil {
+	if o == nil || IsNil(o.CacheState) {
 		var ret string
 		return ret
 	}
@@ -168,7 +172,7 @@ func (o *SoftwarerepositoryCachedImage) GetCacheState() string {
 // GetCacheStateOk returns a tuple with the CacheState field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SoftwarerepositoryCachedImage) GetCacheStateOk() (*string, bool) {
-	if o == nil || o.CacheState == nil {
+	if o == nil || IsNil(o.CacheState) {
 		return nil, false
 	}
 	return o.CacheState, true
@@ -176,7 +180,7 @@ func (o *SoftwarerepositoryCachedImage) GetCacheStateOk() (*string, bool) {
 
 // HasCacheState returns a boolean if a field has been set.
 func (o *SoftwarerepositoryCachedImage) HasCacheState() bool {
-	if o != nil && o.CacheState != nil {
+	if o != nil && !IsNil(o.CacheState) {
 		return true
 	}
 
@@ -190,7 +194,7 @@ func (o *SoftwarerepositoryCachedImage) SetCacheState(v string) {
 
 // GetCachedTime returns the CachedTime field value if set, zero value otherwise.
 func (o *SoftwarerepositoryCachedImage) GetCachedTime() time.Time {
-	if o == nil || o.CachedTime == nil {
+	if o == nil || IsNil(o.CachedTime) {
 		var ret time.Time
 		return ret
 	}
@@ -200,7 +204,7 @@ func (o *SoftwarerepositoryCachedImage) GetCachedTime() time.Time {
 // GetCachedTimeOk returns a tuple with the CachedTime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SoftwarerepositoryCachedImage) GetCachedTimeOk() (*time.Time, bool) {
-	if o == nil || o.CachedTime == nil {
+	if o == nil || IsNil(o.CachedTime) {
 		return nil, false
 	}
 	return o.CachedTime, true
@@ -208,7 +212,7 @@ func (o *SoftwarerepositoryCachedImage) GetCachedTimeOk() (*time.Time, bool) {
 
 // HasCachedTime returns a boolean if a field has been set.
 func (o *SoftwarerepositoryCachedImage) HasCachedTime() bool {
-	if o != nil && o.CachedTime != nil {
+	if o != nil && !IsNil(o.CachedTime) {
 		return true
 	}
 
@@ -222,7 +226,7 @@ func (o *SoftwarerepositoryCachedImage) SetCachedTime(v time.Time) {
 
 // GetLastAccessTime returns the LastAccessTime field value if set, zero value otherwise.
 func (o *SoftwarerepositoryCachedImage) GetLastAccessTime() time.Time {
-	if o == nil || o.LastAccessTime == nil {
+	if o == nil || IsNil(o.LastAccessTime) {
 		var ret time.Time
 		return ret
 	}
@@ -232,7 +236,7 @@ func (o *SoftwarerepositoryCachedImage) GetLastAccessTime() time.Time {
 // GetLastAccessTimeOk returns a tuple with the LastAccessTime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SoftwarerepositoryCachedImage) GetLastAccessTimeOk() (*time.Time, bool) {
-	if o == nil || o.LastAccessTime == nil {
+	if o == nil || IsNil(o.LastAccessTime) {
 		return nil, false
 	}
 	return o.LastAccessTime, true
@@ -240,7 +244,7 @@ func (o *SoftwarerepositoryCachedImage) GetLastAccessTimeOk() (*time.Time, bool)
 
 // HasLastAccessTime returns a boolean if a field has been set.
 func (o *SoftwarerepositoryCachedImage) HasLastAccessTime() bool {
-	if o != nil && o.LastAccessTime != nil {
+	if o != nil && !IsNil(o.LastAccessTime) {
 		return true
 	}
 
@@ -254,7 +258,7 @@ func (o *SoftwarerepositoryCachedImage) SetLastAccessTime(v time.Time) {
 
 // GetMd5sum returns the Md5sum field value if set, zero value otherwise.
 func (o *SoftwarerepositoryCachedImage) GetMd5sum() string {
-	if o == nil || o.Md5sum == nil {
+	if o == nil || IsNil(o.Md5sum) {
 		var ret string
 		return ret
 	}
@@ -264,7 +268,7 @@ func (o *SoftwarerepositoryCachedImage) GetMd5sum() string {
 // GetMd5sumOk returns a tuple with the Md5sum field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SoftwarerepositoryCachedImage) GetMd5sumOk() (*string, bool) {
-	if o == nil || o.Md5sum == nil {
+	if o == nil || IsNil(o.Md5sum) {
 		return nil, false
 	}
 	return o.Md5sum, true
@@ -272,7 +276,7 @@ func (o *SoftwarerepositoryCachedImage) GetMd5sumOk() (*string, bool) {
 
 // HasMd5sum returns a boolean if a field has been set.
 func (o *SoftwarerepositoryCachedImage) HasMd5sum() bool {
-	if o != nil && o.Md5sum != nil {
+	if o != nil && !IsNil(o.Md5sum) {
 		return true
 	}
 
@@ -286,7 +290,7 @@ func (o *SoftwarerepositoryCachedImage) SetMd5sum(v string) {
 
 // GetOriginalSha512sum returns the OriginalSha512sum field value if set, zero value otherwise.
 func (o *SoftwarerepositoryCachedImage) GetOriginalSha512sum() string {
-	if o == nil || o.OriginalSha512sum == nil {
+	if o == nil || IsNil(o.OriginalSha512sum) {
 		var ret string
 		return ret
 	}
@@ -296,7 +300,7 @@ func (o *SoftwarerepositoryCachedImage) GetOriginalSha512sum() string {
 // GetOriginalSha512sumOk returns a tuple with the OriginalSha512sum field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SoftwarerepositoryCachedImage) GetOriginalSha512sumOk() (*string, bool) {
-	if o == nil || o.OriginalSha512sum == nil {
+	if o == nil || IsNil(o.OriginalSha512sum) {
 		return nil, false
 	}
 	return o.OriginalSha512sum, true
@@ -304,7 +308,7 @@ func (o *SoftwarerepositoryCachedImage) GetOriginalSha512sumOk() (*string, bool)
 
 // HasOriginalSha512sum returns a boolean if a field has been set.
 func (o *SoftwarerepositoryCachedImage) HasOriginalSha512sum() bool {
-	if o != nil && o.OriginalSha512sum != nil {
+	if o != nil && !IsNil(o.OriginalSha512sum) {
 		return true
 	}
 
@@ -318,7 +322,7 @@ func (o *SoftwarerepositoryCachedImage) SetOriginalSha512sum(v string) {
 
 // GetPath returns the Path field value if set, zero value otherwise.
 func (o *SoftwarerepositoryCachedImage) GetPath() string {
-	if o == nil || o.Path == nil {
+	if o == nil || IsNil(o.Path) {
 		var ret string
 		return ret
 	}
@@ -328,7 +332,7 @@ func (o *SoftwarerepositoryCachedImage) GetPath() string {
 // GetPathOk returns a tuple with the Path field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SoftwarerepositoryCachedImage) GetPathOk() (*string, bool) {
-	if o == nil || o.Path == nil {
+	if o == nil || IsNil(o.Path) {
 		return nil, false
 	}
 	return o.Path, true
@@ -336,7 +340,7 @@ func (o *SoftwarerepositoryCachedImage) GetPathOk() (*string, bool) {
 
 // HasPath returns a boolean if a field has been set.
 func (o *SoftwarerepositoryCachedImage) HasPath() bool {
-	if o != nil && o.Path != nil {
+	if o != nil && !IsNil(o.Path) {
 		return true
 	}
 
@@ -361,7 +365,7 @@ func (o *SoftwarerepositoryCachedImage) GetRegisteredWorkflows() []string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *SoftwarerepositoryCachedImage) GetRegisteredWorkflowsOk() ([]string, bool) {
-	if o == nil || o.RegisteredWorkflows == nil {
+	if o == nil || IsNil(o.RegisteredWorkflows) {
 		return nil, false
 	}
 	return o.RegisteredWorkflows, true
@@ -369,7 +373,7 @@ func (o *SoftwarerepositoryCachedImage) GetRegisteredWorkflowsOk() ([]string, bo
 
 // HasRegisteredWorkflows returns a boolean if a field has been set.
 func (o *SoftwarerepositoryCachedImage) HasRegisteredWorkflows() bool {
-	if o != nil && o.RegisteredWorkflows != nil {
+	if o != nil && IsNil(o.RegisteredWorkflows) {
 		return true
 	}
 
@@ -383,7 +387,7 @@ func (o *SoftwarerepositoryCachedImage) SetRegisteredWorkflows(v []string) {
 
 // GetUsedCount returns the UsedCount field value if set, zero value otherwise.
 func (o *SoftwarerepositoryCachedImage) GetUsedCount() int64 {
-	if o == nil || o.UsedCount == nil {
+	if o == nil || IsNil(o.UsedCount) {
 		var ret int64
 		return ret
 	}
@@ -393,7 +397,7 @@ func (o *SoftwarerepositoryCachedImage) GetUsedCount() int64 {
 // GetUsedCountOk returns a tuple with the UsedCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SoftwarerepositoryCachedImage) GetUsedCountOk() (*int64, bool) {
-	if o == nil || o.UsedCount == nil {
+	if o == nil || IsNil(o.UsedCount) {
 		return nil, false
 	}
 	return o.UsedCount, true
@@ -401,7 +405,7 @@ func (o *SoftwarerepositoryCachedImage) GetUsedCountOk() (*int64, bool) {
 
 // HasUsedCount returns a boolean if a field has been set.
 func (o *SoftwarerepositoryCachedImage) HasUsedCount() bool {
-	if o != nil && o.UsedCount != nil {
+	if o != nil && !IsNil(o.UsedCount) {
 		return true
 	}
 
@@ -413,128 +417,176 @@ func (o *SoftwarerepositoryCachedImage) SetUsedCount(v int64) {
 	o.UsedCount = &v
 }
 
-// GetFile returns the File field value if set, zero value otherwise.
+// GetFile returns the File field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *SoftwarerepositoryCachedImage) GetFile() SoftwarerepositoryFileRelationship {
-	if o == nil || o.File == nil {
+	if o == nil || IsNil(o.File.Get()) {
 		var ret SoftwarerepositoryFileRelationship
 		return ret
 	}
-	return *o.File
+	return *o.File.Get()
 }
 
 // GetFileOk returns a tuple with the File field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *SoftwarerepositoryCachedImage) GetFileOk() (*SoftwarerepositoryFileRelationship, bool) {
-	if o == nil || o.File == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.File, true
+	return o.File.Get(), o.File.IsSet()
 }
 
 // HasFile returns a boolean if a field has been set.
 func (o *SoftwarerepositoryCachedImage) HasFile() bool {
-	if o != nil && o.File != nil {
+	if o != nil && o.File.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetFile gets a reference to the given SoftwarerepositoryFileRelationship and assigns it to the File field.
+// SetFile gets a reference to the given NullableSoftwarerepositoryFileRelationship and assigns it to the File field.
 func (o *SoftwarerepositoryCachedImage) SetFile(v SoftwarerepositoryFileRelationship) {
-	o.File = &v
+	o.File.Set(&v)
 }
 
-// GetNetworkElement returns the NetworkElement field value if set, zero value otherwise.
+// SetFileNil sets the value for File to be an explicit nil
+func (o *SoftwarerepositoryCachedImage) SetFileNil() {
+	o.File.Set(nil)
+}
+
+// UnsetFile ensures that no value is present for File, not even an explicit nil
+func (o *SoftwarerepositoryCachedImage) UnsetFile() {
+	o.File.Unset()
+}
+
+// GetNetworkElement returns the NetworkElement field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *SoftwarerepositoryCachedImage) GetNetworkElement() NetworkElementRelationship {
-	if o == nil || o.NetworkElement == nil {
+	if o == nil || IsNil(o.NetworkElement.Get()) {
 		var ret NetworkElementRelationship
 		return ret
 	}
-	return *o.NetworkElement
+	return *o.NetworkElement.Get()
 }
 
 // GetNetworkElementOk returns a tuple with the NetworkElement field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *SoftwarerepositoryCachedImage) GetNetworkElementOk() (*NetworkElementRelationship, bool) {
-	if o == nil || o.NetworkElement == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.NetworkElement, true
+	return o.NetworkElement.Get(), o.NetworkElement.IsSet()
 }
 
 // HasNetworkElement returns a boolean if a field has been set.
 func (o *SoftwarerepositoryCachedImage) HasNetworkElement() bool {
-	if o != nil && o.NetworkElement != nil {
+	if o != nil && o.NetworkElement.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetNetworkElement gets a reference to the given NetworkElementRelationship and assigns it to the NetworkElement field.
+// SetNetworkElement gets a reference to the given NullableNetworkElementRelationship and assigns it to the NetworkElement field.
 func (o *SoftwarerepositoryCachedImage) SetNetworkElement(v NetworkElementRelationship) {
-	o.NetworkElement = &v
+	o.NetworkElement.Set(&v)
+}
+
+// SetNetworkElementNil sets the value for NetworkElement to be an explicit nil
+func (o *SoftwarerepositoryCachedImage) SetNetworkElementNil() {
+	o.NetworkElement.Set(nil)
+}
+
+// UnsetNetworkElement ensures that no value is present for NetworkElement, not even an explicit nil
+func (o *SoftwarerepositoryCachedImage) UnsetNetworkElement() {
+	o.NetworkElement.Unset()
 }
 
 func (o SoftwarerepositoryCachedImage) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o SoftwarerepositoryCachedImage) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedConnectorDownloadStatus, errConnectorDownloadStatus := json.Marshal(o.ConnectorDownloadStatus)
 	if errConnectorDownloadStatus != nil {
-		return []byte{}, errConnectorDownloadStatus
+		return map[string]interface{}{}, errConnectorDownloadStatus
 	}
 	errConnectorDownloadStatus = json.Unmarshal([]byte(serializedConnectorDownloadStatus), &toSerialize)
 	if errConnectorDownloadStatus != nil {
-		return []byte{}, errConnectorDownloadStatus
+		return map[string]interface{}{}, errConnectorDownloadStatus
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Action != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Action) {
 		toSerialize["Action"] = o.Action
 	}
-	if o.CacheState != nil {
+	if !IsNil(o.CacheState) {
 		toSerialize["CacheState"] = o.CacheState
 	}
-	if o.CachedTime != nil {
+	if !IsNil(o.CachedTime) {
 		toSerialize["CachedTime"] = o.CachedTime
 	}
-	if o.LastAccessTime != nil {
+	if !IsNil(o.LastAccessTime) {
 		toSerialize["LastAccessTime"] = o.LastAccessTime
 	}
-	if o.Md5sum != nil {
+	if !IsNil(o.Md5sum) {
 		toSerialize["Md5sum"] = o.Md5sum
 	}
-	if o.OriginalSha512sum != nil {
+	if !IsNil(o.OriginalSha512sum) {
 		toSerialize["OriginalSha512sum"] = o.OriginalSha512sum
 	}
-	if o.Path != nil {
+	if !IsNil(o.Path) {
 		toSerialize["Path"] = o.Path
 	}
 	if o.RegisteredWorkflows != nil {
 		toSerialize["RegisteredWorkflows"] = o.RegisteredWorkflows
 	}
-	if o.UsedCount != nil {
+	if !IsNil(o.UsedCount) {
 		toSerialize["UsedCount"] = o.UsedCount
 	}
-	if o.File != nil {
-		toSerialize["File"] = o.File
+	if o.File.IsSet() {
+		toSerialize["File"] = o.File.Get()
 	}
-	if o.NetworkElement != nil {
-		toSerialize["NetworkElement"] = o.NetworkElement
+	if o.NetworkElement.IsSet() {
+		toSerialize["NetworkElement"] = o.NetworkElement.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *SoftwarerepositoryCachedImage) UnmarshalJSON(bytes []byte) (err error) {
+func (o *SoftwarerepositoryCachedImage) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type SoftwarerepositoryCachedImageWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -556,14 +608,14 @@ func (o *SoftwarerepositoryCachedImage) UnmarshalJSON(bytes []byte) (err error) 
 		Path                *string  `json:"Path,omitempty"`
 		RegisteredWorkflows []string `json:"RegisteredWorkflows,omitempty"`
 		// The number of times this file has been used to copy or upgrade or install actions. Used by the cache monitoring process to determine the files to be evicted from the cache.
-		UsedCount      *int64                              `json:"UsedCount,omitempty"`
-		File           *SoftwarerepositoryFileRelationship `json:"File,omitempty"`
-		NetworkElement *NetworkElementRelationship         `json:"NetworkElement,omitempty"`
+		UsedCount      *int64                                     `json:"UsedCount,omitempty"`
+		File           NullableSoftwarerepositoryFileRelationship `json:"File,omitempty"`
+		NetworkElement NullableNetworkElementRelationship         `json:"NetworkElement,omitempty"`
 	}
 
 	varSoftwarerepositoryCachedImageWithoutEmbeddedStruct := SoftwarerepositoryCachedImageWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varSoftwarerepositoryCachedImageWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varSoftwarerepositoryCachedImageWithoutEmbeddedStruct)
 	if err == nil {
 		varSoftwarerepositoryCachedImage := _SoftwarerepositoryCachedImage{}
 		varSoftwarerepositoryCachedImage.ClassId = varSoftwarerepositoryCachedImageWithoutEmbeddedStruct.ClassId
@@ -586,7 +638,7 @@ func (o *SoftwarerepositoryCachedImage) UnmarshalJSON(bytes []byte) (err error) 
 
 	varSoftwarerepositoryCachedImage := _SoftwarerepositoryCachedImage{}
 
-	err = json.Unmarshal(bytes, &varSoftwarerepositoryCachedImage)
+	err = json.Unmarshal(data, &varSoftwarerepositoryCachedImage)
 	if err == nil {
 		o.ConnectorDownloadStatus = varSoftwarerepositoryCachedImage.ConnectorDownloadStatus
 	} else {
@@ -595,7 +647,7 @@ func (o *SoftwarerepositoryCachedImage) UnmarshalJSON(bytes []byte) (err error) 
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Action")

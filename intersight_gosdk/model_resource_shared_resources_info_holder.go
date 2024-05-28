@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the ResourceSharedResourcesInfoHolder type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ResourceSharedResourcesInfoHolder{}
 
 // ResourceSharedResourcesInfoHolder For each MO, the shared config resource relationships from a permission resource are maintained by SharedResourcesInfoHolder. For example, let orgCommon is shared with orgRegular. A user having Server Administrator privilege on orgRegular and a minimum of READ access on sol policy API for orgCommon will be able to create a server profile in orgRegular by referencing an sol policy of orgCommon.
 type ResourceSharedResourcesInfoHolder struct {
@@ -23,14 +27,14 @@ type ResourceSharedResourcesInfoHolder struct {
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
-	ObjectType string                  `json:"ObjectType"`
-	Account    *IamAccountRelationship `json:"Account,omitempty"`
+	ObjectType string                         `json:"ObjectType"`
+	Account    NullableIamAccountRelationship `json:"Account,omitempty"`
 	// An array of relationships to moBaseMo resources.
-	PeerObjects          []MoBaseMoRelationship      `json:"PeerObjects,omitempty"`
-	SharedResource       *MoBaseMoRelationship       `json:"SharedResource,omitempty"`
-	SharedWithResource   *MoBaseMoRelationship       `json:"SharedWithResource,omitempty"`
-	SharingRule          *IamSharingRuleRelationship `json:"SharingRule,omitempty"`
-	SourceObject         *MoBaseMoRelationship       `json:"SourceObject,omitempty"`
+	PeerObjects          []MoBaseMoRelationship             `json:"PeerObjects,omitempty"`
+	SharedResource       NullableMoBaseMoRelationship       `json:"SharedResource,omitempty"`
+	SharedWithResource   NullableMoBaseMoRelationship       `json:"SharedWithResource,omitempty"`
+	SharingRule          NullableIamSharingRuleRelationship `json:"SharingRule,omitempty"`
+	SourceObject         NullableMoBaseMoRelationship       `json:"SourceObject,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -107,36 +111,47 @@ func (o *ResourceSharedResourcesInfoHolder) SetObjectType(v string) {
 	o.ObjectType = v
 }
 
-// GetAccount returns the Account field value if set, zero value otherwise.
+// GetAccount returns the Account field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ResourceSharedResourcesInfoHolder) GetAccount() IamAccountRelationship {
-	if o == nil || o.Account == nil {
+	if o == nil || IsNil(o.Account.Get()) {
 		var ret IamAccountRelationship
 		return ret
 	}
-	return *o.Account
+	return *o.Account.Get()
 }
 
 // GetAccountOk returns a tuple with the Account field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ResourceSharedResourcesInfoHolder) GetAccountOk() (*IamAccountRelationship, bool) {
-	if o == nil || o.Account == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Account, true
+	return o.Account.Get(), o.Account.IsSet()
 }
 
 // HasAccount returns a boolean if a field has been set.
 func (o *ResourceSharedResourcesInfoHolder) HasAccount() bool {
-	if o != nil && o.Account != nil {
+	if o != nil && o.Account.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetAccount gets a reference to the given IamAccountRelationship and assigns it to the Account field.
+// SetAccount gets a reference to the given NullableIamAccountRelationship and assigns it to the Account field.
 func (o *ResourceSharedResourcesInfoHolder) SetAccount(v IamAccountRelationship) {
-	o.Account = &v
+	o.Account.Set(&v)
+}
+
+// SetAccountNil sets the value for Account to be an explicit nil
+func (o *ResourceSharedResourcesInfoHolder) SetAccountNil() {
+	o.Account.Set(nil)
+}
+
+// UnsetAccount ensures that no value is present for Account, not even an explicit nil
+func (o *ResourceSharedResourcesInfoHolder) UnsetAccount() {
+	o.Account.Unset()
 }
 
 // GetPeerObjects returns the PeerObjects field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -152,7 +167,7 @@ func (o *ResourceSharedResourcesInfoHolder) GetPeerObjects() []MoBaseMoRelations
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ResourceSharedResourcesInfoHolder) GetPeerObjectsOk() ([]MoBaseMoRelationship, bool) {
-	if o == nil || o.PeerObjects == nil {
+	if o == nil || IsNil(o.PeerObjects) {
 		return nil, false
 	}
 	return o.PeerObjects, true
@@ -160,7 +175,7 @@ func (o *ResourceSharedResourcesInfoHolder) GetPeerObjectsOk() ([]MoBaseMoRelati
 
 // HasPeerObjects returns a boolean if a field has been set.
 func (o *ResourceSharedResourcesInfoHolder) HasPeerObjects() bool {
-	if o != nil && o.PeerObjects != nil {
+	if o != nil && IsNil(o.PeerObjects) {
 		return true
 	}
 
@@ -172,194 +187,264 @@ func (o *ResourceSharedResourcesInfoHolder) SetPeerObjects(v []MoBaseMoRelations
 	o.PeerObjects = v
 }
 
-// GetSharedResource returns the SharedResource field value if set, zero value otherwise.
+// GetSharedResource returns the SharedResource field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ResourceSharedResourcesInfoHolder) GetSharedResource() MoBaseMoRelationship {
-	if o == nil || o.SharedResource == nil {
+	if o == nil || IsNil(o.SharedResource.Get()) {
 		var ret MoBaseMoRelationship
 		return ret
 	}
-	return *o.SharedResource
+	return *o.SharedResource.Get()
 }
 
 // GetSharedResourceOk returns a tuple with the SharedResource field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ResourceSharedResourcesInfoHolder) GetSharedResourceOk() (*MoBaseMoRelationship, bool) {
-	if o == nil || o.SharedResource == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.SharedResource, true
+	return o.SharedResource.Get(), o.SharedResource.IsSet()
 }
 
 // HasSharedResource returns a boolean if a field has been set.
 func (o *ResourceSharedResourcesInfoHolder) HasSharedResource() bool {
-	if o != nil && o.SharedResource != nil {
+	if o != nil && o.SharedResource.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetSharedResource gets a reference to the given MoBaseMoRelationship and assigns it to the SharedResource field.
+// SetSharedResource gets a reference to the given NullableMoBaseMoRelationship and assigns it to the SharedResource field.
 func (o *ResourceSharedResourcesInfoHolder) SetSharedResource(v MoBaseMoRelationship) {
-	o.SharedResource = &v
+	o.SharedResource.Set(&v)
 }
 
-// GetSharedWithResource returns the SharedWithResource field value if set, zero value otherwise.
+// SetSharedResourceNil sets the value for SharedResource to be an explicit nil
+func (o *ResourceSharedResourcesInfoHolder) SetSharedResourceNil() {
+	o.SharedResource.Set(nil)
+}
+
+// UnsetSharedResource ensures that no value is present for SharedResource, not even an explicit nil
+func (o *ResourceSharedResourcesInfoHolder) UnsetSharedResource() {
+	o.SharedResource.Unset()
+}
+
+// GetSharedWithResource returns the SharedWithResource field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ResourceSharedResourcesInfoHolder) GetSharedWithResource() MoBaseMoRelationship {
-	if o == nil || o.SharedWithResource == nil {
+	if o == nil || IsNil(o.SharedWithResource.Get()) {
 		var ret MoBaseMoRelationship
 		return ret
 	}
-	return *o.SharedWithResource
+	return *o.SharedWithResource.Get()
 }
 
 // GetSharedWithResourceOk returns a tuple with the SharedWithResource field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ResourceSharedResourcesInfoHolder) GetSharedWithResourceOk() (*MoBaseMoRelationship, bool) {
-	if o == nil || o.SharedWithResource == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.SharedWithResource, true
+	return o.SharedWithResource.Get(), o.SharedWithResource.IsSet()
 }
 
 // HasSharedWithResource returns a boolean if a field has been set.
 func (o *ResourceSharedResourcesInfoHolder) HasSharedWithResource() bool {
-	if o != nil && o.SharedWithResource != nil {
+	if o != nil && o.SharedWithResource.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetSharedWithResource gets a reference to the given MoBaseMoRelationship and assigns it to the SharedWithResource field.
+// SetSharedWithResource gets a reference to the given NullableMoBaseMoRelationship and assigns it to the SharedWithResource field.
 func (o *ResourceSharedResourcesInfoHolder) SetSharedWithResource(v MoBaseMoRelationship) {
-	o.SharedWithResource = &v
+	o.SharedWithResource.Set(&v)
 }
 
-// GetSharingRule returns the SharingRule field value if set, zero value otherwise.
+// SetSharedWithResourceNil sets the value for SharedWithResource to be an explicit nil
+func (o *ResourceSharedResourcesInfoHolder) SetSharedWithResourceNil() {
+	o.SharedWithResource.Set(nil)
+}
+
+// UnsetSharedWithResource ensures that no value is present for SharedWithResource, not even an explicit nil
+func (o *ResourceSharedResourcesInfoHolder) UnsetSharedWithResource() {
+	o.SharedWithResource.Unset()
+}
+
+// GetSharingRule returns the SharingRule field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ResourceSharedResourcesInfoHolder) GetSharingRule() IamSharingRuleRelationship {
-	if o == nil || o.SharingRule == nil {
+	if o == nil || IsNil(o.SharingRule.Get()) {
 		var ret IamSharingRuleRelationship
 		return ret
 	}
-	return *o.SharingRule
+	return *o.SharingRule.Get()
 }
 
 // GetSharingRuleOk returns a tuple with the SharingRule field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ResourceSharedResourcesInfoHolder) GetSharingRuleOk() (*IamSharingRuleRelationship, bool) {
-	if o == nil || o.SharingRule == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.SharingRule, true
+	return o.SharingRule.Get(), o.SharingRule.IsSet()
 }
 
 // HasSharingRule returns a boolean if a field has been set.
 func (o *ResourceSharedResourcesInfoHolder) HasSharingRule() bool {
-	if o != nil && o.SharingRule != nil {
+	if o != nil && o.SharingRule.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetSharingRule gets a reference to the given IamSharingRuleRelationship and assigns it to the SharingRule field.
+// SetSharingRule gets a reference to the given NullableIamSharingRuleRelationship and assigns it to the SharingRule field.
 func (o *ResourceSharedResourcesInfoHolder) SetSharingRule(v IamSharingRuleRelationship) {
-	o.SharingRule = &v
+	o.SharingRule.Set(&v)
 }
 
-// GetSourceObject returns the SourceObject field value if set, zero value otherwise.
+// SetSharingRuleNil sets the value for SharingRule to be an explicit nil
+func (o *ResourceSharedResourcesInfoHolder) SetSharingRuleNil() {
+	o.SharingRule.Set(nil)
+}
+
+// UnsetSharingRule ensures that no value is present for SharingRule, not even an explicit nil
+func (o *ResourceSharedResourcesInfoHolder) UnsetSharingRule() {
+	o.SharingRule.Unset()
+}
+
+// GetSourceObject returns the SourceObject field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ResourceSharedResourcesInfoHolder) GetSourceObject() MoBaseMoRelationship {
-	if o == nil || o.SourceObject == nil {
+	if o == nil || IsNil(o.SourceObject.Get()) {
 		var ret MoBaseMoRelationship
 		return ret
 	}
-	return *o.SourceObject
+	return *o.SourceObject.Get()
 }
 
 // GetSourceObjectOk returns a tuple with the SourceObject field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ResourceSharedResourcesInfoHolder) GetSourceObjectOk() (*MoBaseMoRelationship, bool) {
-	if o == nil || o.SourceObject == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.SourceObject, true
+	return o.SourceObject.Get(), o.SourceObject.IsSet()
 }
 
 // HasSourceObject returns a boolean if a field has been set.
 func (o *ResourceSharedResourcesInfoHolder) HasSourceObject() bool {
-	if o != nil && o.SourceObject != nil {
+	if o != nil && o.SourceObject.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetSourceObject gets a reference to the given MoBaseMoRelationship and assigns it to the SourceObject field.
+// SetSourceObject gets a reference to the given NullableMoBaseMoRelationship and assigns it to the SourceObject field.
 func (o *ResourceSharedResourcesInfoHolder) SetSourceObject(v MoBaseMoRelationship) {
-	o.SourceObject = &v
+	o.SourceObject.Set(&v)
+}
+
+// SetSourceObjectNil sets the value for SourceObject to be an explicit nil
+func (o *ResourceSharedResourcesInfoHolder) SetSourceObjectNil() {
+	o.SourceObject.Set(nil)
+}
+
+// UnsetSourceObject ensures that no value is present for SourceObject, not even an explicit nil
+func (o *ResourceSharedResourcesInfoHolder) UnsetSourceObject() {
+	o.SourceObject.Unset()
 }
 
 func (o ResourceSharedResourcesInfoHolder) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o ResourceSharedResourcesInfoHolder) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Account != nil {
-		toSerialize["Account"] = o.Account
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if o.Account.IsSet() {
+		toSerialize["Account"] = o.Account.Get()
 	}
 	if o.PeerObjects != nil {
 		toSerialize["PeerObjects"] = o.PeerObjects
 	}
-	if o.SharedResource != nil {
-		toSerialize["SharedResource"] = o.SharedResource
+	if o.SharedResource.IsSet() {
+		toSerialize["SharedResource"] = o.SharedResource.Get()
 	}
-	if o.SharedWithResource != nil {
-		toSerialize["SharedWithResource"] = o.SharedWithResource
+	if o.SharedWithResource.IsSet() {
+		toSerialize["SharedWithResource"] = o.SharedWithResource.Get()
 	}
-	if o.SharingRule != nil {
-		toSerialize["SharingRule"] = o.SharingRule
+	if o.SharingRule.IsSet() {
+		toSerialize["SharingRule"] = o.SharingRule.Get()
 	}
-	if o.SourceObject != nil {
-		toSerialize["SourceObject"] = o.SourceObject
+	if o.SourceObject.IsSet() {
+		toSerialize["SourceObject"] = o.SourceObject.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *ResourceSharedResourcesInfoHolder) UnmarshalJSON(bytes []byte) (err error) {
+func (o *ResourceSharedResourcesInfoHolder) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type ResourceSharedResourcesInfoHolderWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
-		ObjectType string                  `json:"ObjectType"`
-		Account    *IamAccountRelationship `json:"Account,omitempty"`
+		ObjectType string                         `json:"ObjectType"`
+		Account    NullableIamAccountRelationship `json:"Account,omitempty"`
 		// An array of relationships to moBaseMo resources.
-		PeerObjects        []MoBaseMoRelationship      `json:"PeerObjects,omitempty"`
-		SharedResource     *MoBaseMoRelationship       `json:"SharedResource,omitempty"`
-		SharedWithResource *MoBaseMoRelationship       `json:"SharedWithResource,omitempty"`
-		SharingRule        *IamSharingRuleRelationship `json:"SharingRule,omitempty"`
-		SourceObject       *MoBaseMoRelationship       `json:"SourceObject,omitempty"`
+		PeerObjects        []MoBaseMoRelationship             `json:"PeerObjects,omitempty"`
+		SharedResource     NullableMoBaseMoRelationship       `json:"SharedResource,omitempty"`
+		SharedWithResource NullableMoBaseMoRelationship       `json:"SharedWithResource,omitempty"`
+		SharingRule        NullableIamSharingRuleRelationship `json:"SharingRule,omitempty"`
+		SourceObject       NullableMoBaseMoRelationship       `json:"SourceObject,omitempty"`
 	}
 
 	varResourceSharedResourcesInfoHolderWithoutEmbeddedStruct := ResourceSharedResourcesInfoHolderWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varResourceSharedResourcesInfoHolderWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varResourceSharedResourcesInfoHolderWithoutEmbeddedStruct)
 	if err == nil {
 		varResourceSharedResourcesInfoHolder := _ResourceSharedResourcesInfoHolder{}
 		varResourceSharedResourcesInfoHolder.ClassId = varResourceSharedResourcesInfoHolderWithoutEmbeddedStruct.ClassId
@@ -377,7 +462,7 @@ func (o *ResourceSharedResourcesInfoHolder) UnmarshalJSON(bytes []byte) (err err
 
 	varResourceSharedResourcesInfoHolder := _ResourceSharedResourcesInfoHolder{}
 
-	err = json.Unmarshal(bytes, &varResourceSharedResourcesInfoHolder)
+	err = json.Unmarshal(data, &varResourceSharedResourcesInfoHolder)
 	if err == nil {
 		o.MoBaseMo = varResourceSharedResourcesInfoHolder.MoBaseMo
 	} else {
@@ -386,7 +471,7 @@ func (o *ResourceSharedResourcesInfoHolder) UnmarshalJSON(bytes []byte) (err err
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Account")

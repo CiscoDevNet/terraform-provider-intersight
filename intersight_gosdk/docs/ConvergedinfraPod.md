@@ -9,10 +9,10 @@ Name | Type | Description | Notes
 **DeploymentType** | Pointer to **string** | The deployment type for this integrated system. * &#x60;FlexPodInfra&#x60; - The deployment type for a pod is of Infrastructure. * &#x60;FlexPodNG&#x60; - The deployment type for a pod is of Nextgen type. | [optional] [readonly] [default to "FlexPodInfra"]
 **InteropStatus** | Pointer to **string** | The interoperability status for this solution pod. * &#x60;NotEvaluated&#x60; - The interoperability compliance for the component has not be checked. * &#x60;Approved&#x60; - The component is valid as per the interoperability compliance check. * &#x60;NotApproved&#x60; - The component is not valid as per the interoperability compliance check. * &#x60;Incomplete&#x60; - The interoperability compliance check could not be completed for the component due to incomplete data. | [optional] [readonly] [default to "NotEvaluated"]
 **Summary** | Pointer to [**ConvergedinfraPodSummary**](ConvergedinfraPodSummary.md) |  | [optional] 
-**Organization** | Pointer to [**OrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
-**PodCompliance** | Pointer to [**ConvergedinfraPodComplianceInfoRelationship**](ConvergedinfraPodComplianceInfoRelationship.md) |  | [optional] 
-**PodResourceGroup** | Pointer to [**ResourceGroupRelationship**](ResourceGroupRelationship.md) |  | [optional] 
-**ServiceItemInstance** | Pointer to [**WorkflowServiceItemInstanceRelationship**](WorkflowServiceItemInstanceRelationship.md) |  | [optional] 
+**Organization** | Pointer to [**NullableOrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
+**PodCompliance** | Pointer to [**NullableConvergedinfraPodComplianceInfoRelationship**](ConvergedinfraPodComplianceInfoRelationship.md) |  | [optional] 
+**PodResourceGroup** | Pointer to [**NullableResourceGroupRelationship**](ResourceGroupRelationship.md) |  | [optional] 
+**ServiceItemInstance** | Pointer to [**NullableWorkflowServiceItemInstanceRelationship**](WorkflowServiceItemInstanceRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -173,6 +173,16 @@ SetOrganization sets Organization field to given value.
 
 HasOrganization returns a boolean if a field has been set.
 
+### SetOrganizationNil
+
+`func (o *ConvergedinfraPod) SetOrganizationNil(b bool)`
+
+ SetOrganizationNil sets the value for Organization to be an explicit nil
+
+### UnsetOrganization
+`func (o *ConvergedinfraPod) UnsetOrganization()`
+
+UnsetOrganization ensures that no value is present for Organization, not even an explicit nil
 ### GetPodCompliance
 
 `func (o *ConvergedinfraPod) GetPodCompliance() ConvergedinfraPodComplianceInfoRelationship`
@@ -198,6 +208,16 @@ SetPodCompliance sets PodCompliance field to given value.
 
 HasPodCompliance returns a boolean if a field has been set.
 
+### SetPodComplianceNil
+
+`func (o *ConvergedinfraPod) SetPodComplianceNil(b bool)`
+
+ SetPodComplianceNil sets the value for PodCompliance to be an explicit nil
+
+### UnsetPodCompliance
+`func (o *ConvergedinfraPod) UnsetPodCompliance()`
+
+UnsetPodCompliance ensures that no value is present for PodCompliance, not even an explicit nil
 ### GetPodResourceGroup
 
 `func (o *ConvergedinfraPod) GetPodResourceGroup() ResourceGroupRelationship`
@@ -223,6 +243,16 @@ SetPodResourceGroup sets PodResourceGroup field to given value.
 
 HasPodResourceGroup returns a boolean if a field has been set.
 
+### SetPodResourceGroupNil
+
+`func (o *ConvergedinfraPod) SetPodResourceGroupNil(b bool)`
+
+ SetPodResourceGroupNil sets the value for PodResourceGroup to be an explicit nil
+
+### UnsetPodResourceGroup
+`func (o *ConvergedinfraPod) UnsetPodResourceGroup()`
+
+UnsetPodResourceGroup ensures that no value is present for PodResourceGroup, not even an explicit nil
 ### GetServiceItemInstance
 
 `func (o *ConvergedinfraPod) GetServiceItemInstance() WorkflowServiceItemInstanceRelationship`
@@ -248,6 +278,16 @@ SetServiceItemInstance sets ServiceItemInstance field to given value.
 
 HasServiceItemInstance returns a boolean if a field has been set.
 
+### SetServiceItemInstanceNil
+
+`func (o *ConvergedinfraPod) SetServiceItemInstanceNil(b bool)`
+
+ SetServiceItemInstanceNil sets the value for ServiceItemInstance to be an explicit nil
+
+### UnsetServiceItemInstance
+`func (o *ConvergedinfraPod) UnsetServiceItemInstance()`
+
+UnsetServiceItemInstance ensures that no value is present for ServiceItemInstance, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the FabricSwitchClusterProfile type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &FabricSwitchClusterProfile{}
 
 // FabricSwitchClusterProfile This specifies the configuration policies for a cluster of switches.
 type FabricSwitchClusterProfile struct {
@@ -31,8 +35,8 @@ type FabricSwitchClusterProfile struct {
 	// Values indicating the switches on which the cluster profile has been deployed. 0 indicates that the profile has not been deployed on any switch, 1 indicates that the profile has been deployed on A, 2 indicates that it is deployed on B and 3 indicates that it is deployed on both. * `None` - Switch profiles not deployed on either of the fabric interconnects. * `A` - Switch profiles deployed only on fabric interconnect A. * `B` - Switch profiles deployed only on fabric interconnect B. * `AB` - Switch profiles deployed on both fabric interconnect A and B.
 	DeployedSwitches *string `json:"DeployedSwitches,omitempty"`
 	// The user defined label assigned to the switch profile.
-	UserLabel    *string                               `json:"UserLabel,omitempty"`
-	Organization *OrganizationOrganizationRelationship `json:"Organization,omitempty"`
+	UserLabel    *string                                      `json:"UserLabel,omitempty"`
+	Organization NullableOrganizationOrganizationRelationship `json:"Organization,omitempty"`
 	// An array of relationships to fabricSwitchProfile resources.
 	SwitchProfiles       []FabricSwitchProfileRelationship `json:"SwitchProfiles,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -126,7 +130,7 @@ func (o *FabricSwitchClusterProfile) GetClusterAssignments() []FabricClusterAssi
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *FabricSwitchClusterProfile) GetClusterAssignmentsOk() ([]FabricClusterAssignment, bool) {
-	if o == nil || o.ClusterAssignments == nil {
+	if o == nil || IsNil(o.ClusterAssignments) {
 		return nil, false
 	}
 	return o.ClusterAssignments, true
@@ -134,7 +138,7 @@ func (o *FabricSwitchClusterProfile) GetClusterAssignmentsOk() ([]FabricClusterA
 
 // HasClusterAssignments returns a boolean if a field has been set.
 func (o *FabricSwitchClusterProfile) HasClusterAssignments() bool {
-	if o != nil && o.ClusterAssignments != nil {
+	if o != nil && IsNil(o.ClusterAssignments) {
 		return true
 	}
 
@@ -148,7 +152,7 @@ func (o *FabricSwitchClusterProfile) SetClusterAssignments(v []FabricClusterAssi
 
 // GetConfigContext returns the ConfigContext field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *FabricSwitchClusterProfile) GetConfigContext() PolicyConfigContext {
-	if o == nil || o.ConfigContext.Get() == nil {
+	if o == nil || IsNil(o.ConfigContext.Get()) {
 		var ret PolicyConfigContext
 		return ret
 	}
@@ -191,7 +195,7 @@ func (o *FabricSwitchClusterProfile) UnsetConfigContext() {
 
 // GetDeployStatus returns the DeployStatus field value if set, zero value otherwise.
 func (o *FabricSwitchClusterProfile) GetDeployStatus() string {
-	if o == nil || o.DeployStatus == nil {
+	if o == nil || IsNil(o.DeployStatus) {
 		var ret string
 		return ret
 	}
@@ -201,7 +205,7 @@ func (o *FabricSwitchClusterProfile) GetDeployStatus() string {
 // GetDeployStatusOk returns a tuple with the DeployStatus field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FabricSwitchClusterProfile) GetDeployStatusOk() (*string, bool) {
-	if o == nil || o.DeployStatus == nil {
+	if o == nil || IsNil(o.DeployStatus) {
 		return nil, false
 	}
 	return o.DeployStatus, true
@@ -209,7 +213,7 @@ func (o *FabricSwitchClusterProfile) GetDeployStatusOk() (*string, bool) {
 
 // HasDeployStatus returns a boolean if a field has been set.
 func (o *FabricSwitchClusterProfile) HasDeployStatus() bool {
-	if o != nil && o.DeployStatus != nil {
+	if o != nil && !IsNil(o.DeployStatus) {
 		return true
 	}
 
@@ -223,7 +227,7 @@ func (o *FabricSwitchClusterProfile) SetDeployStatus(v string) {
 
 // GetDeployedSwitches returns the DeployedSwitches field value if set, zero value otherwise.
 func (o *FabricSwitchClusterProfile) GetDeployedSwitches() string {
-	if o == nil || o.DeployedSwitches == nil {
+	if o == nil || IsNil(o.DeployedSwitches) {
 		var ret string
 		return ret
 	}
@@ -233,7 +237,7 @@ func (o *FabricSwitchClusterProfile) GetDeployedSwitches() string {
 // GetDeployedSwitchesOk returns a tuple with the DeployedSwitches field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FabricSwitchClusterProfile) GetDeployedSwitchesOk() (*string, bool) {
-	if o == nil || o.DeployedSwitches == nil {
+	if o == nil || IsNil(o.DeployedSwitches) {
 		return nil, false
 	}
 	return o.DeployedSwitches, true
@@ -241,7 +245,7 @@ func (o *FabricSwitchClusterProfile) GetDeployedSwitchesOk() (*string, bool) {
 
 // HasDeployedSwitches returns a boolean if a field has been set.
 func (o *FabricSwitchClusterProfile) HasDeployedSwitches() bool {
-	if o != nil && o.DeployedSwitches != nil {
+	if o != nil && !IsNil(o.DeployedSwitches) {
 		return true
 	}
 
@@ -255,7 +259,7 @@ func (o *FabricSwitchClusterProfile) SetDeployedSwitches(v string) {
 
 // GetUserLabel returns the UserLabel field value if set, zero value otherwise.
 func (o *FabricSwitchClusterProfile) GetUserLabel() string {
-	if o == nil || o.UserLabel == nil {
+	if o == nil || IsNil(o.UserLabel) {
 		var ret string
 		return ret
 	}
@@ -265,7 +269,7 @@ func (o *FabricSwitchClusterProfile) GetUserLabel() string {
 // GetUserLabelOk returns a tuple with the UserLabel field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FabricSwitchClusterProfile) GetUserLabelOk() (*string, bool) {
-	if o == nil || o.UserLabel == nil {
+	if o == nil || IsNil(o.UserLabel) {
 		return nil, false
 	}
 	return o.UserLabel, true
@@ -273,7 +277,7 @@ func (o *FabricSwitchClusterProfile) GetUserLabelOk() (*string, bool) {
 
 // HasUserLabel returns a boolean if a field has been set.
 func (o *FabricSwitchClusterProfile) HasUserLabel() bool {
-	if o != nil && o.UserLabel != nil {
+	if o != nil && !IsNil(o.UserLabel) {
 		return true
 	}
 
@@ -285,36 +289,47 @@ func (o *FabricSwitchClusterProfile) SetUserLabel(v string) {
 	o.UserLabel = &v
 }
 
-// GetOrganization returns the Organization field value if set, zero value otherwise.
+// GetOrganization returns the Organization field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *FabricSwitchClusterProfile) GetOrganization() OrganizationOrganizationRelationship {
-	if o == nil || o.Organization == nil {
+	if o == nil || IsNil(o.Organization.Get()) {
 		var ret OrganizationOrganizationRelationship
 		return ret
 	}
-	return *o.Organization
+	return *o.Organization.Get()
 }
 
 // GetOrganizationOk returns a tuple with the Organization field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *FabricSwitchClusterProfile) GetOrganizationOk() (*OrganizationOrganizationRelationship, bool) {
-	if o == nil || o.Organization == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Organization, true
+	return o.Organization.Get(), o.Organization.IsSet()
 }
 
 // HasOrganization returns a boolean if a field has been set.
 func (o *FabricSwitchClusterProfile) HasOrganization() bool {
-	if o != nil && o.Organization != nil {
+	if o != nil && o.Organization.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetOrganization gets a reference to the given OrganizationOrganizationRelationship and assigns it to the Organization field.
+// SetOrganization gets a reference to the given NullableOrganizationOrganizationRelationship and assigns it to the Organization field.
 func (o *FabricSwitchClusterProfile) SetOrganization(v OrganizationOrganizationRelationship) {
-	o.Organization = &v
+	o.Organization.Set(&v)
+}
+
+// SetOrganizationNil sets the value for Organization to be an explicit nil
+func (o *FabricSwitchClusterProfile) SetOrganizationNil() {
+	o.Organization.Set(nil)
+}
+
+// UnsetOrganization ensures that no value is present for Organization, not even an explicit nil
+func (o *FabricSwitchClusterProfile) UnsetOrganization() {
+	o.Organization.Unset()
 }
 
 // GetSwitchProfiles returns the SwitchProfiles field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -330,7 +345,7 @@ func (o *FabricSwitchClusterProfile) GetSwitchProfiles() []FabricSwitchProfileRe
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *FabricSwitchClusterProfile) GetSwitchProfilesOk() ([]FabricSwitchProfileRelationship, bool) {
-	if o == nil || o.SwitchProfiles == nil {
+	if o == nil || IsNil(o.SwitchProfiles) {
 		return nil, false
 	}
 	return o.SwitchProfiles, true
@@ -338,7 +353,7 @@ func (o *FabricSwitchClusterProfile) GetSwitchProfilesOk() ([]FabricSwitchProfil
 
 // HasSwitchProfiles returns a boolean if a field has been set.
 func (o *FabricSwitchClusterProfile) HasSwitchProfiles() bool {
-	if o != nil && o.SwitchProfiles != nil {
+	if o != nil && IsNil(o.SwitchProfiles) {
 		return true
 	}
 
@@ -351,38 +366,42 @@ func (o *FabricSwitchClusterProfile) SetSwitchProfiles(v []FabricSwitchProfileRe
 }
 
 func (o FabricSwitchClusterProfile) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o FabricSwitchClusterProfile) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedFabricBaseClusterProfile, errFabricBaseClusterProfile := json.Marshal(o.FabricBaseClusterProfile)
 	if errFabricBaseClusterProfile != nil {
-		return []byte{}, errFabricBaseClusterProfile
+		return map[string]interface{}{}, errFabricBaseClusterProfile
 	}
 	errFabricBaseClusterProfile = json.Unmarshal([]byte(serializedFabricBaseClusterProfile), &toSerialize)
 	if errFabricBaseClusterProfile != nil {
-		return []byte{}, errFabricBaseClusterProfile
+		return map[string]interface{}{}, errFabricBaseClusterProfile
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
 	if o.ClusterAssignments != nil {
 		toSerialize["ClusterAssignments"] = o.ClusterAssignments
 	}
 	if o.ConfigContext.IsSet() {
 		toSerialize["ConfigContext"] = o.ConfigContext.Get()
 	}
-	if o.DeployStatus != nil {
+	if !IsNil(o.DeployStatus) {
 		toSerialize["DeployStatus"] = o.DeployStatus
 	}
-	if o.DeployedSwitches != nil {
+	if !IsNil(o.DeployedSwitches) {
 		toSerialize["DeployedSwitches"] = o.DeployedSwitches
 	}
-	if o.UserLabel != nil {
+	if !IsNil(o.UserLabel) {
 		toSerialize["UserLabel"] = o.UserLabel
 	}
-	if o.Organization != nil {
-		toSerialize["Organization"] = o.Organization
+	if o.Organization.IsSet() {
+		toSerialize["Organization"] = o.Organization.Get()
 	}
 	if o.SwitchProfiles != nil {
 		toSerialize["SwitchProfiles"] = o.SwitchProfiles
@@ -392,10 +411,32 @@ func (o FabricSwitchClusterProfile) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *FabricSwitchClusterProfile) UnmarshalJSON(bytes []byte) (err error) {
+func (o *FabricSwitchClusterProfile) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type FabricSwitchClusterProfileWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -408,15 +449,15 @@ func (o *FabricSwitchClusterProfile) UnmarshalJSON(bytes []byte) (err error) {
 		// Values indicating the switches on which the cluster profile has been deployed. 0 indicates that the profile has not been deployed on any switch, 1 indicates that the profile has been deployed on A, 2 indicates that it is deployed on B and 3 indicates that it is deployed on both. * `None` - Switch profiles not deployed on either of the fabric interconnects. * `A` - Switch profiles deployed only on fabric interconnect A. * `B` - Switch profiles deployed only on fabric interconnect B. * `AB` - Switch profiles deployed on both fabric interconnect A and B.
 		DeployedSwitches *string `json:"DeployedSwitches,omitempty"`
 		// The user defined label assigned to the switch profile.
-		UserLabel    *string                               `json:"UserLabel,omitempty"`
-		Organization *OrganizationOrganizationRelationship `json:"Organization,omitempty"`
+		UserLabel    *string                                      `json:"UserLabel,omitempty"`
+		Organization NullableOrganizationOrganizationRelationship `json:"Organization,omitempty"`
 		// An array of relationships to fabricSwitchProfile resources.
 		SwitchProfiles []FabricSwitchProfileRelationship `json:"SwitchProfiles,omitempty"`
 	}
 
 	varFabricSwitchClusterProfileWithoutEmbeddedStruct := FabricSwitchClusterProfileWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varFabricSwitchClusterProfileWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varFabricSwitchClusterProfileWithoutEmbeddedStruct)
 	if err == nil {
 		varFabricSwitchClusterProfile := _FabricSwitchClusterProfile{}
 		varFabricSwitchClusterProfile.ClassId = varFabricSwitchClusterProfileWithoutEmbeddedStruct.ClassId
@@ -435,7 +476,7 @@ func (o *FabricSwitchClusterProfile) UnmarshalJSON(bytes []byte) (err error) {
 
 	varFabricSwitchClusterProfile := _FabricSwitchClusterProfile{}
 
-	err = json.Unmarshal(bytes, &varFabricSwitchClusterProfile)
+	err = json.Unmarshal(data, &varFabricSwitchClusterProfile)
 	if err == nil {
 		o.FabricBaseClusterProfile = varFabricSwitchClusterProfile.FabricBaseClusterProfile
 	} else {
@@ -444,7 +485,7 @@ func (o *FabricSwitchClusterProfile) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "ClusterAssignments")

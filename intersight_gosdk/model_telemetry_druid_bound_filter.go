@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,7 +13,11 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 )
+
+// checks if the TelemetryDruidBoundFilter type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &TelemetryDruidBoundFilter{}
 
 // TelemetryDruidBoundFilter Bound filters can be used to filter on ranges of dimension values. It can be used for comparison filtering like greater than, less than, greater than or equal to, less than or equal to, and \"between\" (if both \"lower\" and \"upper\" are set). When the bound filter matches against numeric inputs, the string lower and upper bound values are best-effort coerced into a numeric value when using the \"numeric\" mode of ordering. The bound filter can only match against STRING (single and multi-valued), LONG, FLOAT, DOUBLE types. Use the newer range to match against ARRAY or COMPLEX types. Note that the bound filter matches null values if you don't specify a lower bound.
 type TelemetryDruidBoundFilter struct {
@@ -105,7 +109,7 @@ func (o *TelemetryDruidBoundFilter) SetDimension(v string) {
 
 // GetLower returns the Lower field value if set, zero value otherwise.
 func (o *TelemetryDruidBoundFilter) GetLower() string {
-	if o == nil || o.Lower == nil {
+	if o == nil || IsNil(o.Lower) {
 		var ret string
 		return ret
 	}
@@ -115,7 +119,7 @@ func (o *TelemetryDruidBoundFilter) GetLower() string {
 // GetLowerOk returns a tuple with the Lower field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TelemetryDruidBoundFilter) GetLowerOk() (*string, bool) {
-	if o == nil || o.Lower == nil {
+	if o == nil || IsNil(o.Lower) {
 		return nil, false
 	}
 	return o.Lower, true
@@ -123,7 +127,7 @@ func (o *TelemetryDruidBoundFilter) GetLowerOk() (*string, bool) {
 
 // HasLower returns a boolean if a field has been set.
 func (o *TelemetryDruidBoundFilter) HasLower() bool {
-	if o != nil && o.Lower != nil {
+	if o != nil && !IsNil(o.Lower) {
 		return true
 	}
 
@@ -137,7 +141,7 @@ func (o *TelemetryDruidBoundFilter) SetLower(v string) {
 
 // GetUpper returns the Upper field value if set, zero value otherwise.
 func (o *TelemetryDruidBoundFilter) GetUpper() string {
-	if o == nil || o.Upper == nil {
+	if o == nil || IsNil(o.Upper) {
 		var ret string
 		return ret
 	}
@@ -147,7 +151,7 @@ func (o *TelemetryDruidBoundFilter) GetUpper() string {
 // GetUpperOk returns a tuple with the Upper field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TelemetryDruidBoundFilter) GetUpperOk() (*string, bool) {
-	if o == nil || o.Upper == nil {
+	if o == nil || IsNil(o.Upper) {
 		return nil, false
 	}
 	return o.Upper, true
@@ -155,7 +159,7 @@ func (o *TelemetryDruidBoundFilter) GetUpperOk() (*string, bool) {
 
 // HasUpper returns a boolean if a field has been set.
 func (o *TelemetryDruidBoundFilter) HasUpper() bool {
-	if o != nil && o.Upper != nil {
+	if o != nil && !IsNil(o.Upper) {
 		return true
 	}
 
@@ -169,7 +173,7 @@ func (o *TelemetryDruidBoundFilter) SetUpper(v string) {
 
 // GetLowerStrict returns the LowerStrict field value if set, zero value otherwise.
 func (o *TelemetryDruidBoundFilter) GetLowerStrict() bool {
-	if o == nil || o.LowerStrict == nil {
+	if o == nil || IsNil(o.LowerStrict) {
 		var ret bool
 		return ret
 	}
@@ -179,7 +183,7 @@ func (o *TelemetryDruidBoundFilter) GetLowerStrict() bool {
 // GetLowerStrictOk returns a tuple with the LowerStrict field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TelemetryDruidBoundFilter) GetLowerStrictOk() (*bool, bool) {
-	if o == nil || o.LowerStrict == nil {
+	if o == nil || IsNil(o.LowerStrict) {
 		return nil, false
 	}
 	return o.LowerStrict, true
@@ -187,7 +191,7 @@ func (o *TelemetryDruidBoundFilter) GetLowerStrictOk() (*bool, bool) {
 
 // HasLowerStrict returns a boolean if a field has been set.
 func (o *TelemetryDruidBoundFilter) HasLowerStrict() bool {
-	if o != nil && o.LowerStrict != nil {
+	if o != nil && !IsNil(o.LowerStrict) {
 		return true
 	}
 
@@ -201,7 +205,7 @@ func (o *TelemetryDruidBoundFilter) SetLowerStrict(v bool) {
 
 // GetUpperStrict returns the UpperStrict field value if set, zero value otherwise.
 func (o *TelemetryDruidBoundFilter) GetUpperStrict() bool {
-	if o == nil || o.UpperStrict == nil {
+	if o == nil || IsNil(o.UpperStrict) {
 		var ret bool
 		return ret
 	}
@@ -211,7 +215,7 @@ func (o *TelemetryDruidBoundFilter) GetUpperStrict() bool {
 // GetUpperStrictOk returns a tuple with the UpperStrict field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TelemetryDruidBoundFilter) GetUpperStrictOk() (*bool, bool) {
-	if o == nil || o.UpperStrict == nil {
+	if o == nil || IsNil(o.UpperStrict) {
 		return nil, false
 	}
 	return o.UpperStrict, true
@@ -219,7 +223,7 @@ func (o *TelemetryDruidBoundFilter) GetUpperStrictOk() (*bool, bool) {
 
 // HasUpperStrict returns a boolean if a field has been set.
 func (o *TelemetryDruidBoundFilter) HasUpperStrict() bool {
-	if o != nil && o.UpperStrict != nil {
+	if o != nil && !IsNil(o.UpperStrict) {
 		return true
 	}
 
@@ -233,7 +237,7 @@ func (o *TelemetryDruidBoundFilter) SetUpperStrict(v bool) {
 
 // GetOrdering returns the Ordering field value if set, zero value otherwise.
 func (o *TelemetryDruidBoundFilter) GetOrdering() string {
-	if o == nil || o.Ordering == nil {
+	if o == nil || IsNil(o.Ordering) {
 		var ret string
 		return ret
 	}
@@ -243,7 +247,7 @@ func (o *TelemetryDruidBoundFilter) GetOrdering() string {
 // GetOrderingOk returns a tuple with the Ordering field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TelemetryDruidBoundFilter) GetOrderingOk() (*string, bool) {
-	if o == nil || o.Ordering == nil {
+	if o == nil || IsNil(o.Ordering) {
 		return nil, false
 	}
 	return o.Ordering, true
@@ -251,7 +255,7 @@ func (o *TelemetryDruidBoundFilter) GetOrderingOk() (*string, bool) {
 
 // HasOrdering returns a boolean if a field has been set.
 func (o *TelemetryDruidBoundFilter) HasOrdering() bool {
-	if o != nil && o.Ordering != nil {
+	if o != nil && !IsNil(o.Ordering) {
 		return true
 	}
 
@@ -265,7 +269,7 @@ func (o *TelemetryDruidBoundFilter) SetOrdering(v string) {
 
 // GetExtractionFn returns the ExtractionFn field value if set, zero value otherwise.
 func (o *TelemetryDruidBoundFilter) GetExtractionFn() TelemetryDruidExtractionFunction {
-	if o == nil || o.ExtractionFn == nil {
+	if o == nil || IsNil(o.ExtractionFn) {
 		var ret TelemetryDruidExtractionFunction
 		return ret
 	}
@@ -275,7 +279,7 @@ func (o *TelemetryDruidBoundFilter) GetExtractionFn() TelemetryDruidExtractionFu
 // GetExtractionFnOk returns a tuple with the ExtractionFn field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TelemetryDruidBoundFilter) GetExtractionFnOk() (*TelemetryDruidExtractionFunction, bool) {
-	if o == nil || o.ExtractionFn == nil {
+	if o == nil || IsNil(o.ExtractionFn) {
 		return nil, false
 	}
 	return o.ExtractionFn, true
@@ -283,7 +287,7 @@ func (o *TelemetryDruidBoundFilter) GetExtractionFnOk() (*TelemetryDruidExtracti
 
 // HasExtractionFn returns a boolean if a field has been set.
 func (o *TelemetryDruidBoundFilter) HasExtractionFn() bool {
-	if o != nil && o.ExtractionFn != nil {
+	if o != nil && !IsNil(o.ExtractionFn) {
 		return true
 	}
 
@@ -296,29 +300,33 @@ func (o *TelemetryDruidBoundFilter) SetExtractionFn(v TelemetryDruidExtractionFu
 }
 
 func (o TelemetryDruidBoundFilter) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o TelemetryDruidBoundFilter) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["type"] = o.Type
-	}
-	if true {
-		toSerialize["dimension"] = o.Dimension
-	}
-	if o.Lower != nil {
+	toSerialize["type"] = o.Type
+	toSerialize["dimension"] = o.Dimension
+	if !IsNil(o.Lower) {
 		toSerialize["lower"] = o.Lower
 	}
-	if o.Upper != nil {
+	if !IsNil(o.Upper) {
 		toSerialize["upper"] = o.Upper
 	}
-	if o.LowerStrict != nil {
+	if !IsNil(o.LowerStrict) {
 		toSerialize["lowerStrict"] = o.LowerStrict
 	}
-	if o.UpperStrict != nil {
+	if !IsNil(o.UpperStrict) {
 		toSerialize["upperStrict"] = o.UpperStrict
 	}
-	if o.Ordering != nil {
+	if !IsNil(o.Ordering) {
 		toSerialize["ordering"] = o.Ordering
 	}
-	if o.ExtractionFn != nil {
+	if !IsNil(o.ExtractionFn) {
 		toSerialize["extractionFn"] = o.ExtractionFn
 	}
 
@@ -326,19 +334,45 @@ func (o TelemetryDruidBoundFilter) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *TelemetryDruidBoundFilter) UnmarshalJSON(bytes []byte) (err error) {
+func (o *TelemetryDruidBoundFilter) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"type",
+		"dimension",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	varTelemetryDruidBoundFilter := _TelemetryDruidBoundFilter{}
 
-	if err = json.Unmarshal(bytes, &varTelemetryDruidBoundFilter); err == nil {
-		*o = TelemetryDruidBoundFilter(varTelemetryDruidBoundFilter)
+	err = json.Unmarshal(data, &varTelemetryDruidBoundFilter)
+
+	if err != nil {
+		return err
 	}
+
+	*o = TelemetryDruidBoundFilter(varTelemetryDruidBoundFilter)
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "type")
 		delete(additionalProperties, "dimension")
 		delete(additionalProperties, "lower")

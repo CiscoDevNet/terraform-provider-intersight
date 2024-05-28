@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the FcpoolFcBlock type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &FcpoolFcBlock{}
 
 // FcpoolFcBlock A block of contiguous WWN addresses that are part of a pool.
 type FcpoolFcBlock struct {
@@ -23,9 +27,9 @@ type FcpoolFcBlock struct {
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
-	ObjectType string                  `json:"ObjectType"`
-	IdBlock    *FcpoolBlock            `json:"IdBlock,omitempty"`
-	Pool       *FcpoolPoolRelationship `json:"Pool,omitempty"`
+	ObjectType string                         `json:"ObjectType"`
+	IdBlock    *FcpoolBlock                   `json:"IdBlock,omitempty"`
+	Pool       NullableFcpoolPoolRelationship `json:"Pool,omitempty"`
 	// An array of relationships to fcpoolReservation resources.
 	Reservations         []FcpoolReservationRelationship `json:"Reservations,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -106,7 +110,7 @@ func (o *FcpoolFcBlock) SetObjectType(v string) {
 
 // GetIdBlock returns the IdBlock field value if set, zero value otherwise.
 func (o *FcpoolFcBlock) GetIdBlock() FcpoolBlock {
-	if o == nil || o.IdBlock == nil {
+	if o == nil || IsNil(o.IdBlock) {
 		var ret FcpoolBlock
 		return ret
 	}
@@ -116,7 +120,7 @@ func (o *FcpoolFcBlock) GetIdBlock() FcpoolBlock {
 // GetIdBlockOk returns a tuple with the IdBlock field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FcpoolFcBlock) GetIdBlockOk() (*FcpoolBlock, bool) {
-	if o == nil || o.IdBlock == nil {
+	if o == nil || IsNil(o.IdBlock) {
 		return nil, false
 	}
 	return o.IdBlock, true
@@ -124,7 +128,7 @@ func (o *FcpoolFcBlock) GetIdBlockOk() (*FcpoolBlock, bool) {
 
 // HasIdBlock returns a boolean if a field has been set.
 func (o *FcpoolFcBlock) HasIdBlock() bool {
-	if o != nil && o.IdBlock != nil {
+	if o != nil && !IsNil(o.IdBlock) {
 		return true
 	}
 
@@ -136,36 +140,47 @@ func (o *FcpoolFcBlock) SetIdBlock(v FcpoolBlock) {
 	o.IdBlock = &v
 }
 
-// GetPool returns the Pool field value if set, zero value otherwise.
+// GetPool returns the Pool field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *FcpoolFcBlock) GetPool() FcpoolPoolRelationship {
-	if o == nil || o.Pool == nil {
+	if o == nil || IsNil(o.Pool.Get()) {
 		var ret FcpoolPoolRelationship
 		return ret
 	}
-	return *o.Pool
+	return *o.Pool.Get()
 }
 
 // GetPoolOk returns a tuple with the Pool field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *FcpoolFcBlock) GetPoolOk() (*FcpoolPoolRelationship, bool) {
-	if o == nil || o.Pool == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Pool, true
+	return o.Pool.Get(), o.Pool.IsSet()
 }
 
 // HasPool returns a boolean if a field has been set.
 func (o *FcpoolFcBlock) HasPool() bool {
-	if o != nil && o.Pool != nil {
+	if o != nil && o.Pool.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetPool gets a reference to the given FcpoolPoolRelationship and assigns it to the Pool field.
+// SetPool gets a reference to the given NullableFcpoolPoolRelationship and assigns it to the Pool field.
 func (o *FcpoolFcBlock) SetPool(v FcpoolPoolRelationship) {
-	o.Pool = &v
+	o.Pool.Set(&v)
+}
+
+// SetPoolNil sets the value for Pool to be an explicit nil
+func (o *FcpoolFcBlock) SetPoolNil() {
+	o.Pool.Set(nil)
+}
+
+// UnsetPool ensures that no value is present for Pool, not even an explicit nil
+func (o *FcpoolFcBlock) UnsetPool() {
+	o.Pool.Unset()
 }
 
 // GetReservations returns the Reservations field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -181,7 +196,7 @@ func (o *FcpoolFcBlock) GetReservations() []FcpoolReservationRelationship {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *FcpoolFcBlock) GetReservationsOk() ([]FcpoolReservationRelationship, bool) {
-	if o == nil || o.Reservations == nil {
+	if o == nil || IsNil(o.Reservations) {
 		return nil, false
 	}
 	return o.Reservations, true
@@ -189,7 +204,7 @@ func (o *FcpoolFcBlock) GetReservationsOk() ([]FcpoolReservationRelationship, bo
 
 // HasReservations returns a boolean if a field has been set.
 func (o *FcpoolFcBlock) HasReservations() bool {
-	if o != nil && o.Reservations != nil {
+	if o != nil && IsNil(o.Reservations) {
 		return true
 	}
 
@@ -202,26 +217,30 @@ func (o *FcpoolFcBlock) SetReservations(v []FcpoolReservationRelationship) {
 }
 
 func (o FcpoolFcBlock) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o FcpoolFcBlock) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedPoolAbstractBlock, errPoolAbstractBlock := json.Marshal(o.PoolAbstractBlock)
 	if errPoolAbstractBlock != nil {
-		return []byte{}, errPoolAbstractBlock
+		return map[string]interface{}{}, errPoolAbstractBlock
 	}
 	errPoolAbstractBlock = json.Unmarshal([]byte(serializedPoolAbstractBlock), &toSerialize)
 	if errPoolAbstractBlock != nil {
-		return []byte{}, errPoolAbstractBlock
+		return map[string]interface{}{}, errPoolAbstractBlock
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.IdBlock != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.IdBlock) {
 		toSerialize["IdBlock"] = o.IdBlock
 	}
-	if o.Pool != nil {
-		toSerialize["Pool"] = o.Pool
+	if o.Pool.IsSet() {
+		toSerialize["Pool"] = o.Pool.Get()
 	}
 	if o.Reservations != nil {
 		toSerialize["Reservations"] = o.Reservations
@@ -231,24 +250,46 @@ func (o FcpoolFcBlock) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *FcpoolFcBlock) UnmarshalJSON(bytes []byte) (err error) {
+func (o *FcpoolFcBlock) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type FcpoolFcBlockWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
-		ObjectType string                  `json:"ObjectType"`
-		IdBlock    *FcpoolBlock            `json:"IdBlock,omitempty"`
-		Pool       *FcpoolPoolRelationship `json:"Pool,omitempty"`
+		ObjectType string                         `json:"ObjectType"`
+		IdBlock    *FcpoolBlock                   `json:"IdBlock,omitempty"`
+		Pool       NullableFcpoolPoolRelationship `json:"Pool,omitempty"`
 		// An array of relationships to fcpoolReservation resources.
 		Reservations []FcpoolReservationRelationship `json:"Reservations,omitempty"`
 	}
 
 	varFcpoolFcBlockWithoutEmbeddedStruct := FcpoolFcBlockWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varFcpoolFcBlockWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varFcpoolFcBlockWithoutEmbeddedStruct)
 	if err == nil {
 		varFcpoolFcBlock := _FcpoolFcBlock{}
 		varFcpoolFcBlock.ClassId = varFcpoolFcBlockWithoutEmbeddedStruct.ClassId
@@ -263,7 +304,7 @@ func (o *FcpoolFcBlock) UnmarshalJSON(bytes []byte) (err error) {
 
 	varFcpoolFcBlock := _FcpoolFcBlock{}
 
-	err = json.Unmarshal(bytes, &varFcpoolFcBlock)
+	err = json.Unmarshal(data, &varFcpoolFcBlock)
 	if err == nil {
 		o.PoolAbstractBlock = varFcpoolFcBlock.PoolAbstractBlock
 	} else {
@@ -272,7 +313,7 @@ func (o *FcpoolFcBlock) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "IdBlock")

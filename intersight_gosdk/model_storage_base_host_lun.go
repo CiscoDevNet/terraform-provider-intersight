@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the StorageBaseHostLun type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &StorageBaseHostLun{}
 
 // StorageBaseHostLun Generic storage host lun object. It exists only if the volume is associated to host initiator.
 type StorageBaseHostLun struct {
@@ -104,7 +108,7 @@ func (o *StorageBaseHostLun) SetObjectType(v string) {
 
 // GetHlu returns the Hlu field value if set, zero value otherwise.
 func (o *StorageBaseHostLun) GetHlu() int64 {
-	if o == nil || o.Hlu == nil {
+	if o == nil || IsNil(o.Hlu) {
 		var ret int64
 		return ret
 	}
@@ -114,7 +118,7 @@ func (o *StorageBaseHostLun) GetHlu() int64 {
 // GetHluOk returns a tuple with the Hlu field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageBaseHostLun) GetHluOk() (*int64, bool) {
-	if o == nil || o.Hlu == nil {
+	if o == nil || IsNil(o.Hlu) {
 		return nil, false
 	}
 	return o.Hlu, true
@@ -122,7 +126,7 @@ func (o *StorageBaseHostLun) GetHluOk() (*int64, bool) {
 
 // HasHlu returns a boolean if a field has been set.
 func (o *StorageBaseHostLun) HasHlu() bool {
-	if o != nil && o.Hlu != nil {
+	if o != nil && !IsNil(o.Hlu) {
 		return true
 	}
 
@@ -136,7 +140,7 @@ func (o *StorageBaseHostLun) SetHlu(v int64) {
 
 // GetHostName returns the HostName field value if set, zero value otherwise.
 func (o *StorageBaseHostLun) GetHostName() string {
-	if o == nil || o.HostName == nil {
+	if o == nil || IsNil(o.HostName) {
 		var ret string
 		return ret
 	}
@@ -146,7 +150,7 @@ func (o *StorageBaseHostLun) GetHostName() string {
 // GetHostNameOk returns a tuple with the HostName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageBaseHostLun) GetHostNameOk() (*string, bool) {
-	if o == nil || o.HostName == nil {
+	if o == nil || IsNil(o.HostName) {
 		return nil, false
 	}
 	return o.HostName, true
@@ -154,7 +158,7 @@ func (o *StorageBaseHostLun) GetHostNameOk() (*string, bool) {
 
 // HasHostName returns a boolean if a field has been set.
 func (o *StorageBaseHostLun) HasHostName() bool {
-	if o != nil && o.HostName != nil {
+	if o != nil && !IsNil(o.HostName) {
 		return true
 	}
 
@@ -168,7 +172,7 @@ func (o *StorageBaseHostLun) SetHostName(v string) {
 
 // GetVolumeName returns the VolumeName field value if set, zero value otherwise.
 func (o *StorageBaseHostLun) GetVolumeName() string {
-	if o == nil || o.VolumeName == nil {
+	if o == nil || IsNil(o.VolumeName) {
 		var ret string
 		return ret
 	}
@@ -178,7 +182,7 @@ func (o *StorageBaseHostLun) GetVolumeName() string {
 // GetVolumeNameOk returns a tuple with the VolumeName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageBaseHostLun) GetVolumeNameOk() (*string, bool) {
-	if o == nil || o.VolumeName == nil {
+	if o == nil || IsNil(o.VolumeName) {
 		return nil, false
 	}
 	return o.VolumeName, true
@@ -186,7 +190,7 @@ func (o *StorageBaseHostLun) GetVolumeNameOk() (*string, bool) {
 
 // HasVolumeName returns a boolean if a field has been set.
 func (o *StorageBaseHostLun) HasVolumeName() bool {
-	if o != nil && o.VolumeName != nil {
+	if o != nil && !IsNil(o.VolumeName) {
 		return true
 	}
 
@@ -199,28 +203,32 @@ func (o *StorageBaseHostLun) SetVolumeName(v string) {
 }
 
 func (o StorageBaseHostLun) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o StorageBaseHostLun) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Hlu != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Hlu) {
 		toSerialize["Hlu"] = o.Hlu
 	}
-	if o.HostName != nil {
+	if !IsNil(o.HostName) {
 		toSerialize["HostName"] = o.HostName
 	}
-	if o.VolumeName != nil {
+	if !IsNil(o.VolumeName) {
 		toSerialize["VolumeName"] = o.VolumeName
 	}
 
@@ -228,10 +236,32 @@ func (o StorageBaseHostLun) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *StorageBaseHostLun) UnmarshalJSON(bytes []byte) (err error) {
+func (o *StorageBaseHostLun) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type StorageBaseHostLunWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type.
 		ClassId string `json:"ClassId"`
@@ -247,7 +277,7 @@ func (o *StorageBaseHostLun) UnmarshalJSON(bytes []byte) (err error) {
 
 	varStorageBaseHostLunWithoutEmbeddedStruct := StorageBaseHostLunWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varStorageBaseHostLunWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varStorageBaseHostLunWithoutEmbeddedStruct)
 	if err == nil {
 		varStorageBaseHostLun := _StorageBaseHostLun{}
 		varStorageBaseHostLun.ClassId = varStorageBaseHostLunWithoutEmbeddedStruct.ClassId
@@ -262,7 +292,7 @@ func (o *StorageBaseHostLun) UnmarshalJSON(bytes []byte) (err error) {
 
 	varStorageBaseHostLun := _StorageBaseHostLun{}
 
-	err = json.Unmarshal(bytes, &varStorageBaseHostLun)
+	err = json.Unmarshal(data, &varStorageBaseHostLun)
 	if err == nil {
 		o.MoBaseMo = varStorageBaseHostLun.MoBaseMo
 	} else {
@@ -271,7 +301,7 @@ func (o *StorageBaseHostLun) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Hlu")

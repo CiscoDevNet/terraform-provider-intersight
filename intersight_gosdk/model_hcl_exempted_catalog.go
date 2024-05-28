@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the HclExemptedCatalog type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &HclExemptedCatalog{}
 
 // HclExemptedCatalog Collection used to store exempted products (ie. adapters, storage controllers, etc). These products should be ignored for HCL validation purposes.
 type HclExemptedCatalog struct {
@@ -125,7 +129,7 @@ func (o *HclExemptedCatalog) SetObjectType(v string) {
 
 // GetComments returns the Comments field value if set, zero value otherwise.
 func (o *HclExemptedCatalog) GetComments() string {
-	if o == nil || o.Comments == nil {
+	if o == nil || IsNil(o.Comments) {
 		var ret string
 		return ret
 	}
@@ -135,7 +139,7 @@ func (o *HclExemptedCatalog) GetComments() string {
 // GetCommentsOk returns a tuple with the Comments field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HclExemptedCatalog) GetCommentsOk() (*string, bool) {
-	if o == nil || o.Comments == nil {
+	if o == nil || IsNil(o.Comments) {
 		return nil, false
 	}
 	return o.Comments, true
@@ -143,7 +147,7 @@ func (o *HclExemptedCatalog) GetCommentsOk() (*string, bool) {
 
 // HasComments returns a boolean if a field has been set.
 func (o *HclExemptedCatalog) HasComments() bool {
-	if o != nil && o.Comments != nil {
+	if o != nil && !IsNil(o.Comments) {
 		return true
 	}
 
@@ -157,7 +161,7 @@ func (o *HclExemptedCatalog) SetComments(v string) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *HclExemptedCatalog) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -167,7 +171,7 @@ func (o *HclExemptedCatalog) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HclExemptedCatalog) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -175,7 +179,7 @@ func (o *HclExemptedCatalog) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *HclExemptedCatalog) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -189,7 +193,7 @@ func (o *HclExemptedCatalog) SetName(v string) {
 
 // GetOsVendor returns the OsVendor field value if set, zero value otherwise.
 func (o *HclExemptedCatalog) GetOsVendor() string {
-	if o == nil || o.OsVendor == nil {
+	if o == nil || IsNil(o.OsVendor) {
 		var ret string
 		return ret
 	}
@@ -199,7 +203,7 @@ func (o *HclExemptedCatalog) GetOsVendor() string {
 // GetOsVendorOk returns a tuple with the OsVendor field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HclExemptedCatalog) GetOsVendorOk() (*string, bool) {
-	if o == nil || o.OsVendor == nil {
+	if o == nil || IsNil(o.OsVendor) {
 		return nil, false
 	}
 	return o.OsVendor, true
@@ -207,7 +211,7 @@ func (o *HclExemptedCatalog) GetOsVendorOk() (*string, bool) {
 
 // HasOsVendor returns a boolean if a field has been set.
 func (o *HclExemptedCatalog) HasOsVendor() bool {
-	if o != nil && o.OsVendor != nil {
+	if o != nil && !IsNil(o.OsVendor) {
 		return true
 	}
 
@@ -221,7 +225,7 @@ func (o *HclExemptedCatalog) SetOsVendor(v string) {
 
 // GetOsVersion returns the OsVersion field value if set, zero value otherwise.
 func (o *HclExemptedCatalog) GetOsVersion() string {
-	if o == nil || o.OsVersion == nil {
+	if o == nil || IsNil(o.OsVersion) {
 		var ret string
 		return ret
 	}
@@ -231,7 +235,7 @@ func (o *HclExemptedCatalog) GetOsVersion() string {
 // GetOsVersionOk returns a tuple with the OsVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HclExemptedCatalog) GetOsVersionOk() (*string, bool) {
-	if o == nil || o.OsVersion == nil {
+	if o == nil || IsNil(o.OsVersion) {
 		return nil, false
 	}
 	return o.OsVersion, true
@@ -239,7 +243,7 @@ func (o *HclExemptedCatalog) GetOsVersionOk() (*string, bool) {
 
 // HasOsVersion returns a boolean if a field has been set.
 func (o *HclExemptedCatalog) HasOsVersion() bool {
-	if o != nil && o.OsVersion != nil {
+	if o != nil && !IsNil(o.OsVersion) {
 		return true
 	}
 
@@ -253,7 +257,7 @@ func (o *HclExemptedCatalog) SetOsVersion(v string) {
 
 // GetProcessorName returns the ProcessorName field value if set, zero value otherwise.
 func (o *HclExemptedCatalog) GetProcessorName() string {
-	if o == nil || o.ProcessorName == nil {
+	if o == nil || IsNil(o.ProcessorName) {
 		var ret string
 		return ret
 	}
@@ -263,7 +267,7 @@ func (o *HclExemptedCatalog) GetProcessorName() string {
 // GetProcessorNameOk returns a tuple with the ProcessorName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HclExemptedCatalog) GetProcessorNameOk() (*string, bool) {
-	if o == nil || o.ProcessorName == nil {
+	if o == nil || IsNil(o.ProcessorName) {
 		return nil, false
 	}
 	return o.ProcessorName, true
@@ -271,7 +275,7 @@ func (o *HclExemptedCatalog) GetProcessorNameOk() (*string, bool) {
 
 // HasProcessorName returns a boolean if a field has been set.
 func (o *HclExemptedCatalog) HasProcessorName() bool {
-	if o != nil && o.ProcessorName != nil {
+	if o != nil && !IsNil(o.ProcessorName) {
 		return true
 	}
 
@@ -296,7 +300,7 @@ func (o *HclExemptedCatalog) GetProductModels() []string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *HclExemptedCatalog) GetProductModelsOk() ([]string, bool) {
-	if o == nil || o.ProductModels == nil {
+	if o == nil || IsNil(o.ProductModels) {
 		return nil, false
 	}
 	return o.ProductModels, true
@@ -304,7 +308,7 @@ func (o *HclExemptedCatalog) GetProductModelsOk() ([]string, bool) {
 
 // HasProductModels returns a boolean if a field has been set.
 func (o *HclExemptedCatalog) HasProductModels() bool {
-	if o != nil && o.ProductModels != nil {
+	if o != nil && IsNil(o.ProductModels) {
 		return true
 	}
 
@@ -318,7 +322,7 @@ func (o *HclExemptedCatalog) SetProductModels(v []string) {
 
 // GetProductType returns the ProductType field value if set, zero value otherwise.
 func (o *HclExemptedCatalog) GetProductType() string {
-	if o == nil || o.ProductType == nil {
+	if o == nil || IsNil(o.ProductType) {
 		var ret string
 		return ret
 	}
@@ -328,7 +332,7 @@ func (o *HclExemptedCatalog) GetProductType() string {
 // GetProductTypeOk returns a tuple with the ProductType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HclExemptedCatalog) GetProductTypeOk() (*string, bool) {
-	if o == nil || o.ProductType == nil {
+	if o == nil || IsNil(o.ProductType) {
 		return nil, false
 	}
 	return o.ProductType, true
@@ -336,7 +340,7 @@ func (o *HclExemptedCatalog) GetProductTypeOk() (*string, bool) {
 
 // HasProductType returns a boolean if a field has been set.
 func (o *HclExemptedCatalog) HasProductType() bool {
-	if o != nil && o.ProductType != nil {
+	if o != nil && !IsNil(o.ProductType) {
 		return true
 	}
 
@@ -350,7 +354,7 @@ func (o *HclExemptedCatalog) SetProductType(v string) {
 
 // GetServerPid returns the ServerPid field value if set, zero value otherwise.
 func (o *HclExemptedCatalog) GetServerPid() string {
-	if o == nil || o.ServerPid == nil {
+	if o == nil || IsNil(o.ServerPid) {
 		var ret string
 		return ret
 	}
@@ -360,7 +364,7 @@ func (o *HclExemptedCatalog) GetServerPid() string {
 // GetServerPidOk returns a tuple with the ServerPid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HclExemptedCatalog) GetServerPidOk() (*string, bool) {
-	if o == nil || o.ServerPid == nil {
+	if o == nil || IsNil(o.ServerPid) {
 		return nil, false
 	}
 	return o.ServerPid, true
@@ -368,7 +372,7 @@ func (o *HclExemptedCatalog) GetServerPidOk() (*string, bool) {
 
 // HasServerPid returns a boolean if a field has been set.
 func (o *HclExemptedCatalog) HasServerPid() bool {
-	if o != nil && o.ServerPid != nil {
+	if o != nil && !IsNil(o.ServerPid) {
 		return true
 	}
 
@@ -382,7 +386,7 @@ func (o *HclExemptedCatalog) SetServerPid(v string) {
 
 // GetUcsVersion returns the UcsVersion field value if set, zero value otherwise.
 func (o *HclExemptedCatalog) GetUcsVersion() string {
-	if o == nil || o.UcsVersion == nil {
+	if o == nil || IsNil(o.UcsVersion) {
 		var ret string
 		return ret
 	}
@@ -392,7 +396,7 @@ func (o *HclExemptedCatalog) GetUcsVersion() string {
 // GetUcsVersionOk returns a tuple with the UcsVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HclExemptedCatalog) GetUcsVersionOk() (*string, bool) {
-	if o == nil || o.UcsVersion == nil {
+	if o == nil || IsNil(o.UcsVersion) {
 		return nil, false
 	}
 	return o.UcsVersion, true
@@ -400,7 +404,7 @@ func (o *HclExemptedCatalog) GetUcsVersionOk() (*string, bool) {
 
 // HasUcsVersion returns a boolean if a field has been set.
 func (o *HclExemptedCatalog) HasUcsVersion() bool {
-	if o != nil && o.UcsVersion != nil {
+	if o != nil && !IsNil(o.UcsVersion) {
 		return true
 	}
 
@@ -414,7 +418,7 @@ func (o *HclExemptedCatalog) SetUcsVersion(v string) {
 
 // GetVersionType returns the VersionType field value if set, zero value otherwise.
 func (o *HclExemptedCatalog) GetVersionType() string {
-	if o == nil || o.VersionType == nil {
+	if o == nil || IsNil(o.VersionType) {
 		var ret string
 		return ret
 	}
@@ -424,7 +428,7 @@ func (o *HclExemptedCatalog) GetVersionType() string {
 // GetVersionTypeOk returns a tuple with the VersionType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HclExemptedCatalog) GetVersionTypeOk() (*string, bool) {
-	if o == nil || o.VersionType == nil {
+	if o == nil || IsNil(o.VersionType) {
 		return nil, false
 	}
 	return o.VersionType, true
@@ -432,7 +436,7 @@ func (o *HclExemptedCatalog) GetVersionTypeOk() (*string, bool) {
 
 // HasVersionType returns a boolean if a field has been set.
 func (o *HclExemptedCatalog) HasVersionType() bool {
-	if o != nil && o.VersionType != nil {
+	if o != nil && !IsNil(o.VersionType) {
 		return true
 	}
 
@@ -445,49 +449,53 @@ func (o *HclExemptedCatalog) SetVersionType(v string) {
 }
 
 func (o HclExemptedCatalog) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o HclExemptedCatalog) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Comments != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Comments) {
 		toSerialize["Comments"] = o.Comments
 	}
-	if o.Name != nil {
+	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
 	}
-	if o.OsVendor != nil {
+	if !IsNil(o.OsVendor) {
 		toSerialize["OsVendor"] = o.OsVendor
 	}
-	if o.OsVersion != nil {
+	if !IsNil(o.OsVersion) {
 		toSerialize["OsVersion"] = o.OsVersion
 	}
-	if o.ProcessorName != nil {
+	if !IsNil(o.ProcessorName) {
 		toSerialize["ProcessorName"] = o.ProcessorName
 	}
 	if o.ProductModels != nil {
 		toSerialize["ProductModels"] = o.ProductModels
 	}
-	if o.ProductType != nil {
+	if !IsNil(o.ProductType) {
 		toSerialize["ProductType"] = o.ProductType
 	}
-	if o.ServerPid != nil {
+	if !IsNil(o.ServerPid) {
 		toSerialize["ServerPid"] = o.ServerPid
 	}
-	if o.UcsVersion != nil {
+	if !IsNil(o.UcsVersion) {
 		toSerialize["UcsVersion"] = o.UcsVersion
 	}
-	if o.VersionType != nil {
+	if !IsNil(o.VersionType) {
 		toSerialize["VersionType"] = o.VersionType
 	}
 
@@ -495,10 +503,32 @@ func (o HclExemptedCatalog) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *HclExemptedCatalog) UnmarshalJSON(bytes []byte) (err error) {
+func (o *HclExemptedCatalog) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type HclExemptedCatalogWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -527,7 +557,7 @@ func (o *HclExemptedCatalog) UnmarshalJSON(bytes []byte) (err error) {
 
 	varHclExemptedCatalogWithoutEmbeddedStruct := HclExemptedCatalogWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varHclExemptedCatalogWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varHclExemptedCatalogWithoutEmbeddedStruct)
 	if err == nil {
 		varHclExemptedCatalog := _HclExemptedCatalog{}
 		varHclExemptedCatalog.ClassId = varHclExemptedCatalogWithoutEmbeddedStruct.ClassId
@@ -549,7 +579,7 @@ func (o *HclExemptedCatalog) UnmarshalJSON(bytes []byte) (err error) {
 
 	varHclExemptedCatalog := _HclExemptedCatalog{}
 
-	err = json.Unmarshal(bytes, &varHclExemptedCatalog)
+	err = json.Unmarshal(data, &varHclExemptedCatalog)
 	if err == nil {
 		o.MoBaseMo = varHclExemptedCatalog.MoBaseMo
 	} else {
@@ -558,7 +588,7 @@ func (o *HclExemptedCatalog) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Comments")

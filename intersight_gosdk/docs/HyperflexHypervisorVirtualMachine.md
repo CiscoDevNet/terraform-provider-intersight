@@ -16,8 +16,8 @@ Name | Type | Description | Notes
 **StorageUsedInBytes** | Pointer to **int64** | Storage used by HyperFlex virtual machine in bytes. | [optional] [readonly] 
 **Template** | Pointer to **bool** | Flag indicating whether or not this virtual machine is a template. Apply to the ESXi platform only. | [optional] [readonly] 
 **VmInstanceUuid** | Pointer to **string** | The instance UUID of a virtual machine. | [optional] [readonly] 
-**Cluster** | Pointer to [**HyperflexClusterRelationship**](HyperflexClusterRelationship.md) |  | [optional] 
-**Host** | Pointer to [**HyperflexHypervisorHostRelationship**](HyperflexHypervisorHostRelationship.md) |  | [optional] 
+**Cluster** | Pointer to [**NullableHyperflexClusterRelationship**](HyperflexClusterRelationship.md) |  | [optional] 
+**Host** | Pointer to [**NullableHyperflexHypervisorHostRelationship**](HyperflexHypervisorHostRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -363,6 +363,16 @@ SetCluster sets Cluster field to given value.
 
 HasCluster returns a boolean if a field has been set.
 
+### SetClusterNil
+
+`func (o *HyperflexHypervisorVirtualMachine) SetClusterNil(b bool)`
+
+ SetClusterNil sets the value for Cluster to be an explicit nil
+
+### UnsetCluster
+`func (o *HyperflexHypervisorVirtualMachine) UnsetCluster()`
+
+UnsetCluster ensures that no value is present for Cluster, not even an explicit nil
 ### GetHost
 
 `func (o *HyperflexHypervisorVirtualMachine) GetHost() HyperflexHypervisorHostRelationship`
@@ -388,6 +398,16 @@ SetHost sets Host field to given value.
 
 HasHost returns a boolean if a field has been set.
 
+### SetHostNil
+
+`func (o *HyperflexHypervisorVirtualMachine) SetHostNil(b bool)`
+
+ SetHostNil sets the value for Host to be an explicit nil
+
+### UnsetHost
+`func (o *HyperflexHypervisorVirtualMachine) UnsetHost()`
+
+UnsetHost ensures that no value is present for Host, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

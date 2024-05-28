@@ -7,8 +7,8 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "fabric.UplinkRole"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "fabric.UplinkRole"]
 **EthNetworkGroupPolicy** | Pointer to [**[]FabricEthNetworkGroupPolicyRelationship**](FabricEthNetworkGroupPolicyRelationship.md) | An array of relationships to fabricEthNetworkGroupPolicy resources. | [optional] 
-**FlowControlPolicy** | Pointer to [**FabricFlowControlPolicyRelationship**](FabricFlowControlPolicyRelationship.md) |  | [optional] 
-**LinkControlPolicy** | Pointer to [**FabricLinkControlPolicyRelationship**](FabricLinkControlPolicyRelationship.md) |  | [optional] 
+**FlowControlPolicy** | Pointer to [**NullableFabricFlowControlPolicyRelationship**](FabricFlowControlPolicyRelationship.md) |  | [optional] 
+**LinkControlPolicy** | Pointer to [**NullableFabricLinkControlPolicyRelationship**](FabricLinkControlPolicyRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -129,6 +129,16 @@ SetFlowControlPolicy sets FlowControlPolicy field to given value.
 
 HasFlowControlPolicy returns a boolean if a field has been set.
 
+### SetFlowControlPolicyNil
+
+`func (o *FabricUplinkRole) SetFlowControlPolicyNil(b bool)`
+
+ SetFlowControlPolicyNil sets the value for FlowControlPolicy to be an explicit nil
+
+### UnsetFlowControlPolicy
+`func (o *FabricUplinkRole) UnsetFlowControlPolicy()`
+
+UnsetFlowControlPolicy ensures that no value is present for FlowControlPolicy, not even an explicit nil
 ### GetLinkControlPolicy
 
 `func (o *FabricUplinkRole) GetLinkControlPolicy() FabricLinkControlPolicyRelationship`
@@ -154,6 +164,16 @@ SetLinkControlPolicy sets LinkControlPolicy field to given value.
 
 HasLinkControlPolicy returns a boolean if a field has been set.
 
+### SetLinkControlPolicyNil
+
+`func (o *FabricUplinkRole) SetLinkControlPolicyNil(b bool)`
+
+ SetLinkControlPolicyNil sets the value for LinkControlPolicy to be an explicit nil
+
+### UnsetLinkControlPolicy
+`func (o *FabricUplinkRole) UnsetLinkControlPolicy()`
+
+UnsetLinkControlPolicy ensures that no value is present for LinkControlPolicy, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

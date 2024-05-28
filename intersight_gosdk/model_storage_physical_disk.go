@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the StoragePhysicalDisk type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &StoragePhysicalDisk{}
 
 // StoragePhysicalDisk Physical Disk on a server.
 type StoragePhysicalDisk struct {
@@ -129,18 +133,18 @@ type StoragePhysicalDisk struct {
 	// The number of write errors that are permitted while accessing the drive/card.
 	WriteErrorCountThreshold *int64 `json:"WriteErrorCountThreshold,omitempty"`
 	// Number of IO Errors that occured while writing data to the disk.
-	WriteIoErrorCount   *int64                           `json:"WriteIoErrorCount,omitempty"`
-	InventoryDeviceInfo *InventoryDeviceInfoRelationship `json:"InventoryDeviceInfo,omitempty"`
-	LocatorLed          *EquipmentLocatorLedRelationship `json:"LocatorLed,omitempty"`
+	WriteIoErrorCount   *int64                                  `json:"WriteIoErrorCount,omitempty"`
+	InventoryDeviceInfo NullableInventoryDeviceInfoRelationship `json:"InventoryDeviceInfo,omitempty"`
+	LocatorLed          NullableEquipmentLocatorLedRelationship `json:"LocatorLed,omitempty"`
 	// An array of relationships to storagePhysicalDiskExtension resources.
-	PhysicalDiskExtensions []StoragePhysicalDiskExtensionRelationship `json:"PhysicalDiskExtensions,omitempty"`
-	RegisteredDevice       *AssetDeviceRegistrationRelationship       `json:"RegisteredDevice,omitempty"`
+	PhysicalDiskExtensions []StoragePhysicalDiskExtensionRelationship  `json:"PhysicalDiskExtensions,omitempty"`
+	RegisteredDevice       NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	// An array of relationships to firmwareRunningFirmware resources.
 	RunningFirmware []FirmwareRunningFirmwareRelationship `json:"RunningFirmware,omitempty"`
 	// An array of relationships to storageSasPort resources.
-	SasPorts             []StorageSasPortRelationship   `json:"SasPorts,omitempty"`
-	StorageController    *StorageControllerRelationship `json:"StorageController,omitempty"`
-	StorageEnclosure     *StorageEnclosureRelationship  `json:"StorageEnclosure,omitempty"`
+	SasPorts             []StorageSasPortRelationship          `json:"SasPorts,omitempty"`
+	StorageController    NullableStorageControllerRelationship `json:"StorageController,omitempty"`
+	StorageEnclosure     NullableStorageEnclosureRelationship  `json:"StorageEnclosure,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -219,7 +223,7 @@ func (o *StoragePhysicalDisk) SetObjectType(v string) {
 
 // GetBackgroundOperations returns the BackgroundOperations field value if set, zero value otherwise.
 func (o *StoragePhysicalDisk) GetBackgroundOperations() string {
-	if o == nil || o.BackgroundOperations == nil {
+	if o == nil || IsNil(o.BackgroundOperations) {
 		var ret string
 		return ret
 	}
@@ -229,7 +233,7 @@ func (o *StoragePhysicalDisk) GetBackgroundOperations() string {
 // GetBackgroundOperationsOk returns a tuple with the BackgroundOperations field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StoragePhysicalDisk) GetBackgroundOperationsOk() (*string, bool) {
-	if o == nil || o.BackgroundOperations == nil {
+	if o == nil || IsNil(o.BackgroundOperations) {
 		return nil, false
 	}
 	return o.BackgroundOperations, true
@@ -237,7 +241,7 @@ func (o *StoragePhysicalDisk) GetBackgroundOperationsOk() (*string, bool) {
 
 // HasBackgroundOperations returns a boolean if a field has been set.
 func (o *StoragePhysicalDisk) HasBackgroundOperations() bool {
-	if o != nil && o.BackgroundOperations != nil {
+	if o != nil && !IsNil(o.BackgroundOperations) {
 		return true
 	}
 
@@ -251,7 +255,7 @@ func (o *StoragePhysicalDisk) SetBackgroundOperations(v string) {
 
 // GetBlockSize returns the BlockSize field value if set, zero value otherwise.
 func (o *StoragePhysicalDisk) GetBlockSize() string {
-	if o == nil || o.BlockSize == nil {
+	if o == nil || IsNil(o.BlockSize) {
 		var ret string
 		return ret
 	}
@@ -261,7 +265,7 @@ func (o *StoragePhysicalDisk) GetBlockSize() string {
 // GetBlockSizeOk returns a tuple with the BlockSize field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StoragePhysicalDisk) GetBlockSizeOk() (*string, bool) {
-	if o == nil || o.BlockSize == nil {
+	if o == nil || IsNil(o.BlockSize) {
 		return nil, false
 	}
 	return o.BlockSize, true
@@ -269,7 +273,7 @@ func (o *StoragePhysicalDisk) GetBlockSizeOk() (*string, bool) {
 
 // HasBlockSize returns a boolean if a field has been set.
 func (o *StoragePhysicalDisk) HasBlockSize() bool {
-	if o != nil && o.BlockSize != nil {
+	if o != nil && !IsNil(o.BlockSize) {
 		return true
 	}
 
@@ -283,7 +287,7 @@ func (o *StoragePhysicalDisk) SetBlockSize(v string) {
 
 // GetBootable returns the Bootable field value if set, zero value otherwise.
 func (o *StoragePhysicalDisk) GetBootable() string {
-	if o == nil || o.Bootable == nil {
+	if o == nil || IsNil(o.Bootable) {
 		var ret string
 		return ret
 	}
@@ -293,7 +297,7 @@ func (o *StoragePhysicalDisk) GetBootable() string {
 // GetBootableOk returns a tuple with the Bootable field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StoragePhysicalDisk) GetBootableOk() (*string, bool) {
-	if o == nil || o.Bootable == nil {
+	if o == nil || IsNil(o.Bootable) {
 		return nil, false
 	}
 	return o.Bootable, true
@@ -301,7 +305,7 @@ func (o *StoragePhysicalDisk) GetBootableOk() (*string, bool) {
 
 // HasBootable returns a boolean if a field has been set.
 func (o *StoragePhysicalDisk) HasBootable() bool {
-	if o != nil && o.Bootable != nil {
+	if o != nil && !IsNil(o.Bootable) {
 		return true
 	}
 
@@ -315,7 +319,7 @@ func (o *StoragePhysicalDisk) SetBootable(v string) {
 
 // GetConfigurationCheckpoint returns the ConfigurationCheckpoint field value if set, zero value otherwise.
 func (o *StoragePhysicalDisk) GetConfigurationCheckpoint() string {
-	if o == nil || o.ConfigurationCheckpoint == nil {
+	if o == nil || IsNil(o.ConfigurationCheckpoint) {
 		var ret string
 		return ret
 	}
@@ -325,7 +329,7 @@ func (o *StoragePhysicalDisk) GetConfigurationCheckpoint() string {
 // GetConfigurationCheckpointOk returns a tuple with the ConfigurationCheckpoint field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StoragePhysicalDisk) GetConfigurationCheckpointOk() (*string, bool) {
-	if o == nil || o.ConfigurationCheckpoint == nil {
+	if o == nil || IsNil(o.ConfigurationCheckpoint) {
 		return nil, false
 	}
 	return o.ConfigurationCheckpoint, true
@@ -333,7 +337,7 @@ func (o *StoragePhysicalDisk) GetConfigurationCheckpointOk() (*string, bool) {
 
 // HasConfigurationCheckpoint returns a boolean if a field has been set.
 func (o *StoragePhysicalDisk) HasConfigurationCheckpoint() bool {
-	if o != nil && o.ConfigurationCheckpoint != nil {
+	if o != nil && !IsNil(o.ConfigurationCheckpoint) {
 		return true
 	}
 
@@ -347,7 +351,7 @@ func (o *StoragePhysicalDisk) SetConfigurationCheckpoint(v string) {
 
 // GetConfigurationState returns the ConfigurationState field value if set, zero value otherwise.
 func (o *StoragePhysicalDisk) GetConfigurationState() string {
-	if o == nil || o.ConfigurationState == nil {
+	if o == nil || IsNil(o.ConfigurationState) {
 		var ret string
 		return ret
 	}
@@ -357,7 +361,7 @@ func (o *StoragePhysicalDisk) GetConfigurationState() string {
 // GetConfigurationStateOk returns a tuple with the ConfigurationState field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StoragePhysicalDisk) GetConfigurationStateOk() (*string, bool) {
-	if o == nil || o.ConfigurationState == nil {
+	if o == nil || IsNil(o.ConfigurationState) {
 		return nil, false
 	}
 	return o.ConfigurationState, true
@@ -365,7 +369,7 @@ func (o *StoragePhysicalDisk) GetConfigurationStateOk() (*string, bool) {
 
 // HasConfigurationState returns a boolean if a field has been set.
 func (o *StoragePhysicalDisk) HasConfigurationState() bool {
-	if o != nil && o.ConfigurationState != nil {
+	if o != nil && !IsNil(o.ConfigurationState) {
 		return true
 	}
 
@@ -379,7 +383,7 @@ func (o *StoragePhysicalDisk) SetConfigurationState(v string) {
 
 // GetDescription returns the Description field value if set, zero value otherwise.
 func (o *StoragePhysicalDisk) GetDescription() string {
-	if o == nil || o.Description == nil {
+	if o == nil || IsNil(o.Description) {
 		var ret string
 		return ret
 	}
@@ -389,7 +393,7 @@ func (o *StoragePhysicalDisk) GetDescription() string {
 // GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StoragePhysicalDisk) GetDescriptionOk() (*string, bool) {
-	if o == nil || o.Description == nil {
+	if o == nil || IsNil(o.Description) {
 		return nil, false
 	}
 	return o.Description, true
@@ -397,7 +401,7 @@ func (o *StoragePhysicalDisk) GetDescriptionOk() (*string, bool) {
 
 // HasDescription returns a boolean if a field has been set.
 func (o *StoragePhysicalDisk) HasDescription() bool {
-	if o != nil && o.Description != nil {
+	if o != nil && !IsNil(o.Description) {
 		return true
 	}
 
@@ -411,7 +415,7 @@ func (o *StoragePhysicalDisk) SetDescription(v string) {
 
 // GetDisabledForRemoval returns the DisabledForRemoval field value if set, zero value otherwise.
 func (o *StoragePhysicalDisk) GetDisabledForRemoval() bool {
-	if o == nil || o.DisabledForRemoval == nil {
+	if o == nil || IsNil(o.DisabledForRemoval) {
 		var ret bool
 		return ret
 	}
@@ -421,7 +425,7 @@ func (o *StoragePhysicalDisk) GetDisabledForRemoval() bool {
 // GetDisabledForRemovalOk returns a tuple with the DisabledForRemoval field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StoragePhysicalDisk) GetDisabledForRemovalOk() (*bool, bool) {
-	if o == nil || o.DisabledForRemoval == nil {
+	if o == nil || IsNil(o.DisabledForRemoval) {
 		return nil, false
 	}
 	return o.DisabledForRemoval, true
@@ -429,7 +433,7 @@ func (o *StoragePhysicalDisk) GetDisabledForRemovalOk() (*bool, bool) {
 
 // HasDisabledForRemoval returns a boolean if a field has been set.
 func (o *StoragePhysicalDisk) HasDisabledForRemoval() bool {
-	if o != nil && o.DisabledForRemoval != nil {
+	if o != nil && !IsNil(o.DisabledForRemoval) {
 		return true
 	}
 
@@ -443,7 +447,7 @@ func (o *StoragePhysicalDisk) SetDisabledForRemoval(v bool) {
 
 // GetDiscoveredPath returns the DiscoveredPath field value if set, zero value otherwise.
 func (o *StoragePhysicalDisk) GetDiscoveredPath() string {
-	if o == nil || o.DiscoveredPath == nil {
+	if o == nil || IsNil(o.DiscoveredPath) {
 		var ret string
 		return ret
 	}
@@ -453,7 +457,7 @@ func (o *StoragePhysicalDisk) GetDiscoveredPath() string {
 // GetDiscoveredPathOk returns a tuple with the DiscoveredPath field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StoragePhysicalDisk) GetDiscoveredPathOk() (*string, bool) {
-	if o == nil || o.DiscoveredPath == nil {
+	if o == nil || IsNil(o.DiscoveredPath) {
 		return nil, false
 	}
 	return o.DiscoveredPath, true
@@ -461,7 +465,7 @@ func (o *StoragePhysicalDisk) GetDiscoveredPathOk() (*string, bool) {
 
 // HasDiscoveredPath returns a boolean if a field has been set.
 func (o *StoragePhysicalDisk) HasDiscoveredPath() bool {
-	if o != nil && o.DiscoveredPath != nil {
+	if o != nil && !IsNil(o.DiscoveredPath) {
 		return true
 	}
 
@@ -475,7 +479,7 @@ func (o *StoragePhysicalDisk) SetDiscoveredPath(v string) {
 
 // GetDiskId returns the DiskId field value if set, zero value otherwise.
 func (o *StoragePhysicalDisk) GetDiskId() string {
-	if o == nil || o.DiskId == nil {
+	if o == nil || IsNil(o.DiskId) {
 		var ret string
 		return ret
 	}
@@ -485,7 +489,7 @@ func (o *StoragePhysicalDisk) GetDiskId() string {
 // GetDiskIdOk returns a tuple with the DiskId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StoragePhysicalDisk) GetDiskIdOk() (*string, bool) {
-	if o == nil || o.DiskId == nil {
+	if o == nil || IsNil(o.DiskId) {
 		return nil, false
 	}
 	return o.DiskId, true
@@ -493,7 +497,7 @@ func (o *StoragePhysicalDisk) GetDiskIdOk() (*string, bool) {
 
 // HasDiskId returns a boolean if a field has been set.
 func (o *StoragePhysicalDisk) HasDiskId() bool {
-	if o != nil && o.DiskId != nil {
+	if o != nil && !IsNil(o.DiskId) {
 		return true
 	}
 
@@ -507,7 +511,7 @@ func (o *StoragePhysicalDisk) SetDiskId(v string) {
 
 // GetDiskState returns the DiskState field value if set, zero value otherwise.
 func (o *StoragePhysicalDisk) GetDiskState() string {
-	if o == nil || o.DiskState == nil {
+	if o == nil || IsNil(o.DiskState) {
 		var ret string
 		return ret
 	}
@@ -517,7 +521,7 @@ func (o *StoragePhysicalDisk) GetDiskState() string {
 // GetDiskStateOk returns a tuple with the DiskState field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StoragePhysicalDisk) GetDiskStateOk() (*string, bool) {
-	if o == nil || o.DiskState == nil {
+	if o == nil || IsNil(o.DiskState) {
 		return nil, false
 	}
 	return o.DiskState, true
@@ -525,7 +529,7 @@ func (o *StoragePhysicalDisk) GetDiskStateOk() (*string, bool) {
 
 // HasDiskState returns a boolean if a field has been set.
 func (o *StoragePhysicalDisk) HasDiskState() bool {
-	if o != nil && o.DiskState != nil {
+	if o != nil && !IsNil(o.DiskState) {
 		return true
 	}
 
@@ -539,7 +543,7 @@ func (o *StoragePhysicalDisk) SetDiskState(v string) {
 
 // GetDriveFirmware returns the DriveFirmware field value if set, zero value otherwise.
 func (o *StoragePhysicalDisk) GetDriveFirmware() string {
-	if o == nil || o.DriveFirmware == nil {
+	if o == nil || IsNil(o.DriveFirmware) {
 		var ret string
 		return ret
 	}
@@ -549,7 +553,7 @@ func (o *StoragePhysicalDisk) GetDriveFirmware() string {
 // GetDriveFirmwareOk returns a tuple with the DriveFirmware field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StoragePhysicalDisk) GetDriveFirmwareOk() (*string, bool) {
-	if o == nil || o.DriveFirmware == nil {
+	if o == nil || IsNil(o.DriveFirmware) {
 		return nil, false
 	}
 	return o.DriveFirmware, true
@@ -557,7 +561,7 @@ func (o *StoragePhysicalDisk) GetDriveFirmwareOk() (*string, bool) {
 
 // HasDriveFirmware returns a boolean if a field has been set.
 func (o *StoragePhysicalDisk) HasDriveFirmware() bool {
-	if o != nil && o.DriveFirmware != nil {
+	if o != nil && !IsNil(o.DriveFirmware) {
 		return true
 	}
 
@@ -571,7 +575,7 @@ func (o *StoragePhysicalDisk) SetDriveFirmware(v string) {
 
 // GetDriveState returns the DriveState field value if set, zero value otherwise.
 func (o *StoragePhysicalDisk) GetDriveState() string {
-	if o == nil || o.DriveState == nil {
+	if o == nil || IsNil(o.DriveState) {
 		var ret string
 		return ret
 	}
@@ -581,7 +585,7 @@ func (o *StoragePhysicalDisk) GetDriveState() string {
 // GetDriveStateOk returns a tuple with the DriveState field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StoragePhysicalDisk) GetDriveStateOk() (*string, bool) {
-	if o == nil || o.DriveState == nil {
+	if o == nil || IsNil(o.DriveState) {
 		return nil, false
 	}
 	return o.DriveState, true
@@ -589,7 +593,7 @@ func (o *StoragePhysicalDisk) GetDriveStateOk() (*string, bool) {
 
 // HasDriveState returns a boolean if a field has been set.
 func (o *StoragePhysicalDisk) HasDriveState() bool {
-	if o != nil && o.DriveState != nil {
+	if o != nil && !IsNil(o.DriveState) {
 		return true
 	}
 
@@ -603,7 +607,7 @@ func (o *StoragePhysicalDisk) SetDriveState(v string) {
 
 // GetEncryptionStatus returns the EncryptionStatus field value if set, zero value otherwise.
 func (o *StoragePhysicalDisk) GetEncryptionStatus() string {
-	if o == nil || o.EncryptionStatus == nil {
+	if o == nil || IsNil(o.EncryptionStatus) {
 		var ret string
 		return ret
 	}
@@ -613,7 +617,7 @@ func (o *StoragePhysicalDisk) GetEncryptionStatus() string {
 // GetEncryptionStatusOk returns a tuple with the EncryptionStatus field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StoragePhysicalDisk) GetEncryptionStatusOk() (*string, bool) {
-	if o == nil || o.EncryptionStatus == nil {
+	if o == nil || IsNil(o.EncryptionStatus) {
 		return nil, false
 	}
 	return o.EncryptionStatus, true
@@ -621,7 +625,7 @@ func (o *StoragePhysicalDisk) GetEncryptionStatusOk() (*string, bool) {
 
 // HasEncryptionStatus returns a boolean if a field has been set.
 func (o *StoragePhysicalDisk) HasEncryptionStatus() bool {
-	if o != nil && o.EncryptionStatus != nil {
+	if o != nil && !IsNil(o.EncryptionStatus) {
 		return true
 	}
 
@@ -635,7 +639,7 @@ func (o *StoragePhysicalDisk) SetEncryptionStatus(v string) {
 
 // GetFailurePredicted returns the FailurePredicted field value if set, zero value otherwise.
 func (o *StoragePhysicalDisk) GetFailurePredicted() bool {
-	if o == nil || o.FailurePredicted == nil {
+	if o == nil || IsNil(o.FailurePredicted) {
 		var ret bool
 		return ret
 	}
@@ -645,7 +649,7 @@ func (o *StoragePhysicalDisk) GetFailurePredicted() bool {
 // GetFailurePredictedOk returns a tuple with the FailurePredicted field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StoragePhysicalDisk) GetFailurePredictedOk() (*bool, bool) {
-	if o == nil || o.FailurePredicted == nil {
+	if o == nil || IsNil(o.FailurePredicted) {
 		return nil, false
 	}
 	return o.FailurePredicted, true
@@ -653,7 +657,7 @@ func (o *StoragePhysicalDisk) GetFailurePredictedOk() (*bool, bool) {
 
 // HasFailurePredicted returns a boolean if a field has been set.
 func (o *StoragePhysicalDisk) HasFailurePredicted() bool {
-	if o != nil && o.FailurePredicted != nil {
+	if o != nil && !IsNil(o.FailurePredicted) {
 		return true
 	}
 
@@ -667,7 +671,7 @@ func (o *StoragePhysicalDisk) SetFailurePredicted(v bool) {
 
 // GetFdeCapable returns the FdeCapable field value if set, zero value otherwise.
 func (o *StoragePhysicalDisk) GetFdeCapable() string {
-	if o == nil || o.FdeCapable == nil {
+	if o == nil || IsNil(o.FdeCapable) {
 		var ret string
 		return ret
 	}
@@ -677,7 +681,7 @@ func (o *StoragePhysicalDisk) GetFdeCapable() string {
 // GetFdeCapableOk returns a tuple with the FdeCapable field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StoragePhysicalDisk) GetFdeCapableOk() (*string, bool) {
-	if o == nil || o.FdeCapable == nil {
+	if o == nil || IsNil(o.FdeCapable) {
 		return nil, false
 	}
 	return o.FdeCapable, true
@@ -685,7 +689,7 @@ func (o *StoragePhysicalDisk) GetFdeCapableOk() (*string, bool) {
 
 // HasFdeCapable returns a boolean if a field has been set.
 func (o *StoragePhysicalDisk) HasFdeCapable() bool {
-	if o != nil && o.FdeCapable != nil {
+	if o != nil && !IsNil(o.FdeCapable) {
 		return true
 	}
 
@@ -699,7 +703,7 @@ func (o *StoragePhysicalDisk) SetFdeCapable(v string) {
 
 // GetHotSpareType returns the HotSpareType field value if set, zero value otherwise.
 func (o *StoragePhysicalDisk) GetHotSpareType() string {
-	if o == nil || o.HotSpareType == nil {
+	if o == nil || IsNil(o.HotSpareType) {
 		var ret string
 		return ret
 	}
@@ -709,7 +713,7 @@ func (o *StoragePhysicalDisk) GetHotSpareType() string {
 // GetHotSpareTypeOk returns a tuple with the HotSpareType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StoragePhysicalDisk) GetHotSpareTypeOk() (*string, bool) {
-	if o == nil || o.HotSpareType == nil {
+	if o == nil || IsNil(o.HotSpareType) {
 		return nil, false
 	}
 	return o.HotSpareType, true
@@ -717,7 +721,7 @@ func (o *StoragePhysicalDisk) GetHotSpareTypeOk() (*string, bool) {
 
 // HasHotSpareType returns a boolean if a field has been set.
 func (o *StoragePhysicalDisk) HasHotSpareType() bool {
-	if o != nil && o.HotSpareType != nil {
+	if o != nil && !IsNil(o.HotSpareType) {
 		return true
 	}
 
@@ -731,7 +735,7 @@ func (o *StoragePhysicalDisk) SetHotSpareType(v string) {
 
 // GetIndicatorLed returns the IndicatorLed field value if set, zero value otherwise.
 func (o *StoragePhysicalDisk) GetIndicatorLed() string {
-	if o == nil || o.IndicatorLed == nil {
+	if o == nil || IsNil(o.IndicatorLed) {
 		var ret string
 		return ret
 	}
@@ -741,7 +745,7 @@ func (o *StoragePhysicalDisk) GetIndicatorLed() string {
 // GetIndicatorLedOk returns a tuple with the IndicatorLed field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StoragePhysicalDisk) GetIndicatorLedOk() (*string, bool) {
-	if o == nil || o.IndicatorLed == nil {
+	if o == nil || IsNil(o.IndicatorLed) {
 		return nil, false
 	}
 	return o.IndicatorLed, true
@@ -749,7 +753,7 @@ func (o *StoragePhysicalDisk) GetIndicatorLedOk() (*string, bool) {
 
 // HasIndicatorLed returns a boolean if a field has been set.
 func (o *StoragePhysicalDisk) HasIndicatorLed() bool {
-	if o != nil && o.IndicatorLed != nil {
+	if o != nil && !IsNil(o.IndicatorLed) {
 		return true
 	}
 
@@ -763,7 +767,7 @@ func (o *StoragePhysicalDisk) SetIndicatorLed(v string) {
 
 // GetIsPlatformSupported returns the IsPlatformSupported field value if set, zero value otherwise.
 func (o *StoragePhysicalDisk) GetIsPlatformSupported() bool {
-	if o == nil || o.IsPlatformSupported == nil {
+	if o == nil || IsNil(o.IsPlatformSupported) {
 		var ret bool
 		return ret
 	}
@@ -773,7 +777,7 @@ func (o *StoragePhysicalDisk) GetIsPlatformSupported() bool {
 // GetIsPlatformSupportedOk returns a tuple with the IsPlatformSupported field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StoragePhysicalDisk) GetIsPlatformSupportedOk() (*bool, bool) {
-	if o == nil || o.IsPlatformSupported == nil {
+	if o == nil || IsNil(o.IsPlatformSupported) {
 		return nil, false
 	}
 	return o.IsPlatformSupported, true
@@ -781,7 +785,7 @@ func (o *StoragePhysicalDisk) GetIsPlatformSupportedOk() (*bool, bool) {
 
 // HasIsPlatformSupported returns a boolean if a field has been set.
 func (o *StoragePhysicalDisk) HasIsPlatformSupported() bool {
-	if o != nil && o.IsPlatformSupported != nil {
+	if o != nil && !IsNil(o.IsPlatformSupported) {
 		return true
 	}
 
@@ -795,7 +799,7 @@ func (o *StoragePhysicalDisk) SetIsPlatformSupported(v bool) {
 
 // GetLinkSpeed returns the LinkSpeed field value if set, zero value otherwise.
 func (o *StoragePhysicalDisk) GetLinkSpeed() string {
-	if o == nil || o.LinkSpeed == nil {
+	if o == nil || IsNil(o.LinkSpeed) {
 		var ret string
 		return ret
 	}
@@ -805,7 +809,7 @@ func (o *StoragePhysicalDisk) GetLinkSpeed() string {
 // GetLinkSpeedOk returns a tuple with the LinkSpeed field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StoragePhysicalDisk) GetLinkSpeedOk() (*string, bool) {
-	if o == nil || o.LinkSpeed == nil {
+	if o == nil || IsNil(o.LinkSpeed) {
 		return nil, false
 	}
 	return o.LinkSpeed, true
@@ -813,7 +817,7 @@ func (o *StoragePhysicalDisk) GetLinkSpeedOk() (*string, bool) {
 
 // HasLinkSpeed returns a boolean if a field has been set.
 func (o *StoragePhysicalDisk) HasLinkSpeed() bool {
-	if o != nil && o.LinkSpeed != nil {
+	if o != nil && !IsNil(o.LinkSpeed) {
 		return true
 	}
 
@@ -827,7 +831,7 @@ func (o *StoragePhysicalDisk) SetLinkSpeed(v string) {
 
 // GetLinkState returns the LinkState field value if set, zero value otherwise.
 func (o *StoragePhysicalDisk) GetLinkState() string {
-	if o == nil || o.LinkState == nil {
+	if o == nil || IsNil(o.LinkState) {
 		var ret string
 		return ret
 	}
@@ -837,7 +841,7 @@ func (o *StoragePhysicalDisk) GetLinkState() string {
 // GetLinkStateOk returns a tuple with the LinkState field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StoragePhysicalDisk) GetLinkStateOk() (*string, bool) {
-	if o == nil || o.LinkState == nil {
+	if o == nil || IsNil(o.LinkState) {
 		return nil, false
 	}
 	return o.LinkState, true
@@ -845,7 +849,7 @@ func (o *StoragePhysicalDisk) GetLinkStateOk() (*string, bool) {
 
 // HasLinkState returns a boolean if a field has been set.
 func (o *StoragePhysicalDisk) HasLinkState() bool {
-	if o != nil && o.LinkState != nil {
+	if o != nil && !IsNil(o.LinkState) {
 		return true
 	}
 
@@ -859,7 +863,7 @@ func (o *StoragePhysicalDisk) SetLinkState(v string) {
 
 // GetMaximumOperatingTemperature returns the MaximumOperatingTemperature field value if set, zero value otherwise.
 func (o *StoragePhysicalDisk) GetMaximumOperatingTemperature() int64 {
-	if o == nil || o.MaximumOperatingTemperature == nil {
+	if o == nil || IsNil(o.MaximumOperatingTemperature) {
 		var ret int64
 		return ret
 	}
@@ -869,7 +873,7 @@ func (o *StoragePhysicalDisk) GetMaximumOperatingTemperature() int64 {
 // GetMaximumOperatingTemperatureOk returns a tuple with the MaximumOperatingTemperature field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StoragePhysicalDisk) GetMaximumOperatingTemperatureOk() (*int64, bool) {
-	if o == nil || o.MaximumOperatingTemperature == nil {
+	if o == nil || IsNil(o.MaximumOperatingTemperature) {
 		return nil, false
 	}
 	return o.MaximumOperatingTemperature, true
@@ -877,7 +881,7 @@ func (o *StoragePhysicalDisk) GetMaximumOperatingTemperatureOk() (*int64, bool) 
 
 // HasMaximumOperatingTemperature returns a boolean if a field has been set.
 func (o *StoragePhysicalDisk) HasMaximumOperatingTemperature() bool {
-	if o != nil && o.MaximumOperatingTemperature != nil {
+	if o != nil && !IsNil(o.MaximumOperatingTemperature) {
 		return true
 	}
 
@@ -891,7 +895,7 @@ func (o *StoragePhysicalDisk) SetMaximumOperatingTemperature(v int64) {
 
 // GetMediaErrorCount returns the MediaErrorCount field value if set, zero value otherwise.
 func (o *StoragePhysicalDisk) GetMediaErrorCount() int64 {
-	if o == nil || o.MediaErrorCount == nil {
+	if o == nil || IsNil(o.MediaErrorCount) {
 		var ret int64
 		return ret
 	}
@@ -901,7 +905,7 @@ func (o *StoragePhysicalDisk) GetMediaErrorCount() int64 {
 // GetMediaErrorCountOk returns a tuple with the MediaErrorCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StoragePhysicalDisk) GetMediaErrorCountOk() (*int64, bool) {
-	if o == nil || o.MediaErrorCount == nil {
+	if o == nil || IsNil(o.MediaErrorCount) {
 		return nil, false
 	}
 	return o.MediaErrorCount, true
@@ -909,7 +913,7 @@ func (o *StoragePhysicalDisk) GetMediaErrorCountOk() (*int64, bool) {
 
 // HasMediaErrorCount returns a boolean if a field has been set.
 func (o *StoragePhysicalDisk) HasMediaErrorCount() bool {
-	if o != nil && o.MediaErrorCount != nil {
+	if o != nil && !IsNil(o.MediaErrorCount) {
 		return true
 	}
 
@@ -923,7 +927,7 @@ func (o *StoragePhysicalDisk) SetMediaErrorCount(v int64) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *StoragePhysicalDisk) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -933,7 +937,7 @@ func (o *StoragePhysicalDisk) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StoragePhysicalDisk) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -941,7 +945,7 @@ func (o *StoragePhysicalDisk) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *StoragePhysicalDisk) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -955,7 +959,7 @@ func (o *StoragePhysicalDisk) SetName(v string) {
 
 // GetNonCoercedSizeBytes returns the NonCoercedSizeBytes field value if set, zero value otherwise.
 func (o *StoragePhysicalDisk) GetNonCoercedSizeBytes() int64 {
-	if o == nil || o.NonCoercedSizeBytes == nil {
+	if o == nil || IsNil(o.NonCoercedSizeBytes) {
 		var ret int64
 		return ret
 	}
@@ -965,7 +969,7 @@ func (o *StoragePhysicalDisk) GetNonCoercedSizeBytes() int64 {
 // GetNonCoercedSizeBytesOk returns a tuple with the NonCoercedSizeBytes field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StoragePhysicalDisk) GetNonCoercedSizeBytesOk() (*int64, bool) {
-	if o == nil || o.NonCoercedSizeBytes == nil {
+	if o == nil || IsNil(o.NonCoercedSizeBytes) {
 		return nil, false
 	}
 	return o.NonCoercedSizeBytes, true
@@ -973,7 +977,7 @@ func (o *StoragePhysicalDisk) GetNonCoercedSizeBytesOk() (*int64, bool) {
 
 // HasNonCoercedSizeBytes returns a boolean if a field has been set.
 func (o *StoragePhysicalDisk) HasNonCoercedSizeBytes() bool {
-	if o != nil && o.NonCoercedSizeBytes != nil {
+	if o != nil && !IsNil(o.NonCoercedSizeBytes) {
 		return true
 	}
 
@@ -987,7 +991,7 @@ func (o *StoragePhysicalDisk) SetNonCoercedSizeBytes(v int64) {
 
 // GetNumBlocks returns the NumBlocks field value if set, zero value otherwise.
 func (o *StoragePhysicalDisk) GetNumBlocks() string {
-	if o == nil || o.NumBlocks == nil {
+	if o == nil || IsNil(o.NumBlocks) {
 		var ret string
 		return ret
 	}
@@ -997,7 +1001,7 @@ func (o *StoragePhysicalDisk) GetNumBlocks() string {
 // GetNumBlocksOk returns a tuple with the NumBlocks field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StoragePhysicalDisk) GetNumBlocksOk() (*string, bool) {
-	if o == nil || o.NumBlocks == nil {
+	if o == nil || IsNil(o.NumBlocks) {
 		return nil, false
 	}
 	return o.NumBlocks, true
@@ -1005,7 +1009,7 @@ func (o *StoragePhysicalDisk) GetNumBlocksOk() (*string, bool) {
 
 // HasNumBlocks returns a boolean if a field has been set.
 func (o *StoragePhysicalDisk) HasNumBlocks() bool {
-	if o != nil && o.NumBlocks != nil {
+	if o != nil && !IsNil(o.NumBlocks) {
 		return true
 	}
 
@@ -1019,7 +1023,7 @@ func (o *StoragePhysicalDisk) SetNumBlocks(v string) {
 
 // GetOperPowerState returns the OperPowerState field value if set, zero value otherwise.
 func (o *StoragePhysicalDisk) GetOperPowerState() string {
-	if o == nil || o.OperPowerState == nil {
+	if o == nil || IsNil(o.OperPowerState) {
 		var ret string
 		return ret
 	}
@@ -1029,7 +1033,7 @@ func (o *StoragePhysicalDisk) GetOperPowerState() string {
 // GetOperPowerStateOk returns a tuple with the OperPowerState field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StoragePhysicalDisk) GetOperPowerStateOk() (*string, bool) {
-	if o == nil || o.OperPowerState == nil {
+	if o == nil || IsNil(o.OperPowerState) {
 		return nil, false
 	}
 	return o.OperPowerState, true
@@ -1037,7 +1041,7 @@ func (o *StoragePhysicalDisk) GetOperPowerStateOk() (*string, bool) {
 
 // HasOperPowerState returns a boolean if a field has been set.
 func (o *StoragePhysicalDisk) HasOperPowerState() bool {
-	if o != nil && o.OperPowerState != nil {
+	if o != nil && !IsNil(o.OperPowerState) {
 		return true
 	}
 
@@ -1051,7 +1055,7 @@ func (o *StoragePhysicalDisk) SetOperPowerState(v string) {
 
 // GetOperQualifierReason returns the OperQualifierReason field value if set, zero value otherwise.
 func (o *StoragePhysicalDisk) GetOperQualifierReason() string {
-	if o == nil || o.OperQualifierReason == nil {
+	if o == nil || IsNil(o.OperQualifierReason) {
 		var ret string
 		return ret
 	}
@@ -1061,7 +1065,7 @@ func (o *StoragePhysicalDisk) GetOperQualifierReason() string {
 // GetOperQualifierReasonOk returns a tuple with the OperQualifierReason field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StoragePhysicalDisk) GetOperQualifierReasonOk() (*string, bool) {
-	if o == nil || o.OperQualifierReason == nil {
+	if o == nil || IsNil(o.OperQualifierReason) {
 		return nil, false
 	}
 	return o.OperQualifierReason, true
@@ -1069,7 +1073,7 @@ func (o *StoragePhysicalDisk) GetOperQualifierReasonOk() (*string, bool) {
 
 // HasOperQualifierReason returns a boolean if a field has been set.
 func (o *StoragePhysicalDisk) HasOperQualifierReason() bool {
-	if o != nil && o.OperQualifierReason != nil {
+	if o != nil && !IsNil(o.OperQualifierReason) {
 		return true
 	}
 
@@ -1083,7 +1087,7 @@ func (o *StoragePhysicalDisk) SetOperQualifierReason(v string) {
 
 // GetOperability returns the Operability field value if set, zero value otherwise.
 func (o *StoragePhysicalDisk) GetOperability() string {
-	if o == nil || o.Operability == nil {
+	if o == nil || IsNil(o.Operability) {
 		var ret string
 		return ret
 	}
@@ -1093,7 +1097,7 @@ func (o *StoragePhysicalDisk) GetOperability() string {
 // GetOperabilityOk returns a tuple with the Operability field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StoragePhysicalDisk) GetOperabilityOk() (*string, bool) {
-	if o == nil || o.Operability == nil {
+	if o == nil || IsNil(o.Operability) {
 		return nil, false
 	}
 	return o.Operability, true
@@ -1101,7 +1105,7 @@ func (o *StoragePhysicalDisk) GetOperabilityOk() (*string, bool) {
 
 // HasOperability returns a boolean if a field has been set.
 func (o *StoragePhysicalDisk) HasOperability() bool {
-	if o != nil && o.Operability != nil {
+	if o != nil && !IsNil(o.Operability) {
 		return true
 	}
 
@@ -1115,7 +1119,7 @@ func (o *StoragePhysicalDisk) SetOperability(v string) {
 
 // GetOperatingTemperature returns the OperatingTemperature field value if set, zero value otherwise.
 func (o *StoragePhysicalDisk) GetOperatingTemperature() int64 {
-	if o == nil || o.OperatingTemperature == nil {
+	if o == nil || IsNil(o.OperatingTemperature) {
 		var ret int64
 		return ret
 	}
@@ -1125,7 +1129,7 @@ func (o *StoragePhysicalDisk) GetOperatingTemperature() int64 {
 // GetOperatingTemperatureOk returns a tuple with the OperatingTemperature field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StoragePhysicalDisk) GetOperatingTemperatureOk() (*int64, bool) {
-	if o == nil || o.OperatingTemperature == nil {
+	if o == nil || IsNil(o.OperatingTemperature) {
 		return nil, false
 	}
 	return o.OperatingTemperature, true
@@ -1133,7 +1137,7 @@ func (o *StoragePhysicalDisk) GetOperatingTemperatureOk() (*int64, bool) {
 
 // HasOperatingTemperature returns a boolean if a field has been set.
 func (o *StoragePhysicalDisk) HasOperatingTemperature() bool {
-	if o != nil && o.OperatingTemperature != nil {
+	if o != nil && !IsNil(o.OperatingTemperature) {
 		return true
 	}
 
@@ -1147,7 +1151,7 @@ func (o *StoragePhysicalDisk) SetOperatingTemperature(v int64) {
 
 // GetPartNumber returns the PartNumber field value if set, zero value otherwise.
 func (o *StoragePhysicalDisk) GetPartNumber() string {
-	if o == nil || o.PartNumber == nil {
+	if o == nil || IsNil(o.PartNumber) {
 		var ret string
 		return ret
 	}
@@ -1157,7 +1161,7 @@ func (o *StoragePhysicalDisk) GetPartNumber() string {
 // GetPartNumberOk returns a tuple with the PartNumber field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StoragePhysicalDisk) GetPartNumberOk() (*string, bool) {
-	if o == nil || o.PartNumber == nil {
+	if o == nil || IsNil(o.PartNumber) {
 		return nil, false
 	}
 	return o.PartNumber, true
@@ -1165,7 +1169,7 @@ func (o *StoragePhysicalDisk) GetPartNumberOk() (*string, bool) {
 
 // HasPartNumber returns a boolean if a field has been set.
 func (o *StoragePhysicalDisk) HasPartNumber() bool {
-	if o != nil && o.PartNumber != nil {
+	if o != nil && !IsNil(o.PartNumber) {
 		return true
 	}
 
@@ -1179,7 +1183,7 @@ func (o *StoragePhysicalDisk) SetPartNumber(v string) {
 
 // GetPercentLifeLeft returns the PercentLifeLeft field value if set, zero value otherwise.
 func (o *StoragePhysicalDisk) GetPercentLifeLeft() int64 {
-	if o == nil || o.PercentLifeLeft == nil {
+	if o == nil || IsNil(o.PercentLifeLeft) {
 		var ret int64
 		return ret
 	}
@@ -1189,7 +1193,7 @@ func (o *StoragePhysicalDisk) GetPercentLifeLeft() int64 {
 // GetPercentLifeLeftOk returns a tuple with the PercentLifeLeft field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StoragePhysicalDisk) GetPercentLifeLeftOk() (*int64, bool) {
-	if o == nil || o.PercentLifeLeft == nil {
+	if o == nil || IsNil(o.PercentLifeLeft) {
 		return nil, false
 	}
 	return o.PercentLifeLeft, true
@@ -1197,7 +1201,7 @@ func (o *StoragePhysicalDisk) GetPercentLifeLeftOk() (*int64, bool) {
 
 // HasPercentLifeLeft returns a boolean if a field has been set.
 func (o *StoragePhysicalDisk) HasPercentLifeLeft() bool {
-	if o != nil && o.PercentLifeLeft != nil {
+	if o != nil && !IsNil(o.PercentLifeLeft) {
 		return true
 	}
 
@@ -1211,7 +1215,7 @@ func (o *StoragePhysicalDisk) SetPercentLifeLeft(v int64) {
 
 // GetPercentReservedCapacityConsumed returns the PercentReservedCapacityConsumed field value if set, zero value otherwise.
 func (o *StoragePhysicalDisk) GetPercentReservedCapacityConsumed() int64 {
-	if o == nil || o.PercentReservedCapacityConsumed == nil {
+	if o == nil || IsNil(o.PercentReservedCapacityConsumed) {
 		var ret int64
 		return ret
 	}
@@ -1221,7 +1225,7 @@ func (o *StoragePhysicalDisk) GetPercentReservedCapacityConsumed() int64 {
 // GetPercentReservedCapacityConsumedOk returns a tuple with the PercentReservedCapacityConsumed field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StoragePhysicalDisk) GetPercentReservedCapacityConsumedOk() (*int64, bool) {
-	if o == nil || o.PercentReservedCapacityConsumed == nil {
+	if o == nil || IsNil(o.PercentReservedCapacityConsumed) {
 		return nil, false
 	}
 	return o.PercentReservedCapacityConsumed, true
@@ -1229,7 +1233,7 @@ func (o *StoragePhysicalDisk) GetPercentReservedCapacityConsumedOk() (*int64, bo
 
 // HasPercentReservedCapacityConsumed returns a boolean if a field has been set.
 func (o *StoragePhysicalDisk) HasPercentReservedCapacityConsumed() bool {
-	if o != nil && o.PercentReservedCapacityConsumed != nil {
+	if o != nil && !IsNil(o.PercentReservedCapacityConsumed) {
 		return true
 	}
 
@@ -1243,7 +1247,7 @@ func (o *StoragePhysicalDisk) SetPercentReservedCapacityConsumed(v int64) {
 
 // GetPerformancePercent returns the PerformancePercent field value if set, zero value otherwise.
 func (o *StoragePhysicalDisk) GetPerformancePercent() int64 {
-	if o == nil || o.PerformancePercent == nil {
+	if o == nil || IsNil(o.PerformancePercent) {
 		var ret int64
 		return ret
 	}
@@ -1253,7 +1257,7 @@ func (o *StoragePhysicalDisk) GetPerformancePercent() int64 {
 // GetPerformancePercentOk returns a tuple with the PerformancePercent field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StoragePhysicalDisk) GetPerformancePercentOk() (*int64, bool) {
-	if o == nil || o.PerformancePercent == nil {
+	if o == nil || IsNil(o.PerformancePercent) {
 		return nil, false
 	}
 	return o.PerformancePercent, true
@@ -1261,7 +1265,7 @@ func (o *StoragePhysicalDisk) GetPerformancePercentOk() (*int64, bool) {
 
 // HasPerformancePercent returns a boolean if a field has been set.
 func (o *StoragePhysicalDisk) HasPerformancePercent() bool {
-	if o != nil && o.PerformancePercent != nil {
+	if o != nil && !IsNil(o.PerformancePercent) {
 		return true
 	}
 
@@ -1275,7 +1279,7 @@ func (o *StoragePhysicalDisk) SetPerformancePercent(v int64) {
 
 // GetPhysicalBlockSize returns the PhysicalBlockSize field value if set, zero value otherwise.
 func (o *StoragePhysicalDisk) GetPhysicalBlockSize() string {
-	if o == nil || o.PhysicalBlockSize == nil {
+	if o == nil || IsNil(o.PhysicalBlockSize) {
 		var ret string
 		return ret
 	}
@@ -1285,7 +1289,7 @@ func (o *StoragePhysicalDisk) GetPhysicalBlockSize() string {
 // GetPhysicalBlockSizeOk returns a tuple with the PhysicalBlockSize field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StoragePhysicalDisk) GetPhysicalBlockSizeOk() (*string, bool) {
-	if o == nil || o.PhysicalBlockSize == nil {
+	if o == nil || IsNil(o.PhysicalBlockSize) {
 		return nil, false
 	}
 	return o.PhysicalBlockSize, true
@@ -1293,7 +1297,7 @@ func (o *StoragePhysicalDisk) GetPhysicalBlockSizeOk() (*string, bool) {
 
 // HasPhysicalBlockSize returns a boolean if a field has been set.
 func (o *StoragePhysicalDisk) HasPhysicalBlockSize() bool {
-	if o != nil && o.PhysicalBlockSize != nil {
+	if o != nil && !IsNil(o.PhysicalBlockSize) {
 		return true
 	}
 
@@ -1307,7 +1311,7 @@ func (o *StoragePhysicalDisk) SetPhysicalBlockSize(v string) {
 
 // GetPid returns the Pid field value if set, zero value otherwise.
 func (o *StoragePhysicalDisk) GetPid() string {
-	if o == nil || o.Pid == nil {
+	if o == nil || IsNil(o.Pid) {
 		var ret string
 		return ret
 	}
@@ -1317,7 +1321,7 @@ func (o *StoragePhysicalDisk) GetPid() string {
 // GetPidOk returns a tuple with the Pid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StoragePhysicalDisk) GetPidOk() (*string, bool) {
-	if o == nil || o.Pid == nil {
+	if o == nil || IsNil(o.Pid) {
 		return nil, false
 	}
 	return o.Pid, true
@@ -1325,7 +1329,7 @@ func (o *StoragePhysicalDisk) GetPidOk() (*string, bool) {
 
 // HasPid returns a boolean if a field has been set.
 func (o *StoragePhysicalDisk) HasPid() bool {
-	if o != nil && o.Pid != nil {
+	if o != nil && !IsNil(o.Pid) {
 		return true
 	}
 
@@ -1339,7 +1343,7 @@ func (o *StoragePhysicalDisk) SetPid(v string) {
 
 // GetPowerCycleCount returns the PowerCycleCount field value if set, zero value otherwise.
 func (o *StoragePhysicalDisk) GetPowerCycleCount() int64 {
-	if o == nil || o.PowerCycleCount == nil {
+	if o == nil || IsNil(o.PowerCycleCount) {
 		var ret int64
 		return ret
 	}
@@ -1349,7 +1353,7 @@ func (o *StoragePhysicalDisk) GetPowerCycleCount() int64 {
 // GetPowerCycleCountOk returns a tuple with the PowerCycleCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StoragePhysicalDisk) GetPowerCycleCountOk() (*int64, bool) {
-	if o == nil || o.PowerCycleCount == nil {
+	if o == nil || IsNil(o.PowerCycleCount) {
 		return nil, false
 	}
 	return o.PowerCycleCount, true
@@ -1357,7 +1361,7 @@ func (o *StoragePhysicalDisk) GetPowerCycleCountOk() (*int64, bool) {
 
 // HasPowerCycleCount returns a boolean if a field has been set.
 func (o *StoragePhysicalDisk) HasPowerCycleCount() bool {
-	if o != nil && o.PowerCycleCount != nil {
+	if o != nil && !IsNil(o.PowerCycleCount) {
 		return true
 	}
 
@@ -1371,7 +1375,7 @@ func (o *StoragePhysicalDisk) SetPowerCycleCount(v int64) {
 
 // GetPowerOnHours returns the PowerOnHours field value if set, zero value otherwise.
 func (o *StoragePhysicalDisk) GetPowerOnHours() int64 {
-	if o == nil || o.PowerOnHours == nil {
+	if o == nil || IsNil(o.PowerOnHours) {
 		var ret int64
 		return ret
 	}
@@ -1381,7 +1385,7 @@ func (o *StoragePhysicalDisk) GetPowerOnHours() int64 {
 // GetPowerOnHoursOk returns a tuple with the PowerOnHours field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StoragePhysicalDisk) GetPowerOnHoursOk() (*int64, bool) {
-	if o == nil || o.PowerOnHours == nil {
+	if o == nil || IsNil(o.PowerOnHours) {
 		return nil, false
 	}
 	return o.PowerOnHours, true
@@ -1389,7 +1393,7 @@ func (o *StoragePhysicalDisk) GetPowerOnHoursOk() (*int64, bool) {
 
 // HasPowerOnHours returns a boolean if a field has been set.
 func (o *StoragePhysicalDisk) HasPowerOnHours() bool {
-	if o != nil && o.PowerOnHours != nil {
+	if o != nil && !IsNil(o.PowerOnHours) {
 		return true
 	}
 
@@ -1403,7 +1407,7 @@ func (o *StoragePhysicalDisk) SetPowerOnHours(v int64) {
 
 // GetPowerOnHoursPercentage returns the PowerOnHoursPercentage field value if set, zero value otherwise.
 func (o *StoragePhysicalDisk) GetPowerOnHoursPercentage() int64 {
-	if o == nil || o.PowerOnHoursPercentage == nil {
+	if o == nil || IsNil(o.PowerOnHoursPercentage) {
 		var ret int64
 		return ret
 	}
@@ -1413,7 +1417,7 @@ func (o *StoragePhysicalDisk) GetPowerOnHoursPercentage() int64 {
 // GetPowerOnHoursPercentageOk returns a tuple with the PowerOnHoursPercentage field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StoragePhysicalDisk) GetPowerOnHoursPercentageOk() (*int64, bool) {
-	if o == nil || o.PowerOnHoursPercentage == nil {
+	if o == nil || IsNil(o.PowerOnHoursPercentage) {
 		return nil, false
 	}
 	return o.PowerOnHoursPercentage, true
@@ -1421,7 +1425,7 @@ func (o *StoragePhysicalDisk) GetPowerOnHoursPercentageOk() (*int64, bool) {
 
 // HasPowerOnHoursPercentage returns a boolean if a field has been set.
 func (o *StoragePhysicalDisk) HasPowerOnHoursPercentage() bool {
-	if o != nil && o.PowerOnHoursPercentage != nil {
+	if o != nil && !IsNil(o.PowerOnHoursPercentage) {
 		return true
 	}
 
@@ -1435,7 +1439,7 @@ func (o *StoragePhysicalDisk) SetPowerOnHoursPercentage(v int64) {
 
 // GetPredictedMediaLifeLeftPercent returns the PredictedMediaLifeLeftPercent field value if set, zero value otherwise.
 func (o *StoragePhysicalDisk) GetPredictedMediaLifeLeftPercent() int64 {
-	if o == nil || o.PredictedMediaLifeLeftPercent == nil {
+	if o == nil || IsNil(o.PredictedMediaLifeLeftPercent) {
 		var ret int64
 		return ret
 	}
@@ -1445,7 +1449,7 @@ func (o *StoragePhysicalDisk) GetPredictedMediaLifeLeftPercent() int64 {
 // GetPredictedMediaLifeLeftPercentOk returns a tuple with the PredictedMediaLifeLeftPercent field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StoragePhysicalDisk) GetPredictedMediaLifeLeftPercentOk() (*int64, bool) {
-	if o == nil || o.PredictedMediaLifeLeftPercent == nil {
+	if o == nil || IsNil(o.PredictedMediaLifeLeftPercent) {
 		return nil, false
 	}
 	return o.PredictedMediaLifeLeftPercent, true
@@ -1453,7 +1457,7 @@ func (o *StoragePhysicalDisk) GetPredictedMediaLifeLeftPercentOk() (*int64, bool
 
 // HasPredictedMediaLifeLeftPercent returns a boolean if a field has been set.
 func (o *StoragePhysicalDisk) HasPredictedMediaLifeLeftPercent() bool {
-	if o != nil && o.PredictedMediaLifeLeftPercent != nil {
+	if o != nil && !IsNil(o.PredictedMediaLifeLeftPercent) {
 		return true
 	}
 
@@ -1467,7 +1471,7 @@ func (o *StoragePhysicalDisk) SetPredictedMediaLifeLeftPercent(v int64) {
 
 // GetPredictiveFailureCount returns the PredictiveFailureCount field value if set, zero value otherwise.
 func (o *StoragePhysicalDisk) GetPredictiveFailureCount() int64 {
-	if o == nil || o.PredictiveFailureCount == nil {
+	if o == nil || IsNil(o.PredictiveFailureCount) {
 		var ret int64
 		return ret
 	}
@@ -1477,7 +1481,7 @@ func (o *StoragePhysicalDisk) GetPredictiveFailureCount() int64 {
 // GetPredictiveFailureCountOk returns a tuple with the PredictiveFailureCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StoragePhysicalDisk) GetPredictiveFailureCountOk() (*int64, bool) {
-	if o == nil || o.PredictiveFailureCount == nil {
+	if o == nil || IsNil(o.PredictiveFailureCount) {
 		return nil, false
 	}
 	return o.PredictiveFailureCount, true
@@ -1485,7 +1489,7 @@ func (o *StoragePhysicalDisk) GetPredictiveFailureCountOk() (*int64, bool) {
 
 // HasPredictiveFailureCount returns a boolean if a field has been set.
 func (o *StoragePhysicalDisk) HasPredictiveFailureCount() bool {
-	if o != nil && o.PredictiveFailureCount != nil {
+	if o != nil && !IsNil(o.PredictiveFailureCount) {
 		return true
 	}
 
@@ -1499,7 +1503,7 @@ func (o *StoragePhysicalDisk) SetPredictiveFailureCount(v int64) {
 
 // GetProtocol returns the Protocol field value if set, zero value otherwise.
 func (o *StoragePhysicalDisk) GetProtocol() string {
-	if o == nil || o.Protocol == nil {
+	if o == nil || IsNil(o.Protocol) {
 		var ret string
 		return ret
 	}
@@ -1509,7 +1513,7 @@ func (o *StoragePhysicalDisk) GetProtocol() string {
 // GetProtocolOk returns a tuple with the Protocol field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StoragePhysicalDisk) GetProtocolOk() (*string, bool) {
-	if o == nil || o.Protocol == nil {
+	if o == nil || IsNil(o.Protocol) {
 		return nil, false
 	}
 	return o.Protocol, true
@@ -1517,7 +1521,7 @@ func (o *StoragePhysicalDisk) GetProtocolOk() (*string, bool) {
 
 // HasProtocol returns a boolean if a field has been set.
 func (o *StoragePhysicalDisk) HasProtocol() bool {
-	if o != nil && o.Protocol != nil {
+	if o != nil && !IsNil(o.Protocol) {
 		return true
 	}
 
@@ -1531,7 +1535,7 @@ func (o *StoragePhysicalDisk) SetProtocol(v string) {
 
 // GetRawSize returns the RawSize field value if set, zero value otherwise.
 func (o *StoragePhysicalDisk) GetRawSize() string {
-	if o == nil || o.RawSize == nil {
+	if o == nil || IsNil(o.RawSize) {
 		var ret string
 		return ret
 	}
@@ -1541,7 +1545,7 @@ func (o *StoragePhysicalDisk) GetRawSize() string {
 // GetRawSizeOk returns a tuple with the RawSize field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StoragePhysicalDisk) GetRawSizeOk() (*string, bool) {
-	if o == nil || o.RawSize == nil {
+	if o == nil || IsNil(o.RawSize) {
 		return nil, false
 	}
 	return o.RawSize, true
@@ -1549,7 +1553,7 @@ func (o *StoragePhysicalDisk) GetRawSizeOk() (*string, bool) {
 
 // HasRawSize returns a boolean if a field has been set.
 func (o *StoragePhysicalDisk) HasRawSize() bool {
-	if o != nil && o.RawSize != nil {
+	if o != nil && !IsNil(o.RawSize) {
 		return true
 	}
 
@@ -1563,7 +1567,7 @@ func (o *StoragePhysicalDisk) SetRawSize(v string) {
 
 // GetReadErrorCountThreshold returns the ReadErrorCountThreshold field value if set, zero value otherwise.
 func (o *StoragePhysicalDisk) GetReadErrorCountThreshold() int64 {
-	if o == nil || o.ReadErrorCountThreshold == nil {
+	if o == nil || IsNil(o.ReadErrorCountThreshold) {
 		var ret int64
 		return ret
 	}
@@ -1573,7 +1577,7 @@ func (o *StoragePhysicalDisk) GetReadErrorCountThreshold() int64 {
 // GetReadErrorCountThresholdOk returns a tuple with the ReadErrorCountThreshold field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StoragePhysicalDisk) GetReadErrorCountThresholdOk() (*int64, bool) {
-	if o == nil || o.ReadErrorCountThreshold == nil {
+	if o == nil || IsNil(o.ReadErrorCountThreshold) {
 		return nil, false
 	}
 	return o.ReadErrorCountThreshold, true
@@ -1581,7 +1585,7 @@ func (o *StoragePhysicalDisk) GetReadErrorCountThresholdOk() (*int64, bool) {
 
 // HasReadErrorCountThreshold returns a boolean if a field has been set.
 func (o *StoragePhysicalDisk) HasReadErrorCountThreshold() bool {
-	if o != nil && o.ReadErrorCountThreshold != nil {
+	if o != nil && !IsNil(o.ReadErrorCountThreshold) {
 		return true
 	}
 
@@ -1595,7 +1599,7 @@ func (o *StoragePhysicalDisk) SetReadErrorCountThreshold(v int64) {
 
 // GetReadIoErrorCount returns the ReadIoErrorCount field value if set, zero value otherwise.
 func (o *StoragePhysicalDisk) GetReadIoErrorCount() int64 {
-	if o == nil || o.ReadIoErrorCount == nil {
+	if o == nil || IsNil(o.ReadIoErrorCount) {
 		var ret int64
 		return ret
 	}
@@ -1605,7 +1609,7 @@ func (o *StoragePhysicalDisk) GetReadIoErrorCount() int64 {
 // GetReadIoErrorCountOk returns a tuple with the ReadIoErrorCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StoragePhysicalDisk) GetReadIoErrorCountOk() (*int64, bool) {
-	if o == nil || o.ReadIoErrorCount == nil {
+	if o == nil || IsNil(o.ReadIoErrorCount) {
 		return nil, false
 	}
 	return o.ReadIoErrorCount, true
@@ -1613,7 +1617,7 @@ func (o *StoragePhysicalDisk) GetReadIoErrorCountOk() (*int64, bool) {
 
 // HasReadIoErrorCount returns a boolean if a field has been set.
 func (o *StoragePhysicalDisk) HasReadIoErrorCount() bool {
-	if o != nil && o.ReadIoErrorCount != nil {
+	if o != nil && !IsNil(o.ReadIoErrorCount) {
 		return true
 	}
 
@@ -1627,7 +1631,7 @@ func (o *StoragePhysicalDisk) SetReadIoErrorCount(v int64) {
 
 // GetSecured returns the Secured field value if set, zero value otherwise.
 func (o *StoragePhysicalDisk) GetSecured() string {
-	if o == nil || o.Secured == nil {
+	if o == nil || IsNil(o.Secured) {
 		var ret string
 		return ret
 	}
@@ -1637,7 +1641,7 @@ func (o *StoragePhysicalDisk) GetSecured() string {
 // GetSecuredOk returns a tuple with the Secured field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StoragePhysicalDisk) GetSecuredOk() (*string, bool) {
-	if o == nil || o.Secured == nil {
+	if o == nil || IsNil(o.Secured) {
 		return nil, false
 	}
 	return o.Secured, true
@@ -1645,7 +1649,7 @@ func (o *StoragePhysicalDisk) GetSecuredOk() (*string, bool) {
 
 // HasSecured returns a boolean if a field has been set.
 func (o *StoragePhysicalDisk) HasSecured() bool {
-	if o != nil && o.Secured != nil {
+	if o != nil && !IsNil(o.Secured) {
 		return true
 	}
 
@@ -1659,7 +1663,7 @@ func (o *StoragePhysicalDisk) SetSecured(v string) {
 
 // GetSize returns the Size field value if set, zero value otherwise.
 func (o *StoragePhysicalDisk) GetSize() string {
-	if o == nil || o.Size == nil {
+	if o == nil || IsNil(o.Size) {
 		var ret string
 		return ret
 	}
@@ -1669,7 +1673,7 @@ func (o *StoragePhysicalDisk) GetSize() string {
 // GetSizeOk returns a tuple with the Size field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StoragePhysicalDisk) GetSizeOk() (*string, bool) {
-	if o == nil || o.Size == nil {
+	if o == nil || IsNil(o.Size) {
 		return nil, false
 	}
 	return o.Size, true
@@ -1677,7 +1681,7 @@ func (o *StoragePhysicalDisk) GetSizeOk() (*string, bool) {
 
 // HasSize returns a boolean if a field has been set.
 func (o *StoragePhysicalDisk) HasSize() bool {
-	if o != nil && o.Size != nil {
+	if o != nil && !IsNil(o.Size) {
 		return true
 	}
 
@@ -1691,7 +1695,7 @@ func (o *StoragePhysicalDisk) SetSize(v string) {
 
 // GetThermal returns the Thermal field value if set, zero value otherwise.
 func (o *StoragePhysicalDisk) GetThermal() string {
-	if o == nil || o.Thermal == nil {
+	if o == nil || IsNil(o.Thermal) {
 		var ret string
 		return ret
 	}
@@ -1701,7 +1705,7 @@ func (o *StoragePhysicalDisk) GetThermal() string {
 // GetThermalOk returns a tuple with the Thermal field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StoragePhysicalDisk) GetThermalOk() (*string, bool) {
-	if o == nil || o.Thermal == nil {
+	if o == nil || IsNil(o.Thermal) {
 		return nil, false
 	}
 	return o.Thermal, true
@@ -1709,7 +1713,7 @@ func (o *StoragePhysicalDisk) GetThermalOk() (*string, bool) {
 
 // HasThermal returns a boolean if a field has been set.
 func (o *StoragePhysicalDisk) HasThermal() bool {
-	if o != nil && o.Thermal != nil {
+	if o != nil && !IsNil(o.Thermal) {
 		return true
 	}
 
@@ -1723,7 +1727,7 @@ func (o *StoragePhysicalDisk) SetThermal(v string) {
 
 // GetThresholdOperatingTemperature returns the ThresholdOperatingTemperature field value if set, zero value otherwise.
 func (o *StoragePhysicalDisk) GetThresholdOperatingTemperature() int64 {
-	if o == nil || o.ThresholdOperatingTemperature == nil {
+	if o == nil || IsNil(o.ThresholdOperatingTemperature) {
 		var ret int64
 		return ret
 	}
@@ -1733,7 +1737,7 @@ func (o *StoragePhysicalDisk) GetThresholdOperatingTemperature() int64 {
 // GetThresholdOperatingTemperatureOk returns a tuple with the ThresholdOperatingTemperature field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StoragePhysicalDisk) GetThresholdOperatingTemperatureOk() (*int64, bool) {
-	if o == nil || o.ThresholdOperatingTemperature == nil {
+	if o == nil || IsNil(o.ThresholdOperatingTemperature) {
 		return nil, false
 	}
 	return o.ThresholdOperatingTemperature, true
@@ -1741,7 +1745,7 @@ func (o *StoragePhysicalDisk) GetThresholdOperatingTemperatureOk() (*int64, bool
 
 // HasThresholdOperatingTemperature returns a boolean if a field has been set.
 func (o *StoragePhysicalDisk) HasThresholdOperatingTemperature() bool {
-	if o != nil && o.ThresholdOperatingTemperature != nil {
+	if o != nil && !IsNil(o.ThresholdOperatingTemperature) {
 		return true
 	}
 
@@ -1755,7 +1759,7 @@ func (o *StoragePhysicalDisk) SetThresholdOperatingTemperature(v int64) {
 
 // GetType returns the Type field value if set, zero value otherwise.
 func (o *StoragePhysicalDisk) GetType() string {
-	if o == nil || o.Type == nil {
+	if o == nil || IsNil(o.Type) {
 		var ret string
 		return ret
 	}
@@ -1765,7 +1769,7 @@ func (o *StoragePhysicalDisk) GetType() string {
 // GetTypeOk returns a tuple with the Type field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StoragePhysicalDisk) GetTypeOk() (*string, bool) {
-	if o == nil || o.Type == nil {
+	if o == nil || IsNil(o.Type) {
 		return nil, false
 	}
 	return o.Type, true
@@ -1773,7 +1777,7 @@ func (o *StoragePhysicalDisk) GetTypeOk() (*string, bool) {
 
 // HasType returns a boolean if a field has been set.
 func (o *StoragePhysicalDisk) HasType() bool {
-	if o != nil && o.Type != nil {
+	if o != nil && !IsNil(o.Type) {
 		return true
 	}
 
@@ -1787,7 +1791,7 @@ func (o *StoragePhysicalDisk) SetType(v string) {
 
 // GetVariantType returns the VariantType field value if set, zero value otherwise.
 func (o *StoragePhysicalDisk) GetVariantType() string {
-	if o == nil || o.VariantType == nil {
+	if o == nil || IsNil(o.VariantType) {
 		var ret string
 		return ret
 	}
@@ -1797,7 +1801,7 @@ func (o *StoragePhysicalDisk) GetVariantType() string {
 // GetVariantTypeOk returns a tuple with the VariantType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StoragePhysicalDisk) GetVariantTypeOk() (*string, bool) {
-	if o == nil || o.VariantType == nil {
+	if o == nil || IsNil(o.VariantType) {
 		return nil, false
 	}
 	return o.VariantType, true
@@ -1805,7 +1809,7 @@ func (o *StoragePhysicalDisk) GetVariantTypeOk() (*string, bool) {
 
 // HasVariantType returns a boolean if a field has been set.
 func (o *StoragePhysicalDisk) HasVariantType() bool {
-	if o != nil && o.VariantType != nil {
+	if o != nil && !IsNil(o.VariantType) {
 		return true
 	}
 
@@ -1819,7 +1823,7 @@ func (o *StoragePhysicalDisk) SetVariantType(v string) {
 
 // GetWearStatusInDays returns the WearStatusInDays field value if set, zero value otherwise.
 func (o *StoragePhysicalDisk) GetWearStatusInDays() int64 {
-	if o == nil || o.WearStatusInDays == nil {
+	if o == nil || IsNil(o.WearStatusInDays) {
 		var ret int64
 		return ret
 	}
@@ -1829,7 +1833,7 @@ func (o *StoragePhysicalDisk) GetWearStatusInDays() int64 {
 // GetWearStatusInDaysOk returns a tuple with the WearStatusInDays field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StoragePhysicalDisk) GetWearStatusInDaysOk() (*int64, bool) {
-	if o == nil || o.WearStatusInDays == nil {
+	if o == nil || IsNil(o.WearStatusInDays) {
 		return nil, false
 	}
 	return o.WearStatusInDays, true
@@ -1837,7 +1841,7 @@ func (o *StoragePhysicalDisk) GetWearStatusInDaysOk() (*int64, bool) {
 
 // HasWearStatusInDays returns a boolean if a field has been set.
 func (o *StoragePhysicalDisk) HasWearStatusInDays() bool {
-	if o != nil && o.WearStatusInDays != nil {
+	if o != nil && !IsNil(o.WearStatusInDays) {
 		return true
 	}
 
@@ -1851,7 +1855,7 @@ func (o *StoragePhysicalDisk) SetWearStatusInDays(v int64) {
 
 // GetWriteErrorCountThreshold returns the WriteErrorCountThreshold field value if set, zero value otherwise.
 func (o *StoragePhysicalDisk) GetWriteErrorCountThreshold() int64 {
-	if o == nil || o.WriteErrorCountThreshold == nil {
+	if o == nil || IsNil(o.WriteErrorCountThreshold) {
 		var ret int64
 		return ret
 	}
@@ -1861,7 +1865,7 @@ func (o *StoragePhysicalDisk) GetWriteErrorCountThreshold() int64 {
 // GetWriteErrorCountThresholdOk returns a tuple with the WriteErrorCountThreshold field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StoragePhysicalDisk) GetWriteErrorCountThresholdOk() (*int64, bool) {
-	if o == nil || o.WriteErrorCountThreshold == nil {
+	if o == nil || IsNil(o.WriteErrorCountThreshold) {
 		return nil, false
 	}
 	return o.WriteErrorCountThreshold, true
@@ -1869,7 +1873,7 @@ func (o *StoragePhysicalDisk) GetWriteErrorCountThresholdOk() (*int64, bool) {
 
 // HasWriteErrorCountThreshold returns a boolean if a field has been set.
 func (o *StoragePhysicalDisk) HasWriteErrorCountThreshold() bool {
-	if o != nil && o.WriteErrorCountThreshold != nil {
+	if o != nil && !IsNil(o.WriteErrorCountThreshold) {
 		return true
 	}
 
@@ -1883,7 +1887,7 @@ func (o *StoragePhysicalDisk) SetWriteErrorCountThreshold(v int64) {
 
 // GetWriteIoErrorCount returns the WriteIoErrorCount field value if set, zero value otherwise.
 func (o *StoragePhysicalDisk) GetWriteIoErrorCount() int64 {
-	if o == nil || o.WriteIoErrorCount == nil {
+	if o == nil || IsNil(o.WriteIoErrorCount) {
 		var ret int64
 		return ret
 	}
@@ -1893,7 +1897,7 @@ func (o *StoragePhysicalDisk) GetWriteIoErrorCount() int64 {
 // GetWriteIoErrorCountOk returns a tuple with the WriteIoErrorCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StoragePhysicalDisk) GetWriteIoErrorCountOk() (*int64, bool) {
-	if o == nil || o.WriteIoErrorCount == nil {
+	if o == nil || IsNil(o.WriteIoErrorCount) {
 		return nil, false
 	}
 	return o.WriteIoErrorCount, true
@@ -1901,7 +1905,7 @@ func (o *StoragePhysicalDisk) GetWriteIoErrorCountOk() (*int64, bool) {
 
 // HasWriteIoErrorCount returns a boolean if a field has been set.
 func (o *StoragePhysicalDisk) HasWriteIoErrorCount() bool {
-	if o != nil && o.WriteIoErrorCount != nil {
+	if o != nil && !IsNil(o.WriteIoErrorCount) {
 		return true
 	}
 
@@ -1913,68 +1917,90 @@ func (o *StoragePhysicalDisk) SetWriteIoErrorCount(v int64) {
 	o.WriteIoErrorCount = &v
 }
 
-// GetInventoryDeviceInfo returns the InventoryDeviceInfo field value if set, zero value otherwise.
+// GetInventoryDeviceInfo returns the InventoryDeviceInfo field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *StoragePhysicalDisk) GetInventoryDeviceInfo() InventoryDeviceInfoRelationship {
-	if o == nil || o.InventoryDeviceInfo == nil {
+	if o == nil || IsNil(o.InventoryDeviceInfo.Get()) {
 		var ret InventoryDeviceInfoRelationship
 		return ret
 	}
-	return *o.InventoryDeviceInfo
+	return *o.InventoryDeviceInfo.Get()
 }
 
 // GetInventoryDeviceInfoOk returns a tuple with the InventoryDeviceInfo field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StoragePhysicalDisk) GetInventoryDeviceInfoOk() (*InventoryDeviceInfoRelationship, bool) {
-	if o == nil || o.InventoryDeviceInfo == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.InventoryDeviceInfo, true
+	return o.InventoryDeviceInfo.Get(), o.InventoryDeviceInfo.IsSet()
 }
 
 // HasInventoryDeviceInfo returns a boolean if a field has been set.
 func (o *StoragePhysicalDisk) HasInventoryDeviceInfo() bool {
-	if o != nil && o.InventoryDeviceInfo != nil {
+	if o != nil && o.InventoryDeviceInfo.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetInventoryDeviceInfo gets a reference to the given InventoryDeviceInfoRelationship and assigns it to the InventoryDeviceInfo field.
+// SetInventoryDeviceInfo gets a reference to the given NullableInventoryDeviceInfoRelationship and assigns it to the InventoryDeviceInfo field.
 func (o *StoragePhysicalDisk) SetInventoryDeviceInfo(v InventoryDeviceInfoRelationship) {
-	o.InventoryDeviceInfo = &v
+	o.InventoryDeviceInfo.Set(&v)
 }
 
-// GetLocatorLed returns the LocatorLed field value if set, zero value otherwise.
+// SetInventoryDeviceInfoNil sets the value for InventoryDeviceInfo to be an explicit nil
+func (o *StoragePhysicalDisk) SetInventoryDeviceInfoNil() {
+	o.InventoryDeviceInfo.Set(nil)
+}
+
+// UnsetInventoryDeviceInfo ensures that no value is present for InventoryDeviceInfo, not even an explicit nil
+func (o *StoragePhysicalDisk) UnsetInventoryDeviceInfo() {
+	o.InventoryDeviceInfo.Unset()
+}
+
+// GetLocatorLed returns the LocatorLed field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *StoragePhysicalDisk) GetLocatorLed() EquipmentLocatorLedRelationship {
-	if o == nil || o.LocatorLed == nil {
+	if o == nil || IsNil(o.LocatorLed.Get()) {
 		var ret EquipmentLocatorLedRelationship
 		return ret
 	}
-	return *o.LocatorLed
+	return *o.LocatorLed.Get()
 }
 
 // GetLocatorLedOk returns a tuple with the LocatorLed field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StoragePhysicalDisk) GetLocatorLedOk() (*EquipmentLocatorLedRelationship, bool) {
-	if o == nil || o.LocatorLed == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.LocatorLed, true
+	return o.LocatorLed.Get(), o.LocatorLed.IsSet()
 }
 
 // HasLocatorLed returns a boolean if a field has been set.
 func (o *StoragePhysicalDisk) HasLocatorLed() bool {
-	if o != nil && o.LocatorLed != nil {
+	if o != nil && o.LocatorLed.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetLocatorLed gets a reference to the given EquipmentLocatorLedRelationship and assigns it to the LocatorLed field.
+// SetLocatorLed gets a reference to the given NullableEquipmentLocatorLedRelationship and assigns it to the LocatorLed field.
 func (o *StoragePhysicalDisk) SetLocatorLed(v EquipmentLocatorLedRelationship) {
-	o.LocatorLed = &v
+	o.LocatorLed.Set(&v)
+}
+
+// SetLocatorLedNil sets the value for LocatorLed to be an explicit nil
+func (o *StoragePhysicalDisk) SetLocatorLedNil() {
+	o.LocatorLed.Set(nil)
+}
+
+// UnsetLocatorLed ensures that no value is present for LocatorLed, not even an explicit nil
+func (o *StoragePhysicalDisk) UnsetLocatorLed() {
+	o.LocatorLed.Unset()
 }
 
 // GetPhysicalDiskExtensions returns the PhysicalDiskExtensions field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -1990,7 +2016,7 @@ func (o *StoragePhysicalDisk) GetPhysicalDiskExtensions() []StoragePhysicalDiskE
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StoragePhysicalDisk) GetPhysicalDiskExtensionsOk() ([]StoragePhysicalDiskExtensionRelationship, bool) {
-	if o == nil || o.PhysicalDiskExtensions == nil {
+	if o == nil || IsNil(o.PhysicalDiskExtensions) {
 		return nil, false
 	}
 	return o.PhysicalDiskExtensions, true
@@ -1998,7 +2024,7 @@ func (o *StoragePhysicalDisk) GetPhysicalDiskExtensionsOk() ([]StoragePhysicalDi
 
 // HasPhysicalDiskExtensions returns a boolean if a field has been set.
 func (o *StoragePhysicalDisk) HasPhysicalDiskExtensions() bool {
-	if o != nil && o.PhysicalDiskExtensions != nil {
+	if o != nil && IsNil(o.PhysicalDiskExtensions) {
 		return true
 	}
 
@@ -2010,36 +2036,47 @@ func (o *StoragePhysicalDisk) SetPhysicalDiskExtensions(v []StoragePhysicalDiskE
 	o.PhysicalDiskExtensions = v
 }
 
-// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise.
+// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *StoragePhysicalDisk) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil || IsNil(o.RegisteredDevice.Get()) {
 		var ret AssetDeviceRegistrationRelationship
 		return ret
 	}
-	return *o.RegisteredDevice
+	return *o.RegisteredDevice.Get()
 }
 
 // GetRegisteredDeviceOk returns a tuple with the RegisteredDevice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StoragePhysicalDisk) GetRegisteredDeviceOk() (*AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.RegisteredDevice, true
+	return o.RegisteredDevice.Get(), o.RegisteredDevice.IsSet()
 }
 
 // HasRegisteredDevice returns a boolean if a field has been set.
 func (o *StoragePhysicalDisk) HasRegisteredDevice() bool {
-	if o != nil && o.RegisteredDevice != nil {
+	if o != nil && o.RegisteredDevice.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRegisteredDevice gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
+// SetRegisteredDevice gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
 func (o *StoragePhysicalDisk) SetRegisteredDevice(v AssetDeviceRegistrationRelationship) {
-	o.RegisteredDevice = &v
+	o.RegisteredDevice.Set(&v)
+}
+
+// SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+func (o *StoragePhysicalDisk) SetRegisteredDeviceNil() {
+	o.RegisteredDevice.Set(nil)
+}
+
+// UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
+func (o *StoragePhysicalDisk) UnsetRegisteredDevice() {
+	o.RegisteredDevice.Unset()
 }
 
 // GetRunningFirmware returns the RunningFirmware field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -2055,7 +2092,7 @@ func (o *StoragePhysicalDisk) GetRunningFirmware() []FirmwareRunningFirmwareRela
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StoragePhysicalDisk) GetRunningFirmwareOk() ([]FirmwareRunningFirmwareRelationship, bool) {
-	if o == nil || o.RunningFirmware == nil {
+	if o == nil || IsNil(o.RunningFirmware) {
 		return nil, false
 	}
 	return o.RunningFirmware, true
@@ -2063,7 +2100,7 @@ func (o *StoragePhysicalDisk) GetRunningFirmwareOk() ([]FirmwareRunningFirmwareR
 
 // HasRunningFirmware returns a boolean if a field has been set.
 func (o *StoragePhysicalDisk) HasRunningFirmware() bool {
-	if o != nil && o.RunningFirmware != nil {
+	if o != nil && IsNil(o.RunningFirmware) {
 		return true
 	}
 
@@ -2088,7 +2125,7 @@ func (o *StoragePhysicalDisk) GetSasPorts() []StorageSasPortRelationship {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StoragePhysicalDisk) GetSasPortsOk() ([]StorageSasPortRelationship, bool) {
-	if o == nil || o.SasPorts == nil {
+	if o == nil || IsNil(o.SasPorts) {
 		return nil, false
 	}
 	return o.SasPorts, true
@@ -2096,7 +2133,7 @@ func (o *StoragePhysicalDisk) GetSasPortsOk() ([]StorageSasPortRelationship, boo
 
 // HasSasPorts returns a boolean if a field has been set.
 func (o *StoragePhysicalDisk) HasSasPorts() bool {
-	if o != nil && o.SasPorts != nil {
+	if o != nil && IsNil(o.SasPorts) {
 		return true
 	}
 
@@ -2108,256 +2145,282 @@ func (o *StoragePhysicalDisk) SetSasPorts(v []StorageSasPortRelationship) {
 	o.SasPorts = v
 }
 
-// GetStorageController returns the StorageController field value if set, zero value otherwise.
+// GetStorageController returns the StorageController field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *StoragePhysicalDisk) GetStorageController() StorageControllerRelationship {
-	if o == nil || o.StorageController == nil {
+	if o == nil || IsNil(o.StorageController.Get()) {
 		var ret StorageControllerRelationship
 		return ret
 	}
-	return *o.StorageController
+	return *o.StorageController.Get()
 }
 
 // GetStorageControllerOk returns a tuple with the StorageController field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StoragePhysicalDisk) GetStorageControllerOk() (*StorageControllerRelationship, bool) {
-	if o == nil || o.StorageController == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.StorageController, true
+	return o.StorageController.Get(), o.StorageController.IsSet()
 }
 
 // HasStorageController returns a boolean if a field has been set.
 func (o *StoragePhysicalDisk) HasStorageController() bool {
-	if o != nil && o.StorageController != nil {
+	if o != nil && o.StorageController.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetStorageController gets a reference to the given StorageControllerRelationship and assigns it to the StorageController field.
+// SetStorageController gets a reference to the given NullableStorageControllerRelationship and assigns it to the StorageController field.
 func (o *StoragePhysicalDisk) SetStorageController(v StorageControllerRelationship) {
-	o.StorageController = &v
+	o.StorageController.Set(&v)
 }
 
-// GetStorageEnclosure returns the StorageEnclosure field value if set, zero value otherwise.
+// SetStorageControllerNil sets the value for StorageController to be an explicit nil
+func (o *StoragePhysicalDisk) SetStorageControllerNil() {
+	o.StorageController.Set(nil)
+}
+
+// UnsetStorageController ensures that no value is present for StorageController, not even an explicit nil
+func (o *StoragePhysicalDisk) UnsetStorageController() {
+	o.StorageController.Unset()
+}
+
+// GetStorageEnclosure returns the StorageEnclosure field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *StoragePhysicalDisk) GetStorageEnclosure() StorageEnclosureRelationship {
-	if o == nil || o.StorageEnclosure == nil {
+	if o == nil || IsNil(o.StorageEnclosure.Get()) {
 		var ret StorageEnclosureRelationship
 		return ret
 	}
-	return *o.StorageEnclosure
+	return *o.StorageEnclosure.Get()
 }
 
 // GetStorageEnclosureOk returns a tuple with the StorageEnclosure field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StoragePhysicalDisk) GetStorageEnclosureOk() (*StorageEnclosureRelationship, bool) {
-	if o == nil || o.StorageEnclosure == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.StorageEnclosure, true
+	return o.StorageEnclosure.Get(), o.StorageEnclosure.IsSet()
 }
 
 // HasStorageEnclosure returns a boolean if a field has been set.
 func (o *StoragePhysicalDisk) HasStorageEnclosure() bool {
-	if o != nil && o.StorageEnclosure != nil {
+	if o != nil && o.StorageEnclosure.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetStorageEnclosure gets a reference to the given StorageEnclosureRelationship and assigns it to the StorageEnclosure field.
+// SetStorageEnclosure gets a reference to the given NullableStorageEnclosureRelationship and assigns it to the StorageEnclosure field.
 func (o *StoragePhysicalDisk) SetStorageEnclosure(v StorageEnclosureRelationship) {
-	o.StorageEnclosure = &v
+	o.StorageEnclosure.Set(&v)
+}
+
+// SetStorageEnclosureNil sets the value for StorageEnclosure to be an explicit nil
+func (o *StoragePhysicalDisk) SetStorageEnclosureNil() {
+	o.StorageEnclosure.Set(nil)
+}
+
+// UnsetStorageEnclosure ensures that no value is present for StorageEnclosure, not even an explicit nil
+func (o *StoragePhysicalDisk) UnsetStorageEnclosure() {
+	o.StorageEnclosure.Unset()
 }
 
 func (o StoragePhysicalDisk) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o StoragePhysicalDisk) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedEquipmentBase, errEquipmentBase := json.Marshal(o.EquipmentBase)
 	if errEquipmentBase != nil {
-		return []byte{}, errEquipmentBase
+		return map[string]interface{}{}, errEquipmentBase
 	}
 	errEquipmentBase = json.Unmarshal([]byte(serializedEquipmentBase), &toSerialize)
 	if errEquipmentBase != nil {
-		return []byte{}, errEquipmentBase
+		return map[string]interface{}{}, errEquipmentBase
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.BackgroundOperations != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.BackgroundOperations) {
 		toSerialize["BackgroundOperations"] = o.BackgroundOperations
 	}
-	if o.BlockSize != nil {
+	if !IsNil(o.BlockSize) {
 		toSerialize["BlockSize"] = o.BlockSize
 	}
-	if o.Bootable != nil {
+	if !IsNil(o.Bootable) {
 		toSerialize["Bootable"] = o.Bootable
 	}
-	if o.ConfigurationCheckpoint != nil {
+	if !IsNil(o.ConfigurationCheckpoint) {
 		toSerialize["ConfigurationCheckpoint"] = o.ConfigurationCheckpoint
 	}
-	if o.ConfigurationState != nil {
+	if !IsNil(o.ConfigurationState) {
 		toSerialize["ConfigurationState"] = o.ConfigurationState
 	}
-	if o.Description != nil {
+	if !IsNil(o.Description) {
 		toSerialize["Description"] = o.Description
 	}
-	if o.DisabledForRemoval != nil {
+	if !IsNil(o.DisabledForRemoval) {
 		toSerialize["DisabledForRemoval"] = o.DisabledForRemoval
 	}
-	if o.DiscoveredPath != nil {
+	if !IsNil(o.DiscoveredPath) {
 		toSerialize["DiscoveredPath"] = o.DiscoveredPath
 	}
-	if o.DiskId != nil {
+	if !IsNil(o.DiskId) {
 		toSerialize["DiskId"] = o.DiskId
 	}
-	if o.DiskState != nil {
+	if !IsNil(o.DiskState) {
 		toSerialize["DiskState"] = o.DiskState
 	}
-	if o.DriveFirmware != nil {
+	if !IsNil(o.DriveFirmware) {
 		toSerialize["DriveFirmware"] = o.DriveFirmware
 	}
-	if o.DriveState != nil {
+	if !IsNil(o.DriveState) {
 		toSerialize["DriveState"] = o.DriveState
 	}
-	if o.EncryptionStatus != nil {
+	if !IsNil(o.EncryptionStatus) {
 		toSerialize["EncryptionStatus"] = o.EncryptionStatus
 	}
-	if o.FailurePredicted != nil {
+	if !IsNil(o.FailurePredicted) {
 		toSerialize["FailurePredicted"] = o.FailurePredicted
 	}
-	if o.FdeCapable != nil {
+	if !IsNil(o.FdeCapable) {
 		toSerialize["FdeCapable"] = o.FdeCapable
 	}
-	if o.HotSpareType != nil {
+	if !IsNil(o.HotSpareType) {
 		toSerialize["HotSpareType"] = o.HotSpareType
 	}
-	if o.IndicatorLed != nil {
+	if !IsNil(o.IndicatorLed) {
 		toSerialize["IndicatorLed"] = o.IndicatorLed
 	}
-	if o.IsPlatformSupported != nil {
+	if !IsNil(o.IsPlatformSupported) {
 		toSerialize["IsPlatformSupported"] = o.IsPlatformSupported
 	}
-	if o.LinkSpeed != nil {
+	if !IsNil(o.LinkSpeed) {
 		toSerialize["LinkSpeed"] = o.LinkSpeed
 	}
-	if o.LinkState != nil {
+	if !IsNil(o.LinkState) {
 		toSerialize["LinkState"] = o.LinkState
 	}
-	if o.MaximumOperatingTemperature != nil {
+	if !IsNil(o.MaximumOperatingTemperature) {
 		toSerialize["MaximumOperatingTemperature"] = o.MaximumOperatingTemperature
 	}
-	if o.MediaErrorCount != nil {
+	if !IsNil(o.MediaErrorCount) {
 		toSerialize["MediaErrorCount"] = o.MediaErrorCount
 	}
-	if o.Name != nil {
+	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
 	}
-	if o.NonCoercedSizeBytes != nil {
+	if !IsNil(o.NonCoercedSizeBytes) {
 		toSerialize["NonCoercedSizeBytes"] = o.NonCoercedSizeBytes
 	}
-	if o.NumBlocks != nil {
+	if !IsNil(o.NumBlocks) {
 		toSerialize["NumBlocks"] = o.NumBlocks
 	}
-	if o.OperPowerState != nil {
+	if !IsNil(o.OperPowerState) {
 		toSerialize["OperPowerState"] = o.OperPowerState
 	}
-	if o.OperQualifierReason != nil {
+	if !IsNil(o.OperQualifierReason) {
 		toSerialize["OperQualifierReason"] = o.OperQualifierReason
 	}
-	if o.Operability != nil {
+	if !IsNil(o.Operability) {
 		toSerialize["Operability"] = o.Operability
 	}
-	if o.OperatingTemperature != nil {
+	if !IsNil(o.OperatingTemperature) {
 		toSerialize["OperatingTemperature"] = o.OperatingTemperature
 	}
-	if o.PartNumber != nil {
+	if !IsNil(o.PartNumber) {
 		toSerialize["PartNumber"] = o.PartNumber
 	}
-	if o.PercentLifeLeft != nil {
+	if !IsNil(o.PercentLifeLeft) {
 		toSerialize["PercentLifeLeft"] = o.PercentLifeLeft
 	}
-	if o.PercentReservedCapacityConsumed != nil {
+	if !IsNil(o.PercentReservedCapacityConsumed) {
 		toSerialize["PercentReservedCapacityConsumed"] = o.PercentReservedCapacityConsumed
 	}
-	if o.PerformancePercent != nil {
+	if !IsNil(o.PerformancePercent) {
 		toSerialize["PerformancePercent"] = o.PerformancePercent
 	}
-	if o.PhysicalBlockSize != nil {
+	if !IsNil(o.PhysicalBlockSize) {
 		toSerialize["PhysicalBlockSize"] = o.PhysicalBlockSize
 	}
-	if o.Pid != nil {
+	if !IsNil(o.Pid) {
 		toSerialize["Pid"] = o.Pid
 	}
-	if o.PowerCycleCount != nil {
+	if !IsNil(o.PowerCycleCount) {
 		toSerialize["PowerCycleCount"] = o.PowerCycleCount
 	}
-	if o.PowerOnHours != nil {
+	if !IsNil(o.PowerOnHours) {
 		toSerialize["PowerOnHours"] = o.PowerOnHours
 	}
-	if o.PowerOnHoursPercentage != nil {
+	if !IsNil(o.PowerOnHoursPercentage) {
 		toSerialize["PowerOnHoursPercentage"] = o.PowerOnHoursPercentage
 	}
-	if o.PredictedMediaLifeLeftPercent != nil {
+	if !IsNil(o.PredictedMediaLifeLeftPercent) {
 		toSerialize["PredictedMediaLifeLeftPercent"] = o.PredictedMediaLifeLeftPercent
 	}
-	if o.PredictiveFailureCount != nil {
+	if !IsNil(o.PredictiveFailureCount) {
 		toSerialize["PredictiveFailureCount"] = o.PredictiveFailureCount
 	}
-	if o.Protocol != nil {
+	if !IsNil(o.Protocol) {
 		toSerialize["Protocol"] = o.Protocol
 	}
-	if o.RawSize != nil {
+	if !IsNil(o.RawSize) {
 		toSerialize["RawSize"] = o.RawSize
 	}
-	if o.ReadErrorCountThreshold != nil {
+	if !IsNil(o.ReadErrorCountThreshold) {
 		toSerialize["ReadErrorCountThreshold"] = o.ReadErrorCountThreshold
 	}
-	if o.ReadIoErrorCount != nil {
+	if !IsNil(o.ReadIoErrorCount) {
 		toSerialize["ReadIoErrorCount"] = o.ReadIoErrorCount
 	}
-	if o.Secured != nil {
+	if !IsNil(o.Secured) {
 		toSerialize["Secured"] = o.Secured
 	}
-	if o.Size != nil {
+	if !IsNil(o.Size) {
 		toSerialize["Size"] = o.Size
 	}
-	if o.Thermal != nil {
+	if !IsNil(o.Thermal) {
 		toSerialize["Thermal"] = o.Thermal
 	}
-	if o.ThresholdOperatingTemperature != nil {
+	if !IsNil(o.ThresholdOperatingTemperature) {
 		toSerialize["ThresholdOperatingTemperature"] = o.ThresholdOperatingTemperature
 	}
-	if o.Type != nil {
+	if !IsNil(o.Type) {
 		toSerialize["Type"] = o.Type
 	}
-	if o.VariantType != nil {
+	if !IsNil(o.VariantType) {
 		toSerialize["VariantType"] = o.VariantType
 	}
-	if o.WearStatusInDays != nil {
+	if !IsNil(o.WearStatusInDays) {
 		toSerialize["WearStatusInDays"] = o.WearStatusInDays
 	}
-	if o.WriteErrorCountThreshold != nil {
+	if !IsNil(o.WriteErrorCountThreshold) {
 		toSerialize["WriteErrorCountThreshold"] = o.WriteErrorCountThreshold
 	}
-	if o.WriteIoErrorCount != nil {
+	if !IsNil(o.WriteIoErrorCount) {
 		toSerialize["WriteIoErrorCount"] = o.WriteIoErrorCount
 	}
-	if o.InventoryDeviceInfo != nil {
-		toSerialize["InventoryDeviceInfo"] = o.InventoryDeviceInfo
+	if o.InventoryDeviceInfo.IsSet() {
+		toSerialize["InventoryDeviceInfo"] = o.InventoryDeviceInfo.Get()
 	}
-	if o.LocatorLed != nil {
-		toSerialize["LocatorLed"] = o.LocatorLed
+	if o.LocatorLed.IsSet() {
+		toSerialize["LocatorLed"] = o.LocatorLed.Get()
 	}
 	if o.PhysicalDiskExtensions != nil {
 		toSerialize["PhysicalDiskExtensions"] = o.PhysicalDiskExtensions
 	}
-	if o.RegisteredDevice != nil {
-		toSerialize["RegisteredDevice"] = o.RegisteredDevice
+	if o.RegisteredDevice.IsSet() {
+		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
 	}
 	if o.RunningFirmware != nil {
 		toSerialize["RunningFirmware"] = o.RunningFirmware
@@ -2365,21 +2428,43 @@ func (o StoragePhysicalDisk) MarshalJSON() ([]byte, error) {
 	if o.SasPorts != nil {
 		toSerialize["SasPorts"] = o.SasPorts
 	}
-	if o.StorageController != nil {
-		toSerialize["StorageController"] = o.StorageController
+	if o.StorageController.IsSet() {
+		toSerialize["StorageController"] = o.StorageController.Get()
 	}
-	if o.StorageEnclosure != nil {
-		toSerialize["StorageEnclosure"] = o.StorageEnclosure
+	if o.StorageEnclosure.IsSet() {
+		toSerialize["StorageEnclosure"] = o.StorageEnclosure.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *StoragePhysicalDisk) UnmarshalJSON(bytes []byte) (err error) {
+func (o *StoragePhysicalDisk) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type StoragePhysicalDiskWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -2490,23 +2575,23 @@ func (o *StoragePhysicalDisk) UnmarshalJSON(bytes []byte) (err error) {
 		// The number of write errors that are permitted while accessing the drive/card.
 		WriteErrorCountThreshold *int64 `json:"WriteErrorCountThreshold,omitempty"`
 		// Number of IO Errors that occured while writing data to the disk.
-		WriteIoErrorCount   *int64                           `json:"WriteIoErrorCount,omitempty"`
-		InventoryDeviceInfo *InventoryDeviceInfoRelationship `json:"InventoryDeviceInfo,omitempty"`
-		LocatorLed          *EquipmentLocatorLedRelationship `json:"LocatorLed,omitempty"`
+		WriteIoErrorCount   *int64                                  `json:"WriteIoErrorCount,omitempty"`
+		InventoryDeviceInfo NullableInventoryDeviceInfoRelationship `json:"InventoryDeviceInfo,omitempty"`
+		LocatorLed          NullableEquipmentLocatorLedRelationship `json:"LocatorLed,omitempty"`
 		// An array of relationships to storagePhysicalDiskExtension resources.
-		PhysicalDiskExtensions []StoragePhysicalDiskExtensionRelationship `json:"PhysicalDiskExtensions,omitempty"`
-		RegisteredDevice       *AssetDeviceRegistrationRelationship       `json:"RegisteredDevice,omitempty"`
+		PhysicalDiskExtensions []StoragePhysicalDiskExtensionRelationship  `json:"PhysicalDiskExtensions,omitempty"`
+		RegisteredDevice       NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 		// An array of relationships to firmwareRunningFirmware resources.
 		RunningFirmware []FirmwareRunningFirmwareRelationship `json:"RunningFirmware,omitempty"`
 		// An array of relationships to storageSasPort resources.
-		SasPorts          []StorageSasPortRelationship   `json:"SasPorts,omitempty"`
-		StorageController *StorageControllerRelationship `json:"StorageController,omitempty"`
-		StorageEnclosure  *StorageEnclosureRelationship  `json:"StorageEnclosure,omitempty"`
+		SasPorts          []StorageSasPortRelationship          `json:"SasPorts,omitempty"`
+		StorageController NullableStorageControllerRelationship `json:"StorageController,omitempty"`
+		StorageEnclosure  NullableStorageEnclosureRelationship  `json:"StorageEnclosure,omitempty"`
 	}
 
 	varStoragePhysicalDiskWithoutEmbeddedStruct := StoragePhysicalDiskWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varStoragePhysicalDiskWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varStoragePhysicalDiskWithoutEmbeddedStruct)
 	if err == nil {
 		varStoragePhysicalDisk := _StoragePhysicalDisk{}
 		varStoragePhysicalDisk.ClassId = varStoragePhysicalDiskWithoutEmbeddedStruct.ClassId
@@ -2579,7 +2664,7 @@ func (o *StoragePhysicalDisk) UnmarshalJSON(bytes []byte) (err error) {
 
 	varStoragePhysicalDisk := _StoragePhysicalDisk{}
 
-	err = json.Unmarshal(bytes, &varStoragePhysicalDisk)
+	err = json.Unmarshal(data, &varStoragePhysicalDisk)
 	if err == nil {
 		o.EquipmentBase = varStoragePhysicalDisk.EquipmentBase
 	} else {
@@ -2588,7 +2673,7 @@ func (o *StoragePhysicalDisk) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "BackgroundOperations")

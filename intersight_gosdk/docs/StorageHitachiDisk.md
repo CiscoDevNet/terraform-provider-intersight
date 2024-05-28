@@ -10,9 +10,9 @@ Name | Type | Description | Notes
 **ParityGroupId** | Pointer to **string** | Parity group number. When the drive does not belong to any parity group, an empty character string is output. | [optional] [readonly] 
 **TypeDetail** | Pointer to **string** | Drive type of the Hitachi Disk. * &#x60;N/A&#x60; - Drive Type is not available. * &#x60;SAS&#x60; - SAS stands for Serial Attached SCSI. * &#x60;SSD(MLC)&#x60; - SSD (MLC) stands for Multiple Level Cell. * &#x60;SSD(FMC)&#x60; - SSD (FMC) stands for Flash Memory Compressed. * &#x60;SSD(FMD)&#x60; - SSD (FMD) stands for Flash Module Drive. * &#x60;SSD(SLC)&#x60; - SSD (SLC) stands for Single Level Cell. * &#x60;SSD&#x60; - SSD stands for Solid-State Drive. * &#x60;SSD(RI)&#x60; - SSD (RI) stands for Read Intensive. * &#x60;SCM&#x60; - SCM stands for Storage Class Memory. | [optional] [readonly] [default to "N/A"]
 **Usage** | Pointer to **string** | Purpose for which the drive is used. | [optional] [readonly] 
-**Array** | Pointer to [**StorageHitachiArrayRelationship**](StorageHitachiArrayRelationship.md) |  | [optional] 
-**ParityGroup** | Pointer to [**StorageHitachiParityGroupRelationship**](StorageHitachiParityGroupRelationship.md) |  | [optional] 
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
+**Array** | Pointer to [**NullableStorageHitachiArrayRelationship**](StorageHitachiArrayRelationship.md) |  | [optional] 
+**ParityGroup** | Pointer to [**NullableStorageHitachiParityGroupRelationship**](StorageHitachiParityGroupRelationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -198,6 +198,16 @@ SetArray sets Array field to given value.
 
 HasArray returns a boolean if a field has been set.
 
+### SetArrayNil
+
+`func (o *StorageHitachiDisk) SetArrayNil(b bool)`
+
+ SetArrayNil sets the value for Array to be an explicit nil
+
+### UnsetArray
+`func (o *StorageHitachiDisk) UnsetArray()`
+
+UnsetArray ensures that no value is present for Array, not even an explicit nil
 ### GetParityGroup
 
 `func (o *StorageHitachiDisk) GetParityGroup() StorageHitachiParityGroupRelationship`
@@ -223,6 +233,16 @@ SetParityGroup sets ParityGroup field to given value.
 
 HasParityGroup returns a boolean if a field has been set.
 
+### SetParityGroupNil
+
+`func (o *StorageHitachiDisk) SetParityGroupNil(b bool)`
+
+ SetParityGroupNil sets the value for ParityGroup to be an explicit nil
+
+### UnsetParityGroup
+`func (o *StorageHitachiDisk) UnsetParityGroup()`
+
+UnsetParityGroup ensures that no value is present for ParityGroup, not even an explicit nil
 ### GetRegisteredDevice
 
 `func (o *StorageHitachiDisk) GetRegisteredDevice() AssetDeviceRegistrationRelationship`
@@ -248,6 +268,16 @@ SetRegisteredDevice sets RegisteredDevice field to given value.
 
 HasRegisteredDevice returns a boolean if a field has been set.
 
+### SetRegisteredDeviceNil
+
+`func (o *StorageHitachiDisk) SetRegisteredDeviceNil(b bool)`
+
+ SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+
+### UnsetRegisteredDevice
+`func (o *StorageHitachiDisk) UnsetRegisteredDevice()`
+
+UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

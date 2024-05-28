@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **IdBlocks** | Pointer to [**[]FcpoolBlock**](FcpoolBlock.md) |  | [optional] 
 **PoolPurpose** | Pointer to **string** | Purpose of this WWN pool. | [optional] 
 **BlockHeads** | Pointer to [**[]FcpoolFcBlockRelationship**](FcpoolFcBlockRelationship.md) | An array of relationships to fcpoolFcBlock resources. | [optional] [readonly] 
-**Organization** | Pointer to [**OrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
+**Organization** | Pointer to [**NullableOrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
 **Reservations** | Pointer to [**[]FcpoolReservationRelationship**](FcpoolReservationRelationship.md) | An array of relationships to fcpoolReservation resources. | [optional] 
 
 ## Methods
@@ -191,6 +191,16 @@ SetOrganization sets Organization field to given value.
 
 HasOrganization returns a boolean if a field has been set.
 
+### SetOrganizationNil
+
+`func (o *FcpoolPool) SetOrganizationNil(b bool)`
+
+ SetOrganizationNil sets the value for Organization to be an explicit nil
+
+### UnsetOrganization
+`func (o *FcpoolPool) UnsetOrganization()`
+
+UnsetOrganization ensures that no value is present for Organization, not even an explicit nil
 ### GetReservations
 
 `func (o *FcpoolPool) GetReservations() []FcpoolReservationRelationship`

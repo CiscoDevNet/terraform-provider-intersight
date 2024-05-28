@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the FirmwareFirmwareSummary type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &FirmwareFirmwareSummary{}
 
 // FirmwareFirmwareSummary Update inventory that contains the details for the firmware running on each component in the compute.Physical object.
 type FirmwareFirmwareSummary struct {
@@ -25,10 +29,10 @@ type FirmwareFirmwareSummary struct {
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
 	// Version details at the bundle level for the each of server.
-	BundleVersion         *string                      `json:"BundleVersion,omitempty"`
-	ComponentsFwInventory []FirmwareFirmwareInventory  `json:"ComponentsFwInventory,omitempty"`
-	Server                *ComputePhysicalRelationship `json:"Server,omitempty"`
-	TargetMo              *MoBaseMoRelationship        `json:"TargetMo,omitempty"`
+	BundleVersion         *string                             `json:"BundleVersion,omitempty"`
+	ComponentsFwInventory []FirmwareFirmwareInventory         `json:"ComponentsFwInventory,omitempty"`
+	Server                NullableComputePhysicalRelationship `json:"Server,omitempty"`
+	TargetMo              NullableMoBaseMoRelationship        `json:"TargetMo,omitempty"`
 	AdditionalProperties  map[string]interface{}
 }
 
@@ -107,7 +111,7 @@ func (o *FirmwareFirmwareSummary) SetObjectType(v string) {
 
 // GetBundleVersion returns the BundleVersion field value if set, zero value otherwise.
 func (o *FirmwareFirmwareSummary) GetBundleVersion() string {
-	if o == nil || o.BundleVersion == nil {
+	if o == nil || IsNil(o.BundleVersion) {
 		var ret string
 		return ret
 	}
@@ -117,7 +121,7 @@ func (o *FirmwareFirmwareSummary) GetBundleVersion() string {
 // GetBundleVersionOk returns a tuple with the BundleVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FirmwareFirmwareSummary) GetBundleVersionOk() (*string, bool) {
-	if o == nil || o.BundleVersion == nil {
+	if o == nil || IsNil(o.BundleVersion) {
 		return nil, false
 	}
 	return o.BundleVersion, true
@@ -125,7 +129,7 @@ func (o *FirmwareFirmwareSummary) GetBundleVersionOk() (*string, bool) {
 
 // HasBundleVersion returns a boolean if a field has been set.
 func (o *FirmwareFirmwareSummary) HasBundleVersion() bool {
-	if o != nil && o.BundleVersion != nil {
+	if o != nil && !IsNil(o.BundleVersion) {
 		return true
 	}
 
@@ -150,7 +154,7 @@ func (o *FirmwareFirmwareSummary) GetComponentsFwInventory() []FirmwareFirmwareI
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *FirmwareFirmwareSummary) GetComponentsFwInventoryOk() ([]FirmwareFirmwareInventory, bool) {
-	if o == nil || o.ComponentsFwInventory == nil {
+	if o == nil || IsNil(o.ComponentsFwInventory) {
 		return nil, false
 	}
 	return o.ComponentsFwInventory, true
@@ -158,7 +162,7 @@ func (o *FirmwareFirmwareSummary) GetComponentsFwInventoryOk() ([]FirmwareFirmwa
 
 // HasComponentsFwInventory returns a boolean if a field has been set.
 func (o *FirmwareFirmwareSummary) HasComponentsFwInventory() bool {
-	if o != nil && o.ComponentsFwInventory != nil {
+	if o != nil && IsNil(o.ComponentsFwInventory) {
 		return true
 	}
 
@@ -170,122 +174,170 @@ func (o *FirmwareFirmwareSummary) SetComponentsFwInventory(v []FirmwareFirmwareI
 	o.ComponentsFwInventory = v
 }
 
-// GetServer returns the Server field value if set, zero value otherwise.
+// GetServer returns the Server field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *FirmwareFirmwareSummary) GetServer() ComputePhysicalRelationship {
-	if o == nil || o.Server == nil {
+	if o == nil || IsNil(o.Server.Get()) {
 		var ret ComputePhysicalRelationship
 		return ret
 	}
-	return *o.Server
+	return *o.Server.Get()
 }
 
 // GetServerOk returns a tuple with the Server field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *FirmwareFirmwareSummary) GetServerOk() (*ComputePhysicalRelationship, bool) {
-	if o == nil || o.Server == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Server, true
+	return o.Server.Get(), o.Server.IsSet()
 }
 
 // HasServer returns a boolean if a field has been set.
 func (o *FirmwareFirmwareSummary) HasServer() bool {
-	if o != nil && o.Server != nil {
+	if o != nil && o.Server.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetServer gets a reference to the given ComputePhysicalRelationship and assigns it to the Server field.
+// SetServer gets a reference to the given NullableComputePhysicalRelationship and assigns it to the Server field.
 func (o *FirmwareFirmwareSummary) SetServer(v ComputePhysicalRelationship) {
-	o.Server = &v
+	o.Server.Set(&v)
 }
 
-// GetTargetMo returns the TargetMo field value if set, zero value otherwise.
+// SetServerNil sets the value for Server to be an explicit nil
+func (o *FirmwareFirmwareSummary) SetServerNil() {
+	o.Server.Set(nil)
+}
+
+// UnsetServer ensures that no value is present for Server, not even an explicit nil
+func (o *FirmwareFirmwareSummary) UnsetServer() {
+	o.Server.Unset()
+}
+
+// GetTargetMo returns the TargetMo field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *FirmwareFirmwareSummary) GetTargetMo() MoBaseMoRelationship {
-	if o == nil || o.TargetMo == nil {
+	if o == nil || IsNil(o.TargetMo.Get()) {
 		var ret MoBaseMoRelationship
 		return ret
 	}
-	return *o.TargetMo
+	return *o.TargetMo.Get()
 }
 
 // GetTargetMoOk returns a tuple with the TargetMo field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *FirmwareFirmwareSummary) GetTargetMoOk() (*MoBaseMoRelationship, bool) {
-	if o == nil || o.TargetMo == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.TargetMo, true
+	return o.TargetMo.Get(), o.TargetMo.IsSet()
 }
 
 // HasTargetMo returns a boolean if a field has been set.
 func (o *FirmwareFirmwareSummary) HasTargetMo() bool {
-	if o != nil && o.TargetMo != nil {
+	if o != nil && o.TargetMo.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetTargetMo gets a reference to the given MoBaseMoRelationship and assigns it to the TargetMo field.
+// SetTargetMo gets a reference to the given NullableMoBaseMoRelationship and assigns it to the TargetMo field.
 func (o *FirmwareFirmwareSummary) SetTargetMo(v MoBaseMoRelationship) {
-	o.TargetMo = &v
+	o.TargetMo.Set(&v)
+}
+
+// SetTargetMoNil sets the value for TargetMo to be an explicit nil
+func (o *FirmwareFirmwareSummary) SetTargetMoNil() {
+	o.TargetMo.Set(nil)
+}
+
+// UnsetTargetMo ensures that no value is present for TargetMo, not even an explicit nil
+func (o *FirmwareFirmwareSummary) UnsetTargetMo() {
+	o.TargetMo.Unset()
 }
 
 func (o FirmwareFirmwareSummary) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o FirmwareFirmwareSummary) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedPolicyAbstractPolicyInventory, errPolicyAbstractPolicyInventory := json.Marshal(o.PolicyAbstractPolicyInventory)
 	if errPolicyAbstractPolicyInventory != nil {
-		return []byte{}, errPolicyAbstractPolicyInventory
+		return map[string]interface{}{}, errPolicyAbstractPolicyInventory
 	}
 	errPolicyAbstractPolicyInventory = json.Unmarshal([]byte(serializedPolicyAbstractPolicyInventory), &toSerialize)
 	if errPolicyAbstractPolicyInventory != nil {
-		return []byte{}, errPolicyAbstractPolicyInventory
+		return map[string]interface{}{}, errPolicyAbstractPolicyInventory
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.BundleVersion != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.BundleVersion) {
 		toSerialize["BundleVersion"] = o.BundleVersion
 	}
 	if o.ComponentsFwInventory != nil {
 		toSerialize["ComponentsFwInventory"] = o.ComponentsFwInventory
 	}
-	if o.Server != nil {
-		toSerialize["Server"] = o.Server
+	if o.Server.IsSet() {
+		toSerialize["Server"] = o.Server.Get()
 	}
-	if o.TargetMo != nil {
-		toSerialize["TargetMo"] = o.TargetMo
+	if o.TargetMo.IsSet() {
+		toSerialize["TargetMo"] = o.TargetMo.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *FirmwareFirmwareSummary) UnmarshalJSON(bytes []byte) (err error) {
+func (o *FirmwareFirmwareSummary) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type FirmwareFirmwareSummaryWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 		ObjectType string `json:"ObjectType"`
 		// Version details at the bundle level for the each of server.
-		BundleVersion         *string                      `json:"BundleVersion,omitempty"`
-		ComponentsFwInventory []FirmwareFirmwareInventory  `json:"ComponentsFwInventory,omitempty"`
-		Server                *ComputePhysicalRelationship `json:"Server,omitempty"`
-		TargetMo              *MoBaseMoRelationship        `json:"TargetMo,omitempty"`
+		BundleVersion         *string                             `json:"BundleVersion,omitempty"`
+		ComponentsFwInventory []FirmwareFirmwareInventory         `json:"ComponentsFwInventory,omitempty"`
+		Server                NullableComputePhysicalRelationship `json:"Server,omitempty"`
+		TargetMo              NullableMoBaseMoRelationship        `json:"TargetMo,omitempty"`
 	}
 
 	varFirmwareFirmwareSummaryWithoutEmbeddedStruct := FirmwareFirmwareSummaryWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varFirmwareFirmwareSummaryWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varFirmwareFirmwareSummaryWithoutEmbeddedStruct)
 	if err == nil {
 		varFirmwareFirmwareSummary := _FirmwareFirmwareSummary{}
 		varFirmwareFirmwareSummary.ClassId = varFirmwareFirmwareSummaryWithoutEmbeddedStruct.ClassId
@@ -301,7 +353,7 @@ func (o *FirmwareFirmwareSummary) UnmarshalJSON(bytes []byte) (err error) {
 
 	varFirmwareFirmwareSummary := _FirmwareFirmwareSummary{}
 
-	err = json.Unmarshal(bytes, &varFirmwareFirmwareSummary)
+	err = json.Unmarshal(data, &varFirmwareFirmwareSummary)
 	if err == nil {
 		o.PolicyAbstractPolicyInventory = varFirmwareFirmwareSummary.PolicyAbstractPolicyInventory
 	} else {
@@ -310,7 +362,7 @@ func (o *FirmwareFirmwareSummary) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "BundleVersion")

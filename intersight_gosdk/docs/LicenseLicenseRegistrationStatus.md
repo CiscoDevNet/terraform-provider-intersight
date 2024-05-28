@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **IsNewAccount** | Pointer to **bool** | Stores information on whether account is new. This data is used for UI theme upgrade, where existing users will be shown a slightly different screen. True if new. | [optional] [readonly] 
 **LicenseRegistrationState** | Pointer to **string** | Stores information on the current flow of license registration. * &#x60;RegistrationNotStarted&#x60; - The license registration state to chose between trial and registration. * &#x60;RegistrationStarted&#x60; - The license registration state during set up flow. * &#x60;RegistrationComplete&#x60; - The license registration state after completion. | [optional] [default to "RegistrationNotStarted"]
 **TrialRegistrationComplete** | Pointer to **bool** | Stores information on whether trial flow has been completed. True if trial registration finish. | [optional] 
-**AccountLicenseData** | Pointer to [**LicenseAccountLicenseDataRelationship**](LicenseAccountLicenseDataRelationship.md) |  | [optional] 
+**AccountLicenseData** | Pointer to [**NullableLicenseAccountLicenseDataRelationship**](LicenseAccountLicenseDataRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -196,6 +196,16 @@ SetAccountLicenseData sets AccountLicenseData field to given value.
 
 HasAccountLicenseData returns a boolean if a field has been set.
 
+### SetAccountLicenseDataNil
+
+`func (o *LicenseLicenseRegistrationStatus) SetAccountLicenseDataNil(b bool)`
+
+ SetAccountLicenseDataNil sets the value for AccountLicenseData to be an explicit nil
+
+### UnsetAccountLicenseData
+`func (o *LicenseLicenseRegistrationStatus) UnsetAccountLicenseData()`
+
+UnsetAccountLicenseData ensures that no value is present for AccountLicenseData, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

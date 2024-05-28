@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the ComputeServerPowerPolicy type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ComputeServerPowerPolicy{}
 
 // ComputeServerPowerPolicy Policy to determine the required power task during server profile deploy/undeploy.
 type ComputeServerPowerPolicy struct {
@@ -27,12 +31,12 @@ type ComputeServerPowerPolicy struct {
 	// User configured power state of server. * `Policy` - Power state is set to the default value in the policy. * `PowerOn` - Power state of the server is set to On. * `PowerOff` - Power state is the server set to Off. * `PowerCycle` - Power state the server is reset. * `HardReset` - Power state the server is hard reset. * `Shutdown` - Operating system on the server is shut down. * `Reboot` - Power state of IMC is rebooted.
 	PowerState *string `json:"PowerState,omitempty"`
 	// The name of the server it is associated with.
-	ServerName   *string                               `json:"ServerName,omitempty"`
-	Organization *OrganizationOrganizationRelationship `json:"Organization,omitempty"`
+	ServerName   *string                                      `json:"ServerName,omitempty"`
+	Organization NullableOrganizationOrganizationRelationship `json:"Organization,omitempty"`
 	// An array of relationships to policyAbstractConfigProfile resources.
-	Profiles             []PolicyAbstractConfigProfileRelationship `json:"Profiles,omitempty"`
-	RegisteredDevice     *AssetDeviceRegistrationRelationship      `json:"RegisteredDevice,omitempty"`
-	Server               *ComputePhysicalRelationship              `json:"Server,omitempty"`
+	Profiles             []PolicyAbstractConfigProfileRelationship   `json:"Profiles,omitempty"`
+	RegisteredDevice     NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+	Server               NullableComputePhysicalRelationship         `json:"Server,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -115,7 +119,7 @@ func (o *ComputeServerPowerPolicy) SetObjectType(v string) {
 
 // GetPowerState returns the PowerState field value if set, zero value otherwise.
 func (o *ComputeServerPowerPolicy) GetPowerState() string {
-	if o == nil || o.PowerState == nil {
+	if o == nil || IsNil(o.PowerState) {
 		var ret string
 		return ret
 	}
@@ -125,7 +129,7 @@ func (o *ComputeServerPowerPolicy) GetPowerState() string {
 // GetPowerStateOk returns a tuple with the PowerState field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ComputeServerPowerPolicy) GetPowerStateOk() (*string, bool) {
-	if o == nil || o.PowerState == nil {
+	if o == nil || IsNil(o.PowerState) {
 		return nil, false
 	}
 	return o.PowerState, true
@@ -133,7 +137,7 @@ func (o *ComputeServerPowerPolicy) GetPowerStateOk() (*string, bool) {
 
 // HasPowerState returns a boolean if a field has been set.
 func (o *ComputeServerPowerPolicy) HasPowerState() bool {
-	if o != nil && o.PowerState != nil {
+	if o != nil && !IsNil(o.PowerState) {
 		return true
 	}
 
@@ -147,7 +151,7 @@ func (o *ComputeServerPowerPolicy) SetPowerState(v string) {
 
 // GetServerName returns the ServerName field value if set, zero value otherwise.
 func (o *ComputeServerPowerPolicy) GetServerName() string {
-	if o == nil || o.ServerName == nil {
+	if o == nil || IsNil(o.ServerName) {
 		var ret string
 		return ret
 	}
@@ -157,7 +161,7 @@ func (o *ComputeServerPowerPolicy) GetServerName() string {
 // GetServerNameOk returns a tuple with the ServerName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ComputeServerPowerPolicy) GetServerNameOk() (*string, bool) {
-	if o == nil || o.ServerName == nil {
+	if o == nil || IsNil(o.ServerName) {
 		return nil, false
 	}
 	return o.ServerName, true
@@ -165,7 +169,7 @@ func (o *ComputeServerPowerPolicy) GetServerNameOk() (*string, bool) {
 
 // HasServerName returns a boolean if a field has been set.
 func (o *ComputeServerPowerPolicy) HasServerName() bool {
-	if o != nil && o.ServerName != nil {
+	if o != nil && !IsNil(o.ServerName) {
 		return true
 	}
 
@@ -177,36 +181,47 @@ func (o *ComputeServerPowerPolicy) SetServerName(v string) {
 	o.ServerName = &v
 }
 
-// GetOrganization returns the Organization field value if set, zero value otherwise.
+// GetOrganization returns the Organization field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ComputeServerPowerPolicy) GetOrganization() OrganizationOrganizationRelationship {
-	if o == nil || o.Organization == nil {
+	if o == nil || IsNil(o.Organization.Get()) {
 		var ret OrganizationOrganizationRelationship
 		return ret
 	}
-	return *o.Organization
+	return *o.Organization.Get()
 }
 
 // GetOrganizationOk returns a tuple with the Organization field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ComputeServerPowerPolicy) GetOrganizationOk() (*OrganizationOrganizationRelationship, bool) {
-	if o == nil || o.Organization == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Organization, true
+	return o.Organization.Get(), o.Organization.IsSet()
 }
 
 // HasOrganization returns a boolean if a field has been set.
 func (o *ComputeServerPowerPolicy) HasOrganization() bool {
-	if o != nil && o.Organization != nil {
+	if o != nil && o.Organization.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetOrganization gets a reference to the given OrganizationOrganizationRelationship and assigns it to the Organization field.
+// SetOrganization gets a reference to the given NullableOrganizationOrganizationRelationship and assigns it to the Organization field.
 func (o *ComputeServerPowerPolicy) SetOrganization(v OrganizationOrganizationRelationship) {
-	o.Organization = &v
+	o.Organization.Set(&v)
+}
+
+// SetOrganizationNil sets the value for Organization to be an explicit nil
+func (o *ComputeServerPowerPolicy) SetOrganizationNil() {
+	o.Organization.Set(nil)
+}
+
+// UnsetOrganization ensures that no value is present for Organization, not even an explicit nil
+func (o *ComputeServerPowerPolicy) UnsetOrganization() {
+	o.Organization.Unset()
 }
 
 // GetProfiles returns the Profiles field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -222,7 +237,7 @@ func (o *ComputeServerPowerPolicy) GetProfiles() []PolicyAbstractConfigProfileRe
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ComputeServerPowerPolicy) GetProfilesOk() ([]PolicyAbstractConfigProfileRelationship, bool) {
-	if o == nil || o.Profiles == nil {
+	if o == nil || IsNil(o.Profiles) {
 		return nil, false
 	}
 	return o.Profiles, true
@@ -230,7 +245,7 @@ func (o *ComputeServerPowerPolicy) GetProfilesOk() ([]PolicyAbstractConfigProfil
 
 // HasProfiles returns a boolean if a field has been set.
 func (o *ComputeServerPowerPolicy) HasProfiles() bool {
-	if o != nil && o.Profiles != nil {
+	if o != nil && IsNil(o.Profiles) {
 		return true
 	}
 
@@ -242,113 +257,161 @@ func (o *ComputeServerPowerPolicy) SetProfiles(v []PolicyAbstractConfigProfileRe
 	o.Profiles = v
 }
 
-// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise.
+// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ComputeServerPowerPolicy) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil || IsNil(o.RegisteredDevice.Get()) {
 		var ret AssetDeviceRegistrationRelationship
 		return ret
 	}
-	return *o.RegisteredDevice
+	return *o.RegisteredDevice.Get()
 }
 
 // GetRegisteredDeviceOk returns a tuple with the RegisteredDevice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ComputeServerPowerPolicy) GetRegisteredDeviceOk() (*AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.RegisteredDevice, true
+	return o.RegisteredDevice.Get(), o.RegisteredDevice.IsSet()
 }
 
 // HasRegisteredDevice returns a boolean if a field has been set.
 func (o *ComputeServerPowerPolicy) HasRegisteredDevice() bool {
-	if o != nil && o.RegisteredDevice != nil {
+	if o != nil && o.RegisteredDevice.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRegisteredDevice gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
+// SetRegisteredDevice gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
 func (o *ComputeServerPowerPolicy) SetRegisteredDevice(v AssetDeviceRegistrationRelationship) {
-	o.RegisteredDevice = &v
+	o.RegisteredDevice.Set(&v)
 }
 
-// GetServer returns the Server field value if set, zero value otherwise.
+// SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+func (o *ComputeServerPowerPolicy) SetRegisteredDeviceNil() {
+	o.RegisteredDevice.Set(nil)
+}
+
+// UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
+func (o *ComputeServerPowerPolicy) UnsetRegisteredDevice() {
+	o.RegisteredDevice.Unset()
+}
+
+// GetServer returns the Server field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ComputeServerPowerPolicy) GetServer() ComputePhysicalRelationship {
-	if o == nil || o.Server == nil {
+	if o == nil || IsNil(o.Server.Get()) {
 		var ret ComputePhysicalRelationship
 		return ret
 	}
-	return *o.Server
+	return *o.Server.Get()
 }
 
 // GetServerOk returns a tuple with the Server field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ComputeServerPowerPolicy) GetServerOk() (*ComputePhysicalRelationship, bool) {
-	if o == nil || o.Server == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Server, true
+	return o.Server.Get(), o.Server.IsSet()
 }
 
 // HasServer returns a boolean if a field has been set.
 func (o *ComputeServerPowerPolicy) HasServer() bool {
-	if o != nil && o.Server != nil {
+	if o != nil && o.Server.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetServer gets a reference to the given ComputePhysicalRelationship and assigns it to the Server field.
+// SetServer gets a reference to the given NullableComputePhysicalRelationship and assigns it to the Server field.
 func (o *ComputeServerPowerPolicy) SetServer(v ComputePhysicalRelationship) {
-	o.Server = &v
+	o.Server.Set(&v)
+}
+
+// SetServerNil sets the value for Server to be an explicit nil
+func (o *ComputeServerPowerPolicy) SetServerNil() {
+	o.Server.Set(nil)
+}
+
+// UnsetServer ensures that no value is present for Server, not even an explicit nil
+func (o *ComputeServerPowerPolicy) UnsetServer() {
+	o.Server.Unset()
 }
 
 func (o ComputeServerPowerPolicy) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o ComputeServerPowerPolicy) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedPolicyAbstractPolicy, errPolicyAbstractPolicy := json.Marshal(o.PolicyAbstractPolicy)
 	if errPolicyAbstractPolicy != nil {
-		return []byte{}, errPolicyAbstractPolicy
+		return map[string]interface{}{}, errPolicyAbstractPolicy
 	}
 	errPolicyAbstractPolicy = json.Unmarshal([]byte(serializedPolicyAbstractPolicy), &toSerialize)
 	if errPolicyAbstractPolicy != nil {
-		return []byte{}, errPolicyAbstractPolicy
+		return map[string]interface{}{}, errPolicyAbstractPolicy
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.PowerState != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.PowerState) {
 		toSerialize["PowerState"] = o.PowerState
 	}
-	if o.ServerName != nil {
+	if !IsNil(o.ServerName) {
 		toSerialize["ServerName"] = o.ServerName
 	}
-	if o.Organization != nil {
-		toSerialize["Organization"] = o.Organization
+	if o.Organization.IsSet() {
+		toSerialize["Organization"] = o.Organization.Get()
 	}
 	if o.Profiles != nil {
 		toSerialize["Profiles"] = o.Profiles
 	}
-	if o.RegisteredDevice != nil {
-		toSerialize["RegisteredDevice"] = o.RegisteredDevice
+	if o.RegisteredDevice.IsSet() {
+		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
 	}
-	if o.Server != nil {
-		toSerialize["Server"] = o.Server
+	if o.Server.IsSet() {
+		toSerialize["Server"] = o.Server.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *ComputeServerPowerPolicy) UnmarshalJSON(bytes []byte) (err error) {
+func (o *ComputeServerPowerPolicy) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type ComputeServerPowerPolicyWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -357,17 +420,17 @@ func (o *ComputeServerPowerPolicy) UnmarshalJSON(bytes []byte) (err error) {
 		// User configured power state of server. * `Policy` - Power state is set to the default value in the policy. * `PowerOn` - Power state of the server is set to On. * `PowerOff` - Power state is the server set to Off. * `PowerCycle` - Power state the server is reset. * `HardReset` - Power state the server is hard reset. * `Shutdown` - Operating system on the server is shut down. * `Reboot` - Power state of IMC is rebooted.
 		PowerState *string `json:"PowerState,omitempty"`
 		// The name of the server it is associated with.
-		ServerName   *string                               `json:"ServerName,omitempty"`
-		Organization *OrganizationOrganizationRelationship `json:"Organization,omitempty"`
+		ServerName   *string                                      `json:"ServerName,omitempty"`
+		Organization NullableOrganizationOrganizationRelationship `json:"Organization,omitempty"`
 		// An array of relationships to policyAbstractConfigProfile resources.
-		Profiles         []PolicyAbstractConfigProfileRelationship `json:"Profiles,omitempty"`
-		RegisteredDevice *AssetDeviceRegistrationRelationship      `json:"RegisteredDevice,omitempty"`
-		Server           *ComputePhysicalRelationship              `json:"Server,omitempty"`
+		Profiles         []PolicyAbstractConfigProfileRelationship   `json:"Profiles,omitempty"`
+		RegisteredDevice NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+		Server           NullableComputePhysicalRelationship         `json:"Server,omitempty"`
 	}
 
 	varComputeServerPowerPolicyWithoutEmbeddedStruct := ComputeServerPowerPolicyWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varComputeServerPowerPolicyWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varComputeServerPowerPolicyWithoutEmbeddedStruct)
 	if err == nil {
 		varComputeServerPowerPolicy := _ComputeServerPowerPolicy{}
 		varComputeServerPowerPolicy.ClassId = varComputeServerPowerPolicyWithoutEmbeddedStruct.ClassId
@@ -385,7 +448,7 @@ func (o *ComputeServerPowerPolicy) UnmarshalJSON(bytes []byte) (err error) {
 
 	varComputeServerPowerPolicy := _ComputeServerPowerPolicy{}
 
-	err = json.Unmarshal(bytes, &varComputeServerPowerPolicy)
+	err = json.Unmarshal(data, &varComputeServerPowerPolicy)
 	if err == nil {
 		o.PolicyAbstractPolicy = varComputeServerPowerPolicy.PolicyAbstractPolicy
 	} else {
@@ -394,7 +457,7 @@ func (o *ComputeServerPowerPolicy) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "PowerState")

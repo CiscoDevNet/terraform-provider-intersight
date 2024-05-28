@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the AssetWorkloadOptimizerAmazonWebServicesBillingOptions type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &AssetWorkloadOptimizerAmazonWebServicesBillingOptions{}
 
 // AssetWorkloadOptimizerAmazonWebServicesBillingOptions Captures configuration specific to the Amazon web service (AWS) target for Workload Optimizer service. Following explanation is for S3 parameters for configuring billing and costs reports. S3 bucket parameters help in programmatically gaining access to the S3 bucket for billing and cost management. The user must first have Amazon web service billing data being generated for their Amazon web service account. Since this is not enabled in Amazon web service by default, follow the instructions from Amazon web service to generate the bill hourly. Use \"Daily\" time unit frequency on which report data are measured and displayed. [link](https://aws.amazon.com/blogs/aws/new-programmatic-access-to-aws-billing-data/) [link](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/billing-getting-started.html).
 type AssetWorkloadOptimizerAmazonWebServicesBillingOptions struct {
@@ -108,7 +112,7 @@ func (o *AssetWorkloadOptimizerAmazonWebServicesBillingOptions) SetObjectType(v 
 
 // GetCostAndUsageReportBucket returns the CostAndUsageReportBucket field value if set, zero value otherwise.
 func (o *AssetWorkloadOptimizerAmazonWebServicesBillingOptions) GetCostAndUsageReportBucket() string {
-	if o == nil || o.CostAndUsageReportBucket == nil {
+	if o == nil || IsNil(o.CostAndUsageReportBucket) {
 		var ret string
 		return ret
 	}
@@ -118,7 +122,7 @@ func (o *AssetWorkloadOptimizerAmazonWebServicesBillingOptions) GetCostAndUsageR
 // GetCostAndUsageReportBucketOk returns a tuple with the CostAndUsageReportBucket field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AssetWorkloadOptimizerAmazonWebServicesBillingOptions) GetCostAndUsageReportBucketOk() (*string, bool) {
-	if o == nil || o.CostAndUsageReportBucket == nil {
+	if o == nil || IsNil(o.CostAndUsageReportBucket) {
 		return nil, false
 	}
 	return o.CostAndUsageReportBucket, true
@@ -126,7 +130,7 @@ func (o *AssetWorkloadOptimizerAmazonWebServicesBillingOptions) GetCostAndUsageR
 
 // HasCostAndUsageReportBucket returns a boolean if a field has been set.
 func (o *AssetWorkloadOptimizerAmazonWebServicesBillingOptions) HasCostAndUsageReportBucket() bool {
-	if o != nil && o.CostAndUsageReportBucket != nil {
+	if o != nil && !IsNil(o.CostAndUsageReportBucket) {
 		return true
 	}
 
@@ -140,7 +144,7 @@ func (o *AssetWorkloadOptimizerAmazonWebServicesBillingOptions) SetCostAndUsageR
 
 // GetCostAndUsageReportPath returns the CostAndUsageReportPath field value if set, zero value otherwise.
 func (o *AssetWorkloadOptimizerAmazonWebServicesBillingOptions) GetCostAndUsageReportPath() string {
-	if o == nil || o.CostAndUsageReportPath == nil {
+	if o == nil || IsNil(o.CostAndUsageReportPath) {
 		var ret string
 		return ret
 	}
@@ -150,7 +154,7 @@ func (o *AssetWorkloadOptimizerAmazonWebServicesBillingOptions) GetCostAndUsageR
 // GetCostAndUsageReportPathOk returns a tuple with the CostAndUsageReportPath field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AssetWorkloadOptimizerAmazonWebServicesBillingOptions) GetCostAndUsageReportPathOk() (*string, bool) {
-	if o == nil || o.CostAndUsageReportPath == nil {
+	if o == nil || IsNil(o.CostAndUsageReportPath) {
 		return nil, false
 	}
 	return o.CostAndUsageReportPath, true
@@ -158,7 +162,7 @@ func (o *AssetWorkloadOptimizerAmazonWebServicesBillingOptions) GetCostAndUsageR
 
 // HasCostAndUsageReportPath returns a boolean if a field has been set.
 func (o *AssetWorkloadOptimizerAmazonWebServicesBillingOptions) HasCostAndUsageReportPath() bool {
-	if o != nil && o.CostAndUsageReportPath != nil {
+	if o != nil && !IsNil(o.CostAndUsageReportPath) {
 		return true
 	}
 
@@ -172,7 +176,7 @@ func (o *AssetWorkloadOptimizerAmazonWebServicesBillingOptions) SetCostAndUsageR
 
 // GetCostAndUsageReportRegion returns the CostAndUsageReportRegion field value if set, zero value otherwise.
 func (o *AssetWorkloadOptimizerAmazonWebServicesBillingOptions) GetCostAndUsageReportRegion() string {
-	if o == nil || o.CostAndUsageReportRegion == nil {
+	if o == nil || IsNil(o.CostAndUsageReportRegion) {
 		var ret string
 		return ret
 	}
@@ -182,7 +186,7 @@ func (o *AssetWorkloadOptimizerAmazonWebServicesBillingOptions) GetCostAndUsageR
 // GetCostAndUsageReportRegionOk returns a tuple with the CostAndUsageReportRegion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AssetWorkloadOptimizerAmazonWebServicesBillingOptions) GetCostAndUsageReportRegionOk() (*string, bool) {
-	if o == nil || o.CostAndUsageReportRegion == nil {
+	if o == nil || IsNil(o.CostAndUsageReportRegion) {
 		return nil, false
 	}
 	return o.CostAndUsageReportRegion, true
@@ -190,7 +194,7 @@ func (o *AssetWorkloadOptimizerAmazonWebServicesBillingOptions) GetCostAndUsageR
 
 // HasCostAndUsageReportRegion returns a boolean if a field has been set.
 func (o *AssetWorkloadOptimizerAmazonWebServicesBillingOptions) HasCostAndUsageReportRegion() bool {
-	if o != nil && o.CostAndUsageReportRegion != nil {
+	if o != nil && !IsNil(o.CostAndUsageReportRegion) {
 		return true
 	}
 
@@ -203,28 +207,32 @@ func (o *AssetWorkloadOptimizerAmazonWebServicesBillingOptions) SetCostAndUsageR
 }
 
 func (o AssetWorkloadOptimizerAmazonWebServicesBillingOptions) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o AssetWorkloadOptimizerAmazonWebServicesBillingOptions) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedAssetServiceOptions, errAssetServiceOptions := json.Marshal(o.AssetServiceOptions)
 	if errAssetServiceOptions != nil {
-		return []byte{}, errAssetServiceOptions
+		return map[string]interface{}{}, errAssetServiceOptions
 	}
 	errAssetServiceOptions = json.Unmarshal([]byte(serializedAssetServiceOptions), &toSerialize)
 	if errAssetServiceOptions != nil {
-		return []byte{}, errAssetServiceOptions
+		return map[string]interface{}{}, errAssetServiceOptions
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.CostAndUsageReportBucket != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.CostAndUsageReportBucket) {
 		toSerialize["CostAndUsageReportBucket"] = o.CostAndUsageReportBucket
 	}
-	if o.CostAndUsageReportPath != nil {
+	if !IsNil(o.CostAndUsageReportPath) {
 		toSerialize["CostAndUsageReportPath"] = o.CostAndUsageReportPath
 	}
-	if o.CostAndUsageReportRegion != nil {
+	if !IsNil(o.CostAndUsageReportRegion) {
 		toSerialize["CostAndUsageReportRegion"] = o.CostAndUsageReportRegion
 	}
 
@@ -232,10 +240,32 @@ func (o AssetWorkloadOptimizerAmazonWebServicesBillingOptions) MarshalJSON() ([]
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *AssetWorkloadOptimizerAmazonWebServicesBillingOptions) UnmarshalJSON(bytes []byte) (err error) {
+func (o *AssetWorkloadOptimizerAmazonWebServicesBillingOptions) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type AssetWorkloadOptimizerAmazonWebServicesBillingOptionsWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -251,7 +281,7 @@ func (o *AssetWorkloadOptimizerAmazonWebServicesBillingOptions) UnmarshalJSON(by
 
 	varAssetWorkloadOptimizerAmazonWebServicesBillingOptionsWithoutEmbeddedStruct := AssetWorkloadOptimizerAmazonWebServicesBillingOptionsWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varAssetWorkloadOptimizerAmazonWebServicesBillingOptionsWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varAssetWorkloadOptimizerAmazonWebServicesBillingOptionsWithoutEmbeddedStruct)
 	if err == nil {
 		varAssetWorkloadOptimizerAmazonWebServicesBillingOptions := _AssetWorkloadOptimizerAmazonWebServicesBillingOptions{}
 		varAssetWorkloadOptimizerAmazonWebServicesBillingOptions.ClassId = varAssetWorkloadOptimizerAmazonWebServicesBillingOptionsWithoutEmbeddedStruct.ClassId
@@ -266,7 +296,7 @@ func (o *AssetWorkloadOptimizerAmazonWebServicesBillingOptions) UnmarshalJSON(by
 
 	varAssetWorkloadOptimizerAmazonWebServicesBillingOptions := _AssetWorkloadOptimizerAmazonWebServicesBillingOptions{}
 
-	err = json.Unmarshal(bytes, &varAssetWorkloadOptimizerAmazonWebServicesBillingOptions)
+	err = json.Unmarshal(data, &varAssetWorkloadOptimizerAmazonWebServicesBillingOptions)
 	if err == nil {
 		o.AssetServiceOptions = varAssetWorkloadOptimizerAmazonWebServicesBillingOptions.AssetServiceOptions
 	} else {
@@ -275,7 +305,7 @@ func (o *AssetWorkloadOptimizerAmazonWebServicesBillingOptions) UnmarshalJSON(by
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "CostAndUsageReportBucket")

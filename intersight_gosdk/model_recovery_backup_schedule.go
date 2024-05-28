@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,10 +13,14 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 	"time"
 )
+
+// checks if the RecoveryBackupSchedule type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &RecoveryBackupSchedule{}
 
 // RecoveryBackupSchedule Encapsulates the various backup settings available to the user for scheduling a backup on the endpoint.
 type RecoveryBackupSchedule struct {
@@ -117,7 +121,7 @@ func (o *RecoveryBackupSchedule) SetObjectType(v string) {
 
 // GetExecutionTime returns the ExecutionTime field value if set, zero value otherwise.
 func (o *RecoveryBackupSchedule) GetExecutionTime() time.Time {
-	if o == nil || o.ExecutionTime == nil {
+	if o == nil || IsNil(o.ExecutionTime) {
 		var ret time.Time
 		return ret
 	}
@@ -127,7 +131,7 @@ func (o *RecoveryBackupSchedule) GetExecutionTime() time.Time {
 // GetExecutionTimeOk returns a tuple with the ExecutionTime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RecoveryBackupSchedule) GetExecutionTimeOk() (*time.Time, bool) {
-	if o == nil || o.ExecutionTime == nil {
+	if o == nil || IsNil(o.ExecutionTime) {
 		return nil, false
 	}
 	return o.ExecutionTime, true
@@ -135,7 +139,7 @@ func (o *RecoveryBackupSchedule) GetExecutionTimeOk() (*time.Time, bool) {
 
 // HasExecutionTime returns a boolean if a field has been set.
 func (o *RecoveryBackupSchedule) HasExecutionTime() bool {
-	if o != nil && o.ExecutionTime != nil {
+	if o != nil && !IsNil(o.ExecutionTime) {
 		return true
 	}
 
@@ -149,7 +153,7 @@ func (o *RecoveryBackupSchedule) SetExecutionTime(v time.Time) {
 
 // GetFrequencyUnit returns the FrequencyUnit field value if set, zero value otherwise.
 func (o *RecoveryBackupSchedule) GetFrequencyUnit() string {
-	if o == nil || o.FrequencyUnit == nil {
+	if o == nil || IsNil(o.FrequencyUnit) {
 		var ret string
 		return ret
 	}
@@ -159,7 +163,7 @@ func (o *RecoveryBackupSchedule) GetFrequencyUnit() string {
 // GetFrequencyUnitOk returns a tuple with the FrequencyUnit field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RecoveryBackupSchedule) GetFrequencyUnitOk() (*string, bool) {
-	if o == nil || o.FrequencyUnit == nil {
+	if o == nil || IsNil(o.FrequencyUnit) {
 		return nil, false
 	}
 	return o.FrequencyUnit, true
@@ -167,7 +171,7 @@ func (o *RecoveryBackupSchedule) GetFrequencyUnitOk() (*string, bool) {
 
 // HasFrequencyUnit returns a boolean if a field has been set.
 func (o *RecoveryBackupSchedule) HasFrequencyUnit() bool {
-	if o != nil && o.FrequencyUnit != nil {
+	if o != nil && !IsNil(o.FrequencyUnit) {
 		return true
 	}
 
@@ -181,7 +185,7 @@ func (o *RecoveryBackupSchedule) SetFrequencyUnit(v string) {
 
 // GetHours returns the Hours field value if set, zero value otherwise.
 func (o *RecoveryBackupSchedule) GetHours() int32 {
-	if o == nil || o.Hours == nil {
+	if o == nil || IsNil(o.Hours) {
 		var ret int32
 		return ret
 	}
@@ -191,7 +195,7 @@ func (o *RecoveryBackupSchedule) GetHours() int32 {
 // GetHoursOk returns a tuple with the Hours field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RecoveryBackupSchedule) GetHoursOk() (*int32, bool) {
-	if o == nil || o.Hours == nil {
+	if o == nil || IsNil(o.Hours) {
 		return nil, false
 	}
 	return o.Hours, true
@@ -199,7 +203,7 @@ func (o *RecoveryBackupSchedule) GetHoursOk() (*int32, bool) {
 
 // HasHours returns a boolean if a field has been set.
 func (o *RecoveryBackupSchedule) HasHours() bool {
-	if o != nil && o.Hours != nil {
+	if o != nil && !IsNil(o.Hours) {
 		return true
 	}
 
@@ -212,28 +216,32 @@ func (o *RecoveryBackupSchedule) SetHours(v int32) {
 }
 
 func (o RecoveryBackupSchedule) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o RecoveryBackupSchedule) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
 	errMoBaseComplexType = json.Unmarshal([]byte(serializedMoBaseComplexType), &toSerialize)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.ExecutionTime != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.ExecutionTime) {
 		toSerialize["ExecutionTime"] = o.ExecutionTime
 	}
-	if o.FrequencyUnit != nil {
+	if !IsNil(o.FrequencyUnit) {
 		toSerialize["FrequencyUnit"] = o.FrequencyUnit
 	}
-	if o.Hours != nil {
+	if !IsNil(o.Hours) {
 		toSerialize["Hours"] = o.Hours
 	}
 
@@ -241,10 +249,32 @@ func (o RecoveryBackupSchedule) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *RecoveryBackupSchedule) UnmarshalJSON(bytes []byte) (err error) {
+func (o *RecoveryBackupSchedule) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type RecoveryBackupScheduleWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -260,7 +290,7 @@ func (o *RecoveryBackupSchedule) UnmarshalJSON(bytes []byte) (err error) {
 
 	varRecoveryBackupScheduleWithoutEmbeddedStruct := RecoveryBackupScheduleWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varRecoveryBackupScheduleWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varRecoveryBackupScheduleWithoutEmbeddedStruct)
 	if err == nil {
 		varRecoveryBackupSchedule := _RecoveryBackupSchedule{}
 		varRecoveryBackupSchedule.ClassId = varRecoveryBackupScheduleWithoutEmbeddedStruct.ClassId
@@ -275,7 +305,7 @@ func (o *RecoveryBackupSchedule) UnmarshalJSON(bytes []byte) (err error) {
 
 	varRecoveryBackupSchedule := _RecoveryBackupSchedule{}
 
-	err = json.Unmarshal(bytes, &varRecoveryBackupSchedule)
+	err = json.Unmarshal(data, &varRecoveryBackupSchedule)
 	if err == nil {
 		o.MoBaseComplexType = varRecoveryBackupSchedule.MoBaseComplexType
 	} else {
@@ -284,7 +314,7 @@ func (o *RecoveryBackupSchedule) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "ExecutionTime")

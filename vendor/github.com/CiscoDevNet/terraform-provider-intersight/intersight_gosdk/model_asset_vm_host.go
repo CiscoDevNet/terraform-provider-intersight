@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the AssetVmHost type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &AssetVmHost{}
 
 // AssetVmHost Type for saving VM host details.
 type AssetVmHost struct {
@@ -110,7 +114,7 @@ func (o *AssetVmHost) SetObjectType(v string) {
 
 // GetAccountMoid returns the AccountMoid field value if set, zero value otherwise.
 func (o *AssetVmHost) GetAccountMoid() string {
-	if o == nil || o.AccountMoid == nil {
+	if o == nil || IsNil(o.AccountMoid) {
 		var ret string
 		return ret
 	}
@@ -120,7 +124,7 @@ func (o *AssetVmHost) GetAccountMoid() string {
 // GetAccountMoidOk returns a tuple with the AccountMoid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AssetVmHost) GetAccountMoidOk() (*string, bool) {
-	if o == nil || o.AccountMoid == nil {
+	if o == nil || IsNil(o.AccountMoid) {
 		return nil, false
 	}
 	return o.AccountMoid, true
@@ -128,7 +132,7 @@ func (o *AssetVmHost) GetAccountMoidOk() (*string, bool) {
 
 // HasAccountMoid returns a boolean if a field has been set.
 func (o *AssetVmHost) HasAccountMoid() bool {
-	if o != nil && o.AccountMoid != nil {
+	if o != nil && !IsNil(o.AccountMoid) {
 		return true
 	}
 
@@ -142,7 +146,7 @@ func (o *AssetVmHost) SetAccountMoid(v string) {
 
 // GetClusterIdentity returns the ClusterIdentity field value if set, zero value otherwise.
 func (o *AssetVmHost) GetClusterIdentity() string {
-	if o == nil || o.ClusterIdentity == nil {
+	if o == nil || IsNil(o.ClusterIdentity) {
 		var ret string
 		return ret
 	}
@@ -152,7 +156,7 @@ func (o *AssetVmHost) GetClusterIdentity() string {
 // GetClusterIdentityOk returns a tuple with the ClusterIdentity field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AssetVmHost) GetClusterIdentityOk() (*string, bool) {
-	if o == nil || o.ClusterIdentity == nil {
+	if o == nil || IsNil(o.ClusterIdentity) {
 		return nil, false
 	}
 	return o.ClusterIdentity, true
@@ -160,7 +164,7 @@ func (o *AssetVmHost) GetClusterIdentityOk() (*string, bool) {
 
 // HasClusterIdentity returns a boolean if a field has been set.
 func (o *AssetVmHost) HasClusterIdentity() bool {
-	if o != nil && o.ClusterIdentity != nil {
+	if o != nil && !IsNil(o.ClusterIdentity) {
 		return true
 	}
 
@@ -174,7 +178,7 @@ func (o *AssetVmHost) SetClusterIdentity(v string) {
 
 // GetClusterMoid returns the ClusterMoid field value if set, zero value otherwise.
 func (o *AssetVmHost) GetClusterMoid() string {
-	if o == nil || o.ClusterMoid == nil {
+	if o == nil || IsNil(o.ClusterMoid) {
 		var ret string
 		return ret
 	}
@@ -184,7 +188,7 @@ func (o *AssetVmHost) GetClusterMoid() string {
 // GetClusterMoidOk returns a tuple with the ClusterMoid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AssetVmHost) GetClusterMoidOk() (*string, bool) {
-	if o == nil || o.ClusterMoid == nil {
+	if o == nil || IsNil(o.ClusterMoid) {
 		return nil, false
 	}
 	return o.ClusterMoid, true
@@ -192,7 +196,7 @@ func (o *AssetVmHost) GetClusterMoidOk() (*string, bool) {
 
 // HasClusterMoid returns a boolean if a field has been set.
 func (o *AssetVmHost) HasClusterMoid() bool {
-	if o != nil && o.ClusterMoid != nil {
+	if o != nil && !IsNil(o.ClusterMoid) {
 		return true
 	}
 
@@ -206,7 +210,7 @@ func (o *AssetVmHost) SetClusterMoid(v string) {
 
 // GetClusterName returns the ClusterName field value if set, zero value otherwise.
 func (o *AssetVmHost) GetClusterName() string {
-	if o == nil || o.ClusterName == nil {
+	if o == nil || IsNil(o.ClusterName) {
 		var ret string
 		return ret
 	}
@@ -216,7 +220,7 @@ func (o *AssetVmHost) GetClusterName() string {
 // GetClusterNameOk returns a tuple with the ClusterName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AssetVmHost) GetClusterNameOk() (*string, bool) {
-	if o == nil || o.ClusterName == nil {
+	if o == nil || IsNil(o.ClusterName) {
 		return nil, false
 	}
 	return o.ClusterName, true
@@ -224,7 +228,7 @@ func (o *AssetVmHost) GetClusterNameOk() (*string, bool) {
 
 // HasClusterName returns a boolean if a field has been set.
 func (o *AssetVmHost) HasClusterName() bool {
-	if o != nil && o.ClusterName != nil {
+	if o != nil && !IsNil(o.ClusterName) {
 		return true
 	}
 
@@ -237,31 +241,35 @@ func (o *AssetVmHost) SetClusterName(v string) {
 }
 
 func (o AssetVmHost) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o AssetVmHost) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
 	errMoBaseComplexType = json.Unmarshal([]byte(serializedMoBaseComplexType), &toSerialize)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.AccountMoid != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.AccountMoid) {
 		toSerialize["AccountMoid"] = o.AccountMoid
 	}
-	if o.ClusterIdentity != nil {
+	if !IsNil(o.ClusterIdentity) {
 		toSerialize["ClusterIdentity"] = o.ClusterIdentity
 	}
-	if o.ClusterMoid != nil {
+	if !IsNil(o.ClusterMoid) {
 		toSerialize["ClusterMoid"] = o.ClusterMoid
 	}
-	if o.ClusterName != nil {
+	if !IsNil(o.ClusterName) {
 		toSerialize["ClusterName"] = o.ClusterName
 	}
 
@@ -269,10 +277,32 @@ func (o AssetVmHost) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *AssetVmHost) UnmarshalJSON(bytes []byte) (err error) {
+func (o *AssetVmHost) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type AssetVmHostWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -290,7 +320,7 @@ func (o *AssetVmHost) UnmarshalJSON(bytes []byte) (err error) {
 
 	varAssetVmHostWithoutEmbeddedStruct := AssetVmHostWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varAssetVmHostWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varAssetVmHostWithoutEmbeddedStruct)
 	if err == nil {
 		varAssetVmHost := _AssetVmHost{}
 		varAssetVmHost.ClassId = varAssetVmHostWithoutEmbeddedStruct.ClassId
@@ -306,7 +336,7 @@ func (o *AssetVmHost) UnmarshalJSON(bytes []byte) (err error) {
 
 	varAssetVmHost := _AssetVmHost{}
 
-	err = json.Unmarshal(bytes, &varAssetVmHost)
+	err = json.Unmarshal(data, &varAssetVmHost)
 	if err == nil {
 		o.MoBaseComplexType = varAssetVmHost.MoBaseComplexType
 	} else {
@@ -315,7 +345,7 @@ func (o *AssetVmHost) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "AccountMoid")

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the MarketplaceUseCase type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &MarketplaceUseCase{}
 
 // MarketplaceUseCase A cross domain use case for CDA.
 type MarketplaceUseCase struct {
@@ -27,8 +31,8 @@ type MarketplaceUseCase struct {
 	Dependencies []MarketplaceUseCaseDependency `json:"Dependencies,omitempty"`
 	Locales      []MarketplaceUseCaseLocale     `json:"Locales,omitempty"`
 	// A unique identifier is used to prevent duplicates.
-	UniqueName           *string                      `json:"UniqueName,omitempty"`
-	Catalog              *WorkflowCatalogRelationship `json:"Catalog,omitempty"`
+	UniqueName           *string                             `json:"UniqueName,omitempty"`
+	Catalog              NullableWorkflowCatalogRelationship `json:"Catalog,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -118,7 +122,7 @@ func (o *MarketplaceUseCase) GetDependencies() []MarketplaceUseCaseDependency {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *MarketplaceUseCase) GetDependenciesOk() ([]MarketplaceUseCaseDependency, bool) {
-	if o == nil || o.Dependencies == nil {
+	if o == nil || IsNil(o.Dependencies) {
 		return nil, false
 	}
 	return o.Dependencies, true
@@ -126,7 +130,7 @@ func (o *MarketplaceUseCase) GetDependenciesOk() ([]MarketplaceUseCaseDependency
 
 // HasDependencies returns a boolean if a field has been set.
 func (o *MarketplaceUseCase) HasDependencies() bool {
-	if o != nil && o.Dependencies != nil {
+	if o != nil && IsNil(o.Dependencies) {
 		return true
 	}
 
@@ -151,7 +155,7 @@ func (o *MarketplaceUseCase) GetLocales() []MarketplaceUseCaseLocale {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *MarketplaceUseCase) GetLocalesOk() ([]MarketplaceUseCaseLocale, bool) {
-	if o == nil || o.Locales == nil {
+	if o == nil || IsNil(o.Locales) {
 		return nil, false
 	}
 	return o.Locales, true
@@ -159,7 +163,7 @@ func (o *MarketplaceUseCase) GetLocalesOk() ([]MarketplaceUseCaseLocale, bool) {
 
 // HasLocales returns a boolean if a field has been set.
 func (o *MarketplaceUseCase) HasLocales() bool {
-	if o != nil && o.Locales != nil {
+	if o != nil && IsNil(o.Locales) {
 		return true
 	}
 
@@ -173,7 +177,7 @@ func (o *MarketplaceUseCase) SetLocales(v []MarketplaceUseCaseLocale) {
 
 // GetUniqueName returns the UniqueName field value if set, zero value otherwise.
 func (o *MarketplaceUseCase) GetUniqueName() string {
-	if o == nil || o.UniqueName == nil {
+	if o == nil || IsNil(o.UniqueName) {
 		var ret string
 		return ret
 	}
@@ -183,7 +187,7 @@ func (o *MarketplaceUseCase) GetUniqueName() string {
 // GetUniqueNameOk returns a tuple with the UniqueName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *MarketplaceUseCase) GetUniqueNameOk() (*string, bool) {
-	if o == nil || o.UniqueName == nil {
+	if o == nil || IsNil(o.UniqueName) {
 		return nil, false
 	}
 	return o.UniqueName, true
@@ -191,7 +195,7 @@ func (o *MarketplaceUseCase) GetUniqueNameOk() (*string, bool) {
 
 // HasUniqueName returns a boolean if a field has been set.
 func (o *MarketplaceUseCase) HasUniqueName() bool {
-	if o != nil && o.UniqueName != nil {
+	if o != nil && !IsNil(o.UniqueName) {
 		return true
 	}
 
@@ -203,75 +207,112 @@ func (o *MarketplaceUseCase) SetUniqueName(v string) {
 	o.UniqueName = &v
 }
 
-// GetCatalog returns the Catalog field value if set, zero value otherwise.
+// GetCatalog returns the Catalog field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *MarketplaceUseCase) GetCatalog() WorkflowCatalogRelationship {
-	if o == nil || o.Catalog == nil {
+	if o == nil || IsNil(o.Catalog.Get()) {
 		var ret WorkflowCatalogRelationship
 		return ret
 	}
-	return *o.Catalog
+	return *o.Catalog.Get()
 }
 
 // GetCatalogOk returns a tuple with the Catalog field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *MarketplaceUseCase) GetCatalogOk() (*WorkflowCatalogRelationship, bool) {
-	if o == nil || o.Catalog == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Catalog, true
+	return o.Catalog.Get(), o.Catalog.IsSet()
 }
 
 // HasCatalog returns a boolean if a field has been set.
 func (o *MarketplaceUseCase) HasCatalog() bool {
-	if o != nil && o.Catalog != nil {
+	if o != nil && o.Catalog.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetCatalog gets a reference to the given WorkflowCatalogRelationship and assigns it to the Catalog field.
+// SetCatalog gets a reference to the given NullableWorkflowCatalogRelationship and assigns it to the Catalog field.
 func (o *MarketplaceUseCase) SetCatalog(v WorkflowCatalogRelationship) {
-	o.Catalog = &v
+	o.Catalog.Set(&v)
+}
+
+// SetCatalogNil sets the value for Catalog to be an explicit nil
+func (o *MarketplaceUseCase) SetCatalogNil() {
+	o.Catalog.Set(nil)
+}
+
+// UnsetCatalog ensures that no value is present for Catalog, not even an explicit nil
+func (o *MarketplaceUseCase) UnsetCatalog() {
+	o.Catalog.Unset()
 }
 
 func (o MarketplaceUseCase) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o MarketplaceUseCase) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
 	if o.Dependencies != nil {
 		toSerialize["Dependencies"] = o.Dependencies
 	}
 	if o.Locales != nil {
 		toSerialize["Locales"] = o.Locales
 	}
-	if o.UniqueName != nil {
+	if !IsNil(o.UniqueName) {
 		toSerialize["UniqueName"] = o.UniqueName
 	}
-	if o.Catalog != nil {
-		toSerialize["Catalog"] = o.Catalog
+	if o.Catalog.IsSet() {
+		toSerialize["Catalog"] = o.Catalog.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *MarketplaceUseCase) UnmarshalJSON(bytes []byte) (err error) {
+func (o *MarketplaceUseCase) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type MarketplaceUseCaseWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -280,13 +321,13 @@ func (o *MarketplaceUseCase) UnmarshalJSON(bytes []byte) (err error) {
 		Dependencies []MarketplaceUseCaseDependency `json:"Dependencies,omitempty"`
 		Locales      []MarketplaceUseCaseLocale     `json:"Locales,omitempty"`
 		// A unique identifier is used to prevent duplicates.
-		UniqueName *string                      `json:"UniqueName,omitempty"`
-		Catalog    *WorkflowCatalogRelationship `json:"Catalog,omitempty"`
+		UniqueName *string                             `json:"UniqueName,omitempty"`
+		Catalog    NullableWorkflowCatalogRelationship `json:"Catalog,omitempty"`
 	}
 
 	varMarketplaceUseCaseWithoutEmbeddedStruct := MarketplaceUseCaseWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varMarketplaceUseCaseWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varMarketplaceUseCaseWithoutEmbeddedStruct)
 	if err == nil {
 		varMarketplaceUseCase := _MarketplaceUseCase{}
 		varMarketplaceUseCase.ClassId = varMarketplaceUseCaseWithoutEmbeddedStruct.ClassId
@@ -302,7 +343,7 @@ func (o *MarketplaceUseCase) UnmarshalJSON(bytes []byte) (err error) {
 
 	varMarketplaceUseCase := _MarketplaceUseCase{}
 
-	err = json.Unmarshal(bytes, &varMarketplaceUseCase)
+	err = json.Unmarshal(data, &varMarketplaceUseCase)
 	if err == nil {
 		o.MoBaseMo = varMarketplaceUseCase.MoBaseMo
 	} else {
@@ -311,7 +352,7 @@ func (o *MarketplaceUseCase) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Dependencies")

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,10 +13,14 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 	"time"
 )
+
+// checks if the NotificationTriggerWebhook type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &NotificationTriggerWebhook{}
 
 // NotificationTriggerWebhook TriggerWebhook complexType holds the Payload URL's server meta info.
 type NotificationTriggerWebhook struct {
@@ -117,7 +121,7 @@ func (o *NotificationTriggerWebhook) SetObjectType(v string) {
 
 // GetFirstFailedRequest returns the FirstFailedRequest field value if set, zero value otherwise.
 func (o *NotificationTriggerWebhook) GetFirstFailedRequest() time.Time {
-	if o == nil || o.FirstFailedRequest == nil {
+	if o == nil || IsNil(o.FirstFailedRequest) {
 		var ret time.Time
 		return ret
 	}
@@ -127,7 +131,7 @@ func (o *NotificationTriggerWebhook) GetFirstFailedRequest() time.Time {
 // GetFirstFailedRequestOk returns a tuple with the FirstFailedRequest field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NotificationTriggerWebhook) GetFirstFailedRequestOk() (*time.Time, bool) {
-	if o == nil || o.FirstFailedRequest == nil {
+	if o == nil || IsNil(o.FirstFailedRequest) {
 		return nil, false
 	}
 	return o.FirstFailedRequest, true
@@ -135,7 +139,7 @@ func (o *NotificationTriggerWebhook) GetFirstFailedRequestOk() (*time.Time, bool
 
 // HasFirstFailedRequest returns a boolean if a field has been set.
 func (o *NotificationTriggerWebhook) HasFirstFailedRequest() bool {
-	if o != nil && o.FirstFailedRequest != nil {
+	if o != nil && !IsNil(o.FirstFailedRequest) {
 		return true
 	}
 
@@ -149,7 +153,7 @@ func (o *NotificationTriggerWebhook) SetFirstFailedRequest(v time.Time) {
 
 // GetIsSecretSet returns the IsSecretSet field value if set, zero value otherwise.
 func (o *NotificationTriggerWebhook) GetIsSecretSet() bool {
-	if o == nil || o.IsSecretSet == nil {
+	if o == nil || IsNil(o.IsSecretSet) {
 		var ret bool
 		return ret
 	}
@@ -159,7 +163,7 @@ func (o *NotificationTriggerWebhook) GetIsSecretSet() bool {
 // GetIsSecretSetOk returns a tuple with the IsSecretSet field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NotificationTriggerWebhook) GetIsSecretSetOk() (*bool, bool) {
-	if o == nil || o.IsSecretSet == nil {
+	if o == nil || IsNil(o.IsSecretSet) {
 		return nil, false
 	}
 	return o.IsSecretSet, true
@@ -167,7 +171,7 @@ func (o *NotificationTriggerWebhook) GetIsSecretSetOk() (*bool, bool) {
 
 // HasIsSecretSet returns a boolean if a field has been set.
 func (o *NotificationTriggerWebhook) HasIsSecretSet() bool {
-	if o != nil && o.IsSecretSet != nil {
+	if o != nil && !IsNil(o.IsSecretSet) {
 		return true
 	}
 
@@ -181,7 +185,7 @@ func (o *NotificationTriggerWebhook) SetIsSecretSet(v bool) {
 
 // GetLastNetworkError returns the LastNetworkError field value if set, zero value otherwise.
 func (o *NotificationTriggerWebhook) GetLastNetworkError() string {
-	if o == nil || o.LastNetworkError == nil {
+	if o == nil || IsNil(o.LastNetworkError) {
 		var ret string
 		return ret
 	}
@@ -191,7 +195,7 @@ func (o *NotificationTriggerWebhook) GetLastNetworkError() string {
 // GetLastNetworkErrorOk returns a tuple with the LastNetworkError field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NotificationTriggerWebhook) GetLastNetworkErrorOk() (*string, bool) {
-	if o == nil || o.LastNetworkError == nil {
+	if o == nil || IsNil(o.LastNetworkError) {
 		return nil, false
 	}
 	return o.LastNetworkError, true
@@ -199,7 +203,7 @@ func (o *NotificationTriggerWebhook) GetLastNetworkErrorOk() (*string, bool) {
 
 // HasLastNetworkError returns a boolean if a field has been set.
 func (o *NotificationTriggerWebhook) HasLastNetworkError() bool {
-	if o != nil && o.LastNetworkError != nil {
+	if o != nil && !IsNil(o.LastNetworkError) {
 		return true
 	}
 
@@ -213,7 +217,7 @@ func (o *NotificationTriggerWebhook) SetLastNetworkError(v string) {
 
 // GetLastResponseCode returns the LastResponseCode field value if set, zero value otherwise.
 func (o *NotificationTriggerWebhook) GetLastResponseCode() int64 {
-	if o == nil || o.LastResponseCode == nil {
+	if o == nil || IsNil(o.LastResponseCode) {
 		var ret int64
 		return ret
 	}
@@ -223,7 +227,7 @@ func (o *NotificationTriggerWebhook) GetLastResponseCode() int64 {
 // GetLastResponseCodeOk returns a tuple with the LastResponseCode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NotificationTriggerWebhook) GetLastResponseCodeOk() (*int64, bool) {
-	if o == nil || o.LastResponseCode == nil {
+	if o == nil || IsNil(o.LastResponseCode) {
 		return nil, false
 	}
 	return o.LastResponseCode, true
@@ -231,7 +235,7 @@ func (o *NotificationTriggerWebhook) GetLastResponseCodeOk() (*int64, bool) {
 
 // HasLastResponseCode returns a boolean if a field has been set.
 func (o *NotificationTriggerWebhook) HasLastResponseCode() bool {
-	if o != nil && o.LastResponseCode != nil {
+	if o != nil && !IsNil(o.LastResponseCode) {
 		return true
 	}
 
@@ -245,7 +249,7 @@ func (o *NotificationTriggerWebhook) SetLastResponseCode(v int64) {
 
 // GetSecret returns the Secret field value if set, zero value otherwise.
 func (o *NotificationTriggerWebhook) GetSecret() string {
-	if o == nil || o.Secret == nil {
+	if o == nil || IsNil(o.Secret) {
 		var ret string
 		return ret
 	}
@@ -255,7 +259,7 @@ func (o *NotificationTriggerWebhook) GetSecret() string {
 // GetSecretOk returns a tuple with the Secret field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NotificationTriggerWebhook) GetSecretOk() (*string, bool) {
-	if o == nil || o.Secret == nil {
+	if o == nil || IsNil(o.Secret) {
 		return nil, false
 	}
 	return o.Secret, true
@@ -263,7 +267,7 @@ func (o *NotificationTriggerWebhook) GetSecretOk() (*string, bool) {
 
 // HasSecret returns a boolean if a field has been set.
 func (o *NotificationTriggerWebhook) HasSecret() bool {
-	if o != nil && o.Secret != nil {
+	if o != nil && !IsNil(o.Secret) {
 		return true
 	}
 
@@ -277,7 +281,7 @@ func (o *NotificationTriggerWebhook) SetSecret(v string) {
 
 // GetState returns the State field value if set, zero value otherwise.
 func (o *NotificationTriggerWebhook) GetState() string {
-	if o == nil || o.State == nil {
+	if o == nil || IsNil(o.State) {
 		var ret string
 		return ret
 	}
@@ -287,7 +291,7 @@ func (o *NotificationTriggerWebhook) GetState() string {
 // GetStateOk returns a tuple with the State field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NotificationTriggerWebhook) GetStateOk() (*string, bool) {
-	if o == nil || o.State == nil {
+	if o == nil || IsNil(o.State) {
 		return nil, false
 	}
 	return o.State, true
@@ -295,7 +299,7 @@ func (o *NotificationTriggerWebhook) GetStateOk() (*string, bool) {
 
 // HasState returns a boolean if a field has been set.
 func (o *NotificationTriggerWebhook) HasState() bool {
-	if o != nil && o.State != nil {
+	if o != nil && !IsNil(o.State) {
 		return true
 	}
 
@@ -309,7 +313,7 @@ func (o *NotificationTriggerWebhook) SetState(v string) {
 
 // GetUrl returns the Url field value if set, zero value otherwise.
 func (o *NotificationTriggerWebhook) GetUrl() string {
-	if o == nil || o.Url == nil {
+	if o == nil || IsNil(o.Url) {
 		var ret string
 		return ret
 	}
@@ -319,7 +323,7 @@ func (o *NotificationTriggerWebhook) GetUrl() string {
 // GetUrlOk returns a tuple with the Url field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NotificationTriggerWebhook) GetUrlOk() (*string, bool) {
-	if o == nil || o.Url == nil {
+	if o == nil || IsNil(o.Url) {
 		return nil, false
 	}
 	return o.Url, true
@@ -327,7 +331,7 @@ func (o *NotificationTriggerWebhook) GetUrlOk() (*string, bool) {
 
 // HasUrl returns a boolean if a field has been set.
 func (o *NotificationTriggerWebhook) HasUrl() bool {
-	if o != nil && o.Url != nil {
+	if o != nil && !IsNil(o.Url) {
 		return true
 	}
 
@@ -340,40 +344,44 @@ func (o *NotificationTriggerWebhook) SetUrl(v string) {
 }
 
 func (o NotificationTriggerWebhook) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o NotificationTriggerWebhook) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedNotificationAction, errNotificationAction := json.Marshal(o.NotificationAction)
 	if errNotificationAction != nil {
-		return []byte{}, errNotificationAction
+		return map[string]interface{}{}, errNotificationAction
 	}
 	errNotificationAction = json.Unmarshal([]byte(serializedNotificationAction), &toSerialize)
 	if errNotificationAction != nil {
-		return []byte{}, errNotificationAction
+		return map[string]interface{}{}, errNotificationAction
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.FirstFailedRequest != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.FirstFailedRequest) {
 		toSerialize["FirstFailedRequest"] = o.FirstFailedRequest
 	}
-	if o.IsSecretSet != nil {
+	if !IsNil(o.IsSecretSet) {
 		toSerialize["IsSecretSet"] = o.IsSecretSet
 	}
-	if o.LastNetworkError != nil {
+	if !IsNil(o.LastNetworkError) {
 		toSerialize["LastNetworkError"] = o.LastNetworkError
 	}
-	if o.LastResponseCode != nil {
+	if !IsNil(o.LastResponseCode) {
 		toSerialize["LastResponseCode"] = o.LastResponseCode
 	}
-	if o.Secret != nil {
+	if !IsNil(o.Secret) {
 		toSerialize["Secret"] = o.Secret
 	}
-	if o.State != nil {
+	if !IsNil(o.State) {
 		toSerialize["State"] = o.State
 	}
-	if o.Url != nil {
+	if !IsNil(o.Url) {
 		toSerialize["Url"] = o.Url
 	}
 
@@ -381,10 +389,32 @@ func (o NotificationTriggerWebhook) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *NotificationTriggerWebhook) UnmarshalJSON(bytes []byte) (err error) {
+func (o *NotificationTriggerWebhook) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type NotificationTriggerWebhookWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -408,7 +438,7 @@ func (o *NotificationTriggerWebhook) UnmarshalJSON(bytes []byte) (err error) {
 
 	varNotificationTriggerWebhookWithoutEmbeddedStruct := NotificationTriggerWebhookWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varNotificationTriggerWebhookWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varNotificationTriggerWebhookWithoutEmbeddedStruct)
 	if err == nil {
 		varNotificationTriggerWebhook := _NotificationTriggerWebhook{}
 		varNotificationTriggerWebhook.ClassId = varNotificationTriggerWebhookWithoutEmbeddedStruct.ClassId
@@ -427,7 +457,7 @@ func (o *NotificationTriggerWebhook) UnmarshalJSON(bytes []byte) (err error) {
 
 	varNotificationTriggerWebhook := _NotificationTriggerWebhook{}
 
-	err = json.Unmarshal(bytes, &varNotificationTriggerWebhook)
+	err = json.Unmarshal(data, &varNotificationTriggerWebhook)
 	if err == nil {
 		o.NotificationAction = varNotificationTriggerWebhook.NotificationAction
 	} else {
@@ -436,7 +466,7 @@ func (o *NotificationTriggerWebhook) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "FirstFailedRequest")

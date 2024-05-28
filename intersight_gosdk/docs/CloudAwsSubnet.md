@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 **IsDefault** | Pointer to **bool** | If true, indicates that this is default subnet. | [optional] [readonly] 
 **State** | Pointer to **string** | The state of the subnet (pending | available). | [optional] [readonly] 
 **SubnetTags** | Pointer to [**[]CloudCloudTag**](CloudCloudTag.md) |  | [optional] 
-**AwsVpc** | Pointer to [**CloudAwsVpcRelationship**](CloudAwsVpcRelationship.md) |  | [optional] 
+**AwsVpc** | Pointer to [**NullableCloudAwsVpcRelationship**](CloudAwsVpcRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -310,6 +310,16 @@ SetAwsVpc sets AwsVpc field to given value.
 
 HasAwsVpc returns a boolean if a field has been set.
 
+### SetAwsVpcNil
+
+`func (o *CloudAwsSubnet) SetAwsVpcNil(b bool)`
+
+ SetAwsVpcNil sets the value for AwsVpc to be an explicit nil
+
+### UnsetAwsVpc
+`func (o *CloudAwsSubnet) UnsetAwsVpc()`
+
+UnsetAwsVpc ensures that no value is present for AwsVpc, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

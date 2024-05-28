@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the ApplianceBackupBase type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ApplianceBackupBase{}
 
 // ApplianceBackupBase BackupBase is the parent type of Backup, Restore, and BackupPolicy managed objects. BackupBase holds the common information required for copying the file from the Intersight Appliance to the remote file server and vice versa.
 type ApplianceBackupBase struct {
@@ -114,7 +118,7 @@ func (o *ApplianceBackupBase) SetObjectType(v string) {
 
 // GetFilename returns the Filename field value if set, zero value otherwise.
 func (o *ApplianceBackupBase) GetFilename() string {
-	if o == nil || o.Filename == nil {
+	if o == nil || IsNil(o.Filename) {
 		var ret string
 		return ret
 	}
@@ -124,7 +128,7 @@ func (o *ApplianceBackupBase) GetFilename() string {
 // GetFilenameOk returns a tuple with the Filename field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceBackupBase) GetFilenameOk() (*string, bool) {
-	if o == nil || o.Filename == nil {
+	if o == nil || IsNil(o.Filename) {
 		return nil, false
 	}
 	return o.Filename, true
@@ -132,7 +136,7 @@ func (o *ApplianceBackupBase) GetFilenameOk() (*string, bool) {
 
 // HasFilename returns a boolean if a field has been set.
 func (o *ApplianceBackupBase) HasFilename() bool {
-	if o != nil && o.Filename != nil {
+	if o != nil && !IsNil(o.Filename) {
 		return true
 	}
 
@@ -146,7 +150,7 @@ func (o *ApplianceBackupBase) SetFilename(v string) {
 
 // GetProtocol returns the Protocol field value if set, zero value otherwise.
 func (o *ApplianceBackupBase) GetProtocol() string {
-	if o == nil || o.Protocol == nil {
+	if o == nil || IsNil(o.Protocol) {
 		var ret string
 		return ret
 	}
@@ -156,7 +160,7 @@ func (o *ApplianceBackupBase) GetProtocol() string {
 // GetProtocolOk returns a tuple with the Protocol field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceBackupBase) GetProtocolOk() (*string, bool) {
-	if o == nil || o.Protocol == nil {
+	if o == nil || IsNil(o.Protocol) {
 		return nil, false
 	}
 	return o.Protocol, true
@@ -164,7 +168,7 @@ func (o *ApplianceBackupBase) GetProtocolOk() (*string, bool) {
 
 // HasProtocol returns a boolean if a field has been set.
 func (o *ApplianceBackupBase) HasProtocol() bool {
-	if o != nil && o.Protocol != nil {
+	if o != nil && !IsNil(o.Protocol) {
 		return true
 	}
 
@@ -178,7 +182,7 @@ func (o *ApplianceBackupBase) SetProtocol(v string) {
 
 // GetRemoteHost returns the RemoteHost field value if set, zero value otherwise.
 func (o *ApplianceBackupBase) GetRemoteHost() string {
-	if o == nil || o.RemoteHost == nil {
+	if o == nil || IsNil(o.RemoteHost) {
 		var ret string
 		return ret
 	}
@@ -188,7 +192,7 @@ func (o *ApplianceBackupBase) GetRemoteHost() string {
 // GetRemoteHostOk returns a tuple with the RemoteHost field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceBackupBase) GetRemoteHostOk() (*string, bool) {
-	if o == nil || o.RemoteHost == nil {
+	if o == nil || IsNil(o.RemoteHost) {
 		return nil, false
 	}
 	return o.RemoteHost, true
@@ -196,7 +200,7 @@ func (o *ApplianceBackupBase) GetRemoteHostOk() (*string, bool) {
 
 // HasRemoteHost returns a boolean if a field has been set.
 func (o *ApplianceBackupBase) HasRemoteHost() bool {
-	if o != nil && o.RemoteHost != nil {
+	if o != nil && !IsNil(o.RemoteHost) {
 		return true
 	}
 
@@ -210,7 +214,7 @@ func (o *ApplianceBackupBase) SetRemoteHost(v string) {
 
 // GetRemotePath returns the RemotePath field value if set, zero value otherwise.
 func (o *ApplianceBackupBase) GetRemotePath() string {
-	if o == nil || o.RemotePath == nil {
+	if o == nil || IsNil(o.RemotePath) {
 		var ret string
 		return ret
 	}
@@ -220,7 +224,7 @@ func (o *ApplianceBackupBase) GetRemotePath() string {
 // GetRemotePathOk returns a tuple with the RemotePath field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceBackupBase) GetRemotePathOk() (*string, bool) {
-	if o == nil || o.RemotePath == nil {
+	if o == nil || IsNil(o.RemotePath) {
 		return nil, false
 	}
 	return o.RemotePath, true
@@ -228,7 +232,7 @@ func (o *ApplianceBackupBase) GetRemotePathOk() (*string, bool) {
 
 // HasRemotePath returns a boolean if a field has been set.
 func (o *ApplianceBackupBase) HasRemotePath() bool {
-	if o != nil && o.RemotePath != nil {
+	if o != nil && !IsNil(o.RemotePath) {
 		return true
 	}
 
@@ -242,7 +246,7 @@ func (o *ApplianceBackupBase) SetRemotePath(v string) {
 
 // GetRemotePort returns the RemotePort field value if set, zero value otherwise.
 func (o *ApplianceBackupBase) GetRemotePort() int64 {
-	if o == nil || o.RemotePort == nil {
+	if o == nil || IsNil(o.RemotePort) {
 		var ret int64
 		return ret
 	}
@@ -252,7 +256,7 @@ func (o *ApplianceBackupBase) GetRemotePort() int64 {
 // GetRemotePortOk returns a tuple with the RemotePort field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceBackupBase) GetRemotePortOk() (*int64, bool) {
-	if o == nil || o.RemotePort == nil {
+	if o == nil || IsNil(o.RemotePort) {
 		return nil, false
 	}
 	return o.RemotePort, true
@@ -260,7 +264,7 @@ func (o *ApplianceBackupBase) GetRemotePortOk() (*int64, bool) {
 
 // HasRemotePort returns a boolean if a field has been set.
 func (o *ApplianceBackupBase) HasRemotePort() bool {
-	if o != nil && o.RemotePort != nil {
+	if o != nil && !IsNil(o.RemotePort) {
 		return true
 	}
 
@@ -274,7 +278,7 @@ func (o *ApplianceBackupBase) SetRemotePort(v int64) {
 
 // GetUsername returns the Username field value if set, zero value otherwise.
 func (o *ApplianceBackupBase) GetUsername() string {
-	if o == nil || o.Username == nil {
+	if o == nil || IsNil(o.Username) {
 		var ret string
 		return ret
 	}
@@ -284,7 +288,7 @@ func (o *ApplianceBackupBase) GetUsername() string {
 // GetUsernameOk returns a tuple with the Username field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceBackupBase) GetUsernameOk() (*string, bool) {
-	if o == nil || o.Username == nil {
+	if o == nil || IsNil(o.Username) {
 		return nil, false
 	}
 	return o.Username, true
@@ -292,7 +296,7 @@ func (o *ApplianceBackupBase) GetUsernameOk() (*string, bool) {
 
 // HasUsername returns a boolean if a field has been set.
 func (o *ApplianceBackupBase) HasUsername() bool {
-	if o != nil && o.Username != nil {
+	if o != nil && !IsNil(o.Username) {
 		return true
 	}
 
@@ -305,37 +309,41 @@ func (o *ApplianceBackupBase) SetUsername(v string) {
 }
 
 func (o ApplianceBackupBase) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o ApplianceBackupBase) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Filename != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Filename) {
 		toSerialize["Filename"] = o.Filename
 	}
-	if o.Protocol != nil {
+	if !IsNil(o.Protocol) {
 		toSerialize["Protocol"] = o.Protocol
 	}
-	if o.RemoteHost != nil {
+	if !IsNil(o.RemoteHost) {
 		toSerialize["RemoteHost"] = o.RemoteHost
 	}
-	if o.RemotePath != nil {
+	if !IsNil(o.RemotePath) {
 		toSerialize["RemotePath"] = o.RemotePath
 	}
-	if o.RemotePort != nil {
+	if !IsNil(o.RemotePort) {
 		toSerialize["RemotePort"] = o.RemotePort
 	}
-	if o.Username != nil {
+	if !IsNil(o.Username) {
 		toSerialize["Username"] = o.Username
 	}
 
@@ -343,10 +351,32 @@ func (o ApplianceBackupBase) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *ApplianceBackupBase) UnmarshalJSON(bytes []byte) (err error) {
+func (o *ApplianceBackupBase) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type ApplianceBackupBaseWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type.
 		ClassId string `json:"ClassId"`
@@ -368,7 +398,7 @@ func (o *ApplianceBackupBase) UnmarshalJSON(bytes []byte) (err error) {
 
 	varApplianceBackupBaseWithoutEmbeddedStruct := ApplianceBackupBaseWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varApplianceBackupBaseWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varApplianceBackupBaseWithoutEmbeddedStruct)
 	if err == nil {
 		varApplianceBackupBase := _ApplianceBackupBase{}
 		varApplianceBackupBase.ClassId = varApplianceBackupBaseWithoutEmbeddedStruct.ClassId
@@ -386,7 +416,7 @@ func (o *ApplianceBackupBase) UnmarshalJSON(bytes []byte) (err error) {
 
 	varApplianceBackupBase := _ApplianceBackupBase{}
 
-	err = json.Unmarshal(bytes, &varApplianceBackupBase)
+	err = json.Unmarshal(data, &varApplianceBackupBase)
 	if err == nil {
 		o.MoBaseMo = varApplianceBackupBase.MoBaseMo
 	} else {
@@ -395,7 +425,7 @@ func (o *ApplianceBackupBase) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Filename")

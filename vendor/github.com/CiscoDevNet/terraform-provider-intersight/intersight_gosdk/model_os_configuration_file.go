@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the OsConfigurationFile type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &OsConfigurationFile{}
 
 // OsConfigurationFile A ConfigurationFile is an OS specific answer file that helps with the unattended installation. The file can also be a template file with placeholders instead of actual answers. Intersight supports the golang template syntax specified in https://golang.org/pkg/text/template/. The template supports placeholders for all the properties of os.Answers MO type as well as any additional user-defined properties. The values for these placeholders shall be given during OS installation in the form of os.Answers type and 'additionalProperties' in os.OsInstall object.
 type OsConfigurationFile struct {
@@ -34,8 +38,8 @@ type OsConfigurationFile struct {
 	Name         *string         `json:"Name,omitempty"`
 	Placeholders []OsPlaceHolder `json:"Placeholders,omitempty"`
 	// An internal property that is used to distinguish between the pre-canned OS configuration file entries and user provided entries.
-	Supported *bool                  `json:"Supported,omitempty"`
-	Catalog   *OsCatalogRelationship `json:"Catalog,omitempty"`
+	Supported *bool                         `json:"Supported,omitempty"`
+	Catalog   NullableOsCatalogRelationship `json:"Catalog,omitempty"`
 	// An array of relationships to hclOperatingSystem resources.
 	Distributions        []HclOperatingSystemRelationship `json:"Distributions,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -120,7 +124,7 @@ func (o *OsConfigurationFile) SetObjectType(v string) {
 
 // GetDescription returns the Description field value if set, zero value otherwise.
 func (o *OsConfigurationFile) GetDescription() string {
-	if o == nil || o.Description == nil {
+	if o == nil || IsNil(o.Description) {
 		var ret string
 		return ret
 	}
@@ -130,7 +134,7 @@ func (o *OsConfigurationFile) GetDescription() string {
 // GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OsConfigurationFile) GetDescriptionOk() (*string, bool) {
-	if o == nil || o.Description == nil {
+	if o == nil || IsNil(o.Description) {
 		return nil, false
 	}
 	return o.Description, true
@@ -138,7 +142,7 @@ func (o *OsConfigurationFile) GetDescriptionOk() (*string, bool) {
 
 // HasDescription returns a boolean if a field has been set.
 func (o *OsConfigurationFile) HasDescription() bool {
-	if o != nil && o.Description != nil {
+	if o != nil && !IsNil(o.Description) {
 		return true
 	}
 
@@ -152,7 +156,7 @@ func (o *OsConfigurationFile) SetDescription(v string) {
 
 // GetFileContent returns the FileContent field value if set, zero value otherwise.
 func (o *OsConfigurationFile) GetFileContent() string {
-	if o == nil || o.FileContent == nil {
+	if o == nil || IsNil(o.FileContent) {
 		var ret string
 		return ret
 	}
@@ -162,7 +166,7 @@ func (o *OsConfigurationFile) GetFileContent() string {
 // GetFileContentOk returns a tuple with the FileContent field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OsConfigurationFile) GetFileContentOk() (*string, bool) {
-	if o == nil || o.FileContent == nil {
+	if o == nil || IsNil(o.FileContent) {
 		return nil, false
 	}
 	return o.FileContent, true
@@ -170,7 +174,7 @@ func (o *OsConfigurationFile) GetFileContentOk() (*string, bool) {
 
 // HasFileContent returns a boolean if a field has been set.
 func (o *OsConfigurationFile) HasFileContent() bool {
-	if o != nil && o.FileContent != nil {
+	if o != nil && !IsNil(o.FileContent) {
 		return true
 	}
 
@@ -184,7 +188,7 @@ func (o *OsConfigurationFile) SetFileContent(v string) {
 
 // GetInternal returns the Internal field value if set, zero value otherwise.
 func (o *OsConfigurationFile) GetInternal() bool {
-	if o == nil || o.Internal == nil {
+	if o == nil || IsNil(o.Internal) {
 		var ret bool
 		return ret
 	}
@@ -194,7 +198,7 @@ func (o *OsConfigurationFile) GetInternal() bool {
 // GetInternalOk returns a tuple with the Internal field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OsConfigurationFile) GetInternalOk() (*bool, bool) {
-	if o == nil || o.Internal == nil {
+	if o == nil || IsNil(o.Internal) {
 		return nil, false
 	}
 	return o.Internal, true
@@ -202,7 +206,7 @@ func (o *OsConfigurationFile) GetInternalOk() (*bool, bool) {
 
 // HasInternal returns a boolean if a field has been set.
 func (o *OsConfigurationFile) HasInternal() bool {
-	if o != nil && o.Internal != nil {
+	if o != nil && !IsNil(o.Internal) {
 		return true
 	}
 
@@ -216,7 +220,7 @@ func (o *OsConfigurationFile) SetInternal(v bool) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *OsConfigurationFile) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -226,7 +230,7 @@ func (o *OsConfigurationFile) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OsConfigurationFile) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -234,7 +238,7 @@ func (o *OsConfigurationFile) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *OsConfigurationFile) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -259,7 +263,7 @@ func (o *OsConfigurationFile) GetPlaceholders() []OsPlaceHolder {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *OsConfigurationFile) GetPlaceholdersOk() ([]OsPlaceHolder, bool) {
-	if o == nil || o.Placeholders == nil {
+	if o == nil || IsNil(o.Placeholders) {
 		return nil, false
 	}
 	return o.Placeholders, true
@@ -267,7 +271,7 @@ func (o *OsConfigurationFile) GetPlaceholdersOk() ([]OsPlaceHolder, bool) {
 
 // HasPlaceholders returns a boolean if a field has been set.
 func (o *OsConfigurationFile) HasPlaceholders() bool {
-	if o != nil && o.Placeholders != nil {
+	if o != nil && IsNil(o.Placeholders) {
 		return true
 	}
 
@@ -281,7 +285,7 @@ func (o *OsConfigurationFile) SetPlaceholders(v []OsPlaceHolder) {
 
 // GetSupported returns the Supported field value if set, zero value otherwise.
 func (o *OsConfigurationFile) GetSupported() bool {
-	if o == nil || o.Supported == nil {
+	if o == nil || IsNil(o.Supported) {
 		var ret bool
 		return ret
 	}
@@ -291,7 +295,7 @@ func (o *OsConfigurationFile) GetSupported() bool {
 // GetSupportedOk returns a tuple with the Supported field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OsConfigurationFile) GetSupportedOk() (*bool, bool) {
-	if o == nil || o.Supported == nil {
+	if o == nil || IsNil(o.Supported) {
 		return nil, false
 	}
 	return o.Supported, true
@@ -299,7 +303,7 @@ func (o *OsConfigurationFile) GetSupportedOk() (*bool, bool) {
 
 // HasSupported returns a boolean if a field has been set.
 func (o *OsConfigurationFile) HasSupported() bool {
-	if o != nil && o.Supported != nil {
+	if o != nil && !IsNil(o.Supported) {
 		return true
 	}
 
@@ -311,36 +315,47 @@ func (o *OsConfigurationFile) SetSupported(v bool) {
 	o.Supported = &v
 }
 
-// GetCatalog returns the Catalog field value if set, zero value otherwise.
+// GetCatalog returns the Catalog field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *OsConfigurationFile) GetCatalog() OsCatalogRelationship {
-	if o == nil || o.Catalog == nil {
+	if o == nil || IsNil(o.Catalog.Get()) {
 		var ret OsCatalogRelationship
 		return ret
 	}
-	return *o.Catalog
+	return *o.Catalog.Get()
 }
 
 // GetCatalogOk returns a tuple with the Catalog field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *OsConfigurationFile) GetCatalogOk() (*OsCatalogRelationship, bool) {
-	if o == nil || o.Catalog == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Catalog, true
+	return o.Catalog.Get(), o.Catalog.IsSet()
 }
 
 // HasCatalog returns a boolean if a field has been set.
 func (o *OsConfigurationFile) HasCatalog() bool {
-	if o != nil && o.Catalog != nil {
+	if o != nil && o.Catalog.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetCatalog gets a reference to the given OsCatalogRelationship and assigns it to the Catalog field.
+// SetCatalog gets a reference to the given NullableOsCatalogRelationship and assigns it to the Catalog field.
 func (o *OsConfigurationFile) SetCatalog(v OsCatalogRelationship) {
-	o.Catalog = &v
+	o.Catalog.Set(&v)
+}
+
+// SetCatalogNil sets the value for Catalog to be an explicit nil
+func (o *OsConfigurationFile) SetCatalogNil() {
+	o.Catalog.Set(nil)
+}
+
+// UnsetCatalog ensures that no value is present for Catalog, not even an explicit nil
+func (o *OsConfigurationFile) UnsetCatalog() {
+	o.Catalog.Unset()
 }
 
 // GetDistributions returns the Distributions field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -356,7 +371,7 @@ func (o *OsConfigurationFile) GetDistributions() []HclOperatingSystemRelationshi
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *OsConfigurationFile) GetDistributionsOk() ([]HclOperatingSystemRelationship, bool) {
-	if o == nil || o.Distributions == nil {
+	if o == nil || IsNil(o.Distributions) {
 		return nil, false
 	}
 	return o.Distributions, true
@@ -364,7 +379,7 @@ func (o *OsConfigurationFile) GetDistributionsOk() ([]HclOperatingSystemRelation
 
 // HasDistributions returns a boolean if a field has been set.
 func (o *OsConfigurationFile) HasDistributions() bool {
-	if o != nil && o.Distributions != nil {
+	if o != nil && IsNil(o.Distributions) {
 		return true
 	}
 
@@ -377,41 +392,45 @@ func (o *OsConfigurationFile) SetDistributions(v []HclOperatingSystemRelationshi
 }
 
 func (o OsConfigurationFile) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o OsConfigurationFile) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Description != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Description) {
 		toSerialize["Description"] = o.Description
 	}
-	if o.FileContent != nil {
+	if !IsNil(o.FileContent) {
 		toSerialize["FileContent"] = o.FileContent
 	}
-	if o.Internal != nil {
+	if !IsNil(o.Internal) {
 		toSerialize["Internal"] = o.Internal
 	}
-	if o.Name != nil {
+	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
 	}
 	if o.Placeholders != nil {
 		toSerialize["Placeholders"] = o.Placeholders
 	}
-	if o.Supported != nil {
+	if !IsNil(o.Supported) {
 		toSerialize["Supported"] = o.Supported
 	}
-	if o.Catalog != nil {
-		toSerialize["Catalog"] = o.Catalog
+	if o.Catalog.IsSet() {
+		toSerialize["Catalog"] = o.Catalog.Get()
 	}
 	if o.Distributions != nil {
 		toSerialize["Distributions"] = o.Distributions
@@ -421,10 +440,32 @@ func (o OsConfigurationFile) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *OsConfigurationFile) UnmarshalJSON(bytes []byte) (err error) {
+func (o *OsConfigurationFile) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type OsConfigurationFileWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -440,15 +481,15 @@ func (o *OsConfigurationFile) UnmarshalJSON(bytes []byte) (err error) {
 		Name         *string         `json:"Name,omitempty"`
 		Placeholders []OsPlaceHolder `json:"Placeholders,omitempty"`
 		// An internal property that is used to distinguish between the pre-canned OS configuration file entries and user provided entries.
-		Supported *bool                  `json:"Supported,omitempty"`
-		Catalog   *OsCatalogRelationship `json:"Catalog,omitempty"`
+		Supported *bool                         `json:"Supported,omitempty"`
+		Catalog   NullableOsCatalogRelationship `json:"Catalog,omitempty"`
 		// An array of relationships to hclOperatingSystem resources.
 		Distributions []HclOperatingSystemRelationship `json:"Distributions,omitempty"`
 	}
 
 	varOsConfigurationFileWithoutEmbeddedStruct := OsConfigurationFileWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varOsConfigurationFileWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varOsConfigurationFileWithoutEmbeddedStruct)
 	if err == nil {
 		varOsConfigurationFile := _OsConfigurationFile{}
 		varOsConfigurationFile.ClassId = varOsConfigurationFileWithoutEmbeddedStruct.ClassId
@@ -468,7 +509,7 @@ func (o *OsConfigurationFile) UnmarshalJSON(bytes []byte) (err error) {
 
 	varOsConfigurationFile := _OsConfigurationFile{}
 
-	err = json.Unmarshal(bytes, &varOsConfigurationFile)
+	err = json.Unmarshal(data, &varOsConfigurationFile)
 	if err == nil {
 		o.MoBaseMo = varOsConfigurationFile.MoBaseMo
 	} else {
@@ -477,7 +518,7 @@ func (o *OsConfigurationFile) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Description")

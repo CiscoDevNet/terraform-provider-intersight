@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,10 +13,14 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 	"time"
 )
+
+// checks if the AssetDeviceConnection type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &AssetDeviceConnection{}
 
 // AssetDeviceConnection An abstract class that holds the details of a device connectors connection to Intersight.
 type AssetDeviceConnection struct {
@@ -117,7 +121,7 @@ func (o *AssetDeviceConnection) SetObjectType(v string) {
 
 // GetApiVersion returns the ApiVersion field value if set, zero value otherwise.
 func (o *AssetDeviceConnection) GetApiVersion() int64 {
-	if o == nil || o.ApiVersion == nil {
+	if o == nil || IsNil(o.ApiVersion) {
 		var ret int64
 		return ret
 	}
@@ -127,7 +131,7 @@ func (o *AssetDeviceConnection) GetApiVersion() int64 {
 // GetApiVersionOk returns a tuple with the ApiVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AssetDeviceConnection) GetApiVersionOk() (*int64, bool) {
-	if o == nil || o.ApiVersion == nil {
+	if o == nil || IsNil(o.ApiVersion) {
 		return nil, false
 	}
 	return o.ApiVersion, true
@@ -135,7 +139,7 @@ func (o *AssetDeviceConnection) GetApiVersionOk() (*int64, bool) {
 
 // HasApiVersion returns a boolean if a field has been set.
 func (o *AssetDeviceConnection) HasApiVersion() bool {
-	if o != nil && o.ApiVersion != nil {
+	if o != nil && !IsNil(o.ApiVersion) {
 		return true
 	}
 
@@ -149,7 +153,7 @@ func (o *AssetDeviceConnection) SetApiVersion(v int64) {
 
 // GetAppPartitionNumber returns the AppPartitionNumber field value if set, zero value otherwise.
 func (o *AssetDeviceConnection) GetAppPartitionNumber() int64 {
-	if o == nil || o.AppPartitionNumber == nil {
+	if o == nil || IsNil(o.AppPartitionNumber) {
 		var ret int64
 		return ret
 	}
@@ -159,7 +163,7 @@ func (o *AssetDeviceConnection) GetAppPartitionNumber() int64 {
 // GetAppPartitionNumberOk returns a tuple with the AppPartitionNumber field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AssetDeviceConnection) GetAppPartitionNumberOk() (*int64, bool) {
-	if o == nil || o.AppPartitionNumber == nil {
+	if o == nil || IsNil(o.AppPartitionNumber) {
 		return nil, false
 	}
 	return o.AppPartitionNumber, true
@@ -167,7 +171,7 @@ func (o *AssetDeviceConnection) GetAppPartitionNumberOk() (*int64, bool) {
 
 // HasAppPartitionNumber returns a boolean if a field has been set.
 func (o *AssetDeviceConnection) HasAppPartitionNumber() bool {
-	if o != nil && o.AppPartitionNumber != nil {
+	if o != nil && !IsNil(o.AppPartitionNumber) {
 		return true
 	}
 
@@ -181,7 +185,7 @@ func (o *AssetDeviceConnection) SetAppPartitionNumber(v int64) {
 
 // GetConnectionId returns the ConnectionId field value if set, zero value otherwise.
 func (o *AssetDeviceConnection) GetConnectionId() string {
-	if o == nil || o.ConnectionId == nil {
+	if o == nil || IsNil(o.ConnectionId) {
 		var ret string
 		return ret
 	}
@@ -191,7 +195,7 @@ func (o *AssetDeviceConnection) GetConnectionId() string {
 // GetConnectionIdOk returns a tuple with the ConnectionId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AssetDeviceConnection) GetConnectionIdOk() (*string, bool) {
-	if o == nil || o.ConnectionId == nil {
+	if o == nil || IsNil(o.ConnectionId) {
 		return nil, false
 	}
 	return o.ConnectionId, true
@@ -199,7 +203,7 @@ func (o *AssetDeviceConnection) GetConnectionIdOk() (*string, bool) {
 
 // HasConnectionId returns a boolean if a field has been set.
 func (o *AssetDeviceConnection) HasConnectionId() bool {
-	if o != nil && o.ConnectionId != nil {
+	if o != nil && !IsNil(o.ConnectionId) {
 		return true
 	}
 
@@ -213,7 +217,7 @@ func (o *AssetDeviceConnection) SetConnectionId(v string) {
 
 // GetConnectionReason returns the ConnectionReason field value if set, zero value otherwise.
 func (o *AssetDeviceConnection) GetConnectionReason() string {
-	if o == nil || o.ConnectionReason == nil {
+	if o == nil || IsNil(o.ConnectionReason) {
 		var ret string
 		return ret
 	}
@@ -223,7 +227,7 @@ func (o *AssetDeviceConnection) GetConnectionReason() string {
 // GetConnectionReasonOk returns a tuple with the ConnectionReason field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AssetDeviceConnection) GetConnectionReasonOk() (*string, bool) {
-	if o == nil || o.ConnectionReason == nil {
+	if o == nil || IsNil(o.ConnectionReason) {
 		return nil, false
 	}
 	return o.ConnectionReason, true
@@ -231,7 +235,7 @@ func (o *AssetDeviceConnection) GetConnectionReasonOk() (*string, bool) {
 
 // HasConnectionReason returns a boolean if a field has been set.
 func (o *AssetDeviceConnection) HasConnectionReason() bool {
-	if o != nil && o.ConnectionReason != nil {
+	if o != nil && !IsNil(o.ConnectionReason) {
 		return true
 	}
 
@@ -245,7 +249,7 @@ func (o *AssetDeviceConnection) SetConnectionReason(v string) {
 
 // GetConnectionStatus returns the ConnectionStatus field value if set, zero value otherwise.
 func (o *AssetDeviceConnection) GetConnectionStatus() string {
-	if o == nil || o.ConnectionStatus == nil {
+	if o == nil || IsNil(o.ConnectionStatus) {
 		var ret string
 		return ret
 	}
@@ -255,7 +259,7 @@ func (o *AssetDeviceConnection) GetConnectionStatus() string {
 // GetConnectionStatusOk returns a tuple with the ConnectionStatus field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AssetDeviceConnection) GetConnectionStatusOk() (*string, bool) {
-	if o == nil || o.ConnectionStatus == nil {
+	if o == nil || IsNil(o.ConnectionStatus) {
 		return nil, false
 	}
 	return o.ConnectionStatus, true
@@ -263,7 +267,7 @@ func (o *AssetDeviceConnection) GetConnectionStatusOk() (*string, bool) {
 
 // HasConnectionStatus returns a boolean if a field has been set.
 func (o *AssetDeviceConnection) HasConnectionStatus() bool {
-	if o != nil && o.ConnectionStatus != nil {
+	if o != nil && !IsNil(o.ConnectionStatus) {
 		return true
 	}
 
@@ -277,7 +281,7 @@ func (o *AssetDeviceConnection) SetConnectionStatus(v string) {
 
 // GetConnectionStatusLastChangeTime returns the ConnectionStatusLastChangeTime field value if set, zero value otherwise.
 func (o *AssetDeviceConnection) GetConnectionStatusLastChangeTime() time.Time {
-	if o == nil || o.ConnectionStatusLastChangeTime == nil {
+	if o == nil || IsNil(o.ConnectionStatusLastChangeTime) {
 		var ret time.Time
 		return ret
 	}
@@ -287,7 +291,7 @@ func (o *AssetDeviceConnection) GetConnectionStatusLastChangeTime() time.Time {
 // GetConnectionStatusLastChangeTimeOk returns a tuple with the ConnectionStatusLastChangeTime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AssetDeviceConnection) GetConnectionStatusLastChangeTimeOk() (*time.Time, bool) {
-	if o == nil || o.ConnectionStatusLastChangeTime == nil {
+	if o == nil || IsNil(o.ConnectionStatusLastChangeTime) {
 		return nil, false
 	}
 	return o.ConnectionStatusLastChangeTime, true
@@ -295,7 +299,7 @@ func (o *AssetDeviceConnection) GetConnectionStatusLastChangeTimeOk() (*time.Tim
 
 // HasConnectionStatusLastChangeTime returns a boolean if a field has been set.
 func (o *AssetDeviceConnection) HasConnectionStatusLastChangeTime() bool {
-	if o != nil && o.ConnectionStatusLastChangeTime != nil {
+	if o != nil && !IsNil(o.ConnectionStatusLastChangeTime) {
 		return true
 	}
 
@@ -309,7 +313,7 @@ func (o *AssetDeviceConnection) SetConnectionStatusLastChangeTime(v time.Time) {
 
 // GetConnectorVersion returns the ConnectorVersion field value if set, zero value otherwise.
 func (o *AssetDeviceConnection) GetConnectorVersion() string {
-	if o == nil || o.ConnectorVersion == nil {
+	if o == nil || IsNil(o.ConnectorVersion) {
 		var ret string
 		return ret
 	}
@@ -319,7 +323,7 @@ func (o *AssetDeviceConnection) GetConnectorVersion() string {
 // GetConnectorVersionOk returns a tuple with the ConnectorVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AssetDeviceConnection) GetConnectorVersionOk() (*string, bool) {
-	if o == nil || o.ConnectorVersion == nil {
+	if o == nil || IsNil(o.ConnectorVersion) {
 		return nil, false
 	}
 	return o.ConnectorVersion, true
@@ -327,7 +331,7 @@ func (o *AssetDeviceConnection) GetConnectorVersionOk() (*string, bool) {
 
 // HasConnectorVersion returns a boolean if a field has been set.
 func (o *AssetDeviceConnection) HasConnectorVersion() bool {
-	if o != nil && o.ConnectorVersion != nil {
+	if o != nil && !IsNil(o.ConnectorVersion) {
 		return true
 	}
 
@@ -341,7 +345,7 @@ func (o *AssetDeviceConnection) SetConnectorVersion(v string) {
 
 // GetDeviceExternalIpAddress returns the DeviceExternalIpAddress field value if set, zero value otherwise.
 func (o *AssetDeviceConnection) GetDeviceExternalIpAddress() string {
-	if o == nil || o.DeviceExternalIpAddress == nil {
+	if o == nil || IsNil(o.DeviceExternalIpAddress) {
 		var ret string
 		return ret
 	}
@@ -351,7 +355,7 @@ func (o *AssetDeviceConnection) GetDeviceExternalIpAddress() string {
 // GetDeviceExternalIpAddressOk returns a tuple with the DeviceExternalIpAddress field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AssetDeviceConnection) GetDeviceExternalIpAddressOk() (*string, bool) {
-	if o == nil || o.DeviceExternalIpAddress == nil {
+	if o == nil || IsNil(o.DeviceExternalIpAddress) {
 		return nil, false
 	}
 	return o.DeviceExternalIpAddress, true
@@ -359,7 +363,7 @@ func (o *AssetDeviceConnection) GetDeviceExternalIpAddressOk() (*string, bool) {
 
 // HasDeviceExternalIpAddress returns a boolean if a field has been set.
 func (o *AssetDeviceConnection) HasDeviceExternalIpAddress() bool {
-	if o != nil && o.DeviceExternalIpAddress != nil {
+	if o != nil && !IsNil(o.DeviceExternalIpAddress) {
 		return true
 	}
 
@@ -373,7 +377,7 @@ func (o *AssetDeviceConnection) SetDeviceExternalIpAddress(v string) {
 
 // GetProxyApp returns the ProxyApp field value if set, zero value otherwise.
 func (o *AssetDeviceConnection) GetProxyApp() string {
-	if o == nil || o.ProxyApp == nil {
+	if o == nil || IsNil(o.ProxyApp) {
 		var ret string
 		return ret
 	}
@@ -383,7 +387,7 @@ func (o *AssetDeviceConnection) GetProxyApp() string {
 // GetProxyAppOk returns a tuple with the ProxyApp field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AssetDeviceConnection) GetProxyAppOk() (*string, bool) {
-	if o == nil || o.ProxyApp == nil {
+	if o == nil || IsNil(o.ProxyApp) {
 		return nil, false
 	}
 	return o.ProxyApp, true
@@ -391,7 +395,7 @@ func (o *AssetDeviceConnection) GetProxyAppOk() (*string, bool) {
 
 // HasProxyApp returns a boolean if a field has been set.
 func (o *AssetDeviceConnection) HasProxyApp() bool {
-	if o != nil && o.ProxyApp != nil {
+	if o != nil && !IsNil(o.ProxyApp) {
 		return true
 	}
 
@@ -404,46 +408,50 @@ func (o *AssetDeviceConnection) SetProxyApp(v string) {
 }
 
 func (o AssetDeviceConnection) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o AssetDeviceConnection) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.ApiVersion != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.ApiVersion) {
 		toSerialize["ApiVersion"] = o.ApiVersion
 	}
-	if o.AppPartitionNumber != nil {
+	if !IsNil(o.AppPartitionNumber) {
 		toSerialize["AppPartitionNumber"] = o.AppPartitionNumber
 	}
-	if o.ConnectionId != nil {
+	if !IsNil(o.ConnectionId) {
 		toSerialize["ConnectionId"] = o.ConnectionId
 	}
-	if o.ConnectionReason != nil {
+	if !IsNil(o.ConnectionReason) {
 		toSerialize["ConnectionReason"] = o.ConnectionReason
 	}
-	if o.ConnectionStatus != nil {
+	if !IsNil(o.ConnectionStatus) {
 		toSerialize["ConnectionStatus"] = o.ConnectionStatus
 	}
-	if o.ConnectionStatusLastChangeTime != nil {
+	if !IsNil(o.ConnectionStatusLastChangeTime) {
 		toSerialize["ConnectionStatusLastChangeTime"] = o.ConnectionStatusLastChangeTime
 	}
-	if o.ConnectorVersion != nil {
+	if !IsNil(o.ConnectorVersion) {
 		toSerialize["ConnectorVersion"] = o.ConnectorVersion
 	}
-	if o.DeviceExternalIpAddress != nil {
+	if !IsNil(o.DeviceExternalIpAddress) {
 		toSerialize["DeviceExternalIpAddress"] = o.DeviceExternalIpAddress
 	}
-	if o.ProxyApp != nil {
+	if !IsNil(o.ProxyApp) {
 		toSerialize["ProxyApp"] = o.ProxyApp
 	}
 
@@ -451,10 +459,32 @@ func (o AssetDeviceConnection) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *AssetDeviceConnection) UnmarshalJSON(bytes []byte) (err error) {
+func (o *AssetDeviceConnection) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type AssetDeviceConnectionWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type.
 		ClassId string `json:"ClassId"`
@@ -482,7 +512,7 @@ func (o *AssetDeviceConnection) UnmarshalJSON(bytes []byte) (err error) {
 
 	varAssetDeviceConnectionWithoutEmbeddedStruct := AssetDeviceConnectionWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varAssetDeviceConnectionWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varAssetDeviceConnectionWithoutEmbeddedStruct)
 	if err == nil {
 		varAssetDeviceConnection := _AssetDeviceConnection{}
 		varAssetDeviceConnection.ClassId = varAssetDeviceConnectionWithoutEmbeddedStruct.ClassId
@@ -503,7 +533,7 @@ func (o *AssetDeviceConnection) UnmarshalJSON(bytes []byte) (err error) {
 
 	varAssetDeviceConnection := _AssetDeviceConnection{}
 
-	err = json.Unmarshal(bytes, &varAssetDeviceConnection)
+	err = json.Unmarshal(data, &varAssetDeviceConnection)
 	if err == nil {
 		o.MoBaseMo = varAssetDeviceConnection.MoBaseMo
 	} else {
@@ -512,7 +542,7 @@ func (o *AssetDeviceConnection) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "ApiVersion")

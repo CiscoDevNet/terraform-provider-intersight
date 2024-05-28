@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 **HealthCheckWorkflow** | Pointer to [**NullableWorkflowServiceItemActionWorkflowDefinition**](WorkflowServiceItemActionWorkflowDefinition.md) |  | [optional] 
 **Label** | Pointer to **string** | Label for the health check definition that is displayed on UI. | [optional] 
 **Name** | Pointer to **string** | Name of the health check definition. | [optional] 
-**ServiceItemDefinition** | Pointer to [**WorkflowServiceItemDefinitionRelationship**](WorkflowServiceItemDefinitionRelationship.md) |  | [optional] 
+**ServiceItemDefinition** | Pointer to [**NullableWorkflowServiceItemDefinitionRelationship**](WorkflowServiceItemDefinitionRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -284,6 +284,16 @@ SetServiceItemDefinition sets ServiceItemDefinition field to given value.
 
 HasServiceItemDefinition returns a boolean if a field has been set.
 
+### SetServiceItemDefinitionNil
+
+`func (o *WorkflowServiceItemHealthCheckDefinition) SetServiceItemDefinitionNil(b bool)`
+
+ SetServiceItemDefinitionNil sets the value for ServiceItemDefinition to be an explicit nil
+
+### UnsetServiceItemDefinition
+`func (o *WorkflowServiceItemHealthCheckDefinition) UnsetServiceItemDefinition()`
+
+UnsetServiceItemDefinition ensures that no value is present for ServiceItemDefinition, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

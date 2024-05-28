@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,10 +13,14 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 	"time"
 )
+
+// checks if the UcsdBackupInfo type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &UcsdBackupInfo{}
 
 // UcsdBackupInfo List of backup images available for target end device for restore operation.
 type UcsdBackupInfo struct {
@@ -134,7 +138,7 @@ func (o *UcsdBackupInfo) SetObjectType(v string) {
 
 // GetBackupFileName returns the BackupFileName field value if set, zero value otherwise.
 func (o *UcsdBackupInfo) GetBackupFileName() string {
-	if o == nil || o.BackupFileName == nil {
+	if o == nil || IsNil(o.BackupFileName) {
 		var ret string
 		return ret
 	}
@@ -144,7 +148,7 @@ func (o *UcsdBackupInfo) GetBackupFileName() string {
 // GetBackupFileNameOk returns a tuple with the BackupFileName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UcsdBackupInfo) GetBackupFileNameOk() (*string, bool) {
-	if o == nil || o.BackupFileName == nil {
+	if o == nil || IsNil(o.BackupFileName) {
 		return nil, false
 	}
 	return o.BackupFileName, true
@@ -152,7 +156,7 @@ func (o *UcsdBackupInfo) GetBackupFileNameOk() (*string, bool) {
 
 // HasBackupFileName returns a boolean if a field has been set.
 func (o *UcsdBackupInfo) HasBackupFileName() bool {
-	if o != nil && o.BackupFileName != nil {
+	if o != nil && !IsNil(o.BackupFileName) {
 		return true
 	}
 
@@ -166,7 +170,7 @@ func (o *UcsdBackupInfo) SetBackupFileName(v string) {
 
 // GetBackupLocation returns the BackupLocation field value if set, zero value otherwise.
 func (o *UcsdBackupInfo) GetBackupLocation() string {
-	if o == nil || o.BackupLocation == nil {
+	if o == nil || IsNil(o.BackupLocation) {
 		var ret string
 		return ret
 	}
@@ -176,7 +180,7 @@ func (o *UcsdBackupInfo) GetBackupLocation() string {
 // GetBackupLocationOk returns a tuple with the BackupLocation field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UcsdBackupInfo) GetBackupLocationOk() (*string, bool) {
-	if o == nil || o.BackupLocation == nil {
+	if o == nil || IsNil(o.BackupLocation) {
 		return nil, false
 	}
 	return o.BackupLocation, true
@@ -184,7 +188,7 @@ func (o *UcsdBackupInfo) GetBackupLocationOk() (*string, bool) {
 
 // HasBackupLocation returns a boolean if a field has been set.
 func (o *UcsdBackupInfo) HasBackupLocation() bool {
-	if o != nil && o.BackupLocation != nil {
+	if o != nil && !IsNil(o.BackupLocation) {
 		return true
 	}
 
@@ -198,7 +202,7 @@ func (o *UcsdBackupInfo) SetBackupLocation(v string) {
 
 // GetBackupServerIp returns the BackupServerIp field value if set, zero value otherwise.
 func (o *UcsdBackupInfo) GetBackupServerIp() string {
-	if o == nil || o.BackupServerIp == nil {
+	if o == nil || IsNil(o.BackupServerIp) {
 		var ret string
 		return ret
 	}
@@ -208,7 +212,7 @@ func (o *UcsdBackupInfo) GetBackupServerIp() string {
 // GetBackupServerIpOk returns a tuple with the BackupServerIp field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UcsdBackupInfo) GetBackupServerIpOk() (*string, bool) {
-	if o == nil || o.BackupServerIp == nil {
+	if o == nil || IsNil(o.BackupServerIp) {
 		return nil, false
 	}
 	return o.BackupServerIp, true
@@ -216,7 +220,7 @@ func (o *UcsdBackupInfo) GetBackupServerIpOk() (*string, bool) {
 
 // HasBackupServerIp returns a boolean if a field has been set.
 func (o *UcsdBackupInfo) HasBackupServerIp() bool {
-	if o != nil && o.BackupServerIp != nil {
+	if o != nil && !IsNil(o.BackupServerIp) {
 		return true
 	}
 
@@ -230,7 +234,7 @@ func (o *UcsdBackupInfo) SetBackupServerIp(v string) {
 
 // GetBackupSize returns the BackupSize field value if set, zero value otherwise.
 func (o *UcsdBackupInfo) GetBackupSize() int64 {
-	if o == nil || o.BackupSize == nil {
+	if o == nil || IsNil(o.BackupSize) {
 		var ret int64
 		return ret
 	}
@@ -240,7 +244,7 @@ func (o *UcsdBackupInfo) GetBackupSize() int64 {
 // GetBackupSizeOk returns a tuple with the BackupSize field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UcsdBackupInfo) GetBackupSizeOk() (*int64, bool) {
-	if o == nil || o.BackupSize == nil {
+	if o == nil || IsNil(o.BackupSize) {
 		return nil, false
 	}
 	return o.BackupSize, true
@@ -248,7 +252,7 @@ func (o *UcsdBackupInfo) GetBackupSizeOk() (*int64, bool) {
 
 // HasBackupSize returns a boolean if a field has been set.
 func (o *UcsdBackupInfo) HasBackupSize() bool {
-	if o != nil && o.BackupSize != nil {
+	if o != nil && !IsNil(o.BackupSize) {
 		return true
 	}
 
@@ -273,7 +277,7 @@ func (o *UcsdBackupInfo) GetConnectors() []UcsdConnectorPack {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *UcsdBackupInfo) GetConnectorsOk() ([]UcsdConnectorPack, bool) {
-	if o == nil || o.Connectors == nil {
+	if o == nil || IsNil(o.Connectors) {
 		return nil, false
 	}
 	return o.Connectors, true
@@ -281,7 +285,7 @@ func (o *UcsdBackupInfo) GetConnectorsOk() ([]UcsdConnectorPack, bool) {
 
 // HasConnectors returns a boolean if a field has been set.
 func (o *UcsdBackupInfo) HasConnectors() bool {
-	if o != nil && o.Connectors != nil {
+	if o != nil && IsNil(o.Connectors) {
 		return true
 	}
 
@@ -295,7 +299,7 @@ func (o *UcsdBackupInfo) SetConnectors(v []UcsdConnectorPack) {
 
 // GetDuration returns the Duration field value if set, zero value otherwise.
 func (o *UcsdBackupInfo) GetDuration() int64 {
-	if o == nil || o.Duration == nil {
+	if o == nil || IsNil(o.Duration) {
 		var ret int64
 		return ret
 	}
@@ -305,7 +309,7 @@ func (o *UcsdBackupInfo) GetDuration() int64 {
 // GetDurationOk returns a tuple with the Duration field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UcsdBackupInfo) GetDurationOk() (*int64, bool) {
-	if o == nil || o.Duration == nil {
+	if o == nil || IsNil(o.Duration) {
 		return nil, false
 	}
 	return o.Duration, true
@@ -313,7 +317,7 @@ func (o *UcsdBackupInfo) GetDurationOk() (*int64, bool) {
 
 // HasDuration returns a boolean if a field has been set.
 func (o *UcsdBackupInfo) HasDuration() bool {
-	if o != nil && o.Duration != nil {
+	if o != nil && !IsNil(o.Duration) {
 		return true
 	}
 
@@ -327,7 +331,7 @@ func (o *UcsdBackupInfo) SetDuration(v int64) {
 
 // GetEncryptionKey returns the EncryptionKey field value if set, zero value otherwise.
 func (o *UcsdBackupInfo) GetEncryptionKey() string {
-	if o == nil || o.EncryptionKey == nil {
+	if o == nil || IsNil(o.EncryptionKey) {
 		var ret string
 		return ret
 	}
@@ -337,7 +341,7 @@ func (o *UcsdBackupInfo) GetEncryptionKey() string {
 // GetEncryptionKeyOk returns a tuple with the EncryptionKey field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UcsdBackupInfo) GetEncryptionKeyOk() (*string, bool) {
-	if o == nil || o.EncryptionKey == nil {
+	if o == nil || IsNil(o.EncryptionKey) {
 		return nil, false
 	}
 	return o.EncryptionKey, true
@@ -345,7 +349,7 @@ func (o *UcsdBackupInfo) GetEncryptionKeyOk() (*string, bool) {
 
 // HasEncryptionKey returns a boolean if a field has been set.
 func (o *UcsdBackupInfo) HasEncryptionKey() bool {
-	if o != nil && o.EncryptionKey != nil {
+	if o != nil && !IsNil(o.EncryptionKey) {
 		return true
 	}
 
@@ -359,7 +363,7 @@ func (o *UcsdBackupInfo) SetEncryptionKey(v string) {
 
 // GetFailureReason returns the FailureReason field value if set, zero value otherwise.
 func (o *UcsdBackupInfo) GetFailureReason() string {
-	if o == nil || o.FailureReason == nil {
+	if o == nil || IsNil(o.FailureReason) {
 		var ret string
 		return ret
 	}
@@ -369,7 +373,7 @@ func (o *UcsdBackupInfo) GetFailureReason() string {
 // GetFailureReasonOk returns a tuple with the FailureReason field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UcsdBackupInfo) GetFailureReasonOk() (*string, bool) {
-	if o == nil || o.FailureReason == nil {
+	if o == nil || IsNil(o.FailureReason) {
 		return nil, false
 	}
 	return o.FailureReason, true
@@ -377,7 +381,7 @@ func (o *UcsdBackupInfo) GetFailureReasonOk() (*string, bool) {
 
 // HasFailureReason returns a boolean if a field has been set.
 func (o *UcsdBackupInfo) HasFailureReason() bool {
-	if o != nil && o.FailureReason != nil {
+	if o != nil && !IsNil(o.FailureReason) {
 		return true
 	}
 
@@ -391,7 +395,7 @@ func (o *UcsdBackupInfo) SetFailureReason(v string) {
 
 // GetIsPurged returns the IsPurged field value if set, zero value otherwise.
 func (o *UcsdBackupInfo) GetIsPurged() bool {
-	if o == nil || o.IsPurged == nil {
+	if o == nil || IsNil(o.IsPurged) {
 		var ret bool
 		return ret
 	}
@@ -401,7 +405,7 @@ func (o *UcsdBackupInfo) GetIsPurged() bool {
 // GetIsPurgedOk returns a tuple with the IsPurged field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UcsdBackupInfo) GetIsPurgedOk() (*bool, bool) {
-	if o == nil || o.IsPurged == nil {
+	if o == nil || IsNil(o.IsPurged) {
 		return nil, false
 	}
 	return o.IsPurged, true
@@ -409,7 +413,7 @@ func (o *UcsdBackupInfo) GetIsPurgedOk() (*bool, bool) {
 
 // HasIsPurged returns a boolean if a field has been set.
 func (o *UcsdBackupInfo) HasIsPurged() bool {
-	if o != nil && o.IsPurged != nil {
+	if o != nil && !IsNil(o.IsPurged) {
 		return true
 	}
 
@@ -423,7 +427,7 @@ func (o *UcsdBackupInfo) SetIsPurged(v bool) {
 
 // GetLastModified returns the LastModified field value if set, zero value otherwise.
 func (o *UcsdBackupInfo) GetLastModified() time.Time {
-	if o == nil || o.LastModified == nil {
+	if o == nil || IsNil(o.LastModified) {
 		var ret time.Time
 		return ret
 	}
@@ -433,7 +437,7 @@ func (o *UcsdBackupInfo) GetLastModified() time.Time {
 // GetLastModifiedOk returns a tuple with the LastModified field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UcsdBackupInfo) GetLastModifiedOk() (*time.Time, bool) {
-	if o == nil || o.LastModified == nil {
+	if o == nil || IsNil(o.LastModified) {
 		return nil, false
 	}
 	return o.LastModified, true
@@ -441,7 +445,7 @@ func (o *UcsdBackupInfo) GetLastModifiedOk() (*time.Time, bool) {
 
 // HasLastModified returns a boolean if a field has been set.
 func (o *UcsdBackupInfo) HasLastModified() bool {
-	if o != nil && o.LastModified != nil {
+	if o != nil && !IsNil(o.LastModified) {
 		return true
 	}
 
@@ -455,7 +459,7 @@ func (o *UcsdBackupInfo) SetLastModified(v time.Time) {
 
 // GetPercentageCompletion returns the PercentageCompletion field value if set, zero value otherwise.
 func (o *UcsdBackupInfo) GetPercentageCompletion() int64 {
-	if o == nil || o.PercentageCompletion == nil {
+	if o == nil || IsNil(o.PercentageCompletion) {
 		var ret int64
 		return ret
 	}
@@ -465,7 +469,7 @@ func (o *UcsdBackupInfo) GetPercentageCompletion() int64 {
 // GetPercentageCompletionOk returns a tuple with the PercentageCompletion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UcsdBackupInfo) GetPercentageCompletionOk() (*int64, bool) {
-	if o == nil || o.PercentageCompletion == nil {
+	if o == nil || IsNil(o.PercentageCompletion) {
 		return nil, false
 	}
 	return o.PercentageCompletion, true
@@ -473,7 +477,7 @@ func (o *UcsdBackupInfo) GetPercentageCompletionOk() (*int64, bool) {
 
 // HasPercentageCompletion returns a boolean if a field has been set.
 func (o *UcsdBackupInfo) HasPercentageCompletion() bool {
-	if o != nil && o.PercentageCompletion != nil {
+	if o != nil && !IsNil(o.PercentageCompletion) {
 		return true
 	}
 
@@ -487,7 +491,7 @@ func (o *UcsdBackupInfo) SetPercentageCompletion(v int64) {
 
 // GetProductVersion returns the ProductVersion field value if set, zero value otherwise.
 func (o *UcsdBackupInfo) GetProductVersion() string {
-	if o == nil || o.ProductVersion == nil {
+	if o == nil || IsNil(o.ProductVersion) {
 		var ret string
 		return ret
 	}
@@ -497,7 +501,7 @@ func (o *UcsdBackupInfo) GetProductVersion() string {
 // GetProductVersionOk returns a tuple with the ProductVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UcsdBackupInfo) GetProductVersionOk() (*string, bool) {
-	if o == nil || o.ProductVersion == nil {
+	if o == nil || IsNil(o.ProductVersion) {
 		return nil, false
 	}
 	return o.ProductVersion, true
@@ -505,7 +509,7 @@ func (o *UcsdBackupInfo) GetProductVersionOk() (*string, bool) {
 
 // HasProductVersion returns a boolean if a field has been set.
 func (o *UcsdBackupInfo) HasProductVersion() bool {
-	if o != nil && o.ProductVersion != nil {
+	if o != nil && !IsNil(o.ProductVersion) {
 		return true
 	}
 
@@ -519,7 +523,7 @@ func (o *UcsdBackupInfo) SetProductVersion(v string) {
 
 // GetProtocol returns the Protocol field value if set, zero value otherwise.
 func (o *UcsdBackupInfo) GetProtocol() string {
-	if o == nil || o.Protocol == nil {
+	if o == nil || IsNil(o.Protocol) {
 		var ret string
 		return ret
 	}
@@ -529,7 +533,7 @@ func (o *UcsdBackupInfo) GetProtocol() string {
 // GetProtocolOk returns a tuple with the Protocol field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UcsdBackupInfo) GetProtocolOk() (*string, bool) {
-	if o == nil || o.Protocol == nil {
+	if o == nil || IsNil(o.Protocol) {
 		return nil, false
 	}
 	return o.Protocol, true
@@ -537,7 +541,7 @@ func (o *UcsdBackupInfo) GetProtocolOk() (*string, bool) {
 
 // HasProtocol returns a boolean if a field has been set.
 func (o *UcsdBackupInfo) HasProtocol() bool {
-	if o != nil && o.Protocol != nil {
+	if o != nil && !IsNil(o.Protocol) {
 		return true
 	}
 
@@ -551,7 +555,7 @@ func (o *UcsdBackupInfo) SetProtocol(v string) {
 
 // GetStageCompletion returns the StageCompletion field value if set, zero value otherwise.
 func (o *UcsdBackupInfo) GetStageCompletion() string {
-	if o == nil || o.StageCompletion == nil {
+	if o == nil || IsNil(o.StageCompletion) {
 		var ret string
 		return ret
 	}
@@ -561,7 +565,7 @@ func (o *UcsdBackupInfo) GetStageCompletion() string {
 // GetStageCompletionOk returns a tuple with the StageCompletion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UcsdBackupInfo) GetStageCompletionOk() (*string, bool) {
-	if o == nil || o.StageCompletion == nil {
+	if o == nil || IsNil(o.StageCompletion) {
 		return nil, false
 	}
 	return o.StageCompletion, true
@@ -569,7 +573,7 @@ func (o *UcsdBackupInfo) GetStageCompletionOk() (*string, bool) {
 
 // HasStageCompletion returns a boolean if a field has been set.
 func (o *UcsdBackupInfo) HasStageCompletion() bool {
-	if o != nil && o.StageCompletion != nil {
+	if o != nil && !IsNil(o.StageCompletion) {
 		return true
 	}
 
@@ -583,7 +587,7 @@ func (o *UcsdBackupInfo) SetStageCompletion(v string) {
 
 // GetStartTime returns the StartTime field value if set, zero value otherwise.
 func (o *UcsdBackupInfo) GetStartTime() time.Time {
-	if o == nil || o.StartTime == nil {
+	if o == nil || IsNil(o.StartTime) {
 		var ret time.Time
 		return ret
 	}
@@ -593,7 +597,7 @@ func (o *UcsdBackupInfo) GetStartTime() time.Time {
 // GetStartTimeOk returns a tuple with the StartTime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UcsdBackupInfo) GetStartTimeOk() (*time.Time, bool) {
-	if o == nil || o.StartTime == nil {
+	if o == nil || IsNil(o.StartTime) {
 		return nil, false
 	}
 	return o.StartTime, true
@@ -601,7 +605,7 @@ func (o *UcsdBackupInfo) GetStartTimeOk() (*time.Time, bool) {
 
 // HasStartTime returns a boolean if a field has been set.
 func (o *UcsdBackupInfo) HasStartTime() bool {
-	if o != nil && o.StartTime != nil {
+	if o != nil && !IsNil(o.StartTime) {
 		return true
 	}
 
@@ -615,7 +619,7 @@ func (o *UcsdBackupInfo) SetStartTime(v time.Time) {
 
 // GetStatus returns the Status field value if set, zero value otherwise.
 func (o *UcsdBackupInfo) GetStatus() string {
-	if o == nil || o.Status == nil {
+	if o == nil || IsNil(o.Status) {
 		var ret string
 		return ret
 	}
@@ -625,7 +629,7 @@ func (o *UcsdBackupInfo) GetStatus() string {
 // GetStatusOk returns a tuple with the Status field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UcsdBackupInfo) GetStatusOk() (*string, bool) {
-	if o == nil || o.Status == nil {
+	if o == nil || IsNil(o.Status) {
 		return nil, false
 	}
 	return o.Status, true
@@ -633,7 +637,7 @@ func (o *UcsdBackupInfo) GetStatusOk() (*string, bool) {
 
 // HasStatus returns a boolean if a field has been set.
 func (o *UcsdBackupInfo) HasStatus() bool {
-	if o != nil && o.Status != nil {
+	if o != nil && !IsNil(o.Status) {
 		return true
 	}
 
@@ -646,67 +650,71 @@ func (o *UcsdBackupInfo) SetStatus(v string) {
 }
 
 func (o UcsdBackupInfo) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o UcsdBackupInfo) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedRecoveryAbstractBackupInfo, errRecoveryAbstractBackupInfo := json.Marshal(o.RecoveryAbstractBackupInfo)
 	if errRecoveryAbstractBackupInfo != nil {
-		return []byte{}, errRecoveryAbstractBackupInfo
+		return map[string]interface{}{}, errRecoveryAbstractBackupInfo
 	}
 	errRecoveryAbstractBackupInfo = json.Unmarshal([]byte(serializedRecoveryAbstractBackupInfo), &toSerialize)
 	if errRecoveryAbstractBackupInfo != nil {
-		return []byte{}, errRecoveryAbstractBackupInfo
+		return map[string]interface{}{}, errRecoveryAbstractBackupInfo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.BackupFileName != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.BackupFileName) {
 		toSerialize["BackupFileName"] = o.BackupFileName
 	}
-	if o.BackupLocation != nil {
+	if !IsNil(o.BackupLocation) {
 		toSerialize["BackupLocation"] = o.BackupLocation
 	}
-	if o.BackupServerIp != nil {
+	if !IsNil(o.BackupServerIp) {
 		toSerialize["BackupServerIp"] = o.BackupServerIp
 	}
-	if o.BackupSize != nil {
+	if !IsNil(o.BackupSize) {
 		toSerialize["BackupSize"] = o.BackupSize
 	}
 	if o.Connectors != nil {
 		toSerialize["Connectors"] = o.Connectors
 	}
-	if o.Duration != nil {
+	if !IsNil(o.Duration) {
 		toSerialize["Duration"] = o.Duration
 	}
-	if o.EncryptionKey != nil {
+	if !IsNil(o.EncryptionKey) {
 		toSerialize["EncryptionKey"] = o.EncryptionKey
 	}
-	if o.FailureReason != nil {
+	if !IsNil(o.FailureReason) {
 		toSerialize["FailureReason"] = o.FailureReason
 	}
-	if o.IsPurged != nil {
+	if !IsNil(o.IsPurged) {
 		toSerialize["IsPurged"] = o.IsPurged
 	}
-	if o.LastModified != nil {
+	if !IsNil(o.LastModified) {
 		toSerialize["LastModified"] = o.LastModified
 	}
-	if o.PercentageCompletion != nil {
+	if !IsNil(o.PercentageCompletion) {
 		toSerialize["PercentageCompletion"] = o.PercentageCompletion
 	}
-	if o.ProductVersion != nil {
+	if !IsNil(o.ProductVersion) {
 		toSerialize["ProductVersion"] = o.ProductVersion
 	}
-	if o.Protocol != nil {
+	if !IsNil(o.Protocol) {
 		toSerialize["Protocol"] = o.Protocol
 	}
-	if o.StageCompletion != nil {
+	if !IsNil(o.StageCompletion) {
 		toSerialize["StageCompletion"] = o.StageCompletion
 	}
-	if o.StartTime != nil {
+	if !IsNil(o.StartTime) {
 		toSerialize["StartTime"] = o.StartTime
 	}
-	if o.Status != nil {
+	if !IsNil(o.Status) {
 		toSerialize["Status"] = o.Status
 	}
 
@@ -714,10 +722,32 @@ func (o UcsdBackupInfo) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *UcsdBackupInfo) UnmarshalJSON(bytes []byte) (err error) {
+func (o *UcsdBackupInfo) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type UcsdBackupInfoWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -758,7 +788,7 @@ func (o *UcsdBackupInfo) UnmarshalJSON(bytes []byte) (err error) {
 
 	varUcsdBackupInfoWithoutEmbeddedStruct := UcsdBackupInfoWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varUcsdBackupInfoWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varUcsdBackupInfoWithoutEmbeddedStruct)
 	if err == nil {
 		varUcsdBackupInfo := _UcsdBackupInfo{}
 		varUcsdBackupInfo.ClassId = varUcsdBackupInfoWithoutEmbeddedStruct.ClassId
@@ -786,7 +816,7 @@ func (o *UcsdBackupInfo) UnmarshalJSON(bytes []byte) (err error) {
 
 	varUcsdBackupInfo := _UcsdBackupInfo{}
 
-	err = json.Unmarshal(bytes, &varUcsdBackupInfo)
+	err = json.Unmarshal(data, &varUcsdBackupInfo)
 	if err == nil {
 		o.RecoveryAbstractBackupInfo = varUcsdBackupInfo.RecoveryAbstractBackupInfo
 	} else {
@@ -795,7 +825,7 @@ func (o *UcsdBackupInfo) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "BackupFileName")

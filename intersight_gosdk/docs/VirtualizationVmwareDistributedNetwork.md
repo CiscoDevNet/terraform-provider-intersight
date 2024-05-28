@@ -15,7 +15,7 @@ Name | Type | Description | Notes
 **UpLink** | Pointer to **bool** | Indicates if the distributed virtual network is a uplink. | [optional] 
 **VlanRange** | Pointer to [**[]VirtualizationVmwareVlanRange**](VirtualizationVmwareVlanRange.md) |  | [optional] 
 **VlanType** | Pointer to **string** | VLAN type of the distributed virtual network. It can be None, VLAN, VLAN Trunking or Private VLAN. * &#x60;None&#x60; - Do not tag traffic with any VLAN Id. * &#x60;VLAN&#x60; - Tag traffic with the Id from the VLAN Id field. * &#x60;VLAN trunking&#x60; - Pass VLAN traffic with Id within the VLAN trunk range to guest operating system. * &#x60;Private VLAN&#x60; - Associate the traffic with a private VLAN created on the distributed switch. | [optional] [default to "None"]
-**DistributedSwitch** | Pointer to [**VirtualizationVmwareDistributedSwitchRelationship**](VirtualizationVmwareDistributedSwitchRelationship.md) |  | [optional] 
+**DistributedSwitch** | Pointer to [**NullableVirtualizationVmwareDistributedSwitchRelationship**](VirtualizationVmwareDistributedSwitchRelationship.md) |  | [optional] 
 **Hosts** | Pointer to [**[]VirtualizationVmwareHostRelationship**](VirtualizationVmwareHostRelationship.md) | An array of relationships to virtualizationVmwareHost resources. | [optional] [readonly] 
 
 ## Methods
@@ -347,6 +347,16 @@ SetDistributedSwitch sets DistributedSwitch field to given value.
 
 HasDistributedSwitch returns a boolean if a field has been set.
 
+### SetDistributedSwitchNil
+
+`func (o *VirtualizationVmwareDistributedNetwork) SetDistributedSwitchNil(b bool)`
+
+ SetDistributedSwitchNil sets the value for DistributedSwitch to be an explicit nil
+
+### UnsetDistributedSwitch
+`func (o *VirtualizationVmwareDistributedNetwork) UnsetDistributedSwitch()`
+
+UnsetDistributedSwitch ensures that no value is present for DistributedSwitch, not even an explicit nil
 ### GetHosts
 
 `func (o *VirtualizationVmwareDistributedNetwork) GetHosts() []VirtualizationVmwareHostRelationship`

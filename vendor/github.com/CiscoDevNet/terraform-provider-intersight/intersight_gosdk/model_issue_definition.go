@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the IssueDefinition type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &IssueDefinition{}
 
 // IssueDefinition The definition of an issue which encompases the criteria for identifying when the issue exists, documentation of the detected issue, and actions to be taken by Intersight, e.g. raising of an alarm or triggering of a workflow to perform remediation.
 type IssueDefinition struct {
@@ -112,7 +116,7 @@ func (o *IssueDefinition) SetObjectType(v string) {
 
 // GetCondition returns the Condition field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *IssueDefinition) GetCondition() IssueCondition {
-	if o == nil || o.Condition.Get() == nil {
+	if o == nil || IsNil(o.Condition.Get()) {
 		var ret IssueCondition
 		return ret
 	}
@@ -155,7 +159,7 @@ func (o *IssueDefinition) UnsetCondition() {
 
 // GetDescription returns the Description field value if set, zero value otherwise.
 func (o *IssueDefinition) GetDescription() string {
-	if o == nil || o.Description == nil {
+	if o == nil || IsNil(o.Description) {
 		var ret string
 		return ret
 	}
@@ -165,7 +169,7 @@ func (o *IssueDefinition) GetDescription() string {
 // GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IssueDefinition) GetDescriptionOk() (*string, bool) {
-	if o == nil || o.Description == nil {
+	if o == nil || IsNil(o.Description) {
 		return nil, false
 	}
 	return o.Description, true
@@ -173,7 +177,7 @@ func (o *IssueDefinition) GetDescriptionOk() (*string, bool) {
 
 // HasDescription returns a boolean if a field has been set.
 func (o *IssueDefinition) HasDescription() bool {
-	if o != nil && o.Description != nil {
+	if o != nil && !IsNil(o.Description) {
 		return true
 	}
 
@@ -187,7 +191,7 @@ func (o *IssueDefinition) SetDescription(v string) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *IssueDefinition) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -197,7 +201,7 @@ func (o *IssueDefinition) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IssueDefinition) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -205,7 +209,7 @@ func (o *IssueDefinition) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *IssueDefinition) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -219,7 +223,7 @@ func (o *IssueDefinition) SetName(v string) {
 
 // GetProbableCause returns the ProbableCause field value if set, zero value otherwise.
 func (o *IssueDefinition) GetProbableCause() string {
-	if o == nil || o.ProbableCause == nil {
+	if o == nil || IsNil(o.ProbableCause) {
 		var ret string
 		return ret
 	}
@@ -229,7 +233,7 @@ func (o *IssueDefinition) GetProbableCause() string {
 // GetProbableCauseOk returns a tuple with the ProbableCause field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IssueDefinition) GetProbableCauseOk() (*string, bool) {
-	if o == nil || o.ProbableCause == nil {
+	if o == nil || IsNil(o.ProbableCause) {
 		return nil, false
 	}
 	return o.ProbableCause, true
@@ -237,7 +241,7 @@ func (o *IssueDefinition) GetProbableCauseOk() (*string, bool) {
 
 // HasProbableCause returns a boolean if a field has been set.
 func (o *IssueDefinition) HasProbableCause() bool {
-	if o != nil && o.ProbableCause != nil {
+	if o != nil && !IsNil(o.ProbableCause) {
 		return true
 	}
 
@@ -251,7 +255,7 @@ func (o *IssueDefinition) SetProbableCause(v string) {
 
 // GetRemediation returns the Remediation field value if set, zero value otherwise.
 func (o *IssueDefinition) GetRemediation() string {
-	if o == nil || o.Remediation == nil {
+	if o == nil || IsNil(o.Remediation) {
 		var ret string
 		return ret
 	}
@@ -261,7 +265,7 @@ func (o *IssueDefinition) GetRemediation() string {
 // GetRemediationOk returns a tuple with the Remediation field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IssueDefinition) GetRemediationOk() (*string, bool) {
-	if o == nil || o.Remediation == nil {
+	if o == nil || IsNil(o.Remediation) {
 		return nil, false
 	}
 	return o.Remediation, true
@@ -269,7 +273,7 @@ func (o *IssueDefinition) GetRemediationOk() (*string, bool) {
 
 // HasRemediation returns a boolean if a field has been set.
 func (o *IssueDefinition) HasRemediation() bool {
-	if o != nil && o.Remediation != nil {
+	if o != nil && !IsNil(o.Remediation) {
 		return true
 	}
 
@@ -294,7 +298,7 @@ func (o *IssueDefinition) GetSystemClassifications() []string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *IssueDefinition) GetSystemClassificationsOk() ([]string, bool) {
-	if o == nil || o.SystemClassifications == nil {
+	if o == nil || IsNil(o.SystemClassifications) {
 		return nil, false
 	}
 	return o.SystemClassifications, true
@@ -302,7 +306,7 @@ func (o *IssueDefinition) GetSystemClassificationsOk() ([]string, bool) {
 
 // HasSystemClassifications returns a boolean if a field has been set.
 func (o *IssueDefinition) HasSystemClassifications() bool {
-	if o != nil && o.SystemClassifications != nil {
+	if o != nil && IsNil(o.SystemClassifications) {
 		return true
 	}
 
@@ -315,34 +319,38 @@ func (o *IssueDefinition) SetSystemClassifications(v []string) {
 }
 
 func (o IssueDefinition) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o IssueDefinition) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
 	if o.Condition.IsSet() {
 		toSerialize["Condition"] = o.Condition.Get()
 	}
-	if o.Description != nil {
+	if !IsNil(o.Description) {
 		toSerialize["Description"] = o.Description
 	}
-	if o.Name != nil {
+	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
 	}
-	if o.ProbableCause != nil {
+	if !IsNil(o.ProbableCause) {
 		toSerialize["ProbableCause"] = o.ProbableCause
 	}
-	if o.Remediation != nil {
+	if !IsNil(o.Remediation) {
 		toSerialize["Remediation"] = o.Remediation
 	}
 	if o.SystemClassifications != nil {
@@ -353,10 +361,32 @@ func (o IssueDefinition) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *IssueDefinition) UnmarshalJSON(bytes []byte) (err error) {
+func (o *IssueDefinition) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type IssueDefinitionWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type.
 		ClassId string `json:"ClassId"`
@@ -376,7 +406,7 @@ func (o *IssueDefinition) UnmarshalJSON(bytes []byte) (err error) {
 
 	varIssueDefinitionWithoutEmbeddedStruct := IssueDefinitionWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varIssueDefinitionWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varIssueDefinitionWithoutEmbeddedStruct)
 	if err == nil {
 		varIssueDefinition := _IssueDefinition{}
 		varIssueDefinition.ClassId = varIssueDefinitionWithoutEmbeddedStruct.ClassId
@@ -394,7 +424,7 @@ func (o *IssueDefinition) UnmarshalJSON(bytes []byte) (err error) {
 
 	varIssueDefinition := _IssueDefinition{}
 
-	err = json.Unmarshal(bytes, &varIssueDefinition)
+	err = json.Unmarshal(data, &varIssueDefinition)
 	if err == nil {
 		o.MoBaseMo = varIssueDefinition.MoBaseMo
 	} else {
@@ -403,7 +433,7 @@ func (o *IssueDefinition) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Condition")

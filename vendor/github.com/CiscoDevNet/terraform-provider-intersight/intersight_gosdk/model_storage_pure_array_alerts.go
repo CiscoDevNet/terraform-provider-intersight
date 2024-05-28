@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,10 +13,14 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 	"time"
 )
+
+// checks if the StoragePureArrayAlerts type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &StoragePureArrayAlerts{}
 
 // StoragePureArrayAlerts Alert Events in PureStorage FlashArray.
 type StoragePureArrayAlerts struct {
@@ -34,8 +38,8 @@ type StoragePureArrayAlerts struct {
 	// ID of the alert related to the event.
 	Name *string `json:"Name,omitempty"`
 	// Type of the severity of the event it could be Critical or Warning.
-	Severity             *string                       `json:"Severity,omitempty"`
-	Array                *StoragePureArrayRelationship `json:"Array,omitempty"`
+	Severity             *string                              `json:"Severity,omitempty"`
+	Array                NullableStoragePureArrayRelationship `json:"Array,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -114,7 +118,7 @@ func (o *StoragePureArrayAlerts) SetObjectType(v string) {
 
 // GetCause returns the Cause field value if set, zero value otherwise.
 func (o *StoragePureArrayAlerts) GetCause() string {
-	if o == nil || o.Cause == nil {
+	if o == nil || IsNil(o.Cause) {
 		var ret string
 		return ret
 	}
@@ -124,7 +128,7 @@ func (o *StoragePureArrayAlerts) GetCause() string {
 // GetCauseOk returns a tuple with the Cause field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StoragePureArrayAlerts) GetCauseOk() (*string, bool) {
-	if o == nil || o.Cause == nil {
+	if o == nil || IsNil(o.Cause) {
 		return nil, false
 	}
 	return o.Cause, true
@@ -132,7 +136,7 @@ func (o *StoragePureArrayAlerts) GetCauseOk() (*string, bool) {
 
 // HasCause returns a boolean if a field has been set.
 func (o *StoragePureArrayAlerts) HasCause() bool {
-	if o != nil && o.Cause != nil {
+	if o != nil && !IsNil(o.Cause) {
 		return true
 	}
 
@@ -146,7 +150,7 @@ func (o *StoragePureArrayAlerts) SetCause(v string) {
 
 // GetComponent returns the Component field value if set, zero value otherwise.
 func (o *StoragePureArrayAlerts) GetComponent() string {
-	if o == nil || o.Component == nil {
+	if o == nil || IsNil(o.Component) {
 		var ret string
 		return ret
 	}
@@ -156,7 +160,7 @@ func (o *StoragePureArrayAlerts) GetComponent() string {
 // GetComponentOk returns a tuple with the Component field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StoragePureArrayAlerts) GetComponentOk() (*string, bool) {
-	if o == nil || o.Component == nil {
+	if o == nil || IsNil(o.Component) {
 		return nil, false
 	}
 	return o.Component, true
@@ -164,7 +168,7 @@ func (o *StoragePureArrayAlerts) GetComponentOk() (*string, bool) {
 
 // HasComponent returns a boolean if a field has been set.
 func (o *StoragePureArrayAlerts) HasComponent() bool {
-	if o != nil && o.Component != nil {
+	if o != nil && !IsNil(o.Component) {
 		return true
 	}
 
@@ -178,7 +182,7 @@ func (o *StoragePureArrayAlerts) SetComponent(v string) {
 
 // GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.
 func (o *StoragePureArrayAlerts) GetCreatedAt() time.Time {
-	if o == nil || o.CreatedAt == nil {
+	if o == nil || IsNil(o.CreatedAt) {
 		var ret time.Time
 		return ret
 	}
@@ -188,7 +192,7 @@ func (o *StoragePureArrayAlerts) GetCreatedAt() time.Time {
 // GetCreatedAtOk returns a tuple with the CreatedAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StoragePureArrayAlerts) GetCreatedAtOk() (*time.Time, bool) {
-	if o == nil || o.CreatedAt == nil {
+	if o == nil || IsNil(o.CreatedAt) {
 		return nil, false
 	}
 	return o.CreatedAt, true
@@ -196,7 +200,7 @@ func (o *StoragePureArrayAlerts) GetCreatedAtOk() (*time.Time, bool) {
 
 // HasCreatedAt returns a boolean if a field has been set.
 func (o *StoragePureArrayAlerts) HasCreatedAt() bool {
-	if o != nil && o.CreatedAt != nil {
+	if o != nil && !IsNil(o.CreatedAt) {
 		return true
 	}
 
@@ -210,7 +214,7 @@ func (o *StoragePureArrayAlerts) SetCreatedAt(v time.Time) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *StoragePureArrayAlerts) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -220,7 +224,7 @@ func (o *StoragePureArrayAlerts) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StoragePureArrayAlerts) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -228,7 +232,7 @@ func (o *StoragePureArrayAlerts) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *StoragePureArrayAlerts) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -242,7 +246,7 @@ func (o *StoragePureArrayAlerts) SetName(v string) {
 
 // GetSeverity returns the Severity field value if set, zero value otherwise.
 func (o *StoragePureArrayAlerts) GetSeverity() string {
-	if o == nil || o.Severity == nil {
+	if o == nil || IsNil(o.Severity) {
 		var ret string
 		return ret
 	}
@@ -252,7 +256,7 @@ func (o *StoragePureArrayAlerts) GetSeverity() string {
 // GetSeverityOk returns a tuple with the Severity field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StoragePureArrayAlerts) GetSeverityOk() (*string, bool) {
-	if o == nil || o.Severity == nil {
+	if o == nil || IsNil(o.Severity) {
 		return nil, false
 	}
 	return o.Severity, true
@@ -260,7 +264,7 @@ func (o *StoragePureArrayAlerts) GetSeverityOk() (*string, bool) {
 
 // HasSeverity returns a boolean if a field has been set.
 func (o *StoragePureArrayAlerts) HasSeverity() bool {
-	if o != nil && o.Severity != nil {
+	if o != nil && !IsNil(o.Severity) {
 		return true
 	}
 
@@ -272,81 +276,118 @@ func (o *StoragePureArrayAlerts) SetSeverity(v string) {
 	o.Severity = &v
 }
 
-// GetArray returns the Array field value if set, zero value otherwise.
+// GetArray returns the Array field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *StoragePureArrayAlerts) GetArray() StoragePureArrayRelationship {
-	if o == nil || o.Array == nil {
+	if o == nil || IsNil(o.Array.Get()) {
 		var ret StoragePureArrayRelationship
 		return ret
 	}
-	return *o.Array
+	return *o.Array.Get()
 }
 
 // GetArrayOk returns a tuple with the Array field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StoragePureArrayAlerts) GetArrayOk() (*StoragePureArrayRelationship, bool) {
-	if o == nil || o.Array == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Array, true
+	return o.Array.Get(), o.Array.IsSet()
 }
 
 // HasArray returns a boolean if a field has been set.
 func (o *StoragePureArrayAlerts) HasArray() bool {
-	if o != nil && o.Array != nil {
+	if o != nil && o.Array.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetArray gets a reference to the given StoragePureArrayRelationship and assigns it to the Array field.
+// SetArray gets a reference to the given NullableStoragePureArrayRelationship and assigns it to the Array field.
 func (o *StoragePureArrayAlerts) SetArray(v StoragePureArrayRelationship) {
-	o.Array = &v
+	o.Array.Set(&v)
+}
+
+// SetArrayNil sets the value for Array to be an explicit nil
+func (o *StoragePureArrayAlerts) SetArrayNil() {
+	o.Array.Set(nil)
+}
+
+// UnsetArray ensures that no value is present for Array, not even an explicit nil
+func (o *StoragePureArrayAlerts) UnsetArray() {
+	o.Array.Unset()
 }
 
 func (o StoragePureArrayAlerts) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o StoragePureArrayAlerts) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Cause != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Cause) {
 		toSerialize["Cause"] = o.Cause
 	}
-	if o.Component != nil {
+	if !IsNil(o.Component) {
 		toSerialize["Component"] = o.Component
 	}
-	if o.CreatedAt != nil {
+	if !IsNil(o.CreatedAt) {
 		toSerialize["CreatedAt"] = o.CreatedAt
 	}
-	if o.Name != nil {
+	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
 	}
-	if o.Severity != nil {
+	if !IsNil(o.Severity) {
 		toSerialize["Severity"] = o.Severity
 	}
-	if o.Array != nil {
-		toSerialize["Array"] = o.Array
+	if o.Array.IsSet() {
+		toSerialize["Array"] = o.Array.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *StoragePureArrayAlerts) UnmarshalJSON(bytes []byte) (err error) {
+func (o *StoragePureArrayAlerts) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type StoragePureArrayAlertsWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -361,13 +402,13 @@ func (o *StoragePureArrayAlerts) UnmarshalJSON(bytes []byte) (err error) {
 		// ID of the alert related to the event.
 		Name *string `json:"Name,omitempty"`
 		// Type of the severity of the event it could be Critical or Warning.
-		Severity *string                       `json:"Severity,omitempty"`
-		Array    *StoragePureArrayRelationship `json:"Array,omitempty"`
+		Severity *string                              `json:"Severity,omitempty"`
+		Array    NullableStoragePureArrayRelationship `json:"Array,omitempty"`
 	}
 
 	varStoragePureArrayAlertsWithoutEmbeddedStruct := StoragePureArrayAlertsWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varStoragePureArrayAlertsWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varStoragePureArrayAlertsWithoutEmbeddedStruct)
 	if err == nil {
 		varStoragePureArrayAlerts := _StoragePureArrayAlerts{}
 		varStoragePureArrayAlerts.ClassId = varStoragePureArrayAlertsWithoutEmbeddedStruct.ClassId
@@ -385,7 +426,7 @@ func (o *StoragePureArrayAlerts) UnmarshalJSON(bytes []byte) (err error) {
 
 	varStoragePureArrayAlerts := _StoragePureArrayAlerts{}
 
-	err = json.Unmarshal(bytes, &varStoragePureArrayAlerts)
+	err = json.Unmarshal(data, &varStoragePureArrayAlerts)
 	if err == nil {
 		o.MoBaseMo = varStoragePureArrayAlerts.MoBaseMo
 	} else {
@@ -394,7 +435,7 @@ func (o *StoragePureArrayAlerts) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Cause")

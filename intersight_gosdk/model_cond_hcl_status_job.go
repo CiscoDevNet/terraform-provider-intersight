@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the CondHclStatusJob type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &CondHclStatusJob{}
 
 // CondHclStatusJob An HCLStatusJob is used to batch mo inventory notifications and process the evaluation of HCLStatus. When we receive a notification for an inventory MO, we will create a HCLStatusJob and inserted into the DB if it doesn't already exist. Then based on a timer we process the jobs in the DB and clear them.
 type CondHclStatusJob struct {
@@ -23,9 +27,9 @@ type CondHclStatusJob struct {
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
-	ObjectType           string                               `json:"ObjectType"`
-	ManagedObject        *InventoryBaseRelationship           `json:"ManagedObject,omitempty"`
-	RegisteredDevice     *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+	ObjectType           string                                      `json:"ObjectType"`
+	ManagedObject        NullableInventoryBaseRelationship           `json:"ManagedObject,omitempty"`
+	RegisteredDevice     NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -102,113 +106,161 @@ func (o *CondHclStatusJob) SetObjectType(v string) {
 	o.ObjectType = v
 }
 
-// GetManagedObject returns the ManagedObject field value if set, zero value otherwise.
+// GetManagedObject returns the ManagedObject field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CondHclStatusJob) GetManagedObject() InventoryBaseRelationship {
-	if o == nil || o.ManagedObject == nil {
+	if o == nil || IsNil(o.ManagedObject.Get()) {
 		var ret InventoryBaseRelationship
 		return ret
 	}
-	return *o.ManagedObject
+	return *o.ManagedObject.Get()
 }
 
 // GetManagedObjectOk returns a tuple with the ManagedObject field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CondHclStatusJob) GetManagedObjectOk() (*InventoryBaseRelationship, bool) {
-	if o == nil || o.ManagedObject == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.ManagedObject, true
+	return o.ManagedObject.Get(), o.ManagedObject.IsSet()
 }
 
 // HasManagedObject returns a boolean if a field has been set.
 func (o *CondHclStatusJob) HasManagedObject() bool {
-	if o != nil && o.ManagedObject != nil {
+	if o != nil && o.ManagedObject.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetManagedObject gets a reference to the given InventoryBaseRelationship and assigns it to the ManagedObject field.
+// SetManagedObject gets a reference to the given NullableInventoryBaseRelationship and assigns it to the ManagedObject field.
 func (o *CondHclStatusJob) SetManagedObject(v InventoryBaseRelationship) {
-	o.ManagedObject = &v
+	o.ManagedObject.Set(&v)
 }
 
-// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise.
+// SetManagedObjectNil sets the value for ManagedObject to be an explicit nil
+func (o *CondHclStatusJob) SetManagedObjectNil() {
+	o.ManagedObject.Set(nil)
+}
+
+// UnsetManagedObject ensures that no value is present for ManagedObject, not even an explicit nil
+func (o *CondHclStatusJob) UnsetManagedObject() {
+	o.ManagedObject.Unset()
+}
+
+// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CondHclStatusJob) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil || IsNil(o.RegisteredDevice.Get()) {
 		var ret AssetDeviceRegistrationRelationship
 		return ret
 	}
-	return *o.RegisteredDevice
+	return *o.RegisteredDevice.Get()
 }
 
 // GetRegisteredDeviceOk returns a tuple with the RegisteredDevice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CondHclStatusJob) GetRegisteredDeviceOk() (*AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.RegisteredDevice, true
+	return o.RegisteredDevice.Get(), o.RegisteredDevice.IsSet()
 }
 
 // HasRegisteredDevice returns a boolean if a field has been set.
 func (o *CondHclStatusJob) HasRegisteredDevice() bool {
-	if o != nil && o.RegisteredDevice != nil {
+	if o != nil && o.RegisteredDevice.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRegisteredDevice gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
+// SetRegisteredDevice gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
 func (o *CondHclStatusJob) SetRegisteredDevice(v AssetDeviceRegistrationRelationship) {
-	o.RegisteredDevice = &v
+	o.RegisteredDevice.Set(&v)
+}
+
+// SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+func (o *CondHclStatusJob) SetRegisteredDeviceNil() {
+	o.RegisteredDevice.Set(nil)
+}
+
+// UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
+func (o *CondHclStatusJob) UnsetRegisteredDevice() {
+	o.RegisteredDevice.Unset()
 }
 
 func (o CondHclStatusJob) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o CondHclStatusJob) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if o.ManagedObject.IsSet() {
+		toSerialize["ManagedObject"] = o.ManagedObject.Get()
 	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.ManagedObject != nil {
-		toSerialize["ManagedObject"] = o.ManagedObject
-	}
-	if o.RegisteredDevice != nil {
-		toSerialize["RegisteredDevice"] = o.RegisteredDevice
+	if o.RegisteredDevice.IsSet() {
+		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *CondHclStatusJob) UnmarshalJSON(bytes []byte) (err error) {
+func (o *CondHclStatusJob) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type CondHclStatusJobWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
-		ObjectType       string                               `json:"ObjectType"`
-		ManagedObject    *InventoryBaseRelationship           `json:"ManagedObject,omitempty"`
-		RegisteredDevice *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+		ObjectType       string                                      `json:"ObjectType"`
+		ManagedObject    NullableInventoryBaseRelationship           `json:"ManagedObject,omitempty"`
+		RegisteredDevice NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	}
 
 	varCondHclStatusJobWithoutEmbeddedStruct := CondHclStatusJobWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varCondHclStatusJobWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varCondHclStatusJobWithoutEmbeddedStruct)
 	if err == nil {
 		varCondHclStatusJob := _CondHclStatusJob{}
 		varCondHclStatusJob.ClassId = varCondHclStatusJobWithoutEmbeddedStruct.ClassId
@@ -222,7 +274,7 @@ func (o *CondHclStatusJob) UnmarshalJSON(bytes []byte) (err error) {
 
 	varCondHclStatusJob := _CondHclStatusJob{}
 
-	err = json.Unmarshal(bytes, &varCondHclStatusJob)
+	err = json.Unmarshal(data, &varCondHclStatusJob)
 	if err == nil {
 		o.MoBaseMo = varCondHclStatusJob.MoBaseMo
 	} else {
@@ -231,7 +283,7 @@ func (o *CondHclStatusJob) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "ManagedObject")

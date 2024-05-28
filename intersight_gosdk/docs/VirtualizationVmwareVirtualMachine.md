@@ -47,12 +47,12 @@ Name | Type | Description | Notes
 **VmVersion** | Pointer to **string** | Information about the version of this VM (vmx-09, vmx-11 etc.). | [optional] 
 **VmVnicCount** | Pointer to **int64** | How many vnics are present. | [optional] 
 **VnicDeviceConfigId** | Pointer to **string** | Information related to the guest info&#39;s VNIC virtual device. It is a comma-separated list. | [optional] 
-**Cluster** | Pointer to [**VirtualizationVmwareClusterRelationship**](VirtualizationVmwareClusterRelationship.md) |  | [optional] 
-**Datacenter** | Pointer to [**VirtualizationVmwareDatacenterRelationship**](VirtualizationVmwareDatacenterRelationship.md) |  | [optional] 
+**Cluster** | Pointer to [**NullableVirtualizationVmwareClusterRelationship**](VirtualizationVmwareClusterRelationship.md) |  | [optional] 
+**Datacenter** | Pointer to [**NullableVirtualizationVmwareDatacenterRelationship**](VirtualizationVmwareDatacenterRelationship.md) |  | [optional] 
 **Datastores** | Pointer to [**[]VirtualizationVmwareDatastoreRelationship**](VirtualizationVmwareDatastoreRelationship.md) | An array of relationships to virtualizationVmwareDatastore resources. | [optional] [readonly] 
-**Host** | Pointer to [**VirtualizationVmwareHostRelationship**](VirtualizationVmwareHostRelationship.md) |  | [optional] 
+**Host** | Pointer to [**NullableVirtualizationVmwareHostRelationship**](VirtualizationVmwareHostRelationship.md) |  | [optional] 
 **Networks** | Pointer to [**[]VirtualizationBaseNetworkRelationship**](VirtualizationBaseNetworkRelationship.md) | An array of relationships to virtualizationBaseNetwork resources. | [optional] [readonly] 
-**ParentFolder** | Pointer to [**VirtualizationVmwareFolderRelationship**](VirtualizationVmwareFolderRelationship.md) |  | [optional] 
+**ParentFolder** | Pointer to [**NullableVirtualizationVmwareFolderRelationship**](VirtualizationVmwareFolderRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -1303,6 +1303,16 @@ SetCluster sets Cluster field to given value.
 
 HasCluster returns a boolean if a field has been set.
 
+### SetClusterNil
+
+`func (o *VirtualizationVmwareVirtualMachine) SetClusterNil(b bool)`
+
+ SetClusterNil sets the value for Cluster to be an explicit nil
+
+### UnsetCluster
+`func (o *VirtualizationVmwareVirtualMachine) UnsetCluster()`
+
+UnsetCluster ensures that no value is present for Cluster, not even an explicit nil
 ### GetDatacenter
 
 `func (o *VirtualizationVmwareVirtualMachine) GetDatacenter() VirtualizationVmwareDatacenterRelationship`
@@ -1328,6 +1338,16 @@ SetDatacenter sets Datacenter field to given value.
 
 HasDatacenter returns a boolean if a field has been set.
 
+### SetDatacenterNil
+
+`func (o *VirtualizationVmwareVirtualMachine) SetDatacenterNil(b bool)`
+
+ SetDatacenterNil sets the value for Datacenter to be an explicit nil
+
+### UnsetDatacenter
+`func (o *VirtualizationVmwareVirtualMachine) UnsetDatacenter()`
+
+UnsetDatacenter ensures that no value is present for Datacenter, not even an explicit nil
 ### GetDatastores
 
 `func (o *VirtualizationVmwareVirtualMachine) GetDatastores() []VirtualizationVmwareDatastoreRelationship`
@@ -1388,6 +1408,16 @@ SetHost sets Host field to given value.
 
 HasHost returns a boolean if a field has been set.
 
+### SetHostNil
+
+`func (o *VirtualizationVmwareVirtualMachine) SetHostNil(b bool)`
+
+ SetHostNil sets the value for Host to be an explicit nil
+
+### UnsetHost
+`func (o *VirtualizationVmwareVirtualMachine) UnsetHost()`
+
+UnsetHost ensures that no value is present for Host, not even an explicit nil
 ### GetNetworks
 
 `func (o *VirtualizationVmwareVirtualMachine) GetNetworks() []VirtualizationBaseNetworkRelationship`
@@ -1448,6 +1478,16 @@ SetParentFolder sets ParentFolder field to given value.
 
 HasParentFolder returns a boolean if a field has been set.
 
+### SetParentFolderNil
+
+`func (o *VirtualizationVmwareVirtualMachine) SetParentFolderNil(b bool)`
+
+ SetParentFolderNil sets the value for ParentFolder to be an explicit nil
+
+### UnsetParentFolder
+`func (o *VirtualizationVmwareVirtualMachine) UnsetParentFolder()`
+
+UnsetParentFolder ensures that no value is present for ParentFolder, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

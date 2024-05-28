@@ -18,8 +18,8 @@ Name | Type | Description | Notes
 **SdCardDownloadError** | Pointer to **string** | The error message from the endpoint during the SD card download. | [optional] 
 **SourceFirmwareVersion** | Pointer to **string** | CIMC firmware version of the server prior to the upgrade. | [optional] [readonly] 
 **TargetFirmwareVersion** | Pointer to **string** | CIMC firmware version of the server post the upgrade. | [optional] [readonly] 
-**Upgrade** | Pointer to [**FirmwareUpgradeBaseRelationship**](FirmwareUpgradeBaseRelationship.md) |  | [optional] 
-**Workflow** | Pointer to [**WorkflowWorkflowInfoRelationship**](WorkflowWorkflowInfoRelationship.md) |  | [optional] 
+**Upgrade** | Pointer to [**NullableFirmwareUpgradeBaseRelationship**](FirmwareUpgradeBaseRelationship.md) |  | [optional] 
+**Workflow** | Pointer to [**NullableWorkflowWorkflowInfoRelationship**](WorkflowWorkflowInfoRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -405,6 +405,16 @@ SetUpgrade sets Upgrade field to given value.
 
 HasUpgrade returns a boolean if a field has been set.
 
+### SetUpgradeNil
+
+`func (o *FirmwareUpgradeStatus) SetUpgradeNil(b bool)`
+
+ SetUpgradeNil sets the value for Upgrade to be an explicit nil
+
+### UnsetUpgrade
+`func (o *FirmwareUpgradeStatus) UnsetUpgrade()`
+
+UnsetUpgrade ensures that no value is present for Upgrade, not even an explicit nil
 ### GetWorkflow
 
 `func (o *FirmwareUpgradeStatus) GetWorkflow() WorkflowWorkflowInfoRelationship`
@@ -430,6 +440,16 @@ SetWorkflow sets Workflow field to given value.
 
 HasWorkflow returns a boolean if a field has been set.
 
+### SetWorkflowNil
+
+`func (o *FirmwareUpgradeStatus) SetWorkflowNil(b bool)`
+
+ SetWorkflowNil sets the value for Workflow to be an explicit nil
+
+### UnsetWorkflow
+`func (o *FirmwareUpgradeStatus) UnsetWorkflow()`
+
+UnsetWorkflow ensures that no value is present for Workflow, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

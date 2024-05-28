@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the VmediaPolicy type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &VmediaPolicy{}
 
 // VmediaPolicy Policy to configure virtual media settings on endpoint.
 type VmediaPolicy struct {
@@ -29,9 +33,9 @@ type VmediaPolicy struct {
 	// If enabled, allows encryption of all Virtual Media communications. Please note that this can no longer be disabled for servers running versions 4.2 and above.
 	Encryption *bool `json:"Encryption,omitempty"`
 	// If enabled, the virtual drives appear on the boot selection menu after mapping the image and rebooting the host.
-	LowPowerUsb  *bool                                 `json:"LowPowerUsb,omitempty"`
-	Mappings     []VmediaMapping                       `json:"Mappings,omitempty"`
-	Organization *OrganizationOrganizationRelationship `json:"Organization,omitempty"`
+	LowPowerUsb  *bool                                        `json:"LowPowerUsb,omitempty"`
+	Mappings     []VmediaMapping                              `json:"Mappings,omitempty"`
+	Organization NullableOrganizationOrganizationRelationship `json:"Organization,omitempty"`
 	// An array of relationships to policyAbstractConfigProfile resources.
 	Profiles             []PolicyAbstractConfigProfileRelationship `json:"Profiles,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -124,7 +128,7 @@ func (o *VmediaPolicy) SetObjectType(v string) {
 
 // GetEnabled returns the Enabled field value if set, zero value otherwise.
 func (o *VmediaPolicy) GetEnabled() bool {
-	if o == nil || o.Enabled == nil {
+	if o == nil || IsNil(o.Enabled) {
 		var ret bool
 		return ret
 	}
@@ -134,7 +138,7 @@ func (o *VmediaPolicy) GetEnabled() bool {
 // GetEnabledOk returns a tuple with the Enabled field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VmediaPolicy) GetEnabledOk() (*bool, bool) {
-	if o == nil || o.Enabled == nil {
+	if o == nil || IsNil(o.Enabled) {
 		return nil, false
 	}
 	return o.Enabled, true
@@ -142,7 +146,7 @@ func (o *VmediaPolicy) GetEnabledOk() (*bool, bool) {
 
 // HasEnabled returns a boolean if a field has been set.
 func (o *VmediaPolicy) HasEnabled() bool {
-	if o != nil && o.Enabled != nil {
+	if o != nil && !IsNil(o.Enabled) {
 		return true
 	}
 
@@ -156,7 +160,7 @@ func (o *VmediaPolicy) SetEnabled(v bool) {
 
 // GetEncryption returns the Encryption field value if set, zero value otherwise.
 func (o *VmediaPolicy) GetEncryption() bool {
-	if o == nil || o.Encryption == nil {
+	if o == nil || IsNil(o.Encryption) {
 		var ret bool
 		return ret
 	}
@@ -166,7 +170,7 @@ func (o *VmediaPolicy) GetEncryption() bool {
 // GetEncryptionOk returns a tuple with the Encryption field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VmediaPolicy) GetEncryptionOk() (*bool, bool) {
-	if o == nil || o.Encryption == nil {
+	if o == nil || IsNil(o.Encryption) {
 		return nil, false
 	}
 	return o.Encryption, true
@@ -174,7 +178,7 @@ func (o *VmediaPolicy) GetEncryptionOk() (*bool, bool) {
 
 // HasEncryption returns a boolean if a field has been set.
 func (o *VmediaPolicy) HasEncryption() bool {
-	if o != nil && o.Encryption != nil {
+	if o != nil && !IsNil(o.Encryption) {
 		return true
 	}
 
@@ -188,7 +192,7 @@ func (o *VmediaPolicy) SetEncryption(v bool) {
 
 // GetLowPowerUsb returns the LowPowerUsb field value if set, zero value otherwise.
 func (o *VmediaPolicy) GetLowPowerUsb() bool {
-	if o == nil || o.LowPowerUsb == nil {
+	if o == nil || IsNil(o.LowPowerUsb) {
 		var ret bool
 		return ret
 	}
@@ -198,7 +202,7 @@ func (o *VmediaPolicy) GetLowPowerUsb() bool {
 // GetLowPowerUsbOk returns a tuple with the LowPowerUsb field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VmediaPolicy) GetLowPowerUsbOk() (*bool, bool) {
-	if o == nil || o.LowPowerUsb == nil {
+	if o == nil || IsNil(o.LowPowerUsb) {
 		return nil, false
 	}
 	return o.LowPowerUsb, true
@@ -206,7 +210,7 @@ func (o *VmediaPolicy) GetLowPowerUsbOk() (*bool, bool) {
 
 // HasLowPowerUsb returns a boolean if a field has been set.
 func (o *VmediaPolicy) HasLowPowerUsb() bool {
-	if o != nil && o.LowPowerUsb != nil {
+	if o != nil && !IsNil(o.LowPowerUsb) {
 		return true
 	}
 
@@ -231,7 +235,7 @@ func (o *VmediaPolicy) GetMappings() []VmediaMapping {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *VmediaPolicy) GetMappingsOk() ([]VmediaMapping, bool) {
-	if o == nil || o.Mappings == nil {
+	if o == nil || IsNil(o.Mappings) {
 		return nil, false
 	}
 	return o.Mappings, true
@@ -239,7 +243,7 @@ func (o *VmediaPolicy) GetMappingsOk() ([]VmediaMapping, bool) {
 
 // HasMappings returns a boolean if a field has been set.
 func (o *VmediaPolicy) HasMappings() bool {
-	if o != nil && o.Mappings != nil {
+	if o != nil && IsNil(o.Mappings) {
 		return true
 	}
 
@@ -251,36 +255,47 @@ func (o *VmediaPolicy) SetMappings(v []VmediaMapping) {
 	o.Mappings = v
 }
 
-// GetOrganization returns the Organization field value if set, zero value otherwise.
+// GetOrganization returns the Organization field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *VmediaPolicy) GetOrganization() OrganizationOrganizationRelationship {
-	if o == nil || o.Organization == nil {
+	if o == nil || IsNil(o.Organization.Get()) {
 		var ret OrganizationOrganizationRelationship
 		return ret
 	}
-	return *o.Organization
+	return *o.Organization.Get()
 }
 
 // GetOrganizationOk returns a tuple with the Organization field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *VmediaPolicy) GetOrganizationOk() (*OrganizationOrganizationRelationship, bool) {
-	if o == nil || o.Organization == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Organization, true
+	return o.Organization.Get(), o.Organization.IsSet()
 }
 
 // HasOrganization returns a boolean if a field has been set.
 func (o *VmediaPolicy) HasOrganization() bool {
-	if o != nil && o.Organization != nil {
+	if o != nil && o.Organization.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetOrganization gets a reference to the given OrganizationOrganizationRelationship and assigns it to the Organization field.
+// SetOrganization gets a reference to the given NullableOrganizationOrganizationRelationship and assigns it to the Organization field.
 func (o *VmediaPolicy) SetOrganization(v OrganizationOrganizationRelationship) {
-	o.Organization = &v
+	o.Organization.Set(&v)
+}
+
+// SetOrganizationNil sets the value for Organization to be an explicit nil
+func (o *VmediaPolicy) SetOrganizationNil() {
+	o.Organization.Set(nil)
+}
+
+// UnsetOrganization ensures that no value is present for Organization, not even an explicit nil
+func (o *VmediaPolicy) UnsetOrganization() {
+	o.Organization.Unset()
 }
 
 // GetProfiles returns the Profiles field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -296,7 +311,7 @@ func (o *VmediaPolicy) GetProfiles() []PolicyAbstractConfigProfileRelationship {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *VmediaPolicy) GetProfilesOk() ([]PolicyAbstractConfigProfileRelationship, bool) {
-	if o == nil || o.Profiles == nil {
+	if o == nil || IsNil(o.Profiles) {
 		return nil, false
 	}
 	return o.Profiles, true
@@ -304,7 +319,7 @@ func (o *VmediaPolicy) GetProfilesOk() ([]PolicyAbstractConfigProfileRelationshi
 
 // HasProfiles returns a boolean if a field has been set.
 func (o *VmediaPolicy) HasProfiles() bool {
-	if o != nil && o.Profiles != nil {
+	if o != nil && IsNil(o.Profiles) {
 		return true
 	}
 
@@ -317,35 +332,39 @@ func (o *VmediaPolicy) SetProfiles(v []PolicyAbstractConfigProfileRelationship) 
 }
 
 func (o VmediaPolicy) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o VmediaPolicy) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedPolicyAbstractPolicy, errPolicyAbstractPolicy := json.Marshal(o.PolicyAbstractPolicy)
 	if errPolicyAbstractPolicy != nil {
-		return []byte{}, errPolicyAbstractPolicy
+		return map[string]interface{}{}, errPolicyAbstractPolicy
 	}
 	errPolicyAbstractPolicy = json.Unmarshal([]byte(serializedPolicyAbstractPolicy), &toSerialize)
 	if errPolicyAbstractPolicy != nil {
-		return []byte{}, errPolicyAbstractPolicy
+		return map[string]interface{}{}, errPolicyAbstractPolicy
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Enabled != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Enabled) {
 		toSerialize["Enabled"] = o.Enabled
 	}
-	if o.Encryption != nil {
+	if !IsNil(o.Encryption) {
 		toSerialize["Encryption"] = o.Encryption
 	}
-	if o.LowPowerUsb != nil {
+	if !IsNil(o.LowPowerUsb) {
 		toSerialize["LowPowerUsb"] = o.LowPowerUsb
 	}
 	if o.Mappings != nil {
 		toSerialize["Mappings"] = o.Mappings
 	}
-	if o.Organization != nil {
-		toSerialize["Organization"] = o.Organization
+	if o.Organization.IsSet() {
+		toSerialize["Organization"] = o.Organization.Get()
 	}
 	if o.Profiles != nil {
 		toSerialize["Profiles"] = o.Profiles
@@ -355,10 +374,32 @@ func (o VmediaPolicy) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *VmediaPolicy) UnmarshalJSON(bytes []byte) (err error) {
+func (o *VmediaPolicy) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type VmediaPolicyWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -369,16 +410,16 @@ func (o *VmediaPolicy) UnmarshalJSON(bytes []byte) (err error) {
 		// If enabled, allows encryption of all Virtual Media communications. Please note that this can no longer be disabled for servers running versions 4.2 and above.
 		Encryption *bool `json:"Encryption,omitempty"`
 		// If enabled, the virtual drives appear on the boot selection menu after mapping the image and rebooting the host.
-		LowPowerUsb  *bool                                 `json:"LowPowerUsb,omitempty"`
-		Mappings     []VmediaMapping                       `json:"Mappings,omitempty"`
-		Organization *OrganizationOrganizationRelationship `json:"Organization,omitempty"`
+		LowPowerUsb  *bool                                        `json:"LowPowerUsb,omitempty"`
+		Mappings     []VmediaMapping                              `json:"Mappings,omitempty"`
+		Organization NullableOrganizationOrganizationRelationship `json:"Organization,omitempty"`
 		// An array of relationships to policyAbstractConfigProfile resources.
 		Profiles []PolicyAbstractConfigProfileRelationship `json:"Profiles,omitempty"`
 	}
 
 	varVmediaPolicyWithoutEmbeddedStruct := VmediaPolicyWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varVmediaPolicyWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varVmediaPolicyWithoutEmbeddedStruct)
 	if err == nil {
 		varVmediaPolicy := _VmediaPolicy{}
 		varVmediaPolicy.ClassId = varVmediaPolicyWithoutEmbeddedStruct.ClassId
@@ -396,7 +437,7 @@ func (o *VmediaPolicy) UnmarshalJSON(bytes []byte) (err error) {
 
 	varVmediaPolicy := _VmediaPolicy{}
 
-	err = json.Unmarshal(bytes, &varVmediaPolicy)
+	err = json.Unmarshal(data, &varVmediaPolicy)
 	if err == nil {
 		o.PolicyAbstractPolicy = varVmediaPolicy.PolicyAbstractPolicy
 	} else {
@@ -405,7 +446,7 @@ func (o *VmediaPolicy) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Enabled")

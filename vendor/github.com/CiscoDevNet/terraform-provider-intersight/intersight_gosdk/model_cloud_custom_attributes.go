@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the CloudCustomAttributes type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &CloudCustomAttributes{}
 
 // CloudCustomAttributes Stores any platform specific information.
 type CloudCustomAttributes struct {
@@ -108,7 +112,7 @@ func (o *CloudCustomAttributes) SetObjectType(v string) {
 
 // GetAttributeName returns the AttributeName field value if set, zero value otherwise.
 func (o *CloudCustomAttributes) GetAttributeName() string {
-	if o == nil || o.AttributeName == nil {
+	if o == nil || IsNil(o.AttributeName) {
 		var ret string
 		return ret
 	}
@@ -118,7 +122,7 @@ func (o *CloudCustomAttributes) GetAttributeName() string {
 // GetAttributeNameOk returns a tuple with the AttributeName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudCustomAttributes) GetAttributeNameOk() (*string, bool) {
-	if o == nil || o.AttributeName == nil {
+	if o == nil || IsNil(o.AttributeName) {
 		return nil, false
 	}
 	return o.AttributeName, true
@@ -126,7 +130,7 @@ func (o *CloudCustomAttributes) GetAttributeNameOk() (*string, bool) {
 
 // HasAttributeName returns a boolean if a field has been set.
 func (o *CloudCustomAttributes) HasAttributeName() bool {
-	if o != nil && o.AttributeName != nil {
+	if o != nil && !IsNil(o.AttributeName) {
 		return true
 	}
 
@@ -140,7 +144,7 @@ func (o *CloudCustomAttributes) SetAttributeName(v string) {
 
 // GetAttributeType returns the AttributeType field value if set, zero value otherwise.
 func (o *CloudCustomAttributes) GetAttributeType() string {
-	if o == nil || o.AttributeType == nil {
+	if o == nil || IsNil(o.AttributeType) {
 		var ret string
 		return ret
 	}
@@ -150,7 +154,7 @@ func (o *CloudCustomAttributes) GetAttributeType() string {
 // GetAttributeTypeOk returns a tuple with the AttributeType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudCustomAttributes) GetAttributeTypeOk() (*string, bool) {
-	if o == nil || o.AttributeType == nil {
+	if o == nil || IsNil(o.AttributeType) {
 		return nil, false
 	}
 	return o.AttributeType, true
@@ -158,7 +162,7 @@ func (o *CloudCustomAttributes) GetAttributeTypeOk() (*string, bool) {
 
 // HasAttributeType returns a boolean if a field has been set.
 func (o *CloudCustomAttributes) HasAttributeType() bool {
-	if o != nil && o.AttributeType != nil {
+	if o != nil && !IsNil(o.AttributeType) {
 		return true
 	}
 
@@ -172,7 +176,7 @@ func (o *CloudCustomAttributes) SetAttributeType(v string) {
 
 // GetAttributeValue returns the AttributeValue field value if set, zero value otherwise.
 func (o *CloudCustomAttributes) GetAttributeValue() string {
-	if o == nil || o.AttributeValue == nil {
+	if o == nil || IsNil(o.AttributeValue) {
 		var ret string
 		return ret
 	}
@@ -182,7 +186,7 @@ func (o *CloudCustomAttributes) GetAttributeValue() string {
 // GetAttributeValueOk returns a tuple with the AttributeValue field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudCustomAttributes) GetAttributeValueOk() (*string, bool) {
-	if o == nil || o.AttributeValue == nil {
+	if o == nil || IsNil(o.AttributeValue) {
 		return nil, false
 	}
 	return o.AttributeValue, true
@@ -190,7 +194,7 @@ func (o *CloudCustomAttributes) GetAttributeValueOk() (*string, bool) {
 
 // HasAttributeValue returns a boolean if a field has been set.
 func (o *CloudCustomAttributes) HasAttributeValue() bool {
-	if o != nil && o.AttributeValue != nil {
+	if o != nil && !IsNil(o.AttributeValue) {
 		return true
 	}
 
@@ -203,28 +207,32 @@ func (o *CloudCustomAttributes) SetAttributeValue(v string) {
 }
 
 func (o CloudCustomAttributes) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o CloudCustomAttributes) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
 	errMoBaseComplexType = json.Unmarshal([]byte(serializedMoBaseComplexType), &toSerialize)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.AttributeName != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.AttributeName) {
 		toSerialize["AttributeName"] = o.AttributeName
 	}
-	if o.AttributeType != nil {
+	if !IsNil(o.AttributeType) {
 		toSerialize["AttributeType"] = o.AttributeType
 	}
-	if o.AttributeValue != nil {
+	if !IsNil(o.AttributeValue) {
 		toSerialize["AttributeValue"] = o.AttributeValue
 	}
 
@@ -232,10 +240,32 @@ func (o CloudCustomAttributes) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *CloudCustomAttributes) UnmarshalJSON(bytes []byte) (err error) {
+func (o *CloudCustomAttributes) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type CloudCustomAttributesWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -251,7 +281,7 @@ func (o *CloudCustomAttributes) UnmarshalJSON(bytes []byte) (err error) {
 
 	varCloudCustomAttributesWithoutEmbeddedStruct := CloudCustomAttributesWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varCloudCustomAttributesWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varCloudCustomAttributesWithoutEmbeddedStruct)
 	if err == nil {
 		varCloudCustomAttributes := _CloudCustomAttributes{}
 		varCloudCustomAttributes.ClassId = varCloudCustomAttributesWithoutEmbeddedStruct.ClassId
@@ -266,7 +296,7 @@ func (o *CloudCustomAttributes) UnmarshalJSON(bytes []byte) (err error) {
 
 	varCloudCustomAttributes := _CloudCustomAttributes{}
 
-	err = json.Unmarshal(bytes, &varCloudCustomAttributes)
+	err = json.Unmarshal(data, &varCloudCustomAttributes)
 	if err == nil {
 		o.MoBaseComplexType = varCloudCustomAttributes.MoBaseComplexType
 	} else {
@@ -275,7 +305,7 @@ func (o *CloudCustomAttributes) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "AttributeName")

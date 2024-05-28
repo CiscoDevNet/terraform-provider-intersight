@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the ContentBaseParameter type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ContentBaseParameter{}
 
 // ContentBaseParameter A Baseparameter is an abstract definition of specific value to be extracted from a given API or device response. The BaseParameter object provides the name, type and content specific path, such as XPath or JSONPath, that points to the location of the parameter value in the content. Additional parameters necessary to extract data based on content type needs to extend BaseParameter.
 type ContentBaseParameter struct {
@@ -120,7 +124,7 @@ func (o *ContentBaseParameter) SetObjectType(v string) {
 
 // GetAcceptSingleValue returns the AcceptSingleValue field value if set, zero value otherwise.
 func (o *ContentBaseParameter) GetAcceptSingleValue() bool {
-	if o == nil || o.AcceptSingleValue == nil {
+	if o == nil || IsNil(o.AcceptSingleValue) {
 		var ret bool
 		return ret
 	}
@@ -130,7 +134,7 @@ func (o *ContentBaseParameter) GetAcceptSingleValue() bool {
 // GetAcceptSingleValueOk returns a tuple with the AcceptSingleValue field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ContentBaseParameter) GetAcceptSingleValueOk() (*bool, bool) {
-	if o == nil || o.AcceptSingleValue == nil {
+	if o == nil || IsNil(o.AcceptSingleValue) {
 		return nil, false
 	}
 	return o.AcceptSingleValue, true
@@ -138,7 +142,7 @@ func (o *ContentBaseParameter) GetAcceptSingleValueOk() (*bool, bool) {
 
 // HasAcceptSingleValue returns a boolean if a field has been set.
 func (o *ContentBaseParameter) HasAcceptSingleValue() bool {
-	if o != nil && o.AcceptSingleValue != nil {
+	if o != nil && !IsNil(o.AcceptSingleValue) {
 		return true
 	}
 
@@ -152,7 +156,7 @@ func (o *ContentBaseParameter) SetAcceptSingleValue(v bool) {
 
 // GetComplexType returns the ComplexType field value if set, zero value otherwise.
 func (o *ContentBaseParameter) GetComplexType() string {
-	if o == nil || o.ComplexType == nil {
+	if o == nil || IsNil(o.ComplexType) {
 		var ret string
 		return ret
 	}
@@ -162,7 +166,7 @@ func (o *ContentBaseParameter) GetComplexType() string {
 // GetComplexTypeOk returns a tuple with the ComplexType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ContentBaseParameter) GetComplexTypeOk() (*string, bool) {
-	if o == nil || o.ComplexType == nil {
+	if o == nil || IsNil(o.ComplexType) {
 		return nil, false
 	}
 	return o.ComplexType, true
@@ -170,7 +174,7 @@ func (o *ContentBaseParameter) GetComplexTypeOk() (*string, bool) {
 
 // HasComplexType returns a boolean if a field has been set.
 func (o *ContentBaseParameter) HasComplexType() bool {
-	if o != nil && o.ComplexType != nil {
+	if o != nil && !IsNil(o.ComplexType) {
 		return true
 	}
 
@@ -184,7 +188,7 @@ func (o *ContentBaseParameter) SetComplexType(v string) {
 
 // GetItemType returns the ItemType field value if set, zero value otherwise.
 func (o *ContentBaseParameter) GetItemType() string {
-	if o == nil || o.ItemType == nil {
+	if o == nil || IsNil(o.ItemType) {
 		var ret string
 		return ret
 	}
@@ -194,7 +198,7 @@ func (o *ContentBaseParameter) GetItemType() string {
 // GetItemTypeOk returns a tuple with the ItemType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ContentBaseParameter) GetItemTypeOk() (*string, bool) {
-	if o == nil || o.ItemType == nil {
+	if o == nil || IsNil(o.ItemType) {
 		return nil, false
 	}
 	return o.ItemType, true
@@ -202,7 +206,7 @@ func (o *ContentBaseParameter) GetItemTypeOk() (*string, bool) {
 
 // HasItemType returns a boolean if a field has been set.
 func (o *ContentBaseParameter) HasItemType() bool {
-	if o != nil && o.ItemType != nil {
+	if o != nil && !IsNil(o.ItemType) {
 		return true
 	}
 
@@ -216,7 +220,7 @@ func (o *ContentBaseParameter) SetItemType(v string) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *ContentBaseParameter) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -226,7 +230,7 @@ func (o *ContentBaseParameter) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ContentBaseParameter) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -234,7 +238,7 @@ func (o *ContentBaseParameter) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *ContentBaseParameter) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -248,7 +252,7 @@ func (o *ContentBaseParameter) SetName(v string) {
 
 // GetPath returns the Path field value if set, zero value otherwise.
 func (o *ContentBaseParameter) GetPath() string {
-	if o == nil || o.Path == nil {
+	if o == nil || IsNil(o.Path) {
 		var ret string
 		return ret
 	}
@@ -258,7 +262,7 @@ func (o *ContentBaseParameter) GetPath() string {
 // GetPathOk returns a tuple with the Path field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ContentBaseParameter) GetPathOk() (*string, bool) {
-	if o == nil || o.Path == nil {
+	if o == nil || IsNil(o.Path) {
 		return nil, false
 	}
 	return o.Path, true
@@ -266,7 +270,7 @@ func (o *ContentBaseParameter) GetPathOk() (*string, bool) {
 
 // HasPath returns a boolean if a field has been set.
 func (o *ContentBaseParameter) HasPath() bool {
-	if o != nil && o.Path != nil {
+	if o != nil && !IsNil(o.Path) {
 		return true
 	}
 
@@ -280,7 +284,7 @@ func (o *ContentBaseParameter) SetPath(v string) {
 
 // GetSecure returns the Secure field value if set, zero value otherwise.
 func (o *ContentBaseParameter) GetSecure() bool {
-	if o == nil || o.Secure == nil {
+	if o == nil || IsNil(o.Secure) {
 		var ret bool
 		return ret
 	}
@@ -290,7 +294,7 @@ func (o *ContentBaseParameter) GetSecure() bool {
 // GetSecureOk returns a tuple with the Secure field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ContentBaseParameter) GetSecureOk() (*bool, bool) {
-	if o == nil || o.Secure == nil {
+	if o == nil || IsNil(o.Secure) {
 		return nil, false
 	}
 	return o.Secure, true
@@ -298,7 +302,7 @@ func (o *ContentBaseParameter) GetSecureOk() (*bool, bool) {
 
 // HasSecure returns a boolean if a field has been set.
 func (o *ContentBaseParameter) HasSecure() bool {
-	if o != nil && o.Secure != nil {
+	if o != nil && !IsNil(o.Secure) {
 		return true
 	}
 
@@ -312,7 +316,7 @@ func (o *ContentBaseParameter) SetSecure(v bool) {
 
 // GetType returns the Type field value if set, zero value otherwise.
 func (o *ContentBaseParameter) GetType() string {
-	if o == nil || o.Type == nil {
+	if o == nil || IsNil(o.Type) {
 		var ret string
 		return ret
 	}
@@ -322,7 +326,7 @@ func (o *ContentBaseParameter) GetType() string {
 // GetTypeOk returns a tuple with the Type field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ContentBaseParameter) GetTypeOk() (*string, bool) {
-	if o == nil || o.Type == nil {
+	if o == nil || IsNil(o.Type) {
 		return nil, false
 	}
 	return o.Type, true
@@ -330,7 +334,7 @@ func (o *ContentBaseParameter) GetTypeOk() (*string, bool) {
 
 // HasType returns a boolean if a field has been set.
 func (o *ContentBaseParameter) HasType() bool {
-	if o != nil && o.Type != nil {
+	if o != nil && !IsNil(o.Type) {
 		return true
 	}
 
@@ -343,40 +347,44 @@ func (o *ContentBaseParameter) SetType(v string) {
 }
 
 func (o ContentBaseParameter) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o ContentBaseParameter) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
 	errMoBaseComplexType = json.Unmarshal([]byte(serializedMoBaseComplexType), &toSerialize)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.AcceptSingleValue != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.AcceptSingleValue) {
 		toSerialize["AcceptSingleValue"] = o.AcceptSingleValue
 	}
-	if o.ComplexType != nil {
+	if !IsNil(o.ComplexType) {
 		toSerialize["ComplexType"] = o.ComplexType
 	}
-	if o.ItemType != nil {
+	if !IsNil(o.ItemType) {
 		toSerialize["ItemType"] = o.ItemType
 	}
-	if o.Name != nil {
+	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
 	}
-	if o.Path != nil {
+	if !IsNil(o.Path) {
 		toSerialize["Path"] = o.Path
 	}
-	if o.Secure != nil {
+	if !IsNil(o.Secure) {
 		toSerialize["Secure"] = o.Secure
 	}
-	if o.Type != nil {
+	if !IsNil(o.Type) {
 		toSerialize["Type"] = o.Type
 	}
 
@@ -384,10 +392,32 @@ func (o ContentBaseParameter) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *ContentBaseParameter) UnmarshalJSON(bytes []byte) (err error) {
+func (o *ContentBaseParameter) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type ContentBaseParameterWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type.
 		ClassId string `json:"ClassId"`
@@ -411,7 +441,7 @@ func (o *ContentBaseParameter) UnmarshalJSON(bytes []byte) (err error) {
 
 	varContentBaseParameterWithoutEmbeddedStruct := ContentBaseParameterWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varContentBaseParameterWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varContentBaseParameterWithoutEmbeddedStruct)
 	if err == nil {
 		varContentBaseParameter := _ContentBaseParameter{}
 		varContentBaseParameter.ClassId = varContentBaseParameterWithoutEmbeddedStruct.ClassId
@@ -430,7 +460,7 @@ func (o *ContentBaseParameter) UnmarshalJSON(bytes []byte) (err error) {
 
 	varContentBaseParameter := _ContentBaseParameter{}
 
-	err = json.Unmarshal(bytes, &varContentBaseParameter)
+	err = json.Unmarshal(data, &varContentBaseParameter)
 	if err == nil {
 		o.MoBaseComplexType = varContentBaseParameter.MoBaseComplexType
 	} else {
@@ -439,7 +469,7 @@ func (o *ContentBaseParameter) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "AcceptSingleValue")

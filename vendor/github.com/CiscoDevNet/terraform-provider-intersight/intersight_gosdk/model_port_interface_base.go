@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the PortInterfaceBase type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &PortInterfaceBase{}
 
 // PortInterfaceBase Abstract Interface Base class for a virtual interface card/Fex Network Port.
 type PortInterfaceBase struct {
@@ -25,9 +29,9 @@ type PortInterfaceBase struct {
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property. The enum values provides the list of concrete types that can be instantiated from this abstract type.
 	ObjectType string `json:"ObjectType"`
 	// Operational state of an Interface.
-	OperState                 *string                            `json:"OperState,omitempty"`
-	AcknowledgedPeerInterface *EtherPhysicalPortBaseRelationship `json:"AcknowledgedPeerInterface,omitempty"`
-	PeerInterface             *EtherPhysicalPortBaseRelationship `json:"PeerInterface,omitempty"`
+	OperState                 *string                                   `json:"OperState,omitempty"`
+	AcknowledgedPeerInterface NullableEtherPhysicalPortBaseRelationship `json:"AcknowledgedPeerInterface,omitempty"`
+	PeerInterface             NullableEtherPhysicalPortBaseRelationship `json:"PeerInterface,omitempty"`
 	AdditionalProperties      map[string]interface{}
 }
 
@@ -102,7 +106,7 @@ func (o *PortInterfaceBase) SetObjectType(v string) {
 
 // GetOperState returns the OperState field value if set, zero value otherwise.
 func (o *PortInterfaceBase) GetOperState() string {
-	if o == nil || o.OperState == nil {
+	if o == nil || IsNil(o.OperState) {
 		var ret string
 		return ret
 	}
@@ -112,7 +116,7 @@ func (o *PortInterfaceBase) GetOperState() string {
 // GetOperStateOk returns a tuple with the OperState field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PortInterfaceBase) GetOperStateOk() (*string, bool) {
-	if o == nil || o.OperState == nil {
+	if o == nil || IsNil(o.OperState) {
 		return nil, false
 	}
 	return o.OperState, true
@@ -120,7 +124,7 @@ func (o *PortInterfaceBase) GetOperStateOk() (*string, bool) {
 
 // HasOperState returns a boolean if a field has been set.
 func (o *PortInterfaceBase) HasOperState() bool {
-	if o != nil && o.OperState != nil {
+	if o != nil && !IsNil(o.OperState) {
 		return true
 	}
 
@@ -132,118 +136,166 @@ func (o *PortInterfaceBase) SetOperState(v string) {
 	o.OperState = &v
 }
 
-// GetAcknowledgedPeerInterface returns the AcknowledgedPeerInterface field value if set, zero value otherwise.
+// GetAcknowledgedPeerInterface returns the AcknowledgedPeerInterface field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *PortInterfaceBase) GetAcknowledgedPeerInterface() EtherPhysicalPortBaseRelationship {
-	if o == nil || o.AcknowledgedPeerInterface == nil {
+	if o == nil || IsNil(o.AcknowledgedPeerInterface.Get()) {
 		var ret EtherPhysicalPortBaseRelationship
 		return ret
 	}
-	return *o.AcknowledgedPeerInterface
+	return *o.AcknowledgedPeerInterface.Get()
 }
 
 // GetAcknowledgedPeerInterfaceOk returns a tuple with the AcknowledgedPeerInterface field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *PortInterfaceBase) GetAcknowledgedPeerInterfaceOk() (*EtherPhysicalPortBaseRelationship, bool) {
-	if o == nil || o.AcknowledgedPeerInterface == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.AcknowledgedPeerInterface, true
+	return o.AcknowledgedPeerInterface.Get(), o.AcknowledgedPeerInterface.IsSet()
 }
 
 // HasAcknowledgedPeerInterface returns a boolean if a field has been set.
 func (o *PortInterfaceBase) HasAcknowledgedPeerInterface() bool {
-	if o != nil && o.AcknowledgedPeerInterface != nil {
+	if o != nil && o.AcknowledgedPeerInterface.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetAcknowledgedPeerInterface gets a reference to the given EtherPhysicalPortBaseRelationship and assigns it to the AcknowledgedPeerInterface field.
+// SetAcknowledgedPeerInterface gets a reference to the given NullableEtherPhysicalPortBaseRelationship and assigns it to the AcknowledgedPeerInterface field.
 func (o *PortInterfaceBase) SetAcknowledgedPeerInterface(v EtherPhysicalPortBaseRelationship) {
-	o.AcknowledgedPeerInterface = &v
+	o.AcknowledgedPeerInterface.Set(&v)
 }
 
-// GetPeerInterface returns the PeerInterface field value if set, zero value otherwise.
+// SetAcknowledgedPeerInterfaceNil sets the value for AcknowledgedPeerInterface to be an explicit nil
+func (o *PortInterfaceBase) SetAcknowledgedPeerInterfaceNil() {
+	o.AcknowledgedPeerInterface.Set(nil)
+}
+
+// UnsetAcknowledgedPeerInterface ensures that no value is present for AcknowledgedPeerInterface, not even an explicit nil
+func (o *PortInterfaceBase) UnsetAcknowledgedPeerInterface() {
+	o.AcknowledgedPeerInterface.Unset()
+}
+
+// GetPeerInterface returns the PeerInterface field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *PortInterfaceBase) GetPeerInterface() EtherPhysicalPortBaseRelationship {
-	if o == nil || o.PeerInterface == nil {
+	if o == nil || IsNil(o.PeerInterface.Get()) {
 		var ret EtherPhysicalPortBaseRelationship
 		return ret
 	}
-	return *o.PeerInterface
+	return *o.PeerInterface.Get()
 }
 
 // GetPeerInterfaceOk returns a tuple with the PeerInterface field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *PortInterfaceBase) GetPeerInterfaceOk() (*EtherPhysicalPortBaseRelationship, bool) {
-	if o == nil || o.PeerInterface == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.PeerInterface, true
+	return o.PeerInterface.Get(), o.PeerInterface.IsSet()
 }
 
 // HasPeerInterface returns a boolean if a field has been set.
 func (o *PortInterfaceBase) HasPeerInterface() bool {
-	if o != nil && o.PeerInterface != nil {
+	if o != nil && o.PeerInterface.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetPeerInterface gets a reference to the given EtherPhysicalPortBaseRelationship and assigns it to the PeerInterface field.
+// SetPeerInterface gets a reference to the given NullableEtherPhysicalPortBaseRelationship and assigns it to the PeerInterface field.
 func (o *PortInterfaceBase) SetPeerInterface(v EtherPhysicalPortBaseRelationship) {
-	o.PeerInterface = &v
+	o.PeerInterface.Set(&v)
+}
+
+// SetPeerInterfaceNil sets the value for PeerInterface to be an explicit nil
+func (o *PortInterfaceBase) SetPeerInterfaceNil() {
+	o.PeerInterface.Set(nil)
+}
+
+// UnsetPeerInterface ensures that no value is present for PeerInterface, not even an explicit nil
+func (o *PortInterfaceBase) UnsetPeerInterface() {
+	o.PeerInterface.Unset()
 }
 
 func (o PortInterfaceBase) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o PortInterfaceBase) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedInventoryBase, errInventoryBase := json.Marshal(o.InventoryBase)
 	if errInventoryBase != nil {
-		return []byte{}, errInventoryBase
+		return map[string]interface{}{}, errInventoryBase
 	}
 	errInventoryBase = json.Unmarshal([]byte(serializedInventoryBase), &toSerialize)
 	if errInventoryBase != nil {
-		return []byte{}, errInventoryBase
+		return map[string]interface{}{}, errInventoryBase
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.OperState != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.OperState) {
 		toSerialize["OperState"] = o.OperState
 	}
-	if o.AcknowledgedPeerInterface != nil {
-		toSerialize["AcknowledgedPeerInterface"] = o.AcknowledgedPeerInterface
+	if o.AcknowledgedPeerInterface.IsSet() {
+		toSerialize["AcknowledgedPeerInterface"] = o.AcknowledgedPeerInterface.Get()
 	}
-	if o.PeerInterface != nil {
-		toSerialize["PeerInterface"] = o.PeerInterface
+	if o.PeerInterface.IsSet() {
+		toSerialize["PeerInterface"] = o.PeerInterface.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *PortInterfaceBase) UnmarshalJSON(bytes []byte) (err error) {
+func (o *PortInterfaceBase) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type PortInterfaceBaseWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type.
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property. The enum values provides the list of concrete types that can be instantiated from this abstract type.
 		ObjectType string `json:"ObjectType"`
 		// Operational state of an Interface.
-		OperState                 *string                            `json:"OperState,omitempty"`
-		AcknowledgedPeerInterface *EtherPhysicalPortBaseRelationship `json:"AcknowledgedPeerInterface,omitempty"`
-		PeerInterface             *EtherPhysicalPortBaseRelationship `json:"PeerInterface,omitempty"`
+		OperState                 *string                                   `json:"OperState,omitempty"`
+		AcknowledgedPeerInterface NullableEtherPhysicalPortBaseRelationship `json:"AcknowledgedPeerInterface,omitempty"`
+		PeerInterface             NullableEtherPhysicalPortBaseRelationship `json:"PeerInterface,omitempty"`
 	}
 
 	varPortInterfaceBaseWithoutEmbeddedStruct := PortInterfaceBaseWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varPortInterfaceBaseWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varPortInterfaceBaseWithoutEmbeddedStruct)
 	if err == nil {
 		varPortInterfaceBase := _PortInterfaceBase{}
 		varPortInterfaceBase.ClassId = varPortInterfaceBaseWithoutEmbeddedStruct.ClassId
@@ -258,7 +310,7 @@ func (o *PortInterfaceBase) UnmarshalJSON(bytes []byte) (err error) {
 
 	varPortInterfaceBase := _PortInterfaceBase{}
 
-	err = json.Unmarshal(bytes, &varPortInterfaceBase)
+	err = json.Unmarshal(data, &varPortInterfaceBase)
 	if err == nil {
 		o.InventoryBase = varPortInterfaceBase.InventoryBase
 	} else {
@@ -267,7 +319,7 @@ func (o *PortInterfaceBase) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "OperState")

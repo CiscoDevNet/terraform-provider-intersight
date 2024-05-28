@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the StorageBaseDiskPool type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &StorageBaseDiskPool{}
 
 // StorageBaseDiskPool A disk pool is a set of drives that is logically grouped together in the storage array. Some storage vendors use pools extensively.
 type StorageBaseDiskPool struct {
@@ -107,7 +111,7 @@ func (o *StorageBaseDiskPool) SetObjectType(v string) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *StorageBaseDiskPool) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -117,7 +121,7 @@ func (o *StorageBaseDiskPool) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageBaseDiskPool) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -125,7 +129,7 @@ func (o *StorageBaseDiskPool) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *StorageBaseDiskPool) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -139,7 +143,7 @@ func (o *StorageBaseDiskPool) SetName(v string) {
 
 // GetPoolId returns the PoolId field value if set, zero value otherwise.
 func (o *StorageBaseDiskPool) GetPoolId() string {
-	if o == nil || o.PoolId == nil {
+	if o == nil || IsNil(o.PoolId) {
 		var ret string
 		return ret
 	}
@@ -149,7 +153,7 @@ func (o *StorageBaseDiskPool) GetPoolId() string {
 // GetPoolIdOk returns a tuple with the PoolId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageBaseDiskPool) GetPoolIdOk() (*string, bool) {
-	if o == nil || o.PoolId == nil {
+	if o == nil || IsNil(o.PoolId) {
 		return nil, false
 	}
 	return o.PoolId, true
@@ -157,7 +161,7 @@ func (o *StorageBaseDiskPool) GetPoolIdOk() (*string, bool) {
 
 // HasPoolId returns a boolean if a field has been set.
 func (o *StorageBaseDiskPool) HasPoolId() bool {
-	if o != nil && o.PoolId != nil {
+	if o != nil && !IsNil(o.PoolId) {
 		return true
 	}
 
@@ -171,7 +175,7 @@ func (o *StorageBaseDiskPool) SetPoolId(v string) {
 
 // GetStatus returns the Status field value if set, zero value otherwise.
 func (o *StorageBaseDiskPool) GetStatus() string {
-	if o == nil || o.Status == nil {
+	if o == nil || IsNil(o.Status) {
 		var ret string
 		return ret
 	}
@@ -181,7 +185,7 @@ func (o *StorageBaseDiskPool) GetStatus() string {
 // GetStatusOk returns a tuple with the Status field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageBaseDiskPool) GetStatusOk() (*string, bool) {
-	if o == nil || o.Status == nil {
+	if o == nil || IsNil(o.Status) {
 		return nil, false
 	}
 	return o.Status, true
@@ -189,7 +193,7 @@ func (o *StorageBaseDiskPool) GetStatusOk() (*string, bool) {
 
 // HasStatus returns a boolean if a field has been set.
 func (o *StorageBaseDiskPool) HasStatus() bool {
-	if o != nil && o.Status != nil {
+	if o != nil && !IsNil(o.Status) {
 		return true
 	}
 
@@ -203,7 +207,7 @@ func (o *StorageBaseDiskPool) SetStatus(v string) {
 
 // GetStorageUtilization returns the StorageUtilization field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *StorageBaseDiskPool) GetStorageUtilization() StorageBaseCapacity {
-	if o == nil || o.StorageUtilization.Get() == nil {
+	if o == nil || IsNil(o.StorageUtilization.Get()) {
 		var ret StorageBaseCapacity
 		return ret
 	}
@@ -246,7 +250,7 @@ func (o *StorageBaseDiskPool) UnsetStorageUtilization() {
 
 // GetType returns the Type field value if set, zero value otherwise.
 func (o *StorageBaseDiskPool) GetType() string {
-	if o == nil || o.Type == nil {
+	if o == nil || IsNil(o.Type) {
 		var ret string
 		return ret
 	}
@@ -256,7 +260,7 @@ func (o *StorageBaseDiskPool) GetType() string {
 // GetTypeOk returns a tuple with the Type field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageBaseDiskPool) GetTypeOk() (*string, bool) {
-	if o == nil || o.Type == nil {
+	if o == nil || IsNil(o.Type) {
 		return nil, false
 	}
 	return o.Type, true
@@ -264,7 +268,7 @@ func (o *StorageBaseDiskPool) GetTypeOk() (*string, bool) {
 
 // HasType returns a boolean if a field has been set.
 func (o *StorageBaseDiskPool) HasType() bool {
-	if o != nil && o.Type != nil {
+	if o != nil && !IsNil(o.Type) {
 		return true
 	}
 
@@ -277,34 +281,38 @@ func (o *StorageBaseDiskPool) SetType(v string) {
 }
 
 func (o StorageBaseDiskPool) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o StorageBaseDiskPool) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Name != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
 	}
-	if o.PoolId != nil {
+	if !IsNil(o.PoolId) {
 		toSerialize["PoolId"] = o.PoolId
 	}
-	if o.Status != nil {
+	if !IsNil(o.Status) {
 		toSerialize["Status"] = o.Status
 	}
 	if o.StorageUtilization.IsSet() {
 		toSerialize["StorageUtilization"] = o.StorageUtilization.Get()
 	}
-	if o.Type != nil {
+	if !IsNil(o.Type) {
 		toSerialize["Type"] = o.Type
 	}
 
@@ -312,10 +320,32 @@ func (o StorageBaseDiskPool) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *StorageBaseDiskPool) UnmarshalJSON(bytes []byte) (err error) {
+func (o *StorageBaseDiskPool) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type StorageBaseDiskPoolWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type.
 		ClassId string `json:"ClassId"`
@@ -334,7 +364,7 @@ func (o *StorageBaseDiskPool) UnmarshalJSON(bytes []byte) (err error) {
 
 	varStorageBaseDiskPoolWithoutEmbeddedStruct := StorageBaseDiskPoolWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varStorageBaseDiskPoolWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varStorageBaseDiskPoolWithoutEmbeddedStruct)
 	if err == nil {
 		varStorageBaseDiskPool := _StorageBaseDiskPool{}
 		varStorageBaseDiskPool.ClassId = varStorageBaseDiskPoolWithoutEmbeddedStruct.ClassId
@@ -351,7 +381,7 @@ func (o *StorageBaseDiskPool) UnmarshalJSON(bytes []byte) (err error) {
 
 	varStorageBaseDiskPool := _StorageBaseDiskPool{}
 
-	err = json.Unmarshal(bytes, &varStorageBaseDiskPool)
+	err = json.Unmarshal(data, &varStorageBaseDiskPool)
 	if err == nil {
 		o.MoBaseMo = varStorageBaseDiskPool.MoBaseMo
 	} else {
@@ -360,7 +390,7 @@ func (o *StorageBaseDiskPool) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Name")

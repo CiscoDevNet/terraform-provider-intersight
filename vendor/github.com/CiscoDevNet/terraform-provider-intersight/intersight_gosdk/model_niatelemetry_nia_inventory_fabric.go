@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the NiatelemetryNiaInventoryFabric type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &NiatelemetryNiaInventoryFabric{}
 
 // NiatelemetryNiaInventoryFabric Inventory Object available for Fabric-scoped attributes.
 type NiatelemetryNiaInventoryFabric struct {
@@ -123,8 +127,8 @@ type NiatelemetryNiaInventoryFabric struct {
 	// Returns deployed network count for bgw/bgws switches in the MSD fabric.
 	XsiteNetworkCount *int64 `json:"XsiteNetworkCount,omitempty"`
 	// Returns deployed vrf count for bgw/bgws switches in the MSD fabric.
-	XsiteVrfCount        *int64                               `json:"XsiteVrfCount,omitempty"`
-	RegisteredDevice     *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+	XsiteVrfCount        *int64                                      `json:"XsiteVrfCount,omitempty"`
+	RegisteredDevice     NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -203,7 +207,7 @@ func (o *NiatelemetryNiaInventoryFabric) SetObjectType(v string) {
 
 // GetAnycastGwMac returns the AnycastGwMac field value if set, zero value otherwise.
 func (o *NiatelemetryNiaInventoryFabric) GetAnycastGwMac() string {
-	if o == nil || o.AnycastGwMac == nil {
+	if o == nil || IsNil(o.AnycastGwMac) {
 		var ret string
 		return ret
 	}
@@ -213,7 +217,7 @@ func (o *NiatelemetryNiaInventoryFabric) GetAnycastGwMac() string {
 // GetAnycastGwMacOk returns a tuple with the AnycastGwMac field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryNiaInventoryFabric) GetAnycastGwMacOk() (*string, bool) {
-	if o == nil || o.AnycastGwMac == nil {
+	if o == nil || IsNil(o.AnycastGwMac) {
 		return nil, false
 	}
 	return o.AnycastGwMac, true
@@ -221,7 +225,7 @@ func (o *NiatelemetryNiaInventoryFabric) GetAnycastGwMacOk() (*string, bool) {
 
 // HasAnycastGwMac returns a boolean if a field has been set.
 func (o *NiatelemetryNiaInventoryFabric) HasAnycastGwMac() bool {
-	if o != nil && o.AnycastGwMac != nil {
+	if o != nil && !IsNil(o.AnycastGwMac) {
 		return true
 	}
 
@@ -235,7 +239,7 @@ func (o *NiatelemetryNiaInventoryFabric) SetAnycastGwMac(v string) {
 
 // GetBgpEstablishedInterfaceCount returns the BgpEstablishedInterfaceCount field value if set, zero value otherwise.
 func (o *NiatelemetryNiaInventoryFabric) GetBgpEstablishedInterfaceCount() int64 {
-	if o == nil || o.BgpEstablishedInterfaceCount == nil {
+	if o == nil || IsNil(o.BgpEstablishedInterfaceCount) {
 		var ret int64
 		return ret
 	}
@@ -245,7 +249,7 @@ func (o *NiatelemetryNiaInventoryFabric) GetBgpEstablishedInterfaceCount() int64
 // GetBgpEstablishedInterfaceCountOk returns a tuple with the BgpEstablishedInterfaceCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryNiaInventoryFabric) GetBgpEstablishedInterfaceCountOk() (*int64, bool) {
-	if o == nil || o.BgpEstablishedInterfaceCount == nil {
+	if o == nil || IsNil(o.BgpEstablishedInterfaceCount) {
 		return nil, false
 	}
 	return o.BgpEstablishedInterfaceCount, true
@@ -253,7 +257,7 @@ func (o *NiatelemetryNiaInventoryFabric) GetBgpEstablishedInterfaceCountOk() (*i
 
 // HasBgpEstablishedInterfaceCount returns a boolean if a field has been set.
 func (o *NiatelemetryNiaInventoryFabric) HasBgpEstablishedInterfaceCount() bool {
-	if o != nil && o.BgpEstablishedInterfaceCount != nil {
+	if o != nil && !IsNil(o.BgpEstablishedInterfaceCount) {
 		return true
 	}
 
@@ -267,7 +271,7 @@ func (o *NiatelemetryNiaInventoryFabric) SetBgpEstablishedInterfaceCount(v int64
 
 // GetBgwCount returns the BgwCount field value if set, zero value otherwise.
 func (o *NiatelemetryNiaInventoryFabric) GetBgwCount() int64 {
-	if o == nil || o.BgwCount == nil {
+	if o == nil || IsNil(o.BgwCount) {
 		var ret int64
 		return ret
 	}
@@ -277,7 +281,7 @@ func (o *NiatelemetryNiaInventoryFabric) GetBgwCount() int64 {
 // GetBgwCountOk returns a tuple with the BgwCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryNiaInventoryFabric) GetBgwCountOk() (*int64, bool) {
-	if o == nil || o.BgwCount == nil {
+	if o == nil || IsNil(o.BgwCount) {
 		return nil, false
 	}
 	return o.BgwCount, true
@@ -285,7 +289,7 @@ func (o *NiatelemetryNiaInventoryFabric) GetBgwCountOk() (*int64, bool) {
 
 // HasBgwCount returns a boolean if a field has been set.
 func (o *NiatelemetryNiaInventoryFabric) HasBgwCount() bool {
-	if o != nil && o.BgwCount != nil {
+	if o != nil && !IsNil(o.BgwCount) {
 		return true
 	}
 
@@ -299,7 +303,7 @@ func (o *NiatelemetryNiaInventoryFabric) SetBgwCount(v int64) {
 
 // GetBgwInterfaceUpCount returns the BgwInterfaceUpCount field value if set, zero value otherwise.
 func (o *NiatelemetryNiaInventoryFabric) GetBgwInterfaceUpCount() int64 {
-	if o == nil || o.BgwInterfaceUpCount == nil {
+	if o == nil || IsNil(o.BgwInterfaceUpCount) {
 		var ret int64
 		return ret
 	}
@@ -309,7 +313,7 @@ func (o *NiatelemetryNiaInventoryFabric) GetBgwInterfaceUpCount() int64 {
 // GetBgwInterfaceUpCountOk returns a tuple with the BgwInterfaceUpCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryNiaInventoryFabric) GetBgwInterfaceUpCountOk() (*int64, bool) {
-	if o == nil || o.BgwInterfaceUpCount == nil {
+	if o == nil || IsNil(o.BgwInterfaceUpCount) {
 		return nil, false
 	}
 	return o.BgwInterfaceUpCount, true
@@ -317,7 +321,7 @@ func (o *NiatelemetryNiaInventoryFabric) GetBgwInterfaceUpCountOk() (*int64, boo
 
 // HasBgwInterfaceUpCount returns a boolean if a field has been set.
 func (o *NiatelemetryNiaInventoryFabric) HasBgwInterfaceUpCount() bool {
-	if o != nil && o.BgwInterfaceUpCount != nil {
+	if o != nil && !IsNil(o.BgwInterfaceUpCount) {
 		return true
 	}
 
@@ -331,7 +335,7 @@ func (o *NiatelemetryNiaInventoryFabric) SetBgwInterfaceUpCount(v int64) {
 
 // GetBorderGatewaySpineCount returns the BorderGatewaySpineCount field value if set, zero value otherwise.
 func (o *NiatelemetryNiaInventoryFabric) GetBorderGatewaySpineCount() int64 {
-	if o == nil || o.BorderGatewaySpineCount == nil {
+	if o == nil || IsNil(o.BorderGatewaySpineCount) {
 		var ret int64
 		return ret
 	}
@@ -341,7 +345,7 @@ func (o *NiatelemetryNiaInventoryFabric) GetBorderGatewaySpineCount() int64 {
 // GetBorderGatewaySpineCountOk returns a tuple with the BorderGatewaySpineCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryNiaInventoryFabric) GetBorderGatewaySpineCountOk() (*int64, bool) {
-	if o == nil || o.BorderGatewaySpineCount == nil {
+	if o == nil || IsNil(o.BorderGatewaySpineCount) {
 		return nil, false
 	}
 	return o.BorderGatewaySpineCount, true
@@ -349,7 +353,7 @@ func (o *NiatelemetryNiaInventoryFabric) GetBorderGatewaySpineCountOk() (*int64,
 
 // HasBorderGatewaySpineCount returns a boolean if a field has been set.
 func (o *NiatelemetryNiaInventoryFabric) HasBorderGatewaySpineCount() bool {
-	if o != nil && o.BorderGatewaySpineCount != nil {
+	if o != nil && !IsNil(o.BorderGatewaySpineCount) {
 		return true
 	}
 
@@ -363,7 +367,7 @@ func (o *NiatelemetryNiaInventoryFabric) SetBorderGatewaySpineCount(v int64) {
 
 // GetBorderLeafCount returns the BorderLeafCount field value if set, zero value otherwise.
 func (o *NiatelemetryNiaInventoryFabric) GetBorderLeafCount() int64 {
-	if o == nil || o.BorderLeafCount == nil {
+	if o == nil || IsNil(o.BorderLeafCount) {
 		var ret int64
 		return ret
 	}
@@ -373,7 +377,7 @@ func (o *NiatelemetryNiaInventoryFabric) GetBorderLeafCount() int64 {
 // GetBorderLeafCountOk returns a tuple with the BorderLeafCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryNiaInventoryFabric) GetBorderLeafCountOk() (*int64, bool) {
-	if o == nil || o.BorderLeafCount == nil {
+	if o == nil || IsNil(o.BorderLeafCount) {
 		return nil, false
 	}
 	return o.BorderLeafCount, true
@@ -381,7 +385,7 @@ func (o *NiatelemetryNiaInventoryFabric) GetBorderLeafCountOk() (*int64, bool) {
 
 // HasBorderLeafCount returns a boolean if a field has been set.
 func (o *NiatelemetryNiaInventoryFabric) HasBorderLeafCount() bool {
-	if o != nil && o.BorderLeafCount != nil {
+	if o != nil && !IsNil(o.BorderLeafCount) {
 		return true
 	}
 
@@ -395,7 +399,7 @@ func (o *NiatelemetryNiaInventoryFabric) SetBorderLeafCount(v int64) {
 
 // GetCloudsecAutoconfig returns the CloudsecAutoconfig field value if set, zero value otherwise.
 func (o *NiatelemetryNiaInventoryFabric) GetCloudsecAutoconfig() bool {
-	if o == nil || o.CloudsecAutoconfig == nil {
+	if o == nil || IsNil(o.CloudsecAutoconfig) {
 		var ret bool
 		return ret
 	}
@@ -405,7 +409,7 @@ func (o *NiatelemetryNiaInventoryFabric) GetCloudsecAutoconfig() bool {
 // GetCloudsecAutoconfigOk returns a tuple with the CloudsecAutoconfig field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryNiaInventoryFabric) GetCloudsecAutoconfigOk() (*bool, bool) {
-	if o == nil || o.CloudsecAutoconfig == nil {
+	if o == nil || IsNil(o.CloudsecAutoconfig) {
 		return nil, false
 	}
 	return o.CloudsecAutoconfig, true
@@ -413,7 +417,7 @@ func (o *NiatelemetryNiaInventoryFabric) GetCloudsecAutoconfigOk() (*bool, bool)
 
 // HasCloudsecAutoconfig returns a boolean if a field has been set.
 func (o *NiatelemetryNiaInventoryFabric) HasCloudsecAutoconfig() bool {
-	if o != nil && o.CloudsecAutoconfig != nil {
+	if o != nil && !IsNil(o.CloudsecAutoconfig) {
 		return true
 	}
 
@@ -427,7 +431,7 @@ func (o *NiatelemetryNiaInventoryFabric) SetCloudsecAutoconfig(v bool) {
 
 // GetDciSubnetRange returns the DciSubnetRange field value if set, zero value otherwise.
 func (o *NiatelemetryNiaInventoryFabric) GetDciSubnetRange() string {
-	if o == nil || o.DciSubnetRange == nil {
+	if o == nil || IsNil(o.DciSubnetRange) {
 		var ret string
 		return ret
 	}
@@ -437,7 +441,7 @@ func (o *NiatelemetryNiaInventoryFabric) GetDciSubnetRange() string {
 // GetDciSubnetRangeOk returns a tuple with the DciSubnetRange field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryNiaInventoryFabric) GetDciSubnetRangeOk() (*string, bool) {
-	if o == nil || o.DciSubnetRange == nil {
+	if o == nil || IsNil(o.DciSubnetRange) {
 		return nil, false
 	}
 	return o.DciSubnetRange, true
@@ -445,7 +449,7 @@ func (o *NiatelemetryNiaInventoryFabric) GetDciSubnetRangeOk() (*string, bool) {
 
 // HasDciSubnetRange returns a boolean if a field has been set.
 func (o *NiatelemetryNiaInventoryFabric) HasDciSubnetRange() bool {
-	if o != nil && o.DciSubnetRange != nil {
+	if o != nil && !IsNil(o.DciSubnetRange) {
 		return true
 	}
 
@@ -459,7 +463,7 @@ func (o *NiatelemetryNiaInventoryFabric) SetDciSubnetRange(v string) {
 
 // GetDciSubnetTargetMask returns the DciSubnetTargetMask field value if set, zero value otherwise.
 func (o *NiatelemetryNiaInventoryFabric) GetDciSubnetTargetMask() string {
-	if o == nil || o.DciSubnetTargetMask == nil {
+	if o == nil || IsNil(o.DciSubnetTargetMask) {
 		var ret string
 		return ret
 	}
@@ -469,7 +473,7 @@ func (o *NiatelemetryNiaInventoryFabric) GetDciSubnetTargetMask() string {
 // GetDciSubnetTargetMaskOk returns a tuple with the DciSubnetTargetMask field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryNiaInventoryFabric) GetDciSubnetTargetMaskOk() (*string, bool) {
-	if o == nil || o.DciSubnetTargetMask == nil {
+	if o == nil || IsNil(o.DciSubnetTargetMask) {
 		return nil, false
 	}
 	return o.DciSubnetTargetMask, true
@@ -477,7 +481,7 @@ func (o *NiatelemetryNiaInventoryFabric) GetDciSubnetTargetMaskOk() (*string, bo
 
 // HasDciSubnetTargetMask returns a boolean if a field has been set.
 func (o *NiatelemetryNiaInventoryFabric) HasDciSubnetTargetMask() bool {
-	if o != nil && o.DciSubnetTargetMask != nil {
+	if o != nil && !IsNil(o.DciSubnetTargetMask) {
 		return true
 	}
 
@@ -491,7 +495,7 @@ func (o *NiatelemetryNiaInventoryFabric) SetDciSubnetTargetMask(v string) {
 
 // GetDcnmtrackerEnabled returns the DcnmtrackerEnabled field value if set, zero value otherwise.
 func (o *NiatelemetryNiaInventoryFabric) GetDcnmtrackerEnabled() bool {
-	if o == nil || o.DcnmtrackerEnabled == nil {
+	if o == nil || IsNil(o.DcnmtrackerEnabled) {
 		var ret bool
 		return ret
 	}
@@ -501,7 +505,7 @@ func (o *NiatelemetryNiaInventoryFabric) GetDcnmtrackerEnabled() bool {
 // GetDcnmtrackerEnabledOk returns a tuple with the DcnmtrackerEnabled field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryNiaInventoryFabric) GetDcnmtrackerEnabledOk() (*bool, bool) {
-	if o == nil || o.DcnmtrackerEnabled == nil {
+	if o == nil || IsNil(o.DcnmtrackerEnabled) {
 		return nil, false
 	}
 	return o.DcnmtrackerEnabled, true
@@ -509,7 +513,7 @@ func (o *NiatelemetryNiaInventoryFabric) GetDcnmtrackerEnabledOk() (*bool, bool)
 
 // HasDcnmtrackerEnabled returns a boolean if a field has been set.
 func (o *NiatelemetryNiaInventoryFabric) HasDcnmtrackerEnabled() bool {
-	if o != nil && o.DcnmtrackerEnabled != nil {
+	if o != nil && !IsNil(o.DcnmtrackerEnabled) {
 		return true
 	}
 
@@ -523,7 +527,7 @@ func (o *NiatelemetryNiaInventoryFabric) SetDcnmtrackerEnabled(v bool) {
 
 // GetEbgpEvpnLinkUpCount returns the EbgpEvpnLinkUpCount field value if set, zero value otherwise.
 func (o *NiatelemetryNiaInventoryFabric) GetEbgpEvpnLinkUpCount() int64 {
-	if o == nil || o.EbgpEvpnLinkUpCount == nil {
+	if o == nil || IsNil(o.EbgpEvpnLinkUpCount) {
 		var ret int64
 		return ret
 	}
@@ -533,7 +537,7 @@ func (o *NiatelemetryNiaInventoryFabric) GetEbgpEvpnLinkUpCount() int64 {
 // GetEbgpEvpnLinkUpCountOk returns a tuple with the EbgpEvpnLinkUpCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryNiaInventoryFabric) GetEbgpEvpnLinkUpCountOk() (*int64, bool) {
-	if o == nil || o.EbgpEvpnLinkUpCount == nil {
+	if o == nil || IsNil(o.EbgpEvpnLinkUpCount) {
 		return nil, false
 	}
 	return o.EbgpEvpnLinkUpCount, true
@@ -541,7 +545,7 @@ func (o *NiatelemetryNiaInventoryFabric) GetEbgpEvpnLinkUpCountOk() (*int64, boo
 
 // HasEbgpEvpnLinkUpCount returns a boolean if a field has been set.
 func (o *NiatelemetryNiaInventoryFabric) HasEbgpEvpnLinkUpCount() bool {
-	if o != nil && o.EbgpEvpnLinkUpCount != nil {
+	if o != nil && !IsNil(o.EbgpEvpnLinkUpCount) {
 		return true
 	}
 
@@ -555,7 +559,7 @@ func (o *NiatelemetryNiaInventoryFabric) SetEbgpEvpnLinkUpCount(v int64) {
 
 // GetFabricId returns the FabricId field value if set, zero value otherwise.
 func (o *NiatelemetryNiaInventoryFabric) GetFabricId() string {
-	if o == nil || o.FabricId == nil {
+	if o == nil || IsNil(o.FabricId) {
 		var ret string
 		return ret
 	}
@@ -565,7 +569,7 @@ func (o *NiatelemetryNiaInventoryFabric) GetFabricId() string {
 // GetFabricIdOk returns a tuple with the FabricId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryNiaInventoryFabric) GetFabricIdOk() (*string, bool) {
-	if o == nil || o.FabricId == nil {
+	if o == nil || IsNil(o.FabricId) {
 		return nil, false
 	}
 	return o.FabricId, true
@@ -573,7 +577,7 @@ func (o *NiatelemetryNiaInventoryFabric) GetFabricIdOk() (*string, bool) {
 
 // HasFabricId returns a boolean if a field has been set.
 func (o *NiatelemetryNiaInventoryFabric) HasFabricId() bool {
-	if o != nil && o.FabricId != nil {
+	if o != nil && !IsNil(o.FabricId) {
 		return true
 	}
 
@@ -587,7 +591,7 @@ func (o *NiatelemetryNiaInventoryFabric) SetFabricId(v string) {
 
 // GetFabricName returns the FabricName field value if set, zero value otherwise.
 func (o *NiatelemetryNiaInventoryFabric) GetFabricName() string {
-	if o == nil || o.FabricName == nil {
+	if o == nil || IsNil(o.FabricName) {
 		var ret string
 		return ret
 	}
@@ -597,7 +601,7 @@ func (o *NiatelemetryNiaInventoryFabric) GetFabricName() string {
 // GetFabricNameOk returns a tuple with the FabricName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryNiaInventoryFabric) GetFabricNameOk() (*string, bool) {
-	if o == nil || o.FabricName == nil {
+	if o == nil || IsNil(o.FabricName) {
 		return nil, false
 	}
 	return o.FabricName, true
@@ -605,7 +609,7 @@ func (o *NiatelemetryNiaInventoryFabric) GetFabricNameOk() (*string, bool) {
 
 // HasFabricName returns a boolean if a field has been set.
 func (o *NiatelemetryNiaInventoryFabric) HasFabricName() bool {
-	if o != nil && o.FabricName != nil {
+	if o != nil && !IsNil(o.FabricName) {
 		return true
 	}
 
@@ -619,7 +623,7 @@ func (o *NiatelemetryNiaInventoryFabric) SetFabricName(v string) {
 
 // GetFabricParent returns the FabricParent field value if set, zero value otherwise.
 func (o *NiatelemetryNiaInventoryFabric) GetFabricParent() string {
-	if o == nil || o.FabricParent == nil {
+	if o == nil || IsNil(o.FabricParent) {
 		var ret string
 		return ret
 	}
@@ -629,7 +633,7 @@ func (o *NiatelemetryNiaInventoryFabric) GetFabricParent() string {
 // GetFabricParentOk returns a tuple with the FabricParent field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryNiaInventoryFabric) GetFabricParentOk() (*string, bool) {
-	if o == nil || o.FabricParent == nil {
+	if o == nil || IsNil(o.FabricParent) {
 		return nil, false
 	}
 	return o.FabricParent, true
@@ -637,7 +641,7 @@ func (o *NiatelemetryNiaInventoryFabric) GetFabricParentOk() (*string, bool) {
 
 // HasFabricParent returns a boolean if a field has been set.
 func (o *NiatelemetryNiaInventoryFabric) HasFabricParent() bool {
-	if o != nil && o.FabricParent != nil {
+	if o != nil && !IsNil(o.FabricParent) {
 		return true
 	}
 
@@ -651,7 +655,7 @@ func (o *NiatelemetryNiaInventoryFabric) SetFabricParent(v string) {
 
 // GetFabricTechnology returns the FabricTechnology field value if set, zero value otherwise.
 func (o *NiatelemetryNiaInventoryFabric) GetFabricTechnology() string {
-	if o == nil || o.FabricTechnology == nil {
+	if o == nil || IsNil(o.FabricTechnology) {
 		var ret string
 		return ret
 	}
@@ -661,7 +665,7 @@ func (o *NiatelemetryNiaInventoryFabric) GetFabricTechnology() string {
 // GetFabricTechnologyOk returns a tuple with the FabricTechnology field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryNiaInventoryFabric) GetFabricTechnologyOk() (*string, bool) {
-	if o == nil || o.FabricTechnology == nil {
+	if o == nil || IsNil(o.FabricTechnology) {
 		return nil, false
 	}
 	return o.FabricTechnology, true
@@ -669,7 +673,7 @@ func (o *NiatelemetryNiaInventoryFabric) GetFabricTechnologyOk() (*string, bool)
 
 // HasFabricTechnology returns a boolean if a field has been set.
 func (o *NiatelemetryNiaInventoryFabric) HasFabricTechnology() bool {
-	if o != nil && o.FabricTechnology != nil {
+	if o != nil && !IsNil(o.FabricTechnology) {
 		return true
 	}
 
@@ -683,7 +687,7 @@ func (o *NiatelemetryNiaInventoryFabric) SetFabricTechnology(v string) {
 
 // GetFabricType returns the FabricType field value if set, zero value otherwise.
 func (o *NiatelemetryNiaInventoryFabric) GetFabricType() string {
-	if o == nil || o.FabricType == nil {
+	if o == nil || IsNil(o.FabricType) {
 		var ret string
 		return ret
 	}
@@ -693,7 +697,7 @@ func (o *NiatelemetryNiaInventoryFabric) GetFabricType() string {
 // GetFabricTypeOk returns a tuple with the FabricType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryNiaInventoryFabric) GetFabricTypeOk() (*string, bool) {
-	if o == nil || o.FabricType == nil {
+	if o == nil || IsNil(o.FabricType) {
 		return nil, false
 	}
 	return o.FabricType, true
@@ -701,7 +705,7 @@ func (o *NiatelemetryNiaInventoryFabric) GetFabricTypeOk() (*string, bool) {
 
 // HasFabricType returns a boolean if a field has been set.
 func (o *NiatelemetryNiaInventoryFabric) HasFabricType() bool {
-	if o != nil && o.FabricType != nil {
+	if o != nil && !IsNil(o.FabricType) {
 		return true
 	}
 
@@ -715,7 +719,7 @@ func (o *NiatelemetryNiaInventoryFabric) SetFabricType(v string) {
 
 // GetFeaturePtp returns the FeaturePtp field value if set, zero value otherwise.
 func (o *NiatelemetryNiaInventoryFabric) GetFeaturePtp() string {
-	if o == nil || o.FeaturePtp == nil {
+	if o == nil || IsNil(o.FeaturePtp) {
 		var ret string
 		return ret
 	}
@@ -725,7 +729,7 @@ func (o *NiatelemetryNiaInventoryFabric) GetFeaturePtp() string {
 // GetFeaturePtpOk returns a tuple with the FeaturePtp field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryNiaInventoryFabric) GetFeaturePtpOk() (*string, bool) {
-	if o == nil || o.FeaturePtp == nil {
+	if o == nil || IsNil(o.FeaturePtp) {
 		return nil, false
 	}
 	return o.FeaturePtp, true
@@ -733,7 +737,7 @@ func (o *NiatelemetryNiaInventoryFabric) GetFeaturePtpOk() (*string, bool) {
 
 // HasFeaturePtp returns a boolean if a field has been set.
 func (o *NiatelemetryNiaInventoryFabric) HasFeaturePtp() bool {
-	if o != nil && o.FeaturePtp != nil {
+	if o != nil && !IsNil(o.FeaturePtp) {
 		return true
 	}
 
@@ -747,7 +751,7 @@ func (o *NiatelemetryNiaInventoryFabric) SetFeaturePtp(v string) {
 
 // GetIsBgwPresent returns the IsBgwPresent field value if set, zero value otherwise.
 func (o *NiatelemetryNiaInventoryFabric) GetIsBgwPresent() bool {
-	if o == nil || o.IsBgwPresent == nil {
+	if o == nil || IsNil(o.IsBgwPresent) {
 		var ret bool
 		return ret
 	}
@@ -757,7 +761,7 @@ func (o *NiatelemetryNiaInventoryFabric) GetIsBgwPresent() bool {
 // GetIsBgwPresentOk returns a tuple with the IsBgwPresent field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryNiaInventoryFabric) GetIsBgwPresentOk() (*bool, bool) {
-	if o == nil || o.IsBgwPresent == nil {
+	if o == nil || IsNil(o.IsBgwPresent) {
 		return nil, false
 	}
 	return o.IsBgwPresent, true
@@ -765,7 +769,7 @@ func (o *NiatelemetryNiaInventoryFabric) GetIsBgwPresentOk() (*bool, bool) {
 
 // HasIsBgwPresent returns a boolean if a field has been set.
 func (o *NiatelemetryNiaInventoryFabric) HasIsBgwPresent() bool {
-	if o != nil && o.IsBgwPresent != nil {
+	if o != nil && !IsNil(o.IsBgwPresent) {
 		return true
 	}
 
@@ -779,7 +783,7 @@ func (o *NiatelemetryNiaInventoryFabric) SetIsBgwPresent(v bool) {
 
 // GetIsEnableNxapiHttp returns the IsEnableNxapiHttp field value if set, zero value otherwise.
 func (o *NiatelemetryNiaInventoryFabric) GetIsEnableNxapiHttp() bool {
-	if o == nil || o.IsEnableNxapiHttp == nil {
+	if o == nil || IsNil(o.IsEnableNxapiHttp) {
 		var ret bool
 		return ret
 	}
@@ -789,7 +793,7 @@ func (o *NiatelemetryNiaInventoryFabric) GetIsEnableNxapiHttp() bool {
 // GetIsEnableNxapiHttpOk returns a tuple with the IsEnableNxapiHttp field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryNiaInventoryFabric) GetIsEnableNxapiHttpOk() (*bool, bool) {
-	if o == nil || o.IsEnableNxapiHttp == nil {
+	if o == nil || IsNil(o.IsEnableNxapiHttp) {
 		return nil, false
 	}
 	return o.IsEnableNxapiHttp, true
@@ -797,7 +801,7 @@ func (o *NiatelemetryNiaInventoryFabric) GetIsEnableNxapiHttpOk() (*bool, bool) 
 
 // HasIsEnableNxapiHttp returns a boolean if a field has been set.
 func (o *NiatelemetryNiaInventoryFabric) HasIsEnableNxapiHttp() bool {
-	if o != nil && o.IsEnableNxapiHttp != nil {
+	if o != nil && !IsNil(o.IsEnableNxapiHttp) {
 		return true
 	}
 
@@ -811,7 +815,7 @@ func (o *NiatelemetryNiaInventoryFabric) SetIsEnableNxapiHttp(v bool) {
 
 // GetIsEnableRealTimeBackup returns the IsEnableRealTimeBackup field value if set, zero value otherwise.
 func (o *NiatelemetryNiaInventoryFabric) GetIsEnableRealTimeBackup() bool {
-	if o == nil || o.IsEnableRealTimeBackup == nil {
+	if o == nil || IsNil(o.IsEnableRealTimeBackup) {
 		var ret bool
 		return ret
 	}
@@ -821,7 +825,7 @@ func (o *NiatelemetryNiaInventoryFabric) GetIsEnableRealTimeBackup() bool {
 // GetIsEnableRealTimeBackupOk returns a tuple with the IsEnableRealTimeBackup field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryNiaInventoryFabric) GetIsEnableRealTimeBackupOk() (*bool, bool) {
-	if o == nil || o.IsEnableRealTimeBackup == nil {
+	if o == nil || IsNil(o.IsEnableRealTimeBackup) {
 		return nil, false
 	}
 	return o.IsEnableRealTimeBackup, true
@@ -829,7 +833,7 @@ func (o *NiatelemetryNiaInventoryFabric) GetIsEnableRealTimeBackupOk() (*bool, b
 
 // HasIsEnableRealTimeBackup returns a boolean if a field has been set.
 func (o *NiatelemetryNiaInventoryFabric) HasIsEnableRealTimeBackup() bool {
-	if o != nil && o.IsEnableRealTimeBackup != nil {
+	if o != nil && !IsNil(o.IsEnableRealTimeBackup) {
 		return true
 	}
 
@@ -843,7 +847,7 @@ func (o *NiatelemetryNiaInventoryFabric) SetIsEnableRealTimeBackup(v bool) {
 
 // GetIsNgoamEnabled returns the IsNgoamEnabled field value if set, zero value otherwise.
 func (o *NiatelemetryNiaInventoryFabric) GetIsNgoamEnabled() bool {
-	if o == nil || o.IsNgoamEnabled == nil {
+	if o == nil || IsNil(o.IsNgoamEnabled) {
 		var ret bool
 		return ret
 	}
@@ -853,7 +857,7 @@ func (o *NiatelemetryNiaInventoryFabric) GetIsNgoamEnabled() bool {
 // GetIsNgoamEnabledOk returns a tuple with the IsNgoamEnabled field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryNiaInventoryFabric) GetIsNgoamEnabledOk() (*bool, bool) {
-	if o == nil || o.IsNgoamEnabled == nil {
+	if o == nil || IsNil(o.IsNgoamEnabled) {
 		return nil, false
 	}
 	return o.IsNgoamEnabled, true
@@ -861,7 +865,7 @@ func (o *NiatelemetryNiaInventoryFabric) GetIsNgoamEnabledOk() (*bool, bool) {
 
 // HasIsNgoamEnabled returns a boolean if a field has been set.
 func (o *NiatelemetryNiaInventoryFabric) HasIsNgoamEnabled() bool {
-	if o != nil && o.IsNgoamEnabled != nil {
+	if o != nil && !IsNil(o.IsNgoamEnabled) {
 		return true
 	}
 
@@ -875,7 +879,7 @@ func (o *NiatelemetryNiaInventoryFabric) SetIsNgoamEnabled(v bool) {
 
 // GetIsScheduledBackUpEnabled returns the IsScheduledBackUpEnabled field value if set, zero value otherwise.
 func (o *NiatelemetryNiaInventoryFabric) GetIsScheduledBackUpEnabled() bool {
-	if o == nil || o.IsScheduledBackUpEnabled == nil {
+	if o == nil || IsNil(o.IsScheduledBackUpEnabled) {
 		var ret bool
 		return ret
 	}
@@ -885,7 +889,7 @@ func (o *NiatelemetryNiaInventoryFabric) GetIsScheduledBackUpEnabled() bool {
 // GetIsScheduledBackUpEnabledOk returns a tuple with the IsScheduledBackUpEnabled field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryNiaInventoryFabric) GetIsScheduledBackUpEnabledOk() (*bool, bool) {
-	if o == nil || o.IsScheduledBackUpEnabled == nil {
+	if o == nil || IsNil(o.IsScheduledBackUpEnabled) {
 		return nil, false
 	}
 	return o.IsScheduledBackUpEnabled, true
@@ -893,7 +897,7 @@ func (o *NiatelemetryNiaInventoryFabric) GetIsScheduledBackUpEnabledOk() (*bool,
 
 // HasIsScheduledBackUpEnabled returns a boolean if a field has been set.
 func (o *NiatelemetryNiaInventoryFabric) HasIsScheduledBackUpEnabled() bool {
-	if o != nil && o.IsScheduledBackUpEnabled != nil {
+	if o != nil && !IsNil(o.IsScheduledBackUpEnabled) {
 		return true
 	}
 
@@ -907,7 +911,7 @@ func (o *NiatelemetryNiaInventoryFabric) SetIsScheduledBackUpEnabled(v bool) {
 
 // GetIsTrmEnabled returns the IsTrmEnabled field value if set, zero value otherwise.
 func (o *NiatelemetryNiaInventoryFabric) GetIsTrmEnabled() bool {
-	if o == nil || o.IsTrmEnabled == nil {
+	if o == nil || IsNil(o.IsTrmEnabled) {
 		var ret bool
 		return ret
 	}
@@ -917,7 +921,7 @@ func (o *NiatelemetryNiaInventoryFabric) GetIsTrmEnabled() bool {
 // GetIsTrmEnabledOk returns a tuple with the IsTrmEnabled field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryNiaInventoryFabric) GetIsTrmEnabledOk() (*bool, bool) {
-	if o == nil || o.IsTrmEnabled == nil {
+	if o == nil || IsNil(o.IsTrmEnabled) {
 		return nil, false
 	}
 	return o.IsTrmEnabled, true
@@ -925,7 +929,7 @@ func (o *NiatelemetryNiaInventoryFabric) GetIsTrmEnabledOk() (*bool, bool) {
 
 // HasIsTrmEnabled returns a boolean if a field has been set.
 func (o *NiatelemetryNiaInventoryFabric) HasIsTrmEnabled() bool {
-	if o != nil && o.IsTrmEnabled != nil {
+	if o != nil && !IsNil(o.IsTrmEnabled) {
 		return true
 	}
 
@@ -939,7 +943,7 @@ func (o *NiatelemetryNiaInventoryFabric) SetIsTrmEnabled(v bool) {
 
 // GetLeafCount returns the LeafCount field value if set, zero value otherwise.
 func (o *NiatelemetryNiaInventoryFabric) GetLeafCount() int64 {
-	if o == nil || o.LeafCount == nil {
+	if o == nil || IsNil(o.LeafCount) {
 		var ret int64
 		return ret
 	}
@@ -949,7 +953,7 @@ func (o *NiatelemetryNiaInventoryFabric) GetLeafCount() int64 {
 // GetLeafCountOk returns a tuple with the LeafCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryNiaInventoryFabric) GetLeafCountOk() (*int64, bool) {
-	if o == nil || o.LeafCount == nil {
+	if o == nil || IsNil(o.LeafCount) {
 		return nil, false
 	}
 	return o.LeafCount, true
@@ -957,7 +961,7 @@ func (o *NiatelemetryNiaInventoryFabric) GetLeafCountOk() (*int64, bool) {
 
 // HasLeafCount returns a boolean if a field has been set.
 func (o *NiatelemetryNiaInventoryFabric) HasLeafCount() bool {
-	if o != nil && o.LeafCount != nil {
+	if o != nil && !IsNil(o.LeafCount) {
 		return true
 	}
 
@@ -971,7 +975,7 @@ func (o *NiatelemetryNiaInventoryFabric) SetLeafCount(v int64) {
 
 // GetLinkStateRouting returns the LinkStateRouting field value if set, zero value otherwise.
 func (o *NiatelemetryNiaInventoryFabric) GetLinkStateRouting() string {
-	if o == nil || o.LinkStateRouting == nil {
+	if o == nil || IsNil(o.LinkStateRouting) {
 		var ret string
 		return ret
 	}
@@ -981,7 +985,7 @@ func (o *NiatelemetryNiaInventoryFabric) GetLinkStateRouting() string {
 // GetLinkStateRoutingOk returns a tuple with the LinkStateRouting field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryNiaInventoryFabric) GetLinkStateRoutingOk() (*string, bool) {
-	if o == nil || o.LinkStateRouting == nil {
+	if o == nil || IsNil(o.LinkStateRouting) {
 		return nil, false
 	}
 	return o.LinkStateRouting, true
@@ -989,7 +993,7 @@ func (o *NiatelemetryNiaInventoryFabric) GetLinkStateRoutingOk() (*string, bool)
 
 // HasLinkStateRouting returns a boolean if a field has been set.
 func (o *NiatelemetryNiaInventoryFabric) HasLinkStateRouting() bool {
-	if o != nil && o.LinkStateRouting != nil {
+	if o != nil && !IsNil(o.LinkStateRouting) {
 		return true
 	}
 
@@ -1003,7 +1007,7 @@ func (o *NiatelemetryNiaInventoryFabric) SetLinkStateRouting(v string) {
 
 // GetLinkType returns the LinkType field value if set, zero value otherwise.
 func (o *NiatelemetryNiaInventoryFabric) GetLinkType() string {
-	if o == nil || o.LinkType == nil {
+	if o == nil || IsNil(o.LinkType) {
 		var ret string
 		return ret
 	}
@@ -1013,7 +1017,7 @@ func (o *NiatelemetryNiaInventoryFabric) GetLinkType() string {
 // GetLinkTypeOk returns a tuple with the LinkType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryNiaInventoryFabric) GetLinkTypeOk() (*string, bool) {
-	if o == nil || o.LinkType == nil {
+	if o == nil || IsNil(o.LinkType) {
 		return nil, false
 	}
 	return o.LinkType, true
@@ -1021,7 +1025,7 @@ func (o *NiatelemetryNiaInventoryFabric) GetLinkTypeOk() (*string, bool) {
 
 // HasLinkType returns a boolean if a field has been set.
 func (o *NiatelemetryNiaInventoryFabric) HasLinkType() bool {
-	if o != nil && o.LinkType != nil {
+	if o != nil && !IsNil(o.LinkType) {
 		return true
 	}
 
@@ -1046,7 +1050,7 @@ func (o *NiatelemetryNiaInventoryFabric) GetLogicalLinks() []NiatelemetryLogical
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *NiatelemetryNiaInventoryFabric) GetLogicalLinksOk() ([]NiatelemetryLogicalLink, bool) {
-	if o == nil || o.LogicalLinks == nil {
+	if o == nil || IsNil(o.LogicalLinks) {
 		return nil, false
 	}
 	return o.LogicalLinks, true
@@ -1054,7 +1058,7 @@ func (o *NiatelemetryNiaInventoryFabric) GetLogicalLinksOk() ([]NiatelemetryLogi
 
 // HasLogicalLinks returns a boolean if a field has been set.
 func (o *NiatelemetryNiaInventoryFabric) HasLogicalLinks() bool {
-	if o != nil && o.LogicalLinks != nil {
+	if o != nil && IsNil(o.LogicalLinks) {
 		return true
 	}
 
@@ -1068,7 +1072,7 @@ func (o *NiatelemetryNiaInventoryFabric) SetLogicalLinks(v []NiatelemetryLogical
 
 // GetNetworkDeploymentCount returns the NetworkDeploymentCount field value if set, zero value otherwise.
 func (o *NiatelemetryNiaInventoryFabric) GetNetworkDeploymentCount() int64 {
-	if o == nil || o.NetworkDeploymentCount == nil {
+	if o == nil || IsNil(o.NetworkDeploymentCount) {
 		var ret int64
 		return ret
 	}
@@ -1078,7 +1082,7 @@ func (o *NiatelemetryNiaInventoryFabric) GetNetworkDeploymentCount() int64 {
 // GetNetworkDeploymentCountOk returns a tuple with the NetworkDeploymentCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryNiaInventoryFabric) GetNetworkDeploymentCountOk() (*int64, bool) {
-	if o == nil || o.NetworkDeploymentCount == nil {
+	if o == nil || IsNil(o.NetworkDeploymentCount) {
 		return nil, false
 	}
 	return o.NetworkDeploymentCount, true
@@ -1086,7 +1090,7 @@ func (o *NiatelemetryNiaInventoryFabric) GetNetworkDeploymentCountOk() (*int64, 
 
 // HasNetworkDeploymentCount returns a boolean if a field has been set.
 func (o *NiatelemetryNiaInventoryFabric) HasNetworkDeploymentCount() bool {
-	if o != nil && o.NetworkDeploymentCount != nil {
+	if o != nil && !IsNil(o.NetworkDeploymentCount) {
 		return true
 	}
 
@@ -1111,7 +1115,7 @@ func (o *NiatelemetryNiaInventoryFabric) GetNetworkDeploymentStatus() []Niatelem
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *NiatelemetryNiaInventoryFabric) GetNetworkDeploymentStatusOk() ([]NiatelemetryDeploymentStatus, bool) {
-	if o == nil || o.NetworkDeploymentStatus == nil {
+	if o == nil || IsNil(o.NetworkDeploymentStatus) {
 		return nil, false
 	}
 	return o.NetworkDeploymentStatus, true
@@ -1119,7 +1123,7 @@ func (o *NiatelemetryNiaInventoryFabric) GetNetworkDeploymentStatusOk() ([]Niate
 
 // HasNetworkDeploymentStatus returns a boolean if a field has been set.
 func (o *NiatelemetryNiaInventoryFabric) HasNetworkDeploymentStatus() bool {
-	if o != nil && o.NetworkDeploymentStatus != nil {
+	if o != nil && IsNil(o.NetworkDeploymentStatus) {
 		return true
 	}
 
@@ -1133,7 +1137,7 @@ func (o *NiatelemetryNiaInventoryFabric) SetNetworkDeploymentStatus(v []Niatelem
 
 // GetNtpServerIpList returns the NtpServerIpList field value if set, zero value otherwise.
 func (o *NiatelemetryNiaInventoryFabric) GetNtpServerIpList() string {
-	if o == nil || o.NtpServerIpList == nil {
+	if o == nil || IsNil(o.NtpServerIpList) {
 		var ret string
 		return ret
 	}
@@ -1143,7 +1147,7 @@ func (o *NiatelemetryNiaInventoryFabric) GetNtpServerIpList() string {
 // GetNtpServerIpListOk returns a tuple with the NtpServerIpList field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryNiaInventoryFabric) GetNtpServerIpListOk() (*string, bool) {
-	if o == nil || o.NtpServerIpList == nil {
+	if o == nil || IsNil(o.NtpServerIpList) {
 		return nil, false
 	}
 	return o.NtpServerIpList, true
@@ -1151,7 +1155,7 @@ func (o *NiatelemetryNiaInventoryFabric) GetNtpServerIpListOk() (*string, bool) 
 
 // HasNtpServerIpList returns a boolean if a field has been set.
 func (o *NiatelemetryNiaInventoryFabric) HasNtpServerIpList() bool {
-	if o != nil && o.NtpServerIpList != nil {
+	if o != nil && !IsNil(o.NtpServerIpList) {
 		return true
 	}
 
@@ -1165,7 +1169,7 @@ func (o *NiatelemetryNiaInventoryFabric) SetNtpServerIpList(v string) {
 
 // GetNxosVniBwSitesCount returns the NxosVniBwSitesCount field value if set, zero value otherwise.
 func (o *NiatelemetryNiaInventoryFabric) GetNxosVniBwSitesCount() int64 {
-	if o == nil || o.NxosVniBwSitesCount == nil {
+	if o == nil || IsNil(o.NxosVniBwSitesCount) {
 		var ret int64
 		return ret
 	}
@@ -1175,7 +1179,7 @@ func (o *NiatelemetryNiaInventoryFabric) GetNxosVniBwSitesCount() int64 {
 // GetNxosVniBwSitesCountOk returns a tuple with the NxosVniBwSitesCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryNiaInventoryFabric) GetNxosVniBwSitesCountOk() (*int64, bool) {
-	if o == nil || o.NxosVniBwSitesCount == nil {
+	if o == nil || IsNil(o.NxosVniBwSitesCount) {
 		return nil, false
 	}
 	return o.NxosVniBwSitesCount, true
@@ -1183,7 +1187,7 @@ func (o *NiatelemetryNiaInventoryFabric) GetNxosVniBwSitesCountOk() (*int64, boo
 
 // HasNxosVniBwSitesCount returns a boolean if a field has been set.
 func (o *NiatelemetryNiaInventoryFabric) HasNxosVniBwSitesCount() bool {
-	if o != nil && o.NxosVniBwSitesCount != nil {
+	if o != nil && !IsNil(o.NxosVniBwSitesCount) {
 		return true
 	}
 
@@ -1197,7 +1201,7 @@ func (o *NiatelemetryNiaInventoryFabric) SetNxosVniBwSitesCount(v int64) {
 
 // GetNxosVrfBwSitesCount returns the NxosVrfBwSitesCount field value if set, zero value otherwise.
 func (o *NiatelemetryNiaInventoryFabric) GetNxosVrfBwSitesCount() int64 {
-	if o == nil || o.NxosVrfBwSitesCount == nil {
+	if o == nil || IsNil(o.NxosVrfBwSitesCount) {
 		var ret int64
 		return ret
 	}
@@ -1207,7 +1211,7 @@ func (o *NiatelemetryNiaInventoryFabric) GetNxosVrfBwSitesCount() int64 {
 // GetNxosVrfBwSitesCountOk returns a tuple with the NxosVrfBwSitesCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryNiaInventoryFabric) GetNxosVrfBwSitesCountOk() (*int64, bool) {
-	if o == nil || o.NxosVrfBwSitesCount == nil {
+	if o == nil || IsNil(o.NxosVrfBwSitesCount) {
 		return nil, false
 	}
 	return o.NxosVrfBwSitesCount, true
@@ -1215,7 +1219,7 @@ func (o *NiatelemetryNiaInventoryFabric) GetNxosVrfBwSitesCountOk() (*int64, boo
 
 // HasNxosVrfBwSitesCount returns a boolean if a field has been set.
 func (o *NiatelemetryNiaInventoryFabric) HasNxosVrfBwSitesCount() bool {
-	if o != nil && o.NxosVrfBwSitesCount != nil {
+	if o != nil && !IsNil(o.NxosVrfBwSitesCount) {
 		return true
 	}
 
@@ -1229,7 +1233,7 @@ func (o *NiatelemetryNiaInventoryFabric) SetNxosVrfBwSitesCount(v int64) {
 
 // GetNxosVrfCount returns the NxosVrfCount field value if set, zero value otherwise.
 func (o *NiatelemetryNiaInventoryFabric) GetNxosVrfCount() int64 {
-	if o == nil || o.NxosVrfCount == nil {
+	if o == nil || IsNil(o.NxosVrfCount) {
 		var ret int64
 		return ret
 	}
@@ -1239,7 +1243,7 @@ func (o *NiatelemetryNiaInventoryFabric) GetNxosVrfCount() int64 {
 // GetNxosVrfCountOk returns a tuple with the NxosVrfCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryNiaInventoryFabric) GetNxosVrfCountOk() (*int64, bool) {
-	if o == nil || o.NxosVrfCount == nil {
+	if o == nil || IsNil(o.NxosVrfCount) {
 		return nil, false
 	}
 	return o.NxosVrfCount, true
@@ -1247,7 +1251,7 @@ func (o *NiatelemetryNiaInventoryFabric) GetNxosVrfCountOk() (*int64, bool) {
 
 // HasNxosVrfCount returns a boolean if a field has been set.
 func (o *NiatelemetryNiaInventoryFabric) HasNxosVrfCount() bool {
-	if o != nil && o.NxosVrfCount != nil {
+	if o != nil && !IsNil(o.NxosVrfCount) {
 		return true
 	}
 
@@ -1261,7 +1265,7 @@ func (o *NiatelemetryNiaInventoryFabric) SetNxosVrfCount(v int64) {
 
 // GetOperStatus returns the OperStatus field value if set, zero value otherwise.
 func (o *NiatelemetryNiaInventoryFabric) GetOperStatus() string {
-	if o == nil || o.OperStatus == nil {
+	if o == nil || IsNil(o.OperStatus) {
 		var ret string
 		return ret
 	}
@@ -1271,7 +1275,7 @@ func (o *NiatelemetryNiaInventoryFabric) GetOperStatus() string {
 // GetOperStatusOk returns a tuple with the OperStatus field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryNiaInventoryFabric) GetOperStatusOk() (*string, bool) {
-	if o == nil || o.OperStatus == nil {
+	if o == nil || IsNil(o.OperStatus) {
 		return nil, false
 	}
 	return o.OperStatus, true
@@ -1279,7 +1283,7 @@ func (o *NiatelemetryNiaInventoryFabric) GetOperStatusOk() (*string, bool) {
 
 // HasOperStatus returns a boolean if a field has been set.
 func (o *NiatelemetryNiaInventoryFabric) HasOperStatus() bool {
-	if o != nil && o.OperStatus != nil {
+	if o != nil && !IsNil(o.OperStatus) {
 		return true
 	}
 
@@ -1293,7 +1297,7 @@ func (o *NiatelemetryNiaInventoryFabric) SetOperStatus(v string) {
 
 // GetRecordType returns the RecordType field value if set, zero value otherwise.
 func (o *NiatelemetryNiaInventoryFabric) GetRecordType() string {
-	if o == nil || o.RecordType == nil {
+	if o == nil || IsNil(o.RecordType) {
 		var ret string
 		return ret
 	}
@@ -1303,7 +1307,7 @@ func (o *NiatelemetryNiaInventoryFabric) GetRecordType() string {
 // GetRecordTypeOk returns a tuple with the RecordType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryNiaInventoryFabric) GetRecordTypeOk() (*string, bool) {
-	if o == nil || o.RecordType == nil {
+	if o == nil || IsNil(o.RecordType) {
 		return nil, false
 	}
 	return o.RecordType, true
@@ -1311,7 +1315,7 @@ func (o *NiatelemetryNiaInventoryFabric) GetRecordTypeOk() (*string, bool) {
 
 // HasRecordType returns a boolean if a field has been set.
 func (o *NiatelemetryNiaInventoryFabric) HasRecordType() bool {
-	if o != nil && o.RecordType != nil {
+	if o != nil && !IsNil(o.RecordType) {
 		return true
 	}
 
@@ -1325,7 +1329,7 @@ func (o *NiatelemetryNiaInventoryFabric) SetRecordType(v string) {
 
 // GetRecordVersion returns the RecordVersion field value if set, zero value otherwise.
 func (o *NiatelemetryNiaInventoryFabric) GetRecordVersion() string {
-	if o == nil || o.RecordVersion == nil {
+	if o == nil || IsNil(o.RecordVersion) {
 		var ret string
 		return ret
 	}
@@ -1335,7 +1339,7 @@ func (o *NiatelemetryNiaInventoryFabric) GetRecordVersion() string {
 // GetRecordVersionOk returns a tuple with the RecordVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryNiaInventoryFabric) GetRecordVersionOk() (*string, bool) {
-	if o == nil || o.RecordVersion == nil {
+	if o == nil || IsNil(o.RecordVersion) {
 		return nil, false
 	}
 	return o.RecordVersion, true
@@ -1343,7 +1347,7 @@ func (o *NiatelemetryNiaInventoryFabric) GetRecordVersionOk() (*string, bool) {
 
 // HasRecordVersion returns a boolean if a field has been set.
 func (o *NiatelemetryNiaInventoryFabric) HasRecordVersion() bool {
-	if o != nil && o.RecordVersion != nil {
+	if o != nil && !IsNil(o.RecordVersion) {
 		return true
 	}
 
@@ -1357,7 +1361,7 @@ func (o *NiatelemetryNiaInventoryFabric) SetRecordVersion(v string) {
 
 // GetReplicationMode returns the ReplicationMode field value if set, zero value otherwise.
 func (o *NiatelemetryNiaInventoryFabric) GetReplicationMode() string {
-	if o == nil || o.ReplicationMode == nil {
+	if o == nil || IsNil(o.ReplicationMode) {
 		var ret string
 		return ret
 	}
@@ -1367,7 +1371,7 @@ func (o *NiatelemetryNiaInventoryFabric) GetReplicationMode() string {
 // GetReplicationModeOk returns a tuple with the ReplicationMode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryNiaInventoryFabric) GetReplicationModeOk() (*string, bool) {
-	if o == nil || o.ReplicationMode == nil {
+	if o == nil || IsNil(o.ReplicationMode) {
 		return nil, false
 	}
 	return o.ReplicationMode, true
@@ -1375,7 +1379,7 @@ func (o *NiatelemetryNiaInventoryFabric) GetReplicationModeOk() (*string, bool) 
 
 // HasReplicationMode returns a boolean if a field has been set.
 func (o *NiatelemetryNiaInventoryFabric) HasReplicationMode() bool {
-	if o != nil && o.ReplicationMode != nil {
+	if o != nil && !IsNil(o.ReplicationMode) {
 		return true
 	}
 
@@ -1389,7 +1393,7 @@ func (o *NiatelemetryNiaInventoryFabric) SetReplicationMode(v string) {
 
 // GetRpMode returns the RpMode field value if set, zero value otherwise.
 func (o *NiatelemetryNiaInventoryFabric) GetRpMode() string {
-	if o == nil || o.RpMode == nil {
+	if o == nil || IsNil(o.RpMode) {
 		var ret string
 		return ret
 	}
@@ -1399,7 +1403,7 @@ func (o *NiatelemetryNiaInventoryFabric) GetRpMode() string {
 // GetRpModeOk returns a tuple with the RpMode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryNiaInventoryFabric) GetRpModeOk() (*string, bool) {
-	if o == nil || o.RpMode == nil {
+	if o == nil || IsNil(o.RpMode) {
 		return nil, false
 	}
 	return o.RpMode, true
@@ -1407,7 +1411,7 @@ func (o *NiatelemetryNiaInventoryFabric) GetRpModeOk() (*string, bool) {
 
 // HasRpMode returns a boolean if a field has been set.
 func (o *NiatelemetryNiaInventoryFabric) HasRpMode() bool {
-	if o != nil && o.RpMode != nil {
+	if o != nil && !IsNil(o.RpMode) {
 		return true
 	}
 
@@ -1421,7 +1425,7 @@ func (o *NiatelemetryNiaInventoryFabric) SetRpMode(v string) {
 
 // GetSerial returns the Serial field value if set, zero value otherwise.
 func (o *NiatelemetryNiaInventoryFabric) GetSerial() string {
-	if o == nil || o.Serial == nil {
+	if o == nil || IsNil(o.Serial) {
 		var ret string
 		return ret
 	}
@@ -1431,7 +1435,7 @@ func (o *NiatelemetryNiaInventoryFabric) GetSerial() string {
 // GetSerialOk returns a tuple with the Serial field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryNiaInventoryFabric) GetSerialOk() (*string, bool) {
-	if o == nil || o.Serial == nil {
+	if o == nil || IsNil(o.Serial) {
 		return nil, false
 	}
 	return o.Serial, true
@@ -1439,7 +1443,7 @@ func (o *NiatelemetryNiaInventoryFabric) GetSerialOk() (*string, bool) {
 
 // HasSerial returns a boolean if a field has been set.
 func (o *NiatelemetryNiaInventoryFabric) HasSerial() bool {
-	if o != nil && o.Serial != nil {
+	if o != nil && !IsNil(o.Serial) {
 		return true
 	}
 
@@ -1453,7 +1457,7 @@ func (o *NiatelemetryNiaInventoryFabric) SetSerial(v string) {
 
 // GetSiteName returns the SiteName field value if set, zero value otherwise.
 func (o *NiatelemetryNiaInventoryFabric) GetSiteName() string {
-	if o == nil || o.SiteName == nil {
+	if o == nil || IsNil(o.SiteName) {
 		var ret string
 		return ret
 	}
@@ -1463,7 +1467,7 @@ func (o *NiatelemetryNiaInventoryFabric) GetSiteName() string {
 // GetSiteNameOk returns a tuple with the SiteName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryNiaInventoryFabric) GetSiteNameOk() (*string, bool) {
-	if o == nil || o.SiteName == nil {
+	if o == nil || IsNil(o.SiteName) {
 		return nil, false
 	}
 	return o.SiteName, true
@@ -1471,7 +1475,7 @@ func (o *NiatelemetryNiaInventoryFabric) GetSiteNameOk() (*string, bool) {
 
 // HasSiteName returns a boolean if a field has been set.
 func (o *NiatelemetryNiaInventoryFabric) HasSiteName() bool {
-	if o != nil && o.SiteName != nil {
+	if o != nil && !IsNil(o.SiteName) {
 		return true
 	}
 
@@ -1485,7 +1489,7 @@ func (o *NiatelemetryNiaInventoryFabric) SetSiteName(v string) {
 
 // GetSoftwareImage returns the SoftwareImage field value if set, zero value otherwise.
 func (o *NiatelemetryNiaInventoryFabric) GetSoftwareImage() string {
-	if o == nil || o.SoftwareImage == nil {
+	if o == nil || IsNil(o.SoftwareImage) {
 		var ret string
 		return ret
 	}
@@ -1495,7 +1499,7 @@ func (o *NiatelemetryNiaInventoryFabric) GetSoftwareImage() string {
 // GetSoftwareImageOk returns a tuple with the SoftwareImage field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryNiaInventoryFabric) GetSoftwareImageOk() (*string, bool) {
-	if o == nil || o.SoftwareImage == nil {
+	if o == nil || IsNil(o.SoftwareImage) {
 		return nil, false
 	}
 	return o.SoftwareImage, true
@@ -1503,7 +1507,7 @@ func (o *NiatelemetryNiaInventoryFabric) GetSoftwareImageOk() (*string, bool) {
 
 // HasSoftwareImage returns a boolean if a field has been set.
 func (o *NiatelemetryNiaInventoryFabric) HasSoftwareImage() bool {
-	if o != nil && o.SoftwareImage != nil {
+	if o != nil && !IsNil(o.SoftwareImage) {
 		return true
 	}
 
@@ -1517,7 +1521,7 @@ func (o *NiatelemetryNiaInventoryFabric) SetSoftwareImage(v string) {
 
 // GetSpineCount returns the SpineCount field value if set, zero value otherwise.
 func (o *NiatelemetryNiaInventoryFabric) GetSpineCount() int64 {
-	if o == nil || o.SpineCount == nil {
+	if o == nil || IsNil(o.SpineCount) {
 		var ret int64
 		return ret
 	}
@@ -1527,7 +1531,7 @@ func (o *NiatelemetryNiaInventoryFabric) GetSpineCount() int64 {
 // GetSpineCountOk returns a tuple with the SpineCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryNiaInventoryFabric) GetSpineCountOk() (*int64, bool) {
-	if o == nil || o.SpineCount == nil {
+	if o == nil || IsNil(o.SpineCount) {
 		return nil, false
 	}
 	return o.SpineCount, true
@@ -1535,7 +1539,7 @@ func (o *NiatelemetryNiaInventoryFabric) GetSpineCountOk() (*int64, bool) {
 
 // HasSpineCount returns a boolean if a field has been set.
 func (o *NiatelemetryNiaInventoryFabric) HasSpineCount() bool {
-	if o != nil && o.SpineCount != nil {
+	if o != nil && !IsNil(o.SpineCount) {
 		return true
 	}
 
@@ -1549,7 +1553,7 @@ func (o *NiatelemetryNiaInventoryFabric) SetSpineCount(v int64) {
 
 // GetSyslogServerIpList returns the SyslogServerIpList field value if set, zero value otherwise.
 func (o *NiatelemetryNiaInventoryFabric) GetSyslogServerIpList() string {
-	if o == nil || o.SyslogServerIpList == nil {
+	if o == nil || IsNil(o.SyslogServerIpList) {
 		var ret string
 		return ret
 	}
@@ -1559,7 +1563,7 @@ func (o *NiatelemetryNiaInventoryFabric) GetSyslogServerIpList() string {
 // GetSyslogServerIpListOk returns a tuple with the SyslogServerIpList field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryNiaInventoryFabric) GetSyslogServerIpListOk() (*string, bool) {
-	if o == nil || o.SyslogServerIpList == nil {
+	if o == nil || IsNil(o.SyslogServerIpList) {
 		return nil, false
 	}
 	return o.SyslogServerIpList, true
@@ -1567,7 +1571,7 @@ func (o *NiatelemetryNiaInventoryFabric) GetSyslogServerIpListOk() (*string, boo
 
 // HasSyslogServerIpList returns a boolean if a field has been set.
 func (o *NiatelemetryNiaInventoryFabric) HasSyslogServerIpList() bool {
-	if o != nil && o.SyslogServerIpList != nil {
+	if o != nil && !IsNil(o.SyslogServerIpList) {
 		return true
 	}
 
@@ -1581,7 +1585,7 @@ func (o *NiatelemetryNiaInventoryFabric) SetSyslogServerIpList(v string) {
 
 // GetSyslogSev returns the SyslogSev field value if set, zero value otherwise.
 func (o *NiatelemetryNiaInventoryFabric) GetSyslogSev() string {
-	if o == nil || o.SyslogSev == nil {
+	if o == nil || IsNil(o.SyslogSev) {
 		var ret string
 		return ret
 	}
@@ -1591,7 +1595,7 @@ func (o *NiatelemetryNiaInventoryFabric) GetSyslogSev() string {
 // GetSyslogSevOk returns a tuple with the SyslogSev field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryNiaInventoryFabric) GetSyslogSevOk() (*string, bool) {
-	if o == nil || o.SyslogSev == nil {
+	if o == nil || IsNil(o.SyslogSev) {
 		return nil, false
 	}
 	return o.SyslogSev, true
@@ -1599,7 +1603,7 @@ func (o *NiatelemetryNiaInventoryFabric) GetSyslogSevOk() (*string, bool) {
 
 // HasSyslogSev returns a boolean if a field has been set.
 func (o *NiatelemetryNiaInventoryFabric) HasSyslogSev() bool {
-	if o != nil && o.SyslogSev != nil {
+	if o != nil && !IsNil(o.SyslogSev) {
 		return true
 	}
 
@@ -1613,7 +1617,7 @@ func (o *NiatelemetryNiaInventoryFabric) SetSyslogSev(v string) {
 
 // GetTemplateName returns the TemplateName field value if set, zero value otherwise.
 func (o *NiatelemetryNiaInventoryFabric) GetTemplateName() string {
-	if o == nil || o.TemplateName == nil {
+	if o == nil || IsNil(o.TemplateName) {
 		var ret string
 		return ret
 	}
@@ -1623,7 +1627,7 @@ func (o *NiatelemetryNiaInventoryFabric) GetTemplateName() string {
 // GetTemplateNameOk returns a tuple with the TemplateName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryNiaInventoryFabric) GetTemplateNameOk() (*string, bool) {
-	if o == nil || o.TemplateName == nil {
+	if o == nil || IsNil(o.TemplateName) {
 		return nil, false
 	}
 	return o.TemplateName, true
@@ -1631,7 +1635,7 @@ func (o *NiatelemetryNiaInventoryFabric) GetTemplateNameOk() (*string, bool) {
 
 // HasTemplateName returns a boolean if a field has been set.
 func (o *NiatelemetryNiaInventoryFabric) HasTemplateName() bool {
-	if o != nil && o.TemplateName != nil {
+	if o != nil && !IsNil(o.TemplateName) {
 		return true
 	}
 
@@ -1645,7 +1649,7 @@ func (o *NiatelemetryNiaInventoryFabric) SetTemplateName(v string) {
 
 // GetVlanVniMappings returns the VlanVniMappings field value if set, zero value otherwise.
 func (o *NiatelemetryNiaInventoryFabric) GetVlanVniMappings() string {
-	if o == nil || o.VlanVniMappings == nil {
+	if o == nil || IsNil(o.VlanVniMappings) {
 		var ret string
 		return ret
 	}
@@ -1655,7 +1659,7 @@ func (o *NiatelemetryNiaInventoryFabric) GetVlanVniMappings() string {
 // GetVlanVniMappingsOk returns a tuple with the VlanVniMappings field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryNiaInventoryFabric) GetVlanVniMappingsOk() (*string, bool) {
-	if o == nil || o.VlanVniMappings == nil {
+	if o == nil || IsNil(o.VlanVniMappings) {
 		return nil, false
 	}
 	return o.VlanVniMappings, true
@@ -1663,7 +1667,7 @@ func (o *NiatelemetryNiaInventoryFabric) GetVlanVniMappingsOk() (*string, bool) 
 
 // HasVlanVniMappings returns a boolean if a field has been set.
 func (o *NiatelemetryNiaInventoryFabric) HasVlanVniMappings() bool {
-	if o != nil && o.VlanVniMappings != nil {
+	if o != nil && !IsNil(o.VlanVniMappings) {
 		return true
 	}
 
@@ -1677,7 +1681,7 @@ func (o *NiatelemetryNiaInventoryFabric) SetVlanVniMappings(v string) {
 
 // GetVniIpCount returns the VniIpCount field value if set, zero value otherwise.
 func (o *NiatelemetryNiaInventoryFabric) GetVniIpCount() int64 {
-	if o == nil || o.VniIpCount == nil {
+	if o == nil || IsNil(o.VniIpCount) {
 		var ret int64
 		return ret
 	}
@@ -1687,7 +1691,7 @@ func (o *NiatelemetryNiaInventoryFabric) GetVniIpCount() int64 {
 // GetVniIpCountOk returns a tuple with the VniIpCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryNiaInventoryFabric) GetVniIpCountOk() (*int64, bool) {
-	if o == nil || o.VniIpCount == nil {
+	if o == nil || IsNil(o.VniIpCount) {
 		return nil, false
 	}
 	return o.VniIpCount, true
@@ -1695,7 +1699,7 @@ func (o *NiatelemetryNiaInventoryFabric) GetVniIpCountOk() (*int64, bool) {
 
 // HasVniIpCount returns a boolean if a field has been set.
 func (o *NiatelemetryNiaInventoryFabric) HasVniIpCount() bool {
-	if o != nil && o.VniIpCount != nil {
+	if o != nil && !IsNil(o.VniIpCount) {
 		return true
 	}
 
@@ -1720,7 +1724,7 @@ func (o *NiatelemetryNiaInventoryFabric) GetVpcDetails() []NiatelemetryVpcDetail
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *NiatelemetryNiaInventoryFabric) GetVpcDetailsOk() ([]NiatelemetryVpcDetails, bool) {
-	if o == nil || o.VpcDetails == nil {
+	if o == nil || IsNil(o.VpcDetails) {
 		return nil, false
 	}
 	return o.VpcDetails, true
@@ -1728,7 +1732,7 @@ func (o *NiatelemetryNiaInventoryFabric) GetVpcDetailsOk() ([]NiatelemetryVpcDet
 
 // HasVpcDetails returns a boolean if a field has been set.
 func (o *NiatelemetryNiaInventoryFabric) HasVpcDetails() bool {
-	if o != nil && o.VpcDetails != nil {
+	if o != nil && IsNil(o.VpcDetails) {
 		return true
 	}
 
@@ -1742,7 +1746,7 @@ func (o *NiatelemetryNiaInventoryFabric) SetVpcDetails(v []NiatelemetryVpcDetail
 
 // GetVrfDeploymentCount returns the VrfDeploymentCount field value if set, zero value otherwise.
 func (o *NiatelemetryNiaInventoryFabric) GetVrfDeploymentCount() int64 {
-	if o == nil || o.VrfDeploymentCount == nil {
+	if o == nil || IsNil(o.VrfDeploymentCount) {
 		var ret int64
 		return ret
 	}
@@ -1752,7 +1756,7 @@ func (o *NiatelemetryNiaInventoryFabric) GetVrfDeploymentCount() int64 {
 // GetVrfDeploymentCountOk returns a tuple with the VrfDeploymentCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryNiaInventoryFabric) GetVrfDeploymentCountOk() (*int64, bool) {
-	if o == nil || o.VrfDeploymentCount == nil {
+	if o == nil || IsNil(o.VrfDeploymentCount) {
 		return nil, false
 	}
 	return o.VrfDeploymentCount, true
@@ -1760,7 +1764,7 @@ func (o *NiatelemetryNiaInventoryFabric) GetVrfDeploymentCountOk() (*int64, bool
 
 // HasVrfDeploymentCount returns a boolean if a field has been set.
 func (o *NiatelemetryNiaInventoryFabric) HasVrfDeploymentCount() bool {
-	if o != nil && o.VrfDeploymentCount != nil {
+	if o != nil && !IsNil(o.VrfDeploymentCount) {
 		return true
 	}
 
@@ -1785,7 +1789,7 @@ func (o *NiatelemetryNiaInventoryFabric) GetVrfDeploymentStatus() []Niatelemetry
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *NiatelemetryNiaInventoryFabric) GetVrfDeploymentStatusOk() ([]NiatelemetryDeploymentStatus, bool) {
-	if o == nil || o.VrfDeploymentStatus == nil {
+	if o == nil || IsNil(o.VrfDeploymentStatus) {
 		return nil, false
 	}
 	return o.VrfDeploymentStatus, true
@@ -1793,7 +1797,7 @@ func (o *NiatelemetryNiaInventoryFabric) GetVrfDeploymentStatusOk() ([]Niateleme
 
 // HasVrfDeploymentStatus returns a boolean if a field has been set.
 func (o *NiatelemetryNiaInventoryFabric) HasVrfDeploymentStatus() bool {
-	if o != nil && o.VrfDeploymentStatus != nil {
+	if o != nil && IsNil(o.VrfDeploymentStatus) {
 		return true
 	}
 
@@ -1807,7 +1811,7 @@ func (o *NiatelemetryNiaInventoryFabric) SetVrfDeploymentStatus(v []Niatelemetry
 
 // GetXsiteNetworkCount returns the XsiteNetworkCount field value if set, zero value otherwise.
 func (o *NiatelemetryNiaInventoryFabric) GetXsiteNetworkCount() int64 {
-	if o == nil || o.XsiteNetworkCount == nil {
+	if o == nil || IsNil(o.XsiteNetworkCount) {
 		var ret int64
 		return ret
 	}
@@ -1817,7 +1821,7 @@ func (o *NiatelemetryNiaInventoryFabric) GetXsiteNetworkCount() int64 {
 // GetXsiteNetworkCountOk returns a tuple with the XsiteNetworkCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryNiaInventoryFabric) GetXsiteNetworkCountOk() (*int64, bool) {
-	if o == nil || o.XsiteNetworkCount == nil {
+	if o == nil || IsNil(o.XsiteNetworkCount) {
 		return nil, false
 	}
 	return o.XsiteNetworkCount, true
@@ -1825,7 +1829,7 @@ func (o *NiatelemetryNiaInventoryFabric) GetXsiteNetworkCountOk() (*int64, bool)
 
 // HasXsiteNetworkCount returns a boolean if a field has been set.
 func (o *NiatelemetryNiaInventoryFabric) HasXsiteNetworkCount() bool {
-	if o != nil && o.XsiteNetworkCount != nil {
+	if o != nil && !IsNil(o.XsiteNetworkCount) {
 		return true
 	}
 
@@ -1839,7 +1843,7 @@ func (o *NiatelemetryNiaInventoryFabric) SetXsiteNetworkCount(v int64) {
 
 // GetXsiteVrfCount returns the XsiteVrfCount field value if set, zero value otherwise.
 func (o *NiatelemetryNiaInventoryFabric) GetXsiteVrfCount() int64 {
-	if o == nil || o.XsiteVrfCount == nil {
+	if o == nil || IsNil(o.XsiteVrfCount) {
 		var ret int64
 		return ret
 	}
@@ -1849,7 +1853,7 @@ func (o *NiatelemetryNiaInventoryFabric) GetXsiteVrfCount() int64 {
 // GetXsiteVrfCountOk returns a tuple with the XsiteVrfCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryNiaInventoryFabric) GetXsiteVrfCountOk() (*int64, bool) {
-	if o == nil || o.XsiteVrfCount == nil {
+	if o == nil || IsNil(o.XsiteVrfCount) {
 		return nil, false
 	}
 	return o.XsiteVrfCount, true
@@ -1857,7 +1861,7 @@ func (o *NiatelemetryNiaInventoryFabric) GetXsiteVrfCountOk() (*int64, bool) {
 
 // HasXsiteVrfCount returns a boolean if a field has been set.
 func (o *NiatelemetryNiaInventoryFabric) HasXsiteVrfCount() bool {
-	if o != nil && o.XsiteVrfCount != nil {
+	if o != nil && !IsNil(o.XsiteVrfCount) {
 		return true
 	}
 
@@ -1869,222 +1873,259 @@ func (o *NiatelemetryNiaInventoryFabric) SetXsiteVrfCount(v int64) {
 	o.XsiteVrfCount = &v
 }
 
-// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise.
+// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *NiatelemetryNiaInventoryFabric) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil || IsNil(o.RegisteredDevice.Get()) {
 		var ret AssetDeviceRegistrationRelationship
 		return ret
 	}
-	return *o.RegisteredDevice
+	return *o.RegisteredDevice.Get()
 }
 
 // GetRegisteredDeviceOk returns a tuple with the RegisteredDevice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *NiatelemetryNiaInventoryFabric) GetRegisteredDeviceOk() (*AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.RegisteredDevice, true
+	return o.RegisteredDevice.Get(), o.RegisteredDevice.IsSet()
 }
 
 // HasRegisteredDevice returns a boolean if a field has been set.
 func (o *NiatelemetryNiaInventoryFabric) HasRegisteredDevice() bool {
-	if o != nil && o.RegisteredDevice != nil {
+	if o != nil && o.RegisteredDevice.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRegisteredDevice gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
+// SetRegisteredDevice gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
 func (o *NiatelemetryNiaInventoryFabric) SetRegisteredDevice(v AssetDeviceRegistrationRelationship) {
-	o.RegisteredDevice = &v
+	o.RegisteredDevice.Set(&v)
+}
+
+// SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+func (o *NiatelemetryNiaInventoryFabric) SetRegisteredDeviceNil() {
+	o.RegisteredDevice.Set(nil)
+}
+
+// UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
+func (o *NiatelemetryNiaInventoryFabric) UnsetRegisteredDevice() {
+	o.RegisteredDevice.Unset()
 }
 
 func (o NiatelemetryNiaInventoryFabric) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o NiatelemetryNiaInventoryFabric) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.AnycastGwMac != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.AnycastGwMac) {
 		toSerialize["AnycastGwMac"] = o.AnycastGwMac
 	}
-	if o.BgpEstablishedInterfaceCount != nil {
+	if !IsNil(o.BgpEstablishedInterfaceCount) {
 		toSerialize["BgpEstablishedInterfaceCount"] = o.BgpEstablishedInterfaceCount
 	}
-	if o.BgwCount != nil {
+	if !IsNil(o.BgwCount) {
 		toSerialize["BgwCount"] = o.BgwCount
 	}
-	if o.BgwInterfaceUpCount != nil {
+	if !IsNil(o.BgwInterfaceUpCount) {
 		toSerialize["BgwInterfaceUpCount"] = o.BgwInterfaceUpCount
 	}
-	if o.BorderGatewaySpineCount != nil {
+	if !IsNil(o.BorderGatewaySpineCount) {
 		toSerialize["BorderGatewaySpineCount"] = o.BorderGatewaySpineCount
 	}
-	if o.BorderLeafCount != nil {
+	if !IsNil(o.BorderLeafCount) {
 		toSerialize["BorderLeafCount"] = o.BorderLeafCount
 	}
-	if o.CloudsecAutoconfig != nil {
+	if !IsNil(o.CloudsecAutoconfig) {
 		toSerialize["CloudsecAutoconfig"] = o.CloudsecAutoconfig
 	}
-	if o.DciSubnetRange != nil {
+	if !IsNil(o.DciSubnetRange) {
 		toSerialize["DciSubnetRange"] = o.DciSubnetRange
 	}
-	if o.DciSubnetTargetMask != nil {
+	if !IsNil(o.DciSubnetTargetMask) {
 		toSerialize["DciSubnetTargetMask"] = o.DciSubnetTargetMask
 	}
-	if o.DcnmtrackerEnabled != nil {
+	if !IsNil(o.DcnmtrackerEnabled) {
 		toSerialize["DcnmtrackerEnabled"] = o.DcnmtrackerEnabled
 	}
-	if o.EbgpEvpnLinkUpCount != nil {
+	if !IsNil(o.EbgpEvpnLinkUpCount) {
 		toSerialize["EbgpEvpnLinkUpCount"] = o.EbgpEvpnLinkUpCount
 	}
-	if o.FabricId != nil {
+	if !IsNil(o.FabricId) {
 		toSerialize["FabricId"] = o.FabricId
 	}
-	if o.FabricName != nil {
+	if !IsNil(o.FabricName) {
 		toSerialize["FabricName"] = o.FabricName
 	}
-	if o.FabricParent != nil {
+	if !IsNil(o.FabricParent) {
 		toSerialize["FabricParent"] = o.FabricParent
 	}
-	if o.FabricTechnology != nil {
+	if !IsNil(o.FabricTechnology) {
 		toSerialize["FabricTechnology"] = o.FabricTechnology
 	}
-	if o.FabricType != nil {
+	if !IsNil(o.FabricType) {
 		toSerialize["FabricType"] = o.FabricType
 	}
-	if o.FeaturePtp != nil {
+	if !IsNil(o.FeaturePtp) {
 		toSerialize["FeaturePtp"] = o.FeaturePtp
 	}
-	if o.IsBgwPresent != nil {
+	if !IsNil(o.IsBgwPresent) {
 		toSerialize["IsBgwPresent"] = o.IsBgwPresent
 	}
-	if o.IsEnableNxapiHttp != nil {
+	if !IsNil(o.IsEnableNxapiHttp) {
 		toSerialize["IsEnableNxapiHttp"] = o.IsEnableNxapiHttp
 	}
-	if o.IsEnableRealTimeBackup != nil {
+	if !IsNil(o.IsEnableRealTimeBackup) {
 		toSerialize["IsEnableRealTimeBackup"] = o.IsEnableRealTimeBackup
 	}
-	if o.IsNgoamEnabled != nil {
+	if !IsNil(o.IsNgoamEnabled) {
 		toSerialize["IsNgoamEnabled"] = o.IsNgoamEnabled
 	}
-	if o.IsScheduledBackUpEnabled != nil {
+	if !IsNil(o.IsScheduledBackUpEnabled) {
 		toSerialize["IsScheduledBackUpEnabled"] = o.IsScheduledBackUpEnabled
 	}
-	if o.IsTrmEnabled != nil {
+	if !IsNil(o.IsTrmEnabled) {
 		toSerialize["IsTrmEnabled"] = o.IsTrmEnabled
 	}
-	if o.LeafCount != nil {
+	if !IsNil(o.LeafCount) {
 		toSerialize["LeafCount"] = o.LeafCount
 	}
-	if o.LinkStateRouting != nil {
+	if !IsNil(o.LinkStateRouting) {
 		toSerialize["LinkStateRouting"] = o.LinkStateRouting
 	}
-	if o.LinkType != nil {
+	if !IsNil(o.LinkType) {
 		toSerialize["LinkType"] = o.LinkType
 	}
 	if o.LogicalLinks != nil {
 		toSerialize["LogicalLinks"] = o.LogicalLinks
 	}
-	if o.NetworkDeploymentCount != nil {
+	if !IsNil(o.NetworkDeploymentCount) {
 		toSerialize["NetworkDeploymentCount"] = o.NetworkDeploymentCount
 	}
 	if o.NetworkDeploymentStatus != nil {
 		toSerialize["NetworkDeploymentStatus"] = o.NetworkDeploymentStatus
 	}
-	if o.NtpServerIpList != nil {
+	if !IsNil(o.NtpServerIpList) {
 		toSerialize["NtpServerIpList"] = o.NtpServerIpList
 	}
-	if o.NxosVniBwSitesCount != nil {
+	if !IsNil(o.NxosVniBwSitesCount) {
 		toSerialize["NxosVniBwSitesCount"] = o.NxosVniBwSitesCount
 	}
-	if o.NxosVrfBwSitesCount != nil {
+	if !IsNil(o.NxosVrfBwSitesCount) {
 		toSerialize["NxosVrfBwSitesCount"] = o.NxosVrfBwSitesCount
 	}
-	if o.NxosVrfCount != nil {
+	if !IsNil(o.NxosVrfCount) {
 		toSerialize["NxosVrfCount"] = o.NxosVrfCount
 	}
-	if o.OperStatus != nil {
+	if !IsNil(o.OperStatus) {
 		toSerialize["OperStatus"] = o.OperStatus
 	}
-	if o.RecordType != nil {
+	if !IsNil(o.RecordType) {
 		toSerialize["RecordType"] = o.RecordType
 	}
-	if o.RecordVersion != nil {
+	if !IsNil(o.RecordVersion) {
 		toSerialize["RecordVersion"] = o.RecordVersion
 	}
-	if o.ReplicationMode != nil {
+	if !IsNil(o.ReplicationMode) {
 		toSerialize["ReplicationMode"] = o.ReplicationMode
 	}
-	if o.RpMode != nil {
+	if !IsNil(o.RpMode) {
 		toSerialize["RpMode"] = o.RpMode
 	}
-	if o.Serial != nil {
+	if !IsNil(o.Serial) {
 		toSerialize["Serial"] = o.Serial
 	}
-	if o.SiteName != nil {
+	if !IsNil(o.SiteName) {
 		toSerialize["SiteName"] = o.SiteName
 	}
-	if o.SoftwareImage != nil {
+	if !IsNil(o.SoftwareImage) {
 		toSerialize["SoftwareImage"] = o.SoftwareImage
 	}
-	if o.SpineCount != nil {
+	if !IsNil(o.SpineCount) {
 		toSerialize["SpineCount"] = o.SpineCount
 	}
-	if o.SyslogServerIpList != nil {
+	if !IsNil(o.SyslogServerIpList) {
 		toSerialize["SyslogServerIpList"] = o.SyslogServerIpList
 	}
-	if o.SyslogSev != nil {
+	if !IsNil(o.SyslogSev) {
 		toSerialize["SyslogSev"] = o.SyslogSev
 	}
-	if o.TemplateName != nil {
+	if !IsNil(o.TemplateName) {
 		toSerialize["TemplateName"] = o.TemplateName
 	}
-	if o.VlanVniMappings != nil {
+	if !IsNil(o.VlanVniMappings) {
 		toSerialize["VlanVniMappings"] = o.VlanVniMappings
 	}
-	if o.VniIpCount != nil {
+	if !IsNil(o.VniIpCount) {
 		toSerialize["VniIpCount"] = o.VniIpCount
 	}
 	if o.VpcDetails != nil {
 		toSerialize["VpcDetails"] = o.VpcDetails
 	}
-	if o.VrfDeploymentCount != nil {
+	if !IsNil(o.VrfDeploymentCount) {
 		toSerialize["VrfDeploymentCount"] = o.VrfDeploymentCount
 	}
 	if o.VrfDeploymentStatus != nil {
 		toSerialize["VrfDeploymentStatus"] = o.VrfDeploymentStatus
 	}
-	if o.XsiteNetworkCount != nil {
+	if !IsNil(o.XsiteNetworkCount) {
 		toSerialize["XsiteNetworkCount"] = o.XsiteNetworkCount
 	}
-	if o.XsiteVrfCount != nil {
+	if !IsNil(o.XsiteVrfCount) {
 		toSerialize["XsiteVrfCount"] = o.XsiteVrfCount
 	}
-	if o.RegisteredDevice != nil {
-		toSerialize["RegisteredDevice"] = o.RegisteredDevice
+	if o.RegisteredDevice.IsSet() {
+		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *NiatelemetryNiaInventoryFabric) UnmarshalJSON(bytes []byte) (err error) {
+func (o *NiatelemetryNiaInventoryFabric) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type NiatelemetryNiaInventoryFabricWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -2189,13 +2230,13 @@ func (o *NiatelemetryNiaInventoryFabric) UnmarshalJSON(bytes []byte) (err error)
 		// Returns deployed network count for bgw/bgws switches in the MSD fabric.
 		XsiteNetworkCount *int64 `json:"XsiteNetworkCount,omitempty"`
 		// Returns deployed vrf count for bgw/bgws switches in the MSD fabric.
-		XsiteVrfCount    *int64                               `json:"XsiteVrfCount,omitempty"`
-		RegisteredDevice *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+		XsiteVrfCount    *int64                                      `json:"XsiteVrfCount,omitempty"`
+		RegisteredDevice NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	}
 
 	varNiatelemetryNiaInventoryFabricWithoutEmbeddedStruct := NiatelemetryNiaInventoryFabricWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varNiatelemetryNiaInventoryFabricWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varNiatelemetryNiaInventoryFabricWithoutEmbeddedStruct)
 	if err == nil {
 		varNiatelemetryNiaInventoryFabric := _NiatelemetryNiaInventoryFabric{}
 		varNiatelemetryNiaInventoryFabric.ClassId = varNiatelemetryNiaInventoryFabricWithoutEmbeddedStruct.ClassId
@@ -2260,7 +2301,7 @@ func (o *NiatelemetryNiaInventoryFabric) UnmarshalJSON(bytes []byte) (err error)
 
 	varNiatelemetryNiaInventoryFabric := _NiatelemetryNiaInventoryFabric{}
 
-	err = json.Unmarshal(bytes, &varNiatelemetryNiaInventoryFabric)
+	err = json.Unmarshal(data, &varNiatelemetryNiaInventoryFabric)
 	if err == nil {
 		o.MoBaseMo = varNiatelemetryNiaInventoryFabric.MoBaseMo
 	} else {
@@ -2269,7 +2310,7 @@ func (o *NiatelemetryNiaInventoryFabric) UnmarshalJSON(bytes []byte) (err error)
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "AnycastGwMac")

@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "storage.NetAppVolumeEvent"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "storage.NetAppVolumeEvent"]
-**Volume** | Pointer to [**StorageNetAppVolumeRelationship**](StorageNetAppVolumeRelationship.md) |  | [optional] 
+**Volume** | Pointer to [**NullableStorageNetAppVolumeRelationship**](StorageNetAppVolumeRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -92,6 +92,16 @@ SetVolume sets Volume field to given value.
 
 HasVolume returns a boolean if a field has been set.
 
+### SetVolumeNil
+
+`func (o *StorageNetAppVolumeEvent) SetVolumeNil(b bool)`
+
+ SetVolumeNil sets the value for Volume to be an explicit nil
+
+### UnsetVolume
+`func (o *StorageNetAppVolumeEvent) UnsetVolume()`
+
+UnsetVolume ensures that no value is present for Volume, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the IaasCustomTaskInfo type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &IaasCustomTaskInfo{}
 
 // IaasCustomTaskInfo List out the execution of the Custom Tasks with Names.
 type IaasCustomTaskInfo struct {
@@ -31,8 +35,8 @@ type IaasCustomTaskInfo struct {
 	// Task Label in the Workflow.
 	TaskLabel *string `json:"TaskLabel,omitempty"`
 	// Name of the Custom Task in UCSD.
-	TaskName             *string                   `json:"TaskName,omitempty"`
-	Guid                 *IaasUcsdInfoRelationship `json:"Guid,omitempty"`
+	TaskName             *string                          `json:"TaskName,omitempty"`
+	Guid                 NullableIaasUcsdInfoRelationship `json:"Guid,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -111,7 +115,7 @@ func (o *IaasCustomTaskInfo) SetObjectType(v string) {
 
 // GetTaskDescription returns the TaskDescription field value if set, zero value otherwise.
 func (o *IaasCustomTaskInfo) GetTaskDescription() string {
-	if o == nil || o.TaskDescription == nil {
+	if o == nil || IsNil(o.TaskDescription) {
 		var ret string
 		return ret
 	}
@@ -121,7 +125,7 @@ func (o *IaasCustomTaskInfo) GetTaskDescription() string {
 // GetTaskDescriptionOk returns a tuple with the TaskDescription field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IaasCustomTaskInfo) GetTaskDescriptionOk() (*string, bool) {
-	if o == nil || o.TaskDescription == nil {
+	if o == nil || IsNil(o.TaskDescription) {
 		return nil, false
 	}
 	return o.TaskDescription, true
@@ -129,7 +133,7 @@ func (o *IaasCustomTaskInfo) GetTaskDescriptionOk() (*string, bool) {
 
 // HasTaskDescription returns a boolean if a field has been set.
 func (o *IaasCustomTaskInfo) HasTaskDescription() bool {
-	if o != nil && o.TaskDescription != nil {
+	if o != nil && !IsNil(o.TaskDescription) {
 		return true
 	}
 
@@ -143,7 +147,7 @@ func (o *IaasCustomTaskInfo) SetTaskDescription(v string) {
 
 // GetTaskExecutionCount returns the TaskExecutionCount field value if set, zero value otherwise.
 func (o *IaasCustomTaskInfo) GetTaskExecutionCount() int64 {
-	if o == nil || o.TaskExecutionCount == nil {
+	if o == nil || IsNil(o.TaskExecutionCount) {
 		var ret int64
 		return ret
 	}
@@ -153,7 +157,7 @@ func (o *IaasCustomTaskInfo) GetTaskExecutionCount() int64 {
 // GetTaskExecutionCountOk returns a tuple with the TaskExecutionCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IaasCustomTaskInfo) GetTaskExecutionCountOk() (*int64, bool) {
-	if o == nil || o.TaskExecutionCount == nil {
+	if o == nil || IsNil(o.TaskExecutionCount) {
 		return nil, false
 	}
 	return o.TaskExecutionCount, true
@@ -161,7 +165,7 @@ func (o *IaasCustomTaskInfo) GetTaskExecutionCountOk() (*int64, bool) {
 
 // HasTaskExecutionCount returns a boolean if a field has been set.
 func (o *IaasCustomTaskInfo) HasTaskExecutionCount() bool {
-	if o != nil && o.TaskExecutionCount != nil {
+	if o != nil && !IsNil(o.TaskExecutionCount) {
 		return true
 	}
 
@@ -175,7 +179,7 @@ func (o *IaasCustomTaskInfo) SetTaskExecutionCount(v int64) {
 
 // GetTaskLabel returns the TaskLabel field value if set, zero value otherwise.
 func (o *IaasCustomTaskInfo) GetTaskLabel() string {
-	if o == nil || o.TaskLabel == nil {
+	if o == nil || IsNil(o.TaskLabel) {
 		var ret string
 		return ret
 	}
@@ -185,7 +189,7 @@ func (o *IaasCustomTaskInfo) GetTaskLabel() string {
 // GetTaskLabelOk returns a tuple with the TaskLabel field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IaasCustomTaskInfo) GetTaskLabelOk() (*string, bool) {
-	if o == nil || o.TaskLabel == nil {
+	if o == nil || IsNil(o.TaskLabel) {
 		return nil, false
 	}
 	return o.TaskLabel, true
@@ -193,7 +197,7 @@ func (o *IaasCustomTaskInfo) GetTaskLabelOk() (*string, bool) {
 
 // HasTaskLabel returns a boolean if a field has been set.
 func (o *IaasCustomTaskInfo) HasTaskLabel() bool {
-	if o != nil && o.TaskLabel != nil {
+	if o != nil && !IsNil(o.TaskLabel) {
 		return true
 	}
 
@@ -207,7 +211,7 @@ func (o *IaasCustomTaskInfo) SetTaskLabel(v string) {
 
 // GetTaskName returns the TaskName field value if set, zero value otherwise.
 func (o *IaasCustomTaskInfo) GetTaskName() string {
-	if o == nil || o.TaskName == nil {
+	if o == nil || IsNil(o.TaskName) {
 		var ret string
 		return ret
 	}
@@ -217,7 +221,7 @@ func (o *IaasCustomTaskInfo) GetTaskName() string {
 // GetTaskNameOk returns a tuple with the TaskName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IaasCustomTaskInfo) GetTaskNameOk() (*string, bool) {
-	if o == nil || o.TaskName == nil {
+	if o == nil || IsNil(o.TaskName) {
 		return nil, false
 	}
 	return o.TaskName, true
@@ -225,7 +229,7 @@ func (o *IaasCustomTaskInfo) GetTaskNameOk() (*string, bool) {
 
 // HasTaskName returns a boolean if a field has been set.
 func (o *IaasCustomTaskInfo) HasTaskName() bool {
-	if o != nil && o.TaskName != nil {
+	if o != nil && !IsNil(o.TaskName) {
 		return true
 	}
 
@@ -237,78 +241,115 @@ func (o *IaasCustomTaskInfo) SetTaskName(v string) {
 	o.TaskName = &v
 }
 
-// GetGuid returns the Guid field value if set, zero value otherwise.
+// GetGuid returns the Guid field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *IaasCustomTaskInfo) GetGuid() IaasUcsdInfoRelationship {
-	if o == nil || o.Guid == nil {
+	if o == nil || IsNil(o.Guid.Get()) {
 		var ret IaasUcsdInfoRelationship
 		return ret
 	}
-	return *o.Guid
+	return *o.Guid.Get()
 }
 
 // GetGuidOk returns a tuple with the Guid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *IaasCustomTaskInfo) GetGuidOk() (*IaasUcsdInfoRelationship, bool) {
-	if o == nil || o.Guid == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Guid, true
+	return o.Guid.Get(), o.Guid.IsSet()
 }
 
 // HasGuid returns a boolean if a field has been set.
 func (o *IaasCustomTaskInfo) HasGuid() bool {
-	if o != nil && o.Guid != nil {
+	if o != nil && o.Guid.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetGuid gets a reference to the given IaasUcsdInfoRelationship and assigns it to the Guid field.
+// SetGuid gets a reference to the given NullableIaasUcsdInfoRelationship and assigns it to the Guid field.
 func (o *IaasCustomTaskInfo) SetGuid(v IaasUcsdInfoRelationship) {
-	o.Guid = &v
+	o.Guid.Set(&v)
+}
+
+// SetGuidNil sets the value for Guid to be an explicit nil
+func (o *IaasCustomTaskInfo) SetGuidNil() {
+	o.Guid.Set(nil)
+}
+
+// UnsetGuid ensures that no value is present for Guid, not even an explicit nil
+func (o *IaasCustomTaskInfo) UnsetGuid() {
+	o.Guid.Unset()
 }
 
 func (o IaasCustomTaskInfo) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o IaasCustomTaskInfo) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.TaskDescription != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.TaskDescription) {
 		toSerialize["TaskDescription"] = o.TaskDescription
 	}
-	if o.TaskExecutionCount != nil {
+	if !IsNil(o.TaskExecutionCount) {
 		toSerialize["TaskExecutionCount"] = o.TaskExecutionCount
 	}
-	if o.TaskLabel != nil {
+	if !IsNil(o.TaskLabel) {
 		toSerialize["TaskLabel"] = o.TaskLabel
 	}
-	if o.TaskName != nil {
+	if !IsNil(o.TaskName) {
 		toSerialize["TaskName"] = o.TaskName
 	}
-	if o.Guid != nil {
-		toSerialize["Guid"] = o.Guid
+	if o.Guid.IsSet() {
+		toSerialize["Guid"] = o.Guid.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *IaasCustomTaskInfo) UnmarshalJSON(bytes []byte) (err error) {
+func (o *IaasCustomTaskInfo) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type IaasCustomTaskInfoWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -321,13 +362,13 @@ func (o *IaasCustomTaskInfo) UnmarshalJSON(bytes []byte) (err error) {
 		// Task Label in the Workflow.
 		TaskLabel *string `json:"TaskLabel,omitempty"`
 		// Name of the Custom Task in UCSD.
-		TaskName *string                   `json:"TaskName,omitempty"`
-		Guid     *IaasUcsdInfoRelationship `json:"Guid,omitempty"`
+		TaskName *string                          `json:"TaskName,omitempty"`
+		Guid     NullableIaasUcsdInfoRelationship `json:"Guid,omitempty"`
 	}
 
 	varIaasCustomTaskInfoWithoutEmbeddedStruct := IaasCustomTaskInfoWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varIaasCustomTaskInfoWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varIaasCustomTaskInfoWithoutEmbeddedStruct)
 	if err == nil {
 		varIaasCustomTaskInfo := _IaasCustomTaskInfo{}
 		varIaasCustomTaskInfo.ClassId = varIaasCustomTaskInfoWithoutEmbeddedStruct.ClassId
@@ -344,7 +385,7 @@ func (o *IaasCustomTaskInfo) UnmarshalJSON(bytes []byte) (err error) {
 
 	varIaasCustomTaskInfo := _IaasCustomTaskInfo{}
 
-	err = json.Unmarshal(bytes, &varIaasCustomTaskInfo)
+	err = json.Unmarshal(data, &varIaasCustomTaskInfo)
 	if err == nil {
 		o.MoBaseMo = varIaasCustomTaskInfo.MoBaseMo
 	} else {
@@ -353,7 +394,7 @@ func (o *IaasCustomTaskInfo) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "TaskDescription")

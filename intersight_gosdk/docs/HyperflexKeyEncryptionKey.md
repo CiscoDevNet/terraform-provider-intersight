@@ -16,8 +16,8 @@ Name | Type | Description | Notes
 **Passphrase** | Pointer to **string** | Initial passphrase for the encryption policy, password must contain a minimum of 12 characters, with at least 1 lowercase, 1 uppercase, 1 numeric. | [optional] 
 **ResourceType** | Pointer to **string** | Resource type on which this key will be applied. * &#x60;CLUSTER&#x60; - Encryption is per HyperFlex cluster. * &#x60;DATASTORE&#x60; - Encryption is per dataStore on the HyperFlex cluster. * &#x60;DRIVE&#x60; - Encryption is per drive on the HyperFlex cluster. | [optional] [default to "CLUSTER"]
 **TransitKek** | Pointer to **string** | Copy of Key encryption key, which is used for sending the key over to the remote device endpoint. It is not persisited anywhere. | [optional] 
-**ClusterProfile** | Pointer to [**HyperflexClusterProfileRelationship**](HyperflexClusterProfileRelationship.md) |  | [optional] 
-**ResourceMo** | Pointer to [**MoBaseMoRelationship**](MoBaseMoRelationship.md) |  | [optional] 
+**ClusterProfile** | Pointer to [**NullableHyperflexClusterProfileRelationship**](HyperflexClusterProfileRelationship.md) |  | [optional] 
+**ResourceMo** | Pointer to [**NullableMoBaseMoRelationship**](MoBaseMoRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -353,6 +353,16 @@ SetClusterProfile sets ClusterProfile field to given value.
 
 HasClusterProfile returns a boolean if a field has been set.
 
+### SetClusterProfileNil
+
+`func (o *HyperflexKeyEncryptionKey) SetClusterProfileNil(b bool)`
+
+ SetClusterProfileNil sets the value for ClusterProfile to be an explicit nil
+
+### UnsetClusterProfile
+`func (o *HyperflexKeyEncryptionKey) UnsetClusterProfile()`
+
+UnsetClusterProfile ensures that no value is present for ClusterProfile, not even an explicit nil
 ### GetResourceMo
 
 `func (o *HyperflexKeyEncryptionKey) GetResourceMo() MoBaseMoRelationship`
@@ -378,6 +388,16 @@ SetResourceMo sets ResourceMo field to given value.
 
 HasResourceMo returns a boolean if a field has been set.
 
+### SetResourceMoNil
+
+`func (o *HyperflexKeyEncryptionKey) SetResourceMoNil(b bool)`
+
+ SetResourceMoNil sets the value for ResourceMo to be an explicit nil
+
+### UnsetResourceMo
+`func (o *HyperflexKeyEncryptionKey) UnsetResourceMo()`
+
+UnsetResourceMo ensures that no value is present for ResourceMo, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

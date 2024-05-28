@@ -7,8 +7,8 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "firmware.ChassisUpgrade"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "firmware.ChassisUpgrade"]
 **ExcludeComponentList** | Pointer to **[]string** |  | [optional] 
-**Chassis** | Pointer to [**EquipmentChassisRelationship**](EquipmentChassisRelationship.md) |  | [optional] 
-**Device** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
+**Chassis** | Pointer to [**NullableEquipmentChassisRelationship**](EquipmentChassisRelationship.md) |  | [optional] 
+**Device** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -129,6 +129,16 @@ SetChassis sets Chassis field to given value.
 
 HasChassis returns a boolean if a field has been set.
 
+### SetChassisNil
+
+`func (o *FirmwareChassisUpgrade) SetChassisNil(b bool)`
+
+ SetChassisNil sets the value for Chassis to be an explicit nil
+
+### UnsetChassis
+`func (o *FirmwareChassisUpgrade) UnsetChassis()`
+
+UnsetChassis ensures that no value is present for Chassis, not even an explicit nil
 ### GetDevice
 
 `func (o *FirmwareChassisUpgrade) GetDevice() AssetDeviceRegistrationRelationship`
@@ -154,6 +164,16 @@ SetDevice sets Device field to given value.
 
 HasDevice returns a boolean if a field has been set.
 
+### SetDeviceNil
+
+`func (o *FirmwareChassisUpgrade) SetDeviceNil(b bool)`
+
+ SetDeviceNil sets the value for Device to be an explicit nil
+
+### UnsetDevice
+`func (o *FirmwareChassisUpgrade) UnsetDevice()`
+
+UnsetDevice ensures that no value is present for Device, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the EquipmentSwitchOperation type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &EquipmentSwitchOperation{}
 
 // EquipmentSwitchOperation Models the operational states of a Switch in Intersight.
 type EquipmentSwitchOperation struct {
@@ -33,9 +37,9 @@ type EquipmentSwitchOperation struct {
 	// Captures the status of evacuation on this switch. * `None` - Nil value when no action has been triggered by the user. * `Applied` - User configured settings are in applied state. * `Applying` - User settings are being applied on the target server. * `Failed` - User configured settings could not be applied.
 	ConfigEvacState *string `json:"ConfigEvacState,omitempty"`
 	// Evacuation is blocked by the system if it can cause a traffic outage in the domain. Select \"Force Evacuation\" only if system rejects the operation and you want to override that.
-	ForceEvac            *bool                                `json:"ForceEvac,omitempty"`
-	DeviceRegistration   *AssetDeviceRegistrationRelationship `json:"DeviceRegistration,omitempty"`
-	NetworkElement       *NetworkElementRelationship          `json:"NetworkElement,omitempty"`
+	ForceEvac            *bool                                       `json:"ForceEvac,omitempty"`
+	DeviceRegistration   NullableAssetDeviceRegistrationRelationship `json:"DeviceRegistration,omitempty"`
+	NetworkElement       NullableNetworkElementRelationship          `json:"NetworkElement,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -130,7 +134,7 @@ func (o *EquipmentSwitchOperation) SetObjectType(v string) {
 
 // GetAdminEvacState returns the AdminEvacState field value if set, zero value otherwise.
 func (o *EquipmentSwitchOperation) GetAdminEvacState() string {
-	if o == nil || o.AdminEvacState == nil {
+	if o == nil || IsNil(o.AdminEvacState) {
 		var ret string
 		return ret
 	}
@@ -140,7 +144,7 @@ func (o *EquipmentSwitchOperation) GetAdminEvacState() string {
 // GetAdminEvacStateOk returns a tuple with the AdminEvacState field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EquipmentSwitchOperation) GetAdminEvacStateOk() (*string, bool) {
-	if o == nil || o.AdminEvacState == nil {
+	if o == nil || IsNil(o.AdminEvacState) {
 		return nil, false
 	}
 	return o.AdminEvacState, true
@@ -148,7 +152,7 @@ func (o *EquipmentSwitchOperation) GetAdminEvacStateOk() (*string, bool) {
 
 // HasAdminEvacState returns a boolean if a field has been set.
 func (o *EquipmentSwitchOperation) HasAdminEvacState() bool {
-	if o != nil && o.AdminEvacState != nil {
+	if o != nil && !IsNil(o.AdminEvacState) {
 		return true
 	}
 
@@ -162,7 +166,7 @@ func (o *EquipmentSwitchOperation) SetAdminEvacState(v string) {
 
 // GetAdminLocatorLedAction returns the AdminLocatorLedAction field value if set, zero value otherwise.
 func (o *EquipmentSwitchOperation) GetAdminLocatorLedAction() string {
-	if o == nil || o.AdminLocatorLedAction == nil {
+	if o == nil || IsNil(o.AdminLocatorLedAction) {
 		var ret string
 		return ret
 	}
@@ -172,7 +176,7 @@ func (o *EquipmentSwitchOperation) GetAdminLocatorLedAction() string {
 // GetAdminLocatorLedActionOk returns a tuple with the AdminLocatorLedAction field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EquipmentSwitchOperation) GetAdminLocatorLedActionOk() (*string, bool) {
-	if o == nil || o.AdminLocatorLedAction == nil {
+	if o == nil || IsNil(o.AdminLocatorLedAction) {
 		return nil, false
 	}
 	return o.AdminLocatorLedAction, true
@@ -180,7 +184,7 @@ func (o *EquipmentSwitchOperation) GetAdminLocatorLedActionOk() (*string, bool) 
 
 // HasAdminLocatorLedAction returns a boolean if a field has been set.
 func (o *EquipmentSwitchOperation) HasAdminLocatorLedAction() bool {
-	if o != nil && o.AdminLocatorLedAction != nil {
+	if o != nil && !IsNil(o.AdminLocatorLedAction) {
 		return true
 	}
 
@@ -194,7 +198,7 @@ func (o *EquipmentSwitchOperation) SetAdminLocatorLedAction(v string) {
 
 // GetAdminLocatorLedActionState returns the AdminLocatorLedActionState field value if set, zero value otherwise.
 func (o *EquipmentSwitchOperation) GetAdminLocatorLedActionState() string {
-	if o == nil || o.AdminLocatorLedActionState == nil {
+	if o == nil || IsNil(o.AdminLocatorLedActionState) {
 		var ret string
 		return ret
 	}
@@ -204,7 +208,7 @@ func (o *EquipmentSwitchOperation) GetAdminLocatorLedActionState() string {
 // GetAdminLocatorLedActionStateOk returns a tuple with the AdminLocatorLedActionState field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EquipmentSwitchOperation) GetAdminLocatorLedActionStateOk() (*string, bool) {
-	if o == nil || o.AdminLocatorLedActionState == nil {
+	if o == nil || IsNil(o.AdminLocatorLedActionState) {
 		return nil, false
 	}
 	return o.AdminLocatorLedActionState, true
@@ -212,7 +216,7 @@ func (o *EquipmentSwitchOperation) GetAdminLocatorLedActionStateOk() (*string, b
 
 // HasAdminLocatorLedActionState returns a boolean if a field has been set.
 func (o *EquipmentSwitchOperation) HasAdminLocatorLedActionState() bool {
-	if o != nil && o.AdminLocatorLedActionState != nil {
+	if o != nil && !IsNil(o.AdminLocatorLedActionState) {
 		return true
 	}
 
@@ -226,7 +230,7 @@ func (o *EquipmentSwitchOperation) SetAdminLocatorLedActionState(v string) {
 
 // GetConfigEvacState returns the ConfigEvacState field value if set, zero value otherwise.
 func (o *EquipmentSwitchOperation) GetConfigEvacState() string {
-	if o == nil || o.ConfigEvacState == nil {
+	if o == nil || IsNil(o.ConfigEvacState) {
 		var ret string
 		return ret
 	}
@@ -236,7 +240,7 @@ func (o *EquipmentSwitchOperation) GetConfigEvacState() string {
 // GetConfigEvacStateOk returns a tuple with the ConfigEvacState field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EquipmentSwitchOperation) GetConfigEvacStateOk() (*string, bool) {
-	if o == nil || o.ConfigEvacState == nil {
+	if o == nil || IsNil(o.ConfigEvacState) {
 		return nil, false
 	}
 	return o.ConfigEvacState, true
@@ -244,7 +248,7 @@ func (o *EquipmentSwitchOperation) GetConfigEvacStateOk() (*string, bool) {
 
 // HasConfigEvacState returns a boolean if a field has been set.
 func (o *EquipmentSwitchOperation) HasConfigEvacState() bool {
-	if o != nil && o.ConfigEvacState != nil {
+	if o != nil && !IsNil(o.ConfigEvacState) {
 		return true
 	}
 
@@ -258,7 +262,7 @@ func (o *EquipmentSwitchOperation) SetConfigEvacState(v string) {
 
 // GetForceEvac returns the ForceEvac field value if set, zero value otherwise.
 func (o *EquipmentSwitchOperation) GetForceEvac() bool {
-	if o == nil || o.ForceEvac == nil {
+	if o == nil || IsNil(o.ForceEvac) {
 		var ret bool
 		return ret
 	}
@@ -268,7 +272,7 @@ func (o *EquipmentSwitchOperation) GetForceEvac() bool {
 // GetForceEvacOk returns a tuple with the ForceEvac field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EquipmentSwitchOperation) GetForceEvacOk() (*bool, bool) {
-	if o == nil || o.ForceEvac == nil {
+	if o == nil || IsNil(o.ForceEvac) {
 		return nil, false
 	}
 	return o.ForceEvac, true
@@ -276,7 +280,7 @@ func (o *EquipmentSwitchOperation) GetForceEvacOk() (*bool, bool) {
 
 // HasForceEvac returns a boolean if a field has been set.
 func (o *EquipmentSwitchOperation) HasForceEvac() bool {
-	if o != nil && o.ForceEvac != nil {
+	if o != nil && !IsNil(o.ForceEvac) {
 		return true
 	}
 
@@ -288,116 +292,164 @@ func (o *EquipmentSwitchOperation) SetForceEvac(v bool) {
 	o.ForceEvac = &v
 }
 
-// GetDeviceRegistration returns the DeviceRegistration field value if set, zero value otherwise.
+// GetDeviceRegistration returns the DeviceRegistration field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *EquipmentSwitchOperation) GetDeviceRegistration() AssetDeviceRegistrationRelationship {
-	if o == nil || o.DeviceRegistration == nil {
+	if o == nil || IsNil(o.DeviceRegistration.Get()) {
 		var ret AssetDeviceRegistrationRelationship
 		return ret
 	}
-	return *o.DeviceRegistration
+	return *o.DeviceRegistration.Get()
 }
 
 // GetDeviceRegistrationOk returns a tuple with the DeviceRegistration field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *EquipmentSwitchOperation) GetDeviceRegistrationOk() (*AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.DeviceRegistration == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.DeviceRegistration, true
+	return o.DeviceRegistration.Get(), o.DeviceRegistration.IsSet()
 }
 
 // HasDeviceRegistration returns a boolean if a field has been set.
 func (o *EquipmentSwitchOperation) HasDeviceRegistration() bool {
-	if o != nil && o.DeviceRegistration != nil {
+	if o != nil && o.DeviceRegistration.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetDeviceRegistration gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the DeviceRegistration field.
+// SetDeviceRegistration gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the DeviceRegistration field.
 func (o *EquipmentSwitchOperation) SetDeviceRegistration(v AssetDeviceRegistrationRelationship) {
-	o.DeviceRegistration = &v
+	o.DeviceRegistration.Set(&v)
 }
 
-// GetNetworkElement returns the NetworkElement field value if set, zero value otherwise.
+// SetDeviceRegistrationNil sets the value for DeviceRegistration to be an explicit nil
+func (o *EquipmentSwitchOperation) SetDeviceRegistrationNil() {
+	o.DeviceRegistration.Set(nil)
+}
+
+// UnsetDeviceRegistration ensures that no value is present for DeviceRegistration, not even an explicit nil
+func (o *EquipmentSwitchOperation) UnsetDeviceRegistration() {
+	o.DeviceRegistration.Unset()
+}
+
+// GetNetworkElement returns the NetworkElement field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *EquipmentSwitchOperation) GetNetworkElement() NetworkElementRelationship {
-	if o == nil || o.NetworkElement == nil {
+	if o == nil || IsNil(o.NetworkElement.Get()) {
 		var ret NetworkElementRelationship
 		return ret
 	}
-	return *o.NetworkElement
+	return *o.NetworkElement.Get()
 }
 
 // GetNetworkElementOk returns a tuple with the NetworkElement field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *EquipmentSwitchOperation) GetNetworkElementOk() (*NetworkElementRelationship, bool) {
-	if o == nil || o.NetworkElement == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.NetworkElement, true
+	return o.NetworkElement.Get(), o.NetworkElement.IsSet()
 }
 
 // HasNetworkElement returns a boolean if a field has been set.
 func (o *EquipmentSwitchOperation) HasNetworkElement() bool {
-	if o != nil && o.NetworkElement != nil {
+	if o != nil && o.NetworkElement.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetNetworkElement gets a reference to the given NetworkElementRelationship and assigns it to the NetworkElement field.
+// SetNetworkElement gets a reference to the given NullableNetworkElementRelationship and assigns it to the NetworkElement field.
 func (o *EquipmentSwitchOperation) SetNetworkElement(v NetworkElementRelationship) {
-	o.NetworkElement = &v
+	o.NetworkElement.Set(&v)
+}
+
+// SetNetworkElementNil sets the value for NetworkElement to be an explicit nil
+func (o *EquipmentSwitchOperation) SetNetworkElementNil() {
+	o.NetworkElement.Set(nil)
+}
+
+// UnsetNetworkElement ensures that no value is present for NetworkElement, not even an explicit nil
+func (o *EquipmentSwitchOperation) UnsetNetworkElement() {
+	o.NetworkElement.Unset()
 }
 
 func (o EquipmentSwitchOperation) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o EquipmentSwitchOperation) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.AdminEvacState != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.AdminEvacState) {
 		toSerialize["AdminEvacState"] = o.AdminEvacState
 	}
-	if o.AdminLocatorLedAction != nil {
+	if !IsNil(o.AdminLocatorLedAction) {
 		toSerialize["AdminLocatorLedAction"] = o.AdminLocatorLedAction
 	}
-	if o.AdminLocatorLedActionState != nil {
+	if !IsNil(o.AdminLocatorLedActionState) {
 		toSerialize["AdminLocatorLedActionState"] = o.AdminLocatorLedActionState
 	}
-	if o.ConfigEvacState != nil {
+	if !IsNil(o.ConfigEvacState) {
 		toSerialize["ConfigEvacState"] = o.ConfigEvacState
 	}
-	if o.ForceEvac != nil {
+	if !IsNil(o.ForceEvac) {
 		toSerialize["ForceEvac"] = o.ForceEvac
 	}
-	if o.DeviceRegistration != nil {
-		toSerialize["DeviceRegistration"] = o.DeviceRegistration
+	if o.DeviceRegistration.IsSet() {
+		toSerialize["DeviceRegistration"] = o.DeviceRegistration.Get()
 	}
-	if o.NetworkElement != nil {
-		toSerialize["NetworkElement"] = o.NetworkElement
+	if o.NetworkElement.IsSet() {
+		toSerialize["NetworkElement"] = o.NetworkElement.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *EquipmentSwitchOperation) UnmarshalJSON(bytes []byte) (err error) {
+func (o *EquipmentSwitchOperation) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type EquipmentSwitchOperationWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -412,14 +464,14 @@ func (o *EquipmentSwitchOperation) UnmarshalJSON(bytes []byte) (err error) {
 		// Captures the status of evacuation on this switch. * `None` - Nil value when no action has been triggered by the user. * `Applied` - User configured settings are in applied state. * `Applying` - User settings are being applied on the target server. * `Failed` - User configured settings could not be applied.
 		ConfigEvacState *string `json:"ConfigEvacState,omitempty"`
 		// Evacuation is blocked by the system if it can cause a traffic outage in the domain. Select \"Force Evacuation\" only if system rejects the operation and you want to override that.
-		ForceEvac          *bool                                `json:"ForceEvac,omitempty"`
-		DeviceRegistration *AssetDeviceRegistrationRelationship `json:"DeviceRegistration,omitempty"`
-		NetworkElement     *NetworkElementRelationship          `json:"NetworkElement,omitempty"`
+		ForceEvac          *bool                                       `json:"ForceEvac,omitempty"`
+		DeviceRegistration NullableAssetDeviceRegistrationRelationship `json:"DeviceRegistration,omitempty"`
+		NetworkElement     NullableNetworkElementRelationship          `json:"NetworkElement,omitempty"`
 	}
 
 	varEquipmentSwitchOperationWithoutEmbeddedStruct := EquipmentSwitchOperationWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varEquipmentSwitchOperationWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varEquipmentSwitchOperationWithoutEmbeddedStruct)
 	if err == nil {
 		varEquipmentSwitchOperation := _EquipmentSwitchOperation{}
 		varEquipmentSwitchOperation.ClassId = varEquipmentSwitchOperationWithoutEmbeddedStruct.ClassId
@@ -438,7 +490,7 @@ func (o *EquipmentSwitchOperation) UnmarshalJSON(bytes []byte) (err error) {
 
 	varEquipmentSwitchOperation := _EquipmentSwitchOperation{}
 
-	err = json.Unmarshal(bytes, &varEquipmentSwitchOperation)
+	err = json.Unmarshal(data, &varEquipmentSwitchOperation)
 	if err == nil {
 		o.MoBaseMo = varEquipmentSwitchOperation.MoBaseMo
 	} else {
@@ -447,7 +499,7 @@ func (o *EquipmentSwitchOperation) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "AdminEvacState")

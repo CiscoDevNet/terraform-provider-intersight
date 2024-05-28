@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the WorkflowCliCommand type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &WorkflowCliCommand{}
 
 // WorkflowCliCommand This models a single CLI command that can be executed on the end point.
 type WorkflowCliCommand struct {
@@ -120,7 +124,7 @@ func (o *WorkflowCliCommand) SetObjectType(v string) {
 
 // GetCommand returns the Command field value if set, zero value otherwise.
 func (o *WorkflowCliCommand) GetCommand() string {
-	if o == nil || o.Command == nil {
+	if o == nil || IsNil(o.Command) {
 		var ret string
 		return ret
 	}
@@ -130,7 +134,7 @@ func (o *WorkflowCliCommand) GetCommand() string {
 // GetCommandOk returns a tuple with the Command field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowCliCommand) GetCommandOk() (*string, bool) {
-	if o == nil || o.Command == nil {
+	if o == nil || IsNil(o.Command) {
 		return nil, false
 	}
 	return o.Command, true
@@ -138,7 +142,7 @@ func (o *WorkflowCliCommand) GetCommandOk() (*string, bool) {
 
 // HasCommand returns a boolean if a field has been set.
 func (o *WorkflowCliCommand) HasCommand() bool {
-	if o != nil && o.Command != nil {
+	if o != nil && !IsNil(o.Command) {
 		return true
 	}
 
@@ -152,7 +156,7 @@ func (o *WorkflowCliCommand) SetCommand(v string) {
 
 // GetEndPrompt returns the EndPrompt field value if set, zero value otherwise.
 func (o *WorkflowCliCommand) GetEndPrompt() string {
-	if o == nil || o.EndPrompt == nil {
+	if o == nil || IsNil(o.EndPrompt) {
 		var ret string
 		return ret
 	}
@@ -162,7 +166,7 @@ func (o *WorkflowCliCommand) GetEndPrompt() string {
 // GetEndPromptOk returns a tuple with the EndPrompt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowCliCommand) GetEndPromptOk() (*string, bool) {
-	if o == nil || o.EndPrompt == nil {
+	if o == nil || IsNil(o.EndPrompt) {
 		return nil, false
 	}
 	return o.EndPrompt, true
@@ -170,7 +174,7 @@ func (o *WorkflowCliCommand) GetEndPromptOk() (*string, bool) {
 
 // HasEndPrompt returns a boolean if a field has been set.
 func (o *WorkflowCliCommand) HasEndPrompt() bool {
-	if o != nil && o.EndPrompt != nil {
+	if o != nil && !IsNil(o.EndPrompt) {
 		return true
 	}
 
@@ -195,7 +199,7 @@ func (o *WorkflowCliCommand) GetExpectPrompts() []WorkflowExpectPrompt {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *WorkflowCliCommand) GetExpectPromptsOk() ([]WorkflowExpectPrompt, bool) {
-	if o == nil || o.ExpectPrompts == nil {
+	if o == nil || IsNil(o.ExpectPrompts) {
 		return nil, false
 	}
 	return o.ExpectPrompts, true
@@ -203,7 +207,7 @@ func (o *WorkflowCliCommand) GetExpectPromptsOk() ([]WorkflowExpectPrompt, bool)
 
 // HasExpectPrompts returns a boolean if a field has been set.
 func (o *WorkflowCliCommand) HasExpectPrompts() bool {
-	if o != nil && o.ExpectPrompts != nil {
+	if o != nil && IsNil(o.ExpectPrompts) {
 		return true
 	}
 
@@ -228,7 +232,7 @@ func (o *WorkflowCliCommand) GetExpectedExitCodes() []int64 {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *WorkflowCliCommand) GetExpectedExitCodesOk() ([]int64, bool) {
-	if o == nil || o.ExpectedExitCodes == nil {
+	if o == nil || IsNil(o.ExpectedExitCodes) {
 		return nil, false
 	}
 	return o.ExpectedExitCodes, true
@@ -236,7 +240,7 @@ func (o *WorkflowCliCommand) GetExpectedExitCodesOk() ([]int64, bool) {
 
 // HasExpectedExitCodes returns a boolean if a field has been set.
 func (o *WorkflowCliCommand) HasExpectedExitCodes() bool {
-	if o != nil && o.ExpectedExitCodes != nil {
+	if o != nil && IsNil(o.ExpectedExitCodes) {
 		return true
 	}
 
@@ -250,7 +254,7 @@ func (o *WorkflowCliCommand) SetExpectedExitCodes(v []int64) {
 
 // GetSkipStatusCheck returns the SkipStatusCheck field value if set, zero value otherwise.
 func (o *WorkflowCliCommand) GetSkipStatusCheck() bool {
-	if o == nil || o.SkipStatusCheck == nil {
+	if o == nil || IsNil(o.SkipStatusCheck) {
 		var ret bool
 		return ret
 	}
@@ -260,7 +264,7 @@ func (o *WorkflowCliCommand) GetSkipStatusCheck() bool {
 // GetSkipStatusCheckOk returns a tuple with the SkipStatusCheck field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowCliCommand) GetSkipStatusCheckOk() (*bool, bool) {
-	if o == nil || o.SkipStatusCheck == nil {
+	if o == nil || IsNil(o.SkipStatusCheck) {
 		return nil, false
 	}
 	return o.SkipStatusCheck, true
@@ -268,7 +272,7 @@ func (o *WorkflowCliCommand) GetSkipStatusCheckOk() (*bool, bool) {
 
 // HasSkipStatusCheck returns a boolean if a field has been set.
 func (o *WorkflowCliCommand) HasSkipStatusCheck() bool {
-	if o != nil && o.SkipStatusCheck != nil {
+	if o != nil && !IsNil(o.SkipStatusCheck) {
 		return true
 	}
 
@@ -282,7 +286,7 @@ func (o *WorkflowCliCommand) SetSkipStatusCheck(v bool) {
 
 // GetTerminalEnd returns the TerminalEnd field value if set, zero value otherwise.
 func (o *WorkflowCliCommand) GetTerminalEnd() bool {
-	if o == nil || o.TerminalEnd == nil {
+	if o == nil || IsNil(o.TerminalEnd) {
 		var ret bool
 		return ret
 	}
@@ -292,7 +296,7 @@ func (o *WorkflowCliCommand) GetTerminalEnd() bool {
 // GetTerminalEndOk returns a tuple with the TerminalEnd field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowCliCommand) GetTerminalEndOk() (*bool, bool) {
-	if o == nil || o.TerminalEnd == nil {
+	if o == nil || IsNil(o.TerminalEnd) {
 		return nil, false
 	}
 	return o.TerminalEnd, true
@@ -300,7 +304,7 @@ func (o *WorkflowCliCommand) GetTerminalEndOk() (*bool, bool) {
 
 // HasTerminalEnd returns a boolean if a field has been set.
 func (o *WorkflowCliCommand) HasTerminalEnd() bool {
-	if o != nil && o.TerminalEnd != nil {
+	if o != nil && !IsNil(o.TerminalEnd) {
 		return true
 	}
 
@@ -314,7 +318,7 @@ func (o *WorkflowCliCommand) SetTerminalEnd(v bool) {
 
 // GetTerminalStart returns the TerminalStart field value if set, zero value otherwise.
 func (o *WorkflowCliCommand) GetTerminalStart() bool {
-	if o == nil || o.TerminalStart == nil {
+	if o == nil || IsNil(o.TerminalStart) {
 		var ret bool
 		return ret
 	}
@@ -324,7 +328,7 @@ func (o *WorkflowCliCommand) GetTerminalStart() bool {
 // GetTerminalStartOk returns a tuple with the TerminalStart field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowCliCommand) GetTerminalStartOk() (*bool, bool) {
-	if o == nil || o.TerminalStart == nil {
+	if o == nil || IsNil(o.TerminalStart) {
 		return nil, false
 	}
 	return o.TerminalStart, true
@@ -332,7 +336,7 @@ func (o *WorkflowCliCommand) GetTerminalStartOk() (*bool, bool) {
 
 // HasTerminalStart returns a boolean if a field has been set.
 func (o *WorkflowCliCommand) HasTerminalStart() bool {
-	if o != nil && o.TerminalStart != nil {
+	if o != nil && !IsNil(o.TerminalStart) {
 		return true
 	}
 
@@ -346,7 +350,7 @@ func (o *WorkflowCliCommand) SetTerminalStart(v bool) {
 
 // GetType returns the Type field value if set, zero value otherwise.
 func (o *WorkflowCliCommand) GetType() string {
-	if o == nil || o.Type == nil {
+	if o == nil || IsNil(o.Type) {
 		var ret string
 		return ret
 	}
@@ -356,7 +360,7 @@ func (o *WorkflowCliCommand) GetType() string {
 // GetTypeOk returns a tuple with the Type field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowCliCommand) GetTypeOk() (*string, bool) {
-	if o == nil || o.Type == nil {
+	if o == nil || IsNil(o.Type) {
 		return nil, false
 	}
 	return o.Type, true
@@ -364,7 +368,7 @@ func (o *WorkflowCliCommand) GetTypeOk() (*string, bool) {
 
 // HasType returns a boolean if a field has been set.
 func (o *WorkflowCliCommand) HasType() bool {
-	if o != nil && o.Type != nil {
+	if o != nil && !IsNil(o.Type) {
 		return true
 	}
 
@@ -377,25 +381,29 @@ func (o *WorkflowCliCommand) SetType(v string) {
 }
 
 func (o WorkflowCliCommand) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o WorkflowCliCommand) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedWorkflowApi, errWorkflowApi := json.Marshal(o.WorkflowApi)
 	if errWorkflowApi != nil {
-		return []byte{}, errWorkflowApi
+		return map[string]interface{}{}, errWorkflowApi
 	}
 	errWorkflowApi = json.Unmarshal([]byte(serializedWorkflowApi), &toSerialize)
 	if errWorkflowApi != nil {
-		return []byte{}, errWorkflowApi
+		return map[string]interface{}{}, errWorkflowApi
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Command != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Command) {
 		toSerialize["Command"] = o.Command
 	}
-	if o.EndPrompt != nil {
+	if !IsNil(o.EndPrompt) {
 		toSerialize["EndPrompt"] = o.EndPrompt
 	}
 	if o.ExpectPrompts != nil {
@@ -404,16 +412,16 @@ func (o WorkflowCliCommand) MarshalJSON() ([]byte, error) {
 	if o.ExpectedExitCodes != nil {
 		toSerialize["ExpectedExitCodes"] = o.ExpectedExitCodes
 	}
-	if o.SkipStatusCheck != nil {
+	if !IsNil(o.SkipStatusCheck) {
 		toSerialize["SkipStatusCheck"] = o.SkipStatusCheck
 	}
-	if o.TerminalEnd != nil {
+	if !IsNil(o.TerminalEnd) {
 		toSerialize["TerminalEnd"] = o.TerminalEnd
 	}
-	if o.TerminalStart != nil {
+	if !IsNil(o.TerminalStart) {
 		toSerialize["TerminalStart"] = o.TerminalStart
 	}
-	if o.Type != nil {
+	if !IsNil(o.Type) {
 		toSerialize["Type"] = o.Type
 	}
 
@@ -421,10 +429,32 @@ func (o WorkflowCliCommand) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *WorkflowCliCommand) UnmarshalJSON(bytes []byte) (err error) {
+func (o *WorkflowCliCommand) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type WorkflowCliCommandWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -448,7 +478,7 @@ func (o *WorkflowCliCommand) UnmarshalJSON(bytes []byte) (err error) {
 
 	varWorkflowCliCommandWithoutEmbeddedStruct := WorkflowCliCommandWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varWorkflowCliCommandWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varWorkflowCliCommandWithoutEmbeddedStruct)
 	if err == nil {
 		varWorkflowCliCommand := _WorkflowCliCommand{}
 		varWorkflowCliCommand.ClassId = varWorkflowCliCommandWithoutEmbeddedStruct.ClassId
@@ -468,7 +498,7 @@ func (o *WorkflowCliCommand) UnmarshalJSON(bytes []byte) (err error) {
 
 	varWorkflowCliCommand := _WorkflowCliCommand{}
 
-	err = json.Unmarshal(bytes, &varWorkflowCliCommand)
+	err = json.Unmarshal(data, &varWorkflowCliCommand)
 	if err == nil {
 		o.WorkflowApi = varWorkflowCliCommand.WorkflowApi
 	} else {
@@ -477,7 +507,7 @@ func (o *WorkflowCliCommand) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Command")

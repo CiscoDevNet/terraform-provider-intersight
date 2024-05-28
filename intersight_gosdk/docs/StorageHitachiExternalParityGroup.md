@@ -20,8 +20,8 @@ Name | Type | Description | Notes
 **TotalOpenVolumeCapacity** | Pointer to **int64** | Total volume capacity of the open volumes in the external parity group (KB). | [optional] [readonly] 
 **UnallocatedOpenVolumeCapacity** | Pointer to **int64** | From among the open volumes in the external parity group, the total capacity of volumes to which paths are not allocated (KB). | [optional] [readonly] 
 **UsedCapacityRate** | Pointer to **int64** | Usage rate of the external parity group. | [optional] [readonly] 
-**Array** | Pointer to [**StorageHitachiArrayRelationship**](StorageHitachiArrayRelationship.md) |  | [optional] 
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
+**Array** | Pointer to [**NullableStorageHitachiArrayRelationship**](StorageHitachiArrayRelationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -467,6 +467,16 @@ SetArray sets Array field to given value.
 
 HasArray returns a boolean if a field has been set.
 
+### SetArrayNil
+
+`func (o *StorageHitachiExternalParityGroup) SetArrayNil(b bool)`
+
+ SetArrayNil sets the value for Array to be an explicit nil
+
+### UnsetArray
+`func (o *StorageHitachiExternalParityGroup) UnsetArray()`
+
+UnsetArray ensures that no value is present for Array, not even an explicit nil
 ### GetRegisteredDevice
 
 `func (o *StorageHitachiExternalParityGroup) GetRegisteredDevice() AssetDeviceRegistrationRelationship`
@@ -492,6 +502,16 @@ SetRegisteredDevice sets RegisteredDevice field to given value.
 
 HasRegisteredDevice returns a boolean if a field has been set.
 
+### SetRegisteredDeviceNil
+
+`func (o *StorageHitachiExternalParityGroup) SetRegisteredDeviceNil(b bool)`
+
+ SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+
+### UnsetRegisteredDevice
+`func (o *StorageHitachiExternalParityGroup) UnsetRegisteredDevice()`
+
+UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

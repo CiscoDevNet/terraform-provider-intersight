@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the HyperflexTarget type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &HyperflexTarget{}
 
 // HyperflexTarget A HyperFlex iSCSI target entity. Contains detailed information about the iSCSI target which includes a list of linked iSCSI initiator group objects, list of iSCSI lun objects associated with the iSCSI target, authorization method and iSCSI qualified name.
 type HyperflexTarget struct {
@@ -37,8 +41,8 @@ type HyperflexTarget struct {
 	// UUID of the HyperFlex iSCSI target.
 	Uuid *string `json:"Uuid,omitempty"`
 	// Version of the Initiator Group.
-	Version *int64                        `json:"Version,omitempty"`
-	Cluster *HyperflexClusterRelationship `json:"Cluster,omitempty"`
+	Version *int64                               `json:"Version,omitempty"`
+	Cluster NullableHyperflexClusterRelationship `json:"Cluster,omitempty"`
 	// An array of relationships to hyperflexInitiatorGroup resources.
 	InitiatorGroups []HyperflexInitiatorGroupRelationship `json:"InitiatorGroups,omitempty"`
 	// An array of relationships to hyperflexLun resources.
@@ -121,7 +125,7 @@ func (o *HyperflexTarget) SetObjectType(v string) {
 
 // GetAuthMethod returns the AuthMethod field value if set, zero value otherwise.
 func (o *HyperflexTarget) GetAuthMethod() string {
-	if o == nil || o.AuthMethod == nil {
+	if o == nil || IsNil(o.AuthMethod) {
 		var ret string
 		return ret
 	}
@@ -131,7 +135,7 @@ func (o *HyperflexTarget) GetAuthMethod() string {
 // GetAuthMethodOk returns a tuple with the AuthMethod field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexTarget) GetAuthMethodOk() (*string, bool) {
-	if o == nil || o.AuthMethod == nil {
+	if o == nil || IsNil(o.AuthMethod) {
 		return nil, false
 	}
 	return o.AuthMethod, true
@@ -139,7 +143,7 @@ func (o *HyperflexTarget) GetAuthMethodOk() (*string, bool) {
 
 // HasAuthMethod returns a boolean if a field has been set.
 func (o *HyperflexTarget) HasAuthMethod() bool {
-	if o != nil && o.AuthMethod != nil {
+	if o != nil && !IsNil(o.AuthMethod) {
 		return true
 	}
 
@@ -164,7 +168,7 @@ func (o *HyperflexTarget) GetInitiatorGroupUuids() []string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *HyperflexTarget) GetInitiatorGroupUuidsOk() ([]string, bool) {
-	if o == nil || o.InitiatorGroupUuids == nil {
+	if o == nil || IsNil(o.InitiatorGroupUuids) {
 		return nil, false
 	}
 	return o.InitiatorGroupUuids, true
@@ -172,7 +176,7 @@ func (o *HyperflexTarget) GetInitiatorGroupUuidsOk() ([]string, bool) {
 
 // HasInitiatorGroupUuids returns a boolean if a field has been set.
 func (o *HyperflexTarget) HasInitiatorGroupUuids() bool {
-	if o != nil && o.InitiatorGroupUuids != nil {
+	if o != nil && IsNil(o.InitiatorGroupUuids) {
 		return true
 	}
 
@@ -186,7 +190,7 @@ func (o *HyperflexTarget) SetInitiatorGroupUuids(v []string) {
 
 // GetInventorySource returns the InventorySource field value if set, zero value otherwise.
 func (o *HyperflexTarget) GetInventorySource() string {
-	if o == nil || o.InventorySource == nil {
+	if o == nil || IsNil(o.InventorySource) {
 		var ret string
 		return ret
 	}
@@ -196,7 +200,7 @@ func (o *HyperflexTarget) GetInventorySource() string {
 // GetInventorySourceOk returns a tuple with the InventorySource field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexTarget) GetInventorySourceOk() (*string, bool) {
-	if o == nil || o.InventorySource == nil {
+	if o == nil || IsNil(o.InventorySource) {
 		return nil, false
 	}
 	return o.InventorySource, true
@@ -204,7 +208,7 @@ func (o *HyperflexTarget) GetInventorySourceOk() (*string, bool) {
 
 // HasInventorySource returns a boolean if a field has been set.
 func (o *HyperflexTarget) HasInventorySource() bool {
-	if o != nil && o.InventorySource != nil {
+	if o != nil && !IsNil(o.InventorySource) {
 		return true
 	}
 
@@ -218,7 +222,7 @@ func (o *HyperflexTarget) SetInventorySource(v string) {
 
 // GetIqn returns the Iqn field value if set, zero value otherwise.
 func (o *HyperflexTarget) GetIqn() string {
-	if o == nil || o.Iqn == nil {
+	if o == nil || IsNil(o.Iqn) {
 		var ret string
 		return ret
 	}
@@ -228,7 +232,7 @@ func (o *HyperflexTarget) GetIqn() string {
 // GetIqnOk returns a tuple with the Iqn field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexTarget) GetIqnOk() (*string, bool) {
-	if o == nil || o.Iqn == nil {
+	if o == nil || IsNil(o.Iqn) {
 		return nil, false
 	}
 	return o.Iqn, true
@@ -236,7 +240,7 @@ func (o *HyperflexTarget) GetIqnOk() (*string, bool) {
 
 // HasIqn returns a boolean if a field has been set.
 func (o *HyperflexTarget) HasIqn() bool {
-	if o != nil && o.Iqn != nil {
+	if o != nil && !IsNil(o.Iqn) {
 		return true
 	}
 
@@ -261,7 +265,7 @@ func (o *HyperflexTarget) GetLunUuids() []string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *HyperflexTarget) GetLunUuidsOk() ([]string, bool) {
-	if o == nil || o.LunUuids == nil {
+	if o == nil || IsNil(o.LunUuids) {
 		return nil, false
 	}
 	return o.LunUuids, true
@@ -269,7 +273,7 @@ func (o *HyperflexTarget) GetLunUuidsOk() ([]string, bool) {
 
 // HasLunUuids returns a boolean if a field has been set.
 func (o *HyperflexTarget) HasLunUuids() bool {
-	if o != nil && o.LunUuids != nil {
+	if o != nil && IsNil(o.LunUuids) {
 		return true
 	}
 
@@ -283,7 +287,7 @@ func (o *HyperflexTarget) SetLunUuids(v []string) {
 
 // GetNumActiveInitiators returns the NumActiveInitiators field value if set, zero value otherwise.
 func (o *HyperflexTarget) GetNumActiveInitiators() int64 {
-	if o == nil || o.NumActiveInitiators == nil {
+	if o == nil || IsNil(o.NumActiveInitiators) {
 		var ret int64
 		return ret
 	}
@@ -293,7 +297,7 @@ func (o *HyperflexTarget) GetNumActiveInitiators() int64 {
 // GetNumActiveInitiatorsOk returns a tuple with the NumActiveInitiators field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexTarget) GetNumActiveInitiatorsOk() (*int64, bool) {
-	if o == nil || o.NumActiveInitiators == nil {
+	if o == nil || IsNil(o.NumActiveInitiators) {
 		return nil, false
 	}
 	return o.NumActiveInitiators, true
@@ -301,7 +305,7 @@ func (o *HyperflexTarget) GetNumActiveInitiatorsOk() (*int64, bool) {
 
 // HasNumActiveInitiators returns a boolean if a field has been set.
 func (o *HyperflexTarget) HasNumActiveInitiators() bool {
-	if o != nil && o.NumActiveInitiators != nil {
+	if o != nil && !IsNil(o.NumActiveInitiators) {
 		return true
 	}
 
@@ -315,7 +319,7 @@ func (o *HyperflexTarget) SetNumActiveInitiators(v int64) {
 
 // GetUuid returns the Uuid field value if set, zero value otherwise.
 func (o *HyperflexTarget) GetUuid() string {
-	if o == nil || o.Uuid == nil {
+	if o == nil || IsNil(o.Uuid) {
 		var ret string
 		return ret
 	}
@@ -325,7 +329,7 @@ func (o *HyperflexTarget) GetUuid() string {
 // GetUuidOk returns a tuple with the Uuid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexTarget) GetUuidOk() (*string, bool) {
-	if o == nil || o.Uuid == nil {
+	if o == nil || IsNil(o.Uuid) {
 		return nil, false
 	}
 	return o.Uuid, true
@@ -333,7 +337,7 @@ func (o *HyperflexTarget) GetUuidOk() (*string, bool) {
 
 // HasUuid returns a boolean if a field has been set.
 func (o *HyperflexTarget) HasUuid() bool {
-	if o != nil && o.Uuid != nil {
+	if o != nil && !IsNil(o.Uuid) {
 		return true
 	}
 
@@ -347,7 +351,7 @@ func (o *HyperflexTarget) SetUuid(v string) {
 
 // GetVersion returns the Version field value if set, zero value otherwise.
 func (o *HyperflexTarget) GetVersion() int64 {
-	if o == nil || o.Version == nil {
+	if o == nil || IsNil(o.Version) {
 		var ret int64
 		return ret
 	}
@@ -357,7 +361,7 @@ func (o *HyperflexTarget) GetVersion() int64 {
 // GetVersionOk returns a tuple with the Version field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexTarget) GetVersionOk() (*int64, bool) {
-	if o == nil || o.Version == nil {
+	if o == nil || IsNil(o.Version) {
 		return nil, false
 	}
 	return o.Version, true
@@ -365,7 +369,7 @@ func (o *HyperflexTarget) GetVersionOk() (*int64, bool) {
 
 // HasVersion returns a boolean if a field has been set.
 func (o *HyperflexTarget) HasVersion() bool {
-	if o != nil && o.Version != nil {
+	if o != nil && !IsNil(o.Version) {
 		return true
 	}
 
@@ -377,36 +381,47 @@ func (o *HyperflexTarget) SetVersion(v int64) {
 	o.Version = &v
 }
 
-// GetCluster returns the Cluster field value if set, zero value otherwise.
+// GetCluster returns the Cluster field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *HyperflexTarget) GetCluster() HyperflexClusterRelationship {
-	if o == nil || o.Cluster == nil {
+	if o == nil || IsNil(o.Cluster.Get()) {
 		var ret HyperflexClusterRelationship
 		return ret
 	}
-	return *o.Cluster
+	return *o.Cluster.Get()
 }
 
 // GetClusterOk returns a tuple with the Cluster field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *HyperflexTarget) GetClusterOk() (*HyperflexClusterRelationship, bool) {
-	if o == nil || o.Cluster == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Cluster, true
+	return o.Cluster.Get(), o.Cluster.IsSet()
 }
 
 // HasCluster returns a boolean if a field has been set.
 func (o *HyperflexTarget) HasCluster() bool {
-	if o != nil && o.Cluster != nil {
+	if o != nil && o.Cluster.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetCluster gets a reference to the given HyperflexClusterRelationship and assigns it to the Cluster field.
+// SetCluster gets a reference to the given NullableHyperflexClusterRelationship and assigns it to the Cluster field.
 func (o *HyperflexTarget) SetCluster(v HyperflexClusterRelationship) {
-	o.Cluster = &v
+	o.Cluster.Set(&v)
+}
+
+// SetClusterNil sets the value for Cluster to be an explicit nil
+func (o *HyperflexTarget) SetClusterNil() {
+	o.Cluster.Set(nil)
+}
+
+// UnsetCluster ensures that no value is present for Cluster, not even an explicit nil
+func (o *HyperflexTarget) UnsetCluster() {
+	o.Cluster.Unset()
 }
 
 // GetInitiatorGroups returns the InitiatorGroups field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -422,7 +437,7 @@ func (o *HyperflexTarget) GetInitiatorGroups() []HyperflexInitiatorGroupRelation
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *HyperflexTarget) GetInitiatorGroupsOk() ([]HyperflexInitiatorGroupRelationship, bool) {
-	if o == nil || o.InitiatorGroups == nil {
+	if o == nil || IsNil(o.InitiatorGroups) {
 		return nil, false
 	}
 	return o.InitiatorGroups, true
@@ -430,7 +445,7 @@ func (o *HyperflexTarget) GetInitiatorGroupsOk() ([]HyperflexInitiatorGroupRelat
 
 // HasInitiatorGroups returns a boolean if a field has been set.
 func (o *HyperflexTarget) HasInitiatorGroups() bool {
-	if o != nil && o.InitiatorGroups != nil {
+	if o != nil && IsNil(o.InitiatorGroups) {
 		return true
 	}
 
@@ -455,7 +470,7 @@ func (o *HyperflexTarget) GetLuns() []HyperflexLunRelationship {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *HyperflexTarget) GetLunsOk() ([]HyperflexLunRelationship, bool) {
-	if o == nil || o.Luns == nil {
+	if o == nil || IsNil(o.Luns) {
 		return nil, false
 	}
 	return o.Luns, true
@@ -463,7 +478,7 @@ func (o *HyperflexTarget) GetLunsOk() ([]HyperflexLunRelationship, bool) {
 
 // HasLuns returns a boolean if a field has been set.
 func (o *HyperflexTarget) HasLuns() bool {
-	if o != nil && o.Luns != nil {
+	if o != nil && IsNil(o.Luns) {
 		return true
 	}
 
@@ -476,47 +491,51 @@ func (o *HyperflexTarget) SetLuns(v []HyperflexLunRelationship) {
 }
 
 func (o HyperflexTarget) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o HyperflexTarget) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedStorageBaseTarget, errStorageBaseTarget := json.Marshal(o.StorageBaseTarget)
 	if errStorageBaseTarget != nil {
-		return []byte{}, errStorageBaseTarget
+		return map[string]interface{}{}, errStorageBaseTarget
 	}
 	errStorageBaseTarget = json.Unmarshal([]byte(serializedStorageBaseTarget), &toSerialize)
 	if errStorageBaseTarget != nil {
-		return []byte{}, errStorageBaseTarget
+		return map[string]interface{}{}, errStorageBaseTarget
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.AuthMethod != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.AuthMethod) {
 		toSerialize["AuthMethod"] = o.AuthMethod
 	}
 	if o.InitiatorGroupUuids != nil {
 		toSerialize["InitiatorGroupUuids"] = o.InitiatorGroupUuids
 	}
-	if o.InventorySource != nil {
+	if !IsNil(o.InventorySource) {
 		toSerialize["InventorySource"] = o.InventorySource
 	}
-	if o.Iqn != nil {
+	if !IsNil(o.Iqn) {
 		toSerialize["Iqn"] = o.Iqn
 	}
 	if o.LunUuids != nil {
 		toSerialize["LunUuids"] = o.LunUuids
 	}
-	if o.NumActiveInitiators != nil {
+	if !IsNil(o.NumActiveInitiators) {
 		toSerialize["NumActiveInitiators"] = o.NumActiveInitiators
 	}
-	if o.Uuid != nil {
+	if !IsNil(o.Uuid) {
 		toSerialize["Uuid"] = o.Uuid
 	}
-	if o.Version != nil {
+	if !IsNil(o.Version) {
 		toSerialize["Version"] = o.Version
 	}
-	if o.Cluster != nil {
-		toSerialize["Cluster"] = o.Cluster
+	if o.Cluster.IsSet() {
+		toSerialize["Cluster"] = o.Cluster.Get()
 	}
 	if o.InitiatorGroups != nil {
 		toSerialize["InitiatorGroups"] = o.InitiatorGroups
@@ -529,10 +548,32 @@ func (o HyperflexTarget) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *HyperflexTarget) UnmarshalJSON(bytes []byte) (err error) {
+func (o *HyperflexTarget) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type HyperflexTargetWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -551,8 +592,8 @@ func (o *HyperflexTarget) UnmarshalJSON(bytes []byte) (err error) {
 		// UUID of the HyperFlex iSCSI target.
 		Uuid *string `json:"Uuid,omitempty"`
 		// Version of the Initiator Group.
-		Version *int64                        `json:"Version,omitempty"`
-		Cluster *HyperflexClusterRelationship `json:"Cluster,omitempty"`
+		Version *int64                               `json:"Version,omitempty"`
+		Cluster NullableHyperflexClusterRelationship `json:"Cluster,omitempty"`
 		// An array of relationships to hyperflexInitiatorGroup resources.
 		InitiatorGroups []HyperflexInitiatorGroupRelationship `json:"InitiatorGroups,omitempty"`
 		// An array of relationships to hyperflexLun resources.
@@ -561,7 +602,7 @@ func (o *HyperflexTarget) UnmarshalJSON(bytes []byte) (err error) {
 
 	varHyperflexTargetWithoutEmbeddedStruct := HyperflexTargetWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varHyperflexTargetWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varHyperflexTargetWithoutEmbeddedStruct)
 	if err == nil {
 		varHyperflexTarget := _HyperflexTarget{}
 		varHyperflexTarget.ClassId = varHyperflexTargetWithoutEmbeddedStruct.ClassId
@@ -584,7 +625,7 @@ func (o *HyperflexTarget) UnmarshalJSON(bytes []byte) (err error) {
 
 	varHyperflexTarget := _HyperflexTarget{}
 
-	err = json.Unmarshal(bytes, &varHyperflexTarget)
+	err = json.Unmarshal(data, &varHyperflexTarget)
 	if err == nil {
 		o.StorageBaseTarget = varHyperflexTarget.StorageBaseTarget
 	} else {
@@ -593,7 +634,7 @@ func (o *HyperflexTarget) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "AuthMethod")

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the NiatelemetryApicUiPageCounts type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &NiatelemetryApicUiPageCounts{}
 
 // NiatelemetryApicUiPageCounts Object to capture the UI page counts in APIC.
 type NiatelemetryApicUiPageCounts struct {
@@ -35,8 +39,8 @@ type NiatelemetryApicUiPageCounts struct {
 	// Version of record being pushed. This determines what was the API version for data available from the device.
 	RecordVersion *string `json:"RecordVersion,omitempty"`
 	// Name of the APIC site from which this data is being collected.
-	SiteName             *string                              `json:"SiteName,omitempty"`
-	RegisteredDevice     *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+	SiteName             *string                                     `json:"SiteName,omitempty"`
+	RegisteredDevice     NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -115,7 +119,7 @@ func (o *NiatelemetryApicUiPageCounts) SetObjectType(v string) {
 
 // GetDn returns the Dn field value if set, zero value otherwise.
 func (o *NiatelemetryApicUiPageCounts) GetDn() string {
-	if o == nil || o.Dn == nil {
+	if o == nil || IsNil(o.Dn) {
 		var ret string
 		return ret
 	}
@@ -125,7 +129,7 @@ func (o *NiatelemetryApicUiPageCounts) GetDn() string {
 // GetDnOk returns a tuple with the Dn field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryApicUiPageCounts) GetDnOk() (*string, bool) {
-	if o == nil || o.Dn == nil {
+	if o == nil || IsNil(o.Dn) {
 		return nil, false
 	}
 	return o.Dn, true
@@ -133,7 +137,7 @@ func (o *NiatelemetryApicUiPageCounts) GetDnOk() (*string, bool) {
 
 // HasDn returns a boolean if a field has been set.
 func (o *NiatelemetryApicUiPageCounts) HasDn() bool {
-	if o != nil && o.Dn != nil {
+	if o != nil && !IsNil(o.Dn) {
 		return true
 	}
 
@@ -147,7 +151,7 @@ func (o *NiatelemetryApicUiPageCounts) SetDn(v string) {
 
 // GetPageCount returns the PageCount field value if set, zero value otherwise.
 func (o *NiatelemetryApicUiPageCounts) GetPageCount() int64 {
-	if o == nil || o.PageCount == nil {
+	if o == nil || IsNil(o.PageCount) {
 		var ret int64
 		return ret
 	}
@@ -157,7 +161,7 @@ func (o *NiatelemetryApicUiPageCounts) GetPageCount() int64 {
 // GetPageCountOk returns a tuple with the PageCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryApicUiPageCounts) GetPageCountOk() (*int64, bool) {
-	if o == nil || o.PageCount == nil {
+	if o == nil || IsNil(o.PageCount) {
 		return nil, false
 	}
 	return o.PageCount, true
@@ -165,7 +169,7 @@ func (o *NiatelemetryApicUiPageCounts) GetPageCountOk() (*int64, bool) {
 
 // HasPageCount returns a boolean if a field has been set.
 func (o *NiatelemetryApicUiPageCounts) HasPageCount() bool {
-	if o != nil && o.PageCount != nil {
+	if o != nil && !IsNil(o.PageCount) {
 		return true
 	}
 
@@ -179,7 +183,7 @@ func (o *NiatelemetryApicUiPageCounts) SetPageCount(v int64) {
 
 // GetPageName returns the PageName field value if set, zero value otherwise.
 func (o *NiatelemetryApicUiPageCounts) GetPageName() string {
-	if o == nil || o.PageName == nil {
+	if o == nil || IsNil(o.PageName) {
 		var ret string
 		return ret
 	}
@@ -189,7 +193,7 @@ func (o *NiatelemetryApicUiPageCounts) GetPageName() string {
 // GetPageNameOk returns a tuple with the PageName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryApicUiPageCounts) GetPageNameOk() (*string, bool) {
-	if o == nil || o.PageName == nil {
+	if o == nil || IsNil(o.PageName) {
 		return nil, false
 	}
 	return o.PageName, true
@@ -197,7 +201,7 @@ func (o *NiatelemetryApicUiPageCounts) GetPageNameOk() (*string, bool) {
 
 // HasPageName returns a boolean if a field has been set.
 func (o *NiatelemetryApicUiPageCounts) HasPageName() bool {
-	if o != nil && o.PageName != nil {
+	if o != nil && !IsNil(o.PageName) {
 		return true
 	}
 
@@ -211,7 +215,7 @@ func (o *NiatelemetryApicUiPageCounts) SetPageName(v string) {
 
 // GetRecordType returns the RecordType field value if set, zero value otherwise.
 func (o *NiatelemetryApicUiPageCounts) GetRecordType() string {
-	if o == nil || o.RecordType == nil {
+	if o == nil || IsNil(o.RecordType) {
 		var ret string
 		return ret
 	}
@@ -221,7 +225,7 @@ func (o *NiatelemetryApicUiPageCounts) GetRecordType() string {
 // GetRecordTypeOk returns a tuple with the RecordType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryApicUiPageCounts) GetRecordTypeOk() (*string, bool) {
-	if o == nil || o.RecordType == nil {
+	if o == nil || IsNil(o.RecordType) {
 		return nil, false
 	}
 	return o.RecordType, true
@@ -229,7 +233,7 @@ func (o *NiatelemetryApicUiPageCounts) GetRecordTypeOk() (*string, bool) {
 
 // HasRecordType returns a boolean if a field has been set.
 func (o *NiatelemetryApicUiPageCounts) HasRecordType() bool {
-	if o != nil && o.RecordType != nil {
+	if o != nil && !IsNil(o.RecordType) {
 		return true
 	}
 
@@ -243,7 +247,7 @@ func (o *NiatelemetryApicUiPageCounts) SetRecordType(v string) {
 
 // GetRecordVersion returns the RecordVersion field value if set, zero value otherwise.
 func (o *NiatelemetryApicUiPageCounts) GetRecordVersion() string {
-	if o == nil || o.RecordVersion == nil {
+	if o == nil || IsNil(o.RecordVersion) {
 		var ret string
 		return ret
 	}
@@ -253,7 +257,7 @@ func (o *NiatelemetryApicUiPageCounts) GetRecordVersion() string {
 // GetRecordVersionOk returns a tuple with the RecordVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryApicUiPageCounts) GetRecordVersionOk() (*string, bool) {
-	if o == nil || o.RecordVersion == nil {
+	if o == nil || IsNil(o.RecordVersion) {
 		return nil, false
 	}
 	return o.RecordVersion, true
@@ -261,7 +265,7 @@ func (o *NiatelemetryApicUiPageCounts) GetRecordVersionOk() (*string, bool) {
 
 // HasRecordVersion returns a boolean if a field has been set.
 func (o *NiatelemetryApicUiPageCounts) HasRecordVersion() bool {
-	if o != nil && o.RecordVersion != nil {
+	if o != nil && !IsNil(o.RecordVersion) {
 		return true
 	}
 
@@ -275,7 +279,7 @@ func (o *NiatelemetryApicUiPageCounts) SetRecordVersion(v string) {
 
 // GetSiteName returns the SiteName field value if set, zero value otherwise.
 func (o *NiatelemetryApicUiPageCounts) GetSiteName() string {
-	if o == nil || o.SiteName == nil {
+	if o == nil || IsNil(o.SiteName) {
 		var ret string
 		return ret
 	}
@@ -285,7 +289,7 @@ func (o *NiatelemetryApicUiPageCounts) GetSiteName() string {
 // GetSiteNameOk returns a tuple with the SiteName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryApicUiPageCounts) GetSiteNameOk() (*string, bool) {
-	if o == nil || o.SiteName == nil {
+	if o == nil || IsNil(o.SiteName) {
 		return nil, false
 	}
 	return o.SiteName, true
@@ -293,7 +297,7 @@ func (o *NiatelemetryApicUiPageCounts) GetSiteNameOk() (*string, bool) {
 
 // HasSiteName returns a boolean if a field has been set.
 func (o *NiatelemetryApicUiPageCounts) HasSiteName() bool {
-	if o != nil && o.SiteName != nil {
+	if o != nil && !IsNil(o.SiteName) {
 		return true
 	}
 
@@ -305,84 +309,121 @@ func (o *NiatelemetryApicUiPageCounts) SetSiteName(v string) {
 	o.SiteName = &v
 }
 
-// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise.
+// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *NiatelemetryApicUiPageCounts) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil || IsNil(o.RegisteredDevice.Get()) {
 		var ret AssetDeviceRegistrationRelationship
 		return ret
 	}
-	return *o.RegisteredDevice
+	return *o.RegisteredDevice.Get()
 }
 
 // GetRegisteredDeviceOk returns a tuple with the RegisteredDevice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *NiatelemetryApicUiPageCounts) GetRegisteredDeviceOk() (*AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.RegisteredDevice, true
+	return o.RegisteredDevice.Get(), o.RegisteredDevice.IsSet()
 }
 
 // HasRegisteredDevice returns a boolean if a field has been set.
 func (o *NiatelemetryApicUiPageCounts) HasRegisteredDevice() bool {
-	if o != nil && o.RegisteredDevice != nil {
+	if o != nil && o.RegisteredDevice.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRegisteredDevice gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
+// SetRegisteredDevice gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
 func (o *NiatelemetryApicUiPageCounts) SetRegisteredDevice(v AssetDeviceRegistrationRelationship) {
-	o.RegisteredDevice = &v
+	o.RegisteredDevice.Set(&v)
+}
+
+// SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+func (o *NiatelemetryApicUiPageCounts) SetRegisteredDeviceNil() {
+	o.RegisteredDevice.Set(nil)
+}
+
+// UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
+func (o *NiatelemetryApicUiPageCounts) UnsetRegisteredDevice() {
+	o.RegisteredDevice.Unset()
 }
 
 func (o NiatelemetryApicUiPageCounts) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o NiatelemetryApicUiPageCounts) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Dn != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Dn) {
 		toSerialize["Dn"] = o.Dn
 	}
-	if o.PageCount != nil {
+	if !IsNil(o.PageCount) {
 		toSerialize["PageCount"] = o.PageCount
 	}
-	if o.PageName != nil {
+	if !IsNil(o.PageName) {
 		toSerialize["PageName"] = o.PageName
 	}
-	if o.RecordType != nil {
+	if !IsNil(o.RecordType) {
 		toSerialize["RecordType"] = o.RecordType
 	}
-	if o.RecordVersion != nil {
+	if !IsNil(o.RecordVersion) {
 		toSerialize["RecordVersion"] = o.RecordVersion
 	}
-	if o.SiteName != nil {
+	if !IsNil(o.SiteName) {
 		toSerialize["SiteName"] = o.SiteName
 	}
-	if o.RegisteredDevice != nil {
-		toSerialize["RegisteredDevice"] = o.RegisteredDevice
+	if o.RegisteredDevice.IsSet() {
+		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *NiatelemetryApicUiPageCounts) UnmarshalJSON(bytes []byte) (err error) {
+func (o *NiatelemetryApicUiPageCounts) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type NiatelemetryApicUiPageCountsWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -399,13 +440,13 @@ func (o *NiatelemetryApicUiPageCounts) UnmarshalJSON(bytes []byte) (err error) {
 		// Version of record being pushed. This determines what was the API version for data available from the device.
 		RecordVersion *string `json:"RecordVersion,omitempty"`
 		// Name of the APIC site from which this data is being collected.
-		SiteName         *string                              `json:"SiteName,omitempty"`
-		RegisteredDevice *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+		SiteName         *string                                     `json:"SiteName,omitempty"`
+		RegisteredDevice NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	}
 
 	varNiatelemetryApicUiPageCountsWithoutEmbeddedStruct := NiatelemetryApicUiPageCountsWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varNiatelemetryApicUiPageCountsWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varNiatelemetryApicUiPageCountsWithoutEmbeddedStruct)
 	if err == nil {
 		varNiatelemetryApicUiPageCounts := _NiatelemetryApicUiPageCounts{}
 		varNiatelemetryApicUiPageCounts.ClassId = varNiatelemetryApicUiPageCountsWithoutEmbeddedStruct.ClassId
@@ -424,7 +465,7 @@ func (o *NiatelemetryApicUiPageCounts) UnmarshalJSON(bytes []byte) (err error) {
 
 	varNiatelemetryApicUiPageCounts := _NiatelemetryApicUiPageCounts{}
 
-	err = json.Unmarshal(bytes, &varNiatelemetryApicUiPageCounts)
+	err = json.Unmarshal(data, &varNiatelemetryApicUiPageCounts)
 	if err == nil {
 		o.MoBaseMo = varNiatelemetryApicUiPageCounts.MoBaseMo
 	} else {
@@ -433,7 +474,7 @@ func (o *NiatelemetryApicUiPageCounts) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Dn")

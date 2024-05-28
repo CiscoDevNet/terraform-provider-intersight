@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "fcpool.FcBlock"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "fcpool.FcBlock"]
 **IdBlock** | Pointer to [**FcpoolBlock**](FcpoolBlock.md) |  | [optional] 
-**Pool** | Pointer to [**FcpoolPoolRelationship**](FcpoolPoolRelationship.md) |  | [optional] 
+**Pool** | Pointer to [**NullableFcpoolPoolRelationship**](FcpoolPoolRelationship.md) |  | [optional] 
 **Reservations** | Pointer to [**[]FcpoolReservationRelationship**](FcpoolReservationRelationship.md) | An array of relationships to fcpoolReservation resources. | [optional] [readonly] 
 
 ## Methods
@@ -119,6 +119,16 @@ SetPool sets Pool field to given value.
 
 HasPool returns a boolean if a field has been set.
 
+### SetPoolNil
+
+`func (o *FcpoolFcBlock) SetPoolNil(b bool)`
+
+ SetPoolNil sets the value for Pool to be an explicit nil
+
+### UnsetPool
+`func (o *FcpoolFcBlock) UnsetPool()`
+
+UnsetPool ensures that no value is present for Pool, not even an explicit nil
 ### GetReservations
 
 `func (o *FcpoolFcBlock) GetReservations() []FcpoolReservationRelationship`

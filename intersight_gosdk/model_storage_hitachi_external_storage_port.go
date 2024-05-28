@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the StorageHitachiExternalStoragePort type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &StorageHitachiExternalStoragePort{}
 
 // StorageHitachiExternalStoragePort Port entity in Hitachi storage array. A port for an external storage system that is connected to the local storage system.
 type StorageHitachiExternalStoragePort struct {
@@ -43,9 +47,9 @@ type StorageHitachiExternalStoragePort struct {
 	// Port ID of the local storage.
 	PortId *string `json:"PortId,omitempty"`
 	// Virtual port ID. This attribute is displayed when an iSCSI port is used and virtual port mode is enabled.
-	VirtualPortId        *int64                               `json:"VirtualPortId,omitempty"`
-	Array                *StorageHitachiArrayRelationship     `json:"Array,omitempty"`
-	RegisteredDevice     *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+	VirtualPortId        *int64                                      `json:"VirtualPortId,omitempty"`
+	Array                NullableStorageHitachiArrayRelationship     `json:"Array,omitempty"`
+	RegisteredDevice     NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -124,7 +128,7 @@ func (o *StorageHitachiExternalStoragePort) SetObjectType(v string) {
 
 // GetExternalIsUsed returns the ExternalIsUsed field value if set, zero value otherwise.
 func (o *StorageHitachiExternalStoragePort) GetExternalIsUsed() bool {
-	if o == nil || o.ExternalIsUsed == nil {
+	if o == nil || IsNil(o.ExternalIsUsed) {
 		var ret bool
 		return ret
 	}
@@ -134,7 +138,7 @@ func (o *StorageHitachiExternalStoragePort) GetExternalIsUsed() bool {
 // GetExternalIsUsedOk returns a tuple with the ExternalIsUsed field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageHitachiExternalStoragePort) GetExternalIsUsedOk() (*bool, bool) {
-	if o == nil || o.ExternalIsUsed == nil {
+	if o == nil || IsNil(o.ExternalIsUsed) {
 		return nil, false
 	}
 	return o.ExternalIsUsed, true
@@ -142,7 +146,7 @@ func (o *StorageHitachiExternalStoragePort) GetExternalIsUsedOk() (*bool, bool) 
 
 // HasExternalIsUsed returns a boolean if a field has been set.
 func (o *StorageHitachiExternalStoragePort) HasExternalIsUsed() bool {
-	if o != nil && o.ExternalIsUsed != nil {
+	if o != nil && !IsNil(o.ExternalIsUsed) {
 		return true
 	}
 
@@ -156,7 +160,7 @@ func (o *StorageHitachiExternalStoragePort) SetExternalIsUsed(v bool) {
 
 // GetExternalPathMode returns the ExternalPathMode field value if set, zero value otherwise.
 func (o *StorageHitachiExternalStoragePort) GetExternalPathMode() string {
-	if o == nil || o.ExternalPathMode == nil {
+	if o == nil || IsNil(o.ExternalPathMode) {
 		var ret string
 		return ret
 	}
@@ -166,7 +170,7 @@ func (o *StorageHitachiExternalStoragePort) GetExternalPathMode() string {
 // GetExternalPathModeOk returns a tuple with the ExternalPathMode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageHitachiExternalStoragePort) GetExternalPathModeOk() (*string, bool) {
-	if o == nil || o.ExternalPathMode == nil {
+	if o == nil || IsNil(o.ExternalPathMode) {
 		return nil, false
 	}
 	return o.ExternalPathMode, true
@@ -174,7 +178,7 @@ func (o *StorageHitachiExternalStoragePort) GetExternalPathModeOk() (*string, bo
 
 // HasExternalPathMode returns a boolean if a field has been set.
 func (o *StorageHitachiExternalStoragePort) HasExternalPathMode() bool {
-	if o != nil && o.ExternalPathMode != nil {
+	if o != nil && !IsNil(o.ExternalPathMode) {
 		return true
 	}
 
@@ -188,7 +192,7 @@ func (o *StorageHitachiExternalStoragePort) SetExternalPathMode(v string) {
 
 // GetExternalPortId returns the ExternalPortId field value if set, zero value otherwise.
 func (o *StorageHitachiExternalStoragePort) GetExternalPortId() string {
-	if o == nil || o.ExternalPortId == nil {
+	if o == nil || IsNil(o.ExternalPortId) {
 		var ret string
 		return ret
 	}
@@ -198,7 +202,7 @@ func (o *StorageHitachiExternalStoragePort) GetExternalPortId() string {
 // GetExternalPortIdOk returns a tuple with the ExternalPortId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageHitachiExternalStoragePort) GetExternalPortIdOk() (*string, bool) {
-	if o == nil || o.ExternalPortId == nil {
+	if o == nil || IsNil(o.ExternalPortId) {
 		return nil, false
 	}
 	return o.ExternalPortId, true
@@ -206,7 +210,7 @@ func (o *StorageHitachiExternalStoragePort) GetExternalPortIdOk() (*string, bool
 
 // HasExternalPortId returns a boolean if a field has been set.
 func (o *StorageHitachiExternalStoragePort) HasExternalPortId() bool {
-	if o != nil && o.ExternalPortId != nil {
+	if o != nil && !IsNil(o.ExternalPortId) {
 		return true
 	}
 
@@ -220,7 +224,7 @@ func (o *StorageHitachiExternalStoragePort) SetExternalPortId(v string) {
 
 // GetExternalSerialNumber returns the ExternalSerialNumber field value if set, zero value otherwise.
 func (o *StorageHitachiExternalStoragePort) GetExternalSerialNumber() string {
-	if o == nil || o.ExternalSerialNumber == nil {
+	if o == nil || IsNil(o.ExternalSerialNumber) {
 		var ret string
 		return ret
 	}
@@ -230,7 +234,7 @@ func (o *StorageHitachiExternalStoragePort) GetExternalSerialNumber() string {
 // GetExternalSerialNumberOk returns a tuple with the ExternalSerialNumber field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageHitachiExternalStoragePort) GetExternalSerialNumberOk() (*string, bool) {
-	if o == nil || o.ExternalSerialNumber == nil {
+	if o == nil || IsNil(o.ExternalSerialNumber) {
 		return nil, false
 	}
 	return o.ExternalSerialNumber, true
@@ -238,7 +242,7 @@ func (o *StorageHitachiExternalStoragePort) GetExternalSerialNumberOk() (*string
 
 // HasExternalSerialNumber returns a boolean if a field has been set.
 func (o *StorageHitachiExternalStoragePort) HasExternalSerialNumber() bool {
-	if o != nil && o.ExternalSerialNumber != nil {
+	if o != nil && !IsNil(o.ExternalSerialNumber) {
 		return true
 	}
 
@@ -252,7 +256,7 @@ func (o *StorageHitachiExternalStoragePort) SetExternalSerialNumber(v string) {
 
 // GetExternalStorageInfo returns the ExternalStorageInfo field value if set, zero value otherwise.
 func (o *StorageHitachiExternalStoragePort) GetExternalStorageInfo() string {
-	if o == nil || o.ExternalStorageInfo == nil {
+	if o == nil || IsNil(o.ExternalStorageInfo) {
 		var ret string
 		return ret
 	}
@@ -262,7 +266,7 @@ func (o *StorageHitachiExternalStoragePort) GetExternalStorageInfo() string {
 // GetExternalStorageInfoOk returns a tuple with the ExternalStorageInfo field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageHitachiExternalStoragePort) GetExternalStorageInfoOk() (*string, bool) {
-	if o == nil || o.ExternalStorageInfo == nil {
+	if o == nil || IsNil(o.ExternalStorageInfo) {
 		return nil, false
 	}
 	return o.ExternalStorageInfo, true
@@ -270,7 +274,7 @@ func (o *StorageHitachiExternalStoragePort) GetExternalStorageInfoOk() (*string,
 
 // HasExternalStorageInfo returns a boolean if a field has been set.
 func (o *StorageHitachiExternalStoragePort) HasExternalStorageInfo() bool {
-	if o != nil && o.ExternalStorageInfo != nil {
+	if o != nil && !IsNil(o.ExternalStorageInfo) {
 		return true
 	}
 
@@ -284,7 +288,7 @@ func (o *StorageHitachiExternalStoragePort) SetExternalStorageInfo(v string) {
 
 // GetExternalWwn returns the ExternalWwn field value if set, zero value otherwise.
 func (o *StorageHitachiExternalStoragePort) GetExternalWwn() string {
-	if o == nil || o.ExternalWwn == nil {
+	if o == nil || IsNil(o.ExternalWwn) {
 		var ret string
 		return ret
 	}
@@ -294,7 +298,7 @@ func (o *StorageHitachiExternalStoragePort) GetExternalWwn() string {
 // GetExternalWwnOk returns a tuple with the ExternalWwn field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageHitachiExternalStoragePort) GetExternalWwnOk() (*string, bool) {
-	if o == nil || o.ExternalWwn == nil {
+	if o == nil || IsNil(o.ExternalWwn) {
 		return nil, false
 	}
 	return o.ExternalWwn, true
@@ -302,7 +306,7 @@ func (o *StorageHitachiExternalStoragePort) GetExternalWwnOk() (*string, bool) {
 
 // HasExternalWwn returns a boolean if a field has been set.
 func (o *StorageHitachiExternalStoragePort) HasExternalWwn() bool {
-	if o != nil && o.ExternalWwn != nil {
+	if o != nil && !IsNil(o.ExternalWwn) {
 		return true
 	}
 
@@ -316,7 +320,7 @@ func (o *StorageHitachiExternalStoragePort) SetExternalWwn(v string) {
 
 // GetIscsiIpAddress returns the IscsiIpAddress field value if set, zero value otherwise.
 func (o *StorageHitachiExternalStoragePort) GetIscsiIpAddress() string {
-	if o == nil || o.IscsiIpAddress == nil {
+	if o == nil || IsNil(o.IscsiIpAddress) {
 		var ret string
 		return ret
 	}
@@ -326,7 +330,7 @@ func (o *StorageHitachiExternalStoragePort) GetIscsiIpAddress() string {
 // GetIscsiIpAddressOk returns a tuple with the IscsiIpAddress field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageHitachiExternalStoragePort) GetIscsiIpAddressOk() (*string, bool) {
-	if o == nil || o.IscsiIpAddress == nil {
+	if o == nil || IsNil(o.IscsiIpAddress) {
 		return nil, false
 	}
 	return o.IscsiIpAddress, true
@@ -334,7 +338,7 @@ func (o *StorageHitachiExternalStoragePort) GetIscsiIpAddressOk() (*string, bool
 
 // HasIscsiIpAddress returns a boolean if a field has been set.
 func (o *StorageHitachiExternalStoragePort) HasIscsiIpAddress() bool {
-	if o != nil && o.IscsiIpAddress != nil {
+	if o != nil && !IsNil(o.IscsiIpAddress) {
 		return true
 	}
 
@@ -348,7 +352,7 @@ func (o *StorageHitachiExternalStoragePort) SetIscsiIpAddress(v string) {
 
 // GetIscsiName returns the IscsiName field value if set, zero value otherwise.
 func (o *StorageHitachiExternalStoragePort) GetIscsiName() string {
-	if o == nil || o.IscsiName == nil {
+	if o == nil || IsNil(o.IscsiName) {
 		var ret string
 		return ret
 	}
@@ -358,7 +362,7 @@ func (o *StorageHitachiExternalStoragePort) GetIscsiName() string {
 // GetIscsiNameOk returns a tuple with the IscsiName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageHitachiExternalStoragePort) GetIscsiNameOk() (*string, bool) {
-	if o == nil || o.IscsiName == nil {
+	if o == nil || IsNil(o.IscsiName) {
 		return nil, false
 	}
 	return o.IscsiName, true
@@ -366,7 +370,7 @@ func (o *StorageHitachiExternalStoragePort) GetIscsiNameOk() (*string, bool) {
 
 // HasIscsiName returns a boolean if a field has been set.
 func (o *StorageHitachiExternalStoragePort) HasIscsiName() bool {
-	if o != nil && o.IscsiName != nil {
+	if o != nil && !IsNil(o.IscsiName) {
 		return true
 	}
 
@@ -380,7 +384,7 @@ func (o *StorageHitachiExternalStoragePort) SetIscsiName(v string) {
 
 // GetPortId returns the PortId field value if set, zero value otherwise.
 func (o *StorageHitachiExternalStoragePort) GetPortId() string {
-	if o == nil || o.PortId == nil {
+	if o == nil || IsNil(o.PortId) {
 		var ret string
 		return ret
 	}
@@ -390,7 +394,7 @@ func (o *StorageHitachiExternalStoragePort) GetPortId() string {
 // GetPortIdOk returns a tuple with the PortId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageHitachiExternalStoragePort) GetPortIdOk() (*string, bool) {
-	if o == nil || o.PortId == nil {
+	if o == nil || IsNil(o.PortId) {
 		return nil, false
 	}
 	return o.PortId, true
@@ -398,7 +402,7 @@ func (o *StorageHitachiExternalStoragePort) GetPortIdOk() (*string, bool) {
 
 // HasPortId returns a boolean if a field has been set.
 func (o *StorageHitachiExternalStoragePort) HasPortId() bool {
-	if o != nil && o.PortId != nil {
+	if o != nil && !IsNil(o.PortId) {
 		return true
 	}
 
@@ -412,7 +416,7 @@ func (o *StorageHitachiExternalStoragePort) SetPortId(v string) {
 
 // GetVirtualPortId returns the VirtualPortId field value if set, zero value otherwise.
 func (o *StorageHitachiExternalStoragePort) GetVirtualPortId() int64 {
-	if o == nil || o.VirtualPortId == nil {
+	if o == nil || IsNil(o.VirtualPortId) {
 		var ret int64
 		return ret
 	}
@@ -422,7 +426,7 @@ func (o *StorageHitachiExternalStoragePort) GetVirtualPortId() int64 {
 // GetVirtualPortIdOk returns a tuple with the VirtualPortId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageHitachiExternalStoragePort) GetVirtualPortIdOk() (*int64, bool) {
-	if o == nil || o.VirtualPortId == nil {
+	if o == nil || IsNil(o.VirtualPortId) {
 		return nil, false
 	}
 	return o.VirtualPortId, true
@@ -430,7 +434,7 @@ func (o *StorageHitachiExternalStoragePort) GetVirtualPortIdOk() (*int64, bool) 
 
 // HasVirtualPortId returns a boolean if a field has been set.
 func (o *StorageHitachiExternalStoragePort) HasVirtualPortId() bool {
-	if o != nil && o.VirtualPortId != nil {
+	if o != nil && !IsNil(o.VirtualPortId) {
 		return true
 	}
 
@@ -442,131 +446,179 @@ func (o *StorageHitachiExternalStoragePort) SetVirtualPortId(v int64) {
 	o.VirtualPortId = &v
 }
 
-// GetArray returns the Array field value if set, zero value otherwise.
+// GetArray returns the Array field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *StorageHitachiExternalStoragePort) GetArray() StorageHitachiArrayRelationship {
-	if o == nil || o.Array == nil {
+	if o == nil || IsNil(o.Array.Get()) {
 		var ret StorageHitachiArrayRelationship
 		return ret
 	}
-	return *o.Array
+	return *o.Array.Get()
 }
 
 // GetArrayOk returns a tuple with the Array field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StorageHitachiExternalStoragePort) GetArrayOk() (*StorageHitachiArrayRelationship, bool) {
-	if o == nil || o.Array == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Array, true
+	return o.Array.Get(), o.Array.IsSet()
 }
 
 // HasArray returns a boolean if a field has been set.
 func (o *StorageHitachiExternalStoragePort) HasArray() bool {
-	if o != nil && o.Array != nil {
+	if o != nil && o.Array.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetArray gets a reference to the given StorageHitachiArrayRelationship and assigns it to the Array field.
+// SetArray gets a reference to the given NullableStorageHitachiArrayRelationship and assigns it to the Array field.
 func (o *StorageHitachiExternalStoragePort) SetArray(v StorageHitachiArrayRelationship) {
-	o.Array = &v
+	o.Array.Set(&v)
 }
 
-// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise.
+// SetArrayNil sets the value for Array to be an explicit nil
+func (o *StorageHitachiExternalStoragePort) SetArrayNil() {
+	o.Array.Set(nil)
+}
+
+// UnsetArray ensures that no value is present for Array, not even an explicit nil
+func (o *StorageHitachiExternalStoragePort) UnsetArray() {
+	o.Array.Unset()
+}
+
+// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *StorageHitachiExternalStoragePort) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil || IsNil(o.RegisteredDevice.Get()) {
 		var ret AssetDeviceRegistrationRelationship
 		return ret
 	}
-	return *o.RegisteredDevice
+	return *o.RegisteredDevice.Get()
 }
 
 // GetRegisteredDeviceOk returns a tuple with the RegisteredDevice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StorageHitachiExternalStoragePort) GetRegisteredDeviceOk() (*AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.RegisteredDevice, true
+	return o.RegisteredDevice.Get(), o.RegisteredDevice.IsSet()
 }
 
 // HasRegisteredDevice returns a boolean if a field has been set.
 func (o *StorageHitachiExternalStoragePort) HasRegisteredDevice() bool {
-	if o != nil && o.RegisteredDevice != nil {
+	if o != nil && o.RegisteredDevice.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRegisteredDevice gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
+// SetRegisteredDevice gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
 func (o *StorageHitachiExternalStoragePort) SetRegisteredDevice(v AssetDeviceRegistrationRelationship) {
-	o.RegisteredDevice = &v
+	o.RegisteredDevice.Set(&v)
+}
+
+// SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+func (o *StorageHitachiExternalStoragePort) SetRegisteredDeviceNil() {
+	o.RegisteredDevice.Set(nil)
+}
+
+// UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
+func (o *StorageHitachiExternalStoragePort) UnsetRegisteredDevice() {
+	o.RegisteredDevice.Unset()
 }
 
 func (o StorageHitachiExternalStoragePort) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o StorageHitachiExternalStoragePort) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.ExternalIsUsed != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.ExternalIsUsed) {
 		toSerialize["ExternalIsUsed"] = o.ExternalIsUsed
 	}
-	if o.ExternalPathMode != nil {
+	if !IsNil(o.ExternalPathMode) {
 		toSerialize["ExternalPathMode"] = o.ExternalPathMode
 	}
-	if o.ExternalPortId != nil {
+	if !IsNil(o.ExternalPortId) {
 		toSerialize["ExternalPortId"] = o.ExternalPortId
 	}
-	if o.ExternalSerialNumber != nil {
+	if !IsNil(o.ExternalSerialNumber) {
 		toSerialize["ExternalSerialNumber"] = o.ExternalSerialNumber
 	}
-	if o.ExternalStorageInfo != nil {
+	if !IsNil(o.ExternalStorageInfo) {
 		toSerialize["ExternalStorageInfo"] = o.ExternalStorageInfo
 	}
-	if o.ExternalWwn != nil {
+	if !IsNil(o.ExternalWwn) {
 		toSerialize["ExternalWwn"] = o.ExternalWwn
 	}
-	if o.IscsiIpAddress != nil {
+	if !IsNil(o.IscsiIpAddress) {
 		toSerialize["IscsiIpAddress"] = o.IscsiIpAddress
 	}
-	if o.IscsiName != nil {
+	if !IsNil(o.IscsiName) {
 		toSerialize["IscsiName"] = o.IscsiName
 	}
-	if o.PortId != nil {
+	if !IsNil(o.PortId) {
 		toSerialize["PortId"] = o.PortId
 	}
-	if o.VirtualPortId != nil {
+	if !IsNil(o.VirtualPortId) {
 		toSerialize["VirtualPortId"] = o.VirtualPortId
 	}
-	if o.Array != nil {
-		toSerialize["Array"] = o.Array
+	if o.Array.IsSet() {
+		toSerialize["Array"] = o.Array.Get()
 	}
-	if o.RegisteredDevice != nil {
-		toSerialize["RegisteredDevice"] = o.RegisteredDevice
+	if o.RegisteredDevice.IsSet() {
+		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *StorageHitachiExternalStoragePort) UnmarshalJSON(bytes []byte) (err error) {
+func (o *StorageHitachiExternalStoragePort) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type StorageHitachiExternalStoragePortWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -591,14 +643,14 @@ func (o *StorageHitachiExternalStoragePort) UnmarshalJSON(bytes []byte) (err err
 		// Port ID of the local storage.
 		PortId *string `json:"PortId,omitempty"`
 		// Virtual port ID. This attribute is displayed when an iSCSI port is used and virtual port mode is enabled.
-		VirtualPortId    *int64                               `json:"VirtualPortId,omitempty"`
-		Array            *StorageHitachiArrayRelationship     `json:"Array,omitempty"`
-		RegisteredDevice *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+		VirtualPortId    *int64                                      `json:"VirtualPortId,omitempty"`
+		Array            NullableStorageHitachiArrayRelationship     `json:"Array,omitempty"`
+		RegisteredDevice NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	}
 
 	varStorageHitachiExternalStoragePortWithoutEmbeddedStruct := StorageHitachiExternalStoragePortWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varStorageHitachiExternalStoragePortWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varStorageHitachiExternalStoragePortWithoutEmbeddedStruct)
 	if err == nil {
 		varStorageHitachiExternalStoragePort := _StorageHitachiExternalStoragePort{}
 		varStorageHitachiExternalStoragePort.ClassId = varStorageHitachiExternalStoragePortWithoutEmbeddedStruct.ClassId
@@ -622,7 +674,7 @@ func (o *StorageHitachiExternalStoragePort) UnmarshalJSON(bytes []byte) (err err
 
 	varStorageHitachiExternalStoragePort := _StorageHitachiExternalStoragePort{}
 
-	err = json.Unmarshal(bytes, &varStorageHitachiExternalStoragePort)
+	err = json.Unmarshal(data, &varStorageHitachiExternalStoragePort)
 	if err == nil {
 		o.MoBaseMo = varStorageHitachiExternalStoragePort.MoBaseMo
 	} else {
@@ -631,7 +683,7 @@ func (o *StorageHitachiExternalStoragePort) UnmarshalJSON(bytes []byte) (err err
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "ExternalIsUsed")

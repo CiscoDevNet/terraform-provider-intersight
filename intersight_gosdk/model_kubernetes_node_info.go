@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the KubernetesNodeInfo type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &KubernetesNodeInfo{}
 
 // KubernetesNodeInfo Kubernetes Node Information.
 type KubernetesNodeInfo struct {
@@ -122,7 +126,7 @@ func (o *KubernetesNodeInfo) SetObjectType(v string) {
 
 // GetArchitecture returns the Architecture field value if set, zero value otherwise.
 func (o *KubernetesNodeInfo) GetArchitecture() string {
-	if o == nil || o.Architecture == nil {
+	if o == nil || IsNil(o.Architecture) {
 		var ret string
 		return ret
 	}
@@ -132,7 +136,7 @@ func (o *KubernetesNodeInfo) GetArchitecture() string {
 // GetArchitectureOk returns a tuple with the Architecture field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *KubernetesNodeInfo) GetArchitectureOk() (*string, bool) {
-	if o == nil || o.Architecture == nil {
+	if o == nil || IsNil(o.Architecture) {
 		return nil, false
 	}
 	return o.Architecture, true
@@ -140,7 +144,7 @@ func (o *KubernetesNodeInfo) GetArchitectureOk() (*string, bool) {
 
 // HasArchitecture returns a boolean if a field has been set.
 func (o *KubernetesNodeInfo) HasArchitecture() bool {
-	if o != nil && o.Architecture != nil {
+	if o != nil && !IsNil(o.Architecture) {
 		return true
 	}
 
@@ -154,7 +158,7 @@ func (o *KubernetesNodeInfo) SetArchitecture(v string) {
 
 // GetBootId returns the BootId field value if set, zero value otherwise.
 func (o *KubernetesNodeInfo) GetBootId() string {
-	if o == nil || o.BootId == nil {
+	if o == nil || IsNil(o.BootId) {
 		var ret string
 		return ret
 	}
@@ -164,7 +168,7 @@ func (o *KubernetesNodeInfo) GetBootId() string {
 // GetBootIdOk returns a tuple with the BootId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *KubernetesNodeInfo) GetBootIdOk() (*string, bool) {
-	if o == nil || o.BootId == nil {
+	if o == nil || IsNil(o.BootId) {
 		return nil, false
 	}
 	return o.BootId, true
@@ -172,7 +176,7 @@ func (o *KubernetesNodeInfo) GetBootIdOk() (*string, bool) {
 
 // HasBootId returns a boolean if a field has been set.
 func (o *KubernetesNodeInfo) HasBootId() bool {
-	if o != nil && o.BootId != nil {
+	if o != nil && !IsNil(o.BootId) {
 		return true
 	}
 
@@ -186,7 +190,7 @@ func (o *KubernetesNodeInfo) SetBootId(v string) {
 
 // GetContainerRuntimeVersion returns the ContainerRuntimeVersion field value if set, zero value otherwise.
 func (o *KubernetesNodeInfo) GetContainerRuntimeVersion() string {
-	if o == nil || o.ContainerRuntimeVersion == nil {
+	if o == nil || IsNil(o.ContainerRuntimeVersion) {
 		var ret string
 		return ret
 	}
@@ -196,7 +200,7 @@ func (o *KubernetesNodeInfo) GetContainerRuntimeVersion() string {
 // GetContainerRuntimeVersionOk returns a tuple with the ContainerRuntimeVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *KubernetesNodeInfo) GetContainerRuntimeVersionOk() (*string, bool) {
-	if o == nil || o.ContainerRuntimeVersion == nil {
+	if o == nil || IsNil(o.ContainerRuntimeVersion) {
 		return nil, false
 	}
 	return o.ContainerRuntimeVersion, true
@@ -204,7 +208,7 @@ func (o *KubernetesNodeInfo) GetContainerRuntimeVersionOk() (*string, bool) {
 
 // HasContainerRuntimeVersion returns a boolean if a field has been set.
 func (o *KubernetesNodeInfo) HasContainerRuntimeVersion() bool {
-	if o != nil && o.ContainerRuntimeVersion != nil {
+	if o != nil && !IsNil(o.ContainerRuntimeVersion) {
 		return true
 	}
 
@@ -218,7 +222,7 @@ func (o *KubernetesNodeInfo) SetContainerRuntimeVersion(v string) {
 
 // GetKernelVersion returns the KernelVersion field value if set, zero value otherwise.
 func (o *KubernetesNodeInfo) GetKernelVersion() string {
-	if o == nil || o.KernelVersion == nil {
+	if o == nil || IsNil(o.KernelVersion) {
 		var ret string
 		return ret
 	}
@@ -228,7 +232,7 @@ func (o *KubernetesNodeInfo) GetKernelVersion() string {
 // GetKernelVersionOk returns a tuple with the KernelVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *KubernetesNodeInfo) GetKernelVersionOk() (*string, bool) {
-	if o == nil || o.KernelVersion == nil {
+	if o == nil || IsNil(o.KernelVersion) {
 		return nil, false
 	}
 	return o.KernelVersion, true
@@ -236,7 +240,7 @@ func (o *KubernetesNodeInfo) GetKernelVersionOk() (*string, bool) {
 
 // HasKernelVersion returns a boolean if a field has been set.
 func (o *KubernetesNodeInfo) HasKernelVersion() bool {
-	if o != nil && o.KernelVersion != nil {
+	if o != nil && !IsNil(o.KernelVersion) {
 		return true
 	}
 
@@ -250,7 +254,7 @@ func (o *KubernetesNodeInfo) SetKernelVersion(v string) {
 
 // GetKubeProxyVersion returns the KubeProxyVersion field value if set, zero value otherwise.
 func (o *KubernetesNodeInfo) GetKubeProxyVersion() string {
-	if o == nil || o.KubeProxyVersion == nil {
+	if o == nil || IsNil(o.KubeProxyVersion) {
 		var ret string
 		return ret
 	}
@@ -260,7 +264,7 @@ func (o *KubernetesNodeInfo) GetKubeProxyVersion() string {
 // GetKubeProxyVersionOk returns a tuple with the KubeProxyVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *KubernetesNodeInfo) GetKubeProxyVersionOk() (*string, bool) {
-	if o == nil || o.KubeProxyVersion == nil {
+	if o == nil || IsNil(o.KubeProxyVersion) {
 		return nil, false
 	}
 	return o.KubeProxyVersion, true
@@ -268,7 +272,7 @@ func (o *KubernetesNodeInfo) GetKubeProxyVersionOk() (*string, bool) {
 
 // HasKubeProxyVersion returns a boolean if a field has been set.
 func (o *KubernetesNodeInfo) HasKubeProxyVersion() bool {
-	if o != nil && o.KubeProxyVersion != nil {
+	if o != nil && !IsNil(o.KubeProxyVersion) {
 		return true
 	}
 
@@ -282,7 +286,7 @@ func (o *KubernetesNodeInfo) SetKubeProxyVersion(v string) {
 
 // GetKubeletVersion returns the KubeletVersion field value if set, zero value otherwise.
 func (o *KubernetesNodeInfo) GetKubeletVersion() string {
-	if o == nil || o.KubeletVersion == nil {
+	if o == nil || IsNil(o.KubeletVersion) {
 		var ret string
 		return ret
 	}
@@ -292,7 +296,7 @@ func (o *KubernetesNodeInfo) GetKubeletVersion() string {
 // GetKubeletVersionOk returns a tuple with the KubeletVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *KubernetesNodeInfo) GetKubeletVersionOk() (*string, bool) {
-	if o == nil || o.KubeletVersion == nil {
+	if o == nil || IsNil(o.KubeletVersion) {
 		return nil, false
 	}
 	return o.KubeletVersion, true
@@ -300,7 +304,7 @@ func (o *KubernetesNodeInfo) GetKubeletVersionOk() (*string, bool) {
 
 // HasKubeletVersion returns a boolean if a field has been set.
 func (o *KubernetesNodeInfo) HasKubeletVersion() bool {
-	if o != nil && o.KubeletVersion != nil {
+	if o != nil && !IsNil(o.KubeletVersion) {
 		return true
 	}
 
@@ -314,7 +318,7 @@ func (o *KubernetesNodeInfo) SetKubeletVersion(v string) {
 
 // GetMachineId returns the MachineId field value if set, zero value otherwise.
 func (o *KubernetesNodeInfo) GetMachineId() string {
-	if o == nil || o.MachineId == nil {
+	if o == nil || IsNil(o.MachineId) {
 		var ret string
 		return ret
 	}
@@ -324,7 +328,7 @@ func (o *KubernetesNodeInfo) GetMachineId() string {
 // GetMachineIdOk returns a tuple with the MachineId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *KubernetesNodeInfo) GetMachineIdOk() (*string, bool) {
-	if o == nil || o.MachineId == nil {
+	if o == nil || IsNil(o.MachineId) {
 		return nil, false
 	}
 	return o.MachineId, true
@@ -332,7 +336,7 @@ func (o *KubernetesNodeInfo) GetMachineIdOk() (*string, bool) {
 
 // HasMachineId returns a boolean if a field has been set.
 func (o *KubernetesNodeInfo) HasMachineId() bool {
-	if o != nil && o.MachineId != nil {
+	if o != nil && !IsNil(o.MachineId) {
 		return true
 	}
 
@@ -346,7 +350,7 @@ func (o *KubernetesNodeInfo) SetMachineId(v string) {
 
 // GetOperatingSystem returns the OperatingSystem field value if set, zero value otherwise.
 func (o *KubernetesNodeInfo) GetOperatingSystem() string {
-	if o == nil || o.OperatingSystem == nil {
+	if o == nil || IsNil(o.OperatingSystem) {
 		var ret string
 		return ret
 	}
@@ -356,7 +360,7 @@ func (o *KubernetesNodeInfo) GetOperatingSystem() string {
 // GetOperatingSystemOk returns a tuple with the OperatingSystem field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *KubernetesNodeInfo) GetOperatingSystemOk() (*string, bool) {
-	if o == nil || o.OperatingSystem == nil {
+	if o == nil || IsNil(o.OperatingSystem) {
 		return nil, false
 	}
 	return o.OperatingSystem, true
@@ -364,7 +368,7 @@ func (o *KubernetesNodeInfo) GetOperatingSystemOk() (*string, bool) {
 
 // HasOperatingSystem returns a boolean if a field has been set.
 func (o *KubernetesNodeInfo) HasOperatingSystem() bool {
-	if o != nil && o.OperatingSystem != nil {
+	if o != nil && !IsNil(o.OperatingSystem) {
 		return true
 	}
 
@@ -378,7 +382,7 @@ func (o *KubernetesNodeInfo) SetOperatingSystem(v string) {
 
 // GetOsImage returns the OsImage field value if set, zero value otherwise.
 func (o *KubernetesNodeInfo) GetOsImage() string {
-	if o == nil || o.OsImage == nil {
+	if o == nil || IsNil(o.OsImage) {
 		var ret string
 		return ret
 	}
@@ -388,7 +392,7 @@ func (o *KubernetesNodeInfo) GetOsImage() string {
 // GetOsImageOk returns a tuple with the OsImage field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *KubernetesNodeInfo) GetOsImageOk() (*string, bool) {
-	if o == nil || o.OsImage == nil {
+	if o == nil || IsNil(o.OsImage) {
 		return nil, false
 	}
 	return o.OsImage, true
@@ -396,7 +400,7 @@ func (o *KubernetesNodeInfo) GetOsImageOk() (*string, bool) {
 
 // HasOsImage returns a boolean if a field has been set.
 func (o *KubernetesNodeInfo) HasOsImage() bool {
-	if o != nil && o.OsImage != nil {
+	if o != nil && !IsNil(o.OsImage) {
 		return true
 	}
 
@@ -410,7 +414,7 @@ func (o *KubernetesNodeInfo) SetOsImage(v string) {
 
 // GetSystemUuid returns the SystemUuid field value if set, zero value otherwise.
 func (o *KubernetesNodeInfo) GetSystemUuid() string {
-	if o == nil || o.SystemUuid == nil {
+	if o == nil || IsNil(o.SystemUuid) {
 		var ret string
 		return ret
 	}
@@ -420,7 +424,7 @@ func (o *KubernetesNodeInfo) GetSystemUuid() string {
 // GetSystemUuidOk returns a tuple with the SystemUuid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *KubernetesNodeInfo) GetSystemUuidOk() (*string, bool) {
-	if o == nil || o.SystemUuid == nil {
+	if o == nil || IsNil(o.SystemUuid) {
 		return nil, false
 	}
 	return o.SystemUuid, true
@@ -428,7 +432,7 @@ func (o *KubernetesNodeInfo) GetSystemUuidOk() (*string, bool) {
 
 // HasSystemUuid returns a boolean if a field has been set.
 func (o *KubernetesNodeInfo) HasSystemUuid() bool {
-	if o != nil && o.SystemUuid != nil {
+	if o != nil && !IsNil(o.SystemUuid) {
 		return true
 	}
 
@@ -441,49 +445,53 @@ func (o *KubernetesNodeInfo) SetSystemUuid(v string) {
 }
 
 func (o KubernetesNodeInfo) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o KubernetesNodeInfo) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
 	errMoBaseComplexType = json.Unmarshal([]byte(serializedMoBaseComplexType), &toSerialize)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Architecture != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Architecture) {
 		toSerialize["Architecture"] = o.Architecture
 	}
-	if o.BootId != nil {
+	if !IsNil(o.BootId) {
 		toSerialize["BootId"] = o.BootId
 	}
-	if o.ContainerRuntimeVersion != nil {
+	if !IsNil(o.ContainerRuntimeVersion) {
 		toSerialize["ContainerRuntimeVersion"] = o.ContainerRuntimeVersion
 	}
-	if o.KernelVersion != nil {
+	if !IsNil(o.KernelVersion) {
 		toSerialize["KernelVersion"] = o.KernelVersion
 	}
-	if o.KubeProxyVersion != nil {
+	if !IsNil(o.KubeProxyVersion) {
 		toSerialize["KubeProxyVersion"] = o.KubeProxyVersion
 	}
-	if o.KubeletVersion != nil {
+	if !IsNil(o.KubeletVersion) {
 		toSerialize["KubeletVersion"] = o.KubeletVersion
 	}
-	if o.MachineId != nil {
+	if !IsNil(o.MachineId) {
 		toSerialize["MachineId"] = o.MachineId
 	}
-	if o.OperatingSystem != nil {
+	if !IsNil(o.OperatingSystem) {
 		toSerialize["OperatingSystem"] = o.OperatingSystem
 	}
-	if o.OsImage != nil {
+	if !IsNil(o.OsImage) {
 		toSerialize["OsImage"] = o.OsImage
 	}
-	if o.SystemUuid != nil {
+	if !IsNil(o.SystemUuid) {
 		toSerialize["SystemUuid"] = o.SystemUuid
 	}
 
@@ -491,10 +499,32 @@ func (o KubernetesNodeInfo) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *KubernetesNodeInfo) UnmarshalJSON(bytes []byte) (err error) {
+func (o *KubernetesNodeInfo) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type KubernetesNodeInfoWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -524,7 +554,7 @@ func (o *KubernetesNodeInfo) UnmarshalJSON(bytes []byte) (err error) {
 
 	varKubernetesNodeInfoWithoutEmbeddedStruct := KubernetesNodeInfoWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varKubernetesNodeInfoWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varKubernetesNodeInfoWithoutEmbeddedStruct)
 	if err == nil {
 		varKubernetesNodeInfo := _KubernetesNodeInfo{}
 		varKubernetesNodeInfo.ClassId = varKubernetesNodeInfoWithoutEmbeddedStruct.ClassId
@@ -546,7 +576,7 @@ func (o *KubernetesNodeInfo) UnmarshalJSON(bytes []byte) (err error) {
 
 	varKubernetesNodeInfo := _KubernetesNodeInfo{}
 
-	err = json.Unmarshal(bytes, &varKubernetesNodeInfo)
+	err = json.Unmarshal(data, &varKubernetesNodeInfo)
 	if err == nil {
 		o.MoBaseComplexType = varKubernetesNodeInfo.MoBaseComplexType
 	} else {
@@ -555,7 +585,7 @@ func (o *KubernetesNodeInfo) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Architecture")

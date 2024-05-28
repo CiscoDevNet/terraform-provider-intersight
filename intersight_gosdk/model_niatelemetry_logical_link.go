@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the NiatelemetryLogicalLink type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &NiatelemetryLogicalLink{}
 
 // NiatelemetryLogicalLink Stores logical links per fabric.
 type NiatelemetryLogicalLink struct {
@@ -116,7 +120,7 @@ func (o *NiatelemetryLogicalLink) SetObjectType(v string) {
 
 // GetDbId returns the DbId field value if set, zero value otherwise.
 func (o *NiatelemetryLogicalLink) GetDbId() int64 {
-	if o == nil || o.DbId == nil {
+	if o == nil || IsNil(o.DbId) {
 		var ret int64
 		return ret
 	}
@@ -126,7 +130,7 @@ func (o *NiatelemetryLogicalLink) GetDbId() int64 {
 // GetDbIdOk returns a tuple with the DbId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryLogicalLink) GetDbIdOk() (*int64, bool) {
-	if o == nil || o.DbId == nil {
+	if o == nil || IsNil(o.DbId) {
 		return nil, false
 	}
 	return o.DbId, true
@@ -134,7 +138,7 @@ func (o *NiatelemetryLogicalLink) GetDbIdOk() (*int64, bool) {
 
 // HasDbId returns a boolean if a field has been set.
 func (o *NiatelemetryLogicalLink) HasDbId() bool {
-	if o != nil && o.DbId != nil {
+	if o != nil && !IsNil(o.DbId) {
 		return true
 	}
 
@@ -148,7 +152,7 @@ func (o *NiatelemetryLogicalLink) SetDbId(v int64) {
 
 // GetIsPresent returns the IsPresent field value if set, zero value otherwise.
 func (o *NiatelemetryLogicalLink) GetIsPresent() bool {
-	if o == nil || o.IsPresent == nil {
+	if o == nil || IsNil(o.IsPresent) {
 		var ret bool
 		return ret
 	}
@@ -158,7 +162,7 @@ func (o *NiatelemetryLogicalLink) GetIsPresent() bool {
 // GetIsPresentOk returns a tuple with the IsPresent field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryLogicalLink) GetIsPresentOk() (*bool, bool) {
-	if o == nil || o.IsPresent == nil {
+	if o == nil || IsNil(o.IsPresent) {
 		return nil, false
 	}
 	return o.IsPresent, true
@@ -166,7 +170,7 @@ func (o *NiatelemetryLogicalLink) GetIsPresentOk() (*bool, bool) {
 
 // HasIsPresent returns a boolean if a field has been set.
 func (o *NiatelemetryLogicalLink) HasIsPresent() bool {
-	if o != nil && o.IsPresent != nil {
+	if o != nil && !IsNil(o.IsPresent) {
 		return true
 	}
 
@@ -180,7 +184,7 @@ func (o *NiatelemetryLogicalLink) SetIsPresent(v bool) {
 
 // GetLinkAddr1 returns the LinkAddr1 field value if set, zero value otherwise.
 func (o *NiatelemetryLogicalLink) GetLinkAddr1() string {
-	if o == nil || o.LinkAddr1 == nil {
+	if o == nil || IsNil(o.LinkAddr1) {
 		var ret string
 		return ret
 	}
@@ -190,7 +194,7 @@ func (o *NiatelemetryLogicalLink) GetLinkAddr1() string {
 // GetLinkAddr1Ok returns a tuple with the LinkAddr1 field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryLogicalLink) GetLinkAddr1Ok() (*string, bool) {
-	if o == nil || o.LinkAddr1 == nil {
+	if o == nil || IsNil(o.LinkAddr1) {
 		return nil, false
 	}
 	return o.LinkAddr1, true
@@ -198,7 +202,7 @@ func (o *NiatelemetryLogicalLink) GetLinkAddr1Ok() (*string, bool) {
 
 // HasLinkAddr1 returns a boolean if a field has been set.
 func (o *NiatelemetryLogicalLink) HasLinkAddr1() bool {
-	if o != nil && o.LinkAddr1 != nil {
+	if o != nil && !IsNil(o.LinkAddr1) {
 		return true
 	}
 
@@ -212,7 +216,7 @@ func (o *NiatelemetryLogicalLink) SetLinkAddr1(v string) {
 
 // GetLinkAddr2 returns the LinkAddr2 field value if set, zero value otherwise.
 func (o *NiatelemetryLogicalLink) GetLinkAddr2() string {
-	if o == nil || o.LinkAddr2 == nil {
+	if o == nil || IsNil(o.LinkAddr2) {
 		var ret string
 		return ret
 	}
@@ -222,7 +226,7 @@ func (o *NiatelemetryLogicalLink) GetLinkAddr2() string {
 // GetLinkAddr2Ok returns a tuple with the LinkAddr2 field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryLogicalLink) GetLinkAddr2Ok() (*string, bool) {
-	if o == nil || o.LinkAddr2 == nil {
+	if o == nil || IsNil(o.LinkAddr2) {
 		return nil, false
 	}
 	return o.LinkAddr2, true
@@ -230,7 +234,7 @@ func (o *NiatelemetryLogicalLink) GetLinkAddr2Ok() (*string, bool) {
 
 // HasLinkAddr2 returns a boolean if a field has been set.
 func (o *NiatelemetryLogicalLink) HasLinkAddr2() bool {
-	if o != nil && o.LinkAddr2 != nil {
+	if o != nil && !IsNil(o.LinkAddr2) {
 		return true
 	}
 
@@ -244,7 +248,7 @@ func (o *NiatelemetryLogicalLink) SetLinkAddr2(v string) {
 
 // GetLinkState returns the LinkState field value if set, zero value otherwise.
 func (o *NiatelemetryLogicalLink) GetLinkState() string {
-	if o == nil || o.LinkState == nil {
+	if o == nil || IsNil(o.LinkState) {
 		var ret string
 		return ret
 	}
@@ -254,7 +258,7 @@ func (o *NiatelemetryLogicalLink) GetLinkState() string {
 // GetLinkStateOk returns a tuple with the LinkState field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryLogicalLink) GetLinkStateOk() (*string, bool) {
-	if o == nil || o.LinkState == nil {
+	if o == nil || IsNil(o.LinkState) {
 		return nil, false
 	}
 	return o.LinkState, true
@@ -262,7 +266,7 @@ func (o *NiatelemetryLogicalLink) GetLinkStateOk() (*string, bool) {
 
 // HasLinkState returns a boolean if a field has been set.
 func (o *NiatelemetryLogicalLink) HasLinkState() bool {
-	if o != nil && o.LinkState != nil {
+	if o != nil && !IsNil(o.LinkState) {
 		return true
 	}
 
@@ -276,7 +280,7 @@ func (o *NiatelemetryLogicalLink) SetLinkState(v string) {
 
 // GetLinkType returns the LinkType field value if set, zero value otherwise.
 func (o *NiatelemetryLogicalLink) GetLinkType() string {
-	if o == nil || o.LinkType == nil {
+	if o == nil || IsNil(o.LinkType) {
 		var ret string
 		return ret
 	}
@@ -286,7 +290,7 @@ func (o *NiatelemetryLogicalLink) GetLinkType() string {
 // GetLinkTypeOk returns a tuple with the LinkType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryLogicalLink) GetLinkTypeOk() (*string, bool) {
-	if o == nil || o.LinkType == nil {
+	if o == nil || IsNil(o.LinkType) {
 		return nil, false
 	}
 	return o.LinkType, true
@@ -294,7 +298,7 @@ func (o *NiatelemetryLogicalLink) GetLinkTypeOk() (*string, bool) {
 
 // HasLinkType returns a boolean if a field has been set.
 func (o *NiatelemetryLogicalLink) HasLinkType() bool {
-	if o != nil && o.LinkType != nil {
+	if o != nil && !IsNil(o.LinkType) {
 		return true
 	}
 
@@ -308,7 +312,7 @@ func (o *NiatelemetryLogicalLink) SetLinkType(v string) {
 
 // GetUptime returns the Uptime field value if set, zero value otherwise.
 func (o *NiatelemetryLogicalLink) GetUptime() string {
-	if o == nil || o.Uptime == nil {
+	if o == nil || IsNil(o.Uptime) {
 		var ret string
 		return ret
 	}
@@ -318,7 +322,7 @@ func (o *NiatelemetryLogicalLink) GetUptime() string {
 // GetUptimeOk returns a tuple with the Uptime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryLogicalLink) GetUptimeOk() (*string, bool) {
-	if o == nil || o.Uptime == nil {
+	if o == nil || IsNil(o.Uptime) {
 		return nil, false
 	}
 	return o.Uptime, true
@@ -326,7 +330,7 @@ func (o *NiatelemetryLogicalLink) GetUptimeOk() (*string, bool) {
 
 // HasUptime returns a boolean if a field has been set.
 func (o *NiatelemetryLogicalLink) HasUptime() bool {
-	if o != nil && o.Uptime != nil {
+	if o != nil && !IsNil(o.Uptime) {
 		return true
 	}
 
@@ -339,40 +343,44 @@ func (o *NiatelemetryLogicalLink) SetUptime(v string) {
 }
 
 func (o NiatelemetryLogicalLink) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o NiatelemetryLogicalLink) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
 	errMoBaseComplexType = json.Unmarshal([]byte(serializedMoBaseComplexType), &toSerialize)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.DbId != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.DbId) {
 		toSerialize["DbId"] = o.DbId
 	}
-	if o.IsPresent != nil {
+	if !IsNil(o.IsPresent) {
 		toSerialize["IsPresent"] = o.IsPresent
 	}
-	if o.LinkAddr1 != nil {
+	if !IsNil(o.LinkAddr1) {
 		toSerialize["LinkAddr1"] = o.LinkAddr1
 	}
-	if o.LinkAddr2 != nil {
+	if !IsNil(o.LinkAddr2) {
 		toSerialize["LinkAddr2"] = o.LinkAddr2
 	}
-	if o.LinkState != nil {
+	if !IsNil(o.LinkState) {
 		toSerialize["LinkState"] = o.LinkState
 	}
-	if o.LinkType != nil {
+	if !IsNil(o.LinkType) {
 		toSerialize["LinkType"] = o.LinkType
 	}
-	if o.Uptime != nil {
+	if !IsNil(o.Uptime) {
 		toSerialize["Uptime"] = o.Uptime
 	}
 
@@ -380,10 +388,32 @@ func (o NiatelemetryLogicalLink) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *NiatelemetryLogicalLink) UnmarshalJSON(bytes []byte) (err error) {
+func (o *NiatelemetryLogicalLink) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type NiatelemetryLogicalLinkWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -407,7 +437,7 @@ func (o *NiatelemetryLogicalLink) UnmarshalJSON(bytes []byte) (err error) {
 
 	varNiatelemetryLogicalLinkWithoutEmbeddedStruct := NiatelemetryLogicalLinkWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varNiatelemetryLogicalLinkWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varNiatelemetryLogicalLinkWithoutEmbeddedStruct)
 	if err == nil {
 		varNiatelemetryLogicalLink := _NiatelemetryLogicalLink{}
 		varNiatelemetryLogicalLink.ClassId = varNiatelemetryLogicalLinkWithoutEmbeddedStruct.ClassId
@@ -426,7 +456,7 @@ func (o *NiatelemetryLogicalLink) UnmarshalJSON(bytes []byte) (err error) {
 
 	varNiatelemetryLogicalLink := _NiatelemetryLogicalLink{}
 
-	err = json.Unmarshal(bytes, &varNiatelemetryLogicalLink)
+	err = json.Unmarshal(data, &varNiatelemetryLogicalLink)
 	if err == nil {
 		o.MoBaseComplexType = varNiatelemetryLogicalLink.MoBaseComplexType
 	} else {
@@ -435,7 +465,7 @@ func (o *NiatelemetryLogicalLink) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "DbId")

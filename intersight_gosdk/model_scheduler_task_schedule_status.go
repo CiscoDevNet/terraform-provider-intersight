@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,10 +13,14 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 	"time"
 )
+
+// checks if the SchedulerTaskScheduleStatus type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &SchedulerTaskScheduleStatus{}
 
 // SchedulerTaskScheduleStatus The scheduled task details.
 type SchedulerTaskScheduleStatus struct {
@@ -117,7 +121,7 @@ func (o *SchedulerTaskScheduleStatus) SetObjectType(v string) {
 
 // GetCount returns the Count field value if set, zero value otherwise.
 func (o *SchedulerTaskScheduleStatus) GetCount() int64 {
-	if o == nil || o.Count == nil {
+	if o == nil || IsNil(o.Count) {
 		var ret int64
 		return ret
 	}
@@ -127,7 +131,7 @@ func (o *SchedulerTaskScheduleStatus) GetCount() int64 {
 // GetCountOk returns a tuple with the Count field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SchedulerTaskScheduleStatus) GetCountOk() (*int64, bool) {
-	if o == nil || o.Count == nil {
+	if o == nil || IsNil(o.Count) {
 		return nil, false
 	}
 	return o.Count, true
@@ -135,7 +139,7 @@ func (o *SchedulerTaskScheduleStatus) GetCountOk() (*int64, bool) {
 
 // HasCount returns a boolean if a field has been set.
 func (o *SchedulerTaskScheduleStatus) HasCount() bool {
-	if o != nil && o.Count != nil {
+	if o != nil && !IsNil(o.Count) {
 		return true
 	}
 
@@ -149,7 +153,7 @@ func (o *SchedulerTaskScheduleStatus) SetCount(v int64) {
 
 // GetCurrentStatus returns the CurrentStatus field value if set, zero value otherwise.
 func (o *SchedulerTaskScheduleStatus) GetCurrentStatus() string {
-	if o == nil || o.CurrentStatus == nil {
+	if o == nil || IsNil(o.CurrentStatus) {
 		var ret string
 		return ret
 	}
@@ -159,7 +163,7 @@ func (o *SchedulerTaskScheduleStatus) GetCurrentStatus() string {
 // GetCurrentStatusOk returns a tuple with the CurrentStatus field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SchedulerTaskScheduleStatus) GetCurrentStatusOk() (*string, bool) {
-	if o == nil || o.CurrentStatus == nil {
+	if o == nil || IsNil(o.CurrentStatus) {
 		return nil, false
 	}
 	return o.CurrentStatus, true
@@ -167,7 +171,7 @@ func (o *SchedulerTaskScheduleStatus) GetCurrentStatusOk() (*string, bool) {
 
 // HasCurrentStatus returns a boolean if a field has been set.
 func (o *SchedulerTaskScheduleStatus) HasCurrentStatus() bool {
-	if o != nil && o.CurrentStatus != nil {
+	if o != nil && !IsNil(o.CurrentStatus) {
 		return true
 	}
 
@@ -181,7 +185,7 @@ func (o *SchedulerTaskScheduleStatus) SetCurrentStatus(v string) {
 
 // GetIsSystemSuspended returns the IsSystemSuspended field value if set, zero value otherwise.
 func (o *SchedulerTaskScheduleStatus) GetIsSystemSuspended() bool {
-	if o == nil || o.IsSystemSuspended == nil {
+	if o == nil || IsNil(o.IsSystemSuspended) {
 		var ret bool
 		return ret
 	}
@@ -191,7 +195,7 @@ func (o *SchedulerTaskScheduleStatus) GetIsSystemSuspended() bool {
 // GetIsSystemSuspendedOk returns a tuple with the IsSystemSuspended field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SchedulerTaskScheduleStatus) GetIsSystemSuspendedOk() (*bool, bool) {
-	if o == nil || o.IsSystemSuspended == nil {
+	if o == nil || IsNil(o.IsSystemSuspended) {
 		return nil, false
 	}
 	return o.IsSystemSuspended, true
@@ -199,7 +203,7 @@ func (o *SchedulerTaskScheduleStatus) GetIsSystemSuspendedOk() (*bool, bool) {
 
 // HasIsSystemSuspended returns a boolean if a field has been set.
 func (o *SchedulerTaskScheduleStatus) HasIsSystemSuspended() bool {
-	if o != nil && o.IsSystemSuspended != nil {
+	if o != nil && !IsNil(o.IsSystemSuspended) {
 		return true
 	}
 
@@ -213,7 +217,7 @@ func (o *SchedulerTaskScheduleStatus) SetIsSystemSuspended(v bool) {
 
 // GetNextRunStartTime returns the NextRunStartTime field value if set, zero value otherwise.
 func (o *SchedulerTaskScheduleStatus) GetNextRunStartTime() time.Time {
-	if o == nil || o.NextRunStartTime == nil {
+	if o == nil || IsNil(o.NextRunStartTime) {
 		var ret time.Time
 		return ret
 	}
@@ -223,7 +227,7 @@ func (o *SchedulerTaskScheduleStatus) GetNextRunStartTime() time.Time {
 // GetNextRunStartTimeOk returns a tuple with the NextRunStartTime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SchedulerTaskScheduleStatus) GetNextRunStartTimeOk() (*time.Time, bool) {
-	if o == nil || o.NextRunStartTime == nil {
+	if o == nil || IsNil(o.NextRunStartTime) {
 		return nil, false
 	}
 	return o.NextRunStartTime, true
@@ -231,7 +235,7 @@ func (o *SchedulerTaskScheduleStatus) GetNextRunStartTimeOk() (*time.Time, bool)
 
 // HasNextRunStartTime returns a boolean if a field has been set.
 func (o *SchedulerTaskScheduleStatus) HasNextRunStartTime() bool {
-	if o != nil && o.NextRunStartTime != nil {
+	if o != nil && !IsNil(o.NextRunStartTime) {
 		return true
 	}
 
@@ -245,7 +249,7 @@ func (o *SchedulerTaskScheduleStatus) SetNextRunStartTime(v time.Time) {
 
 // GetPrevRunEndTime returns the PrevRunEndTime field value if set, zero value otherwise.
 func (o *SchedulerTaskScheduleStatus) GetPrevRunEndTime() time.Time {
-	if o == nil || o.PrevRunEndTime == nil {
+	if o == nil || IsNil(o.PrevRunEndTime) {
 		var ret time.Time
 		return ret
 	}
@@ -255,7 +259,7 @@ func (o *SchedulerTaskScheduleStatus) GetPrevRunEndTime() time.Time {
 // GetPrevRunEndTimeOk returns a tuple with the PrevRunEndTime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SchedulerTaskScheduleStatus) GetPrevRunEndTimeOk() (*time.Time, bool) {
-	if o == nil || o.PrevRunEndTime == nil {
+	if o == nil || IsNil(o.PrevRunEndTime) {
 		return nil, false
 	}
 	return o.PrevRunEndTime, true
@@ -263,7 +267,7 @@ func (o *SchedulerTaskScheduleStatus) GetPrevRunEndTimeOk() (*time.Time, bool) {
 
 // HasPrevRunEndTime returns a boolean if a field has been set.
 func (o *SchedulerTaskScheduleStatus) HasPrevRunEndTime() bool {
-	if o != nil && o.PrevRunEndTime != nil {
+	if o != nil && !IsNil(o.PrevRunEndTime) {
 		return true
 	}
 
@@ -277,7 +281,7 @@ func (o *SchedulerTaskScheduleStatus) SetPrevRunEndTime(v time.Time) {
 
 // GetPrevRunStartTime returns the PrevRunStartTime field value if set, zero value otherwise.
 func (o *SchedulerTaskScheduleStatus) GetPrevRunStartTime() time.Time {
-	if o == nil || o.PrevRunStartTime == nil {
+	if o == nil || IsNil(o.PrevRunStartTime) {
 		var ret time.Time
 		return ret
 	}
@@ -287,7 +291,7 @@ func (o *SchedulerTaskScheduleStatus) GetPrevRunStartTime() time.Time {
 // GetPrevRunStartTimeOk returns a tuple with the PrevRunStartTime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SchedulerTaskScheduleStatus) GetPrevRunStartTimeOk() (*time.Time, bool) {
-	if o == nil || o.PrevRunStartTime == nil {
+	if o == nil || IsNil(o.PrevRunStartTime) {
 		return nil, false
 	}
 	return o.PrevRunStartTime, true
@@ -295,7 +299,7 @@ func (o *SchedulerTaskScheduleStatus) GetPrevRunStartTimeOk() (*time.Time, bool)
 
 // HasPrevRunStartTime returns a boolean if a field has been set.
 func (o *SchedulerTaskScheduleStatus) HasPrevRunStartTime() bool {
-	if o != nil && o.PrevRunStartTime != nil {
+	if o != nil && !IsNil(o.PrevRunStartTime) {
 		return true
 	}
 
@@ -309,7 +313,7 @@ func (o *SchedulerTaskScheduleStatus) SetPrevRunStartTime(v time.Time) {
 
 // GetReason returns the Reason field value if set, zero value otherwise.
 func (o *SchedulerTaskScheduleStatus) GetReason() string {
-	if o == nil || o.Reason == nil {
+	if o == nil || IsNil(o.Reason) {
 		var ret string
 		return ret
 	}
@@ -319,7 +323,7 @@ func (o *SchedulerTaskScheduleStatus) GetReason() string {
 // GetReasonOk returns a tuple with the Reason field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SchedulerTaskScheduleStatus) GetReasonOk() (*string, bool) {
-	if o == nil || o.Reason == nil {
+	if o == nil || IsNil(o.Reason) {
 		return nil, false
 	}
 	return o.Reason, true
@@ -327,7 +331,7 @@ func (o *SchedulerTaskScheduleStatus) GetReasonOk() (*string, bool) {
 
 // HasReason returns a boolean if a field has been set.
 func (o *SchedulerTaskScheduleStatus) HasReason() bool {
-	if o != nil && o.Reason != nil {
+	if o != nil && !IsNil(o.Reason) {
 		return true
 	}
 
@@ -340,40 +344,44 @@ func (o *SchedulerTaskScheduleStatus) SetReason(v string) {
 }
 
 func (o SchedulerTaskScheduleStatus) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o SchedulerTaskScheduleStatus) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
 	errMoBaseComplexType = json.Unmarshal([]byte(serializedMoBaseComplexType), &toSerialize)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Count != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Count) {
 		toSerialize["Count"] = o.Count
 	}
-	if o.CurrentStatus != nil {
+	if !IsNil(o.CurrentStatus) {
 		toSerialize["CurrentStatus"] = o.CurrentStatus
 	}
-	if o.IsSystemSuspended != nil {
+	if !IsNil(o.IsSystemSuspended) {
 		toSerialize["IsSystemSuspended"] = o.IsSystemSuspended
 	}
-	if o.NextRunStartTime != nil {
+	if !IsNil(o.NextRunStartTime) {
 		toSerialize["NextRunStartTime"] = o.NextRunStartTime
 	}
-	if o.PrevRunEndTime != nil {
+	if !IsNil(o.PrevRunEndTime) {
 		toSerialize["PrevRunEndTime"] = o.PrevRunEndTime
 	}
-	if o.PrevRunStartTime != nil {
+	if !IsNil(o.PrevRunStartTime) {
 		toSerialize["PrevRunStartTime"] = o.PrevRunStartTime
 	}
-	if o.Reason != nil {
+	if !IsNil(o.Reason) {
 		toSerialize["Reason"] = o.Reason
 	}
 
@@ -381,10 +389,32 @@ func (o SchedulerTaskScheduleStatus) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *SchedulerTaskScheduleStatus) UnmarshalJSON(bytes []byte) (err error) {
+func (o *SchedulerTaskScheduleStatus) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type SchedulerTaskScheduleStatusWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -408,7 +438,7 @@ func (o *SchedulerTaskScheduleStatus) UnmarshalJSON(bytes []byte) (err error) {
 
 	varSchedulerTaskScheduleStatusWithoutEmbeddedStruct := SchedulerTaskScheduleStatusWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varSchedulerTaskScheduleStatusWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varSchedulerTaskScheduleStatusWithoutEmbeddedStruct)
 	if err == nil {
 		varSchedulerTaskScheduleStatus := _SchedulerTaskScheduleStatus{}
 		varSchedulerTaskScheduleStatus.ClassId = varSchedulerTaskScheduleStatusWithoutEmbeddedStruct.ClassId
@@ -427,7 +457,7 @@ func (o *SchedulerTaskScheduleStatus) UnmarshalJSON(bytes []byte) (err error) {
 
 	varSchedulerTaskScheduleStatus := _SchedulerTaskScheduleStatus{}
 
-	err = json.Unmarshal(bytes, &varSchedulerTaskScheduleStatus)
+	err = json.Unmarshal(data, &varSchedulerTaskScheduleStatus)
 	if err == nil {
 		o.MoBaseComplexType = varSchedulerTaskScheduleStatus.MoBaseComplexType
 	} else {
@@ -436,7 +466,7 @@ func (o *SchedulerTaskScheduleStatus) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Count")

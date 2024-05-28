@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "workflow.ServiceItemOutput"]
 **Name** | Pointer to **string** | Output name which is used in the output definition of the service item. | [optional] 
 **Output** | Pointer to **interface{}** | Service item output for a service item instance and the format is specified by output definition of the service item definition. | [optional] 
-**ServiceItemInstance** | Pointer to [**WorkflowServiceItemInstanceRelationship**](WorkflowServiceItemInstanceRelationship.md) |  | [optional] 
+**ServiceItemInstance** | Pointer to [**NullableWorkflowServiceItemInstanceRelationship**](WorkflowServiceItemInstanceRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -154,6 +154,16 @@ SetServiceItemInstance sets ServiceItemInstance field to given value.
 
 HasServiceItemInstance returns a boolean if a field has been set.
 
+### SetServiceItemInstanceNil
+
+`func (o *WorkflowServiceItemOutput) SetServiceItemInstanceNil(b bool)`
+
+ SetServiceItemInstanceNil sets the value for ServiceItemInstance to be an explicit nil
+
+### UnsetServiceItemInstance
+`func (o *WorkflowServiceItemOutput) UnsetServiceItemInstance()`
+
+UnsetServiceItemInstance ensures that no value is present for ServiceItemInstance, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

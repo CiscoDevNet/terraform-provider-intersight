@@ -8,10 +8,10 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "fabric.ApplianceRole"]
 **Mode** | Pointer to **string** | Port mode to be set on the appliance port. * &#x60;trunk&#x60; - Trunk Mode Switch Port Type. * &#x60;access&#x60; - Access Mode Switch Port Type. | [optional] [default to "trunk"]
 **Priority** | Pointer to **string** | The &#39;name&#39; of the System QoS Class. * &#x60;Best Effort&#x60; - QoS Priority for Best-effort traffic. * &#x60;FC&#x60; - QoS Priority for FC traffic. * &#x60;Platinum&#x60; - QoS Priority for Platinum traffic. * &#x60;Gold&#x60; - QoS Priority for Gold traffic. * &#x60;Silver&#x60; - QoS Priority for Silver traffic. * &#x60;Bronze&#x60; - QoS Priority for Bronze traffic. | [optional] [default to "Best Effort"]
-**EthNetworkControlPolicy** | Pointer to [**FabricEthNetworkControlPolicyRelationship**](FabricEthNetworkControlPolicyRelationship.md) |  | [optional] 
-**EthNetworkGroupPolicy** | Pointer to [**FabricEthNetworkGroupPolicyRelationship**](FabricEthNetworkGroupPolicyRelationship.md) |  | [optional] 
-**FlowControlPolicy** | Pointer to [**FabricFlowControlPolicyRelationship**](FabricFlowControlPolicyRelationship.md) |  | [optional] 
-**LinkControlPolicy** | Pointer to [**FabricLinkControlPolicyRelationship**](FabricLinkControlPolicyRelationship.md) |  | [optional] 
+**EthNetworkControlPolicy** | Pointer to [**NullableFabricEthNetworkControlPolicyRelationship**](FabricEthNetworkControlPolicyRelationship.md) |  | [optional] 
+**EthNetworkGroupPolicy** | Pointer to [**NullableFabricEthNetworkGroupPolicyRelationship**](FabricEthNetworkGroupPolicyRelationship.md) |  | [optional] 
+**FlowControlPolicy** | Pointer to [**NullableFabricFlowControlPolicyRelationship**](FabricFlowControlPolicyRelationship.md) |  | [optional] 
+**LinkControlPolicy** | Pointer to [**NullableFabricLinkControlPolicyRelationship**](FabricLinkControlPolicyRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -147,6 +147,16 @@ SetEthNetworkControlPolicy sets EthNetworkControlPolicy field to given value.
 
 HasEthNetworkControlPolicy returns a boolean if a field has been set.
 
+### SetEthNetworkControlPolicyNil
+
+`func (o *FabricApplianceRole) SetEthNetworkControlPolicyNil(b bool)`
+
+ SetEthNetworkControlPolicyNil sets the value for EthNetworkControlPolicy to be an explicit nil
+
+### UnsetEthNetworkControlPolicy
+`func (o *FabricApplianceRole) UnsetEthNetworkControlPolicy()`
+
+UnsetEthNetworkControlPolicy ensures that no value is present for EthNetworkControlPolicy, not even an explicit nil
 ### GetEthNetworkGroupPolicy
 
 `func (o *FabricApplianceRole) GetEthNetworkGroupPolicy() FabricEthNetworkGroupPolicyRelationship`
@@ -172,6 +182,16 @@ SetEthNetworkGroupPolicy sets EthNetworkGroupPolicy field to given value.
 
 HasEthNetworkGroupPolicy returns a boolean if a field has been set.
 
+### SetEthNetworkGroupPolicyNil
+
+`func (o *FabricApplianceRole) SetEthNetworkGroupPolicyNil(b bool)`
+
+ SetEthNetworkGroupPolicyNil sets the value for EthNetworkGroupPolicy to be an explicit nil
+
+### UnsetEthNetworkGroupPolicy
+`func (o *FabricApplianceRole) UnsetEthNetworkGroupPolicy()`
+
+UnsetEthNetworkGroupPolicy ensures that no value is present for EthNetworkGroupPolicy, not even an explicit nil
 ### GetFlowControlPolicy
 
 `func (o *FabricApplianceRole) GetFlowControlPolicy() FabricFlowControlPolicyRelationship`
@@ -197,6 +217,16 @@ SetFlowControlPolicy sets FlowControlPolicy field to given value.
 
 HasFlowControlPolicy returns a boolean if a field has been set.
 
+### SetFlowControlPolicyNil
+
+`func (o *FabricApplianceRole) SetFlowControlPolicyNil(b bool)`
+
+ SetFlowControlPolicyNil sets the value for FlowControlPolicy to be an explicit nil
+
+### UnsetFlowControlPolicy
+`func (o *FabricApplianceRole) UnsetFlowControlPolicy()`
+
+UnsetFlowControlPolicy ensures that no value is present for FlowControlPolicy, not even an explicit nil
 ### GetLinkControlPolicy
 
 `func (o *FabricApplianceRole) GetLinkControlPolicy() FabricLinkControlPolicyRelationship`
@@ -222,6 +252,16 @@ SetLinkControlPolicy sets LinkControlPolicy field to given value.
 
 HasLinkControlPolicy returns a boolean if a field has been set.
 
+### SetLinkControlPolicyNil
+
+`func (o *FabricApplianceRole) SetLinkControlPolicyNil(b bool)`
+
+ SetLinkControlPolicyNil sets the value for LinkControlPolicy to be an explicit nil
+
+### UnsetLinkControlPolicy
+`func (o *FabricApplianceRole) UnsetLinkControlPolicy()`
+
+UnsetLinkControlPolicy ensures that no value is present for LinkControlPolicy, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

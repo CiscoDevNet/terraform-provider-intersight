@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the WorkflowTemplateEvaluation type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &WorkflowTemplateEvaluation{}
 
 // WorkflowTemplateEvaluation Executes a given template and returns the result.
 type WorkflowTemplateEvaluation struct {
@@ -110,7 +114,7 @@ func (o *WorkflowTemplateEvaluation) SetObjectType(v string) {
 
 // GetExpectedOutputDataType returns the ExpectedOutputDataType field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *WorkflowTemplateEvaluation) GetExpectedOutputDataType() WorkflowBaseDataType {
-	if o == nil || o.ExpectedOutputDataType.Get() == nil {
+	if o == nil || IsNil(o.ExpectedOutputDataType.Get()) {
 		var ret WorkflowBaseDataType
 		return ret
 	}
@@ -164,7 +168,7 @@ func (o *WorkflowTemplateEvaluation) GetOutput() interface{} {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *WorkflowTemplateEvaluation) GetOutputOk() (*interface{}, bool) {
-	if o == nil || o.Output == nil {
+	if o == nil || IsNil(o.Output) {
 		return nil, false
 	}
 	return &o.Output, true
@@ -172,7 +176,7 @@ func (o *WorkflowTemplateEvaluation) GetOutputOk() (*interface{}, bool) {
 
 // HasOutput returns a boolean if a field has been set.
 func (o *WorkflowTemplateEvaluation) HasOutput() bool {
-	if o != nil && o.Output != nil {
+	if o != nil && IsNil(o.Output) {
 		return true
 	}
 
@@ -186,7 +190,7 @@ func (o *WorkflowTemplateEvaluation) SetOutput(v interface{}) {
 
 // GetPreviewTemplate returns the PreviewTemplate field value if set, zero value otherwise.
 func (o *WorkflowTemplateEvaluation) GetPreviewTemplate() string {
-	if o == nil || o.PreviewTemplate == nil {
+	if o == nil || IsNil(o.PreviewTemplate) {
 		var ret string
 		return ret
 	}
@@ -196,7 +200,7 @@ func (o *WorkflowTemplateEvaluation) GetPreviewTemplate() string {
 // GetPreviewTemplateOk returns a tuple with the PreviewTemplate field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowTemplateEvaluation) GetPreviewTemplateOk() (*string, bool) {
-	if o == nil || o.PreviewTemplate == nil {
+	if o == nil || IsNil(o.PreviewTemplate) {
 		return nil, false
 	}
 	return o.PreviewTemplate, true
@@ -204,7 +208,7 @@ func (o *WorkflowTemplateEvaluation) GetPreviewTemplateOk() (*string, bool) {
 
 // HasPreviewTemplate returns a boolean if a field has been set.
 func (o *WorkflowTemplateEvaluation) HasPreviewTemplate() bool {
-	if o != nil && o.PreviewTemplate != nil {
+	if o != nil && !IsNil(o.PreviewTemplate) {
 		return true
 	}
 
@@ -229,7 +233,7 @@ func (o *WorkflowTemplateEvaluation) GetStages() []TemplateTransformationStage {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *WorkflowTemplateEvaluation) GetStagesOk() ([]TemplateTransformationStage, bool) {
-	if o == nil || o.Stages == nil {
+	if o == nil || IsNil(o.Stages) {
 		return nil, false
 	}
 	return o.Stages, true
@@ -237,7 +241,7 @@ func (o *WorkflowTemplateEvaluation) GetStagesOk() ([]TemplateTransformationStag
 
 // HasStages returns a boolean if a field has been set.
 func (o *WorkflowTemplateEvaluation) HasStages() bool {
-	if o != nil && o.Stages != nil {
+	if o != nil && IsNil(o.Stages) {
 		return true
 	}
 
@@ -262,7 +266,7 @@ func (o *WorkflowTemplateEvaluation) GetValues() interface{} {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *WorkflowTemplateEvaluation) GetValuesOk() (*interface{}, bool) {
-	if o == nil || o.Values == nil {
+	if o == nil || IsNil(o.Values) {
 		return nil, false
 	}
 	return &o.Values, true
@@ -270,7 +274,7 @@ func (o *WorkflowTemplateEvaluation) GetValuesOk() (*interface{}, bool) {
 
 // HasValues returns a boolean if a field has been set.
 func (o *WorkflowTemplateEvaluation) HasValues() bool {
-	if o != nil && o.Values != nil {
+	if o != nil && IsNil(o.Values) {
 		return true
 	}
 
@@ -283,28 +287,32 @@ func (o *WorkflowTemplateEvaluation) SetValues(v interface{}) {
 }
 
 func (o WorkflowTemplateEvaluation) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o WorkflowTemplateEvaluation) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
 	if o.ExpectedOutputDataType.IsSet() {
 		toSerialize["ExpectedOutputDataType"] = o.ExpectedOutputDataType.Get()
 	}
 	if o.Output != nil {
 		toSerialize["Output"] = o.Output
 	}
-	if o.PreviewTemplate != nil {
+	if !IsNil(o.PreviewTemplate) {
 		toSerialize["PreviewTemplate"] = o.PreviewTemplate
 	}
 	if o.Stages != nil {
@@ -318,10 +326,32 @@ func (o WorkflowTemplateEvaluation) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *WorkflowTemplateEvaluation) UnmarshalJSON(bytes []byte) (err error) {
+func (o *WorkflowTemplateEvaluation) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type WorkflowTemplateEvaluationWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -339,7 +369,7 @@ func (o *WorkflowTemplateEvaluation) UnmarshalJSON(bytes []byte) (err error) {
 
 	varWorkflowTemplateEvaluationWithoutEmbeddedStruct := WorkflowTemplateEvaluationWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varWorkflowTemplateEvaluationWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varWorkflowTemplateEvaluationWithoutEmbeddedStruct)
 	if err == nil {
 		varWorkflowTemplateEvaluation := _WorkflowTemplateEvaluation{}
 		varWorkflowTemplateEvaluation.ClassId = varWorkflowTemplateEvaluationWithoutEmbeddedStruct.ClassId
@@ -356,7 +386,7 @@ func (o *WorkflowTemplateEvaluation) UnmarshalJSON(bytes []byte) (err error) {
 
 	varWorkflowTemplateEvaluation := _WorkflowTemplateEvaluation{}
 
-	err = json.Unmarshal(bytes, &varWorkflowTemplateEvaluation)
+	err = json.Unmarshal(data, &varWorkflowTemplateEvaluation)
 	if err == nil {
 		o.MoBaseMo = varWorkflowTemplateEvaluation.MoBaseMo
 	} else {
@@ -365,7 +395,7 @@ func (o *WorkflowTemplateEvaluation) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "ExpectedOutputDataType")

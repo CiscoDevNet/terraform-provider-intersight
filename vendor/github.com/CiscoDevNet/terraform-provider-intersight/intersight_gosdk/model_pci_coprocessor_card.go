@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the PciCoprocessorCard type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &PciCoprocessorCard{}
 
 // PciCoprocessorCard PCIe Compression and Cryptographic CPU Offload Card.
 type PciCoprocessorCard struct {
@@ -27,10 +31,10 @@ type PciCoprocessorCard struct {
 	// The id of the coprocessor card.
 	CardId *int64 `json:"CardId,omitempty"`
 	// The PCI slot name for the coprocessor card.
-	PciSlot              *string                              `json:"PciSlot,omitempty"`
-	ComputeBoard         *ComputeBoardRelationship            `json:"ComputeBoard,omitempty"`
-	InventoryDeviceInfo  *InventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
-	RegisteredDevice     *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+	PciSlot              *string                                     `json:"PciSlot,omitempty"`
+	ComputeBoard         NullableComputeBoardRelationship            `json:"ComputeBoard,omitempty"`
+	InventoryDeviceInfo  NullableInventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
+	RegisteredDevice     NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -109,7 +113,7 @@ func (o *PciCoprocessorCard) SetObjectType(v string) {
 
 // GetCardId returns the CardId field value if set, zero value otherwise.
 func (o *PciCoprocessorCard) GetCardId() int64 {
-	if o == nil || o.CardId == nil {
+	if o == nil || IsNil(o.CardId) {
 		var ret int64
 		return ret
 	}
@@ -119,7 +123,7 @@ func (o *PciCoprocessorCard) GetCardId() int64 {
 // GetCardIdOk returns a tuple with the CardId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PciCoprocessorCard) GetCardIdOk() (*int64, bool) {
-	if o == nil || o.CardId == nil {
+	if o == nil || IsNil(o.CardId) {
 		return nil, false
 	}
 	return o.CardId, true
@@ -127,7 +131,7 @@ func (o *PciCoprocessorCard) GetCardIdOk() (*int64, bool) {
 
 // HasCardId returns a boolean if a field has been set.
 func (o *PciCoprocessorCard) HasCardId() bool {
-	if o != nil && o.CardId != nil {
+	if o != nil && !IsNil(o.CardId) {
 		return true
 	}
 
@@ -141,7 +145,7 @@ func (o *PciCoprocessorCard) SetCardId(v int64) {
 
 // GetPciSlot returns the PciSlot field value if set, zero value otherwise.
 func (o *PciCoprocessorCard) GetPciSlot() string {
-	if o == nil || o.PciSlot == nil {
+	if o == nil || IsNil(o.PciSlot) {
 		var ret string
 		return ret
 	}
@@ -151,7 +155,7 @@ func (o *PciCoprocessorCard) GetPciSlot() string {
 // GetPciSlotOk returns a tuple with the PciSlot field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PciCoprocessorCard) GetPciSlotOk() (*string, bool) {
-	if o == nil || o.PciSlot == nil {
+	if o == nil || IsNil(o.PciSlot) {
 		return nil, false
 	}
 	return o.PciSlot, true
@@ -159,7 +163,7 @@ func (o *PciCoprocessorCard) GetPciSlotOk() (*string, bool) {
 
 // HasPciSlot returns a boolean if a field has been set.
 func (o *PciCoprocessorCard) HasPciSlot() bool {
-	if o != nil && o.PciSlot != nil {
+	if o != nil && !IsNil(o.PciSlot) {
 		return true
 	}
 
@@ -171,142 +175,201 @@ func (o *PciCoprocessorCard) SetPciSlot(v string) {
 	o.PciSlot = &v
 }
 
-// GetComputeBoard returns the ComputeBoard field value if set, zero value otherwise.
+// GetComputeBoard returns the ComputeBoard field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *PciCoprocessorCard) GetComputeBoard() ComputeBoardRelationship {
-	if o == nil || o.ComputeBoard == nil {
+	if o == nil || IsNil(o.ComputeBoard.Get()) {
 		var ret ComputeBoardRelationship
 		return ret
 	}
-	return *o.ComputeBoard
+	return *o.ComputeBoard.Get()
 }
 
 // GetComputeBoardOk returns a tuple with the ComputeBoard field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *PciCoprocessorCard) GetComputeBoardOk() (*ComputeBoardRelationship, bool) {
-	if o == nil || o.ComputeBoard == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.ComputeBoard, true
+	return o.ComputeBoard.Get(), o.ComputeBoard.IsSet()
 }
 
 // HasComputeBoard returns a boolean if a field has been set.
 func (o *PciCoprocessorCard) HasComputeBoard() bool {
-	if o != nil && o.ComputeBoard != nil {
+	if o != nil && o.ComputeBoard.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetComputeBoard gets a reference to the given ComputeBoardRelationship and assigns it to the ComputeBoard field.
+// SetComputeBoard gets a reference to the given NullableComputeBoardRelationship and assigns it to the ComputeBoard field.
 func (o *PciCoprocessorCard) SetComputeBoard(v ComputeBoardRelationship) {
-	o.ComputeBoard = &v
+	o.ComputeBoard.Set(&v)
 }
 
-// GetInventoryDeviceInfo returns the InventoryDeviceInfo field value if set, zero value otherwise.
+// SetComputeBoardNil sets the value for ComputeBoard to be an explicit nil
+func (o *PciCoprocessorCard) SetComputeBoardNil() {
+	o.ComputeBoard.Set(nil)
+}
+
+// UnsetComputeBoard ensures that no value is present for ComputeBoard, not even an explicit nil
+func (o *PciCoprocessorCard) UnsetComputeBoard() {
+	o.ComputeBoard.Unset()
+}
+
+// GetInventoryDeviceInfo returns the InventoryDeviceInfo field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *PciCoprocessorCard) GetInventoryDeviceInfo() InventoryDeviceInfoRelationship {
-	if o == nil || o.InventoryDeviceInfo == nil {
+	if o == nil || IsNil(o.InventoryDeviceInfo.Get()) {
 		var ret InventoryDeviceInfoRelationship
 		return ret
 	}
-	return *o.InventoryDeviceInfo
+	return *o.InventoryDeviceInfo.Get()
 }
 
 // GetInventoryDeviceInfoOk returns a tuple with the InventoryDeviceInfo field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *PciCoprocessorCard) GetInventoryDeviceInfoOk() (*InventoryDeviceInfoRelationship, bool) {
-	if o == nil || o.InventoryDeviceInfo == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.InventoryDeviceInfo, true
+	return o.InventoryDeviceInfo.Get(), o.InventoryDeviceInfo.IsSet()
 }
 
 // HasInventoryDeviceInfo returns a boolean if a field has been set.
 func (o *PciCoprocessorCard) HasInventoryDeviceInfo() bool {
-	if o != nil && o.InventoryDeviceInfo != nil {
+	if o != nil && o.InventoryDeviceInfo.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetInventoryDeviceInfo gets a reference to the given InventoryDeviceInfoRelationship and assigns it to the InventoryDeviceInfo field.
+// SetInventoryDeviceInfo gets a reference to the given NullableInventoryDeviceInfoRelationship and assigns it to the InventoryDeviceInfo field.
 func (o *PciCoprocessorCard) SetInventoryDeviceInfo(v InventoryDeviceInfoRelationship) {
-	o.InventoryDeviceInfo = &v
+	o.InventoryDeviceInfo.Set(&v)
 }
 
-// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise.
+// SetInventoryDeviceInfoNil sets the value for InventoryDeviceInfo to be an explicit nil
+func (o *PciCoprocessorCard) SetInventoryDeviceInfoNil() {
+	o.InventoryDeviceInfo.Set(nil)
+}
+
+// UnsetInventoryDeviceInfo ensures that no value is present for InventoryDeviceInfo, not even an explicit nil
+func (o *PciCoprocessorCard) UnsetInventoryDeviceInfo() {
+	o.InventoryDeviceInfo.Unset()
+}
+
+// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *PciCoprocessorCard) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil || IsNil(o.RegisteredDevice.Get()) {
 		var ret AssetDeviceRegistrationRelationship
 		return ret
 	}
-	return *o.RegisteredDevice
+	return *o.RegisteredDevice.Get()
 }
 
 // GetRegisteredDeviceOk returns a tuple with the RegisteredDevice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *PciCoprocessorCard) GetRegisteredDeviceOk() (*AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.RegisteredDevice, true
+	return o.RegisteredDevice.Get(), o.RegisteredDevice.IsSet()
 }
 
 // HasRegisteredDevice returns a boolean if a field has been set.
 func (o *PciCoprocessorCard) HasRegisteredDevice() bool {
-	if o != nil && o.RegisteredDevice != nil {
+	if o != nil && o.RegisteredDevice.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRegisteredDevice gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
+// SetRegisteredDevice gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
 func (o *PciCoprocessorCard) SetRegisteredDevice(v AssetDeviceRegistrationRelationship) {
-	o.RegisteredDevice = &v
+	o.RegisteredDevice.Set(&v)
+}
+
+// SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+func (o *PciCoprocessorCard) SetRegisteredDeviceNil() {
+	o.RegisteredDevice.Set(nil)
+}
+
+// UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
+func (o *PciCoprocessorCard) UnsetRegisteredDevice() {
+	o.RegisteredDevice.Unset()
 }
 
 func (o PciCoprocessorCard) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o PciCoprocessorCard) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedEquipmentBase, errEquipmentBase := json.Marshal(o.EquipmentBase)
 	if errEquipmentBase != nil {
-		return []byte{}, errEquipmentBase
+		return map[string]interface{}{}, errEquipmentBase
 	}
 	errEquipmentBase = json.Unmarshal([]byte(serializedEquipmentBase), &toSerialize)
 	if errEquipmentBase != nil {
-		return []byte{}, errEquipmentBase
+		return map[string]interface{}{}, errEquipmentBase
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.CardId != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.CardId) {
 		toSerialize["CardId"] = o.CardId
 	}
-	if o.PciSlot != nil {
+	if !IsNil(o.PciSlot) {
 		toSerialize["PciSlot"] = o.PciSlot
 	}
-	if o.ComputeBoard != nil {
-		toSerialize["ComputeBoard"] = o.ComputeBoard
+	if o.ComputeBoard.IsSet() {
+		toSerialize["ComputeBoard"] = o.ComputeBoard.Get()
 	}
-	if o.InventoryDeviceInfo != nil {
-		toSerialize["InventoryDeviceInfo"] = o.InventoryDeviceInfo
+	if o.InventoryDeviceInfo.IsSet() {
+		toSerialize["InventoryDeviceInfo"] = o.InventoryDeviceInfo.Get()
 	}
-	if o.RegisteredDevice != nil {
-		toSerialize["RegisteredDevice"] = o.RegisteredDevice
+	if o.RegisteredDevice.IsSet() {
+		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *PciCoprocessorCard) UnmarshalJSON(bytes []byte) (err error) {
+func (o *PciCoprocessorCard) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type PciCoprocessorCardWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -315,15 +378,15 @@ func (o *PciCoprocessorCard) UnmarshalJSON(bytes []byte) (err error) {
 		// The id of the coprocessor card.
 		CardId *int64 `json:"CardId,omitempty"`
 		// The PCI slot name for the coprocessor card.
-		PciSlot             *string                              `json:"PciSlot,omitempty"`
-		ComputeBoard        *ComputeBoardRelationship            `json:"ComputeBoard,omitempty"`
-		InventoryDeviceInfo *InventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
-		RegisteredDevice    *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+		PciSlot             *string                                     `json:"PciSlot,omitempty"`
+		ComputeBoard        NullableComputeBoardRelationship            `json:"ComputeBoard,omitempty"`
+		InventoryDeviceInfo NullableInventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
+		RegisteredDevice    NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	}
 
 	varPciCoprocessorCardWithoutEmbeddedStruct := PciCoprocessorCardWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varPciCoprocessorCardWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varPciCoprocessorCardWithoutEmbeddedStruct)
 	if err == nil {
 		varPciCoprocessorCard := _PciCoprocessorCard{}
 		varPciCoprocessorCard.ClassId = varPciCoprocessorCardWithoutEmbeddedStruct.ClassId
@@ -340,7 +403,7 @@ func (o *PciCoprocessorCard) UnmarshalJSON(bytes []byte) (err error) {
 
 	varPciCoprocessorCard := _PciCoprocessorCard{}
 
-	err = json.Unmarshal(bytes, &varPciCoprocessorCard)
+	err = json.Unmarshal(data, &varPciCoprocessorCard)
 	if err == nil {
 		o.EquipmentBase = varPciCoprocessorCard.EquipmentBase
 	} else {
@@ -349,7 +412,7 @@ func (o *PciCoprocessorCard) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "CardId")

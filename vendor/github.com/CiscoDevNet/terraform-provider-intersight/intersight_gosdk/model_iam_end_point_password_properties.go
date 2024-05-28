@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the IamEndPointPasswordProperties type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &IamEndPointPasswordProperties{}
 
 // IamEndPointPasswordProperties Password properties for endpoint users.
 type IamEndPointPasswordProperties struct {
@@ -144,7 +148,7 @@ func (o *IamEndPointPasswordProperties) SetObjectType(v string) {
 
 // GetEnablePasswordExpiry returns the EnablePasswordExpiry field value if set, zero value otherwise.
 func (o *IamEndPointPasswordProperties) GetEnablePasswordExpiry() bool {
-	if o == nil || o.EnablePasswordExpiry == nil {
+	if o == nil || IsNil(o.EnablePasswordExpiry) {
 		var ret bool
 		return ret
 	}
@@ -154,7 +158,7 @@ func (o *IamEndPointPasswordProperties) GetEnablePasswordExpiry() bool {
 // GetEnablePasswordExpiryOk returns a tuple with the EnablePasswordExpiry field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IamEndPointPasswordProperties) GetEnablePasswordExpiryOk() (*bool, bool) {
-	if o == nil || o.EnablePasswordExpiry == nil {
+	if o == nil || IsNil(o.EnablePasswordExpiry) {
 		return nil, false
 	}
 	return o.EnablePasswordExpiry, true
@@ -162,7 +166,7 @@ func (o *IamEndPointPasswordProperties) GetEnablePasswordExpiryOk() (*bool, bool
 
 // HasEnablePasswordExpiry returns a boolean if a field has been set.
 func (o *IamEndPointPasswordProperties) HasEnablePasswordExpiry() bool {
-	if o != nil && o.EnablePasswordExpiry != nil {
+	if o != nil && !IsNil(o.EnablePasswordExpiry) {
 		return true
 	}
 
@@ -176,7 +180,7 @@ func (o *IamEndPointPasswordProperties) SetEnablePasswordExpiry(v bool) {
 
 // GetEnforceStrongPassword returns the EnforceStrongPassword field value if set, zero value otherwise.
 func (o *IamEndPointPasswordProperties) GetEnforceStrongPassword() bool {
-	if o == nil || o.EnforceStrongPassword == nil {
+	if o == nil || IsNil(o.EnforceStrongPassword) {
 		var ret bool
 		return ret
 	}
@@ -186,7 +190,7 @@ func (o *IamEndPointPasswordProperties) GetEnforceStrongPassword() bool {
 // GetEnforceStrongPasswordOk returns a tuple with the EnforceStrongPassword field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IamEndPointPasswordProperties) GetEnforceStrongPasswordOk() (*bool, bool) {
-	if o == nil || o.EnforceStrongPassword == nil {
+	if o == nil || IsNil(o.EnforceStrongPassword) {
 		return nil, false
 	}
 	return o.EnforceStrongPassword, true
@@ -194,7 +198,7 @@ func (o *IamEndPointPasswordProperties) GetEnforceStrongPasswordOk() (*bool, boo
 
 // HasEnforceStrongPassword returns a boolean if a field has been set.
 func (o *IamEndPointPasswordProperties) HasEnforceStrongPassword() bool {
-	if o != nil && o.EnforceStrongPassword != nil {
+	if o != nil && !IsNil(o.EnforceStrongPassword) {
 		return true
 	}
 
@@ -208,7 +212,7 @@ func (o *IamEndPointPasswordProperties) SetEnforceStrongPassword(v bool) {
 
 // GetForceSendPassword returns the ForceSendPassword field value if set, zero value otherwise.
 func (o *IamEndPointPasswordProperties) GetForceSendPassword() bool {
-	if o == nil || o.ForceSendPassword == nil {
+	if o == nil || IsNil(o.ForceSendPassword) {
 		var ret bool
 		return ret
 	}
@@ -218,7 +222,7 @@ func (o *IamEndPointPasswordProperties) GetForceSendPassword() bool {
 // GetForceSendPasswordOk returns a tuple with the ForceSendPassword field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IamEndPointPasswordProperties) GetForceSendPasswordOk() (*bool, bool) {
-	if o == nil || o.ForceSendPassword == nil {
+	if o == nil || IsNil(o.ForceSendPassword) {
 		return nil, false
 	}
 	return o.ForceSendPassword, true
@@ -226,7 +230,7 @@ func (o *IamEndPointPasswordProperties) GetForceSendPasswordOk() (*bool, bool) {
 
 // HasForceSendPassword returns a boolean if a field has been set.
 func (o *IamEndPointPasswordProperties) HasForceSendPassword() bool {
-	if o != nil && o.ForceSendPassword != nil {
+	if o != nil && !IsNil(o.ForceSendPassword) {
 		return true
 	}
 
@@ -240,7 +244,7 @@ func (o *IamEndPointPasswordProperties) SetForceSendPassword(v bool) {
 
 // GetGracePeriod returns the GracePeriod field value if set, zero value otherwise.
 func (o *IamEndPointPasswordProperties) GetGracePeriod() int64 {
-	if o == nil || o.GracePeriod == nil {
+	if o == nil || IsNil(o.GracePeriod) {
 		var ret int64
 		return ret
 	}
@@ -250,7 +254,7 @@ func (o *IamEndPointPasswordProperties) GetGracePeriod() int64 {
 // GetGracePeriodOk returns a tuple with the GracePeriod field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IamEndPointPasswordProperties) GetGracePeriodOk() (*int64, bool) {
-	if o == nil || o.GracePeriod == nil {
+	if o == nil || IsNil(o.GracePeriod) {
 		return nil, false
 	}
 	return o.GracePeriod, true
@@ -258,7 +262,7 @@ func (o *IamEndPointPasswordProperties) GetGracePeriodOk() (*int64, bool) {
 
 // HasGracePeriod returns a boolean if a field has been set.
 func (o *IamEndPointPasswordProperties) HasGracePeriod() bool {
-	if o != nil && o.GracePeriod != nil {
+	if o != nil && !IsNil(o.GracePeriod) {
 		return true
 	}
 
@@ -272,7 +276,7 @@ func (o *IamEndPointPasswordProperties) SetGracePeriod(v int64) {
 
 // GetNotificationPeriod returns the NotificationPeriod field value if set, zero value otherwise.
 func (o *IamEndPointPasswordProperties) GetNotificationPeriod() int64 {
-	if o == nil || o.NotificationPeriod == nil {
+	if o == nil || IsNil(o.NotificationPeriod) {
 		var ret int64
 		return ret
 	}
@@ -282,7 +286,7 @@ func (o *IamEndPointPasswordProperties) GetNotificationPeriod() int64 {
 // GetNotificationPeriodOk returns a tuple with the NotificationPeriod field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IamEndPointPasswordProperties) GetNotificationPeriodOk() (*int64, bool) {
-	if o == nil || o.NotificationPeriod == nil {
+	if o == nil || IsNil(o.NotificationPeriod) {
 		return nil, false
 	}
 	return o.NotificationPeriod, true
@@ -290,7 +294,7 @@ func (o *IamEndPointPasswordProperties) GetNotificationPeriodOk() (*int64, bool)
 
 // HasNotificationPeriod returns a boolean if a field has been set.
 func (o *IamEndPointPasswordProperties) HasNotificationPeriod() bool {
-	if o != nil && o.NotificationPeriod != nil {
+	if o != nil && !IsNil(o.NotificationPeriod) {
 		return true
 	}
 
@@ -304,7 +308,7 @@ func (o *IamEndPointPasswordProperties) SetNotificationPeriod(v int64) {
 
 // GetPasswordExpiryDuration returns the PasswordExpiryDuration field value if set, zero value otherwise.
 func (o *IamEndPointPasswordProperties) GetPasswordExpiryDuration() int64 {
-	if o == nil || o.PasswordExpiryDuration == nil {
+	if o == nil || IsNil(o.PasswordExpiryDuration) {
 		var ret int64
 		return ret
 	}
@@ -314,7 +318,7 @@ func (o *IamEndPointPasswordProperties) GetPasswordExpiryDuration() int64 {
 // GetPasswordExpiryDurationOk returns a tuple with the PasswordExpiryDuration field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IamEndPointPasswordProperties) GetPasswordExpiryDurationOk() (*int64, bool) {
-	if o == nil || o.PasswordExpiryDuration == nil {
+	if o == nil || IsNil(o.PasswordExpiryDuration) {
 		return nil, false
 	}
 	return o.PasswordExpiryDuration, true
@@ -322,7 +326,7 @@ func (o *IamEndPointPasswordProperties) GetPasswordExpiryDurationOk() (*int64, b
 
 // HasPasswordExpiryDuration returns a boolean if a field has been set.
 func (o *IamEndPointPasswordProperties) HasPasswordExpiryDuration() bool {
-	if o != nil && o.PasswordExpiryDuration != nil {
+	if o != nil && !IsNil(o.PasswordExpiryDuration) {
 		return true
 	}
 
@@ -336,7 +340,7 @@ func (o *IamEndPointPasswordProperties) SetPasswordExpiryDuration(v int64) {
 
 // GetPasswordHistory returns the PasswordHistory field value if set, zero value otherwise.
 func (o *IamEndPointPasswordProperties) GetPasswordHistory() int64 {
-	if o == nil || o.PasswordHistory == nil {
+	if o == nil || IsNil(o.PasswordHistory) {
 		var ret int64
 		return ret
 	}
@@ -346,7 +350,7 @@ func (o *IamEndPointPasswordProperties) GetPasswordHistory() int64 {
 // GetPasswordHistoryOk returns a tuple with the PasswordHistory field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IamEndPointPasswordProperties) GetPasswordHistoryOk() (*int64, bool) {
-	if o == nil || o.PasswordHistory == nil {
+	if o == nil || IsNil(o.PasswordHistory) {
 		return nil, false
 	}
 	return o.PasswordHistory, true
@@ -354,7 +358,7 @@ func (o *IamEndPointPasswordProperties) GetPasswordHistoryOk() (*int64, bool) {
 
 // HasPasswordHistory returns a boolean if a field has been set.
 func (o *IamEndPointPasswordProperties) HasPasswordHistory() bool {
-	if o != nil && o.PasswordHistory != nil {
+	if o != nil && !IsNil(o.PasswordHistory) {
 		return true
 	}
 
@@ -367,40 +371,44 @@ func (o *IamEndPointPasswordProperties) SetPasswordHistory(v int64) {
 }
 
 func (o IamEndPointPasswordProperties) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o IamEndPointPasswordProperties) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
 	errMoBaseComplexType = json.Unmarshal([]byte(serializedMoBaseComplexType), &toSerialize)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.EnablePasswordExpiry != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.EnablePasswordExpiry) {
 		toSerialize["EnablePasswordExpiry"] = o.EnablePasswordExpiry
 	}
-	if o.EnforceStrongPassword != nil {
+	if !IsNil(o.EnforceStrongPassword) {
 		toSerialize["EnforceStrongPassword"] = o.EnforceStrongPassword
 	}
-	if o.ForceSendPassword != nil {
+	if !IsNil(o.ForceSendPassword) {
 		toSerialize["ForceSendPassword"] = o.ForceSendPassword
 	}
-	if o.GracePeriod != nil {
+	if !IsNil(o.GracePeriod) {
 		toSerialize["GracePeriod"] = o.GracePeriod
 	}
-	if o.NotificationPeriod != nil {
+	if !IsNil(o.NotificationPeriod) {
 		toSerialize["NotificationPeriod"] = o.NotificationPeriod
 	}
-	if o.PasswordExpiryDuration != nil {
+	if !IsNil(o.PasswordExpiryDuration) {
 		toSerialize["PasswordExpiryDuration"] = o.PasswordExpiryDuration
 	}
-	if o.PasswordHistory != nil {
+	if !IsNil(o.PasswordHistory) {
 		toSerialize["PasswordHistory"] = o.PasswordHistory
 	}
 
@@ -408,10 +416,32 @@ func (o IamEndPointPasswordProperties) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *IamEndPointPasswordProperties) UnmarshalJSON(bytes []byte) (err error) {
+func (o *IamEndPointPasswordProperties) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type IamEndPointPasswordPropertiesWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -435,7 +465,7 @@ func (o *IamEndPointPasswordProperties) UnmarshalJSON(bytes []byte) (err error) 
 
 	varIamEndPointPasswordPropertiesWithoutEmbeddedStruct := IamEndPointPasswordPropertiesWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varIamEndPointPasswordPropertiesWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varIamEndPointPasswordPropertiesWithoutEmbeddedStruct)
 	if err == nil {
 		varIamEndPointPasswordProperties := _IamEndPointPasswordProperties{}
 		varIamEndPointPasswordProperties.ClassId = varIamEndPointPasswordPropertiesWithoutEmbeddedStruct.ClassId
@@ -454,7 +484,7 @@ func (o *IamEndPointPasswordProperties) UnmarshalJSON(bytes []byte) (err error) 
 
 	varIamEndPointPasswordProperties := _IamEndPointPasswordProperties{}
 
-	err = json.Unmarshal(bytes, &varIamEndPointPasswordProperties)
+	err = json.Unmarshal(data, &varIamEndPointPasswordProperties)
 	if err == nil {
 		o.MoBaseComplexType = varIamEndPointPasswordProperties.MoBaseComplexType
 	} else {
@@ -463,7 +493,7 @@ func (o *IamEndPointPasswordProperties) UnmarshalJSON(bytes []byte) (err error) 
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "EnablePasswordExpiry")

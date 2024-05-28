@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **RollbackTasks** | Pointer to [**[]WorkflowRollbackWorkflowTask**](WorkflowRollbackWorkflowTask.md) |  | [optional] 
 **SelectedTasks** | Pointer to [**[]WorkflowRollbackWorkflowTask**](WorkflowRollbackWorkflowTask.md) |  | [optional] 
 **Status** | Pointer to **string** | Status of the rollback workflow instance (Created, Running, Completed, Failed). * &#x60;None&#x60; - If no status is set, then the default value is set none for the status field. * &#x60;Created&#x60; - Status of the rollback workflow when it identifies the eligible tasks for rollback. * &#x60;Running&#x60; - Status of the rollback workflow when it is in-progress. * &#x60;Completed&#x60; - Status of the rollback workflow after execution is successful. * &#x60;Failed&#x60; - Status of the rollback workflow after execution results in failure. | [optional] [readonly] [default to "None"]
-**PrimaryWorkflow** | Pointer to [**WorkflowWorkflowInfoRelationship**](WorkflowWorkflowInfoRelationship.md) |  | [optional] 
+**PrimaryWorkflow** | Pointer to [**NullableWorkflowWorkflowInfoRelationship**](WorkflowWorkflowInfoRelationship.md) |  | [optional] 
 **RollbackWorkflows** | Pointer to [**[]WorkflowWorkflowInfoRelationship**](WorkflowWorkflowInfoRelationship.md) | An array of relationships to workflowWorkflowInfo resources. | [optional] [readonly] 
 
 ## Methods
@@ -243,6 +243,16 @@ SetPrimaryWorkflow sets PrimaryWorkflow field to given value.
 
 HasPrimaryWorkflow returns a boolean if a field has been set.
 
+### SetPrimaryWorkflowNil
+
+`func (o *WorkflowRollbackWorkflow) SetPrimaryWorkflowNil(b bool)`
+
+ SetPrimaryWorkflowNil sets the value for PrimaryWorkflow to be an explicit nil
+
+### UnsetPrimaryWorkflow
+`func (o *WorkflowRollbackWorkflow) UnsetPrimaryWorkflow()`
+
+UnsetPrimaryWorkflow ensures that no value is present for PrimaryWorkflow, not even an explicit nil
 ### GetRollbackWorkflows
 
 `func (o *WorkflowRollbackWorkflow) GetRollbackWorkflows() []WorkflowWorkflowInfoRelationship`

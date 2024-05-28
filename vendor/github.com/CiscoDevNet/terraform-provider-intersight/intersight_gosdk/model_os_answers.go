@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the OsAnswers type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &OsAnswers{}
 
 // OsAnswers This MO captures the values for the most common set of fields in OS specific answer files. The values provided in this MO are used to construct the OS specific answer files (kickstart, seed, unattended xml) by replacing the fields/placeholders in selected os.ConfigurationFile content with the values of this MO properties.
 type OsAnswers struct {
@@ -145,7 +149,7 @@ func (o *OsAnswers) GetAlternateNameServers() []string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *OsAnswers) GetAlternateNameServersOk() ([]string, bool) {
-	if o == nil || o.AlternateNameServers == nil {
+	if o == nil || IsNil(o.AlternateNameServers) {
 		return nil, false
 	}
 	return o.AlternateNameServers, true
@@ -153,7 +157,7 @@ func (o *OsAnswers) GetAlternateNameServersOk() ([]string, bool) {
 
 // HasAlternateNameServers returns a boolean if a field has been set.
 func (o *OsAnswers) HasAlternateNameServers() bool {
-	if o != nil && o.AlternateNameServers != nil {
+	if o != nil && IsNil(o.AlternateNameServers) {
 		return true
 	}
 
@@ -167,7 +171,7 @@ func (o *OsAnswers) SetAlternateNameServers(v []string) {
 
 // GetAnswerFile returns the AnswerFile field value if set, zero value otherwise.
 func (o *OsAnswers) GetAnswerFile() string {
-	if o == nil || o.AnswerFile == nil {
+	if o == nil || IsNil(o.AnswerFile) {
 		var ret string
 		return ret
 	}
@@ -177,7 +181,7 @@ func (o *OsAnswers) GetAnswerFile() string {
 // GetAnswerFileOk returns a tuple with the AnswerFile field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OsAnswers) GetAnswerFileOk() (*string, bool) {
-	if o == nil || o.AnswerFile == nil {
+	if o == nil || IsNil(o.AnswerFile) {
 		return nil, false
 	}
 	return o.AnswerFile, true
@@ -185,7 +189,7 @@ func (o *OsAnswers) GetAnswerFileOk() (*string, bool) {
 
 // HasAnswerFile returns a boolean if a field has been set.
 func (o *OsAnswers) HasAnswerFile() bool {
-	if o != nil && o.AnswerFile != nil {
+	if o != nil && !IsNil(o.AnswerFile) {
 		return true
 	}
 
@@ -199,7 +203,7 @@ func (o *OsAnswers) SetAnswerFile(v string) {
 
 // GetHostname returns the Hostname field value if set, zero value otherwise.
 func (o *OsAnswers) GetHostname() string {
-	if o == nil || o.Hostname == nil {
+	if o == nil || IsNil(o.Hostname) {
 		var ret string
 		return ret
 	}
@@ -209,7 +213,7 @@ func (o *OsAnswers) GetHostname() string {
 // GetHostnameOk returns a tuple with the Hostname field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OsAnswers) GetHostnameOk() (*string, bool) {
-	if o == nil || o.Hostname == nil {
+	if o == nil || IsNil(o.Hostname) {
 		return nil, false
 	}
 	return o.Hostname, true
@@ -217,7 +221,7 @@ func (o *OsAnswers) GetHostnameOk() (*string, bool) {
 
 // HasHostname returns a boolean if a field has been set.
 func (o *OsAnswers) HasHostname() bool {
-	if o != nil && o.Hostname != nil {
+	if o != nil && !IsNil(o.Hostname) {
 		return true
 	}
 
@@ -231,7 +235,7 @@ func (o *OsAnswers) SetHostname(v string) {
 
 // GetIpConfigType returns the IpConfigType field value if set, zero value otherwise.
 func (o *OsAnswers) GetIpConfigType() string {
-	if o == nil || o.IpConfigType == nil {
+	if o == nil || IsNil(o.IpConfigType) {
 		var ret string
 		return ret
 	}
@@ -241,7 +245,7 @@ func (o *OsAnswers) GetIpConfigType() string {
 // GetIpConfigTypeOk returns a tuple with the IpConfigType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OsAnswers) GetIpConfigTypeOk() (*string, bool) {
-	if o == nil || o.IpConfigType == nil {
+	if o == nil || IsNil(o.IpConfigType) {
 		return nil, false
 	}
 	return o.IpConfigType, true
@@ -249,7 +253,7 @@ func (o *OsAnswers) GetIpConfigTypeOk() (*string, bool) {
 
 // HasIpConfigType returns a boolean if a field has been set.
 func (o *OsAnswers) HasIpConfigType() bool {
-	if o != nil && o.IpConfigType != nil {
+	if o != nil && !IsNil(o.IpConfigType) {
 		return true
 	}
 
@@ -263,7 +267,7 @@ func (o *OsAnswers) SetIpConfigType(v string) {
 
 // GetIpConfiguration returns the IpConfiguration field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *OsAnswers) GetIpConfiguration() OsIpConfiguration {
-	if o == nil || o.IpConfiguration.Get() == nil {
+	if o == nil || IsNil(o.IpConfiguration.Get()) {
 		var ret OsIpConfiguration
 		return ret
 	}
@@ -306,7 +310,7 @@ func (o *OsAnswers) UnsetIpConfiguration() {
 
 // GetIsAnswerFileSet returns the IsAnswerFileSet field value if set, zero value otherwise.
 func (o *OsAnswers) GetIsAnswerFileSet() bool {
-	if o == nil || o.IsAnswerFileSet == nil {
+	if o == nil || IsNil(o.IsAnswerFileSet) {
 		var ret bool
 		return ret
 	}
@@ -316,7 +320,7 @@ func (o *OsAnswers) GetIsAnswerFileSet() bool {
 // GetIsAnswerFileSetOk returns a tuple with the IsAnswerFileSet field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OsAnswers) GetIsAnswerFileSetOk() (*bool, bool) {
-	if o == nil || o.IsAnswerFileSet == nil {
+	if o == nil || IsNil(o.IsAnswerFileSet) {
 		return nil, false
 	}
 	return o.IsAnswerFileSet, true
@@ -324,7 +328,7 @@ func (o *OsAnswers) GetIsAnswerFileSetOk() (*bool, bool) {
 
 // HasIsAnswerFileSet returns a boolean if a field has been set.
 func (o *OsAnswers) HasIsAnswerFileSet() bool {
-	if o != nil && o.IsAnswerFileSet != nil {
+	if o != nil && !IsNil(o.IsAnswerFileSet) {
 		return true
 	}
 
@@ -338,7 +342,7 @@ func (o *OsAnswers) SetIsAnswerFileSet(v bool) {
 
 // GetIsRootPasswordCrypted returns the IsRootPasswordCrypted field value if set, zero value otherwise.
 func (o *OsAnswers) GetIsRootPasswordCrypted() bool {
-	if o == nil || o.IsRootPasswordCrypted == nil {
+	if o == nil || IsNil(o.IsRootPasswordCrypted) {
 		var ret bool
 		return ret
 	}
@@ -348,7 +352,7 @@ func (o *OsAnswers) GetIsRootPasswordCrypted() bool {
 // GetIsRootPasswordCryptedOk returns a tuple with the IsRootPasswordCrypted field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OsAnswers) GetIsRootPasswordCryptedOk() (*bool, bool) {
-	if o == nil || o.IsRootPasswordCrypted == nil {
+	if o == nil || IsNil(o.IsRootPasswordCrypted) {
 		return nil, false
 	}
 	return o.IsRootPasswordCrypted, true
@@ -356,7 +360,7 @@ func (o *OsAnswers) GetIsRootPasswordCryptedOk() (*bool, bool) {
 
 // HasIsRootPasswordCrypted returns a boolean if a field has been set.
 func (o *OsAnswers) HasIsRootPasswordCrypted() bool {
-	if o != nil && o.IsRootPasswordCrypted != nil {
+	if o != nil && !IsNil(o.IsRootPasswordCrypted) {
 		return true
 	}
 
@@ -370,7 +374,7 @@ func (o *OsAnswers) SetIsRootPasswordCrypted(v bool) {
 
 // GetIsRootPasswordSet returns the IsRootPasswordSet field value if set, zero value otherwise.
 func (o *OsAnswers) GetIsRootPasswordSet() bool {
-	if o == nil || o.IsRootPasswordSet == nil {
+	if o == nil || IsNil(o.IsRootPasswordSet) {
 		var ret bool
 		return ret
 	}
@@ -380,7 +384,7 @@ func (o *OsAnswers) GetIsRootPasswordSet() bool {
 // GetIsRootPasswordSetOk returns a tuple with the IsRootPasswordSet field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OsAnswers) GetIsRootPasswordSetOk() (*bool, bool) {
-	if o == nil || o.IsRootPasswordSet == nil {
+	if o == nil || IsNil(o.IsRootPasswordSet) {
 		return nil, false
 	}
 	return o.IsRootPasswordSet, true
@@ -388,7 +392,7 @@ func (o *OsAnswers) GetIsRootPasswordSetOk() (*bool, bool) {
 
 // HasIsRootPasswordSet returns a boolean if a field has been set.
 func (o *OsAnswers) HasIsRootPasswordSet() bool {
-	if o != nil && o.IsRootPasswordSet != nil {
+	if o != nil && !IsNil(o.IsRootPasswordSet) {
 		return true
 	}
 
@@ -402,7 +406,7 @@ func (o *OsAnswers) SetIsRootPasswordSet(v bool) {
 
 // GetNameserver returns the Nameserver field value if set, zero value otherwise.
 func (o *OsAnswers) GetNameserver() string {
-	if o == nil || o.Nameserver == nil {
+	if o == nil || IsNil(o.Nameserver) {
 		var ret string
 		return ret
 	}
@@ -412,7 +416,7 @@ func (o *OsAnswers) GetNameserver() string {
 // GetNameserverOk returns a tuple with the Nameserver field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OsAnswers) GetNameserverOk() (*string, bool) {
-	if o == nil || o.Nameserver == nil {
+	if o == nil || IsNil(o.Nameserver) {
 		return nil, false
 	}
 	return o.Nameserver, true
@@ -420,7 +424,7 @@ func (o *OsAnswers) GetNameserverOk() (*string, bool) {
 
 // HasNameserver returns a boolean if a field has been set.
 func (o *OsAnswers) HasNameserver() bool {
-	if o != nil && o.Nameserver != nil {
+	if o != nil && !IsNil(o.Nameserver) {
 		return true
 	}
 
@@ -434,7 +438,7 @@ func (o *OsAnswers) SetNameserver(v string) {
 
 // GetNetworkDevice returns the NetworkDevice field value if set, zero value otherwise.
 func (o *OsAnswers) GetNetworkDevice() string {
-	if o == nil || o.NetworkDevice == nil {
+	if o == nil || IsNil(o.NetworkDevice) {
 		var ret string
 		return ret
 	}
@@ -444,7 +448,7 @@ func (o *OsAnswers) GetNetworkDevice() string {
 // GetNetworkDeviceOk returns a tuple with the NetworkDevice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OsAnswers) GetNetworkDeviceOk() (*string, bool) {
-	if o == nil || o.NetworkDevice == nil {
+	if o == nil || IsNil(o.NetworkDevice) {
 		return nil, false
 	}
 	return o.NetworkDevice, true
@@ -452,7 +456,7 @@ func (o *OsAnswers) GetNetworkDeviceOk() (*string, bool) {
 
 // HasNetworkDevice returns a boolean if a field has been set.
 func (o *OsAnswers) HasNetworkDevice() bool {
-	if o != nil && o.NetworkDevice != nil {
+	if o != nil && !IsNil(o.NetworkDevice) {
 		return true
 	}
 
@@ -466,7 +470,7 @@ func (o *OsAnswers) SetNetworkDevice(v string) {
 
 // GetProductKey returns the ProductKey field value if set, zero value otherwise.
 func (o *OsAnswers) GetProductKey() string {
-	if o == nil || o.ProductKey == nil {
+	if o == nil || IsNil(o.ProductKey) {
 		var ret string
 		return ret
 	}
@@ -476,7 +480,7 @@ func (o *OsAnswers) GetProductKey() string {
 // GetProductKeyOk returns a tuple with the ProductKey field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OsAnswers) GetProductKeyOk() (*string, bool) {
-	if o == nil || o.ProductKey == nil {
+	if o == nil || IsNil(o.ProductKey) {
 		return nil, false
 	}
 	return o.ProductKey, true
@@ -484,7 +488,7 @@ func (o *OsAnswers) GetProductKeyOk() (*string, bool) {
 
 // HasProductKey returns a boolean if a field has been set.
 func (o *OsAnswers) HasProductKey() bool {
-	if o != nil && o.ProductKey != nil {
+	if o != nil && !IsNil(o.ProductKey) {
 		return true
 	}
 
@@ -498,7 +502,7 @@ func (o *OsAnswers) SetProductKey(v string) {
 
 // GetRootPassword returns the RootPassword field value if set, zero value otherwise.
 func (o *OsAnswers) GetRootPassword() string {
-	if o == nil || o.RootPassword == nil {
+	if o == nil || IsNil(o.RootPassword) {
 		var ret string
 		return ret
 	}
@@ -508,7 +512,7 @@ func (o *OsAnswers) GetRootPassword() string {
 // GetRootPasswordOk returns a tuple with the RootPassword field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OsAnswers) GetRootPasswordOk() (*string, bool) {
-	if o == nil || o.RootPassword == nil {
+	if o == nil || IsNil(o.RootPassword) {
 		return nil, false
 	}
 	return o.RootPassword, true
@@ -516,7 +520,7 @@ func (o *OsAnswers) GetRootPasswordOk() (*string, bool) {
 
 // HasRootPassword returns a boolean if a field has been set.
 func (o *OsAnswers) HasRootPassword() bool {
-	if o != nil && o.RootPassword != nil {
+	if o != nil && !IsNil(o.RootPassword) {
 		return true
 	}
 
@@ -530,7 +534,7 @@ func (o *OsAnswers) SetRootPassword(v string) {
 
 // GetSource returns the Source field value if set, zero value otherwise.
 func (o *OsAnswers) GetSource() string {
-	if o == nil || o.Source == nil {
+	if o == nil || IsNil(o.Source) {
 		var ret string
 		return ret
 	}
@@ -540,7 +544,7 @@ func (o *OsAnswers) GetSource() string {
 // GetSourceOk returns a tuple with the Source field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OsAnswers) GetSourceOk() (*string, bool) {
-	if o == nil || o.Source == nil {
+	if o == nil || IsNil(o.Source) {
 		return nil, false
 	}
 	return o.Source, true
@@ -548,7 +552,7 @@ func (o *OsAnswers) GetSourceOk() (*string, bool) {
 
 // HasSource returns a boolean if a field has been set.
 func (o *OsAnswers) HasSource() bool {
-	if o != nil && o.Source != nil {
+	if o != nil && !IsNil(o.Source) {
 		return true
 	}
 
@@ -561,58 +565,62 @@ func (o *OsAnswers) SetSource(v string) {
 }
 
 func (o OsAnswers) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o OsAnswers) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
 	errMoBaseComplexType = json.Unmarshal([]byte(serializedMoBaseComplexType), &toSerialize)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
 	if o.AlternateNameServers != nil {
 		toSerialize["AlternateNameServers"] = o.AlternateNameServers
 	}
-	if o.AnswerFile != nil {
+	if !IsNil(o.AnswerFile) {
 		toSerialize["AnswerFile"] = o.AnswerFile
 	}
-	if o.Hostname != nil {
+	if !IsNil(o.Hostname) {
 		toSerialize["Hostname"] = o.Hostname
 	}
-	if o.IpConfigType != nil {
+	if !IsNil(o.IpConfigType) {
 		toSerialize["IpConfigType"] = o.IpConfigType
 	}
 	if o.IpConfiguration.IsSet() {
 		toSerialize["IpConfiguration"] = o.IpConfiguration.Get()
 	}
-	if o.IsAnswerFileSet != nil {
+	if !IsNil(o.IsAnswerFileSet) {
 		toSerialize["IsAnswerFileSet"] = o.IsAnswerFileSet
 	}
-	if o.IsRootPasswordCrypted != nil {
+	if !IsNil(o.IsRootPasswordCrypted) {
 		toSerialize["IsRootPasswordCrypted"] = o.IsRootPasswordCrypted
 	}
-	if o.IsRootPasswordSet != nil {
+	if !IsNil(o.IsRootPasswordSet) {
 		toSerialize["IsRootPasswordSet"] = o.IsRootPasswordSet
 	}
-	if o.Nameserver != nil {
+	if !IsNil(o.Nameserver) {
 		toSerialize["Nameserver"] = o.Nameserver
 	}
-	if o.NetworkDevice != nil {
+	if !IsNil(o.NetworkDevice) {
 		toSerialize["NetworkDevice"] = o.NetworkDevice
 	}
-	if o.ProductKey != nil {
+	if !IsNil(o.ProductKey) {
 		toSerialize["ProductKey"] = o.ProductKey
 	}
-	if o.RootPassword != nil {
+	if !IsNil(o.RootPassword) {
 		toSerialize["RootPassword"] = o.RootPassword
 	}
-	if o.Source != nil {
+	if !IsNil(o.Source) {
 		toSerialize["Source"] = o.Source
 	}
 
@@ -620,10 +628,32 @@ func (o OsAnswers) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *OsAnswers) UnmarshalJSON(bytes []byte) (err error) {
+func (o *OsAnswers) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type OsAnswersWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -657,7 +687,7 @@ func (o *OsAnswers) UnmarshalJSON(bytes []byte) (err error) {
 
 	varOsAnswersWithoutEmbeddedStruct := OsAnswersWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varOsAnswersWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varOsAnswersWithoutEmbeddedStruct)
 	if err == nil {
 		varOsAnswers := _OsAnswers{}
 		varOsAnswers.ClassId = varOsAnswersWithoutEmbeddedStruct.ClassId
@@ -682,7 +712,7 @@ func (o *OsAnswers) UnmarshalJSON(bytes []byte) (err error) {
 
 	varOsAnswers := _OsAnswers{}
 
-	err = json.Unmarshal(bytes, &varOsAnswers)
+	err = json.Unmarshal(data, &varOsAnswers)
 	if err == nil {
 		o.MoBaseComplexType = varOsAnswers.MoBaseComplexType
 	} else {
@@ -691,7 +721,7 @@ func (o *OsAnswers) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "AlternateNameServers")

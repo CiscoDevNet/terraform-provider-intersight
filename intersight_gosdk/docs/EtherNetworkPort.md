@@ -13,8 +13,8 @@ Name | Type | Description | Notes
 **SlotId** | Pointer to **int64** | Switch expansion slot module identifier. | [optional] [readonly] 
 **Speed** | Pointer to **string** | Network Port operational speed of IO card or fabric extender. | [optional] [readonly] 
 **SwitchId** | Pointer to **string** | Switch Identifier that is local to a cluster. | [optional] [readonly] 
-**EquipmentIoCardBase** | Pointer to [**EquipmentIoCardBaseRelationship**](EquipmentIoCardBaseRelationship.md) |  | [optional] 
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
+**EquipmentIoCardBase** | Pointer to [**NullableEquipmentIoCardBaseRelationship**](EquipmentIoCardBaseRelationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -285,6 +285,16 @@ SetEquipmentIoCardBase sets EquipmentIoCardBase field to given value.
 
 HasEquipmentIoCardBase returns a boolean if a field has been set.
 
+### SetEquipmentIoCardBaseNil
+
+`func (o *EtherNetworkPort) SetEquipmentIoCardBaseNil(b bool)`
+
+ SetEquipmentIoCardBaseNil sets the value for EquipmentIoCardBase to be an explicit nil
+
+### UnsetEquipmentIoCardBase
+`func (o *EtherNetworkPort) UnsetEquipmentIoCardBase()`
+
+UnsetEquipmentIoCardBase ensures that no value is present for EquipmentIoCardBase, not even an explicit nil
 ### GetRegisteredDevice
 
 `func (o *EtherNetworkPort) GetRegisteredDevice() AssetDeviceRegistrationRelationship`
@@ -310,6 +320,16 @@ SetRegisteredDevice sets RegisteredDevice field to given value.
 
 HasRegisteredDevice returns a boolean if a field has been set.
 
+### SetRegisteredDeviceNil
+
+`func (o *EtherNetworkPort) SetRegisteredDeviceNil(b bool)`
+
+ SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+
+### UnsetRegisteredDevice
+`func (o *EtherNetworkPort) UnsetRegisteredDevice()`
+
+UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

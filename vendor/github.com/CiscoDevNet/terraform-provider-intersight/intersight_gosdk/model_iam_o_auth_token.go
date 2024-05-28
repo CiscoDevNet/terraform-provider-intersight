@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,10 +13,14 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 	"time"
 )
+
+// checks if the IamOAuthToken type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &IamOAuthToken{}
 
 // IamOAuthToken The meta data for generating OAuth2 token of a user. It is created when user logged in via OAuth2 using Authorization Code grant and deleted upon logout, expiration timeout or manual deletion.
 type IamOAuthToken struct {
@@ -40,11 +44,11 @@ type IamOAuthToken struct {
 	// The last login time for user.
 	LastLoginTime *time.Time `json:"LastLoginTime,omitempty"`
 	// Token identifier. Not the Access Token itself.
-	TokenId              *string                         `json:"TokenId,omitempty"`
-	UserMeta             NullableIamClientMeta           `json:"UserMeta,omitempty"`
-	AppRegistration      *IamAppRegistrationRelationship `json:"AppRegistration,omitempty"`
-	Permission           *IamPermissionRelationship      `json:"Permission,omitempty"`
-	User                 *IamUserRelationship            `json:"User,omitempty"`
+	TokenId              *string                                `json:"TokenId,omitempty"`
+	UserMeta             NullableIamClientMeta                  `json:"UserMeta,omitempty"`
+	AppRegistration      NullableIamAppRegistrationRelationship `json:"AppRegistration,omitempty"`
+	Permission           NullableIamPermissionRelationship      `json:"Permission,omitempty"`
+	User                 NullableIamUserRelationship            `json:"User,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -123,7 +127,7 @@ func (o *IamOAuthToken) SetObjectType(v string) {
 
 // GetAccessExpirationTime returns the AccessExpirationTime field value if set, zero value otherwise.
 func (o *IamOAuthToken) GetAccessExpirationTime() time.Time {
-	if o == nil || o.AccessExpirationTime == nil {
+	if o == nil || IsNil(o.AccessExpirationTime) {
 		var ret time.Time
 		return ret
 	}
@@ -133,7 +137,7 @@ func (o *IamOAuthToken) GetAccessExpirationTime() time.Time {
 // GetAccessExpirationTimeOk returns a tuple with the AccessExpirationTime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IamOAuthToken) GetAccessExpirationTimeOk() (*time.Time, bool) {
-	if o == nil || o.AccessExpirationTime == nil {
+	if o == nil || IsNil(o.AccessExpirationTime) {
 		return nil, false
 	}
 	return o.AccessExpirationTime, true
@@ -141,7 +145,7 @@ func (o *IamOAuthToken) GetAccessExpirationTimeOk() (*time.Time, bool) {
 
 // HasAccessExpirationTime returns a boolean if a field has been set.
 func (o *IamOAuthToken) HasAccessExpirationTime() bool {
-	if o != nil && o.AccessExpirationTime != nil {
+	if o != nil && !IsNil(o.AccessExpirationTime) {
 		return true
 	}
 
@@ -155,7 +159,7 @@ func (o *IamOAuthToken) SetAccessExpirationTime(v time.Time) {
 
 // GetClientId returns the ClientId field value if set, zero value otherwise.
 func (o *IamOAuthToken) GetClientId() string {
-	if o == nil || o.ClientId == nil {
+	if o == nil || IsNil(o.ClientId) {
 		var ret string
 		return ret
 	}
@@ -165,7 +169,7 @@ func (o *IamOAuthToken) GetClientId() string {
 // GetClientIdOk returns a tuple with the ClientId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IamOAuthToken) GetClientIdOk() (*string, bool) {
-	if o == nil || o.ClientId == nil {
+	if o == nil || IsNil(o.ClientId) {
 		return nil, false
 	}
 	return o.ClientId, true
@@ -173,7 +177,7 @@ func (o *IamOAuthToken) GetClientIdOk() (*string, bool) {
 
 // HasClientId returns a boolean if a field has been set.
 func (o *IamOAuthToken) HasClientId() bool {
-	if o != nil && o.ClientId != nil {
+	if o != nil && !IsNil(o.ClientId) {
 		return true
 	}
 
@@ -187,7 +191,7 @@ func (o *IamOAuthToken) SetClientId(v string) {
 
 // GetClientIpAddress returns the ClientIpAddress field value if set, zero value otherwise.
 func (o *IamOAuthToken) GetClientIpAddress() string {
-	if o == nil || o.ClientIpAddress == nil {
+	if o == nil || IsNil(o.ClientIpAddress) {
 		var ret string
 		return ret
 	}
@@ -197,7 +201,7 @@ func (o *IamOAuthToken) GetClientIpAddress() string {
 // GetClientIpAddressOk returns a tuple with the ClientIpAddress field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IamOAuthToken) GetClientIpAddressOk() (*string, bool) {
-	if o == nil || o.ClientIpAddress == nil {
+	if o == nil || IsNil(o.ClientIpAddress) {
 		return nil, false
 	}
 	return o.ClientIpAddress, true
@@ -205,7 +209,7 @@ func (o *IamOAuthToken) GetClientIpAddressOk() (*string, bool) {
 
 // HasClientIpAddress returns a boolean if a field has been set.
 func (o *IamOAuthToken) HasClientIpAddress() bool {
-	if o != nil && o.ClientIpAddress != nil {
+	if o != nil && !IsNil(o.ClientIpAddress) {
 		return true
 	}
 
@@ -219,7 +223,7 @@ func (o *IamOAuthToken) SetClientIpAddress(v string) {
 
 // GetClientName returns the ClientName field value if set, zero value otherwise.
 func (o *IamOAuthToken) GetClientName() string {
-	if o == nil || o.ClientName == nil {
+	if o == nil || IsNil(o.ClientName) {
 		var ret string
 		return ret
 	}
@@ -229,7 +233,7 @@ func (o *IamOAuthToken) GetClientName() string {
 // GetClientNameOk returns a tuple with the ClientName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IamOAuthToken) GetClientNameOk() (*string, bool) {
-	if o == nil || o.ClientName == nil {
+	if o == nil || IsNil(o.ClientName) {
 		return nil, false
 	}
 	return o.ClientName, true
@@ -237,7 +241,7 @@ func (o *IamOAuthToken) GetClientNameOk() (*string, bool) {
 
 // HasClientName returns a boolean if a field has been set.
 func (o *IamOAuthToken) HasClientName() bool {
-	if o != nil && o.ClientName != nil {
+	if o != nil && !IsNil(o.ClientName) {
 		return true
 	}
 
@@ -251,7 +255,7 @@ func (o *IamOAuthToken) SetClientName(v string) {
 
 // GetExpirationTime returns the ExpirationTime field value if set, zero value otherwise.
 func (o *IamOAuthToken) GetExpirationTime() time.Time {
-	if o == nil || o.ExpirationTime == nil {
+	if o == nil || IsNil(o.ExpirationTime) {
 		var ret time.Time
 		return ret
 	}
@@ -261,7 +265,7 @@ func (o *IamOAuthToken) GetExpirationTime() time.Time {
 // GetExpirationTimeOk returns a tuple with the ExpirationTime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IamOAuthToken) GetExpirationTimeOk() (*time.Time, bool) {
-	if o == nil || o.ExpirationTime == nil {
+	if o == nil || IsNil(o.ExpirationTime) {
 		return nil, false
 	}
 	return o.ExpirationTime, true
@@ -269,7 +273,7 @@ func (o *IamOAuthToken) GetExpirationTimeOk() (*time.Time, bool) {
 
 // HasExpirationTime returns a boolean if a field has been set.
 func (o *IamOAuthToken) HasExpirationTime() bool {
-	if o != nil && o.ExpirationTime != nil {
+	if o != nil && !IsNil(o.ExpirationTime) {
 		return true
 	}
 
@@ -283,7 +287,7 @@ func (o *IamOAuthToken) SetExpirationTime(v time.Time) {
 
 // GetLastLoginClient returns the LastLoginClient field value if set, zero value otherwise.
 func (o *IamOAuthToken) GetLastLoginClient() string {
-	if o == nil || o.LastLoginClient == nil {
+	if o == nil || IsNil(o.LastLoginClient) {
 		var ret string
 		return ret
 	}
@@ -293,7 +297,7 @@ func (o *IamOAuthToken) GetLastLoginClient() string {
 // GetLastLoginClientOk returns a tuple with the LastLoginClient field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IamOAuthToken) GetLastLoginClientOk() (*string, bool) {
-	if o == nil || o.LastLoginClient == nil {
+	if o == nil || IsNil(o.LastLoginClient) {
 		return nil, false
 	}
 	return o.LastLoginClient, true
@@ -301,7 +305,7 @@ func (o *IamOAuthToken) GetLastLoginClientOk() (*string, bool) {
 
 // HasLastLoginClient returns a boolean if a field has been set.
 func (o *IamOAuthToken) HasLastLoginClient() bool {
-	if o != nil && o.LastLoginClient != nil {
+	if o != nil && !IsNil(o.LastLoginClient) {
 		return true
 	}
 
@@ -315,7 +319,7 @@ func (o *IamOAuthToken) SetLastLoginClient(v string) {
 
 // GetLastLoginTime returns the LastLoginTime field value if set, zero value otherwise.
 func (o *IamOAuthToken) GetLastLoginTime() time.Time {
-	if o == nil || o.LastLoginTime == nil {
+	if o == nil || IsNil(o.LastLoginTime) {
 		var ret time.Time
 		return ret
 	}
@@ -325,7 +329,7 @@ func (o *IamOAuthToken) GetLastLoginTime() time.Time {
 // GetLastLoginTimeOk returns a tuple with the LastLoginTime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IamOAuthToken) GetLastLoginTimeOk() (*time.Time, bool) {
-	if o == nil || o.LastLoginTime == nil {
+	if o == nil || IsNil(o.LastLoginTime) {
 		return nil, false
 	}
 	return o.LastLoginTime, true
@@ -333,7 +337,7 @@ func (o *IamOAuthToken) GetLastLoginTimeOk() (*time.Time, bool) {
 
 // HasLastLoginTime returns a boolean if a field has been set.
 func (o *IamOAuthToken) HasLastLoginTime() bool {
-	if o != nil && o.LastLoginTime != nil {
+	if o != nil && !IsNil(o.LastLoginTime) {
 		return true
 	}
 
@@ -347,7 +351,7 @@ func (o *IamOAuthToken) SetLastLoginTime(v time.Time) {
 
 // GetTokenId returns the TokenId field value if set, zero value otherwise.
 func (o *IamOAuthToken) GetTokenId() string {
-	if o == nil || o.TokenId == nil {
+	if o == nil || IsNil(o.TokenId) {
 		var ret string
 		return ret
 	}
@@ -357,7 +361,7 @@ func (o *IamOAuthToken) GetTokenId() string {
 // GetTokenIdOk returns a tuple with the TokenId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IamOAuthToken) GetTokenIdOk() (*string, bool) {
-	if o == nil || o.TokenId == nil {
+	if o == nil || IsNil(o.TokenId) {
 		return nil, false
 	}
 	return o.TokenId, true
@@ -365,7 +369,7 @@ func (o *IamOAuthToken) GetTokenIdOk() (*string, bool) {
 
 // HasTokenId returns a boolean if a field has been set.
 func (o *IamOAuthToken) HasTokenId() bool {
-	if o != nil && o.TokenId != nil {
+	if o != nil && !IsNil(o.TokenId) {
 		return true
 	}
 
@@ -379,7 +383,7 @@ func (o *IamOAuthToken) SetTokenId(v string) {
 
 // GetUserMeta returns the UserMeta field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *IamOAuthToken) GetUserMeta() IamClientMeta {
-	if o == nil || o.UserMeta.Get() == nil {
+	if o == nil || IsNil(o.UserMeta.Get()) {
 		var ret IamClientMeta
 		return ret
 	}
@@ -420,163 +424,222 @@ func (o *IamOAuthToken) UnsetUserMeta() {
 	o.UserMeta.Unset()
 }
 
-// GetAppRegistration returns the AppRegistration field value if set, zero value otherwise.
+// GetAppRegistration returns the AppRegistration field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *IamOAuthToken) GetAppRegistration() IamAppRegistrationRelationship {
-	if o == nil || o.AppRegistration == nil {
+	if o == nil || IsNil(o.AppRegistration.Get()) {
 		var ret IamAppRegistrationRelationship
 		return ret
 	}
-	return *o.AppRegistration
+	return *o.AppRegistration.Get()
 }
 
 // GetAppRegistrationOk returns a tuple with the AppRegistration field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *IamOAuthToken) GetAppRegistrationOk() (*IamAppRegistrationRelationship, bool) {
-	if o == nil || o.AppRegistration == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.AppRegistration, true
+	return o.AppRegistration.Get(), o.AppRegistration.IsSet()
 }
 
 // HasAppRegistration returns a boolean if a field has been set.
 func (o *IamOAuthToken) HasAppRegistration() bool {
-	if o != nil && o.AppRegistration != nil {
+	if o != nil && o.AppRegistration.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetAppRegistration gets a reference to the given IamAppRegistrationRelationship and assigns it to the AppRegistration field.
+// SetAppRegistration gets a reference to the given NullableIamAppRegistrationRelationship and assigns it to the AppRegistration field.
 func (o *IamOAuthToken) SetAppRegistration(v IamAppRegistrationRelationship) {
-	o.AppRegistration = &v
+	o.AppRegistration.Set(&v)
 }
 
-// GetPermission returns the Permission field value if set, zero value otherwise.
+// SetAppRegistrationNil sets the value for AppRegistration to be an explicit nil
+func (o *IamOAuthToken) SetAppRegistrationNil() {
+	o.AppRegistration.Set(nil)
+}
+
+// UnsetAppRegistration ensures that no value is present for AppRegistration, not even an explicit nil
+func (o *IamOAuthToken) UnsetAppRegistration() {
+	o.AppRegistration.Unset()
+}
+
+// GetPermission returns the Permission field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *IamOAuthToken) GetPermission() IamPermissionRelationship {
-	if o == nil || o.Permission == nil {
+	if o == nil || IsNil(o.Permission.Get()) {
 		var ret IamPermissionRelationship
 		return ret
 	}
-	return *o.Permission
+	return *o.Permission.Get()
 }
 
 // GetPermissionOk returns a tuple with the Permission field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *IamOAuthToken) GetPermissionOk() (*IamPermissionRelationship, bool) {
-	if o == nil || o.Permission == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Permission, true
+	return o.Permission.Get(), o.Permission.IsSet()
 }
 
 // HasPermission returns a boolean if a field has been set.
 func (o *IamOAuthToken) HasPermission() bool {
-	if o != nil && o.Permission != nil {
+	if o != nil && o.Permission.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetPermission gets a reference to the given IamPermissionRelationship and assigns it to the Permission field.
+// SetPermission gets a reference to the given NullableIamPermissionRelationship and assigns it to the Permission field.
 func (o *IamOAuthToken) SetPermission(v IamPermissionRelationship) {
-	o.Permission = &v
+	o.Permission.Set(&v)
 }
 
-// GetUser returns the User field value if set, zero value otherwise.
+// SetPermissionNil sets the value for Permission to be an explicit nil
+func (o *IamOAuthToken) SetPermissionNil() {
+	o.Permission.Set(nil)
+}
+
+// UnsetPermission ensures that no value is present for Permission, not even an explicit nil
+func (o *IamOAuthToken) UnsetPermission() {
+	o.Permission.Unset()
+}
+
+// GetUser returns the User field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *IamOAuthToken) GetUser() IamUserRelationship {
-	if o == nil || o.User == nil {
+	if o == nil || IsNil(o.User.Get()) {
 		var ret IamUserRelationship
 		return ret
 	}
-	return *o.User
+	return *o.User.Get()
 }
 
 // GetUserOk returns a tuple with the User field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *IamOAuthToken) GetUserOk() (*IamUserRelationship, bool) {
-	if o == nil || o.User == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.User, true
+	return o.User.Get(), o.User.IsSet()
 }
 
 // HasUser returns a boolean if a field has been set.
 func (o *IamOAuthToken) HasUser() bool {
-	if o != nil && o.User != nil {
+	if o != nil && o.User.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetUser gets a reference to the given IamUserRelationship and assigns it to the User field.
+// SetUser gets a reference to the given NullableIamUserRelationship and assigns it to the User field.
 func (o *IamOAuthToken) SetUser(v IamUserRelationship) {
-	o.User = &v
+	o.User.Set(&v)
+}
+
+// SetUserNil sets the value for User to be an explicit nil
+func (o *IamOAuthToken) SetUserNil() {
+	o.User.Set(nil)
+}
+
+// UnsetUser ensures that no value is present for User, not even an explicit nil
+func (o *IamOAuthToken) UnsetUser() {
+	o.User.Unset()
 }
 
 func (o IamOAuthToken) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o IamOAuthToken) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.AccessExpirationTime != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.AccessExpirationTime) {
 		toSerialize["AccessExpirationTime"] = o.AccessExpirationTime
 	}
-	if o.ClientId != nil {
+	if !IsNil(o.ClientId) {
 		toSerialize["ClientId"] = o.ClientId
 	}
-	if o.ClientIpAddress != nil {
+	if !IsNil(o.ClientIpAddress) {
 		toSerialize["ClientIpAddress"] = o.ClientIpAddress
 	}
-	if o.ClientName != nil {
+	if !IsNil(o.ClientName) {
 		toSerialize["ClientName"] = o.ClientName
 	}
-	if o.ExpirationTime != nil {
+	if !IsNil(o.ExpirationTime) {
 		toSerialize["ExpirationTime"] = o.ExpirationTime
 	}
-	if o.LastLoginClient != nil {
+	if !IsNil(o.LastLoginClient) {
 		toSerialize["LastLoginClient"] = o.LastLoginClient
 	}
-	if o.LastLoginTime != nil {
+	if !IsNil(o.LastLoginTime) {
 		toSerialize["LastLoginTime"] = o.LastLoginTime
 	}
-	if o.TokenId != nil {
+	if !IsNil(o.TokenId) {
 		toSerialize["TokenId"] = o.TokenId
 	}
 	if o.UserMeta.IsSet() {
 		toSerialize["UserMeta"] = o.UserMeta.Get()
 	}
-	if o.AppRegistration != nil {
-		toSerialize["AppRegistration"] = o.AppRegistration
+	if o.AppRegistration.IsSet() {
+		toSerialize["AppRegistration"] = o.AppRegistration.Get()
 	}
-	if o.Permission != nil {
-		toSerialize["Permission"] = o.Permission
+	if o.Permission.IsSet() {
+		toSerialize["Permission"] = o.Permission.Get()
 	}
-	if o.User != nil {
-		toSerialize["User"] = o.User
+	if o.User.IsSet() {
+		toSerialize["User"] = o.User.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *IamOAuthToken) UnmarshalJSON(bytes []byte) (err error) {
+func (o *IamOAuthToken) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type IamOAuthTokenWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -597,16 +660,16 @@ func (o *IamOAuthToken) UnmarshalJSON(bytes []byte) (err error) {
 		// The last login time for user.
 		LastLoginTime *time.Time `json:"LastLoginTime,omitempty"`
 		// Token identifier. Not the Access Token itself.
-		TokenId         *string                         `json:"TokenId,omitempty"`
-		UserMeta        NullableIamClientMeta           `json:"UserMeta,omitempty"`
-		AppRegistration *IamAppRegistrationRelationship `json:"AppRegistration,omitempty"`
-		Permission      *IamPermissionRelationship      `json:"Permission,omitempty"`
-		User            *IamUserRelationship            `json:"User,omitempty"`
+		TokenId         *string                                `json:"TokenId,omitempty"`
+		UserMeta        NullableIamClientMeta                  `json:"UserMeta,omitempty"`
+		AppRegistration NullableIamAppRegistrationRelationship `json:"AppRegistration,omitempty"`
+		Permission      NullableIamPermissionRelationship      `json:"Permission,omitempty"`
+		User            NullableIamUserRelationship            `json:"User,omitempty"`
 	}
 
 	varIamOAuthTokenWithoutEmbeddedStruct := IamOAuthTokenWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varIamOAuthTokenWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varIamOAuthTokenWithoutEmbeddedStruct)
 	if err == nil {
 		varIamOAuthToken := _IamOAuthToken{}
 		varIamOAuthToken.ClassId = varIamOAuthTokenWithoutEmbeddedStruct.ClassId
@@ -630,7 +693,7 @@ func (o *IamOAuthToken) UnmarshalJSON(bytes []byte) (err error) {
 
 	varIamOAuthToken := _IamOAuthToken{}
 
-	err = json.Unmarshal(bytes, &varIamOAuthToken)
+	err = json.Unmarshal(data, &varIamOAuthToken)
 	if err == nil {
 		o.MoBaseMo = varIamOAuthToken.MoBaseMo
 	} else {
@@ -639,7 +702,7 @@ func (o *IamOAuthToken) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "AccessExpirationTime")

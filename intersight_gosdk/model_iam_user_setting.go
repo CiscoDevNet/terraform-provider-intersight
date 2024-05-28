@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the IamUserSetting type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &IamUserSetting{}
 
 // IamUserSetting Holder for UI Settings such as preference of the user for Session Recording.
 type IamUserSetting struct {
@@ -29,9 +33,9 @@ type IamUserSetting struct {
 	// UserID or email as configured in the IdP.
 	UserIdOrEmail *string `json:"UserIdOrEmail,omitempty"`
 	// Unique id of the user used by the identity provider to store the user.
-	UserUniqueIdentifier *string                      `json:"UserUniqueIdentifier,omitempty"`
-	Idp                  *IamIdpRelationship          `json:"Idp,omitempty"`
-	IdpReference         *IamIdpReferenceRelationship `json:"IdpReference,omitempty"`
+	UserUniqueIdentifier *string                             `json:"UserUniqueIdentifier,omitempty"`
+	Idp                  NullableIamIdpRelationship          `json:"Idp,omitempty"`
+	IdpReference         NullableIamIdpReferenceRelationship `json:"IdpReference,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -114,7 +118,7 @@ func (o *IamUserSetting) SetObjectType(v string) {
 
 // GetAllowUiSessionRecording returns the AllowUiSessionRecording field value if set, zero value otherwise.
 func (o *IamUserSetting) GetAllowUiSessionRecording() bool {
-	if o == nil || o.AllowUiSessionRecording == nil {
+	if o == nil || IsNil(o.AllowUiSessionRecording) {
 		var ret bool
 		return ret
 	}
@@ -124,7 +128,7 @@ func (o *IamUserSetting) GetAllowUiSessionRecording() bool {
 // GetAllowUiSessionRecordingOk returns a tuple with the AllowUiSessionRecording field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IamUserSetting) GetAllowUiSessionRecordingOk() (*bool, bool) {
-	if o == nil || o.AllowUiSessionRecording == nil {
+	if o == nil || IsNil(o.AllowUiSessionRecording) {
 		return nil, false
 	}
 	return o.AllowUiSessionRecording, true
@@ -132,7 +136,7 @@ func (o *IamUserSetting) GetAllowUiSessionRecordingOk() (*bool, bool) {
 
 // HasAllowUiSessionRecording returns a boolean if a field has been set.
 func (o *IamUserSetting) HasAllowUiSessionRecording() bool {
-	if o != nil && o.AllowUiSessionRecording != nil {
+	if o != nil && !IsNil(o.AllowUiSessionRecording) {
 		return true
 	}
 
@@ -146,7 +150,7 @@ func (o *IamUserSetting) SetAllowUiSessionRecording(v bool) {
 
 // GetUserIdOrEmail returns the UserIdOrEmail field value if set, zero value otherwise.
 func (o *IamUserSetting) GetUserIdOrEmail() string {
-	if o == nil || o.UserIdOrEmail == nil {
+	if o == nil || IsNil(o.UserIdOrEmail) {
 		var ret string
 		return ret
 	}
@@ -156,7 +160,7 @@ func (o *IamUserSetting) GetUserIdOrEmail() string {
 // GetUserIdOrEmailOk returns a tuple with the UserIdOrEmail field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IamUserSetting) GetUserIdOrEmailOk() (*string, bool) {
-	if o == nil || o.UserIdOrEmail == nil {
+	if o == nil || IsNil(o.UserIdOrEmail) {
 		return nil, false
 	}
 	return o.UserIdOrEmail, true
@@ -164,7 +168,7 @@ func (o *IamUserSetting) GetUserIdOrEmailOk() (*string, bool) {
 
 // HasUserIdOrEmail returns a boolean if a field has been set.
 func (o *IamUserSetting) HasUserIdOrEmail() bool {
-	if o != nil && o.UserIdOrEmail != nil {
+	if o != nil && !IsNil(o.UserIdOrEmail) {
 		return true
 	}
 
@@ -178,7 +182,7 @@ func (o *IamUserSetting) SetUserIdOrEmail(v string) {
 
 // GetUserUniqueIdentifier returns the UserUniqueIdentifier field value if set, zero value otherwise.
 func (o *IamUserSetting) GetUserUniqueIdentifier() string {
-	if o == nil || o.UserUniqueIdentifier == nil {
+	if o == nil || IsNil(o.UserUniqueIdentifier) {
 		var ret string
 		return ret
 	}
@@ -188,7 +192,7 @@ func (o *IamUserSetting) GetUserUniqueIdentifier() string {
 // GetUserUniqueIdentifierOk returns a tuple with the UserUniqueIdentifier field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IamUserSetting) GetUserUniqueIdentifierOk() (*string, bool) {
-	if o == nil || o.UserUniqueIdentifier == nil {
+	if o == nil || IsNil(o.UserUniqueIdentifier) {
 		return nil, false
 	}
 	return o.UserUniqueIdentifier, true
@@ -196,7 +200,7 @@ func (o *IamUserSetting) GetUserUniqueIdentifierOk() (*string, bool) {
 
 // HasUserUniqueIdentifier returns a boolean if a field has been set.
 func (o *IamUserSetting) HasUserUniqueIdentifier() bool {
-	if o != nil && o.UserUniqueIdentifier != nil {
+	if o != nil && !IsNil(o.UserUniqueIdentifier) {
 		return true
 	}
 
@@ -208,110 +212,158 @@ func (o *IamUserSetting) SetUserUniqueIdentifier(v string) {
 	o.UserUniqueIdentifier = &v
 }
 
-// GetIdp returns the Idp field value if set, zero value otherwise.
+// GetIdp returns the Idp field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *IamUserSetting) GetIdp() IamIdpRelationship {
-	if o == nil || o.Idp == nil {
+	if o == nil || IsNil(o.Idp.Get()) {
 		var ret IamIdpRelationship
 		return ret
 	}
-	return *o.Idp
+	return *o.Idp.Get()
 }
 
 // GetIdpOk returns a tuple with the Idp field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *IamUserSetting) GetIdpOk() (*IamIdpRelationship, bool) {
-	if o == nil || o.Idp == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Idp, true
+	return o.Idp.Get(), o.Idp.IsSet()
 }
 
 // HasIdp returns a boolean if a field has been set.
 func (o *IamUserSetting) HasIdp() bool {
-	if o != nil && o.Idp != nil {
+	if o != nil && o.Idp.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetIdp gets a reference to the given IamIdpRelationship and assigns it to the Idp field.
+// SetIdp gets a reference to the given NullableIamIdpRelationship and assigns it to the Idp field.
 func (o *IamUserSetting) SetIdp(v IamIdpRelationship) {
-	o.Idp = &v
+	o.Idp.Set(&v)
 }
 
-// GetIdpReference returns the IdpReference field value if set, zero value otherwise.
+// SetIdpNil sets the value for Idp to be an explicit nil
+func (o *IamUserSetting) SetIdpNil() {
+	o.Idp.Set(nil)
+}
+
+// UnsetIdp ensures that no value is present for Idp, not even an explicit nil
+func (o *IamUserSetting) UnsetIdp() {
+	o.Idp.Unset()
+}
+
+// GetIdpReference returns the IdpReference field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *IamUserSetting) GetIdpReference() IamIdpReferenceRelationship {
-	if o == nil || o.IdpReference == nil {
+	if o == nil || IsNil(o.IdpReference.Get()) {
 		var ret IamIdpReferenceRelationship
 		return ret
 	}
-	return *o.IdpReference
+	return *o.IdpReference.Get()
 }
 
 // GetIdpReferenceOk returns a tuple with the IdpReference field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *IamUserSetting) GetIdpReferenceOk() (*IamIdpReferenceRelationship, bool) {
-	if o == nil || o.IdpReference == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.IdpReference, true
+	return o.IdpReference.Get(), o.IdpReference.IsSet()
 }
 
 // HasIdpReference returns a boolean if a field has been set.
 func (o *IamUserSetting) HasIdpReference() bool {
-	if o != nil && o.IdpReference != nil {
+	if o != nil && o.IdpReference.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetIdpReference gets a reference to the given IamIdpReferenceRelationship and assigns it to the IdpReference field.
+// SetIdpReference gets a reference to the given NullableIamIdpReferenceRelationship and assigns it to the IdpReference field.
 func (o *IamUserSetting) SetIdpReference(v IamIdpReferenceRelationship) {
-	o.IdpReference = &v
+	o.IdpReference.Set(&v)
+}
+
+// SetIdpReferenceNil sets the value for IdpReference to be an explicit nil
+func (o *IamUserSetting) SetIdpReferenceNil() {
+	o.IdpReference.Set(nil)
+}
+
+// UnsetIdpReference ensures that no value is present for IdpReference, not even an explicit nil
+func (o *IamUserSetting) UnsetIdpReference() {
+	o.IdpReference.Unset()
 }
 
 func (o IamUserSetting) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o IamUserSetting) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.AllowUiSessionRecording != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.AllowUiSessionRecording) {
 		toSerialize["AllowUiSessionRecording"] = o.AllowUiSessionRecording
 	}
-	if o.UserIdOrEmail != nil {
+	if !IsNil(o.UserIdOrEmail) {
 		toSerialize["UserIdOrEmail"] = o.UserIdOrEmail
 	}
-	if o.UserUniqueIdentifier != nil {
+	if !IsNil(o.UserUniqueIdentifier) {
 		toSerialize["UserUniqueIdentifier"] = o.UserUniqueIdentifier
 	}
-	if o.Idp != nil {
-		toSerialize["Idp"] = o.Idp
+	if o.Idp.IsSet() {
+		toSerialize["Idp"] = o.Idp.Get()
 	}
-	if o.IdpReference != nil {
-		toSerialize["IdpReference"] = o.IdpReference
+	if o.IdpReference.IsSet() {
+		toSerialize["IdpReference"] = o.IdpReference.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *IamUserSetting) UnmarshalJSON(bytes []byte) (err error) {
+func (o *IamUserSetting) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type IamUserSettingWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -322,14 +374,14 @@ func (o *IamUserSetting) UnmarshalJSON(bytes []byte) (err error) {
 		// UserID or email as configured in the IdP.
 		UserIdOrEmail *string `json:"UserIdOrEmail,omitempty"`
 		// Unique id of the user used by the identity provider to store the user.
-		UserUniqueIdentifier *string                      `json:"UserUniqueIdentifier,omitempty"`
-		Idp                  *IamIdpRelationship          `json:"Idp,omitempty"`
-		IdpReference         *IamIdpReferenceRelationship `json:"IdpReference,omitempty"`
+		UserUniqueIdentifier *string                             `json:"UserUniqueIdentifier,omitempty"`
+		Idp                  NullableIamIdpRelationship          `json:"Idp,omitempty"`
+		IdpReference         NullableIamIdpReferenceRelationship `json:"IdpReference,omitempty"`
 	}
 
 	varIamUserSettingWithoutEmbeddedStruct := IamUserSettingWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varIamUserSettingWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varIamUserSettingWithoutEmbeddedStruct)
 	if err == nil {
 		varIamUserSetting := _IamUserSetting{}
 		varIamUserSetting.ClassId = varIamUserSettingWithoutEmbeddedStruct.ClassId
@@ -346,7 +398,7 @@ func (o *IamUserSetting) UnmarshalJSON(bytes []byte) (err error) {
 
 	varIamUserSetting := _IamUserSetting{}
 
-	err = json.Unmarshal(bytes, &varIamUserSetting)
+	err = json.Unmarshal(data, &varIamUserSetting)
 	if err == nil {
 		o.MoBaseMo = varIamUserSetting.MoBaseMo
 	} else {
@@ -355,7 +407,7 @@ func (o *IamUserSetting) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "AllowUiSessionRecording")

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the RecommendationClusterExpansion type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &RecommendationClusterExpansion{}
 
 // RecommendationClusterExpansion Entity representing the cluster expansion recommendations.
 type RecommendationClusterExpansion struct {
@@ -25,11 +29,11 @@ type RecommendationClusterExpansion struct {
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
 	// Name of the cluster for which the expansion recommendation is provided.
-	ClusterName              *string                                             `json:"ClusterName,omitempty"`
-	HardwareExpansionRequest *RecommendationHardwareExpansionRequestRelationship `json:"HardwareExpansionRequest,omitempty"`
+	ClusterName              *string                                                    `json:"ClusterName,omitempty"`
+	HardwareExpansionRequest NullableRecommendationHardwareExpansionRequestRelationship `json:"HardwareExpansionRequest,omitempty"`
 	// An array of relationships to recommendationPhysicalItem resources.
-	PhysicalItem     []RecommendationPhysicalItemRelationship `json:"PhysicalItem,omitempty"`
-	RegisteredDevice *AssetDeviceRegistrationRelationship     `json:"RegisteredDevice,omitempty"`
+	PhysicalItem     []RecommendationPhysicalItemRelationship    `json:"PhysicalItem,omitempty"`
+	RegisteredDevice NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	// An array of relationships to recommendationSoftwareItem resources.
 	SoftwareItem         []RecommendationSoftwareItemRelationship `json:"SoftwareItem,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -110,7 +114,7 @@ func (o *RecommendationClusterExpansion) SetObjectType(v string) {
 
 // GetClusterName returns the ClusterName field value if set, zero value otherwise.
 func (o *RecommendationClusterExpansion) GetClusterName() string {
-	if o == nil || o.ClusterName == nil {
+	if o == nil || IsNil(o.ClusterName) {
 		var ret string
 		return ret
 	}
@@ -120,7 +124,7 @@ func (o *RecommendationClusterExpansion) GetClusterName() string {
 // GetClusterNameOk returns a tuple with the ClusterName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RecommendationClusterExpansion) GetClusterNameOk() (*string, bool) {
-	if o == nil || o.ClusterName == nil {
+	if o == nil || IsNil(o.ClusterName) {
 		return nil, false
 	}
 	return o.ClusterName, true
@@ -128,7 +132,7 @@ func (o *RecommendationClusterExpansion) GetClusterNameOk() (*string, bool) {
 
 // HasClusterName returns a boolean if a field has been set.
 func (o *RecommendationClusterExpansion) HasClusterName() bool {
-	if o != nil && o.ClusterName != nil {
+	if o != nil && !IsNil(o.ClusterName) {
 		return true
 	}
 
@@ -140,36 +144,47 @@ func (o *RecommendationClusterExpansion) SetClusterName(v string) {
 	o.ClusterName = &v
 }
 
-// GetHardwareExpansionRequest returns the HardwareExpansionRequest field value if set, zero value otherwise.
+// GetHardwareExpansionRequest returns the HardwareExpansionRequest field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *RecommendationClusterExpansion) GetHardwareExpansionRequest() RecommendationHardwareExpansionRequestRelationship {
-	if o == nil || o.HardwareExpansionRequest == nil {
+	if o == nil || IsNil(o.HardwareExpansionRequest.Get()) {
 		var ret RecommendationHardwareExpansionRequestRelationship
 		return ret
 	}
-	return *o.HardwareExpansionRequest
+	return *o.HardwareExpansionRequest.Get()
 }
 
 // GetHardwareExpansionRequestOk returns a tuple with the HardwareExpansionRequest field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *RecommendationClusterExpansion) GetHardwareExpansionRequestOk() (*RecommendationHardwareExpansionRequestRelationship, bool) {
-	if o == nil || o.HardwareExpansionRequest == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.HardwareExpansionRequest, true
+	return o.HardwareExpansionRequest.Get(), o.HardwareExpansionRequest.IsSet()
 }
 
 // HasHardwareExpansionRequest returns a boolean if a field has been set.
 func (o *RecommendationClusterExpansion) HasHardwareExpansionRequest() bool {
-	if o != nil && o.HardwareExpansionRequest != nil {
+	if o != nil && o.HardwareExpansionRequest.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetHardwareExpansionRequest gets a reference to the given RecommendationHardwareExpansionRequestRelationship and assigns it to the HardwareExpansionRequest field.
+// SetHardwareExpansionRequest gets a reference to the given NullableRecommendationHardwareExpansionRequestRelationship and assigns it to the HardwareExpansionRequest field.
 func (o *RecommendationClusterExpansion) SetHardwareExpansionRequest(v RecommendationHardwareExpansionRequestRelationship) {
-	o.HardwareExpansionRequest = &v
+	o.HardwareExpansionRequest.Set(&v)
+}
+
+// SetHardwareExpansionRequestNil sets the value for HardwareExpansionRequest to be an explicit nil
+func (o *RecommendationClusterExpansion) SetHardwareExpansionRequestNil() {
+	o.HardwareExpansionRequest.Set(nil)
+}
+
+// UnsetHardwareExpansionRequest ensures that no value is present for HardwareExpansionRequest, not even an explicit nil
+func (o *RecommendationClusterExpansion) UnsetHardwareExpansionRequest() {
+	o.HardwareExpansionRequest.Unset()
 }
 
 // GetPhysicalItem returns the PhysicalItem field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -185,7 +200,7 @@ func (o *RecommendationClusterExpansion) GetPhysicalItem() []RecommendationPhysi
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *RecommendationClusterExpansion) GetPhysicalItemOk() ([]RecommendationPhysicalItemRelationship, bool) {
-	if o == nil || o.PhysicalItem == nil {
+	if o == nil || IsNil(o.PhysicalItem) {
 		return nil, false
 	}
 	return o.PhysicalItem, true
@@ -193,7 +208,7 @@ func (o *RecommendationClusterExpansion) GetPhysicalItemOk() ([]RecommendationPh
 
 // HasPhysicalItem returns a boolean if a field has been set.
 func (o *RecommendationClusterExpansion) HasPhysicalItem() bool {
-	if o != nil && o.PhysicalItem != nil {
+	if o != nil && IsNil(o.PhysicalItem) {
 		return true
 	}
 
@@ -205,36 +220,47 @@ func (o *RecommendationClusterExpansion) SetPhysicalItem(v []RecommendationPhysi
 	o.PhysicalItem = v
 }
 
-// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise.
+// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *RecommendationClusterExpansion) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil || IsNil(o.RegisteredDevice.Get()) {
 		var ret AssetDeviceRegistrationRelationship
 		return ret
 	}
-	return *o.RegisteredDevice
+	return *o.RegisteredDevice.Get()
 }
 
 // GetRegisteredDeviceOk returns a tuple with the RegisteredDevice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *RecommendationClusterExpansion) GetRegisteredDeviceOk() (*AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.RegisteredDevice, true
+	return o.RegisteredDevice.Get(), o.RegisteredDevice.IsSet()
 }
 
 // HasRegisteredDevice returns a boolean if a field has been set.
 func (o *RecommendationClusterExpansion) HasRegisteredDevice() bool {
-	if o != nil && o.RegisteredDevice != nil {
+	if o != nil && o.RegisteredDevice.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRegisteredDevice gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
+// SetRegisteredDevice gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
 func (o *RecommendationClusterExpansion) SetRegisteredDevice(v AssetDeviceRegistrationRelationship) {
-	o.RegisteredDevice = &v
+	o.RegisteredDevice.Set(&v)
+}
+
+// SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+func (o *RecommendationClusterExpansion) SetRegisteredDeviceNil() {
+	o.RegisteredDevice.Set(nil)
+}
+
+// UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
+func (o *RecommendationClusterExpansion) UnsetRegisteredDevice() {
+	o.RegisteredDevice.Unset()
 }
 
 // GetSoftwareItem returns the SoftwareItem field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -250,7 +276,7 @@ func (o *RecommendationClusterExpansion) GetSoftwareItem() []RecommendationSoftw
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *RecommendationClusterExpansion) GetSoftwareItemOk() ([]RecommendationSoftwareItemRelationship, bool) {
-	if o == nil || o.SoftwareItem == nil {
+	if o == nil || IsNil(o.SoftwareItem) {
 		return nil, false
 	}
 	return o.SoftwareItem, true
@@ -258,7 +284,7 @@ func (o *RecommendationClusterExpansion) GetSoftwareItemOk() ([]RecommendationSo
 
 // HasSoftwareItem returns a boolean if a field has been set.
 func (o *RecommendationClusterExpansion) HasSoftwareItem() bool {
-	if o != nil && o.SoftwareItem != nil {
+	if o != nil && IsNil(o.SoftwareItem) {
 		return true
 	}
 
@@ -271,32 +297,36 @@ func (o *RecommendationClusterExpansion) SetSoftwareItem(v []RecommendationSoftw
 }
 
 func (o RecommendationClusterExpansion) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o RecommendationClusterExpansion) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedRecommendationBase, errRecommendationBase := json.Marshal(o.RecommendationBase)
 	if errRecommendationBase != nil {
-		return []byte{}, errRecommendationBase
+		return map[string]interface{}{}, errRecommendationBase
 	}
 	errRecommendationBase = json.Unmarshal([]byte(serializedRecommendationBase), &toSerialize)
 	if errRecommendationBase != nil {
-		return []byte{}, errRecommendationBase
+		return map[string]interface{}{}, errRecommendationBase
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.ClusterName != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.ClusterName) {
 		toSerialize["ClusterName"] = o.ClusterName
 	}
-	if o.HardwareExpansionRequest != nil {
-		toSerialize["HardwareExpansionRequest"] = o.HardwareExpansionRequest
+	if o.HardwareExpansionRequest.IsSet() {
+		toSerialize["HardwareExpansionRequest"] = o.HardwareExpansionRequest.Get()
 	}
 	if o.PhysicalItem != nil {
 		toSerialize["PhysicalItem"] = o.PhysicalItem
 	}
-	if o.RegisteredDevice != nil {
-		toSerialize["RegisteredDevice"] = o.RegisteredDevice
+	if o.RegisteredDevice.IsSet() {
+		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
 	}
 	if o.SoftwareItem != nil {
 		toSerialize["SoftwareItem"] = o.SoftwareItem
@@ -306,28 +336,50 @@ func (o RecommendationClusterExpansion) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *RecommendationClusterExpansion) UnmarshalJSON(bytes []byte) (err error) {
+func (o *RecommendationClusterExpansion) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type RecommendationClusterExpansionWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 		ObjectType string `json:"ObjectType"`
 		// Name of the cluster for which the expansion recommendation is provided.
-		ClusterName              *string                                             `json:"ClusterName,omitempty"`
-		HardwareExpansionRequest *RecommendationHardwareExpansionRequestRelationship `json:"HardwareExpansionRequest,omitempty"`
+		ClusterName              *string                                                    `json:"ClusterName,omitempty"`
+		HardwareExpansionRequest NullableRecommendationHardwareExpansionRequestRelationship `json:"HardwareExpansionRequest,omitempty"`
 		// An array of relationships to recommendationPhysicalItem resources.
-		PhysicalItem     []RecommendationPhysicalItemRelationship `json:"PhysicalItem,omitempty"`
-		RegisteredDevice *AssetDeviceRegistrationRelationship     `json:"RegisteredDevice,omitempty"`
+		PhysicalItem     []RecommendationPhysicalItemRelationship    `json:"PhysicalItem,omitempty"`
+		RegisteredDevice NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 		// An array of relationships to recommendationSoftwareItem resources.
 		SoftwareItem []RecommendationSoftwareItemRelationship `json:"SoftwareItem,omitempty"`
 	}
 
 	varRecommendationClusterExpansionWithoutEmbeddedStruct := RecommendationClusterExpansionWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varRecommendationClusterExpansionWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varRecommendationClusterExpansionWithoutEmbeddedStruct)
 	if err == nil {
 		varRecommendationClusterExpansion := _RecommendationClusterExpansion{}
 		varRecommendationClusterExpansion.ClassId = varRecommendationClusterExpansionWithoutEmbeddedStruct.ClassId
@@ -344,7 +396,7 @@ func (o *RecommendationClusterExpansion) UnmarshalJSON(bytes []byte) (err error)
 
 	varRecommendationClusterExpansion := _RecommendationClusterExpansion{}
 
-	err = json.Unmarshal(bytes, &varRecommendationClusterExpansion)
+	err = json.Unmarshal(data, &varRecommendationClusterExpansion)
 	if err == nil {
 		o.RecommendationBase = varRecommendationClusterExpansion.RecommendationBase
 	} else {
@@ -353,7 +405,7 @@ func (o *RecommendationClusterExpansion) UnmarshalJSON(bytes []byte) (err error)
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "ClusterName")

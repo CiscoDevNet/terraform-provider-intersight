@@ -18,8 +18,8 @@ Name | Type | Description | Notes
 **NodeName** | Pointer to **string** | The node name for the disk. | [optional] [readonly] 
 **State** | Pointer to **string** | Current state of the NetApp disk. * &#x60;Present&#x60; - Storage disk state type is present. * &#x60;Copy&#x60; - Storage disk state type is copy. * &#x60;Broken&#x60; - Storage disk state type is broken. * &#x60;Maintenance&#x60; - Storage disk state type is maintenance. * &#x60;Partner&#x60; - Storage disk state type is partner. * &#x60;Pending&#x60; - Storage disk state type is pending. * &#x60;Reconstructing&#x60; - Storage disk state type is reconstructing. * &#x60;Removed&#x60; - Storage disk state type is removed. * &#x60;Spare&#x60; - Storage disk state type is spare. * &#x60;Unfail&#x60; - Storage disk state type is unfail. * &#x60;Zeroing&#x60; - Storage disk state type is zeroing. | [optional] [readonly] [default to "Present"]
 **Uuid** | Pointer to **string** | Universally unique identifier of the NetApp Disk. | [optional] [readonly] 
-**Array** | Pointer to [**StorageNetAppClusterRelationship**](StorageNetAppClusterRelationship.md) |  | [optional] 
-**ArrayController** | Pointer to [**StorageNetAppNodeRelationship**](StorageNetAppNodeRelationship.md) |  | [optional] 
+**Array** | Pointer to [**NullableStorageNetAppClusterRelationship**](StorageNetAppClusterRelationship.md) |  | [optional] 
+**ArrayController** | Pointer to [**NullableStorageNetAppNodeRelationship**](StorageNetAppNodeRelationship.md) |  | [optional] 
 **DiskPool** | Pointer to [**[]StorageNetAppAggregateRelationship**](StorageNetAppAggregateRelationship.md) | An array of relationships to storageNetAppAggregate resources. | [optional] [readonly] 
 **Events** | Pointer to [**[]StorageNetAppDiskEventRelationship**](StorageNetAppDiskEventRelationship.md) | An array of relationships to storageNetAppDiskEvent resources. | [optional] [readonly] 
 
@@ -407,6 +407,16 @@ SetArray sets Array field to given value.
 
 HasArray returns a boolean if a field has been set.
 
+### SetArrayNil
+
+`func (o *StorageNetAppBaseDisk) SetArrayNil(b bool)`
+
+ SetArrayNil sets the value for Array to be an explicit nil
+
+### UnsetArray
+`func (o *StorageNetAppBaseDisk) UnsetArray()`
+
+UnsetArray ensures that no value is present for Array, not even an explicit nil
 ### GetArrayController
 
 `func (o *StorageNetAppBaseDisk) GetArrayController() StorageNetAppNodeRelationship`
@@ -432,6 +442,16 @@ SetArrayController sets ArrayController field to given value.
 
 HasArrayController returns a boolean if a field has been set.
 
+### SetArrayControllerNil
+
+`func (o *StorageNetAppBaseDisk) SetArrayControllerNil(b bool)`
+
+ SetArrayControllerNil sets the value for ArrayController to be an explicit nil
+
+### UnsetArrayController
+`func (o *StorageNetAppBaseDisk) UnsetArrayController()`
+
+UnsetArrayController ensures that no value is present for ArrayController, not even an explicit nil
 ### GetDiskPool
 
 `func (o *StorageNetAppBaseDisk) GetDiskPool() []StorageNetAppAggregateRelationship`

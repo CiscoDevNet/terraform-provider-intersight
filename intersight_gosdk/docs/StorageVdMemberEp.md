@@ -11,9 +11,9 @@ Name | Type | Description | Notes
 **Role** | Pointer to **string** | Role of the disk normal or hot-spare, used by virtual-drive. | [optional] [readonly] 
 **SpanId** | Pointer to **string** | The span id number of the virtual drive. | [optional] [readonly] 
 **VdMemberEpId** | Pointer to **int64** | The local disk slot number as id. | [optional] [readonly] 
-**InventoryDeviceInfo** | Pointer to [**InventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
-**StorageVirtualDrive** | Pointer to [**StorageVirtualDriveRelationship**](StorageVirtualDriveRelationship.md) |  | [optional] 
+**InventoryDeviceInfo** | Pointer to [**NullableInventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
+**StorageVirtualDrive** | Pointer to [**NullableStorageVirtualDriveRelationship**](StorageVirtualDriveRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -224,6 +224,16 @@ SetInventoryDeviceInfo sets InventoryDeviceInfo field to given value.
 
 HasInventoryDeviceInfo returns a boolean if a field has been set.
 
+### SetInventoryDeviceInfoNil
+
+`func (o *StorageVdMemberEp) SetInventoryDeviceInfoNil(b bool)`
+
+ SetInventoryDeviceInfoNil sets the value for InventoryDeviceInfo to be an explicit nil
+
+### UnsetInventoryDeviceInfo
+`func (o *StorageVdMemberEp) UnsetInventoryDeviceInfo()`
+
+UnsetInventoryDeviceInfo ensures that no value is present for InventoryDeviceInfo, not even an explicit nil
 ### GetRegisteredDevice
 
 `func (o *StorageVdMemberEp) GetRegisteredDevice() AssetDeviceRegistrationRelationship`
@@ -249,6 +259,16 @@ SetRegisteredDevice sets RegisteredDevice field to given value.
 
 HasRegisteredDevice returns a boolean if a field has been set.
 
+### SetRegisteredDeviceNil
+
+`func (o *StorageVdMemberEp) SetRegisteredDeviceNil(b bool)`
+
+ SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+
+### UnsetRegisteredDevice
+`func (o *StorageVdMemberEp) UnsetRegisteredDevice()`
+
+UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
 ### GetStorageVirtualDrive
 
 `func (o *StorageVdMemberEp) GetStorageVirtualDrive() StorageVirtualDriveRelationship`
@@ -274,6 +294,16 @@ SetStorageVirtualDrive sets StorageVirtualDrive field to given value.
 
 HasStorageVirtualDrive returns a boolean if a field has been set.
 
+### SetStorageVirtualDriveNil
+
+`func (o *StorageVdMemberEp) SetStorageVirtualDriveNil(b bool)`
+
+ SetStorageVirtualDriveNil sets the value for StorageVirtualDrive to be an explicit nil
+
+### UnsetStorageVirtualDrive
+`func (o *StorageVdMemberEp) UnsetStorageVirtualDrive()`
+
+UnsetStorageVirtualDrive ensures that no value is present for StorageVirtualDrive, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

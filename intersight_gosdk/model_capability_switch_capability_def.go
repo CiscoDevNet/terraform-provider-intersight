@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the CapabilitySwitchCapabilityDef type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &CapabilitySwitchCapabilityDef{}
 
 // CapabilitySwitchCapabilityDef Abstract class that defines properties common for all Switch specific 'defs'.
 type CapabilitySwitchCapabilityDef struct {
@@ -108,7 +112,7 @@ func (o *CapabilitySwitchCapabilityDef) SetObjectType(v string) {
 
 // GetPid returns the Pid field value if set, zero value otherwise.
 func (o *CapabilitySwitchCapabilityDef) GetPid() string {
-	if o == nil || o.Pid == nil {
+	if o == nil || IsNil(o.Pid) {
 		var ret string
 		return ret
 	}
@@ -118,7 +122,7 @@ func (o *CapabilitySwitchCapabilityDef) GetPid() string {
 // GetPidOk returns a tuple with the Pid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CapabilitySwitchCapabilityDef) GetPidOk() (*string, bool) {
-	if o == nil || o.Pid == nil {
+	if o == nil || IsNil(o.Pid) {
 		return nil, false
 	}
 	return o.Pid, true
@@ -126,7 +130,7 @@ func (o *CapabilitySwitchCapabilityDef) GetPidOk() (*string, bool) {
 
 // HasPid returns a boolean if a field has been set.
 func (o *CapabilitySwitchCapabilityDef) HasPid() bool {
-	if o != nil && o.Pid != nil {
+	if o != nil && !IsNil(o.Pid) {
 		return true
 	}
 
@@ -140,7 +144,7 @@ func (o *CapabilitySwitchCapabilityDef) SetPid(v string) {
 
 // GetSku returns the Sku field value if set, zero value otherwise.
 func (o *CapabilitySwitchCapabilityDef) GetSku() string {
-	if o == nil || o.Sku == nil {
+	if o == nil || IsNil(o.Sku) {
 		var ret string
 		return ret
 	}
@@ -150,7 +154,7 @@ func (o *CapabilitySwitchCapabilityDef) GetSku() string {
 // GetSkuOk returns a tuple with the Sku field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CapabilitySwitchCapabilityDef) GetSkuOk() (*string, bool) {
-	if o == nil || o.Sku == nil {
+	if o == nil || IsNil(o.Sku) {
 		return nil, false
 	}
 	return o.Sku, true
@@ -158,7 +162,7 @@ func (o *CapabilitySwitchCapabilityDef) GetSkuOk() (*string, bool) {
 
 // HasSku returns a boolean if a field has been set.
 func (o *CapabilitySwitchCapabilityDef) HasSku() bool {
-	if o != nil && o.Sku != nil {
+	if o != nil && !IsNil(o.Sku) {
 		return true
 	}
 
@@ -172,7 +176,7 @@ func (o *CapabilitySwitchCapabilityDef) SetSku(v string) {
 
 // GetVid returns the Vid field value if set, zero value otherwise.
 func (o *CapabilitySwitchCapabilityDef) GetVid() string {
-	if o == nil || o.Vid == nil {
+	if o == nil || IsNil(o.Vid) {
 		var ret string
 		return ret
 	}
@@ -182,7 +186,7 @@ func (o *CapabilitySwitchCapabilityDef) GetVid() string {
 // GetVidOk returns a tuple with the Vid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CapabilitySwitchCapabilityDef) GetVidOk() (*string, bool) {
-	if o == nil || o.Vid == nil {
+	if o == nil || IsNil(o.Vid) {
 		return nil, false
 	}
 	return o.Vid, true
@@ -190,7 +194,7 @@ func (o *CapabilitySwitchCapabilityDef) GetVidOk() (*string, bool) {
 
 // HasVid returns a boolean if a field has been set.
 func (o *CapabilitySwitchCapabilityDef) HasVid() bool {
-	if o != nil && o.Vid != nil {
+	if o != nil && !IsNil(o.Vid) {
 		return true
 	}
 
@@ -203,28 +207,32 @@ func (o *CapabilitySwitchCapabilityDef) SetVid(v string) {
 }
 
 func (o CapabilitySwitchCapabilityDef) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o CapabilitySwitchCapabilityDef) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedCapabilityCapability, errCapabilityCapability := json.Marshal(o.CapabilityCapability)
 	if errCapabilityCapability != nil {
-		return []byte{}, errCapabilityCapability
+		return map[string]interface{}{}, errCapabilityCapability
 	}
 	errCapabilityCapability = json.Unmarshal([]byte(serializedCapabilityCapability), &toSerialize)
 	if errCapabilityCapability != nil {
-		return []byte{}, errCapabilityCapability
+		return map[string]interface{}{}, errCapabilityCapability
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Pid != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Pid) {
 		toSerialize["Pid"] = o.Pid
 	}
-	if o.Sku != nil {
+	if !IsNil(o.Sku) {
 		toSerialize["Sku"] = o.Sku
 	}
-	if o.Vid != nil {
+	if !IsNil(o.Vid) {
 		toSerialize["Vid"] = o.Vid
 	}
 
@@ -232,10 +240,32 @@ func (o CapabilitySwitchCapabilityDef) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *CapabilitySwitchCapabilityDef) UnmarshalJSON(bytes []byte) (err error) {
+func (o *CapabilitySwitchCapabilityDef) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type CapabilitySwitchCapabilityDefWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type.
 		ClassId string `json:"ClassId"`
@@ -251,7 +281,7 @@ func (o *CapabilitySwitchCapabilityDef) UnmarshalJSON(bytes []byte) (err error) 
 
 	varCapabilitySwitchCapabilityDefWithoutEmbeddedStruct := CapabilitySwitchCapabilityDefWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varCapabilitySwitchCapabilityDefWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varCapabilitySwitchCapabilityDefWithoutEmbeddedStruct)
 	if err == nil {
 		varCapabilitySwitchCapabilityDef := _CapabilitySwitchCapabilityDef{}
 		varCapabilitySwitchCapabilityDef.ClassId = varCapabilitySwitchCapabilityDefWithoutEmbeddedStruct.ClassId
@@ -266,7 +296,7 @@ func (o *CapabilitySwitchCapabilityDef) UnmarshalJSON(bytes []byte) (err error) 
 
 	varCapabilitySwitchCapabilityDef := _CapabilitySwitchCapabilityDef{}
 
-	err = json.Unmarshal(bytes, &varCapabilitySwitchCapabilityDef)
+	err = json.Unmarshal(data, &varCapabilitySwitchCapabilityDef)
 	if err == nil {
 		o.CapabilityCapability = varCapabilitySwitchCapabilityDef.CapabilityCapability
 	} else {
@@ -275,7 +305,7 @@ func (o *CapabilitySwitchCapabilityDef) UnmarshalJSON(bytes []byte) (err error) 
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Pid")

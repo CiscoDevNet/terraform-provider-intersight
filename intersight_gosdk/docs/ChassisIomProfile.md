@@ -9,9 +9,9 @@ Name | Type | Description | Notes
 **ConfigChanges** | Pointer to [**NullablePolicyConfigChange**](PolicyConfigChange.md) |  | [optional] 
 **IomEntity** | Pointer to **string** | IOM in chassis for which IOM profile is applicable. or which is attached to a Fabric Interconnect managed by Intersight. * &#x60;IOMA&#x60; - IOM on left side of chassis. * &#x60;IOMB&#x60; - IOM on right side of chassis. | [optional] [default to "IOMA"]
 **ConfigChangeDetails** | Pointer to [**[]ChassisConfigChangeDetailRelationship**](ChassisConfigChangeDetailRelationship.md) | An array of relationships to chassisConfigChangeDetail resources. | [optional] [readonly] 
-**ConfigResult** | Pointer to [**ChassisConfigResultRelationship**](ChassisConfigResultRelationship.md) |  | [optional] 
-**Organization** | Pointer to [**OrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
-**Profile** | Pointer to [**ChassisBaseProfileRelationship**](ChassisBaseProfileRelationship.md) |  | [optional] 
+**ConfigResult** | Pointer to [**NullableChassisConfigResultRelationship**](ChassisConfigResultRelationship.md) |  | [optional] 
+**Organization** | Pointer to [**NullableOrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
+**Profile** | Pointer to [**NullableChassisBaseProfileRelationship**](ChassisBaseProfileRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -192,6 +192,16 @@ SetConfigResult sets ConfigResult field to given value.
 
 HasConfigResult returns a boolean if a field has been set.
 
+### SetConfigResultNil
+
+`func (o *ChassisIomProfile) SetConfigResultNil(b bool)`
+
+ SetConfigResultNil sets the value for ConfigResult to be an explicit nil
+
+### UnsetConfigResult
+`func (o *ChassisIomProfile) UnsetConfigResult()`
+
+UnsetConfigResult ensures that no value is present for ConfigResult, not even an explicit nil
 ### GetOrganization
 
 `func (o *ChassisIomProfile) GetOrganization() OrganizationOrganizationRelationship`
@@ -217,6 +227,16 @@ SetOrganization sets Organization field to given value.
 
 HasOrganization returns a boolean if a field has been set.
 
+### SetOrganizationNil
+
+`func (o *ChassisIomProfile) SetOrganizationNil(b bool)`
+
+ SetOrganizationNil sets the value for Organization to be an explicit nil
+
+### UnsetOrganization
+`func (o *ChassisIomProfile) UnsetOrganization()`
+
+UnsetOrganization ensures that no value is present for Organization, not even an explicit nil
 ### GetProfile
 
 `func (o *ChassisIomProfile) GetProfile() ChassisBaseProfileRelationship`
@@ -242,6 +262,16 @@ SetProfile sets Profile field to given value.
 
 HasProfile returns a boolean if a field has been set.
 
+### SetProfileNil
+
+`func (o *ChassisIomProfile) SetProfileNil(b bool)`
+
+ SetProfileNil sets the value for Profile to be an explicit nil
+
+### UnsetProfile
+`func (o *ChassisIomProfile) UnsetProfile()`
+
+UnsetProfile ensures that no value is present for Profile, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

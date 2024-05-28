@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the StoragePureArrayUtilization type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &StoragePureArrayUtilization{}
 
 // StoragePureArrayUtilization Storage space consumption of Pure FlashArray.
 type StoragePureArrayUtilization struct {
@@ -120,7 +124,7 @@ func (o *StoragePureArrayUtilization) SetObjectType(v string) {
 
 // GetDataReduction returns the DataReduction field value if set, zero value otherwise.
 func (o *StoragePureArrayUtilization) GetDataReduction() float32 {
-	if o == nil || o.DataReduction == nil {
+	if o == nil || IsNil(o.DataReduction) {
 		var ret float32
 		return ret
 	}
@@ -130,7 +134,7 @@ func (o *StoragePureArrayUtilization) GetDataReduction() float32 {
 // GetDataReductionOk returns a tuple with the DataReduction field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StoragePureArrayUtilization) GetDataReductionOk() (*float32, bool) {
-	if o == nil || o.DataReduction == nil {
+	if o == nil || IsNil(o.DataReduction) {
 		return nil, false
 	}
 	return o.DataReduction, true
@@ -138,7 +142,7 @@ func (o *StoragePureArrayUtilization) GetDataReductionOk() (*float32, bool) {
 
 // HasDataReduction returns a boolean if a field has been set.
 func (o *StoragePureArrayUtilization) HasDataReduction() bool {
-	if o != nil && o.DataReduction != nil {
+	if o != nil && !IsNil(o.DataReduction) {
 		return true
 	}
 
@@ -152,7 +156,7 @@ func (o *StoragePureArrayUtilization) SetDataReduction(v float32) {
 
 // GetParity returns the Parity field value if set, zero value otherwise.
 func (o *StoragePureArrayUtilization) GetParity() float32 {
-	if o == nil || o.Parity == nil {
+	if o == nil || IsNil(o.Parity) {
 		var ret float32
 		return ret
 	}
@@ -162,7 +166,7 @@ func (o *StoragePureArrayUtilization) GetParity() float32 {
 // GetParityOk returns a tuple with the Parity field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StoragePureArrayUtilization) GetParityOk() (*float32, bool) {
-	if o == nil || o.Parity == nil {
+	if o == nil || IsNil(o.Parity) {
 		return nil, false
 	}
 	return o.Parity, true
@@ -170,7 +174,7 @@ func (o *StoragePureArrayUtilization) GetParityOk() (*float32, bool) {
 
 // HasParity returns a boolean if a field has been set.
 func (o *StoragePureArrayUtilization) HasParity() bool {
-	if o != nil && o.Parity != nil {
+	if o != nil && !IsNil(o.Parity) {
 		return true
 	}
 
@@ -184,7 +188,7 @@ func (o *StoragePureArrayUtilization) SetParity(v float32) {
 
 // GetProvisioned returns the Provisioned field value if set, zero value otherwise.
 func (o *StoragePureArrayUtilization) GetProvisioned() int64 {
-	if o == nil || o.Provisioned == nil {
+	if o == nil || IsNil(o.Provisioned) {
 		var ret int64
 		return ret
 	}
@@ -194,7 +198,7 @@ func (o *StoragePureArrayUtilization) GetProvisioned() int64 {
 // GetProvisionedOk returns a tuple with the Provisioned field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StoragePureArrayUtilization) GetProvisionedOk() (*int64, bool) {
-	if o == nil || o.Provisioned == nil {
+	if o == nil || IsNil(o.Provisioned) {
 		return nil, false
 	}
 	return o.Provisioned, true
@@ -202,7 +206,7 @@ func (o *StoragePureArrayUtilization) GetProvisionedOk() (*int64, bool) {
 
 // HasProvisioned returns a boolean if a field has been set.
 func (o *StoragePureArrayUtilization) HasProvisioned() bool {
-	if o != nil && o.Provisioned != nil {
+	if o != nil && !IsNil(o.Provisioned) {
 		return true
 	}
 
@@ -216,7 +220,7 @@ func (o *StoragePureArrayUtilization) SetProvisioned(v int64) {
 
 // GetShared returns the Shared field value if set, zero value otherwise.
 func (o *StoragePureArrayUtilization) GetShared() int64 {
-	if o == nil || o.Shared == nil {
+	if o == nil || IsNil(o.Shared) {
 		var ret int64
 		return ret
 	}
@@ -226,7 +230,7 @@ func (o *StoragePureArrayUtilization) GetShared() int64 {
 // GetSharedOk returns a tuple with the Shared field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StoragePureArrayUtilization) GetSharedOk() (*int64, bool) {
-	if o == nil || o.Shared == nil {
+	if o == nil || IsNil(o.Shared) {
 		return nil, false
 	}
 	return o.Shared, true
@@ -234,7 +238,7 @@ func (o *StoragePureArrayUtilization) GetSharedOk() (*int64, bool) {
 
 // HasShared returns a boolean if a field has been set.
 func (o *StoragePureArrayUtilization) HasShared() bool {
-	if o != nil && o.Shared != nil {
+	if o != nil && !IsNil(o.Shared) {
 		return true
 	}
 
@@ -248,7 +252,7 @@ func (o *StoragePureArrayUtilization) SetShared(v int64) {
 
 // GetSnapshot returns the Snapshot field value if set, zero value otherwise.
 func (o *StoragePureArrayUtilization) GetSnapshot() int64 {
-	if o == nil || o.Snapshot == nil {
+	if o == nil || IsNil(o.Snapshot) {
 		var ret int64
 		return ret
 	}
@@ -258,7 +262,7 @@ func (o *StoragePureArrayUtilization) GetSnapshot() int64 {
 // GetSnapshotOk returns a tuple with the Snapshot field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StoragePureArrayUtilization) GetSnapshotOk() (*int64, bool) {
-	if o == nil || o.Snapshot == nil {
+	if o == nil || IsNil(o.Snapshot) {
 		return nil, false
 	}
 	return o.Snapshot, true
@@ -266,7 +270,7 @@ func (o *StoragePureArrayUtilization) GetSnapshotOk() (*int64, bool) {
 
 // HasSnapshot returns a boolean if a field has been set.
 func (o *StoragePureArrayUtilization) HasSnapshot() bool {
-	if o != nil && o.Snapshot != nil {
+	if o != nil && !IsNil(o.Snapshot) {
 		return true
 	}
 
@@ -280,7 +284,7 @@ func (o *StoragePureArrayUtilization) SetSnapshot(v int64) {
 
 // GetSystem returns the System field value if set, zero value otherwise.
 func (o *StoragePureArrayUtilization) GetSystem() int64 {
-	if o == nil || o.System == nil {
+	if o == nil || IsNil(o.System) {
 		var ret int64
 		return ret
 	}
@@ -290,7 +294,7 @@ func (o *StoragePureArrayUtilization) GetSystem() int64 {
 // GetSystemOk returns a tuple with the System field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StoragePureArrayUtilization) GetSystemOk() (*int64, bool) {
-	if o == nil || o.System == nil {
+	if o == nil || IsNil(o.System) {
 		return nil, false
 	}
 	return o.System, true
@@ -298,7 +302,7 @@ func (o *StoragePureArrayUtilization) GetSystemOk() (*int64, bool) {
 
 // HasSystem returns a boolean if a field has been set.
 func (o *StoragePureArrayUtilization) HasSystem() bool {
-	if o != nil && o.System != nil {
+	if o != nil && !IsNil(o.System) {
 		return true
 	}
 
@@ -312,7 +316,7 @@ func (o *StoragePureArrayUtilization) SetSystem(v int64) {
 
 // GetThinProvisioned returns the ThinProvisioned field value if set, zero value otherwise.
 func (o *StoragePureArrayUtilization) GetThinProvisioned() float32 {
-	if o == nil || o.ThinProvisioned == nil {
+	if o == nil || IsNil(o.ThinProvisioned) {
 		var ret float32
 		return ret
 	}
@@ -322,7 +326,7 @@ func (o *StoragePureArrayUtilization) GetThinProvisioned() float32 {
 // GetThinProvisionedOk returns a tuple with the ThinProvisioned field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StoragePureArrayUtilization) GetThinProvisionedOk() (*float32, bool) {
-	if o == nil || o.ThinProvisioned == nil {
+	if o == nil || IsNil(o.ThinProvisioned) {
 		return nil, false
 	}
 	return o.ThinProvisioned, true
@@ -330,7 +334,7 @@ func (o *StoragePureArrayUtilization) GetThinProvisionedOk() (*float32, bool) {
 
 // HasThinProvisioned returns a boolean if a field has been set.
 func (o *StoragePureArrayUtilization) HasThinProvisioned() bool {
-	if o != nil && o.ThinProvisioned != nil {
+	if o != nil && !IsNil(o.ThinProvisioned) {
 		return true
 	}
 
@@ -344,7 +348,7 @@ func (o *StoragePureArrayUtilization) SetThinProvisioned(v float32) {
 
 // GetTotalReduction returns the TotalReduction field value if set, zero value otherwise.
 func (o *StoragePureArrayUtilization) GetTotalReduction() float32 {
-	if o == nil || o.TotalReduction == nil {
+	if o == nil || IsNil(o.TotalReduction) {
 		var ret float32
 		return ret
 	}
@@ -354,7 +358,7 @@ func (o *StoragePureArrayUtilization) GetTotalReduction() float32 {
 // GetTotalReductionOk returns a tuple with the TotalReduction field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StoragePureArrayUtilization) GetTotalReductionOk() (*float32, bool) {
-	if o == nil || o.TotalReduction == nil {
+	if o == nil || IsNil(o.TotalReduction) {
 		return nil, false
 	}
 	return o.TotalReduction, true
@@ -362,7 +366,7 @@ func (o *StoragePureArrayUtilization) GetTotalReductionOk() (*float32, bool) {
 
 // HasTotalReduction returns a boolean if a field has been set.
 func (o *StoragePureArrayUtilization) HasTotalReduction() bool {
-	if o != nil && o.TotalReduction != nil {
+	if o != nil && !IsNil(o.TotalReduction) {
 		return true
 	}
 
@@ -376,7 +380,7 @@ func (o *StoragePureArrayUtilization) SetTotalReduction(v float32) {
 
 // GetVolume returns the Volume field value if set, zero value otherwise.
 func (o *StoragePureArrayUtilization) GetVolume() int64 {
-	if o == nil || o.Volume == nil {
+	if o == nil || IsNil(o.Volume) {
 		var ret int64
 		return ret
 	}
@@ -386,7 +390,7 @@ func (o *StoragePureArrayUtilization) GetVolume() int64 {
 // GetVolumeOk returns a tuple with the Volume field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StoragePureArrayUtilization) GetVolumeOk() (*int64, bool) {
-	if o == nil || o.Volume == nil {
+	if o == nil || IsNil(o.Volume) {
 		return nil, false
 	}
 	return o.Volume, true
@@ -394,7 +398,7 @@ func (o *StoragePureArrayUtilization) GetVolumeOk() (*int64, bool) {
 
 // HasVolume returns a boolean if a field has been set.
 func (o *StoragePureArrayUtilization) HasVolume() bool {
-	if o != nil && o.Volume != nil {
+	if o != nil && !IsNil(o.Volume) {
 		return true
 	}
 
@@ -407,46 +411,50 @@ func (o *StoragePureArrayUtilization) SetVolume(v int64) {
 }
 
 func (o StoragePureArrayUtilization) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o StoragePureArrayUtilization) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedStorageBaseCapacity, errStorageBaseCapacity := json.Marshal(o.StorageBaseCapacity)
 	if errStorageBaseCapacity != nil {
-		return []byte{}, errStorageBaseCapacity
+		return map[string]interface{}{}, errStorageBaseCapacity
 	}
 	errStorageBaseCapacity = json.Unmarshal([]byte(serializedStorageBaseCapacity), &toSerialize)
 	if errStorageBaseCapacity != nil {
-		return []byte{}, errStorageBaseCapacity
+		return map[string]interface{}{}, errStorageBaseCapacity
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.DataReduction != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.DataReduction) {
 		toSerialize["DataReduction"] = o.DataReduction
 	}
-	if o.Parity != nil {
+	if !IsNil(o.Parity) {
 		toSerialize["Parity"] = o.Parity
 	}
-	if o.Provisioned != nil {
+	if !IsNil(o.Provisioned) {
 		toSerialize["Provisioned"] = o.Provisioned
 	}
-	if o.Shared != nil {
+	if !IsNil(o.Shared) {
 		toSerialize["Shared"] = o.Shared
 	}
-	if o.Snapshot != nil {
+	if !IsNil(o.Snapshot) {
 		toSerialize["Snapshot"] = o.Snapshot
 	}
-	if o.System != nil {
+	if !IsNil(o.System) {
 		toSerialize["System"] = o.System
 	}
-	if o.ThinProvisioned != nil {
+	if !IsNil(o.ThinProvisioned) {
 		toSerialize["ThinProvisioned"] = o.ThinProvisioned
 	}
-	if o.TotalReduction != nil {
+	if !IsNil(o.TotalReduction) {
 		toSerialize["TotalReduction"] = o.TotalReduction
 	}
-	if o.Volume != nil {
+	if !IsNil(o.Volume) {
 		toSerialize["Volume"] = o.Volume
 	}
 
@@ -454,10 +462,32 @@ func (o StoragePureArrayUtilization) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *StoragePureArrayUtilization) UnmarshalJSON(bytes []byte) (err error) {
+func (o *StoragePureArrayUtilization) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type StoragePureArrayUtilizationWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -485,7 +515,7 @@ func (o *StoragePureArrayUtilization) UnmarshalJSON(bytes []byte) (err error) {
 
 	varStoragePureArrayUtilizationWithoutEmbeddedStruct := StoragePureArrayUtilizationWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varStoragePureArrayUtilizationWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varStoragePureArrayUtilizationWithoutEmbeddedStruct)
 	if err == nil {
 		varStoragePureArrayUtilization := _StoragePureArrayUtilization{}
 		varStoragePureArrayUtilization.ClassId = varStoragePureArrayUtilizationWithoutEmbeddedStruct.ClassId
@@ -506,7 +536,7 @@ func (o *StoragePureArrayUtilization) UnmarshalJSON(bytes []byte) (err error) {
 
 	varStoragePureArrayUtilization := _StoragePureArrayUtilization{}
 
-	err = json.Unmarshal(bytes, &varStoragePureArrayUtilization)
+	err = json.Unmarshal(data, &varStoragePureArrayUtilization)
 	if err == nil {
 		o.StorageBaseCapacity = varStoragePureArrayUtilization.StorageBaseCapacity
 	} else {
@@ -515,7 +545,7 @@ func (o *StoragePureArrayUtilization) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "DataReduction")

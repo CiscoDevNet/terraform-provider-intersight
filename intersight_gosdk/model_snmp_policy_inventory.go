@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the SnmpPolicyInventory type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &SnmpPolicyInventory{}
 
 // SnmpPolicyInventory Policy to configure SNMP settings on endpoint.
 type SnmpPolicyInventory struct {
@@ -45,8 +49,8 @@ type SnmpPolicyInventory struct {
 	// State of the SNMP v2c on the endpoint. If enabled, the endpoint sends SNMP v2c properties to the designated host.
 	V2Enabled *bool `json:"V2Enabled,omitempty"`
 	// State of the SNMP v3 on the endpoint. If enabled, the endpoint sends SNMP v3 properties to the designated host.
-	V3Enabled            *bool                 `json:"V3Enabled,omitempty"`
-	TargetMo             *MoBaseMoRelationship `json:"TargetMo,omitempty"`
+	V3Enabled            *bool                        `json:"V3Enabled,omitempty"`
+	TargetMo             NullableMoBaseMoRelationship `json:"TargetMo,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -125,7 +129,7 @@ func (o *SnmpPolicyInventory) SetObjectType(v string) {
 
 // GetAccessCommunityString returns the AccessCommunityString field value if set, zero value otherwise.
 func (o *SnmpPolicyInventory) GetAccessCommunityString() string {
-	if o == nil || o.AccessCommunityString == nil {
+	if o == nil || IsNil(o.AccessCommunityString) {
 		var ret string
 		return ret
 	}
@@ -135,7 +139,7 @@ func (o *SnmpPolicyInventory) GetAccessCommunityString() string {
 // GetAccessCommunityStringOk returns a tuple with the AccessCommunityString field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SnmpPolicyInventory) GetAccessCommunityStringOk() (*string, bool) {
-	if o == nil || o.AccessCommunityString == nil {
+	if o == nil || IsNil(o.AccessCommunityString) {
 		return nil, false
 	}
 	return o.AccessCommunityString, true
@@ -143,7 +147,7 @@ func (o *SnmpPolicyInventory) GetAccessCommunityStringOk() (*string, bool) {
 
 // HasAccessCommunityString returns a boolean if a field has been set.
 func (o *SnmpPolicyInventory) HasAccessCommunityString() bool {
-	if o != nil && o.AccessCommunityString != nil {
+	if o != nil && !IsNil(o.AccessCommunityString) {
 		return true
 	}
 
@@ -157,7 +161,7 @@ func (o *SnmpPolicyInventory) SetAccessCommunityString(v string) {
 
 // GetCommunityAccess returns the CommunityAccess field value if set, zero value otherwise.
 func (o *SnmpPolicyInventory) GetCommunityAccess() string {
-	if o == nil || o.CommunityAccess == nil {
+	if o == nil || IsNil(o.CommunityAccess) {
 		var ret string
 		return ret
 	}
@@ -167,7 +171,7 @@ func (o *SnmpPolicyInventory) GetCommunityAccess() string {
 // GetCommunityAccessOk returns a tuple with the CommunityAccess field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SnmpPolicyInventory) GetCommunityAccessOk() (*string, bool) {
-	if o == nil || o.CommunityAccess == nil {
+	if o == nil || IsNil(o.CommunityAccess) {
 		return nil, false
 	}
 	return o.CommunityAccess, true
@@ -175,7 +179,7 @@ func (o *SnmpPolicyInventory) GetCommunityAccessOk() (*string, bool) {
 
 // HasCommunityAccess returns a boolean if a field has been set.
 func (o *SnmpPolicyInventory) HasCommunityAccess() bool {
-	if o != nil && o.CommunityAccess != nil {
+	if o != nil && !IsNil(o.CommunityAccess) {
 		return true
 	}
 
@@ -189,7 +193,7 @@ func (o *SnmpPolicyInventory) SetCommunityAccess(v string) {
 
 // GetEnabled returns the Enabled field value if set, zero value otherwise.
 func (o *SnmpPolicyInventory) GetEnabled() bool {
-	if o == nil || o.Enabled == nil {
+	if o == nil || IsNil(o.Enabled) {
 		var ret bool
 		return ret
 	}
@@ -199,7 +203,7 @@ func (o *SnmpPolicyInventory) GetEnabled() bool {
 // GetEnabledOk returns a tuple with the Enabled field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SnmpPolicyInventory) GetEnabledOk() (*bool, bool) {
-	if o == nil || o.Enabled == nil {
+	if o == nil || IsNil(o.Enabled) {
 		return nil, false
 	}
 	return o.Enabled, true
@@ -207,7 +211,7 @@ func (o *SnmpPolicyInventory) GetEnabledOk() (*bool, bool) {
 
 // HasEnabled returns a boolean if a field has been set.
 func (o *SnmpPolicyInventory) HasEnabled() bool {
-	if o != nil && o.Enabled != nil {
+	if o != nil && !IsNil(o.Enabled) {
 		return true
 	}
 
@@ -221,7 +225,7 @@ func (o *SnmpPolicyInventory) SetEnabled(v bool) {
 
 // GetEngineId returns the EngineId field value if set, zero value otherwise.
 func (o *SnmpPolicyInventory) GetEngineId() string {
-	if o == nil || o.EngineId == nil {
+	if o == nil || IsNil(o.EngineId) {
 		var ret string
 		return ret
 	}
@@ -231,7 +235,7 @@ func (o *SnmpPolicyInventory) GetEngineId() string {
 // GetEngineIdOk returns a tuple with the EngineId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SnmpPolicyInventory) GetEngineIdOk() (*string, bool) {
-	if o == nil || o.EngineId == nil {
+	if o == nil || IsNil(o.EngineId) {
 		return nil, false
 	}
 	return o.EngineId, true
@@ -239,7 +243,7 @@ func (o *SnmpPolicyInventory) GetEngineIdOk() (*string, bool) {
 
 // HasEngineId returns a boolean if a field has been set.
 func (o *SnmpPolicyInventory) HasEngineId() bool {
-	if o != nil && o.EngineId != nil {
+	if o != nil && !IsNil(o.EngineId) {
 		return true
 	}
 
@@ -253,7 +257,7 @@ func (o *SnmpPolicyInventory) SetEngineId(v string) {
 
 // GetSnmpPort returns the SnmpPort field value if set, zero value otherwise.
 func (o *SnmpPolicyInventory) GetSnmpPort() int64 {
-	if o == nil || o.SnmpPort == nil {
+	if o == nil || IsNil(o.SnmpPort) {
 		var ret int64
 		return ret
 	}
@@ -263,7 +267,7 @@ func (o *SnmpPolicyInventory) GetSnmpPort() int64 {
 // GetSnmpPortOk returns a tuple with the SnmpPort field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SnmpPolicyInventory) GetSnmpPortOk() (*int64, bool) {
-	if o == nil || o.SnmpPort == nil {
+	if o == nil || IsNil(o.SnmpPort) {
 		return nil, false
 	}
 	return o.SnmpPort, true
@@ -271,7 +275,7 @@ func (o *SnmpPolicyInventory) GetSnmpPortOk() (*int64, bool) {
 
 // HasSnmpPort returns a boolean if a field has been set.
 func (o *SnmpPolicyInventory) HasSnmpPort() bool {
-	if o != nil && o.SnmpPort != nil {
+	if o != nil && !IsNil(o.SnmpPort) {
 		return true
 	}
 
@@ -296,7 +300,7 @@ func (o *SnmpPolicyInventory) GetSnmpTraps() []SnmpTrap {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *SnmpPolicyInventory) GetSnmpTrapsOk() ([]SnmpTrap, bool) {
-	if o == nil || o.SnmpTraps == nil {
+	if o == nil || IsNil(o.SnmpTraps) {
 		return nil, false
 	}
 	return o.SnmpTraps, true
@@ -304,7 +308,7 @@ func (o *SnmpPolicyInventory) GetSnmpTrapsOk() ([]SnmpTrap, bool) {
 
 // HasSnmpTraps returns a boolean if a field has been set.
 func (o *SnmpPolicyInventory) HasSnmpTraps() bool {
-	if o != nil && o.SnmpTraps != nil {
+	if o != nil && IsNil(o.SnmpTraps) {
 		return true
 	}
 
@@ -329,7 +333,7 @@ func (o *SnmpPolicyInventory) GetSnmpUsers() []SnmpUser {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *SnmpPolicyInventory) GetSnmpUsersOk() ([]SnmpUser, bool) {
-	if o == nil || o.SnmpUsers == nil {
+	if o == nil || IsNil(o.SnmpUsers) {
 		return nil, false
 	}
 	return o.SnmpUsers, true
@@ -337,7 +341,7 @@ func (o *SnmpPolicyInventory) GetSnmpUsersOk() ([]SnmpUser, bool) {
 
 // HasSnmpUsers returns a boolean if a field has been set.
 func (o *SnmpPolicyInventory) HasSnmpUsers() bool {
-	if o != nil && o.SnmpUsers != nil {
+	if o != nil && IsNil(o.SnmpUsers) {
 		return true
 	}
 
@@ -351,7 +355,7 @@ func (o *SnmpPolicyInventory) SetSnmpUsers(v []SnmpUser) {
 
 // GetSysContact returns the SysContact field value if set, zero value otherwise.
 func (o *SnmpPolicyInventory) GetSysContact() string {
-	if o == nil || o.SysContact == nil {
+	if o == nil || IsNil(o.SysContact) {
 		var ret string
 		return ret
 	}
@@ -361,7 +365,7 @@ func (o *SnmpPolicyInventory) GetSysContact() string {
 // GetSysContactOk returns a tuple with the SysContact field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SnmpPolicyInventory) GetSysContactOk() (*string, bool) {
-	if o == nil || o.SysContact == nil {
+	if o == nil || IsNil(o.SysContact) {
 		return nil, false
 	}
 	return o.SysContact, true
@@ -369,7 +373,7 @@ func (o *SnmpPolicyInventory) GetSysContactOk() (*string, bool) {
 
 // HasSysContact returns a boolean if a field has been set.
 func (o *SnmpPolicyInventory) HasSysContact() bool {
-	if o != nil && o.SysContact != nil {
+	if o != nil && !IsNil(o.SysContact) {
 		return true
 	}
 
@@ -383,7 +387,7 @@ func (o *SnmpPolicyInventory) SetSysContact(v string) {
 
 // GetSysLocation returns the SysLocation field value if set, zero value otherwise.
 func (o *SnmpPolicyInventory) GetSysLocation() string {
-	if o == nil || o.SysLocation == nil {
+	if o == nil || IsNil(o.SysLocation) {
 		var ret string
 		return ret
 	}
@@ -393,7 +397,7 @@ func (o *SnmpPolicyInventory) GetSysLocation() string {
 // GetSysLocationOk returns a tuple with the SysLocation field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SnmpPolicyInventory) GetSysLocationOk() (*string, bool) {
-	if o == nil || o.SysLocation == nil {
+	if o == nil || IsNil(o.SysLocation) {
 		return nil, false
 	}
 	return o.SysLocation, true
@@ -401,7 +405,7 @@ func (o *SnmpPolicyInventory) GetSysLocationOk() (*string, bool) {
 
 // HasSysLocation returns a boolean if a field has been set.
 func (o *SnmpPolicyInventory) HasSysLocation() bool {
-	if o != nil && o.SysLocation != nil {
+	if o != nil && !IsNil(o.SysLocation) {
 		return true
 	}
 
@@ -415,7 +419,7 @@ func (o *SnmpPolicyInventory) SetSysLocation(v string) {
 
 // GetTrapCommunity returns the TrapCommunity field value if set, zero value otherwise.
 func (o *SnmpPolicyInventory) GetTrapCommunity() string {
-	if o == nil || o.TrapCommunity == nil {
+	if o == nil || IsNil(o.TrapCommunity) {
 		var ret string
 		return ret
 	}
@@ -425,7 +429,7 @@ func (o *SnmpPolicyInventory) GetTrapCommunity() string {
 // GetTrapCommunityOk returns a tuple with the TrapCommunity field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SnmpPolicyInventory) GetTrapCommunityOk() (*string, bool) {
-	if o == nil || o.TrapCommunity == nil {
+	if o == nil || IsNil(o.TrapCommunity) {
 		return nil, false
 	}
 	return o.TrapCommunity, true
@@ -433,7 +437,7 @@ func (o *SnmpPolicyInventory) GetTrapCommunityOk() (*string, bool) {
 
 // HasTrapCommunity returns a boolean if a field has been set.
 func (o *SnmpPolicyInventory) HasTrapCommunity() bool {
-	if o != nil && o.TrapCommunity != nil {
+	if o != nil && !IsNil(o.TrapCommunity) {
 		return true
 	}
 
@@ -447,7 +451,7 @@ func (o *SnmpPolicyInventory) SetTrapCommunity(v string) {
 
 // GetV2Enabled returns the V2Enabled field value if set, zero value otherwise.
 func (o *SnmpPolicyInventory) GetV2Enabled() bool {
-	if o == nil || o.V2Enabled == nil {
+	if o == nil || IsNil(o.V2Enabled) {
 		var ret bool
 		return ret
 	}
@@ -457,7 +461,7 @@ func (o *SnmpPolicyInventory) GetV2Enabled() bool {
 // GetV2EnabledOk returns a tuple with the V2Enabled field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SnmpPolicyInventory) GetV2EnabledOk() (*bool, bool) {
-	if o == nil || o.V2Enabled == nil {
+	if o == nil || IsNil(o.V2Enabled) {
 		return nil, false
 	}
 	return o.V2Enabled, true
@@ -465,7 +469,7 @@ func (o *SnmpPolicyInventory) GetV2EnabledOk() (*bool, bool) {
 
 // HasV2Enabled returns a boolean if a field has been set.
 func (o *SnmpPolicyInventory) HasV2Enabled() bool {
-	if o != nil && o.V2Enabled != nil {
+	if o != nil && !IsNil(o.V2Enabled) {
 		return true
 	}
 
@@ -479,7 +483,7 @@ func (o *SnmpPolicyInventory) SetV2Enabled(v bool) {
 
 // GetV3Enabled returns the V3Enabled field value if set, zero value otherwise.
 func (o *SnmpPolicyInventory) GetV3Enabled() bool {
-	if o == nil || o.V3Enabled == nil {
+	if o == nil || IsNil(o.V3Enabled) {
 		var ret bool
 		return ret
 	}
@@ -489,7 +493,7 @@ func (o *SnmpPolicyInventory) GetV3Enabled() bool {
 // GetV3EnabledOk returns a tuple with the V3Enabled field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SnmpPolicyInventory) GetV3EnabledOk() (*bool, bool) {
-	if o == nil || o.V3Enabled == nil {
+	if o == nil || IsNil(o.V3Enabled) {
 		return nil, false
 	}
 	return o.V3Enabled, true
@@ -497,7 +501,7 @@ func (o *SnmpPolicyInventory) GetV3EnabledOk() (*bool, bool) {
 
 // HasV3Enabled returns a boolean if a field has been set.
 func (o *SnmpPolicyInventory) HasV3Enabled() bool {
-	if o != nil && o.V3Enabled != nil {
+	if o != nil && !IsNil(o.V3Enabled) {
 		return true
 	}
 
@@ -509,67 +513,82 @@ func (o *SnmpPolicyInventory) SetV3Enabled(v bool) {
 	o.V3Enabled = &v
 }
 
-// GetTargetMo returns the TargetMo field value if set, zero value otherwise.
+// GetTargetMo returns the TargetMo field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *SnmpPolicyInventory) GetTargetMo() MoBaseMoRelationship {
-	if o == nil || o.TargetMo == nil {
+	if o == nil || IsNil(o.TargetMo.Get()) {
 		var ret MoBaseMoRelationship
 		return ret
 	}
-	return *o.TargetMo
+	return *o.TargetMo.Get()
 }
 
 // GetTargetMoOk returns a tuple with the TargetMo field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *SnmpPolicyInventory) GetTargetMoOk() (*MoBaseMoRelationship, bool) {
-	if o == nil || o.TargetMo == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.TargetMo, true
+	return o.TargetMo.Get(), o.TargetMo.IsSet()
 }
 
 // HasTargetMo returns a boolean if a field has been set.
 func (o *SnmpPolicyInventory) HasTargetMo() bool {
-	if o != nil && o.TargetMo != nil {
+	if o != nil && o.TargetMo.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetTargetMo gets a reference to the given MoBaseMoRelationship and assigns it to the TargetMo field.
+// SetTargetMo gets a reference to the given NullableMoBaseMoRelationship and assigns it to the TargetMo field.
 func (o *SnmpPolicyInventory) SetTargetMo(v MoBaseMoRelationship) {
-	o.TargetMo = &v
+	o.TargetMo.Set(&v)
+}
+
+// SetTargetMoNil sets the value for TargetMo to be an explicit nil
+func (o *SnmpPolicyInventory) SetTargetMoNil() {
+	o.TargetMo.Set(nil)
+}
+
+// UnsetTargetMo ensures that no value is present for TargetMo, not even an explicit nil
+func (o *SnmpPolicyInventory) UnsetTargetMo() {
+	o.TargetMo.Unset()
 }
 
 func (o SnmpPolicyInventory) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o SnmpPolicyInventory) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedPolicyAbstractPolicyInventory, errPolicyAbstractPolicyInventory := json.Marshal(o.PolicyAbstractPolicyInventory)
 	if errPolicyAbstractPolicyInventory != nil {
-		return []byte{}, errPolicyAbstractPolicyInventory
+		return map[string]interface{}{}, errPolicyAbstractPolicyInventory
 	}
 	errPolicyAbstractPolicyInventory = json.Unmarshal([]byte(serializedPolicyAbstractPolicyInventory), &toSerialize)
 	if errPolicyAbstractPolicyInventory != nil {
-		return []byte{}, errPolicyAbstractPolicyInventory
+		return map[string]interface{}{}, errPolicyAbstractPolicyInventory
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.AccessCommunityString != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.AccessCommunityString) {
 		toSerialize["AccessCommunityString"] = o.AccessCommunityString
 	}
-	if o.CommunityAccess != nil {
+	if !IsNil(o.CommunityAccess) {
 		toSerialize["CommunityAccess"] = o.CommunityAccess
 	}
-	if o.Enabled != nil {
+	if !IsNil(o.Enabled) {
 		toSerialize["Enabled"] = o.Enabled
 	}
-	if o.EngineId != nil {
+	if !IsNil(o.EngineId) {
 		toSerialize["EngineId"] = o.EngineId
 	}
-	if o.SnmpPort != nil {
+	if !IsNil(o.SnmpPort) {
 		toSerialize["SnmpPort"] = o.SnmpPort
 	}
 	if o.SnmpTraps != nil {
@@ -578,33 +597,55 @@ func (o SnmpPolicyInventory) MarshalJSON() ([]byte, error) {
 	if o.SnmpUsers != nil {
 		toSerialize["SnmpUsers"] = o.SnmpUsers
 	}
-	if o.SysContact != nil {
+	if !IsNil(o.SysContact) {
 		toSerialize["SysContact"] = o.SysContact
 	}
-	if o.SysLocation != nil {
+	if !IsNil(o.SysLocation) {
 		toSerialize["SysLocation"] = o.SysLocation
 	}
-	if o.TrapCommunity != nil {
+	if !IsNil(o.TrapCommunity) {
 		toSerialize["TrapCommunity"] = o.TrapCommunity
 	}
-	if o.V2Enabled != nil {
+	if !IsNil(o.V2Enabled) {
 		toSerialize["V2Enabled"] = o.V2Enabled
 	}
-	if o.V3Enabled != nil {
+	if !IsNil(o.V3Enabled) {
 		toSerialize["V3Enabled"] = o.V3Enabled
 	}
-	if o.TargetMo != nil {
-		toSerialize["TargetMo"] = o.TargetMo
+	if o.TargetMo.IsSet() {
+		toSerialize["TargetMo"] = o.TargetMo.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *SnmpPolicyInventory) UnmarshalJSON(bytes []byte) (err error) {
+func (o *SnmpPolicyInventory) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type SnmpPolicyInventoryWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -631,13 +672,13 @@ func (o *SnmpPolicyInventory) UnmarshalJSON(bytes []byte) (err error) {
 		// State of the SNMP v2c on the endpoint. If enabled, the endpoint sends SNMP v2c properties to the designated host.
 		V2Enabled *bool `json:"V2Enabled,omitempty"`
 		// State of the SNMP v3 on the endpoint. If enabled, the endpoint sends SNMP v3 properties to the designated host.
-		V3Enabled *bool                 `json:"V3Enabled,omitempty"`
-		TargetMo  *MoBaseMoRelationship `json:"TargetMo,omitempty"`
+		V3Enabled *bool                        `json:"V3Enabled,omitempty"`
+		TargetMo  NullableMoBaseMoRelationship `json:"TargetMo,omitempty"`
 	}
 
 	varSnmpPolicyInventoryWithoutEmbeddedStruct := SnmpPolicyInventoryWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varSnmpPolicyInventoryWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varSnmpPolicyInventoryWithoutEmbeddedStruct)
 	if err == nil {
 		varSnmpPolicyInventory := _SnmpPolicyInventory{}
 		varSnmpPolicyInventory.ClassId = varSnmpPolicyInventoryWithoutEmbeddedStruct.ClassId
@@ -662,7 +703,7 @@ func (o *SnmpPolicyInventory) UnmarshalJSON(bytes []byte) (err error) {
 
 	varSnmpPolicyInventory := _SnmpPolicyInventory{}
 
-	err = json.Unmarshal(bytes, &varSnmpPolicyInventory)
+	err = json.Unmarshal(data, &varSnmpPolicyInventory)
 	if err == nil {
 		o.PolicyAbstractPolicyInventory = varSnmpPolicyInventory.PolicyAbstractPolicyInventory
 	} else {
@@ -671,7 +712,7 @@ func (o *SnmpPolicyInventory) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "AccessCommunityString")

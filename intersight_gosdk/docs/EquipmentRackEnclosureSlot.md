@@ -8,10 +8,10 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "equipment.RackEnclosureSlot"]
 **RackId** | Pointer to **int64** | Server ID which is part of Rack Enclosure Slot. | [optional] [readonly] 
 **RackUnitDn** | Pointer to **string** | Server DN which is part of Rack Enclosure Slot. | [optional] [readonly] 
-**EquipmentRackEnclosure** | Pointer to [**EquipmentRackEnclosureRelationship**](EquipmentRackEnclosureRelationship.md) |  | [optional] 
-**InventoryDeviceInfo** | Pointer to [**InventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
-**RackUnit** | Pointer to [**ComputeRackUnitRelationship**](ComputeRackUnitRelationship.md) |  | [optional] 
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
+**EquipmentRackEnclosure** | Pointer to [**NullableEquipmentRackEnclosureRelationship**](EquipmentRackEnclosureRelationship.md) |  | [optional] 
+**InventoryDeviceInfo** | Pointer to [**NullableInventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
+**RackUnit** | Pointer to [**NullableComputeRackUnitRelationship**](ComputeRackUnitRelationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -147,6 +147,16 @@ SetEquipmentRackEnclosure sets EquipmentRackEnclosure field to given value.
 
 HasEquipmentRackEnclosure returns a boolean if a field has been set.
 
+### SetEquipmentRackEnclosureNil
+
+`func (o *EquipmentRackEnclosureSlot) SetEquipmentRackEnclosureNil(b bool)`
+
+ SetEquipmentRackEnclosureNil sets the value for EquipmentRackEnclosure to be an explicit nil
+
+### UnsetEquipmentRackEnclosure
+`func (o *EquipmentRackEnclosureSlot) UnsetEquipmentRackEnclosure()`
+
+UnsetEquipmentRackEnclosure ensures that no value is present for EquipmentRackEnclosure, not even an explicit nil
 ### GetInventoryDeviceInfo
 
 `func (o *EquipmentRackEnclosureSlot) GetInventoryDeviceInfo() InventoryDeviceInfoRelationship`
@@ -172,6 +182,16 @@ SetInventoryDeviceInfo sets InventoryDeviceInfo field to given value.
 
 HasInventoryDeviceInfo returns a boolean if a field has been set.
 
+### SetInventoryDeviceInfoNil
+
+`func (o *EquipmentRackEnclosureSlot) SetInventoryDeviceInfoNil(b bool)`
+
+ SetInventoryDeviceInfoNil sets the value for InventoryDeviceInfo to be an explicit nil
+
+### UnsetInventoryDeviceInfo
+`func (o *EquipmentRackEnclosureSlot) UnsetInventoryDeviceInfo()`
+
+UnsetInventoryDeviceInfo ensures that no value is present for InventoryDeviceInfo, not even an explicit nil
 ### GetRackUnit
 
 `func (o *EquipmentRackEnclosureSlot) GetRackUnit() ComputeRackUnitRelationship`
@@ -197,6 +217,16 @@ SetRackUnit sets RackUnit field to given value.
 
 HasRackUnit returns a boolean if a field has been set.
 
+### SetRackUnitNil
+
+`func (o *EquipmentRackEnclosureSlot) SetRackUnitNil(b bool)`
+
+ SetRackUnitNil sets the value for RackUnit to be an explicit nil
+
+### UnsetRackUnit
+`func (o *EquipmentRackEnclosureSlot) UnsetRackUnit()`
+
+UnsetRackUnit ensures that no value is present for RackUnit, not even an explicit nil
 ### GetRegisteredDevice
 
 `func (o *EquipmentRackEnclosureSlot) GetRegisteredDevice() AssetDeviceRegistrationRelationship`
@@ -222,6 +252,16 @@ SetRegisteredDevice sets RegisteredDevice field to given value.
 
 HasRegisteredDevice returns a boolean if a field has been set.
 
+### SetRegisteredDeviceNil
+
+`func (o *EquipmentRackEnclosureSlot) SetRegisteredDeviceNil(b bool)`
+
+ SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+
+### UnsetRegisteredDevice
+`func (o *EquipmentRackEnclosureSlot) UnsetRegisteredDevice()`
+
+UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

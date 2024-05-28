@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the CondHclStatusDetail type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &CondHclStatusDetail{}
 
 // CondHclStatusDetail The HCL status detail for each component firmware and driver.
 type CondHclStatusDetail struct {
@@ -51,9 +55,9 @@ type CondHclStatusDetail struct {
 	// The firmware, driver name and driver version are considered as part of the software profile for the component. This will provide the HCL validation status for the software profile. The reasons can be one of the following \"Incompatible-Firmware\" - the component's firmware is not listed under the server's hardware and software profile and the component's hardware profile \"Incompatible-Driver\" - the component's driver is not listed under the server's hardware and software profile and the component's hardware profile \"Incompatible-Firmware-Driver\" - the component's firmware and driver are not listed under the server's hardware and software profile and the component's hardware profile \"Service-Unavailable\" - HCL data service is unavailable at the moment (try again later). This could be due to HCL data updating \"Not-Evaluated\" - the component's hardware status was not evaluated because the server's hardware or software profile is not listed or server is exempted. \"Compatible\" - this component's hardware profile is listed in the HCL. * `Missing-Os-Driver-Info` - The validation failed becaue the given server has no OS driver information available in the inventory. Either install ucstools vib or use power shell scripts to tag proper OS information. * `Incompatible-Server-With-Component` - The validation failed for this component because he server model and component model combination was not found in the HCL. * `Incompatible-Processor` - The validation failed because the given processor was not found for the given server PID. * `Incompatible-Os-Info` - The validation failed because the given OS vendor and version was not found in HCL for the server PID and processor combination. * `Incompatible-Component-Model` - The validation failed because the given Component model was not found in the HCL for the given server PID, processor, server Firmware and OS vendor and version. * `Incompatible-Firmware` - The validation failed because the given server firmware or adapter firmware was not found in the HCL for the given server PID, processor, OS vendor and version and component model. * `Incompatible-Driver` - The validation failed because the given driver version was not found in the HCL for the given Server PID, processor, OS vendor and version, server firmware and component firmware. * `Incompatible-Firmware-Driver` - The validation failed because the given component firmware and driver version was not found in the HCL for the given Server PID, processor, OS vendor and version and server firmware. * `Service-Unavailable` - The validation has failed because HCL data service is temporarily not available. The server will be re-evaluated once HCL data service is back online or finished importing new HCL data. * `Service-Error` - The validation has failed because the HCL data service has return a service error or unrecognized result. * `Unrecognized-Protocol` - The validation has failed for the HCL component because the HCL data service has return a validation reason that is unknown to this service. This reason is used as a default failure reason reason in case we cannot map the error reason received from the HCL data service unto one of the other enum values. * `Not-Evaluated` - The validation for the hardware or software HCL status was not yet evaluated because some previous validation had failed. For example if a server's hardware profile fails to validate with HCL, then the server's software status will not be evaluated. * `Compatible` - The validation has passed for this server PID, processor, OS vendor and version, component model, component firmware and driver version.
 	SoftwareStatus *string `json:"SoftwareStatus,omitempty"`
 	// The status for the component model, firmware version, driver name, and driver version after validating against the HCL. The status can be one of the following \"Unknown\" - we do not have enough information to evaluate against the HCL data \"Validated\" - we have validated this component against the HCL and it has \"Validated\" status \"Not-Validated\" - we have validated this component against the HCL and it has \"Not-Validated\" status. \"Not-Evaluated\" - The component is not evaluated against the HCL because the server is exempted. * `Incomplete` - This means we do not have os information in Intersight for this server. Either install ucstools vib or use power shell scripts to tag proper OS information. * `Not-Found` - At HclStatus level, this means that one of the components has failed validation. At HclStatusDetail level, this means that his component's hardware or software profile was not found in the HCL. * `Not-Listed` - At the HclStatus level, this means that some part of the HCL validation has failed. This could be that either the server's hardware or software profile was not listed in the HCL or one of the components' hardware or software profile was not found in the HCL. * `Validated` - At the HclStatus level, this means that all of the components have passed validation. At HclStatusDetail level, this means that the component's hardware or software profile was found in the HCL. * `Not-Evaluated` - At the HclStatus level this means that this means that SW or Component status has not been evaluated as the previous evaluation step has not passed yet. At the HclStatusDetail level this means that either HW or SW status has not been evaluted because a previous evaluation step has not passed yet.
-	Status               *string                    `json:"Status,omitempty"`
-	Component            *InventoryBaseRelationship `json:"Component,omitempty"`
-	HclStatus            *CondHclStatusRelationship `json:"HclStatus,omitempty"`
+	Status               *string                           `json:"Status,omitempty"`
+	Component            NullableInventoryBaseRelationship `json:"Component,omitempty"`
+	HclStatus            NullableCondHclStatusRelationship `json:"HclStatus,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -132,7 +136,7 @@ func (o *CondHclStatusDetail) SetObjectType(v string) {
 
 // GetHardwareStatus returns the HardwareStatus field value if set, zero value otherwise.
 func (o *CondHclStatusDetail) GetHardwareStatus() string {
-	if o == nil || o.HardwareStatus == nil {
+	if o == nil || IsNil(o.HardwareStatus) {
 		var ret string
 		return ret
 	}
@@ -142,7 +146,7 @@ func (o *CondHclStatusDetail) GetHardwareStatus() string {
 // GetHardwareStatusOk returns a tuple with the HardwareStatus field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CondHclStatusDetail) GetHardwareStatusOk() (*string, bool) {
-	if o == nil || o.HardwareStatus == nil {
+	if o == nil || IsNil(o.HardwareStatus) {
 		return nil, false
 	}
 	return o.HardwareStatus, true
@@ -150,7 +154,7 @@ func (o *CondHclStatusDetail) GetHardwareStatusOk() (*string, bool) {
 
 // HasHardwareStatus returns a boolean if a field has been set.
 func (o *CondHclStatusDetail) HasHardwareStatus() bool {
-	if o != nil && o.HardwareStatus != nil {
+	if o != nil && !IsNil(o.HardwareStatus) {
 		return true
 	}
 
@@ -164,7 +168,7 @@ func (o *CondHclStatusDetail) SetHardwareStatus(v string) {
 
 // GetHclCimcVersion returns the HclCimcVersion field value if set, zero value otherwise.
 func (o *CondHclStatusDetail) GetHclCimcVersion() string {
-	if o == nil || o.HclCimcVersion == nil {
+	if o == nil || IsNil(o.HclCimcVersion) {
 		var ret string
 		return ret
 	}
@@ -174,7 +178,7 @@ func (o *CondHclStatusDetail) GetHclCimcVersion() string {
 // GetHclCimcVersionOk returns a tuple with the HclCimcVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CondHclStatusDetail) GetHclCimcVersionOk() (*string, bool) {
-	if o == nil || o.HclCimcVersion == nil {
+	if o == nil || IsNil(o.HclCimcVersion) {
 		return nil, false
 	}
 	return o.HclCimcVersion, true
@@ -182,7 +186,7 @@ func (o *CondHclStatusDetail) GetHclCimcVersionOk() (*string, bool) {
 
 // HasHclCimcVersion returns a boolean if a field has been set.
 func (o *CondHclStatusDetail) HasHclCimcVersion() bool {
-	if o != nil && o.HclCimcVersion != nil {
+	if o != nil && !IsNil(o.HclCimcVersion) {
 		return true
 	}
 
@@ -196,7 +200,7 @@ func (o *CondHclStatusDetail) SetHclCimcVersion(v string) {
 
 // GetHclDriverName returns the HclDriverName field value if set, zero value otherwise.
 func (o *CondHclStatusDetail) GetHclDriverName() string {
-	if o == nil || o.HclDriverName == nil {
+	if o == nil || IsNil(o.HclDriverName) {
 		var ret string
 		return ret
 	}
@@ -206,7 +210,7 @@ func (o *CondHclStatusDetail) GetHclDriverName() string {
 // GetHclDriverNameOk returns a tuple with the HclDriverName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CondHclStatusDetail) GetHclDriverNameOk() (*string, bool) {
-	if o == nil || o.HclDriverName == nil {
+	if o == nil || IsNil(o.HclDriverName) {
 		return nil, false
 	}
 	return o.HclDriverName, true
@@ -214,7 +218,7 @@ func (o *CondHclStatusDetail) GetHclDriverNameOk() (*string, bool) {
 
 // HasHclDriverName returns a boolean if a field has been set.
 func (o *CondHclStatusDetail) HasHclDriverName() bool {
-	if o != nil && o.HclDriverName != nil {
+	if o != nil && !IsNil(o.HclDriverName) {
 		return true
 	}
 
@@ -228,7 +232,7 @@ func (o *CondHclStatusDetail) SetHclDriverName(v string) {
 
 // GetHclDriverVersion returns the HclDriverVersion field value if set, zero value otherwise.
 func (o *CondHclStatusDetail) GetHclDriverVersion() string {
-	if o == nil || o.HclDriverVersion == nil {
+	if o == nil || IsNil(o.HclDriverVersion) {
 		var ret string
 		return ret
 	}
@@ -238,7 +242,7 @@ func (o *CondHclStatusDetail) GetHclDriverVersion() string {
 // GetHclDriverVersionOk returns a tuple with the HclDriverVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CondHclStatusDetail) GetHclDriverVersionOk() (*string, bool) {
-	if o == nil || o.HclDriverVersion == nil {
+	if o == nil || IsNil(o.HclDriverVersion) {
 		return nil, false
 	}
 	return o.HclDriverVersion, true
@@ -246,7 +250,7 @@ func (o *CondHclStatusDetail) GetHclDriverVersionOk() (*string, bool) {
 
 // HasHclDriverVersion returns a boolean if a field has been set.
 func (o *CondHclStatusDetail) HasHclDriverVersion() bool {
-	if o != nil && o.HclDriverVersion != nil {
+	if o != nil && !IsNil(o.HclDriverVersion) {
 		return true
 	}
 
@@ -260,7 +264,7 @@ func (o *CondHclStatusDetail) SetHclDriverVersion(v string) {
 
 // GetHclFirmwareVersion returns the HclFirmwareVersion field value if set, zero value otherwise.
 func (o *CondHclStatusDetail) GetHclFirmwareVersion() string {
-	if o == nil || o.HclFirmwareVersion == nil {
+	if o == nil || IsNil(o.HclFirmwareVersion) {
 		var ret string
 		return ret
 	}
@@ -270,7 +274,7 @@ func (o *CondHclStatusDetail) GetHclFirmwareVersion() string {
 // GetHclFirmwareVersionOk returns a tuple with the HclFirmwareVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CondHclStatusDetail) GetHclFirmwareVersionOk() (*string, bool) {
-	if o == nil || o.HclFirmwareVersion == nil {
+	if o == nil || IsNil(o.HclFirmwareVersion) {
 		return nil, false
 	}
 	return o.HclFirmwareVersion, true
@@ -278,7 +282,7 @@ func (o *CondHclStatusDetail) GetHclFirmwareVersionOk() (*string, bool) {
 
 // HasHclFirmwareVersion returns a boolean if a field has been set.
 func (o *CondHclStatusDetail) HasHclFirmwareVersion() bool {
-	if o != nil && o.HclFirmwareVersion != nil {
+	if o != nil && !IsNil(o.HclFirmwareVersion) {
 		return true
 	}
 
@@ -292,7 +296,7 @@ func (o *CondHclStatusDetail) SetHclFirmwareVersion(v string) {
 
 // GetHclModel returns the HclModel field value if set, zero value otherwise.
 func (o *CondHclStatusDetail) GetHclModel() string {
-	if o == nil || o.HclModel == nil {
+	if o == nil || IsNil(o.HclModel) {
 		var ret string
 		return ret
 	}
@@ -302,7 +306,7 @@ func (o *CondHclStatusDetail) GetHclModel() string {
 // GetHclModelOk returns a tuple with the HclModel field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CondHclStatusDetail) GetHclModelOk() (*string, bool) {
-	if o == nil || o.HclModel == nil {
+	if o == nil || IsNil(o.HclModel) {
 		return nil, false
 	}
 	return o.HclModel, true
@@ -310,7 +314,7 @@ func (o *CondHclStatusDetail) GetHclModelOk() (*string, bool) {
 
 // HasHclModel returns a boolean if a field has been set.
 func (o *CondHclStatusDetail) HasHclModel() bool {
-	if o != nil && o.HclModel != nil {
+	if o != nil && !IsNil(o.HclModel) {
 		return true
 	}
 
@@ -324,7 +328,7 @@ func (o *CondHclStatusDetail) SetHclModel(v string) {
 
 // GetInvCimcVersion returns the InvCimcVersion field value if set, zero value otherwise.
 func (o *CondHclStatusDetail) GetInvCimcVersion() string {
-	if o == nil || o.InvCimcVersion == nil {
+	if o == nil || IsNil(o.InvCimcVersion) {
 		var ret string
 		return ret
 	}
@@ -334,7 +338,7 @@ func (o *CondHclStatusDetail) GetInvCimcVersion() string {
 // GetInvCimcVersionOk returns a tuple with the InvCimcVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CondHclStatusDetail) GetInvCimcVersionOk() (*string, bool) {
-	if o == nil || o.InvCimcVersion == nil {
+	if o == nil || IsNil(o.InvCimcVersion) {
 		return nil, false
 	}
 	return o.InvCimcVersion, true
@@ -342,7 +346,7 @@ func (o *CondHclStatusDetail) GetInvCimcVersionOk() (*string, bool) {
 
 // HasInvCimcVersion returns a boolean if a field has been set.
 func (o *CondHclStatusDetail) HasInvCimcVersion() bool {
-	if o != nil && o.InvCimcVersion != nil {
+	if o != nil && !IsNil(o.InvCimcVersion) {
 		return true
 	}
 
@@ -356,7 +360,7 @@ func (o *CondHclStatusDetail) SetInvCimcVersion(v string) {
 
 // GetInvDriverName returns the InvDriverName field value if set, zero value otherwise.
 func (o *CondHclStatusDetail) GetInvDriverName() string {
-	if o == nil || o.InvDriverName == nil {
+	if o == nil || IsNil(o.InvDriverName) {
 		var ret string
 		return ret
 	}
@@ -366,7 +370,7 @@ func (o *CondHclStatusDetail) GetInvDriverName() string {
 // GetInvDriverNameOk returns a tuple with the InvDriverName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CondHclStatusDetail) GetInvDriverNameOk() (*string, bool) {
-	if o == nil || o.InvDriverName == nil {
+	if o == nil || IsNil(o.InvDriverName) {
 		return nil, false
 	}
 	return o.InvDriverName, true
@@ -374,7 +378,7 @@ func (o *CondHclStatusDetail) GetInvDriverNameOk() (*string, bool) {
 
 // HasInvDriverName returns a boolean if a field has been set.
 func (o *CondHclStatusDetail) HasInvDriverName() bool {
-	if o != nil && o.InvDriverName != nil {
+	if o != nil && !IsNil(o.InvDriverName) {
 		return true
 	}
 
@@ -388,7 +392,7 @@ func (o *CondHclStatusDetail) SetInvDriverName(v string) {
 
 // GetInvDriverVersion returns the InvDriverVersion field value if set, zero value otherwise.
 func (o *CondHclStatusDetail) GetInvDriverVersion() string {
-	if o == nil || o.InvDriverVersion == nil {
+	if o == nil || IsNil(o.InvDriverVersion) {
 		var ret string
 		return ret
 	}
@@ -398,7 +402,7 @@ func (o *CondHclStatusDetail) GetInvDriverVersion() string {
 // GetInvDriverVersionOk returns a tuple with the InvDriverVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CondHclStatusDetail) GetInvDriverVersionOk() (*string, bool) {
-	if o == nil || o.InvDriverVersion == nil {
+	if o == nil || IsNil(o.InvDriverVersion) {
 		return nil, false
 	}
 	return o.InvDriverVersion, true
@@ -406,7 +410,7 @@ func (o *CondHclStatusDetail) GetInvDriverVersionOk() (*string, bool) {
 
 // HasInvDriverVersion returns a boolean if a field has been set.
 func (o *CondHclStatusDetail) HasInvDriverVersion() bool {
-	if o != nil && o.InvDriverVersion != nil {
+	if o != nil && !IsNil(o.InvDriverVersion) {
 		return true
 	}
 
@@ -420,7 +424,7 @@ func (o *CondHclStatusDetail) SetInvDriverVersion(v string) {
 
 // GetInvFirmwareVersion returns the InvFirmwareVersion field value if set, zero value otherwise.
 func (o *CondHclStatusDetail) GetInvFirmwareVersion() string {
-	if o == nil || o.InvFirmwareVersion == nil {
+	if o == nil || IsNil(o.InvFirmwareVersion) {
 		var ret string
 		return ret
 	}
@@ -430,7 +434,7 @@ func (o *CondHclStatusDetail) GetInvFirmwareVersion() string {
 // GetInvFirmwareVersionOk returns a tuple with the InvFirmwareVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CondHclStatusDetail) GetInvFirmwareVersionOk() (*string, bool) {
-	if o == nil || o.InvFirmwareVersion == nil {
+	if o == nil || IsNil(o.InvFirmwareVersion) {
 		return nil, false
 	}
 	return o.InvFirmwareVersion, true
@@ -438,7 +442,7 @@ func (o *CondHclStatusDetail) GetInvFirmwareVersionOk() (*string, bool) {
 
 // HasInvFirmwareVersion returns a boolean if a field has been set.
 func (o *CondHclStatusDetail) HasInvFirmwareVersion() bool {
-	if o != nil && o.InvFirmwareVersion != nil {
+	if o != nil && !IsNil(o.InvFirmwareVersion) {
 		return true
 	}
 
@@ -452,7 +456,7 @@ func (o *CondHclStatusDetail) SetInvFirmwareVersion(v string) {
 
 // GetInvModel returns the InvModel field value if set, zero value otherwise.
 func (o *CondHclStatusDetail) GetInvModel() string {
-	if o == nil || o.InvModel == nil {
+	if o == nil || IsNil(o.InvModel) {
 		var ret string
 		return ret
 	}
@@ -462,7 +466,7 @@ func (o *CondHclStatusDetail) GetInvModel() string {
 // GetInvModelOk returns a tuple with the InvModel field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CondHclStatusDetail) GetInvModelOk() (*string, bool) {
-	if o == nil || o.InvModel == nil {
+	if o == nil || IsNil(o.InvModel) {
 		return nil, false
 	}
 	return o.InvModel, true
@@ -470,7 +474,7 @@ func (o *CondHclStatusDetail) GetInvModelOk() (*string, bool) {
 
 // HasInvModel returns a boolean if a field has been set.
 func (o *CondHclStatusDetail) HasInvModel() bool {
-	if o != nil && o.InvModel != nil {
+	if o != nil && !IsNil(o.InvModel) {
 		return true
 	}
 
@@ -484,7 +488,7 @@ func (o *CondHclStatusDetail) SetInvModel(v string) {
 
 // GetReason returns the Reason field value if set, zero value otherwise.
 func (o *CondHclStatusDetail) GetReason() string {
-	if o == nil || o.Reason == nil {
+	if o == nil || IsNil(o.Reason) {
 		var ret string
 		return ret
 	}
@@ -494,7 +498,7 @@ func (o *CondHclStatusDetail) GetReason() string {
 // GetReasonOk returns a tuple with the Reason field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CondHclStatusDetail) GetReasonOk() (*string, bool) {
-	if o == nil || o.Reason == nil {
+	if o == nil || IsNil(o.Reason) {
 		return nil, false
 	}
 	return o.Reason, true
@@ -502,7 +506,7 @@ func (o *CondHclStatusDetail) GetReasonOk() (*string, bool) {
 
 // HasReason returns a boolean if a field has been set.
 func (o *CondHclStatusDetail) HasReason() bool {
-	if o != nil && o.Reason != nil {
+	if o != nil && !IsNil(o.Reason) {
 		return true
 	}
 
@@ -516,7 +520,7 @@ func (o *CondHclStatusDetail) SetReason(v string) {
 
 // GetSoftwareStatus returns the SoftwareStatus field value if set, zero value otherwise.
 func (o *CondHclStatusDetail) GetSoftwareStatus() string {
-	if o == nil || o.SoftwareStatus == nil {
+	if o == nil || IsNil(o.SoftwareStatus) {
 		var ret string
 		return ret
 	}
@@ -526,7 +530,7 @@ func (o *CondHclStatusDetail) GetSoftwareStatus() string {
 // GetSoftwareStatusOk returns a tuple with the SoftwareStatus field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CondHclStatusDetail) GetSoftwareStatusOk() (*string, bool) {
-	if o == nil || o.SoftwareStatus == nil {
+	if o == nil || IsNil(o.SoftwareStatus) {
 		return nil, false
 	}
 	return o.SoftwareStatus, true
@@ -534,7 +538,7 @@ func (o *CondHclStatusDetail) GetSoftwareStatusOk() (*string, bool) {
 
 // HasSoftwareStatus returns a boolean if a field has been set.
 func (o *CondHclStatusDetail) HasSoftwareStatus() bool {
-	if o != nil && o.SoftwareStatus != nil {
+	if o != nil && !IsNil(o.SoftwareStatus) {
 		return true
 	}
 
@@ -548,7 +552,7 @@ func (o *CondHclStatusDetail) SetSoftwareStatus(v string) {
 
 // GetStatus returns the Status field value if set, zero value otherwise.
 func (o *CondHclStatusDetail) GetStatus() string {
-	if o == nil || o.Status == nil {
+	if o == nil || IsNil(o.Status) {
 		var ret string
 		return ret
 	}
@@ -558,7 +562,7 @@ func (o *CondHclStatusDetail) GetStatus() string {
 // GetStatusOk returns a tuple with the Status field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CondHclStatusDetail) GetStatusOk() (*string, bool) {
-	if o == nil || o.Status == nil {
+	if o == nil || IsNil(o.Status) {
 		return nil, false
 	}
 	return o.Status, true
@@ -566,7 +570,7 @@ func (o *CondHclStatusDetail) GetStatusOk() (*string, bool) {
 
 // HasStatus returns a boolean if a field has been set.
 func (o *CondHclStatusDetail) HasStatus() bool {
-	if o != nil && o.Status != nil {
+	if o != nil && !IsNil(o.Status) {
 		return true
 	}
 
@@ -578,143 +582,191 @@ func (o *CondHclStatusDetail) SetStatus(v string) {
 	o.Status = &v
 }
 
-// GetComponent returns the Component field value if set, zero value otherwise.
+// GetComponent returns the Component field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CondHclStatusDetail) GetComponent() InventoryBaseRelationship {
-	if o == nil || o.Component == nil {
+	if o == nil || IsNil(o.Component.Get()) {
 		var ret InventoryBaseRelationship
 		return ret
 	}
-	return *o.Component
+	return *o.Component.Get()
 }
 
 // GetComponentOk returns a tuple with the Component field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CondHclStatusDetail) GetComponentOk() (*InventoryBaseRelationship, bool) {
-	if o == nil || o.Component == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Component, true
+	return o.Component.Get(), o.Component.IsSet()
 }
 
 // HasComponent returns a boolean if a field has been set.
 func (o *CondHclStatusDetail) HasComponent() bool {
-	if o != nil && o.Component != nil {
+	if o != nil && o.Component.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetComponent gets a reference to the given InventoryBaseRelationship and assigns it to the Component field.
+// SetComponent gets a reference to the given NullableInventoryBaseRelationship and assigns it to the Component field.
 func (o *CondHclStatusDetail) SetComponent(v InventoryBaseRelationship) {
-	o.Component = &v
+	o.Component.Set(&v)
 }
 
-// GetHclStatus returns the HclStatus field value if set, zero value otherwise.
+// SetComponentNil sets the value for Component to be an explicit nil
+func (o *CondHclStatusDetail) SetComponentNil() {
+	o.Component.Set(nil)
+}
+
+// UnsetComponent ensures that no value is present for Component, not even an explicit nil
+func (o *CondHclStatusDetail) UnsetComponent() {
+	o.Component.Unset()
+}
+
+// GetHclStatus returns the HclStatus field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CondHclStatusDetail) GetHclStatus() CondHclStatusRelationship {
-	if o == nil || o.HclStatus == nil {
+	if o == nil || IsNil(o.HclStatus.Get()) {
 		var ret CondHclStatusRelationship
 		return ret
 	}
-	return *o.HclStatus
+	return *o.HclStatus.Get()
 }
 
 // GetHclStatusOk returns a tuple with the HclStatus field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CondHclStatusDetail) GetHclStatusOk() (*CondHclStatusRelationship, bool) {
-	if o == nil || o.HclStatus == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.HclStatus, true
+	return o.HclStatus.Get(), o.HclStatus.IsSet()
 }
 
 // HasHclStatus returns a boolean if a field has been set.
 func (o *CondHclStatusDetail) HasHclStatus() bool {
-	if o != nil && o.HclStatus != nil {
+	if o != nil && o.HclStatus.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetHclStatus gets a reference to the given CondHclStatusRelationship and assigns it to the HclStatus field.
+// SetHclStatus gets a reference to the given NullableCondHclStatusRelationship and assigns it to the HclStatus field.
 func (o *CondHclStatusDetail) SetHclStatus(v CondHclStatusRelationship) {
-	o.HclStatus = &v
+	o.HclStatus.Set(&v)
+}
+
+// SetHclStatusNil sets the value for HclStatus to be an explicit nil
+func (o *CondHclStatusDetail) SetHclStatusNil() {
+	o.HclStatus.Set(nil)
+}
+
+// UnsetHclStatus ensures that no value is present for HclStatus, not even an explicit nil
+func (o *CondHclStatusDetail) UnsetHclStatus() {
+	o.HclStatus.Unset()
 }
 
 func (o CondHclStatusDetail) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o CondHclStatusDetail) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.HardwareStatus != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.HardwareStatus) {
 		toSerialize["HardwareStatus"] = o.HardwareStatus
 	}
-	if o.HclCimcVersion != nil {
+	if !IsNil(o.HclCimcVersion) {
 		toSerialize["HclCimcVersion"] = o.HclCimcVersion
 	}
-	if o.HclDriverName != nil {
+	if !IsNil(o.HclDriverName) {
 		toSerialize["HclDriverName"] = o.HclDriverName
 	}
-	if o.HclDriverVersion != nil {
+	if !IsNil(o.HclDriverVersion) {
 		toSerialize["HclDriverVersion"] = o.HclDriverVersion
 	}
-	if o.HclFirmwareVersion != nil {
+	if !IsNil(o.HclFirmwareVersion) {
 		toSerialize["HclFirmwareVersion"] = o.HclFirmwareVersion
 	}
-	if o.HclModel != nil {
+	if !IsNil(o.HclModel) {
 		toSerialize["HclModel"] = o.HclModel
 	}
-	if o.InvCimcVersion != nil {
+	if !IsNil(o.InvCimcVersion) {
 		toSerialize["InvCimcVersion"] = o.InvCimcVersion
 	}
-	if o.InvDriverName != nil {
+	if !IsNil(o.InvDriverName) {
 		toSerialize["InvDriverName"] = o.InvDriverName
 	}
-	if o.InvDriverVersion != nil {
+	if !IsNil(o.InvDriverVersion) {
 		toSerialize["InvDriverVersion"] = o.InvDriverVersion
 	}
-	if o.InvFirmwareVersion != nil {
+	if !IsNil(o.InvFirmwareVersion) {
 		toSerialize["InvFirmwareVersion"] = o.InvFirmwareVersion
 	}
-	if o.InvModel != nil {
+	if !IsNil(o.InvModel) {
 		toSerialize["InvModel"] = o.InvModel
 	}
-	if o.Reason != nil {
+	if !IsNil(o.Reason) {
 		toSerialize["Reason"] = o.Reason
 	}
-	if o.SoftwareStatus != nil {
+	if !IsNil(o.SoftwareStatus) {
 		toSerialize["SoftwareStatus"] = o.SoftwareStatus
 	}
-	if o.Status != nil {
+	if !IsNil(o.Status) {
 		toSerialize["Status"] = o.Status
 	}
-	if o.Component != nil {
-		toSerialize["Component"] = o.Component
+	if o.Component.IsSet() {
+		toSerialize["Component"] = o.Component.Get()
 	}
-	if o.HclStatus != nil {
-		toSerialize["HclStatus"] = o.HclStatus
+	if o.HclStatus.IsSet() {
+		toSerialize["HclStatus"] = o.HclStatus.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *CondHclStatusDetail) UnmarshalJSON(bytes []byte) (err error) {
+func (o *CondHclStatusDetail) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type CondHclStatusDetailWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -747,14 +799,14 @@ func (o *CondHclStatusDetail) UnmarshalJSON(bytes []byte) (err error) {
 		// The firmware, driver name and driver version are considered as part of the software profile for the component. This will provide the HCL validation status for the software profile. The reasons can be one of the following \"Incompatible-Firmware\" - the component's firmware is not listed under the server's hardware and software profile and the component's hardware profile \"Incompatible-Driver\" - the component's driver is not listed under the server's hardware and software profile and the component's hardware profile \"Incompatible-Firmware-Driver\" - the component's firmware and driver are not listed under the server's hardware and software profile and the component's hardware profile \"Service-Unavailable\" - HCL data service is unavailable at the moment (try again later). This could be due to HCL data updating \"Not-Evaluated\" - the component's hardware status was not evaluated because the server's hardware or software profile is not listed or server is exempted. \"Compatible\" - this component's hardware profile is listed in the HCL. * `Missing-Os-Driver-Info` - The validation failed becaue the given server has no OS driver information available in the inventory. Either install ucstools vib or use power shell scripts to tag proper OS information. * `Incompatible-Server-With-Component` - The validation failed for this component because he server model and component model combination was not found in the HCL. * `Incompatible-Processor` - The validation failed because the given processor was not found for the given server PID. * `Incompatible-Os-Info` - The validation failed because the given OS vendor and version was not found in HCL for the server PID and processor combination. * `Incompatible-Component-Model` - The validation failed because the given Component model was not found in the HCL for the given server PID, processor, server Firmware and OS vendor and version. * `Incompatible-Firmware` - The validation failed because the given server firmware or adapter firmware was not found in the HCL for the given server PID, processor, OS vendor and version and component model. * `Incompatible-Driver` - The validation failed because the given driver version was not found in the HCL for the given Server PID, processor, OS vendor and version, server firmware and component firmware. * `Incompatible-Firmware-Driver` - The validation failed because the given component firmware and driver version was not found in the HCL for the given Server PID, processor, OS vendor and version and server firmware. * `Service-Unavailable` - The validation has failed because HCL data service is temporarily not available. The server will be re-evaluated once HCL data service is back online or finished importing new HCL data. * `Service-Error` - The validation has failed because the HCL data service has return a service error or unrecognized result. * `Unrecognized-Protocol` - The validation has failed for the HCL component because the HCL data service has return a validation reason that is unknown to this service. This reason is used as a default failure reason reason in case we cannot map the error reason received from the HCL data service unto one of the other enum values. * `Not-Evaluated` - The validation for the hardware or software HCL status was not yet evaluated because some previous validation had failed. For example if a server's hardware profile fails to validate with HCL, then the server's software status will not be evaluated. * `Compatible` - The validation has passed for this server PID, processor, OS vendor and version, component model, component firmware and driver version.
 		SoftwareStatus *string `json:"SoftwareStatus,omitempty"`
 		// The status for the component model, firmware version, driver name, and driver version after validating against the HCL. The status can be one of the following \"Unknown\" - we do not have enough information to evaluate against the HCL data \"Validated\" - we have validated this component against the HCL and it has \"Validated\" status \"Not-Validated\" - we have validated this component against the HCL and it has \"Not-Validated\" status. \"Not-Evaluated\" - The component is not evaluated against the HCL because the server is exempted. * `Incomplete` - This means we do not have os information in Intersight for this server. Either install ucstools vib or use power shell scripts to tag proper OS information. * `Not-Found` - At HclStatus level, this means that one of the components has failed validation. At HclStatusDetail level, this means that his component's hardware or software profile was not found in the HCL. * `Not-Listed` - At the HclStatus level, this means that some part of the HCL validation has failed. This could be that either the server's hardware or software profile was not listed in the HCL or one of the components' hardware or software profile was not found in the HCL. * `Validated` - At the HclStatus level, this means that all of the components have passed validation. At HclStatusDetail level, this means that the component's hardware or software profile was found in the HCL. * `Not-Evaluated` - At the HclStatus level this means that this means that SW or Component status has not been evaluated as the previous evaluation step has not passed yet. At the HclStatusDetail level this means that either HW or SW status has not been evaluted because a previous evaluation step has not passed yet.
-		Status    *string                    `json:"Status,omitempty"`
-		Component *InventoryBaseRelationship `json:"Component,omitempty"`
-		HclStatus *CondHclStatusRelationship `json:"HclStatus,omitempty"`
+		Status    *string                           `json:"Status,omitempty"`
+		Component NullableInventoryBaseRelationship `json:"Component,omitempty"`
+		HclStatus NullableCondHclStatusRelationship `json:"HclStatus,omitempty"`
 	}
 
 	varCondHclStatusDetailWithoutEmbeddedStruct := CondHclStatusDetailWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varCondHclStatusDetailWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varCondHclStatusDetailWithoutEmbeddedStruct)
 	if err == nil {
 		varCondHclStatusDetail := _CondHclStatusDetail{}
 		varCondHclStatusDetail.ClassId = varCondHclStatusDetailWithoutEmbeddedStruct.ClassId
@@ -782,7 +834,7 @@ func (o *CondHclStatusDetail) UnmarshalJSON(bytes []byte) (err error) {
 
 	varCondHclStatusDetail := _CondHclStatusDetail{}
 
-	err = json.Unmarshal(bytes, &varCondHclStatusDetail)
+	err = json.Unmarshal(data, &varCondHclStatusDetail)
 	if err == nil {
 		o.MoBaseMo = varCondHclStatusDetail.MoBaseMo
 	} else {
@@ -791,7 +843,7 @@ func (o *CondHclStatusDetail) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "HardwareStatus")

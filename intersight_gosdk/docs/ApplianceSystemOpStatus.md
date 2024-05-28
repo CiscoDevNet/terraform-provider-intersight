@@ -7,11 +7,11 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "appliance.SystemOpStatus"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "appliance.SystemOpStatus"]
 **OperationalStatus** | Pointer to **string** | Operational status of the Intersight Appliance. Operational status is based on the result of the status checks. If result of any check is Critical, then its value is Impaired. Otherwise, if result of any check is Warning, then its value is AttentionNeeded. If all checks are OK, then its value is Operational. * &#x60;Unknown&#x60; - The status of the appliance node is unknown. * &#x60;Operational&#x60; - The appliance node is operational. * &#x60;Impaired&#x60; - The appliance node is impaired. * &#x60;AttentionNeeded&#x60; - The appliance node needs attention. * &#x60;ReadyToJoin&#x60; - The node is ready to be added to a standalone Intersight Appliance to form a cluster. * &#x60;OutOfService&#x60; - The user has taken this node (part of a cluster) to out of service. * &#x60;ReadyForReplacement&#x60; - The cluster node is ready to be replaced. * &#x60;ReplacementInProgress&#x60; - The cluster node replacement is in progress. * &#x60;ReplacementFailed&#x60; - There was a failure during the cluster node replacement. | [optional] [readonly] [default to "Unknown"]
-**Account** | Pointer to [**IamAccountRelationship**](IamAccountRelationship.md) |  | [optional] 
+**Account** | Pointer to [**NullableIamAccountRelationship**](IamAccountRelationship.md) |  | [optional] 
 **AppOpStatuses** | Pointer to [**[]ApplianceAppOpStatusRelationship**](ApplianceAppOpStatusRelationship.md) | An array of relationships to applianceAppOpStatus resources. | [optional] [readonly] 
 **GroupOpStatuses** | Pointer to [**[]ApplianceGroupOpStatusRelationship**](ApplianceGroupOpStatusRelationship.md) | An array of relationships to applianceGroupOpStatus resources. | [optional] [readonly] 
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
-**SystemInfo** | Pointer to [**ApplianceSystemInfoRelationship**](ApplianceSystemInfoRelationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
+**SystemInfo** | Pointer to [**NullableApplianceSystemInfoRelationship**](ApplianceSystemInfoRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -122,6 +122,16 @@ SetAccount sets Account field to given value.
 
 HasAccount returns a boolean if a field has been set.
 
+### SetAccountNil
+
+`func (o *ApplianceSystemOpStatus) SetAccountNil(b bool)`
+
+ SetAccountNil sets the value for Account to be an explicit nil
+
+### UnsetAccount
+`func (o *ApplianceSystemOpStatus) UnsetAccount()`
+
+UnsetAccount ensures that no value is present for Account, not even an explicit nil
 ### GetAppOpStatuses
 
 `func (o *ApplianceSystemOpStatus) GetAppOpStatuses() []ApplianceAppOpStatusRelationship`
@@ -217,6 +227,16 @@ SetRegisteredDevice sets RegisteredDevice field to given value.
 
 HasRegisteredDevice returns a boolean if a field has been set.
 
+### SetRegisteredDeviceNil
+
+`func (o *ApplianceSystemOpStatus) SetRegisteredDeviceNil(b bool)`
+
+ SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+
+### UnsetRegisteredDevice
+`func (o *ApplianceSystemOpStatus) UnsetRegisteredDevice()`
+
+UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
 ### GetSystemInfo
 
 `func (o *ApplianceSystemOpStatus) GetSystemInfo() ApplianceSystemInfoRelationship`
@@ -242,6 +262,16 @@ SetSystemInfo sets SystemInfo field to given value.
 
 HasSystemInfo returns a boolean if a field has been set.
 
+### SetSystemInfoNil
+
+`func (o *ApplianceSystemOpStatus) SetSystemInfoNil(b bool)`
+
+ SetSystemInfoNil sets the value for SystemInfo to be an explicit nil
+
+### UnsetSystemInfo
+`func (o *ApplianceSystemOpStatus) UnsetSystemInfo()`
+
+UnsetSystemInfo ensures that no value is present for SystemInfo, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

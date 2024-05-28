@@ -19,7 +19,7 @@ Name | Type | Description | Notes
 **TotalNodes** | Pointer to **int64** | Total number of nodes in the system. | [optional] [readonly] 
 **TotalPhases** | Pointer to **int64** | TotalPhase represents the total number of the install phases for one install. | [optional] [readonly] 
 **Vip** | Pointer to [**NullableApplianceNodeIpInfo**](ApplianceNodeIpInfo.md) |  | [optional] 
-**Account** | Pointer to [**IamAccountRelationship**](IamAccountRelationship.md) |  | [optional] 
+**Account** | Pointer to [**NullableIamAccountRelationship**](IamAccountRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -480,6 +480,16 @@ SetAccount sets Account field to given value.
 
 HasAccount returns a boolean if a field has been set.
 
+### SetAccountNil
+
+`func (o *ApplianceClusterInstallBase) SetAccountNil(b bool)`
+
+ SetAccountNil sets the value for Account to be an explicit nil
+
+### UnsetAccount
+`func (o *ApplianceClusterInstallBase) UnsetAccount()`
+
+UnsetAccount ensures that no value is present for Account, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

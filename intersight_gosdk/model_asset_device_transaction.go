@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the AssetDeviceTransaction type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &AssetDeviceTransaction{}
 
 // AssetDeviceTransaction Type for saving the device transaction history. It is used in asset.DeploymentDeviceInformation object to save the device transactions.
 type AssetDeviceTransaction struct {
@@ -116,7 +120,7 @@ func (o *AssetDeviceTransaction) SetObjectType(v string) {
 
 // GetAction returns the Action field value if set, zero value otherwise.
 func (o *AssetDeviceTransaction) GetAction() string {
-	if o == nil || o.Action == nil {
+	if o == nil || IsNil(o.Action) {
 		var ret string
 		return ret
 	}
@@ -126,7 +130,7 @@ func (o *AssetDeviceTransaction) GetAction() string {
 // GetActionOk returns a tuple with the Action field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AssetDeviceTransaction) GetActionOk() (*string, bool) {
-	if o == nil || o.Action == nil {
+	if o == nil || IsNil(o.Action) {
 		return nil, false
 	}
 	return o.Action, true
@@ -134,7 +138,7 @@ func (o *AssetDeviceTransaction) GetActionOk() (*string, bool) {
 
 // HasAction returns a boolean if a field has been set.
 func (o *AssetDeviceTransaction) HasAction() bool {
-	if o != nil && o.Action != nil {
+	if o != nil && !IsNil(o.Action) {
 		return true
 	}
 
@@ -148,7 +152,7 @@ func (o *AssetDeviceTransaction) SetAction(v string) {
 
 // GetStatusDescription returns the StatusDescription field value if set, zero value otherwise.
 func (o *AssetDeviceTransaction) GetStatusDescription() string {
-	if o == nil || o.StatusDescription == nil {
+	if o == nil || IsNil(o.StatusDescription) {
 		var ret string
 		return ret
 	}
@@ -158,7 +162,7 @@ func (o *AssetDeviceTransaction) GetStatusDescription() string {
 // GetStatusDescriptionOk returns a tuple with the StatusDescription field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AssetDeviceTransaction) GetStatusDescriptionOk() (*string, bool) {
-	if o == nil || o.StatusDescription == nil {
+	if o == nil || IsNil(o.StatusDescription) {
 		return nil, false
 	}
 	return o.StatusDescription, true
@@ -166,7 +170,7 @@ func (o *AssetDeviceTransaction) GetStatusDescriptionOk() (*string, bool) {
 
 // HasStatusDescription returns a boolean if a field has been set.
 func (o *AssetDeviceTransaction) HasStatusDescription() bool {
-	if o != nil && o.StatusDescription != nil {
+	if o != nil && !IsNil(o.StatusDescription) {
 		return true
 	}
 
@@ -180,7 +184,7 @@ func (o *AssetDeviceTransaction) SetStatusDescription(v string) {
 
 // GetStatusId returns the StatusId field value if set, zero value otherwise.
 func (o *AssetDeviceTransaction) GetStatusId() int32 {
-	if o == nil || o.StatusId == nil {
+	if o == nil || IsNil(o.StatusId) {
 		var ret int32
 		return ret
 	}
@@ -190,7 +194,7 @@ func (o *AssetDeviceTransaction) GetStatusId() int32 {
 // GetStatusIdOk returns a tuple with the StatusId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AssetDeviceTransaction) GetStatusIdOk() (*int32, bool) {
-	if o == nil || o.StatusId == nil {
+	if o == nil || IsNil(o.StatusId) {
 		return nil, false
 	}
 	return o.StatusId, true
@@ -198,7 +202,7 @@ func (o *AssetDeviceTransaction) GetStatusIdOk() (*int32, bool) {
 
 // HasStatusId returns a boolean if a field has been set.
 func (o *AssetDeviceTransaction) HasStatusId() bool {
-	if o != nil && o.StatusId != nil {
+	if o != nil && !IsNil(o.StatusId) {
 		return true
 	}
 
@@ -212,7 +216,7 @@ func (o *AssetDeviceTransaction) SetStatusId(v int32) {
 
 // GetTimestamp returns the Timestamp field value if set, zero value otherwise.
 func (o *AssetDeviceTransaction) GetTimestamp() string {
-	if o == nil || o.Timestamp == nil {
+	if o == nil || IsNil(o.Timestamp) {
 		var ret string
 		return ret
 	}
@@ -222,7 +226,7 @@ func (o *AssetDeviceTransaction) GetTimestamp() string {
 // GetTimestampOk returns a tuple with the Timestamp field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AssetDeviceTransaction) GetTimestampOk() (*string, bool) {
-	if o == nil || o.Timestamp == nil {
+	if o == nil || IsNil(o.Timestamp) {
 		return nil, false
 	}
 	return o.Timestamp, true
@@ -230,7 +234,7 @@ func (o *AssetDeviceTransaction) GetTimestampOk() (*string, bool) {
 
 // HasTimestamp returns a boolean if a field has been set.
 func (o *AssetDeviceTransaction) HasTimestamp() bool {
-	if o != nil && o.Timestamp != nil {
+	if o != nil && !IsNil(o.Timestamp) {
 		return true
 	}
 
@@ -244,7 +248,7 @@ func (o *AssetDeviceTransaction) SetTimestamp(v string) {
 
 // GetTransactionBatchId returns the TransactionBatchId field value if set, zero value otherwise.
 func (o *AssetDeviceTransaction) GetTransactionBatchId() int64 {
-	if o == nil || o.TransactionBatchId == nil {
+	if o == nil || IsNil(o.TransactionBatchId) {
 		var ret int64
 		return ret
 	}
@@ -254,7 +258,7 @@ func (o *AssetDeviceTransaction) GetTransactionBatchId() int64 {
 // GetTransactionBatchIdOk returns a tuple with the TransactionBatchId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AssetDeviceTransaction) GetTransactionBatchIdOk() (*int64, bool) {
-	if o == nil || o.TransactionBatchId == nil {
+	if o == nil || IsNil(o.TransactionBatchId) {
 		return nil, false
 	}
 	return o.TransactionBatchId, true
@@ -262,7 +266,7 @@ func (o *AssetDeviceTransaction) GetTransactionBatchIdOk() (*int64, bool) {
 
 // HasTransactionBatchId returns a boolean if a field has been set.
 func (o *AssetDeviceTransaction) HasTransactionBatchId() bool {
-	if o != nil && o.TransactionBatchId != nil {
+	if o != nil && !IsNil(o.TransactionBatchId) {
 		return true
 	}
 
@@ -276,7 +280,7 @@ func (o *AssetDeviceTransaction) SetTransactionBatchId(v int64) {
 
 // GetTransactionDate returns the TransactionDate field value if set, zero value otherwise.
 func (o *AssetDeviceTransaction) GetTransactionDate() string {
-	if o == nil || o.TransactionDate == nil {
+	if o == nil || IsNil(o.TransactionDate) {
 		var ret string
 		return ret
 	}
@@ -286,7 +290,7 @@ func (o *AssetDeviceTransaction) GetTransactionDate() string {
 // GetTransactionDateOk returns a tuple with the TransactionDate field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AssetDeviceTransaction) GetTransactionDateOk() (*string, bool) {
-	if o == nil || o.TransactionDate == nil {
+	if o == nil || IsNil(o.TransactionDate) {
 		return nil, false
 	}
 	return o.TransactionDate, true
@@ -294,7 +298,7 @@ func (o *AssetDeviceTransaction) GetTransactionDateOk() (*string, bool) {
 
 // HasTransactionDate returns a boolean if a field has been set.
 func (o *AssetDeviceTransaction) HasTransactionDate() bool {
-	if o != nil && o.TransactionDate != nil {
+	if o != nil && !IsNil(o.TransactionDate) {
 		return true
 	}
 
@@ -308,7 +312,7 @@ func (o *AssetDeviceTransaction) SetTransactionDate(v string) {
 
 // GetTransactionSequence returns the TransactionSequence field value if set, zero value otherwise.
 func (o *AssetDeviceTransaction) GetTransactionSequence() int64 {
-	if o == nil || o.TransactionSequence == nil {
+	if o == nil || IsNil(o.TransactionSequence) {
 		var ret int64
 		return ret
 	}
@@ -318,7 +322,7 @@ func (o *AssetDeviceTransaction) GetTransactionSequence() int64 {
 // GetTransactionSequenceOk returns a tuple with the TransactionSequence field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AssetDeviceTransaction) GetTransactionSequenceOk() (*int64, bool) {
-	if o == nil || o.TransactionSequence == nil {
+	if o == nil || IsNil(o.TransactionSequence) {
 		return nil, false
 	}
 	return o.TransactionSequence, true
@@ -326,7 +330,7 @@ func (o *AssetDeviceTransaction) GetTransactionSequenceOk() (*int64, bool) {
 
 // HasTransactionSequence returns a boolean if a field has been set.
 func (o *AssetDeviceTransaction) HasTransactionSequence() bool {
-	if o != nil && o.TransactionSequence != nil {
+	if o != nil && !IsNil(o.TransactionSequence) {
 		return true
 	}
 
@@ -339,40 +343,44 @@ func (o *AssetDeviceTransaction) SetTransactionSequence(v int64) {
 }
 
 func (o AssetDeviceTransaction) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o AssetDeviceTransaction) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
 	errMoBaseComplexType = json.Unmarshal([]byte(serializedMoBaseComplexType), &toSerialize)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Action != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Action) {
 		toSerialize["Action"] = o.Action
 	}
-	if o.StatusDescription != nil {
+	if !IsNil(o.StatusDescription) {
 		toSerialize["StatusDescription"] = o.StatusDescription
 	}
-	if o.StatusId != nil {
+	if !IsNil(o.StatusId) {
 		toSerialize["StatusId"] = o.StatusId
 	}
-	if o.Timestamp != nil {
+	if !IsNil(o.Timestamp) {
 		toSerialize["Timestamp"] = o.Timestamp
 	}
-	if o.TransactionBatchId != nil {
+	if !IsNil(o.TransactionBatchId) {
 		toSerialize["TransactionBatchId"] = o.TransactionBatchId
 	}
-	if o.TransactionDate != nil {
+	if !IsNil(o.TransactionDate) {
 		toSerialize["TransactionDate"] = o.TransactionDate
 	}
-	if o.TransactionSequence != nil {
+	if !IsNil(o.TransactionSequence) {
 		toSerialize["TransactionSequence"] = o.TransactionSequence
 	}
 
@@ -380,10 +388,32 @@ func (o AssetDeviceTransaction) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *AssetDeviceTransaction) UnmarshalJSON(bytes []byte) (err error) {
+func (o *AssetDeviceTransaction) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type AssetDeviceTransactionWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -407,7 +437,7 @@ func (o *AssetDeviceTransaction) UnmarshalJSON(bytes []byte) (err error) {
 
 	varAssetDeviceTransactionWithoutEmbeddedStruct := AssetDeviceTransactionWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varAssetDeviceTransactionWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varAssetDeviceTransactionWithoutEmbeddedStruct)
 	if err == nil {
 		varAssetDeviceTransaction := _AssetDeviceTransaction{}
 		varAssetDeviceTransaction.ClassId = varAssetDeviceTransactionWithoutEmbeddedStruct.ClassId
@@ -426,7 +456,7 @@ func (o *AssetDeviceTransaction) UnmarshalJSON(bytes []byte) (err error) {
 
 	varAssetDeviceTransaction := _AssetDeviceTransaction{}
 
-	err = json.Unmarshal(bytes, &varAssetDeviceTransaction)
+	err = json.Unmarshal(data, &varAssetDeviceTransaction)
 	if err == nil {
 		o.MoBaseComplexType = varAssetDeviceTransaction.MoBaseComplexType
 	} else {
@@ -435,7 +465,7 @@ func (o *AssetDeviceTransaction) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Action")

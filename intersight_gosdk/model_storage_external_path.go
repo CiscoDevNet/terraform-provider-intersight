@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the StorageExternalPath type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &StorageExternalPath{}
 
 // StorageExternalPath The following properties are restored for each external path.
 type StorageExternalPath struct {
@@ -112,7 +116,7 @@ func (o *StorageExternalPath) SetObjectType(v string) {
 
 // GetBlockedPathMonitoring returns the BlockedPathMonitoring field value if set, zero value otherwise.
 func (o *StorageExternalPath) GetBlockedPathMonitoring() int64 {
-	if o == nil || o.BlockedPathMonitoring == nil {
+	if o == nil || IsNil(o.BlockedPathMonitoring) {
 		var ret int64
 		return ret
 	}
@@ -122,7 +126,7 @@ func (o *StorageExternalPath) GetBlockedPathMonitoring() int64 {
 // GetBlockedPathMonitoringOk returns a tuple with the BlockedPathMonitoring field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageExternalPath) GetBlockedPathMonitoringOk() (*int64, bool) {
-	if o == nil || o.BlockedPathMonitoring == nil {
+	if o == nil || IsNil(o.BlockedPathMonitoring) {
 		return nil, false
 	}
 	return o.BlockedPathMonitoring, true
@@ -130,7 +134,7 @@ func (o *StorageExternalPath) GetBlockedPathMonitoringOk() (*int64, bool) {
 
 // HasBlockedPathMonitoring returns a boolean if a field has been set.
 func (o *StorageExternalPath) HasBlockedPathMonitoring() bool {
-	if o != nil && o.BlockedPathMonitoring != nil {
+	if o != nil && !IsNil(o.BlockedPathMonitoring) {
 		return true
 	}
 
@@ -144,7 +148,7 @@ func (o *StorageExternalPath) SetBlockedPathMonitoring(v int64) {
 
 // GetExternalWwn returns the ExternalWwn field value if set, zero value otherwise.
 func (o *StorageExternalPath) GetExternalWwn() string {
-	if o == nil || o.ExternalWwn == nil {
+	if o == nil || IsNil(o.ExternalWwn) {
 		var ret string
 		return ret
 	}
@@ -154,7 +158,7 @@ func (o *StorageExternalPath) GetExternalWwn() string {
 // GetExternalWwnOk returns a tuple with the ExternalWwn field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageExternalPath) GetExternalWwnOk() (*string, bool) {
-	if o == nil || o.ExternalWwn == nil {
+	if o == nil || IsNil(o.ExternalWwn) {
 		return nil, false
 	}
 	return o.ExternalWwn, true
@@ -162,7 +166,7 @@ func (o *StorageExternalPath) GetExternalWwnOk() (*string, bool) {
 
 // HasExternalWwn returns a boolean if a field has been set.
 func (o *StorageExternalPath) HasExternalWwn() bool {
-	if o != nil && o.ExternalWwn != nil {
+	if o != nil && !IsNil(o.ExternalWwn) {
 		return true
 	}
 
@@ -176,7 +180,7 @@ func (o *StorageExternalPath) SetExternalWwn(v string) {
 
 // GetIoTimeOut returns the IoTimeOut field value if set, zero value otherwise.
 func (o *StorageExternalPath) GetIoTimeOut() int64 {
-	if o == nil || o.IoTimeOut == nil {
+	if o == nil || IsNil(o.IoTimeOut) {
 		var ret int64
 		return ret
 	}
@@ -186,7 +190,7 @@ func (o *StorageExternalPath) GetIoTimeOut() int64 {
 // GetIoTimeOutOk returns a tuple with the IoTimeOut field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageExternalPath) GetIoTimeOutOk() (*int64, bool) {
-	if o == nil || o.IoTimeOut == nil {
+	if o == nil || IsNil(o.IoTimeOut) {
 		return nil, false
 	}
 	return o.IoTimeOut, true
@@ -194,7 +198,7 @@ func (o *StorageExternalPath) GetIoTimeOutOk() (*int64, bool) {
 
 // HasIoTimeOut returns a boolean if a field has been set.
 func (o *StorageExternalPath) HasIoTimeOut() bool {
-	if o != nil && o.IoTimeOut != nil {
+	if o != nil && !IsNil(o.IoTimeOut) {
 		return true
 	}
 
@@ -208,7 +212,7 @@ func (o *StorageExternalPath) SetIoTimeOut(v int64) {
 
 // GetPortId returns the PortId field value if set, zero value otherwise.
 func (o *StorageExternalPath) GetPortId() string {
-	if o == nil || o.PortId == nil {
+	if o == nil || IsNil(o.PortId) {
 		var ret string
 		return ret
 	}
@@ -218,7 +222,7 @@ func (o *StorageExternalPath) GetPortId() string {
 // GetPortIdOk returns a tuple with the PortId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageExternalPath) GetPortIdOk() (*string, bool) {
-	if o == nil || o.PortId == nil {
+	if o == nil || IsNil(o.PortId) {
 		return nil, false
 	}
 	return o.PortId, true
@@ -226,7 +230,7 @@ func (o *StorageExternalPath) GetPortIdOk() (*string, bool) {
 
 // HasPortId returns a boolean if a field has been set.
 func (o *StorageExternalPath) HasPortId() bool {
-	if o != nil && o.PortId != nil {
+	if o != nil && !IsNil(o.PortId) {
 		return true
 	}
 
@@ -240,7 +244,7 @@ func (o *StorageExternalPath) SetPortId(v string) {
 
 // GetQueueDepth returns the QueueDepth field value if set, zero value otherwise.
 func (o *StorageExternalPath) GetQueueDepth() int64 {
-	if o == nil || o.QueueDepth == nil {
+	if o == nil || IsNil(o.QueueDepth) {
 		var ret int64
 		return ret
 	}
@@ -250,7 +254,7 @@ func (o *StorageExternalPath) GetQueueDepth() int64 {
 // GetQueueDepthOk returns a tuple with the QueueDepth field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageExternalPath) GetQueueDepthOk() (*int64, bool) {
-	if o == nil || o.QueueDepth == nil {
+	if o == nil || IsNil(o.QueueDepth) {
 		return nil, false
 	}
 	return o.QueueDepth, true
@@ -258,7 +262,7 @@ func (o *StorageExternalPath) GetQueueDepthOk() (*int64, bool) {
 
 // HasQueueDepth returns a boolean if a field has been set.
 func (o *StorageExternalPath) HasQueueDepth() bool {
-	if o != nil && o.QueueDepth != nil {
+	if o != nil && !IsNil(o.QueueDepth) {
 		return true
 	}
 
@@ -271,34 +275,38 @@ func (o *StorageExternalPath) SetQueueDepth(v int64) {
 }
 
 func (o StorageExternalPath) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o StorageExternalPath) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
 	errMoBaseComplexType = json.Unmarshal([]byte(serializedMoBaseComplexType), &toSerialize)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.BlockedPathMonitoring != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.BlockedPathMonitoring) {
 		toSerialize["BlockedPathMonitoring"] = o.BlockedPathMonitoring
 	}
-	if o.ExternalWwn != nil {
+	if !IsNil(o.ExternalWwn) {
 		toSerialize["ExternalWwn"] = o.ExternalWwn
 	}
-	if o.IoTimeOut != nil {
+	if !IsNil(o.IoTimeOut) {
 		toSerialize["IoTimeOut"] = o.IoTimeOut
 	}
-	if o.PortId != nil {
+	if !IsNil(o.PortId) {
 		toSerialize["PortId"] = o.PortId
 	}
-	if o.QueueDepth != nil {
+	if !IsNil(o.QueueDepth) {
 		toSerialize["QueueDepth"] = o.QueueDepth
 	}
 
@@ -306,10 +314,32 @@ func (o StorageExternalPath) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *StorageExternalPath) UnmarshalJSON(bytes []byte) (err error) {
+func (o *StorageExternalPath) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type StorageExternalPathWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -329,7 +359,7 @@ func (o *StorageExternalPath) UnmarshalJSON(bytes []byte) (err error) {
 
 	varStorageExternalPathWithoutEmbeddedStruct := StorageExternalPathWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varStorageExternalPathWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varStorageExternalPathWithoutEmbeddedStruct)
 	if err == nil {
 		varStorageExternalPath := _StorageExternalPath{}
 		varStorageExternalPath.ClassId = varStorageExternalPathWithoutEmbeddedStruct.ClassId
@@ -346,7 +376,7 @@ func (o *StorageExternalPath) UnmarshalJSON(bytes []byte) (err error) {
 
 	varStorageExternalPath := _StorageExternalPath{}
 
-	err = json.Unmarshal(bytes, &varStorageExternalPath)
+	err = json.Unmarshal(data, &varStorageExternalPath)
 	if err == nil {
 		o.MoBaseComplexType = varStorageExternalPath.MoBaseComplexType
 	} else {
@@ -355,7 +385,7 @@ func (o *StorageExternalPath) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "BlockedPathMonitoring")

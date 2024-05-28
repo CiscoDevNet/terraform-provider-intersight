@@ -13,9 +13,9 @@ Name | Type | Description | Notes
 **HypervisorDataIp** | Pointer to **string** | IP address for storage data network (Hypervisor interface). | [optional] 
 **HypervisorMgmtIp** | Pointer to **string** | IP address for Hypervisor management network. | [optional] 
 **NodeRole** | Pointer to **string** | The role that this node performs in the HyperFlex cluster. * &#x60;Unknown&#x60; - The node role is not available. * &#x60;Storage&#x60; - The node persists data and contributes to the storage capacity of a cluster. * &#x60;Compute&#x60; - The node contributes to the compute capacity of a cluster. | [optional] [default to "Unknown"]
-**AssignedServer** | Pointer to [**ComputePhysicalRelationship**](ComputePhysicalRelationship.md) |  | [optional] 
-**ClusterProfile** | Pointer to [**HyperflexClusterProfileRelationship**](HyperflexClusterProfileRelationship.md) |  | [optional] 
-**Node** | Pointer to [**HyperflexNodeRelationship**](HyperflexNodeRelationship.md) |  | [optional] 
+**AssignedServer** | Pointer to [**NullableComputePhysicalRelationship**](ComputePhysicalRelationship.md) |  | [optional] 
+**ClusterProfile** | Pointer to [**NullableHyperflexClusterProfileRelationship**](HyperflexClusterProfileRelationship.md) |  | [optional] 
+**Node** | Pointer to [**NullableHyperflexNodeRelationship**](HyperflexNodeRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -276,6 +276,16 @@ SetAssignedServer sets AssignedServer field to given value.
 
 HasAssignedServer returns a boolean if a field has been set.
 
+### SetAssignedServerNil
+
+`func (o *HyperflexNodeProfile) SetAssignedServerNil(b bool)`
+
+ SetAssignedServerNil sets the value for AssignedServer to be an explicit nil
+
+### UnsetAssignedServer
+`func (o *HyperflexNodeProfile) UnsetAssignedServer()`
+
+UnsetAssignedServer ensures that no value is present for AssignedServer, not even an explicit nil
 ### GetClusterProfile
 
 `func (o *HyperflexNodeProfile) GetClusterProfile() HyperflexClusterProfileRelationship`
@@ -301,6 +311,16 @@ SetClusterProfile sets ClusterProfile field to given value.
 
 HasClusterProfile returns a boolean if a field has been set.
 
+### SetClusterProfileNil
+
+`func (o *HyperflexNodeProfile) SetClusterProfileNil(b bool)`
+
+ SetClusterProfileNil sets the value for ClusterProfile to be an explicit nil
+
+### UnsetClusterProfile
+`func (o *HyperflexNodeProfile) UnsetClusterProfile()`
+
+UnsetClusterProfile ensures that no value is present for ClusterProfile, not even an explicit nil
 ### GetNode
 
 `func (o *HyperflexNodeProfile) GetNode() HyperflexNodeRelationship`
@@ -326,6 +346,16 @@ SetNode sets Node field to given value.
 
 HasNode returns a boolean if a field has been set.
 
+### SetNodeNil
+
+`func (o *HyperflexNodeProfile) SetNodeNil(b bool)`
+
+ SetNodeNil sets the value for Node to be an explicit nil
+
+### UnsetNode
+`func (o *HyperflexNodeProfile) UnsetNode()`
+
+UnsetNode ensures that no value is present for Node, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

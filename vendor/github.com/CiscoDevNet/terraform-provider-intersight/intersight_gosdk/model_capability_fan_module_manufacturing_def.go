@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the CapabilityFanModuleManufacturingDef type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &CapabilityFanModuleManufacturingDef{}
 
 // CapabilityFanModuleManufacturingDef Fan module unit that contains multiple fans.
 type CapabilityFanModuleManufacturingDef struct {
@@ -114,7 +118,7 @@ func (o *CapabilityFanModuleManufacturingDef) SetObjectType(v string) {
 
 // GetCaption returns the Caption field value if set, zero value otherwise.
 func (o *CapabilityFanModuleManufacturingDef) GetCaption() string {
-	if o == nil || o.Caption == nil {
+	if o == nil || IsNil(o.Caption) {
 		var ret string
 		return ret
 	}
@@ -124,7 +128,7 @@ func (o *CapabilityFanModuleManufacturingDef) GetCaption() string {
 // GetCaptionOk returns a tuple with the Caption field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CapabilityFanModuleManufacturingDef) GetCaptionOk() (*string, bool) {
-	if o == nil || o.Caption == nil {
+	if o == nil || IsNil(o.Caption) {
 		return nil, false
 	}
 	return o.Caption, true
@@ -132,7 +136,7 @@ func (o *CapabilityFanModuleManufacturingDef) GetCaptionOk() (*string, bool) {
 
 // HasCaption returns a boolean if a field has been set.
 func (o *CapabilityFanModuleManufacturingDef) HasCaption() bool {
-	if o != nil && o.Caption != nil {
+	if o != nil && !IsNil(o.Caption) {
 		return true
 	}
 
@@ -146,7 +150,7 @@ func (o *CapabilityFanModuleManufacturingDef) SetCaption(v string) {
 
 // GetDescription returns the Description field value if set, zero value otherwise.
 func (o *CapabilityFanModuleManufacturingDef) GetDescription() string {
-	if o == nil || o.Description == nil {
+	if o == nil || IsNil(o.Description) {
 		var ret string
 		return ret
 	}
@@ -156,7 +160,7 @@ func (o *CapabilityFanModuleManufacturingDef) GetDescription() string {
 // GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CapabilityFanModuleManufacturingDef) GetDescriptionOk() (*string, bool) {
-	if o == nil || o.Description == nil {
+	if o == nil || IsNil(o.Description) {
 		return nil, false
 	}
 	return o.Description, true
@@ -164,7 +168,7 @@ func (o *CapabilityFanModuleManufacturingDef) GetDescriptionOk() (*string, bool)
 
 // HasDescription returns a boolean if a field has been set.
 func (o *CapabilityFanModuleManufacturingDef) HasDescription() bool {
-	if o != nil && o.Description != nil {
+	if o != nil && !IsNil(o.Description) {
 		return true
 	}
 
@@ -178,7 +182,7 @@ func (o *CapabilityFanModuleManufacturingDef) SetDescription(v string) {
 
 // GetPid returns the Pid field value if set, zero value otherwise.
 func (o *CapabilityFanModuleManufacturingDef) GetPid() string {
-	if o == nil || o.Pid == nil {
+	if o == nil || IsNil(o.Pid) {
 		var ret string
 		return ret
 	}
@@ -188,7 +192,7 @@ func (o *CapabilityFanModuleManufacturingDef) GetPid() string {
 // GetPidOk returns a tuple with the Pid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CapabilityFanModuleManufacturingDef) GetPidOk() (*string, bool) {
-	if o == nil || o.Pid == nil {
+	if o == nil || IsNil(o.Pid) {
 		return nil, false
 	}
 	return o.Pid, true
@@ -196,7 +200,7 @@ func (o *CapabilityFanModuleManufacturingDef) GetPidOk() (*string, bool) {
 
 // HasPid returns a boolean if a field has been set.
 func (o *CapabilityFanModuleManufacturingDef) HasPid() bool {
-	if o != nil && o.Pid != nil {
+	if o != nil && !IsNil(o.Pid) {
 		return true
 	}
 
@@ -210,7 +214,7 @@ func (o *CapabilityFanModuleManufacturingDef) SetPid(v string) {
 
 // GetProductName returns the ProductName field value if set, zero value otherwise.
 func (o *CapabilityFanModuleManufacturingDef) GetProductName() string {
-	if o == nil || o.ProductName == nil {
+	if o == nil || IsNil(o.ProductName) {
 		var ret string
 		return ret
 	}
@@ -220,7 +224,7 @@ func (o *CapabilityFanModuleManufacturingDef) GetProductName() string {
 // GetProductNameOk returns a tuple with the ProductName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CapabilityFanModuleManufacturingDef) GetProductNameOk() (*string, bool) {
-	if o == nil || o.ProductName == nil {
+	if o == nil || IsNil(o.ProductName) {
 		return nil, false
 	}
 	return o.ProductName, true
@@ -228,7 +232,7 @@ func (o *CapabilityFanModuleManufacturingDef) GetProductNameOk() (*string, bool)
 
 // HasProductName returns a boolean if a field has been set.
 func (o *CapabilityFanModuleManufacturingDef) HasProductName() bool {
-	if o != nil && o.ProductName != nil {
+	if o != nil && !IsNil(o.ProductName) {
 		return true
 	}
 
@@ -242,7 +246,7 @@ func (o *CapabilityFanModuleManufacturingDef) SetProductName(v string) {
 
 // GetSku returns the Sku field value if set, zero value otherwise.
 func (o *CapabilityFanModuleManufacturingDef) GetSku() string {
-	if o == nil || o.Sku == nil {
+	if o == nil || IsNil(o.Sku) {
 		var ret string
 		return ret
 	}
@@ -252,7 +256,7 @@ func (o *CapabilityFanModuleManufacturingDef) GetSku() string {
 // GetSkuOk returns a tuple with the Sku field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CapabilityFanModuleManufacturingDef) GetSkuOk() (*string, bool) {
-	if o == nil || o.Sku == nil {
+	if o == nil || IsNil(o.Sku) {
 		return nil, false
 	}
 	return o.Sku, true
@@ -260,7 +264,7 @@ func (o *CapabilityFanModuleManufacturingDef) GetSkuOk() (*string, bool) {
 
 // HasSku returns a boolean if a field has been set.
 func (o *CapabilityFanModuleManufacturingDef) HasSku() bool {
-	if o != nil && o.Sku != nil {
+	if o != nil && !IsNil(o.Sku) {
 		return true
 	}
 
@@ -274,7 +278,7 @@ func (o *CapabilityFanModuleManufacturingDef) SetSku(v string) {
 
 // GetVid returns the Vid field value if set, zero value otherwise.
 func (o *CapabilityFanModuleManufacturingDef) GetVid() string {
-	if o == nil || o.Vid == nil {
+	if o == nil || IsNil(o.Vid) {
 		var ret string
 		return ret
 	}
@@ -284,7 +288,7 @@ func (o *CapabilityFanModuleManufacturingDef) GetVid() string {
 // GetVidOk returns a tuple with the Vid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CapabilityFanModuleManufacturingDef) GetVidOk() (*string, bool) {
-	if o == nil || o.Vid == nil {
+	if o == nil || IsNil(o.Vid) {
 		return nil, false
 	}
 	return o.Vid, true
@@ -292,7 +296,7 @@ func (o *CapabilityFanModuleManufacturingDef) GetVidOk() (*string, bool) {
 
 // HasVid returns a boolean if a field has been set.
 func (o *CapabilityFanModuleManufacturingDef) HasVid() bool {
-	if o != nil && o.Vid != nil {
+	if o != nil && !IsNil(o.Vid) {
 		return true
 	}
 
@@ -305,37 +309,41 @@ func (o *CapabilityFanModuleManufacturingDef) SetVid(v string) {
 }
 
 func (o CapabilityFanModuleManufacturingDef) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o CapabilityFanModuleManufacturingDef) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedCapabilityCapability, errCapabilityCapability := json.Marshal(o.CapabilityCapability)
 	if errCapabilityCapability != nil {
-		return []byte{}, errCapabilityCapability
+		return map[string]interface{}{}, errCapabilityCapability
 	}
 	errCapabilityCapability = json.Unmarshal([]byte(serializedCapabilityCapability), &toSerialize)
 	if errCapabilityCapability != nil {
-		return []byte{}, errCapabilityCapability
+		return map[string]interface{}{}, errCapabilityCapability
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Caption != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Caption) {
 		toSerialize["Caption"] = o.Caption
 	}
-	if o.Description != nil {
+	if !IsNil(o.Description) {
 		toSerialize["Description"] = o.Description
 	}
-	if o.Pid != nil {
+	if !IsNil(o.Pid) {
 		toSerialize["Pid"] = o.Pid
 	}
-	if o.ProductName != nil {
+	if !IsNil(o.ProductName) {
 		toSerialize["ProductName"] = o.ProductName
 	}
-	if o.Sku != nil {
+	if !IsNil(o.Sku) {
 		toSerialize["Sku"] = o.Sku
 	}
-	if o.Vid != nil {
+	if !IsNil(o.Vid) {
 		toSerialize["Vid"] = o.Vid
 	}
 
@@ -343,10 +351,32 @@ func (o CapabilityFanModuleManufacturingDef) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *CapabilityFanModuleManufacturingDef) UnmarshalJSON(bytes []byte) (err error) {
+func (o *CapabilityFanModuleManufacturingDef) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type CapabilityFanModuleManufacturingDefWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -368,7 +398,7 @@ func (o *CapabilityFanModuleManufacturingDef) UnmarshalJSON(bytes []byte) (err e
 
 	varCapabilityFanModuleManufacturingDefWithoutEmbeddedStruct := CapabilityFanModuleManufacturingDefWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varCapabilityFanModuleManufacturingDefWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varCapabilityFanModuleManufacturingDefWithoutEmbeddedStruct)
 	if err == nil {
 		varCapabilityFanModuleManufacturingDef := _CapabilityFanModuleManufacturingDef{}
 		varCapabilityFanModuleManufacturingDef.ClassId = varCapabilityFanModuleManufacturingDefWithoutEmbeddedStruct.ClassId
@@ -386,7 +416,7 @@ func (o *CapabilityFanModuleManufacturingDef) UnmarshalJSON(bytes []byte) (err e
 
 	varCapabilityFanModuleManufacturingDef := _CapabilityFanModuleManufacturingDef{}
 
-	err = json.Unmarshal(bytes, &varCapabilityFanModuleManufacturingDef)
+	err = json.Unmarshal(data, &varCapabilityFanModuleManufacturingDef)
 	if err == nil {
 		o.CapabilityCapability = varCapabilityFanModuleManufacturingDef.CapabilityCapability
 	} else {
@@ -395,7 +425,7 @@ func (o *CapabilityFanModuleManufacturingDef) UnmarshalJSON(bytes []byte) (err e
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Caption")

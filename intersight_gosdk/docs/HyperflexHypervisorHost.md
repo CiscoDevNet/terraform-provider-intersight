@@ -22,8 +22,8 @@ Name | Type | Description | Notes
 **Role** | Pointer to **string** | The role of the HyperFlex host. * &#x60;UNKNOWN&#x60; - The role of the HyperFlex host is unknown. * &#x60;STORAGE&#x60; - The HyperFlex host&#39;s role is storage. * &#x60;COMPUTE&#x60; - The HyperFlex host&#39;s role is compute. | [optional] [readonly] [default to "UNKNOWN"]
 **TemplateVersion** | Pointer to **string** | The controller virtual machine template version. | [optional] [readonly] 
 **VirtualCpus** | Pointer to **int32** | Configured number of virtual CPUs for Controller virtual machine. | [optional] [readonly] 
-**Cluster** | Pointer to [**HyperflexClusterRelationship**](HyperflexClusterRelationship.md) |  | [optional] 
-**Node** | Pointer to [**HyperflexNodeRelationship**](HyperflexNodeRelationship.md) |  | [optional] 
+**Cluster** | Pointer to [**NullableHyperflexClusterRelationship**](HyperflexClusterRelationship.md) |  | [optional] 
+**Node** | Pointer to [**NullableHyperflexNodeRelationship**](HyperflexNodeRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -539,6 +539,16 @@ SetCluster sets Cluster field to given value.
 
 HasCluster returns a boolean if a field has been set.
 
+### SetClusterNil
+
+`func (o *HyperflexHypervisorHost) SetClusterNil(b bool)`
+
+ SetClusterNil sets the value for Cluster to be an explicit nil
+
+### UnsetCluster
+`func (o *HyperflexHypervisorHost) UnsetCluster()`
+
+UnsetCluster ensures that no value is present for Cluster, not even an explicit nil
 ### GetNode
 
 `func (o *HyperflexHypervisorHost) GetNode() HyperflexNodeRelationship`
@@ -564,6 +574,16 @@ SetNode sets Node field to given value.
 
 HasNode returns a boolean if a field has been set.
 
+### SetNodeNil
+
+`func (o *HyperflexHypervisorHost) SetNodeNil(b bool)`
+
+ SetNodeNil sets the value for Node to be an explicit nil
+
+### UnsetNode
+`func (o *HyperflexHypervisorHost) UnsetNode()`
+
+UnsetNode ensures that no value is present for Node, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

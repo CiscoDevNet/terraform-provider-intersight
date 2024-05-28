@@ -26,10 +26,10 @@ Name | Type | Description | Notes
 **SiteInfo** | Pointer to [**NullableHyperflexSiteDetails**](HyperflexSiteDetails.md) |  | [optional] 
 **Status** | Pointer to **string** | The status of the host. Indicates whether the hypervisor is online. * &#x60;UNKNOWN&#x60; - The host status cannot be determined. * &#x60;ONLINE&#x60; - The host is online and operational. * &#x60;OFFLINE&#x60; - The host is offline and is currently not participating in the HyperFlex cluster. * &#x60;INMAINTENANCE&#x60; - The host is not participating in the HyperFlex cluster because of a maintenance operation, such as firmware or data platform upgrade. * &#x60;DEGRADED&#x60; - The host is degraded and may not be performing in its full operational capacity. | [optional] [readonly] [default to "UNKNOWN"]
 **Version** | Pointer to **string** | The version of the hypervisor running on the host. | [optional] [readonly] 
-**Cluster** | Pointer to [**HyperflexClusterRelationship**](HyperflexClusterRelationship.md) |  | [optional] 
-**ClusterMember** | Pointer to [**AssetClusterMemberRelationship**](AssetClusterMemberRelationship.md) |  | [optional] 
+**Cluster** | Pointer to [**NullableHyperflexClusterRelationship**](HyperflexClusterRelationship.md) |  | [optional] 
+**ClusterMember** | Pointer to [**NullableAssetClusterMemberRelationship**](AssetClusterMemberRelationship.md) |  | [optional] 
 **Drives** | Pointer to [**[]HyperflexDriveRelationship**](HyperflexDriveRelationship.md) | An array of relationships to hyperflexDrive resources. | [optional] [readonly] 
-**PhysicalServer** | Pointer to [**ComputePhysicalRelationship**](ComputePhysicalRelationship.md) |  | [optional] 
+**PhysicalServer** | Pointer to [**NullableComputePhysicalRelationship**](ComputePhysicalRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -685,6 +685,16 @@ SetCluster sets Cluster field to given value.
 
 HasCluster returns a boolean if a field has been set.
 
+### SetClusterNil
+
+`func (o *HyperflexNode) SetClusterNil(b bool)`
+
+ SetClusterNil sets the value for Cluster to be an explicit nil
+
+### UnsetCluster
+`func (o *HyperflexNode) UnsetCluster()`
+
+UnsetCluster ensures that no value is present for Cluster, not even an explicit nil
 ### GetClusterMember
 
 `func (o *HyperflexNode) GetClusterMember() AssetClusterMemberRelationship`
@@ -710,6 +720,16 @@ SetClusterMember sets ClusterMember field to given value.
 
 HasClusterMember returns a boolean if a field has been set.
 
+### SetClusterMemberNil
+
+`func (o *HyperflexNode) SetClusterMemberNil(b bool)`
+
+ SetClusterMemberNil sets the value for ClusterMember to be an explicit nil
+
+### UnsetClusterMember
+`func (o *HyperflexNode) UnsetClusterMember()`
+
+UnsetClusterMember ensures that no value is present for ClusterMember, not even an explicit nil
 ### GetDrives
 
 `func (o *HyperflexNode) GetDrives() []HyperflexDriveRelationship`
@@ -770,6 +790,16 @@ SetPhysicalServer sets PhysicalServer field to given value.
 
 HasPhysicalServer returns a boolean if a field has been set.
 
+### SetPhysicalServerNil
+
+`func (o *HyperflexNode) SetPhysicalServerNil(b bool)`
+
+ SetPhysicalServerNil sets the value for PhysicalServer to be an explicit nil
+
+### UnsetPhysicalServer
+`func (o *HyperflexNode) UnsetPhysicalServer()`
+
+UnsetPhysicalServer ensures that no value is present for PhysicalServer, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

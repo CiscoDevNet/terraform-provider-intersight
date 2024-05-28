@@ -8,12 +8,12 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "iam.Permission"]
 **Description** | Pointer to **string** | The informative description about each permission. | [optional] 
 **Name** | Pointer to **string** | The name of the permission which has to be granted to user. | [optional] 
-**Account** | Pointer to [**IamAccountRelationship**](IamAccountRelationship.md) |  | [optional] 
+**Account** | Pointer to [**NullableIamAccountRelationship**](IamAccountRelationship.md) |  | [optional] 
 **EndPointRoles** | Pointer to [**[]IamEndPointRoleRelationship**](IamEndPointRoleRelationship.md) | An array of relationships to iamEndPointRole resources. | [optional] [readonly] 
 **PrivilegeSets** | Pointer to [**[]IamPrivilegeSetRelationship**](IamPrivilegeSetRelationship.md) | An array of relationships to iamPrivilegeSet resources. | [optional] [readonly] 
 **ResourceRoles** | Pointer to [**[]IamResourceRolesRelationship**](IamResourceRolesRelationship.md) | An array of relationships to iamResourceRoles resources. | [optional] 
 **Roles** | Pointer to [**[]IamRoleRelationship**](IamRoleRelationship.md) | An array of relationships to iamRole resources. | [optional] 
-**SessionLimits** | Pointer to [**IamSessionLimitsRelationship**](IamSessionLimitsRelationship.md) |  | [optional] 
+**SessionLimits** | Pointer to [**NullableIamSessionLimitsRelationship**](IamSessionLimitsRelationship.md) |  | [optional] 
 **UserGroups** | Pointer to [**[]IamUserGroupRelationship**](IamUserGroupRelationship.md) | An array of relationships to iamUserGroup resources. | [optional] 
 **Users** | Pointer to [**[]IamUserRelationship**](IamUserRelationship.md) | An array of relationships to iamUser resources. | [optional] 
 
@@ -151,6 +151,16 @@ SetAccount sets Account field to given value.
 
 HasAccount returns a boolean if a field has been set.
 
+### SetAccountNil
+
+`func (o *IamPermission) SetAccountNil(b bool)`
+
+ SetAccountNil sets the value for Account to be an explicit nil
+
+### UnsetAccount
+`func (o *IamPermission) UnsetAccount()`
+
+UnsetAccount ensures that no value is present for Account, not even an explicit nil
 ### GetEndPointRoles
 
 `func (o *IamPermission) GetEndPointRoles() []IamEndPointRoleRelationship`
@@ -316,6 +326,16 @@ SetSessionLimits sets SessionLimits field to given value.
 
 HasSessionLimits returns a boolean if a field has been set.
 
+### SetSessionLimitsNil
+
+`func (o *IamPermission) SetSessionLimitsNil(b bool)`
+
+ SetSessionLimitsNil sets the value for SessionLimits to be an explicit nil
+
+### UnsetSessionLimits
+`func (o *IamPermission) UnsetSessionLimits()`
+
+UnsetSessionLimits ensures that no value is present for SessionLimits, not even an explicit nil
 ### GetUserGroups
 
 `func (o *IamPermission) GetUserGroups() []IamUserGroupRelationship`

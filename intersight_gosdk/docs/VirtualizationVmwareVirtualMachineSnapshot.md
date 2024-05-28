@@ -15,7 +15,7 @@ Name | Type | Description | Notes
 **Quiesced** | Pointer to **bool** | Quiesce pauses all the I/O operations on virtual machine till the snapshot is taken. | [optional] 
 **RefValue** | Pointer to **string** | Internally assigned MOR reference value. | [optional] 
 **SnapshotSize** | Pointer to **int64** | Size of the snapshot file created of the virtual machine, stored in bytes. | [optional] 
-**VirtualMachine** | Pointer to [**VirtualizationVmwareVirtualMachineRelationship**](VirtualizationVmwareVirtualMachineRelationship.md) |  | [optional] 
+**VirtualMachine** | Pointer to [**NullableVirtualizationVmwareVirtualMachineRelationship**](VirtualizationVmwareVirtualMachineRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -326,6 +326,16 @@ SetVirtualMachine sets VirtualMachine field to given value.
 
 HasVirtualMachine returns a boolean if a field has been set.
 
+### SetVirtualMachineNil
+
+`func (o *VirtualizationVmwareVirtualMachineSnapshot) SetVirtualMachineNil(b bool)`
+
+ SetVirtualMachineNil sets the value for VirtualMachine to be an explicit nil
+
+### UnsetVirtualMachine
+`func (o *VirtualizationVmwareVirtualMachineSnapshot) UnsetVirtualMachine()`
+
+UnsetVirtualMachine ensures that no value is present for VirtualMachine, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

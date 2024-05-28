@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the ConnectorTargetChangeMessage type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ConnectorTargetChangeMessage{}
 
 // ConnectorTargetChangeMessage The message sent to the Appliance device connector when a Target is created, modified or deleted. Appliance device connector is expected to maintain a durable cache of relevent Target information such that it can perform inventory collection and change operations against the target without soliciting basic connectivity details from Intersight.
 type ConnectorTargetChangeMessage struct {
@@ -115,7 +119,7 @@ func (o *ConnectorTargetChangeMessage) SetObjectType(v string) {
 
 // GetModStatus returns the ModStatus field value if set, zero value otherwise.
 func (o *ConnectorTargetChangeMessage) GetModStatus() string {
-	if o == nil || o.ModStatus == nil {
+	if o == nil || IsNil(o.ModStatus) {
 		var ret string
 		return ret
 	}
@@ -125,7 +129,7 @@ func (o *ConnectorTargetChangeMessage) GetModStatus() string {
 // GetModStatusOk returns a tuple with the ModStatus field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ConnectorTargetChangeMessage) GetModStatusOk() (*string, bool) {
-	if o == nil || o.ModStatus == nil {
+	if o == nil || IsNil(o.ModStatus) {
 		return nil, false
 	}
 	return o.ModStatus, true
@@ -133,7 +137,7 @@ func (o *ConnectorTargetChangeMessage) GetModStatusOk() (*string, bool) {
 
 // HasModStatus returns a boolean if a field has been set.
 func (o *ConnectorTargetChangeMessage) HasModStatus() bool {
-	if o != nil && o.ModStatus != nil {
+	if o != nil && !IsNil(o.ModStatus) {
 		return true
 	}
 
@@ -147,7 +151,7 @@ func (o *ConnectorTargetChangeMessage) SetModStatus(v string) {
 
 // GetServiceType returns the ServiceType field value if set, zero value otherwise.
 func (o *ConnectorTargetChangeMessage) GetServiceType() string {
-	if o == nil || o.ServiceType == nil {
+	if o == nil || IsNil(o.ServiceType) {
 		var ret string
 		return ret
 	}
@@ -157,7 +161,7 @@ func (o *ConnectorTargetChangeMessage) GetServiceType() string {
 // GetServiceTypeOk returns a tuple with the ServiceType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ConnectorTargetChangeMessage) GetServiceTypeOk() (*string, bool) {
-	if o == nil || o.ServiceType == nil {
+	if o == nil || IsNil(o.ServiceType) {
 		return nil, false
 	}
 	return o.ServiceType, true
@@ -165,7 +169,7 @@ func (o *ConnectorTargetChangeMessage) GetServiceTypeOk() (*string, bool) {
 
 // HasServiceType returns a boolean if a field has been set.
 func (o *ConnectorTargetChangeMessage) HasServiceType() bool {
-	if o != nil && o.ServiceType != nil {
+	if o != nil && !IsNil(o.ServiceType) {
 		return true
 	}
 
@@ -190,7 +194,7 @@ func (o *ConnectorTargetChangeMessage) GetTargetDetails() interface{} {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ConnectorTargetChangeMessage) GetTargetDetailsOk() (*interface{}, bool) {
-	if o == nil || o.TargetDetails == nil {
+	if o == nil || IsNil(o.TargetDetails) {
 		return nil, false
 	}
 	return &o.TargetDetails, true
@@ -198,7 +202,7 @@ func (o *ConnectorTargetChangeMessage) GetTargetDetailsOk() (*interface{}, bool)
 
 // HasTargetDetails returns a boolean if a field has been set.
 func (o *ConnectorTargetChangeMessage) HasTargetDetails() bool {
-	if o != nil && o.TargetDetails != nil {
+	if o != nil && IsNil(o.TargetDetails) {
 		return true
 	}
 
@@ -212,7 +216,7 @@ func (o *ConnectorTargetChangeMessage) SetTargetDetails(v interface{}) {
 
 // GetTargetMoid returns the TargetMoid field value if set, zero value otherwise.
 func (o *ConnectorTargetChangeMessage) GetTargetMoid() string {
-	if o == nil || o.TargetMoid == nil {
+	if o == nil || IsNil(o.TargetMoid) {
 		var ret string
 		return ret
 	}
@@ -222,7 +226,7 @@ func (o *ConnectorTargetChangeMessage) GetTargetMoid() string {
 // GetTargetMoidOk returns a tuple with the TargetMoid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ConnectorTargetChangeMessage) GetTargetMoidOk() (*string, bool) {
-	if o == nil || o.TargetMoid == nil {
+	if o == nil || IsNil(o.TargetMoid) {
 		return nil, false
 	}
 	return o.TargetMoid, true
@@ -230,7 +234,7 @@ func (o *ConnectorTargetChangeMessage) GetTargetMoidOk() (*string, bool) {
 
 // HasTargetMoid returns a boolean if a field has been set.
 func (o *ConnectorTargetChangeMessage) HasTargetMoid() bool {
-	if o != nil && o.TargetMoid != nil {
+	if o != nil && !IsNil(o.TargetMoid) {
 		return true
 	}
 
@@ -244,7 +248,7 @@ func (o *ConnectorTargetChangeMessage) SetTargetMoid(v string) {
 
 // GetTargetSpecification returns the TargetSpecification field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ConnectorTargetChangeMessage) GetTargetSpecification() ConnectorTargetSpecification {
-	if o == nil || o.TargetSpecification.Get() == nil {
+	if o == nil || IsNil(o.TargetSpecification.Get()) {
 		var ret ConnectorTargetSpecification
 		return ret
 	}
@@ -286,31 +290,35 @@ func (o *ConnectorTargetChangeMessage) UnsetTargetSpecification() {
 }
 
 func (o ConnectorTargetChangeMessage) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o ConnectorTargetChangeMessage) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedConnectorBaseMessage, errConnectorBaseMessage := json.Marshal(o.ConnectorBaseMessage)
 	if errConnectorBaseMessage != nil {
-		return []byte{}, errConnectorBaseMessage
+		return map[string]interface{}{}, errConnectorBaseMessage
 	}
 	errConnectorBaseMessage = json.Unmarshal([]byte(serializedConnectorBaseMessage), &toSerialize)
 	if errConnectorBaseMessage != nil {
-		return []byte{}, errConnectorBaseMessage
+		return map[string]interface{}{}, errConnectorBaseMessage
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.ModStatus != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.ModStatus) {
 		toSerialize["ModStatus"] = o.ModStatus
 	}
-	if o.ServiceType != nil {
+	if !IsNil(o.ServiceType) {
 		toSerialize["ServiceType"] = o.ServiceType
 	}
 	if o.TargetDetails != nil {
 		toSerialize["TargetDetails"] = o.TargetDetails
 	}
-	if o.TargetMoid != nil {
+	if !IsNil(o.TargetMoid) {
 		toSerialize["TargetMoid"] = o.TargetMoid
 	}
 	if o.TargetSpecification.IsSet() {
@@ -321,10 +329,32 @@ func (o ConnectorTargetChangeMessage) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *ConnectorTargetChangeMessage) UnmarshalJSON(bytes []byte) (err error) {
+func (o *ConnectorTargetChangeMessage) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type ConnectorTargetChangeMessageWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -343,7 +373,7 @@ func (o *ConnectorTargetChangeMessage) UnmarshalJSON(bytes []byte) (err error) {
 
 	varConnectorTargetChangeMessageWithoutEmbeddedStruct := ConnectorTargetChangeMessageWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varConnectorTargetChangeMessageWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varConnectorTargetChangeMessageWithoutEmbeddedStruct)
 	if err == nil {
 		varConnectorTargetChangeMessage := _ConnectorTargetChangeMessage{}
 		varConnectorTargetChangeMessage.ClassId = varConnectorTargetChangeMessageWithoutEmbeddedStruct.ClassId
@@ -360,7 +390,7 @@ func (o *ConnectorTargetChangeMessage) UnmarshalJSON(bytes []byte) (err error) {
 
 	varConnectorTargetChangeMessage := _ConnectorTargetChangeMessage{}
 
-	err = json.Unmarshal(bytes, &varConnectorTargetChangeMessage)
+	err = json.Unmarshal(data, &varConnectorTargetChangeMessage)
 	if err == nil {
 		o.ConnectorBaseMessage = varConnectorTargetChangeMessage.ConnectorBaseMessage
 	} else {
@@ -369,7 +399,7 @@ func (o *ConnectorTargetChangeMessage) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "ModStatus")

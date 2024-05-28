@@ -9,10 +9,10 @@ Name | Type | Description | Notes
 **Ipv4Address** | Pointer to **string** | IPv4 Address leased to this Server Profile for In-Band Deployment. | [optional] [readonly] 
 **Ipv6Address** | Pointer to **string** | IPv4 Address leased to this Server Profile for In-Band Deployment. | [optional] [readonly] 
 **OobIpv4Address** | Pointer to **string** | IPv4 Address leased to this Server Profile for Out-Of-Band deployment. | [optional] [readonly] 
-**Ipv4Lease** | Pointer to [**IppoolIpLeaseRelationship**](IppoolIpLeaseRelationship.md) |  | [optional] 
-**Ipv6Lease** | Pointer to [**IppoolIpLeaseRelationship**](IppoolIpLeaseRelationship.md) |  | [optional] 
-**OobIpv4Lease** | Pointer to [**IppoolIpLeaseRelationship**](IppoolIpLeaseRelationship.md) |  | [optional] 
-**Profile** | Pointer to [**PolicyAbstractConfigProfileRelationship**](PolicyAbstractConfigProfileRelationship.md) |  | [optional] 
+**Ipv4Lease** | Pointer to [**NullableIppoolIpLeaseRelationship**](IppoolIpLeaseRelationship.md) |  | [optional] 
+**Ipv6Lease** | Pointer to [**NullableIppoolIpLeaseRelationship**](IppoolIpLeaseRelationship.md) |  | [optional] 
+**OobIpv4Lease** | Pointer to [**NullableIppoolIpLeaseRelationship**](IppoolIpLeaseRelationship.md) |  | [optional] 
+**Profile** | Pointer to [**NullablePolicyAbstractConfigProfileRelationship**](PolicyAbstractConfigProfileRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -173,6 +173,16 @@ SetIpv4Lease sets Ipv4Lease field to given value.
 
 HasIpv4Lease returns a boolean if a field has been set.
 
+### SetIpv4LeaseNil
+
+`func (o *AccessIpAddress) SetIpv4LeaseNil(b bool)`
+
+ SetIpv4LeaseNil sets the value for Ipv4Lease to be an explicit nil
+
+### UnsetIpv4Lease
+`func (o *AccessIpAddress) UnsetIpv4Lease()`
+
+UnsetIpv4Lease ensures that no value is present for Ipv4Lease, not even an explicit nil
 ### GetIpv6Lease
 
 `func (o *AccessIpAddress) GetIpv6Lease() IppoolIpLeaseRelationship`
@@ -198,6 +208,16 @@ SetIpv6Lease sets Ipv6Lease field to given value.
 
 HasIpv6Lease returns a boolean if a field has been set.
 
+### SetIpv6LeaseNil
+
+`func (o *AccessIpAddress) SetIpv6LeaseNil(b bool)`
+
+ SetIpv6LeaseNil sets the value for Ipv6Lease to be an explicit nil
+
+### UnsetIpv6Lease
+`func (o *AccessIpAddress) UnsetIpv6Lease()`
+
+UnsetIpv6Lease ensures that no value is present for Ipv6Lease, not even an explicit nil
 ### GetOobIpv4Lease
 
 `func (o *AccessIpAddress) GetOobIpv4Lease() IppoolIpLeaseRelationship`
@@ -223,6 +243,16 @@ SetOobIpv4Lease sets OobIpv4Lease field to given value.
 
 HasOobIpv4Lease returns a boolean if a field has been set.
 
+### SetOobIpv4LeaseNil
+
+`func (o *AccessIpAddress) SetOobIpv4LeaseNil(b bool)`
+
+ SetOobIpv4LeaseNil sets the value for OobIpv4Lease to be an explicit nil
+
+### UnsetOobIpv4Lease
+`func (o *AccessIpAddress) UnsetOobIpv4Lease()`
+
+UnsetOobIpv4Lease ensures that no value is present for OobIpv4Lease, not even an explicit nil
 ### GetProfile
 
 `func (o *AccessIpAddress) GetProfile() PolicyAbstractConfigProfileRelationship`
@@ -248,6 +278,16 @@ SetProfile sets Profile field to given value.
 
 HasProfile returns a boolean if a field has been set.
 
+### SetProfileNil
+
+`func (o *AccessIpAddress) SetProfileNil(b bool)`
+
+ SetProfileNil sets the value for Profile to be an explicit nil
+
+### UnsetProfile
+`func (o *AccessIpAddress) UnsetProfile()`
+
+UnsetProfile ensures that no value is present for Profile, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

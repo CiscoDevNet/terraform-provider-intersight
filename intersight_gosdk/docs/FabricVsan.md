@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **Name** | Pointer to **string** | User given name for the VSAN configuration. | [optional] 
 **VsanId** | Pointer to **int64** | Virtual San Identifier in the switch. | [optional] 
 **VsanScope** | Pointer to **string** | Used to indicate whether the VSAN Id is defined for storage or uplink or both traffics in FI. * &#x60;Uplink&#x60; - Vsan associated with uplink network. * &#x60;Storage&#x60; - Vsan associated with storage network. * &#x60;Common&#x60; - Vsan that is common for uplink and storage network. | [optional] [default to "Uplink"]
-**FcNetworkPolicy** | Pointer to [**FabricFcNetworkPolicyRelationship**](FabricFcNetworkPolicyRelationship.md) |  | [optional] 
+**FcNetworkPolicy** | Pointer to [**NullableFabricFcNetworkPolicyRelationship**](FabricFcNetworkPolicyRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -248,6 +248,16 @@ SetFcNetworkPolicy sets FcNetworkPolicy field to given value.
 
 HasFcNetworkPolicy returns a boolean if a field has been set.
 
+### SetFcNetworkPolicyNil
+
+`func (o *FabricVsan) SetFcNetworkPolicyNil(b bool)`
+
+ SetFcNetworkPolicyNil sets the value for FcNetworkPolicy to be an explicit nil
+
+### UnsetFcNetworkPolicy
+`func (o *FabricVsan) UnsetFcNetworkPolicy()`
+
+UnsetFcNetworkPolicy ensures that no value is present for FcNetworkPolicy, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

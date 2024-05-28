@@ -13,8 +13,8 @@ Name | Type | Description | Notes
 **PortChannelId** | Pointer to **int64** | Port channel id for port channel created on FI switch. | [optional] [readonly] 
 **PortType** | Pointer to **string** | Defines the transport type for this port (ethernet OR fc). | [optional] [readonly] 
 **TransceiverType** | Pointer to **string** | Transceiver model attached to a port in the Fabric Interconnect. | [optional] [readonly] 
-**AcknowledgedPeerInterface** | Pointer to [**PortInterfaceBaseRelationship**](PortInterfaceBaseRelationship.md) |  | [optional] 
-**PeerInterface** | Pointer to [**PortInterfaceBaseRelationship**](PortInterfaceBaseRelationship.md) |  | [optional] 
+**AcknowledgedPeerInterface** | Pointer to [**NullablePortInterfaceBaseRelationship**](PortInterfaceBaseRelationship.md) |  | [optional] 
+**PeerInterface** | Pointer to [**NullablePortInterfaceBaseRelationship**](PortInterfaceBaseRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -275,6 +275,16 @@ SetAcknowledgedPeerInterface sets AcknowledgedPeerInterface field to given value
 
 HasAcknowledgedPeerInterface returns a boolean if a field has been set.
 
+### SetAcknowledgedPeerInterfaceNil
+
+`func (o *EtherPhysicalPortBase) SetAcknowledgedPeerInterfaceNil(b bool)`
+
+ SetAcknowledgedPeerInterfaceNil sets the value for AcknowledgedPeerInterface to be an explicit nil
+
+### UnsetAcknowledgedPeerInterface
+`func (o *EtherPhysicalPortBase) UnsetAcknowledgedPeerInterface()`
+
+UnsetAcknowledgedPeerInterface ensures that no value is present for AcknowledgedPeerInterface, not even an explicit nil
 ### GetPeerInterface
 
 `func (o *EtherPhysicalPortBase) GetPeerInterface() PortInterfaceBaseRelationship`
@@ -300,6 +310,16 @@ SetPeerInterface sets PeerInterface field to given value.
 
 HasPeerInterface returns a boolean if a field has been set.
 
+### SetPeerInterfaceNil
+
+`func (o *EtherPhysicalPortBase) SetPeerInterfaceNil(b bool)`
+
+ SetPeerInterfaceNil sets the value for PeerInterface to be an explicit nil
+
+### UnsetPeerInterface
+`func (o *EtherPhysicalPortBase) UnsetPeerInterface()`
+
+UnsetPeerInterface ensures that no value is present for PeerInterface, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

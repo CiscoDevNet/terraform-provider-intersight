@@ -9,10 +9,10 @@ Name | Type | Description | Notes
 **Enabled** | Pointer to **bool** | State of the Virtual Media service on the server. | [optional] [readonly] [default to true]
 **Encryption** | Pointer to **bool** | If enabled, allows encryption of all Virtual Media communications. | [optional] [readonly] 
 **LowPowerUsb** | Pointer to **bool** | If enabled, the virtual drives appear on the boot selection menu after mapping the image and rebooting the host. | [optional] [readonly] [default to true]
-**ComputePhysicalUnit** | Pointer to [**ComputePhysicalRelationship**](ComputePhysicalRelationship.md) |  | [optional] 
-**InventoryDeviceInfo** | Pointer to [**InventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
+**ComputePhysicalUnit** | Pointer to [**NullableComputePhysicalRelationship**](ComputePhysicalRelationship.md) |  | [optional] 
+**InventoryDeviceInfo** | Pointer to [**NullableInventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
 **Mappings** | Pointer to [**[]ComputeMappingRelationship**](ComputeMappingRelationship.md) | An array of relationships to computeMapping resources. | [optional] [readonly] 
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -173,6 +173,16 @@ SetComputePhysicalUnit sets ComputePhysicalUnit field to given value.
 
 HasComputePhysicalUnit returns a boolean if a field has been set.
 
+### SetComputePhysicalUnitNil
+
+`func (o *ComputeVmedia) SetComputePhysicalUnitNil(b bool)`
+
+ SetComputePhysicalUnitNil sets the value for ComputePhysicalUnit to be an explicit nil
+
+### UnsetComputePhysicalUnit
+`func (o *ComputeVmedia) UnsetComputePhysicalUnit()`
+
+UnsetComputePhysicalUnit ensures that no value is present for ComputePhysicalUnit, not even an explicit nil
 ### GetInventoryDeviceInfo
 
 `func (o *ComputeVmedia) GetInventoryDeviceInfo() InventoryDeviceInfoRelationship`
@@ -198,6 +208,16 @@ SetInventoryDeviceInfo sets InventoryDeviceInfo field to given value.
 
 HasInventoryDeviceInfo returns a boolean if a field has been set.
 
+### SetInventoryDeviceInfoNil
+
+`func (o *ComputeVmedia) SetInventoryDeviceInfoNil(b bool)`
+
+ SetInventoryDeviceInfoNil sets the value for InventoryDeviceInfo to be an explicit nil
+
+### UnsetInventoryDeviceInfo
+`func (o *ComputeVmedia) UnsetInventoryDeviceInfo()`
+
+UnsetInventoryDeviceInfo ensures that no value is present for InventoryDeviceInfo, not even an explicit nil
 ### GetMappings
 
 `func (o *ComputeVmedia) GetMappings() []ComputeMappingRelationship`
@@ -258,6 +278,16 @@ SetRegisteredDevice sets RegisteredDevice field to given value.
 
 HasRegisteredDevice returns a boolean if a field has been set.
 
+### SetRegisteredDeviceNil
+
+`func (o *ComputeVmedia) SetRegisteredDeviceNil(b bool)`
+
+ SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+
+### UnsetRegisteredDevice
+`func (o *ComputeVmedia) UnsetRegisteredDevice()`
+
+UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

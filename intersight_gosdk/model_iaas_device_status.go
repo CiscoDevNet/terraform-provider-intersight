@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the IaasDeviceStatus type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &IaasDeviceStatus{}
 
 // IaasDeviceStatus List of infra accounts managed by UCSD.
 type IaasDeviceStatus struct {
@@ -45,8 +49,8 @@ type IaasDeviceStatus struct {
 	// Describes about the pod to which this device belongs to in UCSD.
 	Pod *string `json:"Pod,omitempty"`
 	// Describes about the podType of Pod to which this device belongs to in UCSD.
-	PodType              *string                   `json:"PodType,omitempty"`
-	Guid                 *IaasUcsdInfoRelationship `json:"Guid,omitempty"`
+	PodType              *string                          `json:"PodType,omitempty"`
+	Guid                 NullableIaasUcsdInfoRelationship `json:"Guid,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -125,7 +129,7 @@ func (o *IaasDeviceStatus) SetObjectType(v string) {
 
 // GetAccountName returns the AccountName field value if set, zero value otherwise.
 func (o *IaasDeviceStatus) GetAccountName() string {
-	if o == nil || o.AccountName == nil {
+	if o == nil || IsNil(o.AccountName) {
 		var ret string
 		return ret
 	}
@@ -135,7 +139,7 @@ func (o *IaasDeviceStatus) GetAccountName() string {
 // GetAccountNameOk returns a tuple with the AccountName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IaasDeviceStatus) GetAccountNameOk() (*string, bool) {
-	if o == nil || o.AccountName == nil {
+	if o == nil || IsNil(o.AccountName) {
 		return nil, false
 	}
 	return o.AccountName, true
@@ -143,7 +147,7 @@ func (o *IaasDeviceStatus) GetAccountNameOk() (*string, bool) {
 
 // HasAccountName returns a boolean if a field has been set.
 func (o *IaasDeviceStatus) HasAccountName() bool {
-	if o != nil && o.AccountName != nil {
+	if o != nil && !IsNil(o.AccountName) {
 		return true
 	}
 
@@ -157,7 +161,7 @@ func (o *IaasDeviceStatus) SetAccountName(v string) {
 
 // GetAccountType returns the AccountType field value if set, zero value otherwise.
 func (o *IaasDeviceStatus) GetAccountType() string {
-	if o == nil || o.AccountType == nil {
+	if o == nil || IsNil(o.AccountType) {
 		var ret string
 		return ret
 	}
@@ -167,7 +171,7 @@ func (o *IaasDeviceStatus) GetAccountType() string {
 // GetAccountTypeOk returns a tuple with the AccountType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IaasDeviceStatus) GetAccountTypeOk() (*string, bool) {
-	if o == nil || o.AccountType == nil {
+	if o == nil || IsNil(o.AccountType) {
 		return nil, false
 	}
 	return o.AccountType, true
@@ -175,7 +179,7 @@ func (o *IaasDeviceStatus) GetAccountTypeOk() (*string, bool) {
 
 // HasAccountType returns a boolean if a field has been set.
 func (o *IaasDeviceStatus) HasAccountType() bool {
-	if o != nil && o.AccountType != nil {
+	if o != nil && !IsNil(o.AccountType) {
 		return true
 	}
 
@@ -189,7 +193,7 @@ func (o *IaasDeviceStatus) SetAccountType(v string) {
 
 // GetCategory returns the Category field value if set, zero value otherwise.
 func (o *IaasDeviceStatus) GetCategory() string {
-	if o == nil || o.Category == nil {
+	if o == nil || IsNil(o.Category) {
 		var ret string
 		return ret
 	}
@@ -199,7 +203,7 @@ func (o *IaasDeviceStatus) GetCategory() string {
 // GetCategoryOk returns a tuple with the Category field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IaasDeviceStatus) GetCategoryOk() (*string, bool) {
-	if o == nil || o.Category == nil {
+	if o == nil || IsNil(o.Category) {
 		return nil, false
 	}
 	return o.Category, true
@@ -207,7 +211,7 @@ func (o *IaasDeviceStatus) GetCategoryOk() (*string, bool) {
 
 // HasCategory returns a boolean if a field has been set.
 func (o *IaasDeviceStatus) HasCategory() bool {
-	if o != nil && o.Category != nil {
+	if o != nil && !IsNil(o.Category) {
 		return true
 	}
 
@@ -221,7 +225,7 @@ func (o *IaasDeviceStatus) SetCategory(v string) {
 
 // GetClaimStatus returns the ClaimStatus field value if set, zero value otherwise.
 func (o *IaasDeviceStatus) GetClaimStatus() string {
-	if o == nil || o.ClaimStatus == nil {
+	if o == nil || IsNil(o.ClaimStatus) {
 		var ret string
 		return ret
 	}
@@ -231,7 +235,7 @@ func (o *IaasDeviceStatus) GetClaimStatus() string {
 // GetClaimStatusOk returns a tuple with the ClaimStatus field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IaasDeviceStatus) GetClaimStatusOk() (*string, bool) {
-	if o == nil || o.ClaimStatus == nil {
+	if o == nil || IsNil(o.ClaimStatus) {
 		return nil, false
 	}
 	return o.ClaimStatus, true
@@ -239,7 +243,7 @@ func (o *IaasDeviceStatus) GetClaimStatusOk() (*string, bool) {
 
 // HasClaimStatus returns a boolean if a field has been set.
 func (o *IaasDeviceStatus) HasClaimStatus() bool {
-	if o != nil && o.ClaimStatus != nil {
+	if o != nil && !IsNil(o.ClaimStatus) {
 		return true
 	}
 
@@ -253,7 +257,7 @@ func (o *IaasDeviceStatus) SetClaimStatus(v string) {
 
 // GetConnectionStatus returns the ConnectionStatus field value if set, zero value otherwise.
 func (o *IaasDeviceStatus) GetConnectionStatus() string {
-	if o == nil || o.ConnectionStatus == nil {
+	if o == nil || IsNil(o.ConnectionStatus) {
 		var ret string
 		return ret
 	}
@@ -263,7 +267,7 @@ func (o *IaasDeviceStatus) GetConnectionStatus() string {
 // GetConnectionStatusOk returns a tuple with the ConnectionStatus field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IaasDeviceStatus) GetConnectionStatusOk() (*string, bool) {
-	if o == nil || o.ConnectionStatus == nil {
+	if o == nil || IsNil(o.ConnectionStatus) {
 		return nil, false
 	}
 	return o.ConnectionStatus, true
@@ -271,7 +275,7 @@ func (o *IaasDeviceStatus) GetConnectionStatusOk() (*string, bool) {
 
 // HasConnectionStatus returns a boolean if a field has been set.
 func (o *IaasDeviceStatus) HasConnectionStatus() bool {
-	if o != nil && o.ConnectionStatus != nil {
+	if o != nil && !IsNil(o.ConnectionStatus) {
 		return true
 	}
 
@@ -285,7 +289,7 @@ func (o *IaasDeviceStatus) SetConnectionStatus(v string) {
 
 // GetDeviceModel returns the DeviceModel field value if set, zero value otherwise.
 func (o *IaasDeviceStatus) GetDeviceModel() string {
-	if o == nil || o.DeviceModel == nil {
+	if o == nil || IsNil(o.DeviceModel) {
 		var ret string
 		return ret
 	}
@@ -295,7 +299,7 @@ func (o *IaasDeviceStatus) GetDeviceModel() string {
 // GetDeviceModelOk returns a tuple with the DeviceModel field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IaasDeviceStatus) GetDeviceModelOk() (*string, bool) {
-	if o == nil || o.DeviceModel == nil {
+	if o == nil || IsNil(o.DeviceModel) {
 		return nil, false
 	}
 	return o.DeviceModel, true
@@ -303,7 +307,7 @@ func (o *IaasDeviceStatus) GetDeviceModelOk() (*string, bool) {
 
 // HasDeviceModel returns a boolean if a field has been set.
 func (o *IaasDeviceStatus) HasDeviceModel() bool {
-	if o != nil && o.DeviceModel != nil {
+	if o != nil && !IsNil(o.DeviceModel) {
 		return true
 	}
 
@@ -317,7 +321,7 @@ func (o *IaasDeviceStatus) SetDeviceModel(v string) {
 
 // GetDeviceVendor returns the DeviceVendor field value if set, zero value otherwise.
 func (o *IaasDeviceStatus) GetDeviceVendor() string {
-	if o == nil || o.DeviceVendor == nil {
+	if o == nil || IsNil(o.DeviceVendor) {
 		var ret string
 		return ret
 	}
@@ -327,7 +331,7 @@ func (o *IaasDeviceStatus) GetDeviceVendor() string {
 // GetDeviceVendorOk returns a tuple with the DeviceVendor field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IaasDeviceStatus) GetDeviceVendorOk() (*string, bool) {
-	if o == nil || o.DeviceVendor == nil {
+	if o == nil || IsNil(o.DeviceVendor) {
 		return nil, false
 	}
 	return o.DeviceVendor, true
@@ -335,7 +339,7 @@ func (o *IaasDeviceStatus) GetDeviceVendorOk() (*string, bool) {
 
 // HasDeviceVendor returns a boolean if a field has been set.
 func (o *IaasDeviceStatus) HasDeviceVendor() bool {
-	if o != nil && o.DeviceVendor != nil {
+	if o != nil && !IsNil(o.DeviceVendor) {
 		return true
 	}
 
@@ -349,7 +353,7 @@ func (o *IaasDeviceStatus) SetDeviceVendor(v string) {
 
 // GetDeviceVersion returns the DeviceVersion field value if set, zero value otherwise.
 func (o *IaasDeviceStatus) GetDeviceVersion() string {
-	if o == nil || o.DeviceVersion == nil {
+	if o == nil || IsNil(o.DeviceVersion) {
 		var ret string
 		return ret
 	}
@@ -359,7 +363,7 @@ func (o *IaasDeviceStatus) GetDeviceVersion() string {
 // GetDeviceVersionOk returns a tuple with the DeviceVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IaasDeviceStatus) GetDeviceVersionOk() (*string, bool) {
-	if o == nil || o.DeviceVersion == nil {
+	if o == nil || IsNil(o.DeviceVersion) {
 		return nil, false
 	}
 	return o.DeviceVersion, true
@@ -367,7 +371,7 @@ func (o *IaasDeviceStatus) GetDeviceVersionOk() (*string, bool) {
 
 // HasDeviceVersion returns a boolean if a field has been set.
 func (o *IaasDeviceStatus) HasDeviceVersion() bool {
-	if o != nil && o.DeviceVersion != nil {
+	if o != nil && !IsNil(o.DeviceVersion) {
 		return true
 	}
 
@@ -381,7 +385,7 @@ func (o *IaasDeviceStatus) SetDeviceVersion(v string) {
 
 // GetIpAddress returns the IpAddress field value if set, zero value otherwise.
 func (o *IaasDeviceStatus) GetIpAddress() string {
-	if o == nil || o.IpAddress == nil {
+	if o == nil || IsNil(o.IpAddress) {
 		var ret string
 		return ret
 	}
@@ -391,7 +395,7 @@ func (o *IaasDeviceStatus) GetIpAddress() string {
 // GetIpAddressOk returns a tuple with the IpAddress field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IaasDeviceStatus) GetIpAddressOk() (*string, bool) {
-	if o == nil || o.IpAddress == nil {
+	if o == nil || IsNil(o.IpAddress) {
 		return nil, false
 	}
 	return o.IpAddress, true
@@ -399,7 +403,7 @@ func (o *IaasDeviceStatus) GetIpAddressOk() (*string, bool) {
 
 // HasIpAddress returns a boolean if a field has been set.
 func (o *IaasDeviceStatus) HasIpAddress() bool {
-	if o != nil && o.IpAddress != nil {
+	if o != nil && !IsNil(o.IpAddress) {
 		return true
 	}
 
@@ -413,7 +417,7 @@ func (o *IaasDeviceStatus) SetIpAddress(v string) {
 
 // GetPod returns the Pod field value if set, zero value otherwise.
 func (o *IaasDeviceStatus) GetPod() string {
-	if o == nil || o.Pod == nil {
+	if o == nil || IsNil(o.Pod) {
 		var ret string
 		return ret
 	}
@@ -423,7 +427,7 @@ func (o *IaasDeviceStatus) GetPod() string {
 // GetPodOk returns a tuple with the Pod field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IaasDeviceStatus) GetPodOk() (*string, bool) {
-	if o == nil || o.Pod == nil {
+	if o == nil || IsNil(o.Pod) {
 		return nil, false
 	}
 	return o.Pod, true
@@ -431,7 +435,7 @@ func (o *IaasDeviceStatus) GetPodOk() (*string, bool) {
 
 // HasPod returns a boolean if a field has been set.
 func (o *IaasDeviceStatus) HasPod() bool {
-	if o != nil && o.Pod != nil {
+	if o != nil && !IsNil(o.Pod) {
 		return true
 	}
 
@@ -445,7 +449,7 @@ func (o *IaasDeviceStatus) SetPod(v string) {
 
 // GetPodType returns the PodType field value if set, zero value otherwise.
 func (o *IaasDeviceStatus) GetPodType() string {
-	if o == nil || o.PodType == nil {
+	if o == nil || IsNil(o.PodType) {
 		var ret string
 		return ret
 	}
@@ -455,7 +459,7 @@ func (o *IaasDeviceStatus) GetPodType() string {
 // GetPodTypeOk returns a tuple with the PodType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IaasDeviceStatus) GetPodTypeOk() (*string, bool) {
-	if o == nil || o.PodType == nil {
+	if o == nil || IsNil(o.PodType) {
 		return nil, false
 	}
 	return o.PodType, true
@@ -463,7 +467,7 @@ func (o *IaasDeviceStatus) GetPodTypeOk() (*string, bool) {
 
 // HasPodType returns a boolean if a field has been set.
 func (o *IaasDeviceStatus) HasPodType() bool {
-	if o != nil && o.PodType != nil {
+	if o != nil && !IsNil(o.PodType) {
 		return true
 	}
 
@@ -475,99 +479,136 @@ func (o *IaasDeviceStatus) SetPodType(v string) {
 	o.PodType = &v
 }
 
-// GetGuid returns the Guid field value if set, zero value otherwise.
+// GetGuid returns the Guid field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *IaasDeviceStatus) GetGuid() IaasUcsdInfoRelationship {
-	if o == nil || o.Guid == nil {
+	if o == nil || IsNil(o.Guid.Get()) {
 		var ret IaasUcsdInfoRelationship
 		return ret
 	}
-	return *o.Guid
+	return *o.Guid.Get()
 }
 
 // GetGuidOk returns a tuple with the Guid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *IaasDeviceStatus) GetGuidOk() (*IaasUcsdInfoRelationship, bool) {
-	if o == nil || o.Guid == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Guid, true
+	return o.Guid.Get(), o.Guid.IsSet()
 }
 
 // HasGuid returns a boolean if a field has been set.
 func (o *IaasDeviceStatus) HasGuid() bool {
-	if o != nil && o.Guid != nil {
+	if o != nil && o.Guid.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetGuid gets a reference to the given IaasUcsdInfoRelationship and assigns it to the Guid field.
+// SetGuid gets a reference to the given NullableIaasUcsdInfoRelationship and assigns it to the Guid field.
 func (o *IaasDeviceStatus) SetGuid(v IaasUcsdInfoRelationship) {
-	o.Guid = &v
+	o.Guid.Set(&v)
+}
+
+// SetGuidNil sets the value for Guid to be an explicit nil
+func (o *IaasDeviceStatus) SetGuidNil() {
+	o.Guid.Set(nil)
+}
+
+// UnsetGuid ensures that no value is present for Guid, not even an explicit nil
+func (o *IaasDeviceStatus) UnsetGuid() {
+	o.Guid.Unset()
 }
 
 func (o IaasDeviceStatus) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o IaasDeviceStatus) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.AccountName != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.AccountName) {
 		toSerialize["AccountName"] = o.AccountName
 	}
-	if o.AccountType != nil {
+	if !IsNil(o.AccountType) {
 		toSerialize["AccountType"] = o.AccountType
 	}
-	if o.Category != nil {
+	if !IsNil(o.Category) {
 		toSerialize["Category"] = o.Category
 	}
-	if o.ClaimStatus != nil {
+	if !IsNil(o.ClaimStatus) {
 		toSerialize["ClaimStatus"] = o.ClaimStatus
 	}
-	if o.ConnectionStatus != nil {
+	if !IsNil(o.ConnectionStatus) {
 		toSerialize["ConnectionStatus"] = o.ConnectionStatus
 	}
-	if o.DeviceModel != nil {
+	if !IsNil(o.DeviceModel) {
 		toSerialize["DeviceModel"] = o.DeviceModel
 	}
-	if o.DeviceVendor != nil {
+	if !IsNil(o.DeviceVendor) {
 		toSerialize["DeviceVendor"] = o.DeviceVendor
 	}
-	if o.DeviceVersion != nil {
+	if !IsNil(o.DeviceVersion) {
 		toSerialize["DeviceVersion"] = o.DeviceVersion
 	}
-	if o.IpAddress != nil {
+	if !IsNil(o.IpAddress) {
 		toSerialize["IpAddress"] = o.IpAddress
 	}
-	if o.Pod != nil {
+	if !IsNil(o.Pod) {
 		toSerialize["Pod"] = o.Pod
 	}
-	if o.PodType != nil {
+	if !IsNil(o.PodType) {
 		toSerialize["PodType"] = o.PodType
 	}
-	if o.Guid != nil {
-		toSerialize["Guid"] = o.Guid
+	if o.Guid.IsSet() {
+		toSerialize["Guid"] = o.Guid.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *IaasDeviceStatus) UnmarshalJSON(bytes []byte) (err error) {
+func (o *IaasDeviceStatus) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type IaasDeviceStatusWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -594,13 +635,13 @@ func (o *IaasDeviceStatus) UnmarshalJSON(bytes []byte) (err error) {
 		// Describes about the pod to which this device belongs to in UCSD.
 		Pod *string `json:"Pod,omitempty"`
 		// Describes about the podType of Pod to which this device belongs to in UCSD.
-		PodType *string                   `json:"PodType,omitempty"`
-		Guid    *IaasUcsdInfoRelationship `json:"Guid,omitempty"`
+		PodType *string                          `json:"PodType,omitempty"`
+		Guid    NullableIaasUcsdInfoRelationship `json:"Guid,omitempty"`
 	}
 
 	varIaasDeviceStatusWithoutEmbeddedStruct := IaasDeviceStatusWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varIaasDeviceStatusWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varIaasDeviceStatusWithoutEmbeddedStruct)
 	if err == nil {
 		varIaasDeviceStatus := _IaasDeviceStatus{}
 		varIaasDeviceStatus.ClassId = varIaasDeviceStatusWithoutEmbeddedStruct.ClassId
@@ -624,7 +665,7 @@ func (o *IaasDeviceStatus) UnmarshalJSON(bytes []byte) (err error) {
 
 	varIaasDeviceStatus := _IaasDeviceStatus{}
 
-	err = json.Unmarshal(bytes, &varIaasDeviceStatus)
+	err = json.Unmarshal(data, &varIaasDeviceStatus)
 	if err == nil {
 		o.MoBaseMo = varIaasDeviceStatus.MoBaseMo
 	} else {
@@ -633,7 +674,7 @@ func (o *IaasDeviceStatus) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "AccountName")

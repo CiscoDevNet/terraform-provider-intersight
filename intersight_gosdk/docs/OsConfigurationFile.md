@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **Name** | Pointer to **string** | The name of the OS ConfigurationFile that uniquely identifies the configuration file. | [optional] 
 **Placeholders** | Pointer to [**[]OsPlaceHolder**](OsPlaceHolder.md) |  | [optional] 
 **Supported** | Pointer to **bool** | An internal property that is used to distinguish between the pre-canned OS configuration file entries and user provided entries. | [optional] [readonly] 
-**Catalog** | Pointer to [**OsCatalogRelationship**](OsCatalogRelationship.md) |  | [optional] 
+**Catalog** | Pointer to [**NullableOsCatalogRelationship**](OsCatalogRelationship.md) |  | [optional] 
 **Distributions** | Pointer to [**[]HclOperatingSystemRelationship**](HclOperatingSystemRelationship.md) | An array of relationships to hclOperatingSystem resources. | [optional] 
 
 ## Methods
@@ -259,6 +259,16 @@ SetCatalog sets Catalog field to given value.
 
 HasCatalog returns a boolean if a field has been set.
 
+### SetCatalogNil
+
+`func (o *OsConfigurationFile) SetCatalogNil(b bool)`
+
+ SetCatalogNil sets the value for Catalog to be an explicit nil
+
+### UnsetCatalog
+`func (o *OsConfigurationFile) UnsetCatalog()`
+
+UnsetCatalog ensures that no value is present for Catalog, not even an explicit nil
 ### GetDistributions
 
 `func (o *OsConfigurationFile) GetDistributions() []HclOperatingSystemRelationship`

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the VirtualizationVmwareResourceAllocationSystemTrafficTypes type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &VirtualizationVmwareResourceAllocationSystemTrafficTypes{}
 
 // VirtualizationVmwareResourceAllocationSystemTrafficTypes Bandwidth Allocation for System Traffic.
 type VirtualizationVmwareResourceAllocationSystemTrafficTypes struct {
@@ -116,7 +120,7 @@ func (o *VirtualizationVmwareResourceAllocationSystemTrafficTypes) SetObjectType
 
 // GetLimit returns the Limit field value if set, zero value otherwise.
 func (o *VirtualizationVmwareResourceAllocationSystemTrafficTypes) GetLimit() int64 {
-	if o == nil || o.Limit == nil {
+	if o == nil || IsNil(o.Limit) {
 		var ret int64
 		return ret
 	}
@@ -126,7 +130,7 @@ func (o *VirtualizationVmwareResourceAllocationSystemTrafficTypes) GetLimit() in
 // GetLimitOk returns a tuple with the Limit field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationVmwareResourceAllocationSystemTrafficTypes) GetLimitOk() (*int64, bool) {
-	if o == nil || o.Limit == nil {
+	if o == nil || IsNil(o.Limit) {
 		return nil, false
 	}
 	return o.Limit, true
@@ -134,7 +138,7 @@ func (o *VirtualizationVmwareResourceAllocationSystemTrafficTypes) GetLimitOk() 
 
 // HasLimit returns a boolean if a field has been set.
 func (o *VirtualizationVmwareResourceAllocationSystemTrafficTypes) HasLimit() bool {
-	if o != nil && o.Limit != nil {
+	if o != nil && !IsNil(o.Limit) {
 		return true
 	}
 
@@ -148,7 +152,7 @@ func (o *VirtualizationVmwareResourceAllocationSystemTrafficTypes) SetLimit(v in
 
 // GetReservation returns the Reservation field value if set, zero value otherwise.
 func (o *VirtualizationVmwareResourceAllocationSystemTrafficTypes) GetReservation() int64 {
-	if o == nil || o.Reservation == nil {
+	if o == nil || IsNil(o.Reservation) {
 		var ret int64
 		return ret
 	}
@@ -158,7 +162,7 @@ func (o *VirtualizationVmwareResourceAllocationSystemTrafficTypes) GetReservatio
 // GetReservationOk returns a tuple with the Reservation field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationVmwareResourceAllocationSystemTrafficTypes) GetReservationOk() (*int64, bool) {
-	if o == nil || o.Reservation == nil {
+	if o == nil || IsNil(o.Reservation) {
 		return nil, false
 	}
 	return o.Reservation, true
@@ -166,7 +170,7 @@ func (o *VirtualizationVmwareResourceAllocationSystemTrafficTypes) GetReservatio
 
 // HasReservation returns a boolean if a field has been set.
 func (o *VirtualizationVmwareResourceAllocationSystemTrafficTypes) HasReservation() bool {
-	if o != nil && o.Reservation != nil {
+	if o != nil && !IsNil(o.Reservation) {
 		return true
 	}
 
@@ -180,7 +184,7 @@ func (o *VirtualizationVmwareResourceAllocationSystemTrafficTypes) SetReservatio
 
 // GetShares returns the Shares field value if set, zero value otherwise.
 func (o *VirtualizationVmwareResourceAllocationSystemTrafficTypes) GetShares() string {
-	if o == nil || o.Shares == nil {
+	if o == nil || IsNil(o.Shares) {
 		var ret string
 		return ret
 	}
@@ -190,7 +194,7 @@ func (o *VirtualizationVmwareResourceAllocationSystemTrafficTypes) GetShares() s
 // GetSharesOk returns a tuple with the Shares field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationVmwareResourceAllocationSystemTrafficTypes) GetSharesOk() (*string, bool) {
-	if o == nil || o.Shares == nil {
+	if o == nil || IsNil(o.Shares) {
 		return nil, false
 	}
 	return o.Shares, true
@@ -198,7 +202,7 @@ func (o *VirtualizationVmwareResourceAllocationSystemTrafficTypes) GetSharesOk()
 
 // HasShares returns a boolean if a field has been set.
 func (o *VirtualizationVmwareResourceAllocationSystemTrafficTypes) HasShares() bool {
-	if o != nil && o.Shares != nil {
+	if o != nil && !IsNil(o.Shares) {
 		return true
 	}
 
@@ -212,7 +216,7 @@ func (o *VirtualizationVmwareResourceAllocationSystemTrafficTypes) SetShares(v s
 
 // GetSharesValue returns the SharesValue field value if set, zero value otherwise.
 func (o *VirtualizationVmwareResourceAllocationSystemTrafficTypes) GetSharesValue() int32 {
-	if o == nil || o.SharesValue == nil {
+	if o == nil || IsNil(o.SharesValue) {
 		var ret int32
 		return ret
 	}
@@ -222,7 +226,7 @@ func (o *VirtualizationVmwareResourceAllocationSystemTrafficTypes) GetSharesValu
 // GetSharesValueOk returns a tuple with the SharesValue field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationVmwareResourceAllocationSystemTrafficTypes) GetSharesValueOk() (*int32, bool) {
-	if o == nil || o.SharesValue == nil {
+	if o == nil || IsNil(o.SharesValue) {
 		return nil, false
 	}
 	return o.SharesValue, true
@@ -230,7 +234,7 @@ func (o *VirtualizationVmwareResourceAllocationSystemTrafficTypes) GetSharesValu
 
 // HasSharesValue returns a boolean if a field has been set.
 func (o *VirtualizationVmwareResourceAllocationSystemTrafficTypes) HasSharesValue() bool {
-	if o != nil && o.SharesValue != nil {
+	if o != nil && !IsNil(o.SharesValue) {
 		return true
 	}
 
@@ -244,7 +248,7 @@ func (o *VirtualizationVmwareResourceAllocationSystemTrafficTypes) SetSharesValu
 
 // GetTrafficType returns the TrafficType field value if set, zero value otherwise.
 func (o *VirtualizationVmwareResourceAllocationSystemTrafficTypes) GetTrafficType() string {
-	if o == nil || o.TrafficType == nil {
+	if o == nil || IsNil(o.TrafficType) {
 		var ret string
 		return ret
 	}
@@ -254,7 +258,7 @@ func (o *VirtualizationVmwareResourceAllocationSystemTrafficTypes) GetTrafficTyp
 // GetTrafficTypeOk returns a tuple with the TrafficType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationVmwareResourceAllocationSystemTrafficTypes) GetTrafficTypeOk() (*string, bool) {
-	if o == nil || o.TrafficType == nil {
+	if o == nil || IsNil(o.TrafficType) {
 		return nil, false
 	}
 	return o.TrafficType, true
@@ -262,7 +266,7 @@ func (o *VirtualizationVmwareResourceAllocationSystemTrafficTypes) GetTrafficTyp
 
 // HasTrafficType returns a boolean if a field has been set.
 func (o *VirtualizationVmwareResourceAllocationSystemTrafficTypes) HasTrafficType() bool {
-	if o != nil && o.TrafficType != nil {
+	if o != nil && !IsNil(o.TrafficType) {
 		return true
 	}
 
@@ -275,34 +279,38 @@ func (o *VirtualizationVmwareResourceAllocationSystemTrafficTypes) SetTrafficTyp
 }
 
 func (o VirtualizationVmwareResourceAllocationSystemTrafficTypes) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o VirtualizationVmwareResourceAllocationSystemTrafficTypes) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
 	errMoBaseComplexType = json.Unmarshal([]byte(serializedMoBaseComplexType), &toSerialize)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Limit != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Limit) {
 		toSerialize["Limit"] = o.Limit
 	}
-	if o.Reservation != nil {
+	if !IsNil(o.Reservation) {
 		toSerialize["Reservation"] = o.Reservation
 	}
-	if o.Shares != nil {
+	if !IsNil(o.Shares) {
 		toSerialize["Shares"] = o.Shares
 	}
-	if o.SharesValue != nil {
+	if !IsNil(o.SharesValue) {
 		toSerialize["SharesValue"] = o.SharesValue
 	}
-	if o.TrafficType != nil {
+	if !IsNil(o.TrafficType) {
 		toSerialize["TrafficType"] = o.TrafficType
 	}
 
@@ -310,10 +318,32 @@ func (o VirtualizationVmwareResourceAllocationSystemTrafficTypes) MarshalJSON() 
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *VirtualizationVmwareResourceAllocationSystemTrafficTypes) UnmarshalJSON(bytes []byte) (err error) {
+func (o *VirtualizationVmwareResourceAllocationSystemTrafficTypes) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type VirtualizationVmwareResourceAllocationSystemTrafficTypesWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -333,7 +363,7 @@ func (o *VirtualizationVmwareResourceAllocationSystemTrafficTypes) UnmarshalJSON
 
 	varVirtualizationVmwareResourceAllocationSystemTrafficTypesWithoutEmbeddedStruct := VirtualizationVmwareResourceAllocationSystemTrafficTypesWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varVirtualizationVmwareResourceAllocationSystemTrafficTypesWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varVirtualizationVmwareResourceAllocationSystemTrafficTypesWithoutEmbeddedStruct)
 	if err == nil {
 		varVirtualizationVmwareResourceAllocationSystemTrafficTypes := _VirtualizationVmwareResourceAllocationSystemTrafficTypes{}
 		varVirtualizationVmwareResourceAllocationSystemTrafficTypes.ClassId = varVirtualizationVmwareResourceAllocationSystemTrafficTypesWithoutEmbeddedStruct.ClassId
@@ -350,7 +380,7 @@ func (o *VirtualizationVmwareResourceAllocationSystemTrafficTypes) UnmarshalJSON
 
 	varVirtualizationVmwareResourceAllocationSystemTrafficTypes := _VirtualizationVmwareResourceAllocationSystemTrafficTypes{}
 
-	err = json.Unmarshal(bytes, &varVirtualizationVmwareResourceAllocationSystemTrafficTypes)
+	err = json.Unmarshal(data, &varVirtualizationVmwareResourceAllocationSystemTrafficTypes)
 	if err == nil {
 		o.MoBaseComplexType = varVirtualizationVmwareResourceAllocationSystemTrafficTypes.MoBaseComplexType
 	} else {
@@ -359,7 +389,7 @@ func (o *VirtualizationVmwareResourceAllocationSystemTrafficTypes) UnmarshalJSON
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Limit")

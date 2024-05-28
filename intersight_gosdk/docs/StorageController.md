@@ -34,16 +34,16 @@ Name | Type | Description | Notes
 **SupportedStripSizes** | Pointer to **string** | The strip sizes in KiB supported by the Storage Controller. | [optional] 
 **TotalCacheSize** | Pointer to **int64** | The total configured cache memory, measured in MiB. | [optional] 
 **Type** | Pointer to **string** | Controller types are Raid, FlexFlash. | [optional] [readonly] 
-**BackupBatteryUnit** | Pointer to [**StorageBatteryBackupUnitRelationship**](StorageBatteryBackupUnitRelationship.md) |  | [optional] 
-**ComputeBlade** | Pointer to [**ComputeBladeRelationship**](ComputeBladeRelationship.md) |  | [optional] 
-**ComputeBoard** | Pointer to [**ComputeBoardRelationship**](ComputeBoardRelationship.md) |  | [optional] 
-**ComputeRackUnit** | Pointer to [**ComputeRackUnitRelationship**](ComputeRackUnitRelationship.md) |  | [optional] 
+**BackupBatteryUnit** | Pointer to [**NullableStorageBatteryBackupUnitRelationship**](StorageBatteryBackupUnitRelationship.md) |  | [optional] 
+**ComputeBlade** | Pointer to [**NullableComputeBladeRelationship**](ComputeBladeRelationship.md) |  | [optional] 
+**ComputeBoard** | Pointer to [**NullableComputeBoardRelationship**](ComputeBoardRelationship.md) |  | [optional] 
+**ComputeRackUnit** | Pointer to [**NullableComputeRackUnitRelationship**](ComputeRackUnitRelationship.md) |  | [optional] 
 **DiskGroup** | Pointer to [**[]StorageDiskGroupRelationship**](StorageDiskGroupRelationship.md) | An array of relationships to storageDiskGroup resources. | [optional] 
 **DiskSlot** | Pointer to [**[]StorageDiskSlotRelationship**](StorageDiskSlotRelationship.md) | An array of relationships to storageDiskSlot resources. | [optional] [readonly] 
-**InventoryDeviceInfo** | Pointer to [**InventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
+**InventoryDeviceInfo** | Pointer to [**NullableInventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
 **PhysicalDiskExtensions** | Pointer to [**[]StoragePhysicalDiskExtensionRelationship**](StoragePhysicalDiskExtensionRelationship.md) | An array of relationships to storagePhysicalDiskExtension resources. | [optional] [readonly] 
 **PhysicalDisks** | Pointer to [**[]StoragePhysicalDiskRelationship**](StoragePhysicalDiskRelationship.md) | An array of relationships to storagePhysicalDisk resources. | [optional] [readonly] 
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 **RunningFirmware** | Pointer to [**[]FirmwareRunningFirmwareRelationship**](FirmwareRunningFirmwareRelationship.md) | An array of relationships to firmwareRunningFirmware resources. | [optional] [readonly] 
 **VirtualDriveExtensions** | Pointer to [**[]StorageVirtualDriveExtensionRelationship**](StorageVirtualDriveExtensionRelationship.md) | An array of relationships to storageVirtualDriveExtension resources. | [optional] [readonly] 
 **VirtualDrives** | Pointer to [**[]StorageVirtualDriveRelationship**](StorageVirtualDriveRelationship.md) | An array of relationships to storageVirtualDrive resources. | [optional] [readonly] 
@@ -832,6 +832,16 @@ SetBackupBatteryUnit sets BackupBatteryUnit field to given value.
 
 HasBackupBatteryUnit returns a boolean if a field has been set.
 
+### SetBackupBatteryUnitNil
+
+`func (o *StorageController) SetBackupBatteryUnitNil(b bool)`
+
+ SetBackupBatteryUnitNil sets the value for BackupBatteryUnit to be an explicit nil
+
+### UnsetBackupBatteryUnit
+`func (o *StorageController) UnsetBackupBatteryUnit()`
+
+UnsetBackupBatteryUnit ensures that no value is present for BackupBatteryUnit, not even an explicit nil
 ### GetComputeBlade
 
 `func (o *StorageController) GetComputeBlade() ComputeBladeRelationship`
@@ -857,6 +867,16 @@ SetComputeBlade sets ComputeBlade field to given value.
 
 HasComputeBlade returns a boolean if a field has been set.
 
+### SetComputeBladeNil
+
+`func (o *StorageController) SetComputeBladeNil(b bool)`
+
+ SetComputeBladeNil sets the value for ComputeBlade to be an explicit nil
+
+### UnsetComputeBlade
+`func (o *StorageController) UnsetComputeBlade()`
+
+UnsetComputeBlade ensures that no value is present for ComputeBlade, not even an explicit nil
 ### GetComputeBoard
 
 `func (o *StorageController) GetComputeBoard() ComputeBoardRelationship`
@@ -882,6 +902,16 @@ SetComputeBoard sets ComputeBoard field to given value.
 
 HasComputeBoard returns a boolean if a field has been set.
 
+### SetComputeBoardNil
+
+`func (o *StorageController) SetComputeBoardNil(b bool)`
+
+ SetComputeBoardNil sets the value for ComputeBoard to be an explicit nil
+
+### UnsetComputeBoard
+`func (o *StorageController) UnsetComputeBoard()`
+
+UnsetComputeBoard ensures that no value is present for ComputeBoard, not even an explicit nil
 ### GetComputeRackUnit
 
 `func (o *StorageController) GetComputeRackUnit() ComputeRackUnitRelationship`
@@ -907,6 +937,16 @@ SetComputeRackUnit sets ComputeRackUnit field to given value.
 
 HasComputeRackUnit returns a boolean if a field has been set.
 
+### SetComputeRackUnitNil
+
+`func (o *StorageController) SetComputeRackUnitNil(b bool)`
+
+ SetComputeRackUnitNil sets the value for ComputeRackUnit to be an explicit nil
+
+### UnsetComputeRackUnit
+`func (o *StorageController) UnsetComputeRackUnit()`
+
+UnsetComputeRackUnit ensures that no value is present for ComputeRackUnit, not even an explicit nil
 ### GetDiskGroup
 
 `func (o *StorageController) GetDiskGroup() []StorageDiskGroupRelationship`
@@ -1002,6 +1042,16 @@ SetInventoryDeviceInfo sets InventoryDeviceInfo field to given value.
 
 HasInventoryDeviceInfo returns a boolean if a field has been set.
 
+### SetInventoryDeviceInfoNil
+
+`func (o *StorageController) SetInventoryDeviceInfoNil(b bool)`
+
+ SetInventoryDeviceInfoNil sets the value for InventoryDeviceInfo to be an explicit nil
+
+### UnsetInventoryDeviceInfo
+`func (o *StorageController) UnsetInventoryDeviceInfo()`
+
+UnsetInventoryDeviceInfo ensures that no value is present for InventoryDeviceInfo, not even an explicit nil
 ### GetPhysicalDiskExtensions
 
 `func (o *StorageController) GetPhysicalDiskExtensions() []StoragePhysicalDiskExtensionRelationship`
@@ -1097,6 +1147,16 @@ SetRegisteredDevice sets RegisteredDevice field to given value.
 
 HasRegisteredDevice returns a boolean if a field has been set.
 
+### SetRegisteredDeviceNil
+
+`func (o *StorageController) SetRegisteredDeviceNil(b bool)`
+
+ SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+
+### UnsetRegisteredDevice
+`func (o *StorageController) UnsetRegisteredDevice()`
+
+UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
 ### GetRunningFirmware
 
 `func (o *StorageController) GetRunningFirmware() []FirmwareRunningFirmwareRelationship`

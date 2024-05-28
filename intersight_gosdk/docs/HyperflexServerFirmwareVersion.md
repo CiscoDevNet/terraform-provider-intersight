@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "hyperflex.ServerFirmwareVersion"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "hyperflex.ServerFirmwareVersion"]
-**AppCatalog** | Pointer to [**HyperflexAppCatalogRelationship**](HyperflexAppCatalogRelationship.md) |  | [optional] 
+**AppCatalog** | Pointer to [**NullableHyperflexAppCatalogRelationship**](HyperflexAppCatalogRelationship.md) |  | [optional] 
 **ServerFirmwareVersionEntries** | Pointer to [**[]HyperflexServerFirmwareVersionEntryRelationship**](HyperflexServerFirmwareVersionEntryRelationship.md) | An array of relationships to hyperflexServerFirmwareVersionEntry resources. | [optional] 
 
 ## Methods
@@ -93,6 +93,16 @@ SetAppCatalog sets AppCatalog field to given value.
 
 HasAppCatalog returns a boolean if a field has been set.
 
+### SetAppCatalogNil
+
+`func (o *HyperflexServerFirmwareVersion) SetAppCatalogNil(b bool)`
+
+ SetAppCatalogNil sets the value for AppCatalog to be an explicit nil
+
+### UnsetAppCatalog
+`func (o *HyperflexServerFirmwareVersion) UnsetAppCatalog()`
+
+UnsetAppCatalog ensures that no value is present for AppCatalog, not even an explicit nil
 ### GetServerFirmwareVersionEntries
 
 `func (o *HyperflexServerFirmwareVersion) GetServerFirmwareVersionEntries() []HyperflexServerFirmwareVersionEntryRelationship`

@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "storage.NetAppLunEvent"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "storage.NetAppLunEvent"]
-**Lun** | Pointer to [**StorageNetAppLunRelationship**](StorageNetAppLunRelationship.md) |  | [optional] 
+**Lun** | Pointer to [**NullableStorageNetAppLunRelationship**](StorageNetAppLunRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -92,6 +92,16 @@ SetLun sets Lun field to given value.
 
 HasLun returns a boolean if a field has been set.
 
+### SetLunNil
+
+`func (o *StorageNetAppLunEvent) SetLunNil(b bool)`
+
+ SetLunNil sets the value for Lun to be an explicit nil
+
+### UnsetLun
+`func (o *StorageNetAppLunEvent) UnsetLun()`
+
+UnsetLun ensures that no value is present for Lun, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

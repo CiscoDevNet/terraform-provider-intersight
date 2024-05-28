@@ -6,9 +6,9 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "kvm.Tunnel"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "kvm.Tunnel"]
-**Device** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
-**KvmSession** | Pointer to [**KvmSessionRelationship**](KvmSessionRelationship.md) |  | [optional] 
-**Server** | Pointer to [**ComputePhysicalRelationship**](ComputePhysicalRelationship.md) |  | [optional] 
+**Device** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
+**KvmSession** | Pointer to [**NullableKvmSessionRelationship**](KvmSessionRelationship.md) |  | [optional] 
+**Server** | Pointer to [**NullableComputePhysicalRelationship**](ComputePhysicalRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -94,6 +94,16 @@ SetDevice sets Device field to given value.
 
 HasDevice returns a boolean if a field has been set.
 
+### SetDeviceNil
+
+`func (o *KvmTunnel) SetDeviceNil(b bool)`
+
+ SetDeviceNil sets the value for Device to be an explicit nil
+
+### UnsetDevice
+`func (o *KvmTunnel) UnsetDevice()`
+
+UnsetDevice ensures that no value is present for Device, not even an explicit nil
 ### GetKvmSession
 
 `func (o *KvmTunnel) GetKvmSession() KvmSessionRelationship`
@@ -119,6 +129,16 @@ SetKvmSession sets KvmSession field to given value.
 
 HasKvmSession returns a boolean if a field has been set.
 
+### SetKvmSessionNil
+
+`func (o *KvmTunnel) SetKvmSessionNil(b bool)`
+
+ SetKvmSessionNil sets the value for KvmSession to be an explicit nil
+
+### UnsetKvmSession
+`func (o *KvmTunnel) UnsetKvmSession()`
+
+UnsetKvmSession ensures that no value is present for KvmSession, not even an explicit nil
 ### GetServer
 
 `func (o *KvmTunnel) GetServer() ComputePhysicalRelationship`
@@ -144,6 +164,16 @@ SetServer sets Server field to given value.
 
 HasServer returns a boolean if a field has been set.
 
+### SetServerNil
+
+`func (o *KvmTunnel) SetServerNil(b bool)`
+
+ SetServerNil sets the value for Server to be an explicit nil
+
+### UnsetServer
+`func (o *KvmTunnel) UnsetServer()`
+
+UnsetServer ensures that no value is present for Server, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

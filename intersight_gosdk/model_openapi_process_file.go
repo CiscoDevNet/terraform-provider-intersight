@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the OpenapiProcessFile type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &OpenapiProcessFile{}
 
 // OpenapiProcessFile Validates the OpenAPI specification file. On successful validation, it persists information about the available APIs. This information can be used to create tasks in the cloud orchestrator.
 type OpenapiProcessFile struct {
@@ -33,9 +37,9 @@ type OpenapiProcessFile struct {
 	// Status of the OpenAPI specification validation operation. * `none` - Indicates the default status * `InProgress` - Indicates that operation is in progress * `Completed` - Indicates that the operation is complete * `Failed` - Indicates that the operation has failed. Check the failureReason attribute for more details.
 	FileValidationStatus *string `json:"FileValidationStatus,omitempty"`
 	// The location of the previously uploaded OpenAPI specification file.
-	SpecFilePath         *string                                  `json:"SpecFilePath,omitempty"`
-	FileInfo             *OpenapiOpenApiSpecificationRelationship `json:"FileInfo,omitempty"`
-	Organization         *OrganizationOrganizationRelationship    `json:"Organization,omitempty"`
+	SpecFilePath         *string                                         `json:"SpecFilePath,omitempty"`
+	FileInfo             NullableOpenapiOpenApiSpecificationRelationship `json:"FileInfo,omitempty"`
+	Organization         NullableOrganizationOrganizationRelationship    `json:"Organization,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -114,7 +118,7 @@ func (o *OpenapiProcessFile) SetObjectType(v string) {
 
 // GetFailureReason returns the FailureReason field value if set, zero value otherwise.
 func (o *OpenapiProcessFile) GetFailureReason() string {
-	if o == nil || o.FailureReason == nil {
+	if o == nil || IsNil(o.FailureReason) {
 		var ret string
 		return ret
 	}
@@ -124,7 +128,7 @@ func (o *OpenapiProcessFile) GetFailureReason() string {
 // GetFailureReasonOk returns a tuple with the FailureReason field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OpenapiProcessFile) GetFailureReasonOk() (*string, bool) {
-	if o == nil || o.FailureReason == nil {
+	if o == nil || IsNil(o.FailureReason) {
 		return nil, false
 	}
 	return o.FailureReason, true
@@ -132,7 +136,7 @@ func (o *OpenapiProcessFile) GetFailureReasonOk() (*string, bool) {
 
 // HasFailureReason returns a boolean if a field has been set.
 func (o *OpenapiProcessFile) HasFailureReason() bool {
-	if o != nil && o.FailureReason != nil {
+	if o != nil && !IsNil(o.FailureReason) {
 		return true
 	}
 
@@ -146,7 +150,7 @@ func (o *OpenapiProcessFile) SetFailureReason(v string) {
 
 // GetFileDownloadStatus returns the FileDownloadStatus field value if set, zero value otherwise.
 func (o *OpenapiProcessFile) GetFileDownloadStatus() string {
-	if o == nil || o.FileDownloadStatus == nil {
+	if o == nil || IsNil(o.FileDownloadStatus) {
 		var ret string
 		return ret
 	}
@@ -156,7 +160,7 @@ func (o *OpenapiProcessFile) GetFileDownloadStatus() string {
 // GetFileDownloadStatusOk returns a tuple with the FileDownloadStatus field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OpenapiProcessFile) GetFileDownloadStatusOk() (*string, bool) {
-	if o == nil || o.FileDownloadStatus == nil {
+	if o == nil || IsNil(o.FileDownloadStatus) {
 		return nil, false
 	}
 	return o.FileDownloadStatus, true
@@ -164,7 +168,7 @@ func (o *OpenapiProcessFile) GetFileDownloadStatusOk() (*string, bool) {
 
 // HasFileDownloadStatus returns a boolean if a field has been set.
 func (o *OpenapiProcessFile) HasFileDownloadStatus() bool {
-	if o != nil && o.FileDownloadStatus != nil {
+	if o != nil && !IsNil(o.FileDownloadStatus) {
 		return true
 	}
 
@@ -178,7 +182,7 @@ func (o *OpenapiProcessFile) SetFileDownloadStatus(v string) {
 
 // GetFileProcessingStatus returns the FileProcessingStatus field value if set, zero value otherwise.
 func (o *OpenapiProcessFile) GetFileProcessingStatus() string {
-	if o == nil || o.FileProcessingStatus == nil {
+	if o == nil || IsNil(o.FileProcessingStatus) {
 		var ret string
 		return ret
 	}
@@ -188,7 +192,7 @@ func (o *OpenapiProcessFile) GetFileProcessingStatus() string {
 // GetFileProcessingStatusOk returns a tuple with the FileProcessingStatus field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OpenapiProcessFile) GetFileProcessingStatusOk() (*string, bool) {
-	if o == nil || o.FileProcessingStatus == nil {
+	if o == nil || IsNil(o.FileProcessingStatus) {
 		return nil, false
 	}
 	return o.FileProcessingStatus, true
@@ -196,7 +200,7 @@ func (o *OpenapiProcessFile) GetFileProcessingStatusOk() (*string, bool) {
 
 // HasFileProcessingStatus returns a boolean if a field has been set.
 func (o *OpenapiProcessFile) HasFileProcessingStatus() bool {
-	if o != nil && o.FileProcessingStatus != nil {
+	if o != nil && !IsNil(o.FileProcessingStatus) {
 		return true
 	}
 
@@ -210,7 +214,7 @@ func (o *OpenapiProcessFile) SetFileProcessingStatus(v string) {
 
 // GetFileValidationStatus returns the FileValidationStatus field value if set, zero value otherwise.
 func (o *OpenapiProcessFile) GetFileValidationStatus() string {
-	if o == nil || o.FileValidationStatus == nil {
+	if o == nil || IsNil(o.FileValidationStatus) {
 		var ret string
 		return ret
 	}
@@ -220,7 +224,7 @@ func (o *OpenapiProcessFile) GetFileValidationStatus() string {
 // GetFileValidationStatusOk returns a tuple with the FileValidationStatus field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OpenapiProcessFile) GetFileValidationStatusOk() (*string, bool) {
-	if o == nil || o.FileValidationStatus == nil {
+	if o == nil || IsNil(o.FileValidationStatus) {
 		return nil, false
 	}
 	return o.FileValidationStatus, true
@@ -228,7 +232,7 @@ func (o *OpenapiProcessFile) GetFileValidationStatusOk() (*string, bool) {
 
 // HasFileValidationStatus returns a boolean if a field has been set.
 func (o *OpenapiProcessFile) HasFileValidationStatus() bool {
-	if o != nil && o.FileValidationStatus != nil {
+	if o != nil && !IsNil(o.FileValidationStatus) {
 		return true
 	}
 
@@ -242,7 +246,7 @@ func (o *OpenapiProcessFile) SetFileValidationStatus(v string) {
 
 // GetSpecFilePath returns the SpecFilePath field value if set, zero value otherwise.
 func (o *OpenapiProcessFile) GetSpecFilePath() string {
-	if o == nil || o.SpecFilePath == nil {
+	if o == nil || IsNil(o.SpecFilePath) {
 		var ret string
 		return ret
 	}
@@ -252,7 +256,7 @@ func (o *OpenapiProcessFile) GetSpecFilePath() string {
 // GetSpecFilePathOk returns a tuple with the SpecFilePath field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OpenapiProcessFile) GetSpecFilePathOk() (*string, bool) {
-	if o == nil || o.SpecFilePath == nil {
+	if o == nil || IsNil(o.SpecFilePath) {
 		return nil, false
 	}
 	return o.SpecFilePath, true
@@ -260,7 +264,7 @@ func (o *OpenapiProcessFile) GetSpecFilePathOk() (*string, bool) {
 
 // HasSpecFilePath returns a boolean if a field has been set.
 func (o *OpenapiProcessFile) HasSpecFilePath() bool {
-	if o != nil && o.SpecFilePath != nil {
+	if o != nil && !IsNil(o.SpecFilePath) {
 		return true
 	}
 
@@ -272,116 +276,164 @@ func (o *OpenapiProcessFile) SetSpecFilePath(v string) {
 	o.SpecFilePath = &v
 }
 
-// GetFileInfo returns the FileInfo field value if set, zero value otherwise.
+// GetFileInfo returns the FileInfo field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *OpenapiProcessFile) GetFileInfo() OpenapiOpenApiSpecificationRelationship {
-	if o == nil || o.FileInfo == nil {
+	if o == nil || IsNil(o.FileInfo.Get()) {
 		var ret OpenapiOpenApiSpecificationRelationship
 		return ret
 	}
-	return *o.FileInfo
+	return *o.FileInfo.Get()
 }
 
 // GetFileInfoOk returns a tuple with the FileInfo field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *OpenapiProcessFile) GetFileInfoOk() (*OpenapiOpenApiSpecificationRelationship, bool) {
-	if o == nil || o.FileInfo == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.FileInfo, true
+	return o.FileInfo.Get(), o.FileInfo.IsSet()
 }
 
 // HasFileInfo returns a boolean if a field has been set.
 func (o *OpenapiProcessFile) HasFileInfo() bool {
-	if o != nil && o.FileInfo != nil {
+	if o != nil && o.FileInfo.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetFileInfo gets a reference to the given OpenapiOpenApiSpecificationRelationship and assigns it to the FileInfo field.
+// SetFileInfo gets a reference to the given NullableOpenapiOpenApiSpecificationRelationship and assigns it to the FileInfo field.
 func (o *OpenapiProcessFile) SetFileInfo(v OpenapiOpenApiSpecificationRelationship) {
-	o.FileInfo = &v
+	o.FileInfo.Set(&v)
 }
 
-// GetOrganization returns the Organization field value if set, zero value otherwise.
+// SetFileInfoNil sets the value for FileInfo to be an explicit nil
+func (o *OpenapiProcessFile) SetFileInfoNil() {
+	o.FileInfo.Set(nil)
+}
+
+// UnsetFileInfo ensures that no value is present for FileInfo, not even an explicit nil
+func (o *OpenapiProcessFile) UnsetFileInfo() {
+	o.FileInfo.Unset()
+}
+
+// GetOrganization returns the Organization field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *OpenapiProcessFile) GetOrganization() OrganizationOrganizationRelationship {
-	if o == nil || o.Organization == nil {
+	if o == nil || IsNil(o.Organization.Get()) {
 		var ret OrganizationOrganizationRelationship
 		return ret
 	}
-	return *o.Organization
+	return *o.Organization.Get()
 }
 
 // GetOrganizationOk returns a tuple with the Organization field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *OpenapiProcessFile) GetOrganizationOk() (*OrganizationOrganizationRelationship, bool) {
-	if o == nil || o.Organization == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Organization, true
+	return o.Organization.Get(), o.Organization.IsSet()
 }
 
 // HasOrganization returns a boolean if a field has been set.
 func (o *OpenapiProcessFile) HasOrganization() bool {
-	if o != nil && o.Organization != nil {
+	if o != nil && o.Organization.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetOrganization gets a reference to the given OrganizationOrganizationRelationship and assigns it to the Organization field.
+// SetOrganization gets a reference to the given NullableOrganizationOrganizationRelationship and assigns it to the Organization field.
 func (o *OpenapiProcessFile) SetOrganization(v OrganizationOrganizationRelationship) {
-	o.Organization = &v
+	o.Organization.Set(&v)
+}
+
+// SetOrganizationNil sets the value for Organization to be an explicit nil
+func (o *OpenapiProcessFile) SetOrganizationNil() {
+	o.Organization.Set(nil)
+}
+
+// UnsetOrganization ensures that no value is present for Organization, not even an explicit nil
+func (o *OpenapiProcessFile) UnsetOrganization() {
+	o.Organization.Unset()
 }
 
 func (o OpenapiProcessFile) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o OpenapiProcessFile) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.FailureReason != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.FailureReason) {
 		toSerialize["FailureReason"] = o.FailureReason
 	}
-	if o.FileDownloadStatus != nil {
+	if !IsNil(o.FileDownloadStatus) {
 		toSerialize["FileDownloadStatus"] = o.FileDownloadStatus
 	}
-	if o.FileProcessingStatus != nil {
+	if !IsNil(o.FileProcessingStatus) {
 		toSerialize["FileProcessingStatus"] = o.FileProcessingStatus
 	}
-	if o.FileValidationStatus != nil {
+	if !IsNil(o.FileValidationStatus) {
 		toSerialize["FileValidationStatus"] = o.FileValidationStatus
 	}
-	if o.SpecFilePath != nil {
+	if !IsNil(o.SpecFilePath) {
 		toSerialize["SpecFilePath"] = o.SpecFilePath
 	}
-	if o.FileInfo != nil {
-		toSerialize["FileInfo"] = o.FileInfo
+	if o.FileInfo.IsSet() {
+		toSerialize["FileInfo"] = o.FileInfo.Get()
 	}
-	if o.Organization != nil {
-		toSerialize["Organization"] = o.Organization
+	if o.Organization.IsSet() {
+		toSerialize["Organization"] = o.Organization.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *OpenapiProcessFile) UnmarshalJSON(bytes []byte) (err error) {
+func (o *OpenapiProcessFile) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type OpenapiProcessFileWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -396,14 +448,14 @@ func (o *OpenapiProcessFile) UnmarshalJSON(bytes []byte) (err error) {
 		// Status of the OpenAPI specification validation operation. * `none` - Indicates the default status * `InProgress` - Indicates that operation is in progress * `Completed` - Indicates that the operation is complete * `Failed` - Indicates that the operation has failed. Check the failureReason attribute for more details.
 		FileValidationStatus *string `json:"FileValidationStatus,omitempty"`
 		// The location of the previously uploaded OpenAPI specification file.
-		SpecFilePath *string                                  `json:"SpecFilePath,omitempty"`
-		FileInfo     *OpenapiOpenApiSpecificationRelationship `json:"FileInfo,omitempty"`
-		Organization *OrganizationOrganizationRelationship    `json:"Organization,omitempty"`
+		SpecFilePath *string                                         `json:"SpecFilePath,omitempty"`
+		FileInfo     NullableOpenapiOpenApiSpecificationRelationship `json:"FileInfo,omitempty"`
+		Organization NullableOrganizationOrganizationRelationship    `json:"Organization,omitempty"`
 	}
 
 	varOpenapiProcessFileWithoutEmbeddedStruct := OpenapiProcessFileWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varOpenapiProcessFileWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varOpenapiProcessFileWithoutEmbeddedStruct)
 	if err == nil {
 		varOpenapiProcessFile := _OpenapiProcessFile{}
 		varOpenapiProcessFile.ClassId = varOpenapiProcessFileWithoutEmbeddedStruct.ClassId
@@ -422,7 +474,7 @@ func (o *OpenapiProcessFile) UnmarshalJSON(bytes []byte) (err error) {
 
 	varOpenapiProcessFile := _OpenapiProcessFile{}
 
-	err = json.Unmarshal(bytes, &varOpenapiProcessFile)
+	err = json.Unmarshal(data, &varOpenapiProcessFile)
 	if err == nil {
 		o.MoBaseMo = varOpenapiProcessFile.MoBaseMo
 	} else {
@@ -431,7 +483,7 @@ func (o *OpenapiProcessFile) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "FailureReason")

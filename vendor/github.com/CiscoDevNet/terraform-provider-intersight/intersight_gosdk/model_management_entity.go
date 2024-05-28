@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the ManagementEntity type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ManagementEntity{}
 
 // ManagementEntity Logical representation that captures the role of each Fabric Interconnect in UCS Manager.
 type ManagementEntity struct {
@@ -33,10 +37,10 @@ type ManagementEntity struct {
 	// Identity of the Fabric Interconnect - A/B.
 	EntityId *string `json:"EntityId,omitempty"`
 	// Role (Primary / Subordinate) of the Fabric Interconnect.
-	Leadership           *string                              `json:"Leadership,omitempty"`
-	InventoryDeviceInfo  *InventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
-	NetworkElement       *NetworkElementRelationship          `json:"NetworkElement,omitempty"`
-	RegisteredDevice     *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+	Leadership           *string                                     `json:"Leadership,omitempty"`
+	InventoryDeviceInfo  NullableInventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
+	NetworkElement       NullableNetworkElementRelationship          `json:"NetworkElement,omitempty"`
+	RegisteredDevice     NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -115,7 +119,7 @@ func (o *ManagementEntity) SetObjectType(v string) {
 
 // GetClusterLinkState returns the ClusterLinkState field value if set, zero value otherwise.
 func (o *ManagementEntity) GetClusterLinkState() string {
-	if o == nil || o.ClusterLinkState == nil {
+	if o == nil || IsNil(o.ClusterLinkState) {
 		var ret string
 		return ret
 	}
@@ -125,7 +129,7 @@ func (o *ManagementEntity) GetClusterLinkState() string {
 // GetClusterLinkStateOk returns a tuple with the ClusterLinkState field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ManagementEntity) GetClusterLinkStateOk() (*string, bool) {
-	if o == nil || o.ClusterLinkState == nil {
+	if o == nil || IsNil(o.ClusterLinkState) {
 		return nil, false
 	}
 	return o.ClusterLinkState, true
@@ -133,7 +137,7 @@ func (o *ManagementEntity) GetClusterLinkStateOk() (*string, bool) {
 
 // HasClusterLinkState returns a boolean if a field has been set.
 func (o *ManagementEntity) HasClusterLinkState() bool {
-	if o != nil && o.ClusterLinkState != nil {
+	if o != nil && !IsNil(o.ClusterLinkState) {
 		return true
 	}
 
@@ -147,7 +151,7 @@ func (o *ManagementEntity) SetClusterLinkState(v string) {
 
 // GetClusterReadiness returns the ClusterReadiness field value if set, zero value otherwise.
 func (o *ManagementEntity) GetClusterReadiness() string {
-	if o == nil || o.ClusterReadiness == nil {
+	if o == nil || IsNil(o.ClusterReadiness) {
 		var ret string
 		return ret
 	}
@@ -157,7 +161,7 @@ func (o *ManagementEntity) GetClusterReadiness() string {
 // GetClusterReadinessOk returns a tuple with the ClusterReadiness field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ManagementEntity) GetClusterReadinessOk() (*string, bool) {
-	if o == nil || o.ClusterReadiness == nil {
+	if o == nil || IsNil(o.ClusterReadiness) {
 		return nil, false
 	}
 	return o.ClusterReadiness, true
@@ -165,7 +169,7 @@ func (o *ManagementEntity) GetClusterReadinessOk() (*string, bool) {
 
 // HasClusterReadiness returns a boolean if a field has been set.
 func (o *ManagementEntity) HasClusterReadiness() bool {
-	if o != nil && o.ClusterReadiness != nil {
+	if o != nil && !IsNil(o.ClusterReadiness) {
 		return true
 	}
 
@@ -179,7 +183,7 @@ func (o *ManagementEntity) SetClusterReadiness(v string) {
 
 // GetClusterState returns the ClusterState field value if set, zero value otherwise.
 func (o *ManagementEntity) GetClusterState() string {
-	if o == nil || o.ClusterState == nil {
+	if o == nil || IsNil(o.ClusterState) {
 		var ret string
 		return ret
 	}
@@ -189,7 +193,7 @@ func (o *ManagementEntity) GetClusterState() string {
 // GetClusterStateOk returns a tuple with the ClusterState field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ManagementEntity) GetClusterStateOk() (*string, bool) {
-	if o == nil || o.ClusterState == nil {
+	if o == nil || IsNil(o.ClusterState) {
 		return nil, false
 	}
 	return o.ClusterState, true
@@ -197,7 +201,7 @@ func (o *ManagementEntity) GetClusterStateOk() (*string, bool) {
 
 // HasClusterState returns a boolean if a field has been set.
 func (o *ManagementEntity) HasClusterState() bool {
-	if o != nil && o.ClusterState != nil {
+	if o != nil && !IsNil(o.ClusterState) {
 		return true
 	}
 
@@ -211,7 +215,7 @@ func (o *ManagementEntity) SetClusterState(v string) {
 
 // GetEntityId returns the EntityId field value if set, zero value otherwise.
 func (o *ManagementEntity) GetEntityId() string {
-	if o == nil || o.EntityId == nil {
+	if o == nil || IsNil(o.EntityId) {
 		var ret string
 		return ret
 	}
@@ -221,7 +225,7 @@ func (o *ManagementEntity) GetEntityId() string {
 // GetEntityIdOk returns a tuple with the EntityId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ManagementEntity) GetEntityIdOk() (*string, bool) {
-	if o == nil || o.EntityId == nil {
+	if o == nil || IsNil(o.EntityId) {
 		return nil, false
 	}
 	return o.EntityId, true
@@ -229,7 +233,7 @@ func (o *ManagementEntity) GetEntityIdOk() (*string, bool) {
 
 // HasEntityId returns a boolean if a field has been set.
 func (o *ManagementEntity) HasEntityId() bool {
-	if o != nil && o.EntityId != nil {
+	if o != nil && !IsNil(o.EntityId) {
 		return true
 	}
 
@@ -243,7 +247,7 @@ func (o *ManagementEntity) SetEntityId(v string) {
 
 // GetLeadership returns the Leadership field value if set, zero value otherwise.
 func (o *ManagementEntity) GetLeadership() string {
-	if o == nil || o.Leadership == nil {
+	if o == nil || IsNil(o.Leadership) {
 		var ret string
 		return ret
 	}
@@ -253,7 +257,7 @@ func (o *ManagementEntity) GetLeadership() string {
 // GetLeadershipOk returns a tuple with the Leadership field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ManagementEntity) GetLeadershipOk() (*string, bool) {
-	if o == nil || o.Leadership == nil {
+	if o == nil || IsNil(o.Leadership) {
 		return nil, false
 	}
 	return o.Leadership, true
@@ -261,7 +265,7 @@ func (o *ManagementEntity) GetLeadershipOk() (*string, bool) {
 
 // HasLeadership returns a boolean if a field has been set.
 func (o *ManagementEntity) HasLeadership() bool {
-	if o != nil && o.Leadership != nil {
+	if o != nil && !IsNil(o.Leadership) {
 		return true
 	}
 
@@ -273,151 +277,210 @@ func (o *ManagementEntity) SetLeadership(v string) {
 	o.Leadership = &v
 }
 
-// GetInventoryDeviceInfo returns the InventoryDeviceInfo field value if set, zero value otherwise.
+// GetInventoryDeviceInfo returns the InventoryDeviceInfo field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ManagementEntity) GetInventoryDeviceInfo() InventoryDeviceInfoRelationship {
-	if o == nil || o.InventoryDeviceInfo == nil {
+	if o == nil || IsNil(o.InventoryDeviceInfo.Get()) {
 		var ret InventoryDeviceInfoRelationship
 		return ret
 	}
-	return *o.InventoryDeviceInfo
+	return *o.InventoryDeviceInfo.Get()
 }
 
 // GetInventoryDeviceInfoOk returns a tuple with the InventoryDeviceInfo field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ManagementEntity) GetInventoryDeviceInfoOk() (*InventoryDeviceInfoRelationship, bool) {
-	if o == nil || o.InventoryDeviceInfo == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.InventoryDeviceInfo, true
+	return o.InventoryDeviceInfo.Get(), o.InventoryDeviceInfo.IsSet()
 }
 
 // HasInventoryDeviceInfo returns a boolean if a field has been set.
 func (o *ManagementEntity) HasInventoryDeviceInfo() bool {
-	if o != nil && o.InventoryDeviceInfo != nil {
+	if o != nil && o.InventoryDeviceInfo.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetInventoryDeviceInfo gets a reference to the given InventoryDeviceInfoRelationship and assigns it to the InventoryDeviceInfo field.
+// SetInventoryDeviceInfo gets a reference to the given NullableInventoryDeviceInfoRelationship and assigns it to the InventoryDeviceInfo field.
 func (o *ManagementEntity) SetInventoryDeviceInfo(v InventoryDeviceInfoRelationship) {
-	o.InventoryDeviceInfo = &v
+	o.InventoryDeviceInfo.Set(&v)
 }
 
-// GetNetworkElement returns the NetworkElement field value if set, zero value otherwise.
+// SetInventoryDeviceInfoNil sets the value for InventoryDeviceInfo to be an explicit nil
+func (o *ManagementEntity) SetInventoryDeviceInfoNil() {
+	o.InventoryDeviceInfo.Set(nil)
+}
+
+// UnsetInventoryDeviceInfo ensures that no value is present for InventoryDeviceInfo, not even an explicit nil
+func (o *ManagementEntity) UnsetInventoryDeviceInfo() {
+	o.InventoryDeviceInfo.Unset()
+}
+
+// GetNetworkElement returns the NetworkElement field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ManagementEntity) GetNetworkElement() NetworkElementRelationship {
-	if o == nil || o.NetworkElement == nil {
+	if o == nil || IsNil(o.NetworkElement.Get()) {
 		var ret NetworkElementRelationship
 		return ret
 	}
-	return *o.NetworkElement
+	return *o.NetworkElement.Get()
 }
 
 // GetNetworkElementOk returns a tuple with the NetworkElement field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ManagementEntity) GetNetworkElementOk() (*NetworkElementRelationship, bool) {
-	if o == nil || o.NetworkElement == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.NetworkElement, true
+	return o.NetworkElement.Get(), o.NetworkElement.IsSet()
 }
 
 // HasNetworkElement returns a boolean if a field has been set.
 func (o *ManagementEntity) HasNetworkElement() bool {
-	if o != nil && o.NetworkElement != nil {
+	if o != nil && o.NetworkElement.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetNetworkElement gets a reference to the given NetworkElementRelationship and assigns it to the NetworkElement field.
+// SetNetworkElement gets a reference to the given NullableNetworkElementRelationship and assigns it to the NetworkElement field.
 func (o *ManagementEntity) SetNetworkElement(v NetworkElementRelationship) {
-	o.NetworkElement = &v
+	o.NetworkElement.Set(&v)
 }
 
-// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise.
+// SetNetworkElementNil sets the value for NetworkElement to be an explicit nil
+func (o *ManagementEntity) SetNetworkElementNil() {
+	o.NetworkElement.Set(nil)
+}
+
+// UnsetNetworkElement ensures that no value is present for NetworkElement, not even an explicit nil
+func (o *ManagementEntity) UnsetNetworkElement() {
+	o.NetworkElement.Unset()
+}
+
+// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ManagementEntity) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil || IsNil(o.RegisteredDevice.Get()) {
 		var ret AssetDeviceRegistrationRelationship
 		return ret
 	}
-	return *o.RegisteredDevice
+	return *o.RegisteredDevice.Get()
 }
 
 // GetRegisteredDeviceOk returns a tuple with the RegisteredDevice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ManagementEntity) GetRegisteredDeviceOk() (*AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.RegisteredDevice, true
+	return o.RegisteredDevice.Get(), o.RegisteredDevice.IsSet()
 }
 
 // HasRegisteredDevice returns a boolean if a field has been set.
 func (o *ManagementEntity) HasRegisteredDevice() bool {
-	if o != nil && o.RegisteredDevice != nil {
+	if o != nil && o.RegisteredDevice.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRegisteredDevice gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
+// SetRegisteredDevice gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
 func (o *ManagementEntity) SetRegisteredDevice(v AssetDeviceRegistrationRelationship) {
-	o.RegisteredDevice = &v
+	o.RegisteredDevice.Set(&v)
+}
+
+// SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+func (o *ManagementEntity) SetRegisteredDeviceNil() {
+	o.RegisteredDevice.Set(nil)
+}
+
+// UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
+func (o *ManagementEntity) UnsetRegisteredDevice() {
+	o.RegisteredDevice.Unset()
 }
 
 func (o ManagementEntity) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o ManagementEntity) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedInventoryBase, errInventoryBase := json.Marshal(o.InventoryBase)
 	if errInventoryBase != nil {
-		return []byte{}, errInventoryBase
+		return map[string]interface{}{}, errInventoryBase
 	}
 	errInventoryBase = json.Unmarshal([]byte(serializedInventoryBase), &toSerialize)
 	if errInventoryBase != nil {
-		return []byte{}, errInventoryBase
+		return map[string]interface{}{}, errInventoryBase
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.ClusterLinkState != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.ClusterLinkState) {
 		toSerialize["ClusterLinkState"] = o.ClusterLinkState
 	}
-	if o.ClusterReadiness != nil {
+	if !IsNil(o.ClusterReadiness) {
 		toSerialize["ClusterReadiness"] = o.ClusterReadiness
 	}
-	if o.ClusterState != nil {
+	if !IsNil(o.ClusterState) {
 		toSerialize["ClusterState"] = o.ClusterState
 	}
-	if o.EntityId != nil {
+	if !IsNil(o.EntityId) {
 		toSerialize["EntityId"] = o.EntityId
 	}
-	if o.Leadership != nil {
+	if !IsNil(o.Leadership) {
 		toSerialize["Leadership"] = o.Leadership
 	}
-	if o.InventoryDeviceInfo != nil {
-		toSerialize["InventoryDeviceInfo"] = o.InventoryDeviceInfo
+	if o.InventoryDeviceInfo.IsSet() {
+		toSerialize["InventoryDeviceInfo"] = o.InventoryDeviceInfo.Get()
 	}
-	if o.NetworkElement != nil {
-		toSerialize["NetworkElement"] = o.NetworkElement
+	if o.NetworkElement.IsSet() {
+		toSerialize["NetworkElement"] = o.NetworkElement.Get()
 	}
-	if o.RegisteredDevice != nil {
-		toSerialize["RegisteredDevice"] = o.RegisteredDevice
+	if o.RegisteredDevice.IsSet() {
+		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *ManagementEntity) UnmarshalJSON(bytes []byte) (err error) {
+func (o *ManagementEntity) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type ManagementEntityWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -432,15 +495,15 @@ func (o *ManagementEntity) UnmarshalJSON(bytes []byte) (err error) {
 		// Identity of the Fabric Interconnect - A/B.
 		EntityId *string `json:"EntityId,omitempty"`
 		// Role (Primary / Subordinate) of the Fabric Interconnect.
-		Leadership          *string                              `json:"Leadership,omitempty"`
-		InventoryDeviceInfo *InventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
-		NetworkElement      *NetworkElementRelationship          `json:"NetworkElement,omitempty"`
-		RegisteredDevice    *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+		Leadership          *string                                     `json:"Leadership,omitempty"`
+		InventoryDeviceInfo NullableInventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
+		NetworkElement      NullableNetworkElementRelationship          `json:"NetworkElement,omitempty"`
+		RegisteredDevice    NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	}
 
 	varManagementEntityWithoutEmbeddedStruct := ManagementEntityWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varManagementEntityWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varManagementEntityWithoutEmbeddedStruct)
 	if err == nil {
 		varManagementEntity := _ManagementEntity{}
 		varManagementEntity.ClassId = varManagementEntityWithoutEmbeddedStruct.ClassId
@@ -460,7 +523,7 @@ func (o *ManagementEntity) UnmarshalJSON(bytes []byte) (err error) {
 
 	varManagementEntity := _ManagementEntity{}
 
-	err = json.Unmarshal(bytes, &varManagementEntity)
+	err = json.Unmarshal(data, &varManagementEntity)
 	if err == nil {
 		o.InventoryBase = varManagementEntity.InventoryBase
 	} else {
@@ -469,7 +532,7 @@ func (o *ManagementEntity) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "ClusterLinkState")

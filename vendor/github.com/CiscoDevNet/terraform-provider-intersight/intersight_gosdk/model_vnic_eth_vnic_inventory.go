@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the VnicEthVnicInventory type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &VnicEthVnicInventory{}
 
 // VnicEthVnicInventory QoS settings of server’s vNIC.
 type VnicEthVnicInventory struct {
@@ -31,8 +35,8 @@ type VnicEthVnicInventory struct {
 	// Name of the virtual ethernet interface.
 	Name *string `json:"Name,omitempty"`
 	// Enables usage of the Class of Service provided by the operating system.
-	TrustHostCos         *bool                 `json:"TrustHostCos,omitempty"`
-	TargetMo             *MoBaseMoRelationship `json:"TargetMo,omitempty"`
+	TrustHostCos         *bool                        `json:"TrustHostCos,omitempty"`
+	TargetMo             NullableMoBaseMoRelationship `json:"TargetMo,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -111,7 +115,7 @@ func (o *VnicEthVnicInventory) SetObjectType(v string) {
 
 // GetCos returns the Cos field value if set, zero value otherwise.
 func (o *VnicEthVnicInventory) GetCos() int64 {
-	if o == nil || o.Cos == nil {
+	if o == nil || IsNil(o.Cos) {
 		var ret int64
 		return ret
 	}
@@ -121,7 +125,7 @@ func (o *VnicEthVnicInventory) GetCos() int64 {
 // GetCosOk returns a tuple with the Cos field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VnicEthVnicInventory) GetCosOk() (*int64, bool) {
-	if o == nil || o.Cos == nil {
+	if o == nil || IsNil(o.Cos) {
 		return nil, false
 	}
 	return o.Cos, true
@@ -129,7 +133,7 @@ func (o *VnicEthVnicInventory) GetCosOk() (*int64, bool) {
 
 // HasCos returns a boolean if a field has been set.
 func (o *VnicEthVnicInventory) HasCos() bool {
-	if o != nil && o.Cos != nil {
+	if o != nil && !IsNil(o.Cos) {
 		return true
 	}
 
@@ -143,7 +147,7 @@ func (o *VnicEthVnicInventory) SetCos(v int64) {
 
 // GetMtu returns the Mtu field value if set, zero value otherwise.
 func (o *VnicEthVnicInventory) GetMtu() int64 {
-	if o == nil || o.Mtu == nil {
+	if o == nil || IsNil(o.Mtu) {
 		var ret int64
 		return ret
 	}
@@ -153,7 +157,7 @@ func (o *VnicEthVnicInventory) GetMtu() int64 {
 // GetMtuOk returns a tuple with the Mtu field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VnicEthVnicInventory) GetMtuOk() (*int64, bool) {
-	if o == nil || o.Mtu == nil {
+	if o == nil || IsNil(o.Mtu) {
 		return nil, false
 	}
 	return o.Mtu, true
@@ -161,7 +165,7 @@ func (o *VnicEthVnicInventory) GetMtuOk() (*int64, bool) {
 
 // HasMtu returns a boolean if a field has been set.
 func (o *VnicEthVnicInventory) HasMtu() bool {
-	if o != nil && o.Mtu != nil {
+	if o != nil && !IsNil(o.Mtu) {
 		return true
 	}
 
@@ -175,7 +179,7 @@ func (o *VnicEthVnicInventory) SetMtu(v int64) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *VnicEthVnicInventory) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -185,7 +189,7 @@ func (o *VnicEthVnicInventory) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VnicEthVnicInventory) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -193,7 +197,7 @@ func (o *VnicEthVnicInventory) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *VnicEthVnicInventory) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -207,7 +211,7 @@ func (o *VnicEthVnicInventory) SetName(v string) {
 
 // GetTrustHostCos returns the TrustHostCos field value if set, zero value otherwise.
 func (o *VnicEthVnicInventory) GetTrustHostCos() bool {
-	if o == nil || o.TrustHostCos == nil {
+	if o == nil || IsNil(o.TrustHostCos) {
 		var ret bool
 		return ret
 	}
@@ -217,7 +221,7 @@ func (o *VnicEthVnicInventory) GetTrustHostCos() bool {
 // GetTrustHostCosOk returns a tuple with the TrustHostCos field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VnicEthVnicInventory) GetTrustHostCosOk() (*bool, bool) {
-	if o == nil || o.TrustHostCos == nil {
+	if o == nil || IsNil(o.TrustHostCos) {
 		return nil, false
 	}
 	return o.TrustHostCos, true
@@ -225,7 +229,7 @@ func (o *VnicEthVnicInventory) GetTrustHostCosOk() (*bool, bool) {
 
 // HasTrustHostCos returns a boolean if a field has been set.
 func (o *VnicEthVnicInventory) HasTrustHostCos() bool {
-	if o != nil && o.TrustHostCos != nil {
+	if o != nil && !IsNil(o.TrustHostCos) {
 		return true
 	}
 
@@ -237,78 +241,115 @@ func (o *VnicEthVnicInventory) SetTrustHostCos(v bool) {
 	o.TrustHostCos = &v
 }
 
-// GetTargetMo returns the TargetMo field value if set, zero value otherwise.
+// GetTargetMo returns the TargetMo field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *VnicEthVnicInventory) GetTargetMo() MoBaseMoRelationship {
-	if o == nil || o.TargetMo == nil {
+	if o == nil || IsNil(o.TargetMo.Get()) {
 		var ret MoBaseMoRelationship
 		return ret
 	}
-	return *o.TargetMo
+	return *o.TargetMo.Get()
 }
 
 // GetTargetMoOk returns a tuple with the TargetMo field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *VnicEthVnicInventory) GetTargetMoOk() (*MoBaseMoRelationship, bool) {
-	if o == nil || o.TargetMo == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.TargetMo, true
+	return o.TargetMo.Get(), o.TargetMo.IsSet()
 }
 
 // HasTargetMo returns a boolean if a field has been set.
 func (o *VnicEthVnicInventory) HasTargetMo() bool {
-	if o != nil && o.TargetMo != nil {
+	if o != nil && o.TargetMo.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetTargetMo gets a reference to the given MoBaseMoRelationship and assigns it to the TargetMo field.
+// SetTargetMo gets a reference to the given NullableMoBaseMoRelationship and assigns it to the TargetMo field.
 func (o *VnicEthVnicInventory) SetTargetMo(v MoBaseMoRelationship) {
-	o.TargetMo = &v
+	o.TargetMo.Set(&v)
+}
+
+// SetTargetMoNil sets the value for TargetMo to be an explicit nil
+func (o *VnicEthVnicInventory) SetTargetMoNil() {
+	o.TargetMo.Set(nil)
+}
+
+// UnsetTargetMo ensures that no value is present for TargetMo, not even an explicit nil
+func (o *VnicEthVnicInventory) UnsetTargetMo() {
+	o.TargetMo.Unset()
 }
 
 func (o VnicEthVnicInventory) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o VnicEthVnicInventory) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedPolicyAbstractInventory, errPolicyAbstractInventory := json.Marshal(o.PolicyAbstractInventory)
 	if errPolicyAbstractInventory != nil {
-		return []byte{}, errPolicyAbstractInventory
+		return map[string]interface{}{}, errPolicyAbstractInventory
 	}
 	errPolicyAbstractInventory = json.Unmarshal([]byte(serializedPolicyAbstractInventory), &toSerialize)
 	if errPolicyAbstractInventory != nil {
-		return []byte{}, errPolicyAbstractInventory
+		return map[string]interface{}{}, errPolicyAbstractInventory
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Cos != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Cos) {
 		toSerialize["Cos"] = o.Cos
 	}
-	if o.Mtu != nil {
+	if !IsNil(o.Mtu) {
 		toSerialize["Mtu"] = o.Mtu
 	}
-	if o.Name != nil {
+	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
 	}
-	if o.TrustHostCos != nil {
+	if !IsNil(o.TrustHostCos) {
 		toSerialize["TrustHostCos"] = o.TrustHostCos
 	}
-	if o.TargetMo != nil {
-		toSerialize["TargetMo"] = o.TargetMo
+	if o.TargetMo.IsSet() {
+		toSerialize["TargetMo"] = o.TargetMo.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *VnicEthVnicInventory) UnmarshalJSON(bytes []byte) (err error) {
+func (o *VnicEthVnicInventory) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type VnicEthVnicInventoryWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -321,13 +362,13 @@ func (o *VnicEthVnicInventory) UnmarshalJSON(bytes []byte) (err error) {
 		// Name of the virtual ethernet interface.
 		Name *string `json:"Name,omitempty"`
 		// Enables usage of the Class of Service provided by the operating system.
-		TrustHostCos *bool                 `json:"TrustHostCos,omitempty"`
-		TargetMo     *MoBaseMoRelationship `json:"TargetMo,omitempty"`
+		TrustHostCos *bool                        `json:"TrustHostCos,omitempty"`
+		TargetMo     NullableMoBaseMoRelationship `json:"TargetMo,omitempty"`
 	}
 
 	varVnicEthVnicInventoryWithoutEmbeddedStruct := VnicEthVnicInventoryWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varVnicEthVnicInventoryWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varVnicEthVnicInventoryWithoutEmbeddedStruct)
 	if err == nil {
 		varVnicEthVnicInventory := _VnicEthVnicInventory{}
 		varVnicEthVnicInventory.ClassId = varVnicEthVnicInventoryWithoutEmbeddedStruct.ClassId
@@ -344,7 +385,7 @@ func (o *VnicEthVnicInventory) UnmarshalJSON(bytes []byte) (err error) {
 
 	varVnicEthVnicInventory := _VnicEthVnicInventory{}
 
-	err = json.Unmarshal(bytes, &varVnicEthVnicInventory)
+	err = json.Unmarshal(data, &varVnicEthVnicInventory)
 	if err == nil {
 		o.PolicyAbstractInventory = varVnicEthVnicInventory.PolicyAbstractInventory
 	} else {
@@ -353,7 +394,7 @@ func (o *VnicEthVnicInventory) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Cos")

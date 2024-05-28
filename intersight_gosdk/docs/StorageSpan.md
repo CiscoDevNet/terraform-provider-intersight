@@ -8,9 +8,9 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "storage.Span"]
 **Slots** | Pointer to **[]int64** |  | [optional] 
 **SpanId** | Pointer to **int64** | Unique identifier value of this span. | [optional] 
-**DiskGroup** | Pointer to [**StorageDiskGroupRelationship**](StorageDiskGroupRelationship.md) |  | [optional] 
+**DiskGroup** | Pointer to [**NullableStorageDiskGroupRelationship**](StorageDiskGroupRelationship.md) |  | [optional] 
 **PhysicalDisks** | Pointer to [**[]StoragePhysicalDiskRelationship**](StoragePhysicalDiskRelationship.md) | An array of relationships to storagePhysicalDisk resources. | [optional] 
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -156,6 +156,16 @@ SetDiskGroup sets DiskGroup field to given value.
 
 HasDiskGroup returns a boolean if a field has been set.
 
+### SetDiskGroupNil
+
+`func (o *StorageSpan) SetDiskGroupNil(b bool)`
+
+ SetDiskGroupNil sets the value for DiskGroup to be an explicit nil
+
+### UnsetDiskGroup
+`func (o *StorageSpan) UnsetDiskGroup()`
+
+UnsetDiskGroup ensures that no value is present for DiskGroup, not even an explicit nil
 ### GetPhysicalDisks
 
 `func (o *StorageSpan) GetPhysicalDisks() []StoragePhysicalDiskRelationship`
@@ -216,6 +226,16 @@ SetRegisteredDevice sets RegisteredDevice field to given value.
 
 HasRegisteredDevice returns a boolean if a field has been set.
 
+### SetRegisteredDeviceNil
+
+`func (o *StorageSpan) SetRegisteredDeviceNil(b bool)`
+
+ SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+
+### UnsetRegisteredDevice
+`func (o *StorageSpan) UnsetRegisteredDevice()`
+
+UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

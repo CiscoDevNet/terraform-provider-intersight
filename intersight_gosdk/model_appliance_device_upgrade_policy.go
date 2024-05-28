@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,10 +13,14 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 	"time"
 )
+
+// checks if the ApplianceDeviceUpgradePolicy type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ApplianceDeviceUpgradePolicy{}
 
 // ApplianceDeviceUpgradePolicy DeviceUpgradePolicy stores the current upgrade policy of the Intersight Appliances.
 type ApplianceDeviceUpgradePolicy struct {
@@ -39,8 +43,8 @@ type ApplianceDeviceUpgradePolicy struct {
 	// SerialId of the Intersight Appliance. SerialId is generated when the Intersight Appliance is setup. It is a unique UUID string, and serialId will not change for the life time of the Intersight Appliance.
 	SerialId *string `json:"SerialId,omitempty"`
 	// UpgradeType is used to indicate the kink of software upload to upgrade. * `unknown` - Indicates user setting of upgrade service to unknown. * `connected` - Indicates if the upgrade service is set to upload software to latest version automatically. * `manual` - Indicates if the upgrade service is set to upload software to user picked verison manually.
-	SoftwareDownloadType *string                              `json:"SoftwareDownloadType,omitempty"`
-	RegisteredDevice     *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+	SoftwareDownloadType *string                                     `json:"SoftwareDownloadType,omitempty"`
+	RegisteredDevice     NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -127,7 +131,7 @@ func (o *ApplianceDeviceUpgradePolicy) SetObjectType(v string) {
 
 // GetAutoUpgrade returns the AutoUpgrade field value if set, zero value otherwise.
 func (o *ApplianceDeviceUpgradePolicy) GetAutoUpgrade() bool {
-	if o == nil || o.AutoUpgrade == nil {
+	if o == nil || IsNil(o.AutoUpgrade) {
 		var ret bool
 		return ret
 	}
@@ -137,7 +141,7 @@ func (o *ApplianceDeviceUpgradePolicy) GetAutoUpgrade() bool {
 // GetAutoUpgradeOk returns a tuple with the AutoUpgrade field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceDeviceUpgradePolicy) GetAutoUpgradeOk() (*bool, bool) {
-	if o == nil || o.AutoUpgrade == nil {
+	if o == nil || IsNil(o.AutoUpgrade) {
 		return nil, false
 	}
 	return o.AutoUpgrade, true
@@ -145,7 +149,7 @@ func (o *ApplianceDeviceUpgradePolicy) GetAutoUpgradeOk() (*bool, bool) {
 
 // HasAutoUpgrade returns a boolean if a field has been set.
 func (o *ApplianceDeviceUpgradePolicy) HasAutoUpgrade() bool {
-	if o != nil && o.AutoUpgrade != nil {
+	if o != nil && !IsNil(o.AutoUpgrade) {
 		return true
 	}
 
@@ -159,7 +163,7 @@ func (o *ApplianceDeviceUpgradePolicy) SetAutoUpgrade(v bool) {
 
 // GetBlackoutDatesEnabled returns the BlackoutDatesEnabled field value if set, zero value otherwise.
 func (o *ApplianceDeviceUpgradePolicy) GetBlackoutDatesEnabled() bool {
-	if o == nil || o.BlackoutDatesEnabled == nil {
+	if o == nil || IsNil(o.BlackoutDatesEnabled) {
 		var ret bool
 		return ret
 	}
@@ -169,7 +173,7 @@ func (o *ApplianceDeviceUpgradePolicy) GetBlackoutDatesEnabled() bool {
 // GetBlackoutDatesEnabledOk returns a tuple with the BlackoutDatesEnabled field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceDeviceUpgradePolicy) GetBlackoutDatesEnabledOk() (*bool, bool) {
-	if o == nil || o.BlackoutDatesEnabled == nil {
+	if o == nil || IsNil(o.BlackoutDatesEnabled) {
 		return nil, false
 	}
 	return o.BlackoutDatesEnabled, true
@@ -177,7 +181,7 @@ func (o *ApplianceDeviceUpgradePolicy) GetBlackoutDatesEnabledOk() (*bool, bool)
 
 // HasBlackoutDatesEnabled returns a boolean if a field has been set.
 func (o *ApplianceDeviceUpgradePolicy) HasBlackoutDatesEnabled() bool {
-	if o != nil && o.BlackoutDatesEnabled != nil {
+	if o != nil && !IsNil(o.BlackoutDatesEnabled) {
 		return true
 	}
 
@@ -191,7 +195,7 @@ func (o *ApplianceDeviceUpgradePolicy) SetBlackoutDatesEnabled(v bool) {
 
 // GetBlackoutEndDate returns the BlackoutEndDate field value if set, zero value otherwise.
 func (o *ApplianceDeviceUpgradePolicy) GetBlackoutEndDate() time.Time {
-	if o == nil || o.BlackoutEndDate == nil {
+	if o == nil || IsNil(o.BlackoutEndDate) {
 		var ret time.Time
 		return ret
 	}
@@ -201,7 +205,7 @@ func (o *ApplianceDeviceUpgradePolicy) GetBlackoutEndDate() time.Time {
 // GetBlackoutEndDateOk returns a tuple with the BlackoutEndDate field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceDeviceUpgradePolicy) GetBlackoutEndDateOk() (*time.Time, bool) {
-	if o == nil || o.BlackoutEndDate == nil {
+	if o == nil || IsNil(o.BlackoutEndDate) {
 		return nil, false
 	}
 	return o.BlackoutEndDate, true
@@ -209,7 +213,7 @@ func (o *ApplianceDeviceUpgradePolicy) GetBlackoutEndDateOk() (*time.Time, bool)
 
 // HasBlackoutEndDate returns a boolean if a field has been set.
 func (o *ApplianceDeviceUpgradePolicy) HasBlackoutEndDate() bool {
-	if o != nil && o.BlackoutEndDate != nil {
+	if o != nil && !IsNil(o.BlackoutEndDate) {
 		return true
 	}
 
@@ -223,7 +227,7 @@ func (o *ApplianceDeviceUpgradePolicy) SetBlackoutEndDate(v time.Time) {
 
 // GetBlackoutStartDate returns the BlackoutStartDate field value if set, zero value otherwise.
 func (o *ApplianceDeviceUpgradePolicy) GetBlackoutStartDate() time.Time {
-	if o == nil || o.BlackoutStartDate == nil {
+	if o == nil || IsNil(o.BlackoutStartDate) {
 		var ret time.Time
 		return ret
 	}
@@ -233,7 +237,7 @@ func (o *ApplianceDeviceUpgradePolicy) GetBlackoutStartDate() time.Time {
 // GetBlackoutStartDateOk returns a tuple with the BlackoutStartDate field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceDeviceUpgradePolicy) GetBlackoutStartDateOk() (*time.Time, bool) {
-	if o == nil || o.BlackoutStartDate == nil {
+	if o == nil || IsNil(o.BlackoutStartDate) {
 		return nil, false
 	}
 	return o.BlackoutStartDate, true
@@ -241,7 +245,7 @@ func (o *ApplianceDeviceUpgradePolicy) GetBlackoutStartDateOk() (*time.Time, boo
 
 // HasBlackoutStartDate returns a boolean if a field has been set.
 func (o *ApplianceDeviceUpgradePolicy) HasBlackoutStartDate() bool {
-	if o != nil && o.BlackoutStartDate != nil {
+	if o != nil && !IsNil(o.BlackoutStartDate) {
 		return true
 	}
 
@@ -255,7 +259,7 @@ func (o *ApplianceDeviceUpgradePolicy) SetBlackoutStartDate(v time.Time) {
 
 // GetEnableMetaDataSync returns the EnableMetaDataSync field value if set, zero value otherwise.
 func (o *ApplianceDeviceUpgradePolicy) GetEnableMetaDataSync() bool {
-	if o == nil || o.EnableMetaDataSync == nil {
+	if o == nil || IsNil(o.EnableMetaDataSync) {
 		var ret bool
 		return ret
 	}
@@ -265,7 +269,7 @@ func (o *ApplianceDeviceUpgradePolicy) GetEnableMetaDataSync() bool {
 // GetEnableMetaDataSyncOk returns a tuple with the EnableMetaDataSync field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceDeviceUpgradePolicy) GetEnableMetaDataSyncOk() (*bool, bool) {
-	if o == nil || o.EnableMetaDataSync == nil {
+	if o == nil || IsNil(o.EnableMetaDataSync) {
 		return nil, false
 	}
 	return o.EnableMetaDataSync, true
@@ -273,7 +277,7 @@ func (o *ApplianceDeviceUpgradePolicy) GetEnableMetaDataSyncOk() (*bool, bool) {
 
 // HasEnableMetaDataSync returns a boolean if a field has been set.
 func (o *ApplianceDeviceUpgradePolicy) HasEnableMetaDataSync() bool {
-	if o != nil && o.EnableMetaDataSync != nil {
+	if o != nil && !IsNil(o.EnableMetaDataSync) {
 		return true
 	}
 
@@ -287,7 +291,7 @@ func (o *ApplianceDeviceUpgradePolicy) SetEnableMetaDataSync(v bool) {
 
 // GetSchedule returns the Schedule field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ApplianceDeviceUpgradePolicy) GetSchedule() OnpremSchedule {
-	if o == nil || o.Schedule.Get() == nil {
+	if o == nil || IsNil(o.Schedule.Get()) {
 		var ret OnpremSchedule
 		return ret
 	}
@@ -330,7 +334,7 @@ func (o *ApplianceDeviceUpgradePolicy) UnsetSchedule() {
 
 // GetSerialId returns the SerialId field value if set, zero value otherwise.
 func (o *ApplianceDeviceUpgradePolicy) GetSerialId() string {
-	if o == nil || o.SerialId == nil {
+	if o == nil || IsNil(o.SerialId) {
 		var ret string
 		return ret
 	}
@@ -340,7 +344,7 @@ func (o *ApplianceDeviceUpgradePolicy) GetSerialId() string {
 // GetSerialIdOk returns a tuple with the SerialId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceDeviceUpgradePolicy) GetSerialIdOk() (*string, bool) {
-	if o == nil || o.SerialId == nil {
+	if o == nil || IsNil(o.SerialId) {
 		return nil, false
 	}
 	return o.SerialId, true
@@ -348,7 +352,7 @@ func (o *ApplianceDeviceUpgradePolicy) GetSerialIdOk() (*string, bool) {
 
 // HasSerialId returns a boolean if a field has been set.
 func (o *ApplianceDeviceUpgradePolicy) HasSerialId() bool {
-	if o != nil && o.SerialId != nil {
+	if o != nil && !IsNil(o.SerialId) {
 		return true
 	}
 
@@ -362,7 +366,7 @@ func (o *ApplianceDeviceUpgradePolicy) SetSerialId(v string) {
 
 // GetSoftwareDownloadType returns the SoftwareDownloadType field value if set, zero value otherwise.
 func (o *ApplianceDeviceUpgradePolicy) GetSoftwareDownloadType() string {
-	if o == nil || o.SoftwareDownloadType == nil {
+	if o == nil || IsNil(o.SoftwareDownloadType) {
 		var ret string
 		return ret
 	}
@@ -372,7 +376,7 @@ func (o *ApplianceDeviceUpgradePolicy) GetSoftwareDownloadType() string {
 // GetSoftwareDownloadTypeOk returns a tuple with the SoftwareDownloadType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceDeviceUpgradePolicy) GetSoftwareDownloadTypeOk() (*string, bool) {
-	if o == nil || o.SoftwareDownloadType == nil {
+	if o == nil || IsNil(o.SoftwareDownloadType) {
 		return nil, false
 	}
 	return o.SoftwareDownloadType, true
@@ -380,7 +384,7 @@ func (o *ApplianceDeviceUpgradePolicy) GetSoftwareDownloadTypeOk() (*string, boo
 
 // HasSoftwareDownloadType returns a boolean if a field has been set.
 func (o *ApplianceDeviceUpgradePolicy) HasSoftwareDownloadType() bool {
-	if o != nil && o.SoftwareDownloadType != nil {
+	if o != nil && !IsNil(o.SoftwareDownloadType) {
 		return true
 	}
 
@@ -392,90 +396,127 @@ func (o *ApplianceDeviceUpgradePolicy) SetSoftwareDownloadType(v string) {
 	o.SoftwareDownloadType = &v
 }
 
-// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise.
+// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ApplianceDeviceUpgradePolicy) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil || IsNil(o.RegisteredDevice.Get()) {
 		var ret AssetDeviceRegistrationRelationship
 		return ret
 	}
-	return *o.RegisteredDevice
+	return *o.RegisteredDevice.Get()
 }
 
 // GetRegisteredDeviceOk returns a tuple with the RegisteredDevice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ApplianceDeviceUpgradePolicy) GetRegisteredDeviceOk() (*AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.RegisteredDevice, true
+	return o.RegisteredDevice.Get(), o.RegisteredDevice.IsSet()
 }
 
 // HasRegisteredDevice returns a boolean if a field has been set.
 func (o *ApplianceDeviceUpgradePolicy) HasRegisteredDevice() bool {
-	if o != nil && o.RegisteredDevice != nil {
+	if o != nil && o.RegisteredDevice.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRegisteredDevice gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
+// SetRegisteredDevice gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
 func (o *ApplianceDeviceUpgradePolicy) SetRegisteredDevice(v AssetDeviceRegistrationRelationship) {
-	o.RegisteredDevice = &v
+	o.RegisteredDevice.Set(&v)
+}
+
+// SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+func (o *ApplianceDeviceUpgradePolicy) SetRegisteredDeviceNil() {
+	o.RegisteredDevice.Set(nil)
+}
+
+// UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
+func (o *ApplianceDeviceUpgradePolicy) UnsetRegisteredDevice() {
+	o.RegisteredDevice.Unset()
 }
 
 func (o ApplianceDeviceUpgradePolicy) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o ApplianceDeviceUpgradePolicy) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.AutoUpgrade != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.AutoUpgrade) {
 		toSerialize["AutoUpgrade"] = o.AutoUpgrade
 	}
-	if o.BlackoutDatesEnabled != nil {
+	if !IsNil(o.BlackoutDatesEnabled) {
 		toSerialize["BlackoutDatesEnabled"] = o.BlackoutDatesEnabled
 	}
-	if o.BlackoutEndDate != nil {
+	if !IsNil(o.BlackoutEndDate) {
 		toSerialize["BlackoutEndDate"] = o.BlackoutEndDate
 	}
-	if o.BlackoutStartDate != nil {
+	if !IsNil(o.BlackoutStartDate) {
 		toSerialize["BlackoutStartDate"] = o.BlackoutStartDate
 	}
-	if o.EnableMetaDataSync != nil {
+	if !IsNil(o.EnableMetaDataSync) {
 		toSerialize["EnableMetaDataSync"] = o.EnableMetaDataSync
 	}
 	if o.Schedule.IsSet() {
 		toSerialize["Schedule"] = o.Schedule.Get()
 	}
-	if o.SerialId != nil {
+	if !IsNil(o.SerialId) {
 		toSerialize["SerialId"] = o.SerialId
 	}
-	if o.SoftwareDownloadType != nil {
+	if !IsNil(o.SoftwareDownloadType) {
 		toSerialize["SoftwareDownloadType"] = o.SoftwareDownloadType
 	}
-	if o.RegisteredDevice != nil {
-		toSerialize["RegisteredDevice"] = o.RegisteredDevice
+	if o.RegisteredDevice.IsSet() {
+		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *ApplianceDeviceUpgradePolicy) UnmarshalJSON(bytes []byte) (err error) {
+func (o *ApplianceDeviceUpgradePolicy) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type ApplianceDeviceUpgradePolicyWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -495,13 +536,13 @@ func (o *ApplianceDeviceUpgradePolicy) UnmarshalJSON(bytes []byte) (err error) {
 		// SerialId of the Intersight Appliance. SerialId is generated when the Intersight Appliance is setup. It is a unique UUID string, and serialId will not change for the life time of the Intersight Appliance.
 		SerialId *string `json:"SerialId,omitempty"`
 		// UpgradeType is used to indicate the kink of software upload to upgrade. * `unknown` - Indicates user setting of upgrade service to unknown. * `connected` - Indicates if the upgrade service is set to upload software to latest version automatically. * `manual` - Indicates if the upgrade service is set to upload software to user picked verison manually.
-		SoftwareDownloadType *string                              `json:"SoftwareDownloadType,omitempty"`
-		RegisteredDevice     *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+		SoftwareDownloadType *string                                     `json:"SoftwareDownloadType,omitempty"`
+		RegisteredDevice     NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	}
 
 	varApplianceDeviceUpgradePolicyWithoutEmbeddedStruct := ApplianceDeviceUpgradePolicyWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varApplianceDeviceUpgradePolicyWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varApplianceDeviceUpgradePolicyWithoutEmbeddedStruct)
 	if err == nil {
 		varApplianceDeviceUpgradePolicy := _ApplianceDeviceUpgradePolicy{}
 		varApplianceDeviceUpgradePolicy.ClassId = varApplianceDeviceUpgradePolicyWithoutEmbeddedStruct.ClassId
@@ -522,7 +563,7 @@ func (o *ApplianceDeviceUpgradePolicy) UnmarshalJSON(bytes []byte) (err error) {
 
 	varApplianceDeviceUpgradePolicy := _ApplianceDeviceUpgradePolicy{}
 
-	err = json.Unmarshal(bytes, &varApplianceDeviceUpgradePolicy)
+	err = json.Unmarshal(data, &varApplianceDeviceUpgradePolicy)
 	if err == nil {
 		o.MoBaseMo = varApplianceDeviceUpgradePolicy.MoBaseMo
 	} else {
@@ -531,7 +572,7 @@ func (o *ApplianceDeviceUpgradePolicy) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "AutoUpgrade")

@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **MaxValueUnit** | Pointer to **string** | Unit type for the maximum value of the resource. For example, TB, GB, MB. * &#x60;TB&#x60; - The Enum value TB represents that the measurement unit is in terabytes. * &#x60;MB&#x60; - The Enum value MB represents that the measurement unit is in megabytes. * &#x60;GB&#x60; - The Enum value GB represents that the measurement unit is in gigabytes. * &#x60;MHz&#x60; - The Enum value MHz represents that the measurement unit is in megahertz. * &#x60;GHz&#x60; - The Enum value GHz represents that the measurement unit is in gigahertz. * &#x60;Percentage&#x60; - The Enum value Percentage represents that the expansion request is in the percentage of resource increase. For example, a 20% increase in CPU capacity. | [optional] [default to "TB"]
 **UnitType** | Pointer to **string** | Unit type for the expansion request, i.e., if the increase is requested as a raw value in TB, GB, etc., or in percentage increase. * &#x60;TB&#x60; - The Enum value TB represents that the measurement unit is in terabytes. * &#x60;MB&#x60; - The Enum value MB represents that the measurement unit is in megabytes. * &#x60;GB&#x60; - The Enum value GB represents that the measurement unit is in gigabytes. * &#x60;MHz&#x60; - The Enum value MHz represents that the measurement unit is in megahertz. * &#x60;GHz&#x60; - The Enum value GHz represents that the measurement unit is in gigahertz. * &#x60;Percentage&#x60; - The Enum value Percentage represents that the expansion request is in the percentage of resource increase. For example, a 20% increase in CPU capacity. | [optional] [default to "TB"]
 **Value** | Pointer to **float32** | Value of the expansion request which can be absolute value or percentage increase. | [optional] 
-**ExpansionRequest** | Pointer to [**RecommendationHardwareExpansionRequestRelationship**](RecommendationHardwareExpansionRequestRelationship.md) |  | [optional] 
+**ExpansionRequest** | Pointer to [**NullableRecommendationHardwareExpansionRequestRelationship**](RecommendationHardwareExpansionRequestRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -222,6 +222,16 @@ SetExpansionRequest sets ExpansionRequest field to given value.
 
 HasExpansionRequest returns a boolean if a field has been set.
 
+### SetExpansionRequestNil
+
+`func (o *RecommendationHardwareExpansionRequestItem) SetExpansionRequestNil(b bool)`
+
+ SetExpansionRequestNil sets the value for ExpansionRequest to be an explicit nil
+
+### UnsetExpansionRequest
+`func (o *RecommendationHardwareExpansionRequestItem) UnsetExpansionRequest()`
+
+UnsetExpansionRequest ensures that no value is present for ExpansionRequest, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

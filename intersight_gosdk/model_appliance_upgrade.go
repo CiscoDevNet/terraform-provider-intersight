@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,10 +13,14 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 	"time"
 )
+
+// checks if the ApplianceUpgrade type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ApplianceUpgrade{}
 
 // ApplianceUpgrade Upgrade tracks the Intersight Appliance's software upgrades. Intersight Appliance's upgrade service automatically creates an Upgrade managed object when there is a pending software upgrade. User may modify an active Upgrade managed object to reset the software upgrade start time. However, user may not be able to postpone an upgrade beyond the limit enforced by the upgrade grace period set in the software manifest.
 type ApplianceUpgrade struct {
@@ -65,9 +69,9 @@ type ApplianceUpgrade struct {
 	TotalPhases *int64   `json:"TotalPhases,omitempty"`
 	UiPackages  []string `json:"UiPackages,omitempty"`
 	// Software upgrade manifest's version.
-	Version              *string                           `json:"Version,omitempty"`
-	Account              *IamAccountRelationship           `json:"Account,omitempty"`
-	ImageBundle          *ApplianceImageBundleRelationship `json:"ImageBundle,omitempty"`
+	Version              *string                                  `json:"Version,omitempty"`
+	Account              NullableIamAccountRelationship           `json:"Account,omitempty"`
+	ImageBundle          NullableApplianceImageBundleRelationship `json:"ImageBundle,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -150,7 +154,7 @@ func (o *ApplianceUpgrade) SetObjectType(v string) {
 
 // GetActive returns the Active field value if set, zero value otherwise.
 func (o *ApplianceUpgrade) GetActive() bool {
-	if o == nil || o.Active == nil {
+	if o == nil || IsNil(o.Active) {
 		var ret bool
 		return ret
 	}
@@ -160,7 +164,7 @@ func (o *ApplianceUpgrade) GetActive() bool {
 // GetActiveOk returns a tuple with the Active field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceUpgrade) GetActiveOk() (*bool, bool) {
-	if o == nil || o.Active == nil {
+	if o == nil || IsNil(o.Active) {
 		return nil, false
 	}
 	return o.Active, true
@@ -168,7 +172,7 @@ func (o *ApplianceUpgrade) GetActiveOk() (*bool, bool) {
 
 // HasActive returns a boolean if a field has been set.
 func (o *ApplianceUpgrade) HasActive() bool {
-	if o != nil && o.Active != nil {
+	if o != nil && !IsNil(o.Active) {
 		return true
 	}
 
@@ -182,7 +186,7 @@ func (o *ApplianceUpgrade) SetActive(v bool) {
 
 // GetAllNodesPingable returns the AllNodesPingable field value if set, zero value otherwise.
 func (o *ApplianceUpgrade) GetAllNodesPingable() bool {
-	if o == nil || o.AllNodesPingable == nil {
+	if o == nil || IsNil(o.AllNodesPingable) {
 		var ret bool
 		return ret
 	}
@@ -192,7 +196,7 @@ func (o *ApplianceUpgrade) GetAllNodesPingable() bool {
 // GetAllNodesPingableOk returns a tuple with the AllNodesPingable field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceUpgrade) GetAllNodesPingableOk() (*bool, bool) {
-	if o == nil || o.AllNodesPingable == nil {
+	if o == nil || IsNil(o.AllNodesPingable) {
 		return nil, false
 	}
 	return o.AllNodesPingable, true
@@ -200,7 +204,7 @@ func (o *ApplianceUpgrade) GetAllNodesPingableOk() (*bool, bool) {
 
 // HasAllNodesPingable returns a boolean if a field has been set.
 func (o *ApplianceUpgrade) HasAllNodesPingable() bool {
-	if o != nil && o.AllNodesPingable != nil {
+	if o != nil && !IsNil(o.AllNodesPingable) {
 		return true
 	}
 
@@ -214,7 +218,7 @@ func (o *ApplianceUpgrade) SetAllNodesPingable(v bool) {
 
 // GetAutoCreated returns the AutoCreated field value if set, zero value otherwise.
 func (o *ApplianceUpgrade) GetAutoCreated() bool {
-	if o == nil || o.AutoCreated == nil {
+	if o == nil || IsNil(o.AutoCreated) {
 		var ret bool
 		return ret
 	}
@@ -224,7 +228,7 @@ func (o *ApplianceUpgrade) GetAutoCreated() bool {
 // GetAutoCreatedOk returns a tuple with the AutoCreated field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceUpgrade) GetAutoCreatedOk() (*bool, bool) {
-	if o == nil || o.AutoCreated == nil {
+	if o == nil || IsNil(o.AutoCreated) {
 		return nil, false
 	}
 	return o.AutoCreated, true
@@ -232,7 +236,7 @@ func (o *ApplianceUpgrade) GetAutoCreatedOk() (*bool, bool) {
 
 // HasAutoCreated returns a boolean if a field has been set.
 func (o *ApplianceUpgrade) HasAutoCreated() bool {
-	if o != nil && o.AutoCreated != nil {
+	if o != nil && !IsNil(o.AutoCreated) {
 		return true
 	}
 
@@ -257,7 +261,7 @@ func (o *ApplianceUpgrade) GetCompletedPhases() []OnpremUpgradePhase {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ApplianceUpgrade) GetCompletedPhasesOk() ([]OnpremUpgradePhase, bool) {
-	if o == nil || o.CompletedPhases == nil {
+	if o == nil || IsNil(o.CompletedPhases) {
 		return nil, false
 	}
 	return o.CompletedPhases, true
@@ -265,7 +269,7 @@ func (o *ApplianceUpgrade) GetCompletedPhasesOk() ([]OnpremUpgradePhase, bool) {
 
 // HasCompletedPhases returns a boolean if a field has been set.
 func (o *ApplianceUpgrade) HasCompletedPhases() bool {
-	if o != nil && o.CompletedPhases != nil {
+	if o != nil && IsNil(o.CompletedPhases) {
 		return true
 	}
 
@@ -279,7 +283,7 @@ func (o *ApplianceUpgrade) SetCompletedPhases(v []OnpremUpgradePhase) {
 
 // GetCurrentPhase returns the CurrentPhase field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ApplianceUpgrade) GetCurrentPhase() OnpremUpgradePhase {
-	if o == nil || o.CurrentPhase.Get() == nil {
+	if o == nil || IsNil(o.CurrentPhase.Get()) {
 		var ret OnpremUpgradePhase
 		return ret
 	}
@@ -322,7 +326,7 @@ func (o *ApplianceUpgrade) UnsetCurrentPhase() {
 
 // GetDescription returns the Description field value if set, zero value otherwise.
 func (o *ApplianceUpgrade) GetDescription() string {
-	if o == nil || o.Description == nil {
+	if o == nil || IsNil(o.Description) {
 		var ret string
 		return ret
 	}
@@ -332,7 +336,7 @@ func (o *ApplianceUpgrade) GetDescription() string {
 // GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceUpgrade) GetDescriptionOk() (*string, bool) {
-	if o == nil || o.Description == nil {
+	if o == nil || IsNil(o.Description) {
 		return nil, false
 	}
 	return o.Description, true
@@ -340,7 +344,7 @@ func (o *ApplianceUpgrade) GetDescriptionOk() (*string, bool) {
 
 // HasDescription returns a boolean if a field has been set.
 func (o *ApplianceUpgrade) HasDescription() bool {
-	if o != nil && o.Description != nil {
+	if o != nil && !IsNil(o.Description) {
 		return true
 	}
 
@@ -354,7 +358,7 @@ func (o *ApplianceUpgrade) SetDescription(v string) {
 
 // GetElapsedTime returns the ElapsedTime field value if set, zero value otherwise.
 func (o *ApplianceUpgrade) GetElapsedTime() int64 {
-	if o == nil || o.ElapsedTime == nil {
+	if o == nil || IsNil(o.ElapsedTime) {
 		var ret int64
 		return ret
 	}
@@ -364,7 +368,7 @@ func (o *ApplianceUpgrade) GetElapsedTime() int64 {
 // GetElapsedTimeOk returns a tuple with the ElapsedTime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceUpgrade) GetElapsedTimeOk() (*int64, bool) {
-	if o == nil || o.ElapsedTime == nil {
+	if o == nil || IsNil(o.ElapsedTime) {
 		return nil, false
 	}
 	return o.ElapsedTime, true
@@ -372,7 +376,7 @@ func (o *ApplianceUpgrade) GetElapsedTimeOk() (*int64, bool) {
 
 // HasElapsedTime returns a boolean if a field has been set.
 func (o *ApplianceUpgrade) HasElapsedTime() bool {
-	if o != nil && o.ElapsedTime != nil {
+	if o != nil && !IsNil(o.ElapsedTime) {
 		return true
 	}
 
@@ -386,7 +390,7 @@ func (o *ApplianceUpgrade) SetElapsedTime(v int64) {
 
 // GetEndTime returns the EndTime field value if set, zero value otherwise.
 func (o *ApplianceUpgrade) GetEndTime() time.Time {
-	if o == nil || o.EndTime == nil {
+	if o == nil || IsNil(o.EndTime) {
 		var ret time.Time
 		return ret
 	}
@@ -396,7 +400,7 @@ func (o *ApplianceUpgrade) GetEndTime() time.Time {
 // GetEndTimeOk returns a tuple with the EndTime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceUpgrade) GetEndTimeOk() (*time.Time, bool) {
-	if o == nil || o.EndTime == nil {
+	if o == nil || IsNil(o.EndTime) {
 		return nil, false
 	}
 	return o.EndTime, true
@@ -404,7 +408,7 @@ func (o *ApplianceUpgrade) GetEndTimeOk() (*time.Time, bool) {
 
 // HasEndTime returns a boolean if a field has been set.
 func (o *ApplianceUpgrade) HasEndTime() bool {
-	if o != nil && o.EndTime != nil {
+	if o != nil && !IsNil(o.EndTime) {
 		return true
 	}
 
@@ -418,7 +422,7 @@ func (o *ApplianceUpgrade) SetEndTime(v time.Time) {
 
 // GetErrorCode returns the ErrorCode field value if set, zero value otherwise.
 func (o *ApplianceUpgrade) GetErrorCode() int64 {
-	if o == nil || o.ErrorCode == nil {
+	if o == nil || IsNil(o.ErrorCode) {
 		var ret int64
 		return ret
 	}
@@ -428,7 +432,7 @@ func (o *ApplianceUpgrade) GetErrorCode() int64 {
 // GetErrorCodeOk returns a tuple with the ErrorCode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceUpgrade) GetErrorCodeOk() (*int64, bool) {
-	if o == nil || o.ErrorCode == nil {
+	if o == nil || IsNil(o.ErrorCode) {
 		return nil, false
 	}
 	return o.ErrorCode, true
@@ -436,7 +440,7 @@ func (o *ApplianceUpgrade) GetErrorCodeOk() (*int64, bool) {
 
 // HasErrorCode returns a boolean if a field has been set.
 func (o *ApplianceUpgrade) HasErrorCode() bool {
-	if o != nil && o.ErrorCode != nil {
+	if o != nil && !IsNil(o.ErrorCode) {
 		return true
 	}
 
@@ -450,7 +454,7 @@ func (o *ApplianceUpgrade) SetErrorCode(v int64) {
 
 // GetFingerprint returns the Fingerprint field value if set, zero value otherwise.
 func (o *ApplianceUpgrade) GetFingerprint() string {
-	if o == nil || o.Fingerprint == nil {
+	if o == nil || IsNil(o.Fingerprint) {
 		var ret string
 		return ret
 	}
@@ -460,7 +464,7 @@ func (o *ApplianceUpgrade) GetFingerprint() string {
 // GetFingerprintOk returns a tuple with the Fingerprint field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceUpgrade) GetFingerprintOk() (*string, bool) {
-	if o == nil || o.Fingerprint == nil {
+	if o == nil || IsNil(o.Fingerprint) {
 		return nil, false
 	}
 	return o.Fingerprint, true
@@ -468,7 +472,7 @@ func (o *ApplianceUpgrade) GetFingerprintOk() (*string, bool) {
 
 // HasFingerprint returns a boolean if a field has been set.
 func (o *ApplianceUpgrade) HasFingerprint() bool {
-	if o != nil && o.Fingerprint != nil {
+	if o != nil && !IsNil(o.Fingerprint) {
 		return true
 	}
 
@@ -482,7 +486,7 @@ func (o *ApplianceUpgrade) SetFingerprint(v string) {
 
 // GetIsRollingBack returns the IsRollingBack field value if set, zero value otherwise.
 func (o *ApplianceUpgrade) GetIsRollingBack() bool {
-	if o == nil || o.IsRollingBack == nil {
+	if o == nil || IsNil(o.IsRollingBack) {
 		var ret bool
 		return ret
 	}
@@ -492,7 +496,7 @@ func (o *ApplianceUpgrade) GetIsRollingBack() bool {
 // GetIsRollingBackOk returns a tuple with the IsRollingBack field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceUpgrade) GetIsRollingBackOk() (*bool, bool) {
-	if o == nil || o.IsRollingBack == nil {
+	if o == nil || IsNil(o.IsRollingBack) {
 		return nil, false
 	}
 	return o.IsRollingBack, true
@@ -500,7 +504,7 @@ func (o *ApplianceUpgrade) GetIsRollingBackOk() (*bool, bool) {
 
 // HasIsRollingBack returns a boolean if a field has been set.
 func (o *ApplianceUpgrade) HasIsRollingBack() bool {
-	if o != nil && o.IsRollingBack != nil {
+	if o != nil && !IsNil(o.IsRollingBack) {
 		return true
 	}
 
@@ -514,7 +518,7 @@ func (o *ApplianceUpgrade) SetIsRollingBack(v bool) {
 
 // GetIsUserTriggered returns the IsUserTriggered field value if set, zero value otherwise.
 func (o *ApplianceUpgrade) GetIsUserTriggered() bool {
-	if o == nil || o.IsUserTriggered == nil {
+	if o == nil || IsNil(o.IsUserTriggered) {
 		var ret bool
 		return ret
 	}
@@ -524,7 +528,7 @@ func (o *ApplianceUpgrade) GetIsUserTriggered() bool {
 // GetIsUserTriggeredOk returns a tuple with the IsUserTriggered field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceUpgrade) GetIsUserTriggeredOk() (*bool, bool) {
-	if o == nil || o.IsUserTriggered == nil {
+	if o == nil || IsNil(o.IsUserTriggered) {
 		return nil, false
 	}
 	return o.IsUserTriggered, true
@@ -532,7 +536,7 @@ func (o *ApplianceUpgrade) GetIsUserTriggeredOk() (*bool, bool) {
 
 // HasIsUserTriggered returns a boolean if a field has been set.
 func (o *ApplianceUpgrade) HasIsUserTriggered() bool {
-	if o != nil && o.IsUserTriggered != nil {
+	if o != nil && !IsNil(o.IsUserTriggered) {
 		return true
 	}
 
@@ -557,7 +561,7 @@ func (o *ApplianceUpgrade) GetMessages() []string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ApplianceUpgrade) GetMessagesOk() ([]string, bool) {
-	if o == nil || o.Messages == nil {
+	if o == nil || IsNil(o.Messages) {
 		return nil, false
 	}
 	return o.Messages, true
@@ -565,7 +569,7 @@ func (o *ApplianceUpgrade) GetMessagesOk() ([]string, bool) {
 
 // HasMessages returns a boolean if a field has been set.
 func (o *ApplianceUpgrade) HasMessages() bool {
-	if o != nil && o.Messages != nil {
+	if o != nil && IsNil(o.Messages) {
 		return true
 	}
 
@@ -590,7 +594,7 @@ func (o *ApplianceUpgrade) GetNodeInfo() []ApplianceNodeIpInfo {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ApplianceUpgrade) GetNodeInfoOk() ([]ApplianceNodeIpInfo, bool) {
-	if o == nil || o.NodeInfo == nil {
+	if o == nil || IsNil(o.NodeInfo) {
 		return nil, false
 	}
 	return o.NodeInfo, true
@@ -598,7 +602,7 @@ func (o *ApplianceUpgrade) GetNodeInfoOk() ([]ApplianceNodeIpInfo, bool) {
 
 // HasNodeInfo returns a boolean if a field has been set.
 func (o *ApplianceUpgrade) HasNodeInfo() bool {
-	if o != nil && o.NodeInfo != nil {
+	if o != nil && IsNil(o.NodeInfo) {
 		return true
 	}
 
@@ -612,7 +616,7 @@ func (o *ApplianceUpgrade) SetNodeInfo(v []ApplianceNodeIpInfo) {
 
 // GetRollbackNeeded returns the RollbackNeeded field value if set, zero value otherwise.
 func (o *ApplianceUpgrade) GetRollbackNeeded() bool {
-	if o == nil || o.RollbackNeeded == nil {
+	if o == nil || IsNil(o.RollbackNeeded) {
 		var ret bool
 		return ret
 	}
@@ -622,7 +626,7 @@ func (o *ApplianceUpgrade) GetRollbackNeeded() bool {
 // GetRollbackNeededOk returns a tuple with the RollbackNeeded field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceUpgrade) GetRollbackNeededOk() (*bool, bool) {
-	if o == nil || o.RollbackNeeded == nil {
+	if o == nil || IsNil(o.RollbackNeeded) {
 		return nil, false
 	}
 	return o.RollbackNeeded, true
@@ -630,7 +634,7 @@ func (o *ApplianceUpgrade) GetRollbackNeededOk() (*bool, bool) {
 
 // HasRollbackNeeded returns a boolean if a field has been set.
 func (o *ApplianceUpgrade) HasRollbackNeeded() bool {
-	if o != nil && o.RollbackNeeded != nil {
+	if o != nil && !IsNil(o.RollbackNeeded) {
 		return true
 	}
 
@@ -655,7 +659,7 @@ func (o *ApplianceUpgrade) GetRollbackPhases() []OnpremUpgradePhase {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ApplianceUpgrade) GetRollbackPhasesOk() ([]OnpremUpgradePhase, bool) {
-	if o == nil || o.RollbackPhases == nil {
+	if o == nil || IsNil(o.RollbackPhases) {
 		return nil, false
 	}
 	return o.RollbackPhases, true
@@ -663,7 +667,7 @@ func (o *ApplianceUpgrade) GetRollbackPhasesOk() ([]OnpremUpgradePhase, bool) {
 
 // HasRollbackPhases returns a boolean if a field has been set.
 func (o *ApplianceUpgrade) HasRollbackPhases() bool {
-	if o != nil && o.RollbackPhases != nil {
+	if o != nil && IsNil(o.RollbackPhases) {
 		return true
 	}
 
@@ -677,7 +681,7 @@ func (o *ApplianceUpgrade) SetRollbackPhases(v []OnpremUpgradePhase) {
 
 // GetRollbackStatus returns the RollbackStatus field value if set, zero value otherwise.
 func (o *ApplianceUpgrade) GetRollbackStatus() string {
-	if o == nil || o.RollbackStatus == nil {
+	if o == nil || IsNil(o.RollbackStatus) {
 		var ret string
 		return ret
 	}
@@ -687,7 +691,7 @@ func (o *ApplianceUpgrade) GetRollbackStatus() string {
 // GetRollbackStatusOk returns a tuple with the RollbackStatus field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceUpgrade) GetRollbackStatusOk() (*string, bool) {
-	if o == nil || o.RollbackStatus == nil {
+	if o == nil || IsNil(o.RollbackStatus) {
 		return nil, false
 	}
 	return o.RollbackStatus, true
@@ -695,7 +699,7 @@ func (o *ApplianceUpgrade) GetRollbackStatusOk() (*string, bool) {
 
 // HasRollbackStatus returns a boolean if a field has been set.
 func (o *ApplianceUpgrade) HasRollbackStatus() bool {
-	if o != nil && o.RollbackStatus != nil {
+	if o != nil && !IsNil(o.RollbackStatus) {
 		return true
 	}
 
@@ -720,7 +724,7 @@ func (o *ApplianceUpgrade) GetServices() []string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ApplianceUpgrade) GetServicesOk() ([]string, bool) {
-	if o == nil || o.Services == nil {
+	if o == nil || IsNil(o.Services) {
 		return nil, false
 	}
 	return o.Services, true
@@ -728,7 +732,7 @@ func (o *ApplianceUpgrade) GetServicesOk() ([]string, bool) {
 
 // HasServices returns a boolean if a field has been set.
 func (o *ApplianceUpgrade) HasServices() bool {
-	if o != nil && o.Services != nil {
+	if o != nil && IsNil(o.Services) {
 		return true
 	}
 
@@ -742,7 +746,7 @@ func (o *ApplianceUpgrade) SetServices(v []string) {
 
 // GetStartTime returns the StartTime field value if set, zero value otherwise.
 func (o *ApplianceUpgrade) GetStartTime() time.Time {
-	if o == nil || o.StartTime == nil {
+	if o == nil || IsNil(o.StartTime) {
 		var ret time.Time
 		return ret
 	}
@@ -752,7 +756,7 @@ func (o *ApplianceUpgrade) GetStartTime() time.Time {
 // GetStartTimeOk returns a tuple with the StartTime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceUpgrade) GetStartTimeOk() (*time.Time, bool) {
-	if o == nil || o.StartTime == nil {
+	if o == nil || IsNil(o.StartTime) {
 		return nil, false
 	}
 	return o.StartTime, true
@@ -760,7 +764,7 @@ func (o *ApplianceUpgrade) GetStartTimeOk() (*time.Time, bool) {
 
 // HasStartTime returns a boolean if a field has been set.
 func (o *ApplianceUpgrade) HasStartTime() bool {
-	if o != nil && o.StartTime != nil {
+	if o != nil && !IsNil(o.StartTime) {
 		return true
 	}
 
@@ -774,7 +778,7 @@ func (o *ApplianceUpgrade) SetStartTime(v time.Time) {
 
 // GetStatus returns the Status field value if set, zero value otherwise.
 func (o *ApplianceUpgrade) GetStatus() string {
-	if o == nil || o.Status == nil {
+	if o == nil || IsNil(o.Status) {
 		var ret string
 		return ret
 	}
@@ -784,7 +788,7 @@ func (o *ApplianceUpgrade) GetStatus() string {
 // GetStatusOk returns a tuple with the Status field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceUpgrade) GetStatusOk() (*string, bool) {
-	if o == nil || o.Status == nil {
+	if o == nil || IsNil(o.Status) {
 		return nil, false
 	}
 	return o.Status, true
@@ -792,7 +796,7 @@ func (o *ApplianceUpgrade) GetStatusOk() (*string, bool) {
 
 // HasStatus returns a boolean if a field has been set.
 func (o *ApplianceUpgrade) HasStatus() bool {
-	if o != nil && o.Status != nil {
+	if o != nil && !IsNil(o.Status) {
 		return true
 	}
 
@@ -806,7 +810,7 @@ func (o *ApplianceUpgrade) SetStatus(v string) {
 
 // GetTotalNodes returns the TotalNodes field value if set, zero value otherwise.
 func (o *ApplianceUpgrade) GetTotalNodes() int64 {
-	if o == nil || o.TotalNodes == nil {
+	if o == nil || IsNil(o.TotalNodes) {
 		var ret int64
 		return ret
 	}
@@ -816,7 +820,7 @@ func (o *ApplianceUpgrade) GetTotalNodes() int64 {
 // GetTotalNodesOk returns a tuple with the TotalNodes field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceUpgrade) GetTotalNodesOk() (*int64, bool) {
-	if o == nil || o.TotalNodes == nil {
+	if o == nil || IsNil(o.TotalNodes) {
 		return nil, false
 	}
 	return o.TotalNodes, true
@@ -824,7 +828,7 @@ func (o *ApplianceUpgrade) GetTotalNodesOk() (*int64, bool) {
 
 // HasTotalNodes returns a boolean if a field has been set.
 func (o *ApplianceUpgrade) HasTotalNodes() bool {
-	if o != nil && o.TotalNodes != nil {
+	if o != nil && !IsNil(o.TotalNodes) {
 		return true
 	}
 
@@ -838,7 +842,7 @@ func (o *ApplianceUpgrade) SetTotalNodes(v int64) {
 
 // GetTotalPhases returns the TotalPhases field value if set, zero value otherwise.
 func (o *ApplianceUpgrade) GetTotalPhases() int64 {
-	if o == nil || o.TotalPhases == nil {
+	if o == nil || IsNil(o.TotalPhases) {
 		var ret int64
 		return ret
 	}
@@ -848,7 +852,7 @@ func (o *ApplianceUpgrade) GetTotalPhases() int64 {
 // GetTotalPhasesOk returns a tuple with the TotalPhases field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceUpgrade) GetTotalPhasesOk() (*int64, bool) {
-	if o == nil || o.TotalPhases == nil {
+	if o == nil || IsNil(o.TotalPhases) {
 		return nil, false
 	}
 	return o.TotalPhases, true
@@ -856,7 +860,7 @@ func (o *ApplianceUpgrade) GetTotalPhasesOk() (*int64, bool) {
 
 // HasTotalPhases returns a boolean if a field has been set.
 func (o *ApplianceUpgrade) HasTotalPhases() bool {
-	if o != nil && o.TotalPhases != nil {
+	if o != nil && !IsNil(o.TotalPhases) {
 		return true
 	}
 
@@ -881,7 +885,7 @@ func (o *ApplianceUpgrade) GetUiPackages() []string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ApplianceUpgrade) GetUiPackagesOk() ([]string, bool) {
-	if o == nil || o.UiPackages == nil {
+	if o == nil || IsNil(o.UiPackages) {
 		return nil, false
 	}
 	return o.UiPackages, true
@@ -889,7 +893,7 @@ func (o *ApplianceUpgrade) GetUiPackagesOk() ([]string, bool) {
 
 // HasUiPackages returns a boolean if a field has been set.
 func (o *ApplianceUpgrade) HasUiPackages() bool {
-	if o != nil && o.UiPackages != nil {
+	if o != nil && IsNil(o.UiPackages) {
 		return true
 	}
 
@@ -903,7 +907,7 @@ func (o *ApplianceUpgrade) SetUiPackages(v []string) {
 
 // GetVersion returns the Version field value if set, zero value otherwise.
 func (o *ApplianceUpgrade) GetVersion() string {
-	if o == nil || o.Version == nil {
+	if o == nil || IsNil(o.Version) {
 		var ret string
 		return ret
 	}
@@ -913,7 +917,7 @@ func (o *ApplianceUpgrade) GetVersion() string {
 // GetVersionOk returns a tuple with the Version field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceUpgrade) GetVersionOk() (*string, bool) {
-	if o == nil || o.Version == nil {
+	if o == nil || IsNil(o.Version) {
 		return nil, false
 	}
 	return o.Version, true
@@ -921,7 +925,7 @@ func (o *ApplianceUpgrade) GetVersionOk() (*string, bool) {
 
 // HasVersion returns a boolean if a field has been set.
 func (o *ApplianceUpgrade) HasVersion() bool {
-	if o != nil && o.Version != nil {
+	if o != nil && !IsNil(o.Version) {
 		return true
 	}
 
@@ -933,93 +937,119 @@ func (o *ApplianceUpgrade) SetVersion(v string) {
 	o.Version = &v
 }
 
-// GetAccount returns the Account field value if set, zero value otherwise.
+// GetAccount returns the Account field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ApplianceUpgrade) GetAccount() IamAccountRelationship {
-	if o == nil || o.Account == nil {
+	if o == nil || IsNil(o.Account.Get()) {
 		var ret IamAccountRelationship
 		return ret
 	}
-	return *o.Account
+	return *o.Account.Get()
 }
 
 // GetAccountOk returns a tuple with the Account field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ApplianceUpgrade) GetAccountOk() (*IamAccountRelationship, bool) {
-	if o == nil || o.Account == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Account, true
+	return o.Account.Get(), o.Account.IsSet()
 }
 
 // HasAccount returns a boolean if a field has been set.
 func (o *ApplianceUpgrade) HasAccount() bool {
-	if o != nil && o.Account != nil {
+	if o != nil && o.Account.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetAccount gets a reference to the given IamAccountRelationship and assigns it to the Account field.
+// SetAccount gets a reference to the given NullableIamAccountRelationship and assigns it to the Account field.
 func (o *ApplianceUpgrade) SetAccount(v IamAccountRelationship) {
-	o.Account = &v
+	o.Account.Set(&v)
 }
 
-// GetImageBundle returns the ImageBundle field value if set, zero value otherwise.
+// SetAccountNil sets the value for Account to be an explicit nil
+func (o *ApplianceUpgrade) SetAccountNil() {
+	o.Account.Set(nil)
+}
+
+// UnsetAccount ensures that no value is present for Account, not even an explicit nil
+func (o *ApplianceUpgrade) UnsetAccount() {
+	o.Account.Unset()
+}
+
+// GetImageBundle returns the ImageBundle field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ApplianceUpgrade) GetImageBundle() ApplianceImageBundleRelationship {
-	if o == nil || o.ImageBundle == nil {
+	if o == nil || IsNil(o.ImageBundle.Get()) {
 		var ret ApplianceImageBundleRelationship
 		return ret
 	}
-	return *o.ImageBundle
+	return *o.ImageBundle.Get()
 }
 
 // GetImageBundleOk returns a tuple with the ImageBundle field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ApplianceUpgrade) GetImageBundleOk() (*ApplianceImageBundleRelationship, bool) {
-	if o == nil || o.ImageBundle == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.ImageBundle, true
+	return o.ImageBundle.Get(), o.ImageBundle.IsSet()
 }
 
 // HasImageBundle returns a boolean if a field has been set.
 func (o *ApplianceUpgrade) HasImageBundle() bool {
-	if o != nil && o.ImageBundle != nil {
+	if o != nil && o.ImageBundle.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetImageBundle gets a reference to the given ApplianceImageBundleRelationship and assigns it to the ImageBundle field.
+// SetImageBundle gets a reference to the given NullableApplianceImageBundleRelationship and assigns it to the ImageBundle field.
 func (o *ApplianceUpgrade) SetImageBundle(v ApplianceImageBundleRelationship) {
-	o.ImageBundle = &v
+	o.ImageBundle.Set(&v)
+}
+
+// SetImageBundleNil sets the value for ImageBundle to be an explicit nil
+func (o *ApplianceUpgrade) SetImageBundleNil() {
+	o.ImageBundle.Set(nil)
+}
+
+// UnsetImageBundle ensures that no value is present for ImageBundle, not even an explicit nil
+func (o *ApplianceUpgrade) UnsetImageBundle() {
+	o.ImageBundle.Unset()
 }
 
 func (o ApplianceUpgrade) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o ApplianceUpgrade) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Active != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Active) {
 		toSerialize["Active"] = o.Active
 	}
-	if o.AllNodesPingable != nil {
+	if !IsNil(o.AllNodesPingable) {
 		toSerialize["AllNodesPingable"] = o.AllNodesPingable
 	}
-	if o.AutoCreated != nil {
+	if !IsNil(o.AutoCreated) {
 		toSerialize["AutoCreated"] = o.AutoCreated
 	}
 	if o.CompletedPhases != nil {
@@ -1028,25 +1058,25 @@ func (o ApplianceUpgrade) MarshalJSON() ([]byte, error) {
 	if o.CurrentPhase.IsSet() {
 		toSerialize["CurrentPhase"] = o.CurrentPhase.Get()
 	}
-	if o.Description != nil {
+	if !IsNil(o.Description) {
 		toSerialize["Description"] = o.Description
 	}
-	if o.ElapsedTime != nil {
+	if !IsNil(o.ElapsedTime) {
 		toSerialize["ElapsedTime"] = o.ElapsedTime
 	}
-	if o.EndTime != nil {
+	if !IsNil(o.EndTime) {
 		toSerialize["EndTime"] = o.EndTime
 	}
-	if o.ErrorCode != nil {
+	if !IsNil(o.ErrorCode) {
 		toSerialize["ErrorCode"] = o.ErrorCode
 	}
-	if o.Fingerprint != nil {
+	if !IsNil(o.Fingerprint) {
 		toSerialize["Fingerprint"] = o.Fingerprint
 	}
-	if o.IsRollingBack != nil {
+	if !IsNil(o.IsRollingBack) {
 		toSerialize["IsRollingBack"] = o.IsRollingBack
 	}
-	if o.IsUserTriggered != nil {
+	if !IsNil(o.IsUserTriggered) {
 		toSerialize["IsUserTriggered"] = o.IsUserTriggered
 	}
 	if o.Messages != nil {
@@ -1055,51 +1085,73 @@ func (o ApplianceUpgrade) MarshalJSON() ([]byte, error) {
 	if o.NodeInfo != nil {
 		toSerialize["NodeInfo"] = o.NodeInfo
 	}
-	if o.RollbackNeeded != nil {
+	if !IsNil(o.RollbackNeeded) {
 		toSerialize["RollbackNeeded"] = o.RollbackNeeded
 	}
 	if o.RollbackPhases != nil {
 		toSerialize["RollbackPhases"] = o.RollbackPhases
 	}
-	if o.RollbackStatus != nil {
+	if !IsNil(o.RollbackStatus) {
 		toSerialize["RollbackStatus"] = o.RollbackStatus
 	}
 	if o.Services != nil {
 		toSerialize["Services"] = o.Services
 	}
-	if o.StartTime != nil {
+	if !IsNil(o.StartTime) {
 		toSerialize["StartTime"] = o.StartTime
 	}
-	if o.Status != nil {
+	if !IsNil(o.Status) {
 		toSerialize["Status"] = o.Status
 	}
-	if o.TotalNodes != nil {
+	if !IsNil(o.TotalNodes) {
 		toSerialize["TotalNodes"] = o.TotalNodes
 	}
-	if o.TotalPhases != nil {
+	if !IsNil(o.TotalPhases) {
 		toSerialize["TotalPhases"] = o.TotalPhases
 	}
 	if o.UiPackages != nil {
 		toSerialize["UiPackages"] = o.UiPackages
 	}
-	if o.Version != nil {
+	if !IsNil(o.Version) {
 		toSerialize["Version"] = o.Version
 	}
-	if o.Account != nil {
-		toSerialize["Account"] = o.Account
+	if o.Account.IsSet() {
+		toSerialize["Account"] = o.Account.Get()
 	}
-	if o.ImageBundle != nil {
-		toSerialize["ImageBundle"] = o.ImageBundle
+	if o.ImageBundle.IsSet() {
+		toSerialize["ImageBundle"] = o.ImageBundle.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *ApplianceUpgrade) UnmarshalJSON(bytes []byte) (err error) {
+func (o *ApplianceUpgrade) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type ApplianceUpgradeWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -1145,14 +1197,14 @@ func (o *ApplianceUpgrade) UnmarshalJSON(bytes []byte) (err error) {
 		TotalPhases *int64   `json:"TotalPhases,omitempty"`
 		UiPackages  []string `json:"UiPackages,omitempty"`
 		// Software upgrade manifest's version.
-		Version     *string                           `json:"Version,omitempty"`
-		Account     *IamAccountRelationship           `json:"Account,omitempty"`
-		ImageBundle *ApplianceImageBundleRelationship `json:"ImageBundle,omitempty"`
+		Version     *string                                  `json:"Version,omitempty"`
+		Account     NullableIamAccountRelationship           `json:"Account,omitempty"`
+		ImageBundle NullableApplianceImageBundleRelationship `json:"ImageBundle,omitempty"`
 	}
 
 	varApplianceUpgradeWithoutEmbeddedStruct := ApplianceUpgradeWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varApplianceUpgradeWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varApplianceUpgradeWithoutEmbeddedStruct)
 	if err == nil {
 		varApplianceUpgrade := _ApplianceUpgrade{}
 		varApplianceUpgrade.ClassId = varApplianceUpgradeWithoutEmbeddedStruct.ClassId
@@ -1190,7 +1242,7 @@ func (o *ApplianceUpgrade) UnmarshalJSON(bytes []byte) (err error) {
 
 	varApplianceUpgrade := _ApplianceUpgrade{}
 
-	err = json.Unmarshal(bytes, &varApplianceUpgrade)
+	err = json.Unmarshal(data, &varApplianceUpgrade)
 	if err == nil {
 		o.MoBaseMo = varApplianceUpgrade.MoBaseMo
 	} else {
@@ -1199,7 +1251,7 @@ func (o *ApplianceUpgrade) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Active")

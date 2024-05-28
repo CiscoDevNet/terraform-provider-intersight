@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the FabricFcUplinkPcRole type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &FabricFcUplinkPcRole{}
 
 // FabricFcUplinkPcRole Object sent by user to configure a fc uplink port-channel on the collection of ports.
 type FabricFcUplinkPcRole struct {
@@ -116,7 +120,7 @@ func (o *FabricFcUplinkPcRole) SetObjectType(v string) {
 
 // GetAdminSpeed returns the AdminSpeed field value if set, zero value otherwise.
 func (o *FabricFcUplinkPcRole) GetAdminSpeed() string {
-	if o == nil || o.AdminSpeed == nil {
+	if o == nil || IsNil(o.AdminSpeed) {
 		var ret string
 		return ret
 	}
@@ -126,7 +130,7 @@ func (o *FabricFcUplinkPcRole) GetAdminSpeed() string {
 // GetAdminSpeedOk returns a tuple with the AdminSpeed field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FabricFcUplinkPcRole) GetAdminSpeedOk() (*string, bool) {
-	if o == nil || o.AdminSpeed == nil {
+	if o == nil || IsNil(o.AdminSpeed) {
 		return nil, false
 	}
 	return o.AdminSpeed, true
@@ -134,7 +138,7 @@ func (o *FabricFcUplinkPcRole) GetAdminSpeedOk() (*string, bool) {
 
 // HasAdminSpeed returns a boolean if a field has been set.
 func (o *FabricFcUplinkPcRole) HasAdminSpeed() bool {
-	if o != nil && o.AdminSpeed != nil {
+	if o != nil && !IsNil(o.AdminSpeed) {
 		return true
 	}
 
@@ -148,7 +152,7 @@ func (o *FabricFcUplinkPcRole) SetAdminSpeed(v string) {
 
 // GetFillPattern returns the FillPattern field value if set, zero value otherwise.
 func (o *FabricFcUplinkPcRole) GetFillPattern() string {
-	if o == nil || o.FillPattern == nil {
+	if o == nil || IsNil(o.FillPattern) {
 		var ret string
 		return ret
 	}
@@ -158,7 +162,7 @@ func (o *FabricFcUplinkPcRole) GetFillPattern() string {
 // GetFillPatternOk returns a tuple with the FillPattern field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FabricFcUplinkPcRole) GetFillPatternOk() (*string, bool) {
-	if o == nil || o.FillPattern == nil {
+	if o == nil || IsNil(o.FillPattern) {
 		return nil, false
 	}
 	return o.FillPattern, true
@@ -166,7 +170,7 @@ func (o *FabricFcUplinkPcRole) GetFillPatternOk() (*string, bool) {
 
 // HasFillPattern returns a boolean if a field has been set.
 func (o *FabricFcUplinkPcRole) HasFillPattern() bool {
-	if o != nil && o.FillPattern != nil {
+	if o != nil && !IsNil(o.FillPattern) {
 		return true
 	}
 
@@ -180,7 +184,7 @@ func (o *FabricFcUplinkPcRole) SetFillPattern(v string) {
 
 // GetVsanId returns the VsanId field value if set, zero value otherwise.
 func (o *FabricFcUplinkPcRole) GetVsanId() int64 {
-	if o == nil || o.VsanId == nil {
+	if o == nil || IsNil(o.VsanId) {
 		var ret int64
 		return ret
 	}
@@ -190,7 +194,7 @@ func (o *FabricFcUplinkPcRole) GetVsanId() int64 {
 // GetVsanIdOk returns a tuple with the VsanId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FabricFcUplinkPcRole) GetVsanIdOk() (*int64, bool) {
-	if o == nil || o.VsanId == nil {
+	if o == nil || IsNil(o.VsanId) {
 		return nil, false
 	}
 	return o.VsanId, true
@@ -198,7 +202,7 @@ func (o *FabricFcUplinkPcRole) GetVsanIdOk() (*int64, bool) {
 
 // HasVsanId returns a boolean if a field has been set.
 func (o *FabricFcUplinkPcRole) HasVsanId() bool {
-	if o != nil && o.VsanId != nil {
+	if o != nil && !IsNil(o.VsanId) {
 		return true
 	}
 
@@ -211,28 +215,32 @@ func (o *FabricFcUplinkPcRole) SetVsanId(v int64) {
 }
 
 func (o FabricFcUplinkPcRole) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o FabricFcUplinkPcRole) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedFabricPortChannelRole, errFabricPortChannelRole := json.Marshal(o.FabricPortChannelRole)
 	if errFabricPortChannelRole != nil {
-		return []byte{}, errFabricPortChannelRole
+		return map[string]interface{}{}, errFabricPortChannelRole
 	}
 	errFabricPortChannelRole = json.Unmarshal([]byte(serializedFabricPortChannelRole), &toSerialize)
 	if errFabricPortChannelRole != nil {
-		return []byte{}, errFabricPortChannelRole
+		return map[string]interface{}{}, errFabricPortChannelRole
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.AdminSpeed != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.AdminSpeed) {
 		toSerialize["AdminSpeed"] = o.AdminSpeed
 	}
-	if o.FillPattern != nil {
+	if !IsNil(o.FillPattern) {
 		toSerialize["FillPattern"] = o.FillPattern
 	}
-	if o.VsanId != nil {
+	if !IsNil(o.VsanId) {
 		toSerialize["VsanId"] = o.VsanId
 	}
 
@@ -240,10 +248,32 @@ func (o FabricFcUplinkPcRole) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *FabricFcUplinkPcRole) UnmarshalJSON(bytes []byte) (err error) {
+func (o *FabricFcUplinkPcRole) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type FabricFcUplinkPcRoleWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -259,7 +289,7 @@ func (o *FabricFcUplinkPcRole) UnmarshalJSON(bytes []byte) (err error) {
 
 	varFabricFcUplinkPcRoleWithoutEmbeddedStruct := FabricFcUplinkPcRoleWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varFabricFcUplinkPcRoleWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varFabricFcUplinkPcRoleWithoutEmbeddedStruct)
 	if err == nil {
 		varFabricFcUplinkPcRole := _FabricFcUplinkPcRole{}
 		varFabricFcUplinkPcRole.ClassId = varFabricFcUplinkPcRoleWithoutEmbeddedStruct.ClassId
@@ -274,7 +304,7 @@ func (o *FabricFcUplinkPcRole) UnmarshalJSON(bytes []byte) (err error) {
 
 	varFabricFcUplinkPcRole := _FabricFcUplinkPcRole{}
 
-	err = json.Unmarshal(bytes, &varFabricFcUplinkPcRole)
+	err = json.Unmarshal(data, &varFabricFcUplinkPcRole)
 	if err == nil {
 		o.FabricPortChannelRole = varFabricFcUplinkPcRole.FabricPortChannelRole
 	} else {
@@ -283,7 +313,7 @@ func (o *FabricFcUplinkPcRole) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "AdminSpeed")

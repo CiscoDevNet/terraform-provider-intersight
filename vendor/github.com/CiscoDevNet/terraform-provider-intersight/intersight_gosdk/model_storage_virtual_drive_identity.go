@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the StorageVirtualDriveIdentity type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &StorageVirtualDriveIdentity{}
 
 // StorageVirtualDriveIdentity Identity object that uniquely represents a VirtualDrive object under a Server Profile.
 type StorageVirtualDriveIdentity struct {
@@ -25,10 +29,10 @@ type StorageVirtualDriveIdentity struct {
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
 	// The VirtualDrive Name which belongs to the Storage VirtualDrive.
-	Name                 *string                           `json:"Name,omitempty"`
-	ServerProfile        *ServerProfileRelationship        `json:"ServerProfile,omitempty"`
-	StoragePolicy        *StorageStoragePolicyRelationship `json:"StoragePolicy,omitempty"`
-	VirtualDrive         *StorageVirtualDriveRelationship  `json:"VirtualDrive,omitempty"`
+	Name                 *string                                  `json:"Name,omitempty"`
+	ServerProfile        NullableServerProfileRelationship        `json:"ServerProfile,omitempty"`
+	StoragePolicy        NullableStorageStoragePolicyRelationship `json:"StoragePolicy,omitempty"`
+	VirtualDrive         NullableStorageVirtualDriveRelationship  `json:"VirtualDrive,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -107,7 +111,7 @@ func (o *StorageVirtualDriveIdentity) SetObjectType(v string) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *StorageVirtualDriveIdentity) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -117,7 +121,7 @@ func (o *StorageVirtualDriveIdentity) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageVirtualDriveIdentity) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -125,7 +129,7 @@ func (o *StorageVirtualDriveIdentity) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *StorageVirtualDriveIdentity) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -137,154 +141,213 @@ func (o *StorageVirtualDriveIdentity) SetName(v string) {
 	o.Name = &v
 }
 
-// GetServerProfile returns the ServerProfile field value if set, zero value otherwise.
+// GetServerProfile returns the ServerProfile field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *StorageVirtualDriveIdentity) GetServerProfile() ServerProfileRelationship {
-	if o == nil || o.ServerProfile == nil {
+	if o == nil || IsNil(o.ServerProfile.Get()) {
 		var ret ServerProfileRelationship
 		return ret
 	}
-	return *o.ServerProfile
+	return *o.ServerProfile.Get()
 }
 
 // GetServerProfileOk returns a tuple with the ServerProfile field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StorageVirtualDriveIdentity) GetServerProfileOk() (*ServerProfileRelationship, bool) {
-	if o == nil || o.ServerProfile == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.ServerProfile, true
+	return o.ServerProfile.Get(), o.ServerProfile.IsSet()
 }
 
 // HasServerProfile returns a boolean if a field has been set.
 func (o *StorageVirtualDriveIdentity) HasServerProfile() bool {
-	if o != nil && o.ServerProfile != nil {
+	if o != nil && o.ServerProfile.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetServerProfile gets a reference to the given ServerProfileRelationship and assigns it to the ServerProfile field.
+// SetServerProfile gets a reference to the given NullableServerProfileRelationship and assigns it to the ServerProfile field.
 func (o *StorageVirtualDriveIdentity) SetServerProfile(v ServerProfileRelationship) {
-	o.ServerProfile = &v
+	o.ServerProfile.Set(&v)
 }
 
-// GetStoragePolicy returns the StoragePolicy field value if set, zero value otherwise.
+// SetServerProfileNil sets the value for ServerProfile to be an explicit nil
+func (o *StorageVirtualDriveIdentity) SetServerProfileNil() {
+	o.ServerProfile.Set(nil)
+}
+
+// UnsetServerProfile ensures that no value is present for ServerProfile, not even an explicit nil
+func (o *StorageVirtualDriveIdentity) UnsetServerProfile() {
+	o.ServerProfile.Unset()
+}
+
+// GetStoragePolicy returns the StoragePolicy field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *StorageVirtualDriveIdentity) GetStoragePolicy() StorageStoragePolicyRelationship {
-	if o == nil || o.StoragePolicy == nil {
+	if o == nil || IsNil(o.StoragePolicy.Get()) {
 		var ret StorageStoragePolicyRelationship
 		return ret
 	}
-	return *o.StoragePolicy
+	return *o.StoragePolicy.Get()
 }
 
 // GetStoragePolicyOk returns a tuple with the StoragePolicy field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StorageVirtualDriveIdentity) GetStoragePolicyOk() (*StorageStoragePolicyRelationship, bool) {
-	if o == nil || o.StoragePolicy == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.StoragePolicy, true
+	return o.StoragePolicy.Get(), o.StoragePolicy.IsSet()
 }
 
 // HasStoragePolicy returns a boolean if a field has been set.
 func (o *StorageVirtualDriveIdentity) HasStoragePolicy() bool {
-	if o != nil && o.StoragePolicy != nil {
+	if o != nil && o.StoragePolicy.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetStoragePolicy gets a reference to the given StorageStoragePolicyRelationship and assigns it to the StoragePolicy field.
+// SetStoragePolicy gets a reference to the given NullableStorageStoragePolicyRelationship and assigns it to the StoragePolicy field.
 func (o *StorageVirtualDriveIdentity) SetStoragePolicy(v StorageStoragePolicyRelationship) {
-	o.StoragePolicy = &v
+	o.StoragePolicy.Set(&v)
 }
 
-// GetVirtualDrive returns the VirtualDrive field value if set, zero value otherwise.
+// SetStoragePolicyNil sets the value for StoragePolicy to be an explicit nil
+func (o *StorageVirtualDriveIdentity) SetStoragePolicyNil() {
+	o.StoragePolicy.Set(nil)
+}
+
+// UnsetStoragePolicy ensures that no value is present for StoragePolicy, not even an explicit nil
+func (o *StorageVirtualDriveIdentity) UnsetStoragePolicy() {
+	o.StoragePolicy.Unset()
+}
+
+// GetVirtualDrive returns the VirtualDrive field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *StorageVirtualDriveIdentity) GetVirtualDrive() StorageVirtualDriveRelationship {
-	if o == nil || o.VirtualDrive == nil {
+	if o == nil || IsNil(o.VirtualDrive.Get()) {
 		var ret StorageVirtualDriveRelationship
 		return ret
 	}
-	return *o.VirtualDrive
+	return *o.VirtualDrive.Get()
 }
 
 // GetVirtualDriveOk returns a tuple with the VirtualDrive field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StorageVirtualDriveIdentity) GetVirtualDriveOk() (*StorageVirtualDriveRelationship, bool) {
-	if o == nil || o.VirtualDrive == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.VirtualDrive, true
+	return o.VirtualDrive.Get(), o.VirtualDrive.IsSet()
 }
 
 // HasVirtualDrive returns a boolean if a field has been set.
 func (o *StorageVirtualDriveIdentity) HasVirtualDrive() bool {
-	if o != nil && o.VirtualDrive != nil {
+	if o != nil && o.VirtualDrive.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetVirtualDrive gets a reference to the given StorageVirtualDriveRelationship and assigns it to the VirtualDrive field.
+// SetVirtualDrive gets a reference to the given NullableStorageVirtualDriveRelationship and assigns it to the VirtualDrive field.
 func (o *StorageVirtualDriveIdentity) SetVirtualDrive(v StorageVirtualDriveRelationship) {
-	o.VirtualDrive = &v
+	o.VirtualDrive.Set(&v)
+}
+
+// SetVirtualDriveNil sets the value for VirtualDrive to be an explicit nil
+func (o *StorageVirtualDriveIdentity) SetVirtualDriveNil() {
+	o.VirtualDrive.Set(nil)
+}
+
+// UnsetVirtualDrive ensures that no value is present for VirtualDrive, not even an explicit nil
+func (o *StorageVirtualDriveIdentity) UnsetVirtualDrive() {
+	o.VirtualDrive.Unset()
 }
 
 func (o StorageVirtualDriveIdentity) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o StorageVirtualDriveIdentity) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Name != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
 	}
-	if o.ServerProfile != nil {
-		toSerialize["ServerProfile"] = o.ServerProfile
+	if o.ServerProfile.IsSet() {
+		toSerialize["ServerProfile"] = o.ServerProfile.Get()
 	}
-	if o.StoragePolicy != nil {
-		toSerialize["StoragePolicy"] = o.StoragePolicy
+	if o.StoragePolicy.IsSet() {
+		toSerialize["StoragePolicy"] = o.StoragePolicy.Get()
 	}
-	if o.VirtualDrive != nil {
-		toSerialize["VirtualDrive"] = o.VirtualDrive
+	if o.VirtualDrive.IsSet() {
+		toSerialize["VirtualDrive"] = o.VirtualDrive.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *StorageVirtualDriveIdentity) UnmarshalJSON(bytes []byte) (err error) {
+func (o *StorageVirtualDriveIdentity) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type StorageVirtualDriveIdentityWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 		ObjectType string `json:"ObjectType"`
 		// The VirtualDrive Name which belongs to the Storage VirtualDrive.
-		Name          *string                           `json:"Name,omitempty"`
-		ServerProfile *ServerProfileRelationship        `json:"ServerProfile,omitempty"`
-		StoragePolicy *StorageStoragePolicyRelationship `json:"StoragePolicy,omitempty"`
-		VirtualDrive  *StorageVirtualDriveRelationship  `json:"VirtualDrive,omitempty"`
+		Name          *string                                  `json:"Name,omitempty"`
+		ServerProfile NullableServerProfileRelationship        `json:"ServerProfile,omitempty"`
+		StoragePolicy NullableStorageStoragePolicyRelationship `json:"StoragePolicy,omitempty"`
+		VirtualDrive  NullableStorageVirtualDriveRelationship  `json:"VirtualDrive,omitempty"`
 	}
 
 	varStorageVirtualDriveIdentityWithoutEmbeddedStruct := StorageVirtualDriveIdentityWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varStorageVirtualDriveIdentityWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varStorageVirtualDriveIdentityWithoutEmbeddedStruct)
 	if err == nil {
 		varStorageVirtualDriveIdentity := _StorageVirtualDriveIdentity{}
 		varStorageVirtualDriveIdentity.ClassId = varStorageVirtualDriveIdentityWithoutEmbeddedStruct.ClassId
@@ -300,7 +363,7 @@ func (o *StorageVirtualDriveIdentity) UnmarshalJSON(bytes []byte) (err error) {
 
 	varStorageVirtualDriveIdentity := _StorageVirtualDriveIdentity{}
 
-	err = json.Unmarshal(bytes, &varStorageVirtualDriveIdentity)
+	err = json.Unmarshal(data, &varStorageVirtualDriveIdentity)
 	if err == nil {
 		o.MoBaseMo = varStorageVirtualDriveIdentity.MoBaseMo
 	} else {
@@ -309,7 +372,7 @@ func (o *StorageVirtualDriveIdentity) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Name")

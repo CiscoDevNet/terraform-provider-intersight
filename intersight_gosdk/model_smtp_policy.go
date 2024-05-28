@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the SmtpPolicy type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &SmtpPolicy{}
 
 // SmtpPolicy Name that identifies the SMTP Policy.
 type SmtpPolicy struct {
@@ -44,10 +48,10 @@ type SmtpPolicy struct {
 	// IP address or hostname of the SMTP server. The SMTP server is used by the managed device to send email notifications.
 	SmtpServer *string `json:"SmtpServer,omitempty"`
 	// SMTP username from which email notification is sent.
-	UserName         *string                               `json:"UserName,omitempty"`
-	ApplianceAccount *IamAccountRelationship               `json:"ApplianceAccount,omitempty"`
-	Certificate      *IamTrustPointRelationship            `json:"Certificate,omitempty"`
-	Organization     *OrganizationOrganizationRelationship `json:"Organization,omitempty"`
+	UserName         *string                                      `json:"UserName,omitempty"`
+	ApplianceAccount NullableIamAccountRelationship               `json:"ApplianceAccount,omitempty"`
+	Certificate      NullableIamTrustPointRelationship            `json:"Certificate,omitempty"`
+	Organization     NullableOrganizationOrganizationRelationship `json:"Organization,omitempty"`
 	// An array of relationships to policyAbstractConfigProfile resources.
 	Profiles             []PolicyAbstractConfigProfileRelationship `json:"Profiles,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -148,7 +152,7 @@ func (o *SmtpPolicy) SetObjectType(v string) {
 
 // GetAuthPassword returns the AuthPassword field value if set, zero value otherwise.
 func (o *SmtpPolicy) GetAuthPassword() string {
-	if o == nil || o.AuthPassword == nil {
+	if o == nil || IsNil(o.AuthPassword) {
 		var ret string
 		return ret
 	}
@@ -158,7 +162,7 @@ func (o *SmtpPolicy) GetAuthPassword() string {
 // GetAuthPasswordOk returns a tuple with the AuthPassword field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SmtpPolicy) GetAuthPasswordOk() (*string, bool) {
-	if o == nil || o.AuthPassword == nil {
+	if o == nil || IsNil(o.AuthPassword) {
 		return nil, false
 	}
 	return o.AuthPassword, true
@@ -166,7 +170,7 @@ func (o *SmtpPolicy) GetAuthPasswordOk() (*string, bool) {
 
 // HasAuthPassword returns a boolean if a field has been set.
 func (o *SmtpPolicy) HasAuthPassword() bool {
-	if o != nil && o.AuthPassword != nil {
+	if o != nil && !IsNil(o.AuthPassword) {
 		return true
 	}
 
@@ -180,7 +184,7 @@ func (o *SmtpPolicy) SetAuthPassword(v string) {
 
 // GetEnableAuth returns the EnableAuth field value if set, zero value otherwise.
 func (o *SmtpPolicy) GetEnableAuth() bool {
-	if o == nil || o.EnableAuth == nil {
+	if o == nil || IsNil(o.EnableAuth) {
 		var ret bool
 		return ret
 	}
@@ -190,7 +194,7 @@ func (o *SmtpPolicy) GetEnableAuth() bool {
 // GetEnableAuthOk returns a tuple with the EnableAuth field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SmtpPolicy) GetEnableAuthOk() (*bool, bool) {
-	if o == nil || o.EnableAuth == nil {
+	if o == nil || IsNil(o.EnableAuth) {
 		return nil, false
 	}
 	return o.EnableAuth, true
@@ -198,7 +202,7 @@ func (o *SmtpPolicy) GetEnableAuthOk() (*bool, bool) {
 
 // HasEnableAuth returns a boolean if a field has been set.
 func (o *SmtpPolicy) HasEnableAuth() bool {
-	if o != nil && o.EnableAuth != nil {
+	if o != nil && !IsNil(o.EnableAuth) {
 		return true
 	}
 
@@ -212,7 +216,7 @@ func (o *SmtpPolicy) SetEnableAuth(v bool) {
 
 // GetEnableTls returns the EnableTls field value if set, zero value otherwise.
 func (o *SmtpPolicy) GetEnableTls() bool {
-	if o == nil || o.EnableTls == nil {
+	if o == nil || IsNil(o.EnableTls) {
 		var ret bool
 		return ret
 	}
@@ -222,7 +226,7 @@ func (o *SmtpPolicy) GetEnableTls() bool {
 // GetEnableTlsOk returns a tuple with the EnableTls field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SmtpPolicy) GetEnableTlsOk() (*bool, bool) {
-	if o == nil || o.EnableTls == nil {
+	if o == nil || IsNil(o.EnableTls) {
 		return nil, false
 	}
 	return o.EnableTls, true
@@ -230,7 +234,7 @@ func (o *SmtpPolicy) GetEnableTlsOk() (*bool, bool) {
 
 // HasEnableTls returns a boolean if a field has been set.
 func (o *SmtpPolicy) HasEnableTls() bool {
-	if o != nil && o.EnableTls != nil {
+	if o != nil && !IsNil(o.EnableTls) {
 		return true
 	}
 
@@ -244,7 +248,7 @@ func (o *SmtpPolicy) SetEnableTls(v bool) {
 
 // GetEnabled returns the Enabled field value if set, zero value otherwise.
 func (o *SmtpPolicy) GetEnabled() bool {
-	if o == nil || o.Enabled == nil {
+	if o == nil || IsNil(o.Enabled) {
 		var ret bool
 		return ret
 	}
@@ -254,7 +258,7 @@ func (o *SmtpPolicy) GetEnabled() bool {
 // GetEnabledOk returns a tuple with the Enabled field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SmtpPolicy) GetEnabledOk() (*bool, bool) {
-	if o == nil || o.Enabled == nil {
+	if o == nil || IsNil(o.Enabled) {
 		return nil, false
 	}
 	return o.Enabled, true
@@ -262,7 +266,7 @@ func (o *SmtpPolicy) GetEnabledOk() (*bool, bool) {
 
 // HasEnabled returns a boolean if a field has been set.
 func (o *SmtpPolicy) HasEnabled() bool {
-	if o != nil && o.Enabled != nil {
+	if o != nil && !IsNil(o.Enabled) {
 		return true
 	}
 
@@ -276,7 +280,7 @@ func (o *SmtpPolicy) SetEnabled(v bool) {
 
 // GetIsAuthPasswordSet returns the IsAuthPasswordSet field value if set, zero value otherwise.
 func (o *SmtpPolicy) GetIsAuthPasswordSet() bool {
-	if o == nil || o.IsAuthPasswordSet == nil {
+	if o == nil || IsNil(o.IsAuthPasswordSet) {
 		var ret bool
 		return ret
 	}
@@ -286,7 +290,7 @@ func (o *SmtpPolicy) GetIsAuthPasswordSet() bool {
 // GetIsAuthPasswordSetOk returns a tuple with the IsAuthPasswordSet field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SmtpPolicy) GetIsAuthPasswordSetOk() (*bool, bool) {
-	if o == nil || o.IsAuthPasswordSet == nil {
+	if o == nil || IsNil(o.IsAuthPasswordSet) {
 		return nil, false
 	}
 	return o.IsAuthPasswordSet, true
@@ -294,7 +298,7 @@ func (o *SmtpPolicy) GetIsAuthPasswordSetOk() (*bool, bool) {
 
 // HasIsAuthPasswordSet returns a boolean if a field has been set.
 func (o *SmtpPolicy) HasIsAuthPasswordSet() bool {
-	if o != nil && o.IsAuthPasswordSet != nil {
+	if o != nil && !IsNil(o.IsAuthPasswordSet) {
 		return true
 	}
 
@@ -308,7 +312,7 @@ func (o *SmtpPolicy) SetIsAuthPasswordSet(v bool) {
 
 // GetMinSeverity returns the MinSeverity field value if set, zero value otherwise.
 func (o *SmtpPolicy) GetMinSeverity() string {
-	if o == nil || o.MinSeverity == nil {
+	if o == nil || IsNil(o.MinSeverity) {
 		var ret string
 		return ret
 	}
@@ -318,7 +322,7 @@ func (o *SmtpPolicy) GetMinSeverity() string {
 // GetMinSeverityOk returns a tuple with the MinSeverity field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SmtpPolicy) GetMinSeverityOk() (*string, bool) {
-	if o == nil || o.MinSeverity == nil {
+	if o == nil || IsNil(o.MinSeverity) {
 		return nil, false
 	}
 	return o.MinSeverity, true
@@ -326,7 +330,7 @@ func (o *SmtpPolicy) GetMinSeverityOk() (*string, bool) {
 
 // HasMinSeverity returns a boolean if a field has been set.
 func (o *SmtpPolicy) HasMinSeverity() bool {
-	if o != nil && o.MinSeverity != nil {
+	if o != nil && !IsNil(o.MinSeverity) {
 		return true
 	}
 
@@ -340,7 +344,7 @@ func (o *SmtpPolicy) SetMinSeverity(v string) {
 
 // GetSenderEmail returns the SenderEmail field value if set, zero value otherwise.
 func (o *SmtpPolicy) GetSenderEmail() string {
-	if o == nil || o.SenderEmail == nil {
+	if o == nil || IsNil(o.SenderEmail) {
 		var ret string
 		return ret
 	}
@@ -350,7 +354,7 @@ func (o *SmtpPolicy) GetSenderEmail() string {
 // GetSenderEmailOk returns a tuple with the SenderEmail field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SmtpPolicy) GetSenderEmailOk() (*string, bool) {
-	if o == nil || o.SenderEmail == nil {
+	if o == nil || IsNil(o.SenderEmail) {
 		return nil, false
 	}
 	return o.SenderEmail, true
@@ -358,7 +362,7 @@ func (o *SmtpPolicy) GetSenderEmailOk() (*string, bool) {
 
 // HasSenderEmail returns a boolean if a field has been set.
 func (o *SmtpPolicy) HasSenderEmail() bool {
-	if o != nil && o.SenderEmail != nil {
+	if o != nil && !IsNil(o.SenderEmail) {
 		return true
 	}
 
@@ -372,7 +376,7 @@ func (o *SmtpPolicy) SetSenderEmail(v string) {
 
 // GetSmtpPort returns the SmtpPort field value if set, zero value otherwise.
 func (o *SmtpPolicy) GetSmtpPort() int64 {
-	if o == nil || o.SmtpPort == nil {
+	if o == nil || IsNil(o.SmtpPort) {
 		var ret int64
 		return ret
 	}
@@ -382,7 +386,7 @@ func (o *SmtpPolicy) GetSmtpPort() int64 {
 // GetSmtpPortOk returns a tuple with the SmtpPort field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SmtpPolicy) GetSmtpPortOk() (*int64, bool) {
-	if o == nil || o.SmtpPort == nil {
+	if o == nil || IsNil(o.SmtpPort) {
 		return nil, false
 	}
 	return o.SmtpPort, true
@@ -390,7 +394,7 @@ func (o *SmtpPolicy) GetSmtpPortOk() (*int64, bool) {
 
 // HasSmtpPort returns a boolean if a field has been set.
 func (o *SmtpPolicy) HasSmtpPort() bool {
-	if o != nil && o.SmtpPort != nil {
+	if o != nil && !IsNil(o.SmtpPort) {
 		return true
 	}
 
@@ -415,7 +419,7 @@ func (o *SmtpPolicy) GetSmtpRecipients() []string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *SmtpPolicy) GetSmtpRecipientsOk() ([]string, bool) {
-	if o == nil || o.SmtpRecipients == nil {
+	if o == nil || IsNil(o.SmtpRecipients) {
 		return nil, false
 	}
 	return o.SmtpRecipients, true
@@ -423,7 +427,7 @@ func (o *SmtpPolicy) GetSmtpRecipientsOk() ([]string, bool) {
 
 // HasSmtpRecipients returns a boolean if a field has been set.
 func (o *SmtpPolicy) HasSmtpRecipients() bool {
-	if o != nil && o.SmtpRecipients != nil {
+	if o != nil && IsNil(o.SmtpRecipients) {
 		return true
 	}
 
@@ -437,7 +441,7 @@ func (o *SmtpPolicy) SetSmtpRecipients(v []string) {
 
 // GetSmtpServer returns the SmtpServer field value if set, zero value otherwise.
 func (o *SmtpPolicy) GetSmtpServer() string {
-	if o == nil || o.SmtpServer == nil {
+	if o == nil || IsNil(o.SmtpServer) {
 		var ret string
 		return ret
 	}
@@ -447,7 +451,7 @@ func (o *SmtpPolicy) GetSmtpServer() string {
 // GetSmtpServerOk returns a tuple with the SmtpServer field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SmtpPolicy) GetSmtpServerOk() (*string, bool) {
-	if o == nil || o.SmtpServer == nil {
+	if o == nil || IsNil(o.SmtpServer) {
 		return nil, false
 	}
 	return o.SmtpServer, true
@@ -455,7 +459,7 @@ func (o *SmtpPolicy) GetSmtpServerOk() (*string, bool) {
 
 // HasSmtpServer returns a boolean if a field has been set.
 func (o *SmtpPolicy) HasSmtpServer() bool {
-	if o != nil && o.SmtpServer != nil {
+	if o != nil && !IsNil(o.SmtpServer) {
 		return true
 	}
 
@@ -469,7 +473,7 @@ func (o *SmtpPolicy) SetSmtpServer(v string) {
 
 // GetUserName returns the UserName field value if set, zero value otherwise.
 func (o *SmtpPolicy) GetUserName() string {
-	if o == nil || o.UserName == nil {
+	if o == nil || IsNil(o.UserName) {
 		var ret string
 		return ret
 	}
@@ -479,7 +483,7 @@ func (o *SmtpPolicy) GetUserName() string {
 // GetUserNameOk returns a tuple with the UserName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SmtpPolicy) GetUserNameOk() (*string, bool) {
-	if o == nil || o.UserName == nil {
+	if o == nil || IsNil(o.UserName) {
 		return nil, false
 	}
 	return o.UserName, true
@@ -487,7 +491,7 @@ func (o *SmtpPolicy) GetUserNameOk() (*string, bool) {
 
 // HasUserName returns a boolean if a field has been set.
 func (o *SmtpPolicy) HasUserName() bool {
-	if o != nil && o.UserName != nil {
+	if o != nil && !IsNil(o.UserName) {
 		return true
 	}
 
@@ -499,100 +503,133 @@ func (o *SmtpPolicy) SetUserName(v string) {
 	o.UserName = &v
 }
 
-// GetApplianceAccount returns the ApplianceAccount field value if set, zero value otherwise.
+// GetApplianceAccount returns the ApplianceAccount field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *SmtpPolicy) GetApplianceAccount() IamAccountRelationship {
-	if o == nil || o.ApplianceAccount == nil {
+	if o == nil || IsNil(o.ApplianceAccount.Get()) {
 		var ret IamAccountRelationship
 		return ret
 	}
-	return *o.ApplianceAccount
+	return *o.ApplianceAccount.Get()
 }
 
 // GetApplianceAccountOk returns a tuple with the ApplianceAccount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *SmtpPolicy) GetApplianceAccountOk() (*IamAccountRelationship, bool) {
-	if o == nil || o.ApplianceAccount == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.ApplianceAccount, true
+	return o.ApplianceAccount.Get(), o.ApplianceAccount.IsSet()
 }
 
 // HasApplianceAccount returns a boolean if a field has been set.
 func (o *SmtpPolicy) HasApplianceAccount() bool {
-	if o != nil && o.ApplianceAccount != nil {
+	if o != nil && o.ApplianceAccount.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetApplianceAccount gets a reference to the given IamAccountRelationship and assigns it to the ApplianceAccount field.
+// SetApplianceAccount gets a reference to the given NullableIamAccountRelationship and assigns it to the ApplianceAccount field.
 func (o *SmtpPolicy) SetApplianceAccount(v IamAccountRelationship) {
-	o.ApplianceAccount = &v
+	o.ApplianceAccount.Set(&v)
 }
 
-// GetCertificate returns the Certificate field value if set, zero value otherwise.
+// SetApplianceAccountNil sets the value for ApplianceAccount to be an explicit nil
+func (o *SmtpPolicy) SetApplianceAccountNil() {
+	o.ApplianceAccount.Set(nil)
+}
+
+// UnsetApplianceAccount ensures that no value is present for ApplianceAccount, not even an explicit nil
+func (o *SmtpPolicy) UnsetApplianceAccount() {
+	o.ApplianceAccount.Unset()
+}
+
+// GetCertificate returns the Certificate field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *SmtpPolicy) GetCertificate() IamTrustPointRelationship {
-	if o == nil || o.Certificate == nil {
+	if o == nil || IsNil(o.Certificate.Get()) {
 		var ret IamTrustPointRelationship
 		return ret
 	}
-	return *o.Certificate
+	return *o.Certificate.Get()
 }
 
 // GetCertificateOk returns a tuple with the Certificate field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *SmtpPolicy) GetCertificateOk() (*IamTrustPointRelationship, bool) {
-	if o == nil || o.Certificate == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Certificate, true
+	return o.Certificate.Get(), o.Certificate.IsSet()
 }
 
 // HasCertificate returns a boolean if a field has been set.
 func (o *SmtpPolicy) HasCertificate() bool {
-	if o != nil && o.Certificate != nil {
+	if o != nil && o.Certificate.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetCertificate gets a reference to the given IamTrustPointRelationship and assigns it to the Certificate field.
+// SetCertificate gets a reference to the given NullableIamTrustPointRelationship and assigns it to the Certificate field.
 func (o *SmtpPolicy) SetCertificate(v IamTrustPointRelationship) {
-	o.Certificate = &v
+	o.Certificate.Set(&v)
 }
 
-// GetOrganization returns the Organization field value if set, zero value otherwise.
+// SetCertificateNil sets the value for Certificate to be an explicit nil
+func (o *SmtpPolicy) SetCertificateNil() {
+	o.Certificate.Set(nil)
+}
+
+// UnsetCertificate ensures that no value is present for Certificate, not even an explicit nil
+func (o *SmtpPolicy) UnsetCertificate() {
+	o.Certificate.Unset()
+}
+
+// GetOrganization returns the Organization field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *SmtpPolicy) GetOrganization() OrganizationOrganizationRelationship {
-	if o == nil || o.Organization == nil {
+	if o == nil || IsNil(o.Organization.Get()) {
 		var ret OrganizationOrganizationRelationship
 		return ret
 	}
-	return *o.Organization
+	return *o.Organization.Get()
 }
 
 // GetOrganizationOk returns a tuple with the Organization field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *SmtpPolicy) GetOrganizationOk() (*OrganizationOrganizationRelationship, bool) {
-	if o == nil || o.Organization == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Organization, true
+	return o.Organization.Get(), o.Organization.IsSet()
 }
 
 // HasOrganization returns a boolean if a field has been set.
 func (o *SmtpPolicy) HasOrganization() bool {
-	if o != nil && o.Organization != nil {
+	if o != nil && o.Organization.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetOrganization gets a reference to the given OrganizationOrganizationRelationship and assigns it to the Organization field.
+// SetOrganization gets a reference to the given NullableOrganizationOrganizationRelationship and assigns it to the Organization field.
 func (o *SmtpPolicy) SetOrganization(v OrganizationOrganizationRelationship) {
-	o.Organization = &v
+	o.Organization.Set(&v)
+}
+
+// SetOrganizationNil sets the value for Organization to be an explicit nil
+func (o *SmtpPolicy) SetOrganizationNil() {
+	o.Organization.Set(nil)
+}
+
+// UnsetOrganization ensures that no value is present for Organization, not even an explicit nil
+func (o *SmtpPolicy) UnsetOrganization() {
+	o.Organization.Unset()
 }
 
 // GetProfiles returns the Profiles field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -608,7 +645,7 @@ func (o *SmtpPolicy) GetProfiles() []PolicyAbstractConfigProfileRelationship {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *SmtpPolicy) GetProfilesOk() ([]PolicyAbstractConfigProfileRelationship, bool) {
-	if o == nil || o.Profiles == nil {
+	if o == nil || IsNil(o.Profiles) {
 		return nil, false
 	}
 	return o.Profiles, true
@@ -616,7 +653,7 @@ func (o *SmtpPolicy) GetProfilesOk() ([]PolicyAbstractConfigProfileRelationship,
 
 // HasProfiles returns a boolean if a field has been set.
 func (o *SmtpPolicy) HasProfiles() bool {
-	if o != nil && o.Profiles != nil {
+	if o != nil && IsNil(o.Profiles) {
 		return true
 	}
 
@@ -629,62 +666,66 @@ func (o *SmtpPolicy) SetProfiles(v []PolicyAbstractConfigProfileRelationship) {
 }
 
 func (o SmtpPolicy) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o SmtpPolicy) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedPolicyAbstractPolicy, errPolicyAbstractPolicy := json.Marshal(o.PolicyAbstractPolicy)
 	if errPolicyAbstractPolicy != nil {
-		return []byte{}, errPolicyAbstractPolicy
+		return map[string]interface{}{}, errPolicyAbstractPolicy
 	}
 	errPolicyAbstractPolicy = json.Unmarshal([]byte(serializedPolicyAbstractPolicy), &toSerialize)
 	if errPolicyAbstractPolicy != nil {
-		return []byte{}, errPolicyAbstractPolicy
+		return map[string]interface{}{}, errPolicyAbstractPolicy
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.AuthPassword != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.AuthPassword) {
 		toSerialize["AuthPassword"] = o.AuthPassword
 	}
-	if o.EnableAuth != nil {
+	if !IsNil(o.EnableAuth) {
 		toSerialize["EnableAuth"] = o.EnableAuth
 	}
-	if o.EnableTls != nil {
+	if !IsNil(o.EnableTls) {
 		toSerialize["EnableTls"] = o.EnableTls
 	}
-	if o.Enabled != nil {
+	if !IsNil(o.Enabled) {
 		toSerialize["Enabled"] = o.Enabled
 	}
-	if o.IsAuthPasswordSet != nil {
+	if !IsNil(o.IsAuthPasswordSet) {
 		toSerialize["IsAuthPasswordSet"] = o.IsAuthPasswordSet
 	}
-	if o.MinSeverity != nil {
+	if !IsNil(o.MinSeverity) {
 		toSerialize["MinSeverity"] = o.MinSeverity
 	}
-	if o.SenderEmail != nil {
+	if !IsNil(o.SenderEmail) {
 		toSerialize["SenderEmail"] = o.SenderEmail
 	}
-	if o.SmtpPort != nil {
+	if !IsNil(o.SmtpPort) {
 		toSerialize["SmtpPort"] = o.SmtpPort
 	}
 	if o.SmtpRecipients != nil {
 		toSerialize["SmtpRecipients"] = o.SmtpRecipients
 	}
-	if o.SmtpServer != nil {
+	if !IsNil(o.SmtpServer) {
 		toSerialize["SmtpServer"] = o.SmtpServer
 	}
-	if o.UserName != nil {
+	if !IsNil(o.UserName) {
 		toSerialize["UserName"] = o.UserName
 	}
-	if o.ApplianceAccount != nil {
-		toSerialize["ApplianceAccount"] = o.ApplianceAccount
+	if o.ApplianceAccount.IsSet() {
+		toSerialize["ApplianceAccount"] = o.ApplianceAccount.Get()
 	}
-	if o.Certificate != nil {
-		toSerialize["Certificate"] = o.Certificate
+	if o.Certificate.IsSet() {
+		toSerialize["Certificate"] = o.Certificate.Get()
 	}
-	if o.Organization != nil {
-		toSerialize["Organization"] = o.Organization
+	if o.Organization.IsSet() {
+		toSerialize["Organization"] = o.Organization.Get()
 	}
 	if o.Profiles != nil {
 		toSerialize["Profiles"] = o.Profiles
@@ -694,10 +735,32 @@ func (o SmtpPolicy) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *SmtpPolicy) UnmarshalJSON(bytes []byte) (err error) {
+func (o *SmtpPolicy) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type SmtpPolicyWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -723,17 +786,17 @@ func (o *SmtpPolicy) UnmarshalJSON(bytes []byte) (err error) {
 		// IP address or hostname of the SMTP server. The SMTP server is used by the managed device to send email notifications.
 		SmtpServer *string `json:"SmtpServer,omitempty"`
 		// SMTP username from which email notification is sent.
-		UserName         *string                               `json:"UserName,omitempty"`
-		ApplianceAccount *IamAccountRelationship               `json:"ApplianceAccount,omitempty"`
-		Certificate      *IamTrustPointRelationship            `json:"Certificate,omitempty"`
-		Organization     *OrganizationOrganizationRelationship `json:"Organization,omitempty"`
+		UserName         *string                                      `json:"UserName,omitempty"`
+		ApplianceAccount NullableIamAccountRelationship               `json:"ApplianceAccount,omitempty"`
+		Certificate      NullableIamTrustPointRelationship            `json:"Certificate,omitempty"`
+		Organization     NullableOrganizationOrganizationRelationship `json:"Organization,omitempty"`
 		// An array of relationships to policyAbstractConfigProfile resources.
 		Profiles []PolicyAbstractConfigProfileRelationship `json:"Profiles,omitempty"`
 	}
 
 	varSmtpPolicyWithoutEmbeddedStruct := SmtpPolicyWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varSmtpPolicyWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varSmtpPolicyWithoutEmbeddedStruct)
 	if err == nil {
 		varSmtpPolicy := _SmtpPolicy{}
 		varSmtpPolicy.ClassId = varSmtpPolicyWithoutEmbeddedStruct.ClassId
@@ -760,7 +823,7 @@ func (o *SmtpPolicy) UnmarshalJSON(bytes []byte) (err error) {
 
 	varSmtpPolicy := _SmtpPolicy{}
 
-	err = json.Unmarshal(bytes, &varSmtpPolicy)
+	err = json.Unmarshal(data, &varSmtpPolicy)
 	if err == nil {
 		o.PolicyAbstractPolicy = varSmtpPolicy.PolicyAbstractPolicy
 	} else {
@@ -769,7 +832,7 @@ func (o *SmtpPolicy) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "AuthPassword")

@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "storage.NetAppEthernetPortEvent"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "storage.NetAppEthernetPortEvent"]
-**EthernetPort** | Pointer to [**StorageNetAppEthernetPortRelationship**](StorageNetAppEthernetPortRelationship.md) |  | [optional] 
+**EthernetPort** | Pointer to [**NullableStorageNetAppEthernetPortRelationship**](StorageNetAppEthernetPortRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -92,6 +92,16 @@ SetEthernetPort sets EthernetPort field to given value.
 
 HasEthernetPort returns a boolean if a field has been set.
 
+### SetEthernetPortNil
+
+`func (o *StorageNetAppEthernetPortEvent) SetEthernetPortNil(b bool)`
+
+ SetEthernetPortNil sets the value for EthernetPort to be an explicit nil
+
+### UnsetEthernetPort
+`func (o *StorageNetAppEthernetPortEvent) UnsetEthernetPort()`
+
+UnsetEthernetPort ensures that no value is present for EthernetPort, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

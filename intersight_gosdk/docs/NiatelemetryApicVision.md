@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **ApicVisionStateLastUpdateTs** | Pointer to **string** | ApicVision App state last updated timestamp. It indicates the last updated timestamp for operational state of ApicVision app. | [optional] 
 **ApicVisionVersion** | Pointer to **string** | ApicVision App version. apicVisionVersion is used to check compatibility with Nexus Cloud features. | [optional] 
 **ConfigIssues** | Pointer to **string** | Configuration issues depicts the failures for ApicVision managed package upgrade on APIC. | [optional] 
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -196,6 +196,16 @@ SetRegisteredDevice sets RegisteredDevice field to given value.
 
 HasRegisteredDevice returns a boolean if a field has been set.
 
+### SetRegisteredDeviceNil
+
+`func (o *NiatelemetryApicVision) SetRegisteredDeviceNil(b bool)`
+
+ SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+
+### UnsetRegisteredDevice
+`func (o *NiatelemetryApicVision) UnsetRegisteredDevice()`
+
+UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

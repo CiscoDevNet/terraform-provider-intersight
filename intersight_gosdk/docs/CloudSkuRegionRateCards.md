@@ -18,8 +18,8 @@ Name | Type | Description | Notes
 **Unit** | Pointer to **string** | The billing unit to use for computing the price. For e.g. when serviceCategory is Compute the unit will be \&quot;Hrs\&quot;, for Storage it will be \&quot;GB-Mo\&quot;. | [optional] 
 **ValidFrom** | Pointer to **int64** | The epoch start time from which the price will be applied. | [optional] 
 **ValidTo** | Pointer to **int64** | The epoch end time of the current price. | [optional] 
-**Region** | Pointer to [**CloudRegionsRelationship**](CloudRegionsRelationship.md) |  | [optional] 
-**Sku** | Pointer to [**CloudBaseSkuRelationship**](CloudBaseSkuRelationship.md) |  | [optional] 
+**Region** | Pointer to [**NullableCloudRegionsRelationship**](CloudRegionsRelationship.md) |  | [optional] 
+**Sku** | Pointer to [**NullableCloudBaseSkuRelationship**](CloudBaseSkuRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -415,6 +415,16 @@ SetRegion sets Region field to given value.
 
 HasRegion returns a boolean if a field has been set.
 
+### SetRegionNil
+
+`func (o *CloudSkuRegionRateCards) SetRegionNil(b bool)`
+
+ SetRegionNil sets the value for Region to be an explicit nil
+
+### UnsetRegion
+`func (o *CloudSkuRegionRateCards) UnsetRegion()`
+
+UnsetRegion ensures that no value is present for Region, not even an explicit nil
 ### GetSku
 
 `func (o *CloudSkuRegionRateCards) GetSku() CloudBaseSkuRelationship`
@@ -440,6 +450,16 @@ SetSku sets Sku field to given value.
 
 HasSku returns a boolean if a field has been set.
 
+### SetSkuNil
+
+`func (o *CloudSkuRegionRateCards) SetSkuNil(b bool)`
+
+ SetSkuNil sets the value for Sku to be an explicit nil
+
+### UnsetSku
+`func (o *CloudSkuRegionRateCards) UnsetSku()`
+
+UnsetSku ensures that no value is present for Sku, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

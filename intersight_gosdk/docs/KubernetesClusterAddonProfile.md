@@ -8,8 +8,8 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "kubernetes.ClusterAddonProfile"]
 **Addons** | Pointer to [**[]KubernetesAddon**](KubernetesAddon.md) |  | [optional] 
 **Name** | Pointer to **string** | Name of the cluster addon profile. | [optional] 
-**AssociatedCluster** | Pointer to [**KubernetesClusterRelationship**](KubernetesClusterRelationship.md) |  | [optional] 
-**Organization** | Pointer to [**OrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
+**AssociatedCluster** | Pointer to [**NullableKubernetesClusterRelationship**](KubernetesClusterRelationship.md) |  | [optional] 
+**Organization** | Pointer to [**NullableOrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -155,6 +155,16 @@ SetAssociatedCluster sets AssociatedCluster field to given value.
 
 HasAssociatedCluster returns a boolean if a field has been set.
 
+### SetAssociatedClusterNil
+
+`func (o *KubernetesClusterAddonProfile) SetAssociatedClusterNil(b bool)`
+
+ SetAssociatedClusterNil sets the value for AssociatedCluster to be an explicit nil
+
+### UnsetAssociatedCluster
+`func (o *KubernetesClusterAddonProfile) UnsetAssociatedCluster()`
+
+UnsetAssociatedCluster ensures that no value is present for AssociatedCluster, not even an explicit nil
 ### GetOrganization
 
 `func (o *KubernetesClusterAddonProfile) GetOrganization() OrganizationOrganizationRelationship`
@@ -180,6 +190,16 @@ SetOrganization sets Organization field to given value.
 
 HasOrganization returns a boolean if a field has been set.
 
+### SetOrganizationNil
+
+`func (o *KubernetesClusterAddonProfile) SetOrganizationNil(b bool)`
+
+ SetOrganizationNil sets the value for Organization to be an explicit nil
+
+### UnsetOrganization
+`func (o *KubernetesClusterAddonProfile) UnsetOrganization()`
+
+UnsetOrganization ensures that no value is present for Organization, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

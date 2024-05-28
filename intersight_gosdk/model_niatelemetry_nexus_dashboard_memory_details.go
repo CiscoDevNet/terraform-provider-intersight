@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the NiatelemetryNexusDashboardMemoryDetails type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &NiatelemetryNexusDashboardMemoryDetails{}
 
 // NiatelemetryNexusDashboardMemoryDetails Details of Nexus Dashboard's memory.
 type NiatelemetryNexusDashboardMemoryDetails struct {
@@ -27,9 +31,9 @@ type NiatelemetryNexusDashboardMemoryDetails struct {
 	// Name of the node in Nexus Dashboard cluster.
 	DeviceName *string `json:"DeviceName,omitempty"`
 	// Memory capacity of a node in Nexus Dashboard.
-	MemoryCapacity       *int64                                   `json:"MemoryCapacity,omitempty"`
-	NexusDashboard       *NiatelemetryNexusDashboardsRelationship `json:"NexusDashboard,omitempty"`
-	RegisteredDevice     *AssetDeviceRegistrationRelationship     `json:"RegisteredDevice,omitempty"`
+	MemoryCapacity       *int64                                          `json:"MemoryCapacity,omitempty"`
+	NexusDashboard       NullableNiatelemetryNexusDashboardsRelationship `json:"NexusDashboard,omitempty"`
+	RegisteredDevice     NullableAssetDeviceRegistrationRelationship     `json:"RegisteredDevice,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -108,7 +112,7 @@ func (o *NiatelemetryNexusDashboardMemoryDetails) SetObjectType(v string) {
 
 // GetDeviceName returns the DeviceName field value if set, zero value otherwise.
 func (o *NiatelemetryNexusDashboardMemoryDetails) GetDeviceName() string {
-	if o == nil || o.DeviceName == nil {
+	if o == nil || IsNil(o.DeviceName) {
 		var ret string
 		return ret
 	}
@@ -118,7 +122,7 @@ func (o *NiatelemetryNexusDashboardMemoryDetails) GetDeviceName() string {
 // GetDeviceNameOk returns a tuple with the DeviceName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryNexusDashboardMemoryDetails) GetDeviceNameOk() (*string, bool) {
-	if o == nil || o.DeviceName == nil {
+	if o == nil || IsNil(o.DeviceName) {
 		return nil, false
 	}
 	return o.DeviceName, true
@@ -126,7 +130,7 @@ func (o *NiatelemetryNexusDashboardMemoryDetails) GetDeviceNameOk() (*string, bo
 
 // HasDeviceName returns a boolean if a field has been set.
 func (o *NiatelemetryNexusDashboardMemoryDetails) HasDeviceName() bool {
-	if o != nil && o.DeviceName != nil {
+	if o != nil && !IsNil(o.DeviceName) {
 		return true
 	}
 
@@ -140,7 +144,7 @@ func (o *NiatelemetryNexusDashboardMemoryDetails) SetDeviceName(v string) {
 
 // GetMemoryCapacity returns the MemoryCapacity field value if set, zero value otherwise.
 func (o *NiatelemetryNexusDashboardMemoryDetails) GetMemoryCapacity() int64 {
-	if o == nil || o.MemoryCapacity == nil {
+	if o == nil || IsNil(o.MemoryCapacity) {
 		var ret int64
 		return ret
 	}
@@ -150,7 +154,7 @@ func (o *NiatelemetryNexusDashboardMemoryDetails) GetMemoryCapacity() int64 {
 // GetMemoryCapacityOk returns a tuple with the MemoryCapacity field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryNexusDashboardMemoryDetails) GetMemoryCapacityOk() (*int64, bool) {
-	if o == nil || o.MemoryCapacity == nil {
+	if o == nil || IsNil(o.MemoryCapacity) {
 		return nil, false
 	}
 	return o.MemoryCapacity, true
@@ -158,7 +162,7 @@ func (o *NiatelemetryNexusDashboardMemoryDetails) GetMemoryCapacityOk() (*int64,
 
 // HasMemoryCapacity returns a boolean if a field has been set.
 func (o *NiatelemetryNexusDashboardMemoryDetails) HasMemoryCapacity() bool {
-	if o != nil && o.MemoryCapacity != nil {
+	if o != nil && !IsNil(o.MemoryCapacity) {
 		return true
 	}
 
@@ -170,107 +174,155 @@ func (o *NiatelemetryNexusDashboardMemoryDetails) SetMemoryCapacity(v int64) {
 	o.MemoryCapacity = &v
 }
 
-// GetNexusDashboard returns the NexusDashboard field value if set, zero value otherwise.
+// GetNexusDashboard returns the NexusDashboard field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *NiatelemetryNexusDashboardMemoryDetails) GetNexusDashboard() NiatelemetryNexusDashboardsRelationship {
-	if o == nil || o.NexusDashboard == nil {
+	if o == nil || IsNil(o.NexusDashboard.Get()) {
 		var ret NiatelemetryNexusDashboardsRelationship
 		return ret
 	}
-	return *o.NexusDashboard
+	return *o.NexusDashboard.Get()
 }
 
 // GetNexusDashboardOk returns a tuple with the NexusDashboard field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *NiatelemetryNexusDashboardMemoryDetails) GetNexusDashboardOk() (*NiatelemetryNexusDashboardsRelationship, bool) {
-	if o == nil || o.NexusDashboard == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.NexusDashboard, true
+	return o.NexusDashboard.Get(), o.NexusDashboard.IsSet()
 }
 
 // HasNexusDashboard returns a boolean if a field has been set.
 func (o *NiatelemetryNexusDashboardMemoryDetails) HasNexusDashboard() bool {
-	if o != nil && o.NexusDashboard != nil {
+	if o != nil && o.NexusDashboard.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetNexusDashboard gets a reference to the given NiatelemetryNexusDashboardsRelationship and assigns it to the NexusDashboard field.
+// SetNexusDashboard gets a reference to the given NullableNiatelemetryNexusDashboardsRelationship and assigns it to the NexusDashboard field.
 func (o *NiatelemetryNexusDashboardMemoryDetails) SetNexusDashboard(v NiatelemetryNexusDashboardsRelationship) {
-	o.NexusDashboard = &v
+	o.NexusDashboard.Set(&v)
 }
 
-// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise.
+// SetNexusDashboardNil sets the value for NexusDashboard to be an explicit nil
+func (o *NiatelemetryNexusDashboardMemoryDetails) SetNexusDashboardNil() {
+	o.NexusDashboard.Set(nil)
+}
+
+// UnsetNexusDashboard ensures that no value is present for NexusDashboard, not even an explicit nil
+func (o *NiatelemetryNexusDashboardMemoryDetails) UnsetNexusDashboard() {
+	o.NexusDashboard.Unset()
+}
+
+// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *NiatelemetryNexusDashboardMemoryDetails) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil || IsNil(o.RegisteredDevice.Get()) {
 		var ret AssetDeviceRegistrationRelationship
 		return ret
 	}
-	return *o.RegisteredDevice
+	return *o.RegisteredDevice.Get()
 }
 
 // GetRegisteredDeviceOk returns a tuple with the RegisteredDevice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *NiatelemetryNexusDashboardMemoryDetails) GetRegisteredDeviceOk() (*AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.RegisteredDevice, true
+	return o.RegisteredDevice.Get(), o.RegisteredDevice.IsSet()
 }
 
 // HasRegisteredDevice returns a boolean if a field has been set.
 func (o *NiatelemetryNexusDashboardMemoryDetails) HasRegisteredDevice() bool {
-	if o != nil && o.RegisteredDevice != nil {
+	if o != nil && o.RegisteredDevice.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRegisteredDevice gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
+// SetRegisteredDevice gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
 func (o *NiatelemetryNexusDashboardMemoryDetails) SetRegisteredDevice(v AssetDeviceRegistrationRelationship) {
-	o.RegisteredDevice = &v
+	o.RegisteredDevice.Set(&v)
+}
+
+// SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+func (o *NiatelemetryNexusDashboardMemoryDetails) SetRegisteredDeviceNil() {
+	o.RegisteredDevice.Set(nil)
+}
+
+// UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
+func (o *NiatelemetryNexusDashboardMemoryDetails) UnsetRegisteredDevice() {
+	o.RegisteredDevice.Unset()
 }
 
 func (o NiatelemetryNexusDashboardMemoryDetails) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o NiatelemetryNexusDashboardMemoryDetails) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.DeviceName != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.DeviceName) {
 		toSerialize["DeviceName"] = o.DeviceName
 	}
-	if o.MemoryCapacity != nil {
+	if !IsNil(o.MemoryCapacity) {
 		toSerialize["MemoryCapacity"] = o.MemoryCapacity
 	}
-	if o.NexusDashboard != nil {
-		toSerialize["NexusDashboard"] = o.NexusDashboard
+	if o.NexusDashboard.IsSet() {
+		toSerialize["NexusDashboard"] = o.NexusDashboard.Get()
 	}
-	if o.RegisteredDevice != nil {
-		toSerialize["RegisteredDevice"] = o.RegisteredDevice
+	if o.RegisteredDevice.IsSet() {
+		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *NiatelemetryNexusDashboardMemoryDetails) UnmarshalJSON(bytes []byte) (err error) {
+func (o *NiatelemetryNexusDashboardMemoryDetails) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type NiatelemetryNexusDashboardMemoryDetailsWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -279,14 +331,14 @@ func (o *NiatelemetryNexusDashboardMemoryDetails) UnmarshalJSON(bytes []byte) (e
 		// Name of the node in Nexus Dashboard cluster.
 		DeviceName *string `json:"DeviceName,omitempty"`
 		// Memory capacity of a node in Nexus Dashboard.
-		MemoryCapacity   *int64                                   `json:"MemoryCapacity,omitempty"`
-		NexusDashboard   *NiatelemetryNexusDashboardsRelationship `json:"NexusDashboard,omitempty"`
-		RegisteredDevice *AssetDeviceRegistrationRelationship     `json:"RegisteredDevice,omitempty"`
+		MemoryCapacity   *int64                                          `json:"MemoryCapacity,omitempty"`
+		NexusDashboard   NullableNiatelemetryNexusDashboardsRelationship `json:"NexusDashboard,omitempty"`
+		RegisteredDevice NullableAssetDeviceRegistrationRelationship     `json:"RegisteredDevice,omitempty"`
 	}
 
 	varNiatelemetryNexusDashboardMemoryDetailsWithoutEmbeddedStruct := NiatelemetryNexusDashboardMemoryDetailsWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varNiatelemetryNexusDashboardMemoryDetailsWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varNiatelemetryNexusDashboardMemoryDetailsWithoutEmbeddedStruct)
 	if err == nil {
 		varNiatelemetryNexusDashboardMemoryDetails := _NiatelemetryNexusDashboardMemoryDetails{}
 		varNiatelemetryNexusDashboardMemoryDetails.ClassId = varNiatelemetryNexusDashboardMemoryDetailsWithoutEmbeddedStruct.ClassId
@@ -302,7 +354,7 @@ func (o *NiatelemetryNexusDashboardMemoryDetails) UnmarshalJSON(bytes []byte) (e
 
 	varNiatelemetryNexusDashboardMemoryDetails := _NiatelemetryNexusDashboardMemoryDetails{}
 
-	err = json.Unmarshal(bytes, &varNiatelemetryNexusDashboardMemoryDetails)
+	err = json.Unmarshal(data, &varNiatelemetryNexusDashboardMemoryDetails)
 	if err == nil {
 		o.MoBaseMo = varNiatelemetryNexusDashboardMemoryDetails.MoBaseMo
 	} else {
@@ -311,7 +363,7 @@ func (o *NiatelemetryNexusDashboardMemoryDetails) UnmarshalJSON(bytes []byte) (e
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "DeviceName")

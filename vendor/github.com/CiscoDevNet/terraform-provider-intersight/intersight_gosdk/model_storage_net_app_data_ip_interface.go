@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the StorageNetAppDataIpInterface type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &StorageNetAppDataIpInterface{}
 
 // StorageNetAppDataIpInterface NetApp Data IP interface is a logical interface for data within the svm scope.
 type StorageNetAppDataIpInterface struct {
@@ -23,12 +27,12 @@ type StorageNetAppDataIpInterface struct {
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
-	ObjectType      string                         `json:"ObjectType"`
-	ArrayController *StorageNetAppNodeRelationship `json:"ArrayController,omitempty"`
+	ObjectType      string                                `json:"ObjectType"`
+	ArrayController NullableStorageNetAppNodeRelationship `json:"ArrayController,omitempty"`
 	// An array of relationships to storageNetAppDataIpInterfaceEvent resources.
 	Events               []StorageNetAppDataIpInterfaceEventRelationship `json:"Events,omitempty"`
-	NetAppEthernetPort   *StorageNetAppEthernetPortRelationship          `json:"NetAppEthernetPort,omitempty"`
-	Tenant               *StorageNetAppStorageVmRelationship             `json:"Tenant,omitempty"`
+	NetAppEthernetPort   NullableStorageNetAppEthernetPortRelationship   `json:"NetAppEthernetPort,omitempty"`
+	Tenant               NullableStorageNetAppStorageVmRelationship      `json:"Tenant,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -105,36 +109,47 @@ func (o *StorageNetAppDataIpInterface) SetObjectType(v string) {
 	o.ObjectType = v
 }
 
-// GetArrayController returns the ArrayController field value if set, zero value otherwise.
+// GetArrayController returns the ArrayController field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *StorageNetAppDataIpInterface) GetArrayController() StorageNetAppNodeRelationship {
-	if o == nil || o.ArrayController == nil {
+	if o == nil || IsNil(o.ArrayController.Get()) {
 		var ret StorageNetAppNodeRelationship
 		return ret
 	}
-	return *o.ArrayController
+	return *o.ArrayController.Get()
 }
 
 // GetArrayControllerOk returns a tuple with the ArrayController field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StorageNetAppDataIpInterface) GetArrayControllerOk() (*StorageNetAppNodeRelationship, bool) {
-	if o == nil || o.ArrayController == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.ArrayController, true
+	return o.ArrayController.Get(), o.ArrayController.IsSet()
 }
 
 // HasArrayController returns a boolean if a field has been set.
 func (o *StorageNetAppDataIpInterface) HasArrayController() bool {
-	if o != nil && o.ArrayController != nil {
+	if o != nil && o.ArrayController.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetArrayController gets a reference to the given StorageNetAppNodeRelationship and assigns it to the ArrayController field.
+// SetArrayController gets a reference to the given NullableStorageNetAppNodeRelationship and assigns it to the ArrayController field.
 func (o *StorageNetAppDataIpInterface) SetArrayController(v StorageNetAppNodeRelationship) {
-	o.ArrayController = &v
+	o.ArrayController.Set(&v)
+}
+
+// SetArrayControllerNil sets the value for ArrayController to be an explicit nil
+func (o *StorageNetAppDataIpInterface) SetArrayControllerNil() {
+	o.ArrayController.Set(nil)
+}
+
+// UnsetArrayController ensures that no value is present for ArrayController, not even an explicit nil
+func (o *StorageNetAppDataIpInterface) UnsetArrayController() {
+	o.ArrayController.Unset()
 }
 
 // GetEvents returns the Events field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -150,7 +165,7 @@ func (o *StorageNetAppDataIpInterface) GetEvents() []StorageNetAppDataIpInterfac
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StorageNetAppDataIpInterface) GetEventsOk() ([]StorageNetAppDataIpInterfaceEventRelationship, bool) {
-	if o == nil || o.Events == nil {
+	if o == nil || IsNil(o.Events) {
 		return nil, false
 	}
 	return o.Events, true
@@ -158,7 +173,7 @@ func (o *StorageNetAppDataIpInterface) GetEventsOk() ([]StorageNetAppDataIpInter
 
 // HasEvents returns a boolean if a field has been set.
 func (o *StorageNetAppDataIpInterface) HasEvents() bool {
-	if o != nil && o.Events != nil {
+	if o != nil && IsNil(o.Events) {
 		return true
 	}
 
@@ -170,122 +185,170 @@ func (o *StorageNetAppDataIpInterface) SetEvents(v []StorageNetAppDataIpInterfac
 	o.Events = v
 }
 
-// GetNetAppEthernetPort returns the NetAppEthernetPort field value if set, zero value otherwise.
+// GetNetAppEthernetPort returns the NetAppEthernetPort field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *StorageNetAppDataIpInterface) GetNetAppEthernetPort() StorageNetAppEthernetPortRelationship {
-	if o == nil || o.NetAppEthernetPort == nil {
+	if o == nil || IsNil(o.NetAppEthernetPort.Get()) {
 		var ret StorageNetAppEthernetPortRelationship
 		return ret
 	}
-	return *o.NetAppEthernetPort
+	return *o.NetAppEthernetPort.Get()
 }
 
 // GetNetAppEthernetPortOk returns a tuple with the NetAppEthernetPort field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StorageNetAppDataIpInterface) GetNetAppEthernetPortOk() (*StorageNetAppEthernetPortRelationship, bool) {
-	if o == nil || o.NetAppEthernetPort == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.NetAppEthernetPort, true
+	return o.NetAppEthernetPort.Get(), o.NetAppEthernetPort.IsSet()
 }
 
 // HasNetAppEthernetPort returns a boolean if a field has been set.
 func (o *StorageNetAppDataIpInterface) HasNetAppEthernetPort() bool {
-	if o != nil && o.NetAppEthernetPort != nil {
+	if o != nil && o.NetAppEthernetPort.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetNetAppEthernetPort gets a reference to the given StorageNetAppEthernetPortRelationship and assigns it to the NetAppEthernetPort field.
+// SetNetAppEthernetPort gets a reference to the given NullableStorageNetAppEthernetPortRelationship and assigns it to the NetAppEthernetPort field.
 func (o *StorageNetAppDataIpInterface) SetNetAppEthernetPort(v StorageNetAppEthernetPortRelationship) {
-	o.NetAppEthernetPort = &v
+	o.NetAppEthernetPort.Set(&v)
 }
 
-// GetTenant returns the Tenant field value if set, zero value otherwise.
+// SetNetAppEthernetPortNil sets the value for NetAppEthernetPort to be an explicit nil
+func (o *StorageNetAppDataIpInterface) SetNetAppEthernetPortNil() {
+	o.NetAppEthernetPort.Set(nil)
+}
+
+// UnsetNetAppEthernetPort ensures that no value is present for NetAppEthernetPort, not even an explicit nil
+func (o *StorageNetAppDataIpInterface) UnsetNetAppEthernetPort() {
+	o.NetAppEthernetPort.Unset()
+}
+
+// GetTenant returns the Tenant field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *StorageNetAppDataIpInterface) GetTenant() StorageNetAppStorageVmRelationship {
-	if o == nil || o.Tenant == nil {
+	if o == nil || IsNil(o.Tenant.Get()) {
 		var ret StorageNetAppStorageVmRelationship
 		return ret
 	}
-	return *o.Tenant
+	return *o.Tenant.Get()
 }
 
 // GetTenantOk returns a tuple with the Tenant field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StorageNetAppDataIpInterface) GetTenantOk() (*StorageNetAppStorageVmRelationship, bool) {
-	if o == nil || o.Tenant == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Tenant, true
+	return o.Tenant.Get(), o.Tenant.IsSet()
 }
 
 // HasTenant returns a boolean if a field has been set.
 func (o *StorageNetAppDataIpInterface) HasTenant() bool {
-	if o != nil && o.Tenant != nil {
+	if o != nil && o.Tenant.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetTenant gets a reference to the given StorageNetAppStorageVmRelationship and assigns it to the Tenant field.
+// SetTenant gets a reference to the given NullableStorageNetAppStorageVmRelationship and assigns it to the Tenant field.
 func (o *StorageNetAppDataIpInterface) SetTenant(v StorageNetAppStorageVmRelationship) {
-	o.Tenant = &v
+	o.Tenant.Set(&v)
+}
+
+// SetTenantNil sets the value for Tenant to be an explicit nil
+func (o *StorageNetAppDataIpInterface) SetTenantNil() {
+	o.Tenant.Set(nil)
+}
+
+// UnsetTenant ensures that no value is present for Tenant, not even an explicit nil
+func (o *StorageNetAppDataIpInterface) UnsetTenant() {
+	o.Tenant.Unset()
 }
 
 func (o StorageNetAppDataIpInterface) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o StorageNetAppDataIpInterface) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedStorageNetAppBaseIpInterface, errStorageNetAppBaseIpInterface := json.Marshal(o.StorageNetAppBaseIpInterface)
 	if errStorageNetAppBaseIpInterface != nil {
-		return []byte{}, errStorageNetAppBaseIpInterface
+		return map[string]interface{}{}, errStorageNetAppBaseIpInterface
 	}
 	errStorageNetAppBaseIpInterface = json.Unmarshal([]byte(serializedStorageNetAppBaseIpInterface), &toSerialize)
 	if errStorageNetAppBaseIpInterface != nil {
-		return []byte{}, errStorageNetAppBaseIpInterface
+		return map[string]interface{}{}, errStorageNetAppBaseIpInterface
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.ArrayController != nil {
-		toSerialize["ArrayController"] = o.ArrayController
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if o.ArrayController.IsSet() {
+		toSerialize["ArrayController"] = o.ArrayController.Get()
 	}
 	if o.Events != nil {
 		toSerialize["Events"] = o.Events
 	}
-	if o.NetAppEthernetPort != nil {
-		toSerialize["NetAppEthernetPort"] = o.NetAppEthernetPort
+	if o.NetAppEthernetPort.IsSet() {
+		toSerialize["NetAppEthernetPort"] = o.NetAppEthernetPort.Get()
 	}
-	if o.Tenant != nil {
-		toSerialize["Tenant"] = o.Tenant
+	if o.Tenant.IsSet() {
+		toSerialize["Tenant"] = o.Tenant.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *StorageNetAppDataIpInterface) UnmarshalJSON(bytes []byte) (err error) {
+func (o *StorageNetAppDataIpInterface) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type StorageNetAppDataIpInterfaceWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
-		ObjectType      string                         `json:"ObjectType"`
-		ArrayController *StorageNetAppNodeRelationship `json:"ArrayController,omitempty"`
+		ObjectType      string                                `json:"ObjectType"`
+		ArrayController NullableStorageNetAppNodeRelationship `json:"ArrayController,omitempty"`
 		// An array of relationships to storageNetAppDataIpInterfaceEvent resources.
 		Events             []StorageNetAppDataIpInterfaceEventRelationship `json:"Events,omitempty"`
-		NetAppEthernetPort *StorageNetAppEthernetPortRelationship          `json:"NetAppEthernetPort,omitempty"`
-		Tenant             *StorageNetAppStorageVmRelationship             `json:"Tenant,omitempty"`
+		NetAppEthernetPort NullableStorageNetAppEthernetPortRelationship   `json:"NetAppEthernetPort,omitempty"`
+		Tenant             NullableStorageNetAppStorageVmRelationship      `json:"Tenant,omitempty"`
 	}
 
 	varStorageNetAppDataIpInterfaceWithoutEmbeddedStruct := StorageNetAppDataIpInterfaceWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varStorageNetAppDataIpInterfaceWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varStorageNetAppDataIpInterfaceWithoutEmbeddedStruct)
 	if err == nil {
 		varStorageNetAppDataIpInterface := _StorageNetAppDataIpInterface{}
 		varStorageNetAppDataIpInterface.ClassId = varStorageNetAppDataIpInterfaceWithoutEmbeddedStruct.ClassId
@@ -301,7 +364,7 @@ func (o *StorageNetAppDataIpInterface) UnmarshalJSON(bytes []byte) (err error) {
 
 	varStorageNetAppDataIpInterface := _StorageNetAppDataIpInterface{}
 
-	err = json.Unmarshal(bytes, &varStorageNetAppDataIpInterface)
+	err = json.Unmarshal(data, &varStorageNetAppDataIpInterface)
 	if err == nil {
 		o.StorageNetAppBaseIpInterface = varStorageNetAppDataIpInterface.StorageNetAppBaseIpInterface
 	} else {
@@ -310,7 +373,7 @@ func (o *StorageNetAppDataIpInterface) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "ArrayController")

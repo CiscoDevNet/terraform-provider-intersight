@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,7 +13,11 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 )
+
+// checks if the TelemetryDruidTimeSeriesRequest type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &TelemetryDruidTimeSeriesRequest{}
 
 // TelemetryDruidTimeSeriesRequest These types of queries take a timeseries query object and return an array of JSON objects where each object represents a value asked for by the timeseries query.
 type TelemetryDruidTimeSeriesRequest struct {
@@ -108,7 +112,7 @@ func (o *TelemetryDruidTimeSeriesRequest) SetDataSource(v TelemetryDruidDataSour
 
 // GetDescending returns the Descending field value if set, zero value otherwise.
 func (o *TelemetryDruidTimeSeriesRequest) GetDescending() bool {
-	if o == nil || o.Descending == nil {
+	if o == nil || IsNil(o.Descending) {
 		var ret bool
 		return ret
 	}
@@ -118,7 +122,7 @@ func (o *TelemetryDruidTimeSeriesRequest) GetDescending() bool {
 // GetDescendingOk returns a tuple with the Descending field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TelemetryDruidTimeSeriesRequest) GetDescendingOk() (*bool, bool) {
-	if o == nil || o.Descending == nil {
+	if o == nil || IsNil(o.Descending) {
 		return nil, false
 	}
 	return o.Descending, true
@@ -126,7 +130,7 @@ func (o *TelemetryDruidTimeSeriesRequest) GetDescendingOk() (*bool, bool) {
 
 // HasDescending returns a boolean if a field has been set.
 func (o *TelemetryDruidTimeSeriesRequest) HasDescending() bool {
-	if o != nil && o.Descending != nil {
+	if o != nil && !IsNil(o.Descending) {
 		return true
 	}
 
@@ -188,7 +192,7 @@ func (o *TelemetryDruidTimeSeriesRequest) SetGranularity(v TelemetryDruidGranula
 
 // GetFilter returns the Filter field value if set, zero value otherwise.
 func (o *TelemetryDruidTimeSeriesRequest) GetFilter() TelemetryDruidFilter {
-	if o == nil || o.Filter == nil {
+	if o == nil || IsNil(o.Filter) {
 		var ret TelemetryDruidFilter
 		return ret
 	}
@@ -198,7 +202,7 @@ func (o *TelemetryDruidTimeSeriesRequest) GetFilter() TelemetryDruidFilter {
 // GetFilterOk returns a tuple with the Filter field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TelemetryDruidTimeSeriesRequest) GetFilterOk() (*TelemetryDruidFilter, bool) {
-	if o == nil || o.Filter == nil {
+	if o == nil || IsNil(o.Filter) {
 		return nil, false
 	}
 	return o.Filter, true
@@ -206,7 +210,7 @@ func (o *TelemetryDruidTimeSeriesRequest) GetFilterOk() (*TelemetryDruidFilter, 
 
 // HasFilter returns a boolean if a field has been set.
 func (o *TelemetryDruidTimeSeriesRequest) HasFilter() bool {
-	if o != nil && o.Filter != nil {
+	if o != nil && !IsNil(o.Filter) {
 		return true
 	}
 
@@ -220,7 +224,7 @@ func (o *TelemetryDruidTimeSeriesRequest) SetFilter(v TelemetryDruidFilter) {
 
 // GetAggregations returns the Aggregations field value if set, zero value otherwise.
 func (o *TelemetryDruidTimeSeriesRequest) GetAggregations() []TelemetryDruidAggregator {
-	if o == nil || o.Aggregations == nil {
+	if o == nil || IsNil(o.Aggregations) {
 		var ret []TelemetryDruidAggregator
 		return ret
 	}
@@ -230,7 +234,7 @@ func (o *TelemetryDruidTimeSeriesRequest) GetAggregations() []TelemetryDruidAggr
 // GetAggregationsOk returns a tuple with the Aggregations field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TelemetryDruidTimeSeriesRequest) GetAggregationsOk() ([]TelemetryDruidAggregator, bool) {
-	if o == nil || o.Aggregations == nil {
+	if o == nil || IsNil(o.Aggregations) {
 		return nil, false
 	}
 	return o.Aggregations, true
@@ -238,7 +242,7 @@ func (o *TelemetryDruidTimeSeriesRequest) GetAggregationsOk() ([]TelemetryDruidA
 
 // HasAggregations returns a boolean if a field has been set.
 func (o *TelemetryDruidTimeSeriesRequest) HasAggregations() bool {
-	if o != nil && o.Aggregations != nil {
+	if o != nil && !IsNil(o.Aggregations) {
 		return true
 	}
 
@@ -252,7 +256,7 @@ func (o *TelemetryDruidTimeSeriesRequest) SetAggregations(v []TelemetryDruidAggr
 
 // GetPostAggregations returns the PostAggregations field value if set, zero value otherwise.
 func (o *TelemetryDruidTimeSeriesRequest) GetPostAggregations() []TelemetryDruidPostAggregator {
-	if o == nil || o.PostAggregations == nil {
+	if o == nil || IsNil(o.PostAggregations) {
 		var ret []TelemetryDruidPostAggregator
 		return ret
 	}
@@ -262,7 +266,7 @@ func (o *TelemetryDruidTimeSeriesRequest) GetPostAggregations() []TelemetryDruid
 // GetPostAggregationsOk returns a tuple with the PostAggregations field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TelemetryDruidTimeSeriesRequest) GetPostAggregationsOk() ([]TelemetryDruidPostAggregator, bool) {
-	if o == nil || o.PostAggregations == nil {
+	if o == nil || IsNil(o.PostAggregations) {
 		return nil, false
 	}
 	return o.PostAggregations, true
@@ -270,7 +274,7 @@ func (o *TelemetryDruidTimeSeriesRequest) GetPostAggregationsOk() ([]TelemetryDr
 
 // HasPostAggregations returns a boolean if a field has been set.
 func (o *TelemetryDruidTimeSeriesRequest) HasPostAggregations() bool {
-	if o != nil && o.PostAggregations != nil {
+	if o != nil && !IsNil(o.PostAggregations) {
 		return true
 	}
 
@@ -284,7 +288,7 @@ func (o *TelemetryDruidTimeSeriesRequest) SetPostAggregations(v []TelemetryDruid
 
 // GetLimit returns the Limit field value if set, zero value otherwise.
 func (o *TelemetryDruidTimeSeriesRequest) GetLimit() int32 {
-	if o == nil || o.Limit == nil {
+	if o == nil || IsNil(o.Limit) {
 		var ret int32
 		return ret
 	}
@@ -294,7 +298,7 @@ func (o *TelemetryDruidTimeSeriesRequest) GetLimit() int32 {
 // GetLimitOk returns a tuple with the Limit field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TelemetryDruidTimeSeriesRequest) GetLimitOk() (*int32, bool) {
-	if o == nil || o.Limit == nil {
+	if o == nil || IsNil(o.Limit) {
 		return nil, false
 	}
 	return o.Limit, true
@@ -302,7 +306,7 @@ func (o *TelemetryDruidTimeSeriesRequest) GetLimitOk() (*int32, bool) {
 
 // HasLimit returns a boolean if a field has been set.
 func (o *TelemetryDruidTimeSeriesRequest) HasLimit() bool {
-	if o != nil && o.Limit != nil {
+	if o != nil && !IsNil(o.Limit) {
 		return true
 	}
 
@@ -316,7 +320,7 @@ func (o *TelemetryDruidTimeSeriesRequest) SetLimit(v int32) {
 
 // GetContext returns the Context field value if set, zero value otherwise.
 func (o *TelemetryDruidTimeSeriesRequest) GetContext() TelemetryDruidQueryContext {
-	if o == nil || o.Context == nil {
+	if o == nil || IsNil(o.Context) {
 		var ret TelemetryDruidQueryContext
 		return ret
 	}
@@ -326,7 +330,7 @@ func (o *TelemetryDruidTimeSeriesRequest) GetContext() TelemetryDruidQueryContex
 // GetContextOk returns a tuple with the Context field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TelemetryDruidTimeSeriesRequest) GetContextOk() (*TelemetryDruidQueryContext, bool) {
-	if o == nil || o.Context == nil {
+	if o == nil || IsNil(o.Context) {
 		return nil, false
 	}
 	return o.Context, true
@@ -334,7 +338,7 @@ func (o *TelemetryDruidTimeSeriesRequest) GetContextOk() (*TelemetryDruidQueryCo
 
 // HasContext returns a boolean if a field has been set.
 func (o *TelemetryDruidTimeSeriesRequest) HasContext() bool {
-	if o != nil && o.Context != nil {
+	if o != nil && !IsNil(o.Context) {
 		return true
 	}
 
@@ -347,35 +351,35 @@ func (o *TelemetryDruidTimeSeriesRequest) SetContext(v TelemetryDruidQueryContex
 }
 
 func (o TelemetryDruidTimeSeriesRequest) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o TelemetryDruidTimeSeriesRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["queryType"] = o.QueryType
-	}
-	if true {
-		toSerialize["dataSource"] = o.DataSource
-	}
-	if o.Descending != nil {
+	toSerialize["queryType"] = o.QueryType
+	toSerialize["dataSource"] = o.DataSource
+	if !IsNil(o.Descending) {
 		toSerialize["descending"] = o.Descending
 	}
-	if true {
-		toSerialize["intervals"] = o.Intervals
-	}
-	if true {
-		toSerialize["granularity"] = o.Granularity
-	}
-	if o.Filter != nil {
+	toSerialize["intervals"] = o.Intervals
+	toSerialize["granularity"] = o.Granularity
+	if !IsNil(o.Filter) {
 		toSerialize["filter"] = o.Filter
 	}
-	if o.Aggregations != nil {
+	if !IsNil(o.Aggregations) {
 		toSerialize["aggregations"] = o.Aggregations
 	}
-	if o.PostAggregations != nil {
+	if !IsNil(o.PostAggregations) {
 		toSerialize["postAggregations"] = o.PostAggregations
 	}
-	if o.Limit != nil {
+	if !IsNil(o.Limit) {
 		toSerialize["limit"] = o.Limit
 	}
-	if o.Context != nil {
+	if !IsNil(o.Context) {
 		toSerialize["context"] = o.Context
 	}
 
@@ -383,19 +387,47 @@ func (o TelemetryDruidTimeSeriesRequest) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *TelemetryDruidTimeSeriesRequest) UnmarshalJSON(bytes []byte) (err error) {
+func (o *TelemetryDruidTimeSeriesRequest) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"queryType",
+		"dataSource",
+		"intervals",
+		"granularity",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	varTelemetryDruidTimeSeriesRequest := _TelemetryDruidTimeSeriesRequest{}
 
-	if err = json.Unmarshal(bytes, &varTelemetryDruidTimeSeriesRequest); err == nil {
-		*o = TelemetryDruidTimeSeriesRequest(varTelemetryDruidTimeSeriesRequest)
+	err = json.Unmarshal(data, &varTelemetryDruidTimeSeriesRequest)
+
+	if err != nil {
+		return err
 	}
+
+	*o = TelemetryDruidTimeSeriesRequest(varTelemetryDruidTimeSeriesRequest)
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "queryType")
 		delete(additionalProperties, "dataSource")
 		delete(additionalProperties, "descending")

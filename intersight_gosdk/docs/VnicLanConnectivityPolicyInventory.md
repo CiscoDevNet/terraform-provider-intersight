@@ -12,8 +12,8 @@ Name | Type | Description | Notes
 **StaticIqnName** | Pointer to **string** | User provided static iSCSI Qualified Name (IQN) for use as initiator identifiers by iSCSI vNICs in a Fabric Interconnect domain. | [optional] [readonly] 
 **TargetPlatform** | Pointer to **string** | The platform for which the server profile is applicable. It can either be a server that is operating in standalone mode or which is attached to a Fabric Interconnect managed by Intersight. * &#x60;Standalone&#x60; - Servers which are operating in standalone mode i.e. not connected to a Fabric Interconnected. * &#x60;FIAttached&#x60; - Servers which are connected to a Fabric Interconnect that is managed by Intersight. | [optional] [readonly] [default to "Standalone"]
 **EthIfs** | Pointer to [**[]VnicEthIfInventoryRelationship**](VnicEthIfInventoryRelationship.md) | An array of relationships to vnicEthIfInventory resources. | [optional] [readonly] 
-**IqnPool** | Pointer to [**IqnpoolPoolRelationship**](IqnpoolPoolRelationship.md) |  | [optional] 
-**TargetMo** | Pointer to [**MoBaseMoRelationship**](MoBaseMoRelationship.md) |  | [optional] 
+**IqnPool** | Pointer to [**NullableIqnpoolPoolRelationship**](IqnpoolPoolRelationship.md) |  | [optional] 
+**TargetMo** | Pointer to [**NullableMoBaseMoRelationship**](MoBaseMoRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -259,6 +259,16 @@ SetIqnPool sets IqnPool field to given value.
 
 HasIqnPool returns a boolean if a field has been set.
 
+### SetIqnPoolNil
+
+`func (o *VnicLanConnectivityPolicyInventory) SetIqnPoolNil(b bool)`
+
+ SetIqnPoolNil sets the value for IqnPool to be an explicit nil
+
+### UnsetIqnPool
+`func (o *VnicLanConnectivityPolicyInventory) UnsetIqnPool()`
+
+UnsetIqnPool ensures that no value is present for IqnPool, not even an explicit nil
 ### GetTargetMo
 
 `func (o *VnicLanConnectivityPolicyInventory) GetTargetMo() MoBaseMoRelationship`
@@ -284,6 +294,16 @@ SetTargetMo sets TargetMo field to given value.
 
 HasTargetMo returns a boolean if a field has been set.
 
+### SetTargetMoNil
+
+`func (o *VnicLanConnectivityPolicyInventory) SetTargetMoNil(b bool)`
+
+ SetTargetMoNil sets the value for TargetMo to be an explicit nil
+
+### UnsetTargetMo
+`func (o *VnicLanConnectivityPolicyInventory) UnsetTargetMo()`
+
+UnsetTargetMo ensures that no value is present for TargetMo, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

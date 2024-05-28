@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "resource.SourceToPermissionResources"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "resource.SourceToPermissionResources"]
 **PermissionResources** | Pointer to [**[]MoMoRef**](MoMoRef.md) |  | [optional] 
+**PropagateToTarget** | Pointer to **bool** | PropagateToTarget is a boolean value which indicates whether to propagate the PermissionResources of the  source object to the PermissionResources of the target object. If set to true, then PermissionResources of the target object along with its children hierarchy gets updated with PermissionResources of the source  object. If set to false while propagating the PermissionResources from source object, PermissionResources  against the Source in SourceToPermissionResourceHolder property of Target object will be set to  PermissionResources of the source object. In this case, while evaluating access to an MO, we need to consider  CustomPermissionResources for org user to get right access to the MO. | [optional] [readonly] [default to true]
 **SourceObject** | Pointer to [**MoMoRef**](MoMoRef.md) |  | [optional] 
 
 ## Methods
@@ -103,6 +104,31 @@ HasPermissionResources returns a boolean if a field has been set.
 `func (o *ResourceSourceToPermissionResources) UnsetPermissionResources()`
 
 UnsetPermissionResources ensures that no value is present for PermissionResources, not even an explicit nil
+### GetPropagateToTarget
+
+`func (o *ResourceSourceToPermissionResources) GetPropagateToTarget() bool`
+
+GetPropagateToTarget returns the PropagateToTarget field if non-nil, zero value otherwise.
+
+### GetPropagateToTargetOk
+
+`func (o *ResourceSourceToPermissionResources) GetPropagateToTargetOk() (*bool, bool)`
+
+GetPropagateToTargetOk returns a tuple with the PropagateToTarget field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPropagateToTarget
+
+`func (o *ResourceSourceToPermissionResources) SetPropagateToTarget(v bool)`
+
+SetPropagateToTarget sets PropagateToTarget field to given value.
+
+### HasPropagateToTarget
+
+`func (o *ResourceSourceToPermissionResources) HasPropagateToTarget() bool`
+
+HasPropagateToTarget returns a boolean if a field has been set.
+
 ### GetSourceObject
 
 `func (o *ResourceSourceToPermissionResources) GetSourceObject() MoMoRef`

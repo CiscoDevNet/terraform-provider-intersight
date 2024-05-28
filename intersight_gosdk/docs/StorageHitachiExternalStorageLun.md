@@ -15,9 +15,9 @@ Name | Type | Description | Notes
 **IscsiName** | Pointer to **string** | The iSCSI Name of the external storage port. | [optional] [readonly] 
 **PortId** | Pointer to **string** | Port ID of the local storage. | [optional] [readonly] 
 **VirtualPortId** | Pointer to **int64** | Virtual port ID. This attribute is displayed when an iSCSI port is used and virtual port mode is enabled. | [optional] [readonly] 
-**Array** | Pointer to [**StorageHitachiArrayRelationship**](StorageHitachiArrayRelationship.md) |  | [optional] 
-**ExternalStoragePort** | Pointer to [**StorageHitachiExternalStoragePortRelationship**](StorageHitachiExternalStoragePortRelationship.md) |  | [optional] 
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
+**Array** | Pointer to [**NullableStorageHitachiArrayRelationship**](StorageHitachiArrayRelationship.md) |  | [optional] 
+**ExternalStoragePort** | Pointer to [**NullableStorageHitachiExternalStoragePortRelationship**](StorageHitachiExternalStoragePortRelationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -328,6 +328,16 @@ SetArray sets Array field to given value.
 
 HasArray returns a boolean if a field has been set.
 
+### SetArrayNil
+
+`func (o *StorageHitachiExternalStorageLun) SetArrayNil(b bool)`
+
+ SetArrayNil sets the value for Array to be an explicit nil
+
+### UnsetArray
+`func (o *StorageHitachiExternalStorageLun) UnsetArray()`
+
+UnsetArray ensures that no value is present for Array, not even an explicit nil
 ### GetExternalStoragePort
 
 `func (o *StorageHitachiExternalStorageLun) GetExternalStoragePort() StorageHitachiExternalStoragePortRelationship`
@@ -353,6 +363,16 @@ SetExternalStoragePort sets ExternalStoragePort field to given value.
 
 HasExternalStoragePort returns a boolean if a field has been set.
 
+### SetExternalStoragePortNil
+
+`func (o *StorageHitachiExternalStorageLun) SetExternalStoragePortNil(b bool)`
+
+ SetExternalStoragePortNil sets the value for ExternalStoragePort to be an explicit nil
+
+### UnsetExternalStoragePort
+`func (o *StorageHitachiExternalStorageLun) UnsetExternalStoragePort()`
+
+UnsetExternalStoragePort ensures that no value is present for ExternalStoragePort, not even an explicit nil
 ### GetRegisteredDevice
 
 `func (o *StorageHitachiExternalStorageLun) GetRegisteredDevice() AssetDeviceRegistrationRelationship`
@@ -378,6 +398,16 @@ SetRegisteredDevice sets RegisteredDevice field to given value.
 
 HasRegisteredDevice returns a boolean if a field has been set.
 
+### SetRegisteredDeviceNil
+
+`func (o *StorageHitachiExternalStorageLun) SetRegisteredDeviceNil(b bool)`
+
+ SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+
+### UnsetRegisteredDevice
+`func (o *StorageHitachiExternalStorageLun) UnsetRegisteredDevice()`
+
+UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

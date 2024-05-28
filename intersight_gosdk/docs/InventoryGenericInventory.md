@@ -9,9 +9,9 @@ Name | Type | Description | Notes
 **Key** | Pointer to **string** | Key of inventory data for Generic Inventory data set. | [optional] [readonly] 
 **Type** | Pointer to **string** | Type of inventory data for Generic Inventory data set. | [optional] [readonly] 
 **Value** | Pointer to **string** | Value of inventory data for Generic Inventory data set. | [optional] [readonly] 
-**InventoryDeviceInfo** | Pointer to [**InventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
-**InventoryGenericInventoryHolder** | Pointer to [**InventoryGenericInventoryHolderRelationship**](InventoryGenericInventoryHolderRelationship.md) |  | [optional] 
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
+**InventoryDeviceInfo** | Pointer to [**NullableInventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
+**InventoryGenericInventoryHolder** | Pointer to [**NullableInventoryGenericInventoryHolderRelationship**](InventoryGenericInventoryHolderRelationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -172,6 +172,16 @@ SetInventoryDeviceInfo sets InventoryDeviceInfo field to given value.
 
 HasInventoryDeviceInfo returns a boolean if a field has been set.
 
+### SetInventoryDeviceInfoNil
+
+`func (o *InventoryGenericInventory) SetInventoryDeviceInfoNil(b bool)`
+
+ SetInventoryDeviceInfoNil sets the value for InventoryDeviceInfo to be an explicit nil
+
+### UnsetInventoryDeviceInfo
+`func (o *InventoryGenericInventory) UnsetInventoryDeviceInfo()`
+
+UnsetInventoryDeviceInfo ensures that no value is present for InventoryDeviceInfo, not even an explicit nil
 ### GetInventoryGenericInventoryHolder
 
 `func (o *InventoryGenericInventory) GetInventoryGenericInventoryHolder() InventoryGenericInventoryHolderRelationship`
@@ -197,6 +207,16 @@ SetInventoryGenericInventoryHolder sets InventoryGenericInventoryHolder field to
 
 HasInventoryGenericInventoryHolder returns a boolean if a field has been set.
 
+### SetInventoryGenericInventoryHolderNil
+
+`func (o *InventoryGenericInventory) SetInventoryGenericInventoryHolderNil(b bool)`
+
+ SetInventoryGenericInventoryHolderNil sets the value for InventoryGenericInventoryHolder to be an explicit nil
+
+### UnsetInventoryGenericInventoryHolder
+`func (o *InventoryGenericInventory) UnsetInventoryGenericInventoryHolder()`
+
+UnsetInventoryGenericInventoryHolder ensures that no value is present for InventoryGenericInventoryHolder, not even an explicit nil
 ### GetRegisteredDevice
 
 `func (o *InventoryGenericInventory) GetRegisteredDevice() AssetDeviceRegistrationRelationship`
@@ -222,6 +242,16 @@ SetRegisteredDevice sets RegisteredDevice field to given value.
 
 HasRegisteredDevice returns a boolean if a field has been set.
 
+### SetRegisteredDeviceNil
+
+`func (o *InventoryGenericInventory) SetRegisteredDeviceNil(b bool)`
+
+ SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+
+### UnsetRegisteredDevice
+`func (o *InventoryGenericInventory) UnsetRegisteredDevice()`
+
+UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

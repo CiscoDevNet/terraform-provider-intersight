@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the TopSystem type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &TopSystem{}
 
 // TopSystem Root container for all UCSM / CIMC MOs.
 type TopSystem struct {
@@ -37,12 +41,12 @@ type TopSystem struct {
 	// An array of relationships to computeBlade resources.
 	ComputeBlades []ComputeBladeRelationship `json:"ComputeBlades,omitempty"`
 	// An array of relationships to computeRackUnit resources.
-	ComputeRackUnits     []ComputeRackUnitRelationship     `json:"ComputeRackUnits,omitempty"`
-	InventoryDeviceInfo  *InventoryDeviceInfoRelationship  `json:"InventoryDeviceInfo,omitempty"`
-	ManagementController *ManagementControllerRelationship `json:"ManagementController,omitempty"`
+	ComputeRackUnits     []ComputeRackUnitRelationship            `json:"ComputeRackUnits,omitempty"`
+	InventoryDeviceInfo  NullableInventoryDeviceInfoRelationship  `json:"InventoryDeviceInfo,omitempty"`
+	ManagementController NullableManagementControllerRelationship `json:"ManagementController,omitempty"`
 	// An array of relationships to networkElement resources.
-	NetworkElements      []NetworkElementRelationship         `json:"NetworkElements,omitempty"`
-	RegisteredDevice     *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+	NetworkElements      []NetworkElementRelationship                `json:"NetworkElements,omitempty"`
+	RegisteredDevice     NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -121,7 +125,7 @@ func (o *TopSystem) SetObjectType(v string) {
 
 // GetIpv4Address returns the Ipv4Address field value if set, zero value otherwise.
 func (o *TopSystem) GetIpv4Address() string {
-	if o == nil || o.Ipv4Address == nil {
+	if o == nil || IsNil(o.Ipv4Address) {
 		var ret string
 		return ret
 	}
@@ -131,7 +135,7 @@ func (o *TopSystem) GetIpv4Address() string {
 // GetIpv4AddressOk returns a tuple with the Ipv4Address field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TopSystem) GetIpv4AddressOk() (*string, bool) {
-	if o == nil || o.Ipv4Address == nil {
+	if o == nil || IsNil(o.Ipv4Address) {
 		return nil, false
 	}
 	return o.Ipv4Address, true
@@ -139,7 +143,7 @@ func (o *TopSystem) GetIpv4AddressOk() (*string, bool) {
 
 // HasIpv4Address returns a boolean if a field has been set.
 func (o *TopSystem) HasIpv4Address() bool {
-	if o != nil && o.Ipv4Address != nil {
+	if o != nil && !IsNil(o.Ipv4Address) {
 		return true
 	}
 
@@ -153,7 +157,7 @@ func (o *TopSystem) SetIpv4Address(v string) {
 
 // GetIpv6Address returns the Ipv6Address field value if set, zero value otherwise.
 func (o *TopSystem) GetIpv6Address() string {
-	if o == nil || o.Ipv6Address == nil {
+	if o == nil || IsNil(o.Ipv6Address) {
 		var ret string
 		return ret
 	}
@@ -163,7 +167,7 @@ func (o *TopSystem) GetIpv6Address() string {
 // GetIpv6AddressOk returns a tuple with the Ipv6Address field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TopSystem) GetIpv6AddressOk() (*string, bool) {
-	if o == nil || o.Ipv6Address == nil {
+	if o == nil || IsNil(o.Ipv6Address) {
 		return nil, false
 	}
 	return o.Ipv6Address, true
@@ -171,7 +175,7 @@ func (o *TopSystem) GetIpv6AddressOk() (*string, bool) {
 
 // HasIpv6Address returns a boolean if a field has been set.
 func (o *TopSystem) HasIpv6Address() bool {
-	if o != nil && o.Ipv6Address != nil {
+	if o != nil && !IsNil(o.Ipv6Address) {
 		return true
 	}
 
@@ -185,7 +189,7 @@ func (o *TopSystem) SetIpv6Address(v string) {
 
 // GetMode returns the Mode field value if set, zero value otherwise.
 func (o *TopSystem) GetMode() string {
-	if o == nil || o.Mode == nil {
+	if o == nil || IsNil(o.Mode) {
 		var ret string
 		return ret
 	}
@@ -195,7 +199,7 @@ func (o *TopSystem) GetMode() string {
 // GetModeOk returns a tuple with the Mode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TopSystem) GetModeOk() (*string, bool) {
-	if o == nil || o.Mode == nil {
+	if o == nil || IsNil(o.Mode) {
 		return nil, false
 	}
 	return o.Mode, true
@@ -203,7 +207,7 @@ func (o *TopSystem) GetModeOk() (*string, bool) {
 
 // HasMode returns a boolean if a field has been set.
 func (o *TopSystem) HasMode() bool {
-	if o != nil && o.Mode != nil {
+	if o != nil && !IsNil(o.Mode) {
 		return true
 	}
 
@@ -217,7 +221,7 @@ func (o *TopSystem) SetMode(v string) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *TopSystem) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -227,7 +231,7 @@ func (o *TopSystem) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TopSystem) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -235,7 +239,7 @@ func (o *TopSystem) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *TopSystem) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -249,7 +253,7 @@ func (o *TopSystem) SetName(v string) {
 
 // GetTimeZone returns the TimeZone field value if set, zero value otherwise.
 func (o *TopSystem) GetTimeZone() string {
-	if o == nil || o.TimeZone == nil {
+	if o == nil || IsNil(o.TimeZone) {
 		var ret string
 		return ret
 	}
@@ -259,7 +263,7 @@ func (o *TopSystem) GetTimeZone() string {
 // GetTimeZoneOk returns a tuple with the TimeZone field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TopSystem) GetTimeZoneOk() (*string, bool) {
-	if o == nil || o.TimeZone == nil {
+	if o == nil || IsNil(o.TimeZone) {
 		return nil, false
 	}
 	return o.TimeZone, true
@@ -267,7 +271,7 @@ func (o *TopSystem) GetTimeZoneOk() (*string, bool) {
 
 // HasTimeZone returns a boolean if a field has been set.
 func (o *TopSystem) HasTimeZone() bool {
-	if o != nil && o.TimeZone != nil {
+	if o != nil && !IsNil(o.TimeZone) {
 		return true
 	}
 
@@ -292,7 +296,7 @@ func (o *TopSystem) GetComputeBlades() []ComputeBladeRelationship {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *TopSystem) GetComputeBladesOk() ([]ComputeBladeRelationship, bool) {
-	if o == nil || o.ComputeBlades == nil {
+	if o == nil || IsNil(o.ComputeBlades) {
 		return nil, false
 	}
 	return o.ComputeBlades, true
@@ -300,7 +304,7 @@ func (o *TopSystem) GetComputeBladesOk() ([]ComputeBladeRelationship, bool) {
 
 // HasComputeBlades returns a boolean if a field has been set.
 func (o *TopSystem) HasComputeBlades() bool {
-	if o != nil && o.ComputeBlades != nil {
+	if o != nil && IsNil(o.ComputeBlades) {
 		return true
 	}
 
@@ -325,7 +329,7 @@ func (o *TopSystem) GetComputeRackUnits() []ComputeRackUnitRelationship {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *TopSystem) GetComputeRackUnitsOk() ([]ComputeRackUnitRelationship, bool) {
-	if o == nil || o.ComputeRackUnits == nil {
+	if o == nil || IsNil(o.ComputeRackUnits) {
 		return nil, false
 	}
 	return o.ComputeRackUnits, true
@@ -333,7 +337,7 @@ func (o *TopSystem) GetComputeRackUnitsOk() ([]ComputeRackUnitRelationship, bool
 
 // HasComputeRackUnits returns a boolean if a field has been set.
 func (o *TopSystem) HasComputeRackUnits() bool {
-	if o != nil && o.ComputeRackUnits != nil {
+	if o != nil && IsNil(o.ComputeRackUnits) {
 		return true
 	}
 
@@ -345,68 +349,90 @@ func (o *TopSystem) SetComputeRackUnits(v []ComputeRackUnitRelationship) {
 	o.ComputeRackUnits = v
 }
 
-// GetInventoryDeviceInfo returns the InventoryDeviceInfo field value if set, zero value otherwise.
+// GetInventoryDeviceInfo returns the InventoryDeviceInfo field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *TopSystem) GetInventoryDeviceInfo() InventoryDeviceInfoRelationship {
-	if o == nil || o.InventoryDeviceInfo == nil {
+	if o == nil || IsNil(o.InventoryDeviceInfo.Get()) {
 		var ret InventoryDeviceInfoRelationship
 		return ret
 	}
-	return *o.InventoryDeviceInfo
+	return *o.InventoryDeviceInfo.Get()
 }
 
 // GetInventoryDeviceInfoOk returns a tuple with the InventoryDeviceInfo field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *TopSystem) GetInventoryDeviceInfoOk() (*InventoryDeviceInfoRelationship, bool) {
-	if o == nil || o.InventoryDeviceInfo == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.InventoryDeviceInfo, true
+	return o.InventoryDeviceInfo.Get(), o.InventoryDeviceInfo.IsSet()
 }
 
 // HasInventoryDeviceInfo returns a boolean if a field has been set.
 func (o *TopSystem) HasInventoryDeviceInfo() bool {
-	if o != nil && o.InventoryDeviceInfo != nil {
+	if o != nil && o.InventoryDeviceInfo.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetInventoryDeviceInfo gets a reference to the given InventoryDeviceInfoRelationship and assigns it to the InventoryDeviceInfo field.
+// SetInventoryDeviceInfo gets a reference to the given NullableInventoryDeviceInfoRelationship and assigns it to the InventoryDeviceInfo field.
 func (o *TopSystem) SetInventoryDeviceInfo(v InventoryDeviceInfoRelationship) {
-	o.InventoryDeviceInfo = &v
+	o.InventoryDeviceInfo.Set(&v)
 }
 
-// GetManagementController returns the ManagementController field value if set, zero value otherwise.
+// SetInventoryDeviceInfoNil sets the value for InventoryDeviceInfo to be an explicit nil
+func (o *TopSystem) SetInventoryDeviceInfoNil() {
+	o.InventoryDeviceInfo.Set(nil)
+}
+
+// UnsetInventoryDeviceInfo ensures that no value is present for InventoryDeviceInfo, not even an explicit nil
+func (o *TopSystem) UnsetInventoryDeviceInfo() {
+	o.InventoryDeviceInfo.Unset()
+}
+
+// GetManagementController returns the ManagementController field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *TopSystem) GetManagementController() ManagementControllerRelationship {
-	if o == nil || o.ManagementController == nil {
+	if o == nil || IsNil(o.ManagementController.Get()) {
 		var ret ManagementControllerRelationship
 		return ret
 	}
-	return *o.ManagementController
+	return *o.ManagementController.Get()
 }
 
 // GetManagementControllerOk returns a tuple with the ManagementController field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *TopSystem) GetManagementControllerOk() (*ManagementControllerRelationship, bool) {
-	if o == nil || o.ManagementController == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.ManagementController, true
+	return o.ManagementController.Get(), o.ManagementController.IsSet()
 }
 
 // HasManagementController returns a boolean if a field has been set.
 func (o *TopSystem) HasManagementController() bool {
-	if o != nil && o.ManagementController != nil {
+	if o != nil && o.ManagementController.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetManagementController gets a reference to the given ManagementControllerRelationship and assigns it to the ManagementController field.
+// SetManagementController gets a reference to the given NullableManagementControllerRelationship and assigns it to the ManagementController field.
 func (o *TopSystem) SetManagementController(v ManagementControllerRelationship) {
-	o.ManagementController = &v
+	o.ManagementController.Set(&v)
+}
+
+// SetManagementControllerNil sets the value for ManagementController to be an explicit nil
+func (o *TopSystem) SetManagementControllerNil() {
+	o.ManagementController.Set(nil)
+}
+
+// UnsetManagementController ensures that no value is present for ManagementController, not even an explicit nil
+func (o *TopSystem) UnsetManagementController() {
+	o.ManagementController.Unset()
 }
 
 // GetNetworkElements returns the NetworkElements field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -422,7 +448,7 @@ func (o *TopSystem) GetNetworkElements() []NetworkElementRelationship {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *TopSystem) GetNetworkElementsOk() ([]NetworkElementRelationship, bool) {
-	if o == nil || o.NetworkElements == nil {
+	if o == nil || IsNil(o.NetworkElements) {
 		return nil, false
 	}
 	return o.NetworkElements, true
@@ -430,7 +456,7 @@ func (o *TopSystem) GetNetworkElementsOk() ([]NetworkElementRelationship, bool) 
 
 // HasNetworkElements returns a boolean if a field has been set.
 func (o *TopSystem) HasNetworkElements() bool {
-	if o != nil && o.NetworkElements != nil {
+	if o != nil && IsNil(o.NetworkElements) {
 		return true
 	}
 
@@ -442,67 +468,82 @@ func (o *TopSystem) SetNetworkElements(v []NetworkElementRelationship) {
 	o.NetworkElements = v
 }
 
-// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise.
+// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *TopSystem) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil || IsNil(o.RegisteredDevice.Get()) {
 		var ret AssetDeviceRegistrationRelationship
 		return ret
 	}
-	return *o.RegisteredDevice
+	return *o.RegisteredDevice.Get()
 }
 
 // GetRegisteredDeviceOk returns a tuple with the RegisteredDevice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *TopSystem) GetRegisteredDeviceOk() (*AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.RegisteredDevice, true
+	return o.RegisteredDevice.Get(), o.RegisteredDevice.IsSet()
 }
 
 // HasRegisteredDevice returns a boolean if a field has been set.
 func (o *TopSystem) HasRegisteredDevice() bool {
-	if o != nil && o.RegisteredDevice != nil {
+	if o != nil && o.RegisteredDevice.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRegisteredDevice gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
+// SetRegisteredDevice gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
 func (o *TopSystem) SetRegisteredDevice(v AssetDeviceRegistrationRelationship) {
-	o.RegisteredDevice = &v
+	o.RegisteredDevice.Set(&v)
+}
+
+// SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+func (o *TopSystem) SetRegisteredDeviceNil() {
+	o.RegisteredDevice.Set(nil)
+}
+
+// UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
+func (o *TopSystem) UnsetRegisteredDevice() {
+	o.RegisteredDevice.Unset()
 }
 
 func (o TopSystem) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o TopSystem) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedInventoryBase, errInventoryBase := json.Marshal(o.InventoryBase)
 	if errInventoryBase != nil {
-		return []byte{}, errInventoryBase
+		return map[string]interface{}{}, errInventoryBase
 	}
 	errInventoryBase = json.Unmarshal([]byte(serializedInventoryBase), &toSerialize)
 	if errInventoryBase != nil {
-		return []byte{}, errInventoryBase
+		return map[string]interface{}{}, errInventoryBase
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Ipv4Address != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Ipv4Address) {
 		toSerialize["Ipv4Address"] = o.Ipv4Address
 	}
-	if o.Ipv6Address != nil {
+	if !IsNil(o.Ipv6Address) {
 		toSerialize["Ipv6Address"] = o.Ipv6Address
 	}
-	if o.Mode != nil {
+	if !IsNil(o.Mode) {
 		toSerialize["Mode"] = o.Mode
 	}
-	if o.Name != nil {
+	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
 	}
-	if o.TimeZone != nil {
+	if !IsNil(o.TimeZone) {
 		toSerialize["TimeZone"] = o.TimeZone
 	}
 	if o.ComputeBlades != nil {
@@ -511,27 +552,49 @@ func (o TopSystem) MarshalJSON() ([]byte, error) {
 	if o.ComputeRackUnits != nil {
 		toSerialize["ComputeRackUnits"] = o.ComputeRackUnits
 	}
-	if o.InventoryDeviceInfo != nil {
-		toSerialize["InventoryDeviceInfo"] = o.InventoryDeviceInfo
+	if o.InventoryDeviceInfo.IsSet() {
+		toSerialize["InventoryDeviceInfo"] = o.InventoryDeviceInfo.Get()
 	}
-	if o.ManagementController != nil {
-		toSerialize["ManagementController"] = o.ManagementController
+	if o.ManagementController.IsSet() {
+		toSerialize["ManagementController"] = o.ManagementController.Get()
 	}
 	if o.NetworkElements != nil {
 		toSerialize["NetworkElements"] = o.NetworkElements
 	}
-	if o.RegisteredDevice != nil {
-		toSerialize["RegisteredDevice"] = o.RegisteredDevice
+	if o.RegisteredDevice.IsSet() {
+		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *TopSystem) UnmarshalJSON(bytes []byte) (err error) {
+func (o *TopSystem) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type TopSystemWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -550,17 +613,17 @@ func (o *TopSystem) UnmarshalJSON(bytes []byte) (err error) {
 		// An array of relationships to computeBlade resources.
 		ComputeBlades []ComputeBladeRelationship `json:"ComputeBlades,omitempty"`
 		// An array of relationships to computeRackUnit resources.
-		ComputeRackUnits     []ComputeRackUnitRelationship     `json:"ComputeRackUnits,omitempty"`
-		InventoryDeviceInfo  *InventoryDeviceInfoRelationship  `json:"InventoryDeviceInfo,omitempty"`
-		ManagementController *ManagementControllerRelationship `json:"ManagementController,omitempty"`
+		ComputeRackUnits     []ComputeRackUnitRelationship            `json:"ComputeRackUnits,omitempty"`
+		InventoryDeviceInfo  NullableInventoryDeviceInfoRelationship  `json:"InventoryDeviceInfo,omitempty"`
+		ManagementController NullableManagementControllerRelationship `json:"ManagementController,omitempty"`
 		// An array of relationships to networkElement resources.
-		NetworkElements  []NetworkElementRelationship         `json:"NetworkElements,omitempty"`
-		RegisteredDevice *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+		NetworkElements  []NetworkElementRelationship                `json:"NetworkElements,omitempty"`
+		RegisteredDevice NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	}
 
 	varTopSystemWithoutEmbeddedStruct := TopSystemWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varTopSystemWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varTopSystemWithoutEmbeddedStruct)
 	if err == nil {
 		varTopSystem := _TopSystem{}
 		varTopSystem.ClassId = varTopSystemWithoutEmbeddedStruct.ClassId
@@ -583,7 +646,7 @@ func (o *TopSystem) UnmarshalJSON(bytes []byte) (err error) {
 
 	varTopSystem := _TopSystem{}
 
-	err = json.Unmarshal(bytes, &varTopSystem)
+	err = json.Unmarshal(data, &varTopSystem)
 	if err == nil {
 		o.InventoryBase = varTopSystem.InventoryBase
 	} else {
@@ -592,7 +655,7 @@ func (o *TopSystem) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Ipv4Address")

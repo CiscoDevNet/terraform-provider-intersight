@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the NiatelemetryVpcDetails type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &NiatelemetryVpcDetails{}
 
 // NiatelemetryVpcDetails Stores information related to VPC pairs on every switch.
 type NiatelemetryVpcDetails struct {
@@ -108,7 +112,7 @@ func (o *NiatelemetryVpcDetails) SetObjectType(v string) {
 
 // GetIsVpcConfigured returns the IsVpcConfigured field value if set, zero value otherwise.
 func (o *NiatelemetryVpcDetails) GetIsVpcConfigured() bool {
-	if o == nil || o.IsVpcConfigured == nil {
+	if o == nil || IsNil(o.IsVpcConfigured) {
 		var ret bool
 		return ret
 	}
@@ -118,7 +122,7 @@ func (o *NiatelemetryVpcDetails) GetIsVpcConfigured() bool {
 // GetIsVpcConfiguredOk returns a tuple with the IsVpcConfigured field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryVpcDetails) GetIsVpcConfiguredOk() (*bool, bool) {
-	if o == nil || o.IsVpcConfigured == nil {
+	if o == nil || IsNil(o.IsVpcConfigured) {
 		return nil, false
 	}
 	return o.IsVpcConfigured, true
@@ -126,7 +130,7 @@ func (o *NiatelemetryVpcDetails) GetIsVpcConfiguredOk() (*bool, bool) {
 
 // HasIsVpcConfigured returns a boolean if a field has been set.
 func (o *NiatelemetryVpcDetails) HasIsVpcConfigured() bool {
-	if o != nil && o.IsVpcConfigured != nil {
+	if o != nil && !IsNil(o.IsVpcConfigured) {
 		return true
 	}
 
@@ -140,7 +144,7 @@ func (o *NiatelemetryVpcDetails) SetIsVpcConfigured(v bool) {
 
 // GetPeerSwitchDbId returns the PeerSwitchDbId field value if set, zero value otherwise.
 func (o *NiatelemetryVpcDetails) GetPeerSwitchDbId() int64 {
-	if o == nil || o.PeerSwitchDbId == nil {
+	if o == nil || IsNil(o.PeerSwitchDbId) {
 		var ret int64
 		return ret
 	}
@@ -150,7 +154,7 @@ func (o *NiatelemetryVpcDetails) GetPeerSwitchDbId() int64 {
 // GetPeerSwitchDbIdOk returns a tuple with the PeerSwitchDbId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryVpcDetails) GetPeerSwitchDbIdOk() (*int64, bool) {
-	if o == nil || o.PeerSwitchDbId == nil {
+	if o == nil || IsNil(o.PeerSwitchDbId) {
 		return nil, false
 	}
 	return o.PeerSwitchDbId, true
@@ -158,7 +162,7 @@ func (o *NiatelemetryVpcDetails) GetPeerSwitchDbIdOk() (*int64, bool) {
 
 // HasPeerSwitchDbId returns a boolean if a field has been set.
 func (o *NiatelemetryVpcDetails) HasPeerSwitchDbId() bool {
-	if o != nil && o.PeerSwitchDbId != nil {
+	if o != nil && !IsNil(o.PeerSwitchDbId) {
 		return true
 	}
 
@@ -172,7 +176,7 @@ func (o *NiatelemetryVpcDetails) SetPeerSwitchDbId(v int64) {
 
 // GetSwitchDbId returns the SwitchDbId field value if set, zero value otherwise.
 func (o *NiatelemetryVpcDetails) GetSwitchDbId() int64 {
-	if o == nil || o.SwitchDbId == nil {
+	if o == nil || IsNil(o.SwitchDbId) {
 		var ret int64
 		return ret
 	}
@@ -182,7 +186,7 @@ func (o *NiatelemetryVpcDetails) GetSwitchDbId() int64 {
 // GetSwitchDbIdOk returns a tuple with the SwitchDbId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryVpcDetails) GetSwitchDbIdOk() (*int64, bool) {
-	if o == nil || o.SwitchDbId == nil {
+	if o == nil || IsNil(o.SwitchDbId) {
 		return nil, false
 	}
 	return o.SwitchDbId, true
@@ -190,7 +194,7 @@ func (o *NiatelemetryVpcDetails) GetSwitchDbIdOk() (*int64, bool) {
 
 // HasSwitchDbId returns a boolean if a field has been set.
 func (o *NiatelemetryVpcDetails) HasSwitchDbId() bool {
-	if o != nil && o.SwitchDbId != nil {
+	if o != nil && !IsNil(o.SwitchDbId) {
 		return true
 	}
 
@@ -203,28 +207,32 @@ func (o *NiatelemetryVpcDetails) SetSwitchDbId(v int64) {
 }
 
 func (o NiatelemetryVpcDetails) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o NiatelemetryVpcDetails) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
 	errMoBaseComplexType = json.Unmarshal([]byte(serializedMoBaseComplexType), &toSerialize)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.IsVpcConfigured != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.IsVpcConfigured) {
 		toSerialize["IsVpcConfigured"] = o.IsVpcConfigured
 	}
-	if o.PeerSwitchDbId != nil {
+	if !IsNil(o.PeerSwitchDbId) {
 		toSerialize["PeerSwitchDbId"] = o.PeerSwitchDbId
 	}
-	if o.SwitchDbId != nil {
+	if !IsNil(o.SwitchDbId) {
 		toSerialize["SwitchDbId"] = o.SwitchDbId
 	}
 
@@ -232,10 +240,32 @@ func (o NiatelemetryVpcDetails) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *NiatelemetryVpcDetails) UnmarshalJSON(bytes []byte) (err error) {
+func (o *NiatelemetryVpcDetails) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type NiatelemetryVpcDetailsWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -251,7 +281,7 @@ func (o *NiatelemetryVpcDetails) UnmarshalJSON(bytes []byte) (err error) {
 
 	varNiatelemetryVpcDetailsWithoutEmbeddedStruct := NiatelemetryVpcDetailsWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varNiatelemetryVpcDetailsWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varNiatelemetryVpcDetailsWithoutEmbeddedStruct)
 	if err == nil {
 		varNiatelemetryVpcDetails := _NiatelemetryVpcDetails{}
 		varNiatelemetryVpcDetails.ClassId = varNiatelemetryVpcDetailsWithoutEmbeddedStruct.ClassId
@@ -266,7 +296,7 @@ func (o *NiatelemetryVpcDetails) UnmarshalJSON(bytes []byte) (err error) {
 
 	varNiatelemetryVpcDetails := _NiatelemetryVpcDetails{}
 
-	err = json.Unmarshal(bytes, &varNiatelemetryVpcDetails)
+	err = json.Unmarshal(data, &varNiatelemetryVpcDetails)
 	if err == nil {
 		o.MoBaseComplexType = varNiatelemetryVpcDetails.MoBaseComplexType
 	} else {
@@ -275,7 +305,7 @@ func (o *NiatelemetryVpcDetails) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "IsVpcConfigured")

@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **GroupName** | Pointer to **string** | The name of group, which includes Identity Management, Device Connector Service, Core Service, Analytics, Infra and Appliance. | [optional] [readonly] 
 **OverallStatus** | Pointer to **string** | The overall API status from this group&#39;s applications. | [optional] [readonly] 
 **Apps** | Pointer to [**[]ApplianceAppOpStatusRelationship**](ApplianceAppOpStatusRelationship.md) | An array of relationships to applianceAppOpStatus resources. | [optional] [readonly] 
-**SystemOpStatus** | Pointer to [**ApplianceSystemOpStatusRelationship**](ApplianceSystemOpStatusRelationship.md) |  | [optional] 
+**SystemOpStatus** | Pointer to [**NullableApplianceSystemOpStatusRelationship**](ApplianceSystemOpStatusRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -206,6 +206,16 @@ SetSystemOpStatus sets SystemOpStatus field to given value.
 
 HasSystemOpStatus returns a boolean if a field has been set.
 
+### SetSystemOpStatusNil
+
+`func (o *ApplianceGroupOpStatus) SetSystemOpStatusNil(b bool)`
+
+ SetSystemOpStatusNil sets the value for SystemOpStatus to be an explicit nil
+
+### UnsetSystemOpStatus
+`func (o *ApplianceGroupOpStatus) UnsetSystemOpStatus()`
+
+UnsetSystemOpStatus ensures that no value is present for SystemOpStatus, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

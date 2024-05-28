@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **Prefix** | Pointer to **string** | The UUID prefix must be in hexadecimal format xxxxxxxx-xxxx-xxxx. | [optional] 
 **UuidSuffixBlocks** | Pointer to [**[]UuidpoolUuidBlock**](UuidpoolUuidBlock.md) |  | [optional] 
 **BlockHeads** | Pointer to [**[]UuidpoolBlockRelationship**](UuidpoolBlockRelationship.md) | An array of relationships to uuidpoolBlock resources. | [optional] [readonly] 
-**Organization** | Pointer to [**OrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
+**Organization** | Pointer to [**NullableOrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
 **Reservations** | Pointer to [**[]UuidpoolReservationRelationship**](UuidpoolReservationRelationship.md) | An array of relationships to uuidpoolReservation resources. | [optional] 
 
 ## Methods
@@ -191,6 +191,16 @@ SetOrganization sets Organization field to given value.
 
 HasOrganization returns a boolean if a field has been set.
 
+### SetOrganizationNil
+
+`func (o *UuidpoolPool) SetOrganizationNil(b bool)`
+
+ SetOrganizationNil sets the value for Organization to be an explicit nil
+
+### UnsetOrganization
+`func (o *UuidpoolPool) UnsetOrganization()`
+
+UnsetOrganization ensures that no value is present for Organization, not even an explicit nil
 ### GetReservations
 
 `func (o *UuidpoolPool) GetReservations() []UuidpoolReservationRelationship`

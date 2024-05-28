@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **Constraint** | Pointer to [**NullableHyperflexAppSettingConstraint**](HyperflexAppSettingConstraint.md) |  | [optional] 
 **ServerPlatform** | Pointer to **string** | The server platform type that is applicable for the server firmware bundle version. * &#x60;M5&#x60; - M5 generation of UCS server. * &#x60;M3&#x60; - M3 generation of UCS server. * &#x60;M4&#x60; - M4 generation of UCS server. * &#x60;M6&#x60; - M6 generation of UCS server. | [optional] [default to "M5"]
 **Version** | Pointer to **string** | The server firmware bundle version. | [optional] 
-**ServerFirmwareVersion** | Pointer to [**HyperflexServerFirmwareVersionRelationship**](HyperflexServerFirmwareVersionRelationship.md) |  | [optional] 
+**ServerFirmwareVersion** | Pointer to [**NullableHyperflexServerFirmwareVersionRelationship**](HyperflexServerFirmwareVersionRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -180,6 +180,16 @@ SetServerFirmwareVersion sets ServerFirmwareVersion field to given value.
 
 HasServerFirmwareVersion returns a boolean if a field has been set.
 
+### SetServerFirmwareVersionNil
+
+`func (o *HyperflexServerFirmwareVersionEntry) SetServerFirmwareVersionNil(b bool)`
+
+ SetServerFirmwareVersionNil sets the value for ServerFirmwareVersion to be an explicit nil
+
+### UnsetServerFirmwareVersion
+`func (o *HyperflexServerFirmwareVersionEntry) UnsetServerFirmwareVersion()`
+
+UnsetServerFirmwareVersion ensures that no value is present for ServerFirmwareVersion, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

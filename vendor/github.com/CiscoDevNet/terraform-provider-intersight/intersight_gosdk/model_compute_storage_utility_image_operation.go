@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the ComputeStorageUtilityImageOperation type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ComputeStorageUtilityImageOperation{}
 
 // ComputeStorageUtilityImageOperation The operation that can be performed on the FlexMMC images on the servers.
 type ComputeStorageUtilityImageOperation struct {
@@ -112,7 +116,7 @@ func (o *ComputeStorageUtilityImageOperation) SetObjectType(v string) {
 
 // GetAction returns the Action field value if set, zero value otherwise.
 func (o *ComputeStorageUtilityImageOperation) GetAction() string {
-	if o == nil || o.Action == nil {
+	if o == nil || IsNil(o.Action) {
 		var ret string
 		return ret
 	}
@@ -122,7 +126,7 @@ func (o *ComputeStorageUtilityImageOperation) GetAction() string {
 // GetActionOk returns a tuple with the Action field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ComputeStorageUtilityImageOperation) GetActionOk() (*string, bool) {
-	if o == nil || o.Action == nil {
+	if o == nil || IsNil(o.Action) {
 		return nil, false
 	}
 	return o.Action, true
@@ -130,7 +134,7 @@ func (o *ComputeStorageUtilityImageOperation) GetActionOk() (*string, bool) {
 
 // HasAction returns a boolean if a field has been set.
 func (o *ComputeStorageUtilityImageOperation) HasAction() bool {
-	if o != nil && o.Action != nil {
+	if o != nil && !IsNil(o.Action) {
 		return true
 	}
 
@@ -144,7 +148,7 @@ func (o *ComputeStorageUtilityImageOperation) SetAction(v string) {
 
 // GetImageName returns the ImageName field value if set, zero value otherwise.
 func (o *ComputeStorageUtilityImageOperation) GetImageName() string {
-	if o == nil || o.ImageName == nil {
+	if o == nil || IsNil(o.ImageName) {
 		var ret string
 		return ret
 	}
@@ -154,7 +158,7 @@ func (o *ComputeStorageUtilityImageOperation) GetImageName() string {
 // GetImageNameOk returns a tuple with the ImageName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ComputeStorageUtilityImageOperation) GetImageNameOk() (*string, bool) {
-	if o == nil || o.ImageName == nil {
+	if o == nil || IsNil(o.ImageName) {
 		return nil, false
 	}
 	return o.ImageName, true
@@ -162,7 +166,7 @@ func (o *ComputeStorageUtilityImageOperation) GetImageNameOk() (*string, bool) {
 
 // HasImageName returns a boolean if a field has been set.
 func (o *ComputeStorageUtilityImageOperation) HasImageName() bool {
-	if o != nil && o.ImageName != nil {
+	if o != nil && !IsNil(o.ImageName) {
 		return true
 	}
 
@@ -176,7 +180,7 @@ func (o *ComputeStorageUtilityImageOperation) SetImageName(v string) {
 
 // GetImageType returns the ImageType field value if set, zero value otherwise.
 func (o *ComputeStorageUtilityImageOperation) GetImageType() string {
-	if o == nil || o.ImageType == nil {
+	if o == nil || IsNil(o.ImageType) {
 		var ret string
 		return ret
 	}
@@ -186,7 +190,7 @@ func (o *ComputeStorageUtilityImageOperation) GetImageType() string {
 // GetImageTypeOk returns a tuple with the ImageType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ComputeStorageUtilityImageOperation) GetImageTypeOk() (*string, bool) {
-	if o == nil || o.ImageType == nil {
+	if o == nil || IsNil(o.ImageType) {
 		return nil, false
 	}
 	return o.ImageType, true
@@ -194,7 +198,7 @@ func (o *ComputeStorageUtilityImageOperation) GetImageTypeOk() (*string, bool) {
 
 // HasImageType returns a boolean if a field has been set.
 func (o *ComputeStorageUtilityImageOperation) HasImageType() bool {
-	if o != nil && o.ImageType != nil {
+	if o != nil && !IsNil(o.ImageType) {
 		return true
 	}
 
@@ -207,28 +211,32 @@ func (o *ComputeStorageUtilityImageOperation) SetImageType(v string) {
 }
 
 func (o ComputeStorageUtilityImageOperation) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o ComputeStorageUtilityImageOperation) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
 	errMoBaseComplexType = json.Unmarshal([]byte(serializedMoBaseComplexType), &toSerialize)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Action != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Action) {
 		toSerialize["Action"] = o.Action
 	}
-	if o.ImageName != nil {
+	if !IsNil(o.ImageName) {
 		toSerialize["ImageName"] = o.ImageName
 	}
-	if o.ImageType != nil {
+	if !IsNil(o.ImageType) {
 		toSerialize["ImageType"] = o.ImageType
 	}
 
@@ -236,10 +244,32 @@ func (o ComputeStorageUtilityImageOperation) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *ComputeStorageUtilityImageOperation) UnmarshalJSON(bytes []byte) (err error) {
+func (o *ComputeStorageUtilityImageOperation) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type ComputeStorageUtilityImageOperationWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -255,7 +285,7 @@ func (o *ComputeStorageUtilityImageOperation) UnmarshalJSON(bytes []byte) (err e
 
 	varComputeStorageUtilityImageOperationWithoutEmbeddedStruct := ComputeStorageUtilityImageOperationWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varComputeStorageUtilityImageOperationWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varComputeStorageUtilityImageOperationWithoutEmbeddedStruct)
 	if err == nil {
 		varComputeStorageUtilityImageOperation := _ComputeStorageUtilityImageOperation{}
 		varComputeStorageUtilityImageOperation.ClassId = varComputeStorageUtilityImageOperationWithoutEmbeddedStruct.ClassId
@@ -270,7 +300,7 @@ func (o *ComputeStorageUtilityImageOperation) UnmarshalJSON(bytes []byte) (err e
 
 	varComputeStorageUtilityImageOperation := _ComputeStorageUtilityImageOperation{}
 
-	err = json.Unmarshal(bytes, &varComputeStorageUtilityImageOperation)
+	err = json.Unmarshal(data, &varComputeStorageUtilityImageOperation)
 	if err == nil {
 		o.MoBaseComplexType = varComputeStorageUtilityImageOperation.MoBaseComplexType
 	} else {
@@ -279,7 +309,7 @@ func (o *ComputeStorageUtilityImageOperation) UnmarshalJSON(bytes []byte) (err e
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Action")

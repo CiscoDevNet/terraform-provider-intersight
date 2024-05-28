@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the StorageBaseArrayController type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &StorageBaseArrayController{}
 
 // StorageBaseArrayController Common attributes for a Storage array controller. It can be a hardware or software unit which manages the physical storage disks available in the array.
 type StorageBaseArrayController struct {
@@ -106,7 +110,7 @@ func (o *StorageBaseArrayController) SetObjectType(v string) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *StorageBaseArrayController) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -116,7 +120,7 @@ func (o *StorageBaseArrayController) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageBaseArrayController) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -124,7 +128,7 @@ func (o *StorageBaseArrayController) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *StorageBaseArrayController) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -138,7 +142,7 @@ func (o *StorageBaseArrayController) SetName(v string) {
 
 // GetOperationalMode returns the OperationalMode field value if set, zero value otherwise.
 func (o *StorageBaseArrayController) GetOperationalMode() string {
-	if o == nil || o.OperationalMode == nil {
+	if o == nil || IsNil(o.OperationalMode) {
 		var ret string
 		return ret
 	}
@@ -148,7 +152,7 @@ func (o *StorageBaseArrayController) GetOperationalMode() string {
 // GetOperationalModeOk returns a tuple with the OperationalMode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageBaseArrayController) GetOperationalModeOk() (*string, bool) {
-	if o == nil || o.OperationalMode == nil {
+	if o == nil || IsNil(o.OperationalMode) {
 		return nil, false
 	}
 	return o.OperationalMode, true
@@ -156,7 +160,7 @@ func (o *StorageBaseArrayController) GetOperationalModeOk() (*string, bool) {
 
 // HasOperationalMode returns a boolean if a field has been set.
 func (o *StorageBaseArrayController) HasOperationalMode() bool {
-	if o != nil && o.OperationalMode != nil {
+	if o != nil && !IsNil(o.OperationalMode) {
 		return true
 	}
 
@@ -170,7 +174,7 @@ func (o *StorageBaseArrayController) SetOperationalMode(v string) {
 
 // GetStatus returns the Status field value if set, zero value otherwise.
 func (o *StorageBaseArrayController) GetStatus() string {
-	if o == nil || o.Status == nil {
+	if o == nil || IsNil(o.Status) {
 		var ret string
 		return ret
 	}
@@ -180,7 +184,7 @@ func (o *StorageBaseArrayController) GetStatus() string {
 // GetStatusOk returns a tuple with the Status field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageBaseArrayController) GetStatusOk() (*string, bool) {
-	if o == nil || o.Status == nil {
+	if o == nil || IsNil(o.Status) {
 		return nil, false
 	}
 	return o.Status, true
@@ -188,7 +192,7 @@ func (o *StorageBaseArrayController) GetStatusOk() (*string, bool) {
 
 // HasStatus returns a boolean if a field has been set.
 func (o *StorageBaseArrayController) HasStatus() bool {
-	if o != nil && o.Status != nil {
+	if o != nil && !IsNil(o.Status) {
 		return true
 	}
 
@@ -202,7 +206,7 @@ func (o *StorageBaseArrayController) SetStatus(v string) {
 
 // GetVersion returns the Version field value if set, zero value otherwise.
 func (o *StorageBaseArrayController) GetVersion() string {
-	if o == nil || o.Version == nil {
+	if o == nil || IsNil(o.Version) {
 		var ret string
 		return ret
 	}
@@ -212,7 +216,7 @@ func (o *StorageBaseArrayController) GetVersion() string {
 // GetVersionOk returns a tuple with the Version field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageBaseArrayController) GetVersionOk() (*string, bool) {
-	if o == nil || o.Version == nil {
+	if o == nil || IsNil(o.Version) {
 		return nil, false
 	}
 	return o.Version, true
@@ -220,7 +224,7 @@ func (o *StorageBaseArrayController) GetVersionOk() (*string, bool) {
 
 // HasVersion returns a boolean if a field has been set.
 func (o *StorageBaseArrayController) HasVersion() bool {
-	if o != nil && o.Version != nil {
+	if o != nil && !IsNil(o.Version) {
 		return true
 	}
 
@@ -233,31 +237,35 @@ func (o *StorageBaseArrayController) SetVersion(v string) {
 }
 
 func (o StorageBaseArrayController) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o StorageBaseArrayController) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedEquipmentBase, errEquipmentBase := json.Marshal(o.EquipmentBase)
 	if errEquipmentBase != nil {
-		return []byte{}, errEquipmentBase
+		return map[string]interface{}{}, errEquipmentBase
 	}
 	errEquipmentBase = json.Unmarshal([]byte(serializedEquipmentBase), &toSerialize)
 	if errEquipmentBase != nil {
-		return []byte{}, errEquipmentBase
+		return map[string]interface{}{}, errEquipmentBase
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Name != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
 	}
-	if o.OperationalMode != nil {
+	if !IsNil(o.OperationalMode) {
 		toSerialize["OperationalMode"] = o.OperationalMode
 	}
-	if o.Status != nil {
+	if !IsNil(o.Status) {
 		toSerialize["Status"] = o.Status
 	}
-	if o.Version != nil {
+	if !IsNil(o.Version) {
 		toSerialize["Version"] = o.Version
 	}
 
@@ -265,10 +273,32 @@ func (o StorageBaseArrayController) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *StorageBaseArrayController) UnmarshalJSON(bytes []byte) (err error) {
+func (o *StorageBaseArrayController) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type StorageBaseArrayControllerWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type.
 		ClassId string `json:"ClassId"`
@@ -286,7 +316,7 @@ func (o *StorageBaseArrayController) UnmarshalJSON(bytes []byte) (err error) {
 
 	varStorageBaseArrayControllerWithoutEmbeddedStruct := StorageBaseArrayControllerWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varStorageBaseArrayControllerWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varStorageBaseArrayControllerWithoutEmbeddedStruct)
 	if err == nil {
 		varStorageBaseArrayController := _StorageBaseArrayController{}
 		varStorageBaseArrayController.ClassId = varStorageBaseArrayControllerWithoutEmbeddedStruct.ClassId
@@ -302,7 +332,7 @@ func (o *StorageBaseArrayController) UnmarshalJSON(bytes []byte) (err error) {
 
 	varStorageBaseArrayController := _StorageBaseArrayController{}
 
-	err = json.Unmarshal(bytes, &varStorageBaseArrayController)
+	err = json.Unmarshal(data, &varStorageBaseArrayController)
 	if err == nil {
 		o.EquipmentBase = varStorageBaseArrayController.EquipmentBase
 	} else {
@@ -311,7 +341,7 @@ func (o *StorageBaseArrayController) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Name")

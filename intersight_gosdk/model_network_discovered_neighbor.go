@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the NetworkDiscoveredNeighbor type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &NetworkDiscoveredNeighbor{}
 
 // NetworkDiscoveredNeighbor L2 neighbor (LLDP and CDP) available on the switch.
 type NetworkDiscoveredNeighbor struct {
@@ -36,9 +40,9 @@ type NetworkDiscoveredNeighbor struct {
 	// PortID of the neighbor device configured.
 	NeighborPortId *string `json:"NeighborPortId,omitempty"`
 	// Name of the local interface.
-	SwitchPortId         *string                     `json:"SwitchPortId,omitempty"`
-	CdpNeighbor          *NetworkElementRelationship `json:"CdpNeighbor,omitempty"`
-	LldpNeighbor         *NetworkElementRelationship `json:"LldpNeighbor,omitempty"`
+	SwitchPortId         *string                            `json:"SwitchPortId,omitempty"`
+	CdpNeighbor          NullableNetworkElementRelationship `json:"CdpNeighbor,omitempty"`
+	LldpNeighbor         NullableNetworkElementRelationship `json:"LldpNeighbor,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -117,7 +121,7 @@ func (o *NetworkDiscoveredNeighbor) SetObjectType(v string) {
 
 // GetDeviceId returns the DeviceId field value if set, zero value otherwise.
 func (o *NetworkDiscoveredNeighbor) GetDeviceId() string {
-	if o == nil || o.DeviceId == nil {
+	if o == nil || IsNil(o.DeviceId) {
 		var ret string
 		return ret
 	}
@@ -127,7 +131,7 @@ func (o *NetworkDiscoveredNeighbor) GetDeviceId() string {
 // GetDeviceIdOk returns a tuple with the DeviceId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NetworkDiscoveredNeighbor) GetDeviceIdOk() (*string, bool) {
-	if o == nil || o.DeviceId == nil {
+	if o == nil || IsNil(o.DeviceId) {
 		return nil, false
 	}
 	return o.DeviceId, true
@@ -135,7 +139,7 @@ func (o *NetworkDiscoveredNeighbor) GetDeviceIdOk() (*string, bool) {
 
 // HasDeviceId returns a boolean if a field has been set.
 func (o *NetworkDiscoveredNeighbor) HasDeviceId() bool {
-	if o != nil && o.DeviceId != nil {
+	if o != nil && !IsNil(o.DeviceId) {
 		return true
 	}
 
@@ -149,7 +153,7 @@ func (o *NetworkDiscoveredNeighbor) SetDeviceId(v string) {
 
 // GetManagementAddress returns the ManagementAddress field value if set, zero value otherwise.
 func (o *NetworkDiscoveredNeighbor) GetManagementAddress() string {
-	if o == nil || o.ManagementAddress == nil {
+	if o == nil || IsNil(o.ManagementAddress) {
 		var ret string
 		return ret
 	}
@@ -159,7 +163,7 @@ func (o *NetworkDiscoveredNeighbor) GetManagementAddress() string {
 // GetManagementAddressOk returns a tuple with the ManagementAddress field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NetworkDiscoveredNeighbor) GetManagementAddressOk() (*string, bool) {
-	if o == nil || o.ManagementAddress == nil {
+	if o == nil || IsNil(o.ManagementAddress) {
 		return nil, false
 	}
 	return o.ManagementAddress, true
@@ -167,7 +171,7 @@ func (o *NetworkDiscoveredNeighbor) GetManagementAddressOk() (*string, bool) {
 
 // HasManagementAddress returns a boolean if a field has been set.
 func (o *NetworkDiscoveredNeighbor) HasManagementAddress() bool {
-	if o != nil && o.ManagementAddress != nil {
+	if o != nil && !IsNil(o.ManagementAddress) {
 		return true
 	}
 
@@ -192,7 +196,7 @@ func (o *NetworkDiscoveredNeighbor) GetNeighborDeviceCapability() []string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *NetworkDiscoveredNeighbor) GetNeighborDeviceCapabilityOk() ([]string, bool) {
-	if o == nil || o.NeighborDeviceCapability == nil {
+	if o == nil || IsNil(o.NeighborDeviceCapability) {
 		return nil, false
 	}
 	return o.NeighborDeviceCapability, true
@@ -200,7 +204,7 @@ func (o *NetworkDiscoveredNeighbor) GetNeighborDeviceCapabilityOk() ([]string, b
 
 // HasNeighborDeviceCapability returns a boolean if a field has been set.
 func (o *NetworkDiscoveredNeighbor) HasNeighborDeviceCapability() bool {
-	if o != nil && o.NeighborDeviceCapability != nil {
+	if o != nil && IsNil(o.NeighborDeviceCapability) {
 		return true
 	}
 
@@ -214,7 +218,7 @@ func (o *NetworkDiscoveredNeighbor) SetNeighborDeviceCapability(v []string) {
 
 // GetNeighborDeviceId returns the NeighborDeviceId field value if set, zero value otherwise.
 func (o *NetworkDiscoveredNeighbor) GetNeighborDeviceId() string {
-	if o == nil || o.NeighborDeviceId == nil {
+	if o == nil || IsNil(o.NeighborDeviceId) {
 		var ret string
 		return ret
 	}
@@ -224,7 +228,7 @@ func (o *NetworkDiscoveredNeighbor) GetNeighborDeviceId() string {
 // GetNeighborDeviceIdOk returns a tuple with the NeighborDeviceId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NetworkDiscoveredNeighbor) GetNeighborDeviceIdOk() (*string, bool) {
-	if o == nil || o.NeighborDeviceId == nil {
+	if o == nil || IsNil(o.NeighborDeviceId) {
 		return nil, false
 	}
 	return o.NeighborDeviceId, true
@@ -232,7 +236,7 @@ func (o *NetworkDiscoveredNeighbor) GetNeighborDeviceIdOk() (*string, bool) {
 
 // HasNeighborDeviceId returns a boolean if a field has been set.
 func (o *NetworkDiscoveredNeighbor) HasNeighborDeviceId() bool {
-	if o != nil && o.NeighborDeviceId != nil {
+	if o != nil && !IsNil(o.NeighborDeviceId) {
 		return true
 	}
 
@@ -246,7 +250,7 @@ func (o *NetworkDiscoveredNeighbor) SetNeighborDeviceId(v string) {
 
 // GetNeighborInterface returns the NeighborInterface field value if set, zero value otherwise.
 func (o *NetworkDiscoveredNeighbor) GetNeighborInterface() string {
-	if o == nil || o.NeighborInterface == nil {
+	if o == nil || IsNil(o.NeighborInterface) {
 		var ret string
 		return ret
 	}
@@ -256,7 +260,7 @@ func (o *NetworkDiscoveredNeighbor) GetNeighborInterface() string {
 // GetNeighborInterfaceOk returns a tuple with the NeighborInterface field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NetworkDiscoveredNeighbor) GetNeighborInterfaceOk() (*string, bool) {
-	if o == nil || o.NeighborInterface == nil {
+	if o == nil || IsNil(o.NeighborInterface) {
 		return nil, false
 	}
 	return o.NeighborInterface, true
@@ -264,7 +268,7 @@ func (o *NetworkDiscoveredNeighbor) GetNeighborInterfaceOk() (*string, bool) {
 
 // HasNeighborInterface returns a boolean if a field has been set.
 func (o *NetworkDiscoveredNeighbor) HasNeighborInterface() bool {
-	if o != nil && o.NeighborInterface != nil {
+	if o != nil && !IsNil(o.NeighborInterface) {
 		return true
 	}
 
@@ -278,7 +282,7 @@ func (o *NetworkDiscoveredNeighbor) SetNeighborInterface(v string) {
 
 // GetNeighborPortId returns the NeighborPortId field value if set, zero value otherwise.
 func (o *NetworkDiscoveredNeighbor) GetNeighborPortId() string {
-	if o == nil || o.NeighborPortId == nil {
+	if o == nil || IsNil(o.NeighborPortId) {
 		var ret string
 		return ret
 	}
@@ -288,7 +292,7 @@ func (o *NetworkDiscoveredNeighbor) GetNeighborPortId() string {
 // GetNeighborPortIdOk returns a tuple with the NeighborPortId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NetworkDiscoveredNeighbor) GetNeighborPortIdOk() (*string, bool) {
-	if o == nil || o.NeighborPortId == nil {
+	if o == nil || IsNil(o.NeighborPortId) {
 		return nil, false
 	}
 	return o.NeighborPortId, true
@@ -296,7 +300,7 @@ func (o *NetworkDiscoveredNeighbor) GetNeighborPortIdOk() (*string, bool) {
 
 // HasNeighborPortId returns a boolean if a field has been set.
 func (o *NetworkDiscoveredNeighbor) HasNeighborPortId() bool {
-	if o != nil && o.NeighborPortId != nil {
+	if o != nil && !IsNil(o.NeighborPortId) {
 		return true
 	}
 
@@ -310,7 +314,7 @@ func (o *NetworkDiscoveredNeighbor) SetNeighborPortId(v string) {
 
 // GetSwitchPortId returns the SwitchPortId field value if set, zero value otherwise.
 func (o *NetworkDiscoveredNeighbor) GetSwitchPortId() string {
-	if o == nil || o.SwitchPortId == nil {
+	if o == nil || IsNil(o.SwitchPortId) {
 		var ret string
 		return ret
 	}
@@ -320,7 +324,7 @@ func (o *NetworkDiscoveredNeighbor) GetSwitchPortId() string {
 // GetSwitchPortIdOk returns a tuple with the SwitchPortId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NetworkDiscoveredNeighbor) GetSwitchPortIdOk() (*string, bool) {
-	if o == nil || o.SwitchPortId == nil {
+	if o == nil || IsNil(o.SwitchPortId) {
 		return nil, false
 	}
 	return o.SwitchPortId, true
@@ -328,7 +332,7 @@ func (o *NetworkDiscoveredNeighbor) GetSwitchPortIdOk() (*string, bool) {
 
 // HasSwitchPortId returns a boolean if a field has been set.
 func (o *NetworkDiscoveredNeighbor) HasSwitchPortId() bool {
-	if o != nil && o.SwitchPortId != nil {
+	if o != nil && !IsNil(o.SwitchPortId) {
 		return true
 	}
 
@@ -340,122 +344,170 @@ func (o *NetworkDiscoveredNeighbor) SetSwitchPortId(v string) {
 	o.SwitchPortId = &v
 }
 
-// GetCdpNeighbor returns the CdpNeighbor field value if set, zero value otherwise.
+// GetCdpNeighbor returns the CdpNeighbor field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *NetworkDiscoveredNeighbor) GetCdpNeighbor() NetworkElementRelationship {
-	if o == nil || o.CdpNeighbor == nil {
+	if o == nil || IsNil(o.CdpNeighbor.Get()) {
 		var ret NetworkElementRelationship
 		return ret
 	}
-	return *o.CdpNeighbor
+	return *o.CdpNeighbor.Get()
 }
 
 // GetCdpNeighborOk returns a tuple with the CdpNeighbor field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *NetworkDiscoveredNeighbor) GetCdpNeighborOk() (*NetworkElementRelationship, bool) {
-	if o == nil || o.CdpNeighbor == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.CdpNeighbor, true
+	return o.CdpNeighbor.Get(), o.CdpNeighbor.IsSet()
 }
 
 // HasCdpNeighbor returns a boolean if a field has been set.
 func (o *NetworkDiscoveredNeighbor) HasCdpNeighbor() bool {
-	if o != nil && o.CdpNeighbor != nil {
+	if o != nil && o.CdpNeighbor.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetCdpNeighbor gets a reference to the given NetworkElementRelationship and assigns it to the CdpNeighbor field.
+// SetCdpNeighbor gets a reference to the given NullableNetworkElementRelationship and assigns it to the CdpNeighbor field.
 func (o *NetworkDiscoveredNeighbor) SetCdpNeighbor(v NetworkElementRelationship) {
-	o.CdpNeighbor = &v
+	o.CdpNeighbor.Set(&v)
 }
 
-// GetLldpNeighbor returns the LldpNeighbor field value if set, zero value otherwise.
+// SetCdpNeighborNil sets the value for CdpNeighbor to be an explicit nil
+func (o *NetworkDiscoveredNeighbor) SetCdpNeighborNil() {
+	o.CdpNeighbor.Set(nil)
+}
+
+// UnsetCdpNeighbor ensures that no value is present for CdpNeighbor, not even an explicit nil
+func (o *NetworkDiscoveredNeighbor) UnsetCdpNeighbor() {
+	o.CdpNeighbor.Unset()
+}
+
+// GetLldpNeighbor returns the LldpNeighbor field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *NetworkDiscoveredNeighbor) GetLldpNeighbor() NetworkElementRelationship {
-	if o == nil || o.LldpNeighbor == nil {
+	if o == nil || IsNil(o.LldpNeighbor.Get()) {
 		var ret NetworkElementRelationship
 		return ret
 	}
-	return *o.LldpNeighbor
+	return *o.LldpNeighbor.Get()
 }
 
 // GetLldpNeighborOk returns a tuple with the LldpNeighbor field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *NetworkDiscoveredNeighbor) GetLldpNeighborOk() (*NetworkElementRelationship, bool) {
-	if o == nil || o.LldpNeighbor == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.LldpNeighbor, true
+	return o.LldpNeighbor.Get(), o.LldpNeighbor.IsSet()
 }
 
 // HasLldpNeighbor returns a boolean if a field has been set.
 func (o *NetworkDiscoveredNeighbor) HasLldpNeighbor() bool {
-	if o != nil && o.LldpNeighbor != nil {
+	if o != nil && o.LldpNeighbor.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetLldpNeighbor gets a reference to the given NetworkElementRelationship and assigns it to the LldpNeighbor field.
+// SetLldpNeighbor gets a reference to the given NullableNetworkElementRelationship and assigns it to the LldpNeighbor field.
 func (o *NetworkDiscoveredNeighbor) SetLldpNeighbor(v NetworkElementRelationship) {
-	o.LldpNeighbor = &v
+	o.LldpNeighbor.Set(&v)
+}
+
+// SetLldpNeighborNil sets the value for LldpNeighbor to be an explicit nil
+func (o *NetworkDiscoveredNeighbor) SetLldpNeighborNil() {
+	o.LldpNeighbor.Set(nil)
+}
+
+// UnsetLldpNeighbor ensures that no value is present for LldpNeighbor, not even an explicit nil
+func (o *NetworkDiscoveredNeighbor) UnsetLldpNeighbor() {
+	o.LldpNeighbor.Unset()
 }
 
 func (o NetworkDiscoveredNeighbor) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o NetworkDiscoveredNeighbor) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedInventoryBase, errInventoryBase := json.Marshal(o.InventoryBase)
 	if errInventoryBase != nil {
-		return []byte{}, errInventoryBase
+		return map[string]interface{}{}, errInventoryBase
 	}
 	errInventoryBase = json.Unmarshal([]byte(serializedInventoryBase), &toSerialize)
 	if errInventoryBase != nil {
-		return []byte{}, errInventoryBase
+		return map[string]interface{}{}, errInventoryBase
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.DeviceId != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.DeviceId) {
 		toSerialize["DeviceId"] = o.DeviceId
 	}
-	if o.ManagementAddress != nil {
+	if !IsNil(o.ManagementAddress) {
 		toSerialize["ManagementAddress"] = o.ManagementAddress
 	}
 	if o.NeighborDeviceCapability != nil {
 		toSerialize["NeighborDeviceCapability"] = o.NeighborDeviceCapability
 	}
-	if o.NeighborDeviceId != nil {
+	if !IsNil(o.NeighborDeviceId) {
 		toSerialize["NeighborDeviceId"] = o.NeighborDeviceId
 	}
-	if o.NeighborInterface != nil {
+	if !IsNil(o.NeighborInterface) {
 		toSerialize["NeighborInterface"] = o.NeighborInterface
 	}
-	if o.NeighborPortId != nil {
+	if !IsNil(o.NeighborPortId) {
 		toSerialize["NeighborPortId"] = o.NeighborPortId
 	}
-	if o.SwitchPortId != nil {
+	if !IsNil(o.SwitchPortId) {
 		toSerialize["SwitchPortId"] = o.SwitchPortId
 	}
-	if o.CdpNeighbor != nil {
-		toSerialize["CdpNeighbor"] = o.CdpNeighbor
+	if o.CdpNeighbor.IsSet() {
+		toSerialize["CdpNeighbor"] = o.CdpNeighbor.Get()
 	}
-	if o.LldpNeighbor != nil {
-		toSerialize["LldpNeighbor"] = o.LldpNeighbor
+	if o.LldpNeighbor.IsSet() {
+		toSerialize["LldpNeighbor"] = o.LldpNeighbor.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *NetworkDiscoveredNeighbor) UnmarshalJSON(bytes []byte) (err error) {
+func (o *NetworkDiscoveredNeighbor) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type NetworkDiscoveredNeighborWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -473,14 +525,14 @@ func (o *NetworkDiscoveredNeighbor) UnmarshalJSON(bytes []byte) (err error) {
 		// PortID of the neighbor device configured.
 		NeighborPortId *string `json:"NeighborPortId,omitempty"`
 		// Name of the local interface.
-		SwitchPortId *string                     `json:"SwitchPortId,omitempty"`
-		CdpNeighbor  *NetworkElementRelationship `json:"CdpNeighbor,omitempty"`
-		LldpNeighbor *NetworkElementRelationship `json:"LldpNeighbor,omitempty"`
+		SwitchPortId *string                            `json:"SwitchPortId,omitempty"`
+		CdpNeighbor  NullableNetworkElementRelationship `json:"CdpNeighbor,omitempty"`
+		LldpNeighbor NullableNetworkElementRelationship `json:"LldpNeighbor,omitempty"`
 	}
 
 	varNetworkDiscoveredNeighborWithoutEmbeddedStruct := NetworkDiscoveredNeighborWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varNetworkDiscoveredNeighborWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varNetworkDiscoveredNeighborWithoutEmbeddedStruct)
 	if err == nil {
 		varNetworkDiscoveredNeighbor := _NetworkDiscoveredNeighbor{}
 		varNetworkDiscoveredNeighbor.ClassId = varNetworkDiscoveredNeighborWithoutEmbeddedStruct.ClassId
@@ -501,7 +553,7 @@ func (o *NetworkDiscoveredNeighbor) UnmarshalJSON(bytes []byte) (err error) {
 
 	varNetworkDiscoveredNeighbor := _NetworkDiscoveredNeighbor{}
 
-	err = json.Unmarshal(bytes, &varNetworkDiscoveredNeighbor)
+	err = json.Unmarshal(data, &varNetworkDiscoveredNeighbor)
 	if err == nil {
 		o.InventoryBase = varNetworkDiscoveredNeighbor.InventoryBase
 	} else {
@@ -510,7 +562,7 @@ func (o *NetworkDiscoveredNeighbor) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "DeviceId")

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the EquipmentSwitchCard type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &EquipmentSwitchCard{}
 
 // EquipmentSwitchCard Fixed / Removable module on a Fabric Interconnect / Switch.
 type EquipmentSwitchCard struct {
@@ -67,14 +71,14 @@ type EquipmentSwitchCard struct {
 	// An array of relationships to fcPortChannel resources.
 	FcPortChannels []FcPortChannelRelationship `json:"FcPortChannels,omitempty"`
 	// An array of relationships to fcPhysicalPort resources.
-	FcPorts             []FcPhysicalPortRelationship     `json:"FcPorts,omitempty"`
-	InventoryDeviceInfo *InventoryDeviceInfoRelationship `json:"InventoryDeviceInfo,omitempty"`
-	NetworkElement      *NetworkElementRelationship      `json:"NetworkElement,omitempty"`
+	FcPorts             []FcPhysicalPortRelationship            `json:"FcPorts,omitempty"`
+	InventoryDeviceInfo NullableInventoryDeviceInfoRelationship `json:"InventoryDeviceInfo,omitempty"`
+	NetworkElement      NullableNetworkElementRelationship      `json:"NetworkElement,omitempty"`
 	// An array of relationships to etherPortChannel resources.
 	PortChannels []EtherPortChannelRelationship `json:"PortChannels,omitempty"`
 	// An array of relationships to portGroup resources.
-	PortGroups           []PortGroupRelationship              `json:"PortGroups,omitempty"`
-	RegisteredDevice     *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+	PortGroups           []PortGroupRelationship                     `json:"PortGroups,omitempty"`
+	RegisteredDevice     NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -165,7 +169,7 @@ func (o *EquipmentSwitchCard) SetObjectType(v string) {
 
 // GetBaseMac returns the BaseMac field value if set, zero value otherwise.
 func (o *EquipmentSwitchCard) GetBaseMac() string {
-	if o == nil || o.BaseMac == nil {
+	if o == nil || IsNil(o.BaseMac) {
 		var ret string
 		return ret
 	}
@@ -175,7 +179,7 @@ func (o *EquipmentSwitchCard) GetBaseMac() string {
 // GetBaseMacOk returns a tuple with the BaseMac field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EquipmentSwitchCard) GetBaseMacOk() (*string, bool) {
-	if o == nil || o.BaseMac == nil {
+	if o == nil || IsNil(o.BaseMac) {
 		return nil, false
 	}
 	return o.BaseMac, true
@@ -183,7 +187,7 @@ func (o *EquipmentSwitchCard) GetBaseMacOk() (*string, bool) {
 
 // HasBaseMac returns a boolean if a field has been set.
 func (o *EquipmentSwitchCard) HasBaseMac() bool {
-	if o != nil && o.BaseMac != nil {
+	if o != nil && !IsNil(o.BaseMac) {
 		return true
 	}
 
@@ -197,7 +201,7 @@ func (o *EquipmentSwitchCard) SetBaseMac(v string) {
 
 // GetDescription returns the Description field value if set, zero value otherwise.
 func (o *EquipmentSwitchCard) GetDescription() string {
-	if o == nil || o.Description == nil {
+	if o == nil || IsNil(o.Description) {
 		var ret string
 		return ret
 	}
@@ -207,7 +211,7 @@ func (o *EquipmentSwitchCard) GetDescription() string {
 // GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EquipmentSwitchCard) GetDescriptionOk() (*string, bool) {
-	if o == nil || o.Description == nil {
+	if o == nil || IsNil(o.Description) {
 		return nil, false
 	}
 	return o.Description, true
@@ -215,7 +219,7 @@ func (o *EquipmentSwitchCard) GetDescriptionOk() (*string, bool) {
 
 // HasDescription returns a boolean if a field has been set.
 func (o *EquipmentSwitchCard) HasDescription() bool {
-	if o != nil && o.Description != nil {
+	if o != nil && !IsNil(o.Description) {
 		return true
 	}
 
@@ -229,7 +233,7 @@ func (o *EquipmentSwitchCard) SetDescription(v string) {
 
 // GetEndMac returns the EndMac field value if set, zero value otherwise.
 func (o *EquipmentSwitchCard) GetEndMac() string {
-	if o == nil || o.EndMac == nil {
+	if o == nil || IsNil(o.EndMac) {
 		var ret string
 		return ret
 	}
@@ -239,7 +243,7 @@ func (o *EquipmentSwitchCard) GetEndMac() string {
 // GetEndMacOk returns a tuple with the EndMac field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EquipmentSwitchCard) GetEndMacOk() (*string, bool) {
-	if o == nil || o.EndMac == nil {
+	if o == nil || IsNil(o.EndMac) {
 		return nil, false
 	}
 	return o.EndMac, true
@@ -247,7 +251,7 @@ func (o *EquipmentSwitchCard) GetEndMacOk() (*string, bool) {
 
 // HasEndMac returns a boolean if a field has been set.
 func (o *EquipmentSwitchCard) HasEndMac() bool {
-	if o != nil && o.EndMac != nil {
+	if o != nil && !IsNil(o.EndMac) {
 		return true
 	}
 
@@ -261,7 +265,7 @@ func (o *EquipmentSwitchCard) SetEndMac(v string) {
 
 // GetEthernetSwitchingMode returns the EthernetSwitchingMode field value if set, zero value otherwise.
 func (o *EquipmentSwitchCard) GetEthernetSwitchingMode() string {
-	if o == nil || o.EthernetSwitchingMode == nil {
+	if o == nil || IsNil(o.EthernetSwitchingMode) {
 		var ret string
 		return ret
 	}
@@ -271,7 +275,7 @@ func (o *EquipmentSwitchCard) GetEthernetSwitchingMode() string {
 // GetEthernetSwitchingModeOk returns a tuple with the EthernetSwitchingMode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EquipmentSwitchCard) GetEthernetSwitchingModeOk() (*string, bool) {
-	if o == nil || o.EthernetSwitchingMode == nil {
+	if o == nil || IsNil(o.EthernetSwitchingMode) {
 		return nil, false
 	}
 	return o.EthernetSwitchingMode, true
@@ -279,7 +283,7 @@ func (o *EquipmentSwitchCard) GetEthernetSwitchingModeOk() (*string, bool) {
 
 // HasEthernetSwitchingMode returns a boolean if a field has been set.
 func (o *EquipmentSwitchCard) HasEthernetSwitchingMode() bool {
-	if o != nil && o.EthernetSwitchingMode != nil {
+	if o != nil && !IsNil(o.EthernetSwitchingMode) {
 		return true
 	}
 
@@ -293,7 +297,7 @@ func (o *EquipmentSwitchCard) SetEthernetSwitchingMode(v string) {
 
 // GetFcSwitchingMode returns the FcSwitchingMode field value if set, zero value otherwise.
 func (o *EquipmentSwitchCard) GetFcSwitchingMode() string {
-	if o == nil || o.FcSwitchingMode == nil {
+	if o == nil || IsNil(o.FcSwitchingMode) {
 		var ret string
 		return ret
 	}
@@ -303,7 +307,7 @@ func (o *EquipmentSwitchCard) GetFcSwitchingMode() string {
 // GetFcSwitchingModeOk returns a tuple with the FcSwitchingMode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EquipmentSwitchCard) GetFcSwitchingModeOk() (*string, bool) {
-	if o == nil || o.FcSwitchingMode == nil {
+	if o == nil || IsNil(o.FcSwitchingMode) {
 		return nil, false
 	}
 	return o.FcSwitchingMode, true
@@ -311,7 +315,7 @@ func (o *EquipmentSwitchCard) GetFcSwitchingModeOk() (*string, bool) {
 
 // HasFcSwitchingMode returns a boolean if a field has been set.
 func (o *EquipmentSwitchCard) HasFcSwitchingMode() bool {
-	if o != nil && o.FcSwitchingMode != nil {
+	if o != nil && !IsNil(o.FcSwitchingMode) {
 		return true
 	}
 
@@ -325,7 +329,7 @@ func (o *EquipmentSwitchCard) SetFcSwitchingMode(v string) {
 
 // GetHwVersion returns the HwVersion field value if set, zero value otherwise.
 func (o *EquipmentSwitchCard) GetHwVersion() string {
-	if o == nil || o.HwVersion == nil {
+	if o == nil || IsNil(o.HwVersion) {
 		var ret string
 		return ret
 	}
@@ -335,7 +339,7 @@ func (o *EquipmentSwitchCard) GetHwVersion() string {
 // GetHwVersionOk returns a tuple with the HwVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EquipmentSwitchCard) GetHwVersionOk() (*string, bool) {
-	if o == nil || o.HwVersion == nil {
+	if o == nil || IsNil(o.HwVersion) {
 		return nil, false
 	}
 	return o.HwVersion, true
@@ -343,7 +347,7 @@ func (o *EquipmentSwitchCard) GetHwVersionOk() (*string, bool) {
 
 // HasHwVersion returns a boolean if a field has been set.
 func (o *EquipmentSwitchCard) HasHwVersion() bool {
-	if o != nil && o.HwVersion != nil {
+	if o != nil && !IsNil(o.HwVersion) {
 		return true
 	}
 
@@ -357,7 +361,7 @@ func (o *EquipmentSwitchCard) SetHwVersion(v string) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *EquipmentSwitchCard) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -367,7 +371,7 @@ func (o *EquipmentSwitchCard) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EquipmentSwitchCard) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -375,7 +379,7 @@ func (o *EquipmentSwitchCard) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *EquipmentSwitchCard) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -389,7 +393,7 @@ func (o *EquipmentSwitchCard) SetName(v string) {
 
 // GetNumPorts returns the NumPorts field value if set, zero value otherwise.
 func (o *EquipmentSwitchCard) GetNumPorts() int64 {
-	if o == nil || o.NumPorts == nil {
+	if o == nil || IsNil(o.NumPorts) {
 		var ret int64
 		return ret
 	}
@@ -399,7 +403,7 @@ func (o *EquipmentSwitchCard) GetNumPorts() int64 {
 // GetNumPortsOk returns a tuple with the NumPorts field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EquipmentSwitchCard) GetNumPortsOk() (*int64, bool) {
-	if o == nil || o.NumPorts == nil {
+	if o == nil || IsNil(o.NumPorts) {
 		return nil, false
 	}
 	return o.NumPorts, true
@@ -407,7 +411,7 @@ func (o *EquipmentSwitchCard) GetNumPortsOk() (*int64, bool) {
 
 // HasNumPorts returns a boolean if a field has been set.
 func (o *EquipmentSwitchCard) HasNumPorts() bool {
-	if o != nil && o.NumPorts != nil {
+	if o != nil && !IsNil(o.NumPorts) {
 		return true
 	}
 
@@ -421,7 +425,7 @@ func (o *EquipmentSwitchCard) SetNumPorts(v int64) {
 
 // GetOutOfBandIpAddress returns the OutOfBandIpAddress field value if set, zero value otherwise.
 func (o *EquipmentSwitchCard) GetOutOfBandIpAddress() string {
-	if o == nil || o.OutOfBandIpAddress == nil {
+	if o == nil || IsNil(o.OutOfBandIpAddress) {
 		var ret string
 		return ret
 	}
@@ -431,7 +435,7 @@ func (o *EquipmentSwitchCard) GetOutOfBandIpAddress() string {
 // GetOutOfBandIpAddressOk returns a tuple with the OutOfBandIpAddress field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EquipmentSwitchCard) GetOutOfBandIpAddressOk() (*string, bool) {
-	if o == nil || o.OutOfBandIpAddress == nil {
+	if o == nil || IsNil(o.OutOfBandIpAddress) {
 		return nil, false
 	}
 	return o.OutOfBandIpAddress, true
@@ -439,7 +443,7 @@ func (o *EquipmentSwitchCard) GetOutOfBandIpAddressOk() (*string, bool) {
 
 // HasOutOfBandIpAddress returns a boolean if a field has been set.
 func (o *EquipmentSwitchCard) HasOutOfBandIpAddress() bool {
-	if o != nil && o.OutOfBandIpAddress != nil {
+	if o != nil && !IsNil(o.OutOfBandIpAddress) {
 		return true
 	}
 
@@ -453,7 +457,7 @@ func (o *EquipmentSwitchCard) SetOutOfBandIpAddress(v string) {
 
 // GetOutOfBandIpGateway returns the OutOfBandIpGateway field value if set, zero value otherwise.
 func (o *EquipmentSwitchCard) GetOutOfBandIpGateway() string {
-	if o == nil || o.OutOfBandIpGateway == nil {
+	if o == nil || IsNil(o.OutOfBandIpGateway) {
 		var ret string
 		return ret
 	}
@@ -463,7 +467,7 @@ func (o *EquipmentSwitchCard) GetOutOfBandIpGateway() string {
 // GetOutOfBandIpGatewayOk returns a tuple with the OutOfBandIpGateway field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EquipmentSwitchCard) GetOutOfBandIpGatewayOk() (*string, bool) {
-	if o == nil || o.OutOfBandIpGateway == nil {
+	if o == nil || IsNil(o.OutOfBandIpGateway) {
 		return nil, false
 	}
 	return o.OutOfBandIpGateway, true
@@ -471,7 +475,7 @@ func (o *EquipmentSwitchCard) GetOutOfBandIpGatewayOk() (*string, bool) {
 
 // HasOutOfBandIpGateway returns a boolean if a field has been set.
 func (o *EquipmentSwitchCard) HasOutOfBandIpGateway() bool {
-	if o != nil && o.OutOfBandIpGateway != nil {
+	if o != nil && !IsNil(o.OutOfBandIpGateway) {
 		return true
 	}
 
@@ -485,7 +489,7 @@ func (o *EquipmentSwitchCard) SetOutOfBandIpGateway(v string) {
 
 // GetOutOfBandIpMask returns the OutOfBandIpMask field value if set, zero value otherwise.
 func (o *EquipmentSwitchCard) GetOutOfBandIpMask() string {
-	if o == nil || o.OutOfBandIpMask == nil {
+	if o == nil || IsNil(o.OutOfBandIpMask) {
 		var ret string
 		return ret
 	}
@@ -495,7 +499,7 @@ func (o *EquipmentSwitchCard) GetOutOfBandIpMask() string {
 // GetOutOfBandIpMaskOk returns a tuple with the OutOfBandIpMask field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EquipmentSwitchCard) GetOutOfBandIpMaskOk() (*string, bool) {
-	if o == nil || o.OutOfBandIpMask == nil {
+	if o == nil || IsNil(o.OutOfBandIpMask) {
 		return nil, false
 	}
 	return o.OutOfBandIpMask, true
@@ -503,7 +507,7 @@ func (o *EquipmentSwitchCard) GetOutOfBandIpMaskOk() (*string, bool) {
 
 // HasOutOfBandIpMask returns a boolean if a field has been set.
 func (o *EquipmentSwitchCard) HasOutOfBandIpMask() bool {
-	if o != nil && o.OutOfBandIpMask != nil {
+	if o != nil && !IsNil(o.OutOfBandIpMask) {
 		return true
 	}
 
@@ -517,7 +521,7 @@ func (o *EquipmentSwitchCard) SetOutOfBandIpMask(v string) {
 
 // GetOutOfBandMac returns the OutOfBandMac field value if set, zero value otherwise.
 func (o *EquipmentSwitchCard) GetOutOfBandMac() string {
-	if o == nil || o.OutOfBandMac == nil {
+	if o == nil || IsNil(o.OutOfBandMac) {
 		var ret string
 		return ret
 	}
@@ -527,7 +531,7 @@ func (o *EquipmentSwitchCard) GetOutOfBandMac() string {
 // GetOutOfBandMacOk returns a tuple with the OutOfBandMac field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EquipmentSwitchCard) GetOutOfBandMacOk() (*string, bool) {
-	if o == nil || o.OutOfBandMac == nil {
+	if o == nil || IsNil(o.OutOfBandMac) {
 		return nil, false
 	}
 	return o.OutOfBandMac, true
@@ -535,7 +539,7 @@ func (o *EquipmentSwitchCard) GetOutOfBandMacOk() (*string, bool) {
 
 // HasOutOfBandMac returns a boolean if a field has been set.
 func (o *EquipmentSwitchCard) HasOutOfBandMac() bool {
-	if o != nil && o.OutOfBandMac != nil {
+	if o != nil && !IsNil(o.OutOfBandMac) {
 		return true
 	}
 
@@ -549,7 +553,7 @@ func (o *EquipmentSwitchCard) SetOutOfBandMac(v string) {
 
 // GetPartNumber returns the PartNumber field value if set, zero value otherwise.
 func (o *EquipmentSwitchCard) GetPartNumber() string {
-	if o == nil || o.PartNumber == nil {
+	if o == nil || IsNil(o.PartNumber) {
 		var ret string
 		return ret
 	}
@@ -559,7 +563,7 @@ func (o *EquipmentSwitchCard) GetPartNumber() string {
 // GetPartNumberOk returns a tuple with the PartNumber field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EquipmentSwitchCard) GetPartNumberOk() (*string, bool) {
-	if o == nil || o.PartNumber == nil {
+	if o == nil || IsNil(o.PartNumber) {
 		return nil, false
 	}
 	return o.PartNumber, true
@@ -567,7 +571,7 @@ func (o *EquipmentSwitchCard) GetPartNumberOk() (*string, bool) {
 
 // HasPartNumber returns a boolean if a field has been set.
 func (o *EquipmentSwitchCard) HasPartNumber() bool {
-	if o != nil && o.PartNumber != nil {
+	if o != nil && !IsNil(o.PartNumber) {
 		return true
 	}
 
@@ -581,7 +585,7 @@ func (o *EquipmentSwitchCard) SetPartNumber(v string) {
 
 // GetPowerState returns the PowerState field value if set, zero value otherwise.
 func (o *EquipmentSwitchCard) GetPowerState() string {
-	if o == nil || o.PowerState == nil {
+	if o == nil || IsNil(o.PowerState) {
 		var ret string
 		return ret
 	}
@@ -591,7 +595,7 @@ func (o *EquipmentSwitchCard) GetPowerState() string {
 // GetPowerStateOk returns a tuple with the PowerState field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EquipmentSwitchCard) GetPowerStateOk() (*string, bool) {
-	if o == nil || o.PowerState == nil {
+	if o == nil || IsNil(o.PowerState) {
 		return nil, false
 	}
 	return o.PowerState, true
@@ -599,7 +603,7 @@ func (o *EquipmentSwitchCard) GetPowerStateOk() (*string, bool) {
 
 // HasPowerState returns a boolean if a field has been set.
 func (o *EquipmentSwitchCard) HasPowerState() bool {
-	if o != nil && o.PowerState != nil {
+	if o != nil && !IsNil(o.PowerState) {
 		return true
 	}
 
@@ -613,7 +617,7 @@ func (o *EquipmentSwitchCard) SetPowerState(v string) {
 
 // GetSlotId returns the SlotId field value if set, zero value otherwise.
 func (o *EquipmentSwitchCard) GetSlotId() int64 {
-	if o == nil || o.SlotId == nil {
+	if o == nil || IsNil(o.SlotId) {
 		var ret int64
 		return ret
 	}
@@ -623,7 +627,7 @@ func (o *EquipmentSwitchCard) GetSlotId() int64 {
 // GetSlotIdOk returns a tuple with the SlotId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EquipmentSwitchCard) GetSlotIdOk() (*int64, bool) {
-	if o == nil || o.SlotId == nil {
+	if o == nil || IsNil(o.SlotId) {
 		return nil, false
 	}
 	return o.SlotId, true
@@ -631,7 +635,7 @@ func (o *EquipmentSwitchCard) GetSlotIdOk() (*int64, bool) {
 
 // HasSlotId returns a boolean if a field has been set.
 func (o *EquipmentSwitchCard) HasSlotId() bool {
-	if o != nil && o.SlotId != nil {
+	if o != nil && !IsNil(o.SlotId) {
 		return true
 	}
 
@@ -645,7 +649,7 @@ func (o *EquipmentSwitchCard) SetSlotId(v int64) {
 
 // GetState returns the State field value if set, zero value otherwise.
 func (o *EquipmentSwitchCard) GetState() string {
-	if o == nil || o.State == nil {
+	if o == nil || IsNil(o.State) {
 		var ret string
 		return ret
 	}
@@ -655,7 +659,7 @@ func (o *EquipmentSwitchCard) GetState() string {
 // GetStateOk returns a tuple with the State field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EquipmentSwitchCard) GetStateOk() (*string, bool) {
-	if o == nil || o.State == nil {
+	if o == nil || IsNil(o.State) {
 		return nil, false
 	}
 	return o.State, true
@@ -663,7 +667,7 @@ func (o *EquipmentSwitchCard) GetStateOk() (*string, bool) {
 
 // HasState returns a boolean if a field has been set.
 func (o *EquipmentSwitchCard) HasState() bool {
-	if o != nil && o.State != nil {
+	if o != nil && !IsNil(o.State) {
 		return true
 	}
 
@@ -677,7 +681,7 @@ func (o *EquipmentSwitchCard) SetState(v string) {
 
 // GetStatus returns the Status field value if set, zero value otherwise.
 func (o *EquipmentSwitchCard) GetStatus() string {
-	if o == nil || o.Status == nil {
+	if o == nil || IsNil(o.Status) {
 		var ret string
 		return ret
 	}
@@ -687,7 +691,7 @@ func (o *EquipmentSwitchCard) GetStatus() string {
 // GetStatusOk returns a tuple with the Status field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EquipmentSwitchCard) GetStatusOk() (*string, bool) {
-	if o == nil || o.Status == nil {
+	if o == nil || IsNil(o.Status) {
 		return nil, false
 	}
 	return o.Status, true
@@ -695,7 +699,7 @@ func (o *EquipmentSwitchCard) GetStatusOk() (*string, bool) {
 
 // HasStatus returns a boolean if a field has been set.
 func (o *EquipmentSwitchCard) HasStatus() bool {
-	if o != nil && o.Status != nil {
+	if o != nil && !IsNil(o.Status) {
 		return true
 	}
 
@@ -709,7 +713,7 @@ func (o *EquipmentSwitchCard) SetStatus(v string) {
 
 // GetSwitchId returns the SwitchId field value if set, zero value otherwise.
 func (o *EquipmentSwitchCard) GetSwitchId() string {
-	if o == nil || o.SwitchId == nil {
+	if o == nil || IsNil(o.SwitchId) {
 		var ret string
 		return ret
 	}
@@ -719,7 +723,7 @@ func (o *EquipmentSwitchCard) GetSwitchId() string {
 // GetSwitchIdOk returns a tuple with the SwitchId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EquipmentSwitchCard) GetSwitchIdOk() (*string, bool) {
-	if o == nil || o.SwitchId == nil {
+	if o == nil || IsNil(o.SwitchId) {
 		return nil, false
 	}
 	return o.SwitchId, true
@@ -727,7 +731,7 @@ func (o *EquipmentSwitchCard) GetSwitchIdOk() (*string, bool) {
 
 // HasSwitchId returns a boolean if a field has been set.
 func (o *EquipmentSwitchCard) HasSwitchId() bool {
-	if o != nil && o.SwitchId != nil {
+	if o != nil && !IsNil(o.SwitchId) {
 		return true
 	}
 
@@ -741,7 +745,7 @@ func (o *EquipmentSwitchCard) SetSwitchId(v string) {
 
 // GetThermal returns the Thermal field value if set, zero value otherwise.
 func (o *EquipmentSwitchCard) GetThermal() string {
-	if o == nil || o.Thermal == nil {
+	if o == nil || IsNil(o.Thermal) {
 		var ret string
 		return ret
 	}
@@ -751,7 +755,7 @@ func (o *EquipmentSwitchCard) GetThermal() string {
 // GetThermalOk returns a tuple with the Thermal field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EquipmentSwitchCard) GetThermalOk() (*string, bool) {
-	if o == nil || o.Thermal == nil {
+	if o == nil || IsNil(o.Thermal) {
 		return nil, false
 	}
 	return o.Thermal, true
@@ -759,7 +763,7 @@ func (o *EquipmentSwitchCard) GetThermalOk() (*string, bool) {
 
 // HasThermal returns a boolean if a field has been set.
 func (o *EquipmentSwitchCard) HasThermal() bool {
-	if o != nil && o.Thermal != nil {
+	if o != nil && !IsNil(o.Thermal) {
 		return true
 	}
 
@@ -773,7 +777,7 @@ func (o *EquipmentSwitchCard) SetThermal(v string) {
 
 // GetType returns the Type field value if set, zero value otherwise.
 func (o *EquipmentSwitchCard) GetType() string {
-	if o == nil || o.Type == nil {
+	if o == nil || IsNil(o.Type) {
 		var ret string
 		return ret
 	}
@@ -783,7 +787,7 @@ func (o *EquipmentSwitchCard) GetType() string {
 // GetTypeOk returns a tuple with the Type field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EquipmentSwitchCard) GetTypeOk() (*string, bool) {
-	if o == nil || o.Type == nil {
+	if o == nil || IsNil(o.Type) {
 		return nil, false
 	}
 	return o.Type, true
@@ -791,7 +795,7 @@ func (o *EquipmentSwitchCard) GetTypeOk() (*string, bool) {
 
 // HasType returns a boolean if a field has been set.
 func (o *EquipmentSwitchCard) HasType() bool {
-	if o != nil && o.Type != nil {
+	if o != nil && !IsNil(o.Type) {
 		return true
 	}
 
@@ -816,7 +820,7 @@ func (o *EquipmentSwitchCard) GetFcPortChannels() []FcPortChannelRelationship {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *EquipmentSwitchCard) GetFcPortChannelsOk() ([]FcPortChannelRelationship, bool) {
-	if o == nil || o.FcPortChannels == nil {
+	if o == nil || IsNil(o.FcPortChannels) {
 		return nil, false
 	}
 	return o.FcPortChannels, true
@@ -824,7 +828,7 @@ func (o *EquipmentSwitchCard) GetFcPortChannelsOk() ([]FcPortChannelRelationship
 
 // HasFcPortChannels returns a boolean if a field has been set.
 func (o *EquipmentSwitchCard) HasFcPortChannels() bool {
-	if o != nil && o.FcPortChannels != nil {
+	if o != nil && IsNil(o.FcPortChannels) {
 		return true
 	}
 
@@ -849,7 +853,7 @@ func (o *EquipmentSwitchCard) GetFcPorts() []FcPhysicalPortRelationship {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *EquipmentSwitchCard) GetFcPortsOk() ([]FcPhysicalPortRelationship, bool) {
-	if o == nil || o.FcPorts == nil {
+	if o == nil || IsNil(o.FcPorts) {
 		return nil, false
 	}
 	return o.FcPorts, true
@@ -857,7 +861,7 @@ func (o *EquipmentSwitchCard) GetFcPortsOk() ([]FcPhysicalPortRelationship, bool
 
 // HasFcPorts returns a boolean if a field has been set.
 func (o *EquipmentSwitchCard) HasFcPorts() bool {
-	if o != nil && o.FcPorts != nil {
+	if o != nil && IsNil(o.FcPorts) {
 		return true
 	}
 
@@ -869,68 +873,90 @@ func (o *EquipmentSwitchCard) SetFcPorts(v []FcPhysicalPortRelationship) {
 	o.FcPorts = v
 }
 
-// GetInventoryDeviceInfo returns the InventoryDeviceInfo field value if set, zero value otherwise.
+// GetInventoryDeviceInfo returns the InventoryDeviceInfo field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *EquipmentSwitchCard) GetInventoryDeviceInfo() InventoryDeviceInfoRelationship {
-	if o == nil || o.InventoryDeviceInfo == nil {
+	if o == nil || IsNil(o.InventoryDeviceInfo.Get()) {
 		var ret InventoryDeviceInfoRelationship
 		return ret
 	}
-	return *o.InventoryDeviceInfo
+	return *o.InventoryDeviceInfo.Get()
 }
 
 // GetInventoryDeviceInfoOk returns a tuple with the InventoryDeviceInfo field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *EquipmentSwitchCard) GetInventoryDeviceInfoOk() (*InventoryDeviceInfoRelationship, bool) {
-	if o == nil || o.InventoryDeviceInfo == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.InventoryDeviceInfo, true
+	return o.InventoryDeviceInfo.Get(), o.InventoryDeviceInfo.IsSet()
 }
 
 // HasInventoryDeviceInfo returns a boolean if a field has been set.
 func (o *EquipmentSwitchCard) HasInventoryDeviceInfo() bool {
-	if o != nil && o.InventoryDeviceInfo != nil {
+	if o != nil && o.InventoryDeviceInfo.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetInventoryDeviceInfo gets a reference to the given InventoryDeviceInfoRelationship and assigns it to the InventoryDeviceInfo field.
+// SetInventoryDeviceInfo gets a reference to the given NullableInventoryDeviceInfoRelationship and assigns it to the InventoryDeviceInfo field.
 func (o *EquipmentSwitchCard) SetInventoryDeviceInfo(v InventoryDeviceInfoRelationship) {
-	o.InventoryDeviceInfo = &v
+	o.InventoryDeviceInfo.Set(&v)
 }
 
-// GetNetworkElement returns the NetworkElement field value if set, zero value otherwise.
+// SetInventoryDeviceInfoNil sets the value for InventoryDeviceInfo to be an explicit nil
+func (o *EquipmentSwitchCard) SetInventoryDeviceInfoNil() {
+	o.InventoryDeviceInfo.Set(nil)
+}
+
+// UnsetInventoryDeviceInfo ensures that no value is present for InventoryDeviceInfo, not even an explicit nil
+func (o *EquipmentSwitchCard) UnsetInventoryDeviceInfo() {
+	o.InventoryDeviceInfo.Unset()
+}
+
+// GetNetworkElement returns the NetworkElement field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *EquipmentSwitchCard) GetNetworkElement() NetworkElementRelationship {
-	if o == nil || o.NetworkElement == nil {
+	if o == nil || IsNil(o.NetworkElement.Get()) {
 		var ret NetworkElementRelationship
 		return ret
 	}
-	return *o.NetworkElement
+	return *o.NetworkElement.Get()
 }
 
 // GetNetworkElementOk returns a tuple with the NetworkElement field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *EquipmentSwitchCard) GetNetworkElementOk() (*NetworkElementRelationship, bool) {
-	if o == nil || o.NetworkElement == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.NetworkElement, true
+	return o.NetworkElement.Get(), o.NetworkElement.IsSet()
 }
 
 // HasNetworkElement returns a boolean if a field has been set.
 func (o *EquipmentSwitchCard) HasNetworkElement() bool {
-	if o != nil && o.NetworkElement != nil {
+	if o != nil && o.NetworkElement.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetNetworkElement gets a reference to the given NetworkElementRelationship and assigns it to the NetworkElement field.
+// SetNetworkElement gets a reference to the given NullableNetworkElementRelationship and assigns it to the NetworkElement field.
 func (o *EquipmentSwitchCard) SetNetworkElement(v NetworkElementRelationship) {
-	o.NetworkElement = &v
+	o.NetworkElement.Set(&v)
+}
+
+// SetNetworkElementNil sets the value for NetworkElement to be an explicit nil
+func (o *EquipmentSwitchCard) SetNetworkElementNil() {
+	o.NetworkElement.Set(nil)
+}
+
+// UnsetNetworkElement ensures that no value is present for NetworkElement, not even an explicit nil
+func (o *EquipmentSwitchCard) UnsetNetworkElement() {
+	o.NetworkElement.Unset()
 }
 
 // GetPortChannels returns the PortChannels field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -946,7 +972,7 @@ func (o *EquipmentSwitchCard) GetPortChannels() []EtherPortChannelRelationship {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *EquipmentSwitchCard) GetPortChannelsOk() ([]EtherPortChannelRelationship, bool) {
-	if o == nil || o.PortChannels == nil {
+	if o == nil || IsNil(o.PortChannels) {
 		return nil, false
 	}
 	return o.PortChannels, true
@@ -954,7 +980,7 @@ func (o *EquipmentSwitchCard) GetPortChannelsOk() ([]EtherPortChannelRelationshi
 
 // HasPortChannels returns a boolean if a field has been set.
 func (o *EquipmentSwitchCard) HasPortChannels() bool {
-	if o != nil && o.PortChannels != nil {
+	if o != nil && IsNil(o.PortChannels) {
 		return true
 	}
 
@@ -979,7 +1005,7 @@ func (o *EquipmentSwitchCard) GetPortGroups() []PortGroupRelationship {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *EquipmentSwitchCard) GetPortGroupsOk() ([]PortGroupRelationship, bool) {
-	if o == nil || o.PortGroups == nil {
+	if o == nil || IsNil(o.PortGroups) {
 		return nil, false
 	}
 	return o.PortGroups, true
@@ -987,7 +1013,7 @@ func (o *EquipmentSwitchCard) GetPortGroupsOk() ([]PortGroupRelationship, bool) 
 
 // HasPortGroups returns a boolean if a field has been set.
 func (o *EquipmentSwitchCard) HasPortGroups() bool {
-	if o != nil && o.PortGroups != nil {
+	if o != nil && IsNil(o.PortGroups) {
 		return true
 	}
 
@@ -999,112 +1025,127 @@ func (o *EquipmentSwitchCard) SetPortGroups(v []PortGroupRelationship) {
 	o.PortGroups = v
 }
 
-// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise.
+// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *EquipmentSwitchCard) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil || IsNil(o.RegisteredDevice.Get()) {
 		var ret AssetDeviceRegistrationRelationship
 		return ret
 	}
-	return *o.RegisteredDevice
+	return *o.RegisteredDevice.Get()
 }
 
 // GetRegisteredDeviceOk returns a tuple with the RegisteredDevice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *EquipmentSwitchCard) GetRegisteredDeviceOk() (*AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.RegisteredDevice, true
+	return o.RegisteredDevice.Get(), o.RegisteredDevice.IsSet()
 }
 
 // HasRegisteredDevice returns a boolean if a field has been set.
 func (o *EquipmentSwitchCard) HasRegisteredDevice() bool {
-	if o != nil && o.RegisteredDevice != nil {
+	if o != nil && o.RegisteredDevice.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRegisteredDevice gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
+// SetRegisteredDevice gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
 func (o *EquipmentSwitchCard) SetRegisteredDevice(v AssetDeviceRegistrationRelationship) {
-	o.RegisteredDevice = &v
+	o.RegisteredDevice.Set(&v)
+}
+
+// SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+func (o *EquipmentSwitchCard) SetRegisteredDeviceNil() {
+	o.RegisteredDevice.Set(nil)
+}
+
+// UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
+func (o *EquipmentSwitchCard) UnsetRegisteredDevice() {
+	o.RegisteredDevice.Unset()
 }
 
 func (o EquipmentSwitchCard) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o EquipmentSwitchCard) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedEquipmentBase, errEquipmentBase := json.Marshal(o.EquipmentBase)
 	if errEquipmentBase != nil {
-		return []byte{}, errEquipmentBase
+		return map[string]interface{}{}, errEquipmentBase
 	}
 	errEquipmentBase = json.Unmarshal([]byte(serializedEquipmentBase), &toSerialize)
 	if errEquipmentBase != nil {
-		return []byte{}, errEquipmentBase
+		return map[string]interface{}{}, errEquipmentBase
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.BaseMac != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.BaseMac) {
 		toSerialize["BaseMac"] = o.BaseMac
 	}
-	if o.Description != nil {
+	if !IsNil(o.Description) {
 		toSerialize["Description"] = o.Description
 	}
-	if o.EndMac != nil {
+	if !IsNil(o.EndMac) {
 		toSerialize["EndMac"] = o.EndMac
 	}
-	if o.EthernetSwitchingMode != nil {
+	if !IsNil(o.EthernetSwitchingMode) {
 		toSerialize["EthernetSwitchingMode"] = o.EthernetSwitchingMode
 	}
-	if o.FcSwitchingMode != nil {
+	if !IsNil(o.FcSwitchingMode) {
 		toSerialize["FcSwitchingMode"] = o.FcSwitchingMode
 	}
-	if o.HwVersion != nil {
+	if !IsNil(o.HwVersion) {
 		toSerialize["HwVersion"] = o.HwVersion
 	}
-	if o.Name != nil {
+	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
 	}
-	if o.NumPorts != nil {
+	if !IsNil(o.NumPorts) {
 		toSerialize["NumPorts"] = o.NumPorts
 	}
-	if o.OutOfBandIpAddress != nil {
+	if !IsNil(o.OutOfBandIpAddress) {
 		toSerialize["OutOfBandIpAddress"] = o.OutOfBandIpAddress
 	}
-	if o.OutOfBandIpGateway != nil {
+	if !IsNil(o.OutOfBandIpGateway) {
 		toSerialize["OutOfBandIpGateway"] = o.OutOfBandIpGateway
 	}
-	if o.OutOfBandIpMask != nil {
+	if !IsNil(o.OutOfBandIpMask) {
 		toSerialize["OutOfBandIpMask"] = o.OutOfBandIpMask
 	}
-	if o.OutOfBandMac != nil {
+	if !IsNil(o.OutOfBandMac) {
 		toSerialize["OutOfBandMac"] = o.OutOfBandMac
 	}
-	if o.PartNumber != nil {
+	if !IsNil(o.PartNumber) {
 		toSerialize["PartNumber"] = o.PartNumber
 	}
-	if o.PowerState != nil {
+	if !IsNil(o.PowerState) {
 		toSerialize["PowerState"] = o.PowerState
 	}
-	if o.SlotId != nil {
+	if !IsNil(o.SlotId) {
 		toSerialize["SlotId"] = o.SlotId
 	}
-	if o.State != nil {
+	if !IsNil(o.State) {
 		toSerialize["State"] = o.State
 	}
-	if o.Status != nil {
+	if !IsNil(o.Status) {
 		toSerialize["Status"] = o.Status
 	}
-	if o.SwitchId != nil {
+	if !IsNil(o.SwitchId) {
 		toSerialize["SwitchId"] = o.SwitchId
 	}
-	if o.Thermal != nil {
+	if !IsNil(o.Thermal) {
 		toSerialize["Thermal"] = o.Thermal
 	}
-	if o.Type != nil {
+	if !IsNil(o.Type) {
 		toSerialize["Type"] = o.Type
 	}
 	if o.FcPortChannels != nil {
@@ -1113,11 +1154,11 @@ func (o EquipmentSwitchCard) MarshalJSON() ([]byte, error) {
 	if o.FcPorts != nil {
 		toSerialize["FcPorts"] = o.FcPorts
 	}
-	if o.InventoryDeviceInfo != nil {
-		toSerialize["InventoryDeviceInfo"] = o.InventoryDeviceInfo
+	if o.InventoryDeviceInfo.IsSet() {
+		toSerialize["InventoryDeviceInfo"] = o.InventoryDeviceInfo.Get()
 	}
-	if o.NetworkElement != nil {
-		toSerialize["NetworkElement"] = o.NetworkElement
+	if o.NetworkElement.IsSet() {
+		toSerialize["NetworkElement"] = o.NetworkElement.Get()
 	}
 	if o.PortChannels != nil {
 		toSerialize["PortChannels"] = o.PortChannels
@@ -1125,18 +1166,40 @@ func (o EquipmentSwitchCard) MarshalJSON() ([]byte, error) {
 	if o.PortGroups != nil {
 		toSerialize["PortGroups"] = o.PortGroups
 	}
-	if o.RegisteredDevice != nil {
-		toSerialize["RegisteredDevice"] = o.RegisteredDevice
+	if o.RegisteredDevice.IsSet() {
+		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *EquipmentSwitchCard) UnmarshalJSON(bytes []byte) (err error) {
+func (o *EquipmentSwitchCard) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type EquipmentSwitchCardWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -1185,19 +1248,19 @@ func (o *EquipmentSwitchCard) UnmarshalJSON(bytes []byte) (err error) {
 		// An array of relationships to fcPortChannel resources.
 		FcPortChannels []FcPortChannelRelationship `json:"FcPortChannels,omitempty"`
 		// An array of relationships to fcPhysicalPort resources.
-		FcPorts             []FcPhysicalPortRelationship     `json:"FcPorts,omitempty"`
-		InventoryDeviceInfo *InventoryDeviceInfoRelationship `json:"InventoryDeviceInfo,omitempty"`
-		NetworkElement      *NetworkElementRelationship      `json:"NetworkElement,omitempty"`
+		FcPorts             []FcPhysicalPortRelationship            `json:"FcPorts,omitempty"`
+		InventoryDeviceInfo NullableInventoryDeviceInfoRelationship `json:"InventoryDeviceInfo,omitempty"`
+		NetworkElement      NullableNetworkElementRelationship      `json:"NetworkElement,omitempty"`
 		// An array of relationships to etherPortChannel resources.
 		PortChannels []EtherPortChannelRelationship `json:"PortChannels,omitempty"`
 		// An array of relationships to portGroup resources.
-		PortGroups       []PortGroupRelationship              `json:"PortGroups,omitempty"`
-		RegisteredDevice *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+		PortGroups       []PortGroupRelationship                     `json:"PortGroups,omitempty"`
+		RegisteredDevice NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	}
 
 	varEquipmentSwitchCardWithoutEmbeddedStruct := EquipmentSwitchCardWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varEquipmentSwitchCardWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varEquipmentSwitchCardWithoutEmbeddedStruct)
 	if err == nil {
 		varEquipmentSwitchCard := _EquipmentSwitchCard{}
 		varEquipmentSwitchCard.ClassId = varEquipmentSwitchCardWithoutEmbeddedStruct.ClassId
@@ -1236,7 +1299,7 @@ func (o *EquipmentSwitchCard) UnmarshalJSON(bytes []byte) (err error) {
 
 	varEquipmentSwitchCard := _EquipmentSwitchCard{}
 
-	err = json.Unmarshal(bytes, &varEquipmentSwitchCard)
+	err = json.Unmarshal(data, &varEquipmentSwitchCard)
 	if err == nil {
 		o.EquipmentBase = varEquipmentSwitchCard.EquipmentBase
 	} else {
@@ -1245,7 +1308,7 @@ func (o *EquipmentSwitchCard) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "BaseMac")

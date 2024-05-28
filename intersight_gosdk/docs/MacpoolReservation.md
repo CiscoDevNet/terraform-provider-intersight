@@ -8,11 +8,11 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "macpool.Reservation"]
 **Identity** | Pointer to **string** | MAC identity to be reserved. | [optional] 
 **MemberOf** | Pointer to [**[]MacpoolMemberOf**](MacpoolMemberOf.md) |  | [optional] 
-**BlockHead** | Pointer to [**MacpoolIdBlockRelationship**](MacpoolIdBlockRelationship.md) |  | [optional] 
-**Organization** | Pointer to [**OrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
-**Pool** | Pointer to [**MacpoolPoolRelationship**](MacpoolPoolRelationship.md) |  | [optional] 
-**PoolMember** | Pointer to [**MacpoolPoolMemberRelationship**](MacpoolPoolMemberRelationship.md) |  | [optional] 
-**Universe** | Pointer to [**MacpoolUniverseRelationship**](MacpoolUniverseRelationship.md) |  | [optional] 
+**BlockHead** | Pointer to [**NullableMacpoolIdBlockRelationship**](MacpoolIdBlockRelationship.md) |  | [optional] 
+**Organization** | Pointer to [**NullableOrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
+**Pool** | Pointer to [**NullableMacpoolPoolRelationship**](MacpoolPoolRelationship.md) |  | [optional] 
+**PoolMember** | Pointer to [**NullableMacpoolPoolMemberRelationship**](MacpoolPoolMemberRelationship.md) |  | [optional] 
+**Universe** | Pointer to [**NullableMacpoolUniverseRelationship**](MacpoolUniverseRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -158,6 +158,16 @@ SetBlockHead sets BlockHead field to given value.
 
 HasBlockHead returns a boolean if a field has been set.
 
+### SetBlockHeadNil
+
+`func (o *MacpoolReservation) SetBlockHeadNil(b bool)`
+
+ SetBlockHeadNil sets the value for BlockHead to be an explicit nil
+
+### UnsetBlockHead
+`func (o *MacpoolReservation) UnsetBlockHead()`
+
+UnsetBlockHead ensures that no value is present for BlockHead, not even an explicit nil
 ### GetOrganization
 
 `func (o *MacpoolReservation) GetOrganization() OrganizationOrganizationRelationship`
@@ -183,6 +193,16 @@ SetOrganization sets Organization field to given value.
 
 HasOrganization returns a boolean if a field has been set.
 
+### SetOrganizationNil
+
+`func (o *MacpoolReservation) SetOrganizationNil(b bool)`
+
+ SetOrganizationNil sets the value for Organization to be an explicit nil
+
+### UnsetOrganization
+`func (o *MacpoolReservation) UnsetOrganization()`
+
+UnsetOrganization ensures that no value is present for Organization, not even an explicit nil
 ### GetPool
 
 `func (o *MacpoolReservation) GetPool() MacpoolPoolRelationship`
@@ -208,6 +228,16 @@ SetPool sets Pool field to given value.
 
 HasPool returns a boolean if a field has been set.
 
+### SetPoolNil
+
+`func (o *MacpoolReservation) SetPoolNil(b bool)`
+
+ SetPoolNil sets the value for Pool to be an explicit nil
+
+### UnsetPool
+`func (o *MacpoolReservation) UnsetPool()`
+
+UnsetPool ensures that no value is present for Pool, not even an explicit nil
 ### GetPoolMember
 
 `func (o *MacpoolReservation) GetPoolMember() MacpoolPoolMemberRelationship`
@@ -233,6 +263,16 @@ SetPoolMember sets PoolMember field to given value.
 
 HasPoolMember returns a boolean if a field has been set.
 
+### SetPoolMemberNil
+
+`func (o *MacpoolReservation) SetPoolMemberNil(b bool)`
+
+ SetPoolMemberNil sets the value for PoolMember to be an explicit nil
+
+### UnsetPoolMember
+`func (o *MacpoolReservation) UnsetPoolMember()`
+
+UnsetPoolMember ensures that no value is present for PoolMember, not even an explicit nil
 ### GetUniverse
 
 `func (o *MacpoolReservation) GetUniverse() MacpoolUniverseRelationship`
@@ -258,6 +298,16 @@ SetUniverse sets Universe field to given value.
 
 HasUniverse returns a boolean if a field has been set.
 
+### SetUniverseNil
+
+`func (o *MacpoolReservation) SetUniverseNil(b bool)`
+
+ SetUniverseNil sets the value for Universe to be an explicit nil
+
+### UnsetUniverse
+`func (o *MacpoolReservation) UnsetUniverse()`
+
+UnsetUniverse ensures that no value is present for Universe, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

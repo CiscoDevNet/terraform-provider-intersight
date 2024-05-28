@@ -7,9 +7,9 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "recommendation.ClusterExpansion"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "recommendation.ClusterExpansion"]
 **ClusterName** | Pointer to **string** | Name of the cluster for which the expansion recommendation is provided. | [optional] [readonly] 
-**HardwareExpansionRequest** | Pointer to [**RecommendationHardwareExpansionRequestRelationship**](RecommendationHardwareExpansionRequestRelationship.md) |  | [optional] 
+**HardwareExpansionRequest** | Pointer to [**NullableRecommendationHardwareExpansionRequestRelationship**](RecommendationHardwareExpansionRequestRelationship.md) |  | [optional] 
 **PhysicalItem** | Pointer to [**[]RecommendationPhysicalItemRelationship**](RecommendationPhysicalItemRelationship.md) | An array of relationships to recommendationPhysicalItem resources. | [optional] [readonly] 
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 **SoftwareItem** | Pointer to [**[]RecommendationSoftwareItemRelationship**](RecommendationSoftwareItemRelationship.md) | An array of relationships to recommendationSoftwareItem resources. | [optional] [readonly] 
 
 ## Methods
@@ -121,6 +121,16 @@ SetHardwareExpansionRequest sets HardwareExpansionRequest field to given value.
 
 HasHardwareExpansionRequest returns a boolean if a field has been set.
 
+### SetHardwareExpansionRequestNil
+
+`func (o *RecommendationClusterExpansion) SetHardwareExpansionRequestNil(b bool)`
+
+ SetHardwareExpansionRequestNil sets the value for HardwareExpansionRequest to be an explicit nil
+
+### UnsetHardwareExpansionRequest
+`func (o *RecommendationClusterExpansion) UnsetHardwareExpansionRequest()`
+
+UnsetHardwareExpansionRequest ensures that no value is present for HardwareExpansionRequest, not even an explicit nil
 ### GetPhysicalItem
 
 `func (o *RecommendationClusterExpansion) GetPhysicalItem() []RecommendationPhysicalItemRelationship`
@@ -181,6 +191,16 @@ SetRegisteredDevice sets RegisteredDevice field to given value.
 
 HasRegisteredDevice returns a boolean if a field has been set.
 
+### SetRegisteredDeviceNil
+
+`func (o *RecommendationClusterExpansion) SetRegisteredDeviceNil(b bool)`
+
+ SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+
+### UnsetRegisteredDevice
+`func (o *RecommendationClusterExpansion) UnsetRegisteredDevice()`
+
+UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
 ### GetSoftwareItem
 
 `func (o *RecommendationClusterExpansion) GetSoftwareItem() []RecommendationSoftwareItemRelationship`

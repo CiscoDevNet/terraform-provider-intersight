@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the PortMacBinding type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &PortMacBinding{}
 
 // PortMacBinding Establishes relationship between the ports and connected end points based on LLDP TLVs.
 type PortMacBinding struct {
@@ -57,9 +61,9 @@ type PortMacBinding struct {
 	// Slot ID of the local Switch slot Interface.
 	SlotId *int64 `json:"SlotId,omitempty"`
 	// Switch Identifier that is local to a cluster.
-	SwitchId             *int64                               `json:"SwitchId,omitempty"`
-	NetworkElement       *NetworkElementRelationship          `json:"NetworkElement,omitempty"`
-	RegisteredDevice     *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+	SwitchId             *int64                                      `json:"SwitchId,omitempty"`
+	NetworkElement       NullableNetworkElementRelationship          `json:"NetworkElement,omitempty"`
+	RegisteredDevice     NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -138,7 +142,7 @@ func (o *PortMacBinding) SetObjectType(v string) {
 
 // GetAggregatePortId returns the AggregatePortId field value if set, zero value otherwise.
 func (o *PortMacBinding) GetAggregatePortId() int64 {
-	if o == nil || o.AggregatePortId == nil {
+	if o == nil || IsNil(o.AggregatePortId) {
 		var ret int64
 		return ret
 	}
@@ -148,7 +152,7 @@ func (o *PortMacBinding) GetAggregatePortId() int64 {
 // GetAggregatePortIdOk returns a tuple with the AggregatePortId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PortMacBinding) GetAggregatePortIdOk() (*int64, bool) {
-	if o == nil || o.AggregatePortId == nil {
+	if o == nil || IsNil(o.AggregatePortId) {
 		return nil, false
 	}
 	return o.AggregatePortId, true
@@ -156,7 +160,7 @@ func (o *PortMacBinding) GetAggregatePortIdOk() (*int64, bool) {
 
 // HasAggregatePortId returns a boolean if a field has been set.
 func (o *PortMacBinding) HasAggregatePortId() bool {
-	if o != nil && o.AggregatePortId != nil {
+	if o != nil && !IsNil(o.AggregatePortId) {
 		return true
 	}
 
@@ -170,7 +174,7 @@ func (o *PortMacBinding) SetAggregatePortId(v int64) {
 
 // GetChassisId returns the ChassisId field value if set, zero value otherwise.
 func (o *PortMacBinding) GetChassisId() int64 {
-	if o == nil || o.ChassisId == nil {
+	if o == nil || IsNil(o.ChassisId) {
 		var ret int64
 		return ret
 	}
@@ -180,7 +184,7 @@ func (o *PortMacBinding) GetChassisId() int64 {
 // GetChassisIdOk returns a tuple with the ChassisId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PortMacBinding) GetChassisIdOk() (*int64, bool) {
-	if o == nil || o.ChassisId == nil {
+	if o == nil || IsNil(o.ChassisId) {
 		return nil, false
 	}
 	return o.ChassisId, true
@@ -188,7 +192,7 @@ func (o *PortMacBinding) GetChassisIdOk() (*int64, bool) {
 
 // HasChassisId returns a boolean if a field has been set.
 func (o *PortMacBinding) HasChassisId() bool {
-	if o != nil && o.ChassisId != nil {
+	if o != nil && !IsNil(o.ChassisId) {
 		return true
 	}
 
@@ -202,7 +206,7 @@ func (o *PortMacBinding) SetChassisId(v int64) {
 
 // GetChassisModel returns the ChassisModel field value if set, zero value otherwise.
 func (o *PortMacBinding) GetChassisModel() string {
-	if o == nil || o.ChassisModel == nil {
+	if o == nil || IsNil(o.ChassisModel) {
 		var ret string
 		return ret
 	}
@@ -212,7 +216,7 @@ func (o *PortMacBinding) GetChassisModel() string {
 // GetChassisModelOk returns a tuple with the ChassisModel field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PortMacBinding) GetChassisModelOk() (*string, bool) {
-	if o == nil || o.ChassisModel == nil {
+	if o == nil || IsNil(o.ChassisModel) {
 		return nil, false
 	}
 	return o.ChassisModel, true
@@ -220,7 +224,7 @@ func (o *PortMacBinding) GetChassisModelOk() (*string, bool) {
 
 // HasChassisModel returns a boolean if a field has been set.
 func (o *PortMacBinding) HasChassisModel() bool {
-	if o != nil && o.ChassisModel != nil {
+	if o != nil && !IsNil(o.ChassisModel) {
 		return true
 	}
 
@@ -234,7 +238,7 @@ func (o *PortMacBinding) SetChassisModel(v string) {
 
 // GetChassisSerial returns the ChassisSerial field value if set, zero value otherwise.
 func (o *PortMacBinding) GetChassisSerial() string {
-	if o == nil || o.ChassisSerial == nil {
+	if o == nil || IsNil(o.ChassisSerial) {
 		var ret string
 		return ret
 	}
@@ -244,7 +248,7 @@ func (o *PortMacBinding) GetChassisSerial() string {
 // GetChassisSerialOk returns a tuple with the ChassisSerial field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PortMacBinding) GetChassisSerialOk() (*string, bool) {
-	if o == nil || o.ChassisSerial == nil {
+	if o == nil || IsNil(o.ChassisSerial) {
 		return nil, false
 	}
 	return o.ChassisSerial, true
@@ -252,7 +256,7 @@ func (o *PortMacBinding) GetChassisSerialOk() (*string, bool) {
 
 // HasChassisSerial returns a boolean if a field has been set.
 func (o *PortMacBinding) HasChassisSerial() bool {
-	if o != nil && o.ChassisSerial != nil {
+	if o != nil && !IsNil(o.ChassisSerial) {
 		return true
 	}
 
@@ -266,7 +270,7 @@ func (o *PortMacBinding) SetChassisSerial(v string) {
 
 // GetChassisVendor returns the ChassisVendor field value if set, zero value otherwise.
 func (o *PortMacBinding) GetChassisVendor() string {
-	if o == nil || o.ChassisVendor == nil {
+	if o == nil || IsNil(o.ChassisVendor) {
 		var ret string
 		return ret
 	}
@@ -276,7 +280,7 @@ func (o *PortMacBinding) GetChassisVendor() string {
 // GetChassisVendorOk returns a tuple with the ChassisVendor field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PortMacBinding) GetChassisVendorOk() (*string, bool) {
-	if o == nil || o.ChassisVendor == nil {
+	if o == nil || IsNil(o.ChassisVendor) {
 		return nil, false
 	}
 	return o.ChassisVendor, true
@@ -284,7 +288,7 @@ func (o *PortMacBinding) GetChassisVendorOk() (*string, bool) {
 
 // HasChassisVendor returns a boolean if a field has been set.
 func (o *PortMacBinding) HasChassisVendor() bool {
-	if o != nil && o.ChassisVendor != nil {
+	if o != nil && !IsNil(o.ChassisVendor) {
 		return true
 	}
 
@@ -298,7 +302,7 @@ func (o *PortMacBinding) SetChassisVendor(v string) {
 
 // GetDeviceMac returns the DeviceMac field value if set, zero value otherwise.
 func (o *PortMacBinding) GetDeviceMac() string {
-	if o == nil || o.DeviceMac == nil {
+	if o == nil || IsNil(o.DeviceMac) {
 		var ret string
 		return ret
 	}
@@ -308,7 +312,7 @@ func (o *PortMacBinding) GetDeviceMac() string {
 // GetDeviceMacOk returns a tuple with the DeviceMac field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PortMacBinding) GetDeviceMacOk() (*string, bool) {
-	if o == nil || o.DeviceMac == nil {
+	if o == nil || IsNil(o.DeviceMac) {
 		return nil, false
 	}
 	return o.DeviceMac, true
@@ -316,7 +320,7 @@ func (o *PortMacBinding) GetDeviceMacOk() (*string, bool) {
 
 // HasDeviceMac returns a boolean if a field has been set.
 func (o *PortMacBinding) HasDeviceMac() bool {
-	if o != nil && o.DeviceMac != nil {
+	if o != nil && !IsNil(o.DeviceMac) {
 		return true
 	}
 
@@ -330,7 +334,7 @@ func (o *PortMacBinding) SetDeviceMac(v string) {
 
 // GetModuleMode returns the ModuleMode field value if set, zero value otherwise.
 func (o *PortMacBinding) GetModuleMode() int64 {
-	if o == nil || o.ModuleMode == nil {
+	if o == nil || IsNil(o.ModuleMode) {
 		var ret int64
 		return ret
 	}
@@ -340,7 +344,7 @@ func (o *PortMacBinding) GetModuleMode() int64 {
 // GetModuleModeOk returns a tuple with the ModuleMode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PortMacBinding) GetModuleModeOk() (*int64, bool) {
-	if o == nil || o.ModuleMode == nil {
+	if o == nil || IsNil(o.ModuleMode) {
 		return nil, false
 	}
 	return o.ModuleMode, true
@@ -348,7 +352,7 @@ func (o *PortMacBinding) GetModuleModeOk() (*int64, bool) {
 
 // HasModuleMode returns a boolean if a field has been set.
 func (o *PortMacBinding) HasModuleMode() bool {
-	if o != nil && o.ModuleMode != nil {
+	if o != nil && !IsNil(o.ModuleMode) {
 		return true
 	}
 
@@ -362,7 +366,7 @@ func (o *PortMacBinding) SetModuleMode(v int64) {
 
 // GetModuleModel returns the ModuleModel field value if set, zero value otherwise.
 func (o *PortMacBinding) GetModuleModel() string {
-	if o == nil || o.ModuleModel == nil {
+	if o == nil || IsNil(o.ModuleModel) {
 		var ret string
 		return ret
 	}
@@ -372,7 +376,7 @@ func (o *PortMacBinding) GetModuleModel() string {
 // GetModuleModelOk returns a tuple with the ModuleModel field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PortMacBinding) GetModuleModelOk() (*string, bool) {
-	if o == nil || o.ModuleModel == nil {
+	if o == nil || IsNil(o.ModuleModel) {
 		return nil, false
 	}
 	return o.ModuleModel, true
@@ -380,7 +384,7 @@ func (o *PortMacBinding) GetModuleModelOk() (*string, bool) {
 
 // HasModuleModel returns a boolean if a field has been set.
 func (o *PortMacBinding) HasModuleModel() bool {
-	if o != nil && o.ModuleModel != nil {
+	if o != nil && !IsNil(o.ModuleModel) {
 		return true
 	}
 
@@ -394,7 +398,7 @@ func (o *PortMacBinding) SetModuleModel(v string) {
 
 // GetModulePortId returns the ModulePortId field value if set, zero value otherwise.
 func (o *PortMacBinding) GetModulePortId() int64 {
-	if o == nil || o.ModulePortId == nil {
+	if o == nil || IsNil(o.ModulePortId) {
 		var ret int64
 		return ret
 	}
@@ -404,7 +408,7 @@ func (o *PortMacBinding) GetModulePortId() int64 {
 // GetModulePortIdOk returns a tuple with the ModulePortId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PortMacBinding) GetModulePortIdOk() (*int64, bool) {
-	if o == nil || o.ModulePortId == nil {
+	if o == nil || IsNil(o.ModulePortId) {
 		return nil, false
 	}
 	return o.ModulePortId, true
@@ -412,7 +416,7 @@ func (o *PortMacBinding) GetModulePortIdOk() (*int64, bool) {
 
 // HasModulePortId returns a boolean if a field has been set.
 func (o *PortMacBinding) HasModulePortId() bool {
-	if o != nil && o.ModulePortId != nil {
+	if o != nil && !IsNil(o.ModulePortId) {
 		return true
 	}
 
@@ -426,7 +430,7 @@ func (o *PortMacBinding) SetModulePortId(v int64) {
 
 // GetModuleSerial returns the ModuleSerial field value if set, zero value otherwise.
 func (o *PortMacBinding) GetModuleSerial() string {
-	if o == nil || o.ModuleSerial == nil {
+	if o == nil || IsNil(o.ModuleSerial) {
 		var ret string
 		return ret
 	}
@@ -436,7 +440,7 @@ func (o *PortMacBinding) GetModuleSerial() string {
 // GetModuleSerialOk returns a tuple with the ModuleSerial field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PortMacBinding) GetModuleSerialOk() (*string, bool) {
-	if o == nil || o.ModuleSerial == nil {
+	if o == nil || IsNil(o.ModuleSerial) {
 		return nil, false
 	}
 	return o.ModuleSerial, true
@@ -444,7 +448,7 @@ func (o *PortMacBinding) GetModuleSerialOk() (*string, bool) {
 
 // HasModuleSerial returns a boolean if a field has been set.
 func (o *PortMacBinding) HasModuleSerial() bool {
-	if o != nil && o.ModuleSerial != nil {
+	if o != nil && !IsNil(o.ModuleSerial) {
 		return true
 	}
 
@@ -458,7 +462,7 @@ func (o *PortMacBinding) SetModuleSerial(v string) {
 
 // GetModuleSide returns the ModuleSide field value if set, zero value otherwise.
 func (o *PortMacBinding) GetModuleSide() int64 {
-	if o == nil || o.ModuleSide == nil {
+	if o == nil || IsNil(o.ModuleSide) {
 		var ret int64
 		return ret
 	}
@@ -468,7 +472,7 @@ func (o *PortMacBinding) GetModuleSide() int64 {
 // GetModuleSideOk returns a tuple with the ModuleSide field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PortMacBinding) GetModuleSideOk() (*int64, bool) {
-	if o == nil || o.ModuleSide == nil {
+	if o == nil || IsNil(o.ModuleSide) {
 		return nil, false
 	}
 	return o.ModuleSide, true
@@ -476,7 +480,7 @@ func (o *PortMacBinding) GetModuleSideOk() (*int64, bool) {
 
 // HasModuleSide returns a boolean if a field has been set.
 func (o *PortMacBinding) HasModuleSide() bool {
-	if o != nil && o.ModuleSide != nil {
+	if o != nil && !IsNil(o.ModuleSide) {
 		return true
 	}
 
@@ -490,7 +494,7 @@ func (o *PortMacBinding) SetModuleSide(v int64) {
 
 // GetModuleSlot returns the ModuleSlot field value if set, zero value otherwise.
 func (o *PortMacBinding) GetModuleSlot() int64 {
-	if o == nil || o.ModuleSlot == nil {
+	if o == nil || IsNil(o.ModuleSlot) {
 		var ret int64
 		return ret
 	}
@@ -500,7 +504,7 @@ func (o *PortMacBinding) GetModuleSlot() int64 {
 // GetModuleSlotOk returns a tuple with the ModuleSlot field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PortMacBinding) GetModuleSlotOk() (*int64, bool) {
-	if o == nil || o.ModuleSlot == nil {
+	if o == nil || IsNil(o.ModuleSlot) {
 		return nil, false
 	}
 	return o.ModuleSlot, true
@@ -508,7 +512,7 @@ func (o *PortMacBinding) GetModuleSlotOk() (*int64, bool) {
 
 // HasModuleSlot returns a boolean if a field has been set.
 func (o *PortMacBinding) HasModuleSlot() bool {
-	if o != nil && o.ModuleSlot != nil {
+	if o != nil && !IsNil(o.ModuleSlot) {
 		return true
 	}
 
@@ -522,7 +526,7 @@ func (o *PortMacBinding) SetModuleSlot(v int64) {
 
 // GetModuleVendor returns the ModuleVendor field value if set, zero value otherwise.
 func (o *PortMacBinding) GetModuleVendor() string {
-	if o == nil || o.ModuleVendor == nil {
+	if o == nil || IsNil(o.ModuleVendor) {
 		var ret string
 		return ret
 	}
@@ -532,7 +536,7 @@ func (o *PortMacBinding) GetModuleVendor() string {
 // GetModuleVendorOk returns a tuple with the ModuleVendor field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PortMacBinding) GetModuleVendorOk() (*string, bool) {
-	if o == nil || o.ModuleVendor == nil {
+	if o == nil || IsNil(o.ModuleVendor) {
 		return nil, false
 	}
 	return o.ModuleVendor, true
@@ -540,7 +544,7 @@ func (o *PortMacBinding) GetModuleVendorOk() (*string, bool) {
 
 // HasModuleVendor returns a boolean if a field has been set.
 func (o *PortMacBinding) HasModuleVendor() bool {
-	if o != nil && o.ModuleVendor != nil {
+	if o != nil && !IsNil(o.ModuleVendor) {
 		return true
 	}
 
@@ -554,7 +558,7 @@ func (o *PortMacBinding) SetModuleVendor(v string) {
 
 // GetPortId returns the PortId field value if set, zero value otherwise.
 func (o *PortMacBinding) GetPortId() int64 {
-	if o == nil || o.PortId == nil {
+	if o == nil || IsNil(o.PortId) {
 		var ret int64
 		return ret
 	}
@@ -564,7 +568,7 @@ func (o *PortMacBinding) GetPortId() int64 {
 // GetPortIdOk returns a tuple with the PortId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PortMacBinding) GetPortIdOk() (*int64, bool) {
-	if o == nil || o.PortId == nil {
+	if o == nil || IsNil(o.PortId) {
 		return nil, false
 	}
 	return o.PortId, true
@@ -572,7 +576,7 @@ func (o *PortMacBinding) GetPortIdOk() (*int64, bool) {
 
 // HasPortId returns a boolean if a field has been set.
 func (o *PortMacBinding) HasPortId() bool {
-	if o != nil && o.PortId != nil {
+	if o != nil && !IsNil(o.PortId) {
 		return true
 	}
 
@@ -586,7 +590,7 @@ func (o *PortMacBinding) SetPortId(v int64) {
 
 // GetPortMac returns the PortMac field value if set, zero value otherwise.
 func (o *PortMacBinding) GetPortMac() string {
-	if o == nil || o.PortMac == nil {
+	if o == nil || IsNil(o.PortMac) {
 		var ret string
 		return ret
 	}
@@ -596,7 +600,7 @@ func (o *PortMacBinding) GetPortMac() string {
 // GetPortMacOk returns a tuple with the PortMac field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PortMacBinding) GetPortMacOk() (*string, bool) {
-	if o == nil || o.PortMac == nil {
+	if o == nil || IsNil(o.PortMac) {
 		return nil, false
 	}
 	return o.PortMac, true
@@ -604,7 +608,7 @@ func (o *PortMacBinding) GetPortMacOk() (*string, bool) {
 
 // HasPortMac returns a boolean if a field has been set.
 func (o *PortMacBinding) HasPortMac() bool {
-	if o != nil && o.PortMac != nil {
+	if o != nil && !IsNil(o.PortMac) {
 		return true
 	}
 
@@ -618,7 +622,7 @@ func (o *PortMacBinding) SetPortMac(v string) {
 
 // GetSlotId returns the SlotId field value if set, zero value otherwise.
 func (o *PortMacBinding) GetSlotId() int64 {
-	if o == nil || o.SlotId == nil {
+	if o == nil || IsNil(o.SlotId) {
 		var ret int64
 		return ret
 	}
@@ -628,7 +632,7 @@ func (o *PortMacBinding) GetSlotId() int64 {
 // GetSlotIdOk returns a tuple with the SlotId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PortMacBinding) GetSlotIdOk() (*int64, bool) {
-	if o == nil || o.SlotId == nil {
+	if o == nil || IsNil(o.SlotId) {
 		return nil, false
 	}
 	return o.SlotId, true
@@ -636,7 +640,7 @@ func (o *PortMacBinding) GetSlotIdOk() (*int64, bool) {
 
 // HasSlotId returns a boolean if a field has been set.
 func (o *PortMacBinding) HasSlotId() bool {
-	if o != nil && o.SlotId != nil {
+	if o != nil && !IsNil(o.SlotId) {
 		return true
 	}
 
@@ -650,7 +654,7 @@ func (o *PortMacBinding) SetSlotId(v int64) {
 
 // GetSwitchId returns the SwitchId field value if set, zero value otherwise.
 func (o *PortMacBinding) GetSwitchId() int64 {
-	if o == nil || o.SwitchId == nil {
+	if o == nil || IsNil(o.SwitchId) {
 		var ret int64
 		return ret
 	}
@@ -660,7 +664,7 @@ func (o *PortMacBinding) GetSwitchId() int64 {
 // GetSwitchIdOk returns a tuple with the SwitchId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PortMacBinding) GetSwitchIdOk() (*int64, bool) {
-	if o == nil || o.SwitchId == nil {
+	if o == nil || IsNil(o.SwitchId) {
 		return nil, false
 	}
 	return o.SwitchId, true
@@ -668,7 +672,7 @@ func (o *PortMacBinding) GetSwitchIdOk() (*int64, bool) {
 
 // HasSwitchId returns a boolean if a field has been set.
 func (o *PortMacBinding) HasSwitchId() bool {
-	if o != nil && o.SwitchId != nil {
+	if o != nil && !IsNil(o.SwitchId) {
 		return true
 	}
 
@@ -680,152 +684,200 @@ func (o *PortMacBinding) SetSwitchId(v int64) {
 	o.SwitchId = &v
 }
 
-// GetNetworkElement returns the NetworkElement field value if set, zero value otherwise.
+// GetNetworkElement returns the NetworkElement field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *PortMacBinding) GetNetworkElement() NetworkElementRelationship {
-	if o == nil || o.NetworkElement == nil {
+	if o == nil || IsNil(o.NetworkElement.Get()) {
 		var ret NetworkElementRelationship
 		return ret
 	}
-	return *o.NetworkElement
+	return *o.NetworkElement.Get()
 }
 
 // GetNetworkElementOk returns a tuple with the NetworkElement field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *PortMacBinding) GetNetworkElementOk() (*NetworkElementRelationship, bool) {
-	if o == nil || o.NetworkElement == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.NetworkElement, true
+	return o.NetworkElement.Get(), o.NetworkElement.IsSet()
 }
 
 // HasNetworkElement returns a boolean if a field has been set.
 func (o *PortMacBinding) HasNetworkElement() bool {
-	if o != nil && o.NetworkElement != nil {
+	if o != nil && o.NetworkElement.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetNetworkElement gets a reference to the given NetworkElementRelationship and assigns it to the NetworkElement field.
+// SetNetworkElement gets a reference to the given NullableNetworkElementRelationship and assigns it to the NetworkElement field.
 func (o *PortMacBinding) SetNetworkElement(v NetworkElementRelationship) {
-	o.NetworkElement = &v
+	o.NetworkElement.Set(&v)
 }
 
-// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise.
+// SetNetworkElementNil sets the value for NetworkElement to be an explicit nil
+func (o *PortMacBinding) SetNetworkElementNil() {
+	o.NetworkElement.Set(nil)
+}
+
+// UnsetNetworkElement ensures that no value is present for NetworkElement, not even an explicit nil
+func (o *PortMacBinding) UnsetNetworkElement() {
+	o.NetworkElement.Unset()
+}
+
+// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *PortMacBinding) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil || IsNil(o.RegisteredDevice.Get()) {
 		var ret AssetDeviceRegistrationRelationship
 		return ret
 	}
-	return *o.RegisteredDevice
+	return *o.RegisteredDevice.Get()
 }
 
 // GetRegisteredDeviceOk returns a tuple with the RegisteredDevice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *PortMacBinding) GetRegisteredDeviceOk() (*AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.RegisteredDevice, true
+	return o.RegisteredDevice.Get(), o.RegisteredDevice.IsSet()
 }
 
 // HasRegisteredDevice returns a boolean if a field has been set.
 func (o *PortMacBinding) HasRegisteredDevice() bool {
-	if o != nil && o.RegisteredDevice != nil {
+	if o != nil && o.RegisteredDevice.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRegisteredDevice gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
+// SetRegisteredDevice gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
 func (o *PortMacBinding) SetRegisteredDevice(v AssetDeviceRegistrationRelationship) {
-	o.RegisteredDevice = &v
+	o.RegisteredDevice.Set(&v)
+}
+
+// SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+func (o *PortMacBinding) SetRegisteredDeviceNil() {
+	o.RegisteredDevice.Set(nil)
+}
+
+// UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
+func (o *PortMacBinding) UnsetRegisteredDevice() {
+	o.RegisteredDevice.Unset()
 }
 
 func (o PortMacBinding) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o PortMacBinding) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedInventoryBase, errInventoryBase := json.Marshal(o.InventoryBase)
 	if errInventoryBase != nil {
-		return []byte{}, errInventoryBase
+		return map[string]interface{}{}, errInventoryBase
 	}
 	errInventoryBase = json.Unmarshal([]byte(serializedInventoryBase), &toSerialize)
 	if errInventoryBase != nil {
-		return []byte{}, errInventoryBase
+		return map[string]interface{}{}, errInventoryBase
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.AggregatePortId != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.AggregatePortId) {
 		toSerialize["AggregatePortId"] = o.AggregatePortId
 	}
-	if o.ChassisId != nil {
+	if !IsNil(o.ChassisId) {
 		toSerialize["ChassisId"] = o.ChassisId
 	}
-	if o.ChassisModel != nil {
+	if !IsNil(o.ChassisModel) {
 		toSerialize["ChassisModel"] = o.ChassisModel
 	}
-	if o.ChassisSerial != nil {
+	if !IsNil(o.ChassisSerial) {
 		toSerialize["ChassisSerial"] = o.ChassisSerial
 	}
-	if o.ChassisVendor != nil {
+	if !IsNil(o.ChassisVendor) {
 		toSerialize["ChassisVendor"] = o.ChassisVendor
 	}
-	if o.DeviceMac != nil {
+	if !IsNil(o.DeviceMac) {
 		toSerialize["DeviceMac"] = o.DeviceMac
 	}
-	if o.ModuleMode != nil {
+	if !IsNil(o.ModuleMode) {
 		toSerialize["ModuleMode"] = o.ModuleMode
 	}
-	if o.ModuleModel != nil {
+	if !IsNil(o.ModuleModel) {
 		toSerialize["ModuleModel"] = o.ModuleModel
 	}
-	if o.ModulePortId != nil {
+	if !IsNil(o.ModulePortId) {
 		toSerialize["ModulePortId"] = o.ModulePortId
 	}
-	if o.ModuleSerial != nil {
+	if !IsNil(o.ModuleSerial) {
 		toSerialize["ModuleSerial"] = o.ModuleSerial
 	}
-	if o.ModuleSide != nil {
+	if !IsNil(o.ModuleSide) {
 		toSerialize["ModuleSide"] = o.ModuleSide
 	}
-	if o.ModuleSlot != nil {
+	if !IsNil(o.ModuleSlot) {
 		toSerialize["ModuleSlot"] = o.ModuleSlot
 	}
-	if o.ModuleVendor != nil {
+	if !IsNil(o.ModuleVendor) {
 		toSerialize["ModuleVendor"] = o.ModuleVendor
 	}
-	if o.PortId != nil {
+	if !IsNil(o.PortId) {
 		toSerialize["PortId"] = o.PortId
 	}
-	if o.PortMac != nil {
+	if !IsNil(o.PortMac) {
 		toSerialize["PortMac"] = o.PortMac
 	}
-	if o.SlotId != nil {
+	if !IsNil(o.SlotId) {
 		toSerialize["SlotId"] = o.SlotId
 	}
-	if o.SwitchId != nil {
+	if !IsNil(o.SwitchId) {
 		toSerialize["SwitchId"] = o.SwitchId
 	}
-	if o.NetworkElement != nil {
-		toSerialize["NetworkElement"] = o.NetworkElement
+	if o.NetworkElement.IsSet() {
+		toSerialize["NetworkElement"] = o.NetworkElement.Get()
 	}
-	if o.RegisteredDevice != nil {
-		toSerialize["RegisteredDevice"] = o.RegisteredDevice
+	if o.RegisteredDevice.IsSet() {
+		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *PortMacBinding) UnmarshalJSON(bytes []byte) (err error) {
+func (o *PortMacBinding) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type PortMacBindingWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -864,14 +916,14 @@ func (o *PortMacBinding) UnmarshalJSON(bytes []byte) (err error) {
 		// Slot ID of the local Switch slot Interface.
 		SlotId *int64 `json:"SlotId,omitempty"`
 		// Switch Identifier that is local to a cluster.
-		SwitchId         *int64                               `json:"SwitchId,omitempty"`
-		NetworkElement   *NetworkElementRelationship          `json:"NetworkElement,omitempty"`
-		RegisteredDevice *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+		SwitchId         *int64                                      `json:"SwitchId,omitempty"`
+		NetworkElement   NullableNetworkElementRelationship          `json:"NetworkElement,omitempty"`
+		RegisteredDevice NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	}
 
 	varPortMacBindingWithoutEmbeddedStruct := PortMacBindingWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varPortMacBindingWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varPortMacBindingWithoutEmbeddedStruct)
 	if err == nil {
 		varPortMacBinding := _PortMacBinding{}
 		varPortMacBinding.ClassId = varPortMacBindingWithoutEmbeddedStruct.ClassId
@@ -902,7 +954,7 @@ func (o *PortMacBinding) UnmarshalJSON(bytes []byte) (err error) {
 
 	varPortMacBinding := _PortMacBinding{}
 
-	err = json.Unmarshal(bytes, &varPortMacBinding)
+	err = json.Unmarshal(data, &varPortMacBinding)
 	if err == nil {
 		o.InventoryBase = varPortMacBinding.InventoryBase
 	} else {
@@ -911,7 +963,7 @@ func (o *PortMacBinding) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "AggregatePortId")

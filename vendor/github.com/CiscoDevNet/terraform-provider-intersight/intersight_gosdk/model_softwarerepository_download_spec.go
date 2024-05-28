@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the SoftwarerepositoryDownloadSpec type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &SoftwarerepositoryDownloadSpec{}
 
 // SoftwarerepositoryDownloadSpec The URL, certificate and other associated information required to download an image listed in an Intersight catalog.
 type SoftwarerepositoryDownloadSpec struct {
@@ -35,8 +39,8 @@ type SoftwarerepositoryDownloadSpec struct {
 	// The size (in bytes) of the firmware image.
 	Size *int64 `json:"Size,omitempty"`
 	// The URL of this file in file server. The endpoint uses this URL to download the file from the file server.
-	Url                  *string                             `json:"Url,omitempty"`
-	File                 *SoftwarerepositoryFileRelationship `json:"File,omitempty"`
+	Url                  *string                                    `json:"Url,omitempty"`
+	File                 NullableSoftwarerepositoryFileRelationship `json:"File,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -115,7 +119,7 @@ func (o *SoftwarerepositoryDownloadSpec) SetObjectType(v string) {
 
 // GetAuthToken returns the AuthToken field value if set, zero value otherwise.
 func (o *SoftwarerepositoryDownloadSpec) GetAuthToken() string {
-	if o == nil || o.AuthToken == nil {
+	if o == nil || IsNil(o.AuthToken) {
 		var ret string
 		return ret
 	}
@@ -125,7 +129,7 @@ func (o *SoftwarerepositoryDownloadSpec) GetAuthToken() string {
 // GetAuthTokenOk returns a tuple with the AuthToken field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SoftwarerepositoryDownloadSpec) GetAuthTokenOk() (*string, bool) {
-	if o == nil || o.AuthToken == nil {
+	if o == nil || IsNil(o.AuthToken) {
 		return nil, false
 	}
 	return o.AuthToken, true
@@ -133,7 +137,7 @@ func (o *SoftwarerepositoryDownloadSpec) GetAuthTokenOk() (*string, bool) {
 
 // HasAuthToken returns a boolean if a field has been set.
 func (o *SoftwarerepositoryDownloadSpec) HasAuthToken() bool {
-	if o != nil && o.AuthToken != nil {
+	if o != nil && !IsNil(o.AuthToken) {
 		return true
 	}
 
@@ -147,7 +151,7 @@ func (o *SoftwarerepositoryDownloadSpec) SetAuthToken(v string) {
 
 // GetCertificate returns the Certificate field value if set, zero value otherwise.
 func (o *SoftwarerepositoryDownloadSpec) GetCertificate() string {
-	if o == nil || o.Certificate == nil {
+	if o == nil || IsNil(o.Certificate) {
 		var ret string
 		return ret
 	}
@@ -157,7 +161,7 @@ func (o *SoftwarerepositoryDownloadSpec) GetCertificate() string {
 // GetCertificateOk returns a tuple with the Certificate field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SoftwarerepositoryDownloadSpec) GetCertificateOk() (*string, bool) {
-	if o == nil || o.Certificate == nil {
+	if o == nil || IsNil(o.Certificate) {
 		return nil, false
 	}
 	return o.Certificate, true
@@ -165,7 +169,7 @@ func (o *SoftwarerepositoryDownloadSpec) GetCertificateOk() (*string, bool) {
 
 // HasCertificate returns a boolean if a field has been set.
 func (o *SoftwarerepositoryDownloadSpec) HasCertificate() bool {
-	if o != nil && o.Certificate != nil {
+	if o != nil && !IsNil(o.Certificate) {
 		return true
 	}
 
@@ -179,7 +183,7 @@ func (o *SoftwarerepositoryDownloadSpec) SetCertificate(v string) {
 
 // GetFilename returns the Filename field value if set, zero value otherwise.
 func (o *SoftwarerepositoryDownloadSpec) GetFilename() string {
-	if o == nil || o.Filename == nil {
+	if o == nil || IsNil(o.Filename) {
 		var ret string
 		return ret
 	}
@@ -189,7 +193,7 @@ func (o *SoftwarerepositoryDownloadSpec) GetFilename() string {
 // GetFilenameOk returns a tuple with the Filename field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SoftwarerepositoryDownloadSpec) GetFilenameOk() (*string, bool) {
-	if o == nil || o.Filename == nil {
+	if o == nil || IsNil(o.Filename) {
 		return nil, false
 	}
 	return o.Filename, true
@@ -197,7 +201,7 @@ func (o *SoftwarerepositoryDownloadSpec) GetFilenameOk() (*string, bool) {
 
 // HasFilename returns a boolean if a field has been set.
 func (o *SoftwarerepositoryDownloadSpec) HasFilename() bool {
-	if o != nil && o.Filename != nil {
+	if o != nil && !IsNil(o.Filename) {
 		return true
 	}
 
@@ -211,7 +215,7 @@ func (o *SoftwarerepositoryDownloadSpec) SetFilename(v string) {
 
 // GetMd5sum returns the Md5sum field value if set, zero value otherwise.
 func (o *SoftwarerepositoryDownloadSpec) GetMd5sum() string {
-	if o == nil || o.Md5sum == nil {
+	if o == nil || IsNil(o.Md5sum) {
 		var ret string
 		return ret
 	}
@@ -221,7 +225,7 @@ func (o *SoftwarerepositoryDownloadSpec) GetMd5sum() string {
 // GetMd5sumOk returns a tuple with the Md5sum field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SoftwarerepositoryDownloadSpec) GetMd5sumOk() (*string, bool) {
-	if o == nil || o.Md5sum == nil {
+	if o == nil || IsNil(o.Md5sum) {
 		return nil, false
 	}
 	return o.Md5sum, true
@@ -229,7 +233,7 @@ func (o *SoftwarerepositoryDownloadSpec) GetMd5sumOk() (*string, bool) {
 
 // HasMd5sum returns a boolean if a field has been set.
 func (o *SoftwarerepositoryDownloadSpec) HasMd5sum() bool {
-	if o != nil && o.Md5sum != nil {
+	if o != nil && !IsNil(o.Md5sum) {
 		return true
 	}
 
@@ -243,7 +247,7 @@ func (o *SoftwarerepositoryDownloadSpec) SetMd5sum(v string) {
 
 // GetSize returns the Size field value if set, zero value otherwise.
 func (o *SoftwarerepositoryDownloadSpec) GetSize() int64 {
-	if o == nil || o.Size == nil {
+	if o == nil || IsNil(o.Size) {
 		var ret int64
 		return ret
 	}
@@ -253,7 +257,7 @@ func (o *SoftwarerepositoryDownloadSpec) GetSize() int64 {
 // GetSizeOk returns a tuple with the Size field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SoftwarerepositoryDownloadSpec) GetSizeOk() (*int64, bool) {
-	if o == nil || o.Size == nil {
+	if o == nil || IsNil(o.Size) {
 		return nil, false
 	}
 	return o.Size, true
@@ -261,7 +265,7 @@ func (o *SoftwarerepositoryDownloadSpec) GetSizeOk() (*int64, bool) {
 
 // HasSize returns a boolean if a field has been set.
 func (o *SoftwarerepositoryDownloadSpec) HasSize() bool {
-	if o != nil && o.Size != nil {
+	if o != nil && !IsNil(o.Size) {
 		return true
 	}
 
@@ -275,7 +279,7 @@ func (o *SoftwarerepositoryDownloadSpec) SetSize(v int64) {
 
 // GetUrl returns the Url field value if set, zero value otherwise.
 func (o *SoftwarerepositoryDownloadSpec) GetUrl() string {
-	if o == nil || o.Url == nil {
+	if o == nil || IsNil(o.Url) {
 		var ret string
 		return ret
 	}
@@ -285,7 +289,7 @@ func (o *SoftwarerepositoryDownloadSpec) GetUrl() string {
 // GetUrlOk returns a tuple with the Url field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SoftwarerepositoryDownloadSpec) GetUrlOk() (*string, bool) {
-	if o == nil || o.Url == nil {
+	if o == nil || IsNil(o.Url) {
 		return nil, false
 	}
 	return o.Url, true
@@ -293,7 +297,7 @@ func (o *SoftwarerepositoryDownloadSpec) GetUrlOk() (*string, bool) {
 
 // HasUrl returns a boolean if a field has been set.
 func (o *SoftwarerepositoryDownloadSpec) HasUrl() bool {
-	if o != nil && o.Url != nil {
+	if o != nil && !IsNil(o.Url) {
 		return true
 	}
 
@@ -305,84 +309,121 @@ func (o *SoftwarerepositoryDownloadSpec) SetUrl(v string) {
 	o.Url = &v
 }
 
-// GetFile returns the File field value if set, zero value otherwise.
+// GetFile returns the File field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *SoftwarerepositoryDownloadSpec) GetFile() SoftwarerepositoryFileRelationship {
-	if o == nil || o.File == nil {
+	if o == nil || IsNil(o.File.Get()) {
 		var ret SoftwarerepositoryFileRelationship
 		return ret
 	}
-	return *o.File
+	return *o.File.Get()
 }
 
 // GetFileOk returns a tuple with the File field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *SoftwarerepositoryDownloadSpec) GetFileOk() (*SoftwarerepositoryFileRelationship, bool) {
-	if o == nil || o.File == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.File, true
+	return o.File.Get(), o.File.IsSet()
 }
 
 // HasFile returns a boolean if a field has been set.
 func (o *SoftwarerepositoryDownloadSpec) HasFile() bool {
-	if o != nil && o.File != nil {
+	if o != nil && o.File.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetFile gets a reference to the given SoftwarerepositoryFileRelationship and assigns it to the File field.
+// SetFile gets a reference to the given NullableSoftwarerepositoryFileRelationship and assigns it to the File field.
 func (o *SoftwarerepositoryDownloadSpec) SetFile(v SoftwarerepositoryFileRelationship) {
-	o.File = &v
+	o.File.Set(&v)
+}
+
+// SetFileNil sets the value for File to be an explicit nil
+func (o *SoftwarerepositoryDownloadSpec) SetFileNil() {
+	o.File.Set(nil)
+}
+
+// UnsetFile ensures that no value is present for File, not even an explicit nil
+func (o *SoftwarerepositoryDownloadSpec) UnsetFile() {
+	o.File.Unset()
 }
 
 func (o SoftwarerepositoryDownloadSpec) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o SoftwarerepositoryDownloadSpec) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.AuthToken != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.AuthToken) {
 		toSerialize["AuthToken"] = o.AuthToken
 	}
-	if o.Certificate != nil {
+	if !IsNil(o.Certificate) {
 		toSerialize["Certificate"] = o.Certificate
 	}
-	if o.Filename != nil {
+	if !IsNil(o.Filename) {
 		toSerialize["Filename"] = o.Filename
 	}
-	if o.Md5sum != nil {
+	if !IsNil(o.Md5sum) {
 		toSerialize["Md5sum"] = o.Md5sum
 	}
-	if o.Size != nil {
+	if !IsNil(o.Size) {
 		toSerialize["Size"] = o.Size
 	}
-	if o.Url != nil {
+	if !IsNil(o.Url) {
 		toSerialize["Url"] = o.Url
 	}
-	if o.File != nil {
-		toSerialize["File"] = o.File
+	if o.File.IsSet() {
+		toSerialize["File"] = o.File.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *SoftwarerepositoryDownloadSpec) UnmarshalJSON(bytes []byte) (err error) {
+func (o *SoftwarerepositoryDownloadSpec) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type SoftwarerepositoryDownloadSpecWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -399,13 +440,13 @@ func (o *SoftwarerepositoryDownloadSpec) UnmarshalJSON(bytes []byte) (err error)
 		// The size (in bytes) of the firmware image.
 		Size *int64 `json:"Size,omitempty"`
 		// The URL of this file in file server. The endpoint uses this URL to download the file from the file server.
-		Url  *string                             `json:"Url,omitempty"`
-		File *SoftwarerepositoryFileRelationship `json:"File,omitempty"`
+		Url  *string                                    `json:"Url,omitempty"`
+		File NullableSoftwarerepositoryFileRelationship `json:"File,omitempty"`
 	}
 
 	varSoftwarerepositoryDownloadSpecWithoutEmbeddedStruct := SoftwarerepositoryDownloadSpecWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varSoftwarerepositoryDownloadSpecWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varSoftwarerepositoryDownloadSpecWithoutEmbeddedStruct)
 	if err == nil {
 		varSoftwarerepositoryDownloadSpec := _SoftwarerepositoryDownloadSpec{}
 		varSoftwarerepositoryDownloadSpec.ClassId = varSoftwarerepositoryDownloadSpecWithoutEmbeddedStruct.ClassId
@@ -424,7 +465,7 @@ func (o *SoftwarerepositoryDownloadSpec) UnmarshalJSON(bytes []byte) (err error)
 
 	varSoftwarerepositoryDownloadSpec := _SoftwarerepositoryDownloadSpec{}
 
-	err = json.Unmarshal(bytes, &varSoftwarerepositoryDownloadSpec)
+	err = json.Unmarshal(data, &varSoftwarerepositoryDownloadSpec)
 	if err == nil {
 		o.MoBaseMo = varSoftwarerepositoryDownloadSpec.MoBaseMo
 	} else {
@@ -433,7 +474,7 @@ func (o *SoftwarerepositoryDownloadSpec) UnmarshalJSON(bytes []byte) (err error)
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "AuthToken")

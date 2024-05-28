@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the StorageBaseProtectionGroup type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &StorageBaseProtectionGroup{}
 
 // StorageBaseProtectionGroup A protection group contains list of members that are protected together through snapshots with point-in-time consistency across the members. Members within the protection group have common data protection requirements and also the same snapshot, replication, and retention schedules.
 type StorageBaseProtectionGroup struct {
@@ -110,7 +114,7 @@ func (o *StorageBaseProtectionGroup) SetObjectType(v string) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *StorageBaseProtectionGroup) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -120,7 +124,7 @@ func (o *StorageBaseProtectionGroup) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageBaseProtectionGroup) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -128,7 +132,7 @@ func (o *StorageBaseProtectionGroup) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *StorageBaseProtectionGroup) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -142,7 +146,7 @@ func (o *StorageBaseProtectionGroup) SetName(v string) {
 
 // GetPrefix returns the Prefix field value if set, zero value otherwise.
 func (o *StorageBaseProtectionGroup) GetPrefix() string {
-	if o == nil || o.Prefix == nil {
+	if o == nil || IsNil(o.Prefix) {
 		var ret string
 		return ret
 	}
@@ -152,7 +156,7 @@ func (o *StorageBaseProtectionGroup) GetPrefix() string {
 // GetPrefixOk returns a tuple with the Prefix field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageBaseProtectionGroup) GetPrefixOk() (*string, bool) {
-	if o == nil || o.Prefix == nil {
+	if o == nil || IsNil(o.Prefix) {
 		return nil, false
 	}
 	return o.Prefix, true
@@ -160,7 +164,7 @@ func (o *StorageBaseProtectionGroup) GetPrefixOk() (*string, bool) {
 
 // HasPrefix returns a boolean if a field has been set.
 func (o *StorageBaseProtectionGroup) HasPrefix() bool {
-	if o != nil && o.Prefix != nil {
+	if o != nil && !IsNil(o.Prefix) {
 		return true
 	}
 
@@ -174,7 +178,7 @@ func (o *StorageBaseProtectionGroup) SetPrefix(v string) {
 
 // GetReplicationEnabled returns the ReplicationEnabled field value if set, zero value otherwise.
 func (o *StorageBaseProtectionGroup) GetReplicationEnabled() bool {
-	if o == nil || o.ReplicationEnabled == nil {
+	if o == nil || IsNil(o.ReplicationEnabled) {
 		var ret bool
 		return ret
 	}
@@ -184,7 +188,7 @@ func (o *StorageBaseProtectionGroup) GetReplicationEnabled() bool {
 // GetReplicationEnabledOk returns a tuple with the ReplicationEnabled field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageBaseProtectionGroup) GetReplicationEnabledOk() (*bool, bool) {
-	if o == nil || o.ReplicationEnabled == nil {
+	if o == nil || IsNil(o.ReplicationEnabled) {
 		return nil, false
 	}
 	return o.ReplicationEnabled, true
@@ -192,7 +196,7 @@ func (o *StorageBaseProtectionGroup) GetReplicationEnabledOk() (*bool, bool) {
 
 // HasReplicationEnabled returns a boolean if a field has been set.
 func (o *StorageBaseProtectionGroup) HasReplicationEnabled() bool {
-	if o != nil && o.ReplicationEnabled != nil {
+	if o != nil && !IsNil(o.ReplicationEnabled) {
 		return true
 	}
 
@@ -206,7 +210,7 @@ func (o *StorageBaseProtectionGroup) SetReplicationEnabled(v bool) {
 
 // GetSnapshotEnabled returns the SnapshotEnabled field value if set, zero value otherwise.
 func (o *StorageBaseProtectionGroup) GetSnapshotEnabled() bool {
-	if o == nil || o.SnapshotEnabled == nil {
+	if o == nil || IsNil(o.SnapshotEnabled) {
 		var ret bool
 		return ret
 	}
@@ -216,7 +220,7 @@ func (o *StorageBaseProtectionGroup) GetSnapshotEnabled() bool {
 // GetSnapshotEnabledOk returns a tuple with the SnapshotEnabled field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageBaseProtectionGroup) GetSnapshotEnabledOk() (*bool, bool) {
-	if o == nil || o.SnapshotEnabled == nil {
+	if o == nil || IsNil(o.SnapshotEnabled) {
 		return nil, false
 	}
 	return o.SnapshotEnabled, true
@@ -224,7 +228,7 @@ func (o *StorageBaseProtectionGroup) GetSnapshotEnabledOk() (*bool, bool) {
 
 // HasSnapshotEnabled returns a boolean if a field has been set.
 func (o *StorageBaseProtectionGroup) HasSnapshotEnabled() bool {
-	if o != nil && o.SnapshotEnabled != nil {
+	if o != nil && !IsNil(o.SnapshotEnabled) {
 		return true
 	}
 
@@ -237,31 +241,35 @@ func (o *StorageBaseProtectionGroup) SetSnapshotEnabled(v bool) {
 }
 
 func (o StorageBaseProtectionGroup) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o StorageBaseProtectionGroup) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Name != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
 	}
-	if o.Prefix != nil {
+	if !IsNil(o.Prefix) {
 		toSerialize["Prefix"] = o.Prefix
 	}
-	if o.ReplicationEnabled != nil {
+	if !IsNil(o.ReplicationEnabled) {
 		toSerialize["ReplicationEnabled"] = o.ReplicationEnabled
 	}
-	if o.SnapshotEnabled != nil {
+	if !IsNil(o.SnapshotEnabled) {
 		toSerialize["SnapshotEnabled"] = o.SnapshotEnabled
 	}
 
@@ -269,10 +277,32 @@ func (o StorageBaseProtectionGroup) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *StorageBaseProtectionGroup) UnmarshalJSON(bytes []byte) (err error) {
+func (o *StorageBaseProtectionGroup) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type StorageBaseProtectionGroupWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type.
 		ClassId string `json:"ClassId"`
@@ -290,7 +320,7 @@ func (o *StorageBaseProtectionGroup) UnmarshalJSON(bytes []byte) (err error) {
 
 	varStorageBaseProtectionGroupWithoutEmbeddedStruct := StorageBaseProtectionGroupWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varStorageBaseProtectionGroupWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varStorageBaseProtectionGroupWithoutEmbeddedStruct)
 	if err == nil {
 		varStorageBaseProtectionGroup := _StorageBaseProtectionGroup{}
 		varStorageBaseProtectionGroup.ClassId = varStorageBaseProtectionGroupWithoutEmbeddedStruct.ClassId
@@ -306,7 +336,7 @@ func (o *StorageBaseProtectionGroup) UnmarshalJSON(bytes []byte) (err error) {
 
 	varStorageBaseProtectionGroup := _StorageBaseProtectionGroup{}
 
-	err = json.Unmarshal(bytes, &varStorageBaseProtectionGroup)
+	err = json.Unmarshal(data, &varStorageBaseProtectionGroup)
 	if err == nil {
 		o.MoBaseMo = varStorageBaseProtectionGroup.MoBaseMo
 	} else {
@@ -315,7 +345,7 @@ func (o *StorageBaseProtectionGroup) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Name")

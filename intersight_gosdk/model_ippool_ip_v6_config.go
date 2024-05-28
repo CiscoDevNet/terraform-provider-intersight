@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the IppoolIpV6Config type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &IppoolIpV6Config{}
 
 // IppoolIpV6Config Network interface configuration data for IPv6 interfaces. Netmask, Gateway and DNS settings.
 type IppoolIpV6Config struct {
@@ -110,7 +114,7 @@ func (o *IppoolIpV6Config) SetObjectType(v string) {
 
 // GetGateway returns the Gateway field value if set, zero value otherwise.
 func (o *IppoolIpV6Config) GetGateway() string {
-	if o == nil || o.Gateway == nil {
+	if o == nil || IsNil(o.Gateway) {
 		var ret string
 		return ret
 	}
@@ -120,7 +124,7 @@ func (o *IppoolIpV6Config) GetGateway() string {
 // GetGatewayOk returns a tuple with the Gateway field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IppoolIpV6Config) GetGatewayOk() (*string, bool) {
-	if o == nil || o.Gateway == nil {
+	if o == nil || IsNil(o.Gateway) {
 		return nil, false
 	}
 	return o.Gateway, true
@@ -128,7 +132,7 @@ func (o *IppoolIpV6Config) GetGatewayOk() (*string, bool) {
 
 // HasGateway returns a boolean if a field has been set.
 func (o *IppoolIpV6Config) HasGateway() bool {
-	if o != nil && o.Gateway != nil {
+	if o != nil && !IsNil(o.Gateway) {
 		return true
 	}
 
@@ -142,7 +146,7 @@ func (o *IppoolIpV6Config) SetGateway(v string) {
 
 // GetPrefix returns the Prefix field value if set, zero value otherwise.
 func (o *IppoolIpV6Config) GetPrefix() int64 {
-	if o == nil || o.Prefix == nil {
+	if o == nil || IsNil(o.Prefix) {
 		var ret int64
 		return ret
 	}
@@ -152,7 +156,7 @@ func (o *IppoolIpV6Config) GetPrefix() int64 {
 // GetPrefixOk returns a tuple with the Prefix field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IppoolIpV6Config) GetPrefixOk() (*int64, bool) {
-	if o == nil || o.Prefix == nil {
+	if o == nil || IsNil(o.Prefix) {
 		return nil, false
 	}
 	return o.Prefix, true
@@ -160,7 +164,7 @@ func (o *IppoolIpV6Config) GetPrefixOk() (*int64, bool) {
 
 // HasPrefix returns a boolean if a field has been set.
 func (o *IppoolIpV6Config) HasPrefix() bool {
-	if o != nil && o.Prefix != nil {
+	if o != nil && !IsNil(o.Prefix) {
 		return true
 	}
 
@@ -174,7 +178,7 @@ func (o *IppoolIpV6Config) SetPrefix(v int64) {
 
 // GetPrimaryDns returns the PrimaryDns field value if set, zero value otherwise.
 func (o *IppoolIpV6Config) GetPrimaryDns() string {
-	if o == nil || o.PrimaryDns == nil {
+	if o == nil || IsNil(o.PrimaryDns) {
 		var ret string
 		return ret
 	}
@@ -184,7 +188,7 @@ func (o *IppoolIpV6Config) GetPrimaryDns() string {
 // GetPrimaryDnsOk returns a tuple with the PrimaryDns field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IppoolIpV6Config) GetPrimaryDnsOk() (*string, bool) {
-	if o == nil || o.PrimaryDns == nil {
+	if o == nil || IsNil(o.PrimaryDns) {
 		return nil, false
 	}
 	return o.PrimaryDns, true
@@ -192,7 +196,7 @@ func (o *IppoolIpV6Config) GetPrimaryDnsOk() (*string, bool) {
 
 // HasPrimaryDns returns a boolean if a field has been set.
 func (o *IppoolIpV6Config) HasPrimaryDns() bool {
-	if o != nil && o.PrimaryDns != nil {
+	if o != nil && !IsNil(o.PrimaryDns) {
 		return true
 	}
 
@@ -206,7 +210,7 @@ func (o *IppoolIpV6Config) SetPrimaryDns(v string) {
 
 // GetSecondaryDns returns the SecondaryDns field value if set, zero value otherwise.
 func (o *IppoolIpV6Config) GetSecondaryDns() string {
-	if o == nil || o.SecondaryDns == nil {
+	if o == nil || IsNil(o.SecondaryDns) {
 		var ret string
 		return ret
 	}
@@ -216,7 +220,7 @@ func (o *IppoolIpV6Config) GetSecondaryDns() string {
 // GetSecondaryDnsOk returns a tuple with the SecondaryDns field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IppoolIpV6Config) GetSecondaryDnsOk() (*string, bool) {
-	if o == nil || o.SecondaryDns == nil {
+	if o == nil || IsNil(o.SecondaryDns) {
 		return nil, false
 	}
 	return o.SecondaryDns, true
@@ -224,7 +228,7 @@ func (o *IppoolIpV6Config) GetSecondaryDnsOk() (*string, bool) {
 
 // HasSecondaryDns returns a boolean if a field has been set.
 func (o *IppoolIpV6Config) HasSecondaryDns() bool {
-	if o != nil && o.SecondaryDns != nil {
+	if o != nil && !IsNil(o.SecondaryDns) {
 		return true
 	}
 
@@ -237,31 +241,35 @@ func (o *IppoolIpV6Config) SetSecondaryDns(v string) {
 }
 
 func (o IppoolIpV6Config) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o IppoolIpV6Config) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
 	errMoBaseComplexType = json.Unmarshal([]byte(serializedMoBaseComplexType), &toSerialize)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Gateway != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Gateway) {
 		toSerialize["Gateway"] = o.Gateway
 	}
-	if o.Prefix != nil {
+	if !IsNil(o.Prefix) {
 		toSerialize["Prefix"] = o.Prefix
 	}
-	if o.PrimaryDns != nil {
+	if !IsNil(o.PrimaryDns) {
 		toSerialize["PrimaryDns"] = o.PrimaryDns
 	}
-	if o.SecondaryDns != nil {
+	if !IsNil(o.SecondaryDns) {
 		toSerialize["SecondaryDns"] = o.SecondaryDns
 	}
 
@@ -269,10 +277,32 @@ func (o IppoolIpV6Config) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *IppoolIpV6Config) UnmarshalJSON(bytes []byte) (err error) {
+func (o *IppoolIpV6Config) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type IppoolIpV6ConfigWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -290,7 +320,7 @@ func (o *IppoolIpV6Config) UnmarshalJSON(bytes []byte) (err error) {
 
 	varIppoolIpV6ConfigWithoutEmbeddedStruct := IppoolIpV6ConfigWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varIppoolIpV6ConfigWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varIppoolIpV6ConfigWithoutEmbeddedStruct)
 	if err == nil {
 		varIppoolIpV6Config := _IppoolIpV6Config{}
 		varIppoolIpV6Config.ClassId = varIppoolIpV6ConfigWithoutEmbeddedStruct.ClassId
@@ -306,7 +336,7 @@ func (o *IppoolIpV6Config) UnmarshalJSON(bytes []byte) (err error) {
 
 	varIppoolIpV6Config := _IppoolIpV6Config{}
 
-	err = json.Unmarshal(bytes, &varIppoolIpV6Config)
+	err = json.Unmarshal(data, &varIppoolIpV6Config)
 	if err == nil {
 		o.MoBaseComplexType = varIppoolIpV6Config.MoBaseComplexType
 	} else {
@@ -315,7 +345,7 @@ func (o *IppoolIpV6Config) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Gateway")

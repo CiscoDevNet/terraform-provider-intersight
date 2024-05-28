@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the StorageBaseVolume type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &StorageBaseVolume{}
 
 // StorageBaseVolume Generic storage volume object. It is a provisioned storage identity which can be mapped to host to enable host access.
 type StorageBaseVolume struct {
@@ -107,7 +111,7 @@ func (o *StorageBaseVolume) SetObjectType(v string) {
 
 // GetDescription returns the Description field value if set, zero value otherwise.
 func (o *StorageBaseVolume) GetDescription() string {
-	if o == nil || o.Description == nil {
+	if o == nil || IsNil(o.Description) {
 		var ret string
 		return ret
 	}
@@ -117,7 +121,7 @@ func (o *StorageBaseVolume) GetDescription() string {
 // GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageBaseVolume) GetDescriptionOk() (*string, bool) {
-	if o == nil || o.Description == nil {
+	if o == nil || IsNil(o.Description) {
 		return nil, false
 	}
 	return o.Description, true
@@ -125,7 +129,7 @@ func (o *StorageBaseVolume) GetDescriptionOk() (*string, bool) {
 
 // HasDescription returns a boolean if a field has been set.
 func (o *StorageBaseVolume) HasDescription() bool {
-	if o != nil && o.Description != nil {
+	if o != nil && !IsNil(o.Description) {
 		return true
 	}
 
@@ -139,7 +143,7 @@ func (o *StorageBaseVolume) SetDescription(v string) {
 
 // GetNaaId returns the NaaId field value if set, zero value otherwise.
 func (o *StorageBaseVolume) GetNaaId() string {
-	if o == nil || o.NaaId == nil {
+	if o == nil || IsNil(o.NaaId) {
 		var ret string
 		return ret
 	}
@@ -149,7 +153,7 @@ func (o *StorageBaseVolume) GetNaaId() string {
 // GetNaaIdOk returns a tuple with the NaaId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageBaseVolume) GetNaaIdOk() (*string, bool) {
-	if o == nil || o.NaaId == nil {
+	if o == nil || IsNil(o.NaaId) {
 		return nil, false
 	}
 	return o.NaaId, true
@@ -157,7 +161,7 @@ func (o *StorageBaseVolume) GetNaaIdOk() (*string, bool) {
 
 // HasNaaId returns a boolean if a field has been set.
 func (o *StorageBaseVolume) HasNaaId() bool {
-	if o != nil && o.NaaId != nil {
+	if o != nil && !IsNil(o.NaaId) {
 		return true
 	}
 
@@ -171,7 +175,7 @@ func (o *StorageBaseVolume) SetNaaId(v string) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *StorageBaseVolume) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -181,7 +185,7 @@ func (o *StorageBaseVolume) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageBaseVolume) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -189,7 +193,7 @@ func (o *StorageBaseVolume) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *StorageBaseVolume) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -203,7 +207,7 @@ func (o *StorageBaseVolume) SetName(v string) {
 
 // GetSize returns the Size field value if set, zero value otherwise.
 func (o *StorageBaseVolume) GetSize() int64 {
-	if o == nil || o.Size == nil {
+	if o == nil || IsNil(o.Size) {
 		var ret int64
 		return ret
 	}
@@ -213,7 +217,7 @@ func (o *StorageBaseVolume) GetSize() int64 {
 // GetSizeOk returns a tuple with the Size field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageBaseVolume) GetSizeOk() (*int64, bool) {
-	if o == nil || o.Size == nil {
+	if o == nil || IsNil(o.Size) {
 		return nil, false
 	}
 	return o.Size, true
@@ -221,7 +225,7 @@ func (o *StorageBaseVolume) GetSizeOk() (*int64, bool) {
 
 // HasSize returns a boolean if a field has been set.
 func (o *StorageBaseVolume) HasSize() bool {
-	if o != nil && o.Size != nil {
+	if o != nil && !IsNil(o.Size) {
 		return true
 	}
 
@@ -235,7 +239,7 @@ func (o *StorageBaseVolume) SetSize(v int64) {
 
 // GetStorageUtilization returns the StorageUtilization field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *StorageBaseVolume) GetStorageUtilization() StorageBaseCapacity {
-	if o == nil || o.StorageUtilization.Get() == nil {
+	if o == nil || IsNil(o.StorageUtilization.Get()) {
 		var ret StorageBaseCapacity
 		return ret
 	}
@@ -277,31 +281,35 @@ func (o *StorageBaseVolume) UnsetStorageUtilization() {
 }
 
 func (o StorageBaseVolume) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o StorageBaseVolume) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Description != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Description) {
 		toSerialize["Description"] = o.Description
 	}
-	if o.NaaId != nil {
+	if !IsNil(o.NaaId) {
 		toSerialize["NaaId"] = o.NaaId
 	}
-	if o.Name != nil {
+	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
 	}
-	if o.Size != nil {
+	if !IsNil(o.Size) {
 		toSerialize["Size"] = o.Size
 	}
 	if o.StorageUtilization.IsSet() {
@@ -312,10 +320,32 @@ func (o StorageBaseVolume) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *StorageBaseVolume) UnmarshalJSON(bytes []byte) (err error) {
+func (o *StorageBaseVolume) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type StorageBaseVolumeWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type.
 		ClassId string `json:"ClassId"`
@@ -334,7 +364,7 @@ func (o *StorageBaseVolume) UnmarshalJSON(bytes []byte) (err error) {
 
 	varStorageBaseVolumeWithoutEmbeddedStruct := StorageBaseVolumeWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varStorageBaseVolumeWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varStorageBaseVolumeWithoutEmbeddedStruct)
 	if err == nil {
 		varStorageBaseVolume := _StorageBaseVolume{}
 		varStorageBaseVolume.ClassId = varStorageBaseVolumeWithoutEmbeddedStruct.ClassId
@@ -351,7 +381,7 @@ func (o *StorageBaseVolume) UnmarshalJSON(bytes []byte) (err error) {
 
 	varStorageBaseVolume := _StorageBaseVolume{}
 
-	err = json.Unmarshal(bytes, &varStorageBaseVolume)
+	err = json.Unmarshal(data, &varStorageBaseVolume)
 	if err == nil {
 		o.MoBaseMo = varStorageBaseVolume.MoBaseMo
 	} else {
@@ -360,7 +390,7 @@ func (o *StorageBaseVolume) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Description")

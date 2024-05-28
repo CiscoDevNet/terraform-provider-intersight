@@ -15,11 +15,11 @@ Name | Type | Description | Notes
 **Reachability** | Pointer to **string** | This field identifies the reachability to FI-A and B side. | [optional] [readonly] 
 **UsrLbl** | Pointer to **string** | User label configured for the SIOM. | [optional] [readonly] 
 **Vid** | Pointer to **string** | This field identifies the vendor id for this SIOM Unit. | [optional] [readonly] 
-**Controller** | Pointer to [**ManagementControllerRelationship**](ManagementControllerRelationship.md) |  | [optional] 
-**EquipmentSystemIoController** | Pointer to [**EquipmentSystemIoControllerRelationship**](EquipmentSystemIoControllerRelationship.md) |  | [optional] 
-**InventoryDeviceInfo** | Pointer to [**InventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
+**Controller** | Pointer to [**NullableManagementControllerRelationship**](ManagementControllerRelationship.md) |  | [optional] 
+**EquipmentSystemIoController** | Pointer to [**NullableEquipmentSystemIoControllerRelationship**](EquipmentSystemIoControllerRelationship.md) |  | [optional] 
+**InventoryDeviceInfo** | Pointer to [**NullableInventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
 **PortGroups** | Pointer to [**[]PortGroupRelationship**](PortGroupRelationship.md) | An array of relationships to portGroup resources. | [optional] [readonly] 
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -330,6 +330,16 @@ SetController sets Controller field to given value.
 
 HasController returns a boolean if a field has been set.
 
+### SetControllerNil
+
+`func (o *EquipmentSharedIoModule) SetControllerNil(b bool)`
+
+ SetControllerNil sets the value for Controller to be an explicit nil
+
+### UnsetController
+`func (o *EquipmentSharedIoModule) UnsetController()`
+
+UnsetController ensures that no value is present for Controller, not even an explicit nil
 ### GetEquipmentSystemIoController
 
 `func (o *EquipmentSharedIoModule) GetEquipmentSystemIoController() EquipmentSystemIoControllerRelationship`
@@ -355,6 +365,16 @@ SetEquipmentSystemIoController sets EquipmentSystemIoController field to given v
 
 HasEquipmentSystemIoController returns a boolean if a field has been set.
 
+### SetEquipmentSystemIoControllerNil
+
+`func (o *EquipmentSharedIoModule) SetEquipmentSystemIoControllerNil(b bool)`
+
+ SetEquipmentSystemIoControllerNil sets the value for EquipmentSystemIoController to be an explicit nil
+
+### UnsetEquipmentSystemIoController
+`func (o *EquipmentSharedIoModule) UnsetEquipmentSystemIoController()`
+
+UnsetEquipmentSystemIoController ensures that no value is present for EquipmentSystemIoController, not even an explicit nil
 ### GetInventoryDeviceInfo
 
 `func (o *EquipmentSharedIoModule) GetInventoryDeviceInfo() InventoryDeviceInfoRelationship`
@@ -380,6 +400,16 @@ SetInventoryDeviceInfo sets InventoryDeviceInfo field to given value.
 
 HasInventoryDeviceInfo returns a boolean if a field has been set.
 
+### SetInventoryDeviceInfoNil
+
+`func (o *EquipmentSharedIoModule) SetInventoryDeviceInfoNil(b bool)`
+
+ SetInventoryDeviceInfoNil sets the value for InventoryDeviceInfo to be an explicit nil
+
+### UnsetInventoryDeviceInfo
+`func (o *EquipmentSharedIoModule) UnsetInventoryDeviceInfo()`
+
+UnsetInventoryDeviceInfo ensures that no value is present for InventoryDeviceInfo, not even an explicit nil
 ### GetPortGroups
 
 `func (o *EquipmentSharedIoModule) GetPortGroups() []PortGroupRelationship`
@@ -440,6 +470,16 @@ SetRegisteredDevice sets RegisteredDevice field to given value.
 
 HasRegisteredDevice returns a boolean if a field has been set.
 
+### SetRegisteredDeviceNil
+
+`func (o *EquipmentSharedIoModule) SetRegisteredDeviceNil(b bool)`
+
+ SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+
+### UnsetRegisteredDevice
+`func (o *EquipmentSharedIoModule) UnsetRegisteredDevice()`
+
+UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

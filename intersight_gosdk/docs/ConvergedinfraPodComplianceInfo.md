@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "convergedinfra.PodComplianceInfo"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "convergedinfra.PodComplianceInfo"]
 **Details** | Pointer to [**[]ConvergedinfraBaseComplianceDetailsRelationship**](ConvergedinfraBaseComplianceDetailsRelationship.md) | An array of relationships to convergedinfraBaseComplianceDetails resources. | [optional] [readonly] 
-**Pod** | Pointer to [**ConvergedinfraPodRelationship**](ConvergedinfraPodRelationship.md) |  | [optional] 
+**Pod** | Pointer to [**NullableConvergedinfraPodRelationship**](ConvergedinfraPodRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -128,6 +128,16 @@ SetPod sets Pod field to given value.
 
 HasPod returns a boolean if a field has been set.
 
+### SetPodNil
+
+`func (o *ConvergedinfraPodComplianceInfo) SetPodNil(b bool)`
+
+ SetPodNil sets the value for Pod to be an explicit nil
+
+### UnsetPod
+`func (o *ConvergedinfraPodComplianceInfo) UnsetPod()`
+
+UnsetPod ensures that no value is present for Pod, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the HyperflexSnapshotStatus type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &HyperflexSnapshotStatus{}
 
 // HyperflexSnapshotStatus The current state of this virtual machine's snapshot.
 type HyperflexSnapshotStatus struct {
@@ -113,7 +117,7 @@ func (o *HyperflexSnapshotStatus) SetObjectType(v string) {
 
 // GetDescription returns the Description field value if set, zero value otherwise.
 func (o *HyperflexSnapshotStatus) GetDescription() string {
-	if o == nil || o.Description == nil {
+	if o == nil || IsNil(o.Description) {
 		var ret string
 		return ret
 	}
@@ -123,7 +127,7 @@ func (o *HyperflexSnapshotStatus) GetDescription() string {
 // GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexSnapshotStatus) GetDescriptionOk() (*string, bool) {
-	if o == nil || o.Description == nil {
+	if o == nil || IsNil(o.Description) {
 		return nil, false
 	}
 	return o.Description, true
@@ -131,7 +135,7 @@ func (o *HyperflexSnapshotStatus) GetDescriptionOk() (*string, bool) {
 
 // HasDescription returns a boolean if a field has been set.
 func (o *HyperflexSnapshotStatus) HasDescription() bool {
-	if o != nil && o.Description != nil {
+	if o != nil && !IsNil(o.Description) {
 		return true
 	}
 
@@ -145,7 +149,7 @@ func (o *HyperflexSnapshotStatus) SetDescription(v string) {
 
 // GetError returns the Error field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *HyperflexSnapshotStatus) GetError() HyperflexErrorStack {
-	if o == nil || o.Error.Get() == nil {
+	if o == nil || IsNil(o.Error.Get()) {
 		var ret HyperflexErrorStack
 		return ret
 	}
@@ -188,7 +192,7 @@ func (o *HyperflexSnapshotStatus) UnsetError() {
 
 // GetPctComplete returns the PctComplete field value if set, zero value otherwise.
 func (o *HyperflexSnapshotStatus) GetPctComplete() int64 {
-	if o == nil || o.PctComplete == nil {
+	if o == nil || IsNil(o.PctComplete) {
 		var ret int64
 		return ret
 	}
@@ -198,7 +202,7 @@ func (o *HyperflexSnapshotStatus) GetPctComplete() int64 {
 // GetPctCompleteOk returns a tuple with the PctComplete field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexSnapshotStatus) GetPctCompleteOk() (*int64, bool) {
-	if o == nil || o.PctComplete == nil {
+	if o == nil || IsNil(o.PctComplete) {
 		return nil, false
 	}
 	return o.PctComplete, true
@@ -206,7 +210,7 @@ func (o *HyperflexSnapshotStatus) GetPctCompleteOk() (*int64, bool) {
 
 // HasPctComplete returns a boolean if a field has been set.
 func (o *HyperflexSnapshotStatus) HasPctComplete() bool {
-	if o != nil && o.PctComplete != nil {
+	if o != nil && !IsNil(o.PctComplete) {
 		return true
 	}
 
@@ -220,7 +224,7 @@ func (o *HyperflexSnapshotStatus) SetPctComplete(v int64) {
 
 // GetStatus returns the Status field value if set, zero value otherwise.
 func (o *HyperflexSnapshotStatus) GetStatus() string {
-	if o == nil || o.Status == nil {
+	if o == nil || IsNil(o.Status) {
 		var ret string
 		return ret
 	}
@@ -230,7 +234,7 @@ func (o *HyperflexSnapshotStatus) GetStatus() string {
 // GetStatusOk returns a tuple with the Status field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexSnapshotStatus) GetStatusOk() (*string, bool) {
-	if o == nil || o.Status == nil {
+	if o == nil || IsNil(o.Status) {
 		return nil, false
 	}
 	return o.Status, true
@@ -238,7 +242,7 @@ func (o *HyperflexSnapshotStatus) GetStatusOk() (*string, bool) {
 
 // HasStatus returns a boolean if a field has been set.
 func (o *HyperflexSnapshotStatus) HasStatus() bool {
-	if o != nil && o.Status != nil {
+	if o != nil && !IsNil(o.Status) {
 		return true
 	}
 
@@ -252,7 +256,7 @@ func (o *HyperflexSnapshotStatus) SetStatus(v string) {
 
 // GetTimestamp returns the Timestamp field value if set, zero value otherwise.
 func (o *HyperflexSnapshotStatus) GetTimestamp() int64 {
-	if o == nil || o.Timestamp == nil {
+	if o == nil || IsNil(o.Timestamp) {
 		var ret int64
 		return ret
 	}
@@ -262,7 +266,7 @@ func (o *HyperflexSnapshotStatus) GetTimestamp() int64 {
 // GetTimestampOk returns a tuple with the Timestamp field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexSnapshotStatus) GetTimestampOk() (*int64, bool) {
-	if o == nil || o.Timestamp == nil {
+	if o == nil || IsNil(o.Timestamp) {
 		return nil, false
 	}
 	return o.Timestamp, true
@@ -270,7 +274,7 @@ func (o *HyperflexSnapshotStatus) GetTimestampOk() (*int64, bool) {
 
 // HasTimestamp returns a boolean if a field has been set.
 func (o *HyperflexSnapshotStatus) HasTimestamp() bool {
-	if o != nil && o.Timestamp != nil {
+	if o != nil && !IsNil(o.Timestamp) {
 		return true
 	}
 
@@ -284,7 +288,7 @@ func (o *HyperflexSnapshotStatus) SetTimestamp(v int64) {
 
 // GetUsedSpace returns the UsedSpace field value if set, zero value otherwise.
 func (o *HyperflexSnapshotStatus) GetUsedSpace() int64 {
-	if o == nil || o.UsedSpace == nil {
+	if o == nil || IsNil(o.UsedSpace) {
 		var ret int64
 		return ret
 	}
@@ -294,7 +298,7 @@ func (o *HyperflexSnapshotStatus) GetUsedSpace() int64 {
 // GetUsedSpaceOk returns a tuple with the UsedSpace field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexSnapshotStatus) GetUsedSpaceOk() (*int64, bool) {
-	if o == nil || o.UsedSpace == nil {
+	if o == nil || IsNil(o.UsedSpace) {
 		return nil, false
 	}
 	return o.UsedSpace, true
@@ -302,7 +306,7 @@ func (o *HyperflexSnapshotStatus) GetUsedSpaceOk() (*int64, bool) {
 
 // HasUsedSpace returns a boolean if a field has been set.
 func (o *HyperflexSnapshotStatus) HasUsedSpace() bool {
-	if o != nil && o.UsedSpace != nil {
+	if o != nil && !IsNil(o.UsedSpace) {
 		return true
 	}
 
@@ -315,37 +319,41 @@ func (o *HyperflexSnapshotStatus) SetUsedSpace(v int64) {
 }
 
 func (o HyperflexSnapshotStatus) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o HyperflexSnapshotStatus) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
 	errMoBaseComplexType = json.Unmarshal([]byte(serializedMoBaseComplexType), &toSerialize)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Description != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Description) {
 		toSerialize["Description"] = o.Description
 	}
 	if o.Error.IsSet() {
 		toSerialize["Error"] = o.Error.Get()
 	}
-	if o.PctComplete != nil {
+	if !IsNil(o.PctComplete) {
 		toSerialize["PctComplete"] = o.PctComplete
 	}
-	if o.Status != nil {
+	if !IsNil(o.Status) {
 		toSerialize["Status"] = o.Status
 	}
-	if o.Timestamp != nil {
+	if !IsNil(o.Timestamp) {
 		toSerialize["Timestamp"] = o.Timestamp
 	}
-	if o.UsedSpace != nil {
+	if !IsNil(o.UsedSpace) {
 		toSerialize["UsedSpace"] = o.UsedSpace
 	}
 
@@ -353,10 +361,32 @@ func (o HyperflexSnapshotStatus) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *HyperflexSnapshotStatus) UnmarshalJSON(bytes []byte) (err error) {
+func (o *HyperflexSnapshotStatus) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type HyperflexSnapshotStatusWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -377,7 +407,7 @@ func (o *HyperflexSnapshotStatus) UnmarshalJSON(bytes []byte) (err error) {
 
 	varHyperflexSnapshotStatusWithoutEmbeddedStruct := HyperflexSnapshotStatusWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varHyperflexSnapshotStatusWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varHyperflexSnapshotStatusWithoutEmbeddedStruct)
 	if err == nil {
 		varHyperflexSnapshotStatus := _HyperflexSnapshotStatus{}
 		varHyperflexSnapshotStatus.ClassId = varHyperflexSnapshotStatusWithoutEmbeddedStruct.ClassId
@@ -395,7 +425,7 @@ func (o *HyperflexSnapshotStatus) UnmarshalJSON(bytes []byte) (err error) {
 
 	varHyperflexSnapshotStatus := _HyperflexSnapshotStatus{}
 
-	err = json.Unmarshal(bytes, &varHyperflexSnapshotStatus)
+	err = json.Unmarshal(data, &varHyperflexSnapshotStatus)
 	if err == nil {
 		o.MoBaseComplexType = varHyperflexSnapshotStatus.MoBaseComplexType
 	} else {
@@ -404,7 +434,7 @@ func (o *HyperflexSnapshotStatus) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Description")

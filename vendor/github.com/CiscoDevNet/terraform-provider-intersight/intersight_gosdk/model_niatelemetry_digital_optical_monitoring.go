@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the NiatelemetryDigitalOpticalMonitoring type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &NiatelemetryDigitalOpticalMonitoring{}
 
 // NiatelemetryDigitalOpticalMonitoring Digital optical monitoring details for aci nodes.
 type NiatelemetryDigitalOpticalMonitoring struct {
@@ -110,7 +114,7 @@ func (o *NiatelemetryDigitalOpticalMonitoring) SetObjectType(v string) {
 
 // GetAlerts returns the Alerts field value if set, zero value otherwise.
 func (o *NiatelemetryDigitalOpticalMonitoring) GetAlerts() string {
-	if o == nil || o.Alerts == nil {
+	if o == nil || IsNil(o.Alerts) {
 		var ret string
 		return ret
 	}
@@ -120,7 +124,7 @@ func (o *NiatelemetryDigitalOpticalMonitoring) GetAlerts() string {
 // GetAlertsOk returns a tuple with the Alerts field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryDigitalOpticalMonitoring) GetAlertsOk() (*string, bool) {
-	if o == nil || o.Alerts == nil {
+	if o == nil || IsNil(o.Alerts) {
 		return nil, false
 	}
 	return o.Alerts, true
@@ -128,7 +132,7 @@ func (o *NiatelemetryDigitalOpticalMonitoring) GetAlertsOk() (*string, bool) {
 
 // HasAlerts returns a boolean if a field has been set.
 func (o *NiatelemetryDigitalOpticalMonitoring) HasAlerts() bool {
-	if o != nil && o.Alerts != nil {
+	if o != nil && !IsNil(o.Alerts) {
 		return true
 	}
 
@@ -142,7 +146,7 @@ func (o *NiatelemetryDigitalOpticalMonitoring) SetAlerts(v string) {
 
 // GetDn returns the Dn field value if set, zero value otherwise.
 func (o *NiatelemetryDigitalOpticalMonitoring) GetDn() string {
-	if o == nil || o.Dn == nil {
+	if o == nil || IsNil(o.Dn) {
 		var ret string
 		return ret
 	}
@@ -152,7 +156,7 @@ func (o *NiatelemetryDigitalOpticalMonitoring) GetDn() string {
 // GetDnOk returns a tuple with the Dn field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryDigitalOpticalMonitoring) GetDnOk() (*string, bool) {
-	if o == nil || o.Dn == nil {
+	if o == nil || IsNil(o.Dn) {
 		return nil, false
 	}
 	return o.Dn, true
@@ -160,7 +164,7 @@ func (o *NiatelemetryDigitalOpticalMonitoring) GetDnOk() (*string, bool) {
 
 // HasDn returns a boolean if a field has been set.
 func (o *NiatelemetryDigitalOpticalMonitoring) HasDn() bool {
-	if o != nil && o.Dn != nil {
+	if o != nil && !IsNil(o.Dn) {
 		return true
 	}
 
@@ -174,7 +178,7 @@ func (o *NiatelemetryDigitalOpticalMonitoring) SetDn(v string) {
 
 // GetRxLos returns the RxLos field value if set, zero value otherwise.
 func (o *NiatelemetryDigitalOpticalMonitoring) GetRxLos() string {
-	if o == nil || o.RxLos == nil {
+	if o == nil || IsNil(o.RxLos) {
 		var ret string
 		return ret
 	}
@@ -184,7 +188,7 @@ func (o *NiatelemetryDigitalOpticalMonitoring) GetRxLos() string {
 // GetRxLosOk returns a tuple with the RxLos field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryDigitalOpticalMonitoring) GetRxLosOk() (*string, bool) {
-	if o == nil || o.RxLos == nil {
+	if o == nil || IsNil(o.RxLos) {
 		return nil, false
 	}
 	return o.RxLos, true
@@ -192,7 +196,7 @@ func (o *NiatelemetryDigitalOpticalMonitoring) GetRxLosOk() (*string, bool) {
 
 // HasRxLos returns a boolean if a field has been set.
 func (o *NiatelemetryDigitalOpticalMonitoring) HasRxLos() bool {
-	if o != nil && o.RxLos != nil {
+	if o != nil && !IsNil(o.RxLos) {
 		return true
 	}
 
@@ -206,7 +210,7 @@ func (o *NiatelemetryDigitalOpticalMonitoring) SetRxLos(v string) {
 
 // GetTxFaultCount returns the TxFaultCount field value if set, zero value otherwise.
 func (o *NiatelemetryDigitalOpticalMonitoring) GetTxFaultCount() string {
-	if o == nil || o.TxFaultCount == nil {
+	if o == nil || IsNil(o.TxFaultCount) {
 		var ret string
 		return ret
 	}
@@ -216,7 +220,7 @@ func (o *NiatelemetryDigitalOpticalMonitoring) GetTxFaultCount() string {
 // GetTxFaultCountOk returns a tuple with the TxFaultCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryDigitalOpticalMonitoring) GetTxFaultCountOk() (*string, bool) {
-	if o == nil || o.TxFaultCount == nil {
+	if o == nil || IsNil(o.TxFaultCount) {
 		return nil, false
 	}
 	return o.TxFaultCount, true
@@ -224,7 +228,7 @@ func (o *NiatelemetryDigitalOpticalMonitoring) GetTxFaultCountOk() (*string, boo
 
 // HasTxFaultCount returns a boolean if a field has been set.
 func (o *NiatelemetryDigitalOpticalMonitoring) HasTxFaultCount() bool {
-	if o != nil && o.TxFaultCount != nil {
+	if o != nil && !IsNil(o.TxFaultCount) {
 		return true
 	}
 
@@ -237,31 +241,35 @@ func (o *NiatelemetryDigitalOpticalMonitoring) SetTxFaultCount(v string) {
 }
 
 func (o NiatelemetryDigitalOpticalMonitoring) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o NiatelemetryDigitalOpticalMonitoring) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
 	errMoBaseComplexType = json.Unmarshal([]byte(serializedMoBaseComplexType), &toSerialize)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Alerts != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Alerts) {
 		toSerialize["Alerts"] = o.Alerts
 	}
-	if o.Dn != nil {
+	if !IsNil(o.Dn) {
 		toSerialize["Dn"] = o.Dn
 	}
-	if o.RxLos != nil {
+	if !IsNil(o.RxLos) {
 		toSerialize["RxLos"] = o.RxLos
 	}
-	if o.TxFaultCount != nil {
+	if !IsNil(o.TxFaultCount) {
 		toSerialize["TxFaultCount"] = o.TxFaultCount
 	}
 
@@ -269,10 +277,32 @@ func (o NiatelemetryDigitalOpticalMonitoring) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *NiatelemetryDigitalOpticalMonitoring) UnmarshalJSON(bytes []byte) (err error) {
+func (o *NiatelemetryDigitalOpticalMonitoring) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type NiatelemetryDigitalOpticalMonitoringWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -290,7 +320,7 @@ func (o *NiatelemetryDigitalOpticalMonitoring) UnmarshalJSON(bytes []byte) (err 
 
 	varNiatelemetryDigitalOpticalMonitoringWithoutEmbeddedStruct := NiatelemetryDigitalOpticalMonitoringWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varNiatelemetryDigitalOpticalMonitoringWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varNiatelemetryDigitalOpticalMonitoringWithoutEmbeddedStruct)
 	if err == nil {
 		varNiatelemetryDigitalOpticalMonitoring := _NiatelemetryDigitalOpticalMonitoring{}
 		varNiatelemetryDigitalOpticalMonitoring.ClassId = varNiatelemetryDigitalOpticalMonitoringWithoutEmbeddedStruct.ClassId
@@ -306,7 +336,7 @@ func (o *NiatelemetryDigitalOpticalMonitoring) UnmarshalJSON(bytes []byte) (err 
 
 	varNiatelemetryDigitalOpticalMonitoring := _NiatelemetryDigitalOpticalMonitoring{}
 
-	err = json.Unmarshal(bytes, &varNiatelemetryDigitalOpticalMonitoring)
+	err = json.Unmarshal(data, &varNiatelemetryDigitalOpticalMonitoring)
 	if err == nil {
 		o.MoBaseComplexType = varNiatelemetryDigitalOpticalMonitoring.MoBaseComplexType
 	} else {
@@ -315,7 +345,7 @@ func (o *NiatelemetryDigitalOpticalMonitoring) UnmarshalJSON(bytes []byte) (err 
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Alerts")

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the FeedbackFeedbackData type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &FeedbackFeedbackData{}
 
 // FeedbackFeedbackData Feedback data that collected on the UI from user.
 type FeedbackFeedbackData struct {
@@ -132,7 +136,7 @@ func (o *FeedbackFeedbackData) SetObjectType(v string) {
 
 // GetAccountName returns the AccountName field value if set, zero value otherwise.
 func (o *FeedbackFeedbackData) GetAccountName() string {
-	if o == nil || o.AccountName == nil {
+	if o == nil || IsNil(o.AccountName) {
 		var ret string
 		return ret
 	}
@@ -142,7 +146,7 @@ func (o *FeedbackFeedbackData) GetAccountName() string {
 // GetAccountNameOk returns a tuple with the AccountName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FeedbackFeedbackData) GetAccountNameOk() (*string, bool) {
-	if o == nil || o.AccountName == nil {
+	if o == nil || IsNil(o.AccountName) {
 		return nil, false
 	}
 	return o.AccountName, true
@@ -150,7 +154,7 @@ func (o *FeedbackFeedbackData) GetAccountNameOk() (*string, bool) {
 
 // HasAccountName returns a boolean if a field has been set.
 func (o *FeedbackFeedbackData) HasAccountName() bool {
-	if o != nil && o.AccountName != nil {
+	if o != nil && !IsNil(o.AccountName) {
 		return true
 	}
 
@@ -175,7 +179,7 @@ func (o *FeedbackFeedbackData) GetAlternativeFollowUpEmails() []string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *FeedbackFeedbackData) GetAlternativeFollowUpEmailsOk() ([]string, bool) {
-	if o == nil || o.AlternativeFollowUpEmails == nil {
+	if o == nil || IsNil(o.AlternativeFollowUpEmails) {
 		return nil, false
 	}
 	return o.AlternativeFollowUpEmails, true
@@ -183,7 +187,7 @@ func (o *FeedbackFeedbackData) GetAlternativeFollowUpEmailsOk() ([]string, bool)
 
 // HasAlternativeFollowUpEmails returns a boolean if a field has been set.
 func (o *FeedbackFeedbackData) HasAlternativeFollowUpEmails() bool {
-	if o != nil && o.AlternativeFollowUpEmails != nil {
+	if o != nil && IsNil(o.AlternativeFollowUpEmails) {
 		return true
 	}
 
@@ -197,7 +201,7 @@ func (o *FeedbackFeedbackData) SetAlternativeFollowUpEmails(v []string) {
 
 // GetComment returns the Comment field value if set, zero value otherwise.
 func (o *FeedbackFeedbackData) GetComment() string {
-	if o == nil || o.Comment == nil {
+	if o == nil || IsNil(o.Comment) {
 		var ret string
 		return ret
 	}
@@ -207,7 +211,7 @@ func (o *FeedbackFeedbackData) GetComment() string {
 // GetCommentOk returns a tuple with the Comment field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FeedbackFeedbackData) GetCommentOk() (*string, bool) {
-	if o == nil || o.Comment == nil {
+	if o == nil || IsNil(o.Comment) {
 		return nil, false
 	}
 	return o.Comment, true
@@ -215,7 +219,7 @@ func (o *FeedbackFeedbackData) GetCommentOk() (*string, bool) {
 
 // HasComment returns a boolean if a field has been set.
 func (o *FeedbackFeedbackData) HasComment() bool {
-	if o != nil && o.Comment != nil {
+	if o != nil && !IsNil(o.Comment) {
 		return true
 	}
 
@@ -229,7 +233,7 @@ func (o *FeedbackFeedbackData) SetComment(v string) {
 
 // GetEmail returns the Email field value if set, zero value otherwise.
 func (o *FeedbackFeedbackData) GetEmail() string {
-	if o == nil || o.Email == nil {
+	if o == nil || IsNil(o.Email) {
 		var ret string
 		return ret
 	}
@@ -239,7 +243,7 @@ func (o *FeedbackFeedbackData) GetEmail() string {
 // GetEmailOk returns a tuple with the Email field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FeedbackFeedbackData) GetEmailOk() (*string, bool) {
-	if o == nil || o.Email == nil {
+	if o == nil || IsNil(o.Email) {
 		return nil, false
 	}
 	return o.Email, true
@@ -247,7 +251,7 @@ func (o *FeedbackFeedbackData) GetEmailOk() (*string, bool) {
 
 // HasEmail returns a boolean if a field has been set.
 func (o *FeedbackFeedbackData) HasEmail() bool {
-	if o != nil && o.Email != nil {
+	if o != nil && !IsNil(o.Email) {
 		return true
 	}
 
@@ -262,7 +266,7 @@ func (o *FeedbackFeedbackData) SetEmail(v string) {
 // GetEvaluation returns the Evaluation field value if set, zero value otherwise.
 // Deprecated
 func (o *FeedbackFeedbackData) GetEvaluation() string {
-	if o == nil || o.Evaluation == nil {
+	if o == nil || IsNil(o.Evaluation) {
 		var ret string
 		return ret
 	}
@@ -273,7 +277,7 @@ func (o *FeedbackFeedbackData) GetEvaluation() string {
 // and a boolean to check if the value has been set.
 // Deprecated
 func (o *FeedbackFeedbackData) GetEvaluationOk() (*string, bool) {
-	if o == nil || o.Evaluation == nil {
+	if o == nil || IsNil(o.Evaluation) {
 		return nil, false
 	}
 	return o.Evaluation, true
@@ -281,7 +285,7 @@ func (o *FeedbackFeedbackData) GetEvaluationOk() (*string, bool) {
 
 // HasEvaluation returns a boolean if a field has been set.
 func (o *FeedbackFeedbackData) HasEvaluation() bool {
-	if o != nil && o.Evaluation != nil {
+	if o != nil && !IsNil(o.Evaluation) {
 		return true
 	}
 
@@ -296,7 +300,7 @@ func (o *FeedbackFeedbackData) SetEvaluation(v string) {
 
 // GetFollowUp returns the FollowUp field value if set, zero value otherwise.
 func (o *FeedbackFeedbackData) GetFollowUp() bool {
-	if o == nil || o.FollowUp == nil {
+	if o == nil || IsNil(o.FollowUp) {
 		var ret bool
 		return ret
 	}
@@ -306,7 +310,7 @@ func (o *FeedbackFeedbackData) GetFollowUp() bool {
 // GetFollowUpOk returns a tuple with the FollowUp field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FeedbackFeedbackData) GetFollowUpOk() (*bool, bool) {
-	if o == nil || o.FollowUp == nil {
+	if o == nil || IsNil(o.FollowUp) {
 		return nil, false
 	}
 	return o.FollowUp, true
@@ -314,7 +318,7 @@ func (o *FeedbackFeedbackData) GetFollowUpOk() (*bool, bool) {
 
 // HasFollowUp returns a boolean if a field has been set.
 func (o *FeedbackFeedbackData) HasFollowUp() bool {
-	if o != nil && o.FollowUp != nil {
+	if o != nil && !IsNil(o.FollowUp) {
 		return true
 	}
 
@@ -328,7 +332,7 @@ func (o *FeedbackFeedbackData) SetFollowUp(v bool) {
 
 // GetFullStoryUrl returns the FullStoryUrl field value if set, zero value otherwise.
 func (o *FeedbackFeedbackData) GetFullStoryUrl() string {
-	if o == nil || o.FullStoryUrl == nil {
+	if o == nil || IsNil(o.FullStoryUrl) {
 		var ret string
 		return ret
 	}
@@ -338,7 +342,7 @@ func (o *FeedbackFeedbackData) GetFullStoryUrl() string {
 // GetFullStoryUrlOk returns a tuple with the FullStoryUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FeedbackFeedbackData) GetFullStoryUrlOk() (*string, bool) {
-	if o == nil || o.FullStoryUrl == nil {
+	if o == nil || IsNil(o.FullStoryUrl) {
 		return nil, false
 	}
 	return o.FullStoryUrl, true
@@ -346,7 +350,7 @@ func (o *FeedbackFeedbackData) GetFullStoryUrlOk() (*string, bool) {
 
 // HasFullStoryUrl returns a boolean if a field has been set.
 func (o *FeedbackFeedbackData) HasFullStoryUrl() bool {
-	if o != nil && o.FullStoryUrl != nil {
+	if o != nil && !IsNil(o.FullStoryUrl) {
 		return true
 	}
 
@@ -360,7 +364,7 @@ func (o *FeedbackFeedbackData) SetFullStoryUrl(v string) {
 
 // GetProductSatisfactionScale returns the ProductSatisfactionScale field value if set, zero value otherwise.
 func (o *FeedbackFeedbackData) GetProductSatisfactionScale() int64 {
-	if o == nil || o.ProductSatisfactionScale == nil {
+	if o == nil || IsNil(o.ProductSatisfactionScale) {
 		var ret int64
 		return ret
 	}
@@ -370,7 +374,7 @@ func (o *FeedbackFeedbackData) GetProductSatisfactionScale() int64 {
 // GetProductSatisfactionScaleOk returns a tuple with the ProductSatisfactionScale field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FeedbackFeedbackData) GetProductSatisfactionScaleOk() (*int64, bool) {
-	if o == nil || o.ProductSatisfactionScale == nil {
+	if o == nil || IsNil(o.ProductSatisfactionScale) {
 		return nil, false
 	}
 	return o.ProductSatisfactionScale, true
@@ -378,7 +382,7 @@ func (o *FeedbackFeedbackData) GetProductSatisfactionScaleOk() (*int64, bool) {
 
 // HasProductSatisfactionScale returns a boolean if a field has been set.
 func (o *FeedbackFeedbackData) HasProductSatisfactionScale() bool {
-	if o != nil && o.ProductSatisfactionScale != nil {
+	if o != nil && !IsNil(o.ProductSatisfactionScale) {
 		return true
 	}
 
@@ -392,7 +396,7 @@ func (o *FeedbackFeedbackData) SetProductSatisfactionScale(v int64) {
 
 // GetSurveyCompleted returns the SurveyCompleted field value if set, zero value otherwise.
 func (o *FeedbackFeedbackData) GetSurveyCompleted() bool {
-	if o == nil || o.SurveyCompleted == nil {
+	if o == nil || IsNil(o.SurveyCompleted) {
 		var ret bool
 		return ret
 	}
@@ -402,7 +406,7 @@ func (o *FeedbackFeedbackData) GetSurveyCompleted() bool {
 // GetSurveyCompletedOk returns a tuple with the SurveyCompleted field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FeedbackFeedbackData) GetSurveyCompletedOk() (*bool, bool) {
-	if o == nil || o.SurveyCompleted == nil {
+	if o == nil || IsNil(o.SurveyCompleted) {
 		return nil, false
 	}
 	return o.SurveyCompleted, true
@@ -410,7 +414,7 @@ func (o *FeedbackFeedbackData) GetSurveyCompletedOk() (*bool, bool) {
 
 // HasSurveyCompleted returns a boolean if a field has been set.
 func (o *FeedbackFeedbackData) HasSurveyCompleted() bool {
-	if o != nil && o.SurveyCompleted != nil {
+	if o != nil && !IsNil(o.SurveyCompleted) {
 		return true
 	}
 
@@ -435,7 +439,7 @@ func (o *FeedbackFeedbackData) GetTraceIds() interface{} {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *FeedbackFeedbackData) GetTraceIdsOk() (*interface{}, bool) {
-	if o == nil || o.TraceIds == nil {
+	if o == nil || IsNil(o.TraceIds) {
 		return nil, false
 	}
 	return &o.TraceIds, true
@@ -443,7 +447,7 @@ func (o *FeedbackFeedbackData) GetTraceIdsOk() (*interface{}, bool) {
 
 // HasTraceIds returns a boolean if a field has been set.
 func (o *FeedbackFeedbackData) HasTraceIds() bool {
-	if o != nil && o.TraceIds != nil {
+	if o != nil && IsNil(o.TraceIds) {
 		return true
 	}
 
@@ -457,7 +461,7 @@ func (o *FeedbackFeedbackData) SetTraceIds(v interface{}) {
 
 // GetType returns the Type field value if set, zero value otherwise.
 func (o *FeedbackFeedbackData) GetType() string {
-	if o == nil || o.Type == nil {
+	if o == nil || IsNil(o.Type) {
 		var ret string
 		return ret
 	}
@@ -467,7 +471,7 @@ func (o *FeedbackFeedbackData) GetType() string {
 // GetTypeOk returns a tuple with the Type field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FeedbackFeedbackData) GetTypeOk() (*string, bool) {
-	if o == nil || o.Type == nil {
+	if o == nil || IsNil(o.Type) {
 		return nil, false
 	}
 	return o.Type, true
@@ -475,7 +479,7 @@ func (o *FeedbackFeedbackData) GetTypeOk() (*string, bool) {
 
 // HasType returns a boolean if a field has been set.
 func (o *FeedbackFeedbackData) HasType() bool {
-	if o != nil && o.Type != nil {
+	if o != nil && !IsNil(o.Type) {
 		return true
 	}
 
@@ -488,52 +492,56 @@ func (o *FeedbackFeedbackData) SetType(v string) {
 }
 
 func (o FeedbackFeedbackData) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o FeedbackFeedbackData) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
 	errMoBaseComplexType = json.Unmarshal([]byte(serializedMoBaseComplexType), &toSerialize)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.AccountName != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.AccountName) {
 		toSerialize["AccountName"] = o.AccountName
 	}
 	if o.AlternativeFollowUpEmails != nil {
 		toSerialize["AlternativeFollowUpEmails"] = o.AlternativeFollowUpEmails
 	}
-	if o.Comment != nil {
+	if !IsNil(o.Comment) {
 		toSerialize["Comment"] = o.Comment
 	}
-	if o.Email != nil {
+	if !IsNil(o.Email) {
 		toSerialize["Email"] = o.Email
 	}
-	if o.Evaluation != nil {
+	if !IsNil(o.Evaluation) {
 		toSerialize["Evaluation"] = o.Evaluation
 	}
-	if o.FollowUp != nil {
+	if !IsNil(o.FollowUp) {
 		toSerialize["FollowUp"] = o.FollowUp
 	}
-	if o.FullStoryUrl != nil {
+	if !IsNil(o.FullStoryUrl) {
 		toSerialize["FullStoryUrl"] = o.FullStoryUrl
 	}
-	if o.ProductSatisfactionScale != nil {
+	if !IsNil(o.ProductSatisfactionScale) {
 		toSerialize["ProductSatisfactionScale"] = o.ProductSatisfactionScale
 	}
-	if o.SurveyCompleted != nil {
+	if !IsNil(o.SurveyCompleted) {
 		toSerialize["SurveyCompleted"] = o.SurveyCompleted
 	}
 	if o.TraceIds != nil {
 		toSerialize["TraceIds"] = o.TraceIds
 	}
-	if o.Type != nil {
+	if !IsNil(o.Type) {
 		toSerialize["Type"] = o.Type
 	}
 
@@ -541,10 +549,32 @@ func (o FeedbackFeedbackData) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *FeedbackFeedbackData) UnmarshalJSON(bytes []byte) (err error) {
+func (o *FeedbackFeedbackData) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type FeedbackFeedbackDataWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -576,7 +606,7 @@ func (o *FeedbackFeedbackData) UnmarshalJSON(bytes []byte) (err error) {
 
 	varFeedbackFeedbackDataWithoutEmbeddedStruct := FeedbackFeedbackDataWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varFeedbackFeedbackDataWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varFeedbackFeedbackDataWithoutEmbeddedStruct)
 	if err == nil {
 		varFeedbackFeedbackData := _FeedbackFeedbackData{}
 		varFeedbackFeedbackData.ClassId = varFeedbackFeedbackDataWithoutEmbeddedStruct.ClassId
@@ -599,7 +629,7 @@ func (o *FeedbackFeedbackData) UnmarshalJSON(bytes []byte) (err error) {
 
 	varFeedbackFeedbackData := _FeedbackFeedbackData{}
 
-	err = json.Unmarshal(bytes, &varFeedbackFeedbackData)
+	err = json.Unmarshal(data, &varFeedbackFeedbackData)
 	if err == nil {
 		o.MoBaseComplexType = varFeedbackFeedbackData.MoBaseComplexType
 	} else {
@@ -608,7 +638,7 @@ func (o *FeedbackFeedbackData) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "AccountName")

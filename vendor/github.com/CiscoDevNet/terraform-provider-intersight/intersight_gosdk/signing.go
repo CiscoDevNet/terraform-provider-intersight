@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -24,7 +24,6 @@ import (
 	"encoding/pem"
 	"fmt"
 	"io"
-	"io/ioutil"
 	"net/http"
 	"net/textproto"
 	"os"
@@ -77,6 +76,12 @@ const (
 	// Calculate the message signature using probabilistic signature scheme RSASSA-PSS.
 	// PSS is randomized and will produce a different signature value each time.
 	HttpSigningAlgorithmRsaPSS string = "RSASSA-PSS"
+
+	// HashAlgorithm Sha256 for generating hash
+	HttpHashAlgorithmSha256 string = "sha256"
+
+	// HashAlgorithm Sha512 for generating hash
+	HttpHashAlgorithmSha512 string = "sha512"
 )
 
 var supportedSigningSchemes = map[string]bool{
@@ -110,13 +115,15 @@ var supportedSigningSchemes = map[string]bool{
 // 2. Set the 'Digest' header in the request body.
 // 3. Include the 'Digest' header and value in the HTTP signature.
 type HttpSignatureAuth struct {
-	KeyId          string // A key identifier.
-	PrivateKeyPath string // The path to the private key.
-	Passphrase     string // The passphrase to decrypt the private key, if the key is encrypted.
-	SigningScheme  string // The signature scheme, when signing HTTP requests. Supported value is 'hs2019'.
+	KeyId            string    // A key identifier.
+	PrivateKeyPath   string    // The path to the private key.
+	PrivateKeyReader io.Reader // provide the APIKey using the types which implement io.Reader interface.
+	Passphrase       string    // The passphrase to decrypt the private key, if the key is encrypted.
+	SigningScheme    string    // The signature scheme, when signing HTTP requests. Supported value is 'hs2019'.
 	// The signature algorithm, when signing HTTP requests.
 	// Supported values are RSASSA-PKCS1-v1_5, RSASSA-PSS.
 	SigningAlgorithm string
+	HashAlgorithm    string   // supported values are sha256 and sha512. This also allows using sha256 with hs2019, which defaults to sha512.
 	SignedHeaders    []string // A list of HTTP headers included when generating the signature for the message.
 	// SignatureMaxValidity specifies the maximum duration of the signature validity.
 	// The value is used to set the '(expires)' signature parameter in the HTTP request.
@@ -136,26 +143,29 @@ func (h *HttpSignatureAuth) SetPrivateKey(privateKey string) error {
 // are invalid.
 func (h *HttpSignatureAuth) ContextWithValue(ctx context.Context) (context.Context, error) {
 	if h.KeyId == "" {
-		return nil, fmt.Errorf("Key ID must be specified")
+		return nil, fmt.Errorf("key ID must be specified")
 	}
-	if h.PrivateKeyPath == "" && h.privateKey == nil {
-		return nil, fmt.Errorf("Private key path must be specified")
+	if (len(h.PrivateKeyPath) == 0 && h.PrivateKeyReader == nil) && h.privateKey == nil {
+		return nil, fmt.Errorf("private key path must be specified")
+	}
+	if len(h.PrivateKeyPath) > 0 && h.PrivateKeyReader != nil {
+		return nil, fmt.Errorf("Specify only one of PrivateKeyPath or PrivateKeyReader")
 	}
 	if _, ok := supportedSigningSchemes[h.SigningScheme]; !ok {
-		return nil, fmt.Errorf("Invalid signing scheme: '%v'", h.SigningScheme)
+		return nil, fmt.Errorf("invalid signing scheme: '%v'", h.SigningScheme)
 	}
 	m := make(map[string]bool)
 	for _, h := range h.SignedHeaders {
 		if strings.EqualFold(h, HttpHeaderAuthorization) {
-			return nil, fmt.Errorf("Signed headers cannot include the 'Authorization' header")
+			return nil, fmt.Errorf("signed headers cannot include the 'Authorization' header")
 		}
 		m[h] = true
 	}
 	if len(m) != len(h.SignedHeaders) {
-		return nil, fmt.Errorf("List of signed headers cannot have duplicate names")
+		return nil, fmt.Errorf("list of signed headers cannot have duplicate names")
 	}
 	if h.SignatureMaxValidity < 0 {
-		return nil, fmt.Errorf("Signature max validity must be a positive value")
+		return nil, fmt.Errorf("signature max validity must be a positive value")
 	}
 	if err := h.loadPrivateKey(); err != nil {
 		return nil, err
@@ -178,7 +188,7 @@ func (h *HttpSignatureAuth) GetPublicKey() (crypto.PublicKey, error) {
 	default:
 		// Do not change '%T' to anything else such as '%v'!
 		// The value of the private key must not be returned.
-		return nil, fmt.Errorf("Unsupported key: %T", h.privateKey)
+		return nil, fmt.Errorf("unsupported key: %T", h.privateKey)
 	}
 }
 
@@ -188,16 +198,20 @@ func (h *HttpSignatureAuth) loadPrivateKey() (err error) {
 	if h.privateKey != nil {
 		return nil
 	}
-	var file *os.File
-	file, err = os.Open(h.PrivateKeyPath)
-	if err != nil {
-		return fmt.Errorf("Cannot load private key '%s'. Error: %v", h.PrivateKeyPath, err)
-	}
-	defer func() {
-		err = file.Close()
-	}()
 	var priv []byte
-	priv, err = ioutil.ReadAll(file)
+	keyReader := h.PrivateKeyReader
+	if keyReader == nil {
+		var file *os.File
+		file, err = os.Open(h.PrivateKeyPath)
+		if err != nil {
+			return fmt.Errorf("cannot load private key '%s'. Error: %v", h.PrivateKeyPath, err)
+		}
+		keyReader = file
+		defer func() {
+			err = file.Close()
+		}()
+	}
+	priv, err = io.ReadAll(keyReader)
 	if err != nil {
 		return err
 	}
@@ -209,7 +223,7 @@ func (h *HttpSignatureAuth) parsePrivateKey(priv []byte) error {
 	pemBlock, _ := pem.Decode(priv)
 	if pemBlock == nil {
 		// No PEM data has been found.
-		return fmt.Errorf("File '%s' does not contain PEM data", h.PrivateKeyPath)
+		return fmt.Errorf("file '%s' does not contain PEM data", h.PrivateKeyPath)
 	}
 	var privKey []byte
 	var err error
@@ -235,7 +249,7 @@ func (h *HttpSignatureAuth) parsePrivateKey(priv []byte) error {
 			return err
 		}
 	default:
-		return fmt.Errorf("Key '%s' is not supported", pemBlock.Type)
+		return fmt.Errorf("key '%s' is not supported", pemBlock.Type)
 	}
 	return nil
 }
@@ -258,7 +272,7 @@ func SignRequest(
 	auth HttpSignatureAuth) error {
 
 	if auth.privateKey == nil {
-		return fmt.Errorf("Private key is not set")
+		return fmt.Errorf("private key is not set")
 	}
 	now := time.Now()
 	date := now.UTC().Format(http.TimeFormat)
@@ -272,7 +286,7 @@ func SignRequest(
 	var expiresUnix float64
 
 	if auth.SignatureMaxValidity < 0 {
-		return fmt.Errorf("Signature validity must be a positive value")
+		return fmt.Errorf("signature validity must be a positive value")
 	}
 	if auth.SignatureMaxValidity > 0 {
 		e := now.Add(auth.SignatureMaxValidity)
@@ -280,18 +294,27 @@ func SignRequest(
 	}
 	// Determine the cryptographic hash to be used for the signature and the body digest.
 	switch auth.SigningScheme {
-	case HttpSigningSchemeRsaSha512, HttpSigningSchemeHs2019:
+	case HttpSigningSchemeRsaSha512:
 		h = crypto.SHA512
 		prefix = "SHA-512="
 	case HttpSigningSchemeRsaSha256:
 		// This is deprecated and should no longer be used.
 		h = crypto.SHA256
 		prefix = "SHA-256="
+	case HttpSigningSchemeHs2019:
+		if auth.HashAlgorithm == HttpHashAlgorithmSha256 {
+			h = crypto.SHA256
+			prefix = "SHA-256="
+		} else {
+			h = crypto.SHA512
+			prefix = "SHA-512="
+		}
+
 	default:
-		return fmt.Errorf("Unsupported signature scheme: %v", auth.SigningScheme)
+		return fmt.Errorf("unsupported signature scheme: %v", auth.SigningScheme)
 	}
 	if !h.Available() {
-		return fmt.Errorf("Hash '%v' is not available", h)
+		return fmt.Errorf("hash '%v' is not available", h)
 	}
 
 	// Build the "(request-target)" signature header.
@@ -318,7 +341,7 @@ func SignRequest(
 		m[h] = true
 	}
 	if len(m) != len(signedHeaders) {
-		return fmt.Errorf("List of signed headers must not have any duplicates")
+		return fmt.Errorf("list of signed headers must not have any duplicates")
 	}
 	hasCreatedParameter := false
 	hasExpiresParameter := false
@@ -327,7 +350,7 @@ func SignRequest(
 		var value string
 		switch header {
 		case strings.ToLower(HttpHeaderAuthorization):
-			return fmt.Errorf("Cannot include the 'Authorization' header as a signed header.")
+			return fmt.Errorf("cannot include the 'Authorization' header as a signed header")
 		case HttpSignatureParameterRequestTarget:
 			value = requestTarget
 		case HttpSignatureParameterCreated:
@@ -335,7 +358,7 @@ func SignRequest(
 			hasCreatedParameter = true
 		case HttpSignatureParameterExpires:
 			if auth.SignatureMaxValidity.Nanoseconds() == 0 {
-				return fmt.Errorf("Cannot set '(expires)' signature parameter. SignatureMaxValidity is not configured.")
+				return fmt.Errorf("cannot set '(expires)' signature parameter. SignatureMaxValidity is not configured")
 			}
 			value = fmt.Sprintf("%.3f", expiresUnix)
 			hasExpiresParameter = true
@@ -371,7 +394,7 @@ func SignRequest(
 			if v, ok = r.Header[canonicalHeader]; !ok {
 				// If a header specified in the headers parameter cannot be matched with
 				// a provided header in the message, the implementation MUST produce an error.
-				return fmt.Errorf("Header '%s' does not exist in the request", canonicalHeader)
+				return fmt.Errorf("header '%s' does not exist in the request", canonicalHeader)
 			}
 			// If there are multiple instances of the same header field, all
 			// header field values associated with the header field MUST be
@@ -386,7 +409,7 @@ func SignRequest(
 		fmt.Fprintf(&sb, "%s: %s", header, value)
 	}
 	if expiresUnix != 0 && !hasExpiresParameter {
-		return fmt.Errorf("SignatureMaxValidity is specified, but '(expired)' parameter is not present")
+		return fmt.Errorf("signatureMaxValidity is specified, but '(expired)' parameter is not present")
 	}
 	msg := []byte(sb.String())
 	msgHash := h.New()
@@ -404,14 +427,14 @@ func SignRequest(
 		case "", HttpSigningAlgorithmRsaPSS:
 			signature, err = rsa.SignPSS(rand.Reader, key, h, d, nil)
 		default:
-			return fmt.Errorf("Unsupported signing algorithm: '%s'", auth.SigningAlgorithm)
+			return fmt.Errorf("unsupported signing algorithm: '%s'", auth.SigningAlgorithm)
 		}
 	case *ecdsa.PrivateKey:
 		signature, err = key.Sign(rand.Reader, d, h)
 	case ed25519.PrivateKey: // requires go 1.13
 		signature, err = key.Sign(rand.Reader, msg, crypto.Hash(0))
 	default:
-		return fmt.Errorf("Unsupported private key")
+		return fmt.Errorf("unsupported private key")
 	}
 	if err != nil {
 		return err

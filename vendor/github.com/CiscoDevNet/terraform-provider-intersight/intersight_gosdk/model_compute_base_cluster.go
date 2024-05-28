@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the ComputeBaseCluster type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ComputeBaseCluster{}
 
 // ComputeBaseCluster Common attributes of a compute cluster.
 type ComputeBaseCluster struct {
@@ -111,7 +115,7 @@ func (o *ComputeBaseCluster) GetStorageClusters() []StorageBaseClusterRelationsh
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ComputeBaseCluster) GetStorageClustersOk() ([]StorageBaseClusterRelationship, bool) {
-	if o == nil || o.StorageClusters == nil {
+	if o == nil || IsNil(o.StorageClusters) {
 		return nil, false
 	}
 	return o.StorageClusters, true
@@ -119,7 +123,7 @@ func (o *ComputeBaseCluster) GetStorageClustersOk() ([]StorageBaseClusterRelatio
 
 // HasStorageClusters returns a boolean if a field has been set.
 func (o *ComputeBaseCluster) HasStorageClusters() bool {
-	if o != nil && o.StorageClusters != nil {
+	if o != nil && IsNil(o.StorageClusters) {
 		return true
 	}
 
@@ -132,21 +136,25 @@ func (o *ComputeBaseCluster) SetStorageClusters(v []StorageBaseClusterRelationsh
 }
 
 func (o ComputeBaseCluster) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o ComputeBaseCluster) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedInfraBaseCluster, errInfraBaseCluster := json.Marshal(o.InfraBaseCluster)
 	if errInfraBaseCluster != nil {
-		return []byte{}, errInfraBaseCluster
+		return map[string]interface{}{}, errInfraBaseCluster
 	}
 	errInfraBaseCluster = json.Unmarshal([]byte(serializedInfraBaseCluster), &toSerialize)
 	if errInfraBaseCluster != nil {
-		return []byte{}, errInfraBaseCluster
+		return map[string]interface{}{}, errInfraBaseCluster
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
 	if o.StorageClusters != nil {
 		toSerialize["StorageClusters"] = o.StorageClusters
 	}
@@ -155,10 +163,32 @@ func (o ComputeBaseCluster) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *ComputeBaseCluster) UnmarshalJSON(bytes []byte) (err error) {
+func (o *ComputeBaseCluster) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type ComputeBaseClusterWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type.
 		ClassId string `json:"ClassId"`
@@ -170,7 +200,7 @@ func (o *ComputeBaseCluster) UnmarshalJSON(bytes []byte) (err error) {
 
 	varComputeBaseClusterWithoutEmbeddedStruct := ComputeBaseClusterWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varComputeBaseClusterWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varComputeBaseClusterWithoutEmbeddedStruct)
 	if err == nil {
 		varComputeBaseCluster := _ComputeBaseCluster{}
 		varComputeBaseCluster.ClassId = varComputeBaseClusterWithoutEmbeddedStruct.ClassId
@@ -183,7 +213,7 @@ func (o *ComputeBaseCluster) UnmarshalJSON(bytes []byte) (err error) {
 
 	varComputeBaseCluster := _ComputeBaseCluster{}
 
-	err = json.Unmarshal(bytes, &varComputeBaseCluster)
+	err = json.Unmarshal(data, &varComputeBaseCluster)
 	if err == nil {
 		o.InfraBaseCluster = varComputeBaseCluster.InfraBaseCluster
 	} else {
@@ -192,7 +222,7 @@ func (o *ComputeBaseCluster) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "StorageClusters")

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the IaasDiagnosticMessages type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &IaasDiagnosticMessages{}
 
 // IaasDiagnosticMessages Gets diagnostics messages from UCSD.
 type IaasDiagnosticMessages struct {
@@ -39,8 +43,8 @@ type IaasDiagnosticMessages struct {
 	// Status of the given alert.
 	Status *string `json:"Status,omitempty"`
 	// Status Id of the given alert.
-	StatusId             *string                              `json:"StatusId,omitempty"`
-	RegisteredDevice     *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+	StatusId             *string                                     `json:"StatusId,omitempty"`
+	RegisteredDevice     NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -119,7 +123,7 @@ func (o *IaasDiagnosticMessages) SetObjectType(v string) {
 
 // GetCategory returns the Category field value if set, zero value otherwise.
 func (o *IaasDiagnosticMessages) GetCategory() string {
-	if o == nil || o.Category == nil {
+	if o == nil || IsNil(o.Category) {
 		var ret string
 		return ret
 	}
@@ -129,7 +133,7 @@ func (o *IaasDiagnosticMessages) GetCategory() string {
 // GetCategoryOk returns a tuple with the Category field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IaasDiagnosticMessages) GetCategoryOk() (*string, bool) {
-	if o == nil || o.Category == nil {
+	if o == nil || IsNil(o.Category) {
 		return nil, false
 	}
 	return o.Category, true
@@ -137,7 +141,7 @@ func (o *IaasDiagnosticMessages) GetCategoryOk() (*string, bool) {
 
 // HasCategory returns a boolean if a field has been set.
 func (o *IaasDiagnosticMessages) HasCategory() bool {
-	if o != nil && o.Category != nil {
+	if o != nil && !IsNil(o.Category) {
 		return true
 	}
 
@@ -151,7 +155,7 @@ func (o *IaasDiagnosticMessages) SetCategory(v string) {
 
 // GetGuid returns the Guid field value if set, zero value otherwise.
 func (o *IaasDiagnosticMessages) GetGuid() string {
-	if o == nil || o.Guid == nil {
+	if o == nil || IsNil(o.Guid) {
 		var ret string
 		return ret
 	}
@@ -161,7 +165,7 @@ func (o *IaasDiagnosticMessages) GetGuid() string {
 // GetGuidOk returns a tuple with the Guid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IaasDiagnosticMessages) GetGuidOk() (*string, bool) {
-	if o == nil || o.Guid == nil {
+	if o == nil || IsNil(o.Guid) {
 		return nil, false
 	}
 	return o.Guid, true
@@ -169,7 +173,7 @@ func (o *IaasDiagnosticMessages) GetGuidOk() (*string, bool) {
 
 // HasGuid returns a boolean if a field has been set.
 func (o *IaasDiagnosticMessages) HasGuid() bool {
-	if o != nil && o.Guid != nil {
+	if o != nil && !IsNil(o.Guid) {
 		return true
 	}
 
@@ -183,7 +187,7 @@ func (o *IaasDiagnosticMessages) SetGuid(v string) {
 
 // GetItem returns the Item field value if set, zero value otherwise.
 func (o *IaasDiagnosticMessages) GetItem() string {
-	if o == nil || o.Item == nil {
+	if o == nil || IsNil(o.Item) {
 		var ret string
 		return ret
 	}
@@ -193,7 +197,7 @@ func (o *IaasDiagnosticMessages) GetItem() string {
 // GetItemOk returns a tuple with the Item field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IaasDiagnosticMessages) GetItemOk() (*string, bool) {
-	if o == nil || o.Item == nil {
+	if o == nil || IsNil(o.Item) {
 		return nil, false
 	}
 	return o.Item, true
@@ -201,7 +205,7 @@ func (o *IaasDiagnosticMessages) GetItemOk() (*string, bool) {
 
 // HasItem returns a boolean if a field has been set.
 func (o *IaasDiagnosticMessages) HasItem() bool {
-	if o != nil && o.Item != nil {
+	if o != nil && !IsNil(o.Item) {
 		return true
 	}
 
@@ -215,7 +219,7 @@ func (o *IaasDiagnosticMessages) SetItem(v string) {
 
 // GetLastChecked returns the LastChecked field value if set, zero value otherwise.
 func (o *IaasDiagnosticMessages) GetLastChecked() string {
-	if o == nil || o.LastChecked == nil {
+	if o == nil || IsNil(o.LastChecked) {
 		var ret string
 		return ret
 	}
@@ -225,7 +229,7 @@ func (o *IaasDiagnosticMessages) GetLastChecked() string {
 // GetLastCheckedOk returns a tuple with the LastChecked field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IaasDiagnosticMessages) GetLastCheckedOk() (*string, bool) {
-	if o == nil || o.LastChecked == nil {
+	if o == nil || IsNil(o.LastChecked) {
 		return nil, false
 	}
 	return o.LastChecked, true
@@ -233,7 +237,7 @@ func (o *IaasDiagnosticMessages) GetLastCheckedOk() (*string, bool) {
 
 // HasLastChecked returns a boolean if a field has been set.
 func (o *IaasDiagnosticMessages) HasLastChecked() bool {
-	if o != nil && o.LastChecked != nil {
+	if o != nil && !IsNil(o.LastChecked) {
 		return true
 	}
 
@@ -247,7 +251,7 @@ func (o *IaasDiagnosticMessages) SetLastChecked(v string) {
 
 // GetMessage returns the Message field value if set, zero value otherwise.
 func (o *IaasDiagnosticMessages) GetMessage() string {
-	if o == nil || o.Message == nil {
+	if o == nil || IsNil(o.Message) {
 		var ret string
 		return ret
 	}
@@ -257,7 +261,7 @@ func (o *IaasDiagnosticMessages) GetMessage() string {
 // GetMessageOk returns a tuple with the Message field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IaasDiagnosticMessages) GetMessageOk() (*string, bool) {
-	if o == nil || o.Message == nil {
+	if o == nil || IsNil(o.Message) {
 		return nil, false
 	}
 	return o.Message, true
@@ -265,7 +269,7 @@ func (o *IaasDiagnosticMessages) GetMessageOk() (*string, bool) {
 
 // HasMessage returns a boolean if a field has been set.
 func (o *IaasDiagnosticMessages) HasMessage() bool {
-	if o != nil && o.Message != nil {
+	if o != nil && !IsNil(o.Message) {
 		return true
 	}
 
@@ -279,7 +283,7 @@ func (o *IaasDiagnosticMessages) SetMessage(v string) {
 
 // GetRecommendation returns the Recommendation field value if set, zero value otherwise.
 func (o *IaasDiagnosticMessages) GetRecommendation() string {
-	if o == nil || o.Recommendation == nil {
+	if o == nil || IsNil(o.Recommendation) {
 		var ret string
 		return ret
 	}
@@ -289,7 +293,7 @@ func (o *IaasDiagnosticMessages) GetRecommendation() string {
 // GetRecommendationOk returns a tuple with the Recommendation field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IaasDiagnosticMessages) GetRecommendationOk() (*string, bool) {
-	if o == nil || o.Recommendation == nil {
+	if o == nil || IsNil(o.Recommendation) {
 		return nil, false
 	}
 	return o.Recommendation, true
@@ -297,7 +301,7 @@ func (o *IaasDiagnosticMessages) GetRecommendationOk() (*string, bool) {
 
 // HasRecommendation returns a boolean if a field has been set.
 func (o *IaasDiagnosticMessages) HasRecommendation() bool {
-	if o != nil && o.Recommendation != nil {
+	if o != nil && !IsNil(o.Recommendation) {
 		return true
 	}
 
@@ -311,7 +315,7 @@ func (o *IaasDiagnosticMessages) SetRecommendation(v string) {
 
 // GetStatus returns the Status field value if set, zero value otherwise.
 func (o *IaasDiagnosticMessages) GetStatus() string {
-	if o == nil || o.Status == nil {
+	if o == nil || IsNil(o.Status) {
 		var ret string
 		return ret
 	}
@@ -321,7 +325,7 @@ func (o *IaasDiagnosticMessages) GetStatus() string {
 // GetStatusOk returns a tuple with the Status field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IaasDiagnosticMessages) GetStatusOk() (*string, bool) {
-	if o == nil || o.Status == nil {
+	if o == nil || IsNil(o.Status) {
 		return nil, false
 	}
 	return o.Status, true
@@ -329,7 +333,7 @@ func (o *IaasDiagnosticMessages) GetStatusOk() (*string, bool) {
 
 // HasStatus returns a boolean if a field has been set.
 func (o *IaasDiagnosticMessages) HasStatus() bool {
-	if o != nil && o.Status != nil {
+	if o != nil && !IsNil(o.Status) {
 		return true
 	}
 
@@ -343,7 +347,7 @@ func (o *IaasDiagnosticMessages) SetStatus(v string) {
 
 // GetStatusId returns the StatusId field value if set, zero value otherwise.
 func (o *IaasDiagnosticMessages) GetStatusId() string {
-	if o == nil || o.StatusId == nil {
+	if o == nil || IsNil(o.StatusId) {
 		var ret string
 		return ret
 	}
@@ -353,7 +357,7 @@ func (o *IaasDiagnosticMessages) GetStatusId() string {
 // GetStatusIdOk returns a tuple with the StatusId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IaasDiagnosticMessages) GetStatusIdOk() (*string, bool) {
-	if o == nil || o.StatusId == nil {
+	if o == nil || IsNil(o.StatusId) {
 		return nil, false
 	}
 	return o.StatusId, true
@@ -361,7 +365,7 @@ func (o *IaasDiagnosticMessages) GetStatusIdOk() (*string, bool) {
 
 // HasStatusId returns a boolean if a field has been set.
 func (o *IaasDiagnosticMessages) HasStatusId() bool {
-	if o != nil && o.StatusId != nil {
+	if o != nil && !IsNil(o.StatusId) {
 		return true
 	}
 
@@ -373,90 +377,127 @@ func (o *IaasDiagnosticMessages) SetStatusId(v string) {
 	o.StatusId = &v
 }
 
-// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise.
+// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *IaasDiagnosticMessages) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil || IsNil(o.RegisteredDevice.Get()) {
 		var ret AssetDeviceRegistrationRelationship
 		return ret
 	}
-	return *o.RegisteredDevice
+	return *o.RegisteredDevice.Get()
 }
 
 // GetRegisteredDeviceOk returns a tuple with the RegisteredDevice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *IaasDiagnosticMessages) GetRegisteredDeviceOk() (*AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.RegisteredDevice, true
+	return o.RegisteredDevice.Get(), o.RegisteredDevice.IsSet()
 }
 
 // HasRegisteredDevice returns a boolean if a field has been set.
 func (o *IaasDiagnosticMessages) HasRegisteredDevice() bool {
-	if o != nil && o.RegisteredDevice != nil {
+	if o != nil && o.RegisteredDevice.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRegisteredDevice gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
+// SetRegisteredDevice gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
 func (o *IaasDiagnosticMessages) SetRegisteredDevice(v AssetDeviceRegistrationRelationship) {
-	o.RegisteredDevice = &v
+	o.RegisteredDevice.Set(&v)
+}
+
+// SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+func (o *IaasDiagnosticMessages) SetRegisteredDeviceNil() {
+	o.RegisteredDevice.Set(nil)
+}
+
+// UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
+func (o *IaasDiagnosticMessages) UnsetRegisteredDevice() {
+	o.RegisteredDevice.Unset()
 }
 
 func (o IaasDiagnosticMessages) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o IaasDiagnosticMessages) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Category != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Category) {
 		toSerialize["Category"] = o.Category
 	}
-	if o.Guid != nil {
+	if !IsNil(o.Guid) {
 		toSerialize["Guid"] = o.Guid
 	}
-	if o.Item != nil {
+	if !IsNil(o.Item) {
 		toSerialize["Item"] = o.Item
 	}
-	if o.LastChecked != nil {
+	if !IsNil(o.LastChecked) {
 		toSerialize["LastChecked"] = o.LastChecked
 	}
-	if o.Message != nil {
+	if !IsNil(o.Message) {
 		toSerialize["Message"] = o.Message
 	}
-	if o.Recommendation != nil {
+	if !IsNil(o.Recommendation) {
 		toSerialize["Recommendation"] = o.Recommendation
 	}
-	if o.Status != nil {
+	if !IsNil(o.Status) {
 		toSerialize["Status"] = o.Status
 	}
-	if o.StatusId != nil {
+	if !IsNil(o.StatusId) {
 		toSerialize["StatusId"] = o.StatusId
 	}
-	if o.RegisteredDevice != nil {
-		toSerialize["RegisteredDevice"] = o.RegisteredDevice
+	if o.RegisteredDevice.IsSet() {
+		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *IaasDiagnosticMessages) UnmarshalJSON(bytes []byte) (err error) {
+func (o *IaasDiagnosticMessages) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type IaasDiagnosticMessagesWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -477,13 +518,13 @@ func (o *IaasDiagnosticMessages) UnmarshalJSON(bytes []byte) (err error) {
 		// Status of the given alert.
 		Status *string `json:"Status,omitempty"`
 		// Status Id of the given alert.
-		StatusId         *string                              `json:"StatusId,omitempty"`
-		RegisteredDevice *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+		StatusId         *string                                     `json:"StatusId,omitempty"`
+		RegisteredDevice NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	}
 
 	varIaasDiagnosticMessagesWithoutEmbeddedStruct := IaasDiagnosticMessagesWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varIaasDiagnosticMessagesWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varIaasDiagnosticMessagesWithoutEmbeddedStruct)
 	if err == nil {
 		varIaasDiagnosticMessages := _IaasDiagnosticMessages{}
 		varIaasDiagnosticMessages.ClassId = varIaasDiagnosticMessagesWithoutEmbeddedStruct.ClassId
@@ -504,7 +545,7 @@ func (o *IaasDiagnosticMessages) UnmarshalJSON(bytes []byte) (err error) {
 
 	varIaasDiagnosticMessages := _IaasDiagnosticMessages{}
 
-	err = json.Unmarshal(bytes, &varIaasDiagnosticMessages)
+	err = json.Unmarshal(data, &varIaasDiagnosticMessages)
 	if err == nil {
 		o.MoBaseMo = varIaasDiagnosticMessages.MoBaseMo
 	} else {
@@ -513,7 +554,7 @@ func (o *IaasDiagnosticMessages) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Category")

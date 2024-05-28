@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the FirmwareBaseDistributable type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &FirmwareBaseDistributable{}
 
 // FirmwareBaseDistributable An image distributed by Cisco.
 type FirmwareBaseDistributable struct {
@@ -47,8 +51,8 @@ type FirmwareBaseDistributable struct {
 	// The vendor or publisher of this file.
 	Vendor *string `json:"Vendor,omitempty"`
 	// An array of relationships to firmwareDistributableMeta resources.
-	DistributableMetas   []FirmwareDistributableMetaRelationship `json:"DistributableMetas,omitempty"`
-	Release              *SoftwarerepositoryReleaseRelationship  `json:"Release,omitempty"`
+	DistributableMetas   []FirmwareDistributableMetaRelationship       `json:"DistributableMetas,omitempty"`
+	Release              NullableSoftwarerepositoryReleaseRelationship `json:"Release,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -64,6 +68,8 @@ func NewFirmwareBaseDistributable(classId string, objectType string) *FirmwareBa
 	this.ObjectType = objectType
 	var importAction string = "None"
 	this.ImportAction = &importAction
+	var recommendedBuild string = "N"
+	this.RecommendedBuild = &recommendedBuild
 	var vendor string = "Cisco"
 	this.Vendor = &vendor
 	return &this
@@ -74,6 +80,8 @@ func NewFirmwareBaseDistributable(classId string, objectType string) *FirmwareBa
 // but it doesn't guarantee that properties required by API are set
 func NewFirmwareBaseDistributableWithDefaults() *FirmwareBaseDistributable {
 	this := FirmwareBaseDistributable{}
+	var recommendedBuild string = "N"
+	this.RecommendedBuild = &recommendedBuild
 	var vendor string = "Cisco"
 	this.Vendor = &vendor
 	return &this
@@ -129,7 +137,7 @@ func (o *FirmwareBaseDistributable) SetObjectType(v string) {
 
 // GetBundleType returns the BundleType field value if set, zero value otherwise.
 func (o *FirmwareBaseDistributable) GetBundleType() string {
-	if o == nil || o.BundleType == nil {
+	if o == nil || IsNil(o.BundleType) {
 		var ret string
 		return ret
 	}
@@ -139,7 +147,7 @@ func (o *FirmwareBaseDistributable) GetBundleType() string {
 // GetBundleTypeOk returns a tuple with the BundleType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FirmwareBaseDistributable) GetBundleTypeOk() (*string, bool) {
-	if o == nil || o.BundleType == nil {
+	if o == nil || IsNil(o.BundleType) {
 		return nil, false
 	}
 	return o.BundleType, true
@@ -147,7 +155,7 @@ func (o *FirmwareBaseDistributable) GetBundleTypeOk() (*string, bool) {
 
 // HasBundleType returns a boolean if a field has been set.
 func (o *FirmwareBaseDistributable) HasBundleType() bool {
-	if o != nil && o.BundleType != nil {
+	if o != nil && !IsNil(o.BundleType) {
 		return true
 	}
 
@@ -172,7 +180,7 @@ func (o *FirmwareBaseDistributable) GetComponentMeta() []FirmwareComponentMeta {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *FirmwareBaseDistributable) GetComponentMetaOk() ([]FirmwareComponentMeta, bool) {
-	if o == nil || o.ComponentMeta == nil {
+	if o == nil || IsNil(o.ComponentMeta) {
 		return nil, false
 	}
 	return o.ComponentMeta, true
@@ -180,7 +188,7 @@ func (o *FirmwareBaseDistributable) GetComponentMetaOk() ([]FirmwareComponentMet
 
 // HasComponentMeta returns a boolean if a field has been set.
 func (o *FirmwareBaseDistributable) HasComponentMeta() bool {
-	if o != nil && o.ComponentMeta != nil {
+	if o != nil && IsNil(o.ComponentMeta) {
 		return true
 	}
 
@@ -194,7 +202,7 @@ func (o *FirmwareBaseDistributable) SetComponentMeta(v []FirmwareComponentMeta) 
 
 // GetGuid returns the Guid field value if set, zero value otherwise.
 func (o *FirmwareBaseDistributable) GetGuid() string {
-	if o == nil || o.Guid == nil {
+	if o == nil || IsNil(o.Guid) {
 		var ret string
 		return ret
 	}
@@ -204,7 +212,7 @@ func (o *FirmwareBaseDistributable) GetGuid() string {
 // GetGuidOk returns a tuple with the Guid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FirmwareBaseDistributable) GetGuidOk() (*string, bool) {
-	if o == nil || o.Guid == nil {
+	if o == nil || IsNil(o.Guid) {
 		return nil, false
 	}
 	return o.Guid, true
@@ -212,7 +220,7 @@ func (o *FirmwareBaseDistributable) GetGuidOk() (*string, bool) {
 
 // HasGuid returns a boolean if a field has been set.
 func (o *FirmwareBaseDistributable) HasGuid() bool {
-	if o != nil && o.Guid != nil {
+	if o != nil && !IsNil(o.Guid) {
 		return true
 	}
 
@@ -226,7 +234,7 @@ func (o *FirmwareBaseDistributable) SetGuid(v string) {
 
 // GetImageType returns the ImageType field value if set, zero value otherwise.
 func (o *FirmwareBaseDistributable) GetImageType() string {
-	if o == nil || o.ImageType == nil {
+	if o == nil || IsNil(o.ImageType) {
 		var ret string
 		return ret
 	}
@@ -236,7 +244,7 @@ func (o *FirmwareBaseDistributable) GetImageType() string {
 // GetImageTypeOk returns a tuple with the ImageType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FirmwareBaseDistributable) GetImageTypeOk() (*string, bool) {
-	if o == nil || o.ImageType == nil {
+	if o == nil || IsNil(o.ImageType) {
 		return nil, false
 	}
 	return o.ImageType, true
@@ -244,7 +252,7 @@ func (o *FirmwareBaseDistributable) GetImageTypeOk() (*string, bool) {
 
 // HasImageType returns a boolean if a field has been set.
 func (o *FirmwareBaseDistributable) HasImageType() bool {
-	if o != nil && o.ImageType != nil {
+	if o != nil && !IsNil(o.ImageType) {
 		return true
 	}
 
@@ -258,7 +266,7 @@ func (o *FirmwareBaseDistributable) SetImageType(v string) {
 
 // GetMdfid returns the Mdfid field value if set, zero value otherwise.
 func (o *FirmwareBaseDistributable) GetMdfid() string {
-	if o == nil || o.Mdfid == nil {
+	if o == nil || IsNil(o.Mdfid) {
 		var ret string
 		return ret
 	}
@@ -268,7 +276,7 @@ func (o *FirmwareBaseDistributable) GetMdfid() string {
 // GetMdfidOk returns a tuple with the Mdfid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FirmwareBaseDistributable) GetMdfidOk() (*string, bool) {
-	if o == nil || o.Mdfid == nil {
+	if o == nil || IsNil(o.Mdfid) {
 		return nil, false
 	}
 	return o.Mdfid, true
@@ -276,7 +284,7 @@ func (o *FirmwareBaseDistributable) GetMdfidOk() (*string, bool) {
 
 // HasMdfid returns a boolean if a field has been set.
 func (o *FirmwareBaseDistributable) HasMdfid() bool {
-	if o != nil && o.Mdfid != nil {
+	if o != nil && !IsNil(o.Mdfid) {
 		return true
 	}
 
@@ -290,7 +298,7 @@ func (o *FirmwareBaseDistributable) SetMdfid(v string) {
 
 // GetModel returns the Model field value if set, zero value otherwise.
 func (o *FirmwareBaseDistributable) GetModel() string {
-	if o == nil || o.Model == nil {
+	if o == nil || IsNil(o.Model) {
 		var ret string
 		return ret
 	}
@@ -300,7 +308,7 @@ func (o *FirmwareBaseDistributable) GetModel() string {
 // GetModelOk returns a tuple with the Model field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FirmwareBaseDistributable) GetModelOk() (*string, bool) {
-	if o == nil || o.Model == nil {
+	if o == nil || IsNil(o.Model) {
 		return nil, false
 	}
 	return o.Model, true
@@ -308,7 +316,7 @@ func (o *FirmwareBaseDistributable) GetModelOk() (*string, bool) {
 
 // HasModel returns a boolean if a field has been set.
 func (o *FirmwareBaseDistributable) HasModel() bool {
-	if o != nil && o.Model != nil {
+	if o != nil && !IsNil(o.Model) {
 		return true
 	}
 
@@ -322,7 +330,7 @@ func (o *FirmwareBaseDistributable) SetModel(v string) {
 
 // GetPlatformType returns the PlatformType field value if set, zero value otherwise.
 func (o *FirmwareBaseDistributable) GetPlatformType() string {
-	if o == nil || o.PlatformType == nil {
+	if o == nil || IsNil(o.PlatformType) {
 		var ret string
 		return ret
 	}
@@ -332,7 +340,7 @@ func (o *FirmwareBaseDistributable) GetPlatformType() string {
 // GetPlatformTypeOk returns a tuple with the PlatformType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FirmwareBaseDistributable) GetPlatformTypeOk() (*string, bool) {
-	if o == nil || o.PlatformType == nil {
+	if o == nil || IsNil(o.PlatformType) {
 		return nil, false
 	}
 	return o.PlatformType, true
@@ -340,7 +348,7 @@ func (o *FirmwareBaseDistributable) GetPlatformTypeOk() (*string, bool) {
 
 // HasPlatformType returns a boolean if a field has been set.
 func (o *FirmwareBaseDistributable) HasPlatformType() bool {
-	if o != nil && o.PlatformType != nil {
+	if o != nil && !IsNil(o.PlatformType) {
 		return true
 	}
 
@@ -354,7 +362,7 @@ func (o *FirmwareBaseDistributable) SetPlatformType(v string) {
 
 // GetRecommendedBuild returns the RecommendedBuild field value if set, zero value otherwise.
 func (o *FirmwareBaseDistributable) GetRecommendedBuild() string {
-	if o == nil || o.RecommendedBuild == nil {
+	if o == nil || IsNil(o.RecommendedBuild) {
 		var ret string
 		return ret
 	}
@@ -364,7 +372,7 @@ func (o *FirmwareBaseDistributable) GetRecommendedBuild() string {
 // GetRecommendedBuildOk returns a tuple with the RecommendedBuild field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FirmwareBaseDistributable) GetRecommendedBuildOk() (*string, bool) {
-	if o == nil || o.RecommendedBuild == nil {
+	if o == nil || IsNil(o.RecommendedBuild) {
 		return nil, false
 	}
 	return o.RecommendedBuild, true
@@ -372,7 +380,7 @@ func (o *FirmwareBaseDistributable) GetRecommendedBuildOk() (*string, bool) {
 
 // HasRecommendedBuild returns a boolean if a field has been set.
 func (o *FirmwareBaseDistributable) HasRecommendedBuild() bool {
-	if o != nil && o.RecommendedBuild != nil {
+	if o != nil && !IsNil(o.RecommendedBuild) {
 		return true
 	}
 
@@ -386,7 +394,7 @@ func (o *FirmwareBaseDistributable) SetRecommendedBuild(v string) {
 
 // GetReleaseNotesUrl returns the ReleaseNotesUrl field value if set, zero value otherwise.
 func (o *FirmwareBaseDistributable) GetReleaseNotesUrl() string {
-	if o == nil || o.ReleaseNotesUrl == nil {
+	if o == nil || IsNil(o.ReleaseNotesUrl) {
 		var ret string
 		return ret
 	}
@@ -396,7 +404,7 @@ func (o *FirmwareBaseDistributable) GetReleaseNotesUrl() string {
 // GetReleaseNotesUrlOk returns a tuple with the ReleaseNotesUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FirmwareBaseDistributable) GetReleaseNotesUrlOk() (*string, bool) {
-	if o == nil || o.ReleaseNotesUrl == nil {
+	if o == nil || IsNil(o.ReleaseNotesUrl) {
 		return nil, false
 	}
 	return o.ReleaseNotesUrl, true
@@ -404,7 +412,7 @@ func (o *FirmwareBaseDistributable) GetReleaseNotesUrlOk() (*string, bool) {
 
 // HasReleaseNotesUrl returns a boolean if a field has been set.
 func (o *FirmwareBaseDistributable) HasReleaseNotesUrl() bool {
-	if o != nil && o.ReleaseNotesUrl != nil {
+	if o != nil && !IsNil(o.ReleaseNotesUrl) {
 		return true
 	}
 
@@ -418,7 +426,7 @@ func (o *FirmwareBaseDistributable) SetReleaseNotesUrl(v string) {
 
 // GetSoftwareTypeId returns the SoftwareTypeId field value if set, zero value otherwise.
 func (o *FirmwareBaseDistributable) GetSoftwareTypeId() string {
-	if o == nil || o.SoftwareTypeId == nil {
+	if o == nil || IsNil(o.SoftwareTypeId) {
 		var ret string
 		return ret
 	}
@@ -428,7 +436,7 @@ func (o *FirmwareBaseDistributable) GetSoftwareTypeId() string {
 // GetSoftwareTypeIdOk returns a tuple with the SoftwareTypeId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FirmwareBaseDistributable) GetSoftwareTypeIdOk() (*string, bool) {
-	if o == nil || o.SoftwareTypeId == nil {
+	if o == nil || IsNil(o.SoftwareTypeId) {
 		return nil, false
 	}
 	return o.SoftwareTypeId, true
@@ -436,7 +444,7 @@ func (o *FirmwareBaseDistributable) GetSoftwareTypeIdOk() (*string, bool) {
 
 // HasSoftwareTypeId returns a boolean if a field has been set.
 func (o *FirmwareBaseDistributable) HasSoftwareTypeId() bool {
-	if o != nil && o.SoftwareTypeId != nil {
+	if o != nil && !IsNil(o.SoftwareTypeId) {
 		return true
 	}
 
@@ -461,7 +469,7 @@ func (o *FirmwareBaseDistributable) GetSupportedModels() []string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *FirmwareBaseDistributable) GetSupportedModelsOk() ([]string, bool) {
-	if o == nil || o.SupportedModels == nil {
+	if o == nil || IsNil(o.SupportedModels) {
 		return nil, false
 	}
 	return o.SupportedModels, true
@@ -469,7 +477,7 @@ func (o *FirmwareBaseDistributable) GetSupportedModelsOk() ([]string, bool) {
 
 // HasSupportedModels returns a boolean if a field has been set.
 func (o *FirmwareBaseDistributable) HasSupportedModels() bool {
-	if o != nil && o.SupportedModels != nil {
+	if o != nil && IsNil(o.SupportedModels) {
 		return true
 	}
 
@@ -483,7 +491,7 @@ func (o *FirmwareBaseDistributable) SetSupportedModels(v []string) {
 
 // GetVendor returns the Vendor field value if set, zero value otherwise.
 func (o *FirmwareBaseDistributable) GetVendor() string {
-	if o == nil || o.Vendor == nil {
+	if o == nil || IsNil(o.Vendor) {
 		var ret string
 		return ret
 	}
@@ -493,7 +501,7 @@ func (o *FirmwareBaseDistributable) GetVendor() string {
 // GetVendorOk returns a tuple with the Vendor field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FirmwareBaseDistributable) GetVendorOk() (*string, bool) {
-	if o == nil || o.Vendor == nil {
+	if o == nil || IsNil(o.Vendor) {
 		return nil, false
 	}
 	return o.Vendor, true
@@ -501,7 +509,7 @@ func (o *FirmwareBaseDistributable) GetVendorOk() (*string, bool) {
 
 // HasVendor returns a boolean if a field has been set.
 func (o *FirmwareBaseDistributable) HasVendor() bool {
-	if o != nil && o.Vendor != nil {
+	if o != nil && !IsNil(o.Vendor) {
 		return true
 	}
 
@@ -526,7 +534,7 @@ func (o *FirmwareBaseDistributable) GetDistributableMetas() []FirmwareDistributa
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *FirmwareBaseDistributable) GetDistributableMetasOk() ([]FirmwareDistributableMetaRelationship, bool) {
-	if o == nil || o.DistributableMetas == nil {
+	if o == nil || IsNil(o.DistributableMetas) {
 		return nil, false
 	}
 	return o.DistributableMetas, true
@@ -534,7 +542,7 @@ func (o *FirmwareBaseDistributable) GetDistributableMetasOk() ([]FirmwareDistrib
 
 // HasDistributableMetas returns a boolean if a field has been set.
 func (o *FirmwareBaseDistributable) HasDistributableMetas() bool {
-	if o != nil && o.DistributableMetas != nil {
+	if o != nil && IsNil(o.DistributableMetas) {
 		return true
 	}
 
@@ -546,105 +554,142 @@ func (o *FirmwareBaseDistributable) SetDistributableMetas(v []FirmwareDistributa
 	o.DistributableMetas = v
 }
 
-// GetRelease returns the Release field value if set, zero value otherwise.
+// GetRelease returns the Release field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *FirmwareBaseDistributable) GetRelease() SoftwarerepositoryReleaseRelationship {
-	if o == nil || o.Release == nil {
+	if o == nil || IsNil(o.Release.Get()) {
 		var ret SoftwarerepositoryReleaseRelationship
 		return ret
 	}
-	return *o.Release
+	return *o.Release.Get()
 }
 
 // GetReleaseOk returns a tuple with the Release field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *FirmwareBaseDistributable) GetReleaseOk() (*SoftwarerepositoryReleaseRelationship, bool) {
-	if o == nil || o.Release == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Release, true
+	return o.Release.Get(), o.Release.IsSet()
 }
 
 // HasRelease returns a boolean if a field has been set.
 func (o *FirmwareBaseDistributable) HasRelease() bool {
-	if o != nil && o.Release != nil {
+	if o != nil && o.Release.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRelease gets a reference to the given SoftwarerepositoryReleaseRelationship and assigns it to the Release field.
+// SetRelease gets a reference to the given NullableSoftwarerepositoryReleaseRelationship and assigns it to the Release field.
 func (o *FirmwareBaseDistributable) SetRelease(v SoftwarerepositoryReleaseRelationship) {
-	o.Release = &v
+	o.Release.Set(&v)
+}
+
+// SetReleaseNil sets the value for Release to be an explicit nil
+func (o *FirmwareBaseDistributable) SetReleaseNil() {
+	o.Release.Set(nil)
+}
+
+// UnsetRelease ensures that no value is present for Release, not even an explicit nil
+func (o *FirmwareBaseDistributable) UnsetRelease() {
+	o.Release.Unset()
 }
 
 func (o FirmwareBaseDistributable) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o FirmwareBaseDistributable) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedSoftwarerepositoryFile, errSoftwarerepositoryFile := json.Marshal(o.SoftwarerepositoryFile)
 	if errSoftwarerepositoryFile != nil {
-		return []byte{}, errSoftwarerepositoryFile
+		return map[string]interface{}{}, errSoftwarerepositoryFile
 	}
 	errSoftwarerepositoryFile = json.Unmarshal([]byte(serializedSoftwarerepositoryFile), &toSerialize)
 	if errSoftwarerepositoryFile != nil {
-		return []byte{}, errSoftwarerepositoryFile
+		return map[string]interface{}{}, errSoftwarerepositoryFile
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.BundleType != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.BundleType) {
 		toSerialize["BundleType"] = o.BundleType
 	}
 	if o.ComponentMeta != nil {
 		toSerialize["ComponentMeta"] = o.ComponentMeta
 	}
-	if o.Guid != nil {
+	if !IsNil(o.Guid) {
 		toSerialize["Guid"] = o.Guid
 	}
-	if o.ImageType != nil {
+	if !IsNil(o.ImageType) {
 		toSerialize["ImageType"] = o.ImageType
 	}
-	if o.Mdfid != nil {
+	if !IsNil(o.Mdfid) {
 		toSerialize["Mdfid"] = o.Mdfid
 	}
-	if o.Model != nil {
+	if !IsNil(o.Model) {
 		toSerialize["Model"] = o.Model
 	}
-	if o.PlatformType != nil {
+	if !IsNil(o.PlatformType) {
 		toSerialize["PlatformType"] = o.PlatformType
 	}
-	if o.RecommendedBuild != nil {
+	if !IsNil(o.RecommendedBuild) {
 		toSerialize["RecommendedBuild"] = o.RecommendedBuild
 	}
-	if o.ReleaseNotesUrl != nil {
+	if !IsNil(o.ReleaseNotesUrl) {
 		toSerialize["ReleaseNotesUrl"] = o.ReleaseNotesUrl
 	}
-	if o.SoftwareTypeId != nil {
+	if !IsNil(o.SoftwareTypeId) {
 		toSerialize["SoftwareTypeId"] = o.SoftwareTypeId
 	}
 	if o.SupportedModels != nil {
 		toSerialize["SupportedModels"] = o.SupportedModels
 	}
-	if o.Vendor != nil {
+	if !IsNil(o.Vendor) {
 		toSerialize["Vendor"] = o.Vendor
 	}
 	if o.DistributableMetas != nil {
 		toSerialize["DistributableMetas"] = o.DistributableMetas
 	}
-	if o.Release != nil {
-		toSerialize["Release"] = o.Release
+	if o.Release.IsSet() {
+		toSerialize["Release"] = o.Release.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *FirmwareBaseDistributable) UnmarshalJSON(bytes []byte) (err error) {
+func (o *FirmwareBaseDistributable) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type FirmwareBaseDistributableWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type.
 		ClassId string `json:"ClassId"`
@@ -673,13 +718,13 @@ func (o *FirmwareBaseDistributable) UnmarshalJSON(bytes []byte) (err error) {
 		// The vendor or publisher of this file.
 		Vendor *string `json:"Vendor,omitempty"`
 		// An array of relationships to firmwareDistributableMeta resources.
-		DistributableMetas []FirmwareDistributableMetaRelationship `json:"DistributableMetas,omitempty"`
-		Release            *SoftwarerepositoryReleaseRelationship  `json:"Release,omitempty"`
+		DistributableMetas []FirmwareDistributableMetaRelationship       `json:"DistributableMetas,omitempty"`
+		Release            NullableSoftwarerepositoryReleaseRelationship `json:"Release,omitempty"`
 	}
 
 	varFirmwareBaseDistributableWithoutEmbeddedStruct := FirmwareBaseDistributableWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varFirmwareBaseDistributableWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varFirmwareBaseDistributableWithoutEmbeddedStruct)
 	if err == nil {
 		varFirmwareBaseDistributable := _FirmwareBaseDistributable{}
 		varFirmwareBaseDistributable.ClassId = varFirmwareBaseDistributableWithoutEmbeddedStruct.ClassId
@@ -705,7 +750,7 @@ func (o *FirmwareBaseDistributable) UnmarshalJSON(bytes []byte) (err error) {
 
 	varFirmwareBaseDistributable := _FirmwareBaseDistributable{}
 
-	err = json.Unmarshal(bytes, &varFirmwareBaseDistributable)
+	err = json.Unmarshal(data, &varFirmwareBaseDistributable)
 	if err == nil {
 		o.SoftwarerepositoryFile = varFirmwareBaseDistributable.SoftwarerepositoryFile
 	} else {
@@ -714,7 +759,7 @@ func (o *FirmwareBaseDistributable) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "BundleType")

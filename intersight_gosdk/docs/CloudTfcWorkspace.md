@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 **LastRunStatus** | Pointer to **string** | The status of the last executed run in this workspace. | [optional] [readonly] 
 **Name** | Pointer to **string** | The name of the workspace. | [optional] [readonly] 
 **WorkspaceVariables** | Pointer to [**[]CloudTfcWorkspaceVariables**](CloudTfcWorkspaceVariables.md) |  | [optional] 
-**Organization** | Pointer to [**CloudTfcOrganizationRelationship**](CloudTfcOrganizationRelationship.md) |  | [optional] 
+**Organization** | Pointer to [**NullableCloudTfcOrganizationRelationship**](CloudTfcOrganizationRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -284,6 +284,16 @@ SetOrganization sets Organization field to given value.
 
 HasOrganization returns a boolean if a field has been set.
 
+### SetOrganizationNil
+
+`func (o *CloudTfcWorkspace) SetOrganizationNil(b bool)`
+
+ SetOrganizationNil sets the value for Organization to be an explicit nil
+
+### UnsetOrganization
+`func (o *CloudTfcWorkspace) UnsetOrganization()`
+
+UnsetOrganization ensures that no value is present for Organization, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

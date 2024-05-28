@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the BulkSubRequest type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &BulkSubRequest{}
 
 // BulkSubRequest An individual API request that is contained within a bulk request.
 type BulkSubRequest struct {
@@ -110,7 +114,7 @@ func (o *BulkSubRequest) SetObjectType(v string) {
 
 // GetUri returns the Uri field value if set, zero value otherwise.
 func (o *BulkSubRequest) GetUri() string {
-	if o == nil || o.Uri == nil {
+	if o == nil || IsNil(o.Uri) {
 		var ret string
 		return ret
 	}
@@ -120,7 +124,7 @@ func (o *BulkSubRequest) GetUri() string {
 // GetUriOk returns a tuple with the Uri field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *BulkSubRequest) GetUriOk() (*string, bool) {
-	if o == nil || o.Uri == nil {
+	if o == nil || IsNil(o.Uri) {
 		return nil, false
 	}
 	return o.Uri, true
@@ -128,7 +132,7 @@ func (o *BulkSubRequest) GetUriOk() (*string, bool) {
 
 // HasUri returns a boolean if a field has been set.
 func (o *BulkSubRequest) HasUri() bool {
-	if o != nil && o.Uri != nil {
+	if o != nil && !IsNil(o.Uri) {
 		return true
 	}
 
@@ -142,7 +146,7 @@ func (o *BulkSubRequest) SetUri(v string) {
 
 // GetVerb returns the Verb field value if set, zero value otherwise.
 func (o *BulkSubRequest) GetVerb() string {
-	if o == nil || o.Verb == nil {
+	if o == nil || IsNil(o.Verb) {
 		var ret string
 		return ret
 	}
@@ -152,7 +156,7 @@ func (o *BulkSubRequest) GetVerb() string {
 // GetVerbOk returns a tuple with the Verb field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *BulkSubRequest) GetVerbOk() (*string, bool) {
-	if o == nil || o.Verb == nil {
+	if o == nil || IsNil(o.Verb) {
 		return nil, false
 	}
 	return o.Verb, true
@@ -160,7 +164,7 @@ func (o *BulkSubRequest) GetVerbOk() (*string, bool) {
 
 // HasVerb returns a boolean if a field has been set.
 func (o *BulkSubRequest) HasVerb() bool {
-	if o != nil && o.Verb != nil {
+	if o != nil && !IsNil(o.Verb) {
 		return true
 	}
 
@@ -173,25 +177,29 @@ func (o *BulkSubRequest) SetVerb(v string) {
 }
 
 func (o BulkSubRequest) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o BulkSubRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
 	errMoBaseComplexType = json.Unmarshal([]byte(serializedMoBaseComplexType), &toSerialize)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Uri != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Uri) {
 		toSerialize["Uri"] = o.Uri
 	}
-	if o.Verb != nil {
+	if !IsNil(o.Verb) {
 		toSerialize["Verb"] = o.Verb
 	}
 
@@ -199,10 +207,32 @@ func (o BulkSubRequest) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *BulkSubRequest) UnmarshalJSON(bytes []byte) (err error) {
+func (o *BulkSubRequest) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type BulkSubRequestWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type.
 		ClassId string `json:"ClassId"`
@@ -216,7 +246,7 @@ func (o *BulkSubRequest) UnmarshalJSON(bytes []byte) (err error) {
 
 	varBulkSubRequestWithoutEmbeddedStruct := BulkSubRequestWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varBulkSubRequestWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varBulkSubRequestWithoutEmbeddedStruct)
 	if err == nil {
 		varBulkSubRequest := _BulkSubRequest{}
 		varBulkSubRequest.ClassId = varBulkSubRequestWithoutEmbeddedStruct.ClassId
@@ -230,7 +260,7 @@ func (o *BulkSubRequest) UnmarshalJSON(bytes []byte) (err error) {
 
 	varBulkSubRequest := _BulkSubRequest{}
 
-	err = json.Unmarshal(bytes, &varBulkSubRequest)
+	err = json.Unmarshal(data, &varBulkSubRequest)
 	if err == nil {
 		o.MoBaseComplexType = varBulkSubRequest.MoBaseComplexType
 	} else {
@@ -239,7 +269,7 @@ func (o *BulkSubRequest) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Uri")

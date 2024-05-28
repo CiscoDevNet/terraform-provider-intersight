@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **ConnectorPack** | Pointer to [**[]ConnectorpackConnectorPackUpdate**](ConnectorpackConnectorPackUpdate.md) |  | [optional] 
 **IsEligibleForUpgrade** | Pointer to **bool** | States whether the UCS Director is eligible for an upgrade. Set to true if connector packs are available for upgrade, else set to false. | [optional] [readonly] 
 **IsUpdateDownloaded** | Pointer to **bool** | States whether all the requisite updates have been downloaded to the target UCS Director. Set to true if all connector packs required to upgrade UCS Director to the next iteration have been downloaded, else set to false. | [optional] [readonly] 
-**UcsdInfo** | Pointer to [**IaasUcsdInfoRelationship**](IaasUcsdInfoRelationship.md) |  | [optional] 
+**UcsdInfo** | Pointer to [**NullableIaasUcsdInfoRelationship**](IaasUcsdInfoRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -180,6 +180,16 @@ SetUcsdInfo sets UcsdInfo field to given value.
 
 HasUcsdInfo returns a boolean if a field has been set.
 
+### SetUcsdInfoNil
+
+`func (o *ConnectorpackUpgradeImpact) SetUcsdInfoNil(b bool)`
+
+ SetUcsdInfoNil sets the value for UcsdInfo to be an explicit nil
+
+### UnsetUcsdInfo
+`func (o *ConnectorpackUpgradeImpact) UnsetUcsdInfo()`
+
+UnsetUcsdInfo ensures that no value is present for UcsdInfo, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

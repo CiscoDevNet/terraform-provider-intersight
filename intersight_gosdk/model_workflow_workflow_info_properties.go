@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the WorkflowWorkflowInfoProperties type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &WorkflowWorkflowInfoProperties{}
 
 // WorkflowWorkflowInfoProperties Properties for a workflowInfo.
 type WorkflowWorkflowInfoProperties struct {
@@ -111,7 +115,7 @@ func (o *WorkflowWorkflowInfoProperties) SetObjectType(v string) {
 
 // GetCancelable returns the Cancelable field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *WorkflowWorkflowInfoProperties) GetCancelable() WorkflowCancelableType {
-	if o == nil || o.Cancelable.Get() == nil {
+	if o == nil || IsNil(o.Cancelable.Get()) {
 		var ret WorkflowCancelableType
 		return ret
 	}
@@ -154,7 +158,7 @@ func (o *WorkflowWorkflowInfoProperties) UnsetCancelable() {
 
 // GetRetryable returns the Retryable field value if set, zero value otherwise.
 func (o *WorkflowWorkflowInfoProperties) GetRetryable() bool {
-	if o == nil || o.Retryable == nil {
+	if o == nil || IsNil(o.Retryable) {
 		var ret bool
 		return ret
 	}
@@ -164,7 +168,7 @@ func (o *WorkflowWorkflowInfoProperties) GetRetryable() bool {
 // GetRetryableOk returns a tuple with the Retryable field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowWorkflowInfoProperties) GetRetryableOk() (*bool, bool) {
-	if o == nil || o.Retryable == nil {
+	if o == nil || IsNil(o.Retryable) {
 		return nil, false
 	}
 	return o.Retryable, true
@@ -172,7 +176,7 @@ func (o *WorkflowWorkflowInfoProperties) GetRetryableOk() (*bool, bool) {
 
 // HasRetryable returns a boolean if a field has been set.
 func (o *WorkflowWorkflowInfoProperties) HasRetryable() bool {
-	if o != nil && o.Retryable != nil {
+	if o != nil && !IsNil(o.Retryable) {
 		return true
 	}
 
@@ -186,7 +190,7 @@ func (o *WorkflowWorkflowInfoProperties) SetRetryable(v bool) {
 
 // GetRollbackAction returns the RollbackAction field value if set, zero value otherwise.
 func (o *WorkflowWorkflowInfoProperties) GetRollbackAction() string {
-	if o == nil || o.RollbackAction == nil {
+	if o == nil || IsNil(o.RollbackAction) {
 		var ret string
 		return ret
 	}
@@ -196,7 +200,7 @@ func (o *WorkflowWorkflowInfoProperties) GetRollbackAction() string {
 // GetRollbackActionOk returns a tuple with the RollbackAction field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowWorkflowInfoProperties) GetRollbackActionOk() (*string, bool) {
-	if o == nil || o.RollbackAction == nil {
+	if o == nil || IsNil(o.RollbackAction) {
 		return nil, false
 	}
 	return o.RollbackAction, true
@@ -204,7 +208,7 @@ func (o *WorkflowWorkflowInfoProperties) GetRollbackActionOk() (*string, bool) {
 
 // HasRollbackAction returns a boolean if a field has been set.
 func (o *WorkflowWorkflowInfoProperties) HasRollbackAction() bool {
-	if o != nil && o.RollbackAction != nil {
+	if o != nil && !IsNil(o.RollbackAction) {
 		return true
 	}
 
@@ -218,7 +222,7 @@ func (o *WorkflowWorkflowInfoProperties) SetRollbackAction(v string) {
 
 // GetRollbackOnCancel returns the RollbackOnCancel field value if set, zero value otherwise.
 func (o *WorkflowWorkflowInfoProperties) GetRollbackOnCancel() bool {
-	if o == nil || o.RollbackOnCancel == nil {
+	if o == nil || IsNil(o.RollbackOnCancel) {
 		var ret bool
 		return ret
 	}
@@ -228,7 +232,7 @@ func (o *WorkflowWorkflowInfoProperties) GetRollbackOnCancel() bool {
 // GetRollbackOnCancelOk returns a tuple with the RollbackOnCancel field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowWorkflowInfoProperties) GetRollbackOnCancelOk() (*bool, bool) {
-	if o == nil || o.RollbackOnCancel == nil {
+	if o == nil || IsNil(o.RollbackOnCancel) {
 		return nil, false
 	}
 	return o.RollbackOnCancel, true
@@ -236,7 +240,7 @@ func (o *WorkflowWorkflowInfoProperties) GetRollbackOnCancelOk() (*bool, bool) {
 
 // HasRollbackOnCancel returns a boolean if a field has been set.
 func (o *WorkflowWorkflowInfoProperties) HasRollbackOnCancel() bool {
-	if o != nil && o.RollbackOnCancel != nil {
+	if o != nil && !IsNil(o.RollbackOnCancel) {
 		return true
 	}
 
@@ -250,7 +254,7 @@ func (o *WorkflowWorkflowInfoProperties) SetRollbackOnCancel(v bool) {
 
 // GetRollbackOnFailure returns the RollbackOnFailure field value if set, zero value otherwise.
 func (o *WorkflowWorkflowInfoProperties) GetRollbackOnFailure() bool {
-	if o == nil || o.RollbackOnFailure == nil {
+	if o == nil || IsNil(o.RollbackOnFailure) {
 		var ret bool
 		return ret
 	}
@@ -260,7 +264,7 @@ func (o *WorkflowWorkflowInfoProperties) GetRollbackOnFailure() bool {
 // GetRollbackOnFailureOk returns a tuple with the RollbackOnFailure field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowWorkflowInfoProperties) GetRollbackOnFailureOk() (*bool, bool) {
-	if o == nil || o.RollbackOnFailure == nil {
+	if o == nil || IsNil(o.RollbackOnFailure) {
 		return nil, false
 	}
 	return o.RollbackOnFailure, true
@@ -268,7 +272,7 @@ func (o *WorkflowWorkflowInfoProperties) GetRollbackOnFailureOk() (*bool, bool) 
 
 // HasRollbackOnFailure returns a boolean if a field has been set.
 func (o *WorkflowWorkflowInfoProperties) HasRollbackOnFailure() bool {
-	if o != nil && o.RollbackOnFailure != nil {
+	if o != nil && !IsNil(o.RollbackOnFailure) {
 		return true
 	}
 
@@ -281,34 +285,38 @@ func (o *WorkflowWorkflowInfoProperties) SetRollbackOnFailure(v bool) {
 }
 
 func (o WorkflowWorkflowInfoProperties) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o WorkflowWorkflowInfoProperties) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
 	errMoBaseComplexType = json.Unmarshal([]byte(serializedMoBaseComplexType), &toSerialize)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
 	if o.Cancelable.IsSet() {
 		toSerialize["Cancelable"] = o.Cancelable.Get()
 	}
-	if o.Retryable != nil {
+	if !IsNil(o.Retryable) {
 		toSerialize["Retryable"] = o.Retryable
 	}
-	if o.RollbackAction != nil {
+	if !IsNil(o.RollbackAction) {
 		toSerialize["RollbackAction"] = o.RollbackAction
 	}
-	if o.RollbackOnCancel != nil {
+	if !IsNil(o.RollbackOnCancel) {
 		toSerialize["RollbackOnCancel"] = o.RollbackOnCancel
 	}
-	if o.RollbackOnFailure != nil {
+	if !IsNil(o.RollbackOnFailure) {
 		toSerialize["RollbackOnFailure"] = o.RollbackOnFailure
 	}
 
@@ -316,10 +324,32 @@ func (o WorkflowWorkflowInfoProperties) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *WorkflowWorkflowInfoProperties) UnmarshalJSON(bytes []byte) (err error) {
+func (o *WorkflowWorkflowInfoProperties) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type WorkflowWorkflowInfoPropertiesWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -338,7 +368,7 @@ func (o *WorkflowWorkflowInfoProperties) UnmarshalJSON(bytes []byte) (err error)
 
 	varWorkflowWorkflowInfoPropertiesWithoutEmbeddedStruct := WorkflowWorkflowInfoPropertiesWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varWorkflowWorkflowInfoPropertiesWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varWorkflowWorkflowInfoPropertiesWithoutEmbeddedStruct)
 	if err == nil {
 		varWorkflowWorkflowInfoProperties := _WorkflowWorkflowInfoProperties{}
 		varWorkflowWorkflowInfoProperties.ClassId = varWorkflowWorkflowInfoPropertiesWithoutEmbeddedStruct.ClassId
@@ -355,7 +385,7 @@ func (o *WorkflowWorkflowInfoProperties) UnmarshalJSON(bytes []byte) (err error)
 
 	varWorkflowWorkflowInfoProperties := _WorkflowWorkflowInfoProperties{}
 
-	err = json.Unmarshal(bytes, &varWorkflowWorkflowInfoProperties)
+	err = json.Unmarshal(data, &varWorkflowWorkflowInfoProperties)
 	if err == nil {
 		o.MoBaseComplexType = varWorkflowWorkflowInfoProperties.MoBaseComplexType
 	} else {
@@ -364,7 +394,7 @@ func (o *WorkflowWorkflowInfoProperties) UnmarshalJSON(bytes []byte) (err error)
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Cancelable")

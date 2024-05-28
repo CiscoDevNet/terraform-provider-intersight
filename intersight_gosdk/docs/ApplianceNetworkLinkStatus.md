@@ -9,8 +9,8 @@ Name | Type | Description | Notes
 **DestinationHostname** | Pointer to **string** | Hostname of the destination endpoint. | [optional] [readonly] 
 **PingTime** | Pointer to **float32** | Time to reach the destination endpoint in milliseconds from the source endpoint. | [optional] [readonly] 
 **SourceHostname** | Pointer to **string** | Hostname of the source endpoint. | [optional] [readonly] 
-**NodeOpStatus** | Pointer to [**ApplianceNodeOpStatusRelationship**](ApplianceNodeOpStatusRelationship.md) |  | [optional] 
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
+**NodeOpStatus** | Pointer to [**NullableApplianceNodeOpStatusRelationship**](ApplianceNodeOpStatusRelationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -171,6 +171,16 @@ SetNodeOpStatus sets NodeOpStatus field to given value.
 
 HasNodeOpStatus returns a boolean if a field has been set.
 
+### SetNodeOpStatusNil
+
+`func (o *ApplianceNetworkLinkStatus) SetNodeOpStatusNil(b bool)`
+
+ SetNodeOpStatusNil sets the value for NodeOpStatus to be an explicit nil
+
+### UnsetNodeOpStatus
+`func (o *ApplianceNetworkLinkStatus) UnsetNodeOpStatus()`
+
+UnsetNodeOpStatus ensures that no value is present for NodeOpStatus, not even an explicit nil
 ### GetRegisteredDevice
 
 `func (o *ApplianceNetworkLinkStatus) GetRegisteredDevice() AssetDeviceRegistrationRelationship`
@@ -196,6 +206,16 @@ SetRegisteredDevice sets RegisteredDevice field to given value.
 
 HasRegisteredDevice returns a boolean if a field has been set.
 
+### SetRegisteredDeviceNil
+
+`func (o *ApplianceNetworkLinkStatus) SetRegisteredDeviceNil(b bool)`
+
+ SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+
+### UnsetRegisteredDevice
+`func (o *ApplianceNetworkLinkStatus) UnsetRegisteredDevice()`
+
+UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

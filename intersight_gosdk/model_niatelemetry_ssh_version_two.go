@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the NiatelemetrySshVersionTwo type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &NiatelemetrySshVersionTwo{}
 
 // NiatelemetrySshVersionTwo Object to capture SSH V2 details in APIC.
 type NiatelemetrySshVersionTwo struct {
@@ -39,8 +43,8 @@ type NiatelemetrySshVersionTwo struct {
 	// SSH Ciphers for SSH V2 in APIC.
 	SshCiphers *string `json:"SshCiphers,omitempty"`
 	// SSH MACS for SSH V2 in APIC.
-	SshMacs              *string                              `json:"SshMacs,omitempty"`
-	RegisteredDevice     *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+	SshMacs              *string                                     `json:"SshMacs,omitempty"`
+	RegisteredDevice     NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -119,7 +123,7 @@ func (o *NiatelemetrySshVersionTwo) SetObjectType(v string) {
 
 // GetAdminSt returns the AdminSt field value if set, zero value otherwise.
 func (o *NiatelemetrySshVersionTwo) GetAdminSt() string {
-	if o == nil || o.AdminSt == nil {
+	if o == nil || IsNil(o.AdminSt) {
 		var ret string
 		return ret
 	}
@@ -129,7 +133,7 @@ func (o *NiatelemetrySshVersionTwo) GetAdminSt() string {
 // GetAdminStOk returns a tuple with the AdminSt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetrySshVersionTwo) GetAdminStOk() (*string, bool) {
-	if o == nil || o.AdminSt == nil {
+	if o == nil || IsNil(o.AdminSt) {
 		return nil, false
 	}
 	return o.AdminSt, true
@@ -137,7 +141,7 @@ func (o *NiatelemetrySshVersionTwo) GetAdminStOk() (*string, bool) {
 
 // HasAdminSt returns a boolean if a field has been set.
 func (o *NiatelemetrySshVersionTwo) HasAdminSt() bool {
-	if o != nil && o.AdminSt != nil {
+	if o != nil && !IsNil(o.AdminSt) {
 		return true
 	}
 
@@ -151,7 +155,7 @@ func (o *NiatelemetrySshVersionTwo) SetAdminSt(v string) {
 
 // GetDn returns the Dn field value if set, zero value otherwise.
 func (o *NiatelemetrySshVersionTwo) GetDn() string {
-	if o == nil || o.Dn == nil {
+	if o == nil || IsNil(o.Dn) {
 		var ret string
 		return ret
 	}
@@ -161,7 +165,7 @@ func (o *NiatelemetrySshVersionTwo) GetDn() string {
 // GetDnOk returns a tuple with the Dn field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetrySshVersionTwo) GetDnOk() (*string, bool) {
-	if o == nil || o.Dn == nil {
+	if o == nil || IsNil(o.Dn) {
 		return nil, false
 	}
 	return o.Dn, true
@@ -169,7 +173,7 @@ func (o *NiatelemetrySshVersionTwo) GetDnOk() (*string, bool) {
 
 // HasDn returns a boolean if a field has been set.
 func (o *NiatelemetrySshVersionTwo) HasDn() bool {
-	if o != nil && o.Dn != nil {
+	if o != nil && !IsNil(o.Dn) {
 		return true
 	}
 
@@ -183,7 +187,7 @@ func (o *NiatelemetrySshVersionTwo) SetDn(v string) {
 
 // GetPasswordAuth returns the PasswordAuth field value if set, zero value otherwise.
 func (o *NiatelemetrySshVersionTwo) GetPasswordAuth() string {
-	if o == nil || o.PasswordAuth == nil {
+	if o == nil || IsNil(o.PasswordAuth) {
 		var ret string
 		return ret
 	}
@@ -193,7 +197,7 @@ func (o *NiatelemetrySshVersionTwo) GetPasswordAuth() string {
 // GetPasswordAuthOk returns a tuple with the PasswordAuth field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetrySshVersionTwo) GetPasswordAuthOk() (*string, bool) {
-	if o == nil || o.PasswordAuth == nil {
+	if o == nil || IsNil(o.PasswordAuth) {
 		return nil, false
 	}
 	return o.PasswordAuth, true
@@ -201,7 +205,7 @@ func (o *NiatelemetrySshVersionTwo) GetPasswordAuthOk() (*string, bool) {
 
 // HasPasswordAuth returns a boolean if a field has been set.
 func (o *NiatelemetrySshVersionTwo) HasPasswordAuth() bool {
-	if o != nil && o.PasswordAuth != nil {
+	if o != nil && !IsNil(o.PasswordAuth) {
 		return true
 	}
 
@@ -215,7 +219,7 @@ func (o *NiatelemetrySshVersionTwo) SetPasswordAuth(v string) {
 
 // GetRecordType returns the RecordType field value if set, zero value otherwise.
 func (o *NiatelemetrySshVersionTwo) GetRecordType() string {
-	if o == nil || o.RecordType == nil {
+	if o == nil || IsNil(o.RecordType) {
 		var ret string
 		return ret
 	}
@@ -225,7 +229,7 @@ func (o *NiatelemetrySshVersionTwo) GetRecordType() string {
 // GetRecordTypeOk returns a tuple with the RecordType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetrySshVersionTwo) GetRecordTypeOk() (*string, bool) {
-	if o == nil || o.RecordType == nil {
+	if o == nil || IsNil(o.RecordType) {
 		return nil, false
 	}
 	return o.RecordType, true
@@ -233,7 +237,7 @@ func (o *NiatelemetrySshVersionTwo) GetRecordTypeOk() (*string, bool) {
 
 // HasRecordType returns a boolean if a field has been set.
 func (o *NiatelemetrySshVersionTwo) HasRecordType() bool {
-	if o != nil && o.RecordType != nil {
+	if o != nil && !IsNil(o.RecordType) {
 		return true
 	}
 
@@ -247,7 +251,7 @@ func (o *NiatelemetrySshVersionTwo) SetRecordType(v string) {
 
 // GetRecordVersion returns the RecordVersion field value if set, zero value otherwise.
 func (o *NiatelemetrySshVersionTwo) GetRecordVersion() string {
-	if o == nil || o.RecordVersion == nil {
+	if o == nil || IsNil(o.RecordVersion) {
 		var ret string
 		return ret
 	}
@@ -257,7 +261,7 @@ func (o *NiatelemetrySshVersionTwo) GetRecordVersion() string {
 // GetRecordVersionOk returns a tuple with the RecordVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetrySshVersionTwo) GetRecordVersionOk() (*string, bool) {
-	if o == nil || o.RecordVersion == nil {
+	if o == nil || IsNil(o.RecordVersion) {
 		return nil, false
 	}
 	return o.RecordVersion, true
@@ -265,7 +269,7 @@ func (o *NiatelemetrySshVersionTwo) GetRecordVersionOk() (*string, bool) {
 
 // HasRecordVersion returns a boolean if a field has been set.
 func (o *NiatelemetrySshVersionTwo) HasRecordVersion() bool {
-	if o != nil && o.RecordVersion != nil {
+	if o != nil && !IsNil(o.RecordVersion) {
 		return true
 	}
 
@@ -279,7 +283,7 @@ func (o *NiatelemetrySshVersionTwo) SetRecordVersion(v string) {
 
 // GetSiteName returns the SiteName field value if set, zero value otherwise.
 func (o *NiatelemetrySshVersionTwo) GetSiteName() string {
-	if o == nil || o.SiteName == nil {
+	if o == nil || IsNil(o.SiteName) {
 		var ret string
 		return ret
 	}
@@ -289,7 +293,7 @@ func (o *NiatelemetrySshVersionTwo) GetSiteName() string {
 // GetSiteNameOk returns a tuple with the SiteName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetrySshVersionTwo) GetSiteNameOk() (*string, bool) {
-	if o == nil || o.SiteName == nil {
+	if o == nil || IsNil(o.SiteName) {
 		return nil, false
 	}
 	return o.SiteName, true
@@ -297,7 +301,7 @@ func (o *NiatelemetrySshVersionTwo) GetSiteNameOk() (*string, bool) {
 
 // HasSiteName returns a boolean if a field has been set.
 func (o *NiatelemetrySshVersionTwo) HasSiteName() bool {
-	if o != nil && o.SiteName != nil {
+	if o != nil && !IsNil(o.SiteName) {
 		return true
 	}
 
@@ -311,7 +315,7 @@ func (o *NiatelemetrySshVersionTwo) SetSiteName(v string) {
 
 // GetSshCiphers returns the SshCiphers field value if set, zero value otherwise.
 func (o *NiatelemetrySshVersionTwo) GetSshCiphers() string {
-	if o == nil || o.SshCiphers == nil {
+	if o == nil || IsNil(o.SshCiphers) {
 		var ret string
 		return ret
 	}
@@ -321,7 +325,7 @@ func (o *NiatelemetrySshVersionTwo) GetSshCiphers() string {
 // GetSshCiphersOk returns a tuple with the SshCiphers field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetrySshVersionTwo) GetSshCiphersOk() (*string, bool) {
-	if o == nil || o.SshCiphers == nil {
+	if o == nil || IsNil(o.SshCiphers) {
 		return nil, false
 	}
 	return o.SshCiphers, true
@@ -329,7 +333,7 @@ func (o *NiatelemetrySshVersionTwo) GetSshCiphersOk() (*string, bool) {
 
 // HasSshCiphers returns a boolean if a field has been set.
 func (o *NiatelemetrySshVersionTwo) HasSshCiphers() bool {
-	if o != nil && o.SshCiphers != nil {
+	if o != nil && !IsNil(o.SshCiphers) {
 		return true
 	}
 
@@ -343,7 +347,7 @@ func (o *NiatelemetrySshVersionTwo) SetSshCiphers(v string) {
 
 // GetSshMacs returns the SshMacs field value if set, zero value otherwise.
 func (o *NiatelemetrySshVersionTwo) GetSshMacs() string {
-	if o == nil || o.SshMacs == nil {
+	if o == nil || IsNil(o.SshMacs) {
 		var ret string
 		return ret
 	}
@@ -353,7 +357,7 @@ func (o *NiatelemetrySshVersionTwo) GetSshMacs() string {
 // GetSshMacsOk returns a tuple with the SshMacs field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetrySshVersionTwo) GetSshMacsOk() (*string, bool) {
-	if o == nil || o.SshMacs == nil {
+	if o == nil || IsNil(o.SshMacs) {
 		return nil, false
 	}
 	return o.SshMacs, true
@@ -361,7 +365,7 @@ func (o *NiatelemetrySshVersionTwo) GetSshMacsOk() (*string, bool) {
 
 // HasSshMacs returns a boolean if a field has been set.
 func (o *NiatelemetrySshVersionTwo) HasSshMacs() bool {
-	if o != nil && o.SshMacs != nil {
+	if o != nil && !IsNil(o.SshMacs) {
 		return true
 	}
 
@@ -373,90 +377,127 @@ func (o *NiatelemetrySshVersionTwo) SetSshMacs(v string) {
 	o.SshMacs = &v
 }
 
-// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise.
+// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *NiatelemetrySshVersionTwo) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil || IsNil(o.RegisteredDevice.Get()) {
 		var ret AssetDeviceRegistrationRelationship
 		return ret
 	}
-	return *o.RegisteredDevice
+	return *o.RegisteredDevice.Get()
 }
 
 // GetRegisteredDeviceOk returns a tuple with the RegisteredDevice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *NiatelemetrySshVersionTwo) GetRegisteredDeviceOk() (*AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.RegisteredDevice, true
+	return o.RegisteredDevice.Get(), o.RegisteredDevice.IsSet()
 }
 
 // HasRegisteredDevice returns a boolean if a field has been set.
 func (o *NiatelemetrySshVersionTwo) HasRegisteredDevice() bool {
-	if o != nil && o.RegisteredDevice != nil {
+	if o != nil && o.RegisteredDevice.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRegisteredDevice gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
+// SetRegisteredDevice gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
 func (o *NiatelemetrySshVersionTwo) SetRegisteredDevice(v AssetDeviceRegistrationRelationship) {
-	o.RegisteredDevice = &v
+	o.RegisteredDevice.Set(&v)
+}
+
+// SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+func (o *NiatelemetrySshVersionTwo) SetRegisteredDeviceNil() {
+	o.RegisteredDevice.Set(nil)
+}
+
+// UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
+func (o *NiatelemetrySshVersionTwo) UnsetRegisteredDevice() {
+	o.RegisteredDevice.Unset()
 }
 
 func (o NiatelemetrySshVersionTwo) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o NiatelemetrySshVersionTwo) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.AdminSt != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.AdminSt) {
 		toSerialize["AdminSt"] = o.AdminSt
 	}
-	if o.Dn != nil {
+	if !IsNil(o.Dn) {
 		toSerialize["Dn"] = o.Dn
 	}
-	if o.PasswordAuth != nil {
+	if !IsNil(o.PasswordAuth) {
 		toSerialize["PasswordAuth"] = o.PasswordAuth
 	}
-	if o.RecordType != nil {
+	if !IsNil(o.RecordType) {
 		toSerialize["RecordType"] = o.RecordType
 	}
-	if o.RecordVersion != nil {
+	if !IsNil(o.RecordVersion) {
 		toSerialize["RecordVersion"] = o.RecordVersion
 	}
-	if o.SiteName != nil {
+	if !IsNil(o.SiteName) {
 		toSerialize["SiteName"] = o.SiteName
 	}
-	if o.SshCiphers != nil {
+	if !IsNil(o.SshCiphers) {
 		toSerialize["SshCiphers"] = o.SshCiphers
 	}
-	if o.SshMacs != nil {
+	if !IsNil(o.SshMacs) {
 		toSerialize["SshMacs"] = o.SshMacs
 	}
-	if o.RegisteredDevice != nil {
-		toSerialize["RegisteredDevice"] = o.RegisteredDevice
+	if o.RegisteredDevice.IsSet() {
+		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *NiatelemetrySshVersionTwo) UnmarshalJSON(bytes []byte) (err error) {
+func (o *NiatelemetrySshVersionTwo) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type NiatelemetrySshVersionTwoWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -477,13 +518,13 @@ func (o *NiatelemetrySshVersionTwo) UnmarshalJSON(bytes []byte) (err error) {
 		// SSH Ciphers for SSH V2 in APIC.
 		SshCiphers *string `json:"SshCiphers,omitempty"`
 		// SSH MACS for SSH V2 in APIC.
-		SshMacs          *string                              `json:"SshMacs,omitempty"`
-		RegisteredDevice *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+		SshMacs          *string                                     `json:"SshMacs,omitempty"`
+		RegisteredDevice NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	}
 
 	varNiatelemetrySshVersionTwoWithoutEmbeddedStruct := NiatelemetrySshVersionTwoWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varNiatelemetrySshVersionTwoWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varNiatelemetrySshVersionTwoWithoutEmbeddedStruct)
 	if err == nil {
 		varNiatelemetrySshVersionTwo := _NiatelemetrySshVersionTwo{}
 		varNiatelemetrySshVersionTwo.ClassId = varNiatelemetrySshVersionTwoWithoutEmbeddedStruct.ClassId
@@ -504,7 +545,7 @@ func (o *NiatelemetrySshVersionTwo) UnmarshalJSON(bytes []byte) (err error) {
 
 	varNiatelemetrySshVersionTwo := _NiatelemetrySshVersionTwo{}
 
-	err = json.Unmarshal(bytes, &varNiatelemetrySshVersionTwo)
+	err = json.Unmarshal(data, &varNiatelemetrySshVersionTwo)
 	if err == nil {
 		o.MoBaseMo = varNiatelemetrySshVersionTwo.MoBaseMo
 	} else {
@@ -513,7 +554,7 @@ func (o *NiatelemetrySshVersionTwo) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "AdminSt")

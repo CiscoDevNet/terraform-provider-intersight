@@ -20,13 +20,13 @@ Name | Type | Description | Notes
 **Sku** | Pointer to **string** | This field identifies the Stockkeeping Unit for this Power Supply. | [optional] [readonly] 
 **Vid** | Pointer to **string** | This field identifies the Vendor ID for this Power Supply Unit. | [optional] [readonly] 
 **Voltage** | Pointer to **string** | This field is used to indicate the voltage state for this Power Supply. | [optional] [readonly] 
-**ComputeRackUnit** | Pointer to [**ComputeRackUnitRelationship**](ComputeRackUnitRelationship.md) |  | [optional] 
-**EquipmentChassis** | Pointer to [**EquipmentChassisRelationship**](EquipmentChassisRelationship.md) |  | [optional] 
-**EquipmentFex** | Pointer to [**EquipmentFexRelationship**](EquipmentFexRelationship.md) |  | [optional] 
-**EquipmentRackEnclosure** | Pointer to [**EquipmentRackEnclosureRelationship**](EquipmentRackEnclosureRelationship.md) |  | [optional] 
-**InventoryDeviceInfo** | Pointer to [**InventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
-**NetworkElement** | Pointer to [**NetworkElementRelationship**](NetworkElementRelationship.md) |  | [optional] 
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
+**ComputeRackUnit** | Pointer to [**NullableComputeRackUnitRelationship**](ComputeRackUnitRelationship.md) |  | [optional] 
+**EquipmentChassis** | Pointer to [**NullableEquipmentChassisRelationship**](EquipmentChassisRelationship.md) |  | [optional] 
+**EquipmentFex** | Pointer to [**NullableEquipmentFexRelationship**](EquipmentFexRelationship.md) |  | [optional] 
+**EquipmentRackEnclosure** | Pointer to [**NullableEquipmentRackEnclosureRelationship**](EquipmentRackEnclosureRelationship.md) |  | [optional] 
+**InventoryDeviceInfo** | Pointer to [**NullableInventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
+**NetworkElement** | Pointer to [**NullableNetworkElementRelationship**](NetworkElementRelationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -472,6 +472,16 @@ SetComputeRackUnit sets ComputeRackUnit field to given value.
 
 HasComputeRackUnit returns a boolean if a field has been set.
 
+### SetComputeRackUnitNil
+
+`func (o *EquipmentPsu) SetComputeRackUnitNil(b bool)`
+
+ SetComputeRackUnitNil sets the value for ComputeRackUnit to be an explicit nil
+
+### UnsetComputeRackUnit
+`func (o *EquipmentPsu) UnsetComputeRackUnit()`
+
+UnsetComputeRackUnit ensures that no value is present for ComputeRackUnit, not even an explicit nil
 ### GetEquipmentChassis
 
 `func (o *EquipmentPsu) GetEquipmentChassis() EquipmentChassisRelationship`
@@ -497,6 +507,16 @@ SetEquipmentChassis sets EquipmentChassis field to given value.
 
 HasEquipmentChassis returns a boolean if a field has been set.
 
+### SetEquipmentChassisNil
+
+`func (o *EquipmentPsu) SetEquipmentChassisNil(b bool)`
+
+ SetEquipmentChassisNil sets the value for EquipmentChassis to be an explicit nil
+
+### UnsetEquipmentChassis
+`func (o *EquipmentPsu) UnsetEquipmentChassis()`
+
+UnsetEquipmentChassis ensures that no value is present for EquipmentChassis, not even an explicit nil
 ### GetEquipmentFex
 
 `func (o *EquipmentPsu) GetEquipmentFex() EquipmentFexRelationship`
@@ -522,6 +542,16 @@ SetEquipmentFex sets EquipmentFex field to given value.
 
 HasEquipmentFex returns a boolean if a field has been set.
 
+### SetEquipmentFexNil
+
+`func (o *EquipmentPsu) SetEquipmentFexNil(b bool)`
+
+ SetEquipmentFexNil sets the value for EquipmentFex to be an explicit nil
+
+### UnsetEquipmentFex
+`func (o *EquipmentPsu) UnsetEquipmentFex()`
+
+UnsetEquipmentFex ensures that no value is present for EquipmentFex, not even an explicit nil
 ### GetEquipmentRackEnclosure
 
 `func (o *EquipmentPsu) GetEquipmentRackEnclosure() EquipmentRackEnclosureRelationship`
@@ -547,6 +577,16 @@ SetEquipmentRackEnclosure sets EquipmentRackEnclosure field to given value.
 
 HasEquipmentRackEnclosure returns a boolean if a field has been set.
 
+### SetEquipmentRackEnclosureNil
+
+`func (o *EquipmentPsu) SetEquipmentRackEnclosureNil(b bool)`
+
+ SetEquipmentRackEnclosureNil sets the value for EquipmentRackEnclosure to be an explicit nil
+
+### UnsetEquipmentRackEnclosure
+`func (o *EquipmentPsu) UnsetEquipmentRackEnclosure()`
+
+UnsetEquipmentRackEnclosure ensures that no value is present for EquipmentRackEnclosure, not even an explicit nil
 ### GetInventoryDeviceInfo
 
 `func (o *EquipmentPsu) GetInventoryDeviceInfo() InventoryDeviceInfoRelationship`
@@ -572,6 +612,16 @@ SetInventoryDeviceInfo sets InventoryDeviceInfo field to given value.
 
 HasInventoryDeviceInfo returns a boolean if a field has been set.
 
+### SetInventoryDeviceInfoNil
+
+`func (o *EquipmentPsu) SetInventoryDeviceInfoNil(b bool)`
+
+ SetInventoryDeviceInfoNil sets the value for InventoryDeviceInfo to be an explicit nil
+
+### UnsetInventoryDeviceInfo
+`func (o *EquipmentPsu) UnsetInventoryDeviceInfo()`
+
+UnsetInventoryDeviceInfo ensures that no value is present for InventoryDeviceInfo, not even an explicit nil
 ### GetNetworkElement
 
 `func (o *EquipmentPsu) GetNetworkElement() NetworkElementRelationship`
@@ -597,6 +647,16 @@ SetNetworkElement sets NetworkElement field to given value.
 
 HasNetworkElement returns a boolean if a field has been set.
 
+### SetNetworkElementNil
+
+`func (o *EquipmentPsu) SetNetworkElementNil(b bool)`
+
+ SetNetworkElementNil sets the value for NetworkElement to be an explicit nil
+
+### UnsetNetworkElement
+`func (o *EquipmentPsu) UnsetNetworkElement()`
+
+UnsetNetworkElement ensures that no value is present for NetworkElement, not even an explicit nil
 ### GetRegisteredDevice
 
 `func (o *EquipmentPsu) GetRegisteredDevice() AssetDeviceRegistrationRelationship`
@@ -622,6 +682,16 @@ SetRegisteredDevice sets RegisteredDevice field to given value.
 
 HasRegisteredDevice returns a boolean if a field has been set.
 
+### SetRegisteredDeviceNil
+
+`func (o *EquipmentPsu) SetRegisteredDeviceNil(b bool)`
+
+ SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+
+### UnsetRegisteredDevice
+`func (o *EquipmentPsu) UnsetRegisteredDevice()`
+
+UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

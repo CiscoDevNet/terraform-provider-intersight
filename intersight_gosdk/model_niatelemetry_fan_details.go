@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the NiatelemetryFanDetails type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &NiatelemetryFanDetails{}
 
 // NiatelemetryFanDetails Stores information of fans per switch.
 type NiatelemetryFanDetails struct {
@@ -110,7 +114,7 @@ func (o *NiatelemetryFanDetails) SetObjectType(v string) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *NiatelemetryFanDetails) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -120,7 +124,7 @@ func (o *NiatelemetryFanDetails) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryFanDetails) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -128,7 +132,7 @@ func (o *NiatelemetryFanDetails) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *NiatelemetryFanDetails) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -142,7 +146,7 @@ func (o *NiatelemetryFanDetails) SetName(v string) {
 
 // GetProductId returns the ProductId field value if set, zero value otherwise.
 func (o *NiatelemetryFanDetails) GetProductId() string {
-	if o == nil || o.ProductId == nil {
+	if o == nil || IsNil(o.ProductId) {
 		var ret string
 		return ret
 	}
@@ -152,7 +156,7 @@ func (o *NiatelemetryFanDetails) GetProductId() string {
 // GetProductIdOk returns a tuple with the ProductId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryFanDetails) GetProductIdOk() (*string, bool) {
-	if o == nil || o.ProductId == nil {
+	if o == nil || IsNil(o.ProductId) {
 		return nil, false
 	}
 	return o.ProductId, true
@@ -160,7 +164,7 @@ func (o *NiatelemetryFanDetails) GetProductIdOk() (*string, bool) {
 
 // HasProductId returns a boolean if a field has been set.
 func (o *NiatelemetryFanDetails) HasProductId() bool {
-	if o != nil && o.ProductId != nil {
+	if o != nil && !IsNil(o.ProductId) {
 		return true
 	}
 
@@ -174,7 +178,7 @@ func (o *NiatelemetryFanDetails) SetProductId(v string) {
 
 // GetSerialNumber returns the SerialNumber field value if set, zero value otherwise.
 func (o *NiatelemetryFanDetails) GetSerialNumber() string {
-	if o == nil || o.SerialNumber == nil {
+	if o == nil || IsNil(o.SerialNumber) {
 		var ret string
 		return ret
 	}
@@ -184,7 +188,7 @@ func (o *NiatelemetryFanDetails) GetSerialNumber() string {
 // GetSerialNumberOk returns a tuple with the SerialNumber field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryFanDetails) GetSerialNumberOk() (*string, bool) {
-	if o == nil || o.SerialNumber == nil {
+	if o == nil || IsNil(o.SerialNumber) {
 		return nil, false
 	}
 	return o.SerialNumber, true
@@ -192,7 +196,7 @@ func (o *NiatelemetryFanDetails) GetSerialNumberOk() (*string, bool) {
 
 // HasSerialNumber returns a boolean if a field has been set.
 func (o *NiatelemetryFanDetails) HasSerialNumber() bool {
-	if o != nil && o.SerialNumber != nil {
+	if o != nil && !IsNil(o.SerialNumber) {
 		return true
 	}
 
@@ -206,7 +210,7 @@ func (o *NiatelemetryFanDetails) SetSerialNumber(v string) {
 
 // GetVendorId returns the VendorId field value if set, zero value otherwise.
 func (o *NiatelemetryFanDetails) GetVendorId() string {
-	if o == nil || o.VendorId == nil {
+	if o == nil || IsNil(o.VendorId) {
 		var ret string
 		return ret
 	}
@@ -216,7 +220,7 @@ func (o *NiatelemetryFanDetails) GetVendorId() string {
 // GetVendorIdOk returns a tuple with the VendorId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryFanDetails) GetVendorIdOk() (*string, bool) {
-	if o == nil || o.VendorId == nil {
+	if o == nil || IsNil(o.VendorId) {
 		return nil, false
 	}
 	return o.VendorId, true
@@ -224,7 +228,7 @@ func (o *NiatelemetryFanDetails) GetVendorIdOk() (*string, bool) {
 
 // HasVendorId returns a boolean if a field has been set.
 func (o *NiatelemetryFanDetails) HasVendorId() bool {
-	if o != nil && o.VendorId != nil {
+	if o != nil && !IsNil(o.VendorId) {
 		return true
 	}
 
@@ -237,31 +241,35 @@ func (o *NiatelemetryFanDetails) SetVendorId(v string) {
 }
 
 func (o NiatelemetryFanDetails) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o NiatelemetryFanDetails) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
 	errMoBaseComplexType = json.Unmarshal([]byte(serializedMoBaseComplexType), &toSerialize)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Name != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
 	}
-	if o.ProductId != nil {
+	if !IsNil(o.ProductId) {
 		toSerialize["ProductId"] = o.ProductId
 	}
-	if o.SerialNumber != nil {
+	if !IsNil(o.SerialNumber) {
 		toSerialize["SerialNumber"] = o.SerialNumber
 	}
-	if o.VendorId != nil {
+	if !IsNil(o.VendorId) {
 		toSerialize["VendorId"] = o.VendorId
 	}
 
@@ -269,10 +277,32 @@ func (o NiatelemetryFanDetails) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *NiatelemetryFanDetails) UnmarshalJSON(bytes []byte) (err error) {
+func (o *NiatelemetryFanDetails) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type NiatelemetryFanDetailsWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -290,7 +320,7 @@ func (o *NiatelemetryFanDetails) UnmarshalJSON(bytes []byte) (err error) {
 
 	varNiatelemetryFanDetailsWithoutEmbeddedStruct := NiatelemetryFanDetailsWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varNiatelemetryFanDetailsWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varNiatelemetryFanDetailsWithoutEmbeddedStruct)
 	if err == nil {
 		varNiatelemetryFanDetails := _NiatelemetryFanDetails{}
 		varNiatelemetryFanDetails.ClassId = varNiatelemetryFanDetailsWithoutEmbeddedStruct.ClassId
@@ -306,7 +336,7 @@ func (o *NiatelemetryFanDetails) UnmarshalJSON(bytes []byte) (err error) {
 
 	varNiatelemetryFanDetails := _NiatelemetryFanDetails{}
 
-	err = json.Unmarshal(bytes, &varNiatelemetryFanDetails)
+	err = json.Unmarshal(data, &varNiatelemetryFanDetails)
 	if err == nil {
 		o.MoBaseComplexType = varNiatelemetryFanDetails.MoBaseComplexType
 	} else {
@@ -315,7 +345,7 @@ func (o *NiatelemetryFanDetails) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Name")

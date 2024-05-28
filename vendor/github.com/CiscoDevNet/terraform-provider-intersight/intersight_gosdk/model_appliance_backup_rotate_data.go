@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,10 +13,14 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 	"time"
 )
+
+// checks if the ApplianceBackupRotateData type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ApplianceBackupRotateData{}
 
 // ApplianceBackupRotateData Keeps track of all current backups being manage by the backup rotate policy. It is used to actively manage backups as part of the rotation.
 type ApplianceBackupRotateData struct {
@@ -26,8 +30,8 @@ type ApplianceBackupRotateData struct {
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
 	// The time at which the backup was taken.
-	BackupTime           *time.Time              `json:"BackupTime,omitempty"`
-	Account              *IamAccountRelationship `json:"Account,omitempty"`
+	BackupTime           *time.Time                     `json:"BackupTime,omitempty"`
+	Account              NullableIamAccountRelationship `json:"Account,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -108,7 +112,7 @@ func (o *ApplianceBackupRotateData) SetObjectType(v string) {
 
 // GetBackupTime returns the BackupTime field value if set, zero value otherwise.
 func (o *ApplianceBackupRotateData) GetBackupTime() time.Time {
-	if o == nil || o.BackupTime == nil {
+	if o == nil || IsNil(o.BackupTime) {
 		var ret time.Time
 		return ret
 	}
@@ -118,7 +122,7 @@ func (o *ApplianceBackupRotateData) GetBackupTime() time.Time {
 // GetBackupTimeOk returns a tuple with the BackupTime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceBackupRotateData) GetBackupTimeOk() (*time.Time, bool) {
-	if o == nil || o.BackupTime == nil {
+	if o == nil || IsNil(o.BackupTime) {
 		return nil, false
 	}
 	return o.BackupTime, true
@@ -126,7 +130,7 @@ func (o *ApplianceBackupRotateData) GetBackupTimeOk() (*time.Time, bool) {
 
 // HasBackupTime returns a boolean if a field has been set.
 func (o *ApplianceBackupRotateData) HasBackupTime() bool {
-	if o != nil && o.BackupTime != nil {
+	if o != nil && !IsNil(o.BackupTime) {
 		return true
 	}
 
@@ -138,82 +142,119 @@ func (o *ApplianceBackupRotateData) SetBackupTime(v time.Time) {
 	o.BackupTime = &v
 }
 
-// GetAccount returns the Account field value if set, zero value otherwise.
+// GetAccount returns the Account field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ApplianceBackupRotateData) GetAccount() IamAccountRelationship {
-	if o == nil || o.Account == nil {
+	if o == nil || IsNil(o.Account.Get()) {
 		var ret IamAccountRelationship
 		return ret
 	}
-	return *o.Account
+	return *o.Account.Get()
 }
 
 // GetAccountOk returns a tuple with the Account field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ApplianceBackupRotateData) GetAccountOk() (*IamAccountRelationship, bool) {
-	if o == nil || o.Account == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Account, true
+	return o.Account.Get(), o.Account.IsSet()
 }
 
 // HasAccount returns a boolean if a field has been set.
 func (o *ApplianceBackupRotateData) HasAccount() bool {
-	if o != nil && o.Account != nil {
+	if o != nil && o.Account.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetAccount gets a reference to the given IamAccountRelationship and assigns it to the Account field.
+// SetAccount gets a reference to the given NullableIamAccountRelationship and assigns it to the Account field.
 func (o *ApplianceBackupRotateData) SetAccount(v IamAccountRelationship) {
-	o.Account = &v
+	o.Account.Set(&v)
+}
+
+// SetAccountNil sets the value for Account to be an explicit nil
+func (o *ApplianceBackupRotateData) SetAccountNil() {
+	o.Account.Set(nil)
+}
+
+// UnsetAccount ensures that no value is present for Account, not even an explicit nil
+func (o *ApplianceBackupRotateData) UnsetAccount() {
+	o.Account.Unset()
 }
 
 func (o ApplianceBackupRotateData) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o ApplianceBackupRotateData) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedApplianceBackupBase, errApplianceBackupBase := json.Marshal(o.ApplianceBackupBase)
 	if errApplianceBackupBase != nil {
-		return []byte{}, errApplianceBackupBase
+		return map[string]interface{}{}, errApplianceBackupBase
 	}
 	errApplianceBackupBase = json.Unmarshal([]byte(serializedApplianceBackupBase), &toSerialize)
 	if errApplianceBackupBase != nil {
-		return []byte{}, errApplianceBackupBase
+		return map[string]interface{}{}, errApplianceBackupBase
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.BackupTime != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.BackupTime) {
 		toSerialize["BackupTime"] = o.BackupTime
 	}
-	if o.Account != nil {
-		toSerialize["Account"] = o.Account
+	if o.Account.IsSet() {
+		toSerialize["Account"] = o.Account.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *ApplianceBackupRotateData) UnmarshalJSON(bytes []byte) (err error) {
+func (o *ApplianceBackupRotateData) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type ApplianceBackupRotateDataWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 		ObjectType string `json:"ObjectType"`
 		// The time at which the backup was taken.
-		BackupTime *time.Time              `json:"BackupTime,omitempty"`
-		Account    *IamAccountRelationship `json:"Account,omitempty"`
+		BackupTime *time.Time                     `json:"BackupTime,omitempty"`
+		Account    NullableIamAccountRelationship `json:"Account,omitempty"`
 	}
 
 	varApplianceBackupRotateDataWithoutEmbeddedStruct := ApplianceBackupRotateDataWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varApplianceBackupRotateDataWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varApplianceBackupRotateDataWithoutEmbeddedStruct)
 	if err == nil {
 		varApplianceBackupRotateData := _ApplianceBackupRotateData{}
 		varApplianceBackupRotateData.ClassId = varApplianceBackupRotateDataWithoutEmbeddedStruct.ClassId
@@ -227,7 +268,7 @@ func (o *ApplianceBackupRotateData) UnmarshalJSON(bytes []byte) (err error) {
 
 	varApplianceBackupRotateData := _ApplianceBackupRotateData{}
 
-	err = json.Unmarshal(bytes, &varApplianceBackupRotateData)
+	err = json.Unmarshal(data, &varApplianceBackupRotateData)
 	if err == nil {
 		o.ApplianceBackupBase = varApplianceBackupRotateData.ApplianceBackupBase
 	} else {
@@ -236,7 +277,7 @@ func (o *ApplianceBackupRotateData) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "BackupTime")

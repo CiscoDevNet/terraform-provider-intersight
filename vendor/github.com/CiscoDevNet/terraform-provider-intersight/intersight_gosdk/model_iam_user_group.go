@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the IamUserGroup type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &IamUserGroup{}
 
 // IamUserGroup User Group provides a way to assign permissions to a group of users based on the IdP attributes received after authentication.
 type IamUserGroup struct {
@@ -25,12 +29,12 @@ type IamUserGroup struct {
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
 	// The name of the user group which the dynamic user belongs to.
-	Name         *string                      `json:"Name,omitempty"`
-	Idp          *IamIdpRelationship          `json:"Idp,omitempty"`
-	Idpreference *IamIdpReferenceRelationship `json:"Idpreference,omitempty"`
+	Name         *string                             `json:"Name,omitempty"`
+	Idp          NullableIamIdpRelationship          `json:"Idp,omitempty"`
+	Idpreference NullableIamIdpReferenceRelationship `json:"Idpreference,omitempty"`
 	// An array of relationships to iamPermission resources.
-	Permissions []IamPermissionRelationship `json:"Permissions,omitempty"`
-	Qualifier   *IamQualifierRelationship   `json:"Qualifier,omitempty"`
+	Permissions []IamPermissionRelationship      `json:"Permissions,omitempty"`
+	Qualifier   NullableIamQualifierRelationship `json:"Qualifier,omitempty"`
 	// An array of relationships to iamUser resources.
 	Users                []IamUserRelationship `json:"Users,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -111,7 +115,7 @@ func (o *IamUserGroup) SetObjectType(v string) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *IamUserGroup) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -121,7 +125,7 @@ func (o *IamUserGroup) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IamUserGroup) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -129,7 +133,7 @@ func (o *IamUserGroup) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *IamUserGroup) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -141,68 +145,90 @@ func (o *IamUserGroup) SetName(v string) {
 	o.Name = &v
 }
 
-// GetIdp returns the Idp field value if set, zero value otherwise.
+// GetIdp returns the Idp field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *IamUserGroup) GetIdp() IamIdpRelationship {
-	if o == nil || o.Idp == nil {
+	if o == nil || IsNil(o.Idp.Get()) {
 		var ret IamIdpRelationship
 		return ret
 	}
-	return *o.Idp
+	return *o.Idp.Get()
 }
 
 // GetIdpOk returns a tuple with the Idp field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *IamUserGroup) GetIdpOk() (*IamIdpRelationship, bool) {
-	if o == nil || o.Idp == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Idp, true
+	return o.Idp.Get(), o.Idp.IsSet()
 }
 
 // HasIdp returns a boolean if a field has been set.
 func (o *IamUserGroup) HasIdp() bool {
-	if o != nil && o.Idp != nil {
+	if o != nil && o.Idp.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetIdp gets a reference to the given IamIdpRelationship and assigns it to the Idp field.
+// SetIdp gets a reference to the given NullableIamIdpRelationship and assigns it to the Idp field.
 func (o *IamUserGroup) SetIdp(v IamIdpRelationship) {
-	o.Idp = &v
+	o.Idp.Set(&v)
 }
 
-// GetIdpreference returns the Idpreference field value if set, zero value otherwise.
+// SetIdpNil sets the value for Idp to be an explicit nil
+func (o *IamUserGroup) SetIdpNil() {
+	o.Idp.Set(nil)
+}
+
+// UnsetIdp ensures that no value is present for Idp, not even an explicit nil
+func (o *IamUserGroup) UnsetIdp() {
+	o.Idp.Unset()
+}
+
+// GetIdpreference returns the Idpreference field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *IamUserGroup) GetIdpreference() IamIdpReferenceRelationship {
-	if o == nil || o.Idpreference == nil {
+	if o == nil || IsNil(o.Idpreference.Get()) {
 		var ret IamIdpReferenceRelationship
 		return ret
 	}
-	return *o.Idpreference
+	return *o.Idpreference.Get()
 }
 
 // GetIdpreferenceOk returns a tuple with the Idpreference field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *IamUserGroup) GetIdpreferenceOk() (*IamIdpReferenceRelationship, bool) {
-	if o == nil || o.Idpreference == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Idpreference, true
+	return o.Idpreference.Get(), o.Idpreference.IsSet()
 }
 
 // HasIdpreference returns a boolean if a field has been set.
 func (o *IamUserGroup) HasIdpreference() bool {
-	if o != nil && o.Idpreference != nil {
+	if o != nil && o.Idpreference.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetIdpreference gets a reference to the given IamIdpReferenceRelationship and assigns it to the Idpreference field.
+// SetIdpreference gets a reference to the given NullableIamIdpReferenceRelationship and assigns it to the Idpreference field.
 func (o *IamUserGroup) SetIdpreference(v IamIdpReferenceRelationship) {
-	o.Idpreference = &v
+	o.Idpreference.Set(&v)
+}
+
+// SetIdpreferenceNil sets the value for Idpreference to be an explicit nil
+func (o *IamUserGroup) SetIdpreferenceNil() {
+	o.Idpreference.Set(nil)
+}
+
+// UnsetIdpreference ensures that no value is present for Idpreference, not even an explicit nil
+func (o *IamUserGroup) UnsetIdpreference() {
+	o.Idpreference.Unset()
 }
 
 // GetPermissions returns the Permissions field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -218,7 +244,7 @@ func (o *IamUserGroup) GetPermissions() []IamPermissionRelationship {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *IamUserGroup) GetPermissionsOk() ([]IamPermissionRelationship, bool) {
-	if o == nil || o.Permissions == nil {
+	if o == nil || IsNil(o.Permissions) {
 		return nil, false
 	}
 	return o.Permissions, true
@@ -226,7 +252,7 @@ func (o *IamUserGroup) GetPermissionsOk() ([]IamPermissionRelationship, bool) {
 
 // HasPermissions returns a boolean if a field has been set.
 func (o *IamUserGroup) HasPermissions() bool {
-	if o != nil && o.Permissions != nil {
+	if o != nil && IsNil(o.Permissions) {
 		return true
 	}
 
@@ -238,36 +264,47 @@ func (o *IamUserGroup) SetPermissions(v []IamPermissionRelationship) {
 	o.Permissions = v
 }
 
-// GetQualifier returns the Qualifier field value if set, zero value otherwise.
+// GetQualifier returns the Qualifier field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *IamUserGroup) GetQualifier() IamQualifierRelationship {
-	if o == nil || o.Qualifier == nil {
+	if o == nil || IsNil(o.Qualifier.Get()) {
 		var ret IamQualifierRelationship
 		return ret
 	}
-	return *o.Qualifier
+	return *o.Qualifier.Get()
 }
 
 // GetQualifierOk returns a tuple with the Qualifier field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *IamUserGroup) GetQualifierOk() (*IamQualifierRelationship, bool) {
-	if o == nil || o.Qualifier == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Qualifier, true
+	return o.Qualifier.Get(), o.Qualifier.IsSet()
 }
 
 // HasQualifier returns a boolean if a field has been set.
 func (o *IamUserGroup) HasQualifier() bool {
-	if o != nil && o.Qualifier != nil {
+	if o != nil && o.Qualifier.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetQualifier gets a reference to the given IamQualifierRelationship and assigns it to the Qualifier field.
+// SetQualifier gets a reference to the given NullableIamQualifierRelationship and assigns it to the Qualifier field.
 func (o *IamUserGroup) SetQualifier(v IamQualifierRelationship) {
-	o.Qualifier = &v
+	o.Qualifier.Set(&v)
+}
+
+// SetQualifierNil sets the value for Qualifier to be an explicit nil
+func (o *IamUserGroup) SetQualifierNil() {
+	o.Qualifier.Set(nil)
+}
+
+// UnsetQualifier ensures that no value is present for Qualifier, not even an explicit nil
+func (o *IamUserGroup) UnsetQualifier() {
+	o.Qualifier.Unset()
 }
 
 // GetUsers returns the Users field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -283,7 +320,7 @@ func (o *IamUserGroup) GetUsers() []IamUserRelationship {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *IamUserGroup) GetUsersOk() ([]IamUserRelationship, bool) {
-	if o == nil || o.Users == nil {
+	if o == nil || IsNil(o.Users) {
 		return nil, false
 	}
 	return o.Users, true
@@ -291,7 +328,7 @@ func (o *IamUserGroup) GetUsersOk() ([]IamUserRelationship, bool) {
 
 // HasUsers returns a boolean if a field has been set.
 func (o *IamUserGroup) HasUsers() bool {
-	if o != nil && o.Users != nil {
+	if o != nil && IsNil(o.Users) {
 		return true
 	}
 
@@ -304,35 +341,39 @@ func (o *IamUserGroup) SetUsers(v []IamUserRelationship) {
 }
 
 func (o IamUserGroup) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o IamUserGroup) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Name != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
 	}
-	if o.Idp != nil {
-		toSerialize["Idp"] = o.Idp
+	if o.Idp.IsSet() {
+		toSerialize["Idp"] = o.Idp.Get()
 	}
-	if o.Idpreference != nil {
-		toSerialize["Idpreference"] = o.Idpreference
+	if o.Idpreference.IsSet() {
+		toSerialize["Idpreference"] = o.Idpreference.Get()
 	}
 	if o.Permissions != nil {
 		toSerialize["Permissions"] = o.Permissions
 	}
-	if o.Qualifier != nil {
-		toSerialize["Qualifier"] = o.Qualifier
+	if o.Qualifier.IsSet() {
+		toSerialize["Qualifier"] = o.Qualifier.Get()
 	}
 	if o.Users != nil {
 		toSerialize["Users"] = o.Users
@@ -342,29 +383,51 @@ func (o IamUserGroup) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *IamUserGroup) UnmarshalJSON(bytes []byte) (err error) {
+func (o *IamUserGroup) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type IamUserGroupWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 		ObjectType string `json:"ObjectType"`
 		// The name of the user group which the dynamic user belongs to.
-		Name         *string                      `json:"Name,omitempty"`
-		Idp          *IamIdpRelationship          `json:"Idp,omitempty"`
-		Idpreference *IamIdpReferenceRelationship `json:"Idpreference,omitempty"`
+		Name         *string                             `json:"Name,omitempty"`
+		Idp          NullableIamIdpRelationship          `json:"Idp,omitempty"`
+		Idpreference NullableIamIdpReferenceRelationship `json:"Idpreference,omitempty"`
 		// An array of relationships to iamPermission resources.
-		Permissions []IamPermissionRelationship `json:"Permissions,omitempty"`
-		Qualifier   *IamQualifierRelationship   `json:"Qualifier,omitempty"`
+		Permissions []IamPermissionRelationship      `json:"Permissions,omitempty"`
+		Qualifier   NullableIamQualifierRelationship `json:"Qualifier,omitempty"`
 		// An array of relationships to iamUser resources.
 		Users []IamUserRelationship `json:"Users,omitempty"`
 	}
 
 	varIamUserGroupWithoutEmbeddedStruct := IamUserGroupWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varIamUserGroupWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varIamUserGroupWithoutEmbeddedStruct)
 	if err == nil {
 		varIamUserGroup := _IamUserGroup{}
 		varIamUserGroup.ClassId = varIamUserGroupWithoutEmbeddedStruct.ClassId
@@ -382,7 +445,7 @@ func (o *IamUserGroup) UnmarshalJSON(bytes []byte) (err error) {
 
 	varIamUserGroup := _IamUserGroup{}
 
-	err = json.Unmarshal(bytes, &varIamUserGroup)
+	err = json.Unmarshal(data, &varIamUserGroup)
 	if err == nil {
 		o.MoBaseMo = varIamUserGroup.MoBaseMo
 	} else {
@@ -391,7 +454,7 @@ func (o *IamUserGroup) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Name")

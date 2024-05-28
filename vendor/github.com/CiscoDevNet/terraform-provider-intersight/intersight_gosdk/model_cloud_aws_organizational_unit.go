@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the CloudAwsOrganizationalUnit type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &CloudAwsOrganizationalUnit{}
 
 // CloudAwsOrganizationalUnit AWS organization unit is represented here. It is a Logical grouping of accounts in a AWS organization.
 type CloudAwsOrganizationalUnit struct {
@@ -27,9 +31,9 @@ type CloudAwsOrganizationalUnit struct {
 	// The identity of this organization. This entity is not manipulated by users. It aids in uniquely identifying the organization object.
 	Identity *string `json:"Identity,omitempty"`
 	// Name of the organizational unit.
-	Name                 *string                                 `json:"Name,omitempty"`
-	ParentOrg            *CloudAwsOrganizationalUnitRelationship `json:"ParentOrg,omitempty"`
-	RegisteredDevice     *AssetDeviceRegistrationRelationship    `json:"RegisteredDevice,omitempty"`
+	Name                 *string                                        `json:"Name,omitempty"`
+	ParentOrg            NullableCloudAwsOrganizationalUnitRelationship `json:"ParentOrg,omitempty"`
+	RegisteredDevice     NullableAssetDeviceRegistrationRelationship    `json:"RegisteredDevice,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -108,7 +112,7 @@ func (o *CloudAwsOrganizationalUnit) SetObjectType(v string) {
 
 // GetIdentity returns the Identity field value if set, zero value otherwise.
 func (o *CloudAwsOrganizationalUnit) GetIdentity() string {
-	if o == nil || o.Identity == nil {
+	if o == nil || IsNil(o.Identity) {
 		var ret string
 		return ret
 	}
@@ -118,7 +122,7 @@ func (o *CloudAwsOrganizationalUnit) GetIdentity() string {
 // GetIdentityOk returns a tuple with the Identity field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudAwsOrganizationalUnit) GetIdentityOk() (*string, bool) {
-	if o == nil || o.Identity == nil {
+	if o == nil || IsNil(o.Identity) {
 		return nil, false
 	}
 	return o.Identity, true
@@ -126,7 +130,7 @@ func (o *CloudAwsOrganizationalUnit) GetIdentityOk() (*string, bool) {
 
 // HasIdentity returns a boolean if a field has been set.
 func (o *CloudAwsOrganizationalUnit) HasIdentity() bool {
-	if o != nil && o.Identity != nil {
+	if o != nil && !IsNil(o.Identity) {
 		return true
 	}
 
@@ -140,7 +144,7 @@ func (o *CloudAwsOrganizationalUnit) SetIdentity(v string) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *CloudAwsOrganizationalUnit) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -150,7 +154,7 @@ func (o *CloudAwsOrganizationalUnit) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudAwsOrganizationalUnit) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -158,7 +162,7 @@ func (o *CloudAwsOrganizationalUnit) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *CloudAwsOrganizationalUnit) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -170,107 +174,155 @@ func (o *CloudAwsOrganizationalUnit) SetName(v string) {
 	o.Name = &v
 }
 
-// GetParentOrg returns the ParentOrg field value if set, zero value otherwise.
+// GetParentOrg returns the ParentOrg field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CloudAwsOrganizationalUnit) GetParentOrg() CloudAwsOrganizationalUnitRelationship {
-	if o == nil || o.ParentOrg == nil {
+	if o == nil || IsNil(o.ParentOrg.Get()) {
 		var ret CloudAwsOrganizationalUnitRelationship
 		return ret
 	}
-	return *o.ParentOrg
+	return *o.ParentOrg.Get()
 }
 
 // GetParentOrgOk returns a tuple with the ParentOrg field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CloudAwsOrganizationalUnit) GetParentOrgOk() (*CloudAwsOrganizationalUnitRelationship, bool) {
-	if o == nil || o.ParentOrg == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.ParentOrg, true
+	return o.ParentOrg.Get(), o.ParentOrg.IsSet()
 }
 
 // HasParentOrg returns a boolean if a field has been set.
 func (o *CloudAwsOrganizationalUnit) HasParentOrg() bool {
-	if o != nil && o.ParentOrg != nil {
+	if o != nil && o.ParentOrg.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetParentOrg gets a reference to the given CloudAwsOrganizationalUnitRelationship and assigns it to the ParentOrg field.
+// SetParentOrg gets a reference to the given NullableCloudAwsOrganizationalUnitRelationship and assigns it to the ParentOrg field.
 func (o *CloudAwsOrganizationalUnit) SetParentOrg(v CloudAwsOrganizationalUnitRelationship) {
-	o.ParentOrg = &v
+	o.ParentOrg.Set(&v)
 }
 
-// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise.
+// SetParentOrgNil sets the value for ParentOrg to be an explicit nil
+func (o *CloudAwsOrganizationalUnit) SetParentOrgNil() {
+	o.ParentOrg.Set(nil)
+}
+
+// UnsetParentOrg ensures that no value is present for ParentOrg, not even an explicit nil
+func (o *CloudAwsOrganizationalUnit) UnsetParentOrg() {
+	o.ParentOrg.Unset()
+}
+
+// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CloudAwsOrganizationalUnit) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil || IsNil(o.RegisteredDevice.Get()) {
 		var ret AssetDeviceRegistrationRelationship
 		return ret
 	}
-	return *o.RegisteredDevice
+	return *o.RegisteredDevice.Get()
 }
 
 // GetRegisteredDeviceOk returns a tuple with the RegisteredDevice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CloudAwsOrganizationalUnit) GetRegisteredDeviceOk() (*AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.RegisteredDevice, true
+	return o.RegisteredDevice.Get(), o.RegisteredDevice.IsSet()
 }
 
 // HasRegisteredDevice returns a boolean if a field has been set.
 func (o *CloudAwsOrganizationalUnit) HasRegisteredDevice() bool {
-	if o != nil && o.RegisteredDevice != nil {
+	if o != nil && o.RegisteredDevice.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRegisteredDevice gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
+// SetRegisteredDevice gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
 func (o *CloudAwsOrganizationalUnit) SetRegisteredDevice(v AssetDeviceRegistrationRelationship) {
-	o.RegisteredDevice = &v
+	o.RegisteredDevice.Set(&v)
+}
+
+// SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+func (o *CloudAwsOrganizationalUnit) SetRegisteredDeviceNil() {
+	o.RegisteredDevice.Set(nil)
+}
+
+// UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
+func (o *CloudAwsOrganizationalUnit) UnsetRegisteredDevice() {
+	o.RegisteredDevice.Unset()
 }
 
 func (o CloudAwsOrganizationalUnit) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o CloudAwsOrganizationalUnit) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Identity != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Identity) {
 		toSerialize["Identity"] = o.Identity
 	}
-	if o.Name != nil {
+	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
 	}
-	if o.ParentOrg != nil {
-		toSerialize["ParentOrg"] = o.ParentOrg
+	if o.ParentOrg.IsSet() {
+		toSerialize["ParentOrg"] = o.ParentOrg.Get()
 	}
-	if o.RegisteredDevice != nil {
-		toSerialize["RegisteredDevice"] = o.RegisteredDevice
+	if o.RegisteredDevice.IsSet() {
+		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *CloudAwsOrganizationalUnit) UnmarshalJSON(bytes []byte) (err error) {
+func (o *CloudAwsOrganizationalUnit) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type CloudAwsOrganizationalUnitWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -279,14 +331,14 @@ func (o *CloudAwsOrganizationalUnit) UnmarshalJSON(bytes []byte) (err error) {
 		// The identity of this organization. This entity is not manipulated by users. It aids in uniquely identifying the organization object.
 		Identity *string `json:"Identity,omitempty"`
 		// Name of the organizational unit.
-		Name             *string                                 `json:"Name,omitempty"`
-		ParentOrg        *CloudAwsOrganizationalUnitRelationship `json:"ParentOrg,omitempty"`
-		RegisteredDevice *AssetDeviceRegistrationRelationship    `json:"RegisteredDevice,omitempty"`
+		Name             *string                                        `json:"Name,omitempty"`
+		ParentOrg        NullableCloudAwsOrganizationalUnitRelationship `json:"ParentOrg,omitempty"`
+		RegisteredDevice NullableAssetDeviceRegistrationRelationship    `json:"RegisteredDevice,omitempty"`
 	}
 
 	varCloudAwsOrganizationalUnitWithoutEmbeddedStruct := CloudAwsOrganizationalUnitWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varCloudAwsOrganizationalUnitWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varCloudAwsOrganizationalUnitWithoutEmbeddedStruct)
 	if err == nil {
 		varCloudAwsOrganizationalUnit := _CloudAwsOrganizationalUnit{}
 		varCloudAwsOrganizationalUnit.ClassId = varCloudAwsOrganizationalUnitWithoutEmbeddedStruct.ClassId
@@ -302,7 +354,7 @@ func (o *CloudAwsOrganizationalUnit) UnmarshalJSON(bytes []byte) (err error) {
 
 	varCloudAwsOrganizationalUnit := _CloudAwsOrganizationalUnit{}
 
-	err = json.Unmarshal(bytes, &varCloudAwsOrganizationalUnit)
+	err = json.Unmarshal(data, &varCloudAwsOrganizationalUnit)
 	if err == nil {
 		o.MoBaseMo = varCloudAwsOrganizationalUnit.MoBaseMo
 	} else {
@@ -311,7 +363,7 @@ func (o *CloudAwsOrganizationalUnit) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Identity")

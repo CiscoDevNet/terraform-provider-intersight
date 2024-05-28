@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,10 +13,14 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 	"time"
 )
+
+// checks if the TerminalAuditLog type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &TerminalAuditLog{}
 
 // TerminalAuditLog Audit log of remote terminal user sessions.
 type TerminalAuditLog struct {
@@ -28,9 +32,9 @@ type TerminalAuditLog struct {
 	// The time the terminal was closed. If terminal has not closed, value is zero time.
 	EndTime *time.Time `json:"EndTime,omitempty"`
 	// The time the terminal session was opened.
-	StartTime            *time.Time                         `json:"StartTime,omitempty"`
-	DeviceRegistration   *AssetDeviceConnectionRelationship `json:"DeviceRegistration,omitempty"`
-	User                 *IamUserRelationship               `json:"User,omitempty"`
+	StartTime            *time.Time                                `json:"StartTime,omitempty"`
+	DeviceRegistration   NullableAssetDeviceConnectionRelationship `json:"DeviceRegistration,omitempty"`
+	User                 NullableIamUserRelationship               `json:"User,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -109,7 +113,7 @@ func (o *TerminalAuditLog) SetObjectType(v string) {
 
 // GetEndTime returns the EndTime field value if set, zero value otherwise.
 func (o *TerminalAuditLog) GetEndTime() time.Time {
-	if o == nil || o.EndTime == nil {
+	if o == nil || IsNil(o.EndTime) {
 		var ret time.Time
 		return ret
 	}
@@ -119,7 +123,7 @@ func (o *TerminalAuditLog) GetEndTime() time.Time {
 // GetEndTimeOk returns a tuple with the EndTime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TerminalAuditLog) GetEndTimeOk() (*time.Time, bool) {
-	if o == nil || o.EndTime == nil {
+	if o == nil || IsNil(o.EndTime) {
 		return nil, false
 	}
 	return o.EndTime, true
@@ -127,7 +131,7 @@ func (o *TerminalAuditLog) GetEndTimeOk() (*time.Time, bool) {
 
 // HasEndTime returns a boolean if a field has been set.
 func (o *TerminalAuditLog) HasEndTime() bool {
-	if o != nil && o.EndTime != nil {
+	if o != nil && !IsNil(o.EndTime) {
 		return true
 	}
 
@@ -141,7 +145,7 @@ func (o *TerminalAuditLog) SetEndTime(v time.Time) {
 
 // GetStartTime returns the StartTime field value if set, zero value otherwise.
 func (o *TerminalAuditLog) GetStartTime() time.Time {
-	if o == nil || o.StartTime == nil {
+	if o == nil || IsNil(o.StartTime) {
 		var ret time.Time
 		return ret
 	}
@@ -151,7 +155,7 @@ func (o *TerminalAuditLog) GetStartTime() time.Time {
 // GetStartTimeOk returns a tuple with the StartTime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TerminalAuditLog) GetStartTimeOk() (*time.Time, bool) {
-	if o == nil || o.StartTime == nil {
+	if o == nil || IsNil(o.StartTime) {
 		return nil, false
 	}
 	return o.StartTime, true
@@ -159,7 +163,7 @@ func (o *TerminalAuditLog) GetStartTimeOk() (*time.Time, bool) {
 
 // HasStartTime returns a boolean if a field has been set.
 func (o *TerminalAuditLog) HasStartTime() bool {
-	if o != nil && o.StartTime != nil {
+	if o != nil && !IsNil(o.StartTime) {
 		return true
 	}
 
@@ -171,107 +175,155 @@ func (o *TerminalAuditLog) SetStartTime(v time.Time) {
 	o.StartTime = &v
 }
 
-// GetDeviceRegistration returns the DeviceRegistration field value if set, zero value otherwise.
+// GetDeviceRegistration returns the DeviceRegistration field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *TerminalAuditLog) GetDeviceRegistration() AssetDeviceConnectionRelationship {
-	if o == nil || o.DeviceRegistration == nil {
+	if o == nil || IsNil(o.DeviceRegistration.Get()) {
 		var ret AssetDeviceConnectionRelationship
 		return ret
 	}
-	return *o.DeviceRegistration
+	return *o.DeviceRegistration.Get()
 }
 
 // GetDeviceRegistrationOk returns a tuple with the DeviceRegistration field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *TerminalAuditLog) GetDeviceRegistrationOk() (*AssetDeviceConnectionRelationship, bool) {
-	if o == nil || o.DeviceRegistration == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.DeviceRegistration, true
+	return o.DeviceRegistration.Get(), o.DeviceRegistration.IsSet()
 }
 
 // HasDeviceRegistration returns a boolean if a field has been set.
 func (o *TerminalAuditLog) HasDeviceRegistration() bool {
-	if o != nil && o.DeviceRegistration != nil {
+	if o != nil && o.DeviceRegistration.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetDeviceRegistration gets a reference to the given AssetDeviceConnectionRelationship and assigns it to the DeviceRegistration field.
+// SetDeviceRegistration gets a reference to the given NullableAssetDeviceConnectionRelationship and assigns it to the DeviceRegistration field.
 func (o *TerminalAuditLog) SetDeviceRegistration(v AssetDeviceConnectionRelationship) {
-	o.DeviceRegistration = &v
+	o.DeviceRegistration.Set(&v)
 }
 
-// GetUser returns the User field value if set, zero value otherwise.
+// SetDeviceRegistrationNil sets the value for DeviceRegistration to be an explicit nil
+func (o *TerminalAuditLog) SetDeviceRegistrationNil() {
+	o.DeviceRegistration.Set(nil)
+}
+
+// UnsetDeviceRegistration ensures that no value is present for DeviceRegistration, not even an explicit nil
+func (o *TerminalAuditLog) UnsetDeviceRegistration() {
+	o.DeviceRegistration.Unset()
+}
+
+// GetUser returns the User field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *TerminalAuditLog) GetUser() IamUserRelationship {
-	if o == nil || o.User == nil {
+	if o == nil || IsNil(o.User.Get()) {
 		var ret IamUserRelationship
 		return ret
 	}
-	return *o.User
+	return *o.User.Get()
 }
 
 // GetUserOk returns a tuple with the User field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *TerminalAuditLog) GetUserOk() (*IamUserRelationship, bool) {
-	if o == nil || o.User == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.User, true
+	return o.User.Get(), o.User.IsSet()
 }
 
 // HasUser returns a boolean if a field has been set.
 func (o *TerminalAuditLog) HasUser() bool {
-	if o != nil && o.User != nil {
+	if o != nil && o.User.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetUser gets a reference to the given IamUserRelationship and assigns it to the User field.
+// SetUser gets a reference to the given NullableIamUserRelationship and assigns it to the User field.
 func (o *TerminalAuditLog) SetUser(v IamUserRelationship) {
-	o.User = &v
+	o.User.Set(&v)
+}
+
+// SetUserNil sets the value for User to be an explicit nil
+func (o *TerminalAuditLog) SetUserNil() {
+	o.User.Set(nil)
+}
+
+// UnsetUser ensures that no value is present for User, not even an explicit nil
+func (o *TerminalAuditLog) UnsetUser() {
+	o.User.Unset()
 }
 
 func (o TerminalAuditLog) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o TerminalAuditLog) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.EndTime != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.EndTime) {
 		toSerialize["EndTime"] = o.EndTime
 	}
-	if o.StartTime != nil {
+	if !IsNil(o.StartTime) {
 		toSerialize["StartTime"] = o.StartTime
 	}
-	if o.DeviceRegistration != nil {
-		toSerialize["DeviceRegistration"] = o.DeviceRegistration
+	if o.DeviceRegistration.IsSet() {
+		toSerialize["DeviceRegistration"] = o.DeviceRegistration.Get()
 	}
-	if o.User != nil {
-		toSerialize["User"] = o.User
+	if o.User.IsSet() {
+		toSerialize["User"] = o.User.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *TerminalAuditLog) UnmarshalJSON(bytes []byte) (err error) {
+func (o *TerminalAuditLog) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type TerminalAuditLogWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -280,14 +332,14 @@ func (o *TerminalAuditLog) UnmarshalJSON(bytes []byte) (err error) {
 		// The time the terminal was closed. If terminal has not closed, value is zero time.
 		EndTime *time.Time `json:"EndTime,omitempty"`
 		// The time the terminal session was opened.
-		StartTime          *time.Time                         `json:"StartTime,omitempty"`
-		DeviceRegistration *AssetDeviceConnectionRelationship `json:"DeviceRegistration,omitempty"`
-		User               *IamUserRelationship               `json:"User,omitempty"`
+		StartTime          *time.Time                                `json:"StartTime,omitempty"`
+		DeviceRegistration NullableAssetDeviceConnectionRelationship `json:"DeviceRegistration,omitempty"`
+		User               NullableIamUserRelationship               `json:"User,omitempty"`
 	}
 
 	varTerminalAuditLogWithoutEmbeddedStruct := TerminalAuditLogWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varTerminalAuditLogWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varTerminalAuditLogWithoutEmbeddedStruct)
 	if err == nil {
 		varTerminalAuditLog := _TerminalAuditLog{}
 		varTerminalAuditLog.ClassId = varTerminalAuditLogWithoutEmbeddedStruct.ClassId
@@ -303,7 +355,7 @@ func (o *TerminalAuditLog) UnmarshalJSON(bytes []byte) (err error) {
 
 	varTerminalAuditLog := _TerminalAuditLog{}
 
-	err = json.Unmarshal(bytes, &varTerminalAuditLog)
+	err = json.Unmarshal(data, &varTerminalAuditLog)
 	if err == nil {
 		o.MoBaseMo = varTerminalAuditLog.MoBaseMo
 	} else {
@@ -312,7 +364,7 @@ func (o *TerminalAuditLog) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "EndTime")

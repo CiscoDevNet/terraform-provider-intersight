@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,10 +13,14 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 	"time"
 )
+
+// checks if the IamIpAccessManagement type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &IamIpAccessManagement{}
 
 // IamIpAccessManagement The access management based on IP address.
 type IamIpAccessManagement struct {
@@ -28,8 +32,8 @@ type IamIpAccessManagement struct {
 	// Flag stores the state of IP address based access management. Access management is enabled when it's true.
 	Enable *bool `json:"Enable,omitempty"`
 	// The access to account gets locked out if wrong IP addresses are configured. Account Administrators have privilege to unblock the account. It stores the time when the account was last recovered from lock out.
-	LastRecoveryTime *time.Time                     `json:"LastRecoveryTime,omitempty"`
-	Holder           *IamSecurityHolderRelationship `json:"Holder,omitempty"`
+	LastRecoveryTime *time.Time                            `json:"LastRecoveryTime,omitempty"`
+	Holder           NullableIamSecurityHolderRelationship `json:"Holder,omitempty"`
 	// An array of relationships to iamIpAddress resources.
 	IpAddresses          []IamIpAddressRelationship `json:"IpAddresses,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -110,7 +114,7 @@ func (o *IamIpAccessManagement) SetObjectType(v string) {
 
 // GetEnable returns the Enable field value if set, zero value otherwise.
 func (o *IamIpAccessManagement) GetEnable() bool {
-	if o == nil || o.Enable == nil {
+	if o == nil || IsNil(o.Enable) {
 		var ret bool
 		return ret
 	}
@@ -120,7 +124,7 @@ func (o *IamIpAccessManagement) GetEnable() bool {
 // GetEnableOk returns a tuple with the Enable field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IamIpAccessManagement) GetEnableOk() (*bool, bool) {
-	if o == nil || o.Enable == nil {
+	if o == nil || IsNil(o.Enable) {
 		return nil, false
 	}
 	return o.Enable, true
@@ -128,7 +132,7 @@ func (o *IamIpAccessManagement) GetEnableOk() (*bool, bool) {
 
 // HasEnable returns a boolean if a field has been set.
 func (o *IamIpAccessManagement) HasEnable() bool {
-	if o != nil && o.Enable != nil {
+	if o != nil && !IsNil(o.Enable) {
 		return true
 	}
 
@@ -142,7 +146,7 @@ func (o *IamIpAccessManagement) SetEnable(v bool) {
 
 // GetLastRecoveryTime returns the LastRecoveryTime field value if set, zero value otherwise.
 func (o *IamIpAccessManagement) GetLastRecoveryTime() time.Time {
-	if o == nil || o.LastRecoveryTime == nil {
+	if o == nil || IsNil(o.LastRecoveryTime) {
 		var ret time.Time
 		return ret
 	}
@@ -152,7 +156,7 @@ func (o *IamIpAccessManagement) GetLastRecoveryTime() time.Time {
 // GetLastRecoveryTimeOk returns a tuple with the LastRecoveryTime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IamIpAccessManagement) GetLastRecoveryTimeOk() (*time.Time, bool) {
-	if o == nil || o.LastRecoveryTime == nil {
+	if o == nil || IsNil(o.LastRecoveryTime) {
 		return nil, false
 	}
 	return o.LastRecoveryTime, true
@@ -160,7 +164,7 @@ func (o *IamIpAccessManagement) GetLastRecoveryTimeOk() (*time.Time, bool) {
 
 // HasLastRecoveryTime returns a boolean if a field has been set.
 func (o *IamIpAccessManagement) HasLastRecoveryTime() bool {
-	if o != nil && o.LastRecoveryTime != nil {
+	if o != nil && !IsNil(o.LastRecoveryTime) {
 		return true
 	}
 
@@ -172,36 +176,47 @@ func (o *IamIpAccessManagement) SetLastRecoveryTime(v time.Time) {
 	o.LastRecoveryTime = &v
 }
 
-// GetHolder returns the Holder field value if set, zero value otherwise.
+// GetHolder returns the Holder field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *IamIpAccessManagement) GetHolder() IamSecurityHolderRelationship {
-	if o == nil || o.Holder == nil {
+	if o == nil || IsNil(o.Holder.Get()) {
 		var ret IamSecurityHolderRelationship
 		return ret
 	}
-	return *o.Holder
+	return *o.Holder.Get()
 }
 
 // GetHolderOk returns a tuple with the Holder field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *IamIpAccessManagement) GetHolderOk() (*IamSecurityHolderRelationship, bool) {
-	if o == nil || o.Holder == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Holder, true
+	return o.Holder.Get(), o.Holder.IsSet()
 }
 
 // HasHolder returns a boolean if a field has been set.
 func (o *IamIpAccessManagement) HasHolder() bool {
-	if o != nil && o.Holder != nil {
+	if o != nil && o.Holder.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetHolder gets a reference to the given IamSecurityHolderRelationship and assigns it to the Holder field.
+// SetHolder gets a reference to the given NullableIamSecurityHolderRelationship and assigns it to the Holder field.
 func (o *IamIpAccessManagement) SetHolder(v IamSecurityHolderRelationship) {
-	o.Holder = &v
+	o.Holder.Set(&v)
+}
+
+// SetHolderNil sets the value for Holder to be an explicit nil
+func (o *IamIpAccessManagement) SetHolderNil() {
+	o.Holder.Set(nil)
+}
+
+// UnsetHolder ensures that no value is present for Holder, not even an explicit nil
+func (o *IamIpAccessManagement) UnsetHolder() {
+	o.Holder.Unset()
 }
 
 // GetIpAddresses returns the IpAddresses field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -217,7 +232,7 @@ func (o *IamIpAccessManagement) GetIpAddresses() []IamIpAddressRelationship {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *IamIpAccessManagement) GetIpAddressesOk() ([]IamIpAddressRelationship, bool) {
-	if o == nil || o.IpAddresses == nil {
+	if o == nil || IsNil(o.IpAddresses) {
 		return nil, false
 	}
 	return o.IpAddresses, true
@@ -225,7 +240,7 @@ func (o *IamIpAccessManagement) GetIpAddressesOk() ([]IamIpAddressRelationship, 
 
 // HasIpAddresses returns a boolean if a field has been set.
 func (o *IamIpAccessManagement) HasIpAddresses() bool {
-	if o != nil && o.IpAddresses != nil {
+	if o != nil && IsNil(o.IpAddresses) {
 		return true
 	}
 
@@ -238,29 +253,33 @@ func (o *IamIpAccessManagement) SetIpAddresses(v []IamIpAddressRelationship) {
 }
 
 func (o IamIpAccessManagement) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o IamIpAccessManagement) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Enable != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Enable) {
 		toSerialize["Enable"] = o.Enable
 	}
-	if o.LastRecoveryTime != nil {
+	if !IsNil(o.LastRecoveryTime) {
 		toSerialize["LastRecoveryTime"] = o.LastRecoveryTime
 	}
-	if o.Holder != nil {
-		toSerialize["Holder"] = o.Holder
+	if o.Holder.IsSet() {
+		toSerialize["Holder"] = o.Holder.Get()
 	}
 	if o.IpAddresses != nil {
 		toSerialize["IpAddresses"] = o.IpAddresses
@@ -270,10 +289,32 @@ func (o IamIpAccessManagement) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *IamIpAccessManagement) UnmarshalJSON(bytes []byte) (err error) {
+func (o *IamIpAccessManagement) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type IamIpAccessManagementWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -282,15 +323,15 @@ func (o *IamIpAccessManagement) UnmarshalJSON(bytes []byte) (err error) {
 		// Flag stores the state of IP address based access management. Access management is enabled when it's true.
 		Enable *bool `json:"Enable,omitempty"`
 		// The access to account gets locked out if wrong IP addresses are configured. Account Administrators have privilege to unblock the account. It stores the time when the account was last recovered from lock out.
-		LastRecoveryTime *time.Time                     `json:"LastRecoveryTime,omitempty"`
-		Holder           *IamSecurityHolderRelationship `json:"Holder,omitempty"`
+		LastRecoveryTime *time.Time                            `json:"LastRecoveryTime,omitempty"`
+		Holder           NullableIamSecurityHolderRelationship `json:"Holder,omitempty"`
 		// An array of relationships to iamIpAddress resources.
 		IpAddresses []IamIpAddressRelationship `json:"IpAddresses,omitempty"`
 	}
 
 	varIamIpAccessManagementWithoutEmbeddedStruct := IamIpAccessManagementWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varIamIpAccessManagementWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varIamIpAccessManagementWithoutEmbeddedStruct)
 	if err == nil {
 		varIamIpAccessManagement := _IamIpAccessManagement{}
 		varIamIpAccessManagement.ClassId = varIamIpAccessManagementWithoutEmbeddedStruct.ClassId
@@ -306,7 +347,7 @@ func (o *IamIpAccessManagement) UnmarshalJSON(bytes []byte) (err error) {
 
 	varIamIpAccessManagement := _IamIpAccessManagement{}
 
-	err = json.Unmarshal(bytes, &varIamIpAccessManagement)
+	err = json.Unmarshal(data, &varIamIpAccessManagement)
 	if err == nil {
 		o.MoBaseMo = varIamIpAccessManagement.MoBaseMo
 	} else {
@@ -315,7 +356,7 @@ func (o *IamIpAccessManagement) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Enable")

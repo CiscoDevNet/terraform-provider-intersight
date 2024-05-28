@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the HyperflexVirtualMachineRuntimeInfo type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &HyperflexVirtualMachineRuntimeInfo{}
 
 // HyperflexVirtualMachineRuntimeInfo Virtual Machine runtime details.
 type HyperflexVirtualMachineRuntimeInfo struct {
@@ -145,7 +149,7 @@ func (o *HyperflexVirtualMachineRuntimeInfo) SetObjectType(v string) {
 
 // GetBiosUuid returns the BiosUuid field value if set, zero value otherwise.
 func (o *HyperflexVirtualMachineRuntimeInfo) GetBiosUuid() string {
-	if o == nil || o.BiosUuid == nil {
+	if o == nil || IsNil(o.BiosUuid) {
 		var ret string
 		return ret
 	}
@@ -155,7 +159,7 @@ func (o *HyperflexVirtualMachineRuntimeInfo) GetBiosUuid() string {
 // GetBiosUuidOk returns a tuple with the BiosUuid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexVirtualMachineRuntimeInfo) GetBiosUuidOk() (*string, bool) {
-	if o == nil || o.BiosUuid == nil {
+	if o == nil || IsNil(o.BiosUuid) {
 		return nil, false
 	}
 	return o.BiosUuid, true
@@ -163,7 +167,7 @@ func (o *HyperflexVirtualMachineRuntimeInfo) GetBiosUuidOk() (*string, bool) {
 
 // HasBiosUuid returns a boolean if a field has been set.
 func (o *HyperflexVirtualMachineRuntimeInfo) HasBiosUuid() bool {
-	if o != nil && o.BiosUuid != nil {
+	if o != nil && !IsNil(o.BiosUuid) {
 		return true
 	}
 
@@ -177,7 +181,7 @@ func (o *HyperflexVirtualMachineRuntimeInfo) SetBiosUuid(v string) {
 
 // GetConnectionState returns the ConnectionState field value if set, zero value otherwise.
 func (o *HyperflexVirtualMachineRuntimeInfo) GetConnectionState() string {
-	if o == nil || o.ConnectionState == nil {
+	if o == nil || IsNil(o.ConnectionState) {
 		var ret string
 		return ret
 	}
@@ -187,7 +191,7 @@ func (o *HyperflexVirtualMachineRuntimeInfo) GetConnectionState() string {
 // GetConnectionStateOk returns a tuple with the ConnectionState field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexVirtualMachineRuntimeInfo) GetConnectionStateOk() (*string, bool) {
-	if o == nil || o.ConnectionState == nil {
+	if o == nil || IsNil(o.ConnectionState) {
 		return nil, false
 	}
 	return o.ConnectionState, true
@@ -195,7 +199,7 @@ func (o *HyperflexVirtualMachineRuntimeInfo) GetConnectionStateOk() (*string, bo
 
 // HasConnectionState returns a boolean if a field has been set.
 func (o *HyperflexVirtualMachineRuntimeInfo) HasConnectionState() bool {
-	if o != nil && o.ConnectionState != nil {
+	if o != nil && !IsNil(o.ConnectionState) {
 		return true
 	}
 
@@ -209,7 +213,7 @@ func (o *HyperflexVirtualMachineRuntimeInfo) SetConnectionState(v string) {
 
 // GetCpuUsage returns the CpuUsage field value if set, zero value otherwise.
 func (o *HyperflexVirtualMachineRuntimeInfo) GetCpuUsage() int64 {
-	if o == nil || o.CpuUsage == nil {
+	if o == nil || IsNil(o.CpuUsage) {
 		var ret int64
 		return ret
 	}
@@ -219,7 +223,7 @@ func (o *HyperflexVirtualMachineRuntimeInfo) GetCpuUsage() int64 {
 // GetCpuUsageOk returns a tuple with the CpuUsage field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexVirtualMachineRuntimeInfo) GetCpuUsageOk() (*int64, bool) {
-	if o == nil || o.CpuUsage == nil {
+	if o == nil || IsNil(o.CpuUsage) {
 		return nil, false
 	}
 	return o.CpuUsage, true
@@ -227,7 +231,7 @@ func (o *HyperflexVirtualMachineRuntimeInfo) GetCpuUsageOk() (*int64, bool) {
 
 // HasCpuUsage returns a boolean if a field has been set.
 func (o *HyperflexVirtualMachineRuntimeInfo) HasCpuUsage() bool {
-	if o != nil && o.CpuUsage != nil {
+	if o != nil && !IsNil(o.CpuUsage) {
 		return true
 	}
 
@@ -241,7 +245,7 @@ func (o *HyperflexVirtualMachineRuntimeInfo) SetCpuUsage(v int64) {
 
 // GetFolder returns the Folder field value if set, zero value otherwise.
 func (o *HyperflexVirtualMachineRuntimeInfo) GetFolder() string {
-	if o == nil || o.Folder == nil {
+	if o == nil || IsNil(o.Folder) {
 		var ret string
 		return ret
 	}
@@ -251,7 +255,7 @@ func (o *HyperflexVirtualMachineRuntimeInfo) GetFolder() string {
 // GetFolderOk returns a tuple with the Folder field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexVirtualMachineRuntimeInfo) GetFolderOk() (*string, bool) {
-	if o == nil || o.Folder == nil {
+	if o == nil || IsNil(o.Folder) {
 		return nil, false
 	}
 	return o.Folder, true
@@ -259,7 +263,7 @@ func (o *HyperflexVirtualMachineRuntimeInfo) GetFolderOk() (*string, bool) {
 
 // HasFolder returns a boolean if a field has been set.
 func (o *HyperflexVirtualMachineRuntimeInfo) HasFolder() bool {
-	if o != nil && o.Folder != nil {
+	if o != nil && !IsNil(o.Folder) {
 		return true
 	}
 
@@ -273,7 +277,7 @@ func (o *HyperflexVirtualMachineRuntimeInfo) SetFolder(v string) {
 
 // GetGuestFamily returns the GuestFamily field value if set, zero value otherwise.
 func (o *HyperflexVirtualMachineRuntimeInfo) GetGuestFamily() string {
-	if o == nil || o.GuestFamily == nil {
+	if o == nil || IsNil(o.GuestFamily) {
 		var ret string
 		return ret
 	}
@@ -283,7 +287,7 @@ func (o *HyperflexVirtualMachineRuntimeInfo) GetGuestFamily() string {
 // GetGuestFamilyOk returns a tuple with the GuestFamily field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexVirtualMachineRuntimeInfo) GetGuestFamilyOk() (*string, bool) {
-	if o == nil || o.GuestFamily == nil {
+	if o == nil || IsNil(o.GuestFamily) {
 		return nil, false
 	}
 	return o.GuestFamily, true
@@ -291,7 +295,7 @@ func (o *HyperflexVirtualMachineRuntimeInfo) GetGuestFamilyOk() (*string, bool) 
 
 // HasGuestFamily returns a boolean if a field has been set.
 func (o *HyperflexVirtualMachineRuntimeInfo) HasGuestFamily() bool {
-	if o != nil && o.GuestFamily != nil {
+	if o != nil && !IsNil(o.GuestFamily) {
 		return true
 	}
 
@@ -305,7 +309,7 @@ func (o *HyperflexVirtualMachineRuntimeInfo) SetGuestFamily(v string) {
 
 // GetGuestFullName returns the GuestFullName field value if set, zero value otherwise.
 func (o *HyperflexVirtualMachineRuntimeInfo) GetGuestFullName() string {
-	if o == nil || o.GuestFullName == nil {
+	if o == nil || IsNil(o.GuestFullName) {
 		var ret string
 		return ret
 	}
@@ -315,7 +319,7 @@ func (o *HyperflexVirtualMachineRuntimeInfo) GetGuestFullName() string {
 // GetGuestFullNameOk returns a tuple with the GuestFullName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexVirtualMachineRuntimeInfo) GetGuestFullNameOk() (*string, bool) {
-	if o == nil || o.GuestFullName == nil {
+	if o == nil || IsNil(o.GuestFullName) {
 		return nil, false
 	}
 	return o.GuestFullName, true
@@ -323,7 +327,7 @@ func (o *HyperflexVirtualMachineRuntimeInfo) GetGuestFullNameOk() (*string, bool
 
 // HasGuestFullName returns a boolean if a field has been set.
 func (o *HyperflexVirtualMachineRuntimeInfo) HasGuestFullName() bool {
-	if o != nil && o.GuestFullName != nil {
+	if o != nil && !IsNil(o.GuestFullName) {
 		return true
 	}
 
@@ -337,7 +341,7 @@ func (o *HyperflexVirtualMachineRuntimeInfo) SetGuestFullName(v string) {
 
 // GetGuestId returns the GuestId field value if set, zero value otherwise.
 func (o *HyperflexVirtualMachineRuntimeInfo) GetGuestId() string {
-	if o == nil || o.GuestId == nil {
+	if o == nil || IsNil(o.GuestId) {
 		var ret string
 		return ret
 	}
@@ -347,7 +351,7 @@ func (o *HyperflexVirtualMachineRuntimeInfo) GetGuestId() string {
 // GetGuestIdOk returns a tuple with the GuestId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexVirtualMachineRuntimeInfo) GetGuestIdOk() (*string, bool) {
-	if o == nil || o.GuestId == nil {
+	if o == nil || IsNil(o.GuestId) {
 		return nil, false
 	}
 	return o.GuestId, true
@@ -355,7 +359,7 @@ func (o *HyperflexVirtualMachineRuntimeInfo) GetGuestIdOk() (*string, bool) {
 
 // HasGuestId returns a boolean if a field has been set.
 func (o *HyperflexVirtualMachineRuntimeInfo) HasGuestId() bool {
-	if o != nil && o.GuestId != nil {
+	if o != nil && !IsNil(o.GuestId) {
 		return true
 	}
 
@@ -369,7 +373,7 @@ func (o *HyperflexVirtualMachineRuntimeInfo) SetGuestId(v string) {
 
 // GetGuestState returns the GuestState field value if set, zero value otherwise.
 func (o *HyperflexVirtualMachineRuntimeInfo) GetGuestState() string {
-	if o == nil || o.GuestState == nil {
+	if o == nil || IsNil(o.GuestState) {
 		var ret string
 		return ret
 	}
@@ -379,7 +383,7 @@ func (o *HyperflexVirtualMachineRuntimeInfo) GetGuestState() string {
 // GetGuestStateOk returns a tuple with the GuestState field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexVirtualMachineRuntimeInfo) GetGuestStateOk() (*string, bool) {
-	if o == nil || o.GuestState == nil {
+	if o == nil || IsNil(o.GuestState) {
 		return nil, false
 	}
 	return o.GuestState, true
@@ -387,7 +391,7 @@ func (o *HyperflexVirtualMachineRuntimeInfo) GetGuestStateOk() (*string, bool) {
 
 // HasGuestState returns a boolean if a field has been set.
 func (o *HyperflexVirtualMachineRuntimeInfo) HasGuestState() bool {
-	if o != nil && o.GuestState != nil {
+	if o != nil && !IsNil(o.GuestState) {
 		return true
 	}
 
@@ -401,7 +405,7 @@ func (o *HyperflexVirtualMachineRuntimeInfo) SetGuestState(v string) {
 
 // GetHostName returns the HostName field value if set, zero value otherwise.
 func (o *HyperflexVirtualMachineRuntimeInfo) GetHostName() string {
-	if o == nil || o.HostName == nil {
+	if o == nil || IsNil(o.HostName) {
 		var ret string
 		return ret
 	}
@@ -411,7 +415,7 @@ func (o *HyperflexVirtualMachineRuntimeInfo) GetHostName() string {
 // GetHostNameOk returns a tuple with the HostName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexVirtualMachineRuntimeInfo) GetHostNameOk() (*string, bool) {
-	if o == nil || o.HostName == nil {
+	if o == nil || IsNil(o.HostName) {
 		return nil, false
 	}
 	return o.HostName, true
@@ -419,7 +423,7 @@ func (o *HyperflexVirtualMachineRuntimeInfo) GetHostNameOk() (*string, bool) {
 
 // HasHostName returns a boolean if a field has been set.
 func (o *HyperflexVirtualMachineRuntimeInfo) HasHostName() bool {
-	if o != nil && o.HostName != nil {
+	if o != nil && !IsNil(o.HostName) {
 		return true
 	}
 
@@ -433,7 +437,7 @@ func (o *HyperflexVirtualMachineRuntimeInfo) SetHostName(v string) {
 
 // GetInstanceUuid returns the InstanceUuid field value if set, zero value otherwise.
 func (o *HyperflexVirtualMachineRuntimeInfo) GetInstanceUuid() string {
-	if o == nil || o.InstanceUuid == nil {
+	if o == nil || IsNil(o.InstanceUuid) {
 		var ret string
 		return ret
 	}
@@ -443,7 +447,7 @@ func (o *HyperflexVirtualMachineRuntimeInfo) GetInstanceUuid() string {
 // GetInstanceUuidOk returns a tuple with the InstanceUuid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexVirtualMachineRuntimeInfo) GetInstanceUuidOk() (*string, bool) {
-	if o == nil || o.InstanceUuid == nil {
+	if o == nil || IsNil(o.InstanceUuid) {
 		return nil, false
 	}
 	return o.InstanceUuid, true
@@ -451,7 +455,7 @@ func (o *HyperflexVirtualMachineRuntimeInfo) GetInstanceUuidOk() (*string, bool)
 
 // HasInstanceUuid returns a boolean if a field has been set.
 func (o *HyperflexVirtualMachineRuntimeInfo) HasInstanceUuid() bool {
-	if o != nil && o.InstanceUuid != nil {
+	if o != nil && !IsNil(o.InstanceUuid) {
 		return true
 	}
 
@@ -465,7 +469,7 @@ func (o *HyperflexVirtualMachineRuntimeInfo) SetInstanceUuid(v string) {
 
 // GetMemoryMb returns the MemoryMb field value if set, zero value otherwise.
 func (o *HyperflexVirtualMachineRuntimeInfo) GetMemoryMb() int64 {
-	if o == nil || o.MemoryMb == nil {
+	if o == nil || IsNil(o.MemoryMb) {
 		var ret int64
 		return ret
 	}
@@ -475,7 +479,7 @@ func (o *HyperflexVirtualMachineRuntimeInfo) GetMemoryMb() int64 {
 // GetMemoryMbOk returns a tuple with the MemoryMb field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexVirtualMachineRuntimeInfo) GetMemoryMbOk() (*int64, bool) {
-	if o == nil || o.MemoryMb == nil {
+	if o == nil || IsNil(o.MemoryMb) {
 		return nil, false
 	}
 	return o.MemoryMb, true
@@ -483,7 +487,7 @@ func (o *HyperflexVirtualMachineRuntimeInfo) GetMemoryMbOk() (*int64, bool) {
 
 // HasMemoryMb returns a boolean if a field has been set.
 func (o *HyperflexVirtualMachineRuntimeInfo) HasMemoryMb() bool {
-	if o != nil && o.MemoryMb != nil {
+	if o != nil && !IsNil(o.MemoryMb) {
 		return true
 	}
 
@@ -497,7 +501,7 @@ func (o *HyperflexVirtualMachineRuntimeInfo) SetMemoryMb(v int64) {
 
 // GetMemoryUsage returns the MemoryUsage field value if set, zero value otherwise.
 func (o *HyperflexVirtualMachineRuntimeInfo) GetMemoryUsage() int64 {
-	if o == nil || o.MemoryUsage == nil {
+	if o == nil || IsNil(o.MemoryUsage) {
 		var ret int64
 		return ret
 	}
@@ -507,7 +511,7 @@ func (o *HyperflexVirtualMachineRuntimeInfo) GetMemoryUsage() int64 {
 // GetMemoryUsageOk returns a tuple with the MemoryUsage field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexVirtualMachineRuntimeInfo) GetMemoryUsageOk() (*int64, bool) {
-	if o == nil || o.MemoryUsage == nil {
+	if o == nil || IsNil(o.MemoryUsage) {
 		return nil, false
 	}
 	return o.MemoryUsage, true
@@ -515,7 +519,7 @@ func (o *HyperflexVirtualMachineRuntimeInfo) GetMemoryUsageOk() (*int64, bool) {
 
 // HasMemoryUsage returns a boolean if a field has been set.
 func (o *HyperflexVirtualMachineRuntimeInfo) HasMemoryUsage() bool {
-	if o != nil && o.MemoryUsage != nil {
+	if o != nil && !IsNil(o.MemoryUsage) {
 		return true
 	}
 
@@ -529,7 +533,7 @@ func (o *HyperflexVirtualMachineRuntimeInfo) SetMemoryUsage(v int64) {
 
 // GetMoid returns the Moid field value if set, zero value otherwise.
 func (o *HyperflexVirtualMachineRuntimeInfo) GetMoid() string {
-	if o == nil || o.Moid == nil {
+	if o == nil || IsNil(o.Moid) {
 		var ret string
 		return ret
 	}
@@ -539,7 +543,7 @@ func (o *HyperflexVirtualMachineRuntimeInfo) GetMoid() string {
 // GetMoidOk returns a tuple with the Moid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexVirtualMachineRuntimeInfo) GetMoidOk() (*string, bool) {
-	if o == nil || o.Moid == nil {
+	if o == nil || IsNil(o.Moid) {
 		return nil, false
 	}
 	return o.Moid, true
@@ -547,7 +551,7 @@ func (o *HyperflexVirtualMachineRuntimeInfo) GetMoidOk() (*string, bool) {
 
 // HasMoid returns a boolean if a field has been set.
 func (o *HyperflexVirtualMachineRuntimeInfo) HasMoid() bool {
-	if o != nil && o.Moid != nil {
+	if o != nil && !IsNil(o.Moid) {
 		return true
 	}
 
@@ -561,7 +565,7 @@ func (o *HyperflexVirtualMachineRuntimeInfo) SetMoid(v string) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *HyperflexVirtualMachineRuntimeInfo) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -571,7 +575,7 @@ func (o *HyperflexVirtualMachineRuntimeInfo) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexVirtualMachineRuntimeInfo) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -579,7 +583,7 @@ func (o *HyperflexVirtualMachineRuntimeInfo) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *HyperflexVirtualMachineRuntimeInfo) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -604,7 +608,7 @@ func (o *HyperflexVirtualMachineRuntimeInfo) GetNetworks() []string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *HyperflexVirtualMachineRuntimeInfo) GetNetworksOk() ([]string, bool) {
-	if o == nil || o.Networks == nil {
+	if o == nil || IsNil(o.Networks) {
 		return nil, false
 	}
 	return o.Networks, true
@@ -612,7 +616,7 @@ func (o *HyperflexVirtualMachineRuntimeInfo) GetNetworksOk() ([]string, bool) {
 
 // HasNetworks returns a boolean if a field has been set.
 func (o *HyperflexVirtualMachineRuntimeInfo) HasNetworks() bool {
-	if o != nil && o.Networks != nil {
+	if o != nil && IsNil(o.Networks) {
 		return true
 	}
 
@@ -626,7 +630,7 @@ func (o *HyperflexVirtualMachineRuntimeInfo) SetNetworks(v []string) {
 
 // GetNumCpu returns the NumCpu field value if set, zero value otherwise.
 func (o *HyperflexVirtualMachineRuntimeInfo) GetNumCpu() int64 {
-	if o == nil || o.NumCpu == nil {
+	if o == nil || IsNil(o.NumCpu) {
 		var ret int64
 		return ret
 	}
@@ -636,7 +640,7 @@ func (o *HyperflexVirtualMachineRuntimeInfo) GetNumCpu() int64 {
 // GetNumCpuOk returns a tuple with the NumCpu field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexVirtualMachineRuntimeInfo) GetNumCpuOk() (*int64, bool) {
-	if o == nil || o.NumCpu == nil {
+	if o == nil || IsNil(o.NumCpu) {
 		return nil, false
 	}
 	return o.NumCpu, true
@@ -644,7 +648,7 @@ func (o *HyperflexVirtualMachineRuntimeInfo) GetNumCpuOk() (*int64, bool) {
 
 // HasNumCpu returns a boolean if a field has been set.
 func (o *HyperflexVirtualMachineRuntimeInfo) HasNumCpu() bool {
-	if o != nil && o.NumCpu != nil {
+	if o != nil && !IsNil(o.NumCpu) {
 		return true
 	}
 
@@ -658,7 +662,7 @@ func (o *HyperflexVirtualMachineRuntimeInfo) SetNumCpu(v int64) {
 
 // GetPowerState returns the PowerState field value if set, zero value otherwise.
 func (o *HyperflexVirtualMachineRuntimeInfo) GetPowerState() string {
-	if o == nil || o.PowerState == nil {
+	if o == nil || IsNil(o.PowerState) {
 		var ret string
 		return ret
 	}
@@ -668,7 +672,7 @@ func (o *HyperflexVirtualMachineRuntimeInfo) GetPowerState() string {
 // GetPowerStateOk returns a tuple with the PowerState field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexVirtualMachineRuntimeInfo) GetPowerStateOk() (*string, bool) {
-	if o == nil || o.PowerState == nil {
+	if o == nil || IsNil(o.PowerState) {
 		return nil, false
 	}
 	return o.PowerState, true
@@ -676,7 +680,7 @@ func (o *HyperflexVirtualMachineRuntimeInfo) GetPowerStateOk() (*string, bool) {
 
 // HasPowerState returns a boolean if a field has been set.
 func (o *HyperflexVirtualMachineRuntimeInfo) HasPowerState() bool {
-	if o != nil && o.PowerState != nil {
+	if o != nil && !IsNil(o.PowerState) {
 		return true
 	}
 
@@ -690,7 +694,7 @@ func (o *HyperflexVirtualMachineRuntimeInfo) SetPowerState(v string) {
 
 // GetProvisionedSize returns the ProvisionedSize field value if set, zero value otherwise.
 func (o *HyperflexVirtualMachineRuntimeInfo) GetProvisionedSize() int64 {
-	if o == nil || o.ProvisionedSize == nil {
+	if o == nil || IsNil(o.ProvisionedSize) {
 		var ret int64
 		return ret
 	}
@@ -700,7 +704,7 @@ func (o *HyperflexVirtualMachineRuntimeInfo) GetProvisionedSize() int64 {
 // GetProvisionedSizeOk returns a tuple with the ProvisionedSize field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexVirtualMachineRuntimeInfo) GetProvisionedSizeOk() (*int64, bool) {
-	if o == nil || o.ProvisionedSize == nil {
+	if o == nil || IsNil(o.ProvisionedSize) {
 		return nil, false
 	}
 	return o.ProvisionedSize, true
@@ -708,7 +712,7 @@ func (o *HyperflexVirtualMachineRuntimeInfo) GetProvisionedSizeOk() (*int64, boo
 
 // HasProvisionedSize returns a boolean if a field has been set.
 func (o *HyperflexVirtualMachineRuntimeInfo) HasProvisionedSize() bool {
-	if o != nil && o.ProvisionedSize != nil {
+	if o != nil && !IsNil(o.ProvisionedSize) {
 		return true
 	}
 
@@ -722,7 +726,7 @@ func (o *HyperflexVirtualMachineRuntimeInfo) SetProvisionedSize(v int64) {
 
 // GetResourcePool returns the ResourcePool field value if set, zero value otherwise.
 func (o *HyperflexVirtualMachineRuntimeInfo) GetResourcePool() string {
-	if o == nil || o.ResourcePool == nil {
+	if o == nil || IsNil(o.ResourcePool) {
 		var ret string
 		return ret
 	}
@@ -732,7 +736,7 @@ func (o *HyperflexVirtualMachineRuntimeInfo) GetResourcePool() string {
 // GetResourcePoolOk returns a tuple with the ResourcePool field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexVirtualMachineRuntimeInfo) GetResourcePoolOk() (*string, bool) {
-	if o == nil || o.ResourcePool == nil {
+	if o == nil || IsNil(o.ResourcePool) {
 		return nil, false
 	}
 	return o.ResourcePool, true
@@ -740,7 +744,7 @@ func (o *HyperflexVirtualMachineRuntimeInfo) GetResourcePoolOk() (*string, bool)
 
 // HasResourcePool returns a boolean if a field has been set.
 func (o *HyperflexVirtualMachineRuntimeInfo) HasResourcePool() bool {
-	if o != nil && o.ResourcePool != nil {
+	if o != nil && !IsNil(o.ResourcePool) {
 		return true
 	}
 
@@ -754,7 +758,7 @@ func (o *HyperflexVirtualMachineRuntimeInfo) SetResourcePool(v string) {
 
 // GetUsedSize returns the UsedSize field value if set, zero value otherwise.
 func (o *HyperflexVirtualMachineRuntimeInfo) GetUsedSize() int64 {
-	if o == nil || o.UsedSize == nil {
+	if o == nil || IsNil(o.UsedSize) {
 		var ret int64
 		return ret
 	}
@@ -764,7 +768,7 @@ func (o *HyperflexVirtualMachineRuntimeInfo) GetUsedSize() int64 {
 // GetUsedSizeOk returns a tuple with the UsedSize field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexVirtualMachineRuntimeInfo) GetUsedSizeOk() (*int64, bool) {
-	if o == nil || o.UsedSize == nil {
+	if o == nil || IsNil(o.UsedSize) {
 		return nil, false
 	}
 	return o.UsedSize, true
@@ -772,7 +776,7 @@ func (o *HyperflexVirtualMachineRuntimeInfo) GetUsedSizeOk() (*int64, bool) {
 
 // HasUsedSize returns a boolean if a field has been set.
 func (o *HyperflexVirtualMachineRuntimeInfo) HasUsedSize() bool {
-	if o != nil && o.UsedSize != nil {
+	if o != nil && !IsNil(o.UsedSize) {
 		return true
 	}
 
@@ -786,7 +790,7 @@ func (o *HyperflexVirtualMachineRuntimeInfo) SetUsedSize(v int64) {
 
 // GetVersion returns the Version field value if set, zero value otherwise.
 func (o *HyperflexVirtualMachineRuntimeInfo) GetVersion() string {
-	if o == nil || o.Version == nil {
+	if o == nil || IsNil(o.Version) {
 		var ret string
 		return ret
 	}
@@ -796,7 +800,7 @@ func (o *HyperflexVirtualMachineRuntimeInfo) GetVersion() string {
 // GetVersionOk returns a tuple with the Version field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexVirtualMachineRuntimeInfo) GetVersionOk() (*string, bool) {
-	if o == nil || o.Version == nil {
+	if o == nil || IsNil(o.Version) {
 		return nil, false
 	}
 	return o.Version, true
@@ -804,7 +808,7 @@ func (o *HyperflexVirtualMachineRuntimeInfo) GetVersionOk() (*string, bool) {
 
 // HasVersion returns a boolean if a field has been set.
 func (o *HyperflexVirtualMachineRuntimeInfo) HasVersion() bool {
-	if o != nil && o.Version != nil {
+	if o != nil && !IsNil(o.Version) {
 		return true
 	}
 
@@ -818,7 +822,7 @@ func (o *HyperflexVirtualMachineRuntimeInfo) SetVersion(v string) {
 
 // GetVmxPath returns the VmxPath field value if set, zero value otherwise.
 func (o *HyperflexVirtualMachineRuntimeInfo) GetVmxPath() string {
-	if o == nil || o.VmxPath == nil {
+	if o == nil || IsNil(o.VmxPath) {
 		var ret string
 		return ret
 	}
@@ -828,7 +832,7 @@ func (o *HyperflexVirtualMachineRuntimeInfo) GetVmxPath() string {
 // GetVmxPathOk returns a tuple with the VmxPath field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexVirtualMachineRuntimeInfo) GetVmxPathOk() (*string, bool) {
-	if o == nil || o.VmxPath == nil {
+	if o == nil || IsNil(o.VmxPath) {
 		return nil, false
 	}
 	return o.VmxPath, true
@@ -836,7 +840,7 @@ func (o *HyperflexVirtualMachineRuntimeInfo) GetVmxPathOk() (*string, bool) {
 
 // HasVmxPath returns a boolean if a field has been set.
 func (o *HyperflexVirtualMachineRuntimeInfo) HasVmxPath() bool {
-	if o != nil && o.VmxPath != nil {
+	if o != nil && !IsNil(o.VmxPath) {
 		return true
 	}
 
@@ -849,85 +853,89 @@ func (o *HyperflexVirtualMachineRuntimeInfo) SetVmxPath(v string) {
 }
 
 func (o HyperflexVirtualMachineRuntimeInfo) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o HyperflexVirtualMachineRuntimeInfo) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
 	errMoBaseComplexType = json.Unmarshal([]byte(serializedMoBaseComplexType), &toSerialize)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.BiosUuid != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.BiosUuid) {
 		toSerialize["BiosUuid"] = o.BiosUuid
 	}
-	if o.ConnectionState != nil {
+	if !IsNil(o.ConnectionState) {
 		toSerialize["ConnectionState"] = o.ConnectionState
 	}
-	if o.CpuUsage != nil {
+	if !IsNil(o.CpuUsage) {
 		toSerialize["CpuUsage"] = o.CpuUsage
 	}
-	if o.Folder != nil {
+	if !IsNil(o.Folder) {
 		toSerialize["Folder"] = o.Folder
 	}
-	if o.GuestFamily != nil {
+	if !IsNil(o.GuestFamily) {
 		toSerialize["GuestFamily"] = o.GuestFamily
 	}
-	if o.GuestFullName != nil {
+	if !IsNil(o.GuestFullName) {
 		toSerialize["GuestFullName"] = o.GuestFullName
 	}
-	if o.GuestId != nil {
+	if !IsNil(o.GuestId) {
 		toSerialize["GuestId"] = o.GuestId
 	}
-	if o.GuestState != nil {
+	if !IsNil(o.GuestState) {
 		toSerialize["GuestState"] = o.GuestState
 	}
-	if o.HostName != nil {
+	if !IsNil(o.HostName) {
 		toSerialize["HostName"] = o.HostName
 	}
-	if o.InstanceUuid != nil {
+	if !IsNil(o.InstanceUuid) {
 		toSerialize["InstanceUuid"] = o.InstanceUuid
 	}
-	if o.MemoryMb != nil {
+	if !IsNil(o.MemoryMb) {
 		toSerialize["MemoryMb"] = o.MemoryMb
 	}
-	if o.MemoryUsage != nil {
+	if !IsNil(o.MemoryUsage) {
 		toSerialize["MemoryUsage"] = o.MemoryUsage
 	}
-	if o.Moid != nil {
+	if !IsNil(o.Moid) {
 		toSerialize["Moid"] = o.Moid
 	}
-	if o.Name != nil {
+	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
 	}
 	if o.Networks != nil {
 		toSerialize["Networks"] = o.Networks
 	}
-	if o.NumCpu != nil {
+	if !IsNil(o.NumCpu) {
 		toSerialize["NumCpu"] = o.NumCpu
 	}
-	if o.PowerState != nil {
+	if !IsNil(o.PowerState) {
 		toSerialize["PowerState"] = o.PowerState
 	}
-	if o.ProvisionedSize != nil {
+	if !IsNil(o.ProvisionedSize) {
 		toSerialize["ProvisionedSize"] = o.ProvisionedSize
 	}
-	if o.ResourcePool != nil {
+	if !IsNil(o.ResourcePool) {
 		toSerialize["ResourcePool"] = o.ResourcePool
 	}
-	if o.UsedSize != nil {
+	if !IsNil(o.UsedSize) {
 		toSerialize["UsedSize"] = o.UsedSize
 	}
-	if o.Version != nil {
+	if !IsNil(o.Version) {
 		toSerialize["Version"] = o.Version
 	}
-	if o.VmxPath != nil {
+	if !IsNil(o.VmxPath) {
 		toSerialize["VmxPath"] = o.VmxPath
 	}
 
@@ -935,10 +943,32 @@ func (o HyperflexVirtualMachineRuntimeInfo) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *HyperflexVirtualMachineRuntimeInfo) UnmarshalJSON(bytes []byte) (err error) {
+func (o *HyperflexVirtualMachineRuntimeInfo) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type HyperflexVirtualMachineRuntimeInfoWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -991,7 +1021,7 @@ func (o *HyperflexVirtualMachineRuntimeInfo) UnmarshalJSON(bytes []byte) (err er
 
 	varHyperflexVirtualMachineRuntimeInfoWithoutEmbeddedStruct := HyperflexVirtualMachineRuntimeInfoWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varHyperflexVirtualMachineRuntimeInfoWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varHyperflexVirtualMachineRuntimeInfoWithoutEmbeddedStruct)
 	if err == nil {
 		varHyperflexVirtualMachineRuntimeInfo := _HyperflexVirtualMachineRuntimeInfo{}
 		varHyperflexVirtualMachineRuntimeInfo.ClassId = varHyperflexVirtualMachineRuntimeInfoWithoutEmbeddedStruct.ClassId
@@ -1025,7 +1055,7 @@ func (o *HyperflexVirtualMachineRuntimeInfo) UnmarshalJSON(bytes []byte) (err er
 
 	varHyperflexVirtualMachineRuntimeInfo := _HyperflexVirtualMachineRuntimeInfo{}
 
-	err = json.Unmarshal(bytes, &varHyperflexVirtualMachineRuntimeInfo)
+	err = json.Unmarshal(data, &varHyperflexVirtualMachineRuntimeInfo)
 	if err == nil {
 		o.MoBaseComplexType = varHyperflexVirtualMachineRuntimeInfo.MoBaseComplexType
 	} else {
@@ -1034,7 +1064,7 @@ func (o *HyperflexVirtualMachineRuntimeInfo) UnmarshalJSON(bytes []byte) (err er
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "BiosUuid")

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the WorkflowAbstractWorkerTask type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &WorkflowAbstractWorkerTask{}
 
 // WorkflowAbstractWorkerTask An AbstractWorkerTask is used to model a task that does some end-user work. This can be another task or it can be another workflow.
 type WorkflowAbstractWorkerTask struct {
@@ -123,7 +127,7 @@ func (o *WorkflowAbstractWorkerTask) GetInputParameters() interface{} {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *WorkflowAbstractWorkerTask) GetInputParametersOk() (*interface{}, bool) {
-	if o == nil || o.InputParameters == nil {
+	if o == nil || IsNil(o.InputParameters) {
 		return nil, false
 	}
 	return &o.InputParameters, true
@@ -131,7 +135,7 @@ func (o *WorkflowAbstractWorkerTask) GetInputParametersOk() (*interface{}, bool)
 
 // HasInputParameters returns a boolean if a field has been set.
 func (o *WorkflowAbstractWorkerTask) HasInputParameters() bool {
-	if o != nil && o.InputParameters != nil {
+	if o != nil && IsNil(o.InputParameters) {
 		return true
 	}
 
@@ -145,7 +149,7 @@ func (o *WorkflowAbstractWorkerTask) SetInputParameters(v interface{}) {
 
 // GetOnFailure returns the OnFailure field value if set, zero value otherwise.
 func (o *WorkflowAbstractWorkerTask) GetOnFailure() string {
-	if o == nil || o.OnFailure == nil {
+	if o == nil || IsNil(o.OnFailure) {
 		var ret string
 		return ret
 	}
@@ -155,7 +159,7 @@ func (o *WorkflowAbstractWorkerTask) GetOnFailure() string {
 // GetOnFailureOk returns a tuple with the OnFailure field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowAbstractWorkerTask) GetOnFailureOk() (*string, bool) {
-	if o == nil || o.OnFailure == nil {
+	if o == nil || IsNil(o.OnFailure) {
 		return nil, false
 	}
 	return o.OnFailure, true
@@ -163,7 +167,7 @@ func (o *WorkflowAbstractWorkerTask) GetOnFailureOk() (*string, bool) {
 
 // HasOnFailure returns a boolean if a field has been set.
 func (o *WorkflowAbstractWorkerTask) HasOnFailure() bool {
-	if o != nil && o.OnFailure != nil {
+	if o != nil && !IsNil(o.OnFailure) {
 		return true
 	}
 
@@ -177,7 +181,7 @@ func (o *WorkflowAbstractWorkerTask) SetOnFailure(v string) {
 
 // GetOnSuccess returns the OnSuccess field value if set, zero value otherwise.
 func (o *WorkflowAbstractWorkerTask) GetOnSuccess() string {
-	if o == nil || o.OnSuccess == nil {
+	if o == nil || IsNil(o.OnSuccess) {
 		var ret string
 		return ret
 	}
@@ -187,7 +191,7 @@ func (o *WorkflowAbstractWorkerTask) GetOnSuccess() string {
 // GetOnSuccessOk returns a tuple with the OnSuccess field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowAbstractWorkerTask) GetOnSuccessOk() (*string, bool) {
-	if o == nil || o.OnSuccess == nil {
+	if o == nil || IsNil(o.OnSuccess) {
 		return nil, false
 	}
 	return o.OnSuccess, true
@@ -195,7 +199,7 @@ func (o *WorkflowAbstractWorkerTask) GetOnSuccessOk() (*string, bool) {
 
 // HasOnSuccess returns a boolean if a field has been set.
 func (o *WorkflowAbstractWorkerTask) HasOnSuccess() bool {
-	if o != nil && o.OnSuccess != nil {
+	if o != nil && !IsNil(o.OnSuccess) {
 		return true
 	}
 
@@ -209,7 +213,7 @@ func (o *WorkflowAbstractWorkerTask) SetOnSuccess(v string) {
 
 // GetRollbackDisabled returns the RollbackDisabled field value if set, zero value otherwise.
 func (o *WorkflowAbstractWorkerTask) GetRollbackDisabled() bool {
-	if o == nil || o.RollbackDisabled == nil {
+	if o == nil || IsNil(o.RollbackDisabled) {
 		var ret bool
 		return ret
 	}
@@ -219,7 +223,7 @@ func (o *WorkflowAbstractWorkerTask) GetRollbackDisabled() bool {
 // GetRollbackDisabledOk returns a tuple with the RollbackDisabled field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowAbstractWorkerTask) GetRollbackDisabledOk() (*bool, bool) {
-	if o == nil || o.RollbackDisabled == nil {
+	if o == nil || IsNil(o.RollbackDisabled) {
 		return nil, false
 	}
 	return o.RollbackDisabled, true
@@ -227,7 +231,7 @@ func (o *WorkflowAbstractWorkerTask) GetRollbackDisabledOk() (*bool, bool) {
 
 // HasRollbackDisabled returns a boolean if a field has been set.
 func (o *WorkflowAbstractWorkerTask) HasRollbackDisabled() bool {
-	if o != nil && o.RollbackDisabled != nil {
+	if o != nil && !IsNil(o.RollbackDisabled) {
 		return true
 	}
 
@@ -252,7 +256,7 @@ func (o *WorkflowAbstractWorkerTask) GetVariableParameters() interface{} {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *WorkflowAbstractWorkerTask) GetVariableParametersOk() (*interface{}, bool) {
-	if o == nil || o.VariableParameters == nil {
+	if o == nil || IsNil(o.VariableParameters) {
 		return nil, false
 	}
 	return &o.VariableParameters, true
@@ -260,7 +264,7 @@ func (o *WorkflowAbstractWorkerTask) GetVariableParametersOk() (*interface{}, bo
 
 // HasVariableParameters returns a boolean if a field has been set.
 func (o *WorkflowAbstractWorkerTask) HasVariableParameters() bool {
-	if o != nil && o.VariableParameters != nil {
+	if o != nil && IsNil(o.VariableParameters) {
 		return true
 	}
 
@@ -273,31 +277,35 @@ func (o *WorkflowAbstractWorkerTask) SetVariableParameters(v interface{}) {
 }
 
 func (o WorkflowAbstractWorkerTask) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o WorkflowAbstractWorkerTask) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedWorkflowWorkflowTask, errWorkflowWorkflowTask := json.Marshal(o.WorkflowWorkflowTask)
 	if errWorkflowWorkflowTask != nil {
-		return []byte{}, errWorkflowWorkflowTask
+		return map[string]interface{}{}, errWorkflowWorkflowTask
 	}
 	errWorkflowWorkflowTask = json.Unmarshal([]byte(serializedWorkflowWorkflowTask), &toSerialize)
 	if errWorkflowWorkflowTask != nil {
-		return []byte{}, errWorkflowWorkflowTask
+		return map[string]interface{}{}, errWorkflowWorkflowTask
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
 	if o.InputParameters != nil {
 		toSerialize["InputParameters"] = o.InputParameters
 	}
-	if o.OnFailure != nil {
+	if !IsNil(o.OnFailure) {
 		toSerialize["OnFailure"] = o.OnFailure
 	}
-	if o.OnSuccess != nil {
+	if !IsNil(o.OnSuccess) {
 		toSerialize["OnSuccess"] = o.OnSuccess
 	}
-	if o.RollbackDisabled != nil {
+	if !IsNil(o.RollbackDisabled) {
 		toSerialize["RollbackDisabled"] = o.RollbackDisabled
 	}
 	if o.VariableParameters != nil {
@@ -308,10 +316,32 @@ func (o WorkflowAbstractWorkerTask) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *WorkflowAbstractWorkerTask) UnmarshalJSON(bytes []byte) (err error) {
+func (o *WorkflowAbstractWorkerTask) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type WorkflowAbstractWorkerTaskWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type.
 		ClassId string `json:"ClassId"`
@@ -331,7 +361,7 @@ func (o *WorkflowAbstractWorkerTask) UnmarshalJSON(bytes []byte) (err error) {
 
 	varWorkflowAbstractWorkerTaskWithoutEmbeddedStruct := WorkflowAbstractWorkerTaskWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varWorkflowAbstractWorkerTaskWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varWorkflowAbstractWorkerTaskWithoutEmbeddedStruct)
 	if err == nil {
 		varWorkflowAbstractWorkerTask := _WorkflowAbstractWorkerTask{}
 		varWorkflowAbstractWorkerTask.ClassId = varWorkflowAbstractWorkerTaskWithoutEmbeddedStruct.ClassId
@@ -348,7 +378,7 @@ func (o *WorkflowAbstractWorkerTask) UnmarshalJSON(bytes []byte) (err error) {
 
 	varWorkflowAbstractWorkerTask := _WorkflowAbstractWorkerTask{}
 
-	err = json.Unmarshal(bytes, &varWorkflowAbstractWorkerTask)
+	err = json.Unmarshal(data, &varWorkflowAbstractWorkerTask)
 	if err == nil {
 		o.WorkflowWorkflowTask = varWorkflowAbstractWorkerTask.WorkflowWorkflowTask
 	} else {
@@ -357,7 +387,7 @@ func (o *WorkflowAbstractWorkerTask) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "InputParameters")

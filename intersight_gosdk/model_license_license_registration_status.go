@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the LicenseLicenseRegistrationStatus type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &LicenseLicenseRegistrationStatus{}
 
 // LicenseLicenseRegistrationStatus Current step of the registration status for licensing.
 type LicenseLicenseRegistrationStatus struct {
@@ -31,8 +35,8 @@ type LicenseLicenseRegistrationStatus struct {
 	// Stores information on the current flow of license registration. * `RegistrationNotStarted` - The license registration state to chose between trial and registration. * `RegistrationStarted` - The license registration state during set up flow. * `RegistrationComplete` - The license registration state after completion.
 	LicenseRegistrationState *string `json:"LicenseRegistrationState,omitempty"`
 	// Stores information on whether trial flow has been completed. True if trial registration finish.
-	TrialRegistrationComplete *bool                                  `json:"TrialRegistrationComplete,omitempty"`
-	AccountLicenseData        *LicenseAccountLicenseDataRelationship `json:"AccountLicenseData,omitempty"`
+	TrialRegistrationComplete *bool                                         `json:"TrialRegistrationComplete,omitempty"`
+	AccountLicenseData        NullableLicenseAccountLicenseDataRelationship `json:"AccountLicenseData,omitempty"`
 	AdditionalProperties      map[string]interface{}
 }
 
@@ -115,7 +119,7 @@ func (o *LicenseLicenseRegistrationStatus) SetObjectType(v string) {
 
 // GetAccountCreationState returns the AccountCreationState field value if set, zero value otherwise.
 func (o *LicenseLicenseRegistrationStatus) GetAccountCreationState() bool {
-	if o == nil || o.AccountCreationState == nil {
+	if o == nil || IsNil(o.AccountCreationState) {
 		var ret bool
 		return ret
 	}
@@ -125,7 +129,7 @@ func (o *LicenseLicenseRegistrationStatus) GetAccountCreationState() bool {
 // GetAccountCreationStateOk returns a tuple with the AccountCreationState field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *LicenseLicenseRegistrationStatus) GetAccountCreationStateOk() (*bool, bool) {
-	if o == nil || o.AccountCreationState == nil {
+	if o == nil || IsNil(o.AccountCreationState) {
 		return nil, false
 	}
 	return o.AccountCreationState, true
@@ -133,7 +137,7 @@ func (o *LicenseLicenseRegistrationStatus) GetAccountCreationStateOk() (*bool, b
 
 // HasAccountCreationState returns a boolean if a field has been set.
 func (o *LicenseLicenseRegistrationStatus) HasAccountCreationState() bool {
-	if o != nil && o.AccountCreationState != nil {
+	if o != nil && !IsNil(o.AccountCreationState) {
 		return true
 	}
 
@@ -147,7 +151,7 @@ func (o *LicenseLicenseRegistrationStatus) SetAccountCreationState(v bool) {
 
 // GetIsNewAccount returns the IsNewAccount field value if set, zero value otherwise.
 func (o *LicenseLicenseRegistrationStatus) GetIsNewAccount() bool {
-	if o == nil || o.IsNewAccount == nil {
+	if o == nil || IsNil(o.IsNewAccount) {
 		var ret bool
 		return ret
 	}
@@ -157,7 +161,7 @@ func (o *LicenseLicenseRegistrationStatus) GetIsNewAccount() bool {
 // GetIsNewAccountOk returns a tuple with the IsNewAccount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *LicenseLicenseRegistrationStatus) GetIsNewAccountOk() (*bool, bool) {
-	if o == nil || o.IsNewAccount == nil {
+	if o == nil || IsNil(o.IsNewAccount) {
 		return nil, false
 	}
 	return o.IsNewAccount, true
@@ -165,7 +169,7 @@ func (o *LicenseLicenseRegistrationStatus) GetIsNewAccountOk() (*bool, bool) {
 
 // HasIsNewAccount returns a boolean if a field has been set.
 func (o *LicenseLicenseRegistrationStatus) HasIsNewAccount() bool {
-	if o != nil && o.IsNewAccount != nil {
+	if o != nil && !IsNil(o.IsNewAccount) {
 		return true
 	}
 
@@ -179,7 +183,7 @@ func (o *LicenseLicenseRegistrationStatus) SetIsNewAccount(v bool) {
 
 // GetLicenseRegistrationState returns the LicenseRegistrationState field value if set, zero value otherwise.
 func (o *LicenseLicenseRegistrationStatus) GetLicenseRegistrationState() string {
-	if o == nil || o.LicenseRegistrationState == nil {
+	if o == nil || IsNil(o.LicenseRegistrationState) {
 		var ret string
 		return ret
 	}
@@ -189,7 +193,7 @@ func (o *LicenseLicenseRegistrationStatus) GetLicenseRegistrationState() string 
 // GetLicenseRegistrationStateOk returns a tuple with the LicenseRegistrationState field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *LicenseLicenseRegistrationStatus) GetLicenseRegistrationStateOk() (*string, bool) {
-	if o == nil || o.LicenseRegistrationState == nil {
+	if o == nil || IsNil(o.LicenseRegistrationState) {
 		return nil, false
 	}
 	return o.LicenseRegistrationState, true
@@ -197,7 +201,7 @@ func (o *LicenseLicenseRegistrationStatus) GetLicenseRegistrationStateOk() (*str
 
 // HasLicenseRegistrationState returns a boolean if a field has been set.
 func (o *LicenseLicenseRegistrationStatus) HasLicenseRegistrationState() bool {
-	if o != nil && o.LicenseRegistrationState != nil {
+	if o != nil && !IsNil(o.LicenseRegistrationState) {
 		return true
 	}
 
@@ -211,7 +215,7 @@ func (o *LicenseLicenseRegistrationStatus) SetLicenseRegistrationState(v string)
 
 // GetTrialRegistrationComplete returns the TrialRegistrationComplete field value if set, zero value otherwise.
 func (o *LicenseLicenseRegistrationStatus) GetTrialRegistrationComplete() bool {
-	if o == nil || o.TrialRegistrationComplete == nil {
+	if o == nil || IsNil(o.TrialRegistrationComplete) {
 		var ret bool
 		return ret
 	}
@@ -221,7 +225,7 @@ func (o *LicenseLicenseRegistrationStatus) GetTrialRegistrationComplete() bool {
 // GetTrialRegistrationCompleteOk returns a tuple with the TrialRegistrationComplete field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *LicenseLicenseRegistrationStatus) GetTrialRegistrationCompleteOk() (*bool, bool) {
-	if o == nil || o.TrialRegistrationComplete == nil {
+	if o == nil || IsNil(o.TrialRegistrationComplete) {
 		return nil, false
 	}
 	return o.TrialRegistrationComplete, true
@@ -229,7 +233,7 @@ func (o *LicenseLicenseRegistrationStatus) GetTrialRegistrationCompleteOk() (*bo
 
 // HasTrialRegistrationComplete returns a boolean if a field has been set.
 func (o *LicenseLicenseRegistrationStatus) HasTrialRegistrationComplete() bool {
-	if o != nil && o.TrialRegistrationComplete != nil {
+	if o != nil && !IsNil(o.TrialRegistrationComplete) {
 		return true
 	}
 
@@ -241,78 +245,115 @@ func (o *LicenseLicenseRegistrationStatus) SetTrialRegistrationComplete(v bool) 
 	o.TrialRegistrationComplete = &v
 }
 
-// GetAccountLicenseData returns the AccountLicenseData field value if set, zero value otherwise.
+// GetAccountLicenseData returns the AccountLicenseData field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *LicenseLicenseRegistrationStatus) GetAccountLicenseData() LicenseAccountLicenseDataRelationship {
-	if o == nil || o.AccountLicenseData == nil {
+	if o == nil || IsNil(o.AccountLicenseData.Get()) {
 		var ret LicenseAccountLicenseDataRelationship
 		return ret
 	}
-	return *o.AccountLicenseData
+	return *o.AccountLicenseData.Get()
 }
 
 // GetAccountLicenseDataOk returns a tuple with the AccountLicenseData field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *LicenseLicenseRegistrationStatus) GetAccountLicenseDataOk() (*LicenseAccountLicenseDataRelationship, bool) {
-	if o == nil || o.AccountLicenseData == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.AccountLicenseData, true
+	return o.AccountLicenseData.Get(), o.AccountLicenseData.IsSet()
 }
 
 // HasAccountLicenseData returns a boolean if a field has been set.
 func (o *LicenseLicenseRegistrationStatus) HasAccountLicenseData() bool {
-	if o != nil && o.AccountLicenseData != nil {
+	if o != nil && o.AccountLicenseData.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetAccountLicenseData gets a reference to the given LicenseAccountLicenseDataRelationship and assigns it to the AccountLicenseData field.
+// SetAccountLicenseData gets a reference to the given NullableLicenseAccountLicenseDataRelationship and assigns it to the AccountLicenseData field.
 func (o *LicenseLicenseRegistrationStatus) SetAccountLicenseData(v LicenseAccountLicenseDataRelationship) {
-	o.AccountLicenseData = &v
+	o.AccountLicenseData.Set(&v)
+}
+
+// SetAccountLicenseDataNil sets the value for AccountLicenseData to be an explicit nil
+func (o *LicenseLicenseRegistrationStatus) SetAccountLicenseDataNil() {
+	o.AccountLicenseData.Set(nil)
+}
+
+// UnsetAccountLicenseData ensures that no value is present for AccountLicenseData, not even an explicit nil
+func (o *LicenseLicenseRegistrationStatus) UnsetAccountLicenseData() {
+	o.AccountLicenseData.Unset()
 }
 
 func (o LicenseLicenseRegistrationStatus) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o LicenseLicenseRegistrationStatus) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.AccountCreationState != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.AccountCreationState) {
 		toSerialize["AccountCreationState"] = o.AccountCreationState
 	}
-	if o.IsNewAccount != nil {
+	if !IsNil(o.IsNewAccount) {
 		toSerialize["IsNewAccount"] = o.IsNewAccount
 	}
-	if o.LicenseRegistrationState != nil {
+	if !IsNil(o.LicenseRegistrationState) {
 		toSerialize["LicenseRegistrationState"] = o.LicenseRegistrationState
 	}
-	if o.TrialRegistrationComplete != nil {
+	if !IsNil(o.TrialRegistrationComplete) {
 		toSerialize["TrialRegistrationComplete"] = o.TrialRegistrationComplete
 	}
-	if o.AccountLicenseData != nil {
-		toSerialize["AccountLicenseData"] = o.AccountLicenseData
+	if o.AccountLicenseData.IsSet() {
+		toSerialize["AccountLicenseData"] = o.AccountLicenseData.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *LicenseLicenseRegistrationStatus) UnmarshalJSON(bytes []byte) (err error) {
+func (o *LicenseLicenseRegistrationStatus) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type LicenseLicenseRegistrationStatusWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -325,13 +366,13 @@ func (o *LicenseLicenseRegistrationStatus) UnmarshalJSON(bytes []byte) (err erro
 		// Stores information on the current flow of license registration. * `RegistrationNotStarted` - The license registration state to chose between trial and registration. * `RegistrationStarted` - The license registration state during set up flow. * `RegistrationComplete` - The license registration state after completion.
 		LicenseRegistrationState *string `json:"LicenseRegistrationState,omitempty"`
 		// Stores information on whether trial flow has been completed. True if trial registration finish.
-		TrialRegistrationComplete *bool                                  `json:"TrialRegistrationComplete,omitempty"`
-		AccountLicenseData        *LicenseAccountLicenseDataRelationship `json:"AccountLicenseData,omitempty"`
+		TrialRegistrationComplete *bool                                         `json:"TrialRegistrationComplete,omitempty"`
+		AccountLicenseData        NullableLicenseAccountLicenseDataRelationship `json:"AccountLicenseData,omitempty"`
 	}
 
 	varLicenseLicenseRegistrationStatusWithoutEmbeddedStruct := LicenseLicenseRegistrationStatusWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varLicenseLicenseRegistrationStatusWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varLicenseLicenseRegistrationStatusWithoutEmbeddedStruct)
 	if err == nil {
 		varLicenseLicenseRegistrationStatus := _LicenseLicenseRegistrationStatus{}
 		varLicenseLicenseRegistrationStatus.ClassId = varLicenseLicenseRegistrationStatusWithoutEmbeddedStruct.ClassId
@@ -348,7 +389,7 @@ func (o *LicenseLicenseRegistrationStatus) UnmarshalJSON(bytes []byte) (err erro
 
 	varLicenseLicenseRegistrationStatus := _LicenseLicenseRegistrationStatus{}
 
-	err = json.Unmarshal(bytes, &varLicenseLicenseRegistrationStatus)
+	err = json.Unmarshal(data, &varLicenseLicenseRegistrationStatus)
 	if err == nil {
 		o.MoBaseMo = varLicenseLicenseRegistrationStatus.MoBaseMo
 	} else {
@@ -357,7 +398,7 @@ func (o *LicenseLicenseRegistrationStatus) UnmarshalJSON(bytes []byte) (err erro
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "AccountCreationState")

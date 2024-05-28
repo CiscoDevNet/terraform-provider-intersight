@@ -59,14 +59,14 @@ Name | Type | Description | Notes
 **WearStatusInDays** | Pointer to **int64** | The number of days an SSD has gone through with the write cycles. | [optional] 
 **WriteErrorCountThreshold** | Pointer to **int64** | The number of write errors that are permitted while accessing the drive/card. | [optional] [readonly] 
 **WriteIoErrorCount** | Pointer to **int64** | Number of IO Errors that occured while writing data to the disk. | [optional] [readonly] 
-**InventoryDeviceInfo** | Pointer to [**InventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
-**LocatorLed** | Pointer to [**EquipmentLocatorLedRelationship**](EquipmentLocatorLedRelationship.md) |  | [optional] 
+**InventoryDeviceInfo** | Pointer to [**NullableInventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
+**LocatorLed** | Pointer to [**NullableEquipmentLocatorLedRelationship**](EquipmentLocatorLedRelationship.md) |  | [optional] 
 **PhysicalDiskExtensions** | Pointer to [**[]StoragePhysicalDiskExtensionRelationship**](StoragePhysicalDiskExtensionRelationship.md) | An array of relationships to storagePhysicalDiskExtension resources. | [optional] 
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 **RunningFirmware** | Pointer to [**[]FirmwareRunningFirmwareRelationship**](FirmwareRunningFirmwareRelationship.md) | An array of relationships to firmwareRunningFirmware resources. | [optional] [readonly] 
 **SasPorts** | Pointer to [**[]StorageSasPortRelationship**](StorageSasPortRelationship.md) | An array of relationships to storageSasPort resources. | [optional] [readonly] 
-**StorageController** | Pointer to [**StorageControllerRelationship**](StorageControllerRelationship.md) |  | [optional] 
-**StorageEnclosure** | Pointer to [**StorageEnclosureRelationship**](StorageEnclosureRelationship.md) |  | [optional] 
+**StorageController** | Pointer to [**NullableStorageControllerRelationship**](StorageControllerRelationship.md) |  | [optional] 
+**StorageEnclosure** | Pointer to [**NullableStorageEnclosureRelationship**](StorageEnclosureRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -1477,6 +1477,16 @@ SetInventoryDeviceInfo sets InventoryDeviceInfo field to given value.
 
 HasInventoryDeviceInfo returns a boolean if a field has been set.
 
+### SetInventoryDeviceInfoNil
+
+`func (o *StoragePhysicalDisk) SetInventoryDeviceInfoNil(b bool)`
+
+ SetInventoryDeviceInfoNil sets the value for InventoryDeviceInfo to be an explicit nil
+
+### UnsetInventoryDeviceInfo
+`func (o *StoragePhysicalDisk) UnsetInventoryDeviceInfo()`
+
+UnsetInventoryDeviceInfo ensures that no value is present for InventoryDeviceInfo, not even an explicit nil
 ### GetLocatorLed
 
 `func (o *StoragePhysicalDisk) GetLocatorLed() EquipmentLocatorLedRelationship`
@@ -1502,6 +1512,16 @@ SetLocatorLed sets LocatorLed field to given value.
 
 HasLocatorLed returns a boolean if a field has been set.
 
+### SetLocatorLedNil
+
+`func (o *StoragePhysicalDisk) SetLocatorLedNil(b bool)`
+
+ SetLocatorLedNil sets the value for LocatorLed to be an explicit nil
+
+### UnsetLocatorLed
+`func (o *StoragePhysicalDisk) UnsetLocatorLed()`
+
+UnsetLocatorLed ensures that no value is present for LocatorLed, not even an explicit nil
 ### GetPhysicalDiskExtensions
 
 `func (o *StoragePhysicalDisk) GetPhysicalDiskExtensions() []StoragePhysicalDiskExtensionRelationship`
@@ -1562,6 +1582,16 @@ SetRegisteredDevice sets RegisteredDevice field to given value.
 
 HasRegisteredDevice returns a boolean if a field has been set.
 
+### SetRegisteredDeviceNil
+
+`func (o *StoragePhysicalDisk) SetRegisteredDeviceNil(b bool)`
+
+ SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+
+### UnsetRegisteredDevice
+`func (o *StoragePhysicalDisk) UnsetRegisteredDevice()`
+
+UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
 ### GetRunningFirmware
 
 `func (o *StoragePhysicalDisk) GetRunningFirmware() []FirmwareRunningFirmwareRelationship`
@@ -1657,6 +1687,16 @@ SetStorageController sets StorageController field to given value.
 
 HasStorageController returns a boolean if a field has been set.
 
+### SetStorageControllerNil
+
+`func (o *StoragePhysicalDisk) SetStorageControllerNil(b bool)`
+
+ SetStorageControllerNil sets the value for StorageController to be an explicit nil
+
+### UnsetStorageController
+`func (o *StoragePhysicalDisk) UnsetStorageController()`
+
+UnsetStorageController ensures that no value is present for StorageController, not even an explicit nil
 ### GetStorageEnclosure
 
 `func (o *StoragePhysicalDisk) GetStorageEnclosure() StorageEnclosureRelationship`
@@ -1682,6 +1722,16 @@ SetStorageEnclosure sets StorageEnclosure field to given value.
 
 HasStorageEnclosure returns a boolean if a field has been set.
 
+### SetStorageEnclosureNil
+
+`func (o *StoragePhysicalDisk) SetStorageEnclosureNil(b bool)`
+
+ SetStorageEnclosureNil sets the value for StorageEnclosure to be an explicit nil
+
+### UnsetStorageEnclosure
+`func (o *StoragePhysicalDisk) UnsetStorageEnclosure()`
+
+UnsetStorageEnclosure ensures that no value is present for StorageEnclosure, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

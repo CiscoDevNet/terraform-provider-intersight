@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the VirtualizationBaseVirtualNetworkInterfaceCard type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &VirtualizationBaseVirtualNetworkInterfaceCard{}
 
 // VirtualizationBaseVirtualNetworkInterfaceCard Common attributes of any virtual network interface card managed by a hypervisor. Serves as a base class for all concrete virtual network interface card types.
 type VirtualizationBaseVirtualNetworkInterfaceCard struct {
@@ -112,7 +116,7 @@ func (o *VirtualizationBaseVirtualNetworkInterfaceCard) SetObjectType(v string) 
 
 // GetAdapterType returns the AdapterType field value if set, zero value otherwise.
 func (o *VirtualizationBaseVirtualNetworkInterfaceCard) GetAdapterType() string {
-	if o == nil || o.AdapterType == nil {
+	if o == nil || IsNil(o.AdapterType) {
 		var ret string
 		return ret
 	}
@@ -122,7 +126,7 @@ func (o *VirtualizationBaseVirtualNetworkInterfaceCard) GetAdapterType() string 
 // GetAdapterTypeOk returns a tuple with the AdapterType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationBaseVirtualNetworkInterfaceCard) GetAdapterTypeOk() (*string, bool) {
-	if o == nil || o.AdapterType == nil {
+	if o == nil || IsNil(o.AdapterType) {
 		return nil, false
 	}
 	return o.AdapterType, true
@@ -130,7 +134,7 @@ func (o *VirtualizationBaseVirtualNetworkInterfaceCard) GetAdapterTypeOk() (*str
 
 // HasAdapterType returns a boolean if a field has been set.
 func (o *VirtualizationBaseVirtualNetworkInterfaceCard) HasAdapterType() bool {
-	if o != nil && o.AdapterType != nil {
+	if o != nil && !IsNil(o.AdapterType) {
 		return true
 	}
 
@@ -144,7 +148,7 @@ func (o *VirtualizationBaseVirtualNetworkInterfaceCard) SetAdapterType(v string)
 
 // GetMacAddress returns the MacAddress field value if set, zero value otherwise.
 func (o *VirtualizationBaseVirtualNetworkInterfaceCard) GetMacAddress() string {
-	if o == nil || o.MacAddress == nil {
+	if o == nil || IsNil(o.MacAddress) {
 		var ret string
 		return ret
 	}
@@ -154,7 +158,7 @@ func (o *VirtualizationBaseVirtualNetworkInterfaceCard) GetMacAddress() string {
 // GetMacAddressOk returns a tuple with the MacAddress field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationBaseVirtualNetworkInterfaceCard) GetMacAddressOk() (*string, bool) {
-	if o == nil || o.MacAddress == nil {
+	if o == nil || IsNil(o.MacAddress) {
 		return nil, false
 	}
 	return o.MacAddress, true
@@ -162,7 +166,7 @@ func (o *VirtualizationBaseVirtualNetworkInterfaceCard) GetMacAddressOk() (*stri
 
 // HasMacAddress returns a boolean if a field has been set.
 func (o *VirtualizationBaseVirtualNetworkInterfaceCard) HasMacAddress() bool {
-	if o != nil && o.MacAddress != nil {
+	if o != nil && !IsNil(o.MacAddress) {
 		return true
 	}
 
@@ -176,7 +180,7 @@ func (o *VirtualizationBaseVirtualNetworkInterfaceCard) SetMacAddress(v string) 
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *VirtualizationBaseVirtualNetworkInterfaceCard) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -186,7 +190,7 @@ func (o *VirtualizationBaseVirtualNetworkInterfaceCard) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationBaseVirtualNetworkInterfaceCard) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -194,7 +198,7 @@ func (o *VirtualizationBaseVirtualNetworkInterfaceCard) GetNameOk() (*string, bo
 
 // HasName returns a boolean if a field has been set.
 func (o *VirtualizationBaseVirtualNetworkInterfaceCard) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -207,28 +211,32 @@ func (o *VirtualizationBaseVirtualNetworkInterfaceCard) SetName(v string) {
 }
 
 func (o VirtualizationBaseVirtualNetworkInterfaceCard) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o VirtualizationBaseVirtualNetworkInterfaceCard) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedVirtualizationBaseSourceDevice, errVirtualizationBaseSourceDevice := json.Marshal(o.VirtualizationBaseSourceDevice)
 	if errVirtualizationBaseSourceDevice != nil {
-		return []byte{}, errVirtualizationBaseSourceDevice
+		return map[string]interface{}{}, errVirtualizationBaseSourceDevice
 	}
 	errVirtualizationBaseSourceDevice = json.Unmarshal([]byte(serializedVirtualizationBaseSourceDevice), &toSerialize)
 	if errVirtualizationBaseSourceDevice != nil {
-		return []byte{}, errVirtualizationBaseSourceDevice
+		return map[string]interface{}{}, errVirtualizationBaseSourceDevice
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.AdapterType != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.AdapterType) {
 		toSerialize["AdapterType"] = o.AdapterType
 	}
-	if o.MacAddress != nil {
+	if !IsNil(o.MacAddress) {
 		toSerialize["MacAddress"] = o.MacAddress
 	}
-	if o.Name != nil {
+	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
 	}
 
@@ -236,10 +244,32 @@ func (o VirtualizationBaseVirtualNetworkInterfaceCard) MarshalJSON() ([]byte, er
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *VirtualizationBaseVirtualNetworkInterfaceCard) UnmarshalJSON(bytes []byte) (err error) {
+func (o *VirtualizationBaseVirtualNetworkInterfaceCard) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type VirtualizationBaseVirtualNetworkInterfaceCardWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type.
 		ClassId string `json:"ClassId"`
@@ -255,7 +285,7 @@ func (o *VirtualizationBaseVirtualNetworkInterfaceCard) UnmarshalJSON(bytes []by
 
 	varVirtualizationBaseVirtualNetworkInterfaceCardWithoutEmbeddedStruct := VirtualizationBaseVirtualNetworkInterfaceCardWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varVirtualizationBaseVirtualNetworkInterfaceCardWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varVirtualizationBaseVirtualNetworkInterfaceCardWithoutEmbeddedStruct)
 	if err == nil {
 		varVirtualizationBaseVirtualNetworkInterfaceCard := _VirtualizationBaseVirtualNetworkInterfaceCard{}
 		varVirtualizationBaseVirtualNetworkInterfaceCard.ClassId = varVirtualizationBaseVirtualNetworkInterfaceCardWithoutEmbeddedStruct.ClassId
@@ -270,7 +300,7 @@ func (o *VirtualizationBaseVirtualNetworkInterfaceCard) UnmarshalJSON(bytes []by
 
 	varVirtualizationBaseVirtualNetworkInterfaceCard := _VirtualizationBaseVirtualNetworkInterfaceCard{}
 
-	err = json.Unmarshal(bytes, &varVirtualizationBaseVirtualNetworkInterfaceCard)
+	err = json.Unmarshal(data, &varVirtualizationBaseVirtualNetworkInterfaceCard)
 	if err == nil {
 		o.VirtualizationBaseSourceDevice = varVirtualizationBaseVirtualNetworkInterfaceCard.VirtualizationBaseSourceDevice
 	} else {
@@ -279,7 +309,7 @@ func (o *VirtualizationBaseVirtualNetworkInterfaceCard) UnmarshalJSON(bytes []by
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "AdapterType")

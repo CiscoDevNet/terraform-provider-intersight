@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the StorageNetAppEthernetPort type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &StorageNetAppEthernetPort{}
 
 // StorageNetAppEthernetPort Ethernet port is a port on a node in a storage array.
 type StorageNetAppEthernetPort struct {
@@ -48,8 +52,8 @@ type StorageNetAppEthernetPort struct {
 	// Type of the port available in storage array. * `LAG` - Storage port of type lag. * `physical` - LIFs can be configured directly on physical ports. * `VLAN` - A logical port that receives and sends VLAN-tagged (IEEE 802.1Q standard) traffic. VLAN port characteristics include the VLAN ID for the port.
 	Type *string `json:"Type,omitempty"`
 	// Universally unique identifier of the physical port.
-	Uuid            *string                        `json:"Uuid,omitempty"`
-	ArrayController *StorageNetAppNodeRelationship `json:"ArrayController,omitempty"`
+	Uuid            *string                               `json:"Uuid,omitempty"`
+	ArrayController NullableStorageNetAppNodeRelationship `json:"ArrayController,omitempty"`
 	// An array of relationships to storageNetAppEthernetPortEvent resources.
 	Events               []StorageNetAppEthernetPortEventRelationship `json:"Events,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -130,7 +134,7 @@ func (o *StorageNetAppEthernetPort) SetObjectType(v string) {
 
 // GetBroadcastDomainName returns the BroadcastDomainName field value if set, zero value otherwise.
 func (o *StorageNetAppEthernetPort) GetBroadcastDomainName() string {
-	if o == nil || o.BroadcastDomainName == nil {
+	if o == nil || IsNil(o.BroadcastDomainName) {
 		var ret string
 		return ret
 	}
@@ -140,7 +144,7 @@ func (o *StorageNetAppEthernetPort) GetBroadcastDomainName() string {
 // GetBroadcastDomainNameOk returns a tuple with the BroadcastDomainName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppEthernetPort) GetBroadcastDomainNameOk() (*string, bool) {
-	if o == nil || o.BroadcastDomainName == nil {
+	if o == nil || IsNil(o.BroadcastDomainName) {
 		return nil, false
 	}
 	return o.BroadcastDomainName, true
@@ -148,7 +152,7 @@ func (o *StorageNetAppEthernetPort) GetBroadcastDomainNameOk() (*string, bool) {
 
 // HasBroadcastDomainName returns a boolean if a field has been set.
 func (o *StorageNetAppEthernetPort) HasBroadcastDomainName() bool {
-	if o != nil && o.BroadcastDomainName != nil {
+	if o != nil && !IsNil(o.BroadcastDomainName) {
 		return true
 	}
 
@@ -162,7 +166,7 @@ func (o *StorageNetAppEthernetPort) SetBroadcastDomainName(v string) {
 
 // GetEnabled returns the Enabled field value if set, zero value otherwise.
 func (o *StorageNetAppEthernetPort) GetEnabled() string {
-	if o == nil || o.Enabled == nil {
+	if o == nil || IsNil(o.Enabled) {
 		var ret string
 		return ret
 	}
@@ -172,7 +176,7 @@ func (o *StorageNetAppEthernetPort) GetEnabled() string {
 // GetEnabledOk returns a tuple with the Enabled field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppEthernetPort) GetEnabledOk() (*string, bool) {
-	if o == nil || o.Enabled == nil {
+	if o == nil || IsNil(o.Enabled) {
 		return nil, false
 	}
 	return o.Enabled, true
@@ -180,7 +184,7 @@ func (o *StorageNetAppEthernetPort) GetEnabledOk() (*string, bool) {
 
 // HasEnabled returns a boolean if a field has been set.
 func (o *StorageNetAppEthernetPort) HasEnabled() bool {
-	if o != nil && o.Enabled != nil {
+	if o != nil && !IsNil(o.Enabled) {
 		return true
 	}
 
@@ -194,7 +198,7 @@ func (o *StorageNetAppEthernetPort) SetEnabled(v string) {
 
 // GetMacAddress returns the MacAddress field value if set, zero value otherwise.
 func (o *StorageNetAppEthernetPort) GetMacAddress() string {
-	if o == nil || o.MacAddress == nil {
+	if o == nil || IsNil(o.MacAddress) {
 		var ret string
 		return ret
 	}
@@ -204,7 +208,7 @@ func (o *StorageNetAppEthernetPort) GetMacAddress() string {
 // GetMacAddressOk returns a tuple with the MacAddress field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppEthernetPort) GetMacAddressOk() (*string, bool) {
-	if o == nil || o.MacAddress == nil {
+	if o == nil || IsNil(o.MacAddress) {
 		return nil, false
 	}
 	return o.MacAddress, true
@@ -212,7 +216,7 @@ func (o *StorageNetAppEthernetPort) GetMacAddressOk() (*string, bool) {
 
 // HasMacAddress returns a boolean if a field has been set.
 func (o *StorageNetAppEthernetPort) HasMacAddress() bool {
-	if o != nil && o.MacAddress != nil {
+	if o != nil && !IsNil(o.MacAddress) {
 		return true
 	}
 
@@ -226,7 +230,7 @@ func (o *StorageNetAppEthernetPort) SetMacAddress(v string) {
 
 // GetMtu returns the Mtu field value if set, zero value otherwise.
 func (o *StorageNetAppEthernetPort) GetMtu() int64 {
-	if o == nil || o.Mtu == nil {
+	if o == nil || IsNil(o.Mtu) {
 		var ret int64
 		return ret
 	}
@@ -236,7 +240,7 @@ func (o *StorageNetAppEthernetPort) GetMtu() int64 {
 // GetMtuOk returns a tuple with the Mtu field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppEthernetPort) GetMtuOk() (*int64, bool) {
-	if o == nil || o.Mtu == nil {
+	if o == nil || IsNil(o.Mtu) {
 		return nil, false
 	}
 	return o.Mtu, true
@@ -244,7 +248,7 @@ func (o *StorageNetAppEthernetPort) GetMtuOk() (*int64, bool) {
 
 // HasMtu returns a boolean if a field has been set.
 func (o *StorageNetAppEthernetPort) HasMtu() bool {
-	if o != nil && o.Mtu != nil {
+	if o != nil && !IsNil(o.Mtu) {
 		return true
 	}
 
@@ -258,7 +262,7 @@ func (o *StorageNetAppEthernetPort) SetMtu(v int64) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *StorageNetAppEthernetPort) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -268,7 +272,7 @@ func (o *StorageNetAppEthernetPort) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppEthernetPort) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -276,7 +280,7 @@ func (o *StorageNetAppEthernetPort) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *StorageNetAppEthernetPort) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -290,7 +294,7 @@ func (o *StorageNetAppEthernetPort) SetName(v string) {
 
 // GetNetAppEthernetPortLag returns the NetAppEthernetPortLag field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *StorageNetAppEthernetPort) GetNetAppEthernetPortLag() StorageNetAppEthernetPortLag {
-	if o == nil || o.NetAppEthernetPortLag.Get() == nil {
+	if o == nil || IsNil(o.NetAppEthernetPortLag.Get()) {
 		var ret StorageNetAppEthernetPortLag
 		return ret
 	}
@@ -333,7 +337,7 @@ func (o *StorageNetAppEthernetPort) UnsetNetAppEthernetPortLag() {
 
 // GetNetAppEthernetPortVlan returns the NetAppEthernetPortVlan field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *StorageNetAppEthernetPort) GetNetAppEthernetPortVlan() StorageNetAppEthernetPortVlan {
-	if o == nil || o.NetAppEthernetPortVlan.Get() == nil {
+	if o == nil || IsNil(o.NetAppEthernetPortVlan.Get()) {
 		var ret StorageNetAppEthernetPortVlan
 		return ret
 	}
@@ -376,7 +380,7 @@ func (o *StorageNetAppEthernetPort) UnsetNetAppEthernetPortVlan() {
 
 // GetNodeName returns the NodeName field value if set, zero value otherwise.
 func (o *StorageNetAppEthernetPort) GetNodeName() string {
-	if o == nil || o.NodeName == nil {
+	if o == nil || IsNil(o.NodeName) {
 		var ret string
 		return ret
 	}
@@ -386,7 +390,7 @@ func (o *StorageNetAppEthernetPort) GetNodeName() string {
 // GetNodeNameOk returns a tuple with the NodeName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppEthernetPort) GetNodeNameOk() (*string, bool) {
-	if o == nil || o.NodeName == nil {
+	if o == nil || IsNil(o.NodeName) {
 		return nil, false
 	}
 	return o.NodeName, true
@@ -394,7 +398,7 @@ func (o *StorageNetAppEthernetPort) GetNodeNameOk() (*string, bool) {
 
 // HasNodeName returns a boolean if a field has been set.
 func (o *StorageNetAppEthernetPort) HasNodeName() bool {
-	if o != nil && o.NodeName != nil {
+	if o != nil && !IsNil(o.NodeName) {
 		return true
 	}
 
@@ -408,7 +412,7 @@ func (o *StorageNetAppEthernetPort) SetNodeName(v string) {
 
 // GetPortState returns the PortState field value if set, zero value otherwise.
 func (o *StorageNetAppEthernetPort) GetPortState() string {
-	if o == nil || o.PortState == nil {
+	if o == nil || IsNil(o.PortState) {
 		var ret string
 		return ret
 	}
@@ -418,7 +422,7 @@ func (o *StorageNetAppEthernetPort) GetPortState() string {
 // GetPortStateOk returns a tuple with the PortState field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppEthernetPort) GetPortStateOk() (*string, bool) {
-	if o == nil || o.PortState == nil {
+	if o == nil || IsNil(o.PortState) {
 		return nil, false
 	}
 	return o.PortState, true
@@ -426,7 +430,7 @@ func (o *StorageNetAppEthernetPort) GetPortStateOk() (*string, bool) {
 
 // HasPortState returns a boolean if a field has been set.
 func (o *StorageNetAppEthernetPort) HasPortState() bool {
-	if o != nil && o.PortState != nil {
+	if o != nil && !IsNil(o.PortState) {
 		return true
 	}
 
@@ -440,7 +444,7 @@ func (o *StorageNetAppEthernetPort) SetPortState(v string) {
 
 // GetSpeed returns the Speed field value if set, zero value otherwise.
 func (o *StorageNetAppEthernetPort) GetSpeed() int64 {
-	if o == nil || o.Speed == nil {
+	if o == nil || IsNil(o.Speed) {
 		var ret int64
 		return ret
 	}
@@ -450,7 +454,7 @@ func (o *StorageNetAppEthernetPort) GetSpeed() int64 {
 // GetSpeedOk returns a tuple with the Speed field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppEthernetPort) GetSpeedOk() (*int64, bool) {
-	if o == nil || o.Speed == nil {
+	if o == nil || IsNil(o.Speed) {
 		return nil, false
 	}
 	return o.Speed, true
@@ -458,7 +462,7 @@ func (o *StorageNetAppEthernetPort) GetSpeedOk() (*int64, bool) {
 
 // HasSpeed returns a boolean if a field has been set.
 func (o *StorageNetAppEthernetPort) HasSpeed() bool {
-	if o != nil && o.Speed != nil {
+	if o != nil && !IsNil(o.Speed) {
 		return true
 	}
 
@@ -473,7 +477,7 @@ func (o *StorageNetAppEthernetPort) SetSpeed(v int64) {
 // GetState returns the State field value if set, zero value otherwise.
 // Deprecated
 func (o *StorageNetAppEthernetPort) GetState() string {
-	if o == nil || o.State == nil {
+	if o == nil || IsNil(o.State) {
 		var ret string
 		return ret
 	}
@@ -484,7 +488,7 @@ func (o *StorageNetAppEthernetPort) GetState() string {
 // and a boolean to check if the value has been set.
 // Deprecated
 func (o *StorageNetAppEthernetPort) GetStateOk() (*string, bool) {
-	if o == nil || o.State == nil {
+	if o == nil || IsNil(o.State) {
 		return nil, false
 	}
 	return o.State, true
@@ -492,7 +496,7 @@ func (o *StorageNetAppEthernetPort) GetStateOk() (*string, bool) {
 
 // HasState returns a boolean if a field has been set.
 func (o *StorageNetAppEthernetPort) HasState() bool {
-	if o != nil && o.State != nil {
+	if o != nil && !IsNil(o.State) {
 		return true
 	}
 
@@ -507,7 +511,7 @@ func (o *StorageNetAppEthernetPort) SetState(v string) {
 
 // GetType returns the Type field value if set, zero value otherwise.
 func (o *StorageNetAppEthernetPort) GetType() string {
-	if o == nil || o.Type == nil {
+	if o == nil || IsNil(o.Type) {
 		var ret string
 		return ret
 	}
@@ -517,7 +521,7 @@ func (o *StorageNetAppEthernetPort) GetType() string {
 // GetTypeOk returns a tuple with the Type field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppEthernetPort) GetTypeOk() (*string, bool) {
-	if o == nil || o.Type == nil {
+	if o == nil || IsNil(o.Type) {
 		return nil, false
 	}
 	return o.Type, true
@@ -525,7 +529,7 @@ func (o *StorageNetAppEthernetPort) GetTypeOk() (*string, bool) {
 
 // HasType returns a boolean if a field has been set.
 func (o *StorageNetAppEthernetPort) HasType() bool {
-	if o != nil && o.Type != nil {
+	if o != nil && !IsNil(o.Type) {
 		return true
 	}
 
@@ -539,7 +543,7 @@ func (o *StorageNetAppEthernetPort) SetType(v string) {
 
 // GetUuid returns the Uuid field value if set, zero value otherwise.
 func (o *StorageNetAppEthernetPort) GetUuid() string {
-	if o == nil || o.Uuid == nil {
+	if o == nil || IsNil(o.Uuid) {
 		var ret string
 		return ret
 	}
@@ -549,7 +553,7 @@ func (o *StorageNetAppEthernetPort) GetUuid() string {
 // GetUuidOk returns a tuple with the Uuid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppEthernetPort) GetUuidOk() (*string, bool) {
-	if o == nil || o.Uuid == nil {
+	if o == nil || IsNil(o.Uuid) {
 		return nil, false
 	}
 	return o.Uuid, true
@@ -557,7 +561,7 @@ func (o *StorageNetAppEthernetPort) GetUuidOk() (*string, bool) {
 
 // HasUuid returns a boolean if a field has been set.
 func (o *StorageNetAppEthernetPort) HasUuid() bool {
-	if o != nil && o.Uuid != nil {
+	if o != nil && !IsNil(o.Uuid) {
 		return true
 	}
 
@@ -569,36 +573,47 @@ func (o *StorageNetAppEthernetPort) SetUuid(v string) {
 	o.Uuid = &v
 }
 
-// GetArrayController returns the ArrayController field value if set, zero value otherwise.
+// GetArrayController returns the ArrayController field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *StorageNetAppEthernetPort) GetArrayController() StorageNetAppNodeRelationship {
-	if o == nil || o.ArrayController == nil {
+	if o == nil || IsNil(o.ArrayController.Get()) {
 		var ret StorageNetAppNodeRelationship
 		return ret
 	}
-	return *o.ArrayController
+	return *o.ArrayController.Get()
 }
 
 // GetArrayControllerOk returns a tuple with the ArrayController field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StorageNetAppEthernetPort) GetArrayControllerOk() (*StorageNetAppNodeRelationship, bool) {
-	if o == nil || o.ArrayController == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.ArrayController, true
+	return o.ArrayController.Get(), o.ArrayController.IsSet()
 }
 
 // HasArrayController returns a boolean if a field has been set.
 func (o *StorageNetAppEthernetPort) HasArrayController() bool {
-	if o != nil && o.ArrayController != nil {
+	if o != nil && o.ArrayController.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetArrayController gets a reference to the given StorageNetAppNodeRelationship and assigns it to the ArrayController field.
+// SetArrayController gets a reference to the given NullableStorageNetAppNodeRelationship and assigns it to the ArrayController field.
 func (o *StorageNetAppEthernetPort) SetArrayController(v StorageNetAppNodeRelationship) {
-	o.ArrayController = &v
+	o.ArrayController.Set(&v)
+}
+
+// SetArrayControllerNil sets the value for ArrayController to be an explicit nil
+func (o *StorageNetAppEthernetPort) SetArrayControllerNil() {
+	o.ArrayController.Set(nil)
+}
+
+// UnsetArrayController ensures that no value is present for ArrayController, not even an explicit nil
+func (o *StorageNetAppEthernetPort) UnsetArrayController() {
+	o.ArrayController.Unset()
 }
 
 // GetEvents returns the Events field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -614,7 +629,7 @@ func (o *StorageNetAppEthernetPort) GetEvents() []StorageNetAppEthernetPortEvent
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StorageNetAppEthernetPort) GetEventsOk() ([]StorageNetAppEthernetPortEventRelationship, bool) {
-	if o == nil || o.Events == nil {
+	if o == nil || IsNil(o.Events) {
 		return nil, false
 	}
 	return o.Events, true
@@ -622,7 +637,7 @@ func (o *StorageNetAppEthernetPort) GetEventsOk() ([]StorageNetAppEthernetPortEv
 
 // HasEvents returns a boolean if a field has been set.
 func (o *StorageNetAppEthernetPort) HasEvents() bool {
-	if o != nil && o.Events != nil {
+	if o != nil && IsNil(o.Events) {
 		return true
 	}
 
@@ -635,34 +650,38 @@ func (o *StorageNetAppEthernetPort) SetEvents(v []StorageNetAppEthernetPortEvent
 }
 
 func (o StorageNetAppEthernetPort) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o StorageNetAppEthernetPort) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.BroadcastDomainName != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.BroadcastDomainName) {
 		toSerialize["BroadcastDomainName"] = o.BroadcastDomainName
 	}
-	if o.Enabled != nil {
+	if !IsNil(o.Enabled) {
 		toSerialize["Enabled"] = o.Enabled
 	}
-	if o.MacAddress != nil {
+	if !IsNil(o.MacAddress) {
 		toSerialize["MacAddress"] = o.MacAddress
 	}
-	if o.Mtu != nil {
+	if !IsNil(o.Mtu) {
 		toSerialize["Mtu"] = o.Mtu
 	}
-	if o.Name != nil {
+	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
 	}
 	if o.NetAppEthernetPortLag.IsSet() {
@@ -671,26 +690,26 @@ func (o StorageNetAppEthernetPort) MarshalJSON() ([]byte, error) {
 	if o.NetAppEthernetPortVlan.IsSet() {
 		toSerialize["NetAppEthernetPortVlan"] = o.NetAppEthernetPortVlan.Get()
 	}
-	if o.NodeName != nil {
+	if !IsNil(o.NodeName) {
 		toSerialize["NodeName"] = o.NodeName
 	}
-	if o.PortState != nil {
+	if !IsNil(o.PortState) {
 		toSerialize["PortState"] = o.PortState
 	}
-	if o.Speed != nil {
+	if !IsNil(o.Speed) {
 		toSerialize["Speed"] = o.Speed
 	}
-	if o.State != nil {
+	if !IsNil(o.State) {
 		toSerialize["State"] = o.State
 	}
-	if o.Type != nil {
+	if !IsNil(o.Type) {
 		toSerialize["Type"] = o.Type
 	}
-	if o.Uuid != nil {
+	if !IsNil(o.Uuid) {
 		toSerialize["Uuid"] = o.Uuid
 	}
-	if o.ArrayController != nil {
-		toSerialize["ArrayController"] = o.ArrayController
+	if o.ArrayController.IsSet() {
+		toSerialize["ArrayController"] = o.ArrayController.Get()
 	}
 	if o.Events != nil {
 		toSerialize["Events"] = o.Events
@@ -700,10 +719,32 @@ func (o StorageNetAppEthernetPort) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *StorageNetAppEthernetPort) UnmarshalJSON(bytes []byte) (err error) {
+func (o *StorageNetAppEthernetPort) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type StorageNetAppEthernetPortWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -733,15 +774,15 @@ func (o *StorageNetAppEthernetPort) UnmarshalJSON(bytes []byte) (err error) {
 		// Type of the port available in storage array. * `LAG` - Storage port of type lag. * `physical` - LIFs can be configured directly on physical ports. * `VLAN` - A logical port that receives and sends VLAN-tagged (IEEE 802.1Q standard) traffic. VLAN port characteristics include the VLAN ID for the port.
 		Type *string `json:"Type,omitempty"`
 		// Universally unique identifier of the physical port.
-		Uuid            *string                        `json:"Uuid,omitempty"`
-		ArrayController *StorageNetAppNodeRelationship `json:"ArrayController,omitempty"`
+		Uuid            *string                               `json:"Uuid,omitempty"`
+		ArrayController NullableStorageNetAppNodeRelationship `json:"ArrayController,omitempty"`
 		// An array of relationships to storageNetAppEthernetPortEvent resources.
 		Events []StorageNetAppEthernetPortEventRelationship `json:"Events,omitempty"`
 	}
 
 	varStorageNetAppEthernetPortWithoutEmbeddedStruct := StorageNetAppEthernetPortWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varStorageNetAppEthernetPortWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varStorageNetAppEthernetPortWithoutEmbeddedStruct)
 	if err == nil {
 		varStorageNetAppEthernetPort := _StorageNetAppEthernetPort{}
 		varStorageNetAppEthernetPort.ClassId = varStorageNetAppEthernetPortWithoutEmbeddedStruct.ClassId
@@ -768,7 +809,7 @@ func (o *StorageNetAppEthernetPort) UnmarshalJSON(bytes []byte) (err error) {
 
 	varStorageNetAppEthernetPort := _StorageNetAppEthernetPort{}
 
-	err = json.Unmarshal(bytes, &varStorageNetAppEthernetPort)
+	err = json.Unmarshal(data, &varStorageNetAppEthernetPort)
 	if err == nil {
 		o.MoBaseMo = varStorageNetAppEthernetPort.MoBaseMo
 	} else {
@@ -777,7 +818,7 @@ func (o *StorageNetAppEthernetPort) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "BroadcastDomainName")

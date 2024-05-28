@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the BulkExportedItem type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &BulkExportedItem{}
 
 // BulkExportedItem A single managed object that is being exported.
 type BulkExportedItem struct {
@@ -43,9 +47,9 @@ type BulkExportedItem struct {
 	// Status of the item's export operation. * `` - The operation has not started. * `ValidationInProgress` - The validation operation is in progress. * `Valid` - The content to be imported is valid. * `InValid` - The content to be imported is not valid and the status message will have the reason. * `InProgress` - The operation is in progress. * `Success` - The operation has succeeded. * `Failed` - The operation has failed. * `RollBackInitiated` - The rollback has been inititiated for import failure. * `RollBackFailed` - The rollback has failed for import failure. * `RollbackCompleted` - The rollback has completed for import failure. * `RollbackAborted` - The rollback has been aborted for import failure. * `OperationTimedOut` - The operation has timed out. * `OperationCancelled` - The operation has been canceled. * `CancelInProgress` - The operation is being canceled.
 	Status *string `json:"Status,omitempty"`
 	// Progress or error message for the MO's export operation.
-	StatusMessage *string                       `json:"StatusMessage,omitempty"`
-	Export        *BulkExportRelationship       `json:"Export,omitempty"`
-	ParentItem    *BulkExportedItemRelationship `json:"ParentItem,omitempty"`
+	StatusMessage *string                              `json:"StatusMessage,omitempty"`
+	Export        NullableBulkExportRelationship       `json:"Export,omitempty"`
+	ParentItem    NullableBulkExportedItemRelationship `json:"ParentItem,omitempty"`
 	// An array of relationships to bulkExportedItem resources.
 	RelatedItems         []BulkExportedItemRelationship `json:"RelatedItems,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -137,7 +141,7 @@ func (o *BulkExportedItem) GetExcludePeers() []string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *BulkExportedItem) GetExcludePeersOk() ([]string, bool) {
-	if o == nil || o.ExcludePeers == nil {
+	if o == nil || IsNil(o.ExcludePeers) {
 		return nil, false
 	}
 	return o.ExcludePeers, true
@@ -145,7 +149,7 @@ func (o *BulkExportedItem) GetExcludePeersOk() ([]string, bool) {
 
 // HasExcludePeers returns a boolean if a field has been set.
 func (o *BulkExportedItem) HasExcludePeers() bool {
-	if o != nil && o.ExcludePeers != nil {
+	if o != nil && IsNil(o.ExcludePeers) {
 		return true
 	}
 
@@ -159,7 +163,7 @@ func (o *BulkExportedItem) SetExcludePeers(v []string) {
 
 // GetExcludeRelations returns the ExcludeRelations field value if set, zero value otherwise.
 func (o *BulkExportedItem) GetExcludeRelations() bool {
-	if o == nil || o.ExcludeRelations == nil {
+	if o == nil || IsNil(o.ExcludeRelations) {
 		var ret bool
 		return ret
 	}
@@ -169,7 +173,7 @@ func (o *BulkExportedItem) GetExcludeRelations() bool {
 // GetExcludeRelationsOk returns a tuple with the ExcludeRelations field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *BulkExportedItem) GetExcludeRelationsOk() (*bool, bool) {
-	if o == nil || o.ExcludeRelations == nil {
+	if o == nil || IsNil(o.ExcludeRelations) {
 		return nil, false
 	}
 	return o.ExcludeRelations, true
@@ -177,7 +181,7 @@ func (o *BulkExportedItem) GetExcludeRelationsOk() (*bool, bool) {
 
 // HasExcludeRelations returns a boolean if a field has been set.
 func (o *BulkExportedItem) HasExcludeRelations() bool {
-	if o != nil && o.ExcludeRelations != nil {
+	if o != nil && !IsNil(o.ExcludeRelations) {
 		return true
 	}
 
@@ -191,7 +195,7 @@ func (o *BulkExportedItem) SetExcludeRelations(v bool) {
 
 // GetExportTags returns the ExportTags field value if set, zero value otherwise.
 func (o *BulkExportedItem) GetExportTags() bool {
-	if o == nil || o.ExportTags == nil {
+	if o == nil || IsNil(o.ExportTags) {
 		var ret bool
 		return ret
 	}
@@ -201,7 +205,7 @@ func (o *BulkExportedItem) GetExportTags() bool {
 // GetExportTagsOk returns a tuple with the ExportTags field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *BulkExportedItem) GetExportTagsOk() (*bool, bool) {
-	if o == nil || o.ExportTags == nil {
+	if o == nil || IsNil(o.ExportTags) {
 		return nil, false
 	}
 	return o.ExportTags, true
@@ -209,7 +213,7 @@ func (o *BulkExportedItem) GetExportTagsOk() (*bool, bool) {
 
 // HasExportTags returns a boolean if a field has been set.
 func (o *BulkExportedItem) HasExportTags() bool {
-	if o != nil && o.ExportTags != nil {
+	if o != nil && !IsNil(o.ExportTags) {
 		return true
 	}
 
@@ -223,7 +227,7 @@ func (o *BulkExportedItem) SetExportTags(v bool) {
 
 // GetFileName returns the FileName field value if set, zero value otherwise.
 func (o *BulkExportedItem) GetFileName() string {
-	if o == nil || o.FileName == nil {
+	if o == nil || IsNil(o.FileName) {
 		var ret string
 		return ret
 	}
@@ -233,7 +237,7 @@ func (o *BulkExportedItem) GetFileName() string {
 // GetFileNameOk returns a tuple with the FileName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *BulkExportedItem) GetFileNameOk() (*string, bool) {
-	if o == nil || o.FileName == nil {
+	if o == nil || IsNil(o.FileName) {
 		return nil, false
 	}
 	return o.FileName, true
@@ -241,7 +245,7 @@ func (o *BulkExportedItem) GetFileNameOk() (*string, bool) {
 
 // HasFileName returns a boolean if a field has been set.
 func (o *BulkExportedItem) HasFileName() bool {
-	if o != nil && o.FileName != nil {
+	if o != nil && !IsNil(o.FileName) {
 		return true
 	}
 
@@ -255,7 +259,7 @@ func (o *BulkExportedItem) SetFileName(v string) {
 
 // GetIncludeOrgIdentity returns the IncludeOrgIdentity field value if set, zero value otherwise.
 func (o *BulkExportedItem) GetIncludeOrgIdentity() bool {
-	if o == nil || o.IncludeOrgIdentity == nil {
+	if o == nil || IsNil(o.IncludeOrgIdentity) {
 		var ret bool
 		return ret
 	}
@@ -265,7 +269,7 @@ func (o *BulkExportedItem) GetIncludeOrgIdentity() bool {
 // GetIncludeOrgIdentityOk returns a tuple with the IncludeOrgIdentity field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *BulkExportedItem) GetIncludeOrgIdentityOk() (*bool, bool) {
-	if o == nil || o.IncludeOrgIdentity == nil {
+	if o == nil || IsNil(o.IncludeOrgIdentity) {
 		return nil, false
 	}
 	return o.IncludeOrgIdentity, true
@@ -273,7 +277,7 @@ func (o *BulkExportedItem) GetIncludeOrgIdentityOk() (*bool, bool) {
 
 // HasIncludeOrgIdentity returns a boolean if a field has been set.
 func (o *BulkExportedItem) HasIncludeOrgIdentity() bool {
-	if o != nil && o.IncludeOrgIdentity != nil {
+	if o != nil && !IsNil(o.IncludeOrgIdentity) {
 		return true
 	}
 
@@ -287,7 +291,7 @@ func (o *BulkExportedItem) SetIncludeOrgIdentity(v bool) {
 
 // GetItem returns the Item field value if set, zero value otherwise.
 func (o *BulkExportedItem) GetItem() MoMoRef {
-	if o == nil || o.Item == nil {
+	if o == nil || IsNil(o.Item) {
 		var ret MoMoRef
 		return ret
 	}
@@ -297,7 +301,7 @@ func (o *BulkExportedItem) GetItem() MoMoRef {
 // GetItemOk returns a tuple with the Item field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *BulkExportedItem) GetItemOk() (*MoMoRef, bool) {
-	if o == nil || o.Item == nil {
+	if o == nil || IsNil(o.Item) {
 		return nil, false
 	}
 	return o.Item, true
@@ -305,7 +309,7 @@ func (o *BulkExportedItem) GetItemOk() (*MoMoRef, bool) {
 
 // HasItem returns a boolean if a field has been set.
 func (o *BulkExportedItem) HasItem() bool {
-	if o != nil && o.Item != nil {
+	if o != nil && !IsNil(o.Item) {
 		return true
 	}
 
@@ -319,7 +323,7 @@ func (o *BulkExportedItem) SetItem(v MoMoRef) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *BulkExportedItem) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -329,7 +333,7 @@ func (o *BulkExportedItem) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *BulkExportedItem) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -337,7 +341,7 @@ func (o *BulkExportedItem) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *BulkExportedItem) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -351,7 +355,7 @@ func (o *BulkExportedItem) SetName(v string) {
 
 // GetServiceName returns the ServiceName field value if set, zero value otherwise.
 func (o *BulkExportedItem) GetServiceName() string {
-	if o == nil || o.ServiceName == nil {
+	if o == nil || IsNil(o.ServiceName) {
 		var ret string
 		return ret
 	}
@@ -361,7 +365,7 @@ func (o *BulkExportedItem) GetServiceName() string {
 // GetServiceNameOk returns a tuple with the ServiceName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *BulkExportedItem) GetServiceNameOk() (*string, bool) {
-	if o == nil || o.ServiceName == nil {
+	if o == nil || IsNil(o.ServiceName) {
 		return nil, false
 	}
 	return o.ServiceName, true
@@ -369,7 +373,7 @@ func (o *BulkExportedItem) GetServiceNameOk() (*string, bool) {
 
 // HasServiceName returns a boolean if a field has been set.
 func (o *BulkExportedItem) HasServiceName() bool {
-	if o != nil && o.ServiceName != nil {
+	if o != nil && !IsNil(o.ServiceName) {
 		return true
 	}
 
@@ -383,7 +387,7 @@ func (o *BulkExportedItem) SetServiceName(v string) {
 
 // GetServiceVersion returns the ServiceVersion field value if set, zero value otherwise.
 func (o *BulkExportedItem) GetServiceVersion() string {
-	if o == nil || o.ServiceVersion == nil {
+	if o == nil || IsNil(o.ServiceVersion) {
 		var ret string
 		return ret
 	}
@@ -393,7 +397,7 @@ func (o *BulkExportedItem) GetServiceVersion() string {
 // GetServiceVersionOk returns a tuple with the ServiceVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *BulkExportedItem) GetServiceVersionOk() (*string, bool) {
-	if o == nil || o.ServiceVersion == nil {
+	if o == nil || IsNil(o.ServiceVersion) {
 		return nil, false
 	}
 	return o.ServiceVersion, true
@@ -401,7 +405,7 @@ func (o *BulkExportedItem) GetServiceVersionOk() (*string, bool) {
 
 // HasServiceVersion returns a boolean if a field has been set.
 func (o *BulkExportedItem) HasServiceVersion() bool {
-	if o != nil && o.ServiceVersion != nil {
+	if o != nil && !IsNil(o.ServiceVersion) {
 		return true
 	}
 
@@ -415,7 +419,7 @@ func (o *BulkExportedItem) SetServiceVersion(v string) {
 
 // GetStatus returns the Status field value if set, zero value otherwise.
 func (o *BulkExportedItem) GetStatus() string {
-	if o == nil || o.Status == nil {
+	if o == nil || IsNil(o.Status) {
 		var ret string
 		return ret
 	}
@@ -425,7 +429,7 @@ func (o *BulkExportedItem) GetStatus() string {
 // GetStatusOk returns a tuple with the Status field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *BulkExportedItem) GetStatusOk() (*string, bool) {
-	if o == nil || o.Status == nil {
+	if o == nil || IsNil(o.Status) {
 		return nil, false
 	}
 	return o.Status, true
@@ -433,7 +437,7 @@ func (o *BulkExportedItem) GetStatusOk() (*string, bool) {
 
 // HasStatus returns a boolean if a field has been set.
 func (o *BulkExportedItem) HasStatus() bool {
-	if o != nil && o.Status != nil {
+	if o != nil && !IsNil(o.Status) {
 		return true
 	}
 
@@ -447,7 +451,7 @@ func (o *BulkExportedItem) SetStatus(v string) {
 
 // GetStatusMessage returns the StatusMessage field value if set, zero value otherwise.
 func (o *BulkExportedItem) GetStatusMessage() string {
-	if o == nil || o.StatusMessage == nil {
+	if o == nil || IsNil(o.StatusMessage) {
 		var ret string
 		return ret
 	}
@@ -457,7 +461,7 @@ func (o *BulkExportedItem) GetStatusMessage() string {
 // GetStatusMessageOk returns a tuple with the StatusMessage field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *BulkExportedItem) GetStatusMessageOk() (*string, bool) {
-	if o == nil || o.StatusMessage == nil {
+	if o == nil || IsNil(o.StatusMessage) {
 		return nil, false
 	}
 	return o.StatusMessage, true
@@ -465,7 +469,7 @@ func (o *BulkExportedItem) GetStatusMessageOk() (*string, bool) {
 
 // HasStatusMessage returns a boolean if a field has been set.
 func (o *BulkExportedItem) HasStatusMessage() bool {
-	if o != nil && o.StatusMessage != nil {
+	if o != nil && !IsNil(o.StatusMessage) {
 		return true
 	}
 
@@ -477,68 +481,90 @@ func (o *BulkExportedItem) SetStatusMessage(v string) {
 	o.StatusMessage = &v
 }
 
-// GetExport returns the Export field value if set, zero value otherwise.
+// GetExport returns the Export field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *BulkExportedItem) GetExport() BulkExportRelationship {
-	if o == nil || o.Export == nil {
+	if o == nil || IsNil(o.Export.Get()) {
 		var ret BulkExportRelationship
 		return ret
 	}
-	return *o.Export
+	return *o.Export.Get()
 }
 
 // GetExportOk returns a tuple with the Export field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *BulkExportedItem) GetExportOk() (*BulkExportRelationship, bool) {
-	if o == nil || o.Export == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Export, true
+	return o.Export.Get(), o.Export.IsSet()
 }
 
 // HasExport returns a boolean if a field has been set.
 func (o *BulkExportedItem) HasExport() bool {
-	if o != nil && o.Export != nil {
+	if o != nil && o.Export.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetExport gets a reference to the given BulkExportRelationship and assigns it to the Export field.
+// SetExport gets a reference to the given NullableBulkExportRelationship and assigns it to the Export field.
 func (o *BulkExportedItem) SetExport(v BulkExportRelationship) {
-	o.Export = &v
+	o.Export.Set(&v)
 }
 
-// GetParentItem returns the ParentItem field value if set, zero value otherwise.
+// SetExportNil sets the value for Export to be an explicit nil
+func (o *BulkExportedItem) SetExportNil() {
+	o.Export.Set(nil)
+}
+
+// UnsetExport ensures that no value is present for Export, not even an explicit nil
+func (o *BulkExportedItem) UnsetExport() {
+	o.Export.Unset()
+}
+
+// GetParentItem returns the ParentItem field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *BulkExportedItem) GetParentItem() BulkExportedItemRelationship {
-	if o == nil || o.ParentItem == nil {
+	if o == nil || IsNil(o.ParentItem.Get()) {
 		var ret BulkExportedItemRelationship
 		return ret
 	}
-	return *o.ParentItem
+	return *o.ParentItem.Get()
 }
 
 // GetParentItemOk returns a tuple with the ParentItem field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *BulkExportedItem) GetParentItemOk() (*BulkExportedItemRelationship, bool) {
-	if o == nil || o.ParentItem == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.ParentItem, true
+	return o.ParentItem.Get(), o.ParentItem.IsSet()
 }
 
 // HasParentItem returns a boolean if a field has been set.
 func (o *BulkExportedItem) HasParentItem() bool {
-	if o != nil && o.ParentItem != nil {
+	if o != nil && o.ParentItem.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetParentItem gets a reference to the given BulkExportedItemRelationship and assigns it to the ParentItem field.
+// SetParentItem gets a reference to the given NullableBulkExportedItemRelationship and assigns it to the ParentItem field.
 func (o *BulkExportedItem) SetParentItem(v BulkExportedItemRelationship) {
-	o.ParentItem = &v
+	o.ParentItem.Set(&v)
+}
+
+// SetParentItemNil sets the value for ParentItem to be an explicit nil
+func (o *BulkExportedItem) SetParentItemNil() {
+	o.ParentItem.Set(nil)
+}
+
+// UnsetParentItem ensures that no value is present for ParentItem, not even an explicit nil
+func (o *BulkExportedItem) UnsetParentItem() {
+	o.ParentItem.Unset()
 }
 
 // GetRelatedItems returns the RelatedItems field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -554,7 +580,7 @@ func (o *BulkExportedItem) GetRelatedItems() []BulkExportedItemRelationship {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *BulkExportedItem) GetRelatedItemsOk() ([]BulkExportedItemRelationship, bool) {
-	if o == nil || o.RelatedItems == nil {
+	if o == nil || IsNil(o.RelatedItems) {
 		return nil, false
 	}
 	return o.RelatedItems, true
@@ -562,7 +588,7 @@ func (o *BulkExportedItem) GetRelatedItemsOk() ([]BulkExportedItemRelationship, 
 
 // HasRelatedItems returns a boolean if a field has been set.
 func (o *BulkExportedItem) HasRelatedItems() bool {
-	if o != nil && o.RelatedItems != nil {
+	if o != nil && IsNil(o.RelatedItems) {
 		return true
 	}
 
@@ -575,59 +601,63 @@ func (o *BulkExportedItem) SetRelatedItems(v []BulkExportedItemRelationship) {
 }
 
 func (o BulkExportedItem) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o BulkExportedItem) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
 	if o.ExcludePeers != nil {
 		toSerialize["ExcludePeers"] = o.ExcludePeers
 	}
-	if o.ExcludeRelations != nil {
+	if !IsNil(o.ExcludeRelations) {
 		toSerialize["ExcludeRelations"] = o.ExcludeRelations
 	}
-	if o.ExportTags != nil {
+	if !IsNil(o.ExportTags) {
 		toSerialize["ExportTags"] = o.ExportTags
 	}
-	if o.FileName != nil {
+	if !IsNil(o.FileName) {
 		toSerialize["FileName"] = o.FileName
 	}
-	if o.IncludeOrgIdentity != nil {
+	if !IsNil(o.IncludeOrgIdentity) {
 		toSerialize["IncludeOrgIdentity"] = o.IncludeOrgIdentity
 	}
-	if o.Item != nil {
+	if !IsNil(o.Item) {
 		toSerialize["Item"] = o.Item
 	}
-	if o.Name != nil {
+	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
 	}
-	if o.ServiceName != nil {
+	if !IsNil(o.ServiceName) {
 		toSerialize["ServiceName"] = o.ServiceName
 	}
-	if o.ServiceVersion != nil {
+	if !IsNil(o.ServiceVersion) {
 		toSerialize["ServiceVersion"] = o.ServiceVersion
 	}
-	if o.Status != nil {
+	if !IsNil(o.Status) {
 		toSerialize["Status"] = o.Status
 	}
-	if o.StatusMessage != nil {
+	if !IsNil(o.StatusMessage) {
 		toSerialize["StatusMessage"] = o.StatusMessage
 	}
-	if o.Export != nil {
-		toSerialize["Export"] = o.Export
+	if o.Export.IsSet() {
+		toSerialize["Export"] = o.Export.Get()
 	}
-	if o.ParentItem != nil {
-		toSerialize["ParentItem"] = o.ParentItem
+	if o.ParentItem.IsSet() {
+		toSerialize["ParentItem"] = o.ParentItem.Get()
 	}
 	if o.RelatedItems != nil {
 		toSerialize["RelatedItems"] = o.RelatedItems
@@ -637,10 +667,32 @@ func (o BulkExportedItem) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *BulkExportedItem) UnmarshalJSON(bytes []byte) (err error) {
+func (o *BulkExportedItem) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type BulkExportedItemWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -665,16 +717,16 @@ func (o *BulkExportedItem) UnmarshalJSON(bytes []byte) (err error) {
 		// Status of the item's export operation. * `` - The operation has not started. * `ValidationInProgress` - The validation operation is in progress. * `Valid` - The content to be imported is valid. * `InValid` - The content to be imported is not valid and the status message will have the reason. * `InProgress` - The operation is in progress. * `Success` - The operation has succeeded. * `Failed` - The operation has failed. * `RollBackInitiated` - The rollback has been inititiated for import failure. * `RollBackFailed` - The rollback has failed for import failure. * `RollbackCompleted` - The rollback has completed for import failure. * `RollbackAborted` - The rollback has been aborted for import failure. * `OperationTimedOut` - The operation has timed out. * `OperationCancelled` - The operation has been canceled. * `CancelInProgress` - The operation is being canceled.
 		Status *string `json:"Status,omitempty"`
 		// Progress or error message for the MO's export operation.
-		StatusMessage *string                       `json:"StatusMessage,omitempty"`
-		Export        *BulkExportRelationship       `json:"Export,omitempty"`
-		ParentItem    *BulkExportedItemRelationship `json:"ParentItem,omitempty"`
+		StatusMessage *string                              `json:"StatusMessage,omitempty"`
+		Export        NullableBulkExportRelationship       `json:"Export,omitempty"`
+		ParentItem    NullableBulkExportedItemRelationship `json:"ParentItem,omitempty"`
 		// An array of relationships to bulkExportedItem resources.
 		RelatedItems []BulkExportedItemRelationship `json:"RelatedItems,omitempty"`
 	}
 
 	varBulkExportedItemWithoutEmbeddedStruct := BulkExportedItemWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varBulkExportedItemWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varBulkExportedItemWithoutEmbeddedStruct)
 	if err == nil {
 		varBulkExportedItem := _BulkExportedItem{}
 		varBulkExportedItem.ClassId = varBulkExportedItemWithoutEmbeddedStruct.ClassId
@@ -700,7 +752,7 @@ func (o *BulkExportedItem) UnmarshalJSON(bytes []byte) (err error) {
 
 	varBulkExportedItem := _BulkExportedItem{}
 
-	err = json.Unmarshal(bytes, &varBulkExportedItem)
+	err = json.Unmarshal(data, &varBulkExportedItem)
 	if err == nil {
 		o.MoBaseMo = varBulkExportedItem.MoBaseMo
 	} else {
@@ -709,7 +761,7 @@ func (o *BulkExportedItem) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "ExcludePeers")

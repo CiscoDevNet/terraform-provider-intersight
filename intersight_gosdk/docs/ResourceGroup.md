@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 **Reevaluate** | Pointer to **bool** | Set Reevaluate to true to reevaluate the group members and memberships of this resource group. | [optional] 
 **Selectors** | Pointer to [**[]ResourceSelector**](ResourceSelector.md) |  | [optional] 
 **Type** | Pointer to **string** | The type of this resource group. (Rbac, Licensing, solution). * &#x60;rbac&#x60; - These resource groups are used for multi-tenancy by assigning to organizations. * &#x60;licensing&#x60; - These resource groups are used to classify resources like servers to various groups which are associated to different license tiers. * &#x60;solution&#x60; - These resource groups are created for Flexpods. | [optional] [readonly] [default to "rbac"]
-**Account** | Pointer to [**IamAccountRelationship**](IamAccountRelationship.md) |  | [optional] 
+**Account** | Pointer to [**NullableIamAccountRelationship**](IamAccountRelationship.md) |  | [optional] 
 **Organizations** | Pointer to [**[]OrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) | An array of relationships to organizationOrganization resources. | [optional] 
 
 ## Methods
@@ -295,6 +295,16 @@ SetAccount sets Account field to given value.
 
 HasAccount returns a boolean if a field has been set.
 
+### SetAccountNil
+
+`func (o *ResourceGroup) SetAccountNil(b bool)`
+
+ SetAccountNil sets the value for Account to be an explicit nil
+
+### UnsetAccount
+`func (o *ResourceGroup) UnsetAccount()`
+
+UnsetAccount ensures that no value is present for Account, not even an explicit nil
 ### GetOrganizations
 
 `func (o *ResourceGroup) GetOrganizations() []OrganizationOrganizationRelationship`

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -91,7 +91,7 @@ func (dst *TelemetryDruidPostAggregator) UnmarshalJSON(data []byte) error {
 	var jsonDict map[string]interface{}
 	err = newStrictDecoder(data).Decode(&jsonDict)
 	if err != nil {
-		return fmt.Errorf("Failed to unmarshal JSON into map for the discriminator lookup.")
+		return fmt.Errorf("failed to unmarshal JSON into map for the discriminator lookup")
 	}
 
 	// check if the discriminator value is 'arithmetic'
@@ -102,7 +102,7 @@ func (dst *TelemetryDruidPostAggregator) UnmarshalJSON(data []byte) error {
 			return nil // data stored in dst.TelemetryDruidArithmeticPostAggregator, return on the first match
 		} else {
 			dst.TelemetryDruidArithmeticPostAggregator = nil
-			return fmt.Errorf("Failed to unmarshal TelemetryDruidPostAggregator as TelemetryDruidArithmeticPostAggregator: %s", err.Error())
+			return fmt.Errorf("failed to unmarshal TelemetryDruidPostAggregator as TelemetryDruidArithmeticPostAggregator: %s", err.Error())
 		}
 	}
 
@@ -114,7 +114,7 @@ func (dst *TelemetryDruidPostAggregator) UnmarshalJSON(data []byte) error {
 			return nil // data stored in dst.TelemetryDruidConstantPostAggregator, return on the first match
 		} else {
 			dst.TelemetryDruidConstantPostAggregator = nil
-			return fmt.Errorf("Failed to unmarshal TelemetryDruidPostAggregator as TelemetryDruidConstantPostAggregator: %s", err.Error())
+			return fmt.Errorf("failed to unmarshal TelemetryDruidPostAggregator as TelemetryDruidConstantPostAggregator: %s", err.Error())
 		}
 	}
 
@@ -126,7 +126,7 @@ func (dst *TelemetryDruidPostAggregator) UnmarshalJSON(data []byte) error {
 			return nil // data stored in dst.TelemetryDruidGreatestLeastPostAggregator, return on the first match
 		} else {
 			dst.TelemetryDruidGreatestLeastPostAggregator = nil
-			return fmt.Errorf("Failed to unmarshal TelemetryDruidPostAggregator as TelemetryDruidGreatestLeastPostAggregator: %s", err.Error())
+			return fmt.Errorf("failed to unmarshal TelemetryDruidPostAggregator as TelemetryDruidGreatestLeastPostAggregator: %s", err.Error())
 		}
 	}
 
@@ -138,7 +138,7 @@ func (dst *TelemetryDruidPostAggregator) UnmarshalJSON(data []byte) error {
 			return nil // data stored in dst.TelemetryDruidGreatestLeastPostAggregator, return on the first match
 		} else {
 			dst.TelemetryDruidGreatestLeastPostAggregator = nil
-			return fmt.Errorf("Failed to unmarshal TelemetryDruidPostAggregator as TelemetryDruidGreatestLeastPostAggregator: %s", err.Error())
+			return fmt.Errorf("failed to unmarshal TelemetryDruidPostAggregator as TelemetryDruidGreatestLeastPostAggregator: %s", err.Error())
 		}
 	}
 
@@ -150,7 +150,7 @@ func (dst *TelemetryDruidPostAggregator) UnmarshalJSON(data []byte) error {
 			return nil // data stored in dst.TelemetryDruidExpressionPostAggregator, return on the first match
 		} else {
 			dst.TelemetryDruidExpressionPostAggregator = nil
-			return fmt.Errorf("Failed to unmarshal TelemetryDruidPostAggregator as TelemetryDruidExpressionPostAggregator: %s", err.Error())
+			return fmt.Errorf("failed to unmarshal TelemetryDruidPostAggregator as TelemetryDruidExpressionPostAggregator: %s", err.Error())
 		}
 	}
 
@@ -162,7 +162,7 @@ func (dst *TelemetryDruidPostAggregator) UnmarshalJSON(data []byte) error {
 			return nil // data stored in dst.TelemetryDruidFieldAccessorPostAggregator, return on the first match
 		} else {
 			dst.TelemetryDruidFieldAccessorPostAggregator = nil
-			return fmt.Errorf("Failed to unmarshal TelemetryDruidPostAggregator as TelemetryDruidFieldAccessorPostAggregator: %s", err.Error())
+			return fmt.Errorf("failed to unmarshal TelemetryDruidPostAggregator as TelemetryDruidFieldAccessorPostAggregator: %s", err.Error())
 		}
 	}
 
@@ -174,7 +174,7 @@ func (dst *TelemetryDruidPostAggregator) UnmarshalJSON(data []byte) error {
 			return nil // data stored in dst.TelemetryDruidFieldAccessorPostAggregator, return on the first match
 		} else {
 			dst.TelemetryDruidFieldAccessorPostAggregator = nil
-			return fmt.Errorf("Failed to unmarshal TelemetryDruidPostAggregator as TelemetryDruidFieldAccessorPostAggregator: %s", err.Error())
+			return fmt.Errorf("failed to unmarshal TelemetryDruidPostAggregator as TelemetryDruidFieldAccessorPostAggregator: %s", err.Error())
 		}
 	}
 
@@ -186,7 +186,7 @@ func (dst *TelemetryDruidPostAggregator) UnmarshalJSON(data []byte) error {
 			return nil // data stored in dst.TelemetryDruidHyperUniquePostAggregator, return on the first match
 		} else {
 			dst.TelemetryDruidHyperUniquePostAggregator = nil
-			return fmt.Errorf("Failed to unmarshal TelemetryDruidPostAggregator as TelemetryDruidHyperUniquePostAggregator: %s", err.Error())
+			return fmt.Errorf("failed to unmarshal TelemetryDruidPostAggregator as TelemetryDruidHyperUniquePostAggregator: %s", err.Error())
 		}
 	}
 
@@ -198,7 +198,7 @@ func (dst *TelemetryDruidPostAggregator) UnmarshalJSON(data []byte) error {
 			return nil // data stored in dst.TelemetryDruidGreatestLeastPostAggregator, return on the first match
 		} else {
 			dst.TelemetryDruidGreatestLeastPostAggregator = nil
-			return fmt.Errorf("Failed to unmarshal TelemetryDruidPostAggregator as TelemetryDruidGreatestLeastPostAggregator: %s", err.Error())
+			return fmt.Errorf("failed to unmarshal TelemetryDruidPostAggregator as TelemetryDruidGreatestLeastPostAggregator: %s", err.Error())
 		}
 	}
 
@@ -210,103 +210,7 @@ func (dst *TelemetryDruidPostAggregator) UnmarshalJSON(data []byte) error {
 			return nil // data stored in dst.TelemetryDruidGreatestLeastPostAggregator, return on the first match
 		} else {
 			dst.TelemetryDruidGreatestLeastPostAggregator = nil
-			return fmt.Errorf("Failed to unmarshal TelemetryDruidPostAggregator as TelemetryDruidGreatestLeastPostAggregator: %s", err.Error())
-		}
-	}
-
-	// check if the discriminator value is 'telemetry.DruidArithmeticPostAggregator'
-	if jsonDict["type"] == "telemetry.DruidArithmeticPostAggregator" {
-		// try to unmarshal JSON data into TelemetryDruidArithmeticPostAggregator
-		err = json.Unmarshal(data, &dst.TelemetryDruidArithmeticPostAggregator)
-		if err == nil {
-			return nil // data stored in dst.TelemetryDruidArithmeticPostAggregator, return on the first match
-		} else {
-			dst.TelemetryDruidArithmeticPostAggregator = nil
-			return fmt.Errorf("Failed to unmarshal TelemetryDruidPostAggregator as TelemetryDruidArithmeticPostAggregator: %s", err.Error())
-		}
-	}
-
-	// check if the discriminator value is 'telemetry.DruidConstantPostAggregator'
-	if jsonDict["type"] == "telemetry.DruidConstantPostAggregator" {
-		// try to unmarshal JSON data into TelemetryDruidConstantPostAggregator
-		err = json.Unmarshal(data, &dst.TelemetryDruidConstantPostAggregator)
-		if err == nil {
-			return nil // data stored in dst.TelemetryDruidConstantPostAggregator, return on the first match
-		} else {
-			dst.TelemetryDruidConstantPostAggregator = nil
-			return fmt.Errorf("Failed to unmarshal TelemetryDruidPostAggregator as TelemetryDruidConstantPostAggregator: %s", err.Error())
-		}
-	}
-
-	// check if the discriminator value is 'telemetry.DruidExpressionPostAggregator'
-	if jsonDict["type"] == "telemetry.DruidExpressionPostAggregator" {
-		// try to unmarshal JSON data into TelemetryDruidExpressionPostAggregator
-		err = json.Unmarshal(data, &dst.TelemetryDruidExpressionPostAggregator)
-		if err == nil {
-			return nil // data stored in dst.TelemetryDruidExpressionPostAggregator, return on the first match
-		} else {
-			dst.TelemetryDruidExpressionPostAggregator = nil
-			return fmt.Errorf("Failed to unmarshal TelemetryDruidPostAggregator as TelemetryDruidExpressionPostAggregator: %s", err.Error())
-		}
-	}
-
-	// check if the discriminator value is 'telemetry.DruidFieldAccessorPostAggregator'
-	if jsonDict["type"] == "telemetry.DruidFieldAccessorPostAggregator" {
-		// try to unmarshal JSON data into TelemetryDruidFieldAccessorPostAggregator
-		err = json.Unmarshal(data, &dst.TelemetryDruidFieldAccessorPostAggregator)
-		if err == nil {
-			return nil // data stored in dst.TelemetryDruidFieldAccessorPostAggregator, return on the first match
-		} else {
-			dst.TelemetryDruidFieldAccessorPostAggregator = nil
-			return fmt.Errorf("Failed to unmarshal TelemetryDruidPostAggregator as TelemetryDruidFieldAccessorPostAggregator: %s", err.Error())
-		}
-	}
-
-	// check if the discriminator value is 'telemetry.DruidGreatestLeastPostAggregator'
-	if jsonDict["type"] == "telemetry.DruidGreatestLeastPostAggregator" {
-		// try to unmarshal JSON data into TelemetryDruidGreatestLeastPostAggregator
-		err = json.Unmarshal(data, &dst.TelemetryDruidGreatestLeastPostAggregator)
-		if err == nil {
-			return nil // data stored in dst.TelemetryDruidGreatestLeastPostAggregator, return on the first match
-		} else {
-			dst.TelemetryDruidGreatestLeastPostAggregator = nil
-			return fmt.Errorf("Failed to unmarshal TelemetryDruidPostAggregator as TelemetryDruidGreatestLeastPostAggregator: %s", err.Error())
-		}
-	}
-
-	// check if the discriminator value is 'telemetry.DruidHyperUniquePostAggregator'
-	if jsonDict["type"] == "telemetry.DruidHyperUniquePostAggregator" {
-		// try to unmarshal JSON data into TelemetryDruidHyperUniquePostAggregator
-		err = json.Unmarshal(data, &dst.TelemetryDruidHyperUniquePostAggregator)
-		if err == nil {
-			return nil // data stored in dst.TelemetryDruidHyperUniquePostAggregator, return on the first match
-		} else {
-			dst.TelemetryDruidHyperUniquePostAggregator = nil
-			return fmt.Errorf("Failed to unmarshal TelemetryDruidPostAggregator as TelemetryDruidHyperUniquePostAggregator: %s", err.Error())
-		}
-	}
-
-	// check if the discriminator value is 'telemetry.DruidThetaSketchEstimatePostAggregator'
-	if jsonDict["type"] == "telemetry.DruidThetaSketchEstimatePostAggregator" {
-		// try to unmarshal JSON data into TelemetryDruidThetaSketchEstimatePostAggregator
-		err = json.Unmarshal(data, &dst.TelemetryDruidThetaSketchEstimatePostAggregator)
-		if err == nil {
-			return nil // data stored in dst.TelemetryDruidThetaSketchEstimatePostAggregator, return on the first match
-		} else {
-			dst.TelemetryDruidThetaSketchEstimatePostAggregator = nil
-			return fmt.Errorf("Failed to unmarshal TelemetryDruidPostAggregator as TelemetryDruidThetaSketchEstimatePostAggregator: %s", err.Error())
-		}
-	}
-
-	// check if the discriminator value is 'telemetry.DruidThetaSketchOperationsPostAggregator'
-	if jsonDict["type"] == "telemetry.DruidThetaSketchOperationsPostAggregator" {
-		// try to unmarshal JSON data into TelemetryDruidThetaSketchOperationsPostAggregator
-		err = json.Unmarshal(data, &dst.TelemetryDruidThetaSketchOperationsPostAggregator)
-		if err == nil {
-			return nil // data stored in dst.TelemetryDruidThetaSketchOperationsPostAggregator, return on the first match
-		} else {
-			dst.TelemetryDruidThetaSketchOperationsPostAggregator = nil
-			return fmt.Errorf("Failed to unmarshal TelemetryDruidPostAggregator as TelemetryDruidThetaSketchOperationsPostAggregator: %s", err.Error())
+			return fmt.Errorf("failed to unmarshal TelemetryDruidPostAggregator as TelemetryDruidGreatestLeastPostAggregator: %s", err.Error())
 		}
 	}
 
@@ -318,7 +222,7 @@ func (dst *TelemetryDruidPostAggregator) UnmarshalJSON(data []byte) error {
 			return nil // data stored in dst.TelemetryDruidThetaSketchEstimatePostAggregator, return on the first match
 		} else {
 			dst.TelemetryDruidThetaSketchEstimatePostAggregator = nil
-			return fmt.Errorf("Failed to unmarshal TelemetryDruidPostAggregator as TelemetryDruidThetaSketchEstimatePostAggregator: %s", err.Error())
+			return fmt.Errorf("failed to unmarshal TelemetryDruidPostAggregator as TelemetryDruidThetaSketchEstimatePostAggregator: %s", err.Error())
 		}
 	}
 
@@ -330,7 +234,103 @@ func (dst *TelemetryDruidPostAggregator) UnmarshalJSON(data []byte) error {
 			return nil // data stored in dst.TelemetryDruidThetaSketchOperationsPostAggregator, return on the first match
 		} else {
 			dst.TelemetryDruidThetaSketchOperationsPostAggregator = nil
-			return fmt.Errorf("Failed to unmarshal TelemetryDruidPostAggregator as TelemetryDruidThetaSketchOperationsPostAggregator: %s", err.Error())
+			return fmt.Errorf("failed to unmarshal TelemetryDruidPostAggregator as TelemetryDruidThetaSketchOperationsPostAggregator: %s", err.Error())
+		}
+	}
+
+	// check if the discriminator value is 'telemetry.DruidArithmeticPostAggregator'
+	if jsonDict["type"] == "telemetry.DruidArithmeticPostAggregator" {
+		// try to unmarshal JSON data into TelemetryDruidArithmeticPostAggregator
+		err = json.Unmarshal(data, &dst.TelemetryDruidArithmeticPostAggregator)
+		if err == nil {
+			return nil // data stored in dst.TelemetryDruidArithmeticPostAggregator, return on the first match
+		} else {
+			dst.TelemetryDruidArithmeticPostAggregator = nil
+			return fmt.Errorf("failed to unmarshal TelemetryDruidPostAggregator as TelemetryDruidArithmeticPostAggregator: %s", err.Error())
+		}
+	}
+
+	// check if the discriminator value is 'telemetry.DruidConstantPostAggregator'
+	if jsonDict["type"] == "telemetry.DruidConstantPostAggregator" {
+		// try to unmarshal JSON data into TelemetryDruidConstantPostAggregator
+		err = json.Unmarshal(data, &dst.TelemetryDruidConstantPostAggregator)
+		if err == nil {
+			return nil // data stored in dst.TelemetryDruidConstantPostAggregator, return on the first match
+		} else {
+			dst.TelemetryDruidConstantPostAggregator = nil
+			return fmt.Errorf("failed to unmarshal TelemetryDruidPostAggregator as TelemetryDruidConstantPostAggregator: %s", err.Error())
+		}
+	}
+
+	// check if the discriminator value is 'telemetry.DruidExpressionPostAggregator'
+	if jsonDict["type"] == "telemetry.DruidExpressionPostAggregator" {
+		// try to unmarshal JSON data into TelemetryDruidExpressionPostAggregator
+		err = json.Unmarshal(data, &dst.TelemetryDruidExpressionPostAggregator)
+		if err == nil {
+			return nil // data stored in dst.TelemetryDruidExpressionPostAggregator, return on the first match
+		} else {
+			dst.TelemetryDruidExpressionPostAggregator = nil
+			return fmt.Errorf("failed to unmarshal TelemetryDruidPostAggregator as TelemetryDruidExpressionPostAggregator: %s", err.Error())
+		}
+	}
+
+	// check if the discriminator value is 'telemetry.DruidFieldAccessorPostAggregator'
+	if jsonDict["type"] == "telemetry.DruidFieldAccessorPostAggregator" {
+		// try to unmarshal JSON data into TelemetryDruidFieldAccessorPostAggregator
+		err = json.Unmarshal(data, &dst.TelemetryDruidFieldAccessorPostAggregator)
+		if err == nil {
+			return nil // data stored in dst.TelemetryDruidFieldAccessorPostAggregator, return on the first match
+		} else {
+			dst.TelemetryDruidFieldAccessorPostAggregator = nil
+			return fmt.Errorf("failed to unmarshal TelemetryDruidPostAggregator as TelemetryDruidFieldAccessorPostAggregator: %s", err.Error())
+		}
+	}
+
+	// check if the discriminator value is 'telemetry.DruidGreatestLeastPostAggregator'
+	if jsonDict["type"] == "telemetry.DruidGreatestLeastPostAggregator" {
+		// try to unmarshal JSON data into TelemetryDruidGreatestLeastPostAggregator
+		err = json.Unmarshal(data, &dst.TelemetryDruidGreatestLeastPostAggregator)
+		if err == nil {
+			return nil // data stored in dst.TelemetryDruidGreatestLeastPostAggregator, return on the first match
+		} else {
+			dst.TelemetryDruidGreatestLeastPostAggregator = nil
+			return fmt.Errorf("failed to unmarshal TelemetryDruidPostAggregator as TelemetryDruidGreatestLeastPostAggregator: %s", err.Error())
+		}
+	}
+
+	// check if the discriminator value is 'telemetry.DruidHyperUniquePostAggregator'
+	if jsonDict["type"] == "telemetry.DruidHyperUniquePostAggregator" {
+		// try to unmarshal JSON data into TelemetryDruidHyperUniquePostAggregator
+		err = json.Unmarshal(data, &dst.TelemetryDruidHyperUniquePostAggregator)
+		if err == nil {
+			return nil // data stored in dst.TelemetryDruidHyperUniquePostAggregator, return on the first match
+		} else {
+			dst.TelemetryDruidHyperUniquePostAggregator = nil
+			return fmt.Errorf("failed to unmarshal TelemetryDruidPostAggregator as TelemetryDruidHyperUniquePostAggregator: %s", err.Error())
+		}
+	}
+
+	// check if the discriminator value is 'telemetry.DruidThetaSketchEstimatePostAggregator'
+	if jsonDict["type"] == "telemetry.DruidThetaSketchEstimatePostAggregator" {
+		// try to unmarshal JSON data into TelemetryDruidThetaSketchEstimatePostAggregator
+		err = json.Unmarshal(data, &dst.TelemetryDruidThetaSketchEstimatePostAggregator)
+		if err == nil {
+			return nil // data stored in dst.TelemetryDruidThetaSketchEstimatePostAggregator, return on the first match
+		} else {
+			dst.TelemetryDruidThetaSketchEstimatePostAggregator = nil
+			return fmt.Errorf("failed to unmarshal TelemetryDruidPostAggregator as TelemetryDruidThetaSketchEstimatePostAggregator: %s", err.Error())
+		}
+	}
+
+	// check if the discriminator value is 'telemetry.DruidThetaSketchOperationsPostAggregator'
+	if jsonDict["type"] == "telemetry.DruidThetaSketchOperationsPostAggregator" {
+		// try to unmarshal JSON data into TelemetryDruidThetaSketchOperationsPostAggregator
+		err = json.Unmarshal(data, &dst.TelemetryDruidThetaSketchOperationsPostAggregator)
+		if err == nil {
+			return nil // data stored in dst.TelemetryDruidThetaSketchOperationsPostAggregator, return on the first match
+		} else {
+			dst.TelemetryDruidThetaSketchOperationsPostAggregator = nil
+			return fmt.Errorf("failed to unmarshal TelemetryDruidPostAggregator as TelemetryDruidThetaSketchOperationsPostAggregator: %s", err.Error())
 		}
 	}
 

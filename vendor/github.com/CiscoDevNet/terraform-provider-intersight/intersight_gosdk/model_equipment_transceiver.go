@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the EquipmentTransceiver type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &EquipmentTransceiver{}
 
 // EquipmentTransceiver Transceiver information on the chassis.
 type EquipmentTransceiver struct {
@@ -51,11 +55,11 @@ type EquipmentTransceiver struct {
 	// Switch Identifier that is local to a cluster.
 	SwitchId *string `json:"SwitchId,omitempty"`
 	// The type of the transceiver.
-	Type                 *string                              `json:"Type,omitempty"`
-	EtherHostPort        *EtherHostPortRelationship           `json:"EtherHostPort,omitempty"`
-	EtherPhysicalPort    *EtherPhysicalPortRelationship       `json:"EtherPhysicalPort,omitempty"`
-	FcPhysicalPort       *FcPhysicalPortRelationship          `json:"FcPhysicalPort,omitempty"`
-	RegisteredDevice     *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+	Type                 *string                                     `json:"Type,omitempty"`
+	EtherHostPort        NullableEtherHostPortRelationship           `json:"EtherHostPort,omitempty"`
+	EtherPhysicalPort    NullableEtherPhysicalPortRelationship       `json:"EtherPhysicalPort,omitempty"`
+	FcPhysicalPort       NullableFcPhysicalPortRelationship          `json:"FcPhysicalPort,omitempty"`
+	RegisteredDevice     NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -134,7 +138,7 @@ func (o *EquipmentTransceiver) SetObjectType(v string) {
 
 // GetAggregatePortId returns the AggregatePortId field value if set, zero value otherwise.
 func (o *EquipmentTransceiver) GetAggregatePortId() int64 {
-	if o == nil || o.AggregatePortId == nil {
+	if o == nil || IsNil(o.AggregatePortId) {
 		var ret int64
 		return ret
 	}
@@ -144,7 +148,7 @@ func (o *EquipmentTransceiver) GetAggregatePortId() int64 {
 // GetAggregatePortIdOk returns a tuple with the AggregatePortId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EquipmentTransceiver) GetAggregatePortIdOk() (*int64, bool) {
-	if o == nil || o.AggregatePortId == nil {
+	if o == nil || IsNil(o.AggregatePortId) {
 		return nil, false
 	}
 	return o.AggregatePortId, true
@@ -152,7 +156,7 @@ func (o *EquipmentTransceiver) GetAggregatePortIdOk() (*int64, bool) {
 
 // HasAggregatePortId returns a boolean if a field has been set.
 func (o *EquipmentTransceiver) HasAggregatePortId() bool {
-	if o != nil && o.AggregatePortId != nil {
+	if o != nil && !IsNil(o.AggregatePortId) {
 		return true
 	}
 
@@ -166,7 +170,7 @@ func (o *EquipmentTransceiver) SetAggregatePortId(v int64) {
 
 // GetCiscoExtendedIdNumber returns the CiscoExtendedIdNumber field value if set, zero value otherwise.
 func (o *EquipmentTransceiver) GetCiscoExtendedIdNumber() string {
-	if o == nil || o.CiscoExtendedIdNumber == nil {
+	if o == nil || IsNil(o.CiscoExtendedIdNumber) {
 		var ret string
 		return ret
 	}
@@ -176,7 +180,7 @@ func (o *EquipmentTransceiver) GetCiscoExtendedIdNumber() string {
 // GetCiscoExtendedIdNumberOk returns a tuple with the CiscoExtendedIdNumber field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EquipmentTransceiver) GetCiscoExtendedIdNumberOk() (*string, bool) {
-	if o == nil || o.CiscoExtendedIdNumber == nil {
+	if o == nil || IsNil(o.CiscoExtendedIdNumber) {
 		return nil, false
 	}
 	return o.CiscoExtendedIdNumber, true
@@ -184,7 +188,7 @@ func (o *EquipmentTransceiver) GetCiscoExtendedIdNumberOk() (*string, bool) {
 
 // HasCiscoExtendedIdNumber returns a boolean if a field has been set.
 func (o *EquipmentTransceiver) HasCiscoExtendedIdNumber() bool {
-	if o != nil && o.CiscoExtendedIdNumber != nil {
+	if o != nil && !IsNil(o.CiscoExtendedIdNumber) {
 		return true
 	}
 
@@ -198,7 +202,7 @@ func (o *EquipmentTransceiver) SetCiscoExtendedIdNumber(v string) {
 
 // GetInterfaceType returns the InterfaceType field value if set, zero value otherwise.
 func (o *EquipmentTransceiver) GetInterfaceType() string {
-	if o == nil || o.InterfaceType == nil {
+	if o == nil || IsNil(o.InterfaceType) {
 		var ret string
 		return ret
 	}
@@ -208,7 +212,7 @@ func (o *EquipmentTransceiver) GetInterfaceType() string {
 // GetInterfaceTypeOk returns a tuple with the InterfaceType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EquipmentTransceiver) GetInterfaceTypeOk() (*string, bool) {
-	if o == nil || o.InterfaceType == nil {
+	if o == nil || IsNil(o.InterfaceType) {
 		return nil, false
 	}
 	return o.InterfaceType, true
@@ -216,7 +220,7 @@ func (o *EquipmentTransceiver) GetInterfaceTypeOk() (*string, bool) {
 
 // HasInterfaceType returns a boolean if a field has been set.
 func (o *EquipmentTransceiver) HasInterfaceType() bool {
-	if o != nil && o.InterfaceType != nil {
+	if o != nil && !IsNil(o.InterfaceType) {
 		return true
 	}
 
@@ -230,7 +234,7 @@ func (o *EquipmentTransceiver) SetInterfaceType(v string) {
 
 // GetManufacturerPartNumber returns the ManufacturerPartNumber field value if set, zero value otherwise.
 func (o *EquipmentTransceiver) GetManufacturerPartNumber() string {
-	if o == nil || o.ManufacturerPartNumber == nil {
+	if o == nil || IsNil(o.ManufacturerPartNumber) {
 		var ret string
 		return ret
 	}
@@ -240,7 +244,7 @@ func (o *EquipmentTransceiver) GetManufacturerPartNumber() string {
 // GetManufacturerPartNumberOk returns a tuple with the ManufacturerPartNumber field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EquipmentTransceiver) GetManufacturerPartNumberOk() (*string, bool) {
-	if o == nil || o.ManufacturerPartNumber == nil {
+	if o == nil || IsNil(o.ManufacturerPartNumber) {
 		return nil, false
 	}
 	return o.ManufacturerPartNumber, true
@@ -248,7 +252,7 @@ func (o *EquipmentTransceiver) GetManufacturerPartNumberOk() (*string, bool) {
 
 // HasManufacturerPartNumber returns a boolean if a field has been set.
 func (o *EquipmentTransceiver) HasManufacturerPartNumber() bool {
-	if o != nil && o.ManufacturerPartNumber != nil {
+	if o != nil && !IsNil(o.ManufacturerPartNumber) {
 		return true
 	}
 
@@ -262,7 +266,7 @@ func (o *EquipmentTransceiver) SetManufacturerPartNumber(v string) {
 
 // GetModuleId returns the ModuleId field value if set, zero value otherwise.
 func (o *EquipmentTransceiver) GetModuleId() int64 {
-	if o == nil || o.ModuleId == nil {
+	if o == nil || IsNil(o.ModuleId) {
 		var ret int64
 		return ret
 	}
@@ -272,7 +276,7 @@ func (o *EquipmentTransceiver) GetModuleId() int64 {
 // GetModuleIdOk returns a tuple with the ModuleId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EquipmentTransceiver) GetModuleIdOk() (*int64, bool) {
-	if o == nil || o.ModuleId == nil {
+	if o == nil || IsNil(o.ModuleId) {
 		return nil, false
 	}
 	return o.ModuleId, true
@@ -280,7 +284,7 @@ func (o *EquipmentTransceiver) GetModuleIdOk() (*int64, bool) {
 
 // HasModuleId returns a boolean if a field has been set.
 func (o *EquipmentTransceiver) HasModuleId() bool {
-	if o != nil && o.ModuleId != nil {
+	if o != nil && !IsNil(o.ModuleId) {
 		return true
 	}
 
@@ -294,7 +298,7 @@ func (o *EquipmentTransceiver) SetModuleId(v int64) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *EquipmentTransceiver) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -304,7 +308,7 @@ func (o *EquipmentTransceiver) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EquipmentTransceiver) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -312,7 +316,7 @@ func (o *EquipmentTransceiver) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *EquipmentTransceiver) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -326,7 +330,7 @@ func (o *EquipmentTransceiver) SetName(v string) {
 
 // GetOperSpeed returns the OperSpeed field value if set, zero value otherwise.
 func (o *EquipmentTransceiver) GetOperSpeed() string {
-	if o == nil || o.OperSpeed == nil {
+	if o == nil || IsNil(o.OperSpeed) {
 		var ret string
 		return ret
 	}
@@ -336,7 +340,7 @@ func (o *EquipmentTransceiver) GetOperSpeed() string {
 // GetOperSpeedOk returns a tuple with the OperSpeed field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EquipmentTransceiver) GetOperSpeedOk() (*string, bool) {
-	if o == nil || o.OperSpeed == nil {
+	if o == nil || IsNil(o.OperSpeed) {
 		return nil, false
 	}
 	return o.OperSpeed, true
@@ -344,7 +348,7 @@ func (o *EquipmentTransceiver) GetOperSpeedOk() (*string, bool) {
 
 // HasOperSpeed returns a boolean if a field has been set.
 func (o *EquipmentTransceiver) HasOperSpeed() bool {
-	if o != nil && o.OperSpeed != nil {
+	if o != nil && !IsNil(o.OperSpeed) {
 		return true
 	}
 
@@ -358,7 +362,7 @@ func (o *EquipmentTransceiver) SetOperSpeed(v string) {
 
 // GetOperState returns the OperState field value if set, zero value otherwise.
 func (o *EquipmentTransceiver) GetOperState() string {
-	if o == nil || o.OperState == nil {
+	if o == nil || IsNil(o.OperState) {
 		var ret string
 		return ret
 	}
@@ -368,7 +372,7 @@ func (o *EquipmentTransceiver) GetOperState() string {
 // GetOperStateOk returns a tuple with the OperState field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EquipmentTransceiver) GetOperStateOk() (*string, bool) {
-	if o == nil || o.OperState == nil {
+	if o == nil || IsNil(o.OperState) {
 		return nil, false
 	}
 	return o.OperState, true
@@ -376,7 +380,7 @@ func (o *EquipmentTransceiver) GetOperStateOk() (*string, bool) {
 
 // HasOperState returns a boolean if a field has been set.
 func (o *EquipmentTransceiver) HasOperState() bool {
-	if o != nil && o.OperState != nil {
+	if o != nil && !IsNil(o.OperState) {
 		return true
 	}
 
@@ -390,7 +394,7 @@ func (o *EquipmentTransceiver) SetOperState(v string) {
 
 // GetOperStateQual returns the OperStateQual field value if set, zero value otherwise.
 func (o *EquipmentTransceiver) GetOperStateQual() string {
-	if o == nil || o.OperStateQual == nil {
+	if o == nil || IsNil(o.OperStateQual) {
 		var ret string
 		return ret
 	}
@@ -400,7 +404,7 @@ func (o *EquipmentTransceiver) GetOperStateQual() string {
 // GetOperStateQualOk returns a tuple with the OperStateQual field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EquipmentTransceiver) GetOperStateQualOk() (*string, bool) {
-	if o == nil || o.OperStateQual == nil {
+	if o == nil || IsNil(o.OperStateQual) {
 		return nil, false
 	}
 	return o.OperStateQual, true
@@ -408,7 +412,7 @@ func (o *EquipmentTransceiver) GetOperStateQualOk() (*string, bool) {
 
 // HasOperStateQual returns a boolean if a field has been set.
 func (o *EquipmentTransceiver) HasOperStateQual() bool {
-	if o != nil && o.OperStateQual != nil {
+	if o != nil && !IsNil(o.OperStateQual) {
 		return true
 	}
 
@@ -422,7 +426,7 @@ func (o *EquipmentTransceiver) SetOperStateQual(v string) {
 
 // GetPortId returns the PortId field value if set, zero value otherwise.
 func (o *EquipmentTransceiver) GetPortId() int64 {
-	if o == nil || o.PortId == nil {
+	if o == nil || IsNil(o.PortId) {
 		var ret int64
 		return ret
 	}
@@ -432,7 +436,7 @@ func (o *EquipmentTransceiver) GetPortId() int64 {
 // GetPortIdOk returns a tuple with the PortId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EquipmentTransceiver) GetPortIdOk() (*int64, bool) {
-	if o == nil || o.PortId == nil {
+	if o == nil || IsNil(o.PortId) {
 		return nil, false
 	}
 	return o.PortId, true
@@ -440,7 +444,7 @@ func (o *EquipmentTransceiver) GetPortIdOk() (*int64, bool) {
 
 // HasPortId returns a boolean if a field has been set.
 func (o *EquipmentTransceiver) HasPortId() bool {
-	if o != nil && o.PortId != nil {
+	if o != nil && !IsNil(o.PortId) {
 		return true
 	}
 
@@ -454,7 +458,7 @@ func (o *EquipmentTransceiver) SetPortId(v int64) {
 
 // GetSlotId returns the SlotId field value if set, zero value otherwise.
 func (o *EquipmentTransceiver) GetSlotId() int64 {
-	if o == nil || o.SlotId == nil {
+	if o == nil || IsNil(o.SlotId) {
 		var ret int64
 		return ret
 	}
@@ -464,7 +468,7 @@ func (o *EquipmentTransceiver) GetSlotId() int64 {
 // GetSlotIdOk returns a tuple with the SlotId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EquipmentTransceiver) GetSlotIdOk() (*int64, bool) {
-	if o == nil || o.SlotId == nil {
+	if o == nil || IsNil(o.SlotId) {
 		return nil, false
 	}
 	return o.SlotId, true
@@ -472,7 +476,7 @@ func (o *EquipmentTransceiver) GetSlotIdOk() (*int64, bool) {
 
 // HasSlotId returns a boolean if a field has been set.
 func (o *EquipmentTransceiver) HasSlotId() bool {
-	if o != nil && o.SlotId != nil {
+	if o != nil && !IsNil(o.SlotId) {
 		return true
 	}
 
@@ -486,7 +490,7 @@ func (o *EquipmentTransceiver) SetSlotId(v int64) {
 
 // GetStatus returns the Status field value if set, zero value otherwise.
 func (o *EquipmentTransceiver) GetStatus() string {
-	if o == nil || o.Status == nil {
+	if o == nil || IsNil(o.Status) {
 		var ret string
 		return ret
 	}
@@ -496,7 +500,7 @@ func (o *EquipmentTransceiver) GetStatus() string {
 // GetStatusOk returns a tuple with the Status field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EquipmentTransceiver) GetStatusOk() (*string, bool) {
-	if o == nil || o.Status == nil {
+	if o == nil || IsNil(o.Status) {
 		return nil, false
 	}
 	return o.Status, true
@@ -504,7 +508,7 @@ func (o *EquipmentTransceiver) GetStatusOk() (*string, bool) {
 
 // HasStatus returns a boolean if a field has been set.
 func (o *EquipmentTransceiver) HasStatus() bool {
-	if o != nil && o.Status != nil {
+	if o != nil && !IsNil(o.Status) {
 		return true
 	}
 
@@ -518,7 +522,7 @@ func (o *EquipmentTransceiver) SetStatus(v string) {
 
 // GetSwitchId returns the SwitchId field value if set, zero value otherwise.
 func (o *EquipmentTransceiver) GetSwitchId() string {
-	if o == nil || o.SwitchId == nil {
+	if o == nil || IsNil(o.SwitchId) {
 		var ret string
 		return ret
 	}
@@ -528,7 +532,7 @@ func (o *EquipmentTransceiver) GetSwitchId() string {
 // GetSwitchIdOk returns a tuple with the SwitchId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EquipmentTransceiver) GetSwitchIdOk() (*string, bool) {
-	if o == nil || o.SwitchId == nil {
+	if o == nil || IsNil(o.SwitchId) {
 		return nil, false
 	}
 	return o.SwitchId, true
@@ -536,7 +540,7 @@ func (o *EquipmentTransceiver) GetSwitchIdOk() (*string, bool) {
 
 // HasSwitchId returns a boolean if a field has been set.
 func (o *EquipmentTransceiver) HasSwitchId() bool {
-	if o != nil && o.SwitchId != nil {
+	if o != nil && !IsNil(o.SwitchId) {
 		return true
 	}
 
@@ -550,7 +554,7 @@ func (o *EquipmentTransceiver) SetSwitchId(v string) {
 
 // GetType returns the Type field value if set, zero value otherwise.
 func (o *EquipmentTransceiver) GetType() string {
-	if o == nil || o.Type == nil {
+	if o == nil || IsNil(o.Type) {
 		var ret string
 		return ret
 	}
@@ -560,7 +564,7 @@ func (o *EquipmentTransceiver) GetType() string {
 // GetTypeOk returns a tuple with the Type field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EquipmentTransceiver) GetTypeOk() (*string, bool) {
-	if o == nil || o.Type == nil {
+	if o == nil || IsNil(o.Type) {
 		return nil, false
 	}
 	return o.Type, true
@@ -568,7 +572,7 @@ func (o *EquipmentTransceiver) GetTypeOk() (*string, bool) {
 
 // HasType returns a boolean if a field has been set.
 func (o *EquipmentTransceiver) HasType() bool {
-	if o != nil && o.Type != nil {
+	if o != nil && !IsNil(o.Type) {
 		return true
 	}
 
@@ -580,213 +584,283 @@ func (o *EquipmentTransceiver) SetType(v string) {
 	o.Type = &v
 }
 
-// GetEtherHostPort returns the EtherHostPort field value if set, zero value otherwise.
+// GetEtherHostPort returns the EtherHostPort field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *EquipmentTransceiver) GetEtherHostPort() EtherHostPortRelationship {
-	if o == nil || o.EtherHostPort == nil {
+	if o == nil || IsNil(o.EtherHostPort.Get()) {
 		var ret EtherHostPortRelationship
 		return ret
 	}
-	return *o.EtherHostPort
+	return *o.EtherHostPort.Get()
 }
 
 // GetEtherHostPortOk returns a tuple with the EtherHostPort field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *EquipmentTransceiver) GetEtherHostPortOk() (*EtherHostPortRelationship, bool) {
-	if o == nil || o.EtherHostPort == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.EtherHostPort, true
+	return o.EtherHostPort.Get(), o.EtherHostPort.IsSet()
 }
 
 // HasEtherHostPort returns a boolean if a field has been set.
 func (o *EquipmentTransceiver) HasEtherHostPort() bool {
-	if o != nil && o.EtherHostPort != nil {
+	if o != nil && o.EtherHostPort.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetEtherHostPort gets a reference to the given EtherHostPortRelationship and assigns it to the EtherHostPort field.
+// SetEtherHostPort gets a reference to the given NullableEtherHostPortRelationship and assigns it to the EtherHostPort field.
 func (o *EquipmentTransceiver) SetEtherHostPort(v EtherHostPortRelationship) {
-	o.EtherHostPort = &v
+	o.EtherHostPort.Set(&v)
 }
 
-// GetEtherPhysicalPort returns the EtherPhysicalPort field value if set, zero value otherwise.
+// SetEtherHostPortNil sets the value for EtherHostPort to be an explicit nil
+func (o *EquipmentTransceiver) SetEtherHostPortNil() {
+	o.EtherHostPort.Set(nil)
+}
+
+// UnsetEtherHostPort ensures that no value is present for EtherHostPort, not even an explicit nil
+func (o *EquipmentTransceiver) UnsetEtherHostPort() {
+	o.EtherHostPort.Unset()
+}
+
+// GetEtherPhysicalPort returns the EtherPhysicalPort field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *EquipmentTransceiver) GetEtherPhysicalPort() EtherPhysicalPortRelationship {
-	if o == nil || o.EtherPhysicalPort == nil {
+	if o == nil || IsNil(o.EtherPhysicalPort.Get()) {
 		var ret EtherPhysicalPortRelationship
 		return ret
 	}
-	return *o.EtherPhysicalPort
+	return *o.EtherPhysicalPort.Get()
 }
 
 // GetEtherPhysicalPortOk returns a tuple with the EtherPhysicalPort field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *EquipmentTransceiver) GetEtherPhysicalPortOk() (*EtherPhysicalPortRelationship, bool) {
-	if o == nil || o.EtherPhysicalPort == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.EtherPhysicalPort, true
+	return o.EtherPhysicalPort.Get(), o.EtherPhysicalPort.IsSet()
 }
 
 // HasEtherPhysicalPort returns a boolean if a field has been set.
 func (o *EquipmentTransceiver) HasEtherPhysicalPort() bool {
-	if o != nil && o.EtherPhysicalPort != nil {
+	if o != nil && o.EtherPhysicalPort.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetEtherPhysicalPort gets a reference to the given EtherPhysicalPortRelationship and assigns it to the EtherPhysicalPort field.
+// SetEtherPhysicalPort gets a reference to the given NullableEtherPhysicalPortRelationship and assigns it to the EtherPhysicalPort field.
 func (o *EquipmentTransceiver) SetEtherPhysicalPort(v EtherPhysicalPortRelationship) {
-	o.EtherPhysicalPort = &v
+	o.EtherPhysicalPort.Set(&v)
 }
 
-// GetFcPhysicalPort returns the FcPhysicalPort field value if set, zero value otherwise.
+// SetEtherPhysicalPortNil sets the value for EtherPhysicalPort to be an explicit nil
+func (o *EquipmentTransceiver) SetEtherPhysicalPortNil() {
+	o.EtherPhysicalPort.Set(nil)
+}
+
+// UnsetEtherPhysicalPort ensures that no value is present for EtherPhysicalPort, not even an explicit nil
+func (o *EquipmentTransceiver) UnsetEtherPhysicalPort() {
+	o.EtherPhysicalPort.Unset()
+}
+
+// GetFcPhysicalPort returns the FcPhysicalPort field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *EquipmentTransceiver) GetFcPhysicalPort() FcPhysicalPortRelationship {
-	if o == nil || o.FcPhysicalPort == nil {
+	if o == nil || IsNil(o.FcPhysicalPort.Get()) {
 		var ret FcPhysicalPortRelationship
 		return ret
 	}
-	return *o.FcPhysicalPort
+	return *o.FcPhysicalPort.Get()
 }
 
 // GetFcPhysicalPortOk returns a tuple with the FcPhysicalPort field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *EquipmentTransceiver) GetFcPhysicalPortOk() (*FcPhysicalPortRelationship, bool) {
-	if o == nil || o.FcPhysicalPort == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.FcPhysicalPort, true
+	return o.FcPhysicalPort.Get(), o.FcPhysicalPort.IsSet()
 }
 
 // HasFcPhysicalPort returns a boolean if a field has been set.
 func (o *EquipmentTransceiver) HasFcPhysicalPort() bool {
-	if o != nil && o.FcPhysicalPort != nil {
+	if o != nil && o.FcPhysicalPort.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetFcPhysicalPort gets a reference to the given FcPhysicalPortRelationship and assigns it to the FcPhysicalPort field.
+// SetFcPhysicalPort gets a reference to the given NullableFcPhysicalPortRelationship and assigns it to the FcPhysicalPort field.
 func (o *EquipmentTransceiver) SetFcPhysicalPort(v FcPhysicalPortRelationship) {
-	o.FcPhysicalPort = &v
+	o.FcPhysicalPort.Set(&v)
 }
 
-// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise.
+// SetFcPhysicalPortNil sets the value for FcPhysicalPort to be an explicit nil
+func (o *EquipmentTransceiver) SetFcPhysicalPortNil() {
+	o.FcPhysicalPort.Set(nil)
+}
+
+// UnsetFcPhysicalPort ensures that no value is present for FcPhysicalPort, not even an explicit nil
+func (o *EquipmentTransceiver) UnsetFcPhysicalPort() {
+	o.FcPhysicalPort.Unset()
+}
+
+// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *EquipmentTransceiver) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil || IsNil(o.RegisteredDevice.Get()) {
 		var ret AssetDeviceRegistrationRelationship
 		return ret
 	}
-	return *o.RegisteredDevice
+	return *o.RegisteredDevice.Get()
 }
 
 // GetRegisteredDeviceOk returns a tuple with the RegisteredDevice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *EquipmentTransceiver) GetRegisteredDeviceOk() (*AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.RegisteredDevice, true
+	return o.RegisteredDevice.Get(), o.RegisteredDevice.IsSet()
 }
 
 // HasRegisteredDevice returns a boolean if a field has been set.
 func (o *EquipmentTransceiver) HasRegisteredDevice() bool {
-	if o != nil && o.RegisteredDevice != nil {
+	if o != nil && o.RegisteredDevice.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRegisteredDevice gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
+// SetRegisteredDevice gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
 func (o *EquipmentTransceiver) SetRegisteredDevice(v AssetDeviceRegistrationRelationship) {
-	o.RegisteredDevice = &v
+	o.RegisteredDevice.Set(&v)
+}
+
+// SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+func (o *EquipmentTransceiver) SetRegisteredDeviceNil() {
+	o.RegisteredDevice.Set(nil)
+}
+
+// UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
+func (o *EquipmentTransceiver) UnsetRegisteredDevice() {
+	o.RegisteredDevice.Unset()
 }
 
 func (o EquipmentTransceiver) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o EquipmentTransceiver) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedEquipmentBase, errEquipmentBase := json.Marshal(o.EquipmentBase)
 	if errEquipmentBase != nil {
-		return []byte{}, errEquipmentBase
+		return map[string]interface{}{}, errEquipmentBase
 	}
 	errEquipmentBase = json.Unmarshal([]byte(serializedEquipmentBase), &toSerialize)
 	if errEquipmentBase != nil {
-		return []byte{}, errEquipmentBase
+		return map[string]interface{}{}, errEquipmentBase
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.AggregatePortId != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.AggregatePortId) {
 		toSerialize["AggregatePortId"] = o.AggregatePortId
 	}
-	if o.CiscoExtendedIdNumber != nil {
+	if !IsNil(o.CiscoExtendedIdNumber) {
 		toSerialize["CiscoExtendedIdNumber"] = o.CiscoExtendedIdNumber
 	}
-	if o.InterfaceType != nil {
+	if !IsNil(o.InterfaceType) {
 		toSerialize["InterfaceType"] = o.InterfaceType
 	}
-	if o.ManufacturerPartNumber != nil {
+	if !IsNil(o.ManufacturerPartNumber) {
 		toSerialize["ManufacturerPartNumber"] = o.ManufacturerPartNumber
 	}
-	if o.ModuleId != nil {
+	if !IsNil(o.ModuleId) {
 		toSerialize["ModuleId"] = o.ModuleId
 	}
-	if o.Name != nil {
+	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
 	}
-	if o.OperSpeed != nil {
+	if !IsNil(o.OperSpeed) {
 		toSerialize["OperSpeed"] = o.OperSpeed
 	}
-	if o.OperState != nil {
+	if !IsNil(o.OperState) {
 		toSerialize["OperState"] = o.OperState
 	}
-	if o.OperStateQual != nil {
+	if !IsNil(o.OperStateQual) {
 		toSerialize["OperStateQual"] = o.OperStateQual
 	}
-	if o.PortId != nil {
+	if !IsNil(o.PortId) {
 		toSerialize["PortId"] = o.PortId
 	}
-	if o.SlotId != nil {
+	if !IsNil(o.SlotId) {
 		toSerialize["SlotId"] = o.SlotId
 	}
-	if o.Status != nil {
+	if !IsNil(o.Status) {
 		toSerialize["Status"] = o.Status
 	}
-	if o.SwitchId != nil {
+	if !IsNil(o.SwitchId) {
 		toSerialize["SwitchId"] = o.SwitchId
 	}
-	if o.Type != nil {
+	if !IsNil(o.Type) {
 		toSerialize["Type"] = o.Type
 	}
-	if o.EtherHostPort != nil {
-		toSerialize["EtherHostPort"] = o.EtherHostPort
+	if o.EtherHostPort.IsSet() {
+		toSerialize["EtherHostPort"] = o.EtherHostPort.Get()
 	}
-	if o.EtherPhysicalPort != nil {
-		toSerialize["EtherPhysicalPort"] = o.EtherPhysicalPort
+	if o.EtherPhysicalPort.IsSet() {
+		toSerialize["EtherPhysicalPort"] = o.EtherPhysicalPort.Get()
 	}
-	if o.FcPhysicalPort != nil {
-		toSerialize["FcPhysicalPort"] = o.FcPhysicalPort
+	if o.FcPhysicalPort.IsSet() {
+		toSerialize["FcPhysicalPort"] = o.FcPhysicalPort.Get()
 	}
-	if o.RegisteredDevice != nil {
-		toSerialize["RegisteredDevice"] = o.RegisteredDevice
+	if o.RegisteredDevice.IsSet() {
+		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *EquipmentTransceiver) UnmarshalJSON(bytes []byte) (err error) {
+func (o *EquipmentTransceiver) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type EquipmentTransceiverWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -819,16 +893,16 @@ func (o *EquipmentTransceiver) UnmarshalJSON(bytes []byte) (err error) {
 		// Switch Identifier that is local to a cluster.
 		SwitchId *string `json:"SwitchId,omitempty"`
 		// The type of the transceiver.
-		Type              *string                              `json:"Type,omitempty"`
-		EtherHostPort     *EtherHostPortRelationship           `json:"EtherHostPort,omitempty"`
-		EtherPhysicalPort *EtherPhysicalPortRelationship       `json:"EtherPhysicalPort,omitempty"`
-		FcPhysicalPort    *FcPhysicalPortRelationship          `json:"FcPhysicalPort,omitempty"`
-		RegisteredDevice  *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+		Type              *string                                     `json:"Type,omitempty"`
+		EtherHostPort     NullableEtherHostPortRelationship           `json:"EtherHostPort,omitempty"`
+		EtherPhysicalPort NullableEtherPhysicalPortRelationship       `json:"EtherPhysicalPort,omitempty"`
+		FcPhysicalPort    NullableFcPhysicalPortRelationship          `json:"FcPhysicalPort,omitempty"`
+		RegisteredDevice  NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	}
 
 	varEquipmentTransceiverWithoutEmbeddedStruct := EquipmentTransceiverWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varEquipmentTransceiverWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varEquipmentTransceiverWithoutEmbeddedStruct)
 	if err == nil {
 		varEquipmentTransceiver := _EquipmentTransceiver{}
 		varEquipmentTransceiver.ClassId = varEquipmentTransceiverWithoutEmbeddedStruct.ClassId
@@ -858,7 +932,7 @@ func (o *EquipmentTransceiver) UnmarshalJSON(bytes []byte) (err error) {
 
 	varEquipmentTransceiver := _EquipmentTransceiver{}
 
-	err = json.Unmarshal(bytes, &varEquipmentTransceiver)
+	err = json.Unmarshal(data, &varEquipmentTransceiver)
 	if err == nil {
 		o.EquipmentBase = varEquipmentTransceiver.EquipmentBase
 	} else {
@@ -867,7 +941,7 @@ func (o *EquipmentTransceiver) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "AggregatePortId")

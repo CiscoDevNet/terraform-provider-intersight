@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "iam.LdapProvider"]
 **Port** | Pointer to **int64** | LDAP Server Port for connection establishment. | [optional] [default to 389]
 **Server** | Pointer to **string** | LDAP Server Address, can be IP address or hostname. | [optional] 
-**LdapPolicy** | Pointer to [**IamLdapPolicyRelationship**](IamLdapPolicyRelationship.md) |  | [optional] 
+**LdapPolicy** | Pointer to [**NullableIamLdapPolicyRelationship**](IamLdapPolicyRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -144,6 +144,16 @@ SetLdapPolicy sets LdapPolicy field to given value.
 
 HasLdapPolicy returns a boolean if a field has been set.
 
+### SetLdapPolicyNil
+
+`func (o *IamLdapProvider) SetLdapPolicyNil(b bool)`
+
+ SetLdapPolicyNil sets the value for LdapPolicy to be an explicit nil
+
+### UnsetLdapPolicy
+`func (o *IamLdapProvider) UnsetLdapPolicy()`
+
+UnsetLdapPolicy ensures that no value is present for LdapPolicy, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

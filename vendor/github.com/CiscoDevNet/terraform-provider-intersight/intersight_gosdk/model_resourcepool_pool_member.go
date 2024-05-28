@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the ResourcepoolPoolMember type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ResourcepoolPoolMember{}
 
 // ResourcepoolPoolMember PoolMember represents a resources that is part of a pool.
 type ResourcepoolPoolMember struct {
@@ -26,10 +30,10 @@ type ResourcepoolPoolMember struct {
 	ObjectType string   `json:"ObjectType"`
 	Features   []string `json:"Features,omitempty"`
 	// An array of relationships to moBaseMo resources.
-	AssignedToEntity     []MoBaseMoRelationship         `json:"AssignedToEntity,omitempty"`
-	Peer                 *ResourcepoolLeaseRelationship `json:"Peer,omitempty"`
-	Pool                 *ResourcepoolPoolRelationship  `json:"Pool,omitempty"`
-	Resource             *MoBaseMoRelationship          `json:"Resource,omitempty"`
+	AssignedToEntity     []MoBaseMoRelationship                `json:"AssignedToEntity,omitempty"`
+	Peer                 NullableResourcepoolLeaseRelationship `json:"Peer,omitempty"`
+	Pool                 NullableResourcepoolPoolRelationship  `json:"Pool,omitempty"`
+	Resource             NullableMoBaseMoRelationship          `json:"Resource,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -121,7 +125,7 @@ func (o *ResourcepoolPoolMember) GetFeatures() []string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ResourcepoolPoolMember) GetFeaturesOk() ([]string, bool) {
-	if o == nil || o.Features == nil {
+	if o == nil || IsNil(o.Features) {
 		return nil, false
 	}
 	return o.Features, true
@@ -129,7 +133,7 @@ func (o *ResourcepoolPoolMember) GetFeaturesOk() ([]string, bool) {
 
 // HasFeatures returns a boolean if a field has been set.
 func (o *ResourcepoolPoolMember) HasFeatures() bool {
-	if o != nil && o.Features != nil {
+	if o != nil && IsNil(o.Features) {
 		return true
 	}
 
@@ -154,7 +158,7 @@ func (o *ResourcepoolPoolMember) GetAssignedToEntity() []MoBaseMoRelationship {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ResourcepoolPoolMember) GetAssignedToEntityOk() ([]MoBaseMoRelationship, bool) {
-	if o == nil || o.AssignedToEntity == nil {
+	if o == nil || IsNil(o.AssignedToEntity) {
 		return nil, false
 	}
 	return o.AssignedToEntity, true
@@ -162,7 +166,7 @@ func (o *ResourcepoolPoolMember) GetAssignedToEntityOk() ([]MoBaseMoRelationship
 
 // HasAssignedToEntity returns a boolean if a field has been set.
 func (o *ResourcepoolPoolMember) HasAssignedToEntity() bool {
-	if o != nil && o.AssignedToEntity != nil {
+	if o != nil && IsNil(o.AssignedToEntity) {
 		return true
 	}
 
@@ -174,142 +178,201 @@ func (o *ResourcepoolPoolMember) SetAssignedToEntity(v []MoBaseMoRelationship) {
 	o.AssignedToEntity = v
 }
 
-// GetPeer returns the Peer field value if set, zero value otherwise.
+// GetPeer returns the Peer field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ResourcepoolPoolMember) GetPeer() ResourcepoolLeaseRelationship {
-	if o == nil || o.Peer == nil {
+	if o == nil || IsNil(o.Peer.Get()) {
 		var ret ResourcepoolLeaseRelationship
 		return ret
 	}
-	return *o.Peer
+	return *o.Peer.Get()
 }
 
 // GetPeerOk returns a tuple with the Peer field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ResourcepoolPoolMember) GetPeerOk() (*ResourcepoolLeaseRelationship, bool) {
-	if o == nil || o.Peer == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Peer, true
+	return o.Peer.Get(), o.Peer.IsSet()
 }
 
 // HasPeer returns a boolean if a field has been set.
 func (o *ResourcepoolPoolMember) HasPeer() bool {
-	if o != nil && o.Peer != nil {
+	if o != nil && o.Peer.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetPeer gets a reference to the given ResourcepoolLeaseRelationship and assigns it to the Peer field.
+// SetPeer gets a reference to the given NullableResourcepoolLeaseRelationship and assigns it to the Peer field.
 func (o *ResourcepoolPoolMember) SetPeer(v ResourcepoolLeaseRelationship) {
-	o.Peer = &v
+	o.Peer.Set(&v)
 }
 
-// GetPool returns the Pool field value if set, zero value otherwise.
+// SetPeerNil sets the value for Peer to be an explicit nil
+func (o *ResourcepoolPoolMember) SetPeerNil() {
+	o.Peer.Set(nil)
+}
+
+// UnsetPeer ensures that no value is present for Peer, not even an explicit nil
+func (o *ResourcepoolPoolMember) UnsetPeer() {
+	o.Peer.Unset()
+}
+
+// GetPool returns the Pool field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ResourcepoolPoolMember) GetPool() ResourcepoolPoolRelationship {
-	if o == nil || o.Pool == nil {
+	if o == nil || IsNil(o.Pool.Get()) {
 		var ret ResourcepoolPoolRelationship
 		return ret
 	}
-	return *o.Pool
+	return *o.Pool.Get()
 }
 
 // GetPoolOk returns a tuple with the Pool field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ResourcepoolPoolMember) GetPoolOk() (*ResourcepoolPoolRelationship, bool) {
-	if o == nil || o.Pool == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Pool, true
+	return o.Pool.Get(), o.Pool.IsSet()
 }
 
 // HasPool returns a boolean if a field has been set.
 func (o *ResourcepoolPoolMember) HasPool() bool {
-	if o != nil && o.Pool != nil {
+	if o != nil && o.Pool.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetPool gets a reference to the given ResourcepoolPoolRelationship and assigns it to the Pool field.
+// SetPool gets a reference to the given NullableResourcepoolPoolRelationship and assigns it to the Pool field.
 func (o *ResourcepoolPoolMember) SetPool(v ResourcepoolPoolRelationship) {
-	o.Pool = &v
+	o.Pool.Set(&v)
 }
 
-// GetResource returns the Resource field value if set, zero value otherwise.
+// SetPoolNil sets the value for Pool to be an explicit nil
+func (o *ResourcepoolPoolMember) SetPoolNil() {
+	o.Pool.Set(nil)
+}
+
+// UnsetPool ensures that no value is present for Pool, not even an explicit nil
+func (o *ResourcepoolPoolMember) UnsetPool() {
+	o.Pool.Unset()
+}
+
+// GetResource returns the Resource field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ResourcepoolPoolMember) GetResource() MoBaseMoRelationship {
-	if o == nil || o.Resource == nil {
+	if o == nil || IsNil(o.Resource.Get()) {
 		var ret MoBaseMoRelationship
 		return ret
 	}
-	return *o.Resource
+	return *o.Resource.Get()
 }
 
 // GetResourceOk returns a tuple with the Resource field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ResourcepoolPoolMember) GetResourceOk() (*MoBaseMoRelationship, bool) {
-	if o == nil || o.Resource == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Resource, true
+	return o.Resource.Get(), o.Resource.IsSet()
 }
 
 // HasResource returns a boolean if a field has been set.
 func (o *ResourcepoolPoolMember) HasResource() bool {
-	if o != nil && o.Resource != nil {
+	if o != nil && o.Resource.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetResource gets a reference to the given MoBaseMoRelationship and assigns it to the Resource field.
+// SetResource gets a reference to the given NullableMoBaseMoRelationship and assigns it to the Resource field.
 func (o *ResourcepoolPoolMember) SetResource(v MoBaseMoRelationship) {
-	o.Resource = &v
+	o.Resource.Set(&v)
+}
+
+// SetResourceNil sets the value for Resource to be an explicit nil
+func (o *ResourcepoolPoolMember) SetResourceNil() {
+	o.Resource.Set(nil)
+}
+
+// UnsetResource ensures that no value is present for Resource, not even an explicit nil
+func (o *ResourcepoolPoolMember) UnsetResource() {
+	o.Resource.Unset()
 }
 
 func (o ResourcepoolPoolMember) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o ResourcepoolPoolMember) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedPoolAbstractPoolMember, errPoolAbstractPoolMember := json.Marshal(o.PoolAbstractPoolMember)
 	if errPoolAbstractPoolMember != nil {
-		return []byte{}, errPoolAbstractPoolMember
+		return map[string]interface{}{}, errPoolAbstractPoolMember
 	}
 	errPoolAbstractPoolMember = json.Unmarshal([]byte(serializedPoolAbstractPoolMember), &toSerialize)
 	if errPoolAbstractPoolMember != nil {
-		return []byte{}, errPoolAbstractPoolMember
+		return map[string]interface{}{}, errPoolAbstractPoolMember
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
 	if o.Features != nil {
 		toSerialize["Features"] = o.Features
 	}
 	if o.AssignedToEntity != nil {
 		toSerialize["AssignedToEntity"] = o.AssignedToEntity
 	}
-	if o.Peer != nil {
-		toSerialize["Peer"] = o.Peer
+	if o.Peer.IsSet() {
+		toSerialize["Peer"] = o.Peer.Get()
 	}
-	if o.Pool != nil {
-		toSerialize["Pool"] = o.Pool
+	if o.Pool.IsSet() {
+		toSerialize["Pool"] = o.Pool.Get()
 	}
-	if o.Resource != nil {
-		toSerialize["Resource"] = o.Resource
+	if o.Resource.IsSet() {
+		toSerialize["Resource"] = o.Resource.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *ResourcepoolPoolMember) UnmarshalJSON(bytes []byte) (err error) {
+func (o *ResourcepoolPoolMember) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type ResourcepoolPoolMemberWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -317,15 +380,15 @@ func (o *ResourcepoolPoolMember) UnmarshalJSON(bytes []byte) (err error) {
 		ObjectType string   `json:"ObjectType"`
 		Features   []string `json:"Features,omitempty"`
 		// An array of relationships to moBaseMo resources.
-		AssignedToEntity []MoBaseMoRelationship         `json:"AssignedToEntity,omitempty"`
-		Peer             *ResourcepoolLeaseRelationship `json:"Peer,omitempty"`
-		Pool             *ResourcepoolPoolRelationship  `json:"Pool,omitempty"`
-		Resource         *MoBaseMoRelationship          `json:"Resource,omitempty"`
+		AssignedToEntity []MoBaseMoRelationship                `json:"AssignedToEntity,omitempty"`
+		Peer             NullableResourcepoolLeaseRelationship `json:"Peer,omitempty"`
+		Pool             NullableResourcepoolPoolRelationship  `json:"Pool,omitempty"`
+		Resource         NullableMoBaseMoRelationship          `json:"Resource,omitempty"`
 	}
 
 	varResourcepoolPoolMemberWithoutEmbeddedStruct := ResourcepoolPoolMemberWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varResourcepoolPoolMemberWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varResourcepoolPoolMemberWithoutEmbeddedStruct)
 	if err == nil {
 		varResourcepoolPoolMember := _ResourcepoolPoolMember{}
 		varResourcepoolPoolMember.ClassId = varResourcepoolPoolMemberWithoutEmbeddedStruct.ClassId
@@ -342,7 +405,7 @@ func (o *ResourcepoolPoolMember) UnmarshalJSON(bytes []byte) (err error) {
 
 	varResourcepoolPoolMember := _ResourcepoolPoolMember{}
 
-	err = json.Unmarshal(bytes, &varResourcepoolPoolMember)
+	err = json.Unmarshal(data, &varResourcepoolPoolMember)
 	if err == nil {
 		o.PoolAbstractPoolMember = varResourcepoolPoolMember.PoolAbstractPoolMember
 	} else {
@@ -351,7 +414,7 @@ func (o *ResourcepoolPoolMember) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Features")

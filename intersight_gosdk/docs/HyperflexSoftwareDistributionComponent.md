@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **FilePath** | Pointer to **string** | File location on the cloud storage. | [optional] 
 **FilesToDownload** | Pointer to **[]string** |  | [optional] 
 **Version** | Pointer to **string** | The HyperFlex Software Distribution Component Version. | [optional] 
-**SoftwareDistributionVersion** | Pointer to [**HyperflexSoftwareDistributionVersionRelationship**](HyperflexSoftwareDistributionVersionRelationship.md) |  | [optional] 
+**SoftwareDistributionVersion** | Pointer to [**NullableHyperflexSoftwareDistributionVersionRelationship**](HyperflexSoftwareDistributionVersionRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -258,6 +258,16 @@ SetSoftwareDistributionVersion sets SoftwareDistributionVersion field to given v
 
 HasSoftwareDistributionVersion returns a boolean if a field has been set.
 
+### SetSoftwareDistributionVersionNil
+
+`func (o *HyperflexSoftwareDistributionComponent) SetSoftwareDistributionVersionNil(b bool)`
+
+ SetSoftwareDistributionVersionNil sets the value for SoftwareDistributionVersion to be an explicit nil
+
+### UnsetSoftwareDistributionVersion
+`func (o *HyperflexSoftwareDistributionComponent) UnsetSoftwareDistributionVersion()`
+
+UnsetSoftwareDistributionVersion ensures that no value is present for SoftwareDistributionVersion, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

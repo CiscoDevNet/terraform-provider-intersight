@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the EquipmentPsu type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &EquipmentPsu{}
 
 // EquipmentPsu This represents power supply unit for chassis/server.
 type EquipmentPsu struct {
@@ -50,14 +54,14 @@ type EquipmentPsu struct {
 	// This field identifies the Vendor ID for this Power Supply Unit.
 	Vid *string `json:"Vid,omitempty"`
 	// This field is used to indicate the voltage state for this Power Supply.
-	Voltage                *string                              `json:"Voltage,omitempty"`
-	ComputeRackUnit        *ComputeRackUnitRelationship         `json:"ComputeRackUnit,omitempty"`
-	EquipmentChassis       *EquipmentChassisRelationship        `json:"EquipmentChassis,omitempty"`
-	EquipmentFex           *EquipmentFexRelationship            `json:"EquipmentFex,omitempty"`
-	EquipmentRackEnclosure *EquipmentRackEnclosureRelationship  `json:"EquipmentRackEnclosure,omitempty"`
-	InventoryDeviceInfo    *InventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
-	NetworkElement         *NetworkElementRelationship          `json:"NetworkElement,omitempty"`
-	RegisteredDevice       *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+	Voltage                *string                                     `json:"Voltage,omitempty"`
+	ComputeRackUnit        NullableComputeRackUnitRelationship         `json:"ComputeRackUnit,omitempty"`
+	EquipmentChassis       NullableEquipmentChassisRelationship        `json:"EquipmentChassis,omitempty"`
+	EquipmentFex           NullableEquipmentFexRelationship            `json:"EquipmentFex,omitempty"`
+	EquipmentRackEnclosure NullableEquipmentRackEnclosureRelationship  `json:"EquipmentRackEnclosure,omitempty"`
+	InventoryDeviceInfo    NullableInventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
+	NetworkElement         NullableNetworkElementRelationship          `json:"NetworkElement,omitempty"`
+	RegisteredDevice       NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	AdditionalProperties   map[string]interface{}
 }
 
@@ -136,7 +140,7 @@ func (o *EquipmentPsu) SetObjectType(v string) {
 
 // GetDescription returns the Description field value if set, zero value otherwise.
 func (o *EquipmentPsu) GetDescription() string {
-	if o == nil || o.Description == nil {
+	if o == nil || IsNil(o.Description) {
 		var ret string
 		return ret
 	}
@@ -146,7 +150,7 @@ func (o *EquipmentPsu) GetDescription() string {
 // GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EquipmentPsu) GetDescriptionOk() (*string, bool) {
-	if o == nil || o.Description == nil {
+	if o == nil || IsNil(o.Description) {
 		return nil, false
 	}
 	return o.Description, true
@@ -154,7 +158,7 @@ func (o *EquipmentPsu) GetDescriptionOk() (*string, bool) {
 
 // HasDescription returns a boolean if a field has been set.
 func (o *EquipmentPsu) HasDescription() bool {
-	if o != nil && o.Description != nil {
+	if o != nil && !IsNil(o.Description) {
 		return true
 	}
 
@@ -168,7 +172,7 @@ func (o *EquipmentPsu) SetDescription(v string) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *EquipmentPsu) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -178,7 +182,7 @@ func (o *EquipmentPsu) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EquipmentPsu) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -186,7 +190,7 @@ func (o *EquipmentPsu) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *EquipmentPsu) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -211,7 +215,7 @@ func (o *EquipmentPsu) GetOperReason() []string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *EquipmentPsu) GetOperReasonOk() ([]string, bool) {
-	if o == nil || o.OperReason == nil {
+	if o == nil || IsNil(o.OperReason) {
 		return nil, false
 	}
 	return o.OperReason, true
@@ -219,7 +223,7 @@ func (o *EquipmentPsu) GetOperReasonOk() ([]string, bool) {
 
 // HasOperReason returns a boolean if a field has been set.
 func (o *EquipmentPsu) HasOperReason() bool {
-	if o != nil && o.OperReason != nil {
+	if o != nil && IsNil(o.OperReason) {
 		return true
 	}
 
@@ -233,7 +237,7 @@ func (o *EquipmentPsu) SetOperReason(v []string) {
 
 // GetOperState returns the OperState field value if set, zero value otherwise.
 func (o *EquipmentPsu) GetOperState() string {
-	if o == nil || o.OperState == nil {
+	if o == nil || IsNil(o.OperState) {
 		var ret string
 		return ret
 	}
@@ -243,7 +247,7 @@ func (o *EquipmentPsu) GetOperState() string {
 // GetOperStateOk returns a tuple with the OperState field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EquipmentPsu) GetOperStateOk() (*string, bool) {
-	if o == nil || o.OperState == nil {
+	if o == nil || IsNil(o.OperState) {
 		return nil, false
 	}
 	return o.OperState, true
@@ -251,7 +255,7 @@ func (o *EquipmentPsu) GetOperStateOk() (*string, bool) {
 
 // HasOperState returns a boolean if a field has been set.
 func (o *EquipmentPsu) HasOperState() bool {
-	if o != nil && o.OperState != nil {
+	if o != nil && !IsNil(o.OperState) {
 		return true
 	}
 
@@ -265,7 +269,7 @@ func (o *EquipmentPsu) SetOperState(v string) {
 
 // GetPartNumber returns the PartNumber field value if set, zero value otherwise.
 func (o *EquipmentPsu) GetPartNumber() string {
-	if o == nil || o.PartNumber == nil {
+	if o == nil || IsNil(o.PartNumber) {
 		var ret string
 		return ret
 	}
@@ -275,7 +279,7 @@ func (o *EquipmentPsu) GetPartNumber() string {
 // GetPartNumberOk returns a tuple with the PartNumber field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EquipmentPsu) GetPartNumberOk() (*string, bool) {
-	if o == nil || o.PartNumber == nil {
+	if o == nil || IsNil(o.PartNumber) {
 		return nil, false
 	}
 	return o.PartNumber, true
@@ -283,7 +287,7 @@ func (o *EquipmentPsu) GetPartNumberOk() (*string, bool) {
 
 // HasPartNumber returns a boolean if a field has been set.
 func (o *EquipmentPsu) HasPartNumber() bool {
-	if o != nil && o.PartNumber != nil {
+	if o != nil && !IsNil(o.PartNumber) {
 		return true
 	}
 
@@ -297,7 +301,7 @@ func (o *EquipmentPsu) SetPartNumber(v string) {
 
 // GetPid returns the Pid field value if set, zero value otherwise.
 func (o *EquipmentPsu) GetPid() string {
-	if o == nil || o.Pid == nil {
+	if o == nil || IsNil(o.Pid) {
 		var ret string
 		return ret
 	}
@@ -307,7 +311,7 @@ func (o *EquipmentPsu) GetPid() string {
 // GetPidOk returns a tuple with the Pid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EquipmentPsu) GetPidOk() (*string, bool) {
-	if o == nil || o.Pid == nil {
+	if o == nil || IsNil(o.Pid) {
 		return nil, false
 	}
 	return o.Pid, true
@@ -315,7 +319,7 @@ func (o *EquipmentPsu) GetPidOk() (*string, bool) {
 
 // HasPid returns a boolean if a field has been set.
 func (o *EquipmentPsu) HasPid() bool {
-	if o != nil && o.Pid != nil {
+	if o != nil && !IsNil(o.Pid) {
 		return true
 	}
 
@@ -329,7 +333,7 @@ func (o *EquipmentPsu) SetPid(v string) {
 
 // GetPsuFwVersion returns the PsuFwVersion field value if set, zero value otherwise.
 func (o *EquipmentPsu) GetPsuFwVersion() string {
-	if o == nil || o.PsuFwVersion == nil {
+	if o == nil || IsNil(o.PsuFwVersion) {
 		var ret string
 		return ret
 	}
@@ -339,7 +343,7 @@ func (o *EquipmentPsu) GetPsuFwVersion() string {
 // GetPsuFwVersionOk returns a tuple with the PsuFwVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EquipmentPsu) GetPsuFwVersionOk() (*string, bool) {
-	if o == nil || o.PsuFwVersion == nil {
+	if o == nil || IsNil(o.PsuFwVersion) {
 		return nil, false
 	}
 	return o.PsuFwVersion, true
@@ -347,7 +351,7 @@ func (o *EquipmentPsu) GetPsuFwVersionOk() (*string, bool) {
 
 // HasPsuFwVersion returns a boolean if a field has been set.
 func (o *EquipmentPsu) HasPsuFwVersion() bool {
-	if o != nil && o.PsuFwVersion != nil {
+	if o != nil && !IsNil(o.PsuFwVersion) {
 		return true
 	}
 
@@ -361,7 +365,7 @@ func (o *EquipmentPsu) SetPsuFwVersion(v string) {
 
 // GetPsuId returns the PsuId field value if set, zero value otherwise.
 func (o *EquipmentPsu) GetPsuId() int64 {
-	if o == nil || o.PsuId == nil {
+	if o == nil || IsNil(o.PsuId) {
 		var ret int64
 		return ret
 	}
@@ -371,7 +375,7 @@ func (o *EquipmentPsu) GetPsuId() int64 {
 // GetPsuIdOk returns a tuple with the PsuId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EquipmentPsu) GetPsuIdOk() (*int64, bool) {
-	if o == nil || o.PsuId == nil {
+	if o == nil || IsNil(o.PsuId) {
 		return nil, false
 	}
 	return o.PsuId, true
@@ -379,7 +383,7 @@ func (o *EquipmentPsu) GetPsuIdOk() (*int64, bool) {
 
 // HasPsuId returns a boolean if a field has been set.
 func (o *EquipmentPsu) HasPsuId() bool {
-	if o != nil && o.PsuId != nil {
+	if o != nil && !IsNil(o.PsuId) {
 		return true
 	}
 
@@ -393,7 +397,7 @@ func (o *EquipmentPsu) SetPsuId(v int64) {
 
 // GetPsuInputSrc returns the PsuInputSrc field value if set, zero value otherwise.
 func (o *EquipmentPsu) GetPsuInputSrc() string {
-	if o == nil || o.PsuInputSrc == nil {
+	if o == nil || IsNil(o.PsuInputSrc) {
 		var ret string
 		return ret
 	}
@@ -403,7 +407,7 @@ func (o *EquipmentPsu) GetPsuInputSrc() string {
 // GetPsuInputSrcOk returns a tuple with the PsuInputSrc field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EquipmentPsu) GetPsuInputSrcOk() (*string, bool) {
-	if o == nil || o.PsuInputSrc == nil {
+	if o == nil || IsNil(o.PsuInputSrc) {
 		return nil, false
 	}
 	return o.PsuInputSrc, true
@@ -411,7 +415,7 @@ func (o *EquipmentPsu) GetPsuInputSrcOk() (*string, bool) {
 
 // HasPsuInputSrc returns a boolean if a field has been set.
 func (o *EquipmentPsu) HasPsuInputSrc() bool {
-	if o != nil && o.PsuInputSrc != nil {
+	if o != nil && !IsNil(o.PsuInputSrc) {
 		return true
 	}
 
@@ -425,7 +429,7 @@ func (o *EquipmentPsu) SetPsuInputSrc(v string) {
 
 // GetPsuType returns the PsuType field value if set, zero value otherwise.
 func (o *EquipmentPsu) GetPsuType() string {
-	if o == nil || o.PsuType == nil {
+	if o == nil || IsNil(o.PsuType) {
 		var ret string
 		return ret
 	}
@@ -435,7 +439,7 @@ func (o *EquipmentPsu) GetPsuType() string {
 // GetPsuTypeOk returns a tuple with the PsuType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EquipmentPsu) GetPsuTypeOk() (*string, bool) {
-	if o == nil || o.PsuType == nil {
+	if o == nil || IsNil(o.PsuType) {
 		return nil, false
 	}
 	return o.PsuType, true
@@ -443,7 +447,7 @@ func (o *EquipmentPsu) GetPsuTypeOk() (*string, bool) {
 
 // HasPsuType returns a boolean if a field has been set.
 func (o *EquipmentPsu) HasPsuType() bool {
-	if o != nil && o.PsuType != nil {
+	if o != nil && !IsNil(o.PsuType) {
 		return true
 	}
 
@@ -457,7 +461,7 @@ func (o *EquipmentPsu) SetPsuType(v string) {
 
 // GetPsuWattage returns the PsuWattage field value if set, zero value otherwise.
 func (o *EquipmentPsu) GetPsuWattage() string {
-	if o == nil || o.PsuWattage == nil {
+	if o == nil || IsNil(o.PsuWattage) {
 		var ret string
 		return ret
 	}
@@ -467,7 +471,7 @@ func (o *EquipmentPsu) GetPsuWattage() string {
 // GetPsuWattageOk returns a tuple with the PsuWattage field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EquipmentPsu) GetPsuWattageOk() (*string, bool) {
-	if o == nil || o.PsuWattage == nil {
+	if o == nil || IsNil(o.PsuWattage) {
 		return nil, false
 	}
 	return o.PsuWattage, true
@@ -475,7 +479,7 @@ func (o *EquipmentPsu) GetPsuWattageOk() (*string, bool) {
 
 // HasPsuWattage returns a boolean if a field has been set.
 func (o *EquipmentPsu) HasPsuWattage() bool {
-	if o != nil && o.PsuWattage != nil {
+	if o != nil && !IsNil(o.PsuWattage) {
 		return true
 	}
 
@@ -489,7 +493,7 @@ func (o *EquipmentPsu) SetPsuWattage(v string) {
 
 // GetSku returns the Sku field value if set, zero value otherwise.
 func (o *EquipmentPsu) GetSku() string {
-	if o == nil || o.Sku == nil {
+	if o == nil || IsNil(o.Sku) {
 		var ret string
 		return ret
 	}
@@ -499,7 +503,7 @@ func (o *EquipmentPsu) GetSku() string {
 // GetSkuOk returns a tuple with the Sku field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EquipmentPsu) GetSkuOk() (*string, bool) {
-	if o == nil || o.Sku == nil {
+	if o == nil || IsNil(o.Sku) {
 		return nil, false
 	}
 	return o.Sku, true
@@ -507,7 +511,7 @@ func (o *EquipmentPsu) GetSkuOk() (*string, bool) {
 
 // HasSku returns a boolean if a field has been set.
 func (o *EquipmentPsu) HasSku() bool {
-	if o != nil && o.Sku != nil {
+	if o != nil && !IsNil(o.Sku) {
 		return true
 	}
 
@@ -521,7 +525,7 @@ func (o *EquipmentPsu) SetSku(v string) {
 
 // GetVid returns the Vid field value if set, zero value otherwise.
 func (o *EquipmentPsu) GetVid() string {
-	if o == nil || o.Vid == nil {
+	if o == nil || IsNil(o.Vid) {
 		var ret string
 		return ret
 	}
@@ -531,7 +535,7 @@ func (o *EquipmentPsu) GetVid() string {
 // GetVidOk returns a tuple with the Vid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EquipmentPsu) GetVidOk() (*string, bool) {
-	if o == nil || o.Vid == nil {
+	if o == nil || IsNil(o.Vid) {
 		return nil, false
 	}
 	return o.Vid, true
@@ -539,7 +543,7 @@ func (o *EquipmentPsu) GetVidOk() (*string, bool) {
 
 // HasVid returns a boolean if a field has been set.
 func (o *EquipmentPsu) HasVid() bool {
-	if o != nil && o.Vid != nil {
+	if o != nil && !IsNil(o.Vid) {
 		return true
 	}
 
@@ -553,7 +557,7 @@ func (o *EquipmentPsu) SetVid(v string) {
 
 // GetVoltage returns the Voltage field value if set, zero value otherwise.
 func (o *EquipmentPsu) GetVoltage() string {
-	if o == nil || o.Voltage == nil {
+	if o == nil || IsNil(o.Voltage) {
 		var ret string
 		return ret
 	}
@@ -563,7 +567,7 @@ func (o *EquipmentPsu) GetVoltage() string {
 // GetVoltageOk returns a tuple with the Voltage field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EquipmentPsu) GetVoltageOk() (*string, bool) {
-	if o == nil || o.Voltage == nil {
+	if o == nil || IsNil(o.Voltage) {
 		return nil, false
 	}
 	return o.Voltage, true
@@ -571,7 +575,7 @@ func (o *EquipmentPsu) GetVoltageOk() (*string, bool) {
 
 // HasVoltage returns a boolean if a field has been set.
 func (o *EquipmentPsu) HasVoltage() bool {
-	if o != nil && o.Voltage != nil {
+	if o != nil && !IsNil(o.Voltage) {
 		return true
 	}
 
@@ -583,318 +587,421 @@ func (o *EquipmentPsu) SetVoltage(v string) {
 	o.Voltage = &v
 }
 
-// GetComputeRackUnit returns the ComputeRackUnit field value if set, zero value otherwise.
+// GetComputeRackUnit returns the ComputeRackUnit field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *EquipmentPsu) GetComputeRackUnit() ComputeRackUnitRelationship {
-	if o == nil || o.ComputeRackUnit == nil {
+	if o == nil || IsNil(o.ComputeRackUnit.Get()) {
 		var ret ComputeRackUnitRelationship
 		return ret
 	}
-	return *o.ComputeRackUnit
+	return *o.ComputeRackUnit.Get()
 }
 
 // GetComputeRackUnitOk returns a tuple with the ComputeRackUnit field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *EquipmentPsu) GetComputeRackUnitOk() (*ComputeRackUnitRelationship, bool) {
-	if o == nil || o.ComputeRackUnit == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.ComputeRackUnit, true
+	return o.ComputeRackUnit.Get(), o.ComputeRackUnit.IsSet()
 }
 
 // HasComputeRackUnit returns a boolean if a field has been set.
 func (o *EquipmentPsu) HasComputeRackUnit() bool {
-	if o != nil && o.ComputeRackUnit != nil {
+	if o != nil && o.ComputeRackUnit.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetComputeRackUnit gets a reference to the given ComputeRackUnitRelationship and assigns it to the ComputeRackUnit field.
+// SetComputeRackUnit gets a reference to the given NullableComputeRackUnitRelationship and assigns it to the ComputeRackUnit field.
 func (o *EquipmentPsu) SetComputeRackUnit(v ComputeRackUnitRelationship) {
-	o.ComputeRackUnit = &v
+	o.ComputeRackUnit.Set(&v)
 }
 
-// GetEquipmentChassis returns the EquipmentChassis field value if set, zero value otherwise.
+// SetComputeRackUnitNil sets the value for ComputeRackUnit to be an explicit nil
+func (o *EquipmentPsu) SetComputeRackUnitNil() {
+	o.ComputeRackUnit.Set(nil)
+}
+
+// UnsetComputeRackUnit ensures that no value is present for ComputeRackUnit, not even an explicit nil
+func (o *EquipmentPsu) UnsetComputeRackUnit() {
+	o.ComputeRackUnit.Unset()
+}
+
+// GetEquipmentChassis returns the EquipmentChassis field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *EquipmentPsu) GetEquipmentChassis() EquipmentChassisRelationship {
-	if o == nil || o.EquipmentChassis == nil {
+	if o == nil || IsNil(o.EquipmentChassis.Get()) {
 		var ret EquipmentChassisRelationship
 		return ret
 	}
-	return *o.EquipmentChassis
+	return *o.EquipmentChassis.Get()
 }
 
 // GetEquipmentChassisOk returns a tuple with the EquipmentChassis field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *EquipmentPsu) GetEquipmentChassisOk() (*EquipmentChassisRelationship, bool) {
-	if o == nil || o.EquipmentChassis == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.EquipmentChassis, true
+	return o.EquipmentChassis.Get(), o.EquipmentChassis.IsSet()
 }
 
 // HasEquipmentChassis returns a boolean if a field has been set.
 func (o *EquipmentPsu) HasEquipmentChassis() bool {
-	if o != nil && o.EquipmentChassis != nil {
+	if o != nil && o.EquipmentChassis.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetEquipmentChassis gets a reference to the given EquipmentChassisRelationship and assigns it to the EquipmentChassis field.
+// SetEquipmentChassis gets a reference to the given NullableEquipmentChassisRelationship and assigns it to the EquipmentChassis field.
 func (o *EquipmentPsu) SetEquipmentChassis(v EquipmentChassisRelationship) {
-	o.EquipmentChassis = &v
+	o.EquipmentChassis.Set(&v)
 }
 
-// GetEquipmentFex returns the EquipmentFex field value if set, zero value otherwise.
+// SetEquipmentChassisNil sets the value for EquipmentChassis to be an explicit nil
+func (o *EquipmentPsu) SetEquipmentChassisNil() {
+	o.EquipmentChassis.Set(nil)
+}
+
+// UnsetEquipmentChassis ensures that no value is present for EquipmentChassis, not even an explicit nil
+func (o *EquipmentPsu) UnsetEquipmentChassis() {
+	o.EquipmentChassis.Unset()
+}
+
+// GetEquipmentFex returns the EquipmentFex field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *EquipmentPsu) GetEquipmentFex() EquipmentFexRelationship {
-	if o == nil || o.EquipmentFex == nil {
+	if o == nil || IsNil(o.EquipmentFex.Get()) {
 		var ret EquipmentFexRelationship
 		return ret
 	}
-	return *o.EquipmentFex
+	return *o.EquipmentFex.Get()
 }
 
 // GetEquipmentFexOk returns a tuple with the EquipmentFex field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *EquipmentPsu) GetEquipmentFexOk() (*EquipmentFexRelationship, bool) {
-	if o == nil || o.EquipmentFex == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.EquipmentFex, true
+	return o.EquipmentFex.Get(), o.EquipmentFex.IsSet()
 }
 
 // HasEquipmentFex returns a boolean if a field has been set.
 func (o *EquipmentPsu) HasEquipmentFex() bool {
-	if o != nil && o.EquipmentFex != nil {
+	if o != nil && o.EquipmentFex.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetEquipmentFex gets a reference to the given EquipmentFexRelationship and assigns it to the EquipmentFex field.
+// SetEquipmentFex gets a reference to the given NullableEquipmentFexRelationship and assigns it to the EquipmentFex field.
 func (o *EquipmentPsu) SetEquipmentFex(v EquipmentFexRelationship) {
-	o.EquipmentFex = &v
+	o.EquipmentFex.Set(&v)
 }
 
-// GetEquipmentRackEnclosure returns the EquipmentRackEnclosure field value if set, zero value otherwise.
+// SetEquipmentFexNil sets the value for EquipmentFex to be an explicit nil
+func (o *EquipmentPsu) SetEquipmentFexNil() {
+	o.EquipmentFex.Set(nil)
+}
+
+// UnsetEquipmentFex ensures that no value is present for EquipmentFex, not even an explicit nil
+func (o *EquipmentPsu) UnsetEquipmentFex() {
+	o.EquipmentFex.Unset()
+}
+
+// GetEquipmentRackEnclosure returns the EquipmentRackEnclosure field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *EquipmentPsu) GetEquipmentRackEnclosure() EquipmentRackEnclosureRelationship {
-	if o == nil || o.EquipmentRackEnclosure == nil {
+	if o == nil || IsNil(o.EquipmentRackEnclosure.Get()) {
 		var ret EquipmentRackEnclosureRelationship
 		return ret
 	}
-	return *o.EquipmentRackEnclosure
+	return *o.EquipmentRackEnclosure.Get()
 }
 
 // GetEquipmentRackEnclosureOk returns a tuple with the EquipmentRackEnclosure field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *EquipmentPsu) GetEquipmentRackEnclosureOk() (*EquipmentRackEnclosureRelationship, bool) {
-	if o == nil || o.EquipmentRackEnclosure == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.EquipmentRackEnclosure, true
+	return o.EquipmentRackEnclosure.Get(), o.EquipmentRackEnclosure.IsSet()
 }
 
 // HasEquipmentRackEnclosure returns a boolean if a field has been set.
 func (o *EquipmentPsu) HasEquipmentRackEnclosure() bool {
-	if o != nil && o.EquipmentRackEnclosure != nil {
+	if o != nil && o.EquipmentRackEnclosure.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetEquipmentRackEnclosure gets a reference to the given EquipmentRackEnclosureRelationship and assigns it to the EquipmentRackEnclosure field.
+// SetEquipmentRackEnclosure gets a reference to the given NullableEquipmentRackEnclosureRelationship and assigns it to the EquipmentRackEnclosure field.
 func (o *EquipmentPsu) SetEquipmentRackEnclosure(v EquipmentRackEnclosureRelationship) {
-	o.EquipmentRackEnclosure = &v
+	o.EquipmentRackEnclosure.Set(&v)
 }
 
-// GetInventoryDeviceInfo returns the InventoryDeviceInfo field value if set, zero value otherwise.
+// SetEquipmentRackEnclosureNil sets the value for EquipmentRackEnclosure to be an explicit nil
+func (o *EquipmentPsu) SetEquipmentRackEnclosureNil() {
+	o.EquipmentRackEnclosure.Set(nil)
+}
+
+// UnsetEquipmentRackEnclosure ensures that no value is present for EquipmentRackEnclosure, not even an explicit nil
+func (o *EquipmentPsu) UnsetEquipmentRackEnclosure() {
+	o.EquipmentRackEnclosure.Unset()
+}
+
+// GetInventoryDeviceInfo returns the InventoryDeviceInfo field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *EquipmentPsu) GetInventoryDeviceInfo() InventoryDeviceInfoRelationship {
-	if o == nil || o.InventoryDeviceInfo == nil {
+	if o == nil || IsNil(o.InventoryDeviceInfo.Get()) {
 		var ret InventoryDeviceInfoRelationship
 		return ret
 	}
-	return *o.InventoryDeviceInfo
+	return *o.InventoryDeviceInfo.Get()
 }
 
 // GetInventoryDeviceInfoOk returns a tuple with the InventoryDeviceInfo field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *EquipmentPsu) GetInventoryDeviceInfoOk() (*InventoryDeviceInfoRelationship, bool) {
-	if o == nil || o.InventoryDeviceInfo == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.InventoryDeviceInfo, true
+	return o.InventoryDeviceInfo.Get(), o.InventoryDeviceInfo.IsSet()
 }
 
 // HasInventoryDeviceInfo returns a boolean if a field has been set.
 func (o *EquipmentPsu) HasInventoryDeviceInfo() bool {
-	if o != nil && o.InventoryDeviceInfo != nil {
+	if o != nil && o.InventoryDeviceInfo.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetInventoryDeviceInfo gets a reference to the given InventoryDeviceInfoRelationship and assigns it to the InventoryDeviceInfo field.
+// SetInventoryDeviceInfo gets a reference to the given NullableInventoryDeviceInfoRelationship and assigns it to the InventoryDeviceInfo field.
 func (o *EquipmentPsu) SetInventoryDeviceInfo(v InventoryDeviceInfoRelationship) {
-	o.InventoryDeviceInfo = &v
+	o.InventoryDeviceInfo.Set(&v)
 }
 
-// GetNetworkElement returns the NetworkElement field value if set, zero value otherwise.
+// SetInventoryDeviceInfoNil sets the value for InventoryDeviceInfo to be an explicit nil
+func (o *EquipmentPsu) SetInventoryDeviceInfoNil() {
+	o.InventoryDeviceInfo.Set(nil)
+}
+
+// UnsetInventoryDeviceInfo ensures that no value is present for InventoryDeviceInfo, not even an explicit nil
+func (o *EquipmentPsu) UnsetInventoryDeviceInfo() {
+	o.InventoryDeviceInfo.Unset()
+}
+
+// GetNetworkElement returns the NetworkElement field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *EquipmentPsu) GetNetworkElement() NetworkElementRelationship {
-	if o == nil || o.NetworkElement == nil {
+	if o == nil || IsNil(o.NetworkElement.Get()) {
 		var ret NetworkElementRelationship
 		return ret
 	}
-	return *o.NetworkElement
+	return *o.NetworkElement.Get()
 }
 
 // GetNetworkElementOk returns a tuple with the NetworkElement field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *EquipmentPsu) GetNetworkElementOk() (*NetworkElementRelationship, bool) {
-	if o == nil || o.NetworkElement == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.NetworkElement, true
+	return o.NetworkElement.Get(), o.NetworkElement.IsSet()
 }
 
 // HasNetworkElement returns a boolean if a field has been set.
 func (o *EquipmentPsu) HasNetworkElement() bool {
-	if o != nil && o.NetworkElement != nil {
+	if o != nil && o.NetworkElement.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetNetworkElement gets a reference to the given NetworkElementRelationship and assigns it to the NetworkElement field.
+// SetNetworkElement gets a reference to the given NullableNetworkElementRelationship and assigns it to the NetworkElement field.
 func (o *EquipmentPsu) SetNetworkElement(v NetworkElementRelationship) {
-	o.NetworkElement = &v
+	o.NetworkElement.Set(&v)
 }
 
-// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise.
+// SetNetworkElementNil sets the value for NetworkElement to be an explicit nil
+func (o *EquipmentPsu) SetNetworkElementNil() {
+	o.NetworkElement.Set(nil)
+}
+
+// UnsetNetworkElement ensures that no value is present for NetworkElement, not even an explicit nil
+func (o *EquipmentPsu) UnsetNetworkElement() {
+	o.NetworkElement.Unset()
+}
+
+// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *EquipmentPsu) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil || IsNil(o.RegisteredDevice.Get()) {
 		var ret AssetDeviceRegistrationRelationship
 		return ret
 	}
-	return *o.RegisteredDevice
+	return *o.RegisteredDevice.Get()
 }
 
 // GetRegisteredDeviceOk returns a tuple with the RegisteredDevice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *EquipmentPsu) GetRegisteredDeviceOk() (*AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.RegisteredDevice, true
+	return o.RegisteredDevice.Get(), o.RegisteredDevice.IsSet()
 }
 
 // HasRegisteredDevice returns a boolean if a field has been set.
 func (o *EquipmentPsu) HasRegisteredDevice() bool {
-	if o != nil && o.RegisteredDevice != nil {
+	if o != nil && o.RegisteredDevice.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRegisteredDevice gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
+// SetRegisteredDevice gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
 func (o *EquipmentPsu) SetRegisteredDevice(v AssetDeviceRegistrationRelationship) {
-	o.RegisteredDevice = &v
+	o.RegisteredDevice.Set(&v)
+}
+
+// SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+func (o *EquipmentPsu) SetRegisteredDeviceNil() {
+	o.RegisteredDevice.Set(nil)
+}
+
+// UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
+func (o *EquipmentPsu) UnsetRegisteredDevice() {
+	o.RegisteredDevice.Unset()
 }
 
 func (o EquipmentPsu) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o EquipmentPsu) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedEquipmentBase, errEquipmentBase := json.Marshal(o.EquipmentBase)
 	if errEquipmentBase != nil {
-		return []byte{}, errEquipmentBase
+		return map[string]interface{}{}, errEquipmentBase
 	}
 	errEquipmentBase = json.Unmarshal([]byte(serializedEquipmentBase), &toSerialize)
 	if errEquipmentBase != nil {
-		return []byte{}, errEquipmentBase
+		return map[string]interface{}{}, errEquipmentBase
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Description != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Description) {
 		toSerialize["Description"] = o.Description
 	}
-	if o.Name != nil {
+	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
 	}
 	if o.OperReason != nil {
 		toSerialize["OperReason"] = o.OperReason
 	}
-	if o.OperState != nil {
+	if !IsNil(o.OperState) {
 		toSerialize["OperState"] = o.OperState
 	}
-	if o.PartNumber != nil {
+	if !IsNil(o.PartNumber) {
 		toSerialize["PartNumber"] = o.PartNumber
 	}
-	if o.Pid != nil {
+	if !IsNil(o.Pid) {
 		toSerialize["Pid"] = o.Pid
 	}
-	if o.PsuFwVersion != nil {
+	if !IsNil(o.PsuFwVersion) {
 		toSerialize["PsuFwVersion"] = o.PsuFwVersion
 	}
-	if o.PsuId != nil {
+	if !IsNil(o.PsuId) {
 		toSerialize["PsuId"] = o.PsuId
 	}
-	if o.PsuInputSrc != nil {
+	if !IsNil(o.PsuInputSrc) {
 		toSerialize["PsuInputSrc"] = o.PsuInputSrc
 	}
-	if o.PsuType != nil {
+	if !IsNil(o.PsuType) {
 		toSerialize["PsuType"] = o.PsuType
 	}
-	if o.PsuWattage != nil {
+	if !IsNil(o.PsuWattage) {
 		toSerialize["PsuWattage"] = o.PsuWattage
 	}
-	if o.Sku != nil {
+	if !IsNil(o.Sku) {
 		toSerialize["Sku"] = o.Sku
 	}
-	if o.Vid != nil {
+	if !IsNil(o.Vid) {
 		toSerialize["Vid"] = o.Vid
 	}
-	if o.Voltage != nil {
+	if !IsNil(o.Voltage) {
 		toSerialize["Voltage"] = o.Voltage
 	}
-	if o.ComputeRackUnit != nil {
-		toSerialize["ComputeRackUnit"] = o.ComputeRackUnit
+	if o.ComputeRackUnit.IsSet() {
+		toSerialize["ComputeRackUnit"] = o.ComputeRackUnit.Get()
 	}
-	if o.EquipmentChassis != nil {
-		toSerialize["EquipmentChassis"] = o.EquipmentChassis
+	if o.EquipmentChassis.IsSet() {
+		toSerialize["EquipmentChassis"] = o.EquipmentChassis.Get()
 	}
-	if o.EquipmentFex != nil {
-		toSerialize["EquipmentFex"] = o.EquipmentFex
+	if o.EquipmentFex.IsSet() {
+		toSerialize["EquipmentFex"] = o.EquipmentFex.Get()
 	}
-	if o.EquipmentRackEnclosure != nil {
-		toSerialize["EquipmentRackEnclosure"] = o.EquipmentRackEnclosure
+	if o.EquipmentRackEnclosure.IsSet() {
+		toSerialize["EquipmentRackEnclosure"] = o.EquipmentRackEnclosure.Get()
 	}
-	if o.InventoryDeviceInfo != nil {
-		toSerialize["InventoryDeviceInfo"] = o.InventoryDeviceInfo
+	if o.InventoryDeviceInfo.IsSet() {
+		toSerialize["InventoryDeviceInfo"] = o.InventoryDeviceInfo.Get()
 	}
-	if o.NetworkElement != nil {
-		toSerialize["NetworkElement"] = o.NetworkElement
+	if o.NetworkElement.IsSet() {
+		toSerialize["NetworkElement"] = o.NetworkElement.Get()
 	}
-	if o.RegisteredDevice != nil {
-		toSerialize["RegisteredDevice"] = o.RegisteredDevice
+	if o.RegisteredDevice.IsSet() {
+		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *EquipmentPsu) UnmarshalJSON(bytes []byte) (err error) {
+func (o *EquipmentPsu) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type EquipmentPsuWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -926,19 +1033,19 @@ func (o *EquipmentPsu) UnmarshalJSON(bytes []byte) (err error) {
 		// This field identifies the Vendor ID for this Power Supply Unit.
 		Vid *string `json:"Vid,omitempty"`
 		// This field is used to indicate the voltage state for this Power Supply.
-		Voltage                *string                              `json:"Voltage,omitempty"`
-		ComputeRackUnit        *ComputeRackUnitRelationship         `json:"ComputeRackUnit,omitempty"`
-		EquipmentChassis       *EquipmentChassisRelationship        `json:"EquipmentChassis,omitempty"`
-		EquipmentFex           *EquipmentFexRelationship            `json:"EquipmentFex,omitempty"`
-		EquipmentRackEnclosure *EquipmentRackEnclosureRelationship  `json:"EquipmentRackEnclosure,omitempty"`
-		InventoryDeviceInfo    *InventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
-		NetworkElement         *NetworkElementRelationship          `json:"NetworkElement,omitempty"`
-		RegisteredDevice       *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+		Voltage                *string                                     `json:"Voltage,omitempty"`
+		ComputeRackUnit        NullableComputeRackUnitRelationship         `json:"ComputeRackUnit,omitempty"`
+		EquipmentChassis       NullableEquipmentChassisRelationship        `json:"EquipmentChassis,omitempty"`
+		EquipmentFex           NullableEquipmentFexRelationship            `json:"EquipmentFex,omitempty"`
+		EquipmentRackEnclosure NullableEquipmentRackEnclosureRelationship  `json:"EquipmentRackEnclosure,omitempty"`
+		InventoryDeviceInfo    NullableInventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
+		NetworkElement         NullableNetworkElementRelationship          `json:"NetworkElement,omitempty"`
+		RegisteredDevice       NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	}
 
 	varEquipmentPsuWithoutEmbeddedStruct := EquipmentPsuWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varEquipmentPsuWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varEquipmentPsuWithoutEmbeddedStruct)
 	if err == nil {
 		varEquipmentPsu := _EquipmentPsu{}
 		varEquipmentPsu.ClassId = varEquipmentPsuWithoutEmbeddedStruct.ClassId
@@ -971,7 +1078,7 @@ func (o *EquipmentPsu) UnmarshalJSON(bytes []byte) (err error) {
 
 	varEquipmentPsu := _EquipmentPsu{}
 
-	err = json.Unmarshal(bytes, &varEquipmentPsu)
+	err = json.Unmarshal(data, &varEquipmentPsu)
 	if err == nil {
 		o.EquipmentBase = varEquipmentPsu.EquipmentBase
 	} else {
@@ -980,7 +1087,7 @@ func (o *EquipmentPsu) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Description")

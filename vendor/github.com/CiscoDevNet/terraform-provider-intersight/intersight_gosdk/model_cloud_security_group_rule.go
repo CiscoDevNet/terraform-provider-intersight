@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the CloudSecurityGroupRule type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &CloudSecurityGroupRule{}
 
 // CloudSecurityGroupRule A single ingress or egress group rule, allow to filter traffic to virtual machine, based on protocols and port numbers.
 type CloudSecurityGroupRule struct {
@@ -124,7 +128,7 @@ func (o *CloudSecurityGroupRule) SetObjectType(v string) {
 
 // GetAction returns the Action field value if set, zero value otherwise.
 func (o *CloudSecurityGroupRule) GetAction() string {
-	if o == nil || o.Action == nil {
+	if o == nil || IsNil(o.Action) {
 		var ret string
 		return ret
 	}
@@ -134,7 +138,7 @@ func (o *CloudSecurityGroupRule) GetAction() string {
 // GetActionOk returns a tuple with the Action field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudSecurityGroupRule) GetActionOk() (*string, bool) {
-	if o == nil || o.Action == nil {
+	if o == nil || IsNil(o.Action) {
 		return nil, false
 	}
 	return o.Action, true
@@ -142,7 +146,7 @@ func (o *CloudSecurityGroupRule) GetActionOk() (*string, bool) {
 
 // HasAction returns a boolean if a field has been set.
 func (o *CloudSecurityGroupRule) HasAction() bool {
-	if o != nil && o.Action != nil {
+	if o != nil && !IsNil(o.Action) {
 		return true
 	}
 
@@ -156,7 +160,7 @@ func (o *CloudSecurityGroupRule) SetAction(v string) {
 
 // GetDescription returns the Description field value if set, zero value otherwise.
 func (o *CloudSecurityGroupRule) GetDescription() string {
-	if o == nil || o.Description == nil {
+	if o == nil || IsNil(o.Description) {
 		var ret string
 		return ret
 	}
@@ -166,7 +170,7 @@ func (o *CloudSecurityGroupRule) GetDescription() string {
 // GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudSecurityGroupRule) GetDescriptionOk() (*string, bool) {
-	if o == nil || o.Description == nil {
+	if o == nil || IsNil(o.Description) {
 		return nil, false
 	}
 	return o.Description, true
@@ -174,7 +178,7 @@ func (o *CloudSecurityGroupRule) GetDescriptionOk() (*string, bool) {
 
 // HasDescription returns a boolean if a field has been set.
 func (o *CloudSecurityGroupRule) HasDescription() bool {
-	if o != nil && o.Description != nil {
+	if o != nil && !IsNil(o.Description) {
 		return true
 	}
 
@@ -188,7 +192,7 @@ func (o *CloudSecurityGroupRule) SetDescription(v string) {
 
 // GetEndPort returns the EndPort field value if set, zero value otherwise.
 func (o *CloudSecurityGroupRule) GetEndPort() int64 {
-	if o == nil || o.EndPort == nil {
+	if o == nil || IsNil(o.EndPort) {
 		var ret int64
 		return ret
 	}
@@ -198,7 +202,7 @@ func (o *CloudSecurityGroupRule) GetEndPort() int64 {
 // GetEndPortOk returns a tuple with the EndPort field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudSecurityGroupRule) GetEndPortOk() (*int64, bool) {
-	if o == nil || o.EndPort == nil {
+	if o == nil || IsNil(o.EndPort) {
 		return nil, false
 	}
 	return o.EndPort, true
@@ -206,7 +210,7 @@ func (o *CloudSecurityGroupRule) GetEndPortOk() (*int64, bool) {
 
 // HasEndPort returns a boolean if a field has been set.
 func (o *CloudSecurityGroupRule) HasEndPort() bool {
-	if o != nil && o.EndPort != nil {
+	if o != nil && !IsNil(o.EndPort) {
 		return true
 	}
 
@@ -220,7 +224,7 @@ func (o *CloudSecurityGroupRule) SetEndPort(v int64) {
 
 // GetEtherType returns the EtherType field value if set, zero value otherwise.
 func (o *CloudSecurityGroupRule) GetEtherType() string {
-	if o == nil || o.EtherType == nil {
+	if o == nil || IsNil(o.EtherType) {
 		var ret string
 		return ret
 	}
@@ -230,7 +234,7 @@ func (o *CloudSecurityGroupRule) GetEtherType() string {
 // GetEtherTypeOk returns a tuple with the EtherType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudSecurityGroupRule) GetEtherTypeOk() (*string, bool) {
-	if o == nil || o.EtherType == nil {
+	if o == nil || IsNil(o.EtherType) {
 		return nil, false
 	}
 	return o.EtherType, true
@@ -238,7 +242,7 @@ func (o *CloudSecurityGroupRule) GetEtherTypeOk() (*string, bool) {
 
 // HasEtherType returns a boolean if a field has been set.
 func (o *CloudSecurityGroupRule) HasEtherType() bool {
-	if o != nil && o.EtherType != nil {
+	if o != nil && !IsNil(o.EtherType) {
 		return true
 	}
 
@@ -252,7 +256,7 @@ func (o *CloudSecurityGroupRule) SetEtherType(v string) {
 
 // GetIdentity returns the Identity field value if set, zero value otherwise.
 func (o *CloudSecurityGroupRule) GetIdentity() string {
-	if o == nil || o.Identity == nil {
+	if o == nil || IsNil(o.Identity) {
 		var ret string
 		return ret
 	}
@@ -262,7 +266,7 @@ func (o *CloudSecurityGroupRule) GetIdentity() string {
 // GetIdentityOk returns a tuple with the Identity field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudSecurityGroupRule) GetIdentityOk() (*string, bool) {
-	if o == nil || o.Identity == nil {
+	if o == nil || IsNil(o.Identity) {
 		return nil, false
 	}
 	return o.Identity, true
@@ -270,7 +274,7 @@ func (o *CloudSecurityGroupRule) GetIdentityOk() (*string, bool) {
 
 // HasIdentity returns a boolean if a field has been set.
 func (o *CloudSecurityGroupRule) HasIdentity() bool {
-	if o != nil && o.Identity != nil {
+	if o != nil && !IsNil(o.Identity) {
 		return true
 	}
 
@@ -284,7 +288,7 @@ func (o *CloudSecurityGroupRule) SetIdentity(v string) {
 
 // GetIndex returns the Index field value if set, zero value otherwise.
 func (o *CloudSecurityGroupRule) GetIndex() int64 {
-	if o == nil || o.Index == nil {
+	if o == nil || IsNil(o.Index) {
 		var ret int64
 		return ret
 	}
@@ -294,7 +298,7 @@ func (o *CloudSecurityGroupRule) GetIndex() int64 {
 // GetIndexOk returns a tuple with the Index field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudSecurityGroupRule) GetIndexOk() (*int64, bool) {
-	if o == nil || o.Index == nil {
+	if o == nil || IsNil(o.Index) {
 		return nil, false
 	}
 	return o.Index, true
@@ -302,7 +306,7 @@ func (o *CloudSecurityGroupRule) GetIndexOk() (*int64, bool) {
 
 // HasIndex returns a boolean if a field has been set.
 func (o *CloudSecurityGroupRule) HasIndex() bool {
-	if o != nil && o.Index != nil {
+	if o != nil && !IsNil(o.Index) {
 		return true
 	}
 
@@ -316,7 +320,7 @@ func (o *CloudSecurityGroupRule) SetIndex(v int64) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *CloudSecurityGroupRule) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -326,7 +330,7 @@ func (o *CloudSecurityGroupRule) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudSecurityGroupRule) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -334,7 +338,7 @@ func (o *CloudSecurityGroupRule) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *CloudSecurityGroupRule) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -359,7 +363,7 @@ func (o *CloudSecurityGroupRule) GetPortList() []int64 {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CloudSecurityGroupRule) GetPortListOk() ([]int64, bool) {
-	if o == nil || o.PortList == nil {
+	if o == nil || IsNil(o.PortList) {
 		return nil, false
 	}
 	return o.PortList, true
@@ -367,7 +371,7 @@ func (o *CloudSecurityGroupRule) GetPortListOk() ([]int64, bool) {
 
 // HasPortList returns a boolean if a field has been set.
 func (o *CloudSecurityGroupRule) HasPortList() bool {
-	if o != nil && o.PortList != nil {
+	if o != nil && IsNil(o.PortList) {
 		return true
 	}
 
@@ -381,7 +385,7 @@ func (o *CloudSecurityGroupRule) SetPortList(v []int64) {
 
 // GetProtocol returns the Protocol field value if set, zero value otherwise.
 func (o *CloudSecurityGroupRule) GetProtocol() string {
-	if o == nil || o.Protocol == nil {
+	if o == nil || IsNil(o.Protocol) {
 		var ret string
 		return ret
 	}
@@ -391,7 +395,7 @@ func (o *CloudSecurityGroupRule) GetProtocol() string {
 // GetProtocolOk returns a tuple with the Protocol field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudSecurityGroupRule) GetProtocolOk() (*string, bool) {
-	if o == nil || o.Protocol == nil {
+	if o == nil || IsNil(o.Protocol) {
 		return nil, false
 	}
 	return o.Protocol, true
@@ -399,7 +403,7 @@ func (o *CloudSecurityGroupRule) GetProtocolOk() (*string, bool) {
 
 // HasProtocol returns a boolean if a field has been set.
 func (o *CloudSecurityGroupRule) HasProtocol() bool {
-	if o != nil && o.Protocol != nil {
+	if o != nil && !IsNil(o.Protocol) {
 		return true
 	}
 
@@ -424,7 +428,7 @@ func (o *CloudSecurityGroupRule) GetSourceCidr() []string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CloudSecurityGroupRule) GetSourceCidrOk() ([]string, bool) {
-	if o == nil || o.SourceCidr == nil {
+	if o == nil || IsNil(o.SourceCidr) {
 		return nil, false
 	}
 	return o.SourceCidr, true
@@ -432,7 +436,7 @@ func (o *CloudSecurityGroupRule) GetSourceCidrOk() ([]string, bool) {
 
 // HasSourceCidr returns a boolean if a field has been set.
 func (o *CloudSecurityGroupRule) HasSourceCidr() bool {
-	if o != nil && o.SourceCidr != nil {
+	if o != nil && IsNil(o.SourceCidr) {
 		return true
 	}
 
@@ -446,7 +450,7 @@ func (o *CloudSecurityGroupRule) SetSourceCidr(v []string) {
 
 // GetSourceSecurityGroup returns the SourceSecurityGroup field value if set, zero value otherwise.
 func (o *CloudSecurityGroupRule) GetSourceSecurityGroup() string {
-	if o == nil || o.SourceSecurityGroup == nil {
+	if o == nil || IsNil(o.SourceSecurityGroup) {
 		var ret string
 		return ret
 	}
@@ -456,7 +460,7 @@ func (o *CloudSecurityGroupRule) GetSourceSecurityGroup() string {
 // GetSourceSecurityGroupOk returns a tuple with the SourceSecurityGroup field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudSecurityGroupRule) GetSourceSecurityGroupOk() (*string, bool) {
-	if o == nil || o.SourceSecurityGroup == nil {
+	if o == nil || IsNil(o.SourceSecurityGroup) {
 		return nil, false
 	}
 	return o.SourceSecurityGroup, true
@@ -464,7 +468,7 @@ func (o *CloudSecurityGroupRule) GetSourceSecurityGroupOk() (*string, bool) {
 
 // HasSourceSecurityGroup returns a boolean if a field has been set.
 func (o *CloudSecurityGroupRule) HasSourceSecurityGroup() bool {
-	if o != nil && o.SourceSecurityGroup != nil {
+	if o != nil && !IsNil(o.SourceSecurityGroup) {
 		return true
 	}
 
@@ -478,7 +482,7 @@ func (o *CloudSecurityGroupRule) SetSourceSecurityGroup(v string) {
 
 // GetStartPort returns the StartPort field value if set, zero value otherwise.
 func (o *CloudSecurityGroupRule) GetStartPort() int64 {
-	if o == nil || o.StartPort == nil {
+	if o == nil || IsNil(o.StartPort) {
 		var ret int64
 		return ret
 	}
@@ -488,7 +492,7 @@ func (o *CloudSecurityGroupRule) GetStartPort() int64 {
 // GetStartPortOk returns a tuple with the StartPort field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudSecurityGroupRule) GetStartPortOk() (*int64, bool) {
-	if o == nil || o.StartPort == nil {
+	if o == nil || IsNil(o.StartPort) {
 		return nil, false
 	}
 	return o.StartPort, true
@@ -496,7 +500,7 @@ func (o *CloudSecurityGroupRule) GetStartPortOk() (*int64, bool) {
 
 // HasStartPort returns a boolean if a field has been set.
 func (o *CloudSecurityGroupRule) HasStartPort() bool {
-	if o != nil && o.StartPort != nil {
+	if o != nil && !IsNil(o.StartPort) {
 		return true
 	}
 
@@ -509,55 +513,59 @@ func (o *CloudSecurityGroupRule) SetStartPort(v int64) {
 }
 
 func (o CloudSecurityGroupRule) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o CloudSecurityGroupRule) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
 	errMoBaseComplexType = json.Unmarshal([]byte(serializedMoBaseComplexType), &toSerialize)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Action != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Action) {
 		toSerialize["Action"] = o.Action
 	}
-	if o.Description != nil {
+	if !IsNil(o.Description) {
 		toSerialize["Description"] = o.Description
 	}
-	if o.EndPort != nil {
+	if !IsNil(o.EndPort) {
 		toSerialize["EndPort"] = o.EndPort
 	}
-	if o.EtherType != nil {
+	if !IsNil(o.EtherType) {
 		toSerialize["EtherType"] = o.EtherType
 	}
-	if o.Identity != nil {
+	if !IsNil(o.Identity) {
 		toSerialize["Identity"] = o.Identity
 	}
-	if o.Index != nil {
+	if !IsNil(o.Index) {
 		toSerialize["Index"] = o.Index
 	}
-	if o.Name != nil {
+	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
 	}
 	if o.PortList != nil {
 		toSerialize["PortList"] = o.PortList
 	}
-	if o.Protocol != nil {
+	if !IsNil(o.Protocol) {
 		toSerialize["Protocol"] = o.Protocol
 	}
 	if o.SourceCidr != nil {
 		toSerialize["SourceCidr"] = o.SourceCidr
 	}
-	if o.SourceSecurityGroup != nil {
+	if !IsNil(o.SourceSecurityGroup) {
 		toSerialize["SourceSecurityGroup"] = o.SourceSecurityGroup
 	}
-	if o.StartPort != nil {
+	if !IsNil(o.StartPort) {
 		toSerialize["StartPort"] = o.StartPort
 	}
 
@@ -565,10 +573,32 @@ func (o CloudSecurityGroupRule) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *CloudSecurityGroupRule) UnmarshalJSON(bytes []byte) (err error) {
+func (o *CloudSecurityGroupRule) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type CloudSecurityGroupRuleWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -600,7 +630,7 @@ func (o *CloudSecurityGroupRule) UnmarshalJSON(bytes []byte) (err error) {
 
 	varCloudSecurityGroupRuleWithoutEmbeddedStruct := CloudSecurityGroupRuleWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varCloudSecurityGroupRuleWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varCloudSecurityGroupRuleWithoutEmbeddedStruct)
 	if err == nil {
 		varCloudSecurityGroupRule := _CloudSecurityGroupRule{}
 		varCloudSecurityGroupRule.ClassId = varCloudSecurityGroupRuleWithoutEmbeddedStruct.ClassId
@@ -624,7 +654,7 @@ func (o *CloudSecurityGroupRule) UnmarshalJSON(bytes []byte) (err error) {
 
 	varCloudSecurityGroupRule := _CloudSecurityGroupRule{}
 
-	err = json.Unmarshal(bytes, &varCloudSecurityGroupRule)
+	err = json.Unmarshal(data, &varCloudSecurityGroupRule)
 	if err == nil {
 		o.MoBaseComplexType = varCloudSecurityGroupRule.MoBaseComplexType
 	} else {
@@ -633,7 +663,7 @@ func (o *CloudSecurityGroupRule) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Action")

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the HyperflexIscsiNetwork type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &HyperflexIscsiNetwork{}
 
 // HyperflexIscsiNetwork The HyperFlex iSCSI Network configuration. Contains detailed information about the iSCSI network which includes subnet, gateway, Virtual local area network (VLAN) name, VLAN identity, maximum transmission unit (MTU), ranges of the IP addresses belonging to the HyperFlex iSCSI network.
 type HyperflexIscsiNetwork struct {
@@ -46,8 +50,8 @@ type HyperflexIscsiNetwork struct {
 	// The Virtual local area network (VLAN) name of the HyperFlex iSCSI network.
 	VlanName *string `json:"VlanName,omitempty"`
 	// The VLAN ID of the HyperFlex iSCSI network.
-	Vlanid               *int64                        `json:"Vlanid,omitempty"`
-	Cluster              *HyperflexClusterRelationship `json:"Cluster,omitempty"`
+	Vlanid               *int64                               `json:"Vlanid,omitempty"`
+	Cluster              NullableHyperflexClusterRelationship `json:"Cluster,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -126,7 +130,7 @@ func (o *HyperflexIscsiNetwork) SetObjectType(v string) {
 
 // GetGateway returns the Gateway field value if set, zero value otherwise.
 func (o *HyperflexIscsiNetwork) GetGateway() string {
-	if o == nil || o.Gateway == nil {
+	if o == nil || IsNil(o.Gateway) {
 		var ret string
 		return ret
 	}
@@ -136,7 +140,7 @@ func (o *HyperflexIscsiNetwork) GetGateway() string {
 // GetGatewayOk returns a tuple with the Gateway field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexIscsiNetwork) GetGatewayOk() (*string, bool) {
-	if o == nil || o.Gateway == nil {
+	if o == nil || IsNil(o.Gateway) {
 		return nil, false
 	}
 	return o.Gateway, true
@@ -144,7 +148,7 @@ func (o *HyperflexIscsiNetwork) GetGatewayOk() (*string, bool) {
 
 // HasGateway returns a boolean if a field has been set.
 func (o *HyperflexIscsiNetwork) HasGateway() bool {
-	if o != nil && o.Gateway != nil {
+	if o != nil && !IsNil(o.Gateway) {
 		return true
 	}
 
@@ -158,7 +162,7 @@ func (o *HyperflexIscsiNetwork) SetGateway(v string) {
 
 // GetInventorySource returns the InventorySource field value if set, zero value otherwise.
 func (o *HyperflexIscsiNetwork) GetInventorySource() string {
-	if o == nil || o.InventorySource == nil {
+	if o == nil || IsNil(o.InventorySource) {
 		var ret string
 		return ret
 	}
@@ -168,7 +172,7 @@ func (o *HyperflexIscsiNetwork) GetInventorySource() string {
 // GetInventorySourceOk returns a tuple with the InventorySource field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexIscsiNetwork) GetInventorySourceOk() (*string, bool) {
-	if o == nil || o.InventorySource == nil {
+	if o == nil || IsNil(o.InventorySource) {
 		return nil, false
 	}
 	return o.InventorySource, true
@@ -176,7 +180,7 @@ func (o *HyperflexIscsiNetwork) GetInventorySourceOk() (*string, bool) {
 
 // HasInventorySource returns a boolean if a field has been set.
 func (o *HyperflexIscsiNetwork) HasInventorySource() bool {
-	if o != nil && o.InventorySource != nil {
+	if o != nil && !IsNil(o.InventorySource) {
 		return true
 	}
 
@@ -201,7 +205,7 @@ func (o *HyperflexIscsiNetwork) GetIpRanges() []NetworkHyperFlexInternetProtocol
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *HyperflexIscsiNetwork) GetIpRangesOk() ([]NetworkHyperFlexInternetProtocolAddressRange, bool) {
-	if o == nil || o.IpRanges == nil {
+	if o == nil || IsNil(o.IpRanges) {
 		return nil, false
 	}
 	return o.IpRanges, true
@@ -209,7 +213,7 @@ func (o *HyperflexIscsiNetwork) GetIpRangesOk() ([]NetworkHyperFlexInternetProto
 
 // HasIpRanges returns a boolean if a field has been set.
 func (o *HyperflexIscsiNetwork) HasIpRanges() bool {
-	if o != nil && o.IpRanges != nil {
+	if o != nil && IsNil(o.IpRanges) {
 		return true
 	}
 
@@ -223,7 +227,7 @@ func (o *HyperflexIscsiNetwork) SetIpRanges(v []NetworkHyperFlexInternetProtocol
 
 // GetIscsiCip returns the IscsiCip field value if set, zero value otherwise.
 func (o *HyperflexIscsiNetwork) GetIscsiCip() string {
-	if o == nil || o.IscsiCip == nil {
+	if o == nil || IsNil(o.IscsiCip) {
 		var ret string
 		return ret
 	}
@@ -233,7 +237,7 @@ func (o *HyperflexIscsiNetwork) GetIscsiCip() string {
 // GetIscsiCipOk returns a tuple with the IscsiCip field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexIscsiNetwork) GetIscsiCipOk() (*string, bool) {
-	if o == nil || o.IscsiCip == nil {
+	if o == nil || IsNil(o.IscsiCip) {
 		return nil, false
 	}
 	return o.IscsiCip, true
@@ -241,7 +245,7 @@ func (o *HyperflexIscsiNetwork) GetIscsiCipOk() (*string, bool) {
 
 // HasIscsiCip returns a boolean if a field has been set.
 func (o *HyperflexIscsiNetwork) HasIscsiCip() bool {
-	if o != nil && o.IscsiCip != nil {
+	if o != nil && !IsNil(o.IscsiCip) {
 		return true
 	}
 
@@ -255,7 +259,7 @@ func (o *HyperflexIscsiNetwork) SetIscsiCip(v string) {
 
 // GetMtu returns the Mtu field value if set, zero value otherwise.
 func (o *HyperflexIscsiNetwork) GetMtu() string {
-	if o == nil || o.Mtu == nil {
+	if o == nil || IsNil(o.Mtu) {
 		var ret string
 		return ret
 	}
@@ -265,7 +269,7 @@ func (o *HyperflexIscsiNetwork) GetMtu() string {
 // GetMtuOk returns a tuple with the Mtu field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexIscsiNetwork) GetMtuOk() (*string, bool) {
-	if o == nil || o.Mtu == nil {
+	if o == nil || IsNil(o.Mtu) {
 		return nil, false
 	}
 	return o.Mtu, true
@@ -273,7 +277,7 @@ func (o *HyperflexIscsiNetwork) GetMtuOk() (*string, bool) {
 
 // HasMtu returns a boolean if a field has been set.
 func (o *HyperflexIscsiNetwork) HasMtu() bool {
-	if o != nil && o.Mtu != nil {
+	if o != nil && !IsNil(o.Mtu) {
 		return true
 	}
 
@@ -287,7 +291,7 @@ func (o *HyperflexIscsiNetwork) SetMtu(v string) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *HyperflexIscsiNetwork) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -297,7 +301,7 @@ func (o *HyperflexIscsiNetwork) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexIscsiNetwork) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -305,7 +309,7 @@ func (o *HyperflexIscsiNetwork) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *HyperflexIscsiNetwork) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -319,7 +323,7 @@ func (o *HyperflexIscsiNetwork) SetName(v string) {
 
 // GetSubnet returns the Subnet field value if set, zero value otherwise.
 func (o *HyperflexIscsiNetwork) GetSubnet() string {
-	if o == nil || o.Subnet == nil {
+	if o == nil || IsNil(o.Subnet) {
 		var ret string
 		return ret
 	}
@@ -329,7 +333,7 @@ func (o *HyperflexIscsiNetwork) GetSubnet() string {
 // GetSubnetOk returns a tuple with the Subnet field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexIscsiNetwork) GetSubnetOk() (*string, bool) {
-	if o == nil || o.Subnet == nil {
+	if o == nil || IsNil(o.Subnet) {
 		return nil, false
 	}
 	return o.Subnet, true
@@ -337,7 +341,7 @@ func (o *HyperflexIscsiNetwork) GetSubnetOk() (*string, bool) {
 
 // HasSubnet returns a boolean if a field has been set.
 func (o *HyperflexIscsiNetwork) HasSubnet() bool {
-	if o != nil && o.Subnet != nil {
+	if o != nil && !IsNil(o.Subnet) {
 		return true
 	}
 
@@ -351,7 +355,7 @@ func (o *HyperflexIscsiNetwork) SetSubnet(v string) {
 
 // GetUcsHost returns the UcsHost field value if set, zero value otherwise.
 func (o *HyperflexIscsiNetwork) GetUcsHost() string {
-	if o == nil || o.UcsHost == nil {
+	if o == nil || IsNil(o.UcsHost) {
 		var ret string
 		return ret
 	}
@@ -361,7 +365,7 @@ func (o *HyperflexIscsiNetwork) GetUcsHost() string {
 // GetUcsHostOk returns a tuple with the UcsHost field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexIscsiNetwork) GetUcsHostOk() (*string, bool) {
-	if o == nil || o.UcsHost == nil {
+	if o == nil || IsNil(o.UcsHost) {
 		return nil, false
 	}
 	return o.UcsHost, true
@@ -369,7 +373,7 @@ func (o *HyperflexIscsiNetwork) GetUcsHostOk() (*string, bool) {
 
 // HasUcsHost returns a boolean if a field has been set.
 func (o *HyperflexIscsiNetwork) HasUcsHost() bool {
-	if o != nil && o.UcsHost != nil {
+	if o != nil && !IsNil(o.UcsHost) {
 		return true
 	}
 
@@ -383,7 +387,7 @@ func (o *HyperflexIscsiNetwork) SetUcsHost(v string) {
 
 // GetUuid returns the Uuid field value if set, zero value otherwise.
 func (o *HyperflexIscsiNetwork) GetUuid() string {
-	if o == nil || o.Uuid == nil {
+	if o == nil || IsNil(o.Uuid) {
 		var ret string
 		return ret
 	}
@@ -393,7 +397,7 @@ func (o *HyperflexIscsiNetwork) GetUuid() string {
 // GetUuidOk returns a tuple with the Uuid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexIscsiNetwork) GetUuidOk() (*string, bool) {
-	if o == nil || o.Uuid == nil {
+	if o == nil || IsNil(o.Uuid) {
 		return nil, false
 	}
 	return o.Uuid, true
@@ -401,7 +405,7 @@ func (o *HyperflexIscsiNetwork) GetUuidOk() (*string, bool) {
 
 // HasUuid returns a boolean if a field has been set.
 func (o *HyperflexIscsiNetwork) HasUuid() bool {
-	if o != nil && o.Uuid != nil {
+	if o != nil && !IsNil(o.Uuid) {
 		return true
 	}
 
@@ -415,7 +419,7 @@ func (o *HyperflexIscsiNetwork) SetUuid(v string) {
 
 // GetVersion returns the Version field value if set, zero value otherwise.
 func (o *HyperflexIscsiNetwork) GetVersion() int64 {
-	if o == nil || o.Version == nil {
+	if o == nil || IsNil(o.Version) {
 		var ret int64
 		return ret
 	}
@@ -425,7 +429,7 @@ func (o *HyperflexIscsiNetwork) GetVersion() int64 {
 // GetVersionOk returns a tuple with the Version field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexIscsiNetwork) GetVersionOk() (*int64, bool) {
-	if o == nil || o.Version == nil {
+	if o == nil || IsNil(o.Version) {
 		return nil, false
 	}
 	return o.Version, true
@@ -433,7 +437,7 @@ func (o *HyperflexIscsiNetwork) GetVersionOk() (*int64, bool) {
 
 // HasVersion returns a boolean if a field has been set.
 func (o *HyperflexIscsiNetwork) HasVersion() bool {
-	if o != nil && o.Version != nil {
+	if o != nil && !IsNil(o.Version) {
 		return true
 	}
 
@@ -447,7 +451,7 @@ func (o *HyperflexIscsiNetwork) SetVersion(v int64) {
 
 // GetVlanName returns the VlanName field value if set, zero value otherwise.
 func (o *HyperflexIscsiNetwork) GetVlanName() string {
-	if o == nil || o.VlanName == nil {
+	if o == nil || IsNil(o.VlanName) {
 		var ret string
 		return ret
 	}
@@ -457,7 +461,7 @@ func (o *HyperflexIscsiNetwork) GetVlanName() string {
 // GetVlanNameOk returns a tuple with the VlanName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexIscsiNetwork) GetVlanNameOk() (*string, bool) {
-	if o == nil || o.VlanName == nil {
+	if o == nil || IsNil(o.VlanName) {
 		return nil, false
 	}
 	return o.VlanName, true
@@ -465,7 +469,7 @@ func (o *HyperflexIscsiNetwork) GetVlanNameOk() (*string, bool) {
 
 // HasVlanName returns a boolean if a field has been set.
 func (o *HyperflexIscsiNetwork) HasVlanName() bool {
-	if o != nil && o.VlanName != nil {
+	if o != nil && !IsNil(o.VlanName) {
 		return true
 	}
 
@@ -479,7 +483,7 @@ func (o *HyperflexIscsiNetwork) SetVlanName(v string) {
 
 // GetVlanid returns the Vlanid field value if set, zero value otherwise.
 func (o *HyperflexIscsiNetwork) GetVlanid() int64 {
-	if o == nil || o.Vlanid == nil {
+	if o == nil || IsNil(o.Vlanid) {
 		var ret int64
 		return ret
 	}
@@ -489,7 +493,7 @@ func (o *HyperflexIscsiNetwork) GetVlanid() int64 {
 // GetVlanidOk returns a tuple with the Vlanid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexIscsiNetwork) GetVlanidOk() (*int64, bool) {
-	if o == nil || o.Vlanid == nil {
+	if o == nil || IsNil(o.Vlanid) {
 		return nil, false
 	}
 	return o.Vlanid, true
@@ -497,7 +501,7 @@ func (o *HyperflexIscsiNetwork) GetVlanidOk() (*int64, bool) {
 
 // HasVlanid returns a boolean if a field has been set.
 func (o *HyperflexIscsiNetwork) HasVlanid() bool {
-	if o != nil && o.Vlanid != nil {
+	if o != nil && !IsNil(o.Vlanid) {
 		return true
 	}
 
@@ -509,102 +513,139 @@ func (o *HyperflexIscsiNetwork) SetVlanid(v int64) {
 	o.Vlanid = &v
 }
 
-// GetCluster returns the Cluster field value if set, zero value otherwise.
+// GetCluster returns the Cluster field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *HyperflexIscsiNetwork) GetCluster() HyperflexClusterRelationship {
-	if o == nil || o.Cluster == nil {
+	if o == nil || IsNil(o.Cluster.Get()) {
 		var ret HyperflexClusterRelationship
 		return ret
 	}
-	return *o.Cluster
+	return *o.Cluster.Get()
 }
 
 // GetClusterOk returns a tuple with the Cluster field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *HyperflexIscsiNetwork) GetClusterOk() (*HyperflexClusterRelationship, bool) {
-	if o == nil || o.Cluster == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Cluster, true
+	return o.Cluster.Get(), o.Cluster.IsSet()
 }
 
 // HasCluster returns a boolean if a field has been set.
 func (o *HyperflexIscsiNetwork) HasCluster() bool {
-	if o != nil && o.Cluster != nil {
+	if o != nil && o.Cluster.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetCluster gets a reference to the given HyperflexClusterRelationship and assigns it to the Cluster field.
+// SetCluster gets a reference to the given NullableHyperflexClusterRelationship and assigns it to the Cluster field.
 func (o *HyperflexIscsiNetwork) SetCluster(v HyperflexClusterRelationship) {
-	o.Cluster = &v
+	o.Cluster.Set(&v)
+}
+
+// SetClusterNil sets the value for Cluster to be an explicit nil
+func (o *HyperflexIscsiNetwork) SetClusterNil() {
+	o.Cluster.Set(nil)
+}
+
+// UnsetCluster ensures that no value is present for Cluster, not even an explicit nil
+func (o *HyperflexIscsiNetwork) UnsetCluster() {
+	o.Cluster.Unset()
 }
 
 func (o HyperflexIscsiNetwork) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o HyperflexIscsiNetwork) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Gateway != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Gateway) {
 		toSerialize["Gateway"] = o.Gateway
 	}
-	if o.InventorySource != nil {
+	if !IsNil(o.InventorySource) {
 		toSerialize["InventorySource"] = o.InventorySource
 	}
 	if o.IpRanges != nil {
 		toSerialize["IpRanges"] = o.IpRanges
 	}
-	if o.IscsiCip != nil {
+	if !IsNil(o.IscsiCip) {
 		toSerialize["IscsiCip"] = o.IscsiCip
 	}
-	if o.Mtu != nil {
+	if !IsNil(o.Mtu) {
 		toSerialize["Mtu"] = o.Mtu
 	}
-	if o.Name != nil {
+	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
 	}
-	if o.Subnet != nil {
+	if !IsNil(o.Subnet) {
 		toSerialize["Subnet"] = o.Subnet
 	}
-	if o.UcsHost != nil {
+	if !IsNil(o.UcsHost) {
 		toSerialize["UcsHost"] = o.UcsHost
 	}
-	if o.Uuid != nil {
+	if !IsNil(o.Uuid) {
 		toSerialize["Uuid"] = o.Uuid
 	}
-	if o.Version != nil {
+	if !IsNil(o.Version) {
 		toSerialize["Version"] = o.Version
 	}
-	if o.VlanName != nil {
+	if !IsNil(o.VlanName) {
 		toSerialize["VlanName"] = o.VlanName
 	}
-	if o.Vlanid != nil {
+	if !IsNil(o.Vlanid) {
 		toSerialize["Vlanid"] = o.Vlanid
 	}
-	if o.Cluster != nil {
-		toSerialize["Cluster"] = o.Cluster
+	if o.Cluster.IsSet() {
+		toSerialize["Cluster"] = o.Cluster.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *HyperflexIscsiNetwork) UnmarshalJSON(bytes []byte) (err error) {
+func (o *HyperflexIscsiNetwork) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type HyperflexIscsiNetworkWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -632,13 +673,13 @@ func (o *HyperflexIscsiNetwork) UnmarshalJSON(bytes []byte) (err error) {
 		// The Virtual local area network (VLAN) name of the HyperFlex iSCSI network.
 		VlanName *string `json:"VlanName,omitempty"`
 		// The VLAN ID of the HyperFlex iSCSI network.
-		Vlanid  *int64                        `json:"Vlanid,omitempty"`
-		Cluster *HyperflexClusterRelationship `json:"Cluster,omitempty"`
+		Vlanid  *int64                               `json:"Vlanid,omitempty"`
+		Cluster NullableHyperflexClusterRelationship `json:"Cluster,omitempty"`
 	}
 
 	varHyperflexIscsiNetworkWithoutEmbeddedStruct := HyperflexIscsiNetworkWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varHyperflexIscsiNetworkWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varHyperflexIscsiNetworkWithoutEmbeddedStruct)
 	if err == nil {
 		varHyperflexIscsiNetwork := _HyperflexIscsiNetwork{}
 		varHyperflexIscsiNetwork.ClassId = varHyperflexIscsiNetworkWithoutEmbeddedStruct.ClassId
@@ -663,7 +704,7 @@ func (o *HyperflexIscsiNetwork) UnmarshalJSON(bytes []byte) (err error) {
 
 	varHyperflexIscsiNetwork := _HyperflexIscsiNetwork{}
 
-	err = json.Unmarshal(bytes, &varHyperflexIscsiNetwork)
+	err = json.Unmarshal(data, &varHyperflexIscsiNetwork)
 	if err == nil {
 		o.MoBaseMo = varHyperflexIscsiNetwork.MoBaseMo
 	} else {
@@ -672,7 +713,7 @@ func (o *HyperflexIscsiNetwork) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Gateway")

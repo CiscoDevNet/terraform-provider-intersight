@@ -15,11 +15,11 @@ Name | Type | Description | Notes
 **PartNumber** | Pointer to **string** | Part Number identifier for the IO module. | [optional] [readonly] 
 **Pid** | Pointer to **string** | This field identifies the Product ID for systemIOController. | [optional] [readonly] 
 **SystemIoControllerId** | Pointer to **int64** | This represents system I/O Controller identifier. | [optional] [readonly] 
-**Cmc** | Pointer to [**ManagementControllerRelationship**](ManagementControllerRelationship.md) |  | [optional] 
-**EquipmentChassis** | Pointer to [**EquipmentChassisRelationship**](EquipmentChassisRelationship.md) |  | [optional] 
-**InventoryDeviceInfo** | Pointer to [**InventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
-**SharedIoModule** | Pointer to [**EquipmentSharedIoModuleRelationship**](EquipmentSharedIoModuleRelationship.md) |  | [optional] 
+**Cmc** | Pointer to [**NullableManagementControllerRelationship**](ManagementControllerRelationship.md) |  | [optional] 
+**EquipmentChassis** | Pointer to [**NullableEquipmentChassisRelationship**](EquipmentChassisRelationship.md) |  | [optional] 
+**InventoryDeviceInfo** | Pointer to [**NullableInventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
+**SharedIoModule** | Pointer to [**NullableEquipmentSharedIoModuleRelationship**](EquipmentSharedIoModuleRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -330,6 +330,16 @@ SetCmc sets Cmc field to given value.
 
 HasCmc returns a boolean if a field has been set.
 
+### SetCmcNil
+
+`func (o *EquipmentSystemIoController) SetCmcNil(b bool)`
+
+ SetCmcNil sets the value for Cmc to be an explicit nil
+
+### UnsetCmc
+`func (o *EquipmentSystemIoController) UnsetCmc()`
+
+UnsetCmc ensures that no value is present for Cmc, not even an explicit nil
 ### GetEquipmentChassis
 
 `func (o *EquipmentSystemIoController) GetEquipmentChassis() EquipmentChassisRelationship`
@@ -355,6 +365,16 @@ SetEquipmentChassis sets EquipmentChassis field to given value.
 
 HasEquipmentChassis returns a boolean if a field has been set.
 
+### SetEquipmentChassisNil
+
+`func (o *EquipmentSystemIoController) SetEquipmentChassisNil(b bool)`
+
+ SetEquipmentChassisNil sets the value for EquipmentChassis to be an explicit nil
+
+### UnsetEquipmentChassis
+`func (o *EquipmentSystemIoController) UnsetEquipmentChassis()`
+
+UnsetEquipmentChassis ensures that no value is present for EquipmentChassis, not even an explicit nil
 ### GetInventoryDeviceInfo
 
 `func (o *EquipmentSystemIoController) GetInventoryDeviceInfo() InventoryDeviceInfoRelationship`
@@ -380,6 +400,16 @@ SetInventoryDeviceInfo sets InventoryDeviceInfo field to given value.
 
 HasInventoryDeviceInfo returns a boolean if a field has been set.
 
+### SetInventoryDeviceInfoNil
+
+`func (o *EquipmentSystemIoController) SetInventoryDeviceInfoNil(b bool)`
+
+ SetInventoryDeviceInfoNil sets the value for InventoryDeviceInfo to be an explicit nil
+
+### UnsetInventoryDeviceInfo
+`func (o *EquipmentSystemIoController) UnsetInventoryDeviceInfo()`
+
+UnsetInventoryDeviceInfo ensures that no value is present for InventoryDeviceInfo, not even an explicit nil
 ### GetRegisteredDevice
 
 `func (o *EquipmentSystemIoController) GetRegisteredDevice() AssetDeviceRegistrationRelationship`
@@ -405,6 +435,16 @@ SetRegisteredDevice sets RegisteredDevice field to given value.
 
 HasRegisteredDevice returns a boolean if a field has been set.
 
+### SetRegisteredDeviceNil
+
+`func (o *EquipmentSystemIoController) SetRegisteredDeviceNil(b bool)`
+
+ SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+
+### UnsetRegisteredDevice
+`func (o *EquipmentSystemIoController) UnsetRegisteredDevice()`
+
+UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
 ### GetSharedIoModule
 
 `func (o *EquipmentSystemIoController) GetSharedIoModule() EquipmentSharedIoModuleRelationship`
@@ -430,6 +470,16 @@ SetSharedIoModule sets SharedIoModule field to given value.
 
 HasSharedIoModule returns a boolean if a field has been set.
 
+### SetSharedIoModuleNil
+
+`func (o *EquipmentSystemIoController) SetSharedIoModuleNil(b bool)`
+
+ SetSharedIoModuleNil sets the value for SharedIoModule to be an explicit nil
+
+### UnsetSharedIoModule
+`func (o *EquipmentSystemIoController) UnsetSharedIoModule()`
+
+UnsetSharedIoModule ensures that no value is present for SharedIoModule, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

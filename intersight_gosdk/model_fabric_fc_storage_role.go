@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the FabricFcStorageRole type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &FabricFcStorageRole{}
 
 // FabricFcStorageRole Configuration object sent by user to create a fc uplink port.
 type FabricFcStorageRole struct {
@@ -110,7 +114,7 @@ func (o *FabricFcStorageRole) SetObjectType(v string) {
 
 // GetAdminSpeed returns the AdminSpeed field value if set, zero value otherwise.
 func (o *FabricFcStorageRole) GetAdminSpeed() string {
-	if o == nil || o.AdminSpeed == nil {
+	if o == nil || IsNil(o.AdminSpeed) {
 		var ret string
 		return ret
 	}
@@ -120,7 +124,7 @@ func (o *FabricFcStorageRole) GetAdminSpeed() string {
 // GetAdminSpeedOk returns a tuple with the AdminSpeed field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FabricFcStorageRole) GetAdminSpeedOk() (*string, bool) {
-	if o == nil || o.AdminSpeed == nil {
+	if o == nil || IsNil(o.AdminSpeed) {
 		return nil, false
 	}
 	return o.AdminSpeed, true
@@ -128,7 +132,7 @@ func (o *FabricFcStorageRole) GetAdminSpeedOk() (*string, bool) {
 
 // HasAdminSpeed returns a boolean if a field has been set.
 func (o *FabricFcStorageRole) HasAdminSpeed() bool {
-	if o != nil && o.AdminSpeed != nil {
+	if o != nil && !IsNil(o.AdminSpeed) {
 		return true
 	}
 
@@ -142,7 +146,7 @@ func (o *FabricFcStorageRole) SetAdminSpeed(v string) {
 
 // GetVsanId returns the VsanId field value if set, zero value otherwise.
 func (o *FabricFcStorageRole) GetVsanId() int64 {
-	if o == nil || o.VsanId == nil {
+	if o == nil || IsNil(o.VsanId) {
 		var ret int64
 		return ret
 	}
@@ -152,7 +156,7 @@ func (o *FabricFcStorageRole) GetVsanId() int64 {
 // GetVsanIdOk returns a tuple with the VsanId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FabricFcStorageRole) GetVsanIdOk() (*int64, bool) {
-	if o == nil || o.VsanId == nil {
+	if o == nil || IsNil(o.VsanId) {
 		return nil, false
 	}
 	return o.VsanId, true
@@ -160,7 +164,7 @@ func (o *FabricFcStorageRole) GetVsanIdOk() (*int64, bool) {
 
 // HasVsanId returns a boolean if a field has been set.
 func (o *FabricFcStorageRole) HasVsanId() bool {
-	if o != nil && o.VsanId != nil {
+	if o != nil && !IsNil(o.VsanId) {
 		return true
 	}
 
@@ -173,25 +177,29 @@ func (o *FabricFcStorageRole) SetVsanId(v int64) {
 }
 
 func (o FabricFcStorageRole) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o FabricFcStorageRole) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedFabricPortRole, errFabricPortRole := json.Marshal(o.FabricPortRole)
 	if errFabricPortRole != nil {
-		return []byte{}, errFabricPortRole
+		return map[string]interface{}{}, errFabricPortRole
 	}
 	errFabricPortRole = json.Unmarshal([]byte(serializedFabricPortRole), &toSerialize)
 	if errFabricPortRole != nil {
-		return []byte{}, errFabricPortRole
+		return map[string]interface{}{}, errFabricPortRole
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.AdminSpeed != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.AdminSpeed) {
 		toSerialize["AdminSpeed"] = o.AdminSpeed
 	}
-	if o.VsanId != nil {
+	if !IsNil(o.VsanId) {
 		toSerialize["VsanId"] = o.VsanId
 	}
 
@@ -199,10 +207,32 @@ func (o FabricFcStorageRole) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *FabricFcStorageRole) UnmarshalJSON(bytes []byte) (err error) {
+func (o *FabricFcStorageRole) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type FabricFcStorageRoleWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -216,7 +246,7 @@ func (o *FabricFcStorageRole) UnmarshalJSON(bytes []byte) (err error) {
 
 	varFabricFcStorageRoleWithoutEmbeddedStruct := FabricFcStorageRoleWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varFabricFcStorageRoleWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varFabricFcStorageRoleWithoutEmbeddedStruct)
 	if err == nil {
 		varFabricFcStorageRole := _FabricFcStorageRole{}
 		varFabricFcStorageRole.ClassId = varFabricFcStorageRoleWithoutEmbeddedStruct.ClassId
@@ -230,7 +260,7 @@ func (o *FabricFcStorageRole) UnmarshalJSON(bytes []byte) (err error) {
 
 	varFabricFcStorageRole := _FabricFcStorageRole{}
 
-	err = json.Unmarshal(bytes, &varFabricFcStorageRole)
+	err = json.Unmarshal(data, &varFabricFcStorageRole)
 	if err == nil {
 		o.FabricPortRole = varFabricFcStorageRole.FabricPortRole
 	} else {
@@ -239,7 +269,7 @@ func (o *FabricFcStorageRole) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "AdminSpeed")

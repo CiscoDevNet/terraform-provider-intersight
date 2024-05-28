@@ -14,9 +14,9 @@ Name | Type | Description | Notes
 **Name** | Pointer to **string** | The name of the Identity Provider, for example Cisco, Okta, or OneID. | [optional] 
 **SkipWarning** | Pointer to **bool** | When users attempt the Account URL login with an unverified Domain Name, they get a warning stating that they are logging in using an unverified Domain Name. Enable the slider if you do not wish to see the warning message. | [optional] 
 **Type** | Pointer to **string** | Authentication protocol used by the IdP. * &#x60;saml&#x60; - Use SAML as the authentication protocol for sign-on. * &#x60;oidc&#x60; - Open ID connect to be used as an authentication protocol for sign-on. * &#x60;local&#x60; - The local authentication method to be used for sign-on. Local type is set to default for the Intersight Appliance IdP. | [optional] [default to "saml"]
-**Account** | Pointer to [**IamAccountRelationship**](IamAccountRelationship.md) |  | [optional] 
-**LdapPolicy** | Pointer to [**IamLdapPolicyRelationship**](IamLdapPolicyRelationship.md) |  | [optional] 
-**System** | Pointer to [**IamSystemRelationship**](IamSystemRelationship.md) |  | [optional] 
+**Account** | Pointer to [**NullableIamAccountRelationship**](IamAccountRelationship.md) |  | [optional] 
+**LdapPolicy** | Pointer to [**NullableIamLdapPolicyRelationship**](IamLdapPolicyRelationship.md) |  | [optional] 
+**System** | Pointer to [**NullableIamSystemRelationship**](IamSystemRelationship.md) |  | [optional] 
 **UserPreferences** | Pointer to [**[]IamUserPreferenceRelationship**](IamUserPreferenceRelationship.md) | An array of relationships to iamUserPreference resources. | [optional] [readonly] 
 **UserSettings** | Pointer to [**[]IamUserSettingRelationship**](IamUserSettingRelationship.md) | An array of relationships to iamUserSetting resources. | [optional] [readonly] 
 **Usergroups** | Pointer to [**[]IamUserGroupRelationship**](IamUserGroupRelationship.md) | An array of relationships to iamUserGroup resources. | [optional] 
@@ -316,6 +316,16 @@ SetAccount sets Account field to given value.
 
 HasAccount returns a boolean if a field has been set.
 
+### SetAccountNil
+
+`func (o *IamIdp) SetAccountNil(b bool)`
+
+ SetAccountNil sets the value for Account to be an explicit nil
+
+### UnsetAccount
+`func (o *IamIdp) UnsetAccount()`
+
+UnsetAccount ensures that no value is present for Account, not even an explicit nil
 ### GetLdapPolicy
 
 `func (o *IamIdp) GetLdapPolicy() IamLdapPolicyRelationship`
@@ -341,6 +351,16 @@ SetLdapPolicy sets LdapPolicy field to given value.
 
 HasLdapPolicy returns a boolean if a field has been set.
 
+### SetLdapPolicyNil
+
+`func (o *IamIdp) SetLdapPolicyNil(b bool)`
+
+ SetLdapPolicyNil sets the value for LdapPolicy to be an explicit nil
+
+### UnsetLdapPolicy
+`func (o *IamIdp) UnsetLdapPolicy()`
+
+UnsetLdapPolicy ensures that no value is present for LdapPolicy, not even an explicit nil
 ### GetSystem
 
 `func (o *IamIdp) GetSystem() IamSystemRelationship`
@@ -366,6 +386,16 @@ SetSystem sets System field to given value.
 
 HasSystem returns a boolean if a field has been set.
 
+### SetSystemNil
+
+`func (o *IamIdp) SetSystemNil(b bool)`
+
+ SetSystemNil sets the value for System to be an explicit nil
+
+### UnsetSystem
+`func (o *IamIdp) UnsetSystem()`
+
+UnsetSystem ensures that no value is present for System, not even an explicit nil
 ### GetUserPreferences
 
 `func (o *IamIdp) GetUserPreferences() []IamUserPreferenceRelationship`

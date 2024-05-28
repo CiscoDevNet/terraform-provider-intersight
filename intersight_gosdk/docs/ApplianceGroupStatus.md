@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **GroupName** | Pointer to **string** | The name of group, which includes Identity Management, Device Connector Service, Core Service, Analytics, Internal and Appliance. | [optional] [readonly] 
 **OverallStatus** | Pointer to **string** | The overall API status from this group&#39;s applications. | [optional] [readonly] 
 **Apps** | Pointer to [**[]ApplianceAppStatusRelationship**](ApplianceAppStatusRelationship.md) | An array of relationships to applianceAppStatus resources. | [optional] [readonly] 
-**SystemStatus** | Pointer to [**ApplianceSystemStatusRelationship**](ApplianceSystemStatusRelationship.md) |  | [optional] 
+**SystemStatus** | Pointer to [**NullableApplianceSystemStatusRelationship**](ApplianceSystemStatusRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -206,6 +206,16 @@ SetSystemStatus sets SystemStatus field to given value.
 
 HasSystemStatus returns a boolean if a field has been set.
 
+### SetSystemStatusNil
+
+`func (o *ApplianceGroupStatus) SetSystemStatusNil(b bool)`
+
+ SetSystemStatusNil sets the value for SystemStatus to be an explicit nil
+
+### UnsetSystemStatus
+`func (o *ApplianceGroupStatus) UnsetSystemStatus()`
+
+UnsetSystemStatus ensures that no value is present for SystemStatus, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

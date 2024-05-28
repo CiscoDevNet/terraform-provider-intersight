@@ -6,10 +6,10 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "storage.NetAppNonDataIpInterface"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "storage.NetAppNonDataIpInterface"]
-**Array** | Pointer to [**StorageNetAppClusterRelationship**](StorageNetAppClusterRelationship.md) |  | [optional] 
-**ArrayController** | Pointer to [**StorageNetAppNodeRelationship**](StorageNetAppNodeRelationship.md) |  | [optional] 
+**Array** | Pointer to [**NullableStorageNetAppClusterRelationship**](StorageNetAppClusterRelationship.md) |  | [optional] 
+**ArrayController** | Pointer to [**NullableStorageNetAppNodeRelationship**](StorageNetAppNodeRelationship.md) |  | [optional] 
 **Events** | Pointer to [**[]StorageNetAppNonDataIpInterfaceEventRelationship**](StorageNetAppNonDataIpInterfaceEventRelationship.md) | An array of relationships to storageNetAppNonDataIpInterfaceEvent resources. | [optional] [readonly] 
-**NetAppEthernetPort** | Pointer to [**StorageNetAppEthernetPortRelationship**](StorageNetAppEthernetPortRelationship.md) |  | [optional] 
+**NetAppEthernetPort** | Pointer to [**NullableStorageNetAppEthernetPortRelationship**](StorageNetAppEthernetPortRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -95,6 +95,16 @@ SetArray sets Array field to given value.
 
 HasArray returns a boolean if a field has been set.
 
+### SetArrayNil
+
+`func (o *StorageNetAppNonDataIpInterface) SetArrayNil(b bool)`
+
+ SetArrayNil sets the value for Array to be an explicit nil
+
+### UnsetArray
+`func (o *StorageNetAppNonDataIpInterface) UnsetArray()`
+
+UnsetArray ensures that no value is present for Array, not even an explicit nil
 ### GetArrayController
 
 `func (o *StorageNetAppNonDataIpInterface) GetArrayController() StorageNetAppNodeRelationship`
@@ -120,6 +130,16 @@ SetArrayController sets ArrayController field to given value.
 
 HasArrayController returns a boolean if a field has been set.
 
+### SetArrayControllerNil
+
+`func (o *StorageNetAppNonDataIpInterface) SetArrayControllerNil(b bool)`
+
+ SetArrayControllerNil sets the value for ArrayController to be an explicit nil
+
+### UnsetArrayController
+`func (o *StorageNetAppNonDataIpInterface) UnsetArrayController()`
+
+UnsetArrayController ensures that no value is present for ArrayController, not even an explicit nil
 ### GetEvents
 
 `func (o *StorageNetAppNonDataIpInterface) GetEvents() []StorageNetAppNonDataIpInterfaceEventRelationship`
@@ -180,6 +200,16 @@ SetNetAppEthernetPort sets NetAppEthernetPort field to given value.
 
 HasNetAppEthernetPort returns a boolean if a field has been set.
 
+### SetNetAppEthernetPortNil
+
+`func (o *StorageNetAppNonDataIpInterface) SetNetAppEthernetPortNil(b bool)`
+
+ SetNetAppEthernetPortNil sets the value for NetAppEthernetPort to be an explicit nil
+
+### UnsetNetAppEthernetPort
+`func (o *StorageNetAppNonDataIpInterface) UnsetNetAppEthernetPort()`
+
+UnsetNetAppEthernetPort ensures that no value is present for NetAppEthernetPort, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -9,8 +9,9 @@ Name | Type | Description | Notes
 **GroupPermissionRoles** | Pointer to [**[]IamGroupPermissionToRoles**](IamGroupPermissionToRoles.md) |  | [optional] 
 **Reevaluate** | Pointer to **bool** | Set Reevaluate to true to reevaluate the membership of a resource. | [optional] 
 **TargetApp** | Pointer to **string** | Name of the Service owning the resource. | [optional] [readonly] 
-**Holder** | Pointer to [**ResourceMembershipHolderRelationship**](ResourceMembershipHolderRelationship.md) |  | [optional] 
-**Resource** | Pointer to [**MoBaseMoRelationship**](MoBaseMoRelationship.md) |  | [optional] 
+**Holder** | Pointer to [**NullableResourceMembershipHolderRelationship**](ResourceMembershipHolderRelationship.md) |  | [optional] 
+**Resource** | Pointer to [**NullableMoBaseMoRelationship**](MoBaseMoRelationship.md) |  | [optional] 
+**ResourceAncestors** | Pointer to [**[]MoBaseMoRelationship**](MoBaseMoRelationship.md) | An array of relationships to moBaseMo resources. | [optional] 
 
 ## Methods
 
@@ -181,6 +182,16 @@ SetHolder sets Holder field to given value.
 
 HasHolder returns a boolean if a field has been set.
 
+### SetHolderNil
+
+`func (o *ResourceMembership) SetHolderNil(b bool)`
+
+ SetHolderNil sets the value for Holder to be an explicit nil
+
+### UnsetHolder
+`func (o *ResourceMembership) UnsetHolder()`
+
+UnsetHolder ensures that no value is present for Holder, not even an explicit nil
 ### GetResource
 
 `func (o *ResourceMembership) GetResource() MoBaseMoRelationship`
@@ -206,6 +217,51 @@ SetResource sets Resource field to given value.
 
 HasResource returns a boolean if a field has been set.
 
+### SetResourceNil
+
+`func (o *ResourceMembership) SetResourceNil(b bool)`
+
+ SetResourceNil sets the value for Resource to be an explicit nil
+
+### UnsetResource
+`func (o *ResourceMembership) UnsetResource()`
+
+UnsetResource ensures that no value is present for Resource, not even an explicit nil
+### GetResourceAncestors
+
+`func (o *ResourceMembership) GetResourceAncestors() []MoBaseMoRelationship`
+
+GetResourceAncestors returns the ResourceAncestors field if non-nil, zero value otherwise.
+
+### GetResourceAncestorsOk
+
+`func (o *ResourceMembership) GetResourceAncestorsOk() (*[]MoBaseMoRelationship, bool)`
+
+GetResourceAncestorsOk returns a tuple with the ResourceAncestors field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetResourceAncestors
+
+`func (o *ResourceMembership) SetResourceAncestors(v []MoBaseMoRelationship)`
+
+SetResourceAncestors sets ResourceAncestors field to given value.
+
+### HasResourceAncestors
+
+`func (o *ResourceMembership) HasResourceAncestors() bool`
+
+HasResourceAncestors returns a boolean if a field has been set.
+
+### SetResourceAncestorsNil
+
+`func (o *ResourceMembership) SetResourceAncestorsNil(b bool)`
+
+ SetResourceAncestorsNil sets the value for ResourceAncestors to be an explicit nil
+
+### UnsetResourceAncestors
+`func (o *ResourceMembership) UnsetResourceAncestors()`
+
+UnsetResourceAncestors ensures that no value is present for ResourceAncestors, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

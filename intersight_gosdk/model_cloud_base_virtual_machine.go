@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,10 +13,14 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 	"time"
 )
+
+// checks if the CloudBaseVirtualMachine type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &CloudBaseVirtualMachine{}
 
 // CloudBaseVirtualMachine BaseVirtualMachine is an abstract base type for all cloud virtual machines.
 type CloudBaseVirtualMachine struct {
@@ -127,7 +131,7 @@ func (o *CloudBaseVirtualMachine) SetObjectType(v string) {
 
 // GetBillingUnit returns the BillingUnit field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CloudBaseVirtualMachine) GetBillingUnit() CloudBillingUnit {
-	if o == nil || o.BillingUnit.Get() == nil {
+	if o == nil || IsNil(o.BillingUnit.Get()) {
 		var ret CloudBillingUnit
 		return ret
 	}
@@ -170,7 +174,7 @@ func (o *CloudBaseVirtualMachine) UnsetBillingUnit() {
 
 // GetImageInfo returns the ImageInfo field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CloudBaseVirtualMachine) GetImageInfo() CloudImageReference {
-	if o == nil || o.ImageInfo.Get() == nil {
+	if o == nil || IsNil(o.ImageInfo.Get()) {
 		var ret CloudImageReference
 		return ret
 	}
@@ -213,7 +217,7 @@ func (o *CloudBaseVirtualMachine) UnsetImageInfo() {
 
 // GetInstanceType returns the InstanceType field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CloudBaseVirtualMachine) GetInstanceType() CloudInstanceType {
-	if o == nil || o.InstanceType.Get() == nil {
+	if o == nil || IsNil(o.InstanceType.Get()) {
 		var ret CloudInstanceType
 		return ret
 	}
@@ -267,7 +271,7 @@ func (o *CloudBaseVirtualMachine) GetNetworkInterfaceAttachments() []CloudNetwor
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CloudBaseVirtualMachine) GetNetworkInterfaceAttachmentsOk() ([]CloudNetworkInterfaceAttachment, bool) {
-	if o == nil || o.NetworkInterfaceAttachments == nil {
+	if o == nil || IsNil(o.NetworkInterfaceAttachments) {
 		return nil, false
 	}
 	return o.NetworkInterfaceAttachments, true
@@ -275,7 +279,7 @@ func (o *CloudBaseVirtualMachine) GetNetworkInterfaceAttachmentsOk() ([]CloudNet
 
 // HasNetworkInterfaceAttachments returns a boolean if a field has been set.
 func (o *CloudBaseVirtualMachine) HasNetworkInterfaceAttachments() bool {
-	if o != nil && o.NetworkInterfaceAttachments != nil {
+	if o != nil && IsNil(o.NetworkInterfaceAttachments) {
 		return true
 	}
 
@@ -289,7 +293,7 @@ func (o *CloudBaseVirtualMachine) SetNetworkInterfaceAttachments(v []CloudNetwor
 
 // GetPrivateDns returns the PrivateDns field value if set, zero value otherwise.
 func (o *CloudBaseVirtualMachine) GetPrivateDns() string {
-	if o == nil || o.PrivateDns == nil {
+	if o == nil || IsNil(o.PrivateDns) {
 		var ret string
 		return ret
 	}
@@ -299,7 +303,7 @@ func (o *CloudBaseVirtualMachine) GetPrivateDns() string {
 // GetPrivateDnsOk returns a tuple with the PrivateDns field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudBaseVirtualMachine) GetPrivateDnsOk() (*string, bool) {
-	if o == nil || o.PrivateDns == nil {
+	if o == nil || IsNil(o.PrivateDns) {
 		return nil, false
 	}
 	return o.PrivateDns, true
@@ -307,7 +311,7 @@ func (o *CloudBaseVirtualMachine) GetPrivateDnsOk() (*string, bool) {
 
 // HasPrivateDns returns a boolean if a field has been set.
 func (o *CloudBaseVirtualMachine) HasPrivateDns() bool {
-	if o != nil && o.PrivateDns != nil {
+	if o != nil && !IsNil(o.PrivateDns) {
 		return true
 	}
 
@@ -321,7 +325,7 @@ func (o *CloudBaseVirtualMachine) SetPrivateDns(v string) {
 
 // GetPublicDns returns the PublicDns field value if set, zero value otherwise.
 func (o *CloudBaseVirtualMachine) GetPublicDns() string {
-	if o == nil || o.PublicDns == nil {
+	if o == nil || IsNil(o.PublicDns) {
 		var ret string
 		return ret
 	}
@@ -331,7 +335,7 @@ func (o *CloudBaseVirtualMachine) GetPublicDns() string {
 // GetPublicDnsOk returns a tuple with the PublicDns field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudBaseVirtualMachine) GetPublicDnsOk() (*string, bool) {
-	if o == nil || o.PublicDns == nil {
+	if o == nil || IsNil(o.PublicDns) {
 		return nil, false
 	}
 	return o.PublicDns, true
@@ -339,7 +343,7 @@ func (o *CloudBaseVirtualMachine) GetPublicDnsOk() (*string, bool) {
 
 // HasPublicDns returns a boolean if a field has been set.
 func (o *CloudBaseVirtualMachine) HasPublicDns() bool {
-	if o != nil && o.PublicDns != nil {
+	if o != nil && !IsNil(o.PublicDns) {
 		return true
 	}
 
@@ -353,7 +357,7 @@ func (o *CloudBaseVirtualMachine) SetPublicDns(v string) {
 
 // GetRegion returns the Region field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CloudBaseVirtualMachine) GetRegion() CloudCloudRegion {
-	if o == nil || o.Region.Get() == nil {
+	if o == nil || IsNil(o.Region.Get()) {
 		var ret CloudCloudRegion
 		return ret
 	}
@@ -396,7 +400,7 @@ func (o *CloudBaseVirtualMachine) UnsetRegion() {
 
 // GetTenancy returns the Tenancy field value if set, zero value otherwise.
 func (o *CloudBaseVirtualMachine) GetTenancy() string {
-	if o == nil || o.Tenancy == nil {
+	if o == nil || IsNil(o.Tenancy) {
 		var ret string
 		return ret
 	}
@@ -406,7 +410,7 @@ func (o *CloudBaseVirtualMachine) GetTenancy() string {
 // GetTenancyOk returns a tuple with the Tenancy field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudBaseVirtualMachine) GetTenancyOk() (*string, bool) {
-	if o == nil || o.Tenancy == nil {
+	if o == nil || IsNil(o.Tenancy) {
 		return nil, false
 	}
 	return o.Tenancy, true
@@ -414,7 +418,7 @@ func (o *CloudBaseVirtualMachine) GetTenancyOk() (*string, bool) {
 
 // HasTenancy returns a boolean if a field has been set.
 func (o *CloudBaseVirtualMachine) HasTenancy() bool {
-	if o != nil && o.Tenancy != nil {
+	if o != nil && !IsNil(o.Tenancy) {
 		return true
 	}
 
@@ -428,7 +432,7 @@ func (o *CloudBaseVirtualMachine) SetTenancy(v string) {
 
 // GetTerminationTime returns the TerminationTime field value if set, zero value otherwise.
 func (o *CloudBaseVirtualMachine) GetTerminationTime() time.Time {
-	if o == nil || o.TerminationTime == nil {
+	if o == nil || IsNil(o.TerminationTime) {
 		var ret time.Time
 		return ret
 	}
@@ -438,7 +442,7 @@ func (o *CloudBaseVirtualMachine) GetTerminationTime() time.Time {
 // GetTerminationTimeOk returns a tuple with the TerminationTime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudBaseVirtualMachine) GetTerminationTimeOk() (*time.Time, bool) {
-	if o == nil || o.TerminationTime == nil {
+	if o == nil || IsNil(o.TerminationTime) {
 		return nil, false
 	}
 	return o.TerminationTime, true
@@ -446,7 +450,7 @@ func (o *CloudBaseVirtualMachine) GetTerminationTimeOk() (*time.Time, bool) {
 
 // HasTerminationTime returns a boolean if a field has been set.
 func (o *CloudBaseVirtualMachine) HasTerminationTime() bool {
-	if o != nil && o.TerminationTime != nil {
+	if o != nil && !IsNil(o.TerminationTime) {
 		return true
 	}
 
@@ -471,7 +475,7 @@ func (o *CloudBaseVirtualMachine) GetVirtualMachineTags() []CloudCloudTag {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CloudBaseVirtualMachine) GetVirtualMachineTagsOk() ([]CloudCloudTag, bool) {
-	if o == nil || o.VirtualMachineTags == nil {
+	if o == nil || IsNil(o.VirtualMachineTags) {
 		return nil, false
 	}
 	return o.VirtualMachineTags, true
@@ -479,7 +483,7 @@ func (o *CloudBaseVirtualMachine) GetVirtualMachineTagsOk() ([]CloudCloudTag, bo
 
 // HasVirtualMachineTags returns a boolean if a field has been set.
 func (o *CloudBaseVirtualMachine) HasVirtualMachineTags() bool {
-	if o != nil && o.VirtualMachineTags != nil {
+	if o != nil && IsNil(o.VirtualMachineTags) {
 		return true
 	}
 
@@ -504,7 +508,7 @@ func (o *CloudBaseVirtualMachine) GetVolumeAttachments() []CloudVolumeAttachment
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CloudBaseVirtualMachine) GetVolumeAttachmentsOk() ([]CloudVolumeAttachment, bool) {
-	if o == nil || o.VolumeAttachments == nil {
+	if o == nil || IsNil(o.VolumeAttachments) {
 		return nil, false
 	}
 	return o.VolumeAttachments, true
@@ -512,7 +516,7 @@ func (o *CloudBaseVirtualMachine) GetVolumeAttachmentsOk() ([]CloudVolumeAttachm
 
 // HasVolumeAttachments returns a boolean if a field has been set.
 func (o *CloudBaseVirtualMachine) HasVolumeAttachments() bool {
-	if o != nil && o.VolumeAttachments != nil {
+	if o != nil && IsNil(o.VolumeAttachments) {
 		return true
 	}
 
@@ -526,7 +530,7 @@ func (o *CloudBaseVirtualMachine) SetVolumeAttachments(v []CloudVolumeAttachment
 
 // GetZone returns the Zone field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CloudBaseVirtualMachine) GetZone() CloudAvailabilityZone {
-	if o == nil || o.Zone.Get() == nil {
+	if o == nil || IsNil(o.Zone.Get()) {
 		var ret CloudAvailabilityZone
 		return ret
 	}
@@ -568,21 +572,25 @@ func (o *CloudBaseVirtualMachine) UnsetZone() {
 }
 
 func (o CloudBaseVirtualMachine) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o CloudBaseVirtualMachine) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedVirtualizationBaseVirtualMachine, errVirtualizationBaseVirtualMachine := json.Marshal(o.VirtualizationBaseVirtualMachine)
 	if errVirtualizationBaseVirtualMachine != nil {
-		return []byte{}, errVirtualizationBaseVirtualMachine
+		return map[string]interface{}{}, errVirtualizationBaseVirtualMachine
 	}
 	errVirtualizationBaseVirtualMachine = json.Unmarshal([]byte(serializedVirtualizationBaseVirtualMachine), &toSerialize)
 	if errVirtualizationBaseVirtualMachine != nil {
-		return []byte{}, errVirtualizationBaseVirtualMachine
+		return map[string]interface{}{}, errVirtualizationBaseVirtualMachine
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
 	if o.BillingUnit.IsSet() {
 		toSerialize["BillingUnit"] = o.BillingUnit.Get()
 	}
@@ -595,19 +603,19 @@ func (o CloudBaseVirtualMachine) MarshalJSON() ([]byte, error) {
 	if o.NetworkInterfaceAttachments != nil {
 		toSerialize["NetworkInterfaceAttachments"] = o.NetworkInterfaceAttachments
 	}
-	if o.PrivateDns != nil {
+	if !IsNil(o.PrivateDns) {
 		toSerialize["PrivateDns"] = o.PrivateDns
 	}
-	if o.PublicDns != nil {
+	if !IsNil(o.PublicDns) {
 		toSerialize["PublicDns"] = o.PublicDns
 	}
 	if o.Region.IsSet() {
 		toSerialize["Region"] = o.Region.Get()
 	}
-	if o.Tenancy != nil {
+	if !IsNil(o.Tenancy) {
 		toSerialize["Tenancy"] = o.Tenancy
 	}
-	if o.TerminationTime != nil {
+	if !IsNil(o.TerminationTime) {
 		toSerialize["TerminationTime"] = o.TerminationTime
 	}
 	if o.VirtualMachineTags != nil {
@@ -624,10 +632,32 @@ func (o CloudBaseVirtualMachine) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *CloudBaseVirtualMachine) UnmarshalJSON(bytes []byte) (err error) {
+func (o *CloudBaseVirtualMachine) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type CloudBaseVirtualMachineWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type.
 		ClassId string `json:"ClassId"`
@@ -653,7 +683,7 @@ func (o *CloudBaseVirtualMachine) UnmarshalJSON(bytes []byte) (err error) {
 
 	varCloudBaseVirtualMachineWithoutEmbeddedStruct := CloudBaseVirtualMachineWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varCloudBaseVirtualMachineWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varCloudBaseVirtualMachineWithoutEmbeddedStruct)
 	if err == nil {
 		varCloudBaseVirtualMachine := _CloudBaseVirtualMachine{}
 		varCloudBaseVirtualMachine.ClassId = varCloudBaseVirtualMachineWithoutEmbeddedStruct.ClassId
@@ -677,7 +707,7 @@ func (o *CloudBaseVirtualMachine) UnmarshalJSON(bytes []byte) (err error) {
 
 	varCloudBaseVirtualMachine := _CloudBaseVirtualMachine{}
 
-	err = json.Unmarshal(bytes, &varCloudBaseVirtualMachine)
+	err = json.Unmarshal(data, &varCloudBaseVirtualMachine)
 	if err == nil {
 		o.VirtualizationBaseVirtualMachine = varCloudBaseVirtualMachine.VirtualizationBaseVirtualMachine
 	} else {
@@ -686,7 +716,7 @@ func (o *CloudBaseVirtualMachine) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "BillingUnit")

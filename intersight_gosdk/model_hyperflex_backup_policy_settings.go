@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the HyperflexBackupPolicySettings type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &HyperflexBackupPolicySettings{}
 
 // HyperflexBackupPolicySettings HyperFlex Backup Policy settings definition.
 type HyperflexBackupPolicySettings struct {
@@ -118,7 +122,7 @@ func (o *HyperflexBackupPolicySettings) SetObjectType(v string) {
 
 // GetBackupDataStoreName returns the BackupDataStoreName field value if set, zero value otherwise.
 func (o *HyperflexBackupPolicySettings) GetBackupDataStoreName() string {
-	if o == nil || o.BackupDataStoreName == nil {
+	if o == nil || IsNil(o.BackupDataStoreName) {
 		var ret string
 		return ret
 	}
@@ -128,7 +132,7 @@ func (o *HyperflexBackupPolicySettings) GetBackupDataStoreName() string {
 // GetBackupDataStoreNameOk returns a tuple with the BackupDataStoreName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexBackupPolicySettings) GetBackupDataStoreNameOk() (*string, bool) {
-	if o == nil || o.BackupDataStoreName == nil {
+	if o == nil || IsNil(o.BackupDataStoreName) {
 		return nil, false
 	}
 	return o.BackupDataStoreName, true
@@ -136,7 +140,7 @@ func (o *HyperflexBackupPolicySettings) GetBackupDataStoreNameOk() (*string, boo
 
 // HasBackupDataStoreName returns a boolean if a field has been set.
 func (o *HyperflexBackupPolicySettings) HasBackupDataStoreName() bool {
-	if o != nil && o.BackupDataStoreName != nil {
+	if o != nil && !IsNil(o.BackupDataStoreName) {
 		return true
 	}
 
@@ -150,7 +154,7 @@ func (o *HyperflexBackupPolicySettings) SetBackupDataStoreName(v string) {
 
 // GetBackupDataStoreSize returns the BackupDataStoreSize field value if set, zero value otherwise.
 func (o *HyperflexBackupPolicySettings) GetBackupDataStoreSize() int64 {
-	if o == nil || o.BackupDataStoreSize == nil {
+	if o == nil || IsNil(o.BackupDataStoreSize) {
 		var ret int64
 		return ret
 	}
@@ -160,7 +164,7 @@ func (o *HyperflexBackupPolicySettings) GetBackupDataStoreSize() int64 {
 // GetBackupDataStoreSizeOk returns a tuple with the BackupDataStoreSize field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexBackupPolicySettings) GetBackupDataStoreSizeOk() (*int64, bool) {
-	if o == nil || o.BackupDataStoreSize == nil {
+	if o == nil || IsNil(o.BackupDataStoreSize) {
 		return nil, false
 	}
 	return o.BackupDataStoreSize, true
@@ -168,7 +172,7 @@ func (o *HyperflexBackupPolicySettings) GetBackupDataStoreSizeOk() (*int64, bool
 
 // HasBackupDataStoreSize returns a boolean if a field has been set.
 func (o *HyperflexBackupPolicySettings) HasBackupDataStoreSize() bool {
-	if o != nil && o.BackupDataStoreSize != nil {
+	if o != nil && !IsNil(o.BackupDataStoreSize) {
 		return true
 	}
 
@@ -182,7 +186,7 @@ func (o *HyperflexBackupPolicySettings) SetBackupDataStoreSize(v int64) {
 
 // GetBackupDataStoreSizeUnit returns the BackupDataStoreSizeUnit field value if set, zero value otherwise.
 func (o *HyperflexBackupPolicySettings) GetBackupDataStoreSizeUnit() string {
-	if o == nil || o.BackupDataStoreSizeUnit == nil {
+	if o == nil || IsNil(o.BackupDataStoreSizeUnit) {
 		var ret string
 		return ret
 	}
@@ -192,7 +196,7 @@ func (o *HyperflexBackupPolicySettings) GetBackupDataStoreSizeUnit() string {
 // GetBackupDataStoreSizeUnitOk returns a tuple with the BackupDataStoreSizeUnit field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexBackupPolicySettings) GetBackupDataStoreSizeUnitOk() (*string, bool) {
-	if o == nil || o.BackupDataStoreSizeUnit == nil {
+	if o == nil || IsNil(o.BackupDataStoreSizeUnit) {
 		return nil, false
 	}
 	return o.BackupDataStoreSizeUnit, true
@@ -200,7 +204,7 @@ func (o *HyperflexBackupPolicySettings) GetBackupDataStoreSizeUnitOk() (*string,
 
 // HasBackupDataStoreSizeUnit returns a boolean if a field has been set.
 func (o *HyperflexBackupPolicySettings) HasBackupDataStoreSizeUnit() bool {
-	if o != nil && o.BackupDataStoreSizeUnit != nil {
+	if o != nil && !IsNil(o.BackupDataStoreSizeUnit) {
 		return true
 	}
 
@@ -214,7 +218,7 @@ func (o *HyperflexBackupPolicySettings) SetBackupDataStoreSizeUnit(v string) {
 
 // GetDataStoreEncryptionEnabled returns the DataStoreEncryptionEnabled field value if set, zero value otherwise.
 func (o *HyperflexBackupPolicySettings) GetDataStoreEncryptionEnabled() bool {
-	if o == nil || o.DataStoreEncryptionEnabled == nil {
+	if o == nil || IsNil(o.DataStoreEncryptionEnabled) {
 		var ret bool
 		return ret
 	}
@@ -224,7 +228,7 @@ func (o *HyperflexBackupPolicySettings) GetDataStoreEncryptionEnabled() bool {
 // GetDataStoreEncryptionEnabledOk returns a tuple with the DataStoreEncryptionEnabled field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexBackupPolicySettings) GetDataStoreEncryptionEnabledOk() (*bool, bool) {
-	if o == nil || o.DataStoreEncryptionEnabled == nil {
+	if o == nil || IsNil(o.DataStoreEncryptionEnabled) {
 		return nil, false
 	}
 	return o.DataStoreEncryptionEnabled, true
@@ -232,7 +236,7 @@ func (o *HyperflexBackupPolicySettings) GetDataStoreEncryptionEnabledOk() (*bool
 
 // HasDataStoreEncryptionEnabled returns a boolean if a field has been set.
 func (o *HyperflexBackupPolicySettings) HasDataStoreEncryptionEnabled() bool {
-	if o != nil && o.DataStoreEncryptionEnabled != nil {
+	if o != nil && !IsNil(o.DataStoreEncryptionEnabled) {
 		return true
 	}
 
@@ -246,7 +250,7 @@ func (o *HyperflexBackupPolicySettings) SetDataStoreEncryptionEnabled(v bool) {
 
 // GetLocalSnapshotRetentionCount returns the LocalSnapshotRetentionCount field value if set, zero value otherwise.
 func (o *HyperflexBackupPolicySettings) GetLocalSnapshotRetentionCount() int64 {
-	if o == nil || o.LocalSnapshotRetentionCount == nil {
+	if o == nil || IsNil(o.LocalSnapshotRetentionCount) {
 		var ret int64
 		return ret
 	}
@@ -256,7 +260,7 @@ func (o *HyperflexBackupPolicySettings) GetLocalSnapshotRetentionCount() int64 {
 // GetLocalSnapshotRetentionCountOk returns a tuple with the LocalSnapshotRetentionCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexBackupPolicySettings) GetLocalSnapshotRetentionCountOk() (*int64, bool) {
-	if o == nil || o.LocalSnapshotRetentionCount == nil {
+	if o == nil || IsNil(o.LocalSnapshotRetentionCount) {
 		return nil, false
 	}
 	return o.LocalSnapshotRetentionCount, true
@@ -264,7 +268,7 @@ func (o *HyperflexBackupPolicySettings) GetLocalSnapshotRetentionCountOk() (*int
 
 // HasLocalSnapshotRetentionCount returns a boolean if a field has been set.
 func (o *HyperflexBackupPolicySettings) HasLocalSnapshotRetentionCount() bool {
-	if o != nil && o.LocalSnapshotRetentionCount != nil {
+	if o != nil && !IsNil(o.LocalSnapshotRetentionCount) {
 		return true
 	}
 
@@ -278,7 +282,7 @@ func (o *HyperflexBackupPolicySettings) SetLocalSnapshotRetentionCount(v int64) 
 
 // GetReplicationIntervalInMinutes returns the ReplicationIntervalInMinutes field value if set, zero value otherwise.
 func (o *HyperflexBackupPolicySettings) GetReplicationIntervalInMinutes() int64 {
-	if o == nil || o.ReplicationIntervalInMinutes == nil {
+	if o == nil || IsNil(o.ReplicationIntervalInMinutes) {
 		var ret int64
 		return ret
 	}
@@ -288,7 +292,7 @@ func (o *HyperflexBackupPolicySettings) GetReplicationIntervalInMinutes() int64 
 // GetReplicationIntervalInMinutesOk returns a tuple with the ReplicationIntervalInMinutes field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexBackupPolicySettings) GetReplicationIntervalInMinutesOk() (*int64, bool) {
-	if o == nil || o.ReplicationIntervalInMinutes == nil {
+	if o == nil || IsNil(o.ReplicationIntervalInMinutes) {
 		return nil, false
 	}
 	return o.ReplicationIntervalInMinutes, true
@@ -296,7 +300,7 @@ func (o *HyperflexBackupPolicySettings) GetReplicationIntervalInMinutesOk() (*in
 
 // HasReplicationIntervalInMinutes returns a boolean if a field has been set.
 func (o *HyperflexBackupPolicySettings) HasReplicationIntervalInMinutes() bool {
-	if o != nil && o.ReplicationIntervalInMinutes != nil {
+	if o != nil && !IsNil(o.ReplicationIntervalInMinutes) {
 		return true
 	}
 
@@ -310,7 +314,7 @@ func (o *HyperflexBackupPolicySettings) SetReplicationIntervalInMinutes(v int64)
 
 // GetReplicationPairNamePrefix returns the ReplicationPairNamePrefix field value if set, zero value otherwise.
 func (o *HyperflexBackupPolicySettings) GetReplicationPairNamePrefix() string {
-	if o == nil || o.ReplicationPairNamePrefix == nil {
+	if o == nil || IsNil(o.ReplicationPairNamePrefix) {
 		var ret string
 		return ret
 	}
@@ -320,7 +324,7 @@ func (o *HyperflexBackupPolicySettings) GetReplicationPairNamePrefix() string {
 // GetReplicationPairNamePrefixOk returns a tuple with the ReplicationPairNamePrefix field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexBackupPolicySettings) GetReplicationPairNamePrefixOk() (*string, bool) {
-	if o == nil || o.ReplicationPairNamePrefix == nil {
+	if o == nil || IsNil(o.ReplicationPairNamePrefix) {
 		return nil, false
 	}
 	return o.ReplicationPairNamePrefix, true
@@ -328,7 +332,7 @@ func (o *HyperflexBackupPolicySettings) GetReplicationPairNamePrefixOk() (*strin
 
 // HasReplicationPairNamePrefix returns a boolean if a field has been set.
 func (o *HyperflexBackupPolicySettings) HasReplicationPairNamePrefix() bool {
-	if o != nil && o.ReplicationPairNamePrefix != nil {
+	if o != nil && !IsNil(o.ReplicationPairNamePrefix) {
 		return true
 	}
 
@@ -342,7 +346,7 @@ func (o *HyperflexBackupPolicySettings) SetReplicationPairNamePrefix(v string) {
 
 // GetSnapshotRetentionCount returns the SnapshotRetentionCount field value if set, zero value otherwise.
 func (o *HyperflexBackupPolicySettings) GetSnapshotRetentionCount() int64 {
-	if o == nil || o.SnapshotRetentionCount == nil {
+	if o == nil || IsNil(o.SnapshotRetentionCount) {
 		var ret int64
 		return ret
 	}
@@ -352,7 +356,7 @@ func (o *HyperflexBackupPolicySettings) GetSnapshotRetentionCount() int64 {
 // GetSnapshotRetentionCountOk returns a tuple with the SnapshotRetentionCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexBackupPolicySettings) GetSnapshotRetentionCountOk() (*int64, bool) {
-	if o == nil || o.SnapshotRetentionCount == nil {
+	if o == nil || IsNil(o.SnapshotRetentionCount) {
 		return nil, false
 	}
 	return o.SnapshotRetentionCount, true
@@ -360,7 +364,7 @@ func (o *HyperflexBackupPolicySettings) GetSnapshotRetentionCountOk() (*int64, b
 
 // HasSnapshotRetentionCount returns a boolean if a field has been set.
 func (o *HyperflexBackupPolicySettings) HasSnapshotRetentionCount() bool {
-	if o != nil && o.SnapshotRetentionCount != nil {
+	if o != nil && !IsNil(o.SnapshotRetentionCount) {
 		return true
 	}
 
@@ -373,43 +377,47 @@ func (o *HyperflexBackupPolicySettings) SetSnapshotRetentionCount(v int64) {
 }
 
 func (o HyperflexBackupPolicySettings) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o HyperflexBackupPolicySettings) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
 	errMoBaseComplexType = json.Unmarshal([]byte(serializedMoBaseComplexType), &toSerialize)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.BackupDataStoreName != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.BackupDataStoreName) {
 		toSerialize["BackupDataStoreName"] = o.BackupDataStoreName
 	}
-	if o.BackupDataStoreSize != nil {
+	if !IsNil(o.BackupDataStoreSize) {
 		toSerialize["BackupDataStoreSize"] = o.BackupDataStoreSize
 	}
-	if o.BackupDataStoreSizeUnit != nil {
+	if !IsNil(o.BackupDataStoreSizeUnit) {
 		toSerialize["BackupDataStoreSizeUnit"] = o.BackupDataStoreSizeUnit
 	}
-	if o.DataStoreEncryptionEnabled != nil {
+	if !IsNil(o.DataStoreEncryptionEnabled) {
 		toSerialize["DataStoreEncryptionEnabled"] = o.DataStoreEncryptionEnabled
 	}
-	if o.LocalSnapshotRetentionCount != nil {
+	if !IsNil(o.LocalSnapshotRetentionCount) {
 		toSerialize["LocalSnapshotRetentionCount"] = o.LocalSnapshotRetentionCount
 	}
-	if o.ReplicationIntervalInMinutes != nil {
+	if !IsNil(o.ReplicationIntervalInMinutes) {
 		toSerialize["ReplicationIntervalInMinutes"] = o.ReplicationIntervalInMinutes
 	}
-	if o.ReplicationPairNamePrefix != nil {
+	if !IsNil(o.ReplicationPairNamePrefix) {
 		toSerialize["ReplicationPairNamePrefix"] = o.ReplicationPairNamePrefix
 	}
-	if o.SnapshotRetentionCount != nil {
+	if !IsNil(o.SnapshotRetentionCount) {
 		toSerialize["SnapshotRetentionCount"] = o.SnapshotRetentionCount
 	}
 
@@ -417,10 +425,32 @@ func (o HyperflexBackupPolicySettings) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *HyperflexBackupPolicySettings) UnmarshalJSON(bytes []byte) (err error) {
+func (o *HyperflexBackupPolicySettings) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type HyperflexBackupPolicySettingsWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -446,7 +476,7 @@ func (o *HyperflexBackupPolicySettings) UnmarshalJSON(bytes []byte) (err error) 
 
 	varHyperflexBackupPolicySettingsWithoutEmbeddedStruct := HyperflexBackupPolicySettingsWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varHyperflexBackupPolicySettingsWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varHyperflexBackupPolicySettingsWithoutEmbeddedStruct)
 	if err == nil {
 		varHyperflexBackupPolicySettings := _HyperflexBackupPolicySettings{}
 		varHyperflexBackupPolicySettings.ClassId = varHyperflexBackupPolicySettingsWithoutEmbeddedStruct.ClassId
@@ -466,7 +496,7 @@ func (o *HyperflexBackupPolicySettings) UnmarshalJSON(bytes []byte) (err error) 
 
 	varHyperflexBackupPolicySettings := _HyperflexBackupPolicySettings{}
 
-	err = json.Unmarshal(bytes, &varHyperflexBackupPolicySettings)
+	err = json.Unmarshal(data, &varHyperflexBackupPolicySettings)
 	if err == nil {
 		o.MoBaseComplexType = varHyperflexBackupPolicySettings.MoBaseComplexType
 	} else {
@@ -475,7 +505,7 @@ func (o *HyperflexBackupPolicySettings) UnmarshalJSON(bytes []byte) (err error) 
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "BackupDataStoreName")

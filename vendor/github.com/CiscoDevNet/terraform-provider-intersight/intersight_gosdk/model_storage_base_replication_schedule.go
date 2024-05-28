@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the StorageBaseReplicationSchedule type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &StorageBaseReplicationSchedule{}
 
 // StorageBaseReplicationSchedule Configuration parameters for snapshot creation on target arrays.
 type StorageBaseReplicationSchedule struct {
@@ -110,7 +114,7 @@ func (o *StorageBaseReplicationSchedule) SetObjectType(v string) {
 
 // GetFrequency returns the Frequency field value if set, zero value otherwise.
 func (o *StorageBaseReplicationSchedule) GetFrequency() string {
-	if o == nil || o.Frequency == nil {
+	if o == nil || IsNil(o.Frequency) {
 		var ret string
 		return ret
 	}
@@ -120,7 +124,7 @@ func (o *StorageBaseReplicationSchedule) GetFrequency() string {
 // GetFrequencyOk returns a tuple with the Frequency field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageBaseReplicationSchedule) GetFrequencyOk() (*string, bool) {
-	if o == nil || o.Frequency == nil {
+	if o == nil || IsNil(o.Frequency) {
 		return nil, false
 	}
 	return o.Frequency, true
@@ -128,7 +132,7 @@ func (o *StorageBaseReplicationSchedule) GetFrequencyOk() (*string, bool) {
 
 // HasFrequency returns a boolean if a field has been set.
 func (o *StorageBaseReplicationSchedule) HasFrequency() bool {
-	if o != nil && o.Frequency != nil {
+	if o != nil && !IsNil(o.Frequency) {
 		return true
 	}
 
@@ -142,7 +146,7 @@ func (o *StorageBaseReplicationSchedule) SetFrequency(v string) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *StorageBaseReplicationSchedule) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -152,7 +156,7 @@ func (o *StorageBaseReplicationSchedule) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageBaseReplicationSchedule) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -160,7 +164,7 @@ func (o *StorageBaseReplicationSchedule) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *StorageBaseReplicationSchedule) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -174,7 +178,7 @@ func (o *StorageBaseReplicationSchedule) SetName(v string) {
 
 // GetReplicationTime returns the ReplicationTime field value if set, zero value otherwise.
 func (o *StorageBaseReplicationSchedule) GetReplicationTime() string {
-	if o == nil || o.ReplicationTime == nil {
+	if o == nil || IsNil(o.ReplicationTime) {
 		var ret string
 		return ret
 	}
@@ -184,7 +188,7 @@ func (o *StorageBaseReplicationSchedule) GetReplicationTime() string {
 // GetReplicationTimeOk returns a tuple with the ReplicationTime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageBaseReplicationSchedule) GetReplicationTimeOk() (*string, bool) {
-	if o == nil || o.ReplicationTime == nil {
+	if o == nil || IsNil(o.ReplicationTime) {
 		return nil, false
 	}
 	return o.ReplicationTime, true
@@ -192,7 +196,7 @@ func (o *StorageBaseReplicationSchedule) GetReplicationTimeOk() (*string, bool) 
 
 // HasReplicationTime returns a boolean if a field has been set.
 func (o *StorageBaseReplicationSchedule) HasReplicationTime() bool {
-	if o != nil && o.ReplicationTime != nil {
+	if o != nil && !IsNil(o.ReplicationTime) {
 		return true
 	}
 
@@ -206,7 +210,7 @@ func (o *StorageBaseReplicationSchedule) SetReplicationTime(v string) {
 
 // GetRetentionTime returns the RetentionTime field value if set, zero value otherwise.
 func (o *StorageBaseReplicationSchedule) GetRetentionTime() string {
-	if o == nil || o.RetentionTime == nil {
+	if o == nil || IsNil(o.RetentionTime) {
 		var ret string
 		return ret
 	}
@@ -216,7 +220,7 @@ func (o *StorageBaseReplicationSchedule) GetRetentionTime() string {
 // GetRetentionTimeOk returns a tuple with the RetentionTime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageBaseReplicationSchedule) GetRetentionTimeOk() (*string, bool) {
-	if o == nil || o.RetentionTime == nil {
+	if o == nil || IsNil(o.RetentionTime) {
 		return nil, false
 	}
 	return o.RetentionTime, true
@@ -224,7 +228,7 @@ func (o *StorageBaseReplicationSchedule) GetRetentionTimeOk() (*string, bool) {
 
 // HasRetentionTime returns a boolean if a field has been set.
 func (o *StorageBaseReplicationSchedule) HasRetentionTime() bool {
-	if o != nil && o.RetentionTime != nil {
+	if o != nil && !IsNil(o.RetentionTime) {
 		return true
 	}
 
@@ -237,31 +241,35 @@ func (o *StorageBaseReplicationSchedule) SetRetentionTime(v string) {
 }
 
 func (o StorageBaseReplicationSchedule) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o StorageBaseReplicationSchedule) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Frequency != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Frequency) {
 		toSerialize["Frequency"] = o.Frequency
 	}
-	if o.Name != nil {
+	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
 	}
-	if o.ReplicationTime != nil {
+	if !IsNil(o.ReplicationTime) {
 		toSerialize["ReplicationTime"] = o.ReplicationTime
 	}
-	if o.RetentionTime != nil {
+	if !IsNil(o.RetentionTime) {
 		toSerialize["RetentionTime"] = o.RetentionTime
 	}
 
@@ -269,10 +277,32 @@ func (o StorageBaseReplicationSchedule) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *StorageBaseReplicationSchedule) UnmarshalJSON(bytes []byte) (err error) {
+func (o *StorageBaseReplicationSchedule) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type StorageBaseReplicationScheduleWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type.
 		ClassId string `json:"ClassId"`
@@ -290,7 +320,7 @@ func (o *StorageBaseReplicationSchedule) UnmarshalJSON(bytes []byte) (err error)
 
 	varStorageBaseReplicationScheduleWithoutEmbeddedStruct := StorageBaseReplicationScheduleWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varStorageBaseReplicationScheduleWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varStorageBaseReplicationScheduleWithoutEmbeddedStruct)
 	if err == nil {
 		varStorageBaseReplicationSchedule := _StorageBaseReplicationSchedule{}
 		varStorageBaseReplicationSchedule.ClassId = varStorageBaseReplicationScheduleWithoutEmbeddedStruct.ClassId
@@ -306,7 +336,7 @@ func (o *StorageBaseReplicationSchedule) UnmarshalJSON(bytes []byte) (err error)
 
 	varStorageBaseReplicationSchedule := _StorageBaseReplicationSchedule{}
 
-	err = json.Unmarshal(bytes, &varStorageBaseReplicationSchedule)
+	err = json.Unmarshal(data, &varStorageBaseReplicationSchedule)
 	if err == nil {
 		o.MoBaseMo = varStorageBaseReplicationSchedule.MoBaseMo
 	} else {
@@ -315,7 +345,7 @@ func (o *StorageBaseReplicationSchedule) UnmarshalJSON(bytes []byte) (err error)
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Frequency")

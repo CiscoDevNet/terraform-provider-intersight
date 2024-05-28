@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the IamResourcePermission type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &IamResourcePermission{}
 
 // IamResourcePermission ResourcePermission represents the permissions defined on a resource like organization.
 type IamResourcePermission struct {
@@ -26,9 +30,9 @@ type IamResourcePermission struct {
 	ObjectType      string                 `json:"ObjectType"`
 	PermissionRoles []IamPermissionToRoles `json:"PermissionRoles,omitempty"`
 	// Name of the service owning the resource.
-	TargetApp            *string                        `json:"TargetApp,omitempty"`
-	Holder               *IamSecurityHolderRelationship `json:"Holder,omitempty"`
-	Resource             *MoBaseMoRelationship          `json:"Resource,omitempty"`
+	TargetApp            *string                               `json:"TargetApp,omitempty"`
+	Holder               NullableIamSecurityHolderRelationship `json:"Holder,omitempty"`
+	Resource             NullableMoBaseMoRelationship          `json:"Resource,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -118,7 +122,7 @@ func (o *IamResourcePermission) GetPermissionRoles() []IamPermissionToRoles {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *IamResourcePermission) GetPermissionRolesOk() ([]IamPermissionToRoles, bool) {
-	if o == nil || o.PermissionRoles == nil {
+	if o == nil || IsNil(o.PermissionRoles) {
 		return nil, false
 	}
 	return o.PermissionRoles, true
@@ -126,7 +130,7 @@ func (o *IamResourcePermission) GetPermissionRolesOk() ([]IamPermissionToRoles, 
 
 // HasPermissionRoles returns a boolean if a field has been set.
 func (o *IamResourcePermission) HasPermissionRoles() bool {
-	if o != nil && o.PermissionRoles != nil {
+	if o != nil && IsNil(o.PermissionRoles) {
 		return true
 	}
 
@@ -140,7 +144,7 @@ func (o *IamResourcePermission) SetPermissionRoles(v []IamPermissionToRoles) {
 
 // GetTargetApp returns the TargetApp field value if set, zero value otherwise.
 func (o *IamResourcePermission) GetTargetApp() string {
-	if o == nil || o.TargetApp == nil {
+	if o == nil || IsNil(o.TargetApp) {
 		var ret string
 		return ret
 	}
@@ -150,7 +154,7 @@ func (o *IamResourcePermission) GetTargetApp() string {
 // GetTargetAppOk returns a tuple with the TargetApp field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IamResourcePermission) GetTargetAppOk() (*string, bool) {
-	if o == nil || o.TargetApp == nil {
+	if o == nil || IsNil(o.TargetApp) {
 		return nil, false
 	}
 	return o.TargetApp, true
@@ -158,7 +162,7 @@ func (o *IamResourcePermission) GetTargetAppOk() (*string, bool) {
 
 // HasTargetApp returns a boolean if a field has been set.
 func (o *IamResourcePermission) HasTargetApp() bool {
-	if o != nil && o.TargetApp != nil {
+	if o != nil && !IsNil(o.TargetApp) {
 		return true
 	}
 
@@ -170,107 +174,155 @@ func (o *IamResourcePermission) SetTargetApp(v string) {
 	o.TargetApp = &v
 }
 
-// GetHolder returns the Holder field value if set, zero value otherwise.
+// GetHolder returns the Holder field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *IamResourcePermission) GetHolder() IamSecurityHolderRelationship {
-	if o == nil || o.Holder == nil {
+	if o == nil || IsNil(o.Holder.Get()) {
 		var ret IamSecurityHolderRelationship
 		return ret
 	}
-	return *o.Holder
+	return *o.Holder.Get()
 }
 
 // GetHolderOk returns a tuple with the Holder field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *IamResourcePermission) GetHolderOk() (*IamSecurityHolderRelationship, bool) {
-	if o == nil || o.Holder == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Holder, true
+	return o.Holder.Get(), o.Holder.IsSet()
 }
 
 // HasHolder returns a boolean if a field has been set.
 func (o *IamResourcePermission) HasHolder() bool {
-	if o != nil && o.Holder != nil {
+	if o != nil && o.Holder.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetHolder gets a reference to the given IamSecurityHolderRelationship and assigns it to the Holder field.
+// SetHolder gets a reference to the given NullableIamSecurityHolderRelationship and assigns it to the Holder field.
 func (o *IamResourcePermission) SetHolder(v IamSecurityHolderRelationship) {
-	o.Holder = &v
+	o.Holder.Set(&v)
 }
 
-// GetResource returns the Resource field value if set, zero value otherwise.
+// SetHolderNil sets the value for Holder to be an explicit nil
+func (o *IamResourcePermission) SetHolderNil() {
+	o.Holder.Set(nil)
+}
+
+// UnsetHolder ensures that no value is present for Holder, not even an explicit nil
+func (o *IamResourcePermission) UnsetHolder() {
+	o.Holder.Unset()
+}
+
+// GetResource returns the Resource field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *IamResourcePermission) GetResource() MoBaseMoRelationship {
-	if o == nil || o.Resource == nil {
+	if o == nil || IsNil(o.Resource.Get()) {
 		var ret MoBaseMoRelationship
 		return ret
 	}
-	return *o.Resource
+	return *o.Resource.Get()
 }
 
 // GetResourceOk returns a tuple with the Resource field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *IamResourcePermission) GetResourceOk() (*MoBaseMoRelationship, bool) {
-	if o == nil || o.Resource == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Resource, true
+	return o.Resource.Get(), o.Resource.IsSet()
 }
 
 // HasResource returns a boolean if a field has been set.
 func (o *IamResourcePermission) HasResource() bool {
-	if o != nil && o.Resource != nil {
+	if o != nil && o.Resource.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetResource gets a reference to the given MoBaseMoRelationship and assigns it to the Resource field.
+// SetResource gets a reference to the given NullableMoBaseMoRelationship and assigns it to the Resource field.
 func (o *IamResourcePermission) SetResource(v MoBaseMoRelationship) {
-	o.Resource = &v
+	o.Resource.Set(&v)
+}
+
+// SetResourceNil sets the value for Resource to be an explicit nil
+func (o *IamResourcePermission) SetResourceNil() {
+	o.Resource.Set(nil)
+}
+
+// UnsetResource ensures that no value is present for Resource, not even an explicit nil
+func (o *IamResourcePermission) UnsetResource() {
+	o.Resource.Unset()
 }
 
 func (o IamResourcePermission) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o IamResourcePermission) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
 	if o.PermissionRoles != nil {
 		toSerialize["PermissionRoles"] = o.PermissionRoles
 	}
-	if o.TargetApp != nil {
+	if !IsNil(o.TargetApp) {
 		toSerialize["TargetApp"] = o.TargetApp
 	}
-	if o.Holder != nil {
-		toSerialize["Holder"] = o.Holder
+	if o.Holder.IsSet() {
+		toSerialize["Holder"] = o.Holder.Get()
 	}
-	if o.Resource != nil {
-		toSerialize["Resource"] = o.Resource
+	if o.Resource.IsSet() {
+		toSerialize["Resource"] = o.Resource.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *IamResourcePermission) UnmarshalJSON(bytes []byte) (err error) {
+func (o *IamResourcePermission) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type IamResourcePermissionWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -278,14 +330,14 @@ func (o *IamResourcePermission) UnmarshalJSON(bytes []byte) (err error) {
 		ObjectType      string                 `json:"ObjectType"`
 		PermissionRoles []IamPermissionToRoles `json:"PermissionRoles,omitempty"`
 		// Name of the service owning the resource.
-		TargetApp *string                        `json:"TargetApp,omitempty"`
-		Holder    *IamSecurityHolderRelationship `json:"Holder,omitempty"`
-		Resource  *MoBaseMoRelationship          `json:"Resource,omitempty"`
+		TargetApp *string                               `json:"TargetApp,omitempty"`
+		Holder    NullableIamSecurityHolderRelationship `json:"Holder,omitempty"`
+		Resource  NullableMoBaseMoRelationship          `json:"Resource,omitempty"`
 	}
 
 	varIamResourcePermissionWithoutEmbeddedStruct := IamResourcePermissionWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varIamResourcePermissionWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varIamResourcePermissionWithoutEmbeddedStruct)
 	if err == nil {
 		varIamResourcePermission := _IamResourcePermission{}
 		varIamResourcePermission.ClassId = varIamResourcePermissionWithoutEmbeddedStruct.ClassId
@@ -301,7 +353,7 @@ func (o *IamResourcePermission) UnmarshalJSON(bytes []byte) (err error) {
 
 	varIamResourcePermission := _IamResourcePermission{}
 
-	err = json.Unmarshal(bytes, &varIamResourcePermission)
+	err = json.Unmarshal(data, &varIamResourcePermission)
 	if err == nil {
 		o.MoBaseMo = varIamResourcePermission.MoBaseMo
 	} else {
@@ -310,7 +362,7 @@ func (o *IamResourcePermission) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "PermissionRoles")

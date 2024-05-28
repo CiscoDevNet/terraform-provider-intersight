@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the VirtualizationBaseCluster type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &VirtualizationBaseCluster{}
 
 // VirtualizationBaseCluster Common attributes of a cluster of resources within a datacenter. A cluster is a convenient grouping of resources such as Host, Datastore, etc.
 type VirtualizationBaseCluster struct {
@@ -117,7 +121,7 @@ func (o *VirtualizationBaseCluster) SetObjectType(v string) {
 
 // GetAlarmSummary returns the AlarmSummary field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *VirtualizationBaseCluster) GetAlarmSummary() CondAlarmSummary {
-	if o == nil || o.AlarmSummary.Get() == nil {
+	if o == nil || IsNil(o.AlarmSummary.Get()) {
 		var ret CondAlarmSummary
 		return ret
 	}
@@ -160,7 +164,7 @@ func (o *VirtualizationBaseCluster) UnsetAlarmSummary() {
 
 // GetHypervisorType returns the HypervisorType field value if set, zero value otherwise.
 func (o *VirtualizationBaseCluster) GetHypervisorType() string {
-	if o == nil || o.HypervisorType == nil {
+	if o == nil || IsNil(o.HypervisorType) {
 		var ret string
 		return ret
 	}
@@ -170,7 +174,7 @@ func (o *VirtualizationBaseCluster) GetHypervisorType() string {
 // GetHypervisorTypeOk returns a tuple with the HypervisorType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationBaseCluster) GetHypervisorTypeOk() (*string, bool) {
-	if o == nil || o.HypervisorType == nil {
+	if o == nil || IsNil(o.HypervisorType) {
 		return nil, false
 	}
 	return o.HypervisorType, true
@@ -178,7 +182,7 @@ func (o *VirtualizationBaseCluster) GetHypervisorTypeOk() (*string, bool) {
 
 // HasHypervisorType returns a boolean if a field has been set.
 func (o *VirtualizationBaseCluster) HasHypervisorType() bool {
-	if o != nil && o.HypervisorType != nil {
+	if o != nil && !IsNil(o.HypervisorType) {
 		return true
 	}
 
@@ -192,7 +196,7 @@ func (o *VirtualizationBaseCluster) SetHypervisorType(v string) {
 
 // GetHypervisorVersion returns the HypervisorVersion field value if set, zero value otherwise.
 func (o *VirtualizationBaseCluster) GetHypervisorVersion() string {
-	if o == nil || o.HypervisorVersion == nil {
+	if o == nil || IsNil(o.HypervisorVersion) {
 		var ret string
 		return ret
 	}
@@ -202,7 +206,7 @@ func (o *VirtualizationBaseCluster) GetHypervisorVersion() string {
 // GetHypervisorVersionOk returns a tuple with the HypervisorVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationBaseCluster) GetHypervisorVersionOk() (*string, bool) {
-	if o == nil || o.HypervisorVersion == nil {
+	if o == nil || IsNil(o.HypervisorVersion) {
 		return nil, false
 	}
 	return o.HypervisorVersion, true
@@ -210,7 +214,7 @@ func (o *VirtualizationBaseCluster) GetHypervisorVersionOk() (*string, bool) {
 
 // HasHypervisorVersion returns a boolean if a field has been set.
 func (o *VirtualizationBaseCluster) HasHypervisorVersion() bool {
-	if o != nil && o.HypervisorVersion != nil {
+	if o != nil && !IsNil(o.HypervisorVersion) {
 		return true
 	}
 
@@ -224,7 +228,7 @@ func (o *VirtualizationBaseCluster) SetHypervisorVersion(v string) {
 
 // GetIdentity returns the Identity field value if set, zero value otherwise.
 func (o *VirtualizationBaseCluster) GetIdentity() string {
-	if o == nil || o.Identity == nil {
+	if o == nil || IsNil(o.Identity) {
 		var ret string
 		return ret
 	}
@@ -234,7 +238,7 @@ func (o *VirtualizationBaseCluster) GetIdentity() string {
 // GetIdentityOk returns a tuple with the Identity field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationBaseCluster) GetIdentityOk() (*string, bool) {
-	if o == nil || o.Identity == nil {
+	if o == nil || IsNil(o.Identity) {
 		return nil, false
 	}
 	return o.Identity, true
@@ -242,7 +246,7 @@ func (o *VirtualizationBaseCluster) GetIdentityOk() (*string, bool) {
 
 // HasIdentity returns a boolean if a field has been set.
 func (o *VirtualizationBaseCluster) HasIdentity() bool {
-	if o != nil && o.Identity != nil {
+	if o != nil && !IsNil(o.Identity) {
 		return true
 	}
 
@@ -256,7 +260,7 @@ func (o *VirtualizationBaseCluster) SetIdentity(v string) {
 
 // GetMemoryCapacity returns the MemoryCapacity field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *VirtualizationBaseCluster) GetMemoryCapacity() VirtualizationMemoryCapacity {
-	if o == nil || o.MemoryCapacity.Get() == nil {
+	if o == nil || IsNil(o.MemoryCapacity.Get()) {
 		var ret VirtualizationMemoryCapacity
 		return ret
 	}
@@ -299,7 +303,7 @@ func (o *VirtualizationBaseCluster) UnsetMemoryCapacity() {
 
 // GetProcessorCapacity returns the ProcessorCapacity field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *VirtualizationBaseCluster) GetProcessorCapacity() VirtualizationComputeCapacity {
-	if o == nil || o.ProcessorCapacity.Get() == nil {
+	if o == nil || IsNil(o.ProcessorCapacity.Get()) {
 		var ret VirtualizationComputeCapacity
 		return ret
 	}
@@ -342,7 +346,7 @@ func (o *VirtualizationBaseCluster) UnsetProcessorCapacity() {
 
 // GetTotalCores returns the TotalCores field value if set, zero value otherwise.
 func (o *VirtualizationBaseCluster) GetTotalCores() int64 {
-	if o == nil || o.TotalCores == nil {
+	if o == nil || IsNil(o.TotalCores) {
 		var ret int64
 		return ret
 	}
@@ -352,7 +356,7 @@ func (o *VirtualizationBaseCluster) GetTotalCores() int64 {
 // GetTotalCoresOk returns a tuple with the TotalCores field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationBaseCluster) GetTotalCoresOk() (*int64, bool) {
-	if o == nil || o.TotalCores == nil {
+	if o == nil || IsNil(o.TotalCores) {
 		return nil, false
 	}
 	return o.TotalCores, true
@@ -360,7 +364,7 @@ func (o *VirtualizationBaseCluster) GetTotalCoresOk() (*int64, bool) {
 
 // HasTotalCores returns a boolean if a field has been set.
 func (o *VirtualizationBaseCluster) HasTotalCores() bool {
-	if o != nil && o.TotalCores != nil {
+	if o != nil && !IsNil(o.TotalCores) {
 		return true
 	}
 
@@ -373,31 +377,35 @@ func (o *VirtualizationBaseCluster) SetTotalCores(v int64) {
 }
 
 func (o VirtualizationBaseCluster) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o VirtualizationBaseCluster) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedComputeBaseCluster, errComputeBaseCluster := json.Marshal(o.ComputeBaseCluster)
 	if errComputeBaseCluster != nil {
-		return []byte{}, errComputeBaseCluster
+		return map[string]interface{}{}, errComputeBaseCluster
 	}
 	errComputeBaseCluster = json.Unmarshal([]byte(serializedComputeBaseCluster), &toSerialize)
 	if errComputeBaseCluster != nil {
-		return []byte{}, errComputeBaseCluster
+		return map[string]interface{}{}, errComputeBaseCluster
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
 	if o.AlarmSummary.IsSet() {
 		toSerialize["AlarmSummary"] = o.AlarmSummary.Get()
 	}
-	if o.HypervisorType != nil {
+	if !IsNil(o.HypervisorType) {
 		toSerialize["HypervisorType"] = o.HypervisorType
 	}
-	if o.HypervisorVersion != nil {
+	if !IsNil(o.HypervisorVersion) {
 		toSerialize["HypervisorVersion"] = o.HypervisorVersion
 	}
-	if o.Identity != nil {
+	if !IsNil(o.Identity) {
 		toSerialize["Identity"] = o.Identity
 	}
 	if o.MemoryCapacity.IsSet() {
@@ -406,7 +414,7 @@ func (o VirtualizationBaseCluster) MarshalJSON() ([]byte, error) {
 	if o.ProcessorCapacity.IsSet() {
 		toSerialize["ProcessorCapacity"] = o.ProcessorCapacity.Get()
 	}
-	if o.TotalCores != nil {
+	if !IsNil(o.TotalCores) {
 		toSerialize["TotalCores"] = o.TotalCores
 	}
 
@@ -414,10 +422,32 @@ func (o VirtualizationBaseCluster) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *VirtualizationBaseCluster) UnmarshalJSON(bytes []byte) (err error) {
+func (o *VirtualizationBaseCluster) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type VirtualizationBaseClusterWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type.
 		ClassId string `json:"ClassId"`
@@ -438,7 +468,7 @@ func (o *VirtualizationBaseCluster) UnmarshalJSON(bytes []byte) (err error) {
 
 	varVirtualizationBaseClusterWithoutEmbeddedStruct := VirtualizationBaseClusterWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varVirtualizationBaseClusterWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varVirtualizationBaseClusterWithoutEmbeddedStruct)
 	if err == nil {
 		varVirtualizationBaseCluster := _VirtualizationBaseCluster{}
 		varVirtualizationBaseCluster.ClassId = varVirtualizationBaseClusterWithoutEmbeddedStruct.ClassId
@@ -457,7 +487,7 @@ func (o *VirtualizationBaseCluster) UnmarshalJSON(bytes []byte) (err error) {
 
 	varVirtualizationBaseCluster := _VirtualizationBaseCluster{}
 
-	err = json.Unmarshal(bytes, &varVirtualizationBaseCluster)
+	err = json.Unmarshal(data, &varVirtualizationBaseCluster)
 	if err == nil {
 		o.ComputeBaseCluster = varVirtualizationBaseCluster.ComputeBaseCluster
 	} else {
@@ -466,7 +496,7 @@ func (o *VirtualizationBaseCluster) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "AlarmSummary")

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the StorageNetAppQtree type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &StorageNetAppQtree{}
 
 // StorageNetAppQtree NetApp qtree is a logically defined file system that can exist as a special subdirectory of the root directory within a volume.
 type StorageNetAppQtree struct {
@@ -41,9 +45,9 @@ type StorageNetAppQtree struct {
 	// The parent volume name for the qtree.
 	VolumeName *string `json:"VolumeName,omitempty"`
 	// NetApp Volume uuid, unique identifier for the NetApp volume.
-	VolumeUuid           *string                             `json:"VolumeUuid,omitempty"`
-	StorageContainer     *StorageNetAppVolumeRelationship    `json:"StorageContainer,omitempty"`
-	Tenant               *StorageNetAppStorageVmRelationship `json:"Tenant,omitempty"`
+	VolumeUuid           *string                                    `json:"VolumeUuid,omitempty"`
+	StorageContainer     NullableStorageNetAppVolumeRelationship    `json:"StorageContainer,omitempty"`
+	Tenant               NullableStorageNetAppStorageVmRelationship `json:"Tenant,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -122,7 +126,7 @@ func (o *StorageNetAppQtree) SetObjectType(v string) {
 
 // GetExportPolicyId returns the ExportPolicyId field value if set, zero value otherwise.
 func (o *StorageNetAppQtree) GetExportPolicyId() string {
-	if o == nil || o.ExportPolicyId == nil {
+	if o == nil || IsNil(o.ExportPolicyId) {
 		var ret string
 		return ret
 	}
@@ -132,7 +136,7 @@ func (o *StorageNetAppQtree) GetExportPolicyId() string {
 // GetExportPolicyIdOk returns a tuple with the ExportPolicyId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppQtree) GetExportPolicyIdOk() (*string, bool) {
-	if o == nil || o.ExportPolicyId == nil {
+	if o == nil || IsNil(o.ExportPolicyId) {
 		return nil, false
 	}
 	return o.ExportPolicyId, true
@@ -140,7 +144,7 @@ func (o *StorageNetAppQtree) GetExportPolicyIdOk() (*string, bool) {
 
 // HasExportPolicyId returns a boolean if a field has been set.
 func (o *StorageNetAppQtree) HasExportPolicyId() bool {
-	if o != nil && o.ExportPolicyId != nil {
+	if o != nil && !IsNil(o.ExportPolicyId) {
 		return true
 	}
 
@@ -154,7 +158,7 @@ func (o *StorageNetAppQtree) SetExportPolicyId(v string) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *StorageNetAppQtree) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -164,7 +168,7 @@ func (o *StorageNetAppQtree) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppQtree) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -172,7 +176,7 @@ func (o *StorageNetAppQtree) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *StorageNetAppQtree) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -186,7 +190,7 @@ func (o *StorageNetAppQtree) SetName(v string) {
 
 // GetPath returns the Path field value if set, zero value otherwise.
 func (o *StorageNetAppQtree) GetPath() string {
-	if o == nil || o.Path == nil {
+	if o == nil || IsNil(o.Path) {
 		var ret string
 		return ret
 	}
@@ -196,7 +200,7 @@ func (o *StorageNetAppQtree) GetPath() string {
 // GetPathOk returns a tuple with the Path field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppQtree) GetPathOk() (*string, bool) {
-	if o == nil || o.Path == nil {
+	if o == nil || IsNil(o.Path) {
 		return nil, false
 	}
 	return o.Path, true
@@ -204,7 +208,7 @@ func (o *StorageNetAppQtree) GetPathOk() (*string, bool) {
 
 // HasPath returns a boolean if a field has been set.
 func (o *StorageNetAppQtree) HasPath() bool {
-	if o != nil && o.Path != nil {
+	if o != nil && !IsNil(o.Path) {
 		return true
 	}
 
@@ -218,7 +222,7 @@ func (o *StorageNetAppQtree) SetPath(v string) {
 
 // GetPermission returns the Permission field value if set, zero value otherwise.
 func (o *StorageNetAppQtree) GetPermission() string {
-	if o == nil || o.Permission == nil {
+	if o == nil || IsNil(o.Permission) {
 		var ret string
 		return ret
 	}
@@ -228,7 +232,7 @@ func (o *StorageNetAppQtree) GetPermission() string {
 // GetPermissionOk returns a tuple with the Permission field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppQtree) GetPermissionOk() (*string, bool) {
-	if o == nil || o.Permission == nil {
+	if o == nil || IsNil(o.Permission) {
 		return nil, false
 	}
 	return o.Permission, true
@@ -236,7 +240,7 @@ func (o *StorageNetAppQtree) GetPermissionOk() (*string, bool) {
 
 // HasPermission returns a boolean if a field has been set.
 func (o *StorageNetAppQtree) HasPermission() bool {
-	if o != nil && o.Permission != nil {
+	if o != nil && !IsNil(o.Permission) {
 		return true
 	}
 
@@ -250,7 +254,7 @@ func (o *StorageNetAppQtree) SetPermission(v string) {
 
 // GetQtreeId returns the QtreeId field value if set, zero value otherwise.
 func (o *StorageNetAppQtree) GetQtreeId() int64 {
-	if o == nil || o.QtreeId == nil {
+	if o == nil || IsNil(o.QtreeId) {
 		var ret int64
 		return ret
 	}
@@ -260,7 +264,7 @@ func (o *StorageNetAppQtree) GetQtreeId() int64 {
 // GetQtreeIdOk returns a tuple with the QtreeId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppQtree) GetQtreeIdOk() (*int64, bool) {
-	if o == nil || o.QtreeId == nil {
+	if o == nil || IsNil(o.QtreeId) {
 		return nil, false
 	}
 	return o.QtreeId, true
@@ -268,7 +272,7 @@ func (o *StorageNetAppQtree) GetQtreeIdOk() (*int64, bool) {
 
 // HasQtreeId returns a boolean if a field has been set.
 func (o *StorageNetAppQtree) HasQtreeId() bool {
-	if o != nil && o.QtreeId != nil {
+	if o != nil && !IsNil(o.QtreeId) {
 		return true
 	}
 
@@ -282,7 +286,7 @@ func (o *StorageNetAppQtree) SetQtreeId(v int64) {
 
 // GetSecurityStyle returns the SecurityStyle field value if set, zero value otherwise.
 func (o *StorageNetAppQtree) GetSecurityStyle() string {
-	if o == nil || o.SecurityStyle == nil {
+	if o == nil || IsNil(o.SecurityStyle) {
 		var ret string
 		return ret
 	}
@@ -292,7 +296,7 @@ func (o *StorageNetAppQtree) GetSecurityStyle() string {
 // GetSecurityStyleOk returns a tuple with the SecurityStyle field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppQtree) GetSecurityStyleOk() (*string, bool) {
-	if o == nil || o.SecurityStyle == nil {
+	if o == nil || IsNil(o.SecurityStyle) {
 		return nil, false
 	}
 	return o.SecurityStyle, true
@@ -300,7 +304,7 @@ func (o *StorageNetAppQtree) GetSecurityStyleOk() (*string, bool) {
 
 // HasSecurityStyle returns a boolean if a field has been set.
 func (o *StorageNetAppQtree) HasSecurityStyle() bool {
-	if o != nil && o.SecurityStyle != nil {
+	if o != nil && !IsNil(o.SecurityStyle) {
 		return true
 	}
 
@@ -314,7 +318,7 @@ func (o *StorageNetAppQtree) SetSecurityStyle(v string) {
 
 // GetSvmName returns the SvmName field value if set, zero value otherwise.
 func (o *StorageNetAppQtree) GetSvmName() string {
-	if o == nil || o.SvmName == nil {
+	if o == nil || IsNil(o.SvmName) {
 		var ret string
 		return ret
 	}
@@ -324,7 +328,7 @@ func (o *StorageNetAppQtree) GetSvmName() string {
 // GetSvmNameOk returns a tuple with the SvmName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppQtree) GetSvmNameOk() (*string, bool) {
-	if o == nil || o.SvmName == nil {
+	if o == nil || IsNil(o.SvmName) {
 		return nil, false
 	}
 	return o.SvmName, true
@@ -332,7 +336,7 @@ func (o *StorageNetAppQtree) GetSvmNameOk() (*string, bool) {
 
 // HasSvmName returns a boolean if a field has been set.
 func (o *StorageNetAppQtree) HasSvmName() bool {
-	if o != nil && o.SvmName != nil {
+	if o != nil && !IsNil(o.SvmName) {
 		return true
 	}
 
@@ -346,7 +350,7 @@ func (o *StorageNetAppQtree) SetSvmName(v string) {
 
 // GetVolumeName returns the VolumeName field value if set, zero value otherwise.
 func (o *StorageNetAppQtree) GetVolumeName() string {
-	if o == nil || o.VolumeName == nil {
+	if o == nil || IsNil(o.VolumeName) {
 		var ret string
 		return ret
 	}
@@ -356,7 +360,7 @@ func (o *StorageNetAppQtree) GetVolumeName() string {
 // GetVolumeNameOk returns a tuple with the VolumeName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppQtree) GetVolumeNameOk() (*string, bool) {
-	if o == nil || o.VolumeName == nil {
+	if o == nil || IsNil(o.VolumeName) {
 		return nil, false
 	}
 	return o.VolumeName, true
@@ -364,7 +368,7 @@ func (o *StorageNetAppQtree) GetVolumeNameOk() (*string, bool) {
 
 // HasVolumeName returns a boolean if a field has been set.
 func (o *StorageNetAppQtree) HasVolumeName() bool {
-	if o != nil && o.VolumeName != nil {
+	if o != nil && !IsNil(o.VolumeName) {
 		return true
 	}
 
@@ -378,7 +382,7 @@ func (o *StorageNetAppQtree) SetVolumeName(v string) {
 
 // GetVolumeUuid returns the VolumeUuid field value if set, zero value otherwise.
 func (o *StorageNetAppQtree) GetVolumeUuid() string {
-	if o == nil || o.VolumeUuid == nil {
+	if o == nil || IsNil(o.VolumeUuid) {
 		var ret string
 		return ret
 	}
@@ -388,7 +392,7 @@ func (o *StorageNetAppQtree) GetVolumeUuid() string {
 // GetVolumeUuidOk returns a tuple with the VolumeUuid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppQtree) GetVolumeUuidOk() (*string, bool) {
-	if o == nil || o.VolumeUuid == nil {
+	if o == nil || IsNil(o.VolumeUuid) {
 		return nil, false
 	}
 	return o.VolumeUuid, true
@@ -396,7 +400,7 @@ func (o *StorageNetAppQtree) GetVolumeUuidOk() (*string, bool) {
 
 // HasVolumeUuid returns a boolean if a field has been set.
 func (o *StorageNetAppQtree) HasVolumeUuid() bool {
-	if o != nil && o.VolumeUuid != nil {
+	if o != nil && !IsNil(o.VolumeUuid) {
 		return true
 	}
 
@@ -408,128 +412,176 @@ func (o *StorageNetAppQtree) SetVolumeUuid(v string) {
 	o.VolumeUuid = &v
 }
 
-// GetStorageContainer returns the StorageContainer field value if set, zero value otherwise.
+// GetStorageContainer returns the StorageContainer field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *StorageNetAppQtree) GetStorageContainer() StorageNetAppVolumeRelationship {
-	if o == nil || o.StorageContainer == nil {
+	if o == nil || IsNil(o.StorageContainer.Get()) {
 		var ret StorageNetAppVolumeRelationship
 		return ret
 	}
-	return *o.StorageContainer
+	return *o.StorageContainer.Get()
 }
 
 // GetStorageContainerOk returns a tuple with the StorageContainer field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StorageNetAppQtree) GetStorageContainerOk() (*StorageNetAppVolumeRelationship, bool) {
-	if o == nil || o.StorageContainer == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.StorageContainer, true
+	return o.StorageContainer.Get(), o.StorageContainer.IsSet()
 }
 
 // HasStorageContainer returns a boolean if a field has been set.
 func (o *StorageNetAppQtree) HasStorageContainer() bool {
-	if o != nil && o.StorageContainer != nil {
+	if o != nil && o.StorageContainer.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetStorageContainer gets a reference to the given StorageNetAppVolumeRelationship and assigns it to the StorageContainer field.
+// SetStorageContainer gets a reference to the given NullableStorageNetAppVolumeRelationship and assigns it to the StorageContainer field.
 func (o *StorageNetAppQtree) SetStorageContainer(v StorageNetAppVolumeRelationship) {
-	o.StorageContainer = &v
+	o.StorageContainer.Set(&v)
 }
 
-// GetTenant returns the Tenant field value if set, zero value otherwise.
+// SetStorageContainerNil sets the value for StorageContainer to be an explicit nil
+func (o *StorageNetAppQtree) SetStorageContainerNil() {
+	o.StorageContainer.Set(nil)
+}
+
+// UnsetStorageContainer ensures that no value is present for StorageContainer, not even an explicit nil
+func (o *StorageNetAppQtree) UnsetStorageContainer() {
+	o.StorageContainer.Unset()
+}
+
+// GetTenant returns the Tenant field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *StorageNetAppQtree) GetTenant() StorageNetAppStorageVmRelationship {
-	if o == nil || o.Tenant == nil {
+	if o == nil || IsNil(o.Tenant.Get()) {
 		var ret StorageNetAppStorageVmRelationship
 		return ret
 	}
-	return *o.Tenant
+	return *o.Tenant.Get()
 }
 
 // GetTenantOk returns a tuple with the Tenant field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StorageNetAppQtree) GetTenantOk() (*StorageNetAppStorageVmRelationship, bool) {
-	if o == nil || o.Tenant == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Tenant, true
+	return o.Tenant.Get(), o.Tenant.IsSet()
 }
 
 // HasTenant returns a boolean if a field has been set.
 func (o *StorageNetAppQtree) HasTenant() bool {
-	if o != nil && o.Tenant != nil {
+	if o != nil && o.Tenant.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetTenant gets a reference to the given StorageNetAppStorageVmRelationship and assigns it to the Tenant field.
+// SetTenant gets a reference to the given NullableStorageNetAppStorageVmRelationship and assigns it to the Tenant field.
 func (o *StorageNetAppQtree) SetTenant(v StorageNetAppStorageVmRelationship) {
-	o.Tenant = &v
+	o.Tenant.Set(&v)
+}
+
+// SetTenantNil sets the value for Tenant to be an explicit nil
+func (o *StorageNetAppQtree) SetTenantNil() {
+	o.Tenant.Set(nil)
+}
+
+// UnsetTenant ensures that no value is present for Tenant, not even an explicit nil
+func (o *StorageNetAppQtree) UnsetTenant() {
+	o.Tenant.Unset()
 }
 
 func (o StorageNetAppQtree) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o StorageNetAppQtree) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.ExportPolicyId != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.ExportPolicyId) {
 		toSerialize["ExportPolicyId"] = o.ExportPolicyId
 	}
-	if o.Name != nil {
+	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
 	}
-	if o.Path != nil {
+	if !IsNil(o.Path) {
 		toSerialize["Path"] = o.Path
 	}
-	if o.Permission != nil {
+	if !IsNil(o.Permission) {
 		toSerialize["Permission"] = o.Permission
 	}
-	if o.QtreeId != nil {
+	if !IsNil(o.QtreeId) {
 		toSerialize["QtreeId"] = o.QtreeId
 	}
-	if o.SecurityStyle != nil {
+	if !IsNil(o.SecurityStyle) {
 		toSerialize["SecurityStyle"] = o.SecurityStyle
 	}
-	if o.SvmName != nil {
+	if !IsNil(o.SvmName) {
 		toSerialize["SvmName"] = o.SvmName
 	}
-	if o.VolumeName != nil {
+	if !IsNil(o.VolumeName) {
 		toSerialize["VolumeName"] = o.VolumeName
 	}
-	if o.VolumeUuid != nil {
+	if !IsNil(o.VolumeUuid) {
 		toSerialize["VolumeUuid"] = o.VolumeUuid
 	}
-	if o.StorageContainer != nil {
-		toSerialize["StorageContainer"] = o.StorageContainer
+	if o.StorageContainer.IsSet() {
+		toSerialize["StorageContainer"] = o.StorageContainer.Get()
 	}
-	if o.Tenant != nil {
-		toSerialize["Tenant"] = o.Tenant
+	if o.Tenant.IsSet() {
+		toSerialize["Tenant"] = o.Tenant.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *StorageNetAppQtree) UnmarshalJSON(bytes []byte) (err error) {
+func (o *StorageNetAppQtree) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type StorageNetAppQtreeWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -552,14 +604,14 @@ func (o *StorageNetAppQtree) UnmarshalJSON(bytes []byte) (err error) {
 		// The parent volume name for the qtree.
 		VolumeName *string `json:"VolumeName,omitempty"`
 		// NetApp Volume uuid, unique identifier for the NetApp volume.
-		VolumeUuid       *string                             `json:"VolumeUuid,omitempty"`
-		StorageContainer *StorageNetAppVolumeRelationship    `json:"StorageContainer,omitempty"`
-		Tenant           *StorageNetAppStorageVmRelationship `json:"Tenant,omitempty"`
+		VolumeUuid       *string                                    `json:"VolumeUuid,omitempty"`
+		StorageContainer NullableStorageNetAppVolumeRelationship    `json:"StorageContainer,omitempty"`
+		Tenant           NullableStorageNetAppStorageVmRelationship `json:"Tenant,omitempty"`
 	}
 
 	varStorageNetAppQtreeWithoutEmbeddedStruct := StorageNetAppQtreeWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varStorageNetAppQtreeWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varStorageNetAppQtreeWithoutEmbeddedStruct)
 	if err == nil {
 		varStorageNetAppQtree := _StorageNetAppQtree{}
 		varStorageNetAppQtree.ClassId = varStorageNetAppQtreeWithoutEmbeddedStruct.ClassId
@@ -582,7 +634,7 @@ func (o *StorageNetAppQtree) UnmarshalJSON(bytes []byte) (err error) {
 
 	varStorageNetAppQtree := _StorageNetAppQtree{}
 
-	err = json.Unmarshal(bytes, &varStorageNetAppQtree)
+	err = json.Unmarshal(data, &varStorageNetAppQtree)
 	if err == nil {
 		o.MoBaseMo = varStorageNetAppQtree.MoBaseMo
 	} else {
@@ -591,7 +643,7 @@ func (o *StorageNetAppQtree) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "ExportPolicyId")

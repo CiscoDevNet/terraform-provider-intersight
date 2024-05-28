@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the HyperflexHypervisorVirtualMachine type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &HyperflexHypervisorVirtualMachine{}
 
 // HyperflexHypervisorVirtualMachine A virtual machine belonging to the HyperFlex cluster spawned via the hypervisor.
 type HyperflexHypervisorVirtualMachine struct {
@@ -42,9 +46,9 @@ type HyperflexHypervisorVirtualMachine struct {
 	// Flag indicating whether or not this virtual machine is a template. Apply to the ESXi platform only.
 	Template *bool `json:"Template,omitempty"`
 	// The instance UUID of a virtual machine.
-	VmInstanceUuid       *string                              `json:"VmInstanceUuid,omitempty"`
-	Cluster              *HyperflexClusterRelationship        `json:"Cluster,omitempty"`
-	Host                 *HyperflexHypervisorHostRelationship `json:"Host,omitempty"`
+	VmInstanceUuid       *string                                     `json:"VmInstanceUuid,omitempty"`
+	Cluster              NullableHyperflexClusterRelationship        `json:"Cluster,omitempty"`
+	Host                 NullableHyperflexHypervisorHostRelationship `json:"Host,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -131,7 +135,7 @@ func (o *HyperflexHypervisorVirtualMachine) SetObjectType(v string) {
 
 // GetConnectionState returns the ConnectionState field value if set, zero value otherwise.
 func (o *HyperflexHypervisorVirtualMachine) GetConnectionState() string {
-	if o == nil || o.ConnectionState == nil {
+	if o == nil || IsNil(o.ConnectionState) {
 		var ret string
 		return ret
 	}
@@ -141,7 +145,7 @@ func (o *HyperflexHypervisorVirtualMachine) GetConnectionState() string {
 // GetConnectionStateOk returns a tuple with the ConnectionState field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexHypervisorVirtualMachine) GetConnectionStateOk() (*string, bool) {
-	if o == nil || o.ConnectionState == nil {
+	if o == nil || IsNil(o.ConnectionState) {
 		return nil, false
 	}
 	return o.ConnectionState, true
@@ -149,7 +153,7 @@ func (o *HyperflexHypervisorVirtualMachine) GetConnectionStateOk() (*string, boo
 
 // HasConnectionState returns a boolean if a field has been set.
 func (o *HyperflexHypervisorVirtualMachine) HasConnectionState() bool {
-	if o != nil && o.ConnectionState != nil {
+	if o != nil && !IsNil(o.ConnectionState) {
 		return true
 	}
 
@@ -163,7 +167,7 @@ func (o *HyperflexHypervisorVirtualMachine) SetConnectionState(v string) {
 
 // GetGuestOsState returns the GuestOsState field value if set, zero value otherwise.
 func (o *HyperflexHypervisorVirtualMachine) GetGuestOsState() string {
-	if o == nil || o.GuestOsState == nil {
+	if o == nil || IsNil(o.GuestOsState) {
 		var ret string
 		return ret
 	}
@@ -173,7 +177,7 @@ func (o *HyperflexHypervisorVirtualMachine) GetGuestOsState() string {
 // GetGuestOsStateOk returns a tuple with the GuestOsState field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexHypervisorVirtualMachine) GetGuestOsStateOk() (*string, bool) {
-	if o == nil || o.GuestOsState == nil {
+	if o == nil || IsNil(o.GuestOsState) {
 		return nil, false
 	}
 	return o.GuestOsState, true
@@ -181,7 +185,7 @@ func (o *HyperflexHypervisorVirtualMachine) GetGuestOsStateOk() (*string, bool) 
 
 // HasGuestOsState returns a boolean if a field has been set.
 func (o *HyperflexHypervisorVirtualMachine) HasGuestOsState() bool {
-	if o != nil && o.GuestOsState != nil {
+	if o != nil && !IsNil(o.GuestOsState) {
 		return true
 	}
 
@@ -195,7 +199,7 @@ func (o *HyperflexHypervisorVirtualMachine) SetGuestOsState(v string) {
 
 // GetHostUuid returns the HostUuid field value if set, zero value otherwise.
 func (o *HyperflexHypervisorVirtualMachine) GetHostUuid() string {
-	if o == nil || o.HostUuid == nil {
+	if o == nil || IsNil(o.HostUuid) {
 		var ret string
 		return ret
 	}
@@ -205,7 +209,7 @@ func (o *HyperflexHypervisorVirtualMachine) GetHostUuid() string {
 // GetHostUuidOk returns a tuple with the HostUuid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexHypervisorVirtualMachine) GetHostUuidOk() (*string, bool) {
-	if o == nil || o.HostUuid == nil {
+	if o == nil || IsNil(o.HostUuid) {
 		return nil, false
 	}
 	return o.HostUuid, true
@@ -213,7 +217,7 @@ func (o *HyperflexHypervisorVirtualMachine) GetHostUuidOk() (*string, bool) {
 
 // HasHostUuid returns a boolean if a field has been set.
 func (o *HyperflexHypervisorVirtualMachine) HasHostUuid() bool {
-	if o != nil && o.HostUuid != nil {
+	if o != nil && !IsNil(o.HostUuid) {
 		return true
 	}
 
@@ -227,7 +231,7 @@ func (o *HyperflexHypervisorVirtualMachine) SetHostUuid(v string) {
 
 // GetIp returns the Ip field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *HyperflexHypervisorVirtualMachine) GetIp() NetworkHyperFlexNetworkAddress {
-	if o == nil || o.Ip.Get() == nil {
+	if o == nil || IsNil(o.Ip.Get()) {
 		var ret NetworkHyperFlexNetworkAddress
 		return ret
 	}
@@ -270,7 +274,7 @@ func (o *HyperflexHypervisorVirtualMachine) UnsetIp() {
 
 // GetPath returns the Path field value if set, zero value otherwise.
 func (o *HyperflexHypervisorVirtualMachine) GetPath() string {
-	if o == nil || o.Path == nil {
+	if o == nil || IsNil(o.Path) {
 		var ret string
 		return ret
 	}
@@ -280,7 +284,7 @@ func (o *HyperflexHypervisorVirtualMachine) GetPath() string {
 // GetPathOk returns a tuple with the Path field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexHypervisorVirtualMachine) GetPathOk() (*string, bool) {
-	if o == nil || o.Path == nil {
+	if o == nil || IsNil(o.Path) {
 		return nil, false
 	}
 	return o.Path, true
@@ -288,7 +292,7 @@ func (o *HyperflexHypervisorVirtualMachine) GetPathOk() (*string, bool) {
 
 // HasPath returns a boolean if a field has been set.
 func (o *HyperflexHypervisorVirtualMachine) HasPath() bool {
-	if o != nil && o.Path != nil {
+	if o != nil && !IsNil(o.Path) {
 		return true
 	}
 
@@ -302,7 +306,7 @@ func (o *HyperflexHypervisorVirtualMachine) SetPath(v string) {
 
 // GetPlatformInstanceId returns the PlatformInstanceId field value if set, zero value otherwise.
 func (o *HyperflexHypervisorVirtualMachine) GetPlatformInstanceId() string {
-	if o == nil || o.PlatformInstanceId == nil {
+	if o == nil || IsNil(o.PlatformInstanceId) {
 		var ret string
 		return ret
 	}
@@ -312,7 +316,7 @@ func (o *HyperflexHypervisorVirtualMachine) GetPlatformInstanceId() string {
 // GetPlatformInstanceIdOk returns a tuple with the PlatformInstanceId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexHypervisorVirtualMachine) GetPlatformInstanceIdOk() (*string, bool) {
-	if o == nil || o.PlatformInstanceId == nil {
+	if o == nil || IsNil(o.PlatformInstanceId) {
 		return nil, false
 	}
 	return o.PlatformInstanceId, true
@@ -320,7 +324,7 @@ func (o *HyperflexHypervisorVirtualMachine) GetPlatformInstanceIdOk() (*string, 
 
 // HasPlatformInstanceId returns a boolean if a field has been set.
 func (o *HyperflexHypervisorVirtualMachine) HasPlatformInstanceId() bool {
-	if o != nil && o.PlatformInstanceId != nil {
+	if o != nil && !IsNil(o.PlatformInstanceId) {
 		return true
 	}
 
@@ -334,7 +338,7 @@ func (o *HyperflexHypervisorVirtualMachine) SetPlatformInstanceId(v string) {
 
 // GetStorageProvisionedInBytes returns the StorageProvisionedInBytes field value if set, zero value otherwise.
 func (o *HyperflexHypervisorVirtualMachine) GetStorageProvisionedInBytes() int64 {
-	if o == nil || o.StorageProvisionedInBytes == nil {
+	if o == nil || IsNil(o.StorageProvisionedInBytes) {
 		var ret int64
 		return ret
 	}
@@ -344,7 +348,7 @@ func (o *HyperflexHypervisorVirtualMachine) GetStorageProvisionedInBytes() int64
 // GetStorageProvisionedInBytesOk returns a tuple with the StorageProvisionedInBytes field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexHypervisorVirtualMachine) GetStorageProvisionedInBytesOk() (*int64, bool) {
-	if o == nil || o.StorageProvisionedInBytes == nil {
+	if o == nil || IsNil(o.StorageProvisionedInBytes) {
 		return nil, false
 	}
 	return o.StorageProvisionedInBytes, true
@@ -352,7 +356,7 @@ func (o *HyperflexHypervisorVirtualMachine) GetStorageProvisionedInBytesOk() (*i
 
 // HasStorageProvisionedInBytes returns a boolean if a field has been set.
 func (o *HyperflexHypervisorVirtualMachine) HasStorageProvisionedInBytes() bool {
-	if o != nil && o.StorageProvisionedInBytes != nil {
+	if o != nil && !IsNil(o.StorageProvisionedInBytes) {
 		return true
 	}
 
@@ -366,7 +370,7 @@ func (o *HyperflexHypervisorVirtualMachine) SetStorageProvisionedInBytes(v int64
 
 // GetStorageUsedInBytes returns the StorageUsedInBytes field value if set, zero value otherwise.
 func (o *HyperflexHypervisorVirtualMachine) GetStorageUsedInBytes() int64 {
-	if o == nil || o.StorageUsedInBytes == nil {
+	if o == nil || IsNil(o.StorageUsedInBytes) {
 		var ret int64
 		return ret
 	}
@@ -376,7 +380,7 @@ func (o *HyperflexHypervisorVirtualMachine) GetStorageUsedInBytes() int64 {
 // GetStorageUsedInBytesOk returns a tuple with the StorageUsedInBytes field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexHypervisorVirtualMachine) GetStorageUsedInBytesOk() (*int64, bool) {
-	if o == nil || o.StorageUsedInBytes == nil {
+	if o == nil || IsNil(o.StorageUsedInBytes) {
 		return nil, false
 	}
 	return o.StorageUsedInBytes, true
@@ -384,7 +388,7 @@ func (o *HyperflexHypervisorVirtualMachine) GetStorageUsedInBytesOk() (*int64, b
 
 // HasStorageUsedInBytes returns a boolean if a field has been set.
 func (o *HyperflexHypervisorVirtualMachine) HasStorageUsedInBytes() bool {
-	if o != nil && o.StorageUsedInBytes != nil {
+	if o != nil && !IsNil(o.StorageUsedInBytes) {
 		return true
 	}
 
@@ -398,7 +402,7 @@ func (o *HyperflexHypervisorVirtualMachine) SetStorageUsedInBytes(v int64) {
 
 // GetTemplate returns the Template field value if set, zero value otherwise.
 func (o *HyperflexHypervisorVirtualMachine) GetTemplate() bool {
-	if o == nil || o.Template == nil {
+	if o == nil || IsNil(o.Template) {
 		var ret bool
 		return ret
 	}
@@ -408,7 +412,7 @@ func (o *HyperflexHypervisorVirtualMachine) GetTemplate() bool {
 // GetTemplateOk returns a tuple with the Template field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexHypervisorVirtualMachine) GetTemplateOk() (*bool, bool) {
-	if o == nil || o.Template == nil {
+	if o == nil || IsNil(o.Template) {
 		return nil, false
 	}
 	return o.Template, true
@@ -416,7 +420,7 @@ func (o *HyperflexHypervisorVirtualMachine) GetTemplateOk() (*bool, bool) {
 
 // HasTemplate returns a boolean if a field has been set.
 func (o *HyperflexHypervisorVirtualMachine) HasTemplate() bool {
-	if o != nil && o.Template != nil {
+	if o != nil && !IsNil(o.Template) {
 		return true
 	}
 
@@ -430,7 +434,7 @@ func (o *HyperflexHypervisorVirtualMachine) SetTemplate(v bool) {
 
 // GetVmInstanceUuid returns the VmInstanceUuid field value if set, zero value otherwise.
 func (o *HyperflexHypervisorVirtualMachine) GetVmInstanceUuid() string {
-	if o == nil || o.VmInstanceUuid == nil {
+	if o == nil || IsNil(o.VmInstanceUuid) {
 		var ret string
 		return ret
 	}
@@ -440,7 +444,7 @@ func (o *HyperflexHypervisorVirtualMachine) GetVmInstanceUuid() string {
 // GetVmInstanceUuidOk returns a tuple with the VmInstanceUuid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexHypervisorVirtualMachine) GetVmInstanceUuidOk() (*string, bool) {
-	if o == nil || o.VmInstanceUuid == nil {
+	if o == nil || IsNil(o.VmInstanceUuid) {
 		return nil, false
 	}
 	return o.VmInstanceUuid, true
@@ -448,7 +452,7 @@ func (o *HyperflexHypervisorVirtualMachine) GetVmInstanceUuidOk() (*string, bool
 
 // HasVmInstanceUuid returns a boolean if a field has been set.
 func (o *HyperflexHypervisorVirtualMachine) HasVmInstanceUuid() bool {
-	if o != nil && o.VmInstanceUuid != nil {
+	if o != nil && !IsNil(o.VmInstanceUuid) {
 		return true
 	}
 
@@ -460,131 +464,179 @@ func (o *HyperflexHypervisorVirtualMachine) SetVmInstanceUuid(v string) {
 	o.VmInstanceUuid = &v
 }
 
-// GetCluster returns the Cluster field value if set, zero value otherwise.
+// GetCluster returns the Cluster field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *HyperflexHypervisorVirtualMachine) GetCluster() HyperflexClusterRelationship {
-	if o == nil || o.Cluster == nil {
+	if o == nil || IsNil(o.Cluster.Get()) {
 		var ret HyperflexClusterRelationship
 		return ret
 	}
-	return *o.Cluster
+	return *o.Cluster.Get()
 }
 
 // GetClusterOk returns a tuple with the Cluster field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *HyperflexHypervisorVirtualMachine) GetClusterOk() (*HyperflexClusterRelationship, bool) {
-	if o == nil || o.Cluster == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Cluster, true
+	return o.Cluster.Get(), o.Cluster.IsSet()
 }
 
 // HasCluster returns a boolean if a field has been set.
 func (o *HyperflexHypervisorVirtualMachine) HasCluster() bool {
-	if o != nil && o.Cluster != nil {
+	if o != nil && o.Cluster.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetCluster gets a reference to the given HyperflexClusterRelationship and assigns it to the Cluster field.
+// SetCluster gets a reference to the given NullableHyperflexClusterRelationship and assigns it to the Cluster field.
 func (o *HyperflexHypervisorVirtualMachine) SetCluster(v HyperflexClusterRelationship) {
-	o.Cluster = &v
+	o.Cluster.Set(&v)
 }
 
-// GetHost returns the Host field value if set, zero value otherwise.
+// SetClusterNil sets the value for Cluster to be an explicit nil
+func (o *HyperflexHypervisorVirtualMachine) SetClusterNil() {
+	o.Cluster.Set(nil)
+}
+
+// UnsetCluster ensures that no value is present for Cluster, not even an explicit nil
+func (o *HyperflexHypervisorVirtualMachine) UnsetCluster() {
+	o.Cluster.Unset()
+}
+
+// GetHost returns the Host field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *HyperflexHypervisorVirtualMachine) GetHost() HyperflexHypervisorHostRelationship {
-	if o == nil || o.Host == nil {
+	if o == nil || IsNil(o.Host.Get()) {
 		var ret HyperflexHypervisorHostRelationship
 		return ret
 	}
-	return *o.Host
+	return *o.Host.Get()
 }
 
 // GetHostOk returns a tuple with the Host field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *HyperflexHypervisorVirtualMachine) GetHostOk() (*HyperflexHypervisorHostRelationship, bool) {
-	if o == nil || o.Host == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Host, true
+	return o.Host.Get(), o.Host.IsSet()
 }
 
 // HasHost returns a boolean if a field has been set.
 func (o *HyperflexHypervisorVirtualMachine) HasHost() bool {
-	if o != nil && o.Host != nil {
+	if o != nil && o.Host.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetHost gets a reference to the given HyperflexHypervisorHostRelationship and assigns it to the Host field.
+// SetHost gets a reference to the given NullableHyperflexHypervisorHostRelationship and assigns it to the Host field.
 func (o *HyperflexHypervisorVirtualMachine) SetHost(v HyperflexHypervisorHostRelationship) {
-	o.Host = &v
+	o.Host.Set(&v)
+}
+
+// SetHostNil sets the value for Host to be an explicit nil
+func (o *HyperflexHypervisorVirtualMachine) SetHostNil() {
+	o.Host.Set(nil)
+}
+
+// UnsetHost ensures that no value is present for Host, not even an explicit nil
+func (o *HyperflexHypervisorVirtualMachine) UnsetHost() {
+	o.Host.Unset()
 }
 
 func (o HyperflexHypervisorVirtualMachine) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o HyperflexHypervisorVirtualMachine) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedVirtualizationBaseVirtualMachine, errVirtualizationBaseVirtualMachine := json.Marshal(o.VirtualizationBaseVirtualMachine)
 	if errVirtualizationBaseVirtualMachine != nil {
-		return []byte{}, errVirtualizationBaseVirtualMachine
+		return map[string]interface{}{}, errVirtualizationBaseVirtualMachine
 	}
 	errVirtualizationBaseVirtualMachine = json.Unmarshal([]byte(serializedVirtualizationBaseVirtualMachine), &toSerialize)
 	if errVirtualizationBaseVirtualMachine != nil {
-		return []byte{}, errVirtualizationBaseVirtualMachine
+		return map[string]interface{}{}, errVirtualizationBaseVirtualMachine
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.ConnectionState != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.ConnectionState) {
 		toSerialize["ConnectionState"] = o.ConnectionState
 	}
-	if o.GuestOsState != nil {
+	if !IsNil(o.GuestOsState) {
 		toSerialize["GuestOsState"] = o.GuestOsState
 	}
-	if o.HostUuid != nil {
+	if !IsNil(o.HostUuid) {
 		toSerialize["HostUuid"] = o.HostUuid
 	}
 	if o.Ip.IsSet() {
 		toSerialize["Ip"] = o.Ip.Get()
 	}
-	if o.Path != nil {
+	if !IsNil(o.Path) {
 		toSerialize["Path"] = o.Path
 	}
-	if o.PlatformInstanceId != nil {
+	if !IsNil(o.PlatformInstanceId) {
 		toSerialize["PlatformInstanceId"] = o.PlatformInstanceId
 	}
-	if o.StorageProvisionedInBytes != nil {
+	if !IsNil(o.StorageProvisionedInBytes) {
 		toSerialize["StorageProvisionedInBytes"] = o.StorageProvisionedInBytes
 	}
-	if o.StorageUsedInBytes != nil {
+	if !IsNil(o.StorageUsedInBytes) {
 		toSerialize["StorageUsedInBytes"] = o.StorageUsedInBytes
 	}
-	if o.Template != nil {
+	if !IsNil(o.Template) {
 		toSerialize["Template"] = o.Template
 	}
-	if o.VmInstanceUuid != nil {
+	if !IsNil(o.VmInstanceUuid) {
 		toSerialize["VmInstanceUuid"] = o.VmInstanceUuid
 	}
-	if o.Cluster != nil {
-		toSerialize["Cluster"] = o.Cluster
+	if o.Cluster.IsSet() {
+		toSerialize["Cluster"] = o.Cluster.Get()
 	}
-	if o.Host != nil {
-		toSerialize["Host"] = o.Host
+	if o.Host.IsSet() {
+		toSerialize["Host"] = o.Host.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *HyperflexHypervisorVirtualMachine) UnmarshalJSON(bytes []byte) (err error) {
+func (o *HyperflexHypervisorVirtualMachine) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type HyperflexHypervisorVirtualMachineWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -608,14 +660,14 @@ func (o *HyperflexHypervisorVirtualMachine) UnmarshalJSON(bytes []byte) (err err
 		// Flag indicating whether or not this virtual machine is a template. Apply to the ESXi platform only.
 		Template *bool `json:"Template,omitempty"`
 		// The instance UUID of a virtual machine.
-		VmInstanceUuid *string                              `json:"VmInstanceUuid,omitempty"`
-		Cluster        *HyperflexClusterRelationship        `json:"Cluster,omitempty"`
-		Host           *HyperflexHypervisorHostRelationship `json:"Host,omitempty"`
+		VmInstanceUuid *string                                     `json:"VmInstanceUuid,omitempty"`
+		Cluster        NullableHyperflexClusterRelationship        `json:"Cluster,omitempty"`
+		Host           NullableHyperflexHypervisorHostRelationship `json:"Host,omitempty"`
 	}
 
 	varHyperflexHypervisorVirtualMachineWithoutEmbeddedStruct := HyperflexHypervisorVirtualMachineWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varHyperflexHypervisorVirtualMachineWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varHyperflexHypervisorVirtualMachineWithoutEmbeddedStruct)
 	if err == nil {
 		varHyperflexHypervisorVirtualMachine := _HyperflexHypervisorVirtualMachine{}
 		varHyperflexHypervisorVirtualMachine.ClassId = varHyperflexHypervisorVirtualMachineWithoutEmbeddedStruct.ClassId
@@ -639,7 +691,7 @@ func (o *HyperflexHypervisorVirtualMachine) UnmarshalJSON(bytes []byte) (err err
 
 	varHyperflexHypervisorVirtualMachine := _HyperflexHypervisorVirtualMachine{}
 
-	err = json.Unmarshal(bytes, &varHyperflexHypervisorVirtualMachine)
+	err = json.Unmarshal(data, &varHyperflexHypervisorVirtualMachine)
 	if err == nil {
 		o.VirtualizationBaseVirtualMachine = varHyperflexHypervisorVirtualMachine.VirtualizationBaseVirtualMachine
 	} else {
@@ -648,7 +700,7 @@ func (o *HyperflexHypervisorVirtualMachine) UnmarshalJSON(bytes []byte) (err err
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "ConnectionState")

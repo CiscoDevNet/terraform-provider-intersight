@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the FabricVsan type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &FabricVsan{}
 
 // FabricVsan Configuration object sent by user to create VSAN configurations.
 type FabricVsan struct {
@@ -37,8 +41,8 @@ type FabricVsan struct {
 	// Virtual San Identifier in the switch.
 	VsanId *int64 `json:"VsanId,omitempty"`
 	// Used to indicate whether the VSAN Id is defined for storage or uplink or both traffics in FI. * `Uplink` - Vsan associated with uplink network. * `Storage` - Vsan associated with storage network. * `Common` - Vsan that is common for uplink and storage network.
-	VsanScope            *string                            `json:"VsanScope,omitempty"`
-	FcNetworkPolicy      *FabricFcNetworkPolicyRelationship `json:"FcNetworkPolicy,omitempty"`
+	VsanScope            *string                                   `json:"VsanScope,omitempty"`
+	FcNetworkPolicy      NullableFabricFcNetworkPolicyRelationship `json:"FcNetworkPolicy,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -126,7 +130,7 @@ func (o *FabricVsan) SetObjectType(v string) {
 // GetDefaultZoning returns the DefaultZoning field value if set, zero value otherwise.
 // Deprecated
 func (o *FabricVsan) GetDefaultZoning() string {
-	if o == nil || o.DefaultZoning == nil {
+	if o == nil || IsNil(o.DefaultZoning) {
 		var ret string
 		return ret
 	}
@@ -137,7 +141,7 @@ func (o *FabricVsan) GetDefaultZoning() string {
 // and a boolean to check if the value has been set.
 // Deprecated
 func (o *FabricVsan) GetDefaultZoningOk() (*string, bool) {
-	if o == nil || o.DefaultZoning == nil {
+	if o == nil || IsNil(o.DefaultZoning) {
 		return nil, false
 	}
 	return o.DefaultZoning, true
@@ -145,7 +149,7 @@ func (o *FabricVsan) GetDefaultZoningOk() (*string, bool) {
 
 // HasDefaultZoning returns a boolean if a field has been set.
 func (o *FabricVsan) HasDefaultZoning() bool {
-	if o != nil && o.DefaultZoning != nil {
+	if o != nil && !IsNil(o.DefaultZoning) {
 		return true
 	}
 
@@ -161,7 +165,7 @@ func (o *FabricVsan) SetDefaultZoning(v string) {
 // GetFcZoneSharingMode returns the FcZoneSharingMode field value if set, zero value otherwise.
 // Deprecated
 func (o *FabricVsan) GetFcZoneSharingMode() string {
-	if o == nil || o.FcZoneSharingMode == nil {
+	if o == nil || IsNil(o.FcZoneSharingMode) {
 		var ret string
 		return ret
 	}
@@ -172,7 +176,7 @@ func (o *FabricVsan) GetFcZoneSharingMode() string {
 // and a boolean to check if the value has been set.
 // Deprecated
 func (o *FabricVsan) GetFcZoneSharingModeOk() (*string, bool) {
-	if o == nil || o.FcZoneSharingMode == nil {
+	if o == nil || IsNil(o.FcZoneSharingMode) {
 		return nil, false
 	}
 	return o.FcZoneSharingMode, true
@@ -180,7 +184,7 @@ func (o *FabricVsan) GetFcZoneSharingModeOk() (*string, bool) {
 
 // HasFcZoneSharingMode returns a boolean if a field has been set.
 func (o *FabricVsan) HasFcZoneSharingMode() bool {
-	if o != nil && o.FcZoneSharingMode != nil {
+	if o != nil && !IsNil(o.FcZoneSharingMode) {
 		return true
 	}
 
@@ -195,7 +199,7 @@ func (o *FabricVsan) SetFcZoneSharingMode(v string) {
 
 // GetFcoeVlan returns the FcoeVlan field value if set, zero value otherwise.
 func (o *FabricVsan) GetFcoeVlan() int64 {
-	if o == nil || o.FcoeVlan == nil {
+	if o == nil || IsNil(o.FcoeVlan) {
 		var ret int64
 		return ret
 	}
@@ -205,7 +209,7 @@ func (o *FabricVsan) GetFcoeVlan() int64 {
 // GetFcoeVlanOk returns a tuple with the FcoeVlan field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FabricVsan) GetFcoeVlanOk() (*int64, bool) {
-	if o == nil || o.FcoeVlan == nil {
+	if o == nil || IsNil(o.FcoeVlan) {
 		return nil, false
 	}
 	return o.FcoeVlan, true
@@ -213,7 +217,7 @@ func (o *FabricVsan) GetFcoeVlanOk() (*int64, bool) {
 
 // HasFcoeVlan returns a boolean if a field has been set.
 func (o *FabricVsan) HasFcoeVlan() bool {
-	if o != nil && o.FcoeVlan != nil {
+	if o != nil && !IsNil(o.FcoeVlan) {
 		return true
 	}
 
@@ -227,7 +231,7 @@ func (o *FabricVsan) SetFcoeVlan(v int64) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *FabricVsan) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -237,7 +241,7 @@ func (o *FabricVsan) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FabricVsan) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -245,7 +249,7 @@ func (o *FabricVsan) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *FabricVsan) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -259,7 +263,7 @@ func (o *FabricVsan) SetName(v string) {
 
 // GetVsanId returns the VsanId field value if set, zero value otherwise.
 func (o *FabricVsan) GetVsanId() int64 {
-	if o == nil || o.VsanId == nil {
+	if o == nil || IsNil(o.VsanId) {
 		var ret int64
 		return ret
 	}
@@ -269,7 +273,7 @@ func (o *FabricVsan) GetVsanId() int64 {
 // GetVsanIdOk returns a tuple with the VsanId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FabricVsan) GetVsanIdOk() (*int64, bool) {
-	if o == nil || o.VsanId == nil {
+	if o == nil || IsNil(o.VsanId) {
 		return nil, false
 	}
 	return o.VsanId, true
@@ -277,7 +281,7 @@ func (o *FabricVsan) GetVsanIdOk() (*int64, bool) {
 
 // HasVsanId returns a boolean if a field has been set.
 func (o *FabricVsan) HasVsanId() bool {
-	if o != nil && o.VsanId != nil {
+	if o != nil && !IsNil(o.VsanId) {
 		return true
 	}
 
@@ -291,7 +295,7 @@ func (o *FabricVsan) SetVsanId(v int64) {
 
 // GetVsanScope returns the VsanScope field value if set, zero value otherwise.
 func (o *FabricVsan) GetVsanScope() string {
-	if o == nil || o.VsanScope == nil {
+	if o == nil || IsNil(o.VsanScope) {
 		var ret string
 		return ret
 	}
@@ -301,7 +305,7 @@ func (o *FabricVsan) GetVsanScope() string {
 // GetVsanScopeOk returns a tuple with the VsanScope field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FabricVsan) GetVsanScopeOk() (*string, bool) {
-	if o == nil || o.VsanScope == nil {
+	if o == nil || IsNil(o.VsanScope) {
 		return nil, false
 	}
 	return o.VsanScope, true
@@ -309,7 +313,7 @@ func (o *FabricVsan) GetVsanScopeOk() (*string, bool) {
 
 // HasVsanScope returns a boolean if a field has been set.
 func (o *FabricVsan) HasVsanScope() bool {
-	if o != nil && o.VsanScope != nil {
+	if o != nil && !IsNil(o.VsanScope) {
 		return true
 	}
 
@@ -321,84 +325,121 @@ func (o *FabricVsan) SetVsanScope(v string) {
 	o.VsanScope = &v
 }
 
-// GetFcNetworkPolicy returns the FcNetworkPolicy field value if set, zero value otherwise.
+// GetFcNetworkPolicy returns the FcNetworkPolicy field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *FabricVsan) GetFcNetworkPolicy() FabricFcNetworkPolicyRelationship {
-	if o == nil || o.FcNetworkPolicy == nil {
+	if o == nil || IsNil(o.FcNetworkPolicy.Get()) {
 		var ret FabricFcNetworkPolicyRelationship
 		return ret
 	}
-	return *o.FcNetworkPolicy
+	return *o.FcNetworkPolicy.Get()
 }
 
 // GetFcNetworkPolicyOk returns a tuple with the FcNetworkPolicy field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *FabricVsan) GetFcNetworkPolicyOk() (*FabricFcNetworkPolicyRelationship, bool) {
-	if o == nil || o.FcNetworkPolicy == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.FcNetworkPolicy, true
+	return o.FcNetworkPolicy.Get(), o.FcNetworkPolicy.IsSet()
 }
 
 // HasFcNetworkPolicy returns a boolean if a field has been set.
 func (o *FabricVsan) HasFcNetworkPolicy() bool {
-	if o != nil && o.FcNetworkPolicy != nil {
+	if o != nil && o.FcNetworkPolicy.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetFcNetworkPolicy gets a reference to the given FabricFcNetworkPolicyRelationship and assigns it to the FcNetworkPolicy field.
+// SetFcNetworkPolicy gets a reference to the given NullableFabricFcNetworkPolicyRelationship and assigns it to the FcNetworkPolicy field.
 func (o *FabricVsan) SetFcNetworkPolicy(v FabricFcNetworkPolicyRelationship) {
-	o.FcNetworkPolicy = &v
+	o.FcNetworkPolicy.Set(&v)
+}
+
+// SetFcNetworkPolicyNil sets the value for FcNetworkPolicy to be an explicit nil
+func (o *FabricVsan) SetFcNetworkPolicyNil() {
+	o.FcNetworkPolicy.Set(nil)
+}
+
+// UnsetFcNetworkPolicy ensures that no value is present for FcNetworkPolicy, not even an explicit nil
+func (o *FabricVsan) UnsetFcNetworkPolicy() {
+	o.FcNetworkPolicy.Unset()
 }
 
 func (o FabricVsan) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o FabricVsan) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.DefaultZoning != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.DefaultZoning) {
 		toSerialize["DefaultZoning"] = o.DefaultZoning
 	}
-	if o.FcZoneSharingMode != nil {
+	if !IsNil(o.FcZoneSharingMode) {
 		toSerialize["FcZoneSharingMode"] = o.FcZoneSharingMode
 	}
-	if o.FcoeVlan != nil {
+	if !IsNil(o.FcoeVlan) {
 		toSerialize["FcoeVlan"] = o.FcoeVlan
 	}
-	if o.Name != nil {
+	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
 	}
-	if o.VsanId != nil {
+	if !IsNil(o.VsanId) {
 		toSerialize["VsanId"] = o.VsanId
 	}
-	if o.VsanScope != nil {
+	if !IsNil(o.VsanScope) {
 		toSerialize["VsanScope"] = o.VsanScope
 	}
-	if o.FcNetworkPolicy != nil {
-		toSerialize["FcNetworkPolicy"] = o.FcNetworkPolicy
+	if o.FcNetworkPolicy.IsSet() {
+		toSerialize["FcNetworkPolicy"] = o.FcNetworkPolicy.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *FabricVsan) UnmarshalJSON(bytes []byte) (err error) {
+func (o *FabricVsan) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type FabricVsanWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -417,13 +458,13 @@ func (o *FabricVsan) UnmarshalJSON(bytes []byte) (err error) {
 		// Virtual San Identifier in the switch.
 		VsanId *int64 `json:"VsanId,omitempty"`
 		// Used to indicate whether the VSAN Id is defined for storage or uplink or both traffics in FI. * `Uplink` - Vsan associated with uplink network. * `Storage` - Vsan associated with storage network. * `Common` - Vsan that is common for uplink and storage network.
-		VsanScope       *string                            `json:"VsanScope,omitempty"`
-		FcNetworkPolicy *FabricFcNetworkPolicyRelationship `json:"FcNetworkPolicy,omitempty"`
+		VsanScope       *string                                   `json:"VsanScope,omitempty"`
+		FcNetworkPolicy NullableFabricFcNetworkPolicyRelationship `json:"FcNetworkPolicy,omitempty"`
 	}
 
 	varFabricVsanWithoutEmbeddedStruct := FabricVsanWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varFabricVsanWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varFabricVsanWithoutEmbeddedStruct)
 	if err == nil {
 		varFabricVsan := _FabricVsan{}
 		varFabricVsan.ClassId = varFabricVsanWithoutEmbeddedStruct.ClassId
@@ -442,7 +483,7 @@ func (o *FabricVsan) UnmarshalJSON(bytes []byte) (err error) {
 
 	varFabricVsan := _FabricVsan{}
 
-	err = json.Unmarshal(bytes, &varFabricVsan)
+	err = json.Unmarshal(data, &varFabricVsan)
 	if err == nil {
 		o.MoBaseMo = varFabricVsan.MoBaseMo
 	} else {
@@ -451,7 +492,7 @@ func (o *FabricVsan) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "DefaultZoning")

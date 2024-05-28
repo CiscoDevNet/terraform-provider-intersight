@@ -9,9 +9,9 @@ Name | Type | Description | Notes
 **Internal** | Pointer to **bool** | If a folder is internal, it will be set to true. | [optional] 
 **InventoryPath** | Pointer to **string** | Inventory path to the folder. Example - /DC/myFolder. | [optional] 
 **TypeofFolder** | Pointer to **string** | Determines the type of folder. e.g. vCenter folder, VM and Templete Folder, StorageFolder, NetworkFolder, Host and Cluster Folder. * &#x60;Unknown&#x60; - The type of the folder is unknown. It may not represent that the folder does not exist but indicates that something might be wrong. * &#x60;VMTemplateFolder&#x60; - The folder contains VMs and VM templates. * &#x60;StorageFolder&#x60; - The folder contains storage devices. * &#x60;HostClusterFolder&#x60; - The folder contains hosts and clusters. * &#x60;NetworkFolder&#x60; - The folder contains network items. * &#x60;VcenterFolder&#x60; - The folder created under a vCenter or vCenter folder. | [optional] [default to "Unknown"]
-**Datacenter** | Pointer to [**VirtualizationVmwareDatacenterRelationship**](VirtualizationVmwareDatacenterRelationship.md) |  | [optional] 
-**HypervisorManager** | Pointer to [**VirtualizationVmwareVcenterRelationship**](VirtualizationVmwareVcenterRelationship.md) |  | [optional] 
-**VmwareFolder** | Pointer to [**VirtualizationVmwareFolderRelationship**](VirtualizationVmwareFolderRelationship.md) |  | [optional] 
+**Datacenter** | Pointer to [**NullableVirtualizationVmwareDatacenterRelationship**](VirtualizationVmwareDatacenterRelationship.md) |  | [optional] 
+**HypervisorManager** | Pointer to [**NullableVirtualizationVmwareVcenterRelationship**](VirtualizationVmwareVcenterRelationship.md) |  | [optional] 
+**VmwareFolder** | Pointer to [**NullableVirtualizationVmwareFolderRelationship**](VirtualizationVmwareFolderRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -172,6 +172,16 @@ SetDatacenter sets Datacenter field to given value.
 
 HasDatacenter returns a boolean if a field has been set.
 
+### SetDatacenterNil
+
+`func (o *VirtualizationVmwareFolder) SetDatacenterNil(b bool)`
+
+ SetDatacenterNil sets the value for Datacenter to be an explicit nil
+
+### UnsetDatacenter
+`func (o *VirtualizationVmwareFolder) UnsetDatacenter()`
+
+UnsetDatacenter ensures that no value is present for Datacenter, not even an explicit nil
 ### GetHypervisorManager
 
 `func (o *VirtualizationVmwareFolder) GetHypervisorManager() VirtualizationVmwareVcenterRelationship`
@@ -197,6 +207,16 @@ SetHypervisorManager sets HypervisorManager field to given value.
 
 HasHypervisorManager returns a boolean if a field has been set.
 
+### SetHypervisorManagerNil
+
+`func (o *VirtualizationVmwareFolder) SetHypervisorManagerNil(b bool)`
+
+ SetHypervisorManagerNil sets the value for HypervisorManager to be an explicit nil
+
+### UnsetHypervisorManager
+`func (o *VirtualizationVmwareFolder) UnsetHypervisorManager()`
+
+UnsetHypervisorManager ensures that no value is present for HypervisorManager, not even an explicit nil
 ### GetVmwareFolder
 
 `func (o *VirtualizationVmwareFolder) GetVmwareFolder() VirtualizationVmwareFolderRelationship`
@@ -222,6 +242,16 @@ SetVmwareFolder sets VmwareFolder field to given value.
 
 HasVmwareFolder returns a boolean if a field has been set.
 
+### SetVmwareFolderNil
+
+`func (o *VirtualizationVmwareFolder) SetVmwareFolderNil(b bool)`
+
+ SetVmwareFolderNil sets the value for VmwareFolder to be an explicit nil
+
+### UnsetVmwareFolder
+`func (o *VirtualizationVmwareFolder) UnsetVmwareFolder()`
+
+UnsetVmwareFolder ensures that no value is present for VmwareFolder, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -14,8 +14,8 @@ Name | Type | Description | Notes
 **MacAddressType** | Pointer to **string** | MAC address type for the mac address assigned to virtual network interface. * &#x60;manual&#x60; - Statically assigned MAC address. * &#x60;generated&#x60; - Automatically generated MAC address. * &#x60;assigned&#x60; - MAC address assigned by VCenter to the virtual network interface card. | [optional] [default to "manual"]
 **NetworkType** | Pointer to **string** | Type of network for virtual network interface. It can be either standard or distributed. | [optional] 
 **VmIdentity** | Pointer to **string** | Identity of the virtual machine where the virtual network interface is created. | [optional] 
-**Network** | Pointer to [**VirtualizationBaseNetworkRelationship**](VirtualizationBaseNetworkRelationship.md) |  | [optional] 
-**VirtualMachine** | Pointer to [**VirtualizationVmwareVirtualMachineRelationship**](VirtualizationVmwareVirtualMachineRelationship.md) |  | [optional] 
+**Network** | Pointer to [**NullableVirtualizationBaseNetworkRelationship**](VirtualizationBaseNetworkRelationship.md) |  | [optional] 
+**VirtualMachine** | Pointer to [**NullableVirtualizationVmwareVirtualMachineRelationship**](VirtualizationVmwareVirtualMachineRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -301,6 +301,16 @@ SetNetwork sets Network field to given value.
 
 HasNetwork returns a boolean if a field has been set.
 
+### SetNetworkNil
+
+`func (o *VirtualizationVmwareVirtualNetworkInterface) SetNetworkNil(b bool)`
+
+ SetNetworkNil sets the value for Network to be an explicit nil
+
+### UnsetNetwork
+`func (o *VirtualizationVmwareVirtualNetworkInterface) UnsetNetwork()`
+
+UnsetNetwork ensures that no value is present for Network, not even an explicit nil
 ### GetVirtualMachine
 
 `func (o *VirtualizationVmwareVirtualNetworkInterface) GetVirtualMachine() VirtualizationVmwareVirtualMachineRelationship`
@@ -326,6 +336,16 @@ SetVirtualMachine sets VirtualMachine field to given value.
 
 HasVirtualMachine returns a boolean if a field has been set.
 
+### SetVirtualMachineNil
+
+`func (o *VirtualizationVmwareVirtualNetworkInterface) SetVirtualMachineNil(b bool)`
+
+ SetVirtualMachineNil sets the value for VirtualMachine to be an explicit nil
+
+### UnsetVirtualMachine
+`func (o *VirtualizationVmwareVirtualNetworkInterface) UnsetVirtualMachine()`
+
+UnsetVirtualMachine ensures that no value is present for VirtualMachine, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

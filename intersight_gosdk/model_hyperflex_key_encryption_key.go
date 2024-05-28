@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the HyperflexKeyEncryptionKey type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &HyperflexKeyEncryptionKey{}
 
 // HyperflexKeyEncryptionKey Specifies a key encryption Key and parameters for the associated resource.
 type HyperflexKeyEncryptionKey struct {
@@ -43,9 +47,9 @@ type HyperflexKeyEncryptionKey struct {
 	// Resource type on which this key will be applied. * `CLUSTER` - Encryption is per HyperFlex cluster. * `DATASTORE` - Encryption is per dataStore on the HyperFlex cluster. * `DRIVE` - Encryption is per drive on the HyperFlex cluster.
 	ResourceType *string `json:"ResourceType,omitempty"`
 	// Copy of Key encryption key, which is used for sending the key over to the remote device endpoint. It is not persisited anywhere.
-	TransitKek           *string                              `json:"TransitKek,omitempty"`
-	ClusterProfile       *HyperflexClusterProfileRelationship `json:"ClusterProfile,omitempty"`
-	ResourceMo           *MoBaseMoRelationship                `json:"ResourceMo,omitempty"`
+	TransitKek           *string                                     `json:"TransitKek,omitempty"`
+	ClusterProfile       NullableHyperflexClusterProfileRelationship `json:"ClusterProfile,omitempty"`
+	ResourceMo           NullableMoBaseMoRelationship                `json:"ResourceMo,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -136,7 +140,7 @@ func (o *HyperflexKeyEncryptionKey) SetObjectType(v string) {
 
 // GetIsAccountRecovery returns the IsAccountRecovery field value if set, zero value otherwise.
 func (o *HyperflexKeyEncryptionKey) GetIsAccountRecovery() bool {
-	if o == nil || o.IsAccountRecovery == nil {
+	if o == nil || IsNil(o.IsAccountRecovery) {
 		var ret bool
 		return ret
 	}
@@ -146,7 +150,7 @@ func (o *HyperflexKeyEncryptionKey) GetIsAccountRecovery() bool {
 // GetIsAccountRecoveryOk returns a tuple with the IsAccountRecovery field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexKeyEncryptionKey) GetIsAccountRecoveryOk() (*bool, bool) {
-	if o == nil || o.IsAccountRecovery == nil {
+	if o == nil || IsNil(o.IsAccountRecovery) {
 		return nil, false
 	}
 	return o.IsAccountRecovery, true
@@ -154,7 +158,7 @@ func (o *HyperflexKeyEncryptionKey) GetIsAccountRecoveryOk() (*bool, bool) {
 
 // HasIsAccountRecovery returns a boolean if a field has been set.
 func (o *HyperflexKeyEncryptionKey) HasIsAccountRecovery() bool {
-	if o != nil && o.IsAccountRecovery != nil {
+	if o != nil && !IsNil(o.IsAccountRecovery) {
 		return true
 	}
 
@@ -168,7 +172,7 @@ func (o *HyperflexKeyEncryptionKey) SetIsAccountRecovery(v bool) {
 
 // GetIsKekSet returns the IsKekSet field value if set, zero value otherwise.
 func (o *HyperflexKeyEncryptionKey) GetIsKekSet() bool {
-	if o == nil || o.IsKekSet == nil {
+	if o == nil || IsNil(o.IsKekSet) {
 		var ret bool
 		return ret
 	}
@@ -178,7 +182,7 @@ func (o *HyperflexKeyEncryptionKey) GetIsKekSet() bool {
 // GetIsKekSetOk returns a tuple with the IsKekSet field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexKeyEncryptionKey) GetIsKekSetOk() (*bool, bool) {
-	if o == nil || o.IsKekSet == nil {
+	if o == nil || IsNil(o.IsKekSet) {
 		return nil, false
 	}
 	return o.IsKekSet, true
@@ -186,7 +190,7 @@ func (o *HyperflexKeyEncryptionKey) GetIsKekSetOk() (*bool, bool) {
 
 // HasIsKekSet returns a boolean if a field has been set.
 func (o *HyperflexKeyEncryptionKey) HasIsKekSet() bool {
-	if o != nil && o.IsKekSet != nil {
+	if o != nil && !IsNil(o.IsKekSet) {
 		return true
 	}
 
@@ -200,7 +204,7 @@ func (o *HyperflexKeyEncryptionKey) SetIsKekSet(v bool) {
 
 // GetIsPassphraseSet returns the IsPassphraseSet field value if set, zero value otherwise.
 func (o *HyperflexKeyEncryptionKey) GetIsPassphraseSet() bool {
-	if o == nil || o.IsPassphraseSet == nil {
+	if o == nil || IsNil(o.IsPassphraseSet) {
 		var ret bool
 		return ret
 	}
@@ -210,7 +214,7 @@ func (o *HyperflexKeyEncryptionKey) GetIsPassphraseSet() bool {
 // GetIsPassphraseSetOk returns a tuple with the IsPassphraseSet field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexKeyEncryptionKey) GetIsPassphraseSetOk() (*bool, bool) {
-	if o == nil || o.IsPassphraseSet == nil {
+	if o == nil || IsNil(o.IsPassphraseSet) {
 		return nil, false
 	}
 	return o.IsPassphraseSet, true
@@ -218,7 +222,7 @@ func (o *HyperflexKeyEncryptionKey) GetIsPassphraseSetOk() (*bool, bool) {
 
 // HasIsPassphraseSet returns a boolean if a field has been set.
 func (o *HyperflexKeyEncryptionKey) HasIsPassphraseSet() bool {
-	if o != nil && o.IsPassphraseSet != nil {
+	if o != nil && !IsNil(o.IsPassphraseSet) {
 		return true
 	}
 
@@ -232,7 +236,7 @@ func (o *HyperflexKeyEncryptionKey) SetIsPassphraseSet(v bool) {
 
 // GetIteration returns the Iteration field value if set, zero value otherwise.
 func (o *HyperflexKeyEncryptionKey) GetIteration() int64 {
-	if o == nil || o.Iteration == nil {
+	if o == nil || IsNil(o.Iteration) {
 		var ret int64
 		return ret
 	}
@@ -242,7 +246,7 @@ func (o *HyperflexKeyEncryptionKey) GetIteration() int64 {
 // GetIterationOk returns a tuple with the Iteration field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexKeyEncryptionKey) GetIterationOk() (*int64, bool) {
-	if o == nil || o.Iteration == nil {
+	if o == nil || IsNil(o.Iteration) {
 		return nil, false
 	}
 	return o.Iteration, true
@@ -250,7 +254,7 @@ func (o *HyperflexKeyEncryptionKey) GetIterationOk() (*int64, bool) {
 
 // HasIteration returns a boolean if a field has been set.
 func (o *HyperflexKeyEncryptionKey) HasIteration() bool {
-	if o != nil && o.Iteration != nil {
+	if o != nil && !IsNil(o.Iteration) {
 		return true
 	}
 
@@ -264,7 +268,7 @@ func (o *HyperflexKeyEncryptionKey) SetIteration(v int64) {
 
 // GetKek returns the Kek field value if set, zero value otherwise.
 func (o *HyperflexKeyEncryptionKey) GetKek() string {
-	if o == nil || o.Kek == nil {
+	if o == nil || IsNil(o.Kek) {
 		var ret string
 		return ret
 	}
@@ -274,7 +278,7 @@ func (o *HyperflexKeyEncryptionKey) GetKek() string {
 // GetKekOk returns a tuple with the Kek field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexKeyEncryptionKey) GetKekOk() (*string, bool) {
-	if o == nil || o.Kek == nil {
+	if o == nil || IsNil(o.Kek) {
 		return nil, false
 	}
 	return o.Kek, true
@@ -282,7 +286,7 @@ func (o *HyperflexKeyEncryptionKey) GetKekOk() (*string, bool) {
 
 // HasKek returns a boolean if a field has been set.
 func (o *HyperflexKeyEncryptionKey) HasKek() bool {
-	if o != nil && o.Kek != nil {
+	if o != nil && !IsNil(o.Kek) {
 		return true
 	}
 
@@ -296,7 +300,7 @@ func (o *HyperflexKeyEncryptionKey) SetKek(v string) {
 
 // GetKeyId returns the KeyId field value if set, zero value otherwise.
 func (o *HyperflexKeyEncryptionKey) GetKeyId() string {
-	if o == nil || o.KeyId == nil {
+	if o == nil || IsNil(o.KeyId) {
 		var ret string
 		return ret
 	}
@@ -306,7 +310,7 @@ func (o *HyperflexKeyEncryptionKey) GetKeyId() string {
 // GetKeyIdOk returns a tuple with the KeyId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexKeyEncryptionKey) GetKeyIdOk() (*string, bool) {
-	if o == nil || o.KeyId == nil {
+	if o == nil || IsNil(o.KeyId) {
 		return nil, false
 	}
 	return o.KeyId, true
@@ -314,7 +318,7 @@ func (o *HyperflexKeyEncryptionKey) GetKeyIdOk() (*string, bool) {
 
 // HasKeyId returns a boolean if a field has been set.
 func (o *HyperflexKeyEncryptionKey) HasKeyId() bool {
-	if o != nil && o.KeyId != nil {
+	if o != nil && !IsNil(o.KeyId) {
 		return true
 	}
 
@@ -328,7 +332,7 @@ func (o *HyperflexKeyEncryptionKey) SetKeyId(v string) {
 
 // GetKeyState returns the KeyState field value if set, zero value otherwise.
 func (o *HyperflexKeyEncryptionKey) GetKeyState() string {
-	if o == nil || o.KeyState == nil {
+	if o == nil || IsNil(o.KeyState) {
 		var ret string
 		return ret
 	}
@@ -338,7 +342,7 @@ func (o *HyperflexKeyEncryptionKey) GetKeyState() string {
 // GetKeyStateOk returns a tuple with the KeyState field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexKeyEncryptionKey) GetKeyStateOk() (*string, bool) {
-	if o == nil || o.KeyState == nil {
+	if o == nil || IsNil(o.KeyState) {
 		return nil, false
 	}
 	return o.KeyState, true
@@ -346,7 +350,7 @@ func (o *HyperflexKeyEncryptionKey) GetKeyStateOk() (*string, bool) {
 
 // HasKeyState returns a boolean if a field has been set.
 func (o *HyperflexKeyEncryptionKey) HasKeyState() bool {
-	if o != nil && o.KeyState != nil {
+	if o != nil && !IsNil(o.KeyState) {
 		return true
 	}
 
@@ -360,7 +364,7 @@ func (o *HyperflexKeyEncryptionKey) SetKeyState(v string) {
 
 // GetPassphrase returns the Passphrase field value if set, zero value otherwise.
 func (o *HyperflexKeyEncryptionKey) GetPassphrase() string {
-	if o == nil || o.Passphrase == nil {
+	if o == nil || IsNil(o.Passphrase) {
 		var ret string
 		return ret
 	}
@@ -370,7 +374,7 @@ func (o *HyperflexKeyEncryptionKey) GetPassphrase() string {
 // GetPassphraseOk returns a tuple with the Passphrase field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexKeyEncryptionKey) GetPassphraseOk() (*string, bool) {
-	if o == nil || o.Passphrase == nil {
+	if o == nil || IsNil(o.Passphrase) {
 		return nil, false
 	}
 	return o.Passphrase, true
@@ -378,7 +382,7 @@ func (o *HyperflexKeyEncryptionKey) GetPassphraseOk() (*string, bool) {
 
 // HasPassphrase returns a boolean if a field has been set.
 func (o *HyperflexKeyEncryptionKey) HasPassphrase() bool {
-	if o != nil && o.Passphrase != nil {
+	if o != nil && !IsNil(o.Passphrase) {
 		return true
 	}
 
@@ -392,7 +396,7 @@ func (o *HyperflexKeyEncryptionKey) SetPassphrase(v string) {
 
 // GetResourceType returns the ResourceType field value if set, zero value otherwise.
 func (o *HyperflexKeyEncryptionKey) GetResourceType() string {
-	if o == nil || o.ResourceType == nil {
+	if o == nil || IsNil(o.ResourceType) {
 		var ret string
 		return ret
 	}
@@ -402,7 +406,7 @@ func (o *HyperflexKeyEncryptionKey) GetResourceType() string {
 // GetResourceTypeOk returns a tuple with the ResourceType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexKeyEncryptionKey) GetResourceTypeOk() (*string, bool) {
-	if o == nil || o.ResourceType == nil {
+	if o == nil || IsNil(o.ResourceType) {
 		return nil, false
 	}
 	return o.ResourceType, true
@@ -410,7 +414,7 @@ func (o *HyperflexKeyEncryptionKey) GetResourceTypeOk() (*string, bool) {
 
 // HasResourceType returns a boolean if a field has been set.
 func (o *HyperflexKeyEncryptionKey) HasResourceType() bool {
-	if o != nil && o.ResourceType != nil {
+	if o != nil && !IsNil(o.ResourceType) {
 		return true
 	}
 
@@ -424,7 +428,7 @@ func (o *HyperflexKeyEncryptionKey) SetResourceType(v string) {
 
 // GetTransitKek returns the TransitKek field value if set, zero value otherwise.
 func (o *HyperflexKeyEncryptionKey) GetTransitKek() string {
-	if o == nil || o.TransitKek == nil {
+	if o == nil || IsNil(o.TransitKek) {
 		var ret string
 		return ret
 	}
@@ -434,7 +438,7 @@ func (o *HyperflexKeyEncryptionKey) GetTransitKek() string {
 // GetTransitKekOk returns a tuple with the TransitKek field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexKeyEncryptionKey) GetTransitKekOk() (*string, bool) {
-	if o == nil || o.TransitKek == nil {
+	if o == nil || IsNil(o.TransitKek) {
 		return nil, false
 	}
 	return o.TransitKek, true
@@ -442,7 +446,7 @@ func (o *HyperflexKeyEncryptionKey) GetTransitKekOk() (*string, bool) {
 
 // HasTransitKek returns a boolean if a field has been set.
 func (o *HyperflexKeyEncryptionKey) HasTransitKek() bool {
-	if o != nil && o.TransitKek != nil {
+	if o != nil && !IsNil(o.TransitKek) {
 		return true
 	}
 
@@ -454,131 +458,179 @@ func (o *HyperflexKeyEncryptionKey) SetTransitKek(v string) {
 	o.TransitKek = &v
 }
 
-// GetClusterProfile returns the ClusterProfile field value if set, zero value otherwise.
+// GetClusterProfile returns the ClusterProfile field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *HyperflexKeyEncryptionKey) GetClusterProfile() HyperflexClusterProfileRelationship {
-	if o == nil || o.ClusterProfile == nil {
+	if o == nil || IsNil(o.ClusterProfile.Get()) {
 		var ret HyperflexClusterProfileRelationship
 		return ret
 	}
-	return *o.ClusterProfile
+	return *o.ClusterProfile.Get()
 }
 
 // GetClusterProfileOk returns a tuple with the ClusterProfile field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *HyperflexKeyEncryptionKey) GetClusterProfileOk() (*HyperflexClusterProfileRelationship, bool) {
-	if o == nil || o.ClusterProfile == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.ClusterProfile, true
+	return o.ClusterProfile.Get(), o.ClusterProfile.IsSet()
 }
 
 // HasClusterProfile returns a boolean if a field has been set.
 func (o *HyperflexKeyEncryptionKey) HasClusterProfile() bool {
-	if o != nil && o.ClusterProfile != nil {
+	if o != nil && o.ClusterProfile.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetClusterProfile gets a reference to the given HyperflexClusterProfileRelationship and assigns it to the ClusterProfile field.
+// SetClusterProfile gets a reference to the given NullableHyperflexClusterProfileRelationship and assigns it to the ClusterProfile field.
 func (o *HyperflexKeyEncryptionKey) SetClusterProfile(v HyperflexClusterProfileRelationship) {
-	o.ClusterProfile = &v
+	o.ClusterProfile.Set(&v)
 }
 
-// GetResourceMo returns the ResourceMo field value if set, zero value otherwise.
+// SetClusterProfileNil sets the value for ClusterProfile to be an explicit nil
+func (o *HyperflexKeyEncryptionKey) SetClusterProfileNil() {
+	o.ClusterProfile.Set(nil)
+}
+
+// UnsetClusterProfile ensures that no value is present for ClusterProfile, not even an explicit nil
+func (o *HyperflexKeyEncryptionKey) UnsetClusterProfile() {
+	o.ClusterProfile.Unset()
+}
+
+// GetResourceMo returns the ResourceMo field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *HyperflexKeyEncryptionKey) GetResourceMo() MoBaseMoRelationship {
-	if o == nil || o.ResourceMo == nil {
+	if o == nil || IsNil(o.ResourceMo.Get()) {
 		var ret MoBaseMoRelationship
 		return ret
 	}
-	return *o.ResourceMo
+	return *o.ResourceMo.Get()
 }
 
 // GetResourceMoOk returns a tuple with the ResourceMo field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *HyperflexKeyEncryptionKey) GetResourceMoOk() (*MoBaseMoRelationship, bool) {
-	if o == nil || o.ResourceMo == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.ResourceMo, true
+	return o.ResourceMo.Get(), o.ResourceMo.IsSet()
 }
 
 // HasResourceMo returns a boolean if a field has been set.
 func (o *HyperflexKeyEncryptionKey) HasResourceMo() bool {
-	if o != nil && o.ResourceMo != nil {
+	if o != nil && o.ResourceMo.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetResourceMo gets a reference to the given MoBaseMoRelationship and assigns it to the ResourceMo field.
+// SetResourceMo gets a reference to the given NullableMoBaseMoRelationship and assigns it to the ResourceMo field.
 func (o *HyperflexKeyEncryptionKey) SetResourceMo(v MoBaseMoRelationship) {
-	o.ResourceMo = &v
+	o.ResourceMo.Set(&v)
+}
+
+// SetResourceMoNil sets the value for ResourceMo to be an explicit nil
+func (o *HyperflexKeyEncryptionKey) SetResourceMoNil() {
+	o.ResourceMo.Set(nil)
+}
+
+// UnsetResourceMo ensures that no value is present for ResourceMo, not even an explicit nil
+func (o *HyperflexKeyEncryptionKey) UnsetResourceMo() {
+	o.ResourceMo.Unset()
 }
 
 func (o HyperflexKeyEncryptionKey) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o HyperflexKeyEncryptionKey) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.IsAccountRecovery != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.IsAccountRecovery) {
 		toSerialize["IsAccountRecovery"] = o.IsAccountRecovery
 	}
-	if o.IsKekSet != nil {
+	if !IsNil(o.IsKekSet) {
 		toSerialize["IsKekSet"] = o.IsKekSet
 	}
-	if o.IsPassphraseSet != nil {
+	if !IsNil(o.IsPassphraseSet) {
 		toSerialize["IsPassphraseSet"] = o.IsPassphraseSet
 	}
-	if o.Iteration != nil {
+	if !IsNil(o.Iteration) {
 		toSerialize["Iteration"] = o.Iteration
 	}
-	if o.Kek != nil {
+	if !IsNil(o.Kek) {
 		toSerialize["Kek"] = o.Kek
 	}
-	if o.KeyId != nil {
+	if !IsNil(o.KeyId) {
 		toSerialize["KeyId"] = o.KeyId
 	}
-	if o.KeyState != nil {
+	if !IsNil(o.KeyState) {
 		toSerialize["KeyState"] = o.KeyState
 	}
-	if o.Passphrase != nil {
+	if !IsNil(o.Passphrase) {
 		toSerialize["Passphrase"] = o.Passphrase
 	}
-	if o.ResourceType != nil {
+	if !IsNil(o.ResourceType) {
 		toSerialize["ResourceType"] = o.ResourceType
 	}
-	if o.TransitKek != nil {
+	if !IsNil(o.TransitKek) {
 		toSerialize["TransitKek"] = o.TransitKek
 	}
-	if o.ClusterProfile != nil {
-		toSerialize["ClusterProfile"] = o.ClusterProfile
+	if o.ClusterProfile.IsSet() {
+		toSerialize["ClusterProfile"] = o.ClusterProfile.Get()
 	}
-	if o.ResourceMo != nil {
-		toSerialize["ResourceMo"] = o.ResourceMo
+	if o.ResourceMo.IsSet() {
+		toSerialize["ResourceMo"] = o.ResourceMo.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *HyperflexKeyEncryptionKey) UnmarshalJSON(bytes []byte) (err error) {
+func (o *HyperflexKeyEncryptionKey) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type HyperflexKeyEncryptionKeyWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -603,14 +655,14 @@ func (o *HyperflexKeyEncryptionKey) UnmarshalJSON(bytes []byte) (err error) {
 		// Resource type on which this key will be applied. * `CLUSTER` - Encryption is per HyperFlex cluster. * `DATASTORE` - Encryption is per dataStore on the HyperFlex cluster. * `DRIVE` - Encryption is per drive on the HyperFlex cluster.
 		ResourceType *string `json:"ResourceType,omitempty"`
 		// Copy of Key encryption key, which is used for sending the key over to the remote device endpoint. It is not persisited anywhere.
-		TransitKek     *string                              `json:"TransitKek,omitempty"`
-		ClusterProfile *HyperflexClusterProfileRelationship `json:"ClusterProfile,omitempty"`
-		ResourceMo     *MoBaseMoRelationship                `json:"ResourceMo,omitempty"`
+		TransitKek     *string                                     `json:"TransitKek,omitempty"`
+		ClusterProfile NullableHyperflexClusterProfileRelationship `json:"ClusterProfile,omitempty"`
+		ResourceMo     NullableMoBaseMoRelationship                `json:"ResourceMo,omitempty"`
 	}
 
 	varHyperflexKeyEncryptionKeyWithoutEmbeddedStruct := HyperflexKeyEncryptionKeyWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varHyperflexKeyEncryptionKeyWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varHyperflexKeyEncryptionKeyWithoutEmbeddedStruct)
 	if err == nil {
 		varHyperflexKeyEncryptionKey := _HyperflexKeyEncryptionKey{}
 		varHyperflexKeyEncryptionKey.ClassId = varHyperflexKeyEncryptionKeyWithoutEmbeddedStruct.ClassId
@@ -634,7 +686,7 @@ func (o *HyperflexKeyEncryptionKey) UnmarshalJSON(bytes []byte) (err error) {
 
 	varHyperflexKeyEncryptionKey := _HyperflexKeyEncryptionKey{}
 
-	err = json.Unmarshal(bytes, &varHyperflexKeyEncryptionKey)
+	err = json.Unmarshal(data, &varHyperflexKeyEncryptionKey)
 	if err == nil {
 		o.MoBaseMo = varHyperflexKeyEncryptionKey.MoBaseMo
 	} else {
@@ -643,7 +695,7 @@ func (o *HyperflexKeyEncryptionKey) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "IsAccountRecovery")

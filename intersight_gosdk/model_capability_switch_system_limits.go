@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the CapabilitySwitchSystemLimits type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &CapabilitySwitchSystemLimits{}
 
 // CapabilitySwitchSystemLimits Object combines and lists the storage-config limits for each of the Fabric/Switch platforms.
 type CapabilitySwitchSystemLimits struct {
@@ -108,7 +112,7 @@ func (o *CapabilitySwitchSystemLimits) SetObjectType(v string) {
 
 // GetMaximumChassisCount returns the MaximumChassisCount field value if set, zero value otherwise.
 func (o *CapabilitySwitchSystemLimits) GetMaximumChassisCount() int64 {
-	if o == nil || o.MaximumChassisCount == nil {
+	if o == nil || IsNil(o.MaximumChassisCount) {
 		var ret int64
 		return ret
 	}
@@ -118,7 +122,7 @@ func (o *CapabilitySwitchSystemLimits) GetMaximumChassisCount() int64 {
 // GetMaximumChassisCountOk returns a tuple with the MaximumChassisCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CapabilitySwitchSystemLimits) GetMaximumChassisCountOk() (*int64, bool) {
-	if o == nil || o.MaximumChassisCount == nil {
+	if o == nil || IsNil(o.MaximumChassisCount) {
 		return nil, false
 	}
 	return o.MaximumChassisCount, true
@@ -126,7 +130,7 @@ func (o *CapabilitySwitchSystemLimits) GetMaximumChassisCountOk() (*int64, bool)
 
 // HasMaximumChassisCount returns a boolean if a field has been set.
 func (o *CapabilitySwitchSystemLimits) HasMaximumChassisCount() bool {
-	if o != nil && o.MaximumChassisCount != nil {
+	if o != nil && !IsNil(o.MaximumChassisCount) {
 		return true
 	}
 
@@ -140,7 +144,7 @@ func (o *CapabilitySwitchSystemLimits) SetMaximumChassisCount(v int64) {
 
 // GetMaximumFexPerDomain returns the MaximumFexPerDomain field value if set, zero value otherwise.
 func (o *CapabilitySwitchSystemLimits) GetMaximumFexPerDomain() int64 {
-	if o == nil || o.MaximumFexPerDomain == nil {
+	if o == nil || IsNil(o.MaximumFexPerDomain) {
 		var ret int64
 		return ret
 	}
@@ -150,7 +154,7 @@ func (o *CapabilitySwitchSystemLimits) GetMaximumFexPerDomain() int64 {
 // GetMaximumFexPerDomainOk returns a tuple with the MaximumFexPerDomain field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CapabilitySwitchSystemLimits) GetMaximumFexPerDomainOk() (*int64, bool) {
-	if o == nil || o.MaximumFexPerDomain == nil {
+	if o == nil || IsNil(o.MaximumFexPerDomain) {
 		return nil, false
 	}
 	return o.MaximumFexPerDomain, true
@@ -158,7 +162,7 @@ func (o *CapabilitySwitchSystemLimits) GetMaximumFexPerDomainOk() (*int64, bool)
 
 // HasMaximumFexPerDomain returns a boolean if a field has been set.
 func (o *CapabilitySwitchSystemLimits) HasMaximumFexPerDomain() bool {
-	if o != nil && o.MaximumFexPerDomain != nil {
+	if o != nil && !IsNil(o.MaximumFexPerDomain) {
 		return true
 	}
 
@@ -172,7 +176,7 @@ func (o *CapabilitySwitchSystemLimits) SetMaximumFexPerDomain(v int64) {
 
 // GetMaximumServersPerDomain returns the MaximumServersPerDomain field value if set, zero value otherwise.
 func (o *CapabilitySwitchSystemLimits) GetMaximumServersPerDomain() int64 {
-	if o == nil || o.MaximumServersPerDomain == nil {
+	if o == nil || IsNil(o.MaximumServersPerDomain) {
 		var ret int64
 		return ret
 	}
@@ -182,7 +186,7 @@ func (o *CapabilitySwitchSystemLimits) GetMaximumServersPerDomain() int64 {
 // GetMaximumServersPerDomainOk returns a tuple with the MaximumServersPerDomain field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CapabilitySwitchSystemLimits) GetMaximumServersPerDomainOk() (*int64, bool) {
-	if o == nil || o.MaximumServersPerDomain == nil {
+	if o == nil || IsNil(o.MaximumServersPerDomain) {
 		return nil, false
 	}
 	return o.MaximumServersPerDomain, true
@@ -190,7 +194,7 @@ func (o *CapabilitySwitchSystemLimits) GetMaximumServersPerDomainOk() (*int64, b
 
 // HasMaximumServersPerDomain returns a boolean if a field has been set.
 func (o *CapabilitySwitchSystemLimits) HasMaximumServersPerDomain() bool {
-	if o != nil && o.MaximumServersPerDomain != nil {
+	if o != nil && !IsNil(o.MaximumServersPerDomain) {
 		return true
 	}
 
@@ -203,28 +207,32 @@ func (o *CapabilitySwitchSystemLimits) SetMaximumServersPerDomain(v int64) {
 }
 
 func (o CapabilitySwitchSystemLimits) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o CapabilitySwitchSystemLimits) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
 	errMoBaseComplexType = json.Unmarshal([]byte(serializedMoBaseComplexType), &toSerialize)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.MaximumChassisCount != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.MaximumChassisCount) {
 		toSerialize["MaximumChassisCount"] = o.MaximumChassisCount
 	}
-	if o.MaximumFexPerDomain != nil {
+	if !IsNil(o.MaximumFexPerDomain) {
 		toSerialize["MaximumFexPerDomain"] = o.MaximumFexPerDomain
 	}
-	if o.MaximumServersPerDomain != nil {
+	if !IsNil(o.MaximumServersPerDomain) {
 		toSerialize["MaximumServersPerDomain"] = o.MaximumServersPerDomain
 	}
 
@@ -232,10 +240,32 @@ func (o CapabilitySwitchSystemLimits) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *CapabilitySwitchSystemLimits) UnmarshalJSON(bytes []byte) (err error) {
+func (o *CapabilitySwitchSystemLimits) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type CapabilitySwitchSystemLimitsWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -251,7 +281,7 @@ func (o *CapabilitySwitchSystemLimits) UnmarshalJSON(bytes []byte) (err error) {
 
 	varCapabilitySwitchSystemLimitsWithoutEmbeddedStruct := CapabilitySwitchSystemLimitsWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varCapabilitySwitchSystemLimitsWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varCapabilitySwitchSystemLimitsWithoutEmbeddedStruct)
 	if err == nil {
 		varCapabilitySwitchSystemLimits := _CapabilitySwitchSystemLimits{}
 		varCapabilitySwitchSystemLimits.ClassId = varCapabilitySwitchSystemLimitsWithoutEmbeddedStruct.ClassId
@@ -266,7 +296,7 @@ func (o *CapabilitySwitchSystemLimits) UnmarshalJSON(bytes []byte) (err error) {
 
 	varCapabilitySwitchSystemLimits := _CapabilitySwitchSystemLimits{}
 
-	err = json.Unmarshal(bytes, &varCapabilitySwitchSystemLimits)
+	err = json.Unmarshal(data, &varCapabilitySwitchSystemLimits)
 	if err == nil {
 		o.MoBaseComplexType = varCapabilitySwitchSystemLimits.MoBaseComplexType
 	} else {
@@ -275,7 +305,7 @@ func (o *CapabilitySwitchSystemLimits) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "MaximumChassisCount")

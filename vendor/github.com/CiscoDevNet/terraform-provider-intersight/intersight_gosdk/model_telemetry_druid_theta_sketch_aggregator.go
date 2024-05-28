@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,7 +13,11 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 )
+
+// checks if the TelemetryDruidThetaSketchAggregator type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &TelemetryDruidThetaSketchAggregator{}
 
 // TelemetryDruidThetaSketchAggregator Theta sketch aggregation provides a class of specialized algorithms, called streaming algorithms, or sketches that can produce results orders-of magnitude faster and with mathematically proven error bounds. For interactive queries there may not be other viable alternatives, and in the case of real-time analysis, sketches are the only known solution. In the analysis of big data there are often problem queries that don't scale because they require huge compute resources and time to generate exact results. Examples include count distinct, quantiles, most-frequent items, joins, matrix computations, and graph analysis. If approximate results are acceptable, theta sketch aggregation can be used. Logically speaking, a Theta sketch object can be thought of as a set data structure. Sketches are read and aggregated (set unioned) together. A theta sketch query returns the estimate of the number of unique entries in the sketch object. You can use post aggregators to do union, intersection or difference on sketch columns in the same row. You can use thetaSketch aggregator on columns which were not ingested using the same. It will return estimated cardinality of the column.
 type TelemetryDruidThetaSketchAggregator struct {
@@ -128,7 +132,7 @@ func (o *TelemetryDruidThetaSketchAggregator) SetFieldName(v string) {
 
 // GetSize returns the Size field value if set, zero value otherwise.
 func (o *TelemetryDruidThetaSketchAggregator) GetSize() int32 {
-	if o == nil || o.Size == nil {
+	if o == nil || IsNil(o.Size) {
 		var ret int32
 		return ret
 	}
@@ -138,7 +142,7 @@ func (o *TelemetryDruidThetaSketchAggregator) GetSize() int32 {
 // GetSizeOk returns a tuple with the Size field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TelemetryDruidThetaSketchAggregator) GetSizeOk() (*int32, bool) {
-	if o == nil || o.Size == nil {
+	if o == nil || IsNil(o.Size) {
 		return nil, false
 	}
 	return o.Size, true
@@ -146,7 +150,7 @@ func (o *TelemetryDruidThetaSketchAggregator) GetSizeOk() (*int32, bool) {
 
 // HasSize returns a boolean if a field has been set.
 func (o *TelemetryDruidThetaSketchAggregator) HasSize() bool {
-	if o != nil && o.Size != nil {
+	if o != nil && !IsNil(o.Size) {
 		return true
 	}
 
@@ -159,17 +163,19 @@ func (o *TelemetryDruidThetaSketchAggregator) SetSize(v int32) {
 }
 
 func (o TelemetryDruidThetaSketchAggregator) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o TelemetryDruidThetaSketchAggregator) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["type"] = o.Type
-	}
-	if true {
-		toSerialize["name"] = o.Name
-	}
-	if true {
-		toSerialize["fieldName"] = o.FieldName
-	}
-	if o.Size != nil {
+	toSerialize["type"] = o.Type
+	toSerialize["name"] = o.Name
+	toSerialize["fieldName"] = o.FieldName
+	if !IsNil(o.Size) {
 		toSerialize["size"] = o.Size
 	}
 
@@ -177,19 +183,46 @@ func (o TelemetryDruidThetaSketchAggregator) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *TelemetryDruidThetaSketchAggregator) UnmarshalJSON(bytes []byte) (err error) {
+func (o *TelemetryDruidThetaSketchAggregator) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"type",
+		"name",
+		"fieldName",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	varTelemetryDruidThetaSketchAggregator := _TelemetryDruidThetaSketchAggregator{}
 
-	if err = json.Unmarshal(bytes, &varTelemetryDruidThetaSketchAggregator); err == nil {
-		*o = TelemetryDruidThetaSketchAggregator(varTelemetryDruidThetaSketchAggregator)
+	err = json.Unmarshal(data, &varTelemetryDruidThetaSketchAggregator)
+
+	if err != nil {
+		return err
 	}
+
+	*o = TelemetryDruidThetaSketchAggregator(varTelemetryDruidThetaSketchAggregator)
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "type")
 		delete(additionalProperties, "name")
 		delete(additionalProperties, "fieldName")

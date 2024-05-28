@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the IwotenantTenantCustomization type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &IwotenantTenantCustomization{}
 
 // IwotenantTenantCustomization Tenant customization that end user can do such as enabling data extractor.
 type IwotenantTenantCustomization struct {
@@ -37,8 +41,8 @@ type IwotenantTenantCustomization struct {
 	// AWS access key Id to write data to redshift.  Refer to AWS cloud formation stack 'Output' of the tenant.
 	WriteUserAccessKeyId *string `json:"WriteUserAccessKeyId,omitempty"`
 	// AWS secret access key to write data to redshift.  Refer to AWS cloud formation stack 'Output' of the tenant.
-	WriteUserSecretAccessKey *string                 `json:"WriteUserSecretAccessKey,omitempty"`
-	Account                  *IamAccountRelationship `json:"Account,omitempty"`
+	WriteUserSecretAccessKey *string                        `json:"WriteUserSecretAccessKey,omitempty"`
+	Account                  NullableIamAccountRelationship `json:"Account,omitempty"`
 	AdditionalProperties     map[string]interface{}
 }
 
@@ -117,7 +121,7 @@ func (o *IwotenantTenantCustomization) SetObjectType(v string) {
 
 // GetEnableDataExtractor returns the EnableDataExtractor field value if set, zero value otherwise.
 func (o *IwotenantTenantCustomization) GetEnableDataExtractor() bool {
-	if o == nil || o.EnableDataExtractor == nil {
+	if o == nil || IsNil(o.EnableDataExtractor) {
 		var ret bool
 		return ret
 	}
@@ -127,7 +131,7 @@ func (o *IwotenantTenantCustomization) GetEnableDataExtractor() bool {
 // GetEnableDataExtractorOk returns a tuple with the EnableDataExtractor field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IwotenantTenantCustomization) GetEnableDataExtractorOk() (*bool, bool) {
-	if o == nil || o.EnableDataExtractor == nil {
+	if o == nil || IsNil(o.EnableDataExtractor) {
 		return nil, false
 	}
 	return o.EnableDataExtractor, true
@@ -135,7 +139,7 @@ func (o *IwotenantTenantCustomization) GetEnableDataExtractorOk() (*bool, bool) 
 
 // HasEnableDataExtractor returns a boolean if a field has been set.
 func (o *IwotenantTenantCustomization) HasEnableDataExtractor() bool {
-	if o != nil && o.EnableDataExtractor != nil {
+	if o != nil && !IsNil(o.EnableDataExtractor) {
 		return true
 	}
 
@@ -149,7 +153,7 @@ func (o *IwotenantTenantCustomization) SetEnableDataExtractor(v bool) {
 
 // GetIsWriteUserAccessKeyIdSet returns the IsWriteUserAccessKeyIdSet field value if set, zero value otherwise.
 func (o *IwotenantTenantCustomization) GetIsWriteUserAccessKeyIdSet() bool {
-	if o == nil || o.IsWriteUserAccessKeyIdSet == nil {
+	if o == nil || IsNil(o.IsWriteUserAccessKeyIdSet) {
 		var ret bool
 		return ret
 	}
@@ -159,7 +163,7 @@ func (o *IwotenantTenantCustomization) GetIsWriteUserAccessKeyIdSet() bool {
 // GetIsWriteUserAccessKeyIdSetOk returns a tuple with the IsWriteUserAccessKeyIdSet field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IwotenantTenantCustomization) GetIsWriteUserAccessKeyIdSetOk() (*bool, bool) {
-	if o == nil || o.IsWriteUserAccessKeyIdSet == nil {
+	if o == nil || IsNil(o.IsWriteUserAccessKeyIdSet) {
 		return nil, false
 	}
 	return o.IsWriteUserAccessKeyIdSet, true
@@ -167,7 +171,7 @@ func (o *IwotenantTenantCustomization) GetIsWriteUserAccessKeyIdSetOk() (*bool, 
 
 // HasIsWriteUserAccessKeyIdSet returns a boolean if a field has been set.
 func (o *IwotenantTenantCustomization) HasIsWriteUserAccessKeyIdSet() bool {
-	if o != nil && o.IsWriteUserAccessKeyIdSet != nil {
+	if o != nil && !IsNil(o.IsWriteUserAccessKeyIdSet) {
 		return true
 	}
 
@@ -181,7 +185,7 @@ func (o *IwotenantTenantCustomization) SetIsWriteUserAccessKeyIdSet(v bool) {
 
 // GetIsWriteUserSecretAccessKeySet returns the IsWriteUserSecretAccessKeySet field value if set, zero value otherwise.
 func (o *IwotenantTenantCustomization) GetIsWriteUserSecretAccessKeySet() bool {
-	if o == nil || o.IsWriteUserSecretAccessKeySet == nil {
+	if o == nil || IsNil(o.IsWriteUserSecretAccessKeySet) {
 		var ret bool
 		return ret
 	}
@@ -191,7 +195,7 @@ func (o *IwotenantTenantCustomization) GetIsWriteUserSecretAccessKeySet() bool {
 // GetIsWriteUserSecretAccessKeySetOk returns a tuple with the IsWriteUserSecretAccessKeySet field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IwotenantTenantCustomization) GetIsWriteUserSecretAccessKeySetOk() (*bool, bool) {
-	if o == nil || o.IsWriteUserSecretAccessKeySet == nil {
+	if o == nil || IsNil(o.IsWriteUserSecretAccessKeySet) {
 		return nil, false
 	}
 	return o.IsWriteUserSecretAccessKeySet, true
@@ -199,7 +203,7 @@ func (o *IwotenantTenantCustomization) GetIsWriteUserSecretAccessKeySetOk() (*bo
 
 // HasIsWriteUserSecretAccessKeySet returns a boolean if a field has been set.
 func (o *IwotenantTenantCustomization) HasIsWriteUserSecretAccessKeySet() bool {
-	if o != nil && o.IsWriteUserSecretAccessKeySet != nil {
+	if o != nil && !IsNil(o.IsWriteUserSecretAccessKeySet) {
 		return true
 	}
 
@@ -213,7 +217,7 @@ func (o *IwotenantTenantCustomization) SetIsWriteUserSecretAccessKeySet(v bool) 
 
 // GetIwoId returns the IwoId field value if set, zero value otherwise.
 func (o *IwotenantTenantCustomization) GetIwoId() string {
-	if o == nil || o.IwoId == nil {
+	if o == nil || IsNil(o.IwoId) {
 		var ret string
 		return ret
 	}
@@ -223,7 +227,7 @@ func (o *IwotenantTenantCustomization) GetIwoId() string {
 // GetIwoIdOk returns a tuple with the IwoId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IwotenantTenantCustomization) GetIwoIdOk() (*string, bool) {
-	if o == nil || o.IwoId == nil {
+	if o == nil || IsNil(o.IwoId) {
 		return nil, false
 	}
 	return o.IwoId, true
@@ -231,7 +235,7 @@ func (o *IwotenantTenantCustomization) GetIwoIdOk() (*string, bool) {
 
 // HasIwoId returns a boolean if a field has been set.
 func (o *IwotenantTenantCustomization) HasIwoId() bool {
-	if o != nil && o.IwoId != nil {
+	if o != nil && !IsNil(o.IwoId) {
 		return true
 	}
 
@@ -245,7 +249,7 @@ func (o *IwotenantTenantCustomization) SetIwoId(v string) {
 
 // GetMskServerForDataExtractor returns the MskServerForDataExtractor field value if set, zero value otherwise.
 func (o *IwotenantTenantCustomization) GetMskServerForDataExtractor() string {
-	if o == nil || o.MskServerForDataExtractor == nil {
+	if o == nil || IsNil(o.MskServerForDataExtractor) {
 		var ret string
 		return ret
 	}
@@ -255,7 +259,7 @@ func (o *IwotenantTenantCustomization) GetMskServerForDataExtractor() string {
 // GetMskServerForDataExtractorOk returns a tuple with the MskServerForDataExtractor field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IwotenantTenantCustomization) GetMskServerForDataExtractorOk() (*string, bool) {
-	if o == nil || o.MskServerForDataExtractor == nil {
+	if o == nil || IsNil(o.MskServerForDataExtractor) {
 		return nil, false
 	}
 	return o.MskServerForDataExtractor, true
@@ -263,7 +267,7 @@ func (o *IwotenantTenantCustomization) GetMskServerForDataExtractorOk() (*string
 
 // HasMskServerForDataExtractor returns a boolean if a field has been set.
 func (o *IwotenantTenantCustomization) HasMskServerForDataExtractor() bool {
-	if o != nil && o.MskServerForDataExtractor != nil {
+	if o != nil && !IsNil(o.MskServerForDataExtractor) {
 		return true
 	}
 
@@ -277,7 +281,7 @@ func (o *IwotenantTenantCustomization) SetMskServerForDataExtractor(v string) {
 
 // GetWriteUserAccessKeyId returns the WriteUserAccessKeyId field value if set, zero value otherwise.
 func (o *IwotenantTenantCustomization) GetWriteUserAccessKeyId() string {
-	if o == nil || o.WriteUserAccessKeyId == nil {
+	if o == nil || IsNil(o.WriteUserAccessKeyId) {
 		var ret string
 		return ret
 	}
@@ -287,7 +291,7 @@ func (o *IwotenantTenantCustomization) GetWriteUserAccessKeyId() string {
 // GetWriteUserAccessKeyIdOk returns a tuple with the WriteUserAccessKeyId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IwotenantTenantCustomization) GetWriteUserAccessKeyIdOk() (*string, bool) {
-	if o == nil || o.WriteUserAccessKeyId == nil {
+	if o == nil || IsNil(o.WriteUserAccessKeyId) {
 		return nil, false
 	}
 	return o.WriteUserAccessKeyId, true
@@ -295,7 +299,7 @@ func (o *IwotenantTenantCustomization) GetWriteUserAccessKeyIdOk() (*string, boo
 
 // HasWriteUserAccessKeyId returns a boolean if a field has been set.
 func (o *IwotenantTenantCustomization) HasWriteUserAccessKeyId() bool {
-	if o != nil && o.WriteUserAccessKeyId != nil {
+	if o != nil && !IsNil(o.WriteUserAccessKeyId) {
 		return true
 	}
 
@@ -309,7 +313,7 @@ func (o *IwotenantTenantCustomization) SetWriteUserAccessKeyId(v string) {
 
 // GetWriteUserSecretAccessKey returns the WriteUserSecretAccessKey field value if set, zero value otherwise.
 func (o *IwotenantTenantCustomization) GetWriteUserSecretAccessKey() string {
-	if o == nil || o.WriteUserSecretAccessKey == nil {
+	if o == nil || IsNil(o.WriteUserSecretAccessKey) {
 		var ret string
 		return ret
 	}
@@ -319,7 +323,7 @@ func (o *IwotenantTenantCustomization) GetWriteUserSecretAccessKey() string {
 // GetWriteUserSecretAccessKeyOk returns a tuple with the WriteUserSecretAccessKey field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IwotenantTenantCustomization) GetWriteUserSecretAccessKeyOk() (*string, bool) {
-	if o == nil || o.WriteUserSecretAccessKey == nil {
+	if o == nil || IsNil(o.WriteUserSecretAccessKey) {
 		return nil, false
 	}
 	return o.WriteUserSecretAccessKey, true
@@ -327,7 +331,7 @@ func (o *IwotenantTenantCustomization) GetWriteUserSecretAccessKeyOk() (*string,
 
 // HasWriteUserSecretAccessKey returns a boolean if a field has been set.
 func (o *IwotenantTenantCustomization) HasWriteUserSecretAccessKey() bool {
-	if o != nil && o.WriteUserSecretAccessKey != nil {
+	if o != nil && !IsNil(o.WriteUserSecretAccessKey) {
 		return true
 	}
 
@@ -339,87 +343,124 @@ func (o *IwotenantTenantCustomization) SetWriteUserSecretAccessKey(v string) {
 	o.WriteUserSecretAccessKey = &v
 }
 
-// GetAccount returns the Account field value if set, zero value otherwise.
+// GetAccount returns the Account field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *IwotenantTenantCustomization) GetAccount() IamAccountRelationship {
-	if o == nil || o.Account == nil {
+	if o == nil || IsNil(o.Account.Get()) {
 		var ret IamAccountRelationship
 		return ret
 	}
-	return *o.Account
+	return *o.Account.Get()
 }
 
 // GetAccountOk returns a tuple with the Account field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *IwotenantTenantCustomization) GetAccountOk() (*IamAccountRelationship, bool) {
-	if o == nil || o.Account == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Account, true
+	return o.Account.Get(), o.Account.IsSet()
 }
 
 // HasAccount returns a boolean if a field has been set.
 func (o *IwotenantTenantCustomization) HasAccount() bool {
-	if o != nil && o.Account != nil {
+	if o != nil && o.Account.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetAccount gets a reference to the given IamAccountRelationship and assigns it to the Account field.
+// SetAccount gets a reference to the given NullableIamAccountRelationship and assigns it to the Account field.
 func (o *IwotenantTenantCustomization) SetAccount(v IamAccountRelationship) {
-	o.Account = &v
+	o.Account.Set(&v)
+}
+
+// SetAccountNil sets the value for Account to be an explicit nil
+func (o *IwotenantTenantCustomization) SetAccountNil() {
+	o.Account.Set(nil)
+}
+
+// UnsetAccount ensures that no value is present for Account, not even an explicit nil
+func (o *IwotenantTenantCustomization) UnsetAccount() {
+	o.Account.Unset()
 }
 
 func (o IwotenantTenantCustomization) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o IwotenantTenantCustomization) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.EnableDataExtractor != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.EnableDataExtractor) {
 		toSerialize["EnableDataExtractor"] = o.EnableDataExtractor
 	}
-	if o.IsWriteUserAccessKeyIdSet != nil {
+	if !IsNil(o.IsWriteUserAccessKeyIdSet) {
 		toSerialize["IsWriteUserAccessKeyIdSet"] = o.IsWriteUserAccessKeyIdSet
 	}
-	if o.IsWriteUserSecretAccessKeySet != nil {
+	if !IsNil(o.IsWriteUserSecretAccessKeySet) {
 		toSerialize["IsWriteUserSecretAccessKeySet"] = o.IsWriteUserSecretAccessKeySet
 	}
-	if o.IwoId != nil {
+	if !IsNil(o.IwoId) {
 		toSerialize["IwoId"] = o.IwoId
 	}
-	if o.MskServerForDataExtractor != nil {
+	if !IsNil(o.MskServerForDataExtractor) {
 		toSerialize["MskServerForDataExtractor"] = o.MskServerForDataExtractor
 	}
-	if o.WriteUserAccessKeyId != nil {
+	if !IsNil(o.WriteUserAccessKeyId) {
 		toSerialize["WriteUserAccessKeyId"] = o.WriteUserAccessKeyId
 	}
-	if o.WriteUserSecretAccessKey != nil {
+	if !IsNil(o.WriteUserSecretAccessKey) {
 		toSerialize["WriteUserSecretAccessKey"] = o.WriteUserSecretAccessKey
 	}
-	if o.Account != nil {
-		toSerialize["Account"] = o.Account
+	if o.Account.IsSet() {
+		toSerialize["Account"] = o.Account.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *IwotenantTenantCustomization) UnmarshalJSON(bytes []byte) (err error) {
+func (o *IwotenantTenantCustomization) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type IwotenantTenantCustomizationWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -438,13 +479,13 @@ func (o *IwotenantTenantCustomization) UnmarshalJSON(bytes []byte) (err error) {
 		// AWS access key Id to write data to redshift.  Refer to AWS cloud formation stack 'Output' of the tenant.
 		WriteUserAccessKeyId *string `json:"WriteUserAccessKeyId,omitempty"`
 		// AWS secret access key to write data to redshift.  Refer to AWS cloud formation stack 'Output' of the tenant.
-		WriteUserSecretAccessKey *string                 `json:"WriteUserSecretAccessKey,omitempty"`
-		Account                  *IamAccountRelationship `json:"Account,omitempty"`
+		WriteUserSecretAccessKey *string                        `json:"WriteUserSecretAccessKey,omitempty"`
+		Account                  NullableIamAccountRelationship `json:"Account,omitempty"`
 	}
 
 	varIwotenantTenantCustomizationWithoutEmbeddedStruct := IwotenantTenantCustomizationWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varIwotenantTenantCustomizationWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varIwotenantTenantCustomizationWithoutEmbeddedStruct)
 	if err == nil {
 		varIwotenantTenantCustomization := _IwotenantTenantCustomization{}
 		varIwotenantTenantCustomization.ClassId = varIwotenantTenantCustomizationWithoutEmbeddedStruct.ClassId
@@ -464,7 +505,7 @@ func (o *IwotenantTenantCustomization) UnmarshalJSON(bytes []byte) (err error) {
 
 	varIwotenantTenantCustomization := _IwotenantTenantCustomization{}
 
-	err = json.Unmarshal(bytes, &varIwotenantTenantCustomization)
+	err = json.Unmarshal(data, &varIwotenantTenantCustomization)
 	if err == nil {
 		o.MoBaseMo = varIwotenantTenantCustomization.MoBaseMo
 	} else {
@@ -473,7 +514,7 @@ func (o *IwotenantTenantCustomization) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "EnableDataExtractor")

@@ -24,7 +24,7 @@ Name | Type | Description | Notes
 **SubscriptionId** | Pointer to **string** | The id of license subscription. | [optional] [readonly] 
 **SubstitutedLicense** | Pointer to [**[]LicenseSubstituteLicense**](LicenseSubstituteLicense.md) |  | [optional] 
 **TrialAdmin** | Pointer to **bool** | The administrative state of the trial license. When the LicenseState is set to &#39;NotLicensed&#39;, &#39;trialAdmin&#39; can be set to true to start the trial period, i.e. licenseState is set to be TrialPeriod. | [optional] [readonly] 
-**AccountLicenseData** | Pointer to [**LicenseAccountLicenseDataRelationship**](LicenseAccountLicenseDataRelationship.md) |  | [optional] 
+**AccountLicenseData** | Pointer to [**NullableLicenseAccountLicenseDataRelationship**](LicenseAccountLicenseDataRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -570,6 +570,16 @@ SetAccountLicenseData sets AccountLicenseData field to given value.
 
 HasAccountLicenseData returns a boolean if a field has been set.
 
+### SetAccountLicenseDataNil
+
+`func (o *LicenseLicenseInfo) SetAccountLicenseDataNil(b bool)`
+
+ SetAccountLicenseDataNil sets the value for AccountLicenseData to be an explicit nil
+
+### UnsetAccountLicenseData
+`func (o *LicenseLicenseInfo) UnsetAccountLicenseData()`
+
+UnsetAccountLicenseData ensures that no value is present for AccountLicenseData, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

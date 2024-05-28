@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the StorageNvmeVirtualDriveConfiguration type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &StorageNvmeVirtualDriveConfiguration{}
 
 // StorageNvmeVirtualDriveConfiguration Virtual Drive type models a single virtual drive that needs to be created for NVMe Raid on reboot. Used in activation workflow.
 type StorageNvmeVirtualDriveConfiguration struct {
@@ -127,7 +131,7 @@ func (o *StorageNvmeVirtualDriveConfiguration) SetObjectType(v string) {
 
 // GetAccessPolicy returns the AccessPolicy field value if set, zero value otherwise.
 func (o *StorageNvmeVirtualDriveConfiguration) GetAccessPolicy() string {
-	if o == nil || o.AccessPolicy == nil {
+	if o == nil || IsNil(o.AccessPolicy) {
 		var ret string
 		return ret
 	}
@@ -137,7 +141,7 @@ func (o *StorageNvmeVirtualDriveConfiguration) GetAccessPolicy() string {
 // GetAccessPolicyOk returns a tuple with the AccessPolicy field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNvmeVirtualDriveConfiguration) GetAccessPolicyOk() (*string, bool) {
-	if o == nil || o.AccessPolicy == nil {
+	if o == nil || IsNil(o.AccessPolicy) {
 		return nil, false
 	}
 	return o.AccessPolicy, true
@@ -145,7 +149,7 @@ func (o *StorageNvmeVirtualDriveConfiguration) GetAccessPolicyOk() (*string, boo
 
 // HasAccessPolicy returns a boolean if a field has been set.
 func (o *StorageNvmeVirtualDriveConfiguration) HasAccessPolicy() bool {
-	if o != nil && o.AccessPolicy != nil {
+	if o != nil && !IsNil(o.AccessPolicy) {
 		return true
 	}
 
@@ -159,7 +163,7 @@ func (o *StorageNvmeVirtualDriveConfiguration) SetAccessPolicy(v string) {
 
 // GetBootable returns the Bootable field value if set, zero value otherwise.
 func (o *StorageNvmeVirtualDriveConfiguration) GetBootable() bool {
-	if o == nil || o.Bootable == nil {
+	if o == nil || IsNil(o.Bootable) {
 		var ret bool
 		return ret
 	}
@@ -169,7 +173,7 @@ func (o *StorageNvmeVirtualDriveConfiguration) GetBootable() bool {
 // GetBootableOk returns a tuple with the Bootable field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNvmeVirtualDriveConfiguration) GetBootableOk() (*bool, bool) {
-	if o == nil || o.Bootable == nil {
+	if o == nil || IsNil(o.Bootable) {
 		return nil, false
 	}
 	return o.Bootable, true
@@ -177,7 +181,7 @@ func (o *StorageNvmeVirtualDriveConfiguration) GetBootableOk() (*bool, bool) {
 
 // HasBootable returns a boolean if a field has been set.
 func (o *StorageNvmeVirtualDriveConfiguration) HasBootable() bool {
-	if o != nil && o.Bootable != nil {
+	if o != nil && !IsNil(o.Bootable) {
 		return true
 	}
 
@@ -191,7 +195,7 @@ func (o *StorageNvmeVirtualDriveConfiguration) SetBootable(v bool) {
 
 // GetControllerDn returns the ControllerDn field value if set, zero value otherwise.
 func (o *StorageNvmeVirtualDriveConfiguration) GetControllerDn() string {
-	if o == nil || o.ControllerDn == nil {
+	if o == nil || IsNil(o.ControllerDn) {
 		var ret string
 		return ret
 	}
@@ -201,7 +205,7 @@ func (o *StorageNvmeVirtualDriveConfiguration) GetControllerDn() string {
 // GetControllerDnOk returns a tuple with the ControllerDn field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNvmeVirtualDriveConfiguration) GetControllerDnOk() (*string, bool) {
-	if o == nil || o.ControllerDn == nil {
+	if o == nil || IsNil(o.ControllerDn) {
 		return nil, false
 	}
 	return o.ControllerDn, true
@@ -209,7 +213,7 @@ func (o *StorageNvmeVirtualDriveConfiguration) GetControllerDnOk() (*string, boo
 
 // HasControllerDn returns a boolean if a field has been set.
 func (o *StorageNvmeVirtualDriveConfiguration) HasControllerDn() bool {
-	if o != nil && o.ControllerDn != nil {
+	if o != nil && !IsNil(o.ControllerDn) {
 		return true
 	}
 
@@ -223,7 +227,7 @@ func (o *StorageNvmeVirtualDriveConfiguration) SetControllerDn(v string) {
 
 // GetDedicatedHotSpare returns the DedicatedHotSpare field value if set, zero value otherwise.
 func (o *StorageNvmeVirtualDriveConfiguration) GetDedicatedHotSpare() string {
-	if o == nil || o.DedicatedHotSpare == nil {
+	if o == nil || IsNil(o.DedicatedHotSpare) {
 		var ret string
 		return ret
 	}
@@ -233,7 +237,7 @@ func (o *StorageNvmeVirtualDriveConfiguration) GetDedicatedHotSpare() string {
 // GetDedicatedHotSpareOk returns a tuple with the DedicatedHotSpare field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNvmeVirtualDriveConfiguration) GetDedicatedHotSpareOk() (*string, bool) {
-	if o == nil || o.DedicatedHotSpare == nil {
+	if o == nil || IsNil(o.DedicatedHotSpare) {
 		return nil, false
 	}
 	return o.DedicatedHotSpare, true
@@ -241,7 +245,7 @@ func (o *StorageNvmeVirtualDriveConfiguration) GetDedicatedHotSpareOk() (*string
 
 // HasDedicatedHotSpare returns a boolean if a field has been set.
 func (o *StorageNvmeVirtualDriveConfiguration) HasDedicatedHotSpare() bool {
-	if o != nil && o.DedicatedHotSpare != nil {
+	if o != nil && !IsNil(o.DedicatedHotSpare) {
 		return true
 	}
 
@@ -255,7 +259,7 @@ func (o *StorageNvmeVirtualDriveConfiguration) SetDedicatedHotSpare(v string) {
 
 // GetDiskCachePolicy returns the DiskCachePolicy field value if set, zero value otherwise.
 func (o *StorageNvmeVirtualDriveConfiguration) GetDiskCachePolicy() string {
-	if o == nil || o.DiskCachePolicy == nil {
+	if o == nil || IsNil(o.DiskCachePolicy) {
 		var ret string
 		return ret
 	}
@@ -265,7 +269,7 @@ func (o *StorageNvmeVirtualDriveConfiguration) GetDiskCachePolicy() string {
 // GetDiskCachePolicyOk returns a tuple with the DiskCachePolicy field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNvmeVirtualDriveConfiguration) GetDiskCachePolicyOk() (*string, bool) {
-	if o == nil || o.DiskCachePolicy == nil {
+	if o == nil || IsNil(o.DiskCachePolicy) {
 		return nil, false
 	}
 	return o.DiskCachePolicy, true
@@ -273,7 +277,7 @@ func (o *StorageNvmeVirtualDriveConfiguration) GetDiskCachePolicyOk() (*string, 
 
 // HasDiskCachePolicy returns a boolean if a field has been set.
 func (o *StorageNvmeVirtualDriveConfiguration) HasDiskCachePolicy() bool {
-	if o != nil && o.DiskCachePolicy != nil {
+	if o != nil && !IsNil(o.DiskCachePolicy) {
 		return true
 	}
 
@@ -287,7 +291,7 @@ func (o *StorageNvmeVirtualDriveConfiguration) SetDiskCachePolicy(v string) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *StorageNvmeVirtualDriveConfiguration) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -297,7 +301,7 @@ func (o *StorageNvmeVirtualDriveConfiguration) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNvmeVirtualDriveConfiguration) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -305,7 +309,7 @@ func (o *StorageNvmeVirtualDriveConfiguration) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *StorageNvmeVirtualDriveConfiguration) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -319,7 +323,7 @@ func (o *StorageNvmeVirtualDriveConfiguration) SetName(v string) {
 
 // GetRaidLevel returns the RaidLevel field value if set, zero value otherwise.
 func (o *StorageNvmeVirtualDriveConfiguration) GetRaidLevel() string {
-	if o == nil || o.RaidLevel == nil {
+	if o == nil || IsNil(o.RaidLevel) {
 		var ret string
 		return ret
 	}
@@ -329,7 +333,7 @@ func (o *StorageNvmeVirtualDriveConfiguration) GetRaidLevel() string {
 // GetRaidLevelOk returns a tuple with the RaidLevel field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNvmeVirtualDriveConfiguration) GetRaidLevelOk() (*string, bool) {
-	if o == nil || o.RaidLevel == nil {
+	if o == nil || IsNil(o.RaidLevel) {
 		return nil, false
 	}
 	return o.RaidLevel, true
@@ -337,7 +341,7 @@ func (o *StorageNvmeVirtualDriveConfiguration) GetRaidLevelOk() (*string, bool) 
 
 // HasRaidLevel returns a boolean if a field has been set.
 func (o *StorageNvmeVirtualDriveConfiguration) HasRaidLevel() bool {
-	if o != nil && o.RaidLevel != nil {
+	if o != nil && !IsNil(o.RaidLevel) {
 		return true
 	}
 
@@ -351,7 +355,7 @@ func (o *StorageNvmeVirtualDriveConfiguration) SetRaidLevel(v string) {
 
 // GetReadPolicy returns the ReadPolicy field value if set, zero value otherwise.
 func (o *StorageNvmeVirtualDriveConfiguration) GetReadPolicy() string {
-	if o == nil || o.ReadPolicy == nil {
+	if o == nil || IsNil(o.ReadPolicy) {
 		var ret string
 		return ret
 	}
@@ -361,7 +365,7 @@ func (o *StorageNvmeVirtualDriveConfiguration) GetReadPolicy() string {
 // GetReadPolicyOk returns a tuple with the ReadPolicy field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNvmeVirtualDriveConfiguration) GetReadPolicyOk() (*string, bool) {
-	if o == nil || o.ReadPolicy == nil {
+	if o == nil || IsNil(o.ReadPolicy) {
 		return nil, false
 	}
 	return o.ReadPolicy, true
@@ -369,7 +373,7 @@ func (o *StorageNvmeVirtualDriveConfiguration) GetReadPolicyOk() (*string, bool)
 
 // HasReadPolicy returns a boolean if a field has been set.
 func (o *StorageNvmeVirtualDriveConfiguration) HasReadPolicy() bool {
-	if o != nil && o.ReadPolicy != nil {
+	if o != nil && !IsNil(o.ReadPolicy) {
 		return true
 	}
 
@@ -383,7 +387,7 @@ func (o *StorageNvmeVirtualDriveConfiguration) SetReadPolicy(v string) {
 
 // GetSelfEncrypt returns the SelfEncrypt field value if set, zero value otherwise.
 func (o *StorageNvmeVirtualDriveConfiguration) GetSelfEncrypt() string {
-	if o == nil || o.SelfEncrypt == nil {
+	if o == nil || IsNil(o.SelfEncrypt) {
 		var ret string
 		return ret
 	}
@@ -393,7 +397,7 @@ func (o *StorageNvmeVirtualDriveConfiguration) GetSelfEncrypt() string {
 // GetSelfEncryptOk returns a tuple with the SelfEncrypt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNvmeVirtualDriveConfiguration) GetSelfEncryptOk() (*string, bool) {
-	if o == nil || o.SelfEncrypt == nil {
+	if o == nil || IsNil(o.SelfEncrypt) {
 		return nil, false
 	}
 	return o.SelfEncrypt, true
@@ -401,7 +405,7 @@ func (o *StorageNvmeVirtualDriveConfiguration) GetSelfEncryptOk() (*string, bool
 
 // HasSelfEncrypt returns a boolean if a field has been set.
 func (o *StorageNvmeVirtualDriveConfiguration) HasSelfEncrypt() bool {
-	if o != nil && o.SelfEncrypt != nil {
+	if o != nil && !IsNil(o.SelfEncrypt) {
 		return true
 	}
 
@@ -415,7 +419,7 @@ func (o *StorageNvmeVirtualDriveConfiguration) SetSelfEncrypt(v string) {
 
 // GetSize returns the Size field value if set, zero value otherwise.
 func (o *StorageNvmeVirtualDriveConfiguration) GetSize() string {
-	if o == nil || o.Size == nil {
+	if o == nil || IsNil(o.Size) {
 		var ret string
 		return ret
 	}
@@ -425,7 +429,7 @@ func (o *StorageNvmeVirtualDriveConfiguration) GetSize() string {
 // GetSizeOk returns a tuple with the Size field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNvmeVirtualDriveConfiguration) GetSizeOk() (*string, bool) {
-	if o == nil || o.Size == nil {
+	if o == nil || IsNil(o.Size) {
 		return nil, false
 	}
 	return o.Size, true
@@ -433,7 +437,7 @@ func (o *StorageNvmeVirtualDriveConfiguration) GetSizeOk() (*string, bool) {
 
 // HasSize returns a boolean if a field has been set.
 func (o *StorageNvmeVirtualDriveConfiguration) HasSize() bool {
-	if o != nil && o.Size != nil {
+	if o != nil && !IsNil(o.Size) {
 		return true
 	}
 
@@ -458,7 +462,7 @@ func (o *StorageNvmeVirtualDriveConfiguration) GetSpanDisks() []string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StorageNvmeVirtualDriveConfiguration) GetSpanDisksOk() ([]string, bool) {
-	if o == nil || o.SpanDisks == nil {
+	if o == nil || IsNil(o.SpanDisks) {
 		return nil, false
 	}
 	return o.SpanDisks, true
@@ -466,7 +470,7 @@ func (o *StorageNvmeVirtualDriveConfiguration) GetSpanDisksOk() ([]string, bool)
 
 // HasSpanDisks returns a boolean if a field has been set.
 func (o *StorageNvmeVirtualDriveConfiguration) HasSpanDisks() bool {
-	if o != nil && o.SpanDisks != nil {
+	if o != nil && IsNil(o.SpanDisks) {
 		return true
 	}
 
@@ -480,7 +484,7 @@ func (o *StorageNvmeVirtualDriveConfiguration) SetSpanDisks(v []string) {
 
 // GetStripSize returns the StripSize field value if set, zero value otherwise.
 func (o *StorageNvmeVirtualDriveConfiguration) GetStripSize() string {
-	if o == nil || o.StripSize == nil {
+	if o == nil || IsNil(o.StripSize) {
 		var ret string
 		return ret
 	}
@@ -490,7 +494,7 @@ func (o *StorageNvmeVirtualDriveConfiguration) GetStripSize() string {
 // GetStripSizeOk returns a tuple with the StripSize field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNvmeVirtualDriveConfiguration) GetStripSizeOk() (*string, bool) {
-	if o == nil || o.StripSize == nil {
+	if o == nil || IsNil(o.StripSize) {
 		return nil, false
 	}
 	return o.StripSize, true
@@ -498,7 +502,7 @@ func (o *StorageNvmeVirtualDriveConfiguration) GetStripSizeOk() (*string, bool) 
 
 // HasStripSize returns a boolean if a field has been set.
 func (o *StorageNvmeVirtualDriveConfiguration) HasStripSize() bool {
-	if o != nil && o.StripSize != nil {
+	if o != nil && !IsNil(o.StripSize) {
 		return true
 	}
 
@@ -512,7 +516,7 @@ func (o *StorageNvmeVirtualDriveConfiguration) SetStripSize(v string) {
 
 // GetWritePolicy returns the WritePolicy field value if set, zero value otherwise.
 func (o *StorageNvmeVirtualDriveConfiguration) GetWritePolicy() string {
-	if o == nil || o.WritePolicy == nil {
+	if o == nil || IsNil(o.WritePolicy) {
 		var ret string
 		return ret
 	}
@@ -522,7 +526,7 @@ func (o *StorageNvmeVirtualDriveConfiguration) GetWritePolicy() string {
 // GetWritePolicyOk returns a tuple with the WritePolicy field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNvmeVirtualDriveConfiguration) GetWritePolicyOk() (*string, bool) {
-	if o == nil || o.WritePolicy == nil {
+	if o == nil || IsNil(o.WritePolicy) {
 		return nil, false
 	}
 	return o.WritePolicy, true
@@ -530,7 +534,7 @@ func (o *StorageNvmeVirtualDriveConfiguration) GetWritePolicyOk() (*string, bool
 
 // HasWritePolicy returns a boolean if a field has been set.
 func (o *StorageNvmeVirtualDriveConfiguration) HasWritePolicy() bool {
-	if o != nil && o.WritePolicy != nil {
+	if o != nil && !IsNil(o.WritePolicy) {
 		return true
 	}
 
@@ -543,58 +547,62 @@ func (o *StorageNvmeVirtualDriveConfiguration) SetWritePolicy(v string) {
 }
 
 func (o StorageNvmeVirtualDriveConfiguration) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o StorageNvmeVirtualDriveConfiguration) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
 	errMoBaseComplexType = json.Unmarshal([]byte(serializedMoBaseComplexType), &toSerialize)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.AccessPolicy != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.AccessPolicy) {
 		toSerialize["AccessPolicy"] = o.AccessPolicy
 	}
-	if o.Bootable != nil {
+	if !IsNil(o.Bootable) {
 		toSerialize["Bootable"] = o.Bootable
 	}
-	if o.ControllerDn != nil {
+	if !IsNil(o.ControllerDn) {
 		toSerialize["ControllerDn"] = o.ControllerDn
 	}
-	if o.DedicatedHotSpare != nil {
+	if !IsNil(o.DedicatedHotSpare) {
 		toSerialize["DedicatedHotSpare"] = o.DedicatedHotSpare
 	}
-	if o.DiskCachePolicy != nil {
+	if !IsNil(o.DiskCachePolicy) {
 		toSerialize["DiskCachePolicy"] = o.DiskCachePolicy
 	}
-	if o.Name != nil {
+	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
 	}
-	if o.RaidLevel != nil {
+	if !IsNil(o.RaidLevel) {
 		toSerialize["RaidLevel"] = o.RaidLevel
 	}
-	if o.ReadPolicy != nil {
+	if !IsNil(o.ReadPolicy) {
 		toSerialize["ReadPolicy"] = o.ReadPolicy
 	}
-	if o.SelfEncrypt != nil {
+	if !IsNil(o.SelfEncrypt) {
 		toSerialize["SelfEncrypt"] = o.SelfEncrypt
 	}
-	if o.Size != nil {
+	if !IsNil(o.Size) {
 		toSerialize["Size"] = o.Size
 	}
 	if o.SpanDisks != nil {
 		toSerialize["SpanDisks"] = o.SpanDisks
 	}
-	if o.StripSize != nil {
+	if !IsNil(o.StripSize) {
 		toSerialize["StripSize"] = o.StripSize
 	}
-	if o.WritePolicy != nil {
+	if !IsNil(o.WritePolicy) {
 		toSerialize["WritePolicy"] = o.WritePolicy
 	}
 
@@ -602,10 +610,32 @@ func (o StorageNvmeVirtualDriveConfiguration) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *StorageNvmeVirtualDriveConfiguration) UnmarshalJSON(bytes []byte) (err error) {
+func (o *StorageNvmeVirtualDriveConfiguration) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type StorageNvmeVirtualDriveConfigurationWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -640,7 +670,7 @@ func (o *StorageNvmeVirtualDriveConfiguration) UnmarshalJSON(bytes []byte) (err 
 
 	varStorageNvmeVirtualDriveConfigurationWithoutEmbeddedStruct := StorageNvmeVirtualDriveConfigurationWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varStorageNvmeVirtualDriveConfigurationWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varStorageNvmeVirtualDriveConfigurationWithoutEmbeddedStruct)
 	if err == nil {
 		varStorageNvmeVirtualDriveConfiguration := _StorageNvmeVirtualDriveConfiguration{}
 		varStorageNvmeVirtualDriveConfiguration.ClassId = varStorageNvmeVirtualDriveConfigurationWithoutEmbeddedStruct.ClassId
@@ -665,7 +695,7 @@ func (o *StorageNvmeVirtualDriveConfiguration) UnmarshalJSON(bytes []byte) (err 
 
 	varStorageNvmeVirtualDriveConfiguration := _StorageNvmeVirtualDriveConfiguration{}
 
-	err = json.Unmarshal(bytes, &varStorageNvmeVirtualDriveConfiguration)
+	err = json.Unmarshal(data, &varStorageNvmeVirtualDriveConfiguration)
 	if err == nil {
 		o.MoBaseComplexType = varStorageNvmeVirtualDriveConfiguration.MoBaseComplexType
 	} else {
@@ -674,7 +704,7 @@ func (o *StorageNvmeVirtualDriveConfiguration) UnmarshalJSON(bytes []byte) (err 
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "AccessPolicy")

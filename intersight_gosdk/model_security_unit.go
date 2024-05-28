@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the SecurityUnit type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &SecurityUnit{}
 
 // SecurityUnit The crypto card present on a server.
 type SecurityUnit struct {
@@ -41,10 +45,10 @@ type SecurityUnit struct {
 	// The vendor identifier of the security unit.
 	Vid *string `json:"Vid,omitempty"`
 	// The voltage state of the security unit.
-	Voltage              *string                              `json:"Voltage,omitempty"`
-	ComputeBoard         *ComputeBoardRelationship            `json:"ComputeBoard,omitempty"`
-	InventoryDeviceInfo  *InventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
-	RegisteredDevice     *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+	Voltage              *string                                     `json:"Voltage,omitempty"`
+	ComputeBoard         NullableComputeBoardRelationship            `json:"ComputeBoard,omitempty"`
+	InventoryDeviceInfo  NullableInventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
+	RegisteredDevice     NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -123,7 +127,7 @@ func (o *SecurityUnit) SetObjectType(v string) {
 
 // GetOperState returns the OperState field value if set, zero value otherwise.
 func (o *SecurityUnit) GetOperState() string {
-	if o == nil || o.OperState == nil {
+	if o == nil || IsNil(o.OperState) {
 		var ret string
 		return ret
 	}
@@ -133,7 +137,7 @@ func (o *SecurityUnit) GetOperState() string {
 // GetOperStateOk returns a tuple with the OperState field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SecurityUnit) GetOperStateOk() (*string, bool) {
-	if o == nil || o.OperState == nil {
+	if o == nil || IsNil(o.OperState) {
 		return nil, false
 	}
 	return o.OperState, true
@@ -141,7 +145,7 @@ func (o *SecurityUnit) GetOperStateOk() (*string, bool) {
 
 // HasOperState returns a boolean if a field has been set.
 func (o *SecurityUnit) HasOperState() bool {
-	if o != nil && o.OperState != nil {
+	if o != nil && !IsNil(o.OperState) {
 		return true
 	}
 
@@ -155,7 +159,7 @@ func (o *SecurityUnit) SetOperState(v string) {
 
 // GetOperability returns the Operability field value if set, zero value otherwise.
 func (o *SecurityUnit) GetOperability() string {
-	if o == nil || o.Operability == nil {
+	if o == nil || IsNil(o.Operability) {
 		var ret string
 		return ret
 	}
@@ -165,7 +169,7 @@ func (o *SecurityUnit) GetOperability() string {
 // GetOperabilityOk returns a tuple with the Operability field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SecurityUnit) GetOperabilityOk() (*string, bool) {
-	if o == nil || o.Operability == nil {
+	if o == nil || IsNil(o.Operability) {
 		return nil, false
 	}
 	return o.Operability, true
@@ -173,7 +177,7 @@ func (o *SecurityUnit) GetOperabilityOk() (*string, bool) {
 
 // HasOperability returns a boolean if a field has been set.
 func (o *SecurityUnit) HasOperability() bool {
-	if o != nil && o.Operability != nil {
+	if o != nil && !IsNil(o.Operability) {
 		return true
 	}
 
@@ -187,7 +191,7 @@ func (o *SecurityUnit) SetOperability(v string) {
 
 // GetPartNumber returns the PartNumber field value if set, zero value otherwise.
 func (o *SecurityUnit) GetPartNumber() string {
-	if o == nil || o.PartNumber == nil {
+	if o == nil || IsNil(o.PartNumber) {
 		var ret string
 		return ret
 	}
@@ -197,7 +201,7 @@ func (o *SecurityUnit) GetPartNumber() string {
 // GetPartNumberOk returns a tuple with the PartNumber field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SecurityUnit) GetPartNumberOk() (*string, bool) {
-	if o == nil || o.PartNumber == nil {
+	if o == nil || IsNil(o.PartNumber) {
 		return nil, false
 	}
 	return o.PartNumber, true
@@ -205,7 +209,7 @@ func (o *SecurityUnit) GetPartNumberOk() (*string, bool) {
 
 // HasPartNumber returns a boolean if a field has been set.
 func (o *SecurityUnit) HasPartNumber() bool {
-	if o != nil && o.PartNumber != nil {
+	if o != nil && !IsNil(o.PartNumber) {
 		return true
 	}
 
@@ -219,7 +223,7 @@ func (o *SecurityUnit) SetPartNumber(v string) {
 
 // GetPciSlot returns the PciSlot field value if set, zero value otherwise.
 func (o *SecurityUnit) GetPciSlot() string {
-	if o == nil || o.PciSlot == nil {
+	if o == nil || IsNil(o.PciSlot) {
 		var ret string
 		return ret
 	}
@@ -229,7 +233,7 @@ func (o *SecurityUnit) GetPciSlot() string {
 // GetPciSlotOk returns a tuple with the PciSlot field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SecurityUnit) GetPciSlotOk() (*string, bool) {
-	if o == nil || o.PciSlot == nil {
+	if o == nil || IsNil(o.PciSlot) {
 		return nil, false
 	}
 	return o.PciSlot, true
@@ -237,7 +241,7 @@ func (o *SecurityUnit) GetPciSlotOk() (*string, bool) {
 
 // HasPciSlot returns a boolean if a field has been set.
 func (o *SecurityUnit) HasPciSlot() bool {
-	if o != nil && o.PciSlot != nil {
+	if o != nil && !IsNil(o.PciSlot) {
 		return true
 	}
 
@@ -251,7 +255,7 @@ func (o *SecurityUnit) SetPciSlot(v string) {
 
 // GetPower returns the Power field value if set, zero value otherwise.
 func (o *SecurityUnit) GetPower() string {
-	if o == nil || o.Power == nil {
+	if o == nil || IsNil(o.Power) {
 		var ret string
 		return ret
 	}
@@ -261,7 +265,7 @@ func (o *SecurityUnit) GetPower() string {
 // GetPowerOk returns a tuple with the Power field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SecurityUnit) GetPowerOk() (*string, bool) {
-	if o == nil || o.Power == nil {
+	if o == nil || IsNil(o.Power) {
 		return nil, false
 	}
 	return o.Power, true
@@ -269,7 +273,7 @@ func (o *SecurityUnit) GetPowerOk() (*string, bool) {
 
 // HasPower returns a boolean if a field has been set.
 func (o *SecurityUnit) HasPower() bool {
-	if o != nil && o.Power != nil {
+	if o != nil && !IsNil(o.Power) {
 		return true
 	}
 
@@ -283,7 +287,7 @@ func (o *SecurityUnit) SetPower(v string) {
 
 // GetThermal returns the Thermal field value if set, zero value otherwise.
 func (o *SecurityUnit) GetThermal() string {
-	if o == nil || o.Thermal == nil {
+	if o == nil || IsNil(o.Thermal) {
 		var ret string
 		return ret
 	}
@@ -293,7 +297,7 @@ func (o *SecurityUnit) GetThermal() string {
 // GetThermalOk returns a tuple with the Thermal field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SecurityUnit) GetThermalOk() (*string, bool) {
-	if o == nil || o.Thermal == nil {
+	if o == nil || IsNil(o.Thermal) {
 		return nil, false
 	}
 	return o.Thermal, true
@@ -301,7 +305,7 @@ func (o *SecurityUnit) GetThermalOk() (*string, bool) {
 
 // HasThermal returns a boolean if a field has been set.
 func (o *SecurityUnit) HasThermal() bool {
-	if o != nil && o.Thermal != nil {
+	if o != nil && !IsNil(o.Thermal) {
 		return true
 	}
 
@@ -315,7 +319,7 @@ func (o *SecurityUnit) SetThermal(v string) {
 
 // GetUnitId returns the UnitId field value if set, zero value otherwise.
 func (o *SecurityUnit) GetUnitId() int64 {
-	if o == nil || o.UnitId == nil {
+	if o == nil || IsNil(o.UnitId) {
 		var ret int64
 		return ret
 	}
@@ -325,7 +329,7 @@ func (o *SecurityUnit) GetUnitId() int64 {
 // GetUnitIdOk returns a tuple with the UnitId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SecurityUnit) GetUnitIdOk() (*int64, bool) {
-	if o == nil || o.UnitId == nil {
+	if o == nil || IsNil(o.UnitId) {
 		return nil, false
 	}
 	return o.UnitId, true
@@ -333,7 +337,7 @@ func (o *SecurityUnit) GetUnitIdOk() (*int64, bool) {
 
 // HasUnitId returns a boolean if a field has been set.
 func (o *SecurityUnit) HasUnitId() bool {
-	if o != nil && o.UnitId != nil {
+	if o != nil && !IsNil(o.UnitId) {
 		return true
 	}
 
@@ -347,7 +351,7 @@ func (o *SecurityUnit) SetUnitId(v int64) {
 
 // GetVid returns the Vid field value if set, zero value otherwise.
 func (o *SecurityUnit) GetVid() string {
-	if o == nil || o.Vid == nil {
+	if o == nil || IsNil(o.Vid) {
 		var ret string
 		return ret
 	}
@@ -357,7 +361,7 @@ func (o *SecurityUnit) GetVid() string {
 // GetVidOk returns a tuple with the Vid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SecurityUnit) GetVidOk() (*string, bool) {
-	if o == nil || o.Vid == nil {
+	if o == nil || IsNil(o.Vid) {
 		return nil, false
 	}
 	return o.Vid, true
@@ -365,7 +369,7 @@ func (o *SecurityUnit) GetVidOk() (*string, bool) {
 
 // HasVid returns a boolean if a field has been set.
 func (o *SecurityUnit) HasVid() bool {
-	if o != nil && o.Vid != nil {
+	if o != nil && !IsNil(o.Vid) {
 		return true
 	}
 
@@ -379,7 +383,7 @@ func (o *SecurityUnit) SetVid(v string) {
 
 // GetVoltage returns the Voltage field value if set, zero value otherwise.
 func (o *SecurityUnit) GetVoltage() string {
-	if o == nil || o.Voltage == nil {
+	if o == nil || IsNil(o.Voltage) {
 		var ret string
 		return ret
 	}
@@ -389,7 +393,7 @@ func (o *SecurityUnit) GetVoltage() string {
 // GetVoltageOk returns a tuple with the Voltage field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SecurityUnit) GetVoltageOk() (*string, bool) {
-	if o == nil || o.Voltage == nil {
+	if o == nil || IsNil(o.Voltage) {
 		return nil, false
 	}
 	return o.Voltage, true
@@ -397,7 +401,7 @@ func (o *SecurityUnit) GetVoltageOk() (*string, bool) {
 
 // HasVoltage returns a boolean if a field has been set.
 func (o *SecurityUnit) HasVoltage() bool {
-	if o != nil && o.Voltage != nil {
+	if o != nil && !IsNil(o.Voltage) {
 		return true
 	}
 
@@ -409,163 +413,222 @@ func (o *SecurityUnit) SetVoltage(v string) {
 	o.Voltage = &v
 }
 
-// GetComputeBoard returns the ComputeBoard field value if set, zero value otherwise.
+// GetComputeBoard returns the ComputeBoard field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *SecurityUnit) GetComputeBoard() ComputeBoardRelationship {
-	if o == nil || o.ComputeBoard == nil {
+	if o == nil || IsNil(o.ComputeBoard.Get()) {
 		var ret ComputeBoardRelationship
 		return ret
 	}
-	return *o.ComputeBoard
+	return *o.ComputeBoard.Get()
 }
 
 // GetComputeBoardOk returns a tuple with the ComputeBoard field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *SecurityUnit) GetComputeBoardOk() (*ComputeBoardRelationship, bool) {
-	if o == nil || o.ComputeBoard == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.ComputeBoard, true
+	return o.ComputeBoard.Get(), o.ComputeBoard.IsSet()
 }
 
 // HasComputeBoard returns a boolean if a field has been set.
 func (o *SecurityUnit) HasComputeBoard() bool {
-	if o != nil && o.ComputeBoard != nil {
+	if o != nil && o.ComputeBoard.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetComputeBoard gets a reference to the given ComputeBoardRelationship and assigns it to the ComputeBoard field.
+// SetComputeBoard gets a reference to the given NullableComputeBoardRelationship and assigns it to the ComputeBoard field.
 func (o *SecurityUnit) SetComputeBoard(v ComputeBoardRelationship) {
-	o.ComputeBoard = &v
+	o.ComputeBoard.Set(&v)
 }
 
-// GetInventoryDeviceInfo returns the InventoryDeviceInfo field value if set, zero value otherwise.
+// SetComputeBoardNil sets the value for ComputeBoard to be an explicit nil
+func (o *SecurityUnit) SetComputeBoardNil() {
+	o.ComputeBoard.Set(nil)
+}
+
+// UnsetComputeBoard ensures that no value is present for ComputeBoard, not even an explicit nil
+func (o *SecurityUnit) UnsetComputeBoard() {
+	o.ComputeBoard.Unset()
+}
+
+// GetInventoryDeviceInfo returns the InventoryDeviceInfo field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *SecurityUnit) GetInventoryDeviceInfo() InventoryDeviceInfoRelationship {
-	if o == nil || o.InventoryDeviceInfo == nil {
+	if o == nil || IsNil(o.InventoryDeviceInfo.Get()) {
 		var ret InventoryDeviceInfoRelationship
 		return ret
 	}
-	return *o.InventoryDeviceInfo
+	return *o.InventoryDeviceInfo.Get()
 }
 
 // GetInventoryDeviceInfoOk returns a tuple with the InventoryDeviceInfo field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *SecurityUnit) GetInventoryDeviceInfoOk() (*InventoryDeviceInfoRelationship, bool) {
-	if o == nil || o.InventoryDeviceInfo == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.InventoryDeviceInfo, true
+	return o.InventoryDeviceInfo.Get(), o.InventoryDeviceInfo.IsSet()
 }
 
 // HasInventoryDeviceInfo returns a boolean if a field has been set.
 func (o *SecurityUnit) HasInventoryDeviceInfo() bool {
-	if o != nil && o.InventoryDeviceInfo != nil {
+	if o != nil && o.InventoryDeviceInfo.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetInventoryDeviceInfo gets a reference to the given InventoryDeviceInfoRelationship and assigns it to the InventoryDeviceInfo field.
+// SetInventoryDeviceInfo gets a reference to the given NullableInventoryDeviceInfoRelationship and assigns it to the InventoryDeviceInfo field.
 func (o *SecurityUnit) SetInventoryDeviceInfo(v InventoryDeviceInfoRelationship) {
-	o.InventoryDeviceInfo = &v
+	o.InventoryDeviceInfo.Set(&v)
 }
 
-// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise.
+// SetInventoryDeviceInfoNil sets the value for InventoryDeviceInfo to be an explicit nil
+func (o *SecurityUnit) SetInventoryDeviceInfoNil() {
+	o.InventoryDeviceInfo.Set(nil)
+}
+
+// UnsetInventoryDeviceInfo ensures that no value is present for InventoryDeviceInfo, not even an explicit nil
+func (o *SecurityUnit) UnsetInventoryDeviceInfo() {
+	o.InventoryDeviceInfo.Unset()
+}
+
+// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *SecurityUnit) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil || IsNil(o.RegisteredDevice.Get()) {
 		var ret AssetDeviceRegistrationRelationship
 		return ret
 	}
-	return *o.RegisteredDevice
+	return *o.RegisteredDevice.Get()
 }
 
 // GetRegisteredDeviceOk returns a tuple with the RegisteredDevice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *SecurityUnit) GetRegisteredDeviceOk() (*AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.RegisteredDevice, true
+	return o.RegisteredDevice.Get(), o.RegisteredDevice.IsSet()
 }
 
 // HasRegisteredDevice returns a boolean if a field has been set.
 func (o *SecurityUnit) HasRegisteredDevice() bool {
-	if o != nil && o.RegisteredDevice != nil {
+	if o != nil && o.RegisteredDevice.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRegisteredDevice gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
+// SetRegisteredDevice gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
 func (o *SecurityUnit) SetRegisteredDevice(v AssetDeviceRegistrationRelationship) {
-	o.RegisteredDevice = &v
+	o.RegisteredDevice.Set(&v)
+}
+
+// SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+func (o *SecurityUnit) SetRegisteredDeviceNil() {
+	o.RegisteredDevice.Set(nil)
+}
+
+// UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
+func (o *SecurityUnit) UnsetRegisteredDevice() {
+	o.RegisteredDevice.Unset()
 }
 
 func (o SecurityUnit) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o SecurityUnit) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedEquipmentBase, errEquipmentBase := json.Marshal(o.EquipmentBase)
 	if errEquipmentBase != nil {
-		return []byte{}, errEquipmentBase
+		return map[string]interface{}{}, errEquipmentBase
 	}
 	errEquipmentBase = json.Unmarshal([]byte(serializedEquipmentBase), &toSerialize)
 	if errEquipmentBase != nil {
-		return []byte{}, errEquipmentBase
+		return map[string]interface{}{}, errEquipmentBase
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.OperState != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.OperState) {
 		toSerialize["OperState"] = o.OperState
 	}
-	if o.Operability != nil {
+	if !IsNil(o.Operability) {
 		toSerialize["Operability"] = o.Operability
 	}
-	if o.PartNumber != nil {
+	if !IsNil(o.PartNumber) {
 		toSerialize["PartNumber"] = o.PartNumber
 	}
-	if o.PciSlot != nil {
+	if !IsNil(o.PciSlot) {
 		toSerialize["PciSlot"] = o.PciSlot
 	}
-	if o.Power != nil {
+	if !IsNil(o.Power) {
 		toSerialize["Power"] = o.Power
 	}
-	if o.Thermal != nil {
+	if !IsNil(o.Thermal) {
 		toSerialize["Thermal"] = o.Thermal
 	}
-	if o.UnitId != nil {
+	if !IsNil(o.UnitId) {
 		toSerialize["UnitId"] = o.UnitId
 	}
-	if o.Vid != nil {
+	if !IsNil(o.Vid) {
 		toSerialize["Vid"] = o.Vid
 	}
-	if o.Voltage != nil {
+	if !IsNil(o.Voltage) {
 		toSerialize["Voltage"] = o.Voltage
 	}
-	if o.ComputeBoard != nil {
-		toSerialize["ComputeBoard"] = o.ComputeBoard
+	if o.ComputeBoard.IsSet() {
+		toSerialize["ComputeBoard"] = o.ComputeBoard.Get()
 	}
-	if o.InventoryDeviceInfo != nil {
-		toSerialize["InventoryDeviceInfo"] = o.InventoryDeviceInfo
+	if o.InventoryDeviceInfo.IsSet() {
+		toSerialize["InventoryDeviceInfo"] = o.InventoryDeviceInfo.Get()
 	}
-	if o.RegisteredDevice != nil {
-		toSerialize["RegisteredDevice"] = o.RegisteredDevice
+	if o.RegisteredDevice.IsSet() {
+		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *SecurityUnit) UnmarshalJSON(bytes []byte) (err error) {
+func (o *SecurityUnit) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type SecurityUnitWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -588,15 +651,15 @@ func (o *SecurityUnit) UnmarshalJSON(bytes []byte) (err error) {
 		// The vendor identifier of the security unit.
 		Vid *string `json:"Vid,omitempty"`
 		// The voltage state of the security unit.
-		Voltage             *string                              `json:"Voltage,omitempty"`
-		ComputeBoard        *ComputeBoardRelationship            `json:"ComputeBoard,omitempty"`
-		InventoryDeviceInfo *InventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
-		RegisteredDevice    *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+		Voltage             *string                                     `json:"Voltage,omitempty"`
+		ComputeBoard        NullableComputeBoardRelationship            `json:"ComputeBoard,omitempty"`
+		InventoryDeviceInfo NullableInventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
+		RegisteredDevice    NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	}
 
 	varSecurityUnitWithoutEmbeddedStruct := SecurityUnitWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varSecurityUnitWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varSecurityUnitWithoutEmbeddedStruct)
 	if err == nil {
 		varSecurityUnit := _SecurityUnit{}
 		varSecurityUnit.ClassId = varSecurityUnitWithoutEmbeddedStruct.ClassId
@@ -620,7 +683,7 @@ func (o *SecurityUnit) UnmarshalJSON(bytes []byte) (err error) {
 
 	varSecurityUnit := _SecurityUnit{}
 
-	err = json.Unmarshal(bytes, &varSecurityUnit)
+	err = json.Unmarshal(data, &varSecurityUnit)
 	if err == nil {
 		o.EquipmentBase = varSecurityUnit.EquipmentBase
 	} else {
@@ -629,7 +692,7 @@ func (o *SecurityUnit) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "OperState")

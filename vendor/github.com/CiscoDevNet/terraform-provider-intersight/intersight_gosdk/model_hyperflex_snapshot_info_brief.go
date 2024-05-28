@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the HyperflexSnapshotInfoBrief type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &HyperflexSnapshotInfoBrief{}
 
 // HyperflexSnapshotInfoBrief Reference to the VmSnapshot information.
 type HyperflexSnapshotInfoBrief struct {
@@ -107,7 +111,7 @@ func (o *HyperflexSnapshotInfoBrief) SetObjectType(v string) {
 
 // GetReplicationStatus returns the ReplicationStatus field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *HyperflexSnapshotInfoBrief) GetReplicationStatus() HyperflexReplicationStatus {
-	if o == nil || o.ReplicationStatus.Get() == nil {
+	if o == nil || IsNil(o.ReplicationStatus.Get()) {
 		var ret HyperflexReplicationStatus
 		return ret
 	}
@@ -150,7 +154,7 @@ func (o *HyperflexSnapshotInfoBrief) UnsetReplicationStatus() {
 
 // GetSite returns the Site field value if set, zero value otherwise.
 func (o *HyperflexSnapshotInfoBrief) GetSite() string {
-	if o == nil || o.Site == nil {
+	if o == nil || IsNil(o.Site) {
 		var ret string
 		return ret
 	}
@@ -160,7 +164,7 @@ func (o *HyperflexSnapshotInfoBrief) GetSite() string {
 // GetSiteOk returns a tuple with the Site field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexSnapshotInfoBrief) GetSiteOk() (*string, bool) {
-	if o == nil || o.Site == nil {
+	if o == nil || IsNil(o.Site) {
 		return nil, false
 	}
 	return o.Site, true
@@ -168,7 +172,7 @@ func (o *HyperflexSnapshotInfoBrief) GetSiteOk() (*string, bool) {
 
 // HasSite returns a boolean if a field has been set.
 func (o *HyperflexSnapshotInfoBrief) HasSite() bool {
-	if o != nil && o.Site != nil {
+	if o != nil && !IsNil(o.Site) {
 		return true
 	}
 
@@ -182,7 +186,7 @@ func (o *HyperflexSnapshotInfoBrief) SetSite(v string) {
 
 // GetSnapshotStatus returns the SnapshotStatus field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *HyperflexSnapshotInfoBrief) GetSnapshotStatus() HyperflexSnapshotStatus {
-	if o == nil || o.SnapshotStatus.Get() == nil {
+	if o == nil || IsNil(o.SnapshotStatus.Get()) {
 		var ret HyperflexSnapshotStatus
 		return ret
 	}
@@ -225,7 +229,7 @@ func (o *HyperflexSnapshotInfoBrief) UnsetSnapshotStatus() {
 
 // GetVmSnapshotEntityReference returns the VmSnapshotEntityReference field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *HyperflexSnapshotInfoBrief) GetVmSnapshotEntityReference() HyperflexEntityReference {
-	if o == nil || o.VmSnapshotEntityReference.Get() == nil {
+	if o == nil || IsNil(o.VmSnapshotEntityReference.Get()) {
 		var ret HyperflexEntityReference
 		return ret
 	}
@@ -267,25 +271,29 @@ func (o *HyperflexSnapshotInfoBrief) UnsetVmSnapshotEntityReference() {
 }
 
 func (o HyperflexSnapshotInfoBrief) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o HyperflexSnapshotInfoBrief) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
 	errMoBaseComplexType = json.Unmarshal([]byte(serializedMoBaseComplexType), &toSerialize)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
 	if o.ReplicationStatus.IsSet() {
 		toSerialize["ReplicationStatus"] = o.ReplicationStatus.Get()
 	}
-	if o.Site != nil {
+	if !IsNil(o.Site) {
 		toSerialize["Site"] = o.Site
 	}
 	if o.SnapshotStatus.IsSet() {
@@ -299,10 +307,32 @@ func (o HyperflexSnapshotInfoBrief) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *HyperflexSnapshotInfoBrief) UnmarshalJSON(bytes []byte) (err error) {
+func (o *HyperflexSnapshotInfoBrief) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type HyperflexSnapshotInfoBriefWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -317,7 +347,7 @@ func (o *HyperflexSnapshotInfoBrief) UnmarshalJSON(bytes []byte) (err error) {
 
 	varHyperflexSnapshotInfoBriefWithoutEmbeddedStruct := HyperflexSnapshotInfoBriefWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varHyperflexSnapshotInfoBriefWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varHyperflexSnapshotInfoBriefWithoutEmbeddedStruct)
 	if err == nil {
 		varHyperflexSnapshotInfoBrief := _HyperflexSnapshotInfoBrief{}
 		varHyperflexSnapshotInfoBrief.ClassId = varHyperflexSnapshotInfoBriefWithoutEmbeddedStruct.ClassId
@@ -333,7 +363,7 @@ func (o *HyperflexSnapshotInfoBrief) UnmarshalJSON(bytes []byte) (err error) {
 
 	varHyperflexSnapshotInfoBrief := _HyperflexSnapshotInfoBrief{}
 
-	err = json.Unmarshal(bytes, &varHyperflexSnapshotInfoBrief)
+	err = json.Unmarshal(data, &varHyperflexSnapshotInfoBrief)
 	if err == nil {
 		o.MoBaseComplexType = varHyperflexSnapshotInfoBrief.MoBaseComplexType
 	} else {
@@ -342,7 +372,7 @@ func (o *HyperflexSnapshotInfoBrief) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "ReplicationStatus")

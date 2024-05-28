@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the HyperflexLun type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &HyperflexLun{}
 
 // HyperflexLun A HyperFlex iSCSI logical unit number (LUN) entity. Contains detailed information about the iSCSI LUN which includes the identity and capacity information, and the iSCSI target to which it is associated.
 type HyperflexLun struct {
@@ -51,8 +55,8 @@ type HyperflexLun struct {
 	// UUID of the HyperFlex iSCSI LUN.
 	Uuid *string `json:"Uuid,omitempty"`
 	// Version of the HyperFlex iSCSI lun.
-	Version              *int64                       `json:"Version,omitempty"`
-	Target               *HyperflexTargetRelationship `json:"Target,omitempty"`
+	Version              *int64                              `json:"Version,omitempty"`
+	Target               NullableHyperflexTargetRelationship `json:"Target,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -131,7 +135,7 @@ func (o *HyperflexLun) SetObjectType(v string) {
 
 // GetDescription returns the Description field value if set, zero value otherwise.
 func (o *HyperflexLun) GetDescription() string {
-	if o == nil || o.Description == nil {
+	if o == nil || IsNil(o.Description) {
 		var ret string
 		return ret
 	}
@@ -141,7 +145,7 @@ func (o *HyperflexLun) GetDescription() string {
 // GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexLun) GetDescriptionOk() (*string, bool) {
-	if o == nil || o.Description == nil {
+	if o == nil || IsNil(o.Description) {
 		return nil, false
 	}
 	return o.Description, true
@@ -149,7 +153,7 @@ func (o *HyperflexLun) GetDescriptionOk() (*string, bool) {
 
 // HasDescription returns a boolean if a field has been set.
 func (o *HyperflexLun) HasDescription() bool {
-	if o != nil && o.Description != nil {
+	if o != nil && !IsNil(o.Description) {
 		return true
 	}
 
@@ -163,7 +167,7 @@ func (o *HyperflexLun) SetDescription(v string) {
 
 // GetDsCapacityInBytes returns the DsCapacityInBytes field value if set, zero value otherwise.
 func (o *HyperflexLun) GetDsCapacityInBytes() int64 {
-	if o == nil || o.DsCapacityInBytes == nil {
+	if o == nil || IsNil(o.DsCapacityInBytes) {
 		var ret int64
 		return ret
 	}
@@ -173,7 +177,7 @@ func (o *HyperflexLun) GetDsCapacityInBytes() int64 {
 // GetDsCapacityInBytesOk returns a tuple with the DsCapacityInBytes field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexLun) GetDsCapacityInBytesOk() (*int64, bool) {
-	if o == nil || o.DsCapacityInBytes == nil {
+	if o == nil || IsNil(o.DsCapacityInBytes) {
 		return nil, false
 	}
 	return o.DsCapacityInBytes, true
@@ -181,7 +185,7 @@ func (o *HyperflexLun) GetDsCapacityInBytesOk() (*int64, bool) {
 
 // HasDsCapacityInBytes returns a boolean if a field has been set.
 func (o *HyperflexLun) HasDsCapacityInBytes() bool {
-	if o != nil && o.DsCapacityInBytes != nil {
+	if o != nil && !IsNil(o.DsCapacityInBytes) {
 		return true
 	}
 
@@ -195,7 +199,7 @@ func (o *HyperflexLun) SetDsCapacityInBytes(v int64) {
 
 // GetDsName returns the DsName field value if set, zero value otherwise.
 func (o *HyperflexLun) GetDsName() string {
-	if o == nil || o.DsName == nil {
+	if o == nil || IsNil(o.DsName) {
 		var ret string
 		return ret
 	}
@@ -205,7 +209,7 @@ func (o *HyperflexLun) GetDsName() string {
 // GetDsNameOk returns a tuple with the DsName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexLun) GetDsNameOk() (*string, bool) {
-	if o == nil || o.DsName == nil {
+	if o == nil || IsNil(o.DsName) {
 		return nil, false
 	}
 	return o.DsName, true
@@ -213,7 +217,7 @@ func (o *HyperflexLun) GetDsNameOk() (*string, bool) {
 
 // HasDsName returns a boolean if a field has been set.
 func (o *HyperflexLun) HasDsName() bool {
-	if o != nil && o.DsName != nil {
+	if o != nil && !IsNil(o.DsName) {
 		return true
 	}
 
@@ -227,7 +231,7 @@ func (o *HyperflexLun) SetDsName(v string) {
 
 // GetDsUuid returns the DsUuid field value if set, zero value otherwise.
 func (o *HyperflexLun) GetDsUuid() string {
-	if o == nil || o.DsUuid == nil {
+	if o == nil || IsNil(o.DsUuid) {
 		var ret string
 		return ret
 	}
@@ -237,7 +241,7 @@ func (o *HyperflexLun) GetDsUuid() string {
 // GetDsUuidOk returns a tuple with the DsUuid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexLun) GetDsUuidOk() (*string, bool) {
-	if o == nil || o.DsUuid == nil {
+	if o == nil || IsNil(o.DsUuid) {
 		return nil, false
 	}
 	return o.DsUuid, true
@@ -245,7 +249,7 @@ func (o *HyperflexLun) GetDsUuidOk() (*string, bool) {
 
 // HasDsUuid returns a boolean if a field has been set.
 func (o *HyperflexLun) HasDsUuid() bool {
-	if o != nil && o.DsUuid != nil {
+	if o != nil && !IsNil(o.DsUuid) {
 		return true
 	}
 
@@ -259,7 +263,7 @@ func (o *HyperflexLun) SetDsUuid(v string) {
 
 // GetInventorySource returns the InventorySource field value if set, zero value otherwise.
 func (o *HyperflexLun) GetInventorySource() string {
-	if o == nil || o.InventorySource == nil {
+	if o == nil || IsNil(o.InventorySource) {
 		var ret string
 		return ret
 	}
@@ -269,7 +273,7 @@ func (o *HyperflexLun) GetInventorySource() string {
 // GetInventorySourceOk returns a tuple with the InventorySource field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexLun) GetInventorySourceOk() (*string, bool) {
-	if o == nil || o.InventorySource == nil {
+	if o == nil || IsNil(o.InventorySource) {
 		return nil, false
 	}
 	return o.InventorySource, true
@@ -277,7 +281,7 @@ func (o *HyperflexLun) GetInventorySourceOk() (*string, bool) {
 
 // HasInventorySource returns a boolean if a field has been set.
 func (o *HyperflexLun) HasInventorySource() bool {
-	if o != nil && o.InventorySource != nil {
+	if o != nil && !IsNil(o.InventorySource) {
 		return true
 	}
 
@@ -291,7 +295,7 @@ func (o *HyperflexLun) SetInventorySource(v string) {
 
 // GetIsEncrypted returns the IsEncrypted field value if set, zero value otherwise.
 func (o *HyperflexLun) GetIsEncrypted() bool {
-	if o == nil || o.IsEncrypted == nil {
+	if o == nil || IsNil(o.IsEncrypted) {
 		var ret bool
 		return ret
 	}
@@ -301,7 +305,7 @@ func (o *HyperflexLun) GetIsEncrypted() bool {
 // GetIsEncryptedOk returns a tuple with the IsEncrypted field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexLun) GetIsEncryptedOk() (*bool, bool) {
-	if o == nil || o.IsEncrypted == nil {
+	if o == nil || IsNil(o.IsEncrypted) {
 		return nil, false
 	}
 	return o.IsEncrypted, true
@@ -309,7 +313,7 @@ func (o *HyperflexLun) GetIsEncryptedOk() (*bool, bool) {
 
 // HasIsEncrypted returns a boolean if a field has been set.
 func (o *HyperflexLun) HasIsEncrypted() bool {
-	if o != nil && o.IsEncrypted != nil {
+	if o != nil && !IsNil(o.IsEncrypted) {
 		return true
 	}
 
@@ -323,7 +327,7 @@ func (o *HyperflexLun) SetIsEncrypted(v bool) {
 
 // GetLunId returns the LunId field value if set, zero value otherwise.
 func (o *HyperflexLun) GetLunId() string {
-	if o == nil || o.LunId == nil {
+	if o == nil || IsNil(o.LunId) {
 		var ret string
 		return ret
 	}
@@ -333,7 +337,7 @@ func (o *HyperflexLun) GetLunId() string {
 // GetLunIdOk returns a tuple with the LunId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexLun) GetLunIdOk() (*string, bool) {
-	if o == nil || o.LunId == nil {
+	if o == nil || IsNil(o.LunId) {
 		return nil, false
 	}
 	return o.LunId, true
@@ -341,7 +345,7 @@ func (o *HyperflexLun) GetLunIdOk() (*string, bool) {
 
 // HasLunId returns a boolean if a field has been set.
 func (o *HyperflexLun) HasLunId() bool {
-	if o != nil && o.LunId != nil {
+	if o != nil && !IsNil(o.LunId) {
 		return true
 	}
 
@@ -355,7 +359,7 @@ func (o *HyperflexLun) SetLunId(v string) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *HyperflexLun) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -365,7 +369,7 @@ func (o *HyperflexLun) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexLun) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -373,7 +377,7 @@ func (o *HyperflexLun) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *HyperflexLun) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -387,7 +391,7 @@ func (o *HyperflexLun) SetName(v string) {
 
 // GetSerialNo returns the SerialNo field value if set, zero value otherwise.
 func (o *HyperflexLun) GetSerialNo() string {
-	if o == nil || o.SerialNo == nil {
+	if o == nil || IsNil(o.SerialNo) {
 		var ret string
 		return ret
 	}
@@ -397,7 +401,7 @@ func (o *HyperflexLun) GetSerialNo() string {
 // GetSerialNoOk returns a tuple with the SerialNo field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexLun) GetSerialNoOk() (*string, bool) {
-	if o == nil || o.SerialNo == nil {
+	if o == nil || IsNil(o.SerialNo) {
 		return nil, false
 	}
 	return o.SerialNo, true
@@ -405,7 +409,7 @@ func (o *HyperflexLun) GetSerialNoOk() (*string, bool) {
 
 // HasSerialNo returns a boolean if a field has been set.
 func (o *HyperflexLun) HasSerialNo() bool {
-	if o != nil && o.SerialNo != nil {
+	if o != nil && !IsNil(o.SerialNo) {
 		return true
 	}
 
@@ -419,7 +423,7 @@ func (o *HyperflexLun) SetSerialNo(v string) {
 
 // GetTotalCapacityInBytes returns the TotalCapacityInBytes field value if set, zero value otherwise.
 func (o *HyperflexLun) GetTotalCapacityInBytes() int64 {
-	if o == nil || o.TotalCapacityInBytes == nil {
+	if o == nil || IsNil(o.TotalCapacityInBytes) {
 		var ret int64
 		return ret
 	}
@@ -429,7 +433,7 @@ func (o *HyperflexLun) GetTotalCapacityInBytes() int64 {
 // GetTotalCapacityInBytesOk returns a tuple with the TotalCapacityInBytes field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexLun) GetTotalCapacityInBytesOk() (*int64, bool) {
-	if o == nil || o.TotalCapacityInBytes == nil {
+	if o == nil || IsNil(o.TotalCapacityInBytes) {
 		return nil, false
 	}
 	return o.TotalCapacityInBytes, true
@@ -437,7 +441,7 @@ func (o *HyperflexLun) GetTotalCapacityInBytesOk() (*int64, bool) {
 
 // HasTotalCapacityInBytes returns a boolean if a field has been set.
 func (o *HyperflexLun) HasTotalCapacityInBytes() bool {
-	if o != nil && o.TotalCapacityInBytes != nil {
+	if o != nil && !IsNil(o.TotalCapacityInBytes) {
 		return true
 	}
 
@@ -451,7 +455,7 @@ func (o *HyperflexLun) SetTotalCapacityInBytes(v int64) {
 
 // GetTuuid returns the Tuuid field value if set, zero value otherwise.
 func (o *HyperflexLun) GetTuuid() string {
-	if o == nil || o.Tuuid == nil {
+	if o == nil || IsNil(o.Tuuid) {
 		var ret string
 		return ret
 	}
@@ -461,7 +465,7 @@ func (o *HyperflexLun) GetTuuid() string {
 // GetTuuidOk returns a tuple with the Tuuid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexLun) GetTuuidOk() (*string, bool) {
-	if o == nil || o.Tuuid == nil {
+	if o == nil || IsNil(o.Tuuid) {
 		return nil, false
 	}
 	return o.Tuuid, true
@@ -469,7 +473,7 @@ func (o *HyperflexLun) GetTuuidOk() (*string, bool) {
 
 // HasTuuid returns a boolean if a field has been set.
 func (o *HyperflexLun) HasTuuid() bool {
-	if o != nil && o.Tuuid != nil {
+	if o != nil && !IsNil(o.Tuuid) {
 		return true
 	}
 
@@ -483,7 +487,7 @@ func (o *HyperflexLun) SetTuuid(v string) {
 
 // GetUsedCapacityInBytes returns the UsedCapacityInBytes field value if set, zero value otherwise.
 func (o *HyperflexLun) GetUsedCapacityInBytes() int64 {
-	if o == nil || o.UsedCapacityInBytes == nil {
+	if o == nil || IsNil(o.UsedCapacityInBytes) {
 		var ret int64
 		return ret
 	}
@@ -493,7 +497,7 @@ func (o *HyperflexLun) GetUsedCapacityInBytes() int64 {
 // GetUsedCapacityInBytesOk returns a tuple with the UsedCapacityInBytes field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexLun) GetUsedCapacityInBytesOk() (*int64, bool) {
-	if o == nil || o.UsedCapacityInBytes == nil {
+	if o == nil || IsNil(o.UsedCapacityInBytes) {
 		return nil, false
 	}
 	return o.UsedCapacityInBytes, true
@@ -501,7 +505,7 @@ func (o *HyperflexLun) GetUsedCapacityInBytesOk() (*int64, bool) {
 
 // HasUsedCapacityInBytes returns a boolean if a field has been set.
 func (o *HyperflexLun) HasUsedCapacityInBytes() bool {
-	if o != nil && o.UsedCapacityInBytes != nil {
+	if o != nil && !IsNil(o.UsedCapacityInBytes) {
 		return true
 	}
 
@@ -515,7 +519,7 @@ func (o *HyperflexLun) SetUsedCapacityInBytes(v int64) {
 
 // GetUuid returns the Uuid field value if set, zero value otherwise.
 func (o *HyperflexLun) GetUuid() string {
-	if o == nil || o.Uuid == nil {
+	if o == nil || IsNil(o.Uuid) {
 		var ret string
 		return ret
 	}
@@ -525,7 +529,7 @@ func (o *HyperflexLun) GetUuid() string {
 // GetUuidOk returns a tuple with the Uuid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexLun) GetUuidOk() (*string, bool) {
-	if o == nil || o.Uuid == nil {
+	if o == nil || IsNil(o.Uuid) {
 		return nil, false
 	}
 	return o.Uuid, true
@@ -533,7 +537,7 @@ func (o *HyperflexLun) GetUuidOk() (*string, bool) {
 
 // HasUuid returns a boolean if a field has been set.
 func (o *HyperflexLun) HasUuid() bool {
-	if o != nil && o.Uuid != nil {
+	if o != nil && !IsNil(o.Uuid) {
 		return true
 	}
 
@@ -547,7 +551,7 @@ func (o *HyperflexLun) SetUuid(v string) {
 
 // GetVersion returns the Version field value if set, zero value otherwise.
 func (o *HyperflexLun) GetVersion() int64 {
-	if o == nil || o.Version == nil {
+	if o == nil || IsNil(o.Version) {
 		var ret int64
 		return ret
 	}
@@ -557,7 +561,7 @@ func (o *HyperflexLun) GetVersion() int64 {
 // GetVersionOk returns a tuple with the Version field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexLun) GetVersionOk() (*int64, bool) {
-	if o == nil || o.Version == nil {
+	if o == nil || IsNil(o.Version) {
 		return nil, false
 	}
 	return o.Version, true
@@ -565,7 +569,7 @@ func (o *HyperflexLun) GetVersionOk() (*int64, bool) {
 
 // HasVersion returns a boolean if a field has been set.
 func (o *HyperflexLun) HasVersion() bool {
-	if o != nil && o.Version != nil {
+	if o != nil && !IsNil(o.Version) {
 		return true
 	}
 
@@ -577,108 +581,145 @@ func (o *HyperflexLun) SetVersion(v int64) {
 	o.Version = &v
 }
 
-// GetTarget returns the Target field value if set, zero value otherwise.
+// GetTarget returns the Target field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *HyperflexLun) GetTarget() HyperflexTargetRelationship {
-	if o == nil || o.Target == nil {
+	if o == nil || IsNil(o.Target.Get()) {
 		var ret HyperflexTargetRelationship
 		return ret
 	}
-	return *o.Target
+	return *o.Target.Get()
 }
 
 // GetTargetOk returns a tuple with the Target field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *HyperflexLun) GetTargetOk() (*HyperflexTargetRelationship, bool) {
-	if o == nil || o.Target == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Target, true
+	return o.Target.Get(), o.Target.IsSet()
 }
 
 // HasTarget returns a boolean if a field has been set.
 func (o *HyperflexLun) HasTarget() bool {
-	if o != nil && o.Target != nil {
+	if o != nil && o.Target.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetTarget gets a reference to the given HyperflexTargetRelationship and assigns it to the Target field.
+// SetTarget gets a reference to the given NullableHyperflexTargetRelationship and assigns it to the Target field.
 func (o *HyperflexLun) SetTarget(v HyperflexTargetRelationship) {
-	o.Target = &v
+	o.Target.Set(&v)
+}
+
+// SetTargetNil sets the value for Target to be an explicit nil
+func (o *HyperflexLun) SetTargetNil() {
+	o.Target.Set(nil)
+}
+
+// UnsetTarget ensures that no value is present for Target, not even an explicit nil
+func (o *HyperflexLun) UnsetTarget() {
+	o.Target.Unset()
 }
 
 func (o HyperflexLun) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o HyperflexLun) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedStorageBaseHostLun, errStorageBaseHostLun := json.Marshal(o.StorageBaseHostLun)
 	if errStorageBaseHostLun != nil {
-		return []byte{}, errStorageBaseHostLun
+		return map[string]interface{}{}, errStorageBaseHostLun
 	}
 	errStorageBaseHostLun = json.Unmarshal([]byte(serializedStorageBaseHostLun), &toSerialize)
 	if errStorageBaseHostLun != nil {
-		return []byte{}, errStorageBaseHostLun
+		return map[string]interface{}{}, errStorageBaseHostLun
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Description != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Description) {
 		toSerialize["Description"] = o.Description
 	}
-	if o.DsCapacityInBytes != nil {
+	if !IsNil(o.DsCapacityInBytes) {
 		toSerialize["DsCapacityInBytes"] = o.DsCapacityInBytes
 	}
-	if o.DsName != nil {
+	if !IsNil(o.DsName) {
 		toSerialize["DsName"] = o.DsName
 	}
-	if o.DsUuid != nil {
+	if !IsNil(o.DsUuid) {
 		toSerialize["DsUuid"] = o.DsUuid
 	}
-	if o.InventorySource != nil {
+	if !IsNil(o.InventorySource) {
 		toSerialize["InventorySource"] = o.InventorySource
 	}
-	if o.IsEncrypted != nil {
+	if !IsNil(o.IsEncrypted) {
 		toSerialize["IsEncrypted"] = o.IsEncrypted
 	}
-	if o.LunId != nil {
+	if !IsNil(o.LunId) {
 		toSerialize["LunId"] = o.LunId
 	}
-	if o.Name != nil {
+	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
 	}
-	if o.SerialNo != nil {
+	if !IsNil(o.SerialNo) {
 		toSerialize["SerialNo"] = o.SerialNo
 	}
-	if o.TotalCapacityInBytes != nil {
+	if !IsNil(o.TotalCapacityInBytes) {
 		toSerialize["TotalCapacityInBytes"] = o.TotalCapacityInBytes
 	}
-	if o.Tuuid != nil {
+	if !IsNil(o.Tuuid) {
 		toSerialize["Tuuid"] = o.Tuuid
 	}
-	if o.UsedCapacityInBytes != nil {
+	if !IsNil(o.UsedCapacityInBytes) {
 		toSerialize["UsedCapacityInBytes"] = o.UsedCapacityInBytes
 	}
-	if o.Uuid != nil {
+	if !IsNil(o.Uuid) {
 		toSerialize["Uuid"] = o.Uuid
 	}
-	if o.Version != nil {
+	if !IsNil(o.Version) {
 		toSerialize["Version"] = o.Version
 	}
-	if o.Target != nil {
-		toSerialize["Target"] = o.Target
+	if o.Target.IsSet() {
+		toSerialize["Target"] = o.Target.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *HyperflexLun) UnmarshalJSON(bytes []byte) (err error) {
+func (o *HyperflexLun) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type HyperflexLunWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -711,13 +752,13 @@ func (o *HyperflexLun) UnmarshalJSON(bytes []byte) (err error) {
 		// UUID of the HyperFlex iSCSI LUN.
 		Uuid *string `json:"Uuid,omitempty"`
 		// Version of the HyperFlex iSCSI lun.
-		Version *int64                       `json:"Version,omitempty"`
-		Target  *HyperflexTargetRelationship `json:"Target,omitempty"`
+		Version *int64                              `json:"Version,omitempty"`
+		Target  NullableHyperflexTargetRelationship `json:"Target,omitempty"`
 	}
 
 	varHyperflexLunWithoutEmbeddedStruct := HyperflexLunWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varHyperflexLunWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varHyperflexLunWithoutEmbeddedStruct)
 	if err == nil {
 		varHyperflexLun := _HyperflexLun{}
 		varHyperflexLun.ClassId = varHyperflexLunWithoutEmbeddedStruct.ClassId
@@ -744,7 +785,7 @@ func (o *HyperflexLun) UnmarshalJSON(bytes []byte) (err error) {
 
 	varHyperflexLun := _HyperflexLun{}
 
-	err = json.Unmarshal(bytes, &varHyperflexLun)
+	err = json.Unmarshal(data, &varHyperflexLun)
 	if err == nil {
 		o.StorageBaseHostLun = varHyperflexLun.StorageBaseHostLun
 	} else {
@@ -753,7 +794,7 @@ func (o *HyperflexLun) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Description")

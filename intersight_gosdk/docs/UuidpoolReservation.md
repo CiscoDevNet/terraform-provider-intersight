@@ -7,11 +7,11 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "uuidpool.Reservation"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "uuidpool.Reservation"]
 **Identity** | Pointer to **string** | UUID identity to be reserved. | [optional] 
-**Block** | Pointer to [**UuidpoolBlockRelationship**](UuidpoolBlockRelationship.md) |  | [optional] 
-**Organization** | Pointer to [**OrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
-**Pool** | Pointer to [**UuidpoolPoolRelationship**](UuidpoolPoolRelationship.md) |  | [optional] 
-**PoolMember** | Pointer to [**UuidpoolPoolMemberRelationship**](UuidpoolPoolMemberRelationship.md) |  | [optional] 
-**Universe** | Pointer to [**UuidpoolUniverseRelationship**](UuidpoolUniverseRelationship.md) |  | [optional] 
+**Block** | Pointer to [**NullableUuidpoolBlockRelationship**](UuidpoolBlockRelationship.md) |  | [optional] 
+**Organization** | Pointer to [**NullableOrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
+**Pool** | Pointer to [**NullableUuidpoolPoolRelationship**](UuidpoolPoolRelationship.md) |  | [optional] 
+**PoolMember** | Pointer to [**NullableUuidpoolPoolMemberRelationship**](UuidpoolPoolMemberRelationship.md) |  | [optional] 
+**Universe** | Pointer to [**NullableUuidpoolUniverseRelationship**](UuidpoolUniverseRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -122,6 +122,16 @@ SetBlock sets Block field to given value.
 
 HasBlock returns a boolean if a field has been set.
 
+### SetBlockNil
+
+`func (o *UuidpoolReservation) SetBlockNil(b bool)`
+
+ SetBlockNil sets the value for Block to be an explicit nil
+
+### UnsetBlock
+`func (o *UuidpoolReservation) UnsetBlock()`
+
+UnsetBlock ensures that no value is present for Block, not even an explicit nil
 ### GetOrganization
 
 `func (o *UuidpoolReservation) GetOrganization() OrganizationOrganizationRelationship`
@@ -147,6 +157,16 @@ SetOrganization sets Organization field to given value.
 
 HasOrganization returns a boolean if a field has been set.
 
+### SetOrganizationNil
+
+`func (o *UuidpoolReservation) SetOrganizationNil(b bool)`
+
+ SetOrganizationNil sets the value for Organization to be an explicit nil
+
+### UnsetOrganization
+`func (o *UuidpoolReservation) UnsetOrganization()`
+
+UnsetOrganization ensures that no value is present for Organization, not even an explicit nil
 ### GetPool
 
 `func (o *UuidpoolReservation) GetPool() UuidpoolPoolRelationship`
@@ -172,6 +192,16 @@ SetPool sets Pool field to given value.
 
 HasPool returns a boolean if a field has been set.
 
+### SetPoolNil
+
+`func (o *UuidpoolReservation) SetPoolNil(b bool)`
+
+ SetPoolNil sets the value for Pool to be an explicit nil
+
+### UnsetPool
+`func (o *UuidpoolReservation) UnsetPool()`
+
+UnsetPool ensures that no value is present for Pool, not even an explicit nil
 ### GetPoolMember
 
 `func (o *UuidpoolReservation) GetPoolMember() UuidpoolPoolMemberRelationship`
@@ -197,6 +227,16 @@ SetPoolMember sets PoolMember field to given value.
 
 HasPoolMember returns a boolean if a field has been set.
 
+### SetPoolMemberNil
+
+`func (o *UuidpoolReservation) SetPoolMemberNil(b bool)`
+
+ SetPoolMemberNil sets the value for PoolMember to be an explicit nil
+
+### UnsetPoolMember
+`func (o *UuidpoolReservation) UnsetPoolMember()`
+
+UnsetPoolMember ensures that no value is present for PoolMember, not even an explicit nil
 ### GetUniverse
 
 `func (o *UuidpoolReservation) GetUniverse() UuidpoolUniverseRelationship`
@@ -222,6 +262,16 @@ SetUniverse sets Universe field to given value.
 
 HasUniverse returns a boolean if a field has been set.
 
+### SetUniverseNil
+
+`func (o *UuidpoolReservation) SetUniverseNil(b bool)`
+
+ SetUniverseNil sets the value for Universe to be an explicit nil
+
+### UnsetUniverse
+`func (o *UuidpoolReservation) UnsetUniverse()`
+
+UnsetUniverse ensures that no value is present for Universe, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

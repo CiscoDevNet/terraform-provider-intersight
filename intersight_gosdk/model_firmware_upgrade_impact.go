@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the FirmwareUpgradeImpact type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &FirmwareUpgradeImpact{}
 
 // FirmwareUpgradeImpact Before submitting firmware upgrade operation, the estimate impact helps to know the list of components be impacted and require host reboot. This cannot be used for network share based upgrade.
 type FirmwareUpgradeImpact struct {
@@ -27,11 +31,11 @@ type FirmwareUpgradeImpact struct {
 	// An array of relationships to equipmentChassis resources.
 	Chassis []EquipmentChassisRelationship `json:"Chassis,omitempty"`
 	// An array of relationships to assetDeviceRegistration resources.
-	Device        []AssetDeviceRegistrationRelationship `json:"Device,omitempty"`
-	Distributable *FirmwareDistributableRelationship    `json:"Distributable,omitempty"`
+	Device        []AssetDeviceRegistrationRelationship     `json:"Device,omitempty"`
+	Distributable NullableFirmwareDistributableRelationship `json:"Distributable,omitempty"`
 	// An array of relationships to networkElement resources.
-	NetworkElements []NetworkElementRelationship           `json:"NetworkElements,omitempty"`
-	Release         *SoftwarerepositoryReleaseRelationship `json:"Release,omitempty"`
+	NetworkElements []NetworkElementRelationship                  `json:"NetworkElements,omitempty"`
+	Release         NullableSoftwarerepositoryReleaseRelationship `json:"Release,omitempty"`
 	// An array of relationships to computePhysical resources.
 	Server               []ComputePhysicalRelationship `json:"Server,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -127,7 +131,7 @@ func (o *FirmwareUpgradeImpact) GetChassis() []EquipmentChassisRelationship {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *FirmwareUpgradeImpact) GetChassisOk() ([]EquipmentChassisRelationship, bool) {
-	if o == nil || o.Chassis == nil {
+	if o == nil || IsNil(o.Chassis) {
 		return nil, false
 	}
 	return o.Chassis, true
@@ -135,7 +139,7 @@ func (o *FirmwareUpgradeImpact) GetChassisOk() ([]EquipmentChassisRelationship, 
 
 // HasChassis returns a boolean if a field has been set.
 func (o *FirmwareUpgradeImpact) HasChassis() bool {
-	if o != nil && o.Chassis != nil {
+	if o != nil && IsNil(o.Chassis) {
 		return true
 	}
 
@@ -160,7 +164,7 @@ func (o *FirmwareUpgradeImpact) GetDevice() []AssetDeviceRegistrationRelationshi
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *FirmwareUpgradeImpact) GetDeviceOk() ([]AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.Device == nil {
+	if o == nil || IsNil(o.Device) {
 		return nil, false
 	}
 	return o.Device, true
@@ -168,7 +172,7 @@ func (o *FirmwareUpgradeImpact) GetDeviceOk() ([]AssetDeviceRegistrationRelation
 
 // HasDevice returns a boolean if a field has been set.
 func (o *FirmwareUpgradeImpact) HasDevice() bool {
-	if o != nil && o.Device != nil {
+	if o != nil && IsNil(o.Device) {
 		return true
 	}
 
@@ -180,36 +184,47 @@ func (o *FirmwareUpgradeImpact) SetDevice(v []AssetDeviceRegistrationRelationshi
 	o.Device = v
 }
 
-// GetDistributable returns the Distributable field value if set, zero value otherwise.
+// GetDistributable returns the Distributable field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *FirmwareUpgradeImpact) GetDistributable() FirmwareDistributableRelationship {
-	if o == nil || o.Distributable == nil {
+	if o == nil || IsNil(o.Distributable.Get()) {
 		var ret FirmwareDistributableRelationship
 		return ret
 	}
-	return *o.Distributable
+	return *o.Distributable.Get()
 }
 
 // GetDistributableOk returns a tuple with the Distributable field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *FirmwareUpgradeImpact) GetDistributableOk() (*FirmwareDistributableRelationship, bool) {
-	if o == nil || o.Distributable == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Distributable, true
+	return o.Distributable.Get(), o.Distributable.IsSet()
 }
 
 // HasDistributable returns a boolean if a field has been set.
 func (o *FirmwareUpgradeImpact) HasDistributable() bool {
-	if o != nil && o.Distributable != nil {
+	if o != nil && o.Distributable.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetDistributable gets a reference to the given FirmwareDistributableRelationship and assigns it to the Distributable field.
+// SetDistributable gets a reference to the given NullableFirmwareDistributableRelationship and assigns it to the Distributable field.
 func (o *FirmwareUpgradeImpact) SetDistributable(v FirmwareDistributableRelationship) {
-	o.Distributable = &v
+	o.Distributable.Set(&v)
+}
+
+// SetDistributableNil sets the value for Distributable to be an explicit nil
+func (o *FirmwareUpgradeImpact) SetDistributableNil() {
+	o.Distributable.Set(nil)
+}
+
+// UnsetDistributable ensures that no value is present for Distributable, not even an explicit nil
+func (o *FirmwareUpgradeImpact) UnsetDistributable() {
+	o.Distributable.Unset()
 }
 
 // GetNetworkElements returns the NetworkElements field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -225,7 +240,7 @@ func (o *FirmwareUpgradeImpact) GetNetworkElements() []NetworkElementRelationshi
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *FirmwareUpgradeImpact) GetNetworkElementsOk() ([]NetworkElementRelationship, bool) {
-	if o == nil || o.NetworkElements == nil {
+	if o == nil || IsNil(o.NetworkElements) {
 		return nil, false
 	}
 	return o.NetworkElements, true
@@ -233,7 +248,7 @@ func (o *FirmwareUpgradeImpact) GetNetworkElementsOk() ([]NetworkElementRelation
 
 // HasNetworkElements returns a boolean if a field has been set.
 func (o *FirmwareUpgradeImpact) HasNetworkElements() bool {
-	if o != nil && o.NetworkElements != nil {
+	if o != nil && IsNil(o.NetworkElements) {
 		return true
 	}
 
@@ -245,36 +260,47 @@ func (o *FirmwareUpgradeImpact) SetNetworkElements(v []NetworkElementRelationshi
 	o.NetworkElements = v
 }
 
-// GetRelease returns the Release field value if set, zero value otherwise.
+// GetRelease returns the Release field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *FirmwareUpgradeImpact) GetRelease() SoftwarerepositoryReleaseRelationship {
-	if o == nil || o.Release == nil {
+	if o == nil || IsNil(o.Release.Get()) {
 		var ret SoftwarerepositoryReleaseRelationship
 		return ret
 	}
-	return *o.Release
+	return *o.Release.Get()
 }
 
 // GetReleaseOk returns a tuple with the Release field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *FirmwareUpgradeImpact) GetReleaseOk() (*SoftwarerepositoryReleaseRelationship, bool) {
-	if o == nil || o.Release == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Release, true
+	return o.Release.Get(), o.Release.IsSet()
 }
 
 // HasRelease returns a boolean if a field has been set.
 func (o *FirmwareUpgradeImpact) HasRelease() bool {
-	if o != nil && o.Release != nil {
+	if o != nil && o.Release.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRelease gets a reference to the given SoftwarerepositoryReleaseRelationship and assigns it to the Release field.
+// SetRelease gets a reference to the given NullableSoftwarerepositoryReleaseRelationship and assigns it to the Release field.
 func (o *FirmwareUpgradeImpact) SetRelease(v SoftwarerepositoryReleaseRelationship) {
-	o.Release = &v
+	o.Release.Set(&v)
+}
+
+// SetReleaseNil sets the value for Release to be an explicit nil
+func (o *FirmwareUpgradeImpact) SetReleaseNil() {
+	o.Release.Set(nil)
+}
+
+// UnsetRelease ensures that no value is present for Release, not even an explicit nil
+func (o *FirmwareUpgradeImpact) UnsetRelease() {
+	o.Release.Unset()
 }
 
 // GetServer returns the Server field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -290,7 +316,7 @@ func (o *FirmwareUpgradeImpact) GetServer() []ComputePhysicalRelationship {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *FirmwareUpgradeImpact) GetServerOk() ([]ComputePhysicalRelationship, bool) {
-	if o == nil || o.Server == nil {
+	if o == nil || IsNil(o.Server) {
 		return nil, false
 	}
 	return o.Server, true
@@ -298,7 +324,7 @@ func (o *FirmwareUpgradeImpact) GetServerOk() ([]ComputePhysicalRelationship, bo
 
 // HasServer returns a boolean if a field has been set.
 func (o *FirmwareUpgradeImpact) HasServer() bool {
-	if o != nil && o.Server != nil {
+	if o != nil && IsNil(o.Server) {
 		return true
 	}
 
@@ -311,35 +337,39 @@ func (o *FirmwareUpgradeImpact) SetServer(v []ComputePhysicalRelationship) {
 }
 
 func (o FirmwareUpgradeImpact) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o FirmwareUpgradeImpact) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedFirmwareUpgradeImpactBase, errFirmwareUpgradeImpactBase := json.Marshal(o.FirmwareUpgradeImpactBase)
 	if errFirmwareUpgradeImpactBase != nil {
-		return []byte{}, errFirmwareUpgradeImpactBase
+		return map[string]interface{}{}, errFirmwareUpgradeImpactBase
 	}
 	errFirmwareUpgradeImpactBase = json.Unmarshal([]byte(serializedFirmwareUpgradeImpactBase), &toSerialize)
 	if errFirmwareUpgradeImpactBase != nil {
-		return []byte{}, errFirmwareUpgradeImpactBase
+		return map[string]interface{}{}, errFirmwareUpgradeImpactBase
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
 	if o.Chassis != nil {
 		toSerialize["Chassis"] = o.Chassis
 	}
 	if o.Device != nil {
 		toSerialize["Device"] = o.Device
 	}
-	if o.Distributable != nil {
-		toSerialize["Distributable"] = o.Distributable
+	if o.Distributable.IsSet() {
+		toSerialize["Distributable"] = o.Distributable.Get()
 	}
 	if o.NetworkElements != nil {
 		toSerialize["NetworkElements"] = o.NetworkElements
 	}
-	if o.Release != nil {
-		toSerialize["Release"] = o.Release
+	if o.Release.IsSet() {
+		toSerialize["Release"] = o.Release.Get()
 	}
 	if o.Server != nil {
 		toSerialize["Server"] = o.Server
@@ -349,10 +379,32 @@ func (o FirmwareUpgradeImpact) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *FirmwareUpgradeImpact) UnmarshalJSON(bytes []byte) (err error) {
+func (o *FirmwareUpgradeImpact) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type FirmwareUpgradeImpactWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -361,18 +413,18 @@ func (o *FirmwareUpgradeImpact) UnmarshalJSON(bytes []byte) (err error) {
 		// An array of relationships to equipmentChassis resources.
 		Chassis []EquipmentChassisRelationship `json:"Chassis,omitempty"`
 		// An array of relationships to assetDeviceRegistration resources.
-		Device        []AssetDeviceRegistrationRelationship `json:"Device,omitempty"`
-		Distributable *FirmwareDistributableRelationship    `json:"Distributable,omitempty"`
+		Device        []AssetDeviceRegistrationRelationship     `json:"Device,omitempty"`
+		Distributable NullableFirmwareDistributableRelationship `json:"Distributable,omitempty"`
 		// An array of relationships to networkElement resources.
-		NetworkElements []NetworkElementRelationship           `json:"NetworkElements,omitempty"`
-		Release         *SoftwarerepositoryReleaseRelationship `json:"Release,omitempty"`
+		NetworkElements []NetworkElementRelationship                  `json:"NetworkElements,omitempty"`
+		Release         NullableSoftwarerepositoryReleaseRelationship `json:"Release,omitempty"`
 		// An array of relationships to computePhysical resources.
 		Server []ComputePhysicalRelationship `json:"Server,omitempty"`
 	}
 
 	varFirmwareUpgradeImpactWithoutEmbeddedStruct := FirmwareUpgradeImpactWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varFirmwareUpgradeImpactWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varFirmwareUpgradeImpactWithoutEmbeddedStruct)
 	if err == nil {
 		varFirmwareUpgradeImpact := _FirmwareUpgradeImpact{}
 		varFirmwareUpgradeImpact.ClassId = varFirmwareUpgradeImpactWithoutEmbeddedStruct.ClassId
@@ -390,7 +442,7 @@ func (o *FirmwareUpgradeImpact) UnmarshalJSON(bytes []byte) (err error) {
 
 	varFirmwareUpgradeImpact := _FirmwareUpgradeImpact{}
 
-	err = json.Unmarshal(bytes, &varFirmwareUpgradeImpact)
+	err = json.Unmarshal(data, &varFirmwareUpgradeImpact)
 	if err == nil {
 		o.FirmwareUpgradeImpactBase = varFirmwareUpgradeImpact.FirmwareUpgradeImpactBase
 	} else {
@@ -399,7 +451,7 @@ func (o *FirmwareUpgradeImpact) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Chassis")

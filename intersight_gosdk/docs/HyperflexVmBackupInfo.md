@@ -19,9 +19,9 @@ Name | Type | Description | Notes
 **TgtClusterName** | Pointer to **string** | Name for the target cluster this Virtual Machine is residing on. | [optional] [readonly] 
 **VmEntityReference** | Pointer to [**NullableHyperflexEntityReference**](HyperflexEntityReference.md) |  | [optional] 
 **VmInfo** | Pointer to [**NullableHyperflexVirtualMachine**](HyperflexVirtualMachine.md) |  | [optional] 
-**SrcBackupCluster** | Pointer to [**HyperflexBackupClusterRelationship**](HyperflexBackupClusterRelationship.md) |  | [optional] 
-**SrcCluster** | Pointer to [**HyperflexClusterRelationship**](HyperflexClusterRelationship.md) |  | [optional] 
-**TgtCluster** | Pointer to [**HyperflexClusterRelationship**](HyperflexClusterRelationship.md) |  | [optional] 
+**SrcBackupCluster** | Pointer to [**NullableHyperflexBackupClusterRelationship**](HyperflexBackupClusterRelationship.md) |  | [optional] 
+**SrcCluster** | Pointer to [**NullableHyperflexClusterRelationship**](HyperflexClusterRelationship.md) |  | [optional] 
+**TgtCluster** | Pointer to [**NullableHyperflexClusterRelationship**](HyperflexClusterRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -492,6 +492,16 @@ SetSrcBackupCluster sets SrcBackupCluster field to given value.
 
 HasSrcBackupCluster returns a boolean if a field has been set.
 
+### SetSrcBackupClusterNil
+
+`func (o *HyperflexVmBackupInfo) SetSrcBackupClusterNil(b bool)`
+
+ SetSrcBackupClusterNil sets the value for SrcBackupCluster to be an explicit nil
+
+### UnsetSrcBackupCluster
+`func (o *HyperflexVmBackupInfo) UnsetSrcBackupCluster()`
+
+UnsetSrcBackupCluster ensures that no value is present for SrcBackupCluster, not even an explicit nil
 ### GetSrcCluster
 
 `func (o *HyperflexVmBackupInfo) GetSrcCluster() HyperflexClusterRelationship`
@@ -517,6 +527,16 @@ SetSrcCluster sets SrcCluster field to given value.
 
 HasSrcCluster returns a boolean if a field has been set.
 
+### SetSrcClusterNil
+
+`func (o *HyperflexVmBackupInfo) SetSrcClusterNil(b bool)`
+
+ SetSrcClusterNil sets the value for SrcCluster to be an explicit nil
+
+### UnsetSrcCluster
+`func (o *HyperflexVmBackupInfo) UnsetSrcCluster()`
+
+UnsetSrcCluster ensures that no value is present for SrcCluster, not even an explicit nil
 ### GetTgtCluster
 
 `func (o *HyperflexVmBackupInfo) GetTgtCluster() HyperflexClusterRelationship`
@@ -542,6 +562,16 @@ SetTgtCluster sets TgtCluster field to given value.
 
 HasTgtCluster returns a boolean if a field has been set.
 
+### SetTgtClusterNil
+
+`func (o *HyperflexVmBackupInfo) SetTgtClusterNil(b bool)`
+
+ SetTgtClusterNil sets the value for TgtCluster to be an explicit nil
+
+### UnsetTgtCluster
+`func (o *HyperflexVmBackupInfo) UnsetTgtCluster()`
+
+UnsetTgtCluster ensures that no value is present for TgtCluster, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

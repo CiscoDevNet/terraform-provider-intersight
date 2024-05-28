@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the CapabilityActionsMetaData type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &CapabilityActionsMetaData{}
 
 // CapabilityActionsMetaData Metadata or constraints of various server actions supported in Intersight for 3rd Party servers. It is validated against the target provided  and the actions are allowed only upon successful validation.
 type CapabilityActionsMetaData struct {
@@ -117,7 +121,7 @@ func (o *CapabilityActionsMetaData) SetObjectType(v string) {
 
 // GetMaxFwVersion returns the MaxFwVersion field value if set, zero value otherwise.
 func (o *CapabilityActionsMetaData) GetMaxFwVersion() string {
-	if o == nil || o.MaxFwVersion == nil {
+	if o == nil || IsNil(o.MaxFwVersion) {
 		var ret string
 		return ret
 	}
@@ -127,7 +131,7 @@ func (o *CapabilityActionsMetaData) GetMaxFwVersion() string {
 // GetMaxFwVersionOk returns a tuple with the MaxFwVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CapabilityActionsMetaData) GetMaxFwVersionOk() (*string, bool) {
-	if o == nil || o.MaxFwVersion == nil {
+	if o == nil || IsNil(o.MaxFwVersion) {
 		return nil, false
 	}
 	return o.MaxFwVersion, true
@@ -135,7 +139,7 @@ func (o *CapabilityActionsMetaData) GetMaxFwVersionOk() (*string, bool) {
 
 // HasMaxFwVersion returns a boolean if a field has been set.
 func (o *CapabilityActionsMetaData) HasMaxFwVersion() bool {
-	if o != nil && o.MaxFwVersion != nil {
+	if o != nil && !IsNil(o.MaxFwVersion) {
 		return true
 	}
 
@@ -149,7 +153,7 @@ func (o *CapabilityActionsMetaData) SetMaxFwVersion(v string) {
 
 // GetMinFwVersion returns the MinFwVersion field value if set, zero value otherwise.
 func (o *CapabilityActionsMetaData) GetMinFwVersion() string {
-	if o == nil || o.MinFwVersion == nil {
+	if o == nil || IsNil(o.MinFwVersion) {
 		var ret string
 		return ret
 	}
@@ -159,7 +163,7 @@ func (o *CapabilityActionsMetaData) GetMinFwVersion() string {
 // GetMinFwVersionOk returns a tuple with the MinFwVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CapabilityActionsMetaData) GetMinFwVersionOk() (*string, bool) {
-	if o == nil || o.MinFwVersion == nil {
+	if o == nil || IsNil(o.MinFwVersion) {
 		return nil, false
 	}
 	return o.MinFwVersion, true
@@ -167,7 +171,7 @@ func (o *CapabilityActionsMetaData) GetMinFwVersionOk() (*string, bool) {
 
 // HasMinFwVersion returns a boolean if a field has been set.
 func (o *CapabilityActionsMetaData) HasMinFwVersion() bool {
-	if o != nil && o.MinFwVersion != nil {
+	if o != nil && !IsNil(o.MinFwVersion) {
 		return true
 	}
 
@@ -181,7 +185,7 @@ func (o *CapabilityActionsMetaData) SetMinFwVersion(v string) {
 
 // GetModel returns the Model field value if set, zero value otherwise.
 func (o *CapabilityActionsMetaData) GetModel() string {
-	if o == nil || o.Model == nil {
+	if o == nil || IsNil(o.Model) {
 		var ret string
 		return ret
 	}
@@ -191,7 +195,7 @@ func (o *CapabilityActionsMetaData) GetModel() string {
 // GetModelOk returns a tuple with the Model field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CapabilityActionsMetaData) GetModelOk() (*string, bool) {
-	if o == nil || o.Model == nil {
+	if o == nil || IsNil(o.Model) {
 		return nil, false
 	}
 	return o.Model, true
@@ -199,7 +203,7 @@ func (o *CapabilityActionsMetaData) GetModelOk() (*string, bool) {
 
 // HasModel returns a boolean if a field has been set.
 func (o *CapabilityActionsMetaData) HasModel() bool {
-	if o != nil && o.Model != nil {
+	if o != nil && !IsNil(o.Model) {
 		return true
 	}
 
@@ -224,7 +228,7 @@ func (o *CapabilityActionsMetaData) GetSupportedActions() []string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CapabilityActionsMetaData) GetSupportedActionsOk() ([]string, bool) {
-	if o == nil || o.SupportedActions == nil {
+	if o == nil || IsNil(o.SupportedActions) {
 		return nil, false
 	}
 	return o.SupportedActions, true
@@ -232,7 +236,7 @@ func (o *CapabilityActionsMetaData) GetSupportedActionsOk() ([]string, bool) {
 
 // HasSupportedActions returns a boolean if a field has been set.
 func (o *CapabilityActionsMetaData) HasSupportedActions() bool {
-	if o != nil && o.SupportedActions != nil {
+	if o != nil && IsNil(o.SupportedActions) {
 		return true
 	}
 
@@ -246,7 +250,7 @@ func (o *CapabilityActionsMetaData) SetSupportedActions(v []string) {
 
 // GetTargetType returns the TargetType field value if set, zero value otherwise.
 func (o *CapabilityActionsMetaData) GetTargetType() string {
-	if o == nil || o.TargetType == nil {
+	if o == nil || IsNil(o.TargetType) {
 		var ret string
 		return ret
 	}
@@ -256,7 +260,7 @@ func (o *CapabilityActionsMetaData) GetTargetType() string {
 // GetTargetTypeOk returns a tuple with the TargetType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CapabilityActionsMetaData) GetTargetTypeOk() (*string, bool) {
-	if o == nil || o.TargetType == nil {
+	if o == nil || IsNil(o.TargetType) {
 		return nil, false
 	}
 	return o.TargetType, true
@@ -264,7 +268,7 @@ func (o *CapabilityActionsMetaData) GetTargetTypeOk() (*string, bool) {
 
 // HasTargetType returns a boolean if a field has been set.
 func (o *CapabilityActionsMetaData) HasTargetType() bool {
-	if o != nil && o.TargetType != nil {
+	if o != nil && !IsNil(o.TargetType) {
 		return true
 	}
 
@@ -278,7 +282,7 @@ func (o *CapabilityActionsMetaData) SetTargetType(v string) {
 
 // GetVendor returns the Vendor field value if set, zero value otherwise.
 func (o *CapabilityActionsMetaData) GetVendor() string {
-	if o == nil || o.Vendor == nil {
+	if o == nil || IsNil(o.Vendor) {
 		var ret string
 		return ret
 	}
@@ -288,7 +292,7 @@ func (o *CapabilityActionsMetaData) GetVendor() string {
 // GetVendorOk returns a tuple with the Vendor field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CapabilityActionsMetaData) GetVendorOk() (*string, bool) {
-	if o == nil || o.Vendor == nil {
+	if o == nil || IsNil(o.Vendor) {
 		return nil, false
 	}
 	return o.Vendor, true
@@ -296,7 +300,7 @@ func (o *CapabilityActionsMetaData) GetVendorOk() (*string, bool) {
 
 // HasVendor returns a boolean if a field has been set.
 func (o *CapabilityActionsMetaData) HasVendor() bool {
-	if o != nil && o.Vendor != nil {
+	if o != nil && !IsNil(o.Vendor) {
 		return true
 	}
 
@@ -309,37 +313,41 @@ func (o *CapabilityActionsMetaData) SetVendor(v string) {
 }
 
 func (o CapabilityActionsMetaData) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o CapabilityActionsMetaData) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedCapabilityCapability, errCapabilityCapability := json.Marshal(o.CapabilityCapability)
 	if errCapabilityCapability != nil {
-		return []byte{}, errCapabilityCapability
+		return map[string]interface{}{}, errCapabilityCapability
 	}
 	errCapabilityCapability = json.Unmarshal([]byte(serializedCapabilityCapability), &toSerialize)
 	if errCapabilityCapability != nil {
-		return []byte{}, errCapabilityCapability
+		return map[string]interface{}{}, errCapabilityCapability
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.MaxFwVersion != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.MaxFwVersion) {
 		toSerialize["MaxFwVersion"] = o.MaxFwVersion
 	}
-	if o.MinFwVersion != nil {
+	if !IsNil(o.MinFwVersion) {
 		toSerialize["MinFwVersion"] = o.MinFwVersion
 	}
-	if o.Model != nil {
+	if !IsNil(o.Model) {
 		toSerialize["Model"] = o.Model
 	}
 	if o.SupportedActions != nil {
 		toSerialize["SupportedActions"] = o.SupportedActions
 	}
-	if o.TargetType != nil {
+	if !IsNil(o.TargetType) {
 		toSerialize["TargetType"] = o.TargetType
 	}
-	if o.Vendor != nil {
+	if !IsNil(o.Vendor) {
 		toSerialize["Vendor"] = o.Vendor
 	}
 
@@ -347,10 +355,32 @@ func (o CapabilityActionsMetaData) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *CapabilityActionsMetaData) UnmarshalJSON(bytes []byte) (err error) {
+func (o *CapabilityActionsMetaData) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type CapabilityActionsMetaDataWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -371,7 +401,7 @@ func (o *CapabilityActionsMetaData) UnmarshalJSON(bytes []byte) (err error) {
 
 	varCapabilityActionsMetaDataWithoutEmbeddedStruct := CapabilityActionsMetaDataWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varCapabilityActionsMetaDataWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varCapabilityActionsMetaDataWithoutEmbeddedStruct)
 	if err == nil {
 		varCapabilityActionsMetaData := _CapabilityActionsMetaData{}
 		varCapabilityActionsMetaData.ClassId = varCapabilityActionsMetaDataWithoutEmbeddedStruct.ClassId
@@ -389,7 +419,7 @@ func (o *CapabilityActionsMetaData) UnmarshalJSON(bytes []byte) (err error) {
 
 	varCapabilityActionsMetaData := _CapabilityActionsMetaData{}
 
-	err = json.Unmarshal(bytes, &varCapabilityActionsMetaData)
+	err = json.Unmarshal(data, &varCapabilityActionsMetaData)
 	if err == nil {
 		o.CapabilityCapability = varCapabilityActionsMetaData.CapabilityCapability
 	} else {
@@ -398,7 +428,7 @@ func (o *CapabilityActionsMetaData) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "MaxFwVersion")

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the IamUserPreference type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &IamUserPreference{}
 
 // IamUserPreference Holder for UI preferences such as theme, columns.
 type IamUserPreference struct {
@@ -27,9 +31,9 @@ type IamUserPreference struct {
 	// UI preferences of the user.
 	Preference interface{} `json:"Preference,omitempty"`
 	// Unique id of the user used by the identity provider to store the user.
-	UserUniqueIdentifier *string                      `json:"UserUniqueIdentifier,omitempty"`
-	Idp                  *IamIdpRelationship          `json:"Idp,omitempty"`
-	IdpReference         *IamIdpReferenceRelationship `json:"IdpReference,omitempty"`
+	UserUniqueIdentifier *string                             `json:"UserUniqueIdentifier,omitempty"`
+	Idp                  NullableIamIdpRelationship          `json:"Idp,omitempty"`
+	IdpReference         NullableIamIdpReferenceRelationship `json:"IdpReference,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -119,7 +123,7 @@ func (o *IamUserPreference) GetPreference() interface{} {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *IamUserPreference) GetPreferenceOk() (*interface{}, bool) {
-	if o == nil || o.Preference == nil {
+	if o == nil || IsNil(o.Preference) {
 		return nil, false
 	}
 	return &o.Preference, true
@@ -127,7 +131,7 @@ func (o *IamUserPreference) GetPreferenceOk() (*interface{}, bool) {
 
 // HasPreference returns a boolean if a field has been set.
 func (o *IamUserPreference) HasPreference() bool {
-	if o != nil && o.Preference != nil {
+	if o != nil && IsNil(o.Preference) {
 		return true
 	}
 
@@ -141,7 +145,7 @@ func (o *IamUserPreference) SetPreference(v interface{}) {
 
 // GetUserUniqueIdentifier returns the UserUniqueIdentifier field value if set, zero value otherwise.
 func (o *IamUserPreference) GetUserUniqueIdentifier() string {
-	if o == nil || o.UserUniqueIdentifier == nil {
+	if o == nil || IsNil(o.UserUniqueIdentifier) {
 		var ret string
 		return ret
 	}
@@ -151,7 +155,7 @@ func (o *IamUserPreference) GetUserUniqueIdentifier() string {
 // GetUserUniqueIdentifierOk returns a tuple with the UserUniqueIdentifier field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IamUserPreference) GetUserUniqueIdentifierOk() (*string, bool) {
-	if o == nil || o.UserUniqueIdentifier == nil {
+	if o == nil || IsNil(o.UserUniqueIdentifier) {
 		return nil, false
 	}
 	return o.UserUniqueIdentifier, true
@@ -159,7 +163,7 @@ func (o *IamUserPreference) GetUserUniqueIdentifierOk() (*string, bool) {
 
 // HasUserUniqueIdentifier returns a boolean if a field has been set.
 func (o *IamUserPreference) HasUserUniqueIdentifier() bool {
-	if o != nil && o.UserUniqueIdentifier != nil {
+	if o != nil && !IsNil(o.UserUniqueIdentifier) {
 		return true
 	}
 
@@ -171,107 +175,155 @@ func (o *IamUserPreference) SetUserUniqueIdentifier(v string) {
 	o.UserUniqueIdentifier = &v
 }
 
-// GetIdp returns the Idp field value if set, zero value otherwise.
+// GetIdp returns the Idp field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *IamUserPreference) GetIdp() IamIdpRelationship {
-	if o == nil || o.Idp == nil {
+	if o == nil || IsNil(o.Idp.Get()) {
 		var ret IamIdpRelationship
 		return ret
 	}
-	return *o.Idp
+	return *o.Idp.Get()
 }
 
 // GetIdpOk returns a tuple with the Idp field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *IamUserPreference) GetIdpOk() (*IamIdpRelationship, bool) {
-	if o == nil || o.Idp == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Idp, true
+	return o.Idp.Get(), o.Idp.IsSet()
 }
 
 // HasIdp returns a boolean if a field has been set.
 func (o *IamUserPreference) HasIdp() bool {
-	if o != nil && o.Idp != nil {
+	if o != nil && o.Idp.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetIdp gets a reference to the given IamIdpRelationship and assigns it to the Idp field.
+// SetIdp gets a reference to the given NullableIamIdpRelationship and assigns it to the Idp field.
 func (o *IamUserPreference) SetIdp(v IamIdpRelationship) {
-	o.Idp = &v
+	o.Idp.Set(&v)
 }
 
-// GetIdpReference returns the IdpReference field value if set, zero value otherwise.
+// SetIdpNil sets the value for Idp to be an explicit nil
+func (o *IamUserPreference) SetIdpNil() {
+	o.Idp.Set(nil)
+}
+
+// UnsetIdp ensures that no value is present for Idp, not even an explicit nil
+func (o *IamUserPreference) UnsetIdp() {
+	o.Idp.Unset()
+}
+
+// GetIdpReference returns the IdpReference field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *IamUserPreference) GetIdpReference() IamIdpReferenceRelationship {
-	if o == nil || o.IdpReference == nil {
+	if o == nil || IsNil(o.IdpReference.Get()) {
 		var ret IamIdpReferenceRelationship
 		return ret
 	}
-	return *o.IdpReference
+	return *o.IdpReference.Get()
 }
 
 // GetIdpReferenceOk returns a tuple with the IdpReference field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *IamUserPreference) GetIdpReferenceOk() (*IamIdpReferenceRelationship, bool) {
-	if o == nil || o.IdpReference == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.IdpReference, true
+	return o.IdpReference.Get(), o.IdpReference.IsSet()
 }
 
 // HasIdpReference returns a boolean if a field has been set.
 func (o *IamUserPreference) HasIdpReference() bool {
-	if o != nil && o.IdpReference != nil {
+	if o != nil && o.IdpReference.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetIdpReference gets a reference to the given IamIdpReferenceRelationship and assigns it to the IdpReference field.
+// SetIdpReference gets a reference to the given NullableIamIdpReferenceRelationship and assigns it to the IdpReference field.
 func (o *IamUserPreference) SetIdpReference(v IamIdpReferenceRelationship) {
-	o.IdpReference = &v
+	o.IdpReference.Set(&v)
+}
+
+// SetIdpReferenceNil sets the value for IdpReference to be an explicit nil
+func (o *IamUserPreference) SetIdpReferenceNil() {
+	o.IdpReference.Set(nil)
+}
+
+// UnsetIdpReference ensures that no value is present for IdpReference, not even an explicit nil
+func (o *IamUserPreference) UnsetIdpReference() {
+	o.IdpReference.Unset()
 }
 
 func (o IamUserPreference) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o IamUserPreference) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
 	if o.Preference != nil {
 		toSerialize["Preference"] = o.Preference
 	}
-	if o.UserUniqueIdentifier != nil {
+	if !IsNil(o.UserUniqueIdentifier) {
 		toSerialize["UserUniqueIdentifier"] = o.UserUniqueIdentifier
 	}
-	if o.Idp != nil {
-		toSerialize["Idp"] = o.Idp
+	if o.Idp.IsSet() {
+		toSerialize["Idp"] = o.Idp.Get()
 	}
-	if o.IdpReference != nil {
-		toSerialize["IdpReference"] = o.IdpReference
+	if o.IdpReference.IsSet() {
+		toSerialize["IdpReference"] = o.IdpReference.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *IamUserPreference) UnmarshalJSON(bytes []byte) (err error) {
+func (o *IamUserPreference) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type IamUserPreferenceWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -280,14 +332,14 @@ func (o *IamUserPreference) UnmarshalJSON(bytes []byte) (err error) {
 		// UI preferences of the user.
 		Preference interface{} `json:"Preference,omitempty"`
 		// Unique id of the user used by the identity provider to store the user.
-		UserUniqueIdentifier *string                      `json:"UserUniqueIdentifier,omitempty"`
-		Idp                  *IamIdpRelationship          `json:"Idp,omitempty"`
-		IdpReference         *IamIdpReferenceRelationship `json:"IdpReference,omitempty"`
+		UserUniqueIdentifier *string                             `json:"UserUniqueIdentifier,omitempty"`
+		Idp                  NullableIamIdpRelationship          `json:"Idp,omitempty"`
+		IdpReference         NullableIamIdpReferenceRelationship `json:"IdpReference,omitempty"`
 	}
 
 	varIamUserPreferenceWithoutEmbeddedStruct := IamUserPreferenceWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varIamUserPreferenceWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varIamUserPreferenceWithoutEmbeddedStruct)
 	if err == nil {
 		varIamUserPreference := _IamUserPreference{}
 		varIamUserPreference.ClassId = varIamUserPreferenceWithoutEmbeddedStruct.ClassId
@@ -303,7 +355,7 @@ func (o *IamUserPreference) UnmarshalJSON(bytes []byte) (err error) {
 
 	varIamUserPreference := _IamUserPreference{}
 
-	err = json.Unmarshal(bytes, &varIamUserPreference)
+	err = json.Unmarshal(data, &varIamUserPreference)
 	if err == nil {
 		o.MoBaseMo = varIamUserPreference.MoBaseMo
 	} else {
@@ -312,7 +364,7 @@ func (o *IamUserPreference) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Preference")

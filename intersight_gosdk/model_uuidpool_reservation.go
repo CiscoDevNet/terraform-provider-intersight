@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the UuidpoolReservation type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &UuidpoolReservation{}
 
 // UuidpoolReservation The UUID reservation object, used to hold reserved identity.
 type UuidpoolReservation struct {
@@ -25,12 +29,12 @@ type UuidpoolReservation struct {
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
 	// UUID identity to be reserved.
-	Identity             *string                               `json:"Identity,omitempty"`
-	Block                *UuidpoolBlockRelationship            `json:"Block,omitempty"`
-	Organization         *OrganizationOrganizationRelationship `json:"Organization,omitempty"`
-	Pool                 *UuidpoolPoolRelationship             `json:"Pool,omitempty"`
-	PoolMember           *UuidpoolPoolMemberRelationship       `json:"PoolMember,omitempty"`
-	Universe             *UuidpoolUniverseRelationship         `json:"Universe,omitempty"`
+	Identity             *string                                      `json:"Identity,omitempty"`
+	Block                NullableUuidpoolBlockRelationship            `json:"Block,omitempty"`
+	Organization         NullableOrganizationOrganizationRelationship `json:"Organization,omitempty"`
+	Pool                 NullableUuidpoolPoolRelationship             `json:"Pool,omitempty"`
+	PoolMember           NullableUuidpoolPoolMemberRelationship       `json:"PoolMember,omitempty"`
+	Universe             NullableUuidpoolUniverseRelationship         `json:"Universe,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -111,7 +115,7 @@ func (o *UuidpoolReservation) SetObjectType(v string) {
 
 // GetIdentity returns the Identity field value if set, zero value otherwise.
 func (o *UuidpoolReservation) GetIdentity() string {
-	if o == nil || o.Identity == nil {
+	if o == nil || IsNil(o.Identity) {
 		var ret string
 		return ret
 	}
@@ -121,7 +125,7 @@ func (o *UuidpoolReservation) GetIdentity() string {
 // GetIdentityOk returns a tuple with the Identity field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UuidpoolReservation) GetIdentityOk() (*string, bool) {
-	if o == nil || o.Identity == nil {
+	if o == nil || IsNil(o.Identity) {
 		return nil, false
 	}
 	return o.Identity, true
@@ -129,7 +133,7 @@ func (o *UuidpoolReservation) GetIdentityOk() (*string, bool) {
 
 // HasIdentity returns a boolean if a field has been set.
 func (o *UuidpoolReservation) HasIdentity() bool {
-	if o != nil && o.Identity != nil {
+	if o != nil && !IsNil(o.Identity) {
 		return true
 	}
 
@@ -141,226 +145,307 @@ func (o *UuidpoolReservation) SetIdentity(v string) {
 	o.Identity = &v
 }
 
-// GetBlock returns the Block field value if set, zero value otherwise.
+// GetBlock returns the Block field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *UuidpoolReservation) GetBlock() UuidpoolBlockRelationship {
-	if o == nil || o.Block == nil {
+	if o == nil || IsNil(o.Block.Get()) {
 		var ret UuidpoolBlockRelationship
 		return ret
 	}
-	return *o.Block
+	return *o.Block.Get()
 }
 
 // GetBlockOk returns a tuple with the Block field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *UuidpoolReservation) GetBlockOk() (*UuidpoolBlockRelationship, bool) {
-	if o == nil || o.Block == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Block, true
+	return o.Block.Get(), o.Block.IsSet()
 }
 
 // HasBlock returns a boolean if a field has been set.
 func (o *UuidpoolReservation) HasBlock() bool {
-	if o != nil && o.Block != nil {
+	if o != nil && o.Block.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetBlock gets a reference to the given UuidpoolBlockRelationship and assigns it to the Block field.
+// SetBlock gets a reference to the given NullableUuidpoolBlockRelationship and assigns it to the Block field.
 func (o *UuidpoolReservation) SetBlock(v UuidpoolBlockRelationship) {
-	o.Block = &v
+	o.Block.Set(&v)
 }
 
-// GetOrganization returns the Organization field value if set, zero value otherwise.
+// SetBlockNil sets the value for Block to be an explicit nil
+func (o *UuidpoolReservation) SetBlockNil() {
+	o.Block.Set(nil)
+}
+
+// UnsetBlock ensures that no value is present for Block, not even an explicit nil
+func (o *UuidpoolReservation) UnsetBlock() {
+	o.Block.Unset()
+}
+
+// GetOrganization returns the Organization field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *UuidpoolReservation) GetOrganization() OrganizationOrganizationRelationship {
-	if o == nil || o.Organization == nil {
+	if o == nil || IsNil(o.Organization.Get()) {
 		var ret OrganizationOrganizationRelationship
 		return ret
 	}
-	return *o.Organization
+	return *o.Organization.Get()
 }
 
 // GetOrganizationOk returns a tuple with the Organization field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *UuidpoolReservation) GetOrganizationOk() (*OrganizationOrganizationRelationship, bool) {
-	if o == nil || o.Organization == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Organization, true
+	return o.Organization.Get(), o.Organization.IsSet()
 }
 
 // HasOrganization returns a boolean if a field has been set.
 func (o *UuidpoolReservation) HasOrganization() bool {
-	if o != nil && o.Organization != nil {
+	if o != nil && o.Organization.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetOrganization gets a reference to the given OrganizationOrganizationRelationship and assigns it to the Organization field.
+// SetOrganization gets a reference to the given NullableOrganizationOrganizationRelationship and assigns it to the Organization field.
 func (o *UuidpoolReservation) SetOrganization(v OrganizationOrganizationRelationship) {
-	o.Organization = &v
+	o.Organization.Set(&v)
 }
 
-// GetPool returns the Pool field value if set, zero value otherwise.
+// SetOrganizationNil sets the value for Organization to be an explicit nil
+func (o *UuidpoolReservation) SetOrganizationNil() {
+	o.Organization.Set(nil)
+}
+
+// UnsetOrganization ensures that no value is present for Organization, not even an explicit nil
+func (o *UuidpoolReservation) UnsetOrganization() {
+	o.Organization.Unset()
+}
+
+// GetPool returns the Pool field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *UuidpoolReservation) GetPool() UuidpoolPoolRelationship {
-	if o == nil || o.Pool == nil {
+	if o == nil || IsNil(o.Pool.Get()) {
 		var ret UuidpoolPoolRelationship
 		return ret
 	}
-	return *o.Pool
+	return *o.Pool.Get()
 }
 
 // GetPoolOk returns a tuple with the Pool field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *UuidpoolReservation) GetPoolOk() (*UuidpoolPoolRelationship, bool) {
-	if o == nil || o.Pool == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Pool, true
+	return o.Pool.Get(), o.Pool.IsSet()
 }
 
 // HasPool returns a boolean if a field has been set.
 func (o *UuidpoolReservation) HasPool() bool {
-	if o != nil && o.Pool != nil {
+	if o != nil && o.Pool.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetPool gets a reference to the given UuidpoolPoolRelationship and assigns it to the Pool field.
+// SetPool gets a reference to the given NullableUuidpoolPoolRelationship and assigns it to the Pool field.
 func (o *UuidpoolReservation) SetPool(v UuidpoolPoolRelationship) {
-	o.Pool = &v
+	o.Pool.Set(&v)
 }
 
-// GetPoolMember returns the PoolMember field value if set, zero value otherwise.
+// SetPoolNil sets the value for Pool to be an explicit nil
+func (o *UuidpoolReservation) SetPoolNil() {
+	o.Pool.Set(nil)
+}
+
+// UnsetPool ensures that no value is present for Pool, not even an explicit nil
+func (o *UuidpoolReservation) UnsetPool() {
+	o.Pool.Unset()
+}
+
+// GetPoolMember returns the PoolMember field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *UuidpoolReservation) GetPoolMember() UuidpoolPoolMemberRelationship {
-	if o == nil || o.PoolMember == nil {
+	if o == nil || IsNil(o.PoolMember.Get()) {
 		var ret UuidpoolPoolMemberRelationship
 		return ret
 	}
-	return *o.PoolMember
+	return *o.PoolMember.Get()
 }
 
 // GetPoolMemberOk returns a tuple with the PoolMember field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *UuidpoolReservation) GetPoolMemberOk() (*UuidpoolPoolMemberRelationship, bool) {
-	if o == nil || o.PoolMember == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.PoolMember, true
+	return o.PoolMember.Get(), o.PoolMember.IsSet()
 }
 
 // HasPoolMember returns a boolean if a field has been set.
 func (o *UuidpoolReservation) HasPoolMember() bool {
-	if o != nil && o.PoolMember != nil {
+	if o != nil && o.PoolMember.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetPoolMember gets a reference to the given UuidpoolPoolMemberRelationship and assigns it to the PoolMember field.
+// SetPoolMember gets a reference to the given NullableUuidpoolPoolMemberRelationship and assigns it to the PoolMember field.
 func (o *UuidpoolReservation) SetPoolMember(v UuidpoolPoolMemberRelationship) {
-	o.PoolMember = &v
+	o.PoolMember.Set(&v)
 }
 
-// GetUniverse returns the Universe field value if set, zero value otherwise.
+// SetPoolMemberNil sets the value for PoolMember to be an explicit nil
+func (o *UuidpoolReservation) SetPoolMemberNil() {
+	o.PoolMember.Set(nil)
+}
+
+// UnsetPoolMember ensures that no value is present for PoolMember, not even an explicit nil
+func (o *UuidpoolReservation) UnsetPoolMember() {
+	o.PoolMember.Unset()
+}
+
+// GetUniverse returns the Universe field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *UuidpoolReservation) GetUniverse() UuidpoolUniverseRelationship {
-	if o == nil || o.Universe == nil {
+	if o == nil || IsNil(o.Universe.Get()) {
 		var ret UuidpoolUniverseRelationship
 		return ret
 	}
-	return *o.Universe
+	return *o.Universe.Get()
 }
 
 // GetUniverseOk returns a tuple with the Universe field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *UuidpoolReservation) GetUniverseOk() (*UuidpoolUniverseRelationship, bool) {
-	if o == nil || o.Universe == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Universe, true
+	return o.Universe.Get(), o.Universe.IsSet()
 }
 
 // HasUniverse returns a boolean if a field has been set.
 func (o *UuidpoolReservation) HasUniverse() bool {
-	if o != nil && o.Universe != nil {
+	if o != nil && o.Universe.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetUniverse gets a reference to the given UuidpoolUniverseRelationship and assigns it to the Universe field.
+// SetUniverse gets a reference to the given NullableUuidpoolUniverseRelationship and assigns it to the Universe field.
 func (o *UuidpoolReservation) SetUniverse(v UuidpoolUniverseRelationship) {
-	o.Universe = &v
+	o.Universe.Set(&v)
+}
+
+// SetUniverseNil sets the value for Universe to be an explicit nil
+func (o *UuidpoolReservation) SetUniverseNil() {
+	o.Universe.Set(nil)
+}
+
+// UnsetUniverse ensures that no value is present for Universe, not even an explicit nil
+func (o *UuidpoolReservation) UnsetUniverse() {
+	o.Universe.Unset()
 }
 
 func (o UuidpoolReservation) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o UuidpoolReservation) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedPoolReservation, errPoolReservation := json.Marshal(o.PoolReservation)
 	if errPoolReservation != nil {
-		return []byte{}, errPoolReservation
+		return map[string]interface{}{}, errPoolReservation
 	}
 	errPoolReservation = json.Unmarshal([]byte(serializedPoolReservation), &toSerialize)
 	if errPoolReservation != nil {
-		return []byte{}, errPoolReservation
+		return map[string]interface{}{}, errPoolReservation
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Identity != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Identity) {
 		toSerialize["Identity"] = o.Identity
 	}
-	if o.Block != nil {
-		toSerialize["Block"] = o.Block
+	if o.Block.IsSet() {
+		toSerialize["Block"] = o.Block.Get()
 	}
-	if o.Organization != nil {
-		toSerialize["Organization"] = o.Organization
+	if o.Organization.IsSet() {
+		toSerialize["Organization"] = o.Organization.Get()
 	}
-	if o.Pool != nil {
-		toSerialize["Pool"] = o.Pool
+	if o.Pool.IsSet() {
+		toSerialize["Pool"] = o.Pool.Get()
 	}
-	if o.PoolMember != nil {
-		toSerialize["PoolMember"] = o.PoolMember
+	if o.PoolMember.IsSet() {
+		toSerialize["PoolMember"] = o.PoolMember.Get()
 	}
-	if o.Universe != nil {
-		toSerialize["Universe"] = o.Universe
+	if o.Universe.IsSet() {
+		toSerialize["Universe"] = o.Universe.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *UuidpoolReservation) UnmarshalJSON(bytes []byte) (err error) {
+func (o *UuidpoolReservation) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type UuidpoolReservationWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 		ObjectType string `json:"ObjectType"`
 		// UUID identity to be reserved.
-		Identity     *string                               `json:"Identity,omitempty"`
-		Block        *UuidpoolBlockRelationship            `json:"Block,omitempty"`
-		Organization *OrganizationOrganizationRelationship `json:"Organization,omitempty"`
-		Pool         *UuidpoolPoolRelationship             `json:"Pool,omitempty"`
-		PoolMember   *UuidpoolPoolMemberRelationship       `json:"PoolMember,omitempty"`
-		Universe     *UuidpoolUniverseRelationship         `json:"Universe,omitempty"`
+		Identity     *string                                      `json:"Identity,omitempty"`
+		Block        NullableUuidpoolBlockRelationship            `json:"Block,omitempty"`
+		Organization NullableOrganizationOrganizationRelationship `json:"Organization,omitempty"`
+		Pool         NullableUuidpoolPoolRelationship             `json:"Pool,omitempty"`
+		PoolMember   NullableUuidpoolPoolMemberRelationship       `json:"PoolMember,omitempty"`
+		Universe     NullableUuidpoolUniverseRelationship         `json:"Universe,omitempty"`
 	}
 
 	varUuidpoolReservationWithoutEmbeddedStruct := UuidpoolReservationWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varUuidpoolReservationWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varUuidpoolReservationWithoutEmbeddedStruct)
 	if err == nil {
 		varUuidpoolReservation := _UuidpoolReservation{}
 		varUuidpoolReservation.ClassId = varUuidpoolReservationWithoutEmbeddedStruct.ClassId
@@ -378,7 +463,7 @@ func (o *UuidpoolReservation) UnmarshalJSON(bytes []byte) (err error) {
 
 	varUuidpoolReservation := _UuidpoolReservation{}
 
-	err = json.Unmarshal(bytes, &varUuidpoolReservation)
+	err = json.Unmarshal(data, &varUuidpoolReservation)
 	if err == nil {
 		o.PoolReservation = varUuidpoolReservation.PoolReservation
 	} else {
@@ -387,7 +472,7 @@ func (o *UuidpoolReservation) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Identity")

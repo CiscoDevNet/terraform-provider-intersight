@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the LicenseLicenseReservationOp type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &LicenseLicenseReservationOp{}
 
 // LicenseLicenseReservationOp Customer operation object to request reservation code.
 type LicenseLicenseReservationOp struct {
@@ -37,8 +41,8 @@ type LicenseLicenseReservationOp struct {
 	// Revervation code used to generate authorization code from CSSM.
 	RequestCode *string `json:"RequestCode,omitempty"`
 	// Return code used to return the reserved license to smart license account.
-	ReturnCode           *string                 `json:"ReturnCode,omitempty"`
-	Account              *IamAccountRelationship `json:"Account,omitempty"`
+	ReturnCode           *string                        `json:"ReturnCode,omitempty"`
+	Account              NullableIamAccountRelationship `json:"Account,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -117,7 +121,7 @@ func (o *LicenseLicenseReservationOp) SetObjectType(v string) {
 
 // GetAuthCode returns the AuthCode field value if set, zero value otherwise.
 func (o *LicenseLicenseReservationOp) GetAuthCode() string {
-	if o == nil || o.AuthCode == nil {
+	if o == nil || IsNil(o.AuthCode) {
 		var ret string
 		return ret
 	}
@@ -127,7 +131,7 @@ func (o *LicenseLicenseReservationOp) GetAuthCode() string {
 // GetAuthCodeOk returns a tuple with the AuthCode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *LicenseLicenseReservationOp) GetAuthCodeOk() (*string, bool) {
-	if o == nil || o.AuthCode == nil {
+	if o == nil || IsNil(o.AuthCode) {
 		return nil, false
 	}
 	return o.AuthCode, true
@@ -135,7 +139,7 @@ func (o *LicenseLicenseReservationOp) GetAuthCodeOk() (*string, bool) {
 
 // HasAuthCode returns a boolean if a field has been set.
 func (o *LicenseLicenseReservationOp) HasAuthCode() bool {
-	if o != nil && o.AuthCode != nil {
+	if o != nil && !IsNil(o.AuthCode) {
 		return true
 	}
 
@@ -149,7 +153,7 @@ func (o *LicenseLicenseReservationOp) SetAuthCode(v string) {
 
 // GetAuthCodeInstalled returns the AuthCodeInstalled field value if set, zero value otherwise.
 func (o *LicenseLicenseReservationOp) GetAuthCodeInstalled() bool {
-	if o == nil || o.AuthCodeInstalled == nil {
+	if o == nil || IsNil(o.AuthCodeInstalled) {
 		var ret bool
 		return ret
 	}
@@ -159,7 +163,7 @@ func (o *LicenseLicenseReservationOp) GetAuthCodeInstalled() bool {
 // GetAuthCodeInstalledOk returns a tuple with the AuthCodeInstalled field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *LicenseLicenseReservationOp) GetAuthCodeInstalledOk() (*bool, bool) {
-	if o == nil || o.AuthCodeInstalled == nil {
+	if o == nil || IsNil(o.AuthCodeInstalled) {
 		return nil, false
 	}
 	return o.AuthCodeInstalled, true
@@ -167,7 +171,7 @@ func (o *LicenseLicenseReservationOp) GetAuthCodeInstalledOk() (*bool, bool) {
 
 // HasAuthCodeInstalled returns a boolean if a field has been set.
 func (o *LicenseLicenseReservationOp) HasAuthCodeInstalled() bool {
-	if o != nil && o.AuthCodeInstalled != nil {
+	if o != nil && !IsNil(o.AuthCodeInstalled) {
 		return true
 	}
 
@@ -181,7 +185,7 @@ func (o *LicenseLicenseReservationOp) SetAuthCodeInstalled(v bool) {
 
 // GetConfirmCode returns the ConfirmCode field value if set, zero value otherwise.
 func (o *LicenseLicenseReservationOp) GetConfirmCode() string {
-	if o == nil || o.ConfirmCode == nil {
+	if o == nil || IsNil(o.ConfirmCode) {
 		var ret string
 		return ret
 	}
@@ -191,7 +195,7 @@ func (o *LicenseLicenseReservationOp) GetConfirmCode() string {
 // GetConfirmCodeOk returns a tuple with the ConfirmCode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *LicenseLicenseReservationOp) GetConfirmCodeOk() (*string, bool) {
-	if o == nil || o.ConfirmCode == nil {
+	if o == nil || IsNil(o.ConfirmCode) {
 		return nil, false
 	}
 	return o.ConfirmCode, true
@@ -199,7 +203,7 @@ func (o *LicenseLicenseReservationOp) GetConfirmCodeOk() (*string, bool) {
 
 // HasConfirmCode returns a boolean if a field has been set.
 func (o *LicenseLicenseReservationOp) HasConfirmCode() bool {
-	if o != nil && o.ConfirmCode != nil {
+	if o != nil && !IsNil(o.ConfirmCode) {
 		return true
 	}
 
@@ -213,7 +217,7 @@ func (o *LicenseLicenseReservationOp) SetConfirmCode(v string) {
 
 // GetGenerateRequestCode returns the GenerateRequestCode field value if set, zero value otherwise.
 func (o *LicenseLicenseReservationOp) GetGenerateRequestCode() bool {
-	if o == nil || o.GenerateRequestCode == nil {
+	if o == nil || IsNil(o.GenerateRequestCode) {
 		var ret bool
 		return ret
 	}
@@ -223,7 +227,7 @@ func (o *LicenseLicenseReservationOp) GetGenerateRequestCode() bool {
 // GetGenerateRequestCodeOk returns a tuple with the GenerateRequestCode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *LicenseLicenseReservationOp) GetGenerateRequestCodeOk() (*bool, bool) {
-	if o == nil || o.GenerateRequestCode == nil {
+	if o == nil || IsNil(o.GenerateRequestCode) {
 		return nil, false
 	}
 	return o.GenerateRequestCode, true
@@ -231,7 +235,7 @@ func (o *LicenseLicenseReservationOp) GetGenerateRequestCodeOk() (*bool, bool) {
 
 // HasGenerateRequestCode returns a boolean if a field has been set.
 func (o *LicenseLicenseReservationOp) HasGenerateRequestCode() bool {
-	if o != nil && o.GenerateRequestCode != nil {
+	if o != nil && !IsNil(o.GenerateRequestCode) {
 		return true
 	}
 
@@ -245,7 +249,7 @@ func (o *LicenseLicenseReservationOp) SetGenerateRequestCode(v bool) {
 
 // GetGenerateReturnCode returns the GenerateReturnCode field value if set, zero value otherwise.
 func (o *LicenseLicenseReservationOp) GetGenerateReturnCode() bool {
-	if o == nil || o.GenerateReturnCode == nil {
+	if o == nil || IsNil(o.GenerateReturnCode) {
 		var ret bool
 		return ret
 	}
@@ -255,7 +259,7 @@ func (o *LicenseLicenseReservationOp) GetGenerateReturnCode() bool {
 // GetGenerateReturnCodeOk returns a tuple with the GenerateReturnCode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *LicenseLicenseReservationOp) GetGenerateReturnCodeOk() (*bool, bool) {
-	if o == nil || o.GenerateReturnCode == nil {
+	if o == nil || IsNil(o.GenerateReturnCode) {
 		return nil, false
 	}
 	return o.GenerateReturnCode, true
@@ -263,7 +267,7 @@ func (o *LicenseLicenseReservationOp) GetGenerateReturnCodeOk() (*bool, bool) {
 
 // HasGenerateReturnCode returns a boolean if a field has been set.
 func (o *LicenseLicenseReservationOp) HasGenerateReturnCode() bool {
-	if o != nil && o.GenerateReturnCode != nil {
+	if o != nil && !IsNil(o.GenerateReturnCode) {
 		return true
 	}
 
@@ -277,7 +281,7 @@ func (o *LicenseLicenseReservationOp) SetGenerateReturnCode(v bool) {
 
 // GetRequestCode returns the RequestCode field value if set, zero value otherwise.
 func (o *LicenseLicenseReservationOp) GetRequestCode() string {
-	if o == nil || o.RequestCode == nil {
+	if o == nil || IsNil(o.RequestCode) {
 		var ret string
 		return ret
 	}
@@ -287,7 +291,7 @@ func (o *LicenseLicenseReservationOp) GetRequestCode() string {
 // GetRequestCodeOk returns a tuple with the RequestCode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *LicenseLicenseReservationOp) GetRequestCodeOk() (*string, bool) {
-	if o == nil || o.RequestCode == nil {
+	if o == nil || IsNil(o.RequestCode) {
 		return nil, false
 	}
 	return o.RequestCode, true
@@ -295,7 +299,7 @@ func (o *LicenseLicenseReservationOp) GetRequestCodeOk() (*string, bool) {
 
 // HasRequestCode returns a boolean if a field has been set.
 func (o *LicenseLicenseReservationOp) HasRequestCode() bool {
-	if o != nil && o.RequestCode != nil {
+	if o != nil && !IsNil(o.RequestCode) {
 		return true
 	}
 
@@ -309,7 +313,7 @@ func (o *LicenseLicenseReservationOp) SetRequestCode(v string) {
 
 // GetReturnCode returns the ReturnCode field value if set, zero value otherwise.
 func (o *LicenseLicenseReservationOp) GetReturnCode() string {
-	if o == nil || o.ReturnCode == nil {
+	if o == nil || IsNil(o.ReturnCode) {
 		var ret string
 		return ret
 	}
@@ -319,7 +323,7 @@ func (o *LicenseLicenseReservationOp) GetReturnCode() string {
 // GetReturnCodeOk returns a tuple with the ReturnCode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *LicenseLicenseReservationOp) GetReturnCodeOk() (*string, bool) {
-	if o == nil || o.ReturnCode == nil {
+	if o == nil || IsNil(o.ReturnCode) {
 		return nil, false
 	}
 	return o.ReturnCode, true
@@ -327,7 +331,7 @@ func (o *LicenseLicenseReservationOp) GetReturnCodeOk() (*string, bool) {
 
 // HasReturnCode returns a boolean if a field has been set.
 func (o *LicenseLicenseReservationOp) HasReturnCode() bool {
-	if o != nil && o.ReturnCode != nil {
+	if o != nil && !IsNil(o.ReturnCode) {
 		return true
 	}
 
@@ -339,87 +343,124 @@ func (o *LicenseLicenseReservationOp) SetReturnCode(v string) {
 	o.ReturnCode = &v
 }
 
-// GetAccount returns the Account field value if set, zero value otherwise.
+// GetAccount returns the Account field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *LicenseLicenseReservationOp) GetAccount() IamAccountRelationship {
-	if o == nil || o.Account == nil {
+	if o == nil || IsNil(o.Account.Get()) {
 		var ret IamAccountRelationship
 		return ret
 	}
-	return *o.Account
+	return *o.Account.Get()
 }
 
 // GetAccountOk returns a tuple with the Account field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *LicenseLicenseReservationOp) GetAccountOk() (*IamAccountRelationship, bool) {
-	if o == nil || o.Account == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Account, true
+	return o.Account.Get(), o.Account.IsSet()
 }
 
 // HasAccount returns a boolean if a field has been set.
 func (o *LicenseLicenseReservationOp) HasAccount() bool {
-	if o != nil && o.Account != nil {
+	if o != nil && o.Account.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetAccount gets a reference to the given IamAccountRelationship and assigns it to the Account field.
+// SetAccount gets a reference to the given NullableIamAccountRelationship and assigns it to the Account field.
 func (o *LicenseLicenseReservationOp) SetAccount(v IamAccountRelationship) {
-	o.Account = &v
+	o.Account.Set(&v)
+}
+
+// SetAccountNil sets the value for Account to be an explicit nil
+func (o *LicenseLicenseReservationOp) SetAccountNil() {
+	o.Account.Set(nil)
+}
+
+// UnsetAccount ensures that no value is present for Account, not even an explicit nil
+func (o *LicenseLicenseReservationOp) UnsetAccount() {
+	o.Account.Unset()
 }
 
 func (o LicenseLicenseReservationOp) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o LicenseLicenseReservationOp) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.AuthCode != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.AuthCode) {
 		toSerialize["AuthCode"] = o.AuthCode
 	}
-	if o.AuthCodeInstalled != nil {
+	if !IsNil(o.AuthCodeInstalled) {
 		toSerialize["AuthCodeInstalled"] = o.AuthCodeInstalled
 	}
-	if o.ConfirmCode != nil {
+	if !IsNil(o.ConfirmCode) {
 		toSerialize["ConfirmCode"] = o.ConfirmCode
 	}
-	if o.GenerateRequestCode != nil {
+	if !IsNil(o.GenerateRequestCode) {
 		toSerialize["GenerateRequestCode"] = o.GenerateRequestCode
 	}
-	if o.GenerateReturnCode != nil {
+	if !IsNil(o.GenerateReturnCode) {
 		toSerialize["GenerateReturnCode"] = o.GenerateReturnCode
 	}
-	if o.RequestCode != nil {
+	if !IsNil(o.RequestCode) {
 		toSerialize["RequestCode"] = o.RequestCode
 	}
-	if o.ReturnCode != nil {
+	if !IsNil(o.ReturnCode) {
 		toSerialize["ReturnCode"] = o.ReturnCode
 	}
-	if o.Account != nil {
-		toSerialize["Account"] = o.Account
+	if o.Account.IsSet() {
+		toSerialize["Account"] = o.Account.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *LicenseLicenseReservationOp) UnmarshalJSON(bytes []byte) (err error) {
+func (o *LicenseLicenseReservationOp) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type LicenseLicenseReservationOpWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -438,13 +479,13 @@ func (o *LicenseLicenseReservationOp) UnmarshalJSON(bytes []byte) (err error) {
 		// Revervation code used to generate authorization code from CSSM.
 		RequestCode *string `json:"RequestCode,omitempty"`
 		// Return code used to return the reserved license to smart license account.
-		ReturnCode *string                 `json:"ReturnCode,omitempty"`
-		Account    *IamAccountRelationship `json:"Account,omitempty"`
+		ReturnCode *string                        `json:"ReturnCode,omitempty"`
+		Account    NullableIamAccountRelationship `json:"Account,omitempty"`
 	}
 
 	varLicenseLicenseReservationOpWithoutEmbeddedStruct := LicenseLicenseReservationOpWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varLicenseLicenseReservationOpWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varLicenseLicenseReservationOpWithoutEmbeddedStruct)
 	if err == nil {
 		varLicenseLicenseReservationOp := _LicenseLicenseReservationOp{}
 		varLicenseLicenseReservationOp.ClassId = varLicenseLicenseReservationOpWithoutEmbeddedStruct.ClassId
@@ -464,7 +505,7 @@ func (o *LicenseLicenseReservationOp) UnmarshalJSON(bytes []byte) (err error) {
 
 	varLicenseLicenseReservationOp := _LicenseLicenseReservationOp{}
 
-	err = json.Unmarshal(bytes, &varLicenseLicenseReservationOp)
+	err = json.Unmarshal(data, &varLicenseLicenseReservationOp)
 	if err == nil {
 		o.MoBaseMo = varLicenseLicenseReservationOp.MoBaseMo
 	} else {
@@ -473,7 +514,7 @@ func (o *LicenseLicenseReservationOp) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "AuthCode")

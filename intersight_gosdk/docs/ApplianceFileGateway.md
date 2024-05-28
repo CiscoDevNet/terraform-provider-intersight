@@ -15,7 +15,7 @@ Name | Type | Description | Notes
 **ServerCert** | Pointer to **string** | SSL certificate of the cloud storage service. | [optional] [readonly] 
 **ValidityPeriod** | Pointer to **int64** | Signed URL&#39;s validity period in minutes. | [optional] [readonly] 
 **Version** | Pointer to **string** | File version as reported by the cloud storage service. | [optional] [readonly] 
-**Account** | Pointer to [**IamAccountRelationship**](IamAccountRelationship.md) |  | [optional] 
+**Account** | Pointer to [**NullableIamAccountRelationship**](IamAccountRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -326,6 +326,16 @@ SetAccount sets Account field to given value.
 
 HasAccount returns a boolean if a field has been set.
 
+### SetAccountNil
+
+`func (o *ApplianceFileGateway) SetAccountNil(b bool)`
+
+ SetAccountNil sets the value for Account to be an explicit nil
+
+### UnsetAccount
+`func (o *ApplianceFileGateway) UnsetAccount()`
+
+UnsetAccount ensures that no value is present for Account, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

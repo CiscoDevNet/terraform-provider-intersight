@@ -83,8 +83,9 @@ func (c *Client) getHttpSignatureContext(ctx context.Context, flagKeyId string, 
 	authCfg := gosdk.HttpSignatureAuth{
 		KeyId:            flagKeyId,
 		Passphrase:       "",
-		SigningScheme:    gosdk.HttpSigningSchemeRsaSha256,
+		SigningScheme:    gosdk.HttpSigningSchemeHs2019,
 		SigningAlgorithm: gosdk.HttpSigningAlgorithmRsaPKCS1v15,
+		HashAlgorithm:    gosdk.HttpHashAlgorithmSha256,
 		SignedHeaders: []string{
 			gosdk.HttpSignatureParameterRequestTarget,
 			gosdk.HttpSignatureParameterCreated,
@@ -96,6 +97,7 @@ func (c *Client) getHttpSignatureContext(ctx context.Context, flagKeyId string, 
 		},
 		SignatureMaxValidity: 10 * time.Minute,
 	}
+
 	//Set Private Key or Private Key Path
 	if _, err := os.Stat(flagSecretKey); err != nil {
 		// not a file, therefore is string

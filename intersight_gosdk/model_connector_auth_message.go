@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the ConnectorAuthMessage type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ConnectorAuthMessage{}
 
 // ConnectorAuthMessage A base abstract message for connector messages that require authentication to be passed from the Intersight services.
 type ConnectorAuthMessage struct {
@@ -106,7 +110,7 @@ func (o *ConnectorAuthMessage) SetObjectType(v string) {
 
 // GetRemoteUserLocale returns the RemoteUserLocale field value if set, zero value otherwise.
 func (o *ConnectorAuthMessage) GetRemoteUserLocale() string {
-	if o == nil || o.RemoteUserLocale == nil {
+	if o == nil || IsNil(o.RemoteUserLocale) {
 		var ret string
 		return ret
 	}
@@ -116,7 +120,7 @@ func (o *ConnectorAuthMessage) GetRemoteUserLocale() string {
 // GetRemoteUserLocaleOk returns a tuple with the RemoteUserLocale field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ConnectorAuthMessage) GetRemoteUserLocaleOk() (*string, bool) {
-	if o == nil || o.RemoteUserLocale == nil {
+	if o == nil || IsNil(o.RemoteUserLocale) {
 		return nil, false
 	}
 	return o.RemoteUserLocale, true
@@ -124,7 +128,7 @@ func (o *ConnectorAuthMessage) GetRemoteUserLocaleOk() (*string, bool) {
 
 // HasRemoteUserLocale returns a boolean if a field has been set.
 func (o *ConnectorAuthMessage) HasRemoteUserLocale() bool {
-	if o != nil && o.RemoteUserLocale != nil {
+	if o != nil && !IsNil(o.RemoteUserLocale) {
 		return true
 	}
 
@@ -138,7 +142,7 @@ func (o *ConnectorAuthMessage) SetRemoteUserLocale(v string) {
 
 // GetRemoteUserName returns the RemoteUserName field value if set, zero value otherwise.
 func (o *ConnectorAuthMessage) GetRemoteUserName() string {
-	if o == nil || o.RemoteUserName == nil {
+	if o == nil || IsNil(o.RemoteUserName) {
 		var ret string
 		return ret
 	}
@@ -148,7 +152,7 @@ func (o *ConnectorAuthMessage) GetRemoteUserName() string {
 // GetRemoteUserNameOk returns a tuple with the RemoteUserName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ConnectorAuthMessage) GetRemoteUserNameOk() (*string, bool) {
-	if o == nil || o.RemoteUserName == nil {
+	if o == nil || IsNil(o.RemoteUserName) {
 		return nil, false
 	}
 	return o.RemoteUserName, true
@@ -156,7 +160,7 @@ func (o *ConnectorAuthMessage) GetRemoteUserNameOk() (*string, bool) {
 
 // HasRemoteUserName returns a boolean if a field has been set.
 func (o *ConnectorAuthMessage) HasRemoteUserName() bool {
-	if o != nil && o.RemoteUserName != nil {
+	if o != nil && !IsNil(o.RemoteUserName) {
 		return true
 	}
 
@@ -170,7 +174,7 @@ func (o *ConnectorAuthMessage) SetRemoteUserName(v string) {
 
 // GetRemoteUserRoles returns the RemoteUserRoles field value if set, zero value otherwise.
 func (o *ConnectorAuthMessage) GetRemoteUserRoles() string {
-	if o == nil || o.RemoteUserRoles == nil {
+	if o == nil || IsNil(o.RemoteUserRoles) {
 		var ret string
 		return ret
 	}
@@ -180,7 +184,7 @@ func (o *ConnectorAuthMessage) GetRemoteUserRoles() string {
 // GetRemoteUserRolesOk returns a tuple with the RemoteUserRoles field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ConnectorAuthMessage) GetRemoteUserRolesOk() (*string, bool) {
-	if o == nil || o.RemoteUserRoles == nil {
+	if o == nil || IsNil(o.RemoteUserRoles) {
 		return nil, false
 	}
 	return o.RemoteUserRoles, true
@@ -188,7 +192,7 @@ func (o *ConnectorAuthMessage) GetRemoteUserRolesOk() (*string, bool) {
 
 // HasRemoteUserRoles returns a boolean if a field has been set.
 func (o *ConnectorAuthMessage) HasRemoteUserRoles() bool {
-	if o != nil && o.RemoteUserRoles != nil {
+	if o != nil && !IsNil(o.RemoteUserRoles) {
 		return true
 	}
 
@@ -202,7 +206,7 @@ func (o *ConnectorAuthMessage) SetRemoteUserRoles(v string) {
 
 // GetRemoteUserSessionId returns the RemoteUserSessionId field value if set, zero value otherwise.
 func (o *ConnectorAuthMessage) GetRemoteUserSessionId() string {
-	if o == nil || o.RemoteUserSessionId == nil {
+	if o == nil || IsNil(o.RemoteUserSessionId) {
 		var ret string
 		return ret
 	}
@@ -212,7 +216,7 @@ func (o *ConnectorAuthMessage) GetRemoteUserSessionId() string {
 // GetRemoteUserSessionIdOk returns a tuple with the RemoteUserSessionId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ConnectorAuthMessage) GetRemoteUserSessionIdOk() (*string, bool) {
-	if o == nil || o.RemoteUserSessionId == nil {
+	if o == nil || IsNil(o.RemoteUserSessionId) {
 		return nil, false
 	}
 	return o.RemoteUserSessionId, true
@@ -220,7 +224,7 @@ func (o *ConnectorAuthMessage) GetRemoteUserSessionIdOk() (*string, bool) {
 
 // HasRemoteUserSessionId returns a boolean if a field has been set.
 func (o *ConnectorAuthMessage) HasRemoteUserSessionId() bool {
-	if o != nil && o.RemoteUserSessionId != nil {
+	if o != nil && !IsNil(o.RemoteUserSessionId) {
 		return true
 	}
 
@@ -233,31 +237,35 @@ func (o *ConnectorAuthMessage) SetRemoteUserSessionId(v string) {
 }
 
 func (o ConnectorAuthMessage) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o ConnectorAuthMessage) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedConnectorBaseMessage, errConnectorBaseMessage := json.Marshal(o.ConnectorBaseMessage)
 	if errConnectorBaseMessage != nil {
-		return []byte{}, errConnectorBaseMessage
+		return map[string]interface{}{}, errConnectorBaseMessage
 	}
 	errConnectorBaseMessage = json.Unmarshal([]byte(serializedConnectorBaseMessage), &toSerialize)
 	if errConnectorBaseMessage != nil {
-		return []byte{}, errConnectorBaseMessage
+		return map[string]interface{}{}, errConnectorBaseMessage
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.RemoteUserLocale != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.RemoteUserLocale) {
 		toSerialize["RemoteUserLocale"] = o.RemoteUserLocale
 	}
-	if o.RemoteUserName != nil {
+	if !IsNil(o.RemoteUserName) {
 		toSerialize["RemoteUserName"] = o.RemoteUserName
 	}
-	if o.RemoteUserRoles != nil {
+	if !IsNil(o.RemoteUserRoles) {
 		toSerialize["RemoteUserRoles"] = o.RemoteUserRoles
 	}
-	if o.RemoteUserSessionId != nil {
+	if !IsNil(o.RemoteUserSessionId) {
 		toSerialize["RemoteUserSessionId"] = o.RemoteUserSessionId
 	}
 
@@ -265,10 +273,32 @@ func (o ConnectorAuthMessage) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *ConnectorAuthMessage) UnmarshalJSON(bytes []byte) (err error) {
+func (o *ConnectorAuthMessage) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type ConnectorAuthMessageWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type.
 		ClassId string `json:"ClassId"`
@@ -286,7 +316,7 @@ func (o *ConnectorAuthMessage) UnmarshalJSON(bytes []byte) (err error) {
 
 	varConnectorAuthMessageWithoutEmbeddedStruct := ConnectorAuthMessageWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varConnectorAuthMessageWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varConnectorAuthMessageWithoutEmbeddedStruct)
 	if err == nil {
 		varConnectorAuthMessage := _ConnectorAuthMessage{}
 		varConnectorAuthMessage.ClassId = varConnectorAuthMessageWithoutEmbeddedStruct.ClassId
@@ -302,7 +332,7 @@ func (o *ConnectorAuthMessage) UnmarshalJSON(bytes []byte) (err error) {
 
 	varConnectorAuthMessage := _ConnectorAuthMessage{}
 
-	err = json.Unmarshal(bytes, &varConnectorAuthMessage)
+	err = json.Unmarshal(data, &varConnectorAuthMessage)
 	if err == nil {
 		o.ConnectorBaseMessage = varConnectorAuthMessage.ConnectorBaseMessage
 	} else {
@@ -311,7 +341,7 @@ func (o *ConnectorAuthMessage) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "RemoteUserLocale")

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the MemoryPersistentMemoryPolicy type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &MemoryPersistentMemoryPolicy{}
 
 // MemoryPersistentMemoryPolicy The Persistent Memory policy defines the reusable Persistent Memory related configuration that can be applied on many servers. This policy allows the application of Persistent Memory Goals and creation of Persistent Memory Regions and Namespaces. The encryption of the Persistent Memory Modules can be enabled through this policy by providing a passphrase.
 type MemoryPersistentMemoryPolicy struct {
@@ -30,8 +34,8 @@ type MemoryPersistentMemoryPolicy struct {
 	// Management Mode of the policy. This can be either Configured from Intersight or Configured from Operating System. * `configured-from-intersight` - The Persistent Memory Modules are configured from Intersight thorugh Persistent Memory policy. * `configured-from-operating-system` - The Persistent Memory Modules are configured from operating system thorugh OS tools.
 	ManagementMode *string `json:"ManagementMode,omitempty"`
 	// Persistent Memory Namespaces to be retained or not.
-	RetainNamespaces *bool                                 `json:"RetainNamespaces,omitempty"`
-	Organization     *OrganizationOrganizationRelationship `json:"Organization,omitempty"`
+	RetainNamespaces *bool                                        `json:"RetainNamespaces,omitempty"`
+	Organization     NullableOrganizationOrganizationRelationship `json:"Organization,omitempty"`
 	// An array of relationships to policyAbstractConfigProfile resources.
 	Profiles             []PolicyAbstractConfigProfileRelationship `json:"Profiles,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -131,7 +135,7 @@ func (o *MemoryPersistentMemoryPolicy) GetGoals() []MemoryPersistentMemoryGoal {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *MemoryPersistentMemoryPolicy) GetGoalsOk() ([]MemoryPersistentMemoryGoal, bool) {
-	if o == nil || o.Goals == nil {
+	if o == nil || IsNil(o.Goals) {
 		return nil, false
 	}
 	return o.Goals, true
@@ -139,7 +143,7 @@ func (o *MemoryPersistentMemoryPolicy) GetGoalsOk() ([]MemoryPersistentMemoryGoa
 
 // HasGoals returns a boolean if a field has been set.
 func (o *MemoryPersistentMemoryPolicy) HasGoals() bool {
-	if o != nil && o.Goals != nil {
+	if o != nil && IsNil(o.Goals) {
 		return true
 	}
 
@@ -153,7 +157,7 @@ func (o *MemoryPersistentMemoryPolicy) SetGoals(v []MemoryPersistentMemoryGoal) 
 
 // GetLocalSecurity returns the LocalSecurity field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *MemoryPersistentMemoryPolicy) GetLocalSecurity() MemoryPersistentMemoryLocalSecurity {
-	if o == nil || o.LocalSecurity.Get() == nil {
+	if o == nil || IsNil(o.LocalSecurity.Get()) {
 		var ret MemoryPersistentMemoryLocalSecurity
 		return ret
 	}
@@ -207,7 +211,7 @@ func (o *MemoryPersistentMemoryPolicy) GetLogicalNamespaces() []MemoryPersistent
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *MemoryPersistentMemoryPolicy) GetLogicalNamespacesOk() ([]MemoryPersistentMemoryLogicalNamespace, bool) {
-	if o == nil || o.LogicalNamespaces == nil {
+	if o == nil || IsNil(o.LogicalNamespaces) {
 		return nil, false
 	}
 	return o.LogicalNamespaces, true
@@ -215,7 +219,7 @@ func (o *MemoryPersistentMemoryPolicy) GetLogicalNamespacesOk() ([]MemoryPersist
 
 // HasLogicalNamespaces returns a boolean if a field has been set.
 func (o *MemoryPersistentMemoryPolicy) HasLogicalNamespaces() bool {
-	if o != nil && o.LogicalNamespaces != nil {
+	if o != nil && IsNil(o.LogicalNamespaces) {
 		return true
 	}
 
@@ -229,7 +233,7 @@ func (o *MemoryPersistentMemoryPolicy) SetLogicalNamespaces(v []MemoryPersistent
 
 // GetManagementMode returns the ManagementMode field value if set, zero value otherwise.
 func (o *MemoryPersistentMemoryPolicy) GetManagementMode() string {
-	if o == nil || o.ManagementMode == nil {
+	if o == nil || IsNil(o.ManagementMode) {
 		var ret string
 		return ret
 	}
@@ -239,7 +243,7 @@ func (o *MemoryPersistentMemoryPolicy) GetManagementMode() string {
 // GetManagementModeOk returns a tuple with the ManagementMode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *MemoryPersistentMemoryPolicy) GetManagementModeOk() (*string, bool) {
-	if o == nil || o.ManagementMode == nil {
+	if o == nil || IsNil(o.ManagementMode) {
 		return nil, false
 	}
 	return o.ManagementMode, true
@@ -247,7 +251,7 @@ func (o *MemoryPersistentMemoryPolicy) GetManagementModeOk() (*string, bool) {
 
 // HasManagementMode returns a boolean if a field has been set.
 func (o *MemoryPersistentMemoryPolicy) HasManagementMode() bool {
-	if o != nil && o.ManagementMode != nil {
+	if o != nil && !IsNil(o.ManagementMode) {
 		return true
 	}
 
@@ -261,7 +265,7 @@ func (o *MemoryPersistentMemoryPolicy) SetManagementMode(v string) {
 
 // GetRetainNamespaces returns the RetainNamespaces field value if set, zero value otherwise.
 func (o *MemoryPersistentMemoryPolicy) GetRetainNamespaces() bool {
-	if o == nil || o.RetainNamespaces == nil {
+	if o == nil || IsNil(o.RetainNamespaces) {
 		var ret bool
 		return ret
 	}
@@ -271,7 +275,7 @@ func (o *MemoryPersistentMemoryPolicy) GetRetainNamespaces() bool {
 // GetRetainNamespacesOk returns a tuple with the RetainNamespaces field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *MemoryPersistentMemoryPolicy) GetRetainNamespacesOk() (*bool, bool) {
-	if o == nil || o.RetainNamespaces == nil {
+	if o == nil || IsNil(o.RetainNamespaces) {
 		return nil, false
 	}
 	return o.RetainNamespaces, true
@@ -279,7 +283,7 @@ func (o *MemoryPersistentMemoryPolicy) GetRetainNamespacesOk() (*bool, bool) {
 
 // HasRetainNamespaces returns a boolean if a field has been set.
 func (o *MemoryPersistentMemoryPolicy) HasRetainNamespaces() bool {
-	if o != nil && o.RetainNamespaces != nil {
+	if o != nil && !IsNil(o.RetainNamespaces) {
 		return true
 	}
 
@@ -291,36 +295,47 @@ func (o *MemoryPersistentMemoryPolicy) SetRetainNamespaces(v bool) {
 	o.RetainNamespaces = &v
 }
 
-// GetOrganization returns the Organization field value if set, zero value otherwise.
+// GetOrganization returns the Organization field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *MemoryPersistentMemoryPolicy) GetOrganization() OrganizationOrganizationRelationship {
-	if o == nil || o.Organization == nil {
+	if o == nil || IsNil(o.Organization.Get()) {
 		var ret OrganizationOrganizationRelationship
 		return ret
 	}
-	return *o.Organization
+	return *o.Organization.Get()
 }
 
 // GetOrganizationOk returns a tuple with the Organization field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *MemoryPersistentMemoryPolicy) GetOrganizationOk() (*OrganizationOrganizationRelationship, bool) {
-	if o == nil || o.Organization == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Organization, true
+	return o.Organization.Get(), o.Organization.IsSet()
 }
 
 // HasOrganization returns a boolean if a field has been set.
 func (o *MemoryPersistentMemoryPolicy) HasOrganization() bool {
-	if o != nil && o.Organization != nil {
+	if o != nil && o.Organization.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetOrganization gets a reference to the given OrganizationOrganizationRelationship and assigns it to the Organization field.
+// SetOrganization gets a reference to the given NullableOrganizationOrganizationRelationship and assigns it to the Organization field.
 func (o *MemoryPersistentMemoryPolicy) SetOrganization(v OrganizationOrganizationRelationship) {
-	o.Organization = &v
+	o.Organization.Set(&v)
+}
+
+// SetOrganizationNil sets the value for Organization to be an explicit nil
+func (o *MemoryPersistentMemoryPolicy) SetOrganizationNil() {
+	o.Organization.Set(nil)
+}
+
+// UnsetOrganization ensures that no value is present for Organization, not even an explicit nil
+func (o *MemoryPersistentMemoryPolicy) UnsetOrganization() {
+	o.Organization.Unset()
 }
 
 // GetProfiles returns the Profiles field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -336,7 +351,7 @@ func (o *MemoryPersistentMemoryPolicy) GetProfiles() []PolicyAbstractConfigProfi
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *MemoryPersistentMemoryPolicy) GetProfilesOk() ([]PolicyAbstractConfigProfileRelationship, bool) {
-	if o == nil || o.Profiles == nil {
+	if o == nil || IsNil(o.Profiles) {
 		return nil, false
 	}
 	return o.Profiles, true
@@ -344,7 +359,7 @@ func (o *MemoryPersistentMemoryPolicy) GetProfilesOk() ([]PolicyAbstractConfigPr
 
 // HasProfiles returns a boolean if a field has been set.
 func (o *MemoryPersistentMemoryPolicy) HasProfiles() bool {
-	if o != nil && o.Profiles != nil {
+	if o != nil && IsNil(o.Profiles) {
 		return true
 	}
 
@@ -357,21 +372,25 @@ func (o *MemoryPersistentMemoryPolicy) SetProfiles(v []PolicyAbstractConfigProfi
 }
 
 func (o MemoryPersistentMemoryPolicy) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o MemoryPersistentMemoryPolicy) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedPolicyAbstractPolicy, errPolicyAbstractPolicy := json.Marshal(o.PolicyAbstractPolicy)
 	if errPolicyAbstractPolicy != nil {
-		return []byte{}, errPolicyAbstractPolicy
+		return map[string]interface{}{}, errPolicyAbstractPolicy
 	}
 	errPolicyAbstractPolicy = json.Unmarshal([]byte(serializedPolicyAbstractPolicy), &toSerialize)
 	if errPolicyAbstractPolicy != nil {
-		return []byte{}, errPolicyAbstractPolicy
+		return map[string]interface{}{}, errPolicyAbstractPolicy
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
 	if o.Goals != nil {
 		toSerialize["Goals"] = o.Goals
 	}
@@ -381,14 +400,14 @@ func (o MemoryPersistentMemoryPolicy) MarshalJSON() ([]byte, error) {
 	if o.LogicalNamespaces != nil {
 		toSerialize["LogicalNamespaces"] = o.LogicalNamespaces
 	}
-	if o.ManagementMode != nil {
+	if !IsNil(o.ManagementMode) {
 		toSerialize["ManagementMode"] = o.ManagementMode
 	}
-	if o.RetainNamespaces != nil {
+	if !IsNil(o.RetainNamespaces) {
 		toSerialize["RetainNamespaces"] = o.RetainNamespaces
 	}
-	if o.Organization != nil {
-		toSerialize["Organization"] = o.Organization
+	if o.Organization.IsSet() {
+		toSerialize["Organization"] = o.Organization.Get()
 	}
 	if o.Profiles != nil {
 		toSerialize["Profiles"] = o.Profiles
@@ -398,10 +417,32 @@ func (o MemoryPersistentMemoryPolicy) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *MemoryPersistentMemoryPolicy) UnmarshalJSON(bytes []byte) (err error) {
+func (o *MemoryPersistentMemoryPolicy) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type MemoryPersistentMemoryPolicyWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -413,15 +454,15 @@ func (o *MemoryPersistentMemoryPolicy) UnmarshalJSON(bytes []byte) (err error) {
 		// Management Mode of the policy. This can be either Configured from Intersight or Configured from Operating System. * `configured-from-intersight` - The Persistent Memory Modules are configured from Intersight thorugh Persistent Memory policy. * `configured-from-operating-system` - The Persistent Memory Modules are configured from operating system thorugh OS tools.
 		ManagementMode *string `json:"ManagementMode,omitempty"`
 		// Persistent Memory Namespaces to be retained or not.
-		RetainNamespaces *bool                                 `json:"RetainNamespaces,omitempty"`
-		Organization     *OrganizationOrganizationRelationship `json:"Organization,omitempty"`
+		RetainNamespaces *bool                                        `json:"RetainNamespaces,omitempty"`
+		Organization     NullableOrganizationOrganizationRelationship `json:"Organization,omitempty"`
 		// An array of relationships to policyAbstractConfigProfile resources.
 		Profiles []PolicyAbstractConfigProfileRelationship `json:"Profiles,omitempty"`
 	}
 
 	varMemoryPersistentMemoryPolicyWithoutEmbeddedStruct := MemoryPersistentMemoryPolicyWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varMemoryPersistentMemoryPolicyWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varMemoryPersistentMemoryPolicyWithoutEmbeddedStruct)
 	if err == nil {
 		varMemoryPersistentMemoryPolicy := _MemoryPersistentMemoryPolicy{}
 		varMemoryPersistentMemoryPolicy.ClassId = varMemoryPersistentMemoryPolicyWithoutEmbeddedStruct.ClassId
@@ -440,7 +481,7 @@ func (o *MemoryPersistentMemoryPolicy) UnmarshalJSON(bytes []byte) (err error) {
 
 	varMemoryPersistentMemoryPolicy := _MemoryPersistentMemoryPolicy{}
 
-	err = json.Unmarshal(bytes, &varMemoryPersistentMemoryPolicy)
+	err = json.Unmarshal(data, &varMemoryPersistentMemoryPolicy)
 	if err == nil {
 		o.PolicyAbstractPolicy = varMemoryPersistentMemoryPolicy.PolicyAbstractPolicy
 	} else {
@@ -449,7 +490,7 @@ func (o *MemoryPersistentMemoryPolicy) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Goals")

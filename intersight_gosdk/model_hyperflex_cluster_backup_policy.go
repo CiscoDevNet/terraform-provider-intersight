@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the HyperflexClusterBackupPolicy type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &HyperflexClusterBackupPolicy{}
 
 // HyperflexClusterBackupPolicy Specifies cluster backup configuration for a HyperFlex Cluster.
 type HyperflexClusterBackupPolicy struct {
@@ -38,11 +42,11 @@ type HyperflexClusterBackupPolicy struct {
 	ReplicationPairNamePrefix *string                              `json:"ReplicationPairNamePrefix,omitempty"`
 	ReplicationSchedule       NullableHyperflexReplicationSchedule `json:"ReplicationSchedule,omitempty"`
 	// Number of snapshots that will be retained as part of the Multi Point in Time support.
-	SnapshotRetentionCount *int64                        `json:"SnapshotRetentionCount,omitempty"`
-	BackupTarget           *HyperflexClusterRelationship `json:"BackupTarget,omitempty"`
+	SnapshotRetentionCount *int64                               `json:"SnapshotRetentionCount,omitempty"`
+	BackupTarget           NullableHyperflexClusterRelationship `json:"BackupTarget,omitempty"`
 	// An array of relationships to hyperflexClusterProfile resources.
-	ClusterProfiles      []HyperflexClusterProfileRelationship `json:"ClusterProfiles,omitempty"`
-	Organization         *OrganizationOrganizationRelationship `json:"Organization,omitempty"`
+	ClusterProfiles      []HyperflexClusterProfileRelationship        `json:"ClusterProfiles,omitempty"`
+	Organization         NullableOrganizationOrganizationRelationship `json:"Organization,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -149,7 +153,7 @@ func (o *HyperflexClusterBackupPolicy) SetObjectType(v string) {
 
 // GetBackupDataStoreName returns the BackupDataStoreName field value if set, zero value otherwise.
 func (o *HyperflexClusterBackupPolicy) GetBackupDataStoreName() string {
-	if o == nil || o.BackupDataStoreName == nil {
+	if o == nil || IsNil(o.BackupDataStoreName) {
 		var ret string
 		return ret
 	}
@@ -159,7 +163,7 @@ func (o *HyperflexClusterBackupPolicy) GetBackupDataStoreName() string {
 // GetBackupDataStoreNameOk returns a tuple with the BackupDataStoreName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexClusterBackupPolicy) GetBackupDataStoreNameOk() (*string, bool) {
-	if o == nil || o.BackupDataStoreName == nil {
+	if o == nil || IsNil(o.BackupDataStoreName) {
 		return nil, false
 	}
 	return o.BackupDataStoreName, true
@@ -167,7 +171,7 @@ func (o *HyperflexClusterBackupPolicy) GetBackupDataStoreNameOk() (*string, bool
 
 // HasBackupDataStoreName returns a boolean if a field has been set.
 func (o *HyperflexClusterBackupPolicy) HasBackupDataStoreName() bool {
-	if o != nil && o.BackupDataStoreName != nil {
+	if o != nil && !IsNil(o.BackupDataStoreName) {
 		return true
 	}
 
@@ -181,7 +185,7 @@ func (o *HyperflexClusterBackupPolicy) SetBackupDataStoreName(v string) {
 
 // GetBackupDataStoreSize returns the BackupDataStoreSize field value if set, zero value otherwise.
 func (o *HyperflexClusterBackupPolicy) GetBackupDataStoreSize() int64 {
-	if o == nil || o.BackupDataStoreSize == nil {
+	if o == nil || IsNil(o.BackupDataStoreSize) {
 		var ret int64
 		return ret
 	}
@@ -191,7 +195,7 @@ func (o *HyperflexClusterBackupPolicy) GetBackupDataStoreSize() int64 {
 // GetBackupDataStoreSizeOk returns a tuple with the BackupDataStoreSize field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexClusterBackupPolicy) GetBackupDataStoreSizeOk() (*int64, bool) {
-	if o == nil || o.BackupDataStoreSize == nil {
+	if o == nil || IsNil(o.BackupDataStoreSize) {
 		return nil, false
 	}
 	return o.BackupDataStoreSize, true
@@ -199,7 +203,7 @@ func (o *HyperflexClusterBackupPolicy) GetBackupDataStoreSizeOk() (*int64, bool)
 
 // HasBackupDataStoreSize returns a boolean if a field has been set.
 func (o *HyperflexClusterBackupPolicy) HasBackupDataStoreSize() bool {
-	if o != nil && o.BackupDataStoreSize != nil {
+	if o != nil && !IsNil(o.BackupDataStoreSize) {
 		return true
 	}
 
@@ -213,7 +217,7 @@ func (o *HyperflexClusterBackupPolicy) SetBackupDataStoreSize(v int64) {
 
 // GetBackupDataStoreSizeUnit returns the BackupDataStoreSizeUnit field value if set, zero value otherwise.
 func (o *HyperflexClusterBackupPolicy) GetBackupDataStoreSizeUnit() string {
-	if o == nil || o.BackupDataStoreSizeUnit == nil {
+	if o == nil || IsNil(o.BackupDataStoreSizeUnit) {
 		var ret string
 		return ret
 	}
@@ -223,7 +227,7 @@ func (o *HyperflexClusterBackupPolicy) GetBackupDataStoreSizeUnit() string {
 // GetBackupDataStoreSizeUnitOk returns a tuple with the BackupDataStoreSizeUnit field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexClusterBackupPolicy) GetBackupDataStoreSizeUnitOk() (*string, bool) {
-	if o == nil || o.BackupDataStoreSizeUnit == nil {
+	if o == nil || IsNil(o.BackupDataStoreSizeUnit) {
 		return nil, false
 	}
 	return o.BackupDataStoreSizeUnit, true
@@ -231,7 +235,7 @@ func (o *HyperflexClusterBackupPolicy) GetBackupDataStoreSizeUnitOk() (*string, 
 
 // HasBackupDataStoreSizeUnit returns a boolean if a field has been set.
 func (o *HyperflexClusterBackupPolicy) HasBackupDataStoreSizeUnit() bool {
-	if o != nil && o.BackupDataStoreSizeUnit != nil {
+	if o != nil && !IsNil(o.BackupDataStoreSizeUnit) {
 		return true
 	}
 
@@ -245,7 +249,7 @@ func (o *HyperflexClusterBackupPolicy) SetBackupDataStoreSizeUnit(v string) {
 
 // GetDataStoreEncryptionEnabled returns the DataStoreEncryptionEnabled field value if set, zero value otherwise.
 func (o *HyperflexClusterBackupPolicy) GetDataStoreEncryptionEnabled() bool {
-	if o == nil || o.DataStoreEncryptionEnabled == nil {
+	if o == nil || IsNil(o.DataStoreEncryptionEnabled) {
 		var ret bool
 		return ret
 	}
@@ -255,7 +259,7 @@ func (o *HyperflexClusterBackupPolicy) GetDataStoreEncryptionEnabled() bool {
 // GetDataStoreEncryptionEnabledOk returns a tuple with the DataStoreEncryptionEnabled field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexClusterBackupPolicy) GetDataStoreEncryptionEnabledOk() (*bool, bool) {
-	if o == nil || o.DataStoreEncryptionEnabled == nil {
+	if o == nil || IsNil(o.DataStoreEncryptionEnabled) {
 		return nil, false
 	}
 	return o.DataStoreEncryptionEnabled, true
@@ -263,7 +267,7 @@ func (o *HyperflexClusterBackupPolicy) GetDataStoreEncryptionEnabledOk() (*bool,
 
 // HasDataStoreEncryptionEnabled returns a boolean if a field has been set.
 func (o *HyperflexClusterBackupPolicy) HasDataStoreEncryptionEnabled() bool {
-	if o != nil && o.DataStoreEncryptionEnabled != nil {
+	if o != nil && !IsNil(o.DataStoreEncryptionEnabled) {
 		return true
 	}
 
@@ -277,7 +281,7 @@ func (o *HyperflexClusterBackupPolicy) SetDataStoreEncryptionEnabled(v bool) {
 
 // GetLocalSnapshotRetentionCount returns the LocalSnapshotRetentionCount field value if set, zero value otherwise.
 func (o *HyperflexClusterBackupPolicy) GetLocalSnapshotRetentionCount() int64 {
-	if o == nil || o.LocalSnapshotRetentionCount == nil {
+	if o == nil || IsNil(o.LocalSnapshotRetentionCount) {
 		var ret int64
 		return ret
 	}
@@ -287,7 +291,7 @@ func (o *HyperflexClusterBackupPolicy) GetLocalSnapshotRetentionCount() int64 {
 // GetLocalSnapshotRetentionCountOk returns a tuple with the LocalSnapshotRetentionCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexClusterBackupPolicy) GetLocalSnapshotRetentionCountOk() (*int64, bool) {
-	if o == nil || o.LocalSnapshotRetentionCount == nil {
+	if o == nil || IsNil(o.LocalSnapshotRetentionCount) {
 		return nil, false
 	}
 	return o.LocalSnapshotRetentionCount, true
@@ -295,7 +299,7 @@ func (o *HyperflexClusterBackupPolicy) GetLocalSnapshotRetentionCountOk() (*int6
 
 // HasLocalSnapshotRetentionCount returns a boolean if a field has been set.
 func (o *HyperflexClusterBackupPolicy) HasLocalSnapshotRetentionCount() bool {
-	if o != nil && o.LocalSnapshotRetentionCount != nil {
+	if o != nil && !IsNil(o.LocalSnapshotRetentionCount) {
 		return true
 	}
 
@@ -309,7 +313,7 @@ func (o *HyperflexClusterBackupPolicy) SetLocalSnapshotRetentionCount(v int64) {
 
 // GetReplicationPairNamePrefix returns the ReplicationPairNamePrefix field value if set, zero value otherwise.
 func (o *HyperflexClusterBackupPolicy) GetReplicationPairNamePrefix() string {
-	if o == nil || o.ReplicationPairNamePrefix == nil {
+	if o == nil || IsNil(o.ReplicationPairNamePrefix) {
 		var ret string
 		return ret
 	}
@@ -319,7 +323,7 @@ func (o *HyperflexClusterBackupPolicy) GetReplicationPairNamePrefix() string {
 // GetReplicationPairNamePrefixOk returns a tuple with the ReplicationPairNamePrefix field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexClusterBackupPolicy) GetReplicationPairNamePrefixOk() (*string, bool) {
-	if o == nil || o.ReplicationPairNamePrefix == nil {
+	if o == nil || IsNil(o.ReplicationPairNamePrefix) {
 		return nil, false
 	}
 	return o.ReplicationPairNamePrefix, true
@@ -327,7 +331,7 @@ func (o *HyperflexClusterBackupPolicy) GetReplicationPairNamePrefixOk() (*string
 
 // HasReplicationPairNamePrefix returns a boolean if a field has been set.
 func (o *HyperflexClusterBackupPolicy) HasReplicationPairNamePrefix() bool {
-	if o != nil && o.ReplicationPairNamePrefix != nil {
+	if o != nil && !IsNil(o.ReplicationPairNamePrefix) {
 		return true
 	}
 
@@ -341,7 +345,7 @@ func (o *HyperflexClusterBackupPolicy) SetReplicationPairNamePrefix(v string) {
 
 // GetReplicationSchedule returns the ReplicationSchedule field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *HyperflexClusterBackupPolicy) GetReplicationSchedule() HyperflexReplicationSchedule {
-	if o == nil || o.ReplicationSchedule.Get() == nil {
+	if o == nil || IsNil(o.ReplicationSchedule.Get()) {
 		var ret HyperflexReplicationSchedule
 		return ret
 	}
@@ -384,7 +388,7 @@ func (o *HyperflexClusterBackupPolicy) UnsetReplicationSchedule() {
 
 // GetSnapshotRetentionCount returns the SnapshotRetentionCount field value if set, zero value otherwise.
 func (o *HyperflexClusterBackupPolicy) GetSnapshotRetentionCount() int64 {
-	if o == nil || o.SnapshotRetentionCount == nil {
+	if o == nil || IsNil(o.SnapshotRetentionCount) {
 		var ret int64
 		return ret
 	}
@@ -394,7 +398,7 @@ func (o *HyperflexClusterBackupPolicy) GetSnapshotRetentionCount() int64 {
 // GetSnapshotRetentionCountOk returns a tuple with the SnapshotRetentionCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexClusterBackupPolicy) GetSnapshotRetentionCountOk() (*int64, bool) {
-	if o == nil || o.SnapshotRetentionCount == nil {
+	if o == nil || IsNil(o.SnapshotRetentionCount) {
 		return nil, false
 	}
 	return o.SnapshotRetentionCount, true
@@ -402,7 +406,7 @@ func (o *HyperflexClusterBackupPolicy) GetSnapshotRetentionCountOk() (*int64, bo
 
 // HasSnapshotRetentionCount returns a boolean if a field has been set.
 func (o *HyperflexClusterBackupPolicy) HasSnapshotRetentionCount() bool {
-	if o != nil && o.SnapshotRetentionCount != nil {
+	if o != nil && !IsNil(o.SnapshotRetentionCount) {
 		return true
 	}
 
@@ -414,36 +418,47 @@ func (o *HyperflexClusterBackupPolicy) SetSnapshotRetentionCount(v int64) {
 	o.SnapshotRetentionCount = &v
 }
 
-// GetBackupTarget returns the BackupTarget field value if set, zero value otherwise.
+// GetBackupTarget returns the BackupTarget field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *HyperflexClusterBackupPolicy) GetBackupTarget() HyperflexClusterRelationship {
-	if o == nil || o.BackupTarget == nil {
+	if o == nil || IsNil(o.BackupTarget.Get()) {
 		var ret HyperflexClusterRelationship
 		return ret
 	}
-	return *o.BackupTarget
+	return *o.BackupTarget.Get()
 }
 
 // GetBackupTargetOk returns a tuple with the BackupTarget field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *HyperflexClusterBackupPolicy) GetBackupTargetOk() (*HyperflexClusterRelationship, bool) {
-	if o == nil || o.BackupTarget == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.BackupTarget, true
+	return o.BackupTarget.Get(), o.BackupTarget.IsSet()
 }
 
 // HasBackupTarget returns a boolean if a field has been set.
 func (o *HyperflexClusterBackupPolicy) HasBackupTarget() bool {
-	if o != nil && o.BackupTarget != nil {
+	if o != nil && o.BackupTarget.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetBackupTarget gets a reference to the given HyperflexClusterRelationship and assigns it to the BackupTarget field.
+// SetBackupTarget gets a reference to the given NullableHyperflexClusterRelationship and assigns it to the BackupTarget field.
 func (o *HyperflexClusterBackupPolicy) SetBackupTarget(v HyperflexClusterRelationship) {
-	o.BackupTarget = &v
+	o.BackupTarget.Set(&v)
+}
+
+// SetBackupTargetNil sets the value for BackupTarget to be an explicit nil
+func (o *HyperflexClusterBackupPolicy) SetBackupTargetNil() {
+	o.BackupTarget.Set(nil)
+}
+
+// UnsetBackupTarget ensures that no value is present for BackupTarget, not even an explicit nil
+func (o *HyperflexClusterBackupPolicy) UnsetBackupTarget() {
+	o.BackupTarget.Unset()
 }
 
 // GetClusterProfiles returns the ClusterProfiles field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -459,7 +474,7 @@ func (o *HyperflexClusterBackupPolicy) GetClusterProfiles() []HyperflexClusterPr
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *HyperflexClusterBackupPolicy) GetClusterProfilesOk() ([]HyperflexClusterProfileRelationship, bool) {
-	if o == nil || o.ClusterProfiles == nil {
+	if o == nil || IsNil(o.ClusterProfiles) {
 		return nil, false
 	}
 	return o.ClusterProfiles, true
@@ -467,7 +482,7 @@ func (o *HyperflexClusterBackupPolicy) GetClusterProfilesOk() ([]HyperflexCluste
 
 // HasClusterProfiles returns a boolean if a field has been set.
 func (o *HyperflexClusterBackupPolicy) HasClusterProfiles() bool {
-	if o != nil && o.ClusterProfiles != nil {
+	if o != nil && IsNil(o.ClusterProfiles) {
 		return true
 	}
 
@@ -479,96 +494,133 @@ func (o *HyperflexClusterBackupPolicy) SetClusterProfiles(v []HyperflexClusterPr
 	o.ClusterProfiles = v
 }
 
-// GetOrganization returns the Organization field value if set, zero value otherwise.
+// GetOrganization returns the Organization field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *HyperflexClusterBackupPolicy) GetOrganization() OrganizationOrganizationRelationship {
-	if o == nil || o.Organization == nil {
+	if o == nil || IsNil(o.Organization.Get()) {
 		var ret OrganizationOrganizationRelationship
 		return ret
 	}
-	return *o.Organization
+	return *o.Organization.Get()
 }
 
 // GetOrganizationOk returns a tuple with the Organization field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *HyperflexClusterBackupPolicy) GetOrganizationOk() (*OrganizationOrganizationRelationship, bool) {
-	if o == nil || o.Organization == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Organization, true
+	return o.Organization.Get(), o.Organization.IsSet()
 }
 
 // HasOrganization returns a boolean if a field has been set.
 func (o *HyperflexClusterBackupPolicy) HasOrganization() bool {
-	if o != nil && o.Organization != nil {
+	if o != nil && o.Organization.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetOrganization gets a reference to the given OrganizationOrganizationRelationship and assigns it to the Organization field.
+// SetOrganization gets a reference to the given NullableOrganizationOrganizationRelationship and assigns it to the Organization field.
 func (o *HyperflexClusterBackupPolicy) SetOrganization(v OrganizationOrganizationRelationship) {
-	o.Organization = &v
+	o.Organization.Set(&v)
+}
+
+// SetOrganizationNil sets the value for Organization to be an explicit nil
+func (o *HyperflexClusterBackupPolicy) SetOrganizationNil() {
+	o.Organization.Set(nil)
+}
+
+// UnsetOrganization ensures that no value is present for Organization, not even an explicit nil
+func (o *HyperflexClusterBackupPolicy) UnsetOrganization() {
+	o.Organization.Unset()
 }
 
 func (o HyperflexClusterBackupPolicy) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o HyperflexClusterBackupPolicy) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedPolicyAbstractPolicy, errPolicyAbstractPolicy := json.Marshal(o.PolicyAbstractPolicy)
 	if errPolicyAbstractPolicy != nil {
-		return []byte{}, errPolicyAbstractPolicy
+		return map[string]interface{}{}, errPolicyAbstractPolicy
 	}
 	errPolicyAbstractPolicy = json.Unmarshal([]byte(serializedPolicyAbstractPolicy), &toSerialize)
 	if errPolicyAbstractPolicy != nil {
-		return []byte{}, errPolicyAbstractPolicy
+		return map[string]interface{}{}, errPolicyAbstractPolicy
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.BackupDataStoreName != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.BackupDataStoreName) {
 		toSerialize["BackupDataStoreName"] = o.BackupDataStoreName
 	}
-	if o.BackupDataStoreSize != nil {
+	if !IsNil(o.BackupDataStoreSize) {
 		toSerialize["BackupDataStoreSize"] = o.BackupDataStoreSize
 	}
-	if o.BackupDataStoreSizeUnit != nil {
+	if !IsNil(o.BackupDataStoreSizeUnit) {
 		toSerialize["BackupDataStoreSizeUnit"] = o.BackupDataStoreSizeUnit
 	}
-	if o.DataStoreEncryptionEnabled != nil {
+	if !IsNil(o.DataStoreEncryptionEnabled) {
 		toSerialize["DataStoreEncryptionEnabled"] = o.DataStoreEncryptionEnabled
 	}
-	if o.LocalSnapshotRetentionCount != nil {
+	if !IsNil(o.LocalSnapshotRetentionCount) {
 		toSerialize["LocalSnapshotRetentionCount"] = o.LocalSnapshotRetentionCount
 	}
-	if o.ReplicationPairNamePrefix != nil {
+	if !IsNil(o.ReplicationPairNamePrefix) {
 		toSerialize["ReplicationPairNamePrefix"] = o.ReplicationPairNamePrefix
 	}
 	if o.ReplicationSchedule.IsSet() {
 		toSerialize["ReplicationSchedule"] = o.ReplicationSchedule.Get()
 	}
-	if o.SnapshotRetentionCount != nil {
+	if !IsNil(o.SnapshotRetentionCount) {
 		toSerialize["SnapshotRetentionCount"] = o.SnapshotRetentionCount
 	}
-	if o.BackupTarget != nil {
-		toSerialize["BackupTarget"] = o.BackupTarget
+	if o.BackupTarget.IsSet() {
+		toSerialize["BackupTarget"] = o.BackupTarget.Get()
 	}
 	if o.ClusterProfiles != nil {
 		toSerialize["ClusterProfiles"] = o.ClusterProfiles
 	}
-	if o.Organization != nil {
-		toSerialize["Organization"] = o.Organization
+	if o.Organization.IsSet() {
+		toSerialize["Organization"] = o.Organization.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *HyperflexClusterBackupPolicy) UnmarshalJSON(bytes []byte) (err error) {
+func (o *HyperflexClusterBackupPolicy) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type HyperflexClusterBackupPolicyWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -588,16 +640,16 @@ func (o *HyperflexClusterBackupPolicy) UnmarshalJSON(bytes []byte) (err error) {
 		ReplicationPairNamePrefix *string                              `json:"ReplicationPairNamePrefix,omitempty"`
 		ReplicationSchedule       NullableHyperflexReplicationSchedule `json:"ReplicationSchedule,omitempty"`
 		// Number of snapshots that will be retained as part of the Multi Point in Time support.
-		SnapshotRetentionCount *int64                        `json:"SnapshotRetentionCount,omitempty"`
-		BackupTarget           *HyperflexClusterRelationship `json:"BackupTarget,omitempty"`
+		SnapshotRetentionCount *int64                               `json:"SnapshotRetentionCount,omitempty"`
+		BackupTarget           NullableHyperflexClusterRelationship `json:"BackupTarget,omitempty"`
 		// An array of relationships to hyperflexClusterProfile resources.
-		ClusterProfiles []HyperflexClusterProfileRelationship `json:"ClusterProfiles,omitempty"`
-		Organization    *OrganizationOrganizationRelationship `json:"Organization,omitempty"`
+		ClusterProfiles []HyperflexClusterProfileRelationship        `json:"ClusterProfiles,omitempty"`
+		Organization    NullableOrganizationOrganizationRelationship `json:"Organization,omitempty"`
 	}
 
 	varHyperflexClusterBackupPolicyWithoutEmbeddedStruct := HyperflexClusterBackupPolicyWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varHyperflexClusterBackupPolicyWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varHyperflexClusterBackupPolicyWithoutEmbeddedStruct)
 	if err == nil {
 		varHyperflexClusterBackupPolicy := _HyperflexClusterBackupPolicy{}
 		varHyperflexClusterBackupPolicy.ClassId = varHyperflexClusterBackupPolicyWithoutEmbeddedStruct.ClassId
@@ -620,7 +672,7 @@ func (o *HyperflexClusterBackupPolicy) UnmarshalJSON(bytes []byte) (err error) {
 
 	varHyperflexClusterBackupPolicy := _HyperflexClusterBackupPolicy{}
 
-	err = json.Unmarshal(bytes, &varHyperflexClusterBackupPolicy)
+	err = json.Unmarshal(data, &varHyperflexClusterBackupPolicy)
 	if err == nil {
 		o.PolicyAbstractPolicy = varHyperflexClusterBackupPolicy.PolicyAbstractPolicy
 	} else {
@@ -629,7 +681,7 @@ func (o *HyperflexClusterBackupPolicy) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "BackupDataStoreName")

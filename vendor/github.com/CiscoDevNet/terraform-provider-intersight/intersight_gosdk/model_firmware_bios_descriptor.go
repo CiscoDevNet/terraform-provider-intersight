@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the FirmwareBiosDescriptor type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &FirmwareBiosDescriptor{}
 
 // FirmwareBiosDescriptor Descriptor to uniquely identify a BIOS.
 type FirmwareBiosDescriptor struct {
@@ -45,30 +49,60 @@ func NewFirmwareBiosDescriptorWithDefaults() *FirmwareBiosDescriptor {
 }
 
 func (o FirmwareBiosDescriptor) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o FirmwareBiosDescriptor) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedFirmwareComponentDescriptor, errFirmwareComponentDescriptor := json.Marshal(o.FirmwareComponentDescriptor)
 	if errFirmwareComponentDescriptor != nil {
-		return []byte{}, errFirmwareComponentDescriptor
+		return map[string]interface{}{}, errFirmwareComponentDescriptor
 	}
 	errFirmwareComponentDescriptor = json.Unmarshal([]byte(serializedFirmwareComponentDescriptor), &toSerialize)
 	if errFirmwareComponentDescriptor != nil {
-		return []byte{}, errFirmwareComponentDescriptor
+		return map[string]interface{}{}, errFirmwareComponentDescriptor
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *FirmwareBiosDescriptor) UnmarshalJSON(bytes []byte) (err error) {
+func (o *FirmwareBiosDescriptor) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type FirmwareBiosDescriptorWithoutEmbeddedStruct struct {
 	}
 
 	varFirmwareBiosDescriptorWithoutEmbeddedStruct := FirmwareBiosDescriptorWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varFirmwareBiosDescriptorWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varFirmwareBiosDescriptorWithoutEmbeddedStruct)
 	if err == nil {
 		varFirmwareBiosDescriptor := _FirmwareBiosDescriptor{}
 		*o = FirmwareBiosDescriptor(varFirmwareBiosDescriptor)
@@ -78,7 +112,7 @@ func (o *FirmwareBiosDescriptor) UnmarshalJSON(bytes []byte) (err error) {
 
 	varFirmwareBiosDescriptor := _FirmwareBiosDescriptor{}
 
-	err = json.Unmarshal(bytes, &varFirmwareBiosDescriptor)
+	err = json.Unmarshal(data, &varFirmwareBiosDescriptor)
 	if err == nil {
 		o.FirmwareComponentDescriptor = varFirmwareBiosDescriptor.FirmwareComponentDescriptor
 	} else {
@@ -87,7 +121,7 @@ func (o *FirmwareBiosDescriptor) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 
 		// remove fields from embedded structs
 		reflectFirmwareComponentDescriptor := reflect.ValueOf(o.FirmwareComponentDescriptor)

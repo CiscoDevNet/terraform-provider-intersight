@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,10 +13,14 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 	"time"
 )
+
+// checks if the IwotenantTenantStatus type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &IwotenantTenantStatus{}
 
 // IwotenantTenantStatus When an Intersight customer activates IWO license, kubernetes resources need to configured, vault policies need to be setup, etc. to run IWO services as pods. The provisioning of these resources takes a few minutes. Any feature dependent on the IWO APIs will fail till these services are healthy. TenantStatus MO provides status and health of the tenants, so user can be notified when tenant creation is in progress or has failed.
 type IwotenantTenantStatus struct {
@@ -30,8 +34,8 @@ type IwotenantTenantStatus struct {
 	// The iwoId uniquely identifies a IWO tenant. The iwoId is used as part of namespace, (logical) database names, policies in vault and many others. As of now, accountMoid has to be provided as the iwoId.
 	IwoId *string `json:"IwoId,omitempty"`
 	// During IWO tenant upgrade (or reconfiguration), deployStatus is set to InProgress and referenceTime set to current time. When tenant upgrade (or reconfiguration) does not complete within a pre-defined time using this as reference, deployStatus is set as Failed.
-	ReferenceTime        *time.Time              `json:"ReferenceTime,omitempty"`
-	Account              *IamAccountRelationship `json:"Account,omitempty"`
+	ReferenceTime        *time.Time                     `json:"ReferenceTime,omitempty"`
+	Account              NullableIamAccountRelationship `json:"Account,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -110,7 +114,7 @@ func (o *IwotenantTenantStatus) SetObjectType(v string) {
 
 // GetDeployStatus returns the DeployStatus field value if set, zero value otherwise.
 func (o *IwotenantTenantStatus) GetDeployStatus() string {
-	if o == nil || o.DeployStatus == nil {
+	if o == nil || IsNil(o.DeployStatus) {
 		var ret string
 		return ret
 	}
@@ -120,7 +124,7 @@ func (o *IwotenantTenantStatus) GetDeployStatus() string {
 // GetDeployStatusOk returns a tuple with the DeployStatus field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IwotenantTenantStatus) GetDeployStatusOk() (*string, bool) {
-	if o == nil || o.DeployStatus == nil {
+	if o == nil || IsNil(o.DeployStatus) {
 		return nil, false
 	}
 	return o.DeployStatus, true
@@ -128,7 +132,7 @@ func (o *IwotenantTenantStatus) GetDeployStatusOk() (*string, bool) {
 
 // HasDeployStatus returns a boolean if a field has been set.
 func (o *IwotenantTenantStatus) HasDeployStatus() bool {
-	if o != nil && o.DeployStatus != nil {
+	if o != nil && !IsNil(o.DeployStatus) {
 		return true
 	}
 
@@ -142,7 +146,7 @@ func (o *IwotenantTenantStatus) SetDeployStatus(v string) {
 
 // GetIwoId returns the IwoId field value if set, zero value otherwise.
 func (o *IwotenantTenantStatus) GetIwoId() string {
-	if o == nil || o.IwoId == nil {
+	if o == nil || IsNil(o.IwoId) {
 		var ret string
 		return ret
 	}
@@ -152,7 +156,7 @@ func (o *IwotenantTenantStatus) GetIwoId() string {
 // GetIwoIdOk returns a tuple with the IwoId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IwotenantTenantStatus) GetIwoIdOk() (*string, bool) {
-	if o == nil || o.IwoId == nil {
+	if o == nil || IsNil(o.IwoId) {
 		return nil, false
 	}
 	return o.IwoId, true
@@ -160,7 +164,7 @@ func (o *IwotenantTenantStatus) GetIwoIdOk() (*string, bool) {
 
 // HasIwoId returns a boolean if a field has been set.
 func (o *IwotenantTenantStatus) HasIwoId() bool {
-	if o != nil && o.IwoId != nil {
+	if o != nil && !IsNil(o.IwoId) {
 		return true
 	}
 
@@ -174,7 +178,7 @@ func (o *IwotenantTenantStatus) SetIwoId(v string) {
 
 // GetReferenceTime returns the ReferenceTime field value if set, zero value otherwise.
 func (o *IwotenantTenantStatus) GetReferenceTime() time.Time {
-	if o == nil || o.ReferenceTime == nil {
+	if o == nil || IsNil(o.ReferenceTime) {
 		var ret time.Time
 		return ret
 	}
@@ -184,7 +188,7 @@ func (o *IwotenantTenantStatus) GetReferenceTime() time.Time {
 // GetReferenceTimeOk returns a tuple with the ReferenceTime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IwotenantTenantStatus) GetReferenceTimeOk() (*time.Time, bool) {
-	if o == nil || o.ReferenceTime == nil {
+	if o == nil || IsNil(o.ReferenceTime) {
 		return nil, false
 	}
 	return o.ReferenceTime, true
@@ -192,7 +196,7 @@ func (o *IwotenantTenantStatus) GetReferenceTimeOk() (*time.Time, bool) {
 
 // HasReferenceTime returns a boolean if a field has been set.
 func (o *IwotenantTenantStatus) HasReferenceTime() bool {
-	if o != nil && o.ReferenceTime != nil {
+	if o != nil && !IsNil(o.ReferenceTime) {
 		return true
 	}
 
@@ -204,75 +208,112 @@ func (o *IwotenantTenantStatus) SetReferenceTime(v time.Time) {
 	o.ReferenceTime = &v
 }
 
-// GetAccount returns the Account field value if set, zero value otherwise.
+// GetAccount returns the Account field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *IwotenantTenantStatus) GetAccount() IamAccountRelationship {
-	if o == nil || o.Account == nil {
+	if o == nil || IsNil(o.Account.Get()) {
 		var ret IamAccountRelationship
 		return ret
 	}
-	return *o.Account
+	return *o.Account.Get()
 }
 
 // GetAccountOk returns a tuple with the Account field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *IwotenantTenantStatus) GetAccountOk() (*IamAccountRelationship, bool) {
-	if o == nil || o.Account == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Account, true
+	return o.Account.Get(), o.Account.IsSet()
 }
 
 // HasAccount returns a boolean if a field has been set.
 func (o *IwotenantTenantStatus) HasAccount() bool {
-	if o != nil && o.Account != nil {
+	if o != nil && o.Account.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetAccount gets a reference to the given IamAccountRelationship and assigns it to the Account field.
+// SetAccount gets a reference to the given NullableIamAccountRelationship and assigns it to the Account field.
 func (o *IwotenantTenantStatus) SetAccount(v IamAccountRelationship) {
-	o.Account = &v
+	o.Account.Set(&v)
+}
+
+// SetAccountNil sets the value for Account to be an explicit nil
+func (o *IwotenantTenantStatus) SetAccountNil() {
+	o.Account.Set(nil)
+}
+
+// UnsetAccount ensures that no value is present for Account, not even an explicit nil
+func (o *IwotenantTenantStatus) UnsetAccount() {
+	o.Account.Unset()
 }
 
 func (o IwotenantTenantStatus) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o IwotenantTenantStatus) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.DeployStatus != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.DeployStatus) {
 		toSerialize["DeployStatus"] = o.DeployStatus
 	}
-	if o.IwoId != nil {
+	if !IsNil(o.IwoId) {
 		toSerialize["IwoId"] = o.IwoId
 	}
-	if o.ReferenceTime != nil {
+	if !IsNil(o.ReferenceTime) {
 		toSerialize["ReferenceTime"] = o.ReferenceTime
 	}
-	if o.Account != nil {
-		toSerialize["Account"] = o.Account
+	if o.Account.IsSet() {
+		toSerialize["Account"] = o.Account.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *IwotenantTenantStatus) UnmarshalJSON(bytes []byte) (err error) {
+func (o *IwotenantTenantStatus) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type IwotenantTenantStatusWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -283,13 +324,13 @@ func (o *IwotenantTenantStatus) UnmarshalJSON(bytes []byte) (err error) {
 		// The iwoId uniquely identifies a IWO tenant. The iwoId is used as part of namespace, (logical) database names, policies in vault and many others. As of now, accountMoid has to be provided as the iwoId.
 		IwoId *string `json:"IwoId,omitempty"`
 		// During IWO tenant upgrade (or reconfiguration), deployStatus is set to InProgress and referenceTime set to current time. When tenant upgrade (or reconfiguration) does not complete within a pre-defined time using this as reference, deployStatus is set as Failed.
-		ReferenceTime *time.Time              `json:"ReferenceTime,omitempty"`
-		Account       *IamAccountRelationship `json:"Account,omitempty"`
+		ReferenceTime *time.Time                     `json:"ReferenceTime,omitempty"`
+		Account       NullableIamAccountRelationship `json:"Account,omitempty"`
 	}
 
 	varIwotenantTenantStatusWithoutEmbeddedStruct := IwotenantTenantStatusWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varIwotenantTenantStatusWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varIwotenantTenantStatusWithoutEmbeddedStruct)
 	if err == nil {
 		varIwotenantTenantStatus := _IwotenantTenantStatus{}
 		varIwotenantTenantStatus.ClassId = varIwotenantTenantStatusWithoutEmbeddedStruct.ClassId
@@ -305,7 +346,7 @@ func (o *IwotenantTenantStatus) UnmarshalJSON(bytes []byte) (err error) {
 
 	varIwotenantTenantStatus := _IwotenantTenantStatus{}
 
-	err = json.Unmarshal(bytes, &varIwotenantTenantStatus)
+	err = json.Unmarshal(data, &varIwotenantTenantStatus)
 	if err == nil {
 		o.MoBaseMo = varIwotenantTenantStatus.MoBaseMo
 	} else {
@@ -314,7 +355,7 @@ func (o *IwotenantTenantStatus) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "DeployStatus")

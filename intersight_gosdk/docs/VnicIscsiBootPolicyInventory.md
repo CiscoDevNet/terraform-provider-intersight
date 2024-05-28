@@ -13,11 +13,11 @@ Name | Type | Description | Notes
 **InitiatorStaticIpV4Config** | Pointer to [**NullableIppoolIpV4Config**](IppoolIpV4Config.md) |  | [optional] 
 **MutualChap** | Pointer to [**NullableVnicIscsiAuthProfile**](VnicIscsiAuthProfile.md) |  | [optional] 
 **TargetSourceType** | Pointer to **string** | Source Type of Targets - Auto/Static. * &#x60;Static&#x60; - Type indicates that static target interface is assigned to iSCSI boot. * &#x60;Auto&#x60; - Type indicates that the system selects the target interface automatically during iSCSI boot. | [optional] [readonly] [default to "Static"]
-**InitiatorIpPool** | Pointer to [**IppoolPoolRelationship**](IppoolPoolRelationship.md) |  | [optional] 
-**IscsiAdapterPolicy** | Pointer to [**VnicIscsiAdapterPolicyInventoryRelationship**](VnicIscsiAdapterPolicyInventoryRelationship.md) |  | [optional] 
-**PrimaryTargetPolicy** | Pointer to [**VnicIscsiStaticTargetPolicyInventoryRelationship**](VnicIscsiStaticTargetPolicyInventoryRelationship.md) |  | [optional] 
-**SecondaryTargetPolicy** | Pointer to [**VnicIscsiStaticTargetPolicyInventoryRelationship**](VnicIscsiStaticTargetPolicyInventoryRelationship.md) |  | [optional] 
-**TargetMo** | Pointer to [**MoBaseMoRelationship**](MoBaseMoRelationship.md) |  | [optional] 
+**InitiatorIpPool** | Pointer to [**NullableIppoolPoolRelationship**](IppoolPoolRelationship.md) |  | [optional] 
+**IscsiAdapterPolicy** | Pointer to [**NullableVnicIscsiAdapterPolicyInventoryRelationship**](VnicIscsiAdapterPolicyInventoryRelationship.md) |  | [optional] 
+**PrimaryTargetPolicy** | Pointer to [**NullableVnicIscsiStaticTargetPolicyInventoryRelationship**](VnicIscsiStaticTargetPolicyInventoryRelationship.md) |  | [optional] 
+**SecondaryTargetPolicy** | Pointer to [**NullableVnicIscsiStaticTargetPolicyInventoryRelationship**](VnicIscsiStaticTargetPolicyInventoryRelationship.md) |  | [optional] 
+**TargetMo** | Pointer to [**NullableMoBaseMoRelationship**](MoBaseMoRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -308,6 +308,16 @@ SetInitiatorIpPool sets InitiatorIpPool field to given value.
 
 HasInitiatorIpPool returns a boolean if a field has been set.
 
+### SetInitiatorIpPoolNil
+
+`func (o *VnicIscsiBootPolicyInventory) SetInitiatorIpPoolNil(b bool)`
+
+ SetInitiatorIpPoolNil sets the value for InitiatorIpPool to be an explicit nil
+
+### UnsetInitiatorIpPool
+`func (o *VnicIscsiBootPolicyInventory) UnsetInitiatorIpPool()`
+
+UnsetInitiatorIpPool ensures that no value is present for InitiatorIpPool, not even an explicit nil
 ### GetIscsiAdapterPolicy
 
 `func (o *VnicIscsiBootPolicyInventory) GetIscsiAdapterPolicy() VnicIscsiAdapterPolicyInventoryRelationship`
@@ -333,6 +343,16 @@ SetIscsiAdapterPolicy sets IscsiAdapterPolicy field to given value.
 
 HasIscsiAdapterPolicy returns a boolean if a field has been set.
 
+### SetIscsiAdapterPolicyNil
+
+`func (o *VnicIscsiBootPolicyInventory) SetIscsiAdapterPolicyNil(b bool)`
+
+ SetIscsiAdapterPolicyNil sets the value for IscsiAdapterPolicy to be an explicit nil
+
+### UnsetIscsiAdapterPolicy
+`func (o *VnicIscsiBootPolicyInventory) UnsetIscsiAdapterPolicy()`
+
+UnsetIscsiAdapterPolicy ensures that no value is present for IscsiAdapterPolicy, not even an explicit nil
 ### GetPrimaryTargetPolicy
 
 `func (o *VnicIscsiBootPolicyInventory) GetPrimaryTargetPolicy() VnicIscsiStaticTargetPolicyInventoryRelationship`
@@ -358,6 +378,16 @@ SetPrimaryTargetPolicy sets PrimaryTargetPolicy field to given value.
 
 HasPrimaryTargetPolicy returns a boolean if a field has been set.
 
+### SetPrimaryTargetPolicyNil
+
+`func (o *VnicIscsiBootPolicyInventory) SetPrimaryTargetPolicyNil(b bool)`
+
+ SetPrimaryTargetPolicyNil sets the value for PrimaryTargetPolicy to be an explicit nil
+
+### UnsetPrimaryTargetPolicy
+`func (o *VnicIscsiBootPolicyInventory) UnsetPrimaryTargetPolicy()`
+
+UnsetPrimaryTargetPolicy ensures that no value is present for PrimaryTargetPolicy, not even an explicit nil
 ### GetSecondaryTargetPolicy
 
 `func (o *VnicIscsiBootPolicyInventory) GetSecondaryTargetPolicy() VnicIscsiStaticTargetPolicyInventoryRelationship`
@@ -383,6 +413,16 @@ SetSecondaryTargetPolicy sets SecondaryTargetPolicy field to given value.
 
 HasSecondaryTargetPolicy returns a boolean if a field has been set.
 
+### SetSecondaryTargetPolicyNil
+
+`func (o *VnicIscsiBootPolicyInventory) SetSecondaryTargetPolicyNil(b bool)`
+
+ SetSecondaryTargetPolicyNil sets the value for SecondaryTargetPolicy to be an explicit nil
+
+### UnsetSecondaryTargetPolicy
+`func (o *VnicIscsiBootPolicyInventory) UnsetSecondaryTargetPolicy()`
+
+UnsetSecondaryTargetPolicy ensures that no value is present for SecondaryTargetPolicy, not even an explicit nil
 ### GetTargetMo
 
 `func (o *VnicIscsiBootPolicyInventory) GetTargetMo() MoBaseMoRelationship`
@@ -408,6 +448,16 @@ SetTargetMo sets TargetMo field to given value.
 
 HasTargetMo returns a boolean if a field has been set.
 
+### SetTargetMoNil
+
+`func (o *VnicIscsiBootPolicyInventory) SetTargetMoNil(b bool)`
+
+ SetTargetMoNil sets the value for TargetMo to be an explicit nil
+
+### UnsetTargetMo
+`func (o *VnicIscsiBootPolicyInventory) UnsetTargetMo()`
+
+UnsetTargetMo ensures that no value is present for TargetMo, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

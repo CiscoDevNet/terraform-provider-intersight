@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,10 +13,14 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 	"time"
 )
+
+// checks if the ApplianceBackupPolicy type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ApplianceBackupPolicy{}
 
 // ApplianceBackupPolicy BackupPolicy stores the Intersight Appliance's backup policy. There will be only one BackupPolicy managed object in the Intersight Appliance. Default backup policy managed object is created during the Intersight Appliance setup, and it is configured in the manual backup mode.
 type ApplianceBackupPolicy struct {
@@ -36,9 +40,9 @@ type ApplianceBackupPolicy struct {
 	// The number of backups before earliest backup is overwritten. Requires cleanup policy to be enabled.
 	RetentionCount *int64 `json:"RetentionCount,omitempty"`
 	// If backup rotate policy is set, older backups will automatically be overwritten. The number of backups before overwriting is defined by the retentionCount property.
-	RetentionPolicyEnabled *bool                   `json:"RetentionPolicyEnabled,omitempty"`
-	Schedule               NullableOnpremSchedule  `json:"Schedule,omitempty"`
-	Account                *IamAccountRelationship `json:"Account,omitempty"`
+	RetentionPolicyEnabled *bool                          `json:"RetentionPolicyEnabled,omitempty"`
+	Schedule               NullableOnpremSchedule         `json:"Schedule,omitempty"`
+	Account                NullableIamAccountRelationship `json:"Account,omitempty"`
 	AdditionalProperties   map[string]interface{}
 }
 
@@ -123,7 +127,7 @@ func (o *ApplianceBackupPolicy) SetObjectType(v string) {
 
 // GetBackupTime returns the BackupTime field value if set, zero value otherwise.
 func (o *ApplianceBackupPolicy) GetBackupTime() time.Time {
-	if o == nil || o.BackupTime == nil {
+	if o == nil || IsNil(o.BackupTime) {
 		var ret time.Time
 		return ret
 	}
@@ -133,7 +137,7 @@ func (o *ApplianceBackupPolicy) GetBackupTime() time.Time {
 // GetBackupTimeOk returns a tuple with the BackupTime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceBackupPolicy) GetBackupTimeOk() (*time.Time, bool) {
-	if o == nil || o.BackupTime == nil {
+	if o == nil || IsNil(o.BackupTime) {
 		return nil, false
 	}
 	return o.BackupTime, true
@@ -141,7 +145,7 @@ func (o *ApplianceBackupPolicy) GetBackupTimeOk() (*time.Time, bool) {
 
 // HasBackupTime returns a boolean if a field has been set.
 func (o *ApplianceBackupPolicy) HasBackupTime() bool {
-	if o != nil && o.BackupTime != nil {
+	if o != nil && !IsNil(o.BackupTime) {
 		return true
 	}
 
@@ -155,7 +159,7 @@ func (o *ApplianceBackupPolicy) SetBackupTime(v time.Time) {
 
 // GetIsPasswordSet returns the IsPasswordSet field value if set, zero value otherwise.
 func (o *ApplianceBackupPolicy) GetIsPasswordSet() bool {
-	if o == nil || o.IsPasswordSet == nil {
+	if o == nil || IsNil(o.IsPasswordSet) {
 		var ret bool
 		return ret
 	}
@@ -165,7 +169,7 @@ func (o *ApplianceBackupPolicy) GetIsPasswordSet() bool {
 // GetIsPasswordSetOk returns a tuple with the IsPasswordSet field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceBackupPolicy) GetIsPasswordSetOk() (*bool, bool) {
-	if o == nil || o.IsPasswordSet == nil {
+	if o == nil || IsNil(o.IsPasswordSet) {
 		return nil, false
 	}
 	return o.IsPasswordSet, true
@@ -173,7 +177,7 @@ func (o *ApplianceBackupPolicy) GetIsPasswordSetOk() (*bool, bool) {
 
 // HasIsPasswordSet returns a boolean if a field has been set.
 func (o *ApplianceBackupPolicy) HasIsPasswordSet() bool {
-	if o != nil && o.IsPasswordSet != nil {
+	if o != nil && !IsNil(o.IsPasswordSet) {
 		return true
 	}
 
@@ -187,7 +191,7 @@ func (o *ApplianceBackupPolicy) SetIsPasswordSet(v bool) {
 
 // GetManualBackup returns the ManualBackup field value if set, zero value otherwise.
 func (o *ApplianceBackupPolicy) GetManualBackup() bool {
-	if o == nil || o.ManualBackup == nil {
+	if o == nil || IsNil(o.ManualBackup) {
 		var ret bool
 		return ret
 	}
@@ -197,7 +201,7 @@ func (o *ApplianceBackupPolicy) GetManualBackup() bool {
 // GetManualBackupOk returns a tuple with the ManualBackup field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceBackupPolicy) GetManualBackupOk() (*bool, bool) {
-	if o == nil || o.ManualBackup == nil {
+	if o == nil || IsNil(o.ManualBackup) {
 		return nil, false
 	}
 	return o.ManualBackup, true
@@ -205,7 +209,7 @@ func (o *ApplianceBackupPolicy) GetManualBackupOk() (*bool, bool) {
 
 // HasManualBackup returns a boolean if a field has been set.
 func (o *ApplianceBackupPolicy) HasManualBackup() bool {
-	if o != nil && o.ManualBackup != nil {
+	if o != nil && !IsNil(o.ManualBackup) {
 		return true
 	}
 
@@ -219,7 +223,7 @@ func (o *ApplianceBackupPolicy) SetManualBackup(v bool) {
 
 // GetPassword returns the Password field value if set, zero value otherwise.
 func (o *ApplianceBackupPolicy) GetPassword() string {
-	if o == nil || o.Password == nil {
+	if o == nil || IsNil(o.Password) {
 		var ret string
 		return ret
 	}
@@ -229,7 +233,7 @@ func (o *ApplianceBackupPolicy) GetPassword() string {
 // GetPasswordOk returns a tuple with the Password field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceBackupPolicy) GetPasswordOk() (*string, bool) {
-	if o == nil || o.Password == nil {
+	if o == nil || IsNil(o.Password) {
 		return nil, false
 	}
 	return o.Password, true
@@ -237,7 +241,7 @@ func (o *ApplianceBackupPolicy) GetPasswordOk() (*string, bool) {
 
 // HasPassword returns a boolean if a field has been set.
 func (o *ApplianceBackupPolicy) HasPassword() bool {
-	if o != nil && o.Password != nil {
+	if o != nil && !IsNil(o.Password) {
 		return true
 	}
 
@@ -251,7 +255,7 @@ func (o *ApplianceBackupPolicy) SetPassword(v string) {
 
 // GetRetentionCount returns the RetentionCount field value if set, zero value otherwise.
 func (o *ApplianceBackupPolicy) GetRetentionCount() int64 {
-	if o == nil || o.RetentionCount == nil {
+	if o == nil || IsNil(o.RetentionCount) {
 		var ret int64
 		return ret
 	}
@@ -261,7 +265,7 @@ func (o *ApplianceBackupPolicy) GetRetentionCount() int64 {
 // GetRetentionCountOk returns a tuple with the RetentionCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceBackupPolicy) GetRetentionCountOk() (*int64, bool) {
-	if o == nil || o.RetentionCount == nil {
+	if o == nil || IsNil(o.RetentionCount) {
 		return nil, false
 	}
 	return o.RetentionCount, true
@@ -269,7 +273,7 @@ func (o *ApplianceBackupPolicy) GetRetentionCountOk() (*int64, bool) {
 
 // HasRetentionCount returns a boolean if a field has been set.
 func (o *ApplianceBackupPolicy) HasRetentionCount() bool {
-	if o != nil && o.RetentionCount != nil {
+	if o != nil && !IsNil(o.RetentionCount) {
 		return true
 	}
 
@@ -283,7 +287,7 @@ func (o *ApplianceBackupPolicy) SetRetentionCount(v int64) {
 
 // GetRetentionPolicyEnabled returns the RetentionPolicyEnabled field value if set, zero value otherwise.
 func (o *ApplianceBackupPolicy) GetRetentionPolicyEnabled() bool {
-	if o == nil || o.RetentionPolicyEnabled == nil {
+	if o == nil || IsNil(o.RetentionPolicyEnabled) {
 		var ret bool
 		return ret
 	}
@@ -293,7 +297,7 @@ func (o *ApplianceBackupPolicy) GetRetentionPolicyEnabled() bool {
 // GetRetentionPolicyEnabledOk returns a tuple with the RetentionPolicyEnabled field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceBackupPolicy) GetRetentionPolicyEnabledOk() (*bool, bool) {
-	if o == nil || o.RetentionPolicyEnabled == nil {
+	if o == nil || IsNil(o.RetentionPolicyEnabled) {
 		return nil, false
 	}
 	return o.RetentionPolicyEnabled, true
@@ -301,7 +305,7 @@ func (o *ApplianceBackupPolicy) GetRetentionPolicyEnabledOk() (*bool, bool) {
 
 // HasRetentionPolicyEnabled returns a boolean if a field has been set.
 func (o *ApplianceBackupPolicy) HasRetentionPolicyEnabled() bool {
-	if o != nil && o.RetentionPolicyEnabled != nil {
+	if o != nil && !IsNil(o.RetentionPolicyEnabled) {
 		return true
 	}
 
@@ -315,7 +319,7 @@ func (o *ApplianceBackupPolicy) SetRetentionPolicyEnabled(v bool) {
 
 // GetSchedule returns the Schedule field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ApplianceBackupPolicy) GetSchedule() OnpremSchedule {
-	if o == nil || o.Schedule.Get() == nil {
+	if o == nil || IsNil(o.Schedule.Get()) {
 		var ret OnpremSchedule
 		return ret
 	}
@@ -356,87 +360,124 @@ func (o *ApplianceBackupPolicy) UnsetSchedule() {
 	o.Schedule.Unset()
 }
 
-// GetAccount returns the Account field value if set, zero value otherwise.
+// GetAccount returns the Account field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ApplianceBackupPolicy) GetAccount() IamAccountRelationship {
-	if o == nil || o.Account == nil {
+	if o == nil || IsNil(o.Account.Get()) {
 		var ret IamAccountRelationship
 		return ret
 	}
-	return *o.Account
+	return *o.Account.Get()
 }
 
 // GetAccountOk returns a tuple with the Account field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ApplianceBackupPolicy) GetAccountOk() (*IamAccountRelationship, bool) {
-	if o == nil || o.Account == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Account, true
+	return o.Account.Get(), o.Account.IsSet()
 }
 
 // HasAccount returns a boolean if a field has been set.
 func (o *ApplianceBackupPolicy) HasAccount() bool {
-	if o != nil && o.Account != nil {
+	if o != nil && o.Account.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetAccount gets a reference to the given IamAccountRelationship and assigns it to the Account field.
+// SetAccount gets a reference to the given NullableIamAccountRelationship and assigns it to the Account field.
 func (o *ApplianceBackupPolicy) SetAccount(v IamAccountRelationship) {
-	o.Account = &v
+	o.Account.Set(&v)
+}
+
+// SetAccountNil sets the value for Account to be an explicit nil
+func (o *ApplianceBackupPolicy) SetAccountNil() {
+	o.Account.Set(nil)
+}
+
+// UnsetAccount ensures that no value is present for Account, not even an explicit nil
+func (o *ApplianceBackupPolicy) UnsetAccount() {
+	o.Account.Unset()
 }
 
 func (o ApplianceBackupPolicy) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o ApplianceBackupPolicy) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedApplianceBackupBase, errApplianceBackupBase := json.Marshal(o.ApplianceBackupBase)
 	if errApplianceBackupBase != nil {
-		return []byte{}, errApplianceBackupBase
+		return map[string]interface{}{}, errApplianceBackupBase
 	}
 	errApplianceBackupBase = json.Unmarshal([]byte(serializedApplianceBackupBase), &toSerialize)
 	if errApplianceBackupBase != nil {
-		return []byte{}, errApplianceBackupBase
+		return map[string]interface{}{}, errApplianceBackupBase
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.BackupTime != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.BackupTime) {
 		toSerialize["BackupTime"] = o.BackupTime
 	}
-	if o.IsPasswordSet != nil {
+	if !IsNil(o.IsPasswordSet) {
 		toSerialize["IsPasswordSet"] = o.IsPasswordSet
 	}
-	if o.ManualBackup != nil {
+	if !IsNil(o.ManualBackup) {
 		toSerialize["ManualBackup"] = o.ManualBackup
 	}
-	if o.Password != nil {
+	if !IsNil(o.Password) {
 		toSerialize["Password"] = o.Password
 	}
-	if o.RetentionCount != nil {
+	if !IsNil(o.RetentionCount) {
 		toSerialize["RetentionCount"] = o.RetentionCount
 	}
-	if o.RetentionPolicyEnabled != nil {
+	if !IsNil(o.RetentionPolicyEnabled) {
 		toSerialize["RetentionPolicyEnabled"] = o.RetentionPolicyEnabled
 	}
 	if o.Schedule.IsSet() {
 		toSerialize["Schedule"] = o.Schedule.Get()
 	}
-	if o.Account != nil {
-		toSerialize["Account"] = o.Account
+	if o.Account.IsSet() {
+		toSerialize["Account"] = o.Account.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *ApplianceBackupPolicy) UnmarshalJSON(bytes []byte) (err error) {
+func (o *ApplianceBackupPolicy) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type ApplianceBackupPolicyWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -453,14 +494,14 @@ func (o *ApplianceBackupPolicy) UnmarshalJSON(bytes []byte) (err error) {
 		// The number of backups before earliest backup is overwritten. Requires cleanup policy to be enabled.
 		RetentionCount *int64 `json:"RetentionCount,omitempty"`
 		// If backup rotate policy is set, older backups will automatically be overwritten. The number of backups before overwriting is defined by the retentionCount property.
-		RetentionPolicyEnabled *bool                   `json:"RetentionPolicyEnabled,omitempty"`
-		Schedule               NullableOnpremSchedule  `json:"Schedule,omitempty"`
-		Account                *IamAccountRelationship `json:"Account,omitempty"`
+		RetentionPolicyEnabled *bool                          `json:"RetentionPolicyEnabled,omitempty"`
+		Schedule               NullableOnpremSchedule         `json:"Schedule,omitempty"`
+		Account                NullableIamAccountRelationship `json:"Account,omitempty"`
 	}
 
 	varApplianceBackupPolicyWithoutEmbeddedStruct := ApplianceBackupPolicyWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varApplianceBackupPolicyWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varApplianceBackupPolicyWithoutEmbeddedStruct)
 	if err == nil {
 		varApplianceBackupPolicy := _ApplianceBackupPolicy{}
 		varApplianceBackupPolicy.ClassId = varApplianceBackupPolicyWithoutEmbeddedStruct.ClassId
@@ -480,7 +521,7 @@ func (o *ApplianceBackupPolicy) UnmarshalJSON(bytes []byte) (err error) {
 
 	varApplianceBackupPolicy := _ApplianceBackupPolicy{}
 
-	err = json.Unmarshal(bytes, &varApplianceBackupPolicy)
+	err = json.Unmarshal(data, &varApplianceBackupPolicy)
 	if err == nil {
 		o.ApplianceBackupBase = varApplianceBackupPolicy.ApplianceBackupBase
 	} else {
@@ -489,7 +530,7 @@ func (o *ApplianceBackupPolicy) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "BackupTime")

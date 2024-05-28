@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the NiatelemetryHcloudDetails type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &NiatelemetryHcloudDetails{}
 
 // NiatelemetryHcloudDetails Inventory object available per device scope. This common object holds a device level information.
 type NiatelemetryHcloudDetails struct {
@@ -46,8 +50,8 @@ type NiatelemetryHcloudDetails struct {
 	// Returns the total number of VPCs deployed in Azure/AWS platforms.
 	VpcCount *int64 `json:"VpcCount,omitempty"`
 	// Returns the total number of VPCs deployed in GCP.
-	VpcCountGcp          *int64                               `json:"VpcCountGcp,omitempty"`
-	RegisteredDevice     *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+	VpcCountGcp          *int64                                      `json:"VpcCountGcp,omitempty"`
+	RegisteredDevice     NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -126,7 +130,7 @@ func (o *NiatelemetryHcloudDetails) SetObjectType(v string) {
 
 // GetDn returns the Dn field value if set, zero value otherwise.
 func (o *NiatelemetryHcloudDetails) GetDn() string {
-	if o == nil || o.Dn == nil {
+	if o == nil || IsNil(o.Dn) {
 		var ret string
 		return ret
 	}
@@ -136,7 +140,7 @@ func (o *NiatelemetryHcloudDetails) GetDn() string {
 // GetDnOk returns a tuple with the Dn field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryHcloudDetails) GetDnOk() (*string, bool) {
-	if o == nil || o.Dn == nil {
+	if o == nil || IsNil(o.Dn) {
 		return nil, false
 	}
 	return o.Dn, true
@@ -144,7 +148,7 @@ func (o *NiatelemetryHcloudDetails) GetDnOk() (*string, bool) {
 
 // HasDn returns a boolean if a field has been set.
 func (o *NiatelemetryHcloudDetails) HasDn() bool {
-	if o != nil && o.Dn != nil {
+	if o != nil && !IsNil(o.Dn) {
 		return true
 	}
 
@@ -158,7 +162,7 @@ func (o *NiatelemetryHcloudDetails) SetDn(v string) {
 
 // GetEpgCount returns the EpgCount field value if set, zero value otherwise.
 func (o *NiatelemetryHcloudDetails) GetEpgCount() int64 {
-	if o == nil || o.EpgCount == nil {
+	if o == nil || IsNil(o.EpgCount) {
 		var ret int64
 		return ret
 	}
@@ -168,7 +172,7 @@ func (o *NiatelemetryHcloudDetails) GetEpgCount() int64 {
 // GetEpgCountOk returns a tuple with the EpgCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryHcloudDetails) GetEpgCountOk() (*int64, bool) {
-	if o == nil || o.EpgCount == nil {
+	if o == nil || IsNil(o.EpgCount) {
 		return nil, false
 	}
 	return o.EpgCount, true
@@ -176,7 +180,7 @@ func (o *NiatelemetryHcloudDetails) GetEpgCountOk() (*int64, bool) {
 
 // HasEpgCount returns a boolean if a field has been set.
 func (o *NiatelemetryHcloudDetails) HasEpgCount() bool {
-	if o != nil && o.EpgCount != nil {
+	if o != nil && !IsNil(o.EpgCount) {
 		return true
 	}
 
@@ -190,7 +194,7 @@ func (o *NiatelemetryHcloudDetails) SetEpgCount(v int64) {
 
 // GetRecordType returns the RecordType field value if set, zero value otherwise.
 func (o *NiatelemetryHcloudDetails) GetRecordType() string {
-	if o == nil || o.RecordType == nil {
+	if o == nil || IsNil(o.RecordType) {
 		var ret string
 		return ret
 	}
@@ -200,7 +204,7 @@ func (o *NiatelemetryHcloudDetails) GetRecordType() string {
 // GetRecordTypeOk returns a tuple with the RecordType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryHcloudDetails) GetRecordTypeOk() (*string, bool) {
-	if o == nil || o.RecordType == nil {
+	if o == nil || IsNil(o.RecordType) {
 		return nil, false
 	}
 	return o.RecordType, true
@@ -208,7 +212,7 @@ func (o *NiatelemetryHcloudDetails) GetRecordTypeOk() (*string, bool) {
 
 // HasRecordType returns a boolean if a field has been set.
 func (o *NiatelemetryHcloudDetails) HasRecordType() bool {
-	if o != nil && o.RecordType != nil {
+	if o != nil && !IsNil(o.RecordType) {
 		return true
 	}
 
@@ -222,7 +226,7 @@ func (o *NiatelemetryHcloudDetails) SetRecordType(v string) {
 
 // GetRecordVersion returns the RecordVersion field value if set, zero value otherwise.
 func (o *NiatelemetryHcloudDetails) GetRecordVersion() string {
-	if o == nil || o.RecordVersion == nil {
+	if o == nil || IsNil(o.RecordVersion) {
 		var ret string
 		return ret
 	}
@@ -232,7 +236,7 @@ func (o *NiatelemetryHcloudDetails) GetRecordVersion() string {
 // GetRecordVersionOk returns a tuple with the RecordVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryHcloudDetails) GetRecordVersionOk() (*string, bool) {
-	if o == nil || o.RecordVersion == nil {
+	if o == nil || IsNil(o.RecordVersion) {
 		return nil, false
 	}
 	return o.RecordVersion, true
@@ -240,7 +244,7 @@ func (o *NiatelemetryHcloudDetails) GetRecordVersionOk() (*string, bool) {
 
 // HasRecordVersion returns a boolean if a field has been set.
 func (o *NiatelemetryHcloudDetails) HasRecordVersion() bool {
-	if o != nil && o.RecordVersion != nil {
+	if o != nil && !IsNil(o.RecordVersion) {
 		return true
 	}
 
@@ -265,7 +269,7 @@ func (o *NiatelemetryHcloudDetails) GetRouter() []NiatelemetryCloudRoutersElemen
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *NiatelemetryHcloudDetails) GetRouterOk() ([]NiatelemetryCloudRoutersElement, bool) {
-	if o == nil || o.Router == nil {
+	if o == nil || IsNil(o.Router) {
 		return nil, false
 	}
 	return o.Router, true
@@ -273,7 +277,7 @@ func (o *NiatelemetryHcloudDetails) GetRouterOk() ([]NiatelemetryCloudRoutersEle
 
 // HasRouter returns a boolean if a field has been set.
 func (o *NiatelemetryHcloudDetails) HasRouter() bool {
-	if o != nil && o.Router != nil {
+	if o != nil && IsNil(o.Router) {
 		return true
 	}
 
@@ -287,7 +291,7 @@ func (o *NiatelemetryHcloudDetails) SetRouter(v []NiatelemetryCloudRoutersElemen
 
 // GetRouterCount returns the RouterCount field value if set, zero value otherwise.
 func (o *NiatelemetryHcloudDetails) GetRouterCount() int64 {
-	if o == nil || o.RouterCount == nil {
+	if o == nil || IsNil(o.RouterCount) {
 		var ret int64
 		return ret
 	}
@@ -297,7 +301,7 @@ func (o *NiatelemetryHcloudDetails) GetRouterCount() int64 {
 // GetRouterCountOk returns a tuple with the RouterCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryHcloudDetails) GetRouterCountOk() (*int64, bool) {
-	if o == nil || o.RouterCount == nil {
+	if o == nil || IsNil(o.RouterCount) {
 		return nil, false
 	}
 	return o.RouterCount, true
@@ -305,7 +309,7 @@ func (o *NiatelemetryHcloudDetails) GetRouterCountOk() (*int64, bool) {
 
 // HasRouterCount returns a boolean if a field has been set.
 func (o *NiatelemetryHcloudDetails) HasRouterCount() bool {
-	if o != nil && o.RouterCount != nil {
+	if o != nil && !IsNil(o.RouterCount) {
 		return true
 	}
 
@@ -319,7 +323,7 @@ func (o *NiatelemetryHcloudDetails) SetRouterCount(v int64) {
 
 // GetSiteName returns the SiteName field value if set, zero value otherwise.
 func (o *NiatelemetryHcloudDetails) GetSiteName() string {
-	if o == nil || o.SiteName == nil {
+	if o == nil || IsNil(o.SiteName) {
 		var ret string
 		return ret
 	}
@@ -329,7 +333,7 @@ func (o *NiatelemetryHcloudDetails) GetSiteName() string {
 // GetSiteNameOk returns a tuple with the SiteName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryHcloudDetails) GetSiteNameOk() (*string, bool) {
-	if o == nil || o.SiteName == nil {
+	if o == nil || IsNil(o.SiteName) {
 		return nil, false
 	}
 	return o.SiteName, true
@@ -337,7 +341,7 @@ func (o *NiatelemetryHcloudDetails) GetSiteNameOk() (*string, bool) {
 
 // HasSiteName returns a boolean if a field has been set.
 func (o *NiatelemetryHcloudDetails) HasSiteName() bool {
-	if o != nil && o.SiteName != nil {
+	if o != nil && !IsNil(o.SiteName) {
 		return true
 	}
 
@@ -351,7 +355,7 @@ func (o *NiatelemetryHcloudDetails) SetSiteName(v string) {
 
 // GetSubnetsAddress returns the SubnetsAddress field value if set, zero value otherwise.
 func (o *NiatelemetryHcloudDetails) GetSubnetsAddress() string {
-	if o == nil || o.SubnetsAddress == nil {
+	if o == nil || IsNil(o.SubnetsAddress) {
 		var ret string
 		return ret
 	}
@@ -361,7 +365,7 @@ func (o *NiatelemetryHcloudDetails) GetSubnetsAddress() string {
 // GetSubnetsAddressOk returns a tuple with the SubnetsAddress field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryHcloudDetails) GetSubnetsAddressOk() (*string, bool) {
-	if o == nil || o.SubnetsAddress == nil {
+	if o == nil || IsNil(o.SubnetsAddress) {
 		return nil, false
 	}
 	return o.SubnetsAddress, true
@@ -369,7 +373,7 @@ func (o *NiatelemetryHcloudDetails) GetSubnetsAddressOk() (*string, bool) {
 
 // HasSubnetsAddress returns a boolean if a field has been set.
 func (o *NiatelemetryHcloudDetails) HasSubnetsAddress() bool {
-	if o != nil && o.SubnetsAddress != nil {
+	if o != nil && !IsNil(o.SubnetsAddress) {
 		return true
 	}
 
@@ -383,7 +387,7 @@ func (o *NiatelemetryHcloudDetails) SetSubnetsAddress(v string) {
 
 // GetSubnetsCount returns the SubnetsCount field value if set, zero value otherwise.
 func (o *NiatelemetryHcloudDetails) GetSubnetsCount() int64 {
-	if o == nil || o.SubnetsCount == nil {
+	if o == nil || IsNil(o.SubnetsCount) {
 		var ret int64
 		return ret
 	}
@@ -393,7 +397,7 @@ func (o *NiatelemetryHcloudDetails) GetSubnetsCount() int64 {
 // GetSubnetsCountOk returns a tuple with the SubnetsCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryHcloudDetails) GetSubnetsCountOk() (*int64, bool) {
-	if o == nil || o.SubnetsCount == nil {
+	if o == nil || IsNil(o.SubnetsCount) {
 		return nil, false
 	}
 	return o.SubnetsCount, true
@@ -401,7 +405,7 @@ func (o *NiatelemetryHcloudDetails) GetSubnetsCountOk() (*int64, bool) {
 
 // HasSubnetsCount returns a boolean if a field has been set.
 func (o *NiatelemetryHcloudDetails) HasSubnetsCount() bool {
-	if o != nil && o.SubnetsCount != nil {
+	if o != nil && !IsNil(o.SubnetsCount) {
 		return true
 	}
 
@@ -415,7 +419,7 @@ func (o *NiatelemetryHcloudDetails) SetSubnetsCount(v int64) {
 
 // GetTransitGatewaysCount returns the TransitGatewaysCount field value if set, zero value otherwise.
 func (o *NiatelemetryHcloudDetails) GetTransitGatewaysCount() int64 {
-	if o == nil || o.TransitGatewaysCount == nil {
+	if o == nil || IsNil(o.TransitGatewaysCount) {
 		var ret int64
 		return ret
 	}
@@ -425,7 +429,7 @@ func (o *NiatelemetryHcloudDetails) GetTransitGatewaysCount() int64 {
 // GetTransitGatewaysCountOk returns a tuple with the TransitGatewaysCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryHcloudDetails) GetTransitGatewaysCountOk() (*int64, bool) {
-	if o == nil || o.TransitGatewaysCount == nil {
+	if o == nil || IsNil(o.TransitGatewaysCount) {
 		return nil, false
 	}
 	return o.TransitGatewaysCount, true
@@ -433,7 +437,7 @@ func (o *NiatelemetryHcloudDetails) GetTransitGatewaysCountOk() (*int64, bool) {
 
 // HasTransitGatewaysCount returns a boolean if a field has been set.
 func (o *NiatelemetryHcloudDetails) HasTransitGatewaysCount() bool {
-	if o != nil && o.TransitGatewaysCount != nil {
+	if o != nil && !IsNil(o.TransitGatewaysCount) {
 		return true
 	}
 
@@ -447,7 +451,7 @@ func (o *NiatelemetryHcloudDetails) SetTransitGatewaysCount(v int64) {
 
 // GetVpcCount returns the VpcCount field value if set, zero value otherwise.
 func (o *NiatelemetryHcloudDetails) GetVpcCount() int64 {
-	if o == nil || o.VpcCount == nil {
+	if o == nil || IsNil(o.VpcCount) {
 		var ret int64
 		return ret
 	}
@@ -457,7 +461,7 @@ func (o *NiatelemetryHcloudDetails) GetVpcCount() int64 {
 // GetVpcCountOk returns a tuple with the VpcCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryHcloudDetails) GetVpcCountOk() (*int64, bool) {
-	if o == nil || o.VpcCount == nil {
+	if o == nil || IsNil(o.VpcCount) {
 		return nil, false
 	}
 	return o.VpcCount, true
@@ -465,7 +469,7 @@ func (o *NiatelemetryHcloudDetails) GetVpcCountOk() (*int64, bool) {
 
 // HasVpcCount returns a boolean if a field has been set.
 func (o *NiatelemetryHcloudDetails) HasVpcCount() bool {
-	if o != nil && o.VpcCount != nil {
+	if o != nil && !IsNil(o.VpcCount) {
 		return true
 	}
 
@@ -479,7 +483,7 @@ func (o *NiatelemetryHcloudDetails) SetVpcCount(v int64) {
 
 // GetVpcCountGcp returns the VpcCountGcp field value if set, zero value otherwise.
 func (o *NiatelemetryHcloudDetails) GetVpcCountGcp() int64 {
-	if o == nil || o.VpcCountGcp == nil {
+	if o == nil || IsNil(o.VpcCountGcp) {
 		var ret int64
 		return ret
 	}
@@ -489,7 +493,7 @@ func (o *NiatelemetryHcloudDetails) GetVpcCountGcp() int64 {
 // GetVpcCountGcpOk returns a tuple with the VpcCountGcp field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryHcloudDetails) GetVpcCountGcpOk() (*int64, bool) {
-	if o == nil || o.VpcCountGcp == nil {
+	if o == nil || IsNil(o.VpcCountGcp) {
 		return nil, false
 	}
 	return o.VpcCountGcp, true
@@ -497,7 +501,7 @@ func (o *NiatelemetryHcloudDetails) GetVpcCountGcpOk() (*int64, bool) {
 
 // HasVpcCountGcp returns a boolean if a field has been set.
 func (o *NiatelemetryHcloudDetails) HasVpcCountGcp() bool {
-	if o != nil && o.VpcCountGcp != nil {
+	if o != nil && !IsNil(o.VpcCountGcp) {
 		return true
 	}
 
@@ -509,102 +513,139 @@ func (o *NiatelemetryHcloudDetails) SetVpcCountGcp(v int64) {
 	o.VpcCountGcp = &v
 }
 
-// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise.
+// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *NiatelemetryHcloudDetails) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil || IsNil(o.RegisteredDevice.Get()) {
 		var ret AssetDeviceRegistrationRelationship
 		return ret
 	}
-	return *o.RegisteredDevice
+	return *o.RegisteredDevice.Get()
 }
 
 // GetRegisteredDeviceOk returns a tuple with the RegisteredDevice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *NiatelemetryHcloudDetails) GetRegisteredDeviceOk() (*AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.RegisteredDevice, true
+	return o.RegisteredDevice.Get(), o.RegisteredDevice.IsSet()
 }
 
 // HasRegisteredDevice returns a boolean if a field has been set.
 func (o *NiatelemetryHcloudDetails) HasRegisteredDevice() bool {
-	if o != nil && o.RegisteredDevice != nil {
+	if o != nil && o.RegisteredDevice.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRegisteredDevice gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
+// SetRegisteredDevice gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
 func (o *NiatelemetryHcloudDetails) SetRegisteredDevice(v AssetDeviceRegistrationRelationship) {
-	o.RegisteredDevice = &v
+	o.RegisteredDevice.Set(&v)
+}
+
+// SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+func (o *NiatelemetryHcloudDetails) SetRegisteredDeviceNil() {
+	o.RegisteredDevice.Set(nil)
+}
+
+// UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
+func (o *NiatelemetryHcloudDetails) UnsetRegisteredDevice() {
+	o.RegisteredDevice.Unset()
 }
 
 func (o NiatelemetryHcloudDetails) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o NiatelemetryHcloudDetails) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Dn != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Dn) {
 		toSerialize["Dn"] = o.Dn
 	}
-	if o.EpgCount != nil {
+	if !IsNil(o.EpgCount) {
 		toSerialize["EpgCount"] = o.EpgCount
 	}
-	if o.RecordType != nil {
+	if !IsNil(o.RecordType) {
 		toSerialize["RecordType"] = o.RecordType
 	}
-	if o.RecordVersion != nil {
+	if !IsNil(o.RecordVersion) {
 		toSerialize["RecordVersion"] = o.RecordVersion
 	}
 	if o.Router != nil {
 		toSerialize["Router"] = o.Router
 	}
-	if o.RouterCount != nil {
+	if !IsNil(o.RouterCount) {
 		toSerialize["RouterCount"] = o.RouterCount
 	}
-	if o.SiteName != nil {
+	if !IsNil(o.SiteName) {
 		toSerialize["SiteName"] = o.SiteName
 	}
-	if o.SubnetsAddress != nil {
+	if !IsNil(o.SubnetsAddress) {
 		toSerialize["SubnetsAddress"] = o.SubnetsAddress
 	}
-	if o.SubnetsCount != nil {
+	if !IsNil(o.SubnetsCount) {
 		toSerialize["SubnetsCount"] = o.SubnetsCount
 	}
-	if o.TransitGatewaysCount != nil {
+	if !IsNil(o.TransitGatewaysCount) {
 		toSerialize["TransitGatewaysCount"] = o.TransitGatewaysCount
 	}
-	if o.VpcCount != nil {
+	if !IsNil(o.VpcCount) {
 		toSerialize["VpcCount"] = o.VpcCount
 	}
-	if o.VpcCountGcp != nil {
+	if !IsNil(o.VpcCountGcp) {
 		toSerialize["VpcCountGcp"] = o.VpcCountGcp
 	}
-	if o.RegisteredDevice != nil {
-		toSerialize["RegisteredDevice"] = o.RegisteredDevice
+	if o.RegisteredDevice.IsSet() {
+		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *NiatelemetryHcloudDetails) UnmarshalJSON(bytes []byte) (err error) {
+func (o *NiatelemetryHcloudDetails) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type NiatelemetryHcloudDetailsWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -632,13 +673,13 @@ func (o *NiatelemetryHcloudDetails) UnmarshalJSON(bytes []byte) (err error) {
 		// Returns the total number of VPCs deployed in Azure/AWS platforms.
 		VpcCount *int64 `json:"VpcCount,omitempty"`
 		// Returns the total number of VPCs deployed in GCP.
-		VpcCountGcp      *int64                               `json:"VpcCountGcp,omitempty"`
-		RegisteredDevice *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+		VpcCountGcp      *int64                                      `json:"VpcCountGcp,omitempty"`
+		RegisteredDevice NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	}
 
 	varNiatelemetryHcloudDetailsWithoutEmbeddedStruct := NiatelemetryHcloudDetailsWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varNiatelemetryHcloudDetailsWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varNiatelemetryHcloudDetailsWithoutEmbeddedStruct)
 	if err == nil {
 		varNiatelemetryHcloudDetails := _NiatelemetryHcloudDetails{}
 		varNiatelemetryHcloudDetails.ClassId = varNiatelemetryHcloudDetailsWithoutEmbeddedStruct.ClassId
@@ -663,7 +704,7 @@ func (o *NiatelemetryHcloudDetails) UnmarshalJSON(bytes []byte) (err error) {
 
 	varNiatelemetryHcloudDetails := _NiatelemetryHcloudDetails{}
 
-	err = json.Unmarshal(bytes, &varNiatelemetryHcloudDetails)
+	err = json.Unmarshal(data, &varNiatelemetryHcloudDetails)
 	if err == nil {
 		o.MoBaseMo = varNiatelemetryHcloudDetails.MoBaseMo
 	} else {
@@ -672,7 +713,7 @@ func (o *NiatelemetryHcloudDetails) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Dn")

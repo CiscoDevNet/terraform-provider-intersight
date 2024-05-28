@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,10 +13,14 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 	"time"
 )
+
+// checks if the WorkflowCatalogServiceRequest type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &WorkflowCatalogServiceRequest{}
 
 // WorkflowCatalogServiceRequest Catalog Service Request is one instance of a catalog item based on a catalog item definition.
 type WorkflowCatalogServiceRequest struct {
@@ -41,16 +45,16 @@ type WorkflowCatalogServiceRequest struct {
 	// Status of the catalog service request instance which determines the actions that are allowed on this instance. * `NotCreated` - The service item is not yet created and it is in a draft mode. A service item instance can be deleted in this state. * `InProgress` - An action is in progress and until that action has reached a final state, another action cannot be started. * `Failed` - The last action on the service item instance failed and corrective measures need to be taken to bring the service item instance back to valid state. * `Okay` - The last action on the service item instance completed and the service item instance is in Okay state. * `Decommissioned` - The service item is decommissioned and can be safely deleted. A service item instance in any other state after it has been created cannot be deleted until it has been decommissioned.
 	Status *string `json:"Status,omitempty"`
 	// The user identifier who invoked the request to create the catalog service request.
-	UserIdOrEmail         *string                                    `json:"UserIdOrEmail,omitempty"`
-	CatalogItemDefinition *WorkflowCatalogItemDefinitionRelationship `json:"CatalogItemDefinition,omitempty"`
-	Idp                   *IamIdpRelationship                        `json:"Idp,omitempty"`
-	IdpReference          *IamIdpReferenceRelationship               `json:"IdpReference,omitempty"`
-	Organization          *OrganizationOrganizationRelationship      `json:"Organization,omitempty"`
+	UserIdOrEmail         *string                                           `json:"UserIdOrEmail,omitempty"`
+	CatalogItemDefinition NullableWorkflowCatalogItemDefinitionRelationship `json:"CatalogItemDefinition,omitempty"`
+	Idp                   NullableIamIdpRelationship                        `json:"Idp,omitempty"`
+	IdpReference          NullableIamIdpReferenceRelationship               `json:"IdpReference,omitempty"`
+	Organization          NullableOrganizationOrganizationRelationship      `json:"Organization,omitempty"`
 	// An array of relationships to workflowServiceItemActionInstance resources.
 	ServiceItemActionInstances []WorkflowServiceItemActionInstanceRelationship `json:"ServiceItemActionInstances,omitempty"`
 	// An array of relationships to workflowServiceItemInstance resources.
 	ServiceItemInstances []WorkflowServiceItemInstanceRelationship `json:"ServiceItemInstances,omitempty"`
-	User                 *IamUserRelationship                      `json:"User,omitempty"`
+	User                 NullableIamUserRelationship               `json:"User,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -129,7 +133,7 @@ func (o *WorkflowCatalogServiceRequest) SetObjectType(v string) {
 
 // GetDescription returns the Description field value if set, zero value otherwise.
 func (o *WorkflowCatalogServiceRequest) GetDescription() string {
-	if o == nil || o.Description == nil {
+	if o == nil || IsNil(o.Description) {
 		var ret string
 		return ret
 	}
@@ -139,7 +143,7 @@ func (o *WorkflowCatalogServiceRequest) GetDescription() string {
 // GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowCatalogServiceRequest) GetDescriptionOk() (*string, bool) {
-	if o == nil || o.Description == nil {
+	if o == nil || IsNil(o.Description) {
 		return nil, false
 	}
 	return o.Description, true
@@ -147,7 +151,7 @@ func (o *WorkflowCatalogServiceRequest) GetDescriptionOk() (*string, bool) {
 
 // HasDescription returns a boolean if a field has been set.
 func (o *WorkflowCatalogServiceRequest) HasDescription() bool {
-	if o != nil && o.Description != nil {
+	if o != nil && !IsNil(o.Description) {
 		return true
 	}
 
@@ -161,7 +165,7 @@ func (o *WorkflowCatalogServiceRequest) SetDescription(v string) {
 
 // GetEndTime returns the EndTime field value if set, zero value otherwise.
 func (o *WorkflowCatalogServiceRequest) GetEndTime() time.Time {
-	if o == nil || o.EndTime == nil {
+	if o == nil || IsNil(o.EndTime) {
 		var ret time.Time
 		return ret
 	}
@@ -171,7 +175,7 @@ func (o *WorkflowCatalogServiceRequest) GetEndTime() time.Time {
 // GetEndTimeOk returns a tuple with the EndTime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowCatalogServiceRequest) GetEndTimeOk() (*time.Time, bool) {
-	if o == nil || o.EndTime == nil {
+	if o == nil || IsNil(o.EndTime) {
 		return nil, false
 	}
 	return o.EndTime, true
@@ -179,7 +183,7 @@ func (o *WorkflowCatalogServiceRequest) GetEndTimeOk() (*time.Time, bool) {
 
 // HasEndTime returns a boolean if a field has been set.
 func (o *WorkflowCatalogServiceRequest) HasEndTime() bool {
-	if o != nil && o.EndTime != nil {
+	if o != nil && !IsNil(o.EndTime) {
 		return true
 	}
 
@@ -204,7 +208,7 @@ func (o *WorkflowCatalogServiceRequest) GetInput() interface{} {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *WorkflowCatalogServiceRequest) GetInputOk() (*interface{}, bool) {
-	if o == nil || o.Input == nil {
+	if o == nil || IsNil(o.Input) {
 		return nil, false
 	}
 	return &o.Input, true
@@ -212,7 +216,7 @@ func (o *WorkflowCatalogServiceRequest) GetInputOk() (*interface{}, bool) {
 
 // HasInput returns a boolean if a field has been set.
 func (o *WorkflowCatalogServiceRequest) HasInput() bool {
-	if o != nil && o.Input != nil {
+	if o != nil && IsNil(o.Input) {
 		return true
 	}
 
@@ -226,7 +230,7 @@ func (o *WorkflowCatalogServiceRequest) SetInput(v interface{}) {
 
 // GetLabel returns the Label field value if set, zero value otherwise.
 func (o *WorkflowCatalogServiceRequest) GetLabel() string {
-	if o == nil || o.Label == nil {
+	if o == nil || IsNil(o.Label) {
 		var ret string
 		return ret
 	}
@@ -236,7 +240,7 @@ func (o *WorkflowCatalogServiceRequest) GetLabel() string {
 // GetLabelOk returns a tuple with the Label field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowCatalogServiceRequest) GetLabelOk() (*string, bool) {
-	if o == nil || o.Label == nil {
+	if o == nil || IsNil(o.Label) {
 		return nil, false
 	}
 	return o.Label, true
@@ -244,7 +248,7 @@ func (o *WorkflowCatalogServiceRequest) GetLabelOk() (*string, bool) {
 
 // HasLabel returns a boolean if a field has been set.
 func (o *WorkflowCatalogServiceRequest) HasLabel() bool {
-	if o != nil && o.Label != nil {
+	if o != nil && !IsNil(o.Label) {
 		return true
 	}
 
@@ -269,7 +273,7 @@ func (o *WorkflowCatalogServiceRequest) GetMessages() []ServicerequestMessage {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *WorkflowCatalogServiceRequest) GetMessagesOk() ([]ServicerequestMessage, bool) {
-	if o == nil || o.Messages == nil {
+	if o == nil || IsNil(o.Messages) {
 		return nil, false
 	}
 	return o.Messages, true
@@ -277,7 +281,7 @@ func (o *WorkflowCatalogServiceRequest) GetMessagesOk() ([]ServicerequestMessage
 
 // HasMessages returns a boolean if a field has been set.
 func (o *WorkflowCatalogServiceRequest) HasMessages() bool {
-	if o != nil && o.Messages != nil {
+	if o != nil && IsNil(o.Messages) {
 		return true
 	}
 
@@ -291,7 +295,7 @@ func (o *WorkflowCatalogServiceRequest) SetMessages(v []ServicerequestMessage) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *WorkflowCatalogServiceRequest) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -301,7 +305,7 @@ func (o *WorkflowCatalogServiceRequest) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowCatalogServiceRequest) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -309,7 +313,7 @@ func (o *WorkflowCatalogServiceRequest) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *WorkflowCatalogServiceRequest) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -323,7 +327,7 @@ func (o *WorkflowCatalogServiceRequest) SetName(v string) {
 
 // GetOperation returns the Operation field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *WorkflowCatalogServiceRequest) GetOperation() WorkflowBaseOperation {
-	if o == nil || o.Operation.Get() == nil {
+	if o == nil || IsNil(o.Operation.Get()) {
 		var ret WorkflowBaseOperation
 		return ret
 	}
@@ -377,7 +381,7 @@ func (o *WorkflowCatalogServiceRequest) GetSelectionCriteriaInputs() []Serviceit
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *WorkflowCatalogServiceRequest) GetSelectionCriteriaInputsOk() ([]ServiceitemSelectionCriteriaInput, bool) {
-	if o == nil || o.SelectionCriteriaInputs == nil {
+	if o == nil || IsNil(o.SelectionCriteriaInputs) {
 		return nil, false
 	}
 	return o.SelectionCriteriaInputs, true
@@ -385,7 +389,7 @@ func (o *WorkflowCatalogServiceRequest) GetSelectionCriteriaInputsOk() ([]Servic
 
 // HasSelectionCriteriaInputs returns a boolean if a field has been set.
 func (o *WorkflowCatalogServiceRequest) HasSelectionCriteriaInputs() bool {
-	if o != nil && o.SelectionCriteriaInputs != nil {
+	if o != nil && IsNil(o.SelectionCriteriaInputs) {
 		return true
 	}
 
@@ -399,7 +403,7 @@ func (o *WorkflowCatalogServiceRequest) SetSelectionCriteriaInputs(v []Serviceit
 
 // GetStatus returns the Status field value if set, zero value otherwise.
 func (o *WorkflowCatalogServiceRequest) GetStatus() string {
-	if o == nil || o.Status == nil {
+	if o == nil || IsNil(o.Status) {
 		var ret string
 		return ret
 	}
@@ -409,7 +413,7 @@ func (o *WorkflowCatalogServiceRequest) GetStatus() string {
 // GetStatusOk returns a tuple with the Status field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowCatalogServiceRequest) GetStatusOk() (*string, bool) {
-	if o == nil || o.Status == nil {
+	if o == nil || IsNil(o.Status) {
 		return nil, false
 	}
 	return o.Status, true
@@ -417,7 +421,7 @@ func (o *WorkflowCatalogServiceRequest) GetStatusOk() (*string, bool) {
 
 // HasStatus returns a boolean if a field has been set.
 func (o *WorkflowCatalogServiceRequest) HasStatus() bool {
-	if o != nil && o.Status != nil {
+	if o != nil && !IsNil(o.Status) {
 		return true
 	}
 
@@ -431,7 +435,7 @@ func (o *WorkflowCatalogServiceRequest) SetStatus(v string) {
 
 // GetUserIdOrEmail returns the UserIdOrEmail field value if set, zero value otherwise.
 func (o *WorkflowCatalogServiceRequest) GetUserIdOrEmail() string {
-	if o == nil || o.UserIdOrEmail == nil {
+	if o == nil || IsNil(o.UserIdOrEmail) {
 		var ret string
 		return ret
 	}
@@ -441,7 +445,7 @@ func (o *WorkflowCatalogServiceRequest) GetUserIdOrEmail() string {
 // GetUserIdOrEmailOk returns a tuple with the UserIdOrEmail field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowCatalogServiceRequest) GetUserIdOrEmailOk() (*string, bool) {
-	if o == nil || o.UserIdOrEmail == nil {
+	if o == nil || IsNil(o.UserIdOrEmail) {
 		return nil, false
 	}
 	return o.UserIdOrEmail, true
@@ -449,7 +453,7 @@ func (o *WorkflowCatalogServiceRequest) GetUserIdOrEmailOk() (*string, bool) {
 
 // HasUserIdOrEmail returns a boolean if a field has been set.
 func (o *WorkflowCatalogServiceRequest) HasUserIdOrEmail() bool {
-	if o != nil && o.UserIdOrEmail != nil {
+	if o != nil && !IsNil(o.UserIdOrEmail) {
 		return true
 	}
 
@@ -461,132 +465,176 @@ func (o *WorkflowCatalogServiceRequest) SetUserIdOrEmail(v string) {
 	o.UserIdOrEmail = &v
 }
 
-// GetCatalogItemDefinition returns the CatalogItemDefinition field value if set, zero value otherwise.
+// GetCatalogItemDefinition returns the CatalogItemDefinition field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *WorkflowCatalogServiceRequest) GetCatalogItemDefinition() WorkflowCatalogItemDefinitionRelationship {
-	if o == nil || o.CatalogItemDefinition == nil {
+	if o == nil || IsNil(o.CatalogItemDefinition.Get()) {
 		var ret WorkflowCatalogItemDefinitionRelationship
 		return ret
 	}
-	return *o.CatalogItemDefinition
+	return *o.CatalogItemDefinition.Get()
 }
 
 // GetCatalogItemDefinitionOk returns a tuple with the CatalogItemDefinition field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *WorkflowCatalogServiceRequest) GetCatalogItemDefinitionOk() (*WorkflowCatalogItemDefinitionRelationship, bool) {
-	if o == nil || o.CatalogItemDefinition == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.CatalogItemDefinition, true
+	return o.CatalogItemDefinition.Get(), o.CatalogItemDefinition.IsSet()
 }
 
 // HasCatalogItemDefinition returns a boolean if a field has been set.
 func (o *WorkflowCatalogServiceRequest) HasCatalogItemDefinition() bool {
-	if o != nil && o.CatalogItemDefinition != nil {
+	if o != nil && o.CatalogItemDefinition.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetCatalogItemDefinition gets a reference to the given WorkflowCatalogItemDefinitionRelationship and assigns it to the CatalogItemDefinition field.
+// SetCatalogItemDefinition gets a reference to the given NullableWorkflowCatalogItemDefinitionRelationship and assigns it to the CatalogItemDefinition field.
 func (o *WorkflowCatalogServiceRequest) SetCatalogItemDefinition(v WorkflowCatalogItemDefinitionRelationship) {
-	o.CatalogItemDefinition = &v
+	o.CatalogItemDefinition.Set(&v)
 }
 
-// GetIdp returns the Idp field value if set, zero value otherwise.
+// SetCatalogItemDefinitionNil sets the value for CatalogItemDefinition to be an explicit nil
+func (o *WorkflowCatalogServiceRequest) SetCatalogItemDefinitionNil() {
+	o.CatalogItemDefinition.Set(nil)
+}
+
+// UnsetCatalogItemDefinition ensures that no value is present for CatalogItemDefinition, not even an explicit nil
+func (o *WorkflowCatalogServiceRequest) UnsetCatalogItemDefinition() {
+	o.CatalogItemDefinition.Unset()
+}
+
+// GetIdp returns the Idp field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *WorkflowCatalogServiceRequest) GetIdp() IamIdpRelationship {
-	if o == nil || o.Idp == nil {
+	if o == nil || IsNil(o.Idp.Get()) {
 		var ret IamIdpRelationship
 		return ret
 	}
-	return *o.Idp
+	return *o.Idp.Get()
 }
 
 // GetIdpOk returns a tuple with the Idp field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *WorkflowCatalogServiceRequest) GetIdpOk() (*IamIdpRelationship, bool) {
-	if o == nil || o.Idp == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Idp, true
+	return o.Idp.Get(), o.Idp.IsSet()
 }
 
 // HasIdp returns a boolean if a field has been set.
 func (o *WorkflowCatalogServiceRequest) HasIdp() bool {
-	if o != nil && o.Idp != nil {
+	if o != nil && o.Idp.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetIdp gets a reference to the given IamIdpRelationship and assigns it to the Idp field.
+// SetIdp gets a reference to the given NullableIamIdpRelationship and assigns it to the Idp field.
 func (o *WorkflowCatalogServiceRequest) SetIdp(v IamIdpRelationship) {
-	o.Idp = &v
+	o.Idp.Set(&v)
 }
 
-// GetIdpReference returns the IdpReference field value if set, zero value otherwise.
+// SetIdpNil sets the value for Idp to be an explicit nil
+func (o *WorkflowCatalogServiceRequest) SetIdpNil() {
+	o.Idp.Set(nil)
+}
+
+// UnsetIdp ensures that no value is present for Idp, not even an explicit nil
+func (o *WorkflowCatalogServiceRequest) UnsetIdp() {
+	o.Idp.Unset()
+}
+
+// GetIdpReference returns the IdpReference field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *WorkflowCatalogServiceRequest) GetIdpReference() IamIdpReferenceRelationship {
-	if o == nil || o.IdpReference == nil {
+	if o == nil || IsNil(o.IdpReference.Get()) {
 		var ret IamIdpReferenceRelationship
 		return ret
 	}
-	return *o.IdpReference
+	return *o.IdpReference.Get()
 }
 
 // GetIdpReferenceOk returns a tuple with the IdpReference field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *WorkflowCatalogServiceRequest) GetIdpReferenceOk() (*IamIdpReferenceRelationship, bool) {
-	if o == nil || o.IdpReference == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.IdpReference, true
+	return o.IdpReference.Get(), o.IdpReference.IsSet()
 }
 
 // HasIdpReference returns a boolean if a field has been set.
 func (o *WorkflowCatalogServiceRequest) HasIdpReference() bool {
-	if o != nil && o.IdpReference != nil {
+	if o != nil && o.IdpReference.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetIdpReference gets a reference to the given IamIdpReferenceRelationship and assigns it to the IdpReference field.
+// SetIdpReference gets a reference to the given NullableIamIdpReferenceRelationship and assigns it to the IdpReference field.
 func (o *WorkflowCatalogServiceRequest) SetIdpReference(v IamIdpReferenceRelationship) {
-	o.IdpReference = &v
+	o.IdpReference.Set(&v)
 }
 
-// GetOrganization returns the Organization field value if set, zero value otherwise.
+// SetIdpReferenceNil sets the value for IdpReference to be an explicit nil
+func (o *WorkflowCatalogServiceRequest) SetIdpReferenceNil() {
+	o.IdpReference.Set(nil)
+}
+
+// UnsetIdpReference ensures that no value is present for IdpReference, not even an explicit nil
+func (o *WorkflowCatalogServiceRequest) UnsetIdpReference() {
+	o.IdpReference.Unset()
+}
+
+// GetOrganization returns the Organization field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *WorkflowCatalogServiceRequest) GetOrganization() OrganizationOrganizationRelationship {
-	if o == nil || o.Organization == nil {
+	if o == nil || IsNil(o.Organization.Get()) {
 		var ret OrganizationOrganizationRelationship
 		return ret
 	}
-	return *o.Organization
+	return *o.Organization.Get()
 }
 
 // GetOrganizationOk returns a tuple with the Organization field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *WorkflowCatalogServiceRequest) GetOrganizationOk() (*OrganizationOrganizationRelationship, bool) {
-	if o == nil || o.Organization == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Organization, true
+	return o.Organization.Get(), o.Organization.IsSet()
 }
 
 // HasOrganization returns a boolean if a field has been set.
 func (o *WorkflowCatalogServiceRequest) HasOrganization() bool {
-	if o != nil && o.Organization != nil {
+	if o != nil && o.Organization.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetOrganization gets a reference to the given OrganizationOrganizationRelationship and assigns it to the Organization field.
+// SetOrganization gets a reference to the given NullableOrganizationOrganizationRelationship and assigns it to the Organization field.
 func (o *WorkflowCatalogServiceRequest) SetOrganization(v OrganizationOrganizationRelationship) {
-	o.Organization = &v
+	o.Organization.Set(&v)
+}
+
+// SetOrganizationNil sets the value for Organization to be an explicit nil
+func (o *WorkflowCatalogServiceRequest) SetOrganizationNil() {
+	o.Organization.Set(nil)
+}
+
+// UnsetOrganization ensures that no value is present for Organization, not even an explicit nil
+func (o *WorkflowCatalogServiceRequest) UnsetOrganization() {
+	o.Organization.Unset()
 }
 
 // GetServiceItemActionInstances returns the ServiceItemActionInstances field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -602,7 +650,7 @@ func (o *WorkflowCatalogServiceRequest) GetServiceItemActionInstances() []Workfl
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *WorkflowCatalogServiceRequest) GetServiceItemActionInstancesOk() ([]WorkflowServiceItemActionInstanceRelationship, bool) {
-	if o == nil || o.ServiceItemActionInstances == nil {
+	if o == nil || IsNil(o.ServiceItemActionInstances) {
 		return nil, false
 	}
 	return o.ServiceItemActionInstances, true
@@ -610,7 +658,7 @@ func (o *WorkflowCatalogServiceRequest) GetServiceItemActionInstancesOk() ([]Wor
 
 // HasServiceItemActionInstances returns a boolean if a field has been set.
 func (o *WorkflowCatalogServiceRequest) HasServiceItemActionInstances() bool {
-	if o != nil && o.ServiceItemActionInstances != nil {
+	if o != nil && IsNil(o.ServiceItemActionInstances) {
 		return true
 	}
 
@@ -635,7 +683,7 @@ func (o *WorkflowCatalogServiceRequest) GetServiceItemInstances() []WorkflowServ
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *WorkflowCatalogServiceRequest) GetServiceItemInstancesOk() ([]WorkflowServiceItemInstanceRelationship, bool) {
-	if o == nil || o.ServiceItemInstances == nil {
+	if o == nil || IsNil(o.ServiceItemInstances) {
 		return nil, false
 	}
 	return o.ServiceItemInstances, true
@@ -643,7 +691,7 @@ func (o *WorkflowCatalogServiceRequest) GetServiceItemInstancesOk() ([]WorkflowS
 
 // HasServiceItemInstances returns a boolean if a field has been set.
 func (o *WorkflowCatalogServiceRequest) HasServiceItemInstances() bool {
-	if o != nil && o.ServiceItemInstances != nil {
+	if o != nil && IsNil(o.ServiceItemInstances) {
 		return true
 	}
 
@@ -655,70 +703,85 @@ func (o *WorkflowCatalogServiceRequest) SetServiceItemInstances(v []WorkflowServ
 	o.ServiceItemInstances = v
 }
 
-// GetUser returns the User field value if set, zero value otherwise.
+// GetUser returns the User field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *WorkflowCatalogServiceRequest) GetUser() IamUserRelationship {
-	if o == nil || o.User == nil {
+	if o == nil || IsNil(o.User.Get()) {
 		var ret IamUserRelationship
 		return ret
 	}
-	return *o.User
+	return *o.User.Get()
 }
 
 // GetUserOk returns a tuple with the User field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *WorkflowCatalogServiceRequest) GetUserOk() (*IamUserRelationship, bool) {
-	if o == nil || o.User == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.User, true
+	return o.User.Get(), o.User.IsSet()
 }
 
 // HasUser returns a boolean if a field has been set.
 func (o *WorkflowCatalogServiceRequest) HasUser() bool {
-	if o != nil && o.User != nil {
+	if o != nil && o.User.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetUser gets a reference to the given IamUserRelationship and assigns it to the User field.
+// SetUser gets a reference to the given NullableIamUserRelationship and assigns it to the User field.
 func (o *WorkflowCatalogServiceRequest) SetUser(v IamUserRelationship) {
-	o.User = &v
+	o.User.Set(&v)
+}
+
+// SetUserNil sets the value for User to be an explicit nil
+func (o *WorkflowCatalogServiceRequest) SetUserNil() {
+	o.User.Set(nil)
+}
+
+// UnsetUser ensures that no value is present for User, not even an explicit nil
+func (o *WorkflowCatalogServiceRequest) UnsetUser() {
+	o.User.Unset()
 }
 
 func (o WorkflowCatalogServiceRequest) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o WorkflowCatalogServiceRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Description != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Description) {
 		toSerialize["Description"] = o.Description
 	}
-	if o.EndTime != nil {
+	if !IsNil(o.EndTime) {
 		toSerialize["EndTime"] = o.EndTime
 	}
 	if o.Input != nil {
 		toSerialize["Input"] = o.Input
 	}
-	if o.Label != nil {
+	if !IsNil(o.Label) {
 		toSerialize["Label"] = o.Label
 	}
 	if o.Messages != nil {
 		toSerialize["Messages"] = o.Messages
 	}
-	if o.Name != nil {
+	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
 	}
 	if o.Operation.IsSet() {
@@ -727,23 +790,23 @@ func (o WorkflowCatalogServiceRequest) MarshalJSON() ([]byte, error) {
 	if o.SelectionCriteriaInputs != nil {
 		toSerialize["SelectionCriteriaInputs"] = o.SelectionCriteriaInputs
 	}
-	if o.Status != nil {
+	if !IsNil(o.Status) {
 		toSerialize["Status"] = o.Status
 	}
-	if o.UserIdOrEmail != nil {
+	if !IsNil(o.UserIdOrEmail) {
 		toSerialize["UserIdOrEmail"] = o.UserIdOrEmail
 	}
-	if o.CatalogItemDefinition != nil {
-		toSerialize["CatalogItemDefinition"] = o.CatalogItemDefinition
+	if o.CatalogItemDefinition.IsSet() {
+		toSerialize["CatalogItemDefinition"] = o.CatalogItemDefinition.Get()
 	}
-	if o.Idp != nil {
-		toSerialize["Idp"] = o.Idp
+	if o.Idp.IsSet() {
+		toSerialize["Idp"] = o.Idp.Get()
 	}
-	if o.IdpReference != nil {
-		toSerialize["IdpReference"] = o.IdpReference
+	if o.IdpReference.IsSet() {
+		toSerialize["IdpReference"] = o.IdpReference.Get()
 	}
-	if o.Organization != nil {
-		toSerialize["Organization"] = o.Organization
+	if o.Organization.IsSet() {
+		toSerialize["Organization"] = o.Organization.Get()
 	}
 	if o.ServiceItemActionInstances != nil {
 		toSerialize["ServiceItemActionInstances"] = o.ServiceItemActionInstances
@@ -751,18 +814,40 @@ func (o WorkflowCatalogServiceRequest) MarshalJSON() ([]byte, error) {
 	if o.ServiceItemInstances != nil {
 		toSerialize["ServiceItemInstances"] = o.ServiceItemInstances
 	}
-	if o.User != nil {
-		toSerialize["User"] = o.User
+	if o.User.IsSet() {
+		toSerialize["User"] = o.User.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *WorkflowCatalogServiceRequest) UnmarshalJSON(bytes []byte) (err error) {
+func (o *WorkflowCatalogServiceRequest) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type WorkflowCatalogServiceRequestWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -784,21 +869,21 @@ func (o *WorkflowCatalogServiceRequest) UnmarshalJSON(bytes []byte) (err error) 
 		// Status of the catalog service request instance which determines the actions that are allowed on this instance. * `NotCreated` - The service item is not yet created and it is in a draft mode. A service item instance can be deleted in this state. * `InProgress` - An action is in progress and until that action has reached a final state, another action cannot be started. * `Failed` - The last action on the service item instance failed and corrective measures need to be taken to bring the service item instance back to valid state. * `Okay` - The last action on the service item instance completed and the service item instance is in Okay state. * `Decommissioned` - The service item is decommissioned and can be safely deleted. A service item instance in any other state after it has been created cannot be deleted until it has been decommissioned.
 		Status *string `json:"Status,omitempty"`
 		// The user identifier who invoked the request to create the catalog service request.
-		UserIdOrEmail         *string                                    `json:"UserIdOrEmail,omitempty"`
-		CatalogItemDefinition *WorkflowCatalogItemDefinitionRelationship `json:"CatalogItemDefinition,omitempty"`
-		Idp                   *IamIdpRelationship                        `json:"Idp,omitempty"`
-		IdpReference          *IamIdpReferenceRelationship               `json:"IdpReference,omitempty"`
-		Organization          *OrganizationOrganizationRelationship      `json:"Organization,omitempty"`
+		UserIdOrEmail         *string                                           `json:"UserIdOrEmail,omitempty"`
+		CatalogItemDefinition NullableWorkflowCatalogItemDefinitionRelationship `json:"CatalogItemDefinition,omitempty"`
+		Idp                   NullableIamIdpRelationship                        `json:"Idp,omitempty"`
+		IdpReference          NullableIamIdpReferenceRelationship               `json:"IdpReference,omitempty"`
+		Organization          NullableOrganizationOrganizationRelationship      `json:"Organization,omitempty"`
 		// An array of relationships to workflowServiceItemActionInstance resources.
 		ServiceItemActionInstances []WorkflowServiceItemActionInstanceRelationship `json:"ServiceItemActionInstances,omitempty"`
 		// An array of relationships to workflowServiceItemInstance resources.
 		ServiceItemInstances []WorkflowServiceItemInstanceRelationship `json:"ServiceItemInstances,omitempty"`
-		User                 *IamUserRelationship                      `json:"User,omitempty"`
+		User                 NullableIamUserRelationship               `json:"User,omitempty"`
 	}
 
 	varWorkflowCatalogServiceRequestWithoutEmbeddedStruct := WorkflowCatalogServiceRequestWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varWorkflowCatalogServiceRequestWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varWorkflowCatalogServiceRequestWithoutEmbeddedStruct)
 	if err == nil {
 		varWorkflowCatalogServiceRequest := _WorkflowCatalogServiceRequest{}
 		varWorkflowCatalogServiceRequest.ClassId = varWorkflowCatalogServiceRequestWithoutEmbeddedStruct.ClassId
@@ -827,7 +912,7 @@ func (o *WorkflowCatalogServiceRequest) UnmarshalJSON(bytes []byte) (err error) 
 
 	varWorkflowCatalogServiceRequest := _WorkflowCatalogServiceRequest{}
 
-	err = json.Unmarshal(bytes, &varWorkflowCatalogServiceRequest)
+	err = json.Unmarshal(data, &varWorkflowCatalogServiceRequest)
 	if err == nil {
 		o.MoBaseMo = varWorkflowCatalogServiceRequest.MoBaseMo
 	} else {
@@ -836,7 +921,7 @@ func (o *WorkflowCatalogServiceRequest) UnmarshalJSON(bytes []byte) (err error) 
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Description")

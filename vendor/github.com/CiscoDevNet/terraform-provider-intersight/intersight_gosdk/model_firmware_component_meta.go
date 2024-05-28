@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the FirmwareComponentMeta type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &FirmwareComponentMeta{}
 
 // FirmwareComponentMeta Contains the details for each component in the HSU bundle catalog.
 type FirmwareComponentMeta struct {
@@ -131,7 +135,7 @@ func (o *FirmwareComponentMeta) SetObjectType(v string) {
 
 // GetComponentLabel returns the ComponentLabel field value if set, zero value otherwise.
 func (o *FirmwareComponentMeta) GetComponentLabel() string {
-	if o == nil || o.ComponentLabel == nil {
+	if o == nil || IsNil(o.ComponentLabel) {
 		var ret string
 		return ret
 	}
@@ -141,7 +145,7 @@ func (o *FirmwareComponentMeta) GetComponentLabel() string {
 // GetComponentLabelOk returns a tuple with the ComponentLabel field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FirmwareComponentMeta) GetComponentLabelOk() (*string, bool) {
-	if o == nil || o.ComponentLabel == nil {
+	if o == nil || IsNil(o.ComponentLabel) {
 		return nil, false
 	}
 	return o.ComponentLabel, true
@@ -149,7 +153,7 @@ func (o *FirmwareComponentMeta) GetComponentLabelOk() (*string, bool) {
 
 // HasComponentLabel returns a boolean if a field has been set.
 func (o *FirmwareComponentMeta) HasComponentLabel() bool {
-	if o != nil && o.ComponentLabel != nil {
+	if o != nil && !IsNil(o.ComponentLabel) {
 		return true
 	}
 
@@ -163,7 +167,7 @@ func (o *FirmwareComponentMeta) SetComponentLabel(v string) {
 
 // GetComponentType returns the ComponentType field value if set, zero value otherwise.
 func (o *FirmwareComponentMeta) GetComponentType() string {
-	if o == nil || o.ComponentType == nil {
+	if o == nil || IsNil(o.ComponentType) {
 		var ret string
 		return ret
 	}
@@ -173,7 +177,7 @@ func (o *FirmwareComponentMeta) GetComponentType() string {
 // GetComponentTypeOk returns a tuple with the ComponentType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FirmwareComponentMeta) GetComponentTypeOk() (*string, bool) {
-	if o == nil || o.ComponentType == nil {
+	if o == nil || IsNil(o.ComponentType) {
 		return nil, false
 	}
 	return o.ComponentType, true
@@ -181,7 +185,7 @@ func (o *FirmwareComponentMeta) GetComponentTypeOk() (*string, bool) {
 
 // HasComponentType returns a boolean if a field has been set.
 func (o *FirmwareComponentMeta) HasComponentType() bool {
-	if o != nil && o.ComponentType != nil {
+	if o != nil && !IsNil(o.ComponentType) {
 		return true
 	}
 
@@ -195,7 +199,7 @@ func (o *FirmwareComponentMeta) SetComponentType(v string) {
 
 // GetDescription returns the Description field value if set, zero value otherwise.
 func (o *FirmwareComponentMeta) GetDescription() string {
-	if o == nil || o.Description == nil {
+	if o == nil || IsNil(o.Description) {
 		var ret string
 		return ret
 	}
@@ -205,7 +209,7 @@ func (o *FirmwareComponentMeta) GetDescription() string {
 // GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FirmwareComponentMeta) GetDescriptionOk() (*string, bool) {
-	if o == nil || o.Description == nil {
+	if o == nil || IsNil(o.Description) {
 		return nil, false
 	}
 	return o.Description, true
@@ -213,7 +217,7 @@ func (o *FirmwareComponentMeta) GetDescriptionOk() (*string, bool) {
 
 // HasDescription returns a boolean if a field has been set.
 func (o *FirmwareComponentMeta) HasDescription() bool {
-	if o != nil && o.Description != nil {
+	if o != nil && !IsNil(o.Description) {
 		return true
 	}
 
@@ -227,7 +231,7 @@ func (o *FirmwareComponentMeta) SetDescription(v string) {
 
 // GetDisruption returns the Disruption field value if set, zero value otherwise.
 func (o *FirmwareComponentMeta) GetDisruption() string {
-	if o == nil || o.Disruption == nil {
+	if o == nil || IsNil(o.Disruption) {
 		var ret string
 		return ret
 	}
@@ -237,7 +241,7 @@ func (o *FirmwareComponentMeta) GetDisruption() string {
 // GetDisruptionOk returns a tuple with the Disruption field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FirmwareComponentMeta) GetDisruptionOk() (*string, bool) {
-	if o == nil || o.Disruption == nil {
+	if o == nil || IsNil(o.Disruption) {
 		return nil, false
 	}
 	return o.Disruption, true
@@ -245,7 +249,7 @@ func (o *FirmwareComponentMeta) GetDisruptionOk() (*string, bool) {
 
 // HasDisruption returns a boolean if a field has been set.
 func (o *FirmwareComponentMeta) HasDisruption() bool {
-	if o != nil && o.Disruption != nil {
+	if o != nil && !IsNil(o.Disruption) {
 		return true
 	}
 
@@ -259,7 +263,7 @@ func (o *FirmwareComponentMeta) SetDisruption(v string) {
 
 // GetImagePath returns the ImagePath field value if set, zero value otherwise.
 func (o *FirmwareComponentMeta) GetImagePath() string {
-	if o == nil || o.ImagePath == nil {
+	if o == nil || IsNil(o.ImagePath) {
 		var ret string
 		return ret
 	}
@@ -269,7 +273,7 @@ func (o *FirmwareComponentMeta) GetImagePath() string {
 // GetImagePathOk returns a tuple with the ImagePath field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FirmwareComponentMeta) GetImagePathOk() (*string, bool) {
-	if o == nil || o.ImagePath == nil {
+	if o == nil || IsNil(o.ImagePath) {
 		return nil, false
 	}
 	return o.ImagePath, true
@@ -277,7 +281,7 @@ func (o *FirmwareComponentMeta) GetImagePathOk() (*string, bool) {
 
 // HasImagePath returns a boolean if a field has been set.
 func (o *FirmwareComponentMeta) HasImagePath() bool {
-	if o != nil && o.ImagePath != nil {
+	if o != nil && !IsNil(o.ImagePath) {
 		return true
 	}
 
@@ -291,7 +295,7 @@ func (o *FirmwareComponentMeta) SetImagePath(v string) {
 
 // GetIsOobSupported returns the IsOobSupported field value if set, zero value otherwise.
 func (o *FirmwareComponentMeta) GetIsOobSupported() bool {
-	if o == nil || o.IsOobSupported == nil {
+	if o == nil || IsNil(o.IsOobSupported) {
 		var ret bool
 		return ret
 	}
@@ -301,7 +305,7 @@ func (o *FirmwareComponentMeta) GetIsOobSupported() bool {
 // GetIsOobSupportedOk returns a tuple with the IsOobSupported field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FirmwareComponentMeta) GetIsOobSupportedOk() (*bool, bool) {
-	if o == nil || o.IsOobSupported == nil {
+	if o == nil || IsNil(o.IsOobSupported) {
 		return nil, false
 	}
 	return o.IsOobSupported, true
@@ -309,7 +313,7 @@ func (o *FirmwareComponentMeta) GetIsOobSupportedOk() (*bool, bool) {
 
 // HasIsOobSupported returns a boolean if a field has been set.
 func (o *FirmwareComponentMeta) HasIsOobSupported() bool {
-	if o != nil && o.IsOobSupported != nil {
+	if o != nil && !IsNil(o.IsOobSupported) {
 		return true
 	}
 
@@ -323,7 +327,7 @@ func (o *FirmwareComponentMeta) SetIsOobSupported(v bool) {
 
 // GetModel returns the Model field value if set, zero value otherwise.
 func (o *FirmwareComponentMeta) GetModel() string {
-	if o == nil || o.Model == nil {
+	if o == nil || IsNil(o.Model) {
 		var ret string
 		return ret
 	}
@@ -333,7 +337,7 @@ func (o *FirmwareComponentMeta) GetModel() string {
 // GetModelOk returns a tuple with the Model field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FirmwareComponentMeta) GetModelOk() (*string, bool) {
-	if o == nil || o.Model == nil {
+	if o == nil || IsNil(o.Model) {
 		return nil, false
 	}
 	return o.Model, true
@@ -341,7 +345,7 @@ func (o *FirmwareComponentMeta) GetModelOk() (*string, bool) {
 
 // HasModel returns a boolean if a field has been set.
 func (o *FirmwareComponentMeta) HasModel() bool {
-	if o != nil && o.Model != nil {
+	if o != nil && !IsNil(o.Model) {
 		return true
 	}
 
@@ -366,7 +370,7 @@ func (o *FirmwareComponentMeta) GetOobManageability() []string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *FirmwareComponentMeta) GetOobManageabilityOk() ([]string, bool) {
-	if o == nil || o.OobManageability == nil {
+	if o == nil || IsNil(o.OobManageability) {
 		return nil, false
 	}
 	return o.OobManageability, true
@@ -374,7 +378,7 @@ func (o *FirmwareComponentMeta) GetOobManageabilityOk() ([]string, bool) {
 
 // HasOobManageability returns a boolean if a field has been set.
 func (o *FirmwareComponentMeta) HasOobManageability() bool {
-	if o != nil && o.OobManageability != nil {
+	if o != nil && IsNil(o.OobManageability) {
 		return true
 	}
 
@@ -388,7 +392,7 @@ func (o *FirmwareComponentMeta) SetOobManageability(v []string) {
 
 // GetPackedVersion returns the PackedVersion field value if set, zero value otherwise.
 func (o *FirmwareComponentMeta) GetPackedVersion() string {
-	if o == nil || o.PackedVersion == nil {
+	if o == nil || IsNil(o.PackedVersion) {
 		var ret string
 		return ret
 	}
@@ -398,7 +402,7 @@ func (o *FirmwareComponentMeta) GetPackedVersion() string {
 // GetPackedVersionOk returns a tuple with the PackedVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FirmwareComponentMeta) GetPackedVersionOk() (*string, bool) {
-	if o == nil || o.PackedVersion == nil {
+	if o == nil || IsNil(o.PackedVersion) {
 		return nil, false
 	}
 	return o.PackedVersion, true
@@ -406,7 +410,7 @@ func (o *FirmwareComponentMeta) GetPackedVersionOk() (*string, bool) {
 
 // HasPackedVersion returns a boolean if a field has been set.
 func (o *FirmwareComponentMeta) HasPackedVersion() bool {
-	if o != nil && o.PackedVersion != nil {
+	if o != nil && !IsNil(o.PackedVersion) {
 		return true
 	}
 
@@ -420,7 +424,7 @@ func (o *FirmwareComponentMeta) SetPackedVersion(v string) {
 
 // GetRedfishUrl returns the RedfishUrl field value if set, zero value otherwise.
 func (o *FirmwareComponentMeta) GetRedfishUrl() string {
-	if o == nil || o.RedfishUrl == nil {
+	if o == nil || IsNil(o.RedfishUrl) {
 		var ret string
 		return ret
 	}
@@ -430,7 +434,7 @@ func (o *FirmwareComponentMeta) GetRedfishUrl() string {
 // GetRedfishUrlOk returns a tuple with the RedfishUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FirmwareComponentMeta) GetRedfishUrlOk() (*string, bool) {
-	if o == nil || o.RedfishUrl == nil {
+	if o == nil || IsNil(o.RedfishUrl) {
 		return nil, false
 	}
 	return o.RedfishUrl, true
@@ -438,7 +442,7 @@ func (o *FirmwareComponentMeta) GetRedfishUrlOk() (*string, bool) {
 
 // HasRedfishUrl returns a boolean if a field has been set.
 func (o *FirmwareComponentMeta) HasRedfishUrl() bool {
-	if o != nil && o.RedfishUrl != nil {
+	if o != nil && !IsNil(o.RedfishUrl) {
 		return true
 	}
 
@@ -452,7 +456,7 @@ func (o *FirmwareComponentMeta) SetRedfishUrl(v string) {
 
 // GetVendor returns the Vendor field value if set, zero value otherwise.
 func (o *FirmwareComponentMeta) GetVendor() string {
-	if o == nil || o.Vendor == nil {
+	if o == nil || IsNil(o.Vendor) {
 		var ret string
 		return ret
 	}
@@ -462,7 +466,7 @@ func (o *FirmwareComponentMeta) GetVendor() string {
 // GetVendorOk returns a tuple with the Vendor field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FirmwareComponentMeta) GetVendorOk() (*string, bool) {
-	if o == nil || o.Vendor == nil {
+	if o == nil || IsNil(o.Vendor) {
 		return nil, false
 	}
 	return o.Vendor, true
@@ -470,7 +474,7 @@ func (o *FirmwareComponentMeta) GetVendorOk() (*string, bool) {
 
 // HasVendor returns a boolean if a field has been set.
 func (o *FirmwareComponentMeta) HasVendor() bool {
-	if o != nil && o.Vendor != nil {
+	if o != nil && !IsNil(o.Vendor) {
 		return true
 	}
 
@@ -483,52 +487,56 @@ func (o *FirmwareComponentMeta) SetVendor(v string) {
 }
 
 func (o FirmwareComponentMeta) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o FirmwareComponentMeta) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
 	errMoBaseComplexType = json.Unmarshal([]byte(serializedMoBaseComplexType), &toSerialize)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.ComponentLabel != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.ComponentLabel) {
 		toSerialize["ComponentLabel"] = o.ComponentLabel
 	}
-	if o.ComponentType != nil {
+	if !IsNil(o.ComponentType) {
 		toSerialize["ComponentType"] = o.ComponentType
 	}
-	if o.Description != nil {
+	if !IsNil(o.Description) {
 		toSerialize["Description"] = o.Description
 	}
-	if o.Disruption != nil {
+	if !IsNil(o.Disruption) {
 		toSerialize["Disruption"] = o.Disruption
 	}
-	if o.ImagePath != nil {
+	if !IsNil(o.ImagePath) {
 		toSerialize["ImagePath"] = o.ImagePath
 	}
-	if o.IsOobSupported != nil {
+	if !IsNil(o.IsOobSupported) {
 		toSerialize["IsOobSupported"] = o.IsOobSupported
 	}
-	if o.Model != nil {
+	if !IsNil(o.Model) {
 		toSerialize["Model"] = o.Model
 	}
 	if o.OobManageability != nil {
 		toSerialize["OobManageability"] = o.OobManageability
 	}
-	if o.PackedVersion != nil {
+	if !IsNil(o.PackedVersion) {
 		toSerialize["PackedVersion"] = o.PackedVersion
 	}
-	if o.RedfishUrl != nil {
+	if !IsNil(o.RedfishUrl) {
 		toSerialize["RedfishUrl"] = o.RedfishUrl
 	}
-	if o.Vendor != nil {
+	if !IsNil(o.Vendor) {
 		toSerialize["Vendor"] = o.Vendor
 	}
 
@@ -536,10 +544,32 @@ func (o FirmwareComponentMeta) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *FirmwareComponentMeta) UnmarshalJSON(bytes []byte) (err error) {
+func (o *FirmwareComponentMeta) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type FirmwareComponentMetaWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -570,7 +600,7 @@ func (o *FirmwareComponentMeta) UnmarshalJSON(bytes []byte) (err error) {
 
 	varFirmwareComponentMetaWithoutEmbeddedStruct := FirmwareComponentMetaWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varFirmwareComponentMetaWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varFirmwareComponentMetaWithoutEmbeddedStruct)
 	if err == nil {
 		varFirmwareComponentMeta := _FirmwareComponentMeta{}
 		varFirmwareComponentMeta.ClassId = varFirmwareComponentMetaWithoutEmbeddedStruct.ClassId
@@ -593,7 +623,7 @@ func (o *FirmwareComponentMeta) UnmarshalJSON(bytes []byte) (err error) {
 
 	varFirmwareComponentMeta := _FirmwareComponentMeta{}
 
-	err = json.Unmarshal(bytes, &varFirmwareComponentMeta)
+	err = json.Unmarshal(data, &varFirmwareComponentMeta)
 	if err == nil {
 		o.MoBaseComplexType = varFirmwareComponentMeta.MoBaseComplexType
 	} else {
@@ -602,7 +632,7 @@ func (o *FirmwareComponentMeta) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "ComponentLabel")

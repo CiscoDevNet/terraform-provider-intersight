@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the StorageFlexFlashController type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &StorageFlexFlashController{}
 
 // StorageFlexFlashController Storage Flex Flash Controller.
 type StorageFlexFlashController struct {
@@ -27,16 +31,16 @@ type StorageFlexFlashController struct {
 	// State of the Flex Flash Storage Controller.
 	ControllerState *string `json:"ControllerState,omitempty"`
 	// Identifier for the Flex Flash Storage Controller.
-	FfControllerId *string                   `json:"FfControllerId,omitempty"`
-	ComputeBoard   *ComputeBoardRelationship `json:"ComputeBoard,omitempty"`
+	FfControllerId *string                          `json:"FfControllerId,omitempty"`
+	ComputeBoard   NullableComputeBoardRelationship `json:"ComputeBoard,omitempty"`
 	// An array of relationships to storageFlexFlashControllerProps resources.
 	FlexFlashControllerProps []StorageFlexFlashControllerPropsRelationship `json:"FlexFlashControllerProps,omitempty"`
 	// An array of relationships to storageFlexFlashPhysicalDrive resources.
 	FlexFlashPhysicalDrives []StorageFlexFlashPhysicalDriveRelationship `json:"FlexFlashPhysicalDrives,omitempty"`
 	// An array of relationships to storageFlexFlashVirtualDrive resources.
-	FlexFlashVirtualDrives []StorageFlexFlashVirtualDriveRelationship `json:"FlexFlashVirtualDrives,omitempty"`
-	InventoryDeviceInfo    *InventoryDeviceInfoRelationship           `json:"InventoryDeviceInfo,omitempty"`
-	RegisteredDevice       *AssetDeviceRegistrationRelationship       `json:"RegisteredDevice,omitempty"`
+	FlexFlashVirtualDrives []StorageFlexFlashVirtualDriveRelationship  `json:"FlexFlashVirtualDrives,omitempty"`
+	InventoryDeviceInfo    NullableInventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
+	RegisteredDevice       NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	// An array of relationships to firmwareRunningFirmware resources.
 	RunningFirmware      []FirmwareRunningFirmwareRelationship `json:"RunningFirmware,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -117,7 +121,7 @@ func (o *StorageFlexFlashController) SetObjectType(v string) {
 
 // GetControllerState returns the ControllerState field value if set, zero value otherwise.
 func (o *StorageFlexFlashController) GetControllerState() string {
-	if o == nil || o.ControllerState == nil {
+	if o == nil || IsNil(o.ControllerState) {
 		var ret string
 		return ret
 	}
@@ -127,7 +131,7 @@ func (o *StorageFlexFlashController) GetControllerState() string {
 // GetControllerStateOk returns a tuple with the ControllerState field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageFlexFlashController) GetControllerStateOk() (*string, bool) {
-	if o == nil || o.ControllerState == nil {
+	if o == nil || IsNil(o.ControllerState) {
 		return nil, false
 	}
 	return o.ControllerState, true
@@ -135,7 +139,7 @@ func (o *StorageFlexFlashController) GetControllerStateOk() (*string, bool) {
 
 // HasControllerState returns a boolean if a field has been set.
 func (o *StorageFlexFlashController) HasControllerState() bool {
-	if o != nil && o.ControllerState != nil {
+	if o != nil && !IsNil(o.ControllerState) {
 		return true
 	}
 
@@ -149,7 +153,7 @@ func (o *StorageFlexFlashController) SetControllerState(v string) {
 
 // GetFfControllerId returns the FfControllerId field value if set, zero value otherwise.
 func (o *StorageFlexFlashController) GetFfControllerId() string {
-	if o == nil || o.FfControllerId == nil {
+	if o == nil || IsNil(o.FfControllerId) {
 		var ret string
 		return ret
 	}
@@ -159,7 +163,7 @@ func (o *StorageFlexFlashController) GetFfControllerId() string {
 // GetFfControllerIdOk returns a tuple with the FfControllerId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageFlexFlashController) GetFfControllerIdOk() (*string, bool) {
-	if o == nil || o.FfControllerId == nil {
+	if o == nil || IsNil(o.FfControllerId) {
 		return nil, false
 	}
 	return o.FfControllerId, true
@@ -167,7 +171,7 @@ func (o *StorageFlexFlashController) GetFfControllerIdOk() (*string, bool) {
 
 // HasFfControllerId returns a boolean if a field has been set.
 func (o *StorageFlexFlashController) HasFfControllerId() bool {
-	if o != nil && o.FfControllerId != nil {
+	if o != nil && !IsNil(o.FfControllerId) {
 		return true
 	}
 
@@ -179,36 +183,47 @@ func (o *StorageFlexFlashController) SetFfControllerId(v string) {
 	o.FfControllerId = &v
 }
 
-// GetComputeBoard returns the ComputeBoard field value if set, zero value otherwise.
+// GetComputeBoard returns the ComputeBoard field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *StorageFlexFlashController) GetComputeBoard() ComputeBoardRelationship {
-	if o == nil || o.ComputeBoard == nil {
+	if o == nil || IsNil(o.ComputeBoard.Get()) {
 		var ret ComputeBoardRelationship
 		return ret
 	}
-	return *o.ComputeBoard
+	return *o.ComputeBoard.Get()
 }
 
 // GetComputeBoardOk returns a tuple with the ComputeBoard field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StorageFlexFlashController) GetComputeBoardOk() (*ComputeBoardRelationship, bool) {
-	if o == nil || o.ComputeBoard == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.ComputeBoard, true
+	return o.ComputeBoard.Get(), o.ComputeBoard.IsSet()
 }
 
 // HasComputeBoard returns a boolean if a field has been set.
 func (o *StorageFlexFlashController) HasComputeBoard() bool {
-	if o != nil && o.ComputeBoard != nil {
+	if o != nil && o.ComputeBoard.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetComputeBoard gets a reference to the given ComputeBoardRelationship and assigns it to the ComputeBoard field.
+// SetComputeBoard gets a reference to the given NullableComputeBoardRelationship and assigns it to the ComputeBoard field.
 func (o *StorageFlexFlashController) SetComputeBoard(v ComputeBoardRelationship) {
-	o.ComputeBoard = &v
+	o.ComputeBoard.Set(&v)
+}
+
+// SetComputeBoardNil sets the value for ComputeBoard to be an explicit nil
+func (o *StorageFlexFlashController) SetComputeBoardNil() {
+	o.ComputeBoard.Set(nil)
+}
+
+// UnsetComputeBoard ensures that no value is present for ComputeBoard, not even an explicit nil
+func (o *StorageFlexFlashController) UnsetComputeBoard() {
+	o.ComputeBoard.Unset()
 }
 
 // GetFlexFlashControllerProps returns the FlexFlashControllerProps field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -224,7 +239,7 @@ func (o *StorageFlexFlashController) GetFlexFlashControllerProps() []StorageFlex
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StorageFlexFlashController) GetFlexFlashControllerPropsOk() ([]StorageFlexFlashControllerPropsRelationship, bool) {
-	if o == nil || o.FlexFlashControllerProps == nil {
+	if o == nil || IsNil(o.FlexFlashControllerProps) {
 		return nil, false
 	}
 	return o.FlexFlashControllerProps, true
@@ -232,7 +247,7 @@ func (o *StorageFlexFlashController) GetFlexFlashControllerPropsOk() ([]StorageF
 
 // HasFlexFlashControllerProps returns a boolean if a field has been set.
 func (o *StorageFlexFlashController) HasFlexFlashControllerProps() bool {
-	if o != nil && o.FlexFlashControllerProps != nil {
+	if o != nil && IsNil(o.FlexFlashControllerProps) {
 		return true
 	}
 
@@ -257,7 +272,7 @@ func (o *StorageFlexFlashController) GetFlexFlashPhysicalDrives() []StorageFlexF
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StorageFlexFlashController) GetFlexFlashPhysicalDrivesOk() ([]StorageFlexFlashPhysicalDriveRelationship, bool) {
-	if o == nil || o.FlexFlashPhysicalDrives == nil {
+	if o == nil || IsNil(o.FlexFlashPhysicalDrives) {
 		return nil, false
 	}
 	return o.FlexFlashPhysicalDrives, true
@@ -265,7 +280,7 @@ func (o *StorageFlexFlashController) GetFlexFlashPhysicalDrivesOk() ([]StorageFl
 
 // HasFlexFlashPhysicalDrives returns a boolean if a field has been set.
 func (o *StorageFlexFlashController) HasFlexFlashPhysicalDrives() bool {
-	if o != nil && o.FlexFlashPhysicalDrives != nil {
+	if o != nil && IsNil(o.FlexFlashPhysicalDrives) {
 		return true
 	}
 
@@ -290,7 +305,7 @@ func (o *StorageFlexFlashController) GetFlexFlashVirtualDrives() []StorageFlexFl
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StorageFlexFlashController) GetFlexFlashVirtualDrivesOk() ([]StorageFlexFlashVirtualDriveRelationship, bool) {
-	if o == nil || o.FlexFlashVirtualDrives == nil {
+	if o == nil || IsNil(o.FlexFlashVirtualDrives) {
 		return nil, false
 	}
 	return o.FlexFlashVirtualDrives, true
@@ -298,7 +313,7 @@ func (o *StorageFlexFlashController) GetFlexFlashVirtualDrivesOk() ([]StorageFle
 
 // HasFlexFlashVirtualDrives returns a boolean if a field has been set.
 func (o *StorageFlexFlashController) HasFlexFlashVirtualDrives() bool {
-	if o != nil && o.FlexFlashVirtualDrives != nil {
+	if o != nil && IsNil(o.FlexFlashVirtualDrives) {
 		return true
 	}
 
@@ -310,68 +325,90 @@ func (o *StorageFlexFlashController) SetFlexFlashVirtualDrives(v []StorageFlexFl
 	o.FlexFlashVirtualDrives = v
 }
 
-// GetInventoryDeviceInfo returns the InventoryDeviceInfo field value if set, zero value otherwise.
+// GetInventoryDeviceInfo returns the InventoryDeviceInfo field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *StorageFlexFlashController) GetInventoryDeviceInfo() InventoryDeviceInfoRelationship {
-	if o == nil || o.InventoryDeviceInfo == nil {
+	if o == nil || IsNil(o.InventoryDeviceInfo.Get()) {
 		var ret InventoryDeviceInfoRelationship
 		return ret
 	}
-	return *o.InventoryDeviceInfo
+	return *o.InventoryDeviceInfo.Get()
 }
 
 // GetInventoryDeviceInfoOk returns a tuple with the InventoryDeviceInfo field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StorageFlexFlashController) GetInventoryDeviceInfoOk() (*InventoryDeviceInfoRelationship, bool) {
-	if o == nil || o.InventoryDeviceInfo == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.InventoryDeviceInfo, true
+	return o.InventoryDeviceInfo.Get(), o.InventoryDeviceInfo.IsSet()
 }
 
 // HasInventoryDeviceInfo returns a boolean if a field has been set.
 func (o *StorageFlexFlashController) HasInventoryDeviceInfo() bool {
-	if o != nil && o.InventoryDeviceInfo != nil {
+	if o != nil && o.InventoryDeviceInfo.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetInventoryDeviceInfo gets a reference to the given InventoryDeviceInfoRelationship and assigns it to the InventoryDeviceInfo field.
+// SetInventoryDeviceInfo gets a reference to the given NullableInventoryDeviceInfoRelationship and assigns it to the InventoryDeviceInfo field.
 func (o *StorageFlexFlashController) SetInventoryDeviceInfo(v InventoryDeviceInfoRelationship) {
-	o.InventoryDeviceInfo = &v
+	o.InventoryDeviceInfo.Set(&v)
 }
 
-// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise.
+// SetInventoryDeviceInfoNil sets the value for InventoryDeviceInfo to be an explicit nil
+func (o *StorageFlexFlashController) SetInventoryDeviceInfoNil() {
+	o.InventoryDeviceInfo.Set(nil)
+}
+
+// UnsetInventoryDeviceInfo ensures that no value is present for InventoryDeviceInfo, not even an explicit nil
+func (o *StorageFlexFlashController) UnsetInventoryDeviceInfo() {
+	o.InventoryDeviceInfo.Unset()
+}
+
+// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *StorageFlexFlashController) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil || IsNil(o.RegisteredDevice.Get()) {
 		var ret AssetDeviceRegistrationRelationship
 		return ret
 	}
-	return *o.RegisteredDevice
+	return *o.RegisteredDevice.Get()
 }
 
 // GetRegisteredDeviceOk returns a tuple with the RegisteredDevice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StorageFlexFlashController) GetRegisteredDeviceOk() (*AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.RegisteredDevice, true
+	return o.RegisteredDevice.Get(), o.RegisteredDevice.IsSet()
 }
 
 // HasRegisteredDevice returns a boolean if a field has been set.
 func (o *StorageFlexFlashController) HasRegisteredDevice() bool {
-	if o != nil && o.RegisteredDevice != nil {
+	if o != nil && o.RegisteredDevice.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRegisteredDevice gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
+// SetRegisteredDevice gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
 func (o *StorageFlexFlashController) SetRegisteredDevice(v AssetDeviceRegistrationRelationship) {
-	o.RegisteredDevice = &v
+	o.RegisteredDevice.Set(&v)
+}
+
+// SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+func (o *StorageFlexFlashController) SetRegisteredDeviceNil() {
+	o.RegisteredDevice.Set(nil)
+}
+
+// UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
+func (o *StorageFlexFlashController) UnsetRegisteredDevice() {
+	o.RegisteredDevice.Unset()
 }
 
 // GetRunningFirmware returns the RunningFirmware field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -387,7 +424,7 @@ func (o *StorageFlexFlashController) GetRunningFirmware() []FirmwareRunningFirmw
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StorageFlexFlashController) GetRunningFirmwareOk() ([]FirmwareRunningFirmwareRelationship, bool) {
-	if o == nil || o.RunningFirmware == nil {
+	if o == nil || IsNil(o.RunningFirmware) {
 		return nil, false
 	}
 	return o.RunningFirmware, true
@@ -395,7 +432,7 @@ func (o *StorageFlexFlashController) GetRunningFirmwareOk() ([]FirmwareRunningFi
 
 // HasRunningFirmware returns a boolean if a field has been set.
 func (o *StorageFlexFlashController) HasRunningFirmware() bool {
-	if o != nil && o.RunningFirmware != nil {
+	if o != nil && IsNil(o.RunningFirmware) {
 		return true
 	}
 
@@ -408,29 +445,33 @@ func (o *StorageFlexFlashController) SetRunningFirmware(v []FirmwareRunningFirmw
 }
 
 func (o StorageFlexFlashController) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o StorageFlexFlashController) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedEquipmentBase, errEquipmentBase := json.Marshal(o.EquipmentBase)
 	if errEquipmentBase != nil {
-		return []byte{}, errEquipmentBase
+		return map[string]interface{}{}, errEquipmentBase
 	}
 	errEquipmentBase = json.Unmarshal([]byte(serializedEquipmentBase), &toSerialize)
 	if errEquipmentBase != nil {
-		return []byte{}, errEquipmentBase
+		return map[string]interface{}{}, errEquipmentBase
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.ControllerState != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.ControllerState) {
 		toSerialize["ControllerState"] = o.ControllerState
 	}
-	if o.FfControllerId != nil {
+	if !IsNil(o.FfControllerId) {
 		toSerialize["FfControllerId"] = o.FfControllerId
 	}
-	if o.ComputeBoard != nil {
-		toSerialize["ComputeBoard"] = o.ComputeBoard
+	if o.ComputeBoard.IsSet() {
+		toSerialize["ComputeBoard"] = o.ComputeBoard.Get()
 	}
 	if o.FlexFlashControllerProps != nil {
 		toSerialize["FlexFlashControllerProps"] = o.FlexFlashControllerProps
@@ -441,11 +482,11 @@ func (o StorageFlexFlashController) MarshalJSON() ([]byte, error) {
 	if o.FlexFlashVirtualDrives != nil {
 		toSerialize["FlexFlashVirtualDrives"] = o.FlexFlashVirtualDrives
 	}
-	if o.InventoryDeviceInfo != nil {
-		toSerialize["InventoryDeviceInfo"] = o.InventoryDeviceInfo
+	if o.InventoryDeviceInfo.IsSet() {
+		toSerialize["InventoryDeviceInfo"] = o.InventoryDeviceInfo.Get()
 	}
-	if o.RegisteredDevice != nil {
-		toSerialize["RegisteredDevice"] = o.RegisteredDevice
+	if o.RegisteredDevice.IsSet() {
+		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
 	}
 	if o.RunningFirmware != nil {
 		toSerialize["RunningFirmware"] = o.RunningFirmware
@@ -455,10 +496,32 @@ func (o StorageFlexFlashController) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *StorageFlexFlashController) UnmarshalJSON(bytes []byte) (err error) {
+func (o *StorageFlexFlashController) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type StorageFlexFlashControllerWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -467,23 +530,23 @@ func (o *StorageFlexFlashController) UnmarshalJSON(bytes []byte) (err error) {
 		// State of the Flex Flash Storage Controller.
 		ControllerState *string `json:"ControllerState,omitempty"`
 		// Identifier for the Flex Flash Storage Controller.
-		FfControllerId *string                   `json:"FfControllerId,omitempty"`
-		ComputeBoard   *ComputeBoardRelationship `json:"ComputeBoard,omitempty"`
+		FfControllerId *string                          `json:"FfControllerId,omitempty"`
+		ComputeBoard   NullableComputeBoardRelationship `json:"ComputeBoard,omitempty"`
 		// An array of relationships to storageFlexFlashControllerProps resources.
 		FlexFlashControllerProps []StorageFlexFlashControllerPropsRelationship `json:"FlexFlashControllerProps,omitempty"`
 		// An array of relationships to storageFlexFlashPhysicalDrive resources.
 		FlexFlashPhysicalDrives []StorageFlexFlashPhysicalDriveRelationship `json:"FlexFlashPhysicalDrives,omitempty"`
 		// An array of relationships to storageFlexFlashVirtualDrive resources.
-		FlexFlashVirtualDrives []StorageFlexFlashVirtualDriveRelationship `json:"FlexFlashVirtualDrives,omitempty"`
-		InventoryDeviceInfo    *InventoryDeviceInfoRelationship           `json:"InventoryDeviceInfo,omitempty"`
-		RegisteredDevice       *AssetDeviceRegistrationRelationship       `json:"RegisteredDevice,omitempty"`
+		FlexFlashVirtualDrives []StorageFlexFlashVirtualDriveRelationship  `json:"FlexFlashVirtualDrives,omitempty"`
+		InventoryDeviceInfo    NullableInventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
+		RegisteredDevice       NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 		// An array of relationships to firmwareRunningFirmware resources.
 		RunningFirmware []FirmwareRunningFirmwareRelationship `json:"RunningFirmware,omitempty"`
 	}
 
 	varStorageFlexFlashControllerWithoutEmbeddedStruct := StorageFlexFlashControllerWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varStorageFlexFlashControllerWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varStorageFlexFlashControllerWithoutEmbeddedStruct)
 	if err == nil {
 		varStorageFlexFlashController := _StorageFlexFlashController{}
 		varStorageFlexFlashController.ClassId = varStorageFlexFlashControllerWithoutEmbeddedStruct.ClassId
@@ -504,7 +567,7 @@ func (o *StorageFlexFlashController) UnmarshalJSON(bytes []byte) (err error) {
 
 	varStorageFlexFlashController := _StorageFlexFlashController{}
 
-	err = json.Unmarshal(bytes, &varStorageFlexFlashController)
+	err = json.Unmarshal(data, &varStorageFlexFlashController)
 	if err == nil {
 		o.EquipmentBase = varStorageFlexFlashController.EquipmentBase
 	} else {
@@ -513,7 +576,7 @@ func (o *StorageFlexFlashController) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "ControllerState")

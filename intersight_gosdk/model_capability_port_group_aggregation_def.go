@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the CapabilityPortGroupAggregationDef type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &CapabilityPortGroupAggregationDef{}
 
 // CapabilityPortGroupAggregationDef FEX/IOCARD module port group aggregation capabilities.
 type CapabilityPortGroupAggregationDef struct {
@@ -108,7 +112,7 @@ func (o *CapabilityPortGroupAggregationDef) SetObjectType(v string) {
 
 // GetAggregationCap returns the AggregationCap field value if set, zero value otherwise.
 func (o *CapabilityPortGroupAggregationDef) GetAggregationCap() string {
-	if o == nil || o.AggregationCap == nil {
+	if o == nil || IsNil(o.AggregationCap) {
 		var ret string
 		return ret
 	}
@@ -118,7 +122,7 @@ func (o *CapabilityPortGroupAggregationDef) GetAggregationCap() string {
 // GetAggregationCapOk returns a tuple with the AggregationCap field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CapabilityPortGroupAggregationDef) GetAggregationCapOk() (*string, bool) {
-	if o == nil || o.AggregationCap == nil {
+	if o == nil || IsNil(o.AggregationCap) {
 		return nil, false
 	}
 	return o.AggregationCap, true
@@ -126,7 +130,7 @@ func (o *CapabilityPortGroupAggregationDef) GetAggregationCapOk() (*string, bool
 
 // HasAggregationCap returns a boolean if a field has been set.
 func (o *CapabilityPortGroupAggregationDef) HasAggregationCap() bool {
-	if o != nil && o.AggregationCap != nil {
+	if o != nil && !IsNil(o.AggregationCap) {
 		return true
 	}
 
@@ -140,7 +144,7 @@ func (o *CapabilityPortGroupAggregationDef) SetAggregationCap(v string) {
 
 // GetHw40GPortGroupCap returns the Hw40GPortGroupCap field value if set, zero value otherwise.
 func (o *CapabilityPortGroupAggregationDef) GetHw40GPortGroupCap() bool {
-	if o == nil || o.Hw40GPortGroupCap == nil {
+	if o == nil || IsNil(o.Hw40GPortGroupCap) {
 		var ret bool
 		return ret
 	}
@@ -150,7 +154,7 @@ func (o *CapabilityPortGroupAggregationDef) GetHw40GPortGroupCap() bool {
 // GetHw40GPortGroupCapOk returns a tuple with the Hw40GPortGroupCap field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CapabilityPortGroupAggregationDef) GetHw40GPortGroupCapOk() (*bool, bool) {
-	if o == nil || o.Hw40GPortGroupCap == nil {
+	if o == nil || IsNil(o.Hw40GPortGroupCap) {
 		return nil, false
 	}
 	return o.Hw40GPortGroupCap, true
@@ -158,7 +162,7 @@ func (o *CapabilityPortGroupAggregationDef) GetHw40GPortGroupCapOk() (*bool, boo
 
 // HasHw40GPortGroupCap returns a boolean if a field has been set.
 func (o *CapabilityPortGroupAggregationDef) HasHw40GPortGroupCap() bool {
-	if o != nil && o.Hw40GPortGroupCap != nil {
+	if o != nil && !IsNil(o.Hw40GPortGroupCap) {
 		return true
 	}
 
@@ -172,7 +176,7 @@ func (o *CapabilityPortGroupAggregationDef) SetHw40GPortGroupCap(v bool) {
 
 // GetPgtype returns the Pgtype field value if set, zero value otherwise.
 func (o *CapabilityPortGroupAggregationDef) GetPgtype() string {
-	if o == nil || o.Pgtype == nil {
+	if o == nil || IsNil(o.Pgtype) {
 		var ret string
 		return ret
 	}
@@ -182,7 +186,7 @@ func (o *CapabilityPortGroupAggregationDef) GetPgtype() string {
 // GetPgtypeOk returns a tuple with the Pgtype field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CapabilityPortGroupAggregationDef) GetPgtypeOk() (*string, bool) {
-	if o == nil || o.Pgtype == nil {
+	if o == nil || IsNil(o.Pgtype) {
 		return nil, false
 	}
 	return o.Pgtype, true
@@ -190,7 +194,7 @@ func (o *CapabilityPortGroupAggregationDef) GetPgtypeOk() (*string, bool) {
 
 // HasPgtype returns a boolean if a field has been set.
 func (o *CapabilityPortGroupAggregationDef) HasPgtype() bool {
-	if o != nil && o.Pgtype != nil {
+	if o != nil && !IsNil(o.Pgtype) {
 		return true
 	}
 
@@ -203,28 +207,32 @@ func (o *CapabilityPortGroupAggregationDef) SetPgtype(v string) {
 }
 
 func (o CapabilityPortGroupAggregationDef) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o CapabilityPortGroupAggregationDef) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedCapabilityCapability, errCapabilityCapability := json.Marshal(o.CapabilityCapability)
 	if errCapabilityCapability != nil {
-		return []byte{}, errCapabilityCapability
+		return map[string]interface{}{}, errCapabilityCapability
 	}
 	errCapabilityCapability = json.Unmarshal([]byte(serializedCapabilityCapability), &toSerialize)
 	if errCapabilityCapability != nil {
-		return []byte{}, errCapabilityCapability
+		return map[string]interface{}{}, errCapabilityCapability
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.AggregationCap != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.AggregationCap) {
 		toSerialize["AggregationCap"] = o.AggregationCap
 	}
-	if o.Hw40GPortGroupCap != nil {
+	if !IsNil(o.Hw40GPortGroupCap) {
 		toSerialize["Hw40GPortGroupCap"] = o.Hw40GPortGroupCap
 	}
-	if o.Pgtype != nil {
+	if !IsNil(o.Pgtype) {
 		toSerialize["Pgtype"] = o.Pgtype
 	}
 
@@ -232,10 +240,32 @@ func (o CapabilityPortGroupAggregationDef) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *CapabilityPortGroupAggregationDef) UnmarshalJSON(bytes []byte) (err error) {
+func (o *CapabilityPortGroupAggregationDef) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type CapabilityPortGroupAggregationDefWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -251,7 +281,7 @@ func (o *CapabilityPortGroupAggregationDef) UnmarshalJSON(bytes []byte) (err err
 
 	varCapabilityPortGroupAggregationDefWithoutEmbeddedStruct := CapabilityPortGroupAggregationDefWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varCapabilityPortGroupAggregationDefWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varCapabilityPortGroupAggregationDefWithoutEmbeddedStruct)
 	if err == nil {
 		varCapabilityPortGroupAggregationDef := _CapabilityPortGroupAggregationDef{}
 		varCapabilityPortGroupAggregationDef.ClassId = varCapabilityPortGroupAggregationDefWithoutEmbeddedStruct.ClassId
@@ -266,7 +296,7 @@ func (o *CapabilityPortGroupAggregationDef) UnmarshalJSON(bytes []byte) (err err
 
 	varCapabilityPortGroupAggregationDef := _CapabilityPortGroupAggregationDef{}
 
-	err = json.Unmarshal(bytes, &varCapabilityPortGroupAggregationDef)
+	err = json.Unmarshal(data, &varCapabilityPortGroupAggregationDef)
 	if err == nil {
 		o.CapabilityCapability = varCapabilityPortGroupAggregationDef.CapabilityCapability
 	} else {
@@ -275,7 +305,7 @@ func (o *CapabilityPortGroupAggregationDef) UnmarshalJSON(bytes []byte) (err err
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "AggregationCap")

@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "iqnpool.Block"]
 **IqnSuffixBlock** | Pointer to [**IqnpoolIqnSuffixBlock**](IqnpoolIqnSuffixBlock.md) |  | [optional] 
 **Prefix** | Pointer to **string** | Prefix of the IQN pool. IQN Address is constructed as &lt;prefix&gt;:&lt;suffix&gt;:&lt;number&gt;. | [optional] [readonly] 
-**Pool** | Pointer to [**IqnpoolPoolRelationship**](IqnpoolPoolRelationship.md) |  | [optional] 
+**Pool** | Pointer to [**NullableIqnpoolPoolRelationship**](IqnpoolPoolRelationship.md) |  | [optional] 
 **Reservations** | Pointer to [**[]IqnpoolReservationRelationship**](IqnpoolReservationRelationship.md) | An array of relationships to iqnpoolReservation resources. | [optional] [readonly] 
 
 ## Methods
@@ -145,6 +145,16 @@ SetPool sets Pool field to given value.
 
 HasPool returns a boolean if a field has been set.
 
+### SetPoolNil
+
+`func (o *IqnpoolBlock) SetPoolNil(b bool)`
+
+ SetPoolNil sets the value for Pool to be an explicit nil
+
+### UnsetPool
+`func (o *IqnpoolBlock) UnsetPool()`
+
+UnsetPool ensures that no value is present for Pool, not even an explicit nil
 ### GetReservations
 
 `func (o *IqnpoolBlock) GetReservations() []IqnpoolReservationRelationship`

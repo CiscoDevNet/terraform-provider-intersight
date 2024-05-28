@@ -19,9 +19,9 @@ Name | Type | Description | Notes
 **UserUniqueIdentifier** | Pointer to **string** | Unique id of the user used by the identity provider to store the user. | [optional] [readonly] 
 **ApiKeys** | Pointer to [**[]IamApiKeyRelationship**](IamApiKeyRelationship.md) | An array of relationships to iamApiKey resources. | [optional] [readonly] 
 **AppRegistrations** | Pointer to [**[]IamAppRegistrationRelationship**](IamAppRegistrationRelationship.md) | An array of relationships to iamAppRegistration resources. | [optional] [readonly] 
-**Idp** | Pointer to [**IamIdpRelationship**](IamIdpRelationship.md) |  | [optional] 
-**Idpreference** | Pointer to [**IamIdpReferenceRelationship**](IamIdpReferenceRelationship.md) |  | [optional] 
-**LocalUserPassword** | Pointer to [**IamLocalUserPasswordRelationship**](IamLocalUserPasswordRelationship.md) |  | [optional] 
+**Idp** | Pointer to [**NullableIamIdpRelationship**](IamIdpRelationship.md) |  | [optional] 
+**Idpreference** | Pointer to [**NullableIamIdpReferenceRelationship**](IamIdpReferenceRelationship.md) |  | [optional] 
+**LocalUserPassword** | Pointer to [**NullableIamLocalUserPasswordRelationship**](IamLocalUserPasswordRelationship.md) |  | [optional] 
 **OauthTokens** | Pointer to [**[]IamOAuthTokenRelationship**](IamOAuthTokenRelationship.md) | An array of relationships to iamOAuthToken resources. | [optional] [readonly] 
 **Permissions** | Pointer to [**[]IamPermissionRelationship**](IamPermissionRelationship.md) | An array of relationships to iamPermission resources. | [optional] 
 **Sessions** | Pointer to [**[]IamSessionRelationship**](IamSessionRelationship.md) | An array of relationships to iamSession resources. | [optional] [readonly] 
@@ -455,6 +455,16 @@ SetIdp sets Idp field to given value.
 
 HasIdp returns a boolean if a field has been set.
 
+### SetIdpNil
+
+`func (o *IamUser) SetIdpNil(b bool)`
+
+ SetIdpNil sets the value for Idp to be an explicit nil
+
+### UnsetIdp
+`func (o *IamUser) UnsetIdp()`
+
+UnsetIdp ensures that no value is present for Idp, not even an explicit nil
 ### GetIdpreference
 
 `func (o *IamUser) GetIdpreference() IamIdpReferenceRelationship`
@@ -480,6 +490,16 @@ SetIdpreference sets Idpreference field to given value.
 
 HasIdpreference returns a boolean if a field has been set.
 
+### SetIdpreferenceNil
+
+`func (o *IamUser) SetIdpreferenceNil(b bool)`
+
+ SetIdpreferenceNil sets the value for Idpreference to be an explicit nil
+
+### UnsetIdpreference
+`func (o *IamUser) UnsetIdpreference()`
+
+UnsetIdpreference ensures that no value is present for Idpreference, not even an explicit nil
 ### GetLocalUserPassword
 
 `func (o *IamUser) GetLocalUserPassword() IamLocalUserPasswordRelationship`
@@ -505,6 +525,16 @@ SetLocalUserPassword sets LocalUserPassword field to given value.
 
 HasLocalUserPassword returns a boolean if a field has been set.
 
+### SetLocalUserPasswordNil
+
+`func (o *IamUser) SetLocalUserPasswordNil(b bool)`
+
+ SetLocalUserPasswordNil sets the value for LocalUserPassword to be an explicit nil
+
+### UnsetLocalUserPassword
+`func (o *IamUser) UnsetLocalUserPassword()`
+
+UnsetLocalUserPassword ensures that no value is present for LocalUserPassword, not even an explicit nil
 ### GetOauthTokens
 
 `func (o *IamUser) GetOauthTokens() []IamOAuthTokenRelationship`

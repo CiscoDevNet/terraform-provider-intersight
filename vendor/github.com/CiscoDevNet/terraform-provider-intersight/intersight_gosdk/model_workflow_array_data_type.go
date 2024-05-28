@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the WorkflowArrayDataType type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &WorkflowArrayDataType{}
 
 // WorkflowArrayDataType This data type represents an array of a given type. It can be an array of primitive data or of custom data.
 type WorkflowArrayDataType struct {
@@ -107,7 +111,7 @@ func (o *WorkflowArrayDataType) SetObjectType(v string) {
 
 // GetArrayItemType returns the ArrayItemType field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *WorkflowArrayDataType) GetArrayItemType() WorkflowArrayItem {
-	if o == nil || o.ArrayItemType.Get() == nil {
+	if o == nil || IsNil(o.ArrayItemType.Get()) {
 		var ret WorkflowArrayItem
 		return ret
 	}
@@ -150,7 +154,7 @@ func (o *WorkflowArrayDataType) UnsetArrayItemType() {
 
 // GetMax returns the Max field value if set, zero value otherwise.
 func (o *WorkflowArrayDataType) GetMax() int64 {
-	if o == nil || o.Max == nil {
+	if o == nil || IsNil(o.Max) {
 		var ret int64
 		return ret
 	}
@@ -160,7 +164,7 @@ func (o *WorkflowArrayDataType) GetMax() int64 {
 // GetMaxOk returns a tuple with the Max field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowArrayDataType) GetMaxOk() (*int64, bool) {
-	if o == nil || o.Max == nil {
+	if o == nil || IsNil(o.Max) {
 		return nil, false
 	}
 	return o.Max, true
@@ -168,7 +172,7 @@ func (o *WorkflowArrayDataType) GetMaxOk() (*int64, bool) {
 
 // HasMax returns a boolean if a field has been set.
 func (o *WorkflowArrayDataType) HasMax() bool {
-	if o != nil && o.Max != nil {
+	if o != nil && !IsNil(o.Max) {
 		return true
 	}
 
@@ -182,7 +186,7 @@ func (o *WorkflowArrayDataType) SetMax(v int64) {
 
 // GetMin returns the Min field value if set, zero value otherwise.
 func (o *WorkflowArrayDataType) GetMin() int64 {
-	if o == nil || o.Min == nil {
+	if o == nil || IsNil(o.Min) {
 		var ret int64
 		return ret
 	}
@@ -192,7 +196,7 @@ func (o *WorkflowArrayDataType) GetMin() int64 {
 // GetMinOk returns a tuple with the Min field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowArrayDataType) GetMinOk() (*int64, bool) {
-	if o == nil || o.Min == nil {
+	if o == nil || IsNil(o.Min) {
 		return nil, false
 	}
 	return o.Min, true
@@ -200,7 +204,7 @@ func (o *WorkflowArrayDataType) GetMinOk() (*int64, bool) {
 
 // HasMin returns a boolean if a field has been set.
 func (o *WorkflowArrayDataType) HasMin() bool {
-	if o != nil && o.Min != nil {
+	if o != nil && !IsNil(o.Min) {
 		return true
 	}
 
@@ -213,28 +217,32 @@ func (o *WorkflowArrayDataType) SetMin(v int64) {
 }
 
 func (o WorkflowArrayDataType) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o WorkflowArrayDataType) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedWorkflowBaseDataType, errWorkflowBaseDataType := json.Marshal(o.WorkflowBaseDataType)
 	if errWorkflowBaseDataType != nil {
-		return []byte{}, errWorkflowBaseDataType
+		return map[string]interface{}{}, errWorkflowBaseDataType
 	}
 	errWorkflowBaseDataType = json.Unmarshal([]byte(serializedWorkflowBaseDataType), &toSerialize)
 	if errWorkflowBaseDataType != nil {
-		return []byte{}, errWorkflowBaseDataType
+		return map[string]interface{}{}, errWorkflowBaseDataType
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
 	if o.ArrayItemType.IsSet() {
 		toSerialize["ArrayItemType"] = o.ArrayItemType.Get()
 	}
-	if o.Max != nil {
+	if !IsNil(o.Max) {
 		toSerialize["Max"] = o.Max
 	}
-	if o.Min != nil {
+	if !IsNil(o.Min) {
 		toSerialize["Min"] = o.Min
 	}
 
@@ -242,10 +250,32 @@ func (o WorkflowArrayDataType) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *WorkflowArrayDataType) UnmarshalJSON(bytes []byte) (err error) {
+func (o *WorkflowArrayDataType) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type WorkflowArrayDataTypeWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -260,7 +290,7 @@ func (o *WorkflowArrayDataType) UnmarshalJSON(bytes []byte) (err error) {
 
 	varWorkflowArrayDataTypeWithoutEmbeddedStruct := WorkflowArrayDataTypeWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varWorkflowArrayDataTypeWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varWorkflowArrayDataTypeWithoutEmbeddedStruct)
 	if err == nil {
 		varWorkflowArrayDataType := _WorkflowArrayDataType{}
 		varWorkflowArrayDataType.ClassId = varWorkflowArrayDataTypeWithoutEmbeddedStruct.ClassId
@@ -275,7 +305,7 @@ func (o *WorkflowArrayDataType) UnmarshalJSON(bytes []byte) (err error) {
 
 	varWorkflowArrayDataType := _WorkflowArrayDataType{}
 
-	err = json.Unmarshal(bytes, &varWorkflowArrayDataType)
+	err = json.Unmarshal(data, &varWorkflowArrayDataType)
 	if err == nil {
 		o.WorkflowBaseDataType = varWorkflowArrayDataType.WorkflowBaseDataType
 	} else {
@@ -284,7 +314,7 @@ func (o *WorkflowArrayDataType) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "ArrayItemType")

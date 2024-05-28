@@ -12,10 +12,10 @@ Name | Type | Description | Notes
 **ServerFirmwareVersions** | Pointer to [**[]HyperflexServerFirmwareVersionInfo**](HyperflexServerFirmwareVersionInfo.md) |  | [optional] 
 **UpgradeTypes** | Pointer to **[]string** |  | [optional] 
 **ClusterProfiles** | Pointer to [**[]HyperflexClusterProfileRelationship**](HyperflexClusterProfileRelationship.md) | An array of relationships to hyperflexClusterProfile resources. | [optional] 
-**HxdpVersionInfo** | Pointer to [**SoftwareHyperflexDistributableRelationship**](SoftwareHyperflexDistributableRelationship.md) |  | [optional] 
-**HypervisorVersionInfo** | Pointer to [**SoftwareHyperflexDistributableRelationship**](SoftwareHyperflexDistributableRelationship.md) |  | [optional] 
-**Organization** | Pointer to [**OrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
-**ServerFirmwareVersionInfo** | Pointer to [**FirmwareDistributableRelationship**](FirmwareDistributableRelationship.md) |  | [optional] 
+**HxdpVersionInfo** | Pointer to [**NullableSoftwareHyperflexDistributableRelationship**](SoftwareHyperflexDistributableRelationship.md) |  | [optional] 
+**HypervisorVersionInfo** | Pointer to [**NullableSoftwareHyperflexDistributableRelationship**](SoftwareHyperflexDistributableRelationship.md) |  | [optional] 
+**Organization** | Pointer to [**NullableOrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
+**ServerFirmwareVersionInfo** | Pointer to [**NullableFirmwareDistributableRelationship**](FirmwareDistributableRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -281,6 +281,16 @@ SetHxdpVersionInfo sets HxdpVersionInfo field to given value.
 
 HasHxdpVersionInfo returns a boolean if a field has been set.
 
+### SetHxdpVersionInfoNil
+
+`func (o *HyperflexSoftwareVersionPolicy) SetHxdpVersionInfoNil(b bool)`
+
+ SetHxdpVersionInfoNil sets the value for HxdpVersionInfo to be an explicit nil
+
+### UnsetHxdpVersionInfo
+`func (o *HyperflexSoftwareVersionPolicy) UnsetHxdpVersionInfo()`
+
+UnsetHxdpVersionInfo ensures that no value is present for HxdpVersionInfo, not even an explicit nil
 ### GetHypervisorVersionInfo
 
 `func (o *HyperflexSoftwareVersionPolicy) GetHypervisorVersionInfo() SoftwareHyperflexDistributableRelationship`
@@ -306,6 +316,16 @@ SetHypervisorVersionInfo sets HypervisorVersionInfo field to given value.
 
 HasHypervisorVersionInfo returns a boolean if a field has been set.
 
+### SetHypervisorVersionInfoNil
+
+`func (o *HyperflexSoftwareVersionPolicy) SetHypervisorVersionInfoNil(b bool)`
+
+ SetHypervisorVersionInfoNil sets the value for HypervisorVersionInfo to be an explicit nil
+
+### UnsetHypervisorVersionInfo
+`func (o *HyperflexSoftwareVersionPolicy) UnsetHypervisorVersionInfo()`
+
+UnsetHypervisorVersionInfo ensures that no value is present for HypervisorVersionInfo, not even an explicit nil
 ### GetOrganization
 
 `func (o *HyperflexSoftwareVersionPolicy) GetOrganization() OrganizationOrganizationRelationship`
@@ -331,6 +351,16 @@ SetOrganization sets Organization field to given value.
 
 HasOrganization returns a boolean if a field has been set.
 
+### SetOrganizationNil
+
+`func (o *HyperflexSoftwareVersionPolicy) SetOrganizationNil(b bool)`
+
+ SetOrganizationNil sets the value for Organization to be an explicit nil
+
+### UnsetOrganization
+`func (o *HyperflexSoftwareVersionPolicy) UnsetOrganization()`
+
+UnsetOrganization ensures that no value is present for Organization, not even an explicit nil
 ### GetServerFirmwareVersionInfo
 
 `func (o *HyperflexSoftwareVersionPolicy) GetServerFirmwareVersionInfo() FirmwareDistributableRelationship`
@@ -356,6 +386,16 @@ SetServerFirmwareVersionInfo sets ServerFirmwareVersionInfo field to given value
 
 HasServerFirmwareVersionInfo returns a boolean if a field has been set.
 
+### SetServerFirmwareVersionInfoNil
+
+`func (o *HyperflexSoftwareVersionPolicy) SetServerFirmwareVersionInfoNil(b bool)`
+
+ SetServerFirmwareVersionInfoNil sets the value for ServerFirmwareVersionInfo to be an explicit nil
+
+### UnsetServerFirmwareVersionInfo
+`func (o *HyperflexSoftwareVersionPolicy) UnsetServerFirmwareVersionInfo()`
+
+UnsetServerFirmwareVersionInfo ensures that no value is present for ServerFirmwareVersionInfo, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,10 +13,14 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 	"time"
 )
+
+// checks if the TamAdvisoryInstance type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &TamAdvisoryInstance{}
 
 // TamAdvisoryInstance Instance of an Intersight advisory applicable for an Intersight managed object. An advisory instance is created when a given advisory is found applicable for an Intersight managed object. An advisory instance is retained for some time even after being cleared for historical purposes. A 'cleared' advisory instance is deleted after the retention time is elaspsed.
 type TamAdvisoryInstance struct {
@@ -34,10 +38,10 @@ type TamAdvisoryInstance struct {
 	// Timestamp when this advisory was last evaluated.
 	LastVerifiedTime *time.Time `json:"LastVerifiedTime,omitempty"`
 	// Current state of the advisory instance (Active/Cleared/Unknown etc.). * `unknown` - Intersight is unable to determine if the Advisory instance is applicable for the affected managed object. * `active` - Advisory instance is currently active and applicable for the affected managed object. * `cleared` - Advisory instance is no longer applicable for the affected managed object.
-	State                *string                              `json:"State,omitempty"`
-	Advisory             *TamBaseAdvisoryRelationship         `json:"Advisory,omitempty"`
-	AffectedObject       *MoBaseMoRelationship                `json:"AffectedObject,omitempty"`
-	DeviceRegistration   *AssetDeviceRegistrationRelationship `json:"DeviceRegistration,omitempty"`
+	State                *string                                     `json:"State,omitempty"`
+	Advisory             NullableTamBaseAdvisoryRelationship         `json:"Advisory,omitempty"`
+	AffectedObject       NullableMoBaseMoRelationship                `json:"AffectedObject,omitempty"`
+	DeviceRegistration   NullableAssetDeviceRegistrationRelationship `json:"DeviceRegistration,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -120,7 +124,7 @@ func (o *TamAdvisoryInstance) SetObjectType(v string) {
 
 // GetAffectedObjectMoid returns the AffectedObjectMoid field value if set, zero value otherwise.
 func (o *TamAdvisoryInstance) GetAffectedObjectMoid() string {
-	if o == nil || o.AffectedObjectMoid == nil {
+	if o == nil || IsNil(o.AffectedObjectMoid) {
 		var ret string
 		return ret
 	}
@@ -130,7 +134,7 @@ func (o *TamAdvisoryInstance) GetAffectedObjectMoid() string {
 // GetAffectedObjectMoidOk returns a tuple with the AffectedObjectMoid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TamAdvisoryInstance) GetAffectedObjectMoidOk() (*string, bool) {
-	if o == nil || o.AffectedObjectMoid == nil {
+	if o == nil || IsNil(o.AffectedObjectMoid) {
 		return nil, false
 	}
 	return o.AffectedObjectMoid, true
@@ -138,7 +142,7 @@ func (o *TamAdvisoryInstance) GetAffectedObjectMoidOk() (*string, bool) {
 
 // HasAffectedObjectMoid returns a boolean if a field has been set.
 func (o *TamAdvisoryInstance) HasAffectedObjectMoid() bool {
-	if o != nil && o.AffectedObjectMoid != nil {
+	if o != nil && !IsNil(o.AffectedObjectMoid) {
 		return true
 	}
 
@@ -152,7 +156,7 @@ func (o *TamAdvisoryInstance) SetAffectedObjectMoid(v string) {
 
 // GetAffectedObjectType returns the AffectedObjectType field value if set, zero value otherwise.
 func (o *TamAdvisoryInstance) GetAffectedObjectType() string {
-	if o == nil || o.AffectedObjectType == nil {
+	if o == nil || IsNil(o.AffectedObjectType) {
 		var ret string
 		return ret
 	}
@@ -162,7 +166,7 @@ func (o *TamAdvisoryInstance) GetAffectedObjectType() string {
 // GetAffectedObjectTypeOk returns a tuple with the AffectedObjectType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TamAdvisoryInstance) GetAffectedObjectTypeOk() (*string, bool) {
-	if o == nil || o.AffectedObjectType == nil {
+	if o == nil || IsNil(o.AffectedObjectType) {
 		return nil, false
 	}
 	return o.AffectedObjectType, true
@@ -170,7 +174,7 @@ func (o *TamAdvisoryInstance) GetAffectedObjectTypeOk() (*string, bool) {
 
 // HasAffectedObjectType returns a boolean if a field has been set.
 func (o *TamAdvisoryInstance) HasAffectedObjectType() bool {
-	if o != nil && o.AffectedObjectType != nil {
+	if o != nil && !IsNil(o.AffectedObjectType) {
 		return true
 	}
 
@@ -184,7 +188,7 @@ func (o *TamAdvisoryInstance) SetAffectedObjectType(v string) {
 
 // GetLastStateChangeTime returns the LastStateChangeTime field value if set, zero value otherwise.
 func (o *TamAdvisoryInstance) GetLastStateChangeTime() time.Time {
-	if o == nil || o.LastStateChangeTime == nil {
+	if o == nil || IsNil(o.LastStateChangeTime) {
 		var ret time.Time
 		return ret
 	}
@@ -194,7 +198,7 @@ func (o *TamAdvisoryInstance) GetLastStateChangeTime() time.Time {
 // GetLastStateChangeTimeOk returns a tuple with the LastStateChangeTime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TamAdvisoryInstance) GetLastStateChangeTimeOk() (*time.Time, bool) {
-	if o == nil || o.LastStateChangeTime == nil {
+	if o == nil || IsNil(o.LastStateChangeTime) {
 		return nil, false
 	}
 	return o.LastStateChangeTime, true
@@ -202,7 +206,7 @@ func (o *TamAdvisoryInstance) GetLastStateChangeTimeOk() (*time.Time, bool) {
 
 // HasLastStateChangeTime returns a boolean if a field has been set.
 func (o *TamAdvisoryInstance) HasLastStateChangeTime() bool {
-	if o != nil && o.LastStateChangeTime != nil {
+	if o != nil && !IsNil(o.LastStateChangeTime) {
 		return true
 	}
 
@@ -216,7 +220,7 @@ func (o *TamAdvisoryInstance) SetLastStateChangeTime(v time.Time) {
 
 // GetLastVerifiedTime returns the LastVerifiedTime field value if set, zero value otherwise.
 func (o *TamAdvisoryInstance) GetLastVerifiedTime() time.Time {
-	if o == nil || o.LastVerifiedTime == nil {
+	if o == nil || IsNil(o.LastVerifiedTime) {
 		var ret time.Time
 		return ret
 	}
@@ -226,7 +230,7 @@ func (o *TamAdvisoryInstance) GetLastVerifiedTime() time.Time {
 // GetLastVerifiedTimeOk returns a tuple with the LastVerifiedTime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TamAdvisoryInstance) GetLastVerifiedTimeOk() (*time.Time, bool) {
-	if o == nil || o.LastVerifiedTime == nil {
+	if o == nil || IsNil(o.LastVerifiedTime) {
 		return nil, false
 	}
 	return o.LastVerifiedTime, true
@@ -234,7 +238,7 @@ func (o *TamAdvisoryInstance) GetLastVerifiedTimeOk() (*time.Time, bool) {
 
 // HasLastVerifiedTime returns a boolean if a field has been set.
 func (o *TamAdvisoryInstance) HasLastVerifiedTime() bool {
-	if o != nil && o.LastVerifiedTime != nil {
+	if o != nil && !IsNil(o.LastVerifiedTime) {
 		return true
 	}
 
@@ -248,7 +252,7 @@ func (o *TamAdvisoryInstance) SetLastVerifiedTime(v time.Time) {
 
 // GetState returns the State field value if set, zero value otherwise.
 func (o *TamAdvisoryInstance) GetState() string {
-	if o == nil || o.State == nil {
+	if o == nil || IsNil(o.State) {
 		var ret string
 		return ret
 	}
@@ -258,7 +262,7 @@ func (o *TamAdvisoryInstance) GetState() string {
 // GetStateOk returns a tuple with the State field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TamAdvisoryInstance) GetStateOk() (*string, bool) {
-	if o == nil || o.State == nil {
+	if o == nil || IsNil(o.State) {
 		return nil, false
 	}
 	return o.State, true
@@ -266,7 +270,7 @@ func (o *TamAdvisoryInstance) GetStateOk() (*string, bool) {
 
 // HasState returns a boolean if a field has been set.
 func (o *TamAdvisoryInstance) HasState() bool {
-	if o != nil && o.State != nil {
+	if o != nil && !IsNil(o.State) {
 		return true
 	}
 
@@ -278,151 +282,210 @@ func (o *TamAdvisoryInstance) SetState(v string) {
 	o.State = &v
 }
 
-// GetAdvisory returns the Advisory field value if set, zero value otherwise.
+// GetAdvisory returns the Advisory field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *TamAdvisoryInstance) GetAdvisory() TamBaseAdvisoryRelationship {
-	if o == nil || o.Advisory == nil {
+	if o == nil || IsNil(o.Advisory.Get()) {
 		var ret TamBaseAdvisoryRelationship
 		return ret
 	}
-	return *o.Advisory
+	return *o.Advisory.Get()
 }
 
 // GetAdvisoryOk returns a tuple with the Advisory field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *TamAdvisoryInstance) GetAdvisoryOk() (*TamBaseAdvisoryRelationship, bool) {
-	if o == nil || o.Advisory == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Advisory, true
+	return o.Advisory.Get(), o.Advisory.IsSet()
 }
 
 // HasAdvisory returns a boolean if a field has been set.
 func (o *TamAdvisoryInstance) HasAdvisory() bool {
-	if o != nil && o.Advisory != nil {
+	if o != nil && o.Advisory.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetAdvisory gets a reference to the given TamBaseAdvisoryRelationship and assigns it to the Advisory field.
+// SetAdvisory gets a reference to the given NullableTamBaseAdvisoryRelationship and assigns it to the Advisory field.
 func (o *TamAdvisoryInstance) SetAdvisory(v TamBaseAdvisoryRelationship) {
-	o.Advisory = &v
+	o.Advisory.Set(&v)
 }
 
-// GetAffectedObject returns the AffectedObject field value if set, zero value otherwise.
+// SetAdvisoryNil sets the value for Advisory to be an explicit nil
+func (o *TamAdvisoryInstance) SetAdvisoryNil() {
+	o.Advisory.Set(nil)
+}
+
+// UnsetAdvisory ensures that no value is present for Advisory, not even an explicit nil
+func (o *TamAdvisoryInstance) UnsetAdvisory() {
+	o.Advisory.Unset()
+}
+
+// GetAffectedObject returns the AffectedObject field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *TamAdvisoryInstance) GetAffectedObject() MoBaseMoRelationship {
-	if o == nil || o.AffectedObject == nil {
+	if o == nil || IsNil(o.AffectedObject.Get()) {
 		var ret MoBaseMoRelationship
 		return ret
 	}
-	return *o.AffectedObject
+	return *o.AffectedObject.Get()
 }
 
 // GetAffectedObjectOk returns a tuple with the AffectedObject field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *TamAdvisoryInstance) GetAffectedObjectOk() (*MoBaseMoRelationship, bool) {
-	if o == nil || o.AffectedObject == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.AffectedObject, true
+	return o.AffectedObject.Get(), o.AffectedObject.IsSet()
 }
 
 // HasAffectedObject returns a boolean if a field has been set.
 func (o *TamAdvisoryInstance) HasAffectedObject() bool {
-	if o != nil && o.AffectedObject != nil {
+	if o != nil && o.AffectedObject.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetAffectedObject gets a reference to the given MoBaseMoRelationship and assigns it to the AffectedObject field.
+// SetAffectedObject gets a reference to the given NullableMoBaseMoRelationship and assigns it to the AffectedObject field.
 func (o *TamAdvisoryInstance) SetAffectedObject(v MoBaseMoRelationship) {
-	o.AffectedObject = &v
+	o.AffectedObject.Set(&v)
 }
 
-// GetDeviceRegistration returns the DeviceRegistration field value if set, zero value otherwise.
+// SetAffectedObjectNil sets the value for AffectedObject to be an explicit nil
+func (o *TamAdvisoryInstance) SetAffectedObjectNil() {
+	o.AffectedObject.Set(nil)
+}
+
+// UnsetAffectedObject ensures that no value is present for AffectedObject, not even an explicit nil
+func (o *TamAdvisoryInstance) UnsetAffectedObject() {
+	o.AffectedObject.Unset()
+}
+
+// GetDeviceRegistration returns the DeviceRegistration field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *TamAdvisoryInstance) GetDeviceRegistration() AssetDeviceRegistrationRelationship {
-	if o == nil || o.DeviceRegistration == nil {
+	if o == nil || IsNil(o.DeviceRegistration.Get()) {
 		var ret AssetDeviceRegistrationRelationship
 		return ret
 	}
-	return *o.DeviceRegistration
+	return *o.DeviceRegistration.Get()
 }
 
 // GetDeviceRegistrationOk returns a tuple with the DeviceRegistration field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *TamAdvisoryInstance) GetDeviceRegistrationOk() (*AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.DeviceRegistration == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.DeviceRegistration, true
+	return o.DeviceRegistration.Get(), o.DeviceRegistration.IsSet()
 }
 
 // HasDeviceRegistration returns a boolean if a field has been set.
 func (o *TamAdvisoryInstance) HasDeviceRegistration() bool {
-	if o != nil && o.DeviceRegistration != nil {
+	if o != nil && o.DeviceRegistration.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetDeviceRegistration gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the DeviceRegistration field.
+// SetDeviceRegistration gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the DeviceRegistration field.
 func (o *TamAdvisoryInstance) SetDeviceRegistration(v AssetDeviceRegistrationRelationship) {
-	o.DeviceRegistration = &v
+	o.DeviceRegistration.Set(&v)
+}
+
+// SetDeviceRegistrationNil sets the value for DeviceRegistration to be an explicit nil
+func (o *TamAdvisoryInstance) SetDeviceRegistrationNil() {
+	o.DeviceRegistration.Set(nil)
+}
+
+// UnsetDeviceRegistration ensures that no value is present for DeviceRegistration, not even an explicit nil
+func (o *TamAdvisoryInstance) UnsetDeviceRegistration() {
+	o.DeviceRegistration.Unset()
 }
 
 func (o TamAdvisoryInstance) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o TamAdvisoryInstance) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.AffectedObjectMoid != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.AffectedObjectMoid) {
 		toSerialize["AffectedObjectMoid"] = o.AffectedObjectMoid
 	}
-	if o.AffectedObjectType != nil {
+	if !IsNil(o.AffectedObjectType) {
 		toSerialize["AffectedObjectType"] = o.AffectedObjectType
 	}
-	if o.LastStateChangeTime != nil {
+	if !IsNil(o.LastStateChangeTime) {
 		toSerialize["LastStateChangeTime"] = o.LastStateChangeTime
 	}
-	if o.LastVerifiedTime != nil {
+	if !IsNil(o.LastVerifiedTime) {
 		toSerialize["LastVerifiedTime"] = o.LastVerifiedTime
 	}
-	if o.State != nil {
+	if !IsNil(o.State) {
 		toSerialize["State"] = o.State
 	}
-	if o.Advisory != nil {
-		toSerialize["Advisory"] = o.Advisory
+	if o.Advisory.IsSet() {
+		toSerialize["Advisory"] = o.Advisory.Get()
 	}
-	if o.AffectedObject != nil {
-		toSerialize["AffectedObject"] = o.AffectedObject
+	if o.AffectedObject.IsSet() {
+		toSerialize["AffectedObject"] = o.AffectedObject.Get()
 	}
-	if o.DeviceRegistration != nil {
-		toSerialize["DeviceRegistration"] = o.DeviceRegistration
+	if o.DeviceRegistration.IsSet() {
+		toSerialize["DeviceRegistration"] = o.DeviceRegistration.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *TamAdvisoryInstance) UnmarshalJSON(bytes []byte) (err error) {
+func (o *TamAdvisoryInstance) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type TamAdvisoryInstanceWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -437,15 +500,15 @@ func (o *TamAdvisoryInstance) UnmarshalJSON(bytes []byte) (err error) {
 		// Timestamp when this advisory was last evaluated.
 		LastVerifiedTime *time.Time `json:"LastVerifiedTime,omitempty"`
 		// Current state of the advisory instance (Active/Cleared/Unknown etc.). * `unknown` - Intersight is unable to determine if the Advisory instance is applicable for the affected managed object. * `active` - Advisory instance is currently active and applicable for the affected managed object. * `cleared` - Advisory instance is no longer applicable for the affected managed object.
-		State              *string                              `json:"State,omitempty"`
-		Advisory           *TamBaseAdvisoryRelationship         `json:"Advisory,omitempty"`
-		AffectedObject     *MoBaseMoRelationship                `json:"AffectedObject,omitempty"`
-		DeviceRegistration *AssetDeviceRegistrationRelationship `json:"DeviceRegistration,omitempty"`
+		State              *string                                     `json:"State,omitempty"`
+		Advisory           NullableTamBaseAdvisoryRelationship         `json:"Advisory,omitempty"`
+		AffectedObject     NullableMoBaseMoRelationship                `json:"AffectedObject,omitempty"`
+		DeviceRegistration NullableAssetDeviceRegistrationRelationship `json:"DeviceRegistration,omitempty"`
 	}
 
 	varTamAdvisoryInstanceWithoutEmbeddedStruct := TamAdvisoryInstanceWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varTamAdvisoryInstanceWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varTamAdvisoryInstanceWithoutEmbeddedStruct)
 	if err == nil {
 		varTamAdvisoryInstance := _TamAdvisoryInstance{}
 		varTamAdvisoryInstance.ClassId = varTamAdvisoryInstanceWithoutEmbeddedStruct.ClassId
@@ -465,7 +528,7 @@ func (o *TamAdvisoryInstance) UnmarshalJSON(bytes []byte) (err error) {
 
 	varTamAdvisoryInstance := _TamAdvisoryInstance{}
 
-	err = json.Unmarshal(bytes, &varTamAdvisoryInstance)
+	err = json.Unmarshal(data, &varTamAdvisoryInstance)
 	if err == nil {
 		o.MoBaseMo = varTamAdvisoryInstance.MoBaseMo
 	} else {
@@ -474,7 +537,7 @@ func (o *TamAdvisoryInstance) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "AffectedObjectMoid")

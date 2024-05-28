@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the StorageHitachiExternalPathGroup type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &StorageHitachiExternalPathGroup{}
 
 // StorageHitachiExternalPathGroup A external path group in Hitachi storage array.
 type StorageHitachiExternalPathGroup struct {
@@ -31,9 +35,9 @@ type StorageHitachiExternalPathGroup struct {
 	// Serial number of the external storage system.
 	ExternalSerialNumber *string `json:"ExternalSerialNumber,omitempty"`
 	// External path group number.
-	Name                 *string                              `json:"Name,omitempty"`
-	Array                *StorageHitachiArrayRelationship     `json:"Array,omitempty"`
-	RegisteredDevice     *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+	Name                 *string                                     `json:"Name,omitempty"`
+	Array                NullableStorageHitachiArrayRelationship     `json:"Array,omitempty"`
+	RegisteredDevice     NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -123,7 +127,7 @@ func (o *StorageHitachiExternalPathGroup) GetExternalParityGroups() []StorageExt
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StorageHitachiExternalPathGroup) GetExternalParityGroupsOk() ([]StorageExternalParityGroup, bool) {
-	if o == nil || o.ExternalParityGroups == nil {
+	if o == nil || IsNil(o.ExternalParityGroups) {
 		return nil, false
 	}
 	return o.ExternalParityGroups, true
@@ -131,7 +135,7 @@ func (o *StorageHitachiExternalPathGroup) GetExternalParityGroupsOk() ([]Storage
 
 // HasExternalParityGroups returns a boolean if a field has been set.
 func (o *StorageHitachiExternalPathGroup) HasExternalParityGroups() bool {
-	if o != nil && o.ExternalParityGroups != nil {
+	if o != nil && IsNil(o.ExternalParityGroups) {
 		return true
 	}
 
@@ -156,7 +160,7 @@ func (o *StorageHitachiExternalPathGroup) GetExternalPaths() []StorageExternalPa
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StorageHitachiExternalPathGroup) GetExternalPathsOk() ([]StorageExternalPath, bool) {
-	if o == nil || o.ExternalPaths == nil {
+	if o == nil || IsNil(o.ExternalPaths) {
 		return nil, false
 	}
 	return o.ExternalPaths, true
@@ -164,7 +168,7 @@ func (o *StorageHitachiExternalPathGroup) GetExternalPathsOk() ([]StorageExterna
 
 // HasExternalPaths returns a boolean if a field has been set.
 func (o *StorageHitachiExternalPathGroup) HasExternalPaths() bool {
-	if o != nil && o.ExternalPaths != nil {
+	if o != nil && IsNil(o.ExternalPaths) {
 		return true
 	}
 
@@ -178,7 +182,7 @@ func (o *StorageHitachiExternalPathGroup) SetExternalPaths(v []StorageExternalPa
 
 // GetExternalProductId returns the ExternalProductId field value if set, zero value otherwise.
 func (o *StorageHitachiExternalPathGroup) GetExternalProductId() string {
-	if o == nil || o.ExternalProductId == nil {
+	if o == nil || IsNil(o.ExternalProductId) {
 		var ret string
 		return ret
 	}
@@ -188,7 +192,7 @@ func (o *StorageHitachiExternalPathGroup) GetExternalProductId() string {
 // GetExternalProductIdOk returns a tuple with the ExternalProductId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageHitachiExternalPathGroup) GetExternalProductIdOk() (*string, bool) {
-	if o == nil || o.ExternalProductId == nil {
+	if o == nil || IsNil(o.ExternalProductId) {
 		return nil, false
 	}
 	return o.ExternalProductId, true
@@ -196,7 +200,7 @@ func (o *StorageHitachiExternalPathGroup) GetExternalProductIdOk() (*string, boo
 
 // HasExternalProductId returns a boolean if a field has been set.
 func (o *StorageHitachiExternalPathGroup) HasExternalProductId() bool {
-	if o != nil && o.ExternalProductId != nil {
+	if o != nil && !IsNil(o.ExternalProductId) {
 		return true
 	}
 
@@ -210,7 +214,7 @@ func (o *StorageHitachiExternalPathGroup) SetExternalProductId(v string) {
 
 // GetExternalSerialNumber returns the ExternalSerialNumber field value if set, zero value otherwise.
 func (o *StorageHitachiExternalPathGroup) GetExternalSerialNumber() string {
-	if o == nil || o.ExternalSerialNumber == nil {
+	if o == nil || IsNil(o.ExternalSerialNumber) {
 		var ret string
 		return ret
 	}
@@ -220,7 +224,7 @@ func (o *StorageHitachiExternalPathGroup) GetExternalSerialNumber() string {
 // GetExternalSerialNumberOk returns a tuple with the ExternalSerialNumber field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageHitachiExternalPathGroup) GetExternalSerialNumberOk() (*string, bool) {
-	if o == nil || o.ExternalSerialNumber == nil {
+	if o == nil || IsNil(o.ExternalSerialNumber) {
 		return nil, false
 	}
 	return o.ExternalSerialNumber, true
@@ -228,7 +232,7 @@ func (o *StorageHitachiExternalPathGroup) GetExternalSerialNumberOk() (*string, 
 
 // HasExternalSerialNumber returns a boolean if a field has been set.
 func (o *StorageHitachiExternalPathGroup) HasExternalSerialNumber() bool {
-	if o != nil && o.ExternalSerialNumber != nil {
+	if o != nil && !IsNil(o.ExternalSerialNumber) {
 		return true
 	}
 
@@ -242,7 +246,7 @@ func (o *StorageHitachiExternalPathGroup) SetExternalSerialNumber(v string) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *StorageHitachiExternalPathGroup) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -252,7 +256,7 @@ func (o *StorageHitachiExternalPathGroup) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageHitachiExternalPathGroup) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -260,7 +264,7 @@ func (o *StorageHitachiExternalPathGroup) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *StorageHitachiExternalPathGroup) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -272,116 +276,164 @@ func (o *StorageHitachiExternalPathGroup) SetName(v string) {
 	o.Name = &v
 }
 
-// GetArray returns the Array field value if set, zero value otherwise.
+// GetArray returns the Array field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *StorageHitachiExternalPathGroup) GetArray() StorageHitachiArrayRelationship {
-	if o == nil || o.Array == nil {
+	if o == nil || IsNil(o.Array.Get()) {
 		var ret StorageHitachiArrayRelationship
 		return ret
 	}
-	return *o.Array
+	return *o.Array.Get()
 }
 
 // GetArrayOk returns a tuple with the Array field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StorageHitachiExternalPathGroup) GetArrayOk() (*StorageHitachiArrayRelationship, bool) {
-	if o == nil || o.Array == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Array, true
+	return o.Array.Get(), o.Array.IsSet()
 }
 
 // HasArray returns a boolean if a field has been set.
 func (o *StorageHitachiExternalPathGroup) HasArray() bool {
-	if o != nil && o.Array != nil {
+	if o != nil && o.Array.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetArray gets a reference to the given StorageHitachiArrayRelationship and assigns it to the Array field.
+// SetArray gets a reference to the given NullableStorageHitachiArrayRelationship and assigns it to the Array field.
 func (o *StorageHitachiExternalPathGroup) SetArray(v StorageHitachiArrayRelationship) {
-	o.Array = &v
+	o.Array.Set(&v)
 }
 
-// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise.
+// SetArrayNil sets the value for Array to be an explicit nil
+func (o *StorageHitachiExternalPathGroup) SetArrayNil() {
+	o.Array.Set(nil)
+}
+
+// UnsetArray ensures that no value is present for Array, not even an explicit nil
+func (o *StorageHitachiExternalPathGroup) UnsetArray() {
+	o.Array.Unset()
+}
+
+// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *StorageHitachiExternalPathGroup) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil || IsNil(o.RegisteredDevice.Get()) {
 		var ret AssetDeviceRegistrationRelationship
 		return ret
 	}
-	return *o.RegisteredDevice
+	return *o.RegisteredDevice.Get()
 }
 
 // GetRegisteredDeviceOk returns a tuple with the RegisteredDevice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StorageHitachiExternalPathGroup) GetRegisteredDeviceOk() (*AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.RegisteredDevice, true
+	return o.RegisteredDevice.Get(), o.RegisteredDevice.IsSet()
 }
 
 // HasRegisteredDevice returns a boolean if a field has been set.
 func (o *StorageHitachiExternalPathGroup) HasRegisteredDevice() bool {
-	if o != nil && o.RegisteredDevice != nil {
+	if o != nil && o.RegisteredDevice.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRegisteredDevice gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
+// SetRegisteredDevice gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
 func (o *StorageHitachiExternalPathGroup) SetRegisteredDevice(v AssetDeviceRegistrationRelationship) {
-	o.RegisteredDevice = &v
+	o.RegisteredDevice.Set(&v)
+}
+
+// SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+func (o *StorageHitachiExternalPathGroup) SetRegisteredDeviceNil() {
+	o.RegisteredDevice.Set(nil)
+}
+
+// UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
+func (o *StorageHitachiExternalPathGroup) UnsetRegisteredDevice() {
+	o.RegisteredDevice.Unset()
 }
 
 func (o StorageHitachiExternalPathGroup) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o StorageHitachiExternalPathGroup) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
 	if o.ExternalParityGroups != nil {
 		toSerialize["ExternalParityGroups"] = o.ExternalParityGroups
 	}
 	if o.ExternalPaths != nil {
 		toSerialize["ExternalPaths"] = o.ExternalPaths
 	}
-	if o.ExternalProductId != nil {
+	if !IsNil(o.ExternalProductId) {
 		toSerialize["ExternalProductId"] = o.ExternalProductId
 	}
-	if o.ExternalSerialNumber != nil {
+	if !IsNil(o.ExternalSerialNumber) {
 		toSerialize["ExternalSerialNumber"] = o.ExternalSerialNumber
 	}
-	if o.Name != nil {
+	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
 	}
-	if o.Array != nil {
-		toSerialize["Array"] = o.Array
+	if o.Array.IsSet() {
+		toSerialize["Array"] = o.Array.Get()
 	}
-	if o.RegisteredDevice != nil {
-		toSerialize["RegisteredDevice"] = o.RegisteredDevice
+	if o.RegisteredDevice.IsSet() {
+		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *StorageHitachiExternalPathGroup) UnmarshalJSON(bytes []byte) (err error) {
+func (o *StorageHitachiExternalPathGroup) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type StorageHitachiExternalPathGroupWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -394,14 +446,14 @@ func (o *StorageHitachiExternalPathGroup) UnmarshalJSON(bytes []byte) (err error
 		// Serial number of the external storage system.
 		ExternalSerialNumber *string `json:"ExternalSerialNumber,omitempty"`
 		// External path group number.
-		Name             *string                              `json:"Name,omitempty"`
-		Array            *StorageHitachiArrayRelationship     `json:"Array,omitempty"`
-		RegisteredDevice *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+		Name             *string                                     `json:"Name,omitempty"`
+		Array            NullableStorageHitachiArrayRelationship     `json:"Array,omitempty"`
+		RegisteredDevice NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	}
 
 	varStorageHitachiExternalPathGroupWithoutEmbeddedStruct := StorageHitachiExternalPathGroupWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varStorageHitachiExternalPathGroupWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varStorageHitachiExternalPathGroupWithoutEmbeddedStruct)
 	if err == nil {
 		varStorageHitachiExternalPathGroup := _StorageHitachiExternalPathGroup{}
 		varStorageHitachiExternalPathGroup.ClassId = varStorageHitachiExternalPathGroupWithoutEmbeddedStruct.ClassId
@@ -420,7 +472,7 @@ func (o *StorageHitachiExternalPathGroup) UnmarshalJSON(bytes []byte) (err error
 
 	varStorageHitachiExternalPathGroup := _StorageHitachiExternalPathGroup{}
 
-	err = json.Unmarshal(bytes, &varStorageHitachiExternalPathGroup)
+	err = json.Unmarshal(data, &varStorageHitachiExternalPathGroup)
 	if err == nil {
 		o.MoBaseMo = varStorageHitachiExternalPathGroup.MoBaseMo
 	} else {
@@ -429,7 +481,7 @@ func (o *StorageHitachiExternalPathGroup) UnmarshalJSON(bytes []byte) (err error
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "ExternalParityGroups")

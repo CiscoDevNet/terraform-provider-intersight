@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the CapabilityServerSchemaDescriptor type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &CapabilityServerSchemaDescriptor{}
 
 // CapabilityServerSchemaDescriptor Descriptor that identifies the server's redfish locatorled using cimc firmware info.
 type CapabilityServerSchemaDescriptor struct {
@@ -106,7 +110,7 @@ func (o *CapabilityServerSchemaDescriptor) SetObjectType(v string) {
 
 // GetLocatorLedName returns the LocatorLedName field value if set, zero value otherwise.
 func (o *CapabilityServerSchemaDescriptor) GetLocatorLedName() string {
-	if o == nil || o.LocatorLedName == nil {
+	if o == nil || IsNil(o.LocatorLedName) {
 		var ret string
 		return ret
 	}
@@ -116,7 +120,7 @@ func (o *CapabilityServerSchemaDescriptor) GetLocatorLedName() string {
 // GetLocatorLedNameOk returns a tuple with the LocatorLedName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CapabilityServerSchemaDescriptor) GetLocatorLedNameOk() (*string, bool) {
-	if o == nil || o.LocatorLedName == nil {
+	if o == nil || IsNil(o.LocatorLedName) {
 		return nil, false
 	}
 	return o.LocatorLedName, true
@@ -124,7 +128,7 @@ func (o *CapabilityServerSchemaDescriptor) GetLocatorLedNameOk() (*string, bool)
 
 // HasLocatorLedName returns a boolean if a field has been set.
 func (o *CapabilityServerSchemaDescriptor) HasLocatorLedName() bool {
-	if o != nil && o.LocatorLedName != nil {
+	if o != nil && !IsNil(o.LocatorLedName) {
 		return true
 	}
 
@@ -138,7 +142,7 @@ func (o *CapabilityServerSchemaDescriptor) SetLocatorLedName(v string) {
 
 // GetRedfishSchema returns the RedfishSchema field value if set, zero value otherwise.
 func (o *CapabilityServerSchemaDescriptor) GetRedfishSchema() string {
-	if o == nil || o.RedfishSchema == nil {
+	if o == nil || IsNil(o.RedfishSchema) {
 		var ret string
 		return ret
 	}
@@ -148,7 +152,7 @@ func (o *CapabilityServerSchemaDescriptor) GetRedfishSchema() string {
 // GetRedfishSchemaOk returns a tuple with the RedfishSchema field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CapabilityServerSchemaDescriptor) GetRedfishSchemaOk() (*string, bool) {
-	if o == nil || o.RedfishSchema == nil {
+	if o == nil || IsNil(o.RedfishSchema) {
 		return nil, false
 	}
 	return o.RedfishSchema, true
@@ -156,7 +160,7 @@ func (o *CapabilityServerSchemaDescriptor) GetRedfishSchemaOk() (*string, bool) 
 
 // HasRedfishSchema returns a boolean if a field has been set.
 func (o *CapabilityServerSchemaDescriptor) HasRedfishSchema() bool {
-	if o != nil && o.RedfishSchema != nil {
+	if o != nil && !IsNil(o.RedfishSchema) {
 		return true
 	}
 
@@ -169,25 +173,29 @@ func (o *CapabilityServerSchemaDescriptor) SetRedfishSchema(v string) {
 }
 
 func (o CapabilityServerSchemaDescriptor) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o CapabilityServerSchemaDescriptor) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedCapabilityHardwareDescriptor, errCapabilityHardwareDescriptor := json.Marshal(o.CapabilityHardwareDescriptor)
 	if errCapabilityHardwareDescriptor != nil {
-		return []byte{}, errCapabilityHardwareDescriptor
+		return map[string]interface{}{}, errCapabilityHardwareDescriptor
 	}
 	errCapabilityHardwareDescriptor = json.Unmarshal([]byte(serializedCapabilityHardwareDescriptor), &toSerialize)
 	if errCapabilityHardwareDescriptor != nil {
-		return []byte{}, errCapabilityHardwareDescriptor
+		return map[string]interface{}{}, errCapabilityHardwareDescriptor
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.LocatorLedName != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.LocatorLedName) {
 		toSerialize["LocatorLedName"] = o.LocatorLedName
 	}
-	if o.RedfishSchema != nil {
+	if !IsNil(o.RedfishSchema) {
 		toSerialize["RedfishSchema"] = o.RedfishSchema
 	}
 
@@ -195,10 +203,32 @@ func (o CapabilityServerSchemaDescriptor) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *CapabilityServerSchemaDescriptor) UnmarshalJSON(bytes []byte) (err error) {
+func (o *CapabilityServerSchemaDescriptor) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type CapabilityServerSchemaDescriptorWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -212,7 +242,7 @@ func (o *CapabilityServerSchemaDescriptor) UnmarshalJSON(bytes []byte) (err erro
 
 	varCapabilityServerSchemaDescriptorWithoutEmbeddedStruct := CapabilityServerSchemaDescriptorWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varCapabilityServerSchemaDescriptorWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varCapabilityServerSchemaDescriptorWithoutEmbeddedStruct)
 	if err == nil {
 		varCapabilityServerSchemaDescriptor := _CapabilityServerSchemaDescriptor{}
 		varCapabilityServerSchemaDescriptor.ClassId = varCapabilityServerSchemaDescriptorWithoutEmbeddedStruct.ClassId
@@ -226,7 +256,7 @@ func (o *CapabilityServerSchemaDescriptor) UnmarshalJSON(bytes []byte) (err erro
 
 	varCapabilityServerSchemaDescriptor := _CapabilityServerSchemaDescriptor{}
 
-	err = json.Unmarshal(bytes, &varCapabilityServerSchemaDescriptor)
+	err = json.Unmarshal(data, &varCapabilityServerSchemaDescriptor)
 	if err == nil {
 		o.CapabilityHardwareDescriptor = varCapabilityServerSchemaDescriptor.CapabilityHardwareDescriptor
 	} else {
@@ -235,7 +265,7 @@ func (o *CapabilityServerSchemaDescriptor) UnmarshalJSON(bytes []byte) (err erro
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "LocatorLedName")

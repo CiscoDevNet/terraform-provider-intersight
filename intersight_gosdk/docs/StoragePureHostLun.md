@@ -8,11 +8,11 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "storage.PureHostLun"]
 **HostGroupName** | Pointer to **string** | Name of the host group associated with LUN. | [optional] [readonly] 
 **Shared** | Pointer to **bool** | Kind of volume connection to host. True if it is connected through host group. False in case of direct host connection. | [optional] [readonly] 
-**Array** | Pointer to [**StoragePureArrayRelationship**](StoragePureArrayRelationship.md) |  | [optional] 
-**Host** | Pointer to [**StoragePureHostRelationship**](StoragePureHostRelationship.md) |  | [optional] 
-**HostGroup** | Pointer to [**StoragePureHostGroupRelationship**](StoragePureHostGroupRelationship.md) |  | [optional] 
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
-**Volume** | Pointer to [**StoragePureVolumeRelationship**](StoragePureVolumeRelationship.md) |  | [optional] 
+**Array** | Pointer to [**NullableStoragePureArrayRelationship**](StoragePureArrayRelationship.md) |  | [optional] 
+**Host** | Pointer to [**NullableStoragePureHostRelationship**](StoragePureHostRelationship.md) |  | [optional] 
+**HostGroup** | Pointer to [**NullableStoragePureHostGroupRelationship**](StoragePureHostGroupRelationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
+**Volume** | Pointer to [**NullableStoragePureVolumeRelationship**](StoragePureVolumeRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -148,6 +148,16 @@ SetArray sets Array field to given value.
 
 HasArray returns a boolean if a field has been set.
 
+### SetArrayNil
+
+`func (o *StoragePureHostLun) SetArrayNil(b bool)`
+
+ SetArrayNil sets the value for Array to be an explicit nil
+
+### UnsetArray
+`func (o *StoragePureHostLun) UnsetArray()`
+
+UnsetArray ensures that no value is present for Array, not even an explicit nil
 ### GetHost
 
 `func (o *StoragePureHostLun) GetHost() StoragePureHostRelationship`
@@ -173,6 +183,16 @@ SetHost sets Host field to given value.
 
 HasHost returns a boolean if a field has been set.
 
+### SetHostNil
+
+`func (o *StoragePureHostLun) SetHostNil(b bool)`
+
+ SetHostNil sets the value for Host to be an explicit nil
+
+### UnsetHost
+`func (o *StoragePureHostLun) UnsetHost()`
+
+UnsetHost ensures that no value is present for Host, not even an explicit nil
 ### GetHostGroup
 
 `func (o *StoragePureHostLun) GetHostGroup() StoragePureHostGroupRelationship`
@@ -198,6 +218,16 @@ SetHostGroup sets HostGroup field to given value.
 
 HasHostGroup returns a boolean if a field has been set.
 
+### SetHostGroupNil
+
+`func (o *StoragePureHostLun) SetHostGroupNil(b bool)`
+
+ SetHostGroupNil sets the value for HostGroup to be an explicit nil
+
+### UnsetHostGroup
+`func (o *StoragePureHostLun) UnsetHostGroup()`
+
+UnsetHostGroup ensures that no value is present for HostGroup, not even an explicit nil
 ### GetRegisteredDevice
 
 `func (o *StoragePureHostLun) GetRegisteredDevice() AssetDeviceRegistrationRelationship`
@@ -223,6 +253,16 @@ SetRegisteredDevice sets RegisteredDevice field to given value.
 
 HasRegisteredDevice returns a boolean if a field has been set.
 
+### SetRegisteredDeviceNil
+
+`func (o *StoragePureHostLun) SetRegisteredDeviceNil(b bool)`
+
+ SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+
+### UnsetRegisteredDevice
+`func (o *StoragePureHostLun) UnsetRegisteredDevice()`
+
+UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
 ### GetVolume
 
 `func (o *StoragePureHostLun) GetVolume() StoragePureVolumeRelationship`
@@ -248,6 +288,16 @@ SetVolume sets Volume field to given value.
 
 HasVolume returns a boolean if a field has been set.
 
+### SetVolumeNil
+
+`func (o *StoragePureHostLun) SetVolumeNil(b bool)`
+
+ SetVolumeNil sets the value for Volume to be an explicit nil
+
+### UnsetVolume
+`func (o *StoragePureHostLun) UnsetVolume()`
+
+UnsetVolume ensures that no value is present for Volume, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

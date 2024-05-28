@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the MetricsMetricCriterion type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &MetricsMetricCriterion{}
 
 // MetricsMetricCriterion Contains all the data and parameters used to configure a metric.
 type MetricsMetricCriterion struct {
@@ -118,7 +122,7 @@ func (o *MetricsMetricCriterion) SetObjectType(v string) {
 
 // GetAggregation returns the Aggregation field value if set, zero value otherwise.
 func (o *MetricsMetricCriterion) GetAggregation() string {
-	if o == nil || o.Aggregation == nil {
+	if o == nil || IsNil(o.Aggregation) {
 		var ret string
 		return ret
 	}
@@ -128,7 +132,7 @@ func (o *MetricsMetricCriterion) GetAggregation() string {
 // GetAggregationOk returns a tuple with the Aggregation field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *MetricsMetricCriterion) GetAggregationOk() (*string, bool) {
-	if o == nil || o.Aggregation == nil {
+	if o == nil || IsNil(o.Aggregation) {
 		return nil, false
 	}
 	return o.Aggregation, true
@@ -136,7 +140,7 @@ func (o *MetricsMetricCriterion) GetAggregationOk() (*string, bool) {
 
 // HasAggregation returns a boolean if a field has been set.
 func (o *MetricsMetricCriterion) HasAggregation() bool {
-	if o != nil && o.Aggregation != nil {
+	if o != nil && !IsNil(o.Aggregation) {
 		return true
 	}
 
@@ -161,7 +165,7 @@ func (o *MetricsMetricCriterion) GetFilters() []string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *MetricsMetricCriterion) GetFiltersOk() ([]string, bool) {
-	if o == nil || o.Filters == nil {
+	if o == nil || IsNil(o.Filters) {
 		return nil, false
 	}
 	return o.Filters, true
@@ -169,7 +173,7 @@ func (o *MetricsMetricCriterion) GetFiltersOk() ([]string, bool) {
 
 // HasFilters returns a boolean if a field has been set.
 func (o *MetricsMetricCriterion) HasFilters() bool {
-	if o != nil && o.Filters != nil {
+	if o != nil && IsNil(o.Filters) {
 		return true
 	}
 
@@ -194,7 +198,7 @@ func (o *MetricsMetricCriterion) GetGroups() []string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *MetricsMetricCriterion) GetGroupsOk() ([]string, bool) {
-	if o == nil || o.Groups == nil {
+	if o == nil || IsNil(o.Groups) {
 		return nil, false
 	}
 	return o.Groups, true
@@ -202,7 +206,7 @@ func (o *MetricsMetricCriterion) GetGroupsOk() ([]string, bool) {
 
 // HasGroups returns a boolean if a field has been set.
 func (o *MetricsMetricCriterion) HasGroups() bool {
-	if o != nil && o.Groups != nil {
+	if o != nil && IsNil(o.Groups) {
 		return true
 	}
 
@@ -216,7 +220,7 @@ func (o *MetricsMetricCriterion) SetGroups(v []string) {
 
 // GetInstrument returns the Instrument field value if set, zero value otherwise.
 func (o *MetricsMetricCriterion) GetInstrument() string {
-	if o == nil || o.Instrument == nil {
+	if o == nil || IsNil(o.Instrument) {
 		var ret string
 		return ret
 	}
@@ -226,7 +230,7 @@ func (o *MetricsMetricCriterion) GetInstrument() string {
 // GetInstrumentOk returns a tuple with the Instrument field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *MetricsMetricCriterion) GetInstrumentOk() (*string, bool) {
-	if o == nil || o.Instrument == nil {
+	if o == nil || IsNil(o.Instrument) {
 		return nil, false
 	}
 	return o.Instrument, true
@@ -234,7 +238,7 @@ func (o *MetricsMetricCriterion) GetInstrumentOk() (*string, bool) {
 
 // HasInstrument returns a boolean if a field has been set.
 func (o *MetricsMetricCriterion) HasInstrument() bool {
-	if o != nil && o.Instrument != nil {
+	if o != nil && !IsNil(o.Instrument) {
 		return true
 	}
 
@@ -248,7 +252,7 @@ func (o *MetricsMetricCriterion) SetInstrument(v string) {
 
 // GetIsEnabled returns the IsEnabled field value if set, zero value otherwise.
 func (o *MetricsMetricCriterion) GetIsEnabled() bool {
-	if o == nil || o.IsEnabled == nil {
+	if o == nil || IsNil(o.IsEnabled) {
 		var ret bool
 		return ret
 	}
@@ -258,7 +262,7 @@ func (o *MetricsMetricCriterion) GetIsEnabled() bool {
 // GetIsEnabledOk returns a tuple with the IsEnabled field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *MetricsMetricCriterion) GetIsEnabledOk() (*bool, bool) {
-	if o == nil || o.IsEnabled == nil {
+	if o == nil || IsNil(o.IsEnabled) {
 		return nil, false
 	}
 	return o.IsEnabled, true
@@ -266,7 +270,7 @@ func (o *MetricsMetricCriterion) GetIsEnabledOk() (*bool, bool) {
 
 // HasIsEnabled returns a boolean if a field has been set.
 func (o *MetricsMetricCriterion) HasIsEnabled() bool {
-	if o != nil && o.IsEnabled != nil {
+	if o != nil && !IsNil(o.IsEnabled) {
 		return true
 	}
 
@@ -280,7 +284,7 @@ func (o *MetricsMetricCriterion) SetIsEnabled(v bool) {
 
 // GetMetric returns the Metric field value if set, zero value otherwise.
 func (o *MetricsMetricCriterion) GetMetric() string {
-	if o == nil || o.Metric == nil {
+	if o == nil || IsNil(o.Metric) {
 		var ret string
 		return ret
 	}
@@ -290,7 +294,7 @@ func (o *MetricsMetricCriterion) GetMetric() string {
 // GetMetricOk returns a tuple with the Metric field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *MetricsMetricCriterion) GetMetricOk() (*string, bool) {
-	if o == nil || o.Metric == nil {
+	if o == nil || IsNil(o.Metric) {
 		return nil, false
 	}
 	return o.Metric, true
@@ -298,7 +302,7 @@ func (o *MetricsMetricCriterion) GetMetricOk() (*string, bool) {
 
 // HasMetric returns a boolean if a field has been set.
 func (o *MetricsMetricCriterion) HasMetric() bool {
-	if o != nil && o.Metric != nil {
+	if o != nil && !IsNil(o.Metric) {
 		return true
 	}
 
@@ -312,7 +316,7 @@ func (o *MetricsMetricCriterion) SetMetric(v string) {
 
 // GetMetricAggregation returns the MetricAggregation field value if set, zero value otherwise.
 func (o *MetricsMetricCriterion) GetMetricAggregation() string {
-	if o == nil || o.MetricAggregation == nil {
+	if o == nil || IsNil(o.MetricAggregation) {
 		var ret string
 		return ret
 	}
@@ -322,7 +326,7 @@ func (o *MetricsMetricCriterion) GetMetricAggregation() string {
 // GetMetricAggregationOk returns a tuple with the MetricAggregation field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *MetricsMetricCriterion) GetMetricAggregationOk() (*string, bool) {
-	if o == nil || o.MetricAggregation == nil {
+	if o == nil || IsNil(o.MetricAggregation) {
 		return nil, false
 	}
 	return o.MetricAggregation, true
@@ -330,7 +334,7 @@ func (o *MetricsMetricCriterion) GetMetricAggregationOk() (*string, bool) {
 
 // HasMetricAggregation returns a boolean if a field has been set.
 func (o *MetricsMetricCriterion) HasMetricAggregation() bool {
-	if o != nil && o.MetricAggregation != nil {
+	if o != nil && !IsNil(o.MetricAggregation) {
 		return true
 	}
 
@@ -344,7 +348,7 @@ func (o *MetricsMetricCriterion) SetMetricAggregation(v string) {
 
 // GetTopLimit returns the TopLimit field value if set, zero value otherwise.
 func (o *MetricsMetricCriterion) GetTopLimit() int64 {
-	if o == nil || o.TopLimit == nil {
+	if o == nil || IsNil(o.TopLimit) {
 		var ret int64
 		return ret
 	}
@@ -354,7 +358,7 @@ func (o *MetricsMetricCriterion) GetTopLimit() int64 {
 // GetTopLimitOk returns a tuple with the TopLimit field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *MetricsMetricCriterion) GetTopLimitOk() (*int64, bool) {
-	if o == nil || o.TopLimit == nil {
+	if o == nil || IsNil(o.TopLimit) {
 		return nil, false
 	}
 	return o.TopLimit, true
@@ -362,7 +366,7 @@ func (o *MetricsMetricCriterion) GetTopLimitOk() (*int64, bool) {
 
 // HasTopLimit returns a boolean if a field has been set.
 func (o *MetricsMetricCriterion) HasTopLimit() bool {
-	if o != nil && o.TopLimit != nil {
+	if o != nil && !IsNil(o.TopLimit) {
 		return true
 	}
 
@@ -376,7 +380,7 @@ func (o *MetricsMetricCriterion) SetTopLimit(v int64) {
 
 // GetTopSort returns the TopSort field value if set, zero value otherwise.
 func (o *MetricsMetricCriterion) GetTopSort() string {
-	if o == nil || o.TopSort == nil {
+	if o == nil || IsNil(o.TopSort) {
 		var ret string
 		return ret
 	}
@@ -386,7 +390,7 @@ func (o *MetricsMetricCriterion) GetTopSort() string {
 // GetTopSortOk returns a tuple with the TopSort field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *MetricsMetricCriterion) GetTopSortOk() (*string, bool) {
-	if o == nil || o.TopSort == nil {
+	if o == nil || IsNil(o.TopSort) {
 		return nil, false
 	}
 	return o.TopSort, true
@@ -394,7 +398,7 @@ func (o *MetricsMetricCriterion) GetTopSortOk() (*string, bool) {
 
 // HasTopSort returns a boolean if a field has been set.
 func (o *MetricsMetricCriterion) HasTopSort() bool {
-	if o != nil && o.TopSort != nil {
+	if o != nil && !IsNil(o.TopSort) {
 		return true
 	}
 
@@ -407,22 +411,26 @@ func (o *MetricsMetricCriterion) SetTopSort(v string) {
 }
 
 func (o MetricsMetricCriterion) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o MetricsMetricCriterion) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
 	errMoBaseComplexType = json.Unmarshal([]byte(serializedMoBaseComplexType), &toSerialize)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Aggregation != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Aggregation) {
 		toSerialize["Aggregation"] = o.Aggregation
 	}
 	if o.Filters != nil {
@@ -431,22 +439,22 @@ func (o MetricsMetricCriterion) MarshalJSON() ([]byte, error) {
 	if o.Groups != nil {
 		toSerialize["Groups"] = o.Groups
 	}
-	if o.Instrument != nil {
+	if !IsNil(o.Instrument) {
 		toSerialize["Instrument"] = o.Instrument
 	}
-	if o.IsEnabled != nil {
+	if !IsNil(o.IsEnabled) {
 		toSerialize["IsEnabled"] = o.IsEnabled
 	}
-	if o.Metric != nil {
+	if !IsNil(o.Metric) {
 		toSerialize["Metric"] = o.Metric
 	}
-	if o.MetricAggregation != nil {
+	if !IsNil(o.MetricAggregation) {
 		toSerialize["MetricAggregation"] = o.MetricAggregation
 	}
-	if o.TopLimit != nil {
+	if !IsNil(o.TopLimit) {
 		toSerialize["TopLimit"] = o.TopLimit
 	}
-	if o.TopSort != nil {
+	if !IsNil(o.TopSort) {
 		toSerialize["TopSort"] = o.TopSort
 	}
 
@@ -454,10 +462,32 @@ func (o MetricsMetricCriterion) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *MetricsMetricCriterion) UnmarshalJSON(bytes []byte) (err error) {
+func (o *MetricsMetricCriterion) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type MetricsMetricCriterionWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -483,7 +513,7 @@ func (o *MetricsMetricCriterion) UnmarshalJSON(bytes []byte) (err error) {
 
 	varMetricsMetricCriterionWithoutEmbeddedStruct := MetricsMetricCriterionWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varMetricsMetricCriterionWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varMetricsMetricCriterionWithoutEmbeddedStruct)
 	if err == nil {
 		varMetricsMetricCriterion := _MetricsMetricCriterion{}
 		varMetricsMetricCriterion.ClassId = varMetricsMetricCriterionWithoutEmbeddedStruct.ClassId
@@ -504,7 +534,7 @@ func (o *MetricsMetricCriterion) UnmarshalJSON(bytes []byte) (err error) {
 
 	varMetricsMetricCriterion := _MetricsMetricCriterion{}
 
-	err = json.Unmarshal(bytes, &varMetricsMetricCriterion)
+	err = json.Unmarshal(data, &varMetricsMetricCriterion)
 	if err == nil {
 		o.MoBaseComplexType = varMetricsMetricCriterion.MoBaseComplexType
 	} else {
@@ -513,7 +543,7 @@ func (o *MetricsMetricCriterion) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Aggregation")

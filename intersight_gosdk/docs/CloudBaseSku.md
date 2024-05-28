@@ -19,8 +19,8 @@ Name | Type | Description | Notes
 **ServiceFamily** | Pointer to **string** | Property to identify the family of service that the sku belongs to. | [optional] 
 **ServiceName** | Pointer to **string** | Any display name for the ServiceCategory if available. | [optional] 
 **Unit** | Pointer to **string** | The pricing associated with this Sku. Can be hourly, per minute. | [optional] 
-**Region** | Pointer to [**CloudRegionsRelationship**](CloudRegionsRelationship.md) |  | [optional] 
-**Target** | Pointer to [**AssetTargetRelationship**](AssetTargetRelationship.md) |  | [optional] 
+**Region** | Pointer to [**NullableCloudRegionsRelationship**](CloudRegionsRelationship.md) |  | [optional] 
+**Target** | Pointer to [**NullableAssetTargetRelationship**](AssetTargetRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -441,6 +441,16 @@ SetRegion sets Region field to given value.
 
 HasRegion returns a boolean if a field has been set.
 
+### SetRegionNil
+
+`func (o *CloudBaseSku) SetRegionNil(b bool)`
+
+ SetRegionNil sets the value for Region to be an explicit nil
+
+### UnsetRegion
+`func (o *CloudBaseSku) UnsetRegion()`
+
+UnsetRegion ensures that no value is present for Region, not even an explicit nil
 ### GetTarget
 
 `func (o *CloudBaseSku) GetTarget() AssetTargetRelationship`
@@ -466,6 +476,16 @@ SetTarget sets Target field to given value.
 
 HasTarget returns a boolean if a field has been set.
 
+### SetTargetNil
+
+`func (o *CloudBaseSku) SetTargetNil(b bool)`
+
+ SetTargetNil sets the value for Target to be an explicit nil
+
+### UnsetTarget
+`func (o *CloudBaseSku) UnsetTarget()`
+
+UnsetTarget ensures that no value is present for Target, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

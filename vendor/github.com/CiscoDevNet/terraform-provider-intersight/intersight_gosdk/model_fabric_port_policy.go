@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the FabricPortPolicy type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &FabricPortPolicy{}
 
 // FabricPortPolicy A policy for all the physical ports of the Fabric Interconnect.
 type FabricPortPolicy struct {
@@ -25,8 +29,8 @@ type FabricPortPolicy struct {
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
 	// This field specifies the device model that this Port Policy is being configured for. * `UCS-FI-6454` - The standard 4th generation UCS Fabric Interconnect with 54 ports. * `UCS-FI-64108` - The expanded 4th generation UCS Fabric Interconnect with 108 ports. * `UCS-FI-6536` - The standard 5th generation UCS Fabric Interconnect with 36 ports. * `UCSX-S9108-100G` - Cisco UCS Fabric Interconnect 9108 100G with 8 ports. * `unknown` - Unknown device type, usage is TBD.
-	DeviceModel  *string                               `json:"DeviceModel,omitempty"`
-	Organization *OrganizationOrganizationRelationship `json:"Organization,omitempty"`
+	DeviceModel  *string                                      `json:"DeviceModel,omitempty"`
+	Organization NullableOrganizationOrganizationRelationship `json:"Organization,omitempty"`
 	// An array of relationships to fabricBaseSwitchProfile resources.
 	Profiles             []FabricBaseSwitchProfileRelationship `json:"Profiles,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -111,7 +115,7 @@ func (o *FabricPortPolicy) SetObjectType(v string) {
 
 // GetDeviceModel returns the DeviceModel field value if set, zero value otherwise.
 func (o *FabricPortPolicy) GetDeviceModel() string {
-	if o == nil || o.DeviceModel == nil {
+	if o == nil || IsNil(o.DeviceModel) {
 		var ret string
 		return ret
 	}
@@ -121,7 +125,7 @@ func (o *FabricPortPolicy) GetDeviceModel() string {
 // GetDeviceModelOk returns a tuple with the DeviceModel field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FabricPortPolicy) GetDeviceModelOk() (*string, bool) {
-	if o == nil || o.DeviceModel == nil {
+	if o == nil || IsNil(o.DeviceModel) {
 		return nil, false
 	}
 	return o.DeviceModel, true
@@ -129,7 +133,7 @@ func (o *FabricPortPolicy) GetDeviceModelOk() (*string, bool) {
 
 // HasDeviceModel returns a boolean if a field has been set.
 func (o *FabricPortPolicy) HasDeviceModel() bool {
-	if o != nil && o.DeviceModel != nil {
+	if o != nil && !IsNil(o.DeviceModel) {
 		return true
 	}
 
@@ -141,36 +145,47 @@ func (o *FabricPortPolicy) SetDeviceModel(v string) {
 	o.DeviceModel = &v
 }
 
-// GetOrganization returns the Organization field value if set, zero value otherwise.
+// GetOrganization returns the Organization field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *FabricPortPolicy) GetOrganization() OrganizationOrganizationRelationship {
-	if o == nil || o.Organization == nil {
+	if o == nil || IsNil(o.Organization.Get()) {
 		var ret OrganizationOrganizationRelationship
 		return ret
 	}
-	return *o.Organization
+	return *o.Organization.Get()
 }
 
 // GetOrganizationOk returns a tuple with the Organization field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *FabricPortPolicy) GetOrganizationOk() (*OrganizationOrganizationRelationship, bool) {
-	if o == nil || o.Organization == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Organization, true
+	return o.Organization.Get(), o.Organization.IsSet()
 }
 
 // HasOrganization returns a boolean if a field has been set.
 func (o *FabricPortPolicy) HasOrganization() bool {
-	if o != nil && o.Organization != nil {
+	if o != nil && o.Organization.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetOrganization gets a reference to the given OrganizationOrganizationRelationship and assigns it to the Organization field.
+// SetOrganization gets a reference to the given NullableOrganizationOrganizationRelationship and assigns it to the Organization field.
 func (o *FabricPortPolicy) SetOrganization(v OrganizationOrganizationRelationship) {
-	o.Organization = &v
+	o.Organization.Set(&v)
+}
+
+// SetOrganizationNil sets the value for Organization to be an explicit nil
+func (o *FabricPortPolicy) SetOrganizationNil() {
+	o.Organization.Set(nil)
+}
+
+// UnsetOrganization ensures that no value is present for Organization, not even an explicit nil
+func (o *FabricPortPolicy) UnsetOrganization() {
+	o.Organization.Unset()
 }
 
 // GetProfiles returns the Profiles field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -186,7 +201,7 @@ func (o *FabricPortPolicy) GetProfiles() []FabricBaseSwitchProfileRelationship {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *FabricPortPolicy) GetProfilesOk() ([]FabricBaseSwitchProfileRelationship, bool) {
-	if o == nil || o.Profiles == nil {
+	if o == nil || IsNil(o.Profiles) {
 		return nil, false
 	}
 	return o.Profiles, true
@@ -194,7 +209,7 @@ func (o *FabricPortPolicy) GetProfilesOk() ([]FabricBaseSwitchProfileRelationshi
 
 // HasProfiles returns a boolean if a field has been set.
 func (o *FabricPortPolicy) HasProfiles() bool {
-	if o != nil && o.Profiles != nil {
+	if o != nil && IsNil(o.Profiles) {
 		return true
 	}
 
@@ -207,26 +222,30 @@ func (o *FabricPortPolicy) SetProfiles(v []FabricBaseSwitchProfileRelationship) 
 }
 
 func (o FabricPortPolicy) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o FabricPortPolicy) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedPolicyAbstractPolicy, errPolicyAbstractPolicy := json.Marshal(o.PolicyAbstractPolicy)
 	if errPolicyAbstractPolicy != nil {
-		return []byte{}, errPolicyAbstractPolicy
+		return map[string]interface{}{}, errPolicyAbstractPolicy
 	}
 	errPolicyAbstractPolicy = json.Unmarshal([]byte(serializedPolicyAbstractPolicy), &toSerialize)
 	if errPolicyAbstractPolicy != nil {
-		return []byte{}, errPolicyAbstractPolicy
+		return map[string]interface{}{}, errPolicyAbstractPolicy
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.DeviceModel != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.DeviceModel) {
 		toSerialize["DeviceModel"] = o.DeviceModel
 	}
-	if o.Organization != nil {
-		toSerialize["Organization"] = o.Organization
+	if o.Organization.IsSet() {
+		toSerialize["Organization"] = o.Organization.Get()
 	}
 	if o.Profiles != nil {
 		toSerialize["Profiles"] = o.Profiles
@@ -236,25 +255,47 @@ func (o FabricPortPolicy) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *FabricPortPolicy) UnmarshalJSON(bytes []byte) (err error) {
+func (o *FabricPortPolicy) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type FabricPortPolicyWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 		ObjectType string `json:"ObjectType"`
 		// This field specifies the device model that this Port Policy is being configured for. * `UCS-FI-6454` - The standard 4th generation UCS Fabric Interconnect with 54 ports. * `UCS-FI-64108` - The expanded 4th generation UCS Fabric Interconnect with 108 ports. * `UCS-FI-6536` - The standard 5th generation UCS Fabric Interconnect with 36 ports. * `UCSX-S9108-100G` - Cisco UCS Fabric Interconnect 9108 100G with 8 ports. * `unknown` - Unknown device type, usage is TBD.
-		DeviceModel  *string                               `json:"DeviceModel,omitempty"`
-		Organization *OrganizationOrganizationRelationship `json:"Organization,omitempty"`
+		DeviceModel  *string                                      `json:"DeviceModel,omitempty"`
+		Organization NullableOrganizationOrganizationRelationship `json:"Organization,omitempty"`
 		// An array of relationships to fabricBaseSwitchProfile resources.
 		Profiles []FabricBaseSwitchProfileRelationship `json:"Profiles,omitempty"`
 	}
 
 	varFabricPortPolicyWithoutEmbeddedStruct := FabricPortPolicyWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varFabricPortPolicyWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varFabricPortPolicyWithoutEmbeddedStruct)
 	if err == nil {
 		varFabricPortPolicy := _FabricPortPolicy{}
 		varFabricPortPolicy.ClassId = varFabricPortPolicyWithoutEmbeddedStruct.ClassId
@@ -269,7 +310,7 @@ func (o *FabricPortPolicy) UnmarshalJSON(bytes []byte) (err error) {
 
 	varFabricPortPolicy := _FabricPortPolicy{}
 
-	err = json.Unmarshal(bytes, &varFabricPortPolicy)
+	err = json.Unmarshal(data, &varFabricPortPolicy)
 	if err == nil {
 		o.PolicyAbstractPolicy = varFabricPortPolicy.PolicyAbstractPolicy
 	} else {
@@ -278,7 +319,7 @@ func (o *FabricPortPolicy) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "DeviceModel")

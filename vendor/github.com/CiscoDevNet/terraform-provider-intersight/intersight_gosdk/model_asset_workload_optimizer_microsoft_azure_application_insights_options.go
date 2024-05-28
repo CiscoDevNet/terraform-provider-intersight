@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the AssetWorkloadOptimizerMicrosoftAzureApplicationInsightsOptions type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &AssetWorkloadOptimizerMicrosoftAzureApplicationInsightsOptions{}
 
 // AssetWorkloadOptimizerMicrosoftAzureApplicationInsightsOptions Captures configuration specific to the Microsoft Azure Application Intersight target for the Workload Optimizer service.
 type AssetWorkloadOptimizerMicrosoftAzureApplicationInsightsOptions struct {
@@ -110,7 +114,7 @@ func (o *AssetWorkloadOptimizerMicrosoftAzureApplicationInsightsOptions) SetObje
 
 // GetEnrollmentNumber returns the EnrollmentNumber field value if set, zero value otherwise.
 func (o *AssetWorkloadOptimizerMicrosoftAzureApplicationInsightsOptions) GetEnrollmentNumber() string {
-	if o == nil || o.EnrollmentNumber == nil {
+	if o == nil || IsNil(o.EnrollmentNumber) {
 		var ret string
 		return ret
 	}
@@ -120,7 +124,7 @@ func (o *AssetWorkloadOptimizerMicrosoftAzureApplicationInsightsOptions) GetEnro
 // GetEnrollmentNumberOk returns a tuple with the EnrollmentNumber field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AssetWorkloadOptimizerMicrosoftAzureApplicationInsightsOptions) GetEnrollmentNumberOk() (*string, bool) {
-	if o == nil || o.EnrollmentNumber == nil {
+	if o == nil || IsNil(o.EnrollmentNumber) {
 		return nil, false
 	}
 	return o.EnrollmentNumber, true
@@ -128,7 +132,7 @@ func (o *AssetWorkloadOptimizerMicrosoftAzureApplicationInsightsOptions) GetEnro
 
 // HasEnrollmentNumber returns a boolean if a field has been set.
 func (o *AssetWorkloadOptimizerMicrosoftAzureApplicationInsightsOptions) HasEnrollmentNumber() bool {
-	if o != nil && o.EnrollmentNumber != nil {
+	if o != nil && !IsNil(o.EnrollmentNumber) {
 		return true
 	}
 
@@ -142,7 +146,7 @@ func (o *AssetWorkloadOptimizerMicrosoftAzureApplicationInsightsOptions) SetEnro
 
 // GetOfferId returns the OfferId field value if set, zero value otherwise.
 func (o *AssetWorkloadOptimizerMicrosoftAzureApplicationInsightsOptions) GetOfferId() string {
-	if o == nil || o.OfferId == nil {
+	if o == nil || IsNil(o.OfferId) {
 		var ret string
 		return ret
 	}
@@ -152,7 +156,7 @@ func (o *AssetWorkloadOptimizerMicrosoftAzureApplicationInsightsOptions) GetOffe
 // GetOfferIdOk returns a tuple with the OfferId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AssetWorkloadOptimizerMicrosoftAzureApplicationInsightsOptions) GetOfferIdOk() (*string, bool) {
-	if o == nil || o.OfferId == nil {
+	if o == nil || IsNil(o.OfferId) {
 		return nil, false
 	}
 	return o.OfferId, true
@@ -160,7 +164,7 @@ func (o *AssetWorkloadOptimizerMicrosoftAzureApplicationInsightsOptions) GetOffe
 
 // HasOfferId returns a boolean if a field has been set.
 func (o *AssetWorkloadOptimizerMicrosoftAzureApplicationInsightsOptions) HasOfferId() bool {
-	if o != nil && o.OfferId != nil {
+	if o != nil && !IsNil(o.OfferId) {
 		return true
 	}
 
@@ -174,7 +178,7 @@ func (o *AssetWorkloadOptimizerMicrosoftAzureApplicationInsightsOptions) SetOffe
 
 // GetSubscriptionId returns the SubscriptionId field value if set, zero value otherwise.
 func (o *AssetWorkloadOptimizerMicrosoftAzureApplicationInsightsOptions) GetSubscriptionId() string {
-	if o == nil || o.SubscriptionId == nil {
+	if o == nil || IsNil(o.SubscriptionId) {
 		var ret string
 		return ret
 	}
@@ -184,7 +188,7 @@ func (o *AssetWorkloadOptimizerMicrosoftAzureApplicationInsightsOptions) GetSubs
 // GetSubscriptionIdOk returns a tuple with the SubscriptionId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AssetWorkloadOptimizerMicrosoftAzureApplicationInsightsOptions) GetSubscriptionIdOk() (*string, bool) {
-	if o == nil || o.SubscriptionId == nil {
+	if o == nil || IsNil(o.SubscriptionId) {
 		return nil, false
 	}
 	return o.SubscriptionId, true
@@ -192,7 +196,7 @@ func (o *AssetWorkloadOptimizerMicrosoftAzureApplicationInsightsOptions) GetSubs
 
 // HasSubscriptionId returns a boolean if a field has been set.
 func (o *AssetWorkloadOptimizerMicrosoftAzureApplicationInsightsOptions) HasSubscriptionId() bool {
-	if o != nil && o.SubscriptionId != nil {
+	if o != nil && !IsNil(o.SubscriptionId) {
 		return true
 	}
 
@@ -206,7 +210,7 @@ func (o *AssetWorkloadOptimizerMicrosoftAzureApplicationInsightsOptions) SetSubs
 
 // GetTenantId returns the TenantId field value if set, zero value otherwise.
 func (o *AssetWorkloadOptimizerMicrosoftAzureApplicationInsightsOptions) GetTenantId() string {
-	if o == nil || o.TenantId == nil {
+	if o == nil || IsNil(o.TenantId) {
 		var ret string
 		return ret
 	}
@@ -216,7 +220,7 @@ func (o *AssetWorkloadOptimizerMicrosoftAzureApplicationInsightsOptions) GetTena
 // GetTenantIdOk returns a tuple with the TenantId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AssetWorkloadOptimizerMicrosoftAzureApplicationInsightsOptions) GetTenantIdOk() (*string, bool) {
-	if o == nil || o.TenantId == nil {
+	if o == nil || IsNil(o.TenantId) {
 		return nil, false
 	}
 	return o.TenantId, true
@@ -224,7 +228,7 @@ func (o *AssetWorkloadOptimizerMicrosoftAzureApplicationInsightsOptions) GetTena
 
 // HasTenantId returns a boolean if a field has been set.
 func (o *AssetWorkloadOptimizerMicrosoftAzureApplicationInsightsOptions) HasTenantId() bool {
-	if o != nil && o.TenantId != nil {
+	if o != nil && !IsNil(o.TenantId) {
 		return true
 	}
 
@@ -237,31 +241,35 @@ func (o *AssetWorkloadOptimizerMicrosoftAzureApplicationInsightsOptions) SetTena
 }
 
 func (o AssetWorkloadOptimizerMicrosoftAzureApplicationInsightsOptions) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o AssetWorkloadOptimizerMicrosoftAzureApplicationInsightsOptions) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedAssetServiceOptions, errAssetServiceOptions := json.Marshal(o.AssetServiceOptions)
 	if errAssetServiceOptions != nil {
-		return []byte{}, errAssetServiceOptions
+		return map[string]interface{}{}, errAssetServiceOptions
 	}
 	errAssetServiceOptions = json.Unmarshal([]byte(serializedAssetServiceOptions), &toSerialize)
 	if errAssetServiceOptions != nil {
-		return []byte{}, errAssetServiceOptions
+		return map[string]interface{}{}, errAssetServiceOptions
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.EnrollmentNumber != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.EnrollmentNumber) {
 		toSerialize["EnrollmentNumber"] = o.EnrollmentNumber
 	}
-	if o.OfferId != nil {
+	if !IsNil(o.OfferId) {
 		toSerialize["OfferId"] = o.OfferId
 	}
-	if o.SubscriptionId != nil {
+	if !IsNil(o.SubscriptionId) {
 		toSerialize["SubscriptionId"] = o.SubscriptionId
 	}
-	if o.TenantId != nil {
+	if !IsNil(o.TenantId) {
 		toSerialize["TenantId"] = o.TenantId
 	}
 
@@ -269,10 +277,32 @@ func (o AssetWorkloadOptimizerMicrosoftAzureApplicationInsightsOptions) MarshalJ
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *AssetWorkloadOptimizerMicrosoftAzureApplicationInsightsOptions) UnmarshalJSON(bytes []byte) (err error) {
+func (o *AssetWorkloadOptimizerMicrosoftAzureApplicationInsightsOptions) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type AssetWorkloadOptimizerMicrosoftAzureApplicationInsightsOptionsWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -290,7 +320,7 @@ func (o *AssetWorkloadOptimizerMicrosoftAzureApplicationInsightsOptions) Unmarsh
 
 	varAssetWorkloadOptimizerMicrosoftAzureApplicationInsightsOptionsWithoutEmbeddedStruct := AssetWorkloadOptimizerMicrosoftAzureApplicationInsightsOptionsWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varAssetWorkloadOptimizerMicrosoftAzureApplicationInsightsOptionsWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varAssetWorkloadOptimizerMicrosoftAzureApplicationInsightsOptionsWithoutEmbeddedStruct)
 	if err == nil {
 		varAssetWorkloadOptimizerMicrosoftAzureApplicationInsightsOptions := _AssetWorkloadOptimizerMicrosoftAzureApplicationInsightsOptions{}
 		varAssetWorkloadOptimizerMicrosoftAzureApplicationInsightsOptions.ClassId = varAssetWorkloadOptimizerMicrosoftAzureApplicationInsightsOptionsWithoutEmbeddedStruct.ClassId
@@ -306,7 +336,7 @@ func (o *AssetWorkloadOptimizerMicrosoftAzureApplicationInsightsOptions) Unmarsh
 
 	varAssetWorkloadOptimizerMicrosoftAzureApplicationInsightsOptions := _AssetWorkloadOptimizerMicrosoftAzureApplicationInsightsOptions{}
 
-	err = json.Unmarshal(bytes, &varAssetWorkloadOptimizerMicrosoftAzureApplicationInsightsOptions)
+	err = json.Unmarshal(data, &varAssetWorkloadOptimizerMicrosoftAzureApplicationInsightsOptions)
 	if err == nil {
 		o.AssetServiceOptions = varAssetWorkloadOptimizerMicrosoftAzureApplicationInsightsOptions.AssetServiceOptions
 	} else {
@@ -315,7 +345,7 @@ func (o *AssetWorkloadOptimizerMicrosoftAzureApplicationInsightsOptions) Unmarsh
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "EnrollmentNumber")

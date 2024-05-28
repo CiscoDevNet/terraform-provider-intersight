@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the AssetSudiInfo type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &AssetSudiInfo{}
 
 // AssetSudiInfo The SUDI is an X.509v3 certificate, which maintains the product identifier and serial number. The identity is implemented at manufacturing and chained to a publicly identifiable root certificate authority. It can be used as an unchangeable identity for configuration, security, auditing, and management. This structure contains the SUDI information read from the device's Trust Anchor Module (TAM). When the Intersight service receives a SUDI signature, it performs the following steps: 1. Validate the SUDI certificate is valid and has been issued by a trusted Certificate Authority. 2. Validate the 'signature'. In DC ApiVersion >= 16, the signature is expected to be a JWT signed by the TAM private key. 3. Set the 'status' property to indicate whether the signature is valid or not.
 type AssetSudiInfo struct {
@@ -113,7 +117,7 @@ func (o *AssetSudiInfo) SetObjectType(v string) {
 
 // GetPid returns the Pid field value if set, zero value otherwise.
 func (o *AssetSudiInfo) GetPid() string {
-	if o == nil || o.Pid == nil {
+	if o == nil || IsNil(o.Pid) {
 		var ret string
 		return ret
 	}
@@ -123,7 +127,7 @@ func (o *AssetSudiInfo) GetPid() string {
 // GetPidOk returns a tuple with the Pid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AssetSudiInfo) GetPidOk() (*string, bool) {
-	if o == nil || o.Pid == nil {
+	if o == nil || IsNil(o.Pid) {
 		return nil, false
 	}
 	return o.Pid, true
@@ -131,7 +135,7 @@ func (o *AssetSudiInfo) GetPidOk() (*string, bool) {
 
 // HasPid returns a boolean if a field has been set.
 func (o *AssetSudiInfo) HasPid() bool {
-	if o != nil && o.Pid != nil {
+	if o != nil && !IsNil(o.Pid) {
 		return true
 	}
 
@@ -145,7 +149,7 @@ func (o *AssetSudiInfo) SetPid(v string) {
 
 // GetSerialNumber returns the SerialNumber field value if set, zero value otherwise.
 func (o *AssetSudiInfo) GetSerialNumber() string {
-	if o == nil || o.SerialNumber == nil {
+	if o == nil || IsNil(o.SerialNumber) {
 		var ret string
 		return ret
 	}
@@ -155,7 +159,7 @@ func (o *AssetSudiInfo) GetSerialNumber() string {
 // GetSerialNumberOk returns a tuple with the SerialNumber field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AssetSudiInfo) GetSerialNumberOk() (*string, bool) {
-	if o == nil || o.SerialNumber == nil {
+	if o == nil || IsNil(o.SerialNumber) {
 		return nil, false
 	}
 	return o.SerialNumber, true
@@ -163,7 +167,7 @@ func (o *AssetSudiInfo) GetSerialNumberOk() (*string, bool) {
 
 // HasSerialNumber returns a boolean if a field has been set.
 func (o *AssetSudiInfo) HasSerialNumber() bool {
-	if o != nil && o.SerialNumber != nil {
+	if o != nil && !IsNil(o.SerialNumber) {
 		return true
 	}
 
@@ -177,7 +181,7 @@ func (o *AssetSudiInfo) SetSerialNumber(v string) {
 
 // GetSignature returns the Signature field value if set, zero value otherwise.
 func (o *AssetSudiInfo) GetSignature() string {
-	if o == nil || o.Signature == nil {
+	if o == nil || IsNil(o.Signature) {
 		var ret string
 		return ret
 	}
@@ -187,7 +191,7 @@ func (o *AssetSudiInfo) GetSignature() string {
 // GetSignatureOk returns a tuple with the Signature field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AssetSudiInfo) GetSignatureOk() (*string, bool) {
-	if o == nil || o.Signature == nil {
+	if o == nil || IsNil(o.Signature) {
 		return nil, false
 	}
 	return o.Signature, true
@@ -195,7 +199,7 @@ func (o *AssetSudiInfo) GetSignatureOk() (*string, bool) {
 
 // HasSignature returns a boolean if a field has been set.
 func (o *AssetSudiInfo) HasSignature() bool {
-	if o != nil && o.Signature != nil {
+	if o != nil && !IsNil(o.Signature) {
 		return true
 	}
 
@@ -209,7 +213,7 @@ func (o *AssetSudiInfo) SetSignature(v string) {
 
 // GetStatus returns the Status field value if set, zero value otherwise.
 func (o *AssetSudiInfo) GetStatus() string {
-	if o == nil || o.Status == nil {
+	if o == nil || IsNil(o.Status) {
 		var ret string
 		return ret
 	}
@@ -219,7 +223,7 @@ func (o *AssetSudiInfo) GetStatus() string {
 // GetStatusOk returns a tuple with the Status field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AssetSudiInfo) GetStatusOk() (*string, bool) {
-	if o == nil || o.Status == nil {
+	if o == nil || IsNil(o.Status) {
 		return nil, false
 	}
 	return o.Status, true
@@ -227,7 +231,7 @@ func (o *AssetSudiInfo) GetStatusOk() (*string, bool) {
 
 // HasStatus returns a boolean if a field has been set.
 func (o *AssetSudiInfo) HasStatus() bool {
-	if o != nil && o.Status != nil {
+	if o != nil && !IsNil(o.Status) {
 		return true
 	}
 
@@ -241,7 +245,7 @@ func (o *AssetSudiInfo) SetStatus(v string) {
 
 // GetStatusDetails returns the StatusDetails field value if set, zero value otherwise.
 func (o *AssetSudiInfo) GetStatusDetails() string {
-	if o == nil || o.StatusDetails == nil {
+	if o == nil || IsNil(o.StatusDetails) {
 		var ret string
 		return ret
 	}
@@ -251,7 +255,7 @@ func (o *AssetSudiInfo) GetStatusDetails() string {
 // GetStatusDetailsOk returns a tuple with the StatusDetails field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AssetSudiInfo) GetStatusDetailsOk() (*string, bool) {
-	if o == nil || o.StatusDetails == nil {
+	if o == nil || IsNil(o.StatusDetails) {
 		return nil, false
 	}
 	return o.StatusDetails, true
@@ -259,7 +263,7 @@ func (o *AssetSudiInfo) GetStatusDetailsOk() (*string, bool) {
 
 // HasStatusDetails returns a boolean if a field has been set.
 func (o *AssetSudiInfo) HasStatusDetails() bool {
-	if o != nil && o.StatusDetails != nil {
+	if o != nil && !IsNil(o.StatusDetails) {
 		return true
 	}
 
@@ -273,7 +277,7 @@ func (o *AssetSudiInfo) SetStatusDetails(v string) {
 
 // GetSudiCertificate returns the SudiCertificate field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *AssetSudiInfo) GetSudiCertificate() X509Certificate {
-	if o == nil || o.SudiCertificate.Get() == nil {
+	if o == nil || IsNil(o.SudiCertificate.Get()) {
 		var ret X509Certificate
 		return ret
 	}
@@ -315,34 +319,38 @@ func (o *AssetSudiInfo) UnsetSudiCertificate() {
 }
 
 func (o AssetSudiInfo) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o AssetSudiInfo) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
 	errMoBaseComplexType = json.Unmarshal([]byte(serializedMoBaseComplexType), &toSerialize)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Pid != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Pid) {
 		toSerialize["Pid"] = o.Pid
 	}
-	if o.SerialNumber != nil {
+	if !IsNil(o.SerialNumber) {
 		toSerialize["SerialNumber"] = o.SerialNumber
 	}
-	if o.Signature != nil {
+	if !IsNil(o.Signature) {
 		toSerialize["Signature"] = o.Signature
 	}
-	if o.Status != nil {
+	if !IsNil(o.Status) {
 		toSerialize["Status"] = o.Status
 	}
-	if o.StatusDetails != nil {
+	if !IsNil(o.StatusDetails) {
 		toSerialize["StatusDetails"] = o.StatusDetails
 	}
 	if o.SudiCertificate.IsSet() {
@@ -353,10 +361,32 @@ func (o AssetSudiInfo) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *AssetSudiInfo) UnmarshalJSON(bytes []byte) (err error) {
+func (o *AssetSudiInfo) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type AssetSudiInfoWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -377,7 +407,7 @@ func (o *AssetSudiInfo) UnmarshalJSON(bytes []byte) (err error) {
 
 	varAssetSudiInfoWithoutEmbeddedStruct := AssetSudiInfoWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varAssetSudiInfoWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varAssetSudiInfoWithoutEmbeddedStruct)
 	if err == nil {
 		varAssetSudiInfo := _AssetSudiInfo{}
 		varAssetSudiInfo.ClassId = varAssetSudiInfoWithoutEmbeddedStruct.ClassId
@@ -395,7 +425,7 @@ func (o *AssetSudiInfo) UnmarshalJSON(bytes []byte) (err error) {
 
 	varAssetSudiInfo := _AssetSudiInfo{}
 
-	err = json.Unmarshal(bytes, &varAssetSudiInfo)
+	err = json.Unmarshal(data, &varAssetSudiInfo)
 	if err == nil {
 		o.MoBaseComplexType = varAssetSudiInfo.MoBaseComplexType
 	} else {
@@ -404,7 +434,7 @@ func (o *AssetSudiInfo) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Pid")

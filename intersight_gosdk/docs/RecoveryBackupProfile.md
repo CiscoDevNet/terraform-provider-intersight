@@ -7,11 +7,11 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "recovery.BackupProfile"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "recovery.BackupProfile"]
 **Enabled** | Pointer to **bool** | Enables/Disables the schedule on the endpoint. | [optional] [default to true]
-**BackupConfig** | Pointer to [**RecoveryBackupConfigPolicyRelationship**](RecoveryBackupConfigPolicyRelationship.md) |  | [optional] 
-**ConfigResult** | Pointer to [**RecoveryConfigResultRelationship**](RecoveryConfigResultRelationship.md) |  | [optional] 
-**DeviceId** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
-**Organization** | Pointer to [**OrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
-**ScheduleConfig** | Pointer to [**RecoveryScheduleConfigPolicyRelationship**](RecoveryScheduleConfigPolicyRelationship.md) |  | [optional] 
+**BackupConfig** | Pointer to [**NullableRecoveryBackupConfigPolicyRelationship**](RecoveryBackupConfigPolicyRelationship.md) |  | [optional] 
+**ConfigResult** | Pointer to [**NullableRecoveryConfigResultRelationship**](RecoveryConfigResultRelationship.md) |  | [optional] 
+**DeviceId** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
+**Organization** | Pointer to [**NullableOrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
+**ScheduleConfig** | Pointer to [**NullableRecoveryScheduleConfigPolicyRelationship**](RecoveryScheduleConfigPolicyRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -122,6 +122,16 @@ SetBackupConfig sets BackupConfig field to given value.
 
 HasBackupConfig returns a boolean if a field has been set.
 
+### SetBackupConfigNil
+
+`func (o *RecoveryBackupProfile) SetBackupConfigNil(b bool)`
+
+ SetBackupConfigNil sets the value for BackupConfig to be an explicit nil
+
+### UnsetBackupConfig
+`func (o *RecoveryBackupProfile) UnsetBackupConfig()`
+
+UnsetBackupConfig ensures that no value is present for BackupConfig, not even an explicit nil
 ### GetConfigResult
 
 `func (o *RecoveryBackupProfile) GetConfigResult() RecoveryConfigResultRelationship`
@@ -147,6 +157,16 @@ SetConfigResult sets ConfigResult field to given value.
 
 HasConfigResult returns a boolean if a field has been set.
 
+### SetConfigResultNil
+
+`func (o *RecoveryBackupProfile) SetConfigResultNil(b bool)`
+
+ SetConfigResultNil sets the value for ConfigResult to be an explicit nil
+
+### UnsetConfigResult
+`func (o *RecoveryBackupProfile) UnsetConfigResult()`
+
+UnsetConfigResult ensures that no value is present for ConfigResult, not even an explicit nil
 ### GetDeviceId
 
 `func (o *RecoveryBackupProfile) GetDeviceId() AssetDeviceRegistrationRelationship`
@@ -172,6 +192,16 @@ SetDeviceId sets DeviceId field to given value.
 
 HasDeviceId returns a boolean if a field has been set.
 
+### SetDeviceIdNil
+
+`func (o *RecoveryBackupProfile) SetDeviceIdNil(b bool)`
+
+ SetDeviceIdNil sets the value for DeviceId to be an explicit nil
+
+### UnsetDeviceId
+`func (o *RecoveryBackupProfile) UnsetDeviceId()`
+
+UnsetDeviceId ensures that no value is present for DeviceId, not even an explicit nil
 ### GetOrganization
 
 `func (o *RecoveryBackupProfile) GetOrganization() OrganizationOrganizationRelationship`
@@ -197,6 +227,16 @@ SetOrganization sets Organization field to given value.
 
 HasOrganization returns a boolean if a field has been set.
 
+### SetOrganizationNil
+
+`func (o *RecoveryBackupProfile) SetOrganizationNil(b bool)`
+
+ SetOrganizationNil sets the value for Organization to be an explicit nil
+
+### UnsetOrganization
+`func (o *RecoveryBackupProfile) UnsetOrganization()`
+
+UnsetOrganization ensures that no value is present for Organization, not even an explicit nil
 ### GetScheduleConfig
 
 `func (o *RecoveryBackupProfile) GetScheduleConfig() RecoveryScheduleConfigPolicyRelationship`
@@ -222,6 +262,16 @@ SetScheduleConfig sets ScheduleConfig field to given value.
 
 HasScheduleConfig returns a boolean if a field has been set.
 
+### SetScheduleConfigNil
+
+`func (o *RecoveryBackupProfile) SetScheduleConfigNil(b bool)`
+
+ SetScheduleConfigNil sets the value for ScheduleConfig to be an explicit nil
+
+### UnsetScheduleConfig
+`func (o *RecoveryBackupProfile) UnsetScheduleConfig()`
+
+UnsetScheduleConfig ensures that no value is present for ScheduleConfig, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

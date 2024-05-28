@@ -13,11 +13,11 @@ Name | Type | Description | Notes
 **InitiatorStaticIpV4Config** | Pointer to [**NullableIppoolIpV4Config**](IppoolIpV4Config.md) |  | [optional] 
 **MutualChap** | Pointer to [**NullableVnicIscsiAuthProfile**](VnicIscsiAuthProfile.md) |  | [optional] 
 **TargetSourceType** | Pointer to **string** | Source Type of Targets - Auto/Static. * &#x60;Static&#x60; - Type indicates that static target interface is assigned to iSCSI boot. * &#x60;Auto&#x60; - Type indicates that the system selects the target interface automatically during iSCSI boot. | [optional] [default to "Static"]
-**InitiatorIpPool** | Pointer to [**IppoolPoolRelationship**](IppoolPoolRelationship.md) |  | [optional] 
-**IscsiAdapterPolicy** | Pointer to [**VnicIscsiAdapterPolicyRelationship**](VnicIscsiAdapterPolicyRelationship.md) |  | [optional] 
-**Organization** | Pointer to [**OrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
-**PrimaryTargetPolicy** | Pointer to [**VnicIscsiStaticTargetPolicyRelationship**](VnicIscsiStaticTargetPolicyRelationship.md) |  | [optional] 
-**SecondaryTargetPolicy** | Pointer to [**VnicIscsiStaticTargetPolicyRelationship**](VnicIscsiStaticTargetPolicyRelationship.md) |  | [optional] 
+**InitiatorIpPool** | Pointer to [**NullableIppoolPoolRelationship**](IppoolPoolRelationship.md) |  | [optional] 
+**IscsiAdapterPolicy** | Pointer to [**NullableVnicIscsiAdapterPolicyRelationship**](VnicIscsiAdapterPolicyRelationship.md) |  | [optional] 
+**Organization** | Pointer to [**NullableOrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
+**PrimaryTargetPolicy** | Pointer to [**NullableVnicIscsiStaticTargetPolicyRelationship**](VnicIscsiStaticTargetPolicyRelationship.md) |  | [optional] 
+**SecondaryTargetPolicy** | Pointer to [**NullableVnicIscsiStaticTargetPolicyRelationship**](VnicIscsiStaticTargetPolicyRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -308,6 +308,16 @@ SetInitiatorIpPool sets InitiatorIpPool field to given value.
 
 HasInitiatorIpPool returns a boolean if a field has been set.
 
+### SetInitiatorIpPoolNil
+
+`func (o *VnicIscsiBootPolicy) SetInitiatorIpPoolNil(b bool)`
+
+ SetInitiatorIpPoolNil sets the value for InitiatorIpPool to be an explicit nil
+
+### UnsetInitiatorIpPool
+`func (o *VnicIscsiBootPolicy) UnsetInitiatorIpPool()`
+
+UnsetInitiatorIpPool ensures that no value is present for InitiatorIpPool, not even an explicit nil
 ### GetIscsiAdapterPolicy
 
 `func (o *VnicIscsiBootPolicy) GetIscsiAdapterPolicy() VnicIscsiAdapterPolicyRelationship`
@@ -333,6 +343,16 @@ SetIscsiAdapterPolicy sets IscsiAdapterPolicy field to given value.
 
 HasIscsiAdapterPolicy returns a boolean if a field has been set.
 
+### SetIscsiAdapterPolicyNil
+
+`func (o *VnicIscsiBootPolicy) SetIscsiAdapterPolicyNil(b bool)`
+
+ SetIscsiAdapterPolicyNil sets the value for IscsiAdapterPolicy to be an explicit nil
+
+### UnsetIscsiAdapterPolicy
+`func (o *VnicIscsiBootPolicy) UnsetIscsiAdapterPolicy()`
+
+UnsetIscsiAdapterPolicy ensures that no value is present for IscsiAdapterPolicy, not even an explicit nil
 ### GetOrganization
 
 `func (o *VnicIscsiBootPolicy) GetOrganization() OrganizationOrganizationRelationship`
@@ -358,6 +378,16 @@ SetOrganization sets Organization field to given value.
 
 HasOrganization returns a boolean if a field has been set.
 
+### SetOrganizationNil
+
+`func (o *VnicIscsiBootPolicy) SetOrganizationNil(b bool)`
+
+ SetOrganizationNil sets the value for Organization to be an explicit nil
+
+### UnsetOrganization
+`func (o *VnicIscsiBootPolicy) UnsetOrganization()`
+
+UnsetOrganization ensures that no value is present for Organization, not even an explicit nil
 ### GetPrimaryTargetPolicy
 
 `func (o *VnicIscsiBootPolicy) GetPrimaryTargetPolicy() VnicIscsiStaticTargetPolicyRelationship`
@@ -383,6 +413,16 @@ SetPrimaryTargetPolicy sets PrimaryTargetPolicy field to given value.
 
 HasPrimaryTargetPolicy returns a boolean if a field has been set.
 
+### SetPrimaryTargetPolicyNil
+
+`func (o *VnicIscsiBootPolicy) SetPrimaryTargetPolicyNil(b bool)`
+
+ SetPrimaryTargetPolicyNil sets the value for PrimaryTargetPolicy to be an explicit nil
+
+### UnsetPrimaryTargetPolicy
+`func (o *VnicIscsiBootPolicy) UnsetPrimaryTargetPolicy()`
+
+UnsetPrimaryTargetPolicy ensures that no value is present for PrimaryTargetPolicy, not even an explicit nil
 ### GetSecondaryTargetPolicy
 
 `func (o *VnicIscsiBootPolicy) GetSecondaryTargetPolicy() VnicIscsiStaticTargetPolicyRelationship`
@@ -408,6 +448,16 @@ SetSecondaryTargetPolicy sets SecondaryTargetPolicy field to given value.
 
 HasSecondaryTargetPolicy returns a boolean if a field has been set.
 
+### SetSecondaryTargetPolicyNil
+
+`func (o *VnicIscsiBootPolicy) SetSecondaryTargetPolicyNil(b bool)`
+
+ SetSecondaryTargetPolicyNil sets the value for SecondaryTargetPolicy to be an explicit nil
+
+### UnsetSecondaryTargetPolicy
+`func (o *VnicIscsiBootPolicy) UnsetSecondaryTargetPolicy()`
+
+UnsetSecondaryTargetPolicy ensures that no value is present for SecondaryTargetPolicy, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

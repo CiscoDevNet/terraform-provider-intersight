@@ -15,10 +15,10 @@ Name | Type | Description | Notes
 **VendorUuid** | Pointer to **string** | The UUID value of the vendor assigned to the virtual drive. | [optional] [readonly] 
 **VirtualDriveDn** | Pointer to **string** | The distinguished name of the virtual drive for which the extended data is provided. | [optional] [readonly] 
 **VirtualDriveId** | Pointer to **string** | The Id of the virtual drive. | [optional] [readonly] 
-**InventoryDeviceInfo** | Pointer to [**InventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
-**StorageController** | Pointer to [**StorageControllerRelationship**](StorageControllerRelationship.md) |  | [optional] 
-**VirtualDrive** | Pointer to [**StorageVirtualDriveRelationship**](StorageVirtualDriveRelationship.md) |  | [optional] 
+**InventoryDeviceInfo** | Pointer to [**NullableInventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
+**StorageController** | Pointer to [**NullableStorageControllerRelationship**](StorageControllerRelationship.md) |  | [optional] 
+**VirtualDrive** | Pointer to [**NullableStorageVirtualDriveRelationship**](StorageVirtualDriveRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -329,6 +329,16 @@ SetInventoryDeviceInfo sets InventoryDeviceInfo field to given value.
 
 HasInventoryDeviceInfo returns a boolean if a field has been set.
 
+### SetInventoryDeviceInfoNil
+
+`func (o *StorageVirtualDriveExtension) SetInventoryDeviceInfoNil(b bool)`
+
+ SetInventoryDeviceInfoNil sets the value for InventoryDeviceInfo to be an explicit nil
+
+### UnsetInventoryDeviceInfo
+`func (o *StorageVirtualDriveExtension) UnsetInventoryDeviceInfo()`
+
+UnsetInventoryDeviceInfo ensures that no value is present for InventoryDeviceInfo, not even an explicit nil
 ### GetRegisteredDevice
 
 `func (o *StorageVirtualDriveExtension) GetRegisteredDevice() AssetDeviceRegistrationRelationship`
@@ -354,6 +364,16 @@ SetRegisteredDevice sets RegisteredDevice field to given value.
 
 HasRegisteredDevice returns a boolean if a field has been set.
 
+### SetRegisteredDeviceNil
+
+`func (o *StorageVirtualDriveExtension) SetRegisteredDeviceNil(b bool)`
+
+ SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+
+### UnsetRegisteredDevice
+`func (o *StorageVirtualDriveExtension) UnsetRegisteredDevice()`
+
+UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
 ### GetStorageController
 
 `func (o *StorageVirtualDriveExtension) GetStorageController() StorageControllerRelationship`
@@ -379,6 +399,16 @@ SetStorageController sets StorageController field to given value.
 
 HasStorageController returns a boolean if a field has been set.
 
+### SetStorageControllerNil
+
+`func (o *StorageVirtualDriveExtension) SetStorageControllerNil(b bool)`
+
+ SetStorageControllerNil sets the value for StorageController to be an explicit nil
+
+### UnsetStorageController
+`func (o *StorageVirtualDriveExtension) UnsetStorageController()`
+
+UnsetStorageController ensures that no value is present for StorageController, not even an explicit nil
 ### GetVirtualDrive
 
 `func (o *StorageVirtualDriveExtension) GetVirtualDrive() StorageVirtualDriveRelationship`
@@ -404,6 +434,16 @@ SetVirtualDrive sets VirtualDrive field to given value.
 
 HasVirtualDrive returns a boolean if a field has been set.
 
+### SetVirtualDriveNil
+
+`func (o *StorageVirtualDriveExtension) SetVirtualDriveNil(b bool)`
+
+ SetVirtualDriveNil sets the value for VirtualDrive to be an explicit nil
+
+### UnsetVirtualDrive
+`func (o *StorageVirtualDriveExtension) UnsetVirtualDrive()`
+
+UnsetVirtualDrive ensures that no value is present for VirtualDrive, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

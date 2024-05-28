@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the StorageNvmeRaidConfiguration type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &StorageNvmeRaidConfiguration{}
 
 // StorageNvmeRaidConfiguration Object that stores Nvme Raid Configuration data under a Server Profile, used for creation of vd, update pd state for NVMe on reboot.
 type StorageNvmeRaidConfiguration struct {
@@ -27,11 +31,11 @@ type StorageNvmeRaidConfiguration struct {
 	// The storage controller Dn Name for which Nvme RAID is created at endpoint.
 	ControllerDn *string `json:"ControllerDn,omitempty"`
 	// The storage controller Moid for which Nvme RAID creation is supported.
-	ControllerMoid       *string                           `json:"ControllerMoid,omitempty"`
-	DiskStates           []StorageNvmePhysicalDiskState    `json:"DiskStates,omitempty"`
-	DriveGroups          []StorageNvmeRaidDriveGroup       `json:"DriveGroups,omitempty"`
-	ServerProfile        *ServerProfileRelationship        `json:"ServerProfile,omitempty"`
-	StoragePolicy        *StorageStoragePolicyRelationship `json:"StoragePolicy,omitempty"`
+	ControllerMoid       *string                                  `json:"ControllerMoid,omitempty"`
+	DiskStates           []StorageNvmePhysicalDiskState           `json:"DiskStates,omitempty"`
+	DriveGroups          []StorageNvmeRaidDriveGroup              `json:"DriveGroups,omitempty"`
+	ServerProfile        NullableServerProfileRelationship        `json:"ServerProfile,omitempty"`
+	StoragePolicy        NullableStorageStoragePolicyRelationship `json:"StoragePolicy,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -110,7 +114,7 @@ func (o *StorageNvmeRaidConfiguration) SetObjectType(v string) {
 
 // GetControllerDn returns the ControllerDn field value if set, zero value otherwise.
 func (o *StorageNvmeRaidConfiguration) GetControllerDn() string {
-	if o == nil || o.ControllerDn == nil {
+	if o == nil || IsNil(o.ControllerDn) {
 		var ret string
 		return ret
 	}
@@ -120,7 +124,7 @@ func (o *StorageNvmeRaidConfiguration) GetControllerDn() string {
 // GetControllerDnOk returns a tuple with the ControllerDn field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNvmeRaidConfiguration) GetControllerDnOk() (*string, bool) {
-	if o == nil || o.ControllerDn == nil {
+	if o == nil || IsNil(o.ControllerDn) {
 		return nil, false
 	}
 	return o.ControllerDn, true
@@ -128,7 +132,7 @@ func (o *StorageNvmeRaidConfiguration) GetControllerDnOk() (*string, bool) {
 
 // HasControllerDn returns a boolean if a field has been set.
 func (o *StorageNvmeRaidConfiguration) HasControllerDn() bool {
-	if o != nil && o.ControllerDn != nil {
+	if o != nil && !IsNil(o.ControllerDn) {
 		return true
 	}
 
@@ -142,7 +146,7 @@ func (o *StorageNvmeRaidConfiguration) SetControllerDn(v string) {
 
 // GetControllerMoid returns the ControllerMoid field value if set, zero value otherwise.
 func (o *StorageNvmeRaidConfiguration) GetControllerMoid() string {
-	if o == nil || o.ControllerMoid == nil {
+	if o == nil || IsNil(o.ControllerMoid) {
 		var ret string
 		return ret
 	}
@@ -152,7 +156,7 @@ func (o *StorageNvmeRaidConfiguration) GetControllerMoid() string {
 // GetControllerMoidOk returns a tuple with the ControllerMoid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNvmeRaidConfiguration) GetControllerMoidOk() (*string, bool) {
-	if o == nil || o.ControllerMoid == nil {
+	if o == nil || IsNil(o.ControllerMoid) {
 		return nil, false
 	}
 	return o.ControllerMoid, true
@@ -160,7 +164,7 @@ func (o *StorageNvmeRaidConfiguration) GetControllerMoidOk() (*string, bool) {
 
 // HasControllerMoid returns a boolean if a field has been set.
 func (o *StorageNvmeRaidConfiguration) HasControllerMoid() bool {
-	if o != nil && o.ControllerMoid != nil {
+	if o != nil && !IsNil(o.ControllerMoid) {
 		return true
 	}
 
@@ -185,7 +189,7 @@ func (o *StorageNvmeRaidConfiguration) GetDiskStates() []StorageNvmePhysicalDisk
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StorageNvmeRaidConfiguration) GetDiskStatesOk() ([]StorageNvmePhysicalDiskState, bool) {
-	if o == nil || o.DiskStates == nil {
+	if o == nil || IsNil(o.DiskStates) {
 		return nil, false
 	}
 	return o.DiskStates, true
@@ -193,7 +197,7 @@ func (o *StorageNvmeRaidConfiguration) GetDiskStatesOk() ([]StorageNvmePhysicalD
 
 // HasDiskStates returns a boolean if a field has been set.
 func (o *StorageNvmeRaidConfiguration) HasDiskStates() bool {
-	if o != nil && o.DiskStates != nil {
+	if o != nil && IsNil(o.DiskStates) {
 		return true
 	}
 
@@ -218,7 +222,7 @@ func (o *StorageNvmeRaidConfiguration) GetDriveGroups() []StorageNvmeRaidDriveGr
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StorageNvmeRaidConfiguration) GetDriveGroupsOk() ([]StorageNvmeRaidDriveGroup, bool) {
-	if o == nil || o.DriveGroups == nil {
+	if o == nil || IsNil(o.DriveGroups) {
 		return nil, false
 	}
 	return o.DriveGroups, true
@@ -226,7 +230,7 @@ func (o *StorageNvmeRaidConfiguration) GetDriveGroupsOk() ([]StorageNvmeRaidDriv
 
 // HasDriveGroups returns a boolean if a field has been set.
 func (o *StorageNvmeRaidConfiguration) HasDriveGroups() bool {
-	if o != nil && o.DriveGroups != nil {
+	if o != nil && IsNil(o.DriveGroups) {
 		return true
 	}
 
@@ -238,90 +242,116 @@ func (o *StorageNvmeRaidConfiguration) SetDriveGroups(v []StorageNvmeRaidDriveGr
 	o.DriveGroups = v
 }
 
-// GetServerProfile returns the ServerProfile field value if set, zero value otherwise.
+// GetServerProfile returns the ServerProfile field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *StorageNvmeRaidConfiguration) GetServerProfile() ServerProfileRelationship {
-	if o == nil || o.ServerProfile == nil {
+	if o == nil || IsNil(o.ServerProfile.Get()) {
 		var ret ServerProfileRelationship
 		return ret
 	}
-	return *o.ServerProfile
+	return *o.ServerProfile.Get()
 }
 
 // GetServerProfileOk returns a tuple with the ServerProfile field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StorageNvmeRaidConfiguration) GetServerProfileOk() (*ServerProfileRelationship, bool) {
-	if o == nil || o.ServerProfile == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.ServerProfile, true
+	return o.ServerProfile.Get(), o.ServerProfile.IsSet()
 }
 
 // HasServerProfile returns a boolean if a field has been set.
 func (o *StorageNvmeRaidConfiguration) HasServerProfile() bool {
-	if o != nil && o.ServerProfile != nil {
+	if o != nil && o.ServerProfile.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetServerProfile gets a reference to the given ServerProfileRelationship and assigns it to the ServerProfile field.
+// SetServerProfile gets a reference to the given NullableServerProfileRelationship and assigns it to the ServerProfile field.
 func (o *StorageNvmeRaidConfiguration) SetServerProfile(v ServerProfileRelationship) {
-	o.ServerProfile = &v
+	o.ServerProfile.Set(&v)
 }
 
-// GetStoragePolicy returns the StoragePolicy field value if set, zero value otherwise.
+// SetServerProfileNil sets the value for ServerProfile to be an explicit nil
+func (o *StorageNvmeRaidConfiguration) SetServerProfileNil() {
+	o.ServerProfile.Set(nil)
+}
+
+// UnsetServerProfile ensures that no value is present for ServerProfile, not even an explicit nil
+func (o *StorageNvmeRaidConfiguration) UnsetServerProfile() {
+	o.ServerProfile.Unset()
+}
+
+// GetStoragePolicy returns the StoragePolicy field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *StorageNvmeRaidConfiguration) GetStoragePolicy() StorageStoragePolicyRelationship {
-	if o == nil || o.StoragePolicy == nil {
+	if o == nil || IsNil(o.StoragePolicy.Get()) {
 		var ret StorageStoragePolicyRelationship
 		return ret
 	}
-	return *o.StoragePolicy
+	return *o.StoragePolicy.Get()
 }
 
 // GetStoragePolicyOk returns a tuple with the StoragePolicy field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StorageNvmeRaidConfiguration) GetStoragePolicyOk() (*StorageStoragePolicyRelationship, bool) {
-	if o == nil || o.StoragePolicy == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.StoragePolicy, true
+	return o.StoragePolicy.Get(), o.StoragePolicy.IsSet()
 }
 
 // HasStoragePolicy returns a boolean if a field has been set.
 func (o *StorageNvmeRaidConfiguration) HasStoragePolicy() bool {
-	if o != nil && o.StoragePolicy != nil {
+	if o != nil && o.StoragePolicy.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetStoragePolicy gets a reference to the given StorageStoragePolicyRelationship and assigns it to the StoragePolicy field.
+// SetStoragePolicy gets a reference to the given NullableStorageStoragePolicyRelationship and assigns it to the StoragePolicy field.
 func (o *StorageNvmeRaidConfiguration) SetStoragePolicy(v StorageStoragePolicyRelationship) {
-	o.StoragePolicy = &v
+	o.StoragePolicy.Set(&v)
+}
+
+// SetStoragePolicyNil sets the value for StoragePolicy to be an explicit nil
+func (o *StorageNvmeRaidConfiguration) SetStoragePolicyNil() {
+	o.StoragePolicy.Set(nil)
+}
+
+// UnsetStoragePolicy ensures that no value is present for StoragePolicy, not even an explicit nil
+func (o *StorageNvmeRaidConfiguration) UnsetStoragePolicy() {
+	o.StoragePolicy.Unset()
 }
 
 func (o StorageNvmeRaidConfiguration) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o StorageNvmeRaidConfiguration) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.ControllerDn != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.ControllerDn) {
 		toSerialize["ControllerDn"] = o.ControllerDn
 	}
-	if o.ControllerMoid != nil {
+	if !IsNil(o.ControllerMoid) {
 		toSerialize["ControllerMoid"] = o.ControllerMoid
 	}
 	if o.DiskStates != nil {
@@ -330,21 +360,43 @@ func (o StorageNvmeRaidConfiguration) MarshalJSON() ([]byte, error) {
 	if o.DriveGroups != nil {
 		toSerialize["DriveGroups"] = o.DriveGroups
 	}
-	if o.ServerProfile != nil {
-		toSerialize["ServerProfile"] = o.ServerProfile
+	if o.ServerProfile.IsSet() {
+		toSerialize["ServerProfile"] = o.ServerProfile.Get()
 	}
-	if o.StoragePolicy != nil {
-		toSerialize["StoragePolicy"] = o.StoragePolicy
+	if o.StoragePolicy.IsSet() {
+		toSerialize["StoragePolicy"] = o.StoragePolicy.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *StorageNvmeRaidConfiguration) UnmarshalJSON(bytes []byte) (err error) {
+func (o *StorageNvmeRaidConfiguration) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type StorageNvmeRaidConfigurationWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -353,16 +405,16 @@ func (o *StorageNvmeRaidConfiguration) UnmarshalJSON(bytes []byte) (err error) {
 		// The storage controller Dn Name for which Nvme RAID is created at endpoint.
 		ControllerDn *string `json:"ControllerDn,omitempty"`
 		// The storage controller Moid for which Nvme RAID creation is supported.
-		ControllerMoid *string                           `json:"ControllerMoid,omitempty"`
-		DiskStates     []StorageNvmePhysicalDiskState    `json:"DiskStates,omitempty"`
-		DriveGroups    []StorageNvmeRaidDriveGroup       `json:"DriveGroups,omitempty"`
-		ServerProfile  *ServerProfileRelationship        `json:"ServerProfile,omitempty"`
-		StoragePolicy  *StorageStoragePolicyRelationship `json:"StoragePolicy,omitempty"`
+		ControllerMoid *string                                  `json:"ControllerMoid,omitempty"`
+		DiskStates     []StorageNvmePhysicalDiskState           `json:"DiskStates,omitempty"`
+		DriveGroups    []StorageNvmeRaidDriveGroup              `json:"DriveGroups,omitempty"`
+		ServerProfile  NullableServerProfileRelationship        `json:"ServerProfile,omitempty"`
+		StoragePolicy  NullableStorageStoragePolicyRelationship `json:"StoragePolicy,omitempty"`
 	}
 
 	varStorageNvmeRaidConfigurationWithoutEmbeddedStruct := StorageNvmeRaidConfigurationWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varStorageNvmeRaidConfigurationWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varStorageNvmeRaidConfigurationWithoutEmbeddedStruct)
 	if err == nil {
 		varStorageNvmeRaidConfiguration := _StorageNvmeRaidConfiguration{}
 		varStorageNvmeRaidConfiguration.ClassId = varStorageNvmeRaidConfigurationWithoutEmbeddedStruct.ClassId
@@ -380,7 +432,7 @@ func (o *StorageNvmeRaidConfiguration) UnmarshalJSON(bytes []byte) (err error) {
 
 	varStorageNvmeRaidConfiguration := _StorageNvmeRaidConfiguration{}
 
-	err = json.Unmarshal(bytes, &varStorageNvmeRaidConfiguration)
+	err = json.Unmarshal(data, &varStorageNvmeRaidConfiguration)
 	if err == nil {
 		o.MoBaseMo = varStorageNvmeRaidConfiguration.MoBaseMo
 	} else {
@@ -389,7 +441,7 @@ func (o *StorageNvmeRaidConfiguration) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "ControllerDn")

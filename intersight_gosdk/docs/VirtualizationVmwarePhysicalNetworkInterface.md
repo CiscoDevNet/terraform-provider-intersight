@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **MacAddress** | Pointer to **string** | Standard MAC address assigned to physical network interface. | [optional] 
 **Pci** | Pointer to **string** | PCI info for physical network interface. | [optional] 
 **SwitchName** | Pointer to **string** | Switch associated with the physical network interface. | [optional] 
-**Host** | Pointer to [**VirtualizationVmwareHostRelationship**](VirtualizationVmwareHostRelationship.md) |  | [optional] 
+**Host** | Pointer to [**NullableVirtualizationVmwareHostRelationship**](VirtualizationVmwareHostRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -222,6 +222,16 @@ SetHost sets Host field to given value.
 
 HasHost returns a boolean if a field has been set.
 
+### SetHostNil
+
+`func (o *VirtualizationVmwarePhysicalNetworkInterface) SetHostNil(b bool)`
+
+ SetHostNil sets the value for Host to be an explicit nil
+
+### UnsetHost
+`func (o *VirtualizationVmwarePhysicalNetworkInterface) UnsetHost()`
+
+UnsetHost ensures that no value is present for Host, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

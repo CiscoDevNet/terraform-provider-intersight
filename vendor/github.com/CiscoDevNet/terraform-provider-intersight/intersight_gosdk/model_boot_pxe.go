@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the BootPxe type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &BootPxe{}
 
 // BootPxe Device type used when booting from a PXE boot device.
 type BootPxe struct {
@@ -128,7 +132,7 @@ func (o *BootPxe) SetObjectType(v string) {
 
 // GetInterfaceName returns the InterfaceName field value if set, zero value otherwise.
 func (o *BootPxe) GetInterfaceName() string {
-	if o == nil || o.InterfaceName == nil {
+	if o == nil || IsNil(o.InterfaceName) {
 		var ret string
 		return ret
 	}
@@ -138,7 +142,7 @@ func (o *BootPxe) GetInterfaceName() string {
 // GetInterfaceNameOk returns a tuple with the InterfaceName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *BootPxe) GetInterfaceNameOk() (*string, bool) {
-	if o == nil || o.InterfaceName == nil {
+	if o == nil || IsNil(o.InterfaceName) {
 		return nil, false
 	}
 	return o.InterfaceName, true
@@ -146,7 +150,7 @@ func (o *BootPxe) GetInterfaceNameOk() (*string, bool) {
 
 // HasInterfaceName returns a boolean if a field has been set.
 func (o *BootPxe) HasInterfaceName() bool {
-	if o != nil && o.InterfaceName != nil {
+	if o != nil && !IsNil(o.InterfaceName) {
 		return true
 	}
 
@@ -160,7 +164,7 @@ func (o *BootPxe) SetInterfaceName(v string) {
 
 // GetInterfaceSource returns the InterfaceSource field value if set, zero value otherwise.
 func (o *BootPxe) GetInterfaceSource() string {
-	if o == nil || o.InterfaceSource == nil {
+	if o == nil || IsNil(o.InterfaceSource) {
 		var ret string
 		return ret
 	}
@@ -170,7 +174,7 @@ func (o *BootPxe) GetInterfaceSource() string {
 // GetInterfaceSourceOk returns a tuple with the InterfaceSource field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *BootPxe) GetInterfaceSourceOk() (*string, bool) {
-	if o == nil || o.InterfaceSource == nil {
+	if o == nil || IsNil(o.InterfaceSource) {
 		return nil, false
 	}
 	return o.InterfaceSource, true
@@ -178,7 +182,7 @@ func (o *BootPxe) GetInterfaceSourceOk() (*string, bool) {
 
 // HasInterfaceSource returns a boolean if a field has been set.
 func (o *BootPxe) HasInterfaceSource() bool {
-	if o != nil && o.InterfaceSource != nil {
+	if o != nil && !IsNil(o.InterfaceSource) {
 		return true
 	}
 
@@ -192,7 +196,7 @@ func (o *BootPxe) SetInterfaceSource(v string) {
 
 // GetIpType returns the IpType field value if set, zero value otherwise.
 func (o *BootPxe) GetIpType() string {
-	if o == nil || o.IpType == nil {
+	if o == nil || IsNil(o.IpType) {
 		var ret string
 		return ret
 	}
@@ -202,7 +206,7 @@ func (o *BootPxe) GetIpType() string {
 // GetIpTypeOk returns a tuple with the IpType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *BootPxe) GetIpTypeOk() (*string, bool) {
-	if o == nil || o.IpType == nil {
+	if o == nil || IsNil(o.IpType) {
 		return nil, false
 	}
 	return o.IpType, true
@@ -210,7 +214,7 @@ func (o *BootPxe) GetIpTypeOk() (*string, bool) {
 
 // HasIpType returns a boolean if a field has been set.
 func (o *BootPxe) HasIpType() bool {
-	if o != nil && o.IpType != nil {
+	if o != nil && !IsNil(o.IpType) {
 		return true
 	}
 
@@ -224,7 +228,7 @@ func (o *BootPxe) SetIpType(v string) {
 
 // GetMacAddress returns the MacAddress field value if set, zero value otherwise.
 func (o *BootPxe) GetMacAddress() string {
-	if o == nil || o.MacAddress == nil {
+	if o == nil || IsNil(o.MacAddress) {
 		var ret string
 		return ret
 	}
@@ -234,7 +238,7 @@ func (o *BootPxe) GetMacAddress() string {
 // GetMacAddressOk returns a tuple with the MacAddress field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *BootPxe) GetMacAddressOk() (*string, bool) {
-	if o == nil || o.MacAddress == nil {
+	if o == nil || IsNil(o.MacAddress) {
 		return nil, false
 	}
 	return o.MacAddress, true
@@ -242,7 +246,7 @@ func (o *BootPxe) GetMacAddressOk() (*string, bool) {
 
 // HasMacAddress returns a boolean if a field has been set.
 func (o *BootPxe) HasMacAddress() bool {
-	if o != nil && o.MacAddress != nil {
+	if o != nil && !IsNil(o.MacAddress) {
 		return true
 	}
 
@@ -256,7 +260,7 @@ func (o *BootPxe) SetMacAddress(v string) {
 
 // GetPort returns the Port field value if set, zero value otherwise.
 func (o *BootPxe) GetPort() int64 {
-	if o == nil || o.Port == nil {
+	if o == nil || IsNil(o.Port) {
 		var ret int64
 		return ret
 	}
@@ -266,7 +270,7 @@ func (o *BootPxe) GetPort() int64 {
 // GetPortOk returns a tuple with the Port field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *BootPxe) GetPortOk() (*int64, bool) {
-	if o == nil || o.Port == nil {
+	if o == nil || IsNil(o.Port) {
 		return nil, false
 	}
 	return o.Port, true
@@ -274,7 +278,7 @@ func (o *BootPxe) GetPortOk() (*int64, bool) {
 
 // HasPort returns a boolean if a field has been set.
 func (o *BootPxe) HasPort() bool {
-	if o != nil && o.Port != nil {
+	if o != nil && !IsNil(o.Port) {
 		return true
 	}
 
@@ -288,7 +292,7 @@ func (o *BootPxe) SetPort(v int64) {
 
 // GetSlot returns the Slot field value if set, zero value otherwise.
 func (o *BootPxe) GetSlot() string {
-	if o == nil || o.Slot == nil {
+	if o == nil || IsNil(o.Slot) {
 		var ret string
 		return ret
 	}
@@ -298,7 +302,7 @@ func (o *BootPxe) GetSlot() string {
 // GetSlotOk returns a tuple with the Slot field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *BootPxe) GetSlotOk() (*string, bool) {
-	if o == nil || o.Slot == nil {
+	if o == nil || IsNil(o.Slot) {
 		return nil, false
 	}
 	return o.Slot, true
@@ -306,7 +310,7 @@ func (o *BootPxe) GetSlotOk() (*string, bool) {
 
 // HasSlot returns a boolean if a field has been set.
 func (o *BootPxe) HasSlot() bool {
-	if o != nil && o.Slot != nil {
+	if o != nil && !IsNil(o.Slot) {
 		return true
 	}
 
@@ -319,37 +323,41 @@ func (o *BootPxe) SetSlot(v string) {
 }
 
 func (o BootPxe) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o BootPxe) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedBootDeviceBase, errBootDeviceBase := json.Marshal(o.BootDeviceBase)
 	if errBootDeviceBase != nil {
-		return []byte{}, errBootDeviceBase
+		return map[string]interface{}{}, errBootDeviceBase
 	}
 	errBootDeviceBase = json.Unmarshal([]byte(serializedBootDeviceBase), &toSerialize)
 	if errBootDeviceBase != nil {
-		return []byte{}, errBootDeviceBase
+		return map[string]interface{}{}, errBootDeviceBase
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.InterfaceName != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.InterfaceName) {
 		toSerialize["InterfaceName"] = o.InterfaceName
 	}
-	if o.InterfaceSource != nil {
+	if !IsNil(o.InterfaceSource) {
 		toSerialize["InterfaceSource"] = o.InterfaceSource
 	}
-	if o.IpType != nil {
+	if !IsNil(o.IpType) {
 		toSerialize["IpType"] = o.IpType
 	}
-	if o.MacAddress != nil {
+	if !IsNil(o.MacAddress) {
 		toSerialize["MacAddress"] = o.MacAddress
 	}
-	if o.Port != nil {
+	if !IsNil(o.Port) {
 		toSerialize["Port"] = o.Port
 	}
-	if o.Slot != nil {
+	if !IsNil(o.Slot) {
 		toSerialize["Slot"] = o.Slot
 	}
 
@@ -357,10 +365,32 @@ func (o BootPxe) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *BootPxe) UnmarshalJSON(bytes []byte) (err error) {
+func (o *BootPxe) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type BootPxeWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -382,7 +412,7 @@ func (o *BootPxe) UnmarshalJSON(bytes []byte) (err error) {
 
 	varBootPxeWithoutEmbeddedStruct := BootPxeWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varBootPxeWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varBootPxeWithoutEmbeddedStruct)
 	if err == nil {
 		varBootPxe := _BootPxe{}
 		varBootPxe.ClassId = varBootPxeWithoutEmbeddedStruct.ClassId
@@ -400,7 +430,7 @@ func (o *BootPxe) UnmarshalJSON(bytes []byte) (err error) {
 
 	varBootPxe := _BootPxe{}
 
-	err = json.Unmarshal(bytes, &varBootPxe)
+	err = json.Unmarshal(data, &varBootPxe)
 	if err == nil {
 		o.BootDeviceBase = varBootPxe.BootDeviceBase
 	} else {
@@ -409,7 +439,7 @@ func (o *BootPxe) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "InterfaceName")

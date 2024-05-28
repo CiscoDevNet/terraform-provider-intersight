@@ -6,9 +6,9 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "cloud.AwsVirtualMachine"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "cloud.AwsVirtualMachine"]
-**AwsBillingUnit** | Pointer to [**CloudAwsBillingUnitRelationship**](CloudAwsBillingUnitRelationship.md) |  | [optional] 
-**KeyPair** | Pointer to [**CloudAwsKeyPairRelationship**](CloudAwsKeyPairRelationship.md) |  | [optional] 
-**Location** | Pointer to [**CloudAwsVpcRelationship**](CloudAwsVpcRelationship.md) |  | [optional] 
+**AwsBillingUnit** | Pointer to [**NullableCloudAwsBillingUnitRelationship**](CloudAwsBillingUnitRelationship.md) |  | [optional] 
+**KeyPair** | Pointer to [**NullableCloudAwsKeyPairRelationship**](CloudAwsKeyPairRelationship.md) |  | [optional] 
+**Location** | Pointer to [**NullableCloudAwsVpcRelationship**](CloudAwsVpcRelationship.md) |  | [optional] 
 **SecurityGroups** | Pointer to [**[]CloudAwsSecurityGroupRelationship**](CloudAwsSecurityGroupRelationship.md) | An array of relationships to cloudAwsSecurityGroup resources. | [optional] [readonly] 
 
 ## Methods
@@ -95,6 +95,16 @@ SetAwsBillingUnit sets AwsBillingUnit field to given value.
 
 HasAwsBillingUnit returns a boolean if a field has been set.
 
+### SetAwsBillingUnitNil
+
+`func (o *CloudAwsVirtualMachine) SetAwsBillingUnitNil(b bool)`
+
+ SetAwsBillingUnitNil sets the value for AwsBillingUnit to be an explicit nil
+
+### UnsetAwsBillingUnit
+`func (o *CloudAwsVirtualMachine) UnsetAwsBillingUnit()`
+
+UnsetAwsBillingUnit ensures that no value is present for AwsBillingUnit, not even an explicit nil
 ### GetKeyPair
 
 `func (o *CloudAwsVirtualMachine) GetKeyPair() CloudAwsKeyPairRelationship`
@@ -120,6 +130,16 @@ SetKeyPair sets KeyPair field to given value.
 
 HasKeyPair returns a boolean if a field has been set.
 
+### SetKeyPairNil
+
+`func (o *CloudAwsVirtualMachine) SetKeyPairNil(b bool)`
+
+ SetKeyPairNil sets the value for KeyPair to be an explicit nil
+
+### UnsetKeyPair
+`func (o *CloudAwsVirtualMachine) UnsetKeyPair()`
+
+UnsetKeyPair ensures that no value is present for KeyPair, not even an explicit nil
 ### GetLocation
 
 `func (o *CloudAwsVirtualMachine) GetLocation() CloudAwsVpcRelationship`
@@ -145,6 +165,16 @@ SetLocation sets Location field to given value.
 
 HasLocation returns a boolean if a field has been set.
 
+### SetLocationNil
+
+`func (o *CloudAwsVirtualMachine) SetLocationNil(b bool)`
+
+ SetLocationNil sets the value for Location to be an explicit nil
+
+### UnsetLocation
+`func (o *CloudAwsVirtualMachine) UnsetLocation()`
+
+UnsetLocation ensures that no value is present for Location, not even an explicit nil
 ### GetSecurityGroups
 
 `func (o *CloudAwsVirtualMachine) GetSecurityGroups() []CloudAwsSecurityGroupRelationship`

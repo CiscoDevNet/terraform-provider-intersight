@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the MemoryPersistentMemoryRegion type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &MemoryPersistentMemoryRegion{}
 
 // MemoryPersistentMemoryRegion Persistent Memory Region configured on the Persistent Memory Modules on a server.
 type MemoryPersistentMemoryRegion struct {
@@ -41,12 +45,12 @@ type MemoryPersistentMemoryRegion struct {
 	// Socket Memory ID of the Persistent Memory Region.
 	SocketMemoryId *string `json:"SocketMemoryId,omitempty"`
 	// Total capacity in GiB of the Persistent Memory Region.
-	TotalCapacity                       *string                                          `json:"TotalCapacity,omitempty"`
-	InventoryDeviceInfo                 *InventoryDeviceInfoRelationship                 `json:"InventoryDeviceInfo,omitempty"`
-	MemoryPersistentMemoryConfiguration *MemoryPersistentMemoryConfigurationRelationship `json:"MemoryPersistentMemoryConfiguration,omitempty"`
+	TotalCapacity                       *string                                                 `json:"TotalCapacity,omitempty"`
+	InventoryDeviceInfo                 NullableInventoryDeviceInfoRelationship                 `json:"InventoryDeviceInfo,omitempty"`
+	MemoryPersistentMemoryConfiguration NullableMemoryPersistentMemoryConfigurationRelationship `json:"MemoryPersistentMemoryConfiguration,omitempty"`
 	// An array of relationships to memoryPersistentMemoryNamespace resources.
 	PersistentMemoryNamespaces []MemoryPersistentMemoryNamespaceRelationship `json:"PersistentMemoryNamespaces,omitempty"`
-	RegisteredDevice           *AssetDeviceRegistrationRelationship          `json:"RegisteredDevice,omitempty"`
+	RegisteredDevice           NullableAssetDeviceRegistrationRelationship   `json:"RegisteredDevice,omitempty"`
 	AdditionalProperties       map[string]interface{}
 }
 
@@ -125,7 +129,7 @@ func (o *MemoryPersistentMemoryRegion) SetObjectType(v string) {
 
 // GetFreeCapacity returns the FreeCapacity field value if set, zero value otherwise.
 func (o *MemoryPersistentMemoryRegion) GetFreeCapacity() string {
-	if o == nil || o.FreeCapacity == nil {
+	if o == nil || IsNil(o.FreeCapacity) {
 		var ret string
 		return ret
 	}
@@ -135,7 +139,7 @@ func (o *MemoryPersistentMemoryRegion) GetFreeCapacity() string {
 // GetFreeCapacityOk returns a tuple with the FreeCapacity field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *MemoryPersistentMemoryRegion) GetFreeCapacityOk() (*string, bool) {
-	if o == nil || o.FreeCapacity == nil {
+	if o == nil || IsNil(o.FreeCapacity) {
 		return nil, false
 	}
 	return o.FreeCapacity, true
@@ -143,7 +147,7 @@ func (o *MemoryPersistentMemoryRegion) GetFreeCapacityOk() (*string, bool) {
 
 // HasFreeCapacity returns a boolean if a field has been set.
 func (o *MemoryPersistentMemoryRegion) HasFreeCapacity() bool {
-	if o != nil && o.FreeCapacity != nil {
+	if o != nil && !IsNil(o.FreeCapacity) {
 		return true
 	}
 
@@ -157,7 +161,7 @@ func (o *MemoryPersistentMemoryRegion) SetFreeCapacity(v string) {
 
 // GetHealthState returns the HealthState field value if set, zero value otherwise.
 func (o *MemoryPersistentMemoryRegion) GetHealthState() string {
-	if o == nil || o.HealthState == nil {
+	if o == nil || IsNil(o.HealthState) {
 		var ret string
 		return ret
 	}
@@ -167,7 +171,7 @@ func (o *MemoryPersistentMemoryRegion) GetHealthState() string {
 // GetHealthStateOk returns a tuple with the HealthState field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *MemoryPersistentMemoryRegion) GetHealthStateOk() (*string, bool) {
-	if o == nil || o.HealthState == nil {
+	if o == nil || IsNil(o.HealthState) {
 		return nil, false
 	}
 	return o.HealthState, true
@@ -175,7 +179,7 @@ func (o *MemoryPersistentMemoryRegion) GetHealthStateOk() (*string, bool) {
 
 // HasHealthState returns a boolean if a field has been set.
 func (o *MemoryPersistentMemoryRegion) HasHealthState() bool {
-	if o != nil && o.HealthState != nil {
+	if o != nil && !IsNil(o.HealthState) {
 		return true
 	}
 
@@ -189,7 +193,7 @@ func (o *MemoryPersistentMemoryRegion) SetHealthState(v string) {
 
 // GetInterleavedSetId returns the InterleavedSetId field value if set, zero value otherwise.
 func (o *MemoryPersistentMemoryRegion) GetInterleavedSetId() string {
-	if o == nil || o.InterleavedSetId == nil {
+	if o == nil || IsNil(o.InterleavedSetId) {
 		var ret string
 		return ret
 	}
@@ -199,7 +203,7 @@ func (o *MemoryPersistentMemoryRegion) GetInterleavedSetId() string {
 // GetInterleavedSetIdOk returns a tuple with the InterleavedSetId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *MemoryPersistentMemoryRegion) GetInterleavedSetIdOk() (*string, bool) {
-	if o == nil || o.InterleavedSetId == nil {
+	if o == nil || IsNil(o.InterleavedSetId) {
 		return nil, false
 	}
 	return o.InterleavedSetId, true
@@ -207,7 +211,7 @@ func (o *MemoryPersistentMemoryRegion) GetInterleavedSetIdOk() (*string, bool) {
 
 // HasInterleavedSetId returns a boolean if a field has been set.
 func (o *MemoryPersistentMemoryRegion) HasInterleavedSetId() bool {
-	if o != nil && o.InterleavedSetId != nil {
+	if o != nil && !IsNil(o.InterleavedSetId) {
 		return true
 	}
 
@@ -221,7 +225,7 @@ func (o *MemoryPersistentMemoryRegion) SetInterleavedSetId(v string) {
 
 // GetLocaterIds returns the LocaterIds field value if set, zero value otherwise.
 func (o *MemoryPersistentMemoryRegion) GetLocaterIds() string {
-	if o == nil || o.LocaterIds == nil {
+	if o == nil || IsNil(o.LocaterIds) {
 		var ret string
 		return ret
 	}
@@ -231,7 +235,7 @@ func (o *MemoryPersistentMemoryRegion) GetLocaterIds() string {
 // GetLocaterIdsOk returns a tuple with the LocaterIds field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *MemoryPersistentMemoryRegion) GetLocaterIdsOk() (*string, bool) {
-	if o == nil || o.LocaterIds == nil {
+	if o == nil || IsNil(o.LocaterIds) {
 		return nil, false
 	}
 	return o.LocaterIds, true
@@ -239,7 +243,7 @@ func (o *MemoryPersistentMemoryRegion) GetLocaterIdsOk() (*string, bool) {
 
 // HasLocaterIds returns a boolean if a field has been set.
 func (o *MemoryPersistentMemoryRegion) HasLocaterIds() bool {
-	if o != nil && o.LocaterIds != nil {
+	if o != nil && !IsNil(o.LocaterIds) {
 		return true
 	}
 
@@ -253,7 +257,7 @@ func (o *MemoryPersistentMemoryRegion) SetLocaterIds(v string) {
 
 // GetPersistentMemoryType returns the PersistentMemoryType field value if set, zero value otherwise.
 func (o *MemoryPersistentMemoryRegion) GetPersistentMemoryType() string {
-	if o == nil || o.PersistentMemoryType == nil {
+	if o == nil || IsNil(o.PersistentMemoryType) {
 		var ret string
 		return ret
 	}
@@ -263,7 +267,7 @@ func (o *MemoryPersistentMemoryRegion) GetPersistentMemoryType() string {
 // GetPersistentMemoryTypeOk returns a tuple with the PersistentMemoryType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *MemoryPersistentMemoryRegion) GetPersistentMemoryTypeOk() (*string, bool) {
-	if o == nil || o.PersistentMemoryType == nil {
+	if o == nil || IsNil(o.PersistentMemoryType) {
 		return nil, false
 	}
 	return o.PersistentMemoryType, true
@@ -271,7 +275,7 @@ func (o *MemoryPersistentMemoryRegion) GetPersistentMemoryTypeOk() (*string, boo
 
 // HasPersistentMemoryType returns a boolean if a field has been set.
 func (o *MemoryPersistentMemoryRegion) HasPersistentMemoryType() bool {
-	if o != nil && o.PersistentMemoryType != nil {
+	if o != nil && !IsNil(o.PersistentMemoryType) {
 		return true
 	}
 
@@ -285,7 +289,7 @@ func (o *MemoryPersistentMemoryRegion) SetPersistentMemoryType(v string) {
 
 // GetRegionId returns the RegionId field value if set, zero value otherwise.
 func (o *MemoryPersistentMemoryRegion) GetRegionId() string {
-	if o == nil || o.RegionId == nil {
+	if o == nil || IsNil(o.RegionId) {
 		var ret string
 		return ret
 	}
@@ -295,7 +299,7 @@ func (o *MemoryPersistentMemoryRegion) GetRegionId() string {
 // GetRegionIdOk returns a tuple with the RegionId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *MemoryPersistentMemoryRegion) GetRegionIdOk() (*string, bool) {
-	if o == nil || o.RegionId == nil {
+	if o == nil || IsNil(o.RegionId) {
 		return nil, false
 	}
 	return o.RegionId, true
@@ -303,7 +307,7 @@ func (o *MemoryPersistentMemoryRegion) GetRegionIdOk() (*string, bool) {
 
 // HasRegionId returns a boolean if a field has been set.
 func (o *MemoryPersistentMemoryRegion) HasRegionId() bool {
-	if o != nil && o.RegionId != nil {
+	if o != nil && !IsNil(o.RegionId) {
 		return true
 	}
 
@@ -317,7 +321,7 @@ func (o *MemoryPersistentMemoryRegion) SetRegionId(v string) {
 
 // GetSocketId returns the SocketId field value if set, zero value otherwise.
 func (o *MemoryPersistentMemoryRegion) GetSocketId() string {
-	if o == nil || o.SocketId == nil {
+	if o == nil || IsNil(o.SocketId) {
 		var ret string
 		return ret
 	}
@@ -327,7 +331,7 @@ func (o *MemoryPersistentMemoryRegion) GetSocketId() string {
 // GetSocketIdOk returns a tuple with the SocketId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *MemoryPersistentMemoryRegion) GetSocketIdOk() (*string, bool) {
-	if o == nil || o.SocketId == nil {
+	if o == nil || IsNil(o.SocketId) {
 		return nil, false
 	}
 	return o.SocketId, true
@@ -335,7 +339,7 @@ func (o *MemoryPersistentMemoryRegion) GetSocketIdOk() (*string, bool) {
 
 // HasSocketId returns a boolean if a field has been set.
 func (o *MemoryPersistentMemoryRegion) HasSocketId() bool {
-	if o != nil && o.SocketId != nil {
+	if o != nil && !IsNil(o.SocketId) {
 		return true
 	}
 
@@ -349,7 +353,7 @@ func (o *MemoryPersistentMemoryRegion) SetSocketId(v string) {
 
 // GetSocketMemoryId returns the SocketMemoryId field value if set, zero value otherwise.
 func (o *MemoryPersistentMemoryRegion) GetSocketMemoryId() string {
-	if o == nil || o.SocketMemoryId == nil {
+	if o == nil || IsNil(o.SocketMemoryId) {
 		var ret string
 		return ret
 	}
@@ -359,7 +363,7 @@ func (o *MemoryPersistentMemoryRegion) GetSocketMemoryId() string {
 // GetSocketMemoryIdOk returns a tuple with the SocketMemoryId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *MemoryPersistentMemoryRegion) GetSocketMemoryIdOk() (*string, bool) {
-	if o == nil || o.SocketMemoryId == nil {
+	if o == nil || IsNil(o.SocketMemoryId) {
 		return nil, false
 	}
 	return o.SocketMemoryId, true
@@ -367,7 +371,7 @@ func (o *MemoryPersistentMemoryRegion) GetSocketMemoryIdOk() (*string, bool) {
 
 // HasSocketMemoryId returns a boolean if a field has been set.
 func (o *MemoryPersistentMemoryRegion) HasSocketMemoryId() bool {
-	if o != nil && o.SocketMemoryId != nil {
+	if o != nil && !IsNil(o.SocketMemoryId) {
 		return true
 	}
 
@@ -381,7 +385,7 @@ func (o *MemoryPersistentMemoryRegion) SetSocketMemoryId(v string) {
 
 // GetTotalCapacity returns the TotalCapacity field value if set, zero value otherwise.
 func (o *MemoryPersistentMemoryRegion) GetTotalCapacity() string {
-	if o == nil || o.TotalCapacity == nil {
+	if o == nil || IsNil(o.TotalCapacity) {
 		var ret string
 		return ret
 	}
@@ -391,7 +395,7 @@ func (o *MemoryPersistentMemoryRegion) GetTotalCapacity() string {
 // GetTotalCapacityOk returns a tuple with the TotalCapacity field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *MemoryPersistentMemoryRegion) GetTotalCapacityOk() (*string, bool) {
-	if o == nil || o.TotalCapacity == nil {
+	if o == nil || IsNil(o.TotalCapacity) {
 		return nil, false
 	}
 	return o.TotalCapacity, true
@@ -399,7 +403,7 @@ func (o *MemoryPersistentMemoryRegion) GetTotalCapacityOk() (*string, bool) {
 
 // HasTotalCapacity returns a boolean if a field has been set.
 func (o *MemoryPersistentMemoryRegion) HasTotalCapacity() bool {
-	if o != nil && o.TotalCapacity != nil {
+	if o != nil && !IsNil(o.TotalCapacity) {
 		return true
 	}
 
@@ -411,68 +415,90 @@ func (o *MemoryPersistentMemoryRegion) SetTotalCapacity(v string) {
 	o.TotalCapacity = &v
 }
 
-// GetInventoryDeviceInfo returns the InventoryDeviceInfo field value if set, zero value otherwise.
+// GetInventoryDeviceInfo returns the InventoryDeviceInfo field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *MemoryPersistentMemoryRegion) GetInventoryDeviceInfo() InventoryDeviceInfoRelationship {
-	if o == nil || o.InventoryDeviceInfo == nil {
+	if o == nil || IsNil(o.InventoryDeviceInfo.Get()) {
 		var ret InventoryDeviceInfoRelationship
 		return ret
 	}
-	return *o.InventoryDeviceInfo
+	return *o.InventoryDeviceInfo.Get()
 }
 
 // GetInventoryDeviceInfoOk returns a tuple with the InventoryDeviceInfo field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *MemoryPersistentMemoryRegion) GetInventoryDeviceInfoOk() (*InventoryDeviceInfoRelationship, bool) {
-	if o == nil || o.InventoryDeviceInfo == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.InventoryDeviceInfo, true
+	return o.InventoryDeviceInfo.Get(), o.InventoryDeviceInfo.IsSet()
 }
 
 // HasInventoryDeviceInfo returns a boolean if a field has been set.
 func (o *MemoryPersistentMemoryRegion) HasInventoryDeviceInfo() bool {
-	if o != nil && o.InventoryDeviceInfo != nil {
+	if o != nil && o.InventoryDeviceInfo.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetInventoryDeviceInfo gets a reference to the given InventoryDeviceInfoRelationship and assigns it to the InventoryDeviceInfo field.
+// SetInventoryDeviceInfo gets a reference to the given NullableInventoryDeviceInfoRelationship and assigns it to the InventoryDeviceInfo field.
 func (o *MemoryPersistentMemoryRegion) SetInventoryDeviceInfo(v InventoryDeviceInfoRelationship) {
-	o.InventoryDeviceInfo = &v
+	o.InventoryDeviceInfo.Set(&v)
 }
 
-// GetMemoryPersistentMemoryConfiguration returns the MemoryPersistentMemoryConfiguration field value if set, zero value otherwise.
+// SetInventoryDeviceInfoNil sets the value for InventoryDeviceInfo to be an explicit nil
+func (o *MemoryPersistentMemoryRegion) SetInventoryDeviceInfoNil() {
+	o.InventoryDeviceInfo.Set(nil)
+}
+
+// UnsetInventoryDeviceInfo ensures that no value is present for InventoryDeviceInfo, not even an explicit nil
+func (o *MemoryPersistentMemoryRegion) UnsetInventoryDeviceInfo() {
+	o.InventoryDeviceInfo.Unset()
+}
+
+// GetMemoryPersistentMemoryConfiguration returns the MemoryPersistentMemoryConfiguration field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *MemoryPersistentMemoryRegion) GetMemoryPersistentMemoryConfiguration() MemoryPersistentMemoryConfigurationRelationship {
-	if o == nil || o.MemoryPersistentMemoryConfiguration == nil {
+	if o == nil || IsNil(o.MemoryPersistentMemoryConfiguration.Get()) {
 		var ret MemoryPersistentMemoryConfigurationRelationship
 		return ret
 	}
-	return *o.MemoryPersistentMemoryConfiguration
+	return *o.MemoryPersistentMemoryConfiguration.Get()
 }
 
 // GetMemoryPersistentMemoryConfigurationOk returns a tuple with the MemoryPersistentMemoryConfiguration field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *MemoryPersistentMemoryRegion) GetMemoryPersistentMemoryConfigurationOk() (*MemoryPersistentMemoryConfigurationRelationship, bool) {
-	if o == nil || o.MemoryPersistentMemoryConfiguration == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.MemoryPersistentMemoryConfiguration, true
+	return o.MemoryPersistentMemoryConfiguration.Get(), o.MemoryPersistentMemoryConfiguration.IsSet()
 }
 
 // HasMemoryPersistentMemoryConfiguration returns a boolean if a field has been set.
 func (o *MemoryPersistentMemoryRegion) HasMemoryPersistentMemoryConfiguration() bool {
-	if o != nil && o.MemoryPersistentMemoryConfiguration != nil {
+	if o != nil && o.MemoryPersistentMemoryConfiguration.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetMemoryPersistentMemoryConfiguration gets a reference to the given MemoryPersistentMemoryConfigurationRelationship and assigns it to the MemoryPersistentMemoryConfiguration field.
+// SetMemoryPersistentMemoryConfiguration gets a reference to the given NullableMemoryPersistentMemoryConfigurationRelationship and assigns it to the MemoryPersistentMemoryConfiguration field.
 func (o *MemoryPersistentMemoryRegion) SetMemoryPersistentMemoryConfiguration(v MemoryPersistentMemoryConfigurationRelationship) {
-	o.MemoryPersistentMemoryConfiguration = &v
+	o.MemoryPersistentMemoryConfiguration.Set(&v)
+}
+
+// SetMemoryPersistentMemoryConfigurationNil sets the value for MemoryPersistentMemoryConfiguration to be an explicit nil
+func (o *MemoryPersistentMemoryRegion) SetMemoryPersistentMemoryConfigurationNil() {
+	o.MemoryPersistentMemoryConfiguration.Set(nil)
+}
+
+// UnsetMemoryPersistentMemoryConfiguration ensures that no value is present for MemoryPersistentMemoryConfiguration, not even an explicit nil
+func (o *MemoryPersistentMemoryRegion) UnsetMemoryPersistentMemoryConfiguration() {
+	o.MemoryPersistentMemoryConfiguration.Unset()
 }
 
 // GetPersistentMemoryNamespaces returns the PersistentMemoryNamespaces field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -488,7 +514,7 @@ func (o *MemoryPersistentMemoryRegion) GetPersistentMemoryNamespaces() []MemoryP
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *MemoryPersistentMemoryRegion) GetPersistentMemoryNamespacesOk() ([]MemoryPersistentMemoryNamespaceRelationship, bool) {
-	if o == nil || o.PersistentMemoryNamespaces == nil {
+	if o == nil || IsNil(o.PersistentMemoryNamespaces) {
 		return nil, false
 	}
 	return o.PersistentMemoryNamespaces, true
@@ -496,7 +522,7 @@ func (o *MemoryPersistentMemoryRegion) GetPersistentMemoryNamespacesOk() ([]Memo
 
 // HasPersistentMemoryNamespaces returns a boolean if a field has been set.
 func (o *MemoryPersistentMemoryRegion) HasPersistentMemoryNamespaces() bool {
-	if o != nil && o.PersistentMemoryNamespaces != nil {
+	if o != nil && IsNil(o.PersistentMemoryNamespaces) {
 		return true
 	}
 
@@ -508,102 +534,139 @@ func (o *MemoryPersistentMemoryRegion) SetPersistentMemoryNamespaces(v []MemoryP
 	o.PersistentMemoryNamespaces = v
 }
 
-// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise.
+// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *MemoryPersistentMemoryRegion) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil || IsNil(o.RegisteredDevice.Get()) {
 		var ret AssetDeviceRegistrationRelationship
 		return ret
 	}
-	return *o.RegisteredDevice
+	return *o.RegisteredDevice.Get()
 }
 
 // GetRegisteredDeviceOk returns a tuple with the RegisteredDevice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *MemoryPersistentMemoryRegion) GetRegisteredDeviceOk() (*AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.RegisteredDevice, true
+	return o.RegisteredDevice.Get(), o.RegisteredDevice.IsSet()
 }
 
 // HasRegisteredDevice returns a boolean if a field has been set.
 func (o *MemoryPersistentMemoryRegion) HasRegisteredDevice() bool {
-	if o != nil && o.RegisteredDevice != nil {
+	if o != nil && o.RegisteredDevice.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRegisteredDevice gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
+// SetRegisteredDevice gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
 func (o *MemoryPersistentMemoryRegion) SetRegisteredDevice(v AssetDeviceRegistrationRelationship) {
-	o.RegisteredDevice = &v
+	o.RegisteredDevice.Set(&v)
+}
+
+// SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+func (o *MemoryPersistentMemoryRegion) SetRegisteredDeviceNil() {
+	o.RegisteredDevice.Set(nil)
+}
+
+// UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
+func (o *MemoryPersistentMemoryRegion) UnsetRegisteredDevice() {
+	o.RegisteredDevice.Unset()
 }
 
 func (o MemoryPersistentMemoryRegion) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o MemoryPersistentMemoryRegion) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedInventoryBase, errInventoryBase := json.Marshal(o.InventoryBase)
 	if errInventoryBase != nil {
-		return []byte{}, errInventoryBase
+		return map[string]interface{}{}, errInventoryBase
 	}
 	errInventoryBase = json.Unmarshal([]byte(serializedInventoryBase), &toSerialize)
 	if errInventoryBase != nil {
-		return []byte{}, errInventoryBase
+		return map[string]interface{}{}, errInventoryBase
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.FreeCapacity != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.FreeCapacity) {
 		toSerialize["FreeCapacity"] = o.FreeCapacity
 	}
-	if o.HealthState != nil {
+	if !IsNil(o.HealthState) {
 		toSerialize["HealthState"] = o.HealthState
 	}
-	if o.InterleavedSetId != nil {
+	if !IsNil(o.InterleavedSetId) {
 		toSerialize["InterleavedSetId"] = o.InterleavedSetId
 	}
-	if o.LocaterIds != nil {
+	if !IsNil(o.LocaterIds) {
 		toSerialize["LocaterIds"] = o.LocaterIds
 	}
-	if o.PersistentMemoryType != nil {
+	if !IsNil(o.PersistentMemoryType) {
 		toSerialize["PersistentMemoryType"] = o.PersistentMemoryType
 	}
-	if o.RegionId != nil {
+	if !IsNil(o.RegionId) {
 		toSerialize["RegionId"] = o.RegionId
 	}
-	if o.SocketId != nil {
+	if !IsNil(o.SocketId) {
 		toSerialize["SocketId"] = o.SocketId
 	}
-	if o.SocketMemoryId != nil {
+	if !IsNil(o.SocketMemoryId) {
 		toSerialize["SocketMemoryId"] = o.SocketMemoryId
 	}
-	if o.TotalCapacity != nil {
+	if !IsNil(o.TotalCapacity) {
 		toSerialize["TotalCapacity"] = o.TotalCapacity
 	}
-	if o.InventoryDeviceInfo != nil {
-		toSerialize["InventoryDeviceInfo"] = o.InventoryDeviceInfo
+	if o.InventoryDeviceInfo.IsSet() {
+		toSerialize["InventoryDeviceInfo"] = o.InventoryDeviceInfo.Get()
 	}
-	if o.MemoryPersistentMemoryConfiguration != nil {
-		toSerialize["MemoryPersistentMemoryConfiguration"] = o.MemoryPersistentMemoryConfiguration
+	if o.MemoryPersistentMemoryConfiguration.IsSet() {
+		toSerialize["MemoryPersistentMemoryConfiguration"] = o.MemoryPersistentMemoryConfiguration.Get()
 	}
 	if o.PersistentMemoryNamespaces != nil {
 		toSerialize["PersistentMemoryNamespaces"] = o.PersistentMemoryNamespaces
 	}
-	if o.RegisteredDevice != nil {
-		toSerialize["RegisteredDevice"] = o.RegisteredDevice
+	if o.RegisteredDevice.IsSet() {
+		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *MemoryPersistentMemoryRegion) UnmarshalJSON(bytes []byte) (err error) {
+func (o *MemoryPersistentMemoryRegion) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type MemoryPersistentMemoryRegionWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -626,17 +689,17 @@ func (o *MemoryPersistentMemoryRegion) UnmarshalJSON(bytes []byte) (err error) {
 		// Socket Memory ID of the Persistent Memory Region.
 		SocketMemoryId *string `json:"SocketMemoryId,omitempty"`
 		// Total capacity in GiB of the Persistent Memory Region.
-		TotalCapacity                       *string                                          `json:"TotalCapacity,omitempty"`
-		InventoryDeviceInfo                 *InventoryDeviceInfoRelationship                 `json:"InventoryDeviceInfo,omitempty"`
-		MemoryPersistentMemoryConfiguration *MemoryPersistentMemoryConfigurationRelationship `json:"MemoryPersistentMemoryConfiguration,omitempty"`
+		TotalCapacity                       *string                                                 `json:"TotalCapacity,omitempty"`
+		InventoryDeviceInfo                 NullableInventoryDeviceInfoRelationship                 `json:"InventoryDeviceInfo,omitempty"`
+		MemoryPersistentMemoryConfiguration NullableMemoryPersistentMemoryConfigurationRelationship `json:"MemoryPersistentMemoryConfiguration,omitempty"`
 		// An array of relationships to memoryPersistentMemoryNamespace resources.
 		PersistentMemoryNamespaces []MemoryPersistentMemoryNamespaceRelationship `json:"PersistentMemoryNamespaces,omitempty"`
-		RegisteredDevice           *AssetDeviceRegistrationRelationship          `json:"RegisteredDevice,omitempty"`
+		RegisteredDevice           NullableAssetDeviceRegistrationRelationship   `json:"RegisteredDevice,omitempty"`
 	}
 
 	varMemoryPersistentMemoryRegionWithoutEmbeddedStruct := MemoryPersistentMemoryRegionWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varMemoryPersistentMemoryRegionWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varMemoryPersistentMemoryRegionWithoutEmbeddedStruct)
 	if err == nil {
 		varMemoryPersistentMemoryRegion := _MemoryPersistentMemoryRegion{}
 		varMemoryPersistentMemoryRegion.ClassId = varMemoryPersistentMemoryRegionWithoutEmbeddedStruct.ClassId
@@ -661,7 +724,7 @@ func (o *MemoryPersistentMemoryRegion) UnmarshalJSON(bytes []byte) (err error) {
 
 	varMemoryPersistentMemoryRegion := _MemoryPersistentMemoryRegion{}
 
-	err = json.Unmarshal(bytes, &varMemoryPersistentMemoryRegion)
+	err = json.Unmarshal(data, &varMemoryPersistentMemoryRegion)
 	if err == nil {
 		o.InventoryBase = varMemoryPersistentMemoryRegion.InventoryBase
 	} else {
@@ -670,7 +733,7 @@ func (o *MemoryPersistentMemoryRegion) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "FreeCapacity")

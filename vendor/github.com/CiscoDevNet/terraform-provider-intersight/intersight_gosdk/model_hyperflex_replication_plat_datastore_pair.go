@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the HyperflexReplicationPlatDatastorePair type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &HyperflexReplicationPlatDatastorePair{}
 
 // HyperflexReplicationPlatDatastorePair Pair of datastores that are replication peers with each other.
 type HyperflexReplicationPlatDatastorePair struct {
@@ -113,7 +117,7 @@ func (o *HyperflexReplicationPlatDatastorePair) SetObjectType(v string) {
 
 // GetAds returns the Ads field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *HyperflexReplicationPlatDatastorePair) GetAds() HyperflexReplicationPlatDatastore {
-	if o == nil || o.Ads.Get() == nil {
+	if o == nil || IsNil(o.Ads.Get()) {
 		var ret HyperflexReplicationPlatDatastore
 		return ret
 	}
@@ -156,7 +160,7 @@ func (o *HyperflexReplicationPlatDatastorePair) UnsetAds() {
 
 // GetBackupOnly returns the BackupOnly field value if set, zero value otherwise.
 func (o *HyperflexReplicationPlatDatastorePair) GetBackupOnly() bool {
-	if o == nil || o.BackupOnly == nil {
+	if o == nil || IsNil(o.BackupOnly) {
 		var ret bool
 		return ret
 	}
@@ -166,7 +170,7 @@ func (o *HyperflexReplicationPlatDatastorePair) GetBackupOnly() bool {
 // GetBackupOnlyOk returns a tuple with the BackupOnly field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexReplicationPlatDatastorePair) GetBackupOnlyOk() (*bool, bool) {
-	if o == nil || o.BackupOnly == nil {
+	if o == nil || IsNil(o.BackupOnly) {
 		return nil, false
 	}
 	return o.BackupOnly, true
@@ -174,7 +178,7 @@ func (o *HyperflexReplicationPlatDatastorePair) GetBackupOnlyOk() (*bool, bool) 
 
 // HasBackupOnly returns a boolean if a field has been set.
 func (o *HyperflexReplicationPlatDatastorePair) HasBackupOnly() bool {
-	if o != nil && o.BackupOnly != nil {
+	if o != nil && !IsNil(o.BackupOnly) {
 		return true
 	}
 
@@ -188,7 +192,7 @@ func (o *HyperflexReplicationPlatDatastorePair) SetBackupOnly(v bool) {
 
 // GetBds returns the Bds field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *HyperflexReplicationPlatDatastorePair) GetBds() HyperflexReplicationPlatDatastore {
-	if o == nil || o.Bds.Get() == nil {
+	if o == nil || IsNil(o.Bds.Get()) {
 		var ret HyperflexReplicationPlatDatastore
 		return ret
 	}
@@ -231,7 +235,7 @@ func (o *HyperflexReplicationPlatDatastorePair) UnsetBds() {
 
 // GetQuiesce returns the Quiesce field value if set, zero value otherwise.
 func (o *HyperflexReplicationPlatDatastorePair) GetQuiesce() bool {
-	if o == nil || o.Quiesce == nil {
+	if o == nil || IsNil(o.Quiesce) {
 		var ret bool
 		return ret
 	}
@@ -241,7 +245,7 @@ func (o *HyperflexReplicationPlatDatastorePair) GetQuiesce() bool {
 // GetQuiesceOk returns a tuple with the Quiesce field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexReplicationPlatDatastorePair) GetQuiesceOk() (*bool, bool) {
-	if o == nil || o.Quiesce == nil {
+	if o == nil || IsNil(o.Quiesce) {
 		return nil, false
 	}
 	return o.Quiesce, true
@@ -249,7 +253,7 @@ func (o *HyperflexReplicationPlatDatastorePair) GetQuiesceOk() (*bool, bool) {
 
 // HasQuiesce returns a boolean if a field has been set.
 func (o *HyperflexReplicationPlatDatastorePair) HasQuiesce() bool {
-	if o != nil && o.Quiesce != nil {
+	if o != nil && !IsNil(o.Quiesce) {
 		return true
 	}
 
@@ -263,7 +267,7 @@ func (o *HyperflexReplicationPlatDatastorePair) SetQuiesce(v bool) {
 
 // GetReplicationIntervalInMinutes returns the ReplicationIntervalInMinutes field value if set, zero value otherwise.
 func (o *HyperflexReplicationPlatDatastorePair) GetReplicationIntervalInMinutes() int64 {
-	if o == nil || o.ReplicationIntervalInMinutes == nil {
+	if o == nil || IsNil(o.ReplicationIntervalInMinutes) {
 		var ret int64
 		return ret
 	}
@@ -273,7 +277,7 @@ func (o *HyperflexReplicationPlatDatastorePair) GetReplicationIntervalInMinutes(
 // GetReplicationIntervalInMinutesOk returns a tuple with the ReplicationIntervalInMinutes field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexReplicationPlatDatastorePair) GetReplicationIntervalInMinutesOk() (*int64, bool) {
-	if o == nil || o.ReplicationIntervalInMinutes == nil {
+	if o == nil || IsNil(o.ReplicationIntervalInMinutes) {
 		return nil, false
 	}
 	return o.ReplicationIntervalInMinutes, true
@@ -281,7 +285,7 @@ func (o *HyperflexReplicationPlatDatastorePair) GetReplicationIntervalInMinutesO
 
 // HasReplicationIntervalInMinutes returns a boolean if a field has been set.
 func (o *HyperflexReplicationPlatDatastorePair) HasReplicationIntervalInMinutes() bool {
-	if o != nil && o.ReplicationIntervalInMinutes != nil {
+	if o != nil && !IsNil(o.ReplicationIntervalInMinutes) {
 		return true
 	}
 
@@ -295,7 +299,7 @@ func (o *HyperflexReplicationPlatDatastorePair) SetReplicationIntervalInMinutes(
 
 // GetSourceds returns the Sourceds field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *HyperflexReplicationPlatDatastorePair) GetSourceds() HyperflexReplicationPlatDatastore {
-	if o == nil || o.Sourceds.Get() == nil {
+	if o == nil || IsNil(o.Sourceds.Get()) {
 		var ret HyperflexReplicationPlatDatastore
 		return ret
 	}
@@ -338,7 +342,7 @@ func (o *HyperflexReplicationPlatDatastorePair) UnsetSourceds() {
 
 // GetStorageOnly returns the StorageOnly field value if set, zero value otherwise.
 func (o *HyperflexReplicationPlatDatastorePair) GetStorageOnly() bool {
-	if o == nil || o.StorageOnly == nil {
+	if o == nil || IsNil(o.StorageOnly) {
 		var ret bool
 		return ret
 	}
@@ -348,7 +352,7 @@ func (o *HyperflexReplicationPlatDatastorePair) GetStorageOnly() bool {
 // GetStorageOnlyOk returns a tuple with the StorageOnly field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexReplicationPlatDatastorePair) GetStorageOnlyOk() (*bool, bool) {
-	if o == nil || o.StorageOnly == nil {
+	if o == nil || IsNil(o.StorageOnly) {
 		return nil, false
 	}
 	return o.StorageOnly, true
@@ -356,7 +360,7 @@ func (o *HyperflexReplicationPlatDatastorePair) GetStorageOnlyOk() (*bool, bool)
 
 // HasStorageOnly returns a boolean if a field has been set.
 func (o *HyperflexReplicationPlatDatastorePair) HasStorageOnly() bool {
-	if o != nil && o.StorageOnly != nil {
+	if o != nil && !IsNil(o.StorageOnly) {
 		return true
 	}
 
@@ -369,40 +373,44 @@ func (o *HyperflexReplicationPlatDatastorePair) SetStorageOnly(v bool) {
 }
 
 func (o HyperflexReplicationPlatDatastorePair) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o HyperflexReplicationPlatDatastorePair) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
 	errMoBaseComplexType = json.Unmarshal([]byte(serializedMoBaseComplexType), &toSerialize)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
 	if o.Ads.IsSet() {
 		toSerialize["Ads"] = o.Ads.Get()
 	}
-	if o.BackupOnly != nil {
+	if !IsNil(o.BackupOnly) {
 		toSerialize["BackupOnly"] = o.BackupOnly
 	}
 	if o.Bds.IsSet() {
 		toSerialize["Bds"] = o.Bds.Get()
 	}
-	if o.Quiesce != nil {
+	if !IsNil(o.Quiesce) {
 		toSerialize["Quiesce"] = o.Quiesce
 	}
-	if o.ReplicationIntervalInMinutes != nil {
+	if !IsNil(o.ReplicationIntervalInMinutes) {
 		toSerialize["ReplicationIntervalInMinutes"] = o.ReplicationIntervalInMinutes
 	}
 	if o.Sourceds.IsSet() {
 		toSerialize["Sourceds"] = o.Sourceds.Get()
 	}
-	if o.StorageOnly != nil {
+	if !IsNil(o.StorageOnly) {
 		toSerialize["StorageOnly"] = o.StorageOnly
 	}
 
@@ -410,10 +418,32 @@ func (o HyperflexReplicationPlatDatastorePair) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *HyperflexReplicationPlatDatastorePair) UnmarshalJSON(bytes []byte) (err error) {
+func (o *HyperflexReplicationPlatDatastorePair) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type HyperflexReplicationPlatDatastorePairWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -434,7 +464,7 @@ func (o *HyperflexReplicationPlatDatastorePair) UnmarshalJSON(bytes []byte) (err
 
 	varHyperflexReplicationPlatDatastorePairWithoutEmbeddedStruct := HyperflexReplicationPlatDatastorePairWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varHyperflexReplicationPlatDatastorePairWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varHyperflexReplicationPlatDatastorePairWithoutEmbeddedStruct)
 	if err == nil {
 		varHyperflexReplicationPlatDatastorePair := _HyperflexReplicationPlatDatastorePair{}
 		varHyperflexReplicationPlatDatastorePair.ClassId = varHyperflexReplicationPlatDatastorePairWithoutEmbeddedStruct.ClassId
@@ -453,7 +483,7 @@ func (o *HyperflexReplicationPlatDatastorePair) UnmarshalJSON(bytes []byte) (err
 
 	varHyperflexReplicationPlatDatastorePair := _HyperflexReplicationPlatDatastorePair{}
 
-	err = json.Unmarshal(bytes, &varHyperflexReplicationPlatDatastorePair)
+	err = json.Unmarshal(data, &varHyperflexReplicationPlatDatastorePair)
 	if err == nil {
 		o.MoBaseComplexType = varHyperflexReplicationPlatDatastorePair.MoBaseComplexType
 	} else {
@@ -462,7 +492,7 @@ func (o *HyperflexReplicationPlatDatastorePair) UnmarshalJSON(bytes []byte) (err
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Ads")

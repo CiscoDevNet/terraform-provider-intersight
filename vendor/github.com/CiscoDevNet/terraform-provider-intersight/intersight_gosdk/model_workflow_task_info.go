@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,10 +13,14 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 	"time"
 )
+
+// checks if the WorkflowTaskInfo type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &WorkflowTaskInfo{}
 
 // WorkflowTaskInfo Task instance which represents the run time instance of a task within a workflow.
 type WorkflowTaskInfo struct {
@@ -55,14 +59,14 @@ type WorkflowTaskInfo struct {
 	// The time stamp when the task started execution.
 	StartTime *time.Time `json:"StartTime,omitempty"`
 	// The status of the task and this will specify if the task is running or has reached a final state.
-	Status          *string                           `json:"Status,omitempty"`
-	TaskInstIdList  []WorkflowTaskRetryInfo           `json:"TaskInstIdList,omitempty"`
-	TaskLoopInfo    NullableWorkflowTaskLoopInfo      `json:"TaskLoopInfo,omitempty"`
-	SubWorkflowInfo *WorkflowWorkflowInfoRelationship `json:"SubWorkflowInfo,omitempty"`
+	Status          *string                                  `json:"Status,omitempty"`
+	TaskInstIdList  []WorkflowTaskRetryInfo                  `json:"TaskInstIdList,omitempty"`
+	TaskLoopInfo    NullableWorkflowTaskLoopInfo             `json:"TaskLoopInfo,omitempty"`
+	SubWorkflowInfo NullableWorkflowWorkflowInfoRelationship `json:"SubWorkflowInfo,omitempty"`
 	// An array of relationships to workflowWorkflowInfo resources.
-	SubWorkflowRetryHistory []WorkflowWorkflowInfoRelationship  `json:"SubWorkflowRetryHistory,omitempty"`
-	TaskDefinition          *WorkflowTaskDefinitionRelationship `json:"TaskDefinition,omitempty"`
-	WorkflowInfo            *WorkflowWorkflowInfoRelationship   `json:"WorkflowInfo,omitempty"`
+	SubWorkflowRetryHistory []WorkflowWorkflowInfoRelationship         `json:"SubWorkflowRetryHistory,omitempty"`
+	TaskDefinition          NullableWorkflowTaskDefinitionRelationship `json:"TaskDefinition,omitempty"`
+	WorkflowInfo            NullableWorkflowWorkflowInfoRelationship   `json:"WorkflowInfo,omitempty"`
 	AdditionalProperties    map[string]interface{}
 }
 
@@ -141,7 +145,7 @@ func (o *WorkflowTaskInfo) SetObjectType(v string) {
 
 // GetDescription returns the Description field value if set, zero value otherwise.
 func (o *WorkflowTaskInfo) GetDescription() string {
-	if o == nil || o.Description == nil {
+	if o == nil || IsNil(o.Description) {
 		var ret string
 		return ret
 	}
@@ -151,7 +155,7 @@ func (o *WorkflowTaskInfo) GetDescription() string {
 // GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowTaskInfo) GetDescriptionOk() (*string, bool) {
-	if o == nil || o.Description == nil {
+	if o == nil || IsNil(o.Description) {
 		return nil, false
 	}
 	return o.Description, true
@@ -159,7 +163,7 @@ func (o *WorkflowTaskInfo) GetDescriptionOk() (*string, bool) {
 
 // HasDescription returns a boolean if a field has been set.
 func (o *WorkflowTaskInfo) HasDescription() bool {
-	if o != nil && o.Description != nil {
+	if o != nil && !IsNil(o.Description) {
 		return true
 	}
 
@@ -173,7 +177,7 @@ func (o *WorkflowTaskInfo) SetDescription(v string) {
 
 // GetEndTime returns the EndTime field value if set, zero value otherwise.
 func (o *WorkflowTaskInfo) GetEndTime() time.Time {
-	if o == nil || o.EndTime == nil {
+	if o == nil || IsNil(o.EndTime) {
 		var ret time.Time
 		return ret
 	}
@@ -183,7 +187,7 @@ func (o *WorkflowTaskInfo) GetEndTime() time.Time {
 // GetEndTimeOk returns a tuple with the EndTime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowTaskInfo) GetEndTimeOk() (*time.Time, bool) {
-	if o == nil || o.EndTime == nil {
+	if o == nil || IsNil(o.EndTime) {
 		return nil, false
 	}
 	return o.EndTime, true
@@ -191,7 +195,7 @@ func (o *WorkflowTaskInfo) GetEndTimeOk() (*time.Time, bool) {
 
 // HasEndTime returns a boolean if a field has been set.
 func (o *WorkflowTaskInfo) HasEndTime() bool {
-	if o != nil && o.EndTime != nil {
+	if o != nil && !IsNil(o.EndTime) {
 		return true
 	}
 
@@ -205,7 +209,7 @@ func (o *WorkflowTaskInfo) SetEndTime(v time.Time) {
 
 // GetFailureReason returns the FailureReason field value if set, zero value otherwise.
 func (o *WorkflowTaskInfo) GetFailureReason() string {
-	if o == nil || o.FailureReason == nil {
+	if o == nil || IsNil(o.FailureReason) {
 		var ret string
 		return ret
 	}
@@ -215,7 +219,7 @@ func (o *WorkflowTaskInfo) GetFailureReason() string {
 // GetFailureReasonOk returns a tuple with the FailureReason field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowTaskInfo) GetFailureReasonOk() (*string, bool) {
-	if o == nil || o.FailureReason == nil {
+	if o == nil || IsNil(o.FailureReason) {
 		return nil, false
 	}
 	return o.FailureReason, true
@@ -223,7 +227,7 @@ func (o *WorkflowTaskInfo) GetFailureReasonOk() (*string, bool) {
 
 // HasFailureReason returns a boolean if a field has been set.
 func (o *WorkflowTaskInfo) HasFailureReason() bool {
-	if o != nil && o.FailureReason != nil {
+	if o != nil && !IsNil(o.FailureReason) {
 		return true
 	}
 
@@ -248,7 +252,7 @@ func (o *WorkflowTaskInfo) GetInput() interface{} {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *WorkflowTaskInfo) GetInputOk() (*interface{}, bool) {
-	if o == nil || o.Input == nil {
+	if o == nil || IsNil(o.Input) {
 		return nil, false
 	}
 	return &o.Input, true
@@ -256,7 +260,7 @@ func (o *WorkflowTaskInfo) GetInputOk() (*interface{}, bool) {
 
 // HasInput returns a boolean if a field has been set.
 func (o *WorkflowTaskInfo) HasInput() bool {
-	if o != nil && o.Input != nil {
+	if o != nil && IsNil(o.Input) {
 		return true
 	}
 
@@ -270,7 +274,7 @@ func (o *WorkflowTaskInfo) SetInput(v interface{}) {
 
 // GetInstId returns the InstId field value if set, zero value otherwise.
 func (o *WorkflowTaskInfo) GetInstId() string {
-	if o == nil || o.InstId == nil {
+	if o == nil || IsNil(o.InstId) {
 		var ret string
 		return ret
 	}
@@ -280,7 +284,7 @@ func (o *WorkflowTaskInfo) GetInstId() string {
 // GetInstIdOk returns a tuple with the InstId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowTaskInfo) GetInstIdOk() (*string, bool) {
-	if o == nil || o.InstId == nil {
+	if o == nil || IsNil(o.InstId) {
 		return nil, false
 	}
 	return o.InstId, true
@@ -288,7 +292,7 @@ func (o *WorkflowTaskInfo) GetInstIdOk() (*string, bool) {
 
 // HasInstId returns a boolean if a field has been set.
 func (o *WorkflowTaskInfo) HasInstId() bool {
-	if o != nil && o.InstId != nil {
+	if o != nil && !IsNil(o.InstId) {
 		return true
 	}
 
@@ -302,7 +306,7 @@ func (o *WorkflowTaskInfo) SetInstId(v string) {
 
 // GetInternal returns the Internal field value if set, zero value otherwise.
 func (o *WorkflowTaskInfo) GetInternal() bool {
-	if o == nil || o.Internal == nil {
+	if o == nil || IsNil(o.Internal) {
 		var ret bool
 		return ret
 	}
@@ -312,7 +316,7 @@ func (o *WorkflowTaskInfo) GetInternal() bool {
 // GetInternalOk returns a tuple with the Internal field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowTaskInfo) GetInternalOk() (*bool, bool) {
-	if o == nil || o.Internal == nil {
+	if o == nil || IsNil(o.Internal) {
 		return nil, false
 	}
 	return o.Internal, true
@@ -320,7 +324,7 @@ func (o *WorkflowTaskInfo) GetInternalOk() (*bool, bool) {
 
 // HasInternal returns a boolean if a field has been set.
 func (o *WorkflowTaskInfo) HasInternal() bool {
-	if o != nil && o.Internal != nil {
+	if o != nil && !IsNil(o.Internal) {
 		return true
 	}
 
@@ -334,7 +338,7 @@ func (o *WorkflowTaskInfo) SetInternal(v bool) {
 
 // GetLabel returns the Label field value if set, zero value otherwise.
 func (o *WorkflowTaskInfo) GetLabel() string {
-	if o == nil || o.Label == nil {
+	if o == nil || IsNil(o.Label) {
 		var ret string
 		return ret
 	}
@@ -344,7 +348,7 @@ func (o *WorkflowTaskInfo) GetLabel() string {
 // GetLabelOk returns a tuple with the Label field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowTaskInfo) GetLabelOk() (*string, bool) {
-	if o == nil || o.Label == nil {
+	if o == nil || IsNil(o.Label) {
 		return nil, false
 	}
 	return o.Label, true
@@ -352,7 +356,7 @@ func (o *WorkflowTaskInfo) GetLabelOk() (*string, bool) {
 
 // HasLabel returns a boolean if a field has been set.
 func (o *WorkflowTaskInfo) HasLabel() bool {
-	if o != nil && o.Label != nil {
+	if o != nil && !IsNil(o.Label) {
 		return true
 	}
 
@@ -377,7 +381,7 @@ func (o *WorkflowTaskInfo) GetMessage() []WorkflowMessage {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *WorkflowTaskInfo) GetMessageOk() ([]WorkflowMessage, bool) {
-	if o == nil || o.Message == nil {
+	if o == nil || IsNil(o.Message) {
 		return nil, false
 	}
 	return o.Message, true
@@ -385,7 +389,7 @@ func (o *WorkflowTaskInfo) GetMessageOk() ([]WorkflowMessage, bool) {
 
 // HasMessage returns a boolean if a field has been set.
 func (o *WorkflowTaskInfo) HasMessage() bool {
-	if o != nil && o.Message != nil {
+	if o != nil && IsNil(o.Message) {
 		return true
 	}
 
@@ -399,7 +403,7 @@ func (o *WorkflowTaskInfo) SetMessage(v []WorkflowMessage) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *WorkflowTaskInfo) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -409,7 +413,7 @@ func (o *WorkflowTaskInfo) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowTaskInfo) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -417,7 +421,7 @@ func (o *WorkflowTaskInfo) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *WorkflowTaskInfo) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -442,7 +446,7 @@ func (o *WorkflowTaskInfo) GetOutput() interface{} {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *WorkflowTaskInfo) GetOutputOk() (*interface{}, bool) {
-	if o == nil || o.Output == nil {
+	if o == nil || IsNil(o.Output) {
 		return nil, false
 	}
 	return &o.Output, true
@@ -450,7 +454,7 @@ func (o *WorkflowTaskInfo) GetOutputOk() (*interface{}, bool) {
 
 // HasOutput returns a boolean if a field has been set.
 func (o *WorkflowTaskInfo) HasOutput() bool {
-	if o != nil && o.Output != nil {
+	if o != nil && IsNil(o.Output) {
 		return true
 	}
 
@@ -464,7 +468,7 @@ func (o *WorkflowTaskInfo) SetOutput(v interface{}) {
 
 // GetRefName returns the RefName field value if set, zero value otherwise.
 func (o *WorkflowTaskInfo) GetRefName() string {
-	if o == nil || o.RefName == nil {
+	if o == nil || IsNil(o.RefName) {
 		var ret string
 		return ret
 	}
@@ -474,7 +478,7 @@ func (o *WorkflowTaskInfo) GetRefName() string {
 // GetRefNameOk returns a tuple with the RefName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowTaskInfo) GetRefNameOk() (*string, bool) {
-	if o == nil || o.RefName == nil {
+	if o == nil || IsNil(o.RefName) {
 		return nil, false
 	}
 	return o.RefName, true
@@ -482,7 +486,7 @@ func (o *WorkflowTaskInfo) GetRefNameOk() (*string, bool) {
 
 // HasRefName returns a boolean if a field has been set.
 func (o *WorkflowTaskInfo) HasRefName() bool {
-	if o != nil && o.RefName != nil {
+	if o != nil && !IsNil(o.RefName) {
 		return true
 	}
 
@@ -496,7 +500,7 @@ func (o *WorkflowTaskInfo) SetRefName(v string) {
 
 // GetRetryCount returns the RetryCount field value if set, zero value otherwise.
 func (o *WorkflowTaskInfo) GetRetryCount() int64 {
-	if o == nil || o.RetryCount == nil {
+	if o == nil || IsNil(o.RetryCount) {
 		var ret int64
 		return ret
 	}
@@ -506,7 +510,7 @@ func (o *WorkflowTaskInfo) GetRetryCount() int64 {
 // GetRetryCountOk returns a tuple with the RetryCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowTaskInfo) GetRetryCountOk() (*int64, bool) {
-	if o == nil || o.RetryCount == nil {
+	if o == nil || IsNil(o.RetryCount) {
 		return nil, false
 	}
 	return o.RetryCount, true
@@ -514,7 +518,7 @@ func (o *WorkflowTaskInfo) GetRetryCountOk() (*int64, bool) {
 
 // HasRetryCount returns a boolean if a field has been set.
 func (o *WorkflowTaskInfo) HasRetryCount() bool {
-	if o != nil && o.RetryCount != nil {
+	if o != nil && !IsNil(o.RetryCount) {
 		return true
 	}
 
@@ -528,7 +532,7 @@ func (o *WorkflowTaskInfo) SetRetryCount(v int64) {
 
 // GetRollbackDisabled returns the RollbackDisabled field value if set, zero value otherwise.
 func (o *WorkflowTaskInfo) GetRollbackDisabled() bool {
-	if o == nil || o.RollbackDisabled == nil {
+	if o == nil || IsNil(o.RollbackDisabled) {
 		var ret bool
 		return ret
 	}
@@ -538,7 +542,7 @@ func (o *WorkflowTaskInfo) GetRollbackDisabled() bool {
 // GetRollbackDisabledOk returns a tuple with the RollbackDisabled field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowTaskInfo) GetRollbackDisabledOk() (*bool, bool) {
-	if o == nil || o.RollbackDisabled == nil {
+	if o == nil || IsNil(o.RollbackDisabled) {
 		return nil, false
 	}
 	return o.RollbackDisabled, true
@@ -546,7 +550,7 @@ func (o *WorkflowTaskInfo) GetRollbackDisabledOk() (*bool, bool) {
 
 // HasRollbackDisabled returns a boolean if a field has been set.
 func (o *WorkflowTaskInfo) HasRollbackDisabled() bool {
-	if o != nil && o.RollbackDisabled != nil {
+	if o != nil && !IsNil(o.RollbackDisabled) {
 		return true
 	}
 
@@ -560,7 +564,7 @@ func (o *WorkflowTaskInfo) SetRollbackDisabled(v bool) {
 
 // GetRunningInstId returns the RunningInstId field value if set, zero value otherwise.
 func (o *WorkflowTaskInfo) GetRunningInstId() string {
-	if o == nil || o.RunningInstId == nil {
+	if o == nil || IsNil(o.RunningInstId) {
 		var ret string
 		return ret
 	}
@@ -570,7 +574,7 @@ func (o *WorkflowTaskInfo) GetRunningInstId() string {
 // GetRunningInstIdOk returns a tuple with the RunningInstId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowTaskInfo) GetRunningInstIdOk() (*string, bool) {
-	if o == nil || o.RunningInstId == nil {
+	if o == nil || IsNil(o.RunningInstId) {
 		return nil, false
 	}
 	return o.RunningInstId, true
@@ -578,7 +582,7 @@ func (o *WorkflowTaskInfo) GetRunningInstIdOk() (*string, bool) {
 
 // HasRunningInstId returns a boolean if a field has been set.
 func (o *WorkflowTaskInfo) HasRunningInstId() bool {
-	if o != nil && o.RunningInstId != nil {
+	if o != nil && !IsNil(o.RunningInstId) {
 		return true
 	}
 
@@ -592,7 +596,7 @@ func (o *WorkflowTaskInfo) SetRunningInstId(v string) {
 
 // GetStartTime returns the StartTime field value if set, zero value otherwise.
 func (o *WorkflowTaskInfo) GetStartTime() time.Time {
-	if o == nil || o.StartTime == nil {
+	if o == nil || IsNil(o.StartTime) {
 		var ret time.Time
 		return ret
 	}
@@ -602,7 +606,7 @@ func (o *WorkflowTaskInfo) GetStartTime() time.Time {
 // GetStartTimeOk returns a tuple with the StartTime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowTaskInfo) GetStartTimeOk() (*time.Time, bool) {
-	if o == nil || o.StartTime == nil {
+	if o == nil || IsNil(o.StartTime) {
 		return nil, false
 	}
 	return o.StartTime, true
@@ -610,7 +614,7 @@ func (o *WorkflowTaskInfo) GetStartTimeOk() (*time.Time, bool) {
 
 // HasStartTime returns a boolean if a field has been set.
 func (o *WorkflowTaskInfo) HasStartTime() bool {
-	if o != nil && o.StartTime != nil {
+	if o != nil && !IsNil(o.StartTime) {
 		return true
 	}
 
@@ -624,7 +628,7 @@ func (o *WorkflowTaskInfo) SetStartTime(v time.Time) {
 
 // GetStatus returns the Status field value if set, zero value otherwise.
 func (o *WorkflowTaskInfo) GetStatus() string {
-	if o == nil || o.Status == nil {
+	if o == nil || IsNil(o.Status) {
 		var ret string
 		return ret
 	}
@@ -634,7 +638,7 @@ func (o *WorkflowTaskInfo) GetStatus() string {
 // GetStatusOk returns a tuple with the Status field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowTaskInfo) GetStatusOk() (*string, bool) {
-	if o == nil || o.Status == nil {
+	if o == nil || IsNil(o.Status) {
 		return nil, false
 	}
 	return o.Status, true
@@ -642,7 +646,7 @@ func (o *WorkflowTaskInfo) GetStatusOk() (*string, bool) {
 
 // HasStatus returns a boolean if a field has been set.
 func (o *WorkflowTaskInfo) HasStatus() bool {
-	if o != nil && o.Status != nil {
+	if o != nil && !IsNil(o.Status) {
 		return true
 	}
 
@@ -667,7 +671,7 @@ func (o *WorkflowTaskInfo) GetTaskInstIdList() []WorkflowTaskRetryInfo {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *WorkflowTaskInfo) GetTaskInstIdListOk() ([]WorkflowTaskRetryInfo, bool) {
-	if o == nil || o.TaskInstIdList == nil {
+	if o == nil || IsNil(o.TaskInstIdList) {
 		return nil, false
 	}
 	return o.TaskInstIdList, true
@@ -675,7 +679,7 @@ func (o *WorkflowTaskInfo) GetTaskInstIdListOk() ([]WorkflowTaskRetryInfo, bool)
 
 // HasTaskInstIdList returns a boolean if a field has been set.
 func (o *WorkflowTaskInfo) HasTaskInstIdList() bool {
-	if o != nil && o.TaskInstIdList != nil {
+	if o != nil && IsNil(o.TaskInstIdList) {
 		return true
 	}
 
@@ -689,7 +693,7 @@ func (o *WorkflowTaskInfo) SetTaskInstIdList(v []WorkflowTaskRetryInfo) {
 
 // GetTaskLoopInfo returns the TaskLoopInfo field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *WorkflowTaskInfo) GetTaskLoopInfo() WorkflowTaskLoopInfo {
-	if o == nil || o.TaskLoopInfo.Get() == nil {
+	if o == nil || IsNil(o.TaskLoopInfo.Get()) {
 		var ret WorkflowTaskLoopInfo
 		return ret
 	}
@@ -730,36 +734,47 @@ func (o *WorkflowTaskInfo) UnsetTaskLoopInfo() {
 	o.TaskLoopInfo.Unset()
 }
 
-// GetSubWorkflowInfo returns the SubWorkflowInfo field value if set, zero value otherwise.
+// GetSubWorkflowInfo returns the SubWorkflowInfo field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *WorkflowTaskInfo) GetSubWorkflowInfo() WorkflowWorkflowInfoRelationship {
-	if o == nil || o.SubWorkflowInfo == nil {
+	if o == nil || IsNil(o.SubWorkflowInfo.Get()) {
 		var ret WorkflowWorkflowInfoRelationship
 		return ret
 	}
-	return *o.SubWorkflowInfo
+	return *o.SubWorkflowInfo.Get()
 }
 
 // GetSubWorkflowInfoOk returns a tuple with the SubWorkflowInfo field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *WorkflowTaskInfo) GetSubWorkflowInfoOk() (*WorkflowWorkflowInfoRelationship, bool) {
-	if o == nil || o.SubWorkflowInfo == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.SubWorkflowInfo, true
+	return o.SubWorkflowInfo.Get(), o.SubWorkflowInfo.IsSet()
 }
 
 // HasSubWorkflowInfo returns a boolean if a field has been set.
 func (o *WorkflowTaskInfo) HasSubWorkflowInfo() bool {
-	if o != nil && o.SubWorkflowInfo != nil {
+	if o != nil && o.SubWorkflowInfo.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetSubWorkflowInfo gets a reference to the given WorkflowWorkflowInfoRelationship and assigns it to the SubWorkflowInfo field.
+// SetSubWorkflowInfo gets a reference to the given NullableWorkflowWorkflowInfoRelationship and assigns it to the SubWorkflowInfo field.
 func (o *WorkflowTaskInfo) SetSubWorkflowInfo(v WorkflowWorkflowInfoRelationship) {
-	o.SubWorkflowInfo = &v
+	o.SubWorkflowInfo.Set(&v)
+}
+
+// SetSubWorkflowInfoNil sets the value for SubWorkflowInfo to be an explicit nil
+func (o *WorkflowTaskInfo) SetSubWorkflowInfoNil() {
+	o.SubWorkflowInfo.Set(nil)
+}
+
+// UnsetSubWorkflowInfo ensures that no value is present for SubWorkflowInfo, not even an explicit nil
+func (o *WorkflowTaskInfo) UnsetSubWorkflowInfo() {
+	o.SubWorkflowInfo.Unset()
 }
 
 // GetSubWorkflowRetryHistory returns the SubWorkflowRetryHistory field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -775,7 +790,7 @@ func (o *WorkflowTaskInfo) GetSubWorkflowRetryHistory() []WorkflowWorkflowInfoRe
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *WorkflowTaskInfo) GetSubWorkflowRetryHistoryOk() ([]WorkflowWorkflowInfoRelationship, bool) {
-	if o == nil || o.SubWorkflowRetryHistory == nil {
+	if o == nil || IsNil(o.SubWorkflowRetryHistory) {
 		return nil, false
 	}
 	return o.SubWorkflowRetryHistory, true
@@ -783,7 +798,7 @@ func (o *WorkflowTaskInfo) GetSubWorkflowRetryHistoryOk() ([]WorkflowWorkflowInf
 
 // HasSubWorkflowRetryHistory returns a boolean if a field has been set.
 func (o *WorkflowTaskInfo) HasSubWorkflowRetryHistory() bool {
-	if o != nil && o.SubWorkflowRetryHistory != nil {
+	if o != nil && IsNil(o.SubWorkflowRetryHistory) {
 		return true
 	}
 
@@ -795,132 +810,158 @@ func (o *WorkflowTaskInfo) SetSubWorkflowRetryHistory(v []WorkflowWorkflowInfoRe
 	o.SubWorkflowRetryHistory = v
 }
 
-// GetTaskDefinition returns the TaskDefinition field value if set, zero value otherwise.
+// GetTaskDefinition returns the TaskDefinition field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *WorkflowTaskInfo) GetTaskDefinition() WorkflowTaskDefinitionRelationship {
-	if o == nil || o.TaskDefinition == nil {
+	if o == nil || IsNil(o.TaskDefinition.Get()) {
 		var ret WorkflowTaskDefinitionRelationship
 		return ret
 	}
-	return *o.TaskDefinition
+	return *o.TaskDefinition.Get()
 }
 
 // GetTaskDefinitionOk returns a tuple with the TaskDefinition field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *WorkflowTaskInfo) GetTaskDefinitionOk() (*WorkflowTaskDefinitionRelationship, bool) {
-	if o == nil || o.TaskDefinition == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.TaskDefinition, true
+	return o.TaskDefinition.Get(), o.TaskDefinition.IsSet()
 }
 
 // HasTaskDefinition returns a boolean if a field has been set.
 func (o *WorkflowTaskInfo) HasTaskDefinition() bool {
-	if o != nil && o.TaskDefinition != nil {
+	if o != nil && o.TaskDefinition.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetTaskDefinition gets a reference to the given WorkflowTaskDefinitionRelationship and assigns it to the TaskDefinition field.
+// SetTaskDefinition gets a reference to the given NullableWorkflowTaskDefinitionRelationship and assigns it to the TaskDefinition field.
 func (o *WorkflowTaskInfo) SetTaskDefinition(v WorkflowTaskDefinitionRelationship) {
-	o.TaskDefinition = &v
+	o.TaskDefinition.Set(&v)
 }
 
-// GetWorkflowInfo returns the WorkflowInfo field value if set, zero value otherwise.
+// SetTaskDefinitionNil sets the value for TaskDefinition to be an explicit nil
+func (o *WorkflowTaskInfo) SetTaskDefinitionNil() {
+	o.TaskDefinition.Set(nil)
+}
+
+// UnsetTaskDefinition ensures that no value is present for TaskDefinition, not even an explicit nil
+func (o *WorkflowTaskInfo) UnsetTaskDefinition() {
+	o.TaskDefinition.Unset()
+}
+
+// GetWorkflowInfo returns the WorkflowInfo field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *WorkflowTaskInfo) GetWorkflowInfo() WorkflowWorkflowInfoRelationship {
-	if o == nil || o.WorkflowInfo == nil {
+	if o == nil || IsNil(o.WorkflowInfo.Get()) {
 		var ret WorkflowWorkflowInfoRelationship
 		return ret
 	}
-	return *o.WorkflowInfo
+	return *o.WorkflowInfo.Get()
 }
 
 // GetWorkflowInfoOk returns a tuple with the WorkflowInfo field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *WorkflowTaskInfo) GetWorkflowInfoOk() (*WorkflowWorkflowInfoRelationship, bool) {
-	if o == nil || o.WorkflowInfo == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.WorkflowInfo, true
+	return o.WorkflowInfo.Get(), o.WorkflowInfo.IsSet()
 }
 
 // HasWorkflowInfo returns a boolean if a field has been set.
 func (o *WorkflowTaskInfo) HasWorkflowInfo() bool {
-	if o != nil && o.WorkflowInfo != nil {
+	if o != nil && o.WorkflowInfo.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetWorkflowInfo gets a reference to the given WorkflowWorkflowInfoRelationship and assigns it to the WorkflowInfo field.
+// SetWorkflowInfo gets a reference to the given NullableWorkflowWorkflowInfoRelationship and assigns it to the WorkflowInfo field.
 func (o *WorkflowTaskInfo) SetWorkflowInfo(v WorkflowWorkflowInfoRelationship) {
-	o.WorkflowInfo = &v
+	o.WorkflowInfo.Set(&v)
+}
+
+// SetWorkflowInfoNil sets the value for WorkflowInfo to be an explicit nil
+func (o *WorkflowTaskInfo) SetWorkflowInfoNil() {
+	o.WorkflowInfo.Set(nil)
+}
+
+// UnsetWorkflowInfo ensures that no value is present for WorkflowInfo, not even an explicit nil
+func (o *WorkflowTaskInfo) UnsetWorkflowInfo() {
+	o.WorkflowInfo.Unset()
 }
 
 func (o WorkflowTaskInfo) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o WorkflowTaskInfo) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Description != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Description) {
 		toSerialize["Description"] = o.Description
 	}
-	if o.EndTime != nil {
+	if !IsNil(o.EndTime) {
 		toSerialize["EndTime"] = o.EndTime
 	}
-	if o.FailureReason != nil {
+	if !IsNil(o.FailureReason) {
 		toSerialize["FailureReason"] = o.FailureReason
 	}
 	if o.Input != nil {
 		toSerialize["Input"] = o.Input
 	}
-	if o.InstId != nil {
+	if !IsNil(o.InstId) {
 		toSerialize["InstId"] = o.InstId
 	}
-	if o.Internal != nil {
+	if !IsNil(o.Internal) {
 		toSerialize["Internal"] = o.Internal
 	}
-	if o.Label != nil {
+	if !IsNil(o.Label) {
 		toSerialize["Label"] = o.Label
 	}
 	if o.Message != nil {
 		toSerialize["Message"] = o.Message
 	}
-	if o.Name != nil {
+	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
 	}
 	if o.Output != nil {
 		toSerialize["Output"] = o.Output
 	}
-	if o.RefName != nil {
+	if !IsNil(o.RefName) {
 		toSerialize["RefName"] = o.RefName
 	}
-	if o.RetryCount != nil {
+	if !IsNil(o.RetryCount) {
 		toSerialize["RetryCount"] = o.RetryCount
 	}
-	if o.RollbackDisabled != nil {
+	if !IsNil(o.RollbackDisabled) {
 		toSerialize["RollbackDisabled"] = o.RollbackDisabled
 	}
-	if o.RunningInstId != nil {
+	if !IsNil(o.RunningInstId) {
 		toSerialize["RunningInstId"] = o.RunningInstId
 	}
-	if o.StartTime != nil {
+	if !IsNil(o.StartTime) {
 		toSerialize["StartTime"] = o.StartTime
 	}
-	if o.Status != nil {
+	if !IsNil(o.Status) {
 		toSerialize["Status"] = o.Status
 	}
 	if o.TaskInstIdList != nil {
@@ -929,27 +970,49 @@ func (o WorkflowTaskInfo) MarshalJSON() ([]byte, error) {
 	if o.TaskLoopInfo.IsSet() {
 		toSerialize["TaskLoopInfo"] = o.TaskLoopInfo.Get()
 	}
-	if o.SubWorkflowInfo != nil {
-		toSerialize["SubWorkflowInfo"] = o.SubWorkflowInfo
+	if o.SubWorkflowInfo.IsSet() {
+		toSerialize["SubWorkflowInfo"] = o.SubWorkflowInfo.Get()
 	}
 	if o.SubWorkflowRetryHistory != nil {
 		toSerialize["SubWorkflowRetryHistory"] = o.SubWorkflowRetryHistory
 	}
-	if o.TaskDefinition != nil {
-		toSerialize["TaskDefinition"] = o.TaskDefinition
+	if o.TaskDefinition.IsSet() {
+		toSerialize["TaskDefinition"] = o.TaskDefinition.Get()
 	}
-	if o.WorkflowInfo != nil {
-		toSerialize["WorkflowInfo"] = o.WorkflowInfo
+	if o.WorkflowInfo.IsSet() {
+		toSerialize["WorkflowInfo"] = o.WorkflowInfo.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *WorkflowTaskInfo) UnmarshalJSON(bytes []byte) (err error) {
+func (o *WorkflowTaskInfo) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type WorkflowTaskInfoWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -985,19 +1048,19 @@ func (o *WorkflowTaskInfo) UnmarshalJSON(bytes []byte) (err error) {
 		// The time stamp when the task started execution.
 		StartTime *time.Time `json:"StartTime,omitempty"`
 		// The status of the task and this will specify if the task is running or has reached a final state.
-		Status          *string                           `json:"Status,omitempty"`
-		TaskInstIdList  []WorkflowTaskRetryInfo           `json:"TaskInstIdList,omitempty"`
-		TaskLoopInfo    NullableWorkflowTaskLoopInfo      `json:"TaskLoopInfo,omitempty"`
-		SubWorkflowInfo *WorkflowWorkflowInfoRelationship `json:"SubWorkflowInfo,omitempty"`
+		Status          *string                                  `json:"Status,omitempty"`
+		TaskInstIdList  []WorkflowTaskRetryInfo                  `json:"TaskInstIdList,omitempty"`
+		TaskLoopInfo    NullableWorkflowTaskLoopInfo             `json:"TaskLoopInfo,omitempty"`
+		SubWorkflowInfo NullableWorkflowWorkflowInfoRelationship `json:"SubWorkflowInfo,omitempty"`
 		// An array of relationships to workflowWorkflowInfo resources.
-		SubWorkflowRetryHistory []WorkflowWorkflowInfoRelationship  `json:"SubWorkflowRetryHistory,omitempty"`
-		TaskDefinition          *WorkflowTaskDefinitionRelationship `json:"TaskDefinition,omitempty"`
-		WorkflowInfo            *WorkflowWorkflowInfoRelationship   `json:"WorkflowInfo,omitempty"`
+		SubWorkflowRetryHistory []WorkflowWorkflowInfoRelationship         `json:"SubWorkflowRetryHistory,omitempty"`
+		TaskDefinition          NullableWorkflowTaskDefinitionRelationship `json:"TaskDefinition,omitempty"`
+		WorkflowInfo            NullableWorkflowWorkflowInfoRelationship   `json:"WorkflowInfo,omitempty"`
 	}
 
 	varWorkflowTaskInfoWithoutEmbeddedStruct := WorkflowTaskInfoWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varWorkflowTaskInfoWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varWorkflowTaskInfoWithoutEmbeddedStruct)
 	if err == nil {
 		varWorkflowTaskInfo := _WorkflowTaskInfo{}
 		varWorkflowTaskInfo.ClassId = varWorkflowTaskInfoWithoutEmbeddedStruct.ClassId
@@ -1031,7 +1094,7 @@ func (o *WorkflowTaskInfo) UnmarshalJSON(bytes []byte) (err error) {
 
 	varWorkflowTaskInfo := _WorkflowTaskInfo{}
 
-	err = json.Unmarshal(bytes, &varWorkflowTaskInfo)
+	err = json.Unmarshal(data, &varWorkflowTaskInfo)
 	if err == nil {
 		o.MoBaseMo = varWorkflowTaskInfo.MoBaseMo
 	} else {
@@ -1040,7 +1103,7 @@ func (o *WorkflowTaskInfo) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Description")

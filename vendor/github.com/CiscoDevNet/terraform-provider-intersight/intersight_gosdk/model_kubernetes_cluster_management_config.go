@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the KubernetesClusterManagementConfig type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &KubernetesClusterManagementConfig{}
 
 // KubernetesClusterManagementConfig Configuration settings for a Kubernetes cluster.
 type KubernetesClusterManagementConfig struct {
@@ -114,7 +118,7 @@ func (o *KubernetesClusterManagementConfig) SetObjectType(v string) {
 
 // GetIsTacPasswdSet returns the IsTacPasswdSet field value if set, zero value otherwise.
 func (o *KubernetesClusterManagementConfig) GetIsTacPasswdSet() bool {
-	if o == nil || o.IsTacPasswdSet == nil {
+	if o == nil || IsNil(o.IsTacPasswdSet) {
 		var ret bool
 		return ret
 	}
@@ -124,7 +128,7 @@ func (o *KubernetesClusterManagementConfig) GetIsTacPasswdSet() bool {
 // GetIsTacPasswdSetOk returns a tuple with the IsTacPasswdSet field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *KubernetesClusterManagementConfig) GetIsTacPasswdSetOk() (*bool, bool) {
-	if o == nil || o.IsTacPasswdSet == nil {
+	if o == nil || IsNil(o.IsTacPasswdSet) {
 		return nil, false
 	}
 	return o.IsTacPasswdSet, true
@@ -132,7 +136,7 @@ func (o *KubernetesClusterManagementConfig) GetIsTacPasswdSetOk() (*bool, bool) 
 
 // HasIsTacPasswdSet returns a boolean if a field has been set.
 func (o *KubernetesClusterManagementConfig) HasIsTacPasswdSet() bool {
-	if o != nil && o.IsTacPasswdSet != nil {
+	if o != nil && !IsNil(o.IsTacPasswdSet) {
 		return true
 	}
 
@@ -146,7 +150,7 @@ func (o *KubernetesClusterManagementConfig) SetIsTacPasswdSet(v bool) {
 
 // GetLoadBalancerCount returns the LoadBalancerCount field value if set, zero value otherwise.
 func (o *KubernetesClusterManagementConfig) GetLoadBalancerCount() int64 {
-	if o == nil || o.LoadBalancerCount == nil {
+	if o == nil || IsNil(o.LoadBalancerCount) {
 		var ret int64
 		return ret
 	}
@@ -156,7 +160,7 @@ func (o *KubernetesClusterManagementConfig) GetLoadBalancerCount() int64 {
 // GetLoadBalancerCountOk returns a tuple with the LoadBalancerCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *KubernetesClusterManagementConfig) GetLoadBalancerCountOk() (*int64, bool) {
-	if o == nil || o.LoadBalancerCount == nil {
+	if o == nil || IsNil(o.LoadBalancerCount) {
 		return nil, false
 	}
 	return o.LoadBalancerCount, true
@@ -164,7 +168,7 @@ func (o *KubernetesClusterManagementConfig) GetLoadBalancerCountOk() (*int64, bo
 
 // HasLoadBalancerCount returns a boolean if a field has been set.
 func (o *KubernetesClusterManagementConfig) HasLoadBalancerCount() bool {
-	if o != nil && o.LoadBalancerCount != nil {
+	if o != nil && !IsNil(o.LoadBalancerCount) {
 		return true
 	}
 
@@ -189,7 +193,7 @@ func (o *KubernetesClusterManagementConfig) GetLoadBalancers() []string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *KubernetesClusterManagementConfig) GetLoadBalancersOk() ([]string, bool) {
-	if o == nil || o.LoadBalancers == nil {
+	if o == nil || IsNil(o.LoadBalancers) {
 		return nil, false
 	}
 	return o.LoadBalancers, true
@@ -197,7 +201,7 @@ func (o *KubernetesClusterManagementConfig) GetLoadBalancersOk() ([]string, bool
 
 // HasLoadBalancers returns a boolean if a field has been set.
 func (o *KubernetesClusterManagementConfig) HasLoadBalancers() bool {
-	if o != nil && o.LoadBalancers != nil {
+	if o != nil && IsNil(o.LoadBalancers) {
 		return true
 	}
 
@@ -211,7 +215,7 @@ func (o *KubernetesClusterManagementConfig) SetLoadBalancers(v []string) {
 
 // GetMasterVip returns the MasterVip field value if set, zero value otherwise.
 func (o *KubernetesClusterManagementConfig) GetMasterVip() string {
-	if o == nil || o.MasterVip == nil {
+	if o == nil || IsNil(o.MasterVip) {
 		var ret string
 		return ret
 	}
@@ -221,7 +225,7 @@ func (o *KubernetesClusterManagementConfig) GetMasterVip() string {
 // GetMasterVipOk returns a tuple with the MasterVip field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *KubernetesClusterManagementConfig) GetMasterVipOk() (*string, bool) {
-	if o == nil || o.MasterVip == nil {
+	if o == nil || IsNil(o.MasterVip) {
 		return nil, false
 	}
 	return o.MasterVip, true
@@ -229,7 +233,7 @@ func (o *KubernetesClusterManagementConfig) GetMasterVipOk() (*string, bool) {
 
 // HasMasterVip returns a boolean if a field has been set.
 func (o *KubernetesClusterManagementConfig) HasMasterVip() bool {
-	if o != nil && o.MasterVip != nil {
+	if o != nil && !IsNil(o.MasterVip) {
 		return true
 	}
 
@@ -254,7 +258,7 @@ func (o *KubernetesClusterManagementConfig) GetSshKeys() []string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *KubernetesClusterManagementConfig) GetSshKeysOk() ([]string, bool) {
-	if o == nil || o.SshKeys == nil {
+	if o == nil || IsNil(o.SshKeys) {
 		return nil, false
 	}
 	return o.SshKeys, true
@@ -262,7 +266,7 @@ func (o *KubernetesClusterManagementConfig) GetSshKeysOk() ([]string, bool) {
 
 // HasSshKeys returns a boolean if a field has been set.
 func (o *KubernetesClusterManagementConfig) HasSshKeys() bool {
-	if o != nil && o.SshKeys != nil {
+	if o != nil && IsNil(o.SshKeys) {
 		return true
 	}
 
@@ -276,7 +280,7 @@ func (o *KubernetesClusterManagementConfig) SetSshKeys(v []string) {
 
 // GetSshUser returns the SshUser field value if set, zero value otherwise.
 func (o *KubernetesClusterManagementConfig) GetSshUser() string {
-	if o == nil || o.SshUser == nil {
+	if o == nil || IsNil(o.SshUser) {
 		var ret string
 		return ret
 	}
@@ -286,7 +290,7 @@ func (o *KubernetesClusterManagementConfig) GetSshUser() string {
 // GetSshUserOk returns a tuple with the SshUser field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *KubernetesClusterManagementConfig) GetSshUserOk() (*string, bool) {
-	if o == nil || o.SshUser == nil {
+	if o == nil || IsNil(o.SshUser) {
 		return nil, false
 	}
 	return o.SshUser, true
@@ -294,7 +298,7 @@ func (o *KubernetesClusterManagementConfig) GetSshUserOk() (*string, bool) {
 
 // HasSshUser returns a boolean if a field has been set.
 func (o *KubernetesClusterManagementConfig) HasSshUser() bool {
-	if o != nil && o.SshUser != nil {
+	if o != nil && !IsNil(o.SshUser) {
 		return true
 	}
 
@@ -308,7 +312,7 @@ func (o *KubernetesClusterManagementConfig) SetSshUser(v string) {
 
 // GetTacPasswd returns the TacPasswd field value if set, zero value otherwise.
 func (o *KubernetesClusterManagementConfig) GetTacPasswd() string {
-	if o == nil || o.TacPasswd == nil {
+	if o == nil || IsNil(o.TacPasswd) {
 		var ret string
 		return ret
 	}
@@ -318,7 +322,7 @@ func (o *KubernetesClusterManagementConfig) GetTacPasswd() string {
 // GetTacPasswdOk returns a tuple with the TacPasswd field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *KubernetesClusterManagementConfig) GetTacPasswdOk() (*string, bool) {
-	if o == nil || o.TacPasswd == nil {
+	if o == nil || IsNil(o.TacPasswd) {
 		return nil, false
 	}
 	return o.TacPasswd, true
@@ -326,7 +330,7 @@ func (o *KubernetesClusterManagementConfig) GetTacPasswdOk() (*string, bool) {
 
 // HasTacPasswd returns a boolean if a field has been set.
 func (o *KubernetesClusterManagementConfig) HasTacPasswd() bool {
-	if o != nil && o.TacPasswd != nil {
+	if o != nil && !IsNil(o.TacPasswd) {
 		return true
 	}
 
@@ -339,40 +343,44 @@ func (o *KubernetesClusterManagementConfig) SetTacPasswd(v string) {
 }
 
 func (o KubernetesClusterManagementConfig) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o KubernetesClusterManagementConfig) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
 	errMoBaseComplexType = json.Unmarshal([]byte(serializedMoBaseComplexType), &toSerialize)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.IsTacPasswdSet != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.IsTacPasswdSet) {
 		toSerialize["IsTacPasswdSet"] = o.IsTacPasswdSet
 	}
-	if o.LoadBalancerCount != nil {
+	if !IsNil(o.LoadBalancerCount) {
 		toSerialize["LoadBalancerCount"] = o.LoadBalancerCount
 	}
 	if o.LoadBalancers != nil {
 		toSerialize["LoadBalancers"] = o.LoadBalancers
 	}
-	if o.MasterVip != nil {
+	if !IsNil(o.MasterVip) {
 		toSerialize["MasterVip"] = o.MasterVip
 	}
 	if o.SshKeys != nil {
 		toSerialize["SshKeys"] = o.SshKeys
 	}
-	if o.SshUser != nil {
+	if !IsNil(o.SshUser) {
 		toSerialize["SshUser"] = o.SshUser
 	}
-	if o.TacPasswd != nil {
+	if !IsNil(o.TacPasswd) {
 		toSerialize["TacPasswd"] = o.TacPasswd
 	}
 
@@ -380,10 +388,32 @@ func (o KubernetesClusterManagementConfig) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *KubernetesClusterManagementConfig) UnmarshalJSON(bytes []byte) (err error) {
+func (o *KubernetesClusterManagementConfig) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type KubernetesClusterManagementConfigWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -405,7 +435,7 @@ func (o *KubernetesClusterManagementConfig) UnmarshalJSON(bytes []byte) (err err
 
 	varKubernetesClusterManagementConfigWithoutEmbeddedStruct := KubernetesClusterManagementConfigWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varKubernetesClusterManagementConfigWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varKubernetesClusterManagementConfigWithoutEmbeddedStruct)
 	if err == nil {
 		varKubernetesClusterManagementConfig := _KubernetesClusterManagementConfig{}
 		varKubernetesClusterManagementConfig.ClassId = varKubernetesClusterManagementConfigWithoutEmbeddedStruct.ClassId
@@ -424,7 +454,7 @@ func (o *KubernetesClusterManagementConfig) UnmarshalJSON(bytes []byte) (err err
 
 	varKubernetesClusterManagementConfig := _KubernetesClusterManagementConfig{}
 
-	err = json.Unmarshal(bytes, &varKubernetesClusterManagementConfig)
+	err = json.Unmarshal(data, &varKubernetesClusterManagementConfig)
 	if err == nil {
 		o.MoBaseComplexType = varKubernetesClusterManagementConfig.MoBaseComplexType
 	} else {
@@ -433,7 +463,7 @@ func (o *KubernetesClusterManagementConfig) UnmarshalJSON(bytes []byte) (err err
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "IsTacPasswdSet")

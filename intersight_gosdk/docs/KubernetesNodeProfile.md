@@ -7,10 +7,10 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
 **CloudProvider** | Pointer to **string** | Cloud provider for this node profile. * &#x60;noProvider&#x60; - Enables the use of no cloud provider. * &#x60;external&#x60; - Out of tree cloud provider, e.g. CPI for vsphere. | [optional] [default to "noProvider"]
-**ConfigResult** | Pointer to [**KubernetesConfigResultRelationship**](KubernetesConfigResultRelationship.md) |  | [optional] 
-**NodeGroup** | Pointer to [**KubernetesNodeGroupProfileRelationship**](KubernetesNodeGroupProfileRelationship.md) |  | [optional] 
-**Target** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
-**Version** | Pointer to [**KubernetesVersionRelationship**](KubernetesVersionRelationship.md) |  | [optional] 
+**ConfigResult** | Pointer to [**NullableKubernetesConfigResultRelationship**](KubernetesConfigResultRelationship.md) |  | [optional] 
+**NodeGroup** | Pointer to [**NullableKubernetesNodeGroupProfileRelationship**](KubernetesNodeGroupProfileRelationship.md) |  | [optional] 
+**Target** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
+**Version** | Pointer to [**NullableKubernetesVersionRelationship**](KubernetesVersionRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -121,6 +121,16 @@ SetConfigResult sets ConfigResult field to given value.
 
 HasConfigResult returns a boolean if a field has been set.
 
+### SetConfigResultNil
+
+`func (o *KubernetesNodeProfile) SetConfigResultNil(b bool)`
+
+ SetConfigResultNil sets the value for ConfigResult to be an explicit nil
+
+### UnsetConfigResult
+`func (o *KubernetesNodeProfile) UnsetConfigResult()`
+
+UnsetConfigResult ensures that no value is present for ConfigResult, not even an explicit nil
 ### GetNodeGroup
 
 `func (o *KubernetesNodeProfile) GetNodeGroup() KubernetesNodeGroupProfileRelationship`
@@ -146,6 +156,16 @@ SetNodeGroup sets NodeGroup field to given value.
 
 HasNodeGroup returns a boolean if a field has been set.
 
+### SetNodeGroupNil
+
+`func (o *KubernetesNodeProfile) SetNodeGroupNil(b bool)`
+
+ SetNodeGroupNil sets the value for NodeGroup to be an explicit nil
+
+### UnsetNodeGroup
+`func (o *KubernetesNodeProfile) UnsetNodeGroup()`
+
+UnsetNodeGroup ensures that no value is present for NodeGroup, not even an explicit nil
 ### GetTarget
 
 `func (o *KubernetesNodeProfile) GetTarget() AssetDeviceRegistrationRelationship`
@@ -171,6 +191,16 @@ SetTarget sets Target field to given value.
 
 HasTarget returns a boolean if a field has been set.
 
+### SetTargetNil
+
+`func (o *KubernetesNodeProfile) SetTargetNil(b bool)`
+
+ SetTargetNil sets the value for Target to be an explicit nil
+
+### UnsetTarget
+`func (o *KubernetesNodeProfile) UnsetTarget()`
+
+UnsetTarget ensures that no value is present for Target, not even an explicit nil
 ### GetVersion
 
 `func (o *KubernetesNodeProfile) GetVersion() KubernetesVersionRelationship`
@@ -196,6 +226,16 @@ SetVersion sets Version field to given value.
 
 HasVersion returns a boolean if a field has been set.
 
+### SetVersionNil
+
+`func (o *KubernetesNodeProfile) SetVersionNil(b bool)`
+
+ SetVersionNil sets the value for Version to be an explicit nil
+
+### UnsetVersion
+`func (o *KubernetesNodeProfile) UnsetVersion()`
+
+UnsetVersion ensures that no value is present for Version, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

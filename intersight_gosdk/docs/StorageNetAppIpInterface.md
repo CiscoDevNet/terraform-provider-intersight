@@ -18,10 +18,10 @@ Name | Type | Description | Notes
 **Services** | Pointer to **[]string** |  | [optional] 
 **State** | Pointer to **string** | The state of the IP interface. * &#x60;down&#x60; - An inactive port is listed as Down. * &#x60;up&#x60; - An active port is listed as Up. * &#x60;present&#x60; - An active port is listed as present. | [optional] [readonly] [default to "down"]
 **Uuid** | Pointer to **string** | Uuid of NetApp IP Interface. | [optional] [readonly] 
-**ArrayController** | Pointer to [**StorageNetAppNodeRelationship**](StorageNetAppNodeRelationship.md) |  | [optional] 
+**ArrayController** | Pointer to [**NullableStorageNetAppNodeRelationship**](StorageNetAppNodeRelationship.md) |  | [optional] 
 **Events** | Pointer to [**[]StorageNetAppIpInterfaceEventRelationship**](StorageNetAppIpInterfaceEventRelationship.md) | An array of relationships to storageNetAppIpInterfaceEvent resources. | [optional] [readonly] 
-**NetAppEthernetPort** | Pointer to [**StorageNetAppEthernetPortRelationship**](StorageNetAppEthernetPortRelationship.md) |  | [optional] 
-**Tenant** | Pointer to [**StorageNetAppStorageVmRelationship**](StorageNetAppStorageVmRelationship.md) |  | [optional] 
+**NetAppEthernetPort** | Pointer to [**NullableStorageNetAppEthernetPortRelationship**](StorageNetAppEthernetPortRelationship.md) |  | [optional] 
+**Tenant** | Pointer to [**NullableStorageNetAppStorageVmRelationship**](StorageNetAppStorageVmRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -417,6 +417,16 @@ SetArrayController sets ArrayController field to given value.
 
 HasArrayController returns a boolean if a field has been set.
 
+### SetArrayControllerNil
+
+`func (o *StorageNetAppIpInterface) SetArrayControllerNil(b bool)`
+
+ SetArrayControllerNil sets the value for ArrayController to be an explicit nil
+
+### UnsetArrayController
+`func (o *StorageNetAppIpInterface) UnsetArrayController()`
+
+UnsetArrayController ensures that no value is present for ArrayController, not even an explicit nil
 ### GetEvents
 
 `func (o *StorageNetAppIpInterface) GetEvents() []StorageNetAppIpInterfaceEventRelationship`
@@ -477,6 +487,16 @@ SetNetAppEthernetPort sets NetAppEthernetPort field to given value.
 
 HasNetAppEthernetPort returns a boolean if a field has been set.
 
+### SetNetAppEthernetPortNil
+
+`func (o *StorageNetAppIpInterface) SetNetAppEthernetPortNil(b bool)`
+
+ SetNetAppEthernetPortNil sets the value for NetAppEthernetPort to be an explicit nil
+
+### UnsetNetAppEthernetPort
+`func (o *StorageNetAppIpInterface) UnsetNetAppEthernetPort()`
+
+UnsetNetAppEthernetPort ensures that no value is present for NetAppEthernetPort, not even an explicit nil
 ### GetTenant
 
 `func (o *StorageNetAppIpInterface) GetTenant() StorageNetAppStorageVmRelationship`
@@ -502,6 +522,16 @@ SetTenant sets Tenant field to given value.
 
 HasTenant returns a boolean if a field has been set.
 
+### SetTenantNil
+
+`func (o *StorageNetAppIpInterface) SetTenantNil(b bool)`
+
+ SetTenantNil sets the value for Tenant to be an explicit nil
+
+### UnsetTenant
+`func (o *StorageNetAppIpInterface) UnsetTenant()`
+
+UnsetTenant ensures that no value is present for Tenant, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

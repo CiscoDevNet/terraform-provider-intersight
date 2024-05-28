@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the FabricPinGroup type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &FabricPinGroup{}
 
 // FabricPinGroup PinGroup configuration sent by user.
 type FabricPinGroup struct {
@@ -25,8 +29,8 @@ type FabricPinGroup struct {
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property. The enum values provides the list of concrete types that can be instantiated from this abstract type.
 	ObjectType string `json:"ObjectType"`
 	// Name of the Pingroup for static pinning.
-	Name                 *string                       `json:"Name,omitempty"`
-	PortPolicy           *FabricPortPolicyRelationship `json:"PortPolicy,omitempty"`
+	Name                 *string                              `json:"Name,omitempty"`
+	PortPolicy           NullableFabricPortPolicyRelationship `json:"PortPolicy,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -101,7 +105,7 @@ func (o *FabricPinGroup) SetObjectType(v string) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *FabricPinGroup) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -111,7 +115,7 @@ func (o *FabricPinGroup) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FabricPinGroup) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -119,7 +123,7 @@ func (o *FabricPinGroup) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *FabricPinGroup) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -131,82 +135,119 @@ func (o *FabricPinGroup) SetName(v string) {
 	o.Name = &v
 }
 
-// GetPortPolicy returns the PortPolicy field value if set, zero value otherwise.
+// GetPortPolicy returns the PortPolicy field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *FabricPinGroup) GetPortPolicy() FabricPortPolicyRelationship {
-	if o == nil || o.PortPolicy == nil {
+	if o == nil || IsNil(o.PortPolicy.Get()) {
 		var ret FabricPortPolicyRelationship
 		return ret
 	}
-	return *o.PortPolicy
+	return *o.PortPolicy.Get()
 }
 
 // GetPortPolicyOk returns a tuple with the PortPolicy field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *FabricPinGroup) GetPortPolicyOk() (*FabricPortPolicyRelationship, bool) {
-	if o == nil || o.PortPolicy == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.PortPolicy, true
+	return o.PortPolicy.Get(), o.PortPolicy.IsSet()
 }
 
 // HasPortPolicy returns a boolean if a field has been set.
 func (o *FabricPinGroup) HasPortPolicy() bool {
-	if o != nil && o.PortPolicy != nil {
+	if o != nil && o.PortPolicy.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetPortPolicy gets a reference to the given FabricPortPolicyRelationship and assigns it to the PortPolicy field.
+// SetPortPolicy gets a reference to the given NullableFabricPortPolicyRelationship and assigns it to the PortPolicy field.
 func (o *FabricPinGroup) SetPortPolicy(v FabricPortPolicyRelationship) {
-	o.PortPolicy = &v
+	o.PortPolicy.Set(&v)
+}
+
+// SetPortPolicyNil sets the value for PortPolicy to be an explicit nil
+func (o *FabricPinGroup) SetPortPolicyNil() {
+	o.PortPolicy.Set(nil)
+}
+
+// UnsetPortPolicy ensures that no value is present for PortPolicy, not even an explicit nil
+func (o *FabricPinGroup) UnsetPortPolicy() {
+	o.PortPolicy.Unset()
 }
 
 func (o FabricPinGroup) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o FabricPinGroup) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Name != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
 	}
-	if o.PortPolicy != nil {
-		toSerialize["PortPolicy"] = o.PortPolicy
+	if o.PortPolicy.IsSet() {
+		toSerialize["PortPolicy"] = o.PortPolicy.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *FabricPinGroup) UnmarshalJSON(bytes []byte) (err error) {
+func (o *FabricPinGroup) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type FabricPinGroupWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type.
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property. The enum values provides the list of concrete types that can be instantiated from this abstract type.
 		ObjectType string `json:"ObjectType"`
 		// Name of the Pingroup for static pinning.
-		Name       *string                       `json:"Name,omitempty"`
-		PortPolicy *FabricPortPolicyRelationship `json:"PortPolicy,omitempty"`
+		Name       *string                              `json:"Name,omitempty"`
+		PortPolicy NullableFabricPortPolicyRelationship `json:"PortPolicy,omitempty"`
 	}
 
 	varFabricPinGroupWithoutEmbeddedStruct := FabricPinGroupWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varFabricPinGroupWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varFabricPinGroupWithoutEmbeddedStruct)
 	if err == nil {
 		varFabricPinGroup := _FabricPinGroup{}
 		varFabricPinGroup.ClassId = varFabricPinGroupWithoutEmbeddedStruct.ClassId
@@ -220,7 +261,7 @@ func (o *FabricPinGroup) UnmarshalJSON(bytes []byte) (err error) {
 
 	varFabricPinGroup := _FabricPinGroup{}
 
-	err = json.Unmarshal(bytes, &varFabricPinGroup)
+	err = json.Unmarshal(data, &varFabricPinGroup)
 	if err == nil {
 		o.MoBaseMo = varFabricPinGroup.MoBaseMo
 	} else {
@@ -229,7 +270,7 @@ func (o *FabricPinGroup) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Name")

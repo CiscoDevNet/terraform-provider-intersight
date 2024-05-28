@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "fabric.SwitchClusterProfileTemplate"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "fabric.SwitchClusterProfileTemplate"]
 **Usage** | Pointer to **int64** | The count of switch cluster profiles derived from the template. | [optional] [readonly] [default to 0]
-**Organization** | Pointer to [**OrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
+**Organization** | Pointer to [**NullableOrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
 **SwitchProfileTemplates** | Pointer to [**[]FabricSwitchProfileTemplateRelationship**](FabricSwitchProfileTemplateRelationship.md) | An array of relationships to fabricSwitchProfileTemplate resources. | [optional] 
 
 ## Methods
@@ -119,6 +119,16 @@ SetOrganization sets Organization field to given value.
 
 HasOrganization returns a boolean if a field has been set.
 
+### SetOrganizationNil
+
+`func (o *FabricSwitchClusterProfileTemplate) SetOrganizationNil(b bool)`
+
+ SetOrganizationNil sets the value for Organization to be an explicit nil
+
+### UnsetOrganization
+`func (o *FabricSwitchClusterProfileTemplate) UnsetOrganization()`
+
+UnsetOrganization ensures that no value is present for Organization, not even an explicit nil
 ### GetSwitchProfileTemplates
 
 `func (o *FabricSwitchClusterProfileTemplate) GetSwitchProfileTemplates() []FabricSwitchProfileTemplateRelationship`

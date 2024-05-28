@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the IaasLicenseUtilizationInfo type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &IaasLicenseUtilizationInfo{}
 
 // IaasLicenseUtilizationInfo License list with the Utilization info for UCSD.
 type IaasLicenseUtilizationInfo struct {
@@ -110,7 +114,7 @@ func (o *IaasLicenseUtilizationInfo) SetObjectType(v string) {
 
 // GetActualUsed returns the ActualUsed field value if set, zero value otherwise.
 func (o *IaasLicenseUtilizationInfo) GetActualUsed() int64 {
-	if o == nil || o.ActualUsed == nil {
+	if o == nil || IsNil(o.ActualUsed) {
 		var ret int64
 		return ret
 	}
@@ -120,7 +124,7 @@ func (o *IaasLicenseUtilizationInfo) GetActualUsed() int64 {
 // GetActualUsedOk returns a tuple with the ActualUsed field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IaasLicenseUtilizationInfo) GetActualUsedOk() (*int64, bool) {
-	if o == nil || o.ActualUsed == nil {
+	if o == nil || IsNil(o.ActualUsed) {
 		return nil, false
 	}
 	return o.ActualUsed, true
@@ -128,7 +132,7 @@ func (o *IaasLicenseUtilizationInfo) GetActualUsedOk() (*int64, bool) {
 
 // HasActualUsed returns a boolean if a field has been set.
 func (o *IaasLicenseUtilizationInfo) HasActualUsed() bool {
-	if o != nil && o.ActualUsed != nil {
+	if o != nil && !IsNil(o.ActualUsed) {
 		return true
 	}
 
@@ -142,7 +146,7 @@ func (o *IaasLicenseUtilizationInfo) SetActualUsed(v int64) {
 
 // GetLabel returns the Label field value if set, zero value otherwise.
 func (o *IaasLicenseUtilizationInfo) GetLabel() string {
-	if o == nil || o.Label == nil {
+	if o == nil || IsNil(o.Label) {
 		var ret string
 		return ret
 	}
@@ -152,7 +156,7 @@ func (o *IaasLicenseUtilizationInfo) GetLabel() string {
 // GetLabelOk returns a tuple with the Label field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IaasLicenseUtilizationInfo) GetLabelOk() (*string, bool) {
-	if o == nil || o.Label == nil {
+	if o == nil || IsNil(o.Label) {
 		return nil, false
 	}
 	return o.Label, true
@@ -160,7 +164,7 @@ func (o *IaasLicenseUtilizationInfo) GetLabelOk() (*string, bool) {
 
 // HasLabel returns a boolean if a field has been set.
 func (o *IaasLicenseUtilizationInfo) HasLabel() bool {
-	if o != nil && o.Label != nil {
+	if o != nil && !IsNil(o.Label) {
 		return true
 	}
 
@@ -174,7 +178,7 @@ func (o *IaasLicenseUtilizationInfo) SetLabel(v string) {
 
 // GetLicensedLimit returns the LicensedLimit field value if set, zero value otherwise.
 func (o *IaasLicenseUtilizationInfo) GetLicensedLimit() string {
-	if o == nil || o.LicensedLimit == nil {
+	if o == nil || IsNil(o.LicensedLimit) {
 		var ret string
 		return ret
 	}
@@ -184,7 +188,7 @@ func (o *IaasLicenseUtilizationInfo) GetLicensedLimit() string {
 // GetLicensedLimitOk returns a tuple with the LicensedLimit field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IaasLicenseUtilizationInfo) GetLicensedLimitOk() (*string, bool) {
-	if o == nil || o.LicensedLimit == nil {
+	if o == nil || IsNil(o.LicensedLimit) {
 		return nil, false
 	}
 	return o.LicensedLimit, true
@@ -192,7 +196,7 @@ func (o *IaasLicenseUtilizationInfo) GetLicensedLimitOk() (*string, bool) {
 
 // HasLicensedLimit returns a boolean if a field has been set.
 func (o *IaasLicenseUtilizationInfo) HasLicensedLimit() bool {
-	if o != nil && o.LicensedLimit != nil {
+	if o != nil && !IsNil(o.LicensedLimit) {
 		return true
 	}
 
@@ -206,7 +210,7 @@ func (o *IaasLicenseUtilizationInfo) SetLicensedLimit(v string) {
 
 // GetSku returns the Sku field value if set, zero value otherwise.
 func (o *IaasLicenseUtilizationInfo) GetSku() string {
-	if o == nil || o.Sku == nil {
+	if o == nil || IsNil(o.Sku) {
 		var ret string
 		return ret
 	}
@@ -216,7 +220,7 @@ func (o *IaasLicenseUtilizationInfo) GetSku() string {
 // GetSkuOk returns a tuple with the Sku field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IaasLicenseUtilizationInfo) GetSkuOk() (*string, bool) {
-	if o == nil || o.Sku == nil {
+	if o == nil || IsNil(o.Sku) {
 		return nil, false
 	}
 	return o.Sku, true
@@ -224,7 +228,7 @@ func (o *IaasLicenseUtilizationInfo) GetSkuOk() (*string, bool) {
 
 // HasSku returns a boolean if a field has been set.
 func (o *IaasLicenseUtilizationInfo) HasSku() bool {
-	if o != nil && o.Sku != nil {
+	if o != nil && !IsNil(o.Sku) {
 		return true
 	}
 
@@ -237,31 +241,35 @@ func (o *IaasLicenseUtilizationInfo) SetSku(v string) {
 }
 
 func (o IaasLicenseUtilizationInfo) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o IaasLicenseUtilizationInfo) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
 	errMoBaseComplexType = json.Unmarshal([]byte(serializedMoBaseComplexType), &toSerialize)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.ActualUsed != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.ActualUsed) {
 		toSerialize["ActualUsed"] = o.ActualUsed
 	}
-	if o.Label != nil {
+	if !IsNil(o.Label) {
 		toSerialize["Label"] = o.Label
 	}
-	if o.LicensedLimit != nil {
+	if !IsNil(o.LicensedLimit) {
 		toSerialize["LicensedLimit"] = o.LicensedLimit
 	}
-	if o.Sku != nil {
+	if !IsNil(o.Sku) {
 		toSerialize["Sku"] = o.Sku
 	}
 
@@ -269,10 +277,32 @@ func (o IaasLicenseUtilizationInfo) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *IaasLicenseUtilizationInfo) UnmarshalJSON(bytes []byte) (err error) {
+func (o *IaasLicenseUtilizationInfo) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type IaasLicenseUtilizationInfoWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -290,7 +320,7 @@ func (o *IaasLicenseUtilizationInfo) UnmarshalJSON(bytes []byte) (err error) {
 
 	varIaasLicenseUtilizationInfoWithoutEmbeddedStruct := IaasLicenseUtilizationInfoWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varIaasLicenseUtilizationInfoWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varIaasLicenseUtilizationInfoWithoutEmbeddedStruct)
 	if err == nil {
 		varIaasLicenseUtilizationInfo := _IaasLicenseUtilizationInfo{}
 		varIaasLicenseUtilizationInfo.ClassId = varIaasLicenseUtilizationInfoWithoutEmbeddedStruct.ClassId
@@ -306,7 +336,7 @@ func (o *IaasLicenseUtilizationInfo) UnmarshalJSON(bytes []byte) (err error) {
 
 	varIaasLicenseUtilizationInfo := _IaasLicenseUtilizationInfo{}
 
-	err = json.Unmarshal(bytes, &varIaasLicenseUtilizationInfo)
+	err = json.Unmarshal(data, &varIaasLicenseUtilizationInfo)
 	if err == nil {
 		o.MoBaseComplexType = varIaasLicenseUtilizationInfo.MoBaseComplexType
 	} else {
@@ -315,7 +345,7 @@ func (o *IaasLicenseUtilizationInfo) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "ActualUsed")

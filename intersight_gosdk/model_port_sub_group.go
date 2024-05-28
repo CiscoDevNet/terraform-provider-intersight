@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the PortSubGroup type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &PortSubGroup{}
 
 // PortSubGroup Holder for multiple ports within a portGroup. SubGroup represents a break-out port group on the Fabric Interconnect.
 type PortSubGroup struct {
@@ -29,17 +33,17 @@ type PortSubGroup struct {
 	// Switch expansion slot module identifier.
 	SlotId *int64 `json:"SlotId,omitempty"`
 	// Type of port sub-group. Values are Eth or Fc.
-	Transport           *string                          `json:"Transport,omitempty"`
-	EquipmentIoCardBase *EquipmentIoCardBaseRelationship `json:"EquipmentIoCardBase,omitempty"`
+	Transport           *string                                 `json:"Transport,omitempty"`
+	EquipmentIoCardBase NullableEquipmentIoCardBaseRelationship `json:"EquipmentIoCardBase,omitempty"`
 	// An array of relationships to etherHostPort resources.
 	EtherHostPorts []EtherHostPortRelationship `json:"EtherHostPorts,omitempty"`
 	// An array of relationships to etherPhysicalPort resources.
 	EthernetPorts []EtherPhysicalPortRelationship `json:"EthernetPorts,omitempty"`
 	// An array of relationships to fcPhysicalPort resources.
-	FcPorts              []FcPhysicalPortRelationship         `json:"FcPorts,omitempty"`
-	InventoryDeviceInfo  *InventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
-	PortGroup            *PortGroupRelationship               `json:"PortGroup,omitempty"`
-	RegisteredDevice     *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+	FcPorts              []FcPhysicalPortRelationship                `json:"FcPorts,omitempty"`
+	InventoryDeviceInfo  NullableInventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
+	PortGroup            NullablePortGroupRelationship               `json:"PortGroup,omitempty"`
+	RegisteredDevice     NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -118,7 +122,7 @@ func (o *PortSubGroup) SetObjectType(v string) {
 
 // GetAggregatePortId returns the AggregatePortId field value if set, zero value otherwise.
 func (o *PortSubGroup) GetAggregatePortId() int64 {
-	if o == nil || o.AggregatePortId == nil {
+	if o == nil || IsNil(o.AggregatePortId) {
 		var ret int64
 		return ret
 	}
@@ -128,7 +132,7 @@ func (o *PortSubGroup) GetAggregatePortId() int64 {
 // GetAggregatePortIdOk returns a tuple with the AggregatePortId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PortSubGroup) GetAggregatePortIdOk() (*int64, bool) {
-	if o == nil || o.AggregatePortId == nil {
+	if o == nil || IsNil(o.AggregatePortId) {
 		return nil, false
 	}
 	return o.AggregatePortId, true
@@ -136,7 +140,7 @@ func (o *PortSubGroup) GetAggregatePortIdOk() (*int64, bool) {
 
 // HasAggregatePortId returns a boolean if a field has been set.
 func (o *PortSubGroup) HasAggregatePortId() bool {
-	if o != nil && o.AggregatePortId != nil {
+	if o != nil && !IsNil(o.AggregatePortId) {
 		return true
 	}
 
@@ -150,7 +154,7 @@ func (o *PortSubGroup) SetAggregatePortId(v int64) {
 
 // GetSlotId returns the SlotId field value if set, zero value otherwise.
 func (o *PortSubGroup) GetSlotId() int64 {
-	if o == nil || o.SlotId == nil {
+	if o == nil || IsNil(o.SlotId) {
 		var ret int64
 		return ret
 	}
@@ -160,7 +164,7 @@ func (o *PortSubGroup) GetSlotId() int64 {
 // GetSlotIdOk returns a tuple with the SlotId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PortSubGroup) GetSlotIdOk() (*int64, bool) {
-	if o == nil || o.SlotId == nil {
+	if o == nil || IsNil(o.SlotId) {
 		return nil, false
 	}
 	return o.SlotId, true
@@ -168,7 +172,7 @@ func (o *PortSubGroup) GetSlotIdOk() (*int64, bool) {
 
 // HasSlotId returns a boolean if a field has been set.
 func (o *PortSubGroup) HasSlotId() bool {
-	if o != nil && o.SlotId != nil {
+	if o != nil && !IsNil(o.SlotId) {
 		return true
 	}
 
@@ -182,7 +186,7 @@ func (o *PortSubGroup) SetSlotId(v int64) {
 
 // GetTransport returns the Transport field value if set, zero value otherwise.
 func (o *PortSubGroup) GetTransport() string {
-	if o == nil || o.Transport == nil {
+	if o == nil || IsNil(o.Transport) {
 		var ret string
 		return ret
 	}
@@ -192,7 +196,7 @@ func (o *PortSubGroup) GetTransport() string {
 // GetTransportOk returns a tuple with the Transport field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PortSubGroup) GetTransportOk() (*string, bool) {
-	if o == nil || o.Transport == nil {
+	if o == nil || IsNil(o.Transport) {
 		return nil, false
 	}
 	return o.Transport, true
@@ -200,7 +204,7 @@ func (o *PortSubGroup) GetTransportOk() (*string, bool) {
 
 // HasTransport returns a boolean if a field has been set.
 func (o *PortSubGroup) HasTransport() bool {
-	if o != nil && o.Transport != nil {
+	if o != nil && !IsNil(o.Transport) {
 		return true
 	}
 
@@ -212,36 +216,47 @@ func (o *PortSubGroup) SetTransport(v string) {
 	o.Transport = &v
 }
 
-// GetEquipmentIoCardBase returns the EquipmentIoCardBase field value if set, zero value otherwise.
+// GetEquipmentIoCardBase returns the EquipmentIoCardBase field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *PortSubGroup) GetEquipmentIoCardBase() EquipmentIoCardBaseRelationship {
-	if o == nil || o.EquipmentIoCardBase == nil {
+	if o == nil || IsNil(o.EquipmentIoCardBase.Get()) {
 		var ret EquipmentIoCardBaseRelationship
 		return ret
 	}
-	return *o.EquipmentIoCardBase
+	return *o.EquipmentIoCardBase.Get()
 }
 
 // GetEquipmentIoCardBaseOk returns a tuple with the EquipmentIoCardBase field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *PortSubGroup) GetEquipmentIoCardBaseOk() (*EquipmentIoCardBaseRelationship, bool) {
-	if o == nil || o.EquipmentIoCardBase == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.EquipmentIoCardBase, true
+	return o.EquipmentIoCardBase.Get(), o.EquipmentIoCardBase.IsSet()
 }
 
 // HasEquipmentIoCardBase returns a boolean if a field has been set.
 func (o *PortSubGroup) HasEquipmentIoCardBase() bool {
-	if o != nil && o.EquipmentIoCardBase != nil {
+	if o != nil && o.EquipmentIoCardBase.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetEquipmentIoCardBase gets a reference to the given EquipmentIoCardBaseRelationship and assigns it to the EquipmentIoCardBase field.
+// SetEquipmentIoCardBase gets a reference to the given NullableEquipmentIoCardBaseRelationship and assigns it to the EquipmentIoCardBase field.
 func (o *PortSubGroup) SetEquipmentIoCardBase(v EquipmentIoCardBaseRelationship) {
-	o.EquipmentIoCardBase = &v
+	o.EquipmentIoCardBase.Set(&v)
+}
+
+// SetEquipmentIoCardBaseNil sets the value for EquipmentIoCardBase to be an explicit nil
+func (o *PortSubGroup) SetEquipmentIoCardBaseNil() {
+	o.EquipmentIoCardBase.Set(nil)
+}
+
+// UnsetEquipmentIoCardBase ensures that no value is present for EquipmentIoCardBase, not even an explicit nil
+func (o *PortSubGroup) UnsetEquipmentIoCardBase() {
+	o.EquipmentIoCardBase.Unset()
 }
 
 // GetEtherHostPorts returns the EtherHostPorts field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -257,7 +272,7 @@ func (o *PortSubGroup) GetEtherHostPorts() []EtherHostPortRelationship {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *PortSubGroup) GetEtherHostPortsOk() ([]EtherHostPortRelationship, bool) {
-	if o == nil || o.EtherHostPorts == nil {
+	if o == nil || IsNil(o.EtherHostPorts) {
 		return nil, false
 	}
 	return o.EtherHostPorts, true
@@ -265,7 +280,7 @@ func (o *PortSubGroup) GetEtherHostPortsOk() ([]EtherHostPortRelationship, bool)
 
 // HasEtherHostPorts returns a boolean if a field has been set.
 func (o *PortSubGroup) HasEtherHostPorts() bool {
-	if o != nil && o.EtherHostPorts != nil {
+	if o != nil && IsNil(o.EtherHostPorts) {
 		return true
 	}
 
@@ -290,7 +305,7 @@ func (o *PortSubGroup) GetEthernetPorts() []EtherPhysicalPortRelationship {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *PortSubGroup) GetEthernetPortsOk() ([]EtherPhysicalPortRelationship, bool) {
-	if o == nil || o.EthernetPorts == nil {
+	if o == nil || IsNil(o.EthernetPorts) {
 		return nil, false
 	}
 	return o.EthernetPorts, true
@@ -298,7 +313,7 @@ func (o *PortSubGroup) GetEthernetPortsOk() ([]EtherPhysicalPortRelationship, bo
 
 // HasEthernetPorts returns a boolean if a field has been set.
 func (o *PortSubGroup) HasEthernetPorts() bool {
-	if o != nil && o.EthernetPorts != nil {
+	if o != nil && IsNil(o.EthernetPorts) {
 		return true
 	}
 
@@ -323,7 +338,7 @@ func (o *PortSubGroup) GetFcPorts() []FcPhysicalPortRelationship {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *PortSubGroup) GetFcPortsOk() ([]FcPhysicalPortRelationship, bool) {
-	if o == nil || o.FcPorts == nil {
+	if o == nil || IsNil(o.FcPorts) {
 		return nil, false
 	}
 	return o.FcPorts, true
@@ -331,7 +346,7 @@ func (o *PortSubGroup) GetFcPortsOk() ([]FcPhysicalPortRelationship, bool) {
 
 // HasFcPorts returns a boolean if a field has been set.
 func (o *PortSubGroup) HasFcPorts() bool {
-	if o != nil && o.FcPorts != nil {
+	if o != nil && IsNil(o.FcPorts) {
 		return true
 	}
 
@@ -343,129 +358,166 @@ func (o *PortSubGroup) SetFcPorts(v []FcPhysicalPortRelationship) {
 	o.FcPorts = v
 }
 
-// GetInventoryDeviceInfo returns the InventoryDeviceInfo field value if set, zero value otherwise.
+// GetInventoryDeviceInfo returns the InventoryDeviceInfo field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *PortSubGroup) GetInventoryDeviceInfo() InventoryDeviceInfoRelationship {
-	if o == nil || o.InventoryDeviceInfo == nil {
+	if o == nil || IsNil(o.InventoryDeviceInfo.Get()) {
 		var ret InventoryDeviceInfoRelationship
 		return ret
 	}
-	return *o.InventoryDeviceInfo
+	return *o.InventoryDeviceInfo.Get()
 }
 
 // GetInventoryDeviceInfoOk returns a tuple with the InventoryDeviceInfo field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *PortSubGroup) GetInventoryDeviceInfoOk() (*InventoryDeviceInfoRelationship, bool) {
-	if o == nil || o.InventoryDeviceInfo == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.InventoryDeviceInfo, true
+	return o.InventoryDeviceInfo.Get(), o.InventoryDeviceInfo.IsSet()
 }
 
 // HasInventoryDeviceInfo returns a boolean if a field has been set.
 func (o *PortSubGroup) HasInventoryDeviceInfo() bool {
-	if o != nil && o.InventoryDeviceInfo != nil {
+	if o != nil && o.InventoryDeviceInfo.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetInventoryDeviceInfo gets a reference to the given InventoryDeviceInfoRelationship and assigns it to the InventoryDeviceInfo field.
+// SetInventoryDeviceInfo gets a reference to the given NullableInventoryDeviceInfoRelationship and assigns it to the InventoryDeviceInfo field.
 func (o *PortSubGroup) SetInventoryDeviceInfo(v InventoryDeviceInfoRelationship) {
-	o.InventoryDeviceInfo = &v
+	o.InventoryDeviceInfo.Set(&v)
 }
 
-// GetPortGroup returns the PortGroup field value if set, zero value otherwise.
+// SetInventoryDeviceInfoNil sets the value for InventoryDeviceInfo to be an explicit nil
+func (o *PortSubGroup) SetInventoryDeviceInfoNil() {
+	o.InventoryDeviceInfo.Set(nil)
+}
+
+// UnsetInventoryDeviceInfo ensures that no value is present for InventoryDeviceInfo, not even an explicit nil
+func (o *PortSubGroup) UnsetInventoryDeviceInfo() {
+	o.InventoryDeviceInfo.Unset()
+}
+
+// GetPortGroup returns the PortGroup field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *PortSubGroup) GetPortGroup() PortGroupRelationship {
-	if o == nil || o.PortGroup == nil {
+	if o == nil || IsNil(o.PortGroup.Get()) {
 		var ret PortGroupRelationship
 		return ret
 	}
-	return *o.PortGroup
+	return *o.PortGroup.Get()
 }
 
 // GetPortGroupOk returns a tuple with the PortGroup field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *PortSubGroup) GetPortGroupOk() (*PortGroupRelationship, bool) {
-	if o == nil || o.PortGroup == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.PortGroup, true
+	return o.PortGroup.Get(), o.PortGroup.IsSet()
 }
 
 // HasPortGroup returns a boolean if a field has been set.
 func (o *PortSubGroup) HasPortGroup() bool {
-	if o != nil && o.PortGroup != nil {
+	if o != nil && o.PortGroup.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetPortGroup gets a reference to the given PortGroupRelationship and assigns it to the PortGroup field.
+// SetPortGroup gets a reference to the given NullablePortGroupRelationship and assigns it to the PortGroup field.
 func (o *PortSubGroup) SetPortGroup(v PortGroupRelationship) {
-	o.PortGroup = &v
+	o.PortGroup.Set(&v)
 }
 
-// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise.
+// SetPortGroupNil sets the value for PortGroup to be an explicit nil
+func (o *PortSubGroup) SetPortGroupNil() {
+	o.PortGroup.Set(nil)
+}
+
+// UnsetPortGroup ensures that no value is present for PortGroup, not even an explicit nil
+func (o *PortSubGroup) UnsetPortGroup() {
+	o.PortGroup.Unset()
+}
+
+// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *PortSubGroup) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil || IsNil(o.RegisteredDevice.Get()) {
 		var ret AssetDeviceRegistrationRelationship
 		return ret
 	}
-	return *o.RegisteredDevice
+	return *o.RegisteredDevice.Get()
 }
 
 // GetRegisteredDeviceOk returns a tuple with the RegisteredDevice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *PortSubGroup) GetRegisteredDeviceOk() (*AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.RegisteredDevice, true
+	return o.RegisteredDevice.Get(), o.RegisteredDevice.IsSet()
 }
 
 // HasRegisteredDevice returns a boolean if a field has been set.
 func (o *PortSubGroup) HasRegisteredDevice() bool {
-	if o != nil && o.RegisteredDevice != nil {
+	if o != nil && o.RegisteredDevice.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRegisteredDevice gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
+// SetRegisteredDevice gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
 func (o *PortSubGroup) SetRegisteredDevice(v AssetDeviceRegistrationRelationship) {
-	o.RegisteredDevice = &v
+	o.RegisteredDevice.Set(&v)
+}
+
+// SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+func (o *PortSubGroup) SetRegisteredDeviceNil() {
+	o.RegisteredDevice.Set(nil)
+}
+
+// UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
+func (o *PortSubGroup) UnsetRegisteredDevice() {
+	o.RegisteredDevice.Unset()
 }
 
 func (o PortSubGroup) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o PortSubGroup) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedInventoryBase, errInventoryBase := json.Marshal(o.InventoryBase)
 	if errInventoryBase != nil {
-		return []byte{}, errInventoryBase
+		return map[string]interface{}{}, errInventoryBase
 	}
 	errInventoryBase = json.Unmarshal([]byte(serializedInventoryBase), &toSerialize)
 	if errInventoryBase != nil {
-		return []byte{}, errInventoryBase
+		return map[string]interface{}{}, errInventoryBase
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.AggregatePortId != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.AggregatePortId) {
 		toSerialize["AggregatePortId"] = o.AggregatePortId
 	}
-	if o.SlotId != nil {
+	if !IsNil(o.SlotId) {
 		toSerialize["SlotId"] = o.SlotId
 	}
-	if o.Transport != nil {
+	if !IsNil(o.Transport) {
 		toSerialize["Transport"] = o.Transport
 	}
-	if o.EquipmentIoCardBase != nil {
-		toSerialize["EquipmentIoCardBase"] = o.EquipmentIoCardBase
+	if o.EquipmentIoCardBase.IsSet() {
+		toSerialize["EquipmentIoCardBase"] = o.EquipmentIoCardBase.Get()
 	}
 	if o.EtherHostPorts != nil {
 		toSerialize["EtherHostPorts"] = o.EtherHostPorts
@@ -476,24 +528,46 @@ func (o PortSubGroup) MarshalJSON() ([]byte, error) {
 	if o.FcPorts != nil {
 		toSerialize["FcPorts"] = o.FcPorts
 	}
-	if o.InventoryDeviceInfo != nil {
-		toSerialize["InventoryDeviceInfo"] = o.InventoryDeviceInfo
+	if o.InventoryDeviceInfo.IsSet() {
+		toSerialize["InventoryDeviceInfo"] = o.InventoryDeviceInfo.Get()
 	}
-	if o.PortGroup != nil {
-		toSerialize["PortGroup"] = o.PortGroup
+	if o.PortGroup.IsSet() {
+		toSerialize["PortGroup"] = o.PortGroup.Get()
 	}
-	if o.RegisteredDevice != nil {
-		toSerialize["RegisteredDevice"] = o.RegisteredDevice
+	if o.RegisteredDevice.IsSet() {
+		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *PortSubGroup) UnmarshalJSON(bytes []byte) (err error) {
+func (o *PortSubGroup) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type PortSubGroupWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -504,22 +578,22 @@ func (o *PortSubGroup) UnmarshalJSON(bytes []byte) (err error) {
 		// Switch expansion slot module identifier.
 		SlotId *int64 `json:"SlotId,omitempty"`
 		// Type of port sub-group. Values are Eth or Fc.
-		Transport           *string                          `json:"Transport,omitempty"`
-		EquipmentIoCardBase *EquipmentIoCardBaseRelationship `json:"EquipmentIoCardBase,omitempty"`
+		Transport           *string                                 `json:"Transport,omitempty"`
+		EquipmentIoCardBase NullableEquipmentIoCardBaseRelationship `json:"EquipmentIoCardBase,omitempty"`
 		// An array of relationships to etherHostPort resources.
 		EtherHostPorts []EtherHostPortRelationship `json:"EtherHostPorts,omitempty"`
 		// An array of relationships to etherPhysicalPort resources.
 		EthernetPorts []EtherPhysicalPortRelationship `json:"EthernetPorts,omitempty"`
 		// An array of relationships to fcPhysicalPort resources.
-		FcPorts             []FcPhysicalPortRelationship         `json:"FcPorts,omitempty"`
-		InventoryDeviceInfo *InventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
-		PortGroup           *PortGroupRelationship               `json:"PortGroup,omitempty"`
-		RegisteredDevice    *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+		FcPorts             []FcPhysicalPortRelationship                `json:"FcPorts,omitempty"`
+		InventoryDeviceInfo NullableInventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
+		PortGroup           NullablePortGroupRelationship               `json:"PortGroup,omitempty"`
+		RegisteredDevice    NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	}
 
 	varPortSubGroupWithoutEmbeddedStruct := PortSubGroupWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varPortSubGroupWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varPortSubGroupWithoutEmbeddedStruct)
 	if err == nil {
 		varPortSubGroup := _PortSubGroup{}
 		varPortSubGroup.ClassId = varPortSubGroupWithoutEmbeddedStruct.ClassId
@@ -541,7 +615,7 @@ func (o *PortSubGroup) UnmarshalJSON(bytes []byte) (err error) {
 
 	varPortSubGroup := _PortSubGroup{}
 
-	err = json.Unmarshal(bytes, &varPortSubGroup)
+	err = json.Unmarshal(data, &varPortSubGroup)
 	if err == nil {
 		o.InventoryBase = varPortSubGroup.InventoryBase
 	} else {
@@ -550,7 +624,7 @@ func (o *PortSubGroup) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "AggregatePortId")

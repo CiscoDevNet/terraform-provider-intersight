@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the NetworkVpcPeer type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &NetworkVpcPeer{}
 
 // NetworkVpcPeer Concrete class for VPC peer configured on a network device.
 type NetworkVpcPeer struct {
@@ -33,10 +37,10 @@ type NetworkVpcPeer struct {
 	// Identity of the virtual port channel.
 	VpcDomainId *int64 `json:"VpcDomainId,omitempty"`
 	// Identity of the virtual port channel.
-	VpcPeerId            *int64                               `json:"VpcPeerId,omitempty"`
-	EtherPortChannel     *EtherPortChannelRelationship        `json:"EtherPortChannel,omitempty"`
-	NetworkElement       *NetworkElementRelationship          `json:"NetworkElement,omitempty"`
-	RegisteredDevice     *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+	VpcPeerId            *int64                                      `json:"VpcPeerId,omitempty"`
+	EtherPortChannel     NullableEtherPortChannelRelationship        `json:"EtherPortChannel,omitempty"`
+	NetworkElement       NullableNetworkElementRelationship          `json:"NetworkElement,omitempty"`
+	RegisteredDevice     NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -115,7 +119,7 @@ func (o *NetworkVpcPeer) SetObjectType(v string) {
 
 // GetOperationalState returns the OperationalState field value if set, zero value otherwise.
 func (o *NetworkVpcPeer) GetOperationalState() string {
-	if o == nil || o.OperationalState == nil {
+	if o == nil || IsNil(o.OperationalState) {
 		var ret string
 		return ret
 	}
@@ -125,7 +129,7 @@ func (o *NetworkVpcPeer) GetOperationalState() string {
 // GetOperationalStateOk returns a tuple with the OperationalState field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NetworkVpcPeer) GetOperationalStateOk() (*string, bool) {
-	if o == nil || o.OperationalState == nil {
+	if o == nil || IsNil(o.OperationalState) {
 		return nil, false
 	}
 	return o.OperationalState, true
@@ -133,7 +137,7 @@ func (o *NetworkVpcPeer) GetOperationalStateOk() (*string, bool) {
 
 // HasOperationalState returns a boolean if a field has been set.
 func (o *NetworkVpcPeer) HasOperationalState() bool {
-	if o != nil && o.OperationalState != nil {
+	if o != nil && !IsNil(o.OperationalState) {
 		return true
 	}
 
@@ -147,7 +151,7 @@ func (o *NetworkVpcPeer) SetOperationalState(v string) {
 
 // GetPortChannel returns the PortChannel field value if set, zero value otherwise.
 func (o *NetworkVpcPeer) GetPortChannel() string {
-	if o == nil || o.PortChannel == nil {
+	if o == nil || IsNil(o.PortChannel) {
 		var ret string
 		return ret
 	}
@@ -157,7 +161,7 @@ func (o *NetworkVpcPeer) GetPortChannel() string {
 // GetPortChannelOk returns a tuple with the PortChannel field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NetworkVpcPeer) GetPortChannelOk() (*string, bool) {
-	if o == nil || o.PortChannel == nil {
+	if o == nil || IsNil(o.PortChannel) {
 		return nil, false
 	}
 	return o.PortChannel, true
@@ -165,7 +169,7 @@ func (o *NetworkVpcPeer) GetPortChannelOk() (*string, bool) {
 
 // HasPortChannel returns a boolean if a field has been set.
 func (o *NetworkVpcPeer) HasPortChannel() bool {
-	if o != nil && o.PortChannel != nil {
+	if o != nil && !IsNil(o.PortChannel) {
 		return true
 	}
 
@@ -179,7 +183,7 @@ func (o *NetworkVpcPeer) SetPortChannel(v string) {
 
 // GetPortChannelId returns the PortChannelId field value if set, zero value otherwise.
 func (o *NetworkVpcPeer) GetPortChannelId() int64 {
-	if o == nil || o.PortChannelId == nil {
+	if o == nil || IsNil(o.PortChannelId) {
 		var ret int64
 		return ret
 	}
@@ -189,7 +193,7 @@ func (o *NetworkVpcPeer) GetPortChannelId() int64 {
 // GetPortChannelIdOk returns a tuple with the PortChannelId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NetworkVpcPeer) GetPortChannelIdOk() (*int64, bool) {
-	if o == nil || o.PortChannelId == nil {
+	if o == nil || IsNil(o.PortChannelId) {
 		return nil, false
 	}
 	return o.PortChannelId, true
@@ -197,7 +201,7 @@ func (o *NetworkVpcPeer) GetPortChannelIdOk() (*int64, bool) {
 
 // HasPortChannelId returns a boolean if a field has been set.
 func (o *NetworkVpcPeer) HasPortChannelId() bool {
-	if o != nil && o.PortChannelId != nil {
+	if o != nil && !IsNil(o.PortChannelId) {
 		return true
 	}
 
@@ -211,7 +215,7 @@ func (o *NetworkVpcPeer) SetPortChannelId(v int64) {
 
 // GetVpcDomainId returns the VpcDomainId field value if set, zero value otherwise.
 func (o *NetworkVpcPeer) GetVpcDomainId() int64 {
-	if o == nil || o.VpcDomainId == nil {
+	if o == nil || IsNil(o.VpcDomainId) {
 		var ret int64
 		return ret
 	}
@@ -221,7 +225,7 @@ func (o *NetworkVpcPeer) GetVpcDomainId() int64 {
 // GetVpcDomainIdOk returns a tuple with the VpcDomainId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NetworkVpcPeer) GetVpcDomainIdOk() (*int64, bool) {
-	if o == nil || o.VpcDomainId == nil {
+	if o == nil || IsNil(o.VpcDomainId) {
 		return nil, false
 	}
 	return o.VpcDomainId, true
@@ -229,7 +233,7 @@ func (o *NetworkVpcPeer) GetVpcDomainIdOk() (*int64, bool) {
 
 // HasVpcDomainId returns a boolean if a field has been set.
 func (o *NetworkVpcPeer) HasVpcDomainId() bool {
-	if o != nil && o.VpcDomainId != nil {
+	if o != nil && !IsNil(o.VpcDomainId) {
 		return true
 	}
 
@@ -243,7 +247,7 @@ func (o *NetworkVpcPeer) SetVpcDomainId(v int64) {
 
 // GetVpcPeerId returns the VpcPeerId field value if set, zero value otherwise.
 func (o *NetworkVpcPeer) GetVpcPeerId() int64 {
-	if o == nil || o.VpcPeerId == nil {
+	if o == nil || IsNil(o.VpcPeerId) {
 		var ret int64
 		return ret
 	}
@@ -253,7 +257,7 @@ func (o *NetworkVpcPeer) GetVpcPeerId() int64 {
 // GetVpcPeerIdOk returns a tuple with the VpcPeerId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NetworkVpcPeer) GetVpcPeerIdOk() (*int64, bool) {
-	if o == nil || o.VpcPeerId == nil {
+	if o == nil || IsNil(o.VpcPeerId) {
 		return nil, false
 	}
 	return o.VpcPeerId, true
@@ -261,7 +265,7 @@ func (o *NetworkVpcPeer) GetVpcPeerIdOk() (*int64, bool) {
 
 // HasVpcPeerId returns a boolean if a field has been set.
 func (o *NetworkVpcPeer) HasVpcPeerId() bool {
-	if o != nil && o.VpcPeerId != nil {
+	if o != nil && !IsNil(o.VpcPeerId) {
 		return true
 	}
 
@@ -273,151 +277,210 @@ func (o *NetworkVpcPeer) SetVpcPeerId(v int64) {
 	o.VpcPeerId = &v
 }
 
-// GetEtherPortChannel returns the EtherPortChannel field value if set, zero value otherwise.
+// GetEtherPortChannel returns the EtherPortChannel field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *NetworkVpcPeer) GetEtherPortChannel() EtherPortChannelRelationship {
-	if o == nil || o.EtherPortChannel == nil {
+	if o == nil || IsNil(o.EtherPortChannel.Get()) {
 		var ret EtherPortChannelRelationship
 		return ret
 	}
-	return *o.EtherPortChannel
+	return *o.EtherPortChannel.Get()
 }
 
 // GetEtherPortChannelOk returns a tuple with the EtherPortChannel field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *NetworkVpcPeer) GetEtherPortChannelOk() (*EtherPortChannelRelationship, bool) {
-	if o == nil || o.EtherPortChannel == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.EtherPortChannel, true
+	return o.EtherPortChannel.Get(), o.EtherPortChannel.IsSet()
 }
 
 // HasEtherPortChannel returns a boolean if a field has been set.
 func (o *NetworkVpcPeer) HasEtherPortChannel() bool {
-	if o != nil && o.EtherPortChannel != nil {
+	if o != nil && o.EtherPortChannel.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetEtherPortChannel gets a reference to the given EtherPortChannelRelationship and assigns it to the EtherPortChannel field.
+// SetEtherPortChannel gets a reference to the given NullableEtherPortChannelRelationship and assigns it to the EtherPortChannel field.
 func (o *NetworkVpcPeer) SetEtherPortChannel(v EtherPortChannelRelationship) {
-	o.EtherPortChannel = &v
+	o.EtherPortChannel.Set(&v)
 }
 
-// GetNetworkElement returns the NetworkElement field value if set, zero value otherwise.
+// SetEtherPortChannelNil sets the value for EtherPortChannel to be an explicit nil
+func (o *NetworkVpcPeer) SetEtherPortChannelNil() {
+	o.EtherPortChannel.Set(nil)
+}
+
+// UnsetEtherPortChannel ensures that no value is present for EtherPortChannel, not even an explicit nil
+func (o *NetworkVpcPeer) UnsetEtherPortChannel() {
+	o.EtherPortChannel.Unset()
+}
+
+// GetNetworkElement returns the NetworkElement field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *NetworkVpcPeer) GetNetworkElement() NetworkElementRelationship {
-	if o == nil || o.NetworkElement == nil {
+	if o == nil || IsNil(o.NetworkElement.Get()) {
 		var ret NetworkElementRelationship
 		return ret
 	}
-	return *o.NetworkElement
+	return *o.NetworkElement.Get()
 }
 
 // GetNetworkElementOk returns a tuple with the NetworkElement field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *NetworkVpcPeer) GetNetworkElementOk() (*NetworkElementRelationship, bool) {
-	if o == nil || o.NetworkElement == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.NetworkElement, true
+	return o.NetworkElement.Get(), o.NetworkElement.IsSet()
 }
 
 // HasNetworkElement returns a boolean if a field has been set.
 func (o *NetworkVpcPeer) HasNetworkElement() bool {
-	if o != nil && o.NetworkElement != nil {
+	if o != nil && o.NetworkElement.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetNetworkElement gets a reference to the given NetworkElementRelationship and assigns it to the NetworkElement field.
+// SetNetworkElement gets a reference to the given NullableNetworkElementRelationship and assigns it to the NetworkElement field.
 func (o *NetworkVpcPeer) SetNetworkElement(v NetworkElementRelationship) {
-	o.NetworkElement = &v
+	o.NetworkElement.Set(&v)
 }
 
-// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise.
+// SetNetworkElementNil sets the value for NetworkElement to be an explicit nil
+func (o *NetworkVpcPeer) SetNetworkElementNil() {
+	o.NetworkElement.Set(nil)
+}
+
+// UnsetNetworkElement ensures that no value is present for NetworkElement, not even an explicit nil
+func (o *NetworkVpcPeer) UnsetNetworkElement() {
+	o.NetworkElement.Unset()
+}
+
+// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *NetworkVpcPeer) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil || IsNil(o.RegisteredDevice.Get()) {
 		var ret AssetDeviceRegistrationRelationship
 		return ret
 	}
-	return *o.RegisteredDevice
+	return *o.RegisteredDevice.Get()
 }
 
 // GetRegisteredDeviceOk returns a tuple with the RegisteredDevice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *NetworkVpcPeer) GetRegisteredDeviceOk() (*AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.RegisteredDevice, true
+	return o.RegisteredDevice.Get(), o.RegisteredDevice.IsSet()
 }
 
 // HasRegisteredDevice returns a boolean if a field has been set.
 func (o *NetworkVpcPeer) HasRegisteredDevice() bool {
-	if o != nil && o.RegisteredDevice != nil {
+	if o != nil && o.RegisteredDevice.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRegisteredDevice gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
+// SetRegisteredDevice gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
 func (o *NetworkVpcPeer) SetRegisteredDevice(v AssetDeviceRegistrationRelationship) {
-	o.RegisteredDevice = &v
+	o.RegisteredDevice.Set(&v)
+}
+
+// SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+func (o *NetworkVpcPeer) SetRegisteredDeviceNil() {
+	o.RegisteredDevice.Set(nil)
+}
+
+// UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
+func (o *NetworkVpcPeer) UnsetRegisteredDevice() {
+	o.RegisteredDevice.Unset()
 }
 
 func (o NetworkVpcPeer) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o NetworkVpcPeer) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedInventoryBase, errInventoryBase := json.Marshal(o.InventoryBase)
 	if errInventoryBase != nil {
-		return []byte{}, errInventoryBase
+		return map[string]interface{}{}, errInventoryBase
 	}
 	errInventoryBase = json.Unmarshal([]byte(serializedInventoryBase), &toSerialize)
 	if errInventoryBase != nil {
-		return []byte{}, errInventoryBase
+		return map[string]interface{}{}, errInventoryBase
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.OperationalState != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.OperationalState) {
 		toSerialize["OperationalState"] = o.OperationalState
 	}
-	if o.PortChannel != nil {
+	if !IsNil(o.PortChannel) {
 		toSerialize["PortChannel"] = o.PortChannel
 	}
-	if o.PortChannelId != nil {
+	if !IsNil(o.PortChannelId) {
 		toSerialize["PortChannelId"] = o.PortChannelId
 	}
-	if o.VpcDomainId != nil {
+	if !IsNil(o.VpcDomainId) {
 		toSerialize["VpcDomainId"] = o.VpcDomainId
 	}
-	if o.VpcPeerId != nil {
+	if !IsNil(o.VpcPeerId) {
 		toSerialize["VpcPeerId"] = o.VpcPeerId
 	}
-	if o.EtherPortChannel != nil {
-		toSerialize["EtherPortChannel"] = o.EtherPortChannel
+	if o.EtherPortChannel.IsSet() {
+		toSerialize["EtherPortChannel"] = o.EtherPortChannel.Get()
 	}
-	if o.NetworkElement != nil {
-		toSerialize["NetworkElement"] = o.NetworkElement
+	if o.NetworkElement.IsSet() {
+		toSerialize["NetworkElement"] = o.NetworkElement.Get()
 	}
-	if o.RegisteredDevice != nil {
-		toSerialize["RegisteredDevice"] = o.RegisteredDevice
+	if o.RegisteredDevice.IsSet() {
+		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *NetworkVpcPeer) UnmarshalJSON(bytes []byte) (err error) {
+func (o *NetworkVpcPeer) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type NetworkVpcPeerWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -432,15 +495,15 @@ func (o *NetworkVpcPeer) UnmarshalJSON(bytes []byte) (err error) {
 		// Identity of the virtual port channel.
 		VpcDomainId *int64 `json:"VpcDomainId,omitempty"`
 		// Identity of the virtual port channel.
-		VpcPeerId        *int64                               `json:"VpcPeerId,omitempty"`
-		EtherPortChannel *EtherPortChannelRelationship        `json:"EtherPortChannel,omitempty"`
-		NetworkElement   *NetworkElementRelationship          `json:"NetworkElement,omitempty"`
-		RegisteredDevice *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+		VpcPeerId        *int64                                      `json:"VpcPeerId,omitempty"`
+		EtherPortChannel NullableEtherPortChannelRelationship        `json:"EtherPortChannel,omitempty"`
+		NetworkElement   NullableNetworkElementRelationship          `json:"NetworkElement,omitempty"`
+		RegisteredDevice NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	}
 
 	varNetworkVpcPeerWithoutEmbeddedStruct := NetworkVpcPeerWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varNetworkVpcPeerWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varNetworkVpcPeerWithoutEmbeddedStruct)
 	if err == nil {
 		varNetworkVpcPeer := _NetworkVpcPeer{}
 		varNetworkVpcPeer.ClassId = varNetworkVpcPeerWithoutEmbeddedStruct.ClassId
@@ -460,7 +523,7 @@ func (o *NetworkVpcPeer) UnmarshalJSON(bytes []byte) (err error) {
 
 	varNetworkVpcPeer := _NetworkVpcPeer{}
 
-	err = json.Unmarshal(bytes, &varNetworkVpcPeer)
+	err = json.Unmarshal(data, &varNetworkVpcPeer)
 	if err == nil {
 		o.InventoryBase = varNetworkVpcPeer.InventoryBase
 	} else {
@@ -469,7 +532,7 @@ func (o *NetworkVpcPeer) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "OperationalState")

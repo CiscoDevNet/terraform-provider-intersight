@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the SnmpUser type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &SnmpUser{}
 
 // SnmpUser Complex type for a User based security model, for communication between an agent and manager. Applicable only for SNMPv3.
 type SnmpUser struct {
@@ -130,7 +134,7 @@ func (o *SnmpUser) SetObjectType(v string) {
 
 // GetAuthPassword returns the AuthPassword field value if set, zero value otherwise.
 func (o *SnmpUser) GetAuthPassword() string {
-	if o == nil || o.AuthPassword == nil {
+	if o == nil || IsNil(o.AuthPassword) {
 		var ret string
 		return ret
 	}
@@ -140,7 +144,7 @@ func (o *SnmpUser) GetAuthPassword() string {
 // GetAuthPasswordOk returns a tuple with the AuthPassword field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SnmpUser) GetAuthPasswordOk() (*string, bool) {
-	if o == nil || o.AuthPassword == nil {
+	if o == nil || IsNil(o.AuthPassword) {
 		return nil, false
 	}
 	return o.AuthPassword, true
@@ -148,7 +152,7 @@ func (o *SnmpUser) GetAuthPasswordOk() (*string, bool) {
 
 // HasAuthPassword returns a boolean if a field has been set.
 func (o *SnmpUser) HasAuthPassword() bool {
-	if o != nil && o.AuthPassword != nil {
+	if o != nil && !IsNil(o.AuthPassword) {
 		return true
 	}
 
@@ -162,7 +166,7 @@ func (o *SnmpUser) SetAuthPassword(v string) {
 
 // GetAuthType returns the AuthType field value if set, zero value otherwise.
 func (o *SnmpUser) GetAuthType() string {
-	if o == nil || o.AuthType == nil {
+	if o == nil || IsNil(o.AuthType) {
 		var ret string
 		return ret
 	}
@@ -172,7 +176,7 @@ func (o *SnmpUser) GetAuthType() string {
 // GetAuthTypeOk returns a tuple with the AuthType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SnmpUser) GetAuthTypeOk() (*string, bool) {
-	if o == nil || o.AuthType == nil {
+	if o == nil || IsNil(o.AuthType) {
 		return nil, false
 	}
 	return o.AuthType, true
@@ -180,7 +184,7 @@ func (o *SnmpUser) GetAuthTypeOk() (*string, bool) {
 
 // HasAuthType returns a boolean if a field has been set.
 func (o *SnmpUser) HasAuthType() bool {
-	if o != nil && o.AuthType != nil {
+	if o != nil && !IsNil(o.AuthType) {
 		return true
 	}
 
@@ -194,7 +198,7 @@ func (o *SnmpUser) SetAuthType(v string) {
 
 // GetIsAuthPasswordSet returns the IsAuthPasswordSet field value if set, zero value otherwise.
 func (o *SnmpUser) GetIsAuthPasswordSet() bool {
-	if o == nil || o.IsAuthPasswordSet == nil {
+	if o == nil || IsNil(o.IsAuthPasswordSet) {
 		var ret bool
 		return ret
 	}
@@ -204,7 +208,7 @@ func (o *SnmpUser) GetIsAuthPasswordSet() bool {
 // GetIsAuthPasswordSetOk returns a tuple with the IsAuthPasswordSet field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SnmpUser) GetIsAuthPasswordSetOk() (*bool, bool) {
-	if o == nil || o.IsAuthPasswordSet == nil {
+	if o == nil || IsNil(o.IsAuthPasswordSet) {
 		return nil, false
 	}
 	return o.IsAuthPasswordSet, true
@@ -212,7 +216,7 @@ func (o *SnmpUser) GetIsAuthPasswordSetOk() (*bool, bool) {
 
 // HasIsAuthPasswordSet returns a boolean if a field has been set.
 func (o *SnmpUser) HasIsAuthPasswordSet() bool {
-	if o != nil && o.IsAuthPasswordSet != nil {
+	if o != nil && !IsNil(o.IsAuthPasswordSet) {
 		return true
 	}
 
@@ -226,7 +230,7 @@ func (o *SnmpUser) SetIsAuthPasswordSet(v bool) {
 
 // GetIsPrivacyPasswordSet returns the IsPrivacyPasswordSet field value if set, zero value otherwise.
 func (o *SnmpUser) GetIsPrivacyPasswordSet() bool {
-	if o == nil || o.IsPrivacyPasswordSet == nil {
+	if o == nil || IsNil(o.IsPrivacyPasswordSet) {
 		var ret bool
 		return ret
 	}
@@ -236,7 +240,7 @@ func (o *SnmpUser) GetIsPrivacyPasswordSet() bool {
 // GetIsPrivacyPasswordSetOk returns a tuple with the IsPrivacyPasswordSet field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SnmpUser) GetIsPrivacyPasswordSetOk() (*bool, bool) {
-	if o == nil || o.IsPrivacyPasswordSet == nil {
+	if o == nil || IsNil(o.IsPrivacyPasswordSet) {
 		return nil, false
 	}
 	return o.IsPrivacyPasswordSet, true
@@ -244,7 +248,7 @@ func (o *SnmpUser) GetIsPrivacyPasswordSetOk() (*bool, bool) {
 
 // HasIsPrivacyPasswordSet returns a boolean if a field has been set.
 func (o *SnmpUser) HasIsPrivacyPasswordSet() bool {
-	if o != nil && o.IsPrivacyPasswordSet != nil {
+	if o != nil && !IsNil(o.IsPrivacyPasswordSet) {
 		return true
 	}
 
@@ -258,7 +262,7 @@ func (o *SnmpUser) SetIsPrivacyPasswordSet(v bool) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *SnmpUser) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -268,7 +272,7 @@ func (o *SnmpUser) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SnmpUser) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -276,7 +280,7 @@ func (o *SnmpUser) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *SnmpUser) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -290,7 +294,7 @@ func (o *SnmpUser) SetName(v string) {
 
 // GetPrivacyPassword returns the PrivacyPassword field value if set, zero value otherwise.
 func (o *SnmpUser) GetPrivacyPassword() string {
-	if o == nil || o.PrivacyPassword == nil {
+	if o == nil || IsNil(o.PrivacyPassword) {
 		var ret string
 		return ret
 	}
@@ -300,7 +304,7 @@ func (o *SnmpUser) GetPrivacyPassword() string {
 // GetPrivacyPasswordOk returns a tuple with the PrivacyPassword field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SnmpUser) GetPrivacyPasswordOk() (*string, bool) {
-	if o == nil || o.PrivacyPassword == nil {
+	if o == nil || IsNil(o.PrivacyPassword) {
 		return nil, false
 	}
 	return o.PrivacyPassword, true
@@ -308,7 +312,7 @@ func (o *SnmpUser) GetPrivacyPasswordOk() (*string, bool) {
 
 // HasPrivacyPassword returns a boolean if a field has been set.
 func (o *SnmpUser) HasPrivacyPassword() bool {
-	if o != nil && o.PrivacyPassword != nil {
+	if o != nil && !IsNil(o.PrivacyPassword) {
 		return true
 	}
 
@@ -322,7 +326,7 @@ func (o *SnmpUser) SetPrivacyPassword(v string) {
 
 // GetPrivacyType returns the PrivacyType field value if set, zero value otherwise.
 func (o *SnmpUser) GetPrivacyType() string {
-	if o == nil || o.PrivacyType == nil {
+	if o == nil || IsNil(o.PrivacyType) {
 		var ret string
 		return ret
 	}
@@ -332,7 +336,7 @@ func (o *SnmpUser) GetPrivacyType() string {
 // GetPrivacyTypeOk returns a tuple with the PrivacyType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SnmpUser) GetPrivacyTypeOk() (*string, bool) {
-	if o == nil || o.PrivacyType == nil {
+	if o == nil || IsNil(o.PrivacyType) {
 		return nil, false
 	}
 	return o.PrivacyType, true
@@ -340,7 +344,7 @@ func (o *SnmpUser) GetPrivacyTypeOk() (*string, bool) {
 
 // HasPrivacyType returns a boolean if a field has been set.
 func (o *SnmpUser) HasPrivacyType() bool {
-	if o != nil && o.PrivacyType != nil {
+	if o != nil && !IsNil(o.PrivacyType) {
 		return true
 	}
 
@@ -354,7 +358,7 @@ func (o *SnmpUser) SetPrivacyType(v string) {
 
 // GetSecurityLevel returns the SecurityLevel field value if set, zero value otherwise.
 func (o *SnmpUser) GetSecurityLevel() string {
-	if o == nil || o.SecurityLevel == nil {
+	if o == nil || IsNil(o.SecurityLevel) {
 		var ret string
 		return ret
 	}
@@ -364,7 +368,7 @@ func (o *SnmpUser) GetSecurityLevel() string {
 // GetSecurityLevelOk returns a tuple with the SecurityLevel field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SnmpUser) GetSecurityLevelOk() (*string, bool) {
-	if o == nil || o.SecurityLevel == nil {
+	if o == nil || IsNil(o.SecurityLevel) {
 		return nil, false
 	}
 	return o.SecurityLevel, true
@@ -372,7 +376,7 @@ func (o *SnmpUser) GetSecurityLevelOk() (*string, bool) {
 
 // HasSecurityLevel returns a boolean if a field has been set.
 func (o *SnmpUser) HasSecurityLevel() bool {
-	if o != nil && o.SecurityLevel != nil {
+	if o != nil && !IsNil(o.SecurityLevel) {
 		return true
 	}
 
@@ -385,43 +389,47 @@ func (o *SnmpUser) SetSecurityLevel(v string) {
 }
 
 func (o SnmpUser) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o SnmpUser) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
 	errMoBaseComplexType = json.Unmarshal([]byte(serializedMoBaseComplexType), &toSerialize)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.AuthPassword != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.AuthPassword) {
 		toSerialize["AuthPassword"] = o.AuthPassword
 	}
-	if o.AuthType != nil {
+	if !IsNil(o.AuthType) {
 		toSerialize["AuthType"] = o.AuthType
 	}
-	if o.IsAuthPasswordSet != nil {
+	if !IsNil(o.IsAuthPasswordSet) {
 		toSerialize["IsAuthPasswordSet"] = o.IsAuthPasswordSet
 	}
-	if o.IsPrivacyPasswordSet != nil {
+	if !IsNil(o.IsPrivacyPasswordSet) {
 		toSerialize["IsPrivacyPasswordSet"] = o.IsPrivacyPasswordSet
 	}
-	if o.Name != nil {
+	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
 	}
-	if o.PrivacyPassword != nil {
+	if !IsNil(o.PrivacyPassword) {
 		toSerialize["PrivacyPassword"] = o.PrivacyPassword
 	}
-	if o.PrivacyType != nil {
+	if !IsNil(o.PrivacyType) {
 		toSerialize["PrivacyType"] = o.PrivacyType
 	}
-	if o.SecurityLevel != nil {
+	if !IsNil(o.SecurityLevel) {
 		toSerialize["SecurityLevel"] = o.SecurityLevel
 	}
 
@@ -429,10 +437,32 @@ func (o SnmpUser) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *SnmpUser) UnmarshalJSON(bytes []byte) (err error) {
+func (o *SnmpUser) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type SnmpUserWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -458,7 +488,7 @@ func (o *SnmpUser) UnmarshalJSON(bytes []byte) (err error) {
 
 	varSnmpUserWithoutEmbeddedStruct := SnmpUserWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varSnmpUserWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varSnmpUserWithoutEmbeddedStruct)
 	if err == nil {
 		varSnmpUser := _SnmpUser{}
 		varSnmpUser.ClassId = varSnmpUserWithoutEmbeddedStruct.ClassId
@@ -478,7 +508,7 @@ func (o *SnmpUser) UnmarshalJSON(bytes []byte) (err error) {
 
 	varSnmpUser := _SnmpUser{}
 
-	err = json.Unmarshal(bytes, &varSnmpUser)
+	err = json.Unmarshal(data, &varSnmpUser)
 	if err == nil {
 		o.MoBaseComplexType = varSnmpUser.MoBaseComplexType
 	} else {
@@ -487,7 +517,7 @@ func (o *SnmpUser) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "AuthPassword")

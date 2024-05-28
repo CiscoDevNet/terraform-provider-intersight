@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the ConnectorFileMessage type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ConnectorFileMessage{}
 
 // ConnectorFileMessage Message carries file operations to perform on the platform's file system. Cloud services can send a message to open and write to files on the connector platform's file system. Writes to a file can be buffered across many 'FileContent' messages, the file plugin will append to an open file as it receives file content until a close message is received. If any operation fails (such as a file write returns error), an error will be returned to the cloud service and a best effort to close and remove the file will be made (if the file was previously opened).
 type ConnectorFileMessage struct {
@@ -112,7 +116,7 @@ func (o *ConnectorFileMessage) SetObjectType(v string) {
 
 // GetMsgType returns the MsgType field value if set, zero value otherwise.
 func (o *ConnectorFileMessage) GetMsgType() string {
-	if o == nil || o.MsgType == nil {
+	if o == nil || IsNil(o.MsgType) {
 		var ret string
 		return ret
 	}
@@ -122,7 +126,7 @@ func (o *ConnectorFileMessage) GetMsgType() string {
 // GetMsgTypeOk returns a tuple with the MsgType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ConnectorFileMessage) GetMsgTypeOk() (*string, bool) {
-	if o == nil || o.MsgType == nil {
+	if o == nil || IsNil(o.MsgType) {
 		return nil, false
 	}
 	return o.MsgType, true
@@ -130,7 +134,7 @@ func (o *ConnectorFileMessage) GetMsgTypeOk() (*string, bool) {
 
 // HasMsgType returns a boolean if a field has been set.
 func (o *ConnectorFileMessage) HasMsgType() bool {
-	if o != nil && o.MsgType != nil {
+	if o != nil && !IsNil(o.MsgType) {
 		return true
 	}
 
@@ -144,7 +148,7 @@ func (o *ConnectorFileMessage) SetMsgType(v string) {
 
 // GetPath returns the Path field value if set, zero value otherwise.
 func (o *ConnectorFileMessage) GetPath() string {
-	if o == nil || o.Path == nil {
+	if o == nil || IsNil(o.Path) {
 		var ret string
 		return ret
 	}
@@ -154,7 +158,7 @@ func (o *ConnectorFileMessage) GetPath() string {
 // GetPathOk returns a tuple with the Path field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ConnectorFileMessage) GetPathOk() (*string, bool) {
-	if o == nil || o.Path == nil {
+	if o == nil || IsNil(o.Path) {
 		return nil, false
 	}
 	return o.Path, true
@@ -162,7 +166,7 @@ func (o *ConnectorFileMessage) GetPathOk() (*string, bool) {
 
 // HasPath returns a boolean if a field has been set.
 func (o *ConnectorFileMessage) HasPath() bool {
-	if o != nil && o.Path != nil {
+	if o != nil && !IsNil(o.Path) {
 		return true
 	}
 
@@ -176,7 +180,7 @@ func (o *ConnectorFileMessage) SetPath(v string) {
 
 // GetStream returns the Stream field value if set, zero value otherwise.
 func (o *ConnectorFileMessage) GetStream() string {
-	if o == nil || o.Stream == nil {
+	if o == nil || IsNil(o.Stream) {
 		var ret string
 		return ret
 	}
@@ -186,7 +190,7 @@ func (o *ConnectorFileMessage) GetStream() string {
 // GetStreamOk returns a tuple with the Stream field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ConnectorFileMessage) GetStreamOk() (*string, bool) {
-	if o == nil || o.Stream == nil {
+	if o == nil || IsNil(o.Stream) {
 		return nil, false
 	}
 	return o.Stream, true
@@ -194,7 +198,7 @@ func (o *ConnectorFileMessage) GetStreamOk() (*string, bool) {
 
 // HasStream returns a boolean if a field has been set.
 func (o *ConnectorFileMessage) HasStream() bool {
-	if o != nil && o.Stream != nil {
+	if o != nil && !IsNil(o.Stream) {
 		return true
 	}
 
@@ -207,28 +211,32 @@ func (o *ConnectorFileMessage) SetStream(v string) {
 }
 
 func (o ConnectorFileMessage) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o ConnectorFileMessage) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedConnectorBaseMessage, errConnectorBaseMessage := json.Marshal(o.ConnectorBaseMessage)
 	if errConnectorBaseMessage != nil {
-		return []byte{}, errConnectorBaseMessage
+		return map[string]interface{}{}, errConnectorBaseMessage
 	}
 	errConnectorBaseMessage = json.Unmarshal([]byte(serializedConnectorBaseMessage), &toSerialize)
 	if errConnectorBaseMessage != nil {
-		return []byte{}, errConnectorBaseMessage
+		return map[string]interface{}{}, errConnectorBaseMessage
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.MsgType != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.MsgType) {
 		toSerialize["MsgType"] = o.MsgType
 	}
-	if o.Path != nil {
+	if !IsNil(o.Path) {
 		toSerialize["Path"] = o.Path
 	}
-	if o.Stream != nil {
+	if !IsNil(o.Stream) {
 		toSerialize["Stream"] = o.Stream
 	}
 
@@ -236,10 +244,32 @@ func (o ConnectorFileMessage) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *ConnectorFileMessage) UnmarshalJSON(bytes []byte) (err error) {
+func (o *ConnectorFileMessage) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type ConnectorFileMessageWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -255,7 +285,7 @@ func (o *ConnectorFileMessage) UnmarshalJSON(bytes []byte) (err error) {
 
 	varConnectorFileMessageWithoutEmbeddedStruct := ConnectorFileMessageWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varConnectorFileMessageWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varConnectorFileMessageWithoutEmbeddedStruct)
 	if err == nil {
 		varConnectorFileMessage := _ConnectorFileMessage{}
 		varConnectorFileMessage.ClassId = varConnectorFileMessageWithoutEmbeddedStruct.ClassId
@@ -270,7 +300,7 @@ func (o *ConnectorFileMessage) UnmarshalJSON(bytes []byte) (err error) {
 
 	varConnectorFileMessage := _ConnectorFileMessage{}
 
-	err = json.Unmarshal(bytes, &varConnectorFileMessage)
+	err = json.Unmarshal(data, &varConnectorFileMessage)
 	if err == nil {
 		o.ConnectorBaseMessage = varConnectorFileMessage.ConnectorBaseMessage
 	} else {
@@ -279,7 +309,7 @@ func (o *ConnectorFileMessage) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "MsgType")

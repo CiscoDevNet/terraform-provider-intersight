@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the VnicUsnicSettings type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &VnicUsnicSettings{}
 
 // VnicUsnicSettings User Space NIC Settings that enable low-latency and higher throughput by bypassing the kernel layer when sending/receiving packets.
 type VnicUsnicSettings struct {
@@ -112,7 +116,7 @@ func (o *VnicUsnicSettings) SetObjectType(v string) {
 
 // GetCos returns the Cos field value if set, zero value otherwise.
 func (o *VnicUsnicSettings) GetCos() int64 {
-	if o == nil || o.Cos == nil {
+	if o == nil || IsNil(o.Cos) {
 		var ret int64
 		return ret
 	}
@@ -122,7 +126,7 @@ func (o *VnicUsnicSettings) GetCos() int64 {
 // GetCosOk returns a tuple with the Cos field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VnicUsnicSettings) GetCosOk() (*int64, bool) {
-	if o == nil || o.Cos == nil {
+	if o == nil || IsNil(o.Cos) {
 		return nil, false
 	}
 	return o.Cos, true
@@ -130,7 +134,7 @@ func (o *VnicUsnicSettings) GetCosOk() (*int64, bool) {
 
 // HasCos returns a boolean if a field has been set.
 func (o *VnicUsnicSettings) HasCos() bool {
-	if o != nil && o.Cos != nil {
+	if o != nil && !IsNil(o.Cos) {
 		return true
 	}
 
@@ -144,7 +148,7 @@ func (o *VnicUsnicSettings) SetCos(v int64) {
 
 // GetCount returns the Count field value if set, zero value otherwise.
 func (o *VnicUsnicSettings) GetCount() int64 {
-	if o == nil || o.Count == nil {
+	if o == nil || IsNil(o.Count) {
 		var ret int64
 		return ret
 	}
@@ -154,7 +158,7 @@ func (o *VnicUsnicSettings) GetCount() int64 {
 // GetCountOk returns a tuple with the Count field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VnicUsnicSettings) GetCountOk() (*int64, bool) {
-	if o == nil || o.Count == nil {
+	if o == nil || IsNil(o.Count) {
 		return nil, false
 	}
 	return o.Count, true
@@ -162,7 +166,7 @@ func (o *VnicUsnicSettings) GetCountOk() (*int64, bool) {
 
 // HasCount returns a boolean if a field has been set.
 func (o *VnicUsnicSettings) HasCount() bool {
-	if o != nil && o.Count != nil {
+	if o != nil && !IsNil(o.Count) {
 		return true
 	}
 
@@ -176,7 +180,7 @@ func (o *VnicUsnicSettings) SetCount(v int64) {
 
 // GetUsnicAdapterPolicy returns the UsnicAdapterPolicy field value if set, zero value otherwise.
 func (o *VnicUsnicSettings) GetUsnicAdapterPolicy() string {
-	if o == nil || o.UsnicAdapterPolicy == nil {
+	if o == nil || IsNil(o.UsnicAdapterPolicy) {
 		var ret string
 		return ret
 	}
@@ -186,7 +190,7 @@ func (o *VnicUsnicSettings) GetUsnicAdapterPolicy() string {
 // GetUsnicAdapterPolicyOk returns a tuple with the UsnicAdapterPolicy field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VnicUsnicSettings) GetUsnicAdapterPolicyOk() (*string, bool) {
-	if o == nil || o.UsnicAdapterPolicy == nil {
+	if o == nil || IsNil(o.UsnicAdapterPolicy) {
 		return nil, false
 	}
 	return o.UsnicAdapterPolicy, true
@@ -194,7 +198,7 @@ func (o *VnicUsnicSettings) GetUsnicAdapterPolicyOk() (*string, bool) {
 
 // HasUsnicAdapterPolicy returns a boolean if a field has been set.
 func (o *VnicUsnicSettings) HasUsnicAdapterPolicy() bool {
-	if o != nil && o.UsnicAdapterPolicy != nil {
+	if o != nil && !IsNil(o.UsnicAdapterPolicy) {
 		return true
 	}
 
@@ -207,28 +211,32 @@ func (o *VnicUsnicSettings) SetUsnicAdapterPolicy(v string) {
 }
 
 func (o VnicUsnicSettings) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o VnicUsnicSettings) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
 	errMoBaseComplexType = json.Unmarshal([]byte(serializedMoBaseComplexType), &toSerialize)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Cos != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Cos) {
 		toSerialize["Cos"] = o.Cos
 	}
-	if o.Count != nil {
+	if !IsNil(o.Count) {
 		toSerialize["Count"] = o.Count
 	}
-	if o.UsnicAdapterPolicy != nil {
+	if !IsNil(o.UsnicAdapterPolicy) {
 		toSerialize["UsnicAdapterPolicy"] = o.UsnicAdapterPolicy
 	}
 
@@ -236,10 +244,32 @@ func (o VnicUsnicSettings) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *VnicUsnicSettings) UnmarshalJSON(bytes []byte) (err error) {
+func (o *VnicUsnicSettings) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type VnicUsnicSettingsWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -255,7 +285,7 @@ func (o *VnicUsnicSettings) UnmarshalJSON(bytes []byte) (err error) {
 
 	varVnicUsnicSettingsWithoutEmbeddedStruct := VnicUsnicSettingsWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varVnicUsnicSettingsWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varVnicUsnicSettingsWithoutEmbeddedStruct)
 	if err == nil {
 		varVnicUsnicSettings := _VnicUsnicSettings{}
 		varVnicUsnicSettings.ClassId = varVnicUsnicSettingsWithoutEmbeddedStruct.ClassId
@@ -270,7 +300,7 @@ func (o *VnicUsnicSettings) UnmarshalJSON(bytes []byte) (err error) {
 
 	varVnicUsnicSettings := _VnicUsnicSettings{}
 
-	err = json.Unmarshal(bytes, &varVnicUsnicSettings)
+	err = json.Unmarshal(data, &varVnicUsnicSettings)
 	if err == nil {
 		o.MoBaseComplexType = varVnicUsnicSettings.MoBaseComplexType
 	} else {
@@ -279,7 +309,7 @@ func (o *VnicUsnicSettings) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Cos")

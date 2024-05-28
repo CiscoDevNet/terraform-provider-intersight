@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the PowerControlState type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &PowerControlState{}
 
 // PowerControlState Managed object used to track chassis power capping information.
 type PowerControlState struct {
@@ -43,9 +47,9 @@ type PowerControlState struct {
 	// The status of power rebalancing mode of the chassis. If enabled, this mode allows the system to dynamically reallocate the power between servers depending on their power usage.  * `Enabled` - Set the value to Enabled. * `Disabled` - Set the value to Disabled.
 	PowerRebalancing *string `json:"PowerRebalancing,omitempty"`
 	// The status of power save mode of the chassis. If Enabled and the requested power budget is less than available power capacity,  the additional PSUs not required to comply with redundancy policy are placed in Power Save mode.  * `Enabled` - Set the value to Enabled. * `Disabled` - Set the value to Disabled.
-	PowerSaveMode        *string                              `json:"PowerSaveMode,omitempty"`
-	EquipmentChassis     *EquipmentChassisRelationship        `json:"EquipmentChassis,omitempty"`
-	RegisteredDevice     *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+	PowerSaveMode        *string                                     `json:"PowerSaveMode,omitempty"`
+	EquipmentChassis     NullableEquipmentChassisRelationship        `json:"EquipmentChassis,omitempty"`
+	RegisteredDevice     NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -124,7 +128,7 @@ func (o *PowerControlState) SetObjectType(v string) {
 
 // GetAllocatedPower returns the AllocatedPower field value if set, zero value otherwise.
 func (o *PowerControlState) GetAllocatedPower() int64 {
-	if o == nil || o.AllocatedPower == nil {
+	if o == nil || IsNil(o.AllocatedPower) {
 		var ret int64
 		return ret
 	}
@@ -134,7 +138,7 @@ func (o *PowerControlState) GetAllocatedPower() int64 {
 // GetAllocatedPowerOk returns a tuple with the AllocatedPower field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PowerControlState) GetAllocatedPowerOk() (*int64, bool) {
-	if o == nil || o.AllocatedPower == nil {
+	if o == nil || IsNil(o.AllocatedPower) {
 		return nil, false
 	}
 	return o.AllocatedPower, true
@@ -142,7 +146,7 @@ func (o *PowerControlState) GetAllocatedPowerOk() (*int64, bool) {
 
 // HasAllocatedPower returns a boolean if a field has been set.
 func (o *PowerControlState) HasAllocatedPower() bool {
-	if o != nil && o.AllocatedPower != nil {
+	if o != nil && !IsNil(o.AllocatedPower) {
 		return true
 	}
 
@@ -156,7 +160,7 @@ func (o *PowerControlState) SetAllocatedPower(v int64) {
 
 // GetExtendedPowerCapacity returns the ExtendedPowerCapacity field value if set, zero value otherwise.
 func (o *PowerControlState) GetExtendedPowerCapacity() string {
-	if o == nil || o.ExtendedPowerCapacity == nil {
+	if o == nil || IsNil(o.ExtendedPowerCapacity) {
 		var ret string
 		return ret
 	}
@@ -166,7 +170,7 @@ func (o *PowerControlState) GetExtendedPowerCapacity() string {
 // GetExtendedPowerCapacityOk returns a tuple with the ExtendedPowerCapacity field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PowerControlState) GetExtendedPowerCapacityOk() (*string, bool) {
-	if o == nil || o.ExtendedPowerCapacity == nil {
+	if o == nil || IsNil(o.ExtendedPowerCapacity) {
 		return nil, false
 	}
 	return o.ExtendedPowerCapacity, true
@@ -174,7 +178,7 @@ func (o *PowerControlState) GetExtendedPowerCapacityOk() (*string, bool) {
 
 // HasExtendedPowerCapacity returns a boolean if a field has been set.
 func (o *PowerControlState) HasExtendedPowerCapacity() bool {
-	if o != nil && o.ExtendedPowerCapacity != nil {
+	if o != nil && !IsNil(o.ExtendedPowerCapacity) {
 		return true
 	}
 
@@ -188,7 +192,7 @@ func (o *PowerControlState) SetExtendedPowerCapacity(v string) {
 
 // GetGridMaxPower returns the GridMaxPower field value if set, zero value otherwise.
 func (o *PowerControlState) GetGridMaxPower() int64 {
-	if o == nil || o.GridMaxPower == nil {
+	if o == nil || IsNil(o.GridMaxPower) {
 		var ret int64
 		return ret
 	}
@@ -198,7 +202,7 @@ func (o *PowerControlState) GetGridMaxPower() int64 {
 // GetGridMaxPowerOk returns a tuple with the GridMaxPower field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PowerControlState) GetGridMaxPowerOk() (*int64, bool) {
-	if o == nil || o.GridMaxPower == nil {
+	if o == nil || IsNil(o.GridMaxPower) {
 		return nil, false
 	}
 	return o.GridMaxPower, true
@@ -206,7 +210,7 @@ func (o *PowerControlState) GetGridMaxPowerOk() (*int64, bool) {
 
 // HasGridMaxPower returns a boolean if a field has been set.
 func (o *PowerControlState) HasGridMaxPower() bool {
-	if o != nil && o.GridMaxPower != nil {
+	if o != nil && !IsNil(o.GridMaxPower) {
 		return true
 	}
 
@@ -220,7 +224,7 @@ func (o *PowerControlState) SetGridMaxPower(v int64) {
 
 // GetMaxRequiredPower returns the MaxRequiredPower field value if set, zero value otherwise.
 func (o *PowerControlState) GetMaxRequiredPower() int64 {
-	if o == nil || o.MaxRequiredPower == nil {
+	if o == nil || IsNil(o.MaxRequiredPower) {
 		var ret int64
 		return ret
 	}
@@ -230,7 +234,7 @@ func (o *PowerControlState) GetMaxRequiredPower() int64 {
 // GetMaxRequiredPowerOk returns a tuple with the MaxRequiredPower field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PowerControlState) GetMaxRequiredPowerOk() (*int64, bool) {
-	if o == nil || o.MaxRequiredPower == nil {
+	if o == nil || IsNil(o.MaxRequiredPower) {
 		return nil, false
 	}
 	return o.MaxRequiredPower, true
@@ -238,7 +242,7 @@ func (o *PowerControlState) GetMaxRequiredPowerOk() (*int64, bool) {
 
 // HasMaxRequiredPower returns a boolean if a field has been set.
 func (o *PowerControlState) HasMaxRequiredPower() bool {
-	if o != nil && o.MaxRequiredPower != nil {
+	if o != nil && !IsNil(o.MaxRequiredPower) {
 		return true
 	}
 
@@ -252,7 +256,7 @@ func (o *PowerControlState) SetMaxRequiredPower(v int64) {
 
 // GetMinRequiredPower returns the MinRequiredPower field value if set, zero value otherwise.
 func (o *PowerControlState) GetMinRequiredPower() int64 {
-	if o == nil || o.MinRequiredPower == nil {
+	if o == nil || IsNil(o.MinRequiredPower) {
 		var ret int64
 		return ret
 	}
@@ -262,7 +266,7 @@ func (o *PowerControlState) GetMinRequiredPower() int64 {
 // GetMinRequiredPowerOk returns a tuple with the MinRequiredPower field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PowerControlState) GetMinRequiredPowerOk() (*int64, bool) {
-	if o == nil || o.MinRequiredPower == nil {
+	if o == nil || IsNil(o.MinRequiredPower) {
 		return nil, false
 	}
 	return o.MinRequiredPower, true
@@ -270,7 +274,7 @@ func (o *PowerControlState) GetMinRequiredPowerOk() (*int64, bool) {
 
 // HasMinRequiredPower returns a boolean if a field has been set.
 func (o *PowerControlState) HasMinRequiredPower() bool {
-	if o != nil && o.MinRequiredPower != nil {
+	if o != nil && !IsNil(o.MinRequiredPower) {
 		return true
 	}
 
@@ -284,7 +288,7 @@ func (o *PowerControlState) SetMinRequiredPower(v int64) {
 
 // GetN1MaxPower returns the N1MaxPower field value if set, zero value otherwise.
 func (o *PowerControlState) GetN1MaxPower() int64 {
-	if o == nil || o.N1MaxPower == nil {
+	if o == nil || IsNil(o.N1MaxPower) {
 		var ret int64
 		return ret
 	}
@@ -294,7 +298,7 @@ func (o *PowerControlState) GetN1MaxPower() int64 {
 // GetN1MaxPowerOk returns a tuple with the N1MaxPower field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PowerControlState) GetN1MaxPowerOk() (*int64, bool) {
-	if o == nil || o.N1MaxPower == nil {
+	if o == nil || IsNil(o.N1MaxPower) {
 		return nil, false
 	}
 	return o.N1MaxPower, true
@@ -302,7 +306,7 @@ func (o *PowerControlState) GetN1MaxPowerOk() (*int64, bool) {
 
 // HasN1MaxPower returns a boolean if a field has been set.
 func (o *PowerControlState) HasN1MaxPower() bool {
-	if o != nil && o.N1MaxPower != nil {
+	if o != nil && !IsNil(o.N1MaxPower) {
 		return true
 	}
 
@@ -316,7 +320,7 @@ func (o *PowerControlState) SetN1MaxPower(v int64) {
 
 // GetN2MaxPower returns the N2MaxPower field value if set, zero value otherwise.
 func (o *PowerControlState) GetN2MaxPower() int64 {
-	if o == nil || o.N2MaxPower == nil {
+	if o == nil || IsNil(o.N2MaxPower) {
 		var ret int64
 		return ret
 	}
@@ -326,7 +330,7 @@ func (o *PowerControlState) GetN2MaxPower() int64 {
 // GetN2MaxPowerOk returns a tuple with the N2MaxPower field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PowerControlState) GetN2MaxPowerOk() (*int64, bool) {
-	if o == nil || o.N2MaxPower == nil {
+	if o == nil || IsNil(o.N2MaxPower) {
 		return nil, false
 	}
 	return o.N2MaxPower, true
@@ -334,7 +338,7 @@ func (o *PowerControlState) GetN2MaxPowerOk() (*int64, bool) {
 
 // HasN2MaxPower returns a boolean if a field has been set.
 func (o *PowerControlState) HasN2MaxPower() bool {
-	if o != nil && o.N2MaxPower != nil {
+	if o != nil && !IsNil(o.N2MaxPower) {
 		return true
 	}
 
@@ -348,7 +352,7 @@ func (o *PowerControlState) SetN2MaxPower(v int64) {
 
 // GetNonRedundantMaxPower returns the NonRedundantMaxPower field value if set, zero value otherwise.
 func (o *PowerControlState) GetNonRedundantMaxPower() int64 {
-	if o == nil || o.NonRedundantMaxPower == nil {
+	if o == nil || IsNil(o.NonRedundantMaxPower) {
 		var ret int64
 		return ret
 	}
@@ -358,7 +362,7 @@ func (o *PowerControlState) GetNonRedundantMaxPower() int64 {
 // GetNonRedundantMaxPowerOk returns a tuple with the NonRedundantMaxPower field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PowerControlState) GetNonRedundantMaxPowerOk() (*int64, bool) {
-	if o == nil || o.NonRedundantMaxPower == nil {
+	if o == nil || IsNil(o.NonRedundantMaxPower) {
 		return nil, false
 	}
 	return o.NonRedundantMaxPower, true
@@ -366,7 +370,7 @@ func (o *PowerControlState) GetNonRedundantMaxPowerOk() (*int64, bool) {
 
 // HasNonRedundantMaxPower returns a boolean if a field has been set.
 func (o *PowerControlState) HasNonRedundantMaxPower() bool {
-	if o != nil && o.NonRedundantMaxPower != nil {
+	if o != nil && !IsNil(o.NonRedundantMaxPower) {
 		return true
 	}
 
@@ -380,7 +384,7 @@ func (o *PowerControlState) SetNonRedundantMaxPower(v int64) {
 
 // GetPowerRebalancing returns the PowerRebalancing field value if set, zero value otherwise.
 func (o *PowerControlState) GetPowerRebalancing() string {
-	if o == nil || o.PowerRebalancing == nil {
+	if o == nil || IsNil(o.PowerRebalancing) {
 		var ret string
 		return ret
 	}
@@ -390,7 +394,7 @@ func (o *PowerControlState) GetPowerRebalancing() string {
 // GetPowerRebalancingOk returns a tuple with the PowerRebalancing field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PowerControlState) GetPowerRebalancingOk() (*string, bool) {
-	if o == nil || o.PowerRebalancing == nil {
+	if o == nil || IsNil(o.PowerRebalancing) {
 		return nil, false
 	}
 	return o.PowerRebalancing, true
@@ -398,7 +402,7 @@ func (o *PowerControlState) GetPowerRebalancingOk() (*string, bool) {
 
 // HasPowerRebalancing returns a boolean if a field has been set.
 func (o *PowerControlState) HasPowerRebalancing() bool {
-	if o != nil && o.PowerRebalancing != nil {
+	if o != nil && !IsNil(o.PowerRebalancing) {
 		return true
 	}
 
@@ -412,7 +416,7 @@ func (o *PowerControlState) SetPowerRebalancing(v string) {
 
 // GetPowerSaveMode returns the PowerSaveMode field value if set, zero value otherwise.
 func (o *PowerControlState) GetPowerSaveMode() string {
-	if o == nil || o.PowerSaveMode == nil {
+	if o == nil || IsNil(o.PowerSaveMode) {
 		var ret string
 		return ret
 	}
@@ -422,7 +426,7 @@ func (o *PowerControlState) GetPowerSaveMode() string {
 // GetPowerSaveModeOk returns a tuple with the PowerSaveMode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PowerControlState) GetPowerSaveModeOk() (*string, bool) {
-	if o == nil || o.PowerSaveMode == nil {
+	if o == nil || IsNil(o.PowerSaveMode) {
 		return nil, false
 	}
 	return o.PowerSaveMode, true
@@ -430,7 +434,7 @@ func (o *PowerControlState) GetPowerSaveModeOk() (*string, bool) {
 
 // HasPowerSaveMode returns a boolean if a field has been set.
 func (o *PowerControlState) HasPowerSaveMode() bool {
-	if o != nil && o.PowerSaveMode != nil {
+	if o != nil && !IsNil(o.PowerSaveMode) {
 		return true
 	}
 
@@ -442,131 +446,179 @@ func (o *PowerControlState) SetPowerSaveMode(v string) {
 	o.PowerSaveMode = &v
 }
 
-// GetEquipmentChassis returns the EquipmentChassis field value if set, zero value otherwise.
+// GetEquipmentChassis returns the EquipmentChassis field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *PowerControlState) GetEquipmentChassis() EquipmentChassisRelationship {
-	if o == nil || o.EquipmentChassis == nil {
+	if o == nil || IsNil(o.EquipmentChassis.Get()) {
 		var ret EquipmentChassisRelationship
 		return ret
 	}
-	return *o.EquipmentChassis
+	return *o.EquipmentChassis.Get()
 }
 
 // GetEquipmentChassisOk returns a tuple with the EquipmentChassis field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *PowerControlState) GetEquipmentChassisOk() (*EquipmentChassisRelationship, bool) {
-	if o == nil || o.EquipmentChassis == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.EquipmentChassis, true
+	return o.EquipmentChassis.Get(), o.EquipmentChassis.IsSet()
 }
 
 // HasEquipmentChassis returns a boolean if a field has been set.
 func (o *PowerControlState) HasEquipmentChassis() bool {
-	if o != nil && o.EquipmentChassis != nil {
+	if o != nil && o.EquipmentChassis.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetEquipmentChassis gets a reference to the given EquipmentChassisRelationship and assigns it to the EquipmentChassis field.
+// SetEquipmentChassis gets a reference to the given NullableEquipmentChassisRelationship and assigns it to the EquipmentChassis field.
 func (o *PowerControlState) SetEquipmentChassis(v EquipmentChassisRelationship) {
-	o.EquipmentChassis = &v
+	o.EquipmentChassis.Set(&v)
 }
 
-// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise.
+// SetEquipmentChassisNil sets the value for EquipmentChassis to be an explicit nil
+func (o *PowerControlState) SetEquipmentChassisNil() {
+	o.EquipmentChassis.Set(nil)
+}
+
+// UnsetEquipmentChassis ensures that no value is present for EquipmentChassis, not even an explicit nil
+func (o *PowerControlState) UnsetEquipmentChassis() {
+	o.EquipmentChassis.Unset()
+}
+
+// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *PowerControlState) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil || IsNil(o.RegisteredDevice.Get()) {
 		var ret AssetDeviceRegistrationRelationship
 		return ret
 	}
-	return *o.RegisteredDevice
+	return *o.RegisteredDevice.Get()
 }
 
 // GetRegisteredDeviceOk returns a tuple with the RegisteredDevice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *PowerControlState) GetRegisteredDeviceOk() (*AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.RegisteredDevice, true
+	return o.RegisteredDevice.Get(), o.RegisteredDevice.IsSet()
 }
 
 // HasRegisteredDevice returns a boolean if a field has been set.
 func (o *PowerControlState) HasRegisteredDevice() bool {
-	if o != nil && o.RegisteredDevice != nil {
+	if o != nil && o.RegisteredDevice.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRegisteredDevice gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
+// SetRegisteredDevice gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
 func (o *PowerControlState) SetRegisteredDevice(v AssetDeviceRegistrationRelationship) {
-	o.RegisteredDevice = &v
+	o.RegisteredDevice.Set(&v)
+}
+
+// SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+func (o *PowerControlState) SetRegisteredDeviceNil() {
+	o.RegisteredDevice.Set(nil)
+}
+
+// UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
+func (o *PowerControlState) UnsetRegisteredDevice() {
+	o.RegisteredDevice.Unset()
 }
 
 func (o PowerControlState) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o PowerControlState) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.AllocatedPower != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.AllocatedPower) {
 		toSerialize["AllocatedPower"] = o.AllocatedPower
 	}
-	if o.ExtendedPowerCapacity != nil {
+	if !IsNil(o.ExtendedPowerCapacity) {
 		toSerialize["ExtendedPowerCapacity"] = o.ExtendedPowerCapacity
 	}
-	if o.GridMaxPower != nil {
+	if !IsNil(o.GridMaxPower) {
 		toSerialize["GridMaxPower"] = o.GridMaxPower
 	}
-	if o.MaxRequiredPower != nil {
+	if !IsNil(o.MaxRequiredPower) {
 		toSerialize["MaxRequiredPower"] = o.MaxRequiredPower
 	}
-	if o.MinRequiredPower != nil {
+	if !IsNil(o.MinRequiredPower) {
 		toSerialize["MinRequiredPower"] = o.MinRequiredPower
 	}
-	if o.N1MaxPower != nil {
+	if !IsNil(o.N1MaxPower) {
 		toSerialize["N1MaxPower"] = o.N1MaxPower
 	}
-	if o.N2MaxPower != nil {
+	if !IsNil(o.N2MaxPower) {
 		toSerialize["N2MaxPower"] = o.N2MaxPower
 	}
-	if o.NonRedundantMaxPower != nil {
+	if !IsNil(o.NonRedundantMaxPower) {
 		toSerialize["NonRedundantMaxPower"] = o.NonRedundantMaxPower
 	}
-	if o.PowerRebalancing != nil {
+	if !IsNil(o.PowerRebalancing) {
 		toSerialize["PowerRebalancing"] = o.PowerRebalancing
 	}
-	if o.PowerSaveMode != nil {
+	if !IsNil(o.PowerSaveMode) {
 		toSerialize["PowerSaveMode"] = o.PowerSaveMode
 	}
-	if o.EquipmentChassis != nil {
-		toSerialize["EquipmentChassis"] = o.EquipmentChassis
+	if o.EquipmentChassis.IsSet() {
+		toSerialize["EquipmentChassis"] = o.EquipmentChassis.Get()
 	}
-	if o.RegisteredDevice != nil {
-		toSerialize["RegisteredDevice"] = o.RegisteredDevice
+	if o.RegisteredDevice.IsSet() {
+		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *PowerControlState) UnmarshalJSON(bytes []byte) (err error) {
+func (o *PowerControlState) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type PowerControlStateWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -591,14 +643,14 @@ func (o *PowerControlState) UnmarshalJSON(bytes []byte) (err error) {
 		// The status of power rebalancing mode of the chassis. If enabled, this mode allows the system to dynamically reallocate the power between servers depending on their power usage.  * `Enabled` - Set the value to Enabled. * `Disabled` - Set the value to Disabled.
 		PowerRebalancing *string `json:"PowerRebalancing,omitempty"`
 		// The status of power save mode of the chassis. If Enabled and the requested power budget is less than available power capacity,  the additional PSUs not required to comply with redundancy policy are placed in Power Save mode.  * `Enabled` - Set the value to Enabled. * `Disabled` - Set the value to Disabled.
-		PowerSaveMode    *string                              `json:"PowerSaveMode,omitempty"`
-		EquipmentChassis *EquipmentChassisRelationship        `json:"EquipmentChassis,omitempty"`
-		RegisteredDevice *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+		PowerSaveMode    *string                                     `json:"PowerSaveMode,omitempty"`
+		EquipmentChassis NullableEquipmentChassisRelationship        `json:"EquipmentChassis,omitempty"`
+		RegisteredDevice NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	}
 
 	varPowerControlStateWithoutEmbeddedStruct := PowerControlStateWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varPowerControlStateWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varPowerControlStateWithoutEmbeddedStruct)
 	if err == nil {
 		varPowerControlState := _PowerControlState{}
 		varPowerControlState.ClassId = varPowerControlStateWithoutEmbeddedStruct.ClassId
@@ -622,7 +674,7 @@ func (o *PowerControlState) UnmarshalJSON(bytes []byte) (err error) {
 
 	varPowerControlState := _PowerControlState{}
 
-	err = json.Unmarshal(bytes, &varPowerControlState)
+	err = json.Unmarshal(data, &varPowerControlState)
 	if err == nil {
 		o.MoBaseMo = varPowerControlState.MoBaseMo
 	} else {
@@ -631,7 +683,7 @@ func (o *PowerControlState) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "AllocatedPower")

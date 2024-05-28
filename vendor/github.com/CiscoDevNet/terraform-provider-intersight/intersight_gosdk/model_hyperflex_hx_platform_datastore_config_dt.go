@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the HyperflexHxPlatformDatastoreConfigDt type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &HyperflexHxPlatformDatastoreConfigDt{}
 
 // HyperflexHxPlatformDatastoreConfigDt Platform datastore configuration.
 type HyperflexHxPlatformDatastoreConfigDt struct {
@@ -116,7 +120,7 @@ func (o *HyperflexHxPlatformDatastoreConfigDt) SetObjectType(v string) {
 
 // GetDataBlockSize returns the DataBlockSize field value if set, zero value otherwise.
 func (o *HyperflexHxPlatformDatastoreConfigDt) GetDataBlockSize() int64 {
-	if o == nil || o.DataBlockSize == nil {
+	if o == nil || IsNil(o.DataBlockSize) {
 		var ret int64
 		return ret
 	}
@@ -126,7 +130,7 @@ func (o *HyperflexHxPlatformDatastoreConfigDt) GetDataBlockSize() int64 {
 // GetDataBlockSizeOk returns a tuple with the DataBlockSize field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexHxPlatformDatastoreConfigDt) GetDataBlockSizeOk() (*int64, bool) {
-	if o == nil || o.DataBlockSize == nil {
+	if o == nil || IsNil(o.DataBlockSize) {
 		return nil, false
 	}
 	return o.DataBlockSize, true
@@ -134,7 +138,7 @@ func (o *HyperflexHxPlatformDatastoreConfigDt) GetDataBlockSizeOk() (*int64, boo
 
 // HasDataBlockSize returns a boolean if a field has been set.
 func (o *HyperflexHxPlatformDatastoreConfigDt) HasDataBlockSize() bool {
-	if o != nil && o.DataBlockSize != nil {
+	if o != nil && !IsNil(o.DataBlockSize) {
 		return true
 	}
 
@@ -148,7 +152,7 @@ func (o *HyperflexHxPlatformDatastoreConfigDt) SetDataBlockSize(v int64) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *HyperflexHxPlatformDatastoreConfigDt) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -158,7 +162,7 @@ func (o *HyperflexHxPlatformDatastoreConfigDt) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexHxPlatformDatastoreConfigDt) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -166,7 +170,7 @@ func (o *HyperflexHxPlatformDatastoreConfigDt) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *HyperflexHxPlatformDatastoreConfigDt) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -180,7 +184,7 @@ func (o *HyperflexHxPlatformDatastoreConfigDt) SetName(v string) {
 
 // GetNumMirrors returns the NumMirrors field value if set, zero value otherwise.
 func (o *HyperflexHxPlatformDatastoreConfigDt) GetNumMirrors() int64 {
-	if o == nil || o.NumMirrors == nil {
+	if o == nil || IsNil(o.NumMirrors) {
 		var ret int64
 		return ret
 	}
@@ -190,7 +194,7 @@ func (o *HyperflexHxPlatformDatastoreConfigDt) GetNumMirrors() int64 {
 // GetNumMirrorsOk returns a tuple with the NumMirrors field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexHxPlatformDatastoreConfigDt) GetNumMirrorsOk() (*int64, bool) {
-	if o == nil || o.NumMirrors == nil {
+	if o == nil || IsNil(o.NumMirrors) {
 		return nil, false
 	}
 	return o.NumMirrors, true
@@ -198,7 +202,7 @@ func (o *HyperflexHxPlatformDatastoreConfigDt) GetNumMirrorsOk() (*int64, bool) 
 
 // HasNumMirrors returns a boolean if a field has been set.
 func (o *HyperflexHxPlatformDatastoreConfigDt) HasNumMirrors() bool {
-	if o != nil && o.NumMirrors != nil {
+	if o != nil && !IsNil(o.NumMirrors) {
 		return true
 	}
 
@@ -212,7 +216,7 @@ func (o *HyperflexHxPlatformDatastoreConfigDt) SetNumMirrors(v int64) {
 
 // GetNumStripesForLargeFiles returns the NumStripesForLargeFiles field value if set, zero value otherwise.
 func (o *HyperflexHxPlatformDatastoreConfigDt) GetNumStripesForLargeFiles() int64 {
-	if o == nil || o.NumStripesForLargeFiles == nil {
+	if o == nil || IsNil(o.NumStripesForLargeFiles) {
 		var ret int64
 		return ret
 	}
@@ -222,7 +226,7 @@ func (o *HyperflexHxPlatformDatastoreConfigDt) GetNumStripesForLargeFiles() int6
 // GetNumStripesForLargeFilesOk returns a tuple with the NumStripesForLargeFiles field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexHxPlatformDatastoreConfigDt) GetNumStripesForLargeFilesOk() (*int64, bool) {
-	if o == nil || o.NumStripesForLargeFiles == nil {
+	if o == nil || IsNil(o.NumStripesForLargeFiles) {
 		return nil, false
 	}
 	return o.NumStripesForLargeFiles, true
@@ -230,7 +234,7 @@ func (o *HyperflexHxPlatformDatastoreConfigDt) GetNumStripesForLargeFilesOk() (*
 
 // HasNumStripesForLargeFiles returns a boolean if a field has been set.
 func (o *HyperflexHxPlatformDatastoreConfigDt) HasNumStripesForLargeFiles() bool {
-	if o != nil && o.NumStripesForLargeFiles != nil {
+	if o != nil && !IsNil(o.NumStripesForLargeFiles) {
 		return true
 	}
 
@@ -244,7 +248,7 @@ func (o *HyperflexHxPlatformDatastoreConfigDt) SetNumStripesForLargeFiles(v int6
 
 // GetProvisionedCapacity returns the ProvisionedCapacity field value if set, zero value otherwise.
 func (o *HyperflexHxPlatformDatastoreConfigDt) GetProvisionedCapacity() int64 {
-	if o == nil || o.ProvisionedCapacity == nil {
+	if o == nil || IsNil(o.ProvisionedCapacity) {
 		var ret int64
 		return ret
 	}
@@ -254,7 +258,7 @@ func (o *HyperflexHxPlatformDatastoreConfigDt) GetProvisionedCapacity() int64 {
 // GetProvisionedCapacityOk returns a tuple with the ProvisionedCapacity field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexHxPlatformDatastoreConfigDt) GetProvisionedCapacityOk() (*int64, bool) {
-	if o == nil || o.ProvisionedCapacity == nil {
+	if o == nil || IsNil(o.ProvisionedCapacity) {
 		return nil, false
 	}
 	return o.ProvisionedCapacity, true
@@ -262,7 +266,7 @@ func (o *HyperflexHxPlatformDatastoreConfigDt) GetProvisionedCapacityOk() (*int6
 
 // HasProvisionedCapacity returns a boolean if a field has been set.
 func (o *HyperflexHxPlatformDatastoreConfigDt) HasProvisionedCapacity() bool {
-	if o != nil && o.ProvisionedCapacity != nil {
+	if o != nil && !IsNil(o.ProvisionedCapacity) {
 		return true
 	}
 
@@ -276,7 +280,7 @@ func (o *HyperflexHxPlatformDatastoreConfigDt) SetProvisionedCapacity(v int64) {
 
 // GetSystemDatastore returns the SystemDatastore field value if set, zero value otherwise.
 func (o *HyperflexHxPlatformDatastoreConfigDt) GetSystemDatastore() bool {
-	if o == nil || o.SystemDatastore == nil {
+	if o == nil || IsNil(o.SystemDatastore) {
 		var ret bool
 		return ret
 	}
@@ -286,7 +290,7 @@ func (o *HyperflexHxPlatformDatastoreConfigDt) GetSystemDatastore() bool {
 // GetSystemDatastoreOk returns a tuple with the SystemDatastore field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexHxPlatformDatastoreConfigDt) GetSystemDatastoreOk() (*bool, bool) {
-	if o == nil || o.SystemDatastore == nil {
+	if o == nil || IsNil(o.SystemDatastore) {
 		return nil, false
 	}
 	return o.SystemDatastore, true
@@ -294,7 +298,7 @@ func (o *HyperflexHxPlatformDatastoreConfigDt) GetSystemDatastoreOk() (*bool, bo
 
 // HasSystemDatastore returns a boolean if a field has been set.
 func (o *HyperflexHxPlatformDatastoreConfigDt) HasSystemDatastore() bool {
-	if o != nil && o.SystemDatastore != nil {
+	if o != nil && !IsNil(o.SystemDatastore) {
 		return true
 	}
 
@@ -308,7 +312,7 @@ func (o *HyperflexHxPlatformDatastoreConfigDt) SetSystemDatastore(v bool) {
 
 // GetUsageType returns the UsageType field value if set, zero value otherwise.
 func (o *HyperflexHxPlatformDatastoreConfigDt) GetUsageType() string {
-	if o == nil || o.UsageType == nil {
+	if o == nil || IsNil(o.UsageType) {
 		var ret string
 		return ret
 	}
@@ -318,7 +322,7 @@ func (o *HyperflexHxPlatformDatastoreConfigDt) GetUsageType() string {
 // GetUsageTypeOk returns a tuple with the UsageType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexHxPlatformDatastoreConfigDt) GetUsageTypeOk() (*string, bool) {
-	if o == nil || o.UsageType == nil {
+	if o == nil || IsNil(o.UsageType) {
 		return nil, false
 	}
 	return o.UsageType, true
@@ -326,7 +330,7 @@ func (o *HyperflexHxPlatformDatastoreConfigDt) GetUsageTypeOk() (*string, bool) 
 
 // HasUsageType returns a boolean if a field has been set.
 func (o *HyperflexHxPlatformDatastoreConfigDt) HasUsageType() bool {
-	if o != nil && o.UsageType != nil {
+	if o != nil && !IsNil(o.UsageType) {
 		return true
 	}
 
@@ -339,40 +343,44 @@ func (o *HyperflexHxPlatformDatastoreConfigDt) SetUsageType(v string) {
 }
 
 func (o HyperflexHxPlatformDatastoreConfigDt) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o HyperflexHxPlatformDatastoreConfigDt) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
 	errMoBaseComplexType = json.Unmarshal([]byte(serializedMoBaseComplexType), &toSerialize)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.DataBlockSize != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.DataBlockSize) {
 		toSerialize["DataBlockSize"] = o.DataBlockSize
 	}
-	if o.Name != nil {
+	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
 	}
-	if o.NumMirrors != nil {
+	if !IsNil(o.NumMirrors) {
 		toSerialize["NumMirrors"] = o.NumMirrors
 	}
-	if o.NumStripesForLargeFiles != nil {
+	if !IsNil(o.NumStripesForLargeFiles) {
 		toSerialize["NumStripesForLargeFiles"] = o.NumStripesForLargeFiles
 	}
-	if o.ProvisionedCapacity != nil {
+	if !IsNil(o.ProvisionedCapacity) {
 		toSerialize["ProvisionedCapacity"] = o.ProvisionedCapacity
 	}
-	if o.SystemDatastore != nil {
+	if !IsNil(o.SystemDatastore) {
 		toSerialize["SystemDatastore"] = o.SystemDatastore
 	}
-	if o.UsageType != nil {
+	if !IsNil(o.UsageType) {
 		toSerialize["UsageType"] = o.UsageType
 	}
 
@@ -380,10 +388,32 @@ func (o HyperflexHxPlatformDatastoreConfigDt) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *HyperflexHxPlatformDatastoreConfigDt) UnmarshalJSON(bytes []byte) (err error) {
+func (o *HyperflexHxPlatformDatastoreConfigDt) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type HyperflexHxPlatformDatastoreConfigDtWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -407,7 +437,7 @@ func (o *HyperflexHxPlatformDatastoreConfigDt) UnmarshalJSON(bytes []byte) (err 
 
 	varHyperflexHxPlatformDatastoreConfigDtWithoutEmbeddedStruct := HyperflexHxPlatformDatastoreConfigDtWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varHyperflexHxPlatformDatastoreConfigDtWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varHyperflexHxPlatformDatastoreConfigDtWithoutEmbeddedStruct)
 	if err == nil {
 		varHyperflexHxPlatformDatastoreConfigDt := _HyperflexHxPlatformDatastoreConfigDt{}
 		varHyperflexHxPlatformDatastoreConfigDt.ClassId = varHyperflexHxPlatformDatastoreConfigDtWithoutEmbeddedStruct.ClassId
@@ -426,7 +456,7 @@ func (o *HyperflexHxPlatformDatastoreConfigDt) UnmarshalJSON(bytes []byte) (err 
 
 	varHyperflexHxPlatformDatastoreConfigDt := _HyperflexHxPlatformDatastoreConfigDt{}
 
-	err = json.Unmarshal(bytes, &varHyperflexHxPlatformDatastoreConfigDt)
+	err = json.Unmarshal(data, &varHyperflexHxPlatformDatastoreConfigDt)
 	if err == nil {
 		o.MoBaseComplexType = varHyperflexHxPlatformDatastoreConfigDt.MoBaseComplexType
 	} else {
@@ -435,7 +465,7 @@ func (o *HyperflexHxPlatformDatastoreConfigDt) UnmarshalJSON(bytes []byte) (err 
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "DataBlockSize")

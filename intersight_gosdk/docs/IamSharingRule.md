@@ -6,9 +6,9 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "iam.SharingRule"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "iam.SharingRule"]
-**Account** | Pointer to [**IamAccountRelationship**](IamAccountRelationship.md) |  | [optional] 
-**SharedResource** | Pointer to [**MoBaseMoRelationship**](MoBaseMoRelationship.md) |  | [optional] 
-**SharedWithResource** | Pointer to [**MoBaseMoRelationship**](MoBaseMoRelationship.md) |  | [optional] 
+**Account** | Pointer to [**NullableIamAccountRelationship**](IamAccountRelationship.md) |  | [optional] 
+**SharedResource** | Pointer to [**NullableMoBaseMoRelationship**](MoBaseMoRelationship.md) |  | [optional] 
+**SharedWithResource** | Pointer to [**NullableMoBaseMoRelationship**](MoBaseMoRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -94,6 +94,16 @@ SetAccount sets Account field to given value.
 
 HasAccount returns a boolean if a field has been set.
 
+### SetAccountNil
+
+`func (o *IamSharingRule) SetAccountNil(b bool)`
+
+ SetAccountNil sets the value for Account to be an explicit nil
+
+### UnsetAccount
+`func (o *IamSharingRule) UnsetAccount()`
+
+UnsetAccount ensures that no value is present for Account, not even an explicit nil
 ### GetSharedResource
 
 `func (o *IamSharingRule) GetSharedResource() MoBaseMoRelationship`
@@ -119,6 +129,16 @@ SetSharedResource sets SharedResource field to given value.
 
 HasSharedResource returns a boolean if a field has been set.
 
+### SetSharedResourceNil
+
+`func (o *IamSharingRule) SetSharedResourceNil(b bool)`
+
+ SetSharedResourceNil sets the value for SharedResource to be an explicit nil
+
+### UnsetSharedResource
+`func (o *IamSharingRule) UnsetSharedResource()`
+
+UnsetSharedResource ensures that no value is present for SharedResource, not even an explicit nil
 ### GetSharedWithResource
 
 `func (o *IamSharingRule) GetSharedWithResource() MoBaseMoRelationship`
@@ -144,6 +164,16 @@ SetSharedWithResource sets SharedWithResource field to given value.
 
 HasSharedWithResource returns a boolean if a field has been set.
 
+### SetSharedWithResourceNil
+
+`func (o *IamSharingRule) SetSharedWithResourceNil(b bool)`
+
+ SetSharedWithResourceNil sets the value for SharedWithResource to be an explicit nil
+
+### UnsetSharedWithResource
+`func (o *IamSharingRule) UnsetSharedWithResource()`
+
+UnsetSharedWithResource ensures that no value is present for SharedWithResource, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the KubernetesStatefulSet type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &KubernetesStatefulSet{}
 
 // KubernetesStatefulSet StatefulSet is the workload API object used to manage stateful applications. It manages the deployment and scaling of a set of Pods, and provides guarantees about the ordering and uniqueness of these Pods.
 type KubernetesStatefulSet struct {
@@ -23,9 +27,9 @@ type KubernetesStatefulSet struct {
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
-	ObjectType           string                               `json:"ObjectType"`
-	Status               NullableKubernetesStatefulSetStatus  `json:"Status,omitempty"`
-	RegisteredDevice     *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+	ObjectType           string                                      `json:"ObjectType"`
+	Status               NullableKubernetesStatefulSetStatus         `json:"Status,omitempty"`
+	RegisteredDevice     NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -104,7 +108,7 @@ func (o *KubernetesStatefulSet) SetObjectType(v string) {
 
 // GetStatus returns the Status field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *KubernetesStatefulSet) GetStatus() KubernetesStatefulSetStatus {
-	if o == nil || o.Status.Get() == nil {
+	if o == nil || IsNil(o.Status.Get()) {
 		var ret KubernetesStatefulSetStatus
 		return ret
 	}
@@ -145,81 +149,118 @@ func (o *KubernetesStatefulSet) UnsetStatus() {
 	o.Status.Unset()
 }
 
-// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise.
+// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *KubernetesStatefulSet) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil || IsNil(o.RegisteredDevice.Get()) {
 		var ret AssetDeviceRegistrationRelationship
 		return ret
 	}
-	return *o.RegisteredDevice
+	return *o.RegisteredDevice.Get()
 }
 
 // GetRegisteredDeviceOk returns a tuple with the RegisteredDevice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *KubernetesStatefulSet) GetRegisteredDeviceOk() (*AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.RegisteredDevice, true
+	return o.RegisteredDevice.Get(), o.RegisteredDevice.IsSet()
 }
 
 // HasRegisteredDevice returns a boolean if a field has been set.
 func (o *KubernetesStatefulSet) HasRegisteredDevice() bool {
-	if o != nil && o.RegisteredDevice != nil {
+	if o != nil && o.RegisteredDevice.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRegisteredDevice gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
+// SetRegisteredDevice gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
 func (o *KubernetesStatefulSet) SetRegisteredDevice(v AssetDeviceRegistrationRelationship) {
-	o.RegisteredDevice = &v
+	o.RegisteredDevice.Set(&v)
+}
+
+// SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+func (o *KubernetesStatefulSet) SetRegisteredDeviceNil() {
+	o.RegisteredDevice.Set(nil)
+}
+
+// UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
+func (o *KubernetesStatefulSet) UnsetRegisteredDevice() {
+	o.RegisteredDevice.Unset()
 }
 
 func (o KubernetesStatefulSet) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o KubernetesStatefulSet) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedKubernetesAbstractStatefulSet, errKubernetesAbstractStatefulSet := json.Marshal(o.KubernetesAbstractStatefulSet)
 	if errKubernetesAbstractStatefulSet != nil {
-		return []byte{}, errKubernetesAbstractStatefulSet
+		return map[string]interface{}{}, errKubernetesAbstractStatefulSet
 	}
 	errKubernetesAbstractStatefulSet = json.Unmarshal([]byte(serializedKubernetesAbstractStatefulSet), &toSerialize)
 	if errKubernetesAbstractStatefulSet != nil {
-		return []byte{}, errKubernetesAbstractStatefulSet
+		return map[string]interface{}{}, errKubernetesAbstractStatefulSet
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
 	if o.Status.IsSet() {
 		toSerialize["Status"] = o.Status.Get()
 	}
-	if o.RegisteredDevice != nil {
-		toSerialize["RegisteredDevice"] = o.RegisteredDevice
+	if o.RegisteredDevice.IsSet() {
+		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *KubernetesStatefulSet) UnmarshalJSON(bytes []byte) (err error) {
+func (o *KubernetesStatefulSet) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type KubernetesStatefulSetWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
-		ObjectType       string                               `json:"ObjectType"`
-		Status           NullableKubernetesStatefulSetStatus  `json:"Status,omitempty"`
-		RegisteredDevice *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+		ObjectType       string                                      `json:"ObjectType"`
+		Status           NullableKubernetesStatefulSetStatus         `json:"Status,omitempty"`
+		RegisteredDevice NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	}
 
 	varKubernetesStatefulSetWithoutEmbeddedStruct := KubernetesStatefulSetWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varKubernetesStatefulSetWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varKubernetesStatefulSetWithoutEmbeddedStruct)
 	if err == nil {
 		varKubernetesStatefulSet := _KubernetesStatefulSet{}
 		varKubernetesStatefulSet.ClassId = varKubernetesStatefulSetWithoutEmbeddedStruct.ClassId
@@ -233,7 +274,7 @@ func (o *KubernetesStatefulSet) UnmarshalJSON(bytes []byte) (err error) {
 
 	varKubernetesStatefulSet := _KubernetesStatefulSet{}
 
-	err = json.Unmarshal(bytes, &varKubernetesStatefulSet)
+	err = json.Unmarshal(data, &varKubernetesStatefulSet)
 	if err == nil {
 		o.KubernetesAbstractStatefulSet = varKubernetesStatefulSet.KubernetesAbstractStatefulSet
 	} else {
@@ -242,7 +283,7 @@ func (o *KubernetesStatefulSet) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Status")

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the StorageNetAppEthernetPortLag type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &StorageNetAppEthernetPortLag{}
 
 // StorageNetAppEthernetPortLag Storage port of type lag.
 type StorageNetAppEthernetPortLag struct {
@@ -119,7 +123,7 @@ func (o *StorageNetAppEthernetPortLag) GetActivePorts() []StorageNetAppPort {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StorageNetAppEthernetPortLag) GetActivePortsOk() ([]StorageNetAppPort, bool) {
-	if o == nil || o.ActivePorts == nil {
+	if o == nil || IsNil(o.ActivePorts) {
 		return nil, false
 	}
 	return o.ActivePorts, true
@@ -127,7 +131,7 @@ func (o *StorageNetAppEthernetPortLag) GetActivePortsOk() ([]StorageNetAppPort, 
 
 // HasActivePorts returns a boolean if a field has been set.
 func (o *StorageNetAppEthernetPortLag) HasActivePorts() bool {
-	if o != nil && o.ActivePorts != nil {
+	if o != nil && IsNil(o.ActivePorts) {
 		return true
 	}
 
@@ -141,7 +145,7 @@ func (o *StorageNetAppEthernetPortLag) SetActivePorts(v []StorageNetAppPort) {
 
 // GetDistributionPolicy returns the DistributionPolicy field value if set, zero value otherwise.
 func (o *StorageNetAppEthernetPortLag) GetDistributionPolicy() string {
-	if o == nil || o.DistributionPolicy == nil {
+	if o == nil || IsNil(o.DistributionPolicy) {
 		var ret string
 		return ret
 	}
@@ -151,7 +155,7 @@ func (o *StorageNetAppEthernetPortLag) GetDistributionPolicy() string {
 // GetDistributionPolicyOk returns a tuple with the DistributionPolicy field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppEthernetPortLag) GetDistributionPolicyOk() (*string, bool) {
-	if o == nil || o.DistributionPolicy == nil {
+	if o == nil || IsNil(o.DistributionPolicy) {
 		return nil, false
 	}
 	return o.DistributionPolicy, true
@@ -159,7 +163,7 @@ func (o *StorageNetAppEthernetPortLag) GetDistributionPolicyOk() (*string, bool)
 
 // HasDistributionPolicy returns a boolean if a field has been set.
 func (o *StorageNetAppEthernetPortLag) HasDistributionPolicy() bool {
-	if o != nil && o.DistributionPolicy != nil {
+	if o != nil && !IsNil(o.DistributionPolicy) {
 		return true
 	}
 
@@ -184,7 +188,7 @@ func (o *StorageNetAppEthernetPortLag) GetMemberPorts() []StorageNetAppPort {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StorageNetAppEthernetPortLag) GetMemberPortsOk() ([]StorageNetAppPort, bool) {
-	if o == nil || o.MemberPorts == nil {
+	if o == nil || IsNil(o.MemberPorts) {
 		return nil, false
 	}
 	return o.MemberPorts, true
@@ -192,7 +196,7 @@ func (o *StorageNetAppEthernetPortLag) GetMemberPortsOk() ([]StorageNetAppPort, 
 
 // HasMemberPorts returns a boolean if a field has been set.
 func (o *StorageNetAppEthernetPortLag) HasMemberPorts() bool {
-	if o != nil && o.MemberPorts != nil {
+	if o != nil && IsNil(o.MemberPorts) {
 		return true
 	}
 
@@ -206,7 +210,7 @@ func (o *StorageNetAppEthernetPortLag) SetMemberPorts(v []StorageNetAppPort) {
 
 // GetMode returns the Mode field value if set, zero value otherwise.
 func (o *StorageNetAppEthernetPortLag) GetMode() string {
-	if o == nil || o.Mode == nil {
+	if o == nil || IsNil(o.Mode) {
 		var ret string
 		return ret
 	}
@@ -216,7 +220,7 @@ func (o *StorageNetAppEthernetPortLag) GetMode() string {
 // GetModeOk returns a tuple with the Mode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppEthernetPortLag) GetModeOk() (*string, bool) {
-	if o == nil || o.Mode == nil {
+	if o == nil || IsNil(o.Mode) {
 		return nil, false
 	}
 	return o.Mode, true
@@ -224,7 +228,7 @@ func (o *StorageNetAppEthernetPortLag) GetModeOk() (*string, bool) {
 
 // HasMode returns a boolean if a field has been set.
 func (o *StorageNetAppEthernetPortLag) HasMode() bool {
-	if o != nil && o.Mode != nil {
+	if o != nil && !IsNil(o.Mode) {
 		return true
 	}
 
@@ -237,31 +241,35 @@ func (o *StorageNetAppEthernetPortLag) SetMode(v string) {
 }
 
 func (o StorageNetAppEthernetPortLag) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o StorageNetAppEthernetPortLag) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
 	errMoBaseComplexType = json.Unmarshal([]byte(serializedMoBaseComplexType), &toSerialize)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
 	if o.ActivePorts != nil {
 		toSerialize["ActivePorts"] = o.ActivePorts
 	}
-	if o.DistributionPolicy != nil {
+	if !IsNil(o.DistributionPolicy) {
 		toSerialize["DistributionPolicy"] = o.DistributionPolicy
 	}
 	if o.MemberPorts != nil {
 		toSerialize["MemberPorts"] = o.MemberPorts
 	}
-	if o.Mode != nil {
+	if !IsNil(o.Mode) {
 		toSerialize["Mode"] = o.Mode
 	}
 
@@ -269,10 +277,32 @@ func (o StorageNetAppEthernetPortLag) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *StorageNetAppEthernetPortLag) UnmarshalJSON(bytes []byte) (err error) {
+func (o *StorageNetAppEthernetPortLag) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type StorageNetAppEthernetPortLagWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -288,7 +318,7 @@ func (o *StorageNetAppEthernetPortLag) UnmarshalJSON(bytes []byte) (err error) {
 
 	varStorageNetAppEthernetPortLagWithoutEmbeddedStruct := StorageNetAppEthernetPortLagWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varStorageNetAppEthernetPortLagWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varStorageNetAppEthernetPortLagWithoutEmbeddedStruct)
 	if err == nil {
 		varStorageNetAppEthernetPortLag := _StorageNetAppEthernetPortLag{}
 		varStorageNetAppEthernetPortLag.ClassId = varStorageNetAppEthernetPortLagWithoutEmbeddedStruct.ClassId
@@ -304,7 +334,7 @@ func (o *StorageNetAppEthernetPortLag) UnmarshalJSON(bytes []byte) (err error) {
 
 	varStorageNetAppEthernetPortLag := _StorageNetAppEthernetPortLag{}
 
-	err = json.Unmarshal(bytes, &varStorageNetAppEthernetPortLag)
+	err = json.Unmarshal(data, &varStorageNetAppEthernetPortLag)
 	if err == nil {
 		o.MoBaseComplexType = varStorageNetAppEthernetPortLag.MoBaseComplexType
 	} else {
@@ -313,7 +343,7 @@ func (o *StorageNetAppEthernetPortLag) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "ActivePorts")

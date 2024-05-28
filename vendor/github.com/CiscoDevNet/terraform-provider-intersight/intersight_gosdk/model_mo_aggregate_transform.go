@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the MoAggregateTransform type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &MoAggregateTransform{}
 
 // MoAggregateTransform The output of a request that includes the $apply query parameter. The schema of an aggregation query is dynamically determined based on the request query parameters.  See https://intersight.com/apidocs/introduction/query/#apply-query-option for more details.
 type MoAggregateTransform struct {
@@ -58,7 +62,7 @@ func (o *MoAggregateTransform) GetResults() []map[string]interface{} {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *MoAggregateTransform) GetResultsOk() ([]map[string]interface{}, bool) {
-	if o == nil || o.Results == nil {
+	if o == nil || IsNil(o.Results) {
 		return nil, false
 	}
 	return o.Results, true
@@ -66,7 +70,7 @@ func (o *MoAggregateTransform) GetResultsOk() ([]map[string]interface{}, bool) {
 
 // HasResults returns a boolean if a field has been set.
 func (o *MoAggregateTransform) HasResults() bool {
-	if o != nil && o.Results != nil {
+	if o != nil && IsNil(o.Results) {
 		return true
 	}
 
@@ -79,14 +83,22 @@ func (o *MoAggregateTransform) SetResults(v []map[string]interface{}) {
 }
 
 func (o MoAggregateTransform) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o MoAggregateTransform) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseResponse, errMoBaseResponse := json.Marshal(o.MoBaseResponse)
 	if errMoBaseResponse != nil {
-		return []byte{}, errMoBaseResponse
+		return map[string]interface{}{}, errMoBaseResponse
 	}
 	errMoBaseResponse = json.Unmarshal([]byte(serializedMoBaseResponse), &toSerialize)
 	if errMoBaseResponse != nil {
-		return []byte{}, errMoBaseResponse
+		return map[string]interface{}{}, errMoBaseResponse
 	}
 	if o.Results != nil {
 		toSerialize["Results"] = o.Results
@@ -96,10 +108,31 @@ func (o MoAggregateTransform) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *MoAggregateTransform) UnmarshalJSON(bytes []byte) (err error) {
+func (o *MoAggregateTransform) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type MoAggregateTransformWithoutEmbeddedStruct struct {
 		// The results of the aggregation query.
 		Results []map[string]interface{} `json:"Results,omitempty"`
@@ -107,7 +140,7 @@ func (o *MoAggregateTransform) UnmarshalJSON(bytes []byte) (err error) {
 
 	varMoAggregateTransformWithoutEmbeddedStruct := MoAggregateTransformWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varMoAggregateTransformWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varMoAggregateTransformWithoutEmbeddedStruct)
 	if err == nil {
 		varMoAggregateTransform := _MoAggregateTransform{}
 		varMoAggregateTransform.Results = varMoAggregateTransformWithoutEmbeddedStruct.Results
@@ -118,7 +151,7 @@ func (o *MoAggregateTransform) UnmarshalJSON(bytes []byte) (err error) {
 
 	varMoAggregateTransform := _MoAggregateTransform{}
 
-	err = json.Unmarshal(bytes, &varMoAggregateTransform)
+	err = json.Unmarshal(data, &varMoAggregateTransform)
 	if err == nil {
 		o.MoBaseResponse = varMoAggregateTransform.MoBaseResponse
 	} else {
@@ -127,7 +160,7 @@ func (o *MoAggregateTransform) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "Results")
 
 		// remove fields from embedded structs

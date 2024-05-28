@@ -6,12 +6,12 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "resource.SharedResourcesInfoHolder"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "resource.SharedResourcesInfoHolder"]
-**Account** | Pointer to [**IamAccountRelationship**](IamAccountRelationship.md) |  | [optional] 
+**Account** | Pointer to [**NullableIamAccountRelationship**](IamAccountRelationship.md) |  | [optional] 
 **PeerObjects** | Pointer to [**[]MoBaseMoRelationship**](MoBaseMoRelationship.md) | An array of relationships to moBaseMo resources. | [optional] [readonly] 
-**SharedResource** | Pointer to [**MoBaseMoRelationship**](MoBaseMoRelationship.md) |  | [optional] 
-**SharedWithResource** | Pointer to [**MoBaseMoRelationship**](MoBaseMoRelationship.md) |  | [optional] 
-**SharingRule** | Pointer to [**IamSharingRuleRelationship**](IamSharingRuleRelationship.md) |  | [optional] 
-**SourceObject** | Pointer to [**MoBaseMoRelationship**](MoBaseMoRelationship.md) |  | [optional] 
+**SharedResource** | Pointer to [**NullableMoBaseMoRelationship**](MoBaseMoRelationship.md) |  | [optional] 
+**SharedWithResource** | Pointer to [**NullableMoBaseMoRelationship**](MoBaseMoRelationship.md) |  | [optional] 
+**SharingRule** | Pointer to [**NullableIamSharingRuleRelationship**](IamSharingRuleRelationship.md) |  | [optional] 
+**SourceObject** | Pointer to [**NullableMoBaseMoRelationship**](MoBaseMoRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -97,6 +97,16 @@ SetAccount sets Account field to given value.
 
 HasAccount returns a boolean if a field has been set.
 
+### SetAccountNil
+
+`func (o *ResourceSharedResourcesInfoHolder) SetAccountNil(b bool)`
+
+ SetAccountNil sets the value for Account to be an explicit nil
+
+### UnsetAccount
+`func (o *ResourceSharedResourcesInfoHolder) UnsetAccount()`
+
+UnsetAccount ensures that no value is present for Account, not even an explicit nil
 ### GetPeerObjects
 
 `func (o *ResourceSharedResourcesInfoHolder) GetPeerObjects() []MoBaseMoRelationship`
@@ -157,6 +167,16 @@ SetSharedResource sets SharedResource field to given value.
 
 HasSharedResource returns a boolean if a field has been set.
 
+### SetSharedResourceNil
+
+`func (o *ResourceSharedResourcesInfoHolder) SetSharedResourceNil(b bool)`
+
+ SetSharedResourceNil sets the value for SharedResource to be an explicit nil
+
+### UnsetSharedResource
+`func (o *ResourceSharedResourcesInfoHolder) UnsetSharedResource()`
+
+UnsetSharedResource ensures that no value is present for SharedResource, not even an explicit nil
 ### GetSharedWithResource
 
 `func (o *ResourceSharedResourcesInfoHolder) GetSharedWithResource() MoBaseMoRelationship`
@@ -182,6 +202,16 @@ SetSharedWithResource sets SharedWithResource field to given value.
 
 HasSharedWithResource returns a boolean if a field has been set.
 
+### SetSharedWithResourceNil
+
+`func (o *ResourceSharedResourcesInfoHolder) SetSharedWithResourceNil(b bool)`
+
+ SetSharedWithResourceNil sets the value for SharedWithResource to be an explicit nil
+
+### UnsetSharedWithResource
+`func (o *ResourceSharedResourcesInfoHolder) UnsetSharedWithResource()`
+
+UnsetSharedWithResource ensures that no value is present for SharedWithResource, not even an explicit nil
 ### GetSharingRule
 
 `func (o *ResourceSharedResourcesInfoHolder) GetSharingRule() IamSharingRuleRelationship`
@@ -207,6 +237,16 @@ SetSharingRule sets SharingRule field to given value.
 
 HasSharingRule returns a boolean if a field has been set.
 
+### SetSharingRuleNil
+
+`func (o *ResourceSharedResourcesInfoHolder) SetSharingRuleNil(b bool)`
+
+ SetSharingRuleNil sets the value for SharingRule to be an explicit nil
+
+### UnsetSharingRule
+`func (o *ResourceSharedResourcesInfoHolder) UnsetSharingRule()`
+
+UnsetSharingRule ensures that no value is present for SharingRule, not even an explicit nil
 ### GetSourceObject
 
 `func (o *ResourceSharedResourcesInfoHolder) GetSourceObject() MoBaseMoRelationship`
@@ -232,6 +272,16 @@ SetSourceObject sets SourceObject field to given value.
 
 HasSourceObject returns a boolean if a field has been set.
 
+### SetSourceObjectNil
+
+`func (o *ResourceSharedResourcesInfoHolder) SetSourceObjectNil(b bool)`
+
+ SetSourceObjectNil sets the value for SourceObject to be an explicit nil
+
+### UnsetSourceObject
+`func (o *ResourceSharedResourcesInfoHolder) UnsetSourceObject()`
+
+UnsetSourceObject ensures that no value is present for SourceObject, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

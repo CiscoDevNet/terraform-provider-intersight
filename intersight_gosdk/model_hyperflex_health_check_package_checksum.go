@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,10 +13,14 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 	"time"
 )
+
+// checks if the HyperflexHealthCheckPackageChecksum type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &HyperflexHealthCheckPackageChecksum{}
 
 // HyperflexHealthCheckPackageChecksum HyperFlex health check Debian Package SHA512 checksum.
 type HyperflexHealthCheckPackageChecksum struct {
@@ -113,7 +117,7 @@ func (o *HyperflexHealthCheckPackageChecksum) SetObjectType(v string) {
 
 // GetChecksum returns the Checksum field value if set, zero value otherwise.
 func (o *HyperflexHealthCheckPackageChecksum) GetChecksum() string {
-	if o == nil || o.Checksum == nil {
+	if o == nil || IsNil(o.Checksum) {
 		var ret string
 		return ret
 	}
@@ -123,7 +127,7 @@ func (o *HyperflexHealthCheckPackageChecksum) GetChecksum() string {
 // GetChecksumOk returns a tuple with the Checksum field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexHealthCheckPackageChecksum) GetChecksumOk() (*string, bool) {
-	if o == nil || o.Checksum == nil {
+	if o == nil || IsNil(o.Checksum) {
 		return nil, false
 	}
 	return o.Checksum, true
@@ -131,7 +135,7 @@ func (o *HyperflexHealthCheckPackageChecksum) GetChecksumOk() (*string, bool) {
 
 // HasChecksum returns a boolean if a field has been set.
 func (o *HyperflexHealthCheckPackageChecksum) HasChecksum() bool {
-	if o != nil && o.Checksum != nil {
+	if o != nil && !IsNil(o.Checksum) {
 		return true
 	}
 
@@ -145,7 +149,7 @@ func (o *HyperflexHealthCheckPackageChecksum) SetChecksum(v string) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *HyperflexHealthCheckPackageChecksum) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -155,7 +159,7 @@ func (o *HyperflexHealthCheckPackageChecksum) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexHealthCheckPackageChecksum) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -163,7 +167,7 @@ func (o *HyperflexHealthCheckPackageChecksum) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *HyperflexHealthCheckPackageChecksum) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -177,7 +181,7 @@ func (o *HyperflexHealthCheckPackageChecksum) SetName(v string) {
 
 // GetPackageName returns the PackageName field value if set, zero value otherwise.
 func (o *HyperflexHealthCheckPackageChecksum) GetPackageName() string {
-	if o == nil || o.PackageName == nil {
+	if o == nil || IsNil(o.PackageName) {
 		var ret string
 		return ret
 	}
@@ -187,7 +191,7 @@ func (o *HyperflexHealthCheckPackageChecksum) GetPackageName() string {
 // GetPackageNameOk returns a tuple with the PackageName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexHealthCheckPackageChecksum) GetPackageNameOk() (*string, bool) {
-	if o == nil || o.PackageName == nil {
+	if o == nil || IsNil(o.PackageName) {
 		return nil, false
 	}
 	return o.PackageName, true
@@ -195,7 +199,7 @@ func (o *HyperflexHealthCheckPackageChecksum) GetPackageNameOk() (*string, bool)
 
 // HasPackageName returns a boolean if a field has been set.
 func (o *HyperflexHealthCheckPackageChecksum) HasPackageName() bool {
-	if o != nil && o.PackageName != nil {
+	if o != nil && !IsNil(o.PackageName) {
 		return true
 	}
 
@@ -209,7 +213,7 @@ func (o *HyperflexHealthCheckPackageChecksum) SetPackageName(v string) {
 
 // GetTimestamp returns the Timestamp field value if set, zero value otherwise.
 func (o *HyperflexHealthCheckPackageChecksum) GetTimestamp() time.Time {
-	if o == nil || o.Timestamp == nil {
+	if o == nil || IsNil(o.Timestamp) {
 		var ret time.Time
 		return ret
 	}
@@ -219,7 +223,7 @@ func (o *HyperflexHealthCheckPackageChecksum) GetTimestamp() time.Time {
 // GetTimestampOk returns a tuple with the Timestamp field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexHealthCheckPackageChecksum) GetTimestampOk() (*time.Time, bool) {
-	if o == nil || o.Timestamp == nil {
+	if o == nil || IsNil(o.Timestamp) {
 		return nil, false
 	}
 	return o.Timestamp, true
@@ -227,7 +231,7 @@ func (o *HyperflexHealthCheckPackageChecksum) GetTimestampOk() (*time.Time, bool
 
 // HasTimestamp returns a boolean if a field has been set.
 func (o *HyperflexHealthCheckPackageChecksum) HasTimestamp() bool {
-	if o != nil && o.Timestamp != nil {
+	if o != nil && !IsNil(o.Timestamp) {
 		return true
 	}
 
@@ -241,7 +245,7 @@ func (o *HyperflexHealthCheckPackageChecksum) SetTimestamp(v time.Time) {
 
 // GetVersion returns the Version field value if set, zero value otherwise.
 func (o *HyperflexHealthCheckPackageChecksum) GetVersion() string {
-	if o == nil || o.Version == nil {
+	if o == nil || IsNil(o.Version) {
 		var ret string
 		return ret
 	}
@@ -251,7 +255,7 @@ func (o *HyperflexHealthCheckPackageChecksum) GetVersion() string {
 // GetVersionOk returns a tuple with the Version field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexHealthCheckPackageChecksum) GetVersionOk() (*string, bool) {
-	if o == nil || o.Version == nil {
+	if o == nil || IsNil(o.Version) {
 		return nil, false
 	}
 	return o.Version, true
@@ -259,7 +263,7 @@ func (o *HyperflexHealthCheckPackageChecksum) GetVersionOk() (*string, bool) {
 
 // HasVersion returns a boolean if a field has been set.
 func (o *HyperflexHealthCheckPackageChecksum) HasVersion() bool {
-	if o != nil && o.Version != nil {
+	if o != nil && !IsNil(o.Version) {
 		return true
 	}
 
@@ -272,34 +276,38 @@ func (o *HyperflexHealthCheckPackageChecksum) SetVersion(v string) {
 }
 
 func (o HyperflexHealthCheckPackageChecksum) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o HyperflexHealthCheckPackageChecksum) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Checksum != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Checksum) {
 		toSerialize["Checksum"] = o.Checksum
 	}
-	if o.Name != nil {
+	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
 	}
-	if o.PackageName != nil {
+	if !IsNil(o.PackageName) {
 		toSerialize["PackageName"] = o.PackageName
 	}
-	if o.Timestamp != nil {
+	if !IsNil(o.Timestamp) {
 		toSerialize["Timestamp"] = o.Timestamp
 	}
-	if o.Version != nil {
+	if !IsNil(o.Version) {
 		toSerialize["Version"] = o.Version
 	}
 
@@ -307,10 +315,32 @@ func (o HyperflexHealthCheckPackageChecksum) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *HyperflexHealthCheckPackageChecksum) UnmarshalJSON(bytes []byte) (err error) {
+func (o *HyperflexHealthCheckPackageChecksum) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type HyperflexHealthCheckPackageChecksumWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -330,7 +360,7 @@ func (o *HyperflexHealthCheckPackageChecksum) UnmarshalJSON(bytes []byte) (err e
 
 	varHyperflexHealthCheckPackageChecksumWithoutEmbeddedStruct := HyperflexHealthCheckPackageChecksumWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varHyperflexHealthCheckPackageChecksumWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varHyperflexHealthCheckPackageChecksumWithoutEmbeddedStruct)
 	if err == nil {
 		varHyperflexHealthCheckPackageChecksum := _HyperflexHealthCheckPackageChecksum{}
 		varHyperflexHealthCheckPackageChecksum.ClassId = varHyperflexHealthCheckPackageChecksumWithoutEmbeddedStruct.ClassId
@@ -347,7 +377,7 @@ func (o *HyperflexHealthCheckPackageChecksum) UnmarshalJSON(bytes []byte) (err e
 
 	varHyperflexHealthCheckPackageChecksum := _HyperflexHealthCheckPackageChecksum{}
 
-	err = json.Unmarshal(bytes, &varHyperflexHealthCheckPackageChecksum)
+	err = json.Unmarshal(data, &varHyperflexHealthCheckPackageChecksum)
 	if err == nil {
 		o.MoBaseMo = varHyperflexHealthCheckPackageChecksum.MoBaseMo
 	} else {
@@ -356,7 +386,7 @@ func (o *HyperflexHealthCheckPackageChecksum) UnmarshalJSON(bytes []byte) (err e
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Checksum")

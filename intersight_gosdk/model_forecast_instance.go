@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,10 +13,14 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 	"time"
 )
+
+// checks if the ForecastInstance type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ForecastInstance{}
 
 // ForecastInstance Entity representing forecast result for instance of managed object, ie, data source.
 type ForecastInstance struct {
@@ -44,9 +48,9 @@ type ForecastInstance struct {
 	MinDaysForForecast *int64                `json:"MinDaysForForecast,omitempty"`
 	Model              NullableForecastModel `json:"Model,omitempty"`
 	// The number of days remaining before the device reaches the specified threshold for the metric as defined in definition.
-	ThresholdDays        *int64                               `json:"ThresholdDays,omitempty"`
-	ForecastDef          *ForecastDefinitionRelationship      `json:"ForecastDef,omitempty"`
-	RegisteredDevice     *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+	ThresholdDays        *int64                                      `json:"ThresholdDays,omitempty"`
+	ForecastDef          NullableForecastDefinitionRelationship      `json:"ForecastDef,omitempty"`
+	RegisteredDevice     NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -133,7 +137,7 @@ func (o *ForecastInstance) SetObjectType(v string) {
 
 // GetAction returns the Action field value if set, zero value otherwise.
 func (o *ForecastInstance) GetAction() string {
-	if o == nil || o.Action == nil {
+	if o == nil || IsNil(o.Action) {
 		var ret string
 		return ret
 	}
@@ -143,7 +147,7 @@ func (o *ForecastInstance) GetAction() string {
 // GetActionOk returns a tuple with the Action field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ForecastInstance) GetActionOk() (*string, bool) {
-	if o == nil || o.Action == nil {
+	if o == nil || IsNil(o.Action) {
 		return nil, false
 	}
 	return o.Action, true
@@ -151,7 +155,7 @@ func (o *ForecastInstance) GetActionOk() (*string, bool) {
 
 // HasAction returns a boolean if a field has been set.
 func (o *ForecastInstance) HasAction() bool {
-	if o != nil && o.Action != nil {
+	if o != nil && !IsNil(o.Action) {
 		return true
 	}
 
@@ -176,7 +180,7 @@ func (o *ForecastInstance) GetAltModel() []float32 {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ForecastInstance) GetAltModelOk() ([]float32, bool) {
-	if o == nil || o.AltModel == nil {
+	if o == nil || IsNil(o.AltModel) {
 		return nil, false
 	}
 	return o.AltModel, true
@@ -184,7 +188,7 @@ func (o *ForecastInstance) GetAltModelOk() ([]float32, bool) {
 
 // HasAltModel returns a boolean if a field has been set.
 func (o *ForecastInstance) HasAltModel() bool {
-	if o != nil && o.AltModel != nil {
+	if o != nil && IsNil(o.AltModel) {
 		return true
 	}
 
@@ -198,7 +202,7 @@ func (o *ForecastInstance) SetAltModel(v []float32) {
 
 // GetDataInterval returns the DataInterval field value if set, zero value otherwise.
 func (o *ForecastInstance) GetDataInterval() int64 {
-	if o == nil || o.DataInterval == nil {
+	if o == nil || IsNil(o.DataInterval) {
 		var ret int64
 		return ret
 	}
@@ -208,7 +212,7 @@ func (o *ForecastInstance) GetDataInterval() int64 {
 // GetDataIntervalOk returns a tuple with the DataInterval field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ForecastInstance) GetDataIntervalOk() (*int64, bool) {
-	if o == nil || o.DataInterval == nil {
+	if o == nil || IsNil(o.DataInterval) {
 		return nil, false
 	}
 	return o.DataInterval, true
@@ -216,7 +220,7 @@ func (o *ForecastInstance) GetDataIntervalOk() (*int64, bool) {
 
 // HasDataInterval returns a boolean if a field has been set.
 func (o *ForecastInstance) HasDataInterval() bool {
-	if o != nil && o.DataInterval != nil {
+	if o != nil && !IsNil(o.DataInterval) {
 		return true
 	}
 
@@ -230,7 +234,7 @@ func (o *ForecastInstance) SetDataInterval(v int64) {
 
 // GetDataStartDate returns the DataStartDate field value if set, zero value otherwise.
 func (o *ForecastInstance) GetDataStartDate() time.Time {
-	if o == nil || o.DataStartDate == nil {
+	if o == nil || IsNil(o.DataStartDate) {
 		var ret time.Time
 		return ret
 	}
@@ -240,7 +244,7 @@ func (o *ForecastInstance) GetDataStartDate() time.Time {
 // GetDataStartDateOk returns a tuple with the DataStartDate field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ForecastInstance) GetDataStartDateOk() (*time.Time, bool) {
-	if o == nil || o.DataStartDate == nil {
+	if o == nil || IsNil(o.DataStartDate) {
 		return nil, false
 	}
 	return o.DataStartDate, true
@@ -248,7 +252,7 @@ func (o *ForecastInstance) GetDataStartDateOk() (*time.Time, bool) {
 
 // HasDataStartDate returns a boolean if a field has been set.
 func (o *ForecastInstance) HasDataStartDate() bool {
-	if o != nil && o.DataStartDate != nil {
+	if o != nil && !IsNil(o.DataStartDate) {
 		return true
 	}
 
@@ -262,7 +266,7 @@ func (o *ForecastInstance) SetDataStartDate(v time.Time) {
 
 // GetDeviceId returns the DeviceId field value if set, zero value otherwise.
 func (o *ForecastInstance) GetDeviceId() string {
-	if o == nil || o.DeviceId == nil {
+	if o == nil || IsNil(o.DeviceId) {
 		var ret string
 		return ret
 	}
@@ -272,7 +276,7 @@ func (o *ForecastInstance) GetDeviceId() string {
 // GetDeviceIdOk returns a tuple with the DeviceId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ForecastInstance) GetDeviceIdOk() (*string, bool) {
-	if o == nil || o.DeviceId == nil {
+	if o == nil || IsNil(o.DeviceId) {
 		return nil, false
 	}
 	return o.DeviceId, true
@@ -280,7 +284,7 @@ func (o *ForecastInstance) GetDeviceIdOk() (*string, bool) {
 
 // HasDeviceId returns a boolean if a field has been set.
 func (o *ForecastInstance) HasDeviceId() bool {
-	if o != nil && o.DeviceId != nil {
+	if o != nil && !IsNil(o.DeviceId) {
 		return true
 	}
 
@@ -294,7 +298,7 @@ func (o *ForecastInstance) SetDeviceId(v string) {
 
 // GetFullCapDays returns the FullCapDays field value if set, zero value otherwise.
 func (o *ForecastInstance) GetFullCapDays() int64 {
-	if o == nil || o.FullCapDays == nil {
+	if o == nil || IsNil(o.FullCapDays) {
 		var ret int64
 		return ret
 	}
@@ -304,7 +308,7 @@ func (o *ForecastInstance) GetFullCapDays() int64 {
 // GetFullCapDaysOk returns a tuple with the FullCapDays field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ForecastInstance) GetFullCapDaysOk() (*int64, bool) {
-	if o == nil || o.FullCapDays == nil {
+	if o == nil || IsNil(o.FullCapDays) {
 		return nil, false
 	}
 	return o.FullCapDays, true
@@ -312,7 +316,7 @@ func (o *ForecastInstance) GetFullCapDaysOk() (*int64, bool) {
 
 // HasFullCapDays returns a boolean if a field has been set.
 func (o *ForecastInstance) HasFullCapDays() bool {
-	if o != nil && o.FullCapDays != nil {
+	if o != nil && !IsNil(o.FullCapDays) {
 		return true
 	}
 
@@ -326,7 +330,7 @@ func (o *ForecastInstance) SetFullCapDays(v int64) {
 
 // GetLastModelUpdateTime returns the LastModelUpdateTime field value if set, zero value otherwise.
 func (o *ForecastInstance) GetLastModelUpdateTime() time.Time {
-	if o == nil || o.LastModelUpdateTime == nil {
+	if o == nil || IsNil(o.LastModelUpdateTime) {
 		var ret time.Time
 		return ret
 	}
@@ -336,7 +340,7 @@ func (o *ForecastInstance) GetLastModelUpdateTime() time.Time {
 // GetLastModelUpdateTimeOk returns a tuple with the LastModelUpdateTime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ForecastInstance) GetLastModelUpdateTimeOk() (*time.Time, bool) {
-	if o == nil || o.LastModelUpdateTime == nil {
+	if o == nil || IsNil(o.LastModelUpdateTime) {
 		return nil, false
 	}
 	return o.LastModelUpdateTime, true
@@ -344,7 +348,7 @@ func (o *ForecastInstance) GetLastModelUpdateTimeOk() (*time.Time, bool) {
 
 // HasLastModelUpdateTime returns a boolean if a field has been set.
 func (o *ForecastInstance) HasLastModelUpdateTime() bool {
-	if o != nil && o.LastModelUpdateTime != nil {
+	if o != nil && !IsNil(o.LastModelUpdateTime) {
 		return true
 	}
 
@@ -358,7 +362,7 @@ func (o *ForecastInstance) SetLastModelUpdateTime(v time.Time) {
 
 // GetMetricName returns the MetricName field value if set, zero value otherwise.
 func (o *ForecastInstance) GetMetricName() string {
-	if o == nil || o.MetricName == nil {
+	if o == nil || IsNil(o.MetricName) {
 		var ret string
 		return ret
 	}
@@ -368,7 +372,7 @@ func (o *ForecastInstance) GetMetricName() string {
 // GetMetricNameOk returns a tuple with the MetricName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ForecastInstance) GetMetricNameOk() (*string, bool) {
-	if o == nil || o.MetricName == nil {
+	if o == nil || IsNil(o.MetricName) {
 		return nil, false
 	}
 	return o.MetricName, true
@@ -376,7 +380,7 @@ func (o *ForecastInstance) GetMetricNameOk() (*string, bool) {
 
 // HasMetricName returns a boolean if a field has been set.
 func (o *ForecastInstance) HasMetricName() bool {
-	if o != nil && o.MetricName != nil {
+	if o != nil && !IsNil(o.MetricName) {
 		return true
 	}
 
@@ -390,7 +394,7 @@ func (o *ForecastInstance) SetMetricName(v string) {
 
 // GetMinDaysForForecast returns the MinDaysForForecast field value if set, zero value otherwise.
 func (o *ForecastInstance) GetMinDaysForForecast() int64 {
-	if o == nil || o.MinDaysForForecast == nil {
+	if o == nil || IsNil(o.MinDaysForForecast) {
 		var ret int64
 		return ret
 	}
@@ -400,7 +404,7 @@ func (o *ForecastInstance) GetMinDaysForForecast() int64 {
 // GetMinDaysForForecastOk returns a tuple with the MinDaysForForecast field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ForecastInstance) GetMinDaysForForecastOk() (*int64, bool) {
-	if o == nil || o.MinDaysForForecast == nil {
+	if o == nil || IsNil(o.MinDaysForForecast) {
 		return nil, false
 	}
 	return o.MinDaysForForecast, true
@@ -408,7 +412,7 @@ func (o *ForecastInstance) GetMinDaysForForecastOk() (*int64, bool) {
 
 // HasMinDaysForForecast returns a boolean if a field has been set.
 func (o *ForecastInstance) HasMinDaysForForecast() bool {
-	if o != nil && o.MinDaysForForecast != nil {
+	if o != nil && !IsNil(o.MinDaysForForecast) {
 		return true
 	}
 
@@ -422,7 +426,7 @@ func (o *ForecastInstance) SetMinDaysForForecast(v int64) {
 
 // GetModel returns the Model field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ForecastInstance) GetModel() ForecastModel {
-	if o == nil || o.Model.Get() == nil {
+	if o == nil || IsNil(o.Model.Get()) {
 		var ret ForecastModel
 		return ret
 	}
@@ -465,7 +469,7 @@ func (o *ForecastInstance) UnsetModel() {
 
 // GetThresholdDays returns the ThresholdDays field value if set, zero value otherwise.
 func (o *ForecastInstance) GetThresholdDays() int64 {
-	if o == nil || o.ThresholdDays == nil {
+	if o == nil || IsNil(o.ThresholdDays) {
 		var ret int64
 		return ret
 	}
@@ -475,7 +479,7 @@ func (o *ForecastInstance) GetThresholdDays() int64 {
 // GetThresholdDaysOk returns a tuple with the ThresholdDays field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ForecastInstance) GetThresholdDaysOk() (*int64, bool) {
-	if o == nil || o.ThresholdDays == nil {
+	if o == nil || IsNil(o.ThresholdDays) {
 		return nil, false
 	}
 	return o.ThresholdDays, true
@@ -483,7 +487,7 @@ func (o *ForecastInstance) GetThresholdDaysOk() (*int64, bool) {
 
 // HasThresholdDays returns a boolean if a field has been set.
 func (o *ForecastInstance) HasThresholdDays() bool {
-	if o != nil && o.ThresholdDays != nil {
+	if o != nil && !IsNil(o.ThresholdDays) {
 		return true
 	}
 
@@ -495,134 +499,182 @@ func (o *ForecastInstance) SetThresholdDays(v int64) {
 	o.ThresholdDays = &v
 }
 
-// GetForecastDef returns the ForecastDef field value if set, zero value otherwise.
+// GetForecastDef returns the ForecastDef field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ForecastInstance) GetForecastDef() ForecastDefinitionRelationship {
-	if o == nil || o.ForecastDef == nil {
+	if o == nil || IsNil(o.ForecastDef.Get()) {
 		var ret ForecastDefinitionRelationship
 		return ret
 	}
-	return *o.ForecastDef
+	return *o.ForecastDef.Get()
 }
 
 // GetForecastDefOk returns a tuple with the ForecastDef field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ForecastInstance) GetForecastDefOk() (*ForecastDefinitionRelationship, bool) {
-	if o == nil || o.ForecastDef == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.ForecastDef, true
+	return o.ForecastDef.Get(), o.ForecastDef.IsSet()
 }
 
 // HasForecastDef returns a boolean if a field has been set.
 func (o *ForecastInstance) HasForecastDef() bool {
-	if o != nil && o.ForecastDef != nil {
+	if o != nil && o.ForecastDef.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetForecastDef gets a reference to the given ForecastDefinitionRelationship and assigns it to the ForecastDef field.
+// SetForecastDef gets a reference to the given NullableForecastDefinitionRelationship and assigns it to the ForecastDef field.
 func (o *ForecastInstance) SetForecastDef(v ForecastDefinitionRelationship) {
-	o.ForecastDef = &v
+	o.ForecastDef.Set(&v)
 }
 
-// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise.
+// SetForecastDefNil sets the value for ForecastDef to be an explicit nil
+func (o *ForecastInstance) SetForecastDefNil() {
+	o.ForecastDef.Set(nil)
+}
+
+// UnsetForecastDef ensures that no value is present for ForecastDef, not even an explicit nil
+func (o *ForecastInstance) UnsetForecastDef() {
+	o.ForecastDef.Unset()
+}
+
+// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ForecastInstance) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil || IsNil(o.RegisteredDevice.Get()) {
 		var ret AssetDeviceRegistrationRelationship
 		return ret
 	}
-	return *o.RegisteredDevice
+	return *o.RegisteredDevice.Get()
 }
 
 // GetRegisteredDeviceOk returns a tuple with the RegisteredDevice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ForecastInstance) GetRegisteredDeviceOk() (*AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.RegisteredDevice, true
+	return o.RegisteredDevice.Get(), o.RegisteredDevice.IsSet()
 }
 
 // HasRegisteredDevice returns a boolean if a field has been set.
 func (o *ForecastInstance) HasRegisteredDevice() bool {
-	if o != nil && o.RegisteredDevice != nil {
+	if o != nil && o.RegisteredDevice.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRegisteredDevice gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
+// SetRegisteredDevice gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
 func (o *ForecastInstance) SetRegisteredDevice(v AssetDeviceRegistrationRelationship) {
-	o.RegisteredDevice = &v
+	o.RegisteredDevice.Set(&v)
+}
+
+// SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+func (o *ForecastInstance) SetRegisteredDeviceNil() {
+	o.RegisteredDevice.Set(nil)
+}
+
+// UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
+func (o *ForecastInstance) UnsetRegisteredDevice() {
+	o.RegisteredDevice.Unset()
 }
 
 func (o ForecastInstance) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o ForecastInstance) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Action != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Action) {
 		toSerialize["Action"] = o.Action
 	}
 	if o.AltModel != nil {
 		toSerialize["AltModel"] = o.AltModel
 	}
-	if o.DataInterval != nil {
+	if !IsNil(o.DataInterval) {
 		toSerialize["DataInterval"] = o.DataInterval
 	}
-	if o.DataStartDate != nil {
+	if !IsNil(o.DataStartDate) {
 		toSerialize["DataStartDate"] = o.DataStartDate
 	}
-	if o.DeviceId != nil {
+	if !IsNil(o.DeviceId) {
 		toSerialize["DeviceId"] = o.DeviceId
 	}
-	if o.FullCapDays != nil {
+	if !IsNil(o.FullCapDays) {
 		toSerialize["FullCapDays"] = o.FullCapDays
 	}
-	if o.LastModelUpdateTime != nil {
+	if !IsNil(o.LastModelUpdateTime) {
 		toSerialize["LastModelUpdateTime"] = o.LastModelUpdateTime
 	}
-	if o.MetricName != nil {
+	if !IsNil(o.MetricName) {
 		toSerialize["MetricName"] = o.MetricName
 	}
-	if o.MinDaysForForecast != nil {
+	if !IsNil(o.MinDaysForForecast) {
 		toSerialize["MinDaysForForecast"] = o.MinDaysForForecast
 	}
 	if o.Model.IsSet() {
 		toSerialize["Model"] = o.Model.Get()
 	}
-	if o.ThresholdDays != nil {
+	if !IsNil(o.ThresholdDays) {
 		toSerialize["ThresholdDays"] = o.ThresholdDays
 	}
-	if o.ForecastDef != nil {
-		toSerialize["ForecastDef"] = o.ForecastDef
+	if o.ForecastDef.IsSet() {
+		toSerialize["ForecastDef"] = o.ForecastDef.Get()
 	}
-	if o.RegisteredDevice != nil {
-		toSerialize["RegisteredDevice"] = o.RegisteredDevice
+	if o.RegisteredDevice.IsSet() {
+		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *ForecastInstance) UnmarshalJSON(bytes []byte) (err error) {
+func (o *ForecastInstance) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type ForecastInstanceWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -647,14 +699,14 @@ func (o *ForecastInstance) UnmarshalJSON(bytes []byte) (err error) {
 		MinDaysForForecast *int64                `json:"MinDaysForForecast,omitempty"`
 		Model              NullableForecastModel `json:"Model,omitempty"`
 		// The number of days remaining before the device reaches the specified threshold for the metric as defined in definition.
-		ThresholdDays    *int64                               `json:"ThresholdDays,omitempty"`
-		ForecastDef      *ForecastDefinitionRelationship      `json:"ForecastDef,omitempty"`
-		RegisteredDevice *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+		ThresholdDays    *int64                                      `json:"ThresholdDays,omitempty"`
+		ForecastDef      NullableForecastDefinitionRelationship      `json:"ForecastDef,omitempty"`
+		RegisteredDevice NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	}
 
 	varForecastInstanceWithoutEmbeddedStruct := ForecastInstanceWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varForecastInstanceWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varForecastInstanceWithoutEmbeddedStruct)
 	if err == nil {
 		varForecastInstance := _ForecastInstance{}
 		varForecastInstance.ClassId = varForecastInstanceWithoutEmbeddedStruct.ClassId
@@ -679,7 +731,7 @@ func (o *ForecastInstance) UnmarshalJSON(bytes []byte) (err error) {
 
 	varForecastInstance := _ForecastInstance{}
 
-	err = json.Unmarshal(bytes, &varForecastInstance)
+	err = json.Unmarshal(data, &varForecastInstance)
 	if err == nil {
 		o.MoBaseMo = varForecastInstance.MoBaseMo
 	} else {
@@ -688,7 +740,7 @@ func (o *ForecastInstance) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Action")

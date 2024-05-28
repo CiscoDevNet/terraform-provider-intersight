@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the WorkflowFileOperations type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &WorkflowFileOperations{}
 
 // WorkflowFileOperations This models a single File Operation request within a batch of requests that get executed within a single workflow task.
 type WorkflowFileOperations struct {
@@ -110,7 +114,7 @@ func (o *WorkflowFileOperations) SetObjectType(v string) {
 
 // GetFileDownload returns the FileDownload field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *WorkflowFileOperations) GetFileDownload() WorkflowFileDownloadOp {
-	if o == nil || o.FileDownload.Get() == nil {
+	if o == nil || IsNil(o.FileDownload.Get()) {
 		var ret WorkflowFileDownloadOp
 		return ret
 	}
@@ -153,7 +157,7 @@ func (o *WorkflowFileOperations) UnsetFileDownload() {
 
 // GetFileTemplate returns the FileTemplate field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *WorkflowFileOperations) GetFileTemplate() WorkflowFileTemplateOp {
-	if o == nil || o.FileTemplate.Get() == nil {
+	if o == nil || IsNil(o.FileTemplate.Get()) {
 		var ret WorkflowFileTemplateOp
 		return ret
 	}
@@ -196,7 +200,7 @@ func (o *WorkflowFileOperations) UnsetFileTemplate() {
 
 // GetOperationType returns the OperationType field value if set, zero value otherwise.
 func (o *WorkflowFileOperations) GetOperationType() string {
-	if o == nil || o.OperationType == nil {
+	if o == nil || IsNil(o.OperationType) {
 		var ret string
 		return ret
 	}
@@ -206,7 +210,7 @@ func (o *WorkflowFileOperations) GetOperationType() string {
 // GetOperationTypeOk returns a tuple with the OperationType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowFileOperations) GetOperationTypeOk() (*string, bool) {
-	if o == nil || o.OperationType == nil {
+	if o == nil || IsNil(o.OperationType) {
 		return nil, false
 	}
 	return o.OperationType, true
@@ -214,7 +218,7 @@ func (o *WorkflowFileOperations) GetOperationTypeOk() (*string, bool) {
 
 // HasOperationType returns a boolean if a field has been set.
 func (o *WorkflowFileOperations) HasOperationType() bool {
-	if o != nil && o.OperationType != nil {
+	if o != nil && !IsNil(o.OperationType) {
 		return true
 	}
 
@@ -227,28 +231,32 @@ func (o *WorkflowFileOperations) SetOperationType(v string) {
 }
 
 func (o WorkflowFileOperations) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o WorkflowFileOperations) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedWorkflowApi, errWorkflowApi := json.Marshal(o.WorkflowApi)
 	if errWorkflowApi != nil {
-		return []byte{}, errWorkflowApi
+		return map[string]interface{}{}, errWorkflowApi
 	}
 	errWorkflowApi = json.Unmarshal([]byte(serializedWorkflowApi), &toSerialize)
 	if errWorkflowApi != nil {
-		return []byte{}, errWorkflowApi
+		return map[string]interface{}{}, errWorkflowApi
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
 	if o.FileDownload.IsSet() {
 		toSerialize["FileDownload"] = o.FileDownload.Get()
 	}
 	if o.FileTemplate.IsSet() {
 		toSerialize["FileTemplate"] = o.FileTemplate.Get()
 	}
-	if o.OperationType != nil {
+	if !IsNil(o.OperationType) {
 		toSerialize["OperationType"] = o.OperationType
 	}
 
@@ -256,10 +264,32 @@ func (o WorkflowFileOperations) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *WorkflowFileOperations) UnmarshalJSON(bytes []byte) (err error) {
+func (o *WorkflowFileOperations) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type WorkflowFileOperationsWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -273,7 +303,7 @@ func (o *WorkflowFileOperations) UnmarshalJSON(bytes []byte) (err error) {
 
 	varWorkflowFileOperationsWithoutEmbeddedStruct := WorkflowFileOperationsWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varWorkflowFileOperationsWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varWorkflowFileOperationsWithoutEmbeddedStruct)
 	if err == nil {
 		varWorkflowFileOperations := _WorkflowFileOperations{}
 		varWorkflowFileOperations.ClassId = varWorkflowFileOperationsWithoutEmbeddedStruct.ClassId
@@ -288,7 +318,7 @@ func (o *WorkflowFileOperations) UnmarshalJSON(bytes []byte) (err error) {
 
 	varWorkflowFileOperations := _WorkflowFileOperations{}
 
-	err = json.Unmarshal(bytes, &varWorkflowFileOperations)
+	err = json.Unmarshal(data, &varWorkflowFileOperations)
 	if err == nil {
 		o.WorkflowApi = varWorkflowFileOperations.WorkflowApi
 	} else {
@@ -297,7 +327,7 @@ func (o *WorkflowFileOperations) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "FileDownload")

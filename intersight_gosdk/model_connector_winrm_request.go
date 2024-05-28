@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the ConnectorWinrmRequest type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ConnectorWinrmRequest{}
 
 // ConnectorWinrmRequest A WinRM message sent from a cloud service to be proxied through a device connector. Encapsulates the details needed to execute a powershell script against an Intersight claimed, WinRM enabled windows target.
 type ConnectorWinrmRequest struct {
@@ -118,7 +122,7 @@ func (o *ConnectorWinrmRequest) SetObjectType(v string) {
 
 // GetAssetTargetMoid returns the AssetTargetMoid field value if set, zero value otherwise.
 func (o *ConnectorWinrmRequest) GetAssetTargetMoid() string {
-	if o == nil || o.AssetTargetMoid == nil {
+	if o == nil || IsNil(o.AssetTargetMoid) {
 		var ret string
 		return ret
 	}
@@ -128,7 +132,7 @@ func (o *ConnectorWinrmRequest) GetAssetTargetMoid() string {
 // GetAssetTargetMoidOk returns a tuple with the AssetTargetMoid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ConnectorWinrmRequest) GetAssetTargetMoidOk() (*string, bool) {
-	if o == nil || o.AssetTargetMoid == nil {
+	if o == nil || IsNil(o.AssetTargetMoid) {
 		return nil, false
 	}
 	return o.AssetTargetMoid, true
@@ -136,7 +140,7 @@ func (o *ConnectorWinrmRequest) GetAssetTargetMoidOk() (*string, bool) {
 
 // HasAssetTargetMoid returns a boolean if a field has been set.
 func (o *ConnectorWinrmRequest) HasAssetTargetMoid() bool {
-	if o != nil && o.AssetTargetMoid != nil {
+	if o != nil && !IsNil(o.AssetTargetMoid) {
 		return true
 	}
 
@@ -150,7 +154,7 @@ func (o *ConnectorWinrmRequest) SetAssetTargetMoid(v string) {
 
 // GetBody returns the Body field value if set, zero value otherwise.
 func (o *ConnectorWinrmRequest) GetBody() string {
-	if o == nil || o.Body == nil {
+	if o == nil || IsNil(o.Body) {
 		var ret string
 		return ret
 	}
@@ -160,7 +164,7 @@ func (o *ConnectorWinrmRequest) GetBody() string {
 // GetBodyOk returns a tuple with the Body field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ConnectorWinrmRequest) GetBodyOk() (*string, bool) {
-	if o == nil || o.Body == nil {
+	if o == nil || IsNil(o.Body) {
 		return nil, false
 	}
 	return o.Body, true
@@ -168,7 +172,7 @@ func (o *ConnectorWinrmRequest) GetBodyOk() (*string, bool) {
 
 // HasBody returns a boolean if a field has been set.
 func (o *ConnectorWinrmRequest) HasBody() bool {
-	if o != nil && o.Body != nil {
+	if o != nil && !IsNil(o.Body) {
 		return true
 	}
 
@@ -182,7 +186,7 @@ func (o *ConnectorWinrmRequest) SetBody(v string) {
 
 // GetFilename returns the Filename field value if set, zero value otherwise.
 func (o *ConnectorWinrmRequest) GetFilename() string {
-	if o == nil || o.Filename == nil {
+	if o == nil || IsNil(o.Filename) {
 		var ret string
 		return ret
 	}
@@ -192,7 +196,7 @@ func (o *ConnectorWinrmRequest) GetFilename() string {
 // GetFilenameOk returns a tuple with the Filename field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ConnectorWinrmRequest) GetFilenameOk() (*string, bool) {
-	if o == nil || o.Filename == nil {
+	if o == nil || IsNil(o.Filename) {
 		return nil, false
 	}
 	return o.Filename, true
@@ -200,7 +204,7 @@ func (o *ConnectorWinrmRequest) GetFilenameOk() (*string, bool) {
 
 // HasFilename returns a boolean if a field has been set.
 func (o *ConnectorWinrmRequest) HasFilename() bool {
-	if o != nil && o.Filename != nil {
+	if o != nil && !IsNil(o.Filename) {
 		return true
 	}
 
@@ -214,7 +218,7 @@ func (o *ConnectorWinrmRequest) SetFilename(v string) {
 
 // GetOpType returns the OpType field value if set, zero value otherwise.
 func (o *ConnectorWinrmRequest) GetOpType() string {
-	if o == nil || o.OpType == nil {
+	if o == nil || IsNil(o.OpType) {
 		var ret string
 		return ret
 	}
@@ -224,7 +228,7 @@ func (o *ConnectorWinrmRequest) GetOpType() string {
 // GetOpTypeOk returns a tuple with the OpType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ConnectorWinrmRequest) GetOpTypeOk() (*string, bool) {
-	if o == nil || o.OpType == nil {
+	if o == nil || IsNil(o.OpType) {
 		return nil, false
 	}
 	return o.OpType, true
@@ -232,7 +236,7 @@ func (o *ConnectorWinrmRequest) GetOpTypeOk() (*string, bool) {
 
 // HasOpType returns a boolean if a field has been set.
 func (o *ConnectorWinrmRequest) HasOpType() bool {
-	if o != nil && o.OpType != nil {
+	if o != nil && !IsNil(o.OpType) {
 		return true
 	}
 
@@ -246,7 +250,7 @@ func (o *ConnectorWinrmRequest) SetOpType(v string) {
 
 // GetSessionId returns the SessionId field value if set, zero value otherwise.
 func (o *ConnectorWinrmRequest) GetSessionId() string {
-	if o == nil || o.SessionId == nil {
+	if o == nil || IsNil(o.SessionId) {
 		var ret string
 		return ret
 	}
@@ -256,7 +260,7 @@ func (o *ConnectorWinrmRequest) GetSessionId() string {
 // GetSessionIdOk returns a tuple with the SessionId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ConnectorWinrmRequest) GetSessionIdOk() (*string, bool) {
-	if o == nil || o.SessionId == nil {
+	if o == nil || IsNil(o.SessionId) {
 		return nil, false
 	}
 	return o.SessionId, true
@@ -264,7 +268,7 @@ func (o *ConnectorWinrmRequest) GetSessionIdOk() (*string, bool) {
 
 // HasSessionId returns a boolean if a field has been set.
 func (o *ConnectorWinrmRequest) HasSessionId() bool {
-	if o != nil && o.SessionId != nil {
+	if o != nil && !IsNil(o.SessionId) {
 		return true
 	}
 
@@ -278,7 +282,7 @@ func (o *ConnectorWinrmRequest) SetSessionId(v string) {
 
 // GetTimeout returns the Timeout field value if set, zero value otherwise.
 func (o *ConnectorWinrmRequest) GetTimeout() int64 {
-	if o == nil || o.Timeout == nil {
+	if o == nil || IsNil(o.Timeout) {
 		var ret int64
 		return ret
 	}
@@ -288,7 +292,7 @@ func (o *ConnectorWinrmRequest) GetTimeout() int64 {
 // GetTimeoutOk returns a tuple with the Timeout field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ConnectorWinrmRequest) GetTimeoutOk() (*int64, bool) {
-	if o == nil || o.Timeout == nil {
+	if o == nil || IsNil(o.Timeout) {
 		return nil, false
 	}
 	return o.Timeout, true
@@ -296,7 +300,7 @@ func (o *ConnectorWinrmRequest) GetTimeoutOk() (*int64, bool) {
 
 // HasTimeout returns a boolean if a field has been set.
 func (o *ConnectorWinrmRequest) HasTimeout() bool {
-	if o != nil && o.Timeout != nil {
+	if o != nil && !IsNil(o.Timeout) {
 		return true
 	}
 
@@ -309,37 +313,41 @@ func (o *ConnectorWinrmRequest) SetTimeout(v int64) {
 }
 
 func (o ConnectorWinrmRequest) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o ConnectorWinrmRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedConnectorBaseMessage, errConnectorBaseMessage := json.Marshal(o.ConnectorBaseMessage)
 	if errConnectorBaseMessage != nil {
-		return []byte{}, errConnectorBaseMessage
+		return map[string]interface{}{}, errConnectorBaseMessage
 	}
 	errConnectorBaseMessage = json.Unmarshal([]byte(serializedConnectorBaseMessage), &toSerialize)
 	if errConnectorBaseMessage != nil {
-		return []byte{}, errConnectorBaseMessage
+		return map[string]interface{}{}, errConnectorBaseMessage
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.AssetTargetMoid != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.AssetTargetMoid) {
 		toSerialize["AssetTargetMoid"] = o.AssetTargetMoid
 	}
-	if o.Body != nil {
+	if !IsNil(o.Body) {
 		toSerialize["Body"] = o.Body
 	}
-	if o.Filename != nil {
+	if !IsNil(o.Filename) {
 		toSerialize["Filename"] = o.Filename
 	}
-	if o.OpType != nil {
+	if !IsNil(o.OpType) {
 		toSerialize["OpType"] = o.OpType
 	}
-	if o.SessionId != nil {
+	if !IsNil(o.SessionId) {
 		toSerialize["SessionId"] = o.SessionId
 	}
-	if o.Timeout != nil {
+	if !IsNil(o.Timeout) {
 		toSerialize["Timeout"] = o.Timeout
 	}
 
@@ -347,10 +355,32 @@ func (o ConnectorWinrmRequest) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *ConnectorWinrmRequest) UnmarshalJSON(bytes []byte) (err error) {
+func (o *ConnectorWinrmRequest) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type ConnectorWinrmRequestWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -372,7 +402,7 @@ func (o *ConnectorWinrmRequest) UnmarshalJSON(bytes []byte) (err error) {
 
 	varConnectorWinrmRequestWithoutEmbeddedStruct := ConnectorWinrmRequestWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varConnectorWinrmRequestWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varConnectorWinrmRequestWithoutEmbeddedStruct)
 	if err == nil {
 		varConnectorWinrmRequest := _ConnectorWinrmRequest{}
 		varConnectorWinrmRequest.ClassId = varConnectorWinrmRequestWithoutEmbeddedStruct.ClassId
@@ -390,7 +420,7 @@ func (o *ConnectorWinrmRequest) UnmarshalJSON(bytes []byte) (err error) {
 
 	varConnectorWinrmRequest := _ConnectorWinrmRequest{}
 
-	err = json.Unmarshal(bytes, &varConnectorWinrmRequest)
+	err = json.Unmarshal(data, &varConnectorWinrmRequest)
 	if err == nil {
 		o.ConnectorBaseMessage = varConnectorWinrmRequest.ConnectorBaseMessage
 	} else {
@@ -399,7 +429,7 @@ func (o *ConnectorWinrmRequest) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "AssetTargetMoid")

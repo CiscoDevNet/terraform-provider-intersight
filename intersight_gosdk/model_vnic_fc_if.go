@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the VnicFcIf type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &VnicFcIf{}
 
 // VnicFcIf Virtual Fibre Channel Interface.
 type VnicFcIf struct {
@@ -41,14 +45,14 @@ type VnicFcIf struct {
 	// The WWPN address that is assigned to the vHBA based on the wwn pool that has been assigned to the SAN Connectivity Policy.
 	Wwpn *string `json:"Wwpn,omitempty"`
 	// Type of allocation selected to assign a WWPN address to the vhba. * `POOL` - The user selects a pool from which the mac/wwn address will be leased for the Virtual Interface. * `STATIC` - The user assigns a static mac/wwn address for the Virtual Interface.
-	WwpnAddressType       *string                                  `json:"WwpnAddressType,omitempty"`
-	Profile               *PolicyAbstractConfigProfileRelationship `json:"Profile,omitempty"`
-	SanConnectivityPolicy *VnicSanConnectivityPolicyRelationship   `json:"SanConnectivityPolicy,omitempty"`
-	ScpVhba               *VnicFcIfRelationship                    `json:"ScpVhba,omitempty"`
+	WwpnAddressType       *string                                         `json:"WwpnAddressType,omitempty"`
+	Profile               NullablePolicyAbstractConfigProfileRelationship `json:"Profile,omitempty"`
+	SanConnectivityPolicy NullableVnicSanConnectivityPolicyRelationship   `json:"SanConnectivityPolicy,omitempty"`
+	ScpVhba               NullableVnicFcIfRelationship                    `json:"ScpVhba,omitempty"`
 	// An array of relationships to vnicFcIf resources.
-	SpVhbas              []VnicFcIfRelationship        `json:"SpVhbas,omitempty"`
-	SrcTemplate          *VnicVhbaTemplateRelationship `json:"SrcTemplate,omitempty"`
-	WwpnLease            *FcpoolLeaseRelationship      `json:"WwpnLease,omitempty"`
+	SpVhbas              []VnicFcIfRelationship               `json:"SpVhbas,omitempty"`
+	SrcTemplate          NullableVnicVhbaTemplateRelationship `json:"SrcTemplate,omitempty"`
+	WwpnLease            NullableFcpoolLeaseRelationship      `json:"WwpnLease,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -133,7 +137,7 @@ func (o *VnicFcIf) SetObjectType(v string) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *VnicFcIf) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -143,7 +147,7 @@ func (o *VnicFcIf) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VnicFcIf) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -151,7 +155,7 @@ func (o *VnicFcIf) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *VnicFcIf) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -165,7 +169,7 @@ func (o *VnicFcIf) SetName(v string) {
 
 // GetOrder returns the Order field value if set, zero value otherwise.
 func (o *VnicFcIf) GetOrder() int64 {
-	if o == nil || o.Order == nil {
+	if o == nil || IsNil(o.Order) {
 		var ret int64
 		return ret
 	}
@@ -175,7 +179,7 @@ func (o *VnicFcIf) GetOrder() int64 {
 // GetOrderOk returns a tuple with the Order field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VnicFcIf) GetOrderOk() (*int64, bool) {
-	if o == nil || o.Order == nil {
+	if o == nil || IsNil(o.Order) {
 		return nil, false
 	}
 	return o.Order, true
@@ -183,7 +187,7 @@ func (o *VnicFcIf) GetOrderOk() (*int64, bool) {
 
 // HasOrder returns a boolean if a field has been set.
 func (o *VnicFcIf) HasOrder() bool {
-	if o != nil && o.Order != nil {
+	if o != nil && !IsNil(o.Order) {
 		return true
 	}
 
@@ -208,7 +212,7 @@ func (o *VnicFcIf) GetOverriddenList() []string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *VnicFcIf) GetOverriddenListOk() ([]string, bool) {
-	if o == nil || o.OverriddenList == nil {
+	if o == nil || IsNil(o.OverriddenList) {
 		return nil, false
 	}
 	return o.OverriddenList, true
@@ -216,7 +220,7 @@ func (o *VnicFcIf) GetOverriddenListOk() ([]string, bool) {
 
 // HasOverriddenList returns a boolean if a field has been set.
 func (o *VnicFcIf) HasOverriddenList() bool {
-	if o != nil && o.OverriddenList != nil {
+	if o != nil && IsNil(o.OverriddenList) {
 		return true
 	}
 
@@ -230,7 +234,7 @@ func (o *VnicFcIf) SetOverriddenList(v []string) {
 
 // GetPlacement returns the Placement field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *VnicFcIf) GetPlacement() VnicPlacementSettings {
-	if o == nil || o.Placement.Get() == nil {
+	if o == nil || IsNil(o.Placement.Get()) {
 		var ret VnicPlacementSettings
 		return ret
 	}
@@ -273,7 +277,7 @@ func (o *VnicFcIf) UnsetPlacement() {
 
 // GetStaticWwpnAddress returns the StaticWwpnAddress field value if set, zero value otherwise.
 func (o *VnicFcIf) GetStaticWwpnAddress() string {
-	if o == nil || o.StaticWwpnAddress == nil {
+	if o == nil || IsNil(o.StaticWwpnAddress) {
 		var ret string
 		return ret
 	}
@@ -283,7 +287,7 @@ func (o *VnicFcIf) GetStaticWwpnAddress() string {
 // GetStaticWwpnAddressOk returns a tuple with the StaticWwpnAddress field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VnicFcIf) GetStaticWwpnAddressOk() (*string, bool) {
-	if o == nil || o.StaticWwpnAddress == nil {
+	if o == nil || IsNil(o.StaticWwpnAddress) {
 		return nil, false
 	}
 	return o.StaticWwpnAddress, true
@@ -291,7 +295,7 @@ func (o *VnicFcIf) GetStaticWwpnAddressOk() (*string, bool) {
 
 // HasStaticWwpnAddress returns a boolean if a field has been set.
 func (o *VnicFcIf) HasStaticWwpnAddress() bool {
-	if o != nil && o.StaticWwpnAddress != nil {
+	if o != nil && !IsNil(o.StaticWwpnAddress) {
 		return true
 	}
 
@@ -316,7 +320,7 @@ func (o *VnicFcIf) GetTemplateActions() []MotemplateActionEntry {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *VnicFcIf) GetTemplateActionsOk() ([]MotemplateActionEntry, bool) {
-	if o == nil || o.TemplateActions == nil {
+	if o == nil || IsNil(o.TemplateActions) {
 		return nil, false
 	}
 	return o.TemplateActions, true
@@ -324,7 +328,7 @@ func (o *VnicFcIf) GetTemplateActionsOk() ([]MotemplateActionEntry, bool) {
 
 // HasTemplateActions returns a boolean if a field has been set.
 func (o *VnicFcIf) HasTemplateActions() bool {
-	if o != nil && o.TemplateActions != nil {
+	if o != nil && IsNil(o.TemplateActions) {
 		return true
 	}
 
@@ -349,7 +353,7 @@ func (o *VnicFcIf) GetTemplateSyncErrors() []MotemplateSyncError {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *VnicFcIf) GetTemplateSyncErrorsOk() ([]MotemplateSyncError, bool) {
-	if o == nil || o.TemplateSyncErrors == nil {
+	if o == nil || IsNil(o.TemplateSyncErrors) {
 		return nil, false
 	}
 	return o.TemplateSyncErrors, true
@@ -357,7 +361,7 @@ func (o *VnicFcIf) GetTemplateSyncErrorsOk() ([]MotemplateSyncError, bool) {
 
 // HasTemplateSyncErrors returns a boolean if a field has been set.
 func (o *VnicFcIf) HasTemplateSyncErrors() bool {
-	if o != nil && o.TemplateSyncErrors != nil {
+	if o != nil && IsNil(o.TemplateSyncErrors) {
 		return true
 	}
 
@@ -371,7 +375,7 @@ func (o *VnicFcIf) SetTemplateSyncErrors(v []MotemplateSyncError) {
 
 // GetTemplateSyncStatus returns the TemplateSyncStatus field value if set, zero value otherwise.
 func (o *VnicFcIf) GetTemplateSyncStatus() string {
-	if o == nil || o.TemplateSyncStatus == nil {
+	if o == nil || IsNil(o.TemplateSyncStatus) {
 		var ret string
 		return ret
 	}
@@ -381,7 +385,7 @@ func (o *VnicFcIf) GetTemplateSyncStatus() string {
 // GetTemplateSyncStatusOk returns a tuple with the TemplateSyncStatus field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VnicFcIf) GetTemplateSyncStatusOk() (*string, bool) {
-	if o == nil || o.TemplateSyncStatus == nil {
+	if o == nil || IsNil(o.TemplateSyncStatus) {
 		return nil, false
 	}
 	return o.TemplateSyncStatus, true
@@ -389,7 +393,7 @@ func (o *VnicFcIf) GetTemplateSyncStatusOk() (*string, bool) {
 
 // HasTemplateSyncStatus returns a boolean if a field has been set.
 func (o *VnicFcIf) HasTemplateSyncStatus() bool {
-	if o != nil && o.TemplateSyncStatus != nil {
+	if o != nil && !IsNil(o.TemplateSyncStatus) {
 		return true
 	}
 
@@ -403,7 +407,7 @@ func (o *VnicFcIf) SetTemplateSyncStatus(v string) {
 
 // GetVifId returns the VifId field value if set, zero value otherwise.
 func (o *VnicFcIf) GetVifId() int64 {
-	if o == nil || o.VifId == nil {
+	if o == nil || IsNil(o.VifId) {
 		var ret int64
 		return ret
 	}
@@ -413,7 +417,7 @@ func (o *VnicFcIf) GetVifId() int64 {
 // GetVifIdOk returns a tuple with the VifId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VnicFcIf) GetVifIdOk() (*int64, bool) {
-	if o == nil || o.VifId == nil {
+	if o == nil || IsNil(o.VifId) {
 		return nil, false
 	}
 	return o.VifId, true
@@ -421,7 +425,7 @@ func (o *VnicFcIf) GetVifIdOk() (*int64, bool) {
 
 // HasVifId returns a boolean if a field has been set.
 func (o *VnicFcIf) HasVifId() bool {
-	if o != nil && o.VifId != nil {
+	if o != nil && !IsNil(o.VifId) {
 		return true
 	}
 
@@ -435,7 +439,7 @@ func (o *VnicFcIf) SetVifId(v int64) {
 
 // GetWwpn returns the Wwpn field value if set, zero value otherwise.
 func (o *VnicFcIf) GetWwpn() string {
-	if o == nil || o.Wwpn == nil {
+	if o == nil || IsNil(o.Wwpn) {
 		var ret string
 		return ret
 	}
@@ -445,7 +449,7 @@ func (o *VnicFcIf) GetWwpn() string {
 // GetWwpnOk returns a tuple with the Wwpn field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VnicFcIf) GetWwpnOk() (*string, bool) {
-	if o == nil || o.Wwpn == nil {
+	if o == nil || IsNil(o.Wwpn) {
 		return nil, false
 	}
 	return o.Wwpn, true
@@ -453,7 +457,7 @@ func (o *VnicFcIf) GetWwpnOk() (*string, bool) {
 
 // HasWwpn returns a boolean if a field has been set.
 func (o *VnicFcIf) HasWwpn() bool {
-	if o != nil && o.Wwpn != nil {
+	if o != nil && !IsNil(o.Wwpn) {
 		return true
 	}
 
@@ -467,7 +471,7 @@ func (o *VnicFcIf) SetWwpn(v string) {
 
 // GetWwpnAddressType returns the WwpnAddressType field value if set, zero value otherwise.
 func (o *VnicFcIf) GetWwpnAddressType() string {
-	if o == nil || o.WwpnAddressType == nil {
+	if o == nil || IsNil(o.WwpnAddressType) {
 		var ret string
 		return ret
 	}
@@ -477,7 +481,7 @@ func (o *VnicFcIf) GetWwpnAddressType() string {
 // GetWwpnAddressTypeOk returns a tuple with the WwpnAddressType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VnicFcIf) GetWwpnAddressTypeOk() (*string, bool) {
-	if o == nil || o.WwpnAddressType == nil {
+	if o == nil || IsNil(o.WwpnAddressType) {
 		return nil, false
 	}
 	return o.WwpnAddressType, true
@@ -485,7 +489,7 @@ func (o *VnicFcIf) GetWwpnAddressTypeOk() (*string, bool) {
 
 // HasWwpnAddressType returns a boolean if a field has been set.
 func (o *VnicFcIf) HasWwpnAddressType() bool {
-	if o != nil && o.WwpnAddressType != nil {
+	if o != nil && !IsNil(o.WwpnAddressType) {
 		return true
 	}
 
@@ -497,100 +501,133 @@ func (o *VnicFcIf) SetWwpnAddressType(v string) {
 	o.WwpnAddressType = &v
 }
 
-// GetProfile returns the Profile field value if set, zero value otherwise.
+// GetProfile returns the Profile field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *VnicFcIf) GetProfile() PolicyAbstractConfigProfileRelationship {
-	if o == nil || o.Profile == nil {
+	if o == nil || IsNil(o.Profile.Get()) {
 		var ret PolicyAbstractConfigProfileRelationship
 		return ret
 	}
-	return *o.Profile
+	return *o.Profile.Get()
 }
 
 // GetProfileOk returns a tuple with the Profile field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *VnicFcIf) GetProfileOk() (*PolicyAbstractConfigProfileRelationship, bool) {
-	if o == nil || o.Profile == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Profile, true
+	return o.Profile.Get(), o.Profile.IsSet()
 }
 
 // HasProfile returns a boolean if a field has been set.
 func (o *VnicFcIf) HasProfile() bool {
-	if o != nil && o.Profile != nil {
+	if o != nil && o.Profile.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetProfile gets a reference to the given PolicyAbstractConfigProfileRelationship and assigns it to the Profile field.
+// SetProfile gets a reference to the given NullablePolicyAbstractConfigProfileRelationship and assigns it to the Profile field.
 func (o *VnicFcIf) SetProfile(v PolicyAbstractConfigProfileRelationship) {
-	o.Profile = &v
+	o.Profile.Set(&v)
 }
 
-// GetSanConnectivityPolicy returns the SanConnectivityPolicy field value if set, zero value otherwise.
+// SetProfileNil sets the value for Profile to be an explicit nil
+func (o *VnicFcIf) SetProfileNil() {
+	o.Profile.Set(nil)
+}
+
+// UnsetProfile ensures that no value is present for Profile, not even an explicit nil
+func (o *VnicFcIf) UnsetProfile() {
+	o.Profile.Unset()
+}
+
+// GetSanConnectivityPolicy returns the SanConnectivityPolicy field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *VnicFcIf) GetSanConnectivityPolicy() VnicSanConnectivityPolicyRelationship {
-	if o == nil || o.SanConnectivityPolicy == nil {
+	if o == nil || IsNil(o.SanConnectivityPolicy.Get()) {
 		var ret VnicSanConnectivityPolicyRelationship
 		return ret
 	}
-	return *o.SanConnectivityPolicy
+	return *o.SanConnectivityPolicy.Get()
 }
 
 // GetSanConnectivityPolicyOk returns a tuple with the SanConnectivityPolicy field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *VnicFcIf) GetSanConnectivityPolicyOk() (*VnicSanConnectivityPolicyRelationship, bool) {
-	if o == nil || o.SanConnectivityPolicy == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.SanConnectivityPolicy, true
+	return o.SanConnectivityPolicy.Get(), o.SanConnectivityPolicy.IsSet()
 }
 
 // HasSanConnectivityPolicy returns a boolean if a field has been set.
 func (o *VnicFcIf) HasSanConnectivityPolicy() bool {
-	if o != nil && o.SanConnectivityPolicy != nil {
+	if o != nil && o.SanConnectivityPolicy.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetSanConnectivityPolicy gets a reference to the given VnicSanConnectivityPolicyRelationship and assigns it to the SanConnectivityPolicy field.
+// SetSanConnectivityPolicy gets a reference to the given NullableVnicSanConnectivityPolicyRelationship and assigns it to the SanConnectivityPolicy field.
 func (o *VnicFcIf) SetSanConnectivityPolicy(v VnicSanConnectivityPolicyRelationship) {
-	o.SanConnectivityPolicy = &v
+	o.SanConnectivityPolicy.Set(&v)
 }
 
-// GetScpVhba returns the ScpVhba field value if set, zero value otherwise.
+// SetSanConnectivityPolicyNil sets the value for SanConnectivityPolicy to be an explicit nil
+func (o *VnicFcIf) SetSanConnectivityPolicyNil() {
+	o.SanConnectivityPolicy.Set(nil)
+}
+
+// UnsetSanConnectivityPolicy ensures that no value is present for SanConnectivityPolicy, not even an explicit nil
+func (o *VnicFcIf) UnsetSanConnectivityPolicy() {
+	o.SanConnectivityPolicy.Unset()
+}
+
+// GetScpVhba returns the ScpVhba field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *VnicFcIf) GetScpVhba() VnicFcIfRelationship {
-	if o == nil || o.ScpVhba == nil {
+	if o == nil || IsNil(o.ScpVhba.Get()) {
 		var ret VnicFcIfRelationship
 		return ret
 	}
-	return *o.ScpVhba
+	return *o.ScpVhba.Get()
 }
 
 // GetScpVhbaOk returns a tuple with the ScpVhba field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *VnicFcIf) GetScpVhbaOk() (*VnicFcIfRelationship, bool) {
-	if o == nil || o.ScpVhba == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.ScpVhba, true
+	return o.ScpVhba.Get(), o.ScpVhba.IsSet()
 }
 
 // HasScpVhba returns a boolean if a field has been set.
 func (o *VnicFcIf) HasScpVhba() bool {
-	if o != nil && o.ScpVhba != nil {
+	if o != nil && o.ScpVhba.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetScpVhba gets a reference to the given VnicFcIfRelationship and assigns it to the ScpVhba field.
+// SetScpVhba gets a reference to the given NullableVnicFcIfRelationship and assigns it to the ScpVhba field.
 func (o *VnicFcIf) SetScpVhba(v VnicFcIfRelationship) {
-	o.ScpVhba = &v
+	o.ScpVhba.Set(&v)
+}
+
+// SetScpVhbaNil sets the value for ScpVhba to be an explicit nil
+func (o *VnicFcIf) SetScpVhbaNil() {
+	o.ScpVhba.Set(nil)
+}
+
+// UnsetScpVhba ensures that no value is present for ScpVhba, not even an explicit nil
+func (o *VnicFcIf) UnsetScpVhba() {
+	o.ScpVhba.Unset()
 }
 
 // GetSpVhbas returns the SpVhbas field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -606,7 +643,7 @@ func (o *VnicFcIf) GetSpVhbas() []VnicFcIfRelationship {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *VnicFcIf) GetSpVhbasOk() ([]VnicFcIfRelationship, bool) {
-	if o == nil || o.SpVhbas == nil {
+	if o == nil || IsNil(o.SpVhbas) {
 		return nil, false
 	}
 	return o.SpVhbas, true
@@ -614,7 +651,7 @@ func (o *VnicFcIf) GetSpVhbasOk() ([]VnicFcIfRelationship, bool) {
 
 // HasSpVhbas returns a boolean if a field has been set.
 func (o *VnicFcIf) HasSpVhbas() bool {
-	if o != nil && o.SpVhbas != nil {
+	if o != nil && IsNil(o.SpVhbas) {
 		return true
 	}
 
@@ -626,90 +663,116 @@ func (o *VnicFcIf) SetSpVhbas(v []VnicFcIfRelationship) {
 	o.SpVhbas = v
 }
 
-// GetSrcTemplate returns the SrcTemplate field value if set, zero value otherwise.
+// GetSrcTemplate returns the SrcTemplate field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *VnicFcIf) GetSrcTemplate() VnicVhbaTemplateRelationship {
-	if o == nil || o.SrcTemplate == nil {
+	if o == nil || IsNil(o.SrcTemplate.Get()) {
 		var ret VnicVhbaTemplateRelationship
 		return ret
 	}
-	return *o.SrcTemplate
+	return *o.SrcTemplate.Get()
 }
 
 // GetSrcTemplateOk returns a tuple with the SrcTemplate field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *VnicFcIf) GetSrcTemplateOk() (*VnicVhbaTemplateRelationship, bool) {
-	if o == nil || o.SrcTemplate == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.SrcTemplate, true
+	return o.SrcTemplate.Get(), o.SrcTemplate.IsSet()
 }
 
 // HasSrcTemplate returns a boolean if a field has been set.
 func (o *VnicFcIf) HasSrcTemplate() bool {
-	if o != nil && o.SrcTemplate != nil {
+	if o != nil && o.SrcTemplate.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetSrcTemplate gets a reference to the given VnicVhbaTemplateRelationship and assigns it to the SrcTemplate field.
+// SetSrcTemplate gets a reference to the given NullableVnicVhbaTemplateRelationship and assigns it to the SrcTemplate field.
 func (o *VnicFcIf) SetSrcTemplate(v VnicVhbaTemplateRelationship) {
-	o.SrcTemplate = &v
+	o.SrcTemplate.Set(&v)
 }
 
-// GetWwpnLease returns the WwpnLease field value if set, zero value otherwise.
+// SetSrcTemplateNil sets the value for SrcTemplate to be an explicit nil
+func (o *VnicFcIf) SetSrcTemplateNil() {
+	o.SrcTemplate.Set(nil)
+}
+
+// UnsetSrcTemplate ensures that no value is present for SrcTemplate, not even an explicit nil
+func (o *VnicFcIf) UnsetSrcTemplate() {
+	o.SrcTemplate.Unset()
+}
+
+// GetWwpnLease returns the WwpnLease field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *VnicFcIf) GetWwpnLease() FcpoolLeaseRelationship {
-	if o == nil || o.WwpnLease == nil {
+	if o == nil || IsNil(o.WwpnLease.Get()) {
 		var ret FcpoolLeaseRelationship
 		return ret
 	}
-	return *o.WwpnLease
+	return *o.WwpnLease.Get()
 }
 
 // GetWwpnLeaseOk returns a tuple with the WwpnLease field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *VnicFcIf) GetWwpnLeaseOk() (*FcpoolLeaseRelationship, bool) {
-	if o == nil || o.WwpnLease == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.WwpnLease, true
+	return o.WwpnLease.Get(), o.WwpnLease.IsSet()
 }
 
 // HasWwpnLease returns a boolean if a field has been set.
 func (o *VnicFcIf) HasWwpnLease() bool {
-	if o != nil && o.WwpnLease != nil {
+	if o != nil && o.WwpnLease.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetWwpnLease gets a reference to the given FcpoolLeaseRelationship and assigns it to the WwpnLease field.
+// SetWwpnLease gets a reference to the given NullableFcpoolLeaseRelationship and assigns it to the WwpnLease field.
 func (o *VnicFcIf) SetWwpnLease(v FcpoolLeaseRelationship) {
-	o.WwpnLease = &v
+	o.WwpnLease.Set(&v)
+}
+
+// SetWwpnLeaseNil sets the value for WwpnLease to be an explicit nil
+func (o *VnicFcIf) SetWwpnLeaseNil() {
+	o.WwpnLease.Set(nil)
+}
+
+// UnsetWwpnLease ensures that no value is present for WwpnLease, not even an explicit nil
+func (o *VnicFcIf) UnsetWwpnLease() {
+	o.WwpnLease.Unset()
 }
 
 func (o VnicFcIf) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o VnicFcIf) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedVnicBaseFcIf, errVnicBaseFcIf := json.Marshal(o.VnicBaseFcIf)
 	if errVnicBaseFcIf != nil {
-		return []byte{}, errVnicBaseFcIf
+		return map[string]interface{}{}, errVnicBaseFcIf
 	}
 	errVnicBaseFcIf = json.Unmarshal([]byte(serializedVnicBaseFcIf), &toSerialize)
 	if errVnicBaseFcIf != nil {
-		return []byte{}, errVnicBaseFcIf
+		return map[string]interface{}{}, errVnicBaseFcIf
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Name != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
 	}
-	if o.Order != nil {
+	if !IsNil(o.Order) {
 		toSerialize["Order"] = o.Order
 	}
 	if o.OverriddenList != nil {
@@ -718,7 +781,7 @@ func (o VnicFcIf) MarshalJSON() ([]byte, error) {
 	if o.Placement.IsSet() {
 		toSerialize["Placement"] = o.Placement.Get()
 	}
-	if o.StaticWwpnAddress != nil {
+	if !IsNil(o.StaticWwpnAddress) {
 		toSerialize["StaticWwpnAddress"] = o.StaticWwpnAddress
 	}
 	if o.TemplateActions != nil {
@@ -727,45 +790,67 @@ func (o VnicFcIf) MarshalJSON() ([]byte, error) {
 	if o.TemplateSyncErrors != nil {
 		toSerialize["TemplateSyncErrors"] = o.TemplateSyncErrors
 	}
-	if o.TemplateSyncStatus != nil {
+	if !IsNil(o.TemplateSyncStatus) {
 		toSerialize["TemplateSyncStatus"] = o.TemplateSyncStatus
 	}
-	if o.VifId != nil {
+	if !IsNil(o.VifId) {
 		toSerialize["VifId"] = o.VifId
 	}
-	if o.Wwpn != nil {
+	if !IsNil(o.Wwpn) {
 		toSerialize["Wwpn"] = o.Wwpn
 	}
-	if o.WwpnAddressType != nil {
+	if !IsNil(o.WwpnAddressType) {
 		toSerialize["WwpnAddressType"] = o.WwpnAddressType
 	}
-	if o.Profile != nil {
-		toSerialize["Profile"] = o.Profile
+	if o.Profile.IsSet() {
+		toSerialize["Profile"] = o.Profile.Get()
 	}
-	if o.SanConnectivityPolicy != nil {
-		toSerialize["SanConnectivityPolicy"] = o.SanConnectivityPolicy
+	if o.SanConnectivityPolicy.IsSet() {
+		toSerialize["SanConnectivityPolicy"] = o.SanConnectivityPolicy.Get()
 	}
-	if o.ScpVhba != nil {
-		toSerialize["ScpVhba"] = o.ScpVhba
+	if o.ScpVhba.IsSet() {
+		toSerialize["ScpVhba"] = o.ScpVhba.Get()
 	}
 	if o.SpVhbas != nil {
 		toSerialize["SpVhbas"] = o.SpVhbas
 	}
-	if o.SrcTemplate != nil {
-		toSerialize["SrcTemplate"] = o.SrcTemplate
+	if o.SrcTemplate.IsSet() {
+		toSerialize["SrcTemplate"] = o.SrcTemplate.Get()
 	}
-	if o.WwpnLease != nil {
-		toSerialize["WwpnLease"] = o.WwpnLease
+	if o.WwpnLease.IsSet() {
+		toSerialize["WwpnLease"] = o.WwpnLease.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *VnicFcIf) UnmarshalJSON(bytes []byte) (err error) {
+func (o *VnicFcIf) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type VnicFcIfWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -788,19 +873,19 @@ func (o *VnicFcIf) UnmarshalJSON(bytes []byte) (err error) {
 		// The WWPN address that is assigned to the vHBA based on the wwn pool that has been assigned to the SAN Connectivity Policy.
 		Wwpn *string `json:"Wwpn,omitempty"`
 		// Type of allocation selected to assign a WWPN address to the vhba. * `POOL` - The user selects a pool from which the mac/wwn address will be leased for the Virtual Interface. * `STATIC` - The user assigns a static mac/wwn address for the Virtual Interface.
-		WwpnAddressType       *string                                  `json:"WwpnAddressType,omitempty"`
-		Profile               *PolicyAbstractConfigProfileRelationship `json:"Profile,omitempty"`
-		SanConnectivityPolicy *VnicSanConnectivityPolicyRelationship   `json:"SanConnectivityPolicy,omitempty"`
-		ScpVhba               *VnicFcIfRelationship                    `json:"ScpVhba,omitempty"`
+		WwpnAddressType       *string                                         `json:"WwpnAddressType,omitempty"`
+		Profile               NullablePolicyAbstractConfigProfileRelationship `json:"Profile,omitempty"`
+		SanConnectivityPolicy NullableVnicSanConnectivityPolicyRelationship   `json:"SanConnectivityPolicy,omitempty"`
+		ScpVhba               NullableVnicFcIfRelationship                    `json:"ScpVhba,omitempty"`
 		// An array of relationships to vnicFcIf resources.
-		SpVhbas     []VnicFcIfRelationship        `json:"SpVhbas,omitempty"`
-		SrcTemplate *VnicVhbaTemplateRelationship `json:"SrcTemplate,omitempty"`
-		WwpnLease   *FcpoolLeaseRelationship      `json:"WwpnLease,omitempty"`
+		SpVhbas     []VnicFcIfRelationship               `json:"SpVhbas,omitempty"`
+		SrcTemplate NullableVnicVhbaTemplateRelationship `json:"SrcTemplate,omitempty"`
+		WwpnLease   NullableFcpoolLeaseRelationship      `json:"WwpnLease,omitempty"`
 	}
 
 	varVnicFcIfWithoutEmbeddedStruct := VnicFcIfWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varVnicFcIfWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varVnicFcIfWithoutEmbeddedStruct)
 	if err == nil {
 		varVnicFcIf := _VnicFcIf{}
 		varVnicFcIf.ClassId = varVnicFcIfWithoutEmbeddedStruct.ClassId
@@ -829,7 +914,7 @@ func (o *VnicFcIf) UnmarshalJSON(bytes []byte) (err error) {
 
 	varVnicFcIf := _VnicFcIf{}
 
-	err = json.Unmarshal(bytes, &varVnicFcIf)
+	err = json.Unmarshal(data, &varVnicFcIf)
 	if err == nil {
 		o.VnicBaseFcIf = varVnicFcIf.VnicBaseFcIf
 	} else {
@@ -838,7 +923,7 @@ func (o *VnicFcIf) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Name")

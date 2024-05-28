@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the ConvergedinfraBasePodSummary type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ConvergedinfraBasePodSummary{}
 
 // ConvergedinfraBasePodSummary Summary information for the base pod. This inclues properties like number of nodes, stroage capacity/utilization, aggregated alarms for all the components of the pod etc.
 type ConvergedinfraBasePodSummary struct {
@@ -112,7 +116,7 @@ func (o *ConvergedinfraBasePodSummary) SetObjectType(v string) {
 
 // GetAlarmSummary returns the AlarmSummary field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ConvergedinfraBasePodSummary) GetAlarmSummary() ConvergedinfraAlarmSummary {
-	if o == nil || o.AlarmSummary.Get() == nil {
+	if o == nil || IsNil(o.AlarmSummary.Get()) {
 		var ret ConvergedinfraAlarmSummary
 		return ret
 	}
@@ -155,7 +159,7 @@ func (o *ConvergedinfraBasePodSummary) UnsetAlarmSummary() {
 
 // GetComplianceSummary returns the ComplianceSummary field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ConvergedinfraBasePodSummary) GetComplianceSummary() ConvergedinfraComplianceSummary {
-	if o == nil || o.ComplianceSummary.Get() == nil {
+	if o == nil || IsNil(o.ComplianceSummary.Get()) {
 		var ret ConvergedinfraComplianceSummary
 		return ret
 	}
@@ -198,7 +202,7 @@ func (o *ConvergedinfraBasePodSummary) UnsetComplianceSummary() {
 
 // GetNodeCount returns the NodeCount field value if set, zero value otherwise.
 func (o *ConvergedinfraBasePodSummary) GetNodeCount() int64 {
-	if o == nil || o.NodeCount == nil {
+	if o == nil || IsNil(o.NodeCount) {
 		var ret int64
 		return ret
 	}
@@ -208,7 +212,7 @@ func (o *ConvergedinfraBasePodSummary) GetNodeCount() int64 {
 // GetNodeCountOk returns a tuple with the NodeCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ConvergedinfraBasePodSummary) GetNodeCountOk() (*int64, bool) {
-	if o == nil || o.NodeCount == nil {
+	if o == nil || IsNil(o.NodeCount) {
 		return nil, false
 	}
 	return o.NodeCount, true
@@ -216,7 +220,7 @@ func (o *ConvergedinfraBasePodSummary) GetNodeCountOk() (*int64, bool) {
 
 // HasNodeCount returns a boolean if a field has been set.
 func (o *ConvergedinfraBasePodSummary) HasNodeCount() bool {
-	if o != nil && o.NodeCount != nil {
+	if o != nil && !IsNil(o.NodeCount) {
 		return true
 	}
 
@@ -230,7 +234,7 @@ func (o *ConvergedinfraBasePodSummary) SetNodeCount(v int64) {
 
 // GetStorageAvailable returns the StorageAvailable field value if set, zero value otherwise.
 func (o *ConvergedinfraBasePodSummary) GetStorageAvailable() int64 {
-	if o == nil || o.StorageAvailable == nil {
+	if o == nil || IsNil(o.StorageAvailable) {
 		var ret int64
 		return ret
 	}
@@ -240,7 +244,7 @@ func (o *ConvergedinfraBasePodSummary) GetStorageAvailable() int64 {
 // GetStorageAvailableOk returns a tuple with the StorageAvailable field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ConvergedinfraBasePodSummary) GetStorageAvailableOk() (*int64, bool) {
-	if o == nil || o.StorageAvailable == nil {
+	if o == nil || IsNil(o.StorageAvailable) {
 		return nil, false
 	}
 	return o.StorageAvailable, true
@@ -248,7 +252,7 @@ func (o *ConvergedinfraBasePodSummary) GetStorageAvailableOk() (*int64, bool) {
 
 // HasStorageAvailable returns a boolean if a field has been set.
 func (o *ConvergedinfraBasePodSummary) HasStorageAvailable() bool {
-	if o != nil && o.StorageAvailable != nil {
+	if o != nil && !IsNil(o.StorageAvailable) {
 		return true
 	}
 
@@ -262,7 +266,7 @@ func (o *ConvergedinfraBasePodSummary) SetStorageAvailable(v int64) {
 
 // GetStorageCapacity returns the StorageCapacity field value if set, zero value otherwise.
 func (o *ConvergedinfraBasePodSummary) GetStorageCapacity() int64 {
-	if o == nil || o.StorageCapacity == nil {
+	if o == nil || IsNil(o.StorageCapacity) {
 		var ret int64
 		return ret
 	}
@@ -272,7 +276,7 @@ func (o *ConvergedinfraBasePodSummary) GetStorageCapacity() int64 {
 // GetStorageCapacityOk returns a tuple with the StorageCapacity field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ConvergedinfraBasePodSummary) GetStorageCapacityOk() (*int64, bool) {
-	if o == nil || o.StorageCapacity == nil {
+	if o == nil || IsNil(o.StorageCapacity) {
 		return nil, false
 	}
 	return o.StorageCapacity, true
@@ -280,7 +284,7 @@ func (o *ConvergedinfraBasePodSummary) GetStorageCapacityOk() (*int64, bool) {
 
 // HasStorageCapacity returns a boolean if a field has been set.
 func (o *ConvergedinfraBasePodSummary) HasStorageCapacity() bool {
-	if o != nil && o.StorageCapacity != nil {
+	if o != nil && !IsNil(o.StorageCapacity) {
 		return true
 	}
 
@@ -294,7 +298,7 @@ func (o *ConvergedinfraBasePodSummary) SetStorageCapacity(v int64) {
 
 // GetStorageUtilization returns the StorageUtilization field value if set, zero value otherwise.
 func (o *ConvergedinfraBasePodSummary) GetStorageUtilization() float32 {
-	if o == nil || o.StorageUtilization == nil {
+	if o == nil || IsNil(o.StorageUtilization) {
 		var ret float32
 		return ret
 	}
@@ -304,7 +308,7 @@ func (o *ConvergedinfraBasePodSummary) GetStorageUtilization() float32 {
 // GetStorageUtilizationOk returns a tuple with the StorageUtilization field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ConvergedinfraBasePodSummary) GetStorageUtilizationOk() (*float32, bool) {
-	if o == nil || o.StorageUtilization == nil {
+	if o == nil || IsNil(o.StorageUtilization) {
 		return nil, false
 	}
 	return o.StorageUtilization, true
@@ -312,7 +316,7 @@ func (o *ConvergedinfraBasePodSummary) GetStorageUtilizationOk() (*float32, bool
 
 // HasStorageUtilization returns a boolean if a field has been set.
 func (o *ConvergedinfraBasePodSummary) HasStorageUtilization() bool {
-	if o != nil && o.StorageUtilization != nil {
+	if o != nil && !IsNil(o.StorageUtilization) {
 		return true
 	}
 
@@ -325,37 +329,41 @@ func (o *ConvergedinfraBasePodSummary) SetStorageUtilization(v float32) {
 }
 
 func (o ConvergedinfraBasePodSummary) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o ConvergedinfraBasePodSummary) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
 	errMoBaseComplexType = json.Unmarshal([]byte(serializedMoBaseComplexType), &toSerialize)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
 	if o.AlarmSummary.IsSet() {
 		toSerialize["AlarmSummary"] = o.AlarmSummary.Get()
 	}
 	if o.ComplianceSummary.IsSet() {
 		toSerialize["ComplianceSummary"] = o.ComplianceSummary.Get()
 	}
-	if o.NodeCount != nil {
+	if !IsNil(o.NodeCount) {
 		toSerialize["NodeCount"] = o.NodeCount
 	}
-	if o.StorageAvailable != nil {
+	if !IsNil(o.StorageAvailable) {
 		toSerialize["StorageAvailable"] = o.StorageAvailable
 	}
-	if o.StorageCapacity != nil {
+	if !IsNil(o.StorageCapacity) {
 		toSerialize["StorageCapacity"] = o.StorageCapacity
 	}
-	if o.StorageUtilization != nil {
+	if !IsNil(o.StorageUtilization) {
 		toSerialize["StorageUtilization"] = o.StorageUtilization
 	}
 
@@ -363,10 +371,32 @@ func (o ConvergedinfraBasePodSummary) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *ConvergedinfraBasePodSummary) UnmarshalJSON(bytes []byte) (err error) {
+func (o *ConvergedinfraBasePodSummary) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type ConvergedinfraBasePodSummaryWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type.
 		ClassId string `json:"ClassId"`
@@ -386,7 +416,7 @@ func (o *ConvergedinfraBasePodSummary) UnmarshalJSON(bytes []byte) (err error) {
 
 	varConvergedinfraBasePodSummaryWithoutEmbeddedStruct := ConvergedinfraBasePodSummaryWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varConvergedinfraBasePodSummaryWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varConvergedinfraBasePodSummaryWithoutEmbeddedStruct)
 	if err == nil {
 		varConvergedinfraBasePodSummary := _ConvergedinfraBasePodSummary{}
 		varConvergedinfraBasePodSummary.ClassId = varConvergedinfraBasePodSummaryWithoutEmbeddedStruct.ClassId
@@ -404,7 +434,7 @@ func (o *ConvergedinfraBasePodSummary) UnmarshalJSON(bytes []byte) (err error) {
 
 	varConvergedinfraBasePodSummary := _ConvergedinfraBasePodSummary{}
 
-	err = json.Unmarshal(bytes, &varConvergedinfraBasePodSummary)
+	err = json.Unmarshal(data, &varConvergedinfraBasePodSummary)
 	if err == nil {
 		o.MoBaseComplexType = varConvergedinfraBasePodSummary.MoBaseComplexType
 	} else {
@@ -413,7 +443,7 @@ func (o *ConvergedinfraBasePodSummary) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "AlarmSummary")

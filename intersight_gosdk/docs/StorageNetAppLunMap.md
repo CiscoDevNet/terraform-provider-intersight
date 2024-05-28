@@ -9,8 +9,8 @@ Name | Type | Description | Notes
 **IgroupUuid** | Pointer to **string** | UUID of the initiator group. | [optional] [readonly] 
 **LunUuid** | Pointer to **string** | Universally unique identifier of the LUN. | [optional] [readonly] 
 **Host** | Pointer to [**[]StorageNetAppInitiatorGroupRelationship**](StorageNetAppInitiatorGroupRelationship.md) | An array of relationships to storageNetAppInitiatorGroup resources. | [optional] [readonly] 
-**Tenant** | Pointer to [**StorageNetAppStorageVmRelationship**](StorageNetAppStorageVmRelationship.md) |  | [optional] 
-**Volume** | Pointer to [**StorageNetAppLunRelationship**](StorageNetAppLunRelationship.md) |  | [optional] 
+**Tenant** | Pointer to [**NullableStorageNetAppStorageVmRelationship**](StorageNetAppStorageVmRelationship.md) |  | [optional] 
+**Volume** | Pointer to [**NullableStorageNetAppLunRelationship**](StorageNetAppLunRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -181,6 +181,16 @@ SetTenant sets Tenant field to given value.
 
 HasTenant returns a boolean if a field has been set.
 
+### SetTenantNil
+
+`func (o *StorageNetAppLunMap) SetTenantNil(b bool)`
+
+ SetTenantNil sets the value for Tenant to be an explicit nil
+
+### UnsetTenant
+`func (o *StorageNetAppLunMap) UnsetTenant()`
+
+UnsetTenant ensures that no value is present for Tenant, not even an explicit nil
 ### GetVolume
 
 `func (o *StorageNetAppLunMap) GetVolume() StorageNetAppLunRelationship`
@@ -206,6 +216,16 @@ SetVolume sets Volume field to given value.
 
 HasVolume returns a boolean if a field has been set.
 
+### SetVolumeNil
+
+`func (o *StorageNetAppLunMap) SetVolumeNil(b bool)`
+
+ SetVolumeNil sets the value for Volume to be an explicit nil
+
+### UnsetVolume
+`func (o *StorageNetAppLunMap) UnsetVolume()`
+
+UnsetVolume ensures that no value is present for Volume, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

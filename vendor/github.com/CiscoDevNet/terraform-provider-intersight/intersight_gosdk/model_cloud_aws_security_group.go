@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the CloudAwsSecurityGroup type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &CloudAwsSecurityGroup{}
 
 // CloudAwsSecurityGroup AWS Security group object is represented here. It contains inbound and outbound rules control the flow of traffic to and traffic from the virtual machine, respectively.
 type CloudAwsSecurityGroup struct {
@@ -23,12 +27,12 @@ type CloudAwsSecurityGroup struct {
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
-	ObjectType           string                           `json:"ObjectType"`
-	EgressRules          []CloudSecurityGroupRule         `json:"EgressRules,omitempty"`
-	IngressRules         []CloudSecurityGroupRule         `json:"IngressRules,omitempty"`
-	SecurityGroupTags    []CloudCloudTag                  `json:"SecurityGroupTags,omitempty"`
-	AwsBillingUnit       *CloudAwsBillingUnitRelationship `json:"AwsBillingUnit,omitempty"`
-	Location             *CloudAwsVpcRelationship         `json:"Location,omitempty"`
+	ObjectType           string                                  `json:"ObjectType"`
+	EgressRules          []CloudSecurityGroupRule                `json:"EgressRules,omitempty"`
+	IngressRules         []CloudSecurityGroupRule                `json:"IngressRules,omitempty"`
+	SecurityGroupTags    []CloudCloudTag                         `json:"SecurityGroupTags,omitempty"`
+	AwsBillingUnit       NullableCloudAwsBillingUnitRelationship `json:"AwsBillingUnit,omitempty"`
+	Location             NullableCloudAwsVpcRelationship         `json:"Location,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -118,7 +122,7 @@ func (o *CloudAwsSecurityGroup) GetEgressRules() []CloudSecurityGroupRule {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CloudAwsSecurityGroup) GetEgressRulesOk() ([]CloudSecurityGroupRule, bool) {
-	if o == nil || o.EgressRules == nil {
+	if o == nil || IsNil(o.EgressRules) {
 		return nil, false
 	}
 	return o.EgressRules, true
@@ -126,7 +130,7 @@ func (o *CloudAwsSecurityGroup) GetEgressRulesOk() ([]CloudSecurityGroupRule, bo
 
 // HasEgressRules returns a boolean if a field has been set.
 func (o *CloudAwsSecurityGroup) HasEgressRules() bool {
-	if o != nil && o.EgressRules != nil {
+	if o != nil && IsNil(o.EgressRules) {
 		return true
 	}
 
@@ -151,7 +155,7 @@ func (o *CloudAwsSecurityGroup) GetIngressRules() []CloudSecurityGroupRule {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CloudAwsSecurityGroup) GetIngressRulesOk() ([]CloudSecurityGroupRule, bool) {
-	if o == nil || o.IngressRules == nil {
+	if o == nil || IsNil(o.IngressRules) {
 		return nil, false
 	}
 	return o.IngressRules, true
@@ -159,7 +163,7 @@ func (o *CloudAwsSecurityGroup) GetIngressRulesOk() ([]CloudSecurityGroupRule, b
 
 // HasIngressRules returns a boolean if a field has been set.
 func (o *CloudAwsSecurityGroup) HasIngressRules() bool {
-	if o != nil && o.IngressRules != nil {
+	if o != nil && IsNil(o.IngressRules) {
 		return true
 	}
 
@@ -184,7 +188,7 @@ func (o *CloudAwsSecurityGroup) GetSecurityGroupTags() []CloudCloudTag {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CloudAwsSecurityGroup) GetSecurityGroupTagsOk() ([]CloudCloudTag, bool) {
-	if o == nil || o.SecurityGroupTags == nil {
+	if o == nil || IsNil(o.SecurityGroupTags) {
 		return nil, false
 	}
 	return o.SecurityGroupTags, true
@@ -192,7 +196,7 @@ func (o *CloudAwsSecurityGroup) GetSecurityGroupTagsOk() ([]CloudCloudTag, bool)
 
 // HasSecurityGroupTags returns a boolean if a field has been set.
 func (o *CloudAwsSecurityGroup) HasSecurityGroupTags() bool {
-	if o != nil && o.SecurityGroupTags != nil {
+	if o != nil && IsNil(o.SecurityGroupTags) {
 		return true
 	}
 
@@ -204,86 +208,112 @@ func (o *CloudAwsSecurityGroup) SetSecurityGroupTags(v []CloudCloudTag) {
 	o.SecurityGroupTags = v
 }
 
-// GetAwsBillingUnit returns the AwsBillingUnit field value if set, zero value otherwise.
+// GetAwsBillingUnit returns the AwsBillingUnit field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CloudAwsSecurityGroup) GetAwsBillingUnit() CloudAwsBillingUnitRelationship {
-	if o == nil || o.AwsBillingUnit == nil {
+	if o == nil || IsNil(o.AwsBillingUnit.Get()) {
 		var ret CloudAwsBillingUnitRelationship
 		return ret
 	}
-	return *o.AwsBillingUnit
+	return *o.AwsBillingUnit.Get()
 }
 
 // GetAwsBillingUnitOk returns a tuple with the AwsBillingUnit field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CloudAwsSecurityGroup) GetAwsBillingUnitOk() (*CloudAwsBillingUnitRelationship, bool) {
-	if o == nil || o.AwsBillingUnit == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.AwsBillingUnit, true
+	return o.AwsBillingUnit.Get(), o.AwsBillingUnit.IsSet()
 }
 
 // HasAwsBillingUnit returns a boolean if a field has been set.
 func (o *CloudAwsSecurityGroup) HasAwsBillingUnit() bool {
-	if o != nil && o.AwsBillingUnit != nil {
+	if o != nil && o.AwsBillingUnit.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetAwsBillingUnit gets a reference to the given CloudAwsBillingUnitRelationship and assigns it to the AwsBillingUnit field.
+// SetAwsBillingUnit gets a reference to the given NullableCloudAwsBillingUnitRelationship and assigns it to the AwsBillingUnit field.
 func (o *CloudAwsSecurityGroup) SetAwsBillingUnit(v CloudAwsBillingUnitRelationship) {
-	o.AwsBillingUnit = &v
+	o.AwsBillingUnit.Set(&v)
 }
 
-// GetLocation returns the Location field value if set, zero value otherwise.
+// SetAwsBillingUnitNil sets the value for AwsBillingUnit to be an explicit nil
+func (o *CloudAwsSecurityGroup) SetAwsBillingUnitNil() {
+	o.AwsBillingUnit.Set(nil)
+}
+
+// UnsetAwsBillingUnit ensures that no value is present for AwsBillingUnit, not even an explicit nil
+func (o *CloudAwsSecurityGroup) UnsetAwsBillingUnit() {
+	o.AwsBillingUnit.Unset()
+}
+
+// GetLocation returns the Location field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CloudAwsSecurityGroup) GetLocation() CloudAwsVpcRelationship {
-	if o == nil || o.Location == nil {
+	if o == nil || IsNil(o.Location.Get()) {
 		var ret CloudAwsVpcRelationship
 		return ret
 	}
-	return *o.Location
+	return *o.Location.Get()
 }
 
 // GetLocationOk returns a tuple with the Location field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CloudAwsSecurityGroup) GetLocationOk() (*CloudAwsVpcRelationship, bool) {
-	if o == nil || o.Location == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Location, true
+	return o.Location.Get(), o.Location.IsSet()
 }
 
 // HasLocation returns a boolean if a field has been set.
 func (o *CloudAwsSecurityGroup) HasLocation() bool {
-	if o != nil && o.Location != nil {
+	if o != nil && o.Location.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetLocation gets a reference to the given CloudAwsVpcRelationship and assigns it to the Location field.
+// SetLocation gets a reference to the given NullableCloudAwsVpcRelationship and assigns it to the Location field.
 func (o *CloudAwsSecurityGroup) SetLocation(v CloudAwsVpcRelationship) {
-	o.Location = &v
+	o.Location.Set(&v)
+}
+
+// SetLocationNil sets the value for Location to be an explicit nil
+func (o *CloudAwsSecurityGroup) SetLocationNil() {
+	o.Location.Set(nil)
+}
+
+// UnsetLocation ensures that no value is present for Location, not even an explicit nil
+func (o *CloudAwsSecurityGroup) UnsetLocation() {
+	o.Location.Unset()
 }
 
 func (o CloudAwsSecurityGroup) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o CloudAwsSecurityGroup) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedCloudBaseEntity, errCloudBaseEntity := json.Marshal(o.CloudBaseEntity)
 	if errCloudBaseEntity != nil {
-		return []byte{}, errCloudBaseEntity
+		return map[string]interface{}{}, errCloudBaseEntity
 	}
 	errCloudBaseEntity = json.Unmarshal([]byte(serializedCloudBaseEntity), &toSerialize)
 	if errCloudBaseEntity != nil {
-		return []byte{}, errCloudBaseEntity
+		return map[string]interface{}{}, errCloudBaseEntity
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
 	if o.EgressRules != nil {
 		toSerialize["EgressRules"] = o.EgressRules
 	}
@@ -293,36 +323,58 @@ func (o CloudAwsSecurityGroup) MarshalJSON() ([]byte, error) {
 	if o.SecurityGroupTags != nil {
 		toSerialize["SecurityGroupTags"] = o.SecurityGroupTags
 	}
-	if o.AwsBillingUnit != nil {
-		toSerialize["AwsBillingUnit"] = o.AwsBillingUnit
+	if o.AwsBillingUnit.IsSet() {
+		toSerialize["AwsBillingUnit"] = o.AwsBillingUnit.Get()
 	}
-	if o.Location != nil {
-		toSerialize["Location"] = o.Location
+	if o.Location.IsSet() {
+		toSerialize["Location"] = o.Location.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *CloudAwsSecurityGroup) UnmarshalJSON(bytes []byte) (err error) {
+func (o *CloudAwsSecurityGroup) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type CloudAwsSecurityGroupWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
-		ObjectType        string                           `json:"ObjectType"`
-		EgressRules       []CloudSecurityGroupRule         `json:"EgressRules,omitempty"`
-		IngressRules      []CloudSecurityGroupRule         `json:"IngressRules,omitempty"`
-		SecurityGroupTags []CloudCloudTag                  `json:"SecurityGroupTags,omitempty"`
-		AwsBillingUnit    *CloudAwsBillingUnitRelationship `json:"AwsBillingUnit,omitempty"`
-		Location          *CloudAwsVpcRelationship         `json:"Location,omitempty"`
+		ObjectType        string                                  `json:"ObjectType"`
+		EgressRules       []CloudSecurityGroupRule                `json:"EgressRules,omitempty"`
+		IngressRules      []CloudSecurityGroupRule                `json:"IngressRules,omitempty"`
+		SecurityGroupTags []CloudCloudTag                         `json:"SecurityGroupTags,omitempty"`
+		AwsBillingUnit    NullableCloudAwsBillingUnitRelationship `json:"AwsBillingUnit,omitempty"`
+		Location          NullableCloudAwsVpcRelationship         `json:"Location,omitempty"`
 	}
 
 	varCloudAwsSecurityGroupWithoutEmbeddedStruct := CloudAwsSecurityGroupWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varCloudAwsSecurityGroupWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varCloudAwsSecurityGroupWithoutEmbeddedStruct)
 	if err == nil {
 		varCloudAwsSecurityGroup := _CloudAwsSecurityGroup{}
 		varCloudAwsSecurityGroup.ClassId = varCloudAwsSecurityGroupWithoutEmbeddedStruct.ClassId
@@ -339,7 +391,7 @@ func (o *CloudAwsSecurityGroup) UnmarshalJSON(bytes []byte) (err error) {
 
 	varCloudAwsSecurityGroup := _CloudAwsSecurityGroup{}
 
-	err = json.Unmarshal(bytes, &varCloudAwsSecurityGroup)
+	err = json.Unmarshal(data, &varCloudAwsSecurityGroup)
 	if err == nil {
 		o.CloudBaseEntity = varCloudAwsSecurityGroup.CloudBaseEntity
 	} else {
@@ -348,7 +400,7 @@ func (o *CloudAwsSecurityGroup) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "EgressRules")

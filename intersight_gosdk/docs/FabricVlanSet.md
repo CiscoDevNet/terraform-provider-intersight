@@ -12,8 +12,8 @@ Name | Type | Description | Notes
 **PrimaryVlanId** | Pointer to **int64** | The Primary VLAN ID of the VLAN, if the sharing type of the VLAN is Isolated or Community. | [optional] [readonly] [default to 0]
 **SharingType** | Pointer to **string** | The sharing type of this VLAN. * &#x60;None&#x60; - This represents a regular VLAN. * &#x60;Primary&#x60; - This represents a primary VLAN. * &#x60;Isolated&#x60; - This represents an isolated VLAN. * &#x60;Community&#x60; - This represents a community VLAN. | [optional] [readonly] [default to "None"]
 **Vlans** | Pointer to **string** | Set of VLANs defined by VLAN object with identical configuration. | [optional] [readonly] 
-**EthNetworkPolicy** | Pointer to [**FabricEthNetworkPolicyRelationship**](FabricEthNetworkPolicyRelationship.md) |  | [optional] 
-**MulticastPolicy** | Pointer to [**FabricMulticastPolicyRelationship**](FabricMulticastPolicyRelationship.md) |  | [optional] 
+**EthNetworkPolicy** | Pointer to [**NullableFabricEthNetworkPolicyRelationship**](FabricEthNetworkPolicyRelationship.md) |  | [optional] 
+**MulticastPolicy** | Pointer to [**NullableFabricMulticastPolicyRelationship**](FabricMulticastPolicyRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -249,6 +249,16 @@ SetEthNetworkPolicy sets EthNetworkPolicy field to given value.
 
 HasEthNetworkPolicy returns a boolean if a field has been set.
 
+### SetEthNetworkPolicyNil
+
+`func (o *FabricVlanSet) SetEthNetworkPolicyNil(b bool)`
+
+ SetEthNetworkPolicyNil sets the value for EthNetworkPolicy to be an explicit nil
+
+### UnsetEthNetworkPolicy
+`func (o *FabricVlanSet) UnsetEthNetworkPolicy()`
+
+UnsetEthNetworkPolicy ensures that no value is present for EthNetworkPolicy, not even an explicit nil
 ### GetMulticastPolicy
 
 `func (o *FabricVlanSet) GetMulticastPolicy() FabricMulticastPolicyRelationship`
@@ -274,6 +284,16 @@ SetMulticastPolicy sets MulticastPolicy field to given value.
 
 HasMulticastPolicy returns a boolean if a field has been set.
 
+### SetMulticastPolicyNil
+
+`func (o *FabricVlanSet) SetMulticastPolicyNil(b bool)`
+
+ SetMulticastPolicyNil sets the value for MulticastPolicy to be an explicit nil
+
+### UnsetMulticastPolicy
+`func (o *FabricVlanSet) UnsetMulticastPolicy()`
+
+UnsetMulticastPolicy ensures that no value is present for MulticastPolicy, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the SoftwarerepositoryCategoryMapper type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &SoftwarerepositoryCategoryMapper{}
 
 // SoftwarerepositoryCategoryMapper Maps a Cisco software repository image category identifier to its applicable hardware models.
 type SoftwarerepositoryCategoryMapper struct {
@@ -130,7 +134,7 @@ func (o *SoftwarerepositoryCategoryMapper) SetObjectType(v string) {
 
 // GetCategory returns the Category field value if set, zero value otherwise.
 func (o *SoftwarerepositoryCategoryMapper) GetCategory() string {
-	if o == nil || o.Category == nil {
+	if o == nil || IsNil(o.Category) {
 		var ret string
 		return ret
 	}
@@ -140,7 +144,7 @@ func (o *SoftwarerepositoryCategoryMapper) GetCategory() string {
 // GetCategoryOk returns a tuple with the Category field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SoftwarerepositoryCategoryMapper) GetCategoryOk() (*string, bool) {
-	if o == nil || o.Category == nil {
+	if o == nil || IsNil(o.Category) {
 		return nil, false
 	}
 	return o.Category, true
@@ -148,7 +152,7 @@ func (o *SoftwarerepositoryCategoryMapper) GetCategoryOk() (*string, bool) {
 
 // HasCategory returns a boolean if a field has been set.
 func (o *SoftwarerepositoryCategoryMapper) HasCategory() bool {
-	if o != nil && o.Category != nil {
+	if o != nil && !IsNil(o.Category) {
 		return true
 	}
 
@@ -162,7 +166,7 @@ func (o *SoftwarerepositoryCategoryMapper) SetCategory(v string) {
 
 // GetFileType returns the FileType field value if set, zero value otherwise.
 func (o *SoftwarerepositoryCategoryMapper) GetFileType() string {
-	if o == nil || o.FileType == nil {
+	if o == nil || IsNil(o.FileType) {
 		var ret string
 		return ret
 	}
@@ -172,7 +176,7 @@ func (o *SoftwarerepositoryCategoryMapper) GetFileType() string {
 // GetFileTypeOk returns a tuple with the FileType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SoftwarerepositoryCategoryMapper) GetFileTypeOk() (*string, bool) {
-	if o == nil || o.FileType == nil {
+	if o == nil || IsNil(o.FileType) {
 		return nil, false
 	}
 	return o.FileType, true
@@ -180,7 +184,7 @@ func (o *SoftwarerepositoryCategoryMapper) GetFileTypeOk() (*string, bool) {
 
 // HasFileType returns a boolean if a field has been set.
 func (o *SoftwarerepositoryCategoryMapper) HasFileType() bool {
-	if o != nil && o.FileType != nil {
+	if o != nil && !IsNil(o.FileType) {
 		return true
 	}
 
@@ -194,7 +198,7 @@ func (o *SoftwarerepositoryCategoryMapper) SetFileType(v string) {
 
 // GetImageType returns the ImageType field value if set, zero value otherwise.
 func (o *SoftwarerepositoryCategoryMapper) GetImageType() string {
-	if o == nil || o.ImageType == nil {
+	if o == nil || IsNil(o.ImageType) {
 		var ret string
 		return ret
 	}
@@ -204,7 +208,7 @@ func (o *SoftwarerepositoryCategoryMapper) GetImageType() string {
 // GetImageTypeOk returns a tuple with the ImageType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SoftwarerepositoryCategoryMapper) GetImageTypeOk() (*string, bool) {
-	if o == nil || o.ImageType == nil {
+	if o == nil || IsNil(o.ImageType) {
 		return nil, false
 	}
 	return o.ImageType, true
@@ -212,7 +216,7 @@ func (o *SoftwarerepositoryCategoryMapper) GetImageTypeOk() (*string, bool) {
 
 // HasImageType returns a boolean if a field has been set.
 func (o *SoftwarerepositoryCategoryMapper) HasImageType() bool {
-	if o != nil && o.ImageType != nil {
+	if o != nil && !IsNil(o.ImageType) {
 		return true
 	}
 
@@ -226,7 +230,7 @@ func (o *SoftwarerepositoryCategoryMapper) SetImageType(v string) {
 
 // GetIsNfsUpgradeSupported returns the IsNfsUpgradeSupported field value if set, zero value otherwise.
 func (o *SoftwarerepositoryCategoryMapper) GetIsNfsUpgradeSupported() bool {
-	if o == nil || o.IsNfsUpgradeSupported == nil {
+	if o == nil || IsNil(o.IsNfsUpgradeSupported) {
 		var ret bool
 		return ret
 	}
@@ -236,7 +240,7 @@ func (o *SoftwarerepositoryCategoryMapper) GetIsNfsUpgradeSupported() bool {
 // GetIsNfsUpgradeSupportedOk returns a tuple with the IsNfsUpgradeSupported field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SoftwarerepositoryCategoryMapper) GetIsNfsUpgradeSupportedOk() (*bool, bool) {
-	if o == nil || o.IsNfsUpgradeSupported == nil {
+	if o == nil || IsNil(o.IsNfsUpgradeSupported) {
 		return nil, false
 	}
 	return o.IsNfsUpgradeSupported, true
@@ -244,7 +248,7 @@ func (o *SoftwarerepositoryCategoryMapper) GetIsNfsUpgradeSupportedOk() (*bool, 
 
 // HasIsNfsUpgradeSupported returns a boolean if a field has been set.
 func (o *SoftwarerepositoryCategoryMapper) HasIsNfsUpgradeSupported() bool {
-	if o != nil && o.IsNfsUpgradeSupported != nil {
+	if o != nil && !IsNil(o.IsNfsUpgradeSupported) {
 		return true
 	}
 
@@ -258,7 +262,7 @@ func (o *SoftwarerepositoryCategoryMapper) SetIsNfsUpgradeSupported(v bool) {
 
 // GetMdfId returns the MdfId field value if set, zero value otherwise.
 func (o *SoftwarerepositoryCategoryMapper) GetMdfId() string {
-	if o == nil || o.MdfId == nil {
+	if o == nil || IsNil(o.MdfId) {
 		var ret string
 		return ret
 	}
@@ -268,7 +272,7 @@ func (o *SoftwarerepositoryCategoryMapper) GetMdfId() string {
 // GetMdfIdOk returns a tuple with the MdfId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SoftwarerepositoryCategoryMapper) GetMdfIdOk() (*string, bool) {
-	if o == nil || o.MdfId == nil {
+	if o == nil || IsNil(o.MdfId) {
 		return nil, false
 	}
 	return o.MdfId, true
@@ -276,7 +280,7 @@ func (o *SoftwarerepositoryCategoryMapper) GetMdfIdOk() (*string, bool) {
 
 // HasMdfId returns a boolean if a field has been set.
 func (o *SoftwarerepositoryCategoryMapper) HasMdfId() bool {
-	if o != nil && o.MdfId != nil {
+	if o != nil && !IsNil(o.MdfId) {
 		return true
 	}
 
@@ -290,7 +294,7 @@ func (o *SoftwarerepositoryCategoryMapper) SetMdfId(v string) {
 
 // GetRegexPattern returns the RegexPattern field value if set, zero value otherwise.
 func (o *SoftwarerepositoryCategoryMapper) GetRegexPattern() string {
-	if o == nil || o.RegexPattern == nil {
+	if o == nil || IsNil(o.RegexPattern) {
 		var ret string
 		return ret
 	}
@@ -300,7 +304,7 @@ func (o *SoftwarerepositoryCategoryMapper) GetRegexPattern() string {
 // GetRegexPatternOk returns a tuple with the RegexPattern field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SoftwarerepositoryCategoryMapper) GetRegexPatternOk() (*string, bool) {
-	if o == nil || o.RegexPattern == nil {
+	if o == nil || IsNil(o.RegexPattern) {
 		return nil, false
 	}
 	return o.RegexPattern, true
@@ -308,7 +312,7 @@ func (o *SoftwarerepositoryCategoryMapper) GetRegexPatternOk() (*string, bool) {
 
 // HasRegexPattern returns a boolean if a field has been set.
 func (o *SoftwarerepositoryCategoryMapper) HasRegexPattern() bool {
-	if o != nil && o.RegexPattern != nil {
+	if o != nil && !IsNil(o.RegexPattern) {
 		return true
 	}
 
@@ -322,7 +326,7 @@ func (o *SoftwarerepositoryCategoryMapper) SetRegexPattern(v string) {
 
 // GetSource returns the Source field value if set, zero value otherwise.
 func (o *SoftwarerepositoryCategoryMapper) GetSource() string {
-	if o == nil || o.Source == nil {
+	if o == nil || IsNil(o.Source) {
 		var ret string
 		return ret
 	}
@@ -332,7 +336,7 @@ func (o *SoftwarerepositoryCategoryMapper) GetSource() string {
 // GetSourceOk returns a tuple with the Source field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SoftwarerepositoryCategoryMapper) GetSourceOk() (*string, bool) {
-	if o == nil || o.Source == nil {
+	if o == nil || IsNil(o.Source) {
 		return nil, false
 	}
 	return o.Source, true
@@ -340,7 +344,7 @@ func (o *SoftwarerepositoryCategoryMapper) GetSourceOk() (*string, bool) {
 
 // HasSource returns a boolean if a field has been set.
 func (o *SoftwarerepositoryCategoryMapper) HasSource() bool {
-	if o != nil && o.Source != nil {
+	if o != nil && !IsNil(o.Source) {
 		return true
 	}
 
@@ -365,7 +369,7 @@ func (o *SoftwarerepositoryCategoryMapper) GetSupportedModels() []string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *SoftwarerepositoryCategoryMapper) GetSupportedModelsOk() ([]string, bool) {
-	if o == nil || o.SupportedModels == nil {
+	if o == nil || IsNil(o.SupportedModels) {
 		return nil, false
 	}
 	return o.SupportedModels, true
@@ -373,7 +377,7 @@ func (o *SoftwarerepositoryCategoryMapper) GetSupportedModelsOk() ([]string, boo
 
 // HasSupportedModels returns a boolean if a field has been set.
 func (o *SoftwarerepositoryCategoryMapper) HasSupportedModels() bool {
-	if o != nil && o.SupportedModels != nil {
+	if o != nil && IsNil(o.SupportedModels) {
 		return true
 	}
 
@@ -387,7 +391,7 @@ func (o *SoftwarerepositoryCategoryMapper) SetSupportedModels(v []string) {
 
 // GetSwId returns the SwId field value if set, zero value otherwise.
 func (o *SoftwarerepositoryCategoryMapper) GetSwId() string {
-	if o == nil || o.SwId == nil {
+	if o == nil || IsNil(o.SwId) {
 		var ret string
 		return ret
 	}
@@ -397,7 +401,7 @@ func (o *SoftwarerepositoryCategoryMapper) GetSwId() string {
 // GetSwIdOk returns a tuple with the SwId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SoftwarerepositoryCategoryMapper) GetSwIdOk() (*string, bool) {
-	if o == nil || o.SwId == nil {
+	if o == nil || IsNil(o.SwId) {
 		return nil, false
 	}
 	return o.SwId, true
@@ -405,7 +409,7 @@ func (o *SoftwarerepositoryCategoryMapper) GetSwIdOk() (*string, bool) {
 
 // HasSwId returns a boolean if a field has been set.
 func (o *SoftwarerepositoryCategoryMapper) HasSwId() bool {
-	if o != nil && o.SwId != nil {
+	if o != nil && !IsNil(o.SwId) {
 		return true
 	}
 
@@ -430,7 +434,7 @@ func (o *SoftwarerepositoryCategoryMapper) GetTagTypes() []string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *SoftwarerepositoryCategoryMapper) GetTagTypesOk() ([]string, bool) {
-	if o == nil || o.TagTypes == nil {
+	if o == nil || IsNil(o.TagTypes) {
 		return nil, false
 	}
 	return o.TagTypes, true
@@ -438,7 +442,7 @@ func (o *SoftwarerepositoryCategoryMapper) GetTagTypesOk() ([]string, bool) {
 
 // HasTagTypes returns a boolean if a field has been set.
 func (o *SoftwarerepositoryCategoryMapper) HasTagTypes() bool {
-	if o != nil && o.TagTypes != nil {
+	if o != nil && IsNil(o.TagTypes) {
 		return true
 	}
 
@@ -452,7 +456,7 @@ func (o *SoftwarerepositoryCategoryMapper) SetTagTypes(v []string) {
 
 // GetVersion returns the Version field value if set, zero value otherwise.
 func (o *SoftwarerepositoryCategoryMapper) GetVersion() string {
-	if o == nil || o.Version == nil {
+	if o == nil || IsNil(o.Version) {
 		var ret string
 		return ret
 	}
@@ -462,7 +466,7 @@ func (o *SoftwarerepositoryCategoryMapper) GetVersion() string {
 // GetVersionOk returns a tuple with the Version field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SoftwarerepositoryCategoryMapper) GetVersionOk() (*string, bool) {
-	if o == nil || o.Version == nil {
+	if o == nil || IsNil(o.Version) {
 		return nil, false
 	}
 	return o.Version, true
@@ -470,7 +474,7 @@ func (o *SoftwarerepositoryCategoryMapper) GetVersionOk() (*string, bool) {
 
 // HasVersion returns a boolean if a field has been set.
 func (o *SoftwarerepositoryCategoryMapper) HasVersion() bool {
-	if o != nil && o.Version != nil {
+	if o != nil && !IsNil(o.Version) {
 		return true
 	}
 
@@ -483,52 +487,56 @@ func (o *SoftwarerepositoryCategoryMapper) SetVersion(v string) {
 }
 
 func (o SoftwarerepositoryCategoryMapper) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o SoftwarerepositoryCategoryMapper) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedCapabilityCapability, errCapabilityCapability := json.Marshal(o.CapabilityCapability)
 	if errCapabilityCapability != nil {
-		return []byte{}, errCapabilityCapability
+		return map[string]interface{}{}, errCapabilityCapability
 	}
 	errCapabilityCapability = json.Unmarshal([]byte(serializedCapabilityCapability), &toSerialize)
 	if errCapabilityCapability != nil {
-		return []byte{}, errCapabilityCapability
+		return map[string]interface{}{}, errCapabilityCapability
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Category != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Category) {
 		toSerialize["Category"] = o.Category
 	}
-	if o.FileType != nil {
+	if !IsNil(o.FileType) {
 		toSerialize["FileType"] = o.FileType
 	}
-	if o.ImageType != nil {
+	if !IsNil(o.ImageType) {
 		toSerialize["ImageType"] = o.ImageType
 	}
-	if o.IsNfsUpgradeSupported != nil {
+	if !IsNil(o.IsNfsUpgradeSupported) {
 		toSerialize["IsNfsUpgradeSupported"] = o.IsNfsUpgradeSupported
 	}
-	if o.MdfId != nil {
+	if !IsNil(o.MdfId) {
 		toSerialize["MdfId"] = o.MdfId
 	}
-	if o.RegexPattern != nil {
+	if !IsNil(o.RegexPattern) {
 		toSerialize["RegexPattern"] = o.RegexPattern
 	}
-	if o.Source != nil {
+	if !IsNil(o.Source) {
 		toSerialize["Source"] = o.Source
 	}
 	if o.SupportedModels != nil {
 		toSerialize["SupportedModels"] = o.SupportedModels
 	}
-	if o.SwId != nil {
+	if !IsNil(o.SwId) {
 		toSerialize["SwId"] = o.SwId
 	}
 	if o.TagTypes != nil {
 		toSerialize["TagTypes"] = o.TagTypes
 	}
-	if o.Version != nil {
+	if !IsNil(o.Version) {
 		toSerialize["Version"] = o.Version
 	}
 
@@ -536,10 +544,32 @@ func (o SoftwarerepositoryCategoryMapper) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *SoftwarerepositoryCategoryMapper) UnmarshalJSON(bytes []byte) (err error) {
+func (o *SoftwarerepositoryCategoryMapper) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type SoftwarerepositoryCategoryMapperWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -569,7 +599,7 @@ func (o *SoftwarerepositoryCategoryMapper) UnmarshalJSON(bytes []byte) (err erro
 
 	varSoftwarerepositoryCategoryMapperWithoutEmbeddedStruct := SoftwarerepositoryCategoryMapperWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varSoftwarerepositoryCategoryMapperWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varSoftwarerepositoryCategoryMapperWithoutEmbeddedStruct)
 	if err == nil {
 		varSoftwarerepositoryCategoryMapper := _SoftwarerepositoryCategoryMapper{}
 		varSoftwarerepositoryCategoryMapper.ClassId = varSoftwarerepositoryCategoryMapperWithoutEmbeddedStruct.ClassId
@@ -592,7 +622,7 @@ func (o *SoftwarerepositoryCategoryMapper) UnmarshalJSON(bytes []byte) (err erro
 
 	varSoftwarerepositoryCategoryMapper := _SoftwarerepositoryCategoryMapper{}
 
-	err = json.Unmarshal(bytes, &varSoftwarerepositoryCategoryMapper)
+	err = json.Unmarshal(data, &varSoftwarerepositoryCategoryMapper)
 	if err == nil {
 		o.CapabilityCapability = varSoftwarerepositoryCategoryMapper.CapabilityCapability
 	} else {
@@ -601,7 +631,7 @@ func (o *SoftwarerepositoryCategoryMapper) UnmarshalJSON(bytes []byte) (err erro
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Category")

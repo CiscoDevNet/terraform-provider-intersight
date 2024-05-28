@@ -9,9 +9,9 @@ Name | Type | Description | Notes
 **Description** | Pointer to **string** | Informative description about each role. | [optional] [readonly] 
 **Name** | Pointer to **string** | The name of the role which has to be granted to user. | [optional] 
 **PrivilegeNames** | Pointer to **[]string** |  | [optional] 
-**Account** | Pointer to [**IamAccountRelationship**](IamAccountRelationship.md) |  | [optional] 
+**Account** | Pointer to [**NullableIamAccountRelationship**](IamAccountRelationship.md) |  | [optional] 
 **PrivilegeSets** | Pointer to [**[]IamPrivilegeSetRelationship**](IamPrivilegeSetRelationship.md) | An array of relationships to iamPrivilegeSet resources. | [optional] [readonly] 
-**System** | Pointer to [**IamSystemRelationship**](IamSystemRelationship.md) |  | [optional] 
+**System** | Pointer to [**NullableIamSystemRelationship**](IamSystemRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -182,6 +182,16 @@ SetAccount sets Account field to given value.
 
 HasAccount returns a boolean if a field has been set.
 
+### SetAccountNil
+
+`func (o *IamRole) SetAccountNil(b bool)`
+
+ SetAccountNil sets the value for Account to be an explicit nil
+
+### UnsetAccount
+`func (o *IamRole) UnsetAccount()`
+
+UnsetAccount ensures that no value is present for Account, not even an explicit nil
 ### GetPrivilegeSets
 
 `func (o *IamRole) GetPrivilegeSets() []IamPrivilegeSetRelationship`
@@ -242,6 +252,16 @@ SetSystem sets System field to given value.
 
 HasSystem returns a boolean if a field has been set.
 
+### SetSystemNil
+
+`func (o *IamRole) SetSystemNil(b bool)`
+
+ SetSystemNil sets the value for System to be an explicit nil
+
+### UnsetSystem
+`func (o *IamRole) UnsetSystem()`
+
+UnsetSystem ensures that no value is present for System, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

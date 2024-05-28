@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the NiatelemetryLc type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &NiatelemetryLc{}
 
 // NiatelemetryLc Object is available at Line Card scope.
 type NiatelemetryLc struct {
@@ -49,8 +53,8 @@ type NiatelemetryLc struct {
 	// The Site name represents an APIC cluster. Service Engine can onboard multiple APIC clusters / sites.
 	SiteName *string `json:"SiteName,omitempty"`
 	// VID for the line card in the inventory.
-	Vid                  *string                              `json:"Vid,omitempty"`
-	RegisteredDevice     *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+	Vid                  *string                                     `json:"Vid,omitempty"`
+	RegisteredDevice     NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -129,7 +133,7 @@ func (o *NiatelemetryLc) SetObjectType(v string) {
 
 // GetDescription returns the Description field value if set, zero value otherwise.
 func (o *NiatelemetryLc) GetDescription() string {
-	if o == nil || o.Description == nil {
+	if o == nil || IsNil(o.Description) {
 		var ret string
 		return ret
 	}
@@ -139,7 +143,7 @@ func (o *NiatelemetryLc) GetDescription() string {
 // GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryLc) GetDescriptionOk() (*string, bool) {
-	if o == nil || o.Description == nil {
+	if o == nil || IsNil(o.Description) {
 		return nil, false
 	}
 	return o.Description, true
@@ -147,7 +151,7 @@ func (o *NiatelemetryLc) GetDescriptionOk() (*string, bool) {
 
 // HasDescription returns a boolean if a field has been set.
 func (o *NiatelemetryLc) HasDescription() bool {
-	if o != nil && o.Description != nil {
+	if o != nil && !IsNil(o.Description) {
 		return true
 	}
 
@@ -161,7 +165,7 @@ func (o *NiatelemetryLc) SetDescription(v string) {
 
 // GetDn returns the Dn field value if set, zero value otherwise.
 func (o *NiatelemetryLc) GetDn() string {
-	if o == nil || o.Dn == nil {
+	if o == nil || IsNil(o.Dn) {
 		var ret string
 		return ret
 	}
@@ -171,7 +175,7 @@ func (o *NiatelemetryLc) GetDn() string {
 // GetDnOk returns a tuple with the Dn field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryLc) GetDnOk() (*string, bool) {
-	if o == nil || o.Dn == nil {
+	if o == nil || IsNil(o.Dn) {
 		return nil, false
 	}
 	return o.Dn, true
@@ -179,7 +183,7 @@ func (o *NiatelemetryLc) GetDnOk() (*string, bool) {
 
 // HasDn returns a boolean if a field has been set.
 func (o *NiatelemetryLc) HasDn() bool {
-	if o != nil && o.Dn != nil {
+	if o != nil && !IsNil(o.Dn) {
 		return true
 	}
 
@@ -193,7 +197,7 @@ func (o *NiatelemetryLc) SetDn(v string) {
 
 // GetHardwareVersion returns the HardwareVersion field value if set, zero value otherwise.
 func (o *NiatelemetryLc) GetHardwareVersion() string {
-	if o == nil || o.HardwareVersion == nil {
+	if o == nil || IsNil(o.HardwareVersion) {
 		var ret string
 		return ret
 	}
@@ -203,7 +207,7 @@ func (o *NiatelemetryLc) GetHardwareVersion() string {
 // GetHardwareVersionOk returns a tuple with the HardwareVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryLc) GetHardwareVersionOk() (*string, bool) {
-	if o == nil || o.HardwareVersion == nil {
+	if o == nil || IsNil(o.HardwareVersion) {
 		return nil, false
 	}
 	return o.HardwareVersion, true
@@ -211,7 +215,7 @@ func (o *NiatelemetryLc) GetHardwareVersionOk() (*string, bool) {
 
 // HasHardwareVersion returns a boolean if a field has been set.
 func (o *NiatelemetryLc) HasHardwareVersion() bool {
-	if o != nil && o.HardwareVersion != nil {
+	if o != nil && !IsNil(o.HardwareVersion) {
 		return true
 	}
 
@@ -225,7 +229,7 @@ func (o *NiatelemetryLc) SetHardwareVersion(v string) {
 
 // GetModel returns the Model field value if set, zero value otherwise.
 func (o *NiatelemetryLc) GetModel() string {
-	if o == nil || o.Model == nil {
+	if o == nil || IsNil(o.Model) {
 		var ret string
 		return ret
 	}
@@ -235,7 +239,7 @@ func (o *NiatelemetryLc) GetModel() string {
 // GetModelOk returns a tuple with the Model field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryLc) GetModelOk() (*string, bool) {
-	if o == nil || o.Model == nil {
+	if o == nil || IsNil(o.Model) {
 		return nil, false
 	}
 	return o.Model, true
@@ -243,7 +247,7 @@ func (o *NiatelemetryLc) GetModelOk() (*string, bool) {
 
 // HasModel returns a boolean if a field has been set.
 func (o *NiatelemetryLc) HasModel() bool {
-	if o != nil && o.Model != nil {
+	if o != nil && !IsNil(o.Model) {
 		return true
 	}
 
@@ -257,7 +261,7 @@ func (o *NiatelemetryLc) SetModel(v string) {
 
 // GetNodeId returns the NodeId field value if set, zero value otherwise.
 func (o *NiatelemetryLc) GetNodeId() int64 {
-	if o == nil || o.NodeId == nil {
+	if o == nil || IsNil(o.NodeId) {
 		var ret int64
 		return ret
 	}
@@ -267,7 +271,7 @@ func (o *NiatelemetryLc) GetNodeId() int64 {
 // GetNodeIdOk returns a tuple with the NodeId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryLc) GetNodeIdOk() (*int64, bool) {
-	if o == nil || o.NodeId == nil {
+	if o == nil || IsNil(o.NodeId) {
 		return nil, false
 	}
 	return o.NodeId, true
@@ -275,7 +279,7 @@ func (o *NiatelemetryLc) GetNodeIdOk() (*int64, bool) {
 
 // HasNodeId returns a boolean if a field has been set.
 func (o *NiatelemetryLc) HasNodeId() bool {
-	if o != nil && o.NodeId != nil {
+	if o != nil && !IsNil(o.NodeId) {
 		return true
 	}
 
@@ -289,7 +293,7 @@ func (o *NiatelemetryLc) SetNodeId(v int64) {
 
 // GetOperationalState returns the OperationalState field value if set, zero value otherwise.
 func (o *NiatelemetryLc) GetOperationalState() string {
-	if o == nil || o.OperationalState == nil {
+	if o == nil || IsNil(o.OperationalState) {
 		var ret string
 		return ret
 	}
@@ -299,7 +303,7 @@ func (o *NiatelemetryLc) GetOperationalState() string {
 // GetOperationalStateOk returns a tuple with the OperationalState field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryLc) GetOperationalStateOk() (*string, bool) {
-	if o == nil || o.OperationalState == nil {
+	if o == nil || IsNil(o.OperationalState) {
 		return nil, false
 	}
 	return o.OperationalState, true
@@ -307,7 +311,7 @@ func (o *NiatelemetryLc) GetOperationalStateOk() (*string, bool) {
 
 // HasOperationalState returns a boolean if a field has been set.
 func (o *NiatelemetryLc) HasOperationalState() bool {
-	if o != nil && o.OperationalState != nil {
+	if o != nil && !IsNil(o.OperationalState) {
 		return true
 	}
 
@@ -321,7 +325,7 @@ func (o *NiatelemetryLc) SetOperationalState(v string) {
 
 // GetPowerState returns the PowerState field value if set, zero value otherwise.
 func (o *NiatelemetryLc) GetPowerState() string {
-	if o == nil || o.PowerState == nil {
+	if o == nil || IsNil(o.PowerState) {
 		var ret string
 		return ret
 	}
@@ -331,7 +335,7 @@ func (o *NiatelemetryLc) GetPowerState() string {
 // GetPowerStateOk returns a tuple with the PowerState field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryLc) GetPowerStateOk() (*string, bool) {
-	if o == nil || o.PowerState == nil {
+	if o == nil || IsNil(o.PowerState) {
 		return nil, false
 	}
 	return o.PowerState, true
@@ -339,7 +343,7 @@ func (o *NiatelemetryLc) GetPowerStateOk() (*string, bool) {
 
 // HasPowerState returns a boolean if a field has been set.
 func (o *NiatelemetryLc) HasPowerState() bool {
-	if o != nil && o.PowerState != nil {
+	if o != nil && !IsNil(o.PowerState) {
 		return true
 	}
 
@@ -353,7 +357,7 @@ func (o *NiatelemetryLc) SetPowerState(v string) {
 
 // GetRecordType returns the RecordType field value if set, zero value otherwise.
 func (o *NiatelemetryLc) GetRecordType() string {
-	if o == nil || o.RecordType == nil {
+	if o == nil || IsNil(o.RecordType) {
 		var ret string
 		return ret
 	}
@@ -363,7 +367,7 @@ func (o *NiatelemetryLc) GetRecordType() string {
 // GetRecordTypeOk returns a tuple with the RecordType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryLc) GetRecordTypeOk() (*string, bool) {
-	if o == nil || o.RecordType == nil {
+	if o == nil || IsNil(o.RecordType) {
 		return nil, false
 	}
 	return o.RecordType, true
@@ -371,7 +375,7 @@ func (o *NiatelemetryLc) GetRecordTypeOk() (*string, bool) {
 
 // HasRecordType returns a boolean if a field has been set.
 func (o *NiatelemetryLc) HasRecordType() bool {
-	if o != nil && o.RecordType != nil {
+	if o != nil && !IsNil(o.RecordType) {
 		return true
 	}
 
@@ -385,7 +389,7 @@ func (o *NiatelemetryLc) SetRecordType(v string) {
 
 // GetRecordVersion returns the RecordVersion field value if set, zero value otherwise.
 func (o *NiatelemetryLc) GetRecordVersion() string {
-	if o == nil || o.RecordVersion == nil {
+	if o == nil || IsNil(o.RecordVersion) {
 		var ret string
 		return ret
 	}
@@ -395,7 +399,7 @@ func (o *NiatelemetryLc) GetRecordVersion() string {
 // GetRecordVersionOk returns a tuple with the RecordVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryLc) GetRecordVersionOk() (*string, bool) {
-	if o == nil || o.RecordVersion == nil {
+	if o == nil || IsNil(o.RecordVersion) {
 		return nil, false
 	}
 	return o.RecordVersion, true
@@ -403,7 +407,7 @@ func (o *NiatelemetryLc) GetRecordVersionOk() (*string, bool) {
 
 // HasRecordVersion returns a boolean if a field has been set.
 func (o *NiatelemetryLc) HasRecordVersion() bool {
-	if o != nil && o.RecordVersion != nil {
+	if o != nil && !IsNil(o.RecordVersion) {
 		return true
 	}
 
@@ -417,7 +421,7 @@ func (o *NiatelemetryLc) SetRecordVersion(v string) {
 
 // GetRedundancyState returns the RedundancyState field value if set, zero value otherwise.
 func (o *NiatelemetryLc) GetRedundancyState() string {
-	if o == nil || o.RedundancyState == nil {
+	if o == nil || IsNil(o.RedundancyState) {
 		var ret string
 		return ret
 	}
@@ -427,7 +431,7 @@ func (o *NiatelemetryLc) GetRedundancyState() string {
 // GetRedundancyStateOk returns a tuple with the RedundancyState field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryLc) GetRedundancyStateOk() (*string, bool) {
-	if o == nil || o.RedundancyState == nil {
+	if o == nil || IsNil(o.RedundancyState) {
 		return nil, false
 	}
 	return o.RedundancyState, true
@@ -435,7 +439,7 @@ func (o *NiatelemetryLc) GetRedundancyStateOk() (*string, bool) {
 
 // HasRedundancyState returns a boolean if a field has been set.
 func (o *NiatelemetryLc) HasRedundancyState() bool {
-	if o != nil && o.RedundancyState != nil {
+	if o != nil && !IsNil(o.RedundancyState) {
 		return true
 	}
 
@@ -449,7 +453,7 @@ func (o *NiatelemetryLc) SetRedundancyState(v string) {
 
 // GetSerialNumber returns the SerialNumber field value if set, zero value otherwise.
 func (o *NiatelemetryLc) GetSerialNumber() string {
-	if o == nil || o.SerialNumber == nil {
+	if o == nil || IsNil(o.SerialNumber) {
 		var ret string
 		return ret
 	}
@@ -459,7 +463,7 @@ func (o *NiatelemetryLc) GetSerialNumber() string {
 // GetSerialNumberOk returns a tuple with the SerialNumber field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryLc) GetSerialNumberOk() (*string, bool) {
-	if o == nil || o.SerialNumber == nil {
+	if o == nil || IsNil(o.SerialNumber) {
 		return nil, false
 	}
 	return o.SerialNumber, true
@@ -467,7 +471,7 @@ func (o *NiatelemetryLc) GetSerialNumberOk() (*string, bool) {
 
 // HasSerialNumber returns a boolean if a field has been set.
 func (o *NiatelemetryLc) HasSerialNumber() bool {
-	if o != nil && o.SerialNumber != nil {
+	if o != nil && !IsNil(o.SerialNumber) {
 		return true
 	}
 
@@ -481,7 +485,7 @@ func (o *NiatelemetryLc) SetSerialNumber(v string) {
 
 // GetSiteName returns the SiteName field value if set, zero value otherwise.
 func (o *NiatelemetryLc) GetSiteName() string {
-	if o == nil || o.SiteName == nil {
+	if o == nil || IsNil(o.SiteName) {
 		var ret string
 		return ret
 	}
@@ -491,7 +495,7 @@ func (o *NiatelemetryLc) GetSiteName() string {
 // GetSiteNameOk returns a tuple with the SiteName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryLc) GetSiteNameOk() (*string, bool) {
-	if o == nil || o.SiteName == nil {
+	if o == nil || IsNil(o.SiteName) {
 		return nil, false
 	}
 	return o.SiteName, true
@@ -499,7 +503,7 @@ func (o *NiatelemetryLc) GetSiteNameOk() (*string, bool) {
 
 // HasSiteName returns a boolean if a field has been set.
 func (o *NiatelemetryLc) HasSiteName() bool {
-	if o != nil && o.SiteName != nil {
+	if o != nil && !IsNil(o.SiteName) {
 		return true
 	}
 
@@ -513,7 +517,7 @@ func (o *NiatelemetryLc) SetSiteName(v string) {
 
 // GetVid returns the Vid field value if set, zero value otherwise.
 func (o *NiatelemetryLc) GetVid() string {
-	if o == nil || o.Vid == nil {
+	if o == nil || IsNil(o.Vid) {
 		var ret string
 		return ret
 	}
@@ -523,7 +527,7 @@ func (o *NiatelemetryLc) GetVid() string {
 // GetVidOk returns a tuple with the Vid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryLc) GetVidOk() (*string, bool) {
-	if o == nil || o.Vid == nil {
+	if o == nil || IsNil(o.Vid) {
 		return nil, false
 	}
 	return o.Vid, true
@@ -531,7 +535,7 @@ func (o *NiatelemetryLc) GetVidOk() (*string, bool) {
 
 // HasVid returns a boolean if a field has been set.
 func (o *NiatelemetryLc) HasVid() bool {
-	if o != nil && o.Vid != nil {
+	if o != nil && !IsNil(o.Vid) {
 		return true
 	}
 
@@ -543,105 +547,142 @@ func (o *NiatelemetryLc) SetVid(v string) {
 	o.Vid = &v
 }
 
-// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise.
+// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *NiatelemetryLc) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil || IsNil(o.RegisteredDevice.Get()) {
 		var ret AssetDeviceRegistrationRelationship
 		return ret
 	}
-	return *o.RegisteredDevice
+	return *o.RegisteredDevice.Get()
 }
 
 // GetRegisteredDeviceOk returns a tuple with the RegisteredDevice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *NiatelemetryLc) GetRegisteredDeviceOk() (*AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.RegisteredDevice, true
+	return o.RegisteredDevice.Get(), o.RegisteredDevice.IsSet()
 }
 
 // HasRegisteredDevice returns a boolean if a field has been set.
 func (o *NiatelemetryLc) HasRegisteredDevice() bool {
-	if o != nil && o.RegisteredDevice != nil {
+	if o != nil && o.RegisteredDevice.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRegisteredDevice gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
+// SetRegisteredDevice gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
 func (o *NiatelemetryLc) SetRegisteredDevice(v AssetDeviceRegistrationRelationship) {
-	o.RegisteredDevice = &v
+	o.RegisteredDevice.Set(&v)
+}
+
+// SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+func (o *NiatelemetryLc) SetRegisteredDeviceNil() {
+	o.RegisteredDevice.Set(nil)
+}
+
+// UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
+func (o *NiatelemetryLc) UnsetRegisteredDevice() {
+	o.RegisteredDevice.Unset()
 }
 
 func (o NiatelemetryLc) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o NiatelemetryLc) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Description != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Description) {
 		toSerialize["Description"] = o.Description
 	}
-	if o.Dn != nil {
+	if !IsNil(o.Dn) {
 		toSerialize["Dn"] = o.Dn
 	}
-	if o.HardwareVersion != nil {
+	if !IsNil(o.HardwareVersion) {
 		toSerialize["HardwareVersion"] = o.HardwareVersion
 	}
-	if o.Model != nil {
+	if !IsNil(o.Model) {
 		toSerialize["Model"] = o.Model
 	}
-	if o.NodeId != nil {
+	if !IsNil(o.NodeId) {
 		toSerialize["NodeId"] = o.NodeId
 	}
-	if o.OperationalState != nil {
+	if !IsNil(o.OperationalState) {
 		toSerialize["OperationalState"] = o.OperationalState
 	}
-	if o.PowerState != nil {
+	if !IsNil(o.PowerState) {
 		toSerialize["PowerState"] = o.PowerState
 	}
-	if o.RecordType != nil {
+	if !IsNil(o.RecordType) {
 		toSerialize["RecordType"] = o.RecordType
 	}
-	if o.RecordVersion != nil {
+	if !IsNil(o.RecordVersion) {
 		toSerialize["RecordVersion"] = o.RecordVersion
 	}
-	if o.RedundancyState != nil {
+	if !IsNil(o.RedundancyState) {
 		toSerialize["RedundancyState"] = o.RedundancyState
 	}
-	if o.SerialNumber != nil {
+	if !IsNil(o.SerialNumber) {
 		toSerialize["SerialNumber"] = o.SerialNumber
 	}
-	if o.SiteName != nil {
+	if !IsNil(o.SiteName) {
 		toSerialize["SiteName"] = o.SiteName
 	}
-	if o.Vid != nil {
+	if !IsNil(o.Vid) {
 		toSerialize["Vid"] = o.Vid
 	}
-	if o.RegisteredDevice != nil {
-		toSerialize["RegisteredDevice"] = o.RegisteredDevice
+	if o.RegisteredDevice.IsSet() {
+		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *NiatelemetryLc) UnmarshalJSON(bytes []byte) (err error) {
+func (o *NiatelemetryLc) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type NiatelemetryLcWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -672,13 +713,13 @@ func (o *NiatelemetryLc) UnmarshalJSON(bytes []byte) (err error) {
 		// The Site name represents an APIC cluster. Service Engine can onboard multiple APIC clusters / sites.
 		SiteName *string `json:"SiteName,omitempty"`
 		// VID for the line card in the inventory.
-		Vid              *string                              `json:"Vid,omitempty"`
-		RegisteredDevice *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+		Vid              *string                                     `json:"Vid,omitempty"`
+		RegisteredDevice NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	}
 
 	varNiatelemetryLcWithoutEmbeddedStruct := NiatelemetryLcWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varNiatelemetryLcWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varNiatelemetryLcWithoutEmbeddedStruct)
 	if err == nil {
 		varNiatelemetryLc := _NiatelemetryLc{}
 		varNiatelemetryLc.ClassId = varNiatelemetryLcWithoutEmbeddedStruct.ClassId
@@ -704,7 +745,7 @@ func (o *NiatelemetryLc) UnmarshalJSON(bytes []byte) (err error) {
 
 	varNiatelemetryLc := _NiatelemetryLc{}
 
-	err = json.Unmarshal(bytes, &varNiatelemetryLc)
+	err = json.Unmarshal(data, &varNiatelemetryLc)
 	if err == nil {
 		o.MoBaseMo = varNiatelemetryLc.MoBaseMo
 	} else {
@@ -713,7 +754,7 @@ func (o *NiatelemetryLc) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Description")

@@ -8,8 +8,8 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "iam.UserPreference"]
 **Preference** | Pointer to **interface{}** | UI preferences of the user. | [optional] 
 **UserUniqueIdentifier** | Pointer to **string** | Unique id of the user used by the identity provider to store the user. | [optional] [readonly] 
-**Idp** | Pointer to [**IamIdpRelationship**](IamIdpRelationship.md) |  | [optional] 
-**IdpReference** | Pointer to [**IamIdpReferenceRelationship**](IamIdpReferenceRelationship.md) |  | [optional] 
+**Idp** | Pointer to [**NullableIamIdpRelationship**](IamIdpRelationship.md) |  | [optional] 
+**IdpReference** | Pointer to [**NullableIamIdpReferenceRelationship**](IamIdpReferenceRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -155,6 +155,16 @@ SetIdp sets Idp field to given value.
 
 HasIdp returns a boolean if a field has been set.
 
+### SetIdpNil
+
+`func (o *IamUserPreference) SetIdpNil(b bool)`
+
+ SetIdpNil sets the value for Idp to be an explicit nil
+
+### UnsetIdp
+`func (o *IamUserPreference) UnsetIdp()`
+
+UnsetIdp ensures that no value is present for Idp, not even an explicit nil
 ### GetIdpReference
 
 `func (o *IamUserPreference) GetIdpReference() IamIdpReferenceRelationship`
@@ -180,6 +190,16 @@ SetIdpReference sets IdpReference field to given value.
 
 HasIdpReference returns a boolean if a field has been set.
 
+### SetIdpReferenceNil
+
+`func (o *IamUserPreference) SetIdpReferenceNil(b bool)`
+
+ SetIdpReferenceNil sets the value for IdpReference to be an explicit nil
+
+### UnsetIdpReference
+`func (o *IamUserPreference) UnsetIdpReference()`
+
+UnsetIdpReference ensures that no value is present for IdpReference, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

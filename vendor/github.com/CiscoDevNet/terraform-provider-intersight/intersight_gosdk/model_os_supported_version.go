@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the OsSupportedVersion type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &OsSupportedVersion{}
 
 // OsSupportedVersion The supported operating system version by SCU. The API is mainly for UI operation. In the software management page, operating system configuration will be created by providing the vendor and version. The version will be filtered based on vendor.
 type OsSupportedVersion struct {
@@ -25,9 +29,9 @@ type OsSupportedVersion struct {
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
 	// The OsInstall Supported Operating System Version Name.
-	VersionName          *string                               `json:"VersionName,omitempty"`
-	Vendor               *HclOperatingSystemVendorRelationship `json:"Vendor,omitempty"`
-	Version              *HclOperatingSystemRelationship       `json:"Version,omitempty"`
+	VersionName          *string                                      `json:"VersionName,omitempty"`
+	Vendor               NullableHclOperatingSystemVendorRelationship `json:"Vendor,omitempty"`
+	Version              NullableHclOperatingSystemRelationship       `json:"Version,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -106,7 +110,7 @@ func (o *OsSupportedVersion) SetObjectType(v string) {
 
 // GetVersionName returns the VersionName field value if set, zero value otherwise.
 func (o *OsSupportedVersion) GetVersionName() string {
-	if o == nil || o.VersionName == nil {
+	if o == nil || IsNil(o.VersionName) {
 		var ret string
 		return ret
 	}
@@ -116,7 +120,7 @@ func (o *OsSupportedVersion) GetVersionName() string {
 // GetVersionNameOk returns a tuple with the VersionName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OsSupportedVersion) GetVersionNameOk() (*string, bool) {
-	if o == nil || o.VersionName == nil {
+	if o == nil || IsNil(o.VersionName) {
 		return nil, false
 	}
 	return o.VersionName, true
@@ -124,7 +128,7 @@ func (o *OsSupportedVersion) GetVersionNameOk() (*string, bool) {
 
 // HasVersionName returns a boolean if a field has been set.
 func (o *OsSupportedVersion) HasVersionName() bool {
-	if o != nil && o.VersionName != nil {
+	if o != nil && !IsNil(o.VersionName) {
 		return true
 	}
 
@@ -136,118 +140,166 @@ func (o *OsSupportedVersion) SetVersionName(v string) {
 	o.VersionName = &v
 }
 
-// GetVendor returns the Vendor field value if set, zero value otherwise.
+// GetVendor returns the Vendor field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *OsSupportedVersion) GetVendor() HclOperatingSystemVendorRelationship {
-	if o == nil || o.Vendor == nil {
+	if o == nil || IsNil(o.Vendor.Get()) {
 		var ret HclOperatingSystemVendorRelationship
 		return ret
 	}
-	return *o.Vendor
+	return *o.Vendor.Get()
 }
 
 // GetVendorOk returns a tuple with the Vendor field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *OsSupportedVersion) GetVendorOk() (*HclOperatingSystemVendorRelationship, bool) {
-	if o == nil || o.Vendor == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Vendor, true
+	return o.Vendor.Get(), o.Vendor.IsSet()
 }
 
 // HasVendor returns a boolean if a field has been set.
 func (o *OsSupportedVersion) HasVendor() bool {
-	if o != nil && o.Vendor != nil {
+	if o != nil && o.Vendor.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetVendor gets a reference to the given HclOperatingSystemVendorRelationship and assigns it to the Vendor field.
+// SetVendor gets a reference to the given NullableHclOperatingSystemVendorRelationship and assigns it to the Vendor field.
 func (o *OsSupportedVersion) SetVendor(v HclOperatingSystemVendorRelationship) {
-	o.Vendor = &v
+	o.Vendor.Set(&v)
 }
 
-// GetVersion returns the Version field value if set, zero value otherwise.
+// SetVendorNil sets the value for Vendor to be an explicit nil
+func (o *OsSupportedVersion) SetVendorNil() {
+	o.Vendor.Set(nil)
+}
+
+// UnsetVendor ensures that no value is present for Vendor, not even an explicit nil
+func (o *OsSupportedVersion) UnsetVendor() {
+	o.Vendor.Unset()
+}
+
+// GetVersion returns the Version field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *OsSupportedVersion) GetVersion() HclOperatingSystemRelationship {
-	if o == nil || o.Version == nil {
+	if o == nil || IsNil(o.Version.Get()) {
 		var ret HclOperatingSystemRelationship
 		return ret
 	}
-	return *o.Version
+	return *o.Version.Get()
 }
 
 // GetVersionOk returns a tuple with the Version field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *OsSupportedVersion) GetVersionOk() (*HclOperatingSystemRelationship, bool) {
-	if o == nil || o.Version == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Version, true
+	return o.Version.Get(), o.Version.IsSet()
 }
 
 // HasVersion returns a boolean if a field has been set.
 func (o *OsSupportedVersion) HasVersion() bool {
-	if o != nil && o.Version != nil {
+	if o != nil && o.Version.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetVersion gets a reference to the given HclOperatingSystemRelationship and assigns it to the Version field.
+// SetVersion gets a reference to the given NullableHclOperatingSystemRelationship and assigns it to the Version field.
 func (o *OsSupportedVersion) SetVersion(v HclOperatingSystemRelationship) {
-	o.Version = &v
+	o.Version.Set(&v)
+}
+
+// SetVersionNil sets the value for Version to be an explicit nil
+func (o *OsSupportedVersion) SetVersionNil() {
+	o.Version.Set(nil)
+}
+
+// UnsetVersion ensures that no value is present for Version, not even an explicit nil
+func (o *OsSupportedVersion) UnsetVersion() {
+	o.Version.Unset()
 }
 
 func (o OsSupportedVersion) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o OsSupportedVersion) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.VersionName != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.VersionName) {
 		toSerialize["VersionName"] = o.VersionName
 	}
-	if o.Vendor != nil {
-		toSerialize["Vendor"] = o.Vendor
+	if o.Vendor.IsSet() {
+		toSerialize["Vendor"] = o.Vendor.Get()
 	}
-	if o.Version != nil {
-		toSerialize["Version"] = o.Version
+	if o.Version.IsSet() {
+		toSerialize["Version"] = o.Version.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *OsSupportedVersion) UnmarshalJSON(bytes []byte) (err error) {
+func (o *OsSupportedVersion) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type OsSupportedVersionWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 		ObjectType string `json:"ObjectType"`
 		// The OsInstall Supported Operating System Version Name.
-		VersionName *string                               `json:"VersionName,omitempty"`
-		Vendor      *HclOperatingSystemVendorRelationship `json:"Vendor,omitempty"`
-		Version     *HclOperatingSystemRelationship       `json:"Version,omitempty"`
+		VersionName *string                                      `json:"VersionName,omitempty"`
+		Vendor      NullableHclOperatingSystemVendorRelationship `json:"Vendor,omitempty"`
+		Version     NullableHclOperatingSystemRelationship       `json:"Version,omitempty"`
 	}
 
 	varOsSupportedVersionWithoutEmbeddedStruct := OsSupportedVersionWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varOsSupportedVersionWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varOsSupportedVersionWithoutEmbeddedStruct)
 	if err == nil {
 		varOsSupportedVersion := _OsSupportedVersion{}
 		varOsSupportedVersion.ClassId = varOsSupportedVersionWithoutEmbeddedStruct.ClassId
@@ -262,7 +314,7 @@ func (o *OsSupportedVersion) UnmarshalJSON(bytes []byte) (err error) {
 
 	varOsSupportedVersion := _OsSupportedVersion{}
 
-	err = json.Unmarshal(bytes, &varOsSupportedVersion)
+	err = json.Unmarshal(data, &varOsSupportedVersion)
 	if err == nil {
 		o.MoBaseMo = varOsSupportedVersion.MoBaseMo
 	} else {
@@ -271,7 +323,7 @@ func (o *OsSupportedVersion) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "VersionName")

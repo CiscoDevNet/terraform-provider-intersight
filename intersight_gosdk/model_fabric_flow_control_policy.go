@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the FabricFlowControlPolicy type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &FabricFlowControlPolicy{}
 
 // FabricFlowControlPolicy Priority Flow Control setting for each port.
 type FabricFlowControlPolicy struct {
@@ -29,8 +33,8 @@ type FabricFlowControlPolicy struct {
 	// Link-level Flow Control configured in the receive direction. * `Disabled` - Admin configured Disabled State. * `Enabled` - Admin configured Enabled State.
 	ReceiveDirection *string `json:"ReceiveDirection,omitempty"`
 	// Link-level Flow Control configured in the send direction. * `Disabled` - Admin configured Disabled State. * `Enabled` - Admin configured Enabled State.
-	SendDirection        *string                               `json:"SendDirection,omitempty"`
-	Organization         *OrganizationOrganizationRelationship `json:"Organization,omitempty"`
+	SendDirection        *string                                      `json:"SendDirection,omitempty"`
+	Organization         NullableOrganizationOrganizationRelationship `json:"Organization,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -121,7 +125,7 @@ func (o *FabricFlowControlPolicy) SetObjectType(v string) {
 
 // GetPriorityFlowControlMode returns the PriorityFlowControlMode field value if set, zero value otherwise.
 func (o *FabricFlowControlPolicy) GetPriorityFlowControlMode() string {
-	if o == nil || o.PriorityFlowControlMode == nil {
+	if o == nil || IsNil(o.PriorityFlowControlMode) {
 		var ret string
 		return ret
 	}
@@ -131,7 +135,7 @@ func (o *FabricFlowControlPolicy) GetPriorityFlowControlMode() string {
 // GetPriorityFlowControlModeOk returns a tuple with the PriorityFlowControlMode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FabricFlowControlPolicy) GetPriorityFlowControlModeOk() (*string, bool) {
-	if o == nil || o.PriorityFlowControlMode == nil {
+	if o == nil || IsNil(o.PriorityFlowControlMode) {
 		return nil, false
 	}
 	return o.PriorityFlowControlMode, true
@@ -139,7 +143,7 @@ func (o *FabricFlowControlPolicy) GetPriorityFlowControlModeOk() (*string, bool)
 
 // HasPriorityFlowControlMode returns a boolean if a field has been set.
 func (o *FabricFlowControlPolicy) HasPriorityFlowControlMode() bool {
-	if o != nil && o.PriorityFlowControlMode != nil {
+	if o != nil && !IsNil(o.PriorityFlowControlMode) {
 		return true
 	}
 
@@ -153,7 +157,7 @@ func (o *FabricFlowControlPolicy) SetPriorityFlowControlMode(v string) {
 
 // GetReceiveDirection returns the ReceiveDirection field value if set, zero value otherwise.
 func (o *FabricFlowControlPolicy) GetReceiveDirection() string {
-	if o == nil || o.ReceiveDirection == nil {
+	if o == nil || IsNil(o.ReceiveDirection) {
 		var ret string
 		return ret
 	}
@@ -163,7 +167,7 @@ func (o *FabricFlowControlPolicy) GetReceiveDirection() string {
 // GetReceiveDirectionOk returns a tuple with the ReceiveDirection field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FabricFlowControlPolicy) GetReceiveDirectionOk() (*string, bool) {
-	if o == nil || o.ReceiveDirection == nil {
+	if o == nil || IsNil(o.ReceiveDirection) {
 		return nil, false
 	}
 	return o.ReceiveDirection, true
@@ -171,7 +175,7 @@ func (o *FabricFlowControlPolicy) GetReceiveDirectionOk() (*string, bool) {
 
 // HasReceiveDirection returns a boolean if a field has been set.
 func (o *FabricFlowControlPolicy) HasReceiveDirection() bool {
-	if o != nil && o.ReceiveDirection != nil {
+	if o != nil && !IsNil(o.ReceiveDirection) {
 		return true
 	}
 
@@ -185,7 +189,7 @@ func (o *FabricFlowControlPolicy) SetReceiveDirection(v string) {
 
 // GetSendDirection returns the SendDirection field value if set, zero value otherwise.
 func (o *FabricFlowControlPolicy) GetSendDirection() string {
-	if o == nil || o.SendDirection == nil {
+	if o == nil || IsNil(o.SendDirection) {
 		var ret string
 		return ret
 	}
@@ -195,7 +199,7 @@ func (o *FabricFlowControlPolicy) GetSendDirection() string {
 // GetSendDirectionOk returns a tuple with the SendDirection field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FabricFlowControlPolicy) GetSendDirectionOk() (*string, bool) {
-	if o == nil || o.SendDirection == nil {
+	if o == nil || IsNil(o.SendDirection) {
 		return nil, false
 	}
 	return o.SendDirection, true
@@ -203,7 +207,7 @@ func (o *FabricFlowControlPolicy) GetSendDirectionOk() (*string, bool) {
 
 // HasSendDirection returns a boolean if a field has been set.
 func (o *FabricFlowControlPolicy) HasSendDirection() bool {
-	if o != nil && o.SendDirection != nil {
+	if o != nil && !IsNil(o.SendDirection) {
 		return true
 	}
 
@@ -215,75 +219,112 @@ func (o *FabricFlowControlPolicy) SetSendDirection(v string) {
 	o.SendDirection = &v
 }
 
-// GetOrganization returns the Organization field value if set, zero value otherwise.
+// GetOrganization returns the Organization field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *FabricFlowControlPolicy) GetOrganization() OrganizationOrganizationRelationship {
-	if o == nil || o.Organization == nil {
+	if o == nil || IsNil(o.Organization.Get()) {
 		var ret OrganizationOrganizationRelationship
 		return ret
 	}
-	return *o.Organization
+	return *o.Organization.Get()
 }
 
 // GetOrganizationOk returns a tuple with the Organization field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *FabricFlowControlPolicy) GetOrganizationOk() (*OrganizationOrganizationRelationship, bool) {
-	if o == nil || o.Organization == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Organization, true
+	return o.Organization.Get(), o.Organization.IsSet()
 }
 
 // HasOrganization returns a boolean if a field has been set.
 func (o *FabricFlowControlPolicy) HasOrganization() bool {
-	if o != nil && o.Organization != nil {
+	if o != nil && o.Organization.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetOrganization gets a reference to the given OrganizationOrganizationRelationship and assigns it to the Organization field.
+// SetOrganization gets a reference to the given NullableOrganizationOrganizationRelationship and assigns it to the Organization field.
 func (o *FabricFlowControlPolicy) SetOrganization(v OrganizationOrganizationRelationship) {
-	o.Organization = &v
+	o.Organization.Set(&v)
+}
+
+// SetOrganizationNil sets the value for Organization to be an explicit nil
+func (o *FabricFlowControlPolicy) SetOrganizationNil() {
+	o.Organization.Set(nil)
+}
+
+// UnsetOrganization ensures that no value is present for Organization, not even an explicit nil
+func (o *FabricFlowControlPolicy) UnsetOrganization() {
+	o.Organization.Unset()
 }
 
 func (o FabricFlowControlPolicy) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o FabricFlowControlPolicy) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedPolicyAbstractPolicy, errPolicyAbstractPolicy := json.Marshal(o.PolicyAbstractPolicy)
 	if errPolicyAbstractPolicy != nil {
-		return []byte{}, errPolicyAbstractPolicy
+		return map[string]interface{}{}, errPolicyAbstractPolicy
 	}
 	errPolicyAbstractPolicy = json.Unmarshal([]byte(serializedPolicyAbstractPolicy), &toSerialize)
 	if errPolicyAbstractPolicy != nil {
-		return []byte{}, errPolicyAbstractPolicy
+		return map[string]interface{}{}, errPolicyAbstractPolicy
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.PriorityFlowControlMode != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.PriorityFlowControlMode) {
 		toSerialize["PriorityFlowControlMode"] = o.PriorityFlowControlMode
 	}
-	if o.ReceiveDirection != nil {
+	if !IsNil(o.ReceiveDirection) {
 		toSerialize["ReceiveDirection"] = o.ReceiveDirection
 	}
-	if o.SendDirection != nil {
+	if !IsNil(o.SendDirection) {
 		toSerialize["SendDirection"] = o.SendDirection
 	}
-	if o.Organization != nil {
-		toSerialize["Organization"] = o.Organization
+	if o.Organization.IsSet() {
+		toSerialize["Organization"] = o.Organization.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *FabricFlowControlPolicy) UnmarshalJSON(bytes []byte) (err error) {
+func (o *FabricFlowControlPolicy) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type FabricFlowControlPolicyWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -294,13 +335,13 @@ func (o *FabricFlowControlPolicy) UnmarshalJSON(bytes []byte) (err error) {
 		// Link-level Flow Control configured in the receive direction. * `Disabled` - Admin configured Disabled State. * `Enabled` - Admin configured Enabled State.
 		ReceiveDirection *string `json:"ReceiveDirection,omitempty"`
 		// Link-level Flow Control configured in the send direction. * `Disabled` - Admin configured Disabled State. * `Enabled` - Admin configured Enabled State.
-		SendDirection *string                               `json:"SendDirection,omitempty"`
-		Organization  *OrganizationOrganizationRelationship `json:"Organization,omitempty"`
+		SendDirection *string                                      `json:"SendDirection,omitempty"`
+		Organization  NullableOrganizationOrganizationRelationship `json:"Organization,omitempty"`
 	}
 
 	varFabricFlowControlPolicyWithoutEmbeddedStruct := FabricFlowControlPolicyWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varFabricFlowControlPolicyWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varFabricFlowControlPolicyWithoutEmbeddedStruct)
 	if err == nil {
 		varFabricFlowControlPolicy := _FabricFlowControlPolicy{}
 		varFabricFlowControlPolicy.ClassId = varFabricFlowControlPolicyWithoutEmbeddedStruct.ClassId
@@ -316,7 +357,7 @@ func (o *FabricFlowControlPolicy) UnmarshalJSON(bytes []byte) (err error) {
 
 	varFabricFlowControlPolicy := _FabricFlowControlPolicy{}
 
-	err = json.Unmarshal(bytes, &varFabricFlowControlPolicy)
+	err = json.Unmarshal(data, &varFabricFlowControlPolicy)
 	if err == nil {
 		o.PolicyAbstractPolicy = varFabricFlowControlPolicy.PolicyAbstractPolicy
 	} else {
@@ -325,7 +366,7 @@ func (o *FabricFlowControlPolicy) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "PriorityFlowControlMode")

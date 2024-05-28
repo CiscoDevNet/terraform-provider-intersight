@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the VirtualizationNetworkInterface type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &VirtualizationNetworkInterface{}
 
 // VirtualizationNetworkInterface Virtual machine network interface configuration data.
 type VirtualizationNetworkInterface struct {
@@ -140,7 +144,7 @@ func (o *VirtualizationNetworkInterface) SetObjectType(v string) {
 
 // GetAdaptorType returns the AdaptorType field value if set, zero value otherwise.
 func (o *VirtualizationNetworkInterface) GetAdaptorType() string {
-	if o == nil || o.AdaptorType == nil {
+	if o == nil || IsNil(o.AdaptorType) {
 		var ret string
 		return ret
 	}
@@ -150,7 +154,7 @@ func (o *VirtualizationNetworkInterface) GetAdaptorType() string {
 // GetAdaptorTypeOk returns a tuple with the AdaptorType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationNetworkInterface) GetAdaptorTypeOk() (*string, bool) {
-	if o == nil || o.AdaptorType == nil {
+	if o == nil || IsNil(o.AdaptorType) {
 		return nil, false
 	}
 	return o.AdaptorType, true
@@ -158,7 +162,7 @@ func (o *VirtualizationNetworkInterface) GetAdaptorTypeOk() (*string, bool) {
 
 // HasAdaptorType returns a boolean if a field has been set.
 func (o *VirtualizationNetworkInterface) HasAdaptorType() bool {
-	if o != nil && o.AdaptorType != nil {
+	if o != nil && !IsNil(o.AdaptorType) {
 		return true
 	}
 
@@ -172,7 +176,7 @@ func (o *VirtualizationNetworkInterface) SetAdaptorType(v string) {
 
 // GetBridge returns the Bridge field value if set, zero value otherwise.
 func (o *VirtualizationNetworkInterface) GetBridge() string {
-	if o == nil || o.Bridge == nil {
+	if o == nil || IsNil(o.Bridge) {
 		var ret string
 		return ret
 	}
@@ -182,7 +186,7 @@ func (o *VirtualizationNetworkInterface) GetBridge() string {
 // GetBridgeOk returns a tuple with the Bridge field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationNetworkInterface) GetBridgeOk() (*string, bool) {
-	if o == nil || o.Bridge == nil {
+	if o == nil || IsNil(o.Bridge) {
 		return nil, false
 	}
 	return o.Bridge, true
@@ -190,7 +194,7 @@ func (o *VirtualizationNetworkInterface) GetBridgeOk() (*string, bool) {
 
 // HasBridge returns a boolean if a field has been set.
 func (o *VirtualizationNetworkInterface) HasBridge() bool {
-	if o != nil && o.Bridge != nil {
+	if o != nil && !IsNil(o.Bridge) {
 		return true
 	}
 
@@ -204,7 +208,7 @@ func (o *VirtualizationNetworkInterface) SetBridge(v string) {
 
 // GetConnectAtPowerOn returns the ConnectAtPowerOn field value if set, zero value otherwise.
 func (o *VirtualizationNetworkInterface) GetConnectAtPowerOn() bool {
-	if o == nil || o.ConnectAtPowerOn == nil {
+	if o == nil || IsNil(o.ConnectAtPowerOn) {
 		var ret bool
 		return ret
 	}
@@ -214,7 +218,7 @@ func (o *VirtualizationNetworkInterface) GetConnectAtPowerOn() bool {
 // GetConnectAtPowerOnOk returns a tuple with the ConnectAtPowerOn field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationNetworkInterface) GetConnectAtPowerOnOk() (*bool, bool) {
-	if o == nil || o.ConnectAtPowerOn == nil {
+	if o == nil || IsNil(o.ConnectAtPowerOn) {
 		return nil, false
 	}
 	return o.ConnectAtPowerOn, true
@@ -222,7 +226,7 @@ func (o *VirtualizationNetworkInterface) GetConnectAtPowerOnOk() (*bool, bool) {
 
 // HasConnectAtPowerOn returns a boolean if a field has been set.
 func (o *VirtualizationNetworkInterface) HasConnectAtPowerOn() bool {
-	if o != nil && o.ConnectAtPowerOn != nil {
+	if o != nil && !IsNil(o.ConnectAtPowerOn) {
 		return true
 	}
 
@@ -236,7 +240,7 @@ func (o *VirtualizationNetworkInterface) SetConnectAtPowerOn(v bool) {
 
 // GetDirectPathIo returns the DirectPathIo field value if set, zero value otherwise.
 func (o *VirtualizationNetworkInterface) GetDirectPathIo() bool {
-	if o == nil || o.DirectPathIo == nil {
+	if o == nil || IsNil(o.DirectPathIo) {
 		var ret bool
 		return ret
 	}
@@ -246,7 +250,7 @@ func (o *VirtualizationNetworkInterface) GetDirectPathIo() bool {
 // GetDirectPathIoOk returns a tuple with the DirectPathIo field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationNetworkInterface) GetDirectPathIoOk() (*bool, bool) {
-	if o == nil || o.DirectPathIo == nil {
+	if o == nil || IsNil(o.DirectPathIo) {
 		return nil, false
 	}
 	return o.DirectPathIo, true
@@ -254,7 +258,7 @@ func (o *VirtualizationNetworkInterface) GetDirectPathIoOk() (*bool, bool) {
 
 // HasDirectPathIo returns a boolean if a field has been set.
 func (o *VirtualizationNetworkInterface) HasDirectPathIo() bool {
-	if o != nil && o.DirectPathIo != nil {
+	if o != nil && !IsNil(o.DirectPathIo) {
 		return true
 	}
 
@@ -268,7 +272,7 @@ func (o *VirtualizationNetworkInterface) SetDirectPathIo(v bool) {
 
 // GetIpForwardingEnabled returns the IpForwardingEnabled field value if set, zero value otherwise.
 func (o *VirtualizationNetworkInterface) GetIpForwardingEnabled() bool {
-	if o == nil || o.IpForwardingEnabled == nil {
+	if o == nil || IsNil(o.IpForwardingEnabled) {
 		var ret bool
 		return ret
 	}
@@ -278,7 +282,7 @@ func (o *VirtualizationNetworkInterface) GetIpForwardingEnabled() bool {
 // GetIpForwardingEnabledOk returns a tuple with the IpForwardingEnabled field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationNetworkInterface) GetIpForwardingEnabledOk() (*bool, bool) {
-	if o == nil || o.IpForwardingEnabled == nil {
+	if o == nil || IsNil(o.IpForwardingEnabled) {
 		return nil, false
 	}
 	return o.IpForwardingEnabled, true
@@ -286,7 +290,7 @@ func (o *VirtualizationNetworkInterface) GetIpForwardingEnabledOk() (*bool, bool
 
 // HasIpForwardingEnabled returns a boolean if a field has been set.
 func (o *VirtualizationNetworkInterface) HasIpForwardingEnabled() bool {
-	if o != nil && o.IpForwardingEnabled != nil {
+	if o != nil && !IsNil(o.IpForwardingEnabled) {
 		return true
 	}
 
@@ -300,7 +304,7 @@ func (o *VirtualizationNetworkInterface) SetIpForwardingEnabled(v bool) {
 
 // GetIpv6Address returns the Ipv6Address field value if set, zero value otherwise.
 func (o *VirtualizationNetworkInterface) GetIpv6Address() bool {
-	if o == nil || o.Ipv6Address == nil {
+	if o == nil || IsNil(o.Ipv6Address) {
 		var ret bool
 		return ret
 	}
@@ -310,7 +314,7 @@ func (o *VirtualizationNetworkInterface) GetIpv6Address() bool {
 // GetIpv6AddressOk returns a tuple with the Ipv6Address field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationNetworkInterface) GetIpv6AddressOk() (*bool, bool) {
-	if o == nil || o.Ipv6Address == nil {
+	if o == nil || IsNil(o.Ipv6Address) {
 		return nil, false
 	}
 	return o.Ipv6Address, true
@@ -318,7 +322,7 @@ func (o *VirtualizationNetworkInterface) GetIpv6AddressOk() (*bool, bool) {
 
 // HasIpv6Address returns a boolean if a field has been set.
 func (o *VirtualizationNetworkInterface) HasIpv6Address() bool {
-	if o != nil && o.Ipv6Address != nil {
+	if o != nil && !IsNil(o.Ipv6Address) {
 		return true
 	}
 
@@ -332,7 +336,7 @@ func (o *VirtualizationNetworkInterface) SetIpv6Address(v bool) {
 
 // GetMacAddress returns the MacAddress field value if set, zero value otherwise.
 func (o *VirtualizationNetworkInterface) GetMacAddress() string {
-	if o == nil || o.MacAddress == nil {
+	if o == nil || IsNil(o.MacAddress) {
 		var ret string
 		return ret
 	}
@@ -342,7 +346,7 @@ func (o *VirtualizationNetworkInterface) GetMacAddress() string {
 // GetMacAddressOk returns a tuple with the MacAddress field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationNetworkInterface) GetMacAddressOk() (*string, bool) {
-	if o == nil || o.MacAddress == nil {
+	if o == nil || IsNil(o.MacAddress) {
 		return nil, false
 	}
 	return o.MacAddress, true
@@ -350,7 +354,7 @@ func (o *VirtualizationNetworkInterface) GetMacAddressOk() (*string, bool) {
 
 // HasMacAddress returns a boolean if a field has been set.
 func (o *VirtualizationNetworkInterface) HasMacAddress() bool {
-	if o != nil && o.MacAddress != nil {
+	if o != nil && !IsNil(o.MacAddress) {
 		return true
 	}
 
@@ -364,7 +368,7 @@ func (o *VirtualizationNetworkInterface) SetMacAddress(v string) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *VirtualizationNetworkInterface) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -374,7 +378,7 @@ func (o *VirtualizationNetworkInterface) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationNetworkInterface) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -382,7 +386,7 @@ func (o *VirtualizationNetworkInterface) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *VirtualizationNetworkInterface) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -396,7 +400,7 @@ func (o *VirtualizationNetworkInterface) SetName(v string) {
 
 // GetNetworkId returns the NetworkId field value if set, zero value otherwise.
 func (o *VirtualizationNetworkInterface) GetNetworkId() string {
-	if o == nil || o.NetworkId == nil {
+	if o == nil || IsNil(o.NetworkId) {
 		var ret string
 		return ret
 	}
@@ -406,7 +410,7 @@ func (o *VirtualizationNetworkInterface) GetNetworkId() string {
 // GetNetworkIdOk returns a tuple with the NetworkId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationNetworkInterface) GetNetworkIdOk() (*string, bool) {
-	if o == nil || o.NetworkId == nil {
+	if o == nil || IsNil(o.NetworkId) {
 		return nil, false
 	}
 	return o.NetworkId, true
@@ -414,7 +418,7 @@ func (o *VirtualizationNetworkInterface) GetNetworkIdOk() (*string, bool) {
 
 // HasNetworkId returns a boolean if a field has been set.
 func (o *VirtualizationNetworkInterface) HasNetworkId() bool {
-	if o != nil && o.NetworkId != nil {
+	if o != nil && !IsNil(o.NetworkId) {
 		return true
 	}
 
@@ -428,7 +432,7 @@ func (o *VirtualizationNetworkInterface) SetNetworkId(v string) {
 
 // GetNicId returns the NicId field value if set, zero value otherwise.
 func (o *VirtualizationNetworkInterface) GetNicId() string {
-	if o == nil || o.NicId == nil {
+	if o == nil || IsNil(o.NicId) {
 		var ret string
 		return ret
 	}
@@ -438,7 +442,7 @@ func (o *VirtualizationNetworkInterface) GetNicId() string {
 // GetNicIdOk returns a tuple with the NicId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationNetworkInterface) GetNicIdOk() (*string, bool) {
-	if o == nil || o.NicId == nil {
+	if o == nil || IsNil(o.NicId) {
 		return nil, false
 	}
 	return o.NicId, true
@@ -446,7 +450,7 @@ func (o *VirtualizationNetworkInterface) GetNicIdOk() (*string, bool) {
 
 // HasNicId returns a boolean if a field has been set.
 func (o *VirtualizationNetworkInterface) HasNicId() bool {
-	if o != nil && o.NicId != nil {
+	if o != nil && !IsNil(o.NicId) {
 		return true
 	}
 
@@ -460,7 +464,7 @@ func (o *VirtualizationNetworkInterface) SetNicId(v string) {
 
 // GetOrder returns the Order field value if set, zero value otherwise.
 func (o *VirtualizationNetworkInterface) GetOrder() int64 {
-	if o == nil || o.Order == nil {
+	if o == nil || IsNil(o.Order) {
 		var ret int64
 		return ret
 	}
@@ -470,7 +474,7 @@ func (o *VirtualizationNetworkInterface) GetOrder() int64 {
 // GetOrderOk returns a tuple with the Order field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationNetworkInterface) GetOrderOk() (*int64, bool) {
-	if o == nil || o.Order == nil {
+	if o == nil || IsNil(o.Order) {
 		return nil, false
 	}
 	return o.Order, true
@@ -478,7 +482,7 @@ func (o *VirtualizationNetworkInterface) GetOrderOk() (*int64, bool) {
 
 // HasOrder returns a boolean if a field has been set.
 func (o *VirtualizationNetworkInterface) HasOrder() bool {
-	if o != nil && o.Order != nil {
+	if o != nil && !IsNil(o.Order) {
 		return true
 	}
 
@@ -492,7 +496,7 @@ func (o *VirtualizationNetworkInterface) SetOrder(v int64) {
 
 // GetPrivateIpAllocationMode returns the PrivateIpAllocationMode field value if set, zero value otherwise.
 func (o *VirtualizationNetworkInterface) GetPrivateIpAllocationMode() string {
-	if o == nil || o.PrivateIpAllocationMode == nil {
+	if o == nil || IsNil(o.PrivateIpAllocationMode) {
 		var ret string
 		return ret
 	}
@@ -502,7 +506,7 @@ func (o *VirtualizationNetworkInterface) GetPrivateIpAllocationMode() string {
 // GetPrivateIpAllocationModeOk returns a tuple with the PrivateIpAllocationMode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationNetworkInterface) GetPrivateIpAllocationModeOk() (*string, bool) {
-	if o == nil || o.PrivateIpAllocationMode == nil {
+	if o == nil || IsNil(o.PrivateIpAllocationMode) {
 		return nil, false
 	}
 	return o.PrivateIpAllocationMode, true
@@ -510,7 +514,7 @@ func (o *VirtualizationNetworkInterface) GetPrivateIpAllocationModeOk() (*string
 
 // HasPrivateIpAllocationMode returns a boolean if a field has been set.
 func (o *VirtualizationNetworkInterface) HasPrivateIpAllocationMode() bool {
-	if o != nil && o.PrivateIpAllocationMode != nil {
+	if o != nil && !IsNil(o.PrivateIpAllocationMode) {
 		return true
 	}
 
@@ -524,7 +528,7 @@ func (o *VirtualizationNetworkInterface) SetPrivateIpAllocationMode(v string) {
 
 // GetPublicIpAllocate returns the PublicIpAllocate field value if set, zero value otherwise.
 func (o *VirtualizationNetworkInterface) GetPublicIpAllocate() bool {
-	if o == nil || o.PublicIpAllocate == nil {
+	if o == nil || IsNil(o.PublicIpAllocate) {
 		var ret bool
 		return ret
 	}
@@ -534,7 +538,7 @@ func (o *VirtualizationNetworkInterface) GetPublicIpAllocate() bool {
 // GetPublicIpAllocateOk returns a tuple with the PublicIpAllocate field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationNetworkInterface) GetPublicIpAllocateOk() (*bool, bool) {
-	if o == nil || o.PublicIpAllocate == nil {
+	if o == nil || IsNil(o.PublicIpAllocate) {
 		return nil, false
 	}
 	return o.PublicIpAllocate, true
@@ -542,7 +546,7 @@ func (o *VirtualizationNetworkInterface) GetPublicIpAllocateOk() (*bool, bool) {
 
 // HasPublicIpAllocate returns a boolean if a field has been set.
 func (o *VirtualizationNetworkInterface) HasPublicIpAllocate() bool {
-	if o != nil && o.PublicIpAllocate != nil {
+	if o != nil && !IsNil(o.PublicIpAllocate) {
 		return true
 	}
 
@@ -567,7 +571,7 @@ func (o *VirtualizationNetworkInterface) GetSecurityGroups() []string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *VirtualizationNetworkInterface) GetSecurityGroupsOk() ([]string, bool) {
-	if o == nil || o.SecurityGroups == nil {
+	if o == nil || IsNil(o.SecurityGroups) {
 		return nil, false
 	}
 	return o.SecurityGroups, true
@@ -575,7 +579,7 @@ func (o *VirtualizationNetworkInterface) GetSecurityGroupsOk() ([]string, bool) 
 
 // HasSecurityGroups returns a boolean if a field has been set.
 func (o *VirtualizationNetworkInterface) HasSecurityGroups() bool {
-	if o != nil && o.SecurityGroups != nil {
+	if o != nil && IsNil(o.SecurityGroups) {
 		return true
 	}
 
@@ -600,7 +604,7 @@ func (o *VirtualizationNetworkInterface) GetStaticIpAddress() []VirtualizationIp
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *VirtualizationNetworkInterface) GetStaticIpAddressOk() ([]VirtualizationIpAddressInfo, bool) {
-	if o == nil || o.StaticIpAddress == nil {
+	if o == nil || IsNil(o.StaticIpAddress) {
 		return nil, false
 	}
 	return o.StaticIpAddress, true
@@ -608,7 +612,7 @@ func (o *VirtualizationNetworkInterface) GetStaticIpAddressOk() ([]Virtualizatio
 
 // HasStaticIpAddress returns a boolean if a field has been set.
 func (o *VirtualizationNetworkInterface) HasStaticIpAddress() bool {
-	if o != nil && o.StaticIpAddress != nil {
+	if o != nil && IsNil(o.StaticIpAddress) {
 		return true
 	}
 
@@ -622,7 +626,7 @@ func (o *VirtualizationNetworkInterface) SetStaticIpAddress(v []VirtualizationIp
 
 // GetSubnetId returns the SubnetId field value if set, zero value otherwise.
 func (o *VirtualizationNetworkInterface) GetSubnetId() string {
-	if o == nil || o.SubnetId == nil {
+	if o == nil || IsNil(o.SubnetId) {
 		var ret string
 		return ret
 	}
@@ -632,7 +636,7 @@ func (o *VirtualizationNetworkInterface) GetSubnetId() string {
 // GetSubnetIdOk returns a tuple with the SubnetId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationNetworkInterface) GetSubnetIdOk() (*string, bool) {
-	if o == nil || o.SubnetId == nil {
+	if o == nil || IsNil(o.SubnetId) {
 		return nil, false
 	}
 	return o.SubnetId, true
@@ -640,7 +644,7 @@ func (o *VirtualizationNetworkInterface) GetSubnetIdOk() (*string, bool) {
 
 // HasSubnetId returns a boolean if a field has been set.
 func (o *VirtualizationNetworkInterface) HasSubnetId() bool {
-	if o != nil && o.SubnetId != nil {
+	if o != nil && !IsNil(o.SubnetId) {
 		return true
 	}
 
@@ -653,58 +657,62 @@ func (o *VirtualizationNetworkInterface) SetSubnetId(v string) {
 }
 
 func (o VirtualizationNetworkInterface) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o VirtualizationNetworkInterface) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
 	errMoBaseComplexType = json.Unmarshal([]byte(serializedMoBaseComplexType), &toSerialize)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.AdaptorType != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.AdaptorType) {
 		toSerialize["AdaptorType"] = o.AdaptorType
 	}
-	if o.Bridge != nil {
+	if !IsNil(o.Bridge) {
 		toSerialize["Bridge"] = o.Bridge
 	}
-	if o.ConnectAtPowerOn != nil {
+	if !IsNil(o.ConnectAtPowerOn) {
 		toSerialize["ConnectAtPowerOn"] = o.ConnectAtPowerOn
 	}
-	if o.DirectPathIo != nil {
+	if !IsNil(o.DirectPathIo) {
 		toSerialize["DirectPathIo"] = o.DirectPathIo
 	}
-	if o.IpForwardingEnabled != nil {
+	if !IsNil(o.IpForwardingEnabled) {
 		toSerialize["IpForwardingEnabled"] = o.IpForwardingEnabled
 	}
-	if o.Ipv6Address != nil {
+	if !IsNil(o.Ipv6Address) {
 		toSerialize["Ipv6Address"] = o.Ipv6Address
 	}
-	if o.MacAddress != nil {
+	if !IsNil(o.MacAddress) {
 		toSerialize["MacAddress"] = o.MacAddress
 	}
-	if o.Name != nil {
+	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
 	}
-	if o.NetworkId != nil {
+	if !IsNil(o.NetworkId) {
 		toSerialize["NetworkId"] = o.NetworkId
 	}
-	if o.NicId != nil {
+	if !IsNil(o.NicId) {
 		toSerialize["NicId"] = o.NicId
 	}
-	if o.Order != nil {
+	if !IsNil(o.Order) {
 		toSerialize["Order"] = o.Order
 	}
-	if o.PrivateIpAllocationMode != nil {
+	if !IsNil(o.PrivateIpAllocationMode) {
 		toSerialize["PrivateIpAllocationMode"] = o.PrivateIpAllocationMode
 	}
-	if o.PublicIpAllocate != nil {
+	if !IsNil(o.PublicIpAllocate) {
 		toSerialize["PublicIpAllocate"] = o.PublicIpAllocate
 	}
 	if o.SecurityGroups != nil {
@@ -713,7 +721,7 @@ func (o VirtualizationNetworkInterface) MarshalJSON() ([]byte, error) {
 	if o.StaticIpAddress != nil {
 		toSerialize["StaticIpAddress"] = o.StaticIpAddress
 	}
-	if o.SubnetId != nil {
+	if !IsNil(o.SubnetId) {
 		toSerialize["SubnetId"] = o.SubnetId
 	}
 
@@ -721,10 +729,32 @@ func (o VirtualizationNetworkInterface) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *VirtualizationNetworkInterface) UnmarshalJSON(bytes []byte) (err error) {
+func (o *VirtualizationNetworkInterface) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type VirtualizationNetworkInterfaceWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -764,7 +794,7 @@ func (o *VirtualizationNetworkInterface) UnmarshalJSON(bytes []byte) (err error)
 
 	varVirtualizationNetworkInterfaceWithoutEmbeddedStruct := VirtualizationNetworkInterfaceWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varVirtualizationNetworkInterfaceWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varVirtualizationNetworkInterfaceWithoutEmbeddedStruct)
 	if err == nil {
 		varVirtualizationNetworkInterface := _VirtualizationNetworkInterface{}
 		varVirtualizationNetworkInterface.ClassId = varVirtualizationNetworkInterfaceWithoutEmbeddedStruct.ClassId
@@ -792,7 +822,7 @@ func (o *VirtualizationNetworkInterface) UnmarshalJSON(bytes []byte) (err error)
 
 	varVirtualizationNetworkInterface := _VirtualizationNetworkInterface{}
 
-	err = json.Unmarshal(bytes, &varVirtualizationNetworkInterface)
+	err = json.Unmarshal(data, &varVirtualizationNetworkInterface)
 	if err == nil {
 		o.MoBaseComplexType = varVirtualizationNetworkInterface.MoBaseComplexType
 	} else {
@@ -801,7 +831,7 @@ func (o *VirtualizationNetworkInterface) UnmarshalJSON(bytes []byte) (err error)
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "AdaptorType")

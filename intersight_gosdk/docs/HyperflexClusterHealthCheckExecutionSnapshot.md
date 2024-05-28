@@ -8,9 +8,9 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "hyperflex.ClusterHealthCheckExecutionSnapshot"]
 **ExecutionContext** | Pointer to **string** | The execution context of the HyperFlex health checks. * &#x60;UNKNOWN&#x60; - The current context of HyperFlex health check execution is unknown. * &#x60;WORKFLOW&#x60; - The HyperFlex health check execution is initiated through an orchestration workflow. * &#x60;SCHEDULED&#x60; - The HyperFlex health check execution is through a scheduled run. | [optional] [default to "UNKNOWN"]
 **Timestamp** | Pointer to **time.Time** | Timestamp of the last health check execution on the HyperFlex cluster. | [optional] 
-**HxCluster** | Pointer to [**HyperflexClusterRelationship**](HyperflexClusterRelationship.md) |  | [optional] 
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
-**Workflow** | Pointer to [**WorkflowWorkflowInfoRelationship**](WorkflowWorkflowInfoRelationship.md) |  | [optional] 
+**HxCluster** | Pointer to [**NullableHyperflexClusterRelationship**](HyperflexClusterRelationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
+**Workflow** | Pointer to [**NullableWorkflowWorkflowInfoRelationship**](WorkflowWorkflowInfoRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -146,6 +146,16 @@ SetHxCluster sets HxCluster field to given value.
 
 HasHxCluster returns a boolean if a field has been set.
 
+### SetHxClusterNil
+
+`func (o *HyperflexClusterHealthCheckExecutionSnapshot) SetHxClusterNil(b bool)`
+
+ SetHxClusterNil sets the value for HxCluster to be an explicit nil
+
+### UnsetHxCluster
+`func (o *HyperflexClusterHealthCheckExecutionSnapshot) UnsetHxCluster()`
+
+UnsetHxCluster ensures that no value is present for HxCluster, not even an explicit nil
 ### GetRegisteredDevice
 
 `func (o *HyperflexClusterHealthCheckExecutionSnapshot) GetRegisteredDevice() AssetDeviceRegistrationRelationship`
@@ -171,6 +181,16 @@ SetRegisteredDevice sets RegisteredDevice field to given value.
 
 HasRegisteredDevice returns a boolean if a field has been set.
 
+### SetRegisteredDeviceNil
+
+`func (o *HyperflexClusterHealthCheckExecutionSnapshot) SetRegisteredDeviceNil(b bool)`
+
+ SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+
+### UnsetRegisteredDevice
+`func (o *HyperflexClusterHealthCheckExecutionSnapshot) UnsetRegisteredDevice()`
+
+UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
 ### GetWorkflow
 
 `func (o *HyperflexClusterHealthCheckExecutionSnapshot) GetWorkflow() WorkflowWorkflowInfoRelationship`
@@ -196,6 +216,16 @@ SetWorkflow sets Workflow field to given value.
 
 HasWorkflow returns a boolean if a field has been set.
 
+### SetWorkflowNil
+
+`func (o *HyperflexClusterHealthCheckExecutionSnapshot) SetWorkflowNil(b bool)`
+
+ SetWorkflowNil sets the value for Workflow to be an explicit nil
+
+### UnsetWorkflow
+`func (o *HyperflexClusterHealthCheckExecutionSnapshot) UnsetWorkflow()`
+
+UnsetWorkflow ensures that no value is present for Workflow, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

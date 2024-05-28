@@ -7,8 +7,8 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "connectorpack.ConnectorPackUpgrade"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "connectorpack.ConnectorPackUpgrade"]
 **ConnectorPackOpType** | Pointer to **string** | The type of operation to be performed on UCS Director. * &#x60;Install&#x60; - Installs the requisite connector packs on UCS Director. * &#x60;Push&#x60; - Pushes the requisite connector packs to UCS Director. | [optional] [default to "Install"]
-**UcsdInfo** | Pointer to [**IaasUcsdInfoRelationship**](IaasUcsdInfoRelationship.md) |  | [optional] 
-**Workflow** | Pointer to [**WorkflowWorkflowInfoRelationship**](WorkflowWorkflowInfoRelationship.md) |  | [optional] 
+**UcsdInfo** | Pointer to [**NullableIaasUcsdInfoRelationship**](IaasUcsdInfoRelationship.md) |  | [optional] 
+**Workflow** | Pointer to [**NullableWorkflowWorkflowInfoRelationship**](WorkflowWorkflowInfoRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -119,6 +119,16 @@ SetUcsdInfo sets UcsdInfo field to given value.
 
 HasUcsdInfo returns a boolean if a field has been set.
 
+### SetUcsdInfoNil
+
+`func (o *ConnectorpackConnectorPackUpgrade) SetUcsdInfoNil(b bool)`
+
+ SetUcsdInfoNil sets the value for UcsdInfo to be an explicit nil
+
+### UnsetUcsdInfo
+`func (o *ConnectorpackConnectorPackUpgrade) UnsetUcsdInfo()`
+
+UnsetUcsdInfo ensures that no value is present for UcsdInfo, not even an explicit nil
 ### GetWorkflow
 
 `func (o *ConnectorpackConnectorPackUpgrade) GetWorkflow() WorkflowWorkflowInfoRelationship`
@@ -144,6 +154,16 @@ SetWorkflow sets Workflow field to given value.
 
 HasWorkflow returns a boolean if a field has been set.
 
+### SetWorkflowNil
+
+`func (o *ConnectorpackConnectorPackUpgrade) SetWorkflowNil(b bool)`
+
+ SetWorkflowNil sets the value for Workflow to be an explicit nil
+
+### UnsetWorkflow
+`func (o *ConnectorpackConnectorPackUpgrade) UnsetWorkflow()`
+
+UnsetWorkflow ensures that no value is present for Workflow, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

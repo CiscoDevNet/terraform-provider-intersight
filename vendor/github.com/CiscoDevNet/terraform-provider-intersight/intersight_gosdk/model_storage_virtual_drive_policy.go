@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the StorageVirtualDrivePolicy type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &StorageVirtualDrivePolicy{}
 
 // StorageVirtualDrivePolicy This models the manual drive selection configuration.
 type StorageVirtualDrivePolicy struct {
@@ -132,7 +136,7 @@ func (o *StorageVirtualDrivePolicy) SetObjectType(v string) {
 
 // GetAccessPolicy returns the AccessPolicy field value if set, zero value otherwise.
 func (o *StorageVirtualDrivePolicy) GetAccessPolicy() string {
-	if o == nil || o.AccessPolicy == nil {
+	if o == nil || IsNil(o.AccessPolicy) {
 		var ret string
 		return ret
 	}
@@ -142,7 +146,7 @@ func (o *StorageVirtualDrivePolicy) GetAccessPolicy() string {
 // GetAccessPolicyOk returns a tuple with the AccessPolicy field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageVirtualDrivePolicy) GetAccessPolicyOk() (*string, bool) {
-	if o == nil || o.AccessPolicy == nil {
+	if o == nil || IsNil(o.AccessPolicy) {
 		return nil, false
 	}
 	return o.AccessPolicy, true
@@ -150,7 +154,7 @@ func (o *StorageVirtualDrivePolicy) GetAccessPolicyOk() (*string, bool) {
 
 // HasAccessPolicy returns a boolean if a field has been set.
 func (o *StorageVirtualDrivePolicy) HasAccessPolicy() bool {
-	if o != nil && o.AccessPolicy != nil {
+	if o != nil && !IsNil(o.AccessPolicy) {
 		return true
 	}
 
@@ -164,7 +168,7 @@ func (o *StorageVirtualDrivePolicy) SetAccessPolicy(v string) {
 
 // GetDriveCache returns the DriveCache field value if set, zero value otherwise.
 func (o *StorageVirtualDrivePolicy) GetDriveCache() string {
-	if o == nil || o.DriveCache == nil {
+	if o == nil || IsNil(o.DriveCache) {
 		var ret string
 		return ret
 	}
@@ -174,7 +178,7 @@ func (o *StorageVirtualDrivePolicy) GetDriveCache() string {
 // GetDriveCacheOk returns a tuple with the DriveCache field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageVirtualDrivePolicy) GetDriveCacheOk() (*string, bool) {
-	if o == nil || o.DriveCache == nil {
+	if o == nil || IsNil(o.DriveCache) {
 		return nil, false
 	}
 	return o.DriveCache, true
@@ -182,7 +186,7 @@ func (o *StorageVirtualDrivePolicy) GetDriveCacheOk() (*string, bool) {
 
 // HasDriveCache returns a boolean if a field has been set.
 func (o *StorageVirtualDrivePolicy) HasDriveCache() bool {
-	if o != nil && o.DriveCache != nil {
+	if o != nil && !IsNil(o.DriveCache) {
 		return true
 	}
 
@@ -196,7 +200,7 @@ func (o *StorageVirtualDrivePolicy) SetDriveCache(v string) {
 
 // GetReadPolicy returns the ReadPolicy field value if set, zero value otherwise.
 func (o *StorageVirtualDrivePolicy) GetReadPolicy() string {
-	if o == nil || o.ReadPolicy == nil {
+	if o == nil || IsNil(o.ReadPolicy) {
 		var ret string
 		return ret
 	}
@@ -206,7 +210,7 @@ func (o *StorageVirtualDrivePolicy) GetReadPolicy() string {
 // GetReadPolicyOk returns a tuple with the ReadPolicy field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageVirtualDrivePolicy) GetReadPolicyOk() (*string, bool) {
-	if o == nil || o.ReadPolicy == nil {
+	if o == nil || IsNil(o.ReadPolicy) {
 		return nil, false
 	}
 	return o.ReadPolicy, true
@@ -214,7 +218,7 @@ func (o *StorageVirtualDrivePolicy) GetReadPolicyOk() (*string, bool) {
 
 // HasReadPolicy returns a boolean if a field has been set.
 func (o *StorageVirtualDrivePolicy) HasReadPolicy() bool {
-	if o != nil && o.ReadPolicy != nil {
+	if o != nil && !IsNil(o.ReadPolicy) {
 		return true
 	}
 
@@ -228,7 +232,7 @@ func (o *StorageVirtualDrivePolicy) SetReadPolicy(v string) {
 
 // GetStripSize returns the StripSize field value if set, zero value otherwise.
 func (o *StorageVirtualDrivePolicy) GetStripSize() int32 {
-	if o == nil || o.StripSize == nil {
+	if o == nil || IsNil(o.StripSize) {
 		var ret int32
 		return ret
 	}
@@ -238,7 +242,7 @@ func (o *StorageVirtualDrivePolicy) GetStripSize() int32 {
 // GetStripSizeOk returns a tuple with the StripSize field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageVirtualDrivePolicy) GetStripSizeOk() (*int32, bool) {
-	if o == nil || o.StripSize == nil {
+	if o == nil || IsNil(o.StripSize) {
 		return nil, false
 	}
 	return o.StripSize, true
@@ -246,7 +250,7 @@ func (o *StorageVirtualDrivePolicy) GetStripSizeOk() (*int32, bool) {
 
 // HasStripSize returns a boolean if a field has been set.
 func (o *StorageVirtualDrivePolicy) HasStripSize() bool {
-	if o != nil && o.StripSize != nil {
+	if o != nil && !IsNil(o.StripSize) {
 		return true
 	}
 
@@ -260,7 +264,7 @@ func (o *StorageVirtualDrivePolicy) SetStripSize(v int32) {
 
 // GetWritePolicy returns the WritePolicy field value if set, zero value otherwise.
 func (o *StorageVirtualDrivePolicy) GetWritePolicy() string {
-	if o == nil || o.WritePolicy == nil {
+	if o == nil || IsNil(o.WritePolicy) {
 		var ret string
 		return ret
 	}
@@ -270,7 +274,7 @@ func (o *StorageVirtualDrivePolicy) GetWritePolicy() string {
 // GetWritePolicyOk returns a tuple with the WritePolicy field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageVirtualDrivePolicy) GetWritePolicyOk() (*string, bool) {
-	if o == nil || o.WritePolicy == nil {
+	if o == nil || IsNil(o.WritePolicy) {
 		return nil, false
 	}
 	return o.WritePolicy, true
@@ -278,7 +282,7 @@ func (o *StorageVirtualDrivePolicy) GetWritePolicyOk() (*string, bool) {
 
 // HasWritePolicy returns a boolean if a field has been set.
 func (o *StorageVirtualDrivePolicy) HasWritePolicy() bool {
-	if o != nil && o.WritePolicy != nil {
+	if o != nil && !IsNil(o.WritePolicy) {
 		return true
 	}
 
@@ -291,34 +295,38 @@ func (o *StorageVirtualDrivePolicy) SetWritePolicy(v string) {
 }
 
 func (o StorageVirtualDrivePolicy) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o StorageVirtualDrivePolicy) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
 	errMoBaseComplexType = json.Unmarshal([]byte(serializedMoBaseComplexType), &toSerialize)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.AccessPolicy != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.AccessPolicy) {
 		toSerialize["AccessPolicy"] = o.AccessPolicy
 	}
-	if o.DriveCache != nil {
+	if !IsNil(o.DriveCache) {
 		toSerialize["DriveCache"] = o.DriveCache
 	}
-	if o.ReadPolicy != nil {
+	if !IsNil(o.ReadPolicy) {
 		toSerialize["ReadPolicy"] = o.ReadPolicy
 	}
-	if o.StripSize != nil {
+	if !IsNil(o.StripSize) {
 		toSerialize["StripSize"] = o.StripSize
 	}
-	if o.WritePolicy != nil {
+	if !IsNil(o.WritePolicy) {
 		toSerialize["WritePolicy"] = o.WritePolicy
 	}
 
@@ -326,10 +334,32 @@ func (o StorageVirtualDrivePolicy) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *StorageVirtualDrivePolicy) UnmarshalJSON(bytes []byte) (err error) {
+func (o *StorageVirtualDrivePolicy) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type StorageVirtualDrivePolicyWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -349,7 +379,7 @@ func (o *StorageVirtualDrivePolicy) UnmarshalJSON(bytes []byte) (err error) {
 
 	varStorageVirtualDrivePolicyWithoutEmbeddedStruct := StorageVirtualDrivePolicyWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varStorageVirtualDrivePolicyWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varStorageVirtualDrivePolicyWithoutEmbeddedStruct)
 	if err == nil {
 		varStorageVirtualDrivePolicy := _StorageVirtualDrivePolicy{}
 		varStorageVirtualDrivePolicy.ClassId = varStorageVirtualDrivePolicyWithoutEmbeddedStruct.ClassId
@@ -366,7 +396,7 @@ func (o *StorageVirtualDrivePolicy) UnmarshalJSON(bytes []byte) (err error) {
 
 	varStorageVirtualDrivePolicy := _StorageVirtualDrivePolicy{}
 
-	err = json.Unmarshal(bytes, &varStorageVirtualDrivePolicy)
+	err = json.Unmarshal(data, &varStorageVirtualDrivePolicy)
 	if err == nil {
 		o.MoBaseComplexType = varStorageVirtualDrivePolicy.MoBaseComplexType
 	} else {
@@ -375,7 +405,7 @@ func (o *StorageVirtualDrivePolicy) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "AccessPolicy")

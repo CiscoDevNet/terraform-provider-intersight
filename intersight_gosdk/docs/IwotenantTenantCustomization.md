@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 **MskServerForDataExtractor** | Pointer to **string** | MSK cluster endpoint that data extractor can send reporting data to. This  MS cluster in turn populates data into tables in Redshift cluster. | [optional] 
 **WriteUserAccessKeyId** | Pointer to **string** | AWS access key Id to write data to redshift.  Refer to AWS cloud formation stack &#39;Output&#39; of the tenant. | [optional] 
 **WriteUserSecretAccessKey** | Pointer to **string** | AWS secret access key to write data to redshift.  Refer to AWS cloud formation stack &#39;Output&#39; of the tenant. | [optional] 
-**Account** | Pointer to [**IamAccountRelationship**](IamAccountRelationship.md) |  | [optional] 
+**Account** | Pointer to [**NullableIamAccountRelationship**](IamAccountRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -274,6 +274,16 @@ SetAccount sets Account field to given value.
 
 HasAccount returns a boolean if a field has been set.
 
+### SetAccountNil
+
+`func (o *IwotenantTenantCustomization) SetAccountNil(b bool)`
+
+ SetAccountNil sets the value for Account to be an explicit nil
+
+### UnsetAccount
+`func (o *IwotenantTenantCustomization) UnsetAccount()`
+
+UnsetAccount ensures that no value is present for Account, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

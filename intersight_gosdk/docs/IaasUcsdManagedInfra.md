@@ -17,7 +17,7 @@ Name | Type | Description | Notes
 **UserCount** | Pointer to **int64** | Total user accounts in UCSD. | [optional] [readonly] 
 **VdcCount** | Pointer to **int64** | Total virtual datacenters in UCSD. | [optional] [readonly] 
 **VmCount** | Pointer to **int64** | Total Virtual machines in UCSD. | [optional] [readonly] 
-**Guid** | Pointer to [**IaasUcsdInfoRelationship**](IaasUcsdInfoRelationship.md) |  | [optional] 
+**Guid** | Pointer to [**NullableIaasUcsdInfoRelationship**](IaasUcsdInfoRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -378,6 +378,16 @@ SetGuid sets Guid field to given value.
 
 HasGuid returns a boolean if a field has been set.
 
+### SetGuidNil
+
+`func (o *IaasUcsdManagedInfra) SetGuidNil(b bool)`
+
+ SetGuidNil sets the value for Guid to be an explicit nil
+
+### UnsetGuid
+`func (o *IaasUcsdManagedInfra) UnsetGuid()`
+
+UnsetGuid ensures that no value is present for Guid, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

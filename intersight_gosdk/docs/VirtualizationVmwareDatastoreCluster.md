@@ -23,7 +23,7 @@ Name | Type | Description | Notes
 **StorageDrsEnabled** | Pointer to **bool** | Is Storage DRS enabled for this datastore cluster. | [optional] 
 **UtilizedSpaceThreshold** | Pointer to **int32** | Minimum level of consumed space for each datastore that is the threshold for action. | [optional] 
 **VmEvacuationAutomationMode** | Pointer to **string** | Storage DRS behavior when it generates recommendations for VM evacuations from datastores in a datastore cluster. | [optional] 
-**Datacenter** | Pointer to [**VirtualizationVmwareDatacenterRelationship**](VirtualizationVmwareDatacenterRelationship.md) |  | [optional] 
+**Datacenter** | Pointer to [**NullableVirtualizationVmwareDatacenterRelationship**](VirtualizationVmwareDatacenterRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -534,6 +534,16 @@ SetDatacenter sets Datacenter field to given value.
 
 HasDatacenter returns a boolean if a field has been set.
 
+### SetDatacenterNil
+
+`func (o *VirtualizationVmwareDatastoreCluster) SetDatacenterNil(b bool)`
+
+ SetDatacenterNil sets the value for Datacenter to be an explicit nil
+
+### UnsetDatacenter
+`func (o *VirtualizationVmwareDatastoreCluster) UnsetDatacenter()`
+
+UnsetDatacenter ensures that no value is present for Datacenter, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

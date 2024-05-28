@@ -156,6 +156,10 @@ func checkWorkflowStatus(conn *Config, w models.WorkflowWorkflowInfoRelationship
 	var workflowInfo models.WorkflowWorkflowInfo
 	for { // infinite loop
 		moid := w.MoMoRef.GetMoid()
+		if len(moid) == 0 {
+			// nothing to wait for workflowInfo Moid does not exist
+			return fmt.Sprintf("workflow moid is empty %v", w), nil
+		}
 		// accepting pointer to workflowInfo and assigning to workflowInfo after de-referencing
 		workflowInfoRef, _, responseErr := conn.ApiClient.WorkflowApi.GetWorkflowWorkflowInfoByMoid(conn.ctx, moid).Execute()
 		if responseErr != nil {

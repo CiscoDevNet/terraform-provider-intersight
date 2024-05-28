@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the FirmwareDirectDownload type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &FirmwareDirectDownload{}
 
 // FirmwareDirectDownload A specification for downloading the image from Cisco or appliance repository or user provided HTTP file server that hosts the image for firmware upgrade.
 type FirmwareDirectDownload struct {
@@ -121,7 +125,7 @@ func (o *FirmwareDirectDownload) SetObjectType(v string) {
 
 // GetHttpServer returns the HttpServer field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *FirmwareDirectDownload) GetHttpServer() FirmwareHttpServer {
-	if o == nil || o.HttpServer.Get() == nil {
+	if o == nil || IsNil(o.HttpServer.Get()) {
 		var ret FirmwareHttpServer
 		return ret
 	}
@@ -164,7 +168,7 @@ func (o *FirmwareDirectDownload) UnsetHttpServer() {
 
 // GetImageSource returns the ImageSource field value if set, zero value otherwise.
 func (o *FirmwareDirectDownload) GetImageSource() string {
-	if o == nil || o.ImageSource == nil {
+	if o == nil || IsNil(o.ImageSource) {
 		var ret string
 		return ret
 	}
@@ -174,7 +178,7 @@ func (o *FirmwareDirectDownload) GetImageSource() string {
 // GetImageSourceOk returns a tuple with the ImageSource field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FirmwareDirectDownload) GetImageSourceOk() (*string, bool) {
-	if o == nil || o.ImageSource == nil {
+	if o == nil || IsNil(o.ImageSource) {
 		return nil, false
 	}
 	return o.ImageSource, true
@@ -182,7 +186,7 @@ func (o *FirmwareDirectDownload) GetImageSourceOk() (*string, bool) {
 
 // HasImageSource returns a boolean if a field has been set.
 func (o *FirmwareDirectDownload) HasImageSource() bool {
-	if o != nil && o.ImageSource != nil {
+	if o != nil && !IsNil(o.ImageSource) {
 		return true
 	}
 
@@ -196,7 +200,7 @@ func (o *FirmwareDirectDownload) SetImageSource(v string) {
 
 // GetIsPasswordSet returns the IsPasswordSet field value if set, zero value otherwise.
 func (o *FirmwareDirectDownload) GetIsPasswordSet() bool {
-	if o == nil || o.IsPasswordSet == nil {
+	if o == nil || IsNil(o.IsPasswordSet) {
 		var ret bool
 		return ret
 	}
@@ -206,7 +210,7 @@ func (o *FirmwareDirectDownload) GetIsPasswordSet() bool {
 // GetIsPasswordSetOk returns a tuple with the IsPasswordSet field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FirmwareDirectDownload) GetIsPasswordSetOk() (*bool, bool) {
-	if o == nil || o.IsPasswordSet == nil {
+	if o == nil || IsNil(o.IsPasswordSet) {
 		return nil, false
 	}
 	return o.IsPasswordSet, true
@@ -214,7 +218,7 @@ func (o *FirmwareDirectDownload) GetIsPasswordSetOk() (*bool, bool) {
 
 // HasIsPasswordSet returns a boolean if a field has been set.
 func (o *FirmwareDirectDownload) HasIsPasswordSet() bool {
-	if o != nil && o.IsPasswordSet != nil {
+	if o != nil && !IsNil(o.IsPasswordSet) {
 		return true
 	}
 
@@ -228,7 +232,7 @@ func (o *FirmwareDirectDownload) SetIsPasswordSet(v bool) {
 
 // GetPassword returns the Password field value if set, zero value otherwise.
 func (o *FirmwareDirectDownload) GetPassword() string {
-	if o == nil || o.Password == nil {
+	if o == nil || IsNil(o.Password) {
 		var ret string
 		return ret
 	}
@@ -238,7 +242,7 @@ func (o *FirmwareDirectDownload) GetPassword() string {
 // GetPasswordOk returns a tuple with the Password field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FirmwareDirectDownload) GetPasswordOk() (*string, bool) {
-	if o == nil || o.Password == nil {
+	if o == nil || IsNil(o.Password) {
 		return nil, false
 	}
 	return o.Password, true
@@ -246,7 +250,7 @@ func (o *FirmwareDirectDownload) GetPasswordOk() (*string, bool) {
 
 // HasPassword returns a boolean if a field has been set.
 func (o *FirmwareDirectDownload) HasPassword() bool {
-	if o != nil && o.Password != nil {
+	if o != nil && !IsNil(o.Password) {
 		return true
 	}
 
@@ -260,7 +264,7 @@ func (o *FirmwareDirectDownload) SetPassword(v string) {
 
 // GetUpgradeoption returns the Upgradeoption field value if set, zero value otherwise.
 func (o *FirmwareDirectDownload) GetUpgradeoption() string {
-	if o == nil || o.Upgradeoption == nil {
+	if o == nil || IsNil(o.Upgradeoption) {
 		var ret string
 		return ret
 	}
@@ -270,7 +274,7 @@ func (o *FirmwareDirectDownload) GetUpgradeoption() string {
 // GetUpgradeoptionOk returns a tuple with the Upgradeoption field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FirmwareDirectDownload) GetUpgradeoptionOk() (*string, bool) {
-	if o == nil || o.Upgradeoption == nil {
+	if o == nil || IsNil(o.Upgradeoption) {
 		return nil, false
 	}
 	return o.Upgradeoption, true
@@ -278,7 +282,7 @@ func (o *FirmwareDirectDownload) GetUpgradeoptionOk() (*string, bool) {
 
 // HasUpgradeoption returns a boolean if a field has been set.
 func (o *FirmwareDirectDownload) HasUpgradeoption() bool {
-	if o != nil && o.Upgradeoption != nil {
+	if o != nil && !IsNil(o.Upgradeoption) {
 		return true
 	}
 
@@ -292,7 +296,7 @@ func (o *FirmwareDirectDownload) SetUpgradeoption(v string) {
 
 // GetUsername returns the Username field value if set, zero value otherwise.
 func (o *FirmwareDirectDownload) GetUsername() string {
-	if o == nil || o.Username == nil {
+	if o == nil || IsNil(o.Username) {
 		var ret string
 		return ret
 	}
@@ -302,7 +306,7 @@ func (o *FirmwareDirectDownload) GetUsername() string {
 // GetUsernameOk returns a tuple with the Username field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FirmwareDirectDownload) GetUsernameOk() (*string, bool) {
-	if o == nil || o.Username == nil {
+	if o == nil || IsNil(o.Username) {
 		return nil, false
 	}
 	return o.Username, true
@@ -310,7 +314,7 @@ func (o *FirmwareDirectDownload) GetUsernameOk() (*string, bool) {
 
 // HasUsername returns a boolean if a field has been set.
 func (o *FirmwareDirectDownload) HasUsername() bool {
-	if o != nil && o.Username != nil {
+	if o != nil && !IsNil(o.Username) {
 		return true
 	}
 
@@ -323,37 +327,41 @@ func (o *FirmwareDirectDownload) SetUsername(v string) {
 }
 
 func (o FirmwareDirectDownload) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o FirmwareDirectDownload) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
 	errMoBaseComplexType = json.Unmarshal([]byte(serializedMoBaseComplexType), &toSerialize)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
 	if o.HttpServer.IsSet() {
 		toSerialize["HttpServer"] = o.HttpServer.Get()
 	}
-	if o.ImageSource != nil {
+	if !IsNil(o.ImageSource) {
 		toSerialize["ImageSource"] = o.ImageSource
 	}
-	if o.IsPasswordSet != nil {
+	if !IsNil(o.IsPasswordSet) {
 		toSerialize["IsPasswordSet"] = o.IsPasswordSet
 	}
-	if o.Password != nil {
+	if !IsNil(o.Password) {
 		toSerialize["Password"] = o.Password
 	}
-	if o.Upgradeoption != nil {
+	if !IsNil(o.Upgradeoption) {
 		toSerialize["Upgradeoption"] = o.Upgradeoption
 	}
-	if o.Username != nil {
+	if !IsNil(o.Username) {
 		toSerialize["Username"] = o.Username
 	}
 
@@ -361,10 +369,32 @@ func (o FirmwareDirectDownload) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *FirmwareDirectDownload) UnmarshalJSON(bytes []byte) (err error) {
+func (o *FirmwareDirectDownload) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type FirmwareDirectDownloadWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -385,7 +415,7 @@ func (o *FirmwareDirectDownload) UnmarshalJSON(bytes []byte) (err error) {
 
 	varFirmwareDirectDownloadWithoutEmbeddedStruct := FirmwareDirectDownloadWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varFirmwareDirectDownloadWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varFirmwareDirectDownloadWithoutEmbeddedStruct)
 	if err == nil {
 		varFirmwareDirectDownload := _FirmwareDirectDownload{}
 		varFirmwareDirectDownload.ClassId = varFirmwareDirectDownloadWithoutEmbeddedStruct.ClassId
@@ -403,7 +433,7 @@ func (o *FirmwareDirectDownload) UnmarshalJSON(bytes []byte) (err error) {
 
 	varFirmwareDirectDownload := _FirmwareDirectDownload{}
 
-	err = json.Unmarshal(bytes, &varFirmwareDirectDownload)
+	err = json.Unmarshal(data, &varFirmwareDirectDownload)
 	if err == nil {
 		o.MoBaseComplexType = varFirmwareDirectDownload.MoBaseComplexType
 	} else {
@@ -412,7 +442,7 @@ func (o *FirmwareDirectDownload) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "HttpServer")

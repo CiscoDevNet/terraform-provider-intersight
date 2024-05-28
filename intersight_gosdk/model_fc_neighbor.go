@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the FcNeighbor type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &FcNeighbor{}
 
 // FcNeighbor Concrete class for switch and N port virtualization neighbors present in various interfaces of a switch.
 type FcNeighbor struct {
@@ -33,9 +37,9 @@ type FcNeighbor struct {
 	// Device Id of the neighbor switch.
 	PeerSwitchName *string `json:"PeerSwitchName,omitempty"`
 	// World Wide Name of the neighbor switch.
-	PeerWwn              *string                     `json:"PeerWwn,omitempty"`
-	FcPhysicalPort       *FcPhysicalPortRelationship `json:"FcPhysicalPort,omitempty"`
-	FcPortChannel        *FcPortChannelRelationship  `json:"FcPortChannel,omitempty"`
+	PeerWwn              *string                            `json:"PeerWwn,omitempty"`
+	FcPhysicalPort       NullableFcPhysicalPortRelationship `json:"FcPhysicalPort,omitempty"`
+	FcPortChannel        NullableFcPortChannelRelationship  `json:"FcPortChannel,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -114,7 +118,7 @@ func (o *FcNeighbor) SetObjectType(v string) {
 
 // GetPeerDeviceCapability returns the PeerDeviceCapability field value if set, zero value otherwise.
 func (o *FcNeighbor) GetPeerDeviceCapability() string {
-	if o == nil || o.PeerDeviceCapability == nil {
+	if o == nil || IsNil(o.PeerDeviceCapability) {
 		var ret string
 		return ret
 	}
@@ -124,7 +128,7 @@ func (o *FcNeighbor) GetPeerDeviceCapability() string {
 // GetPeerDeviceCapabilityOk returns a tuple with the PeerDeviceCapability field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FcNeighbor) GetPeerDeviceCapabilityOk() (*string, bool) {
-	if o == nil || o.PeerDeviceCapability == nil {
+	if o == nil || IsNil(o.PeerDeviceCapability) {
 		return nil, false
 	}
 	return o.PeerDeviceCapability, true
@@ -132,7 +136,7 @@ func (o *FcNeighbor) GetPeerDeviceCapabilityOk() (*string, bool) {
 
 // HasPeerDeviceCapability returns a boolean if a field has been set.
 func (o *FcNeighbor) HasPeerDeviceCapability() bool {
-	if o != nil && o.PeerDeviceCapability != nil {
+	if o != nil && !IsNil(o.PeerDeviceCapability) {
 		return true
 	}
 
@@ -146,7 +150,7 @@ func (o *FcNeighbor) SetPeerDeviceCapability(v string) {
 
 // GetPeerInterface returns the PeerInterface field value if set, zero value otherwise.
 func (o *FcNeighbor) GetPeerInterface() string {
-	if o == nil || o.PeerInterface == nil {
+	if o == nil || IsNil(o.PeerInterface) {
 		var ret string
 		return ret
 	}
@@ -156,7 +160,7 @@ func (o *FcNeighbor) GetPeerInterface() string {
 // GetPeerInterfaceOk returns a tuple with the PeerInterface field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FcNeighbor) GetPeerInterfaceOk() (*string, bool) {
-	if o == nil || o.PeerInterface == nil {
+	if o == nil || IsNil(o.PeerInterface) {
 		return nil, false
 	}
 	return o.PeerInterface, true
@@ -164,7 +168,7 @@ func (o *FcNeighbor) GetPeerInterfaceOk() (*string, bool) {
 
 // HasPeerInterface returns a boolean if a field has been set.
 func (o *FcNeighbor) HasPeerInterface() bool {
-	if o != nil && o.PeerInterface != nil {
+	if o != nil && !IsNil(o.PeerInterface) {
 		return true
 	}
 
@@ -178,7 +182,7 @@ func (o *FcNeighbor) SetPeerInterface(v string) {
 
 // GetPeerIpAddress returns the PeerIpAddress field value if set, zero value otherwise.
 func (o *FcNeighbor) GetPeerIpAddress() string {
-	if o == nil || o.PeerIpAddress == nil {
+	if o == nil || IsNil(o.PeerIpAddress) {
 		var ret string
 		return ret
 	}
@@ -188,7 +192,7 @@ func (o *FcNeighbor) GetPeerIpAddress() string {
 // GetPeerIpAddressOk returns a tuple with the PeerIpAddress field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FcNeighbor) GetPeerIpAddressOk() (*string, bool) {
-	if o == nil || o.PeerIpAddress == nil {
+	if o == nil || IsNil(o.PeerIpAddress) {
 		return nil, false
 	}
 	return o.PeerIpAddress, true
@@ -196,7 +200,7 @@ func (o *FcNeighbor) GetPeerIpAddressOk() (*string, bool) {
 
 // HasPeerIpAddress returns a boolean if a field has been set.
 func (o *FcNeighbor) HasPeerIpAddress() bool {
-	if o != nil && o.PeerIpAddress != nil {
+	if o != nil && !IsNil(o.PeerIpAddress) {
 		return true
 	}
 
@@ -210,7 +214,7 @@ func (o *FcNeighbor) SetPeerIpAddress(v string) {
 
 // GetPeerSwitchName returns the PeerSwitchName field value if set, zero value otherwise.
 func (o *FcNeighbor) GetPeerSwitchName() string {
-	if o == nil || o.PeerSwitchName == nil {
+	if o == nil || IsNil(o.PeerSwitchName) {
 		var ret string
 		return ret
 	}
@@ -220,7 +224,7 @@ func (o *FcNeighbor) GetPeerSwitchName() string {
 // GetPeerSwitchNameOk returns a tuple with the PeerSwitchName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FcNeighbor) GetPeerSwitchNameOk() (*string, bool) {
-	if o == nil || o.PeerSwitchName == nil {
+	if o == nil || IsNil(o.PeerSwitchName) {
 		return nil, false
 	}
 	return o.PeerSwitchName, true
@@ -228,7 +232,7 @@ func (o *FcNeighbor) GetPeerSwitchNameOk() (*string, bool) {
 
 // HasPeerSwitchName returns a boolean if a field has been set.
 func (o *FcNeighbor) HasPeerSwitchName() bool {
-	if o != nil && o.PeerSwitchName != nil {
+	if o != nil && !IsNil(o.PeerSwitchName) {
 		return true
 	}
 
@@ -242,7 +246,7 @@ func (o *FcNeighbor) SetPeerSwitchName(v string) {
 
 // GetPeerWwn returns the PeerWwn field value if set, zero value otherwise.
 func (o *FcNeighbor) GetPeerWwn() string {
-	if o == nil || o.PeerWwn == nil {
+	if o == nil || IsNil(o.PeerWwn) {
 		var ret string
 		return ret
 	}
@@ -252,7 +256,7 @@ func (o *FcNeighbor) GetPeerWwn() string {
 // GetPeerWwnOk returns a tuple with the PeerWwn field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FcNeighbor) GetPeerWwnOk() (*string, bool) {
-	if o == nil || o.PeerWwn == nil {
+	if o == nil || IsNil(o.PeerWwn) {
 		return nil, false
 	}
 	return o.PeerWwn, true
@@ -260,7 +264,7 @@ func (o *FcNeighbor) GetPeerWwnOk() (*string, bool) {
 
 // HasPeerWwn returns a boolean if a field has been set.
 func (o *FcNeighbor) HasPeerWwn() bool {
-	if o != nil && o.PeerWwn != nil {
+	if o != nil && !IsNil(o.PeerWwn) {
 		return true
 	}
 
@@ -272,116 +276,164 @@ func (o *FcNeighbor) SetPeerWwn(v string) {
 	o.PeerWwn = &v
 }
 
-// GetFcPhysicalPort returns the FcPhysicalPort field value if set, zero value otherwise.
+// GetFcPhysicalPort returns the FcPhysicalPort field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *FcNeighbor) GetFcPhysicalPort() FcPhysicalPortRelationship {
-	if o == nil || o.FcPhysicalPort == nil {
+	if o == nil || IsNil(o.FcPhysicalPort.Get()) {
 		var ret FcPhysicalPortRelationship
 		return ret
 	}
-	return *o.FcPhysicalPort
+	return *o.FcPhysicalPort.Get()
 }
 
 // GetFcPhysicalPortOk returns a tuple with the FcPhysicalPort field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *FcNeighbor) GetFcPhysicalPortOk() (*FcPhysicalPortRelationship, bool) {
-	if o == nil || o.FcPhysicalPort == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.FcPhysicalPort, true
+	return o.FcPhysicalPort.Get(), o.FcPhysicalPort.IsSet()
 }
 
 // HasFcPhysicalPort returns a boolean if a field has been set.
 func (o *FcNeighbor) HasFcPhysicalPort() bool {
-	if o != nil && o.FcPhysicalPort != nil {
+	if o != nil && o.FcPhysicalPort.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetFcPhysicalPort gets a reference to the given FcPhysicalPortRelationship and assigns it to the FcPhysicalPort field.
+// SetFcPhysicalPort gets a reference to the given NullableFcPhysicalPortRelationship and assigns it to the FcPhysicalPort field.
 func (o *FcNeighbor) SetFcPhysicalPort(v FcPhysicalPortRelationship) {
-	o.FcPhysicalPort = &v
+	o.FcPhysicalPort.Set(&v)
 }
 
-// GetFcPortChannel returns the FcPortChannel field value if set, zero value otherwise.
+// SetFcPhysicalPortNil sets the value for FcPhysicalPort to be an explicit nil
+func (o *FcNeighbor) SetFcPhysicalPortNil() {
+	o.FcPhysicalPort.Set(nil)
+}
+
+// UnsetFcPhysicalPort ensures that no value is present for FcPhysicalPort, not even an explicit nil
+func (o *FcNeighbor) UnsetFcPhysicalPort() {
+	o.FcPhysicalPort.Unset()
+}
+
+// GetFcPortChannel returns the FcPortChannel field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *FcNeighbor) GetFcPortChannel() FcPortChannelRelationship {
-	if o == nil || o.FcPortChannel == nil {
+	if o == nil || IsNil(o.FcPortChannel.Get()) {
 		var ret FcPortChannelRelationship
 		return ret
 	}
-	return *o.FcPortChannel
+	return *o.FcPortChannel.Get()
 }
 
 // GetFcPortChannelOk returns a tuple with the FcPortChannel field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *FcNeighbor) GetFcPortChannelOk() (*FcPortChannelRelationship, bool) {
-	if o == nil || o.FcPortChannel == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.FcPortChannel, true
+	return o.FcPortChannel.Get(), o.FcPortChannel.IsSet()
 }
 
 // HasFcPortChannel returns a boolean if a field has been set.
 func (o *FcNeighbor) HasFcPortChannel() bool {
-	if o != nil && o.FcPortChannel != nil {
+	if o != nil && o.FcPortChannel.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetFcPortChannel gets a reference to the given FcPortChannelRelationship and assigns it to the FcPortChannel field.
+// SetFcPortChannel gets a reference to the given NullableFcPortChannelRelationship and assigns it to the FcPortChannel field.
 func (o *FcNeighbor) SetFcPortChannel(v FcPortChannelRelationship) {
-	o.FcPortChannel = &v
+	o.FcPortChannel.Set(&v)
+}
+
+// SetFcPortChannelNil sets the value for FcPortChannel to be an explicit nil
+func (o *FcNeighbor) SetFcPortChannelNil() {
+	o.FcPortChannel.Set(nil)
+}
+
+// UnsetFcPortChannel ensures that no value is present for FcPortChannel, not even an explicit nil
+func (o *FcNeighbor) UnsetFcPortChannel() {
+	o.FcPortChannel.Unset()
 }
 
 func (o FcNeighbor) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o FcNeighbor) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedInventoryBase, errInventoryBase := json.Marshal(o.InventoryBase)
 	if errInventoryBase != nil {
-		return []byte{}, errInventoryBase
+		return map[string]interface{}{}, errInventoryBase
 	}
 	errInventoryBase = json.Unmarshal([]byte(serializedInventoryBase), &toSerialize)
 	if errInventoryBase != nil {
-		return []byte{}, errInventoryBase
+		return map[string]interface{}{}, errInventoryBase
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.PeerDeviceCapability != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.PeerDeviceCapability) {
 		toSerialize["PeerDeviceCapability"] = o.PeerDeviceCapability
 	}
-	if o.PeerInterface != nil {
+	if !IsNil(o.PeerInterface) {
 		toSerialize["PeerInterface"] = o.PeerInterface
 	}
-	if o.PeerIpAddress != nil {
+	if !IsNil(o.PeerIpAddress) {
 		toSerialize["PeerIpAddress"] = o.PeerIpAddress
 	}
-	if o.PeerSwitchName != nil {
+	if !IsNil(o.PeerSwitchName) {
 		toSerialize["PeerSwitchName"] = o.PeerSwitchName
 	}
-	if o.PeerWwn != nil {
+	if !IsNil(o.PeerWwn) {
 		toSerialize["PeerWwn"] = o.PeerWwn
 	}
-	if o.FcPhysicalPort != nil {
-		toSerialize["FcPhysicalPort"] = o.FcPhysicalPort
+	if o.FcPhysicalPort.IsSet() {
+		toSerialize["FcPhysicalPort"] = o.FcPhysicalPort.Get()
 	}
-	if o.FcPortChannel != nil {
-		toSerialize["FcPortChannel"] = o.FcPortChannel
+	if o.FcPortChannel.IsSet() {
+		toSerialize["FcPortChannel"] = o.FcPortChannel.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *FcNeighbor) UnmarshalJSON(bytes []byte) (err error) {
+func (o *FcNeighbor) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type FcNeighborWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -396,14 +448,14 @@ func (o *FcNeighbor) UnmarshalJSON(bytes []byte) (err error) {
 		// Device Id of the neighbor switch.
 		PeerSwitchName *string `json:"PeerSwitchName,omitempty"`
 		// World Wide Name of the neighbor switch.
-		PeerWwn        *string                     `json:"PeerWwn,omitempty"`
-		FcPhysicalPort *FcPhysicalPortRelationship `json:"FcPhysicalPort,omitempty"`
-		FcPortChannel  *FcPortChannelRelationship  `json:"FcPortChannel,omitempty"`
+		PeerWwn        *string                            `json:"PeerWwn,omitempty"`
+		FcPhysicalPort NullableFcPhysicalPortRelationship `json:"FcPhysicalPort,omitempty"`
+		FcPortChannel  NullableFcPortChannelRelationship  `json:"FcPortChannel,omitempty"`
 	}
 
 	varFcNeighborWithoutEmbeddedStruct := FcNeighborWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varFcNeighborWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varFcNeighborWithoutEmbeddedStruct)
 	if err == nil {
 		varFcNeighbor := _FcNeighbor{}
 		varFcNeighbor.ClassId = varFcNeighborWithoutEmbeddedStruct.ClassId
@@ -422,7 +474,7 @@ func (o *FcNeighbor) UnmarshalJSON(bytes []byte) (err error) {
 
 	varFcNeighbor := _FcNeighbor{}
 
-	err = json.Unmarshal(bytes, &varFcNeighbor)
+	err = json.Unmarshal(data, &varFcNeighbor)
 	if err == nil {
 		o.InventoryBase = varFcNeighbor.InventoryBase
 	} else {
@@ -431,7 +483,7 @@ func (o *FcNeighbor) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "PeerDeviceCapability")

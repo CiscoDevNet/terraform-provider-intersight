@@ -7,10 +7,10 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "storage.PureVolumeSnapshot"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "storage.PureVolumeSnapshot"]
 **Serial** | Pointer to **string** | Unique serial number of the snapshot allocated by the storage array. | [optional] [readonly] 
-**Array** | Pointer to [**StoragePureArrayRelationship**](StoragePureArrayRelationship.md) |  | [optional] 
-**ProtectionGroupSnapshot** | Pointer to [**StoragePureProtectionGroupSnapshotRelationship**](StoragePureProtectionGroupSnapshotRelationship.md) |  | [optional] 
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
-**Volume** | Pointer to [**StoragePureVolumeRelationship**](StoragePureVolumeRelationship.md) |  | [optional] 
+**Array** | Pointer to [**NullableStoragePureArrayRelationship**](StoragePureArrayRelationship.md) |  | [optional] 
+**ProtectionGroupSnapshot** | Pointer to [**NullableStoragePureProtectionGroupSnapshotRelationship**](StoragePureProtectionGroupSnapshotRelationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
+**Volume** | Pointer to [**NullableStoragePureVolumeRelationship**](StoragePureVolumeRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -121,6 +121,16 @@ SetArray sets Array field to given value.
 
 HasArray returns a boolean if a field has been set.
 
+### SetArrayNil
+
+`func (o *StoragePureVolumeSnapshot) SetArrayNil(b bool)`
+
+ SetArrayNil sets the value for Array to be an explicit nil
+
+### UnsetArray
+`func (o *StoragePureVolumeSnapshot) UnsetArray()`
+
+UnsetArray ensures that no value is present for Array, not even an explicit nil
 ### GetProtectionGroupSnapshot
 
 `func (o *StoragePureVolumeSnapshot) GetProtectionGroupSnapshot() StoragePureProtectionGroupSnapshotRelationship`
@@ -146,6 +156,16 @@ SetProtectionGroupSnapshot sets ProtectionGroupSnapshot field to given value.
 
 HasProtectionGroupSnapshot returns a boolean if a field has been set.
 
+### SetProtectionGroupSnapshotNil
+
+`func (o *StoragePureVolumeSnapshot) SetProtectionGroupSnapshotNil(b bool)`
+
+ SetProtectionGroupSnapshotNil sets the value for ProtectionGroupSnapshot to be an explicit nil
+
+### UnsetProtectionGroupSnapshot
+`func (o *StoragePureVolumeSnapshot) UnsetProtectionGroupSnapshot()`
+
+UnsetProtectionGroupSnapshot ensures that no value is present for ProtectionGroupSnapshot, not even an explicit nil
 ### GetRegisteredDevice
 
 `func (o *StoragePureVolumeSnapshot) GetRegisteredDevice() AssetDeviceRegistrationRelationship`
@@ -171,6 +191,16 @@ SetRegisteredDevice sets RegisteredDevice field to given value.
 
 HasRegisteredDevice returns a boolean if a field has been set.
 
+### SetRegisteredDeviceNil
+
+`func (o *StoragePureVolumeSnapshot) SetRegisteredDeviceNil(b bool)`
+
+ SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+
+### UnsetRegisteredDevice
+`func (o *StoragePureVolumeSnapshot) UnsetRegisteredDevice()`
+
+UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
 ### GetVolume
 
 `func (o *StoragePureVolumeSnapshot) GetVolume() StoragePureVolumeRelationship`
@@ -196,6 +226,16 @@ SetVolume sets Volume field to given value.
 
 HasVolume returns a boolean if a field has been set.
 
+### SetVolumeNil
+
+`func (o *StoragePureVolumeSnapshot) SetVolumeNil(b bool)`
+
+ SetVolumeNil sets the value for Volume to be an explicit nil
+
+### UnsetVolume
+`func (o *StoragePureVolumeSnapshot) UnsetVolume()`
+
+UnsetVolume ensures that no value is present for Volume, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

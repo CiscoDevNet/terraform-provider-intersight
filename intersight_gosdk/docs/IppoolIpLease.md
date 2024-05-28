@@ -12,12 +12,12 @@ Name | Type | Description | Notes
 **IpV6Address** | Pointer to **string** | IPv6 Address given as a lease to an external entity like server profiles. | [optional] 
 **IpV6Config** | Pointer to [**NullableIppoolIpV6Config**](IppoolIpV6Config.md) |  | [optional] 
 **Reservation** | Pointer to [**IppoolReservationReference**](IppoolReservationReference.md) |  | [optional] 
-**AssignedToEntity** | Pointer to [**MoBaseMoRelationship**](MoBaseMoRelationship.md) |  | [optional] 
-**BlockLease** | Pointer to [**IppoolBlockLeaseRelationship**](IppoolBlockLeaseRelationship.md) |  | [optional] 
-**Pool** | Pointer to [**IppoolPoolRelationship**](IppoolPoolRelationship.md) |  | [optional] 
-**PoolMember** | Pointer to [**IppoolPoolMemberRelationship**](IppoolPoolMemberRelationship.md) |  | [optional] 
-**Universe** | Pointer to [**IppoolUniverseRelationship**](IppoolUniverseRelationship.md) |  | [optional] 
-**Vrf** | Pointer to [**VrfVrfRelationship**](VrfVrfRelationship.md) |  | [optional] 
+**AssignedToEntity** | Pointer to [**NullableMoBaseMoRelationship**](MoBaseMoRelationship.md) |  | [optional] 
+**BlockLease** | Pointer to [**NullableIppoolBlockLeaseRelationship**](IppoolBlockLeaseRelationship.md) |  | [optional] 
+**Pool** | Pointer to [**NullableIppoolPoolRelationship**](IppoolPoolRelationship.md) |  | [optional] 
+**PoolMember** | Pointer to [**NullableIppoolPoolMemberRelationship**](IppoolPoolMemberRelationship.md) |  | [optional] 
+**Universe** | Pointer to [**NullableIppoolUniverseRelationship**](IppoolUniverseRelationship.md) |  | [optional] 
+**Vrf** | Pointer to [**NullableVrfVrfRelationship**](VrfVrfRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -273,6 +273,16 @@ SetAssignedToEntity sets AssignedToEntity field to given value.
 
 HasAssignedToEntity returns a boolean if a field has been set.
 
+### SetAssignedToEntityNil
+
+`func (o *IppoolIpLease) SetAssignedToEntityNil(b bool)`
+
+ SetAssignedToEntityNil sets the value for AssignedToEntity to be an explicit nil
+
+### UnsetAssignedToEntity
+`func (o *IppoolIpLease) UnsetAssignedToEntity()`
+
+UnsetAssignedToEntity ensures that no value is present for AssignedToEntity, not even an explicit nil
 ### GetBlockLease
 
 `func (o *IppoolIpLease) GetBlockLease() IppoolBlockLeaseRelationship`
@@ -298,6 +308,16 @@ SetBlockLease sets BlockLease field to given value.
 
 HasBlockLease returns a boolean if a field has been set.
 
+### SetBlockLeaseNil
+
+`func (o *IppoolIpLease) SetBlockLeaseNil(b bool)`
+
+ SetBlockLeaseNil sets the value for BlockLease to be an explicit nil
+
+### UnsetBlockLease
+`func (o *IppoolIpLease) UnsetBlockLease()`
+
+UnsetBlockLease ensures that no value is present for BlockLease, not even an explicit nil
 ### GetPool
 
 `func (o *IppoolIpLease) GetPool() IppoolPoolRelationship`
@@ -323,6 +343,16 @@ SetPool sets Pool field to given value.
 
 HasPool returns a boolean if a field has been set.
 
+### SetPoolNil
+
+`func (o *IppoolIpLease) SetPoolNil(b bool)`
+
+ SetPoolNil sets the value for Pool to be an explicit nil
+
+### UnsetPool
+`func (o *IppoolIpLease) UnsetPool()`
+
+UnsetPool ensures that no value is present for Pool, not even an explicit nil
 ### GetPoolMember
 
 `func (o *IppoolIpLease) GetPoolMember() IppoolPoolMemberRelationship`
@@ -348,6 +378,16 @@ SetPoolMember sets PoolMember field to given value.
 
 HasPoolMember returns a boolean if a field has been set.
 
+### SetPoolMemberNil
+
+`func (o *IppoolIpLease) SetPoolMemberNil(b bool)`
+
+ SetPoolMemberNil sets the value for PoolMember to be an explicit nil
+
+### UnsetPoolMember
+`func (o *IppoolIpLease) UnsetPoolMember()`
+
+UnsetPoolMember ensures that no value is present for PoolMember, not even an explicit nil
 ### GetUniverse
 
 `func (o *IppoolIpLease) GetUniverse() IppoolUniverseRelationship`
@@ -373,6 +413,16 @@ SetUniverse sets Universe field to given value.
 
 HasUniverse returns a boolean if a field has been set.
 
+### SetUniverseNil
+
+`func (o *IppoolIpLease) SetUniverseNil(b bool)`
+
+ SetUniverseNil sets the value for Universe to be an explicit nil
+
+### UnsetUniverse
+`func (o *IppoolIpLease) UnsetUniverse()`
+
+UnsetUniverse ensures that no value is present for Universe, not even an explicit nil
 ### GetVrf
 
 `func (o *IppoolIpLease) GetVrf() VrfVrfRelationship`
@@ -398,6 +448,16 @@ SetVrf sets Vrf field to given value.
 
 HasVrf returns a boolean if a field has been set.
 
+### SetVrfNil
+
+`func (o *IppoolIpLease) SetVrfNil(b bool)`
+
+ SetVrfNil sets the value for Vrf to be an explicit nil
+
+### UnsetVrf
+`func (o *IppoolIpLease) UnsetVrf()`
+
+UnsetVrf ensures that no value is present for Vrf, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

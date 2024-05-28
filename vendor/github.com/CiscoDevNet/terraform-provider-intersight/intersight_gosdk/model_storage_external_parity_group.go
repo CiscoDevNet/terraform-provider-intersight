@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the StorageExternalParityGroup type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &StorageExternalParityGroup{}
 
 // StorageExternalParityGroup The following properties are stored for each external parity group.
 type StorageExternalParityGroup struct {
@@ -119,7 +123,7 @@ func (o *StorageExternalParityGroup) SetObjectType(v string) {
 
 // GetCacheMode returns the CacheMode field value if set, zero value otherwise.
 func (o *StorageExternalParityGroup) GetCacheMode() string {
-	if o == nil || o.CacheMode == nil {
+	if o == nil || IsNil(o.CacheMode) {
 		var ret string
 		return ret
 	}
@@ -129,7 +133,7 @@ func (o *StorageExternalParityGroup) GetCacheMode() string {
 // GetCacheModeOk returns a tuple with the CacheMode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageExternalParityGroup) GetCacheModeOk() (*string, bool) {
-	if o == nil || o.CacheMode == nil {
+	if o == nil || IsNil(o.CacheMode) {
 		return nil, false
 	}
 	return o.CacheMode, true
@@ -137,7 +141,7 @@ func (o *StorageExternalParityGroup) GetCacheModeOk() (*string, bool) {
 
 // HasCacheMode returns a boolean if a field has been set.
 func (o *StorageExternalParityGroup) HasCacheMode() bool {
-	if o != nil && o.CacheMode != nil {
+	if o != nil && !IsNil(o.CacheMode) {
 		return true
 	}
 
@@ -162,7 +166,7 @@ func (o *StorageExternalParityGroup) GetExternalLuns() []StorageExternalLun {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StorageExternalParityGroup) GetExternalLunsOk() ([]StorageExternalLun, bool) {
-	if o == nil || o.ExternalLuns == nil {
+	if o == nil || IsNil(o.ExternalLuns) {
 		return nil, false
 	}
 	return o.ExternalLuns, true
@@ -170,7 +174,7 @@ func (o *StorageExternalParityGroup) GetExternalLunsOk() ([]StorageExternalLun, 
 
 // HasExternalLuns returns a boolean if a field has been set.
 func (o *StorageExternalParityGroup) HasExternalLuns() bool {
-	if o != nil && o.ExternalLuns != nil {
+	if o != nil && IsNil(o.ExternalLuns) {
 		return true
 	}
 
@@ -184,7 +188,7 @@ func (o *StorageExternalParityGroup) SetExternalLuns(v []StorageExternalLun) {
 
 // GetExternalParityGroupId returns the ExternalParityGroupId field value if set, zero value otherwise.
 func (o *StorageExternalParityGroup) GetExternalParityGroupId() string {
-	if o == nil || o.ExternalParityGroupId == nil {
+	if o == nil || IsNil(o.ExternalParityGroupId) {
 		var ret string
 		return ret
 	}
@@ -194,7 +198,7 @@ func (o *StorageExternalParityGroup) GetExternalParityGroupId() string {
 // GetExternalParityGroupIdOk returns a tuple with the ExternalParityGroupId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageExternalParityGroup) GetExternalParityGroupIdOk() (*string, bool) {
-	if o == nil || o.ExternalParityGroupId == nil {
+	if o == nil || IsNil(o.ExternalParityGroupId) {
 		return nil, false
 	}
 	return o.ExternalParityGroupId, true
@@ -202,7 +206,7 @@ func (o *StorageExternalParityGroup) GetExternalParityGroupIdOk() (*string, bool
 
 // HasExternalParityGroupId returns a boolean if a field has been set.
 func (o *StorageExternalParityGroup) HasExternalParityGroupId() bool {
-	if o != nil && o.ExternalParityGroupId != nil {
+	if o != nil && !IsNil(o.ExternalParityGroupId) {
 		return true
 	}
 
@@ -216,7 +220,7 @@ func (o *StorageExternalParityGroup) SetExternalParityGroupId(v string) {
 
 // GetExternalParityGroupStatus returns the ExternalParityGroupStatus field value if set, zero value otherwise.
 func (o *StorageExternalParityGroup) GetExternalParityGroupStatus() string {
-	if o == nil || o.ExternalParityGroupStatus == nil {
+	if o == nil || IsNil(o.ExternalParityGroupStatus) {
 		var ret string
 		return ret
 	}
@@ -226,7 +230,7 @@ func (o *StorageExternalParityGroup) GetExternalParityGroupStatus() string {
 // GetExternalParityGroupStatusOk returns a tuple with the ExternalParityGroupStatus field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageExternalParityGroup) GetExternalParityGroupStatusOk() (*string, bool) {
-	if o == nil || o.ExternalParityGroupStatus == nil {
+	if o == nil || IsNil(o.ExternalParityGroupStatus) {
 		return nil, false
 	}
 	return o.ExternalParityGroupStatus, true
@@ -234,7 +238,7 @@ func (o *StorageExternalParityGroup) GetExternalParityGroupStatusOk() (*string, 
 
 // HasExternalParityGroupStatus returns a boolean if a field has been set.
 func (o *StorageExternalParityGroup) HasExternalParityGroupStatus() bool {
-	if o != nil && o.ExternalParityGroupStatus != nil {
+	if o != nil && !IsNil(o.ExternalParityGroupStatus) {
 		return true
 	}
 
@@ -248,7 +252,7 @@ func (o *StorageExternalParityGroup) SetExternalParityGroupStatus(v string) {
 
 // GetIsDataDirectMapping returns the IsDataDirectMapping field value if set, zero value otherwise.
 func (o *StorageExternalParityGroup) GetIsDataDirectMapping() bool {
-	if o == nil || o.IsDataDirectMapping == nil {
+	if o == nil || IsNil(o.IsDataDirectMapping) {
 		var ret bool
 		return ret
 	}
@@ -258,7 +262,7 @@ func (o *StorageExternalParityGroup) GetIsDataDirectMapping() bool {
 // GetIsDataDirectMappingOk returns a tuple with the IsDataDirectMapping field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageExternalParityGroup) GetIsDataDirectMappingOk() (*bool, bool) {
-	if o == nil || o.IsDataDirectMapping == nil {
+	if o == nil || IsNil(o.IsDataDirectMapping) {
 		return nil, false
 	}
 	return o.IsDataDirectMapping, true
@@ -266,7 +270,7 @@ func (o *StorageExternalParityGroup) GetIsDataDirectMappingOk() (*bool, bool) {
 
 // HasIsDataDirectMapping returns a boolean if a field has been set.
 func (o *StorageExternalParityGroup) HasIsDataDirectMapping() bool {
-	if o != nil && o.IsDataDirectMapping != nil {
+	if o != nil && !IsNil(o.IsDataDirectMapping) {
 		return true
 	}
 
@@ -280,7 +284,7 @@ func (o *StorageExternalParityGroup) SetIsDataDirectMapping(v bool) {
 
 // GetIsInflowControlEnabled returns the IsInflowControlEnabled field value if set, zero value otherwise.
 func (o *StorageExternalParityGroup) GetIsInflowControlEnabled() bool {
-	if o == nil || o.IsInflowControlEnabled == nil {
+	if o == nil || IsNil(o.IsInflowControlEnabled) {
 		var ret bool
 		return ret
 	}
@@ -290,7 +294,7 @@ func (o *StorageExternalParityGroup) GetIsInflowControlEnabled() bool {
 // GetIsInflowControlEnabledOk returns a tuple with the IsInflowControlEnabled field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageExternalParityGroup) GetIsInflowControlEnabledOk() (*bool, bool) {
-	if o == nil || o.IsInflowControlEnabled == nil {
+	if o == nil || IsNil(o.IsInflowControlEnabled) {
 		return nil, false
 	}
 	return o.IsInflowControlEnabled, true
@@ -298,7 +302,7 @@ func (o *StorageExternalParityGroup) GetIsInflowControlEnabledOk() (*bool, bool)
 
 // HasIsInflowControlEnabled returns a boolean if a field has been set.
 func (o *StorageExternalParityGroup) HasIsInflowControlEnabled() bool {
-	if o != nil && o.IsInflowControlEnabled != nil {
+	if o != nil && !IsNil(o.IsInflowControlEnabled) {
 		return true
 	}
 
@@ -312,7 +316,7 @@ func (o *StorageExternalParityGroup) SetIsInflowControlEnabled(v bool) {
 
 // GetLoadBalanceMode returns the LoadBalanceMode field value if set, zero value otherwise.
 func (o *StorageExternalParityGroup) GetLoadBalanceMode() string {
-	if o == nil || o.LoadBalanceMode == nil {
+	if o == nil || IsNil(o.LoadBalanceMode) {
 		var ret string
 		return ret
 	}
@@ -322,7 +326,7 @@ func (o *StorageExternalParityGroup) GetLoadBalanceMode() string {
 // GetLoadBalanceModeOk returns a tuple with the LoadBalanceMode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageExternalParityGroup) GetLoadBalanceModeOk() (*string, bool) {
-	if o == nil || o.LoadBalanceMode == nil {
+	if o == nil || IsNil(o.LoadBalanceMode) {
 		return nil, false
 	}
 	return o.LoadBalanceMode, true
@@ -330,7 +334,7 @@ func (o *StorageExternalParityGroup) GetLoadBalanceModeOk() (*string, bool) {
 
 // HasLoadBalanceMode returns a boolean if a field has been set.
 func (o *StorageExternalParityGroup) HasLoadBalanceMode() bool {
-	if o != nil && o.LoadBalanceMode != nil {
+	if o != nil && !IsNil(o.LoadBalanceMode) {
 		return true
 	}
 
@@ -344,7 +348,7 @@ func (o *StorageExternalParityGroup) SetLoadBalanceMode(v string) {
 
 // GetMpBladeId returns the MpBladeId field value if set, zero value otherwise.
 func (o *StorageExternalParityGroup) GetMpBladeId() int64 {
-	if o == nil || o.MpBladeId == nil {
+	if o == nil || IsNil(o.MpBladeId) {
 		var ret int64
 		return ret
 	}
@@ -354,7 +358,7 @@ func (o *StorageExternalParityGroup) GetMpBladeId() int64 {
 // GetMpBladeIdOk returns a tuple with the MpBladeId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageExternalParityGroup) GetMpBladeIdOk() (*int64, bool) {
-	if o == nil || o.MpBladeId == nil {
+	if o == nil || IsNil(o.MpBladeId) {
 		return nil, false
 	}
 	return o.MpBladeId, true
@@ -362,7 +366,7 @@ func (o *StorageExternalParityGroup) GetMpBladeIdOk() (*int64, bool) {
 
 // HasMpBladeId returns a boolean if a field has been set.
 func (o *StorageExternalParityGroup) HasMpBladeId() bool {
-	if o != nil && o.MpBladeId != nil {
+	if o != nil && !IsNil(o.MpBladeId) {
 		return true
 	}
 
@@ -376,7 +380,7 @@ func (o *StorageExternalParityGroup) SetMpBladeId(v int64) {
 
 // GetPathMode returns the PathMode field value if set, zero value otherwise.
 func (o *StorageExternalParityGroup) GetPathMode() string {
-	if o == nil || o.PathMode == nil {
+	if o == nil || IsNil(o.PathMode) {
 		var ret string
 		return ret
 	}
@@ -386,7 +390,7 @@ func (o *StorageExternalParityGroup) GetPathMode() string {
 // GetPathModeOk returns a tuple with the PathMode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageExternalParityGroup) GetPathModeOk() (*string, bool) {
-	if o == nil || o.PathMode == nil {
+	if o == nil || IsNil(o.PathMode) {
 		return nil, false
 	}
 	return o.PathMode, true
@@ -394,7 +398,7 @@ func (o *StorageExternalParityGroup) GetPathModeOk() (*string, bool) {
 
 // HasPathMode returns a boolean if a field has been set.
 func (o *StorageExternalParityGroup) HasPathMode() bool {
-	if o != nil && o.PathMode != nil {
+	if o != nil && !IsNil(o.PathMode) {
 		return true
 	}
 
@@ -407,46 +411,50 @@ func (o *StorageExternalParityGroup) SetPathMode(v string) {
 }
 
 func (o StorageExternalParityGroup) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o StorageExternalParityGroup) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
 	errMoBaseComplexType = json.Unmarshal([]byte(serializedMoBaseComplexType), &toSerialize)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.CacheMode != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.CacheMode) {
 		toSerialize["CacheMode"] = o.CacheMode
 	}
 	if o.ExternalLuns != nil {
 		toSerialize["ExternalLuns"] = o.ExternalLuns
 	}
-	if o.ExternalParityGroupId != nil {
+	if !IsNil(o.ExternalParityGroupId) {
 		toSerialize["ExternalParityGroupId"] = o.ExternalParityGroupId
 	}
-	if o.ExternalParityGroupStatus != nil {
+	if !IsNil(o.ExternalParityGroupStatus) {
 		toSerialize["ExternalParityGroupStatus"] = o.ExternalParityGroupStatus
 	}
-	if o.IsDataDirectMapping != nil {
+	if !IsNil(o.IsDataDirectMapping) {
 		toSerialize["IsDataDirectMapping"] = o.IsDataDirectMapping
 	}
-	if o.IsInflowControlEnabled != nil {
+	if !IsNil(o.IsInflowControlEnabled) {
 		toSerialize["IsInflowControlEnabled"] = o.IsInflowControlEnabled
 	}
-	if o.LoadBalanceMode != nil {
+	if !IsNil(o.LoadBalanceMode) {
 		toSerialize["LoadBalanceMode"] = o.LoadBalanceMode
 	}
-	if o.MpBladeId != nil {
+	if !IsNil(o.MpBladeId) {
 		toSerialize["MpBladeId"] = o.MpBladeId
 	}
-	if o.PathMode != nil {
+	if !IsNil(o.PathMode) {
 		toSerialize["PathMode"] = o.PathMode
 	}
 
@@ -454,10 +462,32 @@ func (o StorageExternalParityGroup) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *StorageExternalParityGroup) UnmarshalJSON(bytes []byte) (err error) {
+func (o *StorageExternalParityGroup) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type StorageExternalParityGroupWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -484,7 +514,7 @@ func (o *StorageExternalParityGroup) UnmarshalJSON(bytes []byte) (err error) {
 
 	varStorageExternalParityGroupWithoutEmbeddedStruct := StorageExternalParityGroupWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varStorageExternalParityGroupWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varStorageExternalParityGroupWithoutEmbeddedStruct)
 	if err == nil {
 		varStorageExternalParityGroup := _StorageExternalParityGroup{}
 		varStorageExternalParityGroup.ClassId = varStorageExternalParityGroupWithoutEmbeddedStruct.ClassId
@@ -505,7 +535,7 @@ func (o *StorageExternalParityGroup) UnmarshalJSON(bytes []byte) (err error) {
 
 	varStorageExternalParityGroup := _StorageExternalParityGroup{}
 
-	err = json.Unmarshal(bytes, &varStorageExternalParityGroup)
+	err = json.Unmarshal(data, &varStorageExternalParityGroup)
 	if err == nil {
 		o.MoBaseComplexType = varStorageExternalParityGroup.MoBaseComplexType
 	} else {
@@ -514,7 +544,7 @@ func (o *StorageExternalParityGroup) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "CacheMode")

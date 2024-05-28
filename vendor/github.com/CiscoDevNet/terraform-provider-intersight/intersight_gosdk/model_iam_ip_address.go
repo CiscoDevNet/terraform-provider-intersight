@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the IamIpAddress type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &IamIpAddress{}
 
 // IamIpAddress Add an IP address to enable IP address based access management.
 type IamIpAddress struct {
@@ -27,8 +31,8 @@ type IamIpAddress struct {
 	// The Trusted IP range's address. IP address, CIDR range, and IP address range formats are supported. For example '12.13.14.15', '12.13.14.0/24', and '12.13.14.15-12.13.14.200'. Reserved IP ranges '127.0.0.1', '10.0.0.0/8', '172.16.0.0/12', and '192.168.0.0/16' are not allowed.
 	Address *string `json:"Address,omitempty"`
 	// Description of Trusted IP address range.
-	Description          *string                            `json:"Description,omitempty"`
-	IpAccessManagement   *IamIpAccessManagementRelationship `json:"IpAccessManagement,omitempty"`
+	Description          *string                                   `json:"Description,omitempty"`
+	IpAccessManagement   NullableIamIpAccessManagementRelationship `json:"IpAccessManagement,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -107,7 +111,7 @@ func (o *IamIpAddress) SetObjectType(v string) {
 
 // GetAddress returns the Address field value if set, zero value otherwise.
 func (o *IamIpAddress) GetAddress() string {
-	if o == nil || o.Address == nil {
+	if o == nil || IsNil(o.Address) {
 		var ret string
 		return ret
 	}
@@ -117,7 +121,7 @@ func (o *IamIpAddress) GetAddress() string {
 // GetAddressOk returns a tuple with the Address field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IamIpAddress) GetAddressOk() (*string, bool) {
-	if o == nil || o.Address == nil {
+	if o == nil || IsNil(o.Address) {
 		return nil, false
 	}
 	return o.Address, true
@@ -125,7 +129,7 @@ func (o *IamIpAddress) GetAddressOk() (*string, bool) {
 
 // HasAddress returns a boolean if a field has been set.
 func (o *IamIpAddress) HasAddress() bool {
-	if o != nil && o.Address != nil {
+	if o != nil && !IsNil(o.Address) {
 		return true
 	}
 
@@ -139,7 +143,7 @@ func (o *IamIpAddress) SetAddress(v string) {
 
 // GetDescription returns the Description field value if set, zero value otherwise.
 func (o *IamIpAddress) GetDescription() string {
-	if o == nil || o.Description == nil {
+	if o == nil || IsNil(o.Description) {
 		var ret string
 		return ret
 	}
@@ -149,7 +153,7 @@ func (o *IamIpAddress) GetDescription() string {
 // GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IamIpAddress) GetDescriptionOk() (*string, bool) {
-	if o == nil || o.Description == nil {
+	if o == nil || IsNil(o.Description) {
 		return nil, false
 	}
 	return o.Description, true
@@ -157,7 +161,7 @@ func (o *IamIpAddress) GetDescriptionOk() (*string, bool) {
 
 // HasDescription returns a boolean if a field has been set.
 func (o *IamIpAddress) HasDescription() bool {
-	if o != nil && o.Description != nil {
+	if o != nil && !IsNil(o.Description) {
 		return true
 	}
 
@@ -169,72 +173,109 @@ func (o *IamIpAddress) SetDescription(v string) {
 	o.Description = &v
 }
 
-// GetIpAccessManagement returns the IpAccessManagement field value if set, zero value otherwise.
+// GetIpAccessManagement returns the IpAccessManagement field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *IamIpAddress) GetIpAccessManagement() IamIpAccessManagementRelationship {
-	if o == nil || o.IpAccessManagement == nil {
+	if o == nil || IsNil(o.IpAccessManagement.Get()) {
 		var ret IamIpAccessManagementRelationship
 		return ret
 	}
-	return *o.IpAccessManagement
+	return *o.IpAccessManagement.Get()
 }
 
 // GetIpAccessManagementOk returns a tuple with the IpAccessManagement field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *IamIpAddress) GetIpAccessManagementOk() (*IamIpAccessManagementRelationship, bool) {
-	if o == nil || o.IpAccessManagement == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.IpAccessManagement, true
+	return o.IpAccessManagement.Get(), o.IpAccessManagement.IsSet()
 }
 
 // HasIpAccessManagement returns a boolean if a field has been set.
 func (o *IamIpAddress) HasIpAccessManagement() bool {
-	if o != nil && o.IpAccessManagement != nil {
+	if o != nil && o.IpAccessManagement.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetIpAccessManagement gets a reference to the given IamIpAccessManagementRelationship and assigns it to the IpAccessManagement field.
+// SetIpAccessManagement gets a reference to the given NullableIamIpAccessManagementRelationship and assigns it to the IpAccessManagement field.
 func (o *IamIpAddress) SetIpAccessManagement(v IamIpAccessManagementRelationship) {
-	o.IpAccessManagement = &v
+	o.IpAccessManagement.Set(&v)
+}
+
+// SetIpAccessManagementNil sets the value for IpAccessManagement to be an explicit nil
+func (o *IamIpAddress) SetIpAccessManagementNil() {
+	o.IpAccessManagement.Set(nil)
+}
+
+// UnsetIpAccessManagement ensures that no value is present for IpAccessManagement, not even an explicit nil
+func (o *IamIpAddress) UnsetIpAccessManagement() {
+	o.IpAccessManagement.Unset()
 }
 
 func (o IamIpAddress) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o IamIpAddress) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Address != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Address) {
 		toSerialize["Address"] = o.Address
 	}
-	if o.Description != nil {
+	if !IsNil(o.Description) {
 		toSerialize["Description"] = o.Description
 	}
-	if o.IpAccessManagement != nil {
-		toSerialize["IpAccessManagement"] = o.IpAccessManagement
+	if o.IpAccessManagement.IsSet() {
+		toSerialize["IpAccessManagement"] = o.IpAccessManagement.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *IamIpAddress) UnmarshalJSON(bytes []byte) (err error) {
+func (o *IamIpAddress) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type IamIpAddressWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -243,13 +284,13 @@ func (o *IamIpAddress) UnmarshalJSON(bytes []byte) (err error) {
 		// The Trusted IP range's address. IP address, CIDR range, and IP address range formats are supported. For example '12.13.14.15', '12.13.14.0/24', and '12.13.14.15-12.13.14.200'. Reserved IP ranges '127.0.0.1', '10.0.0.0/8', '172.16.0.0/12', and '192.168.0.0/16' are not allowed.
 		Address *string `json:"Address,omitempty"`
 		// Description of Trusted IP address range.
-		Description        *string                            `json:"Description,omitempty"`
-		IpAccessManagement *IamIpAccessManagementRelationship `json:"IpAccessManagement,omitempty"`
+		Description        *string                                   `json:"Description,omitempty"`
+		IpAccessManagement NullableIamIpAccessManagementRelationship `json:"IpAccessManagement,omitempty"`
 	}
 
 	varIamIpAddressWithoutEmbeddedStruct := IamIpAddressWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varIamIpAddressWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varIamIpAddressWithoutEmbeddedStruct)
 	if err == nil {
 		varIamIpAddress := _IamIpAddress{}
 		varIamIpAddress.ClassId = varIamIpAddressWithoutEmbeddedStruct.ClassId
@@ -264,7 +305,7 @@ func (o *IamIpAddress) UnmarshalJSON(bytes []byte) (err error) {
 
 	varIamIpAddress := _IamIpAddress{}
 
-	err = json.Unmarshal(bytes, &varIamIpAddress)
+	err = json.Unmarshal(data, &varIamIpAddress)
 	if err == nil {
 		o.MoBaseMo = varIamIpAddress.MoBaseMo
 	} else {
@@ -273,7 +314,7 @@ func (o *IamIpAddress) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Address")

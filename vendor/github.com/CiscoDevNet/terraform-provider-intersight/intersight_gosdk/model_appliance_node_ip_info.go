@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the ApplianceNodeIpInfo type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ApplianceNodeIpInfo{}
 
 // ApplianceNodeIpInfo NodeInfo contains the hostname, ip address, and node number for a node.
 type ApplianceNodeIpInfo struct {
@@ -116,7 +120,7 @@ func (o *ApplianceNodeIpInfo) SetObjectType(v string) {
 
 // GetGateway returns the Gateway field value if set, zero value otherwise.
 func (o *ApplianceNodeIpInfo) GetGateway() string {
-	if o == nil || o.Gateway == nil {
+	if o == nil || IsNil(o.Gateway) {
 		var ret string
 		return ret
 	}
@@ -126,7 +130,7 @@ func (o *ApplianceNodeIpInfo) GetGateway() string {
 // GetGatewayOk returns a tuple with the Gateway field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceNodeIpInfo) GetGatewayOk() (*string, bool) {
-	if o == nil || o.Gateway == nil {
+	if o == nil || IsNil(o.Gateway) {
 		return nil, false
 	}
 	return o.Gateway, true
@@ -134,7 +138,7 @@ func (o *ApplianceNodeIpInfo) GetGatewayOk() (*string, bool) {
 
 // HasGateway returns a boolean if a field has been set.
 func (o *ApplianceNodeIpInfo) HasGateway() bool {
-	if o != nil && o.Gateway != nil {
+	if o != nil && !IsNil(o.Gateway) {
 		return true
 	}
 
@@ -148,7 +152,7 @@ func (o *ApplianceNodeIpInfo) SetGateway(v string) {
 
 // GetHostname returns the Hostname field value if set, zero value otherwise.
 func (o *ApplianceNodeIpInfo) GetHostname() string {
-	if o == nil || o.Hostname == nil {
+	if o == nil || IsNil(o.Hostname) {
 		var ret string
 		return ret
 	}
@@ -158,7 +162,7 @@ func (o *ApplianceNodeIpInfo) GetHostname() string {
 // GetHostnameOk returns a tuple with the Hostname field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceNodeIpInfo) GetHostnameOk() (*string, bool) {
-	if o == nil || o.Hostname == nil {
+	if o == nil || IsNil(o.Hostname) {
 		return nil, false
 	}
 	return o.Hostname, true
@@ -166,7 +170,7 @@ func (o *ApplianceNodeIpInfo) GetHostnameOk() (*string, bool) {
 
 // HasHostname returns a boolean if a field has been set.
 func (o *ApplianceNodeIpInfo) HasHostname() bool {
-	if o != nil && o.Hostname != nil {
+	if o != nil && !IsNil(o.Hostname) {
 		return true
 	}
 
@@ -180,7 +184,7 @@ func (o *ApplianceNodeIpInfo) SetHostname(v string) {
 
 // GetIpAddress returns the IpAddress field value if set, zero value otherwise.
 func (o *ApplianceNodeIpInfo) GetIpAddress() string {
-	if o == nil || o.IpAddress == nil {
+	if o == nil || IsNil(o.IpAddress) {
 		var ret string
 		return ret
 	}
@@ -190,7 +194,7 @@ func (o *ApplianceNodeIpInfo) GetIpAddress() string {
 // GetIpAddressOk returns a tuple with the IpAddress field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceNodeIpInfo) GetIpAddressOk() (*string, bool) {
-	if o == nil || o.IpAddress == nil {
+	if o == nil || IsNil(o.IpAddress) {
 		return nil, false
 	}
 	return o.IpAddress, true
@@ -198,7 +202,7 @@ func (o *ApplianceNodeIpInfo) GetIpAddressOk() (*string, bool) {
 
 // HasIpAddress returns a boolean if a field has been set.
 func (o *ApplianceNodeIpInfo) HasIpAddress() bool {
-	if o != nil && o.IpAddress != nil {
+	if o != nil && !IsNil(o.IpAddress) {
 		return true
 	}
 
@@ -212,7 +216,7 @@ func (o *ApplianceNodeIpInfo) SetIpAddress(v string) {
 
 // GetNetmask returns the Netmask field value if set, zero value otherwise.
 func (o *ApplianceNodeIpInfo) GetNetmask() string {
-	if o == nil || o.Netmask == nil {
+	if o == nil || IsNil(o.Netmask) {
 		var ret string
 		return ret
 	}
@@ -222,7 +226,7 @@ func (o *ApplianceNodeIpInfo) GetNetmask() string {
 // GetNetmaskOk returns a tuple with the Netmask field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceNodeIpInfo) GetNetmaskOk() (*string, bool) {
-	if o == nil || o.Netmask == nil {
+	if o == nil || IsNil(o.Netmask) {
 		return nil, false
 	}
 	return o.Netmask, true
@@ -230,7 +234,7 @@ func (o *ApplianceNodeIpInfo) GetNetmaskOk() (*string, bool) {
 
 // HasNetmask returns a boolean if a field has been set.
 func (o *ApplianceNodeIpInfo) HasNetmask() bool {
-	if o != nil && o.Netmask != nil {
+	if o != nil && !IsNil(o.Netmask) {
 		return true
 	}
 
@@ -244,7 +248,7 @@ func (o *ApplianceNodeIpInfo) SetNetmask(v string) {
 
 // GetNodeId returns the NodeId field value if set, zero value otherwise.
 func (o *ApplianceNodeIpInfo) GetNodeId() int64 {
-	if o == nil || o.NodeId == nil {
+	if o == nil || IsNil(o.NodeId) {
 		var ret int64
 		return ret
 	}
@@ -254,7 +258,7 @@ func (o *ApplianceNodeIpInfo) GetNodeId() int64 {
 // GetNodeIdOk returns a tuple with the NodeId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceNodeIpInfo) GetNodeIdOk() (*int64, bool) {
-	if o == nil || o.NodeId == nil {
+	if o == nil || IsNil(o.NodeId) {
 		return nil, false
 	}
 	return o.NodeId, true
@@ -262,7 +266,7 @@ func (o *ApplianceNodeIpInfo) GetNodeIdOk() (*int64, bool) {
 
 // HasNodeId returns a boolean if a field has been set.
 func (o *ApplianceNodeIpInfo) HasNodeId() bool {
-	if o != nil && o.NodeId != nil {
+	if o != nil && !IsNil(o.NodeId) {
 		return true
 	}
 
@@ -276,7 +280,7 @@ func (o *ApplianceNodeIpInfo) SetNodeId(v int64) {
 
 // GetNodeMoid returns the NodeMoid field value if set, zero value otherwise.
 func (o *ApplianceNodeIpInfo) GetNodeMoid() string {
-	if o == nil || o.NodeMoid == nil {
+	if o == nil || IsNil(o.NodeMoid) {
 		var ret string
 		return ret
 	}
@@ -286,7 +290,7 @@ func (o *ApplianceNodeIpInfo) GetNodeMoid() string {
 // GetNodeMoidOk returns a tuple with the NodeMoid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceNodeIpInfo) GetNodeMoidOk() (*string, bool) {
-	if o == nil || o.NodeMoid == nil {
+	if o == nil || IsNil(o.NodeMoid) {
 		return nil, false
 	}
 	return o.NodeMoid, true
@@ -294,7 +298,7 @@ func (o *ApplianceNodeIpInfo) GetNodeMoidOk() (*string, bool) {
 
 // HasNodeMoid returns a boolean if a field has been set.
 func (o *ApplianceNodeIpInfo) HasNodeMoid() bool {
-	if o != nil && o.NodeMoid != nil {
+	if o != nil && !IsNil(o.NodeMoid) {
 		return true
 	}
 
@@ -308,7 +312,7 @@ func (o *ApplianceNodeIpInfo) SetNodeMoid(v string) {
 
 // GetStatus returns the Status field value if set, zero value otherwise.
 func (o *ApplianceNodeIpInfo) GetStatus() string {
-	if o == nil || o.Status == nil {
+	if o == nil || IsNil(o.Status) {
 		var ret string
 		return ret
 	}
@@ -318,7 +322,7 @@ func (o *ApplianceNodeIpInfo) GetStatus() string {
 // GetStatusOk returns a tuple with the Status field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceNodeIpInfo) GetStatusOk() (*string, bool) {
-	if o == nil || o.Status == nil {
+	if o == nil || IsNil(o.Status) {
 		return nil, false
 	}
 	return o.Status, true
@@ -326,7 +330,7 @@ func (o *ApplianceNodeIpInfo) GetStatusOk() (*string, bool) {
 
 // HasStatus returns a boolean if a field has been set.
 func (o *ApplianceNodeIpInfo) HasStatus() bool {
-	if o != nil && o.Status != nil {
+	if o != nil && !IsNil(o.Status) {
 		return true
 	}
 
@@ -339,40 +343,44 @@ func (o *ApplianceNodeIpInfo) SetStatus(v string) {
 }
 
 func (o ApplianceNodeIpInfo) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o ApplianceNodeIpInfo) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
 	errMoBaseComplexType = json.Unmarshal([]byte(serializedMoBaseComplexType), &toSerialize)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Gateway != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Gateway) {
 		toSerialize["Gateway"] = o.Gateway
 	}
-	if o.Hostname != nil {
+	if !IsNil(o.Hostname) {
 		toSerialize["Hostname"] = o.Hostname
 	}
-	if o.IpAddress != nil {
+	if !IsNil(o.IpAddress) {
 		toSerialize["IpAddress"] = o.IpAddress
 	}
-	if o.Netmask != nil {
+	if !IsNil(o.Netmask) {
 		toSerialize["Netmask"] = o.Netmask
 	}
-	if o.NodeId != nil {
+	if !IsNil(o.NodeId) {
 		toSerialize["NodeId"] = o.NodeId
 	}
-	if o.NodeMoid != nil {
+	if !IsNil(o.NodeMoid) {
 		toSerialize["NodeMoid"] = o.NodeMoid
 	}
-	if o.Status != nil {
+	if !IsNil(o.Status) {
 		toSerialize["Status"] = o.Status
 	}
 
@@ -380,10 +388,32 @@ func (o ApplianceNodeIpInfo) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *ApplianceNodeIpInfo) UnmarshalJSON(bytes []byte) (err error) {
+func (o *ApplianceNodeIpInfo) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type ApplianceNodeIpInfoWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -407,7 +437,7 @@ func (o *ApplianceNodeIpInfo) UnmarshalJSON(bytes []byte) (err error) {
 
 	varApplianceNodeIpInfoWithoutEmbeddedStruct := ApplianceNodeIpInfoWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varApplianceNodeIpInfoWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varApplianceNodeIpInfoWithoutEmbeddedStruct)
 	if err == nil {
 		varApplianceNodeIpInfo := _ApplianceNodeIpInfo{}
 		varApplianceNodeIpInfo.ClassId = varApplianceNodeIpInfoWithoutEmbeddedStruct.ClassId
@@ -426,7 +456,7 @@ func (o *ApplianceNodeIpInfo) UnmarshalJSON(bytes []byte) (err error) {
 
 	varApplianceNodeIpInfo := _ApplianceNodeIpInfo{}
 
-	err = json.Unmarshal(bytes, &varApplianceNodeIpInfo)
+	err = json.Unmarshal(data, &varApplianceNodeIpInfo)
 	if err == nil {
 		o.MoBaseComplexType = varApplianceNodeIpInfo.MoBaseComplexType
 	} else {
@@ -435,7 +465,7 @@ func (o *ApplianceNodeIpInfo) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Gateway")

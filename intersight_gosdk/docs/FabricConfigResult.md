@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "fabric.ConfigResult"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "fabric.ConfigResult"]
-**Profile** | Pointer to [**FabricBaseSwitchProfileRelationship**](FabricBaseSwitchProfileRelationship.md) |  | [optional] 
+**Profile** | Pointer to [**NullableFabricBaseSwitchProfileRelationship**](FabricBaseSwitchProfileRelationship.md) |  | [optional] 
 **ResultEntries** | Pointer to [**[]FabricConfigResultEntryRelationship**](FabricConfigResultEntryRelationship.md) | An array of relationships to fabricConfigResultEntry resources. | [optional] 
 
 ## Methods
@@ -93,6 +93,16 @@ SetProfile sets Profile field to given value.
 
 HasProfile returns a boolean if a field has been set.
 
+### SetProfileNil
+
+`func (o *FabricConfigResult) SetProfileNil(b bool)`
+
+ SetProfileNil sets the value for Profile to be an explicit nil
+
+### UnsetProfile
+`func (o *FabricConfigResult) UnsetProfile()`
+
+UnsetProfile ensures that no value is present for Profile, not even an explicit nil
 ### GetResultEntries
 
 `func (o *FabricConfigResult) GetResultEntries() []FabricConfigResultEntryRelationship`

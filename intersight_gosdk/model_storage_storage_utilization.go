@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the StorageStorageUtilization type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &StorageStorageUtilization{}
 
 // StorageStorageUtilization Storage space utilized by Pure storage entity.
 type StorageStorageUtilization struct {
@@ -108,7 +112,7 @@ func (o *StorageStorageUtilization) SetObjectType(v string) {
 
 // GetDataReduction returns the DataReduction field value if set, zero value otherwise.
 func (o *StorageStorageUtilization) GetDataReduction() float32 {
-	if o == nil || o.DataReduction == nil {
+	if o == nil || IsNil(o.DataReduction) {
 		var ret float32
 		return ret
 	}
@@ -118,7 +122,7 @@ func (o *StorageStorageUtilization) GetDataReduction() float32 {
 // GetDataReductionOk returns a tuple with the DataReduction field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageStorageUtilization) GetDataReductionOk() (*float32, bool) {
-	if o == nil || o.DataReduction == nil {
+	if o == nil || IsNil(o.DataReduction) {
 		return nil, false
 	}
 	return o.DataReduction, true
@@ -126,7 +130,7 @@ func (o *StorageStorageUtilization) GetDataReductionOk() (*float32, bool) {
 
 // HasDataReduction returns a boolean if a field has been set.
 func (o *StorageStorageUtilization) HasDataReduction() bool {
-	if o != nil && o.DataReduction != nil {
+	if o != nil && !IsNil(o.DataReduction) {
 		return true
 	}
 
@@ -140,7 +144,7 @@ func (o *StorageStorageUtilization) SetDataReduction(v float32) {
 
 // GetSnapshot returns the Snapshot field value if set, zero value otherwise.
 func (o *StorageStorageUtilization) GetSnapshot() int64 {
-	if o == nil || o.Snapshot == nil {
+	if o == nil || IsNil(o.Snapshot) {
 		var ret int64
 		return ret
 	}
@@ -150,7 +154,7 @@ func (o *StorageStorageUtilization) GetSnapshot() int64 {
 // GetSnapshotOk returns a tuple with the Snapshot field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageStorageUtilization) GetSnapshotOk() (*int64, bool) {
-	if o == nil || o.Snapshot == nil {
+	if o == nil || IsNil(o.Snapshot) {
 		return nil, false
 	}
 	return o.Snapshot, true
@@ -158,7 +162,7 @@ func (o *StorageStorageUtilization) GetSnapshotOk() (*int64, bool) {
 
 // HasSnapshot returns a boolean if a field has been set.
 func (o *StorageStorageUtilization) HasSnapshot() bool {
-	if o != nil && o.Snapshot != nil {
+	if o != nil && !IsNil(o.Snapshot) {
 		return true
 	}
 
@@ -172,7 +176,7 @@ func (o *StorageStorageUtilization) SetSnapshot(v int64) {
 
 // GetThinProvisioned returns the ThinProvisioned field value if set, zero value otherwise.
 func (o *StorageStorageUtilization) GetThinProvisioned() float32 {
-	if o == nil || o.ThinProvisioned == nil {
+	if o == nil || IsNil(o.ThinProvisioned) {
 		var ret float32
 		return ret
 	}
@@ -182,7 +186,7 @@ func (o *StorageStorageUtilization) GetThinProvisioned() float32 {
 // GetThinProvisionedOk returns a tuple with the ThinProvisioned field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageStorageUtilization) GetThinProvisionedOk() (*float32, bool) {
-	if o == nil || o.ThinProvisioned == nil {
+	if o == nil || IsNil(o.ThinProvisioned) {
 		return nil, false
 	}
 	return o.ThinProvisioned, true
@@ -190,7 +194,7 @@ func (o *StorageStorageUtilization) GetThinProvisionedOk() (*float32, bool) {
 
 // HasThinProvisioned returns a boolean if a field has been set.
 func (o *StorageStorageUtilization) HasThinProvisioned() bool {
-	if o != nil && o.ThinProvisioned != nil {
+	if o != nil && !IsNil(o.ThinProvisioned) {
 		return true
 	}
 
@@ -204,7 +208,7 @@ func (o *StorageStorageUtilization) SetThinProvisioned(v float32) {
 
 // GetTotalReduction returns the TotalReduction field value if set, zero value otherwise.
 func (o *StorageStorageUtilization) GetTotalReduction() float32 {
-	if o == nil || o.TotalReduction == nil {
+	if o == nil || IsNil(o.TotalReduction) {
 		var ret float32
 		return ret
 	}
@@ -214,7 +218,7 @@ func (o *StorageStorageUtilization) GetTotalReduction() float32 {
 // GetTotalReductionOk returns a tuple with the TotalReduction field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageStorageUtilization) GetTotalReductionOk() (*float32, bool) {
-	if o == nil || o.TotalReduction == nil {
+	if o == nil || IsNil(o.TotalReduction) {
 		return nil, false
 	}
 	return o.TotalReduction, true
@@ -222,7 +226,7 @@ func (o *StorageStorageUtilization) GetTotalReductionOk() (*float32, bool) {
 
 // HasTotalReduction returns a boolean if a field has been set.
 func (o *StorageStorageUtilization) HasTotalReduction() bool {
-	if o != nil && o.TotalReduction != nil {
+	if o != nil && !IsNil(o.TotalReduction) {
 		return true
 	}
 
@@ -236,7 +240,7 @@ func (o *StorageStorageUtilization) SetTotalReduction(v float32) {
 
 // GetVolume returns the Volume field value if set, zero value otherwise.
 func (o *StorageStorageUtilization) GetVolume() int64 {
-	if o == nil || o.Volume == nil {
+	if o == nil || IsNil(o.Volume) {
 		var ret int64
 		return ret
 	}
@@ -246,7 +250,7 @@ func (o *StorageStorageUtilization) GetVolume() int64 {
 // GetVolumeOk returns a tuple with the Volume field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageStorageUtilization) GetVolumeOk() (*int64, bool) {
-	if o == nil || o.Volume == nil {
+	if o == nil || IsNil(o.Volume) {
 		return nil, false
 	}
 	return o.Volume, true
@@ -254,7 +258,7 @@ func (o *StorageStorageUtilization) GetVolumeOk() (*int64, bool) {
 
 // HasVolume returns a boolean if a field has been set.
 func (o *StorageStorageUtilization) HasVolume() bool {
-	if o != nil && o.Volume != nil {
+	if o != nil && !IsNil(o.Volume) {
 		return true
 	}
 
@@ -267,34 +271,38 @@ func (o *StorageStorageUtilization) SetVolume(v int64) {
 }
 
 func (o StorageStorageUtilization) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o StorageStorageUtilization) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedStorageBaseCapacity, errStorageBaseCapacity := json.Marshal(o.StorageBaseCapacity)
 	if errStorageBaseCapacity != nil {
-		return []byte{}, errStorageBaseCapacity
+		return map[string]interface{}{}, errStorageBaseCapacity
 	}
 	errStorageBaseCapacity = json.Unmarshal([]byte(serializedStorageBaseCapacity), &toSerialize)
 	if errStorageBaseCapacity != nil {
-		return []byte{}, errStorageBaseCapacity
+		return map[string]interface{}{}, errStorageBaseCapacity
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.DataReduction != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.DataReduction) {
 		toSerialize["DataReduction"] = o.DataReduction
 	}
-	if o.Snapshot != nil {
+	if !IsNil(o.Snapshot) {
 		toSerialize["Snapshot"] = o.Snapshot
 	}
-	if o.ThinProvisioned != nil {
+	if !IsNil(o.ThinProvisioned) {
 		toSerialize["ThinProvisioned"] = o.ThinProvisioned
 	}
-	if o.TotalReduction != nil {
+	if !IsNil(o.TotalReduction) {
 		toSerialize["TotalReduction"] = o.TotalReduction
 	}
-	if o.Volume != nil {
+	if !IsNil(o.Volume) {
 		toSerialize["Volume"] = o.Volume
 	}
 
@@ -302,10 +310,32 @@ func (o StorageStorageUtilization) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *StorageStorageUtilization) UnmarshalJSON(bytes []byte) (err error) {
+func (o *StorageStorageUtilization) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type StorageStorageUtilizationWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type.
 		ClassId string `json:"ClassId"`
@@ -325,7 +355,7 @@ func (o *StorageStorageUtilization) UnmarshalJSON(bytes []byte) (err error) {
 
 	varStorageStorageUtilizationWithoutEmbeddedStruct := StorageStorageUtilizationWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varStorageStorageUtilizationWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varStorageStorageUtilizationWithoutEmbeddedStruct)
 	if err == nil {
 		varStorageStorageUtilization := _StorageStorageUtilization{}
 		varStorageStorageUtilization.ClassId = varStorageStorageUtilizationWithoutEmbeddedStruct.ClassId
@@ -342,7 +372,7 @@ func (o *StorageStorageUtilization) UnmarshalJSON(bytes []byte) (err error) {
 
 	varStorageStorageUtilization := _StorageStorageUtilization{}
 
-	err = json.Unmarshal(bytes, &varStorageStorageUtilization)
+	err = json.Unmarshal(data, &varStorageStorageUtilization)
 	if err == nil {
 		o.StorageBaseCapacity = varStorageStorageUtilization.StorageBaseCapacity
 	} else {
@@ -351,7 +381,7 @@ func (o *StorageStorageUtilization) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "DataReduction")

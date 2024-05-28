@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the StorageHitachiPort type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &StorageHitachiPort{}
 
 // StorageHitachiPort Port entity in Hitachi storage array.
 type StorageHitachiPort struct {
@@ -45,9 +49,9 @@ type StorageHitachiPort struct {
 	// Port ID (short) of the port.
 	ShortportId *string `json:"ShortportId,omitempty"`
 	// Value of MTU for iSCSI communication.
-	TcpMtu               *int64                               `json:"TcpMtu,omitempty"`
-	Array                *StorageHitachiArrayRelationship     `json:"Array,omitempty"`
-	RegisteredDevice     *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+	TcpMtu               *int64                                      `json:"TcpMtu,omitempty"`
+	Array                NullableStorageHitachiArrayRelationship     `json:"Array,omitempty"`
+	RegisteredDevice     NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -126,7 +130,7 @@ func (o *StorageHitachiPort) SetObjectType(v string) {
 
 // GetFabricMode returns the FabricMode field value if set, zero value otherwise.
 func (o *StorageHitachiPort) GetFabricMode() bool {
-	if o == nil || o.FabricMode == nil {
+	if o == nil || IsNil(o.FabricMode) {
 		var ret bool
 		return ret
 	}
@@ -136,7 +140,7 @@ func (o *StorageHitachiPort) GetFabricMode() bool {
 // GetFabricModeOk returns a tuple with the FabricMode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageHitachiPort) GetFabricModeOk() (*bool, bool) {
-	if o == nil || o.FabricMode == nil {
+	if o == nil || IsNil(o.FabricMode) {
 		return nil, false
 	}
 	return o.FabricMode, true
@@ -144,7 +148,7 @@ func (o *StorageHitachiPort) GetFabricModeOk() (*bool, bool) {
 
 // HasFabricMode returns a boolean if a field has been set.
 func (o *StorageHitachiPort) HasFabricMode() bool {
-	if o != nil && o.FabricMode != nil {
+	if o != nil && !IsNil(o.FabricMode) {
 		return true
 	}
 
@@ -158,7 +162,7 @@ func (o *StorageHitachiPort) SetFabricMode(v bool) {
 
 // GetIpv4Address returns the Ipv4Address field value if set, zero value otherwise.
 func (o *StorageHitachiPort) GetIpv4Address() string {
-	if o == nil || o.Ipv4Address == nil {
+	if o == nil || IsNil(o.Ipv4Address) {
 		var ret string
 		return ret
 	}
@@ -168,7 +172,7 @@ func (o *StorageHitachiPort) GetIpv4Address() string {
 // GetIpv4AddressOk returns a tuple with the Ipv4Address field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageHitachiPort) GetIpv4AddressOk() (*string, bool) {
-	if o == nil || o.Ipv4Address == nil {
+	if o == nil || IsNil(o.Ipv4Address) {
 		return nil, false
 	}
 	return o.Ipv4Address, true
@@ -176,7 +180,7 @@ func (o *StorageHitachiPort) GetIpv4AddressOk() (*string, bool) {
 
 // HasIpv4Address returns a boolean if a field has been set.
 func (o *StorageHitachiPort) HasIpv4Address() bool {
-	if o != nil && o.Ipv4Address != nil {
+	if o != nil && !IsNil(o.Ipv4Address) {
 		return true
 	}
 
@@ -190,7 +194,7 @@ func (o *StorageHitachiPort) SetIpv4Address(v string) {
 
 // GetIpv6GlobalAddress returns the Ipv6GlobalAddress field value if set, zero value otherwise.
 func (o *StorageHitachiPort) GetIpv6GlobalAddress() string {
-	if o == nil || o.Ipv6GlobalAddress == nil {
+	if o == nil || IsNil(o.Ipv6GlobalAddress) {
 		var ret string
 		return ret
 	}
@@ -200,7 +204,7 @@ func (o *StorageHitachiPort) GetIpv6GlobalAddress() string {
 // GetIpv6GlobalAddressOk returns a tuple with the Ipv6GlobalAddress field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageHitachiPort) GetIpv6GlobalAddressOk() (*string, bool) {
-	if o == nil || o.Ipv6GlobalAddress == nil {
+	if o == nil || IsNil(o.Ipv6GlobalAddress) {
 		return nil, false
 	}
 	return o.Ipv6GlobalAddress, true
@@ -208,7 +212,7 @@ func (o *StorageHitachiPort) GetIpv6GlobalAddressOk() (*string, bool) {
 
 // HasIpv6GlobalAddress returns a boolean if a field has been set.
 func (o *StorageHitachiPort) HasIpv6GlobalAddress() bool {
-	if o != nil && o.Ipv6GlobalAddress != nil {
+	if o != nil && !IsNil(o.Ipv6GlobalAddress) {
 		return true
 	}
 
@@ -222,7 +226,7 @@ func (o *StorageHitachiPort) SetIpv6GlobalAddress(v string) {
 
 // GetIpv6LinkLocalAddress returns the Ipv6LinkLocalAddress field value if set, zero value otherwise.
 func (o *StorageHitachiPort) GetIpv6LinkLocalAddress() string {
-	if o == nil || o.Ipv6LinkLocalAddress == nil {
+	if o == nil || IsNil(o.Ipv6LinkLocalAddress) {
 		var ret string
 		return ret
 	}
@@ -232,7 +236,7 @@ func (o *StorageHitachiPort) GetIpv6LinkLocalAddress() string {
 // GetIpv6LinkLocalAddressOk returns a tuple with the Ipv6LinkLocalAddress field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageHitachiPort) GetIpv6LinkLocalAddressOk() (*string, bool) {
-	if o == nil || o.Ipv6LinkLocalAddress == nil {
+	if o == nil || IsNil(o.Ipv6LinkLocalAddress) {
 		return nil, false
 	}
 	return o.Ipv6LinkLocalAddress, true
@@ -240,7 +244,7 @@ func (o *StorageHitachiPort) GetIpv6LinkLocalAddressOk() (*string, bool) {
 
 // HasIpv6LinkLocalAddress returns a boolean if a field has been set.
 func (o *StorageHitachiPort) HasIpv6LinkLocalAddress() bool {
-	if o != nil && o.Ipv6LinkLocalAddress != nil {
+	if o != nil && !IsNil(o.Ipv6LinkLocalAddress) {
 		return true
 	}
 
@@ -254,7 +258,7 @@ func (o *StorageHitachiPort) SetIpv6LinkLocalAddress(v string) {
 
 // GetIsIpv6Enable returns the IsIpv6Enable field value if set, zero value otherwise.
 func (o *StorageHitachiPort) GetIsIpv6Enable() bool {
-	if o == nil || o.IsIpv6Enable == nil {
+	if o == nil || IsNil(o.IsIpv6Enable) {
 		var ret bool
 		return ret
 	}
@@ -264,7 +268,7 @@ func (o *StorageHitachiPort) GetIsIpv6Enable() bool {
 // GetIsIpv6EnableOk returns a tuple with the IsIpv6Enable field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageHitachiPort) GetIsIpv6EnableOk() (*bool, bool) {
-	if o == nil || o.IsIpv6Enable == nil {
+	if o == nil || IsNil(o.IsIpv6Enable) {
 		return nil, false
 	}
 	return o.IsIpv6Enable, true
@@ -272,7 +276,7 @@ func (o *StorageHitachiPort) GetIsIpv6EnableOk() (*bool, bool) {
 
 // HasIsIpv6Enable returns a boolean if a field has been set.
 func (o *StorageHitachiPort) HasIsIpv6Enable() bool {
-	if o != nil && o.IsIpv6Enable != nil {
+	if o != nil && !IsNil(o.IsIpv6Enable) {
 		return true
 	}
 
@@ -286,7 +290,7 @@ func (o *StorageHitachiPort) SetIsIpv6Enable(v bool) {
 
 // GetLoopId returns the LoopId field value if set, zero value otherwise.
 func (o *StorageHitachiPort) GetLoopId() string {
-	if o == nil || o.LoopId == nil {
+	if o == nil || IsNil(o.LoopId) {
 		var ret string
 		return ret
 	}
@@ -296,7 +300,7 @@ func (o *StorageHitachiPort) GetLoopId() string {
 // GetLoopIdOk returns a tuple with the LoopId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageHitachiPort) GetLoopIdOk() (*string, bool) {
-	if o == nil || o.LoopId == nil {
+	if o == nil || IsNil(o.LoopId) {
 		return nil, false
 	}
 	return o.LoopId, true
@@ -304,7 +308,7 @@ func (o *StorageHitachiPort) GetLoopIdOk() (*string, bool) {
 
 // HasLoopId returns a boolean if a field has been set.
 func (o *StorageHitachiPort) HasLoopId() bool {
-	if o != nil && o.LoopId != nil {
+	if o != nil && !IsNil(o.LoopId) {
 		return true
 	}
 
@@ -318,7 +322,7 @@ func (o *StorageHitachiPort) SetLoopId(v string) {
 
 // GetPortConnection returns the PortConnection field value if set, zero value otherwise.
 func (o *StorageHitachiPort) GetPortConnection() string {
-	if o == nil || o.PortConnection == nil {
+	if o == nil || IsNil(o.PortConnection) {
 		var ret string
 		return ret
 	}
@@ -328,7 +332,7 @@ func (o *StorageHitachiPort) GetPortConnection() string {
 // GetPortConnectionOk returns a tuple with the PortConnection field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageHitachiPort) GetPortConnectionOk() (*string, bool) {
-	if o == nil || o.PortConnection == nil {
+	if o == nil || IsNil(o.PortConnection) {
 		return nil, false
 	}
 	return o.PortConnection, true
@@ -336,7 +340,7 @@ func (o *StorageHitachiPort) GetPortConnectionOk() (*string, bool) {
 
 // HasPortConnection returns a boolean if a field has been set.
 func (o *StorageHitachiPort) HasPortConnection() bool {
-	if o != nil && o.PortConnection != nil {
+	if o != nil && !IsNil(o.PortConnection) {
 		return true
 	}
 
@@ -350,7 +354,7 @@ func (o *StorageHitachiPort) SetPortConnection(v string) {
 
 // GetPortLunSecurity returns the PortLunSecurity field value if set, zero value otherwise.
 func (o *StorageHitachiPort) GetPortLunSecurity() bool {
-	if o == nil || o.PortLunSecurity == nil {
+	if o == nil || IsNil(o.PortLunSecurity) {
 		var ret bool
 		return ret
 	}
@@ -360,7 +364,7 @@ func (o *StorageHitachiPort) GetPortLunSecurity() bool {
 // GetPortLunSecurityOk returns a tuple with the PortLunSecurity field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageHitachiPort) GetPortLunSecurityOk() (*bool, bool) {
-	if o == nil || o.PortLunSecurity == nil {
+	if o == nil || IsNil(o.PortLunSecurity) {
 		return nil, false
 	}
 	return o.PortLunSecurity, true
@@ -368,7 +372,7 @@ func (o *StorageHitachiPort) GetPortLunSecurityOk() (*bool, bool) {
 
 // HasPortLunSecurity returns a boolean if a field has been set.
 func (o *StorageHitachiPort) HasPortLunSecurity() bool {
-	if o != nil && o.PortLunSecurity != nil {
+	if o != nil && !IsNil(o.PortLunSecurity) {
 		return true
 	}
 
@@ -382,7 +386,7 @@ func (o *StorageHitachiPort) SetPortLunSecurity(v bool) {
 
 // GetPortMode returns the PortMode field value if set, zero value otherwise.
 func (o *StorageHitachiPort) GetPortMode() string {
-	if o == nil || o.PortMode == nil {
+	if o == nil || IsNil(o.PortMode) {
 		var ret string
 		return ret
 	}
@@ -392,7 +396,7 @@ func (o *StorageHitachiPort) GetPortMode() string {
 // GetPortModeOk returns a tuple with the PortMode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageHitachiPort) GetPortModeOk() (*string, bool) {
-	if o == nil || o.PortMode == nil {
+	if o == nil || IsNil(o.PortMode) {
 		return nil, false
 	}
 	return o.PortMode, true
@@ -400,7 +404,7 @@ func (o *StorageHitachiPort) GetPortModeOk() (*string, bool) {
 
 // HasPortMode returns a boolean if a field has been set.
 func (o *StorageHitachiPort) HasPortMode() bool {
-	if o != nil && o.PortMode != nil {
+	if o != nil && !IsNil(o.PortMode) {
 		return true
 	}
 
@@ -414,7 +418,7 @@ func (o *StorageHitachiPort) SetPortMode(v string) {
 
 // GetShortportId returns the ShortportId field value if set, zero value otherwise.
 func (o *StorageHitachiPort) GetShortportId() string {
-	if o == nil || o.ShortportId == nil {
+	if o == nil || IsNil(o.ShortportId) {
 		var ret string
 		return ret
 	}
@@ -424,7 +428,7 @@ func (o *StorageHitachiPort) GetShortportId() string {
 // GetShortportIdOk returns a tuple with the ShortportId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageHitachiPort) GetShortportIdOk() (*string, bool) {
-	if o == nil || o.ShortportId == nil {
+	if o == nil || IsNil(o.ShortportId) {
 		return nil, false
 	}
 	return o.ShortportId, true
@@ -432,7 +436,7 @@ func (o *StorageHitachiPort) GetShortportIdOk() (*string, bool) {
 
 // HasShortportId returns a boolean if a field has been set.
 func (o *StorageHitachiPort) HasShortportId() bool {
-	if o != nil && o.ShortportId != nil {
+	if o != nil && !IsNil(o.ShortportId) {
 		return true
 	}
 
@@ -446,7 +450,7 @@ func (o *StorageHitachiPort) SetShortportId(v string) {
 
 // GetTcpMtu returns the TcpMtu field value if set, zero value otherwise.
 func (o *StorageHitachiPort) GetTcpMtu() int64 {
-	if o == nil || o.TcpMtu == nil {
+	if o == nil || IsNil(o.TcpMtu) {
 		var ret int64
 		return ret
 	}
@@ -456,7 +460,7 @@ func (o *StorageHitachiPort) GetTcpMtu() int64 {
 // GetTcpMtuOk returns a tuple with the TcpMtu field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageHitachiPort) GetTcpMtuOk() (*int64, bool) {
-	if o == nil || o.TcpMtu == nil {
+	if o == nil || IsNil(o.TcpMtu) {
 		return nil, false
 	}
 	return o.TcpMtu, true
@@ -464,7 +468,7 @@ func (o *StorageHitachiPort) GetTcpMtuOk() (*int64, bool) {
 
 // HasTcpMtu returns a boolean if a field has been set.
 func (o *StorageHitachiPort) HasTcpMtu() bool {
-	if o != nil && o.TcpMtu != nil {
+	if o != nil && !IsNil(o.TcpMtu) {
 		return true
 	}
 
@@ -476,134 +480,182 @@ func (o *StorageHitachiPort) SetTcpMtu(v int64) {
 	o.TcpMtu = &v
 }
 
-// GetArray returns the Array field value if set, zero value otherwise.
+// GetArray returns the Array field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *StorageHitachiPort) GetArray() StorageHitachiArrayRelationship {
-	if o == nil || o.Array == nil {
+	if o == nil || IsNil(o.Array.Get()) {
 		var ret StorageHitachiArrayRelationship
 		return ret
 	}
-	return *o.Array
+	return *o.Array.Get()
 }
 
 // GetArrayOk returns a tuple with the Array field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StorageHitachiPort) GetArrayOk() (*StorageHitachiArrayRelationship, bool) {
-	if o == nil || o.Array == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Array, true
+	return o.Array.Get(), o.Array.IsSet()
 }
 
 // HasArray returns a boolean if a field has been set.
 func (o *StorageHitachiPort) HasArray() bool {
-	if o != nil && o.Array != nil {
+	if o != nil && o.Array.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetArray gets a reference to the given StorageHitachiArrayRelationship and assigns it to the Array field.
+// SetArray gets a reference to the given NullableStorageHitachiArrayRelationship and assigns it to the Array field.
 func (o *StorageHitachiPort) SetArray(v StorageHitachiArrayRelationship) {
-	o.Array = &v
+	o.Array.Set(&v)
 }
 
-// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise.
+// SetArrayNil sets the value for Array to be an explicit nil
+func (o *StorageHitachiPort) SetArrayNil() {
+	o.Array.Set(nil)
+}
+
+// UnsetArray ensures that no value is present for Array, not even an explicit nil
+func (o *StorageHitachiPort) UnsetArray() {
+	o.Array.Unset()
+}
+
+// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *StorageHitachiPort) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil || IsNil(o.RegisteredDevice.Get()) {
 		var ret AssetDeviceRegistrationRelationship
 		return ret
 	}
-	return *o.RegisteredDevice
+	return *o.RegisteredDevice.Get()
 }
 
 // GetRegisteredDeviceOk returns a tuple with the RegisteredDevice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StorageHitachiPort) GetRegisteredDeviceOk() (*AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.RegisteredDevice, true
+	return o.RegisteredDevice.Get(), o.RegisteredDevice.IsSet()
 }
 
 // HasRegisteredDevice returns a boolean if a field has been set.
 func (o *StorageHitachiPort) HasRegisteredDevice() bool {
-	if o != nil && o.RegisteredDevice != nil {
+	if o != nil && o.RegisteredDevice.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRegisteredDevice gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
+// SetRegisteredDevice gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
 func (o *StorageHitachiPort) SetRegisteredDevice(v AssetDeviceRegistrationRelationship) {
-	o.RegisteredDevice = &v
+	o.RegisteredDevice.Set(&v)
+}
+
+// SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+func (o *StorageHitachiPort) SetRegisteredDeviceNil() {
+	o.RegisteredDevice.Set(nil)
+}
+
+// UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
+func (o *StorageHitachiPort) UnsetRegisteredDevice() {
+	o.RegisteredDevice.Unset()
 }
 
 func (o StorageHitachiPort) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o StorageHitachiPort) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedStorageBasePhysicalPort, errStorageBasePhysicalPort := json.Marshal(o.StorageBasePhysicalPort)
 	if errStorageBasePhysicalPort != nil {
-		return []byte{}, errStorageBasePhysicalPort
+		return map[string]interface{}{}, errStorageBasePhysicalPort
 	}
 	errStorageBasePhysicalPort = json.Unmarshal([]byte(serializedStorageBasePhysicalPort), &toSerialize)
 	if errStorageBasePhysicalPort != nil {
-		return []byte{}, errStorageBasePhysicalPort
+		return map[string]interface{}{}, errStorageBasePhysicalPort
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.FabricMode != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.FabricMode) {
 		toSerialize["FabricMode"] = o.FabricMode
 	}
-	if o.Ipv4Address != nil {
+	if !IsNil(o.Ipv4Address) {
 		toSerialize["Ipv4Address"] = o.Ipv4Address
 	}
-	if o.Ipv6GlobalAddress != nil {
+	if !IsNil(o.Ipv6GlobalAddress) {
 		toSerialize["Ipv6GlobalAddress"] = o.Ipv6GlobalAddress
 	}
-	if o.Ipv6LinkLocalAddress != nil {
+	if !IsNil(o.Ipv6LinkLocalAddress) {
 		toSerialize["Ipv6LinkLocalAddress"] = o.Ipv6LinkLocalAddress
 	}
-	if o.IsIpv6Enable != nil {
+	if !IsNil(o.IsIpv6Enable) {
 		toSerialize["IsIpv6Enable"] = o.IsIpv6Enable
 	}
-	if o.LoopId != nil {
+	if !IsNil(o.LoopId) {
 		toSerialize["LoopId"] = o.LoopId
 	}
-	if o.PortConnection != nil {
+	if !IsNil(o.PortConnection) {
 		toSerialize["PortConnection"] = o.PortConnection
 	}
-	if o.PortLunSecurity != nil {
+	if !IsNil(o.PortLunSecurity) {
 		toSerialize["PortLunSecurity"] = o.PortLunSecurity
 	}
-	if o.PortMode != nil {
+	if !IsNil(o.PortMode) {
 		toSerialize["PortMode"] = o.PortMode
 	}
-	if o.ShortportId != nil {
+	if !IsNil(o.ShortportId) {
 		toSerialize["ShortportId"] = o.ShortportId
 	}
-	if o.TcpMtu != nil {
+	if !IsNil(o.TcpMtu) {
 		toSerialize["TcpMtu"] = o.TcpMtu
 	}
-	if o.Array != nil {
-		toSerialize["Array"] = o.Array
+	if o.Array.IsSet() {
+		toSerialize["Array"] = o.Array.Get()
 	}
-	if o.RegisteredDevice != nil {
-		toSerialize["RegisteredDevice"] = o.RegisteredDevice
+	if o.RegisteredDevice.IsSet() {
+		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *StorageHitachiPort) UnmarshalJSON(bytes []byte) (err error) {
+func (o *StorageHitachiPort) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type StorageHitachiPortWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -630,14 +682,14 @@ func (o *StorageHitachiPort) UnmarshalJSON(bytes []byte) (err error) {
 		// Port ID (short) of the port.
 		ShortportId *string `json:"ShortportId,omitempty"`
 		// Value of MTU for iSCSI communication.
-		TcpMtu           *int64                               `json:"TcpMtu,omitempty"`
-		Array            *StorageHitachiArrayRelationship     `json:"Array,omitempty"`
-		RegisteredDevice *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+		TcpMtu           *int64                                      `json:"TcpMtu,omitempty"`
+		Array            NullableStorageHitachiArrayRelationship     `json:"Array,omitempty"`
+		RegisteredDevice NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	}
 
 	varStorageHitachiPortWithoutEmbeddedStruct := StorageHitachiPortWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varStorageHitachiPortWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varStorageHitachiPortWithoutEmbeddedStruct)
 	if err == nil {
 		varStorageHitachiPort := _StorageHitachiPort{}
 		varStorageHitachiPort.ClassId = varStorageHitachiPortWithoutEmbeddedStruct.ClassId
@@ -662,7 +714,7 @@ func (o *StorageHitachiPort) UnmarshalJSON(bytes []byte) (err error) {
 
 	varStorageHitachiPort := _StorageHitachiPort{}
 
-	err = json.Unmarshal(bytes, &varStorageHitachiPort)
+	err = json.Unmarshal(data, &varStorageHitachiPort)
 	if err == nil {
 		o.StorageBasePhysicalPort = varStorageHitachiPort.StorageBasePhysicalPort
 	} else {
@@ -671,7 +723,7 @@ func (o *StorageHitachiPort) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "FabricMode")

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the ConnectorCommandControlMessage type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ConnectorCommandControlMessage{}
 
 // ConnectorCommandControlMessage A Command Message is sent from a cloud service to the connector's command plugin to execute a given command on the platform and begin tunneling input/output to/from the command.
 type ConnectorCommandControlMessage struct {
@@ -112,7 +116,7 @@ func (o *ConnectorCommandControlMessage) SetObjectType(v string) {
 
 // GetDir returns the Dir field value if set, zero value otherwise.
 func (o *ConnectorCommandControlMessage) GetDir() string {
-	if o == nil || o.Dir == nil {
+	if o == nil || IsNil(o.Dir) {
 		var ret string
 		return ret
 	}
@@ -122,7 +126,7 @@ func (o *ConnectorCommandControlMessage) GetDir() string {
 // GetDirOk returns a tuple with the Dir field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ConnectorCommandControlMessage) GetDirOk() (*string, bool) {
-	if o == nil || o.Dir == nil {
+	if o == nil || IsNil(o.Dir) {
 		return nil, false
 	}
 	return o.Dir, true
@@ -130,7 +134,7 @@ func (o *ConnectorCommandControlMessage) GetDirOk() (*string, bool) {
 
 // HasDir returns a boolean if a field has been set.
 func (o *ConnectorCommandControlMessage) HasDir() bool {
-	if o != nil && o.Dir != nil {
+	if o != nil && !IsNil(o.Dir) {
 		return true
 	}
 
@@ -144,7 +148,7 @@ func (o *ConnectorCommandControlMessage) SetDir(v string) {
 
 // GetMsgType returns the MsgType field value if set, zero value otherwise.
 func (o *ConnectorCommandControlMessage) GetMsgType() string {
-	if o == nil || o.MsgType == nil {
+	if o == nil || IsNil(o.MsgType) {
 		var ret string
 		return ret
 	}
@@ -154,7 +158,7 @@ func (o *ConnectorCommandControlMessage) GetMsgType() string {
 // GetMsgTypeOk returns a tuple with the MsgType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ConnectorCommandControlMessage) GetMsgTypeOk() (*string, bool) {
-	if o == nil || o.MsgType == nil {
+	if o == nil || IsNil(o.MsgType) {
 		return nil, false
 	}
 	return o.MsgType, true
@@ -162,7 +166,7 @@ func (o *ConnectorCommandControlMessage) GetMsgTypeOk() (*string, bool) {
 
 // HasMsgType returns a boolean if a field has been set.
 func (o *ConnectorCommandControlMessage) HasMsgType() bool {
-	if o != nil && o.MsgType != nil {
+	if o != nil && !IsNil(o.MsgType) {
 		return true
 	}
 
@@ -176,7 +180,7 @@ func (o *ConnectorCommandControlMessage) SetMsgType(v string) {
 
 // GetStream returns the Stream field value if set, zero value otherwise.
 func (o *ConnectorCommandControlMessage) GetStream() string {
-	if o == nil || o.Stream == nil {
+	if o == nil || IsNil(o.Stream) {
 		var ret string
 		return ret
 	}
@@ -186,7 +190,7 @@ func (o *ConnectorCommandControlMessage) GetStream() string {
 // GetStreamOk returns a tuple with the Stream field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ConnectorCommandControlMessage) GetStreamOk() (*string, bool) {
-	if o == nil || o.Stream == nil {
+	if o == nil || IsNil(o.Stream) {
 		return nil, false
 	}
 	return o.Stream, true
@@ -194,7 +198,7 @@ func (o *ConnectorCommandControlMessage) GetStreamOk() (*string, bool) {
 
 // HasStream returns a boolean if a field has been set.
 func (o *ConnectorCommandControlMessage) HasStream() bool {
-	if o != nil && o.Stream != nil {
+	if o != nil && !IsNil(o.Stream) {
 		return true
 	}
 
@@ -208,7 +212,7 @@ func (o *ConnectorCommandControlMessage) SetStream(v string) {
 
 // GetTerminal returns the Terminal field value if set, zero value otherwise.
 func (o *ConnectorCommandControlMessage) GetTerminal() bool {
-	if o == nil || o.Terminal == nil {
+	if o == nil || IsNil(o.Terminal) {
 		var ret bool
 		return ret
 	}
@@ -218,7 +222,7 @@ func (o *ConnectorCommandControlMessage) GetTerminal() bool {
 // GetTerminalOk returns a tuple with the Terminal field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ConnectorCommandControlMessage) GetTerminalOk() (*bool, bool) {
-	if o == nil || o.Terminal == nil {
+	if o == nil || IsNil(o.Terminal) {
 		return nil, false
 	}
 	return o.Terminal, true
@@ -226,7 +230,7 @@ func (o *ConnectorCommandControlMessage) GetTerminalOk() (*bool, bool) {
 
 // HasTerminal returns a boolean if a field has been set.
 func (o *ConnectorCommandControlMessage) HasTerminal() bool {
-	if o != nil && o.Terminal != nil {
+	if o != nil && !IsNil(o.Terminal) {
 		return true
 	}
 
@@ -240,7 +244,7 @@ func (o *ConnectorCommandControlMessage) SetTerminal(v bool) {
 
 // GetTimeout returns the Timeout field value if set, zero value otherwise.
 func (o *ConnectorCommandControlMessage) GetTimeout() int64 {
-	if o == nil || o.Timeout == nil {
+	if o == nil || IsNil(o.Timeout) {
 		var ret int64
 		return ret
 	}
@@ -250,7 +254,7 @@ func (o *ConnectorCommandControlMessage) GetTimeout() int64 {
 // GetTimeoutOk returns a tuple with the Timeout field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ConnectorCommandControlMessage) GetTimeoutOk() (*int64, bool) {
-	if o == nil || o.Timeout == nil {
+	if o == nil || IsNil(o.Timeout) {
 		return nil, false
 	}
 	return o.Timeout, true
@@ -258,7 +262,7 @@ func (o *ConnectorCommandControlMessage) GetTimeoutOk() (*int64, bool) {
 
 // HasTimeout returns a boolean if a field has been set.
 func (o *ConnectorCommandControlMessage) HasTimeout() bool {
-	if o != nil && o.Timeout != nil {
+	if o != nil && !IsNil(o.Timeout) {
 		return true
 	}
 
@@ -271,34 +275,38 @@ func (o *ConnectorCommandControlMessage) SetTimeout(v int64) {
 }
 
 func (o ConnectorCommandControlMessage) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o ConnectorCommandControlMessage) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedConnectorAuthMessage, errConnectorAuthMessage := json.Marshal(o.ConnectorAuthMessage)
 	if errConnectorAuthMessage != nil {
-		return []byte{}, errConnectorAuthMessage
+		return map[string]interface{}{}, errConnectorAuthMessage
 	}
 	errConnectorAuthMessage = json.Unmarshal([]byte(serializedConnectorAuthMessage), &toSerialize)
 	if errConnectorAuthMessage != nil {
-		return []byte{}, errConnectorAuthMessage
+		return map[string]interface{}{}, errConnectorAuthMessage
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Dir != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Dir) {
 		toSerialize["Dir"] = o.Dir
 	}
-	if o.MsgType != nil {
+	if !IsNil(o.MsgType) {
 		toSerialize["MsgType"] = o.MsgType
 	}
-	if o.Stream != nil {
+	if !IsNil(o.Stream) {
 		toSerialize["Stream"] = o.Stream
 	}
-	if o.Terminal != nil {
+	if !IsNil(o.Terminal) {
 		toSerialize["Terminal"] = o.Terminal
 	}
-	if o.Timeout != nil {
+	if !IsNil(o.Timeout) {
 		toSerialize["Timeout"] = o.Timeout
 	}
 
@@ -306,10 +314,32 @@ func (o ConnectorCommandControlMessage) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *ConnectorCommandControlMessage) UnmarshalJSON(bytes []byte) (err error) {
+func (o *ConnectorCommandControlMessage) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type ConnectorCommandControlMessageWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -329,7 +359,7 @@ func (o *ConnectorCommandControlMessage) UnmarshalJSON(bytes []byte) (err error)
 
 	varConnectorCommandControlMessageWithoutEmbeddedStruct := ConnectorCommandControlMessageWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varConnectorCommandControlMessageWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varConnectorCommandControlMessageWithoutEmbeddedStruct)
 	if err == nil {
 		varConnectorCommandControlMessage := _ConnectorCommandControlMessage{}
 		varConnectorCommandControlMessage.ClassId = varConnectorCommandControlMessageWithoutEmbeddedStruct.ClassId
@@ -346,7 +376,7 @@ func (o *ConnectorCommandControlMessage) UnmarshalJSON(bytes []byte) (err error)
 
 	varConnectorCommandControlMessage := _ConnectorCommandControlMessage{}
 
-	err = json.Unmarshal(bytes, &varConnectorCommandControlMessage)
+	err = json.Unmarshal(data, &varConnectorCommandControlMessage)
 	if err == nil {
 		o.ConnectorAuthMessage = varConnectorCommandControlMessage.ConnectorAuthMessage
 	} else {
@@ -355,7 +385,7 @@ func (o *ConnectorCommandControlMessage) UnmarshalJSON(bytes []byte) (err error)
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Dir")

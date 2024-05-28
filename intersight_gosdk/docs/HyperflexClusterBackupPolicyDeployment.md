@@ -25,9 +25,9 @@ Name | Type | Description | Notes
 **TargetDetached** | Pointer to **bool** | True if policy was detached from target Hyperflex Cluster. | [optional] 
 **TargetRequestId** | Pointer to **string** | Unique target cluster request ID allowing retry of the same logical request following a transient communication failure. | [optional] [readonly] 
 **TargetUuid** | Pointer to **string** | Uuid of the target Hyperflex Cluster. | [optional] [readonly] 
-**BackupTarget** | Pointer to [**HyperflexClusterRelationship**](HyperflexClusterRelationship.md) |  | [optional] 
-**Organization** | Pointer to [**OrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
-**SourceCluster** | Pointer to [**HyperflexClusterRelationship**](HyperflexClusterRelationship.md) |  | [optional] 
+**BackupTarget** | Pointer to [**NullableHyperflexClusterRelationship**](HyperflexClusterRelationship.md) |  | [optional] 
+**Organization** | Pointer to [**NullableOrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
+**SourceCluster** | Pointer to [**NullableHyperflexClusterRelationship**](HyperflexClusterRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -598,6 +598,16 @@ SetBackupTarget sets BackupTarget field to given value.
 
 HasBackupTarget returns a boolean if a field has been set.
 
+### SetBackupTargetNil
+
+`func (o *HyperflexClusterBackupPolicyDeployment) SetBackupTargetNil(b bool)`
+
+ SetBackupTargetNil sets the value for BackupTarget to be an explicit nil
+
+### UnsetBackupTarget
+`func (o *HyperflexClusterBackupPolicyDeployment) UnsetBackupTarget()`
+
+UnsetBackupTarget ensures that no value is present for BackupTarget, not even an explicit nil
 ### GetOrganization
 
 `func (o *HyperflexClusterBackupPolicyDeployment) GetOrganization() OrganizationOrganizationRelationship`
@@ -623,6 +633,16 @@ SetOrganization sets Organization field to given value.
 
 HasOrganization returns a boolean if a field has been set.
 
+### SetOrganizationNil
+
+`func (o *HyperflexClusterBackupPolicyDeployment) SetOrganizationNil(b bool)`
+
+ SetOrganizationNil sets the value for Organization to be an explicit nil
+
+### UnsetOrganization
+`func (o *HyperflexClusterBackupPolicyDeployment) UnsetOrganization()`
+
+UnsetOrganization ensures that no value is present for Organization, not even an explicit nil
 ### GetSourceCluster
 
 `func (o *HyperflexClusterBackupPolicyDeployment) GetSourceCluster() HyperflexClusterRelationship`
@@ -648,6 +668,16 @@ SetSourceCluster sets SourceCluster field to given value.
 
 HasSourceCluster returns a boolean if a field has been set.
 
+### SetSourceClusterNil
+
+`func (o *HyperflexClusterBackupPolicyDeployment) SetSourceClusterNil(b bool)`
+
+ SetSourceClusterNil sets the value for SourceCluster to be an explicit nil
+
+### UnsetSourceCluster
+`func (o *HyperflexClusterBackupPolicyDeployment) UnsetSourceCluster()`
+
+UnsetSourceCluster ensures that no value is present for SourceCluster, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

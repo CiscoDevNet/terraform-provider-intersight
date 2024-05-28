@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the AaaRetentionPolicy type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &AaaRetentionPolicy{}
 
 // AaaRetentionPolicy An account level policy specifying the period for the audit log retention.
 type AaaRetentionPolicy struct {
@@ -25,8 +29,8 @@ type AaaRetentionPolicy struct {
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
 	// The time period in months for audit log retention. Audit logs beyond this period will be automatically deleted.
-	RetentionPeriod      *int64                  `json:"RetentionPeriod,omitempty"`
-	Account              *IamAccountRelationship `json:"Account,omitempty"`
+	RetentionPeriod      *int64                         `json:"RetentionPeriod,omitempty"`
+	Account              NullableIamAccountRelationship `json:"Account,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -105,7 +109,7 @@ func (o *AaaRetentionPolicy) SetObjectType(v string) {
 
 // GetRetentionPeriod returns the RetentionPeriod field value if set, zero value otherwise.
 func (o *AaaRetentionPolicy) GetRetentionPeriod() int64 {
-	if o == nil || o.RetentionPeriod == nil {
+	if o == nil || IsNil(o.RetentionPeriod) {
 		var ret int64
 		return ret
 	}
@@ -115,7 +119,7 @@ func (o *AaaRetentionPolicy) GetRetentionPeriod() int64 {
 // GetRetentionPeriodOk returns a tuple with the RetentionPeriod field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AaaRetentionPolicy) GetRetentionPeriodOk() (*int64, bool) {
-	if o == nil || o.RetentionPeriod == nil {
+	if o == nil || IsNil(o.RetentionPeriod) {
 		return nil, false
 	}
 	return o.RetentionPeriod, true
@@ -123,7 +127,7 @@ func (o *AaaRetentionPolicy) GetRetentionPeriodOk() (*int64, bool) {
 
 // HasRetentionPeriod returns a boolean if a field has been set.
 func (o *AaaRetentionPolicy) HasRetentionPeriod() bool {
-	if o != nil && o.RetentionPeriod != nil {
+	if o != nil && !IsNil(o.RetentionPeriod) {
 		return true
 	}
 
@@ -135,82 +139,119 @@ func (o *AaaRetentionPolicy) SetRetentionPeriod(v int64) {
 	o.RetentionPeriod = &v
 }
 
-// GetAccount returns the Account field value if set, zero value otherwise.
+// GetAccount returns the Account field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *AaaRetentionPolicy) GetAccount() IamAccountRelationship {
-	if o == nil || o.Account == nil {
+	if o == nil || IsNil(o.Account.Get()) {
 		var ret IamAccountRelationship
 		return ret
 	}
-	return *o.Account
+	return *o.Account.Get()
 }
 
 // GetAccountOk returns a tuple with the Account field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *AaaRetentionPolicy) GetAccountOk() (*IamAccountRelationship, bool) {
-	if o == nil || o.Account == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Account, true
+	return o.Account.Get(), o.Account.IsSet()
 }
 
 // HasAccount returns a boolean if a field has been set.
 func (o *AaaRetentionPolicy) HasAccount() bool {
-	if o != nil && o.Account != nil {
+	if o != nil && o.Account.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetAccount gets a reference to the given IamAccountRelationship and assigns it to the Account field.
+// SetAccount gets a reference to the given NullableIamAccountRelationship and assigns it to the Account field.
 func (o *AaaRetentionPolicy) SetAccount(v IamAccountRelationship) {
-	o.Account = &v
+	o.Account.Set(&v)
+}
+
+// SetAccountNil sets the value for Account to be an explicit nil
+func (o *AaaRetentionPolicy) SetAccountNil() {
+	o.Account.Set(nil)
+}
+
+// UnsetAccount ensures that no value is present for Account, not even an explicit nil
+func (o *AaaRetentionPolicy) UnsetAccount() {
+	o.Account.Unset()
 }
 
 func (o AaaRetentionPolicy) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o AaaRetentionPolicy) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedPolicyAbstractPolicy, errPolicyAbstractPolicy := json.Marshal(o.PolicyAbstractPolicy)
 	if errPolicyAbstractPolicy != nil {
-		return []byte{}, errPolicyAbstractPolicy
+		return map[string]interface{}{}, errPolicyAbstractPolicy
 	}
 	errPolicyAbstractPolicy = json.Unmarshal([]byte(serializedPolicyAbstractPolicy), &toSerialize)
 	if errPolicyAbstractPolicy != nil {
-		return []byte{}, errPolicyAbstractPolicy
+		return map[string]interface{}{}, errPolicyAbstractPolicy
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.RetentionPeriod != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.RetentionPeriod) {
 		toSerialize["RetentionPeriod"] = o.RetentionPeriod
 	}
-	if o.Account != nil {
-		toSerialize["Account"] = o.Account
+	if o.Account.IsSet() {
+		toSerialize["Account"] = o.Account.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *AaaRetentionPolicy) UnmarshalJSON(bytes []byte) (err error) {
+func (o *AaaRetentionPolicy) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type AaaRetentionPolicyWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 		ObjectType string `json:"ObjectType"`
 		// The time period in months for audit log retention. Audit logs beyond this period will be automatically deleted.
-		RetentionPeriod *int64                  `json:"RetentionPeriod,omitempty"`
-		Account         *IamAccountRelationship `json:"Account,omitempty"`
+		RetentionPeriod *int64                         `json:"RetentionPeriod,omitempty"`
+		Account         NullableIamAccountRelationship `json:"Account,omitempty"`
 	}
 
 	varAaaRetentionPolicyWithoutEmbeddedStruct := AaaRetentionPolicyWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varAaaRetentionPolicyWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varAaaRetentionPolicyWithoutEmbeddedStruct)
 	if err == nil {
 		varAaaRetentionPolicy := _AaaRetentionPolicy{}
 		varAaaRetentionPolicy.ClassId = varAaaRetentionPolicyWithoutEmbeddedStruct.ClassId
@@ -224,7 +265,7 @@ func (o *AaaRetentionPolicy) UnmarshalJSON(bytes []byte) (err error) {
 
 	varAaaRetentionPolicy := _AaaRetentionPolicy{}
 
-	err = json.Unmarshal(bytes, &varAaaRetentionPolicy)
+	err = json.Unmarshal(data, &varAaaRetentionPolicy)
 	if err == nil {
 		o.PolicyAbstractPolicy = varAaaRetentionPolicy.PolicyAbstractPolicy
 	} else {
@@ -233,7 +274,7 @@ func (o *AaaRetentionPolicy) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "RetentionPeriod")

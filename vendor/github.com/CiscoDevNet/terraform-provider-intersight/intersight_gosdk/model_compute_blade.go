@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the ComputeBlade type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ComputeBlade{}
 
 // ComputeBlade Server which is housed in a chassis and shares some of the hardware with other servers in the chassis.
 type ComputeBlade struct {
@@ -31,18 +35,18 @@ type ComputeBlade struct {
 	// The slot number in the chassis that the blade is discovered in.
 	SlotId *int64 `json:"SlotId,omitempty"`
 	// An array of relationships to adapterUnit resources.
-	Adapters          []AdapterUnitRelationship      `json:"Adapters,omitempty"`
-	BiosBootmode      *BiosBootModeRelationship      `json:"BiosBootmode,omitempty"`
-	BiosTokenSettings *BiosTokenSettingsRelationship `json:"BiosTokenSettings,omitempty"`
+	Adapters          []AdapterUnitRelationship             `json:"Adapters,omitempty"`
+	BiosBootmode      NullableBiosBootModeRelationship      `json:"BiosBootmode,omitempty"`
+	BiosTokenSettings NullableBiosTokenSettingsRelationship `json:"BiosTokenSettings,omitempty"`
 	// An array of relationships to biosUnit resources.
-	BiosUnits                          []BiosUnitRelationship                          `json:"BiosUnits,omitempty"`
-	BiosVfSelectMemoryRasConfiguration *BiosVfSelectMemoryRasConfigurationRelationship `json:"BiosVfSelectMemoryRasConfiguration,omitempty"`
-	Bmc                                *ManagementControllerRelationship               `json:"Bmc,omitempty"`
-	Board                              *ComputeBoardRelationship                       `json:"Board,omitempty"`
-	BootDeviceBootmode                 *BootDeviceBootModeRelationship                 `json:"BootDeviceBootmode,omitempty"`
+	BiosUnits                          []BiosUnitRelationship                                 `json:"BiosUnits,omitempty"`
+	BiosVfSelectMemoryRasConfiguration NullableBiosVfSelectMemoryRasConfigurationRelationship `json:"BiosVfSelectMemoryRasConfiguration,omitempty"`
+	Bmc                                NullableManagementControllerRelationship               `json:"Bmc,omitempty"`
+	Board                              NullableComputeBoardRelationship                       `json:"Board,omitempty"`
+	BootDeviceBootmode                 NullableBootDeviceBootModeRelationship                 `json:"BootDeviceBootmode,omitempty"`
 	// An array of relationships to computePersonality resources.
-	ComputePersonality []ComputePersonalityRelationship `json:"ComputePersonality,omitempty"`
-	EquipmentChassis   *EquipmentChassisRelationship    `json:"EquipmentChassis,omitempty"`
+	ComputePersonality []ComputePersonalityRelationship     `json:"ComputePersonality,omitempty"`
+	EquipmentChassis   NullableEquipmentChassisRelationship `json:"EquipmentChassis,omitempty"`
 	// An array of relationships to equipmentIoExpander resources.
 	EquipmentIoExpanders []EquipmentIoExpanderRelationship `json:"EquipmentIoExpanders,omitempty"`
 	// An array of relationships to inventoryGenericInventoryHolder resources.
@@ -50,9 +54,9 @@ type ComputeBlade struct {
 	// An array of relationships to graphicsCard resources.
 	GraphicsCards []GraphicsCardRelationship `json:"GraphicsCards,omitempty"`
 	// An array of relationships to equipmentHybridDriveSlot resources.
-	HybridDriveSlots    []EquipmentHybridDriveSlotRelationship `json:"HybridDriveSlots,omitempty"`
-	InventoryDeviceInfo *InventoryDeviceInfoRelationship       `json:"InventoryDeviceInfo,omitempty"`
-	LocatorLed          *EquipmentLocatorLedRelationship       `json:"LocatorLed,omitempty"`
+	HybridDriveSlots    []EquipmentHybridDriveSlotRelationship  `json:"HybridDriveSlots,omitempty"`
+	InventoryDeviceInfo NullableInventoryDeviceInfoRelationship `json:"InventoryDeviceInfo,omitempty"`
+	LocatorLed          NullableEquipmentLocatorLedRelationship `json:"LocatorLed,omitempty"`
 	// An array of relationships to memoryArray resources.
 	MemoryArrays []MemoryArrayRelationship `json:"MemoryArrays,omitempty"`
 	// An array of relationships to pciDevice resources.
@@ -60,13 +64,13 @@ type ComputeBlade struct {
 	// An array of relationships to pciNode resources.
 	PciNodes []PciNodeRelationship `json:"PciNodes,omitempty"`
 	// An array of relationships to processorUnit resources.
-	Processors       []ProcessorUnitRelationship          `json:"Processors,omitempty"`
-	RegisteredDevice *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+	Processors       []ProcessorUnitRelationship                 `json:"Processors,omitempty"`
+	RegisteredDevice NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	// An array of relationships to storageController resources.
 	StorageControllers []StorageControllerRelationship `json:"StorageControllers,omitempty"`
 	// An array of relationships to storageEnclosure resources.
 	StorageEnclosures    []StorageEnclosureRelationship `json:"StorageEnclosures,omitempty"`
-	TopSystem            *TopSystemRelationship         `json:"TopSystem,omitempty"`
+	TopSystem            NullableTopSystemRelationship  `json:"TopSystem,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -149,7 +153,7 @@ func (o *ComputeBlade) SetObjectType(v string) {
 
 // GetChassisId returns the ChassisId field value if set, zero value otherwise.
 func (o *ComputeBlade) GetChassisId() string {
-	if o == nil || o.ChassisId == nil {
+	if o == nil || IsNil(o.ChassisId) {
 		var ret string
 		return ret
 	}
@@ -159,7 +163,7 @@ func (o *ComputeBlade) GetChassisId() string {
 // GetChassisIdOk returns a tuple with the ChassisId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ComputeBlade) GetChassisIdOk() (*string, bool) {
-	if o == nil || o.ChassisId == nil {
+	if o == nil || IsNil(o.ChassisId) {
 		return nil, false
 	}
 	return o.ChassisId, true
@@ -167,7 +171,7 @@ func (o *ComputeBlade) GetChassisIdOk() (*string, bool) {
 
 // HasChassisId returns a boolean if a field has been set.
 func (o *ComputeBlade) HasChassisId() bool {
-	if o != nil && o.ChassisId != nil {
+	if o != nil && !IsNil(o.ChassisId) {
 		return true
 	}
 
@@ -181,7 +185,7 @@ func (o *ComputeBlade) SetChassisId(v string) {
 
 // GetScaledMode returns the ScaledMode field value if set, zero value otherwise.
 func (o *ComputeBlade) GetScaledMode() string {
-	if o == nil || o.ScaledMode == nil {
+	if o == nil || IsNil(o.ScaledMode) {
 		var ret string
 		return ret
 	}
@@ -191,7 +195,7 @@ func (o *ComputeBlade) GetScaledMode() string {
 // GetScaledModeOk returns a tuple with the ScaledMode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ComputeBlade) GetScaledModeOk() (*string, bool) {
-	if o == nil || o.ScaledMode == nil {
+	if o == nil || IsNil(o.ScaledMode) {
 		return nil, false
 	}
 	return o.ScaledMode, true
@@ -199,7 +203,7 @@ func (o *ComputeBlade) GetScaledModeOk() (*string, bool) {
 
 // HasScaledMode returns a boolean if a field has been set.
 func (o *ComputeBlade) HasScaledMode() bool {
-	if o != nil && o.ScaledMode != nil {
+	if o != nil && !IsNil(o.ScaledMode) {
 		return true
 	}
 
@@ -213,7 +217,7 @@ func (o *ComputeBlade) SetScaledMode(v string) {
 
 // GetSlotId returns the SlotId field value if set, zero value otherwise.
 func (o *ComputeBlade) GetSlotId() int64 {
-	if o == nil || o.SlotId == nil {
+	if o == nil || IsNil(o.SlotId) {
 		var ret int64
 		return ret
 	}
@@ -223,7 +227,7 @@ func (o *ComputeBlade) GetSlotId() int64 {
 // GetSlotIdOk returns a tuple with the SlotId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ComputeBlade) GetSlotIdOk() (*int64, bool) {
-	if o == nil || o.SlotId == nil {
+	if o == nil || IsNil(o.SlotId) {
 		return nil, false
 	}
 	return o.SlotId, true
@@ -231,7 +235,7 @@ func (o *ComputeBlade) GetSlotIdOk() (*int64, bool) {
 
 // HasSlotId returns a boolean if a field has been set.
 func (o *ComputeBlade) HasSlotId() bool {
-	if o != nil && o.SlotId != nil {
+	if o != nil && !IsNil(o.SlotId) {
 		return true
 	}
 
@@ -256,7 +260,7 @@ func (o *ComputeBlade) GetAdapters() []AdapterUnitRelationship {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ComputeBlade) GetAdaptersOk() ([]AdapterUnitRelationship, bool) {
-	if o == nil || o.Adapters == nil {
+	if o == nil || IsNil(o.Adapters) {
 		return nil, false
 	}
 	return o.Adapters, true
@@ -264,7 +268,7 @@ func (o *ComputeBlade) GetAdaptersOk() ([]AdapterUnitRelationship, bool) {
 
 // HasAdapters returns a boolean if a field has been set.
 func (o *ComputeBlade) HasAdapters() bool {
-	if o != nil && o.Adapters != nil {
+	if o != nil && IsNil(o.Adapters) {
 		return true
 	}
 
@@ -276,68 +280,90 @@ func (o *ComputeBlade) SetAdapters(v []AdapterUnitRelationship) {
 	o.Adapters = v
 }
 
-// GetBiosBootmode returns the BiosBootmode field value if set, zero value otherwise.
+// GetBiosBootmode returns the BiosBootmode field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ComputeBlade) GetBiosBootmode() BiosBootModeRelationship {
-	if o == nil || o.BiosBootmode == nil {
+	if o == nil || IsNil(o.BiosBootmode.Get()) {
 		var ret BiosBootModeRelationship
 		return ret
 	}
-	return *o.BiosBootmode
+	return *o.BiosBootmode.Get()
 }
 
 // GetBiosBootmodeOk returns a tuple with the BiosBootmode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ComputeBlade) GetBiosBootmodeOk() (*BiosBootModeRelationship, bool) {
-	if o == nil || o.BiosBootmode == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.BiosBootmode, true
+	return o.BiosBootmode.Get(), o.BiosBootmode.IsSet()
 }
 
 // HasBiosBootmode returns a boolean if a field has been set.
 func (o *ComputeBlade) HasBiosBootmode() bool {
-	if o != nil && o.BiosBootmode != nil {
+	if o != nil && o.BiosBootmode.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetBiosBootmode gets a reference to the given BiosBootModeRelationship and assigns it to the BiosBootmode field.
+// SetBiosBootmode gets a reference to the given NullableBiosBootModeRelationship and assigns it to the BiosBootmode field.
 func (o *ComputeBlade) SetBiosBootmode(v BiosBootModeRelationship) {
-	o.BiosBootmode = &v
+	o.BiosBootmode.Set(&v)
 }
 
-// GetBiosTokenSettings returns the BiosTokenSettings field value if set, zero value otherwise.
+// SetBiosBootmodeNil sets the value for BiosBootmode to be an explicit nil
+func (o *ComputeBlade) SetBiosBootmodeNil() {
+	o.BiosBootmode.Set(nil)
+}
+
+// UnsetBiosBootmode ensures that no value is present for BiosBootmode, not even an explicit nil
+func (o *ComputeBlade) UnsetBiosBootmode() {
+	o.BiosBootmode.Unset()
+}
+
+// GetBiosTokenSettings returns the BiosTokenSettings field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ComputeBlade) GetBiosTokenSettings() BiosTokenSettingsRelationship {
-	if o == nil || o.BiosTokenSettings == nil {
+	if o == nil || IsNil(o.BiosTokenSettings.Get()) {
 		var ret BiosTokenSettingsRelationship
 		return ret
 	}
-	return *o.BiosTokenSettings
+	return *o.BiosTokenSettings.Get()
 }
 
 // GetBiosTokenSettingsOk returns a tuple with the BiosTokenSettings field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ComputeBlade) GetBiosTokenSettingsOk() (*BiosTokenSettingsRelationship, bool) {
-	if o == nil || o.BiosTokenSettings == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.BiosTokenSettings, true
+	return o.BiosTokenSettings.Get(), o.BiosTokenSettings.IsSet()
 }
 
 // HasBiosTokenSettings returns a boolean if a field has been set.
 func (o *ComputeBlade) HasBiosTokenSettings() bool {
-	if o != nil && o.BiosTokenSettings != nil {
+	if o != nil && o.BiosTokenSettings.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetBiosTokenSettings gets a reference to the given BiosTokenSettingsRelationship and assigns it to the BiosTokenSettings field.
+// SetBiosTokenSettings gets a reference to the given NullableBiosTokenSettingsRelationship and assigns it to the BiosTokenSettings field.
 func (o *ComputeBlade) SetBiosTokenSettings(v BiosTokenSettingsRelationship) {
-	o.BiosTokenSettings = &v
+	o.BiosTokenSettings.Set(&v)
+}
+
+// SetBiosTokenSettingsNil sets the value for BiosTokenSettings to be an explicit nil
+func (o *ComputeBlade) SetBiosTokenSettingsNil() {
+	o.BiosTokenSettings.Set(nil)
+}
+
+// UnsetBiosTokenSettings ensures that no value is present for BiosTokenSettings, not even an explicit nil
+func (o *ComputeBlade) UnsetBiosTokenSettings() {
+	o.BiosTokenSettings.Unset()
 }
 
 // GetBiosUnits returns the BiosUnits field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -353,7 +379,7 @@ func (o *ComputeBlade) GetBiosUnits() []BiosUnitRelationship {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ComputeBlade) GetBiosUnitsOk() ([]BiosUnitRelationship, bool) {
-	if o == nil || o.BiosUnits == nil {
+	if o == nil || IsNil(o.BiosUnits) {
 		return nil, false
 	}
 	return o.BiosUnits, true
@@ -361,7 +387,7 @@ func (o *ComputeBlade) GetBiosUnitsOk() ([]BiosUnitRelationship, bool) {
 
 // HasBiosUnits returns a boolean if a field has been set.
 func (o *ComputeBlade) HasBiosUnits() bool {
-	if o != nil && o.BiosUnits != nil {
+	if o != nil && IsNil(o.BiosUnits) {
 		return true
 	}
 
@@ -373,132 +399,176 @@ func (o *ComputeBlade) SetBiosUnits(v []BiosUnitRelationship) {
 	o.BiosUnits = v
 }
 
-// GetBiosVfSelectMemoryRasConfiguration returns the BiosVfSelectMemoryRasConfiguration field value if set, zero value otherwise.
+// GetBiosVfSelectMemoryRasConfiguration returns the BiosVfSelectMemoryRasConfiguration field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ComputeBlade) GetBiosVfSelectMemoryRasConfiguration() BiosVfSelectMemoryRasConfigurationRelationship {
-	if o == nil || o.BiosVfSelectMemoryRasConfiguration == nil {
+	if o == nil || IsNil(o.BiosVfSelectMemoryRasConfiguration.Get()) {
 		var ret BiosVfSelectMemoryRasConfigurationRelationship
 		return ret
 	}
-	return *o.BiosVfSelectMemoryRasConfiguration
+	return *o.BiosVfSelectMemoryRasConfiguration.Get()
 }
 
 // GetBiosVfSelectMemoryRasConfigurationOk returns a tuple with the BiosVfSelectMemoryRasConfiguration field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ComputeBlade) GetBiosVfSelectMemoryRasConfigurationOk() (*BiosVfSelectMemoryRasConfigurationRelationship, bool) {
-	if o == nil || o.BiosVfSelectMemoryRasConfiguration == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.BiosVfSelectMemoryRasConfiguration, true
+	return o.BiosVfSelectMemoryRasConfiguration.Get(), o.BiosVfSelectMemoryRasConfiguration.IsSet()
 }
 
 // HasBiosVfSelectMemoryRasConfiguration returns a boolean if a field has been set.
 func (o *ComputeBlade) HasBiosVfSelectMemoryRasConfiguration() bool {
-	if o != nil && o.BiosVfSelectMemoryRasConfiguration != nil {
+	if o != nil && o.BiosVfSelectMemoryRasConfiguration.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetBiosVfSelectMemoryRasConfiguration gets a reference to the given BiosVfSelectMemoryRasConfigurationRelationship and assigns it to the BiosVfSelectMemoryRasConfiguration field.
+// SetBiosVfSelectMemoryRasConfiguration gets a reference to the given NullableBiosVfSelectMemoryRasConfigurationRelationship and assigns it to the BiosVfSelectMemoryRasConfiguration field.
 func (o *ComputeBlade) SetBiosVfSelectMemoryRasConfiguration(v BiosVfSelectMemoryRasConfigurationRelationship) {
-	o.BiosVfSelectMemoryRasConfiguration = &v
+	o.BiosVfSelectMemoryRasConfiguration.Set(&v)
 }
 
-// GetBmc returns the Bmc field value if set, zero value otherwise.
+// SetBiosVfSelectMemoryRasConfigurationNil sets the value for BiosVfSelectMemoryRasConfiguration to be an explicit nil
+func (o *ComputeBlade) SetBiosVfSelectMemoryRasConfigurationNil() {
+	o.BiosVfSelectMemoryRasConfiguration.Set(nil)
+}
+
+// UnsetBiosVfSelectMemoryRasConfiguration ensures that no value is present for BiosVfSelectMemoryRasConfiguration, not even an explicit nil
+func (o *ComputeBlade) UnsetBiosVfSelectMemoryRasConfiguration() {
+	o.BiosVfSelectMemoryRasConfiguration.Unset()
+}
+
+// GetBmc returns the Bmc field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ComputeBlade) GetBmc() ManagementControllerRelationship {
-	if o == nil || o.Bmc == nil {
+	if o == nil || IsNil(o.Bmc.Get()) {
 		var ret ManagementControllerRelationship
 		return ret
 	}
-	return *o.Bmc
+	return *o.Bmc.Get()
 }
 
 // GetBmcOk returns a tuple with the Bmc field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ComputeBlade) GetBmcOk() (*ManagementControllerRelationship, bool) {
-	if o == nil || o.Bmc == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Bmc, true
+	return o.Bmc.Get(), o.Bmc.IsSet()
 }
 
 // HasBmc returns a boolean if a field has been set.
 func (o *ComputeBlade) HasBmc() bool {
-	if o != nil && o.Bmc != nil {
+	if o != nil && o.Bmc.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetBmc gets a reference to the given ManagementControllerRelationship and assigns it to the Bmc field.
+// SetBmc gets a reference to the given NullableManagementControllerRelationship and assigns it to the Bmc field.
 func (o *ComputeBlade) SetBmc(v ManagementControllerRelationship) {
-	o.Bmc = &v
+	o.Bmc.Set(&v)
 }
 
-// GetBoard returns the Board field value if set, zero value otherwise.
+// SetBmcNil sets the value for Bmc to be an explicit nil
+func (o *ComputeBlade) SetBmcNil() {
+	o.Bmc.Set(nil)
+}
+
+// UnsetBmc ensures that no value is present for Bmc, not even an explicit nil
+func (o *ComputeBlade) UnsetBmc() {
+	o.Bmc.Unset()
+}
+
+// GetBoard returns the Board field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ComputeBlade) GetBoard() ComputeBoardRelationship {
-	if o == nil || o.Board == nil {
+	if o == nil || IsNil(o.Board.Get()) {
 		var ret ComputeBoardRelationship
 		return ret
 	}
-	return *o.Board
+	return *o.Board.Get()
 }
 
 // GetBoardOk returns a tuple with the Board field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ComputeBlade) GetBoardOk() (*ComputeBoardRelationship, bool) {
-	if o == nil || o.Board == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Board, true
+	return o.Board.Get(), o.Board.IsSet()
 }
 
 // HasBoard returns a boolean if a field has been set.
 func (o *ComputeBlade) HasBoard() bool {
-	if o != nil && o.Board != nil {
+	if o != nil && o.Board.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetBoard gets a reference to the given ComputeBoardRelationship and assigns it to the Board field.
+// SetBoard gets a reference to the given NullableComputeBoardRelationship and assigns it to the Board field.
 func (o *ComputeBlade) SetBoard(v ComputeBoardRelationship) {
-	o.Board = &v
+	o.Board.Set(&v)
 }
 
-// GetBootDeviceBootmode returns the BootDeviceBootmode field value if set, zero value otherwise.
+// SetBoardNil sets the value for Board to be an explicit nil
+func (o *ComputeBlade) SetBoardNil() {
+	o.Board.Set(nil)
+}
+
+// UnsetBoard ensures that no value is present for Board, not even an explicit nil
+func (o *ComputeBlade) UnsetBoard() {
+	o.Board.Unset()
+}
+
+// GetBootDeviceBootmode returns the BootDeviceBootmode field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ComputeBlade) GetBootDeviceBootmode() BootDeviceBootModeRelationship {
-	if o == nil || o.BootDeviceBootmode == nil {
+	if o == nil || IsNil(o.BootDeviceBootmode.Get()) {
 		var ret BootDeviceBootModeRelationship
 		return ret
 	}
-	return *o.BootDeviceBootmode
+	return *o.BootDeviceBootmode.Get()
 }
 
 // GetBootDeviceBootmodeOk returns a tuple with the BootDeviceBootmode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ComputeBlade) GetBootDeviceBootmodeOk() (*BootDeviceBootModeRelationship, bool) {
-	if o == nil || o.BootDeviceBootmode == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.BootDeviceBootmode, true
+	return o.BootDeviceBootmode.Get(), o.BootDeviceBootmode.IsSet()
 }
 
 // HasBootDeviceBootmode returns a boolean if a field has been set.
 func (o *ComputeBlade) HasBootDeviceBootmode() bool {
-	if o != nil && o.BootDeviceBootmode != nil {
+	if o != nil && o.BootDeviceBootmode.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetBootDeviceBootmode gets a reference to the given BootDeviceBootModeRelationship and assigns it to the BootDeviceBootmode field.
+// SetBootDeviceBootmode gets a reference to the given NullableBootDeviceBootModeRelationship and assigns it to the BootDeviceBootmode field.
 func (o *ComputeBlade) SetBootDeviceBootmode(v BootDeviceBootModeRelationship) {
-	o.BootDeviceBootmode = &v
+	o.BootDeviceBootmode.Set(&v)
+}
+
+// SetBootDeviceBootmodeNil sets the value for BootDeviceBootmode to be an explicit nil
+func (o *ComputeBlade) SetBootDeviceBootmodeNil() {
+	o.BootDeviceBootmode.Set(nil)
+}
+
+// UnsetBootDeviceBootmode ensures that no value is present for BootDeviceBootmode, not even an explicit nil
+func (o *ComputeBlade) UnsetBootDeviceBootmode() {
+	o.BootDeviceBootmode.Unset()
 }
 
 // GetComputePersonality returns the ComputePersonality field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -514,7 +584,7 @@ func (o *ComputeBlade) GetComputePersonality() []ComputePersonalityRelationship 
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ComputeBlade) GetComputePersonalityOk() ([]ComputePersonalityRelationship, bool) {
-	if o == nil || o.ComputePersonality == nil {
+	if o == nil || IsNil(o.ComputePersonality) {
 		return nil, false
 	}
 	return o.ComputePersonality, true
@@ -522,7 +592,7 @@ func (o *ComputeBlade) GetComputePersonalityOk() ([]ComputePersonalityRelationsh
 
 // HasComputePersonality returns a boolean if a field has been set.
 func (o *ComputeBlade) HasComputePersonality() bool {
-	if o != nil && o.ComputePersonality != nil {
+	if o != nil && IsNil(o.ComputePersonality) {
 		return true
 	}
 
@@ -534,36 +604,47 @@ func (o *ComputeBlade) SetComputePersonality(v []ComputePersonalityRelationship)
 	o.ComputePersonality = v
 }
 
-// GetEquipmentChassis returns the EquipmentChassis field value if set, zero value otherwise.
+// GetEquipmentChassis returns the EquipmentChassis field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ComputeBlade) GetEquipmentChassis() EquipmentChassisRelationship {
-	if o == nil || o.EquipmentChassis == nil {
+	if o == nil || IsNil(o.EquipmentChassis.Get()) {
 		var ret EquipmentChassisRelationship
 		return ret
 	}
-	return *o.EquipmentChassis
+	return *o.EquipmentChassis.Get()
 }
 
 // GetEquipmentChassisOk returns a tuple with the EquipmentChassis field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ComputeBlade) GetEquipmentChassisOk() (*EquipmentChassisRelationship, bool) {
-	if o == nil || o.EquipmentChassis == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.EquipmentChassis, true
+	return o.EquipmentChassis.Get(), o.EquipmentChassis.IsSet()
 }
 
 // HasEquipmentChassis returns a boolean if a field has been set.
 func (o *ComputeBlade) HasEquipmentChassis() bool {
-	if o != nil && o.EquipmentChassis != nil {
+	if o != nil && o.EquipmentChassis.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetEquipmentChassis gets a reference to the given EquipmentChassisRelationship and assigns it to the EquipmentChassis field.
+// SetEquipmentChassis gets a reference to the given NullableEquipmentChassisRelationship and assigns it to the EquipmentChassis field.
 func (o *ComputeBlade) SetEquipmentChassis(v EquipmentChassisRelationship) {
-	o.EquipmentChassis = &v
+	o.EquipmentChassis.Set(&v)
+}
+
+// SetEquipmentChassisNil sets the value for EquipmentChassis to be an explicit nil
+func (o *ComputeBlade) SetEquipmentChassisNil() {
+	o.EquipmentChassis.Set(nil)
+}
+
+// UnsetEquipmentChassis ensures that no value is present for EquipmentChassis, not even an explicit nil
+func (o *ComputeBlade) UnsetEquipmentChassis() {
+	o.EquipmentChassis.Unset()
 }
 
 // GetEquipmentIoExpanders returns the EquipmentIoExpanders field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -579,7 +660,7 @@ func (o *ComputeBlade) GetEquipmentIoExpanders() []EquipmentIoExpanderRelationsh
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ComputeBlade) GetEquipmentIoExpandersOk() ([]EquipmentIoExpanderRelationship, bool) {
-	if o == nil || o.EquipmentIoExpanders == nil {
+	if o == nil || IsNil(o.EquipmentIoExpanders) {
 		return nil, false
 	}
 	return o.EquipmentIoExpanders, true
@@ -587,7 +668,7 @@ func (o *ComputeBlade) GetEquipmentIoExpandersOk() ([]EquipmentIoExpanderRelatio
 
 // HasEquipmentIoExpanders returns a boolean if a field has been set.
 func (o *ComputeBlade) HasEquipmentIoExpanders() bool {
-	if o != nil && o.EquipmentIoExpanders != nil {
+	if o != nil && IsNil(o.EquipmentIoExpanders) {
 		return true
 	}
 
@@ -612,7 +693,7 @@ func (o *ComputeBlade) GetGenericInventoryHolders() []InventoryGenericInventoryH
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ComputeBlade) GetGenericInventoryHoldersOk() ([]InventoryGenericInventoryHolderRelationship, bool) {
-	if o == nil || o.GenericInventoryHolders == nil {
+	if o == nil || IsNil(o.GenericInventoryHolders) {
 		return nil, false
 	}
 	return o.GenericInventoryHolders, true
@@ -620,7 +701,7 @@ func (o *ComputeBlade) GetGenericInventoryHoldersOk() ([]InventoryGenericInvento
 
 // HasGenericInventoryHolders returns a boolean if a field has been set.
 func (o *ComputeBlade) HasGenericInventoryHolders() bool {
-	if o != nil && o.GenericInventoryHolders != nil {
+	if o != nil && IsNil(o.GenericInventoryHolders) {
 		return true
 	}
 
@@ -645,7 +726,7 @@ func (o *ComputeBlade) GetGraphicsCards() []GraphicsCardRelationship {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ComputeBlade) GetGraphicsCardsOk() ([]GraphicsCardRelationship, bool) {
-	if o == nil || o.GraphicsCards == nil {
+	if o == nil || IsNil(o.GraphicsCards) {
 		return nil, false
 	}
 	return o.GraphicsCards, true
@@ -653,7 +734,7 @@ func (o *ComputeBlade) GetGraphicsCardsOk() ([]GraphicsCardRelationship, bool) {
 
 // HasGraphicsCards returns a boolean if a field has been set.
 func (o *ComputeBlade) HasGraphicsCards() bool {
-	if o != nil && o.GraphicsCards != nil {
+	if o != nil && IsNil(o.GraphicsCards) {
 		return true
 	}
 
@@ -678,7 +759,7 @@ func (o *ComputeBlade) GetHybridDriveSlots() []EquipmentHybridDriveSlotRelations
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ComputeBlade) GetHybridDriveSlotsOk() ([]EquipmentHybridDriveSlotRelationship, bool) {
-	if o == nil || o.HybridDriveSlots == nil {
+	if o == nil || IsNil(o.HybridDriveSlots) {
 		return nil, false
 	}
 	return o.HybridDriveSlots, true
@@ -686,7 +767,7 @@ func (o *ComputeBlade) GetHybridDriveSlotsOk() ([]EquipmentHybridDriveSlotRelati
 
 // HasHybridDriveSlots returns a boolean if a field has been set.
 func (o *ComputeBlade) HasHybridDriveSlots() bool {
-	if o != nil && o.HybridDriveSlots != nil {
+	if o != nil && IsNil(o.HybridDriveSlots) {
 		return true
 	}
 
@@ -698,68 +779,90 @@ func (o *ComputeBlade) SetHybridDriveSlots(v []EquipmentHybridDriveSlotRelations
 	o.HybridDriveSlots = v
 }
 
-// GetInventoryDeviceInfo returns the InventoryDeviceInfo field value if set, zero value otherwise.
+// GetInventoryDeviceInfo returns the InventoryDeviceInfo field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ComputeBlade) GetInventoryDeviceInfo() InventoryDeviceInfoRelationship {
-	if o == nil || o.InventoryDeviceInfo == nil {
+	if o == nil || IsNil(o.InventoryDeviceInfo.Get()) {
 		var ret InventoryDeviceInfoRelationship
 		return ret
 	}
-	return *o.InventoryDeviceInfo
+	return *o.InventoryDeviceInfo.Get()
 }
 
 // GetInventoryDeviceInfoOk returns a tuple with the InventoryDeviceInfo field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ComputeBlade) GetInventoryDeviceInfoOk() (*InventoryDeviceInfoRelationship, bool) {
-	if o == nil || o.InventoryDeviceInfo == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.InventoryDeviceInfo, true
+	return o.InventoryDeviceInfo.Get(), o.InventoryDeviceInfo.IsSet()
 }
 
 // HasInventoryDeviceInfo returns a boolean if a field has been set.
 func (o *ComputeBlade) HasInventoryDeviceInfo() bool {
-	if o != nil && o.InventoryDeviceInfo != nil {
+	if o != nil && o.InventoryDeviceInfo.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetInventoryDeviceInfo gets a reference to the given InventoryDeviceInfoRelationship and assigns it to the InventoryDeviceInfo field.
+// SetInventoryDeviceInfo gets a reference to the given NullableInventoryDeviceInfoRelationship and assigns it to the InventoryDeviceInfo field.
 func (o *ComputeBlade) SetInventoryDeviceInfo(v InventoryDeviceInfoRelationship) {
-	o.InventoryDeviceInfo = &v
+	o.InventoryDeviceInfo.Set(&v)
 }
 
-// GetLocatorLed returns the LocatorLed field value if set, zero value otherwise.
+// SetInventoryDeviceInfoNil sets the value for InventoryDeviceInfo to be an explicit nil
+func (o *ComputeBlade) SetInventoryDeviceInfoNil() {
+	o.InventoryDeviceInfo.Set(nil)
+}
+
+// UnsetInventoryDeviceInfo ensures that no value is present for InventoryDeviceInfo, not even an explicit nil
+func (o *ComputeBlade) UnsetInventoryDeviceInfo() {
+	o.InventoryDeviceInfo.Unset()
+}
+
+// GetLocatorLed returns the LocatorLed field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ComputeBlade) GetLocatorLed() EquipmentLocatorLedRelationship {
-	if o == nil || o.LocatorLed == nil {
+	if o == nil || IsNil(o.LocatorLed.Get()) {
 		var ret EquipmentLocatorLedRelationship
 		return ret
 	}
-	return *o.LocatorLed
+	return *o.LocatorLed.Get()
 }
 
 // GetLocatorLedOk returns a tuple with the LocatorLed field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ComputeBlade) GetLocatorLedOk() (*EquipmentLocatorLedRelationship, bool) {
-	if o == nil || o.LocatorLed == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.LocatorLed, true
+	return o.LocatorLed.Get(), o.LocatorLed.IsSet()
 }
 
 // HasLocatorLed returns a boolean if a field has been set.
 func (o *ComputeBlade) HasLocatorLed() bool {
-	if o != nil && o.LocatorLed != nil {
+	if o != nil && o.LocatorLed.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetLocatorLed gets a reference to the given EquipmentLocatorLedRelationship and assigns it to the LocatorLed field.
+// SetLocatorLed gets a reference to the given NullableEquipmentLocatorLedRelationship and assigns it to the LocatorLed field.
 func (o *ComputeBlade) SetLocatorLed(v EquipmentLocatorLedRelationship) {
-	o.LocatorLed = &v
+	o.LocatorLed.Set(&v)
+}
+
+// SetLocatorLedNil sets the value for LocatorLed to be an explicit nil
+func (o *ComputeBlade) SetLocatorLedNil() {
+	o.LocatorLed.Set(nil)
+}
+
+// UnsetLocatorLed ensures that no value is present for LocatorLed, not even an explicit nil
+func (o *ComputeBlade) UnsetLocatorLed() {
+	o.LocatorLed.Unset()
 }
 
 // GetMemoryArrays returns the MemoryArrays field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -775,7 +878,7 @@ func (o *ComputeBlade) GetMemoryArrays() []MemoryArrayRelationship {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ComputeBlade) GetMemoryArraysOk() ([]MemoryArrayRelationship, bool) {
-	if o == nil || o.MemoryArrays == nil {
+	if o == nil || IsNil(o.MemoryArrays) {
 		return nil, false
 	}
 	return o.MemoryArrays, true
@@ -783,7 +886,7 @@ func (o *ComputeBlade) GetMemoryArraysOk() ([]MemoryArrayRelationship, bool) {
 
 // HasMemoryArrays returns a boolean if a field has been set.
 func (o *ComputeBlade) HasMemoryArrays() bool {
-	if o != nil && o.MemoryArrays != nil {
+	if o != nil && IsNil(o.MemoryArrays) {
 		return true
 	}
 
@@ -808,7 +911,7 @@ func (o *ComputeBlade) GetPciDevices() []PciDeviceRelationship {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ComputeBlade) GetPciDevicesOk() ([]PciDeviceRelationship, bool) {
-	if o == nil || o.PciDevices == nil {
+	if o == nil || IsNil(o.PciDevices) {
 		return nil, false
 	}
 	return o.PciDevices, true
@@ -816,7 +919,7 @@ func (o *ComputeBlade) GetPciDevicesOk() ([]PciDeviceRelationship, bool) {
 
 // HasPciDevices returns a boolean if a field has been set.
 func (o *ComputeBlade) HasPciDevices() bool {
-	if o != nil && o.PciDevices != nil {
+	if o != nil && IsNil(o.PciDevices) {
 		return true
 	}
 
@@ -841,7 +944,7 @@ func (o *ComputeBlade) GetPciNodes() []PciNodeRelationship {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ComputeBlade) GetPciNodesOk() ([]PciNodeRelationship, bool) {
-	if o == nil || o.PciNodes == nil {
+	if o == nil || IsNil(o.PciNodes) {
 		return nil, false
 	}
 	return o.PciNodes, true
@@ -849,7 +952,7 @@ func (o *ComputeBlade) GetPciNodesOk() ([]PciNodeRelationship, bool) {
 
 // HasPciNodes returns a boolean if a field has been set.
 func (o *ComputeBlade) HasPciNodes() bool {
-	if o != nil && o.PciNodes != nil {
+	if o != nil && IsNil(o.PciNodes) {
 		return true
 	}
 
@@ -874,7 +977,7 @@ func (o *ComputeBlade) GetProcessors() []ProcessorUnitRelationship {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ComputeBlade) GetProcessorsOk() ([]ProcessorUnitRelationship, bool) {
-	if o == nil || o.Processors == nil {
+	if o == nil || IsNil(o.Processors) {
 		return nil, false
 	}
 	return o.Processors, true
@@ -882,7 +985,7 @@ func (o *ComputeBlade) GetProcessorsOk() ([]ProcessorUnitRelationship, bool) {
 
 // HasProcessors returns a boolean if a field has been set.
 func (o *ComputeBlade) HasProcessors() bool {
-	if o != nil && o.Processors != nil {
+	if o != nil && IsNil(o.Processors) {
 		return true
 	}
 
@@ -894,36 +997,47 @@ func (o *ComputeBlade) SetProcessors(v []ProcessorUnitRelationship) {
 	o.Processors = v
 }
 
-// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise.
+// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ComputeBlade) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil || IsNil(o.RegisteredDevice.Get()) {
 		var ret AssetDeviceRegistrationRelationship
 		return ret
 	}
-	return *o.RegisteredDevice
+	return *o.RegisteredDevice.Get()
 }
 
 // GetRegisteredDeviceOk returns a tuple with the RegisteredDevice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ComputeBlade) GetRegisteredDeviceOk() (*AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.RegisteredDevice, true
+	return o.RegisteredDevice.Get(), o.RegisteredDevice.IsSet()
 }
 
 // HasRegisteredDevice returns a boolean if a field has been set.
 func (o *ComputeBlade) HasRegisteredDevice() bool {
-	if o != nil && o.RegisteredDevice != nil {
+	if o != nil && o.RegisteredDevice.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRegisteredDevice gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
+// SetRegisteredDevice gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
 func (o *ComputeBlade) SetRegisteredDevice(v AssetDeviceRegistrationRelationship) {
-	o.RegisteredDevice = &v
+	o.RegisteredDevice.Set(&v)
+}
+
+// SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+func (o *ComputeBlade) SetRegisteredDeviceNil() {
+	o.RegisteredDevice.Set(nil)
+}
+
+// UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
+func (o *ComputeBlade) UnsetRegisteredDevice() {
+	o.RegisteredDevice.Unset()
 }
 
 // GetStorageControllers returns the StorageControllers field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -939,7 +1053,7 @@ func (o *ComputeBlade) GetStorageControllers() []StorageControllerRelationship {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ComputeBlade) GetStorageControllersOk() ([]StorageControllerRelationship, bool) {
-	if o == nil || o.StorageControllers == nil {
+	if o == nil || IsNil(o.StorageControllers) {
 		return nil, false
 	}
 	return o.StorageControllers, true
@@ -947,7 +1061,7 @@ func (o *ComputeBlade) GetStorageControllersOk() ([]StorageControllerRelationshi
 
 // HasStorageControllers returns a boolean if a field has been set.
 func (o *ComputeBlade) HasStorageControllers() bool {
-	if o != nil && o.StorageControllers != nil {
+	if o != nil && IsNil(o.StorageControllers) {
 		return true
 	}
 
@@ -972,7 +1086,7 @@ func (o *ComputeBlade) GetStorageEnclosures() []StorageEnclosureRelationship {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ComputeBlade) GetStorageEnclosuresOk() ([]StorageEnclosureRelationship, bool) {
-	if o == nil || o.StorageEnclosures == nil {
+	if o == nil || IsNil(o.StorageEnclosures) {
 		return nil, false
 	}
 	return o.StorageEnclosures, true
@@ -980,7 +1094,7 @@ func (o *ComputeBlade) GetStorageEnclosuresOk() ([]StorageEnclosureRelationship,
 
 // HasStorageEnclosures returns a boolean if a field has been set.
 func (o *ComputeBlade) HasStorageEnclosures() bool {
-	if o != nil && o.StorageEnclosures != nil {
+	if o != nil && IsNil(o.StorageEnclosures) {
 		return true
 	}
 
@@ -992,92 +1106,107 @@ func (o *ComputeBlade) SetStorageEnclosures(v []StorageEnclosureRelationship) {
 	o.StorageEnclosures = v
 }
 
-// GetTopSystem returns the TopSystem field value if set, zero value otherwise.
+// GetTopSystem returns the TopSystem field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ComputeBlade) GetTopSystem() TopSystemRelationship {
-	if o == nil || o.TopSystem == nil {
+	if o == nil || IsNil(o.TopSystem.Get()) {
 		var ret TopSystemRelationship
 		return ret
 	}
-	return *o.TopSystem
+	return *o.TopSystem.Get()
 }
 
 // GetTopSystemOk returns a tuple with the TopSystem field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ComputeBlade) GetTopSystemOk() (*TopSystemRelationship, bool) {
-	if o == nil || o.TopSystem == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.TopSystem, true
+	return o.TopSystem.Get(), o.TopSystem.IsSet()
 }
 
 // HasTopSystem returns a boolean if a field has been set.
 func (o *ComputeBlade) HasTopSystem() bool {
-	if o != nil && o.TopSystem != nil {
+	if o != nil && o.TopSystem.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetTopSystem gets a reference to the given TopSystemRelationship and assigns it to the TopSystem field.
+// SetTopSystem gets a reference to the given NullableTopSystemRelationship and assigns it to the TopSystem field.
 func (o *ComputeBlade) SetTopSystem(v TopSystemRelationship) {
-	o.TopSystem = &v
+	o.TopSystem.Set(&v)
+}
+
+// SetTopSystemNil sets the value for TopSystem to be an explicit nil
+func (o *ComputeBlade) SetTopSystemNil() {
+	o.TopSystem.Set(nil)
+}
+
+// UnsetTopSystem ensures that no value is present for TopSystem, not even an explicit nil
+func (o *ComputeBlade) UnsetTopSystem() {
+	o.TopSystem.Unset()
 }
 
 func (o ComputeBlade) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o ComputeBlade) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedComputePhysical, errComputePhysical := json.Marshal(o.ComputePhysical)
 	if errComputePhysical != nil {
-		return []byte{}, errComputePhysical
+		return map[string]interface{}{}, errComputePhysical
 	}
 	errComputePhysical = json.Unmarshal([]byte(serializedComputePhysical), &toSerialize)
 	if errComputePhysical != nil {
-		return []byte{}, errComputePhysical
+		return map[string]interface{}{}, errComputePhysical
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.ChassisId != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.ChassisId) {
 		toSerialize["ChassisId"] = o.ChassisId
 	}
-	if o.ScaledMode != nil {
+	if !IsNil(o.ScaledMode) {
 		toSerialize["ScaledMode"] = o.ScaledMode
 	}
-	if o.SlotId != nil {
+	if !IsNil(o.SlotId) {
 		toSerialize["SlotId"] = o.SlotId
 	}
 	if o.Adapters != nil {
 		toSerialize["Adapters"] = o.Adapters
 	}
-	if o.BiosBootmode != nil {
-		toSerialize["BiosBootmode"] = o.BiosBootmode
+	if o.BiosBootmode.IsSet() {
+		toSerialize["BiosBootmode"] = o.BiosBootmode.Get()
 	}
-	if o.BiosTokenSettings != nil {
-		toSerialize["BiosTokenSettings"] = o.BiosTokenSettings
+	if o.BiosTokenSettings.IsSet() {
+		toSerialize["BiosTokenSettings"] = o.BiosTokenSettings.Get()
 	}
 	if o.BiosUnits != nil {
 		toSerialize["BiosUnits"] = o.BiosUnits
 	}
-	if o.BiosVfSelectMemoryRasConfiguration != nil {
-		toSerialize["BiosVfSelectMemoryRasConfiguration"] = o.BiosVfSelectMemoryRasConfiguration
+	if o.BiosVfSelectMemoryRasConfiguration.IsSet() {
+		toSerialize["BiosVfSelectMemoryRasConfiguration"] = o.BiosVfSelectMemoryRasConfiguration.Get()
 	}
-	if o.Bmc != nil {
-		toSerialize["Bmc"] = o.Bmc
+	if o.Bmc.IsSet() {
+		toSerialize["Bmc"] = o.Bmc.Get()
 	}
-	if o.Board != nil {
-		toSerialize["Board"] = o.Board
+	if o.Board.IsSet() {
+		toSerialize["Board"] = o.Board.Get()
 	}
-	if o.BootDeviceBootmode != nil {
-		toSerialize["BootDeviceBootmode"] = o.BootDeviceBootmode
+	if o.BootDeviceBootmode.IsSet() {
+		toSerialize["BootDeviceBootmode"] = o.BootDeviceBootmode.Get()
 	}
 	if o.ComputePersonality != nil {
 		toSerialize["ComputePersonality"] = o.ComputePersonality
 	}
-	if o.EquipmentChassis != nil {
-		toSerialize["EquipmentChassis"] = o.EquipmentChassis
+	if o.EquipmentChassis.IsSet() {
+		toSerialize["EquipmentChassis"] = o.EquipmentChassis.Get()
 	}
 	if o.EquipmentIoExpanders != nil {
 		toSerialize["EquipmentIoExpanders"] = o.EquipmentIoExpanders
@@ -1091,11 +1220,11 @@ func (o ComputeBlade) MarshalJSON() ([]byte, error) {
 	if o.HybridDriveSlots != nil {
 		toSerialize["HybridDriveSlots"] = o.HybridDriveSlots
 	}
-	if o.InventoryDeviceInfo != nil {
-		toSerialize["InventoryDeviceInfo"] = o.InventoryDeviceInfo
+	if o.InventoryDeviceInfo.IsSet() {
+		toSerialize["InventoryDeviceInfo"] = o.InventoryDeviceInfo.Get()
 	}
-	if o.LocatorLed != nil {
-		toSerialize["LocatorLed"] = o.LocatorLed
+	if o.LocatorLed.IsSet() {
+		toSerialize["LocatorLed"] = o.LocatorLed.Get()
 	}
 	if o.MemoryArrays != nil {
 		toSerialize["MemoryArrays"] = o.MemoryArrays
@@ -1109,8 +1238,8 @@ func (o ComputeBlade) MarshalJSON() ([]byte, error) {
 	if o.Processors != nil {
 		toSerialize["Processors"] = o.Processors
 	}
-	if o.RegisteredDevice != nil {
-		toSerialize["RegisteredDevice"] = o.RegisteredDevice
+	if o.RegisteredDevice.IsSet() {
+		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
 	}
 	if o.StorageControllers != nil {
 		toSerialize["StorageControllers"] = o.StorageControllers
@@ -1118,18 +1247,40 @@ func (o ComputeBlade) MarshalJSON() ([]byte, error) {
 	if o.StorageEnclosures != nil {
 		toSerialize["StorageEnclosures"] = o.StorageEnclosures
 	}
-	if o.TopSystem != nil {
-		toSerialize["TopSystem"] = o.TopSystem
+	if o.TopSystem.IsSet() {
+		toSerialize["TopSystem"] = o.TopSystem.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *ComputeBlade) UnmarshalJSON(bytes []byte) (err error) {
+func (o *ComputeBlade) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type ComputeBladeWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -1142,18 +1293,18 @@ func (o *ComputeBlade) UnmarshalJSON(bytes []byte) (err error) {
 		// The slot number in the chassis that the blade is discovered in.
 		SlotId *int64 `json:"SlotId,omitempty"`
 		// An array of relationships to adapterUnit resources.
-		Adapters          []AdapterUnitRelationship      `json:"Adapters,omitempty"`
-		BiosBootmode      *BiosBootModeRelationship      `json:"BiosBootmode,omitempty"`
-		BiosTokenSettings *BiosTokenSettingsRelationship `json:"BiosTokenSettings,omitempty"`
+		Adapters          []AdapterUnitRelationship             `json:"Adapters,omitempty"`
+		BiosBootmode      NullableBiosBootModeRelationship      `json:"BiosBootmode,omitempty"`
+		BiosTokenSettings NullableBiosTokenSettingsRelationship `json:"BiosTokenSettings,omitempty"`
 		// An array of relationships to biosUnit resources.
-		BiosUnits                          []BiosUnitRelationship                          `json:"BiosUnits,omitempty"`
-		BiosVfSelectMemoryRasConfiguration *BiosVfSelectMemoryRasConfigurationRelationship `json:"BiosVfSelectMemoryRasConfiguration,omitempty"`
-		Bmc                                *ManagementControllerRelationship               `json:"Bmc,omitempty"`
-		Board                              *ComputeBoardRelationship                       `json:"Board,omitempty"`
-		BootDeviceBootmode                 *BootDeviceBootModeRelationship                 `json:"BootDeviceBootmode,omitempty"`
+		BiosUnits                          []BiosUnitRelationship                                 `json:"BiosUnits,omitempty"`
+		BiosVfSelectMemoryRasConfiguration NullableBiosVfSelectMemoryRasConfigurationRelationship `json:"BiosVfSelectMemoryRasConfiguration,omitempty"`
+		Bmc                                NullableManagementControllerRelationship               `json:"Bmc,omitempty"`
+		Board                              NullableComputeBoardRelationship                       `json:"Board,omitempty"`
+		BootDeviceBootmode                 NullableBootDeviceBootModeRelationship                 `json:"BootDeviceBootmode,omitempty"`
 		// An array of relationships to computePersonality resources.
-		ComputePersonality []ComputePersonalityRelationship `json:"ComputePersonality,omitempty"`
-		EquipmentChassis   *EquipmentChassisRelationship    `json:"EquipmentChassis,omitempty"`
+		ComputePersonality []ComputePersonalityRelationship     `json:"ComputePersonality,omitempty"`
+		EquipmentChassis   NullableEquipmentChassisRelationship `json:"EquipmentChassis,omitempty"`
 		// An array of relationships to equipmentIoExpander resources.
 		EquipmentIoExpanders []EquipmentIoExpanderRelationship `json:"EquipmentIoExpanders,omitempty"`
 		// An array of relationships to inventoryGenericInventoryHolder resources.
@@ -1161,9 +1312,9 @@ func (o *ComputeBlade) UnmarshalJSON(bytes []byte) (err error) {
 		// An array of relationships to graphicsCard resources.
 		GraphicsCards []GraphicsCardRelationship `json:"GraphicsCards,omitempty"`
 		// An array of relationships to equipmentHybridDriveSlot resources.
-		HybridDriveSlots    []EquipmentHybridDriveSlotRelationship `json:"HybridDriveSlots,omitempty"`
-		InventoryDeviceInfo *InventoryDeviceInfoRelationship       `json:"InventoryDeviceInfo,omitempty"`
-		LocatorLed          *EquipmentLocatorLedRelationship       `json:"LocatorLed,omitempty"`
+		HybridDriveSlots    []EquipmentHybridDriveSlotRelationship  `json:"HybridDriveSlots,omitempty"`
+		InventoryDeviceInfo NullableInventoryDeviceInfoRelationship `json:"InventoryDeviceInfo,omitempty"`
+		LocatorLed          NullableEquipmentLocatorLedRelationship `json:"LocatorLed,omitempty"`
 		// An array of relationships to memoryArray resources.
 		MemoryArrays []MemoryArrayRelationship `json:"MemoryArrays,omitempty"`
 		// An array of relationships to pciDevice resources.
@@ -1171,18 +1322,18 @@ func (o *ComputeBlade) UnmarshalJSON(bytes []byte) (err error) {
 		// An array of relationships to pciNode resources.
 		PciNodes []PciNodeRelationship `json:"PciNodes,omitempty"`
 		// An array of relationships to processorUnit resources.
-		Processors       []ProcessorUnitRelationship          `json:"Processors,omitempty"`
-		RegisteredDevice *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+		Processors       []ProcessorUnitRelationship                 `json:"Processors,omitempty"`
+		RegisteredDevice NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 		// An array of relationships to storageController resources.
 		StorageControllers []StorageControllerRelationship `json:"StorageControllers,omitempty"`
 		// An array of relationships to storageEnclosure resources.
 		StorageEnclosures []StorageEnclosureRelationship `json:"StorageEnclosures,omitempty"`
-		TopSystem         *TopSystemRelationship         `json:"TopSystem,omitempty"`
+		TopSystem         NullableTopSystemRelationship  `json:"TopSystem,omitempty"`
 	}
 
 	varComputeBladeWithoutEmbeddedStruct := ComputeBladeWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varComputeBladeWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varComputeBladeWithoutEmbeddedStruct)
 	if err == nil {
 		varComputeBlade := _ComputeBlade{}
 		varComputeBlade.ClassId = varComputeBladeWithoutEmbeddedStruct.ClassId
@@ -1221,7 +1372,7 @@ func (o *ComputeBlade) UnmarshalJSON(bytes []byte) (err error) {
 
 	varComputeBlade := _ComputeBlade{}
 
-	err = json.Unmarshal(bytes, &varComputeBlade)
+	err = json.Unmarshal(data, &varComputeBlade)
 	if err == nil {
 		o.ComputePhysical = varComputeBlade.ComputePhysical
 	} else {
@@ -1230,7 +1381,7 @@ func (o *ComputeBlade) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "ChassisId")

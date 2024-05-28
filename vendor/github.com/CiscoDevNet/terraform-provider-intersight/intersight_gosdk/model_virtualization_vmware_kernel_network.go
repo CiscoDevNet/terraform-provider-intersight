@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the VirtualizationVmwareKernelNetwork type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &VirtualizationVmwareKernelNetwork{}
 
 // VirtualizationVmwareKernelNetwork Details of VMware Kernel Network.
 type VirtualizationVmwareKernelNetwork struct {
@@ -46,10 +50,10 @@ type VirtualizationVmwareKernelNetwork struct {
 	// Indicates that vsphere replication is enabled on this kernel network.
 	VsphereReplication *bool `json:"VsphereReplication,omitempty"`
 	// Indicates that vsphere replication nfc is enabled on this kernel network.
-	VsphereReplicationNfc *bool                                               `json:"VsphereReplicationNfc,omitempty"`
-	DistributedNetwork    *VirtualizationVmwareDistributedNetworkRelationship `json:"DistributedNetwork,omitempty"`
-	Host                  *VirtualizationVmwareHostRelationship               `json:"Host,omitempty"`
-	Network               *VirtualizationVmwareNetworkRelationship            `json:"Network,omitempty"`
+	VsphereReplicationNfc *bool                                                      `json:"VsphereReplicationNfc,omitempty"`
+	DistributedNetwork    NullableVirtualizationVmwareDistributedNetworkRelationship `json:"DistributedNetwork,omitempty"`
+	Host                  NullableVirtualizationVmwareHostRelationship               `json:"Host,omitempty"`
+	Network               NullableVirtualizationVmwareNetworkRelationship            `json:"Network,omitempty"`
 	AdditionalProperties  map[string]interface{}
 }
 
@@ -128,7 +132,7 @@ func (o *VirtualizationVmwareKernelNetwork) SetObjectType(v string) {
 
 // GetFaultToleranceLogging returns the FaultToleranceLogging field value if set, zero value otherwise.
 func (o *VirtualizationVmwareKernelNetwork) GetFaultToleranceLogging() bool {
-	if o == nil || o.FaultToleranceLogging == nil {
+	if o == nil || IsNil(o.FaultToleranceLogging) {
 		var ret bool
 		return ret
 	}
@@ -138,7 +142,7 @@ func (o *VirtualizationVmwareKernelNetwork) GetFaultToleranceLogging() bool {
 // GetFaultToleranceLoggingOk returns a tuple with the FaultToleranceLogging field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationVmwareKernelNetwork) GetFaultToleranceLoggingOk() (*bool, bool) {
-	if o == nil || o.FaultToleranceLogging == nil {
+	if o == nil || IsNil(o.FaultToleranceLogging) {
 		return nil, false
 	}
 	return o.FaultToleranceLogging, true
@@ -146,7 +150,7 @@ func (o *VirtualizationVmwareKernelNetwork) GetFaultToleranceLoggingOk() (*bool,
 
 // HasFaultToleranceLogging returns a boolean if a field has been set.
 func (o *VirtualizationVmwareKernelNetwork) HasFaultToleranceLogging() bool {
-	if o != nil && o.FaultToleranceLogging != nil {
+	if o != nil && !IsNil(o.FaultToleranceLogging) {
 		return true
 	}
 
@@ -171,7 +175,7 @@ func (o *VirtualizationVmwareKernelNetwork) GetIpAddress() []string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *VirtualizationVmwareKernelNetwork) GetIpAddressOk() ([]string, bool) {
-	if o == nil || o.IpAddress == nil {
+	if o == nil || IsNil(o.IpAddress) {
 		return nil, false
 	}
 	return o.IpAddress, true
@@ -179,7 +183,7 @@ func (o *VirtualizationVmwareKernelNetwork) GetIpAddressOk() ([]string, bool) {
 
 // HasIpAddress returns a boolean if a field has been set.
 func (o *VirtualizationVmwareKernelNetwork) HasIpAddress() bool {
-	if o != nil && o.IpAddress != nil {
+	if o != nil && IsNil(o.IpAddress) {
 		return true
 	}
 
@@ -193,7 +197,7 @@ func (o *VirtualizationVmwareKernelNetwork) SetIpAddress(v []string) {
 
 // GetMacAddress returns the MacAddress field value if set, zero value otherwise.
 func (o *VirtualizationVmwareKernelNetwork) GetMacAddress() string {
-	if o == nil || o.MacAddress == nil {
+	if o == nil || IsNil(o.MacAddress) {
 		var ret string
 		return ret
 	}
@@ -203,7 +207,7 @@ func (o *VirtualizationVmwareKernelNetwork) GetMacAddress() string {
 // GetMacAddressOk returns a tuple with the MacAddress field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationVmwareKernelNetwork) GetMacAddressOk() (*string, bool) {
-	if o == nil || o.MacAddress == nil {
+	if o == nil || IsNil(o.MacAddress) {
 		return nil, false
 	}
 	return o.MacAddress, true
@@ -211,7 +215,7 @@ func (o *VirtualizationVmwareKernelNetwork) GetMacAddressOk() (*string, bool) {
 
 // HasMacAddress returns a boolean if a field has been set.
 func (o *VirtualizationVmwareKernelNetwork) HasMacAddress() bool {
-	if o != nil && o.MacAddress != nil {
+	if o != nil && !IsNil(o.MacAddress) {
 		return true
 	}
 
@@ -225,7 +229,7 @@ func (o *VirtualizationVmwareKernelNetwork) SetMacAddress(v string) {
 
 // GetManagement returns the Management field value if set, zero value otherwise.
 func (o *VirtualizationVmwareKernelNetwork) GetManagement() bool {
-	if o == nil || o.Management == nil {
+	if o == nil || IsNil(o.Management) {
 		var ret bool
 		return ret
 	}
@@ -235,7 +239,7 @@ func (o *VirtualizationVmwareKernelNetwork) GetManagement() bool {
 // GetManagementOk returns a tuple with the Management field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationVmwareKernelNetwork) GetManagementOk() (*bool, bool) {
-	if o == nil || o.Management == nil {
+	if o == nil || IsNil(o.Management) {
 		return nil, false
 	}
 	return o.Management, true
@@ -243,7 +247,7 @@ func (o *VirtualizationVmwareKernelNetwork) GetManagementOk() (*bool, bool) {
 
 // HasManagement returns a boolean if a field has been set.
 func (o *VirtualizationVmwareKernelNetwork) HasManagement() bool {
-	if o != nil && o.Management != nil {
+	if o != nil && !IsNil(o.Management) {
 		return true
 	}
 
@@ -257,7 +261,7 @@ func (o *VirtualizationVmwareKernelNetwork) SetManagement(v bool) {
 
 // GetMtu returns the Mtu field value if set, zero value otherwise.
 func (o *VirtualizationVmwareKernelNetwork) GetMtu() int64 {
-	if o == nil || o.Mtu == nil {
+	if o == nil || IsNil(o.Mtu) {
 		var ret int64
 		return ret
 	}
@@ -267,7 +271,7 @@ func (o *VirtualizationVmwareKernelNetwork) GetMtu() int64 {
 // GetMtuOk returns a tuple with the Mtu field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationVmwareKernelNetwork) GetMtuOk() (*int64, bool) {
-	if o == nil || o.Mtu == nil {
+	if o == nil || IsNil(o.Mtu) {
 		return nil, false
 	}
 	return o.Mtu, true
@@ -275,7 +279,7 @@ func (o *VirtualizationVmwareKernelNetwork) GetMtuOk() (*int64, bool) {
 
 // HasMtu returns a boolean if a field has been set.
 func (o *VirtualizationVmwareKernelNetwork) HasMtu() bool {
-	if o != nil && o.Mtu != nil {
+	if o != nil && !IsNil(o.Mtu) {
 		return true
 	}
 
@@ -289,7 +293,7 @@ func (o *VirtualizationVmwareKernelNetwork) SetMtu(v int64) {
 
 // GetSubnetMask returns the SubnetMask field value if set, zero value otherwise.
 func (o *VirtualizationVmwareKernelNetwork) GetSubnetMask() string {
-	if o == nil || o.SubnetMask == nil {
+	if o == nil || IsNil(o.SubnetMask) {
 		var ret string
 		return ret
 	}
@@ -299,7 +303,7 @@ func (o *VirtualizationVmwareKernelNetwork) GetSubnetMask() string {
 // GetSubnetMaskOk returns a tuple with the SubnetMask field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationVmwareKernelNetwork) GetSubnetMaskOk() (*string, bool) {
-	if o == nil || o.SubnetMask == nil {
+	if o == nil || IsNil(o.SubnetMask) {
 		return nil, false
 	}
 	return o.SubnetMask, true
@@ -307,7 +311,7 @@ func (o *VirtualizationVmwareKernelNetwork) GetSubnetMaskOk() (*string, bool) {
 
 // HasSubnetMask returns a boolean if a field has been set.
 func (o *VirtualizationVmwareKernelNetwork) HasSubnetMask() bool {
-	if o != nil && o.SubnetMask != nil {
+	if o != nil && !IsNil(o.SubnetMask) {
 		return true
 	}
 
@@ -321,7 +325,7 @@ func (o *VirtualizationVmwareKernelNetwork) SetSubnetMask(v string) {
 
 // GetTcpIpStack returns the TcpIpStack field value if set, zero value otherwise.
 func (o *VirtualizationVmwareKernelNetwork) GetTcpIpStack() string {
-	if o == nil || o.TcpIpStack == nil {
+	if o == nil || IsNil(o.TcpIpStack) {
 		var ret string
 		return ret
 	}
@@ -331,7 +335,7 @@ func (o *VirtualizationVmwareKernelNetwork) GetTcpIpStack() string {
 // GetTcpIpStackOk returns a tuple with the TcpIpStack field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationVmwareKernelNetwork) GetTcpIpStackOk() (*string, bool) {
-	if o == nil || o.TcpIpStack == nil {
+	if o == nil || IsNil(o.TcpIpStack) {
 		return nil, false
 	}
 	return o.TcpIpStack, true
@@ -339,7 +343,7 @@ func (o *VirtualizationVmwareKernelNetwork) GetTcpIpStackOk() (*string, bool) {
 
 // HasTcpIpStack returns a boolean if a field has been set.
 func (o *VirtualizationVmwareKernelNetwork) HasTcpIpStack() bool {
-	if o != nil && o.TcpIpStack != nil {
+	if o != nil && !IsNil(o.TcpIpStack) {
 		return true
 	}
 
@@ -353,7 +357,7 @@ func (o *VirtualizationVmwareKernelNetwork) SetTcpIpStack(v string) {
 
 // GetVmotion returns the Vmotion field value if set, zero value otherwise.
 func (o *VirtualizationVmwareKernelNetwork) GetVmotion() bool {
-	if o == nil || o.Vmotion == nil {
+	if o == nil || IsNil(o.Vmotion) {
 		var ret bool
 		return ret
 	}
@@ -363,7 +367,7 @@ func (o *VirtualizationVmwareKernelNetwork) GetVmotion() bool {
 // GetVmotionOk returns a tuple with the Vmotion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationVmwareKernelNetwork) GetVmotionOk() (*bool, bool) {
-	if o == nil || o.Vmotion == nil {
+	if o == nil || IsNil(o.Vmotion) {
 		return nil, false
 	}
 	return o.Vmotion, true
@@ -371,7 +375,7 @@ func (o *VirtualizationVmwareKernelNetwork) GetVmotionOk() (*bool, bool) {
 
 // HasVmotion returns a boolean if a field has been set.
 func (o *VirtualizationVmwareKernelNetwork) HasVmotion() bool {
-	if o != nil && o.Vmotion != nil {
+	if o != nil && !IsNil(o.Vmotion) {
 		return true
 	}
 
@@ -385,7 +389,7 @@ func (o *VirtualizationVmwareKernelNetwork) SetVmotion(v bool) {
 
 // GetVsan returns the Vsan field value if set, zero value otherwise.
 func (o *VirtualizationVmwareKernelNetwork) GetVsan() bool {
-	if o == nil || o.Vsan == nil {
+	if o == nil || IsNil(o.Vsan) {
 		var ret bool
 		return ret
 	}
@@ -395,7 +399,7 @@ func (o *VirtualizationVmwareKernelNetwork) GetVsan() bool {
 // GetVsanOk returns a tuple with the Vsan field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationVmwareKernelNetwork) GetVsanOk() (*bool, bool) {
-	if o == nil || o.Vsan == nil {
+	if o == nil || IsNil(o.Vsan) {
 		return nil, false
 	}
 	return o.Vsan, true
@@ -403,7 +407,7 @@ func (o *VirtualizationVmwareKernelNetwork) GetVsanOk() (*bool, bool) {
 
 // HasVsan returns a boolean if a field has been set.
 func (o *VirtualizationVmwareKernelNetwork) HasVsan() bool {
-	if o != nil && o.Vsan != nil {
+	if o != nil && !IsNil(o.Vsan) {
 		return true
 	}
 
@@ -417,7 +421,7 @@ func (o *VirtualizationVmwareKernelNetwork) SetVsan(v bool) {
 
 // GetVsphereProvisioning returns the VsphereProvisioning field value if set, zero value otherwise.
 func (o *VirtualizationVmwareKernelNetwork) GetVsphereProvisioning() bool {
-	if o == nil || o.VsphereProvisioning == nil {
+	if o == nil || IsNil(o.VsphereProvisioning) {
 		var ret bool
 		return ret
 	}
@@ -427,7 +431,7 @@ func (o *VirtualizationVmwareKernelNetwork) GetVsphereProvisioning() bool {
 // GetVsphereProvisioningOk returns a tuple with the VsphereProvisioning field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationVmwareKernelNetwork) GetVsphereProvisioningOk() (*bool, bool) {
-	if o == nil || o.VsphereProvisioning == nil {
+	if o == nil || IsNil(o.VsphereProvisioning) {
 		return nil, false
 	}
 	return o.VsphereProvisioning, true
@@ -435,7 +439,7 @@ func (o *VirtualizationVmwareKernelNetwork) GetVsphereProvisioningOk() (*bool, b
 
 // HasVsphereProvisioning returns a boolean if a field has been set.
 func (o *VirtualizationVmwareKernelNetwork) HasVsphereProvisioning() bool {
-	if o != nil && o.VsphereProvisioning != nil {
+	if o != nil && !IsNil(o.VsphereProvisioning) {
 		return true
 	}
 
@@ -449,7 +453,7 @@ func (o *VirtualizationVmwareKernelNetwork) SetVsphereProvisioning(v bool) {
 
 // GetVsphereReplication returns the VsphereReplication field value if set, zero value otherwise.
 func (o *VirtualizationVmwareKernelNetwork) GetVsphereReplication() bool {
-	if o == nil || o.VsphereReplication == nil {
+	if o == nil || IsNil(o.VsphereReplication) {
 		var ret bool
 		return ret
 	}
@@ -459,7 +463,7 @@ func (o *VirtualizationVmwareKernelNetwork) GetVsphereReplication() bool {
 // GetVsphereReplicationOk returns a tuple with the VsphereReplication field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationVmwareKernelNetwork) GetVsphereReplicationOk() (*bool, bool) {
-	if o == nil || o.VsphereReplication == nil {
+	if o == nil || IsNil(o.VsphereReplication) {
 		return nil, false
 	}
 	return o.VsphereReplication, true
@@ -467,7 +471,7 @@ func (o *VirtualizationVmwareKernelNetwork) GetVsphereReplicationOk() (*bool, bo
 
 // HasVsphereReplication returns a boolean if a field has been set.
 func (o *VirtualizationVmwareKernelNetwork) HasVsphereReplication() bool {
-	if o != nil && o.VsphereReplication != nil {
+	if o != nil && !IsNil(o.VsphereReplication) {
 		return true
 	}
 
@@ -481,7 +485,7 @@ func (o *VirtualizationVmwareKernelNetwork) SetVsphereReplication(v bool) {
 
 // GetVsphereReplicationNfc returns the VsphereReplicationNfc field value if set, zero value otherwise.
 func (o *VirtualizationVmwareKernelNetwork) GetVsphereReplicationNfc() bool {
-	if o == nil || o.VsphereReplicationNfc == nil {
+	if o == nil || IsNil(o.VsphereReplicationNfc) {
 		var ret bool
 		return ret
 	}
@@ -491,7 +495,7 @@ func (o *VirtualizationVmwareKernelNetwork) GetVsphereReplicationNfc() bool {
 // GetVsphereReplicationNfcOk returns a tuple with the VsphereReplicationNfc field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationVmwareKernelNetwork) GetVsphereReplicationNfcOk() (*bool, bool) {
-	if o == nil || o.VsphereReplicationNfc == nil {
+	if o == nil || IsNil(o.VsphereReplicationNfc) {
 		return nil, false
 	}
 	return o.VsphereReplicationNfc, true
@@ -499,7 +503,7 @@ func (o *VirtualizationVmwareKernelNetwork) GetVsphereReplicationNfcOk() (*bool,
 
 // HasVsphereReplicationNfc returns a boolean if a field has been set.
 func (o *VirtualizationVmwareKernelNetwork) HasVsphereReplicationNfc() bool {
-	if o != nil && o.VsphereReplicationNfc != nil {
+	if o != nil && !IsNil(o.VsphereReplicationNfc) {
 		return true
 	}
 
@@ -511,172 +515,231 @@ func (o *VirtualizationVmwareKernelNetwork) SetVsphereReplicationNfc(v bool) {
 	o.VsphereReplicationNfc = &v
 }
 
-// GetDistributedNetwork returns the DistributedNetwork field value if set, zero value otherwise.
+// GetDistributedNetwork returns the DistributedNetwork field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *VirtualizationVmwareKernelNetwork) GetDistributedNetwork() VirtualizationVmwareDistributedNetworkRelationship {
-	if o == nil || o.DistributedNetwork == nil {
+	if o == nil || IsNil(o.DistributedNetwork.Get()) {
 		var ret VirtualizationVmwareDistributedNetworkRelationship
 		return ret
 	}
-	return *o.DistributedNetwork
+	return *o.DistributedNetwork.Get()
 }
 
 // GetDistributedNetworkOk returns a tuple with the DistributedNetwork field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *VirtualizationVmwareKernelNetwork) GetDistributedNetworkOk() (*VirtualizationVmwareDistributedNetworkRelationship, bool) {
-	if o == nil || o.DistributedNetwork == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.DistributedNetwork, true
+	return o.DistributedNetwork.Get(), o.DistributedNetwork.IsSet()
 }
 
 // HasDistributedNetwork returns a boolean if a field has been set.
 func (o *VirtualizationVmwareKernelNetwork) HasDistributedNetwork() bool {
-	if o != nil && o.DistributedNetwork != nil {
+	if o != nil && o.DistributedNetwork.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetDistributedNetwork gets a reference to the given VirtualizationVmwareDistributedNetworkRelationship and assigns it to the DistributedNetwork field.
+// SetDistributedNetwork gets a reference to the given NullableVirtualizationVmwareDistributedNetworkRelationship and assigns it to the DistributedNetwork field.
 func (o *VirtualizationVmwareKernelNetwork) SetDistributedNetwork(v VirtualizationVmwareDistributedNetworkRelationship) {
-	o.DistributedNetwork = &v
+	o.DistributedNetwork.Set(&v)
 }
 
-// GetHost returns the Host field value if set, zero value otherwise.
+// SetDistributedNetworkNil sets the value for DistributedNetwork to be an explicit nil
+func (o *VirtualizationVmwareKernelNetwork) SetDistributedNetworkNil() {
+	o.DistributedNetwork.Set(nil)
+}
+
+// UnsetDistributedNetwork ensures that no value is present for DistributedNetwork, not even an explicit nil
+func (o *VirtualizationVmwareKernelNetwork) UnsetDistributedNetwork() {
+	o.DistributedNetwork.Unset()
+}
+
+// GetHost returns the Host field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *VirtualizationVmwareKernelNetwork) GetHost() VirtualizationVmwareHostRelationship {
-	if o == nil || o.Host == nil {
+	if o == nil || IsNil(o.Host.Get()) {
 		var ret VirtualizationVmwareHostRelationship
 		return ret
 	}
-	return *o.Host
+	return *o.Host.Get()
 }
 
 // GetHostOk returns a tuple with the Host field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *VirtualizationVmwareKernelNetwork) GetHostOk() (*VirtualizationVmwareHostRelationship, bool) {
-	if o == nil || o.Host == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Host, true
+	return o.Host.Get(), o.Host.IsSet()
 }
 
 // HasHost returns a boolean if a field has been set.
 func (o *VirtualizationVmwareKernelNetwork) HasHost() bool {
-	if o != nil && o.Host != nil {
+	if o != nil && o.Host.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetHost gets a reference to the given VirtualizationVmwareHostRelationship and assigns it to the Host field.
+// SetHost gets a reference to the given NullableVirtualizationVmwareHostRelationship and assigns it to the Host field.
 func (o *VirtualizationVmwareKernelNetwork) SetHost(v VirtualizationVmwareHostRelationship) {
-	o.Host = &v
+	o.Host.Set(&v)
 }
 
-// GetNetwork returns the Network field value if set, zero value otherwise.
+// SetHostNil sets the value for Host to be an explicit nil
+func (o *VirtualizationVmwareKernelNetwork) SetHostNil() {
+	o.Host.Set(nil)
+}
+
+// UnsetHost ensures that no value is present for Host, not even an explicit nil
+func (o *VirtualizationVmwareKernelNetwork) UnsetHost() {
+	o.Host.Unset()
+}
+
+// GetNetwork returns the Network field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *VirtualizationVmwareKernelNetwork) GetNetwork() VirtualizationVmwareNetworkRelationship {
-	if o == nil || o.Network == nil {
+	if o == nil || IsNil(o.Network.Get()) {
 		var ret VirtualizationVmwareNetworkRelationship
 		return ret
 	}
-	return *o.Network
+	return *o.Network.Get()
 }
 
 // GetNetworkOk returns a tuple with the Network field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *VirtualizationVmwareKernelNetwork) GetNetworkOk() (*VirtualizationVmwareNetworkRelationship, bool) {
-	if o == nil || o.Network == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Network, true
+	return o.Network.Get(), o.Network.IsSet()
 }
 
 // HasNetwork returns a boolean if a field has been set.
 func (o *VirtualizationVmwareKernelNetwork) HasNetwork() bool {
-	if o != nil && o.Network != nil {
+	if o != nil && o.Network.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetNetwork gets a reference to the given VirtualizationVmwareNetworkRelationship and assigns it to the Network field.
+// SetNetwork gets a reference to the given NullableVirtualizationVmwareNetworkRelationship and assigns it to the Network field.
 func (o *VirtualizationVmwareKernelNetwork) SetNetwork(v VirtualizationVmwareNetworkRelationship) {
-	o.Network = &v
+	o.Network.Set(&v)
+}
+
+// SetNetworkNil sets the value for Network to be an explicit nil
+func (o *VirtualizationVmwareKernelNetwork) SetNetworkNil() {
+	o.Network.Set(nil)
+}
+
+// UnsetNetwork ensures that no value is present for Network, not even an explicit nil
+func (o *VirtualizationVmwareKernelNetwork) UnsetNetwork() {
+	o.Network.Unset()
 }
 
 func (o VirtualizationVmwareKernelNetwork) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o VirtualizationVmwareKernelNetwork) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedVirtualizationBaseKernelNetwork, errVirtualizationBaseKernelNetwork := json.Marshal(o.VirtualizationBaseKernelNetwork)
 	if errVirtualizationBaseKernelNetwork != nil {
-		return []byte{}, errVirtualizationBaseKernelNetwork
+		return map[string]interface{}{}, errVirtualizationBaseKernelNetwork
 	}
 	errVirtualizationBaseKernelNetwork = json.Unmarshal([]byte(serializedVirtualizationBaseKernelNetwork), &toSerialize)
 	if errVirtualizationBaseKernelNetwork != nil {
-		return []byte{}, errVirtualizationBaseKernelNetwork
+		return map[string]interface{}{}, errVirtualizationBaseKernelNetwork
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.FaultToleranceLogging != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.FaultToleranceLogging) {
 		toSerialize["FaultToleranceLogging"] = o.FaultToleranceLogging
 	}
 	if o.IpAddress != nil {
 		toSerialize["IpAddress"] = o.IpAddress
 	}
-	if o.MacAddress != nil {
+	if !IsNil(o.MacAddress) {
 		toSerialize["MacAddress"] = o.MacAddress
 	}
-	if o.Management != nil {
+	if !IsNil(o.Management) {
 		toSerialize["Management"] = o.Management
 	}
-	if o.Mtu != nil {
+	if !IsNil(o.Mtu) {
 		toSerialize["Mtu"] = o.Mtu
 	}
-	if o.SubnetMask != nil {
+	if !IsNil(o.SubnetMask) {
 		toSerialize["SubnetMask"] = o.SubnetMask
 	}
-	if o.TcpIpStack != nil {
+	if !IsNil(o.TcpIpStack) {
 		toSerialize["TcpIpStack"] = o.TcpIpStack
 	}
-	if o.Vmotion != nil {
+	if !IsNil(o.Vmotion) {
 		toSerialize["Vmotion"] = o.Vmotion
 	}
-	if o.Vsan != nil {
+	if !IsNil(o.Vsan) {
 		toSerialize["Vsan"] = o.Vsan
 	}
-	if o.VsphereProvisioning != nil {
+	if !IsNil(o.VsphereProvisioning) {
 		toSerialize["VsphereProvisioning"] = o.VsphereProvisioning
 	}
-	if o.VsphereReplication != nil {
+	if !IsNil(o.VsphereReplication) {
 		toSerialize["VsphereReplication"] = o.VsphereReplication
 	}
-	if o.VsphereReplicationNfc != nil {
+	if !IsNil(o.VsphereReplicationNfc) {
 		toSerialize["VsphereReplicationNfc"] = o.VsphereReplicationNfc
 	}
-	if o.DistributedNetwork != nil {
-		toSerialize["DistributedNetwork"] = o.DistributedNetwork
+	if o.DistributedNetwork.IsSet() {
+		toSerialize["DistributedNetwork"] = o.DistributedNetwork.Get()
 	}
-	if o.Host != nil {
-		toSerialize["Host"] = o.Host
+	if o.Host.IsSet() {
+		toSerialize["Host"] = o.Host.Get()
 	}
-	if o.Network != nil {
-		toSerialize["Network"] = o.Network
+	if o.Network.IsSet() {
+		toSerialize["Network"] = o.Network.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *VirtualizationVmwareKernelNetwork) UnmarshalJSON(bytes []byte) (err error) {
+func (o *VirtualizationVmwareKernelNetwork) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type VirtualizationVmwareKernelNetworkWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -704,15 +767,15 @@ func (o *VirtualizationVmwareKernelNetwork) UnmarshalJSON(bytes []byte) (err err
 		// Indicates that vsphere replication is enabled on this kernel network.
 		VsphereReplication *bool `json:"VsphereReplication,omitempty"`
 		// Indicates that vsphere replication nfc is enabled on this kernel network.
-		VsphereReplicationNfc *bool                                               `json:"VsphereReplicationNfc,omitempty"`
-		DistributedNetwork    *VirtualizationVmwareDistributedNetworkRelationship `json:"DistributedNetwork,omitempty"`
-		Host                  *VirtualizationVmwareHostRelationship               `json:"Host,omitempty"`
-		Network               *VirtualizationVmwareNetworkRelationship            `json:"Network,omitempty"`
+		VsphereReplicationNfc *bool                                                      `json:"VsphereReplicationNfc,omitempty"`
+		DistributedNetwork    NullableVirtualizationVmwareDistributedNetworkRelationship `json:"DistributedNetwork,omitempty"`
+		Host                  NullableVirtualizationVmwareHostRelationship               `json:"Host,omitempty"`
+		Network               NullableVirtualizationVmwareNetworkRelationship            `json:"Network,omitempty"`
 	}
 
 	varVirtualizationVmwareKernelNetworkWithoutEmbeddedStruct := VirtualizationVmwareKernelNetworkWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varVirtualizationVmwareKernelNetworkWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varVirtualizationVmwareKernelNetworkWithoutEmbeddedStruct)
 	if err == nil {
 		varVirtualizationVmwareKernelNetwork := _VirtualizationVmwareKernelNetwork{}
 		varVirtualizationVmwareKernelNetwork.ClassId = varVirtualizationVmwareKernelNetworkWithoutEmbeddedStruct.ClassId
@@ -739,7 +802,7 @@ func (o *VirtualizationVmwareKernelNetwork) UnmarshalJSON(bytes []byte) (err err
 
 	varVirtualizationVmwareKernelNetwork := _VirtualizationVmwareKernelNetwork{}
 
-	err = json.Unmarshal(bytes, &varVirtualizationVmwareKernelNetwork)
+	err = json.Unmarshal(data, &varVirtualizationVmwareKernelNetwork)
 	if err == nil {
 		o.VirtualizationBaseKernelNetwork = varVirtualizationVmwareKernelNetwork.VirtualizationBaseKernelNetwork
 	} else {
@@ -748,7 +811,7 @@ func (o *VirtualizationVmwareKernelNetwork) UnmarshalJSON(bytes []byte) (err err
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "FaultToleranceLogging")

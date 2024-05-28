@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the TamEolAdvisoryDetails type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &TamEolAdvisoryDetails{}
 
 // TamEolAdvisoryDetails Details pertaining to the milestone defined by an end-of-life (EOL) milestone advisory.
 type TamEolAdvisoryDetails struct {
@@ -117,7 +121,7 @@ func (o *TamEolAdvisoryDetails) GetAllMilestones() []TamMilestone {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *TamEolAdvisoryDetails) GetAllMilestonesOk() ([]TamMilestone, bool) {
-	if o == nil || o.AllMilestones == nil {
+	if o == nil || IsNil(o.AllMilestones) {
 		return nil, false
 	}
 	return o.AllMilestones, true
@@ -125,7 +129,7 @@ func (o *TamEolAdvisoryDetails) GetAllMilestonesOk() ([]TamMilestone, bool) {
 
 // HasAllMilestones returns a boolean if a field has been set.
 func (o *TamEolAdvisoryDetails) HasAllMilestones() bool {
-	if o != nil && o.AllMilestones != nil {
+	if o != nil && IsNil(o.AllMilestones) {
 		return true
 	}
 
@@ -139,7 +143,7 @@ func (o *TamEolAdvisoryDetails) SetAllMilestones(v []TamMilestone) {
 
 // GetMilestone returns the Milestone field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *TamEolAdvisoryDetails) GetMilestone() TamMilestone {
-	if o == nil || o.Milestone.Get() == nil {
+	if o == nil || IsNil(o.Milestone.Get()) {
 		var ret TamMilestone
 		return ret
 	}
@@ -182,7 +186,7 @@ func (o *TamEolAdvisoryDetails) UnsetMilestone() {
 
 // GetRelease returns the Release field value if set, zero value otherwise.
 func (o *TamEolAdvisoryDetails) GetRelease() string {
-	if o == nil || o.Release == nil {
+	if o == nil || IsNil(o.Release) {
 		var ret string
 		return ret
 	}
@@ -192,7 +196,7 @@ func (o *TamEolAdvisoryDetails) GetRelease() string {
 // GetReleaseOk returns a tuple with the Release field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TamEolAdvisoryDetails) GetReleaseOk() (*string, bool) {
-	if o == nil || o.Release == nil {
+	if o == nil || IsNil(o.Release) {
 		return nil, false
 	}
 	return o.Release, true
@@ -200,7 +204,7 @@ func (o *TamEolAdvisoryDetails) GetReleaseOk() (*string, bool) {
 
 // HasRelease returns a boolean if a field has been set.
 func (o *TamEolAdvisoryDetails) HasRelease() bool {
-	if o != nil && o.Release != nil {
+	if o != nil && !IsNil(o.Release) {
 		return true
 	}
 
@@ -213,28 +217,32 @@ func (o *TamEolAdvisoryDetails) SetRelease(v string) {
 }
 
 func (o TamEolAdvisoryDetails) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o TamEolAdvisoryDetails) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedTamBaseAdvisoryDetails, errTamBaseAdvisoryDetails := json.Marshal(o.TamBaseAdvisoryDetails)
 	if errTamBaseAdvisoryDetails != nil {
-		return []byte{}, errTamBaseAdvisoryDetails
+		return map[string]interface{}{}, errTamBaseAdvisoryDetails
 	}
 	errTamBaseAdvisoryDetails = json.Unmarshal([]byte(serializedTamBaseAdvisoryDetails), &toSerialize)
 	if errTamBaseAdvisoryDetails != nil {
-		return []byte{}, errTamBaseAdvisoryDetails
+		return map[string]interface{}{}, errTamBaseAdvisoryDetails
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
 	if o.AllMilestones != nil {
 		toSerialize["AllMilestones"] = o.AllMilestones
 	}
 	if o.Milestone.IsSet() {
 		toSerialize["Milestone"] = o.Milestone.Get()
 	}
-	if o.Release != nil {
+	if !IsNil(o.Release) {
 		toSerialize["Release"] = o.Release
 	}
 
@@ -242,10 +250,32 @@ func (o TamEolAdvisoryDetails) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *TamEolAdvisoryDetails) UnmarshalJSON(bytes []byte) (err error) {
+func (o *TamEolAdvisoryDetails) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type TamEolAdvisoryDetailsWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -259,7 +289,7 @@ func (o *TamEolAdvisoryDetails) UnmarshalJSON(bytes []byte) (err error) {
 
 	varTamEolAdvisoryDetailsWithoutEmbeddedStruct := TamEolAdvisoryDetailsWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varTamEolAdvisoryDetailsWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varTamEolAdvisoryDetailsWithoutEmbeddedStruct)
 	if err == nil {
 		varTamEolAdvisoryDetails := _TamEolAdvisoryDetails{}
 		varTamEolAdvisoryDetails.ClassId = varTamEolAdvisoryDetailsWithoutEmbeddedStruct.ClassId
@@ -274,7 +304,7 @@ func (o *TamEolAdvisoryDetails) UnmarshalJSON(bytes []byte) (err error) {
 
 	varTamEolAdvisoryDetails := _TamEolAdvisoryDetails{}
 
-	err = json.Unmarshal(bytes, &varTamEolAdvisoryDetails)
+	err = json.Unmarshal(data, &varTamEolAdvisoryDetails)
 	if err == nil {
 		o.TamBaseAdvisoryDetails = varTamEolAdvisoryDetails.TamBaseAdvisoryDetails
 	} else {
@@ -283,7 +313,7 @@ func (o *TamEolAdvisoryDetails) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "AllMilestones")

@@ -24,9 +24,9 @@ Name | Type | Description | Notes
 **OrigSeverity** | Pointer to **string** | The original severity when the alarm was first created. * &#x60;None&#x60; - The Enum value None represents that there is no severity. * &#x60;Info&#x60; - The Enum value Info represents the Informational level of severity. * &#x60;Critical&#x60; - The Enum value Critical represents the Critical level of severity. * &#x60;Warning&#x60; - The Enum value Warning represents the Warning level of severity. * &#x60;Cleared&#x60; - The Enum value Cleared represents that the alarm severity has been cleared. | [optional] [readonly] [default to "None"]
 **Severity** | Pointer to **string** | The severity of the alarm. Valid values are Critical, Warning, Info, and Cleared. * &#x60;None&#x60; - The Enum value None represents that there is no severity. * &#x60;Info&#x60; - The Enum value Info represents the Informational level of severity. * &#x60;Critical&#x60; - The Enum value Critical represents the Critical level of severity. * &#x60;Warning&#x60; - The Enum value Warning represents the Warning level of severity. * &#x60;Cleared&#x60; - The Enum value Cleared represents that the alarm severity has been cleared. | [optional] [readonly] [default to "None"]
 **Suppressed** | Pointer to **bool** | Indicates whether the alarm is marked for suppression or not. | [optional] 
-**AffectedMo** | Pointer to [**MoBaseMoRelationship**](MoBaseMoRelationship.md) |  | [optional] 
-**Definition** | Pointer to [**CondAlarmDefinitionRelationship**](CondAlarmDefinitionRelationship.md) |  | [optional] 
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
+**AffectedMo** | Pointer to [**NullableMoBaseMoRelationship**](MoBaseMoRelationship.md) |  | [optional] 
+**Definition** | Pointer to [**NullableCondAlarmDefinitionRelationship**](CondAlarmDefinitionRelationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -562,6 +562,16 @@ SetAffectedMo sets AffectedMo field to given value.
 
 HasAffectedMo returns a boolean if a field has been set.
 
+### SetAffectedMoNil
+
+`func (o *CondAlarm) SetAffectedMoNil(b bool)`
+
+ SetAffectedMoNil sets the value for AffectedMo to be an explicit nil
+
+### UnsetAffectedMo
+`func (o *CondAlarm) UnsetAffectedMo()`
+
+UnsetAffectedMo ensures that no value is present for AffectedMo, not even an explicit nil
 ### GetDefinition
 
 `func (o *CondAlarm) GetDefinition() CondAlarmDefinitionRelationship`
@@ -587,6 +597,16 @@ SetDefinition sets Definition field to given value.
 
 HasDefinition returns a boolean if a field has been set.
 
+### SetDefinitionNil
+
+`func (o *CondAlarm) SetDefinitionNil(b bool)`
+
+ SetDefinitionNil sets the value for Definition to be an explicit nil
+
+### UnsetDefinition
+`func (o *CondAlarm) UnsetDefinition()`
+
+UnsetDefinition ensures that no value is present for Definition, not even an explicit nil
 ### GetRegisteredDevice
 
 `func (o *CondAlarm) GetRegisteredDevice() AssetDeviceRegistrationRelationship`
@@ -612,6 +632,16 @@ SetRegisteredDevice sets RegisteredDevice field to given value.
 
 HasRegisteredDevice returns a boolean if a field has been set.
 
+### SetRegisteredDeviceNil
+
+`func (o *CondAlarm) SetRegisteredDeviceNil(b bool)`
+
+ SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+
+### UnsetRegisteredDevice
+`func (o *CondAlarm) UnsetRegisteredDevice()`
+
+UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

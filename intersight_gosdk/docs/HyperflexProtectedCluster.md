@@ -14,10 +14,10 @@ Name | Type | Description | Notes
 **TargetClusterName** | Pointer to **string** | Name of the target cluster. | [optional] [readonly] 
 **TargetDatastoreName** | Pointer to **string** | Name of the target datastore. | [optional] [readonly] 
 **TargetDatastoreUtilization** | Pointer to **float32** | Percent usage of the datastore. | [optional] [readonly] 
-**BackupPolicy** | Pointer to [**HyperflexClusterBackupPolicyInventoryRelationship**](HyperflexClusterBackupPolicyInventoryRelationship.md) |  | [optional] 
-**DatastoreStatistic** | Pointer to [**HyperflexDatastoreStatisticRelationship**](HyperflexDatastoreStatisticRelationship.md) |  | [optional] 
-**SrcCluster** | Pointer to [**HyperflexClusterRelationship**](HyperflexClusterRelationship.md) |  | [optional] 
-**TgtCluster** | Pointer to [**HyperflexClusterRelationship**](HyperflexClusterRelationship.md) |  | [optional] 
+**BackupPolicy** | Pointer to [**NullableHyperflexClusterBackupPolicyInventoryRelationship**](HyperflexClusterBackupPolicyInventoryRelationship.md) |  | [optional] 
+**DatastoreStatistic** | Pointer to [**NullableHyperflexDatastoreStatisticRelationship**](HyperflexDatastoreStatisticRelationship.md) |  | [optional] 
+**SrcCluster** | Pointer to [**NullableHyperflexClusterRelationship**](HyperflexClusterRelationship.md) |  | [optional] 
+**TgtCluster** | Pointer to [**NullableHyperflexClusterRelationship**](HyperflexClusterRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -303,6 +303,16 @@ SetBackupPolicy sets BackupPolicy field to given value.
 
 HasBackupPolicy returns a boolean if a field has been set.
 
+### SetBackupPolicyNil
+
+`func (o *HyperflexProtectedCluster) SetBackupPolicyNil(b bool)`
+
+ SetBackupPolicyNil sets the value for BackupPolicy to be an explicit nil
+
+### UnsetBackupPolicy
+`func (o *HyperflexProtectedCluster) UnsetBackupPolicy()`
+
+UnsetBackupPolicy ensures that no value is present for BackupPolicy, not even an explicit nil
 ### GetDatastoreStatistic
 
 `func (o *HyperflexProtectedCluster) GetDatastoreStatistic() HyperflexDatastoreStatisticRelationship`
@@ -328,6 +338,16 @@ SetDatastoreStatistic sets DatastoreStatistic field to given value.
 
 HasDatastoreStatistic returns a boolean if a field has been set.
 
+### SetDatastoreStatisticNil
+
+`func (o *HyperflexProtectedCluster) SetDatastoreStatisticNil(b bool)`
+
+ SetDatastoreStatisticNil sets the value for DatastoreStatistic to be an explicit nil
+
+### UnsetDatastoreStatistic
+`func (o *HyperflexProtectedCluster) UnsetDatastoreStatistic()`
+
+UnsetDatastoreStatistic ensures that no value is present for DatastoreStatistic, not even an explicit nil
 ### GetSrcCluster
 
 `func (o *HyperflexProtectedCluster) GetSrcCluster() HyperflexClusterRelationship`
@@ -353,6 +373,16 @@ SetSrcCluster sets SrcCluster field to given value.
 
 HasSrcCluster returns a boolean if a field has been set.
 
+### SetSrcClusterNil
+
+`func (o *HyperflexProtectedCluster) SetSrcClusterNil(b bool)`
+
+ SetSrcClusterNil sets the value for SrcCluster to be an explicit nil
+
+### UnsetSrcCluster
+`func (o *HyperflexProtectedCluster) UnsetSrcCluster()`
+
+UnsetSrcCluster ensures that no value is present for SrcCluster, not even an explicit nil
 ### GetTgtCluster
 
 `func (o *HyperflexProtectedCluster) GetTgtCluster() HyperflexClusterRelationship`
@@ -378,6 +408,16 @@ SetTgtCluster sets TgtCluster field to given value.
 
 HasTgtCluster returns a boolean if a field has been set.
 
+### SetTgtClusterNil
+
+`func (o *HyperflexProtectedCluster) SetTgtClusterNil(b bool)`
+
+ SetTgtClusterNil sets the value for TgtCluster to be an explicit nil
+
+### UnsetTgtCluster
+`func (o *HyperflexProtectedCluster) UnsetTgtCluster()`
+
+UnsetTgtCluster ensures that no value is present for TgtCluster, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

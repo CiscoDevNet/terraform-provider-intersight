@@ -15,10 +15,10 @@ Name | Type | Description | Notes
 **SasAddress1** | Pointer to **string** | This field identifies the SAS address assigned to the disk SAS port-1. | [optional] 
 **SasAddress2** | Pointer to **string** | This field identifies the SAS address assigned to the disk SAS port-2. | [optional] 
 **Size** | Pointer to **string** | The size of the physical disk in MB. | [optional] 
-**InventoryDeviceInfo** | Pointer to [**InventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
-**PhysicalDisk** | Pointer to [**StoragePhysicalDiskRelationship**](StoragePhysicalDiskRelationship.md) |  | [optional] 
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
-**StorageEnclosure** | Pointer to [**StorageEnclosureRelationship**](StorageEnclosureRelationship.md) |  | [optional] 
+**InventoryDeviceInfo** | Pointer to [**NullableInventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
+**PhysicalDisk** | Pointer to [**NullableStoragePhysicalDiskRelationship**](StoragePhysicalDiskRelationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
+**StorageEnclosure** | Pointer to [**NullableStorageEnclosureRelationship**](StorageEnclosureRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -329,6 +329,16 @@ SetInventoryDeviceInfo sets InventoryDeviceInfo field to given value.
 
 HasInventoryDeviceInfo returns a boolean if a field has been set.
 
+### SetInventoryDeviceInfoNil
+
+`func (o *StorageEnclosureDisk) SetInventoryDeviceInfoNil(b bool)`
+
+ SetInventoryDeviceInfoNil sets the value for InventoryDeviceInfo to be an explicit nil
+
+### UnsetInventoryDeviceInfo
+`func (o *StorageEnclosureDisk) UnsetInventoryDeviceInfo()`
+
+UnsetInventoryDeviceInfo ensures that no value is present for InventoryDeviceInfo, not even an explicit nil
 ### GetPhysicalDisk
 
 `func (o *StorageEnclosureDisk) GetPhysicalDisk() StoragePhysicalDiskRelationship`
@@ -354,6 +364,16 @@ SetPhysicalDisk sets PhysicalDisk field to given value.
 
 HasPhysicalDisk returns a boolean if a field has been set.
 
+### SetPhysicalDiskNil
+
+`func (o *StorageEnclosureDisk) SetPhysicalDiskNil(b bool)`
+
+ SetPhysicalDiskNil sets the value for PhysicalDisk to be an explicit nil
+
+### UnsetPhysicalDisk
+`func (o *StorageEnclosureDisk) UnsetPhysicalDisk()`
+
+UnsetPhysicalDisk ensures that no value is present for PhysicalDisk, not even an explicit nil
 ### GetRegisteredDevice
 
 `func (o *StorageEnclosureDisk) GetRegisteredDevice() AssetDeviceRegistrationRelationship`
@@ -379,6 +399,16 @@ SetRegisteredDevice sets RegisteredDevice field to given value.
 
 HasRegisteredDevice returns a boolean if a field has been set.
 
+### SetRegisteredDeviceNil
+
+`func (o *StorageEnclosureDisk) SetRegisteredDeviceNil(b bool)`
+
+ SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+
+### UnsetRegisteredDevice
+`func (o *StorageEnclosureDisk) UnsetRegisteredDevice()`
+
+UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
 ### GetStorageEnclosure
 
 `func (o *StorageEnclosureDisk) GetStorageEnclosure() StorageEnclosureRelationship`
@@ -404,6 +434,16 @@ SetStorageEnclosure sets StorageEnclosure field to given value.
 
 HasStorageEnclosure returns a boolean if a field has been set.
 
+### SetStorageEnclosureNil
+
+`func (o *StorageEnclosureDisk) SetStorageEnclosureNil(b bool)`
+
+ SetStorageEnclosureNil sets the value for StorageEnclosure to be an explicit nil
+
+### UnsetStorageEnclosure
+`func (o *StorageEnclosureDisk) UnsetStorageEnclosure()`
+
+UnsetStorageEnclosure ensures that no value is present for StorageEnclosure, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

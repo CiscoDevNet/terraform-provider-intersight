@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "hyperflex.HxdpVersion"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "hyperflex.HxdpVersion"]
 **Version** | Pointer to **string** | The HyperFlex Data Platform version. | [optional] 
-**AppCatalog** | Pointer to [**HyperflexAppCatalogRelationship**](HyperflexAppCatalogRelationship.md) |  | [optional] 
+**AppCatalog** | Pointer to [**NullableHyperflexAppCatalogRelationship**](HyperflexAppCatalogRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -118,6 +118,16 @@ SetAppCatalog sets AppCatalog field to given value.
 
 HasAppCatalog returns a boolean if a field has been set.
 
+### SetAppCatalogNil
+
+`func (o *HyperflexHxdpVersion) SetAppCatalogNil(b bool)`
+
+ SetAppCatalogNil sets the value for AppCatalog to be an explicit nil
+
+### UnsetAppCatalog
+`func (o *HyperflexHxdpVersion) UnsetAppCatalog()`
+
+UnsetAppCatalog ensures that no value is present for AppCatalog, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

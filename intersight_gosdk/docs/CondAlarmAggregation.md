@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **InfoAlarmsCount** | Pointer to **int64** | Count of all alarms with severity Info, irrespective of acknowledgement status. | [optional] [readonly] 
 **MoType** | Pointer to **string** | Managed object type. For example, FI managed object type will be network.Element. | [optional] [readonly] 
 **WarningAlarmsCount** | Pointer to **int64** | Count of all alarms with severity Warning, irrespective of acknowledgement status. | [optional] [readonly] 
-**AlarmAggregationSource** | Pointer to [**MoBaseMoRelationship**](MoBaseMoRelationship.md) |  | [optional] 
+**AlarmAggregationSource** | Pointer to [**NullableMoBaseMoRelationship**](MoBaseMoRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -258,6 +258,16 @@ SetAlarmAggregationSource sets AlarmAggregationSource field to given value.
 
 HasAlarmAggregationSource returns a boolean if a field has been set.
 
+### SetAlarmAggregationSourceNil
+
+`func (o *CondAlarmAggregation) SetAlarmAggregationSourceNil(b bool)`
+
+ SetAlarmAggregationSourceNil sets the value for AlarmAggregationSource to be an explicit nil
+
+### UnsetAlarmAggregationSource
+`func (o *CondAlarmAggregation) UnsetAlarmAggregationSource()`
+
+UnsetAlarmAggregationSource ensures that no value is present for AlarmAggregationSource, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

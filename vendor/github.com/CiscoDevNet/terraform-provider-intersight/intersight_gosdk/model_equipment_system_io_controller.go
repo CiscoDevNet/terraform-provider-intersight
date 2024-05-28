@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the EquipmentSystemIoController type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &EquipmentSystemIoController{}
 
 // EquipmentSystemIoController I/O Controller on a chassis which provides the data path to S-series server.
 type EquipmentSystemIoController struct {
@@ -41,12 +45,12 @@ type EquipmentSystemIoController struct {
 	// This field identifies the Product ID for systemIOController.
 	Pid *string `json:"Pid,omitempty"`
 	// This represents system I/O Controller identifier.
-	SystemIoControllerId *int64                               `json:"SystemIoControllerId,omitempty"`
-	Cmc                  *ManagementControllerRelationship    `json:"Cmc,omitempty"`
-	EquipmentChassis     *EquipmentChassisRelationship        `json:"EquipmentChassis,omitempty"`
-	InventoryDeviceInfo  *InventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
-	RegisteredDevice     *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
-	SharedIoModule       *EquipmentSharedIoModuleRelationship `json:"SharedIoModule,omitempty"`
+	SystemIoControllerId *int64                                      `json:"SystemIoControllerId,omitempty"`
+	Cmc                  NullableManagementControllerRelationship    `json:"Cmc,omitempty"`
+	EquipmentChassis     NullableEquipmentChassisRelationship        `json:"EquipmentChassis,omitempty"`
+	InventoryDeviceInfo  NullableInventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
+	RegisteredDevice     NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+	SharedIoModule       NullableEquipmentSharedIoModuleRelationship `json:"SharedIoModule,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -125,7 +129,7 @@ func (o *EquipmentSystemIoController) SetObjectType(v string) {
 
 // GetChassisId returns the ChassisId field value if set, zero value otherwise.
 func (o *EquipmentSystemIoController) GetChassisId() string {
-	if o == nil || o.ChassisId == nil {
+	if o == nil || IsNil(o.ChassisId) {
 		var ret string
 		return ret
 	}
@@ -135,7 +139,7 @@ func (o *EquipmentSystemIoController) GetChassisId() string {
 // GetChassisIdOk returns a tuple with the ChassisId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EquipmentSystemIoController) GetChassisIdOk() (*string, bool) {
-	if o == nil || o.ChassisId == nil {
+	if o == nil || IsNil(o.ChassisId) {
 		return nil, false
 	}
 	return o.ChassisId, true
@@ -143,7 +147,7 @@ func (o *EquipmentSystemIoController) GetChassisIdOk() (*string, bool) {
 
 // HasChassisId returns a boolean if a field has been set.
 func (o *EquipmentSystemIoController) HasChassisId() bool {
-	if o != nil && o.ChassisId != nil {
+	if o != nil && !IsNil(o.ChassisId) {
 		return true
 	}
 
@@ -157,7 +161,7 @@ func (o *EquipmentSystemIoController) SetChassisId(v string) {
 
 // GetConnectionPath returns the ConnectionPath field value if set, zero value otherwise.
 func (o *EquipmentSystemIoController) GetConnectionPath() string {
-	if o == nil || o.ConnectionPath == nil {
+	if o == nil || IsNil(o.ConnectionPath) {
 		var ret string
 		return ret
 	}
@@ -167,7 +171,7 @@ func (o *EquipmentSystemIoController) GetConnectionPath() string {
 // GetConnectionPathOk returns a tuple with the ConnectionPath field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EquipmentSystemIoController) GetConnectionPathOk() (*string, bool) {
-	if o == nil || o.ConnectionPath == nil {
+	if o == nil || IsNil(o.ConnectionPath) {
 		return nil, false
 	}
 	return o.ConnectionPath, true
@@ -175,7 +179,7 @@ func (o *EquipmentSystemIoController) GetConnectionPathOk() (*string, bool) {
 
 // HasConnectionPath returns a boolean if a field has been set.
 func (o *EquipmentSystemIoController) HasConnectionPath() bool {
-	if o != nil && o.ConnectionPath != nil {
+	if o != nil && !IsNil(o.ConnectionPath) {
 		return true
 	}
 
@@ -189,7 +193,7 @@ func (o *EquipmentSystemIoController) SetConnectionPath(v string) {
 
 // GetConnectionStatus returns the ConnectionStatus field value if set, zero value otherwise.
 func (o *EquipmentSystemIoController) GetConnectionStatus() string {
-	if o == nil || o.ConnectionStatus == nil {
+	if o == nil || IsNil(o.ConnectionStatus) {
 		var ret string
 		return ret
 	}
@@ -199,7 +203,7 @@ func (o *EquipmentSystemIoController) GetConnectionStatus() string {
 // GetConnectionStatusOk returns a tuple with the ConnectionStatus field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EquipmentSystemIoController) GetConnectionStatusOk() (*string, bool) {
-	if o == nil || o.ConnectionStatus == nil {
+	if o == nil || IsNil(o.ConnectionStatus) {
 		return nil, false
 	}
 	return o.ConnectionStatus, true
@@ -207,7 +211,7 @@ func (o *EquipmentSystemIoController) GetConnectionStatusOk() (*string, bool) {
 
 // HasConnectionStatus returns a boolean if a field has been set.
 func (o *EquipmentSystemIoController) HasConnectionStatus() bool {
-	if o != nil && o.ConnectionStatus != nil {
+	if o != nil && !IsNil(o.ConnectionStatus) {
 		return true
 	}
 
@@ -221,7 +225,7 @@ func (o *EquipmentSystemIoController) SetConnectionStatus(v string) {
 
 // GetDescription returns the Description field value if set, zero value otherwise.
 func (o *EquipmentSystemIoController) GetDescription() string {
-	if o == nil || o.Description == nil {
+	if o == nil || IsNil(o.Description) {
 		var ret string
 		return ret
 	}
@@ -231,7 +235,7 @@ func (o *EquipmentSystemIoController) GetDescription() string {
 // GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EquipmentSystemIoController) GetDescriptionOk() (*string, bool) {
-	if o == nil || o.Description == nil {
+	if o == nil || IsNil(o.Description) {
 		return nil, false
 	}
 	return o.Description, true
@@ -239,7 +243,7 @@ func (o *EquipmentSystemIoController) GetDescriptionOk() (*string, bool) {
 
 // HasDescription returns a boolean if a field has been set.
 func (o *EquipmentSystemIoController) HasDescription() bool {
-	if o != nil && o.Description != nil {
+	if o != nil && !IsNil(o.Description) {
 		return true
 	}
 
@@ -253,7 +257,7 @@ func (o *EquipmentSystemIoController) SetDescription(v string) {
 
 // GetManagingInstance returns the ManagingInstance field value if set, zero value otherwise.
 func (o *EquipmentSystemIoController) GetManagingInstance() string {
-	if o == nil || o.ManagingInstance == nil {
+	if o == nil || IsNil(o.ManagingInstance) {
 		var ret string
 		return ret
 	}
@@ -263,7 +267,7 @@ func (o *EquipmentSystemIoController) GetManagingInstance() string {
 // GetManagingInstanceOk returns a tuple with the ManagingInstance field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EquipmentSystemIoController) GetManagingInstanceOk() (*string, bool) {
-	if o == nil || o.ManagingInstance == nil {
+	if o == nil || IsNil(o.ManagingInstance) {
 		return nil, false
 	}
 	return o.ManagingInstance, true
@@ -271,7 +275,7 @@ func (o *EquipmentSystemIoController) GetManagingInstanceOk() (*string, bool) {
 
 // HasManagingInstance returns a boolean if a field has been set.
 func (o *EquipmentSystemIoController) HasManagingInstance() bool {
-	if o != nil && o.ManagingInstance != nil {
+	if o != nil && !IsNil(o.ManagingInstance) {
 		return true
 	}
 
@@ -285,7 +289,7 @@ func (o *EquipmentSystemIoController) SetManagingInstance(v string) {
 
 // GetOperState returns the OperState field value if set, zero value otherwise.
 func (o *EquipmentSystemIoController) GetOperState() string {
-	if o == nil || o.OperState == nil {
+	if o == nil || IsNil(o.OperState) {
 		var ret string
 		return ret
 	}
@@ -295,7 +299,7 @@ func (o *EquipmentSystemIoController) GetOperState() string {
 // GetOperStateOk returns a tuple with the OperState field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EquipmentSystemIoController) GetOperStateOk() (*string, bool) {
-	if o == nil || o.OperState == nil {
+	if o == nil || IsNil(o.OperState) {
 		return nil, false
 	}
 	return o.OperState, true
@@ -303,7 +307,7 @@ func (o *EquipmentSystemIoController) GetOperStateOk() (*string, bool) {
 
 // HasOperState returns a boolean if a field has been set.
 func (o *EquipmentSystemIoController) HasOperState() bool {
-	if o != nil && o.OperState != nil {
+	if o != nil && !IsNil(o.OperState) {
 		return true
 	}
 
@@ -317,7 +321,7 @@ func (o *EquipmentSystemIoController) SetOperState(v string) {
 
 // GetPartNumber returns the PartNumber field value if set, zero value otherwise.
 func (o *EquipmentSystemIoController) GetPartNumber() string {
-	if o == nil || o.PartNumber == nil {
+	if o == nil || IsNil(o.PartNumber) {
 		var ret string
 		return ret
 	}
@@ -327,7 +331,7 @@ func (o *EquipmentSystemIoController) GetPartNumber() string {
 // GetPartNumberOk returns a tuple with the PartNumber field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EquipmentSystemIoController) GetPartNumberOk() (*string, bool) {
-	if o == nil || o.PartNumber == nil {
+	if o == nil || IsNil(o.PartNumber) {
 		return nil, false
 	}
 	return o.PartNumber, true
@@ -335,7 +339,7 @@ func (o *EquipmentSystemIoController) GetPartNumberOk() (*string, bool) {
 
 // HasPartNumber returns a boolean if a field has been set.
 func (o *EquipmentSystemIoController) HasPartNumber() bool {
-	if o != nil && o.PartNumber != nil {
+	if o != nil && !IsNil(o.PartNumber) {
 		return true
 	}
 
@@ -349,7 +353,7 @@ func (o *EquipmentSystemIoController) SetPartNumber(v string) {
 
 // GetPid returns the Pid field value if set, zero value otherwise.
 func (o *EquipmentSystemIoController) GetPid() string {
-	if o == nil || o.Pid == nil {
+	if o == nil || IsNil(o.Pid) {
 		var ret string
 		return ret
 	}
@@ -359,7 +363,7 @@ func (o *EquipmentSystemIoController) GetPid() string {
 // GetPidOk returns a tuple with the Pid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EquipmentSystemIoController) GetPidOk() (*string, bool) {
-	if o == nil || o.Pid == nil {
+	if o == nil || IsNil(o.Pid) {
 		return nil, false
 	}
 	return o.Pid, true
@@ -367,7 +371,7 @@ func (o *EquipmentSystemIoController) GetPidOk() (*string, bool) {
 
 // HasPid returns a boolean if a field has been set.
 func (o *EquipmentSystemIoController) HasPid() bool {
-	if o != nil && o.Pid != nil {
+	if o != nil && !IsNil(o.Pid) {
 		return true
 	}
 
@@ -381,7 +385,7 @@ func (o *EquipmentSystemIoController) SetPid(v string) {
 
 // GetSystemIoControllerId returns the SystemIoControllerId field value if set, zero value otherwise.
 func (o *EquipmentSystemIoController) GetSystemIoControllerId() int64 {
-	if o == nil || o.SystemIoControllerId == nil {
+	if o == nil || IsNil(o.SystemIoControllerId) {
 		var ret int64
 		return ret
 	}
@@ -391,7 +395,7 @@ func (o *EquipmentSystemIoController) GetSystemIoControllerId() int64 {
 // GetSystemIoControllerIdOk returns a tuple with the SystemIoControllerId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EquipmentSystemIoController) GetSystemIoControllerIdOk() (*int64, bool) {
-	if o == nil || o.SystemIoControllerId == nil {
+	if o == nil || IsNil(o.SystemIoControllerId) {
 		return nil, false
 	}
 	return o.SystemIoControllerId, true
@@ -399,7 +403,7 @@ func (o *EquipmentSystemIoController) GetSystemIoControllerIdOk() (*int64, bool)
 
 // HasSystemIoControllerId returns a boolean if a field has been set.
 func (o *EquipmentSystemIoController) HasSystemIoControllerId() bool {
-	if o != nil && o.SystemIoControllerId != nil {
+	if o != nil && !IsNil(o.SystemIoControllerId) {
 		return true
 	}
 
@@ -411,233 +415,314 @@ func (o *EquipmentSystemIoController) SetSystemIoControllerId(v int64) {
 	o.SystemIoControllerId = &v
 }
 
-// GetCmc returns the Cmc field value if set, zero value otherwise.
+// GetCmc returns the Cmc field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *EquipmentSystemIoController) GetCmc() ManagementControllerRelationship {
-	if o == nil || o.Cmc == nil {
+	if o == nil || IsNil(o.Cmc.Get()) {
 		var ret ManagementControllerRelationship
 		return ret
 	}
-	return *o.Cmc
+	return *o.Cmc.Get()
 }
 
 // GetCmcOk returns a tuple with the Cmc field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *EquipmentSystemIoController) GetCmcOk() (*ManagementControllerRelationship, bool) {
-	if o == nil || o.Cmc == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Cmc, true
+	return o.Cmc.Get(), o.Cmc.IsSet()
 }
 
 // HasCmc returns a boolean if a field has been set.
 func (o *EquipmentSystemIoController) HasCmc() bool {
-	if o != nil && o.Cmc != nil {
+	if o != nil && o.Cmc.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetCmc gets a reference to the given ManagementControllerRelationship and assigns it to the Cmc field.
+// SetCmc gets a reference to the given NullableManagementControllerRelationship and assigns it to the Cmc field.
 func (o *EquipmentSystemIoController) SetCmc(v ManagementControllerRelationship) {
-	o.Cmc = &v
+	o.Cmc.Set(&v)
 }
 
-// GetEquipmentChassis returns the EquipmentChassis field value if set, zero value otherwise.
+// SetCmcNil sets the value for Cmc to be an explicit nil
+func (o *EquipmentSystemIoController) SetCmcNil() {
+	o.Cmc.Set(nil)
+}
+
+// UnsetCmc ensures that no value is present for Cmc, not even an explicit nil
+func (o *EquipmentSystemIoController) UnsetCmc() {
+	o.Cmc.Unset()
+}
+
+// GetEquipmentChassis returns the EquipmentChassis field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *EquipmentSystemIoController) GetEquipmentChassis() EquipmentChassisRelationship {
-	if o == nil || o.EquipmentChassis == nil {
+	if o == nil || IsNil(o.EquipmentChassis.Get()) {
 		var ret EquipmentChassisRelationship
 		return ret
 	}
-	return *o.EquipmentChassis
+	return *o.EquipmentChassis.Get()
 }
 
 // GetEquipmentChassisOk returns a tuple with the EquipmentChassis field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *EquipmentSystemIoController) GetEquipmentChassisOk() (*EquipmentChassisRelationship, bool) {
-	if o == nil || o.EquipmentChassis == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.EquipmentChassis, true
+	return o.EquipmentChassis.Get(), o.EquipmentChassis.IsSet()
 }
 
 // HasEquipmentChassis returns a boolean if a field has been set.
 func (o *EquipmentSystemIoController) HasEquipmentChassis() bool {
-	if o != nil && o.EquipmentChassis != nil {
+	if o != nil && o.EquipmentChassis.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetEquipmentChassis gets a reference to the given EquipmentChassisRelationship and assigns it to the EquipmentChassis field.
+// SetEquipmentChassis gets a reference to the given NullableEquipmentChassisRelationship and assigns it to the EquipmentChassis field.
 func (o *EquipmentSystemIoController) SetEquipmentChassis(v EquipmentChassisRelationship) {
-	o.EquipmentChassis = &v
+	o.EquipmentChassis.Set(&v)
 }
 
-// GetInventoryDeviceInfo returns the InventoryDeviceInfo field value if set, zero value otherwise.
+// SetEquipmentChassisNil sets the value for EquipmentChassis to be an explicit nil
+func (o *EquipmentSystemIoController) SetEquipmentChassisNil() {
+	o.EquipmentChassis.Set(nil)
+}
+
+// UnsetEquipmentChassis ensures that no value is present for EquipmentChassis, not even an explicit nil
+func (o *EquipmentSystemIoController) UnsetEquipmentChassis() {
+	o.EquipmentChassis.Unset()
+}
+
+// GetInventoryDeviceInfo returns the InventoryDeviceInfo field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *EquipmentSystemIoController) GetInventoryDeviceInfo() InventoryDeviceInfoRelationship {
-	if o == nil || o.InventoryDeviceInfo == nil {
+	if o == nil || IsNil(o.InventoryDeviceInfo.Get()) {
 		var ret InventoryDeviceInfoRelationship
 		return ret
 	}
-	return *o.InventoryDeviceInfo
+	return *o.InventoryDeviceInfo.Get()
 }
 
 // GetInventoryDeviceInfoOk returns a tuple with the InventoryDeviceInfo field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *EquipmentSystemIoController) GetInventoryDeviceInfoOk() (*InventoryDeviceInfoRelationship, bool) {
-	if o == nil || o.InventoryDeviceInfo == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.InventoryDeviceInfo, true
+	return o.InventoryDeviceInfo.Get(), o.InventoryDeviceInfo.IsSet()
 }
 
 // HasInventoryDeviceInfo returns a boolean if a field has been set.
 func (o *EquipmentSystemIoController) HasInventoryDeviceInfo() bool {
-	if o != nil && o.InventoryDeviceInfo != nil {
+	if o != nil && o.InventoryDeviceInfo.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetInventoryDeviceInfo gets a reference to the given InventoryDeviceInfoRelationship and assigns it to the InventoryDeviceInfo field.
+// SetInventoryDeviceInfo gets a reference to the given NullableInventoryDeviceInfoRelationship and assigns it to the InventoryDeviceInfo field.
 func (o *EquipmentSystemIoController) SetInventoryDeviceInfo(v InventoryDeviceInfoRelationship) {
-	o.InventoryDeviceInfo = &v
+	o.InventoryDeviceInfo.Set(&v)
 }
 
-// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise.
+// SetInventoryDeviceInfoNil sets the value for InventoryDeviceInfo to be an explicit nil
+func (o *EquipmentSystemIoController) SetInventoryDeviceInfoNil() {
+	o.InventoryDeviceInfo.Set(nil)
+}
+
+// UnsetInventoryDeviceInfo ensures that no value is present for InventoryDeviceInfo, not even an explicit nil
+func (o *EquipmentSystemIoController) UnsetInventoryDeviceInfo() {
+	o.InventoryDeviceInfo.Unset()
+}
+
+// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *EquipmentSystemIoController) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil || IsNil(o.RegisteredDevice.Get()) {
 		var ret AssetDeviceRegistrationRelationship
 		return ret
 	}
-	return *o.RegisteredDevice
+	return *o.RegisteredDevice.Get()
 }
 
 // GetRegisteredDeviceOk returns a tuple with the RegisteredDevice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *EquipmentSystemIoController) GetRegisteredDeviceOk() (*AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.RegisteredDevice, true
+	return o.RegisteredDevice.Get(), o.RegisteredDevice.IsSet()
 }
 
 // HasRegisteredDevice returns a boolean if a field has been set.
 func (o *EquipmentSystemIoController) HasRegisteredDevice() bool {
-	if o != nil && o.RegisteredDevice != nil {
+	if o != nil && o.RegisteredDevice.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRegisteredDevice gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
+// SetRegisteredDevice gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
 func (o *EquipmentSystemIoController) SetRegisteredDevice(v AssetDeviceRegistrationRelationship) {
-	o.RegisteredDevice = &v
+	o.RegisteredDevice.Set(&v)
 }
 
-// GetSharedIoModule returns the SharedIoModule field value if set, zero value otherwise.
+// SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+func (o *EquipmentSystemIoController) SetRegisteredDeviceNil() {
+	o.RegisteredDevice.Set(nil)
+}
+
+// UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
+func (o *EquipmentSystemIoController) UnsetRegisteredDevice() {
+	o.RegisteredDevice.Unset()
+}
+
+// GetSharedIoModule returns the SharedIoModule field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *EquipmentSystemIoController) GetSharedIoModule() EquipmentSharedIoModuleRelationship {
-	if o == nil || o.SharedIoModule == nil {
+	if o == nil || IsNil(o.SharedIoModule.Get()) {
 		var ret EquipmentSharedIoModuleRelationship
 		return ret
 	}
-	return *o.SharedIoModule
+	return *o.SharedIoModule.Get()
 }
 
 // GetSharedIoModuleOk returns a tuple with the SharedIoModule field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *EquipmentSystemIoController) GetSharedIoModuleOk() (*EquipmentSharedIoModuleRelationship, bool) {
-	if o == nil || o.SharedIoModule == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.SharedIoModule, true
+	return o.SharedIoModule.Get(), o.SharedIoModule.IsSet()
 }
 
 // HasSharedIoModule returns a boolean if a field has been set.
 func (o *EquipmentSystemIoController) HasSharedIoModule() bool {
-	if o != nil && o.SharedIoModule != nil {
+	if o != nil && o.SharedIoModule.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetSharedIoModule gets a reference to the given EquipmentSharedIoModuleRelationship and assigns it to the SharedIoModule field.
+// SetSharedIoModule gets a reference to the given NullableEquipmentSharedIoModuleRelationship and assigns it to the SharedIoModule field.
 func (o *EquipmentSystemIoController) SetSharedIoModule(v EquipmentSharedIoModuleRelationship) {
-	o.SharedIoModule = &v
+	o.SharedIoModule.Set(&v)
+}
+
+// SetSharedIoModuleNil sets the value for SharedIoModule to be an explicit nil
+func (o *EquipmentSystemIoController) SetSharedIoModuleNil() {
+	o.SharedIoModule.Set(nil)
+}
+
+// UnsetSharedIoModule ensures that no value is present for SharedIoModule, not even an explicit nil
+func (o *EquipmentSystemIoController) UnsetSharedIoModule() {
+	o.SharedIoModule.Unset()
 }
 
 func (o EquipmentSystemIoController) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o EquipmentSystemIoController) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedEquipmentBase, errEquipmentBase := json.Marshal(o.EquipmentBase)
 	if errEquipmentBase != nil {
-		return []byte{}, errEquipmentBase
+		return map[string]interface{}{}, errEquipmentBase
 	}
 	errEquipmentBase = json.Unmarshal([]byte(serializedEquipmentBase), &toSerialize)
 	if errEquipmentBase != nil {
-		return []byte{}, errEquipmentBase
+		return map[string]interface{}{}, errEquipmentBase
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.ChassisId != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.ChassisId) {
 		toSerialize["ChassisId"] = o.ChassisId
 	}
-	if o.ConnectionPath != nil {
+	if !IsNil(o.ConnectionPath) {
 		toSerialize["ConnectionPath"] = o.ConnectionPath
 	}
-	if o.ConnectionStatus != nil {
+	if !IsNil(o.ConnectionStatus) {
 		toSerialize["ConnectionStatus"] = o.ConnectionStatus
 	}
-	if o.Description != nil {
+	if !IsNil(o.Description) {
 		toSerialize["Description"] = o.Description
 	}
-	if o.ManagingInstance != nil {
+	if !IsNil(o.ManagingInstance) {
 		toSerialize["ManagingInstance"] = o.ManagingInstance
 	}
-	if o.OperState != nil {
+	if !IsNil(o.OperState) {
 		toSerialize["OperState"] = o.OperState
 	}
-	if o.PartNumber != nil {
+	if !IsNil(o.PartNumber) {
 		toSerialize["PartNumber"] = o.PartNumber
 	}
-	if o.Pid != nil {
+	if !IsNil(o.Pid) {
 		toSerialize["Pid"] = o.Pid
 	}
-	if o.SystemIoControllerId != nil {
+	if !IsNil(o.SystemIoControllerId) {
 		toSerialize["SystemIoControllerId"] = o.SystemIoControllerId
 	}
-	if o.Cmc != nil {
-		toSerialize["Cmc"] = o.Cmc
+	if o.Cmc.IsSet() {
+		toSerialize["Cmc"] = o.Cmc.Get()
 	}
-	if o.EquipmentChassis != nil {
-		toSerialize["EquipmentChassis"] = o.EquipmentChassis
+	if o.EquipmentChassis.IsSet() {
+		toSerialize["EquipmentChassis"] = o.EquipmentChassis.Get()
 	}
-	if o.InventoryDeviceInfo != nil {
-		toSerialize["InventoryDeviceInfo"] = o.InventoryDeviceInfo
+	if o.InventoryDeviceInfo.IsSet() {
+		toSerialize["InventoryDeviceInfo"] = o.InventoryDeviceInfo.Get()
 	}
-	if o.RegisteredDevice != nil {
-		toSerialize["RegisteredDevice"] = o.RegisteredDevice
+	if o.RegisteredDevice.IsSet() {
+		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
 	}
-	if o.SharedIoModule != nil {
-		toSerialize["SharedIoModule"] = o.SharedIoModule
+	if o.SharedIoModule.IsSet() {
+		toSerialize["SharedIoModule"] = o.SharedIoModule.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *EquipmentSystemIoController) UnmarshalJSON(bytes []byte) (err error) {
+func (o *EquipmentSystemIoController) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type EquipmentSystemIoControllerWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -660,17 +745,17 @@ func (o *EquipmentSystemIoController) UnmarshalJSON(bytes []byte) (err error) {
 		// This field identifies the Product ID for systemIOController.
 		Pid *string `json:"Pid,omitempty"`
 		// This represents system I/O Controller identifier.
-		SystemIoControllerId *int64                               `json:"SystemIoControllerId,omitempty"`
-		Cmc                  *ManagementControllerRelationship    `json:"Cmc,omitempty"`
-		EquipmentChassis     *EquipmentChassisRelationship        `json:"EquipmentChassis,omitempty"`
-		InventoryDeviceInfo  *InventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
-		RegisteredDevice     *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
-		SharedIoModule       *EquipmentSharedIoModuleRelationship `json:"SharedIoModule,omitempty"`
+		SystemIoControllerId *int64                                      `json:"SystemIoControllerId,omitempty"`
+		Cmc                  NullableManagementControllerRelationship    `json:"Cmc,omitempty"`
+		EquipmentChassis     NullableEquipmentChassisRelationship        `json:"EquipmentChassis,omitempty"`
+		InventoryDeviceInfo  NullableInventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
+		RegisteredDevice     NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+		SharedIoModule       NullableEquipmentSharedIoModuleRelationship `json:"SharedIoModule,omitempty"`
 	}
 
 	varEquipmentSystemIoControllerWithoutEmbeddedStruct := EquipmentSystemIoControllerWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varEquipmentSystemIoControllerWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varEquipmentSystemIoControllerWithoutEmbeddedStruct)
 	if err == nil {
 		varEquipmentSystemIoController := _EquipmentSystemIoController{}
 		varEquipmentSystemIoController.ClassId = varEquipmentSystemIoControllerWithoutEmbeddedStruct.ClassId
@@ -696,7 +781,7 @@ func (o *EquipmentSystemIoController) UnmarshalJSON(bytes []byte) (err error) {
 
 	varEquipmentSystemIoController := _EquipmentSystemIoController{}
 
-	err = json.Unmarshal(bytes, &varEquipmentSystemIoController)
+	err = json.Unmarshal(data, &varEquipmentSystemIoController)
 	if err == nil {
 		o.EquipmentBase = varEquipmentSystemIoController.EquipmentBase
 	} else {
@@ -705,7 +790,7 @@ func (o *EquipmentSystemIoController) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "ChassisId")

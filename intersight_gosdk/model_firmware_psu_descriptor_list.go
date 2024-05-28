@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the FirmwarePsuDescriptorList type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &FirmwarePsuDescriptorList{}
 
 // FirmwarePsuDescriptorList This resource list is returned as a response to a HTTP GET request that does not include a specific resource identifier.
 type FirmwarePsuDescriptorList struct {
@@ -49,7 +53,7 @@ func NewFirmwarePsuDescriptorListWithDefaults() *FirmwarePsuDescriptorList {
 
 // GetCount returns the Count field value if set, zero value otherwise.
 func (o *FirmwarePsuDescriptorList) GetCount() int32 {
-	if o == nil || o.Count == nil {
+	if o == nil || IsNil(o.Count) {
 		var ret int32
 		return ret
 	}
@@ -59,7 +63,7 @@ func (o *FirmwarePsuDescriptorList) GetCount() int32 {
 // GetCountOk returns a tuple with the Count field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FirmwarePsuDescriptorList) GetCountOk() (*int32, bool) {
-	if o == nil || o.Count == nil {
+	if o == nil || IsNil(o.Count) {
 		return nil, false
 	}
 	return o.Count, true
@@ -67,7 +71,7 @@ func (o *FirmwarePsuDescriptorList) GetCountOk() (*int32, bool) {
 
 // HasCount returns a boolean if a field has been set.
 func (o *FirmwarePsuDescriptorList) HasCount() bool {
-	if o != nil && o.Count != nil {
+	if o != nil && !IsNil(o.Count) {
 		return true
 	}
 
@@ -92,7 +96,7 @@ func (o *FirmwarePsuDescriptorList) GetResults() []FirmwarePsuDescriptor {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *FirmwarePsuDescriptorList) GetResultsOk() ([]FirmwarePsuDescriptor, bool) {
-	if o == nil || o.Results == nil {
+	if o == nil || IsNil(o.Results) {
 		return nil, false
 	}
 	return o.Results, true
@@ -100,7 +104,7 @@ func (o *FirmwarePsuDescriptorList) GetResultsOk() ([]FirmwarePsuDescriptor, boo
 
 // HasResults returns a boolean if a field has been set.
 func (o *FirmwarePsuDescriptorList) HasResults() bool {
-	if o != nil && o.Results != nil {
+	if o != nil && IsNil(o.Results) {
 		return true
 	}
 
@@ -113,16 +117,24 @@ func (o *FirmwarePsuDescriptorList) SetResults(v []FirmwarePsuDescriptor) {
 }
 
 func (o FirmwarePsuDescriptorList) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o FirmwarePsuDescriptorList) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseResponse, errMoBaseResponse := json.Marshal(o.MoBaseResponse)
 	if errMoBaseResponse != nil {
-		return []byte{}, errMoBaseResponse
+		return map[string]interface{}{}, errMoBaseResponse
 	}
 	errMoBaseResponse = json.Unmarshal([]byte(serializedMoBaseResponse), &toSerialize)
 	if errMoBaseResponse != nil {
-		return []byte{}, errMoBaseResponse
+		return map[string]interface{}{}, errMoBaseResponse
 	}
-	if o.Count != nil {
+	if !IsNil(o.Count) {
 		toSerialize["Count"] = o.Count
 	}
 	if o.Results != nil {
@@ -133,10 +145,31 @@ func (o FirmwarePsuDescriptorList) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *FirmwarePsuDescriptorList) UnmarshalJSON(bytes []byte) (err error) {
+func (o *FirmwarePsuDescriptorList) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type FirmwarePsuDescriptorListWithoutEmbeddedStruct struct {
 		// The total number of 'firmware.PsuDescriptor' resources matching the request, accross all pages. The 'Count' attribute is included when the HTTP GET request includes the '$inlinecount' parameter.
 		Count *int32 `json:"Count,omitempty"`
@@ -146,7 +179,7 @@ func (o *FirmwarePsuDescriptorList) UnmarshalJSON(bytes []byte) (err error) {
 
 	varFirmwarePsuDescriptorListWithoutEmbeddedStruct := FirmwarePsuDescriptorListWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varFirmwarePsuDescriptorListWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varFirmwarePsuDescriptorListWithoutEmbeddedStruct)
 	if err == nil {
 		varFirmwarePsuDescriptorList := _FirmwarePsuDescriptorList{}
 		varFirmwarePsuDescriptorList.Count = varFirmwarePsuDescriptorListWithoutEmbeddedStruct.Count
@@ -158,7 +191,7 @@ func (o *FirmwarePsuDescriptorList) UnmarshalJSON(bytes []byte) (err error) {
 
 	varFirmwarePsuDescriptorList := _FirmwarePsuDescriptorList{}
 
-	err = json.Unmarshal(bytes, &varFirmwarePsuDescriptorList)
+	err = json.Unmarshal(data, &varFirmwarePsuDescriptorList)
 	if err == nil {
 		o.MoBaseResponse = varFirmwarePsuDescriptorList.MoBaseResponse
 	} else {
@@ -167,7 +200,7 @@ func (o *FirmwarePsuDescriptorList) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "Count")
 		delete(additionalProperties, "Results")
 

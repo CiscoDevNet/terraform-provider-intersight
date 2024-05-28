@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the ResourcepoolMembershipReservation type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ResourcepoolMembershipReservation{}
 
 // ResourcepoolMembershipReservation A MembershipReservation is created when a resource that belongs to a pool is decommissioned. The MembershipReservation is mapped to pools that have the resource chosen for decommissioning. This MembershipReservation will be utilized in the future to pre-provision servers based on membership serials. The system automatically generates the membership during decommissioning, and its permissions are updated for all organizations associated with the pools. Users of the pool have the authority to remove the pool from the membership. The membership will be removed either during recommissioning or when all the associated pools are deleted.
 type ResourcepoolMembershipReservation struct {
@@ -23,8 +27,8 @@ type ResourcepoolMembershipReservation struct {
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
-	ObjectType string                  `json:"ObjectType"`
-	Account    *IamAccountRelationship `json:"Account,omitempty"`
+	ObjectType string                         `json:"ObjectType"`
+	Account    NullableIamAccountRelationship `json:"Account,omitempty"`
 	// An array of relationships to resourcepoolPool resources.
 	Pools                []ResourcepoolPoolRelationship `json:"Pools,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -103,36 +107,47 @@ func (o *ResourcepoolMembershipReservation) SetObjectType(v string) {
 	o.ObjectType = v
 }
 
-// GetAccount returns the Account field value if set, zero value otherwise.
+// GetAccount returns the Account field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ResourcepoolMembershipReservation) GetAccount() IamAccountRelationship {
-	if o == nil || o.Account == nil {
+	if o == nil || IsNil(o.Account.Get()) {
 		var ret IamAccountRelationship
 		return ret
 	}
-	return *o.Account
+	return *o.Account.Get()
 }
 
 // GetAccountOk returns a tuple with the Account field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ResourcepoolMembershipReservation) GetAccountOk() (*IamAccountRelationship, bool) {
-	if o == nil || o.Account == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Account, true
+	return o.Account.Get(), o.Account.IsSet()
 }
 
 // HasAccount returns a boolean if a field has been set.
 func (o *ResourcepoolMembershipReservation) HasAccount() bool {
-	if o != nil && o.Account != nil {
+	if o != nil && o.Account.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetAccount gets a reference to the given IamAccountRelationship and assigns it to the Account field.
+// SetAccount gets a reference to the given NullableIamAccountRelationship and assigns it to the Account field.
 func (o *ResourcepoolMembershipReservation) SetAccount(v IamAccountRelationship) {
-	o.Account = &v
+	o.Account.Set(&v)
+}
+
+// SetAccountNil sets the value for Account to be an explicit nil
+func (o *ResourcepoolMembershipReservation) SetAccountNil() {
+	o.Account.Set(nil)
+}
+
+// UnsetAccount ensures that no value is present for Account, not even an explicit nil
+func (o *ResourcepoolMembershipReservation) UnsetAccount() {
+	o.Account.Unset()
 }
 
 // GetPools returns the Pools field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -148,7 +163,7 @@ func (o *ResourcepoolMembershipReservation) GetPools() []ResourcepoolPoolRelatio
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ResourcepoolMembershipReservation) GetPoolsOk() ([]ResourcepoolPoolRelationship, bool) {
-	if o == nil || o.Pools == nil {
+	if o == nil || IsNil(o.Pools) {
 		return nil, false
 	}
 	return o.Pools, true
@@ -156,7 +171,7 @@ func (o *ResourcepoolMembershipReservation) GetPoolsOk() ([]ResourcepoolPoolRela
 
 // HasPools returns a boolean if a field has been set.
 func (o *ResourcepoolMembershipReservation) HasPools() bool {
-	if o != nil && o.Pools != nil {
+	if o != nil && IsNil(o.Pools) {
 		return true
 	}
 
@@ -169,23 +184,27 @@ func (o *ResourcepoolMembershipReservation) SetPools(v []ResourcepoolPoolRelatio
 }
 
 func (o ResourcepoolMembershipReservation) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o ResourcepoolMembershipReservation) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedResourceAbstractReservation, errResourceAbstractReservation := json.Marshal(o.ResourceAbstractReservation)
 	if errResourceAbstractReservation != nil {
-		return []byte{}, errResourceAbstractReservation
+		return map[string]interface{}{}, errResourceAbstractReservation
 	}
 	errResourceAbstractReservation = json.Unmarshal([]byte(serializedResourceAbstractReservation), &toSerialize)
 	if errResourceAbstractReservation != nil {
-		return []byte{}, errResourceAbstractReservation
+		return map[string]interface{}{}, errResourceAbstractReservation
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Account != nil {
-		toSerialize["Account"] = o.Account
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if o.Account.IsSet() {
+		toSerialize["Account"] = o.Account.Get()
 	}
 	if o.Pools != nil {
 		toSerialize["Pools"] = o.Pools
@@ -195,23 +214,45 @@ func (o ResourcepoolMembershipReservation) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *ResourcepoolMembershipReservation) UnmarshalJSON(bytes []byte) (err error) {
+func (o *ResourcepoolMembershipReservation) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type ResourcepoolMembershipReservationWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
-		ObjectType string                  `json:"ObjectType"`
-		Account    *IamAccountRelationship `json:"Account,omitempty"`
+		ObjectType string                         `json:"ObjectType"`
+		Account    NullableIamAccountRelationship `json:"Account,omitempty"`
 		// An array of relationships to resourcepoolPool resources.
 		Pools []ResourcepoolPoolRelationship `json:"Pools,omitempty"`
 	}
 
 	varResourcepoolMembershipReservationWithoutEmbeddedStruct := ResourcepoolMembershipReservationWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varResourcepoolMembershipReservationWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varResourcepoolMembershipReservationWithoutEmbeddedStruct)
 	if err == nil {
 		varResourcepoolMembershipReservation := _ResourcepoolMembershipReservation{}
 		varResourcepoolMembershipReservation.ClassId = varResourcepoolMembershipReservationWithoutEmbeddedStruct.ClassId
@@ -225,7 +266,7 @@ func (o *ResourcepoolMembershipReservation) UnmarshalJSON(bytes []byte) (err err
 
 	varResourcepoolMembershipReservation := _ResourcepoolMembershipReservation{}
 
-	err = json.Unmarshal(bytes, &varResourcepoolMembershipReservation)
+	err = json.Unmarshal(data, &varResourcepoolMembershipReservation)
 	if err == nil {
 		o.ResourceAbstractReservation = varResourcepoolMembershipReservation.ResourceAbstractReservation
 	} else {
@@ -234,7 +275,7 @@ func (o *ResourcepoolMembershipReservation) UnmarshalJSON(bytes []byte) (err err
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Account")

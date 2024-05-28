@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,7 +13,11 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 )
+
+// checks if the TelemetryDruidExtractionFunctionTimeFormat type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &TelemetryDruidExtractionFunctionTimeFormat{}
 
 // TelemetryDruidExtractionFunctionTimeFormat Returns the dimension value formatted according to the given format string, time zone, and locale. For __time dimension values, this formats the time value bucketed by the aggregation granularity For a regular dimension, it assumes the string is formatted in ISO-8601 date and time format.
 type TelemetryDruidExtractionFunctionTimeFormat struct {
@@ -76,7 +80,7 @@ func (o *TelemetryDruidExtractionFunctionTimeFormat) SetType(v string) {
 
 // GetFormat returns the Format field value if set, zero value otherwise.
 func (o *TelemetryDruidExtractionFunctionTimeFormat) GetFormat() string {
-	if o == nil || o.Format == nil {
+	if o == nil || IsNil(o.Format) {
 		var ret string
 		return ret
 	}
@@ -86,7 +90,7 @@ func (o *TelemetryDruidExtractionFunctionTimeFormat) GetFormat() string {
 // GetFormatOk returns a tuple with the Format field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TelemetryDruidExtractionFunctionTimeFormat) GetFormatOk() (*string, bool) {
-	if o == nil || o.Format == nil {
+	if o == nil || IsNil(o.Format) {
 		return nil, false
 	}
 	return o.Format, true
@@ -94,7 +98,7 @@ func (o *TelemetryDruidExtractionFunctionTimeFormat) GetFormatOk() (*string, boo
 
 // HasFormat returns a boolean if a field has been set.
 func (o *TelemetryDruidExtractionFunctionTimeFormat) HasFormat() bool {
-	if o != nil && o.Format != nil {
+	if o != nil && !IsNil(o.Format) {
 		return true
 	}
 
@@ -108,7 +112,7 @@ func (o *TelemetryDruidExtractionFunctionTimeFormat) SetFormat(v string) {
 
 // GetLocale returns the Locale field value if set, zero value otherwise.
 func (o *TelemetryDruidExtractionFunctionTimeFormat) GetLocale() string {
-	if o == nil || o.Locale == nil {
+	if o == nil || IsNil(o.Locale) {
 		var ret string
 		return ret
 	}
@@ -118,7 +122,7 @@ func (o *TelemetryDruidExtractionFunctionTimeFormat) GetLocale() string {
 // GetLocaleOk returns a tuple with the Locale field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TelemetryDruidExtractionFunctionTimeFormat) GetLocaleOk() (*string, bool) {
-	if o == nil || o.Locale == nil {
+	if o == nil || IsNil(o.Locale) {
 		return nil, false
 	}
 	return o.Locale, true
@@ -126,7 +130,7 @@ func (o *TelemetryDruidExtractionFunctionTimeFormat) GetLocaleOk() (*string, boo
 
 // HasLocale returns a boolean if a field has been set.
 func (o *TelemetryDruidExtractionFunctionTimeFormat) HasLocale() bool {
-	if o != nil && o.Locale != nil {
+	if o != nil && !IsNil(o.Locale) {
 		return true
 	}
 
@@ -140,7 +144,7 @@ func (o *TelemetryDruidExtractionFunctionTimeFormat) SetLocale(v string) {
 
 // GetTimeZone returns the TimeZone field value if set, zero value otherwise.
 func (o *TelemetryDruidExtractionFunctionTimeFormat) GetTimeZone() string {
-	if o == nil || o.TimeZone == nil {
+	if o == nil || IsNil(o.TimeZone) {
 		var ret string
 		return ret
 	}
@@ -150,7 +154,7 @@ func (o *TelemetryDruidExtractionFunctionTimeFormat) GetTimeZone() string {
 // GetTimeZoneOk returns a tuple with the TimeZone field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TelemetryDruidExtractionFunctionTimeFormat) GetTimeZoneOk() (*string, bool) {
-	if o == nil || o.TimeZone == nil {
+	if o == nil || IsNil(o.TimeZone) {
 		return nil, false
 	}
 	return o.TimeZone, true
@@ -158,7 +162,7 @@ func (o *TelemetryDruidExtractionFunctionTimeFormat) GetTimeZoneOk() (*string, b
 
 // HasTimeZone returns a boolean if a field has been set.
 func (o *TelemetryDruidExtractionFunctionTimeFormat) HasTimeZone() bool {
-	if o != nil && o.TimeZone != nil {
+	if o != nil && !IsNil(o.TimeZone) {
 		return true
 	}
 
@@ -172,7 +176,7 @@ func (o *TelemetryDruidExtractionFunctionTimeFormat) SetTimeZone(v string) {
 
 // GetGranularity returns the Granularity field value if set, zero value otherwise.
 func (o *TelemetryDruidExtractionFunctionTimeFormat) GetGranularity() TelemetryDruidGranularity {
-	if o == nil || o.Granularity == nil {
+	if o == nil || IsNil(o.Granularity) {
 		var ret TelemetryDruidGranularity
 		return ret
 	}
@@ -182,7 +186,7 @@ func (o *TelemetryDruidExtractionFunctionTimeFormat) GetGranularity() TelemetryD
 // GetGranularityOk returns a tuple with the Granularity field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TelemetryDruidExtractionFunctionTimeFormat) GetGranularityOk() (*TelemetryDruidGranularity, bool) {
-	if o == nil || o.Granularity == nil {
+	if o == nil || IsNil(o.Granularity) {
 		return nil, false
 	}
 	return o.Granularity, true
@@ -190,7 +194,7 @@ func (o *TelemetryDruidExtractionFunctionTimeFormat) GetGranularityOk() (*Teleme
 
 // HasGranularity returns a boolean if a field has been set.
 func (o *TelemetryDruidExtractionFunctionTimeFormat) HasGranularity() bool {
-	if o != nil && o.Granularity != nil {
+	if o != nil && !IsNil(o.Granularity) {
 		return true
 	}
 
@@ -204,7 +208,7 @@ func (o *TelemetryDruidExtractionFunctionTimeFormat) SetGranularity(v TelemetryD
 
 // GetAsMillis returns the AsMillis field value if set, zero value otherwise.
 func (o *TelemetryDruidExtractionFunctionTimeFormat) GetAsMillis() bool {
-	if o == nil || o.AsMillis == nil {
+	if o == nil || IsNil(o.AsMillis) {
 		var ret bool
 		return ret
 	}
@@ -214,7 +218,7 @@ func (o *TelemetryDruidExtractionFunctionTimeFormat) GetAsMillis() bool {
 // GetAsMillisOk returns a tuple with the AsMillis field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TelemetryDruidExtractionFunctionTimeFormat) GetAsMillisOk() (*bool, bool) {
-	if o == nil || o.AsMillis == nil {
+	if o == nil || IsNil(o.AsMillis) {
 		return nil, false
 	}
 	return o.AsMillis, true
@@ -222,7 +226,7 @@ func (o *TelemetryDruidExtractionFunctionTimeFormat) GetAsMillisOk() (*bool, boo
 
 // HasAsMillis returns a boolean if a field has been set.
 func (o *TelemetryDruidExtractionFunctionTimeFormat) HasAsMillis() bool {
-	if o != nil && o.AsMillis != nil {
+	if o != nil && !IsNil(o.AsMillis) {
 		return true
 	}
 
@@ -235,23 +239,29 @@ func (o *TelemetryDruidExtractionFunctionTimeFormat) SetAsMillis(v bool) {
 }
 
 func (o TelemetryDruidExtractionFunctionTimeFormat) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["type"] = o.Type
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
-	if o.Format != nil {
+	return json.Marshal(toSerialize)
+}
+
+func (o TelemetryDruidExtractionFunctionTimeFormat) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["type"] = o.Type
+	if !IsNil(o.Format) {
 		toSerialize["format"] = o.Format
 	}
-	if o.Locale != nil {
+	if !IsNil(o.Locale) {
 		toSerialize["locale"] = o.Locale
 	}
-	if o.TimeZone != nil {
+	if !IsNil(o.TimeZone) {
 		toSerialize["timeZone"] = o.TimeZone
 	}
-	if o.Granularity != nil {
+	if !IsNil(o.Granularity) {
 		toSerialize["granularity"] = o.Granularity
 	}
-	if o.AsMillis != nil {
+	if !IsNil(o.AsMillis) {
 		toSerialize["asMillis"] = o.AsMillis
 	}
 
@@ -259,19 +269,44 @@ func (o TelemetryDruidExtractionFunctionTimeFormat) MarshalJSON() ([]byte, error
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *TelemetryDruidExtractionFunctionTimeFormat) UnmarshalJSON(bytes []byte) (err error) {
+func (o *TelemetryDruidExtractionFunctionTimeFormat) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"type",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	varTelemetryDruidExtractionFunctionTimeFormat := _TelemetryDruidExtractionFunctionTimeFormat{}
 
-	if err = json.Unmarshal(bytes, &varTelemetryDruidExtractionFunctionTimeFormat); err == nil {
-		*o = TelemetryDruidExtractionFunctionTimeFormat(varTelemetryDruidExtractionFunctionTimeFormat)
+	err = json.Unmarshal(data, &varTelemetryDruidExtractionFunctionTimeFormat)
+
+	if err != nil {
+		return err
 	}
+
+	*o = TelemetryDruidExtractionFunctionTimeFormat(varTelemetryDruidExtractionFunctionTimeFormat)
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "type")
 		delete(additionalProperties, "format")
 		delete(additionalProperties, "locale")

@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "storage.NetAppFcInterfaceEvent"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "storage.NetAppFcInterfaceEvent"]
-**FcInterface** | Pointer to [**StorageNetAppFcInterfaceRelationship**](StorageNetAppFcInterfaceRelationship.md) |  | [optional] 
+**FcInterface** | Pointer to [**NullableStorageNetAppFcInterfaceRelationship**](StorageNetAppFcInterfaceRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -92,6 +92,16 @@ SetFcInterface sets FcInterface field to given value.
 
 HasFcInterface returns a boolean if a field has been set.
 
+### SetFcInterfaceNil
+
+`func (o *StorageNetAppFcInterfaceEvent) SetFcInterfaceNil(b bool)`
+
+ SetFcInterfaceNil sets the value for FcInterface to be an explicit nil
+
+### UnsetFcInterface
+`func (o *StorageNetAppFcInterfaceEvent) UnsetFcInterface()`
+
+UnsetFcInterface ensures that no value is present for FcInterface, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

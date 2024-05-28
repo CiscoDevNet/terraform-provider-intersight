@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "recovery.ConfigResult"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "recovery.ConfigResult"]
-**BackupProfile** | Pointer to [**RecoveryBackupProfileRelationship**](RecoveryBackupProfileRelationship.md) |  | [optional] 
+**BackupProfile** | Pointer to [**NullableRecoveryBackupProfileRelationship**](RecoveryBackupProfileRelationship.md) |  | [optional] 
 **ResultEntries** | Pointer to [**[]RecoveryConfigResultEntryRelationship**](RecoveryConfigResultEntryRelationship.md) | An array of relationships to recoveryConfigResultEntry resources. | [optional] 
 
 ## Methods
@@ -93,6 +93,16 @@ SetBackupProfile sets BackupProfile field to given value.
 
 HasBackupProfile returns a boolean if a field has been set.
 
+### SetBackupProfileNil
+
+`func (o *RecoveryConfigResult) SetBackupProfileNil(b bool)`
+
+ SetBackupProfileNil sets the value for BackupProfile to be an explicit nil
+
+### UnsetBackupProfile
+`func (o *RecoveryConfigResult) UnsetBackupProfile()`
+
+UnsetBackupProfile ensures that no value is present for BackupProfile, not even an explicit nil
 ### GetResultEntries
 
 `func (o *RecoveryConfigResult) GetResultEntries() []RecoveryConfigResultEntryRelationship`

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the TerraformExecutor type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &TerraformExecutor{}
 
 // TerraformExecutor Executor is a ManagedObject, aka MO. This API is used to execute terraform scripts.
 type TerraformExecutor struct {
@@ -49,10 +53,10 @@ type TerraformExecutor struct {
 	// TaskId of a pontem workflow is same as the MO.
 	TaskId *string `json:"TaskId,omitempty"`
 	// Variables needed by the terraform configuration as a JSON object.
-	Variables            interface{}                          `json:"Variables,omitempty"`
-	Account              *IamAccountRelationship              `json:"Account,omitempty"`
-	RegisteredDevice     *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
-	WorkflowInfo         *WorkflowWorkflowInfoRelationship    `json:"WorkflowInfo,omitempty"`
+	Variables            interface{}                                 `json:"Variables,omitempty"`
+	Account              NullableIamAccountRelationship              `json:"Account,omitempty"`
+	RegisteredDevice     NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+	WorkflowInfo         NullableWorkflowWorkflowInfoRelationship    `json:"WorkflowInfo,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -146,7 +150,7 @@ func (o *TerraformExecutor) GetCloudResource() []TerraformCloudResource {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *TerraformExecutor) GetCloudResourceOk() ([]TerraformCloudResource, bool) {
-	if o == nil || o.CloudResource == nil {
+	if o == nil || IsNil(o.CloudResource) {
 		return nil, false
 	}
 	return o.CloudResource, true
@@ -154,7 +158,7 @@ func (o *TerraformExecutor) GetCloudResourceOk() ([]TerraformCloudResource, bool
 
 // HasCloudResource returns a boolean if a field has been set.
 func (o *TerraformExecutor) HasCloudResource() bool {
-	if o != nil && o.CloudResource != nil {
+	if o != nil && IsNil(o.CloudResource) {
 		return true
 	}
 
@@ -168,7 +172,7 @@ func (o *TerraformExecutor) SetCloudResource(v []TerraformCloudResource) {
 
 // GetCommand returns the Command field value if set, zero value otherwise.
 func (o *TerraformExecutor) GetCommand() string {
-	if o == nil || o.Command == nil {
+	if o == nil || IsNil(o.Command) {
 		var ret string
 		return ret
 	}
@@ -178,7 +182,7 @@ func (o *TerraformExecutor) GetCommand() string {
 // GetCommandOk returns a tuple with the Command field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TerraformExecutor) GetCommandOk() (*string, bool) {
-	if o == nil || o.Command == nil {
+	if o == nil || IsNil(o.Command) {
 		return nil, false
 	}
 	return o.Command, true
@@ -186,7 +190,7 @@ func (o *TerraformExecutor) GetCommandOk() (*string, bool) {
 
 // HasCommand returns a boolean if a field has been set.
 func (o *TerraformExecutor) HasCommand() bool {
-	if o != nil && o.Command != nil {
+	if o != nil && !IsNil(o.Command) {
 		return true
 	}
 
@@ -200,7 +204,7 @@ func (o *TerraformExecutor) SetCommand(v string) {
 
 // GetOperation returns the Operation field value if set, zero value otherwise.
 func (o *TerraformExecutor) GetOperation() string {
-	if o == nil || o.Operation == nil {
+	if o == nil || IsNil(o.Operation) {
 		var ret string
 		return ret
 	}
@@ -210,7 +214,7 @@ func (o *TerraformExecutor) GetOperation() string {
 // GetOperationOk returns a tuple with the Operation field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TerraformExecutor) GetOperationOk() (*string, bool) {
-	if o == nil || o.Operation == nil {
+	if o == nil || IsNil(o.Operation) {
 		return nil, false
 	}
 	return o.Operation, true
@@ -218,7 +222,7 @@ func (o *TerraformExecutor) GetOperationOk() (*string, bool) {
 
 // HasOperation returns a boolean if a field has been set.
 func (o *TerraformExecutor) HasOperation() bool {
-	if o != nil && o.Operation != nil {
+	if o != nil && !IsNil(o.Operation) {
 		return true
 	}
 
@@ -243,7 +247,7 @@ func (o *TerraformExecutor) GetOutput() interface{} {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *TerraformExecutor) GetOutputOk() (*interface{}, bool) {
-	if o == nil || o.Output == nil {
+	if o == nil || IsNil(o.Output) {
 		return nil, false
 	}
 	return &o.Output, true
@@ -251,7 +255,7 @@ func (o *TerraformExecutor) GetOutputOk() (*interface{}, bool) {
 
 // HasOutput returns a boolean if a field has been set.
 func (o *TerraformExecutor) HasOutput() bool {
-	if o != nil && o.Output != nil {
+	if o != nil && IsNil(o.Output) {
 		return true
 	}
 
@@ -265,7 +269,7 @@ func (o *TerraformExecutor) SetOutput(v interface{}) {
 
 // GetPlatformType returns the PlatformType field value if set, zero value otherwise.
 func (o *TerraformExecutor) GetPlatformType() string {
-	if o == nil || o.PlatformType == nil {
+	if o == nil || IsNil(o.PlatformType) {
 		var ret string
 		return ret
 	}
@@ -275,7 +279,7 @@ func (o *TerraformExecutor) GetPlatformType() string {
 // GetPlatformTypeOk returns a tuple with the PlatformType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TerraformExecutor) GetPlatformTypeOk() (*string, bool) {
-	if o == nil || o.PlatformType == nil {
+	if o == nil || IsNil(o.PlatformType) {
 		return nil, false
 	}
 	return o.PlatformType, true
@@ -283,7 +287,7 @@ func (o *TerraformExecutor) GetPlatformTypeOk() (*string, bool) {
 
 // HasPlatformType returns a boolean if a field has been set.
 func (o *TerraformExecutor) HasPlatformType() bool {
-	if o != nil && o.PlatformType != nil {
+	if o != nil && !IsNil(o.PlatformType) {
 		return true
 	}
 
@@ -308,7 +312,7 @@ func (o *TerraformExecutor) GetRunState() []TerraformRunstate {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *TerraformExecutor) GetRunStateOk() ([]TerraformRunstate, bool) {
-	if o == nil || o.RunState == nil {
+	if o == nil || IsNil(o.RunState) {
 		return nil, false
 	}
 	return o.RunState, true
@@ -316,7 +320,7 @@ func (o *TerraformExecutor) GetRunStateOk() ([]TerraformRunstate, bool) {
 
 // HasRunState returns a boolean if a field has been set.
 func (o *TerraformExecutor) HasRunState() bool {
-	if o != nil && o.RunState != nil {
+	if o != nil && IsNil(o.RunState) {
 		return true
 	}
 
@@ -330,7 +334,7 @@ func (o *TerraformExecutor) SetRunState(v []TerraformRunstate) {
 
 // GetSourceFolderName returns the SourceFolderName field value if set, zero value otherwise.
 func (o *TerraformExecutor) GetSourceFolderName() string {
-	if o == nil || o.SourceFolderName == nil {
+	if o == nil || IsNil(o.SourceFolderName) {
 		var ret string
 		return ret
 	}
@@ -340,7 +344,7 @@ func (o *TerraformExecutor) GetSourceFolderName() string {
 // GetSourceFolderNameOk returns a tuple with the SourceFolderName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TerraformExecutor) GetSourceFolderNameOk() (*string, bool) {
-	if o == nil || o.SourceFolderName == nil {
+	if o == nil || IsNil(o.SourceFolderName) {
 		return nil, false
 	}
 	return o.SourceFolderName, true
@@ -348,7 +352,7 @@ func (o *TerraformExecutor) GetSourceFolderNameOk() (*string, bool) {
 
 // HasSourceFolderName returns a boolean if a field has been set.
 func (o *TerraformExecutor) HasSourceFolderName() bool {
-	if o != nil && o.SourceFolderName != nil {
+	if o != nil && !IsNil(o.SourceFolderName) {
 		return true
 	}
 
@@ -362,7 +366,7 @@ func (o *TerraformExecutor) SetSourceFolderName(v string) {
 
 // GetSourceFolderPath returns the SourceFolderPath field value if set, zero value otherwise.
 func (o *TerraformExecutor) GetSourceFolderPath() string {
-	if o == nil || o.SourceFolderPath == nil {
+	if o == nil || IsNil(o.SourceFolderPath) {
 		var ret string
 		return ret
 	}
@@ -372,7 +376,7 @@ func (o *TerraformExecutor) GetSourceFolderPath() string {
 // GetSourceFolderPathOk returns a tuple with the SourceFolderPath field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TerraformExecutor) GetSourceFolderPathOk() (*string, bool) {
-	if o == nil || o.SourceFolderPath == nil {
+	if o == nil || IsNil(o.SourceFolderPath) {
 		return nil, false
 	}
 	return o.SourceFolderPath, true
@@ -380,7 +384,7 @@ func (o *TerraformExecutor) GetSourceFolderPathOk() (*string, bool) {
 
 // HasSourceFolderPath returns a boolean if a field has been set.
 func (o *TerraformExecutor) HasSourceFolderPath() bool {
-	if o != nil && o.SourceFolderPath != nil {
+	if o != nil && !IsNil(o.SourceFolderPath) {
 		return true
 	}
 
@@ -394,7 +398,7 @@ func (o *TerraformExecutor) SetSourceFolderPath(v string) {
 
 // GetSourceLocation returns the SourceLocation field value if set, zero value otherwise.
 func (o *TerraformExecutor) GetSourceLocation() string {
-	if o == nil || o.SourceLocation == nil {
+	if o == nil || IsNil(o.SourceLocation) {
 		var ret string
 		return ret
 	}
@@ -404,7 +408,7 @@ func (o *TerraformExecutor) GetSourceLocation() string {
 // GetSourceLocationOk returns a tuple with the SourceLocation field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TerraformExecutor) GetSourceLocationOk() (*string, bool) {
-	if o == nil || o.SourceLocation == nil {
+	if o == nil || IsNil(o.SourceLocation) {
 		return nil, false
 	}
 	return o.SourceLocation, true
@@ -412,7 +416,7 @@ func (o *TerraformExecutor) GetSourceLocationOk() (*string, bool) {
 
 // HasSourceLocation returns a boolean if a field has been set.
 func (o *TerraformExecutor) HasSourceLocation() bool {
-	if o != nil && o.SourceLocation != nil {
+	if o != nil && !IsNil(o.SourceLocation) {
 		return true
 	}
 
@@ -426,7 +430,7 @@ func (o *TerraformExecutor) SetSourceLocation(v string) {
 
 // GetStatus returns the Status field value if set, zero value otherwise.
 func (o *TerraformExecutor) GetStatus() string {
-	if o == nil || o.Status == nil {
+	if o == nil || IsNil(o.Status) {
 		var ret string
 		return ret
 	}
@@ -436,7 +440,7 @@ func (o *TerraformExecutor) GetStatus() string {
 // GetStatusOk returns a tuple with the Status field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TerraformExecutor) GetStatusOk() (*string, bool) {
-	if o == nil || o.Status == nil {
+	if o == nil || IsNil(o.Status) {
 		return nil, false
 	}
 	return o.Status, true
@@ -444,7 +448,7 @@ func (o *TerraformExecutor) GetStatusOk() (*string, bool) {
 
 // HasStatus returns a boolean if a field has been set.
 func (o *TerraformExecutor) HasStatus() bool {
-	if o != nil && o.Status != nil {
+	if o != nil && !IsNil(o.Status) {
 		return true
 	}
 
@@ -469,7 +473,7 @@ func (o *TerraformExecutor) GetStderr() interface{} {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *TerraformExecutor) GetStderrOk() (*interface{}, bool) {
-	if o == nil || o.Stderr == nil {
+	if o == nil || IsNil(o.Stderr) {
 		return nil, false
 	}
 	return &o.Stderr, true
@@ -477,7 +481,7 @@ func (o *TerraformExecutor) GetStderrOk() (*interface{}, bool) {
 
 // HasStderr returns a boolean if a field has been set.
 func (o *TerraformExecutor) HasStderr() bool {
-	if o != nil && o.Stderr != nil {
+	if o != nil && IsNil(o.Stderr) {
 		return true
 	}
 
@@ -502,7 +506,7 @@ func (o *TerraformExecutor) GetStdout() interface{} {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *TerraformExecutor) GetStdoutOk() (*interface{}, bool) {
-	if o == nil || o.Stdout == nil {
+	if o == nil || IsNil(o.Stdout) {
 		return nil, false
 	}
 	return &o.Stdout, true
@@ -510,7 +514,7 @@ func (o *TerraformExecutor) GetStdoutOk() (*interface{}, bool) {
 
 // HasStdout returns a boolean if a field has been set.
 func (o *TerraformExecutor) HasStdout() bool {
-	if o != nil && o.Stdout != nil {
+	if o != nil && IsNil(o.Stdout) {
 		return true
 	}
 
@@ -524,7 +528,7 @@ func (o *TerraformExecutor) SetStdout(v interface{}) {
 
 // GetTaskId returns the TaskId field value if set, zero value otherwise.
 func (o *TerraformExecutor) GetTaskId() string {
-	if o == nil || o.TaskId == nil {
+	if o == nil || IsNil(o.TaskId) {
 		var ret string
 		return ret
 	}
@@ -534,7 +538,7 @@ func (o *TerraformExecutor) GetTaskId() string {
 // GetTaskIdOk returns a tuple with the TaskId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TerraformExecutor) GetTaskIdOk() (*string, bool) {
-	if o == nil || o.TaskId == nil {
+	if o == nil || IsNil(o.TaskId) {
 		return nil, false
 	}
 	return o.TaskId, true
@@ -542,7 +546,7 @@ func (o *TerraformExecutor) GetTaskIdOk() (*string, bool) {
 
 // HasTaskId returns a boolean if a field has been set.
 func (o *TerraformExecutor) HasTaskId() bool {
-	if o != nil && o.TaskId != nil {
+	if o != nil && !IsNil(o.TaskId) {
 		return true
 	}
 
@@ -567,7 +571,7 @@ func (o *TerraformExecutor) GetVariables() interface{} {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *TerraformExecutor) GetVariablesOk() (*interface{}, bool) {
-	if o == nil || o.Variables == nil {
+	if o == nil || IsNil(o.Variables) {
 		return nil, false
 	}
 	return &o.Variables, true
@@ -575,7 +579,7 @@ func (o *TerraformExecutor) GetVariablesOk() (*interface{}, bool) {
 
 // HasVariables returns a boolean if a field has been set.
 func (o *TerraformExecutor) HasVariables() bool {
-	if o != nil && o.Variables != nil {
+	if o != nil && IsNil(o.Variables) {
 		return true
 	}
 
@@ -587,146 +591,183 @@ func (o *TerraformExecutor) SetVariables(v interface{}) {
 	o.Variables = v
 }
 
-// GetAccount returns the Account field value if set, zero value otherwise.
+// GetAccount returns the Account field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *TerraformExecutor) GetAccount() IamAccountRelationship {
-	if o == nil || o.Account == nil {
+	if o == nil || IsNil(o.Account.Get()) {
 		var ret IamAccountRelationship
 		return ret
 	}
-	return *o.Account
+	return *o.Account.Get()
 }
 
 // GetAccountOk returns a tuple with the Account field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *TerraformExecutor) GetAccountOk() (*IamAccountRelationship, bool) {
-	if o == nil || o.Account == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Account, true
+	return o.Account.Get(), o.Account.IsSet()
 }
 
 // HasAccount returns a boolean if a field has been set.
 func (o *TerraformExecutor) HasAccount() bool {
-	if o != nil && o.Account != nil {
+	if o != nil && o.Account.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetAccount gets a reference to the given IamAccountRelationship and assigns it to the Account field.
+// SetAccount gets a reference to the given NullableIamAccountRelationship and assigns it to the Account field.
 func (o *TerraformExecutor) SetAccount(v IamAccountRelationship) {
-	o.Account = &v
+	o.Account.Set(&v)
 }
 
-// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise.
+// SetAccountNil sets the value for Account to be an explicit nil
+func (o *TerraformExecutor) SetAccountNil() {
+	o.Account.Set(nil)
+}
+
+// UnsetAccount ensures that no value is present for Account, not even an explicit nil
+func (o *TerraformExecutor) UnsetAccount() {
+	o.Account.Unset()
+}
+
+// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *TerraformExecutor) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil || IsNil(o.RegisteredDevice.Get()) {
 		var ret AssetDeviceRegistrationRelationship
 		return ret
 	}
-	return *o.RegisteredDevice
+	return *o.RegisteredDevice.Get()
 }
 
 // GetRegisteredDeviceOk returns a tuple with the RegisteredDevice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *TerraformExecutor) GetRegisteredDeviceOk() (*AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.RegisteredDevice, true
+	return o.RegisteredDevice.Get(), o.RegisteredDevice.IsSet()
 }
 
 // HasRegisteredDevice returns a boolean if a field has been set.
 func (o *TerraformExecutor) HasRegisteredDevice() bool {
-	if o != nil && o.RegisteredDevice != nil {
+	if o != nil && o.RegisteredDevice.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRegisteredDevice gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
+// SetRegisteredDevice gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
 func (o *TerraformExecutor) SetRegisteredDevice(v AssetDeviceRegistrationRelationship) {
-	o.RegisteredDevice = &v
+	o.RegisteredDevice.Set(&v)
 }
 
-// GetWorkflowInfo returns the WorkflowInfo field value if set, zero value otherwise.
+// SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+func (o *TerraformExecutor) SetRegisteredDeviceNil() {
+	o.RegisteredDevice.Set(nil)
+}
+
+// UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
+func (o *TerraformExecutor) UnsetRegisteredDevice() {
+	o.RegisteredDevice.Unset()
+}
+
+// GetWorkflowInfo returns the WorkflowInfo field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *TerraformExecutor) GetWorkflowInfo() WorkflowWorkflowInfoRelationship {
-	if o == nil || o.WorkflowInfo == nil {
+	if o == nil || IsNil(o.WorkflowInfo.Get()) {
 		var ret WorkflowWorkflowInfoRelationship
 		return ret
 	}
-	return *o.WorkflowInfo
+	return *o.WorkflowInfo.Get()
 }
 
 // GetWorkflowInfoOk returns a tuple with the WorkflowInfo field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *TerraformExecutor) GetWorkflowInfoOk() (*WorkflowWorkflowInfoRelationship, bool) {
-	if o == nil || o.WorkflowInfo == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.WorkflowInfo, true
+	return o.WorkflowInfo.Get(), o.WorkflowInfo.IsSet()
 }
 
 // HasWorkflowInfo returns a boolean if a field has been set.
 func (o *TerraformExecutor) HasWorkflowInfo() bool {
-	if o != nil && o.WorkflowInfo != nil {
+	if o != nil && o.WorkflowInfo.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetWorkflowInfo gets a reference to the given WorkflowWorkflowInfoRelationship and assigns it to the WorkflowInfo field.
+// SetWorkflowInfo gets a reference to the given NullableWorkflowWorkflowInfoRelationship and assigns it to the WorkflowInfo field.
 func (o *TerraformExecutor) SetWorkflowInfo(v WorkflowWorkflowInfoRelationship) {
-	o.WorkflowInfo = &v
+	o.WorkflowInfo.Set(&v)
+}
+
+// SetWorkflowInfoNil sets the value for WorkflowInfo to be an explicit nil
+func (o *TerraformExecutor) SetWorkflowInfoNil() {
+	o.WorkflowInfo.Set(nil)
+}
+
+// UnsetWorkflowInfo ensures that no value is present for WorkflowInfo, not even an explicit nil
+func (o *TerraformExecutor) UnsetWorkflowInfo() {
+	o.WorkflowInfo.Unset()
 }
 
 func (o TerraformExecutor) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o TerraformExecutor) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
 	if o.CloudResource != nil {
 		toSerialize["CloudResource"] = o.CloudResource
 	}
-	if o.Command != nil {
+	if !IsNil(o.Command) {
 		toSerialize["Command"] = o.Command
 	}
-	if o.Operation != nil {
+	if !IsNil(o.Operation) {
 		toSerialize["Operation"] = o.Operation
 	}
 	if o.Output != nil {
 		toSerialize["Output"] = o.Output
 	}
-	if o.PlatformType != nil {
+	if !IsNil(o.PlatformType) {
 		toSerialize["PlatformType"] = o.PlatformType
 	}
 	if o.RunState != nil {
 		toSerialize["RunState"] = o.RunState
 	}
-	if o.SourceFolderName != nil {
+	if !IsNil(o.SourceFolderName) {
 		toSerialize["SourceFolderName"] = o.SourceFolderName
 	}
-	if o.SourceFolderPath != nil {
+	if !IsNil(o.SourceFolderPath) {
 		toSerialize["SourceFolderPath"] = o.SourceFolderPath
 	}
-	if o.SourceLocation != nil {
+	if !IsNil(o.SourceLocation) {
 		toSerialize["SourceLocation"] = o.SourceLocation
 	}
-	if o.Status != nil {
+	if !IsNil(o.Status) {
 		toSerialize["Status"] = o.Status
 	}
 	if o.Stderr != nil {
@@ -735,30 +776,52 @@ func (o TerraformExecutor) MarshalJSON() ([]byte, error) {
 	if o.Stdout != nil {
 		toSerialize["Stdout"] = o.Stdout
 	}
-	if o.TaskId != nil {
+	if !IsNil(o.TaskId) {
 		toSerialize["TaskId"] = o.TaskId
 	}
 	if o.Variables != nil {
 		toSerialize["Variables"] = o.Variables
 	}
-	if o.Account != nil {
-		toSerialize["Account"] = o.Account
+	if o.Account.IsSet() {
+		toSerialize["Account"] = o.Account.Get()
 	}
-	if o.RegisteredDevice != nil {
-		toSerialize["RegisteredDevice"] = o.RegisteredDevice
+	if o.RegisteredDevice.IsSet() {
+		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
 	}
-	if o.WorkflowInfo != nil {
-		toSerialize["WorkflowInfo"] = o.WorkflowInfo
+	if o.WorkflowInfo.IsSet() {
+		toSerialize["WorkflowInfo"] = o.WorkflowInfo.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *TerraformExecutor) UnmarshalJSON(bytes []byte) (err error) {
+func (o *TerraformExecutor) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type TerraformExecutorWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -789,15 +852,15 @@ func (o *TerraformExecutor) UnmarshalJSON(bytes []byte) (err error) {
 		// TaskId of a pontem workflow is same as the MO.
 		TaskId *string `json:"TaskId,omitempty"`
 		// Variables needed by the terraform configuration as a JSON object.
-		Variables        interface{}                          `json:"Variables,omitempty"`
-		Account          *IamAccountRelationship              `json:"Account,omitempty"`
-		RegisteredDevice *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
-		WorkflowInfo     *WorkflowWorkflowInfoRelationship    `json:"WorkflowInfo,omitempty"`
+		Variables        interface{}                                 `json:"Variables,omitempty"`
+		Account          NullableIamAccountRelationship              `json:"Account,omitempty"`
+		RegisteredDevice NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+		WorkflowInfo     NullableWorkflowWorkflowInfoRelationship    `json:"WorkflowInfo,omitempty"`
 	}
 
 	varTerraformExecutorWithoutEmbeddedStruct := TerraformExecutorWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varTerraformExecutorWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varTerraformExecutorWithoutEmbeddedStruct)
 	if err == nil {
 		varTerraformExecutor := _TerraformExecutor{}
 		varTerraformExecutor.ClassId = varTerraformExecutorWithoutEmbeddedStruct.ClassId
@@ -826,7 +889,7 @@ func (o *TerraformExecutor) UnmarshalJSON(bytes []byte) (err error) {
 
 	varTerraformExecutor := _TerraformExecutor{}
 
-	err = json.Unmarshal(bytes, &varTerraformExecutor)
+	err = json.Unmarshal(data, &varTerraformExecutor)
 	if err == nil {
 		o.MoBaseMo = varTerraformExecutor.MoBaseMo
 	} else {
@@ -835,7 +898,7 @@ func (o *TerraformExecutor) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "CloudResource")

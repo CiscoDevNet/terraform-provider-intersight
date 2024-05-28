@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the HyperflexFilePath type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &HyperflexFilePath{}
 
 // HyperflexFilePath File path information for this snapshot.
 type HyperflexFilePath struct {
@@ -105,7 +109,7 @@ func (o *HyperflexFilePath) SetObjectType(v string) {
 
 // GetDsInfo returns the DsInfo field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *HyperflexFilePath) GetDsInfo() HyperflexDatastoreInfo {
-	if o == nil || o.DsInfo.Get() == nil {
+	if o == nil || IsNil(o.DsInfo.Get()) {
 		var ret HyperflexDatastoreInfo
 		return ret
 	}
@@ -148,7 +152,7 @@ func (o *HyperflexFilePath) UnsetDsInfo() {
 
 // GetRelativeFilePath returns the RelativeFilePath field value if set, zero value otherwise.
 func (o *HyperflexFilePath) GetRelativeFilePath() string {
-	if o == nil || o.RelativeFilePath == nil {
+	if o == nil || IsNil(o.RelativeFilePath) {
 		var ret string
 		return ret
 	}
@@ -158,7 +162,7 @@ func (o *HyperflexFilePath) GetRelativeFilePath() string {
 // GetRelativeFilePathOk returns a tuple with the RelativeFilePath field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexFilePath) GetRelativeFilePathOk() (*string, bool) {
-	if o == nil || o.RelativeFilePath == nil {
+	if o == nil || IsNil(o.RelativeFilePath) {
 		return nil, false
 	}
 	return o.RelativeFilePath, true
@@ -166,7 +170,7 @@ func (o *HyperflexFilePath) GetRelativeFilePathOk() (*string, bool) {
 
 // HasRelativeFilePath returns a boolean if a field has been set.
 func (o *HyperflexFilePath) HasRelativeFilePath() bool {
-	if o != nil && o.RelativeFilePath != nil {
+	if o != nil && !IsNil(o.RelativeFilePath) {
 		return true
 	}
 
@@ -179,25 +183,29 @@ func (o *HyperflexFilePath) SetRelativeFilePath(v string) {
 }
 
 func (o HyperflexFilePath) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o HyperflexFilePath) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
 	errMoBaseComplexType = json.Unmarshal([]byte(serializedMoBaseComplexType), &toSerialize)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
 	if o.DsInfo.IsSet() {
 		toSerialize["DsInfo"] = o.DsInfo.Get()
 	}
-	if o.RelativeFilePath != nil {
+	if !IsNil(o.RelativeFilePath) {
 		toSerialize["RelativeFilePath"] = o.RelativeFilePath
 	}
 
@@ -205,10 +213,32 @@ func (o HyperflexFilePath) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *HyperflexFilePath) UnmarshalJSON(bytes []byte) (err error) {
+func (o *HyperflexFilePath) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type HyperflexFilePathWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -221,7 +251,7 @@ func (o *HyperflexFilePath) UnmarshalJSON(bytes []byte) (err error) {
 
 	varHyperflexFilePathWithoutEmbeddedStruct := HyperflexFilePathWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varHyperflexFilePathWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varHyperflexFilePathWithoutEmbeddedStruct)
 	if err == nil {
 		varHyperflexFilePath := _HyperflexFilePath{}
 		varHyperflexFilePath.ClassId = varHyperflexFilePathWithoutEmbeddedStruct.ClassId
@@ -235,7 +265,7 @@ func (o *HyperflexFilePath) UnmarshalJSON(bytes []byte) (err error) {
 
 	varHyperflexFilePath := _HyperflexFilePath{}
 
-	err = json.Unmarshal(bytes, &varHyperflexFilePath)
+	err = json.Unmarshal(data, &varHyperflexFilePath)
 	if err == nil {
 		o.MoBaseComplexType = varHyperflexFilePath.MoBaseComplexType
 	} else {
@@ -244,7 +274,7 @@ func (o *HyperflexFilePath) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "DsInfo")

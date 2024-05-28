@@ -10,16 +10,16 @@ Name | Type | Description | Notes
 **PackageVersion** | Pointer to **string** | Bundle version which the firmware belongs to. | [optional] [readonly] 
 **Type** | Pointer to **string** | The type of the firmware. | [optional] [readonly] 
 **Version** | Pointer to **string** | The version of the firmware. | [optional] [readonly] 
-**BiosUnit** | Pointer to [**BiosUnitRelationship**](BiosUnitRelationship.md) |  | [optional] 
-**GraphicsCard** | Pointer to [**GraphicsCardRelationship**](GraphicsCardRelationship.md) |  | [optional] 
-**InventoryDeviceInfo** | Pointer to [**InventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
-**ManagementController** | Pointer to [**ManagementControllerRelationship**](ManagementControllerRelationship.md) |  | [optional] 
+**BiosUnit** | Pointer to [**NullableBiosUnitRelationship**](BiosUnitRelationship.md) |  | [optional] 
+**GraphicsCard** | Pointer to [**NullableGraphicsCardRelationship**](GraphicsCardRelationship.md) |  | [optional] 
+**InventoryDeviceInfo** | Pointer to [**NullableInventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
+**ManagementController** | Pointer to [**NullableManagementControllerRelationship**](ManagementControllerRelationship.md) |  | [optional] 
 **NetworkElements** | Pointer to [**[]NetworkElementRelationship**](NetworkElementRelationship.md) | An array of relationships to networkElement resources. | [optional] 
-**PciSwitch** | Pointer to [**PciSwitchRelationship**](PciSwitchRelationship.md) |  | [optional] 
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
-**StorageController** | Pointer to [**StorageControllerRelationship**](StorageControllerRelationship.md) |  | [optional] 
-**StorageFlexFlashController** | Pointer to [**StorageFlexFlashControllerRelationship**](StorageFlexFlashControllerRelationship.md) |  | [optional] 
-**StoragePhysicalDisk** | Pointer to [**StoragePhysicalDiskRelationship**](StoragePhysicalDiskRelationship.md) |  | [optional] 
+**PciSwitch** | Pointer to [**NullablePciSwitchRelationship**](PciSwitchRelationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
+**StorageController** | Pointer to [**NullableStorageControllerRelationship**](StorageControllerRelationship.md) |  | [optional] 
+**StorageFlexFlashController** | Pointer to [**NullableStorageFlexFlashControllerRelationship**](StorageFlexFlashControllerRelationship.md) |  | [optional] 
+**StoragePhysicalDisk** | Pointer to [**NullableStoragePhysicalDiskRelationship**](StoragePhysicalDiskRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -205,6 +205,16 @@ SetBiosUnit sets BiosUnit field to given value.
 
 HasBiosUnit returns a boolean if a field has been set.
 
+### SetBiosUnitNil
+
+`func (o *FirmwareRunningFirmware) SetBiosUnitNil(b bool)`
+
+ SetBiosUnitNil sets the value for BiosUnit to be an explicit nil
+
+### UnsetBiosUnit
+`func (o *FirmwareRunningFirmware) UnsetBiosUnit()`
+
+UnsetBiosUnit ensures that no value is present for BiosUnit, not even an explicit nil
 ### GetGraphicsCard
 
 `func (o *FirmwareRunningFirmware) GetGraphicsCard() GraphicsCardRelationship`
@@ -230,6 +240,16 @@ SetGraphicsCard sets GraphicsCard field to given value.
 
 HasGraphicsCard returns a boolean if a field has been set.
 
+### SetGraphicsCardNil
+
+`func (o *FirmwareRunningFirmware) SetGraphicsCardNil(b bool)`
+
+ SetGraphicsCardNil sets the value for GraphicsCard to be an explicit nil
+
+### UnsetGraphicsCard
+`func (o *FirmwareRunningFirmware) UnsetGraphicsCard()`
+
+UnsetGraphicsCard ensures that no value is present for GraphicsCard, not even an explicit nil
 ### GetInventoryDeviceInfo
 
 `func (o *FirmwareRunningFirmware) GetInventoryDeviceInfo() InventoryDeviceInfoRelationship`
@@ -255,6 +275,16 @@ SetInventoryDeviceInfo sets InventoryDeviceInfo field to given value.
 
 HasInventoryDeviceInfo returns a boolean if a field has been set.
 
+### SetInventoryDeviceInfoNil
+
+`func (o *FirmwareRunningFirmware) SetInventoryDeviceInfoNil(b bool)`
+
+ SetInventoryDeviceInfoNil sets the value for InventoryDeviceInfo to be an explicit nil
+
+### UnsetInventoryDeviceInfo
+`func (o *FirmwareRunningFirmware) UnsetInventoryDeviceInfo()`
+
+UnsetInventoryDeviceInfo ensures that no value is present for InventoryDeviceInfo, not even an explicit nil
 ### GetManagementController
 
 `func (o *FirmwareRunningFirmware) GetManagementController() ManagementControllerRelationship`
@@ -280,6 +310,16 @@ SetManagementController sets ManagementController field to given value.
 
 HasManagementController returns a boolean if a field has been set.
 
+### SetManagementControllerNil
+
+`func (o *FirmwareRunningFirmware) SetManagementControllerNil(b bool)`
+
+ SetManagementControllerNil sets the value for ManagementController to be an explicit nil
+
+### UnsetManagementController
+`func (o *FirmwareRunningFirmware) UnsetManagementController()`
+
+UnsetManagementController ensures that no value is present for ManagementController, not even an explicit nil
 ### GetNetworkElements
 
 `func (o *FirmwareRunningFirmware) GetNetworkElements() []NetworkElementRelationship`
@@ -340,6 +380,16 @@ SetPciSwitch sets PciSwitch field to given value.
 
 HasPciSwitch returns a boolean if a field has been set.
 
+### SetPciSwitchNil
+
+`func (o *FirmwareRunningFirmware) SetPciSwitchNil(b bool)`
+
+ SetPciSwitchNil sets the value for PciSwitch to be an explicit nil
+
+### UnsetPciSwitch
+`func (o *FirmwareRunningFirmware) UnsetPciSwitch()`
+
+UnsetPciSwitch ensures that no value is present for PciSwitch, not even an explicit nil
 ### GetRegisteredDevice
 
 `func (o *FirmwareRunningFirmware) GetRegisteredDevice() AssetDeviceRegistrationRelationship`
@@ -365,6 +415,16 @@ SetRegisteredDevice sets RegisteredDevice field to given value.
 
 HasRegisteredDevice returns a boolean if a field has been set.
 
+### SetRegisteredDeviceNil
+
+`func (o *FirmwareRunningFirmware) SetRegisteredDeviceNil(b bool)`
+
+ SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+
+### UnsetRegisteredDevice
+`func (o *FirmwareRunningFirmware) UnsetRegisteredDevice()`
+
+UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
 ### GetStorageController
 
 `func (o *FirmwareRunningFirmware) GetStorageController() StorageControllerRelationship`
@@ -390,6 +450,16 @@ SetStorageController sets StorageController field to given value.
 
 HasStorageController returns a boolean if a field has been set.
 
+### SetStorageControllerNil
+
+`func (o *FirmwareRunningFirmware) SetStorageControllerNil(b bool)`
+
+ SetStorageControllerNil sets the value for StorageController to be an explicit nil
+
+### UnsetStorageController
+`func (o *FirmwareRunningFirmware) UnsetStorageController()`
+
+UnsetStorageController ensures that no value is present for StorageController, not even an explicit nil
 ### GetStorageFlexFlashController
 
 `func (o *FirmwareRunningFirmware) GetStorageFlexFlashController() StorageFlexFlashControllerRelationship`
@@ -415,6 +485,16 @@ SetStorageFlexFlashController sets StorageFlexFlashController field to given val
 
 HasStorageFlexFlashController returns a boolean if a field has been set.
 
+### SetStorageFlexFlashControllerNil
+
+`func (o *FirmwareRunningFirmware) SetStorageFlexFlashControllerNil(b bool)`
+
+ SetStorageFlexFlashControllerNil sets the value for StorageFlexFlashController to be an explicit nil
+
+### UnsetStorageFlexFlashController
+`func (o *FirmwareRunningFirmware) UnsetStorageFlexFlashController()`
+
+UnsetStorageFlexFlashController ensures that no value is present for StorageFlexFlashController, not even an explicit nil
 ### GetStoragePhysicalDisk
 
 `func (o *FirmwareRunningFirmware) GetStoragePhysicalDisk() StoragePhysicalDiskRelationship`
@@ -440,6 +520,16 @@ SetStoragePhysicalDisk sets StoragePhysicalDisk field to given value.
 
 HasStoragePhysicalDisk returns a boolean if a field has been set.
 
+### SetStoragePhysicalDiskNil
+
+`func (o *FirmwareRunningFirmware) SetStoragePhysicalDiskNil(b bool)`
+
+ SetStoragePhysicalDiskNil sets the value for StoragePhysicalDisk to be an explicit nil
+
+### UnsetStoragePhysicalDisk
+`func (o *FirmwareRunningFirmware) UnsetStoragePhysicalDisk()`
+
+UnsetStoragePhysicalDisk ensures that no value is present for StoragePhysicalDisk, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

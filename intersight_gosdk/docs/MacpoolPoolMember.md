@@ -7,11 +7,11 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "macpool.PoolMember"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "macpool.PoolMember"]
 **MacAddress** | Pointer to **string** | MAC Address of this pool member. | [optional] [readonly] 
-**AssignedToEntity** | Pointer to [**MoBaseMoRelationship**](MoBaseMoRelationship.md) |  | [optional] 
-**BlockHead** | Pointer to [**MacpoolIdBlockRelationship**](MacpoolIdBlockRelationship.md) |  | [optional] 
-**Peer** | Pointer to [**MacpoolLeaseRelationship**](MacpoolLeaseRelationship.md) |  | [optional] 
-**Pool** | Pointer to [**MacpoolPoolRelationship**](MacpoolPoolRelationship.md) |  | [optional] 
-**Reservation** | Pointer to [**MacpoolReservationRelationship**](MacpoolReservationRelationship.md) |  | [optional] 
+**AssignedToEntity** | Pointer to [**NullableMoBaseMoRelationship**](MoBaseMoRelationship.md) |  | [optional] 
+**BlockHead** | Pointer to [**NullableMacpoolIdBlockRelationship**](MacpoolIdBlockRelationship.md) |  | [optional] 
+**Peer** | Pointer to [**NullableMacpoolLeaseRelationship**](MacpoolLeaseRelationship.md) |  | [optional] 
+**Pool** | Pointer to [**NullableMacpoolPoolRelationship**](MacpoolPoolRelationship.md) |  | [optional] 
+**Reservation** | Pointer to [**NullableMacpoolReservationRelationship**](MacpoolReservationRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -122,6 +122,16 @@ SetAssignedToEntity sets AssignedToEntity field to given value.
 
 HasAssignedToEntity returns a boolean if a field has been set.
 
+### SetAssignedToEntityNil
+
+`func (o *MacpoolPoolMember) SetAssignedToEntityNil(b bool)`
+
+ SetAssignedToEntityNil sets the value for AssignedToEntity to be an explicit nil
+
+### UnsetAssignedToEntity
+`func (o *MacpoolPoolMember) UnsetAssignedToEntity()`
+
+UnsetAssignedToEntity ensures that no value is present for AssignedToEntity, not even an explicit nil
 ### GetBlockHead
 
 `func (o *MacpoolPoolMember) GetBlockHead() MacpoolIdBlockRelationship`
@@ -147,6 +157,16 @@ SetBlockHead sets BlockHead field to given value.
 
 HasBlockHead returns a boolean if a field has been set.
 
+### SetBlockHeadNil
+
+`func (o *MacpoolPoolMember) SetBlockHeadNil(b bool)`
+
+ SetBlockHeadNil sets the value for BlockHead to be an explicit nil
+
+### UnsetBlockHead
+`func (o *MacpoolPoolMember) UnsetBlockHead()`
+
+UnsetBlockHead ensures that no value is present for BlockHead, not even an explicit nil
 ### GetPeer
 
 `func (o *MacpoolPoolMember) GetPeer() MacpoolLeaseRelationship`
@@ -172,6 +192,16 @@ SetPeer sets Peer field to given value.
 
 HasPeer returns a boolean if a field has been set.
 
+### SetPeerNil
+
+`func (o *MacpoolPoolMember) SetPeerNil(b bool)`
+
+ SetPeerNil sets the value for Peer to be an explicit nil
+
+### UnsetPeer
+`func (o *MacpoolPoolMember) UnsetPeer()`
+
+UnsetPeer ensures that no value is present for Peer, not even an explicit nil
 ### GetPool
 
 `func (o *MacpoolPoolMember) GetPool() MacpoolPoolRelationship`
@@ -197,6 +227,16 @@ SetPool sets Pool field to given value.
 
 HasPool returns a boolean if a field has been set.
 
+### SetPoolNil
+
+`func (o *MacpoolPoolMember) SetPoolNil(b bool)`
+
+ SetPoolNil sets the value for Pool to be an explicit nil
+
+### UnsetPool
+`func (o *MacpoolPoolMember) UnsetPool()`
+
+UnsetPool ensures that no value is present for Pool, not even an explicit nil
 ### GetReservation
 
 `func (o *MacpoolPoolMember) GetReservation() MacpoolReservationRelationship`
@@ -222,6 +262,16 @@ SetReservation sets Reservation field to given value.
 
 HasReservation returns a boolean if a field has been set.
 
+### SetReservationNil
+
+`func (o *MacpoolPoolMember) SetReservationNil(b bool)`
+
+ SetReservationNil sets the value for Reservation to be an explicit nil
+
+### UnsetReservation
+`func (o *MacpoolPoolMember) UnsetReservation()`
+
+UnsetReservation ensures that no value is present for Reservation, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

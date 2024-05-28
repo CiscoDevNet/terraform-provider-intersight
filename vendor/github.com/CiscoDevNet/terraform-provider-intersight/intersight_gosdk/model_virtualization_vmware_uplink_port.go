@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the VirtualizationVmwareUplinkPort type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &VirtualizationVmwareUplinkPort{}
 
 // VirtualizationVmwareUplinkPort The VMware uplink port object is represented here.
 type VirtualizationVmwareUplinkPort struct {
@@ -29,10 +33,10 @@ type VirtualizationVmwareUplinkPort struct {
 	// The internally assigned key of this uplink port object. This entity is not manipulated by users.
 	Key *string `json:"Key,omitempty"`
 	// User-provided name to identify the uplink port object.
-	Name                     *string                                                   `json:"Name,omitempty"`
-	DistributedNetwork       *VirtualizationVmwareDistributedNetworkRelationship       `json:"DistributedNetwork,omitempty"`
-	Host                     *VirtualizationVmwareHostRelationship                     `json:"Host,omitempty"`
-	PhysicalNetworkInterface *VirtualizationVmwarePhysicalNetworkInterfaceRelationship `json:"PhysicalNetworkInterface,omitempty"`
+	Name                     *string                                                          `json:"Name,omitempty"`
+	DistributedNetwork       NullableVirtualizationVmwareDistributedNetworkRelationship       `json:"DistributedNetwork,omitempty"`
+	Host                     NullableVirtualizationVmwareHostRelationship                     `json:"Host,omitempty"`
+	PhysicalNetworkInterface NullableVirtualizationVmwarePhysicalNetworkInterfaceRelationship `json:"PhysicalNetworkInterface,omitempty"`
 	AdditionalProperties     map[string]interface{}
 }
 
@@ -111,7 +115,7 @@ func (o *VirtualizationVmwareUplinkPort) SetObjectType(v string) {
 
 // GetIdentity returns the Identity field value if set, zero value otherwise.
 func (o *VirtualizationVmwareUplinkPort) GetIdentity() string {
-	if o == nil || o.Identity == nil {
+	if o == nil || IsNil(o.Identity) {
 		var ret string
 		return ret
 	}
@@ -121,7 +125,7 @@ func (o *VirtualizationVmwareUplinkPort) GetIdentity() string {
 // GetIdentityOk returns a tuple with the Identity field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationVmwareUplinkPort) GetIdentityOk() (*string, bool) {
-	if o == nil || o.Identity == nil {
+	if o == nil || IsNil(o.Identity) {
 		return nil, false
 	}
 	return o.Identity, true
@@ -129,7 +133,7 @@ func (o *VirtualizationVmwareUplinkPort) GetIdentityOk() (*string, bool) {
 
 // HasIdentity returns a boolean if a field has been set.
 func (o *VirtualizationVmwareUplinkPort) HasIdentity() bool {
-	if o != nil && o.Identity != nil {
+	if o != nil && !IsNil(o.Identity) {
 		return true
 	}
 
@@ -143,7 +147,7 @@ func (o *VirtualizationVmwareUplinkPort) SetIdentity(v string) {
 
 // GetKey returns the Key field value if set, zero value otherwise.
 func (o *VirtualizationVmwareUplinkPort) GetKey() string {
-	if o == nil || o.Key == nil {
+	if o == nil || IsNil(o.Key) {
 		var ret string
 		return ret
 	}
@@ -153,7 +157,7 @@ func (o *VirtualizationVmwareUplinkPort) GetKey() string {
 // GetKeyOk returns a tuple with the Key field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationVmwareUplinkPort) GetKeyOk() (*string, bool) {
-	if o == nil || o.Key == nil {
+	if o == nil || IsNil(o.Key) {
 		return nil, false
 	}
 	return o.Key, true
@@ -161,7 +165,7 @@ func (o *VirtualizationVmwareUplinkPort) GetKeyOk() (*string, bool) {
 
 // HasKey returns a boolean if a field has been set.
 func (o *VirtualizationVmwareUplinkPort) HasKey() bool {
-	if o != nil && o.Key != nil {
+	if o != nil && !IsNil(o.Key) {
 		return true
 	}
 
@@ -175,7 +179,7 @@ func (o *VirtualizationVmwareUplinkPort) SetKey(v string) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *VirtualizationVmwareUplinkPort) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -185,7 +189,7 @@ func (o *VirtualizationVmwareUplinkPort) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationVmwareUplinkPort) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -193,7 +197,7 @@ func (o *VirtualizationVmwareUplinkPort) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *VirtualizationVmwareUplinkPort) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -205,145 +209,204 @@ func (o *VirtualizationVmwareUplinkPort) SetName(v string) {
 	o.Name = &v
 }
 
-// GetDistributedNetwork returns the DistributedNetwork field value if set, zero value otherwise.
+// GetDistributedNetwork returns the DistributedNetwork field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *VirtualizationVmwareUplinkPort) GetDistributedNetwork() VirtualizationVmwareDistributedNetworkRelationship {
-	if o == nil || o.DistributedNetwork == nil {
+	if o == nil || IsNil(o.DistributedNetwork.Get()) {
 		var ret VirtualizationVmwareDistributedNetworkRelationship
 		return ret
 	}
-	return *o.DistributedNetwork
+	return *o.DistributedNetwork.Get()
 }
 
 // GetDistributedNetworkOk returns a tuple with the DistributedNetwork field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *VirtualizationVmwareUplinkPort) GetDistributedNetworkOk() (*VirtualizationVmwareDistributedNetworkRelationship, bool) {
-	if o == nil || o.DistributedNetwork == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.DistributedNetwork, true
+	return o.DistributedNetwork.Get(), o.DistributedNetwork.IsSet()
 }
 
 // HasDistributedNetwork returns a boolean if a field has been set.
 func (o *VirtualizationVmwareUplinkPort) HasDistributedNetwork() bool {
-	if o != nil && o.DistributedNetwork != nil {
+	if o != nil && o.DistributedNetwork.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetDistributedNetwork gets a reference to the given VirtualizationVmwareDistributedNetworkRelationship and assigns it to the DistributedNetwork field.
+// SetDistributedNetwork gets a reference to the given NullableVirtualizationVmwareDistributedNetworkRelationship and assigns it to the DistributedNetwork field.
 func (o *VirtualizationVmwareUplinkPort) SetDistributedNetwork(v VirtualizationVmwareDistributedNetworkRelationship) {
-	o.DistributedNetwork = &v
+	o.DistributedNetwork.Set(&v)
 }
 
-// GetHost returns the Host field value if set, zero value otherwise.
+// SetDistributedNetworkNil sets the value for DistributedNetwork to be an explicit nil
+func (o *VirtualizationVmwareUplinkPort) SetDistributedNetworkNil() {
+	o.DistributedNetwork.Set(nil)
+}
+
+// UnsetDistributedNetwork ensures that no value is present for DistributedNetwork, not even an explicit nil
+func (o *VirtualizationVmwareUplinkPort) UnsetDistributedNetwork() {
+	o.DistributedNetwork.Unset()
+}
+
+// GetHost returns the Host field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *VirtualizationVmwareUplinkPort) GetHost() VirtualizationVmwareHostRelationship {
-	if o == nil || o.Host == nil {
+	if o == nil || IsNil(o.Host.Get()) {
 		var ret VirtualizationVmwareHostRelationship
 		return ret
 	}
-	return *o.Host
+	return *o.Host.Get()
 }
 
 // GetHostOk returns a tuple with the Host field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *VirtualizationVmwareUplinkPort) GetHostOk() (*VirtualizationVmwareHostRelationship, bool) {
-	if o == nil || o.Host == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Host, true
+	return o.Host.Get(), o.Host.IsSet()
 }
 
 // HasHost returns a boolean if a field has been set.
 func (o *VirtualizationVmwareUplinkPort) HasHost() bool {
-	if o != nil && o.Host != nil {
+	if o != nil && o.Host.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetHost gets a reference to the given VirtualizationVmwareHostRelationship and assigns it to the Host field.
+// SetHost gets a reference to the given NullableVirtualizationVmwareHostRelationship and assigns it to the Host field.
 func (o *VirtualizationVmwareUplinkPort) SetHost(v VirtualizationVmwareHostRelationship) {
-	o.Host = &v
+	o.Host.Set(&v)
 }
 
-// GetPhysicalNetworkInterface returns the PhysicalNetworkInterface field value if set, zero value otherwise.
+// SetHostNil sets the value for Host to be an explicit nil
+func (o *VirtualizationVmwareUplinkPort) SetHostNil() {
+	o.Host.Set(nil)
+}
+
+// UnsetHost ensures that no value is present for Host, not even an explicit nil
+func (o *VirtualizationVmwareUplinkPort) UnsetHost() {
+	o.Host.Unset()
+}
+
+// GetPhysicalNetworkInterface returns the PhysicalNetworkInterface field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *VirtualizationVmwareUplinkPort) GetPhysicalNetworkInterface() VirtualizationVmwarePhysicalNetworkInterfaceRelationship {
-	if o == nil || o.PhysicalNetworkInterface == nil {
+	if o == nil || IsNil(o.PhysicalNetworkInterface.Get()) {
 		var ret VirtualizationVmwarePhysicalNetworkInterfaceRelationship
 		return ret
 	}
-	return *o.PhysicalNetworkInterface
+	return *o.PhysicalNetworkInterface.Get()
 }
 
 // GetPhysicalNetworkInterfaceOk returns a tuple with the PhysicalNetworkInterface field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *VirtualizationVmwareUplinkPort) GetPhysicalNetworkInterfaceOk() (*VirtualizationVmwarePhysicalNetworkInterfaceRelationship, bool) {
-	if o == nil || o.PhysicalNetworkInterface == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.PhysicalNetworkInterface, true
+	return o.PhysicalNetworkInterface.Get(), o.PhysicalNetworkInterface.IsSet()
 }
 
 // HasPhysicalNetworkInterface returns a boolean if a field has been set.
 func (o *VirtualizationVmwareUplinkPort) HasPhysicalNetworkInterface() bool {
-	if o != nil && o.PhysicalNetworkInterface != nil {
+	if o != nil && o.PhysicalNetworkInterface.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetPhysicalNetworkInterface gets a reference to the given VirtualizationVmwarePhysicalNetworkInterfaceRelationship and assigns it to the PhysicalNetworkInterface field.
+// SetPhysicalNetworkInterface gets a reference to the given NullableVirtualizationVmwarePhysicalNetworkInterfaceRelationship and assigns it to the PhysicalNetworkInterface field.
 func (o *VirtualizationVmwareUplinkPort) SetPhysicalNetworkInterface(v VirtualizationVmwarePhysicalNetworkInterfaceRelationship) {
-	o.PhysicalNetworkInterface = &v
+	o.PhysicalNetworkInterface.Set(&v)
+}
+
+// SetPhysicalNetworkInterfaceNil sets the value for PhysicalNetworkInterface to be an explicit nil
+func (o *VirtualizationVmwareUplinkPort) SetPhysicalNetworkInterfaceNil() {
+	o.PhysicalNetworkInterface.Set(nil)
+}
+
+// UnsetPhysicalNetworkInterface ensures that no value is present for PhysicalNetworkInterface, not even an explicit nil
+func (o *VirtualizationVmwareUplinkPort) UnsetPhysicalNetworkInterface() {
+	o.PhysicalNetworkInterface.Unset()
 }
 
 func (o VirtualizationVmwareUplinkPort) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o VirtualizationVmwareUplinkPort) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedVirtualizationBaseSourceDevice, errVirtualizationBaseSourceDevice := json.Marshal(o.VirtualizationBaseSourceDevice)
 	if errVirtualizationBaseSourceDevice != nil {
-		return []byte{}, errVirtualizationBaseSourceDevice
+		return map[string]interface{}{}, errVirtualizationBaseSourceDevice
 	}
 	errVirtualizationBaseSourceDevice = json.Unmarshal([]byte(serializedVirtualizationBaseSourceDevice), &toSerialize)
 	if errVirtualizationBaseSourceDevice != nil {
-		return []byte{}, errVirtualizationBaseSourceDevice
+		return map[string]interface{}{}, errVirtualizationBaseSourceDevice
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Identity != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Identity) {
 		toSerialize["Identity"] = o.Identity
 	}
-	if o.Key != nil {
+	if !IsNil(o.Key) {
 		toSerialize["Key"] = o.Key
 	}
-	if o.Name != nil {
+	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
 	}
-	if o.DistributedNetwork != nil {
-		toSerialize["DistributedNetwork"] = o.DistributedNetwork
+	if o.DistributedNetwork.IsSet() {
+		toSerialize["DistributedNetwork"] = o.DistributedNetwork.Get()
 	}
-	if o.Host != nil {
-		toSerialize["Host"] = o.Host
+	if o.Host.IsSet() {
+		toSerialize["Host"] = o.Host.Get()
 	}
-	if o.PhysicalNetworkInterface != nil {
-		toSerialize["PhysicalNetworkInterface"] = o.PhysicalNetworkInterface
+	if o.PhysicalNetworkInterface.IsSet() {
+		toSerialize["PhysicalNetworkInterface"] = o.PhysicalNetworkInterface.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *VirtualizationVmwareUplinkPort) UnmarshalJSON(bytes []byte) (err error) {
+func (o *VirtualizationVmwareUplinkPort) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type VirtualizationVmwareUplinkPortWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -354,15 +417,15 @@ func (o *VirtualizationVmwareUplinkPort) UnmarshalJSON(bytes []byte) (err error)
 		// The internally assigned key of this uplink port object. This entity is not manipulated by users.
 		Key *string `json:"Key,omitempty"`
 		// User-provided name to identify the uplink port object.
-		Name                     *string                                                   `json:"Name,omitempty"`
-		DistributedNetwork       *VirtualizationVmwareDistributedNetworkRelationship       `json:"DistributedNetwork,omitempty"`
-		Host                     *VirtualizationVmwareHostRelationship                     `json:"Host,omitempty"`
-		PhysicalNetworkInterface *VirtualizationVmwarePhysicalNetworkInterfaceRelationship `json:"PhysicalNetworkInterface,omitempty"`
+		Name                     *string                                                          `json:"Name,omitempty"`
+		DistributedNetwork       NullableVirtualizationVmwareDistributedNetworkRelationship       `json:"DistributedNetwork,omitempty"`
+		Host                     NullableVirtualizationVmwareHostRelationship                     `json:"Host,omitempty"`
+		PhysicalNetworkInterface NullableVirtualizationVmwarePhysicalNetworkInterfaceRelationship `json:"PhysicalNetworkInterface,omitempty"`
 	}
 
 	varVirtualizationVmwareUplinkPortWithoutEmbeddedStruct := VirtualizationVmwareUplinkPortWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varVirtualizationVmwareUplinkPortWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varVirtualizationVmwareUplinkPortWithoutEmbeddedStruct)
 	if err == nil {
 		varVirtualizationVmwareUplinkPort := _VirtualizationVmwareUplinkPort{}
 		varVirtualizationVmwareUplinkPort.ClassId = varVirtualizationVmwareUplinkPortWithoutEmbeddedStruct.ClassId
@@ -380,7 +443,7 @@ func (o *VirtualizationVmwareUplinkPort) UnmarshalJSON(bytes []byte) (err error)
 
 	varVirtualizationVmwareUplinkPort := _VirtualizationVmwareUplinkPort{}
 
-	err = json.Unmarshal(bytes, &varVirtualizationVmwareUplinkPort)
+	err = json.Unmarshal(data, &varVirtualizationVmwareUplinkPort)
 	if err == nil {
 		o.VirtualizationBaseSourceDevice = varVirtualizationVmwareUplinkPort.VirtualizationBaseSourceDevice
 	} else {
@@ -389,7 +452,7 @@ func (o *VirtualizationVmwareUplinkPort) UnmarshalJSON(bytes []byte) (err error)
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Identity")

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the ConvergedinfraStorageComplianceDetails type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ConvergedinfraStorageComplianceDetails{}
 
 // ConvergedinfraStorageComplianceDetails The compliance details of a storage in a converged infrastructure pod.
 type ConvergedinfraStorageComplianceDetails struct {
@@ -29,11 +33,11 @@ type ConvergedinfraStorageComplianceDetails struct {
 	// The protocol configured for the communication between the switch and the storage array.
 	Protocol *string `json:"Protocol,omitempty"`
 	// The reference device (e.g. adapter, fabric interconnect) against which the storage compliance is getting evaluated. * `Server` - The component type for a server in a converged infrastructure pod. * `Adapter` - The component type for an adapter on a server in a converged infrastructure pod. * `FabricInterconnect` - The component type for a fabric interconnect in a converged infrastructure pod. * `Nexus` - The component type for a nexus switch in a converged infrastructure pod. * `Storage` - The component type for a storage array in a converged infrastructure pod.
-	RefDevice            *string                                             `json:"RefDevice,omitempty"`
-	AdapterCompliance    *ConvergedinfraAdapterComplianceDetailsRelationship `json:"AdapterCompliance,omitempty"`
-	PodCompliance        *ConvergedinfraPodComplianceInfoRelationship        `json:"PodCompliance,omitempty"`
-	StorageArray         *StorageBaseArrayRelationship                       `json:"StorageArray,omitempty"`
-	SwitchCompliance     *ConvergedinfraSwitchComplianceDetailsRelationship  `json:"SwitchCompliance,omitempty"`
+	RefDevice            *string                                                    `json:"RefDevice,omitempty"`
+	AdapterCompliance    NullableConvergedinfraAdapterComplianceDetailsRelationship `json:"AdapterCompliance,omitempty"`
+	PodCompliance        NullableConvergedinfraPodComplianceInfoRelationship        `json:"PodCompliance,omitempty"`
+	StorageArray         NullableStorageBaseArrayRelationship                       `json:"StorageArray,omitempty"`
+	SwitchCompliance     NullableConvergedinfraSwitchComplianceDetailsRelationship  `json:"SwitchCompliance,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -112,7 +116,7 @@ func (o *ConvergedinfraStorageComplianceDetails) SetObjectType(v string) {
 
 // GetOs returns the Os field value if set, zero value otherwise.
 func (o *ConvergedinfraStorageComplianceDetails) GetOs() string {
-	if o == nil || o.Os == nil {
+	if o == nil || IsNil(o.Os) {
 		var ret string
 		return ret
 	}
@@ -122,7 +126,7 @@ func (o *ConvergedinfraStorageComplianceDetails) GetOs() string {
 // GetOsOk returns a tuple with the Os field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ConvergedinfraStorageComplianceDetails) GetOsOk() (*string, bool) {
-	if o == nil || o.Os == nil {
+	if o == nil || IsNil(o.Os) {
 		return nil, false
 	}
 	return o.Os, true
@@ -130,7 +134,7 @@ func (o *ConvergedinfraStorageComplianceDetails) GetOsOk() (*string, bool) {
 
 // HasOs returns a boolean if a field has been set.
 func (o *ConvergedinfraStorageComplianceDetails) HasOs() bool {
-	if o != nil && o.Os != nil {
+	if o != nil && !IsNil(o.Os) {
 		return true
 	}
 
@@ -144,7 +148,7 @@ func (o *ConvergedinfraStorageComplianceDetails) SetOs(v string) {
 
 // GetProtocol returns the Protocol field value if set, zero value otherwise.
 func (o *ConvergedinfraStorageComplianceDetails) GetProtocol() string {
-	if o == nil || o.Protocol == nil {
+	if o == nil || IsNil(o.Protocol) {
 		var ret string
 		return ret
 	}
@@ -154,7 +158,7 @@ func (o *ConvergedinfraStorageComplianceDetails) GetProtocol() string {
 // GetProtocolOk returns a tuple with the Protocol field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ConvergedinfraStorageComplianceDetails) GetProtocolOk() (*string, bool) {
-	if o == nil || o.Protocol == nil {
+	if o == nil || IsNil(o.Protocol) {
 		return nil, false
 	}
 	return o.Protocol, true
@@ -162,7 +166,7 @@ func (o *ConvergedinfraStorageComplianceDetails) GetProtocolOk() (*string, bool)
 
 // HasProtocol returns a boolean if a field has been set.
 func (o *ConvergedinfraStorageComplianceDetails) HasProtocol() bool {
-	if o != nil && o.Protocol != nil {
+	if o != nil && !IsNil(o.Protocol) {
 		return true
 	}
 
@@ -176,7 +180,7 @@ func (o *ConvergedinfraStorageComplianceDetails) SetProtocol(v string) {
 
 // GetRefDevice returns the RefDevice field value if set, zero value otherwise.
 func (o *ConvergedinfraStorageComplianceDetails) GetRefDevice() string {
-	if o == nil || o.RefDevice == nil {
+	if o == nil || IsNil(o.RefDevice) {
 		var ret string
 		return ret
 	}
@@ -186,7 +190,7 @@ func (o *ConvergedinfraStorageComplianceDetails) GetRefDevice() string {
 // GetRefDeviceOk returns a tuple with the RefDevice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ConvergedinfraStorageComplianceDetails) GetRefDeviceOk() (*string, bool) {
-	if o == nil || o.RefDevice == nil {
+	if o == nil || IsNil(o.RefDevice) {
 		return nil, false
 	}
 	return o.RefDevice, true
@@ -194,7 +198,7 @@ func (o *ConvergedinfraStorageComplianceDetails) GetRefDeviceOk() (*string, bool
 
 // HasRefDevice returns a boolean if a field has been set.
 func (o *ConvergedinfraStorageComplianceDetails) HasRefDevice() bool {
-	if o != nil && o.RefDevice != nil {
+	if o != nil && !IsNil(o.RefDevice) {
 		return true
 	}
 
@@ -206,180 +210,250 @@ func (o *ConvergedinfraStorageComplianceDetails) SetRefDevice(v string) {
 	o.RefDevice = &v
 }
 
-// GetAdapterCompliance returns the AdapterCompliance field value if set, zero value otherwise.
+// GetAdapterCompliance returns the AdapterCompliance field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ConvergedinfraStorageComplianceDetails) GetAdapterCompliance() ConvergedinfraAdapterComplianceDetailsRelationship {
-	if o == nil || o.AdapterCompliance == nil {
+	if o == nil || IsNil(o.AdapterCompliance.Get()) {
 		var ret ConvergedinfraAdapterComplianceDetailsRelationship
 		return ret
 	}
-	return *o.AdapterCompliance
+	return *o.AdapterCompliance.Get()
 }
 
 // GetAdapterComplianceOk returns a tuple with the AdapterCompliance field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ConvergedinfraStorageComplianceDetails) GetAdapterComplianceOk() (*ConvergedinfraAdapterComplianceDetailsRelationship, bool) {
-	if o == nil || o.AdapterCompliance == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.AdapterCompliance, true
+	return o.AdapterCompliance.Get(), o.AdapterCompliance.IsSet()
 }
 
 // HasAdapterCompliance returns a boolean if a field has been set.
 func (o *ConvergedinfraStorageComplianceDetails) HasAdapterCompliance() bool {
-	if o != nil && o.AdapterCompliance != nil {
+	if o != nil && o.AdapterCompliance.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetAdapterCompliance gets a reference to the given ConvergedinfraAdapterComplianceDetailsRelationship and assigns it to the AdapterCompliance field.
+// SetAdapterCompliance gets a reference to the given NullableConvergedinfraAdapterComplianceDetailsRelationship and assigns it to the AdapterCompliance field.
 func (o *ConvergedinfraStorageComplianceDetails) SetAdapterCompliance(v ConvergedinfraAdapterComplianceDetailsRelationship) {
-	o.AdapterCompliance = &v
+	o.AdapterCompliance.Set(&v)
 }
 
-// GetPodCompliance returns the PodCompliance field value if set, zero value otherwise.
+// SetAdapterComplianceNil sets the value for AdapterCompliance to be an explicit nil
+func (o *ConvergedinfraStorageComplianceDetails) SetAdapterComplianceNil() {
+	o.AdapterCompliance.Set(nil)
+}
+
+// UnsetAdapterCompliance ensures that no value is present for AdapterCompliance, not even an explicit nil
+func (o *ConvergedinfraStorageComplianceDetails) UnsetAdapterCompliance() {
+	o.AdapterCompliance.Unset()
+}
+
+// GetPodCompliance returns the PodCompliance field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ConvergedinfraStorageComplianceDetails) GetPodCompliance() ConvergedinfraPodComplianceInfoRelationship {
-	if o == nil || o.PodCompliance == nil {
+	if o == nil || IsNil(o.PodCompliance.Get()) {
 		var ret ConvergedinfraPodComplianceInfoRelationship
 		return ret
 	}
-	return *o.PodCompliance
+	return *o.PodCompliance.Get()
 }
 
 // GetPodComplianceOk returns a tuple with the PodCompliance field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ConvergedinfraStorageComplianceDetails) GetPodComplianceOk() (*ConvergedinfraPodComplianceInfoRelationship, bool) {
-	if o == nil || o.PodCompliance == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.PodCompliance, true
+	return o.PodCompliance.Get(), o.PodCompliance.IsSet()
 }
 
 // HasPodCompliance returns a boolean if a field has been set.
 func (o *ConvergedinfraStorageComplianceDetails) HasPodCompliance() bool {
-	if o != nil && o.PodCompliance != nil {
+	if o != nil && o.PodCompliance.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetPodCompliance gets a reference to the given ConvergedinfraPodComplianceInfoRelationship and assigns it to the PodCompliance field.
+// SetPodCompliance gets a reference to the given NullableConvergedinfraPodComplianceInfoRelationship and assigns it to the PodCompliance field.
 func (o *ConvergedinfraStorageComplianceDetails) SetPodCompliance(v ConvergedinfraPodComplianceInfoRelationship) {
-	o.PodCompliance = &v
+	o.PodCompliance.Set(&v)
 }
 
-// GetStorageArray returns the StorageArray field value if set, zero value otherwise.
+// SetPodComplianceNil sets the value for PodCompliance to be an explicit nil
+func (o *ConvergedinfraStorageComplianceDetails) SetPodComplianceNil() {
+	o.PodCompliance.Set(nil)
+}
+
+// UnsetPodCompliance ensures that no value is present for PodCompliance, not even an explicit nil
+func (o *ConvergedinfraStorageComplianceDetails) UnsetPodCompliance() {
+	o.PodCompliance.Unset()
+}
+
+// GetStorageArray returns the StorageArray field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ConvergedinfraStorageComplianceDetails) GetStorageArray() StorageBaseArrayRelationship {
-	if o == nil || o.StorageArray == nil {
+	if o == nil || IsNil(o.StorageArray.Get()) {
 		var ret StorageBaseArrayRelationship
 		return ret
 	}
-	return *o.StorageArray
+	return *o.StorageArray.Get()
 }
 
 // GetStorageArrayOk returns a tuple with the StorageArray field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ConvergedinfraStorageComplianceDetails) GetStorageArrayOk() (*StorageBaseArrayRelationship, bool) {
-	if o == nil || o.StorageArray == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.StorageArray, true
+	return o.StorageArray.Get(), o.StorageArray.IsSet()
 }
 
 // HasStorageArray returns a boolean if a field has been set.
 func (o *ConvergedinfraStorageComplianceDetails) HasStorageArray() bool {
-	if o != nil && o.StorageArray != nil {
+	if o != nil && o.StorageArray.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetStorageArray gets a reference to the given StorageBaseArrayRelationship and assigns it to the StorageArray field.
+// SetStorageArray gets a reference to the given NullableStorageBaseArrayRelationship and assigns it to the StorageArray field.
 func (o *ConvergedinfraStorageComplianceDetails) SetStorageArray(v StorageBaseArrayRelationship) {
-	o.StorageArray = &v
+	o.StorageArray.Set(&v)
 }
 
-// GetSwitchCompliance returns the SwitchCompliance field value if set, zero value otherwise.
+// SetStorageArrayNil sets the value for StorageArray to be an explicit nil
+func (o *ConvergedinfraStorageComplianceDetails) SetStorageArrayNil() {
+	o.StorageArray.Set(nil)
+}
+
+// UnsetStorageArray ensures that no value is present for StorageArray, not even an explicit nil
+func (o *ConvergedinfraStorageComplianceDetails) UnsetStorageArray() {
+	o.StorageArray.Unset()
+}
+
+// GetSwitchCompliance returns the SwitchCompliance field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ConvergedinfraStorageComplianceDetails) GetSwitchCompliance() ConvergedinfraSwitchComplianceDetailsRelationship {
-	if o == nil || o.SwitchCompliance == nil {
+	if o == nil || IsNil(o.SwitchCompliance.Get()) {
 		var ret ConvergedinfraSwitchComplianceDetailsRelationship
 		return ret
 	}
-	return *o.SwitchCompliance
+	return *o.SwitchCompliance.Get()
 }
 
 // GetSwitchComplianceOk returns a tuple with the SwitchCompliance field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ConvergedinfraStorageComplianceDetails) GetSwitchComplianceOk() (*ConvergedinfraSwitchComplianceDetailsRelationship, bool) {
-	if o == nil || o.SwitchCompliance == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.SwitchCompliance, true
+	return o.SwitchCompliance.Get(), o.SwitchCompliance.IsSet()
 }
 
 // HasSwitchCompliance returns a boolean if a field has been set.
 func (o *ConvergedinfraStorageComplianceDetails) HasSwitchCompliance() bool {
-	if o != nil && o.SwitchCompliance != nil {
+	if o != nil && o.SwitchCompliance.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetSwitchCompliance gets a reference to the given ConvergedinfraSwitchComplianceDetailsRelationship and assigns it to the SwitchCompliance field.
+// SetSwitchCompliance gets a reference to the given NullableConvergedinfraSwitchComplianceDetailsRelationship and assigns it to the SwitchCompliance field.
 func (o *ConvergedinfraStorageComplianceDetails) SetSwitchCompliance(v ConvergedinfraSwitchComplianceDetailsRelationship) {
-	o.SwitchCompliance = &v
+	o.SwitchCompliance.Set(&v)
+}
+
+// SetSwitchComplianceNil sets the value for SwitchCompliance to be an explicit nil
+func (o *ConvergedinfraStorageComplianceDetails) SetSwitchComplianceNil() {
+	o.SwitchCompliance.Set(nil)
+}
+
+// UnsetSwitchCompliance ensures that no value is present for SwitchCompliance, not even an explicit nil
+func (o *ConvergedinfraStorageComplianceDetails) UnsetSwitchCompliance() {
+	o.SwitchCompliance.Unset()
 }
 
 func (o ConvergedinfraStorageComplianceDetails) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o ConvergedinfraStorageComplianceDetails) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedConvergedinfraBaseComplianceDetails, errConvergedinfraBaseComplianceDetails := json.Marshal(o.ConvergedinfraBaseComplianceDetails)
 	if errConvergedinfraBaseComplianceDetails != nil {
-		return []byte{}, errConvergedinfraBaseComplianceDetails
+		return map[string]interface{}{}, errConvergedinfraBaseComplianceDetails
 	}
 	errConvergedinfraBaseComplianceDetails = json.Unmarshal([]byte(serializedConvergedinfraBaseComplianceDetails), &toSerialize)
 	if errConvergedinfraBaseComplianceDetails != nil {
-		return []byte{}, errConvergedinfraBaseComplianceDetails
+		return map[string]interface{}{}, errConvergedinfraBaseComplianceDetails
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Os != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Os) {
 		toSerialize["Os"] = o.Os
 	}
-	if o.Protocol != nil {
+	if !IsNil(o.Protocol) {
 		toSerialize["Protocol"] = o.Protocol
 	}
-	if o.RefDevice != nil {
+	if !IsNil(o.RefDevice) {
 		toSerialize["RefDevice"] = o.RefDevice
 	}
-	if o.AdapterCompliance != nil {
-		toSerialize["AdapterCompliance"] = o.AdapterCompliance
+	if o.AdapterCompliance.IsSet() {
+		toSerialize["AdapterCompliance"] = o.AdapterCompliance.Get()
 	}
-	if o.PodCompliance != nil {
-		toSerialize["PodCompliance"] = o.PodCompliance
+	if o.PodCompliance.IsSet() {
+		toSerialize["PodCompliance"] = o.PodCompliance.Get()
 	}
-	if o.StorageArray != nil {
-		toSerialize["StorageArray"] = o.StorageArray
+	if o.StorageArray.IsSet() {
+		toSerialize["StorageArray"] = o.StorageArray.Get()
 	}
-	if o.SwitchCompliance != nil {
-		toSerialize["SwitchCompliance"] = o.SwitchCompliance
+	if o.SwitchCompliance.IsSet() {
+		toSerialize["SwitchCompliance"] = o.SwitchCompliance.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *ConvergedinfraStorageComplianceDetails) UnmarshalJSON(bytes []byte) (err error) {
+func (o *ConvergedinfraStorageComplianceDetails) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type ConvergedinfraStorageComplianceDetailsWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -390,16 +464,16 @@ func (o *ConvergedinfraStorageComplianceDetails) UnmarshalJSON(bytes []byte) (er
 		// The protocol configured for the communication between the switch and the storage array.
 		Protocol *string `json:"Protocol,omitempty"`
 		// The reference device (e.g. adapter, fabric interconnect) against which the storage compliance is getting evaluated. * `Server` - The component type for a server in a converged infrastructure pod. * `Adapter` - The component type for an adapter on a server in a converged infrastructure pod. * `FabricInterconnect` - The component type for a fabric interconnect in a converged infrastructure pod. * `Nexus` - The component type for a nexus switch in a converged infrastructure pod. * `Storage` - The component type for a storage array in a converged infrastructure pod.
-		RefDevice         *string                                             `json:"RefDevice,omitempty"`
-		AdapterCompliance *ConvergedinfraAdapterComplianceDetailsRelationship `json:"AdapterCompliance,omitempty"`
-		PodCompliance     *ConvergedinfraPodComplianceInfoRelationship        `json:"PodCompliance,omitempty"`
-		StorageArray      *StorageBaseArrayRelationship                       `json:"StorageArray,omitempty"`
-		SwitchCompliance  *ConvergedinfraSwitchComplianceDetailsRelationship  `json:"SwitchCompliance,omitempty"`
+		RefDevice         *string                                                    `json:"RefDevice,omitempty"`
+		AdapterCompliance NullableConvergedinfraAdapterComplianceDetailsRelationship `json:"AdapterCompliance,omitempty"`
+		PodCompliance     NullableConvergedinfraPodComplianceInfoRelationship        `json:"PodCompliance,omitempty"`
+		StorageArray      NullableStorageBaseArrayRelationship                       `json:"StorageArray,omitempty"`
+		SwitchCompliance  NullableConvergedinfraSwitchComplianceDetailsRelationship  `json:"SwitchCompliance,omitempty"`
 	}
 
 	varConvergedinfraStorageComplianceDetailsWithoutEmbeddedStruct := ConvergedinfraStorageComplianceDetailsWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varConvergedinfraStorageComplianceDetailsWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varConvergedinfraStorageComplianceDetailsWithoutEmbeddedStruct)
 	if err == nil {
 		varConvergedinfraStorageComplianceDetails := _ConvergedinfraStorageComplianceDetails{}
 		varConvergedinfraStorageComplianceDetails.ClassId = varConvergedinfraStorageComplianceDetailsWithoutEmbeddedStruct.ClassId
@@ -418,7 +492,7 @@ func (o *ConvergedinfraStorageComplianceDetails) UnmarshalJSON(bytes []byte) (er
 
 	varConvergedinfraStorageComplianceDetails := _ConvergedinfraStorageComplianceDetails{}
 
-	err = json.Unmarshal(bytes, &varConvergedinfraStorageComplianceDetails)
+	err = json.Unmarshal(data, &varConvergedinfraStorageComplianceDetails)
 	if err == nil {
 		o.ConvergedinfraBaseComplianceDetails = varConvergedinfraStorageComplianceDetails.ConvergedinfraBaseComplianceDetails
 	} else {
@@ -427,7 +501,7 @@ func (o *ConvergedinfraStorageComplianceDetails) UnmarshalJSON(bytes []byte) (er
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Os")

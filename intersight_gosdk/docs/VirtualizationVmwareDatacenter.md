@@ -16,8 +16,8 @@ Name | Type | Description | Notes
 **StandardNetworkCount** | Pointer to **int64** | Count of all standard networks associated with this datacenter (DC). | [optional] 
 **VmCount** | Pointer to **int64** | Count of all virtual machines (VMs) associated with this DC. | [optional] 
 **VmTemplateCount** | Pointer to **int64** | Count of all virtual machines templates associated with this DC. | [optional] [readonly] 
-**HypervisorManager** | Pointer to [**VirtualizationVmwareVcenterRelationship**](VirtualizationVmwareVcenterRelationship.md) |  | [optional] 
-**ParentFolder** | Pointer to [**VirtualizationVmwareFolderRelationship**](VirtualizationVmwareFolderRelationship.md) |  | [optional] 
+**HypervisorManager** | Pointer to [**NullableVirtualizationVmwareVcenterRelationship**](VirtualizationVmwareVcenterRelationship.md) |  | [optional] 
+**ParentFolder** | Pointer to [**NullableVirtualizationVmwareFolderRelationship**](VirtualizationVmwareFolderRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -353,6 +353,16 @@ SetHypervisorManager sets HypervisorManager field to given value.
 
 HasHypervisorManager returns a boolean if a field has been set.
 
+### SetHypervisorManagerNil
+
+`func (o *VirtualizationVmwareDatacenter) SetHypervisorManagerNil(b bool)`
+
+ SetHypervisorManagerNil sets the value for HypervisorManager to be an explicit nil
+
+### UnsetHypervisorManager
+`func (o *VirtualizationVmwareDatacenter) UnsetHypervisorManager()`
+
+UnsetHypervisorManager ensures that no value is present for HypervisorManager, not even an explicit nil
 ### GetParentFolder
 
 `func (o *VirtualizationVmwareDatacenter) GetParentFolder() VirtualizationVmwareFolderRelationship`
@@ -378,6 +388,16 @@ SetParentFolder sets ParentFolder field to given value.
 
 HasParentFolder returns a boolean if a field has been set.
 
+### SetParentFolderNil
+
+`func (o *VirtualizationVmwareDatacenter) SetParentFolderNil(b bool)`
+
+ SetParentFolderNil sets the value for ParentFolder to be an explicit nil
+
+### UnsetParentFolder
+`func (o *VirtualizationVmwareDatacenter) UnsetParentFolder()`
+
+UnsetParentFolder ensures that no value is present for ParentFolder, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

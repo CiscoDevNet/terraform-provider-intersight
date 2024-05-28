@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the OpenapiApiMethodMeta type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &OpenapiApiMethodMeta{}
 
 // OpenapiApiMethodMeta Contains metadata about APIs in the previously uploaded OpenAPI specification file.
 type OpenapiApiMethodMeta struct {
@@ -33,8 +37,8 @@ type OpenapiApiMethodMeta struct {
 	// The description of the given API.
 	Name *string `json:"Name,omitempty"`
 	// Path of the selected API endpoint.
-	Path                 *string                         `json:"Path,omitempty"`
-	Source               *OpenapiProcessFileRelationship `json:"Source,omitempty"`
+	Path                 *string                                `json:"Path,omitempty"`
+	Source               NullableOpenapiProcessFileRelationship `json:"Source,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -113,7 +117,7 @@ func (o *OpenapiApiMethodMeta) SetObjectType(v string) {
 
 // GetDescription returns the Description field value if set, zero value otherwise.
 func (o *OpenapiApiMethodMeta) GetDescription() string {
-	if o == nil || o.Description == nil {
+	if o == nil || IsNil(o.Description) {
 		var ret string
 		return ret
 	}
@@ -123,7 +127,7 @@ func (o *OpenapiApiMethodMeta) GetDescription() string {
 // GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OpenapiApiMethodMeta) GetDescriptionOk() (*string, bool) {
-	if o == nil || o.Description == nil {
+	if o == nil || IsNil(o.Description) {
 		return nil, false
 	}
 	return o.Description, true
@@ -131,7 +135,7 @@ func (o *OpenapiApiMethodMeta) GetDescriptionOk() (*string, bool) {
 
 // HasDescription returns a boolean if a field has been set.
 func (o *OpenapiApiMethodMeta) HasDescription() bool {
-	if o != nil && o.Description != nil {
+	if o != nil && !IsNil(o.Description) {
 		return true
 	}
 
@@ -145,7 +149,7 @@ func (o *OpenapiApiMethodMeta) SetDescription(v string) {
 
 // GetDisplayLabel returns the DisplayLabel field value if set, zero value otherwise.
 func (o *OpenapiApiMethodMeta) GetDisplayLabel() string {
-	if o == nil || o.DisplayLabel == nil {
+	if o == nil || IsNil(o.DisplayLabel) {
 		var ret string
 		return ret
 	}
@@ -155,7 +159,7 @@ func (o *OpenapiApiMethodMeta) GetDisplayLabel() string {
 // GetDisplayLabelOk returns a tuple with the DisplayLabel field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OpenapiApiMethodMeta) GetDisplayLabelOk() (*string, bool) {
-	if o == nil || o.DisplayLabel == nil {
+	if o == nil || IsNil(o.DisplayLabel) {
 		return nil, false
 	}
 	return o.DisplayLabel, true
@@ -163,7 +167,7 @@ func (o *OpenapiApiMethodMeta) GetDisplayLabelOk() (*string, bool) {
 
 // HasDisplayLabel returns a boolean if a field has been set.
 func (o *OpenapiApiMethodMeta) HasDisplayLabel() bool {
-	if o != nil && o.DisplayLabel != nil {
+	if o != nil && !IsNil(o.DisplayLabel) {
 		return true
 	}
 
@@ -177,7 +181,7 @@ func (o *OpenapiApiMethodMeta) SetDisplayLabel(v string) {
 
 // GetMethod returns the Method field value if set, zero value otherwise.
 func (o *OpenapiApiMethodMeta) GetMethod() string {
-	if o == nil || o.Method == nil {
+	if o == nil || IsNil(o.Method) {
 		var ret string
 		return ret
 	}
@@ -187,7 +191,7 @@ func (o *OpenapiApiMethodMeta) GetMethod() string {
 // GetMethodOk returns a tuple with the Method field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OpenapiApiMethodMeta) GetMethodOk() (*string, bool) {
-	if o == nil || o.Method == nil {
+	if o == nil || IsNil(o.Method) {
 		return nil, false
 	}
 	return o.Method, true
@@ -195,7 +199,7 @@ func (o *OpenapiApiMethodMeta) GetMethodOk() (*string, bool) {
 
 // HasMethod returns a boolean if a field has been set.
 func (o *OpenapiApiMethodMeta) HasMethod() bool {
-	if o != nil && o.Method != nil {
+	if o != nil && !IsNil(o.Method) {
 		return true
 	}
 
@@ -209,7 +213,7 @@ func (o *OpenapiApiMethodMeta) SetMethod(v string) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *OpenapiApiMethodMeta) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -219,7 +223,7 @@ func (o *OpenapiApiMethodMeta) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OpenapiApiMethodMeta) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -227,7 +231,7 @@ func (o *OpenapiApiMethodMeta) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *OpenapiApiMethodMeta) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -241,7 +245,7 @@ func (o *OpenapiApiMethodMeta) SetName(v string) {
 
 // GetPath returns the Path field value if set, zero value otherwise.
 func (o *OpenapiApiMethodMeta) GetPath() string {
-	if o == nil || o.Path == nil {
+	if o == nil || IsNil(o.Path) {
 		var ret string
 		return ret
 	}
@@ -251,7 +255,7 @@ func (o *OpenapiApiMethodMeta) GetPath() string {
 // GetPathOk returns a tuple with the Path field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OpenapiApiMethodMeta) GetPathOk() (*string, bool) {
-	if o == nil || o.Path == nil {
+	if o == nil || IsNil(o.Path) {
 		return nil, false
 	}
 	return o.Path, true
@@ -259,7 +263,7 @@ func (o *OpenapiApiMethodMeta) GetPathOk() (*string, bool) {
 
 // HasPath returns a boolean if a field has been set.
 func (o *OpenapiApiMethodMeta) HasPath() bool {
-	if o != nil && o.Path != nil {
+	if o != nil && !IsNil(o.Path) {
 		return true
 	}
 
@@ -271,81 +275,118 @@ func (o *OpenapiApiMethodMeta) SetPath(v string) {
 	o.Path = &v
 }
 
-// GetSource returns the Source field value if set, zero value otherwise.
+// GetSource returns the Source field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *OpenapiApiMethodMeta) GetSource() OpenapiProcessFileRelationship {
-	if o == nil || o.Source == nil {
+	if o == nil || IsNil(o.Source.Get()) {
 		var ret OpenapiProcessFileRelationship
 		return ret
 	}
-	return *o.Source
+	return *o.Source.Get()
 }
 
 // GetSourceOk returns a tuple with the Source field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *OpenapiApiMethodMeta) GetSourceOk() (*OpenapiProcessFileRelationship, bool) {
-	if o == nil || o.Source == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Source, true
+	return o.Source.Get(), o.Source.IsSet()
 }
 
 // HasSource returns a boolean if a field has been set.
 func (o *OpenapiApiMethodMeta) HasSource() bool {
-	if o != nil && o.Source != nil {
+	if o != nil && o.Source.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetSource gets a reference to the given OpenapiProcessFileRelationship and assigns it to the Source field.
+// SetSource gets a reference to the given NullableOpenapiProcessFileRelationship and assigns it to the Source field.
 func (o *OpenapiApiMethodMeta) SetSource(v OpenapiProcessFileRelationship) {
-	o.Source = &v
+	o.Source.Set(&v)
+}
+
+// SetSourceNil sets the value for Source to be an explicit nil
+func (o *OpenapiApiMethodMeta) SetSourceNil() {
+	o.Source.Set(nil)
+}
+
+// UnsetSource ensures that no value is present for Source, not even an explicit nil
+func (o *OpenapiApiMethodMeta) UnsetSource() {
+	o.Source.Unset()
 }
 
 func (o OpenapiApiMethodMeta) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o OpenapiApiMethodMeta) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Description != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Description) {
 		toSerialize["Description"] = o.Description
 	}
-	if o.DisplayLabel != nil {
+	if !IsNil(o.DisplayLabel) {
 		toSerialize["DisplayLabel"] = o.DisplayLabel
 	}
-	if o.Method != nil {
+	if !IsNil(o.Method) {
 		toSerialize["Method"] = o.Method
 	}
-	if o.Name != nil {
+	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
 	}
-	if o.Path != nil {
+	if !IsNil(o.Path) {
 		toSerialize["Path"] = o.Path
 	}
-	if o.Source != nil {
-		toSerialize["Source"] = o.Source
+	if o.Source.IsSet() {
+		toSerialize["Source"] = o.Source.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *OpenapiApiMethodMeta) UnmarshalJSON(bytes []byte) (err error) {
+func (o *OpenapiApiMethodMeta) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type OpenapiApiMethodMetaWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -360,13 +401,13 @@ func (o *OpenapiApiMethodMeta) UnmarshalJSON(bytes []byte) (err error) {
 		// The description of the given API.
 		Name *string `json:"Name,omitempty"`
 		// Path of the selected API endpoint.
-		Path   *string                         `json:"Path,omitempty"`
-		Source *OpenapiProcessFileRelationship `json:"Source,omitempty"`
+		Path   *string                                `json:"Path,omitempty"`
+		Source NullableOpenapiProcessFileRelationship `json:"Source,omitempty"`
 	}
 
 	varOpenapiApiMethodMetaWithoutEmbeddedStruct := OpenapiApiMethodMetaWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varOpenapiApiMethodMetaWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varOpenapiApiMethodMetaWithoutEmbeddedStruct)
 	if err == nil {
 		varOpenapiApiMethodMeta := _OpenapiApiMethodMeta{}
 		varOpenapiApiMethodMeta.ClassId = varOpenapiApiMethodMetaWithoutEmbeddedStruct.ClassId
@@ -384,7 +425,7 @@ func (o *OpenapiApiMethodMeta) UnmarshalJSON(bytes []byte) (err error) {
 
 	varOpenapiApiMethodMeta := _OpenapiApiMethodMeta{}
 
-	err = json.Unmarshal(bytes, &varOpenapiApiMethodMeta)
+	err = json.Unmarshal(data, &varOpenapiApiMethodMeta)
 	if err == nil {
 		o.MoBaseMo = varOpenapiApiMethodMeta.MoBaseMo
 	} else {
@@ -393,7 +434,7 @@ func (o *OpenapiApiMethodMeta) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Description")

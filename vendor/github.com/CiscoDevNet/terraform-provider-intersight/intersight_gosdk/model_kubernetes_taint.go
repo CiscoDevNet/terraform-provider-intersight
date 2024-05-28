@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the KubernetesTaint type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &KubernetesTaint{}
 
 // KubernetesTaint A core object consisting of three required properties: key, value, and effect. Taints prevent the scheduling of Pods on nodes or node groups. Taints and tolerations work together to ensure that pods are not scheduled onto inappropriate nodes. One or more taints are applied to a node. A node should only schedule a Pod with the matching tolerations for the configured taints.
 type KubernetesTaint struct {
@@ -108,7 +112,7 @@ func (o *KubernetesTaint) SetObjectType(v string) {
 
 // GetEffect returns the Effect field value if set, zero value otherwise.
 func (o *KubernetesTaint) GetEffect() string {
-	if o == nil || o.Effect == nil {
+	if o == nil || IsNil(o.Effect) {
 		var ret string
 		return ret
 	}
@@ -118,7 +122,7 @@ func (o *KubernetesTaint) GetEffect() string {
 // GetEffectOk returns a tuple with the Effect field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *KubernetesTaint) GetEffectOk() (*string, bool) {
-	if o == nil || o.Effect == nil {
+	if o == nil || IsNil(o.Effect) {
 		return nil, false
 	}
 	return o.Effect, true
@@ -126,7 +130,7 @@ func (o *KubernetesTaint) GetEffectOk() (*string, bool) {
 
 // HasEffect returns a boolean if a field has been set.
 func (o *KubernetesTaint) HasEffect() bool {
-	if o != nil && o.Effect != nil {
+	if o != nil && !IsNil(o.Effect) {
 		return true
 	}
 
@@ -140,7 +144,7 @@ func (o *KubernetesTaint) SetEffect(v string) {
 
 // GetKey returns the Key field value if set, zero value otherwise.
 func (o *KubernetesTaint) GetKey() string {
-	if o == nil || o.Key == nil {
+	if o == nil || IsNil(o.Key) {
 		var ret string
 		return ret
 	}
@@ -150,7 +154,7 @@ func (o *KubernetesTaint) GetKey() string {
 // GetKeyOk returns a tuple with the Key field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *KubernetesTaint) GetKeyOk() (*string, bool) {
-	if o == nil || o.Key == nil {
+	if o == nil || IsNil(o.Key) {
 		return nil, false
 	}
 	return o.Key, true
@@ -158,7 +162,7 @@ func (o *KubernetesTaint) GetKeyOk() (*string, bool) {
 
 // HasKey returns a boolean if a field has been set.
 func (o *KubernetesTaint) HasKey() bool {
-	if o != nil && o.Key != nil {
+	if o != nil && !IsNil(o.Key) {
 		return true
 	}
 
@@ -172,7 +176,7 @@ func (o *KubernetesTaint) SetKey(v string) {
 
 // GetValue returns the Value field value if set, zero value otherwise.
 func (o *KubernetesTaint) GetValue() string {
-	if o == nil || o.Value == nil {
+	if o == nil || IsNil(o.Value) {
 		var ret string
 		return ret
 	}
@@ -182,7 +186,7 @@ func (o *KubernetesTaint) GetValue() string {
 // GetValueOk returns a tuple with the Value field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *KubernetesTaint) GetValueOk() (*string, bool) {
-	if o == nil || o.Value == nil {
+	if o == nil || IsNil(o.Value) {
 		return nil, false
 	}
 	return o.Value, true
@@ -190,7 +194,7 @@ func (o *KubernetesTaint) GetValueOk() (*string, bool) {
 
 // HasValue returns a boolean if a field has been set.
 func (o *KubernetesTaint) HasValue() bool {
-	if o != nil && o.Value != nil {
+	if o != nil && !IsNil(o.Value) {
 		return true
 	}
 
@@ -203,28 +207,32 @@ func (o *KubernetesTaint) SetValue(v string) {
 }
 
 func (o KubernetesTaint) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o KubernetesTaint) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
 	errMoBaseComplexType = json.Unmarshal([]byte(serializedMoBaseComplexType), &toSerialize)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Effect != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Effect) {
 		toSerialize["Effect"] = o.Effect
 	}
-	if o.Key != nil {
+	if !IsNil(o.Key) {
 		toSerialize["Key"] = o.Key
 	}
-	if o.Value != nil {
+	if !IsNil(o.Value) {
 		toSerialize["Value"] = o.Value
 	}
 
@@ -232,10 +240,32 @@ func (o KubernetesTaint) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *KubernetesTaint) UnmarshalJSON(bytes []byte) (err error) {
+func (o *KubernetesTaint) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type KubernetesTaintWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -251,7 +281,7 @@ func (o *KubernetesTaint) UnmarshalJSON(bytes []byte) (err error) {
 
 	varKubernetesTaintWithoutEmbeddedStruct := KubernetesTaintWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varKubernetesTaintWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varKubernetesTaintWithoutEmbeddedStruct)
 	if err == nil {
 		varKubernetesTaint := _KubernetesTaint{}
 		varKubernetesTaint.ClassId = varKubernetesTaintWithoutEmbeddedStruct.ClassId
@@ -266,7 +296,7 @@ func (o *KubernetesTaint) UnmarshalJSON(bytes []byte) (err error) {
 
 	varKubernetesTaint := _KubernetesTaint{}
 
-	err = json.Unmarshal(bytes, &varKubernetesTaint)
+	err = json.Unmarshal(data, &varKubernetesTaint)
 	if err == nil {
 		o.MoBaseComplexType = varKubernetesTaint.MoBaseComplexType
 	} else {
@@ -275,7 +305,7 @@ func (o *KubernetesTaint) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Effect")

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the NiaapiFieldNotice type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &NiaapiFieldNotice{}
 
 // NiaapiFieldNotice This contains the new version release notice.
 type NiaapiFieldNotice struct {
@@ -115,7 +119,7 @@ func (o *NiaapiFieldNotice) SetObjectType(v string) {
 
 // GetBugid returns the Bugid field value if set, zero value otherwise.
 func (o *NiaapiFieldNotice) GetBugid() string {
-	if o == nil || o.Bugid == nil {
+	if o == nil || IsNil(o.Bugid) {
 		var ret string
 		return ret
 	}
@@ -125,7 +129,7 @@ func (o *NiaapiFieldNotice) GetBugid() string {
 // GetBugidOk returns a tuple with the Bugid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiaapiFieldNotice) GetBugidOk() (*string, bool) {
-	if o == nil || o.Bugid == nil {
+	if o == nil || IsNil(o.Bugid) {
 		return nil, false
 	}
 	return o.Bugid, true
@@ -133,7 +137,7 @@ func (o *NiaapiFieldNotice) GetBugidOk() (*string, bool) {
 
 // HasBugid returns a boolean if a field has been set.
 func (o *NiaapiFieldNotice) HasBugid() bool {
-	if o != nil && o.Bugid != nil {
+	if o != nil && !IsNil(o.Bugid) {
 		return true
 	}
 
@@ -147,7 +151,7 @@ func (o *NiaapiFieldNotice) SetBugid(v string) {
 
 // GetFieldNoticeDesc returns the FieldNoticeDesc field value if set, zero value otherwise.
 func (o *NiaapiFieldNotice) GetFieldNoticeDesc() string {
-	if o == nil || o.FieldNoticeDesc == nil {
+	if o == nil || IsNil(o.FieldNoticeDesc) {
 		var ret string
 		return ret
 	}
@@ -157,7 +161,7 @@ func (o *NiaapiFieldNotice) GetFieldNoticeDesc() string {
 // GetFieldNoticeDescOk returns a tuple with the FieldNoticeDesc field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiaapiFieldNotice) GetFieldNoticeDescOk() (*string, bool) {
-	if o == nil || o.FieldNoticeDesc == nil {
+	if o == nil || IsNil(o.FieldNoticeDesc) {
 		return nil, false
 	}
 	return o.FieldNoticeDesc, true
@@ -165,7 +169,7 @@ func (o *NiaapiFieldNotice) GetFieldNoticeDescOk() (*string, bool) {
 
 // HasFieldNoticeDesc returns a boolean if a field has been set.
 func (o *NiaapiFieldNotice) HasFieldNoticeDesc() bool {
-	if o != nil && o.FieldNoticeDesc != nil {
+	if o != nil && !IsNil(o.FieldNoticeDesc) {
 		return true
 	}
 
@@ -179,7 +183,7 @@ func (o *NiaapiFieldNotice) SetFieldNoticeDesc(v string) {
 
 // GetFieldNoticeId returns the FieldNoticeId field value if set, zero value otherwise.
 func (o *NiaapiFieldNotice) GetFieldNoticeId() string {
-	if o == nil || o.FieldNoticeId == nil {
+	if o == nil || IsNil(o.FieldNoticeId) {
 		var ret string
 		return ret
 	}
@@ -189,7 +193,7 @@ func (o *NiaapiFieldNotice) GetFieldNoticeId() string {
 // GetFieldNoticeIdOk returns a tuple with the FieldNoticeId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiaapiFieldNotice) GetFieldNoticeIdOk() (*string, bool) {
-	if o == nil || o.FieldNoticeId == nil {
+	if o == nil || IsNil(o.FieldNoticeId) {
 		return nil, false
 	}
 	return o.FieldNoticeId, true
@@ -197,7 +201,7 @@ func (o *NiaapiFieldNotice) GetFieldNoticeIdOk() (*string, bool) {
 
 // HasFieldNoticeId returns a boolean if a field has been set.
 func (o *NiaapiFieldNotice) HasFieldNoticeId() bool {
-	if o != nil && o.FieldNoticeId != nil {
+	if o != nil && !IsNil(o.FieldNoticeId) {
 		return true
 	}
 
@@ -211,7 +215,7 @@ func (o *NiaapiFieldNotice) SetFieldNoticeId(v string) {
 
 // GetFieldNoticeUrl returns the FieldNoticeUrl field value if set, zero value otherwise.
 func (o *NiaapiFieldNotice) GetFieldNoticeUrl() string {
-	if o == nil || o.FieldNoticeUrl == nil {
+	if o == nil || IsNil(o.FieldNoticeUrl) {
 		var ret string
 		return ret
 	}
@@ -221,7 +225,7 @@ func (o *NiaapiFieldNotice) GetFieldNoticeUrl() string {
 // GetFieldNoticeUrlOk returns a tuple with the FieldNoticeUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiaapiFieldNotice) GetFieldNoticeUrlOk() (*string, bool) {
-	if o == nil || o.FieldNoticeUrl == nil {
+	if o == nil || IsNil(o.FieldNoticeUrl) {
 		return nil, false
 	}
 	return o.FieldNoticeUrl, true
@@ -229,7 +233,7 @@ func (o *NiaapiFieldNotice) GetFieldNoticeUrlOk() (*string, bool) {
 
 // HasFieldNoticeUrl returns a boolean if a field has been set.
 func (o *NiaapiFieldNotice) HasFieldNoticeUrl() bool {
-	if o != nil && o.FieldNoticeUrl != nil {
+	if o != nil && !IsNil(o.FieldNoticeUrl) {
 		return true
 	}
 
@@ -243,7 +247,7 @@ func (o *NiaapiFieldNotice) SetFieldNoticeUrl(v string) {
 
 // GetHeadline returns the Headline field value if set, zero value otherwise.
 func (o *NiaapiFieldNotice) GetHeadline() string {
-	if o == nil || o.Headline == nil {
+	if o == nil || IsNil(o.Headline) {
 		var ret string
 		return ret
 	}
@@ -253,7 +257,7 @@ func (o *NiaapiFieldNotice) GetHeadline() string {
 // GetHeadlineOk returns a tuple with the Headline field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiaapiFieldNotice) GetHeadlineOk() (*string, bool) {
-	if o == nil || o.Headline == nil {
+	if o == nil || IsNil(o.Headline) {
 		return nil, false
 	}
 	return o.Headline, true
@@ -261,7 +265,7 @@ func (o *NiaapiFieldNotice) GetHeadlineOk() (*string, bool) {
 
 // HasHeadline returns a boolean if a field has been set.
 func (o *NiaapiFieldNotice) HasHeadline() bool {
-	if o != nil && o.Headline != nil {
+	if o != nil && !IsNil(o.Headline) {
 		return true
 	}
 
@@ -275,7 +279,7 @@ func (o *NiaapiFieldNotice) SetHeadline(v string) {
 
 // GetHwpid returns the Hwpid field value if set, zero value otherwise.
 func (o *NiaapiFieldNotice) GetHwpid() string {
-	if o == nil || o.Hwpid == nil {
+	if o == nil || IsNil(o.Hwpid) {
 		var ret string
 		return ret
 	}
@@ -285,7 +289,7 @@ func (o *NiaapiFieldNotice) GetHwpid() string {
 // GetHwpidOk returns a tuple with the Hwpid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiaapiFieldNotice) GetHwpidOk() (*string, bool) {
-	if o == nil || o.Hwpid == nil {
+	if o == nil || IsNil(o.Hwpid) {
 		return nil, false
 	}
 	return o.Hwpid, true
@@ -293,7 +297,7 @@ func (o *NiaapiFieldNotice) GetHwpidOk() (*string, bool) {
 
 // HasHwpid returns a boolean if a field has been set.
 func (o *NiaapiFieldNotice) HasHwpid() bool {
-	if o != nil && o.Hwpid != nil {
+	if o != nil && !IsNil(o.Hwpid) {
 		return true
 	}
 
@@ -318,7 +322,7 @@ func (o *NiaapiFieldNotice) GetRevisionInfo() []NiaapiRevisionInfo {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *NiaapiFieldNotice) GetRevisionInfoOk() ([]NiaapiRevisionInfo, bool) {
-	if o == nil || o.RevisionInfo == nil {
+	if o == nil || IsNil(o.RevisionInfo) {
 		return nil, false
 	}
 	return o.RevisionInfo, true
@@ -326,7 +330,7 @@ func (o *NiaapiFieldNotice) GetRevisionInfoOk() ([]NiaapiRevisionInfo, bool) {
 
 // HasRevisionInfo returns a boolean if a field has been set.
 func (o *NiaapiFieldNotice) HasRevisionInfo() bool {
-	if o != nil && o.RevisionInfo != nil {
+	if o != nil && IsNil(o.RevisionInfo) {
 		return true
 	}
 
@@ -340,7 +344,7 @@ func (o *NiaapiFieldNotice) SetRevisionInfo(v []NiaapiRevisionInfo) {
 
 // GetSwRelease returns the SwRelease field value if set, zero value otherwise.
 func (o *NiaapiFieldNotice) GetSwRelease() string {
-	if o == nil || o.SwRelease == nil {
+	if o == nil || IsNil(o.SwRelease) {
 		var ret string
 		return ret
 	}
@@ -350,7 +354,7 @@ func (o *NiaapiFieldNotice) GetSwRelease() string {
 // GetSwReleaseOk returns a tuple with the SwRelease field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiaapiFieldNotice) GetSwReleaseOk() (*string, bool) {
-	if o == nil || o.SwRelease == nil {
+	if o == nil || IsNil(o.SwRelease) {
 		return nil, false
 	}
 	return o.SwRelease, true
@@ -358,7 +362,7 @@ func (o *NiaapiFieldNotice) GetSwReleaseOk() (*string, bool) {
 
 // HasSwRelease returns a boolean if a field has been set.
 func (o *NiaapiFieldNotice) HasSwRelease() bool {
-	if o != nil && o.SwRelease != nil {
+	if o != nil && !IsNil(o.SwRelease) {
 		return true
 	}
 
@@ -372,7 +376,7 @@ func (o *NiaapiFieldNotice) SetSwRelease(v string) {
 
 // GetWorkaroundUrl returns the WorkaroundUrl field value if set, zero value otherwise.
 func (o *NiaapiFieldNotice) GetWorkaroundUrl() string {
-	if o == nil || o.WorkaroundUrl == nil {
+	if o == nil || IsNil(o.WorkaroundUrl) {
 		var ret string
 		return ret
 	}
@@ -382,7 +386,7 @@ func (o *NiaapiFieldNotice) GetWorkaroundUrl() string {
 // GetWorkaroundUrlOk returns a tuple with the WorkaroundUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiaapiFieldNotice) GetWorkaroundUrlOk() (*string, bool) {
-	if o == nil || o.WorkaroundUrl == nil {
+	if o == nil || IsNil(o.WorkaroundUrl) {
 		return nil, false
 	}
 	return o.WorkaroundUrl, true
@@ -390,7 +394,7 @@ func (o *NiaapiFieldNotice) GetWorkaroundUrlOk() (*string, bool) {
 
 // HasWorkaroundUrl returns a boolean if a field has been set.
 func (o *NiaapiFieldNotice) HasWorkaroundUrl() bool {
-	if o != nil && o.WorkaroundUrl != nil {
+	if o != nil && !IsNil(o.WorkaroundUrl) {
 		return true
 	}
 
@@ -403,46 +407,50 @@ func (o *NiaapiFieldNotice) SetWorkaroundUrl(v string) {
 }
 
 func (o NiaapiFieldNotice) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o NiaapiFieldNotice) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Bugid != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Bugid) {
 		toSerialize["Bugid"] = o.Bugid
 	}
-	if o.FieldNoticeDesc != nil {
+	if !IsNil(o.FieldNoticeDesc) {
 		toSerialize["FieldNoticeDesc"] = o.FieldNoticeDesc
 	}
-	if o.FieldNoticeId != nil {
+	if !IsNil(o.FieldNoticeId) {
 		toSerialize["FieldNoticeId"] = o.FieldNoticeId
 	}
-	if o.FieldNoticeUrl != nil {
+	if !IsNil(o.FieldNoticeUrl) {
 		toSerialize["FieldNoticeUrl"] = o.FieldNoticeUrl
 	}
-	if o.Headline != nil {
+	if !IsNil(o.Headline) {
 		toSerialize["Headline"] = o.Headline
 	}
-	if o.Hwpid != nil {
+	if !IsNil(o.Hwpid) {
 		toSerialize["Hwpid"] = o.Hwpid
 	}
 	if o.RevisionInfo != nil {
 		toSerialize["RevisionInfo"] = o.RevisionInfo
 	}
-	if o.SwRelease != nil {
+	if !IsNil(o.SwRelease) {
 		toSerialize["SwRelease"] = o.SwRelease
 	}
-	if o.WorkaroundUrl != nil {
+	if !IsNil(o.WorkaroundUrl) {
 		toSerialize["WorkaroundUrl"] = o.WorkaroundUrl
 	}
 
@@ -450,10 +458,32 @@ func (o NiaapiFieldNotice) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *NiaapiFieldNotice) UnmarshalJSON(bytes []byte) (err error) {
+func (o *NiaapiFieldNotice) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type NiaapiFieldNoticeWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type.
 		ClassId string `json:"ClassId"`
@@ -480,7 +510,7 @@ func (o *NiaapiFieldNotice) UnmarshalJSON(bytes []byte) (err error) {
 
 	varNiaapiFieldNoticeWithoutEmbeddedStruct := NiaapiFieldNoticeWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varNiaapiFieldNoticeWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varNiaapiFieldNoticeWithoutEmbeddedStruct)
 	if err == nil {
 		varNiaapiFieldNotice := _NiaapiFieldNotice{}
 		varNiaapiFieldNotice.ClassId = varNiaapiFieldNoticeWithoutEmbeddedStruct.ClassId
@@ -501,7 +531,7 @@ func (o *NiaapiFieldNotice) UnmarshalJSON(bytes []byte) (err error) {
 
 	varNiaapiFieldNotice := _NiaapiFieldNotice{}
 
-	err = json.Unmarshal(bytes, &varNiaapiFieldNotice)
+	err = json.Unmarshal(data, &varNiaapiFieldNotice)
 	if err == nil {
 		o.MoBaseMo = varNiaapiFieldNotice.MoBaseMo
 	} else {
@@ -510,7 +540,7 @@ func (o *NiaapiFieldNotice) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Bugid")

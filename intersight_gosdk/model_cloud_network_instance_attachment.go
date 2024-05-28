@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,10 +13,14 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 	"time"
 )
+
+// checks if the CloudNetworkInstanceAttachment type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &CloudNetworkInstanceAttachment{}
 
 // CloudNetworkInstanceAttachment Instance attached to a network interface.
 type CloudNetworkInstanceAttachment struct {
@@ -113,7 +117,7 @@ func (o *CloudNetworkInstanceAttachment) SetObjectType(v string) {
 
 // GetAttachTime returns the AttachTime field value if set, zero value otherwise.
 func (o *CloudNetworkInstanceAttachment) GetAttachTime() time.Time {
-	if o == nil || o.AttachTime == nil {
+	if o == nil || IsNil(o.AttachTime) {
 		var ret time.Time
 		return ret
 	}
@@ -123,7 +127,7 @@ func (o *CloudNetworkInstanceAttachment) GetAttachTime() time.Time {
 // GetAttachTimeOk returns a tuple with the AttachTime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudNetworkInstanceAttachment) GetAttachTimeOk() (*time.Time, bool) {
-	if o == nil || o.AttachTime == nil {
+	if o == nil || IsNil(o.AttachTime) {
 		return nil, false
 	}
 	return o.AttachTime, true
@@ -131,7 +135,7 @@ func (o *CloudNetworkInstanceAttachment) GetAttachTimeOk() (*time.Time, bool) {
 
 // HasAttachTime returns a boolean if a field has been set.
 func (o *CloudNetworkInstanceAttachment) HasAttachTime() bool {
-	if o != nil && o.AttachTime != nil {
+	if o != nil && !IsNil(o.AttachTime) {
 		return true
 	}
 
@@ -145,7 +149,7 @@ func (o *CloudNetworkInstanceAttachment) SetAttachTime(v time.Time) {
 
 // GetAutoDelete returns the AutoDelete field value if set, zero value otherwise.
 func (o *CloudNetworkInstanceAttachment) GetAutoDelete() bool {
-	if o == nil || o.AutoDelete == nil {
+	if o == nil || IsNil(o.AutoDelete) {
 		var ret bool
 		return ret
 	}
@@ -155,7 +159,7 @@ func (o *CloudNetworkInstanceAttachment) GetAutoDelete() bool {
 // GetAutoDeleteOk returns a tuple with the AutoDelete field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudNetworkInstanceAttachment) GetAutoDeleteOk() (*bool, bool) {
-	if o == nil || o.AutoDelete == nil {
+	if o == nil || IsNil(o.AutoDelete) {
 		return nil, false
 	}
 	return o.AutoDelete, true
@@ -163,7 +167,7 @@ func (o *CloudNetworkInstanceAttachment) GetAutoDeleteOk() (*bool, bool) {
 
 // HasAutoDelete returns a boolean if a field has been set.
 func (o *CloudNetworkInstanceAttachment) HasAutoDelete() bool {
-	if o != nil && o.AutoDelete != nil {
+	if o != nil && !IsNil(o.AutoDelete) {
 		return true
 	}
 
@@ -177,7 +181,7 @@ func (o *CloudNetworkInstanceAttachment) SetAutoDelete(v bool) {
 
 // GetDeviceIndex returns the DeviceIndex field value if set, zero value otherwise.
 func (o *CloudNetworkInstanceAttachment) GetDeviceIndex() int64 {
-	if o == nil || o.DeviceIndex == nil {
+	if o == nil || IsNil(o.DeviceIndex) {
 		var ret int64
 		return ret
 	}
@@ -187,7 +191,7 @@ func (o *CloudNetworkInstanceAttachment) GetDeviceIndex() int64 {
 // GetDeviceIndexOk returns a tuple with the DeviceIndex field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudNetworkInstanceAttachment) GetDeviceIndexOk() (*int64, bool) {
-	if o == nil || o.DeviceIndex == nil {
+	if o == nil || IsNil(o.DeviceIndex) {
 		return nil, false
 	}
 	return o.DeviceIndex, true
@@ -195,7 +199,7 @@ func (o *CloudNetworkInstanceAttachment) GetDeviceIndexOk() (*int64, bool) {
 
 // HasDeviceIndex returns a boolean if a field has been set.
 func (o *CloudNetworkInstanceAttachment) HasDeviceIndex() bool {
-	if o != nil && o.DeviceIndex != nil {
+	if o != nil && !IsNil(o.DeviceIndex) {
 		return true
 	}
 
@@ -209,7 +213,7 @@ func (o *CloudNetworkInstanceAttachment) SetDeviceIndex(v int64) {
 
 // GetInstanceId returns the InstanceId field value if set, zero value otherwise.
 func (o *CloudNetworkInstanceAttachment) GetInstanceId() string {
-	if o == nil || o.InstanceId == nil {
+	if o == nil || IsNil(o.InstanceId) {
 		var ret string
 		return ret
 	}
@@ -219,7 +223,7 @@ func (o *CloudNetworkInstanceAttachment) GetInstanceId() string {
 // GetInstanceIdOk returns a tuple with the InstanceId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudNetworkInstanceAttachment) GetInstanceIdOk() (*string, bool) {
-	if o == nil || o.InstanceId == nil {
+	if o == nil || IsNil(o.InstanceId) {
 		return nil, false
 	}
 	return o.InstanceId, true
@@ -227,7 +231,7 @@ func (o *CloudNetworkInstanceAttachment) GetInstanceIdOk() (*string, bool) {
 
 // HasInstanceId returns a boolean if a field has been set.
 func (o *CloudNetworkInstanceAttachment) HasInstanceId() bool {
-	if o != nil && o.InstanceId != nil {
+	if o != nil && !IsNil(o.InstanceId) {
 		return true
 	}
 
@@ -241,7 +245,7 @@ func (o *CloudNetworkInstanceAttachment) SetInstanceId(v string) {
 
 // GetState returns the State field value if set, zero value otherwise.
 func (o *CloudNetworkInstanceAttachment) GetState() string {
-	if o == nil || o.State == nil {
+	if o == nil || IsNil(o.State) {
 		var ret string
 		return ret
 	}
@@ -251,7 +255,7 @@ func (o *CloudNetworkInstanceAttachment) GetState() string {
 // GetStateOk returns a tuple with the State field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudNetworkInstanceAttachment) GetStateOk() (*string, bool) {
-	if o == nil || o.State == nil {
+	if o == nil || IsNil(o.State) {
 		return nil, false
 	}
 	return o.State, true
@@ -259,7 +263,7 @@ func (o *CloudNetworkInstanceAttachment) GetStateOk() (*string, bool) {
 
 // HasState returns a boolean if a field has been set.
 func (o *CloudNetworkInstanceAttachment) HasState() bool {
-	if o != nil && o.State != nil {
+	if o != nil && !IsNil(o.State) {
 		return true
 	}
 
@@ -272,34 +276,38 @@ func (o *CloudNetworkInstanceAttachment) SetState(v string) {
 }
 
 func (o CloudNetworkInstanceAttachment) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o CloudNetworkInstanceAttachment) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
 	errMoBaseComplexType = json.Unmarshal([]byte(serializedMoBaseComplexType), &toSerialize)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.AttachTime != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.AttachTime) {
 		toSerialize["AttachTime"] = o.AttachTime
 	}
-	if o.AutoDelete != nil {
+	if !IsNil(o.AutoDelete) {
 		toSerialize["AutoDelete"] = o.AutoDelete
 	}
-	if o.DeviceIndex != nil {
+	if !IsNil(o.DeviceIndex) {
 		toSerialize["DeviceIndex"] = o.DeviceIndex
 	}
-	if o.InstanceId != nil {
+	if !IsNil(o.InstanceId) {
 		toSerialize["InstanceId"] = o.InstanceId
 	}
-	if o.State != nil {
+	if !IsNil(o.State) {
 		toSerialize["State"] = o.State
 	}
 
@@ -307,10 +315,32 @@ func (o CloudNetworkInstanceAttachment) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *CloudNetworkInstanceAttachment) UnmarshalJSON(bytes []byte) (err error) {
+func (o *CloudNetworkInstanceAttachment) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type CloudNetworkInstanceAttachmentWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -330,7 +360,7 @@ func (o *CloudNetworkInstanceAttachment) UnmarshalJSON(bytes []byte) (err error)
 
 	varCloudNetworkInstanceAttachmentWithoutEmbeddedStruct := CloudNetworkInstanceAttachmentWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varCloudNetworkInstanceAttachmentWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varCloudNetworkInstanceAttachmentWithoutEmbeddedStruct)
 	if err == nil {
 		varCloudNetworkInstanceAttachment := _CloudNetworkInstanceAttachment{}
 		varCloudNetworkInstanceAttachment.ClassId = varCloudNetworkInstanceAttachmentWithoutEmbeddedStruct.ClassId
@@ -347,7 +377,7 @@ func (o *CloudNetworkInstanceAttachment) UnmarshalJSON(bytes []byte) (err error)
 
 	varCloudNetworkInstanceAttachment := _CloudNetworkInstanceAttachment{}
 
-	err = json.Unmarshal(bytes, &varCloudNetworkInstanceAttachment)
+	err = json.Unmarshal(data, &varCloudNetworkInstanceAttachment)
 	if err == nil {
 		o.MoBaseComplexType = varCloudNetworkInstanceAttachment.MoBaseComplexType
 	} else {
@@ -356,7 +386,7 @@ func (o *CloudNetworkInstanceAttachment) UnmarshalJSON(bytes []byte) (err error)
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "AttachTime")

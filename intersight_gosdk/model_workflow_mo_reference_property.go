@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the WorkflowMoReferenceProperty type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &WorkflowMoReferenceProperty{}
 
 // WorkflowMoReferenceProperty Capture all the properties for an Intersight managed object reference.
 type WorkflowMoReferenceProperty struct {
@@ -119,7 +123,7 @@ func (o *WorkflowMoReferenceProperty) GetDisplayAttributes() []string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *WorkflowMoReferenceProperty) GetDisplayAttributesOk() ([]string, bool) {
-	if o == nil || o.DisplayAttributes == nil {
+	if o == nil || IsNil(o.DisplayAttributes) {
 		return nil, false
 	}
 	return o.DisplayAttributes, true
@@ -127,7 +131,7 @@ func (o *WorkflowMoReferenceProperty) GetDisplayAttributesOk() ([]string, bool) 
 
 // HasDisplayAttributes returns a boolean if a field has been set.
 func (o *WorkflowMoReferenceProperty) HasDisplayAttributes() bool {
-	if o != nil && o.DisplayAttributes != nil {
+	if o != nil && IsNil(o.DisplayAttributes) {
 		return true
 	}
 
@@ -141,7 +145,7 @@ func (o *WorkflowMoReferenceProperty) SetDisplayAttributes(v []string) {
 
 // GetSelector returns the Selector field value if set, zero value otherwise.
 func (o *WorkflowMoReferenceProperty) GetSelector() string {
-	if o == nil || o.Selector == nil {
+	if o == nil || IsNil(o.Selector) {
 		var ret string
 		return ret
 	}
@@ -151,7 +155,7 @@ func (o *WorkflowMoReferenceProperty) GetSelector() string {
 // GetSelectorOk returns a tuple with the Selector field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowMoReferenceProperty) GetSelectorOk() (*string, bool) {
-	if o == nil || o.Selector == nil {
+	if o == nil || IsNil(o.Selector) {
 		return nil, false
 	}
 	return o.Selector, true
@@ -159,7 +163,7 @@ func (o *WorkflowMoReferenceProperty) GetSelectorOk() (*string, bool) {
 
 // HasSelector returns a boolean if a field has been set.
 func (o *WorkflowMoReferenceProperty) HasSelector() bool {
-	if o != nil && o.Selector != nil {
+	if o != nil && !IsNil(o.Selector) {
 		return true
 	}
 
@@ -173,7 +177,7 @@ func (o *WorkflowMoReferenceProperty) SetSelector(v string) {
 
 // GetSelectorProperty returns the SelectorProperty field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *WorkflowMoReferenceProperty) GetSelectorProperty() WorkflowSelectorProperty {
-	if o == nil || o.SelectorProperty.Get() == nil {
+	if o == nil || IsNil(o.SelectorProperty.Get()) {
 		var ret WorkflowSelectorProperty
 		return ret
 	}
@@ -216,7 +220,7 @@ func (o *WorkflowMoReferenceProperty) UnsetSelectorProperty() {
 
 // GetValueAttribute returns the ValueAttribute field value if set, zero value otherwise.
 func (o *WorkflowMoReferenceProperty) GetValueAttribute() string {
-	if o == nil || o.ValueAttribute == nil {
+	if o == nil || IsNil(o.ValueAttribute) {
 		var ret string
 		return ret
 	}
@@ -226,7 +230,7 @@ func (o *WorkflowMoReferenceProperty) GetValueAttribute() string {
 // GetValueAttributeOk returns a tuple with the ValueAttribute field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowMoReferenceProperty) GetValueAttributeOk() (*string, bool) {
-	if o == nil || o.ValueAttribute == nil {
+	if o == nil || IsNil(o.ValueAttribute) {
 		return nil, false
 	}
 	return o.ValueAttribute, true
@@ -234,7 +238,7 @@ func (o *WorkflowMoReferenceProperty) GetValueAttributeOk() (*string, bool) {
 
 // HasValueAttribute returns a boolean if a field has been set.
 func (o *WorkflowMoReferenceProperty) HasValueAttribute() bool {
-	if o != nil && o.ValueAttribute != nil {
+	if o != nil && !IsNil(o.ValueAttribute) {
 		return true
 	}
 
@@ -247,31 +251,35 @@ func (o *WorkflowMoReferenceProperty) SetValueAttribute(v string) {
 }
 
 func (o WorkflowMoReferenceProperty) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o WorkflowMoReferenceProperty) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
 	errMoBaseComplexType = json.Unmarshal([]byte(serializedMoBaseComplexType), &toSerialize)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
 	if o.DisplayAttributes != nil {
 		toSerialize["DisplayAttributes"] = o.DisplayAttributes
 	}
-	if o.Selector != nil {
+	if !IsNil(o.Selector) {
 		toSerialize["Selector"] = o.Selector
 	}
 	if o.SelectorProperty.IsSet() {
 		toSerialize["SelectorProperty"] = o.SelectorProperty.Get()
 	}
-	if o.ValueAttribute != nil {
+	if !IsNil(o.ValueAttribute) {
 		toSerialize["ValueAttribute"] = o.ValueAttribute
 	}
 
@@ -279,10 +287,32 @@ func (o WorkflowMoReferenceProperty) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *WorkflowMoReferenceProperty) UnmarshalJSON(bytes []byte) (err error) {
+func (o *WorkflowMoReferenceProperty) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type WorkflowMoReferencePropertyWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -298,7 +328,7 @@ func (o *WorkflowMoReferenceProperty) UnmarshalJSON(bytes []byte) (err error) {
 
 	varWorkflowMoReferencePropertyWithoutEmbeddedStruct := WorkflowMoReferencePropertyWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varWorkflowMoReferencePropertyWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varWorkflowMoReferencePropertyWithoutEmbeddedStruct)
 	if err == nil {
 		varWorkflowMoReferenceProperty := _WorkflowMoReferenceProperty{}
 		varWorkflowMoReferenceProperty.ClassId = varWorkflowMoReferencePropertyWithoutEmbeddedStruct.ClassId
@@ -314,7 +344,7 @@ func (o *WorkflowMoReferenceProperty) UnmarshalJSON(bytes []byte) (err error) {
 
 	varWorkflowMoReferenceProperty := _WorkflowMoReferenceProperty{}
 
-	err = json.Unmarshal(bytes, &varWorkflowMoReferenceProperty)
+	err = json.Unmarshal(data, &varWorkflowMoReferenceProperty)
 	if err == nil {
 		o.MoBaseComplexType = varWorkflowMoReferenceProperty.MoBaseComplexType
 	} else {
@@ -323,7 +353,7 @@ func (o *WorkflowMoReferenceProperty) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "DisplayAttributes")

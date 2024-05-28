@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -17,11 +17,14 @@ import (
 	"strings"
 )
 
+// checks if the MoTagSummary type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &MoTagSummary{}
+
 // MoTagSummary A document returned in a response body when the HTTP GET request specifies the 'tag' query parameter.
 type MoTagSummary struct {
 	MoBaseResponse
 	// A discriminator value to disambiguate the schema of a HTTP GET response body.
-	ObjectType           string            `json:"ObjectType"`
+	ObjectType           *string           `json:"ObjectType,omitempty"`
 	Results              []MoTagKeySummary `json:"Results,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
@@ -32,9 +35,8 @@ type _MoTagSummary MoTagSummary
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewMoTagSummary(objectType string) *MoTagSummary {
+func NewMoTagSummary() *MoTagSummary {
 	this := MoTagSummary{}
-	this.ObjectType = objectType
 	return &this
 }
 
@@ -46,28 +48,36 @@ func NewMoTagSummaryWithDefaults() *MoTagSummary {
 	return &this
 }
 
-// GetObjectType returns the ObjectType field value
+// GetObjectType returns the ObjectType field value if set, zero value otherwise.
 func (o *MoTagSummary) GetObjectType() string {
-	if o == nil {
+	if o == nil || IsNil(o.ObjectType) {
 		var ret string
 		return ret
 	}
-
-	return o.ObjectType
+	return *o.ObjectType
 }
 
-// GetObjectTypeOk returns a tuple with the ObjectType field value
+// GetObjectTypeOk returns a tuple with the ObjectType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *MoTagSummary) GetObjectTypeOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.ObjectType) {
 		return nil, false
 	}
-	return &o.ObjectType, true
+	return o.ObjectType, true
 }
 
-// SetObjectType sets field value
+// HasObjectType returns a boolean if a field has been set.
+func (o *MoTagSummary) HasObjectType() bool {
+	if o != nil && !IsNil(o.ObjectType) {
+		return true
+	}
+
+	return false
+}
+
+// SetObjectType gets a reference to the given string and assigns it to the ObjectType field.
 func (o *MoTagSummary) SetObjectType(v string) {
-	o.ObjectType = v
+	o.ObjectType = &v
 }
 
 // GetResults returns the Results field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -83,7 +93,7 @@ func (o *MoTagSummary) GetResults() []MoTagKeySummary {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *MoTagSummary) GetResultsOk() ([]MoTagKeySummary, bool) {
-	if o == nil || o.Results == nil {
+	if o == nil || IsNil(o.Results) {
 		return nil, false
 	}
 	return o.Results, true
@@ -91,7 +101,7 @@ func (o *MoTagSummary) GetResultsOk() ([]MoTagKeySummary, bool) {
 
 // HasResults returns a boolean if a field has been set.
 func (o *MoTagSummary) HasResults() bool {
-	if o != nil && o.Results != nil {
+	if o != nil && IsNil(o.Results) {
 		return true
 	}
 
@@ -104,16 +114,24 @@ func (o *MoTagSummary) SetResults(v []MoTagKeySummary) {
 }
 
 func (o MoTagSummary) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o MoTagSummary) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseResponse, errMoBaseResponse := json.Marshal(o.MoBaseResponse)
 	if errMoBaseResponse != nil {
-		return []byte{}, errMoBaseResponse
+		return map[string]interface{}{}, errMoBaseResponse
 	}
 	errMoBaseResponse = json.Unmarshal([]byte(serializedMoBaseResponse), &toSerialize)
 	if errMoBaseResponse != nil {
-		return []byte{}, errMoBaseResponse
+		return map[string]interface{}{}, errMoBaseResponse
 	}
-	if true {
+	if !IsNil(o.ObjectType) {
 		toSerialize["ObjectType"] = o.ObjectType
 	}
 	if o.Results != nil {
@@ -124,19 +142,19 @@ func (o MoTagSummary) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *MoTagSummary) UnmarshalJSON(bytes []byte) (err error) {
+func (o *MoTagSummary) UnmarshalJSON(data []byte) (err error) {
 	type MoTagSummaryWithoutEmbeddedStruct struct {
 		// A discriminator value to disambiguate the schema of a HTTP GET response body.
-		ObjectType string            `json:"ObjectType"`
+		ObjectType *string           `json:"ObjectType,omitempty"`
 		Results    []MoTagKeySummary `json:"Results,omitempty"`
 	}
 
 	varMoTagSummaryWithoutEmbeddedStruct := MoTagSummaryWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varMoTagSummaryWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varMoTagSummaryWithoutEmbeddedStruct)
 	if err == nil {
 		varMoTagSummary := _MoTagSummary{}
 		varMoTagSummary.ObjectType = varMoTagSummaryWithoutEmbeddedStruct.ObjectType
@@ -148,7 +166,7 @@ func (o *MoTagSummary) UnmarshalJSON(bytes []byte) (err error) {
 
 	varMoTagSummary := _MoTagSummary{}
 
-	err = json.Unmarshal(bytes, &varMoTagSummary)
+	err = json.Unmarshal(data, &varMoTagSummary)
 	if err == nil {
 		o.MoBaseResponse = varMoTagSummary.MoBaseResponse
 	} else {
@@ -157,7 +175,7 @@ func (o *MoTagSummary) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Results")
 

@@ -18,9 +18,9 @@ Name | Type | Description | Notes
 **VsphereProvisioning** | Pointer to **bool** | Indicates that vsphere provisioning traffic is enabled on this kernel network. | [optional] 
 **VsphereReplication** | Pointer to **bool** | Indicates that vsphere replication is enabled on this kernel network. | [optional] 
 **VsphereReplicationNfc** | Pointer to **bool** | Indicates that vsphere replication nfc is enabled on this kernel network. | [optional] 
-**DistributedNetwork** | Pointer to [**VirtualizationVmwareDistributedNetworkRelationship**](VirtualizationVmwareDistributedNetworkRelationship.md) |  | [optional] 
-**Host** | Pointer to [**VirtualizationVmwareHostRelationship**](VirtualizationVmwareHostRelationship.md) |  | [optional] 
-**Network** | Pointer to [**VirtualizationVmwareNetworkRelationship**](VirtualizationVmwareNetworkRelationship.md) |  | [optional] 
+**DistributedNetwork** | Pointer to [**NullableVirtualizationVmwareDistributedNetworkRelationship**](VirtualizationVmwareDistributedNetworkRelationship.md) |  | [optional] 
+**Host** | Pointer to [**NullableVirtualizationVmwareHostRelationship**](VirtualizationVmwareHostRelationship.md) |  | [optional] 
+**Network** | Pointer to [**NullableVirtualizationVmwareNetworkRelationship**](VirtualizationVmwareNetworkRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -416,6 +416,16 @@ SetDistributedNetwork sets DistributedNetwork field to given value.
 
 HasDistributedNetwork returns a boolean if a field has been set.
 
+### SetDistributedNetworkNil
+
+`func (o *VirtualizationVmwareKernelNetwork) SetDistributedNetworkNil(b bool)`
+
+ SetDistributedNetworkNil sets the value for DistributedNetwork to be an explicit nil
+
+### UnsetDistributedNetwork
+`func (o *VirtualizationVmwareKernelNetwork) UnsetDistributedNetwork()`
+
+UnsetDistributedNetwork ensures that no value is present for DistributedNetwork, not even an explicit nil
 ### GetHost
 
 `func (o *VirtualizationVmwareKernelNetwork) GetHost() VirtualizationVmwareHostRelationship`
@@ -441,6 +451,16 @@ SetHost sets Host field to given value.
 
 HasHost returns a boolean if a field has been set.
 
+### SetHostNil
+
+`func (o *VirtualizationVmwareKernelNetwork) SetHostNil(b bool)`
+
+ SetHostNil sets the value for Host to be an explicit nil
+
+### UnsetHost
+`func (o *VirtualizationVmwareKernelNetwork) UnsetHost()`
+
+UnsetHost ensures that no value is present for Host, not even an explicit nil
 ### GetNetwork
 
 `func (o *VirtualizationVmwareKernelNetwork) GetNetwork() VirtualizationVmwareNetworkRelationship`
@@ -466,6 +486,16 @@ SetNetwork sets Network field to given value.
 
 HasNetwork returns a boolean if a field has been set.
 
+### SetNetworkNil
+
+`func (o *VirtualizationVmwareKernelNetwork) SetNetworkNil(b bool)`
+
+ SetNetworkNil sets the value for Network to be an explicit nil
+
+### UnsetNetwork
+`func (o *VirtualizationVmwareKernelNetwork) UnsetNetwork()`
+
+UnsetNetwork ensures that no value is present for Network, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

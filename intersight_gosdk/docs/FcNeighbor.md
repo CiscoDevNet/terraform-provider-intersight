@@ -11,8 +11,8 @@ Name | Type | Description | Notes
 **PeerIpAddress** | Pointer to **string** | IP address of the peer switch. | [optional] [readonly] 
 **PeerSwitchName** | Pointer to **string** | Device Id of the neighbor switch. | [optional] [readonly] 
 **PeerWwn** | Pointer to **string** | World Wide Name of the neighbor switch. | [optional] [readonly] 
-**FcPhysicalPort** | Pointer to [**FcPhysicalPortRelationship**](FcPhysicalPortRelationship.md) |  | [optional] 
-**FcPortChannel** | Pointer to [**FcPortChannelRelationship**](FcPortChannelRelationship.md) |  | [optional] 
+**FcPhysicalPort** | Pointer to [**NullableFcPhysicalPortRelationship**](FcPhysicalPortRelationship.md) |  | [optional] 
+**FcPortChannel** | Pointer to [**NullableFcPortChannelRelationship**](FcPortChannelRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -223,6 +223,16 @@ SetFcPhysicalPort sets FcPhysicalPort field to given value.
 
 HasFcPhysicalPort returns a boolean if a field has been set.
 
+### SetFcPhysicalPortNil
+
+`func (o *FcNeighbor) SetFcPhysicalPortNil(b bool)`
+
+ SetFcPhysicalPortNil sets the value for FcPhysicalPort to be an explicit nil
+
+### UnsetFcPhysicalPort
+`func (o *FcNeighbor) UnsetFcPhysicalPort()`
+
+UnsetFcPhysicalPort ensures that no value is present for FcPhysicalPort, not even an explicit nil
 ### GetFcPortChannel
 
 `func (o *FcNeighbor) GetFcPortChannel() FcPortChannelRelationship`
@@ -248,6 +258,16 @@ SetFcPortChannel sets FcPortChannel field to given value.
 
 HasFcPortChannel returns a boolean if a field has been set.
 
+### SetFcPortChannelNil
+
+`func (o *FcNeighbor) SetFcPortChannelNil(b bool)`
+
+ SetFcPortChannelNil sets the value for FcPortChannel to be an explicit nil
+
+### UnsetFcPortChannel
+`func (o *FcNeighbor) UnsetFcPortChannel()`
+
+UnsetFcPortChannel ensures that no value is present for FcPortChannel, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

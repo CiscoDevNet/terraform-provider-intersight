@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the NiatelemetrySiteInventory type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &NiatelemetrySiteInventory{}
 
 // NiatelemetrySiteInventory Details of sites onboarded onto an ND.
 type NiatelemetrySiteInventory struct {
@@ -41,8 +45,8 @@ type NiatelemetrySiteInventory struct {
 	// Specifies whether Site object is DCNM or APIC or ND.
 	RecordType *string `json:"RecordType,omitempty"`
 	// Type of site onboarded either APIC or DCNM.
-	Type                 *string                              `json:"Type,omitempty"`
-	RegisteredDevice     *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+	Type                 *string                                     `json:"Type,omitempty"`
+	RegisteredDevice     NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -132,7 +136,7 @@ func (o *NiatelemetrySiteInventory) GetApps() []string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *NiatelemetrySiteInventory) GetAppsOk() ([]string, bool) {
-	if o == nil || o.Apps == nil {
+	if o == nil || IsNil(o.Apps) {
 		return nil, false
 	}
 	return o.Apps, true
@@ -140,7 +144,7 @@ func (o *NiatelemetrySiteInventory) GetAppsOk() ([]string, bool) {
 
 // HasApps returns a boolean if a field has been set.
 func (o *NiatelemetrySiteInventory) HasApps() bool {
-	if o != nil && o.Apps != nil {
+	if o != nil && IsNil(o.Apps) {
 		return true
 	}
 
@@ -154,7 +158,7 @@ func (o *NiatelemetrySiteInventory) SetApps(v []string) {
 
 // GetConnectivityAnalysisCount returns the ConnectivityAnalysisCount field value if set, zero value otherwise.
 func (o *NiatelemetrySiteInventory) GetConnectivityAnalysisCount() int64 {
-	if o == nil || o.ConnectivityAnalysisCount == nil {
+	if o == nil || IsNil(o.ConnectivityAnalysisCount) {
 		var ret int64
 		return ret
 	}
@@ -164,7 +168,7 @@ func (o *NiatelemetrySiteInventory) GetConnectivityAnalysisCount() int64 {
 // GetConnectivityAnalysisCountOk returns a tuple with the ConnectivityAnalysisCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetrySiteInventory) GetConnectivityAnalysisCountOk() (*int64, bool) {
-	if o == nil || o.ConnectivityAnalysisCount == nil {
+	if o == nil || IsNil(o.ConnectivityAnalysisCount) {
 		return nil, false
 	}
 	return o.ConnectivityAnalysisCount, true
@@ -172,7 +176,7 @@ func (o *NiatelemetrySiteInventory) GetConnectivityAnalysisCountOk() (*int64, bo
 
 // HasConnectivityAnalysisCount returns a boolean if a field has been set.
 func (o *NiatelemetrySiteInventory) HasConnectivityAnalysisCount() bool {
-	if o != nil && o.ConnectivityAnalysisCount != nil {
+	if o != nil && !IsNil(o.ConnectivityAnalysisCount) {
 		return true
 	}
 
@@ -186,7 +190,7 @@ func (o *NiatelemetrySiteInventory) SetConnectivityAnalysisCount(v int64) {
 
 // GetFirmwareVersion returns the FirmwareVersion field value if set, zero value otherwise.
 func (o *NiatelemetrySiteInventory) GetFirmwareVersion() string {
-	if o == nil || o.FirmwareVersion == nil {
+	if o == nil || IsNil(o.FirmwareVersion) {
 		var ret string
 		return ret
 	}
@@ -196,7 +200,7 @@ func (o *NiatelemetrySiteInventory) GetFirmwareVersion() string {
 // GetFirmwareVersionOk returns a tuple with the FirmwareVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetrySiteInventory) GetFirmwareVersionOk() (*string, bool) {
-	if o == nil || o.FirmwareVersion == nil {
+	if o == nil || IsNil(o.FirmwareVersion) {
 		return nil, false
 	}
 	return o.FirmwareVersion, true
@@ -204,7 +208,7 @@ func (o *NiatelemetrySiteInventory) GetFirmwareVersionOk() (*string, bool) {
 
 // HasFirmwareVersion returns a boolean if a field has been set.
 func (o *NiatelemetrySiteInventory) HasFirmwareVersion() bool {
-	if o != nil && o.FirmwareVersion != nil {
+	if o != nil && !IsNil(o.FirmwareVersion) {
 		return true
 	}
 
@@ -218,7 +222,7 @@ func (o *NiatelemetrySiteInventory) SetFirmwareVersion(v string) {
 
 // GetInstallType returns the InstallType field value if set, zero value otherwise.
 func (o *NiatelemetrySiteInventory) GetInstallType() string {
-	if o == nil || o.InstallType == nil {
+	if o == nil || IsNil(o.InstallType) {
 		var ret string
 		return ret
 	}
@@ -228,7 +232,7 @@ func (o *NiatelemetrySiteInventory) GetInstallType() string {
 // GetInstallTypeOk returns a tuple with the InstallType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetrySiteInventory) GetInstallTypeOk() (*string, bool) {
-	if o == nil || o.InstallType == nil {
+	if o == nil || IsNil(o.InstallType) {
 		return nil, false
 	}
 	return o.InstallType, true
@@ -236,7 +240,7 @@ func (o *NiatelemetrySiteInventory) GetInstallTypeOk() (*string, bool) {
 
 // HasInstallType returns a boolean if a field has been set.
 func (o *NiatelemetrySiteInventory) HasInstallType() bool {
-	if o != nil && o.InstallType != nil {
+	if o != nil && !IsNil(o.InstallType) {
 		return true
 	}
 
@@ -261,7 +265,7 @@ func (o *NiatelemetrySiteInventory) GetIpAddress() []string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *NiatelemetrySiteInventory) GetIpAddressOk() ([]string, bool) {
-	if o == nil || o.IpAddress == nil {
+	if o == nil || IsNil(o.IpAddress) {
 		return nil, false
 	}
 	return o.IpAddress, true
@@ -269,7 +273,7 @@ func (o *NiatelemetrySiteInventory) GetIpAddressOk() ([]string, bool) {
 
 // HasIpAddress returns a boolean if a field has been set.
 func (o *NiatelemetrySiteInventory) HasIpAddress() bool {
-	if o != nil && o.IpAddress != nil {
+	if o != nil && IsNil(o.IpAddress) {
 		return true
 	}
 
@@ -283,7 +287,7 @@ func (o *NiatelemetrySiteInventory) SetIpAddress(v []string) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *NiatelemetrySiteInventory) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -293,7 +297,7 @@ func (o *NiatelemetrySiteInventory) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetrySiteInventory) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -301,7 +305,7 @@ func (o *NiatelemetrySiteInventory) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *NiatelemetrySiteInventory) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -315,7 +319,7 @@ func (o *NiatelemetrySiteInventory) SetName(v string) {
 
 // GetNexusDashboard returns the NexusDashboard field value if set, zero value otherwise.
 func (o *NiatelemetrySiteInventory) GetNexusDashboard() string {
-	if o == nil || o.NexusDashboard == nil {
+	if o == nil || IsNil(o.NexusDashboard) {
 		var ret string
 		return ret
 	}
@@ -325,7 +329,7 @@ func (o *NiatelemetrySiteInventory) GetNexusDashboard() string {
 // GetNexusDashboardOk returns a tuple with the NexusDashboard field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetrySiteInventory) GetNexusDashboardOk() (*string, bool) {
-	if o == nil || o.NexusDashboard == nil {
+	if o == nil || IsNil(o.NexusDashboard) {
 		return nil, false
 	}
 	return o.NexusDashboard, true
@@ -333,7 +337,7 @@ func (o *NiatelemetrySiteInventory) GetNexusDashboardOk() (*string, bool) {
 
 // HasNexusDashboard returns a boolean if a field has been set.
 func (o *NiatelemetrySiteInventory) HasNexusDashboard() bool {
-	if o != nil && o.NexusDashboard != nil {
+	if o != nil && !IsNil(o.NexusDashboard) {
 		return true
 	}
 
@@ -347,7 +351,7 @@ func (o *NiatelemetrySiteInventory) SetNexusDashboard(v string) {
 
 // GetNodes returns the Nodes field value if set, zero value otherwise.
 func (o *NiatelemetrySiteInventory) GetNodes() int64 {
-	if o == nil || o.Nodes == nil {
+	if o == nil || IsNil(o.Nodes) {
 		var ret int64
 		return ret
 	}
@@ -357,7 +361,7 @@ func (o *NiatelemetrySiteInventory) GetNodes() int64 {
 // GetNodesOk returns a tuple with the Nodes field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetrySiteInventory) GetNodesOk() (*int64, bool) {
-	if o == nil || o.Nodes == nil {
+	if o == nil || IsNil(o.Nodes) {
 		return nil, false
 	}
 	return o.Nodes, true
@@ -365,7 +369,7 @@ func (o *NiatelemetrySiteInventory) GetNodesOk() (*int64, bool) {
 
 // HasNodes returns a boolean if a field has been set.
 func (o *NiatelemetrySiteInventory) HasNodes() bool {
-	if o != nil && o.Nodes != nil {
+	if o != nil && !IsNil(o.Nodes) {
 		return true
 	}
 
@@ -379,7 +383,7 @@ func (o *NiatelemetrySiteInventory) SetNodes(v int64) {
 
 // GetRecordType returns the RecordType field value if set, zero value otherwise.
 func (o *NiatelemetrySiteInventory) GetRecordType() string {
-	if o == nil || o.RecordType == nil {
+	if o == nil || IsNil(o.RecordType) {
 		var ret string
 		return ret
 	}
@@ -389,7 +393,7 @@ func (o *NiatelemetrySiteInventory) GetRecordType() string {
 // GetRecordTypeOk returns a tuple with the RecordType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetrySiteInventory) GetRecordTypeOk() (*string, bool) {
-	if o == nil || o.RecordType == nil {
+	if o == nil || IsNil(o.RecordType) {
 		return nil, false
 	}
 	return o.RecordType, true
@@ -397,7 +401,7 @@ func (o *NiatelemetrySiteInventory) GetRecordTypeOk() (*string, bool) {
 
 // HasRecordType returns a boolean if a field has been set.
 func (o *NiatelemetrySiteInventory) HasRecordType() bool {
-	if o != nil && o.RecordType != nil {
+	if o != nil && !IsNil(o.RecordType) {
 		return true
 	}
 
@@ -411,7 +415,7 @@ func (o *NiatelemetrySiteInventory) SetRecordType(v string) {
 
 // GetType returns the Type field value if set, zero value otherwise.
 func (o *NiatelemetrySiteInventory) GetType() string {
-	if o == nil || o.Type == nil {
+	if o == nil || IsNil(o.Type) {
 		var ret string
 		return ret
 	}
@@ -421,7 +425,7 @@ func (o *NiatelemetrySiteInventory) GetType() string {
 // GetTypeOk returns a tuple with the Type field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetrySiteInventory) GetTypeOk() (*string, bool) {
-	if o == nil || o.Type == nil {
+	if o == nil || IsNil(o.Type) {
 		return nil, false
 	}
 	return o.Type, true
@@ -429,7 +433,7 @@ func (o *NiatelemetrySiteInventory) GetTypeOk() (*string, bool) {
 
 // HasType returns a boolean if a field has been set.
 func (o *NiatelemetrySiteInventory) HasType() bool {
-	if o != nil && o.Type != nil {
+	if o != nil && !IsNil(o.Type) {
 		return true
 	}
 
@@ -441,96 +445,133 @@ func (o *NiatelemetrySiteInventory) SetType(v string) {
 	o.Type = &v
 }
 
-// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise.
+// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *NiatelemetrySiteInventory) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil || IsNil(o.RegisteredDevice.Get()) {
 		var ret AssetDeviceRegistrationRelationship
 		return ret
 	}
-	return *o.RegisteredDevice
+	return *o.RegisteredDevice.Get()
 }
 
 // GetRegisteredDeviceOk returns a tuple with the RegisteredDevice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *NiatelemetrySiteInventory) GetRegisteredDeviceOk() (*AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.RegisteredDevice, true
+	return o.RegisteredDevice.Get(), o.RegisteredDevice.IsSet()
 }
 
 // HasRegisteredDevice returns a boolean if a field has been set.
 func (o *NiatelemetrySiteInventory) HasRegisteredDevice() bool {
-	if o != nil && o.RegisteredDevice != nil {
+	if o != nil && o.RegisteredDevice.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRegisteredDevice gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
+// SetRegisteredDevice gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
 func (o *NiatelemetrySiteInventory) SetRegisteredDevice(v AssetDeviceRegistrationRelationship) {
-	o.RegisteredDevice = &v
+	o.RegisteredDevice.Set(&v)
+}
+
+// SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+func (o *NiatelemetrySiteInventory) SetRegisteredDeviceNil() {
+	o.RegisteredDevice.Set(nil)
+}
+
+// UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
+func (o *NiatelemetrySiteInventory) UnsetRegisteredDevice() {
+	o.RegisteredDevice.Unset()
 }
 
 func (o NiatelemetrySiteInventory) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o NiatelemetrySiteInventory) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
 	if o.Apps != nil {
 		toSerialize["Apps"] = o.Apps
 	}
-	if o.ConnectivityAnalysisCount != nil {
+	if !IsNil(o.ConnectivityAnalysisCount) {
 		toSerialize["ConnectivityAnalysisCount"] = o.ConnectivityAnalysisCount
 	}
-	if o.FirmwareVersion != nil {
+	if !IsNil(o.FirmwareVersion) {
 		toSerialize["FirmwareVersion"] = o.FirmwareVersion
 	}
-	if o.InstallType != nil {
+	if !IsNil(o.InstallType) {
 		toSerialize["InstallType"] = o.InstallType
 	}
 	if o.IpAddress != nil {
 		toSerialize["IpAddress"] = o.IpAddress
 	}
-	if o.Name != nil {
+	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
 	}
-	if o.NexusDashboard != nil {
+	if !IsNil(o.NexusDashboard) {
 		toSerialize["NexusDashboard"] = o.NexusDashboard
 	}
-	if o.Nodes != nil {
+	if !IsNil(o.Nodes) {
 		toSerialize["Nodes"] = o.Nodes
 	}
-	if o.RecordType != nil {
+	if !IsNil(o.RecordType) {
 		toSerialize["RecordType"] = o.RecordType
 	}
-	if o.Type != nil {
+	if !IsNil(o.Type) {
 		toSerialize["Type"] = o.Type
 	}
-	if o.RegisteredDevice != nil {
-		toSerialize["RegisteredDevice"] = o.RegisteredDevice
+	if o.RegisteredDevice.IsSet() {
+		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *NiatelemetrySiteInventory) UnmarshalJSON(bytes []byte) (err error) {
+func (o *NiatelemetrySiteInventory) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type NiatelemetrySiteInventoryWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -553,13 +594,13 @@ func (o *NiatelemetrySiteInventory) UnmarshalJSON(bytes []byte) (err error) {
 		// Specifies whether Site object is DCNM or APIC or ND.
 		RecordType *string `json:"RecordType,omitempty"`
 		// Type of site onboarded either APIC or DCNM.
-		Type             *string                              `json:"Type,omitempty"`
-		RegisteredDevice *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+		Type             *string                                     `json:"Type,omitempty"`
+		RegisteredDevice NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	}
 
 	varNiatelemetrySiteInventoryWithoutEmbeddedStruct := NiatelemetrySiteInventoryWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varNiatelemetrySiteInventoryWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varNiatelemetrySiteInventoryWithoutEmbeddedStruct)
 	if err == nil {
 		varNiatelemetrySiteInventory := _NiatelemetrySiteInventory{}
 		varNiatelemetrySiteInventory.ClassId = varNiatelemetrySiteInventoryWithoutEmbeddedStruct.ClassId
@@ -582,7 +623,7 @@ func (o *NiatelemetrySiteInventory) UnmarshalJSON(bytes []byte) (err error) {
 
 	varNiatelemetrySiteInventory := _NiatelemetrySiteInventory{}
 
-	err = json.Unmarshal(bytes, &varNiatelemetrySiteInventory)
+	err = json.Unmarshal(data, &varNiatelemetrySiteInventory)
 	if err == nil {
 		o.MoBaseMo = varNiatelemetrySiteInventory.MoBaseMo
 	} else {
@@ -591,7 +632,7 @@ func (o *NiatelemetrySiteInventory) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Apps")

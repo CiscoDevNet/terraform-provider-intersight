@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the VnicTcpOffloadSettings type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &VnicTcpOffloadSettings{}
 
 // VnicTcpOffloadSettings The TCP offload settings decide whether to offload the TCP related network functions from the CPU to the network hardware or not. These options help reduce the CPU overhead and increase the network throughput.
 type VnicTcpOffloadSettings struct {
@@ -126,7 +130,7 @@ func (o *VnicTcpOffloadSettings) SetObjectType(v string) {
 
 // GetLargeReceive returns the LargeReceive field value if set, zero value otherwise.
 func (o *VnicTcpOffloadSettings) GetLargeReceive() bool {
-	if o == nil || o.LargeReceive == nil {
+	if o == nil || IsNil(o.LargeReceive) {
 		var ret bool
 		return ret
 	}
@@ -136,7 +140,7 @@ func (o *VnicTcpOffloadSettings) GetLargeReceive() bool {
 // GetLargeReceiveOk returns a tuple with the LargeReceive field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VnicTcpOffloadSettings) GetLargeReceiveOk() (*bool, bool) {
-	if o == nil || o.LargeReceive == nil {
+	if o == nil || IsNil(o.LargeReceive) {
 		return nil, false
 	}
 	return o.LargeReceive, true
@@ -144,7 +148,7 @@ func (o *VnicTcpOffloadSettings) GetLargeReceiveOk() (*bool, bool) {
 
 // HasLargeReceive returns a boolean if a field has been set.
 func (o *VnicTcpOffloadSettings) HasLargeReceive() bool {
-	if o != nil && o.LargeReceive != nil {
+	if o != nil && !IsNil(o.LargeReceive) {
 		return true
 	}
 
@@ -158,7 +162,7 @@ func (o *VnicTcpOffloadSettings) SetLargeReceive(v bool) {
 
 // GetLargeSend returns the LargeSend field value if set, zero value otherwise.
 func (o *VnicTcpOffloadSettings) GetLargeSend() bool {
-	if o == nil || o.LargeSend == nil {
+	if o == nil || IsNil(o.LargeSend) {
 		var ret bool
 		return ret
 	}
@@ -168,7 +172,7 @@ func (o *VnicTcpOffloadSettings) GetLargeSend() bool {
 // GetLargeSendOk returns a tuple with the LargeSend field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VnicTcpOffloadSettings) GetLargeSendOk() (*bool, bool) {
-	if o == nil || o.LargeSend == nil {
+	if o == nil || IsNil(o.LargeSend) {
 		return nil, false
 	}
 	return o.LargeSend, true
@@ -176,7 +180,7 @@ func (o *VnicTcpOffloadSettings) GetLargeSendOk() (*bool, bool) {
 
 // HasLargeSend returns a boolean if a field has been set.
 func (o *VnicTcpOffloadSettings) HasLargeSend() bool {
-	if o != nil && o.LargeSend != nil {
+	if o != nil && !IsNil(o.LargeSend) {
 		return true
 	}
 
@@ -190,7 +194,7 @@ func (o *VnicTcpOffloadSettings) SetLargeSend(v bool) {
 
 // GetRxChecksum returns the RxChecksum field value if set, zero value otherwise.
 func (o *VnicTcpOffloadSettings) GetRxChecksum() bool {
-	if o == nil || o.RxChecksum == nil {
+	if o == nil || IsNil(o.RxChecksum) {
 		var ret bool
 		return ret
 	}
@@ -200,7 +204,7 @@ func (o *VnicTcpOffloadSettings) GetRxChecksum() bool {
 // GetRxChecksumOk returns a tuple with the RxChecksum field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VnicTcpOffloadSettings) GetRxChecksumOk() (*bool, bool) {
-	if o == nil || o.RxChecksum == nil {
+	if o == nil || IsNil(o.RxChecksum) {
 		return nil, false
 	}
 	return o.RxChecksum, true
@@ -208,7 +212,7 @@ func (o *VnicTcpOffloadSettings) GetRxChecksumOk() (*bool, bool) {
 
 // HasRxChecksum returns a boolean if a field has been set.
 func (o *VnicTcpOffloadSettings) HasRxChecksum() bool {
-	if o != nil && o.RxChecksum != nil {
+	if o != nil && !IsNil(o.RxChecksum) {
 		return true
 	}
 
@@ -222,7 +226,7 @@ func (o *VnicTcpOffloadSettings) SetRxChecksum(v bool) {
 
 // GetTxChecksum returns the TxChecksum field value if set, zero value otherwise.
 func (o *VnicTcpOffloadSettings) GetTxChecksum() bool {
-	if o == nil || o.TxChecksum == nil {
+	if o == nil || IsNil(o.TxChecksum) {
 		var ret bool
 		return ret
 	}
@@ -232,7 +236,7 @@ func (o *VnicTcpOffloadSettings) GetTxChecksum() bool {
 // GetTxChecksumOk returns a tuple with the TxChecksum field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VnicTcpOffloadSettings) GetTxChecksumOk() (*bool, bool) {
-	if o == nil || o.TxChecksum == nil {
+	if o == nil || IsNil(o.TxChecksum) {
 		return nil, false
 	}
 	return o.TxChecksum, true
@@ -240,7 +244,7 @@ func (o *VnicTcpOffloadSettings) GetTxChecksumOk() (*bool, bool) {
 
 // HasTxChecksum returns a boolean if a field has been set.
 func (o *VnicTcpOffloadSettings) HasTxChecksum() bool {
-	if o != nil && o.TxChecksum != nil {
+	if o != nil && !IsNil(o.TxChecksum) {
 		return true
 	}
 
@@ -253,31 +257,35 @@ func (o *VnicTcpOffloadSettings) SetTxChecksum(v bool) {
 }
 
 func (o VnicTcpOffloadSettings) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o VnicTcpOffloadSettings) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
 	errMoBaseComplexType = json.Unmarshal([]byte(serializedMoBaseComplexType), &toSerialize)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.LargeReceive != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.LargeReceive) {
 		toSerialize["LargeReceive"] = o.LargeReceive
 	}
-	if o.LargeSend != nil {
+	if !IsNil(o.LargeSend) {
 		toSerialize["LargeSend"] = o.LargeSend
 	}
-	if o.RxChecksum != nil {
+	if !IsNil(o.RxChecksum) {
 		toSerialize["RxChecksum"] = o.RxChecksum
 	}
-	if o.TxChecksum != nil {
+	if !IsNil(o.TxChecksum) {
 		toSerialize["TxChecksum"] = o.TxChecksum
 	}
 
@@ -285,10 +293,32 @@ func (o VnicTcpOffloadSettings) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *VnicTcpOffloadSettings) UnmarshalJSON(bytes []byte) (err error) {
+func (o *VnicTcpOffloadSettings) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type VnicTcpOffloadSettingsWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -306,7 +336,7 @@ func (o *VnicTcpOffloadSettings) UnmarshalJSON(bytes []byte) (err error) {
 
 	varVnicTcpOffloadSettingsWithoutEmbeddedStruct := VnicTcpOffloadSettingsWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varVnicTcpOffloadSettingsWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varVnicTcpOffloadSettingsWithoutEmbeddedStruct)
 	if err == nil {
 		varVnicTcpOffloadSettings := _VnicTcpOffloadSettings{}
 		varVnicTcpOffloadSettings.ClassId = varVnicTcpOffloadSettingsWithoutEmbeddedStruct.ClassId
@@ -322,7 +352,7 @@ func (o *VnicTcpOffloadSettings) UnmarshalJSON(bytes []byte) (err error) {
 
 	varVnicTcpOffloadSettings := _VnicTcpOffloadSettings{}
 
-	err = json.Unmarshal(bytes, &varVnicTcpOffloadSettings)
+	err = json.Unmarshal(data, &varVnicTcpOffloadSettings)
 	if err == nil {
 		o.MoBaseComplexType = varVnicTcpOffloadSettings.MoBaseComplexType
 	} else {
@@ -331,7 +361,7 @@ func (o *VnicTcpOffloadSettings) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "LargeReceive")

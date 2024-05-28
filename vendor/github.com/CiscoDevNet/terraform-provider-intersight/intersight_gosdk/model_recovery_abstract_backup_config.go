@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the RecoveryAbstractBackupConfig type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &RecoveryAbstractBackupConfig{}
 
 // RecoveryAbstractBackupConfig Base Backup config which contains all the required inputs to do backup on a local or remote server.
 type RecoveryAbstractBackupConfig struct {
@@ -126,7 +130,7 @@ func (o *RecoveryAbstractBackupConfig) SetObjectType(v string) {
 
 // GetFileNamePrefix returns the FileNamePrefix field value if set, zero value otherwise.
 func (o *RecoveryAbstractBackupConfig) GetFileNamePrefix() string {
-	if o == nil || o.FileNamePrefix == nil {
+	if o == nil || IsNil(o.FileNamePrefix) {
 		var ret string
 		return ret
 	}
@@ -136,7 +140,7 @@ func (o *RecoveryAbstractBackupConfig) GetFileNamePrefix() string {
 // GetFileNamePrefixOk returns a tuple with the FileNamePrefix field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RecoveryAbstractBackupConfig) GetFileNamePrefixOk() (*string, bool) {
-	if o == nil || o.FileNamePrefix == nil {
+	if o == nil || IsNil(o.FileNamePrefix) {
 		return nil, false
 	}
 	return o.FileNamePrefix, true
@@ -144,7 +148,7 @@ func (o *RecoveryAbstractBackupConfig) GetFileNamePrefixOk() (*string, bool) {
 
 // HasFileNamePrefix returns a boolean if a field has been set.
 func (o *RecoveryAbstractBackupConfig) HasFileNamePrefix() bool {
-	if o != nil && o.FileNamePrefix != nil {
+	if o != nil && !IsNil(o.FileNamePrefix) {
 		return true
 	}
 
@@ -158,7 +162,7 @@ func (o *RecoveryAbstractBackupConfig) SetFileNamePrefix(v string) {
 
 // GetIsPasswordSet returns the IsPasswordSet field value if set, zero value otherwise.
 func (o *RecoveryAbstractBackupConfig) GetIsPasswordSet() bool {
-	if o == nil || o.IsPasswordSet == nil {
+	if o == nil || IsNil(o.IsPasswordSet) {
 		var ret bool
 		return ret
 	}
@@ -168,7 +172,7 @@ func (o *RecoveryAbstractBackupConfig) GetIsPasswordSet() bool {
 // GetIsPasswordSetOk returns a tuple with the IsPasswordSet field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RecoveryAbstractBackupConfig) GetIsPasswordSetOk() (*bool, bool) {
-	if o == nil || o.IsPasswordSet == nil {
+	if o == nil || IsNil(o.IsPasswordSet) {
 		return nil, false
 	}
 	return o.IsPasswordSet, true
@@ -176,7 +180,7 @@ func (o *RecoveryAbstractBackupConfig) GetIsPasswordSetOk() (*bool, bool) {
 
 // HasIsPasswordSet returns a boolean if a field has been set.
 func (o *RecoveryAbstractBackupConfig) HasIsPasswordSet() bool {
-	if o != nil && o.IsPasswordSet != nil {
+	if o != nil && !IsNil(o.IsPasswordSet) {
 		return true
 	}
 
@@ -190,7 +194,7 @@ func (o *RecoveryAbstractBackupConfig) SetIsPasswordSet(v bool) {
 
 // GetLocationType returns the LocationType field value if set, zero value otherwise.
 func (o *RecoveryAbstractBackupConfig) GetLocationType() string {
-	if o == nil || o.LocationType == nil {
+	if o == nil || IsNil(o.LocationType) {
 		var ret string
 		return ret
 	}
@@ -200,7 +204,7 @@ func (o *RecoveryAbstractBackupConfig) GetLocationType() string {
 // GetLocationTypeOk returns a tuple with the LocationType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RecoveryAbstractBackupConfig) GetLocationTypeOk() (*string, bool) {
-	if o == nil || o.LocationType == nil {
+	if o == nil || IsNil(o.LocationType) {
 		return nil, false
 	}
 	return o.LocationType, true
@@ -208,7 +212,7 @@ func (o *RecoveryAbstractBackupConfig) GetLocationTypeOk() (*string, bool) {
 
 // HasLocationType returns a boolean if a field has been set.
 func (o *RecoveryAbstractBackupConfig) HasLocationType() bool {
-	if o != nil && o.LocationType != nil {
+	if o != nil && !IsNil(o.LocationType) {
 		return true
 	}
 
@@ -222,7 +226,7 @@ func (o *RecoveryAbstractBackupConfig) SetLocationType(v string) {
 
 // GetPassword returns the Password field value if set, zero value otherwise.
 func (o *RecoveryAbstractBackupConfig) GetPassword() string {
-	if o == nil || o.Password == nil {
+	if o == nil || IsNil(o.Password) {
 		var ret string
 		return ret
 	}
@@ -232,7 +236,7 @@ func (o *RecoveryAbstractBackupConfig) GetPassword() string {
 // GetPasswordOk returns a tuple with the Password field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RecoveryAbstractBackupConfig) GetPasswordOk() (*string, bool) {
-	if o == nil || o.Password == nil {
+	if o == nil || IsNil(o.Password) {
 		return nil, false
 	}
 	return o.Password, true
@@ -240,7 +244,7 @@ func (o *RecoveryAbstractBackupConfig) GetPasswordOk() (*string, bool) {
 
 // HasPassword returns a boolean if a field has been set.
 func (o *RecoveryAbstractBackupConfig) HasPassword() bool {
-	if o != nil && o.Password != nil {
+	if o != nil && !IsNil(o.Password) {
 		return true
 	}
 
@@ -254,7 +258,7 @@ func (o *RecoveryAbstractBackupConfig) SetPassword(v string) {
 
 // GetPath returns the Path field value if set, zero value otherwise.
 func (o *RecoveryAbstractBackupConfig) GetPath() string {
-	if o == nil || o.Path == nil {
+	if o == nil || IsNil(o.Path) {
 		var ret string
 		return ret
 	}
@@ -264,7 +268,7 @@ func (o *RecoveryAbstractBackupConfig) GetPath() string {
 // GetPathOk returns a tuple with the Path field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RecoveryAbstractBackupConfig) GetPathOk() (*string, bool) {
-	if o == nil || o.Path == nil {
+	if o == nil || IsNil(o.Path) {
 		return nil, false
 	}
 	return o.Path, true
@@ -272,7 +276,7 @@ func (o *RecoveryAbstractBackupConfig) GetPathOk() (*string, bool) {
 
 // HasPath returns a boolean if a field has been set.
 func (o *RecoveryAbstractBackupConfig) HasPath() bool {
-	if o != nil && o.Path != nil {
+	if o != nil && !IsNil(o.Path) {
 		return true
 	}
 
@@ -286,7 +290,7 @@ func (o *RecoveryAbstractBackupConfig) SetPath(v string) {
 
 // GetProtocol returns the Protocol field value if set, zero value otherwise.
 func (o *RecoveryAbstractBackupConfig) GetProtocol() string {
-	if o == nil || o.Protocol == nil {
+	if o == nil || IsNil(o.Protocol) {
 		var ret string
 		return ret
 	}
@@ -296,7 +300,7 @@ func (o *RecoveryAbstractBackupConfig) GetProtocol() string {
 // GetProtocolOk returns a tuple with the Protocol field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RecoveryAbstractBackupConfig) GetProtocolOk() (*string, bool) {
-	if o == nil || o.Protocol == nil {
+	if o == nil || IsNil(o.Protocol) {
 		return nil, false
 	}
 	return o.Protocol, true
@@ -304,7 +308,7 @@ func (o *RecoveryAbstractBackupConfig) GetProtocolOk() (*string, bool) {
 
 // HasProtocol returns a boolean if a field has been set.
 func (o *RecoveryAbstractBackupConfig) HasProtocol() bool {
-	if o != nil && o.Protocol != nil {
+	if o != nil && !IsNil(o.Protocol) {
 		return true
 	}
 
@@ -318,7 +322,7 @@ func (o *RecoveryAbstractBackupConfig) SetProtocol(v string) {
 
 // GetRetentionCount returns the RetentionCount field value if set, zero value otherwise.
 func (o *RecoveryAbstractBackupConfig) GetRetentionCount() int64 {
-	if o == nil || o.RetentionCount == nil {
+	if o == nil || IsNil(o.RetentionCount) {
 		var ret int64
 		return ret
 	}
@@ -328,7 +332,7 @@ func (o *RecoveryAbstractBackupConfig) GetRetentionCount() int64 {
 // GetRetentionCountOk returns a tuple with the RetentionCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RecoveryAbstractBackupConfig) GetRetentionCountOk() (*int64, bool) {
-	if o == nil || o.RetentionCount == nil {
+	if o == nil || IsNil(o.RetentionCount) {
 		return nil, false
 	}
 	return o.RetentionCount, true
@@ -336,7 +340,7 @@ func (o *RecoveryAbstractBackupConfig) GetRetentionCountOk() (*int64, bool) {
 
 // HasRetentionCount returns a boolean if a field has been set.
 func (o *RecoveryAbstractBackupConfig) HasRetentionCount() bool {
-	if o != nil && o.RetentionCount != nil {
+	if o != nil && !IsNil(o.RetentionCount) {
 		return true
 	}
 
@@ -350,7 +354,7 @@ func (o *RecoveryAbstractBackupConfig) SetRetentionCount(v int64) {
 
 // GetUserName returns the UserName field value if set, zero value otherwise.
 func (o *RecoveryAbstractBackupConfig) GetUserName() string {
-	if o == nil || o.UserName == nil {
+	if o == nil || IsNil(o.UserName) {
 		var ret string
 		return ret
 	}
@@ -360,7 +364,7 @@ func (o *RecoveryAbstractBackupConfig) GetUserName() string {
 // GetUserNameOk returns a tuple with the UserName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RecoveryAbstractBackupConfig) GetUserNameOk() (*string, bool) {
-	if o == nil || o.UserName == nil {
+	if o == nil || IsNil(o.UserName) {
 		return nil, false
 	}
 	return o.UserName, true
@@ -368,7 +372,7 @@ func (o *RecoveryAbstractBackupConfig) GetUserNameOk() (*string, bool) {
 
 // HasUserName returns a boolean if a field has been set.
 func (o *RecoveryAbstractBackupConfig) HasUserName() bool {
-	if o != nil && o.UserName != nil {
+	if o != nil && !IsNil(o.UserName) {
 		return true
 	}
 
@@ -381,43 +385,47 @@ func (o *RecoveryAbstractBackupConfig) SetUserName(v string) {
 }
 
 func (o RecoveryAbstractBackupConfig) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o RecoveryAbstractBackupConfig) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedPolicyAbstractPolicy, errPolicyAbstractPolicy := json.Marshal(o.PolicyAbstractPolicy)
 	if errPolicyAbstractPolicy != nil {
-		return []byte{}, errPolicyAbstractPolicy
+		return map[string]interface{}{}, errPolicyAbstractPolicy
 	}
 	errPolicyAbstractPolicy = json.Unmarshal([]byte(serializedPolicyAbstractPolicy), &toSerialize)
 	if errPolicyAbstractPolicy != nil {
-		return []byte{}, errPolicyAbstractPolicy
+		return map[string]interface{}{}, errPolicyAbstractPolicy
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.FileNamePrefix != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.FileNamePrefix) {
 		toSerialize["FileNamePrefix"] = o.FileNamePrefix
 	}
-	if o.IsPasswordSet != nil {
+	if !IsNil(o.IsPasswordSet) {
 		toSerialize["IsPasswordSet"] = o.IsPasswordSet
 	}
-	if o.LocationType != nil {
+	if !IsNil(o.LocationType) {
 		toSerialize["LocationType"] = o.LocationType
 	}
-	if o.Password != nil {
+	if !IsNil(o.Password) {
 		toSerialize["Password"] = o.Password
 	}
-	if o.Path != nil {
+	if !IsNil(o.Path) {
 		toSerialize["Path"] = o.Path
 	}
-	if o.Protocol != nil {
+	if !IsNil(o.Protocol) {
 		toSerialize["Protocol"] = o.Protocol
 	}
-	if o.RetentionCount != nil {
+	if !IsNil(o.RetentionCount) {
 		toSerialize["RetentionCount"] = o.RetentionCount
 	}
-	if o.UserName != nil {
+	if !IsNil(o.UserName) {
 		toSerialize["UserName"] = o.UserName
 	}
 
@@ -425,10 +433,32 @@ func (o RecoveryAbstractBackupConfig) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *RecoveryAbstractBackupConfig) UnmarshalJSON(bytes []byte) (err error) {
+func (o *RecoveryAbstractBackupConfig) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type RecoveryAbstractBackupConfigWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type.
 		ClassId string `json:"ClassId"`
@@ -454,7 +484,7 @@ func (o *RecoveryAbstractBackupConfig) UnmarshalJSON(bytes []byte) (err error) {
 
 	varRecoveryAbstractBackupConfigWithoutEmbeddedStruct := RecoveryAbstractBackupConfigWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varRecoveryAbstractBackupConfigWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varRecoveryAbstractBackupConfigWithoutEmbeddedStruct)
 	if err == nil {
 		varRecoveryAbstractBackupConfig := _RecoveryAbstractBackupConfig{}
 		varRecoveryAbstractBackupConfig.ClassId = varRecoveryAbstractBackupConfigWithoutEmbeddedStruct.ClassId
@@ -474,7 +504,7 @@ func (o *RecoveryAbstractBackupConfig) UnmarshalJSON(bytes []byte) (err error) {
 
 	varRecoveryAbstractBackupConfig := _RecoveryAbstractBackupConfig{}
 
-	err = json.Unmarshal(bytes, &varRecoveryAbstractBackupConfig)
+	err = json.Unmarshal(data, &varRecoveryAbstractBackupConfig)
 	if err == nil {
 		o.PolicyAbstractPolicy = varRecoveryAbstractBackupConfig.PolicyAbstractPolicy
 	} else {
@@ -483,7 +513,7 @@ func (o *RecoveryAbstractBackupConfig) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "FileNamePrefix")

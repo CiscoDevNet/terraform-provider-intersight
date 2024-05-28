@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "techsupportmanagement.Download"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "techsupportmanagement.Download"]
-**TechSupportStatus** | Pointer to [**TechsupportmanagementTechSupportStatusRelationship**](TechsupportmanagementTechSupportStatusRelationship.md) |  | [optional] 
+**TechSupportStatus** | Pointer to [**NullableTechsupportmanagementTechSupportStatusRelationship**](TechsupportmanagementTechSupportStatusRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -92,6 +92,16 @@ SetTechSupportStatus sets TechSupportStatus field to given value.
 
 HasTechSupportStatus returns a boolean if a field has been set.
 
+### SetTechSupportStatusNil
+
+`func (o *TechsupportmanagementDownload) SetTechSupportStatusNil(b bool)`
+
+ SetTechSupportStatusNil sets the value for TechSupportStatus to be an explicit nil
+
+### UnsetTechSupportStatus
+`func (o *TechsupportmanagementDownload) UnsetTechSupportStatus()`
+
+UnsetTechSupportStatus ensures that no value is present for TechSupportStatus, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

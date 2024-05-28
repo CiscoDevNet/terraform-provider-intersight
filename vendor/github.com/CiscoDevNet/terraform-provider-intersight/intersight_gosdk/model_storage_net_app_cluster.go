@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the StorageNetAppCluster type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &StorageNetAppCluster{}
 
 // StorageNetAppCluster NetApp cluster consists of one or more nodes grouped together as HA pairs to form a scalable cluster.
 type StorageNetAppCluster struct {
@@ -54,8 +58,8 @@ type StorageNetAppCluster struct {
 	// The minor portion of the version.
 	VersionMinor *int64 `json:"VersionMinor,omitempty"`
 	// An array of relationships to storageNetAppClusterEvent resources.
-	Events               []StorageNetAppClusterEventRelationship `json:"Events,omitempty"`
-	RegisteredDevice     *AssetDeviceRegistrationRelationship    `json:"RegisteredDevice,omitempty"`
+	Events               []StorageNetAppClusterEventRelationship     `json:"Events,omitempty"`
+	RegisteredDevice     NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -134,7 +138,7 @@ func (o *StorageNetAppCluster) SetObjectType(v string) {
 
 // GetAutoSupport returns the AutoSupport field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *StorageNetAppCluster) GetAutoSupport() StorageNetAppAutoSupport {
-	if o == nil || o.AutoSupport.Get() == nil {
+	if o == nil || IsNil(o.AutoSupport.Get()) {
 		var ret StorageNetAppAutoSupport
 		return ret
 	}
@@ -177,7 +181,7 @@ func (o *StorageNetAppCluster) UnsetAutoSupport() {
 
 // GetAvgPerformanceMetrics returns the AvgPerformanceMetrics field value if set, zero value otherwise.
 func (o *StorageNetAppCluster) GetAvgPerformanceMetrics() StorageNetAppPerformanceMetricsAverage {
-	if o == nil || o.AvgPerformanceMetrics == nil {
+	if o == nil || IsNil(o.AvgPerformanceMetrics) {
 		var ret StorageNetAppPerformanceMetricsAverage
 		return ret
 	}
@@ -187,7 +191,7 @@ func (o *StorageNetAppCluster) GetAvgPerformanceMetrics() StorageNetAppPerforman
 // GetAvgPerformanceMetricsOk returns a tuple with the AvgPerformanceMetrics field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppCluster) GetAvgPerformanceMetricsOk() (*StorageNetAppPerformanceMetricsAverage, bool) {
-	if o == nil || o.AvgPerformanceMetrics == nil {
+	if o == nil || IsNil(o.AvgPerformanceMetrics) {
 		return nil, false
 	}
 	return o.AvgPerformanceMetrics, true
@@ -195,7 +199,7 @@ func (o *StorageNetAppCluster) GetAvgPerformanceMetricsOk() (*StorageNetAppPerfo
 
 // HasAvgPerformanceMetrics returns a boolean if a field has been set.
 func (o *StorageNetAppCluster) HasAvgPerformanceMetrics() bool {
-	if o != nil && o.AvgPerformanceMetrics != nil {
+	if o != nil && !IsNil(o.AvgPerformanceMetrics) {
 		return true
 	}
 
@@ -209,7 +213,7 @@ func (o *StorageNetAppCluster) SetAvgPerformanceMetrics(v StorageNetAppPerforman
 
 // GetClusterEfficiency returns the ClusterEfficiency field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *StorageNetAppCluster) GetClusterEfficiency() StorageNetAppStorageClusterEfficiency {
-	if o == nil || o.ClusterEfficiency.Get() == nil {
+	if o == nil || IsNil(o.ClusterEfficiency.Get()) {
 		var ret StorageNetAppStorageClusterEfficiency
 		return ret
 	}
@@ -252,7 +256,7 @@ func (o *StorageNetAppCluster) UnsetClusterEfficiency() {
 
 // GetClusterHealthStatus returns the ClusterHealthStatus field value if set, zero value otherwise.
 func (o *StorageNetAppCluster) GetClusterHealthStatus() string {
-	if o == nil || o.ClusterHealthStatus == nil {
+	if o == nil || IsNil(o.ClusterHealthStatus) {
 		var ret string
 		return ret
 	}
@@ -262,7 +266,7 @@ func (o *StorageNetAppCluster) GetClusterHealthStatus() string {
 // GetClusterHealthStatusOk returns a tuple with the ClusterHealthStatus field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppCluster) GetClusterHealthStatusOk() (*string, bool) {
-	if o == nil || o.ClusterHealthStatus == nil {
+	if o == nil || IsNil(o.ClusterHealthStatus) {
 		return nil, false
 	}
 	return o.ClusterHealthStatus, true
@@ -270,7 +274,7 @@ func (o *StorageNetAppCluster) GetClusterHealthStatusOk() (*string, bool) {
 
 // HasClusterHealthStatus returns a boolean if a field has been set.
 func (o *StorageNetAppCluster) HasClusterHealthStatus() bool {
-	if o != nil && o.ClusterHealthStatus != nil {
+	if o != nil && !IsNil(o.ClusterHealthStatus) {
 		return true
 	}
 
@@ -284,7 +288,7 @@ func (o *StorageNetAppCluster) SetClusterHealthStatus(v string) {
 
 // GetDefaultAdminLocked returns the DefaultAdminLocked field value if set, zero value otherwise.
 func (o *StorageNetAppCluster) GetDefaultAdminLocked() bool {
-	if o == nil || o.DefaultAdminLocked == nil {
+	if o == nil || IsNil(o.DefaultAdminLocked) {
 		var ret bool
 		return ret
 	}
@@ -294,7 +298,7 @@ func (o *StorageNetAppCluster) GetDefaultAdminLocked() bool {
 // GetDefaultAdminLockedOk returns a tuple with the DefaultAdminLocked field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppCluster) GetDefaultAdminLockedOk() (*bool, bool) {
-	if o == nil || o.DefaultAdminLocked == nil {
+	if o == nil || IsNil(o.DefaultAdminLocked) {
 		return nil, false
 	}
 	return o.DefaultAdminLocked, true
@@ -302,7 +306,7 @@ func (o *StorageNetAppCluster) GetDefaultAdminLockedOk() (*bool, bool) {
 
 // HasDefaultAdminLocked returns a boolean if a field has been set.
 func (o *StorageNetAppCluster) HasDefaultAdminLocked() bool {
-	if o != nil && o.DefaultAdminLocked != nil {
+	if o != nil && !IsNil(o.DefaultAdminLocked) {
 		return true
 	}
 
@@ -327,7 +331,7 @@ func (o *StorageNetAppCluster) GetDnsDomains() []string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StorageNetAppCluster) GetDnsDomainsOk() ([]string, bool) {
-	if o == nil || o.DnsDomains == nil {
+	if o == nil || IsNil(o.DnsDomains) {
 		return nil, false
 	}
 	return o.DnsDomains, true
@@ -335,7 +339,7 @@ func (o *StorageNetAppCluster) GetDnsDomainsOk() ([]string, bool) {
 
 // HasDnsDomains returns a boolean if a field has been set.
 func (o *StorageNetAppCluster) HasDnsDomains() bool {
-	if o != nil && o.DnsDomains != nil {
+	if o != nil && IsNil(o.DnsDomains) {
 		return true
 	}
 
@@ -349,7 +353,7 @@ func (o *StorageNetAppCluster) SetDnsDomains(v []string) {
 
 // GetFipsCompliant returns the FipsCompliant field value if set, zero value otherwise.
 func (o *StorageNetAppCluster) GetFipsCompliant() bool {
-	if o == nil || o.FipsCompliant == nil {
+	if o == nil || IsNil(o.FipsCompliant) {
 		var ret bool
 		return ret
 	}
@@ -359,7 +363,7 @@ func (o *StorageNetAppCluster) GetFipsCompliant() bool {
 // GetFipsCompliantOk returns a tuple with the FipsCompliant field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppCluster) GetFipsCompliantOk() (*bool, bool) {
-	if o == nil || o.FipsCompliant == nil {
+	if o == nil || IsNil(o.FipsCompliant) {
 		return nil, false
 	}
 	return o.FipsCompliant, true
@@ -367,7 +371,7 @@ func (o *StorageNetAppCluster) GetFipsCompliantOk() (*bool, bool) {
 
 // HasFipsCompliant returns a boolean if a field has been set.
 func (o *StorageNetAppCluster) HasFipsCompliant() bool {
-	if o != nil && o.FipsCompliant != nil {
+	if o != nil && !IsNil(o.FipsCompliant) {
 		return true
 	}
 
@@ -381,7 +385,7 @@ func (o *StorageNetAppCluster) SetFipsCompliant(v bool) {
 
 // GetInsecureCiphers returns the InsecureCiphers field value if set, zero value otherwise.
 func (o *StorageNetAppCluster) GetInsecureCiphers() int64 {
-	if o == nil || o.InsecureCiphers == nil {
+	if o == nil || IsNil(o.InsecureCiphers) {
 		var ret int64
 		return ret
 	}
@@ -391,7 +395,7 @@ func (o *StorageNetAppCluster) GetInsecureCiphers() int64 {
 // GetInsecureCiphersOk returns a tuple with the InsecureCiphers field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppCluster) GetInsecureCiphersOk() (*int64, bool) {
-	if o == nil || o.InsecureCiphers == nil {
+	if o == nil || IsNil(o.InsecureCiphers) {
 		return nil, false
 	}
 	return o.InsecureCiphers, true
@@ -399,7 +403,7 @@ func (o *StorageNetAppCluster) GetInsecureCiphersOk() (*int64, bool) {
 
 // HasInsecureCiphers returns a boolean if a field has been set.
 func (o *StorageNetAppCluster) HasInsecureCiphers() bool {
-	if o != nil && o.InsecureCiphers != nil {
+	if o != nil && !IsNil(o.InsecureCiphers) {
 		return true
 	}
 
@@ -413,7 +417,7 @@ func (o *StorageNetAppCluster) SetInsecureCiphers(v int64) {
 
 // GetKey returns the Key field value if set, zero value otherwise.
 func (o *StorageNetAppCluster) GetKey() string {
-	if o == nil || o.Key == nil {
+	if o == nil || IsNil(o.Key) {
 		var ret string
 		return ret
 	}
@@ -423,7 +427,7 @@ func (o *StorageNetAppCluster) GetKey() string {
 // GetKeyOk returns a tuple with the Key field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppCluster) GetKeyOk() (*string, bool) {
-	if o == nil || o.Key == nil {
+	if o == nil || IsNil(o.Key) {
 		return nil, false
 	}
 	return o.Key, true
@@ -431,7 +435,7 @@ func (o *StorageNetAppCluster) GetKeyOk() (*string, bool) {
 
 // HasKey returns a boolean if a field has been set.
 func (o *StorageNetAppCluster) HasKey() bool {
-	if o != nil && o.Key != nil {
+	if o != nil && !IsNil(o.Key) {
 		return true
 	}
 
@@ -445,7 +449,7 @@ func (o *StorageNetAppCluster) SetKey(v string) {
 
 // GetLocation returns the Location field value if set, zero value otherwise.
 func (o *StorageNetAppCluster) GetLocation() string {
-	if o == nil || o.Location == nil {
+	if o == nil || IsNil(o.Location) {
 		var ret string
 		return ret
 	}
@@ -455,7 +459,7 @@ func (o *StorageNetAppCluster) GetLocation() string {
 // GetLocationOk returns a tuple with the Location field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppCluster) GetLocationOk() (*string, bool) {
-	if o == nil || o.Location == nil {
+	if o == nil || IsNil(o.Location) {
 		return nil, false
 	}
 	return o.Location, true
@@ -463,7 +467,7 @@ func (o *StorageNetAppCluster) GetLocationOk() (*string, bool) {
 
 // HasLocation returns a boolean if a field has been set.
 func (o *StorageNetAppCluster) HasLocation() bool {
-	if o != nil && o.Location != nil {
+	if o != nil && !IsNil(o.Location) {
 		return true
 	}
 
@@ -488,7 +492,7 @@ func (o *StorageNetAppCluster) GetManagementAddress() []string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StorageNetAppCluster) GetManagementAddressOk() ([]string, bool) {
-	if o == nil || o.ManagementAddress == nil {
+	if o == nil || IsNil(o.ManagementAddress) {
 		return nil, false
 	}
 	return o.ManagementAddress, true
@@ -496,7 +500,7 @@ func (o *StorageNetAppCluster) GetManagementAddressOk() ([]string, bool) {
 
 // HasManagementAddress returns a boolean if a field has been set.
 func (o *StorageNetAppCluster) HasManagementAddress() bool {
-	if o != nil && o.ManagementAddress != nil {
+	if o != nil && IsNil(o.ManagementAddress) {
 		return true
 	}
 
@@ -521,7 +525,7 @@ func (o *StorageNetAppCluster) GetNameServers() []string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StorageNetAppCluster) GetNameServersOk() ([]string, bool) {
-	if o == nil || o.NameServers == nil {
+	if o == nil || IsNil(o.NameServers) {
 		return nil, false
 	}
 	return o.NameServers, true
@@ -529,7 +533,7 @@ func (o *StorageNetAppCluster) GetNameServersOk() ([]string, bool) {
 
 // HasNameServers returns a boolean if a field has been set.
 func (o *StorageNetAppCluster) HasNameServers() bool {
-	if o != nil && o.NameServers != nil {
+	if o != nil && IsNil(o.NameServers) {
 		return true
 	}
 
@@ -554,7 +558,7 @@ func (o *StorageNetAppCluster) GetNtpServers() []string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StorageNetAppCluster) GetNtpServersOk() ([]string, bool) {
-	if o == nil || o.NtpServers == nil {
+	if o == nil || IsNil(o.NtpServers) {
 		return nil, false
 	}
 	return o.NtpServers, true
@@ -562,7 +566,7 @@ func (o *StorageNetAppCluster) GetNtpServersOk() ([]string, bool) {
 
 // HasNtpServers returns a boolean if a field has been set.
 func (o *StorageNetAppCluster) HasNtpServers() bool {
-	if o != nil && o.NtpServers != nil {
+	if o != nil && IsNil(o.NtpServers) {
 		return true
 	}
 
@@ -576,7 +580,7 @@ func (o *StorageNetAppCluster) SetNtpServers(v []string) {
 
 // GetRshEnabled returns the RshEnabled field value if set, zero value otherwise.
 func (o *StorageNetAppCluster) GetRshEnabled() bool {
-	if o == nil || o.RshEnabled == nil {
+	if o == nil || IsNil(o.RshEnabled) {
 		var ret bool
 		return ret
 	}
@@ -586,7 +590,7 @@ func (o *StorageNetAppCluster) GetRshEnabled() bool {
 // GetRshEnabledOk returns a tuple with the RshEnabled field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppCluster) GetRshEnabledOk() (*bool, bool) {
-	if o == nil || o.RshEnabled == nil {
+	if o == nil || IsNil(o.RshEnabled) {
 		return nil, false
 	}
 	return o.RshEnabled, true
@@ -594,7 +598,7 @@ func (o *StorageNetAppCluster) GetRshEnabledOk() (*bool, bool) {
 
 // HasRshEnabled returns a boolean if a field has been set.
 func (o *StorageNetAppCluster) HasRshEnabled() bool {
-	if o != nil && o.RshEnabled != nil {
+	if o != nil && !IsNil(o.RshEnabled) {
 		return true
 	}
 
@@ -608,7 +612,7 @@ func (o *StorageNetAppCluster) SetRshEnabled(v bool) {
 
 // GetTelnetEnabled returns the TelnetEnabled field value if set, zero value otherwise.
 func (o *StorageNetAppCluster) GetTelnetEnabled() bool {
-	if o == nil || o.TelnetEnabled == nil {
+	if o == nil || IsNil(o.TelnetEnabled) {
 		var ret bool
 		return ret
 	}
@@ -618,7 +622,7 @@ func (o *StorageNetAppCluster) GetTelnetEnabled() bool {
 // GetTelnetEnabledOk returns a tuple with the TelnetEnabled field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppCluster) GetTelnetEnabledOk() (*bool, bool) {
-	if o == nil || o.TelnetEnabled == nil {
+	if o == nil || IsNil(o.TelnetEnabled) {
 		return nil, false
 	}
 	return o.TelnetEnabled, true
@@ -626,7 +630,7 @@ func (o *StorageNetAppCluster) GetTelnetEnabledOk() (*bool, bool) {
 
 // HasTelnetEnabled returns a boolean if a field has been set.
 func (o *StorageNetAppCluster) HasTelnetEnabled() bool {
-	if o != nil && o.TelnetEnabled != nil {
+	if o != nil && !IsNil(o.TelnetEnabled) {
 		return true
 	}
 
@@ -640,7 +644,7 @@ func (o *StorageNetAppCluster) SetTelnetEnabled(v bool) {
 
 // GetVersionGeneration returns the VersionGeneration field value if set, zero value otherwise.
 func (o *StorageNetAppCluster) GetVersionGeneration() int64 {
-	if o == nil || o.VersionGeneration == nil {
+	if o == nil || IsNil(o.VersionGeneration) {
 		var ret int64
 		return ret
 	}
@@ -650,7 +654,7 @@ func (o *StorageNetAppCluster) GetVersionGeneration() int64 {
 // GetVersionGenerationOk returns a tuple with the VersionGeneration field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppCluster) GetVersionGenerationOk() (*int64, bool) {
-	if o == nil || o.VersionGeneration == nil {
+	if o == nil || IsNil(o.VersionGeneration) {
 		return nil, false
 	}
 	return o.VersionGeneration, true
@@ -658,7 +662,7 @@ func (o *StorageNetAppCluster) GetVersionGenerationOk() (*int64, bool) {
 
 // HasVersionGeneration returns a boolean if a field has been set.
 func (o *StorageNetAppCluster) HasVersionGeneration() bool {
-	if o != nil && o.VersionGeneration != nil {
+	if o != nil && !IsNil(o.VersionGeneration) {
 		return true
 	}
 
@@ -672,7 +676,7 @@ func (o *StorageNetAppCluster) SetVersionGeneration(v int64) {
 
 // GetVersionMajor returns the VersionMajor field value if set, zero value otherwise.
 func (o *StorageNetAppCluster) GetVersionMajor() int64 {
-	if o == nil || o.VersionMajor == nil {
+	if o == nil || IsNil(o.VersionMajor) {
 		var ret int64
 		return ret
 	}
@@ -682,7 +686,7 @@ func (o *StorageNetAppCluster) GetVersionMajor() int64 {
 // GetVersionMajorOk returns a tuple with the VersionMajor field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppCluster) GetVersionMajorOk() (*int64, bool) {
-	if o == nil || o.VersionMajor == nil {
+	if o == nil || IsNil(o.VersionMajor) {
 		return nil, false
 	}
 	return o.VersionMajor, true
@@ -690,7 +694,7 @@ func (o *StorageNetAppCluster) GetVersionMajorOk() (*int64, bool) {
 
 // HasVersionMajor returns a boolean if a field has been set.
 func (o *StorageNetAppCluster) HasVersionMajor() bool {
-	if o != nil && o.VersionMajor != nil {
+	if o != nil && !IsNil(o.VersionMajor) {
 		return true
 	}
 
@@ -704,7 +708,7 @@ func (o *StorageNetAppCluster) SetVersionMajor(v int64) {
 
 // GetVersionMinor returns the VersionMinor field value if set, zero value otherwise.
 func (o *StorageNetAppCluster) GetVersionMinor() int64 {
-	if o == nil || o.VersionMinor == nil {
+	if o == nil || IsNil(o.VersionMinor) {
 		var ret int64
 		return ret
 	}
@@ -714,7 +718,7 @@ func (o *StorageNetAppCluster) GetVersionMinor() int64 {
 // GetVersionMinorOk returns a tuple with the VersionMinor field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppCluster) GetVersionMinorOk() (*int64, bool) {
-	if o == nil || o.VersionMinor == nil {
+	if o == nil || IsNil(o.VersionMinor) {
 		return nil, false
 	}
 	return o.VersionMinor, true
@@ -722,7 +726,7 @@ func (o *StorageNetAppCluster) GetVersionMinorOk() (*int64, bool) {
 
 // HasVersionMinor returns a boolean if a field has been set.
 func (o *StorageNetAppCluster) HasVersionMinor() bool {
-	if o != nil && o.VersionMinor != nil {
+	if o != nil && !IsNil(o.VersionMinor) {
 		return true
 	}
 
@@ -747,7 +751,7 @@ func (o *StorageNetAppCluster) GetEvents() []StorageNetAppClusterEventRelationsh
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StorageNetAppCluster) GetEventsOk() ([]StorageNetAppClusterEventRelationship, bool) {
-	if o == nil || o.Events == nil {
+	if o == nil || IsNil(o.Events) {
 		return nil, false
 	}
 	return o.Events, true
@@ -755,7 +759,7 @@ func (o *StorageNetAppCluster) GetEventsOk() ([]StorageNetAppClusterEventRelatio
 
 // HasEvents returns a boolean if a field has been set.
 func (o *StorageNetAppCluster) HasEvents() bool {
-	if o != nil && o.Events != nil {
+	if o != nil && IsNil(o.Events) {
 		return true
 	}
 
@@ -767,82 +771,97 @@ func (o *StorageNetAppCluster) SetEvents(v []StorageNetAppClusterEventRelationsh
 	o.Events = v
 }
 
-// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise.
+// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *StorageNetAppCluster) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil || IsNil(o.RegisteredDevice.Get()) {
 		var ret AssetDeviceRegistrationRelationship
 		return ret
 	}
-	return *o.RegisteredDevice
+	return *o.RegisteredDevice.Get()
 }
 
 // GetRegisteredDeviceOk returns a tuple with the RegisteredDevice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StorageNetAppCluster) GetRegisteredDeviceOk() (*AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.RegisteredDevice, true
+	return o.RegisteredDevice.Get(), o.RegisteredDevice.IsSet()
 }
 
 // HasRegisteredDevice returns a boolean if a field has been set.
 func (o *StorageNetAppCluster) HasRegisteredDevice() bool {
-	if o != nil && o.RegisteredDevice != nil {
+	if o != nil && o.RegisteredDevice.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRegisteredDevice gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
+// SetRegisteredDevice gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
 func (o *StorageNetAppCluster) SetRegisteredDevice(v AssetDeviceRegistrationRelationship) {
-	o.RegisteredDevice = &v
+	o.RegisteredDevice.Set(&v)
+}
+
+// SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+func (o *StorageNetAppCluster) SetRegisteredDeviceNil() {
+	o.RegisteredDevice.Set(nil)
+}
+
+// UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
+func (o *StorageNetAppCluster) UnsetRegisteredDevice() {
+	o.RegisteredDevice.Unset()
 }
 
 func (o StorageNetAppCluster) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o StorageNetAppCluster) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedStorageBaseArray, errStorageBaseArray := json.Marshal(o.StorageBaseArray)
 	if errStorageBaseArray != nil {
-		return []byte{}, errStorageBaseArray
+		return map[string]interface{}{}, errStorageBaseArray
 	}
 	errStorageBaseArray = json.Unmarshal([]byte(serializedStorageBaseArray), &toSerialize)
 	if errStorageBaseArray != nil {
-		return []byte{}, errStorageBaseArray
+		return map[string]interface{}{}, errStorageBaseArray
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
 	if o.AutoSupport.IsSet() {
 		toSerialize["AutoSupport"] = o.AutoSupport.Get()
 	}
-	if o.AvgPerformanceMetrics != nil {
+	if !IsNil(o.AvgPerformanceMetrics) {
 		toSerialize["AvgPerformanceMetrics"] = o.AvgPerformanceMetrics
 	}
 	if o.ClusterEfficiency.IsSet() {
 		toSerialize["ClusterEfficiency"] = o.ClusterEfficiency.Get()
 	}
-	if o.ClusterHealthStatus != nil {
+	if !IsNil(o.ClusterHealthStatus) {
 		toSerialize["ClusterHealthStatus"] = o.ClusterHealthStatus
 	}
-	if o.DefaultAdminLocked != nil {
+	if !IsNil(o.DefaultAdminLocked) {
 		toSerialize["DefaultAdminLocked"] = o.DefaultAdminLocked
 	}
 	if o.DnsDomains != nil {
 		toSerialize["DnsDomains"] = o.DnsDomains
 	}
-	if o.FipsCompliant != nil {
+	if !IsNil(o.FipsCompliant) {
 		toSerialize["FipsCompliant"] = o.FipsCompliant
 	}
-	if o.InsecureCiphers != nil {
+	if !IsNil(o.InsecureCiphers) {
 		toSerialize["InsecureCiphers"] = o.InsecureCiphers
 	}
-	if o.Key != nil {
+	if !IsNil(o.Key) {
 		toSerialize["Key"] = o.Key
 	}
-	if o.Location != nil {
+	if !IsNil(o.Location) {
 		toSerialize["Location"] = o.Location
 	}
 	if o.ManagementAddress != nil {
@@ -854,36 +873,58 @@ func (o StorageNetAppCluster) MarshalJSON() ([]byte, error) {
 	if o.NtpServers != nil {
 		toSerialize["NtpServers"] = o.NtpServers
 	}
-	if o.RshEnabled != nil {
+	if !IsNil(o.RshEnabled) {
 		toSerialize["RshEnabled"] = o.RshEnabled
 	}
-	if o.TelnetEnabled != nil {
+	if !IsNil(o.TelnetEnabled) {
 		toSerialize["TelnetEnabled"] = o.TelnetEnabled
 	}
-	if o.VersionGeneration != nil {
+	if !IsNil(o.VersionGeneration) {
 		toSerialize["VersionGeneration"] = o.VersionGeneration
 	}
-	if o.VersionMajor != nil {
+	if !IsNil(o.VersionMajor) {
 		toSerialize["VersionMajor"] = o.VersionMajor
 	}
-	if o.VersionMinor != nil {
+	if !IsNil(o.VersionMinor) {
 		toSerialize["VersionMinor"] = o.VersionMinor
 	}
 	if o.Events != nil {
 		toSerialize["Events"] = o.Events
 	}
-	if o.RegisteredDevice != nil {
-		toSerialize["RegisteredDevice"] = o.RegisteredDevice
+	if o.RegisteredDevice.IsSet() {
+		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *StorageNetAppCluster) UnmarshalJSON(bytes []byte) (err error) {
+func (o *StorageNetAppCluster) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type StorageNetAppClusterWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -919,13 +960,13 @@ func (o *StorageNetAppCluster) UnmarshalJSON(bytes []byte) (err error) {
 		// The minor portion of the version.
 		VersionMinor *int64 `json:"VersionMinor,omitempty"`
 		// An array of relationships to storageNetAppClusterEvent resources.
-		Events           []StorageNetAppClusterEventRelationship `json:"Events,omitempty"`
-		RegisteredDevice *AssetDeviceRegistrationRelationship    `json:"RegisteredDevice,omitempty"`
+		Events           []StorageNetAppClusterEventRelationship     `json:"Events,omitempty"`
+		RegisteredDevice NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	}
 
 	varStorageNetAppClusterWithoutEmbeddedStruct := StorageNetAppClusterWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varStorageNetAppClusterWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varStorageNetAppClusterWithoutEmbeddedStruct)
 	if err == nil {
 		varStorageNetAppCluster := _StorageNetAppCluster{}
 		varStorageNetAppCluster.ClassId = varStorageNetAppClusterWithoutEmbeddedStruct.ClassId
@@ -957,7 +998,7 @@ func (o *StorageNetAppCluster) UnmarshalJSON(bytes []byte) (err error) {
 
 	varStorageNetAppCluster := _StorageNetAppCluster{}
 
-	err = json.Unmarshal(bytes, &varStorageNetAppCluster)
+	err = json.Unmarshal(data, &varStorageNetAppCluster)
 	if err == nil {
 		o.StorageBaseArray = varStorageNetAppCluster.StorageBaseArray
 	} else {
@@ -966,7 +1007,7 @@ func (o *StorageNetAppCluster) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "AutoSupport")

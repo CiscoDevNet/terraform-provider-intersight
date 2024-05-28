@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the StorageNetAppAggregate type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &StorageNetAppAggregate{}
 
 // StorageNetAppAggregate NetApp aggregate is a collection of disks arranged into one or more RAID groups.
 type StorageNetAppAggregate struct {
@@ -41,8 +45,8 @@ type StorageNetAppAggregate struct {
 	// Current state of the NetApp aggregate. * `Unknown` - Specifies that the aggregate is discovered, but the aggregate information is not yet retrieved by the Unified Manager server. * `Online` - Aggregate is ready and available. * `Onlining` - The state is transitioning online. * `Offline` - Aggregate is unavailable. * `Offlining` - The state is transitioning offline. * `Relocating` - The aggregate is being relocated. * `Restricted` - Limited operations (e.g., parity reconstruction) are allowed, but data access is not allowed. * `Failed` - The aggregate cannot be brought online. * `Inconsistent` - The aggregate has been marked corrupted; contact technical support. * `Unmounted` - The aggregate is not mounted.
 	State *string `json:"State,omitempty"`
 	// Uuid of NetApp Aggregate.
-	Uuid            *string                        `json:"Uuid,omitempty"`
-	ArrayController *StorageNetAppNodeRelationship `json:"ArrayController,omitempty"`
+	Uuid            *string                               `json:"Uuid,omitempty"`
+	ArrayController NullableStorageNetAppNodeRelationship `json:"ArrayController,omitempty"`
 	// An array of relationships to storageNetAppAggregateEvent resources.
 	Events               []StorageNetAppAggregateEventRelationship `json:"Events,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -123,7 +127,7 @@ func (o *StorageNetAppAggregate) SetObjectType(v string) {
 
 // GetAggregateType returns the AggregateType field value if set, zero value otherwise.
 func (o *StorageNetAppAggregate) GetAggregateType() string {
-	if o == nil || o.AggregateType == nil {
+	if o == nil || IsNil(o.AggregateType) {
 		var ret string
 		return ret
 	}
@@ -133,7 +137,7 @@ func (o *StorageNetAppAggregate) GetAggregateType() string {
 // GetAggregateTypeOk returns a tuple with the AggregateType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppAggregate) GetAggregateTypeOk() (*string, bool) {
-	if o == nil || o.AggregateType == nil {
+	if o == nil || IsNil(o.AggregateType) {
 		return nil, false
 	}
 	return o.AggregateType, true
@@ -141,7 +145,7 @@ func (o *StorageNetAppAggregate) GetAggregateTypeOk() (*string, bool) {
 
 // HasAggregateType returns a boolean if a field has been set.
 func (o *StorageNetAppAggregate) HasAggregateType() bool {
-	if o != nil && o.AggregateType != nil {
+	if o != nil && !IsNil(o.AggregateType) {
 		return true
 	}
 
@@ -155,7 +159,7 @@ func (o *StorageNetAppAggregate) SetAggregateType(v string) {
 
 // GetAvgPerformanceMetrics returns the AvgPerformanceMetrics field value if set, zero value otherwise.
 func (o *StorageNetAppAggregate) GetAvgPerformanceMetrics() StorageNetAppPerformanceMetricsAverage {
-	if o == nil || o.AvgPerformanceMetrics == nil {
+	if o == nil || IsNil(o.AvgPerformanceMetrics) {
 		var ret StorageNetAppPerformanceMetricsAverage
 		return ret
 	}
@@ -165,7 +169,7 @@ func (o *StorageNetAppAggregate) GetAvgPerformanceMetrics() StorageNetAppPerform
 // GetAvgPerformanceMetricsOk returns a tuple with the AvgPerformanceMetrics field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppAggregate) GetAvgPerformanceMetricsOk() (*StorageNetAppPerformanceMetricsAverage, bool) {
-	if o == nil || o.AvgPerformanceMetrics == nil {
+	if o == nil || IsNil(o.AvgPerformanceMetrics) {
 		return nil, false
 	}
 	return o.AvgPerformanceMetrics, true
@@ -173,7 +177,7 @@ func (o *StorageNetAppAggregate) GetAvgPerformanceMetricsOk() (*StorageNetAppPer
 
 // HasAvgPerformanceMetrics returns a boolean if a field has been set.
 func (o *StorageNetAppAggregate) HasAvgPerformanceMetrics() bool {
-	if o != nil && o.AvgPerformanceMetrics != nil {
+	if o != nil && !IsNil(o.AvgPerformanceMetrics) {
 		return true
 	}
 
@@ -198,7 +202,7 @@ func (o *StorageNetAppAggregate) GetCloudStorage() []string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StorageNetAppAggregate) GetCloudStorageOk() ([]string, bool) {
-	if o == nil || o.CloudStorage == nil {
+	if o == nil || IsNil(o.CloudStorage) {
 		return nil, false
 	}
 	return o.CloudStorage, true
@@ -206,7 +210,7 @@ func (o *StorageNetAppAggregate) GetCloudStorageOk() ([]string, bool) {
 
 // HasCloudStorage returns a boolean if a field has been set.
 func (o *StorageNetAppAggregate) HasCloudStorage() bool {
-	if o != nil && o.CloudStorage != nil {
+	if o != nil && IsNil(o.CloudStorage) {
 		return true
 	}
 
@@ -220,7 +224,7 @@ func (o *StorageNetAppAggregate) SetCloudStorage(v []string) {
 
 // GetEfficiencyRatio returns the EfficiencyRatio field value if set, zero value otherwise.
 func (o *StorageNetAppAggregate) GetEfficiencyRatio() float32 {
-	if o == nil || o.EfficiencyRatio == nil {
+	if o == nil || IsNil(o.EfficiencyRatio) {
 		var ret float32
 		return ret
 	}
@@ -230,7 +234,7 @@ func (o *StorageNetAppAggregate) GetEfficiencyRatio() float32 {
 // GetEfficiencyRatioOk returns a tuple with the EfficiencyRatio field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppAggregate) GetEfficiencyRatioOk() (*float32, bool) {
-	if o == nil || o.EfficiencyRatio == nil {
+	if o == nil || IsNil(o.EfficiencyRatio) {
 		return nil, false
 	}
 	return o.EfficiencyRatio, true
@@ -238,7 +242,7 @@ func (o *StorageNetAppAggregate) GetEfficiencyRatioOk() (*float32, bool) {
 
 // HasEfficiencyRatio returns a boolean if a field has been set.
 func (o *StorageNetAppAggregate) HasEfficiencyRatio() bool {
-	if o != nil && o.EfficiencyRatio != nil {
+	if o != nil && !IsNil(o.EfficiencyRatio) {
 		return true
 	}
 
@@ -252,7 +256,7 @@ func (o *StorageNetAppAggregate) SetEfficiencyRatio(v float32) {
 
 // GetKey returns the Key field value if set, zero value otherwise.
 func (o *StorageNetAppAggregate) GetKey() string {
-	if o == nil || o.Key == nil {
+	if o == nil || IsNil(o.Key) {
 		var ret string
 		return ret
 	}
@@ -262,7 +266,7 @@ func (o *StorageNetAppAggregate) GetKey() string {
 // GetKeyOk returns a tuple with the Key field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppAggregate) GetKeyOk() (*string, bool) {
-	if o == nil || o.Key == nil {
+	if o == nil || IsNil(o.Key) {
 		return nil, false
 	}
 	return o.Key, true
@@ -270,7 +274,7 @@ func (o *StorageNetAppAggregate) GetKeyOk() (*string, bool) {
 
 // HasKey returns a boolean if a field has been set.
 func (o *StorageNetAppAggregate) HasKey() bool {
-	if o != nil && o.Key != nil {
+	if o != nil && !IsNil(o.Key) {
 		return true
 	}
 
@@ -284,7 +288,7 @@ func (o *StorageNetAppAggregate) SetKey(v string) {
 
 // GetNodeName returns the NodeName field value if set, zero value otherwise.
 func (o *StorageNetAppAggregate) GetNodeName() string {
-	if o == nil || o.NodeName == nil {
+	if o == nil || IsNil(o.NodeName) {
 		var ret string
 		return ret
 	}
@@ -294,7 +298,7 @@ func (o *StorageNetAppAggregate) GetNodeName() string {
 // GetNodeNameOk returns a tuple with the NodeName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppAggregate) GetNodeNameOk() (*string, bool) {
-	if o == nil || o.NodeName == nil {
+	if o == nil || IsNil(o.NodeName) {
 		return nil, false
 	}
 	return o.NodeName, true
@@ -302,7 +306,7 @@ func (o *StorageNetAppAggregate) GetNodeNameOk() (*string, bool) {
 
 // HasNodeName returns a boolean if a field has been set.
 func (o *StorageNetAppAggregate) HasNodeName() bool {
-	if o != nil && o.NodeName != nil {
+	if o != nil && !IsNil(o.NodeName) {
 		return true
 	}
 
@@ -316,7 +320,7 @@ func (o *StorageNetAppAggregate) SetNodeName(v string) {
 
 // GetRaidSize returns the RaidSize field value if set, zero value otherwise.
 func (o *StorageNetAppAggregate) GetRaidSize() int64 {
-	if o == nil || o.RaidSize == nil {
+	if o == nil || IsNil(o.RaidSize) {
 		var ret int64
 		return ret
 	}
@@ -326,7 +330,7 @@ func (o *StorageNetAppAggregate) GetRaidSize() int64 {
 // GetRaidSizeOk returns a tuple with the RaidSize field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppAggregate) GetRaidSizeOk() (*int64, bool) {
-	if o == nil || o.RaidSize == nil {
+	if o == nil || IsNil(o.RaidSize) {
 		return nil, false
 	}
 	return o.RaidSize, true
@@ -334,7 +338,7 @@ func (o *StorageNetAppAggregate) GetRaidSizeOk() (*int64, bool) {
 
 // HasRaidSize returns a boolean if a field has been set.
 func (o *StorageNetAppAggregate) HasRaidSize() bool {
-	if o != nil && o.RaidSize != nil {
+	if o != nil && !IsNil(o.RaidSize) {
 		return true
 	}
 
@@ -348,7 +352,7 @@ func (o *StorageNetAppAggregate) SetRaidSize(v int64) {
 
 // GetRaidType returns the RaidType field value if set, zero value otherwise.
 func (o *StorageNetAppAggregate) GetRaidType() string {
-	if o == nil || o.RaidType == nil {
+	if o == nil || IsNil(o.RaidType) {
 		var ret string
 		return ret
 	}
@@ -358,7 +362,7 @@ func (o *StorageNetAppAggregate) GetRaidType() string {
 // GetRaidTypeOk returns a tuple with the RaidType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppAggregate) GetRaidTypeOk() (*string, bool) {
-	if o == nil || o.RaidType == nil {
+	if o == nil || IsNil(o.RaidType) {
 		return nil, false
 	}
 	return o.RaidType, true
@@ -366,7 +370,7 @@ func (o *StorageNetAppAggregate) GetRaidTypeOk() (*string, bool) {
 
 // HasRaidType returns a boolean if a field has been set.
 func (o *StorageNetAppAggregate) HasRaidType() bool {
-	if o != nil && o.RaidType != nil {
+	if o != nil && !IsNil(o.RaidType) {
 		return true
 	}
 
@@ -380,7 +384,7 @@ func (o *StorageNetAppAggregate) SetRaidType(v string) {
 
 // GetState returns the State field value if set, zero value otherwise.
 func (o *StorageNetAppAggregate) GetState() string {
-	if o == nil || o.State == nil {
+	if o == nil || IsNil(o.State) {
 		var ret string
 		return ret
 	}
@@ -390,7 +394,7 @@ func (o *StorageNetAppAggregate) GetState() string {
 // GetStateOk returns a tuple with the State field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppAggregate) GetStateOk() (*string, bool) {
-	if o == nil || o.State == nil {
+	if o == nil || IsNil(o.State) {
 		return nil, false
 	}
 	return o.State, true
@@ -398,7 +402,7 @@ func (o *StorageNetAppAggregate) GetStateOk() (*string, bool) {
 
 // HasState returns a boolean if a field has been set.
 func (o *StorageNetAppAggregate) HasState() bool {
-	if o != nil && o.State != nil {
+	if o != nil && !IsNil(o.State) {
 		return true
 	}
 
@@ -412,7 +416,7 @@ func (o *StorageNetAppAggregate) SetState(v string) {
 
 // GetUuid returns the Uuid field value if set, zero value otherwise.
 func (o *StorageNetAppAggregate) GetUuid() string {
-	if o == nil || o.Uuid == nil {
+	if o == nil || IsNil(o.Uuid) {
 		var ret string
 		return ret
 	}
@@ -422,7 +426,7 @@ func (o *StorageNetAppAggregate) GetUuid() string {
 // GetUuidOk returns a tuple with the Uuid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppAggregate) GetUuidOk() (*string, bool) {
-	if o == nil || o.Uuid == nil {
+	if o == nil || IsNil(o.Uuid) {
 		return nil, false
 	}
 	return o.Uuid, true
@@ -430,7 +434,7 @@ func (o *StorageNetAppAggregate) GetUuidOk() (*string, bool) {
 
 // HasUuid returns a boolean if a field has been set.
 func (o *StorageNetAppAggregate) HasUuid() bool {
-	if o != nil && o.Uuid != nil {
+	if o != nil && !IsNil(o.Uuid) {
 		return true
 	}
 
@@ -442,36 +446,47 @@ func (o *StorageNetAppAggregate) SetUuid(v string) {
 	o.Uuid = &v
 }
 
-// GetArrayController returns the ArrayController field value if set, zero value otherwise.
+// GetArrayController returns the ArrayController field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *StorageNetAppAggregate) GetArrayController() StorageNetAppNodeRelationship {
-	if o == nil || o.ArrayController == nil {
+	if o == nil || IsNil(o.ArrayController.Get()) {
 		var ret StorageNetAppNodeRelationship
 		return ret
 	}
-	return *o.ArrayController
+	return *o.ArrayController.Get()
 }
 
 // GetArrayControllerOk returns a tuple with the ArrayController field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StorageNetAppAggregate) GetArrayControllerOk() (*StorageNetAppNodeRelationship, bool) {
-	if o == nil || o.ArrayController == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.ArrayController, true
+	return o.ArrayController.Get(), o.ArrayController.IsSet()
 }
 
 // HasArrayController returns a boolean if a field has been set.
 func (o *StorageNetAppAggregate) HasArrayController() bool {
-	if o != nil && o.ArrayController != nil {
+	if o != nil && o.ArrayController.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetArrayController gets a reference to the given StorageNetAppNodeRelationship and assigns it to the ArrayController field.
+// SetArrayController gets a reference to the given NullableStorageNetAppNodeRelationship and assigns it to the ArrayController field.
 func (o *StorageNetAppAggregate) SetArrayController(v StorageNetAppNodeRelationship) {
-	o.ArrayController = &v
+	o.ArrayController.Set(&v)
+}
+
+// SetArrayControllerNil sets the value for ArrayController to be an explicit nil
+func (o *StorageNetAppAggregate) SetArrayControllerNil() {
+	o.ArrayController.Set(nil)
+}
+
+// UnsetArrayController ensures that no value is present for ArrayController, not even an explicit nil
+func (o *StorageNetAppAggregate) UnsetArrayController() {
+	o.ArrayController.Unset()
 }
 
 // GetEvents returns the Events field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -487,7 +502,7 @@ func (o *StorageNetAppAggregate) GetEvents() []StorageNetAppAggregateEventRelati
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StorageNetAppAggregate) GetEventsOk() ([]StorageNetAppAggregateEventRelationship, bool) {
-	if o == nil || o.Events == nil {
+	if o == nil || IsNil(o.Events) {
 		return nil, false
 	}
 	return o.Events, true
@@ -495,7 +510,7 @@ func (o *StorageNetAppAggregate) GetEventsOk() ([]StorageNetAppAggregateEventRel
 
 // HasEvents returns a boolean if a field has been set.
 func (o *StorageNetAppAggregate) HasEvents() bool {
-	if o != nil && o.Events != nil {
+	if o != nil && IsNil(o.Events) {
 		return true
 	}
 
@@ -508,53 +523,57 @@ func (o *StorageNetAppAggregate) SetEvents(v []StorageNetAppAggregateEventRelati
 }
 
 func (o StorageNetAppAggregate) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o StorageNetAppAggregate) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedStorageBaseDiskPool, errStorageBaseDiskPool := json.Marshal(o.StorageBaseDiskPool)
 	if errStorageBaseDiskPool != nil {
-		return []byte{}, errStorageBaseDiskPool
+		return map[string]interface{}{}, errStorageBaseDiskPool
 	}
 	errStorageBaseDiskPool = json.Unmarshal([]byte(serializedStorageBaseDiskPool), &toSerialize)
 	if errStorageBaseDiskPool != nil {
-		return []byte{}, errStorageBaseDiskPool
+		return map[string]interface{}{}, errStorageBaseDiskPool
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.AggregateType != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.AggregateType) {
 		toSerialize["AggregateType"] = o.AggregateType
 	}
-	if o.AvgPerformanceMetrics != nil {
+	if !IsNil(o.AvgPerformanceMetrics) {
 		toSerialize["AvgPerformanceMetrics"] = o.AvgPerformanceMetrics
 	}
 	if o.CloudStorage != nil {
 		toSerialize["CloudStorage"] = o.CloudStorage
 	}
-	if o.EfficiencyRatio != nil {
+	if !IsNil(o.EfficiencyRatio) {
 		toSerialize["EfficiencyRatio"] = o.EfficiencyRatio
 	}
-	if o.Key != nil {
+	if !IsNil(o.Key) {
 		toSerialize["Key"] = o.Key
 	}
-	if o.NodeName != nil {
+	if !IsNil(o.NodeName) {
 		toSerialize["NodeName"] = o.NodeName
 	}
-	if o.RaidSize != nil {
+	if !IsNil(o.RaidSize) {
 		toSerialize["RaidSize"] = o.RaidSize
 	}
-	if o.RaidType != nil {
+	if !IsNil(o.RaidType) {
 		toSerialize["RaidType"] = o.RaidType
 	}
-	if o.State != nil {
+	if !IsNil(o.State) {
 		toSerialize["State"] = o.State
 	}
-	if o.Uuid != nil {
+	if !IsNil(o.Uuid) {
 		toSerialize["Uuid"] = o.Uuid
 	}
-	if o.ArrayController != nil {
-		toSerialize["ArrayController"] = o.ArrayController
+	if o.ArrayController.IsSet() {
+		toSerialize["ArrayController"] = o.ArrayController.Get()
 	}
 	if o.Events != nil {
 		toSerialize["Events"] = o.Events
@@ -564,10 +583,32 @@ func (o StorageNetAppAggregate) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *StorageNetAppAggregate) UnmarshalJSON(bytes []byte) (err error) {
+func (o *StorageNetAppAggregate) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type StorageNetAppAggregateWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -590,15 +631,15 @@ func (o *StorageNetAppAggregate) UnmarshalJSON(bytes []byte) (err error) {
 		// Current state of the NetApp aggregate. * `Unknown` - Specifies that the aggregate is discovered, but the aggregate information is not yet retrieved by the Unified Manager server. * `Online` - Aggregate is ready and available. * `Onlining` - The state is transitioning online. * `Offline` - Aggregate is unavailable. * `Offlining` - The state is transitioning offline. * `Relocating` - The aggregate is being relocated. * `Restricted` - Limited operations (e.g., parity reconstruction) are allowed, but data access is not allowed. * `Failed` - The aggregate cannot be brought online. * `Inconsistent` - The aggregate has been marked corrupted; contact technical support. * `Unmounted` - The aggregate is not mounted.
 		State *string `json:"State,omitempty"`
 		// Uuid of NetApp Aggregate.
-		Uuid            *string                        `json:"Uuid,omitempty"`
-		ArrayController *StorageNetAppNodeRelationship `json:"ArrayController,omitempty"`
+		Uuid            *string                               `json:"Uuid,omitempty"`
+		ArrayController NullableStorageNetAppNodeRelationship `json:"ArrayController,omitempty"`
 		// An array of relationships to storageNetAppAggregateEvent resources.
 		Events []StorageNetAppAggregateEventRelationship `json:"Events,omitempty"`
 	}
 
 	varStorageNetAppAggregateWithoutEmbeddedStruct := StorageNetAppAggregateWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varStorageNetAppAggregateWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varStorageNetAppAggregateWithoutEmbeddedStruct)
 	if err == nil {
 		varStorageNetAppAggregate := _StorageNetAppAggregate{}
 		varStorageNetAppAggregate.ClassId = varStorageNetAppAggregateWithoutEmbeddedStruct.ClassId
@@ -622,7 +663,7 @@ func (o *StorageNetAppAggregate) UnmarshalJSON(bytes []byte) (err error) {
 
 	varStorageNetAppAggregate := _StorageNetAppAggregate{}
 
-	err = json.Unmarshal(bytes, &varStorageNetAppAggregate)
+	err = json.Unmarshal(data, &varStorageNetAppAggregate)
 	if err == nil {
 		o.StorageBaseDiskPool = varStorageNetAppAggregate.StorageBaseDiskPool
 	} else {
@@ -631,7 +672,7 @@ func (o *StorageNetAppAggregate) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "AggregateType")

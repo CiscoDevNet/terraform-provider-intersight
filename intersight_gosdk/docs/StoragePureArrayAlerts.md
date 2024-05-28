@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **CreatedAt** | Pointer to **time.Time** | Date on which the event was generated on FlashArrays. | [optional] [readonly] 
 **Name** | Pointer to **string** | ID of the alert related to the event. | [optional] [readonly] 
 **Severity** | Pointer to **string** | Type of the severity of the event it could be Critical or Warning. | [optional] [readonly] 
-**Array** | Pointer to [**StoragePureArrayRelationship**](StoragePureArrayRelationship.md) |  | [optional] 
+**Array** | Pointer to [**NullableStoragePureArrayRelationship**](StoragePureArrayRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -222,6 +222,16 @@ SetArray sets Array field to given value.
 
 HasArray returns a boolean if a field has been set.
 
+### SetArrayNil
+
+`func (o *StoragePureArrayAlerts) SetArrayNil(b bool)`
+
+ SetArrayNil sets the value for Array to be an explicit nil
+
+### UnsetArray
+`func (o *StoragePureArrayAlerts) UnsetArray()`
+
+UnsetArray ensures that no value is present for Array, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

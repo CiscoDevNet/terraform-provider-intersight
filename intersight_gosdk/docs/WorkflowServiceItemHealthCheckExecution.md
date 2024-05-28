@@ -12,9 +12,9 @@ Name | Type | Description | Notes
 **Result** | Pointer to **string** | Health check execution result. * &#x60;Unknown&#x60; - Indicates that the health check results could not be determined. * &#x60;Pass&#x60; - Indicates that the health check has passed. * &#x60;Fail&#x60; - Indicates that the health check has failed. * &#x60;Warning&#x60; - Indicates that the health check completed with a warning. * &#x60;NotApplicable&#x60; - Indicates that the health check is either unsupported, or not applicable for the service item. | [optional] [readonly] [default to "Unknown"]
 **Summary** | Pointer to **string** | A brief summary of health check execution result. | [optional] [readonly] 
 **WorkflowStatus** | Pointer to **string** | Status of the workflow that is executed as a part of health check execution. | [optional] [readonly] 
-**HealthCheckDefinition** | Pointer to [**WorkflowServiceItemHealthCheckDefinitionRelationship**](WorkflowServiceItemHealthCheckDefinitionRelationship.md) |  | [optional] 
-**ServiceItemInstance** | Pointer to [**WorkflowServiceItemInstanceRelationship**](WorkflowServiceItemInstanceRelationship.md) |  | [optional] 
-**WorkflowInfo** | Pointer to [**WorkflowWorkflowInfoRelationship**](WorkflowWorkflowInfoRelationship.md) |  | [optional] 
+**HealthCheckDefinition** | Pointer to [**NullableWorkflowServiceItemHealthCheckDefinitionRelationship**](WorkflowServiceItemHealthCheckDefinitionRelationship.md) |  | [optional] 
+**ServiceItemInstance** | Pointer to [**NullableWorkflowServiceItemInstanceRelationship**](WorkflowServiceItemInstanceRelationship.md) |  | [optional] 
+**WorkflowInfo** | Pointer to [**NullableWorkflowWorkflowInfoRelationship**](WorkflowWorkflowInfoRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -260,6 +260,16 @@ SetHealthCheckDefinition sets HealthCheckDefinition field to given value.
 
 HasHealthCheckDefinition returns a boolean if a field has been set.
 
+### SetHealthCheckDefinitionNil
+
+`func (o *WorkflowServiceItemHealthCheckExecution) SetHealthCheckDefinitionNil(b bool)`
+
+ SetHealthCheckDefinitionNil sets the value for HealthCheckDefinition to be an explicit nil
+
+### UnsetHealthCheckDefinition
+`func (o *WorkflowServiceItemHealthCheckExecution) UnsetHealthCheckDefinition()`
+
+UnsetHealthCheckDefinition ensures that no value is present for HealthCheckDefinition, not even an explicit nil
 ### GetServiceItemInstance
 
 `func (o *WorkflowServiceItemHealthCheckExecution) GetServiceItemInstance() WorkflowServiceItemInstanceRelationship`
@@ -285,6 +295,16 @@ SetServiceItemInstance sets ServiceItemInstance field to given value.
 
 HasServiceItemInstance returns a boolean if a field has been set.
 
+### SetServiceItemInstanceNil
+
+`func (o *WorkflowServiceItemHealthCheckExecution) SetServiceItemInstanceNil(b bool)`
+
+ SetServiceItemInstanceNil sets the value for ServiceItemInstance to be an explicit nil
+
+### UnsetServiceItemInstance
+`func (o *WorkflowServiceItemHealthCheckExecution) UnsetServiceItemInstance()`
+
+UnsetServiceItemInstance ensures that no value is present for ServiceItemInstance, not even an explicit nil
 ### GetWorkflowInfo
 
 `func (o *WorkflowServiceItemHealthCheckExecution) GetWorkflowInfo() WorkflowWorkflowInfoRelationship`
@@ -310,6 +330,16 @@ SetWorkflowInfo sets WorkflowInfo field to given value.
 
 HasWorkflowInfo returns a boolean if a field has been set.
 
+### SetWorkflowInfoNil
+
+`func (o *WorkflowServiceItemHealthCheckExecution) SetWorkflowInfoNil(b bool)`
+
+ SetWorkflowInfoNil sets the value for WorkflowInfo to be an explicit nil
+
+### UnsetWorkflowInfo
+`func (o *WorkflowServiceItemHealthCheckExecution) UnsetWorkflowInfo()`
+
+UnsetWorkflowInfo ensures that no value is present for WorkflowInfo, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

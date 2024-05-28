@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the CloudTfcOrganization type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &CloudTfcOrganization{}
 
 // CloudTfcOrganization Organizations are a shared space for teams to collaborate on workspaces in Terraform Cloud.
 type CloudTfcOrganization struct {
@@ -39,8 +43,8 @@ type CloudTfcOrganization struct {
 	// The max number of simultaneous runs allowed in this organization.
 	RunCeiling *int64 `json:"RunCeiling,omitempty"`
 	// Total number of VCS providers in the organization.
-	VcsProviders         *int64                   `json:"VcsProviders,omitempty"`
-	Target               *AssetTargetRelationship `json:"Target,omitempty"`
+	VcsProviders         *int64                          `json:"VcsProviders,omitempty"`
+	Target               NullableAssetTargetRelationship `json:"Target,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -119,7 +123,7 @@ func (o *CloudTfcOrganization) SetObjectType(v string) {
 
 // GetAgentCeiling returns the AgentCeiling field value if set, zero value otherwise.
 func (o *CloudTfcOrganization) GetAgentCeiling() int64 {
-	if o == nil || o.AgentCeiling == nil {
+	if o == nil || IsNil(o.AgentCeiling) {
 		var ret int64
 		return ret
 	}
@@ -129,7 +133,7 @@ func (o *CloudTfcOrganization) GetAgentCeiling() int64 {
 // GetAgentCeilingOk returns a tuple with the AgentCeiling field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudTfcOrganization) GetAgentCeilingOk() (*int64, bool) {
-	if o == nil || o.AgentCeiling == nil {
+	if o == nil || IsNil(o.AgentCeiling) {
 		return nil, false
 	}
 	return o.AgentCeiling, true
@@ -137,7 +141,7 @@ func (o *CloudTfcOrganization) GetAgentCeilingOk() (*int64, bool) {
 
 // HasAgentCeiling returns a boolean if a field has been set.
 func (o *CloudTfcOrganization) HasAgentCeiling() bool {
-	if o != nil && o.AgentCeiling != nil {
+	if o != nil && !IsNil(o.AgentCeiling) {
 		return true
 	}
 
@@ -151,7 +155,7 @@ func (o *CloudTfcOrganization) SetAgentCeiling(v int64) {
 
 // GetEmail returns the Email field value if set, zero value otherwise.
 func (o *CloudTfcOrganization) GetEmail() string {
-	if o == nil || o.Email == nil {
+	if o == nil || IsNil(o.Email) {
 		var ret string
 		return ret
 	}
@@ -161,7 +165,7 @@ func (o *CloudTfcOrganization) GetEmail() string {
 // GetEmailOk returns a tuple with the Email field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudTfcOrganization) GetEmailOk() (*string, bool) {
-	if o == nil || o.Email == nil {
+	if o == nil || IsNil(o.Email) {
 		return nil, false
 	}
 	return o.Email, true
@@ -169,7 +173,7 @@ func (o *CloudTfcOrganization) GetEmailOk() (*string, bool) {
 
 // HasEmail returns a boolean if a field has been set.
 func (o *CloudTfcOrganization) HasEmail() bool {
-	if o != nil && o.Email != nil {
+	if o != nil && !IsNil(o.Email) {
 		return true
 	}
 
@@ -183,7 +187,7 @@ func (o *CloudTfcOrganization) SetEmail(v string) {
 
 // GetIdentity returns the Identity field value if set, zero value otherwise.
 func (o *CloudTfcOrganization) GetIdentity() string {
-	if o == nil || o.Identity == nil {
+	if o == nil || IsNil(o.Identity) {
 		var ret string
 		return ret
 	}
@@ -193,7 +197,7 @@ func (o *CloudTfcOrganization) GetIdentity() string {
 // GetIdentityOk returns a tuple with the Identity field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudTfcOrganization) GetIdentityOk() (*string, bool) {
-	if o == nil || o.Identity == nil {
+	if o == nil || IsNil(o.Identity) {
 		return nil, false
 	}
 	return o.Identity, true
@@ -201,7 +205,7 @@ func (o *CloudTfcOrganization) GetIdentityOk() (*string, bool) {
 
 // HasIdentity returns a boolean if a field has been set.
 func (o *CloudTfcOrganization) HasIdentity() bool {
-	if o != nil && o.Identity != nil {
+	if o != nil && !IsNil(o.Identity) {
 		return true
 	}
 
@@ -215,7 +219,7 @@ func (o *CloudTfcOrganization) SetIdentity(v string) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *CloudTfcOrganization) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -225,7 +229,7 @@ func (o *CloudTfcOrganization) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudTfcOrganization) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -233,7 +237,7 @@ func (o *CloudTfcOrganization) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *CloudTfcOrganization) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -247,7 +251,7 @@ func (o *CloudTfcOrganization) SetName(v string) {
 
 // GetNumTeams returns the NumTeams field value if set, zero value otherwise.
 func (o *CloudTfcOrganization) GetNumTeams() int64 {
-	if o == nil || o.NumTeams == nil {
+	if o == nil || IsNil(o.NumTeams) {
 		var ret int64
 		return ret
 	}
@@ -257,7 +261,7 @@ func (o *CloudTfcOrganization) GetNumTeams() int64 {
 // GetNumTeamsOk returns a tuple with the NumTeams field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudTfcOrganization) GetNumTeamsOk() (*int64, bool) {
-	if o == nil || o.NumTeams == nil {
+	if o == nil || IsNil(o.NumTeams) {
 		return nil, false
 	}
 	return o.NumTeams, true
@@ -265,7 +269,7 @@ func (o *CloudTfcOrganization) GetNumTeamsOk() (*int64, bool) {
 
 // HasNumTeams returns a boolean if a field has been set.
 func (o *CloudTfcOrganization) HasNumTeams() bool {
-	if o != nil && o.NumTeams != nil {
+	if o != nil && !IsNil(o.NumTeams) {
 		return true
 	}
 
@@ -279,7 +283,7 @@ func (o *CloudTfcOrganization) SetNumTeams(v int64) {
 
 // GetNumUsers returns the NumUsers field value if set, zero value otherwise.
 func (o *CloudTfcOrganization) GetNumUsers() int64 {
-	if o == nil || o.NumUsers == nil {
+	if o == nil || IsNil(o.NumUsers) {
 		var ret int64
 		return ret
 	}
@@ -289,7 +293,7 @@ func (o *CloudTfcOrganization) GetNumUsers() int64 {
 // GetNumUsersOk returns a tuple with the NumUsers field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudTfcOrganization) GetNumUsersOk() (*int64, bool) {
-	if o == nil || o.NumUsers == nil {
+	if o == nil || IsNil(o.NumUsers) {
 		return nil, false
 	}
 	return o.NumUsers, true
@@ -297,7 +301,7 @@ func (o *CloudTfcOrganization) GetNumUsersOk() (*int64, bool) {
 
 // HasNumUsers returns a boolean if a field has been set.
 func (o *CloudTfcOrganization) HasNumUsers() bool {
-	if o != nil && o.NumUsers != nil {
+	if o != nil && !IsNil(o.NumUsers) {
 		return true
 	}
 
@@ -311,7 +315,7 @@ func (o *CloudTfcOrganization) SetNumUsers(v int64) {
 
 // GetRunCeiling returns the RunCeiling field value if set, zero value otherwise.
 func (o *CloudTfcOrganization) GetRunCeiling() int64 {
-	if o == nil || o.RunCeiling == nil {
+	if o == nil || IsNil(o.RunCeiling) {
 		var ret int64
 		return ret
 	}
@@ -321,7 +325,7 @@ func (o *CloudTfcOrganization) GetRunCeiling() int64 {
 // GetRunCeilingOk returns a tuple with the RunCeiling field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudTfcOrganization) GetRunCeilingOk() (*int64, bool) {
-	if o == nil || o.RunCeiling == nil {
+	if o == nil || IsNil(o.RunCeiling) {
 		return nil, false
 	}
 	return o.RunCeiling, true
@@ -329,7 +333,7 @@ func (o *CloudTfcOrganization) GetRunCeilingOk() (*int64, bool) {
 
 // HasRunCeiling returns a boolean if a field has been set.
 func (o *CloudTfcOrganization) HasRunCeiling() bool {
-	if o != nil && o.RunCeiling != nil {
+	if o != nil && !IsNil(o.RunCeiling) {
 		return true
 	}
 
@@ -343,7 +347,7 @@ func (o *CloudTfcOrganization) SetRunCeiling(v int64) {
 
 // GetVcsProviders returns the VcsProviders field value if set, zero value otherwise.
 func (o *CloudTfcOrganization) GetVcsProviders() int64 {
-	if o == nil || o.VcsProviders == nil {
+	if o == nil || IsNil(o.VcsProviders) {
 		var ret int64
 		return ret
 	}
@@ -353,7 +357,7 @@ func (o *CloudTfcOrganization) GetVcsProviders() int64 {
 // GetVcsProvidersOk returns a tuple with the VcsProviders field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudTfcOrganization) GetVcsProvidersOk() (*int64, bool) {
-	if o == nil || o.VcsProviders == nil {
+	if o == nil || IsNil(o.VcsProviders) {
 		return nil, false
 	}
 	return o.VcsProviders, true
@@ -361,7 +365,7 @@ func (o *CloudTfcOrganization) GetVcsProvidersOk() (*int64, bool) {
 
 // HasVcsProviders returns a boolean if a field has been set.
 func (o *CloudTfcOrganization) HasVcsProviders() bool {
-	if o != nil && o.VcsProviders != nil {
+	if o != nil && !IsNil(o.VcsProviders) {
 		return true
 	}
 
@@ -373,90 +377,127 @@ func (o *CloudTfcOrganization) SetVcsProviders(v int64) {
 	o.VcsProviders = &v
 }
 
-// GetTarget returns the Target field value if set, zero value otherwise.
+// GetTarget returns the Target field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CloudTfcOrganization) GetTarget() AssetTargetRelationship {
-	if o == nil || o.Target == nil {
+	if o == nil || IsNil(o.Target.Get()) {
 		var ret AssetTargetRelationship
 		return ret
 	}
-	return *o.Target
+	return *o.Target.Get()
 }
 
 // GetTargetOk returns a tuple with the Target field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CloudTfcOrganization) GetTargetOk() (*AssetTargetRelationship, bool) {
-	if o == nil || o.Target == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Target, true
+	return o.Target.Get(), o.Target.IsSet()
 }
 
 // HasTarget returns a boolean if a field has been set.
 func (o *CloudTfcOrganization) HasTarget() bool {
-	if o != nil && o.Target != nil {
+	if o != nil && o.Target.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetTarget gets a reference to the given AssetTargetRelationship and assigns it to the Target field.
+// SetTarget gets a reference to the given NullableAssetTargetRelationship and assigns it to the Target field.
 func (o *CloudTfcOrganization) SetTarget(v AssetTargetRelationship) {
-	o.Target = &v
+	o.Target.Set(&v)
+}
+
+// SetTargetNil sets the value for Target to be an explicit nil
+func (o *CloudTfcOrganization) SetTargetNil() {
+	o.Target.Set(nil)
+}
+
+// UnsetTarget ensures that no value is present for Target, not even an explicit nil
+func (o *CloudTfcOrganization) UnsetTarget() {
+	o.Target.Unset()
 }
 
 func (o CloudTfcOrganization) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o CloudTfcOrganization) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.AgentCeiling != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.AgentCeiling) {
 		toSerialize["AgentCeiling"] = o.AgentCeiling
 	}
-	if o.Email != nil {
+	if !IsNil(o.Email) {
 		toSerialize["Email"] = o.Email
 	}
-	if o.Identity != nil {
+	if !IsNil(o.Identity) {
 		toSerialize["Identity"] = o.Identity
 	}
-	if o.Name != nil {
+	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
 	}
-	if o.NumTeams != nil {
+	if !IsNil(o.NumTeams) {
 		toSerialize["NumTeams"] = o.NumTeams
 	}
-	if o.NumUsers != nil {
+	if !IsNil(o.NumUsers) {
 		toSerialize["NumUsers"] = o.NumUsers
 	}
-	if o.RunCeiling != nil {
+	if !IsNil(o.RunCeiling) {
 		toSerialize["RunCeiling"] = o.RunCeiling
 	}
-	if o.VcsProviders != nil {
+	if !IsNil(o.VcsProviders) {
 		toSerialize["VcsProviders"] = o.VcsProviders
 	}
-	if o.Target != nil {
-		toSerialize["Target"] = o.Target
+	if o.Target.IsSet() {
+		toSerialize["Target"] = o.Target.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *CloudTfcOrganization) UnmarshalJSON(bytes []byte) (err error) {
+func (o *CloudTfcOrganization) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type CloudTfcOrganizationWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -477,13 +518,13 @@ func (o *CloudTfcOrganization) UnmarshalJSON(bytes []byte) (err error) {
 		// The max number of simultaneous runs allowed in this organization.
 		RunCeiling *int64 `json:"RunCeiling,omitempty"`
 		// Total number of VCS providers in the organization.
-		VcsProviders *int64                   `json:"VcsProviders,omitempty"`
-		Target       *AssetTargetRelationship `json:"Target,omitempty"`
+		VcsProviders *int64                          `json:"VcsProviders,omitempty"`
+		Target       NullableAssetTargetRelationship `json:"Target,omitempty"`
 	}
 
 	varCloudTfcOrganizationWithoutEmbeddedStruct := CloudTfcOrganizationWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varCloudTfcOrganizationWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varCloudTfcOrganizationWithoutEmbeddedStruct)
 	if err == nil {
 		varCloudTfcOrganization := _CloudTfcOrganization{}
 		varCloudTfcOrganization.ClassId = varCloudTfcOrganizationWithoutEmbeddedStruct.ClassId
@@ -504,7 +545,7 @@ func (o *CloudTfcOrganization) UnmarshalJSON(bytes []byte) (err error) {
 
 	varCloudTfcOrganization := _CloudTfcOrganization{}
 
-	err = json.Unmarshal(bytes, &varCloudTfcOrganization)
+	err = json.Unmarshal(data, &varCloudTfcOrganization)
 	if err == nil {
 		o.MoBaseMo = varCloudTfcOrganization.MoBaseMo
 	} else {
@@ -513,7 +554,7 @@ func (o *CloudTfcOrganization) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "AgentCeiling")

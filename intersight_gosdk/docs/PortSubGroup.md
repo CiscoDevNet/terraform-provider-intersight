@@ -9,13 +9,13 @@ Name | Type | Description | Notes
 **AggregatePortId** | Pointer to **int64** | Breakout port member in the Fabric Interconnect. | [optional] [readonly] 
 **SlotId** | Pointer to **int64** | Switch expansion slot module identifier. | [optional] [readonly] 
 **Transport** | Pointer to **string** | Type of port sub-group. Values are Eth or Fc. | [optional] [readonly] 
-**EquipmentIoCardBase** | Pointer to [**EquipmentIoCardBaseRelationship**](EquipmentIoCardBaseRelationship.md) |  | [optional] 
+**EquipmentIoCardBase** | Pointer to [**NullableEquipmentIoCardBaseRelationship**](EquipmentIoCardBaseRelationship.md) |  | [optional] 
 **EtherHostPorts** | Pointer to [**[]EtherHostPortRelationship**](EtherHostPortRelationship.md) | An array of relationships to etherHostPort resources. | [optional] [readonly] 
 **EthernetPorts** | Pointer to [**[]EtherPhysicalPortRelationship**](EtherPhysicalPortRelationship.md) | An array of relationships to etherPhysicalPort resources. | [optional] [readonly] 
 **FcPorts** | Pointer to [**[]FcPhysicalPortRelationship**](FcPhysicalPortRelationship.md) | An array of relationships to fcPhysicalPort resources. | [optional] [readonly] 
-**InventoryDeviceInfo** | Pointer to [**InventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
-**PortGroup** | Pointer to [**PortGroupRelationship**](PortGroupRelationship.md) |  | [optional] 
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
+**InventoryDeviceInfo** | Pointer to [**NullableInventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
+**PortGroup** | Pointer to [**NullablePortGroupRelationship**](PortGroupRelationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -176,6 +176,16 @@ SetEquipmentIoCardBase sets EquipmentIoCardBase field to given value.
 
 HasEquipmentIoCardBase returns a boolean if a field has been set.
 
+### SetEquipmentIoCardBaseNil
+
+`func (o *PortSubGroup) SetEquipmentIoCardBaseNil(b bool)`
+
+ SetEquipmentIoCardBaseNil sets the value for EquipmentIoCardBase to be an explicit nil
+
+### UnsetEquipmentIoCardBase
+`func (o *PortSubGroup) UnsetEquipmentIoCardBase()`
+
+UnsetEquipmentIoCardBase ensures that no value is present for EquipmentIoCardBase, not even an explicit nil
 ### GetEtherHostPorts
 
 `func (o *PortSubGroup) GetEtherHostPorts() []EtherHostPortRelationship`
@@ -306,6 +316,16 @@ SetInventoryDeviceInfo sets InventoryDeviceInfo field to given value.
 
 HasInventoryDeviceInfo returns a boolean if a field has been set.
 
+### SetInventoryDeviceInfoNil
+
+`func (o *PortSubGroup) SetInventoryDeviceInfoNil(b bool)`
+
+ SetInventoryDeviceInfoNil sets the value for InventoryDeviceInfo to be an explicit nil
+
+### UnsetInventoryDeviceInfo
+`func (o *PortSubGroup) UnsetInventoryDeviceInfo()`
+
+UnsetInventoryDeviceInfo ensures that no value is present for InventoryDeviceInfo, not even an explicit nil
 ### GetPortGroup
 
 `func (o *PortSubGroup) GetPortGroup() PortGroupRelationship`
@@ -331,6 +351,16 @@ SetPortGroup sets PortGroup field to given value.
 
 HasPortGroup returns a boolean if a field has been set.
 
+### SetPortGroupNil
+
+`func (o *PortSubGroup) SetPortGroupNil(b bool)`
+
+ SetPortGroupNil sets the value for PortGroup to be an explicit nil
+
+### UnsetPortGroup
+`func (o *PortSubGroup) UnsetPortGroup()`
+
+UnsetPortGroup ensures that no value is present for PortGroup, not even an explicit nil
 ### GetRegisteredDevice
 
 `func (o *PortSubGroup) GetRegisteredDevice() AssetDeviceRegistrationRelationship`
@@ -356,6 +386,16 @@ SetRegisteredDevice sets RegisteredDevice field to given value.
 
 HasRegisteredDevice returns a boolean if a field has been set.
 
+### SetRegisteredDeviceNil
+
+`func (o *PortSubGroup) SetRegisteredDeviceNil(b bool)`
+
+ SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+
+### UnsetRegisteredDevice
+`func (o *PortSubGroup) UnsetRegisteredDevice()`
+
+UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

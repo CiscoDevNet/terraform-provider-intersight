@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the HyperflexVmRestoreOperation type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &HyperflexVmRestoreOperation{}
 
 // HyperflexVmRestoreOperation Invoke Virtual Machine restore operation.
 type HyperflexVmRestoreOperation struct {
@@ -29,11 +33,11 @@ type HyperflexVmRestoreOperation struct {
 	// Power on the Virtual Machine after recovery.
 	PowerOn *bool `json:"PowerOn,omitempty"`
 	// Start time for the replication.
-	StartTime              *int64                                `json:"StartTime,omitempty"`
-	Organization           *OrganizationOrganizationRelationship `json:"Organization,omitempty"`
-	RestoreEdgeClusterMoid *HyperflexClusterRelationship         `json:"RestoreEdgeClusterMoid,omitempty"`
-	VmBackupInfoMoid       *HyperflexVmBackupInfoRelationship    `json:"VmBackupInfoMoid,omitempty"`
-	VmSnapshotInfoMoid     *HyperflexVmSnapshotInfoRelationship  `json:"VmSnapshotInfoMoid,omitempty"`
+	StartTime              *int64                                       `json:"StartTime,omitempty"`
+	Organization           NullableOrganizationOrganizationRelationship `json:"Organization,omitempty"`
+	RestoreEdgeClusterMoid NullableHyperflexClusterRelationship         `json:"RestoreEdgeClusterMoid,omitempty"`
+	VmBackupInfoMoid       NullableHyperflexVmBackupInfoRelationship    `json:"VmBackupInfoMoid,omitempty"`
+	VmSnapshotInfoMoid     NullableHyperflexVmSnapshotInfoRelationship  `json:"VmSnapshotInfoMoid,omitempty"`
 	AdditionalProperties   map[string]interface{}
 }
 
@@ -116,7 +120,7 @@ func (o *HyperflexVmRestoreOperation) SetObjectType(v string) {
 
 // GetNewName returns the NewName field value if set, zero value otherwise.
 func (o *HyperflexVmRestoreOperation) GetNewName() string {
-	if o == nil || o.NewName == nil {
+	if o == nil || IsNil(o.NewName) {
 		var ret string
 		return ret
 	}
@@ -126,7 +130,7 @@ func (o *HyperflexVmRestoreOperation) GetNewName() string {
 // GetNewNameOk returns a tuple with the NewName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexVmRestoreOperation) GetNewNameOk() (*string, bool) {
-	if o == nil || o.NewName == nil {
+	if o == nil || IsNil(o.NewName) {
 		return nil, false
 	}
 	return o.NewName, true
@@ -134,7 +138,7 @@ func (o *HyperflexVmRestoreOperation) GetNewNameOk() (*string, bool) {
 
 // HasNewName returns a boolean if a field has been set.
 func (o *HyperflexVmRestoreOperation) HasNewName() bool {
-	if o != nil && o.NewName != nil {
+	if o != nil && !IsNil(o.NewName) {
 		return true
 	}
 
@@ -148,7 +152,7 @@ func (o *HyperflexVmRestoreOperation) SetNewName(v string) {
 
 // GetPowerOn returns the PowerOn field value if set, zero value otherwise.
 func (o *HyperflexVmRestoreOperation) GetPowerOn() bool {
-	if o == nil || o.PowerOn == nil {
+	if o == nil || IsNil(o.PowerOn) {
 		var ret bool
 		return ret
 	}
@@ -158,7 +162,7 @@ func (o *HyperflexVmRestoreOperation) GetPowerOn() bool {
 // GetPowerOnOk returns a tuple with the PowerOn field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexVmRestoreOperation) GetPowerOnOk() (*bool, bool) {
-	if o == nil || o.PowerOn == nil {
+	if o == nil || IsNil(o.PowerOn) {
 		return nil, false
 	}
 	return o.PowerOn, true
@@ -166,7 +170,7 @@ func (o *HyperflexVmRestoreOperation) GetPowerOnOk() (*bool, bool) {
 
 // HasPowerOn returns a boolean if a field has been set.
 func (o *HyperflexVmRestoreOperation) HasPowerOn() bool {
-	if o != nil && o.PowerOn != nil {
+	if o != nil && !IsNil(o.PowerOn) {
 		return true
 	}
 
@@ -180,7 +184,7 @@ func (o *HyperflexVmRestoreOperation) SetPowerOn(v bool) {
 
 // GetStartTime returns the StartTime field value if set, zero value otherwise.
 func (o *HyperflexVmRestoreOperation) GetStartTime() int64 {
-	if o == nil || o.StartTime == nil {
+	if o == nil || IsNil(o.StartTime) {
 		var ret int64
 		return ret
 	}
@@ -190,7 +194,7 @@ func (o *HyperflexVmRestoreOperation) GetStartTime() int64 {
 // GetStartTimeOk returns a tuple with the StartTime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexVmRestoreOperation) GetStartTimeOk() (*int64, bool) {
-	if o == nil || o.StartTime == nil {
+	if o == nil || IsNil(o.StartTime) {
 		return nil, false
 	}
 	return o.StartTime, true
@@ -198,7 +202,7 @@ func (o *HyperflexVmRestoreOperation) GetStartTimeOk() (*int64, bool) {
 
 // HasStartTime returns a boolean if a field has been set.
 func (o *HyperflexVmRestoreOperation) HasStartTime() bool {
-	if o != nil && o.StartTime != nil {
+	if o != nil && !IsNil(o.StartTime) {
 		return true
 	}
 
@@ -210,180 +214,250 @@ func (o *HyperflexVmRestoreOperation) SetStartTime(v int64) {
 	o.StartTime = &v
 }
 
-// GetOrganization returns the Organization field value if set, zero value otherwise.
+// GetOrganization returns the Organization field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *HyperflexVmRestoreOperation) GetOrganization() OrganizationOrganizationRelationship {
-	if o == nil || o.Organization == nil {
+	if o == nil || IsNil(o.Organization.Get()) {
 		var ret OrganizationOrganizationRelationship
 		return ret
 	}
-	return *o.Organization
+	return *o.Organization.Get()
 }
 
 // GetOrganizationOk returns a tuple with the Organization field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *HyperflexVmRestoreOperation) GetOrganizationOk() (*OrganizationOrganizationRelationship, bool) {
-	if o == nil || o.Organization == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Organization, true
+	return o.Organization.Get(), o.Organization.IsSet()
 }
 
 // HasOrganization returns a boolean if a field has been set.
 func (o *HyperflexVmRestoreOperation) HasOrganization() bool {
-	if o != nil && o.Organization != nil {
+	if o != nil && o.Organization.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetOrganization gets a reference to the given OrganizationOrganizationRelationship and assigns it to the Organization field.
+// SetOrganization gets a reference to the given NullableOrganizationOrganizationRelationship and assigns it to the Organization field.
 func (o *HyperflexVmRestoreOperation) SetOrganization(v OrganizationOrganizationRelationship) {
-	o.Organization = &v
+	o.Organization.Set(&v)
 }
 
-// GetRestoreEdgeClusterMoid returns the RestoreEdgeClusterMoid field value if set, zero value otherwise.
+// SetOrganizationNil sets the value for Organization to be an explicit nil
+func (o *HyperflexVmRestoreOperation) SetOrganizationNil() {
+	o.Organization.Set(nil)
+}
+
+// UnsetOrganization ensures that no value is present for Organization, not even an explicit nil
+func (o *HyperflexVmRestoreOperation) UnsetOrganization() {
+	o.Organization.Unset()
+}
+
+// GetRestoreEdgeClusterMoid returns the RestoreEdgeClusterMoid field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *HyperflexVmRestoreOperation) GetRestoreEdgeClusterMoid() HyperflexClusterRelationship {
-	if o == nil || o.RestoreEdgeClusterMoid == nil {
+	if o == nil || IsNil(o.RestoreEdgeClusterMoid.Get()) {
 		var ret HyperflexClusterRelationship
 		return ret
 	}
-	return *o.RestoreEdgeClusterMoid
+	return *o.RestoreEdgeClusterMoid.Get()
 }
 
 // GetRestoreEdgeClusterMoidOk returns a tuple with the RestoreEdgeClusterMoid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *HyperflexVmRestoreOperation) GetRestoreEdgeClusterMoidOk() (*HyperflexClusterRelationship, bool) {
-	if o == nil || o.RestoreEdgeClusterMoid == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.RestoreEdgeClusterMoid, true
+	return o.RestoreEdgeClusterMoid.Get(), o.RestoreEdgeClusterMoid.IsSet()
 }
 
 // HasRestoreEdgeClusterMoid returns a boolean if a field has been set.
 func (o *HyperflexVmRestoreOperation) HasRestoreEdgeClusterMoid() bool {
-	if o != nil && o.RestoreEdgeClusterMoid != nil {
+	if o != nil && o.RestoreEdgeClusterMoid.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRestoreEdgeClusterMoid gets a reference to the given HyperflexClusterRelationship and assigns it to the RestoreEdgeClusterMoid field.
+// SetRestoreEdgeClusterMoid gets a reference to the given NullableHyperflexClusterRelationship and assigns it to the RestoreEdgeClusterMoid field.
 func (o *HyperflexVmRestoreOperation) SetRestoreEdgeClusterMoid(v HyperflexClusterRelationship) {
-	o.RestoreEdgeClusterMoid = &v
+	o.RestoreEdgeClusterMoid.Set(&v)
 }
 
-// GetVmBackupInfoMoid returns the VmBackupInfoMoid field value if set, zero value otherwise.
+// SetRestoreEdgeClusterMoidNil sets the value for RestoreEdgeClusterMoid to be an explicit nil
+func (o *HyperflexVmRestoreOperation) SetRestoreEdgeClusterMoidNil() {
+	o.RestoreEdgeClusterMoid.Set(nil)
+}
+
+// UnsetRestoreEdgeClusterMoid ensures that no value is present for RestoreEdgeClusterMoid, not even an explicit nil
+func (o *HyperflexVmRestoreOperation) UnsetRestoreEdgeClusterMoid() {
+	o.RestoreEdgeClusterMoid.Unset()
+}
+
+// GetVmBackupInfoMoid returns the VmBackupInfoMoid field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *HyperflexVmRestoreOperation) GetVmBackupInfoMoid() HyperflexVmBackupInfoRelationship {
-	if o == nil || o.VmBackupInfoMoid == nil {
+	if o == nil || IsNil(o.VmBackupInfoMoid.Get()) {
 		var ret HyperflexVmBackupInfoRelationship
 		return ret
 	}
-	return *o.VmBackupInfoMoid
+	return *o.VmBackupInfoMoid.Get()
 }
 
 // GetVmBackupInfoMoidOk returns a tuple with the VmBackupInfoMoid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *HyperflexVmRestoreOperation) GetVmBackupInfoMoidOk() (*HyperflexVmBackupInfoRelationship, bool) {
-	if o == nil || o.VmBackupInfoMoid == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.VmBackupInfoMoid, true
+	return o.VmBackupInfoMoid.Get(), o.VmBackupInfoMoid.IsSet()
 }
 
 // HasVmBackupInfoMoid returns a boolean if a field has been set.
 func (o *HyperflexVmRestoreOperation) HasVmBackupInfoMoid() bool {
-	if o != nil && o.VmBackupInfoMoid != nil {
+	if o != nil && o.VmBackupInfoMoid.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetVmBackupInfoMoid gets a reference to the given HyperflexVmBackupInfoRelationship and assigns it to the VmBackupInfoMoid field.
+// SetVmBackupInfoMoid gets a reference to the given NullableHyperflexVmBackupInfoRelationship and assigns it to the VmBackupInfoMoid field.
 func (o *HyperflexVmRestoreOperation) SetVmBackupInfoMoid(v HyperflexVmBackupInfoRelationship) {
-	o.VmBackupInfoMoid = &v
+	o.VmBackupInfoMoid.Set(&v)
 }
 
-// GetVmSnapshotInfoMoid returns the VmSnapshotInfoMoid field value if set, zero value otherwise.
+// SetVmBackupInfoMoidNil sets the value for VmBackupInfoMoid to be an explicit nil
+func (o *HyperflexVmRestoreOperation) SetVmBackupInfoMoidNil() {
+	o.VmBackupInfoMoid.Set(nil)
+}
+
+// UnsetVmBackupInfoMoid ensures that no value is present for VmBackupInfoMoid, not even an explicit nil
+func (o *HyperflexVmRestoreOperation) UnsetVmBackupInfoMoid() {
+	o.VmBackupInfoMoid.Unset()
+}
+
+// GetVmSnapshotInfoMoid returns the VmSnapshotInfoMoid field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *HyperflexVmRestoreOperation) GetVmSnapshotInfoMoid() HyperflexVmSnapshotInfoRelationship {
-	if o == nil || o.VmSnapshotInfoMoid == nil {
+	if o == nil || IsNil(o.VmSnapshotInfoMoid.Get()) {
 		var ret HyperflexVmSnapshotInfoRelationship
 		return ret
 	}
-	return *o.VmSnapshotInfoMoid
+	return *o.VmSnapshotInfoMoid.Get()
 }
 
 // GetVmSnapshotInfoMoidOk returns a tuple with the VmSnapshotInfoMoid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *HyperflexVmRestoreOperation) GetVmSnapshotInfoMoidOk() (*HyperflexVmSnapshotInfoRelationship, bool) {
-	if o == nil || o.VmSnapshotInfoMoid == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.VmSnapshotInfoMoid, true
+	return o.VmSnapshotInfoMoid.Get(), o.VmSnapshotInfoMoid.IsSet()
 }
 
 // HasVmSnapshotInfoMoid returns a boolean if a field has been set.
 func (o *HyperflexVmRestoreOperation) HasVmSnapshotInfoMoid() bool {
-	if o != nil && o.VmSnapshotInfoMoid != nil {
+	if o != nil && o.VmSnapshotInfoMoid.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetVmSnapshotInfoMoid gets a reference to the given HyperflexVmSnapshotInfoRelationship and assigns it to the VmSnapshotInfoMoid field.
+// SetVmSnapshotInfoMoid gets a reference to the given NullableHyperflexVmSnapshotInfoRelationship and assigns it to the VmSnapshotInfoMoid field.
 func (o *HyperflexVmRestoreOperation) SetVmSnapshotInfoMoid(v HyperflexVmSnapshotInfoRelationship) {
-	o.VmSnapshotInfoMoid = &v
+	o.VmSnapshotInfoMoid.Set(&v)
+}
+
+// SetVmSnapshotInfoMoidNil sets the value for VmSnapshotInfoMoid to be an explicit nil
+func (o *HyperflexVmRestoreOperation) SetVmSnapshotInfoMoidNil() {
+	o.VmSnapshotInfoMoid.Set(nil)
+}
+
+// UnsetVmSnapshotInfoMoid ensures that no value is present for VmSnapshotInfoMoid, not even an explicit nil
+func (o *HyperflexVmRestoreOperation) UnsetVmSnapshotInfoMoid() {
+	o.VmSnapshotInfoMoid.Unset()
 }
 
 func (o HyperflexVmRestoreOperation) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o HyperflexVmRestoreOperation) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.NewName != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.NewName) {
 		toSerialize["NewName"] = o.NewName
 	}
-	if o.PowerOn != nil {
+	if !IsNil(o.PowerOn) {
 		toSerialize["PowerOn"] = o.PowerOn
 	}
-	if o.StartTime != nil {
+	if !IsNil(o.StartTime) {
 		toSerialize["StartTime"] = o.StartTime
 	}
-	if o.Organization != nil {
-		toSerialize["Organization"] = o.Organization
+	if o.Organization.IsSet() {
+		toSerialize["Organization"] = o.Organization.Get()
 	}
-	if o.RestoreEdgeClusterMoid != nil {
-		toSerialize["RestoreEdgeClusterMoid"] = o.RestoreEdgeClusterMoid
+	if o.RestoreEdgeClusterMoid.IsSet() {
+		toSerialize["RestoreEdgeClusterMoid"] = o.RestoreEdgeClusterMoid.Get()
 	}
-	if o.VmBackupInfoMoid != nil {
-		toSerialize["VmBackupInfoMoid"] = o.VmBackupInfoMoid
+	if o.VmBackupInfoMoid.IsSet() {
+		toSerialize["VmBackupInfoMoid"] = o.VmBackupInfoMoid.Get()
 	}
-	if o.VmSnapshotInfoMoid != nil {
-		toSerialize["VmSnapshotInfoMoid"] = o.VmSnapshotInfoMoid
+	if o.VmSnapshotInfoMoid.IsSet() {
+		toSerialize["VmSnapshotInfoMoid"] = o.VmSnapshotInfoMoid.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *HyperflexVmRestoreOperation) UnmarshalJSON(bytes []byte) (err error) {
+func (o *HyperflexVmRestoreOperation) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type HyperflexVmRestoreOperationWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -394,16 +468,16 @@ func (o *HyperflexVmRestoreOperation) UnmarshalJSON(bytes []byte) (err error) {
 		// Power on the Virtual Machine after recovery.
 		PowerOn *bool `json:"PowerOn,omitempty"`
 		// Start time for the replication.
-		StartTime              *int64                                `json:"StartTime,omitempty"`
-		Organization           *OrganizationOrganizationRelationship `json:"Organization,omitempty"`
-		RestoreEdgeClusterMoid *HyperflexClusterRelationship         `json:"RestoreEdgeClusterMoid,omitempty"`
-		VmBackupInfoMoid       *HyperflexVmBackupInfoRelationship    `json:"VmBackupInfoMoid,omitempty"`
-		VmSnapshotInfoMoid     *HyperflexVmSnapshotInfoRelationship  `json:"VmSnapshotInfoMoid,omitempty"`
+		StartTime              *int64                                       `json:"StartTime,omitempty"`
+		Organization           NullableOrganizationOrganizationRelationship `json:"Organization,omitempty"`
+		RestoreEdgeClusterMoid NullableHyperflexClusterRelationship         `json:"RestoreEdgeClusterMoid,omitempty"`
+		VmBackupInfoMoid       NullableHyperflexVmBackupInfoRelationship    `json:"VmBackupInfoMoid,omitempty"`
+		VmSnapshotInfoMoid     NullableHyperflexVmSnapshotInfoRelationship  `json:"VmSnapshotInfoMoid,omitempty"`
 	}
 
 	varHyperflexVmRestoreOperationWithoutEmbeddedStruct := HyperflexVmRestoreOperationWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varHyperflexVmRestoreOperationWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varHyperflexVmRestoreOperationWithoutEmbeddedStruct)
 	if err == nil {
 		varHyperflexVmRestoreOperation := _HyperflexVmRestoreOperation{}
 		varHyperflexVmRestoreOperation.ClassId = varHyperflexVmRestoreOperationWithoutEmbeddedStruct.ClassId
@@ -422,7 +496,7 @@ func (o *HyperflexVmRestoreOperation) UnmarshalJSON(bytes []byte) (err error) {
 
 	varHyperflexVmRestoreOperation := _HyperflexVmRestoreOperation{}
 
-	err = json.Unmarshal(bytes, &varHyperflexVmRestoreOperation)
+	err = json.Unmarshal(data, &varHyperflexVmRestoreOperation)
 	if err == nil {
 		o.MoBaseMo = varHyperflexVmRestoreOperation.MoBaseMo
 	} else {
@@ -431,7 +505,7 @@ func (o *HyperflexVmRestoreOperation) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "NewName")

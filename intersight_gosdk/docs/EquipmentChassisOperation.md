@@ -10,8 +10,8 @@ Name | Type | Description | Notes
 **AdminPowerCycleSlotId** | Pointer to **int64** | Slot id of the chassis slot that needs to be power cycled. | [optional] 
 **ChassisOperationStatus** | Pointer to [**[]EquipmentChassisOperationStatus**](EquipmentChassisOperationStatus.md) |  | [optional] 
 **ConfigState** | Pointer to **string** | The configured state of these settings in the target chassis. The value is any one of Applied, Applying, Failed. Applied - This state denotes that the settings are applied successfully in the target chassis. Applying - This state denotes that the settings are being applied in the target chassis. Failed - This state denotes that the settings could not be applied in the target chassis. * &#x60;None&#x60; - Nil value when no action has been triggered by the user. * &#x60;Applied&#x60; - User configured settings are in applied state. * &#x60;Applying&#x60; - User settings are being applied on the target server. * &#x60;Failed&#x60; - User configured settings could not be applied. | [optional] [readonly] [default to "None"]
-**Chassis** | Pointer to [**EquipmentChassisRelationship**](EquipmentChassisRelationship.md) |  | [optional] 
-**DeviceRegistration** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
+**Chassis** | Pointer to [**NullableEquipmentChassisRelationship**](EquipmentChassisRelationship.md) |  | [optional] 
+**DeviceRegistration** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -207,6 +207,16 @@ SetChassis sets Chassis field to given value.
 
 HasChassis returns a boolean if a field has been set.
 
+### SetChassisNil
+
+`func (o *EquipmentChassisOperation) SetChassisNil(b bool)`
+
+ SetChassisNil sets the value for Chassis to be an explicit nil
+
+### UnsetChassis
+`func (o *EquipmentChassisOperation) UnsetChassis()`
+
+UnsetChassis ensures that no value is present for Chassis, not even an explicit nil
 ### GetDeviceRegistration
 
 `func (o *EquipmentChassisOperation) GetDeviceRegistration() AssetDeviceRegistrationRelationship`
@@ -232,6 +242,16 @@ SetDeviceRegistration sets DeviceRegistration field to given value.
 
 HasDeviceRegistration returns a boolean if a field has been set.
 
+### SetDeviceRegistrationNil
+
+`func (o *EquipmentChassisOperation) SetDeviceRegistrationNil(b bool)`
+
+ SetDeviceRegistrationNil sets the value for DeviceRegistration to be an explicit nil
+
+### UnsetDeviceRegistration
+`func (o *EquipmentChassisOperation) UnsetDeviceRegistration()`
+
+UnsetDeviceRegistration ensures that no value is present for DeviceRegistration, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

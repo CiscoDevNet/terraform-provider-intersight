@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the RecommendationSoftwareItem type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &RecommendationSoftwareItem{}
 
 // RecommendationSoftwareItem Entity representing the software recommendation for the managed end point.
 type RecommendationSoftwareItem struct {
@@ -27,8 +31,8 @@ type RecommendationSoftwareItem struct {
 	// The user visible message which informs user of the type of software recommendation.
 	Message *string `json:"Message,omitempty"`
 	// The software-recommendation type, for example, HXDP version, HyperV or ESXi version, etc. * `None` - The Enum value None represents the default software recommendation value. * `HXDPVersion` - The Enum value HXDPVersion represents that the software recommendation is to upgrade the HyperFlex Data Platform build version. * `NodeRatioLicense` - The Enum value NodeRatioLicense represents that the software recommendation is to upgrade the HyperFlex Data Platform license for using 1:2 converged to compute node ratio limits. * `NodeRatioEvalLicense` - The Enum value NodeRatioEvalLicense represents that the software recommendation is to upgrade the Hyperflex Data Platform license to Data Center Premier, after the evaluation period ends. * `DCNoFILicense` - The Enum value DCNoFILicense represents that the software recommendation is to upgrade the HyperFlex Data Platform license for using DC-No-FI limits. * `DcNoFIEvalLicense` - The Enum value DcNoFIEvalLicense represents that the software recommendation is to upgrade the Hyperflex Data Platform license to Hyperflex Data Center Advantage or Data Center Premier license, after evaluation period ends. * `LAZExistingStatus` - The Enum value LAZExistingStatus represents that the software recommendation is to indicate HyperFlex cluster might have LAZ enabled. * `LAZNewStatus` - The Enum value LAZNewStatus represents that the software recommendation is to enable LAZ with expansion on the HyperFlex Cluster. * `EVCStatus` - The Enum value EVCStatus represents that the software recommendation is to enable Enhanced VMotion on the HypeFlex Cluster.
-	RecommendationType   *string                                     `json:"RecommendationType,omitempty"`
-	ClusterExpansion     *RecommendationClusterExpansionRelationship `json:"ClusterExpansion,omitempty"`
+	RecommendationType   *string                                            `json:"RecommendationType,omitempty"`
+	ClusterExpansion     NullableRecommendationClusterExpansionRelationship `json:"ClusterExpansion,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -107,7 +111,7 @@ func (o *RecommendationSoftwareItem) SetObjectType(v string) {
 
 // GetMessage returns the Message field value if set, zero value otherwise.
 func (o *RecommendationSoftwareItem) GetMessage() string {
-	if o == nil || o.Message == nil {
+	if o == nil || IsNil(o.Message) {
 		var ret string
 		return ret
 	}
@@ -117,7 +121,7 @@ func (o *RecommendationSoftwareItem) GetMessage() string {
 // GetMessageOk returns a tuple with the Message field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RecommendationSoftwareItem) GetMessageOk() (*string, bool) {
-	if o == nil || o.Message == nil {
+	if o == nil || IsNil(o.Message) {
 		return nil, false
 	}
 	return o.Message, true
@@ -125,7 +129,7 @@ func (o *RecommendationSoftwareItem) GetMessageOk() (*string, bool) {
 
 // HasMessage returns a boolean if a field has been set.
 func (o *RecommendationSoftwareItem) HasMessage() bool {
-	if o != nil && o.Message != nil {
+	if o != nil && !IsNil(o.Message) {
 		return true
 	}
 
@@ -139,7 +143,7 @@ func (o *RecommendationSoftwareItem) SetMessage(v string) {
 
 // GetRecommendationType returns the RecommendationType field value if set, zero value otherwise.
 func (o *RecommendationSoftwareItem) GetRecommendationType() string {
-	if o == nil || o.RecommendationType == nil {
+	if o == nil || IsNil(o.RecommendationType) {
 		var ret string
 		return ret
 	}
@@ -149,7 +153,7 @@ func (o *RecommendationSoftwareItem) GetRecommendationType() string {
 // GetRecommendationTypeOk returns a tuple with the RecommendationType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RecommendationSoftwareItem) GetRecommendationTypeOk() (*string, bool) {
-	if o == nil || o.RecommendationType == nil {
+	if o == nil || IsNil(o.RecommendationType) {
 		return nil, false
 	}
 	return o.RecommendationType, true
@@ -157,7 +161,7 @@ func (o *RecommendationSoftwareItem) GetRecommendationTypeOk() (*string, bool) {
 
 // HasRecommendationType returns a boolean if a field has been set.
 func (o *RecommendationSoftwareItem) HasRecommendationType() bool {
-	if o != nil && o.RecommendationType != nil {
+	if o != nil && !IsNil(o.RecommendationType) {
 		return true
 	}
 
@@ -169,72 +173,109 @@ func (o *RecommendationSoftwareItem) SetRecommendationType(v string) {
 	o.RecommendationType = &v
 }
 
-// GetClusterExpansion returns the ClusterExpansion field value if set, zero value otherwise.
+// GetClusterExpansion returns the ClusterExpansion field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *RecommendationSoftwareItem) GetClusterExpansion() RecommendationClusterExpansionRelationship {
-	if o == nil || o.ClusterExpansion == nil {
+	if o == nil || IsNil(o.ClusterExpansion.Get()) {
 		var ret RecommendationClusterExpansionRelationship
 		return ret
 	}
-	return *o.ClusterExpansion
+	return *o.ClusterExpansion.Get()
 }
 
 // GetClusterExpansionOk returns a tuple with the ClusterExpansion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *RecommendationSoftwareItem) GetClusterExpansionOk() (*RecommendationClusterExpansionRelationship, bool) {
-	if o == nil || o.ClusterExpansion == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.ClusterExpansion, true
+	return o.ClusterExpansion.Get(), o.ClusterExpansion.IsSet()
 }
 
 // HasClusterExpansion returns a boolean if a field has been set.
 func (o *RecommendationSoftwareItem) HasClusterExpansion() bool {
-	if o != nil && o.ClusterExpansion != nil {
+	if o != nil && o.ClusterExpansion.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetClusterExpansion gets a reference to the given RecommendationClusterExpansionRelationship and assigns it to the ClusterExpansion field.
+// SetClusterExpansion gets a reference to the given NullableRecommendationClusterExpansionRelationship and assigns it to the ClusterExpansion field.
 func (o *RecommendationSoftwareItem) SetClusterExpansion(v RecommendationClusterExpansionRelationship) {
-	o.ClusterExpansion = &v
+	o.ClusterExpansion.Set(&v)
+}
+
+// SetClusterExpansionNil sets the value for ClusterExpansion to be an explicit nil
+func (o *RecommendationSoftwareItem) SetClusterExpansionNil() {
+	o.ClusterExpansion.Set(nil)
+}
+
+// UnsetClusterExpansion ensures that no value is present for ClusterExpansion, not even an explicit nil
+func (o *RecommendationSoftwareItem) UnsetClusterExpansion() {
+	o.ClusterExpansion.Unset()
 }
 
 func (o RecommendationSoftwareItem) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o RecommendationSoftwareItem) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedRecommendationAbstractItem, errRecommendationAbstractItem := json.Marshal(o.RecommendationAbstractItem)
 	if errRecommendationAbstractItem != nil {
-		return []byte{}, errRecommendationAbstractItem
+		return map[string]interface{}{}, errRecommendationAbstractItem
 	}
 	errRecommendationAbstractItem = json.Unmarshal([]byte(serializedRecommendationAbstractItem), &toSerialize)
 	if errRecommendationAbstractItem != nil {
-		return []byte{}, errRecommendationAbstractItem
+		return map[string]interface{}{}, errRecommendationAbstractItem
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Message != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Message) {
 		toSerialize["Message"] = o.Message
 	}
-	if o.RecommendationType != nil {
+	if !IsNil(o.RecommendationType) {
 		toSerialize["RecommendationType"] = o.RecommendationType
 	}
-	if o.ClusterExpansion != nil {
-		toSerialize["ClusterExpansion"] = o.ClusterExpansion
+	if o.ClusterExpansion.IsSet() {
+		toSerialize["ClusterExpansion"] = o.ClusterExpansion.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *RecommendationSoftwareItem) UnmarshalJSON(bytes []byte) (err error) {
+func (o *RecommendationSoftwareItem) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type RecommendationSoftwareItemWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -243,13 +284,13 @@ func (o *RecommendationSoftwareItem) UnmarshalJSON(bytes []byte) (err error) {
 		// The user visible message which informs user of the type of software recommendation.
 		Message *string `json:"Message,omitempty"`
 		// The software-recommendation type, for example, HXDP version, HyperV or ESXi version, etc. * `None` - The Enum value None represents the default software recommendation value. * `HXDPVersion` - The Enum value HXDPVersion represents that the software recommendation is to upgrade the HyperFlex Data Platform build version. * `NodeRatioLicense` - The Enum value NodeRatioLicense represents that the software recommendation is to upgrade the HyperFlex Data Platform license for using 1:2 converged to compute node ratio limits. * `NodeRatioEvalLicense` - The Enum value NodeRatioEvalLicense represents that the software recommendation is to upgrade the Hyperflex Data Platform license to Data Center Premier, after the evaluation period ends. * `DCNoFILicense` - The Enum value DCNoFILicense represents that the software recommendation is to upgrade the HyperFlex Data Platform license for using DC-No-FI limits. * `DcNoFIEvalLicense` - The Enum value DcNoFIEvalLicense represents that the software recommendation is to upgrade the Hyperflex Data Platform license to Hyperflex Data Center Advantage or Data Center Premier license, after evaluation period ends. * `LAZExistingStatus` - The Enum value LAZExistingStatus represents that the software recommendation is to indicate HyperFlex cluster might have LAZ enabled. * `LAZNewStatus` - The Enum value LAZNewStatus represents that the software recommendation is to enable LAZ with expansion on the HyperFlex Cluster. * `EVCStatus` - The Enum value EVCStatus represents that the software recommendation is to enable Enhanced VMotion on the HypeFlex Cluster.
-		RecommendationType *string                                     `json:"RecommendationType,omitempty"`
-		ClusterExpansion   *RecommendationClusterExpansionRelationship `json:"ClusterExpansion,omitempty"`
+		RecommendationType *string                                            `json:"RecommendationType,omitempty"`
+		ClusterExpansion   NullableRecommendationClusterExpansionRelationship `json:"ClusterExpansion,omitempty"`
 	}
 
 	varRecommendationSoftwareItemWithoutEmbeddedStruct := RecommendationSoftwareItemWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varRecommendationSoftwareItemWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varRecommendationSoftwareItemWithoutEmbeddedStruct)
 	if err == nil {
 		varRecommendationSoftwareItem := _RecommendationSoftwareItem{}
 		varRecommendationSoftwareItem.ClassId = varRecommendationSoftwareItemWithoutEmbeddedStruct.ClassId
@@ -264,7 +305,7 @@ func (o *RecommendationSoftwareItem) UnmarshalJSON(bytes []byte) (err error) {
 
 	varRecommendationSoftwareItem := _RecommendationSoftwareItem{}
 
-	err = json.Unmarshal(bytes, &varRecommendationSoftwareItem)
+	err = json.Unmarshal(data, &varRecommendationSoftwareItem)
 	if err == nil {
 		o.RecommendationAbstractItem = varRecommendationSoftwareItem.RecommendationAbstractItem
 	} else {
@@ -273,7 +314,7 @@ func (o *RecommendationSoftwareItem) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Message")

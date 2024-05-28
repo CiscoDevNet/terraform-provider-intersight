@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the ApplianceSystemInfo type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ApplianceSystemInfo{}
 
 // ApplianceSystemInfo The Intersight Appliance's system information. SystemInfo is a singleton managed object created during the Intersight Appliance setup. The Intersight Appliance updates the SystemInfo managed object with up to date cluster status information periodically.
 type ApplianceSystemInfo struct {
@@ -128,7 +132,7 @@ func (o *ApplianceSystemInfo) SetObjectType(v string) {
 
 // GetCloudConnStatus returns the CloudConnStatus field value if set, zero value otherwise.
 func (o *ApplianceSystemInfo) GetCloudConnStatus() string {
-	if o == nil || o.CloudConnStatus == nil {
+	if o == nil || IsNil(o.CloudConnStatus) {
 		var ret string
 		return ret
 	}
@@ -138,7 +142,7 @@ func (o *ApplianceSystemInfo) GetCloudConnStatus() string {
 // GetCloudConnStatusOk returns a tuple with the CloudConnStatus field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceSystemInfo) GetCloudConnStatusOk() (*string, bool) {
-	if o == nil || o.CloudConnStatus == nil {
+	if o == nil || IsNil(o.CloudConnStatus) {
 		return nil, false
 	}
 	return o.CloudConnStatus, true
@@ -146,7 +150,7 @@ func (o *ApplianceSystemInfo) GetCloudConnStatusOk() (*string, bool) {
 
 // HasCloudConnStatus returns a boolean if a field has been set.
 func (o *ApplianceSystemInfo) HasCloudConnStatus() bool {
-	if o != nil && o.CloudConnStatus != nil {
+	if o != nil && !IsNil(o.CloudConnStatus) {
 		return true
 	}
 
@@ -160,7 +164,7 @@ func (o *ApplianceSystemInfo) SetCloudConnStatus(v string) {
 
 // GetClusterStatus returns the ClusterStatus field value if set, zero value otherwise.
 func (o *ApplianceSystemInfo) GetClusterStatus() string {
-	if o == nil || o.ClusterStatus == nil {
+	if o == nil || IsNil(o.ClusterStatus) {
 		var ret string
 		return ret
 	}
@@ -170,7 +174,7 @@ func (o *ApplianceSystemInfo) GetClusterStatus() string {
 // GetClusterStatusOk returns a tuple with the ClusterStatus field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceSystemInfo) GetClusterStatusOk() (*string, bool) {
-	if o == nil || o.ClusterStatus == nil {
+	if o == nil || IsNil(o.ClusterStatus) {
 		return nil, false
 	}
 	return o.ClusterStatus, true
@@ -178,7 +182,7 @@ func (o *ApplianceSystemInfo) GetClusterStatusOk() (*string, bool) {
 
 // HasClusterStatus returns a boolean if a field has been set.
 func (o *ApplianceSystemInfo) HasClusterStatus() bool {
-	if o != nil && o.ClusterStatus != nil {
+	if o != nil && !IsNil(o.ClusterStatus) {
 		return true
 	}
 
@@ -192,7 +196,7 @@ func (o *ApplianceSystemInfo) SetClusterStatus(v string) {
 
 // GetDeploymentSize returns the DeploymentSize field value if set, zero value otherwise.
 func (o *ApplianceSystemInfo) GetDeploymentSize() string {
-	if o == nil || o.DeploymentSize == nil {
+	if o == nil || IsNil(o.DeploymentSize) {
 		var ret string
 		return ret
 	}
@@ -202,7 +206,7 @@ func (o *ApplianceSystemInfo) GetDeploymentSize() string {
 // GetDeploymentSizeOk returns a tuple with the DeploymentSize field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceSystemInfo) GetDeploymentSizeOk() (*string, bool) {
-	if o == nil || o.DeploymentSize == nil {
+	if o == nil || IsNil(o.DeploymentSize) {
 		return nil, false
 	}
 	return o.DeploymentSize, true
@@ -210,7 +214,7 @@ func (o *ApplianceSystemInfo) GetDeploymentSizeOk() (*string, bool) {
 
 // HasDeploymentSize returns a boolean if a field has been set.
 func (o *ApplianceSystemInfo) HasDeploymentSize() bool {
-	if o != nil && o.DeploymentSize != nil {
+	if o != nil && !IsNil(o.DeploymentSize) {
 		return true
 	}
 
@@ -224,7 +228,7 @@ func (o *ApplianceSystemInfo) SetDeploymentSize(v string) {
 
 // GetHostname returns the Hostname field value if set, zero value otherwise.
 func (o *ApplianceSystemInfo) GetHostname() string {
-	if o == nil || o.Hostname == nil {
+	if o == nil || IsNil(o.Hostname) {
 		var ret string
 		return ret
 	}
@@ -234,7 +238,7 @@ func (o *ApplianceSystemInfo) GetHostname() string {
 // GetHostnameOk returns a tuple with the Hostname field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceSystemInfo) GetHostnameOk() (*string, bool) {
-	if o == nil || o.Hostname == nil {
+	if o == nil || IsNil(o.Hostname) {
 		return nil, false
 	}
 	return o.Hostname, true
@@ -242,7 +246,7 @@ func (o *ApplianceSystemInfo) GetHostnameOk() (*string, bool) {
 
 // HasHostname returns a boolean if a field has been set.
 func (o *ApplianceSystemInfo) HasHostname() bool {
-	if o != nil && o.Hostname != nil {
+	if o != nil && !IsNil(o.Hostname) {
 		return true
 	}
 
@@ -256,7 +260,7 @@ func (o *ApplianceSystemInfo) SetHostname(v string) {
 
 // GetInitDone returns the InitDone field value if set, zero value otherwise.
 func (o *ApplianceSystemInfo) GetInitDone() bool {
-	if o == nil || o.InitDone == nil {
+	if o == nil || IsNil(o.InitDone) {
 		var ret bool
 		return ret
 	}
@@ -266,7 +270,7 @@ func (o *ApplianceSystemInfo) GetInitDone() bool {
 // GetInitDoneOk returns a tuple with the InitDone field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceSystemInfo) GetInitDoneOk() (*bool, bool) {
-	if o == nil || o.InitDone == nil {
+	if o == nil || IsNil(o.InitDone) {
 		return nil, false
 	}
 	return o.InitDone, true
@@ -274,7 +278,7 @@ func (o *ApplianceSystemInfo) GetInitDoneOk() (*bool, bool) {
 
 // HasInitDone returns a boolean if a field has been set.
 func (o *ApplianceSystemInfo) HasInitDone() bool {
-	if o != nil && o.InitDone != nil {
+	if o != nil && !IsNil(o.InitDone) {
 		return true
 	}
 
@@ -288,7 +292,7 @@ func (o *ApplianceSystemInfo) SetInitDone(v bool) {
 
 // GetIpAddress returns the IpAddress field value if set, zero value otherwise.
 func (o *ApplianceSystemInfo) GetIpAddress() string {
-	if o == nil || o.IpAddress == nil {
+	if o == nil || IsNil(o.IpAddress) {
 		var ret string
 		return ret
 	}
@@ -298,7 +302,7 @@ func (o *ApplianceSystemInfo) GetIpAddress() string {
 // GetIpAddressOk returns a tuple with the IpAddress field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceSystemInfo) GetIpAddressOk() (*string, bool) {
-	if o == nil || o.IpAddress == nil {
+	if o == nil || IsNil(o.IpAddress) {
 		return nil, false
 	}
 	return o.IpAddress, true
@@ -306,7 +310,7 @@ func (o *ApplianceSystemInfo) GetIpAddressOk() (*string, bool) {
 
 // HasIpAddress returns a boolean if a field has been set.
 func (o *ApplianceSystemInfo) HasIpAddress() bool {
-	if o != nil && o.IpAddress != nil {
+	if o != nil && !IsNil(o.IpAddress) {
 		return true
 	}
 
@@ -320,7 +324,7 @@ func (o *ApplianceSystemInfo) SetIpAddress(v string) {
 
 // GetIsVirtualIp returns the IsVirtualIp field value if set, zero value otherwise.
 func (o *ApplianceSystemInfo) GetIsVirtualIp() bool {
-	if o == nil || o.IsVirtualIp == nil {
+	if o == nil || IsNil(o.IsVirtualIp) {
 		var ret bool
 		return ret
 	}
@@ -330,7 +334,7 @@ func (o *ApplianceSystemInfo) GetIsVirtualIp() bool {
 // GetIsVirtualIpOk returns a tuple with the IsVirtualIp field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceSystemInfo) GetIsVirtualIpOk() (*bool, bool) {
-	if o == nil || o.IsVirtualIp == nil {
+	if o == nil || IsNil(o.IsVirtualIp) {
 		return nil, false
 	}
 	return o.IsVirtualIp, true
@@ -338,7 +342,7 @@ func (o *ApplianceSystemInfo) GetIsVirtualIpOk() (*bool, bool) {
 
 // HasIsVirtualIp returns a boolean if a field has been set.
 func (o *ApplianceSystemInfo) HasIsVirtualIp() bool {
-	if o != nil && o.IsVirtualIp != nil {
+	if o != nil && !IsNil(o.IsVirtualIp) {
 		return true
 	}
 
@@ -352,7 +356,7 @@ func (o *ApplianceSystemInfo) SetIsVirtualIp(v bool) {
 
 // GetOperationalStatus returns the OperationalStatus field value if set, zero value otherwise.
 func (o *ApplianceSystemInfo) GetOperationalStatus() string {
-	if o == nil || o.OperationalStatus == nil {
+	if o == nil || IsNil(o.OperationalStatus) {
 		var ret string
 		return ret
 	}
@@ -362,7 +366,7 @@ func (o *ApplianceSystemInfo) GetOperationalStatus() string {
 // GetOperationalStatusOk returns a tuple with the OperationalStatus field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceSystemInfo) GetOperationalStatusOk() (*string, bool) {
-	if o == nil || o.OperationalStatus == nil {
+	if o == nil || IsNil(o.OperationalStatus) {
 		return nil, false
 	}
 	return o.OperationalStatus, true
@@ -370,7 +374,7 @@ func (o *ApplianceSystemInfo) GetOperationalStatusOk() (*string, bool) {
 
 // HasOperationalStatus returns a boolean if a field has been set.
 func (o *ApplianceSystemInfo) HasOperationalStatus() bool {
-	if o != nil && o.OperationalStatus != nil {
+	if o != nil && !IsNil(o.OperationalStatus) {
 		return true
 	}
 
@@ -384,7 +388,7 @@ func (o *ApplianceSystemInfo) SetOperationalStatus(v string) {
 
 // GetSerialId returns the SerialId field value if set, zero value otherwise.
 func (o *ApplianceSystemInfo) GetSerialId() string {
-	if o == nil || o.SerialId == nil {
+	if o == nil || IsNil(o.SerialId) {
 		var ret string
 		return ret
 	}
@@ -394,7 +398,7 @@ func (o *ApplianceSystemInfo) GetSerialId() string {
 // GetSerialIdOk returns a tuple with the SerialId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceSystemInfo) GetSerialIdOk() (*string, bool) {
-	if o == nil || o.SerialId == nil {
+	if o == nil || IsNil(o.SerialId) {
 		return nil, false
 	}
 	return o.SerialId, true
@@ -402,7 +406,7 @@ func (o *ApplianceSystemInfo) GetSerialIdOk() (*string, bool) {
 
 // HasSerialId returns a boolean if a field has been set.
 func (o *ApplianceSystemInfo) HasSerialId() bool {
-	if o != nil && o.SerialId != nil {
+	if o != nil && !IsNil(o.SerialId) {
 		return true
 	}
 
@@ -416,7 +420,7 @@ func (o *ApplianceSystemInfo) SetSerialId(v string) {
 
 // GetTimeZone returns the TimeZone field value if set, zero value otherwise.
 func (o *ApplianceSystemInfo) GetTimeZone() string {
-	if o == nil || o.TimeZone == nil {
+	if o == nil || IsNil(o.TimeZone) {
 		var ret string
 		return ret
 	}
@@ -426,7 +430,7 @@ func (o *ApplianceSystemInfo) GetTimeZone() string {
 // GetTimeZoneOk returns a tuple with the TimeZone field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceSystemInfo) GetTimeZoneOk() (*string, bool) {
-	if o == nil || o.TimeZone == nil {
+	if o == nil || IsNil(o.TimeZone) {
 		return nil, false
 	}
 	return o.TimeZone, true
@@ -434,7 +438,7 @@ func (o *ApplianceSystemInfo) GetTimeZoneOk() (*string, bool) {
 
 // HasTimeZone returns a boolean if a field has been set.
 func (o *ApplianceSystemInfo) HasTimeZone() bool {
-	if o != nil && o.TimeZone != nil {
+	if o != nil && !IsNil(o.TimeZone) {
 		return true
 	}
 
@@ -448,7 +452,7 @@ func (o *ApplianceSystemInfo) SetTimeZone(v string) {
 
 // GetVersion returns the Version field value if set, zero value otherwise.
 func (o *ApplianceSystemInfo) GetVersion() string {
-	if o == nil || o.Version == nil {
+	if o == nil || IsNil(o.Version) {
 		var ret string
 		return ret
 	}
@@ -458,7 +462,7 @@ func (o *ApplianceSystemInfo) GetVersion() string {
 // GetVersionOk returns a tuple with the Version field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceSystemInfo) GetVersionOk() (*string, bool) {
-	if o == nil || o.Version == nil {
+	if o == nil || IsNil(o.Version) {
 		return nil, false
 	}
 	return o.Version, true
@@ -466,7 +470,7 @@ func (o *ApplianceSystemInfo) GetVersionOk() (*string, bool) {
 
 // HasVersion returns a boolean if a field has been set.
 func (o *ApplianceSystemInfo) HasVersion() bool {
-	if o != nil && o.Version != nil {
+	if o != nil && !IsNil(o.Version) {
 		return true
 	}
 
@@ -479,52 +483,56 @@ func (o *ApplianceSystemInfo) SetVersion(v string) {
 }
 
 func (o ApplianceSystemInfo) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o ApplianceSystemInfo) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.CloudConnStatus != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.CloudConnStatus) {
 		toSerialize["CloudConnStatus"] = o.CloudConnStatus
 	}
-	if o.ClusterStatus != nil {
+	if !IsNil(o.ClusterStatus) {
 		toSerialize["ClusterStatus"] = o.ClusterStatus
 	}
-	if o.DeploymentSize != nil {
+	if !IsNil(o.DeploymentSize) {
 		toSerialize["DeploymentSize"] = o.DeploymentSize
 	}
-	if o.Hostname != nil {
+	if !IsNil(o.Hostname) {
 		toSerialize["Hostname"] = o.Hostname
 	}
-	if o.InitDone != nil {
+	if !IsNil(o.InitDone) {
 		toSerialize["InitDone"] = o.InitDone
 	}
-	if o.IpAddress != nil {
+	if !IsNil(o.IpAddress) {
 		toSerialize["IpAddress"] = o.IpAddress
 	}
-	if o.IsVirtualIp != nil {
+	if !IsNil(o.IsVirtualIp) {
 		toSerialize["IsVirtualIp"] = o.IsVirtualIp
 	}
-	if o.OperationalStatus != nil {
+	if !IsNil(o.OperationalStatus) {
 		toSerialize["OperationalStatus"] = o.OperationalStatus
 	}
-	if o.SerialId != nil {
+	if !IsNil(o.SerialId) {
 		toSerialize["SerialId"] = o.SerialId
 	}
-	if o.TimeZone != nil {
+	if !IsNil(o.TimeZone) {
 		toSerialize["TimeZone"] = o.TimeZone
 	}
-	if o.Version != nil {
+	if !IsNil(o.Version) {
 		toSerialize["Version"] = o.Version
 	}
 
@@ -532,10 +540,32 @@ func (o ApplianceSystemInfo) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *ApplianceSystemInfo) UnmarshalJSON(bytes []byte) (err error) {
+func (o *ApplianceSystemInfo) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type ApplianceSystemInfoWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -567,7 +597,7 @@ func (o *ApplianceSystemInfo) UnmarshalJSON(bytes []byte) (err error) {
 
 	varApplianceSystemInfoWithoutEmbeddedStruct := ApplianceSystemInfoWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varApplianceSystemInfoWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varApplianceSystemInfoWithoutEmbeddedStruct)
 	if err == nil {
 		varApplianceSystemInfo := _ApplianceSystemInfo{}
 		varApplianceSystemInfo.ClassId = varApplianceSystemInfoWithoutEmbeddedStruct.ClassId
@@ -590,7 +620,7 @@ func (o *ApplianceSystemInfo) UnmarshalJSON(bytes []byte) (err error) {
 
 	varApplianceSystemInfo := _ApplianceSystemInfo{}
 
-	err = json.Unmarshal(bytes, &varApplianceSystemInfo)
+	err = json.Unmarshal(data, &varApplianceSystemInfo)
 	if err == nil {
 		o.MoBaseMo = varApplianceSystemInfo.MoBaseMo
 	} else {
@@ -599,7 +629,7 @@ func (o *ApplianceSystemInfo) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "CloudConnStatus")

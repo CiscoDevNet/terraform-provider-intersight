@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the VirtualizationVmwareCluster type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &VirtualizationVmwareCluster{}
 
 // VirtualizationVmwareCluster A real cluster of resources within a data center in VMware. A cluster is a convenient grouping of resources such as Host, Datastore, etc.
 type VirtualizationVmwareCluster struct {
@@ -31,9 +35,9 @@ type VirtualizationVmwareCluster struct {
 	// Inventory path of the cluster.
 	InventoryPath *string `json:"InventoryPath,omitempty"`
 	// Every cluster has an option to enable proactive HA in vCenter. Set to true when the vCenter admin has enabled proactive HA for the cluster.
-	ProactiveHaEnabled   *bool                                       `json:"ProactiveHaEnabled,omitempty"`
-	Datacenter           *VirtualizationVmwareDatacenterRelationship `json:"Datacenter,omitempty"`
-	RegisteredDevice     *AssetDeviceRegistrationRelationship        `json:"RegisteredDevice,omitempty"`
+	ProactiveHaEnabled   *bool                                              `json:"ProactiveHaEnabled,omitempty"`
+	Datacenter           NullableVirtualizationVmwareDatacenterRelationship `json:"Datacenter,omitempty"`
+	RegisteredDevice     NullableAssetDeviceRegistrationRelationship        `json:"RegisteredDevice,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -114,7 +118,7 @@ func (o *VirtualizationVmwareCluster) SetObjectType(v string) {
 
 // GetCpuOverCommitment returns the CpuOverCommitment field value if set, zero value otherwise.
 func (o *VirtualizationVmwareCluster) GetCpuOverCommitment() int64 {
-	if o == nil || o.CpuOverCommitment == nil {
+	if o == nil || IsNil(o.CpuOverCommitment) {
 		var ret int64
 		return ret
 	}
@@ -124,7 +128,7 @@ func (o *VirtualizationVmwareCluster) GetCpuOverCommitment() int64 {
 // GetCpuOverCommitmentOk returns a tuple with the CpuOverCommitment field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationVmwareCluster) GetCpuOverCommitmentOk() (*int64, bool) {
-	if o == nil || o.CpuOverCommitment == nil {
+	if o == nil || IsNil(o.CpuOverCommitment) {
 		return nil, false
 	}
 	return o.CpuOverCommitment, true
@@ -132,7 +136,7 @@ func (o *VirtualizationVmwareCluster) GetCpuOverCommitmentOk() (*int64, bool) {
 
 // HasCpuOverCommitment returns a boolean if a field has been set.
 func (o *VirtualizationVmwareCluster) HasCpuOverCommitment() bool {
-	if o != nil && o.CpuOverCommitment != nil {
+	if o != nil && !IsNil(o.CpuOverCommitment) {
 		return true
 	}
 
@@ -146,7 +150,7 @@ func (o *VirtualizationVmwareCluster) SetCpuOverCommitment(v int64) {
 
 // GetDatastoreCount returns the DatastoreCount field value if set, zero value otherwise.
 func (o *VirtualizationVmwareCluster) GetDatastoreCount() int64 {
-	if o == nil || o.DatastoreCount == nil {
+	if o == nil || IsNil(o.DatastoreCount) {
 		var ret int64
 		return ret
 	}
@@ -156,7 +160,7 @@ func (o *VirtualizationVmwareCluster) GetDatastoreCount() int64 {
 // GetDatastoreCountOk returns a tuple with the DatastoreCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationVmwareCluster) GetDatastoreCountOk() (*int64, bool) {
-	if o == nil || o.DatastoreCount == nil {
+	if o == nil || IsNil(o.DatastoreCount) {
 		return nil, false
 	}
 	return o.DatastoreCount, true
@@ -164,7 +168,7 @@ func (o *VirtualizationVmwareCluster) GetDatastoreCountOk() (*int64, bool) {
 
 // HasDatastoreCount returns a boolean if a field has been set.
 func (o *VirtualizationVmwareCluster) HasDatastoreCount() bool {
-	if o != nil && o.DatastoreCount != nil {
+	if o != nil && !IsNil(o.DatastoreCount) {
 		return true
 	}
 
@@ -178,7 +182,7 @@ func (o *VirtualizationVmwareCluster) SetDatastoreCount(v int64) {
 
 // GetInventoryPath returns the InventoryPath field value if set, zero value otherwise.
 func (o *VirtualizationVmwareCluster) GetInventoryPath() string {
-	if o == nil || o.InventoryPath == nil {
+	if o == nil || IsNil(o.InventoryPath) {
 		var ret string
 		return ret
 	}
@@ -188,7 +192,7 @@ func (o *VirtualizationVmwareCluster) GetInventoryPath() string {
 // GetInventoryPathOk returns a tuple with the InventoryPath field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationVmwareCluster) GetInventoryPathOk() (*string, bool) {
-	if o == nil || o.InventoryPath == nil {
+	if o == nil || IsNil(o.InventoryPath) {
 		return nil, false
 	}
 	return o.InventoryPath, true
@@ -196,7 +200,7 @@ func (o *VirtualizationVmwareCluster) GetInventoryPathOk() (*string, bool) {
 
 // HasInventoryPath returns a boolean if a field has been set.
 func (o *VirtualizationVmwareCluster) HasInventoryPath() bool {
-	if o != nil && o.InventoryPath != nil {
+	if o != nil && !IsNil(o.InventoryPath) {
 		return true
 	}
 
@@ -210,7 +214,7 @@ func (o *VirtualizationVmwareCluster) SetInventoryPath(v string) {
 
 // GetProactiveHaEnabled returns the ProactiveHaEnabled field value if set, zero value otherwise.
 func (o *VirtualizationVmwareCluster) GetProactiveHaEnabled() bool {
-	if o == nil || o.ProactiveHaEnabled == nil {
+	if o == nil || IsNil(o.ProactiveHaEnabled) {
 		var ret bool
 		return ret
 	}
@@ -220,7 +224,7 @@ func (o *VirtualizationVmwareCluster) GetProactiveHaEnabled() bool {
 // GetProactiveHaEnabledOk returns a tuple with the ProactiveHaEnabled field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationVmwareCluster) GetProactiveHaEnabledOk() (*bool, bool) {
-	if o == nil || o.ProactiveHaEnabled == nil {
+	if o == nil || IsNil(o.ProactiveHaEnabled) {
 		return nil, false
 	}
 	return o.ProactiveHaEnabled, true
@@ -228,7 +232,7 @@ func (o *VirtualizationVmwareCluster) GetProactiveHaEnabledOk() (*bool, bool) {
 
 // HasProactiveHaEnabled returns a boolean if a field has been set.
 func (o *VirtualizationVmwareCluster) HasProactiveHaEnabled() bool {
-	if o != nil && o.ProactiveHaEnabled != nil {
+	if o != nil && !IsNil(o.ProactiveHaEnabled) {
 		return true
 	}
 
@@ -240,113 +244,161 @@ func (o *VirtualizationVmwareCluster) SetProactiveHaEnabled(v bool) {
 	o.ProactiveHaEnabled = &v
 }
 
-// GetDatacenter returns the Datacenter field value if set, zero value otherwise.
+// GetDatacenter returns the Datacenter field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *VirtualizationVmwareCluster) GetDatacenter() VirtualizationVmwareDatacenterRelationship {
-	if o == nil || o.Datacenter == nil {
+	if o == nil || IsNil(o.Datacenter.Get()) {
 		var ret VirtualizationVmwareDatacenterRelationship
 		return ret
 	}
-	return *o.Datacenter
+	return *o.Datacenter.Get()
 }
 
 // GetDatacenterOk returns a tuple with the Datacenter field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *VirtualizationVmwareCluster) GetDatacenterOk() (*VirtualizationVmwareDatacenterRelationship, bool) {
-	if o == nil || o.Datacenter == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Datacenter, true
+	return o.Datacenter.Get(), o.Datacenter.IsSet()
 }
 
 // HasDatacenter returns a boolean if a field has been set.
 func (o *VirtualizationVmwareCluster) HasDatacenter() bool {
-	if o != nil && o.Datacenter != nil {
+	if o != nil && o.Datacenter.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetDatacenter gets a reference to the given VirtualizationVmwareDatacenterRelationship and assigns it to the Datacenter field.
+// SetDatacenter gets a reference to the given NullableVirtualizationVmwareDatacenterRelationship and assigns it to the Datacenter field.
 func (o *VirtualizationVmwareCluster) SetDatacenter(v VirtualizationVmwareDatacenterRelationship) {
-	o.Datacenter = &v
+	o.Datacenter.Set(&v)
 }
 
-// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise.
+// SetDatacenterNil sets the value for Datacenter to be an explicit nil
+func (o *VirtualizationVmwareCluster) SetDatacenterNil() {
+	o.Datacenter.Set(nil)
+}
+
+// UnsetDatacenter ensures that no value is present for Datacenter, not even an explicit nil
+func (o *VirtualizationVmwareCluster) UnsetDatacenter() {
+	o.Datacenter.Unset()
+}
+
+// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *VirtualizationVmwareCluster) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil || IsNil(o.RegisteredDevice.Get()) {
 		var ret AssetDeviceRegistrationRelationship
 		return ret
 	}
-	return *o.RegisteredDevice
+	return *o.RegisteredDevice.Get()
 }
 
 // GetRegisteredDeviceOk returns a tuple with the RegisteredDevice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *VirtualizationVmwareCluster) GetRegisteredDeviceOk() (*AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.RegisteredDevice, true
+	return o.RegisteredDevice.Get(), o.RegisteredDevice.IsSet()
 }
 
 // HasRegisteredDevice returns a boolean if a field has been set.
 func (o *VirtualizationVmwareCluster) HasRegisteredDevice() bool {
-	if o != nil && o.RegisteredDevice != nil {
+	if o != nil && o.RegisteredDevice.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRegisteredDevice gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
+// SetRegisteredDevice gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
 func (o *VirtualizationVmwareCluster) SetRegisteredDevice(v AssetDeviceRegistrationRelationship) {
-	o.RegisteredDevice = &v
+	o.RegisteredDevice.Set(&v)
+}
+
+// SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+func (o *VirtualizationVmwareCluster) SetRegisteredDeviceNil() {
+	o.RegisteredDevice.Set(nil)
+}
+
+// UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
+func (o *VirtualizationVmwareCluster) UnsetRegisteredDevice() {
+	o.RegisteredDevice.Unset()
 }
 
 func (o VirtualizationVmwareCluster) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o VirtualizationVmwareCluster) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedVirtualizationBaseCluster, errVirtualizationBaseCluster := json.Marshal(o.VirtualizationBaseCluster)
 	if errVirtualizationBaseCluster != nil {
-		return []byte{}, errVirtualizationBaseCluster
+		return map[string]interface{}{}, errVirtualizationBaseCluster
 	}
 	errVirtualizationBaseCluster = json.Unmarshal([]byte(serializedVirtualizationBaseCluster), &toSerialize)
 	if errVirtualizationBaseCluster != nil {
-		return []byte{}, errVirtualizationBaseCluster
+		return map[string]interface{}{}, errVirtualizationBaseCluster
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.CpuOverCommitment != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.CpuOverCommitment) {
 		toSerialize["CpuOverCommitment"] = o.CpuOverCommitment
 	}
-	if o.DatastoreCount != nil {
+	if !IsNil(o.DatastoreCount) {
 		toSerialize["DatastoreCount"] = o.DatastoreCount
 	}
-	if o.InventoryPath != nil {
+	if !IsNil(o.InventoryPath) {
 		toSerialize["InventoryPath"] = o.InventoryPath
 	}
-	if o.ProactiveHaEnabled != nil {
+	if !IsNil(o.ProactiveHaEnabled) {
 		toSerialize["ProactiveHaEnabled"] = o.ProactiveHaEnabled
 	}
-	if o.Datacenter != nil {
-		toSerialize["Datacenter"] = o.Datacenter
+	if o.Datacenter.IsSet() {
+		toSerialize["Datacenter"] = o.Datacenter.Get()
 	}
-	if o.RegisteredDevice != nil {
-		toSerialize["RegisteredDevice"] = o.RegisteredDevice
+	if o.RegisteredDevice.IsSet() {
+		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *VirtualizationVmwareCluster) UnmarshalJSON(bytes []byte) (err error) {
+func (o *VirtualizationVmwareCluster) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type VirtualizationVmwareClusterWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -359,14 +411,14 @@ func (o *VirtualizationVmwareCluster) UnmarshalJSON(bytes []byte) (err error) {
 		// Inventory path of the cluster.
 		InventoryPath *string `json:"InventoryPath,omitempty"`
 		// Every cluster has an option to enable proactive HA in vCenter. Set to true when the vCenter admin has enabled proactive HA for the cluster.
-		ProactiveHaEnabled *bool                                       `json:"ProactiveHaEnabled,omitempty"`
-		Datacenter         *VirtualizationVmwareDatacenterRelationship `json:"Datacenter,omitempty"`
-		RegisteredDevice   *AssetDeviceRegistrationRelationship        `json:"RegisteredDevice,omitempty"`
+		ProactiveHaEnabled *bool                                              `json:"ProactiveHaEnabled,omitempty"`
+		Datacenter         NullableVirtualizationVmwareDatacenterRelationship `json:"Datacenter,omitempty"`
+		RegisteredDevice   NullableAssetDeviceRegistrationRelationship        `json:"RegisteredDevice,omitempty"`
 	}
 
 	varVirtualizationVmwareClusterWithoutEmbeddedStruct := VirtualizationVmwareClusterWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varVirtualizationVmwareClusterWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varVirtualizationVmwareClusterWithoutEmbeddedStruct)
 	if err == nil {
 		varVirtualizationVmwareCluster := _VirtualizationVmwareCluster{}
 		varVirtualizationVmwareCluster.ClassId = varVirtualizationVmwareClusterWithoutEmbeddedStruct.ClassId
@@ -384,7 +436,7 @@ func (o *VirtualizationVmwareCluster) UnmarshalJSON(bytes []byte) (err error) {
 
 	varVirtualizationVmwareCluster := _VirtualizationVmwareCluster{}
 
-	err = json.Unmarshal(bytes, &varVirtualizationVmwareCluster)
+	err = json.Unmarshal(data, &varVirtualizationVmwareCluster)
 	if err == nil {
 		o.VirtualizationBaseCluster = varVirtualizationVmwareCluster.VirtualizationBaseCluster
 	} else {
@@ -393,7 +445,7 @@ func (o *VirtualizationVmwareCluster) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "CpuOverCommitment")

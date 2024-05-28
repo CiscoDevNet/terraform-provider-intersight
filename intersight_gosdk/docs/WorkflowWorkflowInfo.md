@@ -35,13 +35,13 @@ Name | Type | Description | Notes
 **WaitReason** | Pointer to **string** | Denotes the reason workflow is in waiting status. * &#x60;None&#x60; - Wait reason is none, which indicates there is no reason for the waiting state. * &#x60;GatherTasks&#x60; - Wait reason is gathering tasks, which indicates the workflow is in this state in order to gather tasks. * &#x60;Duplicate&#x60; - Wait reason is duplicate, which indicates the workflow is a duplicate of current running workflow. * &#x60;RateLimit&#x60; - Wait reason is rate limit, which indicates the workflow is rate limited by account/instance level throttling threshold. * &#x60;WaitTask&#x60; - Wait reason when there are one or more wait tasks in the workflow which are yet to receive a task status update. * &#x60;PendingRetryFailed&#x60; - Wait reason when the workflow is pending a RetryFailed action. * &#x60;WaitingToStart&#x60; - Workflow is waiting to start on workflow engine. | [optional] [readonly] [default to "None"]
 **WorkflowCtx** | Pointer to [**NullableWorkflowWorkflowCtx**](WorkflowWorkflowCtx.md) |  | [optional] 
 **WorkflowStatus** | Pointer to **string** | The current state of the workflow execution instance. A draft workflow execution will be in NotStarted state and when \&quot;Start\&quot; action is issued then the workflow will move into Waiting state until the first task of the workflow is scheduled at which time it will move into InProgress state. When execution reaches a final state it move to either Completed, Failed or Terminated state. For more details look at the description for each state. * &#x60;NotStarted&#x60; - Initially all the workflow instances are at \&quot;NotStarted\&quot; state. A workflow can be drafted in this state by issuing Create action. When a workflow is in this state the inputs can be updated until the workflow is started. * &#x60;InProgress&#x60; - A workflow execution moves into \&quot;InProgress\&quot; state when the first task of the workflow is scheduled for execution and continues to remain in that state as long as there are tasks executing or yet to be scheduled for execution. * &#x60;Waiting&#x60; - Workflow can go to waiting state due to execution of wait task present in the workflow or the workflow has not started yet either due to duplicate workflow is running or due to workflow throttling. Once Workflow engine picks up the workflow for execution, it will move to in progress state. * &#x60;Completed&#x60; - A workflow execution moves into Completed state when the execution path of the workflow has reached the Success node in the workflow design and there are no more tasks to be executed. Completed is the final state for the workflow execution instance and no further actions are allowed on this workflow instance. * &#x60;Failed&#x60; - A workflow execution moves into a Failed state when the execution path of the workflow has reached the Failed node in the workflow design and there are no more tasks to be scheduled. A Failed node can be reached when the last executed task has failed or timed out and there are no further retries available for the task. Also as per the workflow design, the last executed task did not specify an OnFailure task to be executed and hence by default, the execution will reach the Failed node. Actions like \&quot;Rerun\&quot;, \&quot;RetryFailed\&quot; and \&quot;RetryFromTask\&quot; can be issued on failed workflow instances. Please refer to the \&quot;Action\&quot; description for more details. * &#x60;Terminated&#x60; - A workflow execution moves to Terminated state when user issues a \&quot;Cancel\&quot; action or due to internal errors caused during workflow execution. e.g. - Task input transformation has failed. Terminated is a final state of the workflow, no further action are allowed on this workflow instance. * &#x60;Canceled&#x60; - A workflow execution moves to Canceled state when a user issues a \&quot;Cancel\&quot; action. Cancel is not a final state, the workflow engine will issue cancel to all the running tasks and then move the workflow to the \&quot;Terminated\&quot; state. * &#x60;Paused&#x60; - A workflow execution moves to Paused state when user issues a \&quot;Pause\&quot; action. When in paused state the current running task will complete its execution but no further tasks will be scheduled until the workflow is resumed. A paused workflow is resumed when the user issues a \&quot;Resume\&quot; action. Paused workflows can be canceled by user. | [optional] [readonly] [default to "NotStarted"]
-**Account** | Pointer to [**IamAccountRelationship**](IamAccountRelationship.md) |  | [optional] 
-**AssociatedObject** | Pointer to [**MoBaseMoRelationship**](MoBaseMoRelationship.md) |  | [optional] 
-**Organization** | Pointer to [**OrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
-**ParentTaskInfo** | Pointer to [**WorkflowTaskInfoRelationship**](WorkflowTaskInfoRelationship.md) |  | [optional] 
-**Permission** | Pointer to [**IamPermissionRelationship**](IamPermissionRelationship.md) |  | [optional] 
+**Account** | Pointer to [**NullableIamAccountRelationship**](IamAccountRelationship.md) |  | [optional] 
+**AssociatedObject** | Pointer to [**NullableMoBaseMoRelationship**](MoBaseMoRelationship.md) |  | [optional] 
+**Organization** | Pointer to [**NullableOrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
+**ParentTaskInfo** | Pointer to [**NullableWorkflowTaskInfoRelationship**](WorkflowTaskInfoRelationship.md) |  | [optional] 
+**Permission** | Pointer to [**NullableIamPermissionRelationship**](IamPermissionRelationship.md) |  | [optional] 
 **TaskInfos** | Pointer to [**[]WorkflowTaskInfoRelationship**](WorkflowTaskInfoRelationship.md) | An array of relationships to workflowTaskInfo resources. | [optional] [readonly] 
-**WorkflowDefinition** | Pointer to [**WorkflowWorkflowDefinitionRelationship**](WorkflowWorkflowDefinitionRelationship.md) |  | [optional] 
+**WorkflowDefinition** | Pointer to [**NullableWorkflowWorkflowDefinitionRelationship**](WorkflowWorkflowDefinitionRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -922,6 +922,16 @@ SetAccount sets Account field to given value.
 
 HasAccount returns a boolean if a field has been set.
 
+### SetAccountNil
+
+`func (o *WorkflowWorkflowInfo) SetAccountNil(b bool)`
+
+ SetAccountNil sets the value for Account to be an explicit nil
+
+### UnsetAccount
+`func (o *WorkflowWorkflowInfo) UnsetAccount()`
+
+UnsetAccount ensures that no value is present for Account, not even an explicit nil
 ### GetAssociatedObject
 
 `func (o *WorkflowWorkflowInfo) GetAssociatedObject() MoBaseMoRelationship`
@@ -947,6 +957,16 @@ SetAssociatedObject sets AssociatedObject field to given value.
 
 HasAssociatedObject returns a boolean if a field has been set.
 
+### SetAssociatedObjectNil
+
+`func (o *WorkflowWorkflowInfo) SetAssociatedObjectNil(b bool)`
+
+ SetAssociatedObjectNil sets the value for AssociatedObject to be an explicit nil
+
+### UnsetAssociatedObject
+`func (o *WorkflowWorkflowInfo) UnsetAssociatedObject()`
+
+UnsetAssociatedObject ensures that no value is present for AssociatedObject, not even an explicit nil
 ### GetOrganization
 
 `func (o *WorkflowWorkflowInfo) GetOrganization() OrganizationOrganizationRelationship`
@@ -972,6 +992,16 @@ SetOrganization sets Organization field to given value.
 
 HasOrganization returns a boolean if a field has been set.
 
+### SetOrganizationNil
+
+`func (o *WorkflowWorkflowInfo) SetOrganizationNil(b bool)`
+
+ SetOrganizationNil sets the value for Organization to be an explicit nil
+
+### UnsetOrganization
+`func (o *WorkflowWorkflowInfo) UnsetOrganization()`
+
+UnsetOrganization ensures that no value is present for Organization, not even an explicit nil
 ### GetParentTaskInfo
 
 `func (o *WorkflowWorkflowInfo) GetParentTaskInfo() WorkflowTaskInfoRelationship`
@@ -997,6 +1027,16 @@ SetParentTaskInfo sets ParentTaskInfo field to given value.
 
 HasParentTaskInfo returns a boolean if a field has been set.
 
+### SetParentTaskInfoNil
+
+`func (o *WorkflowWorkflowInfo) SetParentTaskInfoNil(b bool)`
+
+ SetParentTaskInfoNil sets the value for ParentTaskInfo to be an explicit nil
+
+### UnsetParentTaskInfo
+`func (o *WorkflowWorkflowInfo) UnsetParentTaskInfo()`
+
+UnsetParentTaskInfo ensures that no value is present for ParentTaskInfo, not even an explicit nil
 ### GetPermission
 
 `func (o *WorkflowWorkflowInfo) GetPermission() IamPermissionRelationship`
@@ -1022,6 +1062,16 @@ SetPermission sets Permission field to given value.
 
 HasPermission returns a boolean if a field has been set.
 
+### SetPermissionNil
+
+`func (o *WorkflowWorkflowInfo) SetPermissionNil(b bool)`
+
+ SetPermissionNil sets the value for Permission to be an explicit nil
+
+### UnsetPermission
+`func (o *WorkflowWorkflowInfo) UnsetPermission()`
+
+UnsetPermission ensures that no value is present for Permission, not even an explicit nil
 ### GetTaskInfos
 
 `func (o *WorkflowWorkflowInfo) GetTaskInfos() []WorkflowTaskInfoRelationship`
@@ -1082,6 +1132,16 @@ SetWorkflowDefinition sets WorkflowDefinition field to given value.
 
 HasWorkflowDefinition returns a boolean if a field has been set.
 
+### SetWorkflowDefinitionNil
+
+`func (o *WorkflowWorkflowInfo) SetWorkflowDefinitionNil(b bool)`
+
+ SetWorkflowDefinitionNil sets the value for WorkflowDefinition to be an explicit nil
+
+### UnsetWorkflowDefinition
+`func (o *WorkflowWorkflowInfo) UnsetWorkflowDefinition()`
+
+UnsetWorkflowDefinition ensures that no value is present for WorkflowDefinition, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

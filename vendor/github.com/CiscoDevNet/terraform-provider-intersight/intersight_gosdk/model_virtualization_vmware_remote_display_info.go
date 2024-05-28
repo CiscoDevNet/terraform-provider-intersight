@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the VirtualizationVmwareRemoteDisplayInfo type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &VirtualizationVmwareRemoteDisplayInfo{}
 
 // VirtualizationVmwareRemoteDisplayInfo Details of the remote display settings.
 type VirtualizationVmwareRemoteDisplayInfo struct {
@@ -108,7 +112,7 @@ func (o *VirtualizationVmwareRemoteDisplayInfo) SetObjectType(v string) {
 
 // GetRemoteDisplayPassword returns the RemoteDisplayPassword field value if set, zero value otherwise.
 func (o *VirtualizationVmwareRemoteDisplayInfo) GetRemoteDisplayPassword() string {
-	if o == nil || o.RemoteDisplayPassword == nil {
+	if o == nil || IsNil(o.RemoteDisplayPassword) {
 		var ret string
 		return ret
 	}
@@ -118,7 +122,7 @@ func (o *VirtualizationVmwareRemoteDisplayInfo) GetRemoteDisplayPassword() strin
 // GetRemoteDisplayPasswordOk returns a tuple with the RemoteDisplayPassword field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationVmwareRemoteDisplayInfo) GetRemoteDisplayPasswordOk() (*string, bool) {
-	if o == nil || o.RemoteDisplayPassword == nil {
+	if o == nil || IsNil(o.RemoteDisplayPassword) {
 		return nil, false
 	}
 	return o.RemoteDisplayPassword, true
@@ -126,7 +130,7 @@ func (o *VirtualizationVmwareRemoteDisplayInfo) GetRemoteDisplayPasswordOk() (*s
 
 // HasRemoteDisplayPassword returns a boolean if a field has been set.
 func (o *VirtualizationVmwareRemoteDisplayInfo) HasRemoteDisplayPassword() bool {
-	if o != nil && o.RemoteDisplayPassword != nil {
+	if o != nil && !IsNil(o.RemoteDisplayPassword) {
 		return true
 	}
 
@@ -140,7 +144,7 @@ func (o *VirtualizationVmwareRemoteDisplayInfo) SetRemoteDisplayPassword(v strin
 
 // GetRemoteDisplayVncKey returns the RemoteDisplayVncKey field value if set, zero value otherwise.
 func (o *VirtualizationVmwareRemoteDisplayInfo) GetRemoteDisplayVncKey() string {
-	if o == nil || o.RemoteDisplayVncKey == nil {
+	if o == nil || IsNil(o.RemoteDisplayVncKey) {
 		var ret string
 		return ret
 	}
@@ -150,7 +154,7 @@ func (o *VirtualizationVmwareRemoteDisplayInfo) GetRemoteDisplayVncKey() string 
 // GetRemoteDisplayVncKeyOk returns a tuple with the RemoteDisplayVncKey field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationVmwareRemoteDisplayInfo) GetRemoteDisplayVncKeyOk() (*string, bool) {
-	if o == nil || o.RemoteDisplayVncKey == nil {
+	if o == nil || IsNil(o.RemoteDisplayVncKey) {
 		return nil, false
 	}
 	return o.RemoteDisplayVncKey, true
@@ -158,7 +162,7 @@ func (o *VirtualizationVmwareRemoteDisplayInfo) GetRemoteDisplayVncKeyOk() (*str
 
 // HasRemoteDisplayVncKey returns a boolean if a field has been set.
 func (o *VirtualizationVmwareRemoteDisplayInfo) HasRemoteDisplayVncKey() bool {
-	if o != nil && o.RemoteDisplayVncKey != nil {
+	if o != nil && !IsNil(o.RemoteDisplayVncKey) {
 		return true
 	}
 
@@ -172,7 +176,7 @@ func (o *VirtualizationVmwareRemoteDisplayInfo) SetRemoteDisplayVncKey(v string)
 
 // GetRemoteDisplayVncPort returns the RemoteDisplayVncPort field value if set, zero value otherwise.
 func (o *VirtualizationVmwareRemoteDisplayInfo) GetRemoteDisplayVncPort() int64 {
-	if o == nil || o.RemoteDisplayVncPort == nil {
+	if o == nil || IsNil(o.RemoteDisplayVncPort) {
 		var ret int64
 		return ret
 	}
@@ -182,7 +186,7 @@ func (o *VirtualizationVmwareRemoteDisplayInfo) GetRemoteDisplayVncPort() int64 
 // GetRemoteDisplayVncPortOk returns a tuple with the RemoteDisplayVncPort field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationVmwareRemoteDisplayInfo) GetRemoteDisplayVncPortOk() (*int64, bool) {
-	if o == nil || o.RemoteDisplayVncPort == nil {
+	if o == nil || IsNil(o.RemoteDisplayVncPort) {
 		return nil, false
 	}
 	return o.RemoteDisplayVncPort, true
@@ -190,7 +194,7 @@ func (o *VirtualizationVmwareRemoteDisplayInfo) GetRemoteDisplayVncPortOk() (*in
 
 // HasRemoteDisplayVncPort returns a boolean if a field has been set.
 func (o *VirtualizationVmwareRemoteDisplayInfo) HasRemoteDisplayVncPort() bool {
-	if o != nil && o.RemoteDisplayVncPort != nil {
+	if o != nil && !IsNil(o.RemoteDisplayVncPort) {
 		return true
 	}
 
@@ -203,28 +207,32 @@ func (o *VirtualizationVmwareRemoteDisplayInfo) SetRemoteDisplayVncPort(v int64)
 }
 
 func (o VirtualizationVmwareRemoteDisplayInfo) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o VirtualizationVmwareRemoteDisplayInfo) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
 	errMoBaseComplexType = json.Unmarshal([]byte(serializedMoBaseComplexType), &toSerialize)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.RemoteDisplayPassword != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.RemoteDisplayPassword) {
 		toSerialize["RemoteDisplayPassword"] = o.RemoteDisplayPassword
 	}
-	if o.RemoteDisplayVncKey != nil {
+	if !IsNil(o.RemoteDisplayVncKey) {
 		toSerialize["RemoteDisplayVncKey"] = o.RemoteDisplayVncKey
 	}
-	if o.RemoteDisplayVncPort != nil {
+	if !IsNil(o.RemoteDisplayVncPort) {
 		toSerialize["RemoteDisplayVncPort"] = o.RemoteDisplayVncPort
 	}
 
@@ -232,10 +240,32 @@ func (o VirtualizationVmwareRemoteDisplayInfo) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *VirtualizationVmwareRemoteDisplayInfo) UnmarshalJSON(bytes []byte) (err error) {
+func (o *VirtualizationVmwareRemoteDisplayInfo) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type VirtualizationVmwareRemoteDisplayInfoWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -251,7 +281,7 @@ func (o *VirtualizationVmwareRemoteDisplayInfo) UnmarshalJSON(bytes []byte) (err
 
 	varVirtualizationVmwareRemoteDisplayInfoWithoutEmbeddedStruct := VirtualizationVmwareRemoteDisplayInfoWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varVirtualizationVmwareRemoteDisplayInfoWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varVirtualizationVmwareRemoteDisplayInfoWithoutEmbeddedStruct)
 	if err == nil {
 		varVirtualizationVmwareRemoteDisplayInfo := _VirtualizationVmwareRemoteDisplayInfo{}
 		varVirtualizationVmwareRemoteDisplayInfo.ClassId = varVirtualizationVmwareRemoteDisplayInfoWithoutEmbeddedStruct.ClassId
@@ -266,7 +296,7 @@ func (o *VirtualizationVmwareRemoteDisplayInfo) UnmarshalJSON(bytes []byte) (err
 
 	varVirtualizationVmwareRemoteDisplayInfo := _VirtualizationVmwareRemoteDisplayInfo{}
 
-	err = json.Unmarshal(bytes, &varVirtualizationVmwareRemoteDisplayInfo)
+	err = json.Unmarshal(data, &varVirtualizationVmwareRemoteDisplayInfo)
 	if err == nil {
 		o.MoBaseComplexType = varVirtualizationVmwareRemoteDisplayInfo.MoBaseComplexType
 	} else {
@@ -275,7 +305,7 @@ func (o *VirtualizationVmwareRemoteDisplayInfo) UnmarshalJSON(bytes []byte) (err
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "RemoteDisplayPassword")

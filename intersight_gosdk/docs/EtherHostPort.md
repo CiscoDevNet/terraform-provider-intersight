@@ -9,8 +9,8 @@ Name | Type | Description | Notes
 **AggregatePortId** | Pointer to **int64** | Breakout port member in the fabric extender. | [optional] [readonly] 
 **ModuleId** | Pointer to **int64** | Fabric extender identifier for this port. | [optional] 
 **Speed** | Pointer to **string** | Host Port Speed of IO card or fabric extender. | [optional] [readonly] 
-**EquipmentIoCardBase** | Pointer to [**EquipmentIoCardBaseRelationship**](EquipmentIoCardBaseRelationship.md) |  | [optional] 
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
+**EquipmentIoCardBase** | Pointer to [**NullableEquipmentIoCardBaseRelationship**](EquipmentIoCardBaseRelationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -171,6 +171,16 @@ SetEquipmentIoCardBase sets EquipmentIoCardBase field to given value.
 
 HasEquipmentIoCardBase returns a boolean if a field has been set.
 
+### SetEquipmentIoCardBaseNil
+
+`func (o *EtherHostPort) SetEquipmentIoCardBaseNil(b bool)`
+
+ SetEquipmentIoCardBaseNil sets the value for EquipmentIoCardBase to be an explicit nil
+
+### UnsetEquipmentIoCardBase
+`func (o *EtherHostPort) UnsetEquipmentIoCardBase()`
+
+UnsetEquipmentIoCardBase ensures that no value is present for EquipmentIoCardBase, not even an explicit nil
 ### GetRegisteredDevice
 
 `func (o *EtherHostPort) GetRegisteredDevice() AssetDeviceRegistrationRelationship`
@@ -196,6 +206,16 @@ SetRegisteredDevice sets RegisteredDevice field to given value.
 
 HasRegisteredDevice returns a boolean if a field has been set.
 
+### SetRegisteredDeviceNil
+
+`func (o *EtherHostPort) SetRegisteredDeviceNil(b bool)`
+
+ SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+
+### UnsetRegisteredDevice
+`func (o *EtherHostPort) UnsetRegisteredDevice()`
+
+UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

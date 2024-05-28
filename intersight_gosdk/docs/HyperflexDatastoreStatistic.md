@@ -23,9 +23,9 @@ Name | Type | Description | Notes
 **UnCompressedUsedBytes** | Pointer to **int64** | Number of uncompressed used bytes in the datastore. | [optional] [readonly] 
 **UnsharedUsedBytes** | Pointer to **int64** | Unshared used capacity of the datastore in bytes. | [optional] [readonly] 
 **Uuid** | Pointer to **string** | UUID for the datastore object. | [optional] [readonly] 
-**DataProtectionPeer** | Pointer to [**HyperflexDataProtectionPeerRelationship**](HyperflexDataProtectionPeerRelationship.md) |  | [optional] 
-**SrcCluster** | Pointer to [**HyperflexClusterRelationship**](HyperflexClusterRelationship.md) |  | [optional] 
-**TgtCluster** | Pointer to [**HyperflexClusterRelationship**](HyperflexClusterRelationship.md) |  | [optional] 
+**DataProtectionPeer** | Pointer to [**NullableHyperflexDataProtectionPeerRelationship**](HyperflexDataProtectionPeerRelationship.md) |  | [optional] 
+**SrcCluster** | Pointer to [**NullableHyperflexClusterRelationship**](HyperflexClusterRelationship.md) |  | [optional] 
+**TgtCluster** | Pointer to [**NullableHyperflexClusterRelationship**](HyperflexClusterRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -566,6 +566,16 @@ SetDataProtectionPeer sets DataProtectionPeer field to given value.
 
 HasDataProtectionPeer returns a boolean if a field has been set.
 
+### SetDataProtectionPeerNil
+
+`func (o *HyperflexDatastoreStatistic) SetDataProtectionPeerNil(b bool)`
+
+ SetDataProtectionPeerNil sets the value for DataProtectionPeer to be an explicit nil
+
+### UnsetDataProtectionPeer
+`func (o *HyperflexDatastoreStatistic) UnsetDataProtectionPeer()`
+
+UnsetDataProtectionPeer ensures that no value is present for DataProtectionPeer, not even an explicit nil
 ### GetSrcCluster
 
 `func (o *HyperflexDatastoreStatistic) GetSrcCluster() HyperflexClusterRelationship`
@@ -591,6 +601,16 @@ SetSrcCluster sets SrcCluster field to given value.
 
 HasSrcCluster returns a boolean if a field has been set.
 
+### SetSrcClusterNil
+
+`func (o *HyperflexDatastoreStatistic) SetSrcClusterNil(b bool)`
+
+ SetSrcClusterNil sets the value for SrcCluster to be an explicit nil
+
+### UnsetSrcCluster
+`func (o *HyperflexDatastoreStatistic) UnsetSrcCluster()`
+
+UnsetSrcCluster ensures that no value is present for SrcCluster, not even an explicit nil
 ### GetTgtCluster
 
 `func (o *HyperflexDatastoreStatistic) GetTgtCluster() HyperflexClusterRelationship`
@@ -616,6 +636,16 @@ SetTgtCluster sets TgtCluster field to given value.
 
 HasTgtCluster returns a boolean if a field has been set.
 
+### SetTgtClusterNil
+
+`func (o *HyperflexDatastoreStatistic) SetTgtClusterNil(b bool)`
+
+ SetTgtClusterNil sets the value for TgtCluster to be an explicit nil
+
+### UnsetTgtCluster
+`func (o *HyperflexDatastoreStatistic) UnsetTgtCluster()`
+
+UnsetTgtCluster ensures that no value is present for TgtCluster, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

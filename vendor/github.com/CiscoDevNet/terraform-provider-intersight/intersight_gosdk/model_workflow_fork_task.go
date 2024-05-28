@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the WorkflowForkTask type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &WorkflowForkTask{}
 
 // WorkflowForkTask A ForkTask is a control task that forks tasks for parallel execution in a workflow.
 type WorkflowForkTask struct {
@@ -116,7 +120,7 @@ func (o *WorkflowForkTask) GetForkedTasks() []string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *WorkflowForkTask) GetForkedTasksOk() ([]string, bool) {
-	if o == nil || o.ForkedTasks == nil {
+	if o == nil || IsNil(o.ForkedTasks) {
 		return nil, false
 	}
 	return o.ForkedTasks, true
@@ -124,7 +128,7 @@ func (o *WorkflowForkTask) GetForkedTasksOk() ([]string, bool) {
 
 // HasForkedTasks returns a boolean if a field has been set.
 func (o *WorkflowForkTask) HasForkedTasks() bool {
-	if o != nil && o.ForkedTasks != nil {
+	if o != nil && IsNil(o.ForkedTasks) {
 		return true
 	}
 
@@ -138,7 +142,7 @@ func (o *WorkflowForkTask) SetForkedTasks(v []string) {
 
 // GetJoinTask returns the JoinTask field value if set, zero value otherwise.
 func (o *WorkflowForkTask) GetJoinTask() string {
-	if o == nil || o.JoinTask == nil {
+	if o == nil || IsNil(o.JoinTask) {
 		var ret string
 		return ret
 	}
@@ -148,7 +152,7 @@ func (o *WorkflowForkTask) GetJoinTask() string {
 // GetJoinTaskOk returns a tuple with the JoinTask field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowForkTask) GetJoinTaskOk() (*string, bool) {
-	if o == nil || o.JoinTask == nil {
+	if o == nil || IsNil(o.JoinTask) {
 		return nil, false
 	}
 	return o.JoinTask, true
@@ -156,7 +160,7 @@ func (o *WorkflowForkTask) GetJoinTaskOk() (*string, bool) {
 
 // HasJoinTask returns a boolean if a field has been set.
 func (o *WorkflowForkTask) HasJoinTask() bool {
-	if o != nil && o.JoinTask != nil {
+	if o != nil && !IsNil(o.JoinTask) {
 		return true
 	}
 
@@ -169,25 +173,29 @@ func (o *WorkflowForkTask) SetJoinTask(v string) {
 }
 
 func (o WorkflowForkTask) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o WorkflowForkTask) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedWorkflowControlTask, errWorkflowControlTask := json.Marshal(o.WorkflowControlTask)
 	if errWorkflowControlTask != nil {
-		return []byte{}, errWorkflowControlTask
+		return map[string]interface{}{}, errWorkflowControlTask
 	}
 	errWorkflowControlTask = json.Unmarshal([]byte(serializedWorkflowControlTask), &toSerialize)
 	if errWorkflowControlTask != nil {
-		return []byte{}, errWorkflowControlTask
+		return map[string]interface{}{}, errWorkflowControlTask
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
 	if o.ForkedTasks != nil {
 		toSerialize["ForkedTasks"] = o.ForkedTasks
 	}
-	if o.JoinTask != nil {
+	if !IsNil(o.JoinTask) {
 		toSerialize["JoinTask"] = o.JoinTask
 	}
 
@@ -195,10 +203,32 @@ func (o WorkflowForkTask) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *WorkflowForkTask) UnmarshalJSON(bytes []byte) (err error) {
+func (o *WorkflowForkTask) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type WorkflowForkTaskWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -211,7 +241,7 @@ func (o *WorkflowForkTask) UnmarshalJSON(bytes []byte) (err error) {
 
 	varWorkflowForkTaskWithoutEmbeddedStruct := WorkflowForkTaskWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varWorkflowForkTaskWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varWorkflowForkTaskWithoutEmbeddedStruct)
 	if err == nil {
 		varWorkflowForkTask := _WorkflowForkTask{}
 		varWorkflowForkTask.ClassId = varWorkflowForkTaskWithoutEmbeddedStruct.ClassId
@@ -225,7 +255,7 @@ func (o *WorkflowForkTask) UnmarshalJSON(bytes []byte) (err error) {
 
 	varWorkflowForkTask := _WorkflowForkTask{}
 
-	err = json.Unmarshal(bytes, &varWorkflowForkTask)
+	err = json.Unmarshal(data, &varWorkflowForkTask)
 	if err == nil {
 		o.WorkflowControlTask = varWorkflowForkTask.WorkflowControlTask
 	} else {
@@ -234,7 +264,7 @@ func (o *WorkflowForkTask) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "ForkedTasks")

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the ConnectorpackUpgradeImpact type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ConnectorpackUpgradeImpact{}
 
 // ConnectorpackUpgradeImpact Used to determine the list of connector packs to be installed on a target UCS Director in its next upgrade cycle. Accepts the moid of the target UcsdInfo as part of the filter query. Given below is a sample url :- https://{{target}}/api/v1/connectorpack/UpgradeImpacts? $filter= ( UcsdInfo.Moid eq <<MoId>> ).
 type ConnectorpackUpgradeImpact struct {
@@ -28,8 +32,8 @@ type ConnectorpackUpgradeImpact struct {
 	// States whether the UCS Director is eligible for an upgrade. Set to true if connector packs are available for upgrade, else set to false.
 	IsEligibleForUpgrade *bool `json:"IsEligibleForUpgrade,omitempty"`
 	// States whether all the requisite updates have been downloaded to the target UCS Director. Set to true if all connector packs required to upgrade UCS Director to the next iteration have been downloaded, else set to false.
-	IsUpdateDownloaded   *bool                     `json:"IsUpdateDownloaded,omitempty"`
-	UcsdInfo             *IaasUcsdInfoRelationship `json:"UcsdInfo,omitempty"`
+	IsUpdateDownloaded   *bool                            `json:"IsUpdateDownloaded,omitempty"`
+	UcsdInfo             NullableIaasUcsdInfoRelationship `json:"UcsdInfo,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -119,7 +123,7 @@ func (o *ConnectorpackUpgradeImpact) GetConnectorPack() []ConnectorpackConnector
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ConnectorpackUpgradeImpact) GetConnectorPackOk() ([]ConnectorpackConnectorPackUpdate, bool) {
-	if o == nil || o.ConnectorPack == nil {
+	if o == nil || IsNil(o.ConnectorPack) {
 		return nil, false
 	}
 	return o.ConnectorPack, true
@@ -127,7 +131,7 @@ func (o *ConnectorpackUpgradeImpact) GetConnectorPackOk() ([]ConnectorpackConnec
 
 // HasConnectorPack returns a boolean if a field has been set.
 func (o *ConnectorpackUpgradeImpact) HasConnectorPack() bool {
-	if o != nil && o.ConnectorPack != nil {
+	if o != nil && IsNil(o.ConnectorPack) {
 		return true
 	}
 
@@ -141,7 +145,7 @@ func (o *ConnectorpackUpgradeImpact) SetConnectorPack(v []ConnectorpackConnector
 
 // GetIsEligibleForUpgrade returns the IsEligibleForUpgrade field value if set, zero value otherwise.
 func (o *ConnectorpackUpgradeImpact) GetIsEligibleForUpgrade() bool {
-	if o == nil || o.IsEligibleForUpgrade == nil {
+	if o == nil || IsNil(o.IsEligibleForUpgrade) {
 		var ret bool
 		return ret
 	}
@@ -151,7 +155,7 @@ func (o *ConnectorpackUpgradeImpact) GetIsEligibleForUpgrade() bool {
 // GetIsEligibleForUpgradeOk returns a tuple with the IsEligibleForUpgrade field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ConnectorpackUpgradeImpact) GetIsEligibleForUpgradeOk() (*bool, bool) {
-	if o == nil || o.IsEligibleForUpgrade == nil {
+	if o == nil || IsNil(o.IsEligibleForUpgrade) {
 		return nil, false
 	}
 	return o.IsEligibleForUpgrade, true
@@ -159,7 +163,7 @@ func (o *ConnectorpackUpgradeImpact) GetIsEligibleForUpgradeOk() (*bool, bool) {
 
 // HasIsEligibleForUpgrade returns a boolean if a field has been set.
 func (o *ConnectorpackUpgradeImpact) HasIsEligibleForUpgrade() bool {
-	if o != nil && o.IsEligibleForUpgrade != nil {
+	if o != nil && !IsNil(o.IsEligibleForUpgrade) {
 		return true
 	}
 
@@ -173,7 +177,7 @@ func (o *ConnectorpackUpgradeImpact) SetIsEligibleForUpgrade(v bool) {
 
 // GetIsUpdateDownloaded returns the IsUpdateDownloaded field value if set, zero value otherwise.
 func (o *ConnectorpackUpgradeImpact) GetIsUpdateDownloaded() bool {
-	if o == nil || o.IsUpdateDownloaded == nil {
+	if o == nil || IsNil(o.IsUpdateDownloaded) {
 		var ret bool
 		return ret
 	}
@@ -183,7 +187,7 @@ func (o *ConnectorpackUpgradeImpact) GetIsUpdateDownloaded() bool {
 // GetIsUpdateDownloadedOk returns a tuple with the IsUpdateDownloaded field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ConnectorpackUpgradeImpact) GetIsUpdateDownloadedOk() (*bool, bool) {
-	if o == nil || o.IsUpdateDownloaded == nil {
+	if o == nil || IsNil(o.IsUpdateDownloaded) {
 		return nil, false
 	}
 	return o.IsUpdateDownloaded, true
@@ -191,7 +195,7 @@ func (o *ConnectorpackUpgradeImpact) GetIsUpdateDownloadedOk() (*bool, bool) {
 
 // HasIsUpdateDownloaded returns a boolean if a field has been set.
 func (o *ConnectorpackUpgradeImpact) HasIsUpdateDownloaded() bool {
-	if o != nil && o.IsUpdateDownloaded != nil {
+	if o != nil && !IsNil(o.IsUpdateDownloaded) {
 		return true
 	}
 
@@ -203,75 +207,112 @@ func (o *ConnectorpackUpgradeImpact) SetIsUpdateDownloaded(v bool) {
 	o.IsUpdateDownloaded = &v
 }
 
-// GetUcsdInfo returns the UcsdInfo field value if set, zero value otherwise.
+// GetUcsdInfo returns the UcsdInfo field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ConnectorpackUpgradeImpact) GetUcsdInfo() IaasUcsdInfoRelationship {
-	if o == nil || o.UcsdInfo == nil {
+	if o == nil || IsNil(o.UcsdInfo.Get()) {
 		var ret IaasUcsdInfoRelationship
 		return ret
 	}
-	return *o.UcsdInfo
+	return *o.UcsdInfo.Get()
 }
 
 // GetUcsdInfoOk returns a tuple with the UcsdInfo field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ConnectorpackUpgradeImpact) GetUcsdInfoOk() (*IaasUcsdInfoRelationship, bool) {
-	if o == nil || o.UcsdInfo == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.UcsdInfo, true
+	return o.UcsdInfo.Get(), o.UcsdInfo.IsSet()
 }
 
 // HasUcsdInfo returns a boolean if a field has been set.
 func (o *ConnectorpackUpgradeImpact) HasUcsdInfo() bool {
-	if o != nil && o.UcsdInfo != nil {
+	if o != nil && o.UcsdInfo.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetUcsdInfo gets a reference to the given IaasUcsdInfoRelationship and assigns it to the UcsdInfo field.
+// SetUcsdInfo gets a reference to the given NullableIaasUcsdInfoRelationship and assigns it to the UcsdInfo field.
 func (o *ConnectorpackUpgradeImpact) SetUcsdInfo(v IaasUcsdInfoRelationship) {
-	o.UcsdInfo = &v
+	o.UcsdInfo.Set(&v)
+}
+
+// SetUcsdInfoNil sets the value for UcsdInfo to be an explicit nil
+func (o *ConnectorpackUpgradeImpact) SetUcsdInfoNil() {
+	o.UcsdInfo.Set(nil)
+}
+
+// UnsetUcsdInfo ensures that no value is present for UcsdInfo, not even an explicit nil
+func (o *ConnectorpackUpgradeImpact) UnsetUcsdInfo() {
+	o.UcsdInfo.Unset()
 }
 
 func (o ConnectorpackUpgradeImpact) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o ConnectorpackUpgradeImpact) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
 	if o.ConnectorPack != nil {
 		toSerialize["ConnectorPack"] = o.ConnectorPack
 	}
-	if o.IsEligibleForUpgrade != nil {
+	if !IsNil(o.IsEligibleForUpgrade) {
 		toSerialize["IsEligibleForUpgrade"] = o.IsEligibleForUpgrade
 	}
-	if o.IsUpdateDownloaded != nil {
+	if !IsNil(o.IsUpdateDownloaded) {
 		toSerialize["IsUpdateDownloaded"] = o.IsUpdateDownloaded
 	}
-	if o.UcsdInfo != nil {
-		toSerialize["UcsdInfo"] = o.UcsdInfo
+	if o.UcsdInfo.IsSet() {
+		toSerialize["UcsdInfo"] = o.UcsdInfo.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *ConnectorpackUpgradeImpact) UnmarshalJSON(bytes []byte) (err error) {
+func (o *ConnectorpackUpgradeImpact) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type ConnectorpackUpgradeImpactWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -281,13 +322,13 @@ func (o *ConnectorpackUpgradeImpact) UnmarshalJSON(bytes []byte) (err error) {
 		// States whether the UCS Director is eligible for an upgrade. Set to true if connector packs are available for upgrade, else set to false.
 		IsEligibleForUpgrade *bool `json:"IsEligibleForUpgrade,omitempty"`
 		// States whether all the requisite updates have been downloaded to the target UCS Director. Set to true if all connector packs required to upgrade UCS Director to the next iteration have been downloaded, else set to false.
-		IsUpdateDownloaded *bool                     `json:"IsUpdateDownloaded,omitempty"`
-		UcsdInfo           *IaasUcsdInfoRelationship `json:"UcsdInfo,omitempty"`
+		IsUpdateDownloaded *bool                            `json:"IsUpdateDownloaded,omitempty"`
+		UcsdInfo           NullableIaasUcsdInfoRelationship `json:"UcsdInfo,omitempty"`
 	}
 
 	varConnectorpackUpgradeImpactWithoutEmbeddedStruct := ConnectorpackUpgradeImpactWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varConnectorpackUpgradeImpactWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varConnectorpackUpgradeImpactWithoutEmbeddedStruct)
 	if err == nil {
 		varConnectorpackUpgradeImpact := _ConnectorpackUpgradeImpact{}
 		varConnectorpackUpgradeImpact.ClassId = varConnectorpackUpgradeImpactWithoutEmbeddedStruct.ClassId
@@ -303,7 +344,7 @@ func (o *ConnectorpackUpgradeImpact) UnmarshalJSON(bytes []byte) (err error) {
 
 	varConnectorpackUpgradeImpact := _ConnectorpackUpgradeImpact{}
 
-	err = json.Unmarshal(bytes, &varConnectorpackUpgradeImpact)
+	err = json.Unmarshal(data, &varConnectorpackUpgradeImpact)
 	if err == nil {
 		o.MoBaseMo = varConnectorpackUpgradeImpact.MoBaseMo
 	} else {
@@ -312,7 +353,7 @@ func (o *ConnectorpackUpgradeImpact) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "ConnectorPack")

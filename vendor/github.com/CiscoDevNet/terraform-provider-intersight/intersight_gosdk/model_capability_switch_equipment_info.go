@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the CapabilitySwitchEquipmentInfo type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &CapabilitySwitchEquipmentInfo{}
 
 // CapabilitySwitchEquipmentInfo Type to represent additional switch equipment information.
 type CapabilitySwitchEquipmentInfo struct {
@@ -106,7 +110,7 @@ func (o *CapabilitySwitchEquipmentInfo) SetObjectType(v string) {
 
 // GetMaxFanModules returns the MaxFanModules field value if set, zero value otherwise.
 func (o *CapabilitySwitchEquipmentInfo) GetMaxFanModules() int64 {
-	if o == nil || o.MaxFanModules == nil {
+	if o == nil || IsNil(o.MaxFanModules) {
 		var ret int64
 		return ret
 	}
@@ -116,7 +120,7 @@ func (o *CapabilitySwitchEquipmentInfo) GetMaxFanModules() int64 {
 // GetMaxFanModulesOk returns a tuple with the MaxFanModules field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CapabilitySwitchEquipmentInfo) GetMaxFanModulesOk() (*int64, bool) {
-	if o == nil || o.MaxFanModules == nil {
+	if o == nil || IsNil(o.MaxFanModules) {
 		return nil, false
 	}
 	return o.MaxFanModules, true
@@ -124,7 +128,7 @@ func (o *CapabilitySwitchEquipmentInfo) GetMaxFanModulesOk() (*int64, bool) {
 
 // HasMaxFanModules returns a boolean if a field has been set.
 func (o *CapabilitySwitchEquipmentInfo) HasMaxFanModules() bool {
-	if o != nil && o.MaxFanModules != nil {
+	if o != nil && !IsNil(o.MaxFanModules) {
 		return true
 	}
 
@@ -138,7 +142,7 @@ func (o *CapabilitySwitchEquipmentInfo) SetMaxFanModules(v int64) {
 
 // GetMaxFansInFanModule returns the MaxFansInFanModule field value if set, zero value otherwise.
 func (o *CapabilitySwitchEquipmentInfo) GetMaxFansInFanModule() int64 {
-	if o == nil || o.MaxFansInFanModule == nil {
+	if o == nil || IsNil(o.MaxFansInFanModule) {
 		var ret int64
 		return ret
 	}
@@ -148,7 +152,7 @@ func (o *CapabilitySwitchEquipmentInfo) GetMaxFansInFanModule() int64 {
 // GetMaxFansInFanModuleOk returns a tuple with the MaxFansInFanModule field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CapabilitySwitchEquipmentInfo) GetMaxFansInFanModuleOk() (*int64, bool) {
-	if o == nil || o.MaxFansInFanModule == nil {
+	if o == nil || IsNil(o.MaxFansInFanModule) {
 		return nil, false
 	}
 	return o.MaxFansInFanModule, true
@@ -156,7 +160,7 @@ func (o *CapabilitySwitchEquipmentInfo) GetMaxFansInFanModuleOk() (*int64, bool)
 
 // HasMaxFansInFanModule returns a boolean if a field has been set.
 func (o *CapabilitySwitchEquipmentInfo) HasMaxFansInFanModule() bool {
-	if o != nil && o.MaxFansInFanModule != nil {
+	if o != nil && !IsNil(o.MaxFansInFanModule) {
 		return true
 	}
 
@@ -169,25 +173,29 @@ func (o *CapabilitySwitchEquipmentInfo) SetMaxFansInFanModule(v int64) {
 }
 
 func (o CapabilitySwitchEquipmentInfo) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o CapabilitySwitchEquipmentInfo) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedCapabilitySwitchIdentityDef, errCapabilitySwitchIdentityDef := json.Marshal(o.CapabilitySwitchIdentityDef)
 	if errCapabilitySwitchIdentityDef != nil {
-		return []byte{}, errCapabilitySwitchIdentityDef
+		return map[string]interface{}{}, errCapabilitySwitchIdentityDef
 	}
 	errCapabilitySwitchIdentityDef = json.Unmarshal([]byte(serializedCapabilitySwitchIdentityDef), &toSerialize)
 	if errCapabilitySwitchIdentityDef != nil {
-		return []byte{}, errCapabilitySwitchIdentityDef
+		return map[string]interface{}{}, errCapabilitySwitchIdentityDef
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.MaxFanModules != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.MaxFanModules) {
 		toSerialize["MaxFanModules"] = o.MaxFanModules
 	}
-	if o.MaxFansInFanModule != nil {
+	if !IsNil(o.MaxFansInFanModule) {
 		toSerialize["MaxFansInFanModule"] = o.MaxFansInFanModule
 	}
 
@@ -195,10 +203,32 @@ func (o CapabilitySwitchEquipmentInfo) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *CapabilitySwitchEquipmentInfo) UnmarshalJSON(bytes []byte) (err error) {
+func (o *CapabilitySwitchEquipmentInfo) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type CapabilitySwitchEquipmentInfoWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -212,7 +242,7 @@ func (o *CapabilitySwitchEquipmentInfo) UnmarshalJSON(bytes []byte) (err error) 
 
 	varCapabilitySwitchEquipmentInfoWithoutEmbeddedStruct := CapabilitySwitchEquipmentInfoWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varCapabilitySwitchEquipmentInfoWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varCapabilitySwitchEquipmentInfoWithoutEmbeddedStruct)
 	if err == nil {
 		varCapabilitySwitchEquipmentInfo := _CapabilitySwitchEquipmentInfo{}
 		varCapabilitySwitchEquipmentInfo.ClassId = varCapabilitySwitchEquipmentInfoWithoutEmbeddedStruct.ClassId
@@ -226,7 +256,7 @@ func (o *CapabilitySwitchEquipmentInfo) UnmarshalJSON(bytes []byte) (err error) 
 
 	varCapabilitySwitchEquipmentInfo := _CapabilitySwitchEquipmentInfo{}
 
-	err = json.Unmarshal(bytes, &varCapabilitySwitchEquipmentInfo)
+	err = json.Unmarshal(data, &varCapabilitySwitchEquipmentInfo)
 	if err == nil {
 		o.CapabilitySwitchIdentityDef = varCapabilitySwitchEquipmentInfo.CapabilitySwitchIdentityDef
 	} else {
@@ -235,7 +265,7 @@ func (o *CapabilitySwitchEquipmentInfo) UnmarshalJSON(bytes []byte) (err error) 
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "MaxFanModules")

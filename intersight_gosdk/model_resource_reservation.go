@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,30 +13,29 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
-	"time"
 )
+
+// checks if the ResourceReservation type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ResourceReservation{}
 
 // ResourceReservation A Reservation is used to reserve a place for a new resource in the resource groups.
 type ResourceReservation struct {
-	MoBaseMo
+	ResourceAbstractReservation
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
-	// Expiration of the resource Reservation.
-	Expiration *time.Time `json:"Expiration,omitempty"`
 	// MarkFail is used to set the reservation status to Failed.
 	MarkFail      *bool    `json:"MarkFail,omitempty"`
 	ResourceMoids []string `json:"ResourceMoids,omitempty"`
-	// Type of resources which will get filled into the resource groups.
-	ResourceType *string `json:"ResourceType,omitempty"`
-	// Status of the Reservation. * `Created` - By default, a reservation is in Created status. * `Processing` - A reservation is changed to Processing status for appliance mode resource claim requests. * `Failed` - A reservation is changed to Failed status if the validations on resources, resource groups fails. * `Finished` - A reservation is changed to Finished status if the validations on resources, resource groups are successful. The resource moids in reservation will be added to resource groups using OData filters.
-	Status *string `json:"Status,omitempty"`
 	// Moid of the user who created the reservation.
-	UserMoid *string                 `json:"UserMoid,omitempty"`
-	Account  *IamAccountRelationship `json:"Account,omitempty"`
+	UserMoid *string                        `json:"UserMoid,omitempty"`
+	Account  NullableIamAccountRelationship `json:"Account,omitempty"`
+	// An array of relationships to moBaseMo resources.
+	CustomPermissionResources []MoBaseMoRelationship `json:"CustomPermissionResources,omitempty"`
 	// An array of relationships to resourceGroup resources.
 	Groups               []ResourceGroupRelationship `json:"Groups,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -115,41 +114,9 @@ func (o *ResourceReservation) SetObjectType(v string) {
 	o.ObjectType = v
 }
 
-// GetExpiration returns the Expiration field value if set, zero value otherwise.
-func (o *ResourceReservation) GetExpiration() time.Time {
-	if o == nil || o.Expiration == nil {
-		var ret time.Time
-		return ret
-	}
-	return *o.Expiration
-}
-
-// GetExpirationOk returns a tuple with the Expiration field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ResourceReservation) GetExpirationOk() (*time.Time, bool) {
-	if o == nil || o.Expiration == nil {
-		return nil, false
-	}
-	return o.Expiration, true
-}
-
-// HasExpiration returns a boolean if a field has been set.
-func (o *ResourceReservation) HasExpiration() bool {
-	if o != nil && o.Expiration != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetExpiration gets a reference to the given time.Time and assigns it to the Expiration field.
-func (o *ResourceReservation) SetExpiration(v time.Time) {
-	o.Expiration = &v
-}
-
 // GetMarkFail returns the MarkFail field value if set, zero value otherwise.
 func (o *ResourceReservation) GetMarkFail() bool {
-	if o == nil || o.MarkFail == nil {
+	if o == nil || IsNil(o.MarkFail) {
 		var ret bool
 		return ret
 	}
@@ -159,7 +126,7 @@ func (o *ResourceReservation) GetMarkFail() bool {
 // GetMarkFailOk returns a tuple with the MarkFail field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ResourceReservation) GetMarkFailOk() (*bool, bool) {
-	if o == nil || o.MarkFail == nil {
+	if o == nil || IsNil(o.MarkFail) {
 		return nil, false
 	}
 	return o.MarkFail, true
@@ -167,7 +134,7 @@ func (o *ResourceReservation) GetMarkFailOk() (*bool, bool) {
 
 // HasMarkFail returns a boolean if a field has been set.
 func (o *ResourceReservation) HasMarkFail() bool {
-	if o != nil && o.MarkFail != nil {
+	if o != nil && !IsNil(o.MarkFail) {
 		return true
 	}
 
@@ -192,7 +159,7 @@ func (o *ResourceReservation) GetResourceMoids() []string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ResourceReservation) GetResourceMoidsOk() ([]string, bool) {
-	if o == nil || o.ResourceMoids == nil {
+	if o == nil || IsNil(o.ResourceMoids) {
 		return nil, false
 	}
 	return o.ResourceMoids, true
@@ -200,7 +167,7 @@ func (o *ResourceReservation) GetResourceMoidsOk() ([]string, bool) {
 
 // HasResourceMoids returns a boolean if a field has been set.
 func (o *ResourceReservation) HasResourceMoids() bool {
-	if o != nil && o.ResourceMoids != nil {
+	if o != nil && IsNil(o.ResourceMoids) {
 		return true
 	}
 
@@ -212,73 +179,9 @@ func (o *ResourceReservation) SetResourceMoids(v []string) {
 	o.ResourceMoids = v
 }
 
-// GetResourceType returns the ResourceType field value if set, zero value otherwise.
-func (o *ResourceReservation) GetResourceType() string {
-	if o == nil || o.ResourceType == nil {
-		var ret string
-		return ret
-	}
-	return *o.ResourceType
-}
-
-// GetResourceTypeOk returns a tuple with the ResourceType field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ResourceReservation) GetResourceTypeOk() (*string, bool) {
-	if o == nil || o.ResourceType == nil {
-		return nil, false
-	}
-	return o.ResourceType, true
-}
-
-// HasResourceType returns a boolean if a field has been set.
-func (o *ResourceReservation) HasResourceType() bool {
-	if o != nil && o.ResourceType != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetResourceType gets a reference to the given string and assigns it to the ResourceType field.
-func (o *ResourceReservation) SetResourceType(v string) {
-	o.ResourceType = &v
-}
-
-// GetStatus returns the Status field value if set, zero value otherwise.
-func (o *ResourceReservation) GetStatus() string {
-	if o == nil || o.Status == nil {
-		var ret string
-		return ret
-	}
-	return *o.Status
-}
-
-// GetStatusOk returns a tuple with the Status field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ResourceReservation) GetStatusOk() (*string, bool) {
-	if o == nil || o.Status == nil {
-		return nil, false
-	}
-	return o.Status, true
-}
-
-// HasStatus returns a boolean if a field has been set.
-func (o *ResourceReservation) HasStatus() bool {
-	if o != nil && o.Status != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetStatus gets a reference to the given string and assigns it to the Status field.
-func (o *ResourceReservation) SetStatus(v string) {
-	o.Status = &v
-}
-
 // GetUserMoid returns the UserMoid field value if set, zero value otherwise.
 func (o *ResourceReservation) GetUserMoid() string {
-	if o == nil || o.UserMoid == nil {
+	if o == nil || IsNil(o.UserMoid) {
 		var ret string
 		return ret
 	}
@@ -288,7 +191,7 @@ func (o *ResourceReservation) GetUserMoid() string {
 // GetUserMoidOk returns a tuple with the UserMoid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ResourceReservation) GetUserMoidOk() (*string, bool) {
-	if o == nil || o.UserMoid == nil {
+	if o == nil || IsNil(o.UserMoid) {
 		return nil, false
 	}
 	return o.UserMoid, true
@@ -296,7 +199,7 @@ func (o *ResourceReservation) GetUserMoidOk() (*string, bool) {
 
 // HasUserMoid returns a boolean if a field has been set.
 func (o *ResourceReservation) HasUserMoid() bool {
-	if o != nil && o.UserMoid != nil {
+	if o != nil && !IsNil(o.UserMoid) {
 		return true
 	}
 
@@ -308,36 +211,80 @@ func (o *ResourceReservation) SetUserMoid(v string) {
 	o.UserMoid = &v
 }
 
-// GetAccount returns the Account field value if set, zero value otherwise.
+// GetAccount returns the Account field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ResourceReservation) GetAccount() IamAccountRelationship {
-	if o == nil || o.Account == nil {
+	if o == nil || IsNil(o.Account.Get()) {
 		var ret IamAccountRelationship
 		return ret
 	}
-	return *o.Account
+	return *o.Account.Get()
 }
 
 // GetAccountOk returns a tuple with the Account field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ResourceReservation) GetAccountOk() (*IamAccountRelationship, bool) {
-	if o == nil || o.Account == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Account, true
+	return o.Account.Get(), o.Account.IsSet()
 }
 
 // HasAccount returns a boolean if a field has been set.
 func (o *ResourceReservation) HasAccount() bool {
-	if o != nil && o.Account != nil {
+	if o != nil && o.Account.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetAccount gets a reference to the given IamAccountRelationship and assigns it to the Account field.
+// SetAccount gets a reference to the given NullableIamAccountRelationship and assigns it to the Account field.
 func (o *ResourceReservation) SetAccount(v IamAccountRelationship) {
-	o.Account = &v
+	o.Account.Set(&v)
+}
+
+// SetAccountNil sets the value for Account to be an explicit nil
+func (o *ResourceReservation) SetAccountNil() {
+	o.Account.Set(nil)
+}
+
+// UnsetAccount ensures that no value is present for Account, not even an explicit nil
+func (o *ResourceReservation) UnsetAccount() {
+	o.Account.Unset()
+}
+
+// GetCustomPermissionResources returns the CustomPermissionResources field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ResourceReservation) GetCustomPermissionResources() []MoBaseMoRelationship {
+	if o == nil {
+		var ret []MoBaseMoRelationship
+		return ret
+	}
+	return o.CustomPermissionResources
+}
+
+// GetCustomPermissionResourcesOk returns a tuple with the CustomPermissionResources field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ResourceReservation) GetCustomPermissionResourcesOk() ([]MoBaseMoRelationship, bool) {
+	if o == nil || IsNil(o.CustomPermissionResources) {
+		return nil, false
+	}
+	return o.CustomPermissionResources, true
+}
+
+// HasCustomPermissionResources returns a boolean if a field has been set.
+func (o *ResourceReservation) HasCustomPermissionResources() bool {
+	if o != nil && IsNil(o.CustomPermissionResources) {
+		return true
+	}
+
+	return false
+}
+
+// SetCustomPermissionResources gets a reference to the given []MoBaseMoRelationship and assigns it to the CustomPermissionResources field.
+func (o *ResourceReservation) SetCustomPermissionResources(v []MoBaseMoRelationship) {
+	o.CustomPermissionResources = v
 }
 
 // GetGroups returns the Groups field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -353,7 +300,7 @@ func (o *ResourceReservation) GetGroups() []ResourceGroupRelationship {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ResourceReservation) GetGroupsOk() ([]ResourceGroupRelationship, bool) {
-	if o == nil || o.Groups == nil {
+	if o == nil || IsNil(o.Groups) {
 		return nil, false
 	}
 	return o.Groups, true
@@ -361,7 +308,7 @@ func (o *ResourceReservation) GetGroupsOk() ([]ResourceGroupRelationship, bool) 
 
 // HasGroups returns a boolean if a field has been set.
 func (o *ResourceReservation) HasGroups() bool {
-	if o != nil && o.Groups != nil {
+	if o != nil && IsNil(o.Groups) {
 		return true
 	}
 
@@ -374,41 +321,39 @@ func (o *ResourceReservation) SetGroups(v []ResourceGroupRelationship) {
 }
 
 func (o ResourceReservation) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o ResourceReservation) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
-	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+	serializedResourceAbstractReservation, errResourceAbstractReservation := json.Marshal(o.ResourceAbstractReservation)
+	if errResourceAbstractReservation != nil {
+		return map[string]interface{}{}, errResourceAbstractReservation
 	}
-	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
-	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+	errResourceAbstractReservation = json.Unmarshal([]byte(serializedResourceAbstractReservation), &toSerialize)
+	if errResourceAbstractReservation != nil {
+		return map[string]interface{}{}, errResourceAbstractReservation
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Expiration != nil {
-		toSerialize["Expiration"] = o.Expiration
-	}
-	if o.MarkFail != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.MarkFail) {
 		toSerialize["MarkFail"] = o.MarkFail
 	}
 	if o.ResourceMoids != nil {
 		toSerialize["ResourceMoids"] = o.ResourceMoids
 	}
-	if o.ResourceType != nil {
-		toSerialize["ResourceType"] = o.ResourceType
-	}
-	if o.Status != nil {
-		toSerialize["Status"] = o.Status
-	}
-	if o.UserMoid != nil {
+	if !IsNil(o.UserMoid) {
 		toSerialize["UserMoid"] = o.UserMoid
 	}
-	if o.Account != nil {
-		toSerialize["Account"] = o.Account
+	if o.Account.IsSet() {
+		toSerialize["Account"] = o.Account.Get()
+	}
+	if o.CustomPermissionResources != nil {
+		toSerialize["CustomPermissionResources"] = o.CustomPermissionResources
 	}
 	if o.Groups != nil {
 		toSerialize["Groups"] = o.Groups
@@ -418,45 +363,61 @@ func (o ResourceReservation) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *ResourceReservation) UnmarshalJSON(bytes []byte) (err error) {
+func (o *ResourceReservation) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type ResourceReservationWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 		ObjectType string `json:"ObjectType"`
-		// Expiration of the resource Reservation.
-		Expiration *time.Time `json:"Expiration,omitempty"`
 		// MarkFail is used to set the reservation status to Failed.
 		MarkFail      *bool    `json:"MarkFail,omitempty"`
 		ResourceMoids []string `json:"ResourceMoids,omitempty"`
-		// Type of resources which will get filled into the resource groups.
-		ResourceType *string `json:"ResourceType,omitempty"`
-		// Status of the Reservation. * `Created` - By default, a reservation is in Created status. * `Processing` - A reservation is changed to Processing status for appliance mode resource claim requests. * `Failed` - A reservation is changed to Failed status if the validations on resources, resource groups fails. * `Finished` - A reservation is changed to Finished status if the validations on resources, resource groups are successful. The resource moids in reservation will be added to resource groups using OData filters.
-		Status *string `json:"Status,omitempty"`
 		// Moid of the user who created the reservation.
-		UserMoid *string                 `json:"UserMoid,omitempty"`
-		Account  *IamAccountRelationship `json:"Account,omitempty"`
+		UserMoid *string                        `json:"UserMoid,omitempty"`
+		Account  NullableIamAccountRelationship `json:"Account,omitempty"`
+		// An array of relationships to moBaseMo resources.
+		CustomPermissionResources []MoBaseMoRelationship `json:"CustomPermissionResources,omitempty"`
 		// An array of relationships to resourceGroup resources.
 		Groups []ResourceGroupRelationship `json:"Groups,omitempty"`
 	}
 
 	varResourceReservationWithoutEmbeddedStruct := ResourceReservationWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varResourceReservationWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varResourceReservationWithoutEmbeddedStruct)
 	if err == nil {
 		varResourceReservation := _ResourceReservation{}
 		varResourceReservation.ClassId = varResourceReservationWithoutEmbeddedStruct.ClassId
 		varResourceReservation.ObjectType = varResourceReservationWithoutEmbeddedStruct.ObjectType
-		varResourceReservation.Expiration = varResourceReservationWithoutEmbeddedStruct.Expiration
 		varResourceReservation.MarkFail = varResourceReservationWithoutEmbeddedStruct.MarkFail
 		varResourceReservation.ResourceMoids = varResourceReservationWithoutEmbeddedStruct.ResourceMoids
-		varResourceReservation.ResourceType = varResourceReservationWithoutEmbeddedStruct.ResourceType
-		varResourceReservation.Status = varResourceReservationWithoutEmbeddedStruct.Status
 		varResourceReservation.UserMoid = varResourceReservationWithoutEmbeddedStruct.UserMoid
 		varResourceReservation.Account = varResourceReservationWithoutEmbeddedStruct.Account
+		varResourceReservation.CustomPermissionResources = varResourceReservationWithoutEmbeddedStruct.CustomPermissionResources
 		varResourceReservation.Groups = varResourceReservationWithoutEmbeddedStruct.Groups
 		*o = ResourceReservation(varResourceReservation)
 	} else {
@@ -465,31 +426,29 @@ func (o *ResourceReservation) UnmarshalJSON(bytes []byte) (err error) {
 
 	varResourceReservation := _ResourceReservation{}
 
-	err = json.Unmarshal(bytes, &varResourceReservation)
+	err = json.Unmarshal(data, &varResourceReservation)
 	if err == nil {
-		o.MoBaseMo = varResourceReservation.MoBaseMo
+		o.ResourceAbstractReservation = varResourceReservation.ResourceAbstractReservation
 	} else {
 		return err
 	}
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
-		delete(additionalProperties, "Expiration")
 		delete(additionalProperties, "MarkFail")
 		delete(additionalProperties, "ResourceMoids")
-		delete(additionalProperties, "ResourceType")
-		delete(additionalProperties, "Status")
 		delete(additionalProperties, "UserMoid")
 		delete(additionalProperties, "Account")
+		delete(additionalProperties, "CustomPermissionResources")
 		delete(additionalProperties, "Groups")
 
 		// remove fields from embedded structs
-		reflectMoBaseMo := reflect.ValueOf(o.MoBaseMo)
-		for i := 0; i < reflectMoBaseMo.Type().NumField(); i++ {
-			t := reflectMoBaseMo.Type().Field(i)
+		reflectResourceAbstractReservation := reflect.ValueOf(o.ResourceAbstractReservation)
+		for i := 0; i < reflectResourceAbstractReservation.Type().NumField(); i++ {
+			t := reflectResourceAbstractReservation.Type().Field(i)
 
 			if jsonTag := t.Tag.Get("json"); jsonTag != "" {
 				fieldName := ""

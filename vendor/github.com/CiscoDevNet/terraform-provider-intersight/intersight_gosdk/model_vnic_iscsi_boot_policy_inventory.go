@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the VnicIscsiBootPolicyInventory type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &VnicIscsiBootPolicyInventory{}
 
 // VnicIscsiBootPolicyInventory Configuration parameters to enable a server to boot its operating system from an iSCSI target machine located remotely over a network.
 type VnicIscsiBootPolicyInventory struct {
@@ -34,12 +38,12 @@ type VnicIscsiBootPolicyInventory struct {
 	InitiatorStaticIpV4Config  NullableIppoolIpV4Config     `json:"InitiatorStaticIpV4Config,omitempty"`
 	MutualChap                 NullableVnicIscsiAuthProfile `json:"MutualChap,omitempty"`
 	// Source Type of Targets - Auto/Static. * `Static` - Type indicates that static target interface is assigned to iSCSI boot. * `Auto` - Type indicates that the system selects the target interface automatically during iSCSI boot.
-	TargetSourceType      *string                                           `json:"TargetSourceType,omitempty"`
-	InitiatorIpPool       *IppoolPoolRelationship                           `json:"InitiatorIpPool,omitempty"`
-	IscsiAdapterPolicy    *VnicIscsiAdapterPolicyInventoryRelationship      `json:"IscsiAdapterPolicy,omitempty"`
-	PrimaryTargetPolicy   *VnicIscsiStaticTargetPolicyInventoryRelationship `json:"PrimaryTargetPolicy,omitempty"`
-	SecondaryTargetPolicy *VnicIscsiStaticTargetPolicyInventoryRelationship `json:"SecondaryTargetPolicy,omitempty"`
-	TargetMo              *MoBaseMoRelationship                             `json:"TargetMo,omitempty"`
+	TargetSourceType      *string                                                  `json:"TargetSourceType,omitempty"`
+	InitiatorIpPool       NullableIppoolPoolRelationship                           `json:"InitiatorIpPool,omitempty"`
+	IscsiAdapterPolicy    NullableVnicIscsiAdapterPolicyInventoryRelationship      `json:"IscsiAdapterPolicy,omitempty"`
+	PrimaryTargetPolicy   NullableVnicIscsiStaticTargetPolicyInventoryRelationship `json:"PrimaryTargetPolicy,omitempty"`
+	SecondaryTargetPolicy NullableVnicIscsiStaticTargetPolicyInventoryRelationship `json:"SecondaryTargetPolicy,omitempty"`
+	TargetMo              NullableMoBaseMoRelationship                             `json:"TargetMo,omitempty"`
 	AdditionalProperties  map[string]interface{}
 }
 
@@ -118,7 +122,7 @@ func (o *VnicIscsiBootPolicyInventory) SetObjectType(v string) {
 
 // GetAutoTargetvendorName returns the AutoTargetvendorName field value if set, zero value otherwise.
 func (o *VnicIscsiBootPolicyInventory) GetAutoTargetvendorName() string {
-	if o == nil || o.AutoTargetvendorName == nil {
+	if o == nil || IsNil(o.AutoTargetvendorName) {
 		var ret string
 		return ret
 	}
@@ -128,7 +132,7 @@ func (o *VnicIscsiBootPolicyInventory) GetAutoTargetvendorName() string {
 // GetAutoTargetvendorNameOk returns a tuple with the AutoTargetvendorName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VnicIscsiBootPolicyInventory) GetAutoTargetvendorNameOk() (*string, bool) {
-	if o == nil || o.AutoTargetvendorName == nil {
+	if o == nil || IsNil(o.AutoTargetvendorName) {
 		return nil, false
 	}
 	return o.AutoTargetvendorName, true
@@ -136,7 +140,7 @@ func (o *VnicIscsiBootPolicyInventory) GetAutoTargetvendorNameOk() (*string, boo
 
 // HasAutoTargetvendorName returns a boolean if a field has been set.
 func (o *VnicIscsiBootPolicyInventory) HasAutoTargetvendorName() bool {
-	if o != nil && o.AutoTargetvendorName != nil {
+	if o != nil && !IsNil(o.AutoTargetvendorName) {
 		return true
 	}
 
@@ -150,7 +154,7 @@ func (o *VnicIscsiBootPolicyInventory) SetAutoTargetvendorName(v string) {
 
 // GetChap returns the Chap field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *VnicIscsiBootPolicyInventory) GetChap() VnicIscsiAuthProfile {
-	if o == nil || o.Chap.Get() == nil {
+	if o == nil || IsNil(o.Chap.Get()) {
 		var ret VnicIscsiAuthProfile
 		return ret
 	}
@@ -193,7 +197,7 @@ func (o *VnicIscsiBootPolicyInventory) UnsetChap() {
 
 // GetInitiatorIpSource returns the InitiatorIpSource field value if set, zero value otherwise.
 func (o *VnicIscsiBootPolicyInventory) GetInitiatorIpSource() string {
-	if o == nil || o.InitiatorIpSource == nil {
+	if o == nil || IsNil(o.InitiatorIpSource) {
 		var ret string
 		return ret
 	}
@@ -203,7 +207,7 @@ func (o *VnicIscsiBootPolicyInventory) GetInitiatorIpSource() string {
 // GetInitiatorIpSourceOk returns a tuple with the InitiatorIpSource field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VnicIscsiBootPolicyInventory) GetInitiatorIpSourceOk() (*string, bool) {
-	if o == nil || o.InitiatorIpSource == nil {
+	if o == nil || IsNil(o.InitiatorIpSource) {
 		return nil, false
 	}
 	return o.InitiatorIpSource, true
@@ -211,7 +215,7 @@ func (o *VnicIscsiBootPolicyInventory) GetInitiatorIpSourceOk() (*string, bool) 
 
 // HasInitiatorIpSource returns a boolean if a field has been set.
 func (o *VnicIscsiBootPolicyInventory) HasInitiatorIpSource() bool {
-	if o != nil && o.InitiatorIpSource != nil {
+	if o != nil && !IsNil(o.InitiatorIpSource) {
 		return true
 	}
 
@@ -225,7 +229,7 @@ func (o *VnicIscsiBootPolicyInventory) SetInitiatorIpSource(v string) {
 
 // GetInitiatorStaticIpV4Address returns the InitiatorStaticIpV4Address field value if set, zero value otherwise.
 func (o *VnicIscsiBootPolicyInventory) GetInitiatorStaticIpV4Address() string {
-	if o == nil || o.InitiatorStaticIpV4Address == nil {
+	if o == nil || IsNil(o.InitiatorStaticIpV4Address) {
 		var ret string
 		return ret
 	}
@@ -235,7 +239,7 @@ func (o *VnicIscsiBootPolicyInventory) GetInitiatorStaticIpV4Address() string {
 // GetInitiatorStaticIpV4AddressOk returns a tuple with the InitiatorStaticIpV4Address field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VnicIscsiBootPolicyInventory) GetInitiatorStaticIpV4AddressOk() (*string, bool) {
-	if o == nil || o.InitiatorStaticIpV4Address == nil {
+	if o == nil || IsNil(o.InitiatorStaticIpV4Address) {
 		return nil, false
 	}
 	return o.InitiatorStaticIpV4Address, true
@@ -243,7 +247,7 @@ func (o *VnicIscsiBootPolicyInventory) GetInitiatorStaticIpV4AddressOk() (*strin
 
 // HasInitiatorStaticIpV4Address returns a boolean if a field has been set.
 func (o *VnicIscsiBootPolicyInventory) HasInitiatorStaticIpV4Address() bool {
-	if o != nil && o.InitiatorStaticIpV4Address != nil {
+	if o != nil && !IsNil(o.InitiatorStaticIpV4Address) {
 		return true
 	}
 
@@ -257,7 +261,7 @@ func (o *VnicIscsiBootPolicyInventory) SetInitiatorStaticIpV4Address(v string) {
 
 // GetInitiatorStaticIpV4Config returns the InitiatorStaticIpV4Config field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *VnicIscsiBootPolicyInventory) GetInitiatorStaticIpV4Config() IppoolIpV4Config {
-	if o == nil || o.InitiatorStaticIpV4Config.Get() == nil {
+	if o == nil || IsNil(o.InitiatorStaticIpV4Config.Get()) {
 		var ret IppoolIpV4Config
 		return ret
 	}
@@ -300,7 +304,7 @@ func (o *VnicIscsiBootPolicyInventory) UnsetInitiatorStaticIpV4Config() {
 
 // GetMutualChap returns the MutualChap field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *VnicIscsiBootPolicyInventory) GetMutualChap() VnicIscsiAuthProfile {
-	if o == nil || o.MutualChap.Get() == nil {
+	if o == nil || IsNil(o.MutualChap.Get()) {
 		var ret VnicIscsiAuthProfile
 		return ret
 	}
@@ -343,7 +347,7 @@ func (o *VnicIscsiBootPolicyInventory) UnsetMutualChap() {
 
 // GetTargetSourceType returns the TargetSourceType field value if set, zero value otherwise.
 func (o *VnicIscsiBootPolicyInventory) GetTargetSourceType() string {
-	if o == nil || o.TargetSourceType == nil {
+	if o == nil || IsNil(o.TargetSourceType) {
 		var ret string
 		return ret
 	}
@@ -353,7 +357,7 @@ func (o *VnicIscsiBootPolicyInventory) GetTargetSourceType() string {
 // GetTargetSourceTypeOk returns a tuple with the TargetSourceType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VnicIscsiBootPolicyInventory) GetTargetSourceTypeOk() (*string, bool) {
-	if o == nil || o.TargetSourceType == nil {
+	if o == nil || IsNil(o.TargetSourceType) {
 		return nil, false
 	}
 	return o.TargetSourceType, true
@@ -361,7 +365,7 @@ func (o *VnicIscsiBootPolicyInventory) GetTargetSourceTypeOk() (*string, bool) {
 
 // HasTargetSourceType returns a boolean if a field has been set.
 func (o *VnicIscsiBootPolicyInventory) HasTargetSourceType() bool {
-	if o != nil && o.TargetSourceType != nil {
+	if o != nil && !IsNil(o.TargetSourceType) {
 		return true
 	}
 
@@ -373,192 +377,251 @@ func (o *VnicIscsiBootPolicyInventory) SetTargetSourceType(v string) {
 	o.TargetSourceType = &v
 }
 
-// GetInitiatorIpPool returns the InitiatorIpPool field value if set, zero value otherwise.
+// GetInitiatorIpPool returns the InitiatorIpPool field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *VnicIscsiBootPolicyInventory) GetInitiatorIpPool() IppoolPoolRelationship {
-	if o == nil || o.InitiatorIpPool == nil {
+	if o == nil || IsNil(o.InitiatorIpPool.Get()) {
 		var ret IppoolPoolRelationship
 		return ret
 	}
-	return *o.InitiatorIpPool
+	return *o.InitiatorIpPool.Get()
 }
 
 // GetInitiatorIpPoolOk returns a tuple with the InitiatorIpPool field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *VnicIscsiBootPolicyInventory) GetInitiatorIpPoolOk() (*IppoolPoolRelationship, bool) {
-	if o == nil || o.InitiatorIpPool == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.InitiatorIpPool, true
+	return o.InitiatorIpPool.Get(), o.InitiatorIpPool.IsSet()
 }
 
 // HasInitiatorIpPool returns a boolean if a field has been set.
 func (o *VnicIscsiBootPolicyInventory) HasInitiatorIpPool() bool {
-	if o != nil && o.InitiatorIpPool != nil {
+	if o != nil && o.InitiatorIpPool.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetInitiatorIpPool gets a reference to the given IppoolPoolRelationship and assigns it to the InitiatorIpPool field.
+// SetInitiatorIpPool gets a reference to the given NullableIppoolPoolRelationship and assigns it to the InitiatorIpPool field.
 func (o *VnicIscsiBootPolicyInventory) SetInitiatorIpPool(v IppoolPoolRelationship) {
-	o.InitiatorIpPool = &v
+	o.InitiatorIpPool.Set(&v)
 }
 
-// GetIscsiAdapterPolicy returns the IscsiAdapterPolicy field value if set, zero value otherwise.
+// SetInitiatorIpPoolNil sets the value for InitiatorIpPool to be an explicit nil
+func (o *VnicIscsiBootPolicyInventory) SetInitiatorIpPoolNil() {
+	o.InitiatorIpPool.Set(nil)
+}
+
+// UnsetInitiatorIpPool ensures that no value is present for InitiatorIpPool, not even an explicit nil
+func (o *VnicIscsiBootPolicyInventory) UnsetInitiatorIpPool() {
+	o.InitiatorIpPool.Unset()
+}
+
+// GetIscsiAdapterPolicy returns the IscsiAdapterPolicy field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *VnicIscsiBootPolicyInventory) GetIscsiAdapterPolicy() VnicIscsiAdapterPolicyInventoryRelationship {
-	if o == nil || o.IscsiAdapterPolicy == nil {
+	if o == nil || IsNil(o.IscsiAdapterPolicy.Get()) {
 		var ret VnicIscsiAdapterPolicyInventoryRelationship
 		return ret
 	}
-	return *o.IscsiAdapterPolicy
+	return *o.IscsiAdapterPolicy.Get()
 }
 
 // GetIscsiAdapterPolicyOk returns a tuple with the IscsiAdapterPolicy field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *VnicIscsiBootPolicyInventory) GetIscsiAdapterPolicyOk() (*VnicIscsiAdapterPolicyInventoryRelationship, bool) {
-	if o == nil || o.IscsiAdapterPolicy == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.IscsiAdapterPolicy, true
+	return o.IscsiAdapterPolicy.Get(), o.IscsiAdapterPolicy.IsSet()
 }
 
 // HasIscsiAdapterPolicy returns a boolean if a field has been set.
 func (o *VnicIscsiBootPolicyInventory) HasIscsiAdapterPolicy() bool {
-	if o != nil && o.IscsiAdapterPolicy != nil {
+	if o != nil && o.IscsiAdapterPolicy.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetIscsiAdapterPolicy gets a reference to the given VnicIscsiAdapterPolicyInventoryRelationship and assigns it to the IscsiAdapterPolicy field.
+// SetIscsiAdapterPolicy gets a reference to the given NullableVnicIscsiAdapterPolicyInventoryRelationship and assigns it to the IscsiAdapterPolicy field.
 func (o *VnicIscsiBootPolicyInventory) SetIscsiAdapterPolicy(v VnicIscsiAdapterPolicyInventoryRelationship) {
-	o.IscsiAdapterPolicy = &v
+	o.IscsiAdapterPolicy.Set(&v)
 }
 
-// GetPrimaryTargetPolicy returns the PrimaryTargetPolicy field value if set, zero value otherwise.
+// SetIscsiAdapterPolicyNil sets the value for IscsiAdapterPolicy to be an explicit nil
+func (o *VnicIscsiBootPolicyInventory) SetIscsiAdapterPolicyNil() {
+	o.IscsiAdapterPolicy.Set(nil)
+}
+
+// UnsetIscsiAdapterPolicy ensures that no value is present for IscsiAdapterPolicy, not even an explicit nil
+func (o *VnicIscsiBootPolicyInventory) UnsetIscsiAdapterPolicy() {
+	o.IscsiAdapterPolicy.Unset()
+}
+
+// GetPrimaryTargetPolicy returns the PrimaryTargetPolicy field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *VnicIscsiBootPolicyInventory) GetPrimaryTargetPolicy() VnicIscsiStaticTargetPolicyInventoryRelationship {
-	if o == nil || o.PrimaryTargetPolicy == nil {
+	if o == nil || IsNil(o.PrimaryTargetPolicy.Get()) {
 		var ret VnicIscsiStaticTargetPolicyInventoryRelationship
 		return ret
 	}
-	return *o.PrimaryTargetPolicy
+	return *o.PrimaryTargetPolicy.Get()
 }
 
 // GetPrimaryTargetPolicyOk returns a tuple with the PrimaryTargetPolicy field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *VnicIscsiBootPolicyInventory) GetPrimaryTargetPolicyOk() (*VnicIscsiStaticTargetPolicyInventoryRelationship, bool) {
-	if o == nil || o.PrimaryTargetPolicy == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.PrimaryTargetPolicy, true
+	return o.PrimaryTargetPolicy.Get(), o.PrimaryTargetPolicy.IsSet()
 }
 
 // HasPrimaryTargetPolicy returns a boolean if a field has been set.
 func (o *VnicIscsiBootPolicyInventory) HasPrimaryTargetPolicy() bool {
-	if o != nil && o.PrimaryTargetPolicy != nil {
+	if o != nil && o.PrimaryTargetPolicy.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetPrimaryTargetPolicy gets a reference to the given VnicIscsiStaticTargetPolicyInventoryRelationship and assigns it to the PrimaryTargetPolicy field.
+// SetPrimaryTargetPolicy gets a reference to the given NullableVnicIscsiStaticTargetPolicyInventoryRelationship and assigns it to the PrimaryTargetPolicy field.
 func (o *VnicIscsiBootPolicyInventory) SetPrimaryTargetPolicy(v VnicIscsiStaticTargetPolicyInventoryRelationship) {
-	o.PrimaryTargetPolicy = &v
+	o.PrimaryTargetPolicy.Set(&v)
 }
 
-// GetSecondaryTargetPolicy returns the SecondaryTargetPolicy field value if set, zero value otherwise.
+// SetPrimaryTargetPolicyNil sets the value for PrimaryTargetPolicy to be an explicit nil
+func (o *VnicIscsiBootPolicyInventory) SetPrimaryTargetPolicyNil() {
+	o.PrimaryTargetPolicy.Set(nil)
+}
+
+// UnsetPrimaryTargetPolicy ensures that no value is present for PrimaryTargetPolicy, not even an explicit nil
+func (o *VnicIscsiBootPolicyInventory) UnsetPrimaryTargetPolicy() {
+	o.PrimaryTargetPolicy.Unset()
+}
+
+// GetSecondaryTargetPolicy returns the SecondaryTargetPolicy field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *VnicIscsiBootPolicyInventory) GetSecondaryTargetPolicy() VnicIscsiStaticTargetPolicyInventoryRelationship {
-	if o == nil || o.SecondaryTargetPolicy == nil {
+	if o == nil || IsNil(o.SecondaryTargetPolicy.Get()) {
 		var ret VnicIscsiStaticTargetPolicyInventoryRelationship
 		return ret
 	}
-	return *o.SecondaryTargetPolicy
+	return *o.SecondaryTargetPolicy.Get()
 }
 
 // GetSecondaryTargetPolicyOk returns a tuple with the SecondaryTargetPolicy field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *VnicIscsiBootPolicyInventory) GetSecondaryTargetPolicyOk() (*VnicIscsiStaticTargetPolicyInventoryRelationship, bool) {
-	if o == nil || o.SecondaryTargetPolicy == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.SecondaryTargetPolicy, true
+	return o.SecondaryTargetPolicy.Get(), o.SecondaryTargetPolicy.IsSet()
 }
 
 // HasSecondaryTargetPolicy returns a boolean if a field has been set.
 func (o *VnicIscsiBootPolicyInventory) HasSecondaryTargetPolicy() bool {
-	if o != nil && o.SecondaryTargetPolicy != nil {
+	if o != nil && o.SecondaryTargetPolicy.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetSecondaryTargetPolicy gets a reference to the given VnicIscsiStaticTargetPolicyInventoryRelationship and assigns it to the SecondaryTargetPolicy field.
+// SetSecondaryTargetPolicy gets a reference to the given NullableVnicIscsiStaticTargetPolicyInventoryRelationship and assigns it to the SecondaryTargetPolicy field.
 func (o *VnicIscsiBootPolicyInventory) SetSecondaryTargetPolicy(v VnicIscsiStaticTargetPolicyInventoryRelationship) {
-	o.SecondaryTargetPolicy = &v
+	o.SecondaryTargetPolicy.Set(&v)
 }
 
-// GetTargetMo returns the TargetMo field value if set, zero value otherwise.
+// SetSecondaryTargetPolicyNil sets the value for SecondaryTargetPolicy to be an explicit nil
+func (o *VnicIscsiBootPolicyInventory) SetSecondaryTargetPolicyNil() {
+	o.SecondaryTargetPolicy.Set(nil)
+}
+
+// UnsetSecondaryTargetPolicy ensures that no value is present for SecondaryTargetPolicy, not even an explicit nil
+func (o *VnicIscsiBootPolicyInventory) UnsetSecondaryTargetPolicy() {
+	o.SecondaryTargetPolicy.Unset()
+}
+
+// GetTargetMo returns the TargetMo field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *VnicIscsiBootPolicyInventory) GetTargetMo() MoBaseMoRelationship {
-	if o == nil || o.TargetMo == nil {
+	if o == nil || IsNil(o.TargetMo.Get()) {
 		var ret MoBaseMoRelationship
 		return ret
 	}
-	return *o.TargetMo
+	return *o.TargetMo.Get()
 }
 
 // GetTargetMoOk returns a tuple with the TargetMo field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *VnicIscsiBootPolicyInventory) GetTargetMoOk() (*MoBaseMoRelationship, bool) {
-	if o == nil || o.TargetMo == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.TargetMo, true
+	return o.TargetMo.Get(), o.TargetMo.IsSet()
 }
 
 // HasTargetMo returns a boolean if a field has been set.
 func (o *VnicIscsiBootPolicyInventory) HasTargetMo() bool {
-	if o != nil && o.TargetMo != nil {
+	if o != nil && o.TargetMo.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetTargetMo gets a reference to the given MoBaseMoRelationship and assigns it to the TargetMo field.
+// SetTargetMo gets a reference to the given NullableMoBaseMoRelationship and assigns it to the TargetMo field.
 func (o *VnicIscsiBootPolicyInventory) SetTargetMo(v MoBaseMoRelationship) {
-	o.TargetMo = &v
+	o.TargetMo.Set(&v)
+}
+
+// SetTargetMoNil sets the value for TargetMo to be an explicit nil
+func (o *VnicIscsiBootPolicyInventory) SetTargetMoNil() {
+	o.TargetMo.Set(nil)
+}
+
+// UnsetTargetMo ensures that no value is present for TargetMo, not even an explicit nil
+func (o *VnicIscsiBootPolicyInventory) UnsetTargetMo() {
+	o.TargetMo.Unset()
 }
 
 func (o VnicIscsiBootPolicyInventory) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o VnicIscsiBootPolicyInventory) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedPolicyAbstractPolicyInventory, errPolicyAbstractPolicyInventory := json.Marshal(o.PolicyAbstractPolicyInventory)
 	if errPolicyAbstractPolicyInventory != nil {
-		return []byte{}, errPolicyAbstractPolicyInventory
+		return map[string]interface{}{}, errPolicyAbstractPolicyInventory
 	}
 	errPolicyAbstractPolicyInventory = json.Unmarshal([]byte(serializedPolicyAbstractPolicyInventory), &toSerialize)
 	if errPolicyAbstractPolicyInventory != nil {
-		return []byte{}, errPolicyAbstractPolicyInventory
+		return map[string]interface{}{}, errPolicyAbstractPolicyInventory
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.AutoTargetvendorName != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.AutoTargetvendorName) {
 		toSerialize["AutoTargetvendorName"] = o.AutoTargetvendorName
 	}
 	if o.Chap.IsSet() {
 		toSerialize["Chap"] = o.Chap.Get()
 	}
-	if o.InitiatorIpSource != nil {
+	if !IsNil(o.InitiatorIpSource) {
 		toSerialize["InitiatorIpSource"] = o.InitiatorIpSource
 	}
-	if o.InitiatorStaticIpV4Address != nil {
+	if !IsNil(o.InitiatorStaticIpV4Address) {
 		toSerialize["InitiatorStaticIpV4Address"] = o.InitiatorStaticIpV4Address
 	}
 	if o.InitiatorStaticIpV4Config.IsSet() {
@@ -567,33 +630,55 @@ func (o VnicIscsiBootPolicyInventory) MarshalJSON() ([]byte, error) {
 	if o.MutualChap.IsSet() {
 		toSerialize["MutualChap"] = o.MutualChap.Get()
 	}
-	if o.TargetSourceType != nil {
+	if !IsNil(o.TargetSourceType) {
 		toSerialize["TargetSourceType"] = o.TargetSourceType
 	}
-	if o.InitiatorIpPool != nil {
-		toSerialize["InitiatorIpPool"] = o.InitiatorIpPool
+	if o.InitiatorIpPool.IsSet() {
+		toSerialize["InitiatorIpPool"] = o.InitiatorIpPool.Get()
 	}
-	if o.IscsiAdapterPolicy != nil {
-		toSerialize["IscsiAdapterPolicy"] = o.IscsiAdapterPolicy
+	if o.IscsiAdapterPolicy.IsSet() {
+		toSerialize["IscsiAdapterPolicy"] = o.IscsiAdapterPolicy.Get()
 	}
-	if o.PrimaryTargetPolicy != nil {
-		toSerialize["PrimaryTargetPolicy"] = o.PrimaryTargetPolicy
+	if o.PrimaryTargetPolicy.IsSet() {
+		toSerialize["PrimaryTargetPolicy"] = o.PrimaryTargetPolicy.Get()
 	}
-	if o.SecondaryTargetPolicy != nil {
-		toSerialize["SecondaryTargetPolicy"] = o.SecondaryTargetPolicy
+	if o.SecondaryTargetPolicy.IsSet() {
+		toSerialize["SecondaryTargetPolicy"] = o.SecondaryTargetPolicy.Get()
 	}
-	if o.TargetMo != nil {
-		toSerialize["TargetMo"] = o.TargetMo
+	if o.TargetMo.IsSet() {
+		toSerialize["TargetMo"] = o.TargetMo.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *VnicIscsiBootPolicyInventory) UnmarshalJSON(bytes []byte) (err error) {
+func (o *VnicIscsiBootPolicyInventory) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type VnicIscsiBootPolicyInventoryWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -609,17 +694,17 @@ func (o *VnicIscsiBootPolicyInventory) UnmarshalJSON(bytes []byte) (err error) {
 		InitiatorStaticIpV4Config  NullableIppoolIpV4Config     `json:"InitiatorStaticIpV4Config,omitempty"`
 		MutualChap                 NullableVnicIscsiAuthProfile `json:"MutualChap,omitempty"`
 		// Source Type of Targets - Auto/Static. * `Static` - Type indicates that static target interface is assigned to iSCSI boot. * `Auto` - Type indicates that the system selects the target interface automatically during iSCSI boot.
-		TargetSourceType      *string                                           `json:"TargetSourceType,omitempty"`
-		InitiatorIpPool       *IppoolPoolRelationship                           `json:"InitiatorIpPool,omitempty"`
-		IscsiAdapterPolicy    *VnicIscsiAdapterPolicyInventoryRelationship      `json:"IscsiAdapterPolicy,omitempty"`
-		PrimaryTargetPolicy   *VnicIscsiStaticTargetPolicyInventoryRelationship `json:"PrimaryTargetPolicy,omitempty"`
-		SecondaryTargetPolicy *VnicIscsiStaticTargetPolicyInventoryRelationship `json:"SecondaryTargetPolicy,omitempty"`
-		TargetMo              *MoBaseMoRelationship                             `json:"TargetMo,omitempty"`
+		TargetSourceType      *string                                                  `json:"TargetSourceType,omitempty"`
+		InitiatorIpPool       NullableIppoolPoolRelationship                           `json:"InitiatorIpPool,omitempty"`
+		IscsiAdapterPolicy    NullableVnicIscsiAdapterPolicyInventoryRelationship      `json:"IscsiAdapterPolicy,omitempty"`
+		PrimaryTargetPolicy   NullableVnicIscsiStaticTargetPolicyInventoryRelationship `json:"PrimaryTargetPolicy,omitempty"`
+		SecondaryTargetPolicy NullableVnicIscsiStaticTargetPolicyInventoryRelationship `json:"SecondaryTargetPolicy,omitempty"`
+		TargetMo              NullableMoBaseMoRelationship                             `json:"TargetMo,omitempty"`
 	}
 
 	varVnicIscsiBootPolicyInventoryWithoutEmbeddedStruct := VnicIscsiBootPolicyInventoryWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varVnicIscsiBootPolicyInventoryWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varVnicIscsiBootPolicyInventoryWithoutEmbeddedStruct)
 	if err == nil {
 		varVnicIscsiBootPolicyInventory := _VnicIscsiBootPolicyInventory{}
 		varVnicIscsiBootPolicyInventory.ClassId = varVnicIscsiBootPolicyInventoryWithoutEmbeddedStruct.ClassId
@@ -643,7 +728,7 @@ func (o *VnicIscsiBootPolicyInventory) UnmarshalJSON(bytes []byte) (err error) {
 
 	varVnicIscsiBootPolicyInventory := _VnicIscsiBootPolicyInventory{}
 
-	err = json.Unmarshal(bytes, &varVnicIscsiBootPolicyInventory)
+	err = json.Unmarshal(data, &varVnicIscsiBootPolicyInventory)
 	if err == nil {
 		o.PolicyAbstractPolicyInventory = varVnicIscsiBootPolicyInventory.PolicyAbstractPolicyInventory
 	} else {
@@ -652,7 +737,7 @@ func (o *VnicIscsiBootPolicyInventory) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "AutoTargetvendorName")

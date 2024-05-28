@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
+	"strconv"
 	"strings"
 	"time"
 
@@ -540,7 +541,7 @@ func resourceSchedulerTaskSchedule() *schema.Resource {
 				},
 			},
 			"type": {
-				Description:  "An Enum describing the type of scheduler to use.\n* `None` - No value was set for the schedule type (Enum value None).\n* `OneTime` - Define a one-time task execution time that will not automatically repeat.\n* `Recurring` - Specify a recurring task cadence based on a predefined pattern, such as daily, weekly, monthly, yearly, or every <interval> pattern.",
+				Description:  "An Enum describing the type of scheduler to use.\n* `None` - No value was set for the schedule type (Enum value None).\n* `OneTime` - Define a one-time task execution time that will not automatically repeat.\n* `Recurring` - Specify a recurring task cadence based on a predefined pattern, such as daily, weekly, monthly, yearly, or every <interval> pattern. This option is not currently supported.",
 				Type:         schema.TypeString,
 				ValidateFunc: validation.StringInSlice([]string{"None", "OneTime", "Recurring"}, false),
 				Optional:     true,
@@ -966,14 +967,25 @@ func resourceSchedulerTaskScheduleCreate(c context.Context, d *schema.ResourceDa
 		}
 		return diag.Errorf("error occurred while creating SchedulerTaskSchedule: %s", responseErr.Error())
 	}
-	log.Printf("Moid: %s", resultMo.GetMoid())
-	d.SetId(resultMo.GetMoid())
+	if len(resultMo.GetMoid()) != 0 {
+		log.Printf("Moid: %s", resultMo.GetMoid())
+		d.SetId(resultMo.GetMoid())
+	} else {
+		d.SetId(strconv.FormatInt(time.Now().Unix(), 10))
+		log.Printf("Mo: %v", resultMo)
+	}
+	if len(resultMo.GetMoid()) == 0 {
+		return de
+	}
 	return append(de, resourceSchedulerTaskScheduleRead(c, d, meta)...)
 }
 
 func resourceSchedulerTaskScheduleRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	var de diag.Diagnostics
+	if len(d.Id()) == 0 {
+		return de
+	}
 	conn := meta.(*Config)
 	r := conn.ApiClient.SchedulerApi.GetSchedulerTaskScheduleByMoid(conn.ctx, d.Id())
 	s, _, responseErr := r.Execute()

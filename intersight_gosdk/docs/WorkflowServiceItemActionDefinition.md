@@ -24,8 +24,8 @@ Name | Type | Description | Notes
 **ValidationInformation** | Pointer to [**NullableWorkflowValidationInformation**](WorkflowValidationInformation.md) |  | [optional] 
 **ValidationWorkflows** | Pointer to [**[]WorkflowServiceItemActionWorkflowDefinition**](WorkflowServiceItemActionWorkflowDefinition.md) |  | [optional] 
 **AssociatedRoles** | Pointer to [**[]IamRoleRelationship**](IamRoleRelationship.md) | An array of relationships to iamRole resources. | [optional] 
-**ServiceItemDefinition** | Pointer to [**WorkflowServiceItemDefinitionRelationship**](WorkflowServiceItemDefinitionRelationship.md) |  | [optional] 
-**WorkflowDefinition** | Pointer to [**WorkflowWorkflowDefinitionRelationship**](WorkflowWorkflowDefinitionRelationship.md) |  | [optional] 
+**ServiceItemDefinition** | Pointer to [**NullableWorkflowServiceItemDefinitionRelationship**](WorkflowServiceItemDefinitionRelationship.md) |  | [optional] 
+**WorkflowDefinition** | Pointer to [**NullableWorkflowWorkflowDefinitionRelationship**](WorkflowWorkflowDefinitionRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -671,6 +671,16 @@ SetServiceItemDefinition sets ServiceItemDefinition field to given value.
 
 HasServiceItemDefinition returns a boolean if a field has been set.
 
+### SetServiceItemDefinitionNil
+
+`func (o *WorkflowServiceItemActionDefinition) SetServiceItemDefinitionNil(b bool)`
+
+ SetServiceItemDefinitionNil sets the value for ServiceItemDefinition to be an explicit nil
+
+### UnsetServiceItemDefinition
+`func (o *WorkflowServiceItemActionDefinition) UnsetServiceItemDefinition()`
+
+UnsetServiceItemDefinition ensures that no value is present for ServiceItemDefinition, not even an explicit nil
 ### GetWorkflowDefinition
 
 `func (o *WorkflowServiceItemActionDefinition) GetWorkflowDefinition() WorkflowWorkflowDefinitionRelationship`
@@ -696,6 +706,16 @@ SetWorkflowDefinition sets WorkflowDefinition field to given value.
 
 HasWorkflowDefinition returns a boolean if a field has been set.
 
+### SetWorkflowDefinitionNil
+
+`func (o *WorkflowServiceItemActionDefinition) SetWorkflowDefinitionNil(b bool)`
+
+ SetWorkflowDefinitionNil sets the value for WorkflowDefinition to be an explicit nil
+
+### UnsetWorkflowDefinition
+`func (o *WorkflowServiceItemActionDefinition) UnsetWorkflowDefinition()`
+
+UnsetWorkflowDefinition ensures that no value is present for WorkflowDefinition, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

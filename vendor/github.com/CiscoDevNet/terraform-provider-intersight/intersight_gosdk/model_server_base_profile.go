@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the ServerBaseProfile type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ServerBaseProfile{}
 
 // ServerBaseProfile A profile specifying configuration settings for a physical server.
 type ServerBaseProfile struct {
@@ -27,9 +31,9 @@ type ServerBaseProfile struct {
 	// The platform for which the server profile is applicable. It can either be a server that is operating in standalone mode or which is attached to a Fabric Interconnect managed by Intersight. * `Standalone` - Servers which are operating in standalone mode i.e. not connected to a Fabric Interconnected. * `FIAttached` - Servers which are connected to a Fabric Interconnect that is managed by Intersight.
 	TargetPlatform *string `json:"TargetPlatform,omitempty"`
 	// UUID address allocation type selected to assign an UUID address for the server. * `NONE` - The user did not assign any UUID address. * `STATIC` - The user assigns a static UUID address. * `POOL` - The user selects a pool from which the address will be leased.
-	UuidAddressType      *string                         `json:"UuidAddressType,omitempty"`
-	ConfigResult         *ServerConfigResultRelationship `json:"ConfigResult,omitempty"`
-	UuidPool             *UuidpoolPoolRelationship       `json:"UuidPool,omitempty"`
+	UuidAddressType      *string                                `json:"UuidAddressType,omitempty"`
+	ConfigResult         NullableServerConfigResultRelationship `json:"ConfigResult,omitempty"`
+	UuidPool             NullableUuidpoolPoolRelationship       `json:"UuidPool,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -116,7 +120,7 @@ func (o *ServerBaseProfile) SetObjectType(v string) {
 
 // GetTargetPlatform returns the TargetPlatform field value if set, zero value otherwise.
 func (o *ServerBaseProfile) GetTargetPlatform() string {
-	if o == nil || o.TargetPlatform == nil {
+	if o == nil || IsNil(o.TargetPlatform) {
 		var ret string
 		return ret
 	}
@@ -126,7 +130,7 @@ func (o *ServerBaseProfile) GetTargetPlatform() string {
 // GetTargetPlatformOk returns a tuple with the TargetPlatform field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ServerBaseProfile) GetTargetPlatformOk() (*string, bool) {
-	if o == nil || o.TargetPlatform == nil {
+	if o == nil || IsNil(o.TargetPlatform) {
 		return nil, false
 	}
 	return o.TargetPlatform, true
@@ -134,7 +138,7 @@ func (o *ServerBaseProfile) GetTargetPlatformOk() (*string, bool) {
 
 // HasTargetPlatform returns a boolean if a field has been set.
 func (o *ServerBaseProfile) HasTargetPlatform() bool {
-	if o != nil && o.TargetPlatform != nil {
+	if o != nil && !IsNil(o.TargetPlatform) {
 		return true
 	}
 
@@ -148,7 +152,7 @@ func (o *ServerBaseProfile) SetTargetPlatform(v string) {
 
 // GetUuidAddressType returns the UuidAddressType field value if set, zero value otherwise.
 func (o *ServerBaseProfile) GetUuidAddressType() string {
-	if o == nil || o.UuidAddressType == nil {
+	if o == nil || IsNil(o.UuidAddressType) {
 		var ret string
 		return ret
 	}
@@ -158,7 +162,7 @@ func (o *ServerBaseProfile) GetUuidAddressType() string {
 // GetUuidAddressTypeOk returns a tuple with the UuidAddressType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ServerBaseProfile) GetUuidAddressTypeOk() (*string, bool) {
-	if o == nil || o.UuidAddressType == nil {
+	if o == nil || IsNil(o.UuidAddressType) {
 		return nil, false
 	}
 	return o.UuidAddressType, true
@@ -166,7 +170,7 @@ func (o *ServerBaseProfile) GetUuidAddressTypeOk() (*string, bool) {
 
 // HasUuidAddressType returns a boolean if a field has been set.
 func (o *ServerBaseProfile) HasUuidAddressType() bool {
-	if o != nil && o.UuidAddressType != nil {
+	if o != nil && !IsNil(o.UuidAddressType) {
 		return true
 	}
 
@@ -178,107 +182,155 @@ func (o *ServerBaseProfile) SetUuidAddressType(v string) {
 	o.UuidAddressType = &v
 }
 
-// GetConfigResult returns the ConfigResult field value if set, zero value otherwise.
+// GetConfigResult returns the ConfigResult field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ServerBaseProfile) GetConfigResult() ServerConfigResultRelationship {
-	if o == nil || o.ConfigResult == nil {
+	if o == nil || IsNil(o.ConfigResult.Get()) {
 		var ret ServerConfigResultRelationship
 		return ret
 	}
-	return *o.ConfigResult
+	return *o.ConfigResult.Get()
 }
 
 // GetConfigResultOk returns a tuple with the ConfigResult field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ServerBaseProfile) GetConfigResultOk() (*ServerConfigResultRelationship, bool) {
-	if o == nil || o.ConfigResult == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.ConfigResult, true
+	return o.ConfigResult.Get(), o.ConfigResult.IsSet()
 }
 
 // HasConfigResult returns a boolean if a field has been set.
 func (o *ServerBaseProfile) HasConfigResult() bool {
-	if o != nil && o.ConfigResult != nil {
+	if o != nil && o.ConfigResult.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetConfigResult gets a reference to the given ServerConfigResultRelationship and assigns it to the ConfigResult field.
+// SetConfigResult gets a reference to the given NullableServerConfigResultRelationship and assigns it to the ConfigResult field.
 func (o *ServerBaseProfile) SetConfigResult(v ServerConfigResultRelationship) {
-	o.ConfigResult = &v
+	o.ConfigResult.Set(&v)
 }
 
-// GetUuidPool returns the UuidPool field value if set, zero value otherwise.
+// SetConfigResultNil sets the value for ConfigResult to be an explicit nil
+func (o *ServerBaseProfile) SetConfigResultNil() {
+	o.ConfigResult.Set(nil)
+}
+
+// UnsetConfigResult ensures that no value is present for ConfigResult, not even an explicit nil
+func (o *ServerBaseProfile) UnsetConfigResult() {
+	o.ConfigResult.Unset()
+}
+
+// GetUuidPool returns the UuidPool field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ServerBaseProfile) GetUuidPool() UuidpoolPoolRelationship {
-	if o == nil || o.UuidPool == nil {
+	if o == nil || IsNil(o.UuidPool.Get()) {
 		var ret UuidpoolPoolRelationship
 		return ret
 	}
-	return *o.UuidPool
+	return *o.UuidPool.Get()
 }
 
 // GetUuidPoolOk returns a tuple with the UuidPool field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ServerBaseProfile) GetUuidPoolOk() (*UuidpoolPoolRelationship, bool) {
-	if o == nil || o.UuidPool == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.UuidPool, true
+	return o.UuidPool.Get(), o.UuidPool.IsSet()
 }
 
 // HasUuidPool returns a boolean if a field has been set.
 func (o *ServerBaseProfile) HasUuidPool() bool {
-	if o != nil && o.UuidPool != nil {
+	if o != nil && o.UuidPool.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetUuidPool gets a reference to the given UuidpoolPoolRelationship and assigns it to the UuidPool field.
+// SetUuidPool gets a reference to the given NullableUuidpoolPoolRelationship and assigns it to the UuidPool field.
 func (o *ServerBaseProfile) SetUuidPool(v UuidpoolPoolRelationship) {
-	o.UuidPool = &v
+	o.UuidPool.Set(&v)
+}
+
+// SetUuidPoolNil sets the value for UuidPool to be an explicit nil
+func (o *ServerBaseProfile) SetUuidPoolNil() {
+	o.UuidPool.Set(nil)
+}
+
+// UnsetUuidPool ensures that no value is present for UuidPool, not even an explicit nil
+func (o *ServerBaseProfile) UnsetUuidPool() {
+	o.UuidPool.Unset()
 }
 
 func (o ServerBaseProfile) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o ServerBaseProfile) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedPolicyAbstractConfigProfile, errPolicyAbstractConfigProfile := json.Marshal(o.PolicyAbstractConfigProfile)
 	if errPolicyAbstractConfigProfile != nil {
-		return []byte{}, errPolicyAbstractConfigProfile
+		return map[string]interface{}{}, errPolicyAbstractConfigProfile
 	}
 	errPolicyAbstractConfigProfile = json.Unmarshal([]byte(serializedPolicyAbstractConfigProfile), &toSerialize)
 	if errPolicyAbstractConfigProfile != nil {
-		return []byte{}, errPolicyAbstractConfigProfile
+		return map[string]interface{}{}, errPolicyAbstractConfigProfile
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.TargetPlatform != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.TargetPlatform) {
 		toSerialize["TargetPlatform"] = o.TargetPlatform
 	}
-	if o.UuidAddressType != nil {
+	if !IsNil(o.UuidAddressType) {
 		toSerialize["UuidAddressType"] = o.UuidAddressType
 	}
-	if o.ConfigResult != nil {
-		toSerialize["ConfigResult"] = o.ConfigResult
+	if o.ConfigResult.IsSet() {
+		toSerialize["ConfigResult"] = o.ConfigResult.Get()
 	}
-	if o.UuidPool != nil {
-		toSerialize["UuidPool"] = o.UuidPool
+	if o.UuidPool.IsSet() {
+		toSerialize["UuidPool"] = o.UuidPool.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *ServerBaseProfile) UnmarshalJSON(bytes []byte) (err error) {
+func (o *ServerBaseProfile) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type ServerBaseProfileWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type.
 		ClassId string `json:"ClassId"`
@@ -287,14 +339,14 @@ func (o *ServerBaseProfile) UnmarshalJSON(bytes []byte) (err error) {
 		// The platform for which the server profile is applicable. It can either be a server that is operating in standalone mode or which is attached to a Fabric Interconnect managed by Intersight. * `Standalone` - Servers which are operating in standalone mode i.e. not connected to a Fabric Interconnected. * `FIAttached` - Servers which are connected to a Fabric Interconnect that is managed by Intersight.
 		TargetPlatform *string `json:"TargetPlatform,omitempty"`
 		// UUID address allocation type selected to assign an UUID address for the server. * `NONE` - The user did not assign any UUID address. * `STATIC` - The user assigns a static UUID address. * `POOL` - The user selects a pool from which the address will be leased.
-		UuidAddressType *string                         `json:"UuidAddressType,omitempty"`
-		ConfigResult    *ServerConfigResultRelationship `json:"ConfigResult,omitempty"`
-		UuidPool        *UuidpoolPoolRelationship       `json:"UuidPool,omitempty"`
+		UuidAddressType *string                                `json:"UuidAddressType,omitempty"`
+		ConfigResult    NullableServerConfigResultRelationship `json:"ConfigResult,omitempty"`
+		UuidPool        NullableUuidpoolPoolRelationship       `json:"UuidPool,omitempty"`
 	}
 
 	varServerBaseProfileWithoutEmbeddedStruct := ServerBaseProfileWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varServerBaseProfileWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varServerBaseProfileWithoutEmbeddedStruct)
 	if err == nil {
 		varServerBaseProfile := _ServerBaseProfile{}
 		varServerBaseProfile.ClassId = varServerBaseProfileWithoutEmbeddedStruct.ClassId
@@ -310,7 +362,7 @@ func (o *ServerBaseProfile) UnmarshalJSON(bytes []byte) (err error) {
 
 	varServerBaseProfile := _ServerBaseProfile{}
 
-	err = json.Unmarshal(bytes, &varServerBaseProfile)
+	err = json.Unmarshal(data, &varServerBaseProfile)
 	if err == nil {
 		o.PolicyAbstractConfigProfile = varServerBaseProfile.PolicyAbstractConfigProfile
 	} else {
@@ -319,7 +371,7 @@ func (o *ServerBaseProfile) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "TargetPlatform")

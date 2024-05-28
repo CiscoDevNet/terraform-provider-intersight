@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the StorageFlexFlashVirtualDrive type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &StorageFlexFlashVirtualDrive{}
 
 // StorageFlexFlashVirtualDrive Virtual Drive repersenting a SD Card.
 type StorageFlexFlashVirtualDrive struct {
@@ -35,10 +39,10 @@ type StorageFlexFlashVirtualDrive struct {
 	// Size of virtual drive on the flex controller.
 	Size *string `json:"Size,omitempty"`
 	// Virtual drive on the flex flash controller.
-	VirtualDrive               *string                                 `json:"VirtualDrive,omitempty"`
-	InventoryDeviceInfo        *InventoryDeviceInfoRelationship        `json:"InventoryDeviceInfo,omitempty"`
-	RegisteredDevice           *AssetDeviceRegistrationRelationship    `json:"RegisteredDevice,omitempty"`
-	StorageFlexFlashController *StorageFlexFlashControllerRelationship `json:"StorageFlexFlashController,omitempty"`
+	VirtualDrive               *string                                        `json:"VirtualDrive,omitempty"`
+	InventoryDeviceInfo        NullableInventoryDeviceInfoRelationship        `json:"InventoryDeviceInfo,omitempty"`
+	RegisteredDevice           NullableAssetDeviceRegistrationRelationship    `json:"RegisteredDevice,omitempty"`
+	StorageFlexFlashController NullableStorageFlexFlashControllerRelationship `json:"StorageFlexFlashController,omitempty"`
 	AdditionalProperties       map[string]interface{}
 }
 
@@ -117,7 +121,7 @@ func (o *StorageFlexFlashVirtualDrive) SetObjectType(v string) {
 
 // GetDriveScope returns the DriveScope field value if set, zero value otherwise.
 func (o *StorageFlexFlashVirtualDrive) GetDriveScope() string {
-	if o == nil || o.DriveScope == nil {
+	if o == nil || IsNil(o.DriveScope) {
 		var ret string
 		return ret
 	}
@@ -127,7 +131,7 @@ func (o *StorageFlexFlashVirtualDrive) GetDriveScope() string {
 // GetDriveScopeOk returns a tuple with the DriveScope field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageFlexFlashVirtualDrive) GetDriveScopeOk() (*string, bool) {
-	if o == nil || o.DriveScope == nil {
+	if o == nil || IsNil(o.DriveScope) {
 		return nil, false
 	}
 	return o.DriveScope, true
@@ -135,7 +139,7 @@ func (o *StorageFlexFlashVirtualDrive) GetDriveScopeOk() (*string, bool) {
 
 // HasDriveScope returns a boolean if a field has been set.
 func (o *StorageFlexFlashVirtualDrive) HasDriveScope() bool {
-	if o != nil && o.DriveScope != nil {
+	if o != nil && !IsNil(o.DriveScope) {
 		return true
 	}
 
@@ -149,7 +153,7 @@ func (o *StorageFlexFlashVirtualDrive) SetDriveScope(v string) {
 
 // GetDriveStatus returns the DriveStatus field value if set, zero value otherwise.
 func (o *StorageFlexFlashVirtualDrive) GetDriveStatus() string {
-	if o == nil || o.DriveStatus == nil {
+	if o == nil || IsNil(o.DriveStatus) {
 		var ret string
 		return ret
 	}
@@ -159,7 +163,7 @@ func (o *StorageFlexFlashVirtualDrive) GetDriveStatus() string {
 // GetDriveStatusOk returns a tuple with the DriveStatus field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageFlexFlashVirtualDrive) GetDriveStatusOk() (*string, bool) {
-	if o == nil || o.DriveStatus == nil {
+	if o == nil || IsNil(o.DriveStatus) {
 		return nil, false
 	}
 	return o.DriveStatus, true
@@ -167,7 +171,7 @@ func (o *StorageFlexFlashVirtualDrive) GetDriveStatusOk() (*string, bool) {
 
 // HasDriveStatus returns a boolean if a field has been set.
 func (o *StorageFlexFlashVirtualDrive) HasDriveStatus() bool {
-	if o != nil && o.DriveStatus != nil {
+	if o != nil && !IsNil(o.DriveStatus) {
 		return true
 	}
 
@@ -181,7 +185,7 @@ func (o *StorageFlexFlashVirtualDrive) SetDriveStatus(v string) {
 
 // GetPartitionId returns the PartitionId field value if set, zero value otherwise.
 func (o *StorageFlexFlashVirtualDrive) GetPartitionId() string {
-	if o == nil || o.PartitionId == nil {
+	if o == nil || IsNil(o.PartitionId) {
 		var ret string
 		return ret
 	}
@@ -191,7 +195,7 @@ func (o *StorageFlexFlashVirtualDrive) GetPartitionId() string {
 // GetPartitionIdOk returns a tuple with the PartitionId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageFlexFlashVirtualDrive) GetPartitionIdOk() (*string, bool) {
-	if o == nil || o.PartitionId == nil {
+	if o == nil || IsNil(o.PartitionId) {
 		return nil, false
 	}
 	return o.PartitionId, true
@@ -199,7 +203,7 @@ func (o *StorageFlexFlashVirtualDrive) GetPartitionIdOk() (*string, bool) {
 
 // HasPartitionId returns a boolean if a field has been set.
 func (o *StorageFlexFlashVirtualDrive) HasPartitionId() bool {
-	if o != nil && o.PartitionId != nil {
+	if o != nil && !IsNil(o.PartitionId) {
 		return true
 	}
 
@@ -213,7 +217,7 @@ func (o *StorageFlexFlashVirtualDrive) SetPartitionId(v string) {
 
 // GetResidentImage returns the ResidentImage field value if set, zero value otherwise.
 func (o *StorageFlexFlashVirtualDrive) GetResidentImage() string {
-	if o == nil || o.ResidentImage == nil {
+	if o == nil || IsNil(o.ResidentImage) {
 		var ret string
 		return ret
 	}
@@ -223,7 +227,7 @@ func (o *StorageFlexFlashVirtualDrive) GetResidentImage() string {
 // GetResidentImageOk returns a tuple with the ResidentImage field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageFlexFlashVirtualDrive) GetResidentImageOk() (*string, bool) {
-	if o == nil || o.ResidentImage == nil {
+	if o == nil || IsNil(o.ResidentImage) {
 		return nil, false
 	}
 	return o.ResidentImage, true
@@ -231,7 +235,7 @@ func (o *StorageFlexFlashVirtualDrive) GetResidentImageOk() (*string, bool) {
 
 // HasResidentImage returns a boolean if a field has been set.
 func (o *StorageFlexFlashVirtualDrive) HasResidentImage() bool {
-	if o != nil && o.ResidentImage != nil {
+	if o != nil && !IsNil(o.ResidentImage) {
 		return true
 	}
 
@@ -245,7 +249,7 @@ func (o *StorageFlexFlashVirtualDrive) SetResidentImage(v string) {
 
 // GetSize returns the Size field value if set, zero value otherwise.
 func (o *StorageFlexFlashVirtualDrive) GetSize() string {
-	if o == nil || o.Size == nil {
+	if o == nil || IsNil(o.Size) {
 		var ret string
 		return ret
 	}
@@ -255,7 +259,7 @@ func (o *StorageFlexFlashVirtualDrive) GetSize() string {
 // GetSizeOk returns a tuple with the Size field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageFlexFlashVirtualDrive) GetSizeOk() (*string, bool) {
-	if o == nil || o.Size == nil {
+	if o == nil || IsNil(o.Size) {
 		return nil, false
 	}
 	return o.Size, true
@@ -263,7 +267,7 @@ func (o *StorageFlexFlashVirtualDrive) GetSizeOk() (*string, bool) {
 
 // HasSize returns a boolean if a field has been set.
 func (o *StorageFlexFlashVirtualDrive) HasSize() bool {
-	if o != nil && o.Size != nil {
+	if o != nil && !IsNil(o.Size) {
 		return true
 	}
 
@@ -277,7 +281,7 @@ func (o *StorageFlexFlashVirtualDrive) SetSize(v string) {
 
 // GetVirtualDrive returns the VirtualDrive field value if set, zero value otherwise.
 func (o *StorageFlexFlashVirtualDrive) GetVirtualDrive() string {
-	if o == nil || o.VirtualDrive == nil {
+	if o == nil || IsNil(o.VirtualDrive) {
 		var ret string
 		return ret
 	}
@@ -287,7 +291,7 @@ func (o *StorageFlexFlashVirtualDrive) GetVirtualDrive() string {
 // GetVirtualDriveOk returns a tuple with the VirtualDrive field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageFlexFlashVirtualDrive) GetVirtualDriveOk() (*string, bool) {
-	if o == nil || o.VirtualDrive == nil {
+	if o == nil || IsNil(o.VirtualDrive) {
 		return nil, false
 	}
 	return o.VirtualDrive, true
@@ -295,7 +299,7 @@ func (o *StorageFlexFlashVirtualDrive) GetVirtualDriveOk() (*string, bool) {
 
 // HasVirtualDrive returns a boolean if a field has been set.
 func (o *StorageFlexFlashVirtualDrive) HasVirtualDrive() bool {
-	if o != nil && o.VirtualDrive != nil {
+	if o != nil && !IsNil(o.VirtualDrive) {
 		return true
 	}
 
@@ -307,154 +311,213 @@ func (o *StorageFlexFlashVirtualDrive) SetVirtualDrive(v string) {
 	o.VirtualDrive = &v
 }
 
-// GetInventoryDeviceInfo returns the InventoryDeviceInfo field value if set, zero value otherwise.
+// GetInventoryDeviceInfo returns the InventoryDeviceInfo field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *StorageFlexFlashVirtualDrive) GetInventoryDeviceInfo() InventoryDeviceInfoRelationship {
-	if o == nil || o.InventoryDeviceInfo == nil {
+	if o == nil || IsNil(o.InventoryDeviceInfo.Get()) {
 		var ret InventoryDeviceInfoRelationship
 		return ret
 	}
-	return *o.InventoryDeviceInfo
+	return *o.InventoryDeviceInfo.Get()
 }
 
 // GetInventoryDeviceInfoOk returns a tuple with the InventoryDeviceInfo field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StorageFlexFlashVirtualDrive) GetInventoryDeviceInfoOk() (*InventoryDeviceInfoRelationship, bool) {
-	if o == nil || o.InventoryDeviceInfo == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.InventoryDeviceInfo, true
+	return o.InventoryDeviceInfo.Get(), o.InventoryDeviceInfo.IsSet()
 }
 
 // HasInventoryDeviceInfo returns a boolean if a field has been set.
 func (o *StorageFlexFlashVirtualDrive) HasInventoryDeviceInfo() bool {
-	if o != nil && o.InventoryDeviceInfo != nil {
+	if o != nil && o.InventoryDeviceInfo.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetInventoryDeviceInfo gets a reference to the given InventoryDeviceInfoRelationship and assigns it to the InventoryDeviceInfo field.
+// SetInventoryDeviceInfo gets a reference to the given NullableInventoryDeviceInfoRelationship and assigns it to the InventoryDeviceInfo field.
 func (o *StorageFlexFlashVirtualDrive) SetInventoryDeviceInfo(v InventoryDeviceInfoRelationship) {
-	o.InventoryDeviceInfo = &v
+	o.InventoryDeviceInfo.Set(&v)
 }
 
-// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise.
+// SetInventoryDeviceInfoNil sets the value for InventoryDeviceInfo to be an explicit nil
+func (o *StorageFlexFlashVirtualDrive) SetInventoryDeviceInfoNil() {
+	o.InventoryDeviceInfo.Set(nil)
+}
+
+// UnsetInventoryDeviceInfo ensures that no value is present for InventoryDeviceInfo, not even an explicit nil
+func (o *StorageFlexFlashVirtualDrive) UnsetInventoryDeviceInfo() {
+	o.InventoryDeviceInfo.Unset()
+}
+
+// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *StorageFlexFlashVirtualDrive) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil || IsNil(o.RegisteredDevice.Get()) {
 		var ret AssetDeviceRegistrationRelationship
 		return ret
 	}
-	return *o.RegisteredDevice
+	return *o.RegisteredDevice.Get()
 }
 
 // GetRegisteredDeviceOk returns a tuple with the RegisteredDevice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StorageFlexFlashVirtualDrive) GetRegisteredDeviceOk() (*AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.RegisteredDevice, true
+	return o.RegisteredDevice.Get(), o.RegisteredDevice.IsSet()
 }
 
 // HasRegisteredDevice returns a boolean if a field has been set.
 func (o *StorageFlexFlashVirtualDrive) HasRegisteredDevice() bool {
-	if o != nil && o.RegisteredDevice != nil {
+	if o != nil && o.RegisteredDevice.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRegisteredDevice gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
+// SetRegisteredDevice gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
 func (o *StorageFlexFlashVirtualDrive) SetRegisteredDevice(v AssetDeviceRegistrationRelationship) {
-	o.RegisteredDevice = &v
+	o.RegisteredDevice.Set(&v)
 }
 
-// GetStorageFlexFlashController returns the StorageFlexFlashController field value if set, zero value otherwise.
+// SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+func (o *StorageFlexFlashVirtualDrive) SetRegisteredDeviceNil() {
+	o.RegisteredDevice.Set(nil)
+}
+
+// UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
+func (o *StorageFlexFlashVirtualDrive) UnsetRegisteredDevice() {
+	o.RegisteredDevice.Unset()
+}
+
+// GetStorageFlexFlashController returns the StorageFlexFlashController field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *StorageFlexFlashVirtualDrive) GetStorageFlexFlashController() StorageFlexFlashControllerRelationship {
-	if o == nil || o.StorageFlexFlashController == nil {
+	if o == nil || IsNil(o.StorageFlexFlashController.Get()) {
 		var ret StorageFlexFlashControllerRelationship
 		return ret
 	}
-	return *o.StorageFlexFlashController
+	return *o.StorageFlexFlashController.Get()
 }
 
 // GetStorageFlexFlashControllerOk returns a tuple with the StorageFlexFlashController field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StorageFlexFlashVirtualDrive) GetStorageFlexFlashControllerOk() (*StorageFlexFlashControllerRelationship, bool) {
-	if o == nil || o.StorageFlexFlashController == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.StorageFlexFlashController, true
+	return o.StorageFlexFlashController.Get(), o.StorageFlexFlashController.IsSet()
 }
 
 // HasStorageFlexFlashController returns a boolean if a field has been set.
 func (o *StorageFlexFlashVirtualDrive) HasStorageFlexFlashController() bool {
-	if o != nil && o.StorageFlexFlashController != nil {
+	if o != nil && o.StorageFlexFlashController.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetStorageFlexFlashController gets a reference to the given StorageFlexFlashControllerRelationship and assigns it to the StorageFlexFlashController field.
+// SetStorageFlexFlashController gets a reference to the given NullableStorageFlexFlashControllerRelationship and assigns it to the StorageFlexFlashController field.
 func (o *StorageFlexFlashVirtualDrive) SetStorageFlexFlashController(v StorageFlexFlashControllerRelationship) {
-	o.StorageFlexFlashController = &v
+	o.StorageFlexFlashController.Set(&v)
+}
+
+// SetStorageFlexFlashControllerNil sets the value for StorageFlexFlashController to be an explicit nil
+func (o *StorageFlexFlashVirtualDrive) SetStorageFlexFlashControllerNil() {
+	o.StorageFlexFlashController.Set(nil)
+}
+
+// UnsetStorageFlexFlashController ensures that no value is present for StorageFlexFlashController, not even an explicit nil
+func (o *StorageFlexFlashVirtualDrive) UnsetStorageFlexFlashController() {
+	o.StorageFlexFlashController.Unset()
 }
 
 func (o StorageFlexFlashVirtualDrive) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o StorageFlexFlashVirtualDrive) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedEquipmentBase, errEquipmentBase := json.Marshal(o.EquipmentBase)
 	if errEquipmentBase != nil {
-		return []byte{}, errEquipmentBase
+		return map[string]interface{}{}, errEquipmentBase
 	}
 	errEquipmentBase = json.Unmarshal([]byte(serializedEquipmentBase), &toSerialize)
 	if errEquipmentBase != nil {
-		return []byte{}, errEquipmentBase
+		return map[string]interface{}{}, errEquipmentBase
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.DriveScope != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.DriveScope) {
 		toSerialize["DriveScope"] = o.DriveScope
 	}
-	if o.DriveStatus != nil {
+	if !IsNil(o.DriveStatus) {
 		toSerialize["DriveStatus"] = o.DriveStatus
 	}
-	if o.PartitionId != nil {
+	if !IsNil(o.PartitionId) {
 		toSerialize["PartitionId"] = o.PartitionId
 	}
-	if o.ResidentImage != nil {
+	if !IsNil(o.ResidentImage) {
 		toSerialize["ResidentImage"] = o.ResidentImage
 	}
-	if o.Size != nil {
+	if !IsNil(o.Size) {
 		toSerialize["Size"] = o.Size
 	}
-	if o.VirtualDrive != nil {
+	if !IsNil(o.VirtualDrive) {
 		toSerialize["VirtualDrive"] = o.VirtualDrive
 	}
-	if o.InventoryDeviceInfo != nil {
-		toSerialize["InventoryDeviceInfo"] = o.InventoryDeviceInfo
+	if o.InventoryDeviceInfo.IsSet() {
+		toSerialize["InventoryDeviceInfo"] = o.InventoryDeviceInfo.Get()
 	}
-	if o.RegisteredDevice != nil {
-		toSerialize["RegisteredDevice"] = o.RegisteredDevice
+	if o.RegisteredDevice.IsSet() {
+		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
 	}
-	if o.StorageFlexFlashController != nil {
-		toSerialize["StorageFlexFlashController"] = o.StorageFlexFlashController
+	if o.StorageFlexFlashController.IsSet() {
+		toSerialize["StorageFlexFlashController"] = o.StorageFlexFlashController.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *StorageFlexFlashVirtualDrive) UnmarshalJSON(bytes []byte) (err error) {
+func (o *StorageFlexFlashVirtualDrive) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type StorageFlexFlashVirtualDriveWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -471,15 +534,15 @@ func (o *StorageFlexFlashVirtualDrive) UnmarshalJSON(bytes []byte) (err error) {
 		// Size of virtual drive on the flex controller.
 		Size *string `json:"Size,omitempty"`
 		// Virtual drive on the flex flash controller.
-		VirtualDrive               *string                                 `json:"VirtualDrive,omitempty"`
-		InventoryDeviceInfo        *InventoryDeviceInfoRelationship        `json:"InventoryDeviceInfo,omitempty"`
-		RegisteredDevice           *AssetDeviceRegistrationRelationship    `json:"RegisteredDevice,omitempty"`
-		StorageFlexFlashController *StorageFlexFlashControllerRelationship `json:"StorageFlexFlashController,omitempty"`
+		VirtualDrive               *string                                        `json:"VirtualDrive,omitempty"`
+		InventoryDeviceInfo        NullableInventoryDeviceInfoRelationship        `json:"InventoryDeviceInfo,omitempty"`
+		RegisteredDevice           NullableAssetDeviceRegistrationRelationship    `json:"RegisteredDevice,omitempty"`
+		StorageFlexFlashController NullableStorageFlexFlashControllerRelationship `json:"StorageFlexFlashController,omitempty"`
 	}
 
 	varStorageFlexFlashVirtualDriveWithoutEmbeddedStruct := StorageFlexFlashVirtualDriveWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varStorageFlexFlashVirtualDriveWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varStorageFlexFlashVirtualDriveWithoutEmbeddedStruct)
 	if err == nil {
 		varStorageFlexFlashVirtualDrive := _StorageFlexFlashVirtualDrive{}
 		varStorageFlexFlashVirtualDrive.ClassId = varStorageFlexFlashVirtualDriveWithoutEmbeddedStruct.ClassId
@@ -500,7 +563,7 @@ func (o *StorageFlexFlashVirtualDrive) UnmarshalJSON(bytes []byte) (err error) {
 
 	varStorageFlexFlashVirtualDrive := _StorageFlexFlashVirtualDrive{}
 
-	err = json.Unmarshal(bytes, &varStorageFlexFlashVirtualDrive)
+	err = json.Unmarshal(data, &varStorageFlexFlashVirtualDrive)
 	if err == nil {
 		o.EquipmentBase = varStorageFlexFlashVirtualDrive.EquipmentBase
 	} else {
@@ -509,7 +572,7 @@ func (o *StorageFlexFlashVirtualDrive) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "DriveScope")

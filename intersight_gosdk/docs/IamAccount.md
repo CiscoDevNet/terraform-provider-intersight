@@ -18,10 +18,10 @@ Name | Type | Description | Notes
 **Permissions** | Pointer to [**[]IamPermissionRelationship**](IamPermissionRelationship.md) | An array of relationships to iamPermission resources. | [optional] [readonly] 
 **PrivilegeSets** | Pointer to [**[]IamPrivilegeSetRelationship**](IamPrivilegeSetRelationship.md) | An array of relationships to iamPrivilegeSet resources. | [optional] [readonly] 
 **Privileges** | Pointer to [**[]IamPrivilegeRelationship**](IamPrivilegeRelationship.md) | An array of relationships to iamPrivilege resources. | [optional] [readonly] 
-**ResourceLimits** | Pointer to [**IamResourceLimitsRelationship**](IamResourceLimitsRelationship.md) |  | [optional] 
+**ResourceLimits** | Pointer to [**NullableIamResourceLimitsRelationship**](IamResourceLimitsRelationship.md) |  | [optional] 
 **Roles** | Pointer to [**[]IamRoleRelationship**](IamRoleRelationship.md) | An array of relationships to iamRole resources. | [optional] [readonly] 
-**SecurityHolder** | Pointer to [**IamSecurityHolderRelationship**](IamSecurityHolderRelationship.md) |  | [optional] 
-**SessionLimits** | Pointer to [**IamSessionLimitsRelationship**](IamSessionLimitsRelationship.md) |  | [optional] 
+**SecurityHolder** | Pointer to [**NullableIamSecurityHolderRelationship**](IamSecurityHolderRelationship.md) |  | [optional] 
+**SessionLimits** | Pointer to [**NullableIamSessionLimitsRelationship**](IamSessionLimitsRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -497,6 +497,16 @@ SetResourceLimits sets ResourceLimits field to given value.
 
 HasResourceLimits returns a boolean if a field has been set.
 
+### SetResourceLimitsNil
+
+`func (o *IamAccount) SetResourceLimitsNil(b bool)`
+
+ SetResourceLimitsNil sets the value for ResourceLimits to be an explicit nil
+
+### UnsetResourceLimits
+`func (o *IamAccount) UnsetResourceLimits()`
+
+UnsetResourceLimits ensures that no value is present for ResourceLimits, not even an explicit nil
 ### GetRoles
 
 `func (o *IamAccount) GetRoles() []IamRoleRelationship`
@@ -557,6 +567,16 @@ SetSecurityHolder sets SecurityHolder field to given value.
 
 HasSecurityHolder returns a boolean if a field has been set.
 
+### SetSecurityHolderNil
+
+`func (o *IamAccount) SetSecurityHolderNil(b bool)`
+
+ SetSecurityHolderNil sets the value for SecurityHolder to be an explicit nil
+
+### UnsetSecurityHolder
+`func (o *IamAccount) UnsetSecurityHolder()`
+
+UnsetSecurityHolder ensures that no value is present for SecurityHolder, not even an explicit nil
 ### GetSessionLimits
 
 `func (o *IamAccount) GetSessionLimits() IamSessionLimitsRelationship`
@@ -582,6 +602,16 @@ SetSessionLimits sets SessionLimits field to given value.
 
 HasSessionLimits returns a boolean if a field has been set.
 
+### SetSessionLimitsNil
+
+`func (o *IamAccount) SetSessionLimitsNil(b bool)`
+
+ SetSessionLimitsNil sets the value for SessionLimits to be an explicit nil
+
+### UnsetSessionLimits
+`func (o *IamAccount) UnsetSessionLimits()`
+
+UnsetSessionLimits ensures that no value is present for SessionLimits, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -14,6 +14,9 @@ package intersight
 import (
 	"encoding/json"
 )
+
+// checks if the TelemetryDruidScanResult type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &TelemetryDruidScanResult{}
 
 // TelemetryDruidScanResult Druid Scan row result.
 type TelemetryDruidScanResult struct {
@@ -47,7 +50,7 @@ func NewTelemetryDruidScanResultWithDefaults() *TelemetryDruidScanResult {
 
 // GetSegmentId returns the SegmentId field value if set, zero value otherwise.
 func (o *TelemetryDruidScanResult) GetSegmentId() string {
-	if o == nil || o.SegmentId == nil {
+	if o == nil || IsNil(o.SegmentId) {
 		var ret string
 		return ret
 	}
@@ -57,7 +60,7 @@ func (o *TelemetryDruidScanResult) GetSegmentId() string {
 // GetSegmentIdOk returns a tuple with the SegmentId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TelemetryDruidScanResult) GetSegmentIdOk() (*string, bool) {
-	if o == nil || o.SegmentId == nil {
+	if o == nil || IsNil(o.SegmentId) {
 		return nil, false
 	}
 	return o.SegmentId, true
@@ -65,7 +68,7 @@ func (o *TelemetryDruidScanResult) GetSegmentIdOk() (*string, bool) {
 
 // HasSegmentId returns a boolean if a field has been set.
 func (o *TelemetryDruidScanResult) HasSegmentId() bool {
-	if o != nil && o.SegmentId != nil {
+	if o != nil && !IsNil(o.SegmentId) {
 		return true
 	}
 
@@ -79,7 +82,7 @@ func (o *TelemetryDruidScanResult) SetSegmentId(v string) {
 
 // GetColumns returns the Columns field value if set, zero value otherwise.
 func (o *TelemetryDruidScanResult) GetColumns() []string {
-	if o == nil || o.Columns == nil {
+	if o == nil || IsNil(o.Columns) {
 		var ret []string
 		return ret
 	}
@@ -89,7 +92,7 @@ func (o *TelemetryDruidScanResult) GetColumns() []string {
 // GetColumnsOk returns a tuple with the Columns field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TelemetryDruidScanResult) GetColumnsOk() ([]string, bool) {
-	if o == nil || o.Columns == nil {
+	if o == nil || IsNil(o.Columns) {
 		return nil, false
 	}
 	return o.Columns, true
@@ -97,7 +100,7 @@ func (o *TelemetryDruidScanResult) GetColumnsOk() ([]string, bool) {
 
 // HasColumns returns a boolean if a field has been set.
 func (o *TelemetryDruidScanResult) HasColumns() bool {
-	if o != nil && o.Columns != nil {
+	if o != nil && !IsNil(o.Columns) {
 		return true
 	}
 
@@ -111,7 +114,7 @@ func (o *TelemetryDruidScanResult) SetColumns(v []string) {
 
 // GetEvents returns the Events field value if set, zero value otherwise.
 func (o *TelemetryDruidScanResult) GetEvents() []interface{} {
-	if o == nil || o.Events == nil {
+	if o == nil || IsNil(o.Events) {
 		var ret []interface{}
 		return ret
 	}
@@ -121,7 +124,7 @@ func (o *TelemetryDruidScanResult) GetEvents() []interface{} {
 // GetEventsOk returns a tuple with the Events field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TelemetryDruidScanResult) GetEventsOk() ([]interface{}, bool) {
-	if o == nil || o.Events == nil {
+	if o == nil || IsNil(o.Events) {
 		return nil, false
 	}
 	return o.Events, true
@@ -129,7 +132,7 @@ func (o *TelemetryDruidScanResult) GetEventsOk() ([]interface{}, bool) {
 
 // HasEvents returns a boolean if a field has been set.
 func (o *TelemetryDruidScanResult) HasEvents() bool {
-	if o != nil && o.Events != nil {
+	if o != nil && !IsNil(o.Events) {
 		return true
 	}
 
@@ -142,14 +145,22 @@ func (o *TelemetryDruidScanResult) SetEvents(v []interface{}) {
 }
 
 func (o TelemetryDruidScanResult) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o TelemetryDruidScanResult) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if o.SegmentId != nil {
+	if !IsNil(o.SegmentId) {
 		toSerialize["segmentId"] = o.SegmentId
 	}
-	if o.Columns != nil {
+	if !IsNil(o.Columns) {
 		toSerialize["columns"] = o.Columns
 	}
-	if o.Events != nil {
+	if !IsNil(o.Events) {
 		toSerialize["events"] = o.Events
 	}
 
@@ -157,19 +168,23 @@ func (o TelemetryDruidScanResult) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *TelemetryDruidScanResult) UnmarshalJSON(bytes []byte) (err error) {
+func (o *TelemetryDruidScanResult) UnmarshalJSON(data []byte) (err error) {
 	varTelemetryDruidScanResult := _TelemetryDruidScanResult{}
 
-	if err = json.Unmarshal(bytes, &varTelemetryDruidScanResult); err == nil {
-		*o = TelemetryDruidScanResult(varTelemetryDruidScanResult)
+	err = json.Unmarshal(data, &varTelemetryDruidScanResult)
+
+	if err != nil {
+		return err
 	}
+
+	*o = TelemetryDruidScanResult(varTelemetryDruidScanResult)
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "segmentId")
 		delete(additionalProperties, "columns")
 		delete(additionalProperties, "events")

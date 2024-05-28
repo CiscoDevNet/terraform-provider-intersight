@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the NiatelemetryEpg type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &NiatelemetryEpg{}
 
 // NiatelemetryEpg Object is available at End Point Group scope. This currently applies only to the APIC environemt.
 type NiatelemetryEpg struct {
@@ -57,8 +61,8 @@ type NiatelemetryEpg struct {
 	// The Site name represents an APIC cluster. Service Engine can onboard multiple APIC clusters / sites.
 	SiteName *string `json:"SiteName,omitempty"`
 	// Logical Operators for attribute based microsegmentation in a hypervisor.
-	UsegHypervCount      *int64                               `json:"UsegHypervCount,omitempty"`
-	RegisteredDevice     *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+	UsegHypervCount      *int64                                      `json:"UsegHypervCount,omitempty"`
+	RegisteredDevice     NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -137,7 +141,7 @@ func (o *NiatelemetryEpg) SetObjectType(v string) {
 
 // GetAzurePackCount returns the AzurePackCount field value if set, zero value otherwise.
 func (o *NiatelemetryEpg) GetAzurePackCount() int64 {
-	if o == nil || o.AzurePackCount == nil {
+	if o == nil || IsNil(o.AzurePackCount) {
 		var ret int64
 		return ret
 	}
@@ -147,7 +151,7 @@ func (o *NiatelemetryEpg) GetAzurePackCount() int64 {
 // GetAzurePackCountOk returns a tuple with the AzurePackCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryEpg) GetAzurePackCountOk() (*int64, bool) {
-	if o == nil || o.AzurePackCount == nil {
+	if o == nil || IsNil(o.AzurePackCount) {
 		return nil, false
 	}
 	return o.AzurePackCount, true
@@ -155,7 +159,7 @@ func (o *NiatelemetryEpg) GetAzurePackCountOk() (*int64, bool) {
 
 // HasAzurePackCount returns a boolean if a field has been set.
 func (o *NiatelemetryEpg) HasAzurePackCount() bool {
-	if o != nil && o.AzurePackCount != nil {
+	if o != nil && !IsNil(o.AzurePackCount) {
 		return true
 	}
 
@@ -169,7 +173,7 @@ func (o *NiatelemetryEpg) SetAzurePackCount(v int64) {
 
 // GetDn returns the Dn field value if set, zero value otherwise.
 func (o *NiatelemetryEpg) GetDn() string {
-	if o == nil || o.Dn == nil {
+	if o == nil || IsNil(o.Dn) {
 		var ret string
 		return ret
 	}
@@ -179,7 +183,7 @@ func (o *NiatelemetryEpg) GetDn() string {
 // GetDnOk returns a tuple with the Dn field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryEpg) GetDnOk() (*string, bool) {
-	if o == nil || o.Dn == nil {
+	if o == nil || IsNil(o.Dn) {
 		return nil, false
 	}
 	return o.Dn, true
@@ -187,7 +191,7 @@ func (o *NiatelemetryEpg) GetDnOk() (*string, bool) {
 
 // HasDn returns a boolean if a field has been set.
 func (o *NiatelemetryEpg) HasDn() bool {
-	if o != nil && o.Dn != nil {
+	if o != nil && !IsNil(o.Dn) {
 		return true
 	}
 
@@ -201,7 +205,7 @@ func (o *NiatelemetryEpg) SetDn(v string) {
 
 // GetEpgDelimiterCount returns the EpgDelimiterCount field value if set, zero value otherwise.
 func (o *NiatelemetryEpg) GetEpgDelimiterCount() int64 {
-	if o == nil || o.EpgDelimiterCount == nil {
+	if o == nil || IsNil(o.EpgDelimiterCount) {
 		var ret int64
 		return ret
 	}
@@ -211,7 +215,7 @@ func (o *NiatelemetryEpg) GetEpgDelimiterCount() int64 {
 // GetEpgDelimiterCountOk returns a tuple with the EpgDelimiterCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryEpg) GetEpgDelimiterCountOk() (*int64, bool) {
-	if o == nil || o.EpgDelimiterCount == nil {
+	if o == nil || IsNil(o.EpgDelimiterCount) {
 		return nil, false
 	}
 	return o.EpgDelimiterCount, true
@@ -219,7 +223,7 @@ func (o *NiatelemetryEpg) GetEpgDelimiterCountOk() (*int64, bool) {
 
 // HasEpgDelimiterCount returns a boolean if a field has been set.
 func (o *NiatelemetryEpg) HasEpgDelimiterCount() bool {
-	if o != nil && o.EpgDelimiterCount != nil {
+	if o != nil && !IsNil(o.EpgDelimiterCount) {
 		return true
 	}
 
@@ -233,7 +237,7 @@ func (o *NiatelemetryEpg) SetEpgDelimiterCount(v int64) {
 
 // GetFcNpvCount returns the FcNpvCount field value if set, zero value otherwise.
 func (o *NiatelemetryEpg) GetFcNpvCount() int64 {
-	if o == nil || o.FcNpvCount == nil {
+	if o == nil || IsNil(o.FcNpvCount) {
 		var ret int64
 		return ret
 	}
@@ -243,7 +247,7 @@ func (o *NiatelemetryEpg) GetFcNpvCount() int64 {
 // GetFcNpvCountOk returns a tuple with the FcNpvCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryEpg) GetFcNpvCountOk() (*int64, bool) {
-	if o == nil || o.FcNpvCount == nil {
+	if o == nil || IsNil(o.FcNpvCount) {
 		return nil, false
 	}
 	return o.FcNpvCount, true
@@ -251,7 +255,7 @@ func (o *NiatelemetryEpg) GetFcNpvCountOk() (*int64, bool) {
 
 // HasFcNpvCount returns a boolean if a field has been set.
 func (o *NiatelemetryEpg) HasFcNpvCount() bool {
-	if o != nil && o.FcNpvCount != nil {
+	if o != nil && !IsNil(o.FcNpvCount) {
 		return true
 	}
 
@@ -265,7 +269,7 @@ func (o *NiatelemetryEpg) SetFcNpvCount(v int64) {
 
 // GetFcoeCount returns the FcoeCount field value if set, zero value otherwise.
 func (o *NiatelemetryEpg) GetFcoeCount() int64 {
-	if o == nil || o.FcoeCount == nil {
+	if o == nil || IsNil(o.FcoeCount) {
 		var ret int64
 		return ret
 	}
@@ -275,7 +279,7 @@ func (o *NiatelemetryEpg) GetFcoeCount() int64 {
 // GetFcoeCountOk returns a tuple with the FcoeCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryEpg) GetFcoeCountOk() (*int64, bool) {
-	if o == nil || o.FcoeCount == nil {
+	if o == nil || IsNil(o.FcoeCount) {
 		return nil, false
 	}
 	return o.FcoeCount, true
@@ -283,7 +287,7 @@ func (o *NiatelemetryEpg) GetFcoeCountOk() (*int64, bool) {
 
 // HasFcoeCount returns a boolean if a field has been set.
 func (o *NiatelemetryEpg) HasFcoeCount() bool {
-	if o != nil && o.FcoeCount != nil {
+	if o != nil && !IsNil(o.FcoeCount) {
 		return true
 	}
 
@@ -297,7 +301,7 @@ func (o *NiatelemetryEpg) SetFcoeCount(v int64) {
 
 // GetFvRsDomAttCount returns the FvRsDomAttCount field value if set, zero value otherwise.
 func (o *NiatelemetryEpg) GetFvRsDomAttCount() int64 {
-	if o == nil || o.FvRsDomAttCount == nil {
+	if o == nil || IsNil(o.FvRsDomAttCount) {
 		var ret int64
 		return ret
 	}
@@ -307,7 +311,7 @@ func (o *NiatelemetryEpg) GetFvRsDomAttCount() int64 {
 // GetFvRsDomAttCountOk returns a tuple with the FvRsDomAttCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryEpg) GetFvRsDomAttCountOk() (*int64, bool) {
-	if o == nil || o.FvRsDomAttCount == nil {
+	if o == nil || IsNil(o.FvRsDomAttCount) {
 		return nil, false
 	}
 	return o.FvRsDomAttCount, true
@@ -315,7 +319,7 @@ func (o *NiatelemetryEpg) GetFvRsDomAttCountOk() (*int64, bool) {
 
 // HasFvRsDomAttCount returns a boolean if a field has been set.
 func (o *NiatelemetryEpg) HasFvRsDomAttCount() bool {
-	if o != nil && o.FvRsDomAttCount != nil {
+	if o != nil && !IsNil(o.FvRsDomAttCount) {
 		return true
 	}
 
@@ -329,7 +333,7 @@ func (o *NiatelemetryEpg) SetFvRsDomAttCount(v int64) {
 
 // GetIntraEpgDvsBmCount returns the IntraEpgDvsBmCount field value if set, zero value otherwise.
 func (o *NiatelemetryEpg) GetIntraEpgDvsBmCount() int64 {
-	if o == nil || o.IntraEpgDvsBmCount == nil {
+	if o == nil || IsNil(o.IntraEpgDvsBmCount) {
 		var ret int64
 		return ret
 	}
@@ -339,7 +343,7 @@ func (o *NiatelemetryEpg) GetIntraEpgDvsBmCount() int64 {
 // GetIntraEpgDvsBmCountOk returns a tuple with the IntraEpgDvsBmCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryEpg) GetIntraEpgDvsBmCountOk() (*int64, bool) {
-	if o == nil || o.IntraEpgDvsBmCount == nil {
+	if o == nil || IsNil(o.IntraEpgDvsBmCount) {
 		return nil, false
 	}
 	return o.IntraEpgDvsBmCount, true
@@ -347,7 +351,7 @@ func (o *NiatelemetryEpg) GetIntraEpgDvsBmCountOk() (*int64, bool) {
 
 // HasIntraEpgDvsBmCount returns a boolean if a field has been set.
 func (o *NiatelemetryEpg) HasIntraEpgDvsBmCount() bool {
-	if o != nil && o.IntraEpgDvsBmCount != nil {
+	if o != nil && !IsNil(o.IntraEpgDvsBmCount) {
 		return true
 	}
 
@@ -361,7 +365,7 @@ func (o *NiatelemetryEpg) SetIntraEpgDvsBmCount(v int64) {
 
 // GetIntraEpgHyperv returns the IntraEpgHyperv field value if set, zero value otherwise.
 func (o *NiatelemetryEpg) GetIntraEpgHyperv() string {
-	if o == nil || o.IntraEpgHyperv == nil {
+	if o == nil || IsNil(o.IntraEpgHyperv) {
 		var ret string
 		return ret
 	}
@@ -371,7 +375,7 @@ func (o *NiatelemetryEpg) GetIntraEpgHyperv() string {
 // GetIntraEpgHypervOk returns a tuple with the IntraEpgHyperv field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryEpg) GetIntraEpgHypervOk() (*string, bool) {
-	if o == nil || o.IntraEpgHyperv == nil {
+	if o == nil || IsNil(o.IntraEpgHyperv) {
 		return nil, false
 	}
 	return o.IntraEpgHyperv, true
@@ -379,7 +383,7 @@ func (o *NiatelemetryEpg) GetIntraEpgHypervOk() (*string, bool) {
 
 // HasIntraEpgHyperv returns a boolean if a field has been set.
 func (o *NiatelemetryEpg) HasIntraEpgHyperv() bool {
-	if o != nil && o.IntraEpgHyperv != nil {
+	if o != nil && !IsNil(o.IntraEpgHyperv) {
 		return true
 	}
 
@@ -393,7 +397,7 @@ func (o *NiatelemetryEpg) SetIntraEpgHyperv(v string) {
 
 // GetIsAttrBased returns the IsAttrBased field value if set, zero value otherwise.
 func (o *NiatelemetryEpg) GetIsAttrBased() string {
-	if o == nil || o.IsAttrBased == nil {
+	if o == nil || IsNil(o.IsAttrBased) {
 		var ret string
 		return ret
 	}
@@ -403,7 +407,7 @@ func (o *NiatelemetryEpg) GetIsAttrBased() string {
 // GetIsAttrBasedOk returns a tuple with the IsAttrBased field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryEpg) GetIsAttrBasedOk() (*string, bool) {
-	if o == nil || o.IsAttrBased == nil {
+	if o == nil || IsNil(o.IsAttrBased) {
 		return nil, false
 	}
 	return o.IsAttrBased, true
@@ -411,7 +415,7 @@ func (o *NiatelemetryEpg) GetIsAttrBasedOk() (*string, bool) {
 
 // HasIsAttrBased returns a boolean if a field has been set.
 func (o *NiatelemetryEpg) HasIsAttrBased() bool {
-	if o != nil && o.IsAttrBased != nil {
+	if o != nil && !IsNil(o.IsAttrBased) {
 		return true
 	}
 
@@ -425,7 +429,7 @@ func (o *NiatelemetryEpg) SetIsAttrBased(v string) {
 
 // GetMicrosegmentation returns the Microsegmentation field value if set, zero value otherwise.
 func (o *NiatelemetryEpg) GetMicrosegmentation() string {
-	if o == nil || o.Microsegmentation == nil {
+	if o == nil || IsNil(o.Microsegmentation) {
 		var ret string
 		return ret
 	}
@@ -435,7 +439,7 @@ func (o *NiatelemetryEpg) GetMicrosegmentation() string {
 // GetMicrosegmentationOk returns a tuple with the Microsegmentation field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryEpg) GetMicrosegmentationOk() (*string, bool) {
-	if o == nil || o.Microsegmentation == nil {
+	if o == nil || IsNil(o.Microsegmentation) {
 		return nil, false
 	}
 	return o.Microsegmentation, true
@@ -443,7 +447,7 @@ func (o *NiatelemetryEpg) GetMicrosegmentationOk() (*string, bool) {
 
 // HasMicrosegmentation returns a boolean if a field has been set.
 func (o *NiatelemetryEpg) HasMicrosegmentation() bool {
-	if o != nil && o.Microsegmentation != nil {
+	if o != nil && !IsNil(o.Microsegmentation) {
 		return true
 	}
 
@@ -457,7 +461,7 @@ func (o *NiatelemetryEpg) SetMicrosegmentation(v string) {
 
 // GetMicrosoftUsegCount returns the MicrosoftUsegCount field value if set, zero value otherwise.
 func (o *NiatelemetryEpg) GetMicrosoftUsegCount() int64 {
-	if o == nil || o.MicrosoftUsegCount == nil {
+	if o == nil || IsNil(o.MicrosoftUsegCount) {
 		var ret int64
 		return ret
 	}
@@ -467,7 +471,7 @@ func (o *NiatelemetryEpg) GetMicrosoftUsegCount() int64 {
 // GetMicrosoftUsegCountOk returns a tuple with the MicrosoftUsegCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryEpg) GetMicrosoftUsegCountOk() (*int64, bool) {
-	if o == nil || o.MicrosoftUsegCount == nil {
+	if o == nil || IsNil(o.MicrosoftUsegCount) {
 		return nil, false
 	}
 	return o.MicrosoftUsegCount, true
@@ -475,7 +479,7 @@ func (o *NiatelemetryEpg) GetMicrosoftUsegCountOk() (*int64, bool) {
 
 // HasMicrosoftUsegCount returns a boolean if a field has been set.
 func (o *NiatelemetryEpg) HasMicrosoftUsegCount() bool {
-	if o != nil && o.MicrosoftUsegCount != nil {
+	if o != nil && !IsNil(o.MicrosoftUsegCount) {
 		return true
 	}
 
@@ -489,7 +493,7 @@ func (o *NiatelemetryEpg) SetMicrosoftUsegCount(v int64) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *NiatelemetryEpg) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -499,7 +503,7 @@ func (o *NiatelemetryEpg) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryEpg) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -507,7 +511,7 @@ func (o *NiatelemetryEpg) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *NiatelemetryEpg) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -521,7 +525,7 @@ func (o *NiatelemetryEpg) SetName(v string) {
 
 // GetOrchslDevVipCfgCount returns the OrchslDevVipCfgCount field value if set, zero value otherwise.
 func (o *NiatelemetryEpg) GetOrchslDevVipCfgCount() int64 {
-	if o == nil || o.OrchslDevVipCfgCount == nil {
+	if o == nil || IsNil(o.OrchslDevVipCfgCount) {
 		var ret int64
 		return ret
 	}
@@ -531,7 +535,7 @@ func (o *NiatelemetryEpg) GetOrchslDevVipCfgCount() int64 {
 // GetOrchslDevVipCfgCountOk returns a tuple with the OrchslDevVipCfgCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryEpg) GetOrchslDevVipCfgCountOk() (*int64, bool) {
-	if o == nil || o.OrchslDevVipCfgCount == nil {
+	if o == nil || IsNil(o.OrchslDevVipCfgCount) {
 		return nil, false
 	}
 	return o.OrchslDevVipCfgCount, true
@@ -539,7 +543,7 @@ func (o *NiatelemetryEpg) GetOrchslDevVipCfgCountOk() (*int64, bool) {
 
 // HasOrchslDevVipCfgCount returns a boolean if a field has been set.
 func (o *NiatelemetryEpg) HasOrchslDevVipCfgCount() bool {
-	if o != nil && o.OrchslDevVipCfgCount != nil {
+	if o != nil && !IsNil(o.OrchslDevVipCfgCount) {
 		return true
 	}
 
@@ -553,7 +557,7 @@ func (o *NiatelemetryEpg) SetOrchslDevVipCfgCount(v int64) {
 
 // GetRecordType returns the RecordType field value if set, zero value otherwise.
 func (o *NiatelemetryEpg) GetRecordType() string {
-	if o == nil || o.RecordType == nil {
+	if o == nil || IsNil(o.RecordType) {
 		var ret string
 		return ret
 	}
@@ -563,7 +567,7 @@ func (o *NiatelemetryEpg) GetRecordType() string {
 // GetRecordTypeOk returns a tuple with the RecordType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryEpg) GetRecordTypeOk() (*string, bool) {
-	if o == nil || o.RecordType == nil {
+	if o == nil || IsNil(o.RecordType) {
 		return nil, false
 	}
 	return o.RecordType, true
@@ -571,7 +575,7 @@ func (o *NiatelemetryEpg) GetRecordTypeOk() (*string, bool) {
 
 // HasRecordType returns a boolean if a field has been set.
 func (o *NiatelemetryEpg) HasRecordType() bool {
-	if o != nil && o.RecordType != nil {
+	if o != nil && !IsNil(o.RecordType) {
 		return true
 	}
 
@@ -585,7 +589,7 @@ func (o *NiatelemetryEpg) SetRecordType(v string) {
 
 // GetRecordVersion returns the RecordVersion field value if set, zero value otherwise.
 func (o *NiatelemetryEpg) GetRecordVersion() string {
-	if o == nil || o.RecordVersion == nil {
+	if o == nil || IsNil(o.RecordVersion) {
 		var ret string
 		return ret
 	}
@@ -595,7 +599,7 @@ func (o *NiatelemetryEpg) GetRecordVersion() string {
 // GetRecordVersionOk returns a tuple with the RecordVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryEpg) GetRecordVersionOk() (*string, bool) {
-	if o == nil || o.RecordVersion == nil {
+	if o == nil || IsNil(o.RecordVersion) {
 		return nil, false
 	}
 	return o.RecordVersion, true
@@ -603,7 +607,7 @@ func (o *NiatelemetryEpg) GetRecordVersionOk() (*string, bool) {
 
 // HasRecordVersion returns a boolean if a field has been set.
 func (o *NiatelemetryEpg) HasRecordVersion() bool {
-	if o != nil && o.RecordVersion != nil {
+	if o != nil && !IsNil(o.RecordVersion) {
 		return true
 	}
 
@@ -617,7 +621,7 @@ func (o *NiatelemetryEpg) SetRecordVersion(v string) {
 
 // GetSiteName returns the SiteName field value if set, zero value otherwise.
 func (o *NiatelemetryEpg) GetSiteName() string {
-	if o == nil || o.SiteName == nil {
+	if o == nil || IsNil(o.SiteName) {
 		var ret string
 		return ret
 	}
@@ -627,7 +631,7 @@ func (o *NiatelemetryEpg) GetSiteName() string {
 // GetSiteNameOk returns a tuple with the SiteName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryEpg) GetSiteNameOk() (*string, bool) {
-	if o == nil || o.SiteName == nil {
+	if o == nil || IsNil(o.SiteName) {
 		return nil, false
 	}
 	return o.SiteName, true
@@ -635,7 +639,7 @@ func (o *NiatelemetryEpg) GetSiteNameOk() (*string, bool) {
 
 // HasSiteName returns a boolean if a field has been set.
 func (o *NiatelemetryEpg) HasSiteName() bool {
-	if o != nil && o.SiteName != nil {
+	if o != nil && !IsNil(o.SiteName) {
 		return true
 	}
 
@@ -649,7 +653,7 @@ func (o *NiatelemetryEpg) SetSiteName(v string) {
 
 // GetUsegHypervCount returns the UsegHypervCount field value if set, zero value otherwise.
 func (o *NiatelemetryEpg) GetUsegHypervCount() int64 {
-	if o == nil || o.UsegHypervCount == nil {
+	if o == nil || IsNil(o.UsegHypervCount) {
 		var ret int64
 		return ret
 	}
@@ -659,7 +663,7 @@ func (o *NiatelemetryEpg) GetUsegHypervCount() int64 {
 // GetUsegHypervCountOk returns a tuple with the UsegHypervCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryEpg) GetUsegHypervCountOk() (*int64, bool) {
-	if o == nil || o.UsegHypervCount == nil {
+	if o == nil || IsNil(o.UsegHypervCount) {
 		return nil, false
 	}
 	return o.UsegHypervCount, true
@@ -667,7 +671,7 @@ func (o *NiatelemetryEpg) GetUsegHypervCountOk() (*int64, bool) {
 
 // HasUsegHypervCount returns a boolean if a field has been set.
 func (o *NiatelemetryEpg) HasUsegHypervCount() bool {
-	if o != nil && o.UsegHypervCount != nil {
+	if o != nil && !IsNil(o.UsegHypervCount) {
 		return true
 	}
 
@@ -679,117 +683,154 @@ func (o *NiatelemetryEpg) SetUsegHypervCount(v int64) {
 	o.UsegHypervCount = &v
 }
 
-// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise.
+// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *NiatelemetryEpg) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil || IsNil(o.RegisteredDevice.Get()) {
 		var ret AssetDeviceRegistrationRelationship
 		return ret
 	}
-	return *o.RegisteredDevice
+	return *o.RegisteredDevice.Get()
 }
 
 // GetRegisteredDeviceOk returns a tuple with the RegisteredDevice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *NiatelemetryEpg) GetRegisteredDeviceOk() (*AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.RegisteredDevice, true
+	return o.RegisteredDevice.Get(), o.RegisteredDevice.IsSet()
 }
 
 // HasRegisteredDevice returns a boolean if a field has been set.
 func (o *NiatelemetryEpg) HasRegisteredDevice() bool {
-	if o != nil && o.RegisteredDevice != nil {
+	if o != nil && o.RegisteredDevice.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRegisteredDevice gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
+// SetRegisteredDevice gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
 func (o *NiatelemetryEpg) SetRegisteredDevice(v AssetDeviceRegistrationRelationship) {
-	o.RegisteredDevice = &v
+	o.RegisteredDevice.Set(&v)
+}
+
+// SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+func (o *NiatelemetryEpg) SetRegisteredDeviceNil() {
+	o.RegisteredDevice.Set(nil)
+}
+
+// UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
+func (o *NiatelemetryEpg) UnsetRegisteredDevice() {
+	o.RegisteredDevice.Unset()
 }
 
 func (o NiatelemetryEpg) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o NiatelemetryEpg) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.AzurePackCount != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.AzurePackCount) {
 		toSerialize["AzurePackCount"] = o.AzurePackCount
 	}
-	if o.Dn != nil {
+	if !IsNil(o.Dn) {
 		toSerialize["Dn"] = o.Dn
 	}
-	if o.EpgDelimiterCount != nil {
+	if !IsNil(o.EpgDelimiterCount) {
 		toSerialize["EpgDelimiterCount"] = o.EpgDelimiterCount
 	}
-	if o.FcNpvCount != nil {
+	if !IsNil(o.FcNpvCount) {
 		toSerialize["FcNpvCount"] = o.FcNpvCount
 	}
-	if o.FcoeCount != nil {
+	if !IsNil(o.FcoeCount) {
 		toSerialize["FcoeCount"] = o.FcoeCount
 	}
-	if o.FvRsDomAttCount != nil {
+	if !IsNil(o.FvRsDomAttCount) {
 		toSerialize["FvRsDomAttCount"] = o.FvRsDomAttCount
 	}
-	if o.IntraEpgDvsBmCount != nil {
+	if !IsNil(o.IntraEpgDvsBmCount) {
 		toSerialize["IntraEpgDvsBmCount"] = o.IntraEpgDvsBmCount
 	}
-	if o.IntraEpgHyperv != nil {
+	if !IsNil(o.IntraEpgHyperv) {
 		toSerialize["IntraEpgHyperv"] = o.IntraEpgHyperv
 	}
-	if o.IsAttrBased != nil {
+	if !IsNil(o.IsAttrBased) {
 		toSerialize["IsAttrBased"] = o.IsAttrBased
 	}
-	if o.Microsegmentation != nil {
+	if !IsNil(o.Microsegmentation) {
 		toSerialize["Microsegmentation"] = o.Microsegmentation
 	}
-	if o.MicrosoftUsegCount != nil {
+	if !IsNil(o.MicrosoftUsegCount) {
 		toSerialize["MicrosoftUsegCount"] = o.MicrosoftUsegCount
 	}
-	if o.Name != nil {
+	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
 	}
-	if o.OrchslDevVipCfgCount != nil {
+	if !IsNil(o.OrchslDevVipCfgCount) {
 		toSerialize["OrchslDevVipCfgCount"] = o.OrchslDevVipCfgCount
 	}
-	if o.RecordType != nil {
+	if !IsNil(o.RecordType) {
 		toSerialize["RecordType"] = o.RecordType
 	}
-	if o.RecordVersion != nil {
+	if !IsNil(o.RecordVersion) {
 		toSerialize["RecordVersion"] = o.RecordVersion
 	}
-	if o.SiteName != nil {
+	if !IsNil(o.SiteName) {
 		toSerialize["SiteName"] = o.SiteName
 	}
-	if o.UsegHypervCount != nil {
+	if !IsNil(o.UsegHypervCount) {
 		toSerialize["UsegHypervCount"] = o.UsegHypervCount
 	}
-	if o.RegisteredDevice != nil {
-		toSerialize["RegisteredDevice"] = o.RegisteredDevice
+	if o.RegisteredDevice.IsSet() {
+		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *NiatelemetryEpg) UnmarshalJSON(bytes []byte) (err error) {
+func (o *NiatelemetryEpg) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type NiatelemetryEpgWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -828,13 +869,13 @@ func (o *NiatelemetryEpg) UnmarshalJSON(bytes []byte) (err error) {
 		// The Site name represents an APIC cluster. Service Engine can onboard multiple APIC clusters / sites.
 		SiteName *string `json:"SiteName,omitempty"`
 		// Logical Operators for attribute based microsegmentation in a hypervisor.
-		UsegHypervCount  *int64                               `json:"UsegHypervCount,omitempty"`
-		RegisteredDevice *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+		UsegHypervCount  *int64                                      `json:"UsegHypervCount,omitempty"`
+		RegisteredDevice NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	}
 
 	varNiatelemetryEpgWithoutEmbeddedStruct := NiatelemetryEpgWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varNiatelemetryEpgWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varNiatelemetryEpgWithoutEmbeddedStruct)
 	if err == nil {
 		varNiatelemetryEpg := _NiatelemetryEpg{}
 		varNiatelemetryEpg.ClassId = varNiatelemetryEpgWithoutEmbeddedStruct.ClassId
@@ -864,7 +905,7 @@ func (o *NiatelemetryEpg) UnmarshalJSON(bytes []byte) (err error) {
 
 	varNiatelemetryEpg := _NiatelemetryEpg{}
 
-	err = json.Unmarshal(bytes, &varNiatelemetryEpg)
+	err = json.Unmarshal(data, &varNiatelemetryEpg)
 	if err == nil {
 		o.MoBaseMo = varNiatelemetryEpg.MoBaseMo
 	} else {
@@ -873,7 +914,7 @@ func (o *NiatelemetryEpg) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "AzurePackCount")

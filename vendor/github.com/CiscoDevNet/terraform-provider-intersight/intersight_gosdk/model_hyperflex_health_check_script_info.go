@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the HyperflexHealthCheckScriptInfo type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &HyperflexHealthCheckScriptInfo{}
 
 // HyperflexHealthCheckScriptInfo HyperFlex version-specific Health check script information.
 type HyperflexHealthCheckScriptInfo struct {
@@ -114,7 +118,7 @@ func (o *HyperflexHealthCheckScriptInfo) SetObjectType(v string) {
 
 // GetAggregateScriptName returns the AggregateScriptName field value if set, zero value otherwise.
 func (o *HyperflexHealthCheckScriptInfo) GetAggregateScriptName() string {
-	if o == nil || o.AggregateScriptName == nil {
+	if o == nil || IsNil(o.AggregateScriptName) {
 		var ret string
 		return ret
 	}
@@ -124,7 +128,7 @@ func (o *HyperflexHealthCheckScriptInfo) GetAggregateScriptName() string {
 // GetAggregateScriptNameOk returns a tuple with the AggregateScriptName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexHealthCheckScriptInfo) GetAggregateScriptNameOk() (*string, bool) {
-	if o == nil || o.AggregateScriptName == nil {
+	if o == nil || IsNil(o.AggregateScriptName) {
 		return nil, false
 	}
 	return o.AggregateScriptName, true
@@ -132,7 +136,7 @@ func (o *HyperflexHealthCheckScriptInfo) GetAggregateScriptNameOk() (*string, bo
 
 // HasAggregateScriptName returns a boolean if a field has been set.
 func (o *HyperflexHealthCheckScriptInfo) HasAggregateScriptName() bool {
-	if o != nil && o.AggregateScriptName != nil {
+	if o != nil && !IsNil(o.AggregateScriptName) {
 		return true
 	}
 
@@ -146,7 +150,7 @@ func (o *HyperflexHealthCheckScriptInfo) SetAggregateScriptName(v string) {
 
 // GetHyperflexVersion returns the HyperflexVersion field value if set, zero value otherwise.
 func (o *HyperflexHealthCheckScriptInfo) GetHyperflexVersion() string {
-	if o == nil || o.HyperflexVersion == nil {
+	if o == nil || IsNil(o.HyperflexVersion) {
 		var ret string
 		return ret
 	}
@@ -156,7 +160,7 @@ func (o *HyperflexHealthCheckScriptInfo) GetHyperflexVersion() string {
 // GetHyperflexVersionOk returns a tuple with the HyperflexVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexHealthCheckScriptInfo) GetHyperflexVersionOk() (*string, bool) {
-	if o == nil || o.HyperflexVersion == nil {
+	if o == nil || IsNil(o.HyperflexVersion) {
 		return nil, false
 	}
 	return o.HyperflexVersion, true
@@ -164,7 +168,7 @@ func (o *HyperflexHealthCheckScriptInfo) GetHyperflexVersionOk() (*string, bool)
 
 // HasHyperflexVersion returns a boolean if a field has been set.
 func (o *HyperflexHealthCheckScriptInfo) HasHyperflexVersion() bool {
-	if o != nil && o.HyperflexVersion != nil {
+	if o != nil && !IsNil(o.HyperflexVersion) {
 		return true
 	}
 
@@ -178,7 +182,7 @@ func (o *HyperflexHealthCheckScriptInfo) SetHyperflexVersion(v string) {
 
 // GetScriptExecuteLocation returns the ScriptExecuteLocation field value if set, zero value otherwise.
 func (o *HyperflexHealthCheckScriptInfo) GetScriptExecuteLocation() string {
-	if o == nil || o.ScriptExecuteLocation == nil {
+	if o == nil || IsNil(o.ScriptExecuteLocation) {
 		var ret string
 		return ret
 	}
@@ -188,7 +192,7 @@ func (o *HyperflexHealthCheckScriptInfo) GetScriptExecuteLocation() string {
 // GetScriptExecuteLocationOk returns a tuple with the ScriptExecuteLocation field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexHealthCheckScriptInfo) GetScriptExecuteLocationOk() (*string, bool) {
-	if o == nil || o.ScriptExecuteLocation == nil {
+	if o == nil || IsNil(o.ScriptExecuteLocation) {
 		return nil, false
 	}
 	return o.ScriptExecuteLocation, true
@@ -196,7 +200,7 @@ func (o *HyperflexHealthCheckScriptInfo) GetScriptExecuteLocationOk() (*string, 
 
 // HasScriptExecuteLocation returns a boolean if a field has been set.
 func (o *HyperflexHealthCheckScriptInfo) HasScriptExecuteLocation() bool {
-	if o != nil && o.ScriptExecuteLocation != nil {
+	if o != nil && !IsNil(o.ScriptExecuteLocation) {
 		return true
 	}
 
@@ -210,7 +214,7 @@ func (o *HyperflexHealthCheckScriptInfo) SetScriptExecuteLocation(v string) {
 
 // GetScriptInput returns the ScriptInput field value if set, zero value otherwise.
 func (o *HyperflexHealthCheckScriptInfo) GetScriptInput() string {
-	if o == nil || o.ScriptInput == nil {
+	if o == nil || IsNil(o.ScriptInput) {
 		var ret string
 		return ret
 	}
@@ -220,7 +224,7 @@ func (o *HyperflexHealthCheckScriptInfo) GetScriptInput() string {
 // GetScriptInputOk returns a tuple with the ScriptInput field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexHealthCheckScriptInfo) GetScriptInputOk() (*string, bool) {
-	if o == nil || o.ScriptInput == nil {
+	if o == nil || IsNil(o.ScriptInput) {
 		return nil, false
 	}
 	return o.ScriptInput, true
@@ -228,7 +232,7 @@ func (o *HyperflexHealthCheckScriptInfo) GetScriptInputOk() (*string, bool) {
 
 // HasScriptInput returns a boolean if a field has been set.
 func (o *HyperflexHealthCheckScriptInfo) HasScriptInput() bool {
-	if o != nil && o.ScriptInput != nil {
+	if o != nil && !IsNil(o.ScriptInput) {
 		return true
 	}
 
@@ -242,7 +246,7 @@ func (o *HyperflexHealthCheckScriptInfo) SetScriptInput(v string) {
 
 // GetScriptName returns the ScriptName field value if set, zero value otherwise.
 func (o *HyperflexHealthCheckScriptInfo) GetScriptName() string {
-	if o == nil || o.ScriptName == nil {
+	if o == nil || IsNil(o.ScriptName) {
 		var ret string
 		return ret
 	}
@@ -252,7 +256,7 @@ func (o *HyperflexHealthCheckScriptInfo) GetScriptName() string {
 // GetScriptNameOk returns a tuple with the ScriptName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexHealthCheckScriptInfo) GetScriptNameOk() (*string, bool) {
-	if o == nil || o.ScriptName == nil {
+	if o == nil || IsNil(o.ScriptName) {
 		return nil, false
 	}
 	return o.ScriptName, true
@@ -260,7 +264,7 @@ func (o *HyperflexHealthCheckScriptInfo) GetScriptNameOk() (*string, bool) {
 
 // HasScriptName returns a boolean if a field has been set.
 func (o *HyperflexHealthCheckScriptInfo) HasScriptName() bool {
-	if o != nil && o.ScriptName != nil {
+	if o != nil && !IsNil(o.ScriptName) {
 		return true
 	}
 
@@ -274,7 +278,7 @@ func (o *HyperflexHealthCheckScriptInfo) SetScriptName(v string) {
 
 // GetVersion returns the Version field value if set, zero value otherwise.
 func (o *HyperflexHealthCheckScriptInfo) GetVersion() string {
-	if o == nil || o.Version == nil {
+	if o == nil || IsNil(o.Version) {
 		var ret string
 		return ret
 	}
@@ -284,7 +288,7 @@ func (o *HyperflexHealthCheckScriptInfo) GetVersion() string {
 // GetVersionOk returns a tuple with the Version field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexHealthCheckScriptInfo) GetVersionOk() (*string, bool) {
-	if o == nil || o.Version == nil {
+	if o == nil || IsNil(o.Version) {
 		return nil, false
 	}
 	return o.Version, true
@@ -292,7 +296,7 @@ func (o *HyperflexHealthCheckScriptInfo) GetVersionOk() (*string, bool) {
 
 // HasVersion returns a boolean if a field has been set.
 func (o *HyperflexHealthCheckScriptInfo) HasVersion() bool {
-	if o != nil && o.Version != nil {
+	if o != nil && !IsNil(o.Version) {
 		return true
 	}
 
@@ -305,37 +309,41 @@ func (o *HyperflexHealthCheckScriptInfo) SetVersion(v string) {
 }
 
 func (o HyperflexHealthCheckScriptInfo) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o HyperflexHealthCheckScriptInfo) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
 	errMoBaseComplexType = json.Unmarshal([]byte(serializedMoBaseComplexType), &toSerialize)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.AggregateScriptName != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.AggregateScriptName) {
 		toSerialize["AggregateScriptName"] = o.AggregateScriptName
 	}
-	if o.HyperflexVersion != nil {
+	if !IsNil(o.HyperflexVersion) {
 		toSerialize["HyperflexVersion"] = o.HyperflexVersion
 	}
-	if o.ScriptExecuteLocation != nil {
+	if !IsNil(o.ScriptExecuteLocation) {
 		toSerialize["ScriptExecuteLocation"] = o.ScriptExecuteLocation
 	}
-	if o.ScriptInput != nil {
+	if !IsNil(o.ScriptInput) {
 		toSerialize["ScriptInput"] = o.ScriptInput
 	}
-	if o.ScriptName != nil {
+	if !IsNil(o.ScriptName) {
 		toSerialize["ScriptName"] = o.ScriptName
 	}
-	if o.Version != nil {
+	if !IsNil(o.Version) {
 		toSerialize["Version"] = o.Version
 	}
 
@@ -343,10 +351,32 @@ func (o HyperflexHealthCheckScriptInfo) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *HyperflexHealthCheckScriptInfo) UnmarshalJSON(bytes []byte) (err error) {
+func (o *HyperflexHealthCheckScriptInfo) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type HyperflexHealthCheckScriptInfoWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -368,7 +398,7 @@ func (o *HyperflexHealthCheckScriptInfo) UnmarshalJSON(bytes []byte) (err error)
 
 	varHyperflexHealthCheckScriptInfoWithoutEmbeddedStruct := HyperflexHealthCheckScriptInfoWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varHyperflexHealthCheckScriptInfoWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varHyperflexHealthCheckScriptInfoWithoutEmbeddedStruct)
 	if err == nil {
 		varHyperflexHealthCheckScriptInfo := _HyperflexHealthCheckScriptInfo{}
 		varHyperflexHealthCheckScriptInfo.ClassId = varHyperflexHealthCheckScriptInfoWithoutEmbeddedStruct.ClassId
@@ -386,7 +416,7 @@ func (o *HyperflexHealthCheckScriptInfo) UnmarshalJSON(bytes []byte) (err error)
 
 	varHyperflexHealthCheckScriptInfo := _HyperflexHealthCheckScriptInfo{}
 
-	err = json.Unmarshal(bytes, &varHyperflexHealthCheckScriptInfo)
+	err = json.Unmarshal(data, &varHyperflexHealthCheckScriptInfo)
 	if err == nil {
 		o.MoBaseComplexType = varHyperflexHealthCheckScriptInfo.MoBaseComplexType
 	} else {
@@ -395,7 +425,7 @@ func (o *HyperflexHealthCheckScriptInfo) UnmarshalJSON(bytes []byte) (err error)
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "AggregateScriptName")

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the StorageFileItem type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &StorageFileItem{}
 
 // StorageFileItem The local Storage Files present in a server.
 type StorageFileItem struct {
@@ -37,9 +41,9 @@ type StorageFileItem struct {
 	// File type like CSV, ISO image.
 	Type *string `json:"Type,omitempty"`
 	// Timestamp to indicate the uploaded time for this file.
-	UpdateTime           *string                              `json:"UpdateTime,omitempty"`
-	RegisteredDevice     *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
-	StorageItem          *StorageItemRelationship             `json:"StorageItem,omitempty"`
+	UpdateTime           *string                                     `json:"UpdateTime,omitempty"`
+	RegisteredDevice     NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+	StorageItem          NullableStorageItemRelationship             `json:"StorageItem,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -118,7 +122,7 @@ func (o *StorageFileItem) SetObjectType(v string) {
 
 // GetDescription returns the Description field value if set, zero value otherwise.
 func (o *StorageFileItem) GetDescription() string {
-	if o == nil || o.Description == nil {
+	if o == nil || IsNil(o.Description) {
 		var ret string
 		return ret
 	}
@@ -128,7 +132,7 @@ func (o *StorageFileItem) GetDescription() string {
 // GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageFileItem) GetDescriptionOk() (*string, bool) {
-	if o == nil || o.Description == nil {
+	if o == nil || IsNil(o.Description) {
 		return nil, false
 	}
 	return o.Description, true
@@ -136,7 +140,7 @@ func (o *StorageFileItem) GetDescriptionOk() (*string, bool) {
 
 // HasDescription returns a boolean if a field has been set.
 func (o *StorageFileItem) HasDescription() bool {
-	if o != nil && o.Description != nil {
+	if o != nil && !IsNil(o.Description) {
 		return true
 	}
 
@@ -150,7 +154,7 @@ func (o *StorageFileItem) SetDescription(v string) {
 
 // GetFileId returns the FileId field value if set, zero value otherwise.
 func (o *StorageFileItem) GetFileId() int64 {
-	if o == nil || o.FileId == nil {
+	if o == nil || IsNil(o.FileId) {
 		var ret int64
 		return ret
 	}
@@ -160,7 +164,7 @@ func (o *StorageFileItem) GetFileId() int64 {
 // GetFileIdOk returns a tuple with the FileId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageFileItem) GetFileIdOk() (*int64, bool) {
-	if o == nil || o.FileId == nil {
+	if o == nil || IsNil(o.FileId) {
 		return nil, false
 	}
 	return o.FileId, true
@@ -168,7 +172,7 @@ func (o *StorageFileItem) GetFileIdOk() (*int64, bool) {
 
 // HasFileId returns a boolean if a field has been set.
 func (o *StorageFileItem) HasFileId() bool {
-	if o != nil && o.FileId != nil {
+	if o != nil && !IsNil(o.FileId) {
 		return true
 	}
 
@@ -182,7 +186,7 @@ func (o *StorageFileItem) SetFileId(v int64) {
 
 // GetHostVisible returns the HostVisible field value if set, zero value otherwise.
 func (o *StorageFileItem) GetHostVisible() bool {
-	if o == nil || o.HostVisible == nil {
+	if o == nil || IsNil(o.HostVisible) {
 		var ret bool
 		return ret
 	}
@@ -192,7 +196,7 @@ func (o *StorageFileItem) GetHostVisible() bool {
 // GetHostVisibleOk returns a tuple with the HostVisible field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageFileItem) GetHostVisibleOk() (*bool, bool) {
-	if o == nil || o.HostVisible == nil {
+	if o == nil || IsNil(o.HostVisible) {
 		return nil, false
 	}
 	return o.HostVisible, true
@@ -200,7 +204,7 @@ func (o *StorageFileItem) GetHostVisibleOk() (*bool, bool) {
 
 // HasHostVisible returns a boolean if a field has been set.
 func (o *StorageFileItem) HasHostVisible() bool {
-	if o != nil && o.HostVisible != nil {
+	if o != nil && !IsNil(o.HostVisible) {
 		return true
 	}
 
@@ -214,7 +218,7 @@ func (o *StorageFileItem) SetHostVisible(v bool) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *StorageFileItem) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -224,7 +228,7 @@ func (o *StorageFileItem) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageFileItem) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -232,7 +236,7 @@ func (o *StorageFileItem) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *StorageFileItem) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -246,7 +250,7 @@ func (o *StorageFileItem) SetName(v string) {
 
 // GetSize returns the Size field value if set, zero value otherwise.
 func (o *StorageFileItem) GetSize() string {
-	if o == nil || o.Size == nil {
+	if o == nil || IsNil(o.Size) {
 		var ret string
 		return ret
 	}
@@ -256,7 +260,7 @@ func (o *StorageFileItem) GetSize() string {
 // GetSizeOk returns a tuple with the Size field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageFileItem) GetSizeOk() (*string, bool) {
-	if o == nil || o.Size == nil {
+	if o == nil || IsNil(o.Size) {
 		return nil, false
 	}
 	return o.Size, true
@@ -264,7 +268,7 @@ func (o *StorageFileItem) GetSizeOk() (*string, bool) {
 
 // HasSize returns a boolean if a field has been set.
 func (o *StorageFileItem) HasSize() bool {
-	if o != nil && o.Size != nil {
+	if o != nil && !IsNil(o.Size) {
 		return true
 	}
 
@@ -278,7 +282,7 @@ func (o *StorageFileItem) SetSize(v string) {
 
 // GetType returns the Type field value if set, zero value otherwise.
 func (o *StorageFileItem) GetType() string {
-	if o == nil || o.Type == nil {
+	if o == nil || IsNil(o.Type) {
 		var ret string
 		return ret
 	}
@@ -288,7 +292,7 @@ func (o *StorageFileItem) GetType() string {
 // GetTypeOk returns a tuple with the Type field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageFileItem) GetTypeOk() (*string, bool) {
-	if o == nil || o.Type == nil {
+	if o == nil || IsNil(o.Type) {
 		return nil, false
 	}
 	return o.Type, true
@@ -296,7 +300,7 @@ func (o *StorageFileItem) GetTypeOk() (*string, bool) {
 
 // HasType returns a boolean if a field has been set.
 func (o *StorageFileItem) HasType() bool {
-	if o != nil && o.Type != nil {
+	if o != nil && !IsNil(o.Type) {
 		return true
 	}
 
@@ -310,7 +314,7 @@ func (o *StorageFileItem) SetType(v string) {
 
 // GetUpdateTime returns the UpdateTime field value if set, zero value otherwise.
 func (o *StorageFileItem) GetUpdateTime() string {
-	if o == nil || o.UpdateTime == nil {
+	if o == nil || IsNil(o.UpdateTime) {
 		var ret string
 		return ret
 	}
@@ -320,7 +324,7 @@ func (o *StorageFileItem) GetUpdateTime() string {
 // GetUpdateTimeOk returns a tuple with the UpdateTime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageFileItem) GetUpdateTimeOk() (*string, bool) {
-	if o == nil || o.UpdateTime == nil {
+	if o == nil || IsNil(o.UpdateTime) {
 		return nil, false
 	}
 	return o.UpdateTime, true
@@ -328,7 +332,7 @@ func (o *StorageFileItem) GetUpdateTimeOk() (*string, bool) {
 
 // HasUpdateTime returns a boolean if a field has been set.
 func (o *StorageFileItem) HasUpdateTime() bool {
-	if o != nil && o.UpdateTime != nil {
+	if o != nil && !IsNil(o.UpdateTime) {
 		return true
 	}
 
@@ -340,122 +344,170 @@ func (o *StorageFileItem) SetUpdateTime(v string) {
 	o.UpdateTime = &v
 }
 
-// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise.
+// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *StorageFileItem) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil || IsNil(o.RegisteredDevice.Get()) {
 		var ret AssetDeviceRegistrationRelationship
 		return ret
 	}
-	return *o.RegisteredDevice
+	return *o.RegisteredDevice.Get()
 }
 
 // GetRegisteredDeviceOk returns a tuple with the RegisteredDevice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StorageFileItem) GetRegisteredDeviceOk() (*AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.RegisteredDevice, true
+	return o.RegisteredDevice.Get(), o.RegisteredDevice.IsSet()
 }
 
 // HasRegisteredDevice returns a boolean if a field has been set.
 func (o *StorageFileItem) HasRegisteredDevice() bool {
-	if o != nil && o.RegisteredDevice != nil {
+	if o != nil && o.RegisteredDevice.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRegisteredDevice gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
+// SetRegisteredDevice gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
 func (o *StorageFileItem) SetRegisteredDevice(v AssetDeviceRegistrationRelationship) {
-	o.RegisteredDevice = &v
+	o.RegisteredDevice.Set(&v)
 }
 
-// GetStorageItem returns the StorageItem field value if set, zero value otherwise.
+// SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+func (o *StorageFileItem) SetRegisteredDeviceNil() {
+	o.RegisteredDevice.Set(nil)
+}
+
+// UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
+func (o *StorageFileItem) UnsetRegisteredDevice() {
+	o.RegisteredDevice.Unset()
+}
+
+// GetStorageItem returns the StorageItem field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *StorageFileItem) GetStorageItem() StorageItemRelationship {
-	if o == nil || o.StorageItem == nil {
+	if o == nil || IsNil(o.StorageItem.Get()) {
 		var ret StorageItemRelationship
 		return ret
 	}
-	return *o.StorageItem
+	return *o.StorageItem.Get()
 }
 
 // GetStorageItemOk returns a tuple with the StorageItem field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StorageFileItem) GetStorageItemOk() (*StorageItemRelationship, bool) {
-	if o == nil || o.StorageItem == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.StorageItem, true
+	return o.StorageItem.Get(), o.StorageItem.IsSet()
 }
 
 // HasStorageItem returns a boolean if a field has been set.
 func (o *StorageFileItem) HasStorageItem() bool {
-	if o != nil && o.StorageItem != nil {
+	if o != nil && o.StorageItem.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetStorageItem gets a reference to the given StorageItemRelationship and assigns it to the StorageItem field.
+// SetStorageItem gets a reference to the given NullableStorageItemRelationship and assigns it to the StorageItem field.
 func (o *StorageFileItem) SetStorageItem(v StorageItemRelationship) {
-	o.StorageItem = &v
+	o.StorageItem.Set(&v)
+}
+
+// SetStorageItemNil sets the value for StorageItem to be an explicit nil
+func (o *StorageFileItem) SetStorageItemNil() {
+	o.StorageItem.Set(nil)
+}
+
+// UnsetStorageItem ensures that no value is present for StorageItem, not even an explicit nil
+func (o *StorageFileItem) UnsetStorageItem() {
+	o.StorageItem.Unset()
 }
 
 func (o StorageFileItem) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o StorageFileItem) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedInventoryBase, errInventoryBase := json.Marshal(o.InventoryBase)
 	if errInventoryBase != nil {
-		return []byte{}, errInventoryBase
+		return map[string]interface{}{}, errInventoryBase
 	}
 	errInventoryBase = json.Unmarshal([]byte(serializedInventoryBase), &toSerialize)
 	if errInventoryBase != nil {
-		return []byte{}, errInventoryBase
+		return map[string]interface{}{}, errInventoryBase
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Description != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Description) {
 		toSerialize["Description"] = o.Description
 	}
-	if o.FileId != nil {
+	if !IsNil(o.FileId) {
 		toSerialize["FileId"] = o.FileId
 	}
-	if o.HostVisible != nil {
+	if !IsNil(o.HostVisible) {
 		toSerialize["HostVisible"] = o.HostVisible
 	}
-	if o.Name != nil {
+	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
 	}
-	if o.Size != nil {
+	if !IsNil(o.Size) {
 		toSerialize["Size"] = o.Size
 	}
-	if o.Type != nil {
+	if !IsNil(o.Type) {
 		toSerialize["Type"] = o.Type
 	}
-	if o.UpdateTime != nil {
+	if !IsNil(o.UpdateTime) {
 		toSerialize["UpdateTime"] = o.UpdateTime
 	}
-	if o.RegisteredDevice != nil {
-		toSerialize["RegisteredDevice"] = o.RegisteredDevice
+	if o.RegisteredDevice.IsSet() {
+		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
 	}
-	if o.StorageItem != nil {
-		toSerialize["StorageItem"] = o.StorageItem
+	if o.StorageItem.IsSet() {
+		toSerialize["StorageItem"] = o.StorageItem.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *StorageFileItem) UnmarshalJSON(bytes []byte) (err error) {
+func (o *StorageFileItem) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type StorageFileItemWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -474,14 +526,14 @@ func (o *StorageFileItem) UnmarshalJSON(bytes []byte) (err error) {
 		// File type like CSV, ISO image.
 		Type *string `json:"Type,omitempty"`
 		// Timestamp to indicate the uploaded time for this file.
-		UpdateTime       *string                              `json:"UpdateTime,omitempty"`
-		RegisteredDevice *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
-		StorageItem      *StorageItemRelationship             `json:"StorageItem,omitempty"`
+		UpdateTime       *string                                     `json:"UpdateTime,omitempty"`
+		RegisteredDevice NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+		StorageItem      NullableStorageItemRelationship             `json:"StorageItem,omitempty"`
 	}
 
 	varStorageFileItemWithoutEmbeddedStruct := StorageFileItemWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varStorageFileItemWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varStorageFileItemWithoutEmbeddedStruct)
 	if err == nil {
 		varStorageFileItem := _StorageFileItem{}
 		varStorageFileItem.ClassId = varStorageFileItemWithoutEmbeddedStruct.ClassId
@@ -502,7 +554,7 @@ func (o *StorageFileItem) UnmarshalJSON(bytes []byte) (err error) {
 
 	varStorageFileItem := _StorageFileItem{}
 
-	err = json.Unmarshal(bytes, &varStorageFileItem)
+	err = json.Unmarshal(data, &varStorageFileItem)
 	if err == nil {
 		o.InventoryBase = varStorageFileItem.InventoryBase
 	} else {
@@ -511,7 +563,7 @@ func (o *StorageFileItem) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Description")

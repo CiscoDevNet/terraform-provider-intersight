@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the StorageAutomaticDriveGroup type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &StorageAutomaticDriveGroup{}
 
 // StorageAutomaticDriveGroup This models the automatic drive selection configuration.
 type StorageAutomaticDriveGroup struct {
@@ -126,7 +130,7 @@ func (o *StorageAutomaticDriveGroup) SetObjectType(v string) {
 
 // GetDriveType returns the DriveType field value if set, zero value otherwise.
 func (o *StorageAutomaticDriveGroup) GetDriveType() string {
-	if o == nil || o.DriveType == nil {
+	if o == nil || IsNil(o.DriveType) {
 		var ret string
 		return ret
 	}
@@ -136,7 +140,7 @@ func (o *StorageAutomaticDriveGroup) GetDriveType() string {
 // GetDriveTypeOk returns a tuple with the DriveType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageAutomaticDriveGroup) GetDriveTypeOk() (*string, bool) {
-	if o == nil || o.DriveType == nil {
+	if o == nil || IsNil(o.DriveType) {
 		return nil, false
 	}
 	return o.DriveType, true
@@ -144,7 +148,7 @@ func (o *StorageAutomaticDriveGroup) GetDriveTypeOk() (*string, bool) {
 
 // HasDriveType returns a boolean if a field has been set.
 func (o *StorageAutomaticDriveGroup) HasDriveType() bool {
-	if o != nil && o.DriveType != nil {
+	if o != nil && !IsNil(o.DriveType) {
 		return true
 	}
 
@@ -158,7 +162,7 @@ func (o *StorageAutomaticDriveGroup) SetDriveType(v string) {
 
 // GetDrivesPerSpan returns the DrivesPerSpan field value if set, zero value otherwise.
 func (o *StorageAutomaticDriveGroup) GetDrivesPerSpan() int64 {
-	if o == nil || o.DrivesPerSpan == nil {
+	if o == nil || IsNil(o.DrivesPerSpan) {
 		var ret int64
 		return ret
 	}
@@ -168,7 +172,7 @@ func (o *StorageAutomaticDriveGroup) GetDrivesPerSpan() int64 {
 // GetDrivesPerSpanOk returns a tuple with the DrivesPerSpan field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageAutomaticDriveGroup) GetDrivesPerSpanOk() (*int64, bool) {
-	if o == nil || o.DrivesPerSpan == nil {
+	if o == nil || IsNil(o.DrivesPerSpan) {
 		return nil, false
 	}
 	return o.DrivesPerSpan, true
@@ -176,7 +180,7 @@ func (o *StorageAutomaticDriveGroup) GetDrivesPerSpanOk() (*int64, bool) {
 
 // HasDrivesPerSpan returns a boolean if a field has been set.
 func (o *StorageAutomaticDriveGroup) HasDrivesPerSpan() bool {
-	if o != nil && o.DrivesPerSpan != nil {
+	if o != nil && !IsNil(o.DrivesPerSpan) {
 		return true
 	}
 
@@ -190,7 +194,7 @@ func (o *StorageAutomaticDriveGroup) SetDrivesPerSpan(v int64) {
 
 // GetMinimumDriveSize returns the MinimumDriveSize field value if set, zero value otherwise.
 func (o *StorageAutomaticDriveGroup) GetMinimumDriveSize() int64 {
-	if o == nil || o.MinimumDriveSize == nil {
+	if o == nil || IsNil(o.MinimumDriveSize) {
 		var ret int64
 		return ret
 	}
@@ -200,7 +204,7 @@ func (o *StorageAutomaticDriveGroup) GetMinimumDriveSize() int64 {
 // GetMinimumDriveSizeOk returns a tuple with the MinimumDriveSize field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageAutomaticDriveGroup) GetMinimumDriveSizeOk() (*int64, bool) {
-	if o == nil || o.MinimumDriveSize == nil {
+	if o == nil || IsNil(o.MinimumDriveSize) {
 		return nil, false
 	}
 	return o.MinimumDriveSize, true
@@ -208,7 +212,7 @@ func (o *StorageAutomaticDriveGroup) GetMinimumDriveSizeOk() (*int64, bool) {
 
 // HasMinimumDriveSize returns a boolean if a field has been set.
 func (o *StorageAutomaticDriveGroup) HasMinimumDriveSize() bool {
-	if o != nil && o.MinimumDriveSize != nil {
+	if o != nil && !IsNil(o.MinimumDriveSize) {
 		return true
 	}
 
@@ -222,7 +226,7 @@ func (o *StorageAutomaticDriveGroup) SetMinimumDriveSize(v int64) {
 
 // GetNumDedicatedHotSpares returns the NumDedicatedHotSpares field value if set, zero value otherwise.
 func (o *StorageAutomaticDriveGroup) GetNumDedicatedHotSpares() string {
-	if o == nil || o.NumDedicatedHotSpares == nil {
+	if o == nil || IsNil(o.NumDedicatedHotSpares) {
 		var ret string
 		return ret
 	}
@@ -232,7 +236,7 @@ func (o *StorageAutomaticDriveGroup) GetNumDedicatedHotSpares() string {
 // GetNumDedicatedHotSparesOk returns a tuple with the NumDedicatedHotSpares field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageAutomaticDriveGroup) GetNumDedicatedHotSparesOk() (*string, bool) {
-	if o == nil || o.NumDedicatedHotSpares == nil {
+	if o == nil || IsNil(o.NumDedicatedHotSpares) {
 		return nil, false
 	}
 	return o.NumDedicatedHotSpares, true
@@ -240,7 +244,7 @@ func (o *StorageAutomaticDriveGroup) GetNumDedicatedHotSparesOk() (*string, bool
 
 // HasNumDedicatedHotSpares returns a boolean if a field has been set.
 func (o *StorageAutomaticDriveGroup) HasNumDedicatedHotSpares() bool {
-	if o != nil && o.NumDedicatedHotSpares != nil {
+	if o != nil && !IsNil(o.NumDedicatedHotSpares) {
 		return true
 	}
 
@@ -254,7 +258,7 @@ func (o *StorageAutomaticDriveGroup) SetNumDedicatedHotSpares(v string) {
 
 // GetNumberOfSpans returns the NumberOfSpans field value if set, zero value otherwise.
 func (o *StorageAutomaticDriveGroup) GetNumberOfSpans() int64 {
-	if o == nil || o.NumberOfSpans == nil {
+	if o == nil || IsNil(o.NumberOfSpans) {
 		var ret int64
 		return ret
 	}
@@ -264,7 +268,7 @@ func (o *StorageAutomaticDriveGroup) GetNumberOfSpans() int64 {
 // GetNumberOfSpansOk returns a tuple with the NumberOfSpans field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageAutomaticDriveGroup) GetNumberOfSpansOk() (*int64, bool) {
-	if o == nil || o.NumberOfSpans == nil {
+	if o == nil || IsNil(o.NumberOfSpans) {
 		return nil, false
 	}
 	return o.NumberOfSpans, true
@@ -272,7 +276,7 @@ func (o *StorageAutomaticDriveGroup) GetNumberOfSpansOk() (*int64, bool) {
 
 // HasNumberOfSpans returns a boolean if a field has been set.
 func (o *StorageAutomaticDriveGroup) HasNumberOfSpans() bool {
-	if o != nil && o.NumberOfSpans != nil {
+	if o != nil && !IsNil(o.NumberOfSpans) {
 		return true
 	}
 
@@ -286,7 +290,7 @@ func (o *StorageAutomaticDriveGroup) SetNumberOfSpans(v int64) {
 
 // GetUseRemainingDrives returns the UseRemainingDrives field value if set, zero value otherwise.
 func (o *StorageAutomaticDriveGroup) GetUseRemainingDrives() bool {
-	if o == nil || o.UseRemainingDrives == nil {
+	if o == nil || IsNil(o.UseRemainingDrives) {
 		var ret bool
 		return ret
 	}
@@ -296,7 +300,7 @@ func (o *StorageAutomaticDriveGroup) GetUseRemainingDrives() bool {
 // GetUseRemainingDrivesOk returns a tuple with the UseRemainingDrives field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageAutomaticDriveGroup) GetUseRemainingDrivesOk() (*bool, bool) {
-	if o == nil || o.UseRemainingDrives == nil {
+	if o == nil || IsNil(o.UseRemainingDrives) {
 		return nil, false
 	}
 	return o.UseRemainingDrives, true
@@ -304,7 +308,7 @@ func (o *StorageAutomaticDriveGroup) GetUseRemainingDrivesOk() (*bool, bool) {
 
 // HasUseRemainingDrives returns a boolean if a field has been set.
 func (o *StorageAutomaticDriveGroup) HasUseRemainingDrives() bool {
-	if o != nil && o.UseRemainingDrives != nil {
+	if o != nil && !IsNil(o.UseRemainingDrives) {
 		return true
 	}
 
@@ -317,37 +321,41 @@ func (o *StorageAutomaticDriveGroup) SetUseRemainingDrives(v bool) {
 }
 
 func (o StorageAutomaticDriveGroup) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o StorageAutomaticDriveGroup) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
 	errMoBaseComplexType = json.Unmarshal([]byte(serializedMoBaseComplexType), &toSerialize)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.DriveType != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.DriveType) {
 		toSerialize["DriveType"] = o.DriveType
 	}
-	if o.DrivesPerSpan != nil {
+	if !IsNil(o.DrivesPerSpan) {
 		toSerialize["DrivesPerSpan"] = o.DrivesPerSpan
 	}
-	if o.MinimumDriveSize != nil {
+	if !IsNil(o.MinimumDriveSize) {
 		toSerialize["MinimumDriveSize"] = o.MinimumDriveSize
 	}
-	if o.NumDedicatedHotSpares != nil {
+	if !IsNil(o.NumDedicatedHotSpares) {
 		toSerialize["NumDedicatedHotSpares"] = o.NumDedicatedHotSpares
 	}
-	if o.NumberOfSpans != nil {
+	if !IsNil(o.NumberOfSpans) {
 		toSerialize["NumberOfSpans"] = o.NumberOfSpans
 	}
-	if o.UseRemainingDrives != nil {
+	if !IsNil(o.UseRemainingDrives) {
 		toSerialize["UseRemainingDrives"] = o.UseRemainingDrives
 	}
 
@@ -355,10 +363,32 @@ func (o StorageAutomaticDriveGroup) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *StorageAutomaticDriveGroup) UnmarshalJSON(bytes []byte) (err error) {
+func (o *StorageAutomaticDriveGroup) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type StorageAutomaticDriveGroupWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -380,7 +410,7 @@ func (o *StorageAutomaticDriveGroup) UnmarshalJSON(bytes []byte) (err error) {
 
 	varStorageAutomaticDriveGroupWithoutEmbeddedStruct := StorageAutomaticDriveGroupWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varStorageAutomaticDriveGroupWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varStorageAutomaticDriveGroupWithoutEmbeddedStruct)
 	if err == nil {
 		varStorageAutomaticDriveGroup := _StorageAutomaticDriveGroup{}
 		varStorageAutomaticDriveGroup.ClassId = varStorageAutomaticDriveGroupWithoutEmbeddedStruct.ClassId
@@ -398,7 +428,7 @@ func (o *StorageAutomaticDriveGroup) UnmarshalJSON(bytes []byte) (err error) {
 
 	varStorageAutomaticDriveGroup := _StorageAutomaticDriveGroup{}
 
-	err = json.Unmarshal(bytes, &varStorageAutomaticDriveGroup)
+	err = json.Unmarshal(data, &varStorageAutomaticDriveGroup)
 	if err == nil {
 		o.MoBaseComplexType = varStorageAutomaticDriveGroup.MoBaseComplexType
 	} else {
@@ -407,7 +437,7 @@ func (o *StorageAutomaticDriveGroup) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "DriveType")

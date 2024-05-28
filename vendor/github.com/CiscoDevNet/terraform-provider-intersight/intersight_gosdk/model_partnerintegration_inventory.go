@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the PartnerintegrationInventory type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &PartnerintegrationInventory{}
 
 // PartnerintegrationInventory Inventory Collection object that acts as an aggregator object for the underlying model and ETL objects.
 type PartnerintegrationInventory struct {
@@ -49,8 +53,8 @@ type PartnerintegrationInventory struct {
 	// An array of relationships to partnerintegrationLogs resources.
 	Logs []PartnerintegrationLogsRelationship `json:"Logs,omitempty"`
 	// An array of relationships to partnerintegrationModel resources.
-	Models               []PartnerintegrationModelRelationship `json:"Models,omitempty"`
-	Organization         *OrganizationOrganizationRelationship `json:"Organization,omitempty"`
+	Models               []PartnerintegrationModelRelationship        `json:"Models,omitempty"`
+	Organization         NullableOrganizationOrganizationRelationship `json:"Organization,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -133,7 +137,7 @@ func (o *PartnerintegrationInventory) SetObjectType(v string) {
 
 // GetAction returns the Action field value if set, zero value otherwise.
 func (o *PartnerintegrationInventory) GetAction() string {
-	if o == nil || o.Action == nil {
+	if o == nil || IsNil(o.Action) {
 		var ret string
 		return ret
 	}
@@ -143,7 +147,7 @@ func (o *PartnerintegrationInventory) GetAction() string {
 // GetActionOk returns a tuple with the Action field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PartnerintegrationInventory) GetActionOk() (*string, bool) {
-	if o == nil || o.Action == nil {
+	if o == nil || IsNil(o.Action) {
 		return nil, false
 	}
 	return o.Action, true
@@ -151,7 +155,7 @@ func (o *PartnerintegrationInventory) GetActionOk() (*string, bool) {
 
 // HasAction returns a boolean if a field has been set.
 func (o *PartnerintegrationInventory) HasAction() bool {
-	if o != nil && o.Action != nil {
+	if o != nil && !IsNil(o.Action) {
 		return true
 	}
 
@@ -165,7 +169,7 @@ func (o *PartnerintegrationInventory) SetAction(v string) {
 
 // GetBuildFlags returns the BuildFlags field value if set, zero value otherwise.
 func (o *PartnerintegrationInventory) GetBuildFlags() string {
-	if o == nil || o.BuildFlags == nil {
+	if o == nil || IsNil(o.BuildFlags) {
 		var ret string
 		return ret
 	}
@@ -175,7 +179,7 @@ func (o *PartnerintegrationInventory) GetBuildFlags() string {
 // GetBuildFlagsOk returns a tuple with the BuildFlags field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PartnerintegrationInventory) GetBuildFlagsOk() (*string, bool) {
-	if o == nil || o.BuildFlags == nil {
+	if o == nil || IsNil(o.BuildFlags) {
 		return nil, false
 	}
 	return o.BuildFlags, true
@@ -183,7 +187,7 @@ func (o *PartnerintegrationInventory) GetBuildFlagsOk() (*string, bool) {
 
 // HasBuildFlags returns a boolean if a field has been set.
 func (o *PartnerintegrationInventory) HasBuildFlags() bool {
-	if o != nil && o.BuildFlags != nil {
+	if o != nil && !IsNil(o.BuildFlags) {
 		return true
 	}
 
@@ -197,7 +201,7 @@ func (o *PartnerintegrationInventory) SetBuildFlags(v string) {
 
 // GetBuildStartTime returns the BuildStartTime field value if set, zero value otherwise.
 func (o *PartnerintegrationInventory) GetBuildStartTime() string {
-	if o == nil || o.BuildStartTime == nil {
+	if o == nil || IsNil(o.BuildStartTime) {
 		var ret string
 		return ret
 	}
@@ -207,7 +211,7 @@ func (o *PartnerintegrationInventory) GetBuildStartTime() string {
 // GetBuildStartTimeOk returns a tuple with the BuildStartTime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PartnerintegrationInventory) GetBuildStartTimeOk() (*string, bool) {
-	if o == nil || o.BuildStartTime == nil {
+	if o == nil || IsNil(o.BuildStartTime) {
 		return nil, false
 	}
 	return o.BuildStartTime, true
@@ -215,7 +219,7 @@ func (o *PartnerintegrationInventory) GetBuildStartTimeOk() (*string, bool) {
 
 // HasBuildStartTime returns a boolean if a field has been set.
 func (o *PartnerintegrationInventory) HasBuildStartTime() bool {
-	if o != nil && o.BuildStartTime != nil {
+	if o != nil && !IsNil(o.BuildStartTime) {
 		return true
 	}
 
@@ -229,7 +233,7 @@ func (o *PartnerintegrationInventory) SetBuildStartTime(v string) {
 
 // GetBuildStatus returns the BuildStatus field value if set, zero value otherwise.
 func (o *PartnerintegrationInventory) GetBuildStatus() string {
-	if o == nil || o.BuildStatus == nil {
+	if o == nil || IsNil(o.BuildStatus) {
 		var ret string
 		return ret
 	}
@@ -239,7 +243,7 @@ func (o *PartnerintegrationInventory) GetBuildStatus() string {
 // GetBuildStatusOk returns a tuple with the BuildStatus field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PartnerintegrationInventory) GetBuildStatusOk() (*string, bool) {
-	if o == nil || o.BuildStatus == nil {
+	if o == nil || IsNil(o.BuildStatus) {
 		return nil, false
 	}
 	return o.BuildStatus, true
@@ -247,7 +251,7 @@ func (o *PartnerintegrationInventory) GetBuildStatusOk() (*string, bool) {
 
 // HasBuildStatus returns a boolean if a field has been set.
 func (o *PartnerintegrationInventory) HasBuildStatus() bool {
-	if o != nil && o.BuildStatus != nil {
+	if o != nil && !IsNil(o.BuildStatus) {
 		return true
 	}
 
@@ -261,7 +265,7 @@ func (o *PartnerintegrationInventory) SetBuildStatus(v string) {
 
 // GetDeployStartTime returns the DeployStartTime field value if set, zero value otherwise.
 func (o *PartnerintegrationInventory) GetDeployStartTime() string {
-	if o == nil || o.DeployStartTime == nil {
+	if o == nil || IsNil(o.DeployStartTime) {
 		var ret string
 		return ret
 	}
@@ -271,7 +275,7 @@ func (o *PartnerintegrationInventory) GetDeployStartTime() string {
 // GetDeployStartTimeOk returns a tuple with the DeployStartTime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PartnerintegrationInventory) GetDeployStartTimeOk() (*string, bool) {
-	if o == nil || o.DeployStartTime == nil {
+	if o == nil || IsNil(o.DeployStartTime) {
 		return nil, false
 	}
 	return o.DeployStartTime, true
@@ -279,7 +283,7 @@ func (o *PartnerintegrationInventory) GetDeployStartTimeOk() (*string, bool) {
 
 // HasDeployStartTime returns a boolean if a field has been set.
 func (o *PartnerintegrationInventory) HasDeployStartTime() bool {
-	if o != nil && o.DeployStartTime != nil {
+	if o != nil && !IsNil(o.DeployStartTime) {
 		return true
 	}
 
@@ -293,7 +297,7 @@ func (o *PartnerintegrationInventory) SetDeployStartTime(v string) {
 
 // GetDeployStatus returns the DeployStatus field value if set, zero value otherwise.
 func (o *PartnerintegrationInventory) GetDeployStatus() string {
-	if o == nil || o.DeployStatus == nil {
+	if o == nil || IsNil(o.DeployStatus) {
 		var ret string
 		return ret
 	}
@@ -303,7 +307,7 @@ func (o *PartnerintegrationInventory) GetDeployStatus() string {
 // GetDeployStatusOk returns a tuple with the DeployStatus field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PartnerintegrationInventory) GetDeployStatusOk() (*string, bool) {
-	if o == nil || o.DeployStatus == nil {
+	if o == nil || IsNil(o.DeployStatus) {
 		return nil, false
 	}
 	return o.DeployStatus, true
@@ -311,7 +315,7 @@ func (o *PartnerintegrationInventory) GetDeployStatusOk() (*string, bool) {
 
 // HasDeployStatus returns a boolean if a field has been set.
 func (o *PartnerintegrationInventory) HasDeployStatus() bool {
-	if o != nil && o.DeployStatus != nil {
+	if o != nil && !IsNil(o.DeployStatus) {
 		return true
 	}
 
@@ -325,7 +329,7 @@ func (o *PartnerintegrationInventory) SetDeployStatus(v string) {
 
 // GetImageName returns the ImageName field value if set, zero value otherwise.
 func (o *PartnerintegrationInventory) GetImageName() string {
-	if o == nil || o.ImageName == nil {
+	if o == nil || IsNil(o.ImageName) {
 		var ret string
 		return ret
 	}
@@ -335,7 +339,7 @@ func (o *PartnerintegrationInventory) GetImageName() string {
 // GetImageNameOk returns a tuple with the ImageName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PartnerintegrationInventory) GetImageNameOk() (*string, bool) {
-	if o == nil || o.ImageName == nil {
+	if o == nil || IsNil(o.ImageName) {
 		return nil, false
 	}
 	return o.ImageName, true
@@ -343,7 +347,7 @@ func (o *PartnerintegrationInventory) GetImageNameOk() (*string, bool) {
 
 // HasImageName returns a boolean if a field has been set.
 func (o *PartnerintegrationInventory) HasImageName() bool {
-	if o != nil && o.ImageName != nil {
+	if o != nil && !IsNil(o.ImageName) {
 		return true
 	}
 
@@ -357,7 +361,7 @@ func (o *PartnerintegrationInventory) SetImageName(v string) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *PartnerintegrationInventory) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -367,7 +371,7 @@ func (o *PartnerintegrationInventory) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PartnerintegrationInventory) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -375,7 +379,7 @@ func (o *PartnerintegrationInventory) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *PartnerintegrationInventory) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -389,7 +393,7 @@ func (o *PartnerintegrationInventory) SetName(v string) {
 
 // GetPythonSdkUrl returns the PythonSdkUrl field value if set, zero value otherwise.
 func (o *PartnerintegrationInventory) GetPythonSdkUrl() string {
-	if o == nil || o.PythonSdkUrl == nil {
+	if o == nil || IsNil(o.PythonSdkUrl) {
 		var ret string
 		return ret
 	}
@@ -399,7 +403,7 @@ func (o *PartnerintegrationInventory) GetPythonSdkUrl() string {
 // GetPythonSdkUrlOk returns a tuple with the PythonSdkUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PartnerintegrationInventory) GetPythonSdkUrlOk() (*string, bool) {
-	if o == nil || o.PythonSdkUrl == nil {
+	if o == nil || IsNil(o.PythonSdkUrl) {
 		return nil, false
 	}
 	return o.PythonSdkUrl, true
@@ -407,7 +411,7 @@ func (o *PartnerintegrationInventory) GetPythonSdkUrlOk() (*string, bool) {
 
 // HasPythonSdkUrl returns a boolean if a field has been set.
 func (o *PartnerintegrationInventory) HasPythonSdkUrl() bool {
-	if o != nil && o.PythonSdkUrl != nil {
+	if o != nil && !IsNil(o.PythonSdkUrl) {
 		return true
 	}
 
@@ -432,7 +436,7 @@ func (o *PartnerintegrationInventory) GetDocIssues() []PartnerintegrationDocIssu
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *PartnerintegrationInventory) GetDocIssuesOk() ([]PartnerintegrationDocIssuesRelationship, bool) {
-	if o == nil || o.DocIssues == nil {
+	if o == nil || IsNil(o.DocIssues) {
 		return nil, false
 	}
 	return o.DocIssues, true
@@ -440,7 +444,7 @@ func (o *PartnerintegrationInventory) GetDocIssuesOk() ([]PartnerintegrationDocI
 
 // HasDocIssues returns a boolean if a field has been set.
 func (o *PartnerintegrationInventory) HasDocIssues() bool {
-	if o != nil && o.DocIssues != nil {
+	if o != nil && IsNil(o.DocIssues) {
 		return true
 	}
 
@@ -465,7 +469,7 @@ func (o *PartnerintegrationInventory) GetEtls() []PartnerintegrationEtlRelations
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *PartnerintegrationInventory) GetEtlsOk() ([]PartnerintegrationEtlRelationship, bool) {
-	if o == nil || o.Etls == nil {
+	if o == nil || IsNil(o.Etls) {
 		return nil, false
 	}
 	return o.Etls, true
@@ -473,7 +477,7 @@ func (o *PartnerintegrationInventory) GetEtlsOk() ([]PartnerintegrationEtlRelati
 
 // HasEtls returns a boolean if a field has been set.
 func (o *PartnerintegrationInventory) HasEtls() bool {
-	if o != nil && o.Etls != nil {
+	if o != nil && IsNil(o.Etls) {
 		return true
 	}
 
@@ -498,7 +502,7 @@ func (o *PartnerintegrationInventory) GetLogs() []PartnerintegrationLogsRelation
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *PartnerintegrationInventory) GetLogsOk() ([]PartnerintegrationLogsRelationship, bool) {
-	if o == nil || o.Logs == nil {
+	if o == nil || IsNil(o.Logs) {
 		return nil, false
 	}
 	return o.Logs, true
@@ -506,7 +510,7 @@ func (o *PartnerintegrationInventory) GetLogsOk() ([]PartnerintegrationLogsRelat
 
 // HasLogs returns a boolean if a field has been set.
 func (o *PartnerintegrationInventory) HasLogs() bool {
-	if o != nil && o.Logs != nil {
+	if o != nil && IsNil(o.Logs) {
 		return true
 	}
 
@@ -531,7 +535,7 @@ func (o *PartnerintegrationInventory) GetModels() []PartnerintegrationModelRelat
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *PartnerintegrationInventory) GetModelsOk() ([]PartnerintegrationModelRelationship, bool) {
-	if o == nil || o.Models == nil {
+	if o == nil || IsNil(o.Models) {
 		return nil, false
 	}
 	return o.Models, true
@@ -539,7 +543,7 @@ func (o *PartnerintegrationInventory) GetModelsOk() ([]PartnerintegrationModelRe
 
 // HasModels returns a boolean if a field has been set.
 func (o *PartnerintegrationInventory) HasModels() bool {
-	if o != nil && o.Models != nil {
+	if o != nil && IsNil(o.Models) {
 		return true
 	}
 
@@ -551,79 +555,94 @@ func (o *PartnerintegrationInventory) SetModels(v []PartnerintegrationModelRelat
 	o.Models = v
 }
 
-// GetOrganization returns the Organization field value if set, zero value otherwise.
+// GetOrganization returns the Organization field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *PartnerintegrationInventory) GetOrganization() OrganizationOrganizationRelationship {
-	if o == nil || o.Organization == nil {
+	if o == nil || IsNil(o.Organization.Get()) {
 		var ret OrganizationOrganizationRelationship
 		return ret
 	}
-	return *o.Organization
+	return *o.Organization.Get()
 }
 
 // GetOrganizationOk returns a tuple with the Organization field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *PartnerintegrationInventory) GetOrganizationOk() (*OrganizationOrganizationRelationship, bool) {
-	if o == nil || o.Organization == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Organization, true
+	return o.Organization.Get(), o.Organization.IsSet()
 }
 
 // HasOrganization returns a boolean if a field has been set.
 func (o *PartnerintegrationInventory) HasOrganization() bool {
-	if o != nil && o.Organization != nil {
+	if o != nil && o.Organization.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetOrganization gets a reference to the given OrganizationOrganizationRelationship and assigns it to the Organization field.
+// SetOrganization gets a reference to the given NullableOrganizationOrganizationRelationship and assigns it to the Organization field.
 func (o *PartnerintegrationInventory) SetOrganization(v OrganizationOrganizationRelationship) {
-	o.Organization = &v
+	o.Organization.Set(&v)
+}
+
+// SetOrganizationNil sets the value for Organization to be an explicit nil
+func (o *PartnerintegrationInventory) SetOrganizationNil() {
+	o.Organization.Set(nil)
+}
+
+// UnsetOrganization ensures that no value is present for Organization, not even an explicit nil
+func (o *PartnerintegrationInventory) UnsetOrganization() {
+	o.Organization.Unset()
 }
 
 func (o PartnerintegrationInventory) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o PartnerintegrationInventory) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Action != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Action) {
 		toSerialize["Action"] = o.Action
 	}
-	if o.BuildFlags != nil {
+	if !IsNil(o.BuildFlags) {
 		toSerialize["BuildFlags"] = o.BuildFlags
 	}
-	if o.BuildStartTime != nil {
+	if !IsNil(o.BuildStartTime) {
 		toSerialize["BuildStartTime"] = o.BuildStartTime
 	}
-	if o.BuildStatus != nil {
+	if !IsNil(o.BuildStatus) {
 		toSerialize["BuildStatus"] = o.BuildStatus
 	}
-	if o.DeployStartTime != nil {
+	if !IsNil(o.DeployStartTime) {
 		toSerialize["DeployStartTime"] = o.DeployStartTime
 	}
-	if o.DeployStatus != nil {
+	if !IsNil(o.DeployStatus) {
 		toSerialize["DeployStatus"] = o.DeployStatus
 	}
-	if o.ImageName != nil {
+	if !IsNil(o.ImageName) {
 		toSerialize["ImageName"] = o.ImageName
 	}
-	if o.Name != nil {
+	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
 	}
-	if o.PythonSdkUrl != nil {
+	if !IsNil(o.PythonSdkUrl) {
 		toSerialize["PythonSdkUrl"] = o.PythonSdkUrl
 	}
 	if o.DocIssues != nil {
@@ -638,18 +657,40 @@ func (o PartnerintegrationInventory) MarshalJSON() ([]byte, error) {
 	if o.Models != nil {
 		toSerialize["Models"] = o.Models
 	}
-	if o.Organization != nil {
-		toSerialize["Organization"] = o.Organization
+	if o.Organization.IsSet() {
+		toSerialize["Organization"] = o.Organization.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *PartnerintegrationInventory) UnmarshalJSON(bytes []byte) (err error) {
+func (o *PartnerintegrationInventory) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type PartnerintegrationInventoryWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -680,13 +721,13 @@ func (o *PartnerintegrationInventory) UnmarshalJSON(bytes []byte) (err error) {
 		// An array of relationships to partnerintegrationLogs resources.
 		Logs []PartnerintegrationLogsRelationship `json:"Logs,omitempty"`
 		// An array of relationships to partnerintegrationModel resources.
-		Models       []PartnerintegrationModelRelationship `json:"Models,omitempty"`
-		Organization *OrganizationOrganizationRelationship `json:"Organization,omitempty"`
+		Models       []PartnerintegrationModelRelationship        `json:"Models,omitempty"`
+		Organization NullableOrganizationOrganizationRelationship `json:"Organization,omitempty"`
 	}
 
 	varPartnerintegrationInventoryWithoutEmbeddedStruct := PartnerintegrationInventoryWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varPartnerintegrationInventoryWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varPartnerintegrationInventoryWithoutEmbeddedStruct)
 	if err == nil {
 		varPartnerintegrationInventory := _PartnerintegrationInventory{}
 		varPartnerintegrationInventory.ClassId = varPartnerintegrationInventoryWithoutEmbeddedStruct.ClassId
@@ -712,7 +753,7 @@ func (o *PartnerintegrationInventory) UnmarshalJSON(bytes []byte) (err error) {
 
 	varPartnerintegrationInventory := _PartnerintegrationInventory{}
 
-	err = json.Unmarshal(bytes, &varPartnerintegrationInventory)
+	err = json.Unmarshal(data, &varPartnerintegrationInventory)
 	if err == nil {
 		o.MoBaseMo = varPartnerintegrationInventory.MoBaseMo
 	} else {
@@ -721,7 +762,7 @@ func (o *PartnerintegrationInventory) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Action")

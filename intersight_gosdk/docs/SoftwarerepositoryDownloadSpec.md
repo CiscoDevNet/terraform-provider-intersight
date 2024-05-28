@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **Md5sum** | Pointer to **string** | MD5 sum of the firmware image that will be used by the endpoint to validate the integrity of the image, post download. | [optional] 
 **Size** | Pointer to **int64** | The size (in bytes) of the firmware image. | [optional] 
 **Url** | Pointer to **string** | The URL of this file in file server. The endpoint uses this URL to download the file from the file server. | [optional] 
-**File** | Pointer to [**SoftwarerepositoryFileRelationship**](SoftwarerepositoryFileRelationship.md) |  | [optional] 
+**File** | Pointer to [**NullableSoftwarerepositoryFileRelationship**](SoftwarerepositoryFileRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -248,6 +248,16 @@ SetFile sets File field to given value.
 
 HasFile returns a boolean if a field has been set.
 
+### SetFileNil
+
+`func (o *SoftwarerepositoryDownloadSpec) SetFileNil(b bool)`
+
+ SetFileNil sets the value for File to be an explicit nil
+
+### UnsetFile
+`func (o *SoftwarerepositoryDownloadSpec) UnsetFile()`
+
+UnsetFile ensures that no value is present for File, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

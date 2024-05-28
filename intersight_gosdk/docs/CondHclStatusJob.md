@@ -6,8 +6,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "cond.HclStatusJob"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "cond.HclStatusJob"]
-**ManagedObject** | Pointer to [**InventoryBaseRelationship**](InventoryBaseRelationship.md) |  | [optional] 
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
+**ManagedObject** | Pointer to [**NullableInventoryBaseRelationship**](InventoryBaseRelationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -93,6 +93,16 @@ SetManagedObject sets ManagedObject field to given value.
 
 HasManagedObject returns a boolean if a field has been set.
 
+### SetManagedObjectNil
+
+`func (o *CondHclStatusJob) SetManagedObjectNil(b bool)`
+
+ SetManagedObjectNil sets the value for ManagedObject to be an explicit nil
+
+### UnsetManagedObject
+`func (o *CondHclStatusJob) UnsetManagedObject()`
+
+UnsetManagedObject ensures that no value is present for ManagedObject, not even an explicit nil
 ### GetRegisteredDevice
 
 `func (o *CondHclStatusJob) GetRegisteredDevice() AssetDeviceRegistrationRelationship`
@@ -118,6 +128,16 @@ SetRegisteredDevice sets RegisteredDevice field to given value.
 
 HasRegisteredDevice returns a boolean if a field has been set.
 
+### SetRegisteredDeviceNil
+
+`func (o *CondHclStatusJob) SetRegisteredDeviceNil(b bool)`
+
+ SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+
+### UnsetRegisteredDevice
+`func (o *CondHclStatusJob) UnsetRegisteredDevice()`
+
+UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

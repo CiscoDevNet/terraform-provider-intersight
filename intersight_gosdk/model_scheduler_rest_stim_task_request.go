@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the SchedulerRestStimTaskRequest type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &SchedulerRestStimTaskRequest{}
 
 // SchedulerRestStimTaskRequest The parameters for a reststim invoked by the scheduler.
 type SchedulerRestStimTaskRequest struct {
@@ -127,7 +131,7 @@ func (o *SchedulerRestStimTaskRequest) GetBody() interface{} {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *SchedulerRestStimTaskRequest) GetBodyOk() (*interface{}, bool) {
-	if o == nil || o.Body == nil {
+	if o == nil || IsNil(o.Body) {
 		return nil, false
 	}
 	return &o.Body, true
@@ -135,7 +139,7 @@ func (o *SchedulerRestStimTaskRequest) GetBodyOk() (*interface{}, bool) {
 
 // HasBody returns a boolean if a field has been set.
 func (o *SchedulerRestStimTaskRequest) HasBody() bool {
-	if o != nil && o.Body != nil {
+	if o != nil && IsNil(o.Body) {
 		return true
 	}
 
@@ -160,7 +164,7 @@ func (o *SchedulerRestStimTaskRequest) GetHeaders() interface{} {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *SchedulerRestStimTaskRequest) GetHeadersOk() (*interface{}, bool) {
-	if o == nil || o.Headers == nil {
+	if o == nil || IsNil(o.Headers) {
 		return nil, false
 	}
 	return &o.Headers, true
@@ -168,7 +172,7 @@ func (o *SchedulerRestStimTaskRequest) GetHeadersOk() (*interface{}, bool) {
 
 // HasHeaders returns a boolean if a field has been set.
 func (o *SchedulerRestStimTaskRequest) HasHeaders() bool {
-	if o != nil && o.Headers != nil {
+	if o != nil && IsNil(o.Headers) {
 		return true
 	}
 
@@ -182,7 +186,7 @@ func (o *SchedulerRestStimTaskRequest) SetHeaders(v interface{}) {
 
 // GetMethod returns the Method field value if set, zero value otherwise.
 func (o *SchedulerRestStimTaskRequest) GetMethod() string {
-	if o == nil || o.Method == nil {
+	if o == nil || IsNil(o.Method) {
 		var ret string
 		return ret
 	}
@@ -192,7 +196,7 @@ func (o *SchedulerRestStimTaskRequest) GetMethod() string {
 // GetMethodOk returns a tuple with the Method field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SchedulerRestStimTaskRequest) GetMethodOk() (*string, bool) {
-	if o == nil || o.Method == nil {
+	if o == nil || IsNil(o.Method) {
 		return nil, false
 	}
 	return o.Method, true
@@ -200,7 +204,7 @@ func (o *SchedulerRestStimTaskRequest) GetMethodOk() (*string, bool) {
 
 // HasMethod returns a boolean if a field has been set.
 func (o *SchedulerRestStimTaskRequest) HasMethod() bool {
-	if o != nil && o.Method != nil {
+	if o != nil && !IsNil(o.Method) {
 		return true
 	}
 
@@ -214,7 +218,7 @@ func (o *SchedulerRestStimTaskRequest) SetMethod(v string) {
 
 // GetProtocol returns the Protocol field value if set, zero value otherwise.
 func (o *SchedulerRestStimTaskRequest) GetProtocol() string {
-	if o == nil || o.Protocol == nil {
+	if o == nil || IsNil(o.Protocol) {
 		var ret string
 		return ret
 	}
@@ -224,7 +228,7 @@ func (o *SchedulerRestStimTaskRequest) GetProtocol() string {
 // GetProtocolOk returns a tuple with the Protocol field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SchedulerRestStimTaskRequest) GetProtocolOk() (*string, bool) {
-	if o == nil || o.Protocol == nil {
+	if o == nil || IsNil(o.Protocol) {
 		return nil, false
 	}
 	return o.Protocol, true
@@ -232,7 +236,7 @@ func (o *SchedulerRestStimTaskRequest) GetProtocolOk() (*string, bool) {
 
 // HasProtocol returns a boolean if a field has been set.
 func (o *SchedulerRestStimTaskRequest) HasProtocol() bool {
-	if o != nil && o.Protocol != nil {
+	if o != nil && !IsNil(o.Protocol) {
 		return true
 	}
 
@@ -257,7 +261,7 @@ func (o *SchedulerRestStimTaskRequest) GetResponse() interface{} {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *SchedulerRestStimTaskRequest) GetResponseOk() (*interface{}, bool) {
-	if o == nil || o.Response == nil {
+	if o == nil || IsNil(o.Response) {
 		return nil, false
 	}
 	return &o.Response, true
@@ -265,7 +269,7 @@ func (o *SchedulerRestStimTaskRequest) GetResponseOk() (*interface{}, bool) {
 
 // HasResponse returns a boolean if a field has been set.
 func (o *SchedulerRestStimTaskRequest) HasResponse() bool {
-	if o != nil && o.Response != nil {
+	if o != nil && IsNil(o.Response) {
 		return true
 	}
 
@@ -279,7 +283,7 @@ func (o *SchedulerRestStimTaskRequest) SetResponse(v interface{}) {
 
 // GetTimeout returns the Timeout field value if set, zero value otherwise.
 func (o *SchedulerRestStimTaskRequest) GetTimeout() int64 {
-	if o == nil || o.Timeout == nil {
+	if o == nil || IsNil(o.Timeout) {
 		var ret int64
 		return ret
 	}
@@ -289,7 +293,7 @@ func (o *SchedulerRestStimTaskRequest) GetTimeout() int64 {
 // GetTimeoutOk returns a tuple with the Timeout field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SchedulerRestStimTaskRequest) GetTimeoutOk() (*int64, bool) {
-	if o == nil || o.Timeout == nil {
+	if o == nil || IsNil(o.Timeout) {
 		return nil, false
 	}
 	return o.Timeout, true
@@ -297,7 +301,7 @@ func (o *SchedulerRestStimTaskRequest) GetTimeoutOk() (*int64, bool) {
 
 // HasTimeout returns a boolean if a field has been set.
 func (o *SchedulerRestStimTaskRequest) HasTimeout() bool {
-	if o != nil && o.Timeout != nil {
+	if o != nil && !IsNil(o.Timeout) {
 		return true
 	}
 
@@ -311,7 +315,7 @@ func (o *SchedulerRestStimTaskRequest) SetTimeout(v int64) {
 
 // GetUrl returns the Url field value if set, zero value otherwise.
 func (o *SchedulerRestStimTaskRequest) GetUrl() string {
-	if o == nil || o.Url == nil {
+	if o == nil || IsNil(o.Url) {
 		var ret string
 		return ret
 	}
@@ -321,7 +325,7 @@ func (o *SchedulerRestStimTaskRequest) GetUrl() string {
 // GetUrlOk returns a tuple with the Url field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SchedulerRestStimTaskRequest) GetUrlOk() (*string, bool) {
-	if o == nil || o.Url == nil {
+	if o == nil || IsNil(o.Url) {
 		return nil, false
 	}
 	return o.Url, true
@@ -329,7 +333,7 @@ func (o *SchedulerRestStimTaskRequest) GetUrlOk() (*string, bool) {
 
 // HasUrl returns a boolean if a field has been set.
 func (o *SchedulerRestStimTaskRequest) HasUrl() bool {
-	if o != nil && o.Url != nil {
+	if o != nil && !IsNil(o.Url) {
 		return true
 	}
 
@@ -342,40 +346,44 @@ func (o *SchedulerRestStimTaskRequest) SetUrl(v string) {
 }
 
 func (o SchedulerRestStimTaskRequest) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o SchedulerRestStimTaskRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedSchedulerAbstractTaskRequest, errSchedulerAbstractTaskRequest := json.Marshal(o.SchedulerAbstractTaskRequest)
 	if errSchedulerAbstractTaskRequest != nil {
-		return []byte{}, errSchedulerAbstractTaskRequest
+		return map[string]interface{}{}, errSchedulerAbstractTaskRequest
 	}
 	errSchedulerAbstractTaskRequest = json.Unmarshal([]byte(serializedSchedulerAbstractTaskRequest), &toSerialize)
 	if errSchedulerAbstractTaskRequest != nil {
-		return []byte{}, errSchedulerAbstractTaskRequest
+		return map[string]interface{}{}, errSchedulerAbstractTaskRequest
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
 	if o.Body != nil {
 		toSerialize["Body"] = o.Body
 	}
 	if o.Headers != nil {
 		toSerialize["Headers"] = o.Headers
 	}
-	if o.Method != nil {
+	if !IsNil(o.Method) {
 		toSerialize["Method"] = o.Method
 	}
-	if o.Protocol != nil {
+	if !IsNil(o.Protocol) {
 		toSerialize["Protocol"] = o.Protocol
 	}
 	if o.Response != nil {
 		toSerialize["Response"] = o.Response
 	}
-	if o.Timeout != nil {
+	if !IsNil(o.Timeout) {
 		toSerialize["Timeout"] = o.Timeout
 	}
-	if o.Url != nil {
+	if !IsNil(o.Url) {
 		toSerialize["Url"] = o.Url
 	}
 
@@ -383,10 +391,32 @@ func (o SchedulerRestStimTaskRequest) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *SchedulerRestStimTaskRequest) UnmarshalJSON(bytes []byte) (err error) {
+func (o *SchedulerRestStimTaskRequest) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type SchedulerRestStimTaskRequestWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -410,7 +440,7 @@ func (o *SchedulerRestStimTaskRequest) UnmarshalJSON(bytes []byte) (err error) {
 
 	varSchedulerRestStimTaskRequestWithoutEmbeddedStruct := SchedulerRestStimTaskRequestWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varSchedulerRestStimTaskRequestWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varSchedulerRestStimTaskRequestWithoutEmbeddedStruct)
 	if err == nil {
 		varSchedulerRestStimTaskRequest := _SchedulerRestStimTaskRequest{}
 		varSchedulerRestStimTaskRequest.ClassId = varSchedulerRestStimTaskRequestWithoutEmbeddedStruct.ClassId
@@ -429,7 +459,7 @@ func (o *SchedulerRestStimTaskRequest) UnmarshalJSON(bytes []byte) (err error) {
 
 	varSchedulerRestStimTaskRequest := _SchedulerRestStimTaskRequest{}
 
-	err = json.Unmarshal(bytes, &varSchedulerRestStimTaskRequest)
+	err = json.Unmarshal(data, &varSchedulerRestStimTaskRequest)
 	if err == nil {
 		o.SchedulerAbstractTaskRequest = varSchedulerRestStimTaskRequest.SchedulerAbstractTaskRequest
 	} else {
@@ -438,7 +468,7 @@ func (o *SchedulerRestStimTaskRequest) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Body")

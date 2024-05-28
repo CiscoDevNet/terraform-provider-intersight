@@ -15,8 +15,8 @@ Name | Type | Description | Notes
 **Path** | Pointer to **string** | The absolute path of the imported file in the endpoint. | [optional] [readonly] 
 **RegisteredWorkflows** | Pointer to **[]string** |  | [optional] 
 **UsedCount** | Pointer to **int64** | The number of times this file has been used to copy or upgrade or install actions. Used by the cache monitoring process to determine the files to be evicted from the cache. | [optional] [readonly] 
-**File** | Pointer to [**SoftwarerepositoryFileRelationship**](SoftwarerepositoryFileRelationship.md) |  | [optional] 
-**NetworkElement** | Pointer to [**NetworkElementRelationship**](NetworkElementRelationship.md) |  | [optional] 
+**File** | Pointer to [**NullableSoftwarerepositoryFileRelationship**](SoftwarerepositoryFileRelationship.md) |  | [optional] 
+**NetworkElement** | Pointer to [**NullableNetworkElementRelationship**](NetworkElementRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -337,6 +337,16 @@ SetFile sets File field to given value.
 
 HasFile returns a boolean if a field has been set.
 
+### SetFileNil
+
+`func (o *SoftwarerepositoryCachedImage) SetFileNil(b bool)`
+
+ SetFileNil sets the value for File to be an explicit nil
+
+### UnsetFile
+`func (o *SoftwarerepositoryCachedImage) UnsetFile()`
+
+UnsetFile ensures that no value is present for File, not even an explicit nil
 ### GetNetworkElement
 
 `func (o *SoftwarerepositoryCachedImage) GetNetworkElement() NetworkElementRelationship`
@@ -362,6 +372,16 @@ SetNetworkElement sets NetworkElement field to given value.
 
 HasNetworkElement returns a boolean if a field has been set.
 
+### SetNetworkElementNil
+
+`func (o *SoftwarerepositoryCachedImage) SetNetworkElementNil(b bool)`
+
+ SetNetworkElementNil sets the value for NetworkElement to be an explicit nil
+
+### UnsetNetworkElement
+`func (o *SoftwarerepositoryCachedImage) UnsetNetworkElement()`
+
+UnsetNetworkElement ensures that no value is present for NetworkElement, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

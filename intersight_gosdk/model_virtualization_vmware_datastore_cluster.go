@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the VirtualizationVmwareDatastoreCluster type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &VirtualizationVmwareDatastoreCluster{}
 
 // VirtualizationVmwareDatastoreCluster The VMware Datastore cluster entity with its attributes. Datastore cluster is a collection of datastores with shared resources and a shared management interface.
 type VirtualizationVmwareDatastoreCluster struct {
@@ -57,8 +61,8 @@ type VirtualizationVmwareDatastoreCluster struct {
 	// Minimum level of consumed space for each datastore that is the threshold for action.
 	UtilizedSpaceThreshold *int32 `json:"UtilizedSpaceThreshold,omitempty"`
 	// Storage DRS behavior when it generates recommendations for VM evacuations from datastores in a datastore cluster.
-	VmEvacuationAutomationMode *string                                     `json:"VmEvacuationAutomationMode,omitempty"`
-	Datacenter                 *VirtualizationVmwareDatacenterRelationship `json:"Datacenter,omitempty"`
+	VmEvacuationAutomationMode *string                                            `json:"VmEvacuationAutomationMode,omitempty"`
+	Datacenter                 NullableVirtualizationVmwareDatacenterRelationship `json:"Datacenter,omitempty"`
 	AdditionalProperties       map[string]interface{}
 }
 
@@ -143,7 +147,7 @@ func (o *VirtualizationVmwareDatastoreCluster) SetObjectType(v string) {
 
 // GetAutomationLevel returns the AutomationLevel field value if set, zero value otherwise.
 func (o *VirtualizationVmwareDatastoreCluster) GetAutomationLevel() string {
-	if o == nil || o.AutomationLevel == nil {
+	if o == nil || IsNil(o.AutomationLevel) {
 		var ret string
 		return ret
 	}
@@ -153,7 +157,7 @@ func (o *VirtualizationVmwareDatastoreCluster) GetAutomationLevel() string {
 // GetAutomationLevelOk returns a tuple with the AutomationLevel field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationVmwareDatastoreCluster) GetAutomationLevelOk() (*string, bool) {
-	if o == nil || o.AutomationLevel == nil {
+	if o == nil || IsNil(o.AutomationLevel) {
 		return nil, false
 	}
 	return o.AutomationLevel, true
@@ -161,7 +165,7 @@ func (o *VirtualizationVmwareDatastoreCluster) GetAutomationLevelOk() (*string, 
 
 // HasAutomationLevel returns a boolean if a field has been set.
 func (o *VirtualizationVmwareDatastoreCluster) HasAutomationLevel() bool {
-	if o != nil && o.AutomationLevel != nil {
+	if o != nil && !IsNil(o.AutomationLevel) {
 		return true
 	}
 
@@ -175,7 +179,7 @@ func (o *VirtualizationVmwareDatastoreCluster) SetAutomationLevel(v string) {
 
 // GetFreeSpaceThreshold returns the FreeSpaceThreshold field value if set, zero value otherwise.
 func (o *VirtualizationVmwareDatastoreCluster) GetFreeSpaceThreshold() int64 {
-	if o == nil || o.FreeSpaceThreshold == nil {
+	if o == nil || IsNil(o.FreeSpaceThreshold) {
 		var ret int64
 		return ret
 	}
@@ -185,7 +189,7 @@ func (o *VirtualizationVmwareDatastoreCluster) GetFreeSpaceThreshold() int64 {
 // GetFreeSpaceThresholdOk returns a tuple with the FreeSpaceThreshold field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationVmwareDatastoreCluster) GetFreeSpaceThresholdOk() (*int64, bool) {
-	if o == nil || o.FreeSpaceThreshold == nil {
+	if o == nil || IsNil(o.FreeSpaceThreshold) {
 		return nil, false
 	}
 	return o.FreeSpaceThreshold, true
@@ -193,7 +197,7 @@ func (o *VirtualizationVmwareDatastoreCluster) GetFreeSpaceThresholdOk() (*int64
 
 // HasFreeSpaceThreshold returns a boolean if a field has been set.
 func (o *VirtualizationVmwareDatastoreCluster) HasFreeSpaceThreshold() bool {
-	if o != nil && o.FreeSpaceThreshold != nil {
+	if o != nil && !IsNil(o.FreeSpaceThreshold) {
 		return true
 	}
 
@@ -207,7 +211,7 @@ func (o *VirtualizationVmwareDatastoreCluster) SetFreeSpaceThreshold(v int64) {
 
 // GetInventoryPath returns the InventoryPath field value if set, zero value otherwise.
 func (o *VirtualizationVmwareDatastoreCluster) GetInventoryPath() string {
-	if o == nil || o.InventoryPath == nil {
+	if o == nil || IsNil(o.InventoryPath) {
 		var ret string
 		return ret
 	}
@@ -217,7 +221,7 @@ func (o *VirtualizationVmwareDatastoreCluster) GetInventoryPath() string {
 // GetInventoryPathOk returns a tuple with the InventoryPath field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationVmwareDatastoreCluster) GetInventoryPathOk() (*string, bool) {
-	if o == nil || o.InventoryPath == nil {
+	if o == nil || IsNil(o.InventoryPath) {
 		return nil, false
 	}
 	return o.InventoryPath, true
@@ -225,7 +229,7 @@ func (o *VirtualizationVmwareDatastoreCluster) GetInventoryPathOk() (*string, bo
 
 // HasInventoryPath returns a boolean if a field has been set.
 func (o *VirtualizationVmwareDatastoreCluster) HasInventoryPath() bool {
-	if o != nil && o.InventoryPath != nil {
+	if o != nil && !IsNil(o.InventoryPath) {
 		return true
 	}
 
@@ -239,7 +243,7 @@ func (o *VirtualizationVmwareDatastoreCluster) SetInventoryPath(v string) {
 
 // GetIoLatencyThreshold returns the IoLatencyThreshold field value if set, zero value otherwise.
 func (o *VirtualizationVmwareDatastoreCluster) GetIoLatencyThreshold() int32 {
-	if o == nil || o.IoLatencyThreshold == nil {
+	if o == nil || IsNil(o.IoLatencyThreshold) {
 		var ret int32
 		return ret
 	}
@@ -249,7 +253,7 @@ func (o *VirtualizationVmwareDatastoreCluster) GetIoLatencyThreshold() int32 {
 // GetIoLatencyThresholdOk returns a tuple with the IoLatencyThreshold field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationVmwareDatastoreCluster) GetIoLatencyThresholdOk() (*int32, bool) {
-	if o == nil || o.IoLatencyThreshold == nil {
+	if o == nil || IsNil(o.IoLatencyThreshold) {
 		return nil, false
 	}
 	return o.IoLatencyThreshold, true
@@ -257,7 +261,7 @@ func (o *VirtualizationVmwareDatastoreCluster) GetIoLatencyThresholdOk() (*int32
 
 // HasIoLatencyThreshold returns a boolean if a field has been set.
 func (o *VirtualizationVmwareDatastoreCluster) HasIoLatencyThreshold() bool {
-	if o != nil && o.IoLatencyThreshold != nil {
+	if o != nil && !IsNil(o.IoLatencyThreshold) {
 		return true
 	}
 
@@ -271,7 +275,7 @@ func (o *VirtualizationVmwareDatastoreCluster) SetIoLatencyThreshold(v int32) {
 
 // GetIoLoadBalanceAutomationMode returns the IoLoadBalanceAutomationMode field value if set, zero value otherwise.
 func (o *VirtualizationVmwareDatastoreCluster) GetIoLoadBalanceAutomationMode() string {
-	if o == nil || o.IoLoadBalanceAutomationMode == nil {
+	if o == nil || IsNil(o.IoLoadBalanceAutomationMode) {
 		var ret string
 		return ret
 	}
@@ -281,7 +285,7 @@ func (o *VirtualizationVmwareDatastoreCluster) GetIoLoadBalanceAutomationMode() 
 // GetIoLoadBalanceAutomationModeOk returns a tuple with the IoLoadBalanceAutomationMode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationVmwareDatastoreCluster) GetIoLoadBalanceAutomationModeOk() (*string, bool) {
-	if o == nil || o.IoLoadBalanceAutomationMode == nil {
+	if o == nil || IsNil(o.IoLoadBalanceAutomationMode) {
 		return nil, false
 	}
 	return o.IoLoadBalanceAutomationMode, true
@@ -289,7 +293,7 @@ func (o *VirtualizationVmwareDatastoreCluster) GetIoLoadBalanceAutomationModeOk(
 
 // HasIoLoadBalanceAutomationMode returns a boolean if a field has been set.
 func (o *VirtualizationVmwareDatastoreCluster) HasIoLoadBalanceAutomationMode() bool {
-	if o != nil && o.IoLoadBalanceAutomationMode != nil {
+	if o != nil && !IsNil(o.IoLoadBalanceAutomationMode) {
 		return true
 	}
 
@@ -303,7 +307,7 @@ func (o *VirtualizationVmwareDatastoreCluster) SetIoLoadBalanceAutomationMode(v 
 
 // GetIoLoadImbalanceThreshold returns the IoLoadImbalanceThreshold field value if set, zero value otherwise.
 func (o *VirtualizationVmwareDatastoreCluster) GetIoLoadImbalanceThreshold() int32 {
-	if o == nil || o.IoLoadImbalanceThreshold == nil {
+	if o == nil || IsNil(o.IoLoadImbalanceThreshold) {
 		var ret int32
 		return ret
 	}
@@ -313,7 +317,7 @@ func (o *VirtualizationVmwareDatastoreCluster) GetIoLoadImbalanceThreshold() int
 // GetIoLoadImbalanceThresholdOk returns a tuple with the IoLoadImbalanceThreshold field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationVmwareDatastoreCluster) GetIoLoadImbalanceThresholdOk() (*int32, bool) {
-	if o == nil || o.IoLoadImbalanceThreshold == nil {
+	if o == nil || IsNil(o.IoLoadImbalanceThreshold) {
 		return nil, false
 	}
 	return o.IoLoadImbalanceThreshold, true
@@ -321,7 +325,7 @@ func (o *VirtualizationVmwareDatastoreCluster) GetIoLoadImbalanceThresholdOk() (
 
 // HasIoLoadImbalanceThreshold returns a boolean if a field has been set.
 func (o *VirtualizationVmwareDatastoreCluster) HasIoLoadImbalanceThreshold() bool {
-	if o != nil && o.IoLoadImbalanceThreshold != nil {
+	if o != nil && !IsNil(o.IoLoadImbalanceThreshold) {
 		return true
 	}
 
@@ -335,7 +339,7 @@ func (o *VirtualizationVmwareDatastoreCluster) SetIoLoadImbalanceThreshold(v int
 
 // GetIoMetricsEnabled returns the IoMetricsEnabled field value if set, zero value otherwise.
 func (o *VirtualizationVmwareDatastoreCluster) GetIoMetricsEnabled() bool {
-	if o == nil || o.IoMetricsEnabled == nil {
+	if o == nil || IsNil(o.IoMetricsEnabled) {
 		var ret bool
 		return ret
 	}
@@ -345,7 +349,7 @@ func (o *VirtualizationVmwareDatastoreCluster) GetIoMetricsEnabled() bool {
 // GetIoMetricsEnabledOk returns a tuple with the IoMetricsEnabled field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationVmwareDatastoreCluster) GetIoMetricsEnabledOk() (*bool, bool) {
-	if o == nil || o.IoMetricsEnabled == nil {
+	if o == nil || IsNil(o.IoMetricsEnabled) {
 		return nil, false
 	}
 	return o.IoMetricsEnabled, true
@@ -353,7 +357,7 @@ func (o *VirtualizationVmwareDatastoreCluster) GetIoMetricsEnabledOk() (*bool, b
 
 // HasIoMetricsEnabled returns a boolean if a field has been set.
 func (o *VirtualizationVmwareDatastoreCluster) HasIoMetricsEnabled() bool {
-	if o != nil && o.IoMetricsEnabled != nil {
+	if o != nil && !IsNil(o.IoMetricsEnabled) {
 		return true
 	}
 
@@ -367,7 +371,7 @@ func (o *VirtualizationVmwareDatastoreCluster) SetIoMetricsEnabled(v bool) {
 
 // GetMinSpaceUtilizationDifference returns the MinSpaceUtilizationDifference field value if set, zero value otherwise.
 func (o *VirtualizationVmwareDatastoreCluster) GetMinSpaceUtilizationDifference() int32 {
-	if o == nil || o.MinSpaceUtilizationDifference == nil {
+	if o == nil || IsNil(o.MinSpaceUtilizationDifference) {
 		var ret int32
 		return ret
 	}
@@ -377,7 +381,7 @@ func (o *VirtualizationVmwareDatastoreCluster) GetMinSpaceUtilizationDifference(
 // GetMinSpaceUtilizationDifferenceOk returns a tuple with the MinSpaceUtilizationDifference field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationVmwareDatastoreCluster) GetMinSpaceUtilizationDifferenceOk() (*int32, bool) {
-	if o == nil || o.MinSpaceUtilizationDifference == nil {
+	if o == nil || IsNil(o.MinSpaceUtilizationDifference) {
 		return nil, false
 	}
 	return o.MinSpaceUtilizationDifference, true
@@ -385,7 +389,7 @@ func (o *VirtualizationVmwareDatastoreCluster) GetMinSpaceUtilizationDifferenceO
 
 // HasMinSpaceUtilizationDifference returns a boolean if a field has been set.
 func (o *VirtualizationVmwareDatastoreCluster) HasMinSpaceUtilizationDifference() bool {
-	if o != nil && o.MinSpaceUtilizationDifference != nil {
+	if o != nil && !IsNil(o.MinSpaceUtilizationDifference) {
 		return true
 	}
 
@@ -399,7 +403,7 @@ func (o *VirtualizationVmwareDatastoreCluster) SetMinSpaceUtilizationDifference(
 
 // GetPolicyEnforcementAutomationMode returns the PolicyEnforcementAutomationMode field value if set, zero value otherwise.
 func (o *VirtualizationVmwareDatastoreCluster) GetPolicyEnforcementAutomationMode() string {
-	if o == nil || o.PolicyEnforcementAutomationMode == nil {
+	if o == nil || IsNil(o.PolicyEnforcementAutomationMode) {
 		var ret string
 		return ret
 	}
@@ -409,7 +413,7 @@ func (o *VirtualizationVmwareDatastoreCluster) GetPolicyEnforcementAutomationMod
 // GetPolicyEnforcementAutomationModeOk returns a tuple with the PolicyEnforcementAutomationMode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationVmwareDatastoreCluster) GetPolicyEnforcementAutomationModeOk() (*string, bool) {
-	if o == nil || o.PolicyEnforcementAutomationMode == nil {
+	if o == nil || IsNil(o.PolicyEnforcementAutomationMode) {
 		return nil, false
 	}
 	return o.PolicyEnforcementAutomationMode, true
@@ -417,7 +421,7 @@ func (o *VirtualizationVmwareDatastoreCluster) GetPolicyEnforcementAutomationMod
 
 // HasPolicyEnforcementAutomationMode returns a boolean if a field has been set.
 func (o *VirtualizationVmwareDatastoreCluster) HasPolicyEnforcementAutomationMode() bool {
-	if o != nil && o.PolicyEnforcementAutomationMode != nil {
+	if o != nil && !IsNil(o.PolicyEnforcementAutomationMode) {
 		return true
 	}
 
@@ -431,7 +435,7 @@ func (o *VirtualizationVmwareDatastoreCluster) SetPolicyEnforcementAutomationMod
 
 // GetReservablePercentThreshold returns the ReservablePercentThreshold field value if set, zero value otherwise.
 func (o *VirtualizationVmwareDatastoreCluster) GetReservablePercentThreshold() int32 {
-	if o == nil || o.ReservablePercentThreshold == nil {
+	if o == nil || IsNil(o.ReservablePercentThreshold) {
 		var ret int32
 		return ret
 	}
@@ -441,7 +445,7 @@ func (o *VirtualizationVmwareDatastoreCluster) GetReservablePercentThreshold() i
 // GetReservablePercentThresholdOk returns a tuple with the ReservablePercentThreshold field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationVmwareDatastoreCluster) GetReservablePercentThresholdOk() (*int32, bool) {
-	if o == nil || o.ReservablePercentThreshold == nil {
+	if o == nil || IsNil(o.ReservablePercentThreshold) {
 		return nil, false
 	}
 	return o.ReservablePercentThreshold, true
@@ -449,7 +453,7 @@ func (o *VirtualizationVmwareDatastoreCluster) GetReservablePercentThresholdOk()
 
 // HasReservablePercentThreshold returns a boolean if a field has been set.
 func (o *VirtualizationVmwareDatastoreCluster) HasReservablePercentThreshold() bool {
-	if o != nil && o.ReservablePercentThreshold != nil {
+	if o != nil && !IsNil(o.ReservablePercentThreshold) {
 		return true
 	}
 
@@ -463,7 +467,7 @@ func (o *VirtualizationVmwareDatastoreCluster) SetReservablePercentThreshold(v i
 
 // GetRuleEnforcementAutomationMode returns the RuleEnforcementAutomationMode field value if set, zero value otherwise.
 func (o *VirtualizationVmwareDatastoreCluster) GetRuleEnforcementAutomationMode() string {
-	if o == nil || o.RuleEnforcementAutomationMode == nil {
+	if o == nil || IsNil(o.RuleEnforcementAutomationMode) {
 		var ret string
 		return ret
 	}
@@ -473,7 +477,7 @@ func (o *VirtualizationVmwareDatastoreCluster) GetRuleEnforcementAutomationMode(
 // GetRuleEnforcementAutomationModeOk returns a tuple with the RuleEnforcementAutomationMode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationVmwareDatastoreCluster) GetRuleEnforcementAutomationModeOk() (*string, bool) {
-	if o == nil || o.RuleEnforcementAutomationMode == nil {
+	if o == nil || IsNil(o.RuleEnforcementAutomationMode) {
 		return nil, false
 	}
 	return o.RuleEnforcementAutomationMode, true
@@ -481,7 +485,7 @@ func (o *VirtualizationVmwareDatastoreCluster) GetRuleEnforcementAutomationModeO
 
 // HasRuleEnforcementAutomationMode returns a boolean if a field has been set.
 func (o *VirtualizationVmwareDatastoreCluster) HasRuleEnforcementAutomationMode() bool {
-	if o != nil && o.RuleEnforcementAutomationMode != nil {
+	if o != nil && !IsNil(o.RuleEnforcementAutomationMode) {
 		return true
 	}
 
@@ -495,7 +499,7 @@ func (o *VirtualizationVmwareDatastoreCluster) SetRuleEnforcementAutomationMode(
 
 // GetSpaceLoadBalanceAutomationMode returns the SpaceLoadBalanceAutomationMode field value if set, zero value otherwise.
 func (o *VirtualizationVmwareDatastoreCluster) GetSpaceLoadBalanceAutomationMode() string {
-	if o == nil || o.SpaceLoadBalanceAutomationMode == nil {
+	if o == nil || IsNil(o.SpaceLoadBalanceAutomationMode) {
 		var ret string
 		return ret
 	}
@@ -505,7 +509,7 @@ func (o *VirtualizationVmwareDatastoreCluster) GetSpaceLoadBalanceAutomationMode
 // GetSpaceLoadBalanceAutomationModeOk returns a tuple with the SpaceLoadBalanceAutomationMode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationVmwareDatastoreCluster) GetSpaceLoadBalanceAutomationModeOk() (*string, bool) {
-	if o == nil || o.SpaceLoadBalanceAutomationMode == nil {
+	if o == nil || IsNil(o.SpaceLoadBalanceAutomationMode) {
 		return nil, false
 	}
 	return o.SpaceLoadBalanceAutomationMode, true
@@ -513,7 +517,7 @@ func (o *VirtualizationVmwareDatastoreCluster) GetSpaceLoadBalanceAutomationMode
 
 // HasSpaceLoadBalanceAutomationMode returns a boolean if a field has been set.
 func (o *VirtualizationVmwareDatastoreCluster) HasSpaceLoadBalanceAutomationMode() bool {
-	if o != nil && o.SpaceLoadBalanceAutomationMode != nil {
+	if o != nil && !IsNil(o.SpaceLoadBalanceAutomationMode) {
 		return true
 	}
 
@@ -527,7 +531,7 @@ func (o *VirtualizationVmwareDatastoreCluster) SetSpaceLoadBalanceAutomationMode
 
 // GetSpaceThresholdMode returns the SpaceThresholdMode field value if set, zero value otherwise.
 func (o *VirtualizationVmwareDatastoreCluster) GetSpaceThresholdMode() string {
-	if o == nil || o.SpaceThresholdMode == nil {
+	if o == nil || IsNil(o.SpaceThresholdMode) {
 		var ret string
 		return ret
 	}
@@ -537,7 +541,7 @@ func (o *VirtualizationVmwareDatastoreCluster) GetSpaceThresholdMode() string {
 // GetSpaceThresholdModeOk returns a tuple with the SpaceThresholdMode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationVmwareDatastoreCluster) GetSpaceThresholdModeOk() (*string, bool) {
-	if o == nil || o.SpaceThresholdMode == nil {
+	if o == nil || IsNil(o.SpaceThresholdMode) {
 		return nil, false
 	}
 	return o.SpaceThresholdMode, true
@@ -545,7 +549,7 @@ func (o *VirtualizationVmwareDatastoreCluster) GetSpaceThresholdModeOk() (*strin
 
 // HasSpaceThresholdMode returns a boolean if a field has been set.
 func (o *VirtualizationVmwareDatastoreCluster) HasSpaceThresholdMode() bool {
-	if o != nil && o.SpaceThresholdMode != nil {
+	if o != nil && !IsNil(o.SpaceThresholdMode) {
 		return true
 	}
 
@@ -559,7 +563,7 @@ func (o *VirtualizationVmwareDatastoreCluster) SetSpaceThresholdMode(v string) {
 
 // GetStatus returns the Status field value if set, zero value otherwise.
 func (o *VirtualizationVmwareDatastoreCluster) GetStatus() string {
-	if o == nil || o.Status == nil {
+	if o == nil || IsNil(o.Status) {
 		var ret string
 		return ret
 	}
@@ -569,7 +573,7 @@ func (o *VirtualizationVmwareDatastoreCluster) GetStatus() string {
 // GetStatusOk returns a tuple with the Status field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationVmwareDatastoreCluster) GetStatusOk() (*string, bool) {
-	if o == nil || o.Status == nil {
+	if o == nil || IsNil(o.Status) {
 		return nil, false
 	}
 	return o.Status, true
@@ -577,7 +581,7 @@ func (o *VirtualizationVmwareDatastoreCluster) GetStatusOk() (*string, bool) {
 
 // HasStatus returns a boolean if a field has been set.
 func (o *VirtualizationVmwareDatastoreCluster) HasStatus() bool {
-	if o != nil && o.Status != nil {
+	if o != nil && !IsNil(o.Status) {
 		return true
 	}
 
@@ -591,7 +595,7 @@ func (o *VirtualizationVmwareDatastoreCluster) SetStatus(v string) {
 
 // GetStorageDrsEnabled returns the StorageDrsEnabled field value if set, zero value otherwise.
 func (o *VirtualizationVmwareDatastoreCluster) GetStorageDrsEnabled() bool {
-	if o == nil || o.StorageDrsEnabled == nil {
+	if o == nil || IsNil(o.StorageDrsEnabled) {
 		var ret bool
 		return ret
 	}
@@ -601,7 +605,7 @@ func (o *VirtualizationVmwareDatastoreCluster) GetStorageDrsEnabled() bool {
 // GetStorageDrsEnabledOk returns a tuple with the StorageDrsEnabled field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationVmwareDatastoreCluster) GetStorageDrsEnabledOk() (*bool, bool) {
-	if o == nil || o.StorageDrsEnabled == nil {
+	if o == nil || IsNil(o.StorageDrsEnabled) {
 		return nil, false
 	}
 	return o.StorageDrsEnabled, true
@@ -609,7 +613,7 @@ func (o *VirtualizationVmwareDatastoreCluster) GetStorageDrsEnabledOk() (*bool, 
 
 // HasStorageDrsEnabled returns a boolean if a field has been set.
 func (o *VirtualizationVmwareDatastoreCluster) HasStorageDrsEnabled() bool {
-	if o != nil && o.StorageDrsEnabled != nil {
+	if o != nil && !IsNil(o.StorageDrsEnabled) {
 		return true
 	}
 
@@ -623,7 +627,7 @@ func (o *VirtualizationVmwareDatastoreCluster) SetStorageDrsEnabled(v bool) {
 
 // GetUtilizedSpaceThreshold returns the UtilizedSpaceThreshold field value if set, zero value otherwise.
 func (o *VirtualizationVmwareDatastoreCluster) GetUtilizedSpaceThreshold() int32 {
-	if o == nil || o.UtilizedSpaceThreshold == nil {
+	if o == nil || IsNil(o.UtilizedSpaceThreshold) {
 		var ret int32
 		return ret
 	}
@@ -633,7 +637,7 @@ func (o *VirtualizationVmwareDatastoreCluster) GetUtilizedSpaceThreshold() int32
 // GetUtilizedSpaceThresholdOk returns a tuple with the UtilizedSpaceThreshold field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationVmwareDatastoreCluster) GetUtilizedSpaceThresholdOk() (*int32, bool) {
-	if o == nil || o.UtilizedSpaceThreshold == nil {
+	if o == nil || IsNil(o.UtilizedSpaceThreshold) {
 		return nil, false
 	}
 	return o.UtilizedSpaceThreshold, true
@@ -641,7 +645,7 @@ func (o *VirtualizationVmwareDatastoreCluster) GetUtilizedSpaceThresholdOk() (*i
 
 // HasUtilizedSpaceThreshold returns a boolean if a field has been set.
 func (o *VirtualizationVmwareDatastoreCluster) HasUtilizedSpaceThreshold() bool {
-	if o != nil && o.UtilizedSpaceThreshold != nil {
+	if o != nil && !IsNil(o.UtilizedSpaceThreshold) {
 		return true
 	}
 
@@ -655,7 +659,7 @@ func (o *VirtualizationVmwareDatastoreCluster) SetUtilizedSpaceThreshold(v int32
 
 // GetVmEvacuationAutomationMode returns the VmEvacuationAutomationMode field value if set, zero value otherwise.
 func (o *VirtualizationVmwareDatastoreCluster) GetVmEvacuationAutomationMode() string {
-	if o == nil || o.VmEvacuationAutomationMode == nil {
+	if o == nil || IsNil(o.VmEvacuationAutomationMode) {
 		var ret string
 		return ret
 	}
@@ -665,7 +669,7 @@ func (o *VirtualizationVmwareDatastoreCluster) GetVmEvacuationAutomationMode() s
 // GetVmEvacuationAutomationModeOk returns a tuple with the VmEvacuationAutomationMode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationVmwareDatastoreCluster) GetVmEvacuationAutomationModeOk() (*string, bool) {
-	if o == nil || o.VmEvacuationAutomationMode == nil {
+	if o == nil || IsNil(o.VmEvacuationAutomationMode) {
 		return nil, false
 	}
 	return o.VmEvacuationAutomationMode, true
@@ -673,7 +677,7 @@ func (o *VirtualizationVmwareDatastoreCluster) GetVmEvacuationAutomationModeOk()
 
 // HasVmEvacuationAutomationMode returns a boolean if a field has been set.
 func (o *VirtualizationVmwareDatastoreCluster) HasVmEvacuationAutomationMode() bool {
-	if o != nil && o.VmEvacuationAutomationMode != nil {
+	if o != nil && !IsNil(o.VmEvacuationAutomationMode) {
 		return true
 	}
 
@@ -685,117 +689,154 @@ func (o *VirtualizationVmwareDatastoreCluster) SetVmEvacuationAutomationMode(v s
 	o.VmEvacuationAutomationMode = &v
 }
 
-// GetDatacenter returns the Datacenter field value if set, zero value otherwise.
+// GetDatacenter returns the Datacenter field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *VirtualizationVmwareDatastoreCluster) GetDatacenter() VirtualizationVmwareDatacenterRelationship {
-	if o == nil || o.Datacenter == nil {
+	if o == nil || IsNil(o.Datacenter.Get()) {
 		var ret VirtualizationVmwareDatacenterRelationship
 		return ret
 	}
-	return *o.Datacenter
+	return *o.Datacenter.Get()
 }
 
 // GetDatacenterOk returns a tuple with the Datacenter field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *VirtualizationVmwareDatastoreCluster) GetDatacenterOk() (*VirtualizationVmwareDatacenterRelationship, bool) {
-	if o == nil || o.Datacenter == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Datacenter, true
+	return o.Datacenter.Get(), o.Datacenter.IsSet()
 }
 
 // HasDatacenter returns a boolean if a field has been set.
 func (o *VirtualizationVmwareDatastoreCluster) HasDatacenter() bool {
-	if o != nil && o.Datacenter != nil {
+	if o != nil && o.Datacenter.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetDatacenter gets a reference to the given VirtualizationVmwareDatacenterRelationship and assigns it to the Datacenter field.
+// SetDatacenter gets a reference to the given NullableVirtualizationVmwareDatacenterRelationship and assigns it to the Datacenter field.
 func (o *VirtualizationVmwareDatastoreCluster) SetDatacenter(v VirtualizationVmwareDatacenterRelationship) {
-	o.Datacenter = &v
+	o.Datacenter.Set(&v)
+}
+
+// SetDatacenterNil sets the value for Datacenter to be an explicit nil
+func (o *VirtualizationVmwareDatastoreCluster) SetDatacenterNil() {
+	o.Datacenter.Set(nil)
+}
+
+// UnsetDatacenter ensures that no value is present for Datacenter, not even an explicit nil
+func (o *VirtualizationVmwareDatastoreCluster) UnsetDatacenter() {
+	o.Datacenter.Unset()
 }
 
 func (o VirtualizationVmwareDatastoreCluster) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o VirtualizationVmwareDatastoreCluster) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedVirtualizationBaseDatastoreCluster, errVirtualizationBaseDatastoreCluster := json.Marshal(o.VirtualizationBaseDatastoreCluster)
 	if errVirtualizationBaseDatastoreCluster != nil {
-		return []byte{}, errVirtualizationBaseDatastoreCluster
+		return map[string]interface{}{}, errVirtualizationBaseDatastoreCluster
 	}
 	errVirtualizationBaseDatastoreCluster = json.Unmarshal([]byte(serializedVirtualizationBaseDatastoreCluster), &toSerialize)
 	if errVirtualizationBaseDatastoreCluster != nil {
-		return []byte{}, errVirtualizationBaseDatastoreCluster
+		return map[string]interface{}{}, errVirtualizationBaseDatastoreCluster
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.AutomationLevel != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.AutomationLevel) {
 		toSerialize["AutomationLevel"] = o.AutomationLevel
 	}
-	if o.FreeSpaceThreshold != nil {
+	if !IsNil(o.FreeSpaceThreshold) {
 		toSerialize["FreeSpaceThreshold"] = o.FreeSpaceThreshold
 	}
-	if o.InventoryPath != nil {
+	if !IsNil(o.InventoryPath) {
 		toSerialize["InventoryPath"] = o.InventoryPath
 	}
-	if o.IoLatencyThreshold != nil {
+	if !IsNil(o.IoLatencyThreshold) {
 		toSerialize["IoLatencyThreshold"] = o.IoLatencyThreshold
 	}
-	if o.IoLoadBalanceAutomationMode != nil {
+	if !IsNil(o.IoLoadBalanceAutomationMode) {
 		toSerialize["IoLoadBalanceAutomationMode"] = o.IoLoadBalanceAutomationMode
 	}
-	if o.IoLoadImbalanceThreshold != nil {
+	if !IsNil(o.IoLoadImbalanceThreshold) {
 		toSerialize["IoLoadImbalanceThreshold"] = o.IoLoadImbalanceThreshold
 	}
-	if o.IoMetricsEnabled != nil {
+	if !IsNil(o.IoMetricsEnabled) {
 		toSerialize["IoMetricsEnabled"] = o.IoMetricsEnabled
 	}
-	if o.MinSpaceUtilizationDifference != nil {
+	if !IsNil(o.MinSpaceUtilizationDifference) {
 		toSerialize["MinSpaceUtilizationDifference"] = o.MinSpaceUtilizationDifference
 	}
-	if o.PolicyEnforcementAutomationMode != nil {
+	if !IsNil(o.PolicyEnforcementAutomationMode) {
 		toSerialize["PolicyEnforcementAutomationMode"] = o.PolicyEnforcementAutomationMode
 	}
-	if o.ReservablePercentThreshold != nil {
+	if !IsNil(o.ReservablePercentThreshold) {
 		toSerialize["ReservablePercentThreshold"] = o.ReservablePercentThreshold
 	}
-	if o.RuleEnforcementAutomationMode != nil {
+	if !IsNil(o.RuleEnforcementAutomationMode) {
 		toSerialize["RuleEnforcementAutomationMode"] = o.RuleEnforcementAutomationMode
 	}
-	if o.SpaceLoadBalanceAutomationMode != nil {
+	if !IsNil(o.SpaceLoadBalanceAutomationMode) {
 		toSerialize["SpaceLoadBalanceAutomationMode"] = o.SpaceLoadBalanceAutomationMode
 	}
-	if o.SpaceThresholdMode != nil {
+	if !IsNil(o.SpaceThresholdMode) {
 		toSerialize["SpaceThresholdMode"] = o.SpaceThresholdMode
 	}
-	if o.Status != nil {
+	if !IsNil(o.Status) {
 		toSerialize["Status"] = o.Status
 	}
-	if o.StorageDrsEnabled != nil {
+	if !IsNil(o.StorageDrsEnabled) {
 		toSerialize["StorageDrsEnabled"] = o.StorageDrsEnabled
 	}
-	if o.UtilizedSpaceThreshold != nil {
+	if !IsNil(o.UtilizedSpaceThreshold) {
 		toSerialize["UtilizedSpaceThreshold"] = o.UtilizedSpaceThreshold
 	}
-	if o.VmEvacuationAutomationMode != nil {
+	if !IsNil(o.VmEvacuationAutomationMode) {
 		toSerialize["VmEvacuationAutomationMode"] = o.VmEvacuationAutomationMode
 	}
-	if o.Datacenter != nil {
-		toSerialize["Datacenter"] = o.Datacenter
+	if o.Datacenter.IsSet() {
+		toSerialize["Datacenter"] = o.Datacenter.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *VirtualizationVmwareDatastoreCluster) UnmarshalJSON(bytes []byte) (err error) {
+func (o *VirtualizationVmwareDatastoreCluster) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type VirtualizationVmwareDatastoreClusterWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -834,13 +875,13 @@ func (o *VirtualizationVmwareDatastoreCluster) UnmarshalJSON(bytes []byte) (err 
 		// Minimum level of consumed space for each datastore that is the threshold for action.
 		UtilizedSpaceThreshold *int32 `json:"UtilizedSpaceThreshold,omitempty"`
 		// Storage DRS behavior when it generates recommendations for VM evacuations from datastores in a datastore cluster.
-		VmEvacuationAutomationMode *string                                     `json:"VmEvacuationAutomationMode,omitempty"`
-		Datacenter                 *VirtualizationVmwareDatacenterRelationship `json:"Datacenter,omitempty"`
+		VmEvacuationAutomationMode *string                                            `json:"VmEvacuationAutomationMode,omitempty"`
+		Datacenter                 NullableVirtualizationVmwareDatacenterRelationship `json:"Datacenter,omitempty"`
 	}
 
 	varVirtualizationVmwareDatastoreClusterWithoutEmbeddedStruct := VirtualizationVmwareDatastoreClusterWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varVirtualizationVmwareDatastoreClusterWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varVirtualizationVmwareDatastoreClusterWithoutEmbeddedStruct)
 	if err == nil {
 		varVirtualizationVmwareDatastoreCluster := _VirtualizationVmwareDatastoreCluster{}
 		varVirtualizationVmwareDatastoreCluster.ClassId = varVirtualizationVmwareDatastoreClusterWithoutEmbeddedStruct.ClassId
@@ -870,7 +911,7 @@ func (o *VirtualizationVmwareDatastoreCluster) UnmarshalJSON(bytes []byte) (err 
 
 	varVirtualizationVmwareDatastoreCluster := _VirtualizationVmwareDatastoreCluster{}
 
-	err = json.Unmarshal(bytes, &varVirtualizationVmwareDatastoreCluster)
+	err = json.Unmarshal(data, &varVirtualizationVmwareDatastoreCluster)
 	if err == nil {
 		o.VirtualizationBaseDatastoreCluster = varVirtualizationVmwareDatastoreCluster.VirtualizationBaseDatastoreCluster
 	} else {
@@ -879,7 +920,7 @@ func (o *VirtualizationVmwareDatastoreCluster) UnmarshalJSON(bytes []byte) (err 
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "AutomationLevel")

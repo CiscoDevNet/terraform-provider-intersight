@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **FilePath** | Pointer to **string** | Path of the file being uploaded. | [optional] [readonly] 
 **FileType** | Pointer to **string** | Type of the file being uploaded. * &#x60;None&#x60; - Invalid file type for partnerIntegration appliance. * &#x60;Model&#x60; - Model file of Generic Device. * &#x60;Etl&#x60; - ETL file of Generic Device. * &#x60;Ui&#x60; - UI file of Generic Device. * &#x60;DeviceConnector&#x60; - Generic Device Connector file. | [optional] [default to "None"]
 **WorkspaceName** | Pointer to **string** | The partner integration workspace to use to upload the File. | [optional] [readonly] [default to "default"]
-**Catalog** | Pointer to [**SoftwarerepositoryCatalogRelationship**](SoftwarerepositoryCatalogRelationship.md) |  | [optional] 
+**Catalog** | Pointer to [**NullableSoftwarerepositoryCatalogRelationship**](SoftwarerepositoryCatalogRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -170,6 +170,16 @@ SetCatalog sets Catalog field to given value.
 
 HasCatalog returns a boolean if a field has been set.
 
+### SetCatalogNil
+
+`func (o *PartnerintegrationFile) SetCatalogNil(b bool)`
+
+ SetCatalogNil sets the value for Catalog to be an explicit nil
+
+### UnsetCatalog
+`func (o *PartnerintegrationFile) UnsetCatalog()`
+
+UnsetCatalog ensures that no value is present for Catalog, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

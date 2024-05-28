@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the MemoryPersistentMemoryGoal type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &MemoryPersistentMemoryGoal{}
 
 // MemoryPersistentMemoryGoal A Persistent Memory Goal that needs to be applied on the associated servers through the policy. This would result in the creation of regions and allocation of volatile memory on the server.
 type MemoryPersistentMemoryGoal struct {
@@ -116,7 +120,7 @@ func (o *MemoryPersistentMemoryGoal) SetObjectType(v string) {
 
 // GetMemoryModePercentage returns the MemoryModePercentage field value if set, zero value otherwise.
 func (o *MemoryPersistentMemoryGoal) GetMemoryModePercentage() int64 {
-	if o == nil || o.MemoryModePercentage == nil {
+	if o == nil || IsNil(o.MemoryModePercentage) {
 		var ret int64
 		return ret
 	}
@@ -126,7 +130,7 @@ func (o *MemoryPersistentMemoryGoal) GetMemoryModePercentage() int64 {
 // GetMemoryModePercentageOk returns a tuple with the MemoryModePercentage field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *MemoryPersistentMemoryGoal) GetMemoryModePercentageOk() (*int64, bool) {
-	if o == nil || o.MemoryModePercentage == nil {
+	if o == nil || IsNil(o.MemoryModePercentage) {
 		return nil, false
 	}
 	return o.MemoryModePercentage, true
@@ -134,7 +138,7 @@ func (o *MemoryPersistentMemoryGoal) GetMemoryModePercentageOk() (*int64, bool) 
 
 // HasMemoryModePercentage returns a boolean if a field has been set.
 func (o *MemoryPersistentMemoryGoal) HasMemoryModePercentage() bool {
-	if o != nil && o.MemoryModePercentage != nil {
+	if o != nil && !IsNil(o.MemoryModePercentage) {
 		return true
 	}
 
@@ -148,7 +152,7 @@ func (o *MemoryPersistentMemoryGoal) SetMemoryModePercentage(v int64) {
 
 // GetPersistentMemoryType returns the PersistentMemoryType field value if set, zero value otherwise.
 func (o *MemoryPersistentMemoryGoal) GetPersistentMemoryType() string {
-	if o == nil || o.PersistentMemoryType == nil {
+	if o == nil || IsNil(o.PersistentMemoryType) {
 		var ret string
 		return ret
 	}
@@ -158,7 +162,7 @@ func (o *MemoryPersistentMemoryGoal) GetPersistentMemoryType() string {
 // GetPersistentMemoryTypeOk returns a tuple with the PersistentMemoryType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *MemoryPersistentMemoryGoal) GetPersistentMemoryTypeOk() (*string, bool) {
-	if o == nil || o.PersistentMemoryType == nil {
+	if o == nil || IsNil(o.PersistentMemoryType) {
 		return nil, false
 	}
 	return o.PersistentMemoryType, true
@@ -166,7 +170,7 @@ func (o *MemoryPersistentMemoryGoal) GetPersistentMemoryTypeOk() (*string, bool)
 
 // HasPersistentMemoryType returns a boolean if a field has been set.
 func (o *MemoryPersistentMemoryGoal) HasPersistentMemoryType() bool {
-	if o != nil && o.PersistentMemoryType != nil {
+	if o != nil && !IsNil(o.PersistentMemoryType) {
 		return true
 	}
 
@@ -180,7 +184,7 @@ func (o *MemoryPersistentMemoryGoal) SetPersistentMemoryType(v string) {
 
 // GetSocketId returns the SocketId field value if set, zero value otherwise.
 func (o *MemoryPersistentMemoryGoal) GetSocketId() string {
-	if o == nil || o.SocketId == nil {
+	if o == nil || IsNil(o.SocketId) {
 		var ret string
 		return ret
 	}
@@ -190,7 +194,7 @@ func (o *MemoryPersistentMemoryGoal) GetSocketId() string {
 // GetSocketIdOk returns a tuple with the SocketId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *MemoryPersistentMemoryGoal) GetSocketIdOk() (*string, bool) {
-	if o == nil || o.SocketId == nil {
+	if o == nil || IsNil(o.SocketId) {
 		return nil, false
 	}
 	return o.SocketId, true
@@ -198,7 +202,7 @@ func (o *MemoryPersistentMemoryGoal) GetSocketIdOk() (*string, bool) {
 
 // HasSocketId returns a boolean if a field has been set.
 func (o *MemoryPersistentMemoryGoal) HasSocketId() bool {
-	if o != nil && o.SocketId != nil {
+	if o != nil && !IsNil(o.SocketId) {
 		return true
 	}
 
@@ -211,28 +215,32 @@ func (o *MemoryPersistentMemoryGoal) SetSocketId(v string) {
 }
 
 func (o MemoryPersistentMemoryGoal) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o MemoryPersistentMemoryGoal) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
 	errMoBaseComplexType = json.Unmarshal([]byte(serializedMoBaseComplexType), &toSerialize)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.MemoryModePercentage != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.MemoryModePercentage) {
 		toSerialize["MemoryModePercentage"] = o.MemoryModePercentage
 	}
-	if o.PersistentMemoryType != nil {
+	if !IsNil(o.PersistentMemoryType) {
 		toSerialize["PersistentMemoryType"] = o.PersistentMemoryType
 	}
-	if o.SocketId != nil {
+	if !IsNil(o.SocketId) {
 		toSerialize["SocketId"] = o.SocketId
 	}
 
@@ -240,10 +248,32 @@ func (o MemoryPersistentMemoryGoal) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *MemoryPersistentMemoryGoal) UnmarshalJSON(bytes []byte) (err error) {
+func (o *MemoryPersistentMemoryGoal) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type MemoryPersistentMemoryGoalWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -259,7 +289,7 @@ func (o *MemoryPersistentMemoryGoal) UnmarshalJSON(bytes []byte) (err error) {
 
 	varMemoryPersistentMemoryGoalWithoutEmbeddedStruct := MemoryPersistentMemoryGoalWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varMemoryPersistentMemoryGoalWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varMemoryPersistentMemoryGoalWithoutEmbeddedStruct)
 	if err == nil {
 		varMemoryPersistentMemoryGoal := _MemoryPersistentMemoryGoal{}
 		varMemoryPersistentMemoryGoal.ClassId = varMemoryPersistentMemoryGoalWithoutEmbeddedStruct.ClassId
@@ -274,7 +304,7 @@ func (o *MemoryPersistentMemoryGoal) UnmarshalJSON(bytes []byte) (err error) {
 
 	varMemoryPersistentMemoryGoal := _MemoryPersistentMemoryGoal{}
 
-	err = json.Unmarshal(bytes, &varMemoryPersistentMemoryGoal)
+	err = json.Unmarshal(data, &varMemoryPersistentMemoryGoal)
 	if err == nil {
 		o.MoBaseComplexType = varMemoryPersistentMemoryGoal.MoBaseComplexType
 	} else {
@@ -283,7 +313,7 @@ func (o *MemoryPersistentMemoryGoal) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "MemoryModePercentage")

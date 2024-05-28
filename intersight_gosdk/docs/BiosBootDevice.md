@@ -8,8 +8,8 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "bios.BootDevice"]
 **DeviceName** | Pointer to **string** | Name of the Configured Boot Device. | [optional] [readonly] 
 **DeviceType** | Pointer to **string** | Type of the Configured Boot Device. | [optional] [readonly] 
-**BiosSystemBootOrder** | Pointer to [**BiosSystemBootOrderRelationship**](BiosSystemBootOrderRelationship.md) |  | [optional] 
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
+**BiosSystemBootOrder** | Pointer to [**NullableBiosSystemBootOrderRelationship**](BiosSystemBootOrderRelationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -145,6 +145,16 @@ SetBiosSystemBootOrder sets BiosSystemBootOrder field to given value.
 
 HasBiosSystemBootOrder returns a boolean if a field has been set.
 
+### SetBiosSystemBootOrderNil
+
+`func (o *BiosBootDevice) SetBiosSystemBootOrderNil(b bool)`
+
+ SetBiosSystemBootOrderNil sets the value for BiosSystemBootOrder to be an explicit nil
+
+### UnsetBiosSystemBootOrder
+`func (o *BiosBootDevice) UnsetBiosSystemBootOrder()`
+
+UnsetBiosSystemBootOrder ensures that no value is present for BiosSystemBootOrder, not even an explicit nil
 ### GetRegisteredDevice
 
 `func (o *BiosBootDevice) GetRegisteredDevice() AssetDeviceRegistrationRelationship`
@@ -170,6 +180,16 @@ SetRegisteredDevice sets RegisteredDevice field to given value.
 
 HasRegisteredDevice returns a boolean if a field has been set.
 
+### SetRegisteredDeviceNil
+
+`func (o *BiosBootDevice) SetRegisteredDeviceNil(b bool)`
+
+ SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+
+### UnsetRegisteredDevice
+`func (o *BiosBootDevice) UnsetRegisteredDevice()`
+
+UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the ApplianceNetworkStatus type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ApplianceNetworkStatus{}
 
 // ApplianceNetworkStatus Time to ping a target endpoint.
 type ApplianceNetworkStatus struct {
@@ -108,7 +112,7 @@ func (o *ApplianceNetworkStatus) SetObjectType(v string) {
 
 // GetDestinationHostname returns the DestinationHostname field value if set, zero value otherwise.
 func (o *ApplianceNetworkStatus) GetDestinationHostname() string {
-	if o == nil || o.DestinationHostname == nil {
+	if o == nil || IsNil(o.DestinationHostname) {
 		var ret string
 		return ret
 	}
@@ -118,7 +122,7 @@ func (o *ApplianceNetworkStatus) GetDestinationHostname() string {
 // GetDestinationHostnameOk returns a tuple with the DestinationHostname field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceNetworkStatus) GetDestinationHostnameOk() (*string, bool) {
-	if o == nil || o.DestinationHostname == nil {
+	if o == nil || IsNil(o.DestinationHostname) {
 		return nil, false
 	}
 	return o.DestinationHostname, true
@@ -126,7 +130,7 @@ func (o *ApplianceNetworkStatus) GetDestinationHostnameOk() (*string, bool) {
 
 // HasDestinationHostname returns a boolean if a field has been set.
 func (o *ApplianceNetworkStatus) HasDestinationHostname() bool {
-	if o != nil && o.DestinationHostname != nil {
+	if o != nil && !IsNil(o.DestinationHostname) {
 		return true
 	}
 
@@ -140,7 +144,7 @@ func (o *ApplianceNetworkStatus) SetDestinationHostname(v string) {
 
 // GetPingTime returns the PingTime field value if set, zero value otherwise.
 func (o *ApplianceNetworkStatus) GetPingTime() float32 {
-	if o == nil || o.PingTime == nil {
+	if o == nil || IsNil(o.PingTime) {
 		var ret float32
 		return ret
 	}
@@ -150,7 +154,7 @@ func (o *ApplianceNetworkStatus) GetPingTime() float32 {
 // GetPingTimeOk returns a tuple with the PingTime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceNetworkStatus) GetPingTimeOk() (*float32, bool) {
-	if o == nil || o.PingTime == nil {
+	if o == nil || IsNil(o.PingTime) {
 		return nil, false
 	}
 	return o.PingTime, true
@@ -158,7 +162,7 @@ func (o *ApplianceNetworkStatus) GetPingTimeOk() (*float32, bool) {
 
 // HasPingTime returns a boolean if a field has been set.
 func (o *ApplianceNetworkStatus) HasPingTime() bool {
-	if o != nil && o.PingTime != nil {
+	if o != nil && !IsNil(o.PingTime) {
 		return true
 	}
 
@@ -172,7 +176,7 @@ func (o *ApplianceNetworkStatus) SetPingTime(v float32) {
 
 // GetSourceHostname returns the SourceHostname field value if set, zero value otherwise.
 func (o *ApplianceNetworkStatus) GetSourceHostname() string {
-	if o == nil || o.SourceHostname == nil {
+	if o == nil || IsNil(o.SourceHostname) {
 		var ret string
 		return ret
 	}
@@ -182,7 +186,7 @@ func (o *ApplianceNetworkStatus) GetSourceHostname() string {
 // GetSourceHostnameOk returns a tuple with the SourceHostname field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceNetworkStatus) GetSourceHostnameOk() (*string, bool) {
-	if o == nil || o.SourceHostname == nil {
+	if o == nil || IsNil(o.SourceHostname) {
 		return nil, false
 	}
 	return o.SourceHostname, true
@@ -190,7 +194,7 @@ func (o *ApplianceNetworkStatus) GetSourceHostnameOk() (*string, bool) {
 
 // HasSourceHostname returns a boolean if a field has been set.
 func (o *ApplianceNetworkStatus) HasSourceHostname() bool {
-	if o != nil && o.SourceHostname != nil {
+	if o != nil && !IsNil(o.SourceHostname) {
 		return true
 	}
 
@@ -203,28 +207,32 @@ func (o *ApplianceNetworkStatus) SetSourceHostname(v string) {
 }
 
 func (o ApplianceNetworkStatus) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o ApplianceNetworkStatus) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
 	errMoBaseComplexType = json.Unmarshal([]byte(serializedMoBaseComplexType), &toSerialize)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.DestinationHostname != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.DestinationHostname) {
 		toSerialize["DestinationHostname"] = o.DestinationHostname
 	}
-	if o.PingTime != nil {
+	if !IsNil(o.PingTime) {
 		toSerialize["PingTime"] = o.PingTime
 	}
-	if o.SourceHostname != nil {
+	if !IsNil(o.SourceHostname) {
 		toSerialize["SourceHostname"] = o.SourceHostname
 	}
 
@@ -232,10 +240,32 @@ func (o ApplianceNetworkStatus) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *ApplianceNetworkStatus) UnmarshalJSON(bytes []byte) (err error) {
+func (o *ApplianceNetworkStatus) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type ApplianceNetworkStatusWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -251,7 +281,7 @@ func (o *ApplianceNetworkStatus) UnmarshalJSON(bytes []byte) (err error) {
 
 	varApplianceNetworkStatusWithoutEmbeddedStruct := ApplianceNetworkStatusWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varApplianceNetworkStatusWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varApplianceNetworkStatusWithoutEmbeddedStruct)
 	if err == nil {
 		varApplianceNetworkStatus := _ApplianceNetworkStatus{}
 		varApplianceNetworkStatus.ClassId = varApplianceNetworkStatusWithoutEmbeddedStruct.ClassId
@@ -266,7 +296,7 @@ func (o *ApplianceNetworkStatus) UnmarshalJSON(bytes []byte) (err error) {
 
 	varApplianceNetworkStatus := _ApplianceNetworkStatus{}
 
-	err = json.Unmarshal(bytes, &varApplianceNetworkStatus)
+	err = json.Unmarshal(data, &varApplianceNetworkStatus)
 	if err == nil {
 		o.MoBaseComplexType = varApplianceNetworkStatus.MoBaseComplexType
 	} else {
@@ -275,7 +305,7 @@ func (o *ApplianceNetworkStatus) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "DestinationHostname")

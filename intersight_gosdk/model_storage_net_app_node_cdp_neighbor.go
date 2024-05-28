@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the StorageNetAppNodeCdpNeighbor type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &StorageNetAppNodeCdpNeighbor{}
 
 // StorageNetAppNodeCdpNeighbor Information about the CDP neighbor connected to a given NetApp node port.
 type StorageNetAppNodeCdpNeighbor struct {
@@ -42,8 +46,8 @@ type StorageNetAppNodeCdpNeighbor struct {
 	// The protocol used for CDP.
 	Protocol *string `json:"Protocol,omitempty"`
 	// The version of the operating system running on the CDP neighbor.
-	Version              *string                        `json:"Version,omitempty"`
-	ArrayController      *StorageNetAppNodeRelationship `json:"ArrayController,omitempty"`
+	Version              *string                               `json:"Version,omitempty"`
+	ArrayController      NullableStorageNetAppNodeRelationship `json:"ArrayController,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -133,7 +137,7 @@ func (o *StorageNetAppNodeCdpNeighbor) GetCapabilities() []string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StorageNetAppNodeCdpNeighbor) GetCapabilitiesOk() ([]string, bool) {
-	if o == nil || o.Capabilities == nil {
+	if o == nil || IsNil(o.Capabilities) {
 		return nil, false
 	}
 	return o.Capabilities, true
@@ -141,7 +145,7 @@ func (o *StorageNetAppNodeCdpNeighbor) GetCapabilitiesOk() ([]string, bool) {
 
 // HasCapabilities returns a boolean if a field has been set.
 func (o *StorageNetAppNodeCdpNeighbor) HasCapabilities() bool {
-	if o != nil && o.Capabilities != nil {
+	if o != nil && IsNil(o.Capabilities) {
 		return true
 	}
 
@@ -155,7 +159,7 @@ func (o *StorageNetAppNodeCdpNeighbor) SetCapabilities(v []string) {
 
 // GetDeviceIp returns the DeviceIp field value if set, zero value otherwise.
 func (o *StorageNetAppNodeCdpNeighbor) GetDeviceIp() string {
-	if o == nil || o.DeviceIp == nil {
+	if o == nil || IsNil(o.DeviceIp) {
 		var ret string
 		return ret
 	}
@@ -165,7 +169,7 @@ func (o *StorageNetAppNodeCdpNeighbor) GetDeviceIp() string {
 // GetDeviceIpOk returns a tuple with the DeviceIp field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppNodeCdpNeighbor) GetDeviceIpOk() (*string, bool) {
-	if o == nil || o.DeviceIp == nil {
+	if o == nil || IsNil(o.DeviceIp) {
 		return nil, false
 	}
 	return o.DeviceIp, true
@@ -173,7 +177,7 @@ func (o *StorageNetAppNodeCdpNeighbor) GetDeviceIpOk() (*string, bool) {
 
 // HasDeviceIp returns a boolean if a field has been set.
 func (o *StorageNetAppNodeCdpNeighbor) HasDeviceIp() bool {
-	if o != nil && o.DeviceIp != nil {
+	if o != nil && !IsNil(o.DeviceIp) {
 		return true
 	}
 
@@ -187,7 +191,7 @@ func (o *StorageNetAppNodeCdpNeighbor) SetDeviceIp(v string) {
 
 // GetDiscoveredDevice returns the DiscoveredDevice field value if set, zero value otherwise.
 func (o *StorageNetAppNodeCdpNeighbor) GetDiscoveredDevice() string {
-	if o == nil || o.DiscoveredDevice == nil {
+	if o == nil || IsNil(o.DiscoveredDevice) {
 		var ret string
 		return ret
 	}
@@ -197,7 +201,7 @@ func (o *StorageNetAppNodeCdpNeighbor) GetDiscoveredDevice() string {
 // GetDiscoveredDeviceOk returns a tuple with the DiscoveredDevice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppNodeCdpNeighbor) GetDiscoveredDeviceOk() (*string, bool) {
-	if o == nil || o.DiscoveredDevice == nil {
+	if o == nil || IsNil(o.DiscoveredDevice) {
 		return nil, false
 	}
 	return o.DiscoveredDevice, true
@@ -205,7 +209,7 @@ func (o *StorageNetAppNodeCdpNeighbor) GetDiscoveredDeviceOk() (*string, bool) {
 
 // HasDiscoveredDevice returns a boolean if a field has been set.
 func (o *StorageNetAppNodeCdpNeighbor) HasDiscoveredDevice() bool {
-	if o != nil && o.DiscoveredDevice != nil {
+	if o != nil && !IsNil(o.DiscoveredDevice) {
 		return true
 	}
 
@@ -219,7 +223,7 @@ func (o *StorageNetAppNodeCdpNeighbor) SetDiscoveredDevice(v string) {
 
 // GetHoldTimeRemaining returns the HoldTimeRemaining field value if set, zero value otherwise.
 func (o *StorageNetAppNodeCdpNeighbor) GetHoldTimeRemaining() int64 {
-	if o == nil || o.HoldTimeRemaining == nil {
+	if o == nil || IsNil(o.HoldTimeRemaining) {
 		var ret int64
 		return ret
 	}
@@ -229,7 +233,7 @@ func (o *StorageNetAppNodeCdpNeighbor) GetHoldTimeRemaining() int64 {
 // GetHoldTimeRemainingOk returns a tuple with the HoldTimeRemaining field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppNodeCdpNeighbor) GetHoldTimeRemainingOk() (*int64, bool) {
-	if o == nil || o.HoldTimeRemaining == nil {
+	if o == nil || IsNil(o.HoldTimeRemaining) {
 		return nil, false
 	}
 	return o.HoldTimeRemaining, true
@@ -237,7 +241,7 @@ func (o *StorageNetAppNodeCdpNeighbor) GetHoldTimeRemainingOk() (*int64, bool) {
 
 // HasHoldTimeRemaining returns a boolean if a field has been set.
 func (o *StorageNetAppNodeCdpNeighbor) HasHoldTimeRemaining() bool {
-	if o != nil && o.HoldTimeRemaining != nil {
+	if o != nil && !IsNil(o.HoldTimeRemaining) {
 		return true
 	}
 
@@ -251,7 +255,7 @@ func (o *StorageNetAppNodeCdpNeighbor) SetHoldTimeRemaining(v int64) {
 
 // GetInterface returns the Interface field value if set, zero value otherwise.
 func (o *StorageNetAppNodeCdpNeighbor) GetInterface() string {
-	if o == nil || o.Interface == nil {
+	if o == nil || IsNil(o.Interface) {
 		var ret string
 		return ret
 	}
@@ -261,7 +265,7 @@ func (o *StorageNetAppNodeCdpNeighbor) GetInterface() string {
 // GetInterfaceOk returns a tuple with the Interface field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppNodeCdpNeighbor) GetInterfaceOk() (*string, bool) {
-	if o == nil || o.Interface == nil {
+	if o == nil || IsNil(o.Interface) {
 		return nil, false
 	}
 	return o.Interface, true
@@ -269,7 +273,7 @@ func (o *StorageNetAppNodeCdpNeighbor) GetInterfaceOk() (*string, bool) {
 
 // HasInterface returns a boolean if a field has been set.
 func (o *StorageNetAppNodeCdpNeighbor) HasInterface() bool {
-	if o != nil && o.Interface != nil {
+	if o != nil && !IsNil(o.Interface) {
 		return true
 	}
 
@@ -283,7 +287,7 @@ func (o *StorageNetAppNodeCdpNeighbor) SetInterface(v string) {
 
 // GetNodeName returns the NodeName field value if set, zero value otherwise.
 func (o *StorageNetAppNodeCdpNeighbor) GetNodeName() string {
-	if o == nil || o.NodeName == nil {
+	if o == nil || IsNil(o.NodeName) {
 		var ret string
 		return ret
 	}
@@ -293,7 +297,7 @@ func (o *StorageNetAppNodeCdpNeighbor) GetNodeName() string {
 // GetNodeNameOk returns a tuple with the NodeName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppNodeCdpNeighbor) GetNodeNameOk() (*string, bool) {
-	if o == nil || o.NodeName == nil {
+	if o == nil || IsNil(o.NodeName) {
 		return nil, false
 	}
 	return o.NodeName, true
@@ -301,7 +305,7 @@ func (o *StorageNetAppNodeCdpNeighbor) GetNodeNameOk() (*string, bool) {
 
 // HasNodeName returns a boolean if a field has been set.
 func (o *StorageNetAppNodeCdpNeighbor) HasNodeName() bool {
-	if o != nil && o.NodeName != nil {
+	if o != nil && !IsNil(o.NodeName) {
 		return true
 	}
 
@@ -315,7 +319,7 @@ func (o *StorageNetAppNodeCdpNeighbor) SetNodeName(v string) {
 
 // GetPlatform returns the Platform field value if set, zero value otherwise.
 func (o *StorageNetAppNodeCdpNeighbor) GetPlatform() string {
-	if o == nil || o.Platform == nil {
+	if o == nil || IsNil(o.Platform) {
 		var ret string
 		return ret
 	}
@@ -325,7 +329,7 @@ func (o *StorageNetAppNodeCdpNeighbor) GetPlatform() string {
 // GetPlatformOk returns a tuple with the Platform field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppNodeCdpNeighbor) GetPlatformOk() (*string, bool) {
-	if o == nil || o.Platform == nil {
+	if o == nil || IsNil(o.Platform) {
 		return nil, false
 	}
 	return o.Platform, true
@@ -333,7 +337,7 @@ func (o *StorageNetAppNodeCdpNeighbor) GetPlatformOk() (*string, bool) {
 
 // HasPlatform returns a boolean if a field has been set.
 func (o *StorageNetAppNodeCdpNeighbor) HasPlatform() bool {
-	if o != nil && o.Platform != nil {
+	if o != nil && !IsNil(o.Platform) {
 		return true
 	}
 
@@ -347,7 +351,7 @@ func (o *StorageNetAppNodeCdpNeighbor) SetPlatform(v string) {
 
 // GetPort returns the Port field value if set, zero value otherwise.
 func (o *StorageNetAppNodeCdpNeighbor) GetPort() string {
-	if o == nil || o.Port == nil {
+	if o == nil || IsNil(o.Port) {
 		var ret string
 		return ret
 	}
@@ -357,7 +361,7 @@ func (o *StorageNetAppNodeCdpNeighbor) GetPort() string {
 // GetPortOk returns a tuple with the Port field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppNodeCdpNeighbor) GetPortOk() (*string, bool) {
-	if o == nil || o.Port == nil {
+	if o == nil || IsNil(o.Port) {
 		return nil, false
 	}
 	return o.Port, true
@@ -365,7 +369,7 @@ func (o *StorageNetAppNodeCdpNeighbor) GetPortOk() (*string, bool) {
 
 // HasPort returns a boolean if a field has been set.
 func (o *StorageNetAppNodeCdpNeighbor) HasPort() bool {
-	if o != nil && o.Port != nil {
+	if o != nil && !IsNil(o.Port) {
 		return true
 	}
 
@@ -379,7 +383,7 @@ func (o *StorageNetAppNodeCdpNeighbor) SetPort(v string) {
 
 // GetProtocol returns the Protocol field value if set, zero value otherwise.
 func (o *StorageNetAppNodeCdpNeighbor) GetProtocol() string {
-	if o == nil || o.Protocol == nil {
+	if o == nil || IsNil(o.Protocol) {
 		var ret string
 		return ret
 	}
@@ -389,7 +393,7 @@ func (o *StorageNetAppNodeCdpNeighbor) GetProtocol() string {
 // GetProtocolOk returns a tuple with the Protocol field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppNodeCdpNeighbor) GetProtocolOk() (*string, bool) {
-	if o == nil || o.Protocol == nil {
+	if o == nil || IsNil(o.Protocol) {
 		return nil, false
 	}
 	return o.Protocol, true
@@ -397,7 +401,7 @@ func (o *StorageNetAppNodeCdpNeighbor) GetProtocolOk() (*string, bool) {
 
 // HasProtocol returns a boolean if a field has been set.
 func (o *StorageNetAppNodeCdpNeighbor) HasProtocol() bool {
-	if o != nil && o.Protocol != nil {
+	if o != nil && !IsNil(o.Protocol) {
 		return true
 	}
 
@@ -411,7 +415,7 @@ func (o *StorageNetAppNodeCdpNeighbor) SetProtocol(v string) {
 
 // GetVersion returns the Version field value if set, zero value otherwise.
 func (o *StorageNetAppNodeCdpNeighbor) GetVersion() string {
-	if o == nil || o.Version == nil {
+	if o == nil || IsNil(o.Version) {
 		var ret string
 		return ret
 	}
@@ -421,7 +425,7 @@ func (o *StorageNetAppNodeCdpNeighbor) GetVersion() string {
 // GetVersionOk returns a tuple with the Version field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppNodeCdpNeighbor) GetVersionOk() (*string, bool) {
-	if o == nil || o.Version == nil {
+	if o == nil || IsNil(o.Version) {
 		return nil, false
 	}
 	return o.Version, true
@@ -429,7 +433,7 @@ func (o *StorageNetAppNodeCdpNeighbor) GetVersionOk() (*string, bool) {
 
 // HasVersion returns a boolean if a field has been set.
 func (o *StorageNetAppNodeCdpNeighbor) HasVersion() bool {
-	if o != nil && o.Version != nil {
+	if o != nil && !IsNil(o.Version) {
 		return true
 	}
 
@@ -441,96 +445,133 @@ func (o *StorageNetAppNodeCdpNeighbor) SetVersion(v string) {
 	o.Version = &v
 }
 
-// GetArrayController returns the ArrayController field value if set, zero value otherwise.
+// GetArrayController returns the ArrayController field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *StorageNetAppNodeCdpNeighbor) GetArrayController() StorageNetAppNodeRelationship {
-	if o == nil || o.ArrayController == nil {
+	if o == nil || IsNil(o.ArrayController.Get()) {
 		var ret StorageNetAppNodeRelationship
 		return ret
 	}
-	return *o.ArrayController
+	return *o.ArrayController.Get()
 }
 
 // GetArrayControllerOk returns a tuple with the ArrayController field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StorageNetAppNodeCdpNeighbor) GetArrayControllerOk() (*StorageNetAppNodeRelationship, bool) {
-	if o == nil || o.ArrayController == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.ArrayController, true
+	return o.ArrayController.Get(), o.ArrayController.IsSet()
 }
 
 // HasArrayController returns a boolean if a field has been set.
 func (o *StorageNetAppNodeCdpNeighbor) HasArrayController() bool {
-	if o != nil && o.ArrayController != nil {
+	if o != nil && o.ArrayController.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetArrayController gets a reference to the given StorageNetAppNodeRelationship and assigns it to the ArrayController field.
+// SetArrayController gets a reference to the given NullableStorageNetAppNodeRelationship and assigns it to the ArrayController field.
 func (o *StorageNetAppNodeCdpNeighbor) SetArrayController(v StorageNetAppNodeRelationship) {
-	o.ArrayController = &v
+	o.ArrayController.Set(&v)
+}
+
+// SetArrayControllerNil sets the value for ArrayController to be an explicit nil
+func (o *StorageNetAppNodeCdpNeighbor) SetArrayControllerNil() {
+	o.ArrayController.Set(nil)
+}
+
+// UnsetArrayController ensures that no value is present for ArrayController, not even an explicit nil
+func (o *StorageNetAppNodeCdpNeighbor) UnsetArrayController() {
+	o.ArrayController.Unset()
 }
 
 func (o StorageNetAppNodeCdpNeighbor) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o StorageNetAppNodeCdpNeighbor) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
 	if o.Capabilities != nil {
 		toSerialize["Capabilities"] = o.Capabilities
 	}
-	if o.DeviceIp != nil {
+	if !IsNil(o.DeviceIp) {
 		toSerialize["DeviceIp"] = o.DeviceIp
 	}
-	if o.DiscoveredDevice != nil {
+	if !IsNil(o.DiscoveredDevice) {
 		toSerialize["DiscoveredDevice"] = o.DiscoveredDevice
 	}
-	if o.HoldTimeRemaining != nil {
+	if !IsNil(o.HoldTimeRemaining) {
 		toSerialize["HoldTimeRemaining"] = o.HoldTimeRemaining
 	}
-	if o.Interface != nil {
+	if !IsNil(o.Interface) {
 		toSerialize["Interface"] = o.Interface
 	}
-	if o.NodeName != nil {
+	if !IsNil(o.NodeName) {
 		toSerialize["NodeName"] = o.NodeName
 	}
-	if o.Platform != nil {
+	if !IsNil(o.Platform) {
 		toSerialize["Platform"] = o.Platform
 	}
-	if o.Port != nil {
+	if !IsNil(o.Port) {
 		toSerialize["Port"] = o.Port
 	}
-	if o.Protocol != nil {
+	if !IsNil(o.Protocol) {
 		toSerialize["Protocol"] = o.Protocol
 	}
-	if o.Version != nil {
+	if !IsNil(o.Version) {
 		toSerialize["Version"] = o.Version
 	}
-	if o.ArrayController != nil {
-		toSerialize["ArrayController"] = o.ArrayController
+	if o.ArrayController.IsSet() {
+		toSerialize["ArrayController"] = o.ArrayController.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *StorageNetAppNodeCdpNeighbor) UnmarshalJSON(bytes []byte) (err error) {
+func (o *StorageNetAppNodeCdpNeighbor) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type StorageNetAppNodeCdpNeighborWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -554,13 +595,13 @@ func (o *StorageNetAppNodeCdpNeighbor) UnmarshalJSON(bytes []byte) (err error) {
 		// The protocol used for CDP.
 		Protocol *string `json:"Protocol,omitempty"`
 		// The version of the operating system running on the CDP neighbor.
-		Version         *string                        `json:"Version,omitempty"`
-		ArrayController *StorageNetAppNodeRelationship `json:"ArrayController,omitempty"`
+		Version         *string                               `json:"Version,omitempty"`
+		ArrayController NullableStorageNetAppNodeRelationship `json:"ArrayController,omitempty"`
 	}
 
 	varStorageNetAppNodeCdpNeighborWithoutEmbeddedStruct := StorageNetAppNodeCdpNeighborWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varStorageNetAppNodeCdpNeighborWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varStorageNetAppNodeCdpNeighborWithoutEmbeddedStruct)
 	if err == nil {
 		varStorageNetAppNodeCdpNeighbor := _StorageNetAppNodeCdpNeighbor{}
 		varStorageNetAppNodeCdpNeighbor.ClassId = varStorageNetAppNodeCdpNeighborWithoutEmbeddedStruct.ClassId
@@ -583,7 +624,7 @@ func (o *StorageNetAppNodeCdpNeighbor) UnmarshalJSON(bytes []byte) (err error) {
 
 	varStorageNetAppNodeCdpNeighbor := _StorageNetAppNodeCdpNeighbor{}
 
-	err = json.Unmarshal(bytes, &varStorageNetAppNodeCdpNeighbor)
+	err = json.Unmarshal(data, &varStorageNetAppNodeCdpNeighbor)
 	if err == nil {
 		o.MoBaseMo = varStorageNetAppNodeCdpNeighbor.MoBaseMo
 	} else {
@@ -592,7 +633,7 @@ func (o *StorageNetAppNodeCdpNeighbor) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Capabilities")

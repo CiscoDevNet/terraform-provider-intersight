@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the StorageControllerDrive type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &StorageControllerDrive{}
 
 // StorageControllerDrive The Local Storage present in a server.
 type StorageControllerDrive struct {
@@ -35,9 +39,9 @@ type StorageControllerDrive struct {
 	// The Id of the local Storage.
 	StorageId *string `json:"StorageId,omitempty"`
 	// The type of storage like internal or external. * `Unknown` - Not any of the known Storage Types. * `Internal` - The internal storage type. * `External` - The external storage type.
-	Type             *string                              `json:"Type,omitempty"`
-	ComputeBoard     *ComputeBoardRelationship            `json:"ComputeBoard,omitempty"`
-	RegisteredDevice *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+	Type             *string                                     `json:"Type,omitempty"`
+	ComputeBoard     NullableComputeBoardRelationship            `json:"ComputeBoard,omitempty"`
+	RegisteredDevice NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	// An array of relationships to storageItem resources.
 	StorageItem          []StorageItemRelationship `json:"StorageItem,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -118,7 +122,7 @@ func (o *StorageControllerDrive) SetObjectType(v string) {
 
 // GetControllerType returns the ControllerType field value if set, zero value otherwise.
 func (o *StorageControllerDrive) GetControllerType() string {
-	if o == nil || o.ControllerType == nil {
+	if o == nil || IsNil(o.ControllerType) {
 		var ret string
 		return ret
 	}
@@ -128,7 +132,7 @@ func (o *StorageControllerDrive) GetControllerType() string {
 // GetControllerTypeOk returns a tuple with the ControllerType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageControllerDrive) GetControllerTypeOk() (*string, bool) {
-	if o == nil || o.ControllerType == nil {
+	if o == nil || IsNil(o.ControllerType) {
 		return nil, false
 	}
 	return o.ControllerType, true
@@ -136,7 +140,7 @@ func (o *StorageControllerDrive) GetControllerTypeOk() (*string, bool) {
 
 // HasControllerType returns a boolean if a field has been set.
 func (o *StorageControllerDrive) HasControllerType() bool {
-	if o != nil && o.ControllerType != nil {
+	if o != nil && !IsNil(o.ControllerType) {
 		return true
 	}
 
@@ -150,7 +154,7 @@ func (o *StorageControllerDrive) SetControllerType(v string) {
 
 // GetDescription returns the Description field value if set, zero value otherwise.
 func (o *StorageControllerDrive) GetDescription() string {
-	if o == nil || o.Description == nil {
+	if o == nil || IsNil(o.Description) {
 		var ret string
 		return ret
 	}
@@ -160,7 +164,7 @@ func (o *StorageControllerDrive) GetDescription() string {
 // GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageControllerDrive) GetDescriptionOk() (*string, bool) {
-	if o == nil || o.Description == nil {
+	if o == nil || IsNil(o.Description) {
 		return nil, false
 	}
 	return o.Description, true
@@ -168,7 +172,7 @@ func (o *StorageControllerDrive) GetDescriptionOk() (*string, bool) {
 
 // HasDescription returns a boolean if a field has been set.
 func (o *StorageControllerDrive) HasDescription() bool {
-	if o != nil && o.Description != nil {
+	if o != nil && !IsNil(o.Description) {
 		return true
 	}
 
@@ -182,7 +186,7 @@ func (o *StorageControllerDrive) SetDescription(v string) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *StorageControllerDrive) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -192,7 +196,7 @@ func (o *StorageControllerDrive) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageControllerDrive) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -200,7 +204,7 @@ func (o *StorageControllerDrive) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *StorageControllerDrive) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -214,7 +218,7 @@ func (o *StorageControllerDrive) SetName(v string) {
 
 // GetPartitionCount returns the PartitionCount field value if set, zero value otherwise.
 func (o *StorageControllerDrive) GetPartitionCount() int64 {
-	if o == nil || o.PartitionCount == nil {
+	if o == nil || IsNil(o.PartitionCount) {
 		var ret int64
 		return ret
 	}
@@ -224,7 +228,7 @@ func (o *StorageControllerDrive) GetPartitionCount() int64 {
 // GetPartitionCountOk returns a tuple with the PartitionCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageControllerDrive) GetPartitionCountOk() (*int64, bool) {
-	if o == nil || o.PartitionCount == nil {
+	if o == nil || IsNil(o.PartitionCount) {
 		return nil, false
 	}
 	return o.PartitionCount, true
@@ -232,7 +236,7 @@ func (o *StorageControllerDrive) GetPartitionCountOk() (*int64, bool) {
 
 // HasPartitionCount returns a boolean if a field has been set.
 func (o *StorageControllerDrive) HasPartitionCount() bool {
-	if o != nil && o.PartitionCount != nil {
+	if o != nil && !IsNil(o.PartitionCount) {
 		return true
 	}
 
@@ -246,7 +250,7 @@ func (o *StorageControllerDrive) SetPartitionCount(v int64) {
 
 // GetStorageId returns the StorageId field value if set, zero value otherwise.
 func (o *StorageControllerDrive) GetStorageId() string {
-	if o == nil || o.StorageId == nil {
+	if o == nil || IsNil(o.StorageId) {
 		var ret string
 		return ret
 	}
@@ -256,7 +260,7 @@ func (o *StorageControllerDrive) GetStorageId() string {
 // GetStorageIdOk returns a tuple with the StorageId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageControllerDrive) GetStorageIdOk() (*string, bool) {
-	if o == nil || o.StorageId == nil {
+	if o == nil || IsNil(o.StorageId) {
 		return nil, false
 	}
 	return o.StorageId, true
@@ -264,7 +268,7 @@ func (o *StorageControllerDrive) GetStorageIdOk() (*string, bool) {
 
 // HasStorageId returns a boolean if a field has been set.
 func (o *StorageControllerDrive) HasStorageId() bool {
-	if o != nil && o.StorageId != nil {
+	if o != nil && !IsNil(o.StorageId) {
 		return true
 	}
 
@@ -278,7 +282,7 @@ func (o *StorageControllerDrive) SetStorageId(v string) {
 
 // GetType returns the Type field value if set, zero value otherwise.
 func (o *StorageControllerDrive) GetType() string {
-	if o == nil || o.Type == nil {
+	if o == nil || IsNil(o.Type) {
 		var ret string
 		return ret
 	}
@@ -288,7 +292,7 @@ func (o *StorageControllerDrive) GetType() string {
 // GetTypeOk returns a tuple with the Type field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageControllerDrive) GetTypeOk() (*string, bool) {
-	if o == nil || o.Type == nil {
+	if o == nil || IsNil(o.Type) {
 		return nil, false
 	}
 	return o.Type, true
@@ -296,7 +300,7 @@ func (o *StorageControllerDrive) GetTypeOk() (*string, bool) {
 
 // HasType returns a boolean if a field has been set.
 func (o *StorageControllerDrive) HasType() bool {
-	if o != nil && o.Type != nil {
+	if o != nil && !IsNil(o.Type) {
 		return true
 	}
 
@@ -308,68 +312,90 @@ func (o *StorageControllerDrive) SetType(v string) {
 	o.Type = &v
 }
 
-// GetComputeBoard returns the ComputeBoard field value if set, zero value otherwise.
+// GetComputeBoard returns the ComputeBoard field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *StorageControllerDrive) GetComputeBoard() ComputeBoardRelationship {
-	if o == nil || o.ComputeBoard == nil {
+	if o == nil || IsNil(o.ComputeBoard.Get()) {
 		var ret ComputeBoardRelationship
 		return ret
 	}
-	return *o.ComputeBoard
+	return *o.ComputeBoard.Get()
 }
 
 // GetComputeBoardOk returns a tuple with the ComputeBoard field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StorageControllerDrive) GetComputeBoardOk() (*ComputeBoardRelationship, bool) {
-	if o == nil || o.ComputeBoard == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.ComputeBoard, true
+	return o.ComputeBoard.Get(), o.ComputeBoard.IsSet()
 }
 
 // HasComputeBoard returns a boolean if a field has been set.
 func (o *StorageControllerDrive) HasComputeBoard() bool {
-	if o != nil && o.ComputeBoard != nil {
+	if o != nil && o.ComputeBoard.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetComputeBoard gets a reference to the given ComputeBoardRelationship and assigns it to the ComputeBoard field.
+// SetComputeBoard gets a reference to the given NullableComputeBoardRelationship and assigns it to the ComputeBoard field.
 func (o *StorageControllerDrive) SetComputeBoard(v ComputeBoardRelationship) {
-	o.ComputeBoard = &v
+	o.ComputeBoard.Set(&v)
 }
 
-// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise.
+// SetComputeBoardNil sets the value for ComputeBoard to be an explicit nil
+func (o *StorageControllerDrive) SetComputeBoardNil() {
+	o.ComputeBoard.Set(nil)
+}
+
+// UnsetComputeBoard ensures that no value is present for ComputeBoard, not even an explicit nil
+func (o *StorageControllerDrive) UnsetComputeBoard() {
+	o.ComputeBoard.Unset()
+}
+
+// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *StorageControllerDrive) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil || IsNil(o.RegisteredDevice.Get()) {
 		var ret AssetDeviceRegistrationRelationship
 		return ret
 	}
-	return *o.RegisteredDevice
+	return *o.RegisteredDevice.Get()
 }
 
 // GetRegisteredDeviceOk returns a tuple with the RegisteredDevice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StorageControllerDrive) GetRegisteredDeviceOk() (*AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.RegisteredDevice, true
+	return o.RegisteredDevice.Get(), o.RegisteredDevice.IsSet()
 }
 
 // HasRegisteredDevice returns a boolean if a field has been set.
 func (o *StorageControllerDrive) HasRegisteredDevice() bool {
-	if o != nil && o.RegisteredDevice != nil {
+	if o != nil && o.RegisteredDevice.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRegisteredDevice gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
+// SetRegisteredDevice gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
 func (o *StorageControllerDrive) SetRegisteredDevice(v AssetDeviceRegistrationRelationship) {
-	o.RegisteredDevice = &v
+	o.RegisteredDevice.Set(&v)
+}
+
+// SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+func (o *StorageControllerDrive) SetRegisteredDeviceNil() {
+	o.RegisteredDevice.Set(nil)
+}
+
+// UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
+func (o *StorageControllerDrive) UnsetRegisteredDevice() {
+	o.RegisteredDevice.Unset()
 }
 
 // GetStorageItem returns the StorageItem field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -385,7 +411,7 @@ func (o *StorageControllerDrive) GetStorageItem() []StorageItemRelationship {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StorageControllerDrive) GetStorageItemOk() ([]StorageItemRelationship, bool) {
-	if o == nil || o.StorageItem == nil {
+	if o == nil || IsNil(o.StorageItem) {
 		return nil, false
 	}
 	return o.StorageItem, true
@@ -393,7 +419,7 @@ func (o *StorageControllerDrive) GetStorageItemOk() ([]StorageItemRelationship, 
 
 // HasStorageItem returns a boolean if a field has been set.
 func (o *StorageControllerDrive) HasStorageItem() bool {
-	if o != nil && o.StorageItem != nil {
+	if o != nil && IsNil(o.StorageItem) {
 		return true
 	}
 
@@ -406,44 +432,48 @@ func (o *StorageControllerDrive) SetStorageItem(v []StorageItemRelationship) {
 }
 
 func (o StorageControllerDrive) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o StorageControllerDrive) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedInventoryBase, errInventoryBase := json.Marshal(o.InventoryBase)
 	if errInventoryBase != nil {
-		return []byte{}, errInventoryBase
+		return map[string]interface{}{}, errInventoryBase
 	}
 	errInventoryBase = json.Unmarshal([]byte(serializedInventoryBase), &toSerialize)
 	if errInventoryBase != nil {
-		return []byte{}, errInventoryBase
+		return map[string]interface{}{}, errInventoryBase
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.ControllerType != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.ControllerType) {
 		toSerialize["ControllerType"] = o.ControllerType
 	}
-	if o.Description != nil {
+	if !IsNil(o.Description) {
 		toSerialize["Description"] = o.Description
 	}
-	if o.Name != nil {
+	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
 	}
-	if o.PartitionCount != nil {
+	if !IsNil(o.PartitionCount) {
 		toSerialize["PartitionCount"] = o.PartitionCount
 	}
-	if o.StorageId != nil {
+	if !IsNil(o.StorageId) {
 		toSerialize["StorageId"] = o.StorageId
 	}
-	if o.Type != nil {
+	if !IsNil(o.Type) {
 		toSerialize["Type"] = o.Type
 	}
-	if o.ComputeBoard != nil {
-		toSerialize["ComputeBoard"] = o.ComputeBoard
+	if o.ComputeBoard.IsSet() {
+		toSerialize["ComputeBoard"] = o.ComputeBoard.Get()
 	}
-	if o.RegisteredDevice != nil {
-		toSerialize["RegisteredDevice"] = o.RegisteredDevice
+	if o.RegisteredDevice.IsSet() {
+		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
 	}
 	if o.StorageItem != nil {
 		toSerialize["StorageItem"] = o.StorageItem
@@ -453,10 +483,32 @@ func (o StorageControllerDrive) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *StorageControllerDrive) UnmarshalJSON(bytes []byte) (err error) {
+func (o *StorageControllerDrive) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type StorageControllerDriveWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -473,16 +525,16 @@ func (o *StorageControllerDrive) UnmarshalJSON(bytes []byte) (err error) {
 		// The Id of the local Storage.
 		StorageId *string `json:"StorageId,omitempty"`
 		// The type of storage like internal or external. * `Unknown` - Not any of the known Storage Types. * `Internal` - The internal storage type. * `External` - The external storage type.
-		Type             *string                              `json:"Type,omitempty"`
-		ComputeBoard     *ComputeBoardRelationship            `json:"ComputeBoard,omitempty"`
-		RegisteredDevice *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+		Type             *string                                     `json:"Type,omitempty"`
+		ComputeBoard     NullableComputeBoardRelationship            `json:"ComputeBoard,omitempty"`
+		RegisteredDevice NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 		// An array of relationships to storageItem resources.
 		StorageItem []StorageItemRelationship `json:"StorageItem,omitempty"`
 	}
 
 	varStorageControllerDriveWithoutEmbeddedStruct := StorageControllerDriveWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varStorageControllerDriveWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varStorageControllerDriveWithoutEmbeddedStruct)
 	if err == nil {
 		varStorageControllerDrive := _StorageControllerDrive{}
 		varStorageControllerDrive.ClassId = varStorageControllerDriveWithoutEmbeddedStruct.ClassId
@@ -503,7 +555,7 @@ func (o *StorageControllerDrive) UnmarshalJSON(bytes []byte) (err error) {
 
 	varStorageControllerDrive := _StorageControllerDrive{}
 
-	err = json.Unmarshal(bytes, &varStorageControllerDrive)
+	err = json.Unmarshal(data, &varStorageControllerDrive)
 	if err == nil {
 		o.InventoryBase = varStorageControllerDrive.InventoryBase
 	} else {
@@ -512,7 +564,7 @@ func (o *StorageControllerDrive) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "ControllerType")

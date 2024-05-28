@@ -21,9 +21,9 @@ Name | Type | Description | Notes
 **TgtClusterName** | Pointer to **string** | Name of the cluster this snapshot is replicated to. | [optional] [readonly] 
 **VmEntityReference** | Pointer to [**NullableHyperflexEntityReference**](HyperflexEntityReference.md) |  | [optional] 
 **VmSnapshotEntityReference** | Pointer to [**NullableHyperflexEntityReference**](HyperflexEntityReference.md) |  | [optional] 
-**SrcCluster** | Pointer to [**HyperflexClusterRelationship**](HyperflexClusterRelationship.md) |  | [optional] 
-**TgtCluster** | Pointer to [**HyperflexClusterRelationship**](HyperflexClusterRelationship.md) |  | [optional] 
-**VmBackupInfo** | Pointer to [**HyperflexVmBackupInfoRelationship**](HyperflexVmBackupInfoRelationship.md) |  | [optional] 
+**SrcCluster** | Pointer to [**NullableHyperflexClusterRelationship**](HyperflexClusterRelationship.md) |  | [optional] 
+**TgtCluster** | Pointer to [**NullableHyperflexClusterRelationship**](HyperflexClusterRelationship.md) |  | [optional] 
+**VmBackupInfo** | Pointer to [**NullableHyperflexVmBackupInfoRelationship**](HyperflexVmBackupInfoRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -534,6 +534,16 @@ SetSrcCluster sets SrcCluster field to given value.
 
 HasSrcCluster returns a boolean if a field has been set.
 
+### SetSrcClusterNil
+
+`func (o *HyperflexVmSnapshotInfo) SetSrcClusterNil(b bool)`
+
+ SetSrcClusterNil sets the value for SrcCluster to be an explicit nil
+
+### UnsetSrcCluster
+`func (o *HyperflexVmSnapshotInfo) UnsetSrcCluster()`
+
+UnsetSrcCluster ensures that no value is present for SrcCluster, not even an explicit nil
 ### GetTgtCluster
 
 `func (o *HyperflexVmSnapshotInfo) GetTgtCluster() HyperflexClusterRelationship`
@@ -559,6 +569,16 @@ SetTgtCluster sets TgtCluster field to given value.
 
 HasTgtCluster returns a boolean if a field has been set.
 
+### SetTgtClusterNil
+
+`func (o *HyperflexVmSnapshotInfo) SetTgtClusterNil(b bool)`
+
+ SetTgtClusterNil sets the value for TgtCluster to be an explicit nil
+
+### UnsetTgtCluster
+`func (o *HyperflexVmSnapshotInfo) UnsetTgtCluster()`
+
+UnsetTgtCluster ensures that no value is present for TgtCluster, not even an explicit nil
 ### GetVmBackupInfo
 
 `func (o *HyperflexVmSnapshotInfo) GetVmBackupInfo() HyperflexVmBackupInfoRelationship`
@@ -584,6 +604,16 @@ SetVmBackupInfo sets VmBackupInfo field to given value.
 
 HasVmBackupInfo returns a boolean if a field has been set.
 
+### SetVmBackupInfoNil
+
+`func (o *HyperflexVmSnapshotInfo) SetVmBackupInfoNil(b bool)`
+
+ SetVmBackupInfoNil sets the value for VmBackupInfo to be an explicit nil
+
+### UnsetVmBackupInfo
+`func (o *HyperflexVmSnapshotInfo) UnsetVmBackupInfo()`
+
+UnsetVmBackupInfo ensures that no value is present for VmBackupInfo, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

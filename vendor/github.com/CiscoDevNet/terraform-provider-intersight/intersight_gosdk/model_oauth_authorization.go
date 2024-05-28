@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the OauthAuthorization type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &OauthAuthorization{}
 
 // OauthAuthorization User's consent for Intersight to contact an external software repository such as cisco.com, on the behalf of the user. It is used by Intersight Appliance to support resource owner grant type.
 type OauthAuthorization struct {
@@ -33,9 +37,9 @@ type OauthAuthorization struct {
 	// The password that will be used by Intersight to create OAuth2 tokens for interacting with the external repository, on the user account's behalf.
 	Password *string `json:"Password,omitempty"`
 	// The username that will be used by Intersight to create OAuth2 tokens for interacting with the external repository, on the user account's behalf.
-	UserId               *string                       `json:"UserId,omitempty"`
-	AccessToken          *OauthAccessTokenRelationship `json:"AccessToken,omitempty"`
-	Account              *IamAccountRelationship       `json:"Account,omitempty"`
+	UserId               *string                              `json:"UserId,omitempty"`
+	AccessToken          NullableOauthAccessTokenRelationship `json:"AccessToken,omitempty"`
+	Account              NullableIamAccountRelationship       `json:"Account,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -118,7 +122,7 @@ func (o *OauthAuthorization) SetObjectType(v string) {
 
 // GetApiType returns the ApiType field value if set, zero value otherwise.
 func (o *OauthAuthorization) GetApiType() string {
-	if o == nil || o.ApiType == nil {
+	if o == nil || IsNil(o.ApiType) {
 		var ret string
 		return ret
 	}
@@ -128,7 +132,7 @@ func (o *OauthAuthorization) GetApiType() string {
 // GetApiTypeOk returns a tuple with the ApiType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OauthAuthorization) GetApiTypeOk() (*string, bool) {
-	if o == nil || o.ApiType == nil {
+	if o == nil || IsNil(o.ApiType) {
 		return nil, false
 	}
 	return o.ApiType, true
@@ -136,7 +140,7 @@ func (o *OauthAuthorization) GetApiTypeOk() (*string, bool) {
 
 // HasApiType returns a boolean if a field has been set.
 func (o *OauthAuthorization) HasApiType() bool {
-	if o != nil && o.ApiType != nil {
+	if o != nil && !IsNil(o.ApiType) {
 		return true
 	}
 
@@ -150,7 +154,7 @@ func (o *OauthAuthorization) SetApiType(v string) {
 
 // GetIsPasswordSet returns the IsPasswordSet field value if set, zero value otherwise.
 func (o *OauthAuthorization) GetIsPasswordSet() bool {
-	if o == nil || o.IsPasswordSet == nil {
+	if o == nil || IsNil(o.IsPasswordSet) {
 		var ret bool
 		return ret
 	}
@@ -160,7 +164,7 @@ func (o *OauthAuthorization) GetIsPasswordSet() bool {
 // GetIsPasswordSetOk returns a tuple with the IsPasswordSet field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OauthAuthorization) GetIsPasswordSetOk() (*bool, bool) {
-	if o == nil || o.IsPasswordSet == nil {
+	if o == nil || IsNil(o.IsPasswordSet) {
 		return nil, false
 	}
 	return o.IsPasswordSet, true
@@ -168,7 +172,7 @@ func (o *OauthAuthorization) GetIsPasswordSetOk() (*bool, bool) {
 
 // HasIsPasswordSet returns a boolean if a field has been set.
 func (o *OauthAuthorization) HasIsPasswordSet() bool {
-	if o != nil && o.IsPasswordSet != nil {
+	if o != nil && !IsNil(o.IsPasswordSet) {
 		return true
 	}
 
@@ -182,7 +186,7 @@ func (o *OauthAuthorization) SetIsPasswordSet(v bool) {
 
 // GetIsUserIdSet returns the IsUserIdSet field value if set, zero value otherwise.
 func (o *OauthAuthorization) GetIsUserIdSet() bool {
-	if o == nil || o.IsUserIdSet == nil {
+	if o == nil || IsNil(o.IsUserIdSet) {
 		var ret bool
 		return ret
 	}
@@ -192,7 +196,7 @@ func (o *OauthAuthorization) GetIsUserIdSet() bool {
 // GetIsUserIdSetOk returns a tuple with the IsUserIdSet field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OauthAuthorization) GetIsUserIdSetOk() (*bool, bool) {
-	if o == nil || o.IsUserIdSet == nil {
+	if o == nil || IsNil(o.IsUserIdSet) {
 		return nil, false
 	}
 	return o.IsUserIdSet, true
@@ -200,7 +204,7 @@ func (o *OauthAuthorization) GetIsUserIdSetOk() (*bool, bool) {
 
 // HasIsUserIdSet returns a boolean if a field has been set.
 func (o *OauthAuthorization) HasIsUserIdSet() bool {
-	if o != nil && o.IsUserIdSet != nil {
+	if o != nil && !IsNil(o.IsUserIdSet) {
 		return true
 	}
 
@@ -214,7 +218,7 @@ func (o *OauthAuthorization) SetIsUserIdSet(v bool) {
 
 // GetPassword returns the Password field value if set, zero value otherwise.
 func (o *OauthAuthorization) GetPassword() string {
-	if o == nil || o.Password == nil {
+	if o == nil || IsNil(o.Password) {
 		var ret string
 		return ret
 	}
@@ -224,7 +228,7 @@ func (o *OauthAuthorization) GetPassword() string {
 // GetPasswordOk returns a tuple with the Password field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OauthAuthorization) GetPasswordOk() (*string, bool) {
-	if o == nil || o.Password == nil {
+	if o == nil || IsNil(o.Password) {
 		return nil, false
 	}
 	return o.Password, true
@@ -232,7 +236,7 @@ func (o *OauthAuthorization) GetPasswordOk() (*string, bool) {
 
 // HasPassword returns a boolean if a field has been set.
 func (o *OauthAuthorization) HasPassword() bool {
-	if o != nil && o.Password != nil {
+	if o != nil && !IsNil(o.Password) {
 		return true
 	}
 
@@ -246,7 +250,7 @@ func (o *OauthAuthorization) SetPassword(v string) {
 
 // GetUserId returns the UserId field value if set, zero value otherwise.
 func (o *OauthAuthorization) GetUserId() string {
-	if o == nil || o.UserId == nil {
+	if o == nil || IsNil(o.UserId) {
 		var ret string
 		return ret
 	}
@@ -256,7 +260,7 @@ func (o *OauthAuthorization) GetUserId() string {
 // GetUserIdOk returns a tuple with the UserId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OauthAuthorization) GetUserIdOk() (*string, bool) {
-	if o == nil || o.UserId == nil {
+	if o == nil || IsNil(o.UserId) {
 		return nil, false
 	}
 	return o.UserId, true
@@ -264,7 +268,7 @@ func (o *OauthAuthorization) GetUserIdOk() (*string, bool) {
 
 // HasUserId returns a boolean if a field has been set.
 func (o *OauthAuthorization) HasUserId() bool {
-	if o != nil && o.UserId != nil {
+	if o != nil && !IsNil(o.UserId) {
 		return true
 	}
 
@@ -276,116 +280,164 @@ func (o *OauthAuthorization) SetUserId(v string) {
 	o.UserId = &v
 }
 
-// GetAccessToken returns the AccessToken field value if set, zero value otherwise.
+// GetAccessToken returns the AccessToken field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *OauthAuthorization) GetAccessToken() OauthAccessTokenRelationship {
-	if o == nil || o.AccessToken == nil {
+	if o == nil || IsNil(o.AccessToken.Get()) {
 		var ret OauthAccessTokenRelationship
 		return ret
 	}
-	return *o.AccessToken
+	return *o.AccessToken.Get()
 }
 
 // GetAccessTokenOk returns a tuple with the AccessToken field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *OauthAuthorization) GetAccessTokenOk() (*OauthAccessTokenRelationship, bool) {
-	if o == nil || o.AccessToken == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.AccessToken, true
+	return o.AccessToken.Get(), o.AccessToken.IsSet()
 }
 
 // HasAccessToken returns a boolean if a field has been set.
 func (o *OauthAuthorization) HasAccessToken() bool {
-	if o != nil && o.AccessToken != nil {
+	if o != nil && o.AccessToken.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetAccessToken gets a reference to the given OauthAccessTokenRelationship and assigns it to the AccessToken field.
+// SetAccessToken gets a reference to the given NullableOauthAccessTokenRelationship and assigns it to the AccessToken field.
 func (o *OauthAuthorization) SetAccessToken(v OauthAccessTokenRelationship) {
-	o.AccessToken = &v
+	o.AccessToken.Set(&v)
 }
 
-// GetAccount returns the Account field value if set, zero value otherwise.
+// SetAccessTokenNil sets the value for AccessToken to be an explicit nil
+func (o *OauthAuthorization) SetAccessTokenNil() {
+	o.AccessToken.Set(nil)
+}
+
+// UnsetAccessToken ensures that no value is present for AccessToken, not even an explicit nil
+func (o *OauthAuthorization) UnsetAccessToken() {
+	o.AccessToken.Unset()
+}
+
+// GetAccount returns the Account field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *OauthAuthorization) GetAccount() IamAccountRelationship {
-	if o == nil || o.Account == nil {
+	if o == nil || IsNil(o.Account.Get()) {
 		var ret IamAccountRelationship
 		return ret
 	}
-	return *o.Account
+	return *o.Account.Get()
 }
 
 // GetAccountOk returns a tuple with the Account field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *OauthAuthorization) GetAccountOk() (*IamAccountRelationship, bool) {
-	if o == nil || o.Account == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Account, true
+	return o.Account.Get(), o.Account.IsSet()
 }
 
 // HasAccount returns a boolean if a field has been set.
 func (o *OauthAuthorization) HasAccount() bool {
-	if o != nil && o.Account != nil {
+	if o != nil && o.Account.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetAccount gets a reference to the given IamAccountRelationship and assigns it to the Account field.
+// SetAccount gets a reference to the given NullableIamAccountRelationship and assigns it to the Account field.
 func (o *OauthAuthorization) SetAccount(v IamAccountRelationship) {
-	o.Account = &v
+	o.Account.Set(&v)
+}
+
+// SetAccountNil sets the value for Account to be an explicit nil
+func (o *OauthAuthorization) SetAccountNil() {
+	o.Account.Set(nil)
+}
+
+// UnsetAccount ensures that no value is present for Account, not even an explicit nil
+func (o *OauthAuthorization) UnsetAccount() {
+	o.Account.Unset()
 }
 
 func (o OauthAuthorization) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o OauthAuthorization) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.ApiType != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.ApiType) {
 		toSerialize["ApiType"] = o.ApiType
 	}
-	if o.IsPasswordSet != nil {
+	if !IsNil(o.IsPasswordSet) {
 		toSerialize["IsPasswordSet"] = o.IsPasswordSet
 	}
-	if o.IsUserIdSet != nil {
+	if !IsNil(o.IsUserIdSet) {
 		toSerialize["IsUserIdSet"] = o.IsUserIdSet
 	}
-	if o.Password != nil {
+	if !IsNil(o.Password) {
 		toSerialize["Password"] = o.Password
 	}
-	if o.UserId != nil {
+	if !IsNil(o.UserId) {
 		toSerialize["UserId"] = o.UserId
 	}
-	if o.AccessToken != nil {
-		toSerialize["AccessToken"] = o.AccessToken
+	if o.AccessToken.IsSet() {
+		toSerialize["AccessToken"] = o.AccessToken.Get()
 	}
-	if o.Account != nil {
-		toSerialize["Account"] = o.Account
+	if o.Account.IsSet() {
+		toSerialize["Account"] = o.Account.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *OauthAuthorization) UnmarshalJSON(bytes []byte) (err error) {
+func (o *OauthAuthorization) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type OauthAuthorizationWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -400,14 +452,14 @@ func (o *OauthAuthorization) UnmarshalJSON(bytes []byte) (err error) {
 		// The password that will be used by Intersight to create OAuth2 tokens for interacting with the external repository, on the user account's behalf.
 		Password *string `json:"Password,omitempty"`
 		// The username that will be used by Intersight to create OAuth2 tokens for interacting with the external repository, on the user account's behalf.
-		UserId      *string                       `json:"UserId,omitempty"`
-		AccessToken *OauthAccessTokenRelationship `json:"AccessToken,omitempty"`
-		Account     *IamAccountRelationship       `json:"Account,omitempty"`
+		UserId      *string                              `json:"UserId,omitempty"`
+		AccessToken NullableOauthAccessTokenRelationship `json:"AccessToken,omitempty"`
+		Account     NullableIamAccountRelationship       `json:"Account,omitempty"`
 	}
 
 	varOauthAuthorizationWithoutEmbeddedStruct := OauthAuthorizationWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varOauthAuthorizationWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varOauthAuthorizationWithoutEmbeddedStruct)
 	if err == nil {
 		varOauthAuthorization := _OauthAuthorization{}
 		varOauthAuthorization.ClassId = varOauthAuthorizationWithoutEmbeddedStruct.ClassId
@@ -426,7 +478,7 @@ func (o *OauthAuthorization) UnmarshalJSON(bytes []byte) (err error) {
 
 	varOauthAuthorization := _OauthAuthorization{}
 
-	err = json.Unmarshal(bytes, &varOauthAuthorization)
+	err = json.Unmarshal(data, &varOauthAuthorization)
 	if err == nil {
 		o.MoBaseMo = varOauthAuthorization.MoBaseMo
 	} else {
@@ -435,7 +487,7 @@ func (o *OauthAuthorization) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "ApiType")

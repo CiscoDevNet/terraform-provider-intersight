@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the FabricFcZoneMember type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &FabricFcZoneMember{}
 
 // FabricFcZoneMember SAN target or WWPN that is to be part of the FC zone.
 type FabricFcZoneMember struct {
@@ -114,7 +118,7 @@ func (o *FabricFcZoneMember) SetObjectType(v string) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *FabricFcZoneMember) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -124,7 +128,7 @@ func (o *FabricFcZoneMember) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FabricFcZoneMember) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -132,7 +136,7 @@ func (o *FabricFcZoneMember) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *FabricFcZoneMember) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -146,7 +150,7 @@ func (o *FabricFcZoneMember) SetName(v string) {
 
 // GetSwitchId returns the SwitchId field value if set, zero value otherwise.
 func (o *FabricFcZoneMember) GetSwitchId() string {
-	if o == nil || o.SwitchId == nil {
+	if o == nil || IsNil(o.SwitchId) {
 		var ret string
 		return ret
 	}
@@ -156,7 +160,7 @@ func (o *FabricFcZoneMember) GetSwitchId() string {
 // GetSwitchIdOk returns a tuple with the SwitchId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FabricFcZoneMember) GetSwitchIdOk() (*string, bool) {
-	if o == nil || o.SwitchId == nil {
+	if o == nil || IsNil(o.SwitchId) {
 		return nil, false
 	}
 	return o.SwitchId, true
@@ -164,7 +168,7 @@ func (o *FabricFcZoneMember) GetSwitchIdOk() (*string, bool) {
 
 // HasSwitchId returns a boolean if a field has been set.
 func (o *FabricFcZoneMember) HasSwitchId() bool {
-	if o != nil && o.SwitchId != nil {
+	if o != nil && !IsNil(o.SwitchId) {
 		return true
 	}
 
@@ -178,7 +182,7 @@ func (o *FabricFcZoneMember) SetSwitchId(v string) {
 
 // GetVsanId returns the VsanId field value if set, zero value otherwise.
 func (o *FabricFcZoneMember) GetVsanId() int64 {
-	if o == nil || o.VsanId == nil {
+	if o == nil || IsNil(o.VsanId) {
 		var ret int64
 		return ret
 	}
@@ -188,7 +192,7 @@ func (o *FabricFcZoneMember) GetVsanId() int64 {
 // GetVsanIdOk returns a tuple with the VsanId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FabricFcZoneMember) GetVsanIdOk() (*int64, bool) {
-	if o == nil || o.VsanId == nil {
+	if o == nil || IsNil(o.VsanId) {
 		return nil, false
 	}
 	return o.VsanId, true
@@ -196,7 +200,7 @@ func (o *FabricFcZoneMember) GetVsanIdOk() (*int64, bool) {
 
 // HasVsanId returns a boolean if a field has been set.
 func (o *FabricFcZoneMember) HasVsanId() bool {
-	if o != nil && o.VsanId != nil {
+	if o != nil && !IsNil(o.VsanId) {
 		return true
 	}
 
@@ -210,7 +214,7 @@ func (o *FabricFcZoneMember) SetVsanId(v int64) {
 
 // GetWwpn returns the Wwpn field value if set, zero value otherwise.
 func (o *FabricFcZoneMember) GetWwpn() string {
-	if o == nil || o.Wwpn == nil {
+	if o == nil || IsNil(o.Wwpn) {
 		var ret string
 		return ret
 	}
@@ -220,7 +224,7 @@ func (o *FabricFcZoneMember) GetWwpn() string {
 // GetWwpnOk returns a tuple with the Wwpn field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FabricFcZoneMember) GetWwpnOk() (*string, bool) {
-	if o == nil || o.Wwpn == nil {
+	if o == nil || IsNil(o.Wwpn) {
 		return nil, false
 	}
 	return o.Wwpn, true
@@ -228,7 +232,7 @@ func (o *FabricFcZoneMember) GetWwpnOk() (*string, bool) {
 
 // HasWwpn returns a boolean if a field has been set.
 func (o *FabricFcZoneMember) HasWwpn() bool {
-	if o != nil && o.Wwpn != nil {
+	if o != nil && !IsNil(o.Wwpn) {
 		return true
 	}
 
@@ -241,31 +245,35 @@ func (o *FabricFcZoneMember) SetWwpn(v string) {
 }
 
 func (o FabricFcZoneMember) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o FabricFcZoneMember) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
 	errMoBaseComplexType = json.Unmarshal([]byte(serializedMoBaseComplexType), &toSerialize)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Name != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
 	}
-	if o.SwitchId != nil {
+	if !IsNil(o.SwitchId) {
 		toSerialize["SwitchId"] = o.SwitchId
 	}
-	if o.VsanId != nil {
+	if !IsNil(o.VsanId) {
 		toSerialize["VsanId"] = o.VsanId
 	}
-	if o.Wwpn != nil {
+	if !IsNil(o.Wwpn) {
 		toSerialize["Wwpn"] = o.Wwpn
 	}
 
@@ -273,10 +281,32 @@ func (o FabricFcZoneMember) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *FabricFcZoneMember) UnmarshalJSON(bytes []byte) (err error) {
+func (o *FabricFcZoneMember) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type FabricFcZoneMemberWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -294,7 +324,7 @@ func (o *FabricFcZoneMember) UnmarshalJSON(bytes []byte) (err error) {
 
 	varFabricFcZoneMemberWithoutEmbeddedStruct := FabricFcZoneMemberWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varFabricFcZoneMemberWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varFabricFcZoneMemberWithoutEmbeddedStruct)
 	if err == nil {
 		varFabricFcZoneMember := _FabricFcZoneMember{}
 		varFabricFcZoneMember.ClassId = varFabricFcZoneMemberWithoutEmbeddedStruct.ClassId
@@ -310,7 +340,7 @@ func (o *FabricFcZoneMember) UnmarshalJSON(bytes []byte) (err error) {
 
 	varFabricFcZoneMember := _FabricFcZoneMember{}
 
-	err = json.Unmarshal(bytes, &varFabricFcZoneMember)
+	err = json.Unmarshal(data, &varFabricFcZoneMember)
 	if err == nil {
 		o.MoBaseComplexType = varFabricFcZoneMember.MoBaseComplexType
 	} else {
@@ -319,7 +349,7 @@ func (o *FabricFcZoneMember) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Name")

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the WorkflowSshConfig type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &WorkflowSshConfig{}
 
 // WorkflowSshConfig Carries the SSH session details for opening a new connection.
 type WorkflowSshConfig struct {
@@ -118,7 +122,7 @@ func (o *WorkflowSshConfig) SetObjectType(v string) {
 
 // GetIsPassphraseSet returns the IsPassphraseSet field value if set, zero value otherwise.
 func (o *WorkflowSshConfig) GetIsPassphraseSet() bool {
-	if o == nil || o.IsPassphraseSet == nil {
+	if o == nil || IsNil(o.IsPassphraseSet) {
 		var ret bool
 		return ret
 	}
@@ -128,7 +132,7 @@ func (o *WorkflowSshConfig) GetIsPassphraseSet() bool {
 // GetIsPassphraseSetOk returns a tuple with the IsPassphraseSet field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowSshConfig) GetIsPassphraseSetOk() (*bool, bool) {
-	if o == nil || o.IsPassphraseSet == nil {
+	if o == nil || IsNil(o.IsPassphraseSet) {
 		return nil, false
 	}
 	return o.IsPassphraseSet, true
@@ -136,7 +140,7 @@ func (o *WorkflowSshConfig) GetIsPassphraseSetOk() (*bool, bool) {
 
 // HasIsPassphraseSet returns a boolean if a field has been set.
 func (o *WorkflowSshConfig) HasIsPassphraseSet() bool {
-	if o != nil && o.IsPassphraseSet != nil {
+	if o != nil && !IsNil(o.IsPassphraseSet) {
 		return true
 	}
 
@@ -150,7 +154,7 @@ func (o *WorkflowSshConfig) SetIsPassphraseSet(v bool) {
 
 // GetIsPasswordSet returns the IsPasswordSet field value if set, zero value otherwise.
 func (o *WorkflowSshConfig) GetIsPasswordSet() bool {
-	if o == nil || o.IsPasswordSet == nil {
+	if o == nil || IsNil(o.IsPasswordSet) {
 		var ret bool
 		return ret
 	}
@@ -160,7 +164,7 @@ func (o *WorkflowSshConfig) GetIsPasswordSet() bool {
 // GetIsPasswordSetOk returns a tuple with the IsPasswordSet field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowSshConfig) GetIsPasswordSetOk() (*bool, bool) {
-	if o == nil || o.IsPasswordSet == nil {
+	if o == nil || IsNil(o.IsPasswordSet) {
 		return nil, false
 	}
 	return o.IsPasswordSet, true
@@ -168,7 +172,7 @@ func (o *WorkflowSshConfig) GetIsPasswordSetOk() (*bool, bool) {
 
 // HasIsPasswordSet returns a boolean if a field has been set.
 func (o *WorkflowSshConfig) HasIsPasswordSet() bool {
-	if o != nil && o.IsPasswordSet != nil {
+	if o != nil && !IsNil(o.IsPasswordSet) {
 		return true
 	}
 
@@ -182,7 +186,7 @@ func (o *WorkflowSshConfig) SetIsPasswordSet(v bool) {
 
 // GetIsPrivateKeySet returns the IsPrivateKeySet field value if set, zero value otherwise.
 func (o *WorkflowSshConfig) GetIsPrivateKeySet() bool {
-	if o == nil || o.IsPrivateKeySet == nil {
+	if o == nil || IsNil(o.IsPrivateKeySet) {
 		var ret bool
 		return ret
 	}
@@ -192,7 +196,7 @@ func (o *WorkflowSshConfig) GetIsPrivateKeySet() bool {
 // GetIsPrivateKeySetOk returns a tuple with the IsPrivateKeySet field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowSshConfig) GetIsPrivateKeySetOk() (*bool, bool) {
-	if o == nil || o.IsPrivateKeySet == nil {
+	if o == nil || IsNil(o.IsPrivateKeySet) {
 		return nil, false
 	}
 	return o.IsPrivateKeySet, true
@@ -200,7 +204,7 @@ func (o *WorkflowSshConfig) GetIsPrivateKeySetOk() (*bool, bool) {
 
 // HasIsPrivateKeySet returns a boolean if a field has been set.
 func (o *WorkflowSshConfig) HasIsPrivateKeySet() bool {
-	if o != nil && o.IsPrivateKeySet != nil {
+	if o != nil && !IsNil(o.IsPrivateKeySet) {
 		return true
 	}
 
@@ -214,7 +218,7 @@ func (o *WorkflowSshConfig) SetIsPrivateKeySet(v bool) {
 
 // GetPassphrase returns the Passphrase field value if set, zero value otherwise.
 func (o *WorkflowSshConfig) GetPassphrase() string {
-	if o == nil || o.Passphrase == nil {
+	if o == nil || IsNil(o.Passphrase) {
 		var ret string
 		return ret
 	}
@@ -224,7 +228,7 @@ func (o *WorkflowSshConfig) GetPassphrase() string {
 // GetPassphraseOk returns a tuple with the Passphrase field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowSshConfig) GetPassphraseOk() (*string, bool) {
-	if o == nil || o.Passphrase == nil {
+	if o == nil || IsNil(o.Passphrase) {
 		return nil, false
 	}
 	return o.Passphrase, true
@@ -232,7 +236,7 @@ func (o *WorkflowSshConfig) GetPassphraseOk() (*string, bool) {
 
 // HasPassphrase returns a boolean if a field has been set.
 func (o *WorkflowSshConfig) HasPassphrase() bool {
-	if o != nil && o.Passphrase != nil {
+	if o != nil && !IsNil(o.Passphrase) {
 		return true
 	}
 
@@ -246,7 +250,7 @@ func (o *WorkflowSshConfig) SetPassphrase(v string) {
 
 // GetPassword returns the Password field value if set, zero value otherwise.
 func (o *WorkflowSshConfig) GetPassword() string {
-	if o == nil || o.Password == nil {
+	if o == nil || IsNil(o.Password) {
 		var ret string
 		return ret
 	}
@@ -256,7 +260,7 @@ func (o *WorkflowSshConfig) GetPassword() string {
 // GetPasswordOk returns a tuple with the Password field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowSshConfig) GetPasswordOk() (*string, bool) {
-	if o == nil || o.Password == nil {
+	if o == nil || IsNil(o.Password) {
 		return nil, false
 	}
 	return o.Password, true
@@ -264,7 +268,7 @@ func (o *WorkflowSshConfig) GetPasswordOk() (*string, bool) {
 
 // HasPassword returns a boolean if a field has been set.
 func (o *WorkflowSshConfig) HasPassword() bool {
-	if o != nil && o.Password != nil {
+	if o != nil && !IsNil(o.Password) {
 		return true
 	}
 
@@ -278,7 +282,7 @@ func (o *WorkflowSshConfig) SetPassword(v string) {
 
 // GetPrivateKey returns the PrivateKey field value if set, zero value otherwise.
 func (o *WorkflowSshConfig) GetPrivateKey() string {
-	if o == nil || o.PrivateKey == nil {
+	if o == nil || IsNil(o.PrivateKey) {
 		var ret string
 		return ret
 	}
@@ -288,7 +292,7 @@ func (o *WorkflowSshConfig) GetPrivateKey() string {
 // GetPrivateKeyOk returns a tuple with the PrivateKey field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowSshConfig) GetPrivateKeyOk() (*string, bool) {
-	if o == nil || o.PrivateKey == nil {
+	if o == nil || IsNil(o.PrivateKey) {
 		return nil, false
 	}
 	return o.PrivateKey, true
@@ -296,7 +300,7 @@ func (o *WorkflowSshConfig) GetPrivateKeyOk() (*string, bool) {
 
 // HasPrivateKey returns a boolean if a field has been set.
 func (o *WorkflowSshConfig) HasPrivateKey() bool {
-	if o != nil && o.PrivateKey != nil {
+	if o != nil && !IsNil(o.PrivateKey) {
 		return true
 	}
 
@@ -310,7 +314,7 @@ func (o *WorkflowSshConfig) SetPrivateKey(v string) {
 
 // GetTarget returns the Target field value if set, zero value otherwise.
 func (o *WorkflowSshConfig) GetTarget() string {
-	if o == nil || o.Target == nil {
+	if o == nil || IsNil(o.Target) {
 		var ret string
 		return ret
 	}
@@ -320,7 +324,7 @@ func (o *WorkflowSshConfig) GetTarget() string {
 // GetTargetOk returns a tuple with the Target field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowSshConfig) GetTargetOk() (*string, bool) {
-	if o == nil || o.Target == nil {
+	if o == nil || IsNil(o.Target) {
 		return nil, false
 	}
 	return o.Target, true
@@ -328,7 +332,7 @@ func (o *WorkflowSshConfig) GetTargetOk() (*string, bool) {
 
 // HasTarget returns a boolean if a field has been set.
 func (o *WorkflowSshConfig) HasTarget() bool {
-	if o != nil && o.Target != nil {
+	if o != nil && !IsNil(o.Target) {
 		return true
 	}
 
@@ -342,7 +346,7 @@ func (o *WorkflowSshConfig) SetTarget(v string) {
 
 // GetUser returns the User field value if set, zero value otherwise.
 func (o *WorkflowSshConfig) GetUser() string {
-	if o == nil || o.User == nil {
+	if o == nil || IsNil(o.User) {
 		var ret string
 		return ret
 	}
@@ -352,7 +356,7 @@ func (o *WorkflowSshConfig) GetUser() string {
 // GetUserOk returns a tuple with the User field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowSshConfig) GetUserOk() (*string, bool) {
-	if o == nil || o.User == nil {
+	if o == nil || IsNil(o.User) {
 		return nil, false
 	}
 	return o.User, true
@@ -360,7 +364,7 @@ func (o *WorkflowSshConfig) GetUserOk() (*string, bool) {
 
 // HasUser returns a boolean if a field has been set.
 func (o *WorkflowSshConfig) HasUser() bool {
-	if o != nil && o.User != nil {
+	if o != nil && !IsNil(o.User) {
 		return true
 	}
 
@@ -373,43 +377,47 @@ func (o *WorkflowSshConfig) SetUser(v string) {
 }
 
 func (o WorkflowSshConfig) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o WorkflowSshConfig) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedConnectorBaseMessage, errConnectorBaseMessage := json.Marshal(o.ConnectorBaseMessage)
 	if errConnectorBaseMessage != nil {
-		return []byte{}, errConnectorBaseMessage
+		return map[string]interface{}{}, errConnectorBaseMessage
 	}
 	errConnectorBaseMessage = json.Unmarshal([]byte(serializedConnectorBaseMessage), &toSerialize)
 	if errConnectorBaseMessage != nil {
-		return []byte{}, errConnectorBaseMessage
+		return map[string]interface{}{}, errConnectorBaseMessage
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.IsPassphraseSet != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.IsPassphraseSet) {
 		toSerialize["IsPassphraseSet"] = o.IsPassphraseSet
 	}
-	if o.IsPasswordSet != nil {
+	if !IsNil(o.IsPasswordSet) {
 		toSerialize["IsPasswordSet"] = o.IsPasswordSet
 	}
-	if o.IsPrivateKeySet != nil {
+	if !IsNil(o.IsPrivateKeySet) {
 		toSerialize["IsPrivateKeySet"] = o.IsPrivateKeySet
 	}
-	if o.Passphrase != nil {
+	if !IsNil(o.Passphrase) {
 		toSerialize["Passphrase"] = o.Passphrase
 	}
-	if o.Password != nil {
+	if !IsNil(o.Password) {
 		toSerialize["Password"] = o.Password
 	}
-	if o.PrivateKey != nil {
+	if !IsNil(o.PrivateKey) {
 		toSerialize["PrivateKey"] = o.PrivateKey
 	}
-	if o.Target != nil {
+	if !IsNil(o.Target) {
 		toSerialize["Target"] = o.Target
 	}
-	if o.User != nil {
+	if !IsNil(o.User) {
 		toSerialize["User"] = o.User
 	}
 
@@ -417,10 +425,32 @@ func (o WorkflowSshConfig) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *WorkflowSshConfig) UnmarshalJSON(bytes []byte) (err error) {
+func (o *WorkflowSshConfig) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type WorkflowSshConfigWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -446,7 +476,7 @@ func (o *WorkflowSshConfig) UnmarshalJSON(bytes []byte) (err error) {
 
 	varWorkflowSshConfigWithoutEmbeddedStruct := WorkflowSshConfigWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varWorkflowSshConfigWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varWorkflowSshConfigWithoutEmbeddedStruct)
 	if err == nil {
 		varWorkflowSshConfig := _WorkflowSshConfig{}
 		varWorkflowSshConfig.ClassId = varWorkflowSshConfigWithoutEmbeddedStruct.ClassId
@@ -466,7 +496,7 @@ func (o *WorkflowSshConfig) UnmarshalJSON(bytes []byte) (err error) {
 
 	varWorkflowSshConfig := _WorkflowSshConfig{}
 
-	err = json.Unmarshal(bytes, &varWorkflowSshConfig)
+	err = json.Unmarshal(data, &varWorkflowSshConfig)
 	if err == nil {
 		o.ConnectorBaseMessage = varWorkflowSshConfig.ConnectorBaseMessage
 	} else {
@@ -475,7 +505,7 @@ func (o *WorkflowSshConfig) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "IsPassphraseSet")

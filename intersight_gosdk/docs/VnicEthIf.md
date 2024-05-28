@@ -21,13 +21,13 @@ Name | Type | Description | Notes
 **TemplateSyncErrors** | Pointer to [**[]MotemplateSyncError**](MotemplateSyncError.md) |  | [optional] 
 **TemplateSyncStatus** | Pointer to **string** | The sync status of the current MO wrt the attached Template MO. * &#x60;None&#x60; - The Enum value represents that the object is not attached to any template. * &#x60;OK&#x60; - The Enum value represents that the object values are in sync with attached template. * &#x60;Scheduled&#x60; - The Enum value represents that the object sync from attached template is scheduled from template. * &#x60;InProgress&#x60; - The Enum value represents that the object sync with the attached template is in progress. * &#x60;OutOfSync&#x60; - The Enum value represents that the object values are not in sync with attached template. | [optional] [readonly] [default to "None"]
 **VifId** | Pointer to **int64** | The Vif Id should be same as the channel number of the vethernet created on switch in order to set up the data path. The property is applicable only for FI attached servers where a vethernet is created on the switch for every vNIC. | [optional] [readonly] 
-**IpLease** | Pointer to [**IppoolIpLeaseRelationship**](IppoolIpLeaseRelationship.md) |  | [optional] 
-**LanConnectivityPolicy** | Pointer to [**VnicLanConnectivityPolicyRelationship**](VnicLanConnectivityPolicyRelationship.md) |  | [optional] 
-**LcpVnic** | Pointer to [**VnicEthIfRelationship**](VnicEthIfRelationship.md) |  | [optional] 
-**MacLease** | Pointer to [**MacpoolLeaseRelationship**](MacpoolLeaseRelationship.md) |  | [optional] 
-**Profile** | Pointer to [**PolicyAbstractConfigProfileRelationship**](PolicyAbstractConfigProfileRelationship.md) |  | [optional] 
+**IpLease** | Pointer to [**NullableIppoolIpLeaseRelationship**](IppoolIpLeaseRelationship.md) |  | [optional] 
+**LanConnectivityPolicy** | Pointer to [**NullableVnicLanConnectivityPolicyRelationship**](VnicLanConnectivityPolicyRelationship.md) |  | [optional] 
+**LcpVnic** | Pointer to [**NullableVnicEthIfRelationship**](VnicEthIfRelationship.md) |  | [optional] 
+**MacLease** | Pointer to [**NullableMacpoolLeaseRelationship**](MacpoolLeaseRelationship.md) |  | [optional] 
+**Profile** | Pointer to [**NullablePolicyAbstractConfigProfileRelationship**](PolicyAbstractConfigProfileRelationship.md) |  | [optional] 
 **SpVnics** | Pointer to [**[]VnicEthIfRelationship**](VnicEthIfRelationship.md) | An array of relationships to vnicEthIf resources. | [optional] [readonly] 
-**SrcTemplate** | Pointer to [**VnicVnicTemplateRelationship**](VnicVnicTemplateRelationship.md) |  | [optional] 
+**SrcTemplate** | Pointer to [**NullableVnicVnicTemplateRelationship**](VnicVnicTemplateRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -538,6 +538,16 @@ SetIpLease sets IpLease field to given value.
 
 HasIpLease returns a boolean if a field has been set.
 
+### SetIpLeaseNil
+
+`func (o *VnicEthIf) SetIpLeaseNil(b bool)`
+
+ SetIpLeaseNil sets the value for IpLease to be an explicit nil
+
+### UnsetIpLease
+`func (o *VnicEthIf) UnsetIpLease()`
+
+UnsetIpLease ensures that no value is present for IpLease, not even an explicit nil
 ### GetLanConnectivityPolicy
 
 `func (o *VnicEthIf) GetLanConnectivityPolicy() VnicLanConnectivityPolicyRelationship`
@@ -563,6 +573,16 @@ SetLanConnectivityPolicy sets LanConnectivityPolicy field to given value.
 
 HasLanConnectivityPolicy returns a boolean if a field has been set.
 
+### SetLanConnectivityPolicyNil
+
+`func (o *VnicEthIf) SetLanConnectivityPolicyNil(b bool)`
+
+ SetLanConnectivityPolicyNil sets the value for LanConnectivityPolicy to be an explicit nil
+
+### UnsetLanConnectivityPolicy
+`func (o *VnicEthIf) UnsetLanConnectivityPolicy()`
+
+UnsetLanConnectivityPolicy ensures that no value is present for LanConnectivityPolicy, not even an explicit nil
 ### GetLcpVnic
 
 `func (o *VnicEthIf) GetLcpVnic() VnicEthIfRelationship`
@@ -588,6 +608,16 @@ SetLcpVnic sets LcpVnic field to given value.
 
 HasLcpVnic returns a boolean if a field has been set.
 
+### SetLcpVnicNil
+
+`func (o *VnicEthIf) SetLcpVnicNil(b bool)`
+
+ SetLcpVnicNil sets the value for LcpVnic to be an explicit nil
+
+### UnsetLcpVnic
+`func (o *VnicEthIf) UnsetLcpVnic()`
+
+UnsetLcpVnic ensures that no value is present for LcpVnic, not even an explicit nil
 ### GetMacLease
 
 `func (o *VnicEthIf) GetMacLease() MacpoolLeaseRelationship`
@@ -613,6 +643,16 @@ SetMacLease sets MacLease field to given value.
 
 HasMacLease returns a boolean if a field has been set.
 
+### SetMacLeaseNil
+
+`func (o *VnicEthIf) SetMacLeaseNil(b bool)`
+
+ SetMacLeaseNil sets the value for MacLease to be an explicit nil
+
+### UnsetMacLease
+`func (o *VnicEthIf) UnsetMacLease()`
+
+UnsetMacLease ensures that no value is present for MacLease, not even an explicit nil
 ### GetProfile
 
 `func (o *VnicEthIf) GetProfile() PolicyAbstractConfigProfileRelationship`
@@ -638,6 +678,16 @@ SetProfile sets Profile field to given value.
 
 HasProfile returns a boolean if a field has been set.
 
+### SetProfileNil
+
+`func (o *VnicEthIf) SetProfileNil(b bool)`
+
+ SetProfileNil sets the value for Profile to be an explicit nil
+
+### UnsetProfile
+`func (o *VnicEthIf) UnsetProfile()`
+
+UnsetProfile ensures that no value is present for Profile, not even an explicit nil
 ### GetSpVnics
 
 `func (o *VnicEthIf) GetSpVnics() []VnicEthIfRelationship`
@@ -698,6 +748,16 @@ SetSrcTemplate sets SrcTemplate field to given value.
 
 HasSrcTemplate returns a boolean if a field has been set.
 
+### SetSrcTemplateNil
+
+`func (o *VnicEthIf) SetSrcTemplateNil(b bool)`
+
+ SetSrcTemplateNil sets the value for SrcTemplate to be an explicit nil
+
+### UnsetSrcTemplate
+`func (o *VnicEthIf) UnsetSrcTemplate()`
+
+UnsetSrcTemplate ensures that no value is present for SrcTemplate, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

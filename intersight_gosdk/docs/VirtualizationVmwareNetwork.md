@@ -11,8 +11,8 @@ Name | Type | Description | Notes
 **NicTeamingAndFailover** | Pointer to [**NullableVirtualizationVmwareTeamingAndFailover**](VirtualizationVmwareTeamingAndFailover.md) |  | [optional] 
 **PromiscuousMode** | Pointer to **string** | If promiscuousMode property value is set to reject, incoming traffic only targeted to that network will be visible. If property value is set to accept, objects defined within the network can see all incoming traffic on the virtual switch based on the VLAN policy. * &#x60;Reject&#x60; - Indicates that the security policy is rejected. * &#x60;Accept&#x60; - Indicates that the security policy is accepted. | [optional] [default to "Reject"]
 **VlanId** | Pointer to **int64** | VLAN id with which the network is associated. A value of 0 specifies that port is not associated with a VLAN. | [optional] 
-**Host** | Pointer to [**VirtualizationVmwareHostRelationship**](VirtualizationVmwareHostRelationship.md) |  | [optional] 
-**VirtualSwitch** | Pointer to [**VirtualizationVmwareVirtualSwitchRelationship**](VirtualizationVmwareVirtualSwitchRelationship.md) |  | [optional] 
+**Host** | Pointer to [**NullableVirtualizationVmwareHostRelationship**](VirtualizationVmwareHostRelationship.md) |  | [optional] 
+**VirtualSwitch** | Pointer to [**NullableVirtualizationVmwareVirtualSwitchRelationship**](VirtualizationVmwareVirtualSwitchRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -233,6 +233,16 @@ SetHost sets Host field to given value.
 
 HasHost returns a boolean if a field has been set.
 
+### SetHostNil
+
+`func (o *VirtualizationVmwareNetwork) SetHostNil(b bool)`
+
+ SetHostNil sets the value for Host to be an explicit nil
+
+### UnsetHost
+`func (o *VirtualizationVmwareNetwork) UnsetHost()`
+
+UnsetHost ensures that no value is present for Host, not even an explicit nil
 ### GetVirtualSwitch
 
 `func (o *VirtualizationVmwareNetwork) GetVirtualSwitch() VirtualizationVmwareVirtualSwitchRelationship`
@@ -258,6 +268,16 @@ SetVirtualSwitch sets VirtualSwitch field to given value.
 
 HasVirtualSwitch returns a boolean if a field has been set.
 
+### SetVirtualSwitchNil
+
+`func (o *VirtualizationVmwareNetwork) SetVirtualSwitchNil(b bool)`
+
+ SetVirtualSwitchNil sets the value for VirtualSwitch to be an explicit nil
+
+### UnsetVirtualSwitch
+`func (o *VirtualizationVmwareNetwork) UnsetVirtualSwitch()`
+
+UnsetVirtualSwitch ensures that no value is present for VirtualSwitch, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

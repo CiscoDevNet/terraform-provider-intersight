@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the RecoveryBackupProfile type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &RecoveryBackupProfile{}
 
 // RecoveryBackupProfile Backup profile to initiate on-demand or scheduled backups at end points.
 type RecoveryBackupProfile struct {
@@ -25,12 +29,12 @@ type RecoveryBackupProfile struct {
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
 	// Enables/Disables the schedule on the endpoint.
-	Enabled              *bool                                     `json:"Enabled,omitempty"`
-	BackupConfig         *RecoveryBackupConfigPolicyRelationship   `json:"BackupConfig,omitempty"`
-	ConfigResult         *RecoveryConfigResultRelationship         `json:"ConfigResult,omitempty"`
-	DeviceId             *AssetDeviceRegistrationRelationship      `json:"DeviceId,omitempty"`
-	Organization         *OrganizationOrganizationRelationship     `json:"Organization,omitempty"`
-	ScheduleConfig       *RecoveryScheduleConfigPolicyRelationship `json:"ScheduleConfig,omitempty"`
+	Enabled              *bool                                            `json:"Enabled,omitempty"`
+	BackupConfig         NullableRecoveryBackupConfigPolicyRelationship   `json:"BackupConfig,omitempty"`
+	ConfigResult         NullableRecoveryConfigResultRelationship         `json:"ConfigResult,omitempty"`
+	DeviceId             NullableAssetDeviceRegistrationRelationship      `json:"DeviceId,omitempty"`
+	Organization         NullableOrganizationOrganizationRelationship     `json:"Organization,omitempty"`
+	ScheduleConfig       NullableRecoveryScheduleConfigPolicyRelationship `json:"ScheduleConfig,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -117,7 +121,7 @@ func (o *RecoveryBackupProfile) SetObjectType(v string) {
 
 // GetEnabled returns the Enabled field value if set, zero value otherwise.
 func (o *RecoveryBackupProfile) GetEnabled() bool {
-	if o == nil || o.Enabled == nil {
+	if o == nil || IsNil(o.Enabled) {
 		var ret bool
 		return ret
 	}
@@ -127,7 +131,7 @@ func (o *RecoveryBackupProfile) GetEnabled() bool {
 // GetEnabledOk returns a tuple with the Enabled field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RecoveryBackupProfile) GetEnabledOk() (*bool, bool) {
-	if o == nil || o.Enabled == nil {
+	if o == nil || IsNil(o.Enabled) {
 		return nil, false
 	}
 	return o.Enabled, true
@@ -135,7 +139,7 @@ func (o *RecoveryBackupProfile) GetEnabledOk() (*bool, bool) {
 
 // HasEnabled returns a boolean if a field has been set.
 func (o *RecoveryBackupProfile) HasEnabled() bool {
-	if o != nil && o.Enabled != nil {
+	if o != nil && !IsNil(o.Enabled) {
 		return true
 	}
 
@@ -147,226 +151,307 @@ func (o *RecoveryBackupProfile) SetEnabled(v bool) {
 	o.Enabled = &v
 }
 
-// GetBackupConfig returns the BackupConfig field value if set, zero value otherwise.
+// GetBackupConfig returns the BackupConfig field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *RecoveryBackupProfile) GetBackupConfig() RecoveryBackupConfigPolicyRelationship {
-	if o == nil || o.BackupConfig == nil {
+	if o == nil || IsNil(o.BackupConfig.Get()) {
 		var ret RecoveryBackupConfigPolicyRelationship
 		return ret
 	}
-	return *o.BackupConfig
+	return *o.BackupConfig.Get()
 }
 
 // GetBackupConfigOk returns a tuple with the BackupConfig field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *RecoveryBackupProfile) GetBackupConfigOk() (*RecoveryBackupConfigPolicyRelationship, bool) {
-	if o == nil || o.BackupConfig == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.BackupConfig, true
+	return o.BackupConfig.Get(), o.BackupConfig.IsSet()
 }
 
 // HasBackupConfig returns a boolean if a field has been set.
 func (o *RecoveryBackupProfile) HasBackupConfig() bool {
-	if o != nil && o.BackupConfig != nil {
+	if o != nil && o.BackupConfig.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetBackupConfig gets a reference to the given RecoveryBackupConfigPolicyRelationship and assigns it to the BackupConfig field.
+// SetBackupConfig gets a reference to the given NullableRecoveryBackupConfigPolicyRelationship and assigns it to the BackupConfig field.
 func (o *RecoveryBackupProfile) SetBackupConfig(v RecoveryBackupConfigPolicyRelationship) {
-	o.BackupConfig = &v
+	o.BackupConfig.Set(&v)
 }
 
-// GetConfigResult returns the ConfigResult field value if set, zero value otherwise.
+// SetBackupConfigNil sets the value for BackupConfig to be an explicit nil
+func (o *RecoveryBackupProfile) SetBackupConfigNil() {
+	o.BackupConfig.Set(nil)
+}
+
+// UnsetBackupConfig ensures that no value is present for BackupConfig, not even an explicit nil
+func (o *RecoveryBackupProfile) UnsetBackupConfig() {
+	o.BackupConfig.Unset()
+}
+
+// GetConfigResult returns the ConfigResult field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *RecoveryBackupProfile) GetConfigResult() RecoveryConfigResultRelationship {
-	if o == nil || o.ConfigResult == nil {
+	if o == nil || IsNil(o.ConfigResult.Get()) {
 		var ret RecoveryConfigResultRelationship
 		return ret
 	}
-	return *o.ConfigResult
+	return *o.ConfigResult.Get()
 }
 
 // GetConfigResultOk returns a tuple with the ConfigResult field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *RecoveryBackupProfile) GetConfigResultOk() (*RecoveryConfigResultRelationship, bool) {
-	if o == nil || o.ConfigResult == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.ConfigResult, true
+	return o.ConfigResult.Get(), o.ConfigResult.IsSet()
 }
 
 // HasConfigResult returns a boolean if a field has been set.
 func (o *RecoveryBackupProfile) HasConfigResult() bool {
-	if o != nil && o.ConfigResult != nil {
+	if o != nil && o.ConfigResult.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetConfigResult gets a reference to the given RecoveryConfigResultRelationship and assigns it to the ConfigResult field.
+// SetConfigResult gets a reference to the given NullableRecoveryConfigResultRelationship and assigns it to the ConfigResult field.
 func (o *RecoveryBackupProfile) SetConfigResult(v RecoveryConfigResultRelationship) {
-	o.ConfigResult = &v
+	o.ConfigResult.Set(&v)
 }
 
-// GetDeviceId returns the DeviceId field value if set, zero value otherwise.
+// SetConfigResultNil sets the value for ConfigResult to be an explicit nil
+func (o *RecoveryBackupProfile) SetConfigResultNil() {
+	o.ConfigResult.Set(nil)
+}
+
+// UnsetConfigResult ensures that no value is present for ConfigResult, not even an explicit nil
+func (o *RecoveryBackupProfile) UnsetConfigResult() {
+	o.ConfigResult.Unset()
+}
+
+// GetDeviceId returns the DeviceId field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *RecoveryBackupProfile) GetDeviceId() AssetDeviceRegistrationRelationship {
-	if o == nil || o.DeviceId == nil {
+	if o == nil || IsNil(o.DeviceId.Get()) {
 		var ret AssetDeviceRegistrationRelationship
 		return ret
 	}
-	return *o.DeviceId
+	return *o.DeviceId.Get()
 }
 
 // GetDeviceIdOk returns a tuple with the DeviceId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *RecoveryBackupProfile) GetDeviceIdOk() (*AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.DeviceId == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.DeviceId, true
+	return o.DeviceId.Get(), o.DeviceId.IsSet()
 }
 
 // HasDeviceId returns a boolean if a field has been set.
 func (o *RecoveryBackupProfile) HasDeviceId() bool {
-	if o != nil && o.DeviceId != nil {
+	if o != nil && o.DeviceId.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetDeviceId gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the DeviceId field.
+// SetDeviceId gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the DeviceId field.
 func (o *RecoveryBackupProfile) SetDeviceId(v AssetDeviceRegistrationRelationship) {
-	o.DeviceId = &v
+	o.DeviceId.Set(&v)
 }
 
-// GetOrganization returns the Organization field value if set, zero value otherwise.
+// SetDeviceIdNil sets the value for DeviceId to be an explicit nil
+func (o *RecoveryBackupProfile) SetDeviceIdNil() {
+	o.DeviceId.Set(nil)
+}
+
+// UnsetDeviceId ensures that no value is present for DeviceId, not even an explicit nil
+func (o *RecoveryBackupProfile) UnsetDeviceId() {
+	o.DeviceId.Unset()
+}
+
+// GetOrganization returns the Organization field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *RecoveryBackupProfile) GetOrganization() OrganizationOrganizationRelationship {
-	if o == nil || o.Organization == nil {
+	if o == nil || IsNil(o.Organization.Get()) {
 		var ret OrganizationOrganizationRelationship
 		return ret
 	}
-	return *o.Organization
+	return *o.Organization.Get()
 }
 
 // GetOrganizationOk returns a tuple with the Organization field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *RecoveryBackupProfile) GetOrganizationOk() (*OrganizationOrganizationRelationship, bool) {
-	if o == nil || o.Organization == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Organization, true
+	return o.Organization.Get(), o.Organization.IsSet()
 }
 
 // HasOrganization returns a boolean if a field has been set.
 func (o *RecoveryBackupProfile) HasOrganization() bool {
-	if o != nil && o.Organization != nil {
+	if o != nil && o.Organization.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetOrganization gets a reference to the given OrganizationOrganizationRelationship and assigns it to the Organization field.
+// SetOrganization gets a reference to the given NullableOrganizationOrganizationRelationship and assigns it to the Organization field.
 func (o *RecoveryBackupProfile) SetOrganization(v OrganizationOrganizationRelationship) {
-	o.Organization = &v
+	o.Organization.Set(&v)
 }
 
-// GetScheduleConfig returns the ScheduleConfig field value if set, zero value otherwise.
+// SetOrganizationNil sets the value for Organization to be an explicit nil
+func (o *RecoveryBackupProfile) SetOrganizationNil() {
+	o.Organization.Set(nil)
+}
+
+// UnsetOrganization ensures that no value is present for Organization, not even an explicit nil
+func (o *RecoveryBackupProfile) UnsetOrganization() {
+	o.Organization.Unset()
+}
+
+// GetScheduleConfig returns the ScheduleConfig field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *RecoveryBackupProfile) GetScheduleConfig() RecoveryScheduleConfigPolicyRelationship {
-	if o == nil || o.ScheduleConfig == nil {
+	if o == nil || IsNil(o.ScheduleConfig.Get()) {
 		var ret RecoveryScheduleConfigPolicyRelationship
 		return ret
 	}
-	return *o.ScheduleConfig
+	return *o.ScheduleConfig.Get()
 }
 
 // GetScheduleConfigOk returns a tuple with the ScheduleConfig field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *RecoveryBackupProfile) GetScheduleConfigOk() (*RecoveryScheduleConfigPolicyRelationship, bool) {
-	if o == nil || o.ScheduleConfig == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.ScheduleConfig, true
+	return o.ScheduleConfig.Get(), o.ScheduleConfig.IsSet()
 }
 
 // HasScheduleConfig returns a boolean if a field has been set.
 func (o *RecoveryBackupProfile) HasScheduleConfig() bool {
-	if o != nil && o.ScheduleConfig != nil {
+	if o != nil && o.ScheduleConfig.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetScheduleConfig gets a reference to the given RecoveryScheduleConfigPolicyRelationship and assigns it to the ScheduleConfig field.
+// SetScheduleConfig gets a reference to the given NullableRecoveryScheduleConfigPolicyRelationship and assigns it to the ScheduleConfig field.
 func (o *RecoveryBackupProfile) SetScheduleConfig(v RecoveryScheduleConfigPolicyRelationship) {
-	o.ScheduleConfig = &v
+	o.ScheduleConfig.Set(&v)
+}
+
+// SetScheduleConfigNil sets the value for ScheduleConfig to be an explicit nil
+func (o *RecoveryBackupProfile) SetScheduleConfigNil() {
+	o.ScheduleConfig.Set(nil)
+}
+
+// UnsetScheduleConfig ensures that no value is present for ScheduleConfig, not even an explicit nil
+func (o *RecoveryBackupProfile) UnsetScheduleConfig() {
+	o.ScheduleConfig.Unset()
 }
 
 func (o RecoveryBackupProfile) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o RecoveryBackupProfile) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedPolicyAbstractConfigProfile, errPolicyAbstractConfigProfile := json.Marshal(o.PolicyAbstractConfigProfile)
 	if errPolicyAbstractConfigProfile != nil {
-		return []byte{}, errPolicyAbstractConfigProfile
+		return map[string]interface{}{}, errPolicyAbstractConfigProfile
 	}
 	errPolicyAbstractConfigProfile = json.Unmarshal([]byte(serializedPolicyAbstractConfigProfile), &toSerialize)
 	if errPolicyAbstractConfigProfile != nil {
-		return []byte{}, errPolicyAbstractConfigProfile
+		return map[string]interface{}{}, errPolicyAbstractConfigProfile
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Enabled != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Enabled) {
 		toSerialize["Enabled"] = o.Enabled
 	}
-	if o.BackupConfig != nil {
-		toSerialize["BackupConfig"] = o.BackupConfig
+	if o.BackupConfig.IsSet() {
+		toSerialize["BackupConfig"] = o.BackupConfig.Get()
 	}
-	if o.ConfigResult != nil {
-		toSerialize["ConfigResult"] = o.ConfigResult
+	if o.ConfigResult.IsSet() {
+		toSerialize["ConfigResult"] = o.ConfigResult.Get()
 	}
-	if o.DeviceId != nil {
-		toSerialize["DeviceId"] = o.DeviceId
+	if o.DeviceId.IsSet() {
+		toSerialize["DeviceId"] = o.DeviceId.Get()
 	}
-	if o.Organization != nil {
-		toSerialize["Organization"] = o.Organization
+	if o.Organization.IsSet() {
+		toSerialize["Organization"] = o.Organization.Get()
 	}
-	if o.ScheduleConfig != nil {
-		toSerialize["ScheduleConfig"] = o.ScheduleConfig
+	if o.ScheduleConfig.IsSet() {
+		toSerialize["ScheduleConfig"] = o.ScheduleConfig.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *RecoveryBackupProfile) UnmarshalJSON(bytes []byte) (err error) {
+func (o *RecoveryBackupProfile) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type RecoveryBackupProfileWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 		ObjectType string `json:"ObjectType"`
 		// Enables/Disables the schedule on the endpoint.
-		Enabled        *bool                                     `json:"Enabled,omitempty"`
-		BackupConfig   *RecoveryBackupConfigPolicyRelationship   `json:"BackupConfig,omitempty"`
-		ConfigResult   *RecoveryConfigResultRelationship         `json:"ConfigResult,omitempty"`
-		DeviceId       *AssetDeviceRegistrationRelationship      `json:"DeviceId,omitempty"`
-		Organization   *OrganizationOrganizationRelationship     `json:"Organization,omitempty"`
-		ScheduleConfig *RecoveryScheduleConfigPolicyRelationship `json:"ScheduleConfig,omitempty"`
+		Enabled        *bool                                            `json:"Enabled,omitempty"`
+		BackupConfig   NullableRecoveryBackupConfigPolicyRelationship   `json:"BackupConfig,omitempty"`
+		ConfigResult   NullableRecoveryConfigResultRelationship         `json:"ConfigResult,omitempty"`
+		DeviceId       NullableAssetDeviceRegistrationRelationship      `json:"DeviceId,omitempty"`
+		Organization   NullableOrganizationOrganizationRelationship     `json:"Organization,omitempty"`
+		ScheduleConfig NullableRecoveryScheduleConfigPolicyRelationship `json:"ScheduleConfig,omitempty"`
 	}
 
 	varRecoveryBackupProfileWithoutEmbeddedStruct := RecoveryBackupProfileWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varRecoveryBackupProfileWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varRecoveryBackupProfileWithoutEmbeddedStruct)
 	if err == nil {
 		varRecoveryBackupProfile := _RecoveryBackupProfile{}
 		varRecoveryBackupProfile.ClassId = varRecoveryBackupProfileWithoutEmbeddedStruct.ClassId
@@ -384,7 +469,7 @@ func (o *RecoveryBackupProfile) UnmarshalJSON(bytes []byte) (err error) {
 
 	varRecoveryBackupProfile := _RecoveryBackupProfile{}
 
-	err = json.Unmarshal(bytes, &varRecoveryBackupProfile)
+	err = json.Unmarshal(data, &varRecoveryBackupProfile)
 	if err == nil {
 		o.PolicyAbstractConfigProfile = varRecoveryBackupProfile.PolicyAbstractConfigProfile
 	} else {
@@ -393,7 +478,7 @@ func (o *RecoveryBackupProfile) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Enabled")

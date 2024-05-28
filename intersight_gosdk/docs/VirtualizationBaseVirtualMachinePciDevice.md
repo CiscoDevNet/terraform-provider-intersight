@@ -9,8 +9,8 @@ Name | Type | Description | Notes
 **BackingPciId** | Pointer to **string** | The backing physical host PCI device Id for this device. | [optional] [readonly] 
 **Name** | Pointer to **string** | Name of this virtual machine PCI device. | [optional] [readonly] 
 **Passthrough** | Pointer to **bool** | Indicates if this virtual machine PCI device is enabled via passthrough from the host. | [optional] [readonly] 
-**BackingPciDevice** | Pointer to [**VirtualizationBaseHostPciDeviceRelationship**](VirtualizationBaseHostPciDeviceRelationship.md) |  | [optional] 
-**VirtualMachine** | Pointer to [**VirtualizationBaseVirtualMachineRelationship**](VirtualizationBaseVirtualMachineRelationship.md) |  | [optional] 
+**BackingPciDevice** | Pointer to [**NullableVirtualizationBaseHostPciDeviceRelationship**](VirtualizationBaseHostPciDeviceRelationship.md) |  | [optional] 
+**VirtualMachine** | Pointer to [**NullableVirtualizationBaseVirtualMachineRelationship**](VirtualizationBaseVirtualMachineRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -171,6 +171,16 @@ SetBackingPciDevice sets BackingPciDevice field to given value.
 
 HasBackingPciDevice returns a boolean if a field has been set.
 
+### SetBackingPciDeviceNil
+
+`func (o *VirtualizationBaseVirtualMachinePciDevice) SetBackingPciDeviceNil(b bool)`
+
+ SetBackingPciDeviceNil sets the value for BackingPciDevice to be an explicit nil
+
+### UnsetBackingPciDevice
+`func (o *VirtualizationBaseVirtualMachinePciDevice) UnsetBackingPciDevice()`
+
+UnsetBackingPciDevice ensures that no value is present for BackingPciDevice, not even an explicit nil
 ### GetVirtualMachine
 
 `func (o *VirtualizationBaseVirtualMachinePciDevice) GetVirtualMachine() VirtualizationBaseVirtualMachineRelationship`
@@ -196,6 +206,16 @@ SetVirtualMachine sets VirtualMachine field to given value.
 
 HasVirtualMachine returns a boolean if a field has been set.
 
+### SetVirtualMachineNil
+
+`func (o *VirtualizationBaseVirtualMachinePciDevice) SetVirtualMachineNil(b bool)`
+
+ SetVirtualMachineNil sets the value for VirtualMachine to be an explicit nil
+
+### UnsetVirtualMachine
+`func (o *VirtualizationBaseVirtualMachinePciDevice) UnsetVirtualMachine()`
+
+UnsetVirtualMachine ensures that no value is present for VirtualMachine, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

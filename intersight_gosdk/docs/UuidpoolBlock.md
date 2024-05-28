@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "uuidpool.Block"]
 **Prefix** | Pointer to **string** | Prefix of the UUID pool. UUID is constructed as &lt;prefix&gt;-&lt;suffix&gt;. | [optional] [readonly] 
 **UuidSuffixBlock** | Pointer to [**UuidpoolUuidBlock**](UuidpoolUuidBlock.md) |  | [optional] 
-**Pool** | Pointer to [**UuidpoolPoolRelationship**](UuidpoolPoolRelationship.md) |  | [optional] 
+**Pool** | Pointer to [**NullableUuidpoolPoolRelationship**](UuidpoolPoolRelationship.md) |  | [optional] 
 **Reservations** | Pointer to [**[]UuidpoolReservationRelationship**](UuidpoolReservationRelationship.md) | An array of relationships to uuidpoolReservation resources. | [optional] [readonly] 
 
 ## Methods
@@ -145,6 +145,16 @@ SetPool sets Pool field to given value.
 
 HasPool returns a boolean if a field has been set.
 
+### SetPoolNil
+
+`func (o *UuidpoolBlock) SetPoolNil(b bool)`
+
+ SetPoolNil sets the value for Pool to be an explicit nil
+
+### UnsetPool
+`func (o *UuidpoolBlock) UnsetPool()`
+
+UnsetPool ensures that no value is present for Pool, not even an explicit nil
 ### GetReservations
 
 `func (o *UuidpoolBlock) GetReservations() []UuidpoolReservationRelationship`

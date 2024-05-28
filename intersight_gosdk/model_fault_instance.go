@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the FaultInstance type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &FaultInstance{}
 
 // FaultInstance An endpoint anomaly is represented by this object.
 type FaultInstance struct {
@@ -53,11 +57,11 @@ type FaultInstance struct {
 	// The rule that is responsible for generation of the fault.
 	Rule *string `json:"Rule,omitempty"`
 	// Severity of the fault found.
-	Severity             *string                              `json:"Severity,omitempty"`
-	AffectedMo           *InventoryBaseRelationship           `json:"AffectedMo,omitempty"`
-	AncestorMo           *InventoryBaseRelationship           `json:"AncestorMo,omitempty"`
-	InventoryDeviceInfo  *InventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
-	RegisteredDevice     *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+	Severity             *string                                     `json:"Severity,omitempty"`
+	AffectedMo           NullableInventoryBaseRelationship           `json:"AffectedMo,omitempty"`
+	AncestorMo           NullableInventoryBaseRelationship           `json:"AncestorMo,omitempty"`
+	InventoryDeviceInfo  NullableInventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
+	RegisteredDevice     NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -136,7 +140,7 @@ func (o *FaultInstance) SetObjectType(v string) {
 
 // GetAcknowledged returns the Acknowledged field value if set, zero value otherwise.
 func (o *FaultInstance) GetAcknowledged() string {
-	if o == nil || o.Acknowledged == nil {
+	if o == nil || IsNil(o.Acknowledged) {
 		var ret string
 		return ret
 	}
@@ -146,7 +150,7 @@ func (o *FaultInstance) GetAcknowledged() string {
 // GetAcknowledgedOk returns a tuple with the Acknowledged field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FaultInstance) GetAcknowledgedOk() (*string, bool) {
-	if o == nil || o.Acknowledged == nil {
+	if o == nil || IsNil(o.Acknowledged) {
 		return nil, false
 	}
 	return o.Acknowledged, true
@@ -154,7 +158,7 @@ func (o *FaultInstance) GetAcknowledgedOk() (*string, bool) {
 
 // HasAcknowledged returns a boolean if a field has been set.
 func (o *FaultInstance) HasAcknowledged() bool {
-	if o != nil && o.Acknowledged != nil {
+	if o != nil && !IsNil(o.Acknowledged) {
 		return true
 	}
 
@@ -168,7 +172,7 @@ func (o *FaultInstance) SetAcknowledged(v string) {
 
 // GetAffectedDn returns the AffectedDn field value if set, zero value otherwise.
 func (o *FaultInstance) GetAffectedDn() string {
-	if o == nil || o.AffectedDn == nil {
+	if o == nil || IsNil(o.AffectedDn) {
 		var ret string
 		return ret
 	}
@@ -178,7 +182,7 @@ func (o *FaultInstance) GetAffectedDn() string {
 // GetAffectedDnOk returns a tuple with the AffectedDn field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FaultInstance) GetAffectedDnOk() (*string, bool) {
-	if o == nil || o.AffectedDn == nil {
+	if o == nil || IsNil(o.AffectedDn) {
 		return nil, false
 	}
 	return o.AffectedDn, true
@@ -186,7 +190,7 @@ func (o *FaultInstance) GetAffectedDnOk() (*string, bool) {
 
 // HasAffectedDn returns a boolean if a field has been set.
 func (o *FaultInstance) HasAffectedDn() bool {
-	if o != nil && o.AffectedDn != nil {
+	if o != nil && !IsNil(o.AffectedDn) {
 		return true
 	}
 
@@ -200,7 +204,7 @@ func (o *FaultInstance) SetAffectedDn(v string) {
 
 // GetAffectedMoId returns the AffectedMoId field value if set, zero value otherwise.
 func (o *FaultInstance) GetAffectedMoId() string {
-	if o == nil || o.AffectedMoId == nil {
+	if o == nil || IsNil(o.AffectedMoId) {
 		var ret string
 		return ret
 	}
@@ -210,7 +214,7 @@ func (o *FaultInstance) GetAffectedMoId() string {
 // GetAffectedMoIdOk returns a tuple with the AffectedMoId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FaultInstance) GetAffectedMoIdOk() (*string, bool) {
-	if o == nil || o.AffectedMoId == nil {
+	if o == nil || IsNil(o.AffectedMoId) {
 		return nil, false
 	}
 	return o.AffectedMoId, true
@@ -218,7 +222,7 @@ func (o *FaultInstance) GetAffectedMoIdOk() (*string, bool) {
 
 // HasAffectedMoId returns a boolean if a field has been set.
 func (o *FaultInstance) HasAffectedMoId() bool {
-	if o != nil && o.AffectedMoId != nil {
+	if o != nil && !IsNil(o.AffectedMoId) {
 		return true
 	}
 
@@ -232,7 +236,7 @@ func (o *FaultInstance) SetAffectedMoId(v string) {
 
 // GetAffectedMoType returns the AffectedMoType field value if set, zero value otherwise.
 func (o *FaultInstance) GetAffectedMoType() string {
-	if o == nil || o.AffectedMoType == nil {
+	if o == nil || IsNil(o.AffectedMoType) {
 		var ret string
 		return ret
 	}
@@ -242,7 +246,7 @@ func (o *FaultInstance) GetAffectedMoType() string {
 // GetAffectedMoTypeOk returns a tuple with the AffectedMoType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FaultInstance) GetAffectedMoTypeOk() (*string, bool) {
-	if o == nil || o.AffectedMoType == nil {
+	if o == nil || IsNil(o.AffectedMoType) {
 		return nil, false
 	}
 	return o.AffectedMoType, true
@@ -250,7 +254,7 @@ func (o *FaultInstance) GetAffectedMoTypeOk() (*string, bool) {
 
 // HasAffectedMoType returns a boolean if a field has been set.
 func (o *FaultInstance) HasAffectedMoType() bool {
-	if o != nil && o.AffectedMoType != nil {
+	if o != nil && !IsNil(o.AffectedMoType) {
 		return true
 	}
 
@@ -264,7 +268,7 @@ func (o *FaultInstance) SetAffectedMoType(v string) {
 
 // GetAncestorMoId returns the AncestorMoId field value if set, zero value otherwise.
 func (o *FaultInstance) GetAncestorMoId() string {
-	if o == nil || o.AncestorMoId == nil {
+	if o == nil || IsNil(o.AncestorMoId) {
 		var ret string
 		return ret
 	}
@@ -274,7 +278,7 @@ func (o *FaultInstance) GetAncestorMoId() string {
 // GetAncestorMoIdOk returns a tuple with the AncestorMoId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FaultInstance) GetAncestorMoIdOk() (*string, bool) {
-	if o == nil || o.AncestorMoId == nil {
+	if o == nil || IsNil(o.AncestorMoId) {
 		return nil, false
 	}
 	return o.AncestorMoId, true
@@ -282,7 +286,7 @@ func (o *FaultInstance) GetAncestorMoIdOk() (*string, bool) {
 
 // HasAncestorMoId returns a boolean if a field has been set.
 func (o *FaultInstance) HasAncestorMoId() bool {
-	if o != nil && o.AncestorMoId != nil {
+	if o != nil && !IsNil(o.AncestorMoId) {
 		return true
 	}
 
@@ -296,7 +300,7 @@ func (o *FaultInstance) SetAncestorMoId(v string) {
 
 // GetAncestorMoType returns the AncestorMoType field value if set, zero value otherwise.
 func (o *FaultInstance) GetAncestorMoType() string {
-	if o == nil || o.AncestorMoType == nil {
+	if o == nil || IsNil(o.AncestorMoType) {
 		var ret string
 		return ret
 	}
@@ -306,7 +310,7 @@ func (o *FaultInstance) GetAncestorMoType() string {
 // GetAncestorMoTypeOk returns a tuple with the AncestorMoType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FaultInstance) GetAncestorMoTypeOk() (*string, bool) {
-	if o == nil || o.AncestorMoType == nil {
+	if o == nil || IsNil(o.AncestorMoType) {
 		return nil, false
 	}
 	return o.AncestorMoType, true
@@ -314,7 +318,7 @@ func (o *FaultInstance) GetAncestorMoTypeOk() (*string, bool) {
 
 // HasAncestorMoType returns a boolean if a field has been set.
 func (o *FaultInstance) HasAncestorMoType() bool {
-	if o != nil && o.AncestorMoType != nil {
+	if o != nil && !IsNil(o.AncestorMoType) {
 		return true
 	}
 
@@ -328,7 +332,7 @@ func (o *FaultInstance) SetAncestorMoType(v string) {
 
 // GetCode returns the Code field value if set, zero value otherwise.
 func (o *FaultInstance) GetCode() string {
-	if o == nil || o.Code == nil {
+	if o == nil || IsNil(o.Code) {
 		var ret string
 		return ret
 	}
@@ -338,7 +342,7 @@ func (o *FaultInstance) GetCode() string {
 // GetCodeOk returns a tuple with the Code field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FaultInstance) GetCodeOk() (*string, bool) {
-	if o == nil || o.Code == nil {
+	if o == nil || IsNil(o.Code) {
 		return nil, false
 	}
 	return o.Code, true
@@ -346,7 +350,7 @@ func (o *FaultInstance) GetCodeOk() (*string, bool) {
 
 // HasCode returns a boolean if a field has been set.
 func (o *FaultInstance) HasCode() bool {
-	if o != nil && o.Code != nil {
+	if o != nil && !IsNil(o.Code) {
 		return true
 	}
 
@@ -360,7 +364,7 @@ func (o *FaultInstance) SetCode(v string) {
 
 // GetCreationTime returns the CreationTime field value if set, zero value otherwise.
 func (o *FaultInstance) GetCreationTime() string {
-	if o == nil || o.CreationTime == nil {
+	if o == nil || IsNil(o.CreationTime) {
 		var ret string
 		return ret
 	}
@@ -370,7 +374,7 @@ func (o *FaultInstance) GetCreationTime() string {
 // GetCreationTimeOk returns a tuple with the CreationTime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FaultInstance) GetCreationTimeOk() (*string, bool) {
-	if o == nil || o.CreationTime == nil {
+	if o == nil || IsNil(o.CreationTime) {
 		return nil, false
 	}
 	return o.CreationTime, true
@@ -378,7 +382,7 @@ func (o *FaultInstance) GetCreationTimeOk() (*string, bool) {
 
 // HasCreationTime returns a boolean if a field has been set.
 func (o *FaultInstance) HasCreationTime() bool {
-	if o != nil && o.CreationTime != nil {
+	if o != nil && !IsNil(o.CreationTime) {
 		return true
 	}
 
@@ -392,7 +396,7 @@ func (o *FaultInstance) SetCreationTime(v string) {
 
 // GetDescription returns the Description field value if set, zero value otherwise.
 func (o *FaultInstance) GetDescription() string {
-	if o == nil || o.Description == nil {
+	if o == nil || IsNil(o.Description) {
 		var ret string
 		return ret
 	}
@@ -402,7 +406,7 @@ func (o *FaultInstance) GetDescription() string {
 // GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FaultInstance) GetDescriptionOk() (*string, bool) {
-	if o == nil || o.Description == nil {
+	if o == nil || IsNil(o.Description) {
 		return nil, false
 	}
 	return o.Description, true
@@ -410,7 +414,7 @@ func (o *FaultInstance) GetDescriptionOk() (*string, bool) {
 
 // HasDescription returns a boolean if a field has been set.
 func (o *FaultInstance) HasDescription() bool {
-	if o != nil && o.Description != nil {
+	if o != nil && !IsNil(o.Description) {
 		return true
 	}
 
@@ -424,7 +428,7 @@ func (o *FaultInstance) SetDescription(v string) {
 
 // GetLastTransitionTime returns the LastTransitionTime field value if set, zero value otherwise.
 func (o *FaultInstance) GetLastTransitionTime() string {
-	if o == nil || o.LastTransitionTime == nil {
+	if o == nil || IsNil(o.LastTransitionTime) {
 		var ret string
 		return ret
 	}
@@ -434,7 +438,7 @@ func (o *FaultInstance) GetLastTransitionTime() string {
 // GetLastTransitionTimeOk returns a tuple with the LastTransitionTime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FaultInstance) GetLastTransitionTimeOk() (*string, bool) {
-	if o == nil || o.LastTransitionTime == nil {
+	if o == nil || IsNil(o.LastTransitionTime) {
 		return nil, false
 	}
 	return o.LastTransitionTime, true
@@ -442,7 +446,7 @@ func (o *FaultInstance) GetLastTransitionTimeOk() (*string, bool) {
 
 // HasLastTransitionTime returns a boolean if a field has been set.
 func (o *FaultInstance) HasLastTransitionTime() bool {
-	if o != nil && o.LastTransitionTime != nil {
+	if o != nil && !IsNil(o.LastTransitionTime) {
 		return true
 	}
 
@@ -456,7 +460,7 @@ func (o *FaultInstance) SetLastTransitionTime(v string) {
 
 // GetNumOccurrences returns the NumOccurrences field value if set, zero value otherwise.
 func (o *FaultInstance) GetNumOccurrences() int64 {
-	if o == nil || o.NumOccurrences == nil {
+	if o == nil || IsNil(o.NumOccurrences) {
 		var ret int64
 		return ret
 	}
@@ -466,7 +470,7 @@ func (o *FaultInstance) GetNumOccurrences() int64 {
 // GetNumOccurrencesOk returns a tuple with the NumOccurrences field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FaultInstance) GetNumOccurrencesOk() (*int64, bool) {
-	if o == nil || o.NumOccurrences == nil {
+	if o == nil || IsNil(o.NumOccurrences) {
 		return nil, false
 	}
 	return o.NumOccurrences, true
@@ -474,7 +478,7 @@ func (o *FaultInstance) GetNumOccurrencesOk() (*int64, bool) {
 
 // HasNumOccurrences returns a boolean if a field has been set.
 func (o *FaultInstance) HasNumOccurrences() bool {
-	if o != nil && o.NumOccurrences != nil {
+	if o != nil && !IsNil(o.NumOccurrences) {
 		return true
 	}
 
@@ -488,7 +492,7 @@ func (o *FaultInstance) SetNumOccurrences(v int64) {
 
 // GetOriginalSeverity returns the OriginalSeverity field value if set, zero value otherwise.
 func (o *FaultInstance) GetOriginalSeverity() string {
-	if o == nil || o.OriginalSeverity == nil {
+	if o == nil || IsNil(o.OriginalSeverity) {
 		var ret string
 		return ret
 	}
@@ -498,7 +502,7 @@ func (o *FaultInstance) GetOriginalSeverity() string {
 // GetOriginalSeverityOk returns a tuple with the OriginalSeverity field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FaultInstance) GetOriginalSeverityOk() (*string, bool) {
-	if o == nil || o.OriginalSeverity == nil {
+	if o == nil || IsNil(o.OriginalSeverity) {
 		return nil, false
 	}
 	return o.OriginalSeverity, true
@@ -506,7 +510,7 @@ func (o *FaultInstance) GetOriginalSeverityOk() (*string, bool) {
 
 // HasOriginalSeverity returns a boolean if a field has been set.
 func (o *FaultInstance) HasOriginalSeverity() bool {
-	if o != nil && o.OriginalSeverity != nil {
+	if o != nil && !IsNil(o.OriginalSeverity) {
 		return true
 	}
 
@@ -520,7 +524,7 @@ func (o *FaultInstance) SetOriginalSeverity(v string) {
 
 // GetPreviousSeverity returns the PreviousSeverity field value if set, zero value otherwise.
 func (o *FaultInstance) GetPreviousSeverity() string {
-	if o == nil || o.PreviousSeverity == nil {
+	if o == nil || IsNil(o.PreviousSeverity) {
 		var ret string
 		return ret
 	}
@@ -530,7 +534,7 @@ func (o *FaultInstance) GetPreviousSeverity() string {
 // GetPreviousSeverityOk returns a tuple with the PreviousSeverity field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FaultInstance) GetPreviousSeverityOk() (*string, bool) {
-	if o == nil || o.PreviousSeverity == nil {
+	if o == nil || IsNil(o.PreviousSeverity) {
 		return nil, false
 	}
 	return o.PreviousSeverity, true
@@ -538,7 +542,7 @@ func (o *FaultInstance) GetPreviousSeverityOk() (*string, bool) {
 
 // HasPreviousSeverity returns a boolean if a field has been set.
 func (o *FaultInstance) HasPreviousSeverity() bool {
-	if o != nil && o.PreviousSeverity != nil {
+	if o != nil && !IsNil(o.PreviousSeverity) {
 		return true
 	}
 
@@ -552,7 +556,7 @@ func (o *FaultInstance) SetPreviousSeverity(v string) {
 
 // GetRule returns the Rule field value if set, zero value otherwise.
 func (o *FaultInstance) GetRule() string {
-	if o == nil || o.Rule == nil {
+	if o == nil || IsNil(o.Rule) {
 		var ret string
 		return ret
 	}
@@ -562,7 +566,7 @@ func (o *FaultInstance) GetRule() string {
 // GetRuleOk returns a tuple with the Rule field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FaultInstance) GetRuleOk() (*string, bool) {
-	if o == nil || o.Rule == nil {
+	if o == nil || IsNil(o.Rule) {
 		return nil, false
 	}
 	return o.Rule, true
@@ -570,7 +574,7 @@ func (o *FaultInstance) GetRuleOk() (*string, bool) {
 
 // HasRule returns a boolean if a field has been set.
 func (o *FaultInstance) HasRule() bool {
-	if o != nil && o.Rule != nil {
+	if o != nil && !IsNil(o.Rule) {
 		return true
 	}
 
@@ -584,7 +588,7 @@ func (o *FaultInstance) SetRule(v string) {
 
 // GetSeverity returns the Severity field value if set, zero value otherwise.
 func (o *FaultInstance) GetSeverity() string {
-	if o == nil || o.Severity == nil {
+	if o == nil || IsNil(o.Severity) {
 		var ret string
 		return ret
 	}
@@ -594,7 +598,7 @@ func (o *FaultInstance) GetSeverity() string {
 // GetSeverityOk returns a tuple with the Severity field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FaultInstance) GetSeverityOk() (*string, bool) {
-	if o == nil || o.Severity == nil {
+	if o == nil || IsNil(o.Severity) {
 		return nil, false
 	}
 	return o.Severity, true
@@ -602,7 +606,7 @@ func (o *FaultInstance) GetSeverityOk() (*string, bool) {
 
 // HasSeverity returns a boolean if a field has been set.
 func (o *FaultInstance) HasSeverity() bool {
-	if o != nil && o.Severity != nil {
+	if o != nil && !IsNil(o.Severity) {
 		return true
 	}
 
@@ -614,216 +618,286 @@ func (o *FaultInstance) SetSeverity(v string) {
 	o.Severity = &v
 }
 
-// GetAffectedMo returns the AffectedMo field value if set, zero value otherwise.
+// GetAffectedMo returns the AffectedMo field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *FaultInstance) GetAffectedMo() InventoryBaseRelationship {
-	if o == nil || o.AffectedMo == nil {
+	if o == nil || IsNil(o.AffectedMo.Get()) {
 		var ret InventoryBaseRelationship
 		return ret
 	}
-	return *o.AffectedMo
+	return *o.AffectedMo.Get()
 }
 
 // GetAffectedMoOk returns a tuple with the AffectedMo field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *FaultInstance) GetAffectedMoOk() (*InventoryBaseRelationship, bool) {
-	if o == nil || o.AffectedMo == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.AffectedMo, true
+	return o.AffectedMo.Get(), o.AffectedMo.IsSet()
 }
 
 // HasAffectedMo returns a boolean if a field has been set.
 func (o *FaultInstance) HasAffectedMo() bool {
-	if o != nil && o.AffectedMo != nil {
+	if o != nil && o.AffectedMo.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetAffectedMo gets a reference to the given InventoryBaseRelationship and assigns it to the AffectedMo field.
+// SetAffectedMo gets a reference to the given NullableInventoryBaseRelationship and assigns it to the AffectedMo field.
 func (o *FaultInstance) SetAffectedMo(v InventoryBaseRelationship) {
-	o.AffectedMo = &v
+	o.AffectedMo.Set(&v)
 }
 
-// GetAncestorMo returns the AncestorMo field value if set, zero value otherwise.
+// SetAffectedMoNil sets the value for AffectedMo to be an explicit nil
+func (o *FaultInstance) SetAffectedMoNil() {
+	o.AffectedMo.Set(nil)
+}
+
+// UnsetAffectedMo ensures that no value is present for AffectedMo, not even an explicit nil
+func (o *FaultInstance) UnsetAffectedMo() {
+	o.AffectedMo.Unset()
+}
+
+// GetAncestorMo returns the AncestorMo field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *FaultInstance) GetAncestorMo() InventoryBaseRelationship {
-	if o == nil || o.AncestorMo == nil {
+	if o == nil || IsNil(o.AncestorMo.Get()) {
 		var ret InventoryBaseRelationship
 		return ret
 	}
-	return *o.AncestorMo
+	return *o.AncestorMo.Get()
 }
 
 // GetAncestorMoOk returns a tuple with the AncestorMo field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *FaultInstance) GetAncestorMoOk() (*InventoryBaseRelationship, bool) {
-	if o == nil || o.AncestorMo == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.AncestorMo, true
+	return o.AncestorMo.Get(), o.AncestorMo.IsSet()
 }
 
 // HasAncestorMo returns a boolean if a field has been set.
 func (o *FaultInstance) HasAncestorMo() bool {
-	if o != nil && o.AncestorMo != nil {
+	if o != nil && o.AncestorMo.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetAncestorMo gets a reference to the given InventoryBaseRelationship and assigns it to the AncestorMo field.
+// SetAncestorMo gets a reference to the given NullableInventoryBaseRelationship and assigns it to the AncestorMo field.
 func (o *FaultInstance) SetAncestorMo(v InventoryBaseRelationship) {
-	o.AncestorMo = &v
+	o.AncestorMo.Set(&v)
 }
 
-// GetInventoryDeviceInfo returns the InventoryDeviceInfo field value if set, zero value otherwise.
+// SetAncestorMoNil sets the value for AncestorMo to be an explicit nil
+func (o *FaultInstance) SetAncestorMoNil() {
+	o.AncestorMo.Set(nil)
+}
+
+// UnsetAncestorMo ensures that no value is present for AncestorMo, not even an explicit nil
+func (o *FaultInstance) UnsetAncestorMo() {
+	o.AncestorMo.Unset()
+}
+
+// GetInventoryDeviceInfo returns the InventoryDeviceInfo field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *FaultInstance) GetInventoryDeviceInfo() InventoryDeviceInfoRelationship {
-	if o == nil || o.InventoryDeviceInfo == nil {
+	if o == nil || IsNil(o.InventoryDeviceInfo.Get()) {
 		var ret InventoryDeviceInfoRelationship
 		return ret
 	}
-	return *o.InventoryDeviceInfo
+	return *o.InventoryDeviceInfo.Get()
 }
 
 // GetInventoryDeviceInfoOk returns a tuple with the InventoryDeviceInfo field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *FaultInstance) GetInventoryDeviceInfoOk() (*InventoryDeviceInfoRelationship, bool) {
-	if o == nil || o.InventoryDeviceInfo == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.InventoryDeviceInfo, true
+	return o.InventoryDeviceInfo.Get(), o.InventoryDeviceInfo.IsSet()
 }
 
 // HasInventoryDeviceInfo returns a boolean if a field has been set.
 func (o *FaultInstance) HasInventoryDeviceInfo() bool {
-	if o != nil && o.InventoryDeviceInfo != nil {
+	if o != nil && o.InventoryDeviceInfo.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetInventoryDeviceInfo gets a reference to the given InventoryDeviceInfoRelationship and assigns it to the InventoryDeviceInfo field.
+// SetInventoryDeviceInfo gets a reference to the given NullableInventoryDeviceInfoRelationship and assigns it to the InventoryDeviceInfo field.
 func (o *FaultInstance) SetInventoryDeviceInfo(v InventoryDeviceInfoRelationship) {
-	o.InventoryDeviceInfo = &v
+	o.InventoryDeviceInfo.Set(&v)
 }
 
-// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise.
+// SetInventoryDeviceInfoNil sets the value for InventoryDeviceInfo to be an explicit nil
+func (o *FaultInstance) SetInventoryDeviceInfoNil() {
+	o.InventoryDeviceInfo.Set(nil)
+}
+
+// UnsetInventoryDeviceInfo ensures that no value is present for InventoryDeviceInfo, not even an explicit nil
+func (o *FaultInstance) UnsetInventoryDeviceInfo() {
+	o.InventoryDeviceInfo.Unset()
+}
+
+// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *FaultInstance) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil || IsNil(o.RegisteredDevice.Get()) {
 		var ret AssetDeviceRegistrationRelationship
 		return ret
 	}
-	return *o.RegisteredDevice
+	return *o.RegisteredDevice.Get()
 }
 
 // GetRegisteredDeviceOk returns a tuple with the RegisteredDevice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *FaultInstance) GetRegisteredDeviceOk() (*AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.RegisteredDevice, true
+	return o.RegisteredDevice.Get(), o.RegisteredDevice.IsSet()
 }
 
 // HasRegisteredDevice returns a boolean if a field has been set.
 func (o *FaultInstance) HasRegisteredDevice() bool {
-	if o != nil && o.RegisteredDevice != nil {
+	if o != nil && o.RegisteredDevice.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRegisteredDevice gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
+// SetRegisteredDevice gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
 func (o *FaultInstance) SetRegisteredDevice(v AssetDeviceRegistrationRelationship) {
-	o.RegisteredDevice = &v
+	o.RegisteredDevice.Set(&v)
+}
+
+// SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+func (o *FaultInstance) SetRegisteredDeviceNil() {
+	o.RegisteredDevice.Set(nil)
+}
+
+// UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
+func (o *FaultInstance) UnsetRegisteredDevice() {
+	o.RegisteredDevice.Unset()
 }
 
 func (o FaultInstance) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o FaultInstance) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedInventoryBase, errInventoryBase := json.Marshal(o.InventoryBase)
 	if errInventoryBase != nil {
-		return []byte{}, errInventoryBase
+		return map[string]interface{}{}, errInventoryBase
 	}
 	errInventoryBase = json.Unmarshal([]byte(serializedInventoryBase), &toSerialize)
 	if errInventoryBase != nil {
-		return []byte{}, errInventoryBase
+		return map[string]interface{}{}, errInventoryBase
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Acknowledged != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Acknowledged) {
 		toSerialize["Acknowledged"] = o.Acknowledged
 	}
-	if o.AffectedDn != nil {
+	if !IsNil(o.AffectedDn) {
 		toSerialize["AffectedDn"] = o.AffectedDn
 	}
-	if o.AffectedMoId != nil {
+	if !IsNil(o.AffectedMoId) {
 		toSerialize["AffectedMoId"] = o.AffectedMoId
 	}
-	if o.AffectedMoType != nil {
+	if !IsNil(o.AffectedMoType) {
 		toSerialize["AffectedMoType"] = o.AffectedMoType
 	}
-	if o.AncestorMoId != nil {
+	if !IsNil(o.AncestorMoId) {
 		toSerialize["AncestorMoId"] = o.AncestorMoId
 	}
-	if o.AncestorMoType != nil {
+	if !IsNil(o.AncestorMoType) {
 		toSerialize["AncestorMoType"] = o.AncestorMoType
 	}
-	if o.Code != nil {
+	if !IsNil(o.Code) {
 		toSerialize["Code"] = o.Code
 	}
-	if o.CreationTime != nil {
+	if !IsNil(o.CreationTime) {
 		toSerialize["CreationTime"] = o.CreationTime
 	}
-	if o.Description != nil {
+	if !IsNil(o.Description) {
 		toSerialize["Description"] = o.Description
 	}
-	if o.LastTransitionTime != nil {
+	if !IsNil(o.LastTransitionTime) {
 		toSerialize["LastTransitionTime"] = o.LastTransitionTime
 	}
-	if o.NumOccurrences != nil {
+	if !IsNil(o.NumOccurrences) {
 		toSerialize["NumOccurrences"] = o.NumOccurrences
 	}
-	if o.OriginalSeverity != nil {
+	if !IsNil(o.OriginalSeverity) {
 		toSerialize["OriginalSeverity"] = o.OriginalSeverity
 	}
-	if o.PreviousSeverity != nil {
+	if !IsNil(o.PreviousSeverity) {
 		toSerialize["PreviousSeverity"] = o.PreviousSeverity
 	}
-	if o.Rule != nil {
+	if !IsNil(o.Rule) {
 		toSerialize["Rule"] = o.Rule
 	}
-	if o.Severity != nil {
+	if !IsNil(o.Severity) {
 		toSerialize["Severity"] = o.Severity
 	}
-	if o.AffectedMo != nil {
-		toSerialize["AffectedMo"] = o.AffectedMo
+	if o.AffectedMo.IsSet() {
+		toSerialize["AffectedMo"] = o.AffectedMo.Get()
 	}
-	if o.AncestorMo != nil {
-		toSerialize["AncestorMo"] = o.AncestorMo
+	if o.AncestorMo.IsSet() {
+		toSerialize["AncestorMo"] = o.AncestorMo.Get()
 	}
-	if o.InventoryDeviceInfo != nil {
-		toSerialize["InventoryDeviceInfo"] = o.InventoryDeviceInfo
+	if o.InventoryDeviceInfo.IsSet() {
+		toSerialize["InventoryDeviceInfo"] = o.InventoryDeviceInfo.Get()
 	}
-	if o.RegisteredDevice != nil {
-		toSerialize["RegisteredDevice"] = o.RegisteredDevice
+	if o.RegisteredDevice.IsSet() {
+		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *FaultInstance) UnmarshalJSON(bytes []byte) (err error) {
+func (o *FaultInstance) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type FaultInstanceWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -858,16 +932,16 @@ func (o *FaultInstance) UnmarshalJSON(bytes []byte) (err error) {
 		// The rule that is responsible for generation of the fault.
 		Rule *string `json:"Rule,omitempty"`
 		// Severity of the fault found.
-		Severity            *string                              `json:"Severity,omitempty"`
-		AffectedMo          *InventoryBaseRelationship           `json:"AffectedMo,omitempty"`
-		AncestorMo          *InventoryBaseRelationship           `json:"AncestorMo,omitempty"`
-		InventoryDeviceInfo *InventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
-		RegisteredDevice    *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+		Severity            *string                                     `json:"Severity,omitempty"`
+		AffectedMo          NullableInventoryBaseRelationship           `json:"AffectedMo,omitempty"`
+		AncestorMo          NullableInventoryBaseRelationship           `json:"AncestorMo,omitempty"`
+		InventoryDeviceInfo NullableInventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
+		RegisteredDevice    NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	}
 
 	varFaultInstanceWithoutEmbeddedStruct := FaultInstanceWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varFaultInstanceWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varFaultInstanceWithoutEmbeddedStruct)
 	if err == nil {
 		varFaultInstance := _FaultInstance{}
 		varFaultInstance.ClassId = varFaultInstanceWithoutEmbeddedStruct.ClassId
@@ -898,7 +972,7 @@ func (o *FaultInstance) UnmarshalJSON(bytes []byte) (err error) {
 
 	varFaultInstance := _FaultInstance{}
 
-	err = json.Unmarshal(bytes, &varFaultInstance)
+	err = json.Unmarshal(data, &varFaultInstance)
 	if err == nil {
 		o.InventoryBase = varFaultInstance.InventoryBase
 	} else {
@@ -907,7 +981,7 @@ func (o *FaultInstance) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Acknowledged")

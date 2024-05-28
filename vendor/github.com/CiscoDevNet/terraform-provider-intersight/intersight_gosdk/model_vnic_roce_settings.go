@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the VnicRoceSettings type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &VnicRoceSettings{}
 
 // VnicRoceSettings Settings for RDMA over Converged Ethernet.
 type VnicRoceSettings struct {
@@ -134,7 +138,7 @@ func (o *VnicRoceSettings) SetObjectType(v string) {
 
 // GetClassOfService returns the ClassOfService field value if set, zero value otherwise.
 func (o *VnicRoceSettings) GetClassOfService() int32 {
-	if o == nil || o.ClassOfService == nil {
+	if o == nil || IsNil(o.ClassOfService) {
 		var ret int32
 		return ret
 	}
@@ -144,7 +148,7 @@ func (o *VnicRoceSettings) GetClassOfService() int32 {
 // GetClassOfServiceOk returns a tuple with the ClassOfService field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VnicRoceSettings) GetClassOfServiceOk() (*int32, bool) {
-	if o == nil || o.ClassOfService == nil {
+	if o == nil || IsNil(o.ClassOfService) {
 		return nil, false
 	}
 	return o.ClassOfService, true
@@ -152,7 +156,7 @@ func (o *VnicRoceSettings) GetClassOfServiceOk() (*int32, bool) {
 
 // HasClassOfService returns a boolean if a field has been set.
 func (o *VnicRoceSettings) HasClassOfService() bool {
-	if o != nil && o.ClassOfService != nil {
+	if o != nil && !IsNil(o.ClassOfService) {
 		return true
 	}
 
@@ -166,7 +170,7 @@ func (o *VnicRoceSettings) SetClassOfService(v int32) {
 
 // GetEnabled returns the Enabled field value if set, zero value otherwise.
 func (o *VnicRoceSettings) GetEnabled() bool {
-	if o == nil || o.Enabled == nil {
+	if o == nil || IsNil(o.Enabled) {
 		var ret bool
 		return ret
 	}
@@ -176,7 +180,7 @@ func (o *VnicRoceSettings) GetEnabled() bool {
 // GetEnabledOk returns a tuple with the Enabled field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VnicRoceSettings) GetEnabledOk() (*bool, bool) {
-	if o == nil || o.Enabled == nil {
+	if o == nil || IsNil(o.Enabled) {
 		return nil, false
 	}
 	return o.Enabled, true
@@ -184,7 +188,7 @@ func (o *VnicRoceSettings) GetEnabledOk() (*bool, bool) {
 
 // HasEnabled returns a boolean if a field has been set.
 func (o *VnicRoceSettings) HasEnabled() bool {
-	if o != nil && o.Enabled != nil {
+	if o != nil && !IsNil(o.Enabled) {
 		return true
 	}
 
@@ -198,7 +202,7 @@ func (o *VnicRoceSettings) SetEnabled(v bool) {
 
 // GetMemoryRegions returns the MemoryRegions field value if set, zero value otherwise.
 func (o *VnicRoceSettings) GetMemoryRegions() int64 {
-	if o == nil || o.MemoryRegions == nil {
+	if o == nil || IsNil(o.MemoryRegions) {
 		var ret int64
 		return ret
 	}
@@ -208,7 +212,7 @@ func (o *VnicRoceSettings) GetMemoryRegions() int64 {
 // GetMemoryRegionsOk returns a tuple with the MemoryRegions field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VnicRoceSettings) GetMemoryRegionsOk() (*int64, bool) {
-	if o == nil || o.MemoryRegions == nil {
+	if o == nil || IsNil(o.MemoryRegions) {
 		return nil, false
 	}
 	return o.MemoryRegions, true
@@ -216,7 +220,7 @@ func (o *VnicRoceSettings) GetMemoryRegionsOk() (*int64, bool) {
 
 // HasMemoryRegions returns a boolean if a field has been set.
 func (o *VnicRoceSettings) HasMemoryRegions() bool {
-	if o != nil && o.MemoryRegions != nil {
+	if o != nil && !IsNil(o.MemoryRegions) {
 		return true
 	}
 
@@ -230,7 +234,7 @@ func (o *VnicRoceSettings) SetMemoryRegions(v int64) {
 
 // GetQueuePairs returns the QueuePairs field value if set, zero value otherwise.
 func (o *VnicRoceSettings) GetQueuePairs() int64 {
-	if o == nil || o.QueuePairs == nil {
+	if o == nil || IsNil(o.QueuePairs) {
 		var ret int64
 		return ret
 	}
@@ -240,7 +244,7 @@ func (o *VnicRoceSettings) GetQueuePairs() int64 {
 // GetQueuePairsOk returns a tuple with the QueuePairs field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VnicRoceSettings) GetQueuePairsOk() (*int64, bool) {
-	if o == nil || o.QueuePairs == nil {
+	if o == nil || IsNil(o.QueuePairs) {
 		return nil, false
 	}
 	return o.QueuePairs, true
@@ -248,7 +252,7 @@ func (o *VnicRoceSettings) GetQueuePairsOk() (*int64, bool) {
 
 // HasQueuePairs returns a boolean if a field has been set.
 func (o *VnicRoceSettings) HasQueuePairs() bool {
-	if o != nil && o.QueuePairs != nil {
+	if o != nil && !IsNil(o.QueuePairs) {
 		return true
 	}
 
@@ -262,7 +266,7 @@ func (o *VnicRoceSettings) SetQueuePairs(v int64) {
 
 // GetResourceGroups returns the ResourceGroups field value if set, zero value otherwise.
 func (o *VnicRoceSettings) GetResourceGroups() int64 {
-	if o == nil || o.ResourceGroups == nil {
+	if o == nil || IsNil(o.ResourceGroups) {
 		var ret int64
 		return ret
 	}
@@ -272,7 +276,7 @@ func (o *VnicRoceSettings) GetResourceGroups() int64 {
 // GetResourceGroupsOk returns a tuple with the ResourceGroups field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VnicRoceSettings) GetResourceGroupsOk() (*int64, bool) {
-	if o == nil || o.ResourceGroups == nil {
+	if o == nil || IsNil(o.ResourceGroups) {
 		return nil, false
 	}
 	return o.ResourceGroups, true
@@ -280,7 +284,7 @@ func (o *VnicRoceSettings) GetResourceGroupsOk() (*int64, bool) {
 
 // HasResourceGroups returns a boolean if a field has been set.
 func (o *VnicRoceSettings) HasResourceGroups() bool {
-	if o != nil && o.ResourceGroups != nil {
+	if o != nil && !IsNil(o.ResourceGroups) {
 		return true
 	}
 
@@ -294,7 +298,7 @@ func (o *VnicRoceSettings) SetResourceGroups(v int64) {
 
 // GetVersion returns the Version field value if set, zero value otherwise.
 func (o *VnicRoceSettings) GetVersion() int32 {
-	if o == nil || o.Version == nil {
+	if o == nil || IsNil(o.Version) {
 		var ret int32
 		return ret
 	}
@@ -304,7 +308,7 @@ func (o *VnicRoceSettings) GetVersion() int32 {
 // GetVersionOk returns a tuple with the Version field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VnicRoceSettings) GetVersionOk() (*int32, bool) {
-	if o == nil || o.Version == nil {
+	if o == nil || IsNil(o.Version) {
 		return nil, false
 	}
 	return o.Version, true
@@ -312,7 +316,7 @@ func (o *VnicRoceSettings) GetVersionOk() (*int32, bool) {
 
 // HasVersion returns a boolean if a field has been set.
 func (o *VnicRoceSettings) HasVersion() bool {
-	if o != nil && o.Version != nil {
+	if o != nil && !IsNil(o.Version) {
 		return true
 	}
 
@@ -325,37 +329,41 @@ func (o *VnicRoceSettings) SetVersion(v int32) {
 }
 
 func (o VnicRoceSettings) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o VnicRoceSettings) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
 	errMoBaseComplexType = json.Unmarshal([]byte(serializedMoBaseComplexType), &toSerialize)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.ClassOfService != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.ClassOfService) {
 		toSerialize["ClassOfService"] = o.ClassOfService
 	}
-	if o.Enabled != nil {
+	if !IsNil(o.Enabled) {
 		toSerialize["Enabled"] = o.Enabled
 	}
-	if o.MemoryRegions != nil {
+	if !IsNil(o.MemoryRegions) {
 		toSerialize["MemoryRegions"] = o.MemoryRegions
 	}
-	if o.QueuePairs != nil {
+	if !IsNil(o.QueuePairs) {
 		toSerialize["QueuePairs"] = o.QueuePairs
 	}
-	if o.ResourceGroups != nil {
+	if !IsNil(o.ResourceGroups) {
 		toSerialize["ResourceGroups"] = o.ResourceGroups
 	}
-	if o.Version != nil {
+	if !IsNil(o.Version) {
 		toSerialize["Version"] = o.Version
 	}
 
@@ -363,10 +371,32 @@ func (o VnicRoceSettings) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *VnicRoceSettings) UnmarshalJSON(bytes []byte) (err error) {
+func (o *VnicRoceSettings) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type VnicRoceSettingsWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -388,7 +418,7 @@ func (o *VnicRoceSettings) UnmarshalJSON(bytes []byte) (err error) {
 
 	varVnicRoceSettingsWithoutEmbeddedStruct := VnicRoceSettingsWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varVnicRoceSettingsWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varVnicRoceSettingsWithoutEmbeddedStruct)
 	if err == nil {
 		varVnicRoceSettings := _VnicRoceSettings{}
 		varVnicRoceSettings.ClassId = varVnicRoceSettingsWithoutEmbeddedStruct.ClassId
@@ -406,7 +436,7 @@ func (o *VnicRoceSettings) UnmarshalJSON(bytes []byte) (err error) {
 
 	varVnicRoceSettings := _VnicRoceSettings{}
 
-	err = json.Unmarshal(bytes, &varVnicRoceSettings)
+	err = json.Unmarshal(data, &varVnicRoceSettings)
 	if err == nil {
 		o.MoBaseComplexType = varVnicRoceSettings.MoBaseComplexType
 	} else {
@@ -415,7 +445,7 @@ func (o *VnicRoceSettings) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "ClassOfService")

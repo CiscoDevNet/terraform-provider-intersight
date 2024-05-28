@@ -12,9 +12,9 @@ Name | Type | Description | Notes
 **StartingBlock** | Pointer to **string** | The starting block id of the virtual drive within the physical drive. | [optional] [readonly] 
 **State** | Pointer to **string** | The current state of the physical disk usage. | [optional] [readonly] 
 **VirtualDrive** | Pointer to **string** | The virtual drive corresponding to the physical disk. | [optional] [readonly] 
-**InventoryDeviceInfo** | Pointer to [**InventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
-**StorageVirtualDrive** | Pointer to [**StorageVirtualDriveRelationship**](StorageVirtualDriveRelationship.md) |  | [optional] 
+**InventoryDeviceInfo** | Pointer to [**NullableInventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
+**StorageVirtualDrive** | Pointer to [**NullableStorageVirtualDriveRelationship**](StorageVirtualDriveRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -250,6 +250,16 @@ SetInventoryDeviceInfo sets InventoryDeviceInfo field to given value.
 
 HasInventoryDeviceInfo returns a boolean if a field has been set.
 
+### SetInventoryDeviceInfoNil
+
+`func (o *StoragePhysicalDiskUsage) SetInventoryDeviceInfoNil(b bool)`
+
+ SetInventoryDeviceInfoNil sets the value for InventoryDeviceInfo to be an explicit nil
+
+### UnsetInventoryDeviceInfo
+`func (o *StoragePhysicalDiskUsage) UnsetInventoryDeviceInfo()`
+
+UnsetInventoryDeviceInfo ensures that no value is present for InventoryDeviceInfo, not even an explicit nil
 ### GetRegisteredDevice
 
 `func (o *StoragePhysicalDiskUsage) GetRegisteredDevice() AssetDeviceRegistrationRelationship`
@@ -275,6 +285,16 @@ SetRegisteredDevice sets RegisteredDevice field to given value.
 
 HasRegisteredDevice returns a boolean if a field has been set.
 
+### SetRegisteredDeviceNil
+
+`func (o *StoragePhysicalDiskUsage) SetRegisteredDeviceNil(b bool)`
+
+ SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+
+### UnsetRegisteredDevice
+`func (o *StoragePhysicalDiskUsage) UnsetRegisteredDevice()`
+
+UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
 ### GetStorageVirtualDrive
 
 `func (o *StoragePhysicalDiskUsage) GetStorageVirtualDrive() StorageVirtualDriveRelationship`
@@ -300,6 +320,16 @@ SetStorageVirtualDrive sets StorageVirtualDrive field to given value.
 
 HasStorageVirtualDrive returns a boolean if a field has been set.
 
+### SetStorageVirtualDriveNil
+
+`func (o *StoragePhysicalDiskUsage) SetStorageVirtualDriveNil(b bool)`
+
+ SetStorageVirtualDriveNil sets the value for StorageVirtualDrive to be an explicit nil
+
+### UnsetStorageVirtualDrive
+`func (o *StoragePhysicalDiskUsage) UnsetStorageVirtualDrive()`
+
+UnsetStorageVirtualDrive ensures that no value is present for StorageVirtualDrive, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

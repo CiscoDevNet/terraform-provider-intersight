@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 **SrcBucket** | Pointer to **string** | Name of the bucket to pick up the file from. | [optional] [readonly] 
 **SrcFileName** | Pointer to **string** | Name of source file to upload. | [optional] [readonly] 
 **Logs** | Pointer to [**[]PartnerintegrationDcLogsRelationship**](PartnerintegrationDcLogsRelationship.md) | An array of relationships to partnerintegrationDcLogs resources. | [optional] [readonly] 
-**Organization** | Pointer to [**OrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
+**Organization** | Pointer to [**NullableOrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -310,6 +310,16 @@ SetOrganization sets Organization field to given value.
 
 HasOrganization returns a boolean if a field has been set.
 
+### SetOrganizationNil
+
+`func (o *PartnerintegrationDeviceConnector) SetOrganizationNil(b bool)`
+
+ SetOrganizationNil sets the value for Organization to be an explicit nil
+
+### UnsetOrganization
+`func (o *PartnerintegrationDeviceConnector) UnsetOrganization()`
+
+UnsetOrganization ensures that no value is present for Organization, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

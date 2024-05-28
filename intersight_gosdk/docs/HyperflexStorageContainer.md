@@ -22,7 +22,7 @@ Name | Type | Description | Notes
 **UnCompressedUsedBytes** | Pointer to **int64** | Uncompressed bytes on storage container. | [optional] [readonly] 
 **Uuid** | Pointer to **string** | UUID of the datastore/storage container. | [optional] [readonly] 
 **VolumeCount** | Pointer to **int64** | Number of volumes associated with the storage container. | [optional] [readonly] 
-**Cluster** | Pointer to [**HyperflexClusterRelationship**](HyperflexClusterRelationship.md) |  | [optional] 
+**Cluster** | Pointer to [**NullableHyperflexClusterRelationship**](HyperflexClusterRelationship.md) |  | [optional] 
 **Volumes** | Pointer to [**[]HyperflexVolumeRelationship**](HyperflexVolumeRelationship.md) | An array of relationships to hyperflexVolume resources. | [optional] [readonly] 
 
 ## Methods
@@ -519,6 +519,16 @@ SetCluster sets Cluster field to given value.
 
 HasCluster returns a boolean if a field has been set.
 
+### SetClusterNil
+
+`func (o *HyperflexStorageContainer) SetClusterNil(b bool)`
+
+ SetClusterNil sets the value for Cluster to be an explicit nil
+
+### UnsetCluster
+`func (o *HyperflexStorageContainer) UnsetCluster()`
+
+UnsetCluster ensures that no value is present for Cluster, not even an explicit nil
 ### GetVolumes
 
 `func (o *HyperflexStorageContainer) GetVolumes() []HyperflexVolumeRelationship`

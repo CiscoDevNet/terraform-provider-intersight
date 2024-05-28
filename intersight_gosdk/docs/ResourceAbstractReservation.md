@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type. | [default to "resourcepool.MembershipReservation"]
-**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. The enum values provides the list of concrete types that can be instantiated from this abstract type. | [default to "resourcepool.MembershipReservation"]
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
 **Description** | Pointer to **string** | Details of the use case for which the reservation was created, such as decommissioning. | [optional] 
 **Expiration** | Pointer to **time.Time** | The resource reservation includes an expiration date and a timestamp indicating when this management object will be cleared. The expiration date is set during the decommissioning process and is maintained for a period of 3 months. | [optional] 
 **ReservationSelector** | Pointer to **string** | The unique identification of the resource is based on the resource OData string, which is mentioned as part of the ReservationSelector. For example, &#39;Serial eq &#39;EM6259AE6B&#39;. | [optional] 
-**ResourceType** | Pointer to **string** | The type of resource that is placed into resource groups or pools. Resource Type can be either &#39;compute.Blade&#39; or &#39;compute.RackUnit for pools. | [optional] 
+**ResourceType** | Pointer to **string** | The type of resource that is placed into resource groups or pools. Resource Type can be either &#39;compute.Blade&#39; or &#39;compute.RackUnit&#39; for pools. | [optional] 
 **Status** | Pointer to **string** | The reservation status can be in the &#39;Created&#39;, &#39;Processing&#39;, &#39;Failed&#39;, or &#39;Finished&#39; state. * &#x60;Created&#x60; - By default, a reservation is in Created status. * &#x60;Processing&#x60; - A reservation is changed to Processing status for appliance mode resource claim requests. * &#x60;Failed&#x60; - A reservation is changed to Failed status if the validations on resources, resource groups fails. * &#x60;Finished&#x60; - A reservation is changed to Finished status if the validations on resources, resource groups are successful. The resource moids in reservation will be added to resource groups using OData filters. | [optional] [readonly] [default to "Created"]
-**Identity** | Pointer to [**MoBaseMoRelationship**](MoBaseMoRelationship.md) |  | [optional] 
+**Identity** | Pointer to [**NullableMoBaseMoRelationship**](MoBaseMoRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -222,6 +222,16 @@ SetIdentity sets Identity field to given value.
 
 HasIdentity returns a boolean if a field has been set.
 
+### SetIdentityNil
+
+`func (o *ResourceAbstractReservation) SetIdentityNil(b bool)`
+
+ SetIdentityNil sets the value for Identity to be an explicit nil
+
+### UnsetIdentity
+`func (o *ResourceAbstractReservation) UnsetIdentity()`
+
+UnsetIdentity ensures that no value is present for Identity, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

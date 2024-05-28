@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the CloudBaseSku type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &CloudBaseSku{}
 
 // CloudBaseSku Contains the details of an instance type.
 type CloudBaseSku struct {
@@ -48,9 +52,9 @@ type CloudBaseSku struct {
 	// Any display name for the ServiceCategory if available.
 	ServiceName *string `json:"ServiceName,omitempty"`
 	// The pricing associated with this Sku. Can be hourly, per minute.
-	Unit                 *string                   `json:"Unit,omitempty"`
-	Region               *CloudRegionsRelationship `json:"Region,omitempty"`
-	Target               *AssetTargetRelationship  `json:"Target,omitempty"`
+	Unit                 *string                          `json:"Unit,omitempty"`
+	Region               NullableCloudRegionsRelationship `json:"Region,omitempty"`
+	Target               NullableAssetTargetRelationship  `json:"Target,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -141,7 +145,7 @@ func (o *CloudBaseSku) SetObjectType(v string) {
 
 // GetBasePrice returns the BasePrice field value if set, zero value otherwise.
 func (o *CloudBaseSku) GetBasePrice() float32 {
-	if o == nil || o.BasePrice == nil {
+	if o == nil || IsNil(o.BasePrice) {
 		var ret float32
 		return ret
 	}
@@ -151,7 +155,7 @@ func (o *CloudBaseSku) GetBasePrice() float32 {
 // GetBasePriceOk returns a tuple with the BasePrice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudBaseSku) GetBasePriceOk() (*float32, bool) {
-	if o == nil || o.BasePrice == nil {
+	if o == nil || IsNil(o.BasePrice) {
 		return nil, false
 	}
 	return o.BasePrice, true
@@ -159,7 +163,7 @@ func (o *CloudBaseSku) GetBasePriceOk() (*float32, bool) {
 
 // HasBasePrice returns a boolean if a field has been set.
 func (o *CloudBaseSku) HasBasePrice() bool {
-	if o != nil && o.BasePrice != nil {
+	if o != nil && !IsNil(o.BasePrice) {
 		return true
 	}
 
@@ -173,7 +177,7 @@ func (o *CloudBaseSku) SetBasePrice(v float32) {
 
 // GetCurrency returns the Currency field value if set, zero value otherwise.
 func (o *CloudBaseSku) GetCurrency() string {
-	if o == nil || o.Currency == nil {
+	if o == nil || IsNil(o.Currency) {
 		var ret string
 		return ret
 	}
@@ -183,7 +187,7 @@ func (o *CloudBaseSku) GetCurrency() string {
 // GetCurrencyOk returns a tuple with the Currency field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudBaseSku) GetCurrencyOk() (*string, bool) {
-	if o == nil || o.Currency == nil {
+	if o == nil || IsNil(o.Currency) {
 		return nil, false
 	}
 	return o.Currency, true
@@ -191,7 +195,7 @@ func (o *CloudBaseSku) GetCurrencyOk() (*string, bool) {
 
 // HasCurrency returns a boolean if a field has been set.
 func (o *CloudBaseSku) HasCurrency() bool {
-	if o != nil && o.Currency != nil {
+	if o != nil && !IsNil(o.Currency) {
 		return true
 	}
 
@@ -216,7 +220,7 @@ func (o *CloudBaseSku) GetCustomAttributes() []CloudCustomAttributes {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CloudBaseSku) GetCustomAttributesOk() ([]CloudCustomAttributes, bool) {
-	if o == nil || o.CustomAttributes == nil {
+	if o == nil || IsNil(o.CustomAttributes) {
 		return nil, false
 	}
 	return o.CustomAttributes, true
@@ -224,7 +228,7 @@ func (o *CloudBaseSku) GetCustomAttributesOk() ([]CloudCustomAttributes, bool) {
 
 // HasCustomAttributes returns a boolean if a field has been set.
 func (o *CloudBaseSku) HasCustomAttributes() bool {
-	if o != nil && o.CustomAttributes != nil {
+	if o != nil && IsNil(o.CustomAttributes) {
 		return true
 	}
 
@@ -238,7 +242,7 @@ func (o *CloudBaseSku) SetCustomAttributes(v []CloudCustomAttributes) {
 
 // GetDescription returns the Description field value if set, zero value otherwise.
 func (o *CloudBaseSku) GetDescription() string {
-	if o == nil || o.Description == nil {
+	if o == nil || IsNil(o.Description) {
 		var ret string
 		return ret
 	}
@@ -248,7 +252,7 @@ func (o *CloudBaseSku) GetDescription() string {
 // GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudBaseSku) GetDescriptionOk() (*string, bool) {
-	if o == nil || o.Description == nil {
+	if o == nil || IsNil(o.Description) {
 		return nil, false
 	}
 	return o.Description, true
@@ -256,7 +260,7 @@ func (o *CloudBaseSku) GetDescriptionOk() (*string, bool) {
 
 // HasDescription returns a boolean if a field has been set.
 func (o *CloudBaseSku) HasDescription() bool {
-	if o != nil && o.Description != nil {
+	if o != nil && !IsNil(o.Description) {
 		return true
 	}
 
@@ -270,7 +274,7 @@ func (o *CloudBaseSku) SetDescription(v string) {
 
 // GetIsActive returns the IsActive field value if set, zero value otherwise.
 func (o *CloudBaseSku) GetIsActive() bool {
-	if o == nil || o.IsActive == nil {
+	if o == nil || IsNil(o.IsActive) {
 		var ret bool
 		return ret
 	}
@@ -280,7 +284,7 @@ func (o *CloudBaseSku) GetIsActive() bool {
 // GetIsActiveOk returns a tuple with the IsActive field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudBaseSku) GetIsActiveOk() (*bool, bool) {
-	if o == nil || o.IsActive == nil {
+	if o == nil || IsNil(o.IsActive) {
 		return nil, false
 	}
 	return o.IsActive, true
@@ -288,7 +292,7 @@ func (o *CloudBaseSku) GetIsActiveOk() (*bool, bool) {
 
 // HasIsActive returns a boolean if a field has been set.
 func (o *CloudBaseSku) HasIsActive() bool {
-	if o != nil && o.IsActive != nil {
+	if o != nil && !IsNil(o.IsActive) {
 		return true
 	}
 
@@ -302,7 +306,7 @@ func (o *CloudBaseSku) SetIsActive(v bool) {
 
 // GetIsAutoDiscovered returns the IsAutoDiscovered field value if set, zero value otherwise.
 func (o *CloudBaseSku) GetIsAutoDiscovered() bool {
-	if o == nil || o.IsAutoDiscovered == nil {
+	if o == nil || IsNil(o.IsAutoDiscovered) {
 		var ret bool
 		return ret
 	}
@@ -312,7 +316,7 @@ func (o *CloudBaseSku) GetIsAutoDiscovered() bool {
 // GetIsAutoDiscoveredOk returns a tuple with the IsAutoDiscovered field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudBaseSku) GetIsAutoDiscoveredOk() (*bool, bool) {
-	if o == nil || o.IsAutoDiscovered == nil {
+	if o == nil || IsNil(o.IsAutoDiscovered) {
 		return nil, false
 	}
 	return o.IsAutoDiscovered, true
@@ -320,7 +324,7 @@ func (o *CloudBaseSku) GetIsAutoDiscoveredOk() (*bool, bool) {
 
 // HasIsAutoDiscovered returns a boolean if a field has been set.
 func (o *CloudBaseSku) HasIsAutoDiscovered() bool {
-	if o != nil && o.IsAutoDiscovered != nil {
+	if o != nil && !IsNil(o.IsAutoDiscovered) {
 		return true
 	}
 
@@ -334,7 +338,7 @@ func (o *CloudBaseSku) SetIsAutoDiscovered(v bool) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *CloudBaseSku) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -344,7 +348,7 @@ func (o *CloudBaseSku) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudBaseSku) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -352,7 +356,7 @@ func (o *CloudBaseSku) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *CloudBaseSku) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -366,7 +370,7 @@ func (o *CloudBaseSku) SetName(v string) {
 
 // GetPlatformType returns the PlatformType field value if set, zero value otherwise.
 func (o *CloudBaseSku) GetPlatformType() string {
-	if o == nil || o.PlatformType == nil {
+	if o == nil || IsNil(o.PlatformType) {
 		var ret string
 		return ret
 	}
@@ -376,7 +380,7 @@ func (o *CloudBaseSku) GetPlatformType() string {
 // GetPlatformTypeOk returns a tuple with the PlatformType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudBaseSku) GetPlatformTypeOk() (*string, bool) {
-	if o == nil || o.PlatformType == nil {
+	if o == nil || IsNil(o.PlatformType) {
 		return nil, false
 	}
 	return o.PlatformType, true
@@ -384,7 +388,7 @@ func (o *CloudBaseSku) GetPlatformTypeOk() (*string, bool) {
 
 // HasPlatformType returns a boolean if a field has been set.
 func (o *CloudBaseSku) HasPlatformType() bool {
-	if o != nil && o.PlatformType != nil {
+	if o != nil && !IsNil(o.PlatformType) {
 		return true
 	}
 
@@ -398,7 +402,7 @@ func (o *CloudBaseSku) SetPlatformType(v string) {
 
 // GetRegionId returns the RegionId field value if set, zero value otherwise.
 func (o *CloudBaseSku) GetRegionId() string {
-	if o == nil || o.RegionId == nil {
+	if o == nil || IsNil(o.RegionId) {
 		var ret string
 		return ret
 	}
@@ -408,7 +412,7 @@ func (o *CloudBaseSku) GetRegionId() string {
 // GetRegionIdOk returns a tuple with the RegionId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudBaseSku) GetRegionIdOk() (*string, bool) {
-	if o == nil || o.RegionId == nil {
+	if o == nil || IsNil(o.RegionId) {
 		return nil, false
 	}
 	return o.RegionId, true
@@ -416,7 +420,7 @@ func (o *CloudBaseSku) GetRegionIdOk() (*string, bool) {
 
 // HasRegionId returns a boolean if a field has been set.
 func (o *CloudBaseSku) HasRegionId() bool {
-	if o != nil && o.RegionId != nil {
+	if o != nil && !IsNil(o.RegionId) {
 		return true
 	}
 
@@ -430,7 +434,7 @@ func (o *CloudBaseSku) SetRegionId(v string) {
 
 // GetServiceCategory returns the ServiceCategory field value if set, zero value otherwise.
 func (o *CloudBaseSku) GetServiceCategory() string {
-	if o == nil || o.ServiceCategory == nil {
+	if o == nil || IsNil(o.ServiceCategory) {
 		var ret string
 		return ret
 	}
@@ -440,7 +444,7 @@ func (o *CloudBaseSku) GetServiceCategory() string {
 // GetServiceCategoryOk returns a tuple with the ServiceCategory field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudBaseSku) GetServiceCategoryOk() (*string, bool) {
-	if o == nil || o.ServiceCategory == nil {
+	if o == nil || IsNil(o.ServiceCategory) {
 		return nil, false
 	}
 	return o.ServiceCategory, true
@@ -448,7 +452,7 @@ func (o *CloudBaseSku) GetServiceCategoryOk() (*string, bool) {
 
 // HasServiceCategory returns a boolean if a field has been set.
 func (o *CloudBaseSku) HasServiceCategory() bool {
-	if o != nil && o.ServiceCategory != nil {
+	if o != nil && !IsNil(o.ServiceCategory) {
 		return true
 	}
 
@@ -462,7 +466,7 @@ func (o *CloudBaseSku) SetServiceCategory(v string) {
 
 // GetServiceFamily returns the ServiceFamily field value if set, zero value otherwise.
 func (o *CloudBaseSku) GetServiceFamily() string {
-	if o == nil || o.ServiceFamily == nil {
+	if o == nil || IsNil(o.ServiceFamily) {
 		var ret string
 		return ret
 	}
@@ -472,7 +476,7 @@ func (o *CloudBaseSku) GetServiceFamily() string {
 // GetServiceFamilyOk returns a tuple with the ServiceFamily field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudBaseSku) GetServiceFamilyOk() (*string, bool) {
-	if o == nil || o.ServiceFamily == nil {
+	if o == nil || IsNil(o.ServiceFamily) {
 		return nil, false
 	}
 	return o.ServiceFamily, true
@@ -480,7 +484,7 @@ func (o *CloudBaseSku) GetServiceFamilyOk() (*string, bool) {
 
 // HasServiceFamily returns a boolean if a field has been set.
 func (o *CloudBaseSku) HasServiceFamily() bool {
-	if o != nil && o.ServiceFamily != nil {
+	if o != nil && !IsNil(o.ServiceFamily) {
 		return true
 	}
 
@@ -494,7 +498,7 @@ func (o *CloudBaseSku) SetServiceFamily(v string) {
 
 // GetServiceName returns the ServiceName field value if set, zero value otherwise.
 func (o *CloudBaseSku) GetServiceName() string {
-	if o == nil || o.ServiceName == nil {
+	if o == nil || IsNil(o.ServiceName) {
 		var ret string
 		return ret
 	}
@@ -504,7 +508,7 @@ func (o *CloudBaseSku) GetServiceName() string {
 // GetServiceNameOk returns a tuple with the ServiceName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudBaseSku) GetServiceNameOk() (*string, bool) {
-	if o == nil || o.ServiceName == nil {
+	if o == nil || IsNil(o.ServiceName) {
 		return nil, false
 	}
 	return o.ServiceName, true
@@ -512,7 +516,7 @@ func (o *CloudBaseSku) GetServiceNameOk() (*string, bool) {
 
 // HasServiceName returns a boolean if a field has been set.
 func (o *CloudBaseSku) HasServiceName() bool {
-	if o != nil && o.ServiceName != nil {
+	if o != nil && !IsNil(o.ServiceName) {
 		return true
 	}
 
@@ -526,7 +530,7 @@ func (o *CloudBaseSku) SetServiceName(v string) {
 
 // GetUnit returns the Unit field value if set, zero value otherwise.
 func (o *CloudBaseSku) GetUnit() string {
-	if o == nil || o.Unit == nil {
+	if o == nil || IsNil(o.Unit) {
 		var ret string
 		return ret
 	}
@@ -536,7 +540,7 @@ func (o *CloudBaseSku) GetUnit() string {
 // GetUnitOk returns a tuple with the Unit field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudBaseSku) GetUnitOk() (*string, bool) {
-	if o == nil || o.Unit == nil {
+	if o == nil || IsNil(o.Unit) {
 		return nil, false
 	}
 	return o.Unit, true
@@ -544,7 +548,7 @@ func (o *CloudBaseSku) GetUnitOk() (*string, bool) {
 
 // HasUnit returns a boolean if a field has been set.
 func (o *CloudBaseSku) HasUnit() bool {
-	if o != nil && o.Unit != nil {
+	if o != nil && !IsNil(o.Unit) {
 		return true
 	}
 
@@ -556,140 +560,188 @@ func (o *CloudBaseSku) SetUnit(v string) {
 	o.Unit = &v
 }
 
-// GetRegion returns the Region field value if set, zero value otherwise.
+// GetRegion returns the Region field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CloudBaseSku) GetRegion() CloudRegionsRelationship {
-	if o == nil || o.Region == nil {
+	if o == nil || IsNil(o.Region.Get()) {
 		var ret CloudRegionsRelationship
 		return ret
 	}
-	return *o.Region
+	return *o.Region.Get()
 }
 
 // GetRegionOk returns a tuple with the Region field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CloudBaseSku) GetRegionOk() (*CloudRegionsRelationship, bool) {
-	if o == nil || o.Region == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Region, true
+	return o.Region.Get(), o.Region.IsSet()
 }
 
 // HasRegion returns a boolean if a field has been set.
 func (o *CloudBaseSku) HasRegion() bool {
-	if o != nil && o.Region != nil {
+	if o != nil && o.Region.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRegion gets a reference to the given CloudRegionsRelationship and assigns it to the Region field.
+// SetRegion gets a reference to the given NullableCloudRegionsRelationship and assigns it to the Region field.
 func (o *CloudBaseSku) SetRegion(v CloudRegionsRelationship) {
-	o.Region = &v
+	o.Region.Set(&v)
 }
 
-// GetTarget returns the Target field value if set, zero value otherwise.
+// SetRegionNil sets the value for Region to be an explicit nil
+func (o *CloudBaseSku) SetRegionNil() {
+	o.Region.Set(nil)
+}
+
+// UnsetRegion ensures that no value is present for Region, not even an explicit nil
+func (o *CloudBaseSku) UnsetRegion() {
+	o.Region.Unset()
+}
+
+// GetTarget returns the Target field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CloudBaseSku) GetTarget() AssetTargetRelationship {
-	if o == nil || o.Target == nil {
+	if o == nil || IsNil(o.Target.Get()) {
 		var ret AssetTargetRelationship
 		return ret
 	}
-	return *o.Target
+	return *o.Target.Get()
 }
 
 // GetTargetOk returns a tuple with the Target field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CloudBaseSku) GetTargetOk() (*AssetTargetRelationship, bool) {
-	if o == nil || o.Target == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Target, true
+	return o.Target.Get(), o.Target.IsSet()
 }
 
 // HasTarget returns a boolean if a field has been set.
 func (o *CloudBaseSku) HasTarget() bool {
-	if o != nil && o.Target != nil {
+	if o != nil && o.Target.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetTarget gets a reference to the given AssetTargetRelationship and assigns it to the Target field.
+// SetTarget gets a reference to the given NullableAssetTargetRelationship and assigns it to the Target field.
 func (o *CloudBaseSku) SetTarget(v AssetTargetRelationship) {
-	o.Target = &v
+	o.Target.Set(&v)
+}
+
+// SetTargetNil sets the value for Target to be an explicit nil
+func (o *CloudBaseSku) SetTargetNil() {
+	o.Target.Set(nil)
+}
+
+// UnsetTarget ensures that no value is present for Target, not even an explicit nil
+func (o *CloudBaseSku) UnsetTarget() {
+	o.Target.Unset()
 }
 
 func (o CloudBaseSku) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o CloudBaseSku) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.BasePrice != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.BasePrice) {
 		toSerialize["BasePrice"] = o.BasePrice
 	}
-	if o.Currency != nil {
+	if !IsNil(o.Currency) {
 		toSerialize["Currency"] = o.Currency
 	}
 	if o.CustomAttributes != nil {
 		toSerialize["CustomAttributes"] = o.CustomAttributes
 	}
-	if o.Description != nil {
+	if !IsNil(o.Description) {
 		toSerialize["Description"] = o.Description
 	}
-	if o.IsActive != nil {
+	if !IsNil(o.IsActive) {
 		toSerialize["IsActive"] = o.IsActive
 	}
-	if o.IsAutoDiscovered != nil {
+	if !IsNil(o.IsAutoDiscovered) {
 		toSerialize["IsAutoDiscovered"] = o.IsAutoDiscovered
 	}
-	if o.Name != nil {
+	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
 	}
-	if o.PlatformType != nil {
+	if !IsNil(o.PlatformType) {
 		toSerialize["PlatformType"] = o.PlatformType
 	}
-	if o.RegionId != nil {
+	if !IsNil(o.RegionId) {
 		toSerialize["RegionId"] = o.RegionId
 	}
-	if o.ServiceCategory != nil {
+	if !IsNil(o.ServiceCategory) {
 		toSerialize["ServiceCategory"] = o.ServiceCategory
 	}
-	if o.ServiceFamily != nil {
+	if !IsNil(o.ServiceFamily) {
 		toSerialize["ServiceFamily"] = o.ServiceFamily
 	}
-	if o.ServiceName != nil {
+	if !IsNil(o.ServiceName) {
 		toSerialize["ServiceName"] = o.ServiceName
 	}
-	if o.Unit != nil {
+	if !IsNil(o.Unit) {
 		toSerialize["Unit"] = o.Unit
 	}
-	if o.Region != nil {
-		toSerialize["Region"] = o.Region
+	if o.Region.IsSet() {
+		toSerialize["Region"] = o.Region.Get()
 	}
-	if o.Target != nil {
-		toSerialize["Target"] = o.Target
+	if o.Target.IsSet() {
+		toSerialize["Target"] = o.Target.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *CloudBaseSku) UnmarshalJSON(bytes []byte) (err error) {
+func (o *CloudBaseSku) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type CloudBaseSkuWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type.
 		ClassId string `json:"ClassId"`
@@ -719,14 +771,14 @@ func (o *CloudBaseSku) UnmarshalJSON(bytes []byte) (err error) {
 		// Any display name for the ServiceCategory if available.
 		ServiceName *string `json:"ServiceName,omitempty"`
 		// The pricing associated with this Sku. Can be hourly, per minute.
-		Unit   *string                   `json:"Unit,omitempty"`
-		Region *CloudRegionsRelationship `json:"Region,omitempty"`
-		Target *AssetTargetRelationship  `json:"Target,omitempty"`
+		Unit   *string                          `json:"Unit,omitempty"`
+		Region NullableCloudRegionsRelationship `json:"Region,omitempty"`
+		Target NullableAssetTargetRelationship  `json:"Target,omitempty"`
 	}
 
 	varCloudBaseSkuWithoutEmbeddedStruct := CloudBaseSkuWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varCloudBaseSkuWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varCloudBaseSkuWithoutEmbeddedStruct)
 	if err == nil {
 		varCloudBaseSku := _CloudBaseSku{}
 		varCloudBaseSku.ClassId = varCloudBaseSkuWithoutEmbeddedStruct.ClassId
@@ -753,7 +805,7 @@ func (o *CloudBaseSku) UnmarshalJSON(bytes []byte) (err error) {
 
 	varCloudBaseSku := _CloudBaseSku{}
 
-	err = json.Unmarshal(bytes, &varCloudBaseSku)
+	err = json.Unmarshal(data, &varCloudBaseSku)
 	if err == nil {
 		o.MoBaseMo = varCloudBaseSku.MoBaseMo
 	} else {
@@ -762,7 +814,7 @@ func (o *CloudBaseSku) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "BasePrice")

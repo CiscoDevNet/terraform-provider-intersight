@@ -17,8 +17,8 @@ Name | Type | Description | Notes
 **MinDaysForForecast** | Pointer to **int64** | The minimum number of days the HyperFlex cluster should be up for computing forecast. | [optional] [readonly] 
 **Model** | Pointer to [**NullableForecastModel**](ForecastModel.md) |  | [optional] 
 **ThresholdDays** | Pointer to **int64** | The number of days remaining before the device reaches the specified threshold for the metric as defined in definition. | [optional] [readonly] [default to 2147483647]
-**ForecastDef** | Pointer to [**ForecastDefinitionRelationship**](ForecastDefinitionRelationship.md) |  | [optional] 
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
+**ForecastDef** | Pointer to [**NullableForecastDefinitionRelationship**](ForecastDefinitionRelationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -399,6 +399,16 @@ SetForecastDef sets ForecastDef field to given value.
 
 HasForecastDef returns a boolean if a field has been set.
 
+### SetForecastDefNil
+
+`func (o *ForecastInstance) SetForecastDefNil(b bool)`
+
+ SetForecastDefNil sets the value for ForecastDef to be an explicit nil
+
+### UnsetForecastDef
+`func (o *ForecastInstance) UnsetForecastDef()`
+
+UnsetForecastDef ensures that no value is present for ForecastDef, not even an explicit nil
 ### GetRegisteredDevice
 
 `func (o *ForecastInstance) GetRegisteredDevice() AssetDeviceRegistrationRelationship`
@@ -424,6 +434,16 @@ SetRegisteredDevice sets RegisteredDevice field to given value.
 
 HasRegisteredDevice returns a boolean if a field has been set.
 
+### SetRegisteredDeviceNil
+
+`func (o *ForecastInstance) SetRegisteredDeviceNil(b bool)`
+
+ SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+
+### UnsetRegisteredDevice
+`func (o *ForecastInstance) UnsetRegisteredDevice()`
+
+UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

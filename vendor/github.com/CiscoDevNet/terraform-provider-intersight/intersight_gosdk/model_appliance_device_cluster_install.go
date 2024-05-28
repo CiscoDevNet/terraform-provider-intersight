@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,10 +13,14 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 	"time"
 )
+
+// checks if the ApplianceDeviceClusterInstall type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ApplianceDeviceClusterInstall{}
 
 // ApplianceDeviceClusterInstall DeviceClusterInstall is a singleton that tracks the Intersight Cluster Appliance's install.
 type ApplianceDeviceClusterInstall struct {
@@ -42,8 +46,8 @@ type ApplianceDeviceClusterInstall struct {
 	// Total number of nodes in the system.
 	TotalNodes *int64 `json:"TotalNodes,omitempty"`
 	// TotalPhase represents the total number of the install phases for one install.
-	TotalPhases          *int64                               `json:"TotalPhases,omitempty"`
-	RegisteredDevice     *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+	TotalPhases          *int64                                      `json:"TotalPhases,omitempty"`
+	RegisteredDevice     NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -133,7 +137,7 @@ func (o *ApplianceDeviceClusterInstall) GetCompletedPhases() []ApplianceClusterI
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ApplianceDeviceClusterInstall) GetCompletedPhasesOk() ([]ApplianceClusterInstallPhase, bool) {
-	if o == nil || o.CompletedPhases == nil {
+	if o == nil || IsNil(o.CompletedPhases) {
 		return nil, false
 	}
 	return o.CompletedPhases, true
@@ -141,7 +145,7 @@ func (o *ApplianceDeviceClusterInstall) GetCompletedPhasesOk() ([]ApplianceClust
 
 // HasCompletedPhases returns a boolean if a field has been set.
 func (o *ApplianceDeviceClusterInstall) HasCompletedPhases() bool {
-	if o != nil && o.CompletedPhases != nil {
+	if o != nil && IsNil(o.CompletedPhases) {
 		return true
 	}
 
@@ -155,7 +159,7 @@ func (o *ApplianceDeviceClusterInstall) SetCompletedPhases(v []ApplianceClusterI
 
 // GetCurrentPhase returns the CurrentPhase field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ApplianceDeviceClusterInstall) GetCurrentPhase() ApplianceClusterInstallPhase {
-	if o == nil || o.CurrentPhase.Get() == nil {
+	if o == nil || IsNil(o.CurrentPhase.Get()) {
 		var ret ApplianceClusterInstallPhase
 		return ret
 	}
@@ -198,7 +202,7 @@ func (o *ApplianceDeviceClusterInstall) UnsetCurrentPhase() {
 
 // GetElapsedTime returns the ElapsedTime field value if set, zero value otherwise.
 func (o *ApplianceDeviceClusterInstall) GetElapsedTime() int64 {
-	if o == nil || o.ElapsedTime == nil {
+	if o == nil || IsNil(o.ElapsedTime) {
 		var ret int64
 		return ret
 	}
@@ -208,7 +212,7 @@ func (o *ApplianceDeviceClusterInstall) GetElapsedTime() int64 {
 // GetElapsedTimeOk returns a tuple with the ElapsedTime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceDeviceClusterInstall) GetElapsedTimeOk() (*int64, bool) {
-	if o == nil || o.ElapsedTime == nil {
+	if o == nil || IsNil(o.ElapsedTime) {
 		return nil, false
 	}
 	return o.ElapsedTime, true
@@ -216,7 +220,7 @@ func (o *ApplianceDeviceClusterInstall) GetElapsedTimeOk() (*int64, bool) {
 
 // HasElapsedTime returns a boolean if a field has been set.
 func (o *ApplianceDeviceClusterInstall) HasElapsedTime() bool {
-	if o != nil && o.ElapsedTime != nil {
+	if o != nil && !IsNil(o.ElapsedTime) {
 		return true
 	}
 
@@ -230,7 +234,7 @@ func (o *ApplianceDeviceClusterInstall) SetElapsedTime(v int64) {
 
 // GetEndTime returns the EndTime field value if set, zero value otherwise.
 func (o *ApplianceDeviceClusterInstall) GetEndTime() time.Time {
-	if o == nil || o.EndTime == nil {
+	if o == nil || IsNil(o.EndTime) {
 		var ret time.Time
 		return ret
 	}
@@ -240,7 +244,7 @@ func (o *ApplianceDeviceClusterInstall) GetEndTime() time.Time {
 // GetEndTimeOk returns a tuple with the EndTime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceDeviceClusterInstall) GetEndTimeOk() (*time.Time, bool) {
-	if o == nil || o.EndTime == nil {
+	if o == nil || IsNil(o.EndTime) {
 		return nil, false
 	}
 	return o.EndTime, true
@@ -248,7 +252,7 @@ func (o *ApplianceDeviceClusterInstall) GetEndTimeOk() (*time.Time, bool) {
 
 // HasEndTime returns a boolean if a field has been set.
 func (o *ApplianceDeviceClusterInstall) HasEndTime() bool {
-	if o != nil && o.EndTime != nil {
+	if o != nil && !IsNil(o.EndTime) {
 		return true
 	}
 
@@ -262,7 +266,7 @@ func (o *ApplianceDeviceClusterInstall) SetEndTime(v time.Time) {
 
 // GetErrorCode returns the ErrorCode field value if set, zero value otherwise.
 func (o *ApplianceDeviceClusterInstall) GetErrorCode() int64 {
-	if o == nil || o.ErrorCode == nil {
+	if o == nil || IsNil(o.ErrorCode) {
 		var ret int64
 		return ret
 	}
@@ -272,7 +276,7 @@ func (o *ApplianceDeviceClusterInstall) GetErrorCode() int64 {
 // GetErrorCodeOk returns a tuple with the ErrorCode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceDeviceClusterInstall) GetErrorCodeOk() (*int64, bool) {
-	if o == nil || o.ErrorCode == nil {
+	if o == nil || IsNil(o.ErrorCode) {
 		return nil, false
 	}
 	return o.ErrorCode, true
@@ -280,7 +284,7 @@ func (o *ApplianceDeviceClusterInstall) GetErrorCodeOk() (*int64, bool) {
 
 // HasErrorCode returns a boolean if a field has been set.
 func (o *ApplianceDeviceClusterInstall) HasErrorCode() bool {
-	if o != nil && o.ErrorCode != nil {
+	if o != nil && !IsNil(o.ErrorCode) {
 		return true
 	}
 
@@ -305,7 +309,7 @@ func (o *ApplianceDeviceClusterInstall) GetMessages() []string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ApplianceDeviceClusterInstall) GetMessagesOk() ([]string, bool) {
-	if o == nil || o.Messages == nil {
+	if o == nil || IsNil(o.Messages) {
 		return nil, false
 	}
 	return o.Messages, true
@@ -313,7 +317,7 @@ func (o *ApplianceDeviceClusterInstall) GetMessagesOk() ([]string, bool) {
 
 // HasMessages returns a boolean if a field has been set.
 func (o *ApplianceDeviceClusterInstall) HasMessages() bool {
-	if o != nil && o.Messages != nil {
+	if o != nil && IsNil(o.Messages) {
 		return true
 	}
 
@@ -338,7 +342,7 @@ func (o *ApplianceDeviceClusterInstall) GetNodeInfo() []ApplianceNodeIpInfo {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ApplianceDeviceClusterInstall) GetNodeInfoOk() ([]ApplianceNodeIpInfo, bool) {
-	if o == nil || o.NodeInfo == nil {
+	if o == nil || IsNil(o.NodeInfo) {
 		return nil, false
 	}
 	return o.NodeInfo, true
@@ -346,7 +350,7 @@ func (o *ApplianceDeviceClusterInstall) GetNodeInfoOk() ([]ApplianceNodeIpInfo, 
 
 // HasNodeInfo returns a boolean if a field has been set.
 func (o *ApplianceDeviceClusterInstall) HasNodeInfo() bool {
-	if o != nil && o.NodeInfo != nil {
+	if o != nil && IsNil(o.NodeInfo) {
 		return true
 	}
 
@@ -360,7 +364,7 @@ func (o *ApplianceDeviceClusterInstall) SetNodeInfo(v []ApplianceNodeIpInfo) {
 
 // GetStartTime returns the StartTime field value if set, zero value otherwise.
 func (o *ApplianceDeviceClusterInstall) GetStartTime() time.Time {
-	if o == nil || o.StartTime == nil {
+	if o == nil || IsNil(o.StartTime) {
 		var ret time.Time
 		return ret
 	}
@@ -370,7 +374,7 @@ func (o *ApplianceDeviceClusterInstall) GetStartTime() time.Time {
 // GetStartTimeOk returns a tuple with the StartTime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceDeviceClusterInstall) GetStartTimeOk() (*time.Time, bool) {
-	if o == nil || o.StartTime == nil {
+	if o == nil || IsNil(o.StartTime) {
 		return nil, false
 	}
 	return o.StartTime, true
@@ -378,7 +382,7 @@ func (o *ApplianceDeviceClusterInstall) GetStartTimeOk() (*time.Time, bool) {
 
 // HasStartTime returns a boolean if a field has been set.
 func (o *ApplianceDeviceClusterInstall) HasStartTime() bool {
-	if o != nil && o.StartTime != nil {
+	if o != nil && !IsNil(o.StartTime) {
 		return true
 	}
 
@@ -392,7 +396,7 @@ func (o *ApplianceDeviceClusterInstall) SetStartTime(v time.Time) {
 
 // GetStatus returns the Status field value if set, zero value otherwise.
 func (o *ApplianceDeviceClusterInstall) GetStatus() string {
-	if o == nil || o.Status == nil {
+	if o == nil || IsNil(o.Status) {
 		var ret string
 		return ret
 	}
@@ -402,7 +406,7 @@ func (o *ApplianceDeviceClusterInstall) GetStatus() string {
 // GetStatusOk returns a tuple with the Status field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceDeviceClusterInstall) GetStatusOk() (*string, bool) {
-	if o == nil || o.Status == nil {
+	if o == nil || IsNil(o.Status) {
 		return nil, false
 	}
 	return o.Status, true
@@ -410,7 +414,7 @@ func (o *ApplianceDeviceClusterInstall) GetStatusOk() (*string, bool) {
 
 // HasStatus returns a boolean if a field has been set.
 func (o *ApplianceDeviceClusterInstall) HasStatus() bool {
-	if o != nil && o.Status != nil {
+	if o != nil && !IsNil(o.Status) {
 		return true
 	}
 
@@ -424,7 +428,7 @@ func (o *ApplianceDeviceClusterInstall) SetStatus(v string) {
 
 // GetTotalNodes returns the TotalNodes field value if set, zero value otherwise.
 func (o *ApplianceDeviceClusterInstall) GetTotalNodes() int64 {
-	if o == nil || o.TotalNodes == nil {
+	if o == nil || IsNil(o.TotalNodes) {
 		var ret int64
 		return ret
 	}
@@ -434,7 +438,7 @@ func (o *ApplianceDeviceClusterInstall) GetTotalNodes() int64 {
 // GetTotalNodesOk returns a tuple with the TotalNodes field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceDeviceClusterInstall) GetTotalNodesOk() (*int64, bool) {
-	if o == nil || o.TotalNodes == nil {
+	if o == nil || IsNil(o.TotalNodes) {
 		return nil, false
 	}
 	return o.TotalNodes, true
@@ -442,7 +446,7 @@ func (o *ApplianceDeviceClusterInstall) GetTotalNodesOk() (*int64, bool) {
 
 // HasTotalNodes returns a boolean if a field has been set.
 func (o *ApplianceDeviceClusterInstall) HasTotalNodes() bool {
-	if o != nil && o.TotalNodes != nil {
+	if o != nil && !IsNil(o.TotalNodes) {
 		return true
 	}
 
@@ -456,7 +460,7 @@ func (o *ApplianceDeviceClusterInstall) SetTotalNodes(v int64) {
 
 // GetTotalPhases returns the TotalPhases field value if set, zero value otherwise.
 func (o *ApplianceDeviceClusterInstall) GetTotalPhases() int64 {
-	if o == nil || o.TotalPhases == nil {
+	if o == nil || IsNil(o.TotalPhases) {
 		var ret int64
 		return ret
 	}
@@ -466,7 +470,7 @@ func (o *ApplianceDeviceClusterInstall) GetTotalPhases() int64 {
 // GetTotalPhasesOk returns a tuple with the TotalPhases field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceDeviceClusterInstall) GetTotalPhasesOk() (*int64, bool) {
-	if o == nil || o.TotalPhases == nil {
+	if o == nil || IsNil(o.TotalPhases) {
 		return nil, false
 	}
 	return o.TotalPhases, true
@@ -474,7 +478,7 @@ func (o *ApplianceDeviceClusterInstall) GetTotalPhasesOk() (*int64, bool) {
 
 // HasTotalPhases returns a boolean if a field has been set.
 func (o *ApplianceDeviceClusterInstall) HasTotalPhases() bool {
-	if o != nil && o.TotalPhases != nil {
+	if o != nil && !IsNil(o.TotalPhases) {
 		return true
 	}
 
@@ -486,67 +490,82 @@ func (o *ApplianceDeviceClusterInstall) SetTotalPhases(v int64) {
 	o.TotalPhases = &v
 }
 
-// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise.
+// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ApplianceDeviceClusterInstall) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil || IsNil(o.RegisteredDevice.Get()) {
 		var ret AssetDeviceRegistrationRelationship
 		return ret
 	}
-	return *o.RegisteredDevice
+	return *o.RegisteredDevice.Get()
 }
 
 // GetRegisteredDeviceOk returns a tuple with the RegisteredDevice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ApplianceDeviceClusterInstall) GetRegisteredDeviceOk() (*AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.RegisteredDevice, true
+	return o.RegisteredDevice.Get(), o.RegisteredDevice.IsSet()
 }
 
 // HasRegisteredDevice returns a boolean if a field has been set.
 func (o *ApplianceDeviceClusterInstall) HasRegisteredDevice() bool {
-	if o != nil && o.RegisteredDevice != nil {
+	if o != nil && o.RegisteredDevice.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRegisteredDevice gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
+// SetRegisteredDevice gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
 func (o *ApplianceDeviceClusterInstall) SetRegisteredDevice(v AssetDeviceRegistrationRelationship) {
-	o.RegisteredDevice = &v
+	o.RegisteredDevice.Set(&v)
+}
+
+// SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+func (o *ApplianceDeviceClusterInstall) SetRegisteredDeviceNil() {
+	o.RegisteredDevice.Set(nil)
+}
+
+// UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
+func (o *ApplianceDeviceClusterInstall) UnsetRegisteredDevice() {
+	o.RegisteredDevice.Unset()
 }
 
 func (o ApplianceDeviceClusterInstall) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o ApplianceDeviceClusterInstall) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
 	if o.CompletedPhases != nil {
 		toSerialize["CompletedPhases"] = o.CompletedPhases
 	}
 	if o.CurrentPhase.IsSet() {
 		toSerialize["CurrentPhase"] = o.CurrentPhase.Get()
 	}
-	if o.ElapsedTime != nil {
+	if !IsNil(o.ElapsedTime) {
 		toSerialize["ElapsedTime"] = o.ElapsedTime
 	}
-	if o.EndTime != nil {
+	if !IsNil(o.EndTime) {
 		toSerialize["EndTime"] = o.EndTime
 	}
-	if o.ErrorCode != nil {
+	if !IsNil(o.ErrorCode) {
 		toSerialize["ErrorCode"] = o.ErrorCode
 	}
 	if o.Messages != nil {
@@ -555,30 +574,52 @@ func (o ApplianceDeviceClusterInstall) MarshalJSON() ([]byte, error) {
 	if o.NodeInfo != nil {
 		toSerialize["NodeInfo"] = o.NodeInfo
 	}
-	if o.StartTime != nil {
+	if !IsNil(o.StartTime) {
 		toSerialize["StartTime"] = o.StartTime
 	}
-	if o.Status != nil {
+	if !IsNil(o.Status) {
 		toSerialize["Status"] = o.Status
 	}
-	if o.TotalNodes != nil {
+	if !IsNil(o.TotalNodes) {
 		toSerialize["TotalNodes"] = o.TotalNodes
 	}
-	if o.TotalPhases != nil {
+	if !IsNil(o.TotalPhases) {
 		toSerialize["TotalPhases"] = o.TotalPhases
 	}
-	if o.RegisteredDevice != nil {
-		toSerialize["RegisteredDevice"] = o.RegisteredDevice
+	if o.RegisteredDevice.IsSet() {
+		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *ApplianceDeviceClusterInstall) UnmarshalJSON(bytes []byte) (err error) {
+func (o *ApplianceDeviceClusterInstall) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type ApplianceDeviceClusterInstallWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -601,13 +642,13 @@ func (o *ApplianceDeviceClusterInstall) UnmarshalJSON(bytes []byte) (err error) 
 		// Total number of nodes in the system.
 		TotalNodes *int64 `json:"TotalNodes,omitempty"`
 		// TotalPhase represents the total number of the install phases for one install.
-		TotalPhases      *int64                               `json:"TotalPhases,omitempty"`
-		RegisteredDevice *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+		TotalPhases      *int64                                      `json:"TotalPhases,omitempty"`
+		RegisteredDevice NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	}
 
 	varApplianceDeviceClusterInstallWithoutEmbeddedStruct := ApplianceDeviceClusterInstallWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varApplianceDeviceClusterInstallWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varApplianceDeviceClusterInstallWithoutEmbeddedStruct)
 	if err == nil {
 		varApplianceDeviceClusterInstall := _ApplianceDeviceClusterInstall{}
 		varApplianceDeviceClusterInstall.ClassId = varApplianceDeviceClusterInstallWithoutEmbeddedStruct.ClassId
@@ -631,7 +672,7 @@ func (o *ApplianceDeviceClusterInstall) UnmarshalJSON(bytes []byte) (err error) 
 
 	varApplianceDeviceClusterInstall := _ApplianceDeviceClusterInstall{}
 
-	err = json.Unmarshal(bytes, &varApplianceDeviceClusterInstall)
+	err = json.Unmarshal(data, &varApplianceDeviceClusterInstall)
 	if err == nil {
 		o.MoBaseMo = varApplianceDeviceClusterInstall.MoBaseMo
 	} else {
@@ -640,7 +681,7 @@ func (o *ApplianceDeviceClusterInstall) UnmarshalJSON(bytes []byte) (err error) 
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "CompletedPhases")

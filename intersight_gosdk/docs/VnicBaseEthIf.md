@@ -12,13 +12,13 @@ Name | Type | Description | Notes
 **SriovSettings** | Pointer to [**NullableVnicSriovSettings**](VnicSriovSettings.md) |  | [optional] 
 **UsnicSettings** | Pointer to [**NullableVnicUsnicSettings**](VnicUsnicSettings.md) |  | [optional] 
 **VmqSettings** | Pointer to [**NullableVnicVmqSettings**](VnicVmqSettings.md) |  | [optional] 
-**EthAdapterPolicy** | Pointer to [**VnicEthAdapterPolicyRelationship**](VnicEthAdapterPolicyRelationship.md) |  | [optional] 
-**EthNetworkPolicy** | Pointer to [**VnicEthNetworkPolicyRelationship**](VnicEthNetworkPolicyRelationship.md) |  | [optional] 
-**EthQosPolicy** | Pointer to [**VnicEthQosPolicyRelationship**](VnicEthQosPolicyRelationship.md) |  | [optional] 
-**FabricEthNetworkControlPolicy** | Pointer to [**FabricEthNetworkControlPolicyRelationship**](FabricEthNetworkControlPolicyRelationship.md) |  | [optional] 
+**EthAdapterPolicy** | Pointer to [**NullableVnicEthAdapterPolicyRelationship**](VnicEthAdapterPolicyRelationship.md) |  | [optional] 
+**EthNetworkPolicy** | Pointer to [**NullableVnicEthNetworkPolicyRelationship**](VnicEthNetworkPolicyRelationship.md) |  | [optional] 
+**EthQosPolicy** | Pointer to [**NullableVnicEthQosPolicyRelationship**](VnicEthQosPolicyRelationship.md) |  | [optional] 
+**FabricEthNetworkControlPolicy** | Pointer to [**NullableFabricEthNetworkControlPolicyRelationship**](FabricEthNetworkControlPolicyRelationship.md) |  | [optional] 
 **FabricEthNetworkGroupPolicy** | Pointer to [**[]FabricEthNetworkGroupPolicyRelationship**](FabricEthNetworkGroupPolicyRelationship.md) | An array of relationships to fabricEthNetworkGroupPolicy resources. | [optional] 
-**IscsiBootPolicy** | Pointer to [**VnicIscsiBootPolicyRelationship**](VnicIscsiBootPolicyRelationship.md) |  | [optional] 
-**MacPool** | Pointer to [**MacpoolPoolRelationship**](MacpoolPoolRelationship.md) |  | [optional] 
+**IscsiBootPolicy** | Pointer to [**NullableVnicIscsiBootPolicyRelationship**](VnicIscsiBootPolicyRelationship.md) |  | [optional] 
+**MacPool** | Pointer to [**NullableMacpoolPoolRelationship**](MacpoolPoolRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -294,6 +294,16 @@ SetEthAdapterPolicy sets EthAdapterPolicy field to given value.
 
 HasEthAdapterPolicy returns a boolean if a field has been set.
 
+### SetEthAdapterPolicyNil
+
+`func (o *VnicBaseEthIf) SetEthAdapterPolicyNil(b bool)`
+
+ SetEthAdapterPolicyNil sets the value for EthAdapterPolicy to be an explicit nil
+
+### UnsetEthAdapterPolicy
+`func (o *VnicBaseEthIf) UnsetEthAdapterPolicy()`
+
+UnsetEthAdapterPolicy ensures that no value is present for EthAdapterPolicy, not even an explicit nil
 ### GetEthNetworkPolicy
 
 `func (o *VnicBaseEthIf) GetEthNetworkPolicy() VnicEthNetworkPolicyRelationship`
@@ -319,6 +329,16 @@ SetEthNetworkPolicy sets EthNetworkPolicy field to given value.
 
 HasEthNetworkPolicy returns a boolean if a field has been set.
 
+### SetEthNetworkPolicyNil
+
+`func (o *VnicBaseEthIf) SetEthNetworkPolicyNil(b bool)`
+
+ SetEthNetworkPolicyNil sets the value for EthNetworkPolicy to be an explicit nil
+
+### UnsetEthNetworkPolicy
+`func (o *VnicBaseEthIf) UnsetEthNetworkPolicy()`
+
+UnsetEthNetworkPolicy ensures that no value is present for EthNetworkPolicy, not even an explicit nil
 ### GetEthQosPolicy
 
 `func (o *VnicBaseEthIf) GetEthQosPolicy() VnicEthQosPolicyRelationship`
@@ -344,6 +364,16 @@ SetEthQosPolicy sets EthQosPolicy field to given value.
 
 HasEthQosPolicy returns a boolean if a field has been set.
 
+### SetEthQosPolicyNil
+
+`func (o *VnicBaseEthIf) SetEthQosPolicyNil(b bool)`
+
+ SetEthQosPolicyNil sets the value for EthQosPolicy to be an explicit nil
+
+### UnsetEthQosPolicy
+`func (o *VnicBaseEthIf) UnsetEthQosPolicy()`
+
+UnsetEthQosPolicy ensures that no value is present for EthQosPolicy, not even an explicit nil
 ### GetFabricEthNetworkControlPolicy
 
 `func (o *VnicBaseEthIf) GetFabricEthNetworkControlPolicy() FabricEthNetworkControlPolicyRelationship`
@@ -369,6 +399,16 @@ SetFabricEthNetworkControlPolicy sets FabricEthNetworkControlPolicy field to giv
 
 HasFabricEthNetworkControlPolicy returns a boolean if a field has been set.
 
+### SetFabricEthNetworkControlPolicyNil
+
+`func (o *VnicBaseEthIf) SetFabricEthNetworkControlPolicyNil(b bool)`
+
+ SetFabricEthNetworkControlPolicyNil sets the value for FabricEthNetworkControlPolicy to be an explicit nil
+
+### UnsetFabricEthNetworkControlPolicy
+`func (o *VnicBaseEthIf) UnsetFabricEthNetworkControlPolicy()`
+
+UnsetFabricEthNetworkControlPolicy ensures that no value is present for FabricEthNetworkControlPolicy, not even an explicit nil
 ### GetFabricEthNetworkGroupPolicy
 
 `func (o *VnicBaseEthIf) GetFabricEthNetworkGroupPolicy() []FabricEthNetworkGroupPolicyRelationship`
@@ -429,6 +469,16 @@ SetIscsiBootPolicy sets IscsiBootPolicy field to given value.
 
 HasIscsiBootPolicy returns a boolean if a field has been set.
 
+### SetIscsiBootPolicyNil
+
+`func (o *VnicBaseEthIf) SetIscsiBootPolicyNil(b bool)`
+
+ SetIscsiBootPolicyNil sets the value for IscsiBootPolicy to be an explicit nil
+
+### UnsetIscsiBootPolicy
+`func (o *VnicBaseEthIf) UnsetIscsiBootPolicy()`
+
+UnsetIscsiBootPolicy ensures that no value is present for IscsiBootPolicy, not even an explicit nil
 ### GetMacPool
 
 `func (o *VnicBaseEthIf) GetMacPool() MacpoolPoolRelationship`
@@ -454,6 +504,16 @@ SetMacPool sets MacPool field to given value.
 
 HasMacPool returns a boolean if a field has been set.
 
+### SetMacPoolNil
+
+`func (o *VnicBaseEthIf) SetMacPoolNil(b bool)`
+
+ SetMacPoolNil sets the value for MacPool to be an explicit nil
+
+### UnsetMacPool
+`func (o *VnicBaseEthIf) UnsetMacPool()`
+
+UnsetMacPool ensures that no value is present for MacPool, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

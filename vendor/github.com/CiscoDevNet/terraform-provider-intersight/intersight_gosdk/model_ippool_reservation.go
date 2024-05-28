@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the IppoolReservation type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &IppoolReservation{}
 
 // IppoolReservation The IP reservation object, used to hold reserved addresses.
 type IppoolReservation struct {
@@ -33,14 +37,14 @@ type IppoolReservation struct {
 	// IPv6 Address to be reserved.
 	IpV6Address *string `json:"IpV6Address,omitempty"`
 	// The moid of the Virtual Routing and Forwarding MO.
-	VrfMoid              *string                               `json:"VrfMoid,omitempty"`
-	BlockHead            *IppoolShadowBlockRelationship        `json:"BlockHead,omitempty"`
-	Organization         *OrganizationOrganizationRelationship `json:"Organization,omitempty"`
-	Pool                 *IppoolPoolRelationship               `json:"Pool,omitempty"`
-	PoolMember           *IppoolPoolMemberRelationship         `json:"PoolMember,omitempty"`
-	ShadowPool           *IppoolShadowPoolRelationship         `json:"ShadowPool,omitempty"`
-	Universe             *IppoolUniverseRelationship           `json:"Universe,omitempty"`
-	Vrf                  *VrfVrfRelationship                   `json:"Vrf,omitempty"`
+	VrfMoid              *string                                      `json:"VrfMoid,omitempty"`
+	BlockHead            NullableIppoolShadowBlockRelationship        `json:"BlockHead,omitempty"`
+	Organization         NullableOrganizationOrganizationRelationship `json:"Organization,omitempty"`
+	Pool                 NullableIppoolPoolRelationship               `json:"Pool,omitempty"`
+	PoolMember           NullableIppoolPoolMemberRelationship         `json:"PoolMember,omitempty"`
+	ShadowPool           NullableIppoolShadowPoolRelationship         `json:"ShadowPool,omitempty"`
+	Universe             NullableIppoolUniverseRelationship           `json:"Universe,omitempty"`
+	Vrf                  NullableVrfVrfRelationship                   `json:"Vrf,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -125,7 +129,7 @@ func (o *IppoolReservation) SetObjectType(v string) {
 
 // GetIdentity returns the Identity field value if set, zero value otherwise.
 func (o *IppoolReservation) GetIdentity() string {
-	if o == nil || o.Identity == nil {
+	if o == nil || IsNil(o.Identity) {
 		var ret string
 		return ret
 	}
@@ -135,7 +139,7 @@ func (o *IppoolReservation) GetIdentity() string {
 // GetIdentityOk returns a tuple with the Identity field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IppoolReservation) GetIdentityOk() (*string, bool) {
-	if o == nil || o.Identity == nil {
+	if o == nil || IsNil(o.Identity) {
 		return nil, false
 	}
 	return o.Identity, true
@@ -143,7 +147,7 @@ func (o *IppoolReservation) GetIdentityOk() (*string, bool) {
 
 // HasIdentity returns a boolean if a field has been set.
 func (o *IppoolReservation) HasIdentity() bool {
-	if o != nil && o.Identity != nil {
+	if o != nil && !IsNil(o.Identity) {
 		return true
 	}
 
@@ -157,7 +161,7 @@ func (o *IppoolReservation) SetIdentity(v string) {
 
 // GetIpType returns the IpType field value if set, zero value otherwise.
 func (o *IppoolReservation) GetIpType() string {
-	if o == nil || o.IpType == nil {
+	if o == nil || IsNil(o.IpType) {
 		var ret string
 		return ret
 	}
@@ -167,7 +171,7 @@ func (o *IppoolReservation) GetIpType() string {
 // GetIpTypeOk returns a tuple with the IpType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IppoolReservation) GetIpTypeOk() (*string, bool) {
-	if o == nil || o.IpType == nil {
+	if o == nil || IsNil(o.IpType) {
 		return nil, false
 	}
 	return o.IpType, true
@@ -175,7 +179,7 @@ func (o *IppoolReservation) GetIpTypeOk() (*string, bool) {
 
 // HasIpType returns a boolean if a field has been set.
 func (o *IppoolReservation) HasIpType() bool {
-	if o != nil && o.IpType != nil {
+	if o != nil && !IsNil(o.IpType) {
 		return true
 	}
 
@@ -189,7 +193,7 @@ func (o *IppoolReservation) SetIpType(v string) {
 
 // GetIpV4Address returns the IpV4Address field value if set, zero value otherwise.
 func (o *IppoolReservation) GetIpV4Address() string {
-	if o == nil || o.IpV4Address == nil {
+	if o == nil || IsNil(o.IpV4Address) {
 		var ret string
 		return ret
 	}
@@ -199,7 +203,7 @@ func (o *IppoolReservation) GetIpV4Address() string {
 // GetIpV4AddressOk returns a tuple with the IpV4Address field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IppoolReservation) GetIpV4AddressOk() (*string, bool) {
-	if o == nil || o.IpV4Address == nil {
+	if o == nil || IsNil(o.IpV4Address) {
 		return nil, false
 	}
 	return o.IpV4Address, true
@@ -207,7 +211,7 @@ func (o *IppoolReservation) GetIpV4AddressOk() (*string, bool) {
 
 // HasIpV4Address returns a boolean if a field has been set.
 func (o *IppoolReservation) HasIpV4Address() bool {
-	if o != nil && o.IpV4Address != nil {
+	if o != nil && !IsNil(o.IpV4Address) {
 		return true
 	}
 
@@ -221,7 +225,7 @@ func (o *IppoolReservation) SetIpV4Address(v string) {
 
 // GetIpV6Address returns the IpV6Address field value if set, zero value otherwise.
 func (o *IppoolReservation) GetIpV6Address() string {
-	if o == nil || o.IpV6Address == nil {
+	if o == nil || IsNil(o.IpV6Address) {
 		var ret string
 		return ret
 	}
@@ -231,7 +235,7 @@ func (o *IppoolReservation) GetIpV6Address() string {
 // GetIpV6AddressOk returns a tuple with the IpV6Address field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IppoolReservation) GetIpV6AddressOk() (*string, bool) {
-	if o == nil || o.IpV6Address == nil {
+	if o == nil || IsNil(o.IpV6Address) {
 		return nil, false
 	}
 	return o.IpV6Address, true
@@ -239,7 +243,7 @@ func (o *IppoolReservation) GetIpV6AddressOk() (*string, bool) {
 
 // HasIpV6Address returns a boolean if a field has been set.
 func (o *IppoolReservation) HasIpV6Address() bool {
-	if o != nil && o.IpV6Address != nil {
+	if o != nil && !IsNil(o.IpV6Address) {
 		return true
 	}
 
@@ -253,7 +257,7 @@ func (o *IppoolReservation) SetIpV6Address(v string) {
 
 // GetVrfMoid returns the VrfMoid field value if set, zero value otherwise.
 func (o *IppoolReservation) GetVrfMoid() string {
-	if o == nil || o.VrfMoid == nil {
+	if o == nil || IsNil(o.VrfMoid) {
 		var ret string
 		return ret
 	}
@@ -263,7 +267,7 @@ func (o *IppoolReservation) GetVrfMoid() string {
 // GetVrfMoidOk returns a tuple with the VrfMoid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IppoolReservation) GetVrfMoidOk() (*string, bool) {
-	if o == nil || o.VrfMoid == nil {
+	if o == nil || IsNil(o.VrfMoid) {
 		return nil, false
 	}
 	return o.VrfMoid, true
@@ -271,7 +275,7 @@ func (o *IppoolReservation) GetVrfMoidOk() (*string, bool) {
 
 // HasVrfMoid returns a boolean if a field has been set.
 func (o *IppoolReservation) HasVrfMoid() bool {
-	if o != nil && o.VrfMoid != nil {
+	if o != nil && !IsNil(o.VrfMoid) {
 		return true
 	}
 
@@ -283,291 +287,394 @@ func (o *IppoolReservation) SetVrfMoid(v string) {
 	o.VrfMoid = &v
 }
 
-// GetBlockHead returns the BlockHead field value if set, zero value otherwise.
+// GetBlockHead returns the BlockHead field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *IppoolReservation) GetBlockHead() IppoolShadowBlockRelationship {
-	if o == nil || o.BlockHead == nil {
+	if o == nil || IsNil(o.BlockHead.Get()) {
 		var ret IppoolShadowBlockRelationship
 		return ret
 	}
-	return *o.BlockHead
+	return *o.BlockHead.Get()
 }
 
 // GetBlockHeadOk returns a tuple with the BlockHead field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *IppoolReservation) GetBlockHeadOk() (*IppoolShadowBlockRelationship, bool) {
-	if o == nil || o.BlockHead == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.BlockHead, true
+	return o.BlockHead.Get(), o.BlockHead.IsSet()
 }
 
 // HasBlockHead returns a boolean if a field has been set.
 func (o *IppoolReservation) HasBlockHead() bool {
-	if o != nil && o.BlockHead != nil {
+	if o != nil && o.BlockHead.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetBlockHead gets a reference to the given IppoolShadowBlockRelationship and assigns it to the BlockHead field.
+// SetBlockHead gets a reference to the given NullableIppoolShadowBlockRelationship and assigns it to the BlockHead field.
 func (o *IppoolReservation) SetBlockHead(v IppoolShadowBlockRelationship) {
-	o.BlockHead = &v
+	o.BlockHead.Set(&v)
 }
 
-// GetOrganization returns the Organization field value if set, zero value otherwise.
+// SetBlockHeadNil sets the value for BlockHead to be an explicit nil
+func (o *IppoolReservation) SetBlockHeadNil() {
+	o.BlockHead.Set(nil)
+}
+
+// UnsetBlockHead ensures that no value is present for BlockHead, not even an explicit nil
+func (o *IppoolReservation) UnsetBlockHead() {
+	o.BlockHead.Unset()
+}
+
+// GetOrganization returns the Organization field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *IppoolReservation) GetOrganization() OrganizationOrganizationRelationship {
-	if o == nil || o.Organization == nil {
+	if o == nil || IsNil(o.Organization.Get()) {
 		var ret OrganizationOrganizationRelationship
 		return ret
 	}
-	return *o.Organization
+	return *o.Organization.Get()
 }
 
 // GetOrganizationOk returns a tuple with the Organization field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *IppoolReservation) GetOrganizationOk() (*OrganizationOrganizationRelationship, bool) {
-	if o == nil || o.Organization == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Organization, true
+	return o.Organization.Get(), o.Organization.IsSet()
 }
 
 // HasOrganization returns a boolean if a field has been set.
 func (o *IppoolReservation) HasOrganization() bool {
-	if o != nil && o.Organization != nil {
+	if o != nil && o.Organization.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetOrganization gets a reference to the given OrganizationOrganizationRelationship and assigns it to the Organization field.
+// SetOrganization gets a reference to the given NullableOrganizationOrganizationRelationship and assigns it to the Organization field.
 func (o *IppoolReservation) SetOrganization(v OrganizationOrganizationRelationship) {
-	o.Organization = &v
+	o.Organization.Set(&v)
 }
 
-// GetPool returns the Pool field value if set, zero value otherwise.
+// SetOrganizationNil sets the value for Organization to be an explicit nil
+func (o *IppoolReservation) SetOrganizationNil() {
+	o.Organization.Set(nil)
+}
+
+// UnsetOrganization ensures that no value is present for Organization, not even an explicit nil
+func (o *IppoolReservation) UnsetOrganization() {
+	o.Organization.Unset()
+}
+
+// GetPool returns the Pool field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *IppoolReservation) GetPool() IppoolPoolRelationship {
-	if o == nil || o.Pool == nil {
+	if o == nil || IsNil(o.Pool.Get()) {
 		var ret IppoolPoolRelationship
 		return ret
 	}
-	return *o.Pool
+	return *o.Pool.Get()
 }
 
 // GetPoolOk returns a tuple with the Pool field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *IppoolReservation) GetPoolOk() (*IppoolPoolRelationship, bool) {
-	if o == nil || o.Pool == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Pool, true
+	return o.Pool.Get(), o.Pool.IsSet()
 }
 
 // HasPool returns a boolean if a field has been set.
 func (o *IppoolReservation) HasPool() bool {
-	if o != nil && o.Pool != nil {
+	if o != nil && o.Pool.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetPool gets a reference to the given IppoolPoolRelationship and assigns it to the Pool field.
+// SetPool gets a reference to the given NullableIppoolPoolRelationship and assigns it to the Pool field.
 func (o *IppoolReservation) SetPool(v IppoolPoolRelationship) {
-	o.Pool = &v
+	o.Pool.Set(&v)
 }
 
-// GetPoolMember returns the PoolMember field value if set, zero value otherwise.
+// SetPoolNil sets the value for Pool to be an explicit nil
+func (o *IppoolReservation) SetPoolNil() {
+	o.Pool.Set(nil)
+}
+
+// UnsetPool ensures that no value is present for Pool, not even an explicit nil
+func (o *IppoolReservation) UnsetPool() {
+	o.Pool.Unset()
+}
+
+// GetPoolMember returns the PoolMember field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *IppoolReservation) GetPoolMember() IppoolPoolMemberRelationship {
-	if o == nil || o.PoolMember == nil {
+	if o == nil || IsNil(o.PoolMember.Get()) {
 		var ret IppoolPoolMemberRelationship
 		return ret
 	}
-	return *o.PoolMember
+	return *o.PoolMember.Get()
 }
 
 // GetPoolMemberOk returns a tuple with the PoolMember field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *IppoolReservation) GetPoolMemberOk() (*IppoolPoolMemberRelationship, bool) {
-	if o == nil || o.PoolMember == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.PoolMember, true
+	return o.PoolMember.Get(), o.PoolMember.IsSet()
 }
 
 // HasPoolMember returns a boolean if a field has been set.
 func (o *IppoolReservation) HasPoolMember() bool {
-	if o != nil && o.PoolMember != nil {
+	if o != nil && o.PoolMember.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetPoolMember gets a reference to the given IppoolPoolMemberRelationship and assigns it to the PoolMember field.
+// SetPoolMember gets a reference to the given NullableIppoolPoolMemberRelationship and assigns it to the PoolMember field.
 func (o *IppoolReservation) SetPoolMember(v IppoolPoolMemberRelationship) {
-	o.PoolMember = &v
+	o.PoolMember.Set(&v)
 }
 
-// GetShadowPool returns the ShadowPool field value if set, zero value otherwise.
+// SetPoolMemberNil sets the value for PoolMember to be an explicit nil
+func (o *IppoolReservation) SetPoolMemberNil() {
+	o.PoolMember.Set(nil)
+}
+
+// UnsetPoolMember ensures that no value is present for PoolMember, not even an explicit nil
+func (o *IppoolReservation) UnsetPoolMember() {
+	o.PoolMember.Unset()
+}
+
+// GetShadowPool returns the ShadowPool field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *IppoolReservation) GetShadowPool() IppoolShadowPoolRelationship {
-	if o == nil || o.ShadowPool == nil {
+	if o == nil || IsNil(o.ShadowPool.Get()) {
 		var ret IppoolShadowPoolRelationship
 		return ret
 	}
-	return *o.ShadowPool
+	return *o.ShadowPool.Get()
 }
 
 // GetShadowPoolOk returns a tuple with the ShadowPool field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *IppoolReservation) GetShadowPoolOk() (*IppoolShadowPoolRelationship, bool) {
-	if o == nil || o.ShadowPool == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.ShadowPool, true
+	return o.ShadowPool.Get(), o.ShadowPool.IsSet()
 }
 
 // HasShadowPool returns a boolean if a field has been set.
 func (o *IppoolReservation) HasShadowPool() bool {
-	if o != nil && o.ShadowPool != nil {
+	if o != nil && o.ShadowPool.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetShadowPool gets a reference to the given IppoolShadowPoolRelationship and assigns it to the ShadowPool field.
+// SetShadowPool gets a reference to the given NullableIppoolShadowPoolRelationship and assigns it to the ShadowPool field.
 func (o *IppoolReservation) SetShadowPool(v IppoolShadowPoolRelationship) {
-	o.ShadowPool = &v
+	o.ShadowPool.Set(&v)
 }
 
-// GetUniverse returns the Universe field value if set, zero value otherwise.
+// SetShadowPoolNil sets the value for ShadowPool to be an explicit nil
+func (o *IppoolReservation) SetShadowPoolNil() {
+	o.ShadowPool.Set(nil)
+}
+
+// UnsetShadowPool ensures that no value is present for ShadowPool, not even an explicit nil
+func (o *IppoolReservation) UnsetShadowPool() {
+	o.ShadowPool.Unset()
+}
+
+// GetUniverse returns the Universe field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *IppoolReservation) GetUniverse() IppoolUniverseRelationship {
-	if o == nil || o.Universe == nil {
+	if o == nil || IsNil(o.Universe.Get()) {
 		var ret IppoolUniverseRelationship
 		return ret
 	}
-	return *o.Universe
+	return *o.Universe.Get()
 }
 
 // GetUniverseOk returns a tuple with the Universe field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *IppoolReservation) GetUniverseOk() (*IppoolUniverseRelationship, bool) {
-	if o == nil || o.Universe == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Universe, true
+	return o.Universe.Get(), o.Universe.IsSet()
 }
 
 // HasUniverse returns a boolean if a field has been set.
 func (o *IppoolReservation) HasUniverse() bool {
-	if o != nil && o.Universe != nil {
+	if o != nil && o.Universe.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetUniverse gets a reference to the given IppoolUniverseRelationship and assigns it to the Universe field.
+// SetUniverse gets a reference to the given NullableIppoolUniverseRelationship and assigns it to the Universe field.
 func (o *IppoolReservation) SetUniverse(v IppoolUniverseRelationship) {
-	o.Universe = &v
+	o.Universe.Set(&v)
 }
 
-// GetVrf returns the Vrf field value if set, zero value otherwise.
+// SetUniverseNil sets the value for Universe to be an explicit nil
+func (o *IppoolReservation) SetUniverseNil() {
+	o.Universe.Set(nil)
+}
+
+// UnsetUniverse ensures that no value is present for Universe, not even an explicit nil
+func (o *IppoolReservation) UnsetUniverse() {
+	o.Universe.Unset()
+}
+
+// GetVrf returns the Vrf field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *IppoolReservation) GetVrf() VrfVrfRelationship {
-	if o == nil || o.Vrf == nil {
+	if o == nil || IsNil(o.Vrf.Get()) {
 		var ret VrfVrfRelationship
 		return ret
 	}
-	return *o.Vrf
+	return *o.Vrf.Get()
 }
 
 // GetVrfOk returns a tuple with the Vrf field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *IppoolReservation) GetVrfOk() (*VrfVrfRelationship, bool) {
-	if o == nil || o.Vrf == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Vrf, true
+	return o.Vrf.Get(), o.Vrf.IsSet()
 }
 
 // HasVrf returns a boolean if a field has been set.
 func (o *IppoolReservation) HasVrf() bool {
-	if o != nil && o.Vrf != nil {
+	if o != nil && o.Vrf.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetVrf gets a reference to the given VrfVrfRelationship and assigns it to the Vrf field.
+// SetVrf gets a reference to the given NullableVrfVrfRelationship and assigns it to the Vrf field.
 func (o *IppoolReservation) SetVrf(v VrfVrfRelationship) {
-	o.Vrf = &v
+	o.Vrf.Set(&v)
+}
+
+// SetVrfNil sets the value for Vrf to be an explicit nil
+func (o *IppoolReservation) SetVrfNil() {
+	o.Vrf.Set(nil)
+}
+
+// UnsetVrf ensures that no value is present for Vrf, not even an explicit nil
+func (o *IppoolReservation) UnsetVrf() {
+	o.Vrf.Unset()
 }
 
 func (o IppoolReservation) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o IppoolReservation) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedPoolReservation, errPoolReservation := json.Marshal(o.PoolReservation)
 	if errPoolReservation != nil {
-		return []byte{}, errPoolReservation
+		return map[string]interface{}{}, errPoolReservation
 	}
 	errPoolReservation = json.Unmarshal([]byte(serializedPoolReservation), &toSerialize)
 	if errPoolReservation != nil {
-		return []byte{}, errPoolReservation
+		return map[string]interface{}{}, errPoolReservation
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Identity != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Identity) {
 		toSerialize["Identity"] = o.Identity
 	}
-	if o.IpType != nil {
+	if !IsNil(o.IpType) {
 		toSerialize["IpType"] = o.IpType
 	}
-	if o.IpV4Address != nil {
+	if !IsNil(o.IpV4Address) {
 		toSerialize["IpV4Address"] = o.IpV4Address
 	}
-	if o.IpV6Address != nil {
+	if !IsNil(o.IpV6Address) {
 		toSerialize["IpV6Address"] = o.IpV6Address
 	}
-	if o.VrfMoid != nil {
+	if !IsNil(o.VrfMoid) {
 		toSerialize["VrfMoid"] = o.VrfMoid
 	}
-	if o.BlockHead != nil {
-		toSerialize["BlockHead"] = o.BlockHead
+	if o.BlockHead.IsSet() {
+		toSerialize["BlockHead"] = o.BlockHead.Get()
 	}
-	if o.Organization != nil {
-		toSerialize["Organization"] = o.Organization
+	if o.Organization.IsSet() {
+		toSerialize["Organization"] = o.Organization.Get()
 	}
-	if o.Pool != nil {
-		toSerialize["Pool"] = o.Pool
+	if o.Pool.IsSet() {
+		toSerialize["Pool"] = o.Pool.Get()
 	}
-	if o.PoolMember != nil {
-		toSerialize["PoolMember"] = o.PoolMember
+	if o.PoolMember.IsSet() {
+		toSerialize["PoolMember"] = o.PoolMember.Get()
 	}
-	if o.ShadowPool != nil {
-		toSerialize["ShadowPool"] = o.ShadowPool
+	if o.ShadowPool.IsSet() {
+		toSerialize["ShadowPool"] = o.ShadowPool.Get()
 	}
-	if o.Universe != nil {
-		toSerialize["Universe"] = o.Universe
+	if o.Universe.IsSet() {
+		toSerialize["Universe"] = o.Universe.Get()
 	}
-	if o.Vrf != nil {
-		toSerialize["Vrf"] = o.Vrf
+	if o.Vrf.IsSet() {
+		toSerialize["Vrf"] = o.Vrf.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *IppoolReservation) UnmarshalJSON(bytes []byte) (err error) {
+func (o *IppoolReservation) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type IppoolReservationWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -582,19 +689,19 @@ func (o *IppoolReservation) UnmarshalJSON(bytes []byte) (err error) {
 		// IPv6 Address to be reserved.
 		IpV6Address *string `json:"IpV6Address,omitempty"`
 		// The moid of the Virtual Routing and Forwarding MO.
-		VrfMoid      *string                               `json:"VrfMoid,omitempty"`
-		BlockHead    *IppoolShadowBlockRelationship        `json:"BlockHead,omitempty"`
-		Organization *OrganizationOrganizationRelationship `json:"Organization,omitempty"`
-		Pool         *IppoolPoolRelationship               `json:"Pool,omitempty"`
-		PoolMember   *IppoolPoolMemberRelationship         `json:"PoolMember,omitempty"`
-		ShadowPool   *IppoolShadowPoolRelationship         `json:"ShadowPool,omitempty"`
-		Universe     *IppoolUniverseRelationship           `json:"Universe,omitempty"`
-		Vrf          *VrfVrfRelationship                   `json:"Vrf,omitempty"`
+		VrfMoid      *string                                      `json:"VrfMoid,omitempty"`
+		BlockHead    NullableIppoolShadowBlockRelationship        `json:"BlockHead,omitempty"`
+		Organization NullableOrganizationOrganizationRelationship `json:"Organization,omitempty"`
+		Pool         NullableIppoolPoolRelationship               `json:"Pool,omitempty"`
+		PoolMember   NullableIppoolPoolMemberRelationship         `json:"PoolMember,omitempty"`
+		ShadowPool   NullableIppoolShadowPoolRelationship         `json:"ShadowPool,omitempty"`
+		Universe     NullableIppoolUniverseRelationship           `json:"Universe,omitempty"`
+		Vrf          NullableVrfVrfRelationship                   `json:"Vrf,omitempty"`
 	}
 
 	varIppoolReservationWithoutEmbeddedStruct := IppoolReservationWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varIppoolReservationWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varIppoolReservationWithoutEmbeddedStruct)
 	if err == nil {
 		varIppoolReservation := _IppoolReservation{}
 		varIppoolReservation.ClassId = varIppoolReservationWithoutEmbeddedStruct.ClassId
@@ -618,7 +725,7 @@ func (o *IppoolReservation) UnmarshalJSON(bytes []byte) (err error) {
 
 	varIppoolReservation := _IppoolReservation{}
 
-	err = json.Unmarshal(bytes, &varIppoolReservation)
+	err = json.Unmarshal(data, &varIppoolReservation)
 	if err == nil {
 		o.PoolReservation = varIppoolReservation.PoolReservation
 	} else {
@@ -627,7 +734,7 @@ func (o *IppoolReservation) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Identity")

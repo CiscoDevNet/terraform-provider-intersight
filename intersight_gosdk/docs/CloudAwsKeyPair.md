@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "cloud.AwsKeyPair"]
 **FingerPrint** | Pointer to **string** | Either the SHA-1 digest of the DER encoded private key or  MD5 public key fingerprint. | [optional] [readonly] 
 **PublicKey** | Pointer to **string** | Used in authenticating to the virtual machine . | [optional] [readonly] 
-**AwsBillingUnit** | Pointer to [**CloudAwsBillingUnitRelationship**](CloudAwsBillingUnitRelationship.md) |  | [optional] 
+**AwsBillingUnit** | Pointer to [**NullableCloudAwsBillingUnitRelationship**](CloudAwsBillingUnitRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -144,6 +144,16 @@ SetAwsBillingUnit sets AwsBillingUnit field to given value.
 
 HasAwsBillingUnit returns a boolean if a field has been set.
 
+### SetAwsBillingUnitNil
+
+`func (o *CloudAwsKeyPair) SetAwsBillingUnitNil(b bool)`
+
+ SetAwsBillingUnitNil sets the value for AwsBillingUnit to be an explicit nil
+
+### UnsetAwsBillingUnit
+`func (o *CloudAwsKeyPair) UnsetAwsBillingUnit()`
+
+UnsetAwsBillingUnit ensures that no value is present for AwsBillingUnit, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

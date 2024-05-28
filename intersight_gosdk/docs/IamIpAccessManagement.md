@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "iam.IpAccessManagement"]
 **Enable** | Pointer to **bool** | Flag stores the state of IP address based access management. Access management is enabled when it&#39;s true. | [optional] 
 **LastRecoveryTime** | Pointer to **time.Time** | The access to account gets locked out if wrong IP addresses are configured. Account Administrators have privilege to unblock the account. It stores the time when the account was last recovered from lock out. | [optional] [readonly] 
-**Holder** | Pointer to [**IamSecurityHolderRelationship**](IamSecurityHolderRelationship.md) |  | [optional] 
+**Holder** | Pointer to [**NullableIamSecurityHolderRelationship**](IamSecurityHolderRelationship.md) |  | [optional] 
 **IpAddresses** | Pointer to [**[]IamIpAddressRelationship**](IamIpAddressRelationship.md) | An array of relationships to iamIpAddress resources. | [optional] [readonly] 
 
 ## Methods
@@ -145,6 +145,16 @@ SetHolder sets Holder field to given value.
 
 HasHolder returns a boolean if a field has been set.
 
+### SetHolderNil
+
+`func (o *IamIpAccessManagement) SetHolderNil(b bool)`
+
+ SetHolderNil sets the value for Holder to be an explicit nil
+
+### UnsetHolder
+`func (o *IamIpAccessManagement) UnsetHolder()`
+
+UnsetHolder ensures that no value is present for Holder, not even an explicit nil
 ### GetIpAddresses
 
 `func (o *IamIpAccessManagement) GetIpAddresses() []IamIpAddressRelationship`

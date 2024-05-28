@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the TechsupportmanagementCollectionControlPolicy type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &TechsupportmanagementCollectionControlPolicy{}
 
 // TechsupportmanagementCollectionControlPolicy Policy to control techsupport collection for a specific account.
 type TechsupportmanagementCollectionControlPolicy struct {
@@ -27,8 +31,8 @@ type TechsupportmanagementCollectionControlPolicy struct {
 	// Deployment type defines whether the policy is associated with a SaaS or Appliance account. * `None` - Service deployment type None. * `SaaS` - Service deployment type SaaS. * `Appliance` - Service deployment type Appliance.
 	DeploymentType *string `json:"DeploymentType,omitempty"`
 	// Enable or Disable techsupport collection for a specific account. * `Enable` - Enable techsupport collection. * `Disable` - Disable techsupport collection.
-	TechSupportCollection *string                 `json:"TechSupportCollection,omitempty"`
-	Account               *IamAccountRelationship `json:"Account,omitempty"`
+	TechSupportCollection *string                        `json:"TechSupportCollection,omitempty"`
+	Account               NullableIamAccountRelationship `json:"Account,omitempty"`
 	AdditionalProperties  map[string]interface{}
 }
 
@@ -111,7 +115,7 @@ func (o *TechsupportmanagementCollectionControlPolicy) SetObjectType(v string) {
 
 // GetDeploymentType returns the DeploymentType field value if set, zero value otherwise.
 func (o *TechsupportmanagementCollectionControlPolicy) GetDeploymentType() string {
-	if o == nil || o.DeploymentType == nil {
+	if o == nil || IsNil(o.DeploymentType) {
 		var ret string
 		return ret
 	}
@@ -121,7 +125,7 @@ func (o *TechsupportmanagementCollectionControlPolicy) GetDeploymentType() strin
 // GetDeploymentTypeOk returns a tuple with the DeploymentType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TechsupportmanagementCollectionControlPolicy) GetDeploymentTypeOk() (*string, bool) {
-	if o == nil || o.DeploymentType == nil {
+	if o == nil || IsNil(o.DeploymentType) {
 		return nil, false
 	}
 	return o.DeploymentType, true
@@ -129,7 +133,7 @@ func (o *TechsupportmanagementCollectionControlPolicy) GetDeploymentTypeOk() (*s
 
 // HasDeploymentType returns a boolean if a field has been set.
 func (o *TechsupportmanagementCollectionControlPolicy) HasDeploymentType() bool {
-	if o != nil && o.DeploymentType != nil {
+	if o != nil && !IsNil(o.DeploymentType) {
 		return true
 	}
 
@@ -143,7 +147,7 @@ func (o *TechsupportmanagementCollectionControlPolicy) SetDeploymentType(v strin
 
 // GetTechSupportCollection returns the TechSupportCollection field value if set, zero value otherwise.
 func (o *TechsupportmanagementCollectionControlPolicy) GetTechSupportCollection() string {
-	if o == nil || o.TechSupportCollection == nil {
+	if o == nil || IsNil(o.TechSupportCollection) {
 		var ret string
 		return ret
 	}
@@ -153,7 +157,7 @@ func (o *TechsupportmanagementCollectionControlPolicy) GetTechSupportCollection(
 // GetTechSupportCollectionOk returns a tuple with the TechSupportCollection field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TechsupportmanagementCollectionControlPolicy) GetTechSupportCollectionOk() (*string, bool) {
-	if o == nil || o.TechSupportCollection == nil {
+	if o == nil || IsNil(o.TechSupportCollection) {
 		return nil, false
 	}
 	return o.TechSupportCollection, true
@@ -161,7 +165,7 @@ func (o *TechsupportmanagementCollectionControlPolicy) GetTechSupportCollectionO
 
 // HasTechSupportCollection returns a boolean if a field has been set.
 func (o *TechsupportmanagementCollectionControlPolicy) HasTechSupportCollection() bool {
-	if o != nil && o.TechSupportCollection != nil {
+	if o != nil && !IsNil(o.TechSupportCollection) {
 		return true
 	}
 
@@ -173,72 +177,109 @@ func (o *TechsupportmanagementCollectionControlPolicy) SetTechSupportCollection(
 	o.TechSupportCollection = &v
 }
 
-// GetAccount returns the Account field value if set, zero value otherwise.
+// GetAccount returns the Account field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *TechsupportmanagementCollectionControlPolicy) GetAccount() IamAccountRelationship {
-	if o == nil || o.Account == nil {
+	if o == nil || IsNil(o.Account.Get()) {
 		var ret IamAccountRelationship
 		return ret
 	}
-	return *o.Account
+	return *o.Account.Get()
 }
 
 // GetAccountOk returns a tuple with the Account field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *TechsupportmanagementCollectionControlPolicy) GetAccountOk() (*IamAccountRelationship, bool) {
-	if o == nil || o.Account == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Account, true
+	return o.Account.Get(), o.Account.IsSet()
 }
 
 // HasAccount returns a boolean if a field has been set.
 func (o *TechsupportmanagementCollectionControlPolicy) HasAccount() bool {
-	if o != nil && o.Account != nil {
+	if o != nil && o.Account.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetAccount gets a reference to the given IamAccountRelationship and assigns it to the Account field.
+// SetAccount gets a reference to the given NullableIamAccountRelationship and assigns it to the Account field.
 func (o *TechsupportmanagementCollectionControlPolicy) SetAccount(v IamAccountRelationship) {
-	o.Account = &v
+	o.Account.Set(&v)
+}
+
+// SetAccountNil sets the value for Account to be an explicit nil
+func (o *TechsupportmanagementCollectionControlPolicy) SetAccountNil() {
+	o.Account.Set(nil)
+}
+
+// UnsetAccount ensures that no value is present for Account, not even an explicit nil
+func (o *TechsupportmanagementCollectionControlPolicy) UnsetAccount() {
+	o.Account.Unset()
 }
 
 func (o TechsupportmanagementCollectionControlPolicy) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o TechsupportmanagementCollectionControlPolicy) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.DeploymentType != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.DeploymentType) {
 		toSerialize["DeploymentType"] = o.DeploymentType
 	}
-	if o.TechSupportCollection != nil {
+	if !IsNil(o.TechSupportCollection) {
 		toSerialize["TechSupportCollection"] = o.TechSupportCollection
 	}
-	if o.Account != nil {
-		toSerialize["Account"] = o.Account
+	if o.Account.IsSet() {
+		toSerialize["Account"] = o.Account.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *TechsupportmanagementCollectionControlPolicy) UnmarshalJSON(bytes []byte) (err error) {
+func (o *TechsupportmanagementCollectionControlPolicy) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type TechsupportmanagementCollectionControlPolicyWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -247,13 +288,13 @@ func (o *TechsupportmanagementCollectionControlPolicy) UnmarshalJSON(bytes []byt
 		// Deployment type defines whether the policy is associated with a SaaS or Appliance account. * `None` - Service deployment type None. * `SaaS` - Service deployment type SaaS. * `Appliance` - Service deployment type Appliance.
 		DeploymentType *string `json:"DeploymentType,omitempty"`
 		// Enable or Disable techsupport collection for a specific account. * `Enable` - Enable techsupport collection. * `Disable` - Disable techsupport collection.
-		TechSupportCollection *string                 `json:"TechSupportCollection,omitempty"`
-		Account               *IamAccountRelationship `json:"Account,omitempty"`
+		TechSupportCollection *string                        `json:"TechSupportCollection,omitempty"`
+		Account               NullableIamAccountRelationship `json:"Account,omitempty"`
 	}
 
 	varTechsupportmanagementCollectionControlPolicyWithoutEmbeddedStruct := TechsupportmanagementCollectionControlPolicyWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varTechsupportmanagementCollectionControlPolicyWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varTechsupportmanagementCollectionControlPolicyWithoutEmbeddedStruct)
 	if err == nil {
 		varTechsupportmanagementCollectionControlPolicy := _TechsupportmanagementCollectionControlPolicy{}
 		varTechsupportmanagementCollectionControlPolicy.ClassId = varTechsupportmanagementCollectionControlPolicyWithoutEmbeddedStruct.ClassId
@@ -268,7 +309,7 @@ func (o *TechsupportmanagementCollectionControlPolicy) UnmarshalJSON(bytes []byt
 
 	varTechsupportmanagementCollectionControlPolicy := _TechsupportmanagementCollectionControlPolicy{}
 
-	err = json.Unmarshal(bytes, &varTechsupportmanagementCollectionControlPolicy)
+	err = json.Unmarshal(data, &varTechsupportmanagementCollectionControlPolicy)
 	if err == nil {
 		o.MoBaseMo = varTechsupportmanagementCollectionControlPolicy.MoBaseMo
 	} else {
@@ -277,7 +318,7 @@ func (o *TechsupportmanagementCollectionControlPolicy) UnmarshalJSON(bytes []byt
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "DeploymentType")

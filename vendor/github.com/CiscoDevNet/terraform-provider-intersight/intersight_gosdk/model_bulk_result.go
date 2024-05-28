@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,10 +13,14 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 	"time"
 )
+
+// checks if the BulkResult type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &BulkResult{}
 
 // BulkResult The Result API is a status-monitor resource used to show the processing status of any bulk MO API when the request HTTP 'prefer' header is set to 'respond-async' value.
 type BulkResult struct {
@@ -40,14 +44,14 @@ type BulkResult struct {
 	// The status message shows the error details in human readable format when the request goes to failed state. No additional information is shown for success case.
 	StatusMessage *string `json:"StatusMessage,omitempty"`
 	// The URI on which this async operation is being performed.
-	Uri          *string                               `json:"Uri,omitempty"`
-	MoCloner     *BulkMoClonerRelationship             `json:"MoCloner,omitempty"`
-	MoDeepCloner *BulkMoDeepClonerRelationship         `json:"MoDeepCloner,omitempty"`
-	MoMerger     *BulkMoMergerRelationship             `json:"MoMerger,omitempty"`
-	Organization *OrganizationOrganizationRelationship `json:"Organization,omitempty"`
+	Uri          *string                                      `json:"Uri,omitempty"`
+	MoCloner     NullableBulkMoClonerRelationship             `json:"MoCloner,omitempty"`
+	MoDeepCloner NullableBulkMoDeepClonerRelationship         `json:"MoDeepCloner,omitempty"`
+	MoMerger     NullableBulkMoMergerRelationship             `json:"MoMerger,omitempty"`
+	Organization NullableOrganizationOrganizationRelationship `json:"Organization,omitempty"`
 	// An array of relationships to bulkSubRequestObj resources.
-	Results              []BulkSubRequestObjRelationship   `json:"Results,omitempty"`
-	WorkflowInfo         *WorkflowWorkflowInfoRelationship `json:"WorkflowInfo,omitempty"`
+	Results              []BulkSubRequestObjRelationship          `json:"Results,omitempty"`
+	WorkflowInfo         NullableWorkflowWorkflowInfoRelationship `json:"WorkflowInfo,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -126,7 +130,7 @@ func (o *BulkResult) SetObjectType(v string) {
 
 // GetActionOnError returns the ActionOnError field value if set, zero value otherwise.
 func (o *BulkResult) GetActionOnError() string {
-	if o == nil || o.ActionOnError == nil {
+	if o == nil || IsNil(o.ActionOnError) {
 		var ret string
 		return ret
 	}
@@ -136,7 +140,7 @@ func (o *BulkResult) GetActionOnError() string {
 // GetActionOnErrorOk returns a tuple with the ActionOnError field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *BulkResult) GetActionOnErrorOk() (*string, bool) {
-	if o == nil || o.ActionOnError == nil {
+	if o == nil || IsNil(o.ActionOnError) {
 		return nil, false
 	}
 	return o.ActionOnError, true
@@ -144,7 +148,7 @@ func (o *BulkResult) GetActionOnErrorOk() (*string, bool) {
 
 // HasActionOnError returns a boolean if a field has been set.
 func (o *BulkResult) HasActionOnError() bool {
-	if o != nil && o.ActionOnError != nil {
+	if o != nil && !IsNil(o.ActionOnError) {
 		return true
 	}
 
@@ -158,7 +162,7 @@ func (o *BulkResult) SetActionOnError(v string) {
 
 // GetCompletionTime returns the CompletionTime field value if set, zero value otherwise.
 func (o *BulkResult) GetCompletionTime() time.Time {
-	if o == nil || o.CompletionTime == nil {
+	if o == nil || IsNil(o.CompletionTime) {
 		var ret time.Time
 		return ret
 	}
@@ -168,7 +172,7 @@ func (o *BulkResult) GetCompletionTime() time.Time {
 // GetCompletionTimeOk returns a tuple with the CompletionTime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *BulkResult) GetCompletionTimeOk() (*time.Time, bool) {
-	if o == nil || o.CompletionTime == nil {
+	if o == nil || IsNil(o.CompletionTime) {
 		return nil, false
 	}
 	return o.CompletionTime, true
@@ -176,7 +180,7 @@ func (o *BulkResult) GetCompletionTimeOk() (*time.Time, bool) {
 
 // HasCompletionTime returns a boolean if a field has been set.
 func (o *BulkResult) HasCompletionTime() bool {
-	if o != nil && o.CompletionTime != nil {
+	if o != nil && !IsNil(o.CompletionTime) {
 		return true
 	}
 
@@ -190,7 +194,7 @@ func (o *BulkResult) SetCompletionTime(v time.Time) {
 
 // GetNumSubRequests returns the NumSubRequests field value if set, zero value otherwise.
 func (o *BulkResult) GetNumSubRequests() int64 {
-	if o == nil || o.NumSubRequests == nil {
+	if o == nil || IsNil(o.NumSubRequests) {
 		var ret int64
 		return ret
 	}
@@ -200,7 +204,7 @@ func (o *BulkResult) GetNumSubRequests() int64 {
 // GetNumSubRequestsOk returns a tuple with the NumSubRequests field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *BulkResult) GetNumSubRequestsOk() (*int64, bool) {
-	if o == nil || o.NumSubRequests == nil {
+	if o == nil || IsNil(o.NumSubRequests) {
 		return nil, false
 	}
 	return o.NumSubRequests, true
@@ -208,7 +212,7 @@ func (o *BulkResult) GetNumSubRequestsOk() (*int64, bool) {
 
 // HasNumSubRequests returns a boolean if a field has been set.
 func (o *BulkResult) HasNumSubRequests() bool {
-	if o != nil && o.NumSubRequests != nil {
+	if o != nil && !IsNil(o.NumSubRequests) {
 		return true
 	}
 
@@ -233,7 +237,7 @@ func (o *BulkResult) GetRequest() interface{} {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *BulkResult) GetRequestOk() (*interface{}, bool) {
-	if o == nil || o.Request == nil {
+	if o == nil || IsNil(o.Request) {
 		return nil, false
 	}
 	return &o.Request, true
@@ -241,7 +245,7 @@ func (o *BulkResult) GetRequestOk() (*interface{}, bool) {
 
 // HasRequest returns a boolean if a field has been set.
 func (o *BulkResult) HasRequest() bool {
-	if o != nil && o.Request != nil {
+	if o != nil && IsNil(o.Request) {
 		return true
 	}
 
@@ -255,7 +259,7 @@ func (o *BulkResult) SetRequest(v interface{}) {
 
 // GetRequestReceivedTime returns the RequestReceivedTime field value if set, zero value otherwise.
 func (o *BulkResult) GetRequestReceivedTime() time.Time {
-	if o == nil || o.RequestReceivedTime == nil {
+	if o == nil || IsNil(o.RequestReceivedTime) {
 		var ret time.Time
 		return ret
 	}
@@ -265,7 +269,7 @@ func (o *BulkResult) GetRequestReceivedTime() time.Time {
 // GetRequestReceivedTimeOk returns a tuple with the RequestReceivedTime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *BulkResult) GetRequestReceivedTimeOk() (*time.Time, bool) {
-	if o == nil || o.RequestReceivedTime == nil {
+	if o == nil || IsNil(o.RequestReceivedTime) {
 		return nil, false
 	}
 	return o.RequestReceivedTime, true
@@ -273,7 +277,7 @@ func (o *BulkResult) GetRequestReceivedTimeOk() (*time.Time, bool) {
 
 // HasRequestReceivedTime returns a boolean if a field has been set.
 func (o *BulkResult) HasRequestReceivedTime() bool {
-	if o != nil && o.RequestReceivedTime != nil {
+	if o != nil && !IsNil(o.RequestReceivedTime) {
 		return true
 	}
 
@@ -287,7 +291,7 @@ func (o *BulkResult) SetRequestReceivedTime(v time.Time) {
 
 // GetStatus returns the Status field value if set, zero value otherwise.
 func (o *BulkResult) GetStatus() string {
-	if o == nil || o.Status == nil {
+	if o == nil || IsNil(o.Status) {
 		var ret string
 		return ret
 	}
@@ -297,7 +301,7 @@ func (o *BulkResult) GetStatus() string {
 // GetStatusOk returns a tuple with the Status field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *BulkResult) GetStatusOk() (*string, bool) {
-	if o == nil || o.Status == nil {
+	if o == nil || IsNil(o.Status) {
 		return nil, false
 	}
 	return o.Status, true
@@ -305,7 +309,7 @@ func (o *BulkResult) GetStatusOk() (*string, bool) {
 
 // HasStatus returns a boolean if a field has been set.
 func (o *BulkResult) HasStatus() bool {
-	if o != nil && o.Status != nil {
+	if o != nil && !IsNil(o.Status) {
 		return true
 	}
 
@@ -319,7 +323,7 @@ func (o *BulkResult) SetStatus(v string) {
 
 // GetStatusMessage returns the StatusMessage field value if set, zero value otherwise.
 func (o *BulkResult) GetStatusMessage() string {
-	if o == nil || o.StatusMessage == nil {
+	if o == nil || IsNil(o.StatusMessage) {
 		var ret string
 		return ret
 	}
@@ -329,7 +333,7 @@ func (o *BulkResult) GetStatusMessage() string {
 // GetStatusMessageOk returns a tuple with the StatusMessage field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *BulkResult) GetStatusMessageOk() (*string, bool) {
-	if o == nil || o.StatusMessage == nil {
+	if o == nil || IsNil(o.StatusMessage) {
 		return nil, false
 	}
 	return o.StatusMessage, true
@@ -337,7 +341,7 @@ func (o *BulkResult) GetStatusMessageOk() (*string, bool) {
 
 // HasStatusMessage returns a boolean if a field has been set.
 func (o *BulkResult) HasStatusMessage() bool {
-	if o != nil && o.StatusMessage != nil {
+	if o != nil && !IsNil(o.StatusMessage) {
 		return true
 	}
 
@@ -351,7 +355,7 @@ func (o *BulkResult) SetStatusMessage(v string) {
 
 // GetUri returns the Uri field value if set, zero value otherwise.
 func (o *BulkResult) GetUri() string {
-	if o == nil || o.Uri == nil {
+	if o == nil || IsNil(o.Uri) {
 		var ret string
 		return ret
 	}
@@ -361,7 +365,7 @@ func (o *BulkResult) GetUri() string {
 // GetUriOk returns a tuple with the Uri field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *BulkResult) GetUriOk() (*string, bool) {
-	if o == nil || o.Uri == nil {
+	if o == nil || IsNil(o.Uri) {
 		return nil, false
 	}
 	return o.Uri, true
@@ -369,7 +373,7 @@ func (o *BulkResult) GetUriOk() (*string, bool) {
 
 // HasUri returns a boolean if a field has been set.
 func (o *BulkResult) HasUri() bool {
-	if o != nil && o.Uri != nil {
+	if o != nil && !IsNil(o.Uri) {
 		return true
 	}
 
@@ -381,132 +385,176 @@ func (o *BulkResult) SetUri(v string) {
 	o.Uri = &v
 }
 
-// GetMoCloner returns the MoCloner field value if set, zero value otherwise.
+// GetMoCloner returns the MoCloner field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *BulkResult) GetMoCloner() BulkMoClonerRelationship {
-	if o == nil || o.MoCloner == nil {
+	if o == nil || IsNil(o.MoCloner.Get()) {
 		var ret BulkMoClonerRelationship
 		return ret
 	}
-	return *o.MoCloner
+	return *o.MoCloner.Get()
 }
 
 // GetMoClonerOk returns a tuple with the MoCloner field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *BulkResult) GetMoClonerOk() (*BulkMoClonerRelationship, bool) {
-	if o == nil || o.MoCloner == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.MoCloner, true
+	return o.MoCloner.Get(), o.MoCloner.IsSet()
 }
 
 // HasMoCloner returns a boolean if a field has been set.
 func (o *BulkResult) HasMoCloner() bool {
-	if o != nil && o.MoCloner != nil {
+	if o != nil && o.MoCloner.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetMoCloner gets a reference to the given BulkMoClonerRelationship and assigns it to the MoCloner field.
+// SetMoCloner gets a reference to the given NullableBulkMoClonerRelationship and assigns it to the MoCloner field.
 func (o *BulkResult) SetMoCloner(v BulkMoClonerRelationship) {
-	o.MoCloner = &v
+	o.MoCloner.Set(&v)
 }
 
-// GetMoDeepCloner returns the MoDeepCloner field value if set, zero value otherwise.
+// SetMoClonerNil sets the value for MoCloner to be an explicit nil
+func (o *BulkResult) SetMoClonerNil() {
+	o.MoCloner.Set(nil)
+}
+
+// UnsetMoCloner ensures that no value is present for MoCloner, not even an explicit nil
+func (o *BulkResult) UnsetMoCloner() {
+	o.MoCloner.Unset()
+}
+
+// GetMoDeepCloner returns the MoDeepCloner field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *BulkResult) GetMoDeepCloner() BulkMoDeepClonerRelationship {
-	if o == nil || o.MoDeepCloner == nil {
+	if o == nil || IsNil(o.MoDeepCloner.Get()) {
 		var ret BulkMoDeepClonerRelationship
 		return ret
 	}
-	return *o.MoDeepCloner
+	return *o.MoDeepCloner.Get()
 }
 
 // GetMoDeepClonerOk returns a tuple with the MoDeepCloner field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *BulkResult) GetMoDeepClonerOk() (*BulkMoDeepClonerRelationship, bool) {
-	if o == nil || o.MoDeepCloner == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.MoDeepCloner, true
+	return o.MoDeepCloner.Get(), o.MoDeepCloner.IsSet()
 }
 
 // HasMoDeepCloner returns a boolean if a field has been set.
 func (o *BulkResult) HasMoDeepCloner() bool {
-	if o != nil && o.MoDeepCloner != nil {
+	if o != nil && o.MoDeepCloner.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetMoDeepCloner gets a reference to the given BulkMoDeepClonerRelationship and assigns it to the MoDeepCloner field.
+// SetMoDeepCloner gets a reference to the given NullableBulkMoDeepClonerRelationship and assigns it to the MoDeepCloner field.
 func (o *BulkResult) SetMoDeepCloner(v BulkMoDeepClonerRelationship) {
-	o.MoDeepCloner = &v
+	o.MoDeepCloner.Set(&v)
 }
 
-// GetMoMerger returns the MoMerger field value if set, zero value otherwise.
+// SetMoDeepClonerNil sets the value for MoDeepCloner to be an explicit nil
+func (o *BulkResult) SetMoDeepClonerNil() {
+	o.MoDeepCloner.Set(nil)
+}
+
+// UnsetMoDeepCloner ensures that no value is present for MoDeepCloner, not even an explicit nil
+func (o *BulkResult) UnsetMoDeepCloner() {
+	o.MoDeepCloner.Unset()
+}
+
+// GetMoMerger returns the MoMerger field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *BulkResult) GetMoMerger() BulkMoMergerRelationship {
-	if o == nil || o.MoMerger == nil {
+	if o == nil || IsNil(o.MoMerger.Get()) {
 		var ret BulkMoMergerRelationship
 		return ret
 	}
-	return *o.MoMerger
+	return *o.MoMerger.Get()
 }
 
 // GetMoMergerOk returns a tuple with the MoMerger field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *BulkResult) GetMoMergerOk() (*BulkMoMergerRelationship, bool) {
-	if o == nil || o.MoMerger == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.MoMerger, true
+	return o.MoMerger.Get(), o.MoMerger.IsSet()
 }
 
 // HasMoMerger returns a boolean if a field has been set.
 func (o *BulkResult) HasMoMerger() bool {
-	if o != nil && o.MoMerger != nil {
+	if o != nil && o.MoMerger.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetMoMerger gets a reference to the given BulkMoMergerRelationship and assigns it to the MoMerger field.
+// SetMoMerger gets a reference to the given NullableBulkMoMergerRelationship and assigns it to the MoMerger field.
 func (o *BulkResult) SetMoMerger(v BulkMoMergerRelationship) {
-	o.MoMerger = &v
+	o.MoMerger.Set(&v)
 }
 
-// GetOrganization returns the Organization field value if set, zero value otherwise.
+// SetMoMergerNil sets the value for MoMerger to be an explicit nil
+func (o *BulkResult) SetMoMergerNil() {
+	o.MoMerger.Set(nil)
+}
+
+// UnsetMoMerger ensures that no value is present for MoMerger, not even an explicit nil
+func (o *BulkResult) UnsetMoMerger() {
+	o.MoMerger.Unset()
+}
+
+// GetOrganization returns the Organization field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *BulkResult) GetOrganization() OrganizationOrganizationRelationship {
-	if o == nil || o.Organization == nil {
+	if o == nil || IsNil(o.Organization.Get()) {
 		var ret OrganizationOrganizationRelationship
 		return ret
 	}
-	return *o.Organization
+	return *o.Organization.Get()
 }
 
 // GetOrganizationOk returns a tuple with the Organization field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *BulkResult) GetOrganizationOk() (*OrganizationOrganizationRelationship, bool) {
-	if o == nil || o.Organization == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Organization, true
+	return o.Organization.Get(), o.Organization.IsSet()
 }
 
 // HasOrganization returns a boolean if a field has been set.
 func (o *BulkResult) HasOrganization() bool {
-	if o != nil && o.Organization != nil {
+	if o != nil && o.Organization.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetOrganization gets a reference to the given OrganizationOrganizationRelationship and assigns it to the Organization field.
+// SetOrganization gets a reference to the given NullableOrganizationOrganizationRelationship and assigns it to the Organization field.
 func (o *BulkResult) SetOrganization(v OrganizationOrganizationRelationship) {
-	o.Organization = &v
+	o.Organization.Set(&v)
+}
+
+// SetOrganizationNil sets the value for Organization to be an explicit nil
+func (o *BulkResult) SetOrganizationNil() {
+	o.Organization.Set(nil)
+}
+
+// UnsetOrganization ensures that no value is present for Organization, not even an explicit nil
+func (o *BulkResult) UnsetOrganization() {
+	o.Organization.Unset()
 }
 
 // GetResults returns the Results field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -522,7 +570,7 @@ func (o *BulkResult) GetResults() []BulkSubRequestObjRelationship {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *BulkResult) GetResultsOk() ([]BulkSubRequestObjRelationship, bool) {
-	if o == nil || o.Results == nil {
+	if o == nil || IsNil(o.Results) {
 		return nil, false
 	}
 	return o.Results, true
@@ -530,7 +578,7 @@ func (o *BulkResult) GetResultsOk() ([]BulkSubRequestObjRelationship, bool) {
 
 // HasResults returns a boolean if a field has been set.
 func (o *BulkResult) HasResults() bool {
-	if o != nil && o.Results != nil {
+	if o != nil && IsNil(o.Results) {
 		return true
 	}
 
@@ -542,105 +590,142 @@ func (o *BulkResult) SetResults(v []BulkSubRequestObjRelationship) {
 	o.Results = v
 }
 
-// GetWorkflowInfo returns the WorkflowInfo field value if set, zero value otherwise.
+// GetWorkflowInfo returns the WorkflowInfo field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *BulkResult) GetWorkflowInfo() WorkflowWorkflowInfoRelationship {
-	if o == nil || o.WorkflowInfo == nil {
+	if o == nil || IsNil(o.WorkflowInfo.Get()) {
 		var ret WorkflowWorkflowInfoRelationship
 		return ret
 	}
-	return *o.WorkflowInfo
+	return *o.WorkflowInfo.Get()
 }
 
 // GetWorkflowInfoOk returns a tuple with the WorkflowInfo field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *BulkResult) GetWorkflowInfoOk() (*WorkflowWorkflowInfoRelationship, bool) {
-	if o == nil || o.WorkflowInfo == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.WorkflowInfo, true
+	return o.WorkflowInfo.Get(), o.WorkflowInfo.IsSet()
 }
 
 // HasWorkflowInfo returns a boolean if a field has been set.
 func (o *BulkResult) HasWorkflowInfo() bool {
-	if o != nil && o.WorkflowInfo != nil {
+	if o != nil && o.WorkflowInfo.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetWorkflowInfo gets a reference to the given WorkflowWorkflowInfoRelationship and assigns it to the WorkflowInfo field.
+// SetWorkflowInfo gets a reference to the given NullableWorkflowWorkflowInfoRelationship and assigns it to the WorkflowInfo field.
 func (o *BulkResult) SetWorkflowInfo(v WorkflowWorkflowInfoRelationship) {
-	o.WorkflowInfo = &v
+	o.WorkflowInfo.Set(&v)
+}
+
+// SetWorkflowInfoNil sets the value for WorkflowInfo to be an explicit nil
+func (o *BulkResult) SetWorkflowInfoNil() {
+	o.WorkflowInfo.Set(nil)
+}
+
+// UnsetWorkflowInfo ensures that no value is present for WorkflowInfo, not even an explicit nil
+func (o *BulkResult) UnsetWorkflowInfo() {
+	o.WorkflowInfo.Unset()
 }
 
 func (o BulkResult) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o BulkResult) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.ActionOnError != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.ActionOnError) {
 		toSerialize["ActionOnError"] = o.ActionOnError
 	}
-	if o.CompletionTime != nil {
+	if !IsNil(o.CompletionTime) {
 		toSerialize["CompletionTime"] = o.CompletionTime
 	}
-	if o.NumSubRequests != nil {
+	if !IsNil(o.NumSubRequests) {
 		toSerialize["NumSubRequests"] = o.NumSubRequests
 	}
 	if o.Request != nil {
 		toSerialize["Request"] = o.Request
 	}
-	if o.RequestReceivedTime != nil {
+	if !IsNil(o.RequestReceivedTime) {
 		toSerialize["RequestReceivedTime"] = o.RequestReceivedTime
 	}
-	if o.Status != nil {
+	if !IsNil(o.Status) {
 		toSerialize["Status"] = o.Status
 	}
-	if o.StatusMessage != nil {
+	if !IsNil(o.StatusMessage) {
 		toSerialize["StatusMessage"] = o.StatusMessage
 	}
-	if o.Uri != nil {
+	if !IsNil(o.Uri) {
 		toSerialize["Uri"] = o.Uri
 	}
-	if o.MoCloner != nil {
-		toSerialize["MoCloner"] = o.MoCloner
+	if o.MoCloner.IsSet() {
+		toSerialize["MoCloner"] = o.MoCloner.Get()
 	}
-	if o.MoDeepCloner != nil {
-		toSerialize["MoDeepCloner"] = o.MoDeepCloner
+	if o.MoDeepCloner.IsSet() {
+		toSerialize["MoDeepCloner"] = o.MoDeepCloner.Get()
 	}
-	if o.MoMerger != nil {
-		toSerialize["MoMerger"] = o.MoMerger
+	if o.MoMerger.IsSet() {
+		toSerialize["MoMerger"] = o.MoMerger.Get()
 	}
-	if o.Organization != nil {
-		toSerialize["Organization"] = o.Organization
+	if o.Organization.IsSet() {
+		toSerialize["Organization"] = o.Organization.Get()
 	}
 	if o.Results != nil {
 		toSerialize["Results"] = o.Results
 	}
-	if o.WorkflowInfo != nil {
-		toSerialize["WorkflowInfo"] = o.WorkflowInfo
+	if o.WorkflowInfo.IsSet() {
+		toSerialize["WorkflowInfo"] = o.WorkflowInfo.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *BulkResult) UnmarshalJSON(bytes []byte) (err error) {
+func (o *BulkResult) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type BulkResultWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -661,19 +746,19 @@ func (o *BulkResult) UnmarshalJSON(bytes []byte) (err error) {
 		// The status message shows the error details in human readable format when the request goes to failed state. No additional information is shown for success case.
 		StatusMessage *string `json:"StatusMessage,omitempty"`
 		// The URI on which this async operation is being performed.
-		Uri          *string                               `json:"Uri,omitempty"`
-		MoCloner     *BulkMoClonerRelationship             `json:"MoCloner,omitempty"`
-		MoDeepCloner *BulkMoDeepClonerRelationship         `json:"MoDeepCloner,omitempty"`
-		MoMerger     *BulkMoMergerRelationship             `json:"MoMerger,omitempty"`
-		Organization *OrganizationOrganizationRelationship `json:"Organization,omitempty"`
+		Uri          *string                                      `json:"Uri,omitempty"`
+		MoCloner     NullableBulkMoClonerRelationship             `json:"MoCloner,omitempty"`
+		MoDeepCloner NullableBulkMoDeepClonerRelationship         `json:"MoDeepCloner,omitempty"`
+		MoMerger     NullableBulkMoMergerRelationship             `json:"MoMerger,omitempty"`
+		Organization NullableOrganizationOrganizationRelationship `json:"Organization,omitempty"`
 		// An array of relationships to bulkSubRequestObj resources.
-		Results      []BulkSubRequestObjRelationship   `json:"Results,omitempty"`
-		WorkflowInfo *WorkflowWorkflowInfoRelationship `json:"WorkflowInfo,omitempty"`
+		Results      []BulkSubRequestObjRelationship          `json:"Results,omitempty"`
+		WorkflowInfo NullableWorkflowWorkflowInfoRelationship `json:"WorkflowInfo,omitempty"`
 	}
 
 	varBulkResultWithoutEmbeddedStruct := BulkResultWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varBulkResultWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varBulkResultWithoutEmbeddedStruct)
 	if err == nil {
 		varBulkResult := _BulkResult{}
 		varBulkResult.ClassId = varBulkResultWithoutEmbeddedStruct.ClassId
@@ -699,7 +784,7 @@ func (o *BulkResult) UnmarshalJSON(bytes []byte) (err error) {
 
 	varBulkResult := _BulkResult{}
 
-	err = json.Unmarshal(bytes, &varBulkResult)
+	err = json.Unmarshal(data, &varBulkResult)
 	if err == nil {
 		o.MoBaseMo = varBulkResult.MoBaseMo
 	} else {
@@ -708,7 +793,7 @@ func (o *BulkResult) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "ActionOnError")

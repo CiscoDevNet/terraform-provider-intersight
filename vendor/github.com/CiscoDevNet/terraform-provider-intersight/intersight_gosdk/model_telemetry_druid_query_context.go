@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -14,6 +14,9 @@ package intersight
 import (
 	"encoding/json"
 )
+
+// checks if the TelemetryDruidQueryContext type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &TelemetryDruidQueryContext{}
 
 // TelemetryDruidQueryContext The query context is used for various query configuration parameters. Can be used to modify query behavior, including grand totals and zero-filling.
 type TelemetryDruidQueryContext struct {
@@ -81,7 +84,7 @@ func NewTelemetryDruidQueryContextWithDefaults() *TelemetryDruidQueryContext {
 
 // GetGrandTotal returns the GrandTotal field value if set, zero value otherwise.
 func (o *TelemetryDruidQueryContext) GetGrandTotal() bool {
-	if o == nil || o.GrandTotal == nil {
+	if o == nil || IsNil(o.GrandTotal) {
 		var ret bool
 		return ret
 	}
@@ -91,7 +94,7 @@ func (o *TelemetryDruidQueryContext) GetGrandTotal() bool {
 // GetGrandTotalOk returns a tuple with the GrandTotal field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TelemetryDruidQueryContext) GetGrandTotalOk() (*bool, bool) {
-	if o == nil || o.GrandTotal == nil {
+	if o == nil || IsNil(o.GrandTotal) {
 		return nil, false
 	}
 	return o.GrandTotal, true
@@ -99,7 +102,7 @@ func (o *TelemetryDruidQueryContext) GetGrandTotalOk() (*bool, bool) {
 
 // HasGrandTotal returns a boolean if a field has been set.
 func (o *TelemetryDruidQueryContext) HasGrandTotal() bool {
-	if o != nil && o.GrandTotal != nil {
+	if o != nil && !IsNil(o.GrandTotal) {
 		return true
 	}
 
@@ -113,7 +116,7 @@ func (o *TelemetryDruidQueryContext) SetGrandTotal(v bool) {
 
 // GetSkipEmptyBuckets returns the SkipEmptyBuckets field value if set, zero value otherwise.
 func (o *TelemetryDruidQueryContext) GetSkipEmptyBuckets() bool {
-	if o == nil || o.SkipEmptyBuckets == nil {
+	if o == nil || IsNil(o.SkipEmptyBuckets) {
 		var ret bool
 		return ret
 	}
@@ -123,7 +126,7 @@ func (o *TelemetryDruidQueryContext) GetSkipEmptyBuckets() bool {
 // GetSkipEmptyBucketsOk returns a tuple with the SkipEmptyBuckets field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TelemetryDruidQueryContext) GetSkipEmptyBucketsOk() (*bool, bool) {
-	if o == nil || o.SkipEmptyBuckets == nil {
+	if o == nil || IsNil(o.SkipEmptyBuckets) {
 		return nil, false
 	}
 	return o.SkipEmptyBuckets, true
@@ -131,7 +134,7 @@ func (o *TelemetryDruidQueryContext) GetSkipEmptyBucketsOk() (*bool, bool) {
 
 // HasSkipEmptyBuckets returns a boolean if a field has been set.
 func (o *TelemetryDruidQueryContext) HasSkipEmptyBuckets() bool {
-	if o != nil && o.SkipEmptyBuckets != nil {
+	if o != nil && !IsNil(o.SkipEmptyBuckets) {
 		return true
 	}
 
@@ -145,7 +148,7 @@ func (o *TelemetryDruidQueryContext) SetSkipEmptyBuckets(v bool) {
 
 // GetTimeout returns the Timeout field value if set, zero value otherwise.
 func (o *TelemetryDruidQueryContext) GetTimeout() int32 {
-	if o == nil || o.Timeout == nil {
+	if o == nil || IsNil(o.Timeout) {
 		var ret int32
 		return ret
 	}
@@ -155,7 +158,7 @@ func (o *TelemetryDruidQueryContext) GetTimeout() int32 {
 // GetTimeoutOk returns a tuple with the Timeout field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TelemetryDruidQueryContext) GetTimeoutOk() (*int32, bool) {
-	if o == nil || o.Timeout == nil {
+	if o == nil || IsNil(o.Timeout) {
 		return nil, false
 	}
 	return o.Timeout, true
@@ -163,7 +166,7 @@ func (o *TelemetryDruidQueryContext) GetTimeoutOk() (*int32, bool) {
 
 // HasTimeout returns a boolean if a field has been set.
 func (o *TelemetryDruidQueryContext) HasTimeout() bool {
-	if o != nil && o.Timeout != nil {
+	if o != nil && !IsNil(o.Timeout) {
 		return true
 	}
 
@@ -177,7 +180,7 @@ func (o *TelemetryDruidQueryContext) SetTimeout(v int32) {
 
 // GetPriority returns the Priority field value if set, zero value otherwise.
 func (o *TelemetryDruidQueryContext) GetPriority() int32 {
-	if o == nil || o.Priority == nil {
+	if o == nil || IsNil(o.Priority) {
 		var ret int32
 		return ret
 	}
@@ -187,7 +190,7 @@ func (o *TelemetryDruidQueryContext) GetPriority() int32 {
 // GetPriorityOk returns a tuple with the Priority field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TelemetryDruidQueryContext) GetPriorityOk() (*int32, bool) {
-	if o == nil || o.Priority == nil {
+	if o == nil || IsNil(o.Priority) {
 		return nil, false
 	}
 	return o.Priority, true
@@ -195,7 +198,7 @@ func (o *TelemetryDruidQueryContext) GetPriorityOk() (*int32, bool) {
 
 // HasPriority returns a boolean if a field has been set.
 func (o *TelemetryDruidQueryContext) HasPriority() bool {
-	if o != nil && o.Priority != nil {
+	if o != nil && !IsNil(o.Priority) {
 		return true
 	}
 
@@ -209,7 +212,7 @@ func (o *TelemetryDruidQueryContext) SetPriority(v int32) {
 
 // GetQueryId returns the QueryId field value if set, zero value otherwise.
 func (o *TelemetryDruidQueryContext) GetQueryId() string {
-	if o == nil || o.QueryId == nil {
+	if o == nil || IsNil(o.QueryId) {
 		var ret string
 		return ret
 	}
@@ -219,7 +222,7 @@ func (o *TelemetryDruidQueryContext) GetQueryId() string {
 // GetQueryIdOk returns a tuple with the QueryId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TelemetryDruidQueryContext) GetQueryIdOk() (*string, bool) {
-	if o == nil || o.QueryId == nil {
+	if o == nil || IsNil(o.QueryId) {
 		return nil, false
 	}
 	return o.QueryId, true
@@ -227,7 +230,7 @@ func (o *TelemetryDruidQueryContext) GetQueryIdOk() (*string, bool) {
 
 // HasQueryId returns a boolean if a field has been set.
 func (o *TelemetryDruidQueryContext) HasQueryId() bool {
-	if o != nil && o.QueryId != nil {
+	if o != nil && !IsNil(o.QueryId) {
 		return true
 	}
 
@@ -241,7 +244,7 @@ func (o *TelemetryDruidQueryContext) SetQueryId(v string) {
 
 // GetUseCache returns the UseCache field value if set, zero value otherwise.
 func (o *TelemetryDruidQueryContext) GetUseCache() bool {
-	if o == nil || o.UseCache == nil {
+	if o == nil || IsNil(o.UseCache) {
 		var ret bool
 		return ret
 	}
@@ -251,7 +254,7 @@ func (o *TelemetryDruidQueryContext) GetUseCache() bool {
 // GetUseCacheOk returns a tuple with the UseCache field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TelemetryDruidQueryContext) GetUseCacheOk() (*bool, bool) {
-	if o == nil || o.UseCache == nil {
+	if o == nil || IsNil(o.UseCache) {
 		return nil, false
 	}
 	return o.UseCache, true
@@ -259,7 +262,7 @@ func (o *TelemetryDruidQueryContext) GetUseCacheOk() (*bool, bool) {
 
 // HasUseCache returns a boolean if a field has been set.
 func (o *TelemetryDruidQueryContext) HasUseCache() bool {
-	if o != nil && o.UseCache != nil {
+	if o != nil && !IsNil(o.UseCache) {
 		return true
 	}
 
@@ -273,7 +276,7 @@ func (o *TelemetryDruidQueryContext) SetUseCache(v bool) {
 
 // GetPopulateCache returns the PopulateCache field value if set, zero value otherwise.
 func (o *TelemetryDruidQueryContext) GetPopulateCache() bool {
-	if o == nil || o.PopulateCache == nil {
+	if o == nil || IsNil(o.PopulateCache) {
 		var ret bool
 		return ret
 	}
@@ -283,7 +286,7 @@ func (o *TelemetryDruidQueryContext) GetPopulateCache() bool {
 // GetPopulateCacheOk returns a tuple with the PopulateCache field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TelemetryDruidQueryContext) GetPopulateCacheOk() (*bool, bool) {
-	if o == nil || o.PopulateCache == nil {
+	if o == nil || IsNil(o.PopulateCache) {
 		return nil, false
 	}
 	return o.PopulateCache, true
@@ -291,7 +294,7 @@ func (o *TelemetryDruidQueryContext) GetPopulateCacheOk() (*bool, bool) {
 
 // HasPopulateCache returns a boolean if a field has been set.
 func (o *TelemetryDruidQueryContext) HasPopulateCache() bool {
-	if o != nil && o.PopulateCache != nil {
+	if o != nil && !IsNil(o.PopulateCache) {
 		return true
 	}
 
@@ -305,7 +308,7 @@ func (o *TelemetryDruidQueryContext) SetPopulateCache(v bool) {
 
 // GetUseResultLevelCache returns the UseResultLevelCache field value if set, zero value otherwise.
 func (o *TelemetryDruidQueryContext) GetUseResultLevelCache() bool {
-	if o == nil || o.UseResultLevelCache == nil {
+	if o == nil || IsNil(o.UseResultLevelCache) {
 		var ret bool
 		return ret
 	}
@@ -315,7 +318,7 @@ func (o *TelemetryDruidQueryContext) GetUseResultLevelCache() bool {
 // GetUseResultLevelCacheOk returns a tuple with the UseResultLevelCache field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TelemetryDruidQueryContext) GetUseResultLevelCacheOk() (*bool, bool) {
-	if o == nil || o.UseResultLevelCache == nil {
+	if o == nil || IsNil(o.UseResultLevelCache) {
 		return nil, false
 	}
 	return o.UseResultLevelCache, true
@@ -323,7 +326,7 @@ func (o *TelemetryDruidQueryContext) GetUseResultLevelCacheOk() (*bool, bool) {
 
 // HasUseResultLevelCache returns a boolean if a field has been set.
 func (o *TelemetryDruidQueryContext) HasUseResultLevelCache() bool {
-	if o != nil && o.UseResultLevelCache != nil {
+	if o != nil && !IsNil(o.UseResultLevelCache) {
 		return true
 	}
 
@@ -337,7 +340,7 @@ func (o *TelemetryDruidQueryContext) SetUseResultLevelCache(v bool) {
 
 // GetPopulateResultLevelCache returns the PopulateResultLevelCache field value if set, zero value otherwise.
 func (o *TelemetryDruidQueryContext) GetPopulateResultLevelCache() bool {
-	if o == nil || o.PopulateResultLevelCache == nil {
+	if o == nil || IsNil(o.PopulateResultLevelCache) {
 		var ret bool
 		return ret
 	}
@@ -347,7 +350,7 @@ func (o *TelemetryDruidQueryContext) GetPopulateResultLevelCache() bool {
 // GetPopulateResultLevelCacheOk returns a tuple with the PopulateResultLevelCache field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TelemetryDruidQueryContext) GetPopulateResultLevelCacheOk() (*bool, bool) {
-	if o == nil || o.PopulateResultLevelCache == nil {
+	if o == nil || IsNil(o.PopulateResultLevelCache) {
 		return nil, false
 	}
 	return o.PopulateResultLevelCache, true
@@ -355,7 +358,7 @@ func (o *TelemetryDruidQueryContext) GetPopulateResultLevelCacheOk() (*bool, boo
 
 // HasPopulateResultLevelCache returns a boolean if a field has been set.
 func (o *TelemetryDruidQueryContext) HasPopulateResultLevelCache() bool {
-	if o != nil && o.PopulateResultLevelCache != nil {
+	if o != nil && !IsNil(o.PopulateResultLevelCache) {
 		return true
 	}
 
@@ -369,7 +372,7 @@ func (o *TelemetryDruidQueryContext) SetPopulateResultLevelCache(v bool) {
 
 // GetBySegment returns the BySegment field value if set, zero value otherwise.
 func (o *TelemetryDruidQueryContext) GetBySegment() bool {
-	if o == nil || o.BySegment == nil {
+	if o == nil || IsNil(o.BySegment) {
 		var ret bool
 		return ret
 	}
@@ -379,7 +382,7 @@ func (o *TelemetryDruidQueryContext) GetBySegment() bool {
 // GetBySegmentOk returns a tuple with the BySegment field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TelemetryDruidQueryContext) GetBySegmentOk() (*bool, bool) {
-	if o == nil || o.BySegment == nil {
+	if o == nil || IsNil(o.BySegment) {
 		return nil, false
 	}
 	return o.BySegment, true
@@ -387,7 +390,7 @@ func (o *TelemetryDruidQueryContext) GetBySegmentOk() (*bool, bool) {
 
 // HasBySegment returns a boolean if a field has been set.
 func (o *TelemetryDruidQueryContext) HasBySegment() bool {
-	if o != nil && o.BySegment != nil {
+	if o != nil && !IsNil(o.BySegment) {
 		return true
 	}
 
@@ -401,7 +404,7 @@ func (o *TelemetryDruidQueryContext) SetBySegment(v bool) {
 
 // GetFinalize returns the Finalize field value if set, zero value otherwise.
 func (o *TelemetryDruidQueryContext) GetFinalize() bool {
-	if o == nil || o.Finalize == nil {
+	if o == nil || IsNil(o.Finalize) {
 		var ret bool
 		return ret
 	}
@@ -411,7 +414,7 @@ func (o *TelemetryDruidQueryContext) GetFinalize() bool {
 // GetFinalizeOk returns a tuple with the Finalize field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TelemetryDruidQueryContext) GetFinalizeOk() (*bool, bool) {
-	if o == nil || o.Finalize == nil {
+	if o == nil || IsNil(o.Finalize) {
 		return nil, false
 	}
 	return o.Finalize, true
@@ -419,7 +422,7 @@ func (o *TelemetryDruidQueryContext) GetFinalizeOk() (*bool, bool) {
 
 // HasFinalize returns a boolean if a field has been set.
 func (o *TelemetryDruidQueryContext) HasFinalize() bool {
-	if o != nil && o.Finalize != nil {
+	if o != nil && !IsNil(o.Finalize) {
 		return true
 	}
 
@@ -433,7 +436,7 @@ func (o *TelemetryDruidQueryContext) SetFinalize(v bool) {
 
 // GetChunkPeriod returns the ChunkPeriod field value if set, zero value otherwise.
 func (o *TelemetryDruidQueryContext) GetChunkPeriod() string {
-	if o == nil || o.ChunkPeriod == nil {
+	if o == nil || IsNil(o.ChunkPeriod) {
 		var ret string
 		return ret
 	}
@@ -443,7 +446,7 @@ func (o *TelemetryDruidQueryContext) GetChunkPeriod() string {
 // GetChunkPeriodOk returns a tuple with the ChunkPeriod field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TelemetryDruidQueryContext) GetChunkPeriodOk() (*string, bool) {
-	if o == nil || o.ChunkPeriod == nil {
+	if o == nil || IsNil(o.ChunkPeriod) {
 		return nil, false
 	}
 	return o.ChunkPeriod, true
@@ -451,7 +454,7 @@ func (o *TelemetryDruidQueryContext) GetChunkPeriodOk() (*string, bool) {
 
 // HasChunkPeriod returns a boolean if a field has been set.
 func (o *TelemetryDruidQueryContext) HasChunkPeriod() bool {
-	if o != nil && o.ChunkPeriod != nil {
+	if o != nil && !IsNil(o.ChunkPeriod) {
 		return true
 	}
 
@@ -465,7 +468,7 @@ func (o *TelemetryDruidQueryContext) SetChunkPeriod(v string) {
 
 // GetMaxScatterGatherBytes returns the MaxScatterGatherBytes field value if set, zero value otherwise.
 func (o *TelemetryDruidQueryContext) GetMaxScatterGatherBytes() int32 {
-	if o == nil || o.MaxScatterGatherBytes == nil {
+	if o == nil || IsNil(o.MaxScatterGatherBytes) {
 		var ret int32
 		return ret
 	}
@@ -475,7 +478,7 @@ func (o *TelemetryDruidQueryContext) GetMaxScatterGatherBytes() int32 {
 // GetMaxScatterGatherBytesOk returns a tuple with the MaxScatterGatherBytes field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TelemetryDruidQueryContext) GetMaxScatterGatherBytesOk() (*int32, bool) {
-	if o == nil || o.MaxScatterGatherBytes == nil {
+	if o == nil || IsNil(o.MaxScatterGatherBytes) {
 		return nil, false
 	}
 	return o.MaxScatterGatherBytes, true
@@ -483,7 +486,7 @@ func (o *TelemetryDruidQueryContext) GetMaxScatterGatherBytesOk() (*int32, bool)
 
 // HasMaxScatterGatherBytes returns a boolean if a field has been set.
 func (o *TelemetryDruidQueryContext) HasMaxScatterGatherBytes() bool {
-	if o != nil && o.MaxScatterGatherBytes != nil {
+	if o != nil && !IsNil(o.MaxScatterGatherBytes) {
 		return true
 	}
 
@@ -497,7 +500,7 @@ func (o *TelemetryDruidQueryContext) SetMaxScatterGatherBytes(v int32) {
 
 // GetMaxQueuedBytes returns the MaxQueuedBytes field value if set, zero value otherwise.
 func (o *TelemetryDruidQueryContext) GetMaxQueuedBytes() int32 {
-	if o == nil || o.MaxQueuedBytes == nil {
+	if o == nil || IsNil(o.MaxQueuedBytes) {
 		var ret int32
 		return ret
 	}
@@ -507,7 +510,7 @@ func (o *TelemetryDruidQueryContext) GetMaxQueuedBytes() int32 {
 // GetMaxQueuedBytesOk returns a tuple with the MaxQueuedBytes field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TelemetryDruidQueryContext) GetMaxQueuedBytesOk() (*int32, bool) {
-	if o == nil || o.MaxQueuedBytes == nil {
+	if o == nil || IsNil(o.MaxQueuedBytes) {
 		return nil, false
 	}
 	return o.MaxQueuedBytes, true
@@ -515,7 +518,7 @@ func (o *TelemetryDruidQueryContext) GetMaxQueuedBytesOk() (*int32, bool) {
 
 // HasMaxQueuedBytes returns a boolean if a field has been set.
 func (o *TelemetryDruidQueryContext) HasMaxQueuedBytes() bool {
-	if o != nil && o.MaxQueuedBytes != nil {
+	if o != nil && !IsNil(o.MaxQueuedBytes) {
 		return true
 	}
 
@@ -529,7 +532,7 @@ func (o *TelemetryDruidQueryContext) SetMaxQueuedBytes(v int32) {
 
 // GetSerializeDateTimeAsLong returns the SerializeDateTimeAsLong field value if set, zero value otherwise.
 func (o *TelemetryDruidQueryContext) GetSerializeDateTimeAsLong() bool {
-	if o == nil || o.SerializeDateTimeAsLong == nil {
+	if o == nil || IsNil(o.SerializeDateTimeAsLong) {
 		var ret bool
 		return ret
 	}
@@ -539,7 +542,7 @@ func (o *TelemetryDruidQueryContext) GetSerializeDateTimeAsLong() bool {
 // GetSerializeDateTimeAsLongOk returns a tuple with the SerializeDateTimeAsLong field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TelemetryDruidQueryContext) GetSerializeDateTimeAsLongOk() (*bool, bool) {
-	if o == nil || o.SerializeDateTimeAsLong == nil {
+	if o == nil || IsNil(o.SerializeDateTimeAsLong) {
 		return nil, false
 	}
 	return o.SerializeDateTimeAsLong, true
@@ -547,7 +550,7 @@ func (o *TelemetryDruidQueryContext) GetSerializeDateTimeAsLongOk() (*bool, bool
 
 // HasSerializeDateTimeAsLong returns a boolean if a field has been set.
 func (o *TelemetryDruidQueryContext) HasSerializeDateTimeAsLong() bool {
-	if o != nil && o.SerializeDateTimeAsLong != nil {
+	if o != nil && !IsNil(o.SerializeDateTimeAsLong) {
 		return true
 	}
 
@@ -561,7 +564,7 @@ func (o *TelemetryDruidQueryContext) SetSerializeDateTimeAsLong(v bool) {
 
 // GetSerializeDateTimeAsLongInner returns the SerializeDateTimeAsLongInner field value if set, zero value otherwise.
 func (o *TelemetryDruidQueryContext) GetSerializeDateTimeAsLongInner() bool {
-	if o == nil || o.SerializeDateTimeAsLongInner == nil {
+	if o == nil || IsNil(o.SerializeDateTimeAsLongInner) {
 		var ret bool
 		return ret
 	}
@@ -571,7 +574,7 @@ func (o *TelemetryDruidQueryContext) GetSerializeDateTimeAsLongInner() bool {
 // GetSerializeDateTimeAsLongInnerOk returns a tuple with the SerializeDateTimeAsLongInner field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TelemetryDruidQueryContext) GetSerializeDateTimeAsLongInnerOk() (*bool, bool) {
-	if o == nil || o.SerializeDateTimeAsLongInner == nil {
+	if o == nil || IsNil(o.SerializeDateTimeAsLongInner) {
 		return nil, false
 	}
 	return o.SerializeDateTimeAsLongInner, true
@@ -579,7 +582,7 @@ func (o *TelemetryDruidQueryContext) GetSerializeDateTimeAsLongInnerOk() (*bool,
 
 // HasSerializeDateTimeAsLongInner returns a boolean if a field has been set.
 func (o *TelemetryDruidQueryContext) HasSerializeDateTimeAsLongInner() bool {
-	if o != nil && o.SerializeDateTimeAsLongInner != nil {
+	if o != nil && !IsNil(o.SerializeDateTimeAsLongInner) {
 		return true
 	}
 
@@ -593,7 +596,7 @@ func (o *TelemetryDruidQueryContext) SetSerializeDateTimeAsLongInner(v bool) {
 
 // GetEnableParallelMerge returns the EnableParallelMerge field value if set, zero value otherwise.
 func (o *TelemetryDruidQueryContext) GetEnableParallelMerge() bool {
-	if o == nil || o.EnableParallelMerge == nil {
+	if o == nil || IsNil(o.EnableParallelMerge) {
 		var ret bool
 		return ret
 	}
@@ -603,7 +606,7 @@ func (o *TelemetryDruidQueryContext) GetEnableParallelMerge() bool {
 // GetEnableParallelMergeOk returns a tuple with the EnableParallelMerge field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TelemetryDruidQueryContext) GetEnableParallelMergeOk() (*bool, bool) {
-	if o == nil || o.EnableParallelMerge == nil {
+	if o == nil || IsNil(o.EnableParallelMerge) {
 		return nil, false
 	}
 	return o.EnableParallelMerge, true
@@ -611,7 +614,7 @@ func (o *TelemetryDruidQueryContext) GetEnableParallelMergeOk() (*bool, bool) {
 
 // HasEnableParallelMerge returns a boolean if a field has been set.
 func (o *TelemetryDruidQueryContext) HasEnableParallelMerge() bool {
-	if o != nil && o.EnableParallelMerge != nil {
+	if o != nil && !IsNil(o.EnableParallelMerge) {
 		return true
 	}
 
@@ -625,7 +628,7 @@ func (o *TelemetryDruidQueryContext) SetEnableParallelMerge(v bool) {
 
 // GetParallelMergeParallelism returns the ParallelMergeParallelism field value if set, zero value otherwise.
 func (o *TelemetryDruidQueryContext) GetParallelMergeParallelism() int32 {
-	if o == nil || o.ParallelMergeParallelism == nil {
+	if o == nil || IsNil(o.ParallelMergeParallelism) {
 		var ret int32
 		return ret
 	}
@@ -635,7 +638,7 @@ func (o *TelemetryDruidQueryContext) GetParallelMergeParallelism() int32 {
 // GetParallelMergeParallelismOk returns a tuple with the ParallelMergeParallelism field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TelemetryDruidQueryContext) GetParallelMergeParallelismOk() (*int32, bool) {
-	if o == nil || o.ParallelMergeParallelism == nil {
+	if o == nil || IsNil(o.ParallelMergeParallelism) {
 		return nil, false
 	}
 	return o.ParallelMergeParallelism, true
@@ -643,7 +646,7 @@ func (o *TelemetryDruidQueryContext) GetParallelMergeParallelismOk() (*int32, bo
 
 // HasParallelMergeParallelism returns a boolean if a field has been set.
 func (o *TelemetryDruidQueryContext) HasParallelMergeParallelism() bool {
-	if o != nil && o.ParallelMergeParallelism != nil {
+	if o != nil && !IsNil(o.ParallelMergeParallelism) {
 		return true
 	}
 
@@ -657,7 +660,7 @@ func (o *TelemetryDruidQueryContext) SetParallelMergeParallelism(v int32) {
 
 // GetParallelMergeInitialYieldRows returns the ParallelMergeInitialYieldRows field value if set, zero value otherwise.
 func (o *TelemetryDruidQueryContext) GetParallelMergeInitialYieldRows() int32 {
-	if o == nil || o.ParallelMergeInitialYieldRows == nil {
+	if o == nil || IsNil(o.ParallelMergeInitialYieldRows) {
 		var ret int32
 		return ret
 	}
@@ -667,7 +670,7 @@ func (o *TelemetryDruidQueryContext) GetParallelMergeInitialYieldRows() int32 {
 // GetParallelMergeInitialYieldRowsOk returns a tuple with the ParallelMergeInitialYieldRows field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TelemetryDruidQueryContext) GetParallelMergeInitialYieldRowsOk() (*int32, bool) {
-	if o == nil || o.ParallelMergeInitialYieldRows == nil {
+	if o == nil || IsNil(o.ParallelMergeInitialYieldRows) {
 		return nil, false
 	}
 	return o.ParallelMergeInitialYieldRows, true
@@ -675,7 +678,7 @@ func (o *TelemetryDruidQueryContext) GetParallelMergeInitialYieldRowsOk() (*int3
 
 // HasParallelMergeInitialYieldRows returns a boolean if a field has been set.
 func (o *TelemetryDruidQueryContext) HasParallelMergeInitialYieldRows() bool {
-	if o != nil && o.ParallelMergeInitialYieldRows != nil {
+	if o != nil && !IsNil(o.ParallelMergeInitialYieldRows) {
 		return true
 	}
 
@@ -689,7 +692,7 @@ func (o *TelemetryDruidQueryContext) SetParallelMergeInitialYieldRows(v int32) {
 
 // GetParallelMergeSmallBatchRows returns the ParallelMergeSmallBatchRows field value if set, zero value otherwise.
 func (o *TelemetryDruidQueryContext) GetParallelMergeSmallBatchRows() int32 {
-	if o == nil || o.ParallelMergeSmallBatchRows == nil {
+	if o == nil || IsNil(o.ParallelMergeSmallBatchRows) {
 		var ret int32
 		return ret
 	}
@@ -699,7 +702,7 @@ func (o *TelemetryDruidQueryContext) GetParallelMergeSmallBatchRows() int32 {
 // GetParallelMergeSmallBatchRowsOk returns a tuple with the ParallelMergeSmallBatchRows field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TelemetryDruidQueryContext) GetParallelMergeSmallBatchRowsOk() (*int32, bool) {
-	if o == nil || o.ParallelMergeSmallBatchRows == nil {
+	if o == nil || IsNil(o.ParallelMergeSmallBatchRows) {
 		return nil, false
 	}
 	return o.ParallelMergeSmallBatchRows, true
@@ -707,7 +710,7 @@ func (o *TelemetryDruidQueryContext) GetParallelMergeSmallBatchRowsOk() (*int32,
 
 // HasParallelMergeSmallBatchRows returns a boolean if a field has been set.
 func (o *TelemetryDruidQueryContext) HasParallelMergeSmallBatchRows() bool {
-	if o != nil && o.ParallelMergeSmallBatchRows != nil {
+	if o != nil && !IsNil(o.ParallelMergeSmallBatchRows) {
 		return true
 	}
 
@@ -720,65 +723,73 @@ func (o *TelemetryDruidQueryContext) SetParallelMergeSmallBatchRows(v int32) {
 }
 
 func (o TelemetryDruidQueryContext) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o TelemetryDruidQueryContext) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if o.GrandTotal != nil {
+	if !IsNil(o.GrandTotal) {
 		toSerialize["grandTotal"] = o.GrandTotal
 	}
-	if o.SkipEmptyBuckets != nil {
+	if !IsNil(o.SkipEmptyBuckets) {
 		toSerialize["skipEmptyBuckets"] = o.SkipEmptyBuckets
 	}
-	if o.Timeout != nil {
+	if !IsNil(o.Timeout) {
 		toSerialize["timeout"] = o.Timeout
 	}
-	if o.Priority != nil {
+	if !IsNil(o.Priority) {
 		toSerialize["priority"] = o.Priority
 	}
-	if o.QueryId != nil {
+	if !IsNil(o.QueryId) {
 		toSerialize["queryId"] = o.QueryId
 	}
-	if o.UseCache != nil {
+	if !IsNil(o.UseCache) {
 		toSerialize["useCache"] = o.UseCache
 	}
-	if o.PopulateCache != nil {
+	if !IsNil(o.PopulateCache) {
 		toSerialize["populateCache"] = o.PopulateCache
 	}
-	if o.UseResultLevelCache != nil {
+	if !IsNil(o.UseResultLevelCache) {
 		toSerialize["useResultLevelCache"] = o.UseResultLevelCache
 	}
-	if o.PopulateResultLevelCache != nil {
+	if !IsNil(o.PopulateResultLevelCache) {
 		toSerialize["populateResultLevelCache"] = o.PopulateResultLevelCache
 	}
-	if o.BySegment != nil {
+	if !IsNil(o.BySegment) {
 		toSerialize["bySegment"] = o.BySegment
 	}
-	if o.Finalize != nil {
+	if !IsNil(o.Finalize) {
 		toSerialize["finalize"] = o.Finalize
 	}
-	if o.ChunkPeriod != nil {
+	if !IsNil(o.ChunkPeriod) {
 		toSerialize["chunkPeriod"] = o.ChunkPeriod
 	}
-	if o.MaxScatterGatherBytes != nil {
+	if !IsNil(o.MaxScatterGatherBytes) {
 		toSerialize["maxScatterGatherBytes"] = o.MaxScatterGatherBytes
 	}
-	if o.MaxQueuedBytes != nil {
+	if !IsNil(o.MaxQueuedBytes) {
 		toSerialize["maxQueuedBytes"] = o.MaxQueuedBytes
 	}
-	if o.SerializeDateTimeAsLong != nil {
+	if !IsNil(o.SerializeDateTimeAsLong) {
 		toSerialize["serializeDateTimeAsLong"] = o.SerializeDateTimeAsLong
 	}
-	if o.SerializeDateTimeAsLongInner != nil {
+	if !IsNil(o.SerializeDateTimeAsLongInner) {
 		toSerialize["serializeDateTimeAsLongInner"] = o.SerializeDateTimeAsLongInner
 	}
-	if o.EnableParallelMerge != nil {
+	if !IsNil(o.EnableParallelMerge) {
 		toSerialize["enableParallelMerge"] = o.EnableParallelMerge
 	}
-	if o.ParallelMergeParallelism != nil {
+	if !IsNil(o.ParallelMergeParallelism) {
 		toSerialize["parallelMergeParallelism"] = o.ParallelMergeParallelism
 	}
-	if o.ParallelMergeInitialYieldRows != nil {
+	if !IsNil(o.ParallelMergeInitialYieldRows) {
 		toSerialize["parallelMergeInitialYieldRows"] = o.ParallelMergeInitialYieldRows
 	}
-	if o.ParallelMergeSmallBatchRows != nil {
+	if !IsNil(o.ParallelMergeSmallBatchRows) {
 		toSerialize["parallelMergeSmallBatchRows"] = o.ParallelMergeSmallBatchRows
 	}
 
@@ -786,19 +797,23 @@ func (o TelemetryDruidQueryContext) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *TelemetryDruidQueryContext) UnmarshalJSON(bytes []byte) (err error) {
+func (o *TelemetryDruidQueryContext) UnmarshalJSON(data []byte) (err error) {
 	varTelemetryDruidQueryContext := _TelemetryDruidQueryContext{}
 
-	if err = json.Unmarshal(bytes, &varTelemetryDruidQueryContext); err == nil {
-		*o = TelemetryDruidQueryContext(varTelemetryDruidQueryContext)
+	err = json.Unmarshal(data, &varTelemetryDruidQueryContext)
+
+	if err != nil {
+		return err
 	}
+
+	*o = TelemetryDruidQueryContext(varTelemetryDruidQueryContext)
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "grandTotal")
 		delete(additionalProperties, "skipEmptyBuckets")
 		delete(additionalProperties, "timeout")

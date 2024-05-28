@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the KubernetesEsxiVirtualMachineInfraConfig type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &KubernetesEsxiVirtualMachineInfraConfig{}
 
 // KubernetesEsxiVirtualMachineInfraConfig Infrastructure provider allocation configuration for ESXi virtual machine Kubernetes nodes.
 type KubernetesEsxiVirtualMachineInfraConfig struct {
@@ -112,7 +116,7 @@ func (o *KubernetesEsxiVirtualMachineInfraConfig) SetObjectType(v string) {
 
 // GetCluster returns the Cluster field value if set, zero value otherwise.
 func (o *KubernetesEsxiVirtualMachineInfraConfig) GetCluster() string {
-	if o == nil || o.Cluster == nil {
+	if o == nil || IsNil(o.Cluster) {
 		var ret string
 		return ret
 	}
@@ -122,7 +126,7 @@ func (o *KubernetesEsxiVirtualMachineInfraConfig) GetCluster() string {
 // GetClusterOk returns a tuple with the Cluster field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *KubernetesEsxiVirtualMachineInfraConfig) GetClusterOk() (*string, bool) {
-	if o == nil || o.Cluster == nil {
+	if o == nil || IsNil(o.Cluster) {
 		return nil, false
 	}
 	return o.Cluster, true
@@ -130,7 +134,7 @@ func (o *KubernetesEsxiVirtualMachineInfraConfig) GetClusterOk() (*string, bool)
 
 // HasCluster returns a boolean if a field has been set.
 func (o *KubernetesEsxiVirtualMachineInfraConfig) HasCluster() bool {
-	if o != nil && o.Cluster != nil {
+	if o != nil && !IsNil(o.Cluster) {
 		return true
 	}
 
@@ -144,7 +148,7 @@ func (o *KubernetesEsxiVirtualMachineInfraConfig) SetCluster(v string) {
 
 // GetDatastore returns the Datastore field value if set, zero value otherwise.
 func (o *KubernetesEsxiVirtualMachineInfraConfig) GetDatastore() string {
-	if o == nil || o.Datastore == nil {
+	if o == nil || IsNil(o.Datastore) {
 		var ret string
 		return ret
 	}
@@ -154,7 +158,7 @@ func (o *KubernetesEsxiVirtualMachineInfraConfig) GetDatastore() string {
 // GetDatastoreOk returns a tuple with the Datastore field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *KubernetesEsxiVirtualMachineInfraConfig) GetDatastoreOk() (*string, bool) {
-	if o == nil || o.Datastore == nil {
+	if o == nil || IsNil(o.Datastore) {
 		return nil, false
 	}
 	return o.Datastore, true
@@ -162,7 +166,7 @@ func (o *KubernetesEsxiVirtualMachineInfraConfig) GetDatastoreOk() (*string, boo
 
 // HasDatastore returns a boolean if a field has been set.
 func (o *KubernetesEsxiVirtualMachineInfraConfig) HasDatastore() bool {
-	if o != nil && o.Datastore != nil {
+	if o != nil && !IsNil(o.Datastore) {
 		return true
 	}
 
@@ -176,7 +180,7 @@ func (o *KubernetesEsxiVirtualMachineInfraConfig) SetDatastore(v string) {
 
 // GetIsPassphraseSet returns the IsPassphraseSet field value if set, zero value otherwise.
 func (o *KubernetesEsxiVirtualMachineInfraConfig) GetIsPassphraseSet() bool {
-	if o == nil || o.IsPassphraseSet == nil {
+	if o == nil || IsNil(o.IsPassphraseSet) {
 		var ret bool
 		return ret
 	}
@@ -186,7 +190,7 @@ func (o *KubernetesEsxiVirtualMachineInfraConfig) GetIsPassphraseSet() bool {
 // GetIsPassphraseSetOk returns a tuple with the IsPassphraseSet field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *KubernetesEsxiVirtualMachineInfraConfig) GetIsPassphraseSetOk() (*bool, bool) {
-	if o == nil || o.IsPassphraseSet == nil {
+	if o == nil || IsNil(o.IsPassphraseSet) {
 		return nil, false
 	}
 	return o.IsPassphraseSet, true
@@ -194,7 +198,7 @@ func (o *KubernetesEsxiVirtualMachineInfraConfig) GetIsPassphraseSetOk() (*bool,
 
 // HasIsPassphraseSet returns a boolean if a field has been set.
 func (o *KubernetesEsxiVirtualMachineInfraConfig) HasIsPassphraseSet() bool {
-	if o != nil && o.IsPassphraseSet != nil {
+	if o != nil && !IsNil(o.IsPassphraseSet) {
 		return true
 	}
 
@@ -208,7 +212,7 @@ func (o *KubernetesEsxiVirtualMachineInfraConfig) SetIsPassphraseSet(v bool) {
 
 // GetPassphrase returns the Passphrase field value if set, zero value otherwise.
 func (o *KubernetesEsxiVirtualMachineInfraConfig) GetPassphrase() string {
-	if o == nil || o.Passphrase == nil {
+	if o == nil || IsNil(o.Passphrase) {
 		var ret string
 		return ret
 	}
@@ -218,7 +222,7 @@ func (o *KubernetesEsxiVirtualMachineInfraConfig) GetPassphrase() string {
 // GetPassphraseOk returns a tuple with the Passphrase field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *KubernetesEsxiVirtualMachineInfraConfig) GetPassphraseOk() (*string, bool) {
-	if o == nil || o.Passphrase == nil {
+	if o == nil || IsNil(o.Passphrase) {
 		return nil, false
 	}
 	return o.Passphrase, true
@@ -226,7 +230,7 @@ func (o *KubernetesEsxiVirtualMachineInfraConfig) GetPassphraseOk() (*string, bo
 
 // HasPassphrase returns a boolean if a field has been set.
 func (o *KubernetesEsxiVirtualMachineInfraConfig) HasPassphrase() bool {
-	if o != nil && o.Passphrase != nil {
+	if o != nil && !IsNil(o.Passphrase) {
 		return true
 	}
 
@@ -240,7 +244,7 @@ func (o *KubernetesEsxiVirtualMachineInfraConfig) SetPassphrase(v string) {
 
 // GetResourcePool returns the ResourcePool field value if set, zero value otherwise.
 func (o *KubernetesEsxiVirtualMachineInfraConfig) GetResourcePool() string {
-	if o == nil || o.ResourcePool == nil {
+	if o == nil || IsNil(o.ResourcePool) {
 		var ret string
 		return ret
 	}
@@ -250,7 +254,7 @@ func (o *KubernetesEsxiVirtualMachineInfraConfig) GetResourcePool() string {
 // GetResourcePoolOk returns a tuple with the ResourcePool field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *KubernetesEsxiVirtualMachineInfraConfig) GetResourcePoolOk() (*string, bool) {
-	if o == nil || o.ResourcePool == nil {
+	if o == nil || IsNil(o.ResourcePool) {
 		return nil, false
 	}
 	return o.ResourcePool, true
@@ -258,7 +262,7 @@ func (o *KubernetesEsxiVirtualMachineInfraConfig) GetResourcePoolOk() (*string, 
 
 // HasResourcePool returns a boolean if a field has been set.
 func (o *KubernetesEsxiVirtualMachineInfraConfig) HasResourcePool() bool {
-	if o != nil && o.ResourcePool != nil {
+	if o != nil && !IsNil(o.ResourcePool) {
 		return true
 	}
 
@@ -271,34 +275,38 @@ func (o *KubernetesEsxiVirtualMachineInfraConfig) SetResourcePool(v string) {
 }
 
 func (o KubernetesEsxiVirtualMachineInfraConfig) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o KubernetesEsxiVirtualMachineInfraConfig) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedKubernetesBaseVirtualMachineInfraConfig, errKubernetesBaseVirtualMachineInfraConfig := json.Marshal(o.KubernetesBaseVirtualMachineInfraConfig)
 	if errKubernetesBaseVirtualMachineInfraConfig != nil {
-		return []byte{}, errKubernetesBaseVirtualMachineInfraConfig
+		return map[string]interface{}{}, errKubernetesBaseVirtualMachineInfraConfig
 	}
 	errKubernetesBaseVirtualMachineInfraConfig = json.Unmarshal([]byte(serializedKubernetesBaseVirtualMachineInfraConfig), &toSerialize)
 	if errKubernetesBaseVirtualMachineInfraConfig != nil {
-		return []byte{}, errKubernetesBaseVirtualMachineInfraConfig
+		return map[string]interface{}{}, errKubernetesBaseVirtualMachineInfraConfig
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Cluster != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Cluster) {
 		toSerialize["Cluster"] = o.Cluster
 	}
-	if o.Datastore != nil {
+	if !IsNil(o.Datastore) {
 		toSerialize["Datastore"] = o.Datastore
 	}
-	if o.IsPassphraseSet != nil {
+	if !IsNil(o.IsPassphraseSet) {
 		toSerialize["IsPassphraseSet"] = o.IsPassphraseSet
 	}
-	if o.Passphrase != nil {
+	if !IsNil(o.Passphrase) {
 		toSerialize["Passphrase"] = o.Passphrase
 	}
-	if o.ResourcePool != nil {
+	if !IsNil(o.ResourcePool) {
 		toSerialize["ResourcePool"] = o.ResourcePool
 	}
 
@@ -306,10 +314,32 @@ func (o KubernetesEsxiVirtualMachineInfraConfig) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *KubernetesEsxiVirtualMachineInfraConfig) UnmarshalJSON(bytes []byte) (err error) {
+func (o *KubernetesEsxiVirtualMachineInfraConfig) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type KubernetesEsxiVirtualMachineInfraConfigWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -329,7 +359,7 @@ func (o *KubernetesEsxiVirtualMachineInfraConfig) UnmarshalJSON(bytes []byte) (e
 
 	varKubernetesEsxiVirtualMachineInfraConfigWithoutEmbeddedStruct := KubernetesEsxiVirtualMachineInfraConfigWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varKubernetesEsxiVirtualMachineInfraConfigWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varKubernetesEsxiVirtualMachineInfraConfigWithoutEmbeddedStruct)
 	if err == nil {
 		varKubernetesEsxiVirtualMachineInfraConfig := _KubernetesEsxiVirtualMachineInfraConfig{}
 		varKubernetesEsxiVirtualMachineInfraConfig.ClassId = varKubernetesEsxiVirtualMachineInfraConfigWithoutEmbeddedStruct.ClassId
@@ -346,7 +376,7 @@ func (o *KubernetesEsxiVirtualMachineInfraConfig) UnmarshalJSON(bytes []byte) (e
 
 	varKubernetesEsxiVirtualMachineInfraConfig := _KubernetesEsxiVirtualMachineInfraConfig{}
 
-	err = json.Unmarshal(bytes, &varKubernetesEsxiVirtualMachineInfraConfig)
+	err = json.Unmarshal(data, &varKubernetesEsxiVirtualMachineInfraConfig)
 	if err == nil {
 		o.KubernetesBaseVirtualMachineInfraConfig = varKubernetesEsxiVirtualMachineInfraConfig.KubernetesBaseVirtualMachineInfraConfig
 	} else {
@@ -355,7 +385,7 @@ func (o *KubernetesEsxiVirtualMachineInfraConfig) UnmarshalJSON(bytes []byte) (e
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Cluster")

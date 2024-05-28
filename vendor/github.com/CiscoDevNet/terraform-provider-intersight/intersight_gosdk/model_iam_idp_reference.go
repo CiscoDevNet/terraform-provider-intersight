@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the IamIdpReference type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &IamIdpReference{}
 
 // IamIdpReference Default Cisco IdP for authentication.
 type IamIdpReference struct {
@@ -31,9 +35,9 @@ type IamIdpReference struct {
 	// The flag represents if the second factor of authentication is required for Cisco IdP users.
 	MultiFactorAuthentication *bool `json:"MultiFactorAuthentication,omitempty"`
 	// Cisco IdP reference in an account.
-	Name    *string                 `json:"Name,omitempty"`
-	Account *IamAccountRelationship `json:"Account,omitempty"`
-	Idp     *IamIdpRelationship     `json:"Idp,omitempty"`
+	Name    *string                        `json:"Name,omitempty"`
+	Account NullableIamAccountRelationship `json:"Account,omitempty"`
+	Idp     NullableIamIdpRelationship     `json:"Idp,omitempty"`
 	// An array of relationships to iamUserPreference resources.
 	UserPreferences []IamUserPreferenceRelationship `json:"UserPreferences,omitempty"`
 	// An array of relationships to iamUserSetting resources.
@@ -124,7 +128,7 @@ func (o *IamIdpReference) SetObjectType(v string) {
 
 // GetDomainName returns the DomainName field value if set, zero value otherwise.
 func (o *IamIdpReference) GetDomainName() string {
-	if o == nil || o.DomainName == nil {
+	if o == nil || IsNil(o.DomainName) {
 		var ret string
 		return ret
 	}
@@ -134,7 +138,7 @@ func (o *IamIdpReference) GetDomainName() string {
 // GetDomainNameOk returns a tuple with the DomainName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IamIdpReference) GetDomainNameOk() (*string, bool) {
-	if o == nil || o.DomainName == nil {
+	if o == nil || IsNil(o.DomainName) {
 		return nil, false
 	}
 	return o.DomainName, true
@@ -142,7 +146,7 @@ func (o *IamIdpReference) GetDomainNameOk() (*string, bool) {
 
 // HasDomainName returns a boolean if a field has been set.
 func (o *IamIdpReference) HasDomainName() bool {
-	if o != nil && o.DomainName != nil {
+	if o != nil && !IsNil(o.DomainName) {
 		return true
 	}
 
@@ -156,7 +160,7 @@ func (o *IamIdpReference) SetDomainName(v string) {
 
 // GetIdpEntityId returns the IdpEntityId field value if set, zero value otherwise.
 func (o *IamIdpReference) GetIdpEntityId() string {
-	if o == nil || o.IdpEntityId == nil {
+	if o == nil || IsNil(o.IdpEntityId) {
 		var ret string
 		return ret
 	}
@@ -166,7 +170,7 @@ func (o *IamIdpReference) GetIdpEntityId() string {
 // GetIdpEntityIdOk returns a tuple with the IdpEntityId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IamIdpReference) GetIdpEntityIdOk() (*string, bool) {
-	if o == nil || o.IdpEntityId == nil {
+	if o == nil || IsNil(o.IdpEntityId) {
 		return nil, false
 	}
 	return o.IdpEntityId, true
@@ -174,7 +178,7 @@ func (o *IamIdpReference) GetIdpEntityIdOk() (*string, bool) {
 
 // HasIdpEntityId returns a boolean if a field has been set.
 func (o *IamIdpReference) HasIdpEntityId() bool {
-	if o != nil && o.IdpEntityId != nil {
+	if o != nil && !IsNil(o.IdpEntityId) {
 		return true
 	}
 
@@ -188,7 +192,7 @@ func (o *IamIdpReference) SetIdpEntityId(v string) {
 
 // GetMultiFactorAuthentication returns the MultiFactorAuthentication field value if set, zero value otherwise.
 func (o *IamIdpReference) GetMultiFactorAuthentication() bool {
-	if o == nil || o.MultiFactorAuthentication == nil {
+	if o == nil || IsNil(o.MultiFactorAuthentication) {
 		var ret bool
 		return ret
 	}
@@ -198,7 +202,7 @@ func (o *IamIdpReference) GetMultiFactorAuthentication() bool {
 // GetMultiFactorAuthenticationOk returns a tuple with the MultiFactorAuthentication field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IamIdpReference) GetMultiFactorAuthenticationOk() (*bool, bool) {
-	if o == nil || o.MultiFactorAuthentication == nil {
+	if o == nil || IsNil(o.MultiFactorAuthentication) {
 		return nil, false
 	}
 	return o.MultiFactorAuthentication, true
@@ -206,7 +210,7 @@ func (o *IamIdpReference) GetMultiFactorAuthenticationOk() (*bool, bool) {
 
 // HasMultiFactorAuthentication returns a boolean if a field has been set.
 func (o *IamIdpReference) HasMultiFactorAuthentication() bool {
-	if o != nil && o.MultiFactorAuthentication != nil {
+	if o != nil && !IsNil(o.MultiFactorAuthentication) {
 		return true
 	}
 
@@ -220,7 +224,7 @@ func (o *IamIdpReference) SetMultiFactorAuthentication(v bool) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *IamIdpReference) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -230,7 +234,7 @@ func (o *IamIdpReference) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IamIdpReference) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -238,7 +242,7 @@ func (o *IamIdpReference) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *IamIdpReference) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -250,68 +254,90 @@ func (o *IamIdpReference) SetName(v string) {
 	o.Name = &v
 }
 
-// GetAccount returns the Account field value if set, zero value otherwise.
+// GetAccount returns the Account field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *IamIdpReference) GetAccount() IamAccountRelationship {
-	if o == nil || o.Account == nil {
+	if o == nil || IsNil(o.Account.Get()) {
 		var ret IamAccountRelationship
 		return ret
 	}
-	return *o.Account
+	return *o.Account.Get()
 }
 
 // GetAccountOk returns a tuple with the Account field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *IamIdpReference) GetAccountOk() (*IamAccountRelationship, bool) {
-	if o == nil || o.Account == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Account, true
+	return o.Account.Get(), o.Account.IsSet()
 }
 
 // HasAccount returns a boolean if a field has been set.
 func (o *IamIdpReference) HasAccount() bool {
-	if o != nil && o.Account != nil {
+	if o != nil && o.Account.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetAccount gets a reference to the given IamAccountRelationship and assigns it to the Account field.
+// SetAccount gets a reference to the given NullableIamAccountRelationship and assigns it to the Account field.
 func (o *IamIdpReference) SetAccount(v IamAccountRelationship) {
-	o.Account = &v
+	o.Account.Set(&v)
 }
 
-// GetIdp returns the Idp field value if set, zero value otherwise.
+// SetAccountNil sets the value for Account to be an explicit nil
+func (o *IamIdpReference) SetAccountNil() {
+	o.Account.Set(nil)
+}
+
+// UnsetAccount ensures that no value is present for Account, not even an explicit nil
+func (o *IamIdpReference) UnsetAccount() {
+	o.Account.Unset()
+}
+
+// GetIdp returns the Idp field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *IamIdpReference) GetIdp() IamIdpRelationship {
-	if o == nil || o.Idp == nil {
+	if o == nil || IsNil(o.Idp.Get()) {
 		var ret IamIdpRelationship
 		return ret
 	}
-	return *o.Idp
+	return *o.Idp.Get()
 }
 
 // GetIdpOk returns a tuple with the Idp field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *IamIdpReference) GetIdpOk() (*IamIdpRelationship, bool) {
-	if o == nil || o.Idp == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Idp, true
+	return o.Idp.Get(), o.Idp.IsSet()
 }
 
 // HasIdp returns a boolean if a field has been set.
 func (o *IamIdpReference) HasIdp() bool {
-	if o != nil && o.Idp != nil {
+	if o != nil && o.Idp.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetIdp gets a reference to the given IamIdpRelationship and assigns it to the Idp field.
+// SetIdp gets a reference to the given NullableIamIdpRelationship and assigns it to the Idp field.
 func (o *IamIdpReference) SetIdp(v IamIdpRelationship) {
-	o.Idp = &v
+	o.Idp.Set(&v)
+}
+
+// SetIdpNil sets the value for Idp to be an explicit nil
+func (o *IamIdpReference) SetIdpNil() {
+	o.Idp.Set(nil)
+}
+
+// UnsetIdp ensures that no value is present for Idp, not even an explicit nil
+func (o *IamIdpReference) UnsetIdp() {
+	o.Idp.Unset()
 }
 
 // GetUserPreferences returns the UserPreferences field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -327,7 +353,7 @@ func (o *IamIdpReference) GetUserPreferences() []IamUserPreferenceRelationship {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *IamIdpReference) GetUserPreferencesOk() ([]IamUserPreferenceRelationship, bool) {
-	if o == nil || o.UserPreferences == nil {
+	if o == nil || IsNil(o.UserPreferences) {
 		return nil, false
 	}
 	return o.UserPreferences, true
@@ -335,7 +361,7 @@ func (o *IamIdpReference) GetUserPreferencesOk() ([]IamUserPreferenceRelationshi
 
 // HasUserPreferences returns a boolean if a field has been set.
 func (o *IamIdpReference) HasUserPreferences() bool {
-	if o != nil && o.UserPreferences != nil {
+	if o != nil && IsNil(o.UserPreferences) {
 		return true
 	}
 
@@ -360,7 +386,7 @@ func (o *IamIdpReference) GetUserSettings() []IamUserSettingRelationship {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *IamIdpReference) GetUserSettingsOk() ([]IamUserSettingRelationship, bool) {
-	if o == nil || o.UserSettings == nil {
+	if o == nil || IsNil(o.UserSettings) {
 		return nil, false
 	}
 	return o.UserSettings, true
@@ -368,7 +394,7 @@ func (o *IamIdpReference) GetUserSettingsOk() ([]IamUserSettingRelationship, boo
 
 // HasUserSettings returns a boolean if a field has been set.
 func (o *IamIdpReference) HasUserSettings() bool {
-	if o != nil && o.UserSettings != nil {
+	if o != nil && IsNil(o.UserSettings) {
 		return true
 	}
 
@@ -393,7 +419,7 @@ func (o *IamIdpReference) GetUsergroups() []IamUserGroupRelationship {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *IamIdpReference) GetUsergroupsOk() ([]IamUserGroupRelationship, bool) {
-	if o == nil || o.Usergroups == nil {
+	if o == nil || IsNil(o.Usergroups) {
 		return nil, false
 	}
 	return o.Usergroups, true
@@ -401,7 +427,7 @@ func (o *IamIdpReference) GetUsergroupsOk() ([]IamUserGroupRelationship, bool) {
 
 // HasUsergroups returns a boolean if a field has been set.
 func (o *IamIdpReference) HasUsergroups() bool {
-	if o != nil && o.Usergroups != nil {
+	if o != nil && IsNil(o.Usergroups) {
 		return true
 	}
 
@@ -426,7 +452,7 @@ func (o *IamIdpReference) GetUsers() []IamUserRelationship {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *IamIdpReference) GetUsersOk() ([]IamUserRelationship, bool) {
-	if o == nil || o.Users == nil {
+	if o == nil || IsNil(o.Users) {
 		return nil, false
 	}
 	return o.Users, true
@@ -434,7 +460,7 @@ func (o *IamIdpReference) GetUsersOk() ([]IamUserRelationship, bool) {
 
 // HasUsers returns a boolean if a field has been set.
 func (o *IamIdpReference) HasUsers() bool {
-	if o != nil && o.Users != nil {
+	if o != nil && IsNil(o.Users) {
 		return true
 	}
 
@@ -447,38 +473,42 @@ func (o *IamIdpReference) SetUsers(v []IamUserRelationship) {
 }
 
 func (o IamIdpReference) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o IamIdpReference) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.DomainName != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.DomainName) {
 		toSerialize["DomainName"] = o.DomainName
 	}
-	if o.IdpEntityId != nil {
+	if !IsNil(o.IdpEntityId) {
 		toSerialize["IdpEntityId"] = o.IdpEntityId
 	}
-	if o.MultiFactorAuthentication != nil {
+	if !IsNil(o.MultiFactorAuthentication) {
 		toSerialize["MultiFactorAuthentication"] = o.MultiFactorAuthentication
 	}
-	if o.Name != nil {
+	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
 	}
-	if o.Account != nil {
-		toSerialize["Account"] = o.Account
+	if o.Account.IsSet() {
+		toSerialize["Account"] = o.Account.Get()
 	}
-	if o.Idp != nil {
-		toSerialize["Idp"] = o.Idp
+	if o.Idp.IsSet() {
+		toSerialize["Idp"] = o.Idp.Get()
 	}
 	if o.UserPreferences != nil {
 		toSerialize["UserPreferences"] = o.UserPreferences
@@ -497,10 +527,32 @@ func (o IamIdpReference) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *IamIdpReference) UnmarshalJSON(bytes []byte) (err error) {
+func (o *IamIdpReference) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type IamIdpReferenceWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -513,9 +565,9 @@ func (o *IamIdpReference) UnmarshalJSON(bytes []byte) (err error) {
 		// The flag represents if the second factor of authentication is required for Cisco IdP users.
 		MultiFactorAuthentication *bool `json:"MultiFactorAuthentication,omitempty"`
 		// Cisco IdP reference in an account.
-		Name    *string                 `json:"Name,omitempty"`
-		Account *IamAccountRelationship `json:"Account,omitempty"`
-		Idp     *IamIdpRelationship     `json:"Idp,omitempty"`
+		Name    *string                        `json:"Name,omitempty"`
+		Account NullableIamAccountRelationship `json:"Account,omitempty"`
+		Idp     NullableIamIdpRelationship     `json:"Idp,omitempty"`
 		// An array of relationships to iamUserPreference resources.
 		UserPreferences []IamUserPreferenceRelationship `json:"UserPreferences,omitempty"`
 		// An array of relationships to iamUserSetting resources.
@@ -528,7 +580,7 @@ func (o *IamIdpReference) UnmarshalJSON(bytes []byte) (err error) {
 
 	varIamIdpReferenceWithoutEmbeddedStruct := IamIdpReferenceWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varIamIdpReferenceWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varIamIdpReferenceWithoutEmbeddedStruct)
 	if err == nil {
 		varIamIdpReference := _IamIdpReference{}
 		varIamIdpReference.ClassId = varIamIdpReferenceWithoutEmbeddedStruct.ClassId
@@ -550,7 +602,7 @@ func (o *IamIdpReference) UnmarshalJSON(bytes []byte) (err error) {
 
 	varIamIdpReference := _IamIdpReference{}
 
-	err = json.Unmarshal(bytes, &varIamIdpReference)
+	err = json.Unmarshal(data, &varIamIdpReference)
 	if err == nil {
 		o.MoBaseMo = varIamIdpReference.MoBaseMo
 	} else {
@@ -559,7 +611,7 @@ func (o *IamIdpReference) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "DomainName")

@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **PolicyEnabled** | Pointer to **bool** | Indicates whether HealthCheck schedule policy is enabled on the HyperFlex cluster. | [optional] 
 **ScheduleInterval** | Pointer to **int32** | The frequency at which the health checks are run on the HyperFlex cluster. * &#x60;86400&#x60; - Execute the health check every 24 hours. * &#x60;43200&#x60; - Execute the health check every 12 hours. * &#x60;21600&#x60; - Execute the health check every 6 hours. * &#x60;10800&#x60; - Execute the health check every 3 hours. * &#x60;3600&#x60; - Execute the health check every 1 hours. * &#x60;300&#x60; - Execute the health check every 5 minutes. * &#x60;0&#x60; - Disable the continuous health check. | [optional] [default to 86400]
 **Uuid** | Pointer to **string** | The unique identifier of the health check policy. | [optional] 
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -248,6 +248,16 @@ SetRegisteredDevice sets RegisteredDevice field to given value.
 
 HasRegisteredDevice returns a boolean if a field has been set.
 
+### SetRegisteredDeviceNil
+
+`func (o *HyperflexHealthCheckSchedulePolicy) SetRegisteredDeviceNil(b bool)`
+
+ SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+
+### UnsetRegisteredDevice
+`func (o *HyperflexHealthCheckSchedulePolicy) UnsetRegisteredDevice()`
+
+UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

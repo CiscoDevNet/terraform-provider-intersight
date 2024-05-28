@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the SnmpTrap type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &SnmpTrap{}
 
 // SnmpTrap Complex type that models a trap message sent from an agent to the manager.
 type SnmpTrap struct {
@@ -136,7 +140,7 @@ func (o *SnmpTrap) SetObjectType(v string) {
 
 // GetCommunity returns the Community field value if set, zero value otherwise.
 func (o *SnmpTrap) GetCommunity() string {
-	if o == nil || o.Community == nil {
+	if o == nil || IsNil(o.Community) {
 		var ret string
 		return ret
 	}
@@ -146,7 +150,7 @@ func (o *SnmpTrap) GetCommunity() string {
 // GetCommunityOk returns a tuple with the Community field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SnmpTrap) GetCommunityOk() (*string, bool) {
-	if o == nil || o.Community == nil {
+	if o == nil || IsNil(o.Community) {
 		return nil, false
 	}
 	return o.Community, true
@@ -154,7 +158,7 @@ func (o *SnmpTrap) GetCommunityOk() (*string, bool) {
 
 // HasCommunity returns a boolean if a field has been set.
 func (o *SnmpTrap) HasCommunity() bool {
-	if o != nil && o.Community != nil {
+	if o != nil && !IsNil(o.Community) {
 		return true
 	}
 
@@ -168,7 +172,7 @@ func (o *SnmpTrap) SetCommunity(v string) {
 
 // GetDestination returns the Destination field value if set, zero value otherwise.
 func (o *SnmpTrap) GetDestination() string {
-	if o == nil || o.Destination == nil {
+	if o == nil || IsNil(o.Destination) {
 		var ret string
 		return ret
 	}
@@ -178,7 +182,7 @@ func (o *SnmpTrap) GetDestination() string {
 // GetDestinationOk returns a tuple with the Destination field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SnmpTrap) GetDestinationOk() (*string, bool) {
-	if o == nil || o.Destination == nil {
+	if o == nil || IsNil(o.Destination) {
 		return nil, false
 	}
 	return o.Destination, true
@@ -186,7 +190,7 @@ func (o *SnmpTrap) GetDestinationOk() (*string, bool) {
 
 // HasDestination returns a boolean if a field has been set.
 func (o *SnmpTrap) HasDestination() bool {
-	if o != nil && o.Destination != nil {
+	if o != nil && !IsNil(o.Destination) {
 		return true
 	}
 
@@ -200,7 +204,7 @@ func (o *SnmpTrap) SetDestination(v string) {
 
 // GetEnabled returns the Enabled field value if set, zero value otherwise.
 func (o *SnmpTrap) GetEnabled() bool {
-	if o == nil || o.Enabled == nil {
+	if o == nil || IsNil(o.Enabled) {
 		var ret bool
 		return ret
 	}
@@ -210,7 +214,7 @@ func (o *SnmpTrap) GetEnabled() bool {
 // GetEnabledOk returns a tuple with the Enabled field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SnmpTrap) GetEnabledOk() (*bool, bool) {
-	if o == nil || o.Enabled == nil {
+	if o == nil || IsNil(o.Enabled) {
 		return nil, false
 	}
 	return o.Enabled, true
@@ -218,7 +222,7 @@ func (o *SnmpTrap) GetEnabledOk() (*bool, bool) {
 
 // HasEnabled returns a boolean if a field has been set.
 func (o *SnmpTrap) HasEnabled() bool {
-	if o != nil && o.Enabled != nil {
+	if o != nil && !IsNil(o.Enabled) {
 		return true
 	}
 
@@ -232,7 +236,7 @@ func (o *SnmpTrap) SetEnabled(v bool) {
 
 // GetPort returns the Port field value if set, zero value otherwise.
 func (o *SnmpTrap) GetPort() int64 {
-	if o == nil || o.Port == nil {
+	if o == nil || IsNil(o.Port) {
 		var ret int64
 		return ret
 	}
@@ -242,7 +246,7 @@ func (o *SnmpTrap) GetPort() int64 {
 // GetPortOk returns a tuple with the Port field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SnmpTrap) GetPortOk() (*int64, bool) {
-	if o == nil || o.Port == nil {
+	if o == nil || IsNil(o.Port) {
 		return nil, false
 	}
 	return o.Port, true
@@ -250,7 +254,7 @@ func (o *SnmpTrap) GetPortOk() (*int64, bool) {
 
 // HasPort returns a boolean if a field has been set.
 func (o *SnmpTrap) HasPort() bool {
-	if o != nil && o.Port != nil {
+	if o != nil && !IsNil(o.Port) {
 		return true
 	}
 
@@ -264,7 +268,7 @@ func (o *SnmpTrap) SetPort(v int64) {
 
 // GetSecurityLevel returns the SecurityLevel field value if set, zero value otherwise.
 func (o *SnmpTrap) GetSecurityLevel() string {
-	if o == nil || o.SecurityLevel == nil {
+	if o == nil || IsNil(o.SecurityLevel) {
 		var ret string
 		return ret
 	}
@@ -274,7 +278,7 @@ func (o *SnmpTrap) GetSecurityLevel() string {
 // GetSecurityLevelOk returns a tuple with the SecurityLevel field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SnmpTrap) GetSecurityLevelOk() (*string, bool) {
-	if o == nil || o.SecurityLevel == nil {
+	if o == nil || IsNil(o.SecurityLevel) {
 		return nil, false
 	}
 	return o.SecurityLevel, true
@@ -282,7 +286,7 @@ func (o *SnmpTrap) GetSecurityLevelOk() (*string, bool) {
 
 // HasSecurityLevel returns a boolean if a field has been set.
 func (o *SnmpTrap) HasSecurityLevel() bool {
-	if o != nil && o.SecurityLevel != nil {
+	if o != nil && !IsNil(o.SecurityLevel) {
 		return true
 	}
 
@@ -296,7 +300,7 @@ func (o *SnmpTrap) SetSecurityLevel(v string) {
 
 // GetType returns the Type field value if set, zero value otherwise.
 func (o *SnmpTrap) GetType() string {
-	if o == nil || o.Type == nil {
+	if o == nil || IsNil(o.Type) {
 		var ret string
 		return ret
 	}
@@ -306,7 +310,7 @@ func (o *SnmpTrap) GetType() string {
 // GetTypeOk returns a tuple with the Type field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SnmpTrap) GetTypeOk() (*string, bool) {
-	if o == nil || o.Type == nil {
+	if o == nil || IsNil(o.Type) {
 		return nil, false
 	}
 	return o.Type, true
@@ -314,7 +318,7 @@ func (o *SnmpTrap) GetTypeOk() (*string, bool) {
 
 // HasType returns a boolean if a field has been set.
 func (o *SnmpTrap) HasType() bool {
-	if o != nil && o.Type != nil {
+	if o != nil && !IsNil(o.Type) {
 		return true
 	}
 
@@ -328,7 +332,7 @@ func (o *SnmpTrap) SetType(v string) {
 
 // GetUser returns the User field value if set, zero value otherwise.
 func (o *SnmpTrap) GetUser() string {
-	if o == nil || o.User == nil {
+	if o == nil || IsNil(o.User) {
 		var ret string
 		return ret
 	}
@@ -338,7 +342,7 @@ func (o *SnmpTrap) GetUser() string {
 // GetUserOk returns a tuple with the User field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SnmpTrap) GetUserOk() (*string, bool) {
-	if o == nil || o.User == nil {
+	if o == nil || IsNil(o.User) {
 		return nil, false
 	}
 	return o.User, true
@@ -346,7 +350,7 @@ func (o *SnmpTrap) GetUserOk() (*string, bool) {
 
 // HasUser returns a boolean if a field has been set.
 func (o *SnmpTrap) HasUser() bool {
-	if o != nil && o.User != nil {
+	if o != nil && !IsNil(o.User) {
 		return true
 	}
 
@@ -360,7 +364,7 @@ func (o *SnmpTrap) SetUser(v string) {
 
 // GetVersion returns the Version field value if set, zero value otherwise.
 func (o *SnmpTrap) GetVersion() string {
-	if o == nil || o.Version == nil {
+	if o == nil || IsNil(o.Version) {
 		var ret string
 		return ret
 	}
@@ -370,7 +374,7 @@ func (o *SnmpTrap) GetVersion() string {
 // GetVersionOk returns a tuple with the Version field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SnmpTrap) GetVersionOk() (*string, bool) {
-	if o == nil || o.Version == nil {
+	if o == nil || IsNil(o.Version) {
 		return nil, false
 	}
 	return o.Version, true
@@ -378,7 +382,7 @@ func (o *SnmpTrap) GetVersionOk() (*string, bool) {
 
 // HasVersion returns a boolean if a field has been set.
 func (o *SnmpTrap) HasVersion() bool {
-	if o != nil && o.Version != nil {
+	if o != nil && !IsNil(o.Version) {
 		return true
 	}
 
@@ -392,7 +396,7 @@ func (o *SnmpTrap) SetVersion(v string) {
 
 // GetVrfName returns the VrfName field value if set, zero value otherwise.
 func (o *SnmpTrap) GetVrfName() string {
-	if o == nil || o.VrfName == nil {
+	if o == nil || IsNil(o.VrfName) {
 		var ret string
 		return ret
 	}
@@ -402,7 +406,7 @@ func (o *SnmpTrap) GetVrfName() string {
 // GetVrfNameOk returns a tuple with the VrfName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SnmpTrap) GetVrfNameOk() (*string, bool) {
-	if o == nil || o.VrfName == nil {
+	if o == nil || IsNil(o.VrfName) {
 		return nil, false
 	}
 	return o.VrfName, true
@@ -410,7 +414,7 @@ func (o *SnmpTrap) GetVrfNameOk() (*string, bool) {
 
 // HasVrfName returns a boolean if a field has been set.
 func (o *SnmpTrap) HasVrfName() bool {
-	if o != nil && o.VrfName != nil {
+	if o != nil && !IsNil(o.VrfName) {
 		return true
 	}
 
@@ -423,46 +427,50 @@ func (o *SnmpTrap) SetVrfName(v string) {
 }
 
 func (o SnmpTrap) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o SnmpTrap) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
 	errMoBaseComplexType = json.Unmarshal([]byte(serializedMoBaseComplexType), &toSerialize)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Community != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Community) {
 		toSerialize["Community"] = o.Community
 	}
-	if o.Destination != nil {
+	if !IsNil(o.Destination) {
 		toSerialize["Destination"] = o.Destination
 	}
-	if o.Enabled != nil {
+	if !IsNil(o.Enabled) {
 		toSerialize["Enabled"] = o.Enabled
 	}
-	if o.Port != nil {
+	if !IsNil(o.Port) {
 		toSerialize["Port"] = o.Port
 	}
-	if o.SecurityLevel != nil {
+	if !IsNil(o.SecurityLevel) {
 		toSerialize["SecurityLevel"] = o.SecurityLevel
 	}
-	if o.Type != nil {
+	if !IsNil(o.Type) {
 		toSerialize["Type"] = o.Type
 	}
-	if o.User != nil {
+	if !IsNil(o.User) {
 		toSerialize["User"] = o.User
 	}
-	if o.Version != nil {
+	if !IsNil(o.Version) {
 		toSerialize["Version"] = o.Version
 	}
-	if o.VrfName != nil {
+	if !IsNil(o.VrfName) {
 		toSerialize["VrfName"] = o.VrfName
 	}
 
@@ -470,10 +478,32 @@ func (o SnmpTrap) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *SnmpTrap) UnmarshalJSON(bytes []byte) (err error) {
+func (o *SnmpTrap) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type SnmpTrapWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -501,7 +531,7 @@ func (o *SnmpTrap) UnmarshalJSON(bytes []byte) (err error) {
 
 	varSnmpTrapWithoutEmbeddedStruct := SnmpTrapWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varSnmpTrapWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varSnmpTrapWithoutEmbeddedStruct)
 	if err == nil {
 		varSnmpTrap := _SnmpTrap{}
 		varSnmpTrap.ClassId = varSnmpTrapWithoutEmbeddedStruct.ClassId
@@ -522,7 +552,7 @@ func (o *SnmpTrap) UnmarshalJSON(bytes []byte) (err error) {
 
 	varSnmpTrap := _SnmpTrap{}
 
-	err = json.Unmarshal(bytes, &varSnmpTrap)
+	err = json.Unmarshal(data, &varSnmpTrap)
 	if err == nil {
 		o.MoBaseComplexType = varSnmpTrap.MoBaseComplexType
 	} else {
@@ -531,7 +561,7 @@ func (o *SnmpTrap) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Community")

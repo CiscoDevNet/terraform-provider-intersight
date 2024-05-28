@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the AdapterExtEthInterface type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &AdapterExtEthInterface{}
 
 // AdapterExtEthInterface Physical port of a virtual interface card.
 type AdapterExtEthInterface struct {
@@ -44,10 +48,10 @@ type AdapterExtEthInterface struct {
 	// Peer Slot Id attached to an External Ethernet Interface.
 	PeerSlotId *int64 `json:"PeerSlotId,omitempty"`
 	// SwitchId attached to an External Ethernet Interface.
-	SwitchId             *string                              `json:"SwitchId,omitempty"`
-	AdapterUnit          *AdapterUnitRelationship             `json:"AdapterUnit,omitempty"`
-	InventoryDeviceInfo  *InventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
-	RegisteredDevice     *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+	SwitchId             *string                                     `json:"SwitchId,omitempty"`
+	AdapterUnit          NullableAdapterUnitRelationship             `json:"AdapterUnit,omitempty"`
+	InventoryDeviceInfo  NullableInventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
+	RegisteredDevice     NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -126,7 +130,7 @@ func (o *AdapterExtEthInterface) SetObjectType(v string) {
 
 // GetAdminState returns the AdminState field value if set, zero value otherwise.
 func (o *AdapterExtEthInterface) GetAdminState() string {
-	if o == nil || o.AdminState == nil {
+	if o == nil || IsNil(o.AdminState) {
 		var ret string
 		return ret
 	}
@@ -136,7 +140,7 @@ func (o *AdapterExtEthInterface) GetAdminState() string {
 // GetAdminStateOk returns a tuple with the AdminState field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AdapterExtEthInterface) GetAdminStateOk() (*string, bool) {
-	if o == nil || o.AdminState == nil {
+	if o == nil || IsNil(o.AdminState) {
 		return nil, false
 	}
 	return o.AdminState, true
@@ -144,7 +148,7 @@ func (o *AdapterExtEthInterface) GetAdminStateOk() (*string, bool) {
 
 // HasAdminState returns a boolean if a field has been set.
 func (o *AdapterExtEthInterface) HasAdminState() bool {
-	if o != nil && o.AdminState != nil {
+	if o != nil && !IsNil(o.AdminState) {
 		return true
 	}
 
@@ -158,7 +162,7 @@ func (o *AdapterExtEthInterface) SetAdminState(v string) {
 
 // GetEpDn returns the EpDn field value if set, zero value otherwise.
 func (o *AdapterExtEthInterface) GetEpDn() string {
-	if o == nil || o.EpDn == nil {
+	if o == nil || IsNil(o.EpDn) {
 		var ret string
 		return ret
 	}
@@ -168,7 +172,7 @@ func (o *AdapterExtEthInterface) GetEpDn() string {
 // GetEpDnOk returns a tuple with the EpDn field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AdapterExtEthInterface) GetEpDnOk() (*string, bool) {
-	if o == nil || o.EpDn == nil {
+	if o == nil || IsNil(o.EpDn) {
 		return nil, false
 	}
 	return o.EpDn, true
@@ -176,7 +180,7 @@ func (o *AdapterExtEthInterface) GetEpDnOk() (*string, bool) {
 
 // HasEpDn returns a boolean if a field has been set.
 func (o *AdapterExtEthInterface) HasEpDn() bool {
-	if o != nil && o.EpDn != nil {
+	if o != nil && !IsNil(o.EpDn) {
 		return true
 	}
 
@@ -190,7 +194,7 @@ func (o *AdapterExtEthInterface) SetEpDn(v string) {
 
 // GetExtEthInterfaceId returns the ExtEthInterfaceId field value if set, zero value otherwise.
 func (o *AdapterExtEthInterface) GetExtEthInterfaceId() string {
-	if o == nil || o.ExtEthInterfaceId == nil {
+	if o == nil || IsNil(o.ExtEthInterfaceId) {
 		var ret string
 		return ret
 	}
@@ -200,7 +204,7 @@ func (o *AdapterExtEthInterface) GetExtEthInterfaceId() string {
 // GetExtEthInterfaceIdOk returns a tuple with the ExtEthInterfaceId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AdapterExtEthInterface) GetExtEthInterfaceIdOk() (*string, bool) {
-	if o == nil || o.ExtEthInterfaceId == nil {
+	if o == nil || IsNil(o.ExtEthInterfaceId) {
 		return nil, false
 	}
 	return o.ExtEthInterfaceId, true
@@ -208,7 +212,7 @@ func (o *AdapterExtEthInterface) GetExtEthInterfaceIdOk() (*string, bool) {
 
 // HasExtEthInterfaceId returns a boolean if a field has been set.
 func (o *AdapterExtEthInterface) HasExtEthInterfaceId() bool {
-	if o != nil && o.ExtEthInterfaceId != nil {
+	if o != nil && !IsNil(o.ExtEthInterfaceId) {
 		return true
 	}
 
@@ -222,7 +226,7 @@ func (o *AdapterExtEthInterface) SetExtEthInterfaceId(v string) {
 
 // GetInterfaceType returns the InterfaceType field value if set, zero value otherwise.
 func (o *AdapterExtEthInterface) GetInterfaceType() string {
-	if o == nil || o.InterfaceType == nil {
+	if o == nil || IsNil(o.InterfaceType) {
 		var ret string
 		return ret
 	}
@@ -232,7 +236,7 @@ func (o *AdapterExtEthInterface) GetInterfaceType() string {
 // GetInterfaceTypeOk returns a tuple with the InterfaceType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AdapterExtEthInterface) GetInterfaceTypeOk() (*string, bool) {
-	if o == nil || o.InterfaceType == nil {
+	if o == nil || IsNil(o.InterfaceType) {
 		return nil, false
 	}
 	return o.InterfaceType, true
@@ -240,7 +244,7 @@ func (o *AdapterExtEthInterface) GetInterfaceTypeOk() (*string, bool) {
 
 // HasInterfaceType returns a boolean if a field has been set.
 func (o *AdapterExtEthInterface) HasInterfaceType() bool {
-	if o != nil && o.InterfaceType != nil {
+	if o != nil && !IsNil(o.InterfaceType) {
 		return true
 	}
 
@@ -254,7 +258,7 @@ func (o *AdapterExtEthInterface) SetInterfaceType(v string) {
 
 // GetMacAddress returns the MacAddress field value if set, zero value otherwise.
 func (o *AdapterExtEthInterface) GetMacAddress() string {
-	if o == nil || o.MacAddress == nil {
+	if o == nil || IsNil(o.MacAddress) {
 		var ret string
 		return ret
 	}
@@ -264,7 +268,7 @@ func (o *AdapterExtEthInterface) GetMacAddress() string {
 // GetMacAddressOk returns a tuple with the MacAddress field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AdapterExtEthInterface) GetMacAddressOk() (*string, bool) {
-	if o == nil || o.MacAddress == nil {
+	if o == nil || IsNil(o.MacAddress) {
 		return nil, false
 	}
 	return o.MacAddress, true
@@ -272,7 +276,7 @@ func (o *AdapterExtEthInterface) GetMacAddressOk() (*string, bool) {
 
 // HasMacAddress returns a boolean if a field has been set.
 func (o *AdapterExtEthInterface) HasMacAddress() bool {
-	if o != nil && o.MacAddress != nil {
+	if o != nil && !IsNil(o.MacAddress) {
 		return true
 	}
 
@@ -297,7 +301,7 @@ func (o *AdapterExtEthInterface) GetOperReason() []string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *AdapterExtEthInterface) GetOperReasonOk() ([]string, bool) {
-	if o == nil || o.OperReason == nil {
+	if o == nil || IsNil(o.OperReason) {
 		return nil, false
 	}
 	return o.OperReason, true
@@ -305,7 +309,7 @@ func (o *AdapterExtEthInterface) GetOperReasonOk() ([]string, bool) {
 
 // HasOperReason returns a boolean if a field has been set.
 func (o *AdapterExtEthInterface) HasOperReason() bool {
-	if o != nil && o.OperReason != nil {
+	if o != nil && IsNil(o.OperReason) {
 		return true
 	}
 
@@ -319,7 +323,7 @@ func (o *AdapterExtEthInterface) SetOperReason(v []string) {
 
 // GetPeerAggrPortId returns the PeerAggrPortId field value if set, zero value otherwise.
 func (o *AdapterExtEthInterface) GetPeerAggrPortId() int64 {
-	if o == nil || o.PeerAggrPortId == nil {
+	if o == nil || IsNil(o.PeerAggrPortId) {
 		var ret int64
 		return ret
 	}
@@ -329,7 +333,7 @@ func (o *AdapterExtEthInterface) GetPeerAggrPortId() int64 {
 // GetPeerAggrPortIdOk returns a tuple with the PeerAggrPortId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AdapterExtEthInterface) GetPeerAggrPortIdOk() (*int64, bool) {
-	if o == nil || o.PeerAggrPortId == nil {
+	if o == nil || IsNil(o.PeerAggrPortId) {
 		return nil, false
 	}
 	return o.PeerAggrPortId, true
@@ -337,7 +341,7 @@ func (o *AdapterExtEthInterface) GetPeerAggrPortIdOk() (*int64, bool) {
 
 // HasPeerAggrPortId returns a boolean if a field has been set.
 func (o *AdapterExtEthInterface) HasPeerAggrPortId() bool {
-	if o != nil && o.PeerAggrPortId != nil {
+	if o != nil && !IsNil(o.PeerAggrPortId) {
 		return true
 	}
 
@@ -351,7 +355,7 @@ func (o *AdapterExtEthInterface) SetPeerAggrPortId(v int64) {
 
 // GetPeerDn returns the PeerDn field value if set, zero value otherwise.
 func (o *AdapterExtEthInterface) GetPeerDn() string {
-	if o == nil || o.PeerDn == nil {
+	if o == nil || IsNil(o.PeerDn) {
 		var ret string
 		return ret
 	}
@@ -361,7 +365,7 @@ func (o *AdapterExtEthInterface) GetPeerDn() string {
 // GetPeerDnOk returns a tuple with the PeerDn field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AdapterExtEthInterface) GetPeerDnOk() (*string, bool) {
-	if o == nil || o.PeerDn == nil {
+	if o == nil || IsNil(o.PeerDn) {
 		return nil, false
 	}
 	return o.PeerDn, true
@@ -369,7 +373,7 @@ func (o *AdapterExtEthInterface) GetPeerDnOk() (*string, bool) {
 
 // HasPeerDn returns a boolean if a field has been set.
 func (o *AdapterExtEthInterface) HasPeerDn() bool {
-	if o != nil && o.PeerDn != nil {
+	if o != nil && !IsNil(o.PeerDn) {
 		return true
 	}
 
@@ -383,7 +387,7 @@ func (o *AdapterExtEthInterface) SetPeerDn(v string) {
 
 // GetPeerPortId returns the PeerPortId field value if set, zero value otherwise.
 func (o *AdapterExtEthInterface) GetPeerPortId() int64 {
-	if o == nil || o.PeerPortId == nil {
+	if o == nil || IsNil(o.PeerPortId) {
 		var ret int64
 		return ret
 	}
@@ -393,7 +397,7 @@ func (o *AdapterExtEthInterface) GetPeerPortId() int64 {
 // GetPeerPortIdOk returns a tuple with the PeerPortId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AdapterExtEthInterface) GetPeerPortIdOk() (*int64, bool) {
-	if o == nil || o.PeerPortId == nil {
+	if o == nil || IsNil(o.PeerPortId) {
 		return nil, false
 	}
 	return o.PeerPortId, true
@@ -401,7 +405,7 @@ func (o *AdapterExtEthInterface) GetPeerPortIdOk() (*int64, bool) {
 
 // HasPeerPortId returns a boolean if a field has been set.
 func (o *AdapterExtEthInterface) HasPeerPortId() bool {
-	if o != nil && o.PeerPortId != nil {
+	if o != nil && !IsNil(o.PeerPortId) {
 		return true
 	}
 
@@ -415,7 +419,7 @@ func (o *AdapterExtEthInterface) SetPeerPortId(v int64) {
 
 // GetPeerSlotId returns the PeerSlotId field value if set, zero value otherwise.
 func (o *AdapterExtEthInterface) GetPeerSlotId() int64 {
-	if o == nil || o.PeerSlotId == nil {
+	if o == nil || IsNil(o.PeerSlotId) {
 		var ret int64
 		return ret
 	}
@@ -425,7 +429,7 @@ func (o *AdapterExtEthInterface) GetPeerSlotId() int64 {
 // GetPeerSlotIdOk returns a tuple with the PeerSlotId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AdapterExtEthInterface) GetPeerSlotIdOk() (*int64, bool) {
-	if o == nil || o.PeerSlotId == nil {
+	if o == nil || IsNil(o.PeerSlotId) {
 		return nil, false
 	}
 	return o.PeerSlotId, true
@@ -433,7 +437,7 @@ func (o *AdapterExtEthInterface) GetPeerSlotIdOk() (*int64, bool) {
 
 // HasPeerSlotId returns a boolean if a field has been set.
 func (o *AdapterExtEthInterface) HasPeerSlotId() bool {
-	if o != nil && o.PeerSlotId != nil {
+	if o != nil && !IsNil(o.PeerSlotId) {
 		return true
 	}
 
@@ -447,7 +451,7 @@ func (o *AdapterExtEthInterface) SetPeerSlotId(v int64) {
 
 // GetSwitchId returns the SwitchId field value if set, zero value otherwise.
 func (o *AdapterExtEthInterface) GetSwitchId() string {
-	if o == nil || o.SwitchId == nil {
+	if o == nil || IsNil(o.SwitchId) {
 		var ret string
 		return ret
 	}
@@ -457,7 +461,7 @@ func (o *AdapterExtEthInterface) GetSwitchId() string {
 // GetSwitchIdOk returns a tuple with the SwitchId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AdapterExtEthInterface) GetSwitchIdOk() (*string, bool) {
-	if o == nil || o.SwitchId == nil {
+	if o == nil || IsNil(o.SwitchId) {
 		return nil, false
 	}
 	return o.SwitchId, true
@@ -465,7 +469,7 @@ func (o *AdapterExtEthInterface) GetSwitchIdOk() (*string, bool) {
 
 // HasSwitchId returns a boolean if a field has been set.
 func (o *AdapterExtEthInterface) HasSwitchId() bool {
-	if o != nil && o.SwitchId != nil {
+	if o != nil && !IsNil(o.SwitchId) {
 		return true
 	}
 
@@ -477,169 +481,228 @@ func (o *AdapterExtEthInterface) SetSwitchId(v string) {
 	o.SwitchId = &v
 }
 
-// GetAdapterUnit returns the AdapterUnit field value if set, zero value otherwise.
+// GetAdapterUnit returns the AdapterUnit field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *AdapterExtEthInterface) GetAdapterUnit() AdapterUnitRelationship {
-	if o == nil || o.AdapterUnit == nil {
+	if o == nil || IsNil(o.AdapterUnit.Get()) {
 		var ret AdapterUnitRelationship
 		return ret
 	}
-	return *o.AdapterUnit
+	return *o.AdapterUnit.Get()
 }
 
 // GetAdapterUnitOk returns a tuple with the AdapterUnit field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *AdapterExtEthInterface) GetAdapterUnitOk() (*AdapterUnitRelationship, bool) {
-	if o == nil || o.AdapterUnit == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.AdapterUnit, true
+	return o.AdapterUnit.Get(), o.AdapterUnit.IsSet()
 }
 
 // HasAdapterUnit returns a boolean if a field has been set.
 func (o *AdapterExtEthInterface) HasAdapterUnit() bool {
-	if o != nil && o.AdapterUnit != nil {
+	if o != nil && o.AdapterUnit.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetAdapterUnit gets a reference to the given AdapterUnitRelationship and assigns it to the AdapterUnit field.
+// SetAdapterUnit gets a reference to the given NullableAdapterUnitRelationship and assigns it to the AdapterUnit field.
 func (o *AdapterExtEthInterface) SetAdapterUnit(v AdapterUnitRelationship) {
-	o.AdapterUnit = &v
+	o.AdapterUnit.Set(&v)
 }
 
-// GetInventoryDeviceInfo returns the InventoryDeviceInfo field value if set, zero value otherwise.
+// SetAdapterUnitNil sets the value for AdapterUnit to be an explicit nil
+func (o *AdapterExtEthInterface) SetAdapterUnitNil() {
+	o.AdapterUnit.Set(nil)
+}
+
+// UnsetAdapterUnit ensures that no value is present for AdapterUnit, not even an explicit nil
+func (o *AdapterExtEthInterface) UnsetAdapterUnit() {
+	o.AdapterUnit.Unset()
+}
+
+// GetInventoryDeviceInfo returns the InventoryDeviceInfo field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *AdapterExtEthInterface) GetInventoryDeviceInfo() InventoryDeviceInfoRelationship {
-	if o == nil || o.InventoryDeviceInfo == nil {
+	if o == nil || IsNil(o.InventoryDeviceInfo.Get()) {
 		var ret InventoryDeviceInfoRelationship
 		return ret
 	}
-	return *o.InventoryDeviceInfo
+	return *o.InventoryDeviceInfo.Get()
 }
 
 // GetInventoryDeviceInfoOk returns a tuple with the InventoryDeviceInfo field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *AdapterExtEthInterface) GetInventoryDeviceInfoOk() (*InventoryDeviceInfoRelationship, bool) {
-	if o == nil || o.InventoryDeviceInfo == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.InventoryDeviceInfo, true
+	return o.InventoryDeviceInfo.Get(), o.InventoryDeviceInfo.IsSet()
 }
 
 // HasInventoryDeviceInfo returns a boolean if a field has been set.
 func (o *AdapterExtEthInterface) HasInventoryDeviceInfo() bool {
-	if o != nil && o.InventoryDeviceInfo != nil {
+	if o != nil && o.InventoryDeviceInfo.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetInventoryDeviceInfo gets a reference to the given InventoryDeviceInfoRelationship and assigns it to the InventoryDeviceInfo field.
+// SetInventoryDeviceInfo gets a reference to the given NullableInventoryDeviceInfoRelationship and assigns it to the InventoryDeviceInfo field.
 func (o *AdapterExtEthInterface) SetInventoryDeviceInfo(v InventoryDeviceInfoRelationship) {
-	o.InventoryDeviceInfo = &v
+	o.InventoryDeviceInfo.Set(&v)
 }
 
-// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise.
+// SetInventoryDeviceInfoNil sets the value for InventoryDeviceInfo to be an explicit nil
+func (o *AdapterExtEthInterface) SetInventoryDeviceInfoNil() {
+	o.InventoryDeviceInfo.Set(nil)
+}
+
+// UnsetInventoryDeviceInfo ensures that no value is present for InventoryDeviceInfo, not even an explicit nil
+func (o *AdapterExtEthInterface) UnsetInventoryDeviceInfo() {
+	o.InventoryDeviceInfo.Unset()
+}
+
+// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *AdapterExtEthInterface) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil || IsNil(o.RegisteredDevice.Get()) {
 		var ret AssetDeviceRegistrationRelationship
 		return ret
 	}
-	return *o.RegisteredDevice
+	return *o.RegisteredDevice.Get()
 }
 
 // GetRegisteredDeviceOk returns a tuple with the RegisteredDevice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *AdapterExtEthInterface) GetRegisteredDeviceOk() (*AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.RegisteredDevice, true
+	return o.RegisteredDevice.Get(), o.RegisteredDevice.IsSet()
 }
 
 // HasRegisteredDevice returns a boolean if a field has been set.
 func (o *AdapterExtEthInterface) HasRegisteredDevice() bool {
-	if o != nil && o.RegisteredDevice != nil {
+	if o != nil && o.RegisteredDevice.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRegisteredDevice gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
+// SetRegisteredDevice gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
 func (o *AdapterExtEthInterface) SetRegisteredDevice(v AssetDeviceRegistrationRelationship) {
-	o.RegisteredDevice = &v
+	o.RegisteredDevice.Set(&v)
+}
+
+// SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+func (o *AdapterExtEthInterface) SetRegisteredDeviceNil() {
+	o.RegisteredDevice.Set(nil)
+}
+
+// UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
+func (o *AdapterExtEthInterface) UnsetRegisteredDevice() {
+	o.RegisteredDevice.Unset()
 }
 
 func (o AdapterExtEthInterface) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o AdapterExtEthInterface) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedPortInterfaceBase, errPortInterfaceBase := json.Marshal(o.PortInterfaceBase)
 	if errPortInterfaceBase != nil {
-		return []byte{}, errPortInterfaceBase
+		return map[string]interface{}{}, errPortInterfaceBase
 	}
 	errPortInterfaceBase = json.Unmarshal([]byte(serializedPortInterfaceBase), &toSerialize)
 	if errPortInterfaceBase != nil {
-		return []byte{}, errPortInterfaceBase
+		return map[string]interface{}{}, errPortInterfaceBase
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.AdminState != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.AdminState) {
 		toSerialize["AdminState"] = o.AdminState
 	}
-	if o.EpDn != nil {
+	if !IsNil(o.EpDn) {
 		toSerialize["EpDn"] = o.EpDn
 	}
-	if o.ExtEthInterfaceId != nil {
+	if !IsNil(o.ExtEthInterfaceId) {
 		toSerialize["ExtEthInterfaceId"] = o.ExtEthInterfaceId
 	}
-	if o.InterfaceType != nil {
+	if !IsNil(o.InterfaceType) {
 		toSerialize["InterfaceType"] = o.InterfaceType
 	}
-	if o.MacAddress != nil {
+	if !IsNil(o.MacAddress) {
 		toSerialize["MacAddress"] = o.MacAddress
 	}
 	if o.OperReason != nil {
 		toSerialize["OperReason"] = o.OperReason
 	}
-	if o.PeerAggrPortId != nil {
+	if !IsNil(o.PeerAggrPortId) {
 		toSerialize["PeerAggrPortId"] = o.PeerAggrPortId
 	}
-	if o.PeerDn != nil {
+	if !IsNil(o.PeerDn) {
 		toSerialize["PeerDn"] = o.PeerDn
 	}
-	if o.PeerPortId != nil {
+	if !IsNil(o.PeerPortId) {
 		toSerialize["PeerPortId"] = o.PeerPortId
 	}
-	if o.PeerSlotId != nil {
+	if !IsNil(o.PeerSlotId) {
 		toSerialize["PeerSlotId"] = o.PeerSlotId
 	}
-	if o.SwitchId != nil {
+	if !IsNil(o.SwitchId) {
 		toSerialize["SwitchId"] = o.SwitchId
 	}
-	if o.AdapterUnit != nil {
-		toSerialize["AdapterUnit"] = o.AdapterUnit
+	if o.AdapterUnit.IsSet() {
+		toSerialize["AdapterUnit"] = o.AdapterUnit.Get()
 	}
-	if o.InventoryDeviceInfo != nil {
-		toSerialize["InventoryDeviceInfo"] = o.InventoryDeviceInfo
+	if o.InventoryDeviceInfo.IsSet() {
+		toSerialize["InventoryDeviceInfo"] = o.InventoryDeviceInfo.Get()
 	}
-	if o.RegisteredDevice != nil {
-		toSerialize["RegisteredDevice"] = o.RegisteredDevice
+	if o.RegisteredDevice.IsSet() {
+		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *AdapterExtEthInterface) UnmarshalJSON(bytes []byte) (err error) {
+func (o *AdapterExtEthInterface) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type AdapterExtEthInterfaceWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -665,15 +728,15 @@ func (o *AdapterExtEthInterface) UnmarshalJSON(bytes []byte) (err error) {
 		// Peer Slot Id attached to an External Ethernet Interface.
 		PeerSlotId *int64 `json:"PeerSlotId,omitempty"`
 		// SwitchId attached to an External Ethernet Interface.
-		SwitchId            *string                              `json:"SwitchId,omitempty"`
-		AdapterUnit         *AdapterUnitRelationship             `json:"AdapterUnit,omitempty"`
-		InventoryDeviceInfo *InventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
-		RegisteredDevice    *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+		SwitchId            *string                                     `json:"SwitchId,omitempty"`
+		AdapterUnit         NullableAdapterUnitRelationship             `json:"AdapterUnit,omitempty"`
+		InventoryDeviceInfo NullableInventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
+		RegisteredDevice    NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	}
 
 	varAdapterExtEthInterfaceWithoutEmbeddedStruct := AdapterExtEthInterfaceWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varAdapterExtEthInterfaceWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varAdapterExtEthInterfaceWithoutEmbeddedStruct)
 	if err == nil {
 		varAdapterExtEthInterface := _AdapterExtEthInterface{}
 		varAdapterExtEthInterface.ClassId = varAdapterExtEthInterfaceWithoutEmbeddedStruct.ClassId
@@ -699,7 +762,7 @@ func (o *AdapterExtEthInterface) UnmarshalJSON(bytes []byte) (err error) {
 
 	varAdapterExtEthInterface := _AdapterExtEthInterface{}
 
-	err = json.Unmarshal(bytes, &varAdapterExtEthInterface)
+	err = json.Unmarshal(data, &varAdapterExtEthInterface)
 	if err == nil {
 		o.PortInterfaceBase = varAdapterExtEthInterface.PortInterfaceBase
 	} else {
@@ -708,7 +771,7 @@ func (o *AdapterExtEthInterface) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "AdminState")

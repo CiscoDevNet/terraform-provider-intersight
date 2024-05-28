@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the MetaPropDefinition type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &MetaPropDefinition{}
 
 // MetaPropDefinition Definitions for the properties in a meta.
 type MetaPropDefinition struct {
@@ -120,7 +124,7 @@ func (o *MetaPropDefinition) SetObjectType(v string) {
 
 // GetApiAccess returns the ApiAccess field value if set, zero value otherwise.
 func (o *MetaPropDefinition) GetApiAccess() string {
-	if o == nil || o.ApiAccess == nil {
+	if o == nil || IsNil(o.ApiAccess) {
 		var ret string
 		return ret
 	}
@@ -130,7 +134,7 @@ func (o *MetaPropDefinition) GetApiAccess() string {
 // GetApiAccessOk returns a tuple with the ApiAccess field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *MetaPropDefinition) GetApiAccessOk() (*string, bool) {
-	if o == nil || o.ApiAccess == nil {
+	if o == nil || IsNil(o.ApiAccess) {
 		return nil, false
 	}
 	return o.ApiAccess, true
@@ -138,7 +142,7 @@ func (o *MetaPropDefinition) GetApiAccessOk() (*string, bool) {
 
 // HasApiAccess returns a boolean if a field has been set.
 func (o *MetaPropDefinition) HasApiAccess() bool {
-	if o != nil && o.ApiAccess != nil {
+	if o != nil && !IsNil(o.ApiAccess) {
 		return true
 	}
 
@@ -163,7 +167,7 @@ func (o *MetaPropDefinition) GetDefault() interface{} {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *MetaPropDefinition) GetDefaultOk() (*interface{}, bool) {
-	if o == nil || o.Default == nil {
+	if o == nil || IsNil(o.Default) {
 		return nil, false
 	}
 	return &o.Default, true
@@ -171,7 +175,7 @@ func (o *MetaPropDefinition) GetDefaultOk() (*interface{}, bool) {
 
 // HasDefault returns a boolean if a field has been set.
 func (o *MetaPropDefinition) HasDefault() bool {
-	if o != nil && o.Default != nil {
+	if o != nil && IsNil(o.Default) {
 		return true
 	}
 
@@ -185,7 +189,7 @@ func (o *MetaPropDefinition) SetDefault(v interface{}) {
 
 // GetIsCollection returns the IsCollection field value if set, zero value otherwise.
 func (o *MetaPropDefinition) GetIsCollection() bool {
-	if o == nil || o.IsCollection == nil {
+	if o == nil || IsNil(o.IsCollection) {
 		var ret bool
 		return ret
 	}
@@ -195,7 +199,7 @@ func (o *MetaPropDefinition) GetIsCollection() bool {
 // GetIsCollectionOk returns a tuple with the IsCollection field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *MetaPropDefinition) GetIsCollectionOk() (*bool, bool) {
-	if o == nil || o.IsCollection == nil {
+	if o == nil || IsNil(o.IsCollection) {
 		return nil, false
 	}
 	return o.IsCollection, true
@@ -203,7 +207,7 @@ func (o *MetaPropDefinition) GetIsCollectionOk() (*bool, bool) {
 
 // HasIsCollection returns a boolean if a field has been set.
 func (o *MetaPropDefinition) HasIsCollection() bool {
-	if o != nil && o.IsCollection != nil {
+	if o != nil && !IsNil(o.IsCollection) {
 		return true
 	}
 
@@ -217,7 +221,7 @@ func (o *MetaPropDefinition) SetIsCollection(v bool) {
 
 // GetIsComplexType returns the IsComplexType field value if set, zero value otherwise.
 func (o *MetaPropDefinition) GetIsComplexType() bool {
-	if o == nil || o.IsComplexType == nil {
+	if o == nil || IsNil(o.IsComplexType) {
 		var ret bool
 		return ret
 	}
@@ -227,7 +231,7 @@ func (o *MetaPropDefinition) GetIsComplexType() bool {
 // GetIsComplexTypeOk returns a tuple with the IsComplexType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *MetaPropDefinition) GetIsComplexTypeOk() (*bool, bool) {
-	if o == nil || o.IsComplexType == nil {
+	if o == nil || IsNil(o.IsComplexType) {
 		return nil, false
 	}
 	return o.IsComplexType, true
@@ -235,7 +239,7 @@ func (o *MetaPropDefinition) GetIsComplexTypeOk() (*bool, bool) {
 
 // HasIsComplexType returns a boolean if a field has been set.
 func (o *MetaPropDefinition) HasIsComplexType() bool {
-	if o != nil && o.IsComplexType != nil {
+	if o != nil && !IsNil(o.IsComplexType) {
 		return true
 	}
 
@@ -249,7 +253,7 @@ func (o *MetaPropDefinition) SetIsComplexType(v bool) {
 
 // GetKind returns the Kind field value if set, zero value otherwise.
 func (o *MetaPropDefinition) GetKind() string {
-	if o == nil || o.Kind == nil {
+	if o == nil || IsNil(o.Kind) {
 		var ret string
 		return ret
 	}
@@ -259,7 +263,7 @@ func (o *MetaPropDefinition) GetKind() string {
 // GetKindOk returns a tuple with the Kind field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *MetaPropDefinition) GetKindOk() (*string, bool) {
-	if o == nil || o.Kind == nil {
+	if o == nil || IsNil(o.Kind) {
 		return nil, false
 	}
 	return o.Kind, true
@@ -267,7 +271,7 @@ func (o *MetaPropDefinition) GetKindOk() (*string, bool) {
 
 // HasKind returns a boolean if a field has been set.
 func (o *MetaPropDefinition) HasKind() bool {
-	if o != nil && o.Kind != nil {
+	if o != nil && !IsNil(o.Kind) {
 		return true
 	}
 
@@ -281,7 +285,7 @@ func (o *MetaPropDefinition) SetKind(v string) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *MetaPropDefinition) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -291,7 +295,7 @@ func (o *MetaPropDefinition) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *MetaPropDefinition) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -299,7 +303,7 @@ func (o *MetaPropDefinition) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *MetaPropDefinition) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -313,7 +317,7 @@ func (o *MetaPropDefinition) SetName(v string) {
 
 // GetOpSecurity returns the OpSecurity field value if set, zero value otherwise.
 func (o *MetaPropDefinition) GetOpSecurity() string {
-	if o == nil || o.OpSecurity == nil {
+	if o == nil || IsNil(o.OpSecurity) {
 		var ret string
 		return ret
 	}
@@ -323,7 +327,7 @@ func (o *MetaPropDefinition) GetOpSecurity() string {
 // GetOpSecurityOk returns a tuple with the OpSecurity field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *MetaPropDefinition) GetOpSecurityOk() (*string, bool) {
-	if o == nil || o.OpSecurity == nil {
+	if o == nil || IsNil(o.OpSecurity) {
 		return nil, false
 	}
 	return o.OpSecurity, true
@@ -331,7 +335,7 @@ func (o *MetaPropDefinition) GetOpSecurityOk() (*string, bool) {
 
 // HasOpSecurity returns a boolean if a field has been set.
 func (o *MetaPropDefinition) HasOpSecurity() bool {
-	if o != nil && o.OpSecurity != nil {
+	if o != nil && !IsNil(o.OpSecurity) {
 		return true
 	}
 
@@ -345,7 +349,7 @@ func (o *MetaPropDefinition) SetOpSecurity(v string) {
 
 // GetSearchWeight returns the SearchWeight field value if set, zero value otherwise.
 func (o *MetaPropDefinition) GetSearchWeight() float32 {
-	if o == nil || o.SearchWeight == nil {
+	if o == nil || IsNil(o.SearchWeight) {
 		var ret float32
 		return ret
 	}
@@ -355,7 +359,7 @@ func (o *MetaPropDefinition) GetSearchWeight() float32 {
 // GetSearchWeightOk returns a tuple with the SearchWeight field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *MetaPropDefinition) GetSearchWeightOk() (*float32, bool) {
-	if o == nil || o.SearchWeight == nil {
+	if o == nil || IsNil(o.SearchWeight) {
 		return nil, false
 	}
 	return o.SearchWeight, true
@@ -363,7 +367,7 @@ func (o *MetaPropDefinition) GetSearchWeightOk() (*float32, bool) {
 
 // HasSearchWeight returns a boolean if a field has been set.
 func (o *MetaPropDefinition) HasSearchWeight() bool {
-	if o != nil && o.SearchWeight != nil {
+	if o != nil && !IsNil(o.SearchWeight) {
 		return true
 	}
 
@@ -377,7 +381,7 @@ func (o *MetaPropDefinition) SetSearchWeight(v float32) {
 
 // GetType returns the Type field value if set, zero value otherwise.
 func (o *MetaPropDefinition) GetType() string {
-	if o == nil || o.Type == nil {
+	if o == nil || IsNil(o.Type) {
 		var ret string
 		return ret
 	}
@@ -387,7 +391,7 @@ func (o *MetaPropDefinition) GetType() string {
 // GetTypeOk returns a tuple with the Type field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *MetaPropDefinition) GetTypeOk() (*string, bool) {
-	if o == nil || o.Type == nil {
+	if o == nil || IsNil(o.Type) {
 		return nil, false
 	}
 	return o.Type, true
@@ -395,7 +399,7 @@ func (o *MetaPropDefinition) GetTypeOk() (*string, bool) {
 
 // HasType returns a boolean if a field has been set.
 func (o *MetaPropDefinition) HasType() bool {
-	if o != nil && o.Type != nil {
+	if o != nil && !IsNil(o.Type) {
 		return true
 	}
 
@@ -408,46 +412,50 @@ func (o *MetaPropDefinition) SetType(v string) {
 }
 
 func (o MetaPropDefinition) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o MetaPropDefinition) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
 	errMoBaseComplexType = json.Unmarshal([]byte(serializedMoBaseComplexType), &toSerialize)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.ApiAccess != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.ApiAccess) {
 		toSerialize["ApiAccess"] = o.ApiAccess
 	}
 	if o.Default != nil {
 		toSerialize["Default"] = o.Default
 	}
-	if o.IsCollection != nil {
+	if !IsNil(o.IsCollection) {
 		toSerialize["IsCollection"] = o.IsCollection
 	}
-	if o.IsComplexType != nil {
+	if !IsNil(o.IsComplexType) {
 		toSerialize["IsComplexType"] = o.IsComplexType
 	}
-	if o.Kind != nil {
+	if !IsNil(o.Kind) {
 		toSerialize["Kind"] = o.Kind
 	}
-	if o.Name != nil {
+	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
 	}
-	if o.OpSecurity != nil {
+	if !IsNil(o.OpSecurity) {
 		toSerialize["OpSecurity"] = o.OpSecurity
 	}
-	if o.SearchWeight != nil {
+	if !IsNil(o.SearchWeight) {
 		toSerialize["SearchWeight"] = o.SearchWeight
 	}
-	if o.Type != nil {
+	if !IsNil(o.Type) {
 		toSerialize["Type"] = o.Type
 	}
 
@@ -455,10 +463,32 @@ func (o MetaPropDefinition) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *MetaPropDefinition) UnmarshalJSON(bytes []byte) (err error) {
+func (o *MetaPropDefinition) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type MetaPropDefinitionWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -486,7 +516,7 @@ func (o *MetaPropDefinition) UnmarshalJSON(bytes []byte) (err error) {
 
 	varMetaPropDefinitionWithoutEmbeddedStruct := MetaPropDefinitionWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varMetaPropDefinitionWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varMetaPropDefinitionWithoutEmbeddedStruct)
 	if err == nil {
 		varMetaPropDefinition := _MetaPropDefinition{}
 		varMetaPropDefinition.ClassId = varMetaPropDefinitionWithoutEmbeddedStruct.ClassId
@@ -507,7 +537,7 @@ func (o *MetaPropDefinition) UnmarshalJSON(bytes []byte) (err error) {
 
 	varMetaPropDefinition := _MetaPropDefinition{}
 
-	err = json.Unmarshal(bytes, &varMetaPropDefinition)
+	err = json.Unmarshal(data, &varMetaPropDefinition)
 	if err == nil {
 		o.MoBaseComplexType = varMetaPropDefinition.MoBaseComplexType
 	} else {
@@ -516,7 +546,7 @@ func (o *MetaPropDefinition) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "ApiAccess")

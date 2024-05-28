@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the IamAccount type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &IamAccount{}
 
 // IamAccount The Intersight Account used to access Intersight.
 type IamAccount struct {
@@ -46,12 +50,12 @@ type IamAccount struct {
 	// An array of relationships to iamPrivilegeSet resources.
 	PrivilegeSets []IamPrivilegeSetRelationship `json:"PrivilegeSets,omitempty"`
 	// An array of relationships to iamPrivilege resources.
-	Privileges     []IamPrivilegeRelationship     `json:"Privileges,omitempty"`
-	ResourceLimits *IamResourceLimitsRelationship `json:"ResourceLimits,omitempty"`
+	Privileges     []IamPrivilegeRelationship            `json:"Privileges,omitempty"`
+	ResourceLimits NullableIamResourceLimitsRelationship `json:"ResourceLimits,omitempty"`
 	// An array of relationships to iamRole resources.
-	Roles                []IamRoleRelationship          `json:"Roles,omitempty"`
-	SecurityHolder       *IamSecurityHolderRelationship `json:"SecurityHolder,omitempty"`
-	SessionLimits        *IamSessionLimitsRelationship  `json:"SessionLimits,omitempty"`
+	Roles                []IamRoleRelationship                 `json:"Roles,omitempty"`
+	SecurityHolder       NullableIamSecurityHolderRelationship `json:"SecurityHolder,omitempty"`
+	SessionLimits        NullableIamSessionLimitsRelationship  `json:"SessionLimits,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -130,7 +134,7 @@ func (o *IamAccount) SetObjectType(v string) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *IamAccount) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -140,7 +144,7 @@ func (o *IamAccount) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IamAccount) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -148,7 +152,7 @@ func (o *IamAccount) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *IamAccount) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -173,7 +177,7 @@ func (o *IamAccount) GetRegions() []string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *IamAccount) GetRegionsOk() ([]string, bool) {
-	if o == nil || o.Regions == nil {
+	if o == nil || IsNil(o.Regions) {
 		return nil, false
 	}
 	return o.Regions, true
@@ -181,7 +185,7 @@ func (o *IamAccount) GetRegionsOk() ([]string, bool) {
 
 // HasRegions returns a boolean if a field has been set.
 func (o *IamAccount) HasRegions() bool {
-	if o != nil && o.Regions != nil {
+	if o != nil && IsNil(o.Regions) {
 		return true
 	}
 
@@ -195,7 +199,7 @@ func (o *IamAccount) SetRegions(v []string) {
 
 // GetSingleAdminLockout returns the SingleAdminLockout field value if set, zero value otherwise.
 func (o *IamAccount) GetSingleAdminLockout() bool {
-	if o == nil || o.SingleAdminLockout == nil {
+	if o == nil || IsNil(o.SingleAdminLockout) {
 		var ret bool
 		return ret
 	}
@@ -205,7 +209,7 @@ func (o *IamAccount) GetSingleAdminLockout() bool {
 // GetSingleAdminLockoutOk returns a tuple with the SingleAdminLockout field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IamAccount) GetSingleAdminLockoutOk() (*bool, bool) {
-	if o == nil || o.SingleAdminLockout == nil {
+	if o == nil || IsNil(o.SingleAdminLockout) {
 		return nil, false
 	}
 	return o.SingleAdminLockout, true
@@ -213,7 +217,7 @@ func (o *IamAccount) GetSingleAdminLockoutOk() (*bool, bool) {
 
 // HasSingleAdminLockout returns a boolean if a field has been set.
 func (o *IamAccount) HasSingleAdminLockout() bool {
-	if o != nil && o.SingleAdminLockout != nil {
+	if o != nil && !IsNil(o.SingleAdminLockout) {
 		return true
 	}
 
@@ -227,7 +231,7 @@ func (o *IamAccount) SetSingleAdminLockout(v bool) {
 
 // GetStatus returns the Status field value if set, zero value otherwise.
 func (o *IamAccount) GetStatus() string {
-	if o == nil || o.Status == nil {
+	if o == nil || IsNil(o.Status) {
 		var ret string
 		return ret
 	}
@@ -237,7 +241,7 @@ func (o *IamAccount) GetStatus() string {
 // GetStatusOk returns a tuple with the Status field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IamAccount) GetStatusOk() (*string, bool) {
-	if o == nil || o.Status == nil {
+	if o == nil || IsNil(o.Status) {
 		return nil, false
 	}
 	return o.Status, true
@@ -245,7 +249,7 @@ func (o *IamAccount) GetStatusOk() (*string, bool) {
 
 // HasStatus returns a boolean if a field has been set.
 func (o *IamAccount) HasStatus() bool {
-	if o != nil && o.Status != nil {
+	if o != nil && !IsNil(o.Status) {
 		return true
 	}
 
@@ -270,7 +274,7 @@ func (o *IamAccount) GetAppRegistrations() []IamAppRegistrationRelationship {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *IamAccount) GetAppRegistrationsOk() ([]IamAppRegistrationRelationship, bool) {
-	if o == nil || o.AppRegistrations == nil {
+	if o == nil || IsNil(o.AppRegistrations) {
 		return nil, false
 	}
 	return o.AppRegistrations, true
@@ -278,7 +282,7 @@ func (o *IamAccount) GetAppRegistrationsOk() ([]IamAppRegistrationRelationship, 
 
 // HasAppRegistrations returns a boolean if a field has been set.
 func (o *IamAccount) HasAppRegistrations() bool {
-	if o != nil && o.AppRegistrations != nil {
+	if o != nil && IsNil(o.AppRegistrations) {
 		return true
 	}
 
@@ -303,7 +307,7 @@ func (o *IamAccount) GetDomainGroups() []IamDomainGroupRelationship {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *IamAccount) GetDomainGroupsOk() ([]IamDomainGroupRelationship, bool) {
-	if o == nil || o.DomainGroups == nil {
+	if o == nil || IsNil(o.DomainGroups) {
 		return nil, false
 	}
 	return o.DomainGroups, true
@@ -311,7 +315,7 @@ func (o *IamAccount) GetDomainGroupsOk() ([]IamDomainGroupRelationship, bool) {
 
 // HasDomainGroups returns a boolean if a field has been set.
 func (o *IamAccount) HasDomainGroups() bool {
-	if o != nil && o.DomainGroups != nil {
+	if o != nil && IsNil(o.DomainGroups) {
 		return true
 	}
 
@@ -336,7 +340,7 @@ func (o *IamAccount) GetEndPointRoles() []IamEndPointRoleRelationship {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *IamAccount) GetEndPointRolesOk() ([]IamEndPointRoleRelationship, bool) {
-	if o == nil || o.EndPointRoles == nil {
+	if o == nil || IsNil(o.EndPointRoles) {
 		return nil, false
 	}
 	return o.EndPointRoles, true
@@ -344,7 +348,7 @@ func (o *IamAccount) GetEndPointRolesOk() ([]IamEndPointRoleRelationship, bool) 
 
 // HasEndPointRoles returns a boolean if a field has been set.
 func (o *IamAccount) HasEndPointRoles() bool {
-	if o != nil && o.EndPointRoles != nil {
+	if o != nil && IsNil(o.EndPointRoles) {
 		return true
 	}
 
@@ -369,7 +373,7 @@ func (o *IamAccount) GetIdpreferences() []IamIdpReferenceRelationship {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *IamAccount) GetIdpreferencesOk() ([]IamIdpReferenceRelationship, bool) {
-	if o == nil || o.Idpreferences == nil {
+	if o == nil || IsNil(o.Idpreferences) {
 		return nil, false
 	}
 	return o.Idpreferences, true
@@ -377,7 +381,7 @@ func (o *IamAccount) GetIdpreferencesOk() ([]IamIdpReferenceRelationship, bool) 
 
 // HasIdpreferences returns a boolean if a field has been set.
 func (o *IamAccount) HasIdpreferences() bool {
-	if o != nil && o.Idpreferences != nil {
+	if o != nil && IsNil(o.Idpreferences) {
 		return true
 	}
 
@@ -402,7 +406,7 @@ func (o *IamAccount) GetIdps() []IamIdpRelationship {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *IamAccount) GetIdpsOk() ([]IamIdpRelationship, bool) {
-	if o == nil || o.Idps == nil {
+	if o == nil || IsNil(o.Idps) {
 		return nil, false
 	}
 	return o.Idps, true
@@ -410,7 +414,7 @@ func (o *IamAccount) GetIdpsOk() ([]IamIdpRelationship, bool) {
 
 // HasIdps returns a boolean if a field has been set.
 func (o *IamAccount) HasIdps() bool {
-	if o != nil && o.Idps != nil {
+	if o != nil && IsNil(o.Idps) {
 		return true
 	}
 
@@ -435,7 +439,7 @@ func (o *IamAccount) GetPermissions() []IamPermissionRelationship {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *IamAccount) GetPermissionsOk() ([]IamPermissionRelationship, bool) {
-	if o == nil || o.Permissions == nil {
+	if o == nil || IsNil(o.Permissions) {
 		return nil, false
 	}
 	return o.Permissions, true
@@ -443,7 +447,7 @@ func (o *IamAccount) GetPermissionsOk() ([]IamPermissionRelationship, bool) {
 
 // HasPermissions returns a boolean if a field has been set.
 func (o *IamAccount) HasPermissions() bool {
-	if o != nil && o.Permissions != nil {
+	if o != nil && IsNil(o.Permissions) {
 		return true
 	}
 
@@ -468,7 +472,7 @@ func (o *IamAccount) GetPrivilegeSets() []IamPrivilegeSetRelationship {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *IamAccount) GetPrivilegeSetsOk() ([]IamPrivilegeSetRelationship, bool) {
-	if o == nil || o.PrivilegeSets == nil {
+	if o == nil || IsNil(o.PrivilegeSets) {
 		return nil, false
 	}
 	return o.PrivilegeSets, true
@@ -476,7 +480,7 @@ func (o *IamAccount) GetPrivilegeSetsOk() ([]IamPrivilegeSetRelationship, bool) 
 
 // HasPrivilegeSets returns a boolean if a field has been set.
 func (o *IamAccount) HasPrivilegeSets() bool {
-	if o != nil && o.PrivilegeSets != nil {
+	if o != nil && IsNil(o.PrivilegeSets) {
 		return true
 	}
 
@@ -501,7 +505,7 @@ func (o *IamAccount) GetPrivileges() []IamPrivilegeRelationship {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *IamAccount) GetPrivilegesOk() ([]IamPrivilegeRelationship, bool) {
-	if o == nil || o.Privileges == nil {
+	if o == nil || IsNil(o.Privileges) {
 		return nil, false
 	}
 	return o.Privileges, true
@@ -509,7 +513,7 @@ func (o *IamAccount) GetPrivilegesOk() ([]IamPrivilegeRelationship, bool) {
 
 // HasPrivileges returns a boolean if a field has been set.
 func (o *IamAccount) HasPrivileges() bool {
-	if o != nil && o.Privileges != nil {
+	if o != nil && IsNil(o.Privileges) {
 		return true
 	}
 
@@ -521,36 +525,47 @@ func (o *IamAccount) SetPrivileges(v []IamPrivilegeRelationship) {
 	o.Privileges = v
 }
 
-// GetResourceLimits returns the ResourceLimits field value if set, zero value otherwise.
+// GetResourceLimits returns the ResourceLimits field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *IamAccount) GetResourceLimits() IamResourceLimitsRelationship {
-	if o == nil || o.ResourceLimits == nil {
+	if o == nil || IsNil(o.ResourceLimits.Get()) {
 		var ret IamResourceLimitsRelationship
 		return ret
 	}
-	return *o.ResourceLimits
+	return *o.ResourceLimits.Get()
 }
 
 // GetResourceLimitsOk returns a tuple with the ResourceLimits field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *IamAccount) GetResourceLimitsOk() (*IamResourceLimitsRelationship, bool) {
-	if o == nil || o.ResourceLimits == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.ResourceLimits, true
+	return o.ResourceLimits.Get(), o.ResourceLimits.IsSet()
 }
 
 // HasResourceLimits returns a boolean if a field has been set.
 func (o *IamAccount) HasResourceLimits() bool {
-	if o != nil && o.ResourceLimits != nil {
+	if o != nil && o.ResourceLimits.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetResourceLimits gets a reference to the given IamResourceLimitsRelationship and assigns it to the ResourceLimits field.
+// SetResourceLimits gets a reference to the given NullableIamResourceLimitsRelationship and assigns it to the ResourceLimits field.
 func (o *IamAccount) SetResourceLimits(v IamResourceLimitsRelationship) {
-	o.ResourceLimits = &v
+	o.ResourceLimits.Set(&v)
+}
+
+// SetResourceLimitsNil sets the value for ResourceLimits to be an explicit nil
+func (o *IamAccount) SetResourceLimitsNil() {
+	o.ResourceLimits.Set(nil)
+}
+
+// UnsetResourceLimits ensures that no value is present for ResourceLimits, not even an explicit nil
+func (o *IamAccount) UnsetResourceLimits() {
+	o.ResourceLimits.Unset()
 }
 
 // GetRoles returns the Roles field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -566,7 +581,7 @@ func (o *IamAccount) GetRoles() []IamRoleRelationship {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *IamAccount) GetRolesOk() ([]IamRoleRelationship, bool) {
-	if o == nil || o.Roles == nil {
+	if o == nil || IsNil(o.Roles) {
 		return nil, false
 	}
 	return o.Roles, true
@@ -574,7 +589,7 @@ func (o *IamAccount) GetRolesOk() ([]IamRoleRelationship, bool) {
 
 // HasRoles returns a boolean if a field has been set.
 func (o *IamAccount) HasRoles() bool {
-	if o != nil && o.Roles != nil {
+	if o != nil && IsNil(o.Roles) {
 		return true
 	}
 
@@ -586,96 +601,122 @@ func (o *IamAccount) SetRoles(v []IamRoleRelationship) {
 	o.Roles = v
 }
 
-// GetSecurityHolder returns the SecurityHolder field value if set, zero value otherwise.
+// GetSecurityHolder returns the SecurityHolder field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *IamAccount) GetSecurityHolder() IamSecurityHolderRelationship {
-	if o == nil || o.SecurityHolder == nil {
+	if o == nil || IsNil(o.SecurityHolder.Get()) {
 		var ret IamSecurityHolderRelationship
 		return ret
 	}
-	return *o.SecurityHolder
+	return *o.SecurityHolder.Get()
 }
 
 // GetSecurityHolderOk returns a tuple with the SecurityHolder field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *IamAccount) GetSecurityHolderOk() (*IamSecurityHolderRelationship, bool) {
-	if o == nil || o.SecurityHolder == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.SecurityHolder, true
+	return o.SecurityHolder.Get(), o.SecurityHolder.IsSet()
 }
 
 // HasSecurityHolder returns a boolean if a field has been set.
 func (o *IamAccount) HasSecurityHolder() bool {
-	if o != nil && o.SecurityHolder != nil {
+	if o != nil && o.SecurityHolder.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetSecurityHolder gets a reference to the given IamSecurityHolderRelationship and assigns it to the SecurityHolder field.
+// SetSecurityHolder gets a reference to the given NullableIamSecurityHolderRelationship and assigns it to the SecurityHolder field.
 func (o *IamAccount) SetSecurityHolder(v IamSecurityHolderRelationship) {
-	o.SecurityHolder = &v
+	o.SecurityHolder.Set(&v)
 }
 
-// GetSessionLimits returns the SessionLimits field value if set, zero value otherwise.
+// SetSecurityHolderNil sets the value for SecurityHolder to be an explicit nil
+func (o *IamAccount) SetSecurityHolderNil() {
+	o.SecurityHolder.Set(nil)
+}
+
+// UnsetSecurityHolder ensures that no value is present for SecurityHolder, not even an explicit nil
+func (o *IamAccount) UnsetSecurityHolder() {
+	o.SecurityHolder.Unset()
+}
+
+// GetSessionLimits returns the SessionLimits field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *IamAccount) GetSessionLimits() IamSessionLimitsRelationship {
-	if o == nil || o.SessionLimits == nil {
+	if o == nil || IsNil(o.SessionLimits.Get()) {
 		var ret IamSessionLimitsRelationship
 		return ret
 	}
-	return *o.SessionLimits
+	return *o.SessionLimits.Get()
 }
 
 // GetSessionLimitsOk returns a tuple with the SessionLimits field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *IamAccount) GetSessionLimitsOk() (*IamSessionLimitsRelationship, bool) {
-	if o == nil || o.SessionLimits == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.SessionLimits, true
+	return o.SessionLimits.Get(), o.SessionLimits.IsSet()
 }
 
 // HasSessionLimits returns a boolean if a field has been set.
 func (o *IamAccount) HasSessionLimits() bool {
-	if o != nil && o.SessionLimits != nil {
+	if o != nil && o.SessionLimits.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetSessionLimits gets a reference to the given IamSessionLimitsRelationship and assigns it to the SessionLimits field.
+// SetSessionLimits gets a reference to the given NullableIamSessionLimitsRelationship and assigns it to the SessionLimits field.
 func (o *IamAccount) SetSessionLimits(v IamSessionLimitsRelationship) {
-	o.SessionLimits = &v
+	o.SessionLimits.Set(&v)
+}
+
+// SetSessionLimitsNil sets the value for SessionLimits to be an explicit nil
+func (o *IamAccount) SetSessionLimitsNil() {
+	o.SessionLimits.Set(nil)
+}
+
+// UnsetSessionLimits ensures that no value is present for SessionLimits, not even an explicit nil
+func (o *IamAccount) UnsetSessionLimits() {
+	o.SessionLimits.Unset()
 }
 
 func (o IamAccount) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o IamAccount) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Name != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
 	}
 	if o.Regions != nil {
 		toSerialize["Regions"] = o.Regions
 	}
-	if o.SingleAdminLockout != nil {
+	if !IsNil(o.SingleAdminLockout) {
 		toSerialize["SingleAdminLockout"] = o.SingleAdminLockout
 	}
-	if o.Status != nil {
+	if !IsNil(o.Status) {
 		toSerialize["Status"] = o.Status
 	}
 	if o.AppRegistrations != nil {
@@ -702,27 +743,49 @@ func (o IamAccount) MarshalJSON() ([]byte, error) {
 	if o.Privileges != nil {
 		toSerialize["Privileges"] = o.Privileges
 	}
-	if o.ResourceLimits != nil {
-		toSerialize["ResourceLimits"] = o.ResourceLimits
+	if o.ResourceLimits.IsSet() {
+		toSerialize["ResourceLimits"] = o.ResourceLimits.Get()
 	}
 	if o.Roles != nil {
 		toSerialize["Roles"] = o.Roles
 	}
-	if o.SecurityHolder != nil {
-		toSerialize["SecurityHolder"] = o.SecurityHolder
+	if o.SecurityHolder.IsSet() {
+		toSerialize["SecurityHolder"] = o.SecurityHolder.Get()
 	}
-	if o.SessionLimits != nil {
-		toSerialize["SessionLimits"] = o.SessionLimits
+	if o.SessionLimits.IsSet() {
+		toSerialize["SessionLimits"] = o.SessionLimits.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *IamAccount) UnmarshalJSON(bytes []byte) (err error) {
+func (o *IamAccount) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type IamAccountWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -750,17 +813,17 @@ func (o *IamAccount) UnmarshalJSON(bytes []byte) (err error) {
 		// An array of relationships to iamPrivilegeSet resources.
 		PrivilegeSets []IamPrivilegeSetRelationship `json:"PrivilegeSets,omitempty"`
 		// An array of relationships to iamPrivilege resources.
-		Privileges     []IamPrivilegeRelationship     `json:"Privileges,omitempty"`
-		ResourceLimits *IamResourceLimitsRelationship `json:"ResourceLimits,omitempty"`
+		Privileges     []IamPrivilegeRelationship            `json:"Privileges,omitempty"`
+		ResourceLimits NullableIamResourceLimitsRelationship `json:"ResourceLimits,omitempty"`
 		// An array of relationships to iamRole resources.
-		Roles          []IamRoleRelationship          `json:"Roles,omitempty"`
-		SecurityHolder *IamSecurityHolderRelationship `json:"SecurityHolder,omitempty"`
-		SessionLimits  *IamSessionLimitsRelationship  `json:"SessionLimits,omitempty"`
+		Roles          []IamRoleRelationship                 `json:"Roles,omitempty"`
+		SecurityHolder NullableIamSecurityHolderRelationship `json:"SecurityHolder,omitempty"`
+		SessionLimits  NullableIamSessionLimitsRelationship  `json:"SessionLimits,omitempty"`
 	}
 
 	varIamAccountWithoutEmbeddedStruct := IamAccountWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varIamAccountWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varIamAccountWithoutEmbeddedStruct)
 	if err == nil {
 		varIamAccount := _IamAccount{}
 		varIamAccount.ClassId = varIamAccountWithoutEmbeddedStruct.ClassId
@@ -788,7 +851,7 @@ func (o *IamAccount) UnmarshalJSON(bytes []byte) (err error) {
 
 	varIamAccount := _IamAccount{}
 
-	err = json.Unmarshal(bytes, &varIamAccount)
+	err = json.Unmarshal(data, &varIamAccount)
 	if err == nil {
 		o.MoBaseMo = varIamAccount.MoBaseMo
 	} else {
@@ -797,7 +860,7 @@ func (o *IamAccount) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Name")

@@ -7,12 +7,12 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "os.Install"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "os.Install"]
 **Name** | Pointer to **string** | The name of the OS install configuration. | [optional] 
-**ConfigurationFile** | Pointer to [**OsConfigurationFileRelationship**](OsConfigurationFileRelationship.md) |  | [optional] 
-**Image** | Pointer to [**SoftwarerepositoryOperatingSystemFileRelationship**](SoftwarerepositoryOperatingSystemFileRelationship.md) |  | [optional] 
-**Organization** | Pointer to [**OrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
-**OsduImage** | Pointer to [**FirmwareServerConfigurationUtilityDistributableRelationship**](FirmwareServerConfigurationUtilityDistributableRelationship.md) |  | [optional] 
-**Server** | Pointer to [**ComputePhysicalRelationship**](ComputePhysicalRelationship.md) |  | [optional] 
-**WorkflowInfo** | Pointer to [**WorkflowWorkflowInfoRelationship**](WorkflowWorkflowInfoRelationship.md) |  | [optional] 
+**ConfigurationFile** | Pointer to [**NullableOsConfigurationFileRelationship**](OsConfigurationFileRelationship.md) |  | [optional] 
+**Image** | Pointer to [**NullableSoftwarerepositoryOperatingSystemFileRelationship**](SoftwarerepositoryOperatingSystemFileRelationship.md) |  | [optional] 
+**Organization** | Pointer to [**NullableOrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
+**OsduImage** | Pointer to [**NullableFirmwareServerConfigurationUtilityDistributableRelationship**](FirmwareServerConfigurationUtilityDistributableRelationship.md) |  | [optional] 
+**Server** | Pointer to [**NullableComputePhysicalRelationship**](ComputePhysicalRelationship.md) |  | [optional] 
+**WorkflowInfo** | Pointer to [**NullableWorkflowWorkflowInfoRelationship**](WorkflowWorkflowInfoRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -123,6 +123,16 @@ SetConfigurationFile sets ConfigurationFile field to given value.
 
 HasConfigurationFile returns a boolean if a field has been set.
 
+### SetConfigurationFileNil
+
+`func (o *OsInstall) SetConfigurationFileNil(b bool)`
+
+ SetConfigurationFileNil sets the value for ConfigurationFile to be an explicit nil
+
+### UnsetConfigurationFile
+`func (o *OsInstall) UnsetConfigurationFile()`
+
+UnsetConfigurationFile ensures that no value is present for ConfigurationFile, not even an explicit nil
 ### GetImage
 
 `func (o *OsInstall) GetImage() SoftwarerepositoryOperatingSystemFileRelationship`
@@ -148,6 +158,16 @@ SetImage sets Image field to given value.
 
 HasImage returns a boolean if a field has been set.
 
+### SetImageNil
+
+`func (o *OsInstall) SetImageNil(b bool)`
+
+ SetImageNil sets the value for Image to be an explicit nil
+
+### UnsetImage
+`func (o *OsInstall) UnsetImage()`
+
+UnsetImage ensures that no value is present for Image, not even an explicit nil
 ### GetOrganization
 
 `func (o *OsInstall) GetOrganization() OrganizationOrganizationRelationship`
@@ -173,6 +193,16 @@ SetOrganization sets Organization field to given value.
 
 HasOrganization returns a boolean if a field has been set.
 
+### SetOrganizationNil
+
+`func (o *OsInstall) SetOrganizationNil(b bool)`
+
+ SetOrganizationNil sets the value for Organization to be an explicit nil
+
+### UnsetOrganization
+`func (o *OsInstall) UnsetOrganization()`
+
+UnsetOrganization ensures that no value is present for Organization, not even an explicit nil
 ### GetOsduImage
 
 `func (o *OsInstall) GetOsduImage() FirmwareServerConfigurationUtilityDistributableRelationship`
@@ -198,6 +228,16 @@ SetOsduImage sets OsduImage field to given value.
 
 HasOsduImage returns a boolean if a field has been set.
 
+### SetOsduImageNil
+
+`func (o *OsInstall) SetOsduImageNil(b bool)`
+
+ SetOsduImageNil sets the value for OsduImage to be an explicit nil
+
+### UnsetOsduImage
+`func (o *OsInstall) UnsetOsduImage()`
+
+UnsetOsduImage ensures that no value is present for OsduImage, not even an explicit nil
 ### GetServer
 
 `func (o *OsInstall) GetServer() ComputePhysicalRelationship`
@@ -223,6 +263,16 @@ SetServer sets Server field to given value.
 
 HasServer returns a boolean if a field has been set.
 
+### SetServerNil
+
+`func (o *OsInstall) SetServerNil(b bool)`
+
+ SetServerNil sets the value for Server to be an explicit nil
+
+### UnsetServer
+`func (o *OsInstall) UnsetServer()`
+
+UnsetServer ensures that no value is present for Server, not even an explicit nil
 ### GetWorkflowInfo
 
 `func (o *OsInstall) GetWorkflowInfo() WorkflowWorkflowInfoRelationship`
@@ -248,6 +298,16 @@ SetWorkflowInfo sets WorkflowInfo field to given value.
 
 HasWorkflowInfo returns a boolean if a field has been set.
 
+### SetWorkflowInfoNil
+
+`func (o *OsInstall) SetWorkflowInfoNil(b bool)`
+
+ SetWorkflowInfoNil sets the value for WorkflowInfo to be an explicit nil
+
+### UnsetWorkflowInfo
+`func (o *OsInstall) UnsetWorkflowInfo()`
+
+UnsetWorkflowInfo ensures that no value is present for WorkflowInfo, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

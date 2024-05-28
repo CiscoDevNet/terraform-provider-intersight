@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the HyperflexLicense type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &HyperflexLicense{}
 
 // HyperflexLicense Feature Identifier
 type HyperflexLicense struct {
@@ -37,9 +41,9 @@ type HyperflexLicense struct {
 	// Is reservation enabled for the cluster?
 	PlrEnabled *bool `json:"PlrEnabled,omitempty"`
 	// Is Smart Licensing Enabled for this cluster?
-	SmartLicensingEnabled *bool                                `json:"SmartLicensingEnabled,omitempty"`
-	Cluster               *HyperflexClusterRelationship        `json:"Cluster,omitempty"`
-	RegisteredDevice      *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+	SmartLicensingEnabled *bool                                       `json:"SmartLicensingEnabled,omitempty"`
+	Cluster               NullableHyperflexClusterRelationship        `json:"Cluster,omitempty"`
+	RegisteredDevice      NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	AdditionalProperties  map[string]interface{}
 }
 
@@ -118,7 +122,7 @@ func (o *HyperflexLicense) SetObjectType(v string) {
 
 // GetComplianceState returns the ComplianceState field value if set, zero value otherwise.
 func (o *HyperflexLicense) GetComplianceState() string {
-	if o == nil || o.ComplianceState == nil {
+	if o == nil || IsNil(o.ComplianceState) {
 		var ret string
 		return ret
 	}
@@ -128,7 +132,7 @@ func (o *HyperflexLicense) GetComplianceState() string {
 // GetComplianceStateOk returns a tuple with the ComplianceState field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexLicense) GetComplianceStateOk() (*string, bool) {
-	if o == nil || o.ComplianceState == nil {
+	if o == nil || IsNil(o.ComplianceState) {
 		return nil, false
 	}
 	return o.ComplianceState, true
@@ -136,7 +140,7 @@ func (o *HyperflexLicense) GetComplianceStateOk() (*string, bool) {
 
 // HasComplianceState returns a boolean if a field has been set.
 func (o *HyperflexLicense) HasComplianceState() bool {
-	if o != nil && o.ComplianceState != nil {
+	if o != nil && !IsNil(o.ComplianceState) {
 		return true
 	}
 
@@ -150,7 +154,7 @@ func (o *HyperflexLicense) SetComplianceState(v string) {
 
 // GetGetOutOfComplianceStartAt returns the GetOutOfComplianceStartAt field value if set, zero value otherwise.
 func (o *HyperflexLicense) GetGetOutOfComplianceStartAt() string {
-	if o == nil || o.GetOutOfComplianceStartAt == nil {
+	if o == nil || IsNil(o.GetOutOfComplianceStartAt) {
 		var ret string
 		return ret
 	}
@@ -160,7 +164,7 @@ func (o *HyperflexLicense) GetGetOutOfComplianceStartAt() string {
 // GetGetOutOfComplianceStartAtOk returns a tuple with the GetOutOfComplianceStartAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexLicense) GetGetOutOfComplianceStartAtOk() (*string, bool) {
-	if o == nil || o.GetOutOfComplianceStartAt == nil {
+	if o == nil || IsNil(o.GetOutOfComplianceStartAt) {
 		return nil, false
 	}
 	return o.GetOutOfComplianceStartAt, true
@@ -168,7 +172,7 @@ func (o *HyperflexLicense) GetGetOutOfComplianceStartAtOk() (*string, bool) {
 
 // HasGetOutOfComplianceStartAt returns a boolean if a field has been set.
 func (o *HyperflexLicense) HasGetOutOfComplianceStartAt() bool {
-	if o != nil && o.GetOutOfComplianceStartAt != nil {
+	if o != nil && !IsNil(o.GetOutOfComplianceStartAt) {
 		return true
 	}
 
@@ -182,7 +186,7 @@ func (o *HyperflexLicense) SetGetOutOfComplianceStartAt(v string) {
 
 // GetInEvaluation returns the InEvaluation field value if set, zero value otherwise.
 func (o *HyperflexLicense) GetInEvaluation() bool {
-	if o == nil || o.InEvaluation == nil {
+	if o == nil || IsNil(o.InEvaluation) {
 		var ret bool
 		return ret
 	}
@@ -192,7 +196,7 @@ func (o *HyperflexLicense) GetInEvaluation() bool {
 // GetInEvaluationOk returns a tuple with the InEvaluation field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexLicense) GetInEvaluationOk() (*bool, bool) {
-	if o == nil || o.InEvaluation == nil {
+	if o == nil || IsNil(o.InEvaluation) {
 		return nil, false
 	}
 	return o.InEvaluation, true
@@ -200,7 +204,7 @@ func (o *HyperflexLicense) GetInEvaluationOk() (*bool, bool) {
 
 // HasInEvaluation returns a boolean if a field has been set.
 func (o *HyperflexLicense) HasInEvaluation() bool {
-	if o != nil && o.InEvaluation != nil {
+	if o != nil && !IsNil(o.InEvaluation) {
 		return true
 	}
 
@@ -214,7 +218,7 @@ func (o *HyperflexLicense) SetInEvaluation(v bool) {
 
 // GetLicenseAuthorization returns the LicenseAuthorization field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *HyperflexLicense) GetLicenseAuthorization() HyperflexHxLicenseAuthorizationDetailsDt {
-	if o == nil || o.LicenseAuthorization.Get() == nil {
+	if o == nil || IsNil(o.LicenseAuthorization.Get()) {
 		var ret HyperflexHxLicenseAuthorizationDetailsDt
 		return ret
 	}
@@ -257,7 +261,7 @@ func (o *HyperflexLicense) UnsetLicenseAuthorization() {
 
 // GetLicenseRegistration returns the LicenseRegistration field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *HyperflexLicense) GetLicenseRegistration() HyperflexHxRegistrationDetailsDt {
-	if o == nil || o.LicenseRegistration.Get() == nil {
+	if o == nil || IsNil(o.LicenseRegistration.Get()) {
 		var ret HyperflexHxRegistrationDetailsDt
 		return ret
 	}
@@ -300,7 +304,7 @@ func (o *HyperflexLicense) UnsetLicenseRegistration() {
 
 // GetLicenseType returns the LicenseType field value if set, zero value otherwise.
 func (o *HyperflexLicense) GetLicenseType() string {
-	if o == nil || o.LicenseType == nil {
+	if o == nil || IsNil(o.LicenseType) {
 		var ret string
 		return ret
 	}
@@ -310,7 +314,7 @@ func (o *HyperflexLicense) GetLicenseType() string {
 // GetLicenseTypeOk returns a tuple with the LicenseType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexLicense) GetLicenseTypeOk() (*string, bool) {
-	if o == nil || o.LicenseType == nil {
+	if o == nil || IsNil(o.LicenseType) {
 		return nil, false
 	}
 	return o.LicenseType, true
@@ -318,7 +322,7 @@ func (o *HyperflexLicense) GetLicenseTypeOk() (*string, bool) {
 
 // HasLicenseType returns a boolean if a field has been set.
 func (o *HyperflexLicense) HasLicenseType() bool {
-	if o != nil && o.LicenseType != nil {
+	if o != nil && !IsNil(o.LicenseType) {
 		return true
 	}
 
@@ -332,7 +336,7 @@ func (o *HyperflexLicense) SetLicenseType(v string) {
 
 // GetPlrEnabled returns the PlrEnabled field value if set, zero value otherwise.
 func (o *HyperflexLicense) GetPlrEnabled() bool {
-	if o == nil || o.PlrEnabled == nil {
+	if o == nil || IsNil(o.PlrEnabled) {
 		var ret bool
 		return ret
 	}
@@ -342,7 +346,7 @@ func (o *HyperflexLicense) GetPlrEnabled() bool {
 // GetPlrEnabledOk returns a tuple with the PlrEnabled field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexLicense) GetPlrEnabledOk() (*bool, bool) {
-	if o == nil || o.PlrEnabled == nil {
+	if o == nil || IsNil(o.PlrEnabled) {
 		return nil, false
 	}
 	return o.PlrEnabled, true
@@ -350,7 +354,7 @@ func (o *HyperflexLicense) GetPlrEnabledOk() (*bool, bool) {
 
 // HasPlrEnabled returns a boolean if a field has been set.
 func (o *HyperflexLicense) HasPlrEnabled() bool {
-	if o != nil && o.PlrEnabled != nil {
+	if o != nil && !IsNil(o.PlrEnabled) {
 		return true
 	}
 
@@ -364,7 +368,7 @@ func (o *HyperflexLicense) SetPlrEnabled(v bool) {
 
 // GetSmartLicensingEnabled returns the SmartLicensingEnabled field value if set, zero value otherwise.
 func (o *HyperflexLicense) GetSmartLicensingEnabled() bool {
-	if o == nil || o.SmartLicensingEnabled == nil {
+	if o == nil || IsNil(o.SmartLicensingEnabled) {
 		var ret bool
 		return ret
 	}
@@ -374,7 +378,7 @@ func (o *HyperflexLicense) GetSmartLicensingEnabled() bool {
 // GetSmartLicensingEnabledOk returns a tuple with the SmartLicensingEnabled field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexLicense) GetSmartLicensingEnabledOk() (*bool, bool) {
-	if o == nil || o.SmartLicensingEnabled == nil {
+	if o == nil || IsNil(o.SmartLicensingEnabled) {
 		return nil, false
 	}
 	return o.SmartLicensingEnabled, true
@@ -382,7 +386,7 @@ func (o *HyperflexLicense) GetSmartLicensingEnabledOk() (*bool, bool) {
 
 // HasSmartLicensingEnabled returns a boolean if a field has been set.
 func (o *HyperflexLicense) HasSmartLicensingEnabled() bool {
-	if o != nil && o.SmartLicensingEnabled != nil {
+	if o != nil && !IsNil(o.SmartLicensingEnabled) {
 		return true
 	}
 
@@ -394,93 +398,119 @@ func (o *HyperflexLicense) SetSmartLicensingEnabled(v bool) {
 	o.SmartLicensingEnabled = &v
 }
 
-// GetCluster returns the Cluster field value if set, zero value otherwise.
+// GetCluster returns the Cluster field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *HyperflexLicense) GetCluster() HyperflexClusterRelationship {
-	if o == nil || o.Cluster == nil {
+	if o == nil || IsNil(o.Cluster.Get()) {
 		var ret HyperflexClusterRelationship
 		return ret
 	}
-	return *o.Cluster
+	return *o.Cluster.Get()
 }
 
 // GetClusterOk returns a tuple with the Cluster field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *HyperflexLicense) GetClusterOk() (*HyperflexClusterRelationship, bool) {
-	if o == nil || o.Cluster == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Cluster, true
+	return o.Cluster.Get(), o.Cluster.IsSet()
 }
 
 // HasCluster returns a boolean if a field has been set.
 func (o *HyperflexLicense) HasCluster() bool {
-	if o != nil && o.Cluster != nil {
+	if o != nil && o.Cluster.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetCluster gets a reference to the given HyperflexClusterRelationship and assigns it to the Cluster field.
+// SetCluster gets a reference to the given NullableHyperflexClusterRelationship and assigns it to the Cluster field.
 func (o *HyperflexLicense) SetCluster(v HyperflexClusterRelationship) {
-	o.Cluster = &v
+	o.Cluster.Set(&v)
 }
 
-// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise.
+// SetClusterNil sets the value for Cluster to be an explicit nil
+func (o *HyperflexLicense) SetClusterNil() {
+	o.Cluster.Set(nil)
+}
+
+// UnsetCluster ensures that no value is present for Cluster, not even an explicit nil
+func (o *HyperflexLicense) UnsetCluster() {
+	o.Cluster.Unset()
+}
+
+// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *HyperflexLicense) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil || IsNil(o.RegisteredDevice.Get()) {
 		var ret AssetDeviceRegistrationRelationship
 		return ret
 	}
-	return *o.RegisteredDevice
+	return *o.RegisteredDevice.Get()
 }
 
 // GetRegisteredDeviceOk returns a tuple with the RegisteredDevice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *HyperflexLicense) GetRegisteredDeviceOk() (*AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.RegisteredDevice, true
+	return o.RegisteredDevice.Get(), o.RegisteredDevice.IsSet()
 }
 
 // HasRegisteredDevice returns a boolean if a field has been set.
 func (o *HyperflexLicense) HasRegisteredDevice() bool {
-	if o != nil && o.RegisteredDevice != nil {
+	if o != nil && o.RegisteredDevice.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRegisteredDevice gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
+// SetRegisteredDevice gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
 func (o *HyperflexLicense) SetRegisteredDevice(v AssetDeviceRegistrationRelationship) {
-	o.RegisteredDevice = &v
+	o.RegisteredDevice.Set(&v)
+}
+
+// SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+func (o *HyperflexLicense) SetRegisteredDeviceNil() {
+	o.RegisteredDevice.Set(nil)
+}
+
+// UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
+func (o *HyperflexLicense) UnsetRegisteredDevice() {
+	o.RegisteredDevice.Unset()
 }
 
 func (o HyperflexLicense) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o HyperflexLicense) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.ComplianceState != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.ComplianceState) {
 		toSerialize["ComplianceState"] = o.ComplianceState
 	}
-	if o.GetOutOfComplianceStartAt != nil {
+	if !IsNil(o.GetOutOfComplianceStartAt) {
 		toSerialize["GetOutOfComplianceStartAt"] = o.GetOutOfComplianceStartAt
 	}
-	if o.InEvaluation != nil {
+	if !IsNil(o.InEvaluation) {
 		toSerialize["InEvaluation"] = o.InEvaluation
 	}
 	if o.LicenseAuthorization.IsSet() {
@@ -489,30 +519,52 @@ func (o HyperflexLicense) MarshalJSON() ([]byte, error) {
 	if o.LicenseRegistration.IsSet() {
 		toSerialize["LicenseRegistration"] = o.LicenseRegistration.Get()
 	}
-	if o.LicenseType != nil {
+	if !IsNil(o.LicenseType) {
 		toSerialize["LicenseType"] = o.LicenseType
 	}
-	if o.PlrEnabled != nil {
+	if !IsNil(o.PlrEnabled) {
 		toSerialize["PlrEnabled"] = o.PlrEnabled
 	}
-	if o.SmartLicensingEnabled != nil {
+	if !IsNil(o.SmartLicensingEnabled) {
 		toSerialize["SmartLicensingEnabled"] = o.SmartLicensingEnabled
 	}
-	if o.Cluster != nil {
-		toSerialize["Cluster"] = o.Cluster
+	if o.Cluster.IsSet() {
+		toSerialize["Cluster"] = o.Cluster.Get()
 	}
-	if o.RegisteredDevice != nil {
-		toSerialize["RegisteredDevice"] = o.RegisteredDevice
+	if o.RegisteredDevice.IsSet() {
+		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *HyperflexLicense) UnmarshalJSON(bytes []byte) (err error) {
+func (o *HyperflexLicense) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type HyperflexLicenseWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -531,14 +583,14 @@ func (o *HyperflexLicense) UnmarshalJSON(bytes []byte) (err error) {
 		// Is reservation enabled for the cluster?
 		PlrEnabled *bool `json:"PlrEnabled,omitempty"`
 		// Is Smart Licensing Enabled for this cluster?
-		SmartLicensingEnabled *bool                                `json:"SmartLicensingEnabled,omitempty"`
-		Cluster               *HyperflexClusterRelationship        `json:"Cluster,omitempty"`
-		RegisteredDevice      *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+		SmartLicensingEnabled *bool                                       `json:"SmartLicensingEnabled,omitempty"`
+		Cluster               NullableHyperflexClusterRelationship        `json:"Cluster,omitempty"`
+		RegisteredDevice      NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	}
 
 	varHyperflexLicenseWithoutEmbeddedStruct := HyperflexLicenseWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varHyperflexLicenseWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varHyperflexLicenseWithoutEmbeddedStruct)
 	if err == nil {
 		varHyperflexLicense := _HyperflexLicense{}
 		varHyperflexLicense.ClassId = varHyperflexLicenseWithoutEmbeddedStruct.ClassId
@@ -560,7 +612,7 @@ func (o *HyperflexLicense) UnmarshalJSON(bytes []byte) (err error) {
 
 	varHyperflexLicense := _HyperflexLicense{}
 
-	err = json.Unmarshal(bytes, &varHyperflexLicense)
+	err = json.Unmarshal(data, &varHyperflexLicense)
 	if err == nil {
 		o.MoBaseMo = varHyperflexLicense.MoBaseMo
 	} else {
@@ -569,7 +621,7 @@ func (o *HyperflexLicense) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "ComplianceState")

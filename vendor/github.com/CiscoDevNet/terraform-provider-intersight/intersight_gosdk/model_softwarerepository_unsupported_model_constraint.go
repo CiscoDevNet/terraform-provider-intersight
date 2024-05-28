@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the SoftwarerepositoryUnsupportedModelConstraint type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &SoftwarerepositoryUnsupportedModelConstraint{}
 
 // SoftwarerepositoryUnsupportedModelConstraint It defines a constraint that given an image name and version, server models are unsupported for firmware upgrades.
 type SoftwarerepositoryUnsupportedModelConstraint struct {
@@ -109,7 +113,7 @@ func (o *SoftwarerepositoryUnsupportedModelConstraint) SetObjectType(v string) {
 
 // GetMaxVersion returns the MaxVersion field value if set, zero value otherwise.
 func (o *SoftwarerepositoryUnsupportedModelConstraint) GetMaxVersion() string {
-	if o == nil || o.MaxVersion == nil {
+	if o == nil || IsNil(o.MaxVersion) {
 		var ret string
 		return ret
 	}
@@ -119,7 +123,7 @@ func (o *SoftwarerepositoryUnsupportedModelConstraint) GetMaxVersion() string {
 // GetMaxVersionOk returns a tuple with the MaxVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SoftwarerepositoryUnsupportedModelConstraint) GetMaxVersionOk() (*string, bool) {
-	if o == nil || o.MaxVersion == nil {
+	if o == nil || IsNil(o.MaxVersion) {
 		return nil, false
 	}
 	return o.MaxVersion, true
@@ -127,7 +131,7 @@ func (o *SoftwarerepositoryUnsupportedModelConstraint) GetMaxVersionOk() (*strin
 
 // HasMaxVersion returns a boolean if a field has been set.
 func (o *SoftwarerepositoryUnsupportedModelConstraint) HasMaxVersion() bool {
-	if o != nil && o.MaxVersion != nil {
+	if o != nil && !IsNil(o.MaxVersion) {
 		return true
 	}
 
@@ -141,7 +145,7 @@ func (o *SoftwarerepositoryUnsupportedModelConstraint) SetMaxVersion(v string) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *SoftwarerepositoryUnsupportedModelConstraint) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -151,7 +155,7 @@ func (o *SoftwarerepositoryUnsupportedModelConstraint) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SoftwarerepositoryUnsupportedModelConstraint) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -159,7 +163,7 @@ func (o *SoftwarerepositoryUnsupportedModelConstraint) GetNameOk() (*string, boo
 
 // HasName returns a boolean if a field has been set.
 func (o *SoftwarerepositoryUnsupportedModelConstraint) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -173,7 +177,7 @@ func (o *SoftwarerepositoryUnsupportedModelConstraint) SetName(v string) {
 
 // GetPlatformRegex returns the PlatformRegex field value if set, zero value otherwise.
 func (o *SoftwarerepositoryUnsupportedModelConstraint) GetPlatformRegex() string {
-	if o == nil || o.PlatformRegex == nil {
+	if o == nil || IsNil(o.PlatformRegex) {
 		var ret string
 		return ret
 	}
@@ -183,7 +187,7 @@ func (o *SoftwarerepositoryUnsupportedModelConstraint) GetPlatformRegex() string
 // GetPlatformRegexOk returns a tuple with the PlatformRegex field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SoftwarerepositoryUnsupportedModelConstraint) GetPlatformRegexOk() (*string, bool) {
-	if o == nil || o.PlatformRegex == nil {
+	if o == nil || IsNil(o.PlatformRegex) {
 		return nil, false
 	}
 	return o.PlatformRegex, true
@@ -191,7 +195,7 @@ func (o *SoftwarerepositoryUnsupportedModelConstraint) GetPlatformRegexOk() (*st
 
 // HasPlatformRegex returns a boolean if a field has been set.
 func (o *SoftwarerepositoryUnsupportedModelConstraint) HasPlatformRegex() bool {
-	if o != nil && o.PlatformRegex != nil {
+	if o != nil && !IsNil(o.PlatformRegex) {
 		return true
 	}
 
@@ -216,7 +220,7 @@ func (o *SoftwarerepositoryUnsupportedModelConstraint) GetUnsupportedModels() []
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *SoftwarerepositoryUnsupportedModelConstraint) GetUnsupportedModelsOk() ([]string, bool) {
-	if o == nil || o.UnsupportedModels == nil {
+	if o == nil || IsNil(o.UnsupportedModels) {
 		return nil, false
 	}
 	return o.UnsupportedModels, true
@@ -224,7 +228,7 @@ func (o *SoftwarerepositoryUnsupportedModelConstraint) GetUnsupportedModelsOk() 
 
 // HasUnsupportedModels returns a boolean if a field has been set.
 func (o *SoftwarerepositoryUnsupportedModelConstraint) HasUnsupportedModels() bool {
-	if o != nil && o.UnsupportedModels != nil {
+	if o != nil && IsNil(o.UnsupportedModels) {
 		return true
 	}
 
@@ -237,28 +241,32 @@ func (o *SoftwarerepositoryUnsupportedModelConstraint) SetUnsupportedModels(v []
 }
 
 func (o SoftwarerepositoryUnsupportedModelConstraint) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o SoftwarerepositoryUnsupportedModelConstraint) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
 	errMoBaseComplexType = json.Unmarshal([]byte(serializedMoBaseComplexType), &toSerialize)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.MaxVersion != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.MaxVersion) {
 		toSerialize["MaxVersion"] = o.MaxVersion
 	}
-	if o.Name != nil {
+	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
 	}
-	if o.PlatformRegex != nil {
+	if !IsNil(o.PlatformRegex) {
 		toSerialize["PlatformRegex"] = o.PlatformRegex
 	}
 	if o.UnsupportedModels != nil {
@@ -269,10 +277,32 @@ func (o SoftwarerepositoryUnsupportedModelConstraint) MarshalJSON() ([]byte, err
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *SoftwarerepositoryUnsupportedModelConstraint) UnmarshalJSON(bytes []byte) (err error) {
+func (o *SoftwarerepositoryUnsupportedModelConstraint) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type SoftwarerepositoryUnsupportedModelConstraintWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -289,7 +319,7 @@ func (o *SoftwarerepositoryUnsupportedModelConstraint) UnmarshalJSON(bytes []byt
 
 	varSoftwarerepositoryUnsupportedModelConstraintWithoutEmbeddedStruct := SoftwarerepositoryUnsupportedModelConstraintWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varSoftwarerepositoryUnsupportedModelConstraintWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varSoftwarerepositoryUnsupportedModelConstraintWithoutEmbeddedStruct)
 	if err == nil {
 		varSoftwarerepositoryUnsupportedModelConstraint := _SoftwarerepositoryUnsupportedModelConstraint{}
 		varSoftwarerepositoryUnsupportedModelConstraint.ClassId = varSoftwarerepositoryUnsupportedModelConstraintWithoutEmbeddedStruct.ClassId
@@ -305,7 +335,7 @@ func (o *SoftwarerepositoryUnsupportedModelConstraint) UnmarshalJSON(bytes []byt
 
 	varSoftwarerepositoryUnsupportedModelConstraint := _SoftwarerepositoryUnsupportedModelConstraint{}
 
-	err = json.Unmarshal(bytes, &varSoftwarerepositoryUnsupportedModelConstraint)
+	err = json.Unmarshal(data, &varSoftwarerepositoryUnsupportedModelConstraint)
 	if err == nil {
 		o.MoBaseComplexType = varSoftwarerepositoryUnsupportedModelConstraint.MoBaseComplexType
 	} else {
@@ -314,7 +344,7 @@ func (o *SoftwarerepositoryUnsupportedModelConstraint) UnmarshalJSON(bytes []byt
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "MaxVersion")

@@ -14,9 +14,9 @@ Name | Type | Description | Notes
 **Status** | Pointer to [**NullableSchedulerTaskScheduleStatus**](SchedulerTaskScheduleStatus.md) |  | [optional] 
 **SuspendEndTime** | Pointer to **time.Time** | Suspend a task until an end date. this applies only to the action suspendTill. | [optional] 
 **TaskRequest** | Pointer to [**SchedulerRestStimTaskRequest**](SchedulerRestStimTaskRequest.md) |  | [optional] 
-**Type** | Pointer to **string** | An Enum describing the type of scheduler to use. * &#x60;None&#x60; - No value was set for the schedule type (Enum value None). * &#x60;OneTime&#x60; - Define a one-time task execution time that will not automatically repeat. * &#x60;Recurring&#x60; - Specify a recurring task cadence based on a predefined pattern, such as daily, weekly, monthly, yearly, or every &lt;interval&gt; pattern. | [optional] [default to "None"]
-**AssociatedObject** | Pointer to [**MoBaseMoRelationship**](MoBaseMoRelationship.md) |  | [optional] 
-**WorkflowDefinition** | Pointer to [**WorkflowWorkflowDefinitionRelationship**](WorkflowWorkflowDefinitionRelationship.md) |  | [optional] 
+**Type** | Pointer to **string** | An Enum describing the type of scheduler to use. * &#x60;None&#x60; - No value was set for the schedule type (Enum value None). * &#x60;OneTime&#x60; - Define a one-time task execution time that will not automatically repeat. * &#x60;Recurring&#x60; - Specify a recurring task cadence based on a predefined pattern, such as daily, weekly, monthly, yearly, or every &lt;interval&gt; pattern. This option is not currently supported. | [optional] [default to "None"]
+**AssociatedObject** | Pointer to [**NullableMoBaseMoRelationship**](MoBaseMoRelationship.md) |  | [optional] 
+**WorkflowDefinition** | Pointer to [**NullableWorkflowWorkflowDefinitionRelationship**](WorkflowWorkflowDefinitionRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -337,6 +337,16 @@ SetAssociatedObject sets AssociatedObject field to given value.
 
 HasAssociatedObject returns a boolean if a field has been set.
 
+### SetAssociatedObjectNil
+
+`func (o *SchedulerTaskSchedule) SetAssociatedObjectNil(b bool)`
+
+ SetAssociatedObjectNil sets the value for AssociatedObject to be an explicit nil
+
+### UnsetAssociatedObject
+`func (o *SchedulerTaskSchedule) UnsetAssociatedObject()`
+
+UnsetAssociatedObject ensures that no value is present for AssociatedObject, not even an explicit nil
 ### GetWorkflowDefinition
 
 `func (o *SchedulerTaskSchedule) GetWorkflowDefinition() WorkflowWorkflowDefinitionRelationship`
@@ -362,6 +372,16 @@ SetWorkflowDefinition sets WorkflowDefinition field to given value.
 
 HasWorkflowDefinition returns a boolean if a field has been set.
 
+### SetWorkflowDefinitionNil
+
+`func (o *SchedulerTaskSchedule) SetWorkflowDefinitionNil(b bool)`
+
+ SetWorkflowDefinitionNil sets the value for WorkflowDefinition to be an explicit nil
+
+### UnsetWorkflowDefinition
+`func (o *SchedulerTaskSchedule) UnsetWorkflowDefinition()`
+
+UnsetWorkflowDefinition ensures that no value is present for WorkflowDefinition, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

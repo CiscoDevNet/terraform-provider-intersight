@@ -7,8 +7,8 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
 **OperState** | Pointer to **string** | Operational state of an Interface. | [optional] 
-**AcknowledgedPeerInterface** | Pointer to [**EtherPhysicalPortBaseRelationship**](EtherPhysicalPortBaseRelationship.md) |  | [optional] 
-**PeerInterface** | Pointer to [**EtherPhysicalPortBaseRelationship**](EtherPhysicalPortBaseRelationship.md) |  | [optional] 
+**AcknowledgedPeerInterface** | Pointer to [**NullableEtherPhysicalPortBaseRelationship**](EtherPhysicalPortBaseRelationship.md) |  | [optional] 
+**PeerInterface** | Pointer to [**NullableEtherPhysicalPortBaseRelationship**](EtherPhysicalPortBaseRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -119,6 +119,16 @@ SetAcknowledgedPeerInterface sets AcknowledgedPeerInterface field to given value
 
 HasAcknowledgedPeerInterface returns a boolean if a field has been set.
 
+### SetAcknowledgedPeerInterfaceNil
+
+`func (o *PortInterfaceBase) SetAcknowledgedPeerInterfaceNil(b bool)`
+
+ SetAcknowledgedPeerInterfaceNil sets the value for AcknowledgedPeerInterface to be an explicit nil
+
+### UnsetAcknowledgedPeerInterface
+`func (o *PortInterfaceBase) UnsetAcknowledgedPeerInterface()`
+
+UnsetAcknowledgedPeerInterface ensures that no value is present for AcknowledgedPeerInterface, not even an explicit nil
 ### GetPeerInterface
 
 `func (o *PortInterfaceBase) GetPeerInterface() EtherPhysicalPortBaseRelationship`
@@ -144,6 +154,16 @@ SetPeerInterface sets PeerInterface field to given value.
 
 HasPeerInterface returns a boolean if a field has been set.
 
+### SetPeerInterfaceNil
+
+`func (o *PortInterfaceBase) SetPeerInterfaceNil(b bool)`
+
+ SetPeerInterfaceNil sets the value for PeerInterface to be an explicit nil
+
+### UnsetPeerInterface
+`func (o *PortInterfaceBase) UnsetPeerInterface()`
+
+UnsetPeerInterface ensures that no value is present for PeerInterface, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

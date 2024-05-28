@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the CapabilitySwitchCapability type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &CapabilitySwitchCapability{}
 
 // CapabilitySwitchCapability Type to represent additional switch specific capabilities.
 type CapabilitySwitchCapability struct {
@@ -145,7 +149,7 @@ func (o *CapabilitySwitchCapability) SetObjectType(v string) {
 
 // GetDefaultFcoeVlan returns the DefaultFcoeVlan field value if set, zero value otherwise.
 func (o *CapabilitySwitchCapability) GetDefaultFcoeVlan() int64 {
-	if o == nil || o.DefaultFcoeVlan == nil {
+	if o == nil || IsNil(o.DefaultFcoeVlan) {
 		var ret int64
 		return ret
 	}
@@ -155,7 +159,7 @@ func (o *CapabilitySwitchCapability) GetDefaultFcoeVlan() int64 {
 // GetDefaultFcoeVlanOk returns a tuple with the DefaultFcoeVlan field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CapabilitySwitchCapability) GetDefaultFcoeVlanOk() (*int64, bool) {
-	if o == nil || o.DefaultFcoeVlan == nil {
+	if o == nil || IsNil(o.DefaultFcoeVlan) {
 		return nil, false
 	}
 	return o.DefaultFcoeVlan, true
@@ -163,7 +167,7 @@ func (o *CapabilitySwitchCapability) GetDefaultFcoeVlanOk() (*int64, bool) {
 
 // HasDefaultFcoeVlan returns a boolean if a field has been set.
 func (o *CapabilitySwitchCapability) HasDefaultFcoeVlan() bool {
-	if o != nil && o.DefaultFcoeVlan != nil {
+	if o != nil && !IsNil(o.DefaultFcoeVlan) {
 		return true
 	}
 
@@ -177,7 +181,7 @@ func (o *CapabilitySwitchCapability) SetDefaultFcoeVlan(v int64) {
 
 // GetDynamicVifsSupported returns the DynamicVifsSupported field value if set, zero value otherwise.
 func (o *CapabilitySwitchCapability) GetDynamicVifsSupported() bool {
-	if o == nil || o.DynamicVifsSupported == nil {
+	if o == nil || IsNil(o.DynamicVifsSupported) {
 		var ret bool
 		return ret
 	}
@@ -187,7 +191,7 @@ func (o *CapabilitySwitchCapability) GetDynamicVifsSupported() bool {
 // GetDynamicVifsSupportedOk returns a tuple with the DynamicVifsSupported field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CapabilitySwitchCapability) GetDynamicVifsSupportedOk() (*bool, bool) {
-	if o == nil || o.DynamicVifsSupported == nil {
+	if o == nil || IsNil(o.DynamicVifsSupported) {
 		return nil, false
 	}
 	return o.DynamicVifsSupported, true
@@ -195,7 +199,7 @@ func (o *CapabilitySwitchCapability) GetDynamicVifsSupportedOk() (*bool, bool) {
 
 // HasDynamicVifsSupported returns a boolean if a field has been set.
 func (o *CapabilitySwitchCapability) HasDynamicVifsSupported() bool {
-	if o != nil && o.DynamicVifsSupported != nil {
+	if o != nil && !IsNil(o.DynamicVifsSupported) {
 		return true
 	}
 
@@ -209,7 +213,7 @@ func (o *CapabilitySwitchCapability) SetDynamicVifsSupported(v bool) {
 
 // GetFanModulesSupported returns the FanModulesSupported field value if set, zero value otherwise.
 func (o *CapabilitySwitchCapability) GetFanModulesSupported() bool {
-	if o == nil || o.FanModulesSupported == nil {
+	if o == nil || IsNil(o.FanModulesSupported) {
 		var ret bool
 		return ret
 	}
@@ -219,7 +223,7 @@ func (o *CapabilitySwitchCapability) GetFanModulesSupported() bool {
 // GetFanModulesSupportedOk returns a tuple with the FanModulesSupported field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CapabilitySwitchCapability) GetFanModulesSupportedOk() (*bool, bool) {
-	if o == nil || o.FanModulesSupported == nil {
+	if o == nil || IsNil(o.FanModulesSupported) {
 		return nil, false
 	}
 	return o.FanModulesSupported, true
@@ -227,7 +231,7 @@ func (o *CapabilitySwitchCapability) GetFanModulesSupportedOk() (*bool, bool) {
 
 // HasFanModulesSupported returns a boolean if a field has been set.
 func (o *CapabilitySwitchCapability) HasFanModulesSupported() bool {
-	if o != nil && o.FanModulesSupported != nil {
+	if o != nil && !IsNil(o.FanModulesSupported) {
 		return true
 	}
 
@@ -252,7 +256,7 @@ func (o *CapabilitySwitchCapability) GetFcEndHostModeReservedVsans() []Capabilit
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CapabilitySwitchCapability) GetFcEndHostModeReservedVsansOk() ([]CapabilityPortRange, bool) {
-	if o == nil || o.FcEndHostModeReservedVsans == nil {
+	if o == nil || IsNil(o.FcEndHostModeReservedVsans) {
 		return nil, false
 	}
 	return o.FcEndHostModeReservedVsans, true
@@ -260,7 +264,7 @@ func (o *CapabilitySwitchCapability) GetFcEndHostModeReservedVsansOk() ([]Capabi
 
 // HasFcEndHostModeReservedVsans returns a boolean if a field has been set.
 func (o *CapabilitySwitchCapability) HasFcEndHostModeReservedVsans() bool {
-	if o != nil && o.FcEndHostModeReservedVsans != nil {
+	if o != nil && IsNil(o.FcEndHostModeReservedVsans) {
 		return true
 	}
 
@@ -274,7 +278,7 @@ func (o *CapabilitySwitchCapability) SetFcEndHostModeReservedVsans(v []Capabilit
 
 // GetFcUplinkPortsAutoNegotiationSupported returns the FcUplinkPortsAutoNegotiationSupported field value if set, zero value otherwise.
 func (o *CapabilitySwitchCapability) GetFcUplinkPortsAutoNegotiationSupported() bool {
-	if o == nil || o.FcUplinkPortsAutoNegotiationSupported == nil {
+	if o == nil || IsNil(o.FcUplinkPortsAutoNegotiationSupported) {
 		var ret bool
 		return ret
 	}
@@ -284,7 +288,7 @@ func (o *CapabilitySwitchCapability) GetFcUplinkPortsAutoNegotiationSupported() 
 // GetFcUplinkPortsAutoNegotiationSupportedOk returns a tuple with the FcUplinkPortsAutoNegotiationSupported field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CapabilitySwitchCapability) GetFcUplinkPortsAutoNegotiationSupportedOk() (*bool, bool) {
-	if o == nil || o.FcUplinkPortsAutoNegotiationSupported == nil {
+	if o == nil || IsNil(o.FcUplinkPortsAutoNegotiationSupported) {
 		return nil, false
 	}
 	return o.FcUplinkPortsAutoNegotiationSupported, true
@@ -292,7 +296,7 @@ func (o *CapabilitySwitchCapability) GetFcUplinkPortsAutoNegotiationSupportedOk(
 
 // HasFcUplinkPortsAutoNegotiationSupported returns a boolean if a field has been set.
 func (o *CapabilitySwitchCapability) HasFcUplinkPortsAutoNegotiationSupported() bool {
-	if o != nil && o.FcUplinkPortsAutoNegotiationSupported != nil {
+	if o != nil && !IsNil(o.FcUplinkPortsAutoNegotiationSupported) {
 		return true
 	}
 
@@ -306,7 +310,7 @@ func (o *CapabilitySwitchCapability) SetFcUplinkPortsAutoNegotiationSupported(v 
 
 // GetImmControlsVpcompression returns the ImmControlsVpcompression field value if set, zero value otherwise.
 func (o *CapabilitySwitchCapability) GetImmControlsVpcompression() bool {
-	if o == nil || o.ImmControlsVpcompression == nil {
+	if o == nil || IsNil(o.ImmControlsVpcompression) {
 		var ret bool
 		return ret
 	}
@@ -316,7 +320,7 @@ func (o *CapabilitySwitchCapability) GetImmControlsVpcompression() bool {
 // GetImmControlsVpcompressionOk returns a tuple with the ImmControlsVpcompression field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CapabilitySwitchCapability) GetImmControlsVpcompressionOk() (*bool, bool) {
-	if o == nil || o.ImmControlsVpcompression == nil {
+	if o == nil || IsNil(o.ImmControlsVpcompression) {
 		return nil, false
 	}
 	return o.ImmControlsVpcompression, true
@@ -324,7 +328,7 @@ func (o *CapabilitySwitchCapability) GetImmControlsVpcompressionOk() (*bool, boo
 
 // HasImmControlsVpcompression returns a boolean if a field has been set.
 func (o *CapabilitySwitchCapability) HasImmControlsVpcompression() bool {
-	if o != nil && o.ImmControlsVpcompression != nil {
+	if o != nil && !IsNil(o.ImmControlsVpcompression) {
 		return true
 	}
 
@@ -338,7 +342,7 @@ func (o *CapabilitySwitchCapability) SetImmControlsVpcompression(v bool) {
 
 // GetLocatorBeaconSupported returns the LocatorBeaconSupported field value if set, zero value otherwise.
 func (o *CapabilitySwitchCapability) GetLocatorBeaconSupported() bool {
-	if o == nil || o.LocatorBeaconSupported == nil {
+	if o == nil || IsNil(o.LocatorBeaconSupported) {
 		var ret bool
 		return ret
 	}
@@ -348,7 +352,7 @@ func (o *CapabilitySwitchCapability) GetLocatorBeaconSupported() bool {
 // GetLocatorBeaconSupportedOk returns a tuple with the LocatorBeaconSupported field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CapabilitySwitchCapability) GetLocatorBeaconSupportedOk() (*bool, bool) {
-	if o == nil || o.LocatorBeaconSupported == nil {
+	if o == nil || IsNil(o.LocatorBeaconSupported) {
 		return nil, false
 	}
 	return o.LocatorBeaconSupported, true
@@ -356,7 +360,7 @@ func (o *CapabilitySwitchCapability) GetLocatorBeaconSupportedOk() (*bool, bool)
 
 // HasLocatorBeaconSupported returns a boolean if a field has been set.
 func (o *CapabilitySwitchCapability) HasLocatorBeaconSupported() bool {
-	if o != nil && o.LocatorBeaconSupported != nil {
+	if o != nil && !IsNil(o.LocatorBeaconSupported) {
 		return true
 	}
 
@@ -370,7 +374,7 @@ func (o *CapabilitySwitchCapability) SetLocatorBeaconSupported(v bool) {
 
 // GetMaxPorts returns the MaxPorts field value if set, zero value otherwise.
 func (o *CapabilitySwitchCapability) GetMaxPorts() int64 {
-	if o == nil || o.MaxPorts == nil {
+	if o == nil || IsNil(o.MaxPorts) {
 		var ret int64
 		return ret
 	}
@@ -380,7 +384,7 @@ func (o *CapabilitySwitchCapability) GetMaxPorts() int64 {
 // GetMaxPortsOk returns a tuple with the MaxPorts field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CapabilitySwitchCapability) GetMaxPortsOk() (*int64, bool) {
-	if o == nil || o.MaxPorts == nil {
+	if o == nil || IsNil(o.MaxPorts) {
 		return nil, false
 	}
 	return o.MaxPorts, true
@@ -388,7 +392,7 @@ func (o *CapabilitySwitchCapability) GetMaxPortsOk() (*int64, bool) {
 
 // HasMaxPorts returns a boolean if a field has been set.
 func (o *CapabilitySwitchCapability) HasMaxPorts() bool {
-	if o != nil && o.MaxPorts != nil {
+	if o != nil && !IsNil(o.MaxPorts) {
 		return true
 	}
 
@@ -402,7 +406,7 @@ func (o *CapabilitySwitchCapability) SetMaxPorts(v int64) {
 
 // GetMaxSlots returns the MaxSlots field value if set, zero value otherwise.
 func (o *CapabilitySwitchCapability) GetMaxSlots() int64 {
-	if o == nil || o.MaxSlots == nil {
+	if o == nil || IsNil(o.MaxSlots) {
 		var ret int64
 		return ret
 	}
@@ -412,7 +416,7 @@ func (o *CapabilitySwitchCapability) GetMaxSlots() int64 {
 // GetMaxSlotsOk returns a tuple with the MaxSlots field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CapabilitySwitchCapability) GetMaxSlotsOk() (*int64, bool) {
-	if o == nil || o.MaxSlots == nil {
+	if o == nil || IsNil(o.MaxSlots) {
 		return nil, false
 	}
 	return o.MaxSlots, true
@@ -420,7 +424,7 @@ func (o *CapabilitySwitchCapability) GetMaxSlotsOk() (*int64, bool) {
 
 // HasMaxSlots returns a boolean if a field has been set.
 func (o *CapabilitySwitchCapability) HasMaxSlots() bool {
-	if o != nil && o.MaxSlots != nil {
+	if o != nil && !IsNil(o.MaxSlots) {
 		return true
 	}
 
@@ -434,7 +438,7 @@ func (o *CapabilitySwitchCapability) SetMaxSlots(v int64) {
 
 // GetMinVersionMapWithBreakoutSupport returns the MinVersionMapWithBreakoutSupport field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CapabilitySwitchCapability) GetMinVersionMapWithBreakoutSupport() FirmwareVersionMap {
-	if o == nil || o.MinVersionMapWithBreakoutSupport.Get() == nil {
+	if o == nil || IsNil(o.MinVersionMapWithBreakoutSupport.Get()) {
 		var ret FirmwareVersionMap
 		return ret
 	}
@@ -477,7 +481,7 @@ func (o *CapabilitySwitchCapability) UnsetMinVersionMapWithBreakoutSupport() {
 
 // GetMinVersionMapWithLocatorLedSupport returns the MinVersionMapWithLocatorLedSupport field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CapabilitySwitchCapability) GetMinVersionMapWithLocatorLedSupport() FirmwareVersionMap {
-	if o == nil || o.MinVersionMapWithLocatorLedSupport.Get() == nil {
+	if o == nil || IsNil(o.MinVersionMapWithLocatorLedSupport.Get()) {
 		var ret FirmwareVersionMap
 		return ret
 	}
@@ -520,7 +524,7 @@ func (o *CapabilitySwitchCapability) UnsetMinVersionMapWithLocatorLedSupport() {
 
 // GetMinVersionMapWithNegAuto25gSupport returns the MinVersionMapWithNegAuto25gSupport field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CapabilitySwitchCapability) GetMinVersionMapWithNegAuto25gSupport() FirmwareVersionMap {
-	if o == nil || o.MinVersionMapWithNegAuto25gSupport.Get() == nil {
+	if o == nil || IsNil(o.MinVersionMapWithNegAuto25gSupport.Get()) {
 		var ret FirmwareVersionMap
 		return ret
 	}
@@ -563,7 +567,7 @@ func (o *CapabilitySwitchCapability) UnsetMinVersionMapWithNegAuto25gSupport() {
 
 // GetNetworkLimits returns the NetworkLimits field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CapabilitySwitchCapability) GetNetworkLimits() CapabilitySwitchNetworkLimits {
-	if o == nil || o.NetworkLimits.Get() == nil {
+	if o == nil || IsNil(o.NetworkLimits.Get()) {
 		var ret CapabilitySwitchNetworkLimits
 		return ret
 	}
@@ -617,7 +621,7 @@ func (o *CapabilitySwitchCapability) GetPortsSupporting100gSpeed() []CapabilityP
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CapabilitySwitchCapability) GetPortsSupporting100gSpeedOk() ([]CapabilityPortRange, bool) {
-	if o == nil || o.PortsSupporting100gSpeed == nil {
+	if o == nil || IsNil(o.PortsSupporting100gSpeed) {
 		return nil, false
 	}
 	return o.PortsSupporting100gSpeed, true
@@ -625,7 +629,7 @@ func (o *CapabilitySwitchCapability) GetPortsSupporting100gSpeedOk() ([]Capabili
 
 // HasPortsSupporting100gSpeed returns a boolean if a field has been set.
 func (o *CapabilitySwitchCapability) HasPortsSupporting100gSpeed() bool {
-	if o != nil && o.PortsSupporting100gSpeed != nil {
+	if o != nil && IsNil(o.PortsSupporting100gSpeed) {
 		return true
 	}
 
@@ -650,7 +654,7 @@ func (o *CapabilitySwitchCapability) GetPortsSupporting10gSpeed() []CapabilityPo
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CapabilitySwitchCapability) GetPortsSupporting10gSpeedOk() ([]CapabilityPortRange, bool) {
-	if o == nil || o.PortsSupporting10gSpeed == nil {
+	if o == nil || IsNil(o.PortsSupporting10gSpeed) {
 		return nil, false
 	}
 	return o.PortsSupporting10gSpeed, true
@@ -658,7 +662,7 @@ func (o *CapabilitySwitchCapability) GetPortsSupporting10gSpeedOk() ([]Capabilit
 
 // HasPortsSupporting10gSpeed returns a boolean if a field has been set.
 func (o *CapabilitySwitchCapability) HasPortsSupporting10gSpeed() bool {
-	if o != nil && o.PortsSupporting10gSpeed != nil {
+	if o != nil && IsNil(o.PortsSupporting10gSpeed) {
 		return true
 	}
 
@@ -683,7 +687,7 @@ func (o *CapabilitySwitchCapability) GetPortsSupporting1gSpeed() []CapabilityPor
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CapabilitySwitchCapability) GetPortsSupporting1gSpeedOk() ([]CapabilityPortRange, bool) {
-	if o == nil || o.PortsSupporting1gSpeed == nil {
+	if o == nil || IsNil(o.PortsSupporting1gSpeed) {
 		return nil, false
 	}
 	return o.PortsSupporting1gSpeed, true
@@ -691,7 +695,7 @@ func (o *CapabilitySwitchCapability) GetPortsSupporting1gSpeedOk() ([]Capability
 
 // HasPortsSupporting1gSpeed returns a boolean if a field has been set.
 func (o *CapabilitySwitchCapability) HasPortsSupporting1gSpeed() bool {
-	if o != nil && o.PortsSupporting1gSpeed != nil {
+	if o != nil && IsNil(o.PortsSupporting1gSpeed) {
 		return true
 	}
 
@@ -716,7 +720,7 @@ func (o *CapabilitySwitchCapability) GetPortsSupporting25gSpeed() []CapabilityPo
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CapabilitySwitchCapability) GetPortsSupporting25gSpeedOk() ([]CapabilityPortRange, bool) {
-	if o == nil || o.PortsSupporting25gSpeed == nil {
+	if o == nil || IsNil(o.PortsSupporting25gSpeed) {
 		return nil, false
 	}
 	return o.PortsSupporting25gSpeed, true
@@ -724,7 +728,7 @@ func (o *CapabilitySwitchCapability) GetPortsSupporting25gSpeedOk() ([]Capabilit
 
 // HasPortsSupporting25gSpeed returns a boolean if a field has been set.
 func (o *CapabilitySwitchCapability) HasPortsSupporting25gSpeed() bool {
-	if o != nil && o.PortsSupporting25gSpeed != nil {
+	if o != nil && IsNil(o.PortsSupporting25gSpeed) {
 		return true
 	}
 
@@ -749,7 +753,7 @@ func (o *CapabilitySwitchCapability) GetPortsSupporting40gSpeed() []CapabilityPo
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CapabilitySwitchCapability) GetPortsSupporting40gSpeedOk() ([]CapabilityPortRange, bool) {
-	if o == nil || o.PortsSupporting40gSpeed == nil {
+	if o == nil || IsNil(o.PortsSupporting40gSpeed) {
 		return nil, false
 	}
 	return o.PortsSupporting40gSpeed, true
@@ -757,7 +761,7 @@ func (o *CapabilitySwitchCapability) GetPortsSupporting40gSpeedOk() ([]Capabilit
 
 // HasPortsSupporting40gSpeed returns a boolean if a field has been set.
 func (o *CapabilitySwitchCapability) HasPortsSupporting40gSpeed() bool {
-	if o != nil && o.PortsSupporting40gSpeed != nil {
+	if o != nil && IsNil(o.PortsSupporting40gSpeed) {
 		return true
 	}
 
@@ -782,7 +786,7 @@ func (o *CapabilitySwitchCapability) GetPortsSupportingBreakout() []CapabilityPo
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CapabilitySwitchCapability) GetPortsSupportingBreakoutOk() ([]CapabilityPortRange, bool) {
-	if o == nil || o.PortsSupportingBreakout == nil {
+	if o == nil || IsNil(o.PortsSupportingBreakout) {
 		return nil, false
 	}
 	return o.PortsSupportingBreakout, true
@@ -790,7 +794,7 @@ func (o *CapabilitySwitchCapability) GetPortsSupportingBreakoutOk() ([]Capabilit
 
 // HasPortsSupportingBreakout returns a boolean if a field has been set.
 func (o *CapabilitySwitchCapability) HasPortsSupportingBreakout() bool {
-	if o != nil && o.PortsSupportingBreakout != nil {
+	if o != nil && IsNil(o.PortsSupportingBreakout) {
 		return true
 	}
 
@@ -815,7 +819,7 @@ func (o *CapabilitySwitchCapability) GetPortsSupportingFcoe() []CapabilityPortRa
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CapabilitySwitchCapability) GetPortsSupportingFcoeOk() ([]CapabilityPortRange, bool) {
-	if o == nil || o.PortsSupportingFcoe == nil {
+	if o == nil || IsNil(o.PortsSupportingFcoe) {
 		return nil, false
 	}
 	return o.PortsSupportingFcoe, true
@@ -823,7 +827,7 @@ func (o *CapabilitySwitchCapability) GetPortsSupportingFcoeOk() ([]CapabilityPor
 
 // HasPortsSupportingFcoe returns a boolean if a field has been set.
 func (o *CapabilitySwitchCapability) HasPortsSupportingFcoe() bool {
-	if o != nil && o.PortsSupportingFcoe != nil {
+	if o != nil && IsNil(o.PortsSupportingFcoe) {
 		return true
 	}
 
@@ -848,7 +852,7 @@ func (o *CapabilitySwitchCapability) GetPortsSupportingServerRole() []Capability
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CapabilitySwitchCapability) GetPortsSupportingServerRoleOk() ([]CapabilityPortRange, bool) {
-	if o == nil || o.PortsSupportingServerRole == nil {
+	if o == nil || IsNil(o.PortsSupportingServerRole) {
 		return nil, false
 	}
 	return o.PortsSupportingServerRole, true
@@ -856,7 +860,7 @@ func (o *CapabilitySwitchCapability) GetPortsSupportingServerRoleOk() ([]Capabil
 
 // HasPortsSupportingServerRole returns a boolean if a field has been set.
 func (o *CapabilitySwitchCapability) HasPortsSupportingServerRole() bool {
-	if o != nil && o.PortsSupportingServerRole != nil {
+	if o != nil && IsNil(o.PortsSupportingServerRole) {
 		return true
 	}
 
@@ -881,7 +885,7 @@ func (o *CapabilitySwitchCapability) GetReservedVsans() []CapabilityPortRange {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CapabilitySwitchCapability) GetReservedVsansOk() ([]CapabilityPortRange, bool) {
-	if o == nil || o.ReservedVsans == nil {
+	if o == nil || IsNil(o.ReservedVsans) {
 		return nil, false
 	}
 	return o.ReservedVsans, true
@@ -889,7 +893,7 @@ func (o *CapabilitySwitchCapability) GetReservedVsansOk() ([]CapabilityPortRange
 
 // HasReservedVsans returns a boolean if a field has been set.
 func (o *CapabilitySwitchCapability) HasReservedVsans() bool {
-	if o != nil && o.ReservedVsans != nil {
+	if o != nil && IsNil(o.ReservedVsans) {
 		return true
 	}
 
@@ -903,7 +907,7 @@ func (o *CapabilitySwitchCapability) SetReservedVsans(v []CapabilityPortRange) {
 
 // GetSerenoNetflowSupported returns the SerenoNetflowSupported field value if set, zero value otherwise.
 func (o *CapabilitySwitchCapability) GetSerenoNetflowSupported() bool {
-	if o == nil || o.SerenoNetflowSupported == nil {
+	if o == nil || IsNil(o.SerenoNetflowSupported) {
 		var ret bool
 		return ret
 	}
@@ -913,7 +917,7 @@ func (o *CapabilitySwitchCapability) GetSerenoNetflowSupported() bool {
 // GetSerenoNetflowSupportedOk returns a tuple with the SerenoNetflowSupported field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CapabilitySwitchCapability) GetSerenoNetflowSupportedOk() (*bool, bool) {
-	if o == nil || o.SerenoNetflowSupported == nil {
+	if o == nil || IsNil(o.SerenoNetflowSupported) {
 		return nil, false
 	}
 	return o.SerenoNetflowSupported, true
@@ -921,7 +925,7 @@ func (o *CapabilitySwitchCapability) GetSerenoNetflowSupportedOk() (*bool, bool)
 
 // HasSerenoNetflowSupported returns a boolean if a field has been set.
 func (o *CapabilitySwitchCapability) HasSerenoNetflowSupported() bool {
-	if o != nil && o.SerenoNetflowSupported != nil {
+	if o != nil && !IsNil(o.SerenoNetflowSupported) {
 		return true
 	}
 
@@ -946,7 +950,7 @@ func (o *CapabilitySwitchCapability) GetServerRoleSupportedOnBreakout() []string
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CapabilitySwitchCapability) GetServerRoleSupportedOnBreakoutOk() ([]string, bool) {
-	if o == nil || o.ServerRoleSupportedOnBreakout == nil {
+	if o == nil || IsNil(o.ServerRoleSupportedOnBreakout) {
 		return nil, false
 	}
 	return o.ServerRoleSupportedOnBreakout, true
@@ -954,7 +958,7 @@ func (o *CapabilitySwitchCapability) GetServerRoleSupportedOnBreakoutOk() ([]str
 
 // HasServerRoleSupportedOnBreakout returns a boolean if a field has been set.
 func (o *CapabilitySwitchCapability) HasServerRoleSupportedOnBreakout() bool {
-	if o != nil && o.ServerRoleSupportedOnBreakout != nil {
+	if o != nil && IsNil(o.ServerRoleSupportedOnBreakout) {
 		return true
 	}
 
@@ -968,7 +972,7 @@ func (o *CapabilitySwitchCapability) SetServerRoleSupportedOnBreakout(v []string
 
 // GetStorageLimits returns the StorageLimits field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CapabilitySwitchCapability) GetStorageLimits() CapabilitySwitchStorageLimits {
-	if o == nil || o.StorageLimits.Get() == nil {
+	if o == nil || IsNil(o.StorageLimits.Get()) {
 		var ret CapabilitySwitchStorageLimits
 		return ret
 	}
@@ -1022,7 +1026,7 @@ func (o *CapabilitySwitchCapability) GetSwitchingModeCapabilities() []Capability
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CapabilitySwitchCapability) GetSwitchingModeCapabilitiesOk() ([]CapabilitySwitchingModeCapability, bool) {
-	if o == nil || o.SwitchingModeCapabilities == nil {
+	if o == nil || IsNil(o.SwitchingModeCapabilities) {
 		return nil, false
 	}
 	return o.SwitchingModeCapabilities, true
@@ -1030,7 +1034,7 @@ func (o *CapabilitySwitchCapability) GetSwitchingModeCapabilitiesOk() ([]Capabil
 
 // HasSwitchingModeCapabilities returns a boolean if a field has been set.
 func (o *CapabilitySwitchCapability) HasSwitchingModeCapabilities() bool {
-	if o != nil && o.SwitchingModeCapabilities != nil {
+	if o != nil && IsNil(o.SwitchingModeCapabilities) {
 		return true
 	}
 
@@ -1044,7 +1048,7 @@ func (o *CapabilitySwitchCapability) SetSwitchingModeCapabilities(v []Capability
 
 // GetSystemLimits returns the SystemLimits field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CapabilitySwitchCapability) GetSystemLimits() CapabilitySwitchSystemLimits {
-	if o == nil || o.SystemLimits.Get() == nil {
+	if o == nil || IsNil(o.SystemLimits.Get()) {
 		var ret CapabilitySwitchSystemLimits
 		return ret
 	}
@@ -1098,7 +1102,7 @@ func (o *CapabilitySwitchCapability) GetUnifiedPorts() []CapabilityPortRange {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CapabilitySwitchCapability) GetUnifiedPortsOk() ([]CapabilityPortRange, bool) {
-	if o == nil || o.UnifiedPorts == nil {
+	if o == nil || IsNil(o.UnifiedPorts) {
 		return nil, false
 	}
 	return o.UnifiedPorts, true
@@ -1106,7 +1110,7 @@ func (o *CapabilitySwitchCapability) GetUnifiedPortsOk() ([]CapabilityPortRange,
 
 // HasUnifiedPorts returns a boolean if a field has been set.
 func (o *CapabilitySwitchCapability) HasUnifiedPorts() bool {
-	if o != nil && o.UnifiedPorts != nil {
+	if o != nil && IsNil(o.UnifiedPorts) {
 		return true
 	}
 
@@ -1120,7 +1124,7 @@ func (o *CapabilitySwitchCapability) SetUnifiedPorts(v []CapabilityPortRange) {
 
 // GetUnifiedRule returns the UnifiedRule field value if set, zero value otherwise.
 func (o *CapabilitySwitchCapability) GetUnifiedRule() string {
-	if o == nil || o.UnifiedRule == nil {
+	if o == nil || IsNil(o.UnifiedRule) {
 		var ret string
 		return ret
 	}
@@ -1130,7 +1134,7 @@ func (o *CapabilitySwitchCapability) GetUnifiedRule() string {
 // GetUnifiedRuleOk returns a tuple with the UnifiedRule field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CapabilitySwitchCapability) GetUnifiedRuleOk() (*string, bool) {
-	if o == nil || o.UnifiedRule == nil {
+	if o == nil || IsNil(o.UnifiedRule) {
 		return nil, false
 	}
 	return o.UnifiedRule, true
@@ -1138,7 +1142,7 @@ func (o *CapabilitySwitchCapability) GetUnifiedRuleOk() (*string, bool) {
 
 // HasUnifiedRule returns a boolean if a field has been set.
 func (o *CapabilitySwitchCapability) HasUnifiedRule() bool {
-	if o != nil && o.UnifiedRule != nil {
+	if o != nil && !IsNil(o.UnifiedRule) {
 		return true
 	}
 
@@ -1152,7 +1156,7 @@ func (o *CapabilitySwitchCapability) SetUnifiedRule(v string) {
 
 // GetUplinkAdminPortSpeedNegAuto25GbpsSupported returns the UplinkAdminPortSpeedNegAuto25GbpsSupported field value if set, zero value otherwise.
 func (o *CapabilitySwitchCapability) GetUplinkAdminPortSpeedNegAuto25GbpsSupported() bool {
-	if o == nil || o.UplinkAdminPortSpeedNegAuto25GbpsSupported == nil {
+	if o == nil || IsNil(o.UplinkAdminPortSpeedNegAuto25GbpsSupported) {
 		var ret bool
 		return ret
 	}
@@ -1162,7 +1166,7 @@ func (o *CapabilitySwitchCapability) GetUplinkAdminPortSpeedNegAuto25GbpsSupport
 // GetUplinkAdminPortSpeedNegAuto25GbpsSupportedOk returns a tuple with the UplinkAdminPortSpeedNegAuto25GbpsSupported field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CapabilitySwitchCapability) GetUplinkAdminPortSpeedNegAuto25GbpsSupportedOk() (*bool, bool) {
-	if o == nil || o.UplinkAdminPortSpeedNegAuto25GbpsSupported == nil {
+	if o == nil || IsNil(o.UplinkAdminPortSpeedNegAuto25GbpsSupported) {
 		return nil, false
 	}
 	return o.UplinkAdminPortSpeedNegAuto25GbpsSupported, true
@@ -1170,7 +1174,7 @@ func (o *CapabilitySwitchCapability) GetUplinkAdminPortSpeedNegAuto25GbpsSupport
 
 // HasUplinkAdminPortSpeedNegAuto25GbpsSupported returns a boolean if a field has been set.
 func (o *CapabilitySwitchCapability) HasUplinkAdminPortSpeedNegAuto25GbpsSupported() bool {
-	if o != nil && o.UplinkAdminPortSpeedNegAuto25GbpsSupported != nil {
+	if o != nil && !IsNil(o.UplinkAdminPortSpeedNegAuto25GbpsSupported) {
 		return true
 	}
 
@@ -1183,46 +1187,50 @@ func (o *CapabilitySwitchCapability) SetUplinkAdminPortSpeedNegAuto25GbpsSupport
 }
 
 func (o CapabilitySwitchCapability) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o CapabilitySwitchCapability) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedCapabilitySwitchCapabilityDef, errCapabilitySwitchCapabilityDef := json.Marshal(o.CapabilitySwitchCapabilityDef)
 	if errCapabilitySwitchCapabilityDef != nil {
-		return []byte{}, errCapabilitySwitchCapabilityDef
+		return map[string]interface{}{}, errCapabilitySwitchCapabilityDef
 	}
 	errCapabilitySwitchCapabilityDef = json.Unmarshal([]byte(serializedCapabilitySwitchCapabilityDef), &toSerialize)
 	if errCapabilitySwitchCapabilityDef != nil {
-		return []byte{}, errCapabilitySwitchCapabilityDef
+		return map[string]interface{}{}, errCapabilitySwitchCapabilityDef
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.DefaultFcoeVlan != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.DefaultFcoeVlan) {
 		toSerialize["DefaultFcoeVlan"] = o.DefaultFcoeVlan
 	}
-	if o.DynamicVifsSupported != nil {
+	if !IsNil(o.DynamicVifsSupported) {
 		toSerialize["DynamicVifsSupported"] = o.DynamicVifsSupported
 	}
-	if o.FanModulesSupported != nil {
+	if !IsNil(o.FanModulesSupported) {
 		toSerialize["FanModulesSupported"] = o.FanModulesSupported
 	}
 	if o.FcEndHostModeReservedVsans != nil {
 		toSerialize["FcEndHostModeReservedVsans"] = o.FcEndHostModeReservedVsans
 	}
-	if o.FcUplinkPortsAutoNegotiationSupported != nil {
+	if !IsNil(o.FcUplinkPortsAutoNegotiationSupported) {
 		toSerialize["FcUplinkPortsAutoNegotiationSupported"] = o.FcUplinkPortsAutoNegotiationSupported
 	}
-	if o.ImmControlsVpcompression != nil {
+	if !IsNil(o.ImmControlsVpcompression) {
 		toSerialize["ImmControlsVpcompression"] = o.ImmControlsVpcompression
 	}
-	if o.LocatorBeaconSupported != nil {
+	if !IsNil(o.LocatorBeaconSupported) {
 		toSerialize["LocatorBeaconSupported"] = o.LocatorBeaconSupported
 	}
-	if o.MaxPorts != nil {
+	if !IsNil(o.MaxPorts) {
 		toSerialize["MaxPorts"] = o.MaxPorts
 	}
-	if o.MaxSlots != nil {
+	if !IsNil(o.MaxSlots) {
 		toSerialize["MaxSlots"] = o.MaxSlots
 	}
 	if o.MinVersionMapWithBreakoutSupport.IsSet() {
@@ -1264,7 +1272,7 @@ func (o CapabilitySwitchCapability) MarshalJSON() ([]byte, error) {
 	if o.ReservedVsans != nil {
 		toSerialize["ReservedVsans"] = o.ReservedVsans
 	}
-	if o.SerenoNetflowSupported != nil {
+	if !IsNil(o.SerenoNetflowSupported) {
 		toSerialize["SerenoNetflowSupported"] = o.SerenoNetflowSupported
 	}
 	if o.ServerRoleSupportedOnBreakout != nil {
@@ -1282,10 +1290,10 @@ func (o CapabilitySwitchCapability) MarshalJSON() ([]byte, error) {
 	if o.UnifiedPorts != nil {
 		toSerialize["UnifiedPorts"] = o.UnifiedPorts
 	}
-	if o.UnifiedRule != nil {
+	if !IsNil(o.UnifiedRule) {
 		toSerialize["UnifiedRule"] = o.UnifiedRule
 	}
-	if o.UplinkAdminPortSpeedNegAuto25GbpsSupported != nil {
+	if !IsNil(o.UplinkAdminPortSpeedNegAuto25GbpsSupported) {
 		toSerialize["UplinkAdminPortSpeedNegAuto25GbpsSupported"] = o.UplinkAdminPortSpeedNegAuto25GbpsSupported
 	}
 
@@ -1293,10 +1301,32 @@ func (o CapabilitySwitchCapability) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *CapabilitySwitchCapability) UnmarshalJSON(bytes []byte) (err error) {
+func (o *CapabilitySwitchCapability) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type CapabilitySwitchCapabilityWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -1347,7 +1377,7 @@ func (o *CapabilitySwitchCapability) UnmarshalJSON(bytes []byte) (err error) {
 
 	varCapabilitySwitchCapabilityWithoutEmbeddedStruct := CapabilitySwitchCapabilityWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varCapabilitySwitchCapabilityWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varCapabilitySwitchCapabilityWithoutEmbeddedStruct)
 	if err == nil {
 		varCapabilitySwitchCapability := _CapabilitySwitchCapability{}
 		varCapabilitySwitchCapability.ClassId = varCapabilitySwitchCapabilityWithoutEmbeddedStruct.ClassId
@@ -1389,7 +1419,7 @@ func (o *CapabilitySwitchCapability) UnmarshalJSON(bytes []byte) (err error) {
 
 	varCapabilitySwitchCapability := _CapabilitySwitchCapability{}
 
-	err = json.Unmarshal(bytes, &varCapabilitySwitchCapability)
+	err = json.Unmarshal(data, &varCapabilitySwitchCapability)
 	if err == nil {
 		o.CapabilitySwitchCapabilityDef = varCapabilitySwitchCapability.CapabilitySwitchCapabilityDef
 	} else {
@@ -1398,7 +1428,7 @@ func (o *CapabilitySwitchCapability) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "DefaultFcoeVlan")

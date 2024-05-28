@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "fabric.LinkAggregationPolicy"]
 **LacpRate** | Pointer to **string** | Flag used to indicate whether LACP PDUs are to be sent &#39;fast&#39;, i.e., every 1 second. * &#x60;normal&#x60; - The expanded 4th generation UCS Fabric Interconnect with 108 ports. * &#x60;fast&#x60; - The standard 4th generation UCS Fabric Interconnect with 54 ports. | [optional] [default to "normal"]
 **SuspendIndividual** | Pointer to **bool** | Flag tells the switch whether to suspend the port if it didn’t receive LACP PDU. | [optional] 
-**Organization** | Pointer to [**OrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
+**Organization** | Pointer to [**NullableOrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -144,6 +144,16 @@ SetOrganization sets Organization field to given value.
 
 HasOrganization returns a boolean if a field has been set.
 
+### SetOrganizationNil
+
+`func (o *FabricLinkAggregationPolicy) SetOrganizationNil(b bool)`
+
+ SetOrganizationNil sets the value for Organization to be an explicit nil
+
+### UnsetOrganization
+`func (o *FabricLinkAggregationPolicy) UnsetOrganization()`
+
+UnsetOrganization ensures that no value is present for Organization, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

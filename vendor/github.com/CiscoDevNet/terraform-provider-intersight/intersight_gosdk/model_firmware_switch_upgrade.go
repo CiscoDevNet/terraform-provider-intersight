@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the FirmwareSwitchUpgrade type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &FirmwareSwitchUpgrade{}
 
 // FirmwareSwitchUpgrade Firmware upgrade operation for Fabric Interconnects that downloads the image located at Cisco/appliance/user provided HTTP repository or uses the image from a network share and upgrade. Direct download is used for upgrade that uses the image from a Cisco repository or an appliance repository. Network share is used for upgrade that use the image from a network share from your data center.
 type FirmwareSwitchUpgrade struct {
@@ -25,8 +29,8 @@ type FirmwareSwitchUpgrade struct {
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
 	// The flag to enable or disable fabric evacuation during the switch firmware upgrade. In case of IMM, it is mandatory to have the Fabric Interconnects associated with domain profile for fabric evacuation to happen.
-	EnableFabricEvacuation *bool                                `json:"EnableFabricEvacuation,omitempty"`
-	Device                 *AssetDeviceRegistrationRelationship `json:"Device,omitempty"`
+	EnableFabricEvacuation *bool                                       `json:"EnableFabricEvacuation,omitempty"`
+	Device                 NullableAssetDeviceRegistrationRelationship `json:"Device,omitempty"`
 	// An array of relationships to networkElement resources.
 	NetworkElements      []NetworkElementRelationship `json:"NetworkElements,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -115,7 +119,7 @@ func (o *FirmwareSwitchUpgrade) SetObjectType(v string) {
 
 // GetEnableFabricEvacuation returns the EnableFabricEvacuation field value if set, zero value otherwise.
 func (o *FirmwareSwitchUpgrade) GetEnableFabricEvacuation() bool {
-	if o == nil || o.EnableFabricEvacuation == nil {
+	if o == nil || IsNil(o.EnableFabricEvacuation) {
 		var ret bool
 		return ret
 	}
@@ -125,7 +129,7 @@ func (o *FirmwareSwitchUpgrade) GetEnableFabricEvacuation() bool {
 // GetEnableFabricEvacuationOk returns a tuple with the EnableFabricEvacuation field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FirmwareSwitchUpgrade) GetEnableFabricEvacuationOk() (*bool, bool) {
-	if o == nil || o.EnableFabricEvacuation == nil {
+	if o == nil || IsNil(o.EnableFabricEvacuation) {
 		return nil, false
 	}
 	return o.EnableFabricEvacuation, true
@@ -133,7 +137,7 @@ func (o *FirmwareSwitchUpgrade) GetEnableFabricEvacuationOk() (*bool, bool) {
 
 // HasEnableFabricEvacuation returns a boolean if a field has been set.
 func (o *FirmwareSwitchUpgrade) HasEnableFabricEvacuation() bool {
-	if o != nil && o.EnableFabricEvacuation != nil {
+	if o != nil && !IsNil(o.EnableFabricEvacuation) {
 		return true
 	}
 
@@ -145,36 +149,47 @@ func (o *FirmwareSwitchUpgrade) SetEnableFabricEvacuation(v bool) {
 	o.EnableFabricEvacuation = &v
 }
 
-// GetDevice returns the Device field value if set, zero value otherwise.
+// GetDevice returns the Device field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *FirmwareSwitchUpgrade) GetDevice() AssetDeviceRegistrationRelationship {
-	if o == nil || o.Device == nil {
+	if o == nil || IsNil(o.Device.Get()) {
 		var ret AssetDeviceRegistrationRelationship
 		return ret
 	}
-	return *o.Device
+	return *o.Device.Get()
 }
 
 // GetDeviceOk returns a tuple with the Device field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *FirmwareSwitchUpgrade) GetDeviceOk() (*AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.Device == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Device, true
+	return o.Device.Get(), o.Device.IsSet()
 }
 
 // HasDevice returns a boolean if a field has been set.
 func (o *FirmwareSwitchUpgrade) HasDevice() bool {
-	if o != nil && o.Device != nil {
+	if o != nil && o.Device.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetDevice gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the Device field.
+// SetDevice gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the Device field.
 func (o *FirmwareSwitchUpgrade) SetDevice(v AssetDeviceRegistrationRelationship) {
-	o.Device = &v
+	o.Device.Set(&v)
+}
+
+// SetDeviceNil sets the value for Device to be an explicit nil
+func (o *FirmwareSwitchUpgrade) SetDeviceNil() {
+	o.Device.Set(nil)
+}
+
+// UnsetDevice ensures that no value is present for Device, not even an explicit nil
+func (o *FirmwareSwitchUpgrade) UnsetDevice() {
+	o.Device.Unset()
 }
 
 // GetNetworkElements returns the NetworkElements field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -190,7 +205,7 @@ func (o *FirmwareSwitchUpgrade) GetNetworkElements() []NetworkElementRelationshi
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *FirmwareSwitchUpgrade) GetNetworkElementsOk() ([]NetworkElementRelationship, bool) {
-	if o == nil || o.NetworkElements == nil {
+	if o == nil || IsNil(o.NetworkElements) {
 		return nil, false
 	}
 	return o.NetworkElements, true
@@ -198,7 +213,7 @@ func (o *FirmwareSwitchUpgrade) GetNetworkElementsOk() ([]NetworkElementRelation
 
 // HasNetworkElements returns a boolean if a field has been set.
 func (o *FirmwareSwitchUpgrade) HasNetworkElements() bool {
-	if o != nil && o.NetworkElements != nil {
+	if o != nil && IsNil(o.NetworkElements) {
 		return true
 	}
 
@@ -211,26 +226,30 @@ func (o *FirmwareSwitchUpgrade) SetNetworkElements(v []NetworkElementRelationshi
 }
 
 func (o FirmwareSwitchUpgrade) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o FirmwareSwitchUpgrade) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedFirmwareUpgradeBase, errFirmwareUpgradeBase := json.Marshal(o.FirmwareUpgradeBase)
 	if errFirmwareUpgradeBase != nil {
-		return []byte{}, errFirmwareUpgradeBase
+		return map[string]interface{}{}, errFirmwareUpgradeBase
 	}
 	errFirmwareUpgradeBase = json.Unmarshal([]byte(serializedFirmwareUpgradeBase), &toSerialize)
 	if errFirmwareUpgradeBase != nil {
-		return []byte{}, errFirmwareUpgradeBase
+		return map[string]interface{}{}, errFirmwareUpgradeBase
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.EnableFabricEvacuation != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.EnableFabricEvacuation) {
 		toSerialize["EnableFabricEvacuation"] = o.EnableFabricEvacuation
 	}
-	if o.Device != nil {
-		toSerialize["Device"] = o.Device
+	if o.Device.IsSet() {
+		toSerialize["Device"] = o.Device.Get()
 	}
 	if o.NetworkElements != nil {
 		toSerialize["NetworkElements"] = o.NetworkElements
@@ -240,25 +259,47 @@ func (o FirmwareSwitchUpgrade) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *FirmwareSwitchUpgrade) UnmarshalJSON(bytes []byte) (err error) {
+func (o *FirmwareSwitchUpgrade) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type FirmwareSwitchUpgradeWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 		ObjectType string `json:"ObjectType"`
 		// The flag to enable or disable fabric evacuation during the switch firmware upgrade. In case of IMM, it is mandatory to have the Fabric Interconnects associated with domain profile for fabric evacuation to happen.
-		EnableFabricEvacuation *bool                                `json:"EnableFabricEvacuation,omitempty"`
-		Device                 *AssetDeviceRegistrationRelationship `json:"Device,omitempty"`
+		EnableFabricEvacuation *bool                                       `json:"EnableFabricEvacuation,omitempty"`
+		Device                 NullableAssetDeviceRegistrationRelationship `json:"Device,omitempty"`
 		// An array of relationships to networkElement resources.
 		NetworkElements []NetworkElementRelationship `json:"NetworkElements,omitempty"`
 	}
 
 	varFirmwareSwitchUpgradeWithoutEmbeddedStruct := FirmwareSwitchUpgradeWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varFirmwareSwitchUpgradeWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varFirmwareSwitchUpgradeWithoutEmbeddedStruct)
 	if err == nil {
 		varFirmwareSwitchUpgrade := _FirmwareSwitchUpgrade{}
 		varFirmwareSwitchUpgrade.ClassId = varFirmwareSwitchUpgradeWithoutEmbeddedStruct.ClassId
@@ -273,7 +314,7 @@ func (o *FirmwareSwitchUpgrade) UnmarshalJSON(bytes []byte) (err error) {
 
 	varFirmwareSwitchUpgrade := _FirmwareSwitchUpgrade{}
 
-	err = json.Unmarshal(bytes, &varFirmwareSwitchUpgrade)
+	err = json.Unmarshal(data, &varFirmwareSwitchUpgrade)
 	if err == nil {
 		o.FirmwareUpgradeBase = varFirmwareSwitchUpgrade.FirmwareUpgradeBase
 	} else {
@@ -282,7 +323,7 @@ func (o *FirmwareSwitchUpgrade) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "EnableFabricEvacuation")

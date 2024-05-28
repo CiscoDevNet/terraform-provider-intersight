@@ -6,8 +6,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "hyperflex.VmImportOperation"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "hyperflex.VmImportOperation"]
-**DeviceMoid** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
-**Organization** | Pointer to [**OrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
+**DeviceMoid** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
+**Organization** | Pointer to [**NullableOrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -93,6 +93,16 @@ SetDeviceMoid sets DeviceMoid field to given value.
 
 HasDeviceMoid returns a boolean if a field has been set.
 
+### SetDeviceMoidNil
+
+`func (o *HyperflexVmImportOperation) SetDeviceMoidNil(b bool)`
+
+ SetDeviceMoidNil sets the value for DeviceMoid to be an explicit nil
+
+### UnsetDeviceMoid
+`func (o *HyperflexVmImportOperation) UnsetDeviceMoid()`
+
+UnsetDeviceMoid ensures that no value is present for DeviceMoid, not even an explicit nil
 ### GetOrganization
 
 `func (o *HyperflexVmImportOperation) GetOrganization() OrganizationOrganizationRelationship`
@@ -118,6 +128,16 @@ SetOrganization sets Organization field to given value.
 
 HasOrganization returns a boolean if a field has been set.
 
+### SetOrganizationNil
+
+`func (o *HyperflexVmImportOperation) SetOrganizationNil(b bool)`
+
+ SetOrganizationNil sets the value for Organization to be an explicit nil
+
+### UnsetOrganization
+`func (o *HyperflexVmImportOperation) UnsetOrganization()`
+
+UnsetOrganization ensures that no value is present for Organization, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the EquipmentTpm type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &EquipmentTpm{}
 
 // EquipmentTpm TPM security chip on server board.
 type EquipmentTpm struct {
@@ -35,10 +39,10 @@ type EquipmentTpm struct {
 	// Enter  the ID of the trusted platform module.
 	TpmId *int64 `json:"TpmId,omitempty"`
 	// Identifies the version of the Trusted Platform Module.
-	Version              *string                              `json:"Version,omitempty"`
-	ComputeBoard         *ComputeBoardRelationship            `json:"ComputeBoard,omitempty"`
-	InventoryDeviceInfo  *InventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
-	RegisteredDevice     *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+	Version              *string                                     `json:"Version,omitempty"`
+	ComputeBoard         NullableComputeBoardRelationship            `json:"ComputeBoard,omitempty"`
+	InventoryDeviceInfo  NullableInventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
+	RegisteredDevice     NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -117,7 +121,7 @@ func (o *EquipmentTpm) SetObjectType(v string) {
 
 // GetActivationStatus returns the ActivationStatus field value if set, zero value otherwise.
 func (o *EquipmentTpm) GetActivationStatus() string {
-	if o == nil || o.ActivationStatus == nil {
+	if o == nil || IsNil(o.ActivationStatus) {
 		var ret string
 		return ret
 	}
@@ -127,7 +131,7 @@ func (o *EquipmentTpm) GetActivationStatus() string {
 // GetActivationStatusOk returns a tuple with the ActivationStatus field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EquipmentTpm) GetActivationStatusOk() (*string, bool) {
-	if o == nil || o.ActivationStatus == nil {
+	if o == nil || IsNil(o.ActivationStatus) {
 		return nil, false
 	}
 	return o.ActivationStatus, true
@@ -135,7 +139,7 @@ func (o *EquipmentTpm) GetActivationStatusOk() (*string, bool) {
 
 // HasActivationStatus returns a boolean if a field has been set.
 func (o *EquipmentTpm) HasActivationStatus() bool {
-	if o != nil && o.ActivationStatus != nil {
+	if o != nil && !IsNil(o.ActivationStatus) {
 		return true
 	}
 
@@ -149,7 +153,7 @@ func (o *EquipmentTpm) SetActivationStatus(v string) {
 
 // GetAdminState returns the AdminState field value if set, zero value otherwise.
 func (o *EquipmentTpm) GetAdminState() string {
-	if o == nil || o.AdminState == nil {
+	if o == nil || IsNil(o.AdminState) {
 		var ret string
 		return ret
 	}
@@ -159,7 +163,7 @@ func (o *EquipmentTpm) GetAdminState() string {
 // GetAdminStateOk returns a tuple with the AdminState field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EquipmentTpm) GetAdminStateOk() (*string, bool) {
-	if o == nil || o.AdminState == nil {
+	if o == nil || IsNil(o.AdminState) {
 		return nil, false
 	}
 	return o.AdminState, true
@@ -167,7 +171,7 @@ func (o *EquipmentTpm) GetAdminStateOk() (*string, bool) {
 
 // HasAdminState returns a boolean if a field has been set.
 func (o *EquipmentTpm) HasAdminState() bool {
-	if o != nil && o.AdminState != nil {
+	if o != nil && !IsNil(o.AdminState) {
 		return true
 	}
 
@@ -181,7 +185,7 @@ func (o *EquipmentTpm) SetAdminState(v string) {
 
 // GetFirmwareVersion returns the FirmwareVersion field value if set, zero value otherwise.
 func (o *EquipmentTpm) GetFirmwareVersion() string {
-	if o == nil || o.FirmwareVersion == nil {
+	if o == nil || IsNil(o.FirmwareVersion) {
 		var ret string
 		return ret
 	}
@@ -191,7 +195,7 @@ func (o *EquipmentTpm) GetFirmwareVersion() string {
 // GetFirmwareVersionOk returns a tuple with the FirmwareVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EquipmentTpm) GetFirmwareVersionOk() (*string, bool) {
-	if o == nil || o.FirmwareVersion == nil {
+	if o == nil || IsNil(o.FirmwareVersion) {
 		return nil, false
 	}
 	return o.FirmwareVersion, true
@@ -199,7 +203,7 @@ func (o *EquipmentTpm) GetFirmwareVersionOk() (*string, bool) {
 
 // HasFirmwareVersion returns a boolean if a field has been set.
 func (o *EquipmentTpm) HasFirmwareVersion() bool {
-	if o != nil && o.FirmwareVersion != nil {
+	if o != nil && !IsNil(o.FirmwareVersion) {
 		return true
 	}
 
@@ -213,7 +217,7 @@ func (o *EquipmentTpm) SetFirmwareVersion(v string) {
 
 // GetOwnership returns the Ownership field value if set, zero value otherwise.
 func (o *EquipmentTpm) GetOwnership() string {
-	if o == nil || o.Ownership == nil {
+	if o == nil || IsNil(o.Ownership) {
 		var ret string
 		return ret
 	}
@@ -223,7 +227,7 @@ func (o *EquipmentTpm) GetOwnership() string {
 // GetOwnershipOk returns a tuple with the Ownership field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EquipmentTpm) GetOwnershipOk() (*string, bool) {
-	if o == nil || o.Ownership == nil {
+	if o == nil || IsNil(o.Ownership) {
 		return nil, false
 	}
 	return o.Ownership, true
@@ -231,7 +235,7 @@ func (o *EquipmentTpm) GetOwnershipOk() (*string, bool) {
 
 // HasOwnership returns a boolean if a field has been set.
 func (o *EquipmentTpm) HasOwnership() bool {
-	if o != nil && o.Ownership != nil {
+	if o != nil && !IsNil(o.Ownership) {
 		return true
 	}
 
@@ -245,7 +249,7 @@ func (o *EquipmentTpm) SetOwnership(v string) {
 
 // GetTpmId returns the TpmId field value if set, zero value otherwise.
 func (o *EquipmentTpm) GetTpmId() int64 {
-	if o == nil || o.TpmId == nil {
+	if o == nil || IsNil(o.TpmId) {
 		var ret int64
 		return ret
 	}
@@ -255,7 +259,7 @@ func (o *EquipmentTpm) GetTpmId() int64 {
 // GetTpmIdOk returns a tuple with the TpmId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EquipmentTpm) GetTpmIdOk() (*int64, bool) {
-	if o == nil || o.TpmId == nil {
+	if o == nil || IsNil(o.TpmId) {
 		return nil, false
 	}
 	return o.TpmId, true
@@ -263,7 +267,7 @@ func (o *EquipmentTpm) GetTpmIdOk() (*int64, bool) {
 
 // HasTpmId returns a boolean if a field has been set.
 func (o *EquipmentTpm) HasTpmId() bool {
-	if o != nil && o.TpmId != nil {
+	if o != nil && !IsNil(o.TpmId) {
 		return true
 	}
 
@@ -277,7 +281,7 @@ func (o *EquipmentTpm) SetTpmId(v int64) {
 
 // GetVersion returns the Version field value if set, zero value otherwise.
 func (o *EquipmentTpm) GetVersion() string {
-	if o == nil || o.Version == nil {
+	if o == nil || IsNil(o.Version) {
 		var ret string
 		return ret
 	}
@@ -287,7 +291,7 @@ func (o *EquipmentTpm) GetVersion() string {
 // GetVersionOk returns a tuple with the Version field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EquipmentTpm) GetVersionOk() (*string, bool) {
-	if o == nil || o.Version == nil {
+	if o == nil || IsNil(o.Version) {
 		return nil, false
 	}
 	return o.Version, true
@@ -295,7 +299,7 @@ func (o *EquipmentTpm) GetVersionOk() (*string, bool) {
 
 // HasVersion returns a boolean if a field has been set.
 func (o *EquipmentTpm) HasVersion() bool {
-	if o != nil && o.Version != nil {
+	if o != nil && !IsNil(o.Version) {
 		return true
 	}
 
@@ -307,154 +311,213 @@ func (o *EquipmentTpm) SetVersion(v string) {
 	o.Version = &v
 }
 
-// GetComputeBoard returns the ComputeBoard field value if set, zero value otherwise.
+// GetComputeBoard returns the ComputeBoard field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *EquipmentTpm) GetComputeBoard() ComputeBoardRelationship {
-	if o == nil || o.ComputeBoard == nil {
+	if o == nil || IsNil(o.ComputeBoard.Get()) {
 		var ret ComputeBoardRelationship
 		return ret
 	}
-	return *o.ComputeBoard
+	return *o.ComputeBoard.Get()
 }
 
 // GetComputeBoardOk returns a tuple with the ComputeBoard field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *EquipmentTpm) GetComputeBoardOk() (*ComputeBoardRelationship, bool) {
-	if o == nil || o.ComputeBoard == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.ComputeBoard, true
+	return o.ComputeBoard.Get(), o.ComputeBoard.IsSet()
 }
 
 // HasComputeBoard returns a boolean if a field has been set.
 func (o *EquipmentTpm) HasComputeBoard() bool {
-	if o != nil && o.ComputeBoard != nil {
+	if o != nil && o.ComputeBoard.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetComputeBoard gets a reference to the given ComputeBoardRelationship and assigns it to the ComputeBoard field.
+// SetComputeBoard gets a reference to the given NullableComputeBoardRelationship and assigns it to the ComputeBoard field.
 func (o *EquipmentTpm) SetComputeBoard(v ComputeBoardRelationship) {
-	o.ComputeBoard = &v
+	o.ComputeBoard.Set(&v)
 }
 
-// GetInventoryDeviceInfo returns the InventoryDeviceInfo field value if set, zero value otherwise.
+// SetComputeBoardNil sets the value for ComputeBoard to be an explicit nil
+func (o *EquipmentTpm) SetComputeBoardNil() {
+	o.ComputeBoard.Set(nil)
+}
+
+// UnsetComputeBoard ensures that no value is present for ComputeBoard, not even an explicit nil
+func (o *EquipmentTpm) UnsetComputeBoard() {
+	o.ComputeBoard.Unset()
+}
+
+// GetInventoryDeviceInfo returns the InventoryDeviceInfo field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *EquipmentTpm) GetInventoryDeviceInfo() InventoryDeviceInfoRelationship {
-	if o == nil || o.InventoryDeviceInfo == nil {
+	if o == nil || IsNil(o.InventoryDeviceInfo.Get()) {
 		var ret InventoryDeviceInfoRelationship
 		return ret
 	}
-	return *o.InventoryDeviceInfo
+	return *o.InventoryDeviceInfo.Get()
 }
 
 // GetInventoryDeviceInfoOk returns a tuple with the InventoryDeviceInfo field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *EquipmentTpm) GetInventoryDeviceInfoOk() (*InventoryDeviceInfoRelationship, bool) {
-	if o == nil || o.InventoryDeviceInfo == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.InventoryDeviceInfo, true
+	return o.InventoryDeviceInfo.Get(), o.InventoryDeviceInfo.IsSet()
 }
 
 // HasInventoryDeviceInfo returns a boolean if a field has been set.
 func (o *EquipmentTpm) HasInventoryDeviceInfo() bool {
-	if o != nil && o.InventoryDeviceInfo != nil {
+	if o != nil && o.InventoryDeviceInfo.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetInventoryDeviceInfo gets a reference to the given InventoryDeviceInfoRelationship and assigns it to the InventoryDeviceInfo field.
+// SetInventoryDeviceInfo gets a reference to the given NullableInventoryDeviceInfoRelationship and assigns it to the InventoryDeviceInfo field.
 func (o *EquipmentTpm) SetInventoryDeviceInfo(v InventoryDeviceInfoRelationship) {
-	o.InventoryDeviceInfo = &v
+	o.InventoryDeviceInfo.Set(&v)
 }
 
-// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise.
+// SetInventoryDeviceInfoNil sets the value for InventoryDeviceInfo to be an explicit nil
+func (o *EquipmentTpm) SetInventoryDeviceInfoNil() {
+	o.InventoryDeviceInfo.Set(nil)
+}
+
+// UnsetInventoryDeviceInfo ensures that no value is present for InventoryDeviceInfo, not even an explicit nil
+func (o *EquipmentTpm) UnsetInventoryDeviceInfo() {
+	o.InventoryDeviceInfo.Unset()
+}
+
+// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *EquipmentTpm) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil || IsNil(o.RegisteredDevice.Get()) {
 		var ret AssetDeviceRegistrationRelationship
 		return ret
 	}
-	return *o.RegisteredDevice
+	return *o.RegisteredDevice.Get()
 }
 
 // GetRegisteredDeviceOk returns a tuple with the RegisteredDevice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *EquipmentTpm) GetRegisteredDeviceOk() (*AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.RegisteredDevice, true
+	return o.RegisteredDevice.Get(), o.RegisteredDevice.IsSet()
 }
 
 // HasRegisteredDevice returns a boolean if a field has been set.
 func (o *EquipmentTpm) HasRegisteredDevice() bool {
-	if o != nil && o.RegisteredDevice != nil {
+	if o != nil && o.RegisteredDevice.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRegisteredDevice gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
+// SetRegisteredDevice gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
 func (o *EquipmentTpm) SetRegisteredDevice(v AssetDeviceRegistrationRelationship) {
-	o.RegisteredDevice = &v
+	o.RegisteredDevice.Set(&v)
+}
+
+// SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+func (o *EquipmentTpm) SetRegisteredDeviceNil() {
+	o.RegisteredDevice.Set(nil)
+}
+
+// UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
+func (o *EquipmentTpm) UnsetRegisteredDevice() {
+	o.RegisteredDevice.Unset()
 }
 
 func (o EquipmentTpm) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o EquipmentTpm) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedEquipmentBase, errEquipmentBase := json.Marshal(o.EquipmentBase)
 	if errEquipmentBase != nil {
-		return []byte{}, errEquipmentBase
+		return map[string]interface{}{}, errEquipmentBase
 	}
 	errEquipmentBase = json.Unmarshal([]byte(serializedEquipmentBase), &toSerialize)
 	if errEquipmentBase != nil {
-		return []byte{}, errEquipmentBase
+		return map[string]interface{}{}, errEquipmentBase
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.ActivationStatus != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.ActivationStatus) {
 		toSerialize["ActivationStatus"] = o.ActivationStatus
 	}
-	if o.AdminState != nil {
+	if !IsNil(o.AdminState) {
 		toSerialize["AdminState"] = o.AdminState
 	}
-	if o.FirmwareVersion != nil {
+	if !IsNil(o.FirmwareVersion) {
 		toSerialize["FirmwareVersion"] = o.FirmwareVersion
 	}
-	if o.Ownership != nil {
+	if !IsNil(o.Ownership) {
 		toSerialize["Ownership"] = o.Ownership
 	}
-	if o.TpmId != nil {
+	if !IsNil(o.TpmId) {
 		toSerialize["TpmId"] = o.TpmId
 	}
-	if o.Version != nil {
+	if !IsNil(o.Version) {
 		toSerialize["Version"] = o.Version
 	}
-	if o.ComputeBoard != nil {
-		toSerialize["ComputeBoard"] = o.ComputeBoard
+	if o.ComputeBoard.IsSet() {
+		toSerialize["ComputeBoard"] = o.ComputeBoard.Get()
 	}
-	if o.InventoryDeviceInfo != nil {
-		toSerialize["InventoryDeviceInfo"] = o.InventoryDeviceInfo
+	if o.InventoryDeviceInfo.IsSet() {
+		toSerialize["InventoryDeviceInfo"] = o.InventoryDeviceInfo.Get()
 	}
-	if o.RegisteredDevice != nil {
-		toSerialize["RegisteredDevice"] = o.RegisteredDevice
+	if o.RegisteredDevice.IsSet() {
+		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *EquipmentTpm) UnmarshalJSON(bytes []byte) (err error) {
+func (o *EquipmentTpm) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type EquipmentTpmWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -471,15 +534,15 @@ func (o *EquipmentTpm) UnmarshalJSON(bytes []byte) (err error) {
 		// Enter  the ID of the trusted platform module.
 		TpmId *int64 `json:"TpmId,omitempty"`
 		// Identifies the version of the Trusted Platform Module.
-		Version             *string                              `json:"Version,omitempty"`
-		ComputeBoard        *ComputeBoardRelationship            `json:"ComputeBoard,omitempty"`
-		InventoryDeviceInfo *InventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
-		RegisteredDevice    *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+		Version             *string                                     `json:"Version,omitempty"`
+		ComputeBoard        NullableComputeBoardRelationship            `json:"ComputeBoard,omitempty"`
+		InventoryDeviceInfo NullableInventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
+		RegisteredDevice    NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	}
 
 	varEquipmentTpmWithoutEmbeddedStruct := EquipmentTpmWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varEquipmentTpmWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varEquipmentTpmWithoutEmbeddedStruct)
 	if err == nil {
 		varEquipmentTpm := _EquipmentTpm{}
 		varEquipmentTpm.ClassId = varEquipmentTpmWithoutEmbeddedStruct.ClassId
@@ -500,7 +563,7 @@ func (o *EquipmentTpm) UnmarshalJSON(bytes []byte) (err error) {
 
 	varEquipmentTpm := _EquipmentTpm{}
 
-	err = json.Unmarshal(bytes, &varEquipmentTpm)
+	err = json.Unmarshal(data, &varEquipmentTpm)
 	if err == nil {
 		o.EquipmentBase = varEquipmentTpm.EquipmentBase
 	} else {
@@ -509,7 +572,7 @@ func (o *EquipmentTpm) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "ActivationStatus")

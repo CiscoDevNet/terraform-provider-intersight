@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the TechsupportmanagementTechSupportFileInfo type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &TechsupportmanagementTechSupportFileInfo{}
 
 // TechsupportmanagementTechSupportFileInfo TechSupportFileInfo contains information regarding a single techsupport file produced by a techsupport collection that produces multiple files. A user can track the progress of a particular file in the collection by monitoring the UploadStatus field for that file. This field will progress from \"UploadQueued\", to \"UploadPending\", to \"UploadInProgress\", and finally to one of several terminal states. Possible terminal states for a file include \"Completed\" for a successful collection, and \"UploadFailed\" or \"TechsupportDownloadUrlCreationFailed\" for an unsuccessful collection. For a file that successfully uploads, the file may be retrieved through the link in the TechsupportDownloadUrl field. Note that for a typical techsupport collection that produces a single file, rather than multiple, this type will not be utilized.
 type TechsupportmanagementTechSupportFileInfo struct {
@@ -110,7 +114,7 @@ func (o *TechsupportmanagementTechSupportFileInfo) SetObjectType(v string) {
 
 // GetFileName returns the FileName field value if set, zero value otherwise.
 func (o *TechsupportmanagementTechSupportFileInfo) GetFileName() string {
-	if o == nil || o.FileName == nil {
+	if o == nil || IsNil(o.FileName) {
 		var ret string
 		return ret
 	}
@@ -120,7 +124,7 @@ func (o *TechsupportmanagementTechSupportFileInfo) GetFileName() string {
 // GetFileNameOk returns a tuple with the FileName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TechsupportmanagementTechSupportFileInfo) GetFileNameOk() (*string, bool) {
-	if o == nil || o.FileName == nil {
+	if o == nil || IsNil(o.FileName) {
 		return nil, false
 	}
 	return o.FileName, true
@@ -128,7 +132,7 @@ func (o *TechsupportmanagementTechSupportFileInfo) GetFileNameOk() (*string, boo
 
 // HasFileName returns a boolean if a field has been set.
 func (o *TechsupportmanagementTechSupportFileInfo) HasFileName() bool {
-	if o != nil && o.FileName != nil {
+	if o != nil && !IsNil(o.FileName) {
 		return true
 	}
 
@@ -142,7 +146,7 @@ func (o *TechsupportmanagementTechSupportFileInfo) SetFileName(v string) {
 
 // GetFileSize returns the FileSize field value if set, zero value otherwise.
 func (o *TechsupportmanagementTechSupportFileInfo) GetFileSize() int64 {
-	if o == nil || o.FileSize == nil {
+	if o == nil || IsNil(o.FileSize) {
 		var ret int64
 		return ret
 	}
@@ -152,7 +156,7 @@ func (o *TechsupportmanagementTechSupportFileInfo) GetFileSize() int64 {
 // GetFileSizeOk returns a tuple with the FileSize field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TechsupportmanagementTechSupportFileInfo) GetFileSizeOk() (*int64, bool) {
-	if o == nil || o.FileSize == nil {
+	if o == nil || IsNil(o.FileSize) {
 		return nil, false
 	}
 	return o.FileSize, true
@@ -160,7 +164,7 @@ func (o *TechsupportmanagementTechSupportFileInfo) GetFileSizeOk() (*int64, bool
 
 // HasFileSize returns a boolean if a field has been set.
 func (o *TechsupportmanagementTechSupportFileInfo) HasFileSize() bool {
-	if o != nil && o.FileSize != nil {
+	if o != nil && !IsNil(o.FileSize) {
 		return true
 	}
 
@@ -174,7 +178,7 @@ func (o *TechsupportmanagementTechSupportFileInfo) SetFileSize(v int64) {
 
 // GetTechsupportDownloadUrl returns the TechsupportDownloadUrl field value if set, zero value otherwise.
 func (o *TechsupportmanagementTechSupportFileInfo) GetTechsupportDownloadUrl() string {
-	if o == nil || o.TechsupportDownloadUrl == nil {
+	if o == nil || IsNil(o.TechsupportDownloadUrl) {
 		var ret string
 		return ret
 	}
@@ -184,7 +188,7 @@ func (o *TechsupportmanagementTechSupportFileInfo) GetTechsupportDownloadUrl() s
 // GetTechsupportDownloadUrlOk returns a tuple with the TechsupportDownloadUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TechsupportmanagementTechSupportFileInfo) GetTechsupportDownloadUrlOk() (*string, bool) {
-	if o == nil || o.TechsupportDownloadUrl == nil {
+	if o == nil || IsNil(o.TechsupportDownloadUrl) {
 		return nil, false
 	}
 	return o.TechsupportDownloadUrl, true
@@ -192,7 +196,7 @@ func (o *TechsupportmanagementTechSupportFileInfo) GetTechsupportDownloadUrlOk()
 
 // HasTechsupportDownloadUrl returns a boolean if a field has been set.
 func (o *TechsupportmanagementTechSupportFileInfo) HasTechsupportDownloadUrl() bool {
-	if o != nil && o.TechsupportDownloadUrl != nil {
+	if o != nil && !IsNil(o.TechsupportDownloadUrl) {
 		return true
 	}
 
@@ -206,7 +210,7 @@ func (o *TechsupportmanagementTechSupportFileInfo) SetTechsupportDownloadUrl(v s
 
 // GetUploadStatus returns the UploadStatus field value if set, zero value otherwise.
 func (o *TechsupportmanagementTechSupportFileInfo) GetUploadStatus() string {
-	if o == nil || o.UploadStatus == nil {
+	if o == nil || IsNil(o.UploadStatus) {
 		var ret string
 		return ret
 	}
@@ -216,7 +220,7 @@ func (o *TechsupportmanagementTechSupportFileInfo) GetUploadStatus() string {
 // GetUploadStatusOk returns a tuple with the UploadStatus field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TechsupportmanagementTechSupportFileInfo) GetUploadStatusOk() (*string, bool) {
-	if o == nil || o.UploadStatus == nil {
+	if o == nil || IsNil(o.UploadStatus) {
 		return nil, false
 	}
 	return o.UploadStatus, true
@@ -224,7 +228,7 @@ func (o *TechsupportmanagementTechSupportFileInfo) GetUploadStatusOk() (*string,
 
 // HasUploadStatus returns a boolean if a field has been set.
 func (o *TechsupportmanagementTechSupportFileInfo) HasUploadStatus() bool {
-	if o != nil && o.UploadStatus != nil {
+	if o != nil && !IsNil(o.UploadStatus) {
 		return true
 	}
 
@@ -237,31 +241,35 @@ func (o *TechsupportmanagementTechSupportFileInfo) SetUploadStatus(v string) {
 }
 
 func (o TechsupportmanagementTechSupportFileInfo) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o TechsupportmanagementTechSupportFileInfo) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
 	errMoBaseComplexType = json.Unmarshal([]byte(serializedMoBaseComplexType), &toSerialize)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.FileName != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.FileName) {
 		toSerialize["FileName"] = o.FileName
 	}
-	if o.FileSize != nil {
+	if !IsNil(o.FileSize) {
 		toSerialize["FileSize"] = o.FileSize
 	}
-	if o.TechsupportDownloadUrl != nil {
+	if !IsNil(o.TechsupportDownloadUrl) {
 		toSerialize["TechsupportDownloadUrl"] = o.TechsupportDownloadUrl
 	}
-	if o.UploadStatus != nil {
+	if !IsNil(o.UploadStatus) {
 		toSerialize["UploadStatus"] = o.UploadStatus
 	}
 
@@ -269,10 +277,32 @@ func (o TechsupportmanagementTechSupportFileInfo) MarshalJSON() ([]byte, error) 
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *TechsupportmanagementTechSupportFileInfo) UnmarshalJSON(bytes []byte) (err error) {
+func (o *TechsupportmanagementTechSupportFileInfo) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type TechsupportmanagementTechSupportFileInfoWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -290,7 +320,7 @@ func (o *TechsupportmanagementTechSupportFileInfo) UnmarshalJSON(bytes []byte) (
 
 	varTechsupportmanagementTechSupportFileInfoWithoutEmbeddedStruct := TechsupportmanagementTechSupportFileInfoWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varTechsupportmanagementTechSupportFileInfoWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varTechsupportmanagementTechSupportFileInfoWithoutEmbeddedStruct)
 	if err == nil {
 		varTechsupportmanagementTechSupportFileInfo := _TechsupportmanagementTechSupportFileInfo{}
 		varTechsupportmanagementTechSupportFileInfo.ClassId = varTechsupportmanagementTechSupportFileInfoWithoutEmbeddedStruct.ClassId
@@ -306,7 +336,7 @@ func (o *TechsupportmanagementTechSupportFileInfo) UnmarshalJSON(bytes []byte) (
 
 	varTechsupportmanagementTechSupportFileInfo := _TechsupportmanagementTechSupportFileInfo{}
 
-	err = json.Unmarshal(bytes, &varTechsupportmanagementTechSupportFileInfo)
+	err = json.Unmarshal(data, &varTechsupportmanagementTechSupportFileInfo)
 	if err == nil {
 		o.MoBaseComplexType = varTechsupportmanagementTechSupportFileInfo.MoBaseComplexType
 	} else {
@@ -315,7 +345,7 @@ func (o *TechsupportmanagementTechSupportFileInfo) UnmarshalJSON(bytes []byte) (
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "FileName")

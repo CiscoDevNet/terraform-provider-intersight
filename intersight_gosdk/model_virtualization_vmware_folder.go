@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the VirtualizationVmwareFolder type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &VirtualizationVmwareFolder{}
 
 // VirtualizationVmwareFolder A folder in a VMware vCenter. Folder can be created directly under the vCenter, under a datacenter, or inside another folder.
 type VirtualizationVmwareFolder struct {
@@ -29,10 +33,10 @@ type VirtualizationVmwareFolder struct {
 	// Inventory path to the folder. Example - /DC/myFolder.
 	InventoryPath *string `json:"InventoryPath,omitempty"`
 	// Determines the type of folder. e.g. vCenter folder, VM and Templete Folder, StorageFolder, NetworkFolder, Host and Cluster Folder. * `Unknown` - The type of the folder is unknown. It may not represent that the folder does not exist but indicates that something might be wrong. * `VMTemplateFolder` - The folder contains VMs and VM templates. * `StorageFolder` - The folder contains storage devices. * `HostClusterFolder` - The folder contains hosts and clusters. * `NetworkFolder` - The folder contains network items. * `VcenterFolder` - The folder created under a vCenter or vCenter folder.
-	TypeofFolder         *string                                     `json:"TypeofFolder,omitempty"`
-	Datacenter           *VirtualizationVmwareDatacenterRelationship `json:"Datacenter,omitempty"`
-	HypervisorManager    *VirtualizationVmwareVcenterRelationship    `json:"HypervisorManager,omitempty"`
-	VmwareFolder         *VirtualizationVmwareFolderRelationship     `json:"VmwareFolder,omitempty"`
+	TypeofFolder         *string                                            `json:"TypeofFolder,omitempty"`
+	Datacenter           NullableVirtualizationVmwareDatacenterRelationship `json:"Datacenter,omitempty"`
+	HypervisorManager    NullableVirtualizationVmwareVcenterRelationship    `json:"HypervisorManager,omitempty"`
+	VmwareFolder         NullableVirtualizationVmwareFolderRelationship     `json:"VmwareFolder,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -115,7 +119,7 @@ func (o *VirtualizationVmwareFolder) SetObjectType(v string) {
 
 // GetInternal returns the Internal field value if set, zero value otherwise.
 func (o *VirtualizationVmwareFolder) GetInternal() bool {
-	if o == nil || o.Internal == nil {
+	if o == nil || IsNil(o.Internal) {
 		var ret bool
 		return ret
 	}
@@ -125,7 +129,7 @@ func (o *VirtualizationVmwareFolder) GetInternal() bool {
 // GetInternalOk returns a tuple with the Internal field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationVmwareFolder) GetInternalOk() (*bool, bool) {
-	if o == nil || o.Internal == nil {
+	if o == nil || IsNil(o.Internal) {
 		return nil, false
 	}
 	return o.Internal, true
@@ -133,7 +137,7 @@ func (o *VirtualizationVmwareFolder) GetInternalOk() (*bool, bool) {
 
 // HasInternal returns a boolean if a field has been set.
 func (o *VirtualizationVmwareFolder) HasInternal() bool {
-	if o != nil && o.Internal != nil {
+	if o != nil && !IsNil(o.Internal) {
 		return true
 	}
 
@@ -147,7 +151,7 @@ func (o *VirtualizationVmwareFolder) SetInternal(v bool) {
 
 // GetInventoryPath returns the InventoryPath field value if set, zero value otherwise.
 func (o *VirtualizationVmwareFolder) GetInventoryPath() string {
-	if o == nil || o.InventoryPath == nil {
+	if o == nil || IsNil(o.InventoryPath) {
 		var ret string
 		return ret
 	}
@@ -157,7 +161,7 @@ func (o *VirtualizationVmwareFolder) GetInventoryPath() string {
 // GetInventoryPathOk returns a tuple with the InventoryPath field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationVmwareFolder) GetInventoryPathOk() (*string, bool) {
-	if o == nil || o.InventoryPath == nil {
+	if o == nil || IsNil(o.InventoryPath) {
 		return nil, false
 	}
 	return o.InventoryPath, true
@@ -165,7 +169,7 @@ func (o *VirtualizationVmwareFolder) GetInventoryPathOk() (*string, bool) {
 
 // HasInventoryPath returns a boolean if a field has been set.
 func (o *VirtualizationVmwareFolder) HasInventoryPath() bool {
-	if o != nil && o.InventoryPath != nil {
+	if o != nil && !IsNil(o.InventoryPath) {
 		return true
 	}
 
@@ -179,7 +183,7 @@ func (o *VirtualizationVmwareFolder) SetInventoryPath(v string) {
 
 // GetTypeofFolder returns the TypeofFolder field value if set, zero value otherwise.
 func (o *VirtualizationVmwareFolder) GetTypeofFolder() string {
-	if o == nil || o.TypeofFolder == nil {
+	if o == nil || IsNil(o.TypeofFolder) {
 		var ret string
 		return ret
 	}
@@ -189,7 +193,7 @@ func (o *VirtualizationVmwareFolder) GetTypeofFolder() string {
 // GetTypeofFolderOk returns a tuple with the TypeofFolder field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationVmwareFolder) GetTypeofFolderOk() (*string, bool) {
-	if o == nil || o.TypeofFolder == nil {
+	if o == nil || IsNil(o.TypeofFolder) {
 		return nil, false
 	}
 	return o.TypeofFolder, true
@@ -197,7 +201,7 @@ func (o *VirtualizationVmwareFolder) GetTypeofFolderOk() (*string, bool) {
 
 // HasTypeofFolder returns a boolean if a field has been set.
 func (o *VirtualizationVmwareFolder) HasTypeofFolder() bool {
-	if o != nil && o.TypeofFolder != nil {
+	if o != nil && !IsNil(o.TypeofFolder) {
 		return true
 	}
 
@@ -209,145 +213,204 @@ func (o *VirtualizationVmwareFolder) SetTypeofFolder(v string) {
 	o.TypeofFolder = &v
 }
 
-// GetDatacenter returns the Datacenter field value if set, zero value otherwise.
+// GetDatacenter returns the Datacenter field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *VirtualizationVmwareFolder) GetDatacenter() VirtualizationVmwareDatacenterRelationship {
-	if o == nil || o.Datacenter == nil {
+	if o == nil || IsNil(o.Datacenter.Get()) {
 		var ret VirtualizationVmwareDatacenterRelationship
 		return ret
 	}
-	return *o.Datacenter
+	return *o.Datacenter.Get()
 }
 
 // GetDatacenterOk returns a tuple with the Datacenter field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *VirtualizationVmwareFolder) GetDatacenterOk() (*VirtualizationVmwareDatacenterRelationship, bool) {
-	if o == nil || o.Datacenter == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Datacenter, true
+	return o.Datacenter.Get(), o.Datacenter.IsSet()
 }
 
 // HasDatacenter returns a boolean if a field has been set.
 func (o *VirtualizationVmwareFolder) HasDatacenter() bool {
-	if o != nil && o.Datacenter != nil {
+	if o != nil && o.Datacenter.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetDatacenter gets a reference to the given VirtualizationVmwareDatacenterRelationship and assigns it to the Datacenter field.
+// SetDatacenter gets a reference to the given NullableVirtualizationVmwareDatacenterRelationship and assigns it to the Datacenter field.
 func (o *VirtualizationVmwareFolder) SetDatacenter(v VirtualizationVmwareDatacenterRelationship) {
-	o.Datacenter = &v
+	o.Datacenter.Set(&v)
 }
 
-// GetHypervisorManager returns the HypervisorManager field value if set, zero value otherwise.
+// SetDatacenterNil sets the value for Datacenter to be an explicit nil
+func (o *VirtualizationVmwareFolder) SetDatacenterNil() {
+	o.Datacenter.Set(nil)
+}
+
+// UnsetDatacenter ensures that no value is present for Datacenter, not even an explicit nil
+func (o *VirtualizationVmwareFolder) UnsetDatacenter() {
+	o.Datacenter.Unset()
+}
+
+// GetHypervisorManager returns the HypervisorManager field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *VirtualizationVmwareFolder) GetHypervisorManager() VirtualizationVmwareVcenterRelationship {
-	if o == nil || o.HypervisorManager == nil {
+	if o == nil || IsNil(o.HypervisorManager.Get()) {
 		var ret VirtualizationVmwareVcenterRelationship
 		return ret
 	}
-	return *o.HypervisorManager
+	return *o.HypervisorManager.Get()
 }
 
 // GetHypervisorManagerOk returns a tuple with the HypervisorManager field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *VirtualizationVmwareFolder) GetHypervisorManagerOk() (*VirtualizationVmwareVcenterRelationship, bool) {
-	if o == nil || o.HypervisorManager == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.HypervisorManager, true
+	return o.HypervisorManager.Get(), o.HypervisorManager.IsSet()
 }
 
 // HasHypervisorManager returns a boolean if a field has been set.
 func (o *VirtualizationVmwareFolder) HasHypervisorManager() bool {
-	if o != nil && o.HypervisorManager != nil {
+	if o != nil && o.HypervisorManager.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetHypervisorManager gets a reference to the given VirtualizationVmwareVcenterRelationship and assigns it to the HypervisorManager field.
+// SetHypervisorManager gets a reference to the given NullableVirtualizationVmwareVcenterRelationship and assigns it to the HypervisorManager field.
 func (o *VirtualizationVmwareFolder) SetHypervisorManager(v VirtualizationVmwareVcenterRelationship) {
-	o.HypervisorManager = &v
+	o.HypervisorManager.Set(&v)
 }
 
-// GetVmwareFolder returns the VmwareFolder field value if set, zero value otherwise.
+// SetHypervisorManagerNil sets the value for HypervisorManager to be an explicit nil
+func (o *VirtualizationVmwareFolder) SetHypervisorManagerNil() {
+	o.HypervisorManager.Set(nil)
+}
+
+// UnsetHypervisorManager ensures that no value is present for HypervisorManager, not even an explicit nil
+func (o *VirtualizationVmwareFolder) UnsetHypervisorManager() {
+	o.HypervisorManager.Unset()
+}
+
+// GetVmwareFolder returns the VmwareFolder field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *VirtualizationVmwareFolder) GetVmwareFolder() VirtualizationVmwareFolderRelationship {
-	if o == nil || o.VmwareFolder == nil {
+	if o == nil || IsNil(o.VmwareFolder.Get()) {
 		var ret VirtualizationVmwareFolderRelationship
 		return ret
 	}
-	return *o.VmwareFolder
+	return *o.VmwareFolder.Get()
 }
 
 // GetVmwareFolderOk returns a tuple with the VmwareFolder field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *VirtualizationVmwareFolder) GetVmwareFolderOk() (*VirtualizationVmwareFolderRelationship, bool) {
-	if o == nil || o.VmwareFolder == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.VmwareFolder, true
+	return o.VmwareFolder.Get(), o.VmwareFolder.IsSet()
 }
 
 // HasVmwareFolder returns a boolean if a field has been set.
 func (o *VirtualizationVmwareFolder) HasVmwareFolder() bool {
-	if o != nil && o.VmwareFolder != nil {
+	if o != nil && o.VmwareFolder.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetVmwareFolder gets a reference to the given VirtualizationVmwareFolderRelationship and assigns it to the VmwareFolder field.
+// SetVmwareFolder gets a reference to the given NullableVirtualizationVmwareFolderRelationship and assigns it to the VmwareFolder field.
 func (o *VirtualizationVmwareFolder) SetVmwareFolder(v VirtualizationVmwareFolderRelationship) {
-	o.VmwareFolder = &v
+	o.VmwareFolder.Set(&v)
+}
+
+// SetVmwareFolderNil sets the value for VmwareFolder to be an explicit nil
+func (o *VirtualizationVmwareFolder) SetVmwareFolderNil() {
+	o.VmwareFolder.Set(nil)
+}
+
+// UnsetVmwareFolder ensures that no value is present for VmwareFolder, not even an explicit nil
+func (o *VirtualizationVmwareFolder) UnsetVmwareFolder() {
+	o.VmwareFolder.Unset()
 }
 
 func (o VirtualizationVmwareFolder) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o VirtualizationVmwareFolder) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedVirtualizationBaseFolder, errVirtualizationBaseFolder := json.Marshal(o.VirtualizationBaseFolder)
 	if errVirtualizationBaseFolder != nil {
-		return []byte{}, errVirtualizationBaseFolder
+		return map[string]interface{}{}, errVirtualizationBaseFolder
 	}
 	errVirtualizationBaseFolder = json.Unmarshal([]byte(serializedVirtualizationBaseFolder), &toSerialize)
 	if errVirtualizationBaseFolder != nil {
-		return []byte{}, errVirtualizationBaseFolder
+		return map[string]interface{}{}, errVirtualizationBaseFolder
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Internal != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Internal) {
 		toSerialize["Internal"] = o.Internal
 	}
-	if o.InventoryPath != nil {
+	if !IsNil(o.InventoryPath) {
 		toSerialize["InventoryPath"] = o.InventoryPath
 	}
-	if o.TypeofFolder != nil {
+	if !IsNil(o.TypeofFolder) {
 		toSerialize["TypeofFolder"] = o.TypeofFolder
 	}
-	if o.Datacenter != nil {
-		toSerialize["Datacenter"] = o.Datacenter
+	if o.Datacenter.IsSet() {
+		toSerialize["Datacenter"] = o.Datacenter.Get()
 	}
-	if o.HypervisorManager != nil {
-		toSerialize["HypervisorManager"] = o.HypervisorManager
+	if o.HypervisorManager.IsSet() {
+		toSerialize["HypervisorManager"] = o.HypervisorManager.Get()
 	}
-	if o.VmwareFolder != nil {
-		toSerialize["VmwareFolder"] = o.VmwareFolder
+	if o.VmwareFolder.IsSet() {
+		toSerialize["VmwareFolder"] = o.VmwareFolder.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *VirtualizationVmwareFolder) UnmarshalJSON(bytes []byte) (err error) {
+func (o *VirtualizationVmwareFolder) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type VirtualizationVmwareFolderWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -358,15 +421,15 @@ func (o *VirtualizationVmwareFolder) UnmarshalJSON(bytes []byte) (err error) {
 		// Inventory path to the folder. Example - /DC/myFolder.
 		InventoryPath *string `json:"InventoryPath,omitempty"`
 		// Determines the type of folder. e.g. vCenter folder, VM and Templete Folder, StorageFolder, NetworkFolder, Host and Cluster Folder. * `Unknown` - The type of the folder is unknown. It may not represent that the folder does not exist but indicates that something might be wrong. * `VMTemplateFolder` - The folder contains VMs and VM templates. * `StorageFolder` - The folder contains storage devices. * `HostClusterFolder` - The folder contains hosts and clusters. * `NetworkFolder` - The folder contains network items. * `VcenterFolder` - The folder created under a vCenter or vCenter folder.
-		TypeofFolder      *string                                     `json:"TypeofFolder,omitempty"`
-		Datacenter        *VirtualizationVmwareDatacenterRelationship `json:"Datacenter,omitempty"`
-		HypervisorManager *VirtualizationVmwareVcenterRelationship    `json:"HypervisorManager,omitempty"`
-		VmwareFolder      *VirtualizationVmwareFolderRelationship     `json:"VmwareFolder,omitempty"`
+		TypeofFolder      *string                                            `json:"TypeofFolder,omitempty"`
+		Datacenter        NullableVirtualizationVmwareDatacenterRelationship `json:"Datacenter,omitempty"`
+		HypervisorManager NullableVirtualizationVmwareVcenterRelationship    `json:"HypervisorManager,omitempty"`
+		VmwareFolder      NullableVirtualizationVmwareFolderRelationship     `json:"VmwareFolder,omitempty"`
 	}
 
 	varVirtualizationVmwareFolderWithoutEmbeddedStruct := VirtualizationVmwareFolderWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varVirtualizationVmwareFolderWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varVirtualizationVmwareFolderWithoutEmbeddedStruct)
 	if err == nil {
 		varVirtualizationVmwareFolder := _VirtualizationVmwareFolder{}
 		varVirtualizationVmwareFolder.ClassId = varVirtualizationVmwareFolderWithoutEmbeddedStruct.ClassId
@@ -384,7 +447,7 @@ func (o *VirtualizationVmwareFolder) UnmarshalJSON(bytes []byte) (err error) {
 
 	varVirtualizationVmwareFolder := _VirtualizationVmwareFolder{}
 
-	err = json.Unmarshal(bytes, &varVirtualizationVmwareFolder)
+	err = json.Unmarshal(data, &varVirtualizationVmwareFolder)
 	if err == nil {
 		o.VirtualizationBaseFolder = varVirtualizationVmwareFolder.VirtualizationBaseFolder
 	} else {
@@ -393,7 +456,7 @@ func (o *VirtualizationVmwareFolder) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Internal")

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,10 +13,14 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 	"time"
 )
+
+// checks if the NiaapiSoftwareEol type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &NiaapiSoftwareEol{}
 
 // NiaapiSoftwareEol This contains the end of life notice of software release.
 type NiaapiSoftwareEol struct {
@@ -135,7 +139,7 @@ func (o *NiaapiSoftwareEol) SetObjectType(v string) {
 
 // GetAffectedVersions returns the AffectedVersions field value if set, zero value otherwise.
 func (o *NiaapiSoftwareEol) GetAffectedVersions() string {
-	if o == nil || o.AffectedVersions == nil {
+	if o == nil || IsNil(o.AffectedVersions) {
 		var ret string
 		return ret
 	}
@@ -145,7 +149,7 @@ func (o *NiaapiSoftwareEol) GetAffectedVersions() string {
 // GetAffectedVersionsOk returns a tuple with the AffectedVersions field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiaapiSoftwareEol) GetAffectedVersionsOk() (*string, bool) {
-	if o == nil || o.AffectedVersions == nil {
+	if o == nil || IsNil(o.AffectedVersions) {
 		return nil, false
 	}
 	return o.AffectedVersions, true
@@ -153,7 +157,7 @@ func (o *NiaapiSoftwareEol) GetAffectedVersionsOk() (*string, bool) {
 
 // HasAffectedVersions returns a boolean if a field has been set.
 func (o *NiaapiSoftwareEol) HasAffectedVersions() bool {
-	if o != nil && o.AffectedVersions != nil {
+	if o != nil && !IsNil(o.AffectedVersions) {
 		return true
 	}
 
@@ -167,7 +171,7 @@ func (o *NiaapiSoftwareEol) SetAffectedVersions(v string) {
 
 // GetAnnouncementDate returns the AnnouncementDate field value if set, zero value otherwise.
 func (o *NiaapiSoftwareEol) GetAnnouncementDate() time.Time {
-	if o == nil || o.AnnouncementDate == nil {
+	if o == nil || IsNil(o.AnnouncementDate) {
 		var ret time.Time
 		return ret
 	}
@@ -177,7 +181,7 @@ func (o *NiaapiSoftwareEol) GetAnnouncementDate() time.Time {
 // GetAnnouncementDateOk returns a tuple with the AnnouncementDate field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiaapiSoftwareEol) GetAnnouncementDateOk() (*time.Time, bool) {
-	if o == nil || o.AnnouncementDate == nil {
+	if o == nil || IsNil(o.AnnouncementDate) {
 		return nil, false
 	}
 	return o.AnnouncementDate, true
@@ -185,7 +189,7 @@ func (o *NiaapiSoftwareEol) GetAnnouncementDateOk() (*time.Time, bool) {
 
 // HasAnnouncementDate returns a boolean if a field has been set.
 func (o *NiaapiSoftwareEol) HasAnnouncementDate() bool {
-	if o != nil && o.AnnouncementDate != nil {
+	if o != nil && !IsNil(o.AnnouncementDate) {
 		return true
 	}
 
@@ -199,7 +203,7 @@ func (o *NiaapiSoftwareEol) SetAnnouncementDate(v time.Time) {
 
 // GetAnnouncementDateEpoch returns the AnnouncementDateEpoch field value if set, zero value otherwise.
 func (o *NiaapiSoftwareEol) GetAnnouncementDateEpoch() int64 {
-	if o == nil || o.AnnouncementDateEpoch == nil {
+	if o == nil || IsNil(o.AnnouncementDateEpoch) {
 		var ret int64
 		return ret
 	}
@@ -209,7 +213,7 @@ func (o *NiaapiSoftwareEol) GetAnnouncementDateEpoch() int64 {
 // GetAnnouncementDateEpochOk returns a tuple with the AnnouncementDateEpoch field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiaapiSoftwareEol) GetAnnouncementDateEpochOk() (*int64, bool) {
-	if o == nil || o.AnnouncementDateEpoch == nil {
+	if o == nil || IsNil(o.AnnouncementDateEpoch) {
 		return nil, false
 	}
 	return o.AnnouncementDateEpoch, true
@@ -217,7 +221,7 @@ func (o *NiaapiSoftwareEol) GetAnnouncementDateEpochOk() (*int64, bool) {
 
 // HasAnnouncementDateEpoch returns a boolean if a field has been set.
 func (o *NiaapiSoftwareEol) HasAnnouncementDateEpoch() bool {
-	if o != nil && o.AnnouncementDateEpoch != nil {
+	if o != nil && !IsNil(o.AnnouncementDateEpoch) {
 		return true
 	}
 
@@ -231,7 +235,7 @@ func (o *NiaapiSoftwareEol) SetAnnouncementDateEpoch(v int64) {
 
 // GetBulletinNo returns the BulletinNo field value if set, zero value otherwise.
 func (o *NiaapiSoftwareEol) GetBulletinNo() string {
-	if o == nil || o.BulletinNo == nil {
+	if o == nil || IsNil(o.BulletinNo) {
 		var ret string
 		return ret
 	}
@@ -241,7 +245,7 @@ func (o *NiaapiSoftwareEol) GetBulletinNo() string {
 // GetBulletinNoOk returns a tuple with the BulletinNo field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiaapiSoftwareEol) GetBulletinNoOk() (*string, bool) {
-	if o == nil || o.BulletinNo == nil {
+	if o == nil || IsNil(o.BulletinNo) {
 		return nil, false
 	}
 	return o.BulletinNo, true
@@ -249,7 +253,7 @@ func (o *NiaapiSoftwareEol) GetBulletinNoOk() (*string, bool) {
 
 // HasBulletinNo returns a boolean if a field has been set.
 func (o *NiaapiSoftwareEol) HasBulletinNo() bool {
-	if o != nil && o.BulletinNo != nil {
+	if o != nil && !IsNil(o.BulletinNo) {
 		return true
 	}
 
@@ -263,7 +267,7 @@ func (o *NiaapiSoftwareEol) SetBulletinNo(v string) {
 
 // GetDescription returns the Description field value if set, zero value otherwise.
 func (o *NiaapiSoftwareEol) GetDescription() string {
-	if o == nil || o.Description == nil {
+	if o == nil || IsNil(o.Description) {
 		var ret string
 		return ret
 	}
@@ -273,7 +277,7 @@ func (o *NiaapiSoftwareEol) GetDescription() string {
 // GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiaapiSoftwareEol) GetDescriptionOk() (*string, bool) {
-	if o == nil || o.Description == nil {
+	if o == nil || IsNil(o.Description) {
 		return nil, false
 	}
 	return o.Description, true
@@ -281,7 +285,7 @@ func (o *NiaapiSoftwareEol) GetDescriptionOk() (*string, bool) {
 
 // HasDescription returns a boolean if a field has been set.
 func (o *NiaapiSoftwareEol) HasDescription() bool {
-	if o != nil && o.Description != nil {
+	if o != nil && !IsNil(o.Description) {
 		return true
 	}
 
@@ -295,7 +299,7 @@ func (o *NiaapiSoftwareEol) SetDescription(v string) {
 
 // GetEndofNewServiceAttachmentDate returns the EndofNewServiceAttachmentDate field value if set, zero value otherwise.
 func (o *NiaapiSoftwareEol) GetEndofNewServiceAttachmentDate() time.Time {
-	if o == nil || o.EndofNewServiceAttachmentDate == nil {
+	if o == nil || IsNil(o.EndofNewServiceAttachmentDate) {
 		var ret time.Time
 		return ret
 	}
@@ -305,7 +309,7 @@ func (o *NiaapiSoftwareEol) GetEndofNewServiceAttachmentDate() time.Time {
 // GetEndofNewServiceAttachmentDateOk returns a tuple with the EndofNewServiceAttachmentDate field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiaapiSoftwareEol) GetEndofNewServiceAttachmentDateOk() (*time.Time, bool) {
-	if o == nil || o.EndofNewServiceAttachmentDate == nil {
+	if o == nil || IsNil(o.EndofNewServiceAttachmentDate) {
 		return nil, false
 	}
 	return o.EndofNewServiceAttachmentDate, true
@@ -313,7 +317,7 @@ func (o *NiaapiSoftwareEol) GetEndofNewServiceAttachmentDateOk() (*time.Time, bo
 
 // HasEndofNewServiceAttachmentDate returns a boolean if a field has been set.
 func (o *NiaapiSoftwareEol) HasEndofNewServiceAttachmentDate() bool {
-	if o != nil && o.EndofNewServiceAttachmentDate != nil {
+	if o != nil && !IsNil(o.EndofNewServiceAttachmentDate) {
 		return true
 	}
 
@@ -327,7 +331,7 @@ func (o *NiaapiSoftwareEol) SetEndofNewServiceAttachmentDate(v time.Time) {
 
 // GetEndofNewServiceAttachmentDateEpoch returns the EndofNewServiceAttachmentDateEpoch field value if set, zero value otherwise.
 func (o *NiaapiSoftwareEol) GetEndofNewServiceAttachmentDateEpoch() int64 {
-	if o == nil || o.EndofNewServiceAttachmentDateEpoch == nil {
+	if o == nil || IsNil(o.EndofNewServiceAttachmentDateEpoch) {
 		var ret int64
 		return ret
 	}
@@ -337,7 +341,7 @@ func (o *NiaapiSoftwareEol) GetEndofNewServiceAttachmentDateEpoch() int64 {
 // GetEndofNewServiceAttachmentDateEpochOk returns a tuple with the EndofNewServiceAttachmentDateEpoch field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiaapiSoftwareEol) GetEndofNewServiceAttachmentDateEpochOk() (*int64, bool) {
-	if o == nil || o.EndofNewServiceAttachmentDateEpoch == nil {
+	if o == nil || IsNil(o.EndofNewServiceAttachmentDateEpoch) {
 		return nil, false
 	}
 	return o.EndofNewServiceAttachmentDateEpoch, true
@@ -345,7 +349,7 @@ func (o *NiaapiSoftwareEol) GetEndofNewServiceAttachmentDateEpochOk() (*int64, b
 
 // HasEndofNewServiceAttachmentDateEpoch returns a boolean if a field has been set.
 func (o *NiaapiSoftwareEol) HasEndofNewServiceAttachmentDateEpoch() bool {
-	if o != nil && o.EndofNewServiceAttachmentDateEpoch != nil {
+	if o != nil && !IsNil(o.EndofNewServiceAttachmentDateEpoch) {
 		return true
 	}
 
@@ -359,7 +363,7 @@ func (o *NiaapiSoftwareEol) SetEndofNewServiceAttachmentDateEpoch(v int64) {
 
 // GetEndofServiceContractRenewalDate returns the EndofServiceContractRenewalDate field value if set, zero value otherwise.
 func (o *NiaapiSoftwareEol) GetEndofServiceContractRenewalDate() time.Time {
-	if o == nil || o.EndofServiceContractRenewalDate == nil {
+	if o == nil || IsNil(o.EndofServiceContractRenewalDate) {
 		var ret time.Time
 		return ret
 	}
@@ -369,7 +373,7 @@ func (o *NiaapiSoftwareEol) GetEndofServiceContractRenewalDate() time.Time {
 // GetEndofServiceContractRenewalDateOk returns a tuple with the EndofServiceContractRenewalDate field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiaapiSoftwareEol) GetEndofServiceContractRenewalDateOk() (*time.Time, bool) {
-	if o == nil || o.EndofServiceContractRenewalDate == nil {
+	if o == nil || IsNil(o.EndofServiceContractRenewalDate) {
 		return nil, false
 	}
 	return o.EndofServiceContractRenewalDate, true
@@ -377,7 +381,7 @@ func (o *NiaapiSoftwareEol) GetEndofServiceContractRenewalDateOk() (*time.Time, 
 
 // HasEndofServiceContractRenewalDate returns a boolean if a field has been set.
 func (o *NiaapiSoftwareEol) HasEndofServiceContractRenewalDate() bool {
-	if o != nil && o.EndofServiceContractRenewalDate != nil {
+	if o != nil && !IsNil(o.EndofServiceContractRenewalDate) {
 		return true
 	}
 
@@ -391,7 +395,7 @@ func (o *NiaapiSoftwareEol) SetEndofServiceContractRenewalDate(v time.Time) {
 
 // GetEndofServiceContractRenewalDateEpoch returns the EndofServiceContractRenewalDateEpoch field value if set, zero value otherwise.
 func (o *NiaapiSoftwareEol) GetEndofServiceContractRenewalDateEpoch() int64 {
-	if o == nil || o.EndofServiceContractRenewalDateEpoch == nil {
+	if o == nil || IsNil(o.EndofServiceContractRenewalDateEpoch) {
 		var ret int64
 		return ret
 	}
@@ -401,7 +405,7 @@ func (o *NiaapiSoftwareEol) GetEndofServiceContractRenewalDateEpoch() int64 {
 // GetEndofServiceContractRenewalDateEpochOk returns a tuple with the EndofServiceContractRenewalDateEpoch field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiaapiSoftwareEol) GetEndofServiceContractRenewalDateEpochOk() (*int64, bool) {
-	if o == nil || o.EndofServiceContractRenewalDateEpoch == nil {
+	if o == nil || IsNil(o.EndofServiceContractRenewalDateEpoch) {
 		return nil, false
 	}
 	return o.EndofServiceContractRenewalDateEpoch, true
@@ -409,7 +413,7 @@ func (o *NiaapiSoftwareEol) GetEndofServiceContractRenewalDateEpochOk() (*int64,
 
 // HasEndofServiceContractRenewalDateEpoch returns a boolean if a field has been set.
 func (o *NiaapiSoftwareEol) HasEndofServiceContractRenewalDateEpoch() bool {
-	if o != nil && o.EndofServiceContractRenewalDateEpoch != nil {
+	if o != nil && !IsNil(o.EndofServiceContractRenewalDateEpoch) {
 		return true
 	}
 
@@ -423,7 +427,7 @@ func (o *NiaapiSoftwareEol) SetEndofServiceContractRenewalDateEpoch(v int64) {
 
 // GetEndofSwMaintenanceDate returns the EndofSwMaintenanceDate field value if set, zero value otherwise.
 func (o *NiaapiSoftwareEol) GetEndofSwMaintenanceDate() time.Time {
-	if o == nil || o.EndofSwMaintenanceDate == nil {
+	if o == nil || IsNil(o.EndofSwMaintenanceDate) {
 		var ret time.Time
 		return ret
 	}
@@ -433,7 +437,7 @@ func (o *NiaapiSoftwareEol) GetEndofSwMaintenanceDate() time.Time {
 // GetEndofSwMaintenanceDateOk returns a tuple with the EndofSwMaintenanceDate field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiaapiSoftwareEol) GetEndofSwMaintenanceDateOk() (*time.Time, bool) {
-	if o == nil || o.EndofSwMaintenanceDate == nil {
+	if o == nil || IsNil(o.EndofSwMaintenanceDate) {
 		return nil, false
 	}
 	return o.EndofSwMaintenanceDate, true
@@ -441,7 +445,7 @@ func (o *NiaapiSoftwareEol) GetEndofSwMaintenanceDateOk() (*time.Time, bool) {
 
 // HasEndofSwMaintenanceDate returns a boolean if a field has been set.
 func (o *NiaapiSoftwareEol) HasEndofSwMaintenanceDate() bool {
-	if o != nil && o.EndofSwMaintenanceDate != nil {
+	if o != nil && !IsNil(o.EndofSwMaintenanceDate) {
 		return true
 	}
 
@@ -455,7 +459,7 @@ func (o *NiaapiSoftwareEol) SetEndofSwMaintenanceDate(v time.Time) {
 
 // GetEndofSwMaintenanceDateEpoch returns the EndofSwMaintenanceDateEpoch field value if set, zero value otherwise.
 func (o *NiaapiSoftwareEol) GetEndofSwMaintenanceDateEpoch() int64 {
-	if o == nil || o.EndofSwMaintenanceDateEpoch == nil {
+	if o == nil || IsNil(o.EndofSwMaintenanceDateEpoch) {
 		var ret int64
 		return ret
 	}
@@ -465,7 +469,7 @@ func (o *NiaapiSoftwareEol) GetEndofSwMaintenanceDateEpoch() int64 {
 // GetEndofSwMaintenanceDateEpochOk returns a tuple with the EndofSwMaintenanceDateEpoch field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiaapiSoftwareEol) GetEndofSwMaintenanceDateEpochOk() (*int64, bool) {
-	if o == nil || o.EndofSwMaintenanceDateEpoch == nil {
+	if o == nil || IsNil(o.EndofSwMaintenanceDateEpoch) {
 		return nil, false
 	}
 	return o.EndofSwMaintenanceDateEpoch, true
@@ -473,7 +477,7 @@ func (o *NiaapiSoftwareEol) GetEndofSwMaintenanceDateEpochOk() (*int64, bool) {
 
 // HasEndofSwMaintenanceDateEpoch returns a boolean if a field has been set.
 func (o *NiaapiSoftwareEol) HasEndofSwMaintenanceDateEpoch() bool {
-	if o != nil && o.EndofSwMaintenanceDateEpoch != nil {
+	if o != nil && !IsNil(o.EndofSwMaintenanceDateEpoch) {
 		return true
 	}
 
@@ -487,7 +491,7 @@ func (o *NiaapiSoftwareEol) SetEndofSwMaintenanceDateEpoch(v int64) {
 
 // GetHeadline returns the Headline field value if set, zero value otherwise.
 func (o *NiaapiSoftwareEol) GetHeadline() string {
-	if o == nil || o.Headline == nil {
+	if o == nil || IsNil(o.Headline) {
 		var ret string
 		return ret
 	}
@@ -497,7 +501,7 @@ func (o *NiaapiSoftwareEol) GetHeadline() string {
 // GetHeadlineOk returns a tuple with the Headline field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiaapiSoftwareEol) GetHeadlineOk() (*string, bool) {
-	if o == nil || o.Headline == nil {
+	if o == nil || IsNil(o.Headline) {
 		return nil, false
 	}
 	return o.Headline, true
@@ -505,7 +509,7 @@ func (o *NiaapiSoftwareEol) GetHeadlineOk() (*string, bool) {
 
 // HasHeadline returns a boolean if a field has been set.
 func (o *NiaapiSoftwareEol) HasHeadline() bool {
-	if o != nil && o.Headline != nil {
+	if o != nil && !IsNil(o.Headline) {
 		return true
 	}
 
@@ -519,7 +523,7 @@ func (o *NiaapiSoftwareEol) SetHeadline(v string) {
 
 // GetLastDateofSupport returns the LastDateofSupport field value if set, zero value otherwise.
 func (o *NiaapiSoftwareEol) GetLastDateofSupport() time.Time {
-	if o == nil || o.LastDateofSupport == nil {
+	if o == nil || IsNil(o.LastDateofSupport) {
 		var ret time.Time
 		return ret
 	}
@@ -529,7 +533,7 @@ func (o *NiaapiSoftwareEol) GetLastDateofSupport() time.Time {
 // GetLastDateofSupportOk returns a tuple with the LastDateofSupport field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiaapiSoftwareEol) GetLastDateofSupportOk() (*time.Time, bool) {
-	if o == nil || o.LastDateofSupport == nil {
+	if o == nil || IsNil(o.LastDateofSupport) {
 		return nil, false
 	}
 	return o.LastDateofSupport, true
@@ -537,7 +541,7 @@ func (o *NiaapiSoftwareEol) GetLastDateofSupportOk() (*time.Time, bool) {
 
 // HasLastDateofSupport returns a boolean if a field has been set.
 func (o *NiaapiSoftwareEol) HasLastDateofSupport() bool {
-	if o != nil && o.LastDateofSupport != nil {
+	if o != nil && !IsNil(o.LastDateofSupport) {
 		return true
 	}
 
@@ -551,7 +555,7 @@ func (o *NiaapiSoftwareEol) SetLastDateofSupport(v time.Time) {
 
 // GetLastDateofSupportEpoch returns the LastDateofSupportEpoch field value if set, zero value otherwise.
 func (o *NiaapiSoftwareEol) GetLastDateofSupportEpoch() int64 {
-	if o == nil || o.LastDateofSupportEpoch == nil {
+	if o == nil || IsNil(o.LastDateofSupportEpoch) {
 		var ret int64
 		return ret
 	}
@@ -561,7 +565,7 @@ func (o *NiaapiSoftwareEol) GetLastDateofSupportEpoch() int64 {
 // GetLastDateofSupportEpochOk returns a tuple with the LastDateofSupportEpoch field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiaapiSoftwareEol) GetLastDateofSupportEpochOk() (*int64, bool) {
-	if o == nil || o.LastDateofSupportEpoch == nil {
+	if o == nil || IsNil(o.LastDateofSupportEpoch) {
 		return nil, false
 	}
 	return o.LastDateofSupportEpoch, true
@@ -569,7 +573,7 @@ func (o *NiaapiSoftwareEol) GetLastDateofSupportEpochOk() (*int64, bool) {
 
 // HasLastDateofSupportEpoch returns a boolean if a field has been set.
 func (o *NiaapiSoftwareEol) HasLastDateofSupportEpoch() bool {
-	if o != nil && o.LastDateofSupportEpoch != nil {
+	if o != nil && !IsNil(o.LastDateofSupportEpoch) {
 		return true
 	}
 
@@ -583,7 +587,7 @@ func (o *NiaapiSoftwareEol) SetLastDateofSupportEpoch(v int64) {
 
 // GetLastShipDate returns the LastShipDate field value if set, zero value otherwise.
 func (o *NiaapiSoftwareEol) GetLastShipDate() time.Time {
-	if o == nil || o.LastShipDate == nil {
+	if o == nil || IsNil(o.LastShipDate) {
 		var ret time.Time
 		return ret
 	}
@@ -593,7 +597,7 @@ func (o *NiaapiSoftwareEol) GetLastShipDate() time.Time {
 // GetLastShipDateOk returns a tuple with the LastShipDate field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiaapiSoftwareEol) GetLastShipDateOk() (*time.Time, bool) {
-	if o == nil || o.LastShipDate == nil {
+	if o == nil || IsNil(o.LastShipDate) {
 		return nil, false
 	}
 	return o.LastShipDate, true
@@ -601,7 +605,7 @@ func (o *NiaapiSoftwareEol) GetLastShipDateOk() (*time.Time, bool) {
 
 // HasLastShipDate returns a boolean if a field has been set.
 func (o *NiaapiSoftwareEol) HasLastShipDate() bool {
-	if o != nil && o.LastShipDate != nil {
+	if o != nil && !IsNil(o.LastShipDate) {
 		return true
 	}
 
@@ -615,7 +619,7 @@ func (o *NiaapiSoftwareEol) SetLastShipDate(v time.Time) {
 
 // GetLastShipDateEpoch returns the LastShipDateEpoch field value if set, zero value otherwise.
 func (o *NiaapiSoftwareEol) GetLastShipDateEpoch() int64 {
-	if o == nil || o.LastShipDateEpoch == nil {
+	if o == nil || IsNil(o.LastShipDateEpoch) {
 		var ret int64
 		return ret
 	}
@@ -625,7 +629,7 @@ func (o *NiaapiSoftwareEol) GetLastShipDateEpoch() int64 {
 // GetLastShipDateEpochOk returns a tuple with the LastShipDateEpoch field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiaapiSoftwareEol) GetLastShipDateEpochOk() (*int64, bool) {
-	if o == nil || o.LastShipDateEpoch == nil {
+	if o == nil || IsNil(o.LastShipDateEpoch) {
 		return nil, false
 	}
 	return o.LastShipDateEpoch, true
@@ -633,7 +637,7 @@ func (o *NiaapiSoftwareEol) GetLastShipDateEpochOk() (*int64, bool) {
 
 // HasLastShipDateEpoch returns a boolean if a field has been set.
 func (o *NiaapiSoftwareEol) HasLastShipDateEpoch() bool {
-	if o != nil && o.LastShipDateEpoch != nil {
+	if o != nil && !IsNil(o.LastShipDateEpoch) {
 		return true
 	}
 
@@ -647,7 +651,7 @@ func (o *NiaapiSoftwareEol) SetLastShipDateEpoch(v int64) {
 
 // GetMigrationUrl returns the MigrationUrl field value if set, zero value otherwise.
 func (o *NiaapiSoftwareEol) GetMigrationUrl() string {
-	if o == nil || o.MigrationUrl == nil {
+	if o == nil || IsNil(o.MigrationUrl) {
 		var ret string
 		return ret
 	}
@@ -657,7 +661,7 @@ func (o *NiaapiSoftwareEol) GetMigrationUrl() string {
 // GetMigrationUrlOk returns a tuple with the MigrationUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiaapiSoftwareEol) GetMigrationUrlOk() (*string, bool) {
-	if o == nil || o.MigrationUrl == nil {
+	if o == nil || IsNil(o.MigrationUrl) {
 		return nil, false
 	}
 	return o.MigrationUrl, true
@@ -665,7 +669,7 @@ func (o *NiaapiSoftwareEol) GetMigrationUrlOk() (*string, bool) {
 
 // HasMigrationUrl returns a boolean if a field has been set.
 func (o *NiaapiSoftwareEol) HasMigrationUrl() bool {
-	if o != nil && o.MigrationUrl != nil {
+	if o != nil && !IsNil(o.MigrationUrl) {
 		return true
 	}
 
@@ -679,7 +683,7 @@ func (o *NiaapiSoftwareEol) SetMigrationUrl(v string) {
 
 // GetSoftwareEolUrl returns the SoftwareEolUrl field value if set, zero value otherwise.
 func (o *NiaapiSoftwareEol) GetSoftwareEolUrl() string {
-	if o == nil || o.SoftwareEolUrl == nil {
+	if o == nil || IsNil(o.SoftwareEolUrl) {
 		var ret string
 		return ret
 	}
@@ -689,7 +693,7 @@ func (o *NiaapiSoftwareEol) GetSoftwareEolUrl() string {
 // GetSoftwareEolUrlOk returns a tuple with the SoftwareEolUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiaapiSoftwareEol) GetSoftwareEolUrlOk() (*string, bool) {
-	if o == nil || o.SoftwareEolUrl == nil {
+	if o == nil || IsNil(o.SoftwareEolUrl) {
 		return nil, false
 	}
 	return o.SoftwareEolUrl, true
@@ -697,7 +701,7 @@ func (o *NiaapiSoftwareEol) GetSoftwareEolUrlOk() (*string, bool) {
 
 // HasSoftwareEolUrl returns a boolean if a field has been set.
 func (o *NiaapiSoftwareEol) HasSoftwareEolUrl() bool {
-	if o != nil && o.SoftwareEolUrl != nil {
+	if o != nil && !IsNil(o.SoftwareEolUrl) {
 		return true
 	}
 
@@ -710,73 +714,77 @@ func (o *NiaapiSoftwareEol) SetSoftwareEolUrl(v string) {
 }
 
 func (o NiaapiSoftwareEol) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o NiaapiSoftwareEol) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.AffectedVersions != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.AffectedVersions) {
 		toSerialize["AffectedVersions"] = o.AffectedVersions
 	}
-	if o.AnnouncementDate != nil {
+	if !IsNil(o.AnnouncementDate) {
 		toSerialize["AnnouncementDate"] = o.AnnouncementDate
 	}
-	if o.AnnouncementDateEpoch != nil {
+	if !IsNil(o.AnnouncementDateEpoch) {
 		toSerialize["AnnouncementDateEpoch"] = o.AnnouncementDateEpoch
 	}
-	if o.BulletinNo != nil {
+	if !IsNil(o.BulletinNo) {
 		toSerialize["BulletinNo"] = o.BulletinNo
 	}
-	if o.Description != nil {
+	if !IsNil(o.Description) {
 		toSerialize["Description"] = o.Description
 	}
-	if o.EndofNewServiceAttachmentDate != nil {
+	if !IsNil(o.EndofNewServiceAttachmentDate) {
 		toSerialize["EndofNewServiceAttachmentDate"] = o.EndofNewServiceAttachmentDate
 	}
-	if o.EndofNewServiceAttachmentDateEpoch != nil {
+	if !IsNil(o.EndofNewServiceAttachmentDateEpoch) {
 		toSerialize["EndofNewServiceAttachmentDateEpoch"] = o.EndofNewServiceAttachmentDateEpoch
 	}
-	if o.EndofServiceContractRenewalDate != nil {
+	if !IsNil(o.EndofServiceContractRenewalDate) {
 		toSerialize["EndofServiceContractRenewalDate"] = o.EndofServiceContractRenewalDate
 	}
-	if o.EndofServiceContractRenewalDateEpoch != nil {
+	if !IsNil(o.EndofServiceContractRenewalDateEpoch) {
 		toSerialize["EndofServiceContractRenewalDateEpoch"] = o.EndofServiceContractRenewalDateEpoch
 	}
-	if o.EndofSwMaintenanceDate != nil {
+	if !IsNil(o.EndofSwMaintenanceDate) {
 		toSerialize["EndofSwMaintenanceDate"] = o.EndofSwMaintenanceDate
 	}
-	if o.EndofSwMaintenanceDateEpoch != nil {
+	if !IsNil(o.EndofSwMaintenanceDateEpoch) {
 		toSerialize["EndofSwMaintenanceDateEpoch"] = o.EndofSwMaintenanceDateEpoch
 	}
-	if o.Headline != nil {
+	if !IsNil(o.Headline) {
 		toSerialize["Headline"] = o.Headline
 	}
-	if o.LastDateofSupport != nil {
+	if !IsNil(o.LastDateofSupport) {
 		toSerialize["LastDateofSupport"] = o.LastDateofSupport
 	}
-	if o.LastDateofSupportEpoch != nil {
+	if !IsNil(o.LastDateofSupportEpoch) {
 		toSerialize["LastDateofSupportEpoch"] = o.LastDateofSupportEpoch
 	}
-	if o.LastShipDate != nil {
+	if !IsNil(o.LastShipDate) {
 		toSerialize["LastShipDate"] = o.LastShipDate
 	}
-	if o.LastShipDateEpoch != nil {
+	if !IsNil(o.LastShipDateEpoch) {
 		toSerialize["LastShipDateEpoch"] = o.LastShipDateEpoch
 	}
-	if o.MigrationUrl != nil {
+	if !IsNil(o.MigrationUrl) {
 		toSerialize["MigrationUrl"] = o.MigrationUrl
 	}
-	if o.SoftwareEolUrl != nil {
+	if !IsNil(o.SoftwareEolUrl) {
 		toSerialize["SoftwareEolUrl"] = o.SoftwareEolUrl
 	}
 
@@ -784,10 +792,32 @@ func (o NiaapiSoftwareEol) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *NiaapiSoftwareEol) UnmarshalJSON(bytes []byte) (err error) {
+func (o *NiaapiSoftwareEol) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type NiaapiSoftwareEolWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type.
 		ClassId string `json:"ClassId"`
@@ -833,7 +863,7 @@ func (o *NiaapiSoftwareEol) UnmarshalJSON(bytes []byte) (err error) {
 
 	varNiaapiSoftwareEolWithoutEmbeddedStruct := NiaapiSoftwareEolWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varNiaapiSoftwareEolWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varNiaapiSoftwareEolWithoutEmbeddedStruct)
 	if err == nil {
 		varNiaapiSoftwareEol := _NiaapiSoftwareEol{}
 		varNiaapiSoftwareEol.ClassId = varNiaapiSoftwareEolWithoutEmbeddedStruct.ClassId
@@ -863,7 +893,7 @@ func (o *NiaapiSoftwareEol) UnmarshalJSON(bytes []byte) (err error) {
 
 	varNiaapiSoftwareEol := _NiaapiSoftwareEol{}
 
-	err = json.Unmarshal(bytes, &varNiaapiSoftwareEol)
+	err = json.Unmarshal(data, &varNiaapiSoftwareEol)
 	if err == nil {
 		o.MoBaseMo = varNiaapiSoftwareEol.MoBaseMo
 	} else {
@@ -872,7 +902,7 @@ func (o *NiaapiSoftwareEol) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "AffectedVersions")

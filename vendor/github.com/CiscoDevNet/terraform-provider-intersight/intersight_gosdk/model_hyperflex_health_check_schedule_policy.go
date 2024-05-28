@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,10 +13,14 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 	"time"
 )
+
+// checks if the HyperflexHealthCheckSchedulePolicy type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &HyperflexHealthCheckSchedulePolicy{}
 
 // HyperflexHealthCheckSchedulePolicy Continuous health check schedule policy of a HyperFlex cluster.
 type HyperflexHealthCheckSchedulePolicy struct {
@@ -36,8 +40,8 @@ type HyperflexHealthCheckSchedulePolicy struct {
 	// The frequency at which the health checks are run on the HyperFlex cluster. * `86400` - Execute the health check every 24 hours. * `43200` - Execute the health check every 12 hours. * `21600` - Execute the health check every 6 hours. * `10800` - Execute the health check every 3 hours. * `3600` - Execute the health check every 1 hours. * `300` - Execute the health check every 5 minutes. * `0` - Disable the continuous health check.
 	ScheduleInterval *int32 `json:"ScheduleInterval,omitempty"`
 	// The unique identifier of the health check policy.
-	Uuid                 *string                              `json:"Uuid,omitempty"`
-	RegisteredDevice     *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+	Uuid                 *string                                     `json:"Uuid,omitempty"`
+	RegisteredDevice     NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -120,7 +124,7 @@ func (o *HyperflexHealthCheckSchedulePolicy) SetObjectType(v string) {
 
 // GetLastScheduledOn returns the LastScheduledOn field value if set, zero value otherwise.
 func (o *HyperflexHealthCheckSchedulePolicy) GetLastScheduledOn() time.Time {
-	if o == nil || o.LastScheduledOn == nil {
+	if o == nil || IsNil(o.LastScheduledOn) {
 		var ret time.Time
 		return ret
 	}
@@ -130,7 +134,7 @@ func (o *HyperflexHealthCheckSchedulePolicy) GetLastScheduledOn() time.Time {
 // GetLastScheduledOnOk returns a tuple with the LastScheduledOn field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexHealthCheckSchedulePolicy) GetLastScheduledOnOk() (*time.Time, bool) {
-	if o == nil || o.LastScheduledOn == nil {
+	if o == nil || IsNil(o.LastScheduledOn) {
 		return nil, false
 	}
 	return o.LastScheduledOn, true
@@ -138,7 +142,7 @@ func (o *HyperflexHealthCheckSchedulePolicy) GetLastScheduledOnOk() (*time.Time,
 
 // HasLastScheduledOn returns a boolean if a field has been set.
 func (o *HyperflexHealthCheckSchedulePolicy) HasLastScheduledOn() bool {
-	if o != nil && o.LastScheduledOn != nil {
+	if o != nil && !IsNil(o.LastScheduledOn) {
 		return true
 	}
 
@@ -152,7 +156,7 @@ func (o *HyperflexHealthCheckSchedulePolicy) SetLastScheduledOn(v time.Time) {
 
 // GetLastUnscheduledOn returns the LastUnscheduledOn field value if set, zero value otherwise.
 func (o *HyperflexHealthCheckSchedulePolicy) GetLastUnscheduledOn() time.Time {
-	if o == nil || o.LastUnscheduledOn == nil {
+	if o == nil || IsNil(o.LastUnscheduledOn) {
 		var ret time.Time
 		return ret
 	}
@@ -162,7 +166,7 @@ func (o *HyperflexHealthCheckSchedulePolicy) GetLastUnscheduledOn() time.Time {
 // GetLastUnscheduledOnOk returns a tuple with the LastUnscheduledOn field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexHealthCheckSchedulePolicy) GetLastUnscheduledOnOk() (*time.Time, bool) {
-	if o == nil || o.LastUnscheduledOn == nil {
+	if o == nil || IsNil(o.LastUnscheduledOn) {
 		return nil, false
 	}
 	return o.LastUnscheduledOn, true
@@ -170,7 +174,7 @@ func (o *HyperflexHealthCheckSchedulePolicy) GetLastUnscheduledOnOk() (*time.Tim
 
 // HasLastUnscheduledOn returns a boolean if a field has been set.
 func (o *HyperflexHealthCheckSchedulePolicy) HasLastUnscheduledOn() bool {
-	if o != nil && o.LastUnscheduledOn != nil {
+	if o != nil && !IsNil(o.LastUnscheduledOn) {
 		return true
 	}
 
@@ -184,7 +188,7 @@ func (o *HyperflexHealthCheckSchedulePolicy) SetLastUnscheduledOn(v time.Time) {
 
 // GetNextExpectedExecution returns the NextExpectedExecution field value if set, zero value otherwise.
 func (o *HyperflexHealthCheckSchedulePolicy) GetNextExpectedExecution() time.Time {
-	if o == nil || o.NextExpectedExecution == nil {
+	if o == nil || IsNil(o.NextExpectedExecution) {
 		var ret time.Time
 		return ret
 	}
@@ -194,7 +198,7 @@ func (o *HyperflexHealthCheckSchedulePolicy) GetNextExpectedExecution() time.Tim
 // GetNextExpectedExecutionOk returns a tuple with the NextExpectedExecution field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexHealthCheckSchedulePolicy) GetNextExpectedExecutionOk() (*time.Time, bool) {
-	if o == nil || o.NextExpectedExecution == nil {
+	if o == nil || IsNil(o.NextExpectedExecution) {
 		return nil, false
 	}
 	return o.NextExpectedExecution, true
@@ -202,7 +206,7 @@ func (o *HyperflexHealthCheckSchedulePolicy) GetNextExpectedExecutionOk() (*time
 
 // HasNextExpectedExecution returns a boolean if a field has been set.
 func (o *HyperflexHealthCheckSchedulePolicy) HasNextExpectedExecution() bool {
-	if o != nil && o.NextExpectedExecution != nil {
+	if o != nil && !IsNil(o.NextExpectedExecution) {
 		return true
 	}
 
@@ -216,7 +220,7 @@ func (o *HyperflexHealthCheckSchedulePolicy) SetNextExpectedExecution(v time.Tim
 
 // GetPolicyEnabled returns the PolicyEnabled field value if set, zero value otherwise.
 func (o *HyperflexHealthCheckSchedulePolicy) GetPolicyEnabled() bool {
-	if o == nil || o.PolicyEnabled == nil {
+	if o == nil || IsNil(o.PolicyEnabled) {
 		var ret bool
 		return ret
 	}
@@ -226,7 +230,7 @@ func (o *HyperflexHealthCheckSchedulePolicy) GetPolicyEnabled() bool {
 // GetPolicyEnabledOk returns a tuple with the PolicyEnabled field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexHealthCheckSchedulePolicy) GetPolicyEnabledOk() (*bool, bool) {
-	if o == nil || o.PolicyEnabled == nil {
+	if o == nil || IsNil(o.PolicyEnabled) {
 		return nil, false
 	}
 	return o.PolicyEnabled, true
@@ -234,7 +238,7 @@ func (o *HyperflexHealthCheckSchedulePolicy) GetPolicyEnabledOk() (*bool, bool) 
 
 // HasPolicyEnabled returns a boolean if a field has been set.
 func (o *HyperflexHealthCheckSchedulePolicy) HasPolicyEnabled() bool {
-	if o != nil && o.PolicyEnabled != nil {
+	if o != nil && !IsNil(o.PolicyEnabled) {
 		return true
 	}
 
@@ -248,7 +252,7 @@ func (o *HyperflexHealthCheckSchedulePolicy) SetPolicyEnabled(v bool) {
 
 // GetScheduleInterval returns the ScheduleInterval field value if set, zero value otherwise.
 func (o *HyperflexHealthCheckSchedulePolicy) GetScheduleInterval() int32 {
-	if o == nil || o.ScheduleInterval == nil {
+	if o == nil || IsNil(o.ScheduleInterval) {
 		var ret int32
 		return ret
 	}
@@ -258,7 +262,7 @@ func (o *HyperflexHealthCheckSchedulePolicy) GetScheduleInterval() int32 {
 // GetScheduleIntervalOk returns a tuple with the ScheduleInterval field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexHealthCheckSchedulePolicy) GetScheduleIntervalOk() (*int32, bool) {
-	if o == nil || o.ScheduleInterval == nil {
+	if o == nil || IsNil(o.ScheduleInterval) {
 		return nil, false
 	}
 	return o.ScheduleInterval, true
@@ -266,7 +270,7 @@ func (o *HyperflexHealthCheckSchedulePolicy) GetScheduleIntervalOk() (*int32, bo
 
 // HasScheduleInterval returns a boolean if a field has been set.
 func (o *HyperflexHealthCheckSchedulePolicy) HasScheduleInterval() bool {
-	if o != nil && o.ScheduleInterval != nil {
+	if o != nil && !IsNil(o.ScheduleInterval) {
 		return true
 	}
 
@@ -280,7 +284,7 @@ func (o *HyperflexHealthCheckSchedulePolicy) SetScheduleInterval(v int32) {
 
 // GetUuid returns the Uuid field value if set, zero value otherwise.
 func (o *HyperflexHealthCheckSchedulePolicy) GetUuid() string {
-	if o == nil || o.Uuid == nil {
+	if o == nil || IsNil(o.Uuid) {
 		var ret string
 		return ret
 	}
@@ -290,7 +294,7 @@ func (o *HyperflexHealthCheckSchedulePolicy) GetUuid() string {
 // GetUuidOk returns a tuple with the Uuid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexHealthCheckSchedulePolicy) GetUuidOk() (*string, bool) {
-	if o == nil || o.Uuid == nil {
+	if o == nil || IsNil(o.Uuid) {
 		return nil, false
 	}
 	return o.Uuid, true
@@ -298,7 +302,7 @@ func (o *HyperflexHealthCheckSchedulePolicy) GetUuidOk() (*string, bool) {
 
 // HasUuid returns a boolean if a field has been set.
 func (o *HyperflexHealthCheckSchedulePolicy) HasUuid() bool {
-	if o != nil && o.Uuid != nil {
+	if o != nil && !IsNil(o.Uuid) {
 		return true
 	}
 
@@ -310,84 +314,121 @@ func (o *HyperflexHealthCheckSchedulePolicy) SetUuid(v string) {
 	o.Uuid = &v
 }
 
-// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise.
+// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *HyperflexHealthCheckSchedulePolicy) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil || IsNil(o.RegisteredDevice.Get()) {
 		var ret AssetDeviceRegistrationRelationship
 		return ret
 	}
-	return *o.RegisteredDevice
+	return *o.RegisteredDevice.Get()
 }
 
 // GetRegisteredDeviceOk returns a tuple with the RegisteredDevice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *HyperflexHealthCheckSchedulePolicy) GetRegisteredDeviceOk() (*AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.RegisteredDevice, true
+	return o.RegisteredDevice.Get(), o.RegisteredDevice.IsSet()
 }
 
 // HasRegisteredDevice returns a boolean if a field has been set.
 func (o *HyperflexHealthCheckSchedulePolicy) HasRegisteredDevice() bool {
-	if o != nil && o.RegisteredDevice != nil {
+	if o != nil && o.RegisteredDevice.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRegisteredDevice gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
+// SetRegisteredDevice gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
 func (o *HyperflexHealthCheckSchedulePolicy) SetRegisteredDevice(v AssetDeviceRegistrationRelationship) {
-	o.RegisteredDevice = &v
+	o.RegisteredDevice.Set(&v)
+}
+
+// SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+func (o *HyperflexHealthCheckSchedulePolicy) SetRegisteredDeviceNil() {
+	o.RegisteredDevice.Set(nil)
+}
+
+// UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
+func (o *HyperflexHealthCheckSchedulePolicy) UnsetRegisteredDevice() {
+	o.RegisteredDevice.Unset()
 }
 
 func (o HyperflexHealthCheckSchedulePolicy) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o HyperflexHealthCheckSchedulePolicy) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.LastScheduledOn != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.LastScheduledOn) {
 		toSerialize["LastScheduledOn"] = o.LastScheduledOn
 	}
-	if o.LastUnscheduledOn != nil {
+	if !IsNil(o.LastUnscheduledOn) {
 		toSerialize["LastUnscheduledOn"] = o.LastUnscheduledOn
 	}
-	if o.NextExpectedExecution != nil {
+	if !IsNil(o.NextExpectedExecution) {
 		toSerialize["NextExpectedExecution"] = o.NextExpectedExecution
 	}
-	if o.PolicyEnabled != nil {
+	if !IsNil(o.PolicyEnabled) {
 		toSerialize["PolicyEnabled"] = o.PolicyEnabled
 	}
-	if o.ScheduleInterval != nil {
+	if !IsNil(o.ScheduleInterval) {
 		toSerialize["ScheduleInterval"] = o.ScheduleInterval
 	}
-	if o.Uuid != nil {
+	if !IsNil(o.Uuid) {
 		toSerialize["Uuid"] = o.Uuid
 	}
-	if o.RegisteredDevice != nil {
-		toSerialize["RegisteredDevice"] = o.RegisteredDevice
+	if o.RegisteredDevice.IsSet() {
+		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *HyperflexHealthCheckSchedulePolicy) UnmarshalJSON(bytes []byte) (err error) {
+func (o *HyperflexHealthCheckSchedulePolicy) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type HyperflexHealthCheckSchedulePolicyWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -404,13 +445,13 @@ func (o *HyperflexHealthCheckSchedulePolicy) UnmarshalJSON(bytes []byte) (err er
 		// The frequency at which the health checks are run on the HyperFlex cluster. * `86400` - Execute the health check every 24 hours. * `43200` - Execute the health check every 12 hours. * `21600` - Execute the health check every 6 hours. * `10800` - Execute the health check every 3 hours. * `3600` - Execute the health check every 1 hours. * `300` - Execute the health check every 5 minutes. * `0` - Disable the continuous health check.
 		ScheduleInterval *int32 `json:"ScheduleInterval,omitempty"`
 		// The unique identifier of the health check policy.
-		Uuid             *string                              `json:"Uuid,omitempty"`
-		RegisteredDevice *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+		Uuid             *string                                     `json:"Uuid,omitempty"`
+		RegisteredDevice NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	}
 
 	varHyperflexHealthCheckSchedulePolicyWithoutEmbeddedStruct := HyperflexHealthCheckSchedulePolicyWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varHyperflexHealthCheckSchedulePolicyWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varHyperflexHealthCheckSchedulePolicyWithoutEmbeddedStruct)
 	if err == nil {
 		varHyperflexHealthCheckSchedulePolicy := _HyperflexHealthCheckSchedulePolicy{}
 		varHyperflexHealthCheckSchedulePolicy.ClassId = varHyperflexHealthCheckSchedulePolicyWithoutEmbeddedStruct.ClassId
@@ -429,7 +470,7 @@ func (o *HyperflexHealthCheckSchedulePolicy) UnmarshalJSON(bytes []byte) (err er
 
 	varHyperflexHealthCheckSchedulePolicy := _HyperflexHealthCheckSchedulePolicy{}
 
-	err = json.Unmarshal(bytes, &varHyperflexHealthCheckSchedulePolicy)
+	err = json.Unmarshal(data, &varHyperflexHealthCheckSchedulePolicy)
 	if err == nil {
 		o.MoBaseMo = varHyperflexHealthCheckSchedulePolicy.MoBaseMo
 	} else {
@@ -438,7 +479,7 @@ func (o *HyperflexHealthCheckSchedulePolicy) UnmarshalJSON(bytes []byte) (err er
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "LastScheduledOn")

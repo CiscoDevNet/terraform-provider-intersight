@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **Name** | Pointer to **string** | The name of the agent pool. | [optional] [readonly] 
 **NumActiveAgents** | Pointer to **int64** | The number of active agents used by this pool. The total active agent are sum of idle, busy and unknown agent counts. | [optional] [readonly] 
 **NumTokens** | Pointer to **int64** | The number of Tokens in this agent Pool. | [optional] [readonly] 
-**Organization** | Pointer to [**CloudTfcOrganizationRelationship**](CloudTfcOrganizationRelationship.md) |  | [optional] 
+**Organization** | Pointer to [**NullableCloudTfcOrganizationRelationship**](CloudTfcOrganizationRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -196,6 +196,16 @@ SetOrganization sets Organization field to given value.
 
 HasOrganization returns a boolean if a field has been set.
 
+### SetOrganizationNil
+
+`func (o *CloudTfcAgentpool) SetOrganizationNil(b bool)`
+
+ SetOrganizationNil sets the value for Organization to be an explicit nil
+
+### UnsetOrganization
+`func (o *CloudTfcAgentpool) UnsetOrganization()`
+
+UnsetOrganization ensures that no value is present for Organization, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

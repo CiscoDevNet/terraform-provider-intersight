@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the BootHttp type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &BootHttp{}
 
 // BootHttp Device type used in boot policy to boot from HTTP device.
 type BootHttp struct {
@@ -144,7 +148,7 @@ func (o *BootHttp) SetObjectType(v string) {
 
 // GetInterfaceName returns the InterfaceName field value if set, zero value otherwise.
 func (o *BootHttp) GetInterfaceName() string {
-	if o == nil || o.InterfaceName == nil {
+	if o == nil || IsNil(o.InterfaceName) {
 		var ret string
 		return ret
 	}
@@ -154,7 +158,7 @@ func (o *BootHttp) GetInterfaceName() string {
 // GetInterfaceNameOk returns a tuple with the InterfaceName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *BootHttp) GetInterfaceNameOk() (*string, bool) {
-	if o == nil || o.InterfaceName == nil {
+	if o == nil || IsNil(o.InterfaceName) {
 		return nil, false
 	}
 	return o.InterfaceName, true
@@ -162,7 +166,7 @@ func (o *BootHttp) GetInterfaceNameOk() (*string, bool) {
 
 // HasInterfaceName returns a boolean if a field has been set.
 func (o *BootHttp) HasInterfaceName() bool {
-	if o != nil && o.InterfaceName != nil {
+	if o != nil && !IsNil(o.InterfaceName) {
 		return true
 	}
 
@@ -176,7 +180,7 @@ func (o *BootHttp) SetInterfaceName(v string) {
 
 // GetInterfaceSource returns the InterfaceSource field value if set, zero value otherwise.
 func (o *BootHttp) GetInterfaceSource() string {
-	if o == nil || o.InterfaceSource == nil {
+	if o == nil || IsNil(o.InterfaceSource) {
 		var ret string
 		return ret
 	}
@@ -186,7 +190,7 @@ func (o *BootHttp) GetInterfaceSource() string {
 // GetInterfaceSourceOk returns a tuple with the InterfaceSource field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *BootHttp) GetInterfaceSourceOk() (*string, bool) {
-	if o == nil || o.InterfaceSource == nil {
+	if o == nil || IsNil(o.InterfaceSource) {
 		return nil, false
 	}
 	return o.InterfaceSource, true
@@ -194,7 +198,7 @@ func (o *BootHttp) GetInterfaceSourceOk() (*string, bool) {
 
 // HasInterfaceSource returns a boolean if a field has been set.
 func (o *BootHttp) HasInterfaceSource() bool {
-	if o != nil && o.InterfaceSource != nil {
+	if o != nil && !IsNil(o.InterfaceSource) {
 		return true
 	}
 
@@ -208,7 +212,7 @@ func (o *BootHttp) SetInterfaceSource(v string) {
 
 // GetIpConfigType returns the IpConfigType field value if set, zero value otherwise.
 func (o *BootHttp) GetIpConfigType() string {
-	if o == nil || o.IpConfigType == nil {
+	if o == nil || IsNil(o.IpConfigType) {
 		var ret string
 		return ret
 	}
@@ -218,7 +222,7 @@ func (o *BootHttp) GetIpConfigType() string {
 // GetIpConfigTypeOk returns a tuple with the IpConfigType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *BootHttp) GetIpConfigTypeOk() (*string, bool) {
-	if o == nil || o.IpConfigType == nil {
+	if o == nil || IsNil(o.IpConfigType) {
 		return nil, false
 	}
 	return o.IpConfigType, true
@@ -226,7 +230,7 @@ func (o *BootHttp) GetIpConfigTypeOk() (*string, bool) {
 
 // HasIpConfigType returns a boolean if a field has been set.
 func (o *BootHttp) HasIpConfigType() bool {
-	if o != nil && o.IpConfigType != nil {
+	if o != nil && !IsNil(o.IpConfigType) {
 		return true
 	}
 
@@ -240,7 +244,7 @@ func (o *BootHttp) SetIpConfigType(v string) {
 
 // GetIpType returns the IpType field value if set, zero value otherwise.
 func (o *BootHttp) GetIpType() string {
-	if o == nil || o.IpType == nil {
+	if o == nil || IsNil(o.IpType) {
 		var ret string
 		return ret
 	}
@@ -250,7 +254,7 @@ func (o *BootHttp) GetIpType() string {
 // GetIpTypeOk returns a tuple with the IpType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *BootHttp) GetIpTypeOk() (*string, bool) {
-	if o == nil || o.IpType == nil {
+	if o == nil || IsNil(o.IpType) {
 		return nil, false
 	}
 	return o.IpType, true
@@ -258,7 +262,7 @@ func (o *BootHttp) GetIpTypeOk() (*string, bool) {
 
 // HasIpType returns a boolean if a field has been set.
 func (o *BootHttp) HasIpType() bool {
-	if o != nil && o.IpType != nil {
+	if o != nil && !IsNil(o.IpType) {
 		return true
 	}
 
@@ -272,7 +276,7 @@ func (o *BootHttp) SetIpType(v string) {
 
 // GetMacAddress returns the MacAddress field value if set, zero value otherwise.
 func (o *BootHttp) GetMacAddress() string {
-	if o == nil || o.MacAddress == nil {
+	if o == nil || IsNil(o.MacAddress) {
 		var ret string
 		return ret
 	}
@@ -282,7 +286,7 @@ func (o *BootHttp) GetMacAddress() string {
 // GetMacAddressOk returns a tuple with the MacAddress field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *BootHttp) GetMacAddressOk() (*string, bool) {
-	if o == nil || o.MacAddress == nil {
+	if o == nil || IsNil(o.MacAddress) {
 		return nil, false
 	}
 	return o.MacAddress, true
@@ -290,7 +294,7 @@ func (o *BootHttp) GetMacAddressOk() (*string, bool) {
 
 // HasMacAddress returns a boolean if a field has been set.
 func (o *BootHttp) HasMacAddress() bool {
-	if o != nil && o.MacAddress != nil {
+	if o != nil && !IsNil(o.MacAddress) {
 		return true
 	}
 
@@ -304,7 +308,7 @@ func (o *BootHttp) SetMacAddress(v string) {
 
 // GetPort returns the Port field value if set, zero value otherwise.
 func (o *BootHttp) GetPort() int64 {
-	if o == nil || o.Port == nil {
+	if o == nil || IsNil(o.Port) {
 		var ret int64
 		return ret
 	}
@@ -314,7 +318,7 @@ func (o *BootHttp) GetPort() int64 {
 // GetPortOk returns a tuple with the Port field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *BootHttp) GetPortOk() (*int64, bool) {
-	if o == nil || o.Port == nil {
+	if o == nil || IsNil(o.Port) {
 		return nil, false
 	}
 	return o.Port, true
@@ -322,7 +326,7 @@ func (o *BootHttp) GetPortOk() (*int64, bool) {
 
 // HasPort returns a boolean if a field has been set.
 func (o *BootHttp) HasPort() bool {
-	if o != nil && o.Port != nil {
+	if o != nil && !IsNil(o.Port) {
 		return true
 	}
 
@@ -336,7 +340,7 @@ func (o *BootHttp) SetPort(v int64) {
 
 // GetProtocol returns the Protocol field value if set, zero value otherwise.
 func (o *BootHttp) GetProtocol() string {
-	if o == nil || o.Protocol == nil {
+	if o == nil || IsNil(o.Protocol) {
 		var ret string
 		return ret
 	}
@@ -346,7 +350,7 @@ func (o *BootHttp) GetProtocol() string {
 // GetProtocolOk returns a tuple with the Protocol field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *BootHttp) GetProtocolOk() (*string, bool) {
-	if o == nil || o.Protocol == nil {
+	if o == nil || IsNil(o.Protocol) {
 		return nil, false
 	}
 	return o.Protocol, true
@@ -354,7 +358,7 @@ func (o *BootHttp) GetProtocolOk() (*string, bool) {
 
 // HasProtocol returns a boolean if a field has been set.
 func (o *BootHttp) HasProtocol() bool {
-	if o != nil && o.Protocol != nil {
+	if o != nil && !IsNil(o.Protocol) {
 		return true
 	}
 
@@ -368,7 +372,7 @@ func (o *BootHttp) SetProtocol(v string) {
 
 // GetSlot returns the Slot field value if set, zero value otherwise.
 func (o *BootHttp) GetSlot() string {
-	if o == nil || o.Slot == nil {
+	if o == nil || IsNil(o.Slot) {
 		var ret string
 		return ret
 	}
@@ -378,7 +382,7 @@ func (o *BootHttp) GetSlot() string {
 // GetSlotOk returns a tuple with the Slot field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *BootHttp) GetSlotOk() (*string, bool) {
-	if o == nil || o.Slot == nil {
+	if o == nil || IsNil(o.Slot) {
 		return nil, false
 	}
 	return o.Slot, true
@@ -386,7 +390,7 @@ func (o *BootHttp) GetSlotOk() (*string, bool) {
 
 // HasSlot returns a boolean if a field has been set.
 func (o *BootHttp) HasSlot() bool {
-	if o != nil && o.Slot != nil {
+	if o != nil && !IsNil(o.Slot) {
 		return true
 	}
 
@@ -400,7 +404,7 @@ func (o *BootHttp) SetSlot(v string) {
 
 // GetStaticIpV4Settings returns the StaticIpV4Settings field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *BootHttp) GetStaticIpV4Settings() BootStaticIpV4Settings {
-	if o == nil || o.StaticIpV4Settings.Get() == nil {
+	if o == nil || IsNil(o.StaticIpV4Settings.Get()) {
 		var ret BootStaticIpV4Settings
 		return ret
 	}
@@ -443,7 +447,7 @@ func (o *BootHttp) UnsetStaticIpV4Settings() {
 
 // GetStaticIpV6Settings returns the StaticIpV6Settings field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *BootHttp) GetStaticIpV6Settings() BootStaticIpV6Settings {
-	if o == nil || o.StaticIpV6Settings.Get() == nil {
+	if o == nil || IsNil(o.StaticIpV6Settings.Get()) {
 		var ret BootStaticIpV6Settings
 		return ret
 	}
@@ -486,7 +490,7 @@ func (o *BootHttp) UnsetStaticIpV6Settings() {
 
 // GetUri returns the Uri field value if set, zero value otherwise.
 func (o *BootHttp) GetUri() string {
-	if o == nil || o.Uri == nil {
+	if o == nil || IsNil(o.Uri) {
 		var ret string
 		return ret
 	}
@@ -496,7 +500,7 @@ func (o *BootHttp) GetUri() string {
 // GetUriOk returns a tuple with the Uri field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *BootHttp) GetUriOk() (*string, bool) {
-	if o == nil || o.Uri == nil {
+	if o == nil || IsNil(o.Uri) {
 		return nil, false
 	}
 	return o.Uri, true
@@ -504,7 +508,7 @@ func (o *BootHttp) GetUriOk() (*string, bool) {
 
 // HasUri returns a boolean if a field has been set.
 func (o *BootHttp) HasUri() bool {
-	if o != nil && o.Uri != nil {
+	if o != nil && !IsNil(o.Uri) {
 		return true
 	}
 
@@ -517,43 +521,47 @@ func (o *BootHttp) SetUri(v string) {
 }
 
 func (o BootHttp) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o BootHttp) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedBootDeviceBase, errBootDeviceBase := json.Marshal(o.BootDeviceBase)
 	if errBootDeviceBase != nil {
-		return []byte{}, errBootDeviceBase
+		return map[string]interface{}{}, errBootDeviceBase
 	}
 	errBootDeviceBase = json.Unmarshal([]byte(serializedBootDeviceBase), &toSerialize)
 	if errBootDeviceBase != nil {
-		return []byte{}, errBootDeviceBase
+		return map[string]interface{}{}, errBootDeviceBase
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.InterfaceName != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.InterfaceName) {
 		toSerialize["InterfaceName"] = o.InterfaceName
 	}
-	if o.InterfaceSource != nil {
+	if !IsNil(o.InterfaceSource) {
 		toSerialize["InterfaceSource"] = o.InterfaceSource
 	}
-	if o.IpConfigType != nil {
+	if !IsNil(o.IpConfigType) {
 		toSerialize["IpConfigType"] = o.IpConfigType
 	}
-	if o.IpType != nil {
+	if !IsNil(o.IpType) {
 		toSerialize["IpType"] = o.IpType
 	}
-	if o.MacAddress != nil {
+	if !IsNil(o.MacAddress) {
 		toSerialize["MacAddress"] = o.MacAddress
 	}
-	if o.Port != nil {
+	if !IsNil(o.Port) {
 		toSerialize["Port"] = o.Port
 	}
-	if o.Protocol != nil {
+	if !IsNil(o.Protocol) {
 		toSerialize["Protocol"] = o.Protocol
 	}
-	if o.Slot != nil {
+	if !IsNil(o.Slot) {
 		toSerialize["Slot"] = o.Slot
 	}
 	if o.StaticIpV4Settings.IsSet() {
@@ -562,7 +570,7 @@ func (o BootHttp) MarshalJSON() ([]byte, error) {
 	if o.StaticIpV6Settings.IsSet() {
 		toSerialize["StaticIpV6Settings"] = o.StaticIpV6Settings.Get()
 	}
-	if o.Uri != nil {
+	if !IsNil(o.Uri) {
 		toSerialize["Uri"] = o.Uri
 	}
 
@@ -570,10 +578,32 @@ func (o BootHttp) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *BootHttp) UnmarshalJSON(bytes []byte) (err error) {
+func (o *BootHttp) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type BootHttpWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -603,7 +633,7 @@ func (o *BootHttp) UnmarshalJSON(bytes []byte) (err error) {
 
 	varBootHttpWithoutEmbeddedStruct := BootHttpWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varBootHttpWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varBootHttpWithoutEmbeddedStruct)
 	if err == nil {
 		varBootHttp := _BootHttp{}
 		varBootHttp.ClassId = varBootHttpWithoutEmbeddedStruct.ClassId
@@ -626,7 +656,7 @@ func (o *BootHttp) UnmarshalJSON(bytes []byte) (err error) {
 
 	varBootHttp := _BootHttp{}
 
-	err = json.Unmarshal(bytes, &varBootHttp)
+	err = json.Unmarshal(data, &varBootHttp)
 	if err == nil {
 		o.BootDeviceBase = varBootHttp.BootDeviceBase
 	} else {
@@ -635,7 +665,7 @@ func (o *BootHttp) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "InterfaceName")

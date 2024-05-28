@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **Name** | Pointer to **string** | The name of the subscription. | [optional] 
 **Type** | Pointer to **string** | The chosen subscription type imposes it is own validation rules. When &#39;email&#39; type is chosen, actions array can contain only one entry and it is entry should be of can be only notification.SendEmail; conditions can contain only notification.AlarmMoCondition and condition types should be unique. When the &#39;webhook&#39; type is chosen, the actions array can contain only one entry and it is entry should be of can be only notification.TriggerWebhook; conditions can contain up to a limited amount of entries and all of them should be of type notification.MoCondition. * &#x60;email&#x60; - Email type requires usage of notification.SendEmail complex types for actionsand notification.AlarmMoCondition complex types for conditions. * &#x60;webhook&#x60; - Webhook type requires usage of notification.TriggerWebhook complex types for actionsand notification.MoCondition complex types for conditions. | [optional] [default to "email"]
 **Verify** | Pointer to **string** | Used to verify the actions of the Subscription MO. For a &#39;webhook&#39; type Ping event is sent to verify that the webhook server is accessible. For an &#39;email&#39; type there will be a verification email sent. * &#x60;none&#x60; - No actions will be verified. Default value. * &#x60;all&#x60; - All actions will be re-verified. The previous state of the verification will be preserved. | [optional] [default to "none"]
-**Account** | Pointer to [**IamAccountRelationship**](IamAccountRelationship.md) |  | [optional] 
+**Account** | Pointer to [**NullableIamAccountRelationship**](IamAccountRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -170,6 +170,16 @@ SetAccount sets Account field to given value.
 
 HasAccount returns a boolean if a field has been set.
 
+### SetAccountNil
+
+`func (o *NotificationAccountSubscription) SetAccountNil(b bool)`
+
+ SetAccountNil sets the value for Account to be an explicit nil
+
+### UnsetAccount
+`func (o *NotificationAccountSubscription) UnsetAccount()`
+
+UnsetAccount ensures that no value is present for Account, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the AssetAddressInformation type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &AssetAddressInformation{}
 
 // AssetAddressInformation Type for saving the address information. It is used in asset.DeviceContractInformation object to save customer address.
 type AssetAddressInformation struct {
@@ -124,7 +128,7 @@ func (o *AssetAddressInformation) SetObjectType(v string) {
 
 // GetAddress1 returns the Address1 field value if set, zero value otherwise.
 func (o *AssetAddressInformation) GetAddress1() string {
-	if o == nil || o.Address1 == nil {
+	if o == nil || IsNil(o.Address1) {
 		var ret string
 		return ret
 	}
@@ -134,7 +138,7 @@ func (o *AssetAddressInformation) GetAddress1() string {
 // GetAddress1Ok returns a tuple with the Address1 field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AssetAddressInformation) GetAddress1Ok() (*string, bool) {
-	if o == nil || o.Address1 == nil {
+	if o == nil || IsNil(o.Address1) {
 		return nil, false
 	}
 	return o.Address1, true
@@ -142,7 +146,7 @@ func (o *AssetAddressInformation) GetAddress1Ok() (*string, bool) {
 
 // HasAddress1 returns a boolean if a field has been set.
 func (o *AssetAddressInformation) HasAddress1() bool {
-	if o != nil && o.Address1 != nil {
+	if o != nil && !IsNil(o.Address1) {
 		return true
 	}
 
@@ -156,7 +160,7 @@ func (o *AssetAddressInformation) SetAddress1(v string) {
 
 // GetAddress2 returns the Address2 field value if set, zero value otherwise.
 func (o *AssetAddressInformation) GetAddress2() string {
-	if o == nil || o.Address2 == nil {
+	if o == nil || IsNil(o.Address2) {
 		var ret string
 		return ret
 	}
@@ -166,7 +170,7 @@ func (o *AssetAddressInformation) GetAddress2() string {
 // GetAddress2Ok returns a tuple with the Address2 field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AssetAddressInformation) GetAddress2Ok() (*string, bool) {
-	if o == nil || o.Address2 == nil {
+	if o == nil || IsNil(o.Address2) {
 		return nil, false
 	}
 	return o.Address2, true
@@ -174,7 +178,7 @@ func (o *AssetAddressInformation) GetAddress2Ok() (*string, bool) {
 
 // HasAddress2 returns a boolean if a field has been set.
 func (o *AssetAddressInformation) HasAddress2() bool {
-	if o != nil && o.Address2 != nil {
+	if o != nil && !IsNil(o.Address2) {
 		return true
 	}
 
@@ -188,7 +192,7 @@ func (o *AssetAddressInformation) SetAddress2(v string) {
 
 // GetAddress3 returns the Address3 field value if set, zero value otherwise.
 func (o *AssetAddressInformation) GetAddress3() string {
-	if o == nil || o.Address3 == nil {
+	if o == nil || IsNil(o.Address3) {
 		var ret string
 		return ret
 	}
@@ -198,7 +202,7 @@ func (o *AssetAddressInformation) GetAddress3() string {
 // GetAddress3Ok returns a tuple with the Address3 field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AssetAddressInformation) GetAddress3Ok() (*string, bool) {
-	if o == nil || o.Address3 == nil {
+	if o == nil || IsNil(o.Address3) {
 		return nil, false
 	}
 	return o.Address3, true
@@ -206,7 +210,7 @@ func (o *AssetAddressInformation) GetAddress3Ok() (*string, bool) {
 
 // HasAddress3 returns a boolean if a field has been set.
 func (o *AssetAddressInformation) HasAddress3() bool {
-	if o != nil && o.Address3 != nil {
+	if o != nil && !IsNil(o.Address3) {
 		return true
 	}
 
@@ -220,7 +224,7 @@ func (o *AssetAddressInformation) SetAddress3(v string) {
 
 // GetCity returns the City field value if set, zero value otherwise.
 func (o *AssetAddressInformation) GetCity() string {
-	if o == nil || o.City == nil {
+	if o == nil || IsNil(o.City) {
 		var ret string
 		return ret
 	}
@@ -230,7 +234,7 @@ func (o *AssetAddressInformation) GetCity() string {
 // GetCityOk returns a tuple with the City field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AssetAddressInformation) GetCityOk() (*string, bool) {
-	if o == nil || o.City == nil {
+	if o == nil || IsNil(o.City) {
 		return nil, false
 	}
 	return o.City, true
@@ -238,7 +242,7 @@ func (o *AssetAddressInformation) GetCityOk() (*string, bool) {
 
 // HasCity returns a boolean if a field has been set.
 func (o *AssetAddressInformation) HasCity() bool {
-	if o != nil && o.City != nil {
+	if o != nil && !IsNil(o.City) {
 		return true
 	}
 
@@ -252,7 +256,7 @@ func (o *AssetAddressInformation) SetCity(v string) {
 
 // GetCountry returns the Country field value if set, zero value otherwise.
 func (o *AssetAddressInformation) GetCountry() string {
-	if o == nil || o.Country == nil {
+	if o == nil || IsNil(o.Country) {
 		var ret string
 		return ret
 	}
@@ -262,7 +266,7 @@ func (o *AssetAddressInformation) GetCountry() string {
 // GetCountryOk returns a tuple with the Country field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AssetAddressInformation) GetCountryOk() (*string, bool) {
-	if o == nil || o.Country == nil {
+	if o == nil || IsNil(o.Country) {
 		return nil, false
 	}
 	return o.Country, true
@@ -270,7 +274,7 @@ func (o *AssetAddressInformation) GetCountryOk() (*string, bool) {
 
 // HasCountry returns a boolean if a field has been set.
 func (o *AssetAddressInformation) HasCountry() bool {
-	if o != nil && o.Country != nil {
+	if o != nil && !IsNil(o.Country) {
 		return true
 	}
 
@@ -284,7 +288,7 @@ func (o *AssetAddressInformation) SetCountry(v string) {
 
 // GetCounty returns the County field value if set, zero value otherwise.
 func (o *AssetAddressInformation) GetCounty() string {
-	if o == nil || o.County == nil {
+	if o == nil || IsNil(o.County) {
 		var ret string
 		return ret
 	}
@@ -294,7 +298,7 @@ func (o *AssetAddressInformation) GetCounty() string {
 // GetCountyOk returns a tuple with the County field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AssetAddressInformation) GetCountyOk() (*string, bool) {
-	if o == nil || o.County == nil {
+	if o == nil || IsNil(o.County) {
 		return nil, false
 	}
 	return o.County, true
@@ -302,7 +306,7 @@ func (o *AssetAddressInformation) GetCountyOk() (*string, bool) {
 
 // HasCounty returns a boolean if a field has been set.
 func (o *AssetAddressInformation) HasCounty() bool {
-	if o != nil && o.County != nil {
+	if o != nil && !IsNil(o.County) {
 		return true
 	}
 
@@ -316,7 +320,7 @@ func (o *AssetAddressInformation) SetCounty(v string) {
 
 // GetLocation returns the Location field value if set, zero value otherwise.
 func (o *AssetAddressInformation) GetLocation() string {
-	if o == nil || o.Location == nil {
+	if o == nil || IsNil(o.Location) {
 		var ret string
 		return ret
 	}
@@ -326,7 +330,7 @@ func (o *AssetAddressInformation) GetLocation() string {
 // GetLocationOk returns a tuple with the Location field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AssetAddressInformation) GetLocationOk() (*string, bool) {
-	if o == nil || o.Location == nil {
+	if o == nil || IsNil(o.Location) {
 		return nil, false
 	}
 	return o.Location, true
@@ -334,7 +338,7 @@ func (o *AssetAddressInformation) GetLocationOk() (*string, bool) {
 
 // HasLocation returns a boolean if a field has been set.
 func (o *AssetAddressInformation) HasLocation() bool {
-	if o != nil && o.Location != nil {
+	if o != nil && !IsNil(o.Location) {
 		return true
 	}
 
@@ -348,7 +352,7 @@ func (o *AssetAddressInformation) SetLocation(v string) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *AssetAddressInformation) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -358,7 +362,7 @@ func (o *AssetAddressInformation) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AssetAddressInformation) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -366,7 +370,7 @@ func (o *AssetAddressInformation) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *AssetAddressInformation) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -380,7 +384,7 @@ func (o *AssetAddressInformation) SetName(v string) {
 
 // GetPostalCode returns the PostalCode field value if set, zero value otherwise.
 func (o *AssetAddressInformation) GetPostalCode() string {
-	if o == nil || o.PostalCode == nil {
+	if o == nil || IsNil(o.PostalCode) {
 		var ret string
 		return ret
 	}
@@ -390,7 +394,7 @@ func (o *AssetAddressInformation) GetPostalCode() string {
 // GetPostalCodeOk returns a tuple with the PostalCode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AssetAddressInformation) GetPostalCodeOk() (*string, bool) {
-	if o == nil || o.PostalCode == nil {
+	if o == nil || IsNil(o.PostalCode) {
 		return nil, false
 	}
 	return o.PostalCode, true
@@ -398,7 +402,7 @@ func (o *AssetAddressInformation) GetPostalCodeOk() (*string, bool) {
 
 // HasPostalCode returns a boolean if a field has been set.
 func (o *AssetAddressInformation) HasPostalCode() bool {
-	if o != nil && o.PostalCode != nil {
+	if o != nil && !IsNil(o.PostalCode) {
 		return true
 	}
 
@@ -412,7 +416,7 @@ func (o *AssetAddressInformation) SetPostalCode(v string) {
 
 // GetProvince returns the Province field value if set, zero value otherwise.
 func (o *AssetAddressInformation) GetProvince() string {
-	if o == nil || o.Province == nil {
+	if o == nil || IsNil(o.Province) {
 		var ret string
 		return ret
 	}
@@ -422,7 +426,7 @@ func (o *AssetAddressInformation) GetProvince() string {
 // GetProvinceOk returns a tuple with the Province field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AssetAddressInformation) GetProvinceOk() (*string, bool) {
-	if o == nil || o.Province == nil {
+	if o == nil || IsNil(o.Province) {
 		return nil, false
 	}
 	return o.Province, true
@@ -430,7 +434,7 @@ func (o *AssetAddressInformation) GetProvinceOk() (*string, bool) {
 
 // HasProvince returns a boolean if a field has been set.
 func (o *AssetAddressInformation) HasProvince() bool {
-	if o != nil && o.Province != nil {
+	if o != nil && !IsNil(o.Province) {
 		return true
 	}
 
@@ -444,7 +448,7 @@ func (o *AssetAddressInformation) SetProvince(v string) {
 
 // GetState returns the State field value if set, zero value otherwise.
 func (o *AssetAddressInformation) GetState() string {
-	if o == nil || o.State == nil {
+	if o == nil || IsNil(o.State) {
 		var ret string
 		return ret
 	}
@@ -454,7 +458,7 @@ func (o *AssetAddressInformation) GetState() string {
 // GetStateOk returns a tuple with the State field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AssetAddressInformation) GetStateOk() (*string, bool) {
-	if o == nil || o.State == nil {
+	if o == nil || IsNil(o.State) {
 		return nil, false
 	}
 	return o.State, true
@@ -462,7 +466,7 @@ func (o *AssetAddressInformation) GetStateOk() (*string, bool) {
 
 // HasState returns a boolean if a field has been set.
 func (o *AssetAddressInformation) HasState() bool {
-	if o != nil && o.State != nil {
+	if o != nil && !IsNil(o.State) {
 		return true
 	}
 
@@ -475,52 +479,56 @@ func (o *AssetAddressInformation) SetState(v string) {
 }
 
 func (o AssetAddressInformation) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o AssetAddressInformation) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
 	errMoBaseComplexType = json.Unmarshal([]byte(serializedMoBaseComplexType), &toSerialize)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Address1 != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Address1) {
 		toSerialize["Address1"] = o.Address1
 	}
-	if o.Address2 != nil {
+	if !IsNil(o.Address2) {
 		toSerialize["Address2"] = o.Address2
 	}
-	if o.Address3 != nil {
+	if !IsNil(o.Address3) {
 		toSerialize["Address3"] = o.Address3
 	}
-	if o.City != nil {
+	if !IsNil(o.City) {
 		toSerialize["City"] = o.City
 	}
-	if o.Country != nil {
+	if !IsNil(o.Country) {
 		toSerialize["Country"] = o.Country
 	}
-	if o.County != nil {
+	if !IsNil(o.County) {
 		toSerialize["County"] = o.County
 	}
-	if o.Location != nil {
+	if !IsNil(o.Location) {
 		toSerialize["Location"] = o.Location
 	}
-	if o.Name != nil {
+	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
 	}
-	if o.PostalCode != nil {
+	if !IsNil(o.PostalCode) {
 		toSerialize["PostalCode"] = o.PostalCode
 	}
-	if o.Province != nil {
+	if !IsNil(o.Province) {
 		toSerialize["Province"] = o.Province
 	}
-	if o.State != nil {
+	if !IsNil(o.State) {
 		toSerialize["State"] = o.State
 	}
 
@@ -528,10 +536,32 @@ func (o AssetAddressInformation) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *AssetAddressInformation) UnmarshalJSON(bytes []byte) (err error) {
+func (o *AssetAddressInformation) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type AssetAddressInformationWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -563,7 +593,7 @@ func (o *AssetAddressInformation) UnmarshalJSON(bytes []byte) (err error) {
 
 	varAssetAddressInformationWithoutEmbeddedStruct := AssetAddressInformationWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varAssetAddressInformationWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varAssetAddressInformationWithoutEmbeddedStruct)
 	if err == nil {
 		varAssetAddressInformation := _AssetAddressInformation{}
 		varAssetAddressInformation.ClassId = varAssetAddressInformationWithoutEmbeddedStruct.ClassId
@@ -586,7 +616,7 @@ func (o *AssetAddressInformation) UnmarshalJSON(bytes []byte) (err error) {
 
 	varAssetAddressInformation := _AssetAddressInformation{}
 
-	err = json.Unmarshal(bytes, &varAssetAddressInformation)
+	err = json.Unmarshal(data, &varAssetAddressInformation)
 	if err == nil {
 		o.MoBaseComplexType = varAssetAddressInformation.MoBaseComplexType
 	} else {
@@ -595,7 +625,7 @@ func (o *AssetAddressInformation) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Address1")

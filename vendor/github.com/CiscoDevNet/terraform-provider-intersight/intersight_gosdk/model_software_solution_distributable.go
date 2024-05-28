@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the SoftwareSolutionDistributable type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &SoftwareSolutionDistributable{}
 
 // SoftwareSolutionDistributable A solution image distributed by Cisco.
 type SoftwareSolutionDistributable struct {
@@ -29,8 +33,8 @@ type SoftwareSolutionDistributable struct {
 	// The name of the solution in which the image belongs.
 	SolutionName *string `json:"SolutionName,omitempty"`
 	// The type of the file like OS image, Script etc. * `osimage` - The solution OS image for deployment. * `script` - The Python script for the solution VM configuration and deployment.
-	SubType              *string                                `json:"SubType,omitempty"`
-	Catalog              *SoftwarerepositoryCatalogRelationship `json:"Catalog,omitempty"`
+	SubType              *string                                       `json:"SubType,omitempty"`
+	Catalog              NullableSoftwarerepositoryCatalogRelationship `json:"Catalog,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -46,6 +50,8 @@ func NewSoftwareSolutionDistributable(classId string, objectType string) *Softwa
 	this.ObjectType = objectType
 	var importAction string = "None"
 	this.ImportAction = &importAction
+	var recommendedBuild string = "N"
+	this.RecommendedBuild = &recommendedBuild
 	var vendor string = "Cisco"
 	this.Vendor = &vendor
 	var subType string = "osimage"
@@ -117,7 +123,7 @@ func (o *SoftwareSolutionDistributable) SetObjectType(v string) {
 
 // GetFilePath returns the FilePath field value if set, zero value otherwise.
 func (o *SoftwareSolutionDistributable) GetFilePath() string {
-	if o == nil || o.FilePath == nil {
+	if o == nil || IsNil(o.FilePath) {
 		var ret string
 		return ret
 	}
@@ -127,7 +133,7 @@ func (o *SoftwareSolutionDistributable) GetFilePath() string {
 // GetFilePathOk returns a tuple with the FilePath field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SoftwareSolutionDistributable) GetFilePathOk() (*string, bool) {
-	if o == nil || o.FilePath == nil {
+	if o == nil || IsNil(o.FilePath) {
 		return nil, false
 	}
 	return o.FilePath, true
@@ -135,7 +141,7 @@ func (o *SoftwareSolutionDistributable) GetFilePathOk() (*string, bool) {
 
 // HasFilePath returns a boolean if a field has been set.
 func (o *SoftwareSolutionDistributable) HasFilePath() bool {
-	if o != nil && o.FilePath != nil {
+	if o != nil && !IsNil(o.FilePath) {
 		return true
 	}
 
@@ -149,7 +155,7 @@ func (o *SoftwareSolutionDistributable) SetFilePath(v string) {
 
 // GetSolutionName returns the SolutionName field value if set, zero value otherwise.
 func (o *SoftwareSolutionDistributable) GetSolutionName() string {
-	if o == nil || o.SolutionName == nil {
+	if o == nil || IsNil(o.SolutionName) {
 		var ret string
 		return ret
 	}
@@ -159,7 +165,7 @@ func (o *SoftwareSolutionDistributable) GetSolutionName() string {
 // GetSolutionNameOk returns a tuple with the SolutionName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SoftwareSolutionDistributable) GetSolutionNameOk() (*string, bool) {
-	if o == nil || o.SolutionName == nil {
+	if o == nil || IsNil(o.SolutionName) {
 		return nil, false
 	}
 	return o.SolutionName, true
@@ -167,7 +173,7 @@ func (o *SoftwareSolutionDistributable) GetSolutionNameOk() (*string, bool) {
 
 // HasSolutionName returns a boolean if a field has been set.
 func (o *SoftwareSolutionDistributable) HasSolutionName() bool {
-	if o != nil && o.SolutionName != nil {
+	if o != nil && !IsNil(o.SolutionName) {
 		return true
 	}
 
@@ -181,7 +187,7 @@ func (o *SoftwareSolutionDistributable) SetSolutionName(v string) {
 
 // GetSubType returns the SubType field value if set, zero value otherwise.
 func (o *SoftwareSolutionDistributable) GetSubType() string {
-	if o == nil || o.SubType == nil {
+	if o == nil || IsNil(o.SubType) {
 		var ret string
 		return ret
 	}
@@ -191,7 +197,7 @@ func (o *SoftwareSolutionDistributable) GetSubType() string {
 // GetSubTypeOk returns a tuple with the SubType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SoftwareSolutionDistributable) GetSubTypeOk() (*string, bool) {
-	if o == nil || o.SubType == nil {
+	if o == nil || IsNil(o.SubType) {
 		return nil, false
 	}
 	return o.SubType, true
@@ -199,7 +205,7 @@ func (o *SoftwareSolutionDistributable) GetSubTypeOk() (*string, bool) {
 
 // HasSubType returns a boolean if a field has been set.
 func (o *SoftwareSolutionDistributable) HasSubType() bool {
-	if o != nil && o.SubType != nil {
+	if o != nil && !IsNil(o.SubType) {
 		return true
 	}
 
@@ -211,75 +217,112 @@ func (o *SoftwareSolutionDistributable) SetSubType(v string) {
 	o.SubType = &v
 }
 
-// GetCatalog returns the Catalog field value if set, zero value otherwise.
+// GetCatalog returns the Catalog field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *SoftwareSolutionDistributable) GetCatalog() SoftwarerepositoryCatalogRelationship {
-	if o == nil || o.Catalog == nil {
+	if o == nil || IsNil(o.Catalog.Get()) {
 		var ret SoftwarerepositoryCatalogRelationship
 		return ret
 	}
-	return *o.Catalog
+	return *o.Catalog.Get()
 }
 
 // GetCatalogOk returns a tuple with the Catalog field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *SoftwareSolutionDistributable) GetCatalogOk() (*SoftwarerepositoryCatalogRelationship, bool) {
-	if o == nil || o.Catalog == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Catalog, true
+	return o.Catalog.Get(), o.Catalog.IsSet()
 }
 
 // HasCatalog returns a boolean if a field has been set.
 func (o *SoftwareSolutionDistributable) HasCatalog() bool {
-	if o != nil && o.Catalog != nil {
+	if o != nil && o.Catalog.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetCatalog gets a reference to the given SoftwarerepositoryCatalogRelationship and assigns it to the Catalog field.
+// SetCatalog gets a reference to the given NullableSoftwarerepositoryCatalogRelationship and assigns it to the Catalog field.
 func (o *SoftwareSolutionDistributable) SetCatalog(v SoftwarerepositoryCatalogRelationship) {
-	o.Catalog = &v
+	o.Catalog.Set(&v)
+}
+
+// SetCatalogNil sets the value for Catalog to be an explicit nil
+func (o *SoftwareSolutionDistributable) SetCatalogNil() {
+	o.Catalog.Set(nil)
+}
+
+// UnsetCatalog ensures that no value is present for Catalog, not even an explicit nil
+func (o *SoftwareSolutionDistributable) UnsetCatalog() {
+	o.Catalog.Unset()
 }
 
 func (o SoftwareSolutionDistributable) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o SoftwareSolutionDistributable) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedFirmwareBaseDistributable, errFirmwareBaseDistributable := json.Marshal(o.FirmwareBaseDistributable)
 	if errFirmwareBaseDistributable != nil {
-		return []byte{}, errFirmwareBaseDistributable
+		return map[string]interface{}{}, errFirmwareBaseDistributable
 	}
 	errFirmwareBaseDistributable = json.Unmarshal([]byte(serializedFirmwareBaseDistributable), &toSerialize)
 	if errFirmwareBaseDistributable != nil {
-		return []byte{}, errFirmwareBaseDistributable
+		return map[string]interface{}{}, errFirmwareBaseDistributable
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.FilePath != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.FilePath) {
 		toSerialize["FilePath"] = o.FilePath
 	}
-	if o.SolutionName != nil {
+	if !IsNil(o.SolutionName) {
 		toSerialize["SolutionName"] = o.SolutionName
 	}
-	if o.SubType != nil {
+	if !IsNil(o.SubType) {
 		toSerialize["SubType"] = o.SubType
 	}
-	if o.Catalog != nil {
-		toSerialize["Catalog"] = o.Catalog
+	if o.Catalog.IsSet() {
+		toSerialize["Catalog"] = o.Catalog.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *SoftwareSolutionDistributable) UnmarshalJSON(bytes []byte) (err error) {
+func (o *SoftwareSolutionDistributable) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type SoftwareSolutionDistributableWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -290,13 +333,13 @@ func (o *SoftwareSolutionDistributable) UnmarshalJSON(bytes []byte) (err error) 
 		// The name of the solution in which the image belongs.
 		SolutionName *string `json:"SolutionName,omitempty"`
 		// The type of the file like OS image, Script etc. * `osimage` - The solution OS image for deployment. * `script` - The Python script for the solution VM configuration and deployment.
-		SubType *string                                `json:"SubType,omitempty"`
-		Catalog *SoftwarerepositoryCatalogRelationship `json:"Catalog,omitempty"`
+		SubType *string                                       `json:"SubType,omitempty"`
+		Catalog NullableSoftwarerepositoryCatalogRelationship `json:"Catalog,omitempty"`
 	}
 
 	varSoftwareSolutionDistributableWithoutEmbeddedStruct := SoftwareSolutionDistributableWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varSoftwareSolutionDistributableWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varSoftwareSolutionDistributableWithoutEmbeddedStruct)
 	if err == nil {
 		varSoftwareSolutionDistributable := _SoftwareSolutionDistributable{}
 		varSoftwareSolutionDistributable.ClassId = varSoftwareSolutionDistributableWithoutEmbeddedStruct.ClassId
@@ -312,7 +355,7 @@ func (o *SoftwareSolutionDistributable) UnmarshalJSON(bytes []byte) (err error) 
 
 	varSoftwareSolutionDistributable := _SoftwareSolutionDistributable{}
 
-	err = json.Unmarshal(bytes, &varSoftwareSolutionDistributable)
+	err = json.Unmarshal(data, &varSoftwareSolutionDistributable)
 	if err == nil {
 		o.FirmwareBaseDistributable = varSoftwareSolutionDistributable.FirmwareBaseDistributable
 	} else {
@@ -321,7 +364,7 @@ func (o *SoftwareSolutionDistributable) UnmarshalJSON(bytes []byte) (err error) 
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "FilePath")

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the RecommendationPurchaseOrderList type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &RecommendationPurchaseOrderList{}
 
 // RecommendationPurchaseOrderList Entity representing the list of items in csv format for the current recommendation. This can be used to generate an estimate by uploading it to Cisco Commerce Workspace.
 type RecommendationPurchaseOrderList struct {
@@ -25,8 +29,8 @@ type RecommendationPurchaseOrderList struct {
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
 	// The comma seperated list of items for the current recommendation. This can be used to generate an estimate by uploading it to Cisco Commerce Workspace.
-	ItemList             *string                                     `json:"ItemList,omitempty"`
-	ClusterExpansion     *RecommendationClusterExpansionRelationship `json:"ClusterExpansion,omitempty"`
+	ItemList             *string                                            `json:"ItemList,omitempty"`
+	ClusterExpansion     NullableRecommendationClusterExpansionRelationship `json:"ClusterExpansion,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -105,7 +109,7 @@ func (o *RecommendationPurchaseOrderList) SetObjectType(v string) {
 
 // GetItemList returns the ItemList field value if set, zero value otherwise.
 func (o *RecommendationPurchaseOrderList) GetItemList() string {
-	if o == nil || o.ItemList == nil {
+	if o == nil || IsNil(o.ItemList) {
 		var ret string
 		return ret
 	}
@@ -115,7 +119,7 @@ func (o *RecommendationPurchaseOrderList) GetItemList() string {
 // GetItemListOk returns a tuple with the ItemList field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RecommendationPurchaseOrderList) GetItemListOk() (*string, bool) {
-	if o == nil || o.ItemList == nil {
+	if o == nil || IsNil(o.ItemList) {
 		return nil, false
 	}
 	return o.ItemList, true
@@ -123,7 +127,7 @@ func (o *RecommendationPurchaseOrderList) GetItemListOk() (*string, bool) {
 
 // HasItemList returns a boolean if a field has been set.
 func (o *RecommendationPurchaseOrderList) HasItemList() bool {
-	if o != nil && o.ItemList != nil {
+	if o != nil && !IsNil(o.ItemList) {
 		return true
 	}
 
@@ -135,82 +139,119 @@ func (o *RecommendationPurchaseOrderList) SetItemList(v string) {
 	o.ItemList = &v
 }
 
-// GetClusterExpansion returns the ClusterExpansion field value if set, zero value otherwise.
+// GetClusterExpansion returns the ClusterExpansion field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *RecommendationPurchaseOrderList) GetClusterExpansion() RecommendationClusterExpansionRelationship {
-	if o == nil || o.ClusterExpansion == nil {
+	if o == nil || IsNil(o.ClusterExpansion.Get()) {
 		var ret RecommendationClusterExpansionRelationship
 		return ret
 	}
-	return *o.ClusterExpansion
+	return *o.ClusterExpansion.Get()
 }
 
 // GetClusterExpansionOk returns a tuple with the ClusterExpansion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *RecommendationPurchaseOrderList) GetClusterExpansionOk() (*RecommendationClusterExpansionRelationship, bool) {
-	if o == nil || o.ClusterExpansion == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.ClusterExpansion, true
+	return o.ClusterExpansion.Get(), o.ClusterExpansion.IsSet()
 }
 
 // HasClusterExpansion returns a boolean if a field has been set.
 func (o *RecommendationPurchaseOrderList) HasClusterExpansion() bool {
-	if o != nil && o.ClusterExpansion != nil {
+	if o != nil && o.ClusterExpansion.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetClusterExpansion gets a reference to the given RecommendationClusterExpansionRelationship and assigns it to the ClusterExpansion field.
+// SetClusterExpansion gets a reference to the given NullableRecommendationClusterExpansionRelationship and assigns it to the ClusterExpansion field.
 func (o *RecommendationPurchaseOrderList) SetClusterExpansion(v RecommendationClusterExpansionRelationship) {
-	o.ClusterExpansion = &v
+	o.ClusterExpansion.Set(&v)
+}
+
+// SetClusterExpansionNil sets the value for ClusterExpansion to be an explicit nil
+func (o *RecommendationPurchaseOrderList) SetClusterExpansionNil() {
+	o.ClusterExpansion.Set(nil)
+}
+
+// UnsetClusterExpansion ensures that no value is present for ClusterExpansion, not even an explicit nil
+func (o *RecommendationPurchaseOrderList) UnsetClusterExpansion() {
+	o.ClusterExpansion.Unset()
 }
 
 func (o RecommendationPurchaseOrderList) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o RecommendationPurchaseOrderList) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedRecommendationBase, errRecommendationBase := json.Marshal(o.RecommendationBase)
 	if errRecommendationBase != nil {
-		return []byte{}, errRecommendationBase
+		return map[string]interface{}{}, errRecommendationBase
 	}
 	errRecommendationBase = json.Unmarshal([]byte(serializedRecommendationBase), &toSerialize)
 	if errRecommendationBase != nil {
-		return []byte{}, errRecommendationBase
+		return map[string]interface{}{}, errRecommendationBase
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.ItemList != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.ItemList) {
 		toSerialize["ItemList"] = o.ItemList
 	}
-	if o.ClusterExpansion != nil {
-		toSerialize["ClusterExpansion"] = o.ClusterExpansion
+	if o.ClusterExpansion.IsSet() {
+		toSerialize["ClusterExpansion"] = o.ClusterExpansion.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *RecommendationPurchaseOrderList) UnmarshalJSON(bytes []byte) (err error) {
+func (o *RecommendationPurchaseOrderList) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type RecommendationPurchaseOrderListWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 		ObjectType string `json:"ObjectType"`
 		// The comma seperated list of items for the current recommendation. This can be used to generate an estimate by uploading it to Cisco Commerce Workspace.
-		ItemList         *string                                     `json:"ItemList,omitempty"`
-		ClusterExpansion *RecommendationClusterExpansionRelationship `json:"ClusterExpansion,omitempty"`
+		ItemList         *string                                            `json:"ItemList,omitempty"`
+		ClusterExpansion NullableRecommendationClusterExpansionRelationship `json:"ClusterExpansion,omitempty"`
 	}
 
 	varRecommendationPurchaseOrderListWithoutEmbeddedStruct := RecommendationPurchaseOrderListWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varRecommendationPurchaseOrderListWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varRecommendationPurchaseOrderListWithoutEmbeddedStruct)
 	if err == nil {
 		varRecommendationPurchaseOrderList := _RecommendationPurchaseOrderList{}
 		varRecommendationPurchaseOrderList.ClassId = varRecommendationPurchaseOrderListWithoutEmbeddedStruct.ClassId
@@ -224,7 +265,7 @@ func (o *RecommendationPurchaseOrderList) UnmarshalJSON(bytes []byte) (err error
 
 	varRecommendationPurchaseOrderList := _RecommendationPurchaseOrderList{}
 
-	err = json.Unmarshal(bytes, &varRecommendationPurchaseOrderList)
+	err = json.Unmarshal(data, &varRecommendationPurchaseOrderList)
 	if err == nil {
 		o.RecommendationBase = varRecommendationPurchaseOrderList.RecommendationBase
 	} else {
@@ -233,7 +274,7 @@ func (o *RecommendationPurchaseOrderList) UnmarshalJSON(bytes []byte) (err error
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "ItemList")

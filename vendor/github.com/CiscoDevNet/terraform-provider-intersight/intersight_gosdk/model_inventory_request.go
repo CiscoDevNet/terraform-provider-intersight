@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the InventoryRequest type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &InventoryRequest{}
 
 // InventoryRequest Request MO allows the inventory of specific devices to be collected on demand. The inventory can be collected in three levels - all the MOs of a specific device, MOs of specific MO types for a given device or specific MO instances of specific MO types for a given device. These MO instances are used just to collect the requests and not persisted.
 type InventoryRequest struct {
@@ -23,9 +27,9 @@ type InventoryRequest struct {
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
-	ObjectType           string                               `json:"ObjectType"`
-	Mos                  []InventoryInventoryMo               `json:"Mos,omitempty"`
-	Device               *AssetDeviceRegistrationRelationship `json:"Device,omitempty"`
+	ObjectType           string                                      `json:"ObjectType"`
+	Mos                  []InventoryInventoryMo                      `json:"Mos,omitempty"`
+	Device               NullableAssetDeviceRegistrationRelationship `json:"Device,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -115,7 +119,7 @@ func (o *InventoryRequest) GetMos() []InventoryInventoryMo {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *InventoryRequest) GetMosOk() ([]InventoryInventoryMo, bool) {
-	if o == nil || o.Mos == nil {
+	if o == nil || IsNil(o.Mos) {
 		return nil, false
 	}
 	return o.Mos, true
@@ -123,7 +127,7 @@ func (o *InventoryRequest) GetMosOk() ([]InventoryInventoryMo, bool) {
 
 // HasMos returns a boolean if a field has been set.
 func (o *InventoryRequest) HasMos() bool {
-	if o != nil && o.Mos != nil {
+	if o != nil && IsNil(o.Mos) {
 		return true
 	}
 
@@ -135,81 +139,118 @@ func (o *InventoryRequest) SetMos(v []InventoryInventoryMo) {
 	o.Mos = v
 }
 
-// GetDevice returns the Device field value if set, zero value otherwise.
+// GetDevice returns the Device field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *InventoryRequest) GetDevice() AssetDeviceRegistrationRelationship {
-	if o == nil || o.Device == nil {
+	if o == nil || IsNil(o.Device.Get()) {
 		var ret AssetDeviceRegistrationRelationship
 		return ret
 	}
-	return *o.Device
+	return *o.Device.Get()
 }
 
 // GetDeviceOk returns a tuple with the Device field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *InventoryRequest) GetDeviceOk() (*AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.Device == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Device, true
+	return o.Device.Get(), o.Device.IsSet()
 }
 
 // HasDevice returns a boolean if a field has been set.
 func (o *InventoryRequest) HasDevice() bool {
-	if o != nil && o.Device != nil {
+	if o != nil && o.Device.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetDevice gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the Device field.
+// SetDevice gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the Device field.
 func (o *InventoryRequest) SetDevice(v AssetDeviceRegistrationRelationship) {
-	o.Device = &v
+	o.Device.Set(&v)
+}
+
+// SetDeviceNil sets the value for Device to be an explicit nil
+func (o *InventoryRequest) SetDeviceNil() {
+	o.Device.Set(nil)
+}
+
+// UnsetDevice ensures that no value is present for Device, not even an explicit nil
+func (o *InventoryRequest) UnsetDevice() {
+	o.Device.Unset()
 }
 
 func (o InventoryRequest) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o InventoryRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
 	if o.Mos != nil {
 		toSerialize["Mos"] = o.Mos
 	}
-	if o.Device != nil {
-		toSerialize["Device"] = o.Device
+	if o.Device.IsSet() {
+		toSerialize["Device"] = o.Device.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *InventoryRequest) UnmarshalJSON(bytes []byte) (err error) {
+func (o *InventoryRequest) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type InventoryRequestWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
-		ObjectType string                               `json:"ObjectType"`
-		Mos        []InventoryInventoryMo               `json:"Mos,omitempty"`
-		Device     *AssetDeviceRegistrationRelationship `json:"Device,omitempty"`
+		ObjectType string                                      `json:"ObjectType"`
+		Mos        []InventoryInventoryMo                      `json:"Mos,omitempty"`
+		Device     NullableAssetDeviceRegistrationRelationship `json:"Device,omitempty"`
 	}
 
 	varInventoryRequestWithoutEmbeddedStruct := InventoryRequestWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varInventoryRequestWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varInventoryRequestWithoutEmbeddedStruct)
 	if err == nil {
 		varInventoryRequest := _InventoryRequest{}
 		varInventoryRequest.ClassId = varInventoryRequestWithoutEmbeddedStruct.ClassId
@@ -223,7 +264,7 @@ func (o *InventoryRequest) UnmarshalJSON(bytes []byte) (err error) {
 
 	varInventoryRequest := _InventoryRequest{}
 
-	err = json.Unmarshal(bytes, &varInventoryRequest)
+	err = json.Unmarshal(data, &varInventoryRequest)
 	if err == nil {
 		o.MoBaseMo = varInventoryRequest.MoBaseMo
 	} else {
@@ -232,7 +273,7 @@ func (o *InventoryRequest) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Mos")

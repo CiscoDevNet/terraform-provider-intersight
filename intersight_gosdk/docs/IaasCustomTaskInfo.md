@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **TaskExecutionCount** | Pointer to **int64** | Number of times this task has executed. | [optional] [readonly] 
 **TaskLabel** | Pointer to **string** | Task Label in the Workflow. | [optional] [readonly] 
 **TaskName** | Pointer to **string** | Name of the Custom Task in UCSD. | [optional] [readonly] 
-**Guid** | Pointer to [**IaasUcsdInfoRelationship**](IaasUcsdInfoRelationship.md) |  | [optional] 
+**Guid** | Pointer to [**NullableIaasUcsdInfoRelationship**](IaasUcsdInfoRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -196,6 +196,16 @@ SetGuid sets Guid field to given value.
 
 HasGuid returns a boolean if a field has been set.
 
+### SetGuidNil
+
+`func (o *IaasCustomTaskInfo) SetGuidNil(b bool)`
+
+ SetGuidNil sets the value for Guid to be an explicit nil
+
+### UnsetGuid
+`func (o *IaasCustomTaskInfo) UnsetGuid()`
+
+UnsetGuid ensures that no value is present for Guid, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

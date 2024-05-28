@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the IamLdapBaseProperties type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &IamLdapBaseProperties{}
 
 // IamLdapBaseProperties Base settings of LDAP required while configuring LDAP policy.
 type IamLdapBaseProperties struct {
@@ -146,7 +150,7 @@ func (o *IamLdapBaseProperties) SetObjectType(v string) {
 
 // GetAttribute returns the Attribute field value if set, zero value otherwise.
 func (o *IamLdapBaseProperties) GetAttribute() string {
-	if o == nil || o.Attribute == nil {
+	if o == nil || IsNil(o.Attribute) {
 		var ret string
 		return ret
 	}
@@ -156,7 +160,7 @@ func (o *IamLdapBaseProperties) GetAttribute() string {
 // GetAttributeOk returns a tuple with the Attribute field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IamLdapBaseProperties) GetAttributeOk() (*string, bool) {
-	if o == nil || o.Attribute == nil {
+	if o == nil || IsNil(o.Attribute) {
 		return nil, false
 	}
 	return o.Attribute, true
@@ -164,7 +168,7 @@ func (o *IamLdapBaseProperties) GetAttributeOk() (*string, bool) {
 
 // HasAttribute returns a boolean if a field has been set.
 func (o *IamLdapBaseProperties) HasAttribute() bool {
-	if o != nil && o.Attribute != nil {
+	if o != nil && !IsNil(o.Attribute) {
 		return true
 	}
 
@@ -178,7 +182,7 @@ func (o *IamLdapBaseProperties) SetAttribute(v string) {
 
 // GetBaseDn returns the BaseDn field value if set, zero value otherwise.
 func (o *IamLdapBaseProperties) GetBaseDn() string {
-	if o == nil || o.BaseDn == nil {
+	if o == nil || IsNil(o.BaseDn) {
 		var ret string
 		return ret
 	}
@@ -188,7 +192,7 @@ func (o *IamLdapBaseProperties) GetBaseDn() string {
 // GetBaseDnOk returns a tuple with the BaseDn field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IamLdapBaseProperties) GetBaseDnOk() (*string, bool) {
-	if o == nil || o.BaseDn == nil {
+	if o == nil || IsNil(o.BaseDn) {
 		return nil, false
 	}
 	return o.BaseDn, true
@@ -196,7 +200,7 @@ func (o *IamLdapBaseProperties) GetBaseDnOk() (*string, bool) {
 
 // HasBaseDn returns a boolean if a field has been set.
 func (o *IamLdapBaseProperties) HasBaseDn() bool {
-	if o != nil && o.BaseDn != nil {
+	if o != nil && !IsNil(o.BaseDn) {
 		return true
 	}
 
@@ -210,7 +214,7 @@ func (o *IamLdapBaseProperties) SetBaseDn(v string) {
 
 // GetBindDn returns the BindDn field value if set, zero value otherwise.
 func (o *IamLdapBaseProperties) GetBindDn() string {
-	if o == nil || o.BindDn == nil {
+	if o == nil || IsNil(o.BindDn) {
 		var ret string
 		return ret
 	}
@@ -220,7 +224,7 @@ func (o *IamLdapBaseProperties) GetBindDn() string {
 // GetBindDnOk returns a tuple with the BindDn field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IamLdapBaseProperties) GetBindDnOk() (*string, bool) {
-	if o == nil || o.BindDn == nil {
+	if o == nil || IsNil(o.BindDn) {
 		return nil, false
 	}
 	return o.BindDn, true
@@ -228,7 +232,7 @@ func (o *IamLdapBaseProperties) GetBindDnOk() (*string, bool) {
 
 // HasBindDn returns a boolean if a field has been set.
 func (o *IamLdapBaseProperties) HasBindDn() bool {
-	if o != nil && o.BindDn != nil {
+	if o != nil && !IsNil(o.BindDn) {
 		return true
 	}
 
@@ -242,7 +246,7 @@ func (o *IamLdapBaseProperties) SetBindDn(v string) {
 
 // GetBindMethod returns the BindMethod field value if set, zero value otherwise.
 func (o *IamLdapBaseProperties) GetBindMethod() string {
-	if o == nil || o.BindMethod == nil {
+	if o == nil || IsNil(o.BindMethod) {
 		var ret string
 		return ret
 	}
@@ -252,7 +256,7 @@ func (o *IamLdapBaseProperties) GetBindMethod() string {
 // GetBindMethodOk returns a tuple with the BindMethod field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IamLdapBaseProperties) GetBindMethodOk() (*string, bool) {
-	if o == nil || o.BindMethod == nil {
+	if o == nil || IsNil(o.BindMethod) {
 		return nil, false
 	}
 	return o.BindMethod, true
@@ -260,7 +264,7 @@ func (o *IamLdapBaseProperties) GetBindMethodOk() (*string, bool) {
 
 // HasBindMethod returns a boolean if a field has been set.
 func (o *IamLdapBaseProperties) HasBindMethod() bool {
-	if o != nil && o.BindMethod != nil {
+	if o != nil && !IsNil(o.BindMethod) {
 		return true
 	}
 
@@ -274,7 +278,7 @@ func (o *IamLdapBaseProperties) SetBindMethod(v string) {
 
 // GetDomain returns the Domain field value if set, zero value otherwise.
 func (o *IamLdapBaseProperties) GetDomain() string {
-	if o == nil || o.Domain == nil {
+	if o == nil || IsNil(o.Domain) {
 		var ret string
 		return ret
 	}
@@ -284,7 +288,7 @@ func (o *IamLdapBaseProperties) GetDomain() string {
 // GetDomainOk returns a tuple with the Domain field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IamLdapBaseProperties) GetDomainOk() (*string, bool) {
-	if o == nil || o.Domain == nil {
+	if o == nil || IsNil(o.Domain) {
 		return nil, false
 	}
 	return o.Domain, true
@@ -292,7 +296,7 @@ func (o *IamLdapBaseProperties) GetDomainOk() (*string, bool) {
 
 // HasDomain returns a boolean if a field has been set.
 func (o *IamLdapBaseProperties) HasDomain() bool {
-	if o != nil && o.Domain != nil {
+	if o != nil && !IsNil(o.Domain) {
 		return true
 	}
 
@@ -306,7 +310,7 @@ func (o *IamLdapBaseProperties) SetDomain(v string) {
 
 // GetEnableEncryption returns the EnableEncryption field value if set, zero value otherwise.
 func (o *IamLdapBaseProperties) GetEnableEncryption() bool {
-	if o == nil || o.EnableEncryption == nil {
+	if o == nil || IsNil(o.EnableEncryption) {
 		var ret bool
 		return ret
 	}
@@ -316,7 +320,7 @@ func (o *IamLdapBaseProperties) GetEnableEncryption() bool {
 // GetEnableEncryptionOk returns a tuple with the EnableEncryption field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IamLdapBaseProperties) GetEnableEncryptionOk() (*bool, bool) {
-	if o == nil || o.EnableEncryption == nil {
+	if o == nil || IsNil(o.EnableEncryption) {
 		return nil, false
 	}
 	return o.EnableEncryption, true
@@ -324,7 +328,7 @@ func (o *IamLdapBaseProperties) GetEnableEncryptionOk() (*bool, bool) {
 
 // HasEnableEncryption returns a boolean if a field has been set.
 func (o *IamLdapBaseProperties) HasEnableEncryption() bool {
-	if o != nil && o.EnableEncryption != nil {
+	if o != nil && !IsNil(o.EnableEncryption) {
 		return true
 	}
 
@@ -338,7 +342,7 @@ func (o *IamLdapBaseProperties) SetEnableEncryption(v bool) {
 
 // GetEnableGroupAuthorization returns the EnableGroupAuthorization field value if set, zero value otherwise.
 func (o *IamLdapBaseProperties) GetEnableGroupAuthorization() bool {
-	if o == nil || o.EnableGroupAuthorization == nil {
+	if o == nil || IsNil(o.EnableGroupAuthorization) {
 		var ret bool
 		return ret
 	}
@@ -348,7 +352,7 @@ func (o *IamLdapBaseProperties) GetEnableGroupAuthorization() bool {
 // GetEnableGroupAuthorizationOk returns a tuple with the EnableGroupAuthorization field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IamLdapBaseProperties) GetEnableGroupAuthorizationOk() (*bool, bool) {
-	if o == nil || o.EnableGroupAuthorization == nil {
+	if o == nil || IsNil(o.EnableGroupAuthorization) {
 		return nil, false
 	}
 	return o.EnableGroupAuthorization, true
@@ -356,7 +360,7 @@ func (o *IamLdapBaseProperties) GetEnableGroupAuthorizationOk() (*bool, bool) {
 
 // HasEnableGroupAuthorization returns a boolean if a field has been set.
 func (o *IamLdapBaseProperties) HasEnableGroupAuthorization() bool {
-	if o != nil && o.EnableGroupAuthorization != nil {
+	if o != nil && !IsNil(o.EnableGroupAuthorization) {
 		return true
 	}
 
@@ -370,7 +374,7 @@ func (o *IamLdapBaseProperties) SetEnableGroupAuthorization(v bool) {
 
 // GetEnableNestedGroupSearch returns the EnableNestedGroupSearch field value if set, zero value otherwise.
 func (o *IamLdapBaseProperties) GetEnableNestedGroupSearch() bool {
-	if o == nil || o.EnableNestedGroupSearch == nil {
+	if o == nil || IsNil(o.EnableNestedGroupSearch) {
 		var ret bool
 		return ret
 	}
@@ -380,7 +384,7 @@ func (o *IamLdapBaseProperties) GetEnableNestedGroupSearch() bool {
 // GetEnableNestedGroupSearchOk returns a tuple with the EnableNestedGroupSearch field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IamLdapBaseProperties) GetEnableNestedGroupSearchOk() (*bool, bool) {
-	if o == nil || o.EnableNestedGroupSearch == nil {
+	if o == nil || IsNil(o.EnableNestedGroupSearch) {
 		return nil, false
 	}
 	return o.EnableNestedGroupSearch, true
@@ -388,7 +392,7 @@ func (o *IamLdapBaseProperties) GetEnableNestedGroupSearchOk() (*bool, bool) {
 
 // HasEnableNestedGroupSearch returns a boolean if a field has been set.
 func (o *IamLdapBaseProperties) HasEnableNestedGroupSearch() bool {
-	if o != nil && o.EnableNestedGroupSearch != nil {
+	if o != nil && !IsNil(o.EnableNestedGroupSearch) {
 		return true
 	}
 
@@ -402,7 +406,7 @@ func (o *IamLdapBaseProperties) SetEnableNestedGroupSearch(v bool) {
 
 // GetFilter returns the Filter field value if set, zero value otherwise.
 func (o *IamLdapBaseProperties) GetFilter() string {
-	if o == nil || o.Filter == nil {
+	if o == nil || IsNil(o.Filter) {
 		var ret string
 		return ret
 	}
@@ -412,7 +416,7 @@ func (o *IamLdapBaseProperties) GetFilter() string {
 // GetFilterOk returns a tuple with the Filter field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IamLdapBaseProperties) GetFilterOk() (*string, bool) {
-	if o == nil || o.Filter == nil {
+	if o == nil || IsNil(o.Filter) {
 		return nil, false
 	}
 	return o.Filter, true
@@ -420,7 +424,7 @@ func (o *IamLdapBaseProperties) GetFilterOk() (*string, bool) {
 
 // HasFilter returns a boolean if a field has been set.
 func (o *IamLdapBaseProperties) HasFilter() bool {
-	if o != nil && o.Filter != nil {
+	if o != nil && !IsNil(o.Filter) {
 		return true
 	}
 
@@ -434,7 +438,7 @@ func (o *IamLdapBaseProperties) SetFilter(v string) {
 
 // GetGroupAttribute returns the GroupAttribute field value if set, zero value otherwise.
 func (o *IamLdapBaseProperties) GetGroupAttribute() string {
-	if o == nil || o.GroupAttribute == nil {
+	if o == nil || IsNil(o.GroupAttribute) {
 		var ret string
 		return ret
 	}
@@ -444,7 +448,7 @@ func (o *IamLdapBaseProperties) GetGroupAttribute() string {
 // GetGroupAttributeOk returns a tuple with the GroupAttribute field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IamLdapBaseProperties) GetGroupAttributeOk() (*string, bool) {
-	if o == nil || o.GroupAttribute == nil {
+	if o == nil || IsNil(o.GroupAttribute) {
 		return nil, false
 	}
 	return o.GroupAttribute, true
@@ -452,7 +456,7 @@ func (o *IamLdapBaseProperties) GetGroupAttributeOk() (*string, bool) {
 
 // HasGroupAttribute returns a boolean if a field has been set.
 func (o *IamLdapBaseProperties) HasGroupAttribute() bool {
-	if o != nil && o.GroupAttribute != nil {
+	if o != nil && !IsNil(o.GroupAttribute) {
 		return true
 	}
 
@@ -466,7 +470,7 @@ func (o *IamLdapBaseProperties) SetGroupAttribute(v string) {
 
 // GetIsPasswordSet returns the IsPasswordSet field value if set, zero value otherwise.
 func (o *IamLdapBaseProperties) GetIsPasswordSet() bool {
-	if o == nil || o.IsPasswordSet == nil {
+	if o == nil || IsNil(o.IsPasswordSet) {
 		var ret bool
 		return ret
 	}
@@ -476,7 +480,7 @@ func (o *IamLdapBaseProperties) GetIsPasswordSet() bool {
 // GetIsPasswordSetOk returns a tuple with the IsPasswordSet field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IamLdapBaseProperties) GetIsPasswordSetOk() (*bool, bool) {
-	if o == nil || o.IsPasswordSet == nil {
+	if o == nil || IsNil(o.IsPasswordSet) {
 		return nil, false
 	}
 	return o.IsPasswordSet, true
@@ -484,7 +488,7 @@ func (o *IamLdapBaseProperties) GetIsPasswordSetOk() (*bool, bool) {
 
 // HasIsPasswordSet returns a boolean if a field has been set.
 func (o *IamLdapBaseProperties) HasIsPasswordSet() bool {
-	if o != nil && o.IsPasswordSet != nil {
+	if o != nil && !IsNil(o.IsPasswordSet) {
 		return true
 	}
 
@@ -498,7 +502,7 @@ func (o *IamLdapBaseProperties) SetIsPasswordSet(v bool) {
 
 // GetNestedGroupSearchDepth returns the NestedGroupSearchDepth field value if set, zero value otherwise.
 func (o *IamLdapBaseProperties) GetNestedGroupSearchDepth() int64 {
-	if o == nil || o.NestedGroupSearchDepth == nil {
+	if o == nil || IsNil(o.NestedGroupSearchDepth) {
 		var ret int64
 		return ret
 	}
@@ -508,7 +512,7 @@ func (o *IamLdapBaseProperties) GetNestedGroupSearchDepth() int64 {
 // GetNestedGroupSearchDepthOk returns a tuple with the NestedGroupSearchDepth field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IamLdapBaseProperties) GetNestedGroupSearchDepthOk() (*int64, bool) {
-	if o == nil || o.NestedGroupSearchDepth == nil {
+	if o == nil || IsNil(o.NestedGroupSearchDepth) {
 		return nil, false
 	}
 	return o.NestedGroupSearchDepth, true
@@ -516,7 +520,7 @@ func (o *IamLdapBaseProperties) GetNestedGroupSearchDepthOk() (*int64, bool) {
 
 // HasNestedGroupSearchDepth returns a boolean if a field has been set.
 func (o *IamLdapBaseProperties) HasNestedGroupSearchDepth() bool {
-	if o != nil && o.NestedGroupSearchDepth != nil {
+	if o != nil && !IsNil(o.NestedGroupSearchDepth) {
 		return true
 	}
 
@@ -530,7 +534,7 @@ func (o *IamLdapBaseProperties) SetNestedGroupSearchDepth(v int64) {
 
 // GetPassword returns the Password field value if set, zero value otherwise.
 func (o *IamLdapBaseProperties) GetPassword() string {
-	if o == nil || o.Password == nil {
+	if o == nil || IsNil(o.Password) {
 		var ret string
 		return ret
 	}
@@ -540,7 +544,7 @@ func (o *IamLdapBaseProperties) GetPassword() string {
 // GetPasswordOk returns a tuple with the Password field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IamLdapBaseProperties) GetPasswordOk() (*string, bool) {
-	if o == nil || o.Password == nil {
+	if o == nil || IsNil(o.Password) {
 		return nil, false
 	}
 	return o.Password, true
@@ -548,7 +552,7 @@ func (o *IamLdapBaseProperties) GetPasswordOk() (*string, bool) {
 
 // HasPassword returns a boolean if a field has been set.
 func (o *IamLdapBaseProperties) HasPassword() bool {
-	if o != nil && o.Password != nil {
+	if o != nil && !IsNil(o.Password) {
 		return true
 	}
 
@@ -562,7 +566,7 @@ func (o *IamLdapBaseProperties) SetPassword(v string) {
 
 // GetTimeout returns the Timeout field value if set, zero value otherwise.
 func (o *IamLdapBaseProperties) GetTimeout() int64 {
-	if o == nil || o.Timeout == nil {
+	if o == nil || IsNil(o.Timeout) {
 		var ret int64
 		return ret
 	}
@@ -572,7 +576,7 @@ func (o *IamLdapBaseProperties) GetTimeout() int64 {
 // GetTimeoutOk returns a tuple with the Timeout field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IamLdapBaseProperties) GetTimeoutOk() (*int64, bool) {
-	if o == nil || o.Timeout == nil {
+	if o == nil || IsNil(o.Timeout) {
 		return nil, false
 	}
 	return o.Timeout, true
@@ -580,7 +584,7 @@ func (o *IamLdapBaseProperties) GetTimeoutOk() (*int64, bool) {
 
 // HasTimeout returns a boolean if a field has been set.
 func (o *IamLdapBaseProperties) HasTimeout() bool {
-	if o != nil && o.Timeout != nil {
+	if o != nil && !IsNil(o.Timeout) {
 		return true
 	}
 
@@ -593,61 +597,65 @@ func (o *IamLdapBaseProperties) SetTimeout(v int64) {
 }
 
 func (o IamLdapBaseProperties) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o IamLdapBaseProperties) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
 	errMoBaseComplexType = json.Unmarshal([]byte(serializedMoBaseComplexType), &toSerialize)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Attribute != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Attribute) {
 		toSerialize["Attribute"] = o.Attribute
 	}
-	if o.BaseDn != nil {
+	if !IsNil(o.BaseDn) {
 		toSerialize["BaseDn"] = o.BaseDn
 	}
-	if o.BindDn != nil {
+	if !IsNil(o.BindDn) {
 		toSerialize["BindDn"] = o.BindDn
 	}
-	if o.BindMethod != nil {
+	if !IsNil(o.BindMethod) {
 		toSerialize["BindMethod"] = o.BindMethod
 	}
-	if o.Domain != nil {
+	if !IsNil(o.Domain) {
 		toSerialize["Domain"] = o.Domain
 	}
-	if o.EnableEncryption != nil {
+	if !IsNil(o.EnableEncryption) {
 		toSerialize["EnableEncryption"] = o.EnableEncryption
 	}
-	if o.EnableGroupAuthorization != nil {
+	if !IsNil(o.EnableGroupAuthorization) {
 		toSerialize["EnableGroupAuthorization"] = o.EnableGroupAuthorization
 	}
-	if o.EnableNestedGroupSearch != nil {
+	if !IsNil(o.EnableNestedGroupSearch) {
 		toSerialize["EnableNestedGroupSearch"] = o.EnableNestedGroupSearch
 	}
-	if o.Filter != nil {
+	if !IsNil(o.Filter) {
 		toSerialize["Filter"] = o.Filter
 	}
-	if o.GroupAttribute != nil {
+	if !IsNil(o.GroupAttribute) {
 		toSerialize["GroupAttribute"] = o.GroupAttribute
 	}
-	if o.IsPasswordSet != nil {
+	if !IsNil(o.IsPasswordSet) {
 		toSerialize["IsPasswordSet"] = o.IsPasswordSet
 	}
-	if o.NestedGroupSearchDepth != nil {
+	if !IsNil(o.NestedGroupSearchDepth) {
 		toSerialize["NestedGroupSearchDepth"] = o.NestedGroupSearchDepth
 	}
-	if o.Password != nil {
+	if !IsNil(o.Password) {
 		toSerialize["Password"] = o.Password
 	}
-	if o.Timeout != nil {
+	if !IsNil(o.Timeout) {
 		toSerialize["Timeout"] = o.Timeout
 	}
 
@@ -655,10 +663,32 @@ func (o IamLdapBaseProperties) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *IamLdapBaseProperties) UnmarshalJSON(bytes []byte) (err error) {
+func (o *IamLdapBaseProperties) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type IamLdapBasePropertiesWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -696,7 +726,7 @@ func (o *IamLdapBaseProperties) UnmarshalJSON(bytes []byte) (err error) {
 
 	varIamLdapBasePropertiesWithoutEmbeddedStruct := IamLdapBasePropertiesWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varIamLdapBasePropertiesWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varIamLdapBasePropertiesWithoutEmbeddedStruct)
 	if err == nil {
 		varIamLdapBaseProperties := _IamLdapBaseProperties{}
 		varIamLdapBaseProperties.ClassId = varIamLdapBasePropertiesWithoutEmbeddedStruct.ClassId
@@ -722,7 +752,7 @@ func (o *IamLdapBaseProperties) UnmarshalJSON(bytes []byte) (err error) {
 
 	varIamLdapBaseProperties := _IamLdapBaseProperties{}
 
-	err = json.Unmarshal(bytes, &varIamLdapBaseProperties)
+	err = json.Unmarshal(data, &varIamLdapBaseProperties)
 	if err == nil {
 		o.MoBaseComplexType = varIamLdapBaseProperties.MoBaseComplexType
 	} else {
@@ -731,7 +761,7 @@ func (o *IamLdapBaseProperties) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Attribute")

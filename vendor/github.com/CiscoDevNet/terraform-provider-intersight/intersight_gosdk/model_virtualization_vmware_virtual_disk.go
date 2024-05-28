@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the VirtualizationVmwareVirtualDisk type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &VirtualizationVmwareVirtualDisk{}
 
 // VirtualizationVmwareVirtualDisk Depicts disk configuration used to create a virtual disk on a hypervisor datastore.
 type VirtualizationVmwareVirtualDisk struct {
@@ -58,9 +62,9 @@ type VirtualizationVmwareVirtualDisk struct {
 	// Path of the virtual disk.
 	VirtualDiskPath *string `json:"VirtualDiskPath,omitempty"`
 	// Identity of the virtual machine where the virtual disk is created.
-	VmIdentity           *string                                         `json:"VmIdentity,omitempty"`
-	Datastore            *VirtualizationVmwareDatastoreRelationship      `json:"Datastore,omitempty"`
-	VirtualMachine       *VirtualizationVmwareVirtualMachineRelationship `json:"VirtualMachine,omitempty"`
+	VmIdentity           *string                                                `json:"VmIdentity,omitempty"`
+	Datastore            NullableVirtualizationVmwareDatastoreRelationship      `json:"Datastore,omitempty"`
+	VirtualMachine       NullableVirtualizationVmwareVirtualMachineRelationship `json:"VirtualMachine,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -159,7 +163,7 @@ func (o *VirtualizationVmwareVirtualDisk) SetObjectType(v string) {
 
 // GetCompatibilityMode returns the CompatibilityMode field value if set, zero value otherwise.
 func (o *VirtualizationVmwareVirtualDisk) GetCompatibilityMode() string {
-	if o == nil || o.CompatibilityMode == nil {
+	if o == nil || IsNil(o.CompatibilityMode) {
 		var ret string
 		return ret
 	}
@@ -169,7 +173,7 @@ func (o *VirtualizationVmwareVirtualDisk) GetCompatibilityMode() string {
 // GetCompatibilityModeOk returns a tuple with the CompatibilityMode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationVmwareVirtualDisk) GetCompatibilityModeOk() (*string, bool) {
-	if o == nil || o.CompatibilityMode == nil {
+	if o == nil || IsNil(o.CompatibilityMode) {
 		return nil, false
 	}
 	return o.CompatibilityMode, true
@@ -177,7 +181,7 @@ func (o *VirtualizationVmwareVirtualDisk) GetCompatibilityModeOk() (*string, boo
 
 // HasCompatibilityMode returns a boolean if a field has been set.
 func (o *VirtualizationVmwareVirtualDisk) HasCompatibilityMode() bool {
-	if o != nil && o.CompatibilityMode != nil {
+	if o != nil && !IsNil(o.CompatibilityMode) {
 		return true
 	}
 
@@ -191,7 +195,7 @@ func (o *VirtualizationVmwareVirtualDisk) SetCompatibilityMode(v string) {
 
 // GetControllerKey returns the ControllerKey field value if set, zero value otherwise.
 func (o *VirtualizationVmwareVirtualDisk) GetControllerKey() int64 {
-	if o == nil || o.ControllerKey == nil {
+	if o == nil || IsNil(o.ControllerKey) {
 		var ret int64
 		return ret
 	}
@@ -201,7 +205,7 @@ func (o *VirtualizationVmwareVirtualDisk) GetControllerKey() int64 {
 // GetControllerKeyOk returns a tuple with the ControllerKey field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationVmwareVirtualDisk) GetControllerKeyOk() (*int64, bool) {
-	if o == nil || o.ControllerKey == nil {
+	if o == nil || IsNil(o.ControllerKey) {
 		return nil, false
 	}
 	return o.ControllerKey, true
@@ -209,7 +213,7 @@ func (o *VirtualizationVmwareVirtualDisk) GetControllerKeyOk() (*int64, bool) {
 
 // HasControllerKey returns a boolean if a field has been set.
 func (o *VirtualizationVmwareVirtualDisk) HasControllerKey() bool {
-	if o != nil && o.ControllerKey != nil {
+	if o != nil && !IsNil(o.ControllerKey) {
 		return true
 	}
 
@@ -223,7 +227,7 @@ func (o *VirtualizationVmwareVirtualDisk) SetControllerKey(v int64) {
 
 // GetDeviceName returns the DeviceName field value if set, zero value otherwise.
 func (o *VirtualizationVmwareVirtualDisk) GetDeviceName() string {
-	if o == nil || o.DeviceName == nil {
+	if o == nil || IsNil(o.DeviceName) {
 		var ret string
 		return ret
 	}
@@ -233,7 +237,7 @@ func (o *VirtualizationVmwareVirtualDisk) GetDeviceName() string {
 // GetDeviceNameOk returns a tuple with the DeviceName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationVmwareVirtualDisk) GetDeviceNameOk() (*string, bool) {
-	if o == nil || o.DeviceName == nil {
+	if o == nil || IsNil(o.DeviceName) {
 		return nil, false
 	}
 	return o.DeviceName, true
@@ -241,7 +245,7 @@ func (o *VirtualizationVmwareVirtualDisk) GetDeviceNameOk() (*string, bool) {
 
 // HasDeviceName returns a boolean if a field has been set.
 func (o *VirtualizationVmwareVirtualDisk) HasDeviceName() bool {
-	if o != nil && o.DeviceName != nil {
+	if o != nil && !IsNil(o.DeviceName) {
 		return true
 	}
 
@@ -255,7 +259,7 @@ func (o *VirtualizationVmwareVirtualDisk) SetDeviceName(v string) {
 
 // GetDiskMode returns the DiskMode field value if set, zero value otherwise.
 func (o *VirtualizationVmwareVirtualDisk) GetDiskMode() string {
-	if o == nil || o.DiskMode == nil {
+	if o == nil || IsNil(o.DiskMode) {
 		var ret string
 		return ret
 	}
@@ -265,7 +269,7 @@ func (o *VirtualizationVmwareVirtualDisk) GetDiskMode() string {
 // GetDiskModeOk returns a tuple with the DiskMode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationVmwareVirtualDisk) GetDiskModeOk() (*string, bool) {
-	if o == nil || o.DiskMode == nil {
+	if o == nil || IsNil(o.DiskMode) {
 		return nil, false
 	}
 	return o.DiskMode, true
@@ -273,7 +277,7 @@ func (o *VirtualizationVmwareVirtualDisk) GetDiskModeOk() (*string, bool) {
 
 // HasDiskMode returns a boolean if a field has been set.
 func (o *VirtualizationVmwareVirtualDisk) HasDiskMode() bool {
-	if o != nil && o.DiskMode != nil {
+	if o != nil && !IsNil(o.DiskMode) {
 		return true
 	}
 
@@ -287,7 +291,7 @@ func (o *VirtualizationVmwareVirtualDisk) SetDiskMode(v string) {
 
 // GetDiskType returns the DiskType field value if set, zero value otherwise.
 func (o *VirtualizationVmwareVirtualDisk) GetDiskType() string {
-	if o == nil || o.DiskType == nil {
+	if o == nil || IsNil(o.DiskType) {
 		var ret string
 		return ret
 	}
@@ -297,7 +301,7 @@ func (o *VirtualizationVmwareVirtualDisk) GetDiskType() string {
 // GetDiskTypeOk returns a tuple with the DiskType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationVmwareVirtualDisk) GetDiskTypeOk() (*string, bool) {
-	if o == nil || o.DiskType == nil {
+	if o == nil || IsNil(o.DiskType) {
 		return nil, false
 	}
 	return o.DiskType, true
@@ -305,7 +309,7 @@ func (o *VirtualizationVmwareVirtualDisk) GetDiskTypeOk() (*string, bool) {
 
 // HasDiskType returns a boolean if a field has been set.
 func (o *VirtualizationVmwareVirtualDisk) HasDiskType() bool {
-	if o != nil && o.DiskType != nil {
+	if o != nil && !IsNil(o.DiskType) {
 		return true
 	}
 
@@ -319,7 +323,7 @@ func (o *VirtualizationVmwareVirtualDisk) SetDiskType(v string) {
 
 // GetKey returns the Key field value if set, zero value otherwise.
 func (o *VirtualizationVmwareVirtualDisk) GetKey() int64 {
-	if o == nil || o.Key == nil {
+	if o == nil || IsNil(o.Key) {
 		var ret int64
 		return ret
 	}
@@ -329,7 +333,7 @@ func (o *VirtualizationVmwareVirtualDisk) GetKey() int64 {
 // GetKeyOk returns a tuple with the Key field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationVmwareVirtualDisk) GetKeyOk() (*int64, bool) {
-	if o == nil || o.Key == nil {
+	if o == nil || IsNil(o.Key) {
 		return nil, false
 	}
 	return o.Key, true
@@ -337,7 +341,7 @@ func (o *VirtualizationVmwareVirtualDisk) GetKeyOk() (*int64, bool) {
 
 // HasKey returns a boolean if a field has been set.
 func (o *VirtualizationVmwareVirtualDisk) HasKey() bool {
-	if o != nil && o.Key != nil {
+	if o != nil && !IsNil(o.Key) {
 		return true
 	}
 
@@ -351,7 +355,7 @@ func (o *VirtualizationVmwareVirtualDisk) SetKey(v int64) {
 
 // GetLimit returns the Limit field value if set, zero value otherwise.
 func (o *VirtualizationVmwareVirtualDisk) GetLimit() int64 {
-	if o == nil || o.Limit == nil {
+	if o == nil || IsNil(o.Limit) {
 		var ret int64
 		return ret
 	}
@@ -361,7 +365,7 @@ func (o *VirtualizationVmwareVirtualDisk) GetLimit() int64 {
 // GetLimitOk returns a tuple with the Limit field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationVmwareVirtualDisk) GetLimitOk() (*int64, bool) {
-	if o == nil || o.Limit == nil {
+	if o == nil || IsNil(o.Limit) {
 		return nil, false
 	}
 	return o.Limit, true
@@ -369,7 +373,7 @@ func (o *VirtualizationVmwareVirtualDisk) GetLimitOk() (*int64, bool) {
 
 // HasLimit returns a boolean if a field has been set.
 func (o *VirtualizationVmwareVirtualDisk) HasLimit() bool {
-	if o != nil && o.Limit != nil {
+	if o != nil && !IsNil(o.Limit) {
 		return true
 	}
 
@@ -383,7 +387,7 @@ func (o *VirtualizationVmwareVirtualDisk) SetLimit(v int64) {
 
 // GetLunUuid returns the LunUuid field value if set, zero value otherwise.
 func (o *VirtualizationVmwareVirtualDisk) GetLunUuid() string {
-	if o == nil || o.LunUuid == nil {
+	if o == nil || IsNil(o.LunUuid) {
 		var ret string
 		return ret
 	}
@@ -393,7 +397,7 @@ func (o *VirtualizationVmwareVirtualDisk) GetLunUuid() string {
 // GetLunUuidOk returns a tuple with the LunUuid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationVmwareVirtualDisk) GetLunUuidOk() (*string, bool) {
-	if o == nil || o.LunUuid == nil {
+	if o == nil || IsNil(o.LunUuid) {
 		return nil, false
 	}
 	return o.LunUuid, true
@@ -401,7 +405,7 @@ func (o *VirtualizationVmwareVirtualDisk) GetLunUuidOk() (*string, bool) {
 
 // HasLunUuid returns a boolean if a field has been set.
 func (o *VirtualizationVmwareVirtualDisk) HasLunUuid() bool {
-	if o != nil && o.LunUuid != nil {
+	if o != nil && !IsNil(o.LunUuid) {
 		return true
 	}
 
@@ -415,7 +419,7 @@ func (o *VirtualizationVmwareVirtualDisk) SetLunUuid(v string) {
 
 // GetSerial returns the Serial field value if set, zero value otherwise.
 func (o *VirtualizationVmwareVirtualDisk) GetSerial() string {
-	if o == nil || o.Serial == nil {
+	if o == nil || IsNil(o.Serial) {
 		var ret string
 		return ret
 	}
@@ -425,7 +429,7 @@ func (o *VirtualizationVmwareVirtualDisk) GetSerial() string {
 // GetSerialOk returns a tuple with the Serial field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationVmwareVirtualDisk) GetSerialOk() (*string, bool) {
-	if o == nil || o.Serial == nil {
+	if o == nil || IsNil(o.Serial) {
 		return nil, false
 	}
 	return o.Serial, true
@@ -433,7 +437,7 @@ func (o *VirtualizationVmwareVirtualDisk) GetSerialOk() (*string, bool) {
 
 // HasSerial returns a boolean if a field has been set.
 func (o *VirtualizationVmwareVirtualDisk) HasSerial() bool {
-	if o != nil && o.Serial != nil {
+	if o != nil && !IsNil(o.Serial) {
 		return true
 	}
 
@@ -447,7 +451,7 @@ func (o *VirtualizationVmwareVirtualDisk) SetSerial(v string) {
 
 // GetShares returns the Shares field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *VirtualizationVmwareVirtualDisk) GetShares() VirtualizationVmwareSharesInfo {
-	if o == nil || o.Shares.Get() == nil {
+	if o == nil || IsNil(o.Shares.Get()) {
 		var ret VirtualizationVmwareSharesInfo
 		return ret
 	}
@@ -490,7 +494,7 @@ func (o *VirtualizationVmwareVirtualDisk) UnsetShares() {
 
 // GetSharing returns the Sharing field value if set, zero value otherwise.
 func (o *VirtualizationVmwareVirtualDisk) GetSharing() string {
-	if o == nil || o.Sharing == nil {
+	if o == nil || IsNil(o.Sharing) {
 		var ret string
 		return ret
 	}
@@ -500,7 +504,7 @@ func (o *VirtualizationVmwareVirtualDisk) GetSharing() string {
 // GetSharingOk returns a tuple with the Sharing field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationVmwareVirtualDisk) GetSharingOk() (*string, bool) {
-	if o == nil || o.Sharing == nil {
+	if o == nil || IsNil(o.Sharing) {
 		return nil, false
 	}
 	return o.Sharing, true
@@ -508,7 +512,7 @@ func (o *VirtualizationVmwareVirtualDisk) GetSharingOk() (*string, bool) {
 
 // HasSharing returns a boolean if a field has been set.
 func (o *VirtualizationVmwareVirtualDisk) HasSharing() bool {
-	if o != nil && o.Sharing != nil {
+	if o != nil && !IsNil(o.Sharing) {
 		return true
 	}
 
@@ -522,7 +526,7 @@ func (o *VirtualizationVmwareVirtualDisk) SetSharing(v string) {
 
 // GetStorageAllocationType returns the StorageAllocationType field value if set, zero value otherwise.
 func (o *VirtualizationVmwareVirtualDisk) GetStorageAllocationType() string {
-	if o == nil || o.StorageAllocationType == nil {
+	if o == nil || IsNil(o.StorageAllocationType) {
 		var ret string
 		return ret
 	}
@@ -532,7 +536,7 @@ func (o *VirtualizationVmwareVirtualDisk) GetStorageAllocationType() string {
 // GetStorageAllocationTypeOk returns a tuple with the StorageAllocationType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationVmwareVirtualDisk) GetStorageAllocationTypeOk() (*string, bool) {
-	if o == nil || o.StorageAllocationType == nil {
+	if o == nil || IsNil(o.StorageAllocationType) {
 		return nil, false
 	}
 	return o.StorageAllocationType, true
@@ -540,7 +544,7 @@ func (o *VirtualizationVmwareVirtualDisk) GetStorageAllocationTypeOk() (*string,
 
 // HasStorageAllocationType returns a boolean if a field has been set.
 func (o *VirtualizationVmwareVirtualDisk) HasStorageAllocationType() bool {
-	if o != nil && o.StorageAllocationType != nil {
+	if o != nil && !IsNil(o.StorageAllocationType) {
 		return true
 	}
 
@@ -554,7 +558,7 @@ func (o *VirtualizationVmwareVirtualDisk) SetStorageAllocationType(v string) {
 
 // GetUnitNumber returns the UnitNumber field value if set, zero value otherwise.
 func (o *VirtualizationVmwareVirtualDisk) GetUnitNumber() int64 {
-	if o == nil || o.UnitNumber == nil {
+	if o == nil || IsNil(o.UnitNumber) {
 		var ret int64
 		return ret
 	}
@@ -564,7 +568,7 @@ func (o *VirtualizationVmwareVirtualDisk) GetUnitNumber() int64 {
 // GetUnitNumberOk returns a tuple with the UnitNumber field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationVmwareVirtualDisk) GetUnitNumberOk() (*int64, bool) {
-	if o == nil || o.UnitNumber == nil {
+	if o == nil || IsNil(o.UnitNumber) {
 		return nil, false
 	}
 	return o.UnitNumber, true
@@ -572,7 +576,7 @@ func (o *VirtualizationVmwareVirtualDisk) GetUnitNumberOk() (*int64, bool) {
 
 // HasUnitNumber returns a boolean if a field has been set.
 func (o *VirtualizationVmwareVirtualDisk) HasUnitNumber() bool {
-	if o != nil && o.UnitNumber != nil {
+	if o != nil && !IsNil(o.UnitNumber) {
 		return true
 	}
 
@@ -586,7 +590,7 @@ func (o *VirtualizationVmwareVirtualDisk) SetUnitNumber(v int64) {
 
 // GetUuid returns the Uuid field value if set, zero value otherwise.
 func (o *VirtualizationVmwareVirtualDisk) GetUuid() string {
-	if o == nil || o.Uuid == nil {
+	if o == nil || IsNil(o.Uuid) {
 		var ret string
 		return ret
 	}
@@ -596,7 +600,7 @@ func (o *VirtualizationVmwareVirtualDisk) GetUuid() string {
 // GetUuidOk returns a tuple with the Uuid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationVmwareVirtualDisk) GetUuidOk() (*string, bool) {
-	if o == nil || o.Uuid == nil {
+	if o == nil || IsNil(o.Uuid) {
 		return nil, false
 	}
 	return o.Uuid, true
@@ -604,7 +608,7 @@ func (o *VirtualizationVmwareVirtualDisk) GetUuidOk() (*string, bool) {
 
 // HasUuid returns a boolean if a field has been set.
 func (o *VirtualizationVmwareVirtualDisk) HasUuid() bool {
-	if o != nil && o.Uuid != nil {
+	if o != nil && !IsNil(o.Uuid) {
 		return true
 	}
 
@@ -618,7 +622,7 @@ func (o *VirtualizationVmwareVirtualDisk) SetUuid(v string) {
 
 // GetVdiskId returns the VdiskId field value if set, zero value otherwise.
 func (o *VirtualizationVmwareVirtualDisk) GetVdiskId() string {
-	if o == nil || o.VdiskId == nil {
+	if o == nil || IsNil(o.VdiskId) {
 		var ret string
 		return ret
 	}
@@ -628,7 +632,7 @@ func (o *VirtualizationVmwareVirtualDisk) GetVdiskId() string {
 // GetVdiskIdOk returns a tuple with the VdiskId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationVmwareVirtualDisk) GetVdiskIdOk() (*string, bool) {
-	if o == nil || o.VdiskId == nil {
+	if o == nil || IsNil(o.VdiskId) {
 		return nil, false
 	}
 	return o.VdiskId, true
@@ -636,7 +640,7 @@ func (o *VirtualizationVmwareVirtualDisk) GetVdiskIdOk() (*string, bool) {
 
 // HasVdiskId returns a boolean if a field has been set.
 func (o *VirtualizationVmwareVirtualDisk) HasVdiskId() bool {
-	if o != nil && o.VdiskId != nil {
+	if o != nil && !IsNil(o.VdiskId) {
 		return true
 	}
 
@@ -650,7 +654,7 @@ func (o *VirtualizationVmwareVirtualDisk) SetVdiskId(v string) {
 
 // GetVendor returns the Vendor field value if set, zero value otherwise.
 func (o *VirtualizationVmwareVirtualDisk) GetVendor() string {
-	if o == nil || o.Vendor == nil {
+	if o == nil || IsNil(o.Vendor) {
 		var ret string
 		return ret
 	}
@@ -660,7 +664,7 @@ func (o *VirtualizationVmwareVirtualDisk) GetVendor() string {
 // GetVendorOk returns a tuple with the Vendor field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationVmwareVirtualDisk) GetVendorOk() (*string, bool) {
-	if o == nil || o.Vendor == nil {
+	if o == nil || IsNil(o.Vendor) {
 		return nil, false
 	}
 	return o.Vendor, true
@@ -668,7 +672,7 @@ func (o *VirtualizationVmwareVirtualDisk) GetVendorOk() (*string, bool) {
 
 // HasVendor returns a boolean if a field has been set.
 func (o *VirtualizationVmwareVirtualDisk) HasVendor() bool {
-	if o != nil && o.Vendor != nil {
+	if o != nil && !IsNil(o.Vendor) {
 		return true
 	}
 
@@ -682,7 +686,7 @@ func (o *VirtualizationVmwareVirtualDisk) SetVendor(v string) {
 
 // GetVirtualDiskPath returns the VirtualDiskPath field value if set, zero value otherwise.
 func (o *VirtualizationVmwareVirtualDisk) GetVirtualDiskPath() string {
-	if o == nil || o.VirtualDiskPath == nil {
+	if o == nil || IsNil(o.VirtualDiskPath) {
 		var ret string
 		return ret
 	}
@@ -692,7 +696,7 @@ func (o *VirtualizationVmwareVirtualDisk) GetVirtualDiskPath() string {
 // GetVirtualDiskPathOk returns a tuple with the VirtualDiskPath field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationVmwareVirtualDisk) GetVirtualDiskPathOk() (*string, bool) {
-	if o == nil || o.VirtualDiskPath == nil {
+	if o == nil || IsNil(o.VirtualDiskPath) {
 		return nil, false
 	}
 	return o.VirtualDiskPath, true
@@ -700,7 +704,7 @@ func (o *VirtualizationVmwareVirtualDisk) GetVirtualDiskPathOk() (*string, bool)
 
 // HasVirtualDiskPath returns a boolean if a field has been set.
 func (o *VirtualizationVmwareVirtualDisk) HasVirtualDiskPath() bool {
-	if o != nil && o.VirtualDiskPath != nil {
+	if o != nil && !IsNil(o.VirtualDiskPath) {
 		return true
 	}
 
@@ -714,7 +718,7 @@ func (o *VirtualizationVmwareVirtualDisk) SetVirtualDiskPath(v string) {
 
 // GetVmIdentity returns the VmIdentity field value if set, zero value otherwise.
 func (o *VirtualizationVmwareVirtualDisk) GetVmIdentity() string {
-	if o == nil || o.VmIdentity == nil {
+	if o == nil || IsNil(o.VmIdentity) {
 		var ret string
 		return ret
 	}
@@ -724,7 +728,7 @@ func (o *VirtualizationVmwareVirtualDisk) GetVmIdentity() string {
 // GetVmIdentityOk returns a tuple with the VmIdentity field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationVmwareVirtualDisk) GetVmIdentityOk() (*string, bool) {
-	if o == nil || o.VmIdentity == nil {
+	if o == nil || IsNil(o.VmIdentity) {
 		return nil, false
 	}
 	return o.VmIdentity, true
@@ -732,7 +736,7 @@ func (o *VirtualizationVmwareVirtualDisk) GetVmIdentityOk() (*string, bool) {
 
 // HasVmIdentity returns a boolean if a field has been set.
 func (o *VirtualizationVmwareVirtualDisk) HasVmIdentity() bool {
-	if o != nil && o.VmIdentity != nil {
+	if o != nil && !IsNil(o.VmIdentity) {
 		return true
 	}
 
@@ -744,155 +748,203 @@ func (o *VirtualizationVmwareVirtualDisk) SetVmIdentity(v string) {
 	o.VmIdentity = &v
 }
 
-// GetDatastore returns the Datastore field value if set, zero value otherwise.
+// GetDatastore returns the Datastore field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *VirtualizationVmwareVirtualDisk) GetDatastore() VirtualizationVmwareDatastoreRelationship {
-	if o == nil || o.Datastore == nil {
+	if o == nil || IsNil(o.Datastore.Get()) {
 		var ret VirtualizationVmwareDatastoreRelationship
 		return ret
 	}
-	return *o.Datastore
+	return *o.Datastore.Get()
 }
 
 // GetDatastoreOk returns a tuple with the Datastore field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *VirtualizationVmwareVirtualDisk) GetDatastoreOk() (*VirtualizationVmwareDatastoreRelationship, bool) {
-	if o == nil || o.Datastore == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Datastore, true
+	return o.Datastore.Get(), o.Datastore.IsSet()
 }
 
 // HasDatastore returns a boolean if a field has been set.
 func (o *VirtualizationVmwareVirtualDisk) HasDatastore() bool {
-	if o != nil && o.Datastore != nil {
+	if o != nil && o.Datastore.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetDatastore gets a reference to the given VirtualizationVmwareDatastoreRelationship and assigns it to the Datastore field.
+// SetDatastore gets a reference to the given NullableVirtualizationVmwareDatastoreRelationship and assigns it to the Datastore field.
 func (o *VirtualizationVmwareVirtualDisk) SetDatastore(v VirtualizationVmwareDatastoreRelationship) {
-	o.Datastore = &v
+	o.Datastore.Set(&v)
 }
 
-// GetVirtualMachine returns the VirtualMachine field value if set, zero value otherwise.
+// SetDatastoreNil sets the value for Datastore to be an explicit nil
+func (o *VirtualizationVmwareVirtualDisk) SetDatastoreNil() {
+	o.Datastore.Set(nil)
+}
+
+// UnsetDatastore ensures that no value is present for Datastore, not even an explicit nil
+func (o *VirtualizationVmwareVirtualDisk) UnsetDatastore() {
+	o.Datastore.Unset()
+}
+
+// GetVirtualMachine returns the VirtualMachine field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *VirtualizationVmwareVirtualDisk) GetVirtualMachine() VirtualizationVmwareVirtualMachineRelationship {
-	if o == nil || o.VirtualMachine == nil {
+	if o == nil || IsNil(o.VirtualMachine.Get()) {
 		var ret VirtualizationVmwareVirtualMachineRelationship
 		return ret
 	}
-	return *o.VirtualMachine
+	return *o.VirtualMachine.Get()
 }
 
 // GetVirtualMachineOk returns a tuple with the VirtualMachine field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *VirtualizationVmwareVirtualDisk) GetVirtualMachineOk() (*VirtualizationVmwareVirtualMachineRelationship, bool) {
-	if o == nil || o.VirtualMachine == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.VirtualMachine, true
+	return o.VirtualMachine.Get(), o.VirtualMachine.IsSet()
 }
 
 // HasVirtualMachine returns a boolean if a field has been set.
 func (o *VirtualizationVmwareVirtualDisk) HasVirtualMachine() bool {
-	if o != nil && o.VirtualMachine != nil {
+	if o != nil && o.VirtualMachine.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetVirtualMachine gets a reference to the given VirtualizationVmwareVirtualMachineRelationship and assigns it to the VirtualMachine field.
+// SetVirtualMachine gets a reference to the given NullableVirtualizationVmwareVirtualMachineRelationship and assigns it to the VirtualMachine field.
 func (o *VirtualizationVmwareVirtualDisk) SetVirtualMachine(v VirtualizationVmwareVirtualMachineRelationship) {
-	o.VirtualMachine = &v
+	o.VirtualMachine.Set(&v)
+}
+
+// SetVirtualMachineNil sets the value for VirtualMachine to be an explicit nil
+func (o *VirtualizationVmwareVirtualDisk) SetVirtualMachineNil() {
+	o.VirtualMachine.Set(nil)
+}
+
+// UnsetVirtualMachine ensures that no value is present for VirtualMachine, not even an explicit nil
+func (o *VirtualizationVmwareVirtualDisk) UnsetVirtualMachine() {
+	o.VirtualMachine.Unset()
 }
 
 func (o VirtualizationVmwareVirtualDisk) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o VirtualizationVmwareVirtualDisk) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedVirtualizationBaseVirtualDisk, errVirtualizationBaseVirtualDisk := json.Marshal(o.VirtualizationBaseVirtualDisk)
 	if errVirtualizationBaseVirtualDisk != nil {
-		return []byte{}, errVirtualizationBaseVirtualDisk
+		return map[string]interface{}{}, errVirtualizationBaseVirtualDisk
 	}
 	errVirtualizationBaseVirtualDisk = json.Unmarshal([]byte(serializedVirtualizationBaseVirtualDisk), &toSerialize)
 	if errVirtualizationBaseVirtualDisk != nil {
-		return []byte{}, errVirtualizationBaseVirtualDisk
+		return map[string]interface{}{}, errVirtualizationBaseVirtualDisk
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.CompatibilityMode != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.CompatibilityMode) {
 		toSerialize["CompatibilityMode"] = o.CompatibilityMode
 	}
-	if o.ControllerKey != nil {
+	if !IsNil(o.ControllerKey) {
 		toSerialize["ControllerKey"] = o.ControllerKey
 	}
-	if o.DeviceName != nil {
+	if !IsNil(o.DeviceName) {
 		toSerialize["DeviceName"] = o.DeviceName
 	}
-	if o.DiskMode != nil {
+	if !IsNil(o.DiskMode) {
 		toSerialize["DiskMode"] = o.DiskMode
 	}
-	if o.DiskType != nil {
+	if !IsNil(o.DiskType) {
 		toSerialize["DiskType"] = o.DiskType
 	}
-	if o.Key != nil {
+	if !IsNil(o.Key) {
 		toSerialize["Key"] = o.Key
 	}
-	if o.Limit != nil {
+	if !IsNil(o.Limit) {
 		toSerialize["Limit"] = o.Limit
 	}
-	if o.LunUuid != nil {
+	if !IsNil(o.LunUuid) {
 		toSerialize["LunUuid"] = o.LunUuid
 	}
-	if o.Serial != nil {
+	if !IsNil(o.Serial) {
 		toSerialize["Serial"] = o.Serial
 	}
 	if o.Shares.IsSet() {
 		toSerialize["Shares"] = o.Shares.Get()
 	}
-	if o.Sharing != nil {
+	if !IsNil(o.Sharing) {
 		toSerialize["Sharing"] = o.Sharing
 	}
-	if o.StorageAllocationType != nil {
+	if !IsNil(o.StorageAllocationType) {
 		toSerialize["StorageAllocationType"] = o.StorageAllocationType
 	}
-	if o.UnitNumber != nil {
+	if !IsNil(o.UnitNumber) {
 		toSerialize["UnitNumber"] = o.UnitNumber
 	}
-	if o.Uuid != nil {
+	if !IsNil(o.Uuid) {
 		toSerialize["Uuid"] = o.Uuid
 	}
-	if o.VdiskId != nil {
+	if !IsNil(o.VdiskId) {
 		toSerialize["VdiskId"] = o.VdiskId
 	}
-	if o.Vendor != nil {
+	if !IsNil(o.Vendor) {
 		toSerialize["Vendor"] = o.Vendor
 	}
-	if o.VirtualDiskPath != nil {
+	if !IsNil(o.VirtualDiskPath) {
 		toSerialize["VirtualDiskPath"] = o.VirtualDiskPath
 	}
-	if o.VmIdentity != nil {
+	if !IsNil(o.VmIdentity) {
 		toSerialize["VmIdentity"] = o.VmIdentity
 	}
-	if o.Datastore != nil {
-		toSerialize["Datastore"] = o.Datastore
+	if o.Datastore.IsSet() {
+		toSerialize["Datastore"] = o.Datastore.Get()
 	}
-	if o.VirtualMachine != nil {
-		toSerialize["VirtualMachine"] = o.VirtualMachine
+	if o.VirtualMachine.IsSet() {
+		toSerialize["VirtualMachine"] = o.VirtualMachine.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *VirtualizationVmwareVirtualDisk) UnmarshalJSON(bytes []byte) (err error) {
+func (o *VirtualizationVmwareVirtualDisk) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type VirtualizationVmwareVirtualDiskWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -932,14 +984,14 @@ func (o *VirtualizationVmwareVirtualDisk) UnmarshalJSON(bytes []byte) (err error
 		// Path of the virtual disk.
 		VirtualDiskPath *string `json:"VirtualDiskPath,omitempty"`
 		// Identity of the virtual machine where the virtual disk is created.
-		VmIdentity     *string                                         `json:"VmIdentity,omitempty"`
-		Datastore      *VirtualizationVmwareDatastoreRelationship      `json:"Datastore,omitempty"`
-		VirtualMachine *VirtualizationVmwareVirtualMachineRelationship `json:"VirtualMachine,omitempty"`
+		VmIdentity     *string                                                `json:"VmIdentity,omitempty"`
+		Datastore      NullableVirtualizationVmwareDatastoreRelationship      `json:"Datastore,omitempty"`
+		VirtualMachine NullableVirtualizationVmwareVirtualMachineRelationship `json:"VirtualMachine,omitempty"`
 	}
 
 	varVirtualizationVmwareVirtualDiskWithoutEmbeddedStruct := VirtualizationVmwareVirtualDiskWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varVirtualizationVmwareVirtualDiskWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varVirtualizationVmwareVirtualDiskWithoutEmbeddedStruct)
 	if err == nil {
 		varVirtualizationVmwareVirtualDisk := _VirtualizationVmwareVirtualDisk{}
 		varVirtualizationVmwareVirtualDisk.ClassId = varVirtualizationVmwareVirtualDiskWithoutEmbeddedStruct.ClassId
@@ -971,7 +1023,7 @@ func (o *VirtualizationVmwareVirtualDisk) UnmarshalJSON(bytes []byte) (err error
 
 	varVirtualizationVmwareVirtualDisk := _VirtualizationVmwareVirtualDisk{}
 
-	err = json.Unmarshal(bytes, &varVirtualizationVmwareVirtualDisk)
+	err = json.Unmarshal(data, &varVirtualizationVmwareVirtualDisk)
 	if err == nil {
 		o.VirtualizationBaseVirtualDisk = varVirtualizationVmwareVirtualDisk.VirtualizationBaseVirtualDisk
 	} else {
@@ -980,7 +1032,7 @@ func (o *VirtualizationVmwareVirtualDisk) UnmarshalJSON(bytes []byte) (err error
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "CompatibilityMode")

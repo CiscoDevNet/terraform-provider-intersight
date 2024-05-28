@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the AssetProductInformation type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &AssetProductInformation{}
 
 // AssetProductInformation Type for saving the product information.
 type AssetProductInformation struct {
@@ -114,7 +118,7 @@ func (o *AssetProductInformation) SetObjectType(v string) {
 
 // GetBillTo returns the BillTo field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *AssetProductInformation) GetBillTo() AssetAddressInformation {
-	if o == nil || o.BillTo.Get() == nil {
+	if o == nil || IsNil(o.BillTo.Get()) {
 		var ret AssetAddressInformation
 		return ret
 	}
@@ -157,7 +161,7 @@ func (o *AssetProductInformation) UnsetBillTo() {
 
 // GetDescription returns the Description field value if set, zero value otherwise.
 func (o *AssetProductInformation) GetDescription() string {
-	if o == nil || o.Description == nil {
+	if o == nil || IsNil(o.Description) {
 		var ret string
 		return ret
 	}
@@ -167,7 +171,7 @@ func (o *AssetProductInformation) GetDescription() string {
 // GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AssetProductInformation) GetDescriptionOk() (*string, bool) {
-	if o == nil || o.Description == nil {
+	if o == nil || IsNil(o.Description) {
 		return nil, false
 	}
 	return o.Description, true
@@ -175,7 +179,7 @@ func (o *AssetProductInformation) GetDescriptionOk() (*string, bool) {
 
 // HasDescription returns a boolean if a field has been set.
 func (o *AssetProductInformation) HasDescription() bool {
-	if o != nil && o.Description != nil {
+	if o != nil && !IsNil(o.Description) {
 		return true
 	}
 
@@ -189,7 +193,7 @@ func (o *AssetProductInformation) SetDescription(v string) {
 
 // GetFamily returns the Family field value if set, zero value otherwise.
 func (o *AssetProductInformation) GetFamily() string {
-	if o == nil || o.Family == nil {
+	if o == nil || IsNil(o.Family) {
 		var ret string
 		return ret
 	}
@@ -199,7 +203,7 @@ func (o *AssetProductInformation) GetFamily() string {
 // GetFamilyOk returns a tuple with the Family field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AssetProductInformation) GetFamilyOk() (*string, bool) {
-	if o == nil || o.Family == nil {
+	if o == nil || IsNil(o.Family) {
 		return nil, false
 	}
 	return o.Family, true
@@ -207,7 +211,7 @@ func (o *AssetProductInformation) GetFamilyOk() (*string, bool) {
 
 // HasFamily returns a boolean if a field has been set.
 func (o *AssetProductInformation) HasFamily() bool {
-	if o != nil && o.Family != nil {
+	if o != nil && !IsNil(o.Family) {
 		return true
 	}
 
@@ -221,7 +225,7 @@ func (o *AssetProductInformation) SetFamily(v string) {
 
 // GetGroup returns the Group field value if set, zero value otherwise.
 func (o *AssetProductInformation) GetGroup() string {
-	if o == nil || o.Group == nil {
+	if o == nil || IsNil(o.Group) {
 		var ret string
 		return ret
 	}
@@ -231,7 +235,7 @@ func (o *AssetProductInformation) GetGroup() string {
 // GetGroupOk returns a tuple with the Group field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AssetProductInformation) GetGroupOk() (*string, bool) {
-	if o == nil || o.Group == nil {
+	if o == nil || IsNil(o.Group) {
 		return nil, false
 	}
 	return o.Group, true
@@ -239,7 +243,7 @@ func (o *AssetProductInformation) GetGroupOk() (*string, bool) {
 
 // HasGroup returns a boolean if a field has been set.
 func (o *AssetProductInformation) HasGroup() bool {
-	if o != nil && o.Group != nil {
+	if o != nil && !IsNil(o.Group) {
 		return true
 	}
 
@@ -253,7 +257,7 @@ func (o *AssetProductInformation) SetGroup(v string) {
 
 // GetNumber returns the Number field value if set, zero value otherwise.
 func (o *AssetProductInformation) GetNumber() string {
-	if o == nil || o.Number == nil {
+	if o == nil || IsNil(o.Number) {
 		var ret string
 		return ret
 	}
@@ -263,7 +267,7 @@ func (o *AssetProductInformation) GetNumber() string {
 // GetNumberOk returns a tuple with the Number field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AssetProductInformation) GetNumberOk() (*string, bool) {
-	if o == nil || o.Number == nil {
+	if o == nil || IsNil(o.Number) {
 		return nil, false
 	}
 	return o.Number, true
@@ -271,7 +275,7 @@ func (o *AssetProductInformation) GetNumberOk() (*string, bool) {
 
 // HasNumber returns a boolean if a field has been set.
 func (o *AssetProductInformation) HasNumber() bool {
-	if o != nil && o.Number != nil {
+	if o != nil && !IsNil(o.Number) {
 		return true
 	}
 
@@ -285,7 +289,7 @@ func (o *AssetProductInformation) SetNumber(v string) {
 
 // GetShipTo returns the ShipTo field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *AssetProductInformation) GetShipTo() AssetAddressInformation {
-	if o == nil || o.ShipTo.Get() == nil {
+	if o == nil || IsNil(o.ShipTo.Get()) {
 		var ret AssetAddressInformation
 		return ret
 	}
@@ -328,7 +332,7 @@ func (o *AssetProductInformation) UnsetShipTo() {
 
 // GetSubType returns the SubType field value if set, zero value otherwise.
 func (o *AssetProductInformation) GetSubType() string {
-	if o == nil || o.SubType == nil {
+	if o == nil || IsNil(o.SubType) {
 		var ret string
 		return ret
 	}
@@ -338,7 +342,7 @@ func (o *AssetProductInformation) GetSubType() string {
 // GetSubTypeOk returns a tuple with the SubType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AssetProductInformation) GetSubTypeOk() (*string, bool) {
-	if o == nil || o.SubType == nil {
+	if o == nil || IsNil(o.SubType) {
 		return nil, false
 	}
 	return o.SubType, true
@@ -346,7 +350,7 @@ func (o *AssetProductInformation) GetSubTypeOk() (*string, bool) {
 
 // HasSubType returns a boolean if a field has been set.
 func (o *AssetProductInformation) HasSubType() bool {
-	if o != nil && o.SubType != nil {
+	if o != nil && !IsNil(o.SubType) {
 		return true
 	}
 
@@ -359,40 +363,44 @@ func (o *AssetProductInformation) SetSubType(v string) {
 }
 
 func (o AssetProductInformation) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o AssetProductInformation) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
 	errMoBaseComplexType = json.Unmarshal([]byte(serializedMoBaseComplexType), &toSerialize)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
 	if o.BillTo.IsSet() {
 		toSerialize["BillTo"] = o.BillTo.Get()
 	}
-	if o.Description != nil {
+	if !IsNil(o.Description) {
 		toSerialize["Description"] = o.Description
 	}
-	if o.Family != nil {
+	if !IsNil(o.Family) {
 		toSerialize["Family"] = o.Family
 	}
-	if o.Group != nil {
+	if !IsNil(o.Group) {
 		toSerialize["Group"] = o.Group
 	}
-	if o.Number != nil {
+	if !IsNil(o.Number) {
 		toSerialize["Number"] = o.Number
 	}
 	if o.ShipTo.IsSet() {
 		toSerialize["ShipTo"] = o.ShipTo.Get()
 	}
-	if o.SubType != nil {
+	if !IsNil(o.SubType) {
 		toSerialize["SubType"] = o.SubType
 	}
 
@@ -400,10 +408,32 @@ func (o AssetProductInformation) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *AssetProductInformation) UnmarshalJSON(bytes []byte) (err error) {
+func (o *AssetProductInformation) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type AssetProductInformationWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -425,7 +455,7 @@ func (o *AssetProductInformation) UnmarshalJSON(bytes []byte) (err error) {
 
 	varAssetProductInformationWithoutEmbeddedStruct := AssetProductInformationWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varAssetProductInformationWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varAssetProductInformationWithoutEmbeddedStruct)
 	if err == nil {
 		varAssetProductInformation := _AssetProductInformation{}
 		varAssetProductInformation.ClassId = varAssetProductInformationWithoutEmbeddedStruct.ClassId
@@ -444,7 +474,7 @@ func (o *AssetProductInformation) UnmarshalJSON(bytes []byte) (err error) {
 
 	varAssetProductInformation := _AssetProductInformation{}
 
-	err = json.Unmarshal(bytes, &varAssetProductInformation)
+	err = json.Unmarshal(data, &varAssetProductInformation)
 	if err == nil {
 		o.MoBaseComplexType = varAssetProductInformation.MoBaseComplexType
 	} else {
@@ -453,7 +483,7 @@ func (o *AssetProductInformation) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "BillTo")

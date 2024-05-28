@@ -10,12 +10,12 @@ Name | Type | Description | Notes
 **DcSupported** | Pointer to **bool** | IOM device connector support. | [optional] [readonly] 
 **InbandIpAddresses** | Pointer to [**[]ComputeIpAddress**](ComputeIpAddress.md) |  | [optional] 
 **Side** | Pointer to **string** | Location of IOM within a chassis. The value can be left or right. | [optional] [readonly] 
-**EquipmentChassis** | Pointer to [**EquipmentChassisRelationship**](EquipmentChassisRelationship.md) |  | [optional] 
-**EquipmentFex** | Pointer to [**EquipmentFexRelationship**](EquipmentFexRelationship.md) |  | [optional] 
+**EquipmentChassis** | Pointer to [**NullableEquipmentChassisRelationship**](EquipmentChassisRelationship.md) |  | [optional] 
+**EquipmentFex** | Pointer to [**NullableEquipmentFexRelationship**](EquipmentFexRelationship.md) |  | [optional] 
 **FanModules** | Pointer to [**[]EquipmentFanModuleRelationship**](EquipmentFanModuleRelationship.md) | An array of relationships to equipmentFanModule resources. | [optional] 
-**InventoryDeviceInfo** | Pointer to [**InventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
-**PhysicalDeviceRegistration** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
+**InventoryDeviceInfo** | Pointer to [**NullableInventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
+**PhysicalDeviceRegistration** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -211,6 +211,16 @@ SetEquipmentChassis sets EquipmentChassis field to given value.
 
 HasEquipmentChassis returns a boolean if a field has been set.
 
+### SetEquipmentChassisNil
+
+`func (o *EquipmentIoCard) SetEquipmentChassisNil(b bool)`
+
+ SetEquipmentChassisNil sets the value for EquipmentChassis to be an explicit nil
+
+### UnsetEquipmentChassis
+`func (o *EquipmentIoCard) UnsetEquipmentChassis()`
+
+UnsetEquipmentChassis ensures that no value is present for EquipmentChassis, not even an explicit nil
 ### GetEquipmentFex
 
 `func (o *EquipmentIoCard) GetEquipmentFex() EquipmentFexRelationship`
@@ -236,6 +246,16 @@ SetEquipmentFex sets EquipmentFex field to given value.
 
 HasEquipmentFex returns a boolean if a field has been set.
 
+### SetEquipmentFexNil
+
+`func (o *EquipmentIoCard) SetEquipmentFexNil(b bool)`
+
+ SetEquipmentFexNil sets the value for EquipmentFex to be an explicit nil
+
+### UnsetEquipmentFex
+`func (o *EquipmentIoCard) UnsetEquipmentFex()`
+
+UnsetEquipmentFex ensures that no value is present for EquipmentFex, not even an explicit nil
 ### GetFanModules
 
 `func (o *EquipmentIoCard) GetFanModules() []EquipmentFanModuleRelationship`
@@ -296,6 +316,16 @@ SetInventoryDeviceInfo sets InventoryDeviceInfo field to given value.
 
 HasInventoryDeviceInfo returns a boolean if a field has been set.
 
+### SetInventoryDeviceInfoNil
+
+`func (o *EquipmentIoCard) SetInventoryDeviceInfoNil(b bool)`
+
+ SetInventoryDeviceInfoNil sets the value for InventoryDeviceInfo to be an explicit nil
+
+### UnsetInventoryDeviceInfo
+`func (o *EquipmentIoCard) UnsetInventoryDeviceInfo()`
+
+UnsetInventoryDeviceInfo ensures that no value is present for InventoryDeviceInfo, not even an explicit nil
 ### GetPhysicalDeviceRegistration
 
 `func (o *EquipmentIoCard) GetPhysicalDeviceRegistration() AssetDeviceRegistrationRelationship`
@@ -321,6 +351,16 @@ SetPhysicalDeviceRegistration sets PhysicalDeviceRegistration field to given val
 
 HasPhysicalDeviceRegistration returns a boolean if a field has been set.
 
+### SetPhysicalDeviceRegistrationNil
+
+`func (o *EquipmentIoCard) SetPhysicalDeviceRegistrationNil(b bool)`
+
+ SetPhysicalDeviceRegistrationNil sets the value for PhysicalDeviceRegistration to be an explicit nil
+
+### UnsetPhysicalDeviceRegistration
+`func (o *EquipmentIoCard) UnsetPhysicalDeviceRegistration()`
+
+UnsetPhysicalDeviceRegistration ensures that no value is present for PhysicalDeviceRegistration, not even an explicit nil
 ### GetRegisteredDevice
 
 `func (o *EquipmentIoCard) GetRegisteredDevice() AssetDeviceRegistrationRelationship`
@@ -346,6 +386,16 @@ SetRegisteredDevice sets RegisteredDevice field to given value.
 
 HasRegisteredDevice returns a boolean if a field has been set.
 
+### SetRegisteredDeviceNil
+
+`func (o *EquipmentIoCard) SetRegisteredDeviceNil(b bool)`
+
+ SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+
+### UnsetRegisteredDevice
+`func (o *EquipmentIoCard) UnsetRegisteredDevice()`
+
+UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

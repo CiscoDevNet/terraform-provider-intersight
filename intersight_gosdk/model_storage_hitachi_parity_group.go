@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the StorageHitachiParityGroup type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &StorageHitachiParityGroup{}
 
 // StorageHitachiParityGroup A parity group in Hitachi storage array.
 type StorageHitachiParityGroup struct {
@@ -33,9 +37,9 @@ type StorageHitachiParityGroup struct {
 	// Value of the copy back mode setting of the parity group. true, Copy back mode is enabled. false, Copy back mode is disabled.
 	IsCopyBackModeEnabled *bool `json:"IsCopyBackModeEnabled,omitempty"`
 	// Value of the encryption setting of the parity group. true, Encryption is enabled. false, Encryption is disabled.
-	IsEncryptionEnabled  *bool                                `json:"IsEncryptionEnabled,omitempty"`
-	Array                *StorageHitachiArrayRelationship     `json:"Array,omitempty"`
-	RegisteredDevice     *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+	IsEncryptionEnabled  *bool                                       `json:"IsEncryptionEnabled,omitempty"`
+	Array                NullableStorageHitachiArrayRelationship     `json:"Array,omitempty"`
+	RegisteredDevice     NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -114,7 +118,7 @@ func (o *StorageHitachiParityGroup) SetObjectType(v string) {
 
 // GetDiskSpeed returns the DiskSpeed field value if set, zero value otherwise.
 func (o *StorageHitachiParityGroup) GetDiskSpeed() string {
-	if o == nil || o.DiskSpeed == nil {
+	if o == nil || IsNil(o.DiskSpeed) {
 		var ret string
 		return ret
 	}
@@ -124,7 +128,7 @@ func (o *StorageHitachiParityGroup) GetDiskSpeed() string {
 // GetDiskSpeedOk returns a tuple with the DiskSpeed field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageHitachiParityGroup) GetDiskSpeedOk() (*string, bool) {
-	if o == nil || o.DiskSpeed == nil {
+	if o == nil || IsNil(o.DiskSpeed) {
 		return nil, false
 	}
 	return o.DiskSpeed, true
@@ -132,7 +136,7 @@ func (o *StorageHitachiParityGroup) GetDiskSpeedOk() (*string, bool) {
 
 // HasDiskSpeed returns a boolean if a field has been set.
 func (o *StorageHitachiParityGroup) HasDiskSpeed() bool {
-	if o != nil && o.DiskSpeed != nil {
+	if o != nil && !IsNil(o.DiskSpeed) {
 		return true
 	}
 
@@ -146,7 +150,7 @@ func (o *StorageHitachiParityGroup) SetDiskSpeed(v string) {
 
 // GetDiskType returns the DiskType field value if set, zero value otherwise.
 func (o *StorageHitachiParityGroup) GetDiskType() string {
-	if o == nil || o.DiskType == nil {
+	if o == nil || IsNil(o.DiskType) {
 		var ret string
 		return ret
 	}
@@ -156,7 +160,7 @@ func (o *StorageHitachiParityGroup) GetDiskType() string {
 // GetDiskTypeOk returns a tuple with the DiskType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageHitachiParityGroup) GetDiskTypeOk() (*string, bool) {
-	if o == nil || o.DiskType == nil {
+	if o == nil || IsNil(o.DiskType) {
 		return nil, false
 	}
 	return o.DiskType, true
@@ -164,7 +168,7 @@ func (o *StorageHitachiParityGroup) GetDiskTypeOk() (*string, bool) {
 
 // HasDiskType returns a boolean if a field has been set.
 func (o *StorageHitachiParityGroup) HasDiskType() bool {
-	if o != nil && o.DiskType != nil {
+	if o != nil && !IsNil(o.DiskType) {
 		return true
 	}
 
@@ -178,7 +182,7 @@ func (o *StorageHitachiParityGroup) SetDiskType(v string) {
 
 // GetIsAcceleratedCompressionEnabled returns the IsAcceleratedCompressionEnabled field value if set, zero value otherwise.
 func (o *StorageHitachiParityGroup) GetIsAcceleratedCompressionEnabled() bool {
-	if o == nil || o.IsAcceleratedCompressionEnabled == nil {
+	if o == nil || IsNil(o.IsAcceleratedCompressionEnabled) {
 		var ret bool
 		return ret
 	}
@@ -188,7 +192,7 @@ func (o *StorageHitachiParityGroup) GetIsAcceleratedCompressionEnabled() bool {
 // GetIsAcceleratedCompressionEnabledOk returns a tuple with the IsAcceleratedCompressionEnabled field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageHitachiParityGroup) GetIsAcceleratedCompressionEnabledOk() (*bool, bool) {
-	if o == nil || o.IsAcceleratedCompressionEnabled == nil {
+	if o == nil || IsNil(o.IsAcceleratedCompressionEnabled) {
 		return nil, false
 	}
 	return o.IsAcceleratedCompressionEnabled, true
@@ -196,7 +200,7 @@ func (o *StorageHitachiParityGroup) GetIsAcceleratedCompressionEnabledOk() (*boo
 
 // HasIsAcceleratedCompressionEnabled returns a boolean if a field has been set.
 func (o *StorageHitachiParityGroup) HasIsAcceleratedCompressionEnabled() bool {
-	if o != nil && o.IsAcceleratedCompressionEnabled != nil {
+	if o != nil && !IsNil(o.IsAcceleratedCompressionEnabled) {
 		return true
 	}
 
@@ -210,7 +214,7 @@ func (o *StorageHitachiParityGroup) SetIsAcceleratedCompressionEnabled(v bool) {
 
 // GetIsCopyBackModeEnabled returns the IsCopyBackModeEnabled field value if set, zero value otherwise.
 func (o *StorageHitachiParityGroup) GetIsCopyBackModeEnabled() bool {
-	if o == nil || o.IsCopyBackModeEnabled == nil {
+	if o == nil || IsNil(o.IsCopyBackModeEnabled) {
 		var ret bool
 		return ret
 	}
@@ -220,7 +224,7 @@ func (o *StorageHitachiParityGroup) GetIsCopyBackModeEnabled() bool {
 // GetIsCopyBackModeEnabledOk returns a tuple with the IsCopyBackModeEnabled field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageHitachiParityGroup) GetIsCopyBackModeEnabledOk() (*bool, bool) {
-	if o == nil || o.IsCopyBackModeEnabled == nil {
+	if o == nil || IsNil(o.IsCopyBackModeEnabled) {
 		return nil, false
 	}
 	return o.IsCopyBackModeEnabled, true
@@ -228,7 +232,7 @@ func (o *StorageHitachiParityGroup) GetIsCopyBackModeEnabledOk() (*bool, bool) {
 
 // HasIsCopyBackModeEnabled returns a boolean if a field has been set.
 func (o *StorageHitachiParityGroup) HasIsCopyBackModeEnabled() bool {
-	if o != nil && o.IsCopyBackModeEnabled != nil {
+	if o != nil && !IsNil(o.IsCopyBackModeEnabled) {
 		return true
 	}
 
@@ -242,7 +246,7 @@ func (o *StorageHitachiParityGroup) SetIsCopyBackModeEnabled(v bool) {
 
 // GetIsEncryptionEnabled returns the IsEncryptionEnabled field value if set, zero value otherwise.
 func (o *StorageHitachiParityGroup) GetIsEncryptionEnabled() bool {
-	if o == nil || o.IsEncryptionEnabled == nil {
+	if o == nil || IsNil(o.IsEncryptionEnabled) {
 		var ret bool
 		return ret
 	}
@@ -252,7 +256,7 @@ func (o *StorageHitachiParityGroup) GetIsEncryptionEnabled() bool {
 // GetIsEncryptionEnabledOk returns a tuple with the IsEncryptionEnabled field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageHitachiParityGroup) GetIsEncryptionEnabledOk() (*bool, bool) {
-	if o == nil || o.IsEncryptionEnabled == nil {
+	if o == nil || IsNil(o.IsEncryptionEnabled) {
 		return nil, false
 	}
 	return o.IsEncryptionEnabled, true
@@ -260,7 +264,7 @@ func (o *StorageHitachiParityGroup) GetIsEncryptionEnabledOk() (*bool, bool) {
 
 // HasIsEncryptionEnabled returns a boolean if a field has been set.
 func (o *StorageHitachiParityGroup) HasIsEncryptionEnabled() bool {
-	if o != nil && o.IsEncryptionEnabled != nil {
+	if o != nil && !IsNil(o.IsEncryptionEnabled) {
 		return true
 	}
 
@@ -272,116 +276,164 @@ func (o *StorageHitachiParityGroup) SetIsEncryptionEnabled(v bool) {
 	o.IsEncryptionEnabled = &v
 }
 
-// GetArray returns the Array field value if set, zero value otherwise.
+// GetArray returns the Array field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *StorageHitachiParityGroup) GetArray() StorageHitachiArrayRelationship {
-	if o == nil || o.Array == nil {
+	if o == nil || IsNil(o.Array.Get()) {
 		var ret StorageHitachiArrayRelationship
 		return ret
 	}
-	return *o.Array
+	return *o.Array.Get()
 }
 
 // GetArrayOk returns a tuple with the Array field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StorageHitachiParityGroup) GetArrayOk() (*StorageHitachiArrayRelationship, bool) {
-	if o == nil || o.Array == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Array, true
+	return o.Array.Get(), o.Array.IsSet()
 }
 
 // HasArray returns a boolean if a field has been set.
 func (o *StorageHitachiParityGroup) HasArray() bool {
-	if o != nil && o.Array != nil {
+	if o != nil && o.Array.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetArray gets a reference to the given StorageHitachiArrayRelationship and assigns it to the Array field.
+// SetArray gets a reference to the given NullableStorageHitachiArrayRelationship and assigns it to the Array field.
 func (o *StorageHitachiParityGroup) SetArray(v StorageHitachiArrayRelationship) {
-	o.Array = &v
+	o.Array.Set(&v)
 }
 
-// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise.
+// SetArrayNil sets the value for Array to be an explicit nil
+func (o *StorageHitachiParityGroup) SetArrayNil() {
+	o.Array.Set(nil)
+}
+
+// UnsetArray ensures that no value is present for Array, not even an explicit nil
+func (o *StorageHitachiParityGroup) UnsetArray() {
+	o.Array.Unset()
+}
+
+// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *StorageHitachiParityGroup) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil || IsNil(o.RegisteredDevice.Get()) {
 		var ret AssetDeviceRegistrationRelationship
 		return ret
 	}
-	return *o.RegisteredDevice
+	return *o.RegisteredDevice.Get()
 }
 
 // GetRegisteredDeviceOk returns a tuple with the RegisteredDevice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StorageHitachiParityGroup) GetRegisteredDeviceOk() (*AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.RegisteredDevice, true
+	return o.RegisteredDevice.Get(), o.RegisteredDevice.IsSet()
 }
 
 // HasRegisteredDevice returns a boolean if a field has been set.
 func (o *StorageHitachiParityGroup) HasRegisteredDevice() bool {
-	if o != nil && o.RegisteredDevice != nil {
+	if o != nil && o.RegisteredDevice.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRegisteredDevice gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
+// SetRegisteredDevice gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
 func (o *StorageHitachiParityGroup) SetRegisteredDevice(v AssetDeviceRegistrationRelationship) {
-	o.RegisteredDevice = &v
+	o.RegisteredDevice.Set(&v)
+}
+
+// SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+func (o *StorageHitachiParityGroup) SetRegisteredDeviceNil() {
+	o.RegisteredDevice.Set(nil)
+}
+
+// UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
+func (o *StorageHitachiParityGroup) UnsetRegisteredDevice() {
+	o.RegisteredDevice.Unset()
 }
 
 func (o StorageHitachiParityGroup) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o StorageHitachiParityGroup) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedStorageBaseRaidGroup, errStorageBaseRaidGroup := json.Marshal(o.StorageBaseRaidGroup)
 	if errStorageBaseRaidGroup != nil {
-		return []byte{}, errStorageBaseRaidGroup
+		return map[string]interface{}{}, errStorageBaseRaidGroup
 	}
 	errStorageBaseRaidGroup = json.Unmarshal([]byte(serializedStorageBaseRaidGroup), &toSerialize)
 	if errStorageBaseRaidGroup != nil {
-		return []byte{}, errStorageBaseRaidGroup
+		return map[string]interface{}{}, errStorageBaseRaidGroup
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.DiskSpeed != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.DiskSpeed) {
 		toSerialize["DiskSpeed"] = o.DiskSpeed
 	}
-	if o.DiskType != nil {
+	if !IsNil(o.DiskType) {
 		toSerialize["DiskType"] = o.DiskType
 	}
-	if o.IsAcceleratedCompressionEnabled != nil {
+	if !IsNil(o.IsAcceleratedCompressionEnabled) {
 		toSerialize["IsAcceleratedCompressionEnabled"] = o.IsAcceleratedCompressionEnabled
 	}
-	if o.IsCopyBackModeEnabled != nil {
+	if !IsNil(o.IsCopyBackModeEnabled) {
 		toSerialize["IsCopyBackModeEnabled"] = o.IsCopyBackModeEnabled
 	}
-	if o.IsEncryptionEnabled != nil {
+	if !IsNil(o.IsEncryptionEnabled) {
 		toSerialize["IsEncryptionEnabled"] = o.IsEncryptionEnabled
 	}
-	if o.Array != nil {
-		toSerialize["Array"] = o.Array
+	if o.Array.IsSet() {
+		toSerialize["Array"] = o.Array.Get()
 	}
-	if o.RegisteredDevice != nil {
-		toSerialize["RegisteredDevice"] = o.RegisteredDevice
+	if o.RegisteredDevice.IsSet() {
+		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *StorageHitachiParityGroup) UnmarshalJSON(bytes []byte) (err error) {
+func (o *StorageHitachiParityGroup) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type StorageHitachiParityGroupWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -396,14 +448,14 @@ func (o *StorageHitachiParityGroup) UnmarshalJSON(bytes []byte) (err error) {
 		// Value of the copy back mode setting of the parity group. true, Copy back mode is enabled. false, Copy back mode is disabled.
 		IsCopyBackModeEnabled *bool `json:"IsCopyBackModeEnabled,omitempty"`
 		// Value of the encryption setting of the parity group. true, Encryption is enabled. false, Encryption is disabled.
-		IsEncryptionEnabled *bool                                `json:"IsEncryptionEnabled,omitempty"`
-		Array               *StorageHitachiArrayRelationship     `json:"Array,omitempty"`
-		RegisteredDevice    *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+		IsEncryptionEnabled *bool                                       `json:"IsEncryptionEnabled,omitempty"`
+		Array               NullableStorageHitachiArrayRelationship     `json:"Array,omitempty"`
+		RegisteredDevice    NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	}
 
 	varStorageHitachiParityGroupWithoutEmbeddedStruct := StorageHitachiParityGroupWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varStorageHitachiParityGroupWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varStorageHitachiParityGroupWithoutEmbeddedStruct)
 	if err == nil {
 		varStorageHitachiParityGroup := _StorageHitachiParityGroup{}
 		varStorageHitachiParityGroup.ClassId = varStorageHitachiParityGroupWithoutEmbeddedStruct.ClassId
@@ -422,7 +474,7 @@ func (o *StorageHitachiParityGroup) UnmarshalJSON(bytes []byte) (err error) {
 
 	varStorageHitachiParityGroup := _StorageHitachiParityGroup{}
 
-	err = json.Unmarshal(bytes, &varStorageHitachiParityGroup)
+	err = json.Unmarshal(data, &varStorageHitachiParityGroup)
 	if err == nil {
 		o.StorageBaseRaidGroup = varStorageHitachiParityGroup.StorageBaseRaidGroup
 	} else {
@@ -431,7 +483,7 @@ func (o *StorageHitachiParityGroup) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "DiskSpeed")

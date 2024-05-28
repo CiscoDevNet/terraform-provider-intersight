@@ -11,9 +11,9 @@ Name | Type | Description | Notes
 **Name** | Pointer to **string** | The name of the OS distribution such as ESXi, CentOS. | [optional] 
 **ScuSupported** | Pointer to **bool** | An internal property that is used to denote if the OS Distribution is supported by the Server Configuration Utility. | [optional] [readonly] 
 **SupportedEditions** | Pointer to **[]string** |  | [optional] 
-**Catalog** | Pointer to [**OsCatalogRelationship**](OsCatalogRelationship.md) |  | [optional] 
-**Vendor** | Pointer to [**HclOperatingSystemVendorRelationship**](HclOperatingSystemVendorRelationship.md) |  | [optional] 
-**Version** | Pointer to [**HclOperatingSystemRelationship**](HclOperatingSystemRelationship.md) |  | [optional] 
+**Catalog** | Pointer to [**NullableOsCatalogRelationship**](OsCatalogRelationship.md) |  | [optional] 
+**Vendor** | Pointer to [**NullableHclOperatingSystemVendorRelationship**](HclOperatingSystemVendorRelationship.md) |  | [optional] 
+**Version** | Pointer to [**NullableHclOperatingSystemRelationship**](HclOperatingSystemRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -234,6 +234,16 @@ SetCatalog sets Catalog field to given value.
 
 HasCatalog returns a boolean if a field has been set.
 
+### SetCatalogNil
+
+`func (o *OsDistribution) SetCatalogNil(b bool)`
+
+ SetCatalogNil sets the value for Catalog to be an explicit nil
+
+### UnsetCatalog
+`func (o *OsDistribution) UnsetCatalog()`
+
+UnsetCatalog ensures that no value is present for Catalog, not even an explicit nil
 ### GetVendor
 
 `func (o *OsDistribution) GetVendor() HclOperatingSystemVendorRelationship`
@@ -259,6 +269,16 @@ SetVendor sets Vendor field to given value.
 
 HasVendor returns a boolean if a field has been set.
 
+### SetVendorNil
+
+`func (o *OsDistribution) SetVendorNil(b bool)`
+
+ SetVendorNil sets the value for Vendor to be an explicit nil
+
+### UnsetVendor
+`func (o *OsDistribution) UnsetVendor()`
+
+UnsetVendor ensures that no value is present for Vendor, not even an explicit nil
 ### GetVersion
 
 `func (o *OsDistribution) GetVersion() HclOperatingSystemRelationship`
@@ -284,6 +304,16 @@ SetVersion sets Version field to given value.
 
 HasVersion returns a boolean if a field has been set.
 
+### SetVersionNil
+
+`func (o *OsDistribution) SetVersionNil(b bool)`
+
+ SetVersionNil sets the value for Version to be an explicit nil
+
+### UnsetVersion
+`func (o *OsDistribution) UnsetVersion()`
+
+UnsetVersion ensures that no value is present for Version, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

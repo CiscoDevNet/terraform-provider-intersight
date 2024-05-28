@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the EquipmentFexIdentity type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &EquipmentFexIdentity{}
 
 // EquipmentFexIdentity FexIdentity Object conatains basic information of fabric extender. moduleId is uniquely allocated for the combination of vendor, model and serial number of the chassis.
 type EquipmentFexIdentity struct {
@@ -25,9 +29,9 @@ type EquipmentFexIdentity struct {
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
 	// Switch ID to which Fabric Extender is connected, ID can be either 1 or 2, equalent to A or B.
-	SwitchId             *int64                      `json:"SwitchId,omitempty"`
-	Fex                  *EquipmentFexRelationship   `json:"Fex,omitempty"`
-	NetworkElement       *NetworkElementRelationship `json:"NetworkElement,omitempty"`
+	SwitchId             *int64                             `json:"SwitchId,omitempty"`
+	Fex                  NullableEquipmentFexRelationship   `json:"Fex,omitempty"`
+	NetworkElement       NullableNetworkElementRelationship `json:"NetworkElement,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -108,7 +112,7 @@ func (o *EquipmentFexIdentity) SetObjectType(v string) {
 
 // GetSwitchId returns the SwitchId field value if set, zero value otherwise.
 func (o *EquipmentFexIdentity) GetSwitchId() int64 {
-	if o == nil || o.SwitchId == nil {
+	if o == nil || IsNil(o.SwitchId) {
 		var ret int64
 		return ret
 	}
@@ -118,7 +122,7 @@ func (o *EquipmentFexIdentity) GetSwitchId() int64 {
 // GetSwitchIdOk returns a tuple with the SwitchId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EquipmentFexIdentity) GetSwitchIdOk() (*int64, bool) {
-	if o == nil || o.SwitchId == nil {
+	if o == nil || IsNil(o.SwitchId) {
 		return nil, false
 	}
 	return o.SwitchId, true
@@ -126,7 +130,7 @@ func (o *EquipmentFexIdentity) GetSwitchIdOk() (*int64, bool) {
 
 // HasSwitchId returns a boolean if a field has been set.
 func (o *EquipmentFexIdentity) HasSwitchId() bool {
-	if o != nil && o.SwitchId != nil {
+	if o != nil && !IsNil(o.SwitchId) {
 		return true
 	}
 
@@ -138,118 +142,166 @@ func (o *EquipmentFexIdentity) SetSwitchId(v int64) {
 	o.SwitchId = &v
 }
 
-// GetFex returns the Fex field value if set, zero value otherwise.
+// GetFex returns the Fex field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *EquipmentFexIdentity) GetFex() EquipmentFexRelationship {
-	if o == nil || o.Fex == nil {
+	if o == nil || IsNil(o.Fex.Get()) {
 		var ret EquipmentFexRelationship
 		return ret
 	}
-	return *o.Fex
+	return *o.Fex.Get()
 }
 
 // GetFexOk returns a tuple with the Fex field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *EquipmentFexIdentity) GetFexOk() (*EquipmentFexRelationship, bool) {
-	if o == nil || o.Fex == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Fex, true
+	return o.Fex.Get(), o.Fex.IsSet()
 }
 
 // HasFex returns a boolean if a field has been set.
 func (o *EquipmentFexIdentity) HasFex() bool {
-	if o != nil && o.Fex != nil {
+	if o != nil && o.Fex.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetFex gets a reference to the given EquipmentFexRelationship and assigns it to the Fex field.
+// SetFex gets a reference to the given NullableEquipmentFexRelationship and assigns it to the Fex field.
 func (o *EquipmentFexIdentity) SetFex(v EquipmentFexRelationship) {
-	o.Fex = &v
+	o.Fex.Set(&v)
 }
 
-// GetNetworkElement returns the NetworkElement field value if set, zero value otherwise.
+// SetFexNil sets the value for Fex to be an explicit nil
+func (o *EquipmentFexIdentity) SetFexNil() {
+	o.Fex.Set(nil)
+}
+
+// UnsetFex ensures that no value is present for Fex, not even an explicit nil
+func (o *EquipmentFexIdentity) UnsetFex() {
+	o.Fex.Unset()
+}
+
+// GetNetworkElement returns the NetworkElement field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *EquipmentFexIdentity) GetNetworkElement() NetworkElementRelationship {
-	if o == nil || o.NetworkElement == nil {
+	if o == nil || IsNil(o.NetworkElement.Get()) {
 		var ret NetworkElementRelationship
 		return ret
 	}
-	return *o.NetworkElement
+	return *o.NetworkElement.Get()
 }
 
 // GetNetworkElementOk returns a tuple with the NetworkElement field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *EquipmentFexIdentity) GetNetworkElementOk() (*NetworkElementRelationship, bool) {
-	if o == nil || o.NetworkElement == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.NetworkElement, true
+	return o.NetworkElement.Get(), o.NetworkElement.IsSet()
 }
 
 // HasNetworkElement returns a boolean if a field has been set.
 func (o *EquipmentFexIdentity) HasNetworkElement() bool {
-	if o != nil && o.NetworkElement != nil {
+	if o != nil && o.NetworkElement.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetNetworkElement gets a reference to the given NetworkElementRelationship and assigns it to the NetworkElement field.
+// SetNetworkElement gets a reference to the given NullableNetworkElementRelationship and assigns it to the NetworkElement field.
 func (o *EquipmentFexIdentity) SetNetworkElement(v NetworkElementRelationship) {
-	o.NetworkElement = &v
+	o.NetworkElement.Set(&v)
+}
+
+// SetNetworkElementNil sets the value for NetworkElement to be an explicit nil
+func (o *EquipmentFexIdentity) SetNetworkElementNil() {
+	o.NetworkElement.Set(nil)
+}
+
+// UnsetNetworkElement ensures that no value is present for NetworkElement, not even an explicit nil
+func (o *EquipmentFexIdentity) UnsetNetworkElement() {
+	o.NetworkElement.Unset()
 }
 
 func (o EquipmentFexIdentity) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o EquipmentFexIdentity) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedEquipmentPhysicalIdentity, errEquipmentPhysicalIdentity := json.Marshal(o.EquipmentPhysicalIdentity)
 	if errEquipmentPhysicalIdentity != nil {
-		return []byte{}, errEquipmentPhysicalIdentity
+		return map[string]interface{}{}, errEquipmentPhysicalIdentity
 	}
 	errEquipmentPhysicalIdentity = json.Unmarshal([]byte(serializedEquipmentPhysicalIdentity), &toSerialize)
 	if errEquipmentPhysicalIdentity != nil {
-		return []byte{}, errEquipmentPhysicalIdentity
+		return map[string]interface{}{}, errEquipmentPhysicalIdentity
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.SwitchId != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.SwitchId) {
 		toSerialize["SwitchId"] = o.SwitchId
 	}
-	if o.Fex != nil {
-		toSerialize["Fex"] = o.Fex
+	if o.Fex.IsSet() {
+		toSerialize["Fex"] = o.Fex.Get()
 	}
-	if o.NetworkElement != nil {
-		toSerialize["NetworkElement"] = o.NetworkElement
+	if o.NetworkElement.IsSet() {
+		toSerialize["NetworkElement"] = o.NetworkElement.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *EquipmentFexIdentity) UnmarshalJSON(bytes []byte) (err error) {
+func (o *EquipmentFexIdentity) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type EquipmentFexIdentityWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 		ObjectType string `json:"ObjectType"`
 		// Switch ID to which Fabric Extender is connected, ID can be either 1 or 2, equalent to A or B.
-		SwitchId       *int64                      `json:"SwitchId,omitempty"`
-		Fex            *EquipmentFexRelationship   `json:"Fex,omitempty"`
-		NetworkElement *NetworkElementRelationship `json:"NetworkElement,omitempty"`
+		SwitchId       *int64                             `json:"SwitchId,omitempty"`
+		Fex            NullableEquipmentFexRelationship   `json:"Fex,omitempty"`
+		NetworkElement NullableNetworkElementRelationship `json:"NetworkElement,omitempty"`
 	}
 
 	varEquipmentFexIdentityWithoutEmbeddedStruct := EquipmentFexIdentityWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varEquipmentFexIdentityWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varEquipmentFexIdentityWithoutEmbeddedStruct)
 	if err == nil {
 		varEquipmentFexIdentity := _EquipmentFexIdentity{}
 		varEquipmentFexIdentity.ClassId = varEquipmentFexIdentityWithoutEmbeddedStruct.ClassId
@@ -264,7 +316,7 @@ func (o *EquipmentFexIdentity) UnmarshalJSON(bytes []byte) (err error) {
 
 	varEquipmentFexIdentity := _EquipmentFexIdentity{}
 
-	err = json.Unmarshal(bytes, &varEquipmentFexIdentity)
+	err = json.Unmarshal(data, &varEquipmentFexIdentity)
 	if err == nil {
 		o.EquipmentPhysicalIdentity = varEquipmentFexIdentity.EquipmentPhysicalIdentity
 	} else {
@@ -273,7 +325,7 @@ func (o *EquipmentFexIdentity) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "SwitchId")

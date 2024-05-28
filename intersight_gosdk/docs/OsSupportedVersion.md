@@ -7,8 +7,8 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "os.SupportedVersion"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "os.SupportedVersion"]
 **VersionName** | Pointer to **string** | The OsInstall Supported Operating System Version Name. | [optional] [readonly] 
-**Vendor** | Pointer to [**HclOperatingSystemVendorRelationship**](HclOperatingSystemVendorRelationship.md) |  | [optional] 
-**Version** | Pointer to [**HclOperatingSystemRelationship**](HclOperatingSystemRelationship.md) |  | [optional] 
+**Vendor** | Pointer to [**NullableHclOperatingSystemVendorRelationship**](HclOperatingSystemVendorRelationship.md) |  | [optional] 
+**Version** | Pointer to [**NullableHclOperatingSystemRelationship**](HclOperatingSystemRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -119,6 +119,16 @@ SetVendor sets Vendor field to given value.
 
 HasVendor returns a boolean if a field has been set.
 
+### SetVendorNil
+
+`func (o *OsSupportedVersion) SetVendorNil(b bool)`
+
+ SetVendorNil sets the value for Vendor to be an explicit nil
+
+### UnsetVendor
+`func (o *OsSupportedVersion) UnsetVendor()`
+
+UnsetVendor ensures that no value is present for Vendor, not even an explicit nil
 ### GetVersion
 
 `func (o *OsSupportedVersion) GetVersion() HclOperatingSystemRelationship`
@@ -144,6 +154,16 @@ SetVersion sets Version field to given value.
 
 HasVersion returns a boolean if a field has been set.
 
+### SetVersionNil
+
+`func (o *OsSupportedVersion) SetVersionNil(b bool)`
+
+ SetVersionNil sets the value for Version to be an explicit nil
+
+### UnsetVersion
+`func (o *OsSupportedVersion) UnsetVersion()`
+
+UnsetVersion ensures that no value is present for Version, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

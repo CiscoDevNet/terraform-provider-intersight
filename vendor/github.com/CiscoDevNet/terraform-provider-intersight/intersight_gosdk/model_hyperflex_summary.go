@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the HyperflexSummary type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &HyperflexSummary{}
 
 // HyperflexSummary The storage summary of the HyperFlex cluster.
 type HyperflexSummary struct {
@@ -142,7 +146,7 @@ func (o *HyperflexSummary) SetObjectType(v string) {
 
 // GetActiveNodes returns the ActiveNodes field value if set, zero value otherwise.
 func (o *HyperflexSummary) GetActiveNodes() string {
-	if o == nil || o.ActiveNodes == nil {
+	if o == nil || IsNil(o.ActiveNodes) {
 		var ret string
 		return ret
 	}
@@ -152,7 +156,7 @@ func (o *HyperflexSummary) GetActiveNodes() string {
 // GetActiveNodesOk returns a tuple with the ActiveNodes field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexSummary) GetActiveNodesOk() (*string, bool) {
-	if o == nil || o.ActiveNodes == nil {
+	if o == nil || IsNil(o.ActiveNodes) {
 		return nil, false
 	}
 	return o.ActiveNodes, true
@@ -160,7 +164,7 @@ func (o *HyperflexSummary) GetActiveNodesOk() (*string, bool) {
 
 // HasActiveNodes returns a boolean if a field has been set.
 func (o *HyperflexSummary) HasActiveNodes() bool {
-	if o != nil && o.ActiveNodes != nil {
+	if o != nil && !IsNil(o.ActiveNodes) {
 		return true
 	}
 
@@ -174,7 +178,7 @@ func (o *HyperflexSummary) SetActiveNodes(v string) {
 
 // GetAddress returns the Address field value if set, zero value otherwise.
 func (o *HyperflexSummary) GetAddress() string {
-	if o == nil || o.Address == nil {
+	if o == nil || IsNil(o.Address) {
 		var ret string
 		return ret
 	}
@@ -184,7 +188,7 @@ func (o *HyperflexSummary) GetAddress() string {
 // GetAddressOk returns a tuple with the Address field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexSummary) GetAddressOk() (*string, bool) {
-	if o == nil || o.Address == nil {
+	if o == nil || IsNil(o.Address) {
 		return nil, false
 	}
 	return o.Address, true
@@ -192,7 +196,7 @@ func (o *HyperflexSummary) GetAddressOk() (*string, bool) {
 
 // HasAddress returns a boolean if a field has been set.
 func (o *HyperflexSummary) HasAddress() bool {
-	if o != nil && o.Address != nil {
+	if o != nil && !IsNil(o.Address) {
 		return true
 	}
 
@@ -206,7 +210,7 @@ func (o *HyperflexSummary) SetAddress(v string) {
 
 // GetBoottime returns the Boottime field value if set, zero value otherwise.
 func (o *HyperflexSummary) GetBoottime() int64 {
-	if o == nil || o.Boottime == nil {
+	if o == nil || IsNil(o.Boottime) {
 		var ret int64
 		return ret
 	}
@@ -216,7 +220,7 @@ func (o *HyperflexSummary) GetBoottime() int64 {
 // GetBoottimeOk returns a tuple with the Boottime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexSummary) GetBoottimeOk() (*int64, bool) {
-	if o == nil || o.Boottime == nil {
+	if o == nil || IsNil(o.Boottime) {
 		return nil, false
 	}
 	return o.Boottime, true
@@ -224,7 +228,7 @@ func (o *HyperflexSummary) GetBoottimeOk() (*int64, bool) {
 
 // HasBoottime returns a boolean if a field has been set.
 func (o *HyperflexSummary) HasBoottime() bool {
-	if o != nil && o.Boottime != nil {
+	if o != nil && !IsNil(o.Boottime) {
 		return true
 	}
 
@@ -238,7 +242,7 @@ func (o *HyperflexSummary) SetBoottime(v int64) {
 
 // GetClusterAccessPolicy returns the ClusterAccessPolicy field value if set, zero value otherwise.
 func (o *HyperflexSummary) GetClusterAccessPolicy() string {
-	if o == nil || o.ClusterAccessPolicy == nil {
+	if o == nil || IsNil(o.ClusterAccessPolicy) {
 		var ret string
 		return ret
 	}
@@ -248,7 +252,7 @@ func (o *HyperflexSummary) GetClusterAccessPolicy() string {
 // GetClusterAccessPolicyOk returns a tuple with the ClusterAccessPolicy field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexSummary) GetClusterAccessPolicyOk() (*string, bool) {
-	if o == nil || o.ClusterAccessPolicy == nil {
+	if o == nil || IsNil(o.ClusterAccessPolicy) {
 		return nil, false
 	}
 	return o.ClusterAccessPolicy, true
@@ -256,7 +260,7 @@ func (o *HyperflexSummary) GetClusterAccessPolicyOk() (*string, bool) {
 
 // HasClusterAccessPolicy returns a boolean if a field has been set.
 func (o *HyperflexSummary) HasClusterAccessPolicy() bool {
-	if o != nil && o.ClusterAccessPolicy != nil {
+	if o != nil && !IsNil(o.ClusterAccessPolicy) {
 		return true
 	}
 
@@ -270,7 +274,7 @@ func (o *HyperflexSummary) SetClusterAccessPolicy(v string) {
 
 // GetCompressionSavings returns the CompressionSavings field value if set, zero value otherwise.
 func (o *HyperflexSummary) GetCompressionSavings() float64 {
-	if o == nil || o.CompressionSavings == nil {
+	if o == nil || IsNil(o.CompressionSavings) {
 		var ret float64
 		return ret
 	}
@@ -280,7 +284,7 @@ func (o *HyperflexSummary) GetCompressionSavings() float64 {
 // GetCompressionSavingsOk returns a tuple with the CompressionSavings field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexSummary) GetCompressionSavingsOk() (*float64, bool) {
-	if o == nil || o.CompressionSavings == nil {
+	if o == nil || IsNil(o.CompressionSavings) {
 		return nil, false
 	}
 	return o.CompressionSavings, true
@@ -288,7 +292,7 @@ func (o *HyperflexSummary) GetCompressionSavingsOk() (*float64, bool) {
 
 // HasCompressionSavings returns a boolean if a field has been set.
 func (o *HyperflexSummary) HasCompressionSavings() bool {
-	if o != nil && o.CompressionSavings != nil {
+	if o != nil && !IsNil(o.CompressionSavings) {
 		return true
 	}
 
@@ -302,7 +306,7 @@ func (o *HyperflexSummary) SetCompressionSavings(v float64) {
 
 // GetDataReplicationCompliance returns the DataReplicationCompliance field value if set, zero value otherwise.
 func (o *HyperflexSummary) GetDataReplicationCompliance() string {
-	if o == nil || o.DataReplicationCompliance == nil {
+	if o == nil || IsNil(o.DataReplicationCompliance) {
 		var ret string
 		return ret
 	}
@@ -312,7 +316,7 @@ func (o *HyperflexSummary) GetDataReplicationCompliance() string {
 // GetDataReplicationComplianceOk returns a tuple with the DataReplicationCompliance field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexSummary) GetDataReplicationComplianceOk() (*string, bool) {
-	if o == nil || o.DataReplicationCompliance == nil {
+	if o == nil || IsNil(o.DataReplicationCompliance) {
 		return nil, false
 	}
 	return o.DataReplicationCompliance, true
@@ -320,7 +324,7 @@ func (o *HyperflexSummary) GetDataReplicationComplianceOk() (*string, bool) {
 
 // HasDataReplicationCompliance returns a boolean if a field has been set.
 func (o *HyperflexSummary) HasDataReplicationCompliance() bool {
-	if o != nil && o.DataReplicationCompliance != nil {
+	if o != nil && !IsNil(o.DataReplicationCompliance) {
 		return true
 	}
 
@@ -334,7 +338,7 @@ func (o *HyperflexSummary) SetDataReplicationCompliance(v string) {
 
 // GetDataReplicationFactor returns the DataReplicationFactor field value if set, zero value otherwise.
 func (o *HyperflexSummary) GetDataReplicationFactor() string {
-	if o == nil || o.DataReplicationFactor == nil {
+	if o == nil || IsNil(o.DataReplicationFactor) {
 		var ret string
 		return ret
 	}
@@ -344,7 +348,7 @@ func (o *HyperflexSummary) GetDataReplicationFactor() string {
 // GetDataReplicationFactorOk returns a tuple with the DataReplicationFactor field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexSummary) GetDataReplicationFactorOk() (*string, bool) {
-	if o == nil || o.DataReplicationFactor == nil {
+	if o == nil || IsNil(o.DataReplicationFactor) {
 		return nil, false
 	}
 	return o.DataReplicationFactor, true
@@ -352,7 +356,7 @@ func (o *HyperflexSummary) GetDataReplicationFactorOk() (*string, bool) {
 
 // HasDataReplicationFactor returns a boolean if a field has been set.
 func (o *HyperflexSummary) HasDataReplicationFactor() bool {
-	if o != nil && o.DataReplicationFactor != nil {
+	if o != nil && !IsNil(o.DataReplicationFactor) {
 		return true
 	}
 
@@ -366,7 +370,7 @@ func (o *HyperflexSummary) SetDataReplicationFactor(v string) {
 
 // GetDeduplicationSavings returns the DeduplicationSavings field value if set, zero value otherwise.
 func (o *HyperflexSummary) GetDeduplicationSavings() float64 {
-	if o == nil || o.DeduplicationSavings == nil {
+	if o == nil || IsNil(o.DeduplicationSavings) {
 		var ret float64
 		return ret
 	}
@@ -376,7 +380,7 @@ func (o *HyperflexSummary) GetDeduplicationSavings() float64 {
 // GetDeduplicationSavingsOk returns a tuple with the DeduplicationSavings field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexSummary) GetDeduplicationSavingsOk() (*float64, bool) {
-	if o == nil || o.DeduplicationSavings == nil {
+	if o == nil || IsNil(o.DeduplicationSavings) {
 		return nil, false
 	}
 	return o.DeduplicationSavings, true
@@ -384,7 +388,7 @@ func (o *HyperflexSummary) GetDeduplicationSavingsOk() (*float64, bool) {
 
 // HasDeduplicationSavings returns a boolean if a field has been set.
 func (o *HyperflexSummary) HasDeduplicationSavings() bool {
-	if o != nil && o.DeduplicationSavings != nil {
+	if o != nil && !IsNil(o.DeduplicationSavings) {
 		return true
 	}
 
@@ -398,7 +402,7 @@ func (o *HyperflexSummary) SetDeduplicationSavings(v float64) {
 
 // GetDowntime returns the Downtime field value if set, zero value otherwise.
 func (o *HyperflexSummary) GetDowntime() string {
-	if o == nil || o.Downtime == nil {
+	if o == nil || IsNil(o.Downtime) {
 		var ret string
 		return ret
 	}
@@ -408,7 +412,7 @@ func (o *HyperflexSummary) GetDowntime() string {
 // GetDowntimeOk returns a tuple with the Downtime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexSummary) GetDowntimeOk() (*string, bool) {
-	if o == nil || o.Downtime == nil {
+	if o == nil || IsNil(o.Downtime) {
 		return nil, false
 	}
 	return o.Downtime, true
@@ -416,7 +420,7 @@ func (o *HyperflexSummary) GetDowntimeOk() (*string, bool) {
 
 // HasDowntime returns a boolean if a field has been set.
 func (o *HyperflexSummary) HasDowntime() bool {
-	if o != nil && o.Downtime != nil {
+	if o != nil && !IsNil(o.Downtime) {
 		return true
 	}
 
@@ -430,7 +434,7 @@ func (o *HyperflexSummary) SetDowntime(v string) {
 
 // GetFreeCapacity returns the FreeCapacity field value if set, zero value otherwise.
 func (o *HyperflexSummary) GetFreeCapacity() int64 {
-	if o == nil || o.FreeCapacity == nil {
+	if o == nil || IsNil(o.FreeCapacity) {
 		var ret int64
 		return ret
 	}
@@ -440,7 +444,7 @@ func (o *HyperflexSummary) GetFreeCapacity() int64 {
 // GetFreeCapacityOk returns a tuple with the FreeCapacity field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexSummary) GetFreeCapacityOk() (*int64, bool) {
-	if o == nil || o.FreeCapacity == nil {
+	if o == nil || IsNil(o.FreeCapacity) {
 		return nil, false
 	}
 	return o.FreeCapacity, true
@@ -448,7 +452,7 @@ func (o *HyperflexSummary) GetFreeCapacityOk() (*int64, bool) {
 
 // HasFreeCapacity returns a boolean if a field has been set.
 func (o *HyperflexSummary) HasFreeCapacity() bool {
-	if o != nil && o.FreeCapacity != nil {
+	if o != nil && !IsNil(o.FreeCapacity) {
 		return true
 	}
 
@@ -462,7 +466,7 @@ func (o *HyperflexSummary) SetFreeCapacity(v int64) {
 
 // GetHealingInfo returns the HealingInfo field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *HyperflexSummary) GetHealingInfo() HyperflexStPlatformClusterHealingInfo {
-	if o == nil || o.HealingInfo.Get() == nil {
+	if o == nil || IsNil(o.HealingInfo.Get()) {
 		var ret HyperflexStPlatformClusterHealingInfo
 		return ret
 	}
@@ -505,7 +509,7 @@ func (o *HyperflexSummary) UnsetHealingInfo() {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *HyperflexSummary) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -515,7 +519,7 @@ func (o *HyperflexSummary) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexSummary) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -523,7 +527,7 @@ func (o *HyperflexSummary) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *HyperflexSummary) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -548,7 +552,7 @@ func (o *HyperflexSummary) GetResiliencyDetails() interface{} {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *HyperflexSummary) GetResiliencyDetailsOk() (*interface{}, bool) {
-	if o == nil || o.ResiliencyDetails == nil {
+	if o == nil || IsNil(o.ResiliencyDetails) {
 		return nil, false
 	}
 	return &o.ResiliencyDetails, true
@@ -556,7 +560,7 @@ func (o *HyperflexSummary) GetResiliencyDetailsOk() (*interface{}, bool) {
 
 // HasResiliencyDetails returns a boolean if a field has been set.
 func (o *HyperflexSummary) HasResiliencyDetails() bool {
-	if o != nil && o.ResiliencyDetails != nil {
+	if o != nil && IsNil(o.ResiliencyDetails) {
 		return true
 	}
 
@@ -570,7 +574,7 @@ func (o *HyperflexSummary) SetResiliencyDetails(v interface{}) {
 
 // GetResiliencyDetailsSize returns the ResiliencyDetailsSize field value if set, zero value otherwise.
 func (o *HyperflexSummary) GetResiliencyDetailsSize() int64 {
-	if o == nil || o.ResiliencyDetailsSize == nil {
+	if o == nil || IsNil(o.ResiliencyDetailsSize) {
 		var ret int64
 		return ret
 	}
@@ -580,7 +584,7 @@ func (o *HyperflexSummary) GetResiliencyDetailsSize() int64 {
 // GetResiliencyDetailsSizeOk returns a tuple with the ResiliencyDetailsSize field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexSummary) GetResiliencyDetailsSizeOk() (*int64, bool) {
-	if o == nil || o.ResiliencyDetailsSize == nil {
+	if o == nil || IsNil(o.ResiliencyDetailsSize) {
 		return nil, false
 	}
 	return o.ResiliencyDetailsSize, true
@@ -588,7 +592,7 @@ func (o *HyperflexSummary) GetResiliencyDetailsSizeOk() (*int64, bool) {
 
 // HasResiliencyDetailsSize returns a boolean if a field has been set.
 func (o *HyperflexSummary) HasResiliencyDetailsSize() bool {
-	if o != nil && o.ResiliencyDetailsSize != nil {
+	if o != nil && !IsNil(o.ResiliencyDetailsSize) {
 		return true
 	}
 
@@ -602,7 +606,7 @@ func (o *HyperflexSummary) SetResiliencyDetailsSize(v int64) {
 
 // GetResiliencyInfo returns the ResiliencyInfo field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *HyperflexSummary) GetResiliencyInfo() HyperflexStPlatformClusterResiliencyInfo {
-	if o == nil || o.ResiliencyInfo.Get() == nil {
+	if o == nil || IsNil(o.ResiliencyInfo.Get()) {
 		var ret HyperflexStPlatformClusterResiliencyInfo
 		return ret
 	}
@@ -645,7 +649,7 @@ func (o *HyperflexSummary) UnsetResiliencyInfo() {
 
 // GetSpaceStatus returns the SpaceStatus field value if set, zero value otherwise.
 func (o *HyperflexSummary) GetSpaceStatus() string {
-	if o == nil || o.SpaceStatus == nil {
+	if o == nil || IsNil(o.SpaceStatus) {
 		var ret string
 		return ret
 	}
@@ -655,7 +659,7 @@ func (o *HyperflexSummary) GetSpaceStatus() string {
 // GetSpaceStatusOk returns a tuple with the SpaceStatus field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexSummary) GetSpaceStatusOk() (*string, bool) {
-	if o == nil || o.SpaceStatus == nil {
+	if o == nil || IsNil(o.SpaceStatus) {
 		return nil, false
 	}
 	return o.SpaceStatus, true
@@ -663,7 +667,7 @@ func (o *HyperflexSummary) GetSpaceStatusOk() (*string, bool) {
 
 // HasSpaceStatus returns a boolean if a field has been set.
 func (o *HyperflexSummary) HasSpaceStatus() bool {
-	if o != nil && o.SpaceStatus != nil {
+	if o != nil && !IsNil(o.SpaceStatus) {
 		return true
 	}
 
@@ -677,7 +681,7 @@ func (o *HyperflexSummary) SetSpaceStatus(v string) {
 
 // GetState returns the State field value if set, zero value otherwise.
 func (o *HyperflexSummary) GetState() string {
-	if o == nil || o.State == nil {
+	if o == nil || IsNil(o.State) {
 		var ret string
 		return ret
 	}
@@ -687,7 +691,7 @@ func (o *HyperflexSummary) GetState() string {
 // GetStateOk returns a tuple with the State field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexSummary) GetStateOk() (*string, bool) {
-	if o == nil || o.State == nil {
+	if o == nil || IsNil(o.State) {
 		return nil, false
 	}
 	return o.State, true
@@ -695,7 +699,7 @@ func (o *HyperflexSummary) GetStateOk() (*string, bool) {
 
 // HasState returns a boolean if a field has been set.
 func (o *HyperflexSummary) HasState() bool {
-	if o != nil && o.State != nil {
+	if o != nil && !IsNil(o.State) {
 		return true
 	}
 
@@ -709,7 +713,7 @@ func (o *HyperflexSummary) SetState(v string) {
 
 // GetTotalCapacity returns the TotalCapacity field value if set, zero value otherwise.
 func (o *HyperflexSummary) GetTotalCapacity() int64 {
-	if o == nil || o.TotalCapacity == nil {
+	if o == nil || IsNil(o.TotalCapacity) {
 		var ret int64
 		return ret
 	}
@@ -719,7 +723,7 @@ func (o *HyperflexSummary) GetTotalCapacity() int64 {
 // GetTotalCapacityOk returns a tuple with the TotalCapacity field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexSummary) GetTotalCapacityOk() (*int64, bool) {
-	if o == nil || o.TotalCapacity == nil {
+	if o == nil || IsNil(o.TotalCapacity) {
 		return nil, false
 	}
 	return o.TotalCapacity, true
@@ -727,7 +731,7 @@ func (o *HyperflexSummary) GetTotalCapacityOk() (*int64, bool) {
 
 // HasTotalCapacity returns a boolean if a field has been set.
 func (o *HyperflexSummary) HasTotalCapacity() bool {
-	if o != nil && o.TotalCapacity != nil {
+	if o != nil && !IsNil(o.TotalCapacity) {
 		return true
 	}
 
@@ -741,7 +745,7 @@ func (o *HyperflexSummary) SetTotalCapacity(v int64) {
 
 // GetTotalSavings returns the TotalSavings field value if set, zero value otherwise.
 func (o *HyperflexSummary) GetTotalSavings() float64 {
-	if o == nil || o.TotalSavings == nil {
+	if o == nil || IsNil(o.TotalSavings) {
 		var ret float64
 		return ret
 	}
@@ -751,7 +755,7 @@ func (o *HyperflexSummary) GetTotalSavings() float64 {
 // GetTotalSavingsOk returns a tuple with the TotalSavings field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexSummary) GetTotalSavingsOk() (*float64, bool) {
-	if o == nil || o.TotalSavings == nil {
+	if o == nil || IsNil(o.TotalSavings) {
 		return nil, false
 	}
 	return o.TotalSavings, true
@@ -759,7 +763,7 @@ func (o *HyperflexSummary) GetTotalSavingsOk() (*float64, bool) {
 
 // HasTotalSavings returns a boolean if a field has been set.
 func (o *HyperflexSummary) HasTotalSavings() bool {
-	if o != nil && o.TotalSavings != nil {
+	if o != nil && !IsNil(o.TotalSavings) {
 		return true
 	}
 
@@ -773,7 +777,7 @@ func (o *HyperflexSummary) SetTotalSavings(v float64) {
 
 // GetUptime returns the Uptime field value if set, zero value otherwise.
 func (o *HyperflexSummary) GetUptime() string {
-	if o == nil || o.Uptime == nil {
+	if o == nil || IsNil(o.Uptime) {
 		var ret string
 		return ret
 	}
@@ -783,7 +787,7 @@ func (o *HyperflexSummary) GetUptime() string {
 // GetUptimeOk returns a tuple with the Uptime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexSummary) GetUptimeOk() (*string, bool) {
-	if o == nil || o.Uptime == nil {
+	if o == nil || IsNil(o.Uptime) {
 		return nil, false
 	}
 	return o.Uptime, true
@@ -791,7 +795,7 @@ func (o *HyperflexSummary) GetUptimeOk() (*string, bool) {
 
 // HasUptime returns a boolean if a field has been set.
 func (o *HyperflexSummary) HasUptime() bool {
-	if o != nil && o.Uptime != nil {
+	if o != nil && !IsNil(o.Uptime) {
 		return true
 	}
 
@@ -805,7 +809,7 @@ func (o *HyperflexSummary) SetUptime(v string) {
 
 // GetUsedCapacity returns the UsedCapacity field value if set, zero value otherwise.
 func (o *HyperflexSummary) GetUsedCapacity() int64 {
-	if o == nil || o.UsedCapacity == nil {
+	if o == nil || IsNil(o.UsedCapacity) {
 		var ret int64
 		return ret
 	}
@@ -815,7 +819,7 @@ func (o *HyperflexSummary) GetUsedCapacity() int64 {
 // GetUsedCapacityOk returns a tuple with the UsedCapacity field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexSummary) GetUsedCapacityOk() (*int64, bool) {
-	if o == nil || o.UsedCapacity == nil {
+	if o == nil || IsNil(o.UsedCapacity) {
 		return nil, false
 	}
 	return o.UsedCapacity, true
@@ -823,7 +827,7 @@ func (o *HyperflexSummary) GetUsedCapacityOk() (*int64, bool) {
 
 // HasUsedCapacity returns a boolean if a field has been set.
 func (o *HyperflexSummary) HasUsedCapacity() bool {
-	if o != nil && o.UsedCapacity != nil {
+	if o != nil && !IsNil(o.UsedCapacity) {
 		return true
 	}
 
@@ -836,82 +840,86 @@ func (o *HyperflexSummary) SetUsedCapacity(v int64) {
 }
 
 func (o HyperflexSummary) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o HyperflexSummary) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
 	errMoBaseComplexType = json.Unmarshal([]byte(serializedMoBaseComplexType), &toSerialize)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.ActiveNodes != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.ActiveNodes) {
 		toSerialize["ActiveNodes"] = o.ActiveNodes
 	}
-	if o.Address != nil {
+	if !IsNil(o.Address) {
 		toSerialize["Address"] = o.Address
 	}
-	if o.Boottime != nil {
+	if !IsNil(o.Boottime) {
 		toSerialize["Boottime"] = o.Boottime
 	}
-	if o.ClusterAccessPolicy != nil {
+	if !IsNil(o.ClusterAccessPolicy) {
 		toSerialize["ClusterAccessPolicy"] = o.ClusterAccessPolicy
 	}
-	if o.CompressionSavings != nil {
+	if !IsNil(o.CompressionSavings) {
 		toSerialize["CompressionSavings"] = o.CompressionSavings
 	}
-	if o.DataReplicationCompliance != nil {
+	if !IsNil(o.DataReplicationCompliance) {
 		toSerialize["DataReplicationCompliance"] = o.DataReplicationCompliance
 	}
-	if o.DataReplicationFactor != nil {
+	if !IsNil(o.DataReplicationFactor) {
 		toSerialize["DataReplicationFactor"] = o.DataReplicationFactor
 	}
-	if o.DeduplicationSavings != nil {
+	if !IsNil(o.DeduplicationSavings) {
 		toSerialize["DeduplicationSavings"] = o.DeduplicationSavings
 	}
-	if o.Downtime != nil {
+	if !IsNil(o.Downtime) {
 		toSerialize["Downtime"] = o.Downtime
 	}
-	if o.FreeCapacity != nil {
+	if !IsNil(o.FreeCapacity) {
 		toSerialize["FreeCapacity"] = o.FreeCapacity
 	}
 	if o.HealingInfo.IsSet() {
 		toSerialize["HealingInfo"] = o.HealingInfo.Get()
 	}
-	if o.Name != nil {
+	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
 	}
 	if o.ResiliencyDetails != nil {
 		toSerialize["ResiliencyDetails"] = o.ResiliencyDetails
 	}
-	if o.ResiliencyDetailsSize != nil {
+	if !IsNil(o.ResiliencyDetailsSize) {
 		toSerialize["ResiliencyDetailsSize"] = o.ResiliencyDetailsSize
 	}
 	if o.ResiliencyInfo.IsSet() {
 		toSerialize["ResiliencyInfo"] = o.ResiliencyInfo.Get()
 	}
-	if o.SpaceStatus != nil {
+	if !IsNil(o.SpaceStatus) {
 		toSerialize["SpaceStatus"] = o.SpaceStatus
 	}
-	if o.State != nil {
+	if !IsNil(o.State) {
 		toSerialize["State"] = o.State
 	}
-	if o.TotalCapacity != nil {
+	if !IsNil(o.TotalCapacity) {
 		toSerialize["TotalCapacity"] = o.TotalCapacity
 	}
-	if o.TotalSavings != nil {
+	if !IsNil(o.TotalSavings) {
 		toSerialize["TotalSavings"] = o.TotalSavings
 	}
-	if o.Uptime != nil {
+	if !IsNil(o.Uptime) {
 		toSerialize["Uptime"] = o.Uptime
 	}
-	if o.UsedCapacity != nil {
+	if !IsNil(o.UsedCapacity) {
 		toSerialize["UsedCapacity"] = o.UsedCapacity
 	}
 
@@ -919,10 +927,32 @@ func (o HyperflexSummary) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *HyperflexSummary) UnmarshalJSON(bytes []byte) (err error) {
+func (o *HyperflexSummary) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type HyperflexSummaryWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -972,7 +1002,7 @@ func (o *HyperflexSummary) UnmarshalJSON(bytes []byte) (err error) {
 
 	varHyperflexSummaryWithoutEmbeddedStruct := HyperflexSummaryWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varHyperflexSummaryWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varHyperflexSummaryWithoutEmbeddedStruct)
 	if err == nil {
 		varHyperflexSummary := _HyperflexSummary{}
 		varHyperflexSummary.ClassId = varHyperflexSummaryWithoutEmbeddedStruct.ClassId
@@ -1005,7 +1035,7 @@ func (o *HyperflexSummary) UnmarshalJSON(bytes []byte) (err error) {
 
 	varHyperflexSummary := _HyperflexSummary{}
 
-	err = json.Unmarshal(bytes, &varHyperflexSummary)
+	err = json.Unmarshal(data, &varHyperflexSummary)
 	if err == nil {
 		o.MoBaseComplexType = varHyperflexSummary.MoBaseComplexType
 	} else {
@@ -1014,7 +1044,7 @@ func (o *HyperflexSummary) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "ActiveNodes")

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the VnicFcVethInventory type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &VnicFcVethInventory{}
 
 // VnicFcVethInventory A Fibre Channel Quality of Service (QoS) policy assigns a system class to the outgoing traffic for a vHBA. This system class determines the quality of service for the outgoing traffic. For certain adapters additional controls can also be specified like burst and rate on the outgoing traffic.
 type VnicFcVethInventory struct {
@@ -31,8 +35,8 @@ type VnicFcVethInventory struct {
 	// Name of the virtual FC interface.
 	Name *string `json:"Name,omitempty"`
 	// The value in Mbps to use for limiting the data rate on the virtual interface. Setting this to zero will turn rate limiting off.
-	RateLimit            *int64                `json:"RateLimit,omitempty"`
-	TargetMo             *MoBaseMoRelationship `json:"TargetMo,omitempty"`
+	RateLimit            *int64                       `json:"RateLimit,omitempty"`
+	TargetMo             NullableMoBaseMoRelationship `json:"TargetMo,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -119,7 +123,7 @@ func (o *VnicFcVethInventory) SetObjectType(v string) {
 
 // GetBurst returns the Burst field value if set, zero value otherwise.
 func (o *VnicFcVethInventory) GetBurst() int64 {
-	if o == nil || o.Burst == nil {
+	if o == nil || IsNil(o.Burst) {
 		var ret int64
 		return ret
 	}
@@ -129,7 +133,7 @@ func (o *VnicFcVethInventory) GetBurst() int64 {
 // GetBurstOk returns a tuple with the Burst field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VnicFcVethInventory) GetBurstOk() (*int64, bool) {
-	if o == nil || o.Burst == nil {
+	if o == nil || IsNil(o.Burst) {
 		return nil, false
 	}
 	return o.Burst, true
@@ -137,7 +141,7 @@ func (o *VnicFcVethInventory) GetBurstOk() (*int64, bool) {
 
 // HasBurst returns a boolean if a field has been set.
 func (o *VnicFcVethInventory) HasBurst() bool {
-	if o != nil && o.Burst != nil {
+	if o != nil && !IsNil(o.Burst) {
 		return true
 	}
 
@@ -151,7 +155,7 @@ func (o *VnicFcVethInventory) SetBurst(v int64) {
 
 // GetDescription returns the Description field value if set, zero value otherwise.
 func (o *VnicFcVethInventory) GetDescription() string {
-	if o == nil || o.Description == nil {
+	if o == nil || IsNil(o.Description) {
 		var ret string
 		return ret
 	}
@@ -161,7 +165,7 @@ func (o *VnicFcVethInventory) GetDescription() string {
 // GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VnicFcVethInventory) GetDescriptionOk() (*string, bool) {
-	if o == nil || o.Description == nil {
+	if o == nil || IsNil(o.Description) {
 		return nil, false
 	}
 	return o.Description, true
@@ -169,7 +173,7 @@ func (o *VnicFcVethInventory) GetDescriptionOk() (*string, bool) {
 
 // HasDescription returns a boolean if a field has been set.
 func (o *VnicFcVethInventory) HasDescription() bool {
-	if o != nil && o.Description != nil {
+	if o != nil && !IsNil(o.Description) {
 		return true
 	}
 
@@ -183,7 +187,7 @@ func (o *VnicFcVethInventory) SetDescription(v string) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *VnicFcVethInventory) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -193,7 +197,7 @@ func (o *VnicFcVethInventory) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VnicFcVethInventory) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -201,7 +205,7 @@ func (o *VnicFcVethInventory) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *VnicFcVethInventory) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -215,7 +219,7 @@ func (o *VnicFcVethInventory) SetName(v string) {
 
 // GetRateLimit returns the RateLimit field value if set, zero value otherwise.
 func (o *VnicFcVethInventory) GetRateLimit() int64 {
-	if o == nil || o.RateLimit == nil {
+	if o == nil || IsNil(o.RateLimit) {
 		var ret int64
 		return ret
 	}
@@ -225,7 +229,7 @@ func (o *VnicFcVethInventory) GetRateLimit() int64 {
 // GetRateLimitOk returns a tuple with the RateLimit field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VnicFcVethInventory) GetRateLimitOk() (*int64, bool) {
-	if o == nil || o.RateLimit == nil {
+	if o == nil || IsNil(o.RateLimit) {
 		return nil, false
 	}
 	return o.RateLimit, true
@@ -233,7 +237,7 @@ func (o *VnicFcVethInventory) GetRateLimitOk() (*int64, bool) {
 
 // HasRateLimit returns a boolean if a field has been set.
 func (o *VnicFcVethInventory) HasRateLimit() bool {
-	if o != nil && o.RateLimit != nil {
+	if o != nil && !IsNil(o.RateLimit) {
 		return true
 	}
 
@@ -245,78 +249,115 @@ func (o *VnicFcVethInventory) SetRateLimit(v int64) {
 	o.RateLimit = &v
 }
 
-// GetTargetMo returns the TargetMo field value if set, zero value otherwise.
+// GetTargetMo returns the TargetMo field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *VnicFcVethInventory) GetTargetMo() MoBaseMoRelationship {
-	if o == nil || o.TargetMo == nil {
+	if o == nil || IsNil(o.TargetMo.Get()) {
 		var ret MoBaseMoRelationship
 		return ret
 	}
-	return *o.TargetMo
+	return *o.TargetMo.Get()
 }
 
 // GetTargetMoOk returns a tuple with the TargetMo field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *VnicFcVethInventory) GetTargetMoOk() (*MoBaseMoRelationship, bool) {
-	if o == nil || o.TargetMo == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.TargetMo, true
+	return o.TargetMo.Get(), o.TargetMo.IsSet()
 }
 
 // HasTargetMo returns a boolean if a field has been set.
 func (o *VnicFcVethInventory) HasTargetMo() bool {
-	if o != nil && o.TargetMo != nil {
+	if o != nil && o.TargetMo.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetTargetMo gets a reference to the given MoBaseMoRelationship and assigns it to the TargetMo field.
+// SetTargetMo gets a reference to the given NullableMoBaseMoRelationship and assigns it to the TargetMo field.
 func (o *VnicFcVethInventory) SetTargetMo(v MoBaseMoRelationship) {
-	o.TargetMo = &v
+	o.TargetMo.Set(&v)
+}
+
+// SetTargetMoNil sets the value for TargetMo to be an explicit nil
+func (o *VnicFcVethInventory) SetTargetMoNil() {
+	o.TargetMo.Set(nil)
+}
+
+// UnsetTargetMo ensures that no value is present for TargetMo, not even an explicit nil
+func (o *VnicFcVethInventory) UnsetTargetMo() {
+	o.TargetMo.Unset()
 }
 
 func (o VnicFcVethInventory) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o VnicFcVethInventory) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedPolicyAbstractInventory, errPolicyAbstractInventory := json.Marshal(o.PolicyAbstractInventory)
 	if errPolicyAbstractInventory != nil {
-		return []byte{}, errPolicyAbstractInventory
+		return map[string]interface{}{}, errPolicyAbstractInventory
 	}
 	errPolicyAbstractInventory = json.Unmarshal([]byte(serializedPolicyAbstractInventory), &toSerialize)
 	if errPolicyAbstractInventory != nil {
-		return []byte{}, errPolicyAbstractInventory
+		return map[string]interface{}{}, errPolicyAbstractInventory
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Burst != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Burst) {
 		toSerialize["Burst"] = o.Burst
 	}
-	if o.Description != nil {
+	if !IsNil(o.Description) {
 		toSerialize["Description"] = o.Description
 	}
-	if o.Name != nil {
+	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
 	}
-	if o.RateLimit != nil {
+	if !IsNil(o.RateLimit) {
 		toSerialize["RateLimit"] = o.RateLimit
 	}
-	if o.TargetMo != nil {
-		toSerialize["TargetMo"] = o.TargetMo
+	if o.TargetMo.IsSet() {
+		toSerialize["TargetMo"] = o.TargetMo.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *VnicFcVethInventory) UnmarshalJSON(bytes []byte) (err error) {
+func (o *VnicFcVethInventory) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type VnicFcVethInventoryWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -329,13 +370,13 @@ func (o *VnicFcVethInventory) UnmarshalJSON(bytes []byte) (err error) {
 		// Name of the virtual FC interface.
 		Name *string `json:"Name,omitempty"`
 		// The value in Mbps to use for limiting the data rate on the virtual interface. Setting this to zero will turn rate limiting off.
-		RateLimit *int64                `json:"RateLimit,omitempty"`
-		TargetMo  *MoBaseMoRelationship `json:"TargetMo,omitempty"`
+		RateLimit *int64                       `json:"RateLimit,omitempty"`
+		TargetMo  NullableMoBaseMoRelationship `json:"TargetMo,omitempty"`
 	}
 
 	varVnicFcVethInventoryWithoutEmbeddedStruct := VnicFcVethInventoryWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varVnicFcVethInventoryWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varVnicFcVethInventoryWithoutEmbeddedStruct)
 	if err == nil {
 		varVnicFcVethInventory := _VnicFcVethInventory{}
 		varVnicFcVethInventory.ClassId = varVnicFcVethInventoryWithoutEmbeddedStruct.ClassId
@@ -352,7 +393,7 @@ func (o *VnicFcVethInventory) UnmarshalJSON(bytes []byte) (err error) {
 
 	varVnicFcVethInventory := _VnicFcVethInventory{}
 
-	err = json.Unmarshal(bytes, &varVnicFcVethInventory)
+	err = json.Unmarshal(data, &varVnicFcVethInventory)
 	if err == nil {
 		o.PolicyAbstractInventory = varVnicFcVethInventory.PolicyAbstractInventory
 	} else {
@@ -361,7 +402,7 @@ func (o *VnicFcVethInventory) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Burst")

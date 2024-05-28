@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the VirtualizationBaseHostPciDevice type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &VirtualizationBaseHostPciDevice{}
 
 // VirtualizationBaseHostPciDevice Common attributes of a PCI device on a host.
 type VirtualizationBaseHostPciDevice struct {
@@ -51,9 +55,9 @@ type VirtualizationBaseHostPciDevice struct {
 	// The vendor ID of this PCI device.
 	VendorId *int64 `json:"VendorId,omitempty"`
 	// The vendor name of this PCI device.
-	VendorName           *string                                `json:"VendorName,omitempty"`
-	Cluster              *VirtualizationBaseClusterRelationship `json:"Cluster,omitempty"`
-	Host                 *VirtualizationBaseHostRelationship    `json:"Host,omitempty"`
+	VendorName           *string                                       `json:"VendorName,omitempty"`
+	Cluster              NullableVirtualizationBaseClusterRelationship `json:"Cluster,omitempty"`
+	Host                 NullableVirtualizationBaseHostRelationship    `json:"Host,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -132,7 +136,7 @@ func (o *VirtualizationBaseHostPciDevice) SetObjectType(v string) {
 
 // GetBus returns the Bus field value if set, zero value otherwise.
 func (o *VirtualizationBaseHostPciDevice) GetBus() int64 {
-	if o == nil || o.Bus == nil {
+	if o == nil || IsNil(o.Bus) {
 		var ret int64
 		return ret
 	}
@@ -142,7 +146,7 @@ func (o *VirtualizationBaseHostPciDevice) GetBus() int64 {
 // GetBusOk returns a tuple with the Bus field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationBaseHostPciDevice) GetBusOk() (*int64, bool) {
-	if o == nil || o.Bus == nil {
+	if o == nil || IsNil(o.Bus) {
 		return nil, false
 	}
 	return o.Bus, true
@@ -150,7 +154,7 @@ func (o *VirtualizationBaseHostPciDevice) GetBusOk() (*int64, bool) {
 
 // HasBus returns a boolean if a field has been set.
 func (o *VirtualizationBaseHostPciDevice) HasBus() bool {
-	if o != nil && o.Bus != nil {
+	if o != nil && !IsNil(o.Bus) {
 		return true
 	}
 
@@ -164,7 +168,7 @@ func (o *VirtualizationBaseHostPciDevice) SetBus(v int64) {
 
 // GetDeviceId returns the DeviceId field value if set, zero value otherwise.
 func (o *VirtualizationBaseHostPciDevice) GetDeviceId() int64 {
-	if o == nil || o.DeviceId == nil {
+	if o == nil || IsNil(o.DeviceId) {
 		var ret int64
 		return ret
 	}
@@ -174,7 +178,7 @@ func (o *VirtualizationBaseHostPciDevice) GetDeviceId() int64 {
 // GetDeviceIdOk returns a tuple with the DeviceId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationBaseHostPciDevice) GetDeviceIdOk() (*int64, bool) {
-	if o == nil || o.DeviceId == nil {
+	if o == nil || IsNil(o.DeviceId) {
 		return nil, false
 	}
 	return o.DeviceId, true
@@ -182,7 +186,7 @@ func (o *VirtualizationBaseHostPciDevice) GetDeviceIdOk() (*int64, bool) {
 
 // HasDeviceId returns a boolean if a field has been set.
 func (o *VirtualizationBaseHostPciDevice) HasDeviceId() bool {
-	if o != nil && o.DeviceId != nil {
+	if o != nil && !IsNil(o.DeviceId) {
 		return true
 	}
 
@@ -196,7 +200,7 @@ func (o *VirtualizationBaseHostPciDevice) SetDeviceId(v int64) {
 
 // GetDeviceName returns the DeviceName field value if set, zero value otherwise.
 func (o *VirtualizationBaseHostPciDevice) GetDeviceName() string {
-	if o == nil || o.DeviceName == nil {
+	if o == nil || IsNil(o.DeviceName) {
 		var ret string
 		return ret
 	}
@@ -206,7 +210,7 @@ func (o *VirtualizationBaseHostPciDevice) GetDeviceName() string {
 // GetDeviceNameOk returns a tuple with the DeviceName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationBaseHostPciDevice) GetDeviceNameOk() (*string, bool) {
-	if o == nil || o.DeviceName == nil {
+	if o == nil || IsNil(o.DeviceName) {
 		return nil, false
 	}
 	return o.DeviceName, true
@@ -214,7 +218,7 @@ func (o *VirtualizationBaseHostPciDevice) GetDeviceNameOk() (*string, bool) {
 
 // HasDeviceName returns a boolean if a field has been set.
 func (o *VirtualizationBaseHostPciDevice) HasDeviceName() bool {
-	if o != nil && o.DeviceName != nil {
+	if o != nil && !IsNil(o.DeviceName) {
 		return true
 	}
 
@@ -228,7 +232,7 @@ func (o *VirtualizationBaseHostPciDevice) SetDeviceName(v string) {
 
 // GetFunction returns the Function field value if set, zero value otherwise.
 func (o *VirtualizationBaseHostPciDevice) GetFunction() int64 {
-	if o == nil || o.Function == nil {
+	if o == nil || IsNil(o.Function) {
 		var ret int64
 		return ret
 	}
@@ -238,7 +242,7 @@ func (o *VirtualizationBaseHostPciDevice) GetFunction() int64 {
 // GetFunctionOk returns a tuple with the Function field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationBaseHostPciDevice) GetFunctionOk() (*int64, bool) {
-	if o == nil || o.Function == nil {
+	if o == nil || IsNil(o.Function) {
 		return nil, false
 	}
 	return o.Function, true
@@ -246,7 +250,7 @@ func (o *VirtualizationBaseHostPciDevice) GetFunctionOk() (*int64, bool) {
 
 // HasFunction returns a boolean if a field has been set.
 func (o *VirtualizationBaseHostPciDevice) HasFunction() bool {
-	if o != nil && o.Function != nil {
+	if o != nil && !IsNil(o.Function) {
 		return true
 	}
 
@@ -260,7 +264,7 @@ func (o *VirtualizationBaseHostPciDevice) SetFunction(v int64) {
 
 // GetIdentity returns the Identity field value if set, zero value otherwise.
 func (o *VirtualizationBaseHostPciDevice) GetIdentity() string {
-	if o == nil || o.Identity == nil {
+	if o == nil || IsNil(o.Identity) {
 		var ret string
 		return ret
 	}
@@ -270,7 +274,7 @@ func (o *VirtualizationBaseHostPciDevice) GetIdentity() string {
 // GetIdentityOk returns a tuple with the Identity field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationBaseHostPciDevice) GetIdentityOk() (*string, bool) {
-	if o == nil || o.Identity == nil {
+	if o == nil || IsNil(o.Identity) {
 		return nil, false
 	}
 	return o.Identity, true
@@ -278,7 +282,7 @@ func (o *VirtualizationBaseHostPciDevice) GetIdentityOk() (*string, bool) {
 
 // HasIdentity returns a boolean if a field has been set.
 func (o *VirtualizationBaseHostPciDevice) HasIdentity() bool {
-	if o != nil && o.Identity != nil {
+	if o != nil && !IsNil(o.Identity) {
 		return true
 	}
 
@@ -292,7 +296,7 @@ func (o *VirtualizationBaseHostPciDevice) SetIdentity(v string) {
 
 // GetPassthroughActive returns the PassthroughActive field value if set, zero value otherwise.
 func (o *VirtualizationBaseHostPciDevice) GetPassthroughActive() bool {
-	if o == nil || o.PassthroughActive == nil {
+	if o == nil || IsNil(o.PassthroughActive) {
 		var ret bool
 		return ret
 	}
@@ -302,7 +306,7 @@ func (o *VirtualizationBaseHostPciDevice) GetPassthroughActive() bool {
 // GetPassthroughActiveOk returns a tuple with the PassthroughActive field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationBaseHostPciDevice) GetPassthroughActiveOk() (*bool, bool) {
-	if o == nil || o.PassthroughActive == nil {
+	if o == nil || IsNil(o.PassthroughActive) {
 		return nil, false
 	}
 	return o.PassthroughActive, true
@@ -310,7 +314,7 @@ func (o *VirtualizationBaseHostPciDevice) GetPassthroughActiveOk() (*bool, bool)
 
 // HasPassthroughActive returns a boolean if a field has been set.
 func (o *VirtualizationBaseHostPciDevice) HasPassthroughActive() bool {
-	if o != nil && o.PassthroughActive != nil {
+	if o != nil && !IsNil(o.PassthroughActive) {
 		return true
 	}
 
@@ -324,7 +328,7 @@ func (o *VirtualizationBaseHostPciDevice) SetPassthroughActive(v bool) {
 
 // GetPassthroughEnabled returns the PassthroughEnabled field value if set, zero value otherwise.
 func (o *VirtualizationBaseHostPciDevice) GetPassthroughEnabled() bool {
-	if o == nil || o.PassthroughEnabled == nil {
+	if o == nil || IsNil(o.PassthroughEnabled) {
 		var ret bool
 		return ret
 	}
@@ -334,7 +338,7 @@ func (o *VirtualizationBaseHostPciDevice) GetPassthroughEnabled() bool {
 // GetPassthroughEnabledOk returns a tuple with the PassthroughEnabled field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationBaseHostPciDevice) GetPassthroughEnabledOk() (*bool, bool) {
-	if o == nil || o.PassthroughEnabled == nil {
+	if o == nil || IsNil(o.PassthroughEnabled) {
 		return nil, false
 	}
 	return o.PassthroughEnabled, true
@@ -342,7 +346,7 @@ func (o *VirtualizationBaseHostPciDevice) GetPassthroughEnabledOk() (*bool, bool
 
 // HasPassthroughEnabled returns a boolean if a field has been set.
 func (o *VirtualizationBaseHostPciDevice) HasPassthroughEnabled() bool {
-	if o != nil && o.PassthroughEnabled != nil {
+	if o != nil && !IsNil(o.PassthroughEnabled) {
 		return true
 	}
 
@@ -356,7 +360,7 @@ func (o *VirtualizationBaseHostPciDevice) SetPassthroughEnabled(v bool) {
 
 // GetPciClassId returns the PciClassId field value if set, zero value otherwise.
 func (o *VirtualizationBaseHostPciDevice) GetPciClassId() int64 {
-	if o == nil || o.PciClassId == nil {
+	if o == nil || IsNil(o.PciClassId) {
 		var ret int64
 		return ret
 	}
@@ -366,7 +370,7 @@ func (o *VirtualizationBaseHostPciDevice) GetPciClassId() int64 {
 // GetPciClassIdOk returns a tuple with the PciClassId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationBaseHostPciDevice) GetPciClassIdOk() (*int64, bool) {
-	if o == nil || o.PciClassId == nil {
+	if o == nil || IsNil(o.PciClassId) {
 		return nil, false
 	}
 	return o.PciClassId, true
@@ -374,7 +378,7 @@ func (o *VirtualizationBaseHostPciDevice) GetPciClassIdOk() (*int64, bool) {
 
 // HasPciClassId returns a boolean if a field has been set.
 func (o *VirtualizationBaseHostPciDevice) HasPciClassId() bool {
-	if o != nil && o.PciClassId != nil {
+	if o != nil && !IsNil(o.PciClassId) {
 		return true
 	}
 
@@ -388,7 +392,7 @@ func (o *VirtualizationBaseHostPciDevice) SetPciClassId(v int64) {
 
 // GetPciId returns the PciId field value if set, zero value otherwise.
 func (o *VirtualizationBaseHostPciDevice) GetPciId() string {
-	if o == nil || o.PciId == nil {
+	if o == nil || IsNil(o.PciId) {
 		var ret string
 		return ret
 	}
@@ -398,7 +402,7 @@ func (o *VirtualizationBaseHostPciDevice) GetPciId() string {
 // GetPciIdOk returns a tuple with the PciId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationBaseHostPciDevice) GetPciIdOk() (*string, bool) {
-	if o == nil || o.PciId == nil {
+	if o == nil || IsNil(o.PciId) {
 		return nil, false
 	}
 	return o.PciId, true
@@ -406,7 +410,7 @@ func (o *VirtualizationBaseHostPciDevice) GetPciIdOk() (*string, bool) {
 
 // HasPciId returns a boolean if a field has been set.
 func (o *VirtualizationBaseHostPciDevice) HasPciId() bool {
-	if o != nil && o.PciId != nil {
+	if o != nil && !IsNil(o.PciId) {
 		return true
 	}
 
@@ -420,7 +424,7 @@ func (o *VirtualizationBaseHostPciDevice) SetPciId(v string) {
 
 // GetSlot returns the Slot field value if set, zero value otherwise.
 func (o *VirtualizationBaseHostPciDevice) GetSlot() int64 {
-	if o == nil || o.Slot == nil {
+	if o == nil || IsNil(o.Slot) {
 		var ret int64
 		return ret
 	}
@@ -430,7 +434,7 @@ func (o *VirtualizationBaseHostPciDevice) GetSlot() int64 {
 // GetSlotOk returns a tuple with the Slot field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationBaseHostPciDevice) GetSlotOk() (*int64, bool) {
-	if o == nil || o.Slot == nil {
+	if o == nil || IsNil(o.Slot) {
 		return nil, false
 	}
 	return o.Slot, true
@@ -438,7 +442,7 @@ func (o *VirtualizationBaseHostPciDevice) GetSlotOk() (*int64, bool) {
 
 // HasSlot returns a boolean if a field has been set.
 func (o *VirtualizationBaseHostPciDevice) HasSlot() bool {
-	if o != nil && o.Slot != nil {
+	if o != nil && !IsNil(o.Slot) {
 		return true
 	}
 
@@ -452,7 +456,7 @@ func (o *VirtualizationBaseHostPciDevice) SetSlot(v int64) {
 
 // GetSubDeviceId returns the SubDeviceId field value if set, zero value otherwise.
 func (o *VirtualizationBaseHostPciDevice) GetSubDeviceId() int64 {
-	if o == nil || o.SubDeviceId == nil {
+	if o == nil || IsNil(o.SubDeviceId) {
 		var ret int64
 		return ret
 	}
@@ -462,7 +466,7 @@ func (o *VirtualizationBaseHostPciDevice) GetSubDeviceId() int64 {
 // GetSubDeviceIdOk returns a tuple with the SubDeviceId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationBaseHostPciDevice) GetSubDeviceIdOk() (*int64, bool) {
-	if o == nil || o.SubDeviceId == nil {
+	if o == nil || IsNil(o.SubDeviceId) {
 		return nil, false
 	}
 	return o.SubDeviceId, true
@@ -470,7 +474,7 @@ func (o *VirtualizationBaseHostPciDevice) GetSubDeviceIdOk() (*int64, bool) {
 
 // HasSubDeviceId returns a boolean if a field has been set.
 func (o *VirtualizationBaseHostPciDevice) HasSubDeviceId() bool {
-	if o != nil && o.SubDeviceId != nil {
+	if o != nil && !IsNil(o.SubDeviceId) {
 		return true
 	}
 
@@ -484,7 +488,7 @@ func (o *VirtualizationBaseHostPciDevice) SetSubDeviceId(v int64) {
 
 // GetSubVendorId returns the SubVendorId field value if set, zero value otherwise.
 func (o *VirtualizationBaseHostPciDevice) GetSubVendorId() int64 {
-	if o == nil || o.SubVendorId == nil {
+	if o == nil || IsNil(o.SubVendorId) {
 		var ret int64
 		return ret
 	}
@@ -494,7 +498,7 @@ func (o *VirtualizationBaseHostPciDevice) GetSubVendorId() int64 {
 // GetSubVendorIdOk returns a tuple with the SubVendorId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationBaseHostPciDevice) GetSubVendorIdOk() (*int64, bool) {
-	if o == nil || o.SubVendorId == nil {
+	if o == nil || IsNil(o.SubVendorId) {
 		return nil, false
 	}
 	return o.SubVendorId, true
@@ -502,7 +506,7 @@ func (o *VirtualizationBaseHostPciDevice) GetSubVendorIdOk() (*int64, bool) {
 
 // HasSubVendorId returns a boolean if a field has been set.
 func (o *VirtualizationBaseHostPciDevice) HasSubVendorId() bool {
-	if o != nil && o.SubVendorId != nil {
+	if o != nil && !IsNil(o.SubVendorId) {
 		return true
 	}
 
@@ -516,7 +520,7 @@ func (o *VirtualizationBaseHostPciDevice) SetSubVendorId(v int64) {
 
 // GetVendorId returns the VendorId field value if set, zero value otherwise.
 func (o *VirtualizationBaseHostPciDevice) GetVendorId() int64 {
-	if o == nil || o.VendorId == nil {
+	if o == nil || IsNil(o.VendorId) {
 		var ret int64
 		return ret
 	}
@@ -526,7 +530,7 @@ func (o *VirtualizationBaseHostPciDevice) GetVendorId() int64 {
 // GetVendorIdOk returns a tuple with the VendorId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationBaseHostPciDevice) GetVendorIdOk() (*int64, bool) {
-	if o == nil || o.VendorId == nil {
+	if o == nil || IsNil(o.VendorId) {
 		return nil, false
 	}
 	return o.VendorId, true
@@ -534,7 +538,7 @@ func (o *VirtualizationBaseHostPciDevice) GetVendorIdOk() (*int64, bool) {
 
 // HasVendorId returns a boolean if a field has been set.
 func (o *VirtualizationBaseHostPciDevice) HasVendorId() bool {
-	if o != nil && o.VendorId != nil {
+	if o != nil && !IsNil(o.VendorId) {
 		return true
 	}
 
@@ -548,7 +552,7 @@ func (o *VirtualizationBaseHostPciDevice) SetVendorId(v int64) {
 
 // GetVendorName returns the VendorName field value if set, zero value otherwise.
 func (o *VirtualizationBaseHostPciDevice) GetVendorName() string {
-	if o == nil || o.VendorName == nil {
+	if o == nil || IsNil(o.VendorName) {
 		var ret string
 		return ret
 	}
@@ -558,7 +562,7 @@ func (o *VirtualizationBaseHostPciDevice) GetVendorName() string {
 // GetVendorNameOk returns a tuple with the VendorName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationBaseHostPciDevice) GetVendorNameOk() (*string, bool) {
-	if o == nil || o.VendorName == nil {
+	if o == nil || IsNil(o.VendorName) {
 		return nil, false
 	}
 	return o.VendorName, true
@@ -566,7 +570,7 @@ func (o *VirtualizationBaseHostPciDevice) GetVendorNameOk() (*string, bool) {
 
 // HasVendorName returns a boolean if a field has been set.
 func (o *VirtualizationBaseHostPciDevice) HasVendorName() bool {
-	if o != nil && o.VendorName != nil {
+	if o != nil && !IsNil(o.VendorName) {
 		return true
 	}
 
@@ -578,143 +582,191 @@ func (o *VirtualizationBaseHostPciDevice) SetVendorName(v string) {
 	o.VendorName = &v
 }
 
-// GetCluster returns the Cluster field value if set, zero value otherwise.
+// GetCluster returns the Cluster field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *VirtualizationBaseHostPciDevice) GetCluster() VirtualizationBaseClusterRelationship {
-	if o == nil || o.Cluster == nil {
+	if o == nil || IsNil(o.Cluster.Get()) {
 		var ret VirtualizationBaseClusterRelationship
 		return ret
 	}
-	return *o.Cluster
+	return *o.Cluster.Get()
 }
 
 // GetClusterOk returns a tuple with the Cluster field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *VirtualizationBaseHostPciDevice) GetClusterOk() (*VirtualizationBaseClusterRelationship, bool) {
-	if o == nil || o.Cluster == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Cluster, true
+	return o.Cluster.Get(), o.Cluster.IsSet()
 }
 
 // HasCluster returns a boolean if a field has been set.
 func (o *VirtualizationBaseHostPciDevice) HasCluster() bool {
-	if o != nil && o.Cluster != nil {
+	if o != nil && o.Cluster.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetCluster gets a reference to the given VirtualizationBaseClusterRelationship and assigns it to the Cluster field.
+// SetCluster gets a reference to the given NullableVirtualizationBaseClusterRelationship and assigns it to the Cluster field.
 func (o *VirtualizationBaseHostPciDevice) SetCluster(v VirtualizationBaseClusterRelationship) {
-	o.Cluster = &v
+	o.Cluster.Set(&v)
 }
 
-// GetHost returns the Host field value if set, zero value otherwise.
+// SetClusterNil sets the value for Cluster to be an explicit nil
+func (o *VirtualizationBaseHostPciDevice) SetClusterNil() {
+	o.Cluster.Set(nil)
+}
+
+// UnsetCluster ensures that no value is present for Cluster, not even an explicit nil
+func (o *VirtualizationBaseHostPciDevice) UnsetCluster() {
+	o.Cluster.Unset()
+}
+
+// GetHost returns the Host field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *VirtualizationBaseHostPciDevice) GetHost() VirtualizationBaseHostRelationship {
-	if o == nil || o.Host == nil {
+	if o == nil || IsNil(o.Host.Get()) {
 		var ret VirtualizationBaseHostRelationship
 		return ret
 	}
-	return *o.Host
+	return *o.Host.Get()
 }
 
 // GetHostOk returns a tuple with the Host field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *VirtualizationBaseHostPciDevice) GetHostOk() (*VirtualizationBaseHostRelationship, bool) {
-	if o == nil || o.Host == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Host, true
+	return o.Host.Get(), o.Host.IsSet()
 }
 
 // HasHost returns a boolean if a field has been set.
 func (o *VirtualizationBaseHostPciDevice) HasHost() bool {
-	if o != nil && o.Host != nil {
+	if o != nil && o.Host.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetHost gets a reference to the given VirtualizationBaseHostRelationship and assigns it to the Host field.
+// SetHost gets a reference to the given NullableVirtualizationBaseHostRelationship and assigns it to the Host field.
 func (o *VirtualizationBaseHostPciDevice) SetHost(v VirtualizationBaseHostRelationship) {
-	o.Host = &v
+	o.Host.Set(&v)
+}
+
+// SetHostNil sets the value for Host to be an explicit nil
+func (o *VirtualizationBaseHostPciDevice) SetHostNil() {
+	o.Host.Set(nil)
+}
+
+// UnsetHost ensures that no value is present for Host, not even an explicit nil
+func (o *VirtualizationBaseHostPciDevice) UnsetHost() {
+	o.Host.Unset()
 }
 
 func (o VirtualizationBaseHostPciDevice) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o VirtualizationBaseHostPciDevice) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedVirtualizationBaseSourceDevice, errVirtualizationBaseSourceDevice := json.Marshal(o.VirtualizationBaseSourceDevice)
 	if errVirtualizationBaseSourceDevice != nil {
-		return []byte{}, errVirtualizationBaseSourceDevice
+		return map[string]interface{}{}, errVirtualizationBaseSourceDevice
 	}
 	errVirtualizationBaseSourceDevice = json.Unmarshal([]byte(serializedVirtualizationBaseSourceDevice), &toSerialize)
 	if errVirtualizationBaseSourceDevice != nil {
-		return []byte{}, errVirtualizationBaseSourceDevice
+		return map[string]interface{}{}, errVirtualizationBaseSourceDevice
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Bus != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Bus) {
 		toSerialize["Bus"] = o.Bus
 	}
-	if o.DeviceId != nil {
+	if !IsNil(o.DeviceId) {
 		toSerialize["DeviceId"] = o.DeviceId
 	}
-	if o.DeviceName != nil {
+	if !IsNil(o.DeviceName) {
 		toSerialize["DeviceName"] = o.DeviceName
 	}
-	if o.Function != nil {
+	if !IsNil(o.Function) {
 		toSerialize["Function"] = o.Function
 	}
-	if o.Identity != nil {
+	if !IsNil(o.Identity) {
 		toSerialize["Identity"] = o.Identity
 	}
-	if o.PassthroughActive != nil {
+	if !IsNil(o.PassthroughActive) {
 		toSerialize["PassthroughActive"] = o.PassthroughActive
 	}
-	if o.PassthroughEnabled != nil {
+	if !IsNil(o.PassthroughEnabled) {
 		toSerialize["PassthroughEnabled"] = o.PassthroughEnabled
 	}
-	if o.PciClassId != nil {
+	if !IsNil(o.PciClassId) {
 		toSerialize["PciClassId"] = o.PciClassId
 	}
-	if o.PciId != nil {
+	if !IsNil(o.PciId) {
 		toSerialize["PciId"] = o.PciId
 	}
-	if o.Slot != nil {
+	if !IsNil(o.Slot) {
 		toSerialize["Slot"] = o.Slot
 	}
-	if o.SubDeviceId != nil {
+	if !IsNil(o.SubDeviceId) {
 		toSerialize["SubDeviceId"] = o.SubDeviceId
 	}
-	if o.SubVendorId != nil {
+	if !IsNil(o.SubVendorId) {
 		toSerialize["SubVendorId"] = o.SubVendorId
 	}
-	if o.VendorId != nil {
+	if !IsNil(o.VendorId) {
 		toSerialize["VendorId"] = o.VendorId
 	}
-	if o.VendorName != nil {
+	if !IsNil(o.VendorName) {
 		toSerialize["VendorName"] = o.VendorName
 	}
-	if o.Cluster != nil {
-		toSerialize["Cluster"] = o.Cluster
+	if o.Cluster.IsSet() {
+		toSerialize["Cluster"] = o.Cluster.Get()
 	}
-	if o.Host != nil {
-		toSerialize["Host"] = o.Host
+	if o.Host.IsSet() {
+		toSerialize["Host"] = o.Host.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *VirtualizationBaseHostPciDevice) UnmarshalJSON(bytes []byte) (err error) {
+func (o *VirtualizationBaseHostPciDevice) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type VirtualizationBaseHostPciDeviceWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type.
 		ClassId string `json:"ClassId"`
@@ -747,14 +799,14 @@ func (o *VirtualizationBaseHostPciDevice) UnmarshalJSON(bytes []byte) (err error
 		// The vendor ID of this PCI device.
 		VendorId *int64 `json:"VendorId,omitempty"`
 		// The vendor name of this PCI device.
-		VendorName *string                                `json:"VendorName,omitempty"`
-		Cluster    *VirtualizationBaseClusterRelationship `json:"Cluster,omitempty"`
-		Host       *VirtualizationBaseHostRelationship    `json:"Host,omitempty"`
+		VendorName *string                                       `json:"VendorName,omitempty"`
+		Cluster    NullableVirtualizationBaseClusterRelationship `json:"Cluster,omitempty"`
+		Host       NullableVirtualizationBaseHostRelationship    `json:"Host,omitempty"`
 	}
 
 	varVirtualizationBaseHostPciDeviceWithoutEmbeddedStruct := VirtualizationBaseHostPciDeviceWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varVirtualizationBaseHostPciDeviceWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varVirtualizationBaseHostPciDeviceWithoutEmbeddedStruct)
 	if err == nil {
 		varVirtualizationBaseHostPciDevice := _VirtualizationBaseHostPciDevice{}
 		varVirtualizationBaseHostPciDevice.ClassId = varVirtualizationBaseHostPciDeviceWithoutEmbeddedStruct.ClassId
@@ -782,7 +834,7 @@ func (o *VirtualizationBaseHostPciDevice) UnmarshalJSON(bytes []byte) (err error
 
 	varVirtualizationBaseHostPciDevice := _VirtualizationBaseHostPciDevice{}
 
-	err = json.Unmarshal(bytes, &varVirtualizationBaseHostPciDevice)
+	err = json.Unmarshal(data, &varVirtualizationBaseHostPciDevice)
 	if err == nil {
 		o.VirtualizationBaseSourceDevice = varVirtualizationBaseHostPciDevice.VirtualizationBaseSourceDevice
 	} else {
@@ -791,7 +843,7 @@ func (o *VirtualizationBaseHostPciDevice) UnmarshalJSON(bytes []byte) (err error
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Bus")

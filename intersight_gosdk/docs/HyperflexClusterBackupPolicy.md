@@ -14,9 +14,9 @@ Name | Type | Description | Notes
 **ReplicationPairNamePrefix** | Pointer to **string** | Replication cluster pairing name prefix. | [optional] [default to "backup"]
 **ReplicationSchedule** | Pointer to [**NullableHyperflexReplicationSchedule**](HyperflexReplicationSchedule.md) |  | [optional] 
 **SnapshotRetentionCount** | Pointer to **int64** | Number of snapshots that will be retained as part of the Multi Point in Time support. | [optional] [default to 4]
-**BackupTarget** | Pointer to [**HyperflexClusterRelationship**](HyperflexClusterRelationship.md) |  | [optional] 
+**BackupTarget** | Pointer to [**NullableHyperflexClusterRelationship**](HyperflexClusterRelationship.md) |  | [optional] 
 **ClusterProfiles** | Pointer to [**[]HyperflexClusterProfileRelationship**](HyperflexClusterProfileRelationship.md) | An array of relationships to hyperflexClusterProfile resources. | [optional] 
-**Organization** | Pointer to [**OrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
+**Organization** | Pointer to [**NullableOrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -312,6 +312,16 @@ SetBackupTarget sets BackupTarget field to given value.
 
 HasBackupTarget returns a boolean if a field has been set.
 
+### SetBackupTargetNil
+
+`func (o *HyperflexClusterBackupPolicy) SetBackupTargetNil(b bool)`
+
+ SetBackupTargetNil sets the value for BackupTarget to be an explicit nil
+
+### UnsetBackupTarget
+`func (o *HyperflexClusterBackupPolicy) UnsetBackupTarget()`
+
+UnsetBackupTarget ensures that no value is present for BackupTarget, not even an explicit nil
 ### GetClusterProfiles
 
 `func (o *HyperflexClusterBackupPolicy) GetClusterProfiles() []HyperflexClusterProfileRelationship`
@@ -372,6 +382,16 @@ SetOrganization sets Organization field to given value.
 
 HasOrganization returns a boolean if a field has been set.
 
+### SetOrganizationNil
+
+`func (o *HyperflexClusterBackupPolicy) SetOrganizationNil(b bool)`
+
+ SetOrganizationNil sets the value for Organization to be an explicit nil
+
+### UnsetOrganization
+`func (o *HyperflexClusterBackupPolicy) UnsetOrganization()`
+
+UnsetOrganization ensures that no value is present for Organization, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

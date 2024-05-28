@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the VnicLanConnectivityPolicy type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &VnicLanConnectivityPolicy{}
 
 // VnicLanConnectivityPolicy A LAN Connectivity Policy determines the network resources and the connections between the server and the LAN on the network. This policy uses Consistent Device Naming to configure the vNIC. You can configure a usNIC or VMQ connection for the vNIC to improve network performance.
 type VnicLanConnectivityPolicy struct {
@@ -36,9 +40,9 @@ type VnicLanConnectivityPolicy struct {
 	// Deprecated
 	TargetPlatform *string `json:"TargetPlatform,omitempty"`
 	// An array of relationships to vnicEthIf resources.
-	EthIfs       []VnicEthIfRelationship               `json:"EthIfs,omitempty"`
-	IqnPool      *IqnpoolPoolRelationship              `json:"IqnPool,omitempty"`
-	Organization *OrganizationOrganizationRelationship `json:"Organization,omitempty"`
+	EthIfs       []VnicEthIfRelationship                      `json:"EthIfs,omitempty"`
+	IqnPool      NullableIqnpoolPoolRelationship              `json:"IqnPool,omitempty"`
+	Organization NullableOrganizationOrganizationRelationship `json:"Organization,omitempty"`
 	// An array of relationships to policyAbstractConfigProfile resources.
 	Profiles             []PolicyAbstractConfigProfileRelationship `json:"Profiles,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -135,7 +139,7 @@ func (o *VnicLanConnectivityPolicy) SetObjectType(v string) {
 
 // GetAzureQosEnabled returns the AzureQosEnabled field value if set, zero value otherwise.
 func (o *VnicLanConnectivityPolicy) GetAzureQosEnabled() bool {
-	if o == nil || o.AzureQosEnabled == nil {
+	if o == nil || IsNil(o.AzureQosEnabled) {
 		var ret bool
 		return ret
 	}
@@ -145,7 +149,7 @@ func (o *VnicLanConnectivityPolicy) GetAzureQosEnabled() bool {
 // GetAzureQosEnabledOk returns a tuple with the AzureQosEnabled field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VnicLanConnectivityPolicy) GetAzureQosEnabledOk() (*bool, bool) {
-	if o == nil || o.AzureQosEnabled == nil {
+	if o == nil || IsNil(o.AzureQosEnabled) {
 		return nil, false
 	}
 	return o.AzureQosEnabled, true
@@ -153,7 +157,7 @@ func (o *VnicLanConnectivityPolicy) GetAzureQosEnabledOk() (*bool, bool) {
 
 // HasAzureQosEnabled returns a boolean if a field has been set.
 func (o *VnicLanConnectivityPolicy) HasAzureQosEnabled() bool {
-	if o != nil && o.AzureQosEnabled != nil {
+	if o != nil && !IsNil(o.AzureQosEnabled) {
 		return true
 	}
 
@@ -167,7 +171,7 @@ func (o *VnicLanConnectivityPolicy) SetAzureQosEnabled(v bool) {
 
 // GetIqnAllocationType returns the IqnAllocationType field value if set, zero value otherwise.
 func (o *VnicLanConnectivityPolicy) GetIqnAllocationType() string {
-	if o == nil || o.IqnAllocationType == nil {
+	if o == nil || IsNil(o.IqnAllocationType) {
 		var ret string
 		return ret
 	}
@@ -177,7 +181,7 @@ func (o *VnicLanConnectivityPolicy) GetIqnAllocationType() string {
 // GetIqnAllocationTypeOk returns a tuple with the IqnAllocationType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VnicLanConnectivityPolicy) GetIqnAllocationTypeOk() (*string, bool) {
-	if o == nil || o.IqnAllocationType == nil {
+	if o == nil || IsNil(o.IqnAllocationType) {
 		return nil, false
 	}
 	return o.IqnAllocationType, true
@@ -185,7 +189,7 @@ func (o *VnicLanConnectivityPolicy) GetIqnAllocationTypeOk() (*string, bool) {
 
 // HasIqnAllocationType returns a boolean if a field has been set.
 func (o *VnicLanConnectivityPolicy) HasIqnAllocationType() bool {
-	if o != nil && o.IqnAllocationType != nil {
+	if o != nil && !IsNil(o.IqnAllocationType) {
 		return true
 	}
 
@@ -199,7 +203,7 @@ func (o *VnicLanConnectivityPolicy) SetIqnAllocationType(v string) {
 
 // GetPlacementMode returns the PlacementMode field value if set, zero value otherwise.
 func (o *VnicLanConnectivityPolicy) GetPlacementMode() string {
-	if o == nil || o.PlacementMode == nil {
+	if o == nil || IsNil(o.PlacementMode) {
 		var ret string
 		return ret
 	}
@@ -209,7 +213,7 @@ func (o *VnicLanConnectivityPolicy) GetPlacementMode() string {
 // GetPlacementModeOk returns a tuple with the PlacementMode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VnicLanConnectivityPolicy) GetPlacementModeOk() (*string, bool) {
-	if o == nil || o.PlacementMode == nil {
+	if o == nil || IsNil(o.PlacementMode) {
 		return nil, false
 	}
 	return o.PlacementMode, true
@@ -217,7 +221,7 @@ func (o *VnicLanConnectivityPolicy) GetPlacementModeOk() (*string, bool) {
 
 // HasPlacementMode returns a boolean if a field has been set.
 func (o *VnicLanConnectivityPolicy) HasPlacementMode() bool {
-	if o != nil && o.PlacementMode != nil {
+	if o != nil && !IsNil(o.PlacementMode) {
 		return true
 	}
 
@@ -231,7 +235,7 @@ func (o *VnicLanConnectivityPolicy) SetPlacementMode(v string) {
 
 // GetStaticIqnName returns the StaticIqnName field value if set, zero value otherwise.
 func (o *VnicLanConnectivityPolicy) GetStaticIqnName() string {
-	if o == nil || o.StaticIqnName == nil {
+	if o == nil || IsNil(o.StaticIqnName) {
 		var ret string
 		return ret
 	}
@@ -241,7 +245,7 @@ func (o *VnicLanConnectivityPolicy) GetStaticIqnName() string {
 // GetStaticIqnNameOk returns a tuple with the StaticIqnName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VnicLanConnectivityPolicy) GetStaticIqnNameOk() (*string, bool) {
-	if o == nil || o.StaticIqnName == nil {
+	if o == nil || IsNil(o.StaticIqnName) {
 		return nil, false
 	}
 	return o.StaticIqnName, true
@@ -249,7 +253,7 @@ func (o *VnicLanConnectivityPolicy) GetStaticIqnNameOk() (*string, bool) {
 
 // HasStaticIqnName returns a boolean if a field has been set.
 func (o *VnicLanConnectivityPolicy) HasStaticIqnName() bool {
-	if o != nil && o.StaticIqnName != nil {
+	if o != nil && !IsNil(o.StaticIqnName) {
 		return true
 	}
 
@@ -264,7 +268,7 @@ func (o *VnicLanConnectivityPolicy) SetStaticIqnName(v string) {
 // GetTargetPlatform returns the TargetPlatform field value if set, zero value otherwise.
 // Deprecated
 func (o *VnicLanConnectivityPolicy) GetTargetPlatform() string {
-	if o == nil || o.TargetPlatform == nil {
+	if o == nil || IsNil(o.TargetPlatform) {
 		var ret string
 		return ret
 	}
@@ -275,7 +279,7 @@ func (o *VnicLanConnectivityPolicy) GetTargetPlatform() string {
 // and a boolean to check if the value has been set.
 // Deprecated
 func (o *VnicLanConnectivityPolicy) GetTargetPlatformOk() (*string, bool) {
-	if o == nil || o.TargetPlatform == nil {
+	if o == nil || IsNil(o.TargetPlatform) {
 		return nil, false
 	}
 	return o.TargetPlatform, true
@@ -283,7 +287,7 @@ func (o *VnicLanConnectivityPolicy) GetTargetPlatformOk() (*string, bool) {
 
 // HasTargetPlatform returns a boolean if a field has been set.
 func (o *VnicLanConnectivityPolicy) HasTargetPlatform() bool {
-	if o != nil && o.TargetPlatform != nil {
+	if o != nil && !IsNil(o.TargetPlatform) {
 		return true
 	}
 
@@ -309,7 +313,7 @@ func (o *VnicLanConnectivityPolicy) GetEthIfs() []VnicEthIfRelationship {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *VnicLanConnectivityPolicy) GetEthIfsOk() ([]VnicEthIfRelationship, bool) {
-	if o == nil || o.EthIfs == nil {
+	if o == nil || IsNil(o.EthIfs) {
 		return nil, false
 	}
 	return o.EthIfs, true
@@ -317,7 +321,7 @@ func (o *VnicLanConnectivityPolicy) GetEthIfsOk() ([]VnicEthIfRelationship, bool
 
 // HasEthIfs returns a boolean if a field has been set.
 func (o *VnicLanConnectivityPolicy) HasEthIfs() bool {
-	if o != nil && o.EthIfs != nil {
+	if o != nil && IsNil(o.EthIfs) {
 		return true
 	}
 
@@ -329,68 +333,90 @@ func (o *VnicLanConnectivityPolicy) SetEthIfs(v []VnicEthIfRelationship) {
 	o.EthIfs = v
 }
 
-// GetIqnPool returns the IqnPool field value if set, zero value otherwise.
+// GetIqnPool returns the IqnPool field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *VnicLanConnectivityPolicy) GetIqnPool() IqnpoolPoolRelationship {
-	if o == nil || o.IqnPool == nil {
+	if o == nil || IsNil(o.IqnPool.Get()) {
 		var ret IqnpoolPoolRelationship
 		return ret
 	}
-	return *o.IqnPool
+	return *o.IqnPool.Get()
 }
 
 // GetIqnPoolOk returns a tuple with the IqnPool field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *VnicLanConnectivityPolicy) GetIqnPoolOk() (*IqnpoolPoolRelationship, bool) {
-	if o == nil || o.IqnPool == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.IqnPool, true
+	return o.IqnPool.Get(), o.IqnPool.IsSet()
 }
 
 // HasIqnPool returns a boolean if a field has been set.
 func (o *VnicLanConnectivityPolicy) HasIqnPool() bool {
-	if o != nil && o.IqnPool != nil {
+	if o != nil && o.IqnPool.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetIqnPool gets a reference to the given IqnpoolPoolRelationship and assigns it to the IqnPool field.
+// SetIqnPool gets a reference to the given NullableIqnpoolPoolRelationship and assigns it to the IqnPool field.
 func (o *VnicLanConnectivityPolicy) SetIqnPool(v IqnpoolPoolRelationship) {
-	o.IqnPool = &v
+	o.IqnPool.Set(&v)
 }
 
-// GetOrganization returns the Organization field value if set, zero value otherwise.
+// SetIqnPoolNil sets the value for IqnPool to be an explicit nil
+func (o *VnicLanConnectivityPolicy) SetIqnPoolNil() {
+	o.IqnPool.Set(nil)
+}
+
+// UnsetIqnPool ensures that no value is present for IqnPool, not even an explicit nil
+func (o *VnicLanConnectivityPolicy) UnsetIqnPool() {
+	o.IqnPool.Unset()
+}
+
+// GetOrganization returns the Organization field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *VnicLanConnectivityPolicy) GetOrganization() OrganizationOrganizationRelationship {
-	if o == nil || o.Organization == nil {
+	if o == nil || IsNil(o.Organization.Get()) {
 		var ret OrganizationOrganizationRelationship
 		return ret
 	}
-	return *o.Organization
+	return *o.Organization.Get()
 }
 
 // GetOrganizationOk returns a tuple with the Organization field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *VnicLanConnectivityPolicy) GetOrganizationOk() (*OrganizationOrganizationRelationship, bool) {
-	if o == nil || o.Organization == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Organization, true
+	return o.Organization.Get(), o.Organization.IsSet()
 }
 
 // HasOrganization returns a boolean if a field has been set.
 func (o *VnicLanConnectivityPolicy) HasOrganization() bool {
-	if o != nil && o.Organization != nil {
+	if o != nil && o.Organization.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetOrganization gets a reference to the given OrganizationOrganizationRelationship and assigns it to the Organization field.
+// SetOrganization gets a reference to the given NullableOrganizationOrganizationRelationship and assigns it to the Organization field.
 func (o *VnicLanConnectivityPolicy) SetOrganization(v OrganizationOrganizationRelationship) {
-	o.Organization = &v
+	o.Organization.Set(&v)
+}
+
+// SetOrganizationNil sets the value for Organization to be an explicit nil
+func (o *VnicLanConnectivityPolicy) SetOrganizationNil() {
+	o.Organization.Set(nil)
+}
+
+// UnsetOrganization ensures that no value is present for Organization, not even an explicit nil
+func (o *VnicLanConnectivityPolicy) UnsetOrganization() {
+	o.Organization.Unset()
 }
 
 // GetProfiles returns the Profiles field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -406,7 +432,7 @@ func (o *VnicLanConnectivityPolicy) GetProfiles() []PolicyAbstractConfigProfileR
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *VnicLanConnectivityPolicy) GetProfilesOk() ([]PolicyAbstractConfigProfileRelationship, bool) {
-	if o == nil || o.Profiles == nil {
+	if o == nil || IsNil(o.Profiles) {
 		return nil, false
 	}
 	return o.Profiles, true
@@ -414,7 +440,7 @@ func (o *VnicLanConnectivityPolicy) GetProfilesOk() ([]PolicyAbstractConfigProfi
 
 // HasProfiles returns a boolean if a field has been set.
 func (o *VnicLanConnectivityPolicy) HasProfiles() bool {
-	if o != nil && o.Profiles != nil {
+	if o != nil && IsNil(o.Profiles) {
 		return true
 	}
 
@@ -427,44 +453,48 @@ func (o *VnicLanConnectivityPolicy) SetProfiles(v []PolicyAbstractConfigProfileR
 }
 
 func (o VnicLanConnectivityPolicy) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o VnicLanConnectivityPolicy) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedPolicyAbstractPolicy, errPolicyAbstractPolicy := json.Marshal(o.PolicyAbstractPolicy)
 	if errPolicyAbstractPolicy != nil {
-		return []byte{}, errPolicyAbstractPolicy
+		return map[string]interface{}{}, errPolicyAbstractPolicy
 	}
 	errPolicyAbstractPolicy = json.Unmarshal([]byte(serializedPolicyAbstractPolicy), &toSerialize)
 	if errPolicyAbstractPolicy != nil {
-		return []byte{}, errPolicyAbstractPolicy
+		return map[string]interface{}{}, errPolicyAbstractPolicy
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.AzureQosEnabled != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.AzureQosEnabled) {
 		toSerialize["AzureQosEnabled"] = o.AzureQosEnabled
 	}
-	if o.IqnAllocationType != nil {
+	if !IsNil(o.IqnAllocationType) {
 		toSerialize["IqnAllocationType"] = o.IqnAllocationType
 	}
-	if o.PlacementMode != nil {
+	if !IsNil(o.PlacementMode) {
 		toSerialize["PlacementMode"] = o.PlacementMode
 	}
-	if o.StaticIqnName != nil {
+	if !IsNil(o.StaticIqnName) {
 		toSerialize["StaticIqnName"] = o.StaticIqnName
 	}
-	if o.TargetPlatform != nil {
+	if !IsNil(o.TargetPlatform) {
 		toSerialize["TargetPlatform"] = o.TargetPlatform
 	}
 	if o.EthIfs != nil {
 		toSerialize["EthIfs"] = o.EthIfs
 	}
-	if o.IqnPool != nil {
-		toSerialize["IqnPool"] = o.IqnPool
+	if o.IqnPool.IsSet() {
+		toSerialize["IqnPool"] = o.IqnPool.Get()
 	}
-	if o.Organization != nil {
-		toSerialize["Organization"] = o.Organization
+	if o.Organization.IsSet() {
+		toSerialize["Organization"] = o.Organization.Get()
 	}
 	if o.Profiles != nil {
 		toSerialize["Profiles"] = o.Profiles
@@ -474,10 +504,32 @@ func (o VnicLanConnectivityPolicy) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *VnicLanConnectivityPolicy) UnmarshalJSON(bytes []byte) (err error) {
+func (o *VnicLanConnectivityPolicy) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type VnicLanConnectivityPolicyWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -495,16 +547,16 @@ func (o *VnicLanConnectivityPolicy) UnmarshalJSON(bytes []byte) (err error) {
 		// Deprecated
 		TargetPlatform *string `json:"TargetPlatform,omitempty"`
 		// An array of relationships to vnicEthIf resources.
-		EthIfs       []VnicEthIfRelationship               `json:"EthIfs,omitempty"`
-		IqnPool      *IqnpoolPoolRelationship              `json:"IqnPool,omitempty"`
-		Organization *OrganizationOrganizationRelationship `json:"Organization,omitempty"`
+		EthIfs       []VnicEthIfRelationship                      `json:"EthIfs,omitempty"`
+		IqnPool      NullableIqnpoolPoolRelationship              `json:"IqnPool,omitempty"`
+		Organization NullableOrganizationOrganizationRelationship `json:"Organization,omitempty"`
 		// An array of relationships to policyAbstractConfigProfile resources.
 		Profiles []PolicyAbstractConfigProfileRelationship `json:"Profiles,omitempty"`
 	}
 
 	varVnicLanConnectivityPolicyWithoutEmbeddedStruct := VnicLanConnectivityPolicyWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varVnicLanConnectivityPolicyWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varVnicLanConnectivityPolicyWithoutEmbeddedStruct)
 	if err == nil {
 		varVnicLanConnectivityPolicy := _VnicLanConnectivityPolicy{}
 		varVnicLanConnectivityPolicy.ClassId = varVnicLanConnectivityPolicyWithoutEmbeddedStruct.ClassId
@@ -525,7 +577,7 @@ func (o *VnicLanConnectivityPolicy) UnmarshalJSON(bytes []byte) (err error) {
 
 	varVnicLanConnectivityPolicy := _VnicLanConnectivityPolicy{}
 
-	err = json.Unmarshal(bytes, &varVnicLanConnectivityPolicy)
+	err = json.Unmarshal(data, &varVnicLanConnectivityPolicy)
 	if err == nil {
 		o.PolicyAbstractPolicy = varVnicLanConnectivityPolicy.PolicyAbstractPolicy
 	} else {
@@ -534,7 +586,7 @@ func (o *VnicLanConnectivityPolicy) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "AzureQosEnabled")

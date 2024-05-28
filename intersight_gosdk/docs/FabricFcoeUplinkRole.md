@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "fabric.FcoeUplinkRole"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "fabric.FcoeUplinkRole"]
-**LinkControlPolicy** | Pointer to [**FabricLinkControlPolicyRelationship**](FabricLinkControlPolicyRelationship.md) |  | [optional] 
+**LinkControlPolicy** | Pointer to [**NullableFabricLinkControlPolicyRelationship**](FabricLinkControlPolicyRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -92,6 +92,16 @@ SetLinkControlPolicy sets LinkControlPolicy field to given value.
 
 HasLinkControlPolicy returns a boolean if a field has been set.
 
+### SetLinkControlPolicyNil
+
+`func (o *FabricFcoeUplinkRole) SetLinkControlPolicyNil(b bool)`
+
+ SetLinkControlPolicyNil sets the value for LinkControlPolicy to be an explicit nil
+
+### UnsetLinkControlPolicy
+`func (o *FabricFcoeUplinkRole) UnsetLinkControlPolicy()`
+
+UnsetLinkControlPolicy ensures that no value is present for LinkControlPolicy, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

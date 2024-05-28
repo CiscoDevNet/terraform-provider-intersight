@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "cond.AlarmSuppression"]
 **Description** | Pointer to **string** | User given description on why the suppression is enabled at this entity. | [optional] 
 **Classifications** | Pointer to [**[]CondAlarmClassificationRelationship**](CondAlarmClassificationRelationship.md) | An array of relationships to condAlarmClassification resources. | [optional] 
-**Entity** | Pointer to [**MoBaseMoRelationship**](MoBaseMoRelationship.md) |  | [optional] 
+**Entity** | Pointer to [**NullableMoBaseMoRelationship**](MoBaseMoRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -154,6 +154,16 @@ SetEntity sets Entity field to given value.
 
 HasEntity returns a boolean if a field has been set.
 
+### SetEntityNil
+
+`func (o *CondAlarmSuppression) SetEntityNil(b bool)`
+
+ SetEntityNil sets the value for Entity to be an explicit nil
+
+### UnsetEntity
+`func (o *CondAlarmSuppression) UnsetEntity()`
+
+UnsetEntity ensures that no value is present for Entity, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the PolicyAbstractConfigResultEntry type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &PolicyAbstractConfigResultEntry{}
 
 // PolicyAbstractConfigResultEntry The results details information.
 type PolicyAbstractConfigResultEntry struct {
@@ -109,7 +113,7 @@ func (o *PolicyAbstractConfigResultEntry) SetObjectType(v string) {
 
 // GetCompletedTime returns the CompletedTime field value if set, zero value otherwise.
 func (o *PolicyAbstractConfigResultEntry) GetCompletedTime() string {
-	if o == nil || o.CompletedTime == nil {
+	if o == nil || IsNil(o.CompletedTime) {
 		var ret string
 		return ret
 	}
@@ -119,7 +123,7 @@ func (o *PolicyAbstractConfigResultEntry) GetCompletedTime() string {
 // GetCompletedTimeOk returns a tuple with the CompletedTime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PolicyAbstractConfigResultEntry) GetCompletedTimeOk() (*string, bool) {
-	if o == nil || o.CompletedTime == nil {
+	if o == nil || IsNil(o.CompletedTime) {
 		return nil, false
 	}
 	return o.CompletedTime, true
@@ -127,7 +131,7 @@ func (o *PolicyAbstractConfigResultEntry) GetCompletedTimeOk() (*string, bool) {
 
 // HasCompletedTime returns a boolean if a field has been set.
 func (o *PolicyAbstractConfigResultEntry) HasCompletedTime() bool {
-	if o != nil && o.CompletedTime != nil {
+	if o != nil && !IsNil(o.CompletedTime) {
 		return true
 	}
 
@@ -141,7 +145,7 @@ func (o *PolicyAbstractConfigResultEntry) SetCompletedTime(v string) {
 
 // GetContext returns the Context field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *PolicyAbstractConfigResultEntry) GetContext() PolicyConfigResultContext {
-	if o == nil || o.Context.Get() == nil {
+	if o == nil || IsNil(o.Context.Get()) {
 		var ret PolicyConfigResultContext
 		return ret
 	}
@@ -184,7 +188,7 @@ func (o *PolicyAbstractConfigResultEntry) UnsetContext() {
 
 // GetMessage returns the Message field value if set, zero value otherwise.
 func (o *PolicyAbstractConfigResultEntry) GetMessage() string {
-	if o == nil || o.Message == nil {
+	if o == nil || IsNil(o.Message) {
 		var ret string
 		return ret
 	}
@@ -194,7 +198,7 @@ func (o *PolicyAbstractConfigResultEntry) GetMessage() string {
 // GetMessageOk returns a tuple with the Message field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PolicyAbstractConfigResultEntry) GetMessageOk() (*string, bool) {
-	if o == nil || o.Message == nil {
+	if o == nil || IsNil(o.Message) {
 		return nil, false
 	}
 	return o.Message, true
@@ -202,7 +206,7 @@ func (o *PolicyAbstractConfigResultEntry) GetMessageOk() (*string, bool) {
 
 // HasMessage returns a boolean if a field has been set.
 func (o *PolicyAbstractConfigResultEntry) HasMessage() bool {
-	if o != nil && o.Message != nil {
+	if o != nil && !IsNil(o.Message) {
 		return true
 	}
 
@@ -216,7 +220,7 @@ func (o *PolicyAbstractConfigResultEntry) SetMessage(v string) {
 
 // GetOwnerId returns the OwnerId field value if set, zero value otherwise.
 func (o *PolicyAbstractConfigResultEntry) GetOwnerId() string {
-	if o == nil || o.OwnerId == nil {
+	if o == nil || IsNil(o.OwnerId) {
 		var ret string
 		return ret
 	}
@@ -226,7 +230,7 @@ func (o *PolicyAbstractConfigResultEntry) GetOwnerId() string {
 // GetOwnerIdOk returns a tuple with the OwnerId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PolicyAbstractConfigResultEntry) GetOwnerIdOk() (*string, bool) {
-	if o == nil || o.OwnerId == nil {
+	if o == nil || IsNil(o.OwnerId) {
 		return nil, false
 	}
 	return o.OwnerId, true
@@ -234,7 +238,7 @@ func (o *PolicyAbstractConfigResultEntry) GetOwnerIdOk() (*string, bool) {
 
 // HasOwnerId returns a boolean if a field has been set.
 func (o *PolicyAbstractConfigResultEntry) HasOwnerId() bool {
-	if o != nil && o.OwnerId != nil {
+	if o != nil && !IsNil(o.OwnerId) {
 		return true
 	}
 
@@ -248,7 +252,7 @@ func (o *PolicyAbstractConfigResultEntry) SetOwnerId(v string) {
 
 // GetState returns the State field value if set, zero value otherwise.
 func (o *PolicyAbstractConfigResultEntry) GetState() string {
-	if o == nil || o.State == nil {
+	if o == nil || IsNil(o.State) {
 		var ret string
 		return ret
 	}
@@ -258,7 +262,7 @@ func (o *PolicyAbstractConfigResultEntry) GetState() string {
 // GetStateOk returns a tuple with the State field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PolicyAbstractConfigResultEntry) GetStateOk() (*string, bool) {
-	if o == nil || o.State == nil {
+	if o == nil || IsNil(o.State) {
 		return nil, false
 	}
 	return o.State, true
@@ -266,7 +270,7 @@ func (o *PolicyAbstractConfigResultEntry) GetStateOk() (*string, bool) {
 
 // HasState returns a boolean if a field has been set.
 func (o *PolicyAbstractConfigResultEntry) HasState() bool {
-	if o != nil && o.State != nil {
+	if o != nil && !IsNil(o.State) {
 		return true
 	}
 
@@ -280,7 +284,7 @@ func (o *PolicyAbstractConfigResultEntry) SetState(v string) {
 
 // GetType returns the Type field value if set, zero value otherwise.
 func (o *PolicyAbstractConfigResultEntry) GetType() string {
-	if o == nil || o.Type == nil {
+	if o == nil || IsNil(o.Type) {
 		var ret string
 		return ret
 	}
@@ -290,7 +294,7 @@ func (o *PolicyAbstractConfigResultEntry) GetType() string {
 // GetTypeOk returns a tuple with the Type field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PolicyAbstractConfigResultEntry) GetTypeOk() (*string, bool) {
-	if o == nil || o.Type == nil {
+	if o == nil || IsNil(o.Type) {
 		return nil, false
 	}
 	return o.Type, true
@@ -298,7 +302,7 @@ func (o *PolicyAbstractConfigResultEntry) GetTypeOk() (*string, bool) {
 
 // HasType returns a boolean if a field has been set.
 func (o *PolicyAbstractConfigResultEntry) HasType() bool {
-	if o != nil && o.Type != nil {
+	if o != nil && !IsNil(o.Type) {
 		return true
 	}
 
@@ -311,37 +315,41 @@ func (o *PolicyAbstractConfigResultEntry) SetType(v string) {
 }
 
 func (o PolicyAbstractConfigResultEntry) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o PolicyAbstractConfigResultEntry) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.CompletedTime != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.CompletedTime) {
 		toSerialize["CompletedTime"] = o.CompletedTime
 	}
 	if o.Context.IsSet() {
 		toSerialize["Context"] = o.Context.Get()
 	}
-	if o.Message != nil {
+	if !IsNil(o.Message) {
 		toSerialize["Message"] = o.Message
 	}
-	if o.OwnerId != nil {
+	if !IsNil(o.OwnerId) {
 		toSerialize["OwnerId"] = o.OwnerId
 	}
-	if o.State != nil {
+	if !IsNil(o.State) {
 		toSerialize["State"] = o.State
 	}
-	if o.Type != nil {
+	if !IsNil(o.Type) {
 		toSerialize["Type"] = o.Type
 	}
 
@@ -349,10 +357,32 @@ func (o PolicyAbstractConfigResultEntry) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *PolicyAbstractConfigResultEntry) UnmarshalJSON(bytes []byte) (err error) {
+func (o *PolicyAbstractConfigResultEntry) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type PolicyAbstractConfigResultEntryWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type.
 		ClassId string `json:"ClassId"`
@@ -373,7 +403,7 @@ func (o *PolicyAbstractConfigResultEntry) UnmarshalJSON(bytes []byte) (err error
 
 	varPolicyAbstractConfigResultEntryWithoutEmbeddedStruct := PolicyAbstractConfigResultEntryWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varPolicyAbstractConfigResultEntryWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varPolicyAbstractConfigResultEntryWithoutEmbeddedStruct)
 	if err == nil {
 		varPolicyAbstractConfigResultEntry := _PolicyAbstractConfigResultEntry{}
 		varPolicyAbstractConfigResultEntry.ClassId = varPolicyAbstractConfigResultEntryWithoutEmbeddedStruct.ClassId
@@ -391,7 +421,7 @@ func (o *PolicyAbstractConfigResultEntry) UnmarshalJSON(bytes []byte) (err error
 
 	varPolicyAbstractConfigResultEntry := _PolicyAbstractConfigResultEntry{}
 
-	err = json.Unmarshal(bytes, &varPolicyAbstractConfigResultEntry)
+	err = json.Unmarshal(data, &varPolicyAbstractConfigResultEntry)
 	if err == nil {
 		o.MoBaseMo = varPolicyAbstractConfigResultEntry.MoBaseMo
 	} else {
@@ -400,7 +430,7 @@ func (o *PolicyAbstractConfigResultEntry) UnmarshalJSON(bytes []byte) (err error
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "CompletedTime")

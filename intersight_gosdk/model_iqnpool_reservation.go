@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the IqnpoolReservation type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &IqnpoolReservation{}
 
 // IqnpoolReservation The IQN reservation object, used to hold reserved identity.
 type IqnpoolReservation struct {
@@ -31,12 +35,12 @@ type IqnpoolReservation struct {
 	// Prefix of the IQN address. IQN Address is constructed as <prefix>:<suffix>:<number>.
 	IqnPrefix *string `json:"IqnPrefix,omitempty"`
 	// Suffix of the IQN address. IQN Address is constructed as <prefix>:<suffix>:<number>.
-	IqnSuffix            *string                               `json:"IqnSuffix,omitempty"`
-	Block                *IqnpoolBlockRelationship             `json:"Block,omitempty"`
-	Organization         *OrganizationOrganizationRelationship `json:"Organization,omitempty"`
-	Pool                 *IqnpoolPoolRelationship              `json:"Pool,omitempty"`
-	PoolMember           *IqnpoolPoolMemberRelationship        `json:"PoolMember,omitempty"`
-	Universe             *IqnpoolUniverseRelationship          `json:"Universe,omitempty"`
+	IqnSuffix            *string                                      `json:"IqnSuffix,omitempty"`
+	Block                NullableIqnpoolBlockRelationship             `json:"Block,omitempty"`
+	Organization         NullableOrganizationOrganizationRelationship `json:"Organization,omitempty"`
+	Pool                 NullableIqnpoolPoolRelationship              `json:"Pool,omitempty"`
+	PoolMember           NullableIqnpoolPoolMemberRelationship        `json:"PoolMember,omitempty"`
+	Universe             NullableIqnpoolUniverseRelationship          `json:"Universe,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -117,7 +121,7 @@ func (o *IqnpoolReservation) SetObjectType(v string) {
 
 // GetIdentity returns the Identity field value if set, zero value otherwise.
 func (o *IqnpoolReservation) GetIdentity() string {
-	if o == nil || o.Identity == nil {
+	if o == nil || IsNil(o.Identity) {
 		var ret string
 		return ret
 	}
@@ -127,7 +131,7 @@ func (o *IqnpoolReservation) GetIdentity() string {
 // GetIdentityOk returns a tuple with the Identity field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IqnpoolReservation) GetIdentityOk() (*string, bool) {
-	if o == nil || o.Identity == nil {
+	if o == nil || IsNil(o.Identity) {
 		return nil, false
 	}
 	return o.Identity, true
@@ -135,7 +139,7 @@ func (o *IqnpoolReservation) GetIdentityOk() (*string, bool) {
 
 // HasIdentity returns a boolean if a field has been set.
 func (o *IqnpoolReservation) HasIdentity() bool {
-	if o != nil && o.Identity != nil {
+	if o != nil && !IsNil(o.Identity) {
 		return true
 	}
 
@@ -149,7 +153,7 @@ func (o *IqnpoolReservation) SetIdentity(v string) {
 
 // GetIqnNumber returns the IqnNumber field value if set, zero value otherwise.
 func (o *IqnpoolReservation) GetIqnNumber() int64 {
-	if o == nil || o.IqnNumber == nil {
+	if o == nil || IsNil(o.IqnNumber) {
 		var ret int64
 		return ret
 	}
@@ -159,7 +163,7 @@ func (o *IqnpoolReservation) GetIqnNumber() int64 {
 // GetIqnNumberOk returns a tuple with the IqnNumber field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IqnpoolReservation) GetIqnNumberOk() (*int64, bool) {
-	if o == nil || o.IqnNumber == nil {
+	if o == nil || IsNil(o.IqnNumber) {
 		return nil, false
 	}
 	return o.IqnNumber, true
@@ -167,7 +171,7 @@ func (o *IqnpoolReservation) GetIqnNumberOk() (*int64, bool) {
 
 // HasIqnNumber returns a boolean if a field has been set.
 func (o *IqnpoolReservation) HasIqnNumber() bool {
-	if o != nil && o.IqnNumber != nil {
+	if o != nil && !IsNil(o.IqnNumber) {
 		return true
 	}
 
@@ -181,7 +185,7 @@ func (o *IqnpoolReservation) SetIqnNumber(v int64) {
 
 // GetIqnPrefix returns the IqnPrefix field value if set, zero value otherwise.
 func (o *IqnpoolReservation) GetIqnPrefix() string {
-	if o == nil || o.IqnPrefix == nil {
+	if o == nil || IsNil(o.IqnPrefix) {
 		var ret string
 		return ret
 	}
@@ -191,7 +195,7 @@ func (o *IqnpoolReservation) GetIqnPrefix() string {
 // GetIqnPrefixOk returns a tuple with the IqnPrefix field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IqnpoolReservation) GetIqnPrefixOk() (*string, bool) {
-	if o == nil || o.IqnPrefix == nil {
+	if o == nil || IsNil(o.IqnPrefix) {
 		return nil, false
 	}
 	return o.IqnPrefix, true
@@ -199,7 +203,7 @@ func (o *IqnpoolReservation) GetIqnPrefixOk() (*string, bool) {
 
 // HasIqnPrefix returns a boolean if a field has been set.
 func (o *IqnpoolReservation) HasIqnPrefix() bool {
-	if o != nil && o.IqnPrefix != nil {
+	if o != nil && !IsNil(o.IqnPrefix) {
 		return true
 	}
 
@@ -213,7 +217,7 @@ func (o *IqnpoolReservation) SetIqnPrefix(v string) {
 
 // GetIqnSuffix returns the IqnSuffix field value if set, zero value otherwise.
 func (o *IqnpoolReservation) GetIqnSuffix() string {
-	if o == nil || o.IqnSuffix == nil {
+	if o == nil || IsNil(o.IqnSuffix) {
 		var ret string
 		return ret
 	}
@@ -223,7 +227,7 @@ func (o *IqnpoolReservation) GetIqnSuffix() string {
 // GetIqnSuffixOk returns a tuple with the IqnSuffix field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IqnpoolReservation) GetIqnSuffixOk() (*string, bool) {
-	if o == nil || o.IqnSuffix == nil {
+	if o == nil || IsNil(o.IqnSuffix) {
 		return nil, false
 	}
 	return o.IqnSuffix, true
@@ -231,7 +235,7 @@ func (o *IqnpoolReservation) GetIqnSuffixOk() (*string, bool) {
 
 // HasIqnSuffix returns a boolean if a field has been set.
 func (o *IqnpoolReservation) HasIqnSuffix() bool {
-	if o != nil && o.IqnSuffix != nil {
+	if o != nil && !IsNil(o.IqnSuffix) {
 		return true
 	}
 
@@ -243,218 +247,299 @@ func (o *IqnpoolReservation) SetIqnSuffix(v string) {
 	o.IqnSuffix = &v
 }
 
-// GetBlock returns the Block field value if set, zero value otherwise.
+// GetBlock returns the Block field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *IqnpoolReservation) GetBlock() IqnpoolBlockRelationship {
-	if o == nil || o.Block == nil {
+	if o == nil || IsNil(o.Block.Get()) {
 		var ret IqnpoolBlockRelationship
 		return ret
 	}
-	return *o.Block
+	return *o.Block.Get()
 }
 
 // GetBlockOk returns a tuple with the Block field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *IqnpoolReservation) GetBlockOk() (*IqnpoolBlockRelationship, bool) {
-	if o == nil || o.Block == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Block, true
+	return o.Block.Get(), o.Block.IsSet()
 }
 
 // HasBlock returns a boolean if a field has been set.
 func (o *IqnpoolReservation) HasBlock() bool {
-	if o != nil && o.Block != nil {
+	if o != nil && o.Block.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetBlock gets a reference to the given IqnpoolBlockRelationship and assigns it to the Block field.
+// SetBlock gets a reference to the given NullableIqnpoolBlockRelationship and assigns it to the Block field.
 func (o *IqnpoolReservation) SetBlock(v IqnpoolBlockRelationship) {
-	o.Block = &v
+	o.Block.Set(&v)
 }
 
-// GetOrganization returns the Organization field value if set, zero value otherwise.
+// SetBlockNil sets the value for Block to be an explicit nil
+func (o *IqnpoolReservation) SetBlockNil() {
+	o.Block.Set(nil)
+}
+
+// UnsetBlock ensures that no value is present for Block, not even an explicit nil
+func (o *IqnpoolReservation) UnsetBlock() {
+	o.Block.Unset()
+}
+
+// GetOrganization returns the Organization field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *IqnpoolReservation) GetOrganization() OrganizationOrganizationRelationship {
-	if o == nil || o.Organization == nil {
+	if o == nil || IsNil(o.Organization.Get()) {
 		var ret OrganizationOrganizationRelationship
 		return ret
 	}
-	return *o.Organization
+	return *o.Organization.Get()
 }
 
 // GetOrganizationOk returns a tuple with the Organization field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *IqnpoolReservation) GetOrganizationOk() (*OrganizationOrganizationRelationship, bool) {
-	if o == nil || o.Organization == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Organization, true
+	return o.Organization.Get(), o.Organization.IsSet()
 }
 
 // HasOrganization returns a boolean if a field has been set.
 func (o *IqnpoolReservation) HasOrganization() bool {
-	if o != nil && o.Organization != nil {
+	if o != nil && o.Organization.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetOrganization gets a reference to the given OrganizationOrganizationRelationship and assigns it to the Organization field.
+// SetOrganization gets a reference to the given NullableOrganizationOrganizationRelationship and assigns it to the Organization field.
 func (o *IqnpoolReservation) SetOrganization(v OrganizationOrganizationRelationship) {
-	o.Organization = &v
+	o.Organization.Set(&v)
 }
 
-// GetPool returns the Pool field value if set, zero value otherwise.
+// SetOrganizationNil sets the value for Organization to be an explicit nil
+func (o *IqnpoolReservation) SetOrganizationNil() {
+	o.Organization.Set(nil)
+}
+
+// UnsetOrganization ensures that no value is present for Organization, not even an explicit nil
+func (o *IqnpoolReservation) UnsetOrganization() {
+	o.Organization.Unset()
+}
+
+// GetPool returns the Pool field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *IqnpoolReservation) GetPool() IqnpoolPoolRelationship {
-	if o == nil || o.Pool == nil {
+	if o == nil || IsNil(o.Pool.Get()) {
 		var ret IqnpoolPoolRelationship
 		return ret
 	}
-	return *o.Pool
+	return *o.Pool.Get()
 }
 
 // GetPoolOk returns a tuple with the Pool field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *IqnpoolReservation) GetPoolOk() (*IqnpoolPoolRelationship, bool) {
-	if o == nil || o.Pool == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Pool, true
+	return o.Pool.Get(), o.Pool.IsSet()
 }
 
 // HasPool returns a boolean if a field has been set.
 func (o *IqnpoolReservation) HasPool() bool {
-	if o != nil && o.Pool != nil {
+	if o != nil && o.Pool.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetPool gets a reference to the given IqnpoolPoolRelationship and assigns it to the Pool field.
+// SetPool gets a reference to the given NullableIqnpoolPoolRelationship and assigns it to the Pool field.
 func (o *IqnpoolReservation) SetPool(v IqnpoolPoolRelationship) {
-	o.Pool = &v
+	o.Pool.Set(&v)
 }
 
-// GetPoolMember returns the PoolMember field value if set, zero value otherwise.
+// SetPoolNil sets the value for Pool to be an explicit nil
+func (o *IqnpoolReservation) SetPoolNil() {
+	o.Pool.Set(nil)
+}
+
+// UnsetPool ensures that no value is present for Pool, not even an explicit nil
+func (o *IqnpoolReservation) UnsetPool() {
+	o.Pool.Unset()
+}
+
+// GetPoolMember returns the PoolMember field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *IqnpoolReservation) GetPoolMember() IqnpoolPoolMemberRelationship {
-	if o == nil || o.PoolMember == nil {
+	if o == nil || IsNil(o.PoolMember.Get()) {
 		var ret IqnpoolPoolMemberRelationship
 		return ret
 	}
-	return *o.PoolMember
+	return *o.PoolMember.Get()
 }
 
 // GetPoolMemberOk returns a tuple with the PoolMember field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *IqnpoolReservation) GetPoolMemberOk() (*IqnpoolPoolMemberRelationship, bool) {
-	if o == nil || o.PoolMember == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.PoolMember, true
+	return o.PoolMember.Get(), o.PoolMember.IsSet()
 }
 
 // HasPoolMember returns a boolean if a field has been set.
 func (o *IqnpoolReservation) HasPoolMember() bool {
-	if o != nil && o.PoolMember != nil {
+	if o != nil && o.PoolMember.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetPoolMember gets a reference to the given IqnpoolPoolMemberRelationship and assigns it to the PoolMember field.
+// SetPoolMember gets a reference to the given NullableIqnpoolPoolMemberRelationship and assigns it to the PoolMember field.
 func (o *IqnpoolReservation) SetPoolMember(v IqnpoolPoolMemberRelationship) {
-	o.PoolMember = &v
+	o.PoolMember.Set(&v)
 }
 
-// GetUniverse returns the Universe field value if set, zero value otherwise.
+// SetPoolMemberNil sets the value for PoolMember to be an explicit nil
+func (o *IqnpoolReservation) SetPoolMemberNil() {
+	o.PoolMember.Set(nil)
+}
+
+// UnsetPoolMember ensures that no value is present for PoolMember, not even an explicit nil
+func (o *IqnpoolReservation) UnsetPoolMember() {
+	o.PoolMember.Unset()
+}
+
+// GetUniverse returns the Universe field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *IqnpoolReservation) GetUniverse() IqnpoolUniverseRelationship {
-	if o == nil || o.Universe == nil {
+	if o == nil || IsNil(o.Universe.Get()) {
 		var ret IqnpoolUniverseRelationship
 		return ret
 	}
-	return *o.Universe
+	return *o.Universe.Get()
 }
 
 // GetUniverseOk returns a tuple with the Universe field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *IqnpoolReservation) GetUniverseOk() (*IqnpoolUniverseRelationship, bool) {
-	if o == nil || o.Universe == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Universe, true
+	return o.Universe.Get(), o.Universe.IsSet()
 }
 
 // HasUniverse returns a boolean if a field has been set.
 func (o *IqnpoolReservation) HasUniverse() bool {
-	if o != nil && o.Universe != nil {
+	if o != nil && o.Universe.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetUniverse gets a reference to the given IqnpoolUniverseRelationship and assigns it to the Universe field.
+// SetUniverse gets a reference to the given NullableIqnpoolUniverseRelationship and assigns it to the Universe field.
 func (o *IqnpoolReservation) SetUniverse(v IqnpoolUniverseRelationship) {
-	o.Universe = &v
+	o.Universe.Set(&v)
+}
+
+// SetUniverseNil sets the value for Universe to be an explicit nil
+func (o *IqnpoolReservation) SetUniverseNil() {
+	o.Universe.Set(nil)
+}
+
+// UnsetUniverse ensures that no value is present for Universe, not even an explicit nil
+func (o *IqnpoolReservation) UnsetUniverse() {
+	o.Universe.Unset()
 }
 
 func (o IqnpoolReservation) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o IqnpoolReservation) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedPoolReservation, errPoolReservation := json.Marshal(o.PoolReservation)
 	if errPoolReservation != nil {
-		return []byte{}, errPoolReservation
+		return map[string]interface{}{}, errPoolReservation
 	}
 	errPoolReservation = json.Unmarshal([]byte(serializedPoolReservation), &toSerialize)
 	if errPoolReservation != nil {
-		return []byte{}, errPoolReservation
+		return map[string]interface{}{}, errPoolReservation
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Identity != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Identity) {
 		toSerialize["Identity"] = o.Identity
 	}
-	if o.IqnNumber != nil {
+	if !IsNil(o.IqnNumber) {
 		toSerialize["IqnNumber"] = o.IqnNumber
 	}
-	if o.IqnPrefix != nil {
+	if !IsNil(o.IqnPrefix) {
 		toSerialize["IqnPrefix"] = o.IqnPrefix
 	}
-	if o.IqnSuffix != nil {
+	if !IsNil(o.IqnSuffix) {
 		toSerialize["IqnSuffix"] = o.IqnSuffix
 	}
-	if o.Block != nil {
-		toSerialize["Block"] = o.Block
+	if o.Block.IsSet() {
+		toSerialize["Block"] = o.Block.Get()
 	}
-	if o.Organization != nil {
-		toSerialize["Organization"] = o.Organization
+	if o.Organization.IsSet() {
+		toSerialize["Organization"] = o.Organization.Get()
 	}
-	if o.Pool != nil {
-		toSerialize["Pool"] = o.Pool
+	if o.Pool.IsSet() {
+		toSerialize["Pool"] = o.Pool.Get()
 	}
-	if o.PoolMember != nil {
-		toSerialize["PoolMember"] = o.PoolMember
+	if o.PoolMember.IsSet() {
+		toSerialize["PoolMember"] = o.PoolMember.Get()
 	}
-	if o.Universe != nil {
-		toSerialize["Universe"] = o.Universe
+	if o.Universe.IsSet() {
+		toSerialize["Universe"] = o.Universe.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *IqnpoolReservation) UnmarshalJSON(bytes []byte) (err error) {
+func (o *IqnpoolReservation) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type IqnpoolReservationWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -467,17 +552,17 @@ func (o *IqnpoolReservation) UnmarshalJSON(bytes []byte) (err error) {
 		// Prefix of the IQN address. IQN Address is constructed as <prefix>:<suffix>:<number>.
 		IqnPrefix *string `json:"IqnPrefix,omitempty"`
 		// Suffix of the IQN address. IQN Address is constructed as <prefix>:<suffix>:<number>.
-		IqnSuffix    *string                               `json:"IqnSuffix,omitempty"`
-		Block        *IqnpoolBlockRelationship             `json:"Block,omitempty"`
-		Organization *OrganizationOrganizationRelationship `json:"Organization,omitempty"`
-		Pool         *IqnpoolPoolRelationship              `json:"Pool,omitempty"`
-		PoolMember   *IqnpoolPoolMemberRelationship        `json:"PoolMember,omitempty"`
-		Universe     *IqnpoolUniverseRelationship          `json:"Universe,omitempty"`
+		IqnSuffix    *string                                      `json:"IqnSuffix,omitempty"`
+		Block        NullableIqnpoolBlockRelationship             `json:"Block,omitempty"`
+		Organization NullableOrganizationOrganizationRelationship `json:"Organization,omitempty"`
+		Pool         NullableIqnpoolPoolRelationship              `json:"Pool,omitempty"`
+		PoolMember   NullableIqnpoolPoolMemberRelationship        `json:"PoolMember,omitempty"`
+		Universe     NullableIqnpoolUniverseRelationship          `json:"Universe,omitempty"`
 	}
 
 	varIqnpoolReservationWithoutEmbeddedStruct := IqnpoolReservationWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varIqnpoolReservationWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varIqnpoolReservationWithoutEmbeddedStruct)
 	if err == nil {
 		varIqnpoolReservation := _IqnpoolReservation{}
 		varIqnpoolReservation.ClassId = varIqnpoolReservationWithoutEmbeddedStruct.ClassId
@@ -498,7 +583,7 @@ func (o *IqnpoolReservation) UnmarshalJSON(bytes []byte) (err error) {
 
 	varIqnpoolReservation := _IqnpoolReservation{}
 
-	err = json.Unmarshal(bytes, &varIqnpoolReservation)
+	err = json.Unmarshal(data, &varIqnpoolReservation)
 	if err == nil {
 		o.PoolReservation = varIqnpoolReservation.PoolReservation
 	} else {
@@ -507,7 +592,7 @@ func (o *IqnpoolReservation) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Identity")

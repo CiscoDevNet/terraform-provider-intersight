@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the ApplianceGroupStatus type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ApplianceGroupStatus{}
 
 // ApplianceGroupStatus Status of a group of applications.
 type ApplianceGroupStatus struct {
@@ -31,8 +35,8 @@ type ApplianceGroupStatus struct {
 	// The overall API status from this group's applications.
 	OverallStatus *string `json:"OverallStatus,omitempty"`
 	// An array of relationships to applianceAppStatus resources.
-	Apps                 []ApplianceAppStatusRelationship   `json:"Apps,omitempty"`
-	SystemStatus         *ApplianceSystemStatusRelationship `json:"SystemStatus,omitempty"`
+	Apps                 []ApplianceAppStatusRelationship          `json:"Apps,omitempty"`
+	SystemStatus         NullableApplianceSystemStatusRelationship `json:"SystemStatus,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -111,7 +115,7 @@ func (o *ApplianceGroupStatus) SetObjectType(v string) {
 
 // GetDescription returns the Description field value if set, zero value otherwise.
 func (o *ApplianceGroupStatus) GetDescription() string {
-	if o == nil || o.Description == nil {
+	if o == nil || IsNil(o.Description) {
 		var ret string
 		return ret
 	}
@@ -121,7 +125,7 @@ func (o *ApplianceGroupStatus) GetDescription() string {
 // GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceGroupStatus) GetDescriptionOk() (*string, bool) {
-	if o == nil || o.Description == nil {
+	if o == nil || IsNil(o.Description) {
 		return nil, false
 	}
 	return o.Description, true
@@ -129,7 +133,7 @@ func (o *ApplianceGroupStatus) GetDescriptionOk() (*string, bool) {
 
 // HasDescription returns a boolean if a field has been set.
 func (o *ApplianceGroupStatus) HasDescription() bool {
-	if o != nil && o.Description != nil {
+	if o != nil && !IsNil(o.Description) {
 		return true
 	}
 
@@ -143,7 +147,7 @@ func (o *ApplianceGroupStatus) SetDescription(v string) {
 
 // GetGroupName returns the GroupName field value if set, zero value otherwise.
 func (o *ApplianceGroupStatus) GetGroupName() string {
-	if o == nil || o.GroupName == nil {
+	if o == nil || IsNil(o.GroupName) {
 		var ret string
 		return ret
 	}
@@ -153,7 +157,7 @@ func (o *ApplianceGroupStatus) GetGroupName() string {
 // GetGroupNameOk returns a tuple with the GroupName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceGroupStatus) GetGroupNameOk() (*string, bool) {
-	if o == nil || o.GroupName == nil {
+	if o == nil || IsNil(o.GroupName) {
 		return nil, false
 	}
 	return o.GroupName, true
@@ -161,7 +165,7 @@ func (o *ApplianceGroupStatus) GetGroupNameOk() (*string, bool) {
 
 // HasGroupName returns a boolean if a field has been set.
 func (o *ApplianceGroupStatus) HasGroupName() bool {
-	if o != nil && o.GroupName != nil {
+	if o != nil && !IsNil(o.GroupName) {
 		return true
 	}
 
@@ -175,7 +179,7 @@ func (o *ApplianceGroupStatus) SetGroupName(v string) {
 
 // GetOverallStatus returns the OverallStatus field value if set, zero value otherwise.
 func (o *ApplianceGroupStatus) GetOverallStatus() string {
-	if o == nil || o.OverallStatus == nil {
+	if o == nil || IsNil(o.OverallStatus) {
 		var ret string
 		return ret
 	}
@@ -185,7 +189,7 @@ func (o *ApplianceGroupStatus) GetOverallStatus() string {
 // GetOverallStatusOk returns a tuple with the OverallStatus field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceGroupStatus) GetOverallStatusOk() (*string, bool) {
-	if o == nil || o.OverallStatus == nil {
+	if o == nil || IsNil(o.OverallStatus) {
 		return nil, false
 	}
 	return o.OverallStatus, true
@@ -193,7 +197,7 @@ func (o *ApplianceGroupStatus) GetOverallStatusOk() (*string, bool) {
 
 // HasOverallStatus returns a boolean if a field has been set.
 func (o *ApplianceGroupStatus) HasOverallStatus() bool {
-	if o != nil && o.OverallStatus != nil {
+	if o != nil && !IsNil(o.OverallStatus) {
 		return true
 	}
 
@@ -218,7 +222,7 @@ func (o *ApplianceGroupStatus) GetApps() []ApplianceAppStatusRelationship {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ApplianceGroupStatus) GetAppsOk() ([]ApplianceAppStatusRelationship, bool) {
-	if o == nil || o.Apps == nil {
+	if o == nil || IsNil(o.Apps) {
 		return nil, false
 	}
 	return o.Apps, true
@@ -226,7 +230,7 @@ func (o *ApplianceGroupStatus) GetAppsOk() ([]ApplianceAppStatusRelationship, bo
 
 // HasApps returns a boolean if a field has been set.
 func (o *ApplianceGroupStatus) HasApps() bool {
-	if o != nil && o.Apps != nil {
+	if o != nil && IsNil(o.Apps) {
 		return true
 	}
 
@@ -238,78 +242,115 @@ func (o *ApplianceGroupStatus) SetApps(v []ApplianceAppStatusRelationship) {
 	o.Apps = v
 }
 
-// GetSystemStatus returns the SystemStatus field value if set, zero value otherwise.
+// GetSystemStatus returns the SystemStatus field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ApplianceGroupStatus) GetSystemStatus() ApplianceSystemStatusRelationship {
-	if o == nil || o.SystemStatus == nil {
+	if o == nil || IsNil(o.SystemStatus.Get()) {
 		var ret ApplianceSystemStatusRelationship
 		return ret
 	}
-	return *o.SystemStatus
+	return *o.SystemStatus.Get()
 }
 
 // GetSystemStatusOk returns a tuple with the SystemStatus field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ApplianceGroupStatus) GetSystemStatusOk() (*ApplianceSystemStatusRelationship, bool) {
-	if o == nil || o.SystemStatus == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.SystemStatus, true
+	return o.SystemStatus.Get(), o.SystemStatus.IsSet()
 }
 
 // HasSystemStatus returns a boolean if a field has been set.
 func (o *ApplianceGroupStatus) HasSystemStatus() bool {
-	if o != nil && o.SystemStatus != nil {
+	if o != nil && o.SystemStatus.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetSystemStatus gets a reference to the given ApplianceSystemStatusRelationship and assigns it to the SystemStatus field.
+// SetSystemStatus gets a reference to the given NullableApplianceSystemStatusRelationship and assigns it to the SystemStatus field.
 func (o *ApplianceGroupStatus) SetSystemStatus(v ApplianceSystemStatusRelationship) {
-	o.SystemStatus = &v
+	o.SystemStatus.Set(&v)
+}
+
+// SetSystemStatusNil sets the value for SystemStatus to be an explicit nil
+func (o *ApplianceGroupStatus) SetSystemStatusNil() {
+	o.SystemStatus.Set(nil)
+}
+
+// UnsetSystemStatus ensures that no value is present for SystemStatus, not even an explicit nil
+func (o *ApplianceGroupStatus) UnsetSystemStatus() {
+	o.SystemStatus.Unset()
 }
 
 func (o ApplianceGroupStatus) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o ApplianceGroupStatus) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Description != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Description) {
 		toSerialize["Description"] = o.Description
 	}
-	if o.GroupName != nil {
+	if !IsNil(o.GroupName) {
 		toSerialize["GroupName"] = o.GroupName
 	}
-	if o.OverallStatus != nil {
+	if !IsNil(o.OverallStatus) {
 		toSerialize["OverallStatus"] = o.OverallStatus
 	}
 	if o.Apps != nil {
 		toSerialize["Apps"] = o.Apps
 	}
-	if o.SystemStatus != nil {
-		toSerialize["SystemStatus"] = o.SystemStatus
+	if o.SystemStatus.IsSet() {
+		toSerialize["SystemStatus"] = o.SystemStatus.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *ApplianceGroupStatus) UnmarshalJSON(bytes []byte) (err error) {
+func (o *ApplianceGroupStatus) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type ApplianceGroupStatusWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -322,13 +363,13 @@ func (o *ApplianceGroupStatus) UnmarshalJSON(bytes []byte) (err error) {
 		// The overall API status from this group's applications.
 		OverallStatus *string `json:"OverallStatus,omitempty"`
 		// An array of relationships to applianceAppStatus resources.
-		Apps         []ApplianceAppStatusRelationship   `json:"Apps,omitempty"`
-		SystemStatus *ApplianceSystemStatusRelationship `json:"SystemStatus,omitempty"`
+		Apps         []ApplianceAppStatusRelationship          `json:"Apps,omitempty"`
+		SystemStatus NullableApplianceSystemStatusRelationship `json:"SystemStatus,omitempty"`
 	}
 
 	varApplianceGroupStatusWithoutEmbeddedStruct := ApplianceGroupStatusWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varApplianceGroupStatusWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varApplianceGroupStatusWithoutEmbeddedStruct)
 	if err == nil {
 		varApplianceGroupStatus := _ApplianceGroupStatus{}
 		varApplianceGroupStatus.ClassId = varApplianceGroupStatusWithoutEmbeddedStruct.ClassId
@@ -345,7 +386,7 @@ func (o *ApplianceGroupStatus) UnmarshalJSON(bytes []byte) (err error) {
 
 	varApplianceGroupStatus := _ApplianceGroupStatus{}
 
-	err = json.Unmarshal(bytes, &varApplianceGroupStatus)
+	err = json.Unmarshal(data, &varApplianceGroupStatus)
 	if err == nil {
 		o.MoBaseMo = varApplianceGroupStatus.MoBaseMo
 	} else {
@@ -354,7 +395,7 @@ func (o *ApplianceGroupStatus) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Description")

@@ -7,8 +7,8 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "kubernetes.AddonPolicy"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "kubernetes.AddonPolicy"]
 **AddonConfiguration** | Pointer to [**NullableKubernetesAddonConfiguration**](KubernetesAddonConfiguration.md) |  | [optional] 
-**AddonDefinition** | Pointer to [**KubernetesAddonDefinitionRelationship**](KubernetesAddonDefinitionRelationship.md) |  | [optional] 
-**Organization** | Pointer to [**OrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
+**AddonDefinition** | Pointer to [**NullableKubernetesAddonDefinitionRelationship**](KubernetesAddonDefinitionRelationship.md) |  | [optional] 
+**Organization** | Pointer to [**NullableOrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -129,6 +129,16 @@ SetAddonDefinition sets AddonDefinition field to given value.
 
 HasAddonDefinition returns a boolean if a field has been set.
 
+### SetAddonDefinitionNil
+
+`func (o *KubernetesAddonPolicy) SetAddonDefinitionNil(b bool)`
+
+ SetAddonDefinitionNil sets the value for AddonDefinition to be an explicit nil
+
+### UnsetAddonDefinition
+`func (o *KubernetesAddonPolicy) UnsetAddonDefinition()`
+
+UnsetAddonDefinition ensures that no value is present for AddonDefinition, not even an explicit nil
 ### GetOrganization
 
 `func (o *KubernetesAddonPolicy) GetOrganization() OrganizationOrganizationRelationship`
@@ -154,6 +164,16 @@ SetOrganization sets Organization field to given value.
 
 HasOrganization returns a boolean if a field has been set.
 
+### SetOrganizationNil
+
+`func (o *KubernetesAddonPolicy) SetOrganizationNil(b bool)`
+
+ SetOrganizationNil sets the value for Organization to be an explicit nil
+
+### UnsetOrganization
+`func (o *KubernetesAddonPolicy) UnsetOrganization()`
+
+UnsetOrganization ensures that no value is present for Organization, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

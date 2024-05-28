@@ -10,9 +10,9 @@ Name | Type | Description | Notes
 **PolicyPrefix** | Pointer to **string** | Policy prefix for the policies of the imported server profile. | [optional] 
 **PolicyTypes** | Pointer to **[]string** |  | [optional] 
 **ProfileName** | Pointer to **string** | Profile name for the imported server profile. | [optional] 
-**Organization** | Pointer to [**OrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
-**Server** | Pointer to [**ComputeRackUnitRelationship**](ComputeRackUnitRelationship.md) |  | [optional] 
-**ServerProfile** | Pointer to [**ServerProfileRelationship**](ServerProfileRelationship.md) |  | [optional] 
+**Organization** | Pointer to [**NullableOrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
+**Server** | Pointer to [**NullableComputeRackUnitRelationship**](ComputeRackUnitRelationship.md) |  | [optional] 
+**ServerProfile** | Pointer to [**NullableServerProfileRelationship**](ServerProfileRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -208,6 +208,16 @@ SetOrganization sets Organization field to given value.
 
 HasOrganization returns a boolean if a field has been set.
 
+### SetOrganizationNil
+
+`func (o *ServerConfigImport) SetOrganizationNil(b bool)`
+
+ SetOrganizationNil sets the value for Organization to be an explicit nil
+
+### UnsetOrganization
+`func (o *ServerConfigImport) UnsetOrganization()`
+
+UnsetOrganization ensures that no value is present for Organization, not even an explicit nil
 ### GetServer
 
 `func (o *ServerConfigImport) GetServer() ComputeRackUnitRelationship`
@@ -233,6 +243,16 @@ SetServer sets Server field to given value.
 
 HasServer returns a boolean if a field has been set.
 
+### SetServerNil
+
+`func (o *ServerConfigImport) SetServerNil(b bool)`
+
+ SetServerNil sets the value for Server to be an explicit nil
+
+### UnsetServer
+`func (o *ServerConfigImport) UnsetServer()`
+
+UnsetServer ensures that no value is present for Server, not even an explicit nil
 ### GetServerProfile
 
 `func (o *ServerConfigImport) GetServerProfile() ServerProfileRelationship`
@@ -258,6 +278,16 @@ SetServerProfile sets ServerProfile field to given value.
 
 HasServerProfile returns a boolean if a field has been set.
 
+### SetServerProfileNil
+
+`func (o *ServerConfigImport) SetServerProfileNil(b bool)`
+
+ SetServerProfileNil sets the value for ServerProfile to be an explicit nil
+
+### UnsetServerProfile
+`func (o *ServerConfigImport) UnsetServerProfile()`
+
+UnsetServerProfile ensures that no value is present for ServerProfile, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

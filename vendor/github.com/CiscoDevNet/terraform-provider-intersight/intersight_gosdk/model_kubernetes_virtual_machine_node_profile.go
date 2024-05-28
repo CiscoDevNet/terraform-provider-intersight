@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the KubernetesVirtualMachineNodeProfile type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &KubernetesVirtualMachineNodeProfile{}
 
 // KubernetesVirtualMachineNodeProfile A profile specifying configuration settings for a Virtual Machine node. It is auto-generated based on the NodeGroupProfile and VirtualMachineNodePolicy configuration. Users can do operations like Drain, Cordon, Rebuild on a node.
 type KubernetesVirtualMachineNodeProfile struct {
@@ -27,9 +31,9 @@ type KubernetesVirtualMachineNodeProfile struct {
 	Interfaces []KubernetesEthernet `json:"Interfaces,omitempty"`
 	// An array of relationships to ippoolIpLease resources.
 	// Deprecated
-	IpAddresses          []IppoolIpLeaseRelationship               `json:"IpAddresses,omitempty"`
-	NodeIp               *IppoolIpLeaseRelationship                `json:"NodeIp,omitempty"`
-	VirtualMachine       *VirtualizationVirtualMachineRelationship `json:"VirtualMachine,omitempty"`
+	IpAddresses          []IppoolIpLeaseRelationship                      `json:"IpAddresses,omitempty"`
+	NodeIp               NullableIppoolIpLeaseRelationship                `json:"NodeIp,omitempty"`
+	VirtualMachine       NullableVirtualizationVirtualMachineRelationship `json:"VirtualMachine,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -125,7 +129,7 @@ func (o *KubernetesVirtualMachineNodeProfile) GetInterfaces() []KubernetesEthern
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *KubernetesVirtualMachineNodeProfile) GetInterfacesOk() ([]KubernetesEthernet, bool) {
-	if o == nil || o.Interfaces == nil {
+	if o == nil || IsNil(o.Interfaces) {
 		return nil, false
 	}
 	return o.Interfaces, true
@@ -133,7 +137,7 @@ func (o *KubernetesVirtualMachineNodeProfile) GetInterfacesOk() ([]KubernetesEth
 
 // HasInterfaces returns a boolean if a field has been set.
 func (o *KubernetesVirtualMachineNodeProfile) HasInterfaces() bool {
-	if o != nil && o.Interfaces != nil {
+	if o != nil && IsNil(o.Interfaces) {
 		return true
 	}
 
@@ -160,7 +164,7 @@ func (o *KubernetesVirtualMachineNodeProfile) GetIpAddresses() []IppoolIpLeaseRe
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 // Deprecated
 func (o *KubernetesVirtualMachineNodeProfile) GetIpAddressesOk() ([]IppoolIpLeaseRelationship, bool) {
-	if o == nil || o.IpAddresses == nil {
+	if o == nil || IsNil(o.IpAddresses) {
 		return nil, false
 	}
 	return o.IpAddresses, true
@@ -168,7 +172,7 @@ func (o *KubernetesVirtualMachineNodeProfile) GetIpAddressesOk() ([]IppoolIpLeas
 
 // HasIpAddresses returns a boolean if a field has been set.
 func (o *KubernetesVirtualMachineNodeProfile) HasIpAddresses() bool {
-	if o != nil && o.IpAddresses != nil {
+	if o != nil && IsNil(o.IpAddresses) {
 		return true
 	}
 
@@ -181,107 +185,155 @@ func (o *KubernetesVirtualMachineNodeProfile) SetIpAddresses(v []IppoolIpLeaseRe
 	o.IpAddresses = v
 }
 
-// GetNodeIp returns the NodeIp field value if set, zero value otherwise.
+// GetNodeIp returns the NodeIp field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *KubernetesVirtualMachineNodeProfile) GetNodeIp() IppoolIpLeaseRelationship {
-	if o == nil || o.NodeIp == nil {
+	if o == nil || IsNil(o.NodeIp.Get()) {
 		var ret IppoolIpLeaseRelationship
 		return ret
 	}
-	return *o.NodeIp
+	return *o.NodeIp.Get()
 }
 
 // GetNodeIpOk returns a tuple with the NodeIp field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *KubernetesVirtualMachineNodeProfile) GetNodeIpOk() (*IppoolIpLeaseRelationship, bool) {
-	if o == nil || o.NodeIp == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.NodeIp, true
+	return o.NodeIp.Get(), o.NodeIp.IsSet()
 }
 
 // HasNodeIp returns a boolean if a field has been set.
 func (o *KubernetesVirtualMachineNodeProfile) HasNodeIp() bool {
-	if o != nil && o.NodeIp != nil {
+	if o != nil && o.NodeIp.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetNodeIp gets a reference to the given IppoolIpLeaseRelationship and assigns it to the NodeIp field.
+// SetNodeIp gets a reference to the given NullableIppoolIpLeaseRelationship and assigns it to the NodeIp field.
 func (o *KubernetesVirtualMachineNodeProfile) SetNodeIp(v IppoolIpLeaseRelationship) {
-	o.NodeIp = &v
+	o.NodeIp.Set(&v)
 }
 
-// GetVirtualMachine returns the VirtualMachine field value if set, zero value otherwise.
+// SetNodeIpNil sets the value for NodeIp to be an explicit nil
+func (o *KubernetesVirtualMachineNodeProfile) SetNodeIpNil() {
+	o.NodeIp.Set(nil)
+}
+
+// UnsetNodeIp ensures that no value is present for NodeIp, not even an explicit nil
+func (o *KubernetesVirtualMachineNodeProfile) UnsetNodeIp() {
+	o.NodeIp.Unset()
+}
+
+// GetVirtualMachine returns the VirtualMachine field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *KubernetesVirtualMachineNodeProfile) GetVirtualMachine() VirtualizationVirtualMachineRelationship {
-	if o == nil || o.VirtualMachine == nil {
+	if o == nil || IsNil(o.VirtualMachine.Get()) {
 		var ret VirtualizationVirtualMachineRelationship
 		return ret
 	}
-	return *o.VirtualMachine
+	return *o.VirtualMachine.Get()
 }
 
 // GetVirtualMachineOk returns a tuple with the VirtualMachine field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *KubernetesVirtualMachineNodeProfile) GetVirtualMachineOk() (*VirtualizationVirtualMachineRelationship, bool) {
-	if o == nil || o.VirtualMachine == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.VirtualMachine, true
+	return o.VirtualMachine.Get(), o.VirtualMachine.IsSet()
 }
 
 // HasVirtualMachine returns a boolean if a field has been set.
 func (o *KubernetesVirtualMachineNodeProfile) HasVirtualMachine() bool {
-	if o != nil && o.VirtualMachine != nil {
+	if o != nil && o.VirtualMachine.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetVirtualMachine gets a reference to the given VirtualizationVirtualMachineRelationship and assigns it to the VirtualMachine field.
+// SetVirtualMachine gets a reference to the given NullableVirtualizationVirtualMachineRelationship and assigns it to the VirtualMachine field.
 func (o *KubernetesVirtualMachineNodeProfile) SetVirtualMachine(v VirtualizationVirtualMachineRelationship) {
-	o.VirtualMachine = &v
+	o.VirtualMachine.Set(&v)
+}
+
+// SetVirtualMachineNil sets the value for VirtualMachine to be an explicit nil
+func (o *KubernetesVirtualMachineNodeProfile) SetVirtualMachineNil() {
+	o.VirtualMachine.Set(nil)
+}
+
+// UnsetVirtualMachine ensures that no value is present for VirtualMachine, not even an explicit nil
+func (o *KubernetesVirtualMachineNodeProfile) UnsetVirtualMachine() {
+	o.VirtualMachine.Unset()
 }
 
 func (o KubernetesVirtualMachineNodeProfile) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o KubernetesVirtualMachineNodeProfile) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedKubernetesNodeProfile, errKubernetesNodeProfile := json.Marshal(o.KubernetesNodeProfile)
 	if errKubernetesNodeProfile != nil {
-		return []byte{}, errKubernetesNodeProfile
+		return map[string]interface{}{}, errKubernetesNodeProfile
 	}
 	errKubernetesNodeProfile = json.Unmarshal([]byte(serializedKubernetesNodeProfile), &toSerialize)
 	if errKubernetesNodeProfile != nil {
-		return []byte{}, errKubernetesNodeProfile
+		return map[string]interface{}{}, errKubernetesNodeProfile
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
 	if o.Interfaces != nil {
 		toSerialize["Interfaces"] = o.Interfaces
 	}
 	if o.IpAddresses != nil {
 		toSerialize["IpAddresses"] = o.IpAddresses
 	}
-	if o.NodeIp != nil {
-		toSerialize["NodeIp"] = o.NodeIp
+	if o.NodeIp.IsSet() {
+		toSerialize["NodeIp"] = o.NodeIp.Get()
 	}
-	if o.VirtualMachine != nil {
-		toSerialize["VirtualMachine"] = o.VirtualMachine
+	if o.VirtualMachine.IsSet() {
+		toSerialize["VirtualMachine"] = o.VirtualMachine.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *KubernetesVirtualMachineNodeProfile) UnmarshalJSON(bytes []byte) (err error) {
+func (o *KubernetesVirtualMachineNodeProfile) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type KubernetesVirtualMachineNodeProfileWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -290,14 +342,14 @@ func (o *KubernetesVirtualMachineNodeProfile) UnmarshalJSON(bytes []byte) (err e
 		Interfaces []KubernetesEthernet `json:"Interfaces,omitempty"`
 		// An array of relationships to ippoolIpLease resources.
 		// Deprecated
-		IpAddresses    []IppoolIpLeaseRelationship               `json:"IpAddresses,omitempty"`
-		NodeIp         *IppoolIpLeaseRelationship                `json:"NodeIp,omitempty"`
-		VirtualMachine *VirtualizationVirtualMachineRelationship `json:"VirtualMachine,omitempty"`
+		IpAddresses    []IppoolIpLeaseRelationship                      `json:"IpAddresses,omitempty"`
+		NodeIp         NullableIppoolIpLeaseRelationship                `json:"NodeIp,omitempty"`
+		VirtualMachine NullableVirtualizationVirtualMachineRelationship `json:"VirtualMachine,omitempty"`
 	}
 
 	varKubernetesVirtualMachineNodeProfileWithoutEmbeddedStruct := KubernetesVirtualMachineNodeProfileWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varKubernetesVirtualMachineNodeProfileWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varKubernetesVirtualMachineNodeProfileWithoutEmbeddedStruct)
 	if err == nil {
 		varKubernetesVirtualMachineNodeProfile := _KubernetesVirtualMachineNodeProfile{}
 		varKubernetesVirtualMachineNodeProfile.ClassId = varKubernetesVirtualMachineNodeProfileWithoutEmbeddedStruct.ClassId
@@ -313,7 +365,7 @@ func (o *KubernetesVirtualMachineNodeProfile) UnmarshalJSON(bytes []byte) (err e
 
 	varKubernetesVirtualMachineNodeProfile := _KubernetesVirtualMachineNodeProfile{}
 
-	err = json.Unmarshal(bytes, &varKubernetesVirtualMachineNodeProfile)
+	err = json.Unmarshal(data, &varKubernetesVirtualMachineNodeProfile)
 	if err == nil {
 		o.KubernetesNodeProfile = varKubernetesVirtualMachineNodeProfile.KubernetesNodeProfile
 	} else {
@@ -322,7 +374,7 @@ func (o *KubernetesVirtualMachineNodeProfile) UnmarshalJSON(bytes []byte) (err e
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Interfaces")

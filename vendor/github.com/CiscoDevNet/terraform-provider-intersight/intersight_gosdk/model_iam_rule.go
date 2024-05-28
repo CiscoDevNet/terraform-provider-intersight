@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the IamRule type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &IamRule{}
 
 // IamRule Rule stores the information about the IP address. This information is used during the IP address validation of the incoming request.
 type IamRule struct {
@@ -111,7 +115,7 @@ func (o *IamRule) SetObjectType(v string) {
 
 // GetIpV6 returns the IpV6 field value if set, zero value otherwise.
 func (o *IamRule) GetIpV6() bool {
-	if o == nil || o.IpV6 == nil {
+	if o == nil || IsNil(o.IpV6) {
 		var ret bool
 		return ret
 	}
@@ -121,7 +125,7 @@ func (o *IamRule) GetIpV6() bool {
 // GetIpV6Ok returns a tuple with the IpV6 field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IamRule) GetIpV6Ok() (*bool, bool) {
-	if o == nil || o.IpV6 == nil {
+	if o == nil || IsNil(o.IpV6) {
 		return nil, false
 	}
 	return o.IpV6, true
@@ -129,7 +133,7 @@ func (o *IamRule) GetIpV6Ok() (*bool, bool) {
 
 // HasIpV6 returns a boolean if a field has been set.
 func (o *IamRule) HasIpV6() bool {
-	if o != nil && o.IpV6 != nil {
+	if o != nil && !IsNil(o.IpV6) {
 		return true
 	}
 
@@ -143,7 +147,7 @@ func (o *IamRule) SetIpV6(v bool) {
 
 // GetRuleType returns the RuleType field value if set, zero value otherwise.
 func (o *IamRule) GetRuleType() string {
-	if o == nil || o.RuleType == nil {
+	if o == nil || IsNil(o.RuleType) {
 		var ret string
 		return ret
 	}
@@ -153,7 +157,7 @@ func (o *IamRule) GetRuleType() string {
 // GetRuleTypeOk returns a tuple with the RuleType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IamRule) GetRuleTypeOk() (*string, bool) {
-	if o == nil || o.RuleType == nil {
+	if o == nil || IsNil(o.RuleType) {
 		return nil, false
 	}
 	return o.RuleType, true
@@ -161,7 +165,7 @@ func (o *IamRule) GetRuleTypeOk() (*string, bool) {
 
 // HasRuleType returns a boolean if a field has been set.
 func (o *IamRule) HasRuleType() bool {
-	if o != nil && o.RuleType != nil {
+	if o != nil && !IsNil(o.RuleType) {
 		return true
 	}
 
@@ -186,7 +190,7 @@ func (o *IamRule) GetRuleValue() []string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *IamRule) GetRuleValueOk() ([]string, bool) {
-	if o == nil || o.RuleValue == nil {
+	if o == nil || IsNil(o.RuleValue) {
 		return nil, false
 	}
 	return o.RuleValue, true
@@ -194,7 +198,7 @@ func (o *IamRule) GetRuleValueOk() ([]string, bool) {
 
 // HasRuleValue returns a boolean if a field has been set.
 func (o *IamRule) HasRuleValue() bool {
-	if o != nil && o.RuleValue != nil {
+	if o != nil && IsNil(o.RuleValue) {
 		return true
 	}
 
@@ -207,25 +211,29 @@ func (o *IamRule) SetRuleValue(v []string) {
 }
 
 func (o IamRule) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o IamRule) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
 	errMoBaseComplexType = json.Unmarshal([]byte(serializedMoBaseComplexType), &toSerialize)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.IpV6 != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.IpV6) {
 		toSerialize["IpV6"] = o.IpV6
 	}
-	if o.RuleType != nil {
+	if !IsNil(o.RuleType) {
 		toSerialize["RuleType"] = o.RuleType
 	}
 	if o.RuleValue != nil {
@@ -236,10 +244,32 @@ func (o IamRule) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *IamRule) UnmarshalJSON(bytes []byte) (err error) {
+func (o *IamRule) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type IamRuleWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -254,7 +284,7 @@ func (o *IamRule) UnmarshalJSON(bytes []byte) (err error) {
 
 	varIamRuleWithoutEmbeddedStruct := IamRuleWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varIamRuleWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varIamRuleWithoutEmbeddedStruct)
 	if err == nil {
 		varIamRule := _IamRule{}
 		varIamRule.ClassId = varIamRuleWithoutEmbeddedStruct.ClassId
@@ -269,7 +299,7 @@ func (o *IamRule) UnmarshalJSON(bytes []byte) (err error) {
 
 	varIamRule := _IamRule{}
 
-	err = json.Unmarshal(bytes, &varIamRule)
+	err = json.Unmarshal(data, &varIamRule)
 	if err == nil {
 		o.MoBaseComplexType = varIamRule.MoBaseComplexType
 	} else {
@@ -278,7 +308,7 @@ func (o *IamRule) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "IpV6")

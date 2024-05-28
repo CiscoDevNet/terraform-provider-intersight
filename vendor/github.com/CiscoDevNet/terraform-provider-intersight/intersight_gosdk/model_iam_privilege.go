@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the IamPrivilege type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &IamPrivilege{}
 
 // IamPrivilege Privilege represents an action which can be performed in Intersight such as creating server profile, deleting a user etc.
 type IamPrivilege struct {
@@ -33,9 +37,9 @@ type IamPrivilege struct {
 	// The REST API path of the resource corresponding to this privilege. For example /v1/iam/Accounts, /v1/iam/Sessions.
 	RestPath *string `json:"RestPath,omitempty"`
 	// The URL path prefix of the resource corresponding to this privilege. For example /devops/kibana, /devops/grafana etc.
-	UrlPrefix            *string                 `json:"UrlPrefix,omitempty"`
-	Account              *IamAccountRelationship `json:"Account,omitempty"`
-	System               *IamSystemRelationship  `json:"System,omitempty"`
+	UrlPrefix            *string                        `json:"UrlPrefix,omitempty"`
+	Account              NullableIamAccountRelationship `json:"Account,omitempty"`
+	System               NullableIamSystemRelationship  `json:"System,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -114,7 +118,7 @@ func (o *IamPrivilege) SetObjectType(v string) {
 
 // GetHostnamePrefix returns the HostnamePrefix field value if set, zero value otherwise.
 func (o *IamPrivilege) GetHostnamePrefix() string {
-	if o == nil || o.HostnamePrefix == nil {
+	if o == nil || IsNil(o.HostnamePrefix) {
 		var ret string
 		return ret
 	}
@@ -124,7 +128,7 @@ func (o *IamPrivilege) GetHostnamePrefix() string {
 // GetHostnamePrefixOk returns a tuple with the HostnamePrefix field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IamPrivilege) GetHostnamePrefixOk() (*string, bool) {
-	if o == nil || o.HostnamePrefix == nil {
+	if o == nil || IsNil(o.HostnamePrefix) {
 		return nil, false
 	}
 	return o.HostnamePrefix, true
@@ -132,7 +136,7 @@ func (o *IamPrivilege) GetHostnamePrefixOk() (*string, bool) {
 
 // HasHostnamePrefix returns a boolean if a field has been set.
 func (o *IamPrivilege) HasHostnamePrefix() bool {
-	if o != nil && o.HostnamePrefix != nil {
+	if o != nil && !IsNil(o.HostnamePrefix) {
 		return true
 	}
 
@@ -146,7 +150,7 @@ func (o *IamPrivilege) SetHostnamePrefix(v string) {
 
 // GetMethod returns the Method field value if set, zero value otherwise.
 func (o *IamPrivilege) GetMethod() string {
-	if o == nil || o.Method == nil {
+	if o == nil || IsNil(o.Method) {
 		var ret string
 		return ret
 	}
@@ -156,7 +160,7 @@ func (o *IamPrivilege) GetMethod() string {
 // GetMethodOk returns a tuple with the Method field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IamPrivilege) GetMethodOk() (*string, bool) {
-	if o == nil || o.Method == nil {
+	if o == nil || IsNil(o.Method) {
 		return nil, false
 	}
 	return o.Method, true
@@ -164,7 +168,7 @@ func (o *IamPrivilege) GetMethodOk() (*string, bool) {
 
 // HasMethod returns a boolean if a field has been set.
 func (o *IamPrivilege) HasMethod() bool {
-	if o != nil && o.Method != nil {
+	if o != nil && !IsNil(o.Method) {
 		return true
 	}
 
@@ -178,7 +182,7 @@ func (o *IamPrivilege) SetMethod(v string) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *IamPrivilege) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -188,7 +192,7 @@ func (o *IamPrivilege) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IamPrivilege) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -196,7 +200,7 @@ func (o *IamPrivilege) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *IamPrivilege) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -210,7 +214,7 @@ func (o *IamPrivilege) SetName(v string) {
 
 // GetRestPath returns the RestPath field value if set, zero value otherwise.
 func (o *IamPrivilege) GetRestPath() string {
-	if o == nil || o.RestPath == nil {
+	if o == nil || IsNil(o.RestPath) {
 		var ret string
 		return ret
 	}
@@ -220,7 +224,7 @@ func (o *IamPrivilege) GetRestPath() string {
 // GetRestPathOk returns a tuple with the RestPath field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IamPrivilege) GetRestPathOk() (*string, bool) {
-	if o == nil || o.RestPath == nil {
+	if o == nil || IsNil(o.RestPath) {
 		return nil, false
 	}
 	return o.RestPath, true
@@ -228,7 +232,7 @@ func (o *IamPrivilege) GetRestPathOk() (*string, bool) {
 
 // HasRestPath returns a boolean if a field has been set.
 func (o *IamPrivilege) HasRestPath() bool {
-	if o != nil && o.RestPath != nil {
+	if o != nil && !IsNil(o.RestPath) {
 		return true
 	}
 
@@ -242,7 +246,7 @@ func (o *IamPrivilege) SetRestPath(v string) {
 
 // GetUrlPrefix returns the UrlPrefix field value if set, zero value otherwise.
 func (o *IamPrivilege) GetUrlPrefix() string {
-	if o == nil || o.UrlPrefix == nil {
+	if o == nil || IsNil(o.UrlPrefix) {
 		var ret string
 		return ret
 	}
@@ -252,7 +256,7 @@ func (o *IamPrivilege) GetUrlPrefix() string {
 // GetUrlPrefixOk returns a tuple with the UrlPrefix field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IamPrivilege) GetUrlPrefixOk() (*string, bool) {
-	if o == nil || o.UrlPrefix == nil {
+	if o == nil || IsNil(o.UrlPrefix) {
 		return nil, false
 	}
 	return o.UrlPrefix, true
@@ -260,7 +264,7 @@ func (o *IamPrivilege) GetUrlPrefixOk() (*string, bool) {
 
 // HasUrlPrefix returns a boolean if a field has been set.
 func (o *IamPrivilege) HasUrlPrefix() bool {
-	if o != nil && o.UrlPrefix != nil {
+	if o != nil && !IsNil(o.UrlPrefix) {
 		return true
 	}
 
@@ -272,116 +276,164 @@ func (o *IamPrivilege) SetUrlPrefix(v string) {
 	o.UrlPrefix = &v
 }
 
-// GetAccount returns the Account field value if set, zero value otherwise.
+// GetAccount returns the Account field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *IamPrivilege) GetAccount() IamAccountRelationship {
-	if o == nil || o.Account == nil {
+	if o == nil || IsNil(o.Account.Get()) {
 		var ret IamAccountRelationship
 		return ret
 	}
-	return *o.Account
+	return *o.Account.Get()
 }
 
 // GetAccountOk returns a tuple with the Account field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *IamPrivilege) GetAccountOk() (*IamAccountRelationship, bool) {
-	if o == nil || o.Account == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Account, true
+	return o.Account.Get(), o.Account.IsSet()
 }
 
 // HasAccount returns a boolean if a field has been set.
 func (o *IamPrivilege) HasAccount() bool {
-	if o != nil && o.Account != nil {
+	if o != nil && o.Account.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetAccount gets a reference to the given IamAccountRelationship and assigns it to the Account field.
+// SetAccount gets a reference to the given NullableIamAccountRelationship and assigns it to the Account field.
 func (o *IamPrivilege) SetAccount(v IamAccountRelationship) {
-	o.Account = &v
+	o.Account.Set(&v)
 }
 
-// GetSystem returns the System field value if set, zero value otherwise.
+// SetAccountNil sets the value for Account to be an explicit nil
+func (o *IamPrivilege) SetAccountNil() {
+	o.Account.Set(nil)
+}
+
+// UnsetAccount ensures that no value is present for Account, not even an explicit nil
+func (o *IamPrivilege) UnsetAccount() {
+	o.Account.Unset()
+}
+
+// GetSystem returns the System field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *IamPrivilege) GetSystem() IamSystemRelationship {
-	if o == nil || o.System == nil {
+	if o == nil || IsNil(o.System.Get()) {
 		var ret IamSystemRelationship
 		return ret
 	}
-	return *o.System
+	return *o.System.Get()
 }
 
 // GetSystemOk returns a tuple with the System field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *IamPrivilege) GetSystemOk() (*IamSystemRelationship, bool) {
-	if o == nil || o.System == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.System, true
+	return o.System.Get(), o.System.IsSet()
 }
 
 // HasSystem returns a boolean if a field has been set.
 func (o *IamPrivilege) HasSystem() bool {
-	if o != nil && o.System != nil {
+	if o != nil && o.System.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetSystem gets a reference to the given IamSystemRelationship and assigns it to the System field.
+// SetSystem gets a reference to the given NullableIamSystemRelationship and assigns it to the System field.
 func (o *IamPrivilege) SetSystem(v IamSystemRelationship) {
-	o.System = &v
+	o.System.Set(&v)
+}
+
+// SetSystemNil sets the value for System to be an explicit nil
+func (o *IamPrivilege) SetSystemNil() {
+	o.System.Set(nil)
+}
+
+// UnsetSystem ensures that no value is present for System, not even an explicit nil
+func (o *IamPrivilege) UnsetSystem() {
+	o.System.Unset()
 }
 
 func (o IamPrivilege) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o IamPrivilege) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.HostnamePrefix != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.HostnamePrefix) {
 		toSerialize["HostnamePrefix"] = o.HostnamePrefix
 	}
-	if o.Method != nil {
+	if !IsNil(o.Method) {
 		toSerialize["Method"] = o.Method
 	}
-	if o.Name != nil {
+	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
 	}
-	if o.RestPath != nil {
+	if !IsNil(o.RestPath) {
 		toSerialize["RestPath"] = o.RestPath
 	}
-	if o.UrlPrefix != nil {
+	if !IsNil(o.UrlPrefix) {
 		toSerialize["UrlPrefix"] = o.UrlPrefix
 	}
-	if o.Account != nil {
-		toSerialize["Account"] = o.Account
+	if o.Account.IsSet() {
+		toSerialize["Account"] = o.Account.Get()
 	}
-	if o.System != nil {
-		toSerialize["System"] = o.System
+	if o.System.IsSet() {
+		toSerialize["System"] = o.System.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *IamPrivilege) UnmarshalJSON(bytes []byte) (err error) {
+func (o *IamPrivilege) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type IamPrivilegeWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -396,14 +448,14 @@ func (o *IamPrivilege) UnmarshalJSON(bytes []byte) (err error) {
 		// The REST API path of the resource corresponding to this privilege. For example /v1/iam/Accounts, /v1/iam/Sessions.
 		RestPath *string `json:"RestPath,omitempty"`
 		// The URL path prefix of the resource corresponding to this privilege. For example /devops/kibana, /devops/grafana etc.
-		UrlPrefix *string                 `json:"UrlPrefix,omitempty"`
-		Account   *IamAccountRelationship `json:"Account,omitempty"`
-		System    *IamSystemRelationship  `json:"System,omitempty"`
+		UrlPrefix *string                        `json:"UrlPrefix,omitempty"`
+		Account   NullableIamAccountRelationship `json:"Account,omitempty"`
+		System    NullableIamSystemRelationship  `json:"System,omitempty"`
 	}
 
 	varIamPrivilegeWithoutEmbeddedStruct := IamPrivilegeWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varIamPrivilegeWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varIamPrivilegeWithoutEmbeddedStruct)
 	if err == nil {
 		varIamPrivilege := _IamPrivilege{}
 		varIamPrivilege.ClassId = varIamPrivilegeWithoutEmbeddedStruct.ClassId
@@ -422,7 +474,7 @@ func (o *IamPrivilege) UnmarshalJSON(bytes []byte) (err error) {
 
 	varIamPrivilege := _IamPrivilege{}
 
-	err = json.Unmarshal(bytes, &varIamPrivilege)
+	err = json.Unmarshal(data, &varIamPrivilege)
 	if err == nil {
 		o.MoBaseMo = varIamPrivilege.MoBaseMo
 	} else {
@@ -431,7 +483,7 @@ func (o *IamPrivilege) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "HostnamePrefix")

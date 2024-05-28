@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the KvmSession type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &KvmSession{}
 
 // KvmSession Virtual KVM Session that provides Single Sign-On access to the vKVM console of the server. The vKVM access can be direct or can be tunneled by specifying the tunnel to be used for the access.
 type KvmSession struct {
@@ -33,10 +37,10 @@ type KvmSession struct {
 	// Indicates if vKVM SSO is supported on the server.
 	SsoSupported *bool `json:"SsoSupported,omitempty"`
 	// Username used for vKVM access.
-	Username             *string                              `json:"Username,omitempty"`
-	Device               *AssetDeviceRegistrationRelationship `json:"Device,omitempty"`
-	Server               *ComputePhysicalRelationship         `json:"Server,omitempty"`
-	Tunnel               *KvmTunnelRelationship               `json:"Tunnel,omitempty"`
+	Username             *string                                     `json:"Username,omitempty"`
+	Device               NullableAssetDeviceRegistrationRelationship `json:"Device,omitempty"`
+	Server               NullableComputePhysicalRelationship         `json:"Server,omitempty"`
+	Tunnel               NullableKvmTunnelRelationship               `json:"Tunnel,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -117,7 +121,7 @@ func (o *KvmSession) SetObjectType(v string) {
 
 // GetKvmLaunchUrlPath returns the KvmLaunchUrlPath field value if set, zero value otherwise.
 func (o *KvmSession) GetKvmLaunchUrlPath() string {
-	if o == nil || o.KvmLaunchUrlPath == nil {
+	if o == nil || IsNil(o.KvmLaunchUrlPath) {
 		var ret string
 		return ret
 	}
@@ -127,7 +131,7 @@ func (o *KvmSession) GetKvmLaunchUrlPath() string {
 // GetKvmLaunchUrlPathOk returns a tuple with the KvmLaunchUrlPath field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *KvmSession) GetKvmLaunchUrlPathOk() (*string, bool) {
-	if o == nil || o.KvmLaunchUrlPath == nil {
+	if o == nil || IsNil(o.KvmLaunchUrlPath) {
 		return nil, false
 	}
 	return o.KvmLaunchUrlPath, true
@@ -135,7 +139,7 @@ func (o *KvmSession) GetKvmLaunchUrlPathOk() (*string, bool) {
 
 // HasKvmLaunchUrlPath returns a boolean if a field has been set.
 func (o *KvmSession) HasKvmLaunchUrlPath() bool {
-	if o != nil && o.KvmLaunchUrlPath != nil {
+	if o != nil && !IsNil(o.KvmLaunchUrlPath) {
 		return true
 	}
 
@@ -149,7 +153,7 @@ func (o *KvmSession) SetKvmLaunchUrlPath(v string) {
 
 // GetKvmSessionId returns the KvmSessionId field value if set, zero value otherwise.
 func (o *KvmSession) GetKvmSessionId() string {
-	if o == nil || o.KvmSessionId == nil {
+	if o == nil || IsNil(o.KvmSessionId) {
 		var ret string
 		return ret
 	}
@@ -159,7 +163,7 @@ func (o *KvmSession) GetKvmSessionId() string {
 // GetKvmSessionIdOk returns a tuple with the KvmSessionId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *KvmSession) GetKvmSessionIdOk() (*string, bool) {
-	if o == nil || o.KvmSessionId == nil {
+	if o == nil || IsNil(o.KvmSessionId) {
 		return nil, false
 	}
 	return o.KvmSessionId, true
@@ -167,7 +171,7 @@ func (o *KvmSession) GetKvmSessionIdOk() (*string, bool) {
 
 // HasKvmSessionId returns a boolean if a field has been set.
 func (o *KvmSession) HasKvmSessionId() bool {
-	if o != nil && o.KvmSessionId != nil {
+	if o != nil && !IsNil(o.KvmSessionId) {
 		return true
 	}
 
@@ -181,7 +185,7 @@ func (o *KvmSession) SetKvmSessionId(v string) {
 
 // GetOneTimePassword returns the OneTimePassword field value if set, zero value otherwise.
 func (o *KvmSession) GetOneTimePassword() string {
-	if o == nil || o.OneTimePassword == nil {
+	if o == nil || IsNil(o.OneTimePassword) {
 		var ret string
 		return ret
 	}
@@ -191,7 +195,7 @@ func (o *KvmSession) GetOneTimePassword() string {
 // GetOneTimePasswordOk returns a tuple with the OneTimePassword field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *KvmSession) GetOneTimePasswordOk() (*string, bool) {
-	if o == nil || o.OneTimePassword == nil {
+	if o == nil || IsNil(o.OneTimePassword) {
 		return nil, false
 	}
 	return o.OneTimePassword, true
@@ -199,7 +203,7 @@ func (o *KvmSession) GetOneTimePasswordOk() (*string, bool) {
 
 // HasOneTimePassword returns a boolean if a field has been set.
 func (o *KvmSession) HasOneTimePassword() bool {
-	if o != nil && o.OneTimePassword != nil {
+	if o != nil && !IsNil(o.OneTimePassword) {
 		return true
 	}
 
@@ -213,7 +217,7 @@ func (o *KvmSession) SetOneTimePassword(v string) {
 
 // GetSsoSupported returns the SsoSupported field value if set, zero value otherwise.
 func (o *KvmSession) GetSsoSupported() bool {
-	if o == nil || o.SsoSupported == nil {
+	if o == nil || IsNil(o.SsoSupported) {
 		var ret bool
 		return ret
 	}
@@ -223,7 +227,7 @@ func (o *KvmSession) GetSsoSupported() bool {
 // GetSsoSupportedOk returns a tuple with the SsoSupported field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *KvmSession) GetSsoSupportedOk() (*bool, bool) {
-	if o == nil || o.SsoSupported == nil {
+	if o == nil || IsNil(o.SsoSupported) {
 		return nil, false
 	}
 	return o.SsoSupported, true
@@ -231,7 +235,7 @@ func (o *KvmSession) GetSsoSupportedOk() (*bool, bool) {
 
 // HasSsoSupported returns a boolean if a field has been set.
 func (o *KvmSession) HasSsoSupported() bool {
-	if o != nil && o.SsoSupported != nil {
+	if o != nil && !IsNil(o.SsoSupported) {
 		return true
 	}
 
@@ -245,7 +249,7 @@ func (o *KvmSession) SetSsoSupported(v bool) {
 
 // GetUsername returns the Username field value if set, zero value otherwise.
 func (o *KvmSession) GetUsername() string {
-	if o == nil || o.Username == nil {
+	if o == nil || IsNil(o.Username) {
 		var ret string
 		return ret
 	}
@@ -255,7 +259,7 @@ func (o *KvmSession) GetUsername() string {
 // GetUsernameOk returns a tuple with the Username field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *KvmSession) GetUsernameOk() (*string, bool) {
-	if o == nil || o.Username == nil {
+	if o == nil || IsNil(o.Username) {
 		return nil, false
 	}
 	return o.Username, true
@@ -263,7 +267,7 @@ func (o *KvmSession) GetUsernameOk() (*string, bool) {
 
 // HasUsername returns a boolean if a field has been set.
 func (o *KvmSession) HasUsername() bool {
-	if o != nil && o.Username != nil {
+	if o != nil && !IsNil(o.Username) {
 		return true
 	}
 
@@ -275,151 +279,210 @@ func (o *KvmSession) SetUsername(v string) {
 	o.Username = &v
 }
 
-// GetDevice returns the Device field value if set, zero value otherwise.
+// GetDevice returns the Device field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *KvmSession) GetDevice() AssetDeviceRegistrationRelationship {
-	if o == nil || o.Device == nil {
+	if o == nil || IsNil(o.Device.Get()) {
 		var ret AssetDeviceRegistrationRelationship
 		return ret
 	}
-	return *o.Device
+	return *o.Device.Get()
 }
 
 // GetDeviceOk returns a tuple with the Device field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *KvmSession) GetDeviceOk() (*AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.Device == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Device, true
+	return o.Device.Get(), o.Device.IsSet()
 }
 
 // HasDevice returns a boolean if a field has been set.
 func (o *KvmSession) HasDevice() bool {
-	if o != nil && o.Device != nil {
+	if o != nil && o.Device.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetDevice gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the Device field.
+// SetDevice gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the Device field.
 func (o *KvmSession) SetDevice(v AssetDeviceRegistrationRelationship) {
-	o.Device = &v
+	o.Device.Set(&v)
 }
 
-// GetServer returns the Server field value if set, zero value otherwise.
+// SetDeviceNil sets the value for Device to be an explicit nil
+func (o *KvmSession) SetDeviceNil() {
+	o.Device.Set(nil)
+}
+
+// UnsetDevice ensures that no value is present for Device, not even an explicit nil
+func (o *KvmSession) UnsetDevice() {
+	o.Device.Unset()
+}
+
+// GetServer returns the Server field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *KvmSession) GetServer() ComputePhysicalRelationship {
-	if o == nil || o.Server == nil {
+	if o == nil || IsNil(o.Server.Get()) {
 		var ret ComputePhysicalRelationship
 		return ret
 	}
-	return *o.Server
+	return *o.Server.Get()
 }
 
 // GetServerOk returns a tuple with the Server field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *KvmSession) GetServerOk() (*ComputePhysicalRelationship, bool) {
-	if o == nil || o.Server == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Server, true
+	return o.Server.Get(), o.Server.IsSet()
 }
 
 // HasServer returns a boolean if a field has been set.
 func (o *KvmSession) HasServer() bool {
-	if o != nil && o.Server != nil {
+	if o != nil && o.Server.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetServer gets a reference to the given ComputePhysicalRelationship and assigns it to the Server field.
+// SetServer gets a reference to the given NullableComputePhysicalRelationship and assigns it to the Server field.
 func (o *KvmSession) SetServer(v ComputePhysicalRelationship) {
-	o.Server = &v
+	o.Server.Set(&v)
 }
 
-// GetTunnel returns the Tunnel field value if set, zero value otherwise.
+// SetServerNil sets the value for Server to be an explicit nil
+func (o *KvmSession) SetServerNil() {
+	o.Server.Set(nil)
+}
+
+// UnsetServer ensures that no value is present for Server, not even an explicit nil
+func (o *KvmSession) UnsetServer() {
+	o.Server.Unset()
+}
+
+// GetTunnel returns the Tunnel field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *KvmSession) GetTunnel() KvmTunnelRelationship {
-	if o == nil || o.Tunnel == nil {
+	if o == nil || IsNil(o.Tunnel.Get()) {
 		var ret KvmTunnelRelationship
 		return ret
 	}
-	return *o.Tunnel
+	return *o.Tunnel.Get()
 }
 
 // GetTunnelOk returns a tuple with the Tunnel field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *KvmSession) GetTunnelOk() (*KvmTunnelRelationship, bool) {
-	if o == nil || o.Tunnel == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Tunnel, true
+	return o.Tunnel.Get(), o.Tunnel.IsSet()
 }
 
 // HasTunnel returns a boolean if a field has been set.
 func (o *KvmSession) HasTunnel() bool {
-	if o != nil && o.Tunnel != nil {
+	if o != nil && o.Tunnel.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetTunnel gets a reference to the given KvmTunnelRelationship and assigns it to the Tunnel field.
+// SetTunnel gets a reference to the given NullableKvmTunnelRelationship and assigns it to the Tunnel field.
 func (o *KvmSession) SetTunnel(v KvmTunnelRelationship) {
-	o.Tunnel = &v
+	o.Tunnel.Set(&v)
+}
+
+// SetTunnelNil sets the value for Tunnel to be an explicit nil
+func (o *KvmSession) SetTunnelNil() {
+	o.Tunnel.Set(nil)
+}
+
+// UnsetTunnel ensures that no value is present for Tunnel, not even an explicit nil
+func (o *KvmSession) UnsetTunnel() {
+	o.Tunnel.Unset()
 }
 
 func (o KvmSession) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o KvmSession) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedSessionAbstractSubSession, errSessionAbstractSubSession := json.Marshal(o.SessionAbstractSubSession)
 	if errSessionAbstractSubSession != nil {
-		return []byte{}, errSessionAbstractSubSession
+		return map[string]interface{}{}, errSessionAbstractSubSession
 	}
 	errSessionAbstractSubSession = json.Unmarshal([]byte(serializedSessionAbstractSubSession), &toSerialize)
 	if errSessionAbstractSubSession != nil {
-		return []byte{}, errSessionAbstractSubSession
+		return map[string]interface{}{}, errSessionAbstractSubSession
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.KvmLaunchUrlPath != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.KvmLaunchUrlPath) {
 		toSerialize["KvmLaunchUrlPath"] = o.KvmLaunchUrlPath
 	}
-	if o.KvmSessionId != nil {
+	if !IsNil(o.KvmSessionId) {
 		toSerialize["KvmSessionId"] = o.KvmSessionId
 	}
-	if o.OneTimePassword != nil {
+	if !IsNil(o.OneTimePassword) {
 		toSerialize["OneTimePassword"] = o.OneTimePassword
 	}
-	if o.SsoSupported != nil {
+	if !IsNil(o.SsoSupported) {
 		toSerialize["SsoSupported"] = o.SsoSupported
 	}
-	if o.Username != nil {
+	if !IsNil(o.Username) {
 		toSerialize["Username"] = o.Username
 	}
-	if o.Device != nil {
-		toSerialize["Device"] = o.Device
+	if o.Device.IsSet() {
+		toSerialize["Device"] = o.Device.Get()
 	}
-	if o.Server != nil {
-		toSerialize["Server"] = o.Server
+	if o.Server.IsSet() {
+		toSerialize["Server"] = o.Server.Get()
 	}
-	if o.Tunnel != nil {
-		toSerialize["Tunnel"] = o.Tunnel
+	if o.Tunnel.IsSet() {
+		toSerialize["Tunnel"] = o.Tunnel.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *KvmSession) UnmarshalJSON(bytes []byte) (err error) {
+func (o *KvmSession) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type KvmSessionWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -434,15 +497,15 @@ func (o *KvmSession) UnmarshalJSON(bytes []byte) (err error) {
 		// Indicates if vKVM SSO is supported on the server.
 		SsoSupported *bool `json:"SsoSupported,omitempty"`
 		// Username used for vKVM access.
-		Username *string                              `json:"Username,omitempty"`
-		Device   *AssetDeviceRegistrationRelationship `json:"Device,omitempty"`
-		Server   *ComputePhysicalRelationship         `json:"Server,omitempty"`
-		Tunnel   *KvmTunnelRelationship               `json:"Tunnel,omitempty"`
+		Username *string                                     `json:"Username,omitempty"`
+		Device   NullableAssetDeviceRegistrationRelationship `json:"Device,omitempty"`
+		Server   NullableComputePhysicalRelationship         `json:"Server,omitempty"`
+		Tunnel   NullableKvmTunnelRelationship               `json:"Tunnel,omitempty"`
 	}
 
 	varKvmSessionWithoutEmbeddedStruct := KvmSessionWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varKvmSessionWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varKvmSessionWithoutEmbeddedStruct)
 	if err == nil {
 		varKvmSession := _KvmSession{}
 		varKvmSession.ClassId = varKvmSessionWithoutEmbeddedStruct.ClassId
@@ -462,7 +525,7 @@ func (o *KvmSession) UnmarshalJSON(bytes []byte) (err error) {
 
 	varKvmSession := _KvmSession{}
 
-	err = json.Unmarshal(bytes, &varKvmSession)
+	err = json.Unmarshal(data, &varKvmSession)
 	if err == nil {
 		o.SessionAbstractSubSession = varKvmSession.SessionAbstractSubSession
 	} else {
@@ -471,7 +534,7 @@ func (o *KvmSession) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "KvmLaunchUrlPath")

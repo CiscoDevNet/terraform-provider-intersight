@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the CloudAwsKeyPair type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &CloudAwsKeyPair{}
 
 // CloudAwsKeyPair Key pair object in AWS inventory. A key pair, consisting of a private key and a public key, is a set of security credentials that are used to prove identity when connecting to an EC2 instance.
 type CloudAwsKeyPair struct {
@@ -27,8 +31,8 @@ type CloudAwsKeyPair struct {
 	// Either the SHA-1 digest of the DER encoded private key or  MD5 public key fingerprint.
 	FingerPrint *string `json:"FingerPrint,omitempty"`
 	// Used in authenticating to the virtual machine .
-	PublicKey            *string                          `json:"PublicKey,omitempty"`
-	AwsBillingUnit       *CloudAwsBillingUnitRelationship `json:"AwsBillingUnit,omitempty"`
+	PublicKey            *string                                 `json:"PublicKey,omitempty"`
+	AwsBillingUnit       NullableCloudAwsBillingUnitRelationship `json:"AwsBillingUnit,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -107,7 +111,7 @@ func (o *CloudAwsKeyPair) SetObjectType(v string) {
 
 // GetFingerPrint returns the FingerPrint field value if set, zero value otherwise.
 func (o *CloudAwsKeyPair) GetFingerPrint() string {
-	if o == nil || o.FingerPrint == nil {
+	if o == nil || IsNil(o.FingerPrint) {
 		var ret string
 		return ret
 	}
@@ -117,7 +121,7 @@ func (o *CloudAwsKeyPair) GetFingerPrint() string {
 // GetFingerPrintOk returns a tuple with the FingerPrint field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudAwsKeyPair) GetFingerPrintOk() (*string, bool) {
-	if o == nil || o.FingerPrint == nil {
+	if o == nil || IsNil(o.FingerPrint) {
 		return nil, false
 	}
 	return o.FingerPrint, true
@@ -125,7 +129,7 @@ func (o *CloudAwsKeyPair) GetFingerPrintOk() (*string, bool) {
 
 // HasFingerPrint returns a boolean if a field has been set.
 func (o *CloudAwsKeyPair) HasFingerPrint() bool {
-	if o != nil && o.FingerPrint != nil {
+	if o != nil && !IsNil(o.FingerPrint) {
 		return true
 	}
 
@@ -139,7 +143,7 @@ func (o *CloudAwsKeyPair) SetFingerPrint(v string) {
 
 // GetPublicKey returns the PublicKey field value if set, zero value otherwise.
 func (o *CloudAwsKeyPair) GetPublicKey() string {
-	if o == nil || o.PublicKey == nil {
+	if o == nil || IsNil(o.PublicKey) {
 		var ret string
 		return ret
 	}
@@ -149,7 +153,7 @@ func (o *CloudAwsKeyPair) GetPublicKey() string {
 // GetPublicKeyOk returns a tuple with the PublicKey field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudAwsKeyPair) GetPublicKeyOk() (*string, bool) {
-	if o == nil || o.PublicKey == nil {
+	if o == nil || IsNil(o.PublicKey) {
 		return nil, false
 	}
 	return o.PublicKey, true
@@ -157,7 +161,7 @@ func (o *CloudAwsKeyPair) GetPublicKeyOk() (*string, bool) {
 
 // HasPublicKey returns a boolean if a field has been set.
 func (o *CloudAwsKeyPair) HasPublicKey() bool {
-	if o != nil && o.PublicKey != nil {
+	if o != nil && !IsNil(o.PublicKey) {
 		return true
 	}
 
@@ -169,72 +173,109 @@ func (o *CloudAwsKeyPair) SetPublicKey(v string) {
 	o.PublicKey = &v
 }
 
-// GetAwsBillingUnit returns the AwsBillingUnit field value if set, zero value otherwise.
+// GetAwsBillingUnit returns the AwsBillingUnit field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CloudAwsKeyPair) GetAwsBillingUnit() CloudAwsBillingUnitRelationship {
-	if o == nil || o.AwsBillingUnit == nil {
+	if o == nil || IsNil(o.AwsBillingUnit.Get()) {
 		var ret CloudAwsBillingUnitRelationship
 		return ret
 	}
-	return *o.AwsBillingUnit
+	return *o.AwsBillingUnit.Get()
 }
 
 // GetAwsBillingUnitOk returns a tuple with the AwsBillingUnit field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CloudAwsKeyPair) GetAwsBillingUnitOk() (*CloudAwsBillingUnitRelationship, bool) {
-	if o == nil || o.AwsBillingUnit == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.AwsBillingUnit, true
+	return o.AwsBillingUnit.Get(), o.AwsBillingUnit.IsSet()
 }
 
 // HasAwsBillingUnit returns a boolean if a field has been set.
 func (o *CloudAwsKeyPair) HasAwsBillingUnit() bool {
-	if o != nil && o.AwsBillingUnit != nil {
+	if o != nil && o.AwsBillingUnit.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetAwsBillingUnit gets a reference to the given CloudAwsBillingUnitRelationship and assigns it to the AwsBillingUnit field.
+// SetAwsBillingUnit gets a reference to the given NullableCloudAwsBillingUnitRelationship and assigns it to the AwsBillingUnit field.
 func (o *CloudAwsKeyPair) SetAwsBillingUnit(v CloudAwsBillingUnitRelationship) {
-	o.AwsBillingUnit = &v
+	o.AwsBillingUnit.Set(&v)
+}
+
+// SetAwsBillingUnitNil sets the value for AwsBillingUnit to be an explicit nil
+func (o *CloudAwsKeyPair) SetAwsBillingUnitNil() {
+	o.AwsBillingUnit.Set(nil)
+}
+
+// UnsetAwsBillingUnit ensures that no value is present for AwsBillingUnit, not even an explicit nil
+func (o *CloudAwsKeyPair) UnsetAwsBillingUnit() {
+	o.AwsBillingUnit.Unset()
 }
 
 func (o CloudAwsKeyPair) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o CloudAwsKeyPair) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedCloudBaseEntity, errCloudBaseEntity := json.Marshal(o.CloudBaseEntity)
 	if errCloudBaseEntity != nil {
-		return []byte{}, errCloudBaseEntity
+		return map[string]interface{}{}, errCloudBaseEntity
 	}
 	errCloudBaseEntity = json.Unmarshal([]byte(serializedCloudBaseEntity), &toSerialize)
 	if errCloudBaseEntity != nil {
-		return []byte{}, errCloudBaseEntity
+		return map[string]interface{}{}, errCloudBaseEntity
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.FingerPrint != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.FingerPrint) {
 		toSerialize["FingerPrint"] = o.FingerPrint
 	}
-	if o.PublicKey != nil {
+	if !IsNil(o.PublicKey) {
 		toSerialize["PublicKey"] = o.PublicKey
 	}
-	if o.AwsBillingUnit != nil {
-		toSerialize["AwsBillingUnit"] = o.AwsBillingUnit
+	if o.AwsBillingUnit.IsSet() {
+		toSerialize["AwsBillingUnit"] = o.AwsBillingUnit.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *CloudAwsKeyPair) UnmarshalJSON(bytes []byte) (err error) {
+func (o *CloudAwsKeyPair) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type CloudAwsKeyPairWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -243,13 +284,13 @@ func (o *CloudAwsKeyPair) UnmarshalJSON(bytes []byte) (err error) {
 		// Either the SHA-1 digest of the DER encoded private key or  MD5 public key fingerprint.
 		FingerPrint *string `json:"FingerPrint,omitempty"`
 		// Used in authenticating to the virtual machine .
-		PublicKey      *string                          `json:"PublicKey,omitempty"`
-		AwsBillingUnit *CloudAwsBillingUnitRelationship `json:"AwsBillingUnit,omitempty"`
+		PublicKey      *string                                 `json:"PublicKey,omitempty"`
+		AwsBillingUnit NullableCloudAwsBillingUnitRelationship `json:"AwsBillingUnit,omitempty"`
 	}
 
 	varCloudAwsKeyPairWithoutEmbeddedStruct := CloudAwsKeyPairWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varCloudAwsKeyPairWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varCloudAwsKeyPairWithoutEmbeddedStruct)
 	if err == nil {
 		varCloudAwsKeyPair := _CloudAwsKeyPair{}
 		varCloudAwsKeyPair.ClassId = varCloudAwsKeyPairWithoutEmbeddedStruct.ClassId
@@ -264,7 +305,7 @@ func (o *CloudAwsKeyPair) UnmarshalJSON(bytes []byte) (err error) {
 
 	varCloudAwsKeyPair := _CloudAwsKeyPair{}
 
-	err = json.Unmarshal(bytes, &varCloudAwsKeyPair)
+	err = json.Unmarshal(data, &varCloudAwsKeyPair)
 	if err == nil {
 		o.CloudBaseEntity = varCloudAwsKeyPair.CloudBaseEntity
 	} else {
@@ -273,7 +314,7 @@ func (o *CloudAwsKeyPair) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "FingerPrint")

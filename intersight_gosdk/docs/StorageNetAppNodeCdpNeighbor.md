@@ -16,7 +16,7 @@ Name | Type | Description | Notes
 **Port** | Pointer to **string** | The port for this CDP neighbor. | [optional] [readonly] 
 **Protocol** | Pointer to **string** | The protocol used for CDP. | [optional] [readonly] 
 **Version** | Pointer to **string** | The version of the operating system running on the CDP neighbor. | [optional] [readonly] 
-**ArrayController** | Pointer to [**StorageNetAppNodeRelationship**](StorageNetAppNodeRelationship.md) |  | [optional] 
+**ArrayController** | Pointer to [**NullableStorageNetAppNodeRelationship**](StorageNetAppNodeRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -362,6 +362,16 @@ SetArrayController sets ArrayController field to given value.
 
 HasArrayController returns a boolean if a field has been set.
 
+### SetArrayControllerNil
+
+`func (o *StorageNetAppNodeCdpNeighbor) SetArrayControllerNil(b bool)`
+
+ SetArrayControllerNil sets the value for ArrayController to be an explicit nil
+
+### UnsetArrayController
+`func (o *StorageNetAppNodeCdpNeighbor) UnsetArrayController()`
+
+UnsetArrayController ensures that no value is present for ArrayController, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

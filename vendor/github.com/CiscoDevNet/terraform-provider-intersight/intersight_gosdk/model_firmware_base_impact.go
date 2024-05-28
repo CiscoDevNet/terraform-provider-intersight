@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the FirmwareBaseImpact type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &FirmwareBaseImpact{}
 
 // FirmwareBaseImpact The abstract entity depicting impact on the endpoint during the upgrade operation.
 type FirmwareBaseImpact struct {
@@ -128,7 +132,7 @@ func (o *FirmwareBaseImpact) SetObjectType(v string) {
 
 // GetComputationError returns the ComputationError field value if set, zero value otherwise.
 func (o *FirmwareBaseImpact) GetComputationError() string {
-	if o == nil || o.ComputationError == nil {
+	if o == nil || IsNil(o.ComputationError) {
 		var ret string
 		return ret
 	}
@@ -138,7 +142,7 @@ func (o *FirmwareBaseImpact) GetComputationError() string {
 // GetComputationErrorOk returns a tuple with the ComputationError field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FirmwareBaseImpact) GetComputationErrorOk() (*string, bool) {
-	if o == nil || o.ComputationError == nil {
+	if o == nil || IsNil(o.ComputationError) {
 		return nil, false
 	}
 	return o.ComputationError, true
@@ -146,7 +150,7 @@ func (o *FirmwareBaseImpact) GetComputationErrorOk() (*string, bool) {
 
 // HasComputationError returns a boolean if a field has been set.
 func (o *FirmwareBaseImpact) HasComputationError() bool {
-	if o != nil && o.ComputationError != nil {
+	if o != nil && !IsNil(o.ComputationError) {
 		return true
 	}
 
@@ -160,7 +164,7 @@ func (o *FirmwareBaseImpact) SetComputationError(v string) {
 
 // GetComputationStatusDetail returns the ComputationStatusDetail field value if set, zero value otherwise.
 func (o *FirmwareBaseImpact) GetComputationStatusDetail() string {
-	if o == nil || o.ComputationStatusDetail == nil {
+	if o == nil || IsNil(o.ComputationStatusDetail) {
 		var ret string
 		return ret
 	}
@@ -170,7 +174,7 @@ func (o *FirmwareBaseImpact) GetComputationStatusDetail() string {
 // GetComputationStatusDetailOk returns a tuple with the ComputationStatusDetail field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FirmwareBaseImpact) GetComputationStatusDetailOk() (*string, bool) {
-	if o == nil || o.ComputationStatusDetail == nil {
+	if o == nil || IsNil(o.ComputationStatusDetail) {
 		return nil, false
 	}
 	return o.ComputationStatusDetail, true
@@ -178,7 +182,7 @@ func (o *FirmwareBaseImpact) GetComputationStatusDetailOk() (*string, bool) {
 
 // HasComputationStatusDetail returns a boolean if a field has been set.
 func (o *FirmwareBaseImpact) HasComputationStatusDetail() bool {
-	if o != nil && o.ComputationStatusDetail != nil {
+	if o != nil && !IsNil(o.ComputationStatusDetail) {
 		return true
 	}
 
@@ -192,7 +196,7 @@ func (o *FirmwareBaseImpact) SetComputationStatusDetail(v string) {
 
 // GetDomainName returns the DomainName field value if set, zero value otherwise.
 func (o *FirmwareBaseImpact) GetDomainName() string {
-	if o == nil || o.DomainName == nil {
+	if o == nil || IsNil(o.DomainName) {
 		var ret string
 		return ret
 	}
@@ -202,7 +206,7 @@ func (o *FirmwareBaseImpact) GetDomainName() string {
 // GetDomainNameOk returns a tuple with the DomainName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FirmwareBaseImpact) GetDomainNameOk() (*string, bool) {
-	if o == nil || o.DomainName == nil {
+	if o == nil || IsNil(o.DomainName) {
 		return nil, false
 	}
 	return o.DomainName, true
@@ -210,7 +214,7 @@ func (o *FirmwareBaseImpact) GetDomainNameOk() (*string, bool) {
 
 // HasDomainName returns a boolean if a field has been set.
 func (o *FirmwareBaseImpact) HasDomainName() bool {
-	if o != nil && o.DomainName != nil {
+	if o != nil && !IsNil(o.DomainName) {
 		return true
 	}
 
@@ -224,7 +228,7 @@ func (o *FirmwareBaseImpact) SetDomainName(v string) {
 
 // GetEndPoint returns the EndPoint field value if set, zero value otherwise.
 func (o *FirmwareBaseImpact) GetEndPoint() string {
-	if o == nil || o.EndPoint == nil {
+	if o == nil || IsNil(o.EndPoint) {
 		var ret string
 		return ret
 	}
@@ -234,7 +238,7 @@ func (o *FirmwareBaseImpact) GetEndPoint() string {
 // GetEndPointOk returns a tuple with the EndPoint field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FirmwareBaseImpact) GetEndPointOk() (*string, bool) {
-	if o == nil || o.EndPoint == nil {
+	if o == nil || IsNil(o.EndPoint) {
 		return nil, false
 	}
 	return o.EndPoint, true
@@ -242,7 +246,7 @@ func (o *FirmwareBaseImpact) GetEndPointOk() (*string, bool) {
 
 // HasEndPoint returns a boolean if a field has been set.
 func (o *FirmwareBaseImpact) HasEndPoint() bool {
-	if o != nil && o.EndPoint != nil {
+	if o != nil && !IsNil(o.EndPoint) {
 		return true
 	}
 
@@ -256,7 +260,7 @@ func (o *FirmwareBaseImpact) SetEndPoint(v string) {
 
 // GetFirmwareVersion returns the FirmwareVersion field value if set, zero value otherwise.
 func (o *FirmwareBaseImpact) GetFirmwareVersion() string {
-	if o == nil || o.FirmwareVersion == nil {
+	if o == nil || IsNil(o.FirmwareVersion) {
 		var ret string
 		return ret
 	}
@@ -266,7 +270,7 @@ func (o *FirmwareBaseImpact) GetFirmwareVersion() string {
 // GetFirmwareVersionOk returns a tuple with the FirmwareVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FirmwareBaseImpact) GetFirmwareVersionOk() (*string, bool) {
-	if o == nil || o.FirmwareVersion == nil {
+	if o == nil || IsNil(o.FirmwareVersion) {
 		return nil, false
 	}
 	return o.FirmwareVersion, true
@@ -274,7 +278,7 @@ func (o *FirmwareBaseImpact) GetFirmwareVersionOk() (*string, bool) {
 
 // HasFirmwareVersion returns a boolean if a field has been set.
 func (o *FirmwareBaseImpact) HasFirmwareVersion() bool {
-	if o != nil && o.FirmwareVersion != nil {
+	if o != nil && !IsNil(o.FirmwareVersion) {
 		return true
 	}
 
@@ -288,7 +292,7 @@ func (o *FirmwareBaseImpact) SetFirmwareVersion(v string) {
 
 // GetImpactType returns the ImpactType field value if set, zero value otherwise.
 func (o *FirmwareBaseImpact) GetImpactType() string {
-	if o == nil || o.ImpactType == nil {
+	if o == nil || IsNil(o.ImpactType) {
 		var ret string
 		return ret
 	}
@@ -298,7 +302,7 @@ func (o *FirmwareBaseImpact) GetImpactType() string {
 // GetImpactTypeOk returns a tuple with the ImpactType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FirmwareBaseImpact) GetImpactTypeOk() (*string, bool) {
-	if o == nil || o.ImpactType == nil {
+	if o == nil || IsNil(o.ImpactType) {
 		return nil, false
 	}
 	return o.ImpactType, true
@@ -306,7 +310,7 @@ func (o *FirmwareBaseImpact) GetImpactTypeOk() (*string, bool) {
 
 // HasImpactType returns a boolean if a field has been set.
 func (o *FirmwareBaseImpact) HasImpactType() bool {
-	if o != nil && o.ImpactType != nil {
+	if o != nil && !IsNil(o.ImpactType) {
 		return true
 	}
 
@@ -320,7 +324,7 @@ func (o *FirmwareBaseImpact) SetImpactType(v string) {
 
 // GetModel returns the Model field value if set, zero value otherwise.
 func (o *FirmwareBaseImpact) GetModel() string {
-	if o == nil || o.Model == nil {
+	if o == nil || IsNil(o.Model) {
 		var ret string
 		return ret
 	}
@@ -330,7 +334,7 @@ func (o *FirmwareBaseImpact) GetModel() string {
 // GetModelOk returns a tuple with the Model field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FirmwareBaseImpact) GetModelOk() (*string, bool) {
-	if o == nil || o.Model == nil {
+	if o == nil || IsNil(o.Model) {
 		return nil, false
 	}
 	return o.Model, true
@@ -338,7 +342,7 @@ func (o *FirmwareBaseImpact) GetModelOk() (*string, bool) {
 
 // HasModel returns a boolean if a field has been set.
 func (o *FirmwareBaseImpact) HasModel() bool {
-	if o != nil && o.Model != nil {
+	if o != nil && !IsNil(o.Model) {
 		return true
 	}
 
@@ -352,7 +356,7 @@ func (o *FirmwareBaseImpact) SetModel(v string) {
 
 // GetTargetFirmwareVersion returns the TargetFirmwareVersion field value if set, zero value otherwise.
 func (o *FirmwareBaseImpact) GetTargetFirmwareVersion() string {
-	if o == nil || o.TargetFirmwareVersion == nil {
+	if o == nil || IsNil(o.TargetFirmwareVersion) {
 		var ret string
 		return ret
 	}
@@ -362,7 +366,7 @@ func (o *FirmwareBaseImpact) GetTargetFirmwareVersion() string {
 // GetTargetFirmwareVersionOk returns a tuple with the TargetFirmwareVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FirmwareBaseImpact) GetTargetFirmwareVersionOk() (*string, bool) {
-	if o == nil || o.TargetFirmwareVersion == nil {
+	if o == nil || IsNil(o.TargetFirmwareVersion) {
 		return nil, false
 	}
 	return o.TargetFirmwareVersion, true
@@ -370,7 +374,7 @@ func (o *FirmwareBaseImpact) GetTargetFirmwareVersionOk() (*string, bool) {
 
 // HasTargetFirmwareVersion returns a boolean if a field has been set.
 func (o *FirmwareBaseImpact) HasTargetFirmwareVersion() bool {
-	if o != nil && o.TargetFirmwareVersion != nil {
+	if o != nil && !IsNil(o.TargetFirmwareVersion) {
 		return true
 	}
 
@@ -384,7 +388,7 @@ func (o *FirmwareBaseImpact) SetTargetFirmwareVersion(v string) {
 
 // GetVersionImpact returns the VersionImpact field value if set, zero value otherwise.
 func (o *FirmwareBaseImpact) GetVersionImpact() string {
-	if o == nil || o.VersionImpact == nil {
+	if o == nil || IsNil(o.VersionImpact) {
 		var ret string
 		return ret
 	}
@@ -394,7 +398,7 @@ func (o *FirmwareBaseImpact) GetVersionImpact() string {
 // GetVersionImpactOk returns a tuple with the VersionImpact field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FirmwareBaseImpact) GetVersionImpactOk() (*string, bool) {
-	if o == nil || o.VersionImpact == nil {
+	if o == nil || IsNil(o.VersionImpact) {
 		return nil, false
 	}
 	return o.VersionImpact, true
@@ -402,7 +406,7 @@ func (o *FirmwareBaseImpact) GetVersionImpactOk() (*string, bool) {
 
 // HasVersionImpact returns a boolean if a field has been set.
 func (o *FirmwareBaseImpact) HasVersionImpact() bool {
-	if o != nil && o.VersionImpact != nil {
+	if o != nil && !IsNil(o.VersionImpact) {
 		return true
 	}
 
@@ -415,46 +419,50 @@ func (o *FirmwareBaseImpact) SetVersionImpact(v string) {
 }
 
 func (o FirmwareBaseImpact) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o FirmwareBaseImpact) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
 	errMoBaseComplexType = json.Unmarshal([]byte(serializedMoBaseComplexType), &toSerialize)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.ComputationError != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.ComputationError) {
 		toSerialize["ComputationError"] = o.ComputationError
 	}
-	if o.ComputationStatusDetail != nil {
+	if !IsNil(o.ComputationStatusDetail) {
 		toSerialize["ComputationStatusDetail"] = o.ComputationStatusDetail
 	}
-	if o.DomainName != nil {
+	if !IsNil(o.DomainName) {
 		toSerialize["DomainName"] = o.DomainName
 	}
-	if o.EndPoint != nil {
+	if !IsNil(o.EndPoint) {
 		toSerialize["EndPoint"] = o.EndPoint
 	}
-	if o.FirmwareVersion != nil {
+	if !IsNil(o.FirmwareVersion) {
 		toSerialize["FirmwareVersion"] = o.FirmwareVersion
 	}
-	if o.ImpactType != nil {
+	if !IsNil(o.ImpactType) {
 		toSerialize["ImpactType"] = o.ImpactType
 	}
-	if o.Model != nil {
+	if !IsNil(o.Model) {
 		toSerialize["Model"] = o.Model
 	}
-	if o.TargetFirmwareVersion != nil {
+	if !IsNil(o.TargetFirmwareVersion) {
 		toSerialize["TargetFirmwareVersion"] = o.TargetFirmwareVersion
 	}
-	if o.VersionImpact != nil {
+	if !IsNil(o.VersionImpact) {
 		toSerialize["VersionImpact"] = o.VersionImpact
 	}
 
@@ -462,10 +470,32 @@ func (o FirmwareBaseImpact) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *FirmwareBaseImpact) UnmarshalJSON(bytes []byte) (err error) {
+func (o *FirmwareBaseImpact) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type FirmwareBaseImpactWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type.
 		ClassId string `json:"ClassId"`
@@ -493,7 +523,7 @@ func (o *FirmwareBaseImpact) UnmarshalJSON(bytes []byte) (err error) {
 
 	varFirmwareBaseImpactWithoutEmbeddedStruct := FirmwareBaseImpactWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varFirmwareBaseImpactWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varFirmwareBaseImpactWithoutEmbeddedStruct)
 	if err == nil {
 		varFirmwareBaseImpact := _FirmwareBaseImpact{}
 		varFirmwareBaseImpact.ClassId = varFirmwareBaseImpactWithoutEmbeddedStruct.ClassId
@@ -514,7 +544,7 @@ func (o *FirmwareBaseImpact) UnmarshalJSON(bytes []byte) (err error) {
 
 	varFirmwareBaseImpact := _FirmwareBaseImpact{}
 
-	err = json.Unmarshal(bytes, &varFirmwareBaseImpact)
+	err = json.Unmarshal(data, &varFirmwareBaseImpact)
 	if err == nil {
 		o.MoBaseComplexType = varFirmwareBaseImpact.MoBaseComplexType
 	} else {
@@ -523,7 +553,7 @@ func (o *FirmwareBaseImpact) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "ComputationError")

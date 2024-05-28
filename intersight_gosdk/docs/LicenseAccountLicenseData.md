@@ -34,18 +34,18 @@ Name | Type | Description | Notes
 **SmartApiSyncStatus** | Pointer to **string** | The detailed error message when there is any smart API sync error related to this account. | [optional] [readonly] 
 **SyncStatus** | Pointer to **string** | Current sync status for the account. | [optional] [readonly] 
 **VirtualAccount** | Pointer to **string** | Name of the virtual account. | [optional] [readonly] 
-**Account** | Pointer to [**IamAccountRelationship**](IamAccountRelationship.md) |  | [optional] 
-**CustomerOp** | Pointer to [**LicenseCustomerOpRelationship**](LicenseCustomerOpRelationship.md) |  | [optional] 
-**IksCustomerOp** | Pointer to [**LicenseIksCustomerOpRelationship**](LicenseIksCustomerOpRelationship.md) |  | [optional] 
-**IksLicenseCount** | Pointer to [**LicenseIksLicenseCountRelationship**](LicenseIksLicenseCountRelationship.md) |  | [optional] 
-**IncCustomerOp** | Pointer to [**LicenseIncCustomerOpRelationship**](LicenseIncCustomerOpRelationship.md) |  | [optional] 
-**IncLicenseCount** | Pointer to [**LicenseIncLicenseCountRelationship**](LicenseIncLicenseCountRelationship.md) |  | [optional] 
-**IwoCustomerOp** | Pointer to [**LicenseIwoCustomerOpRelationship**](LicenseIwoCustomerOpRelationship.md) |  | [optional] 
-**IwoLicenseCount** | Pointer to [**LicenseIwoLicenseCountRelationship**](LicenseIwoLicenseCountRelationship.md) |  | [optional] 
-**LicenseInfoView** | Pointer to [**LicenseLicenseInfoViewRelationship**](LicenseLicenseInfoViewRelationship.md) |  | [optional] 
-**LicenseRegistrationStatus** | Pointer to [**LicenseLicenseRegistrationStatusRelationship**](LicenseLicenseRegistrationStatusRelationship.md) |  | [optional] 
+**Account** | Pointer to [**NullableIamAccountRelationship**](IamAccountRelationship.md) |  | [optional] 
+**CustomerOp** | Pointer to [**NullableLicenseCustomerOpRelationship**](LicenseCustomerOpRelationship.md) |  | [optional] 
+**IksCustomerOp** | Pointer to [**NullableLicenseIksCustomerOpRelationship**](LicenseIksCustomerOpRelationship.md) |  | [optional] 
+**IksLicenseCount** | Pointer to [**NullableLicenseIksLicenseCountRelationship**](LicenseIksLicenseCountRelationship.md) |  | [optional] 
+**IncCustomerOp** | Pointer to [**NullableLicenseIncCustomerOpRelationship**](LicenseIncCustomerOpRelationship.md) |  | [optional] 
+**IncLicenseCount** | Pointer to [**NullableLicenseIncLicenseCountRelationship**](LicenseIncLicenseCountRelationship.md) |  | [optional] 
+**IwoCustomerOp** | Pointer to [**NullableLicenseIwoCustomerOpRelationship**](LicenseIwoCustomerOpRelationship.md) |  | [optional] 
+**IwoLicenseCount** | Pointer to [**NullableLicenseIwoLicenseCountRelationship**](LicenseIwoLicenseCountRelationship.md) |  | [optional] 
+**LicenseInfoView** | Pointer to [**NullableLicenseLicenseInfoViewRelationship**](LicenseLicenseInfoViewRelationship.md) |  | [optional] 
+**LicenseRegistrationStatus** | Pointer to [**NullableLicenseLicenseRegistrationStatusRelationship**](LicenseLicenseRegistrationStatusRelationship.md) |  | [optional] 
 **Licenseinfos** | Pointer to [**[]LicenseLicenseInfoRelationship**](LicenseLicenseInfoRelationship.md) | An array of relationships to licenseLicenseInfo resources. | [optional] 
-**SmartlicenseToken** | Pointer to [**LicenseSmartlicenseTokenRelationship**](LicenseSmartlicenseTokenRelationship.md) |  | [optional] 
+**SmartlicenseToken** | Pointer to [**NullableLicenseSmartlicenseTokenRelationship**](LicenseSmartlicenseTokenRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -831,6 +831,16 @@ SetAccount sets Account field to given value.
 
 HasAccount returns a boolean if a field has been set.
 
+### SetAccountNil
+
+`func (o *LicenseAccountLicenseData) SetAccountNil(b bool)`
+
+ SetAccountNil sets the value for Account to be an explicit nil
+
+### UnsetAccount
+`func (o *LicenseAccountLicenseData) UnsetAccount()`
+
+UnsetAccount ensures that no value is present for Account, not even an explicit nil
 ### GetCustomerOp
 
 `func (o *LicenseAccountLicenseData) GetCustomerOp() LicenseCustomerOpRelationship`
@@ -856,6 +866,16 @@ SetCustomerOp sets CustomerOp field to given value.
 
 HasCustomerOp returns a boolean if a field has been set.
 
+### SetCustomerOpNil
+
+`func (o *LicenseAccountLicenseData) SetCustomerOpNil(b bool)`
+
+ SetCustomerOpNil sets the value for CustomerOp to be an explicit nil
+
+### UnsetCustomerOp
+`func (o *LicenseAccountLicenseData) UnsetCustomerOp()`
+
+UnsetCustomerOp ensures that no value is present for CustomerOp, not even an explicit nil
 ### GetIksCustomerOp
 
 `func (o *LicenseAccountLicenseData) GetIksCustomerOp() LicenseIksCustomerOpRelationship`
@@ -881,6 +901,16 @@ SetIksCustomerOp sets IksCustomerOp field to given value.
 
 HasIksCustomerOp returns a boolean if a field has been set.
 
+### SetIksCustomerOpNil
+
+`func (o *LicenseAccountLicenseData) SetIksCustomerOpNil(b bool)`
+
+ SetIksCustomerOpNil sets the value for IksCustomerOp to be an explicit nil
+
+### UnsetIksCustomerOp
+`func (o *LicenseAccountLicenseData) UnsetIksCustomerOp()`
+
+UnsetIksCustomerOp ensures that no value is present for IksCustomerOp, not even an explicit nil
 ### GetIksLicenseCount
 
 `func (o *LicenseAccountLicenseData) GetIksLicenseCount() LicenseIksLicenseCountRelationship`
@@ -906,6 +936,16 @@ SetIksLicenseCount sets IksLicenseCount field to given value.
 
 HasIksLicenseCount returns a boolean if a field has been set.
 
+### SetIksLicenseCountNil
+
+`func (o *LicenseAccountLicenseData) SetIksLicenseCountNil(b bool)`
+
+ SetIksLicenseCountNil sets the value for IksLicenseCount to be an explicit nil
+
+### UnsetIksLicenseCount
+`func (o *LicenseAccountLicenseData) UnsetIksLicenseCount()`
+
+UnsetIksLicenseCount ensures that no value is present for IksLicenseCount, not even an explicit nil
 ### GetIncCustomerOp
 
 `func (o *LicenseAccountLicenseData) GetIncCustomerOp() LicenseIncCustomerOpRelationship`
@@ -931,6 +971,16 @@ SetIncCustomerOp sets IncCustomerOp field to given value.
 
 HasIncCustomerOp returns a boolean if a field has been set.
 
+### SetIncCustomerOpNil
+
+`func (o *LicenseAccountLicenseData) SetIncCustomerOpNil(b bool)`
+
+ SetIncCustomerOpNil sets the value for IncCustomerOp to be an explicit nil
+
+### UnsetIncCustomerOp
+`func (o *LicenseAccountLicenseData) UnsetIncCustomerOp()`
+
+UnsetIncCustomerOp ensures that no value is present for IncCustomerOp, not even an explicit nil
 ### GetIncLicenseCount
 
 `func (o *LicenseAccountLicenseData) GetIncLicenseCount() LicenseIncLicenseCountRelationship`
@@ -956,6 +1006,16 @@ SetIncLicenseCount sets IncLicenseCount field to given value.
 
 HasIncLicenseCount returns a boolean if a field has been set.
 
+### SetIncLicenseCountNil
+
+`func (o *LicenseAccountLicenseData) SetIncLicenseCountNil(b bool)`
+
+ SetIncLicenseCountNil sets the value for IncLicenseCount to be an explicit nil
+
+### UnsetIncLicenseCount
+`func (o *LicenseAccountLicenseData) UnsetIncLicenseCount()`
+
+UnsetIncLicenseCount ensures that no value is present for IncLicenseCount, not even an explicit nil
 ### GetIwoCustomerOp
 
 `func (o *LicenseAccountLicenseData) GetIwoCustomerOp() LicenseIwoCustomerOpRelationship`
@@ -981,6 +1041,16 @@ SetIwoCustomerOp sets IwoCustomerOp field to given value.
 
 HasIwoCustomerOp returns a boolean if a field has been set.
 
+### SetIwoCustomerOpNil
+
+`func (o *LicenseAccountLicenseData) SetIwoCustomerOpNil(b bool)`
+
+ SetIwoCustomerOpNil sets the value for IwoCustomerOp to be an explicit nil
+
+### UnsetIwoCustomerOp
+`func (o *LicenseAccountLicenseData) UnsetIwoCustomerOp()`
+
+UnsetIwoCustomerOp ensures that no value is present for IwoCustomerOp, not even an explicit nil
 ### GetIwoLicenseCount
 
 `func (o *LicenseAccountLicenseData) GetIwoLicenseCount() LicenseIwoLicenseCountRelationship`
@@ -1006,6 +1076,16 @@ SetIwoLicenseCount sets IwoLicenseCount field to given value.
 
 HasIwoLicenseCount returns a boolean if a field has been set.
 
+### SetIwoLicenseCountNil
+
+`func (o *LicenseAccountLicenseData) SetIwoLicenseCountNil(b bool)`
+
+ SetIwoLicenseCountNil sets the value for IwoLicenseCount to be an explicit nil
+
+### UnsetIwoLicenseCount
+`func (o *LicenseAccountLicenseData) UnsetIwoLicenseCount()`
+
+UnsetIwoLicenseCount ensures that no value is present for IwoLicenseCount, not even an explicit nil
 ### GetLicenseInfoView
 
 `func (o *LicenseAccountLicenseData) GetLicenseInfoView() LicenseLicenseInfoViewRelationship`
@@ -1031,6 +1111,16 @@ SetLicenseInfoView sets LicenseInfoView field to given value.
 
 HasLicenseInfoView returns a boolean if a field has been set.
 
+### SetLicenseInfoViewNil
+
+`func (o *LicenseAccountLicenseData) SetLicenseInfoViewNil(b bool)`
+
+ SetLicenseInfoViewNil sets the value for LicenseInfoView to be an explicit nil
+
+### UnsetLicenseInfoView
+`func (o *LicenseAccountLicenseData) UnsetLicenseInfoView()`
+
+UnsetLicenseInfoView ensures that no value is present for LicenseInfoView, not even an explicit nil
 ### GetLicenseRegistrationStatus
 
 `func (o *LicenseAccountLicenseData) GetLicenseRegistrationStatus() LicenseLicenseRegistrationStatusRelationship`
@@ -1056,6 +1146,16 @@ SetLicenseRegistrationStatus sets LicenseRegistrationStatus field to given value
 
 HasLicenseRegistrationStatus returns a boolean if a field has been set.
 
+### SetLicenseRegistrationStatusNil
+
+`func (o *LicenseAccountLicenseData) SetLicenseRegistrationStatusNil(b bool)`
+
+ SetLicenseRegistrationStatusNil sets the value for LicenseRegistrationStatus to be an explicit nil
+
+### UnsetLicenseRegistrationStatus
+`func (o *LicenseAccountLicenseData) UnsetLicenseRegistrationStatus()`
+
+UnsetLicenseRegistrationStatus ensures that no value is present for LicenseRegistrationStatus, not even an explicit nil
 ### GetLicenseinfos
 
 `func (o *LicenseAccountLicenseData) GetLicenseinfos() []LicenseLicenseInfoRelationship`
@@ -1116,6 +1216,16 @@ SetSmartlicenseToken sets SmartlicenseToken field to given value.
 
 HasSmartlicenseToken returns a boolean if a field has been set.
 
+### SetSmartlicenseTokenNil
+
+`func (o *LicenseAccountLicenseData) SetSmartlicenseTokenNil(b bool)`
+
+ SetSmartlicenseTokenNil sets the value for SmartlicenseToken to be an explicit nil
+
+### UnsetSmartlicenseToken
+`func (o *LicenseAccountLicenseData) UnsetSmartlicenseToken()`
+
+UnsetSmartlicenseToken ensures that no value is present for SmartlicenseToken, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

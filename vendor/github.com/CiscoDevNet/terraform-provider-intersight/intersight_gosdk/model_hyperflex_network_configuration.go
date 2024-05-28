@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the HyperflexNetworkConfiguration type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &HyperflexNetworkConfiguration{}
 
 // HyperflexNetworkConfiguration Network configuration data of the HyperFlex cluster.
 type HyperflexNetworkConfiguration struct {
@@ -124,7 +128,7 @@ func (o *HyperflexNetworkConfiguration) SetObjectType(v string) {
 
 // GetClusterDataIp returns the ClusterDataIp field value if set, zero value otherwise.
 func (o *HyperflexNetworkConfiguration) GetClusterDataIp() string {
-	if o == nil || o.ClusterDataIp == nil {
+	if o == nil || IsNil(o.ClusterDataIp) {
 		var ret string
 		return ret
 	}
@@ -134,7 +138,7 @@ func (o *HyperflexNetworkConfiguration) GetClusterDataIp() string {
 // GetClusterDataIpOk returns a tuple with the ClusterDataIp field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexNetworkConfiguration) GetClusterDataIpOk() (*string, bool) {
-	if o == nil || o.ClusterDataIp == nil {
+	if o == nil || IsNil(o.ClusterDataIp) {
 		return nil, false
 	}
 	return o.ClusterDataIp, true
@@ -142,7 +146,7 @@ func (o *HyperflexNetworkConfiguration) GetClusterDataIpOk() (*string, bool) {
 
 // HasClusterDataIp returns a boolean if a field has been set.
 func (o *HyperflexNetworkConfiguration) HasClusterDataIp() bool {
-	if o != nil && o.ClusterDataIp != nil {
+	if o != nil && !IsNil(o.ClusterDataIp) {
 		return true
 	}
 
@@ -156,7 +160,7 @@ func (o *HyperflexNetworkConfiguration) SetClusterDataIp(v string) {
 
 // GetClusterManagementIp returns the ClusterManagementIp field value if set, zero value otherwise.
 func (o *HyperflexNetworkConfiguration) GetClusterManagementIp() string {
-	if o == nil || o.ClusterManagementIp == nil {
+	if o == nil || IsNil(o.ClusterManagementIp) {
 		var ret string
 		return ret
 	}
@@ -166,7 +170,7 @@ func (o *HyperflexNetworkConfiguration) GetClusterManagementIp() string {
 // GetClusterManagementIpOk returns a tuple with the ClusterManagementIp field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexNetworkConfiguration) GetClusterManagementIpOk() (*string, bool) {
-	if o == nil || o.ClusterManagementIp == nil {
+	if o == nil || IsNil(o.ClusterManagementIp) {
 		return nil, false
 	}
 	return o.ClusterManagementIp, true
@@ -174,7 +178,7 @@ func (o *HyperflexNetworkConfiguration) GetClusterManagementIpOk() (*string, boo
 
 // HasClusterManagementIp returns a boolean if a field has been set.
 func (o *HyperflexNetworkConfiguration) HasClusterManagementIp() bool {
-	if o != nil && o.ClusterManagementIp != nil {
+	if o != nil && !IsNil(o.ClusterManagementIp) {
 		return true
 	}
 
@@ -188,7 +192,7 @@ func (o *HyperflexNetworkConfiguration) SetClusterManagementIp(v string) {
 
 // GetDataDefaultGateway returns the DataDefaultGateway field value if set, zero value otherwise.
 func (o *HyperflexNetworkConfiguration) GetDataDefaultGateway() string {
-	if o == nil || o.DataDefaultGateway == nil {
+	if o == nil || IsNil(o.DataDefaultGateway) {
 		var ret string
 		return ret
 	}
@@ -198,7 +202,7 @@ func (o *HyperflexNetworkConfiguration) GetDataDefaultGateway() string {
 // GetDataDefaultGatewayOk returns a tuple with the DataDefaultGateway field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexNetworkConfiguration) GetDataDefaultGatewayOk() (*string, bool) {
-	if o == nil || o.DataDefaultGateway == nil {
+	if o == nil || IsNil(o.DataDefaultGateway) {
 		return nil, false
 	}
 	return o.DataDefaultGateway, true
@@ -206,7 +210,7 @@ func (o *HyperflexNetworkConfiguration) GetDataDefaultGatewayOk() (*string, bool
 
 // HasDataDefaultGateway returns a boolean if a field has been set.
 func (o *HyperflexNetworkConfiguration) HasDataDefaultGateway() bool {
-	if o != nil && o.DataDefaultGateway != nil {
+	if o != nil && !IsNil(o.DataDefaultGateway) {
 		return true
 	}
 
@@ -220,7 +224,7 @@ func (o *HyperflexNetworkConfiguration) SetDataDefaultGateway(v string) {
 
 // GetDataJumboFrame returns the DataJumboFrame field value if set, zero value otherwise.
 func (o *HyperflexNetworkConfiguration) GetDataJumboFrame() bool {
-	if o == nil || o.DataJumboFrame == nil {
+	if o == nil || IsNil(o.DataJumboFrame) {
 		var ret bool
 		return ret
 	}
@@ -230,7 +234,7 @@ func (o *HyperflexNetworkConfiguration) GetDataJumboFrame() bool {
 // GetDataJumboFrameOk returns a tuple with the DataJumboFrame field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexNetworkConfiguration) GetDataJumboFrameOk() (*bool, bool) {
-	if o == nil || o.DataJumboFrame == nil {
+	if o == nil || IsNil(o.DataJumboFrame) {
 		return nil, false
 	}
 	return o.DataJumboFrame, true
@@ -238,7 +242,7 @@ func (o *HyperflexNetworkConfiguration) GetDataJumboFrameOk() (*bool, bool) {
 
 // HasDataJumboFrame returns a boolean if a field has been set.
 func (o *HyperflexNetworkConfiguration) HasDataJumboFrame() bool {
-	if o != nil && o.DataJumboFrame != nil {
+	if o != nil && !IsNil(o.DataJumboFrame) {
 		return true
 	}
 
@@ -252,7 +256,7 @@ func (o *HyperflexNetworkConfiguration) SetDataJumboFrame(v bool) {
 
 // GetDataSubNetmask returns the DataSubNetmask field value if set, zero value otherwise.
 func (o *HyperflexNetworkConfiguration) GetDataSubNetmask() string {
-	if o == nil || o.DataSubNetmask == nil {
+	if o == nil || IsNil(o.DataSubNetmask) {
 		var ret string
 		return ret
 	}
@@ -262,7 +266,7 @@ func (o *HyperflexNetworkConfiguration) GetDataSubNetmask() string {
 // GetDataSubNetmaskOk returns a tuple with the DataSubNetmask field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexNetworkConfiguration) GetDataSubNetmaskOk() (*string, bool) {
-	if o == nil || o.DataSubNetmask == nil {
+	if o == nil || IsNil(o.DataSubNetmask) {
 		return nil, false
 	}
 	return o.DataSubNetmask, true
@@ -270,7 +274,7 @@ func (o *HyperflexNetworkConfiguration) GetDataSubNetmaskOk() (*string, bool) {
 
 // HasDataSubNetmask returns a boolean if a field has been set.
 func (o *HyperflexNetworkConfiguration) HasDataSubNetmask() bool {
-	if o != nil && o.DataSubNetmask != nil {
+	if o != nil && !IsNil(o.DataSubNetmask) {
 		return true
 	}
 
@@ -284,7 +288,7 @@ func (o *HyperflexNetworkConfiguration) SetDataSubNetmask(v string) {
 
 // GetDataVlanId returns the DataVlanId field value if set, zero value otherwise.
 func (o *HyperflexNetworkConfiguration) GetDataVlanId() int64 {
-	if o == nil || o.DataVlanId == nil {
+	if o == nil || IsNil(o.DataVlanId) {
 		var ret int64
 		return ret
 	}
@@ -294,7 +298,7 @@ func (o *HyperflexNetworkConfiguration) GetDataVlanId() int64 {
 // GetDataVlanIdOk returns a tuple with the DataVlanId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexNetworkConfiguration) GetDataVlanIdOk() (*int64, bool) {
-	if o == nil || o.DataVlanId == nil {
+	if o == nil || IsNil(o.DataVlanId) {
 		return nil, false
 	}
 	return o.DataVlanId, true
@@ -302,7 +306,7 @@ func (o *HyperflexNetworkConfiguration) GetDataVlanIdOk() (*int64, bool) {
 
 // HasDataVlanId returns a boolean if a field has been set.
 func (o *HyperflexNetworkConfiguration) HasDataVlanId() bool {
-	if o != nil && o.DataVlanId != nil {
+	if o != nil && !IsNil(o.DataVlanId) {
 		return true
 	}
 
@@ -316,7 +320,7 @@ func (o *HyperflexNetworkConfiguration) SetDataVlanId(v int64) {
 
 // GetLiveMigrationVlanId returns the LiveMigrationVlanId field value if set, zero value otherwise.
 func (o *HyperflexNetworkConfiguration) GetLiveMigrationVlanId() int64 {
-	if o == nil || o.LiveMigrationVlanId == nil {
+	if o == nil || IsNil(o.LiveMigrationVlanId) {
 		var ret int64
 		return ret
 	}
@@ -326,7 +330,7 @@ func (o *HyperflexNetworkConfiguration) GetLiveMigrationVlanId() int64 {
 // GetLiveMigrationVlanIdOk returns a tuple with the LiveMigrationVlanId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexNetworkConfiguration) GetLiveMigrationVlanIdOk() (*int64, bool) {
-	if o == nil || o.LiveMigrationVlanId == nil {
+	if o == nil || IsNil(o.LiveMigrationVlanId) {
 		return nil, false
 	}
 	return o.LiveMigrationVlanId, true
@@ -334,7 +338,7 @@ func (o *HyperflexNetworkConfiguration) GetLiveMigrationVlanIdOk() (*int64, bool
 
 // HasLiveMigrationVlanId returns a boolean if a field has been set.
 func (o *HyperflexNetworkConfiguration) HasLiveMigrationVlanId() bool {
-	if o != nil && o.LiveMigrationVlanId != nil {
+	if o != nil && !IsNil(o.LiveMigrationVlanId) {
 		return true
 	}
 
@@ -348,7 +352,7 @@ func (o *HyperflexNetworkConfiguration) SetLiveMigrationVlanId(v int64) {
 
 // GetManagementDefaultGateway returns the ManagementDefaultGateway field value if set, zero value otherwise.
 func (o *HyperflexNetworkConfiguration) GetManagementDefaultGateway() string {
-	if o == nil || o.ManagementDefaultGateway == nil {
+	if o == nil || IsNil(o.ManagementDefaultGateway) {
 		var ret string
 		return ret
 	}
@@ -358,7 +362,7 @@ func (o *HyperflexNetworkConfiguration) GetManagementDefaultGateway() string {
 // GetManagementDefaultGatewayOk returns a tuple with the ManagementDefaultGateway field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexNetworkConfiguration) GetManagementDefaultGatewayOk() (*string, bool) {
-	if o == nil || o.ManagementDefaultGateway == nil {
+	if o == nil || IsNil(o.ManagementDefaultGateway) {
 		return nil, false
 	}
 	return o.ManagementDefaultGateway, true
@@ -366,7 +370,7 @@ func (o *HyperflexNetworkConfiguration) GetManagementDefaultGatewayOk() (*string
 
 // HasManagementDefaultGateway returns a boolean if a field has been set.
 func (o *HyperflexNetworkConfiguration) HasManagementDefaultGateway() bool {
-	if o != nil && o.ManagementDefaultGateway != nil {
+	if o != nil && !IsNil(o.ManagementDefaultGateway) {
 		return true
 	}
 
@@ -380,7 +384,7 @@ func (o *HyperflexNetworkConfiguration) SetManagementDefaultGateway(v string) {
 
 // GetManagementSubNetmask returns the ManagementSubNetmask field value if set, zero value otherwise.
 func (o *HyperflexNetworkConfiguration) GetManagementSubNetmask() string {
-	if o == nil || o.ManagementSubNetmask == nil {
+	if o == nil || IsNil(o.ManagementSubNetmask) {
 		var ret string
 		return ret
 	}
@@ -390,7 +394,7 @@ func (o *HyperflexNetworkConfiguration) GetManagementSubNetmask() string {
 // GetManagementSubNetmaskOk returns a tuple with the ManagementSubNetmask field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexNetworkConfiguration) GetManagementSubNetmaskOk() (*string, bool) {
-	if o == nil || o.ManagementSubNetmask == nil {
+	if o == nil || IsNil(o.ManagementSubNetmask) {
 		return nil, false
 	}
 	return o.ManagementSubNetmask, true
@@ -398,7 +402,7 @@ func (o *HyperflexNetworkConfiguration) GetManagementSubNetmaskOk() (*string, bo
 
 // HasManagementSubNetmask returns a boolean if a field has been set.
 func (o *HyperflexNetworkConfiguration) HasManagementSubNetmask() bool {
-	if o != nil && o.ManagementSubNetmask != nil {
+	if o != nil && !IsNil(o.ManagementSubNetmask) {
 		return true
 	}
 
@@ -412,7 +416,7 @@ func (o *HyperflexNetworkConfiguration) SetManagementSubNetmask(v string) {
 
 // GetManagementVlanId returns the ManagementVlanId field value if set, zero value otherwise.
 func (o *HyperflexNetworkConfiguration) GetManagementVlanId() int64 {
-	if o == nil || o.ManagementVlanId == nil {
+	if o == nil || IsNil(o.ManagementVlanId) {
 		var ret int64
 		return ret
 	}
@@ -422,7 +426,7 @@ func (o *HyperflexNetworkConfiguration) GetManagementVlanId() int64 {
 // GetManagementVlanIdOk returns a tuple with the ManagementVlanId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexNetworkConfiguration) GetManagementVlanIdOk() (*int64, bool) {
-	if o == nil || o.ManagementVlanId == nil {
+	if o == nil || IsNil(o.ManagementVlanId) {
 		return nil, false
 	}
 	return o.ManagementVlanId, true
@@ -430,7 +434,7 @@ func (o *HyperflexNetworkConfiguration) GetManagementVlanIdOk() (*int64, bool) {
 
 // HasManagementVlanId returns a boolean if a field has been set.
 func (o *HyperflexNetworkConfiguration) HasManagementVlanId() bool {
-	if o != nil && o.ManagementVlanId != nil {
+	if o != nil && !IsNil(o.ManagementVlanId) {
 		return true
 	}
 
@@ -444,7 +448,7 @@ func (o *HyperflexNetworkConfiguration) SetManagementVlanId(v int64) {
 
 // GetVmNetworkVlanId returns the VmNetworkVlanId field value if set, zero value otherwise.
 func (o *HyperflexNetworkConfiguration) GetVmNetworkVlanId() int64 {
-	if o == nil || o.VmNetworkVlanId == nil {
+	if o == nil || IsNil(o.VmNetworkVlanId) {
 		var ret int64
 		return ret
 	}
@@ -454,7 +458,7 @@ func (o *HyperflexNetworkConfiguration) GetVmNetworkVlanId() int64 {
 // GetVmNetworkVlanIdOk returns a tuple with the VmNetworkVlanId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexNetworkConfiguration) GetVmNetworkVlanIdOk() (*int64, bool) {
-	if o == nil || o.VmNetworkVlanId == nil {
+	if o == nil || IsNil(o.VmNetworkVlanId) {
 		return nil, false
 	}
 	return o.VmNetworkVlanId, true
@@ -462,7 +466,7 @@ func (o *HyperflexNetworkConfiguration) GetVmNetworkVlanIdOk() (*int64, bool) {
 
 // HasVmNetworkVlanId returns a boolean if a field has been set.
 func (o *HyperflexNetworkConfiguration) HasVmNetworkVlanId() bool {
-	if o != nil && o.VmNetworkVlanId != nil {
+	if o != nil && !IsNil(o.VmNetworkVlanId) {
 		return true
 	}
 
@@ -475,52 +479,56 @@ func (o *HyperflexNetworkConfiguration) SetVmNetworkVlanId(v int64) {
 }
 
 func (o HyperflexNetworkConfiguration) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o HyperflexNetworkConfiguration) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
 	errMoBaseComplexType = json.Unmarshal([]byte(serializedMoBaseComplexType), &toSerialize)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.ClusterDataIp != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.ClusterDataIp) {
 		toSerialize["ClusterDataIp"] = o.ClusterDataIp
 	}
-	if o.ClusterManagementIp != nil {
+	if !IsNil(o.ClusterManagementIp) {
 		toSerialize["ClusterManagementIp"] = o.ClusterManagementIp
 	}
-	if o.DataDefaultGateway != nil {
+	if !IsNil(o.DataDefaultGateway) {
 		toSerialize["DataDefaultGateway"] = o.DataDefaultGateway
 	}
-	if o.DataJumboFrame != nil {
+	if !IsNil(o.DataJumboFrame) {
 		toSerialize["DataJumboFrame"] = o.DataJumboFrame
 	}
-	if o.DataSubNetmask != nil {
+	if !IsNil(o.DataSubNetmask) {
 		toSerialize["DataSubNetmask"] = o.DataSubNetmask
 	}
-	if o.DataVlanId != nil {
+	if !IsNil(o.DataVlanId) {
 		toSerialize["DataVlanId"] = o.DataVlanId
 	}
-	if o.LiveMigrationVlanId != nil {
+	if !IsNil(o.LiveMigrationVlanId) {
 		toSerialize["LiveMigrationVlanId"] = o.LiveMigrationVlanId
 	}
-	if o.ManagementDefaultGateway != nil {
+	if !IsNil(o.ManagementDefaultGateway) {
 		toSerialize["ManagementDefaultGateway"] = o.ManagementDefaultGateway
 	}
-	if o.ManagementSubNetmask != nil {
+	if !IsNil(o.ManagementSubNetmask) {
 		toSerialize["ManagementSubNetmask"] = o.ManagementSubNetmask
 	}
-	if o.ManagementVlanId != nil {
+	if !IsNil(o.ManagementVlanId) {
 		toSerialize["ManagementVlanId"] = o.ManagementVlanId
 	}
-	if o.VmNetworkVlanId != nil {
+	if !IsNil(o.VmNetworkVlanId) {
 		toSerialize["VmNetworkVlanId"] = o.VmNetworkVlanId
 	}
 
@@ -528,10 +536,32 @@ func (o HyperflexNetworkConfiguration) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *HyperflexNetworkConfiguration) UnmarshalJSON(bytes []byte) (err error) {
+func (o *HyperflexNetworkConfiguration) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type HyperflexNetworkConfigurationWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -563,7 +593,7 @@ func (o *HyperflexNetworkConfiguration) UnmarshalJSON(bytes []byte) (err error) 
 
 	varHyperflexNetworkConfigurationWithoutEmbeddedStruct := HyperflexNetworkConfigurationWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varHyperflexNetworkConfigurationWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varHyperflexNetworkConfigurationWithoutEmbeddedStruct)
 	if err == nil {
 		varHyperflexNetworkConfiguration := _HyperflexNetworkConfiguration{}
 		varHyperflexNetworkConfiguration.ClassId = varHyperflexNetworkConfigurationWithoutEmbeddedStruct.ClassId
@@ -586,7 +616,7 @@ func (o *HyperflexNetworkConfiguration) UnmarshalJSON(bytes []byte) (err error) 
 
 	varHyperflexNetworkConfiguration := _HyperflexNetworkConfiguration{}
 
-	err = json.Unmarshal(bytes, &varHyperflexNetworkConfiguration)
+	err = json.Unmarshal(data, &varHyperflexNetworkConfiguration)
 	if err == nil {
 		o.MoBaseComplexType = varHyperflexNetworkConfiguration.MoBaseComplexType
 	} else {
@@ -595,7 +625,7 @@ func (o *HyperflexNetworkConfiguration) UnmarshalJSON(bytes []byte) (err error) 
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "ClusterDataIp")

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the WorkflowAssociatedRoles type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &WorkflowAssociatedRoles{}
 
 // WorkflowAssociatedRoles AssociatedRoles models the inferred tasks to the required roles mapping cached in the workflow definition.
 type WorkflowAssociatedRoles struct {
@@ -108,7 +112,7 @@ func (o *WorkflowAssociatedRoles) SetObjectType(v string) {
 
 // GetMoid returns the Moid field value if set, zero value otherwise.
 func (o *WorkflowAssociatedRoles) GetMoid() string {
-	if o == nil || o.Moid == nil {
+	if o == nil || IsNil(o.Moid) {
 		var ret string
 		return ret
 	}
@@ -118,7 +122,7 @@ func (o *WorkflowAssociatedRoles) GetMoid() string {
 // GetMoidOk returns a tuple with the Moid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowAssociatedRoles) GetMoidOk() (*string, bool) {
-	if o == nil || o.Moid == nil {
+	if o == nil || IsNil(o.Moid) {
 		return nil, false
 	}
 	return o.Moid, true
@@ -126,7 +130,7 @@ func (o *WorkflowAssociatedRoles) GetMoidOk() (*string, bool) {
 
 // HasMoid returns a boolean if a field has been set.
 func (o *WorkflowAssociatedRoles) HasMoid() bool {
-	if o != nil && o.Moid != nil {
+	if o != nil && !IsNil(o.Moid) {
 		return true
 	}
 
@@ -151,7 +155,7 @@ func (o *WorkflowAssociatedRoles) GetRequiredPrivilegeNames() []string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *WorkflowAssociatedRoles) GetRequiredPrivilegeNamesOk() ([]string, bool) {
-	if o == nil || o.RequiredPrivilegeNames == nil {
+	if o == nil || IsNil(o.RequiredPrivilegeNames) {
 		return nil, false
 	}
 	return o.RequiredPrivilegeNames, true
@@ -159,7 +163,7 @@ func (o *WorkflowAssociatedRoles) GetRequiredPrivilegeNamesOk() ([]string, bool)
 
 // HasRequiredPrivilegeNames returns a boolean if a field has been set.
 func (o *WorkflowAssociatedRoles) HasRequiredPrivilegeNames() bool {
-	if o != nil && o.RequiredPrivilegeNames != nil {
+	if o != nil && IsNil(o.RequiredPrivilegeNames) {
 		return true
 	}
 
@@ -184,7 +188,7 @@ func (o *WorkflowAssociatedRoles) GetRoles() []string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *WorkflowAssociatedRoles) GetRolesOk() ([]string, bool) {
-	if o == nil || o.Roles == nil {
+	if o == nil || IsNil(o.Roles) {
 		return nil, false
 	}
 	return o.Roles, true
@@ -192,7 +196,7 @@ func (o *WorkflowAssociatedRoles) GetRolesOk() ([]string, bool) {
 
 // HasRoles returns a boolean if a field has been set.
 func (o *WorkflowAssociatedRoles) HasRoles() bool {
-	if o != nil && o.Roles != nil {
+	if o != nil && IsNil(o.Roles) {
 		return true
 	}
 
@@ -217,7 +221,7 @@ func (o *WorkflowAssociatedRoles) GetTaskNames() []string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *WorkflowAssociatedRoles) GetTaskNamesOk() ([]string, bool) {
-	if o == nil || o.TaskNames == nil {
+	if o == nil || IsNil(o.TaskNames) {
 		return nil, false
 	}
 	return o.TaskNames, true
@@ -225,7 +229,7 @@ func (o *WorkflowAssociatedRoles) GetTaskNamesOk() ([]string, bool) {
 
 // HasTaskNames returns a boolean if a field has been set.
 func (o *WorkflowAssociatedRoles) HasTaskNames() bool {
-	if o != nil && o.TaskNames != nil {
+	if o != nil && IsNil(o.TaskNames) {
 		return true
 	}
 
@@ -250,7 +254,7 @@ func (o *WorkflowAssociatedRoles) GetWorkflowRoles() []WorkflowAssociatedRoles {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *WorkflowAssociatedRoles) GetWorkflowRolesOk() ([]WorkflowAssociatedRoles, bool) {
-	if o == nil || o.WorkflowRoles == nil {
+	if o == nil || IsNil(o.WorkflowRoles) {
 		return nil, false
 	}
 	return o.WorkflowRoles, true
@@ -258,7 +262,7 @@ func (o *WorkflowAssociatedRoles) GetWorkflowRolesOk() ([]WorkflowAssociatedRole
 
 // HasWorkflowRoles returns a boolean if a field has been set.
 func (o *WorkflowAssociatedRoles) HasWorkflowRoles() bool {
-	if o != nil && o.WorkflowRoles != nil {
+	if o != nil && IsNil(o.WorkflowRoles) {
 		return true
 	}
 
@@ -271,22 +275,26 @@ func (o *WorkflowAssociatedRoles) SetWorkflowRoles(v []WorkflowAssociatedRoles) 
 }
 
 func (o WorkflowAssociatedRoles) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o WorkflowAssociatedRoles) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
 	errMoBaseComplexType = json.Unmarshal([]byte(serializedMoBaseComplexType), &toSerialize)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Moid != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Moid) {
 		toSerialize["Moid"] = o.Moid
 	}
 	if o.RequiredPrivilegeNames != nil {
@@ -306,10 +314,32 @@ func (o WorkflowAssociatedRoles) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *WorkflowAssociatedRoles) UnmarshalJSON(bytes []byte) (err error) {
+func (o *WorkflowAssociatedRoles) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type WorkflowAssociatedRolesWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -325,7 +355,7 @@ func (o *WorkflowAssociatedRoles) UnmarshalJSON(bytes []byte) (err error) {
 
 	varWorkflowAssociatedRolesWithoutEmbeddedStruct := WorkflowAssociatedRolesWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varWorkflowAssociatedRolesWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varWorkflowAssociatedRolesWithoutEmbeddedStruct)
 	if err == nil {
 		varWorkflowAssociatedRoles := _WorkflowAssociatedRoles{}
 		varWorkflowAssociatedRoles.ClassId = varWorkflowAssociatedRolesWithoutEmbeddedStruct.ClassId
@@ -342,7 +372,7 @@ func (o *WorkflowAssociatedRoles) UnmarshalJSON(bytes []byte) (err error) {
 
 	varWorkflowAssociatedRoles := _WorkflowAssociatedRoles{}
 
-	err = json.Unmarshal(bytes, &varWorkflowAssociatedRoles)
+	err = json.Unmarshal(data, &varWorkflowAssociatedRoles)
 	if err == nil {
 		o.MoBaseComplexType = varWorkflowAssociatedRoles.MoBaseComplexType
 	} else {
@@ -351,7 +381,7 @@ func (o *WorkflowAssociatedRoles) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Moid")

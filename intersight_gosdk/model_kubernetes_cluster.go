@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the KubernetesCluster type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &KubernetesCluster{}
 
 // KubernetesCluster Inventories a Kubernetes cluster state. A Cluster object is automatically created when a Kubernetes API server is configured for a cluster.
 type KubernetesCluster struct {
@@ -27,9 +31,9 @@ type KubernetesCluster struct {
 	// Status of the endpoint connection of this Kubernetes cluster. * `` - The target details have been persisted but Intersight has not yet attempted to connect to the target. * `Connected` - Intersight is able to establish a connection to the target and initiate management activities. * `NotConnected` - Intersight is unable to establish a connection to the target. * `ClaimInProgress` - Claim of the target is in progress. A connection to the target has not been fully established. * `UnclaimInProgress` - Unclaim of the target is in progress. Intersight is able to connect to the target and all management operations are supported. * `Unclaimed` - The device was un-claimed from the users account by an Administrator of the device. Also indicates the failure to claim Targets of type HTTP Endpoint in Intersight. * `Claimed` - Target of type HTTP Endpoint is successfully claimed in Intersight. Currently no validation is performed to verify the Target connectivity from Intersight at the time of creation. However invoking API from Intersight Orchestrator fails if this Target is not reachable from Intersight or if Target API credentials are incorrect.
 	ConnectionStatus *string `json:"ConnectionStatus,omitempty"`
 	// Kubeconfig for the cluster to collect inventory for.
-	KubeConfig          *string                                    `json:"KubeConfig,omitempty"`
-	ClusterAddonProfile *KubernetesClusterAddonProfileRelationship `json:"ClusterAddonProfile,omitempty"`
-	Organization        *OrganizationOrganizationRelationship      `json:"Organization,omitempty"`
+	KubeConfig          *string                                           `json:"KubeConfig,omitempty"`
+	ClusterAddonProfile NullableKubernetesClusterAddonProfileRelationship `json:"ClusterAddonProfile,omitempty"`
+	Organization        NullableOrganizationOrganizationRelationship      `json:"Organization,omitempty"`
 	// An array of relationships to assetDeviceRegistration resources.
 	RegisteredDevices    []AssetDeviceRegistrationRelationship `json:"RegisteredDevices,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -114,7 +118,7 @@ func (o *KubernetesCluster) SetObjectType(v string) {
 
 // GetConnectionStatus returns the ConnectionStatus field value if set, zero value otherwise.
 func (o *KubernetesCluster) GetConnectionStatus() string {
-	if o == nil || o.ConnectionStatus == nil {
+	if o == nil || IsNil(o.ConnectionStatus) {
 		var ret string
 		return ret
 	}
@@ -124,7 +128,7 @@ func (o *KubernetesCluster) GetConnectionStatus() string {
 // GetConnectionStatusOk returns a tuple with the ConnectionStatus field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *KubernetesCluster) GetConnectionStatusOk() (*string, bool) {
-	if o == nil || o.ConnectionStatus == nil {
+	if o == nil || IsNil(o.ConnectionStatus) {
 		return nil, false
 	}
 	return o.ConnectionStatus, true
@@ -132,7 +136,7 @@ func (o *KubernetesCluster) GetConnectionStatusOk() (*string, bool) {
 
 // HasConnectionStatus returns a boolean if a field has been set.
 func (o *KubernetesCluster) HasConnectionStatus() bool {
-	if o != nil && o.ConnectionStatus != nil {
+	if o != nil && !IsNil(o.ConnectionStatus) {
 		return true
 	}
 
@@ -146,7 +150,7 @@ func (o *KubernetesCluster) SetConnectionStatus(v string) {
 
 // GetKubeConfig returns the KubeConfig field value if set, zero value otherwise.
 func (o *KubernetesCluster) GetKubeConfig() string {
-	if o == nil || o.KubeConfig == nil {
+	if o == nil || IsNil(o.KubeConfig) {
 		var ret string
 		return ret
 	}
@@ -156,7 +160,7 @@ func (o *KubernetesCluster) GetKubeConfig() string {
 // GetKubeConfigOk returns a tuple with the KubeConfig field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *KubernetesCluster) GetKubeConfigOk() (*string, bool) {
-	if o == nil || o.KubeConfig == nil {
+	if o == nil || IsNil(o.KubeConfig) {
 		return nil, false
 	}
 	return o.KubeConfig, true
@@ -164,7 +168,7 @@ func (o *KubernetesCluster) GetKubeConfigOk() (*string, bool) {
 
 // HasKubeConfig returns a boolean if a field has been set.
 func (o *KubernetesCluster) HasKubeConfig() bool {
-	if o != nil && o.KubeConfig != nil {
+	if o != nil && !IsNil(o.KubeConfig) {
 		return true
 	}
 
@@ -176,68 +180,90 @@ func (o *KubernetesCluster) SetKubeConfig(v string) {
 	o.KubeConfig = &v
 }
 
-// GetClusterAddonProfile returns the ClusterAddonProfile field value if set, zero value otherwise.
+// GetClusterAddonProfile returns the ClusterAddonProfile field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *KubernetesCluster) GetClusterAddonProfile() KubernetesClusterAddonProfileRelationship {
-	if o == nil || o.ClusterAddonProfile == nil {
+	if o == nil || IsNil(o.ClusterAddonProfile.Get()) {
 		var ret KubernetesClusterAddonProfileRelationship
 		return ret
 	}
-	return *o.ClusterAddonProfile
+	return *o.ClusterAddonProfile.Get()
 }
 
 // GetClusterAddonProfileOk returns a tuple with the ClusterAddonProfile field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *KubernetesCluster) GetClusterAddonProfileOk() (*KubernetesClusterAddonProfileRelationship, bool) {
-	if o == nil || o.ClusterAddonProfile == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.ClusterAddonProfile, true
+	return o.ClusterAddonProfile.Get(), o.ClusterAddonProfile.IsSet()
 }
 
 // HasClusterAddonProfile returns a boolean if a field has been set.
 func (o *KubernetesCluster) HasClusterAddonProfile() bool {
-	if o != nil && o.ClusterAddonProfile != nil {
+	if o != nil && o.ClusterAddonProfile.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetClusterAddonProfile gets a reference to the given KubernetesClusterAddonProfileRelationship and assigns it to the ClusterAddonProfile field.
+// SetClusterAddonProfile gets a reference to the given NullableKubernetesClusterAddonProfileRelationship and assigns it to the ClusterAddonProfile field.
 func (o *KubernetesCluster) SetClusterAddonProfile(v KubernetesClusterAddonProfileRelationship) {
-	o.ClusterAddonProfile = &v
+	o.ClusterAddonProfile.Set(&v)
 }
 
-// GetOrganization returns the Organization field value if set, zero value otherwise.
+// SetClusterAddonProfileNil sets the value for ClusterAddonProfile to be an explicit nil
+func (o *KubernetesCluster) SetClusterAddonProfileNil() {
+	o.ClusterAddonProfile.Set(nil)
+}
+
+// UnsetClusterAddonProfile ensures that no value is present for ClusterAddonProfile, not even an explicit nil
+func (o *KubernetesCluster) UnsetClusterAddonProfile() {
+	o.ClusterAddonProfile.Unset()
+}
+
+// GetOrganization returns the Organization field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *KubernetesCluster) GetOrganization() OrganizationOrganizationRelationship {
-	if o == nil || o.Organization == nil {
+	if o == nil || IsNil(o.Organization.Get()) {
 		var ret OrganizationOrganizationRelationship
 		return ret
 	}
-	return *o.Organization
+	return *o.Organization.Get()
 }
 
 // GetOrganizationOk returns a tuple with the Organization field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *KubernetesCluster) GetOrganizationOk() (*OrganizationOrganizationRelationship, bool) {
-	if o == nil || o.Organization == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Organization, true
+	return o.Organization.Get(), o.Organization.IsSet()
 }
 
 // HasOrganization returns a boolean if a field has been set.
 func (o *KubernetesCluster) HasOrganization() bool {
-	if o != nil && o.Organization != nil {
+	if o != nil && o.Organization.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetOrganization gets a reference to the given OrganizationOrganizationRelationship and assigns it to the Organization field.
+// SetOrganization gets a reference to the given NullableOrganizationOrganizationRelationship and assigns it to the Organization field.
 func (o *KubernetesCluster) SetOrganization(v OrganizationOrganizationRelationship) {
-	o.Organization = &v
+	o.Organization.Set(&v)
+}
+
+// SetOrganizationNil sets the value for Organization to be an explicit nil
+func (o *KubernetesCluster) SetOrganizationNil() {
+	o.Organization.Set(nil)
+}
+
+// UnsetOrganization ensures that no value is present for Organization, not even an explicit nil
+func (o *KubernetesCluster) UnsetOrganization() {
+	o.Organization.Unset()
 }
 
 // GetRegisteredDevices returns the RegisteredDevices field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -253,7 +279,7 @@ func (o *KubernetesCluster) GetRegisteredDevices() []AssetDeviceRegistrationRela
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *KubernetesCluster) GetRegisteredDevicesOk() ([]AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.RegisteredDevices == nil {
+	if o == nil || IsNil(o.RegisteredDevices) {
 		return nil, false
 	}
 	return o.RegisteredDevices, true
@@ -261,7 +287,7 @@ func (o *KubernetesCluster) GetRegisteredDevicesOk() ([]AssetDeviceRegistrationR
 
 // HasRegisteredDevices returns a boolean if a field has been set.
 func (o *KubernetesCluster) HasRegisteredDevices() bool {
-	if o != nil && o.RegisteredDevices != nil {
+	if o != nil && IsNil(o.RegisteredDevices) {
 		return true
 	}
 
@@ -274,32 +300,36 @@ func (o *KubernetesCluster) SetRegisteredDevices(v []AssetDeviceRegistrationRela
 }
 
 func (o KubernetesCluster) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o KubernetesCluster) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedComputeBaseCluster, errComputeBaseCluster := json.Marshal(o.ComputeBaseCluster)
 	if errComputeBaseCluster != nil {
-		return []byte{}, errComputeBaseCluster
+		return map[string]interface{}{}, errComputeBaseCluster
 	}
 	errComputeBaseCluster = json.Unmarshal([]byte(serializedComputeBaseCluster), &toSerialize)
 	if errComputeBaseCluster != nil {
-		return []byte{}, errComputeBaseCluster
+		return map[string]interface{}{}, errComputeBaseCluster
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.ConnectionStatus != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.ConnectionStatus) {
 		toSerialize["ConnectionStatus"] = o.ConnectionStatus
 	}
-	if o.KubeConfig != nil {
+	if !IsNil(o.KubeConfig) {
 		toSerialize["KubeConfig"] = o.KubeConfig
 	}
-	if o.ClusterAddonProfile != nil {
-		toSerialize["ClusterAddonProfile"] = o.ClusterAddonProfile
+	if o.ClusterAddonProfile.IsSet() {
+		toSerialize["ClusterAddonProfile"] = o.ClusterAddonProfile.Get()
 	}
-	if o.Organization != nil {
-		toSerialize["Organization"] = o.Organization
+	if o.Organization.IsSet() {
+		toSerialize["Organization"] = o.Organization.Get()
 	}
 	if o.RegisteredDevices != nil {
 		toSerialize["RegisteredDevices"] = o.RegisteredDevices
@@ -309,10 +339,32 @@ func (o KubernetesCluster) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *KubernetesCluster) UnmarshalJSON(bytes []byte) (err error) {
+func (o *KubernetesCluster) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type KubernetesClusterWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -321,16 +373,16 @@ func (o *KubernetesCluster) UnmarshalJSON(bytes []byte) (err error) {
 		// Status of the endpoint connection of this Kubernetes cluster. * `` - The target details have been persisted but Intersight has not yet attempted to connect to the target. * `Connected` - Intersight is able to establish a connection to the target and initiate management activities. * `NotConnected` - Intersight is unable to establish a connection to the target. * `ClaimInProgress` - Claim of the target is in progress. A connection to the target has not been fully established. * `UnclaimInProgress` - Unclaim of the target is in progress. Intersight is able to connect to the target and all management operations are supported. * `Unclaimed` - The device was un-claimed from the users account by an Administrator of the device. Also indicates the failure to claim Targets of type HTTP Endpoint in Intersight. * `Claimed` - Target of type HTTP Endpoint is successfully claimed in Intersight. Currently no validation is performed to verify the Target connectivity from Intersight at the time of creation. However invoking API from Intersight Orchestrator fails if this Target is not reachable from Intersight or if Target API credentials are incorrect.
 		ConnectionStatus *string `json:"ConnectionStatus,omitempty"`
 		// Kubeconfig for the cluster to collect inventory for.
-		KubeConfig          *string                                    `json:"KubeConfig,omitempty"`
-		ClusterAddonProfile *KubernetesClusterAddonProfileRelationship `json:"ClusterAddonProfile,omitempty"`
-		Organization        *OrganizationOrganizationRelationship      `json:"Organization,omitempty"`
+		KubeConfig          *string                                           `json:"KubeConfig,omitempty"`
+		ClusterAddonProfile NullableKubernetesClusterAddonProfileRelationship `json:"ClusterAddonProfile,omitempty"`
+		Organization        NullableOrganizationOrganizationRelationship      `json:"Organization,omitempty"`
 		// An array of relationships to assetDeviceRegistration resources.
 		RegisteredDevices []AssetDeviceRegistrationRelationship `json:"RegisteredDevices,omitempty"`
 	}
 
 	varKubernetesClusterWithoutEmbeddedStruct := KubernetesClusterWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varKubernetesClusterWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varKubernetesClusterWithoutEmbeddedStruct)
 	if err == nil {
 		varKubernetesCluster := _KubernetesCluster{}
 		varKubernetesCluster.ClassId = varKubernetesClusterWithoutEmbeddedStruct.ClassId
@@ -347,7 +399,7 @@ func (o *KubernetesCluster) UnmarshalJSON(bytes []byte) (err error) {
 
 	varKubernetesCluster := _KubernetesCluster{}
 
-	err = json.Unmarshal(bytes, &varKubernetesCluster)
+	err = json.Unmarshal(data, &varKubernetesCluster)
 	if err == nil {
 		o.ComputeBaseCluster = varKubernetesCluster.ComputeBaseCluster
 	} else {
@@ -356,7 +408,7 @@ func (o *KubernetesCluster) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "ConnectionStatus")

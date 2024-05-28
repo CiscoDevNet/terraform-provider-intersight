@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the IamLdapPolicy type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &IamLdapPolicy{}
 
 // IamLdapPolicy LDAP Policy configurations.
 type IamLdapPolicy struct {
@@ -31,11 +35,11 @@ type IamLdapPolicy struct {
 	// LDAP server performs authentication.
 	Enabled *bool `json:"Enabled,omitempty"`
 	// Search precedence between local user database and LDAP user database. * `LocalUserDb` - Precedence is given to local user database while searching. * `LDAPUserDb` - Precedence is given to LADP user database while searching.
-	UserSearchPrecedence *string                 `json:"UserSearchPrecedence,omitempty"`
-	ApplianceAccount     *IamAccountRelationship `json:"ApplianceAccount,omitempty"`
+	UserSearchPrecedence *string                        `json:"UserSearchPrecedence,omitempty"`
+	ApplianceAccount     NullableIamAccountRelationship `json:"ApplianceAccount,omitempty"`
 	// An array of relationships to iamLdapGroup resources.
-	Groups       []IamLdapGroupRelationship            `json:"Groups,omitempty"`
-	Organization *OrganizationOrganizationRelationship `json:"Organization,omitempty"`
+	Groups       []IamLdapGroupRelationship                   `json:"Groups,omitempty"`
+	Organization NullableOrganizationOrganizationRelationship `json:"Organization,omitempty"`
 	// An array of relationships to policyAbstractConfigProfile resources.
 	Profiles []PolicyAbstractConfigProfileRelationship `json:"Profiles,omitempty"`
 	// An array of relationships to iamLdapProvider resources.
@@ -126,7 +130,7 @@ func (o *IamLdapPolicy) SetObjectType(v string) {
 
 // GetBaseProperties returns the BaseProperties field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *IamLdapPolicy) GetBaseProperties() IamLdapBaseProperties {
-	if o == nil || o.BaseProperties.Get() == nil {
+	if o == nil || IsNil(o.BaseProperties.Get()) {
 		var ret IamLdapBaseProperties
 		return ret
 	}
@@ -169,7 +173,7 @@ func (o *IamLdapPolicy) UnsetBaseProperties() {
 
 // GetDnsParameters returns the DnsParameters field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *IamLdapPolicy) GetDnsParameters() IamLdapDnsParameters {
-	if o == nil || o.DnsParameters.Get() == nil {
+	if o == nil || IsNil(o.DnsParameters.Get()) {
 		var ret IamLdapDnsParameters
 		return ret
 	}
@@ -212,7 +216,7 @@ func (o *IamLdapPolicy) UnsetDnsParameters() {
 
 // GetEnableDns returns the EnableDns field value if set, zero value otherwise.
 func (o *IamLdapPolicy) GetEnableDns() bool {
-	if o == nil || o.EnableDns == nil {
+	if o == nil || IsNil(o.EnableDns) {
 		var ret bool
 		return ret
 	}
@@ -222,7 +226,7 @@ func (o *IamLdapPolicy) GetEnableDns() bool {
 // GetEnableDnsOk returns a tuple with the EnableDns field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IamLdapPolicy) GetEnableDnsOk() (*bool, bool) {
-	if o == nil || o.EnableDns == nil {
+	if o == nil || IsNil(o.EnableDns) {
 		return nil, false
 	}
 	return o.EnableDns, true
@@ -230,7 +234,7 @@ func (o *IamLdapPolicy) GetEnableDnsOk() (*bool, bool) {
 
 // HasEnableDns returns a boolean if a field has been set.
 func (o *IamLdapPolicy) HasEnableDns() bool {
-	if o != nil && o.EnableDns != nil {
+	if o != nil && !IsNil(o.EnableDns) {
 		return true
 	}
 
@@ -244,7 +248,7 @@ func (o *IamLdapPolicy) SetEnableDns(v bool) {
 
 // GetEnabled returns the Enabled field value if set, zero value otherwise.
 func (o *IamLdapPolicy) GetEnabled() bool {
-	if o == nil || o.Enabled == nil {
+	if o == nil || IsNil(o.Enabled) {
 		var ret bool
 		return ret
 	}
@@ -254,7 +258,7 @@ func (o *IamLdapPolicy) GetEnabled() bool {
 // GetEnabledOk returns a tuple with the Enabled field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IamLdapPolicy) GetEnabledOk() (*bool, bool) {
-	if o == nil || o.Enabled == nil {
+	if o == nil || IsNil(o.Enabled) {
 		return nil, false
 	}
 	return o.Enabled, true
@@ -262,7 +266,7 @@ func (o *IamLdapPolicy) GetEnabledOk() (*bool, bool) {
 
 // HasEnabled returns a boolean if a field has been set.
 func (o *IamLdapPolicy) HasEnabled() bool {
-	if o != nil && o.Enabled != nil {
+	if o != nil && !IsNil(o.Enabled) {
 		return true
 	}
 
@@ -276,7 +280,7 @@ func (o *IamLdapPolicy) SetEnabled(v bool) {
 
 // GetUserSearchPrecedence returns the UserSearchPrecedence field value if set, zero value otherwise.
 func (o *IamLdapPolicy) GetUserSearchPrecedence() string {
-	if o == nil || o.UserSearchPrecedence == nil {
+	if o == nil || IsNil(o.UserSearchPrecedence) {
 		var ret string
 		return ret
 	}
@@ -286,7 +290,7 @@ func (o *IamLdapPolicy) GetUserSearchPrecedence() string {
 // GetUserSearchPrecedenceOk returns a tuple with the UserSearchPrecedence field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IamLdapPolicy) GetUserSearchPrecedenceOk() (*string, bool) {
-	if o == nil || o.UserSearchPrecedence == nil {
+	if o == nil || IsNil(o.UserSearchPrecedence) {
 		return nil, false
 	}
 	return o.UserSearchPrecedence, true
@@ -294,7 +298,7 @@ func (o *IamLdapPolicy) GetUserSearchPrecedenceOk() (*string, bool) {
 
 // HasUserSearchPrecedence returns a boolean if a field has been set.
 func (o *IamLdapPolicy) HasUserSearchPrecedence() bool {
-	if o != nil && o.UserSearchPrecedence != nil {
+	if o != nil && !IsNil(o.UserSearchPrecedence) {
 		return true
 	}
 
@@ -306,36 +310,47 @@ func (o *IamLdapPolicy) SetUserSearchPrecedence(v string) {
 	o.UserSearchPrecedence = &v
 }
 
-// GetApplianceAccount returns the ApplianceAccount field value if set, zero value otherwise.
+// GetApplianceAccount returns the ApplianceAccount field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *IamLdapPolicy) GetApplianceAccount() IamAccountRelationship {
-	if o == nil || o.ApplianceAccount == nil {
+	if o == nil || IsNil(o.ApplianceAccount.Get()) {
 		var ret IamAccountRelationship
 		return ret
 	}
-	return *o.ApplianceAccount
+	return *o.ApplianceAccount.Get()
 }
 
 // GetApplianceAccountOk returns a tuple with the ApplianceAccount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *IamLdapPolicy) GetApplianceAccountOk() (*IamAccountRelationship, bool) {
-	if o == nil || o.ApplianceAccount == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.ApplianceAccount, true
+	return o.ApplianceAccount.Get(), o.ApplianceAccount.IsSet()
 }
 
 // HasApplianceAccount returns a boolean if a field has been set.
 func (o *IamLdapPolicy) HasApplianceAccount() bool {
-	if o != nil && o.ApplianceAccount != nil {
+	if o != nil && o.ApplianceAccount.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetApplianceAccount gets a reference to the given IamAccountRelationship and assigns it to the ApplianceAccount field.
+// SetApplianceAccount gets a reference to the given NullableIamAccountRelationship and assigns it to the ApplianceAccount field.
 func (o *IamLdapPolicy) SetApplianceAccount(v IamAccountRelationship) {
-	o.ApplianceAccount = &v
+	o.ApplianceAccount.Set(&v)
+}
+
+// SetApplianceAccountNil sets the value for ApplianceAccount to be an explicit nil
+func (o *IamLdapPolicy) SetApplianceAccountNil() {
+	o.ApplianceAccount.Set(nil)
+}
+
+// UnsetApplianceAccount ensures that no value is present for ApplianceAccount, not even an explicit nil
+func (o *IamLdapPolicy) UnsetApplianceAccount() {
+	o.ApplianceAccount.Unset()
 }
 
 // GetGroups returns the Groups field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -351,7 +366,7 @@ func (o *IamLdapPolicy) GetGroups() []IamLdapGroupRelationship {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *IamLdapPolicy) GetGroupsOk() ([]IamLdapGroupRelationship, bool) {
-	if o == nil || o.Groups == nil {
+	if o == nil || IsNil(o.Groups) {
 		return nil, false
 	}
 	return o.Groups, true
@@ -359,7 +374,7 @@ func (o *IamLdapPolicy) GetGroupsOk() ([]IamLdapGroupRelationship, bool) {
 
 // HasGroups returns a boolean if a field has been set.
 func (o *IamLdapPolicy) HasGroups() bool {
-	if o != nil && o.Groups != nil {
+	if o != nil && IsNil(o.Groups) {
 		return true
 	}
 
@@ -371,36 +386,47 @@ func (o *IamLdapPolicy) SetGroups(v []IamLdapGroupRelationship) {
 	o.Groups = v
 }
 
-// GetOrganization returns the Organization field value if set, zero value otherwise.
+// GetOrganization returns the Organization field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *IamLdapPolicy) GetOrganization() OrganizationOrganizationRelationship {
-	if o == nil || o.Organization == nil {
+	if o == nil || IsNil(o.Organization.Get()) {
 		var ret OrganizationOrganizationRelationship
 		return ret
 	}
-	return *o.Organization
+	return *o.Organization.Get()
 }
 
 // GetOrganizationOk returns a tuple with the Organization field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *IamLdapPolicy) GetOrganizationOk() (*OrganizationOrganizationRelationship, bool) {
-	if o == nil || o.Organization == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Organization, true
+	return o.Organization.Get(), o.Organization.IsSet()
 }
 
 // HasOrganization returns a boolean if a field has been set.
 func (o *IamLdapPolicy) HasOrganization() bool {
-	if o != nil && o.Organization != nil {
+	if o != nil && o.Organization.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetOrganization gets a reference to the given OrganizationOrganizationRelationship and assigns it to the Organization field.
+// SetOrganization gets a reference to the given NullableOrganizationOrganizationRelationship and assigns it to the Organization field.
 func (o *IamLdapPolicy) SetOrganization(v OrganizationOrganizationRelationship) {
-	o.Organization = &v
+	o.Organization.Set(&v)
+}
+
+// SetOrganizationNil sets the value for Organization to be an explicit nil
+func (o *IamLdapPolicy) SetOrganizationNil() {
+	o.Organization.Set(nil)
+}
+
+// UnsetOrganization ensures that no value is present for Organization, not even an explicit nil
+func (o *IamLdapPolicy) UnsetOrganization() {
+	o.Organization.Unset()
 }
 
 // GetProfiles returns the Profiles field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -416,7 +442,7 @@ func (o *IamLdapPolicy) GetProfiles() []PolicyAbstractConfigProfileRelationship 
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *IamLdapPolicy) GetProfilesOk() ([]PolicyAbstractConfigProfileRelationship, bool) {
-	if o == nil || o.Profiles == nil {
+	if o == nil || IsNil(o.Profiles) {
 		return nil, false
 	}
 	return o.Profiles, true
@@ -424,7 +450,7 @@ func (o *IamLdapPolicy) GetProfilesOk() ([]PolicyAbstractConfigProfileRelationsh
 
 // HasProfiles returns a boolean if a field has been set.
 func (o *IamLdapPolicy) HasProfiles() bool {
-	if o != nil && o.Profiles != nil {
+	if o != nil && IsNil(o.Profiles) {
 		return true
 	}
 
@@ -449,7 +475,7 @@ func (o *IamLdapPolicy) GetProviders() []IamLdapProviderRelationship {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *IamLdapPolicy) GetProvidersOk() ([]IamLdapProviderRelationship, bool) {
-	if o == nil || o.Providers == nil {
+	if o == nil || IsNil(o.Providers) {
 		return nil, false
 	}
 	return o.Providers, true
@@ -457,7 +483,7 @@ func (o *IamLdapPolicy) GetProvidersOk() ([]IamLdapProviderRelationship, bool) {
 
 // HasProviders returns a boolean if a field has been set.
 func (o *IamLdapPolicy) HasProviders() bool {
-	if o != nil && o.Providers != nil {
+	if o != nil && IsNil(o.Providers) {
 		return true
 	}
 
@@ -470,44 +496,48 @@ func (o *IamLdapPolicy) SetProviders(v []IamLdapProviderRelationship) {
 }
 
 func (o IamLdapPolicy) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o IamLdapPolicy) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedPolicyAbstractPolicy, errPolicyAbstractPolicy := json.Marshal(o.PolicyAbstractPolicy)
 	if errPolicyAbstractPolicy != nil {
-		return []byte{}, errPolicyAbstractPolicy
+		return map[string]interface{}{}, errPolicyAbstractPolicy
 	}
 	errPolicyAbstractPolicy = json.Unmarshal([]byte(serializedPolicyAbstractPolicy), &toSerialize)
 	if errPolicyAbstractPolicy != nil {
-		return []byte{}, errPolicyAbstractPolicy
+		return map[string]interface{}{}, errPolicyAbstractPolicy
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
 	if o.BaseProperties.IsSet() {
 		toSerialize["BaseProperties"] = o.BaseProperties.Get()
 	}
 	if o.DnsParameters.IsSet() {
 		toSerialize["DnsParameters"] = o.DnsParameters.Get()
 	}
-	if o.EnableDns != nil {
+	if !IsNil(o.EnableDns) {
 		toSerialize["EnableDns"] = o.EnableDns
 	}
-	if o.Enabled != nil {
+	if !IsNil(o.Enabled) {
 		toSerialize["Enabled"] = o.Enabled
 	}
-	if o.UserSearchPrecedence != nil {
+	if !IsNil(o.UserSearchPrecedence) {
 		toSerialize["UserSearchPrecedence"] = o.UserSearchPrecedence
 	}
-	if o.ApplianceAccount != nil {
-		toSerialize["ApplianceAccount"] = o.ApplianceAccount
+	if o.ApplianceAccount.IsSet() {
+		toSerialize["ApplianceAccount"] = o.ApplianceAccount.Get()
 	}
 	if o.Groups != nil {
 		toSerialize["Groups"] = o.Groups
 	}
-	if o.Organization != nil {
-		toSerialize["Organization"] = o.Organization
+	if o.Organization.IsSet() {
+		toSerialize["Organization"] = o.Organization.Get()
 	}
 	if o.Profiles != nil {
 		toSerialize["Profiles"] = o.Profiles
@@ -520,10 +550,32 @@ func (o IamLdapPolicy) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *IamLdapPolicy) UnmarshalJSON(bytes []byte) (err error) {
+func (o *IamLdapPolicy) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type IamLdapPolicyWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -536,11 +588,11 @@ func (o *IamLdapPolicy) UnmarshalJSON(bytes []byte) (err error) {
 		// LDAP server performs authentication.
 		Enabled *bool `json:"Enabled,omitempty"`
 		// Search precedence between local user database and LDAP user database. * `LocalUserDb` - Precedence is given to local user database while searching. * `LDAPUserDb` - Precedence is given to LADP user database while searching.
-		UserSearchPrecedence *string                 `json:"UserSearchPrecedence,omitempty"`
-		ApplianceAccount     *IamAccountRelationship `json:"ApplianceAccount,omitempty"`
+		UserSearchPrecedence *string                        `json:"UserSearchPrecedence,omitempty"`
+		ApplianceAccount     NullableIamAccountRelationship `json:"ApplianceAccount,omitempty"`
 		// An array of relationships to iamLdapGroup resources.
-		Groups       []IamLdapGroupRelationship            `json:"Groups,omitempty"`
-		Organization *OrganizationOrganizationRelationship `json:"Organization,omitempty"`
+		Groups       []IamLdapGroupRelationship                   `json:"Groups,omitempty"`
+		Organization NullableOrganizationOrganizationRelationship `json:"Organization,omitempty"`
 		// An array of relationships to policyAbstractConfigProfile resources.
 		Profiles []PolicyAbstractConfigProfileRelationship `json:"Profiles,omitempty"`
 		// An array of relationships to iamLdapProvider resources.
@@ -549,7 +601,7 @@ func (o *IamLdapPolicy) UnmarshalJSON(bytes []byte) (err error) {
 
 	varIamLdapPolicyWithoutEmbeddedStruct := IamLdapPolicyWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varIamLdapPolicyWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varIamLdapPolicyWithoutEmbeddedStruct)
 	if err == nil {
 		varIamLdapPolicy := _IamLdapPolicy{}
 		varIamLdapPolicy.ClassId = varIamLdapPolicyWithoutEmbeddedStruct.ClassId
@@ -571,7 +623,7 @@ func (o *IamLdapPolicy) UnmarshalJSON(bytes []byte) (err error) {
 
 	varIamLdapPolicy := _IamLdapPolicy{}
 
-	err = json.Unmarshal(bytes, &varIamLdapPolicy)
+	err = json.Unmarshal(data, &varIamLdapPolicy)
 	if err == nil {
 		o.PolicyAbstractPolicy = varIamLdapPolicy.PolicyAbstractPolicy
 	} else {
@@ -580,7 +632,7 @@ func (o *IamLdapPolicy) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "BaseProperties")

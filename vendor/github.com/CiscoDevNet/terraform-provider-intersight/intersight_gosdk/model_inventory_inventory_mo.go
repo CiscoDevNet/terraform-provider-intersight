@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the InventoryInventoryMo type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &InventoryInventoryMo{}
 
 // InventoryInventoryMo Complex type representing the inventory MO.
 type InventoryInventoryMo struct {
@@ -108,7 +112,7 @@ func (o *InventoryInventoryMo) SetObjectType(v string) {
 
 // GetMoDn returns the MoDn field value if set, zero value otherwise.
 func (o *InventoryInventoryMo) GetMoDn() string {
-	if o == nil || o.MoDn == nil {
+	if o == nil || IsNil(o.MoDn) {
 		var ret string
 		return ret
 	}
@@ -118,7 +122,7 @@ func (o *InventoryInventoryMo) GetMoDn() string {
 // GetMoDnOk returns a tuple with the MoDn field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *InventoryInventoryMo) GetMoDnOk() (*string, bool) {
-	if o == nil || o.MoDn == nil {
+	if o == nil || IsNil(o.MoDn) {
 		return nil, false
 	}
 	return o.MoDn, true
@@ -126,7 +130,7 @@ func (o *InventoryInventoryMo) GetMoDnOk() (*string, bool) {
 
 // HasMoDn returns a boolean if a field has been set.
 func (o *InventoryInventoryMo) HasMoDn() bool {
-	if o != nil && o.MoDn != nil {
+	if o != nil && !IsNil(o.MoDn) {
 		return true
 	}
 
@@ -140,7 +144,7 @@ func (o *InventoryInventoryMo) SetMoDn(v string) {
 
 // GetMoId returns the MoId field value if set, zero value otherwise.
 func (o *InventoryInventoryMo) GetMoId() string {
-	if o == nil || o.MoId == nil {
+	if o == nil || IsNil(o.MoId) {
 		var ret string
 		return ret
 	}
@@ -150,7 +154,7 @@ func (o *InventoryInventoryMo) GetMoId() string {
 // GetMoIdOk returns a tuple with the MoId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *InventoryInventoryMo) GetMoIdOk() (*string, bool) {
-	if o == nil || o.MoId == nil {
+	if o == nil || IsNil(o.MoId) {
 		return nil, false
 	}
 	return o.MoId, true
@@ -158,7 +162,7 @@ func (o *InventoryInventoryMo) GetMoIdOk() (*string, bool) {
 
 // HasMoId returns a boolean if a field has been set.
 func (o *InventoryInventoryMo) HasMoId() bool {
-	if o != nil && o.MoId != nil {
+	if o != nil && !IsNil(o.MoId) {
 		return true
 	}
 
@@ -172,7 +176,7 @@ func (o *InventoryInventoryMo) SetMoId(v string) {
 
 // GetMoType returns the MoType field value if set, zero value otherwise.
 func (o *InventoryInventoryMo) GetMoType() string {
-	if o == nil || o.MoType == nil {
+	if o == nil || IsNil(o.MoType) {
 		var ret string
 		return ret
 	}
@@ -182,7 +186,7 @@ func (o *InventoryInventoryMo) GetMoType() string {
 // GetMoTypeOk returns a tuple with the MoType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *InventoryInventoryMo) GetMoTypeOk() (*string, bool) {
-	if o == nil || o.MoType == nil {
+	if o == nil || IsNil(o.MoType) {
 		return nil, false
 	}
 	return o.MoType, true
@@ -190,7 +194,7 @@ func (o *InventoryInventoryMo) GetMoTypeOk() (*string, bool) {
 
 // HasMoType returns a boolean if a field has been set.
 func (o *InventoryInventoryMo) HasMoType() bool {
-	if o != nil && o.MoType != nil {
+	if o != nil && !IsNil(o.MoType) {
 		return true
 	}
 
@@ -203,28 +207,32 @@ func (o *InventoryInventoryMo) SetMoType(v string) {
 }
 
 func (o InventoryInventoryMo) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o InventoryInventoryMo) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
 	errMoBaseComplexType = json.Unmarshal([]byte(serializedMoBaseComplexType), &toSerialize)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.MoDn != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.MoDn) {
 		toSerialize["MoDn"] = o.MoDn
 	}
-	if o.MoId != nil {
+	if !IsNil(o.MoId) {
 		toSerialize["MoId"] = o.MoId
 	}
-	if o.MoType != nil {
+	if !IsNil(o.MoType) {
 		toSerialize["MoType"] = o.MoType
 	}
 
@@ -232,10 +240,32 @@ func (o InventoryInventoryMo) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *InventoryInventoryMo) UnmarshalJSON(bytes []byte) (err error) {
+func (o *InventoryInventoryMo) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type InventoryInventoryMoWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -251,7 +281,7 @@ func (o *InventoryInventoryMo) UnmarshalJSON(bytes []byte) (err error) {
 
 	varInventoryInventoryMoWithoutEmbeddedStruct := InventoryInventoryMoWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varInventoryInventoryMoWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varInventoryInventoryMoWithoutEmbeddedStruct)
 	if err == nil {
 		varInventoryInventoryMo := _InventoryInventoryMo{}
 		varInventoryInventoryMo.ClassId = varInventoryInventoryMoWithoutEmbeddedStruct.ClassId
@@ -266,7 +296,7 @@ func (o *InventoryInventoryMo) UnmarshalJSON(bytes []byte) (err error) {
 
 	varInventoryInventoryMo := _InventoryInventoryMo{}
 
-	err = json.Unmarshal(bytes, &varInventoryInventoryMo)
+	err = json.Unmarshal(data, &varInventoryInventoryMo)
 	if err == nil {
 		o.MoBaseComplexType = varInventoryInventoryMo.MoBaseComplexType
 	} else {
@@ -275,7 +305,7 @@ func (o *InventoryInventoryMo) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "MoDn")

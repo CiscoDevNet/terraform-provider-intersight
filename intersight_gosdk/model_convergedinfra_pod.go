@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the ConvergedinfraPod type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ConvergedinfraPod{}
 
 // ConvergedinfraPod A pod is unit of deployment of converged infrastructure. Contains inventory information related to the health, HCL, storage, nodes, etc. of the pod.
 type ConvergedinfraPod struct {
@@ -27,12 +31,12 @@ type ConvergedinfraPod struct {
 	// The deployment type for this integrated system. * `FlexPodInfra` - The deployment type for a pod is of Infrastructure. * `FlexPodNG` - The deployment type for a pod is of Nextgen type.
 	DeploymentType *string `json:"DeploymentType,omitempty"`
 	// The interoperability status for this solution pod. * `NotEvaluated` - The interoperability compliance for the component has not be checked. * `Approved` - The component is valid as per the interoperability compliance check. * `NotApproved` - The component is not valid as per the interoperability compliance check. * `Incomplete` - The interoperability compliance check could not be completed for the component due to incomplete data.
-	InteropStatus        *string                                      `json:"InteropStatus,omitempty"`
-	Summary              *ConvergedinfraPodSummary                    `json:"Summary,omitempty"`
-	Organization         *OrganizationOrganizationRelationship        `json:"Organization,omitempty"`
-	PodCompliance        *ConvergedinfraPodComplianceInfoRelationship `json:"PodCompliance,omitempty"`
-	PodResourceGroup     *ResourceGroupRelationship                   `json:"PodResourceGroup,omitempty"`
-	ServiceItemInstance  *WorkflowServiceItemInstanceRelationship     `json:"ServiceItemInstance,omitempty"`
+	InteropStatus        *string                                             `json:"InteropStatus,omitempty"`
+	Summary              *ConvergedinfraPodSummary                           `json:"Summary,omitempty"`
+	Organization         NullableOrganizationOrganizationRelationship        `json:"Organization,omitempty"`
+	PodCompliance        NullableConvergedinfraPodComplianceInfoRelationship `json:"PodCompliance,omitempty"`
+	PodResourceGroup     NullableResourceGroupRelationship                   `json:"PodResourceGroup,omitempty"`
+	ServiceItemInstance  NullableWorkflowServiceItemInstanceRelationship     `json:"ServiceItemInstance,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -113,7 +117,7 @@ func (o *ConvergedinfraPod) SetObjectType(v string) {
 
 // GetDeploymentType returns the DeploymentType field value if set, zero value otherwise.
 func (o *ConvergedinfraPod) GetDeploymentType() string {
-	if o == nil || o.DeploymentType == nil {
+	if o == nil || IsNil(o.DeploymentType) {
 		var ret string
 		return ret
 	}
@@ -123,7 +127,7 @@ func (o *ConvergedinfraPod) GetDeploymentType() string {
 // GetDeploymentTypeOk returns a tuple with the DeploymentType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ConvergedinfraPod) GetDeploymentTypeOk() (*string, bool) {
-	if o == nil || o.DeploymentType == nil {
+	if o == nil || IsNil(o.DeploymentType) {
 		return nil, false
 	}
 	return o.DeploymentType, true
@@ -131,7 +135,7 @@ func (o *ConvergedinfraPod) GetDeploymentTypeOk() (*string, bool) {
 
 // HasDeploymentType returns a boolean if a field has been set.
 func (o *ConvergedinfraPod) HasDeploymentType() bool {
-	if o != nil && o.DeploymentType != nil {
+	if o != nil && !IsNil(o.DeploymentType) {
 		return true
 	}
 
@@ -145,7 +149,7 @@ func (o *ConvergedinfraPod) SetDeploymentType(v string) {
 
 // GetInteropStatus returns the InteropStatus field value if set, zero value otherwise.
 func (o *ConvergedinfraPod) GetInteropStatus() string {
-	if o == nil || o.InteropStatus == nil {
+	if o == nil || IsNil(o.InteropStatus) {
 		var ret string
 		return ret
 	}
@@ -155,7 +159,7 @@ func (o *ConvergedinfraPod) GetInteropStatus() string {
 // GetInteropStatusOk returns a tuple with the InteropStatus field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ConvergedinfraPod) GetInteropStatusOk() (*string, bool) {
-	if o == nil || o.InteropStatus == nil {
+	if o == nil || IsNil(o.InteropStatus) {
 		return nil, false
 	}
 	return o.InteropStatus, true
@@ -163,7 +167,7 @@ func (o *ConvergedinfraPod) GetInteropStatusOk() (*string, bool) {
 
 // HasInteropStatus returns a boolean if a field has been set.
 func (o *ConvergedinfraPod) HasInteropStatus() bool {
-	if o != nil && o.InteropStatus != nil {
+	if o != nil && !IsNil(o.InteropStatus) {
 		return true
 	}
 
@@ -177,7 +181,7 @@ func (o *ConvergedinfraPod) SetInteropStatus(v string) {
 
 // GetSummary returns the Summary field value if set, zero value otherwise.
 func (o *ConvergedinfraPod) GetSummary() ConvergedinfraPodSummary {
-	if o == nil || o.Summary == nil {
+	if o == nil || IsNil(o.Summary) {
 		var ret ConvergedinfraPodSummary
 		return ret
 	}
@@ -187,7 +191,7 @@ func (o *ConvergedinfraPod) GetSummary() ConvergedinfraPodSummary {
 // GetSummaryOk returns a tuple with the Summary field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ConvergedinfraPod) GetSummaryOk() (*ConvergedinfraPodSummary, bool) {
-	if o == nil || o.Summary == nil {
+	if o == nil || IsNil(o.Summary) {
 		return nil, false
 	}
 	return o.Summary, true
@@ -195,7 +199,7 @@ func (o *ConvergedinfraPod) GetSummaryOk() (*ConvergedinfraPodSummary, bool) {
 
 // HasSummary returns a boolean if a field has been set.
 func (o *ConvergedinfraPod) HasSummary() bool {
-	if o != nil && o.Summary != nil {
+	if o != nil && !IsNil(o.Summary) {
 		return true
 	}
 
@@ -207,180 +211,250 @@ func (o *ConvergedinfraPod) SetSummary(v ConvergedinfraPodSummary) {
 	o.Summary = &v
 }
 
-// GetOrganization returns the Organization field value if set, zero value otherwise.
+// GetOrganization returns the Organization field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ConvergedinfraPod) GetOrganization() OrganizationOrganizationRelationship {
-	if o == nil || o.Organization == nil {
+	if o == nil || IsNil(o.Organization.Get()) {
 		var ret OrganizationOrganizationRelationship
 		return ret
 	}
-	return *o.Organization
+	return *o.Organization.Get()
 }
 
 // GetOrganizationOk returns a tuple with the Organization field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ConvergedinfraPod) GetOrganizationOk() (*OrganizationOrganizationRelationship, bool) {
-	if o == nil || o.Organization == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Organization, true
+	return o.Organization.Get(), o.Organization.IsSet()
 }
 
 // HasOrganization returns a boolean if a field has been set.
 func (o *ConvergedinfraPod) HasOrganization() bool {
-	if o != nil && o.Organization != nil {
+	if o != nil && o.Organization.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetOrganization gets a reference to the given OrganizationOrganizationRelationship and assigns it to the Organization field.
+// SetOrganization gets a reference to the given NullableOrganizationOrganizationRelationship and assigns it to the Organization field.
 func (o *ConvergedinfraPod) SetOrganization(v OrganizationOrganizationRelationship) {
-	o.Organization = &v
+	o.Organization.Set(&v)
 }
 
-// GetPodCompliance returns the PodCompliance field value if set, zero value otherwise.
+// SetOrganizationNil sets the value for Organization to be an explicit nil
+func (o *ConvergedinfraPod) SetOrganizationNil() {
+	o.Organization.Set(nil)
+}
+
+// UnsetOrganization ensures that no value is present for Organization, not even an explicit nil
+func (o *ConvergedinfraPod) UnsetOrganization() {
+	o.Organization.Unset()
+}
+
+// GetPodCompliance returns the PodCompliance field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ConvergedinfraPod) GetPodCompliance() ConvergedinfraPodComplianceInfoRelationship {
-	if o == nil || o.PodCompliance == nil {
+	if o == nil || IsNil(o.PodCompliance.Get()) {
 		var ret ConvergedinfraPodComplianceInfoRelationship
 		return ret
 	}
-	return *o.PodCompliance
+	return *o.PodCompliance.Get()
 }
 
 // GetPodComplianceOk returns a tuple with the PodCompliance field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ConvergedinfraPod) GetPodComplianceOk() (*ConvergedinfraPodComplianceInfoRelationship, bool) {
-	if o == nil || o.PodCompliance == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.PodCompliance, true
+	return o.PodCompliance.Get(), o.PodCompliance.IsSet()
 }
 
 // HasPodCompliance returns a boolean if a field has been set.
 func (o *ConvergedinfraPod) HasPodCompliance() bool {
-	if o != nil && o.PodCompliance != nil {
+	if o != nil && o.PodCompliance.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetPodCompliance gets a reference to the given ConvergedinfraPodComplianceInfoRelationship and assigns it to the PodCompliance field.
+// SetPodCompliance gets a reference to the given NullableConvergedinfraPodComplianceInfoRelationship and assigns it to the PodCompliance field.
 func (o *ConvergedinfraPod) SetPodCompliance(v ConvergedinfraPodComplianceInfoRelationship) {
-	o.PodCompliance = &v
+	o.PodCompliance.Set(&v)
 }
 
-// GetPodResourceGroup returns the PodResourceGroup field value if set, zero value otherwise.
+// SetPodComplianceNil sets the value for PodCompliance to be an explicit nil
+func (o *ConvergedinfraPod) SetPodComplianceNil() {
+	o.PodCompliance.Set(nil)
+}
+
+// UnsetPodCompliance ensures that no value is present for PodCompliance, not even an explicit nil
+func (o *ConvergedinfraPod) UnsetPodCompliance() {
+	o.PodCompliance.Unset()
+}
+
+// GetPodResourceGroup returns the PodResourceGroup field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ConvergedinfraPod) GetPodResourceGroup() ResourceGroupRelationship {
-	if o == nil || o.PodResourceGroup == nil {
+	if o == nil || IsNil(o.PodResourceGroup.Get()) {
 		var ret ResourceGroupRelationship
 		return ret
 	}
-	return *o.PodResourceGroup
+	return *o.PodResourceGroup.Get()
 }
 
 // GetPodResourceGroupOk returns a tuple with the PodResourceGroup field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ConvergedinfraPod) GetPodResourceGroupOk() (*ResourceGroupRelationship, bool) {
-	if o == nil || o.PodResourceGroup == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.PodResourceGroup, true
+	return o.PodResourceGroup.Get(), o.PodResourceGroup.IsSet()
 }
 
 // HasPodResourceGroup returns a boolean if a field has been set.
 func (o *ConvergedinfraPod) HasPodResourceGroup() bool {
-	if o != nil && o.PodResourceGroup != nil {
+	if o != nil && o.PodResourceGroup.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetPodResourceGroup gets a reference to the given ResourceGroupRelationship and assigns it to the PodResourceGroup field.
+// SetPodResourceGroup gets a reference to the given NullableResourceGroupRelationship and assigns it to the PodResourceGroup field.
 func (o *ConvergedinfraPod) SetPodResourceGroup(v ResourceGroupRelationship) {
-	o.PodResourceGroup = &v
+	o.PodResourceGroup.Set(&v)
 }
 
-// GetServiceItemInstance returns the ServiceItemInstance field value if set, zero value otherwise.
+// SetPodResourceGroupNil sets the value for PodResourceGroup to be an explicit nil
+func (o *ConvergedinfraPod) SetPodResourceGroupNil() {
+	o.PodResourceGroup.Set(nil)
+}
+
+// UnsetPodResourceGroup ensures that no value is present for PodResourceGroup, not even an explicit nil
+func (o *ConvergedinfraPod) UnsetPodResourceGroup() {
+	o.PodResourceGroup.Unset()
+}
+
+// GetServiceItemInstance returns the ServiceItemInstance field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ConvergedinfraPod) GetServiceItemInstance() WorkflowServiceItemInstanceRelationship {
-	if o == nil || o.ServiceItemInstance == nil {
+	if o == nil || IsNil(o.ServiceItemInstance.Get()) {
 		var ret WorkflowServiceItemInstanceRelationship
 		return ret
 	}
-	return *o.ServiceItemInstance
+	return *o.ServiceItemInstance.Get()
 }
 
 // GetServiceItemInstanceOk returns a tuple with the ServiceItemInstance field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ConvergedinfraPod) GetServiceItemInstanceOk() (*WorkflowServiceItemInstanceRelationship, bool) {
-	if o == nil || o.ServiceItemInstance == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.ServiceItemInstance, true
+	return o.ServiceItemInstance.Get(), o.ServiceItemInstance.IsSet()
 }
 
 // HasServiceItemInstance returns a boolean if a field has been set.
 func (o *ConvergedinfraPod) HasServiceItemInstance() bool {
-	if o != nil && o.ServiceItemInstance != nil {
+	if o != nil && o.ServiceItemInstance.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetServiceItemInstance gets a reference to the given WorkflowServiceItemInstanceRelationship and assigns it to the ServiceItemInstance field.
+// SetServiceItemInstance gets a reference to the given NullableWorkflowServiceItemInstanceRelationship and assigns it to the ServiceItemInstance field.
 func (o *ConvergedinfraPod) SetServiceItemInstance(v WorkflowServiceItemInstanceRelationship) {
-	o.ServiceItemInstance = &v
+	o.ServiceItemInstance.Set(&v)
+}
+
+// SetServiceItemInstanceNil sets the value for ServiceItemInstance to be an explicit nil
+func (o *ConvergedinfraPod) SetServiceItemInstanceNil() {
+	o.ServiceItemInstance.Set(nil)
+}
+
+// UnsetServiceItemInstance ensures that no value is present for ServiceItemInstance, not even an explicit nil
+func (o *ConvergedinfraPod) UnsetServiceItemInstance() {
+	o.ServiceItemInstance.Unset()
 }
 
 func (o ConvergedinfraPod) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o ConvergedinfraPod) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedConvergedinfraBasePod, errConvergedinfraBasePod := json.Marshal(o.ConvergedinfraBasePod)
 	if errConvergedinfraBasePod != nil {
-		return []byte{}, errConvergedinfraBasePod
+		return map[string]interface{}{}, errConvergedinfraBasePod
 	}
 	errConvergedinfraBasePod = json.Unmarshal([]byte(serializedConvergedinfraBasePod), &toSerialize)
 	if errConvergedinfraBasePod != nil {
-		return []byte{}, errConvergedinfraBasePod
+		return map[string]interface{}{}, errConvergedinfraBasePod
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.DeploymentType != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.DeploymentType) {
 		toSerialize["DeploymentType"] = o.DeploymentType
 	}
-	if o.InteropStatus != nil {
+	if !IsNil(o.InteropStatus) {
 		toSerialize["InteropStatus"] = o.InteropStatus
 	}
-	if o.Summary != nil {
+	if !IsNil(o.Summary) {
 		toSerialize["Summary"] = o.Summary
 	}
-	if o.Organization != nil {
-		toSerialize["Organization"] = o.Organization
+	if o.Organization.IsSet() {
+		toSerialize["Organization"] = o.Organization.Get()
 	}
-	if o.PodCompliance != nil {
-		toSerialize["PodCompliance"] = o.PodCompliance
+	if o.PodCompliance.IsSet() {
+		toSerialize["PodCompliance"] = o.PodCompliance.Get()
 	}
-	if o.PodResourceGroup != nil {
-		toSerialize["PodResourceGroup"] = o.PodResourceGroup
+	if o.PodResourceGroup.IsSet() {
+		toSerialize["PodResourceGroup"] = o.PodResourceGroup.Get()
 	}
-	if o.ServiceItemInstance != nil {
-		toSerialize["ServiceItemInstance"] = o.ServiceItemInstance
+	if o.ServiceItemInstance.IsSet() {
+		toSerialize["ServiceItemInstance"] = o.ServiceItemInstance.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *ConvergedinfraPod) UnmarshalJSON(bytes []byte) (err error) {
+func (o *ConvergedinfraPod) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type ConvergedinfraPodWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -389,17 +463,17 @@ func (o *ConvergedinfraPod) UnmarshalJSON(bytes []byte) (err error) {
 		// The deployment type for this integrated system. * `FlexPodInfra` - The deployment type for a pod is of Infrastructure. * `FlexPodNG` - The deployment type for a pod is of Nextgen type.
 		DeploymentType *string `json:"DeploymentType,omitempty"`
 		// The interoperability status for this solution pod. * `NotEvaluated` - The interoperability compliance for the component has not be checked. * `Approved` - The component is valid as per the interoperability compliance check. * `NotApproved` - The component is not valid as per the interoperability compliance check. * `Incomplete` - The interoperability compliance check could not be completed for the component due to incomplete data.
-		InteropStatus       *string                                      `json:"InteropStatus,omitempty"`
-		Summary             *ConvergedinfraPodSummary                    `json:"Summary,omitempty"`
-		Organization        *OrganizationOrganizationRelationship        `json:"Organization,omitempty"`
-		PodCompliance       *ConvergedinfraPodComplianceInfoRelationship `json:"PodCompliance,omitempty"`
-		PodResourceGroup    *ResourceGroupRelationship                   `json:"PodResourceGroup,omitempty"`
-		ServiceItemInstance *WorkflowServiceItemInstanceRelationship     `json:"ServiceItemInstance,omitempty"`
+		InteropStatus       *string                                             `json:"InteropStatus,omitempty"`
+		Summary             *ConvergedinfraPodSummary                           `json:"Summary,omitempty"`
+		Organization        NullableOrganizationOrganizationRelationship        `json:"Organization,omitempty"`
+		PodCompliance       NullableConvergedinfraPodComplianceInfoRelationship `json:"PodCompliance,omitempty"`
+		PodResourceGroup    NullableResourceGroupRelationship                   `json:"PodResourceGroup,omitempty"`
+		ServiceItemInstance NullableWorkflowServiceItemInstanceRelationship     `json:"ServiceItemInstance,omitempty"`
 	}
 
 	varConvergedinfraPodWithoutEmbeddedStruct := ConvergedinfraPodWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varConvergedinfraPodWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varConvergedinfraPodWithoutEmbeddedStruct)
 	if err == nil {
 		varConvergedinfraPod := _ConvergedinfraPod{}
 		varConvergedinfraPod.ClassId = varConvergedinfraPodWithoutEmbeddedStruct.ClassId
@@ -418,7 +492,7 @@ func (o *ConvergedinfraPod) UnmarshalJSON(bytes []byte) (err error) {
 
 	varConvergedinfraPod := _ConvergedinfraPod{}
 
-	err = json.Unmarshal(bytes, &varConvergedinfraPod)
+	err = json.Unmarshal(data, &varConvergedinfraPod)
 	if err == nil {
 		o.ConvergedinfraBasePod = varConvergedinfraPod.ConvergedinfraBasePod
 	} else {
@@ -427,7 +501,7 @@ func (o *ConvergedinfraPod) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "DeploymentType")

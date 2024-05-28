@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the ResourcepoolPool type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ResourcepoolPool{}
 
 // ResourcepoolPool Pool represents a collection of resource. The resource can be any MO which has PoolResource meta enabled. The resource in the pool can be reserved or unreserved by using Lease API, reserved/unreserved resources can be used in the entities like server profiles.
 type ResourcepoolPool struct {
@@ -28,9 +32,9 @@ type ResourcepoolPool struct {
 	PoolType               *string                                    `json:"PoolType,omitempty"`
 	ResourcePoolParameters NullableResourcepoolResourcePoolParameters `json:"ResourcePoolParameters,omitempty"`
 	// The type of the resource present in the pool, example 'server' its combination of RackUnit and Blade. * `None` - The resource cannot consider for Resource Pool. * `Server` - Resource Pool holds the server kind of resources, example - RackServer, Blade.
-	ResourceType         *string                               `json:"ResourceType,omitempty"`
-	Selectors            []ResourceSelector                    `json:"Selectors,omitempty"`
-	Organization         *OrganizationOrganizationRelationship `json:"Organization,omitempty"`
+	ResourceType         *string                                      `json:"ResourceType,omitempty"`
+	Selectors            []ResourceSelector                           `json:"Selectors,omitempty"`
+	Organization         NullableOrganizationOrganizationRelationship `json:"Organization,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -119,7 +123,7 @@ func (o *ResourcepoolPool) SetObjectType(v string) {
 
 // GetPoolType returns the PoolType field value if set, zero value otherwise.
 func (o *ResourcepoolPool) GetPoolType() string {
-	if o == nil || o.PoolType == nil {
+	if o == nil || IsNil(o.PoolType) {
 		var ret string
 		return ret
 	}
@@ -129,7 +133,7 @@ func (o *ResourcepoolPool) GetPoolType() string {
 // GetPoolTypeOk returns a tuple with the PoolType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ResourcepoolPool) GetPoolTypeOk() (*string, bool) {
-	if o == nil || o.PoolType == nil {
+	if o == nil || IsNil(o.PoolType) {
 		return nil, false
 	}
 	return o.PoolType, true
@@ -137,7 +141,7 @@ func (o *ResourcepoolPool) GetPoolTypeOk() (*string, bool) {
 
 // HasPoolType returns a boolean if a field has been set.
 func (o *ResourcepoolPool) HasPoolType() bool {
-	if o != nil && o.PoolType != nil {
+	if o != nil && !IsNil(o.PoolType) {
 		return true
 	}
 
@@ -151,7 +155,7 @@ func (o *ResourcepoolPool) SetPoolType(v string) {
 
 // GetResourcePoolParameters returns the ResourcePoolParameters field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ResourcepoolPool) GetResourcePoolParameters() ResourcepoolResourcePoolParameters {
-	if o == nil || o.ResourcePoolParameters.Get() == nil {
+	if o == nil || IsNil(o.ResourcePoolParameters.Get()) {
 		var ret ResourcepoolResourcePoolParameters
 		return ret
 	}
@@ -194,7 +198,7 @@ func (o *ResourcepoolPool) UnsetResourcePoolParameters() {
 
 // GetResourceType returns the ResourceType field value if set, zero value otherwise.
 func (o *ResourcepoolPool) GetResourceType() string {
-	if o == nil || o.ResourceType == nil {
+	if o == nil || IsNil(o.ResourceType) {
 		var ret string
 		return ret
 	}
@@ -204,7 +208,7 @@ func (o *ResourcepoolPool) GetResourceType() string {
 // GetResourceTypeOk returns a tuple with the ResourceType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ResourcepoolPool) GetResourceTypeOk() (*string, bool) {
-	if o == nil || o.ResourceType == nil {
+	if o == nil || IsNil(o.ResourceType) {
 		return nil, false
 	}
 	return o.ResourceType, true
@@ -212,7 +216,7 @@ func (o *ResourcepoolPool) GetResourceTypeOk() (*string, bool) {
 
 // HasResourceType returns a boolean if a field has been set.
 func (o *ResourcepoolPool) HasResourceType() bool {
-	if o != nil && o.ResourceType != nil {
+	if o != nil && !IsNil(o.ResourceType) {
 		return true
 	}
 
@@ -237,7 +241,7 @@ func (o *ResourcepoolPool) GetSelectors() []ResourceSelector {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ResourcepoolPool) GetSelectorsOk() ([]ResourceSelector, bool) {
-	if o == nil || o.Selectors == nil {
+	if o == nil || IsNil(o.Selectors) {
 		return nil, false
 	}
 	return o.Selectors, true
@@ -245,7 +249,7 @@ func (o *ResourcepoolPool) GetSelectorsOk() ([]ResourceSelector, bool) {
 
 // HasSelectors returns a boolean if a field has been set.
 func (o *ResourcepoolPool) HasSelectors() bool {
-	if o != nil && o.Selectors != nil {
+	if o != nil && IsNil(o.Selectors) {
 		return true
 	}
 
@@ -257,78 +261,115 @@ func (o *ResourcepoolPool) SetSelectors(v []ResourceSelector) {
 	o.Selectors = v
 }
 
-// GetOrganization returns the Organization field value if set, zero value otherwise.
+// GetOrganization returns the Organization field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ResourcepoolPool) GetOrganization() OrganizationOrganizationRelationship {
-	if o == nil || o.Organization == nil {
+	if o == nil || IsNil(o.Organization.Get()) {
 		var ret OrganizationOrganizationRelationship
 		return ret
 	}
-	return *o.Organization
+	return *o.Organization.Get()
 }
 
 // GetOrganizationOk returns a tuple with the Organization field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ResourcepoolPool) GetOrganizationOk() (*OrganizationOrganizationRelationship, bool) {
-	if o == nil || o.Organization == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Organization, true
+	return o.Organization.Get(), o.Organization.IsSet()
 }
 
 // HasOrganization returns a boolean if a field has been set.
 func (o *ResourcepoolPool) HasOrganization() bool {
-	if o != nil && o.Organization != nil {
+	if o != nil && o.Organization.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetOrganization gets a reference to the given OrganizationOrganizationRelationship and assigns it to the Organization field.
+// SetOrganization gets a reference to the given NullableOrganizationOrganizationRelationship and assigns it to the Organization field.
 func (o *ResourcepoolPool) SetOrganization(v OrganizationOrganizationRelationship) {
-	o.Organization = &v
+	o.Organization.Set(&v)
+}
+
+// SetOrganizationNil sets the value for Organization to be an explicit nil
+func (o *ResourcepoolPool) SetOrganizationNil() {
+	o.Organization.Set(nil)
+}
+
+// UnsetOrganization ensures that no value is present for Organization, not even an explicit nil
+func (o *ResourcepoolPool) UnsetOrganization() {
+	o.Organization.Unset()
 }
 
 func (o ResourcepoolPool) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o ResourcepoolPool) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedPoolAbstractPool, errPoolAbstractPool := json.Marshal(o.PoolAbstractPool)
 	if errPoolAbstractPool != nil {
-		return []byte{}, errPoolAbstractPool
+		return map[string]interface{}{}, errPoolAbstractPool
 	}
 	errPoolAbstractPool = json.Unmarshal([]byte(serializedPoolAbstractPool), &toSerialize)
 	if errPoolAbstractPool != nil {
-		return []byte{}, errPoolAbstractPool
+		return map[string]interface{}{}, errPoolAbstractPool
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.PoolType != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.PoolType) {
 		toSerialize["PoolType"] = o.PoolType
 	}
 	if o.ResourcePoolParameters.IsSet() {
 		toSerialize["ResourcePoolParameters"] = o.ResourcePoolParameters.Get()
 	}
-	if o.ResourceType != nil {
+	if !IsNil(o.ResourceType) {
 		toSerialize["ResourceType"] = o.ResourceType
 	}
 	if o.Selectors != nil {
 		toSerialize["Selectors"] = o.Selectors
 	}
-	if o.Organization != nil {
-		toSerialize["Organization"] = o.Organization
+	if o.Organization.IsSet() {
+		toSerialize["Organization"] = o.Organization.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *ResourcepoolPool) UnmarshalJSON(bytes []byte) (err error) {
+func (o *ResourcepoolPool) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type ResourcepoolPoolWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -338,14 +379,14 @@ func (o *ResourcepoolPool) UnmarshalJSON(bytes []byte) (err error) {
 		PoolType               *string                                    `json:"PoolType,omitempty"`
 		ResourcePoolParameters NullableResourcepoolResourcePoolParameters `json:"ResourcePoolParameters,omitempty"`
 		// The type of the resource present in the pool, example 'server' its combination of RackUnit and Blade. * `None` - The resource cannot consider for Resource Pool. * `Server` - Resource Pool holds the server kind of resources, example - RackServer, Blade.
-		ResourceType *string                               `json:"ResourceType,omitempty"`
-		Selectors    []ResourceSelector                    `json:"Selectors,omitempty"`
-		Organization *OrganizationOrganizationRelationship `json:"Organization,omitempty"`
+		ResourceType *string                                      `json:"ResourceType,omitempty"`
+		Selectors    []ResourceSelector                           `json:"Selectors,omitempty"`
+		Organization NullableOrganizationOrganizationRelationship `json:"Organization,omitempty"`
 	}
 
 	varResourcepoolPoolWithoutEmbeddedStruct := ResourcepoolPoolWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varResourcepoolPoolWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varResourcepoolPoolWithoutEmbeddedStruct)
 	if err == nil {
 		varResourcepoolPool := _ResourcepoolPool{}
 		varResourcepoolPool.ClassId = varResourcepoolPoolWithoutEmbeddedStruct.ClassId
@@ -362,7 +403,7 @@ func (o *ResourcepoolPool) UnmarshalJSON(bytes []byte) (err error) {
 
 	varResourcepoolPool := _ResourcepoolPool{}
 
-	err = json.Unmarshal(bytes, &varResourcepoolPool)
+	err = json.Unmarshal(data, &varResourcepoolPool)
 	if err == nil {
 		o.PoolAbstractPool = varResourcepoolPool.PoolAbstractPool
 	} else {
@@ -371,7 +412,7 @@ func (o *ResourcepoolPool) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "PoolType")

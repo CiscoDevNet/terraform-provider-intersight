@@ -14,8 +14,8 @@ Name | Type | Description | Notes
 **Os** | Pointer to **string** | Details of name and version of the operating system running on the server. | [optional] [readonly] 
 **Platform** | Pointer to **string** | Details of platform of the server, examples are B-Series, C-Series, X-Series etc. | [optional] [readonly] 
 **Processor** | Pointer to **string** | The processor information of the server. | [optional] [readonly] 
-**PodCompliance** | Pointer to [**ConvergedinfraPodComplianceInfoRelationship**](ConvergedinfraPodComplianceInfoRelationship.md) |  | [optional] 
-**Server** | Pointer to [**ComputePhysicalSummaryRelationship**](ComputePhysicalSummaryRelationship.md) |  | [optional] 
+**PodCompliance** | Pointer to [**NullableConvergedinfraPodComplianceInfoRelationship**](ConvergedinfraPodComplianceInfoRelationship.md) |  | [optional] 
+**Server** | Pointer to [**NullableComputePhysicalSummaryRelationship**](ComputePhysicalSummaryRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -301,6 +301,16 @@ SetPodCompliance sets PodCompliance field to given value.
 
 HasPodCompliance returns a boolean if a field has been set.
 
+### SetPodComplianceNil
+
+`func (o *ConvergedinfraServerComplianceDetails) SetPodComplianceNil(b bool)`
+
+ SetPodComplianceNil sets the value for PodCompliance to be an explicit nil
+
+### UnsetPodCompliance
+`func (o *ConvergedinfraServerComplianceDetails) UnsetPodCompliance()`
+
+UnsetPodCompliance ensures that no value is present for PodCompliance, not even an explicit nil
 ### GetServer
 
 `func (o *ConvergedinfraServerComplianceDetails) GetServer() ComputePhysicalSummaryRelationship`
@@ -326,6 +336,16 @@ SetServer sets Server field to given value.
 
 HasServer returns a boolean if a field has been set.
 
+### SetServerNil
+
+`func (o *ConvergedinfraServerComplianceDetails) SetServerNil(b bool)`
+
+ SetServerNil sets the value for Server to be an explicit nil
+
+### UnsetServer
+`func (o *ConvergedinfraServerComplianceDetails) UnsetServer()`
+
+UnsetServer ensures that no value is present for Server, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

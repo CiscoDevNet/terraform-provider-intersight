@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the CloudSkuRegionRateCards type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &CloudSkuRegionRateCards{}
 
 // CloudSkuRegionRateCards Base sku for containing price information for instance type, volumes, containers.
 type CloudSkuRegionRateCards struct {
@@ -46,9 +50,9 @@ type CloudSkuRegionRateCards struct {
 	// The epoch start time from which the price will be applied.
 	ValidFrom *int64 `json:"ValidFrom,omitempty"`
 	// The epoch end time of the current price.
-	ValidTo              *int64                    `json:"ValidTo,omitempty"`
-	Region               *CloudRegionsRelationship `json:"Region,omitempty"`
-	Sku                  *CloudBaseSkuRelationship `json:"Sku,omitempty"`
+	ValidTo              *int64                           `json:"ValidTo,omitempty"`
+	Region               NullableCloudRegionsRelationship `json:"Region,omitempty"`
+	Sku                  NullableCloudBaseSkuRelationship `json:"Sku,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -139,7 +143,7 @@ func (o *CloudSkuRegionRateCards) SetObjectType(v string) {
 
 // GetCurrency returns the Currency field value if set, zero value otherwise.
 func (o *CloudSkuRegionRateCards) GetCurrency() string {
-	if o == nil || o.Currency == nil {
+	if o == nil || IsNil(o.Currency) {
 		var ret string
 		return ret
 	}
@@ -149,7 +153,7 @@ func (o *CloudSkuRegionRateCards) GetCurrency() string {
 // GetCurrencyOk returns a tuple with the Currency field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudSkuRegionRateCards) GetCurrencyOk() (*string, bool) {
-	if o == nil || o.Currency == nil {
+	if o == nil || IsNil(o.Currency) {
 		return nil, false
 	}
 	return o.Currency, true
@@ -157,7 +161,7 @@ func (o *CloudSkuRegionRateCards) GetCurrencyOk() (*string, bool) {
 
 // HasCurrency returns a boolean if a field has been set.
 func (o *CloudSkuRegionRateCards) HasCurrency() bool {
-	if o != nil && o.Currency != nil {
+	if o != nil && !IsNil(o.Currency) {
 		return true
 	}
 
@@ -182,7 +186,7 @@ func (o *CloudSkuRegionRateCards) GetCustomAttributes() []CloudCustomAttributes 
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CloudSkuRegionRateCards) GetCustomAttributesOk() ([]CloudCustomAttributes, bool) {
-	if o == nil || o.CustomAttributes == nil {
+	if o == nil || IsNil(o.CustomAttributes) {
 		return nil, false
 	}
 	return o.CustomAttributes, true
@@ -190,7 +194,7 @@ func (o *CloudSkuRegionRateCards) GetCustomAttributesOk() ([]CloudCustomAttribut
 
 // HasCustomAttributes returns a boolean if a field has been set.
 func (o *CloudSkuRegionRateCards) HasCustomAttributes() bool {
-	if o != nil && o.CustomAttributes != nil {
+	if o != nil && IsNil(o.CustomAttributes) {
 		return true
 	}
 
@@ -204,7 +208,7 @@ func (o *CloudSkuRegionRateCards) SetCustomAttributes(v []CloudCustomAttributes)
 
 // GetDistributionType returns the DistributionType field value if set, zero value otherwise.
 func (o *CloudSkuRegionRateCards) GetDistributionType() string {
-	if o == nil || o.DistributionType == nil {
+	if o == nil || IsNil(o.DistributionType) {
 		var ret string
 		return ret
 	}
@@ -214,7 +218,7 @@ func (o *CloudSkuRegionRateCards) GetDistributionType() string {
 // GetDistributionTypeOk returns a tuple with the DistributionType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudSkuRegionRateCards) GetDistributionTypeOk() (*string, bool) {
-	if o == nil || o.DistributionType == nil {
+	if o == nil || IsNil(o.DistributionType) {
 		return nil, false
 	}
 	return o.DistributionType, true
@@ -222,7 +226,7 @@ func (o *CloudSkuRegionRateCards) GetDistributionTypeOk() (*string, bool) {
 
 // HasDistributionType returns a boolean if a field has been set.
 func (o *CloudSkuRegionRateCards) HasDistributionType() bool {
-	if o != nil && o.DistributionType != nil {
+	if o != nil && !IsNil(o.DistributionType) {
 		return true
 	}
 
@@ -236,7 +240,7 @@ func (o *CloudSkuRegionRateCards) SetDistributionType(v string) {
 
 // GetIsUserDefined returns the IsUserDefined field value if set, zero value otherwise.
 func (o *CloudSkuRegionRateCards) GetIsUserDefined() bool {
-	if o == nil || o.IsUserDefined == nil {
+	if o == nil || IsNil(o.IsUserDefined) {
 		var ret bool
 		return ret
 	}
@@ -246,7 +250,7 @@ func (o *CloudSkuRegionRateCards) GetIsUserDefined() bool {
 // GetIsUserDefinedOk returns a tuple with the IsUserDefined field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudSkuRegionRateCards) GetIsUserDefinedOk() (*bool, bool) {
-	if o == nil || o.IsUserDefined == nil {
+	if o == nil || IsNil(o.IsUserDefined) {
 		return nil, false
 	}
 	return o.IsUserDefined, true
@@ -254,7 +258,7 @@ func (o *CloudSkuRegionRateCards) GetIsUserDefinedOk() (*bool, bool) {
 
 // HasIsUserDefined returns a boolean if a field has been set.
 func (o *CloudSkuRegionRateCards) HasIsUserDefined() bool {
-	if o != nil && o.IsUserDefined != nil {
+	if o != nil && !IsNil(o.IsUserDefined) {
 		return true
 	}
 
@@ -268,7 +272,7 @@ func (o *CloudSkuRegionRateCards) SetIsUserDefined(v bool) {
 
 // GetPlatformType returns the PlatformType field value if set, zero value otherwise.
 func (o *CloudSkuRegionRateCards) GetPlatformType() string {
-	if o == nil || o.PlatformType == nil {
+	if o == nil || IsNil(o.PlatformType) {
 		var ret string
 		return ret
 	}
@@ -278,7 +282,7 @@ func (o *CloudSkuRegionRateCards) GetPlatformType() string {
 // GetPlatformTypeOk returns a tuple with the PlatformType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudSkuRegionRateCards) GetPlatformTypeOk() (*string, bool) {
-	if o == nil || o.PlatformType == nil {
+	if o == nil || IsNil(o.PlatformType) {
 		return nil, false
 	}
 	return o.PlatformType, true
@@ -286,7 +290,7 @@ func (o *CloudSkuRegionRateCards) GetPlatformTypeOk() (*string, bool) {
 
 // HasPlatformType returns a boolean if a field has been set.
 func (o *CloudSkuRegionRateCards) HasPlatformType() bool {
-	if o != nil && o.PlatformType != nil {
+	if o != nil && !IsNil(o.PlatformType) {
 		return true
 	}
 
@@ -300,7 +304,7 @@ func (o *CloudSkuRegionRateCards) SetPlatformType(v string) {
 
 // GetPrice returns the Price field value if set, zero value otherwise.
 func (o *CloudSkuRegionRateCards) GetPrice() float32 {
-	if o == nil || o.Price == nil {
+	if o == nil || IsNil(o.Price) {
 		var ret float32
 		return ret
 	}
@@ -310,7 +314,7 @@ func (o *CloudSkuRegionRateCards) GetPrice() float32 {
 // GetPriceOk returns a tuple with the Price field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudSkuRegionRateCards) GetPriceOk() (*float32, bool) {
-	if o == nil || o.Price == nil {
+	if o == nil || IsNil(o.Price) {
 		return nil, false
 	}
 	return o.Price, true
@@ -318,7 +322,7 @@ func (o *CloudSkuRegionRateCards) GetPriceOk() (*float32, bool) {
 
 // HasPrice returns a boolean if a field has been set.
 func (o *CloudSkuRegionRateCards) HasPrice() bool {
-	if o != nil && o.Price != nil {
+	if o != nil && !IsNil(o.Price) {
 		return true
 	}
 
@@ -332,7 +336,7 @@ func (o *CloudSkuRegionRateCards) SetPrice(v float32) {
 
 // GetRegionId returns the RegionId field value if set, zero value otherwise.
 func (o *CloudSkuRegionRateCards) GetRegionId() string {
-	if o == nil || o.RegionId == nil {
+	if o == nil || IsNil(o.RegionId) {
 		var ret string
 		return ret
 	}
@@ -342,7 +346,7 @@ func (o *CloudSkuRegionRateCards) GetRegionId() string {
 // GetRegionIdOk returns a tuple with the RegionId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudSkuRegionRateCards) GetRegionIdOk() (*string, bool) {
-	if o == nil || o.RegionId == nil {
+	if o == nil || IsNil(o.RegionId) {
 		return nil, false
 	}
 	return o.RegionId, true
@@ -350,7 +354,7 @@ func (o *CloudSkuRegionRateCards) GetRegionIdOk() (*string, bool) {
 
 // HasRegionId returns a boolean if a field has been set.
 func (o *CloudSkuRegionRateCards) HasRegionId() bool {
-	if o != nil && o.RegionId != nil {
+	if o != nil && !IsNil(o.RegionId) {
 		return true
 	}
 
@@ -364,7 +368,7 @@ func (o *CloudSkuRegionRateCards) SetRegionId(v string) {
 
 // GetServiceCategory returns the ServiceCategory field value if set, zero value otherwise.
 func (o *CloudSkuRegionRateCards) GetServiceCategory() string {
-	if o == nil || o.ServiceCategory == nil {
+	if o == nil || IsNil(o.ServiceCategory) {
 		var ret string
 		return ret
 	}
@@ -374,7 +378,7 @@ func (o *CloudSkuRegionRateCards) GetServiceCategory() string {
 // GetServiceCategoryOk returns a tuple with the ServiceCategory field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudSkuRegionRateCards) GetServiceCategoryOk() (*string, bool) {
-	if o == nil || o.ServiceCategory == nil {
+	if o == nil || IsNil(o.ServiceCategory) {
 		return nil, false
 	}
 	return o.ServiceCategory, true
@@ -382,7 +386,7 @@ func (o *CloudSkuRegionRateCards) GetServiceCategoryOk() (*string, bool) {
 
 // HasServiceCategory returns a boolean if a field has been set.
 func (o *CloudSkuRegionRateCards) HasServiceCategory() bool {
-	if o != nil && o.ServiceCategory != nil {
+	if o != nil && !IsNil(o.ServiceCategory) {
 		return true
 	}
 
@@ -396,7 +400,7 @@ func (o *CloudSkuRegionRateCards) SetServiceCategory(v string) {
 
 // GetSkuName returns the SkuName field value if set, zero value otherwise.
 func (o *CloudSkuRegionRateCards) GetSkuName() string {
-	if o == nil || o.SkuName == nil {
+	if o == nil || IsNil(o.SkuName) {
 		var ret string
 		return ret
 	}
@@ -406,7 +410,7 @@ func (o *CloudSkuRegionRateCards) GetSkuName() string {
 // GetSkuNameOk returns a tuple with the SkuName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudSkuRegionRateCards) GetSkuNameOk() (*string, bool) {
-	if o == nil || o.SkuName == nil {
+	if o == nil || IsNil(o.SkuName) {
 		return nil, false
 	}
 	return o.SkuName, true
@@ -414,7 +418,7 @@ func (o *CloudSkuRegionRateCards) GetSkuNameOk() (*string, bool) {
 
 // HasSkuName returns a boolean if a field has been set.
 func (o *CloudSkuRegionRateCards) HasSkuName() bool {
-	if o != nil && o.SkuName != nil {
+	if o != nil && !IsNil(o.SkuName) {
 		return true
 	}
 
@@ -428,7 +432,7 @@ func (o *CloudSkuRegionRateCards) SetSkuName(v string) {
 
 // GetUnit returns the Unit field value if set, zero value otherwise.
 func (o *CloudSkuRegionRateCards) GetUnit() string {
-	if o == nil || o.Unit == nil {
+	if o == nil || IsNil(o.Unit) {
 		var ret string
 		return ret
 	}
@@ -438,7 +442,7 @@ func (o *CloudSkuRegionRateCards) GetUnit() string {
 // GetUnitOk returns a tuple with the Unit field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudSkuRegionRateCards) GetUnitOk() (*string, bool) {
-	if o == nil || o.Unit == nil {
+	if o == nil || IsNil(o.Unit) {
 		return nil, false
 	}
 	return o.Unit, true
@@ -446,7 +450,7 @@ func (o *CloudSkuRegionRateCards) GetUnitOk() (*string, bool) {
 
 // HasUnit returns a boolean if a field has been set.
 func (o *CloudSkuRegionRateCards) HasUnit() bool {
-	if o != nil && o.Unit != nil {
+	if o != nil && !IsNil(o.Unit) {
 		return true
 	}
 
@@ -460,7 +464,7 @@ func (o *CloudSkuRegionRateCards) SetUnit(v string) {
 
 // GetValidFrom returns the ValidFrom field value if set, zero value otherwise.
 func (o *CloudSkuRegionRateCards) GetValidFrom() int64 {
-	if o == nil || o.ValidFrom == nil {
+	if o == nil || IsNil(o.ValidFrom) {
 		var ret int64
 		return ret
 	}
@@ -470,7 +474,7 @@ func (o *CloudSkuRegionRateCards) GetValidFrom() int64 {
 // GetValidFromOk returns a tuple with the ValidFrom field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudSkuRegionRateCards) GetValidFromOk() (*int64, bool) {
-	if o == nil || o.ValidFrom == nil {
+	if o == nil || IsNil(o.ValidFrom) {
 		return nil, false
 	}
 	return o.ValidFrom, true
@@ -478,7 +482,7 @@ func (o *CloudSkuRegionRateCards) GetValidFromOk() (*int64, bool) {
 
 // HasValidFrom returns a boolean if a field has been set.
 func (o *CloudSkuRegionRateCards) HasValidFrom() bool {
-	if o != nil && o.ValidFrom != nil {
+	if o != nil && !IsNil(o.ValidFrom) {
 		return true
 	}
 
@@ -492,7 +496,7 @@ func (o *CloudSkuRegionRateCards) SetValidFrom(v int64) {
 
 // GetValidTo returns the ValidTo field value if set, zero value otherwise.
 func (o *CloudSkuRegionRateCards) GetValidTo() int64 {
-	if o == nil || o.ValidTo == nil {
+	if o == nil || IsNil(o.ValidTo) {
 		var ret int64
 		return ret
 	}
@@ -502,7 +506,7 @@ func (o *CloudSkuRegionRateCards) GetValidTo() int64 {
 // GetValidToOk returns a tuple with the ValidTo field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudSkuRegionRateCards) GetValidToOk() (*int64, bool) {
-	if o == nil || o.ValidTo == nil {
+	if o == nil || IsNil(o.ValidTo) {
 		return nil, false
 	}
 	return o.ValidTo, true
@@ -510,7 +514,7 @@ func (o *CloudSkuRegionRateCards) GetValidToOk() (*int64, bool) {
 
 // HasValidTo returns a boolean if a field has been set.
 func (o *CloudSkuRegionRateCards) HasValidTo() bool {
-	if o != nil && o.ValidTo != nil {
+	if o != nil && !IsNil(o.ValidTo) {
 		return true
 	}
 
@@ -522,137 +526,185 @@ func (o *CloudSkuRegionRateCards) SetValidTo(v int64) {
 	o.ValidTo = &v
 }
 
-// GetRegion returns the Region field value if set, zero value otherwise.
+// GetRegion returns the Region field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CloudSkuRegionRateCards) GetRegion() CloudRegionsRelationship {
-	if o == nil || o.Region == nil {
+	if o == nil || IsNil(o.Region.Get()) {
 		var ret CloudRegionsRelationship
 		return ret
 	}
-	return *o.Region
+	return *o.Region.Get()
 }
 
 // GetRegionOk returns a tuple with the Region field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CloudSkuRegionRateCards) GetRegionOk() (*CloudRegionsRelationship, bool) {
-	if o == nil || o.Region == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Region, true
+	return o.Region.Get(), o.Region.IsSet()
 }
 
 // HasRegion returns a boolean if a field has been set.
 func (o *CloudSkuRegionRateCards) HasRegion() bool {
-	if o != nil && o.Region != nil {
+	if o != nil && o.Region.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRegion gets a reference to the given CloudRegionsRelationship and assigns it to the Region field.
+// SetRegion gets a reference to the given NullableCloudRegionsRelationship and assigns it to the Region field.
 func (o *CloudSkuRegionRateCards) SetRegion(v CloudRegionsRelationship) {
-	o.Region = &v
+	o.Region.Set(&v)
 }
 
-// GetSku returns the Sku field value if set, zero value otherwise.
+// SetRegionNil sets the value for Region to be an explicit nil
+func (o *CloudSkuRegionRateCards) SetRegionNil() {
+	o.Region.Set(nil)
+}
+
+// UnsetRegion ensures that no value is present for Region, not even an explicit nil
+func (o *CloudSkuRegionRateCards) UnsetRegion() {
+	o.Region.Unset()
+}
+
+// GetSku returns the Sku field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CloudSkuRegionRateCards) GetSku() CloudBaseSkuRelationship {
-	if o == nil || o.Sku == nil {
+	if o == nil || IsNil(o.Sku.Get()) {
 		var ret CloudBaseSkuRelationship
 		return ret
 	}
-	return *o.Sku
+	return *o.Sku.Get()
 }
 
 // GetSkuOk returns a tuple with the Sku field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CloudSkuRegionRateCards) GetSkuOk() (*CloudBaseSkuRelationship, bool) {
-	if o == nil || o.Sku == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Sku, true
+	return o.Sku.Get(), o.Sku.IsSet()
 }
 
 // HasSku returns a boolean if a field has been set.
 func (o *CloudSkuRegionRateCards) HasSku() bool {
-	if o != nil && o.Sku != nil {
+	if o != nil && o.Sku.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetSku gets a reference to the given CloudBaseSkuRelationship and assigns it to the Sku field.
+// SetSku gets a reference to the given NullableCloudBaseSkuRelationship and assigns it to the Sku field.
 func (o *CloudSkuRegionRateCards) SetSku(v CloudBaseSkuRelationship) {
-	o.Sku = &v
+	o.Sku.Set(&v)
+}
+
+// SetSkuNil sets the value for Sku to be an explicit nil
+func (o *CloudSkuRegionRateCards) SetSkuNil() {
+	o.Sku.Set(nil)
+}
+
+// UnsetSku ensures that no value is present for Sku, not even an explicit nil
+func (o *CloudSkuRegionRateCards) UnsetSku() {
+	o.Sku.Unset()
 }
 
 func (o CloudSkuRegionRateCards) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o CloudSkuRegionRateCards) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Currency != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Currency) {
 		toSerialize["Currency"] = o.Currency
 	}
 	if o.CustomAttributes != nil {
 		toSerialize["CustomAttributes"] = o.CustomAttributes
 	}
-	if o.DistributionType != nil {
+	if !IsNil(o.DistributionType) {
 		toSerialize["DistributionType"] = o.DistributionType
 	}
-	if o.IsUserDefined != nil {
+	if !IsNil(o.IsUserDefined) {
 		toSerialize["IsUserDefined"] = o.IsUserDefined
 	}
-	if o.PlatformType != nil {
+	if !IsNil(o.PlatformType) {
 		toSerialize["PlatformType"] = o.PlatformType
 	}
-	if o.Price != nil {
+	if !IsNil(o.Price) {
 		toSerialize["Price"] = o.Price
 	}
-	if o.RegionId != nil {
+	if !IsNil(o.RegionId) {
 		toSerialize["RegionId"] = o.RegionId
 	}
-	if o.ServiceCategory != nil {
+	if !IsNil(o.ServiceCategory) {
 		toSerialize["ServiceCategory"] = o.ServiceCategory
 	}
-	if o.SkuName != nil {
+	if !IsNil(o.SkuName) {
 		toSerialize["SkuName"] = o.SkuName
 	}
-	if o.Unit != nil {
+	if !IsNil(o.Unit) {
 		toSerialize["Unit"] = o.Unit
 	}
-	if o.ValidFrom != nil {
+	if !IsNil(o.ValidFrom) {
 		toSerialize["ValidFrom"] = o.ValidFrom
 	}
-	if o.ValidTo != nil {
+	if !IsNil(o.ValidTo) {
 		toSerialize["ValidTo"] = o.ValidTo
 	}
-	if o.Region != nil {
-		toSerialize["Region"] = o.Region
+	if o.Region.IsSet() {
+		toSerialize["Region"] = o.Region.Get()
 	}
-	if o.Sku != nil {
-		toSerialize["Sku"] = o.Sku
+	if o.Sku.IsSet() {
+		toSerialize["Sku"] = o.Sku.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *CloudSkuRegionRateCards) UnmarshalJSON(bytes []byte) (err error) {
+func (o *CloudSkuRegionRateCards) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type CloudSkuRegionRateCardsWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -680,14 +732,14 @@ func (o *CloudSkuRegionRateCards) UnmarshalJSON(bytes []byte) (err error) {
 		// The epoch start time from which the price will be applied.
 		ValidFrom *int64 `json:"ValidFrom,omitempty"`
 		// The epoch end time of the current price.
-		ValidTo *int64                    `json:"ValidTo,omitempty"`
-		Region  *CloudRegionsRelationship `json:"Region,omitempty"`
-		Sku     *CloudBaseSkuRelationship `json:"Sku,omitempty"`
+		ValidTo *int64                           `json:"ValidTo,omitempty"`
+		Region  NullableCloudRegionsRelationship `json:"Region,omitempty"`
+		Sku     NullableCloudBaseSkuRelationship `json:"Sku,omitempty"`
 	}
 
 	varCloudSkuRegionRateCardsWithoutEmbeddedStruct := CloudSkuRegionRateCardsWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varCloudSkuRegionRateCardsWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varCloudSkuRegionRateCardsWithoutEmbeddedStruct)
 	if err == nil {
 		varCloudSkuRegionRateCards := _CloudSkuRegionRateCards{}
 		varCloudSkuRegionRateCards.ClassId = varCloudSkuRegionRateCardsWithoutEmbeddedStruct.ClassId
@@ -713,7 +765,7 @@ func (o *CloudSkuRegionRateCards) UnmarshalJSON(bytes []byte) (err error) {
 
 	varCloudSkuRegionRateCards := _CloudSkuRegionRateCards{}
 
-	err = json.Unmarshal(bytes, &varCloudSkuRegionRateCards)
+	err = json.Unmarshal(data, &varCloudSkuRegionRateCards)
 	if err == nil {
 		o.MoBaseMo = varCloudSkuRegionRateCards.MoBaseMo
 	} else {
@@ -722,7 +774,7 @@ func (o *CloudSkuRegionRateCards) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Currency")

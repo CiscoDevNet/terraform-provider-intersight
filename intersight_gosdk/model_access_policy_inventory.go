@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the AccessPolicyInventory type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &AccessPolicyInventory{}
 
 // AccessPolicyInventory Policy to configure server or chassis management options.
 type AccessPolicyInventory struct {
@@ -27,12 +31,12 @@ type AccessPolicyInventory struct {
 	AddressType       NullableAccessAddressType       `json:"AddressType,omitempty"`
 	ConfigurationType NullableAccessConfigurationType `json:"ConfigurationType,omitempty"`
 	// VLAN to be used for server access over Inband network.
-	InbandVlan           *int64                  `json:"InbandVlan,omitempty"`
-	InbandIpPool         *IppoolPoolRelationship `json:"InbandIpPool,omitempty"`
-	InbandVrf            *VrfVrfRelationship     `json:"InbandVrf,omitempty"`
-	OutOfBandIpPool      *IppoolPoolRelationship `json:"OutOfBandIpPool,omitempty"`
-	OutOfBandVrf         *VrfVrfRelationship     `json:"OutOfBandVrf,omitempty"`
-	TargetMo             *MoBaseMoRelationship   `json:"TargetMo,omitempty"`
+	InbandVlan           *int64                         `json:"InbandVlan,omitempty"`
+	InbandIpPool         NullableIppoolPoolRelationship `json:"InbandIpPool,omitempty"`
+	InbandVrf            NullableVrfVrfRelationship     `json:"InbandVrf,omitempty"`
+	OutOfBandIpPool      NullableIppoolPoolRelationship `json:"OutOfBandIpPool,omitempty"`
+	OutOfBandVrf         NullableVrfVrfRelationship     `json:"OutOfBandVrf,omitempty"`
+	TargetMo             NullableMoBaseMoRelationship   `json:"TargetMo,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -111,7 +115,7 @@ func (o *AccessPolicyInventory) SetObjectType(v string) {
 
 // GetAddressType returns the AddressType field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *AccessPolicyInventory) GetAddressType() AccessAddressType {
-	if o == nil || o.AddressType.Get() == nil {
+	if o == nil || IsNil(o.AddressType.Get()) {
 		var ret AccessAddressType
 		return ret
 	}
@@ -154,7 +158,7 @@ func (o *AccessPolicyInventory) UnsetAddressType() {
 
 // GetConfigurationType returns the ConfigurationType field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *AccessPolicyInventory) GetConfigurationType() AccessConfigurationType {
-	if o == nil || o.ConfigurationType.Get() == nil {
+	if o == nil || IsNil(o.ConfigurationType.Get()) {
 		var ret AccessConfigurationType
 		return ret
 	}
@@ -197,7 +201,7 @@ func (o *AccessPolicyInventory) UnsetConfigurationType() {
 
 // GetInbandVlan returns the InbandVlan field value if set, zero value otherwise.
 func (o *AccessPolicyInventory) GetInbandVlan() int64 {
-	if o == nil || o.InbandVlan == nil {
+	if o == nil || IsNil(o.InbandVlan) {
 		var ret int64
 		return ret
 	}
@@ -207,7 +211,7 @@ func (o *AccessPolicyInventory) GetInbandVlan() int64 {
 // GetInbandVlanOk returns a tuple with the InbandVlan field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AccessPolicyInventory) GetInbandVlanOk() (*int64, bool) {
-	if o == nil || o.InbandVlan == nil {
+	if o == nil || IsNil(o.InbandVlan) {
 		return nil, false
 	}
 	return o.InbandVlan, true
@@ -215,7 +219,7 @@ func (o *AccessPolicyInventory) GetInbandVlanOk() (*int64, bool) {
 
 // HasInbandVlan returns a boolean if a field has been set.
 func (o *AccessPolicyInventory) HasInbandVlan() bool {
-	if o != nil && o.InbandVlan != nil {
+	if o != nil && !IsNil(o.InbandVlan) {
 		return true
 	}
 
@@ -227,215 +231,296 @@ func (o *AccessPolicyInventory) SetInbandVlan(v int64) {
 	o.InbandVlan = &v
 }
 
-// GetInbandIpPool returns the InbandIpPool field value if set, zero value otherwise.
+// GetInbandIpPool returns the InbandIpPool field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *AccessPolicyInventory) GetInbandIpPool() IppoolPoolRelationship {
-	if o == nil || o.InbandIpPool == nil {
+	if o == nil || IsNil(o.InbandIpPool.Get()) {
 		var ret IppoolPoolRelationship
 		return ret
 	}
-	return *o.InbandIpPool
+	return *o.InbandIpPool.Get()
 }
 
 // GetInbandIpPoolOk returns a tuple with the InbandIpPool field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *AccessPolicyInventory) GetInbandIpPoolOk() (*IppoolPoolRelationship, bool) {
-	if o == nil || o.InbandIpPool == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.InbandIpPool, true
+	return o.InbandIpPool.Get(), o.InbandIpPool.IsSet()
 }
 
 // HasInbandIpPool returns a boolean if a field has been set.
 func (o *AccessPolicyInventory) HasInbandIpPool() bool {
-	if o != nil && o.InbandIpPool != nil {
+	if o != nil && o.InbandIpPool.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetInbandIpPool gets a reference to the given IppoolPoolRelationship and assigns it to the InbandIpPool field.
+// SetInbandIpPool gets a reference to the given NullableIppoolPoolRelationship and assigns it to the InbandIpPool field.
 func (o *AccessPolicyInventory) SetInbandIpPool(v IppoolPoolRelationship) {
-	o.InbandIpPool = &v
+	o.InbandIpPool.Set(&v)
 }
 
-// GetInbandVrf returns the InbandVrf field value if set, zero value otherwise.
+// SetInbandIpPoolNil sets the value for InbandIpPool to be an explicit nil
+func (o *AccessPolicyInventory) SetInbandIpPoolNil() {
+	o.InbandIpPool.Set(nil)
+}
+
+// UnsetInbandIpPool ensures that no value is present for InbandIpPool, not even an explicit nil
+func (o *AccessPolicyInventory) UnsetInbandIpPool() {
+	o.InbandIpPool.Unset()
+}
+
+// GetInbandVrf returns the InbandVrf field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *AccessPolicyInventory) GetInbandVrf() VrfVrfRelationship {
-	if o == nil || o.InbandVrf == nil {
+	if o == nil || IsNil(o.InbandVrf.Get()) {
 		var ret VrfVrfRelationship
 		return ret
 	}
-	return *o.InbandVrf
+	return *o.InbandVrf.Get()
 }
 
 // GetInbandVrfOk returns a tuple with the InbandVrf field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *AccessPolicyInventory) GetInbandVrfOk() (*VrfVrfRelationship, bool) {
-	if o == nil || o.InbandVrf == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.InbandVrf, true
+	return o.InbandVrf.Get(), o.InbandVrf.IsSet()
 }
 
 // HasInbandVrf returns a boolean if a field has been set.
 func (o *AccessPolicyInventory) HasInbandVrf() bool {
-	if o != nil && o.InbandVrf != nil {
+	if o != nil && o.InbandVrf.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetInbandVrf gets a reference to the given VrfVrfRelationship and assigns it to the InbandVrf field.
+// SetInbandVrf gets a reference to the given NullableVrfVrfRelationship and assigns it to the InbandVrf field.
 func (o *AccessPolicyInventory) SetInbandVrf(v VrfVrfRelationship) {
-	o.InbandVrf = &v
+	o.InbandVrf.Set(&v)
 }
 
-// GetOutOfBandIpPool returns the OutOfBandIpPool field value if set, zero value otherwise.
+// SetInbandVrfNil sets the value for InbandVrf to be an explicit nil
+func (o *AccessPolicyInventory) SetInbandVrfNil() {
+	o.InbandVrf.Set(nil)
+}
+
+// UnsetInbandVrf ensures that no value is present for InbandVrf, not even an explicit nil
+func (o *AccessPolicyInventory) UnsetInbandVrf() {
+	o.InbandVrf.Unset()
+}
+
+// GetOutOfBandIpPool returns the OutOfBandIpPool field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *AccessPolicyInventory) GetOutOfBandIpPool() IppoolPoolRelationship {
-	if o == nil || o.OutOfBandIpPool == nil {
+	if o == nil || IsNil(o.OutOfBandIpPool.Get()) {
 		var ret IppoolPoolRelationship
 		return ret
 	}
-	return *o.OutOfBandIpPool
+	return *o.OutOfBandIpPool.Get()
 }
 
 // GetOutOfBandIpPoolOk returns a tuple with the OutOfBandIpPool field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *AccessPolicyInventory) GetOutOfBandIpPoolOk() (*IppoolPoolRelationship, bool) {
-	if o == nil || o.OutOfBandIpPool == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.OutOfBandIpPool, true
+	return o.OutOfBandIpPool.Get(), o.OutOfBandIpPool.IsSet()
 }
 
 // HasOutOfBandIpPool returns a boolean if a field has been set.
 func (o *AccessPolicyInventory) HasOutOfBandIpPool() bool {
-	if o != nil && o.OutOfBandIpPool != nil {
+	if o != nil && o.OutOfBandIpPool.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetOutOfBandIpPool gets a reference to the given IppoolPoolRelationship and assigns it to the OutOfBandIpPool field.
+// SetOutOfBandIpPool gets a reference to the given NullableIppoolPoolRelationship and assigns it to the OutOfBandIpPool field.
 func (o *AccessPolicyInventory) SetOutOfBandIpPool(v IppoolPoolRelationship) {
-	o.OutOfBandIpPool = &v
+	o.OutOfBandIpPool.Set(&v)
 }
 
-// GetOutOfBandVrf returns the OutOfBandVrf field value if set, zero value otherwise.
+// SetOutOfBandIpPoolNil sets the value for OutOfBandIpPool to be an explicit nil
+func (o *AccessPolicyInventory) SetOutOfBandIpPoolNil() {
+	o.OutOfBandIpPool.Set(nil)
+}
+
+// UnsetOutOfBandIpPool ensures that no value is present for OutOfBandIpPool, not even an explicit nil
+func (o *AccessPolicyInventory) UnsetOutOfBandIpPool() {
+	o.OutOfBandIpPool.Unset()
+}
+
+// GetOutOfBandVrf returns the OutOfBandVrf field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *AccessPolicyInventory) GetOutOfBandVrf() VrfVrfRelationship {
-	if o == nil || o.OutOfBandVrf == nil {
+	if o == nil || IsNil(o.OutOfBandVrf.Get()) {
 		var ret VrfVrfRelationship
 		return ret
 	}
-	return *o.OutOfBandVrf
+	return *o.OutOfBandVrf.Get()
 }
 
 // GetOutOfBandVrfOk returns a tuple with the OutOfBandVrf field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *AccessPolicyInventory) GetOutOfBandVrfOk() (*VrfVrfRelationship, bool) {
-	if o == nil || o.OutOfBandVrf == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.OutOfBandVrf, true
+	return o.OutOfBandVrf.Get(), o.OutOfBandVrf.IsSet()
 }
 
 // HasOutOfBandVrf returns a boolean if a field has been set.
 func (o *AccessPolicyInventory) HasOutOfBandVrf() bool {
-	if o != nil && o.OutOfBandVrf != nil {
+	if o != nil && o.OutOfBandVrf.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetOutOfBandVrf gets a reference to the given VrfVrfRelationship and assigns it to the OutOfBandVrf field.
+// SetOutOfBandVrf gets a reference to the given NullableVrfVrfRelationship and assigns it to the OutOfBandVrf field.
 func (o *AccessPolicyInventory) SetOutOfBandVrf(v VrfVrfRelationship) {
-	o.OutOfBandVrf = &v
+	o.OutOfBandVrf.Set(&v)
 }
 
-// GetTargetMo returns the TargetMo field value if set, zero value otherwise.
+// SetOutOfBandVrfNil sets the value for OutOfBandVrf to be an explicit nil
+func (o *AccessPolicyInventory) SetOutOfBandVrfNil() {
+	o.OutOfBandVrf.Set(nil)
+}
+
+// UnsetOutOfBandVrf ensures that no value is present for OutOfBandVrf, not even an explicit nil
+func (o *AccessPolicyInventory) UnsetOutOfBandVrf() {
+	o.OutOfBandVrf.Unset()
+}
+
+// GetTargetMo returns the TargetMo field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *AccessPolicyInventory) GetTargetMo() MoBaseMoRelationship {
-	if o == nil || o.TargetMo == nil {
+	if o == nil || IsNil(o.TargetMo.Get()) {
 		var ret MoBaseMoRelationship
 		return ret
 	}
-	return *o.TargetMo
+	return *o.TargetMo.Get()
 }
 
 // GetTargetMoOk returns a tuple with the TargetMo field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *AccessPolicyInventory) GetTargetMoOk() (*MoBaseMoRelationship, bool) {
-	if o == nil || o.TargetMo == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.TargetMo, true
+	return o.TargetMo.Get(), o.TargetMo.IsSet()
 }
 
 // HasTargetMo returns a boolean if a field has been set.
 func (o *AccessPolicyInventory) HasTargetMo() bool {
-	if o != nil && o.TargetMo != nil {
+	if o != nil && o.TargetMo.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetTargetMo gets a reference to the given MoBaseMoRelationship and assigns it to the TargetMo field.
+// SetTargetMo gets a reference to the given NullableMoBaseMoRelationship and assigns it to the TargetMo field.
 func (o *AccessPolicyInventory) SetTargetMo(v MoBaseMoRelationship) {
-	o.TargetMo = &v
+	o.TargetMo.Set(&v)
+}
+
+// SetTargetMoNil sets the value for TargetMo to be an explicit nil
+func (o *AccessPolicyInventory) SetTargetMoNil() {
+	o.TargetMo.Set(nil)
+}
+
+// UnsetTargetMo ensures that no value is present for TargetMo, not even an explicit nil
+func (o *AccessPolicyInventory) UnsetTargetMo() {
+	o.TargetMo.Unset()
 }
 
 func (o AccessPolicyInventory) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o AccessPolicyInventory) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedPolicyAbstractPolicyInventory, errPolicyAbstractPolicyInventory := json.Marshal(o.PolicyAbstractPolicyInventory)
 	if errPolicyAbstractPolicyInventory != nil {
-		return []byte{}, errPolicyAbstractPolicyInventory
+		return map[string]interface{}{}, errPolicyAbstractPolicyInventory
 	}
 	errPolicyAbstractPolicyInventory = json.Unmarshal([]byte(serializedPolicyAbstractPolicyInventory), &toSerialize)
 	if errPolicyAbstractPolicyInventory != nil {
-		return []byte{}, errPolicyAbstractPolicyInventory
+		return map[string]interface{}{}, errPolicyAbstractPolicyInventory
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
 	if o.AddressType.IsSet() {
 		toSerialize["AddressType"] = o.AddressType.Get()
 	}
 	if o.ConfigurationType.IsSet() {
 		toSerialize["ConfigurationType"] = o.ConfigurationType.Get()
 	}
-	if o.InbandVlan != nil {
+	if !IsNil(o.InbandVlan) {
 		toSerialize["InbandVlan"] = o.InbandVlan
 	}
-	if o.InbandIpPool != nil {
-		toSerialize["InbandIpPool"] = o.InbandIpPool
+	if o.InbandIpPool.IsSet() {
+		toSerialize["InbandIpPool"] = o.InbandIpPool.Get()
 	}
-	if o.InbandVrf != nil {
-		toSerialize["InbandVrf"] = o.InbandVrf
+	if o.InbandVrf.IsSet() {
+		toSerialize["InbandVrf"] = o.InbandVrf.Get()
 	}
-	if o.OutOfBandIpPool != nil {
-		toSerialize["OutOfBandIpPool"] = o.OutOfBandIpPool
+	if o.OutOfBandIpPool.IsSet() {
+		toSerialize["OutOfBandIpPool"] = o.OutOfBandIpPool.Get()
 	}
-	if o.OutOfBandVrf != nil {
-		toSerialize["OutOfBandVrf"] = o.OutOfBandVrf
+	if o.OutOfBandVrf.IsSet() {
+		toSerialize["OutOfBandVrf"] = o.OutOfBandVrf.Get()
 	}
-	if o.TargetMo != nil {
-		toSerialize["TargetMo"] = o.TargetMo
+	if o.TargetMo.IsSet() {
+		toSerialize["TargetMo"] = o.TargetMo.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *AccessPolicyInventory) UnmarshalJSON(bytes []byte) (err error) {
+func (o *AccessPolicyInventory) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type AccessPolicyInventoryWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -444,17 +529,17 @@ func (o *AccessPolicyInventory) UnmarshalJSON(bytes []byte) (err error) {
 		AddressType       NullableAccessAddressType       `json:"AddressType,omitempty"`
 		ConfigurationType NullableAccessConfigurationType `json:"ConfigurationType,omitempty"`
 		// VLAN to be used for server access over Inband network.
-		InbandVlan      *int64                  `json:"InbandVlan,omitempty"`
-		InbandIpPool    *IppoolPoolRelationship `json:"InbandIpPool,omitempty"`
-		InbandVrf       *VrfVrfRelationship     `json:"InbandVrf,omitempty"`
-		OutOfBandIpPool *IppoolPoolRelationship `json:"OutOfBandIpPool,omitempty"`
-		OutOfBandVrf    *VrfVrfRelationship     `json:"OutOfBandVrf,omitempty"`
-		TargetMo        *MoBaseMoRelationship   `json:"TargetMo,omitempty"`
+		InbandVlan      *int64                         `json:"InbandVlan,omitempty"`
+		InbandIpPool    NullableIppoolPoolRelationship `json:"InbandIpPool,omitempty"`
+		InbandVrf       NullableVrfVrfRelationship     `json:"InbandVrf,omitempty"`
+		OutOfBandIpPool NullableIppoolPoolRelationship `json:"OutOfBandIpPool,omitempty"`
+		OutOfBandVrf    NullableVrfVrfRelationship     `json:"OutOfBandVrf,omitempty"`
+		TargetMo        NullableMoBaseMoRelationship   `json:"TargetMo,omitempty"`
 	}
 
 	varAccessPolicyInventoryWithoutEmbeddedStruct := AccessPolicyInventoryWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varAccessPolicyInventoryWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varAccessPolicyInventoryWithoutEmbeddedStruct)
 	if err == nil {
 		varAccessPolicyInventory := _AccessPolicyInventory{}
 		varAccessPolicyInventory.ClassId = varAccessPolicyInventoryWithoutEmbeddedStruct.ClassId
@@ -474,7 +559,7 @@ func (o *AccessPolicyInventory) UnmarshalJSON(bytes []byte) (err error) {
 
 	varAccessPolicyInventory := _AccessPolicyInventory{}
 
-	err = json.Unmarshal(bytes, &varAccessPolicyInventory)
+	err = json.Unmarshal(data, &varAccessPolicyInventory)
 	if err == nil {
 		o.PolicyAbstractPolicyInventory = varAccessPolicyInventory.PolicyAbstractPolicyInventory
 	} else {
@@ -483,7 +568,7 @@ func (o *AccessPolicyInventory) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "AddressType")

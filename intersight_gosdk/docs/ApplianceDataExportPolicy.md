@@ -8,8 +8,8 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "appliance.DataExportPolicy"]
 **Enable** | Pointer to **bool** | Status of the data collection mode. If the value is &#39;true&#39;, then data collection is enabled. | [optional] 
 **Name** | Pointer to **string** | Name of the Data Export Policy. | [optional] [readonly] 
-**Account** | Pointer to [**IamAccountRelationship**](IamAccountRelationship.md) |  | [optional] 
-**ParentConfig** | Pointer to [**ApplianceDataExportPolicyRelationship**](ApplianceDataExportPolicyRelationship.md) |  | [optional] 
+**Account** | Pointer to [**NullableIamAccountRelationship**](IamAccountRelationship.md) |  | [optional] 
+**ParentConfig** | Pointer to [**NullableApplianceDataExportPolicyRelationship**](ApplianceDataExportPolicyRelationship.md) |  | [optional] 
 **SubConfigs** | Pointer to [**[]ApplianceDataExportPolicyRelationship**](ApplianceDataExportPolicyRelationship.md) | An array of relationships to applianceDataExportPolicy resources. | [optional] [readonly] 
 
 ## Methods
@@ -146,6 +146,16 @@ SetAccount sets Account field to given value.
 
 HasAccount returns a boolean if a field has been set.
 
+### SetAccountNil
+
+`func (o *ApplianceDataExportPolicy) SetAccountNil(b bool)`
+
+ SetAccountNil sets the value for Account to be an explicit nil
+
+### UnsetAccount
+`func (o *ApplianceDataExportPolicy) UnsetAccount()`
+
+UnsetAccount ensures that no value is present for Account, not even an explicit nil
 ### GetParentConfig
 
 `func (o *ApplianceDataExportPolicy) GetParentConfig() ApplianceDataExportPolicyRelationship`
@@ -171,6 +181,16 @@ SetParentConfig sets ParentConfig field to given value.
 
 HasParentConfig returns a boolean if a field has been set.
 
+### SetParentConfigNil
+
+`func (o *ApplianceDataExportPolicy) SetParentConfigNil(b bool)`
+
+ SetParentConfigNil sets the value for ParentConfig to be an explicit nil
+
+### UnsetParentConfig
+`func (o *ApplianceDataExportPolicy) UnsetParentConfig()`
+
+UnsetParentConfig ensures that no value is present for ParentConfig, not even an explicit nil
 ### GetSubConfigs
 
 `func (o *ApplianceDataExportPolicy) GetSubConfigs() []ApplianceDataExportPolicyRelationship`

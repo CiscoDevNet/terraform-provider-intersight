@@ -40,7 +40,7 @@ Name | Type | Description | Notes
 **UserLabel** | Pointer to **string** | The user defined label assigned to the server. | [optional] [readonly] 
 **Uuid** | Pointer to **string** | The universally unique identity of the server. | [optional] [readonly] 
 **BootCddDevices** | Pointer to [**[]BootCddDeviceRelationship**](BootCddDeviceRelationship.md) | An array of relationships to bootCddDevice resources. | [optional] 
-**BootDeviceBootSecurity** | Pointer to [**BootDeviceBootSecurityRelationship**](BootDeviceBootSecurityRelationship.md) |  | [optional] 
+**BootDeviceBootSecurity** | Pointer to [**NullableBootDeviceBootSecurityRelationship**](BootDeviceBootSecurityRelationship.md) |  | [optional] 
 **BootHddDevices** | Pointer to [**[]BootHddDeviceRelationship**](BootHddDeviceRelationship.md) | An array of relationships to bootHddDevice resources. | [optional] 
 **BootIscsiDevices** | Pointer to [**[]BootIscsiDeviceRelationship**](BootIscsiDeviceRelationship.md) | An array of relationships to bootIscsiDevice resources. | [optional] 
 **BootNvmeDevices** | Pointer to [**[]BootNvmeDeviceRelationship**](BootNvmeDeviceRelationship.md) | An array of relationships to bootNvmeDevice resources. | [optional] 
@@ -51,8 +51,8 @@ Name | Type | Description | Notes
 **BootUefiShellDevices** | Pointer to [**[]BootUefiShellDeviceRelationship**](BootUefiShellDeviceRelationship.md) | An array of relationships to bootUefiShellDevice resources. | [optional] 
 **BootUsbDevices** | Pointer to [**[]BootUsbDeviceRelationship**](BootUsbDeviceRelationship.md) | An array of relationships to bootUsbDevice resources. | [optional] 
 **BootVmediaDevices** | Pointer to [**[]BootVmediaDeviceRelationship**](BootVmediaDeviceRelationship.md) | An array of relationships to bootVmediaDevice resources. | [optional] 
-**MgmtIdentity** | Pointer to [**EquipmentPhysicalIdentityRelationship**](EquipmentPhysicalIdentityRelationship.md) |  | [optional] 
-**Vmedia** | Pointer to [**ComputeVmediaRelationship**](ComputeVmediaRelationship.md) |  | [optional] 
+**MgmtIdentity** | Pointer to [**NullableEquipmentPhysicalIdentityRelationship**](EquipmentPhysicalIdentityRelationship.md) |  | [optional] 
+**Vmedia** | Pointer to [**NullableComputeVmediaRelationship**](ComputeVmediaRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -1028,6 +1028,16 @@ SetBootDeviceBootSecurity sets BootDeviceBootSecurity field to given value.
 
 HasBootDeviceBootSecurity returns a boolean if a field has been set.
 
+### SetBootDeviceBootSecurityNil
+
+`func (o *ComputePhysical) SetBootDeviceBootSecurityNil(b bool)`
+
+ SetBootDeviceBootSecurityNil sets the value for BootDeviceBootSecurity to be an explicit nil
+
+### UnsetBootDeviceBootSecurity
+`func (o *ComputePhysical) UnsetBootDeviceBootSecurity()`
+
+UnsetBootDeviceBootSecurity ensures that no value is present for BootDeviceBootSecurity, not even an explicit nil
 ### GetBootHddDevices
 
 `func (o *ComputePhysical) GetBootHddDevices() []BootHddDeviceRelationship`
@@ -1403,6 +1413,16 @@ SetMgmtIdentity sets MgmtIdentity field to given value.
 
 HasMgmtIdentity returns a boolean if a field has been set.
 
+### SetMgmtIdentityNil
+
+`func (o *ComputePhysical) SetMgmtIdentityNil(b bool)`
+
+ SetMgmtIdentityNil sets the value for MgmtIdentity to be an explicit nil
+
+### UnsetMgmtIdentity
+`func (o *ComputePhysical) UnsetMgmtIdentity()`
+
+UnsetMgmtIdentity ensures that no value is present for MgmtIdentity, not even an explicit nil
 ### GetVmedia
 
 `func (o *ComputePhysical) GetVmedia() ComputeVmediaRelationship`
@@ -1428,6 +1448,16 @@ SetVmedia sets Vmedia field to given value.
 
 HasVmedia returns a boolean if a field has been set.
 
+### SetVmediaNil
+
+`func (o *ComputePhysical) SetVmediaNil(b bool)`
+
+ SetVmediaNil sets the value for Vmedia to be an explicit nil
+
+### UnsetVmedia
+`func (o *ComputePhysical) UnsetVmedia()`
+
+UnsetVmedia ensures that no value is present for Vmedia, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

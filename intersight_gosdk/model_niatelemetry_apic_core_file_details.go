@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the NiatelemetryApicCoreFileDetails type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &NiatelemetryApicCoreFileDetails{}
 
 // NiatelemetryApicCoreFileDetails Object to capture Core File details in APIC.
 type NiatelemetryApicCoreFileDetails struct {
@@ -69,8 +73,8 @@ type NiatelemetryApicCoreFileDetails struct {
 	// UId of the Core file in the APIC.
 	Uid *string `json:"Uid,omitempty"`
 	// User dom of the Core file in APIC.
-	Userdom              *string                              `json:"Userdom,omitempty"`
-	RegisteredDevice     *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+	Userdom              *string                                     `json:"Userdom,omitempty"`
+	RegisteredDevice     NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -149,7 +153,7 @@ func (o *NiatelemetryApicCoreFileDetails) SetObjectType(v string) {
 
 // GetAnnotation returns the Annotation field value if set, zero value otherwise.
 func (o *NiatelemetryApicCoreFileDetails) GetAnnotation() string {
-	if o == nil || o.Annotation == nil {
+	if o == nil || IsNil(o.Annotation) {
 		var ret string
 		return ret
 	}
@@ -159,7 +163,7 @@ func (o *NiatelemetryApicCoreFileDetails) GetAnnotation() string {
 // GetAnnotationOk returns a tuple with the Annotation field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryApicCoreFileDetails) GetAnnotationOk() (*string, bool) {
-	if o == nil || o.Annotation == nil {
+	if o == nil || IsNil(o.Annotation) {
 		return nil, false
 	}
 	return o.Annotation, true
@@ -167,7 +171,7 @@ func (o *NiatelemetryApicCoreFileDetails) GetAnnotationOk() (*string, bool) {
 
 // HasAnnotation returns a boolean if a field has been set.
 func (o *NiatelemetryApicCoreFileDetails) HasAnnotation() bool {
-	if o != nil && o.Annotation != nil {
+	if o != nil && !IsNil(o.Annotation) {
 		return true
 	}
 
@@ -181,7 +185,7 @@ func (o *NiatelemetryApicCoreFileDetails) SetAnnotation(v string) {
 
 // GetChildAction returns the ChildAction field value if set, zero value otherwise.
 func (o *NiatelemetryApicCoreFileDetails) GetChildAction() string {
-	if o == nil || o.ChildAction == nil {
+	if o == nil || IsNil(o.ChildAction) {
 		var ret string
 		return ret
 	}
@@ -191,7 +195,7 @@ func (o *NiatelemetryApicCoreFileDetails) GetChildAction() string {
 // GetChildActionOk returns a tuple with the ChildAction field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryApicCoreFileDetails) GetChildActionOk() (*string, bool) {
-	if o == nil || o.ChildAction == nil {
+	if o == nil || IsNil(o.ChildAction) {
 		return nil, false
 	}
 	return o.ChildAction, true
@@ -199,7 +203,7 @@ func (o *NiatelemetryApicCoreFileDetails) GetChildActionOk() (*string, bool) {
 
 // HasChildAction returns a boolean if a field has been set.
 func (o *NiatelemetryApicCoreFileDetails) HasChildAction() bool {
-	if o != nil && o.ChildAction != nil {
+	if o != nil && !IsNil(o.ChildAction) {
 		return true
 	}
 
@@ -213,7 +217,7 @@ func (o *NiatelemetryApicCoreFileDetails) SetChildAction(v string) {
 
 // GetCollectionTime returns the CollectionTime field value if set, zero value otherwise.
 func (o *NiatelemetryApicCoreFileDetails) GetCollectionTime() string {
-	if o == nil || o.CollectionTime == nil {
+	if o == nil || IsNil(o.CollectionTime) {
 		var ret string
 		return ret
 	}
@@ -223,7 +227,7 @@ func (o *NiatelemetryApicCoreFileDetails) GetCollectionTime() string {
 // GetCollectionTimeOk returns a tuple with the CollectionTime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryApicCoreFileDetails) GetCollectionTimeOk() (*string, bool) {
-	if o == nil || o.CollectionTime == nil {
+	if o == nil || IsNil(o.CollectionTime) {
 		return nil, false
 	}
 	return o.CollectionTime, true
@@ -231,7 +235,7 @@ func (o *NiatelemetryApicCoreFileDetails) GetCollectionTimeOk() (*string, bool) 
 
 // HasCollectionTime returns a boolean if a field has been set.
 func (o *NiatelemetryApicCoreFileDetails) HasCollectionTime() bool {
-	if o != nil && o.CollectionTime != nil {
+	if o != nil && !IsNil(o.CollectionTime) {
 		return true
 	}
 
@@ -245,7 +249,7 @@ func (o *NiatelemetryApicCoreFileDetails) SetCollectionTime(v string) {
 
 // GetDataType returns the DataType field value if set, zero value otherwise.
 func (o *NiatelemetryApicCoreFileDetails) GetDataType() string {
-	if o == nil || o.DataType == nil {
+	if o == nil || IsNil(o.DataType) {
 		var ret string
 		return ret
 	}
@@ -255,7 +259,7 @@ func (o *NiatelemetryApicCoreFileDetails) GetDataType() string {
 // GetDataTypeOk returns a tuple with the DataType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryApicCoreFileDetails) GetDataTypeOk() (*string, bool) {
-	if o == nil || o.DataType == nil {
+	if o == nil || IsNil(o.DataType) {
 		return nil, false
 	}
 	return o.DataType, true
@@ -263,7 +267,7 @@ func (o *NiatelemetryApicCoreFileDetails) GetDataTypeOk() (*string, bool) {
 
 // HasDataType returns a boolean if a field has been set.
 func (o *NiatelemetryApicCoreFileDetails) HasDataType() bool {
-	if o != nil && o.DataType != nil {
+	if o != nil && !IsNil(o.DataType) {
 		return true
 	}
 
@@ -277,7 +281,7 @@ func (o *NiatelemetryApicCoreFileDetails) SetDataType(v string) {
 
 // GetDn returns the Dn field value if set, zero value otherwise.
 func (o *NiatelemetryApicCoreFileDetails) GetDn() string {
-	if o == nil || o.Dn == nil {
+	if o == nil || IsNil(o.Dn) {
 		var ret string
 		return ret
 	}
@@ -287,7 +291,7 @@ func (o *NiatelemetryApicCoreFileDetails) GetDn() string {
 // GetDnOk returns a tuple with the Dn field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryApicCoreFileDetails) GetDnOk() (*string, bool) {
-	if o == nil || o.Dn == nil {
+	if o == nil || IsNil(o.Dn) {
 		return nil, false
 	}
 	return o.Dn, true
@@ -295,7 +299,7 @@ func (o *NiatelemetryApicCoreFileDetails) GetDnOk() (*string, bool) {
 
 // HasDn returns a boolean if a field has been set.
 func (o *NiatelemetryApicCoreFileDetails) HasDn() bool {
-	if o != nil && o.Dn != nil {
+	if o != nil && !IsNil(o.Dn) {
 		return true
 	}
 
@@ -309,7 +313,7 @@ func (o *NiatelemetryApicCoreFileDetails) SetDn(v string) {
 
 // GetExportFileUri returns the ExportFileUri field value if set, zero value otherwise.
 func (o *NiatelemetryApicCoreFileDetails) GetExportFileUri() string {
-	if o == nil || o.ExportFileUri == nil {
+	if o == nil || IsNil(o.ExportFileUri) {
 		var ret string
 		return ret
 	}
@@ -319,7 +323,7 @@ func (o *NiatelemetryApicCoreFileDetails) GetExportFileUri() string {
 // GetExportFileUriOk returns a tuple with the ExportFileUri field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryApicCoreFileDetails) GetExportFileUriOk() (*string, bool) {
-	if o == nil || o.ExportFileUri == nil {
+	if o == nil || IsNil(o.ExportFileUri) {
 		return nil, false
 	}
 	return o.ExportFileUri, true
@@ -327,7 +331,7 @@ func (o *NiatelemetryApicCoreFileDetails) GetExportFileUriOk() (*string, bool) {
 
 // HasExportFileUri returns a boolean if a field has been set.
 func (o *NiatelemetryApicCoreFileDetails) HasExportFileUri() bool {
-	if o != nil && o.ExportFileUri != nil {
+	if o != nil && !IsNil(o.ExportFileUri) {
 		return true
 	}
 
@@ -341,7 +345,7 @@ func (o *NiatelemetryApicCoreFileDetails) SetExportFileUri(v string) {
 
 // GetExportStatus returns the ExportStatus field value if set, zero value otherwise.
 func (o *NiatelemetryApicCoreFileDetails) GetExportStatus() string {
-	if o == nil || o.ExportStatus == nil {
+	if o == nil || IsNil(o.ExportStatus) {
 		var ret string
 		return ret
 	}
@@ -351,7 +355,7 @@ func (o *NiatelemetryApicCoreFileDetails) GetExportStatus() string {
 // GetExportStatusOk returns a tuple with the ExportStatus field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryApicCoreFileDetails) GetExportStatusOk() (*string, bool) {
-	if o == nil || o.ExportStatus == nil {
+	if o == nil || IsNil(o.ExportStatus) {
 		return nil, false
 	}
 	return o.ExportStatus, true
@@ -359,7 +363,7 @@ func (o *NiatelemetryApicCoreFileDetails) GetExportStatusOk() (*string, bool) {
 
 // HasExportStatus returns a boolean if a field has been set.
 func (o *NiatelemetryApicCoreFileDetails) HasExportStatus() bool {
-	if o != nil && o.ExportStatus != nil {
+	if o != nil && !IsNil(o.ExportStatus) {
 		return true
 	}
 
@@ -373,7 +377,7 @@ func (o *NiatelemetryApicCoreFileDetails) SetExportStatus(v string) {
 
 // GetExportStatusStr returns the ExportStatusStr field value if set, zero value otherwise.
 func (o *NiatelemetryApicCoreFileDetails) GetExportStatusStr() int64 {
-	if o == nil || o.ExportStatusStr == nil {
+	if o == nil || IsNil(o.ExportStatusStr) {
 		var ret int64
 		return ret
 	}
@@ -383,7 +387,7 @@ func (o *NiatelemetryApicCoreFileDetails) GetExportStatusStr() int64 {
 // GetExportStatusStrOk returns a tuple with the ExportStatusStr field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryApicCoreFileDetails) GetExportStatusStrOk() (*int64, bool) {
-	if o == nil || o.ExportStatusStr == nil {
+	if o == nil || IsNil(o.ExportStatusStr) {
 		return nil, false
 	}
 	return o.ExportStatusStr, true
@@ -391,7 +395,7 @@ func (o *NiatelemetryApicCoreFileDetails) GetExportStatusStrOk() (*int64, bool) 
 
 // HasExportStatusStr returns a boolean if a field has been set.
 func (o *NiatelemetryApicCoreFileDetails) HasExportStatusStr() bool {
-	if o != nil && o.ExportStatusStr != nil {
+	if o != nil && !IsNil(o.ExportStatusStr) {
 		return true
 	}
 
@@ -405,7 +409,7 @@ func (o *NiatelemetryApicCoreFileDetails) SetExportStatusStr(v int64) {
 
 // GetExportTechSupFileUri returns the ExportTechSupFileUri field value if set, zero value otherwise.
 func (o *NiatelemetryApicCoreFileDetails) GetExportTechSupFileUri() string {
-	if o == nil || o.ExportTechSupFileUri == nil {
+	if o == nil || IsNil(o.ExportTechSupFileUri) {
 		var ret string
 		return ret
 	}
@@ -415,7 +419,7 @@ func (o *NiatelemetryApicCoreFileDetails) GetExportTechSupFileUri() string {
 // GetExportTechSupFileUriOk returns a tuple with the ExportTechSupFileUri field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryApicCoreFileDetails) GetExportTechSupFileUriOk() (*string, bool) {
-	if o == nil || o.ExportTechSupFileUri == nil {
+	if o == nil || IsNil(o.ExportTechSupFileUri) {
 		return nil, false
 	}
 	return o.ExportTechSupFileUri, true
@@ -423,7 +427,7 @@ func (o *NiatelemetryApicCoreFileDetails) GetExportTechSupFileUriOk() (*string, 
 
 // HasExportTechSupFileUri returns a boolean if a field has been set.
 func (o *NiatelemetryApicCoreFileDetails) HasExportTechSupFileUri() bool {
-	if o != nil && o.ExportTechSupFileUri != nil {
+	if o != nil && !IsNil(o.ExportTechSupFileUri) {
 		return true
 	}
 
@@ -437,7 +441,7 @@ func (o *NiatelemetryApicCoreFileDetails) SetExportTechSupFileUri(v string) {
 
 // GetExportedToController returns the ExportedToController field value if set, zero value otherwise.
 func (o *NiatelemetryApicCoreFileDetails) GetExportedToController() string {
-	if o == nil || o.ExportedToController == nil {
+	if o == nil || IsNil(o.ExportedToController) {
 		var ret string
 		return ret
 	}
@@ -447,7 +451,7 @@ func (o *NiatelemetryApicCoreFileDetails) GetExportedToController() string {
 // GetExportedToControllerOk returns a tuple with the ExportedToController field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryApicCoreFileDetails) GetExportedToControllerOk() (*string, bool) {
-	if o == nil || o.ExportedToController == nil {
+	if o == nil || IsNil(o.ExportedToController) {
 		return nil, false
 	}
 	return o.ExportedToController, true
@@ -455,7 +459,7 @@ func (o *NiatelemetryApicCoreFileDetails) GetExportedToControllerOk() (*string, 
 
 // HasExportedToController returns a boolean if a field has been set.
 func (o *NiatelemetryApicCoreFileDetails) HasExportedToController() bool {
-	if o != nil && o.ExportedToController != nil {
+	if o != nil && !IsNil(o.ExportedToController) {
 		return true
 	}
 
@@ -469,7 +473,7 @@ func (o *NiatelemetryApicCoreFileDetails) SetExportedToController(v string) {
 
 // GetExtMngdBy returns the ExtMngdBy field value if set, zero value otherwise.
 func (o *NiatelemetryApicCoreFileDetails) GetExtMngdBy() string {
-	if o == nil || o.ExtMngdBy == nil {
+	if o == nil || IsNil(o.ExtMngdBy) {
 		var ret string
 		return ret
 	}
@@ -479,7 +483,7 @@ func (o *NiatelemetryApicCoreFileDetails) GetExtMngdBy() string {
 // GetExtMngdByOk returns a tuple with the ExtMngdBy field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryApicCoreFileDetails) GetExtMngdByOk() (*string, bool) {
-	if o == nil || o.ExtMngdBy == nil {
+	if o == nil || IsNil(o.ExtMngdBy) {
 		return nil, false
 	}
 	return o.ExtMngdBy, true
@@ -487,7 +491,7 @@ func (o *NiatelemetryApicCoreFileDetails) GetExtMngdByOk() (*string, bool) {
 
 // HasExtMngdBy returns a boolean if a field has been set.
 func (o *NiatelemetryApicCoreFileDetails) HasExtMngdBy() bool {
-	if o != nil && o.ExtMngdBy != nil {
+	if o != nil && !IsNil(o.ExtMngdBy) {
 		return true
 	}
 
@@ -501,7 +505,7 @@ func (o *NiatelemetryApicCoreFileDetails) SetExtMngdBy(v string) {
 
 // GetFileSize returns the FileSize field value if set, zero value otherwise.
 func (o *NiatelemetryApicCoreFileDetails) GetFileSize() int64 {
-	if o == nil || o.FileSize == nil {
+	if o == nil || IsNil(o.FileSize) {
 		var ret int64
 		return ret
 	}
@@ -511,7 +515,7 @@ func (o *NiatelemetryApicCoreFileDetails) GetFileSize() int64 {
 // GetFileSizeOk returns a tuple with the FileSize field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryApicCoreFileDetails) GetFileSizeOk() (*int64, bool) {
-	if o == nil || o.FileSize == nil {
+	if o == nil || IsNil(o.FileSize) {
 		return nil, false
 	}
 	return o.FileSize, true
@@ -519,7 +523,7 @@ func (o *NiatelemetryApicCoreFileDetails) GetFileSizeOk() (*int64, bool) {
 
 // HasFileSize returns a boolean if a field has been set.
 func (o *NiatelemetryApicCoreFileDetails) HasFileSize() bool {
-	if o != nil && o.FileSize != nil {
+	if o != nil && !IsNil(o.FileSize) {
 		return true
 	}
 
@@ -533,7 +537,7 @@ func (o *NiatelemetryApicCoreFileDetails) SetFileSize(v int64) {
 
 // GetHostName returns the HostName field value if set, zero value otherwise.
 func (o *NiatelemetryApicCoreFileDetails) GetHostName() string {
-	if o == nil || o.HostName == nil {
+	if o == nil || IsNil(o.HostName) {
 		var ret string
 		return ret
 	}
@@ -543,7 +547,7 @@ func (o *NiatelemetryApicCoreFileDetails) GetHostName() string {
 // GetHostNameOk returns a tuple with the HostName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryApicCoreFileDetails) GetHostNameOk() (*string, bool) {
-	if o == nil || o.HostName == nil {
+	if o == nil || IsNil(o.HostName) {
 		return nil, false
 	}
 	return o.HostName, true
@@ -551,7 +555,7 @@ func (o *NiatelemetryApicCoreFileDetails) GetHostNameOk() (*string, bool) {
 
 // HasHostName returns a boolean if a field has been set.
 func (o *NiatelemetryApicCoreFileDetails) HasHostName() bool {
-	if o != nil && o.HostName != nil {
+	if o != nil && !IsNil(o.HostName) {
 		return true
 	}
 
@@ -565,7 +569,7 @@ func (o *NiatelemetryApicCoreFileDetails) SetHostName(v string) {
 
 // GetLcOwn returns the LcOwn field value if set, zero value otherwise.
 func (o *NiatelemetryApicCoreFileDetails) GetLcOwn() string {
-	if o == nil || o.LcOwn == nil {
+	if o == nil || IsNil(o.LcOwn) {
 		var ret string
 		return ret
 	}
@@ -575,7 +579,7 @@ func (o *NiatelemetryApicCoreFileDetails) GetLcOwn() string {
 // GetLcOwnOk returns a tuple with the LcOwn field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryApicCoreFileDetails) GetLcOwnOk() (*string, bool) {
-	if o == nil || o.LcOwn == nil {
+	if o == nil || IsNil(o.LcOwn) {
 		return nil, false
 	}
 	return o.LcOwn, true
@@ -583,7 +587,7 @@ func (o *NiatelemetryApicCoreFileDetails) GetLcOwnOk() (*string, bool) {
 
 // HasLcOwn returns a boolean if a field has been set.
 func (o *NiatelemetryApicCoreFileDetails) HasLcOwn() bool {
-	if o != nil && o.LcOwn != nil {
+	if o != nil && !IsNil(o.LcOwn) {
 		return true
 	}
 
@@ -597,7 +601,7 @@ func (o *NiatelemetryApicCoreFileDetails) SetLcOwn(v string) {
 
 // GetModTs returns the ModTs field value if set, zero value otherwise.
 func (o *NiatelemetryApicCoreFileDetails) GetModTs() int64 {
-	if o == nil || o.ModTs == nil {
+	if o == nil || IsNil(o.ModTs) {
 		var ret int64
 		return ret
 	}
@@ -607,7 +611,7 @@ func (o *NiatelemetryApicCoreFileDetails) GetModTs() int64 {
 // GetModTsOk returns a tuple with the ModTs field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryApicCoreFileDetails) GetModTsOk() (*int64, bool) {
-	if o == nil || o.ModTs == nil {
+	if o == nil || IsNil(o.ModTs) {
 		return nil, false
 	}
 	return o.ModTs, true
@@ -615,7 +619,7 @@ func (o *NiatelemetryApicCoreFileDetails) GetModTsOk() (*int64, bool) {
 
 // HasModTs returns a boolean if a field has been set.
 func (o *NiatelemetryApicCoreFileDetails) HasModTs() bool {
-	if o != nil && o.ModTs != nil {
+	if o != nil && !IsNil(o.ModTs) {
 		return true
 	}
 
@@ -629,7 +633,7 @@ func (o *NiatelemetryApicCoreFileDetails) SetModTs(v int64) {
 
 // GetNodeId returns the NodeId field value if set, zero value otherwise.
 func (o *NiatelemetryApicCoreFileDetails) GetNodeId() string {
-	if o == nil || o.NodeId == nil {
+	if o == nil || IsNil(o.NodeId) {
 		var ret string
 		return ret
 	}
@@ -639,7 +643,7 @@ func (o *NiatelemetryApicCoreFileDetails) GetNodeId() string {
 // GetNodeIdOk returns a tuple with the NodeId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryApicCoreFileDetails) GetNodeIdOk() (*string, bool) {
-	if o == nil || o.NodeId == nil {
+	if o == nil || IsNil(o.NodeId) {
 		return nil, false
 	}
 	return o.NodeId, true
@@ -647,7 +651,7 @@ func (o *NiatelemetryApicCoreFileDetails) GetNodeIdOk() (*string, bool) {
 
 // HasNodeId returns a boolean if a field has been set.
 func (o *NiatelemetryApicCoreFileDetails) HasNodeId() bool {
-	if o != nil && o.NodeId != nil {
+	if o != nil && !IsNil(o.NodeId) {
 		return true
 	}
 
@@ -661,7 +665,7 @@ func (o *NiatelemetryApicCoreFileDetails) SetNodeId(v string) {
 
 // GetPolName returns the PolName field value if set, zero value otherwise.
 func (o *NiatelemetryApicCoreFileDetails) GetPolName() string {
-	if o == nil || o.PolName == nil {
+	if o == nil || IsNil(o.PolName) {
 		var ret string
 		return ret
 	}
@@ -671,7 +675,7 @@ func (o *NiatelemetryApicCoreFileDetails) GetPolName() string {
 // GetPolNameOk returns a tuple with the PolName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryApicCoreFileDetails) GetPolNameOk() (*string, bool) {
-	if o == nil || o.PolName == nil {
+	if o == nil || IsNil(o.PolName) {
 		return nil, false
 	}
 	return o.PolName, true
@@ -679,7 +683,7 @@ func (o *NiatelemetryApicCoreFileDetails) GetPolNameOk() (*string, bool) {
 
 // HasPolName returns a boolean if a field has been set.
 func (o *NiatelemetryApicCoreFileDetails) HasPolName() bool {
-	if o != nil && o.PolName != nil {
+	if o != nil && !IsNil(o.PolName) {
 		return true
 	}
 
@@ -693,7 +697,7 @@ func (o *NiatelemetryApicCoreFileDetails) SetPolName(v string) {
 
 // GetRecordType returns the RecordType field value if set, zero value otherwise.
 func (o *NiatelemetryApicCoreFileDetails) GetRecordType() string {
-	if o == nil || o.RecordType == nil {
+	if o == nil || IsNil(o.RecordType) {
 		var ret string
 		return ret
 	}
@@ -703,7 +707,7 @@ func (o *NiatelemetryApicCoreFileDetails) GetRecordType() string {
 // GetRecordTypeOk returns a tuple with the RecordType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryApicCoreFileDetails) GetRecordTypeOk() (*string, bool) {
-	if o == nil || o.RecordType == nil {
+	if o == nil || IsNil(o.RecordType) {
 		return nil, false
 	}
 	return o.RecordType, true
@@ -711,7 +715,7 @@ func (o *NiatelemetryApicCoreFileDetails) GetRecordTypeOk() (*string, bool) {
 
 // HasRecordType returns a boolean if a field has been set.
 func (o *NiatelemetryApicCoreFileDetails) HasRecordType() bool {
-	if o != nil && o.RecordType != nil {
+	if o != nil && !IsNil(o.RecordType) {
 		return true
 	}
 
@@ -725,7 +729,7 @@ func (o *NiatelemetryApicCoreFileDetails) SetRecordType(v string) {
 
 // GetRecordVersion returns the RecordVersion field value if set, zero value otherwise.
 func (o *NiatelemetryApicCoreFileDetails) GetRecordVersion() string {
-	if o == nil || o.RecordVersion == nil {
+	if o == nil || IsNil(o.RecordVersion) {
 		var ret string
 		return ret
 	}
@@ -735,7 +739,7 @@ func (o *NiatelemetryApicCoreFileDetails) GetRecordVersion() string {
 // GetRecordVersionOk returns a tuple with the RecordVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryApicCoreFileDetails) GetRecordVersionOk() (*string, bool) {
-	if o == nil || o.RecordVersion == nil {
+	if o == nil || IsNil(o.RecordVersion) {
 		return nil, false
 	}
 	return o.RecordVersion, true
@@ -743,7 +747,7 @@ func (o *NiatelemetryApicCoreFileDetails) GetRecordVersionOk() (*string, bool) {
 
 // HasRecordVersion returns a boolean if a field has been set.
 func (o *NiatelemetryApicCoreFileDetails) HasRecordVersion() bool {
-	if o != nil && o.RecordVersion != nil {
+	if o != nil && !IsNil(o.RecordVersion) {
 		return true
 	}
 
@@ -757,7 +761,7 @@ func (o *NiatelemetryApicCoreFileDetails) SetRecordVersion(v string) {
 
 // GetSiteName returns the SiteName field value if set, zero value otherwise.
 func (o *NiatelemetryApicCoreFileDetails) GetSiteName() string {
-	if o == nil || o.SiteName == nil {
+	if o == nil || IsNil(o.SiteName) {
 		var ret string
 		return ret
 	}
@@ -767,7 +771,7 @@ func (o *NiatelemetryApicCoreFileDetails) GetSiteName() string {
 // GetSiteNameOk returns a tuple with the SiteName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryApicCoreFileDetails) GetSiteNameOk() (*string, bool) {
-	if o == nil || o.SiteName == nil {
+	if o == nil || IsNil(o.SiteName) {
 		return nil, false
 	}
 	return o.SiteName, true
@@ -775,7 +779,7 @@ func (o *NiatelemetryApicCoreFileDetails) GetSiteNameOk() (*string, bool) {
 
 // HasSiteName returns a boolean if a field has been set.
 func (o *NiatelemetryApicCoreFileDetails) HasSiteName() bool {
-	if o != nil && o.SiteName != nil {
+	if o != nil && !IsNil(o.SiteName) {
 		return true
 	}
 
@@ -789,7 +793,7 @@ func (o *NiatelemetryApicCoreFileDetails) SetSiteName(v string) {
 
 // GetStatus returns the Status field value if set, zero value otherwise.
 func (o *NiatelemetryApicCoreFileDetails) GetStatus() string {
-	if o == nil || o.Status == nil {
+	if o == nil || IsNil(o.Status) {
 		var ret string
 		return ret
 	}
@@ -799,7 +803,7 @@ func (o *NiatelemetryApicCoreFileDetails) GetStatus() string {
 // GetStatusOk returns a tuple with the Status field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryApicCoreFileDetails) GetStatusOk() (*string, bool) {
-	if o == nil || o.Status == nil {
+	if o == nil || IsNil(o.Status) {
 		return nil, false
 	}
 	return o.Status, true
@@ -807,7 +811,7 @@ func (o *NiatelemetryApicCoreFileDetails) GetStatusOk() (*string, bool) {
 
 // HasStatus returns a boolean if a field has been set.
 func (o *NiatelemetryApicCoreFileDetails) HasStatus() bool {
-	if o != nil && o.Status != nil {
+	if o != nil && !IsNil(o.Status) {
 		return true
 	}
 
@@ -821,7 +825,7 @@ func (o *NiatelemetryApicCoreFileDetails) SetStatus(v string) {
 
 // GetUid returns the Uid field value if set, zero value otherwise.
 func (o *NiatelemetryApicCoreFileDetails) GetUid() string {
-	if o == nil || o.Uid == nil {
+	if o == nil || IsNil(o.Uid) {
 		var ret string
 		return ret
 	}
@@ -831,7 +835,7 @@ func (o *NiatelemetryApicCoreFileDetails) GetUid() string {
 // GetUidOk returns a tuple with the Uid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryApicCoreFileDetails) GetUidOk() (*string, bool) {
-	if o == nil || o.Uid == nil {
+	if o == nil || IsNil(o.Uid) {
 		return nil, false
 	}
 	return o.Uid, true
@@ -839,7 +843,7 @@ func (o *NiatelemetryApicCoreFileDetails) GetUidOk() (*string, bool) {
 
 // HasUid returns a boolean if a field has been set.
 func (o *NiatelemetryApicCoreFileDetails) HasUid() bool {
-	if o != nil && o.Uid != nil {
+	if o != nil && !IsNil(o.Uid) {
 		return true
 	}
 
@@ -853,7 +857,7 @@ func (o *NiatelemetryApicCoreFileDetails) SetUid(v string) {
 
 // GetUserdom returns the Userdom field value if set, zero value otherwise.
 func (o *NiatelemetryApicCoreFileDetails) GetUserdom() string {
-	if o == nil || o.Userdom == nil {
+	if o == nil || IsNil(o.Userdom) {
 		var ret string
 		return ret
 	}
@@ -863,7 +867,7 @@ func (o *NiatelemetryApicCoreFileDetails) GetUserdom() string {
 // GetUserdomOk returns a tuple with the Userdom field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryApicCoreFileDetails) GetUserdomOk() (*string, bool) {
-	if o == nil || o.Userdom == nil {
+	if o == nil || IsNil(o.Userdom) {
 		return nil, false
 	}
 	return o.Userdom, true
@@ -871,7 +875,7 @@ func (o *NiatelemetryApicCoreFileDetails) GetUserdomOk() (*string, bool) {
 
 // HasUserdom returns a boolean if a field has been set.
 func (o *NiatelemetryApicCoreFileDetails) HasUserdom() bool {
-	if o != nil && o.Userdom != nil {
+	if o != nil && !IsNil(o.Userdom) {
 		return true
 	}
 
@@ -883,135 +887,172 @@ func (o *NiatelemetryApicCoreFileDetails) SetUserdom(v string) {
 	o.Userdom = &v
 }
 
-// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise.
+// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *NiatelemetryApicCoreFileDetails) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil || IsNil(o.RegisteredDevice.Get()) {
 		var ret AssetDeviceRegistrationRelationship
 		return ret
 	}
-	return *o.RegisteredDevice
+	return *o.RegisteredDevice.Get()
 }
 
 // GetRegisteredDeviceOk returns a tuple with the RegisteredDevice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *NiatelemetryApicCoreFileDetails) GetRegisteredDeviceOk() (*AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.RegisteredDevice, true
+	return o.RegisteredDevice.Get(), o.RegisteredDevice.IsSet()
 }
 
 // HasRegisteredDevice returns a boolean if a field has been set.
 func (o *NiatelemetryApicCoreFileDetails) HasRegisteredDevice() bool {
-	if o != nil && o.RegisteredDevice != nil {
+	if o != nil && o.RegisteredDevice.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRegisteredDevice gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
+// SetRegisteredDevice gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
 func (o *NiatelemetryApicCoreFileDetails) SetRegisteredDevice(v AssetDeviceRegistrationRelationship) {
-	o.RegisteredDevice = &v
+	o.RegisteredDevice.Set(&v)
+}
+
+// SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+func (o *NiatelemetryApicCoreFileDetails) SetRegisteredDeviceNil() {
+	o.RegisteredDevice.Set(nil)
+}
+
+// UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
+func (o *NiatelemetryApicCoreFileDetails) UnsetRegisteredDevice() {
+	o.RegisteredDevice.Unset()
 }
 
 func (o NiatelemetryApicCoreFileDetails) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o NiatelemetryApicCoreFileDetails) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Annotation != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Annotation) {
 		toSerialize["Annotation"] = o.Annotation
 	}
-	if o.ChildAction != nil {
+	if !IsNil(o.ChildAction) {
 		toSerialize["ChildAction"] = o.ChildAction
 	}
-	if o.CollectionTime != nil {
+	if !IsNil(o.CollectionTime) {
 		toSerialize["CollectionTime"] = o.CollectionTime
 	}
-	if o.DataType != nil {
+	if !IsNil(o.DataType) {
 		toSerialize["DataType"] = o.DataType
 	}
-	if o.Dn != nil {
+	if !IsNil(o.Dn) {
 		toSerialize["Dn"] = o.Dn
 	}
-	if o.ExportFileUri != nil {
+	if !IsNil(o.ExportFileUri) {
 		toSerialize["ExportFileUri"] = o.ExportFileUri
 	}
-	if o.ExportStatus != nil {
+	if !IsNil(o.ExportStatus) {
 		toSerialize["ExportStatus"] = o.ExportStatus
 	}
-	if o.ExportStatusStr != nil {
+	if !IsNil(o.ExportStatusStr) {
 		toSerialize["ExportStatusStr"] = o.ExportStatusStr
 	}
-	if o.ExportTechSupFileUri != nil {
+	if !IsNil(o.ExportTechSupFileUri) {
 		toSerialize["ExportTechSupFileUri"] = o.ExportTechSupFileUri
 	}
-	if o.ExportedToController != nil {
+	if !IsNil(o.ExportedToController) {
 		toSerialize["ExportedToController"] = o.ExportedToController
 	}
-	if o.ExtMngdBy != nil {
+	if !IsNil(o.ExtMngdBy) {
 		toSerialize["ExtMngdBy"] = o.ExtMngdBy
 	}
-	if o.FileSize != nil {
+	if !IsNil(o.FileSize) {
 		toSerialize["FileSize"] = o.FileSize
 	}
-	if o.HostName != nil {
+	if !IsNil(o.HostName) {
 		toSerialize["HostName"] = o.HostName
 	}
-	if o.LcOwn != nil {
+	if !IsNil(o.LcOwn) {
 		toSerialize["LcOwn"] = o.LcOwn
 	}
-	if o.ModTs != nil {
+	if !IsNil(o.ModTs) {
 		toSerialize["ModTs"] = o.ModTs
 	}
-	if o.NodeId != nil {
+	if !IsNil(o.NodeId) {
 		toSerialize["NodeId"] = o.NodeId
 	}
-	if o.PolName != nil {
+	if !IsNil(o.PolName) {
 		toSerialize["PolName"] = o.PolName
 	}
-	if o.RecordType != nil {
+	if !IsNil(o.RecordType) {
 		toSerialize["RecordType"] = o.RecordType
 	}
-	if o.RecordVersion != nil {
+	if !IsNil(o.RecordVersion) {
 		toSerialize["RecordVersion"] = o.RecordVersion
 	}
-	if o.SiteName != nil {
+	if !IsNil(o.SiteName) {
 		toSerialize["SiteName"] = o.SiteName
 	}
-	if o.Status != nil {
+	if !IsNil(o.Status) {
 		toSerialize["Status"] = o.Status
 	}
-	if o.Uid != nil {
+	if !IsNil(o.Uid) {
 		toSerialize["Uid"] = o.Uid
 	}
-	if o.Userdom != nil {
+	if !IsNil(o.Userdom) {
 		toSerialize["Userdom"] = o.Userdom
 	}
-	if o.RegisteredDevice != nil {
-		toSerialize["RegisteredDevice"] = o.RegisteredDevice
+	if o.RegisteredDevice.IsSet() {
+		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *NiatelemetryApicCoreFileDetails) UnmarshalJSON(bytes []byte) (err error) {
+func (o *NiatelemetryApicCoreFileDetails) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type NiatelemetryApicCoreFileDetailsWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -1062,13 +1103,13 @@ func (o *NiatelemetryApicCoreFileDetails) UnmarshalJSON(bytes []byte) (err error
 		// UId of the Core file in the APIC.
 		Uid *string `json:"Uid,omitempty"`
 		// User dom of the Core file in APIC.
-		Userdom          *string                              `json:"Userdom,omitempty"`
-		RegisteredDevice *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+		Userdom          *string                                     `json:"Userdom,omitempty"`
+		RegisteredDevice NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	}
 
 	varNiatelemetryApicCoreFileDetailsWithoutEmbeddedStruct := NiatelemetryApicCoreFileDetailsWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varNiatelemetryApicCoreFileDetailsWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varNiatelemetryApicCoreFileDetailsWithoutEmbeddedStruct)
 	if err == nil {
 		varNiatelemetryApicCoreFileDetails := _NiatelemetryApicCoreFileDetails{}
 		varNiatelemetryApicCoreFileDetails.ClassId = varNiatelemetryApicCoreFileDetailsWithoutEmbeddedStruct.ClassId
@@ -1104,7 +1145,7 @@ func (o *NiatelemetryApicCoreFileDetails) UnmarshalJSON(bytes []byte) (err error
 
 	varNiatelemetryApicCoreFileDetails := _NiatelemetryApicCoreFileDetails{}
 
-	err = json.Unmarshal(bytes, &varNiatelemetryApicCoreFileDetails)
+	err = json.Unmarshal(data, &varNiatelemetryApicCoreFileDetails)
 	if err == nil {
 		o.MoBaseMo = varNiatelemetryApicCoreFileDetails.MoBaseMo
 	} else {
@@ -1113,7 +1154,7 @@ func (o *NiatelemetryApicCoreFileDetails) UnmarshalJSON(bytes []byte) (err error
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Annotation")

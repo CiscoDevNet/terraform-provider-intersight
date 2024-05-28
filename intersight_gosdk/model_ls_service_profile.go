@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the LsServiceProfile type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &LsServiceProfile{}
 
 // LsServiceProfile Logical Profile that can be associated to a physical server.
 type LsServiceProfile struct {
@@ -35,9 +39,9 @@ type LsServiceProfile struct {
 	// Name of the UCS Manager service profile.
 	Name *string `json:"Name,omitempty"`
 	// Operational state of the service profile.
-	OperState            *string                              `json:"OperState,omitempty"`
-	InventoryDeviceInfo  *InventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
-	RegisteredDevice     *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+	OperState            *string                                     `json:"OperState,omitempty"`
+	InventoryDeviceInfo  NullableInventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
+	RegisteredDevice     NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -116,7 +120,7 @@ func (o *LsServiceProfile) SetObjectType(v string) {
 
 // GetAssignState returns the AssignState field value if set, zero value otherwise.
 func (o *LsServiceProfile) GetAssignState() string {
-	if o == nil || o.AssignState == nil {
+	if o == nil || IsNil(o.AssignState) {
 		var ret string
 		return ret
 	}
@@ -126,7 +130,7 @@ func (o *LsServiceProfile) GetAssignState() string {
 // GetAssignStateOk returns a tuple with the AssignState field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *LsServiceProfile) GetAssignStateOk() (*string, bool) {
-	if o == nil || o.AssignState == nil {
+	if o == nil || IsNil(o.AssignState) {
 		return nil, false
 	}
 	return o.AssignState, true
@@ -134,7 +138,7 @@ func (o *LsServiceProfile) GetAssignStateOk() (*string, bool) {
 
 // HasAssignState returns a boolean if a field has been set.
 func (o *LsServiceProfile) HasAssignState() bool {
-	if o != nil && o.AssignState != nil {
+	if o != nil && !IsNil(o.AssignState) {
 		return true
 	}
 
@@ -148,7 +152,7 @@ func (o *LsServiceProfile) SetAssignState(v string) {
 
 // GetAssocState returns the AssocState field value if set, zero value otherwise.
 func (o *LsServiceProfile) GetAssocState() string {
-	if o == nil || o.AssocState == nil {
+	if o == nil || IsNil(o.AssocState) {
 		var ret string
 		return ret
 	}
@@ -158,7 +162,7 @@ func (o *LsServiceProfile) GetAssocState() string {
 // GetAssocStateOk returns a tuple with the AssocState field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *LsServiceProfile) GetAssocStateOk() (*string, bool) {
-	if o == nil || o.AssocState == nil {
+	if o == nil || IsNil(o.AssocState) {
 		return nil, false
 	}
 	return o.AssocState, true
@@ -166,7 +170,7 @@ func (o *LsServiceProfile) GetAssocStateOk() (*string, bool) {
 
 // HasAssocState returns a boolean if a field has been set.
 func (o *LsServiceProfile) HasAssocState() bool {
-	if o != nil && o.AssocState != nil {
+	if o != nil && !IsNil(o.AssocState) {
 		return true
 	}
 
@@ -180,7 +184,7 @@ func (o *LsServiceProfile) SetAssocState(v string) {
 
 // GetAssociatedServer returns the AssociatedServer field value if set, zero value otherwise.
 func (o *LsServiceProfile) GetAssociatedServer() string {
-	if o == nil || o.AssociatedServer == nil {
+	if o == nil || IsNil(o.AssociatedServer) {
 		var ret string
 		return ret
 	}
@@ -190,7 +194,7 @@ func (o *LsServiceProfile) GetAssociatedServer() string {
 // GetAssociatedServerOk returns a tuple with the AssociatedServer field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *LsServiceProfile) GetAssociatedServerOk() (*string, bool) {
-	if o == nil || o.AssociatedServer == nil {
+	if o == nil || IsNil(o.AssociatedServer) {
 		return nil, false
 	}
 	return o.AssociatedServer, true
@@ -198,7 +202,7 @@ func (o *LsServiceProfile) GetAssociatedServerOk() (*string, bool) {
 
 // HasAssociatedServer returns a boolean if a field has been set.
 func (o *LsServiceProfile) HasAssociatedServer() bool {
-	if o != nil && o.AssociatedServer != nil {
+	if o != nil && !IsNil(o.AssociatedServer) {
 		return true
 	}
 
@@ -212,7 +216,7 @@ func (o *LsServiceProfile) SetAssociatedServer(v string) {
 
 // GetConfigState returns the ConfigState field value if set, zero value otherwise.
 func (o *LsServiceProfile) GetConfigState() string {
-	if o == nil || o.ConfigState == nil {
+	if o == nil || IsNil(o.ConfigState) {
 		var ret string
 		return ret
 	}
@@ -222,7 +226,7 @@ func (o *LsServiceProfile) GetConfigState() string {
 // GetConfigStateOk returns a tuple with the ConfigState field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *LsServiceProfile) GetConfigStateOk() (*string, bool) {
-	if o == nil || o.ConfigState == nil {
+	if o == nil || IsNil(o.ConfigState) {
 		return nil, false
 	}
 	return o.ConfigState, true
@@ -230,7 +234,7 @@ func (o *LsServiceProfile) GetConfigStateOk() (*string, bool) {
 
 // HasConfigState returns a boolean if a field has been set.
 func (o *LsServiceProfile) HasConfigState() bool {
-	if o != nil && o.ConfigState != nil {
+	if o != nil && !IsNil(o.ConfigState) {
 		return true
 	}
 
@@ -244,7 +248,7 @@ func (o *LsServiceProfile) SetConfigState(v string) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *LsServiceProfile) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -254,7 +258,7 @@ func (o *LsServiceProfile) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *LsServiceProfile) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -262,7 +266,7 @@ func (o *LsServiceProfile) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *LsServiceProfile) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -276,7 +280,7 @@ func (o *LsServiceProfile) SetName(v string) {
 
 // GetOperState returns the OperState field value if set, zero value otherwise.
 func (o *LsServiceProfile) GetOperState() string {
-	if o == nil || o.OperState == nil {
+	if o == nil || IsNil(o.OperState) {
 		var ret string
 		return ret
 	}
@@ -286,7 +290,7 @@ func (o *LsServiceProfile) GetOperState() string {
 // GetOperStateOk returns a tuple with the OperState field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *LsServiceProfile) GetOperStateOk() (*string, bool) {
-	if o == nil || o.OperState == nil {
+	if o == nil || IsNil(o.OperState) {
 		return nil, false
 	}
 	return o.OperState, true
@@ -294,7 +298,7 @@ func (o *LsServiceProfile) GetOperStateOk() (*string, bool) {
 
 // HasOperState returns a boolean if a field has been set.
 func (o *LsServiceProfile) HasOperState() bool {
-	if o != nil && o.OperState != nil {
+	if o != nil && !IsNil(o.OperState) {
 		return true
 	}
 
@@ -306,119 +310,167 @@ func (o *LsServiceProfile) SetOperState(v string) {
 	o.OperState = &v
 }
 
-// GetInventoryDeviceInfo returns the InventoryDeviceInfo field value if set, zero value otherwise.
+// GetInventoryDeviceInfo returns the InventoryDeviceInfo field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *LsServiceProfile) GetInventoryDeviceInfo() InventoryDeviceInfoRelationship {
-	if o == nil || o.InventoryDeviceInfo == nil {
+	if o == nil || IsNil(o.InventoryDeviceInfo.Get()) {
 		var ret InventoryDeviceInfoRelationship
 		return ret
 	}
-	return *o.InventoryDeviceInfo
+	return *o.InventoryDeviceInfo.Get()
 }
 
 // GetInventoryDeviceInfoOk returns a tuple with the InventoryDeviceInfo field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *LsServiceProfile) GetInventoryDeviceInfoOk() (*InventoryDeviceInfoRelationship, bool) {
-	if o == nil || o.InventoryDeviceInfo == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.InventoryDeviceInfo, true
+	return o.InventoryDeviceInfo.Get(), o.InventoryDeviceInfo.IsSet()
 }
 
 // HasInventoryDeviceInfo returns a boolean if a field has been set.
 func (o *LsServiceProfile) HasInventoryDeviceInfo() bool {
-	if o != nil && o.InventoryDeviceInfo != nil {
+	if o != nil && o.InventoryDeviceInfo.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetInventoryDeviceInfo gets a reference to the given InventoryDeviceInfoRelationship and assigns it to the InventoryDeviceInfo field.
+// SetInventoryDeviceInfo gets a reference to the given NullableInventoryDeviceInfoRelationship and assigns it to the InventoryDeviceInfo field.
 func (o *LsServiceProfile) SetInventoryDeviceInfo(v InventoryDeviceInfoRelationship) {
-	o.InventoryDeviceInfo = &v
+	o.InventoryDeviceInfo.Set(&v)
 }
 
-// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise.
+// SetInventoryDeviceInfoNil sets the value for InventoryDeviceInfo to be an explicit nil
+func (o *LsServiceProfile) SetInventoryDeviceInfoNil() {
+	o.InventoryDeviceInfo.Set(nil)
+}
+
+// UnsetInventoryDeviceInfo ensures that no value is present for InventoryDeviceInfo, not even an explicit nil
+func (o *LsServiceProfile) UnsetInventoryDeviceInfo() {
+	o.InventoryDeviceInfo.Unset()
+}
+
+// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *LsServiceProfile) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil || IsNil(o.RegisteredDevice.Get()) {
 		var ret AssetDeviceRegistrationRelationship
 		return ret
 	}
-	return *o.RegisteredDevice
+	return *o.RegisteredDevice.Get()
 }
 
 // GetRegisteredDeviceOk returns a tuple with the RegisteredDevice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *LsServiceProfile) GetRegisteredDeviceOk() (*AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.RegisteredDevice, true
+	return o.RegisteredDevice.Get(), o.RegisteredDevice.IsSet()
 }
 
 // HasRegisteredDevice returns a boolean if a field has been set.
 func (o *LsServiceProfile) HasRegisteredDevice() bool {
-	if o != nil && o.RegisteredDevice != nil {
+	if o != nil && o.RegisteredDevice.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRegisteredDevice gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
+// SetRegisteredDevice gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
 func (o *LsServiceProfile) SetRegisteredDevice(v AssetDeviceRegistrationRelationship) {
-	o.RegisteredDevice = &v
+	o.RegisteredDevice.Set(&v)
+}
+
+// SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+func (o *LsServiceProfile) SetRegisteredDeviceNil() {
+	o.RegisteredDevice.Set(nil)
+}
+
+// UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
+func (o *LsServiceProfile) UnsetRegisteredDevice() {
+	o.RegisteredDevice.Unset()
 }
 
 func (o LsServiceProfile) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o LsServiceProfile) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedInventoryBase, errInventoryBase := json.Marshal(o.InventoryBase)
 	if errInventoryBase != nil {
-		return []byte{}, errInventoryBase
+		return map[string]interface{}{}, errInventoryBase
 	}
 	errInventoryBase = json.Unmarshal([]byte(serializedInventoryBase), &toSerialize)
 	if errInventoryBase != nil {
-		return []byte{}, errInventoryBase
+		return map[string]interface{}{}, errInventoryBase
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.AssignState != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.AssignState) {
 		toSerialize["AssignState"] = o.AssignState
 	}
-	if o.AssocState != nil {
+	if !IsNil(o.AssocState) {
 		toSerialize["AssocState"] = o.AssocState
 	}
-	if o.AssociatedServer != nil {
+	if !IsNil(o.AssociatedServer) {
 		toSerialize["AssociatedServer"] = o.AssociatedServer
 	}
-	if o.ConfigState != nil {
+	if !IsNil(o.ConfigState) {
 		toSerialize["ConfigState"] = o.ConfigState
 	}
-	if o.Name != nil {
+	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
 	}
-	if o.OperState != nil {
+	if !IsNil(o.OperState) {
 		toSerialize["OperState"] = o.OperState
 	}
-	if o.InventoryDeviceInfo != nil {
-		toSerialize["InventoryDeviceInfo"] = o.InventoryDeviceInfo
+	if o.InventoryDeviceInfo.IsSet() {
+		toSerialize["InventoryDeviceInfo"] = o.InventoryDeviceInfo.Get()
 	}
-	if o.RegisteredDevice != nil {
-		toSerialize["RegisteredDevice"] = o.RegisteredDevice
+	if o.RegisteredDevice.IsSet() {
+		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *LsServiceProfile) UnmarshalJSON(bytes []byte) (err error) {
+func (o *LsServiceProfile) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type LsServiceProfileWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -435,14 +487,14 @@ func (o *LsServiceProfile) UnmarshalJSON(bytes []byte) (err error) {
 		// Name of the UCS Manager service profile.
 		Name *string `json:"Name,omitempty"`
 		// Operational state of the service profile.
-		OperState           *string                              `json:"OperState,omitempty"`
-		InventoryDeviceInfo *InventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
-		RegisteredDevice    *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+		OperState           *string                                     `json:"OperState,omitempty"`
+		InventoryDeviceInfo NullableInventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
+		RegisteredDevice    NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	}
 
 	varLsServiceProfileWithoutEmbeddedStruct := LsServiceProfileWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varLsServiceProfileWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varLsServiceProfileWithoutEmbeddedStruct)
 	if err == nil {
 		varLsServiceProfile := _LsServiceProfile{}
 		varLsServiceProfile.ClassId = varLsServiceProfileWithoutEmbeddedStruct.ClassId
@@ -462,7 +514,7 @@ func (o *LsServiceProfile) UnmarshalJSON(bytes []byte) (err error) {
 
 	varLsServiceProfile := _LsServiceProfile{}
 
-	err = json.Unmarshal(bytes, &varLsServiceProfile)
+	err = json.Unmarshal(data, &varLsServiceProfile)
 	if err == nil {
 		o.InventoryBase = varLsServiceProfile.InventoryBase
 	} else {
@@ -471,7 +523,7 @@ func (o *LsServiceProfile) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "AssignState")

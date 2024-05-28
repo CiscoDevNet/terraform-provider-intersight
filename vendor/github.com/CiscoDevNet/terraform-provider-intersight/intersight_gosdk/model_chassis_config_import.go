@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the ChassisConfigImport type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ChassisConfigImport{}
 
 // ChassisConfigImport Configuration import action will import the existing configuration from chassis and generate Intersight policies profile from it. At end of successful import, chassis will be assigned to the generated profile which has policies associated with it. No chassis profile or policies will be generated if configuration import fails.
 type ChassisConfigImport struct {
@@ -30,10 +34,10 @@ type ChassisConfigImport struct {
 	PolicyPrefix *string  `json:"PolicyPrefix,omitempty"`
 	PolicyTypes  []string `json:"PolicyTypes,omitempty"`
 	// Profile name for the imported chassis profile.
-	ProfileName          *string                               `json:"ProfileName,omitempty"`
-	Chassis              *EquipmentChassisRelationship         `json:"Chassis,omitempty"`
-	ChassisProfile       *ChassisProfileRelationship           `json:"ChassisProfile,omitempty"`
-	Organization         *OrganizationOrganizationRelationship `json:"Organization,omitempty"`
+	ProfileName          *string                                      `json:"ProfileName,omitempty"`
+	Chassis              NullableEquipmentChassisRelationship         `json:"Chassis,omitempty"`
+	ChassisProfile       NullableChassisProfileRelationship           `json:"ChassisProfile,omitempty"`
+	Organization         NullableOrganizationOrganizationRelationship `json:"Organization,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -112,7 +116,7 @@ func (o *ChassisConfigImport) SetObjectType(v string) {
 
 // GetDescription returns the Description field value if set, zero value otherwise.
 func (o *ChassisConfigImport) GetDescription() string {
-	if o == nil || o.Description == nil {
+	if o == nil || IsNil(o.Description) {
 		var ret string
 		return ret
 	}
@@ -122,7 +126,7 @@ func (o *ChassisConfigImport) GetDescription() string {
 // GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ChassisConfigImport) GetDescriptionOk() (*string, bool) {
-	if o == nil || o.Description == nil {
+	if o == nil || IsNil(o.Description) {
 		return nil, false
 	}
 	return o.Description, true
@@ -130,7 +134,7 @@ func (o *ChassisConfigImport) GetDescriptionOk() (*string, bool) {
 
 // HasDescription returns a boolean if a field has been set.
 func (o *ChassisConfigImport) HasDescription() bool {
-	if o != nil && o.Description != nil {
+	if o != nil && !IsNil(o.Description) {
 		return true
 	}
 
@@ -144,7 +148,7 @@ func (o *ChassisConfigImport) SetDescription(v string) {
 
 // GetPolicyPrefix returns the PolicyPrefix field value if set, zero value otherwise.
 func (o *ChassisConfigImport) GetPolicyPrefix() string {
-	if o == nil || o.PolicyPrefix == nil {
+	if o == nil || IsNil(o.PolicyPrefix) {
 		var ret string
 		return ret
 	}
@@ -154,7 +158,7 @@ func (o *ChassisConfigImport) GetPolicyPrefix() string {
 // GetPolicyPrefixOk returns a tuple with the PolicyPrefix field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ChassisConfigImport) GetPolicyPrefixOk() (*string, bool) {
-	if o == nil || o.PolicyPrefix == nil {
+	if o == nil || IsNil(o.PolicyPrefix) {
 		return nil, false
 	}
 	return o.PolicyPrefix, true
@@ -162,7 +166,7 @@ func (o *ChassisConfigImport) GetPolicyPrefixOk() (*string, bool) {
 
 // HasPolicyPrefix returns a boolean if a field has been set.
 func (o *ChassisConfigImport) HasPolicyPrefix() bool {
-	if o != nil && o.PolicyPrefix != nil {
+	if o != nil && !IsNil(o.PolicyPrefix) {
 		return true
 	}
 
@@ -187,7 +191,7 @@ func (o *ChassisConfigImport) GetPolicyTypes() []string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ChassisConfigImport) GetPolicyTypesOk() ([]string, bool) {
-	if o == nil || o.PolicyTypes == nil {
+	if o == nil || IsNil(o.PolicyTypes) {
 		return nil, false
 	}
 	return o.PolicyTypes, true
@@ -195,7 +199,7 @@ func (o *ChassisConfigImport) GetPolicyTypesOk() ([]string, bool) {
 
 // HasPolicyTypes returns a boolean if a field has been set.
 func (o *ChassisConfigImport) HasPolicyTypes() bool {
-	if o != nil && o.PolicyTypes != nil {
+	if o != nil && IsNil(o.PolicyTypes) {
 		return true
 	}
 
@@ -209,7 +213,7 @@ func (o *ChassisConfigImport) SetPolicyTypes(v []string) {
 
 // GetProfileName returns the ProfileName field value if set, zero value otherwise.
 func (o *ChassisConfigImport) GetProfileName() string {
-	if o == nil || o.ProfileName == nil {
+	if o == nil || IsNil(o.ProfileName) {
 		var ret string
 		return ret
 	}
@@ -219,7 +223,7 @@ func (o *ChassisConfigImport) GetProfileName() string {
 // GetProfileNameOk returns a tuple with the ProfileName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ChassisConfigImport) GetProfileNameOk() (*string, bool) {
-	if o == nil || o.ProfileName == nil {
+	if o == nil || IsNil(o.ProfileName) {
 		return nil, false
 	}
 	return o.ProfileName, true
@@ -227,7 +231,7 @@ func (o *ChassisConfigImport) GetProfileNameOk() (*string, bool) {
 
 // HasProfileName returns a boolean if a field has been set.
 func (o *ChassisConfigImport) HasProfileName() bool {
-	if o != nil && o.ProfileName != nil {
+	if o != nil && !IsNil(o.ProfileName) {
 		return true
 	}
 
@@ -239,148 +243,207 @@ func (o *ChassisConfigImport) SetProfileName(v string) {
 	o.ProfileName = &v
 }
 
-// GetChassis returns the Chassis field value if set, zero value otherwise.
+// GetChassis returns the Chassis field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ChassisConfigImport) GetChassis() EquipmentChassisRelationship {
-	if o == nil || o.Chassis == nil {
+	if o == nil || IsNil(o.Chassis.Get()) {
 		var ret EquipmentChassisRelationship
 		return ret
 	}
-	return *o.Chassis
+	return *o.Chassis.Get()
 }
 
 // GetChassisOk returns a tuple with the Chassis field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ChassisConfigImport) GetChassisOk() (*EquipmentChassisRelationship, bool) {
-	if o == nil || o.Chassis == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Chassis, true
+	return o.Chassis.Get(), o.Chassis.IsSet()
 }
 
 // HasChassis returns a boolean if a field has been set.
 func (o *ChassisConfigImport) HasChassis() bool {
-	if o != nil && o.Chassis != nil {
+	if o != nil && o.Chassis.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetChassis gets a reference to the given EquipmentChassisRelationship and assigns it to the Chassis field.
+// SetChassis gets a reference to the given NullableEquipmentChassisRelationship and assigns it to the Chassis field.
 func (o *ChassisConfigImport) SetChassis(v EquipmentChassisRelationship) {
-	o.Chassis = &v
+	o.Chassis.Set(&v)
 }
 
-// GetChassisProfile returns the ChassisProfile field value if set, zero value otherwise.
+// SetChassisNil sets the value for Chassis to be an explicit nil
+func (o *ChassisConfigImport) SetChassisNil() {
+	o.Chassis.Set(nil)
+}
+
+// UnsetChassis ensures that no value is present for Chassis, not even an explicit nil
+func (o *ChassisConfigImport) UnsetChassis() {
+	o.Chassis.Unset()
+}
+
+// GetChassisProfile returns the ChassisProfile field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ChassisConfigImport) GetChassisProfile() ChassisProfileRelationship {
-	if o == nil || o.ChassisProfile == nil {
+	if o == nil || IsNil(o.ChassisProfile.Get()) {
 		var ret ChassisProfileRelationship
 		return ret
 	}
-	return *o.ChassisProfile
+	return *o.ChassisProfile.Get()
 }
 
 // GetChassisProfileOk returns a tuple with the ChassisProfile field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ChassisConfigImport) GetChassisProfileOk() (*ChassisProfileRelationship, bool) {
-	if o == nil || o.ChassisProfile == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.ChassisProfile, true
+	return o.ChassisProfile.Get(), o.ChassisProfile.IsSet()
 }
 
 // HasChassisProfile returns a boolean if a field has been set.
 func (o *ChassisConfigImport) HasChassisProfile() bool {
-	if o != nil && o.ChassisProfile != nil {
+	if o != nil && o.ChassisProfile.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetChassisProfile gets a reference to the given ChassisProfileRelationship and assigns it to the ChassisProfile field.
+// SetChassisProfile gets a reference to the given NullableChassisProfileRelationship and assigns it to the ChassisProfile field.
 func (o *ChassisConfigImport) SetChassisProfile(v ChassisProfileRelationship) {
-	o.ChassisProfile = &v
+	o.ChassisProfile.Set(&v)
 }
 
-// GetOrganization returns the Organization field value if set, zero value otherwise.
+// SetChassisProfileNil sets the value for ChassisProfile to be an explicit nil
+func (o *ChassisConfigImport) SetChassisProfileNil() {
+	o.ChassisProfile.Set(nil)
+}
+
+// UnsetChassisProfile ensures that no value is present for ChassisProfile, not even an explicit nil
+func (o *ChassisConfigImport) UnsetChassisProfile() {
+	o.ChassisProfile.Unset()
+}
+
+// GetOrganization returns the Organization field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ChassisConfigImport) GetOrganization() OrganizationOrganizationRelationship {
-	if o == nil || o.Organization == nil {
+	if o == nil || IsNil(o.Organization.Get()) {
 		var ret OrganizationOrganizationRelationship
 		return ret
 	}
-	return *o.Organization
+	return *o.Organization.Get()
 }
 
 // GetOrganizationOk returns a tuple with the Organization field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ChassisConfigImport) GetOrganizationOk() (*OrganizationOrganizationRelationship, bool) {
-	if o == nil || o.Organization == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Organization, true
+	return o.Organization.Get(), o.Organization.IsSet()
 }
 
 // HasOrganization returns a boolean if a field has been set.
 func (o *ChassisConfigImport) HasOrganization() bool {
-	if o != nil && o.Organization != nil {
+	if o != nil && o.Organization.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetOrganization gets a reference to the given OrganizationOrganizationRelationship and assigns it to the Organization field.
+// SetOrganization gets a reference to the given NullableOrganizationOrganizationRelationship and assigns it to the Organization field.
 func (o *ChassisConfigImport) SetOrganization(v OrganizationOrganizationRelationship) {
-	o.Organization = &v
+	o.Organization.Set(&v)
+}
+
+// SetOrganizationNil sets the value for Organization to be an explicit nil
+func (o *ChassisConfigImport) SetOrganizationNil() {
+	o.Organization.Set(nil)
+}
+
+// UnsetOrganization ensures that no value is present for Organization, not even an explicit nil
+func (o *ChassisConfigImport) UnsetOrganization() {
+	o.Organization.Unset()
 }
 
 func (o ChassisConfigImport) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o ChassisConfigImport) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Description != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Description) {
 		toSerialize["Description"] = o.Description
 	}
-	if o.PolicyPrefix != nil {
+	if !IsNil(o.PolicyPrefix) {
 		toSerialize["PolicyPrefix"] = o.PolicyPrefix
 	}
 	if o.PolicyTypes != nil {
 		toSerialize["PolicyTypes"] = o.PolicyTypes
 	}
-	if o.ProfileName != nil {
+	if !IsNil(o.ProfileName) {
 		toSerialize["ProfileName"] = o.ProfileName
 	}
-	if o.Chassis != nil {
-		toSerialize["Chassis"] = o.Chassis
+	if o.Chassis.IsSet() {
+		toSerialize["Chassis"] = o.Chassis.Get()
 	}
-	if o.ChassisProfile != nil {
-		toSerialize["ChassisProfile"] = o.ChassisProfile
+	if o.ChassisProfile.IsSet() {
+		toSerialize["ChassisProfile"] = o.ChassisProfile.Get()
 	}
-	if o.Organization != nil {
-		toSerialize["Organization"] = o.Organization
+	if o.Organization.IsSet() {
+		toSerialize["Organization"] = o.Organization.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *ChassisConfigImport) UnmarshalJSON(bytes []byte) (err error) {
+func (o *ChassisConfigImport) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type ChassisConfigImportWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -392,15 +455,15 @@ func (o *ChassisConfigImport) UnmarshalJSON(bytes []byte) (err error) {
 		PolicyPrefix *string  `json:"PolicyPrefix,omitempty"`
 		PolicyTypes  []string `json:"PolicyTypes,omitempty"`
 		// Profile name for the imported chassis profile.
-		ProfileName    *string                               `json:"ProfileName,omitempty"`
-		Chassis        *EquipmentChassisRelationship         `json:"Chassis,omitempty"`
-		ChassisProfile *ChassisProfileRelationship           `json:"ChassisProfile,omitempty"`
-		Organization   *OrganizationOrganizationRelationship `json:"Organization,omitempty"`
+		ProfileName    *string                                      `json:"ProfileName,omitempty"`
+		Chassis        NullableEquipmentChassisRelationship         `json:"Chassis,omitempty"`
+		ChassisProfile NullableChassisProfileRelationship           `json:"ChassisProfile,omitempty"`
+		Organization   NullableOrganizationOrganizationRelationship `json:"Organization,omitempty"`
 	}
 
 	varChassisConfigImportWithoutEmbeddedStruct := ChassisConfigImportWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varChassisConfigImportWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varChassisConfigImportWithoutEmbeddedStruct)
 	if err == nil {
 		varChassisConfigImport := _ChassisConfigImport{}
 		varChassisConfigImport.ClassId = varChassisConfigImportWithoutEmbeddedStruct.ClassId
@@ -419,7 +482,7 @@ func (o *ChassisConfigImport) UnmarshalJSON(bytes []byte) (err error) {
 
 	varChassisConfigImport := _ChassisConfigImport{}
 
-	err = json.Unmarshal(bytes, &varChassisConfigImport)
+	err = json.Unmarshal(data, &varChassisConfigImport)
 	if err == nil {
 		o.MoBaseMo = varChassisConfigImport.MoBaseMo
 	} else {
@@ -428,7 +491,7 @@ func (o *ChassisConfigImport) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Description")

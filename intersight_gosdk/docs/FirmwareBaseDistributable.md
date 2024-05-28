@@ -13,13 +13,13 @@ Name | Type | Description | Notes
 **Mdfid** | Pointer to **string** | The mdfid of the image provided by cisco.com. | [optional] 
 **Model** | Pointer to **string** | The endpoint model for which this firmware image is applicable. | [optional] 
 **PlatformType** | Pointer to **string** | The platform type of the image. | [optional] [readonly] 
-**RecommendedBuild** | Pointer to **string** | The build which is recommended by Cisco. | [optional] 
+**RecommendedBuild** | Pointer to **string** | The build which is recommended by Cisco. | [optional] [default to "N"]
 **ReleaseNotesUrl** | Pointer to **string** | The url for the release notes of this image. | [optional] 
 **SoftwareTypeId** | Pointer to **string** | The software type id provided by cisco.com. | [optional] [readonly] 
 **SupportedModels** | Pointer to **[]string** |  | [optional] 
 **Vendor** | Pointer to **string** | The vendor or publisher of this file. | [optional] [default to "Cisco"]
 **DistributableMetas** | Pointer to [**[]FirmwareDistributableMetaRelationship**](FirmwareDistributableMetaRelationship.md) | An array of relationships to firmwareDistributableMeta resources. | [optional] 
-**Release** | Pointer to [**SoftwarerepositoryReleaseRelationship**](SoftwarerepositoryReleaseRelationship.md) |  | [optional] 
+**Release** | Pointer to [**NullableSoftwarerepositoryReleaseRelationship**](SoftwarerepositoryReleaseRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -460,6 +460,16 @@ SetRelease sets Release field to given value.
 
 HasRelease returns a boolean if a field has been set.
 
+### SetReleaseNil
+
+`func (o *FirmwareBaseDistributable) SetReleaseNil(b bool)`
+
+ SetReleaseNil sets the value for Release to be an explicit nil
+
+### UnsetRelease
+`func (o *FirmwareBaseDistributable) UnsetRelease()`
+
+UnsetRelease ensures that no value is present for Release, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

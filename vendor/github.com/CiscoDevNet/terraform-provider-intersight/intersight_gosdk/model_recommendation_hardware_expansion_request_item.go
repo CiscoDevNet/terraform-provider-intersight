@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the RecommendationHardwareExpansionRequestItem type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &RecommendationHardwareExpansionRequestItem{}
 
 // RecommendationHardwareExpansionRequestItem Entity representing the user request for expansion of each hardware item.
 type RecommendationHardwareExpansionRequestItem struct {
@@ -33,8 +37,8 @@ type RecommendationHardwareExpansionRequestItem struct {
 	// Unit type for the expansion request, i.e., if the increase is requested as a raw value in TB, GB, etc., or in percentage increase. * `TB` - The Enum value TB represents that the measurement unit is in terabytes. * `MB` - The Enum value MB represents that the measurement unit is in megabytes. * `GB` - The Enum value GB represents that the measurement unit is in gigabytes. * `MHz` - The Enum value MHz represents that the measurement unit is in megahertz. * `GHz` - The Enum value GHz represents that the measurement unit is in gigahertz. * `Percentage` - The Enum value Percentage represents that the expansion request is in the percentage of resource increase. For example, a 20% increase in CPU capacity.
 	UnitType *string `json:"UnitType,omitempty"`
 	// Value of the expansion request which can be absolute value or percentage increase.
-	Value                *float32                                            `json:"Value,omitempty"`
-	ExpansionRequest     *RecommendationHardwareExpansionRequestRelationship `json:"ExpansionRequest,omitempty"`
+	Value                *float32                                                   `json:"Value,omitempty"`
+	ExpansionRequest     NullableRecommendationHardwareExpansionRequestRelationship `json:"ExpansionRequest,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -125,7 +129,7 @@ func (o *RecommendationHardwareExpansionRequestItem) SetObjectType(v string) {
 
 // GetItemType returns the ItemType field value if set, zero value otherwise.
 func (o *RecommendationHardwareExpansionRequestItem) GetItemType() string {
-	if o == nil || o.ItemType == nil {
+	if o == nil || IsNil(o.ItemType) {
 		var ret string
 		return ret
 	}
@@ -135,7 +139,7 @@ func (o *RecommendationHardwareExpansionRequestItem) GetItemType() string {
 // GetItemTypeOk returns a tuple with the ItemType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RecommendationHardwareExpansionRequestItem) GetItemTypeOk() (*string, bool) {
-	if o == nil || o.ItemType == nil {
+	if o == nil || IsNil(o.ItemType) {
 		return nil, false
 	}
 	return o.ItemType, true
@@ -143,7 +147,7 @@ func (o *RecommendationHardwareExpansionRequestItem) GetItemTypeOk() (*string, b
 
 // HasItemType returns a boolean if a field has been set.
 func (o *RecommendationHardwareExpansionRequestItem) HasItemType() bool {
-	if o != nil && o.ItemType != nil {
+	if o != nil && !IsNil(o.ItemType) {
 		return true
 	}
 
@@ -157,7 +161,7 @@ func (o *RecommendationHardwareExpansionRequestItem) SetItemType(v string) {
 
 // GetMaxValue returns the MaxValue field value if set, zero value otherwise.
 func (o *RecommendationHardwareExpansionRequestItem) GetMaxValue() float32 {
-	if o == nil || o.MaxValue == nil {
+	if o == nil || IsNil(o.MaxValue) {
 		var ret float32
 		return ret
 	}
@@ -167,7 +171,7 @@ func (o *RecommendationHardwareExpansionRequestItem) GetMaxValue() float32 {
 // GetMaxValueOk returns a tuple with the MaxValue field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RecommendationHardwareExpansionRequestItem) GetMaxValueOk() (*float32, bool) {
-	if o == nil || o.MaxValue == nil {
+	if o == nil || IsNil(o.MaxValue) {
 		return nil, false
 	}
 	return o.MaxValue, true
@@ -175,7 +179,7 @@ func (o *RecommendationHardwareExpansionRequestItem) GetMaxValueOk() (*float32, 
 
 // HasMaxValue returns a boolean if a field has been set.
 func (o *RecommendationHardwareExpansionRequestItem) HasMaxValue() bool {
-	if o != nil && o.MaxValue != nil {
+	if o != nil && !IsNil(o.MaxValue) {
 		return true
 	}
 
@@ -189,7 +193,7 @@ func (o *RecommendationHardwareExpansionRequestItem) SetMaxValue(v float32) {
 
 // GetMaxValueUnit returns the MaxValueUnit field value if set, zero value otherwise.
 func (o *RecommendationHardwareExpansionRequestItem) GetMaxValueUnit() string {
-	if o == nil || o.MaxValueUnit == nil {
+	if o == nil || IsNil(o.MaxValueUnit) {
 		var ret string
 		return ret
 	}
@@ -199,7 +203,7 @@ func (o *RecommendationHardwareExpansionRequestItem) GetMaxValueUnit() string {
 // GetMaxValueUnitOk returns a tuple with the MaxValueUnit field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RecommendationHardwareExpansionRequestItem) GetMaxValueUnitOk() (*string, bool) {
-	if o == nil || o.MaxValueUnit == nil {
+	if o == nil || IsNil(o.MaxValueUnit) {
 		return nil, false
 	}
 	return o.MaxValueUnit, true
@@ -207,7 +211,7 @@ func (o *RecommendationHardwareExpansionRequestItem) GetMaxValueUnitOk() (*strin
 
 // HasMaxValueUnit returns a boolean if a field has been set.
 func (o *RecommendationHardwareExpansionRequestItem) HasMaxValueUnit() bool {
-	if o != nil && o.MaxValueUnit != nil {
+	if o != nil && !IsNil(o.MaxValueUnit) {
 		return true
 	}
 
@@ -221,7 +225,7 @@ func (o *RecommendationHardwareExpansionRequestItem) SetMaxValueUnit(v string) {
 
 // GetUnitType returns the UnitType field value if set, zero value otherwise.
 func (o *RecommendationHardwareExpansionRequestItem) GetUnitType() string {
-	if o == nil || o.UnitType == nil {
+	if o == nil || IsNil(o.UnitType) {
 		var ret string
 		return ret
 	}
@@ -231,7 +235,7 @@ func (o *RecommendationHardwareExpansionRequestItem) GetUnitType() string {
 // GetUnitTypeOk returns a tuple with the UnitType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RecommendationHardwareExpansionRequestItem) GetUnitTypeOk() (*string, bool) {
-	if o == nil || o.UnitType == nil {
+	if o == nil || IsNil(o.UnitType) {
 		return nil, false
 	}
 	return o.UnitType, true
@@ -239,7 +243,7 @@ func (o *RecommendationHardwareExpansionRequestItem) GetUnitTypeOk() (*string, b
 
 // HasUnitType returns a boolean if a field has been set.
 func (o *RecommendationHardwareExpansionRequestItem) HasUnitType() bool {
-	if o != nil && o.UnitType != nil {
+	if o != nil && !IsNil(o.UnitType) {
 		return true
 	}
 
@@ -253,7 +257,7 @@ func (o *RecommendationHardwareExpansionRequestItem) SetUnitType(v string) {
 
 // GetValue returns the Value field value if set, zero value otherwise.
 func (o *RecommendationHardwareExpansionRequestItem) GetValue() float32 {
-	if o == nil || o.Value == nil {
+	if o == nil || IsNil(o.Value) {
 		var ret float32
 		return ret
 	}
@@ -263,7 +267,7 @@ func (o *RecommendationHardwareExpansionRequestItem) GetValue() float32 {
 // GetValueOk returns a tuple with the Value field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RecommendationHardwareExpansionRequestItem) GetValueOk() (*float32, bool) {
-	if o == nil || o.Value == nil {
+	if o == nil || IsNil(o.Value) {
 		return nil, false
 	}
 	return o.Value, true
@@ -271,7 +275,7 @@ func (o *RecommendationHardwareExpansionRequestItem) GetValueOk() (*float32, boo
 
 // HasValue returns a boolean if a field has been set.
 func (o *RecommendationHardwareExpansionRequestItem) HasValue() bool {
-	if o != nil && o.Value != nil {
+	if o != nil && !IsNil(o.Value) {
 		return true
 	}
 
@@ -283,81 +287,118 @@ func (o *RecommendationHardwareExpansionRequestItem) SetValue(v float32) {
 	o.Value = &v
 }
 
-// GetExpansionRequest returns the ExpansionRequest field value if set, zero value otherwise.
+// GetExpansionRequest returns the ExpansionRequest field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *RecommendationHardwareExpansionRequestItem) GetExpansionRequest() RecommendationHardwareExpansionRequestRelationship {
-	if o == nil || o.ExpansionRequest == nil {
+	if o == nil || IsNil(o.ExpansionRequest.Get()) {
 		var ret RecommendationHardwareExpansionRequestRelationship
 		return ret
 	}
-	return *o.ExpansionRequest
+	return *o.ExpansionRequest.Get()
 }
 
 // GetExpansionRequestOk returns a tuple with the ExpansionRequest field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *RecommendationHardwareExpansionRequestItem) GetExpansionRequestOk() (*RecommendationHardwareExpansionRequestRelationship, bool) {
-	if o == nil || o.ExpansionRequest == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.ExpansionRequest, true
+	return o.ExpansionRequest.Get(), o.ExpansionRequest.IsSet()
 }
 
 // HasExpansionRequest returns a boolean if a field has been set.
 func (o *RecommendationHardwareExpansionRequestItem) HasExpansionRequest() bool {
-	if o != nil && o.ExpansionRequest != nil {
+	if o != nil && o.ExpansionRequest.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetExpansionRequest gets a reference to the given RecommendationHardwareExpansionRequestRelationship and assigns it to the ExpansionRequest field.
+// SetExpansionRequest gets a reference to the given NullableRecommendationHardwareExpansionRequestRelationship and assigns it to the ExpansionRequest field.
 func (o *RecommendationHardwareExpansionRequestItem) SetExpansionRequest(v RecommendationHardwareExpansionRequestRelationship) {
-	o.ExpansionRequest = &v
+	o.ExpansionRequest.Set(&v)
+}
+
+// SetExpansionRequestNil sets the value for ExpansionRequest to be an explicit nil
+func (o *RecommendationHardwareExpansionRequestItem) SetExpansionRequestNil() {
+	o.ExpansionRequest.Set(nil)
+}
+
+// UnsetExpansionRequest ensures that no value is present for ExpansionRequest, not even an explicit nil
+func (o *RecommendationHardwareExpansionRequestItem) UnsetExpansionRequest() {
+	o.ExpansionRequest.Unset()
 }
 
 func (o RecommendationHardwareExpansionRequestItem) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o RecommendationHardwareExpansionRequestItem) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.ItemType != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.ItemType) {
 		toSerialize["ItemType"] = o.ItemType
 	}
-	if o.MaxValue != nil {
+	if !IsNil(o.MaxValue) {
 		toSerialize["MaxValue"] = o.MaxValue
 	}
-	if o.MaxValueUnit != nil {
+	if !IsNil(o.MaxValueUnit) {
 		toSerialize["MaxValueUnit"] = o.MaxValueUnit
 	}
-	if o.UnitType != nil {
+	if !IsNil(o.UnitType) {
 		toSerialize["UnitType"] = o.UnitType
 	}
-	if o.Value != nil {
+	if !IsNil(o.Value) {
 		toSerialize["Value"] = o.Value
 	}
-	if o.ExpansionRequest != nil {
-		toSerialize["ExpansionRequest"] = o.ExpansionRequest
+	if o.ExpansionRequest.IsSet() {
+		toSerialize["ExpansionRequest"] = o.ExpansionRequest.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *RecommendationHardwareExpansionRequestItem) UnmarshalJSON(bytes []byte) (err error) {
+func (o *RecommendationHardwareExpansionRequestItem) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type RecommendationHardwareExpansionRequestItemWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -372,13 +413,13 @@ func (o *RecommendationHardwareExpansionRequestItem) UnmarshalJSON(bytes []byte)
 		// Unit type for the expansion request, i.e., if the increase is requested as a raw value in TB, GB, etc., or in percentage increase. * `TB` - The Enum value TB represents that the measurement unit is in terabytes. * `MB` - The Enum value MB represents that the measurement unit is in megabytes. * `GB` - The Enum value GB represents that the measurement unit is in gigabytes. * `MHz` - The Enum value MHz represents that the measurement unit is in megahertz. * `GHz` - The Enum value GHz represents that the measurement unit is in gigahertz. * `Percentage` - The Enum value Percentage represents that the expansion request is in the percentage of resource increase. For example, a 20% increase in CPU capacity.
 		UnitType *string `json:"UnitType,omitempty"`
 		// Value of the expansion request which can be absolute value or percentage increase.
-		Value            *float32                                            `json:"Value,omitempty"`
-		ExpansionRequest *RecommendationHardwareExpansionRequestRelationship `json:"ExpansionRequest,omitempty"`
+		Value            *float32                                                   `json:"Value,omitempty"`
+		ExpansionRequest NullableRecommendationHardwareExpansionRequestRelationship `json:"ExpansionRequest,omitempty"`
 	}
 
 	varRecommendationHardwareExpansionRequestItemWithoutEmbeddedStruct := RecommendationHardwareExpansionRequestItemWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varRecommendationHardwareExpansionRequestItemWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varRecommendationHardwareExpansionRequestItemWithoutEmbeddedStruct)
 	if err == nil {
 		varRecommendationHardwareExpansionRequestItem := _RecommendationHardwareExpansionRequestItem{}
 		varRecommendationHardwareExpansionRequestItem.ClassId = varRecommendationHardwareExpansionRequestItemWithoutEmbeddedStruct.ClassId
@@ -396,7 +437,7 @@ func (o *RecommendationHardwareExpansionRequestItem) UnmarshalJSON(bytes []byte)
 
 	varRecommendationHardwareExpansionRequestItem := _RecommendationHardwareExpansionRequestItem{}
 
-	err = json.Unmarshal(bytes, &varRecommendationHardwareExpansionRequestItem)
+	err = json.Unmarshal(data, &varRecommendationHardwareExpansionRequestItem)
 	if err == nil {
 		o.MoBaseMo = varRecommendationHardwareExpansionRequestItem.MoBaseMo
 	} else {
@@ -405,7 +446,7 @@ func (o *RecommendationHardwareExpansionRequestItem) UnmarshalJSON(bytes []byte)
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "ItemType")

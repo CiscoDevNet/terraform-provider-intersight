@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the StorageNetAppFcInterfaceEvent type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &StorageNetAppFcInterfaceEvent{}
 
 // StorageNetAppFcInterfaceEvent An event where the impacted resource type is a FC interface.
 type StorageNetAppFcInterfaceEvent struct {
@@ -23,8 +27,8 @@ type StorageNetAppFcInterfaceEvent struct {
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
-	ObjectType           string                                `json:"ObjectType"`
-	FcInterface          *StorageNetAppFcInterfaceRelationship `json:"FcInterface,omitempty"`
+	ObjectType           string                                       `json:"ObjectType"`
+	FcInterface          NullableStorageNetAppFcInterfaceRelationship `json:"FcInterface,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -101,77 +105,114 @@ func (o *StorageNetAppFcInterfaceEvent) SetObjectType(v string) {
 	o.ObjectType = v
 }
 
-// GetFcInterface returns the FcInterface field value if set, zero value otherwise.
+// GetFcInterface returns the FcInterface field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *StorageNetAppFcInterfaceEvent) GetFcInterface() StorageNetAppFcInterfaceRelationship {
-	if o == nil || o.FcInterface == nil {
+	if o == nil || IsNil(o.FcInterface.Get()) {
 		var ret StorageNetAppFcInterfaceRelationship
 		return ret
 	}
-	return *o.FcInterface
+	return *o.FcInterface.Get()
 }
 
 // GetFcInterfaceOk returns a tuple with the FcInterface field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StorageNetAppFcInterfaceEvent) GetFcInterfaceOk() (*StorageNetAppFcInterfaceRelationship, bool) {
-	if o == nil || o.FcInterface == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.FcInterface, true
+	return o.FcInterface.Get(), o.FcInterface.IsSet()
 }
 
 // HasFcInterface returns a boolean if a field has been set.
 func (o *StorageNetAppFcInterfaceEvent) HasFcInterface() bool {
-	if o != nil && o.FcInterface != nil {
+	if o != nil && o.FcInterface.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetFcInterface gets a reference to the given StorageNetAppFcInterfaceRelationship and assigns it to the FcInterface field.
+// SetFcInterface gets a reference to the given NullableStorageNetAppFcInterfaceRelationship and assigns it to the FcInterface field.
 func (o *StorageNetAppFcInterfaceEvent) SetFcInterface(v StorageNetAppFcInterfaceRelationship) {
-	o.FcInterface = &v
+	o.FcInterface.Set(&v)
+}
+
+// SetFcInterfaceNil sets the value for FcInterface to be an explicit nil
+func (o *StorageNetAppFcInterfaceEvent) SetFcInterfaceNil() {
+	o.FcInterface.Set(nil)
+}
+
+// UnsetFcInterface ensures that no value is present for FcInterface, not even an explicit nil
+func (o *StorageNetAppFcInterfaceEvent) UnsetFcInterface() {
+	o.FcInterface.Unset()
 }
 
 func (o StorageNetAppFcInterfaceEvent) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o StorageNetAppFcInterfaceEvent) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedStorageNetAppBaseEvent, errStorageNetAppBaseEvent := json.Marshal(o.StorageNetAppBaseEvent)
 	if errStorageNetAppBaseEvent != nil {
-		return []byte{}, errStorageNetAppBaseEvent
+		return map[string]interface{}{}, errStorageNetAppBaseEvent
 	}
 	errStorageNetAppBaseEvent = json.Unmarshal([]byte(serializedStorageNetAppBaseEvent), &toSerialize)
 	if errStorageNetAppBaseEvent != nil {
-		return []byte{}, errStorageNetAppBaseEvent
+		return map[string]interface{}{}, errStorageNetAppBaseEvent
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.FcInterface != nil {
-		toSerialize["FcInterface"] = o.FcInterface
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if o.FcInterface.IsSet() {
+		toSerialize["FcInterface"] = o.FcInterface.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *StorageNetAppFcInterfaceEvent) UnmarshalJSON(bytes []byte) (err error) {
+func (o *StorageNetAppFcInterfaceEvent) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type StorageNetAppFcInterfaceEventWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
-		ObjectType  string                                `json:"ObjectType"`
-		FcInterface *StorageNetAppFcInterfaceRelationship `json:"FcInterface,omitempty"`
+		ObjectType  string                                       `json:"ObjectType"`
+		FcInterface NullableStorageNetAppFcInterfaceRelationship `json:"FcInterface,omitempty"`
 	}
 
 	varStorageNetAppFcInterfaceEventWithoutEmbeddedStruct := StorageNetAppFcInterfaceEventWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varStorageNetAppFcInterfaceEventWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varStorageNetAppFcInterfaceEventWithoutEmbeddedStruct)
 	if err == nil {
 		varStorageNetAppFcInterfaceEvent := _StorageNetAppFcInterfaceEvent{}
 		varStorageNetAppFcInterfaceEvent.ClassId = varStorageNetAppFcInterfaceEventWithoutEmbeddedStruct.ClassId
@@ -184,7 +225,7 @@ func (o *StorageNetAppFcInterfaceEvent) UnmarshalJSON(bytes []byte) (err error) 
 
 	varStorageNetAppFcInterfaceEvent := _StorageNetAppFcInterfaceEvent{}
 
-	err = json.Unmarshal(bytes, &varStorageNetAppFcInterfaceEvent)
+	err = json.Unmarshal(data, &varStorageNetAppFcInterfaceEvent)
 	if err == nil {
 		o.StorageNetAppBaseEvent = varStorageNetAppFcInterfaceEvent.StorageNetAppBaseEvent
 	} else {
@@ -193,7 +234,7 @@ func (o *StorageNetAppFcInterfaceEvent) UnmarshalJSON(bytes []byte) (err error) 
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "FcInterface")

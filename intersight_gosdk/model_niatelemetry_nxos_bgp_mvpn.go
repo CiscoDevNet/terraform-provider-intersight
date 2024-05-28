@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the NiatelemetryNxosBgpMvpn type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &NiatelemetryNxosBgpMvpn{}
 
 // NiatelemetryNxosBgpMvpn Stores data about BGP MVPN.
 type NiatelemetryNxosBgpMvpn struct {
@@ -118,7 +122,7 @@ func (o *NiatelemetryNxosBgpMvpn) SetObjectType(v string) {
 
 // GetCapablePeers returns the CapablePeers field value if set, zero value otherwise.
 func (o *NiatelemetryNxosBgpMvpn) GetCapablePeers() int64 {
-	if o == nil || o.CapablePeers == nil {
+	if o == nil || IsNil(o.CapablePeers) {
 		var ret int64
 		return ret
 	}
@@ -128,7 +132,7 @@ func (o *NiatelemetryNxosBgpMvpn) GetCapablePeers() int64 {
 // GetCapablePeersOk returns a tuple with the CapablePeers field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryNxosBgpMvpn) GetCapablePeersOk() (*int64, bool) {
-	if o == nil || o.CapablePeers == nil {
+	if o == nil || IsNil(o.CapablePeers) {
 		return nil, false
 	}
 	return o.CapablePeers, true
@@ -136,7 +140,7 @@ func (o *NiatelemetryNxosBgpMvpn) GetCapablePeersOk() (*int64, bool) {
 
 // HasCapablePeers returns a boolean if a field has been set.
 func (o *NiatelemetryNxosBgpMvpn) HasCapablePeers() bool {
-	if o != nil && o.CapablePeers != nil {
+	if o != nil && !IsNil(o.CapablePeers) {
 		return true
 	}
 
@@ -150,7 +154,7 @@ func (o *NiatelemetryNxosBgpMvpn) SetCapablePeers(v int64) {
 
 // GetConfiguredPeers returns the ConfiguredPeers field value if set, zero value otherwise.
 func (o *NiatelemetryNxosBgpMvpn) GetConfiguredPeers() int64 {
-	if o == nil || o.ConfiguredPeers == nil {
+	if o == nil || IsNil(o.ConfiguredPeers) {
 		var ret int64
 		return ret
 	}
@@ -160,7 +164,7 @@ func (o *NiatelemetryNxosBgpMvpn) GetConfiguredPeers() int64 {
 // GetConfiguredPeersOk returns a tuple with the ConfiguredPeers field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryNxosBgpMvpn) GetConfiguredPeersOk() (*int64, bool) {
-	if o == nil || o.ConfiguredPeers == nil {
+	if o == nil || IsNil(o.ConfiguredPeers) {
 		return nil, false
 	}
 	return o.ConfiguredPeers, true
@@ -168,7 +172,7 @@ func (o *NiatelemetryNxosBgpMvpn) GetConfiguredPeersOk() (*int64, bool) {
 
 // HasConfiguredPeers returns a boolean if a field has been set.
 func (o *NiatelemetryNxosBgpMvpn) HasConfiguredPeers() bool {
-	if o != nil && o.ConfiguredPeers != nil {
+	if o != nil && !IsNil(o.ConfiguredPeers) {
 		return true
 	}
 
@@ -182,7 +186,7 @@ func (o *NiatelemetryNxosBgpMvpn) SetConfiguredPeers(v int64) {
 
 // GetMemoryUsed returns the MemoryUsed field value if set, zero value otherwise.
 func (o *NiatelemetryNxosBgpMvpn) GetMemoryUsed() int64 {
-	if o == nil || o.MemoryUsed == nil {
+	if o == nil || IsNil(o.MemoryUsed) {
 		var ret int64
 		return ret
 	}
@@ -192,7 +196,7 @@ func (o *NiatelemetryNxosBgpMvpn) GetMemoryUsed() int64 {
 // GetMemoryUsedOk returns a tuple with the MemoryUsed field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryNxosBgpMvpn) GetMemoryUsedOk() (*int64, bool) {
-	if o == nil || o.MemoryUsed == nil {
+	if o == nil || IsNil(o.MemoryUsed) {
 		return nil, false
 	}
 	return o.MemoryUsed, true
@@ -200,7 +204,7 @@ func (o *NiatelemetryNxosBgpMvpn) GetMemoryUsedOk() (*int64, bool) {
 
 // HasMemoryUsed returns a boolean if a field has been set.
 func (o *NiatelemetryNxosBgpMvpn) HasMemoryUsed() bool {
-	if o != nil && o.MemoryUsed != nil {
+	if o != nil && !IsNil(o.MemoryUsed) {
 		return true
 	}
 
@@ -214,7 +218,7 @@ func (o *NiatelemetryNxosBgpMvpn) SetMemoryUsed(v int64) {
 
 // GetNumberOfClusterLists returns the NumberOfClusterLists field value if set, zero value otherwise.
 func (o *NiatelemetryNxosBgpMvpn) GetNumberOfClusterLists() int64 {
-	if o == nil || o.NumberOfClusterLists == nil {
+	if o == nil || IsNil(o.NumberOfClusterLists) {
 		var ret int64
 		return ret
 	}
@@ -224,7 +228,7 @@ func (o *NiatelemetryNxosBgpMvpn) GetNumberOfClusterLists() int64 {
 // GetNumberOfClusterListsOk returns a tuple with the NumberOfClusterLists field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryNxosBgpMvpn) GetNumberOfClusterListsOk() (*int64, bool) {
-	if o == nil || o.NumberOfClusterLists == nil {
+	if o == nil || IsNil(o.NumberOfClusterLists) {
 		return nil, false
 	}
 	return o.NumberOfClusterLists, true
@@ -232,7 +236,7 @@ func (o *NiatelemetryNxosBgpMvpn) GetNumberOfClusterListsOk() (*int64, bool) {
 
 // HasNumberOfClusterLists returns a boolean if a field has been set.
 func (o *NiatelemetryNxosBgpMvpn) HasNumberOfClusterLists() bool {
-	if o != nil && o.NumberOfClusterLists != nil {
+	if o != nil && !IsNil(o.NumberOfClusterLists) {
 		return true
 	}
 
@@ -246,7 +250,7 @@ func (o *NiatelemetryNxosBgpMvpn) SetNumberOfClusterLists(v int64) {
 
 // GetNumberOfCommunities returns the NumberOfCommunities field value if set, zero value otherwise.
 func (o *NiatelemetryNxosBgpMvpn) GetNumberOfCommunities() int64 {
-	if o == nil || o.NumberOfCommunities == nil {
+	if o == nil || IsNil(o.NumberOfCommunities) {
 		var ret int64
 		return ret
 	}
@@ -256,7 +260,7 @@ func (o *NiatelemetryNxosBgpMvpn) GetNumberOfCommunities() int64 {
 // GetNumberOfCommunitiesOk returns a tuple with the NumberOfCommunities field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryNxosBgpMvpn) GetNumberOfCommunitiesOk() (*int64, bool) {
-	if o == nil || o.NumberOfCommunities == nil {
+	if o == nil || IsNil(o.NumberOfCommunities) {
 		return nil, false
 	}
 	return o.NumberOfCommunities, true
@@ -264,7 +268,7 @@ func (o *NiatelemetryNxosBgpMvpn) GetNumberOfCommunitiesOk() (*int64, bool) {
 
 // HasNumberOfCommunities returns a boolean if a field has been set.
 func (o *NiatelemetryNxosBgpMvpn) HasNumberOfCommunities() bool {
-	if o != nil && o.NumberOfCommunities != nil {
+	if o != nil && !IsNil(o.NumberOfCommunities) {
 		return true
 	}
 
@@ -278,7 +282,7 @@ func (o *NiatelemetryNxosBgpMvpn) SetNumberOfCommunities(v int64) {
 
 // GetTableVersion returns the TableVersion field value if set, zero value otherwise.
 func (o *NiatelemetryNxosBgpMvpn) GetTableVersion() int64 {
-	if o == nil || o.TableVersion == nil {
+	if o == nil || IsNil(o.TableVersion) {
 		var ret int64
 		return ret
 	}
@@ -288,7 +292,7 @@ func (o *NiatelemetryNxosBgpMvpn) GetTableVersion() int64 {
 // GetTableVersionOk returns a tuple with the TableVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryNxosBgpMvpn) GetTableVersionOk() (*int64, bool) {
-	if o == nil || o.TableVersion == nil {
+	if o == nil || IsNil(o.TableVersion) {
 		return nil, false
 	}
 	return o.TableVersion, true
@@ -296,7 +300,7 @@ func (o *NiatelemetryNxosBgpMvpn) GetTableVersionOk() (*int64, bool) {
 
 // HasTableVersion returns a boolean if a field has been set.
 func (o *NiatelemetryNxosBgpMvpn) HasTableVersion() bool {
-	if o != nil && o.TableVersion != nil {
+	if o != nil && !IsNil(o.TableVersion) {
 		return true
 	}
 
@@ -310,7 +314,7 @@ func (o *NiatelemetryNxosBgpMvpn) SetTableVersion(v int64) {
 
 // GetTotalNetworks returns the TotalNetworks field value if set, zero value otherwise.
 func (o *NiatelemetryNxosBgpMvpn) GetTotalNetworks() int64 {
-	if o == nil || o.TotalNetworks == nil {
+	if o == nil || IsNil(o.TotalNetworks) {
 		var ret int64
 		return ret
 	}
@@ -320,7 +324,7 @@ func (o *NiatelemetryNxosBgpMvpn) GetTotalNetworks() int64 {
 // GetTotalNetworksOk returns a tuple with the TotalNetworks field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryNxosBgpMvpn) GetTotalNetworksOk() (*int64, bool) {
-	if o == nil || o.TotalNetworks == nil {
+	if o == nil || IsNil(o.TotalNetworks) {
 		return nil, false
 	}
 	return o.TotalNetworks, true
@@ -328,7 +332,7 @@ func (o *NiatelemetryNxosBgpMvpn) GetTotalNetworksOk() (*int64, bool) {
 
 // HasTotalNetworks returns a boolean if a field has been set.
 func (o *NiatelemetryNxosBgpMvpn) HasTotalNetworks() bool {
-	if o != nil && o.TotalNetworks != nil {
+	if o != nil && !IsNil(o.TotalNetworks) {
 		return true
 	}
 
@@ -342,7 +346,7 @@ func (o *NiatelemetryNxosBgpMvpn) SetTotalNetworks(v int64) {
 
 // GetTotalPaths returns the TotalPaths field value if set, zero value otherwise.
 func (o *NiatelemetryNxosBgpMvpn) GetTotalPaths() int64 {
-	if o == nil || o.TotalPaths == nil {
+	if o == nil || IsNil(o.TotalPaths) {
 		var ret int64
 		return ret
 	}
@@ -352,7 +356,7 @@ func (o *NiatelemetryNxosBgpMvpn) GetTotalPaths() int64 {
 // GetTotalPathsOk returns a tuple with the TotalPaths field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryNxosBgpMvpn) GetTotalPathsOk() (*int64, bool) {
-	if o == nil || o.TotalPaths == nil {
+	if o == nil || IsNil(o.TotalPaths) {
 		return nil, false
 	}
 	return o.TotalPaths, true
@@ -360,7 +364,7 @@ func (o *NiatelemetryNxosBgpMvpn) GetTotalPathsOk() (*int64, bool) {
 
 // HasTotalPaths returns a boolean if a field has been set.
 func (o *NiatelemetryNxosBgpMvpn) HasTotalPaths() bool {
-	if o != nil && o.TotalPaths != nil {
+	if o != nil && !IsNil(o.TotalPaths) {
 		return true
 	}
 
@@ -373,43 +377,47 @@ func (o *NiatelemetryNxosBgpMvpn) SetTotalPaths(v int64) {
 }
 
 func (o NiatelemetryNxosBgpMvpn) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o NiatelemetryNxosBgpMvpn) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
 	errMoBaseComplexType = json.Unmarshal([]byte(serializedMoBaseComplexType), &toSerialize)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.CapablePeers != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.CapablePeers) {
 		toSerialize["CapablePeers"] = o.CapablePeers
 	}
-	if o.ConfiguredPeers != nil {
+	if !IsNil(o.ConfiguredPeers) {
 		toSerialize["ConfiguredPeers"] = o.ConfiguredPeers
 	}
-	if o.MemoryUsed != nil {
+	if !IsNil(o.MemoryUsed) {
 		toSerialize["MemoryUsed"] = o.MemoryUsed
 	}
-	if o.NumberOfClusterLists != nil {
+	if !IsNil(o.NumberOfClusterLists) {
 		toSerialize["NumberOfClusterLists"] = o.NumberOfClusterLists
 	}
-	if o.NumberOfCommunities != nil {
+	if !IsNil(o.NumberOfCommunities) {
 		toSerialize["NumberOfCommunities"] = o.NumberOfCommunities
 	}
-	if o.TableVersion != nil {
+	if !IsNil(o.TableVersion) {
 		toSerialize["TableVersion"] = o.TableVersion
 	}
-	if o.TotalNetworks != nil {
+	if !IsNil(o.TotalNetworks) {
 		toSerialize["TotalNetworks"] = o.TotalNetworks
 	}
-	if o.TotalPaths != nil {
+	if !IsNil(o.TotalPaths) {
 		toSerialize["TotalPaths"] = o.TotalPaths
 	}
 
@@ -417,10 +425,32 @@ func (o NiatelemetryNxosBgpMvpn) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *NiatelemetryNxosBgpMvpn) UnmarshalJSON(bytes []byte) (err error) {
+func (o *NiatelemetryNxosBgpMvpn) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type NiatelemetryNxosBgpMvpnWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -446,7 +476,7 @@ func (o *NiatelemetryNxosBgpMvpn) UnmarshalJSON(bytes []byte) (err error) {
 
 	varNiatelemetryNxosBgpMvpnWithoutEmbeddedStruct := NiatelemetryNxosBgpMvpnWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varNiatelemetryNxosBgpMvpnWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varNiatelemetryNxosBgpMvpnWithoutEmbeddedStruct)
 	if err == nil {
 		varNiatelemetryNxosBgpMvpn := _NiatelemetryNxosBgpMvpn{}
 		varNiatelemetryNxosBgpMvpn.ClassId = varNiatelemetryNxosBgpMvpnWithoutEmbeddedStruct.ClassId
@@ -466,7 +496,7 @@ func (o *NiatelemetryNxosBgpMvpn) UnmarshalJSON(bytes []byte) (err error) {
 
 	varNiatelemetryNxosBgpMvpn := _NiatelemetryNxosBgpMvpn{}
 
-	err = json.Unmarshal(bytes, &varNiatelemetryNxosBgpMvpn)
+	err = json.Unmarshal(data, &varNiatelemetryNxosBgpMvpn)
 	if err == nil {
 		o.MoBaseComplexType = varNiatelemetryNxosBgpMvpn.MoBaseComplexType
 	} else {
@@ -475,7 +505,7 @@ func (o *NiatelemetryNxosBgpMvpn) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "CapablePeers")

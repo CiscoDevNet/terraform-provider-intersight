@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the NiatelemetrySyslogSysMsgFacFilter type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &NiatelemetrySyslogSysMsgFacFilter{}
 
 // NiatelemetrySyslogSysMsgFacFilter Object to capture Syslog system Msg details.
 type NiatelemetrySyslogSysMsgFacFilter struct {
@@ -39,8 +43,8 @@ type NiatelemetrySyslogSysMsgFacFilter struct {
 	// Name of the APIC site from which this data is being collected.
 	SiteName *string `json:"SiteName,omitempty"`
 	// Parent syslog msg for syslog sys msg facility filter in APIC.
-	SyslogSysMsg         *string                              `json:"SyslogSysMsg,omitempty"`
-	RegisteredDevice     *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+	SyslogSysMsg         *string                                     `json:"SyslogSysMsg,omitempty"`
+	RegisteredDevice     NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -119,7 +123,7 @@ func (o *NiatelemetrySyslogSysMsgFacFilter) SetObjectType(v string) {
 
 // GetCommonPolicy returns the CommonPolicy field value if set, zero value otherwise.
 func (o *NiatelemetrySyslogSysMsgFacFilter) GetCommonPolicy() string {
-	if o == nil || o.CommonPolicy == nil {
+	if o == nil || IsNil(o.CommonPolicy) {
 		var ret string
 		return ret
 	}
@@ -129,7 +133,7 @@ func (o *NiatelemetrySyslogSysMsgFacFilter) GetCommonPolicy() string {
 // GetCommonPolicyOk returns a tuple with the CommonPolicy field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetrySyslogSysMsgFacFilter) GetCommonPolicyOk() (*string, bool) {
-	if o == nil || o.CommonPolicy == nil {
+	if o == nil || IsNil(o.CommonPolicy) {
 		return nil, false
 	}
 	return o.CommonPolicy, true
@@ -137,7 +141,7 @@ func (o *NiatelemetrySyslogSysMsgFacFilter) GetCommonPolicyOk() (*string, bool) 
 
 // HasCommonPolicy returns a boolean if a field has been set.
 func (o *NiatelemetrySyslogSysMsgFacFilter) HasCommonPolicy() bool {
-	if o != nil && o.CommonPolicy != nil {
+	if o != nil && !IsNil(o.CommonPolicy) {
 		return true
 	}
 
@@ -151,7 +155,7 @@ func (o *NiatelemetrySyslogSysMsgFacFilter) SetCommonPolicy(v string) {
 
 // GetDn returns the Dn field value if set, zero value otherwise.
 func (o *NiatelemetrySyslogSysMsgFacFilter) GetDn() string {
-	if o == nil || o.Dn == nil {
+	if o == nil || IsNil(o.Dn) {
 		var ret string
 		return ret
 	}
@@ -161,7 +165,7 @@ func (o *NiatelemetrySyslogSysMsgFacFilter) GetDn() string {
 // GetDnOk returns a tuple with the Dn field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetrySyslogSysMsgFacFilter) GetDnOk() (*string, bool) {
-	if o == nil || o.Dn == nil {
+	if o == nil || IsNil(o.Dn) {
 		return nil, false
 	}
 	return o.Dn, true
@@ -169,7 +173,7 @@ func (o *NiatelemetrySyslogSysMsgFacFilter) GetDnOk() (*string, bool) {
 
 // HasDn returns a boolean if a field has been set.
 func (o *NiatelemetrySyslogSysMsgFacFilter) HasDn() bool {
-	if o != nil && o.Dn != nil {
+	if o != nil && !IsNil(o.Dn) {
 		return true
 	}
 
@@ -183,7 +187,7 @@ func (o *NiatelemetrySyslogSysMsgFacFilter) SetDn(v string) {
 
 // GetFacility returns the Facility field value if set, zero value otherwise.
 func (o *NiatelemetrySyslogSysMsgFacFilter) GetFacility() string {
-	if o == nil || o.Facility == nil {
+	if o == nil || IsNil(o.Facility) {
 		var ret string
 		return ret
 	}
@@ -193,7 +197,7 @@ func (o *NiatelemetrySyslogSysMsgFacFilter) GetFacility() string {
 // GetFacilityOk returns a tuple with the Facility field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetrySyslogSysMsgFacFilter) GetFacilityOk() (*string, bool) {
-	if o == nil || o.Facility == nil {
+	if o == nil || IsNil(o.Facility) {
 		return nil, false
 	}
 	return o.Facility, true
@@ -201,7 +205,7 @@ func (o *NiatelemetrySyslogSysMsgFacFilter) GetFacilityOk() (*string, bool) {
 
 // HasFacility returns a boolean if a field has been set.
 func (o *NiatelemetrySyslogSysMsgFacFilter) HasFacility() bool {
-	if o != nil && o.Facility != nil {
+	if o != nil && !IsNil(o.Facility) {
 		return true
 	}
 
@@ -215,7 +219,7 @@ func (o *NiatelemetrySyslogSysMsgFacFilter) SetFacility(v string) {
 
 // GetMinSev returns the MinSev field value if set, zero value otherwise.
 func (o *NiatelemetrySyslogSysMsgFacFilter) GetMinSev() string {
-	if o == nil || o.MinSev == nil {
+	if o == nil || IsNil(o.MinSev) {
 		var ret string
 		return ret
 	}
@@ -225,7 +229,7 @@ func (o *NiatelemetrySyslogSysMsgFacFilter) GetMinSev() string {
 // GetMinSevOk returns a tuple with the MinSev field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetrySyslogSysMsgFacFilter) GetMinSevOk() (*string, bool) {
-	if o == nil || o.MinSev == nil {
+	if o == nil || IsNil(o.MinSev) {
 		return nil, false
 	}
 	return o.MinSev, true
@@ -233,7 +237,7 @@ func (o *NiatelemetrySyslogSysMsgFacFilter) GetMinSevOk() (*string, bool) {
 
 // HasMinSev returns a boolean if a field has been set.
 func (o *NiatelemetrySyslogSysMsgFacFilter) HasMinSev() bool {
-	if o != nil && o.MinSev != nil {
+	if o != nil && !IsNil(o.MinSev) {
 		return true
 	}
 
@@ -247,7 +251,7 @@ func (o *NiatelemetrySyslogSysMsgFacFilter) SetMinSev(v string) {
 
 // GetRecordType returns the RecordType field value if set, zero value otherwise.
 func (o *NiatelemetrySyslogSysMsgFacFilter) GetRecordType() string {
-	if o == nil || o.RecordType == nil {
+	if o == nil || IsNil(o.RecordType) {
 		var ret string
 		return ret
 	}
@@ -257,7 +261,7 @@ func (o *NiatelemetrySyslogSysMsgFacFilter) GetRecordType() string {
 // GetRecordTypeOk returns a tuple with the RecordType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetrySyslogSysMsgFacFilter) GetRecordTypeOk() (*string, bool) {
-	if o == nil || o.RecordType == nil {
+	if o == nil || IsNil(o.RecordType) {
 		return nil, false
 	}
 	return o.RecordType, true
@@ -265,7 +269,7 @@ func (o *NiatelemetrySyslogSysMsgFacFilter) GetRecordTypeOk() (*string, bool) {
 
 // HasRecordType returns a boolean if a field has been set.
 func (o *NiatelemetrySyslogSysMsgFacFilter) HasRecordType() bool {
-	if o != nil && o.RecordType != nil {
+	if o != nil && !IsNil(o.RecordType) {
 		return true
 	}
 
@@ -279,7 +283,7 @@ func (o *NiatelemetrySyslogSysMsgFacFilter) SetRecordType(v string) {
 
 // GetRecordVersion returns the RecordVersion field value if set, zero value otherwise.
 func (o *NiatelemetrySyslogSysMsgFacFilter) GetRecordVersion() string {
-	if o == nil || o.RecordVersion == nil {
+	if o == nil || IsNil(o.RecordVersion) {
 		var ret string
 		return ret
 	}
@@ -289,7 +293,7 @@ func (o *NiatelemetrySyslogSysMsgFacFilter) GetRecordVersion() string {
 // GetRecordVersionOk returns a tuple with the RecordVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetrySyslogSysMsgFacFilter) GetRecordVersionOk() (*string, bool) {
-	if o == nil || o.RecordVersion == nil {
+	if o == nil || IsNil(o.RecordVersion) {
 		return nil, false
 	}
 	return o.RecordVersion, true
@@ -297,7 +301,7 @@ func (o *NiatelemetrySyslogSysMsgFacFilter) GetRecordVersionOk() (*string, bool)
 
 // HasRecordVersion returns a boolean if a field has been set.
 func (o *NiatelemetrySyslogSysMsgFacFilter) HasRecordVersion() bool {
-	if o != nil && o.RecordVersion != nil {
+	if o != nil && !IsNil(o.RecordVersion) {
 		return true
 	}
 
@@ -311,7 +315,7 @@ func (o *NiatelemetrySyslogSysMsgFacFilter) SetRecordVersion(v string) {
 
 // GetSiteName returns the SiteName field value if set, zero value otherwise.
 func (o *NiatelemetrySyslogSysMsgFacFilter) GetSiteName() string {
-	if o == nil || o.SiteName == nil {
+	if o == nil || IsNil(o.SiteName) {
 		var ret string
 		return ret
 	}
@@ -321,7 +325,7 @@ func (o *NiatelemetrySyslogSysMsgFacFilter) GetSiteName() string {
 // GetSiteNameOk returns a tuple with the SiteName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetrySyslogSysMsgFacFilter) GetSiteNameOk() (*string, bool) {
-	if o == nil || o.SiteName == nil {
+	if o == nil || IsNil(o.SiteName) {
 		return nil, false
 	}
 	return o.SiteName, true
@@ -329,7 +333,7 @@ func (o *NiatelemetrySyslogSysMsgFacFilter) GetSiteNameOk() (*string, bool) {
 
 // HasSiteName returns a boolean if a field has been set.
 func (o *NiatelemetrySyslogSysMsgFacFilter) HasSiteName() bool {
-	if o != nil && o.SiteName != nil {
+	if o != nil && !IsNil(o.SiteName) {
 		return true
 	}
 
@@ -343,7 +347,7 @@ func (o *NiatelemetrySyslogSysMsgFacFilter) SetSiteName(v string) {
 
 // GetSyslogSysMsg returns the SyslogSysMsg field value if set, zero value otherwise.
 func (o *NiatelemetrySyslogSysMsgFacFilter) GetSyslogSysMsg() string {
-	if o == nil || o.SyslogSysMsg == nil {
+	if o == nil || IsNil(o.SyslogSysMsg) {
 		var ret string
 		return ret
 	}
@@ -353,7 +357,7 @@ func (o *NiatelemetrySyslogSysMsgFacFilter) GetSyslogSysMsg() string {
 // GetSyslogSysMsgOk returns a tuple with the SyslogSysMsg field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetrySyslogSysMsgFacFilter) GetSyslogSysMsgOk() (*string, bool) {
-	if o == nil || o.SyslogSysMsg == nil {
+	if o == nil || IsNil(o.SyslogSysMsg) {
 		return nil, false
 	}
 	return o.SyslogSysMsg, true
@@ -361,7 +365,7 @@ func (o *NiatelemetrySyslogSysMsgFacFilter) GetSyslogSysMsgOk() (*string, bool) 
 
 // HasSyslogSysMsg returns a boolean if a field has been set.
 func (o *NiatelemetrySyslogSysMsgFacFilter) HasSyslogSysMsg() bool {
-	if o != nil && o.SyslogSysMsg != nil {
+	if o != nil && !IsNil(o.SyslogSysMsg) {
 		return true
 	}
 
@@ -373,90 +377,127 @@ func (o *NiatelemetrySyslogSysMsgFacFilter) SetSyslogSysMsg(v string) {
 	o.SyslogSysMsg = &v
 }
 
-// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise.
+// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *NiatelemetrySyslogSysMsgFacFilter) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil || IsNil(o.RegisteredDevice.Get()) {
 		var ret AssetDeviceRegistrationRelationship
 		return ret
 	}
-	return *o.RegisteredDevice
+	return *o.RegisteredDevice.Get()
 }
 
 // GetRegisteredDeviceOk returns a tuple with the RegisteredDevice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *NiatelemetrySyslogSysMsgFacFilter) GetRegisteredDeviceOk() (*AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.RegisteredDevice, true
+	return o.RegisteredDevice.Get(), o.RegisteredDevice.IsSet()
 }
 
 // HasRegisteredDevice returns a boolean if a field has been set.
 func (o *NiatelemetrySyslogSysMsgFacFilter) HasRegisteredDevice() bool {
-	if o != nil && o.RegisteredDevice != nil {
+	if o != nil && o.RegisteredDevice.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRegisteredDevice gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
+// SetRegisteredDevice gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
 func (o *NiatelemetrySyslogSysMsgFacFilter) SetRegisteredDevice(v AssetDeviceRegistrationRelationship) {
-	o.RegisteredDevice = &v
+	o.RegisteredDevice.Set(&v)
+}
+
+// SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+func (o *NiatelemetrySyslogSysMsgFacFilter) SetRegisteredDeviceNil() {
+	o.RegisteredDevice.Set(nil)
+}
+
+// UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
+func (o *NiatelemetrySyslogSysMsgFacFilter) UnsetRegisteredDevice() {
+	o.RegisteredDevice.Unset()
 }
 
 func (o NiatelemetrySyslogSysMsgFacFilter) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o NiatelemetrySyslogSysMsgFacFilter) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.CommonPolicy != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.CommonPolicy) {
 		toSerialize["CommonPolicy"] = o.CommonPolicy
 	}
-	if o.Dn != nil {
+	if !IsNil(o.Dn) {
 		toSerialize["Dn"] = o.Dn
 	}
-	if o.Facility != nil {
+	if !IsNil(o.Facility) {
 		toSerialize["Facility"] = o.Facility
 	}
-	if o.MinSev != nil {
+	if !IsNil(o.MinSev) {
 		toSerialize["MinSev"] = o.MinSev
 	}
-	if o.RecordType != nil {
+	if !IsNil(o.RecordType) {
 		toSerialize["RecordType"] = o.RecordType
 	}
-	if o.RecordVersion != nil {
+	if !IsNil(o.RecordVersion) {
 		toSerialize["RecordVersion"] = o.RecordVersion
 	}
-	if o.SiteName != nil {
+	if !IsNil(o.SiteName) {
 		toSerialize["SiteName"] = o.SiteName
 	}
-	if o.SyslogSysMsg != nil {
+	if !IsNil(o.SyslogSysMsg) {
 		toSerialize["SyslogSysMsg"] = o.SyslogSysMsg
 	}
-	if o.RegisteredDevice != nil {
-		toSerialize["RegisteredDevice"] = o.RegisteredDevice
+	if o.RegisteredDevice.IsSet() {
+		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *NiatelemetrySyslogSysMsgFacFilter) UnmarshalJSON(bytes []byte) (err error) {
+func (o *NiatelemetrySyslogSysMsgFacFilter) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type NiatelemetrySyslogSysMsgFacFilterWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -477,13 +518,13 @@ func (o *NiatelemetrySyslogSysMsgFacFilter) UnmarshalJSON(bytes []byte) (err err
 		// Name of the APIC site from which this data is being collected.
 		SiteName *string `json:"SiteName,omitempty"`
 		// Parent syslog msg for syslog sys msg facility filter in APIC.
-		SyslogSysMsg     *string                              `json:"SyslogSysMsg,omitempty"`
-		RegisteredDevice *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+		SyslogSysMsg     *string                                     `json:"SyslogSysMsg,omitempty"`
+		RegisteredDevice NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	}
 
 	varNiatelemetrySyslogSysMsgFacFilterWithoutEmbeddedStruct := NiatelemetrySyslogSysMsgFacFilterWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varNiatelemetrySyslogSysMsgFacFilterWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varNiatelemetrySyslogSysMsgFacFilterWithoutEmbeddedStruct)
 	if err == nil {
 		varNiatelemetrySyslogSysMsgFacFilter := _NiatelemetrySyslogSysMsgFacFilter{}
 		varNiatelemetrySyslogSysMsgFacFilter.ClassId = varNiatelemetrySyslogSysMsgFacFilterWithoutEmbeddedStruct.ClassId
@@ -504,7 +545,7 @@ func (o *NiatelemetrySyslogSysMsgFacFilter) UnmarshalJSON(bytes []byte) (err err
 
 	varNiatelemetrySyslogSysMsgFacFilter := _NiatelemetrySyslogSysMsgFacFilter{}
 
-	err = json.Unmarshal(bytes, &varNiatelemetrySyslogSysMsgFacFilter)
+	err = json.Unmarshal(data, &varNiatelemetrySyslogSysMsgFacFilter)
 	if err == nil {
 		o.MoBaseMo = varNiatelemetrySyslogSysMsgFacFilter.MoBaseMo
 	} else {
@@ -513,7 +554,7 @@ func (o *NiatelemetrySyslogSysMsgFacFilter) UnmarshalJSON(bytes []byte) (err err
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "CommonPolicy")

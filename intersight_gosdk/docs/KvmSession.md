@@ -11,9 +11,9 @@ Name | Type | Description | Notes
 **OneTimePassword** | Pointer to **string** | Temporary one-time password for vKVM access. | [optional] 
 **SsoSupported** | Pointer to **bool** | Indicates if vKVM SSO is supported on the server. | [optional] [readonly] 
 **Username** | Pointer to **string** | Username used for vKVM access. | [optional] 
-**Device** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
-**Server** | Pointer to [**ComputePhysicalRelationship**](ComputePhysicalRelationship.md) |  | [optional] 
-**Tunnel** | Pointer to [**KvmTunnelRelationship**](KvmTunnelRelationship.md) |  | [optional] 
+**Device** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
+**Server** | Pointer to [**NullableComputePhysicalRelationship**](ComputePhysicalRelationship.md) |  | [optional] 
+**Tunnel** | Pointer to [**NullableKvmTunnelRelationship**](KvmTunnelRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -224,6 +224,16 @@ SetDevice sets Device field to given value.
 
 HasDevice returns a boolean if a field has been set.
 
+### SetDeviceNil
+
+`func (o *KvmSession) SetDeviceNil(b bool)`
+
+ SetDeviceNil sets the value for Device to be an explicit nil
+
+### UnsetDevice
+`func (o *KvmSession) UnsetDevice()`
+
+UnsetDevice ensures that no value is present for Device, not even an explicit nil
 ### GetServer
 
 `func (o *KvmSession) GetServer() ComputePhysicalRelationship`
@@ -249,6 +259,16 @@ SetServer sets Server field to given value.
 
 HasServer returns a boolean if a field has been set.
 
+### SetServerNil
+
+`func (o *KvmSession) SetServerNil(b bool)`
+
+ SetServerNil sets the value for Server to be an explicit nil
+
+### UnsetServer
+`func (o *KvmSession) UnsetServer()`
+
+UnsetServer ensures that no value is present for Server, not even an explicit nil
 ### GetTunnel
 
 `func (o *KvmSession) GetTunnel() KvmTunnelRelationship`
@@ -274,6 +294,16 @@ SetTunnel sets Tunnel field to given value.
 
 HasTunnel returns a boolean if a field has been set.
 
+### SetTunnelNil
+
+`func (o *KvmSession) SetTunnelNil(b bool)`
+
+ SetTunnelNil sets the value for Tunnel to be an explicit nil
+
+### UnsetTunnel
+`func (o *KvmSession) UnsetTunnel()`
+
+UnsetTunnel ensures that no value is present for Tunnel, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

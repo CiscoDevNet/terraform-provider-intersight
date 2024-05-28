@@ -11,9 +11,9 @@ Name | Type | Description | Notes
 **EndPointId** | Pointer to **int64** | The end-point Id assigned to storage port. | [optional] [readonly] 
 **LinkDescription** | Pointer to **string** | The description for the link. | [optional] [readonly] 
 **LinkSpeed** | Pointer to **string** | The link speed negotiated for communication. | [optional] [readonly] 
-**InventoryDeviceInfo** | Pointer to [**InventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
-**StoragePhysicalDisk** | Pointer to [**StoragePhysicalDiskRelationship**](StoragePhysicalDiskRelationship.md) |  | [optional] 
+**InventoryDeviceInfo** | Pointer to [**NullableInventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
+**StoragePhysicalDisk** | Pointer to [**NullableStoragePhysicalDiskRelationship**](StoragePhysicalDiskRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -224,6 +224,16 @@ SetInventoryDeviceInfo sets InventoryDeviceInfo field to given value.
 
 HasInventoryDeviceInfo returns a boolean if a field has been set.
 
+### SetInventoryDeviceInfoNil
+
+`func (o *StorageSasPort) SetInventoryDeviceInfoNil(b bool)`
+
+ SetInventoryDeviceInfoNil sets the value for InventoryDeviceInfo to be an explicit nil
+
+### UnsetInventoryDeviceInfo
+`func (o *StorageSasPort) UnsetInventoryDeviceInfo()`
+
+UnsetInventoryDeviceInfo ensures that no value is present for InventoryDeviceInfo, not even an explicit nil
 ### GetRegisteredDevice
 
 `func (o *StorageSasPort) GetRegisteredDevice() AssetDeviceRegistrationRelationship`
@@ -249,6 +259,16 @@ SetRegisteredDevice sets RegisteredDevice field to given value.
 
 HasRegisteredDevice returns a boolean if a field has been set.
 
+### SetRegisteredDeviceNil
+
+`func (o *StorageSasPort) SetRegisteredDeviceNil(b bool)`
+
+ SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+
+### UnsetRegisteredDevice
+`func (o *StorageSasPort) UnsetRegisteredDevice()`
+
+UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
 ### GetStoragePhysicalDisk
 
 `func (o *StorageSasPort) GetStoragePhysicalDisk() StoragePhysicalDiskRelationship`
@@ -274,6 +294,16 @@ SetStoragePhysicalDisk sets StoragePhysicalDisk field to given value.
 
 HasStoragePhysicalDisk returns a boolean if a field has been set.
 
+### SetStoragePhysicalDiskNil
+
+`func (o *StorageSasPort) SetStoragePhysicalDiskNil(b bool)`
+
+ SetStoragePhysicalDiskNil sets the value for StoragePhysicalDisk to be an explicit nil
+
+### UnsetStoragePhysicalDisk
+`func (o *StorageSasPort) UnsetStoragePhysicalDisk()`
+
+UnsetStoragePhysicalDisk ensures that no value is present for StoragePhysicalDisk, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

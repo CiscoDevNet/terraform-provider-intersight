@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the NetworkconfigPolicy type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &NetworkconfigPolicy{}
 
 // NetworkconfigPolicy Enable or disable Dynamic DNS, add or update DNS settings for IPv4 and IPv6 on Cisco IMC.
 type NetworkconfigPolicy struct {
@@ -41,9 +45,9 @@ type NetworkconfigPolicy struct {
 	// IP address of the primary DNS server.
 	PreferredIpv4dnsServer *string `json:"PreferredIpv4dnsServer,omitempty"`
 	// IP address of the primary DNS server.
-	PreferredIpv6dnsServer *string                               `json:"PreferredIpv6dnsServer,omitempty"`
-	ApplianceAccount       *IamAccountRelationship               `json:"ApplianceAccount,omitempty"`
-	Organization           *OrganizationOrganizationRelationship `json:"Organization,omitempty"`
+	PreferredIpv6dnsServer *string                                      `json:"PreferredIpv6dnsServer,omitempty"`
+	ApplianceAccount       NullableIamAccountRelationship               `json:"ApplianceAccount,omitempty"`
+	Organization           NullableOrganizationOrganizationRelationship `json:"Organization,omitempty"`
 	// An array of relationships to policyAbstractConfigProfile resources.
 	Profiles             []PolicyAbstractConfigProfileRelationship `json:"Profiles,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -124,7 +128,7 @@ func (o *NetworkconfigPolicy) SetObjectType(v string) {
 
 // GetAlternateIpv4dnsServer returns the AlternateIpv4dnsServer field value if set, zero value otherwise.
 func (o *NetworkconfigPolicy) GetAlternateIpv4dnsServer() string {
-	if o == nil || o.AlternateIpv4dnsServer == nil {
+	if o == nil || IsNil(o.AlternateIpv4dnsServer) {
 		var ret string
 		return ret
 	}
@@ -134,7 +138,7 @@ func (o *NetworkconfigPolicy) GetAlternateIpv4dnsServer() string {
 // GetAlternateIpv4dnsServerOk returns a tuple with the AlternateIpv4dnsServer field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NetworkconfigPolicy) GetAlternateIpv4dnsServerOk() (*string, bool) {
-	if o == nil || o.AlternateIpv4dnsServer == nil {
+	if o == nil || IsNil(o.AlternateIpv4dnsServer) {
 		return nil, false
 	}
 	return o.AlternateIpv4dnsServer, true
@@ -142,7 +146,7 @@ func (o *NetworkconfigPolicy) GetAlternateIpv4dnsServerOk() (*string, bool) {
 
 // HasAlternateIpv4dnsServer returns a boolean if a field has been set.
 func (o *NetworkconfigPolicy) HasAlternateIpv4dnsServer() bool {
-	if o != nil && o.AlternateIpv4dnsServer != nil {
+	if o != nil && !IsNil(o.AlternateIpv4dnsServer) {
 		return true
 	}
 
@@ -156,7 +160,7 @@ func (o *NetworkconfigPolicy) SetAlternateIpv4dnsServer(v string) {
 
 // GetAlternateIpv6dnsServer returns the AlternateIpv6dnsServer field value if set, zero value otherwise.
 func (o *NetworkconfigPolicy) GetAlternateIpv6dnsServer() string {
-	if o == nil || o.AlternateIpv6dnsServer == nil {
+	if o == nil || IsNil(o.AlternateIpv6dnsServer) {
 		var ret string
 		return ret
 	}
@@ -166,7 +170,7 @@ func (o *NetworkconfigPolicy) GetAlternateIpv6dnsServer() string {
 // GetAlternateIpv6dnsServerOk returns a tuple with the AlternateIpv6dnsServer field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NetworkconfigPolicy) GetAlternateIpv6dnsServerOk() (*string, bool) {
-	if o == nil || o.AlternateIpv6dnsServer == nil {
+	if o == nil || IsNil(o.AlternateIpv6dnsServer) {
 		return nil, false
 	}
 	return o.AlternateIpv6dnsServer, true
@@ -174,7 +178,7 @@ func (o *NetworkconfigPolicy) GetAlternateIpv6dnsServerOk() (*string, bool) {
 
 // HasAlternateIpv6dnsServer returns a boolean if a field has been set.
 func (o *NetworkconfigPolicy) HasAlternateIpv6dnsServer() bool {
-	if o != nil && o.AlternateIpv6dnsServer != nil {
+	if o != nil && !IsNil(o.AlternateIpv6dnsServer) {
 		return true
 	}
 
@@ -188,7 +192,7 @@ func (o *NetworkconfigPolicy) SetAlternateIpv6dnsServer(v string) {
 
 // GetDynamicDnsDomain returns the DynamicDnsDomain field value if set, zero value otherwise.
 func (o *NetworkconfigPolicy) GetDynamicDnsDomain() string {
-	if o == nil || o.DynamicDnsDomain == nil {
+	if o == nil || IsNil(o.DynamicDnsDomain) {
 		var ret string
 		return ret
 	}
@@ -198,7 +202,7 @@ func (o *NetworkconfigPolicy) GetDynamicDnsDomain() string {
 // GetDynamicDnsDomainOk returns a tuple with the DynamicDnsDomain field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NetworkconfigPolicy) GetDynamicDnsDomainOk() (*string, bool) {
-	if o == nil || o.DynamicDnsDomain == nil {
+	if o == nil || IsNil(o.DynamicDnsDomain) {
 		return nil, false
 	}
 	return o.DynamicDnsDomain, true
@@ -206,7 +210,7 @@ func (o *NetworkconfigPolicy) GetDynamicDnsDomainOk() (*string, bool) {
 
 // HasDynamicDnsDomain returns a boolean if a field has been set.
 func (o *NetworkconfigPolicy) HasDynamicDnsDomain() bool {
-	if o != nil && o.DynamicDnsDomain != nil {
+	if o != nil && !IsNil(o.DynamicDnsDomain) {
 		return true
 	}
 
@@ -220,7 +224,7 @@ func (o *NetworkconfigPolicy) SetDynamicDnsDomain(v string) {
 
 // GetEnableDynamicDns returns the EnableDynamicDns field value if set, zero value otherwise.
 func (o *NetworkconfigPolicy) GetEnableDynamicDns() bool {
-	if o == nil || o.EnableDynamicDns == nil {
+	if o == nil || IsNil(o.EnableDynamicDns) {
 		var ret bool
 		return ret
 	}
@@ -230,7 +234,7 @@ func (o *NetworkconfigPolicy) GetEnableDynamicDns() bool {
 // GetEnableDynamicDnsOk returns a tuple with the EnableDynamicDns field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NetworkconfigPolicy) GetEnableDynamicDnsOk() (*bool, bool) {
-	if o == nil || o.EnableDynamicDns == nil {
+	if o == nil || IsNil(o.EnableDynamicDns) {
 		return nil, false
 	}
 	return o.EnableDynamicDns, true
@@ -238,7 +242,7 @@ func (o *NetworkconfigPolicy) GetEnableDynamicDnsOk() (*bool, bool) {
 
 // HasEnableDynamicDns returns a boolean if a field has been set.
 func (o *NetworkconfigPolicy) HasEnableDynamicDns() bool {
-	if o != nil && o.EnableDynamicDns != nil {
+	if o != nil && !IsNil(o.EnableDynamicDns) {
 		return true
 	}
 
@@ -252,7 +256,7 @@ func (o *NetworkconfigPolicy) SetEnableDynamicDns(v bool) {
 
 // GetEnableIpv4dnsFromDhcp returns the EnableIpv4dnsFromDhcp field value if set, zero value otherwise.
 func (o *NetworkconfigPolicy) GetEnableIpv4dnsFromDhcp() bool {
-	if o == nil || o.EnableIpv4dnsFromDhcp == nil {
+	if o == nil || IsNil(o.EnableIpv4dnsFromDhcp) {
 		var ret bool
 		return ret
 	}
@@ -262,7 +266,7 @@ func (o *NetworkconfigPolicy) GetEnableIpv4dnsFromDhcp() bool {
 // GetEnableIpv4dnsFromDhcpOk returns a tuple with the EnableIpv4dnsFromDhcp field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NetworkconfigPolicy) GetEnableIpv4dnsFromDhcpOk() (*bool, bool) {
-	if o == nil || o.EnableIpv4dnsFromDhcp == nil {
+	if o == nil || IsNil(o.EnableIpv4dnsFromDhcp) {
 		return nil, false
 	}
 	return o.EnableIpv4dnsFromDhcp, true
@@ -270,7 +274,7 @@ func (o *NetworkconfigPolicy) GetEnableIpv4dnsFromDhcpOk() (*bool, bool) {
 
 // HasEnableIpv4dnsFromDhcp returns a boolean if a field has been set.
 func (o *NetworkconfigPolicy) HasEnableIpv4dnsFromDhcp() bool {
-	if o != nil && o.EnableIpv4dnsFromDhcp != nil {
+	if o != nil && !IsNil(o.EnableIpv4dnsFromDhcp) {
 		return true
 	}
 
@@ -284,7 +288,7 @@ func (o *NetworkconfigPolicy) SetEnableIpv4dnsFromDhcp(v bool) {
 
 // GetEnableIpv6 returns the EnableIpv6 field value if set, zero value otherwise.
 func (o *NetworkconfigPolicy) GetEnableIpv6() bool {
-	if o == nil || o.EnableIpv6 == nil {
+	if o == nil || IsNil(o.EnableIpv6) {
 		var ret bool
 		return ret
 	}
@@ -294,7 +298,7 @@ func (o *NetworkconfigPolicy) GetEnableIpv6() bool {
 // GetEnableIpv6Ok returns a tuple with the EnableIpv6 field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NetworkconfigPolicy) GetEnableIpv6Ok() (*bool, bool) {
-	if o == nil || o.EnableIpv6 == nil {
+	if o == nil || IsNil(o.EnableIpv6) {
 		return nil, false
 	}
 	return o.EnableIpv6, true
@@ -302,7 +306,7 @@ func (o *NetworkconfigPolicy) GetEnableIpv6Ok() (*bool, bool) {
 
 // HasEnableIpv6 returns a boolean if a field has been set.
 func (o *NetworkconfigPolicy) HasEnableIpv6() bool {
-	if o != nil && o.EnableIpv6 != nil {
+	if o != nil && !IsNil(o.EnableIpv6) {
 		return true
 	}
 
@@ -316,7 +320,7 @@ func (o *NetworkconfigPolicy) SetEnableIpv6(v bool) {
 
 // GetEnableIpv6dnsFromDhcp returns the EnableIpv6dnsFromDhcp field value if set, zero value otherwise.
 func (o *NetworkconfigPolicy) GetEnableIpv6dnsFromDhcp() bool {
-	if o == nil || o.EnableIpv6dnsFromDhcp == nil {
+	if o == nil || IsNil(o.EnableIpv6dnsFromDhcp) {
 		var ret bool
 		return ret
 	}
@@ -326,7 +330,7 @@ func (o *NetworkconfigPolicy) GetEnableIpv6dnsFromDhcp() bool {
 // GetEnableIpv6dnsFromDhcpOk returns a tuple with the EnableIpv6dnsFromDhcp field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NetworkconfigPolicy) GetEnableIpv6dnsFromDhcpOk() (*bool, bool) {
-	if o == nil || o.EnableIpv6dnsFromDhcp == nil {
+	if o == nil || IsNil(o.EnableIpv6dnsFromDhcp) {
 		return nil, false
 	}
 	return o.EnableIpv6dnsFromDhcp, true
@@ -334,7 +338,7 @@ func (o *NetworkconfigPolicy) GetEnableIpv6dnsFromDhcpOk() (*bool, bool) {
 
 // HasEnableIpv6dnsFromDhcp returns a boolean if a field has been set.
 func (o *NetworkconfigPolicy) HasEnableIpv6dnsFromDhcp() bool {
-	if o != nil && o.EnableIpv6dnsFromDhcp != nil {
+	if o != nil && !IsNil(o.EnableIpv6dnsFromDhcp) {
 		return true
 	}
 
@@ -348,7 +352,7 @@ func (o *NetworkconfigPolicy) SetEnableIpv6dnsFromDhcp(v bool) {
 
 // GetPreferredIpv4dnsServer returns the PreferredIpv4dnsServer field value if set, zero value otherwise.
 func (o *NetworkconfigPolicy) GetPreferredIpv4dnsServer() string {
-	if o == nil || o.PreferredIpv4dnsServer == nil {
+	if o == nil || IsNil(o.PreferredIpv4dnsServer) {
 		var ret string
 		return ret
 	}
@@ -358,7 +362,7 @@ func (o *NetworkconfigPolicy) GetPreferredIpv4dnsServer() string {
 // GetPreferredIpv4dnsServerOk returns a tuple with the PreferredIpv4dnsServer field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NetworkconfigPolicy) GetPreferredIpv4dnsServerOk() (*string, bool) {
-	if o == nil || o.PreferredIpv4dnsServer == nil {
+	if o == nil || IsNil(o.PreferredIpv4dnsServer) {
 		return nil, false
 	}
 	return o.PreferredIpv4dnsServer, true
@@ -366,7 +370,7 @@ func (o *NetworkconfigPolicy) GetPreferredIpv4dnsServerOk() (*string, bool) {
 
 // HasPreferredIpv4dnsServer returns a boolean if a field has been set.
 func (o *NetworkconfigPolicy) HasPreferredIpv4dnsServer() bool {
-	if o != nil && o.PreferredIpv4dnsServer != nil {
+	if o != nil && !IsNil(o.PreferredIpv4dnsServer) {
 		return true
 	}
 
@@ -380,7 +384,7 @@ func (o *NetworkconfigPolicy) SetPreferredIpv4dnsServer(v string) {
 
 // GetPreferredIpv6dnsServer returns the PreferredIpv6dnsServer field value if set, zero value otherwise.
 func (o *NetworkconfigPolicy) GetPreferredIpv6dnsServer() string {
-	if o == nil || o.PreferredIpv6dnsServer == nil {
+	if o == nil || IsNil(o.PreferredIpv6dnsServer) {
 		var ret string
 		return ret
 	}
@@ -390,7 +394,7 @@ func (o *NetworkconfigPolicy) GetPreferredIpv6dnsServer() string {
 // GetPreferredIpv6dnsServerOk returns a tuple with the PreferredIpv6dnsServer field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NetworkconfigPolicy) GetPreferredIpv6dnsServerOk() (*string, bool) {
-	if o == nil || o.PreferredIpv6dnsServer == nil {
+	if o == nil || IsNil(o.PreferredIpv6dnsServer) {
 		return nil, false
 	}
 	return o.PreferredIpv6dnsServer, true
@@ -398,7 +402,7 @@ func (o *NetworkconfigPolicy) GetPreferredIpv6dnsServerOk() (*string, bool) {
 
 // HasPreferredIpv6dnsServer returns a boolean if a field has been set.
 func (o *NetworkconfigPolicy) HasPreferredIpv6dnsServer() bool {
-	if o != nil && o.PreferredIpv6dnsServer != nil {
+	if o != nil && !IsNil(o.PreferredIpv6dnsServer) {
 		return true
 	}
 
@@ -410,68 +414,90 @@ func (o *NetworkconfigPolicy) SetPreferredIpv6dnsServer(v string) {
 	o.PreferredIpv6dnsServer = &v
 }
 
-// GetApplianceAccount returns the ApplianceAccount field value if set, zero value otherwise.
+// GetApplianceAccount returns the ApplianceAccount field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *NetworkconfigPolicy) GetApplianceAccount() IamAccountRelationship {
-	if o == nil || o.ApplianceAccount == nil {
+	if o == nil || IsNil(o.ApplianceAccount.Get()) {
 		var ret IamAccountRelationship
 		return ret
 	}
-	return *o.ApplianceAccount
+	return *o.ApplianceAccount.Get()
 }
 
 // GetApplianceAccountOk returns a tuple with the ApplianceAccount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *NetworkconfigPolicy) GetApplianceAccountOk() (*IamAccountRelationship, bool) {
-	if o == nil || o.ApplianceAccount == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.ApplianceAccount, true
+	return o.ApplianceAccount.Get(), o.ApplianceAccount.IsSet()
 }
 
 // HasApplianceAccount returns a boolean if a field has been set.
 func (o *NetworkconfigPolicy) HasApplianceAccount() bool {
-	if o != nil && o.ApplianceAccount != nil {
+	if o != nil && o.ApplianceAccount.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetApplianceAccount gets a reference to the given IamAccountRelationship and assigns it to the ApplianceAccount field.
+// SetApplianceAccount gets a reference to the given NullableIamAccountRelationship and assigns it to the ApplianceAccount field.
 func (o *NetworkconfigPolicy) SetApplianceAccount(v IamAccountRelationship) {
-	o.ApplianceAccount = &v
+	o.ApplianceAccount.Set(&v)
 }
 
-// GetOrganization returns the Organization field value if set, zero value otherwise.
+// SetApplianceAccountNil sets the value for ApplianceAccount to be an explicit nil
+func (o *NetworkconfigPolicy) SetApplianceAccountNil() {
+	o.ApplianceAccount.Set(nil)
+}
+
+// UnsetApplianceAccount ensures that no value is present for ApplianceAccount, not even an explicit nil
+func (o *NetworkconfigPolicy) UnsetApplianceAccount() {
+	o.ApplianceAccount.Unset()
+}
+
+// GetOrganization returns the Organization field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *NetworkconfigPolicy) GetOrganization() OrganizationOrganizationRelationship {
-	if o == nil || o.Organization == nil {
+	if o == nil || IsNil(o.Organization.Get()) {
 		var ret OrganizationOrganizationRelationship
 		return ret
 	}
-	return *o.Organization
+	return *o.Organization.Get()
 }
 
 // GetOrganizationOk returns a tuple with the Organization field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *NetworkconfigPolicy) GetOrganizationOk() (*OrganizationOrganizationRelationship, bool) {
-	if o == nil || o.Organization == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Organization, true
+	return o.Organization.Get(), o.Organization.IsSet()
 }
 
 // HasOrganization returns a boolean if a field has been set.
 func (o *NetworkconfigPolicy) HasOrganization() bool {
-	if o != nil && o.Organization != nil {
+	if o != nil && o.Organization.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetOrganization gets a reference to the given OrganizationOrganizationRelationship and assigns it to the Organization field.
+// SetOrganization gets a reference to the given NullableOrganizationOrganizationRelationship and assigns it to the Organization field.
 func (o *NetworkconfigPolicy) SetOrganization(v OrganizationOrganizationRelationship) {
-	o.Organization = &v
+	o.Organization.Set(&v)
+}
+
+// SetOrganizationNil sets the value for Organization to be an explicit nil
+func (o *NetworkconfigPolicy) SetOrganizationNil() {
+	o.Organization.Set(nil)
+}
+
+// UnsetOrganization ensures that no value is present for Organization, not even an explicit nil
+func (o *NetworkconfigPolicy) UnsetOrganization() {
+	o.Organization.Unset()
 }
 
 // GetProfiles returns the Profiles field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -487,7 +513,7 @@ func (o *NetworkconfigPolicy) GetProfiles() []PolicyAbstractConfigProfileRelatio
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *NetworkconfigPolicy) GetProfilesOk() ([]PolicyAbstractConfigProfileRelationship, bool) {
-	if o == nil || o.Profiles == nil {
+	if o == nil || IsNil(o.Profiles) {
 		return nil, false
 	}
 	return o.Profiles, true
@@ -495,7 +521,7 @@ func (o *NetworkconfigPolicy) GetProfilesOk() ([]PolicyAbstractConfigProfileRela
 
 // HasProfiles returns a boolean if a field has been set.
 func (o *NetworkconfigPolicy) HasProfiles() bool {
-	if o != nil && o.Profiles != nil {
+	if o != nil && IsNil(o.Profiles) {
 		return true
 	}
 
@@ -508,53 +534,57 @@ func (o *NetworkconfigPolicy) SetProfiles(v []PolicyAbstractConfigProfileRelatio
 }
 
 func (o NetworkconfigPolicy) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o NetworkconfigPolicy) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedPolicyAbstractPolicy, errPolicyAbstractPolicy := json.Marshal(o.PolicyAbstractPolicy)
 	if errPolicyAbstractPolicy != nil {
-		return []byte{}, errPolicyAbstractPolicy
+		return map[string]interface{}{}, errPolicyAbstractPolicy
 	}
 	errPolicyAbstractPolicy = json.Unmarshal([]byte(serializedPolicyAbstractPolicy), &toSerialize)
 	if errPolicyAbstractPolicy != nil {
-		return []byte{}, errPolicyAbstractPolicy
+		return map[string]interface{}{}, errPolicyAbstractPolicy
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.AlternateIpv4dnsServer != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.AlternateIpv4dnsServer) {
 		toSerialize["AlternateIpv4dnsServer"] = o.AlternateIpv4dnsServer
 	}
-	if o.AlternateIpv6dnsServer != nil {
+	if !IsNil(o.AlternateIpv6dnsServer) {
 		toSerialize["AlternateIpv6dnsServer"] = o.AlternateIpv6dnsServer
 	}
-	if o.DynamicDnsDomain != nil {
+	if !IsNil(o.DynamicDnsDomain) {
 		toSerialize["DynamicDnsDomain"] = o.DynamicDnsDomain
 	}
-	if o.EnableDynamicDns != nil {
+	if !IsNil(o.EnableDynamicDns) {
 		toSerialize["EnableDynamicDns"] = o.EnableDynamicDns
 	}
-	if o.EnableIpv4dnsFromDhcp != nil {
+	if !IsNil(o.EnableIpv4dnsFromDhcp) {
 		toSerialize["EnableIpv4dnsFromDhcp"] = o.EnableIpv4dnsFromDhcp
 	}
-	if o.EnableIpv6 != nil {
+	if !IsNil(o.EnableIpv6) {
 		toSerialize["EnableIpv6"] = o.EnableIpv6
 	}
-	if o.EnableIpv6dnsFromDhcp != nil {
+	if !IsNil(o.EnableIpv6dnsFromDhcp) {
 		toSerialize["EnableIpv6dnsFromDhcp"] = o.EnableIpv6dnsFromDhcp
 	}
-	if o.PreferredIpv4dnsServer != nil {
+	if !IsNil(o.PreferredIpv4dnsServer) {
 		toSerialize["PreferredIpv4dnsServer"] = o.PreferredIpv4dnsServer
 	}
-	if o.PreferredIpv6dnsServer != nil {
+	if !IsNil(o.PreferredIpv6dnsServer) {
 		toSerialize["PreferredIpv6dnsServer"] = o.PreferredIpv6dnsServer
 	}
-	if o.ApplianceAccount != nil {
-		toSerialize["ApplianceAccount"] = o.ApplianceAccount
+	if o.ApplianceAccount.IsSet() {
+		toSerialize["ApplianceAccount"] = o.ApplianceAccount.Get()
 	}
-	if o.Organization != nil {
-		toSerialize["Organization"] = o.Organization
+	if o.Organization.IsSet() {
+		toSerialize["Organization"] = o.Organization.Get()
 	}
 	if o.Profiles != nil {
 		toSerialize["Profiles"] = o.Profiles
@@ -564,10 +594,32 @@ func (o NetworkconfigPolicy) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *NetworkconfigPolicy) UnmarshalJSON(bytes []byte) (err error) {
+func (o *NetworkconfigPolicy) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type NetworkconfigPolicyWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -590,16 +642,16 @@ func (o *NetworkconfigPolicy) UnmarshalJSON(bytes []byte) (err error) {
 		// IP address of the primary DNS server.
 		PreferredIpv4dnsServer *string `json:"PreferredIpv4dnsServer,omitempty"`
 		// IP address of the primary DNS server.
-		PreferredIpv6dnsServer *string                               `json:"PreferredIpv6dnsServer,omitempty"`
-		ApplianceAccount       *IamAccountRelationship               `json:"ApplianceAccount,omitempty"`
-		Organization           *OrganizationOrganizationRelationship `json:"Organization,omitempty"`
+		PreferredIpv6dnsServer *string                                      `json:"PreferredIpv6dnsServer,omitempty"`
+		ApplianceAccount       NullableIamAccountRelationship               `json:"ApplianceAccount,omitempty"`
+		Organization           NullableOrganizationOrganizationRelationship `json:"Organization,omitempty"`
 		// An array of relationships to policyAbstractConfigProfile resources.
 		Profiles []PolicyAbstractConfigProfileRelationship `json:"Profiles,omitempty"`
 	}
 
 	varNetworkconfigPolicyWithoutEmbeddedStruct := NetworkconfigPolicyWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varNetworkconfigPolicyWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varNetworkconfigPolicyWithoutEmbeddedStruct)
 	if err == nil {
 		varNetworkconfigPolicy := _NetworkconfigPolicy{}
 		varNetworkconfigPolicy.ClassId = varNetworkconfigPolicyWithoutEmbeddedStruct.ClassId
@@ -623,7 +675,7 @@ func (o *NetworkconfigPolicy) UnmarshalJSON(bytes []byte) (err error) {
 
 	varNetworkconfigPolicy := _NetworkconfigPolicy{}
 
-	err = json.Unmarshal(bytes, &varNetworkconfigPolicy)
+	err = json.Unmarshal(data, &varNetworkconfigPolicy)
 	if err == nil {
 		o.PolicyAbstractPolicy = varNetworkconfigPolicy.PolicyAbstractPolicy
 	} else {
@@ -632,7 +684,7 @@ func (o *NetworkconfigPolicy) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "AlternateIpv4dnsServer")

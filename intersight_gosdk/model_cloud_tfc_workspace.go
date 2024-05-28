@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the CloudTfcWorkspace type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &CloudTfcWorkspace{}
 
 // CloudTfcWorkspace Terraform workspace which represents running infrastructure managed by Terraform.
 type CloudTfcWorkspace struct {
@@ -35,9 +39,9 @@ type CloudTfcWorkspace struct {
 	// The status of the last executed run in this workspace.
 	LastRunStatus *string `json:"LastRunStatus,omitempty"`
 	// The name of the workspace.
-	Name                 *string                           `json:"Name,omitempty"`
-	WorkspaceVariables   []CloudTfcWorkspaceVariables      `json:"WorkspaceVariables,omitempty"`
-	Organization         *CloudTfcOrganizationRelationship `json:"Organization,omitempty"`
+	Name                 *string                                  `json:"Name,omitempty"`
+	WorkspaceVariables   []CloudTfcWorkspaceVariables             `json:"WorkspaceVariables,omitempty"`
+	Organization         NullableCloudTfcOrganizationRelationship `json:"Organization,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -116,7 +120,7 @@ func (o *CloudTfcWorkspace) SetObjectType(v string) {
 
 // GetAgentPoolId returns the AgentPoolId field value if set, zero value otherwise.
 func (o *CloudTfcWorkspace) GetAgentPoolId() string {
-	if o == nil || o.AgentPoolId == nil {
+	if o == nil || IsNil(o.AgentPoolId) {
 		var ret string
 		return ret
 	}
@@ -126,7 +130,7 @@ func (o *CloudTfcWorkspace) GetAgentPoolId() string {
 // GetAgentPoolIdOk returns a tuple with the AgentPoolId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudTfcWorkspace) GetAgentPoolIdOk() (*string, bool) {
-	if o == nil || o.AgentPoolId == nil {
+	if o == nil || IsNil(o.AgentPoolId) {
 		return nil, false
 	}
 	return o.AgentPoolId, true
@@ -134,7 +138,7 @@ func (o *CloudTfcWorkspace) GetAgentPoolIdOk() (*string, bool) {
 
 // HasAgentPoolId returns a boolean if a field has been set.
 func (o *CloudTfcWorkspace) HasAgentPoolId() bool {
-	if o != nil && o.AgentPoolId != nil {
+	if o != nil && !IsNil(o.AgentPoolId) {
 		return true
 	}
 
@@ -148,7 +152,7 @@ func (o *CloudTfcWorkspace) SetAgentPoolId(v string) {
 
 // GetApplyMethod returns the ApplyMethod field value if set, zero value otherwise.
 func (o *CloudTfcWorkspace) GetApplyMethod() bool {
-	if o == nil || o.ApplyMethod == nil {
+	if o == nil || IsNil(o.ApplyMethod) {
 		var ret bool
 		return ret
 	}
@@ -158,7 +162,7 @@ func (o *CloudTfcWorkspace) GetApplyMethod() bool {
 // GetApplyMethodOk returns a tuple with the ApplyMethod field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudTfcWorkspace) GetApplyMethodOk() (*bool, bool) {
-	if o == nil || o.ApplyMethod == nil {
+	if o == nil || IsNil(o.ApplyMethod) {
 		return nil, false
 	}
 	return o.ApplyMethod, true
@@ -166,7 +170,7 @@ func (o *CloudTfcWorkspace) GetApplyMethodOk() (*bool, bool) {
 
 // HasApplyMethod returns a boolean if a field has been set.
 func (o *CloudTfcWorkspace) HasApplyMethod() bool {
-	if o != nil && o.ApplyMethod != nil {
+	if o != nil && !IsNil(o.ApplyMethod) {
 		return true
 	}
 
@@ -180,7 +184,7 @@ func (o *CloudTfcWorkspace) SetApplyMethod(v bool) {
 
 // GetExecutionMode returns the ExecutionMode field value if set, zero value otherwise.
 func (o *CloudTfcWorkspace) GetExecutionMode() string {
-	if o == nil || o.ExecutionMode == nil {
+	if o == nil || IsNil(o.ExecutionMode) {
 		var ret string
 		return ret
 	}
@@ -190,7 +194,7 @@ func (o *CloudTfcWorkspace) GetExecutionMode() string {
 // GetExecutionModeOk returns a tuple with the ExecutionMode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudTfcWorkspace) GetExecutionModeOk() (*string, bool) {
-	if o == nil || o.ExecutionMode == nil {
+	if o == nil || IsNil(o.ExecutionMode) {
 		return nil, false
 	}
 	return o.ExecutionMode, true
@@ -198,7 +202,7 @@ func (o *CloudTfcWorkspace) GetExecutionModeOk() (*string, bool) {
 
 // HasExecutionMode returns a boolean if a field has been set.
 func (o *CloudTfcWorkspace) HasExecutionMode() bool {
-	if o != nil && o.ExecutionMode != nil {
+	if o != nil && !IsNil(o.ExecutionMode) {
 		return true
 	}
 
@@ -212,7 +216,7 @@ func (o *CloudTfcWorkspace) SetExecutionMode(v string) {
 
 // GetIdentity returns the Identity field value if set, zero value otherwise.
 func (o *CloudTfcWorkspace) GetIdentity() string {
-	if o == nil || o.Identity == nil {
+	if o == nil || IsNil(o.Identity) {
 		var ret string
 		return ret
 	}
@@ -222,7 +226,7 @@ func (o *CloudTfcWorkspace) GetIdentity() string {
 // GetIdentityOk returns a tuple with the Identity field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudTfcWorkspace) GetIdentityOk() (*string, bool) {
-	if o == nil || o.Identity == nil {
+	if o == nil || IsNil(o.Identity) {
 		return nil, false
 	}
 	return o.Identity, true
@@ -230,7 +234,7 @@ func (o *CloudTfcWorkspace) GetIdentityOk() (*string, bool) {
 
 // HasIdentity returns a boolean if a field has been set.
 func (o *CloudTfcWorkspace) HasIdentity() bool {
-	if o != nil && o.Identity != nil {
+	if o != nil && !IsNil(o.Identity) {
 		return true
 	}
 
@@ -244,7 +248,7 @@ func (o *CloudTfcWorkspace) SetIdentity(v string) {
 
 // GetLastRunStatus returns the LastRunStatus field value if set, zero value otherwise.
 func (o *CloudTfcWorkspace) GetLastRunStatus() string {
-	if o == nil || o.LastRunStatus == nil {
+	if o == nil || IsNil(o.LastRunStatus) {
 		var ret string
 		return ret
 	}
@@ -254,7 +258,7 @@ func (o *CloudTfcWorkspace) GetLastRunStatus() string {
 // GetLastRunStatusOk returns a tuple with the LastRunStatus field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudTfcWorkspace) GetLastRunStatusOk() (*string, bool) {
-	if o == nil || o.LastRunStatus == nil {
+	if o == nil || IsNil(o.LastRunStatus) {
 		return nil, false
 	}
 	return o.LastRunStatus, true
@@ -262,7 +266,7 @@ func (o *CloudTfcWorkspace) GetLastRunStatusOk() (*string, bool) {
 
 // HasLastRunStatus returns a boolean if a field has been set.
 func (o *CloudTfcWorkspace) HasLastRunStatus() bool {
-	if o != nil && o.LastRunStatus != nil {
+	if o != nil && !IsNil(o.LastRunStatus) {
 		return true
 	}
 
@@ -276,7 +280,7 @@ func (o *CloudTfcWorkspace) SetLastRunStatus(v string) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *CloudTfcWorkspace) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -286,7 +290,7 @@ func (o *CloudTfcWorkspace) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudTfcWorkspace) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -294,7 +298,7 @@ func (o *CloudTfcWorkspace) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *CloudTfcWorkspace) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -319,7 +323,7 @@ func (o *CloudTfcWorkspace) GetWorkspaceVariables() []CloudTfcWorkspaceVariables
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CloudTfcWorkspace) GetWorkspaceVariablesOk() ([]CloudTfcWorkspaceVariables, bool) {
-	if o == nil || o.WorkspaceVariables == nil {
+	if o == nil || IsNil(o.WorkspaceVariables) {
 		return nil, false
 	}
 	return o.WorkspaceVariables, true
@@ -327,7 +331,7 @@ func (o *CloudTfcWorkspace) GetWorkspaceVariablesOk() ([]CloudTfcWorkspaceVariab
 
 // HasWorkspaceVariables returns a boolean if a field has been set.
 func (o *CloudTfcWorkspace) HasWorkspaceVariables() bool {
-	if o != nil && o.WorkspaceVariables != nil {
+	if o != nil && IsNil(o.WorkspaceVariables) {
 		return true
 	}
 
@@ -339,87 +343,124 @@ func (o *CloudTfcWorkspace) SetWorkspaceVariables(v []CloudTfcWorkspaceVariables
 	o.WorkspaceVariables = v
 }
 
-// GetOrganization returns the Organization field value if set, zero value otherwise.
+// GetOrganization returns the Organization field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CloudTfcWorkspace) GetOrganization() CloudTfcOrganizationRelationship {
-	if o == nil || o.Organization == nil {
+	if o == nil || IsNil(o.Organization.Get()) {
 		var ret CloudTfcOrganizationRelationship
 		return ret
 	}
-	return *o.Organization
+	return *o.Organization.Get()
 }
 
 // GetOrganizationOk returns a tuple with the Organization field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CloudTfcWorkspace) GetOrganizationOk() (*CloudTfcOrganizationRelationship, bool) {
-	if o == nil || o.Organization == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Organization, true
+	return o.Organization.Get(), o.Organization.IsSet()
 }
 
 // HasOrganization returns a boolean if a field has been set.
 func (o *CloudTfcWorkspace) HasOrganization() bool {
-	if o != nil && o.Organization != nil {
+	if o != nil && o.Organization.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetOrganization gets a reference to the given CloudTfcOrganizationRelationship and assigns it to the Organization field.
+// SetOrganization gets a reference to the given NullableCloudTfcOrganizationRelationship and assigns it to the Organization field.
 func (o *CloudTfcWorkspace) SetOrganization(v CloudTfcOrganizationRelationship) {
-	o.Organization = &v
+	o.Organization.Set(&v)
+}
+
+// SetOrganizationNil sets the value for Organization to be an explicit nil
+func (o *CloudTfcWorkspace) SetOrganizationNil() {
+	o.Organization.Set(nil)
+}
+
+// UnsetOrganization ensures that no value is present for Organization, not even an explicit nil
+func (o *CloudTfcWorkspace) UnsetOrganization() {
+	o.Organization.Unset()
 }
 
 func (o CloudTfcWorkspace) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o CloudTfcWorkspace) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.AgentPoolId != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.AgentPoolId) {
 		toSerialize["AgentPoolId"] = o.AgentPoolId
 	}
-	if o.ApplyMethod != nil {
+	if !IsNil(o.ApplyMethod) {
 		toSerialize["ApplyMethod"] = o.ApplyMethod
 	}
-	if o.ExecutionMode != nil {
+	if !IsNil(o.ExecutionMode) {
 		toSerialize["ExecutionMode"] = o.ExecutionMode
 	}
-	if o.Identity != nil {
+	if !IsNil(o.Identity) {
 		toSerialize["Identity"] = o.Identity
 	}
-	if o.LastRunStatus != nil {
+	if !IsNil(o.LastRunStatus) {
 		toSerialize["LastRunStatus"] = o.LastRunStatus
 	}
-	if o.Name != nil {
+	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
 	}
 	if o.WorkspaceVariables != nil {
 		toSerialize["WorkspaceVariables"] = o.WorkspaceVariables
 	}
-	if o.Organization != nil {
-		toSerialize["Organization"] = o.Organization
+	if o.Organization.IsSet() {
+		toSerialize["Organization"] = o.Organization.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *CloudTfcWorkspace) UnmarshalJSON(bytes []byte) (err error) {
+func (o *CloudTfcWorkspace) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type CloudTfcWorkspaceWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -436,14 +477,14 @@ func (o *CloudTfcWorkspace) UnmarshalJSON(bytes []byte) (err error) {
 		// The status of the last executed run in this workspace.
 		LastRunStatus *string `json:"LastRunStatus,omitempty"`
 		// The name of the workspace.
-		Name               *string                           `json:"Name,omitempty"`
-		WorkspaceVariables []CloudTfcWorkspaceVariables      `json:"WorkspaceVariables,omitempty"`
-		Organization       *CloudTfcOrganizationRelationship `json:"Organization,omitempty"`
+		Name               *string                                  `json:"Name,omitempty"`
+		WorkspaceVariables []CloudTfcWorkspaceVariables             `json:"WorkspaceVariables,omitempty"`
+		Organization       NullableCloudTfcOrganizationRelationship `json:"Organization,omitempty"`
 	}
 
 	varCloudTfcWorkspaceWithoutEmbeddedStruct := CloudTfcWorkspaceWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varCloudTfcWorkspaceWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varCloudTfcWorkspaceWithoutEmbeddedStruct)
 	if err == nil {
 		varCloudTfcWorkspace := _CloudTfcWorkspace{}
 		varCloudTfcWorkspace.ClassId = varCloudTfcWorkspaceWithoutEmbeddedStruct.ClassId
@@ -463,7 +504,7 @@ func (o *CloudTfcWorkspace) UnmarshalJSON(bytes []byte) (err error) {
 
 	varCloudTfcWorkspace := _CloudTfcWorkspace{}
 
-	err = json.Unmarshal(bytes, &varCloudTfcWorkspace)
+	err = json.Unmarshal(data, &varCloudTfcWorkspace)
 	if err == nil {
 		o.MoBaseMo = varCloudTfcWorkspace.MoBaseMo
 	} else {
@@ -472,7 +513,7 @@ func (o *CloudTfcWorkspace) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "AgentPoolId")

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the VirtualizationVmwareVcenter type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &VirtualizationVmwareVcenter{}
 
 // VirtualizationVmwareVcenter VMware vCenter entity. The vCenter has a name assigned by user in Intersight.
 type VirtualizationVmwareVcenter struct {
@@ -123,7 +127,7 @@ func (o *VirtualizationVmwareVcenter) SetObjectType(v string) {
 
 // GetClusterCount returns the ClusterCount field value if set, zero value otherwise.
 func (o *VirtualizationVmwareVcenter) GetClusterCount() int64 {
-	if o == nil || o.ClusterCount == nil {
+	if o == nil || IsNil(o.ClusterCount) {
 		var ret int64
 		return ret
 	}
@@ -133,7 +137,7 @@ func (o *VirtualizationVmwareVcenter) GetClusterCount() int64 {
 // GetClusterCountOk returns a tuple with the ClusterCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationVmwareVcenter) GetClusterCountOk() (*int64, bool) {
-	if o == nil || o.ClusterCount == nil {
+	if o == nil || IsNil(o.ClusterCount) {
 		return nil, false
 	}
 	return o.ClusterCount, true
@@ -141,7 +145,7 @@ func (o *VirtualizationVmwareVcenter) GetClusterCountOk() (*int64, bool) {
 
 // HasClusterCount returns a boolean if a field has been set.
 func (o *VirtualizationVmwareVcenter) HasClusterCount() bool {
-	if o != nil && o.ClusterCount != nil {
+	if o != nil && !IsNil(o.ClusterCount) {
 		return true
 	}
 
@@ -155,7 +159,7 @@ func (o *VirtualizationVmwareVcenter) SetClusterCount(v int64) {
 
 // GetDatacenterCount returns the DatacenterCount field value if set, zero value otherwise.
 func (o *VirtualizationVmwareVcenter) GetDatacenterCount() int64 {
-	if o == nil || o.DatacenterCount == nil {
+	if o == nil || IsNil(o.DatacenterCount) {
 		var ret int64
 		return ret
 	}
@@ -165,7 +169,7 @@ func (o *VirtualizationVmwareVcenter) GetDatacenterCount() int64 {
 // GetDatacenterCountOk returns a tuple with the DatacenterCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationVmwareVcenter) GetDatacenterCountOk() (*int64, bool) {
-	if o == nil || o.DatacenterCount == nil {
+	if o == nil || IsNil(o.DatacenterCount) {
 		return nil, false
 	}
 	return o.DatacenterCount, true
@@ -173,7 +177,7 @@ func (o *VirtualizationVmwareVcenter) GetDatacenterCountOk() (*int64, bool) {
 
 // HasDatacenterCount returns a boolean if a field has been set.
 func (o *VirtualizationVmwareVcenter) HasDatacenterCount() bool {
-	if o != nil && o.DatacenterCount != nil {
+	if o != nil && !IsNil(o.DatacenterCount) {
 		return true
 	}
 
@@ -187,7 +191,7 @@ func (o *VirtualizationVmwareVcenter) SetDatacenterCount(v int64) {
 
 // GetDatastoreCount returns the DatastoreCount field value if set, zero value otherwise.
 func (o *VirtualizationVmwareVcenter) GetDatastoreCount() int64 {
-	if o == nil || o.DatastoreCount == nil {
+	if o == nil || IsNil(o.DatastoreCount) {
 		var ret int64
 		return ret
 	}
@@ -197,7 +201,7 @@ func (o *VirtualizationVmwareVcenter) GetDatastoreCount() int64 {
 // GetDatastoreCountOk returns a tuple with the DatastoreCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationVmwareVcenter) GetDatastoreCountOk() (*int64, bool) {
-	if o == nil || o.DatastoreCount == nil {
+	if o == nil || IsNil(o.DatastoreCount) {
 		return nil, false
 	}
 	return o.DatastoreCount, true
@@ -205,7 +209,7 @@ func (o *VirtualizationVmwareVcenter) GetDatastoreCountOk() (*int64, bool) {
 
 // HasDatastoreCount returns a boolean if a field has been set.
 func (o *VirtualizationVmwareVcenter) HasDatastoreCount() bool {
-	if o != nil && o.DatastoreCount != nil {
+	if o != nil && !IsNil(o.DatastoreCount) {
 		return true
 	}
 
@@ -219,7 +223,7 @@ func (o *VirtualizationVmwareVcenter) SetDatastoreCount(v int64) {
 
 // GetDistributedVirtualSwitchCount returns the DistributedVirtualSwitchCount field value if set, zero value otherwise.
 func (o *VirtualizationVmwareVcenter) GetDistributedVirtualSwitchCount() int64 {
-	if o == nil || o.DistributedVirtualSwitchCount == nil {
+	if o == nil || IsNil(o.DistributedVirtualSwitchCount) {
 		var ret int64
 		return ret
 	}
@@ -229,7 +233,7 @@ func (o *VirtualizationVmwareVcenter) GetDistributedVirtualSwitchCount() int64 {
 // GetDistributedVirtualSwitchCountOk returns a tuple with the DistributedVirtualSwitchCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationVmwareVcenter) GetDistributedVirtualSwitchCountOk() (*int64, bool) {
-	if o == nil || o.DistributedVirtualSwitchCount == nil {
+	if o == nil || IsNil(o.DistributedVirtualSwitchCount) {
 		return nil, false
 	}
 	return o.DistributedVirtualSwitchCount, true
@@ -237,7 +241,7 @@ func (o *VirtualizationVmwareVcenter) GetDistributedVirtualSwitchCountOk() (*int
 
 // HasDistributedVirtualSwitchCount returns a boolean if a field has been set.
 func (o *VirtualizationVmwareVcenter) HasDistributedVirtualSwitchCount() bool {
-	if o != nil && o.DistributedVirtualSwitchCount != nil {
+	if o != nil && !IsNil(o.DistributedVirtualSwitchCount) {
 		return true
 	}
 
@@ -251,7 +255,7 @@ func (o *VirtualizationVmwareVcenter) SetDistributedVirtualSwitchCount(v int64) 
 
 // GetDsClusterCount returns the DsClusterCount field value if set, zero value otherwise.
 func (o *VirtualizationVmwareVcenter) GetDsClusterCount() int64 {
-	if o == nil || o.DsClusterCount == nil {
+	if o == nil || IsNil(o.DsClusterCount) {
 		var ret int64
 		return ret
 	}
@@ -261,7 +265,7 @@ func (o *VirtualizationVmwareVcenter) GetDsClusterCount() int64 {
 // GetDsClusterCountOk returns a tuple with the DsClusterCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationVmwareVcenter) GetDsClusterCountOk() (*int64, bool) {
-	if o == nil || o.DsClusterCount == nil {
+	if o == nil || IsNil(o.DsClusterCount) {
 		return nil, false
 	}
 	return o.DsClusterCount, true
@@ -269,7 +273,7 @@ func (o *VirtualizationVmwareVcenter) GetDsClusterCountOk() (*int64, bool) {
 
 // HasDsClusterCount returns a boolean if a field has been set.
 func (o *VirtualizationVmwareVcenter) HasDsClusterCount() bool {
-	if o != nil && o.DsClusterCount != nil {
+	if o != nil && !IsNil(o.DsClusterCount) {
 		return true
 	}
 
@@ -283,7 +287,7 @@ func (o *VirtualizationVmwareVcenter) SetDsClusterCount(v int64) {
 
 // GetExternalIp returns the ExternalIp field value if set, zero value otherwise.
 func (o *VirtualizationVmwareVcenter) GetExternalIp() string {
-	if o == nil || o.ExternalIp == nil {
+	if o == nil || IsNil(o.ExternalIp) {
 		var ret string
 		return ret
 	}
@@ -293,7 +297,7 @@ func (o *VirtualizationVmwareVcenter) GetExternalIp() string {
 // GetExternalIpOk returns a tuple with the ExternalIp field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationVmwareVcenter) GetExternalIpOk() (*string, bool) {
-	if o == nil || o.ExternalIp == nil {
+	if o == nil || IsNil(o.ExternalIp) {
 		return nil, false
 	}
 	return o.ExternalIp, true
@@ -301,7 +305,7 @@ func (o *VirtualizationVmwareVcenter) GetExternalIpOk() (*string, bool) {
 
 // HasExternalIp returns a boolean if a field has been set.
 func (o *VirtualizationVmwareVcenter) HasExternalIp() bool {
-	if o != nil && o.ExternalIp != nil {
+	if o != nil && !IsNil(o.ExternalIp) {
 		return true
 	}
 
@@ -315,7 +319,7 @@ func (o *VirtualizationVmwareVcenter) SetExternalIp(v string) {
 
 // GetHostCount returns the HostCount field value if set, zero value otherwise.
 func (o *VirtualizationVmwareVcenter) GetHostCount() int64 {
-	if o == nil || o.HostCount == nil {
+	if o == nil || IsNil(o.HostCount) {
 		var ret int64
 		return ret
 	}
@@ -325,7 +329,7 @@ func (o *VirtualizationVmwareVcenter) GetHostCount() int64 {
 // GetHostCountOk returns a tuple with the HostCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationVmwareVcenter) GetHostCountOk() (*int64, bool) {
-	if o == nil || o.HostCount == nil {
+	if o == nil || IsNil(o.HostCount) {
 		return nil, false
 	}
 	return o.HostCount, true
@@ -333,7 +337,7 @@ func (o *VirtualizationVmwareVcenter) GetHostCountOk() (*int64, bool) {
 
 // HasHostCount returns a boolean if a field has been set.
 func (o *VirtualizationVmwareVcenter) HasHostCount() bool {
-	if o != nil && o.HostCount != nil {
+	if o != nil && !IsNil(o.HostCount) {
 		return true
 	}
 
@@ -358,7 +362,7 @@ func (o *VirtualizationVmwareVcenter) GetIpAddress() []string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *VirtualizationVmwareVcenter) GetIpAddressOk() ([]string, bool) {
-	if o == nil || o.IpAddress == nil {
+	if o == nil || IsNil(o.IpAddress) {
 		return nil, false
 	}
 	return o.IpAddress, true
@@ -366,7 +370,7 @@ func (o *VirtualizationVmwareVcenter) GetIpAddressOk() ([]string, bool) {
 
 // HasIpAddress returns a boolean if a field has been set.
 func (o *VirtualizationVmwareVcenter) HasIpAddress() bool {
-	if o != nil && o.IpAddress != nil {
+	if o != nil && IsNil(o.IpAddress) {
 		return true
 	}
 
@@ -380,7 +384,7 @@ func (o *VirtualizationVmwareVcenter) SetIpAddress(v []string) {
 
 // GetTargetName returns the TargetName field value if set, zero value otherwise.
 func (o *VirtualizationVmwareVcenter) GetTargetName() string {
-	if o == nil || o.TargetName == nil {
+	if o == nil || IsNil(o.TargetName) {
 		var ret string
 		return ret
 	}
@@ -390,7 +394,7 @@ func (o *VirtualizationVmwareVcenter) GetTargetName() string {
 // GetTargetNameOk returns a tuple with the TargetName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationVmwareVcenter) GetTargetNameOk() (*string, bool) {
-	if o == nil || o.TargetName == nil {
+	if o == nil || IsNil(o.TargetName) {
 		return nil, false
 	}
 	return o.TargetName, true
@@ -398,7 +402,7 @@ func (o *VirtualizationVmwareVcenter) GetTargetNameOk() (*string, bool) {
 
 // HasTargetName returns a boolean if a field has been set.
 func (o *VirtualizationVmwareVcenter) HasTargetName() bool {
-	if o != nil && o.TargetName != nil {
+	if o != nil && !IsNil(o.TargetName) {
 		return true
 	}
 
@@ -412,7 +416,7 @@ func (o *VirtualizationVmwareVcenter) SetTargetName(v string) {
 
 // GetVmCount returns the VmCount field value if set, zero value otherwise.
 func (o *VirtualizationVmwareVcenter) GetVmCount() int64 {
-	if o == nil || o.VmCount == nil {
+	if o == nil || IsNil(o.VmCount) {
 		var ret int64
 		return ret
 	}
@@ -422,7 +426,7 @@ func (o *VirtualizationVmwareVcenter) GetVmCount() int64 {
 // GetVmCountOk returns a tuple with the VmCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationVmwareVcenter) GetVmCountOk() (*int64, bool) {
-	if o == nil || o.VmCount == nil {
+	if o == nil || IsNil(o.VmCount) {
 		return nil, false
 	}
 	return o.VmCount, true
@@ -430,7 +434,7 @@ func (o *VirtualizationVmwareVcenter) GetVmCountOk() (*int64, bool) {
 
 // HasVmCount returns a boolean if a field has been set.
 func (o *VirtualizationVmwareVcenter) HasVmCount() bool {
-	if o != nil && o.VmCount != nil {
+	if o != nil && !IsNil(o.VmCount) {
 		return true
 	}
 
@@ -444,7 +448,7 @@ func (o *VirtualizationVmwareVcenter) SetVmCount(v int64) {
 
 // GetVmTemplatesCount returns the VmTemplatesCount field value if set, zero value otherwise.
 func (o *VirtualizationVmwareVcenter) GetVmTemplatesCount() int64 {
-	if o == nil || o.VmTemplatesCount == nil {
+	if o == nil || IsNil(o.VmTemplatesCount) {
 		var ret int64
 		return ret
 	}
@@ -454,7 +458,7 @@ func (o *VirtualizationVmwareVcenter) GetVmTemplatesCount() int64 {
 // GetVmTemplatesCountOk returns a tuple with the VmTemplatesCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationVmwareVcenter) GetVmTemplatesCountOk() (*int64, bool) {
-	if o == nil || o.VmTemplatesCount == nil {
+	if o == nil || IsNil(o.VmTemplatesCount) {
 		return nil, false
 	}
 	return o.VmTemplatesCount, true
@@ -462,7 +466,7 @@ func (o *VirtualizationVmwareVcenter) GetVmTemplatesCountOk() (*int64, bool) {
 
 // HasVmTemplatesCount returns a boolean if a field has been set.
 func (o *VirtualizationVmwareVcenter) HasVmTemplatesCount() bool {
-	if o != nil && o.VmTemplatesCount != nil {
+	if o != nil && !IsNil(o.VmTemplatesCount) {
 		return true
 	}
 
@@ -475,52 +479,56 @@ func (o *VirtualizationVmwareVcenter) SetVmTemplatesCount(v int64) {
 }
 
 func (o VirtualizationVmwareVcenter) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o VirtualizationVmwareVcenter) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedVirtualizationBaseHypervisorManager, errVirtualizationBaseHypervisorManager := json.Marshal(o.VirtualizationBaseHypervisorManager)
 	if errVirtualizationBaseHypervisorManager != nil {
-		return []byte{}, errVirtualizationBaseHypervisorManager
+		return map[string]interface{}{}, errVirtualizationBaseHypervisorManager
 	}
 	errVirtualizationBaseHypervisorManager = json.Unmarshal([]byte(serializedVirtualizationBaseHypervisorManager), &toSerialize)
 	if errVirtualizationBaseHypervisorManager != nil {
-		return []byte{}, errVirtualizationBaseHypervisorManager
+		return map[string]interface{}{}, errVirtualizationBaseHypervisorManager
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.ClusterCount != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.ClusterCount) {
 		toSerialize["ClusterCount"] = o.ClusterCount
 	}
-	if o.DatacenterCount != nil {
+	if !IsNil(o.DatacenterCount) {
 		toSerialize["DatacenterCount"] = o.DatacenterCount
 	}
-	if o.DatastoreCount != nil {
+	if !IsNil(o.DatastoreCount) {
 		toSerialize["DatastoreCount"] = o.DatastoreCount
 	}
-	if o.DistributedVirtualSwitchCount != nil {
+	if !IsNil(o.DistributedVirtualSwitchCount) {
 		toSerialize["DistributedVirtualSwitchCount"] = o.DistributedVirtualSwitchCount
 	}
-	if o.DsClusterCount != nil {
+	if !IsNil(o.DsClusterCount) {
 		toSerialize["DsClusterCount"] = o.DsClusterCount
 	}
-	if o.ExternalIp != nil {
+	if !IsNil(o.ExternalIp) {
 		toSerialize["ExternalIp"] = o.ExternalIp
 	}
-	if o.HostCount != nil {
+	if !IsNil(o.HostCount) {
 		toSerialize["HostCount"] = o.HostCount
 	}
 	if o.IpAddress != nil {
 		toSerialize["IpAddress"] = o.IpAddress
 	}
-	if o.TargetName != nil {
+	if !IsNil(o.TargetName) {
 		toSerialize["TargetName"] = o.TargetName
 	}
-	if o.VmCount != nil {
+	if !IsNil(o.VmCount) {
 		toSerialize["VmCount"] = o.VmCount
 	}
-	if o.VmTemplatesCount != nil {
+	if !IsNil(o.VmTemplatesCount) {
 		toSerialize["VmTemplatesCount"] = o.VmTemplatesCount
 	}
 
@@ -528,10 +536,32 @@ func (o VirtualizationVmwareVcenter) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *VirtualizationVmwareVcenter) UnmarshalJSON(bytes []byte) (err error) {
+func (o *VirtualizationVmwareVcenter) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type VirtualizationVmwareVcenterWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -562,7 +592,7 @@ func (o *VirtualizationVmwareVcenter) UnmarshalJSON(bytes []byte) (err error) {
 
 	varVirtualizationVmwareVcenterWithoutEmbeddedStruct := VirtualizationVmwareVcenterWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varVirtualizationVmwareVcenterWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varVirtualizationVmwareVcenterWithoutEmbeddedStruct)
 	if err == nil {
 		varVirtualizationVmwareVcenter := _VirtualizationVmwareVcenter{}
 		varVirtualizationVmwareVcenter.ClassId = varVirtualizationVmwareVcenterWithoutEmbeddedStruct.ClassId
@@ -585,7 +615,7 @@ func (o *VirtualizationVmwareVcenter) UnmarshalJSON(bytes []byte) (err error) {
 
 	varVirtualizationVmwareVcenter := _VirtualizationVmwareVcenter{}
 
-	err = json.Unmarshal(bytes, &varVirtualizationVmwareVcenter)
+	err = json.Unmarshal(data, &varVirtualizationVmwareVcenter)
 	if err == nil {
 		o.VirtualizationBaseHypervisorManager = varVirtualizationVmwareVcenter.VirtualizationBaseHypervisorManager
 	} else {
@@ -594,7 +624,7 @@ func (o *VirtualizationVmwareVcenter) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "ClusterCount")

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the CloudInstanceType type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &CloudInstanceType{}
 
 // CloudInstanceType The cpu, memory, storage and network capacity of this instance.
 type CloudInstanceType struct {
@@ -116,7 +120,7 @@ func (o *CloudInstanceType) SetObjectType(v string) {
 
 // GetArchitecture returns the Architecture field value if set, zero value otherwise.
 func (o *CloudInstanceType) GetArchitecture() string {
-	if o == nil || o.Architecture == nil {
+	if o == nil || IsNil(o.Architecture) {
 		var ret string
 		return ret
 	}
@@ -126,7 +130,7 @@ func (o *CloudInstanceType) GetArchitecture() string {
 // GetArchitectureOk returns a tuple with the Architecture field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudInstanceType) GetArchitectureOk() (*string, bool) {
-	if o == nil || o.Architecture == nil {
+	if o == nil || IsNil(o.Architecture) {
 		return nil, false
 	}
 	return o.Architecture, true
@@ -134,7 +138,7 @@ func (o *CloudInstanceType) GetArchitectureOk() (*string, bool) {
 
 // HasArchitecture returns a boolean if a field has been set.
 func (o *CloudInstanceType) HasArchitecture() bool {
-	if o != nil && o.Architecture != nil {
+	if o != nil && !IsNil(o.Architecture) {
 		return true
 	}
 
@@ -148,7 +152,7 @@ func (o *CloudInstanceType) SetArchitecture(v string) {
 
 // GetCpuSpeed returns the CpuSpeed field value if set, zero value otherwise.
 func (o *CloudInstanceType) GetCpuSpeed() int64 {
-	if o == nil || o.CpuSpeed == nil {
+	if o == nil || IsNil(o.CpuSpeed) {
 		var ret int64
 		return ret
 	}
@@ -158,7 +162,7 @@ func (o *CloudInstanceType) GetCpuSpeed() int64 {
 // GetCpuSpeedOk returns a tuple with the CpuSpeed field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudInstanceType) GetCpuSpeedOk() (*int64, bool) {
-	if o == nil || o.CpuSpeed == nil {
+	if o == nil || IsNil(o.CpuSpeed) {
 		return nil, false
 	}
 	return o.CpuSpeed, true
@@ -166,7 +170,7 @@ func (o *CloudInstanceType) GetCpuSpeedOk() (*int64, bool) {
 
 // HasCpuSpeed returns a boolean if a field has been set.
 func (o *CloudInstanceType) HasCpuSpeed() bool {
-	if o != nil && o.CpuSpeed != nil {
+	if o != nil && !IsNil(o.CpuSpeed) {
 		return true
 	}
 
@@ -180,7 +184,7 @@ func (o *CloudInstanceType) SetCpuSpeed(v int64) {
 
 // GetCpus returns the Cpus field value if set, zero value otherwise.
 func (o *CloudInstanceType) GetCpus() int64 {
-	if o == nil || o.Cpus == nil {
+	if o == nil || IsNil(o.Cpus) {
 		var ret int64
 		return ret
 	}
@@ -190,7 +194,7 @@ func (o *CloudInstanceType) GetCpus() int64 {
 // GetCpusOk returns a tuple with the Cpus field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudInstanceType) GetCpusOk() (*int64, bool) {
-	if o == nil || o.Cpus == nil {
+	if o == nil || IsNil(o.Cpus) {
 		return nil, false
 	}
 	return o.Cpus, true
@@ -198,7 +202,7 @@ func (o *CloudInstanceType) GetCpusOk() (*int64, bool) {
 
 // HasCpus returns a boolean if a field has been set.
 func (o *CloudInstanceType) HasCpus() bool {
-	if o != nil && o.Cpus != nil {
+	if o != nil && !IsNil(o.Cpus) {
 		return true
 	}
 
@@ -212,7 +216,7 @@ func (o *CloudInstanceType) SetCpus(v int64) {
 
 // GetInstanceTypeId returns the InstanceTypeId field value if set, zero value otherwise.
 func (o *CloudInstanceType) GetInstanceTypeId() string {
-	if o == nil || o.InstanceTypeId == nil {
+	if o == nil || IsNil(o.InstanceTypeId) {
 		var ret string
 		return ret
 	}
@@ -222,7 +226,7 @@ func (o *CloudInstanceType) GetInstanceTypeId() string {
 // GetInstanceTypeIdOk returns a tuple with the InstanceTypeId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudInstanceType) GetInstanceTypeIdOk() (*string, bool) {
-	if o == nil || o.InstanceTypeId == nil {
+	if o == nil || IsNil(o.InstanceTypeId) {
 		return nil, false
 	}
 	return o.InstanceTypeId, true
@@ -230,7 +234,7 @@ func (o *CloudInstanceType) GetInstanceTypeIdOk() (*string, bool) {
 
 // HasInstanceTypeId returns a boolean if a field has been set.
 func (o *CloudInstanceType) HasInstanceTypeId() bool {
-	if o != nil && o.InstanceTypeId != nil {
+	if o != nil && !IsNil(o.InstanceTypeId) {
 		return true
 	}
 
@@ -244,7 +248,7 @@ func (o *CloudInstanceType) SetInstanceTypeId(v string) {
 
 // GetMemory returns the Memory field value if set, zero value otherwise.
 func (o *CloudInstanceType) GetMemory() int64 {
-	if o == nil || o.Memory == nil {
+	if o == nil || IsNil(o.Memory) {
 		var ret int64
 		return ret
 	}
@@ -254,7 +258,7 @@ func (o *CloudInstanceType) GetMemory() int64 {
 // GetMemoryOk returns a tuple with the Memory field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudInstanceType) GetMemoryOk() (*int64, bool) {
-	if o == nil || o.Memory == nil {
+	if o == nil || IsNil(o.Memory) {
 		return nil, false
 	}
 	return o.Memory, true
@@ -262,7 +266,7 @@ func (o *CloudInstanceType) GetMemoryOk() (*int64, bool) {
 
 // HasMemory returns a boolean if a field has been set.
 func (o *CloudInstanceType) HasMemory() bool {
-	if o != nil && o.Memory != nil {
+	if o != nil && !IsNil(o.Memory) {
 		return true
 	}
 
@@ -276,7 +280,7 @@ func (o *CloudInstanceType) SetMemory(v int64) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *CloudInstanceType) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -286,7 +290,7 @@ func (o *CloudInstanceType) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudInstanceType) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -294,7 +298,7 @@ func (o *CloudInstanceType) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *CloudInstanceType) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -308,7 +312,7 @@ func (o *CloudInstanceType) SetName(v string) {
 
 // GetPlatform returns the Platform field value if set, zero value otherwise.
 func (o *CloudInstanceType) GetPlatform() string {
-	if o == nil || o.Platform == nil {
+	if o == nil || IsNil(o.Platform) {
 		var ret string
 		return ret
 	}
@@ -318,7 +322,7 @@ func (o *CloudInstanceType) GetPlatform() string {
 // GetPlatformOk returns a tuple with the Platform field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudInstanceType) GetPlatformOk() (*string, bool) {
-	if o == nil || o.Platform == nil {
+	if o == nil || IsNil(o.Platform) {
 		return nil, false
 	}
 	return o.Platform, true
@@ -326,7 +330,7 @@ func (o *CloudInstanceType) GetPlatformOk() (*string, bool) {
 
 // HasPlatform returns a boolean if a field has been set.
 func (o *CloudInstanceType) HasPlatform() bool {
-	if o != nil && o.Platform != nil {
+	if o != nil && !IsNil(o.Platform) {
 		return true
 	}
 
@@ -339,40 +343,44 @@ func (o *CloudInstanceType) SetPlatform(v string) {
 }
 
 func (o CloudInstanceType) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o CloudInstanceType) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
 	errMoBaseComplexType = json.Unmarshal([]byte(serializedMoBaseComplexType), &toSerialize)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Architecture != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Architecture) {
 		toSerialize["Architecture"] = o.Architecture
 	}
-	if o.CpuSpeed != nil {
+	if !IsNil(o.CpuSpeed) {
 		toSerialize["CpuSpeed"] = o.CpuSpeed
 	}
-	if o.Cpus != nil {
+	if !IsNil(o.Cpus) {
 		toSerialize["Cpus"] = o.Cpus
 	}
-	if o.InstanceTypeId != nil {
+	if !IsNil(o.InstanceTypeId) {
 		toSerialize["InstanceTypeId"] = o.InstanceTypeId
 	}
-	if o.Memory != nil {
+	if !IsNil(o.Memory) {
 		toSerialize["Memory"] = o.Memory
 	}
-	if o.Name != nil {
+	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
 	}
-	if o.Platform != nil {
+	if !IsNil(o.Platform) {
 		toSerialize["Platform"] = o.Platform
 	}
 
@@ -380,10 +388,32 @@ func (o CloudInstanceType) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *CloudInstanceType) UnmarshalJSON(bytes []byte) (err error) {
+func (o *CloudInstanceType) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type CloudInstanceTypeWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -407,7 +437,7 @@ func (o *CloudInstanceType) UnmarshalJSON(bytes []byte) (err error) {
 
 	varCloudInstanceTypeWithoutEmbeddedStruct := CloudInstanceTypeWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varCloudInstanceTypeWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varCloudInstanceTypeWithoutEmbeddedStruct)
 	if err == nil {
 		varCloudInstanceType := _CloudInstanceType{}
 		varCloudInstanceType.ClassId = varCloudInstanceTypeWithoutEmbeddedStruct.ClassId
@@ -426,7 +456,7 @@ func (o *CloudInstanceType) UnmarshalJSON(bytes []byte) (err error) {
 
 	varCloudInstanceType := _CloudInstanceType{}
 
-	err = json.Unmarshal(bytes, &varCloudInstanceType)
+	err = json.Unmarshal(data, &varCloudInstanceType)
 	if err == nil {
 		o.MoBaseComplexType = varCloudInstanceType.MoBaseComplexType
 	} else {
@@ -435,7 +465,7 @@ func (o *CloudInstanceType) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Architecture")

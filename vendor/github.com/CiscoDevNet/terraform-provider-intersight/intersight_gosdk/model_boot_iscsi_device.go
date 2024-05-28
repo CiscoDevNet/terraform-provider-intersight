@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the BootIscsiDevice type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &BootIscsiDevice{}
 
 // BootIscsiDevice Iscsi Boot Device configured on the server.
 type BootIscsiDevice struct {
@@ -23,10 +27,10 @@ type BootIscsiDevice struct {
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
-	ObjectType           string                               `json:"ObjectType"`
-	ComputePhysical      *ComputePhysicalRelationship         `json:"ComputePhysical,omitempty"`
-	InventoryDeviceInfo  *InventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
-	RegisteredDevice     *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+	ObjectType           string                                      `json:"ObjectType"`
+	ComputePhysical      NullableComputePhysicalRelationship         `json:"ComputePhysical,omitempty"`
+	InventoryDeviceInfo  NullableInventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
+	RegisteredDevice     NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -103,149 +107,208 @@ func (o *BootIscsiDevice) SetObjectType(v string) {
 	o.ObjectType = v
 }
 
-// GetComputePhysical returns the ComputePhysical field value if set, zero value otherwise.
+// GetComputePhysical returns the ComputePhysical field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *BootIscsiDevice) GetComputePhysical() ComputePhysicalRelationship {
-	if o == nil || o.ComputePhysical == nil {
+	if o == nil || IsNil(o.ComputePhysical.Get()) {
 		var ret ComputePhysicalRelationship
 		return ret
 	}
-	return *o.ComputePhysical
+	return *o.ComputePhysical.Get()
 }
 
 // GetComputePhysicalOk returns a tuple with the ComputePhysical field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *BootIscsiDevice) GetComputePhysicalOk() (*ComputePhysicalRelationship, bool) {
-	if o == nil || o.ComputePhysical == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.ComputePhysical, true
+	return o.ComputePhysical.Get(), o.ComputePhysical.IsSet()
 }
 
 // HasComputePhysical returns a boolean if a field has been set.
 func (o *BootIscsiDevice) HasComputePhysical() bool {
-	if o != nil && o.ComputePhysical != nil {
+	if o != nil && o.ComputePhysical.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetComputePhysical gets a reference to the given ComputePhysicalRelationship and assigns it to the ComputePhysical field.
+// SetComputePhysical gets a reference to the given NullableComputePhysicalRelationship and assigns it to the ComputePhysical field.
 func (o *BootIscsiDevice) SetComputePhysical(v ComputePhysicalRelationship) {
-	o.ComputePhysical = &v
+	o.ComputePhysical.Set(&v)
 }
 
-// GetInventoryDeviceInfo returns the InventoryDeviceInfo field value if set, zero value otherwise.
+// SetComputePhysicalNil sets the value for ComputePhysical to be an explicit nil
+func (o *BootIscsiDevice) SetComputePhysicalNil() {
+	o.ComputePhysical.Set(nil)
+}
+
+// UnsetComputePhysical ensures that no value is present for ComputePhysical, not even an explicit nil
+func (o *BootIscsiDevice) UnsetComputePhysical() {
+	o.ComputePhysical.Unset()
+}
+
+// GetInventoryDeviceInfo returns the InventoryDeviceInfo field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *BootIscsiDevice) GetInventoryDeviceInfo() InventoryDeviceInfoRelationship {
-	if o == nil || o.InventoryDeviceInfo == nil {
+	if o == nil || IsNil(o.InventoryDeviceInfo.Get()) {
 		var ret InventoryDeviceInfoRelationship
 		return ret
 	}
-	return *o.InventoryDeviceInfo
+	return *o.InventoryDeviceInfo.Get()
 }
 
 // GetInventoryDeviceInfoOk returns a tuple with the InventoryDeviceInfo field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *BootIscsiDevice) GetInventoryDeviceInfoOk() (*InventoryDeviceInfoRelationship, bool) {
-	if o == nil || o.InventoryDeviceInfo == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.InventoryDeviceInfo, true
+	return o.InventoryDeviceInfo.Get(), o.InventoryDeviceInfo.IsSet()
 }
 
 // HasInventoryDeviceInfo returns a boolean if a field has been set.
 func (o *BootIscsiDevice) HasInventoryDeviceInfo() bool {
-	if o != nil && o.InventoryDeviceInfo != nil {
+	if o != nil && o.InventoryDeviceInfo.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetInventoryDeviceInfo gets a reference to the given InventoryDeviceInfoRelationship and assigns it to the InventoryDeviceInfo field.
+// SetInventoryDeviceInfo gets a reference to the given NullableInventoryDeviceInfoRelationship and assigns it to the InventoryDeviceInfo field.
 func (o *BootIscsiDevice) SetInventoryDeviceInfo(v InventoryDeviceInfoRelationship) {
-	o.InventoryDeviceInfo = &v
+	o.InventoryDeviceInfo.Set(&v)
 }
 
-// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise.
+// SetInventoryDeviceInfoNil sets the value for InventoryDeviceInfo to be an explicit nil
+func (o *BootIscsiDevice) SetInventoryDeviceInfoNil() {
+	o.InventoryDeviceInfo.Set(nil)
+}
+
+// UnsetInventoryDeviceInfo ensures that no value is present for InventoryDeviceInfo, not even an explicit nil
+func (o *BootIscsiDevice) UnsetInventoryDeviceInfo() {
+	o.InventoryDeviceInfo.Unset()
+}
+
+// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *BootIscsiDevice) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil || IsNil(o.RegisteredDevice.Get()) {
 		var ret AssetDeviceRegistrationRelationship
 		return ret
 	}
-	return *o.RegisteredDevice
+	return *o.RegisteredDevice.Get()
 }
 
 // GetRegisteredDeviceOk returns a tuple with the RegisteredDevice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *BootIscsiDevice) GetRegisteredDeviceOk() (*AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.RegisteredDevice, true
+	return o.RegisteredDevice.Get(), o.RegisteredDevice.IsSet()
 }
 
 // HasRegisteredDevice returns a boolean if a field has been set.
 func (o *BootIscsiDevice) HasRegisteredDevice() bool {
-	if o != nil && o.RegisteredDevice != nil {
+	if o != nil && o.RegisteredDevice.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRegisteredDevice gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
+// SetRegisteredDevice gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
 func (o *BootIscsiDevice) SetRegisteredDevice(v AssetDeviceRegistrationRelationship) {
-	o.RegisteredDevice = &v
+	o.RegisteredDevice.Set(&v)
+}
+
+// SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+func (o *BootIscsiDevice) SetRegisteredDeviceNil() {
+	o.RegisteredDevice.Set(nil)
+}
+
+// UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
+func (o *BootIscsiDevice) UnsetRegisteredDevice() {
+	o.RegisteredDevice.Unset()
 }
 
 func (o BootIscsiDevice) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o BootIscsiDevice) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedBootConfiguredDevice, errBootConfiguredDevice := json.Marshal(o.BootConfiguredDevice)
 	if errBootConfiguredDevice != nil {
-		return []byte{}, errBootConfiguredDevice
+		return map[string]interface{}{}, errBootConfiguredDevice
 	}
 	errBootConfiguredDevice = json.Unmarshal([]byte(serializedBootConfiguredDevice), &toSerialize)
 	if errBootConfiguredDevice != nil {
-		return []byte{}, errBootConfiguredDevice
+		return map[string]interface{}{}, errBootConfiguredDevice
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if o.ComputePhysical.IsSet() {
+		toSerialize["ComputePhysical"] = o.ComputePhysical.Get()
 	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
+	if o.InventoryDeviceInfo.IsSet() {
+		toSerialize["InventoryDeviceInfo"] = o.InventoryDeviceInfo.Get()
 	}
-	if o.ComputePhysical != nil {
-		toSerialize["ComputePhysical"] = o.ComputePhysical
-	}
-	if o.InventoryDeviceInfo != nil {
-		toSerialize["InventoryDeviceInfo"] = o.InventoryDeviceInfo
-	}
-	if o.RegisteredDevice != nil {
-		toSerialize["RegisteredDevice"] = o.RegisteredDevice
+	if o.RegisteredDevice.IsSet() {
+		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *BootIscsiDevice) UnmarshalJSON(bytes []byte) (err error) {
+func (o *BootIscsiDevice) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type BootIscsiDeviceWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
-		ObjectType          string                               `json:"ObjectType"`
-		ComputePhysical     *ComputePhysicalRelationship         `json:"ComputePhysical,omitempty"`
-		InventoryDeviceInfo *InventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
-		RegisteredDevice    *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+		ObjectType          string                                      `json:"ObjectType"`
+		ComputePhysical     NullableComputePhysicalRelationship         `json:"ComputePhysical,omitempty"`
+		InventoryDeviceInfo NullableInventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
+		RegisteredDevice    NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	}
 
 	varBootIscsiDeviceWithoutEmbeddedStruct := BootIscsiDeviceWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varBootIscsiDeviceWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varBootIscsiDeviceWithoutEmbeddedStruct)
 	if err == nil {
 		varBootIscsiDevice := _BootIscsiDevice{}
 		varBootIscsiDevice.ClassId = varBootIscsiDeviceWithoutEmbeddedStruct.ClassId
@@ -260,7 +323,7 @@ func (o *BootIscsiDevice) UnmarshalJSON(bytes []byte) (err error) {
 
 	varBootIscsiDevice := _BootIscsiDevice{}
 
-	err = json.Unmarshal(bytes, &varBootIscsiDevice)
+	err = json.Unmarshal(data, &varBootIscsiDevice)
 	if err == nil {
 		o.BootConfiguredDevice = varBootIscsiDevice.BootConfiguredDevice
 	} else {
@@ -269,7 +332,7 @@ func (o *BootIscsiDevice) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "ComputePhysical")

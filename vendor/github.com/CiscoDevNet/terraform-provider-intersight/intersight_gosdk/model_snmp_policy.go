@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the SnmpPolicy type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &SnmpPolicy{}
 
 // SnmpPolicy Policy to configure SNMP settings on endpoint.
 type SnmpPolicy struct {
@@ -45,8 +49,8 @@ type SnmpPolicy struct {
 	// State of the SNMP v2c on the endpoint. If enabled, the endpoint sends SNMP v2c properties to the designated host.
 	V2Enabled *bool `json:"V2Enabled,omitempty"`
 	// State of the SNMP v3 on the endpoint. If enabled, the endpoint sends SNMP v3 properties to the designated host.
-	V3Enabled    *bool                                 `json:"V3Enabled,omitempty"`
-	Organization *OrganizationOrganizationRelationship `json:"Organization,omitempty"`
+	V3Enabled    *bool                                        `json:"V3Enabled,omitempty"`
+	Organization NullableOrganizationOrganizationRelationship `json:"Organization,omitempty"`
 	// An array of relationships to policyAbstractConfigProfile resources.
 	Profiles             []PolicyAbstractConfigProfileRelationship `json:"Profiles,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -147,7 +151,7 @@ func (o *SnmpPolicy) SetObjectType(v string) {
 
 // GetAccessCommunityString returns the AccessCommunityString field value if set, zero value otherwise.
 func (o *SnmpPolicy) GetAccessCommunityString() string {
-	if o == nil || o.AccessCommunityString == nil {
+	if o == nil || IsNil(o.AccessCommunityString) {
 		var ret string
 		return ret
 	}
@@ -157,7 +161,7 @@ func (o *SnmpPolicy) GetAccessCommunityString() string {
 // GetAccessCommunityStringOk returns a tuple with the AccessCommunityString field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SnmpPolicy) GetAccessCommunityStringOk() (*string, bool) {
-	if o == nil || o.AccessCommunityString == nil {
+	if o == nil || IsNil(o.AccessCommunityString) {
 		return nil, false
 	}
 	return o.AccessCommunityString, true
@@ -165,7 +169,7 @@ func (o *SnmpPolicy) GetAccessCommunityStringOk() (*string, bool) {
 
 // HasAccessCommunityString returns a boolean if a field has been set.
 func (o *SnmpPolicy) HasAccessCommunityString() bool {
-	if o != nil && o.AccessCommunityString != nil {
+	if o != nil && !IsNil(o.AccessCommunityString) {
 		return true
 	}
 
@@ -179,7 +183,7 @@ func (o *SnmpPolicy) SetAccessCommunityString(v string) {
 
 // GetCommunityAccess returns the CommunityAccess field value if set, zero value otherwise.
 func (o *SnmpPolicy) GetCommunityAccess() string {
-	if o == nil || o.CommunityAccess == nil {
+	if o == nil || IsNil(o.CommunityAccess) {
 		var ret string
 		return ret
 	}
@@ -189,7 +193,7 @@ func (o *SnmpPolicy) GetCommunityAccess() string {
 // GetCommunityAccessOk returns a tuple with the CommunityAccess field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SnmpPolicy) GetCommunityAccessOk() (*string, bool) {
-	if o == nil || o.CommunityAccess == nil {
+	if o == nil || IsNil(o.CommunityAccess) {
 		return nil, false
 	}
 	return o.CommunityAccess, true
@@ -197,7 +201,7 @@ func (o *SnmpPolicy) GetCommunityAccessOk() (*string, bool) {
 
 // HasCommunityAccess returns a boolean if a field has been set.
 func (o *SnmpPolicy) HasCommunityAccess() bool {
-	if o != nil && o.CommunityAccess != nil {
+	if o != nil && !IsNil(o.CommunityAccess) {
 		return true
 	}
 
@@ -211,7 +215,7 @@ func (o *SnmpPolicy) SetCommunityAccess(v string) {
 
 // GetEnabled returns the Enabled field value if set, zero value otherwise.
 func (o *SnmpPolicy) GetEnabled() bool {
-	if o == nil || o.Enabled == nil {
+	if o == nil || IsNil(o.Enabled) {
 		var ret bool
 		return ret
 	}
@@ -221,7 +225,7 @@ func (o *SnmpPolicy) GetEnabled() bool {
 // GetEnabledOk returns a tuple with the Enabled field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SnmpPolicy) GetEnabledOk() (*bool, bool) {
-	if o == nil || o.Enabled == nil {
+	if o == nil || IsNil(o.Enabled) {
 		return nil, false
 	}
 	return o.Enabled, true
@@ -229,7 +233,7 @@ func (o *SnmpPolicy) GetEnabledOk() (*bool, bool) {
 
 // HasEnabled returns a boolean if a field has been set.
 func (o *SnmpPolicy) HasEnabled() bool {
-	if o != nil && o.Enabled != nil {
+	if o != nil && !IsNil(o.Enabled) {
 		return true
 	}
 
@@ -243,7 +247,7 @@ func (o *SnmpPolicy) SetEnabled(v bool) {
 
 // GetEngineId returns the EngineId field value if set, zero value otherwise.
 func (o *SnmpPolicy) GetEngineId() string {
-	if o == nil || o.EngineId == nil {
+	if o == nil || IsNil(o.EngineId) {
 		var ret string
 		return ret
 	}
@@ -253,7 +257,7 @@ func (o *SnmpPolicy) GetEngineId() string {
 // GetEngineIdOk returns a tuple with the EngineId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SnmpPolicy) GetEngineIdOk() (*string, bool) {
-	if o == nil || o.EngineId == nil {
+	if o == nil || IsNil(o.EngineId) {
 		return nil, false
 	}
 	return o.EngineId, true
@@ -261,7 +265,7 @@ func (o *SnmpPolicy) GetEngineIdOk() (*string, bool) {
 
 // HasEngineId returns a boolean if a field has been set.
 func (o *SnmpPolicy) HasEngineId() bool {
-	if o != nil && o.EngineId != nil {
+	if o != nil && !IsNil(o.EngineId) {
 		return true
 	}
 
@@ -275,7 +279,7 @@ func (o *SnmpPolicy) SetEngineId(v string) {
 
 // GetSnmpPort returns the SnmpPort field value if set, zero value otherwise.
 func (o *SnmpPolicy) GetSnmpPort() int64 {
-	if o == nil || o.SnmpPort == nil {
+	if o == nil || IsNil(o.SnmpPort) {
 		var ret int64
 		return ret
 	}
@@ -285,7 +289,7 @@ func (o *SnmpPolicy) GetSnmpPort() int64 {
 // GetSnmpPortOk returns a tuple with the SnmpPort field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SnmpPolicy) GetSnmpPortOk() (*int64, bool) {
-	if o == nil || o.SnmpPort == nil {
+	if o == nil || IsNil(o.SnmpPort) {
 		return nil, false
 	}
 	return o.SnmpPort, true
@@ -293,7 +297,7 @@ func (o *SnmpPolicy) GetSnmpPortOk() (*int64, bool) {
 
 // HasSnmpPort returns a boolean if a field has been set.
 func (o *SnmpPolicy) HasSnmpPort() bool {
-	if o != nil && o.SnmpPort != nil {
+	if o != nil && !IsNil(o.SnmpPort) {
 		return true
 	}
 
@@ -318,7 +322,7 @@ func (o *SnmpPolicy) GetSnmpTraps() []SnmpTrap {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *SnmpPolicy) GetSnmpTrapsOk() ([]SnmpTrap, bool) {
-	if o == nil || o.SnmpTraps == nil {
+	if o == nil || IsNil(o.SnmpTraps) {
 		return nil, false
 	}
 	return o.SnmpTraps, true
@@ -326,7 +330,7 @@ func (o *SnmpPolicy) GetSnmpTrapsOk() ([]SnmpTrap, bool) {
 
 // HasSnmpTraps returns a boolean if a field has been set.
 func (o *SnmpPolicy) HasSnmpTraps() bool {
-	if o != nil && o.SnmpTraps != nil {
+	if o != nil && IsNil(o.SnmpTraps) {
 		return true
 	}
 
@@ -351,7 +355,7 @@ func (o *SnmpPolicy) GetSnmpUsers() []SnmpUser {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *SnmpPolicy) GetSnmpUsersOk() ([]SnmpUser, bool) {
-	if o == nil || o.SnmpUsers == nil {
+	if o == nil || IsNil(o.SnmpUsers) {
 		return nil, false
 	}
 	return o.SnmpUsers, true
@@ -359,7 +363,7 @@ func (o *SnmpPolicy) GetSnmpUsersOk() ([]SnmpUser, bool) {
 
 // HasSnmpUsers returns a boolean if a field has been set.
 func (o *SnmpPolicy) HasSnmpUsers() bool {
-	if o != nil && o.SnmpUsers != nil {
+	if o != nil && IsNil(o.SnmpUsers) {
 		return true
 	}
 
@@ -373,7 +377,7 @@ func (o *SnmpPolicy) SetSnmpUsers(v []SnmpUser) {
 
 // GetSysContact returns the SysContact field value if set, zero value otherwise.
 func (o *SnmpPolicy) GetSysContact() string {
-	if o == nil || o.SysContact == nil {
+	if o == nil || IsNil(o.SysContact) {
 		var ret string
 		return ret
 	}
@@ -383,7 +387,7 @@ func (o *SnmpPolicy) GetSysContact() string {
 // GetSysContactOk returns a tuple with the SysContact field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SnmpPolicy) GetSysContactOk() (*string, bool) {
-	if o == nil || o.SysContact == nil {
+	if o == nil || IsNil(o.SysContact) {
 		return nil, false
 	}
 	return o.SysContact, true
@@ -391,7 +395,7 @@ func (o *SnmpPolicy) GetSysContactOk() (*string, bool) {
 
 // HasSysContact returns a boolean if a field has been set.
 func (o *SnmpPolicy) HasSysContact() bool {
-	if o != nil && o.SysContact != nil {
+	if o != nil && !IsNil(o.SysContact) {
 		return true
 	}
 
@@ -405,7 +409,7 @@ func (o *SnmpPolicy) SetSysContact(v string) {
 
 // GetSysLocation returns the SysLocation field value if set, zero value otherwise.
 func (o *SnmpPolicy) GetSysLocation() string {
-	if o == nil || o.SysLocation == nil {
+	if o == nil || IsNil(o.SysLocation) {
 		var ret string
 		return ret
 	}
@@ -415,7 +419,7 @@ func (o *SnmpPolicy) GetSysLocation() string {
 // GetSysLocationOk returns a tuple with the SysLocation field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SnmpPolicy) GetSysLocationOk() (*string, bool) {
-	if o == nil || o.SysLocation == nil {
+	if o == nil || IsNil(o.SysLocation) {
 		return nil, false
 	}
 	return o.SysLocation, true
@@ -423,7 +427,7 @@ func (o *SnmpPolicy) GetSysLocationOk() (*string, bool) {
 
 // HasSysLocation returns a boolean if a field has been set.
 func (o *SnmpPolicy) HasSysLocation() bool {
-	if o != nil && o.SysLocation != nil {
+	if o != nil && !IsNil(o.SysLocation) {
 		return true
 	}
 
@@ -437,7 +441,7 @@ func (o *SnmpPolicy) SetSysLocation(v string) {
 
 // GetTrapCommunity returns the TrapCommunity field value if set, zero value otherwise.
 func (o *SnmpPolicy) GetTrapCommunity() string {
-	if o == nil || o.TrapCommunity == nil {
+	if o == nil || IsNil(o.TrapCommunity) {
 		var ret string
 		return ret
 	}
@@ -447,7 +451,7 @@ func (o *SnmpPolicy) GetTrapCommunity() string {
 // GetTrapCommunityOk returns a tuple with the TrapCommunity field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SnmpPolicy) GetTrapCommunityOk() (*string, bool) {
-	if o == nil || o.TrapCommunity == nil {
+	if o == nil || IsNil(o.TrapCommunity) {
 		return nil, false
 	}
 	return o.TrapCommunity, true
@@ -455,7 +459,7 @@ func (o *SnmpPolicy) GetTrapCommunityOk() (*string, bool) {
 
 // HasTrapCommunity returns a boolean if a field has been set.
 func (o *SnmpPolicy) HasTrapCommunity() bool {
-	if o != nil && o.TrapCommunity != nil {
+	if o != nil && !IsNil(o.TrapCommunity) {
 		return true
 	}
 
@@ -469,7 +473,7 @@ func (o *SnmpPolicy) SetTrapCommunity(v string) {
 
 // GetV2Enabled returns the V2Enabled field value if set, zero value otherwise.
 func (o *SnmpPolicy) GetV2Enabled() bool {
-	if o == nil || o.V2Enabled == nil {
+	if o == nil || IsNil(o.V2Enabled) {
 		var ret bool
 		return ret
 	}
@@ -479,7 +483,7 @@ func (o *SnmpPolicy) GetV2Enabled() bool {
 // GetV2EnabledOk returns a tuple with the V2Enabled field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SnmpPolicy) GetV2EnabledOk() (*bool, bool) {
-	if o == nil || o.V2Enabled == nil {
+	if o == nil || IsNil(o.V2Enabled) {
 		return nil, false
 	}
 	return o.V2Enabled, true
@@ -487,7 +491,7 @@ func (o *SnmpPolicy) GetV2EnabledOk() (*bool, bool) {
 
 // HasV2Enabled returns a boolean if a field has been set.
 func (o *SnmpPolicy) HasV2Enabled() bool {
-	if o != nil && o.V2Enabled != nil {
+	if o != nil && !IsNil(o.V2Enabled) {
 		return true
 	}
 
@@ -501,7 +505,7 @@ func (o *SnmpPolicy) SetV2Enabled(v bool) {
 
 // GetV3Enabled returns the V3Enabled field value if set, zero value otherwise.
 func (o *SnmpPolicy) GetV3Enabled() bool {
-	if o == nil || o.V3Enabled == nil {
+	if o == nil || IsNil(o.V3Enabled) {
 		var ret bool
 		return ret
 	}
@@ -511,7 +515,7 @@ func (o *SnmpPolicy) GetV3Enabled() bool {
 // GetV3EnabledOk returns a tuple with the V3Enabled field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SnmpPolicy) GetV3EnabledOk() (*bool, bool) {
-	if o == nil || o.V3Enabled == nil {
+	if o == nil || IsNil(o.V3Enabled) {
 		return nil, false
 	}
 	return o.V3Enabled, true
@@ -519,7 +523,7 @@ func (o *SnmpPolicy) GetV3EnabledOk() (*bool, bool) {
 
 // HasV3Enabled returns a boolean if a field has been set.
 func (o *SnmpPolicy) HasV3Enabled() bool {
-	if o != nil && o.V3Enabled != nil {
+	if o != nil && !IsNil(o.V3Enabled) {
 		return true
 	}
 
@@ -531,36 +535,47 @@ func (o *SnmpPolicy) SetV3Enabled(v bool) {
 	o.V3Enabled = &v
 }
 
-// GetOrganization returns the Organization field value if set, zero value otherwise.
+// GetOrganization returns the Organization field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *SnmpPolicy) GetOrganization() OrganizationOrganizationRelationship {
-	if o == nil || o.Organization == nil {
+	if o == nil || IsNil(o.Organization.Get()) {
 		var ret OrganizationOrganizationRelationship
 		return ret
 	}
-	return *o.Organization
+	return *o.Organization.Get()
 }
 
 // GetOrganizationOk returns a tuple with the Organization field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *SnmpPolicy) GetOrganizationOk() (*OrganizationOrganizationRelationship, bool) {
-	if o == nil || o.Organization == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Organization, true
+	return o.Organization.Get(), o.Organization.IsSet()
 }
 
 // HasOrganization returns a boolean if a field has been set.
 func (o *SnmpPolicy) HasOrganization() bool {
-	if o != nil && o.Organization != nil {
+	if o != nil && o.Organization.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetOrganization gets a reference to the given OrganizationOrganizationRelationship and assigns it to the Organization field.
+// SetOrganization gets a reference to the given NullableOrganizationOrganizationRelationship and assigns it to the Organization field.
 func (o *SnmpPolicy) SetOrganization(v OrganizationOrganizationRelationship) {
-	o.Organization = &v
+	o.Organization.Set(&v)
+}
+
+// SetOrganizationNil sets the value for Organization to be an explicit nil
+func (o *SnmpPolicy) SetOrganizationNil() {
+	o.Organization.Set(nil)
+}
+
+// UnsetOrganization ensures that no value is present for Organization, not even an explicit nil
+func (o *SnmpPolicy) UnsetOrganization() {
+	o.Organization.Unset()
 }
 
 // GetProfiles returns the Profiles field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -576,7 +591,7 @@ func (o *SnmpPolicy) GetProfiles() []PolicyAbstractConfigProfileRelationship {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *SnmpPolicy) GetProfilesOk() ([]PolicyAbstractConfigProfileRelationship, bool) {
-	if o == nil || o.Profiles == nil {
+	if o == nil || IsNil(o.Profiles) {
 		return nil, false
 	}
 	return o.Profiles, true
@@ -584,7 +599,7 @@ func (o *SnmpPolicy) GetProfilesOk() ([]PolicyAbstractConfigProfileRelationship,
 
 // HasProfiles returns a boolean if a field has been set.
 func (o *SnmpPolicy) HasProfiles() bool {
-	if o != nil && o.Profiles != nil {
+	if o != nil && IsNil(o.Profiles) {
 		return true
 	}
 
@@ -597,34 +612,38 @@ func (o *SnmpPolicy) SetProfiles(v []PolicyAbstractConfigProfileRelationship) {
 }
 
 func (o SnmpPolicy) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o SnmpPolicy) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedPolicyAbstractPolicy, errPolicyAbstractPolicy := json.Marshal(o.PolicyAbstractPolicy)
 	if errPolicyAbstractPolicy != nil {
-		return []byte{}, errPolicyAbstractPolicy
+		return map[string]interface{}{}, errPolicyAbstractPolicy
 	}
 	errPolicyAbstractPolicy = json.Unmarshal([]byte(serializedPolicyAbstractPolicy), &toSerialize)
 	if errPolicyAbstractPolicy != nil {
-		return []byte{}, errPolicyAbstractPolicy
+		return map[string]interface{}{}, errPolicyAbstractPolicy
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.AccessCommunityString != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.AccessCommunityString) {
 		toSerialize["AccessCommunityString"] = o.AccessCommunityString
 	}
-	if o.CommunityAccess != nil {
+	if !IsNil(o.CommunityAccess) {
 		toSerialize["CommunityAccess"] = o.CommunityAccess
 	}
-	if o.Enabled != nil {
+	if !IsNil(o.Enabled) {
 		toSerialize["Enabled"] = o.Enabled
 	}
-	if o.EngineId != nil {
+	if !IsNil(o.EngineId) {
 		toSerialize["EngineId"] = o.EngineId
 	}
-	if o.SnmpPort != nil {
+	if !IsNil(o.SnmpPort) {
 		toSerialize["SnmpPort"] = o.SnmpPort
 	}
 	if o.SnmpTraps != nil {
@@ -633,23 +652,23 @@ func (o SnmpPolicy) MarshalJSON() ([]byte, error) {
 	if o.SnmpUsers != nil {
 		toSerialize["SnmpUsers"] = o.SnmpUsers
 	}
-	if o.SysContact != nil {
+	if !IsNil(o.SysContact) {
 		toSerialize["SysContact"] = o.SysContact
 	}
-	if o.SysLocation != nil {
+	if !IsNil(o.SysLocation) {
 		toSerialize["SysLocation"] = o.SysLocation
 	}
-	if o.TrapCommunity != nil {
+	if !IsNil(o.TrapCommunity) {
 		toSerialize["TrapCommunity"] = o.TrapCommunity
 	}
-	if o.V2Enabled != nil {
+	if !IsNil(o.V2Enabled) {
 		toSerialize["V2Enabled"] = o.V2Enabled
 	}
-	if o.V3Enabled != nil {
+	if !IsNil(o.V3Enabled) {
 		toSerialize["V3Enabled"] = o.V3Enabled
 	}
-	if o.Organization != nil {
-		toSerialize["Organization"] = o.Organization
+	if o.Organization.IsSet() {
+		toSerialize["Organization"] = o.Organization.Get()
 	}
 	if o.Profiles != nil {
 		toSerialize["Profiles"] = o.Profiles
@@ -659,10 +678,32 @@ func (o SnmpPolicy) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *SnmpPolicy) UnmarshalJSON(bytes []byte) (err error) {
+func (o *SnmpPolicy) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type SnmpPolicyWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -689,15 +730,15 @@ func (o *SnmpPolicy) UnmarshalJSON(bytes []byte) (err error) {
 		// State of the SNMP v2c on the endpoint. If enabled, the endpoint sends SNMP v2c properties to the designated host.
 		V2Enabled *bool `json:"V2Enabled,omitempty"`
 		// State of the SNMP v3 on the endpoint. If enabled, the endpoint sends SNMP v3 properties to the designated host.
-		V3Enabled    *bool                                 `json:"V3Enabled,omitempty"`
-		Organization *OrganizationOrganizationRelationship `json:"Organization,omitempty"`
+		V3Enabled    *bool                                        `json:"V3Enabled,omitempty"`
+		Organization NullableOrganizationOrganizationRelationship `json:"Organization,omitempty"`
 		// An array of relationships to policyAbstractConfigProfile resources.
 		Profiles []PolicyAbstractConfigProfileRelationship `json:"Profiles,omitempty"`
 	}
 
 	varSnmpPolicyWithoutEmbeddedStruct := SnmpPolicyWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varSnmpPolicyWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varSnmpPolicyWithoutEmbeddedStruct)
 	if err == nil {
 		varSnmpPolicy := _SnmpPolicy{}
 		varSnmpPolicy.ClassId = varSnmpPolicyWithoutEmbeddedStruct.ClassId
@@ -723,7 +764,7 @@ func (o *SnmpPolicy) UnmarshalJSON(bytes []byte) (err error) {
 
 	varSnmpPolicy := _SnmpPolicy{}
 
-	err = json.Unmarshal(bytes, &varSnmpPolicy)
+	err = json.Unmarshal(data, &varSnmpPolicy)
 	if err == nil {
 		o.PolicyAbstractPolicy = varSnmpPolicy.PolicyAbstractPolicy
 	} else {
@@ -732,7 +773,7 @@ func (o *SnmpPolicy) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "AccessCommunityString")

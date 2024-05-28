@@ -20,16 +20,16 @@ Name | Type | Description | Notes
 **StaticUuidAddress** | Pointer to **string** | The UUID address for the server must include UUID prefix xxxxxxxx-xxxx-xxxx along with the UUID suffix of format xxxx-xxxxxxxxxxxx. | [optional] 
 **UserLabel** | Pointer to **string** | User label assigned to the server profile. | [optional] 
 **Uuid** | Pointer to **string** | The UUID address that is assigned to the server based on the UUID pool. | [optional] [readonly] 
-**AssignedServer** | Pointer to [**ComputePhysicalRelationship**](ComputePhysicalRelationship.md) |  | [optional] 
-**AssociatedServer** | Pointer to [**ComputePhysicalRelationship**](ComputePhysicalRelationship.md) |  | [optional] 
-**AssociatedServerPool** | Pointer to [**ResourcepoolPoolRelationship**](ResourcepoolPoolRelationship.md) |  | [optional] 
+**AssignedServer** | Pointer to [**NullableComputePhysicalRelationship**](ComputePhysicalRelationship.md) |  | [optional] 
+**AssociatedServer** | Pointer to [**NullableComputePhysicalRelationship**](ComputePhysicalRelationship.md) |  | [optional] 
+**AssociatedServerPool** | Pointer to [**NullableResourcepoolPoolRelationship**](ResourcepoolPoolRelationship.md) |  | [optional] 
 **ConfigChangeDetails** | Pointer to [**[]ServerConfigChangeDetailRelationship**](ServerConfigChangeDetailRelationship.md) | An array of relationships to serverConfigChangeDetail resources. | [optional] [readonly] 
-**LeasedServer** | Pointer to [**ComputePhysicalRelationship**](ComputePhysicalRelationship.md) |  | [optional] 
-**Organization** | Pointer to [**OrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
-**ResourceLease** | Pointer to [**ResourcepoolLeaseRelationship**](ResourcepoolLeaseRelationship.md) |  | [optional] 
+**LeasedServer** | Pointer to [**NullableComputePhysicalRelationship**](ComputePhysicalRelationship.md) |  | [optional] 
+**Organization** | Pointer to [**NullableOrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
+**ResourceLease** | Pointer to [**NullableResourcepoolLeaseRelationship**](ResourcepoolLeaseRelationship.md) |  | [optional] 
 **RunningWorkflows** | Pointer to [**[]WorkflowWorkflowInfoRelationship**](WorkflowWorkflowInfoRelationship.md) | An array of relationships to workflowWorkflowInfo resources. | [optional] [readonly] 
-**ServerPool** | Pointer to [**ResourcepoolPoolRelationship**](ResourcepoolPoolRelationship.md) |  | [optional] 
-**UuidLease** | Pointer to [**UuidpoolUuidLeaseRelationship**](UuidpoolUuidLeaseRelationship.md) |  | [optional] 
+**ServerPool** | Pointer to [**NullableResourcepoolPoolRelationship**](ResourcepoolPoolRelationship.md) |  | [optional] 
+**UuidLease** | Pointer to [**NullableUuidpoolUuidLeaseRelationship**](UuidpoolUuidLeaseRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -515,6 +515,16 @@ SetAssignedServer sets AssignedServer field to given value.
 
 HasAssignedServer returns a boolean if a field has been set.
 
+### SetAssignedServerNil
+
+`func (o *ServerProfile) SetAssignedServerNil(b bool)`
+
+ SetAssignedServerNil sets the value for AssignedServer to be an explicit nil
+
+### UnsetAssignedServer
+`func (o *ServerProfile) UnsetAssignedServer()`
+
+UnsetAssignedServer ensures that no value is present for AssignedServer, not even an explicit nil
 ### GetAssociatedServer
 
 `func (o *ServerProfile) GetAssociatedServer() ComputePhysicalRelationship`
@@ -540,6 +550,16 @@ SetAssociatedServer sets AssociatedServer field to given value.
 
 HasAssociatedServer returns a boolean if a field has been set.
 
+### SetAssociatedServerNil
+
+`func (o *ServerProfile) SetAssociatedServerNil(b bool)`
+
+ SetAssociatedServerNil sets the value for AssociatedServer to be an explicit nil
+
+### UnsetAssociatedServer
+`func (o *ServerProfile) UnsetAssociatedServer()`
+
+UnsetAssociatedServer ensures that no value is present for AssociatedServer, not even an explicit nil
 ### GetAssociatedServerPool
 
 `func (o *ServerProfile) GetAssociatedServerPool() ResourcepoolPoolRelationship`
@@ -565,6 +585,16 @@ SetAssociatedServerPool sets AssociatedServerPool field to given value.
 
 HasAssociatedServerPool returns a boolean if a field has been set.
 
+### SetAssociatedServerPoolNil
+
+`func (o *ServerProfile) SetAssociatedServerPoolNil(b bool)`
+
+ SetAssociatedServerPoolNil sets the value for AssociatedServerPool to be an explicit nil
+
+### UnsetAssociatedServerPool
+`func (o *ServerProfile) UnsetAssociatedServerPool()`
+
+UnsetAssociatedServerPool ensures that no value is present for AssociatedServerPool, not even an explicit nil
 ### GetConfigChangeDetails
 
 `func (o *ServerProfile) GetConfigChangeDetails() []ServerConfigChangeDetailRelationship`
@@ -625,6 +655,16 @@ SetLeasedServer sets LeasedServer field to given value.
 
 HasLeasedServer returns a boolean if a field has been set.
 
+### SetLeasedServerNil
+
+`func (o *ServerProfile) SetLeasedServerNil(b bool)`
+
+ SetLeasedServerNil sets the value for LeasedServer to be an explicit nil
+
+### UnsetLeasedServer
+`func (o *ServerProfile) UnsetLeasedServer()`
+
+UnsetLeasedServer ensures that no value is present for LeasedServer, not even an explicit nil
 ### GetOrganization
 
 `func (o *ServerProfile) GetOrganization() OrganizationOrganizationRelationship`
@@ -650,6 +690,16 @@ SetOrganization sets Organization field to given value.
 
 HasOrganization returns a boolean if a field has been set.
 
+### SetOrganizationNil
+
+`func (o *ServerProfile) SetOrganizationNil(b bool)`
+
+ SetOrganizationNil sets the value for Organization to be an explicit nil
+
+### UnsetOrganization
+`func (o *ServerProfile) UnsetOrganization()`
+
+UnsetOrganization ensures that no value is present for Organization, not even an explicit nil
 ### GetResourceLease
 
 `func (o *ServerProfile) GetResourceLease() ResourcepoolLeaseRelationship`
@@ -675,6 +725,16 @@ SetResourceLease sets ResourceLease field to given value.
 
 HasResourceLease returns a boolean if a field has been set.
 
+### SetResourceLeaseNil
+
+`func (o *ServerProfile) SetResourceLeaseNil(b bool)`
+
+ SetResourceLeaseNil sets the value for ResourceLease to be an explicit nil
+
+### UnsetResourceLease
+`func (o *ServerProfile) UnsetResourceLease()`
+
+UnsetResourceLease ensures that no value is present for ResourceLease, not even an explicit nil
 ### GetRunningWorkflows
 
 `func (o *ServerProfile) GetRunningWorkflows() []WorkflowWorkflowInfoRelationship`
@@ -735,6 +795,16 @@ SetServerPool sets ServerPool field to given value.
 
 HasServerPool returns a boolean if a field has been set.
 
+### SetServerPoolNil
+
+`func (o *ServerProfile) SetServerPoolNil(b bool)`
+
+ SetServerPoolNil sets the value for ServerPool to be an explicit nil
+
+### UnsetServerPool
+`func (o *ServerProfile) UnsetServerPool()`
+
+UnsetServerPool ensures that no value is present for ServerPool, not even an explicit nil
 ### GetUuidLease
 
 `func (o *ServerProfile) GetUuidLease() UuidpoolUuidLeaseRelationship`
@@ -760,6 +830,16 @@ SetUuidLease sets UuidLease field to given value.
 
 HasUuidLease returns a boolean if a field has been set.
 
+### SetUuidLeaseNil
+
+`func (o *ServerProfile) SetUuidLeaseNil(b bool)`
+
+ SetUuidLeaseNil sets the value for UuidLease to be an explicit nil
+
+### UnsetUuidLease
+`func (o *ServerProfile) UnsetUuidLease()`
+
+UnsetUuidLease ensures that no value is present for UuidLease, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

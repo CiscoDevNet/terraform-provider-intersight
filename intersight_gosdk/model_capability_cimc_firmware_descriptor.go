@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the CapabilityCimcFirmwareDescriptor type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &CapabilityCimcFirmwareDescriptor{}
 
 // CapabilityCimcFirmwareDescriptor Descriptor that identifies the server's redfish integration capability using cimc firmware info.
 type CapabilityCimcFirmwareDescriptor struct {
@@ -110,7 +114,7 @@ func (o *CapabilityCimcFirmwareDescriptor) SetObjectType(v string) {
 
 // GetAdapterEpProxyEnabled returns the AdapterEpProxyEnabled field value if set, zero value otherwise.
 func (o *CapabilityCimcFirmwareDescriptor) GetAdapterEpProxyEnabled() bool {
-	if o == nil || o.AdapterEpProxyEnabled == nil {
+	if o == nil || IsNil(o.AdapterEpProxyEnabled) {
 		var ret bool
 		return ret
 	}
@@ -120,7 +124,7 @@ func (o *CapabilityCimcFirmwareDescriptor) GetAdapterEpProxyEnabled() bool {
 // GetAdapterEpProxyEnabledOk returns a tuple with the AdapterEpProxyEnabled field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CapabilityCimcFirmwareDescriptor) GetAdapterEpProxyEnabledOk() (*bool, bool) {
-	if o == nil || o.AdapterEpProxyEnabled == nil {
+	if o == nil || IsNil(o.AdapterEpProxyEnabled) {
 		return nil, false
 	}
 	return o.AdapterEpProxyEnabled, true
@@ -128,7 +132,7 @@ func (o *CapabilityCimcFirmwareDescriptor) GetAdapterEpProxyEnabledOk() (*bool, 
 
 // HasAdapterEpProxyEnabled returns a boolean if a field has been set.
 func (o *CapabilityCimcFirmwareDescriptor) HasAdapterEpProxyEnabled() bool {
-	if o != nil && o.AdapterEpProxyEnabled != nil {
+	if o != nil && !IsNil(o.AdapterEpProxyEnabled) {
 		return true
 	}
 
@@ -142,7 +146,7 @@ func (o *CapabilityCimcFirmwareDescriptor) SetAdapterEpProxyEnabled(v bool) {
 
 // GetLocalUserPswdSupportedVer returns the LocalUserPswdSupportedVer field value if set, zero value otherwise.
 func (o *CapabilityCimcFirmwareDescriptor) GetLocalUserPswdSupportedVer() string {
-	if o == nil || o.LocalUserPswdSupportedVer == nil {
+	if o == nil || IsNil(o.LocalUserPswdSupportedVer) {
 		var ret string
 		return ret
 	}
@@ -152,7 +156,7 @@ func (o *CapabilityCimcFirmwareDescriptor) GetLocalUserPswdSupportedVer() string
 // GetLocalUserPswdSupportedVerOk returns a tuple with the LocalUserPswdSupportedVer field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CapabilityCimcFirmwareDescriptor) GetLocalUserPswdSupportedVerOk() (*string, bool) {
-	if o == nil || o.LocalUserPswdSupportedVer == nil {
+	if o == nil || IsNil(o.LocalUserPswdSupportedVer) {
 		return nil, false
 	}
 	return o.LocalUserPswdSupportedVer, true
@@ -160,7 +164,7 @@ func (o *CapabilityCimcFirmwareDescriptor) GetLocalUserPswdSupportedVerOk() (*st
 
 // HasLocalUserPswdSupportedVer returns a boolean if a field has been set.
 func (o *CapabilityCimcFirmwareDescriptor) HasLocalUserPswdSupportedVer() bool {
-	if o != nil && o.LocalUserPswdSupportedVer != nil {
+	if o != nil && !IsNil(o.LocalUserPswdSupportedVer) {
 		return true
 	}
 
@@ -174,7 +178,7 @@ func (o *CapabilityCimcFirmwareDescriptor) SetLocalUserPswdSupportedVer(v string
 
 // GetRevision returns the Revision field value if set, zero value otherwise.
 func (o *CapabilityCimcFirmwareDescriptor) GetRevision() string {
-	if o == nil || o.Revision == nil {
+	if o == nil || IsNil(o.Revision) {
 		var ret string
 		return ret
 	}
@@ -184,7 +188,7 @@ func (o *CapabilityCimcFirmwareDescriptor) GetRevision() string {
 // GetRevisionOk returns a tuple with the Revision field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CapabilityCimcFirmwareDescriptor) GetRevisionOk() (*string, bool) {
-	if o == nil || o.Revision == nil {
+	if o == nil || IsNil(o.Revision) {
 		return nil, false
 	}
 	return o.Revision, true
@@ -192,7 +196,7 @@ func (o *CapabilityCimcFirmwareDescriptor) GetRevisionOk() (*string, bool) {
 
 // HasRevision returns a boolean if a field has been set.
 func (o *CapabilityCimcFirmwareDescriptor) HasRevision() bool {
-	if o != nil && o.Revision != nil {
+	if o != nil && !IsNil(o.Revision) {
 		return true
 	}
 
@@ -206,7 +210,7 @@ func (o *CapabilityCimcFirmwareDescriptor) SetRevision(v string) {
 
 // GetUuidSupportedVer returns the UuidSupportedVer field value if set, zero value otherwise.
 func (o *CapabilityCimcFirmwareDescriptor) GetUuidSupportedVer() string {
-	if o == nil || o.UuidSupportedVer == nil {
+	if o == nil || IsNil(o.UuidSupportedVer) {
 		var ret string
 		return ret
 	}
@@ -216,7 +220,7 @@ func (o *CapabilityCimcFirmwareDescriptor) GetUuidSupportedVer() string {
 // GetUuidSupportedVerOk returns a tuple with the UuidSupportedVer field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CapabilityCimcFirmwareDescriptor) GetUuidSupportedVerOk() (*string, bool) {
-	if o == nil || o.UuidSupportedVer == nil {
+	if o == nil || IsNil(o.UuidSupportedVer) {
 		return nil, false
 	}
 	return o.UuidSupportedVer, true
@@ -224,7 +228,7 @@ func (o *CapabilityCimcFirmwareDescriptor) GetUuidSupportedVerOk() (*string, boo
 
 // HasUuidSupportedVer returns a boolean if a field has been set.
 func (o *CapabilityCimcFirmwareDescriptor) HasUuidSupportedVer() bool {
-	if o != nil && o.UuidSupportedVer != nil {
+	if o != nil && !IsNil(o.UuidSupportedVer) {
 		return true
 	}
 
@@ -237,31 +241,35 @@ func (o *CapabilityCimcFirmwareDescriptor) SetUuidSupportedVer(v string) {
 }
 
 func (o CapabilityCimcFirmwareDescriptor) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o CapabilityCimcFirmwareDescriptor) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedCapabilityHardwareDescriptor, errCapabilityHardwareDescriptor := json.Marshal(o.CapabilityHardwareDescriptor)
 	if errCapabilityHardwareDescriptor != nil {
-		return []byte{}, errCapabilityHardwareDescriptor
+		return map[string]interface{}{}, errCapabilityHardwareDescriptor
 	}
 	errCapabilityHardwareDescriptor = json.Unmarshal([]byte(serializedCapabilityHardwareDescriptor), &toSerialize)
 	if errCapabilityHardwareDescriptor != nil {
-		return []byte{}, errCapabilityHardwareDescriptor
+		return map[string]interface{}{}, errCapabilityHardwareDescriptor
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.AdapterEpProxyEnabled != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.AdapterEpProxyEnabled) {
 		toSerialize["AdapterEpProxyEnabled"] = o.AdapterEpProxyEnabled
 	}
-	if o.LocalUserPswdSupportedVer != nil {
+	if !IsNil(o.LocalUserPswdSupportedVer) {
 		toSerialize["LocalUserPswdSupportedVer"] = o.LocalUserPswdSupportedVer
 	}
-	if o.Revision != nil {
+	if !IsNil(o.Revision) {
 		toSerialize["Revision"] = o.Revision
 	}
-	if o.UuidSupportedVer != nil {
+	if !IsNil(o.UuidSupportedVer) {
 		toSerialize["UuidSupportedVer"] = o.UuidSupportedVer
 	}
 
@@ -269,10 +277,32 @@ func (o CapabilityCimcFirmwareDescriptor) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *CapabilityCimcFirmwareDescriptor) UnmarshalJSON(bytes []byte) (err error) {
+func (o *CapabilityCimcFirmwareDescriptor) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type CapabilityCimcFirmwareDescriptorWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -290,7 +320,7 @@ func (o *CapabilityCimcFirmwareDescriptor) UnmarshalJSON(bytes []byte) (err erro
 
 	varCapabilityCimcFirmwareDescriptorWithoutEmbeddedStruct := CapabilityCimcFirmwareDescriptorWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varCapabilityCimcFirmwareDescriptorWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varCapabilityCimcFirmwareDescriptorWithoutEmbeddedStruct)
 	if err == nil {
 		varCapabilityCimcFirmwareDescriptor := _CapabilityCimcFirmwareDescriptor{}
 		varCapabilityCimcFirmwareDescriptor.ClassId = varCapabilityCimcFirmwareDescriptorWithoutEmbeddedStruct.ClassId
@@ -306,7 +336,7 @@ func (o *CapabilityCimcFirmwareDescriptor) UnmarshalJSON(bytes []byte) (err erro
 
 	varCapabilityCimcFirmwareDescriptor := _CapabilityCimcFirmwareDescriptor{}
 
-	err = json.Unmarshal(bytes, &varCapabilityCimcFirmwareDescriptor)
+	err = json.Unmarshal(data, &varCapabilityCimcFirmwareDescriptor)
 	if err == nil {
 		o.CapabilityHardwareDescriptor = varCapabilityCimcFirmwareDescriptor.CapabilityHardwareDescriptor
 	} else {
@@ -315,7 +345,7 @@ func (o *CapabilityCimcFirmwareDescriptor) UnmarshalJSON(bytes []byte) (err erro
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "AdapterEpProxyEnabled")

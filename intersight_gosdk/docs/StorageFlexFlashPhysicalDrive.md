@@ -10,9 +10,9 @@ Name | Type | Description | Notes
 **CardType** | Pointer to **string** | The card type of the flex flash physical drive. | [optional] 
 **OemId** | Pointer to **string** | The OEM Identifier of the flex flash physical drive. | [optional] 
 **PdStatus** | Pointer to **string** | The drive status of the flex flash physical drive. | [optional] 
-**InventoryDeviceInfo** | Pointer to [**InventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
-**StorageFlexFlashController** | Pointer to [**StorageFlexFlashControllerRelationship**](StorageFlexFlashControllerRelationship.md) |  | [optional] 
+**InventoryDeviceInfo** | Pointer to [**NullableInventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
+**StorageFlexFlashController** | Pointer to [**NullableStorageFlexFlashControllerRelationship**](StorageFlexFlashControllerRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -198,6 +198,16 @@ SetInventoryDeviceInfo sets InventoryDeviceInfo field to given value.
 
 HasInventoryDeviceInfo returns a boolean if a field has been set.
 
+### SetInventoryDeviceInfoNil
+
+`func (o *StorageFlexFlashPhysicalDrive) SetInventoryDeviceInfoNil(b bool)`
+
+ SetInventoryDeviceInfoNil sets the value for InventoryDeviceInfo to be an explicit nil
+
+### UnsetInventoryDeviceInfo
+`func (o *StorageFlexFlashPhysicalDrive) UnsetInventoryDeviceInfo()`
+
+UnsetInventoryDeviceInfo ensures that no value is present for InventoryDeviceInfo, not even an explicit nil
 ### GetRegisteredDevice
 
 `func (o *StorageFlexFlashPhysicalDrive) GetRegisteredDevice() AssetDeviceRegistrationRelationship`
@@ -223,6 +233,16 @@ SetRegisteredDevice sets RegisteredDevice field to given value.
 
 HasRegisteredDevice returns a boolean if a field has been set.
 
+### SetRegisteredDeviceNil
+
+`func (o *StorageFlexFlashPhysicalDrive) SetRegisteredDeviceNil(b bool)`
+
+ SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+
+### UnsetRegisteredDevice
+`func (o *StorageFlexFlashPhysicalDrive) UnsetRegisteredDevice()`
+
+UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
 ### GetStorageFlexFlashController
 
 `func (o *StorageFlexFlashPhysicalDrive) GetStorageFlexFlashController() StorageFlexFlashControllerRelationship`
@@ -248,6 +268,16 @@ SetStorageFlexFlashController sets StorageFlexFlashController field to given val
 
 HasStorageFlexFlashController returns a boolean if a field has been set.
 
+### SetStorageFlexFlashControllerNil
+
+`func (o *StorageFlexFlashPhysicalDrive) SetStorageFlexFlashControllerNil(b bool)`
+
+ SetStorageFlexFlashControllerNil sets the value for StorageFlexFlashController to be an explicit nil
+
+### UnsetStorageFlexFlashController
+`func (o *StorageFlexFlashPhysicalDrive) UnsetStorageFlexFlashController()`
+
+UnsetStorageFlexFlashController ensures that no value is present for StorageFlexFlashController, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

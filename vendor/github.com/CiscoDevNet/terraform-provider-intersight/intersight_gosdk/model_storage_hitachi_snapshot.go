@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the StorageHitachiSnapshot type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &StorageHitachiSnapshot{}
 
 // StorageHitachiSnapshot A snapshot entity in Hitachi storage array.
 type StorageHitachiSnapshot struct {
@@ -45,9 +49,9 @@ type StorageHitachiSnapshot struct {
 	// Pair status. Pair status changes according to the pair operation.
 	Status *string `json:"Status,omitempty"`
 	// LDEV number of the secondary volume.
-	SvolLdevId           *int64                               `json:"SvolLdevId,omitempty"`
-	Array                *StorageHitachiArrayRelationship     `json:"Array,omitempty"`
-	RegisteredDevice     *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+	SvolLdevId           *int64                                      `json:"SvolLdevId,omitempty"`
+	Array                NullableStorageHitachiArrayRelationship     `json:"Array,omitempty"`
+	RegisteredDevice     NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -126,7 +130,7 @@ func (o *StorageHitachiSnapshot) SetObjectType(v string) {
 
 // GetConcordanceRate returns the ConcordanceRate field value if set, zero value otherwise.
 func (o *StorageHitachiSnapshot) GetConcordanceRate() int64 {
-	if o == nil || o.ConcordanceRate == nil {
+	if o == nil || IsNil(o.ConcordanceRate) {
 		var ret int64
 		return ret
 	}
@@ -136,7 +140,7 @@ func (o *StorageHitachiSnapshot) GetConcordanceRate() int64 {
 // GetConcordanceRateOk returns a tuple with the ConcordanceRate field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageHitachiSnapshot) GetConcordanceRateOk() (*int64, bool) {
-	if o == nil || o.ConcordanceRate == nil {
+	if o == nil || IsNil(o.ConcordanceRate) {
 		return nil, false
 	}
 	return o.ConcordanceRate, true
@@ -144,7 +148,7 @@ func (o *StorageHitachiSnapshot) GetConcordanceRateOk() (*int64, bool) {
 
 // HasConcordanceRate returns a boolean if a field has been set.
 func (o *StorageHitachiSnapshot) HasConcordanceRate() bool {
-	if o != nil && o.ConcordanceRate != nil {
+	if o != nil && !IsNil(o.ConcordanceRate) {
 		return true
 	}
 
@@ -158,7 +162,7 @@ func (o *StorageHitachiSnapshot) SetConcordanceRate(v int64) {
 
 // GetIsConsistencyGroup returns the IsConsistencyGroup field value if set, zero value otherwise.
 func (o *StorageHitachiSnapshot) GetIsConsistencyGroup() bool {
-	if o == nil || o.IsConsistencyGroup == nil {
+	if o == nil || IsNil(o.IsConsistencyGroup) {
 		var ret bool
 		return ret
 	}
@@ -168,7 +172,7 @@ func (o *StorageHitachiSnapshot) GetIsConsistencyGroup() bool {
 // GetIsConsistencyGroupOk returns a tuple with the IsConsistencyGroup field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageHitachiSnapshot) GetIsConsistencyGroupOk() (*bool, bool) {
-	if o == nil || o.IsConsistencyGroup == nil {
+	if o == nil || IsNil(o.IsConsistencyGroup) {
 		return nil, false
 	}
 	return o.IsConsistencyGroup, true
@@ -176,7 +180,7 @@ func (o *StorageHitachiSnapshot) GetIsConsistencyGroupOk() (*bool, bool) {
 
 // HasIsConsistencyGroup returns a boolean if a field has been set.
 func (o *StorageHitachiSnapshot) HasIsConsistencyGroup() bool {
-	if o != nil && o.IsConsistencyGroup != nil {
+	if o != nil && !IsNil(o.IsConsistencyGroup) {
 		return true
 	}
 
@@ -190,7 +194,7 @@ func (o *StorageHitachiSnapshot) SetIsConsistencyGroup(v bool) {
 
 // GetIsMultistageable returns the IsMultistageable field value if set, zero value otherwise.
 func (o *StorageHitachiSnapshot) GetIsMultistageable() bool {
-	if o == nil || o.IsMultistageable == nil {
+	if o == nil || IsNil(o.IsMultistageable) {
 		var ret bool
 		return ret
 	}
@@ -200,7 +204,7 @@ func (o *StorageHitachiSnapshot) GetIsMultistageable() bool {
 // GetIsMultistageableOk returns a tuple with the IsMultistageable field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageHitachiSnapshot) GetIsMultistageableOk() (*bool, bool) {
-	if o == nil || o.IsMultistageable == nil {
+	if o == nil || IsNil(o.IsMultistageable) {
 		return nil, false
 	}
 	return o.IsMultistageable, true
@@ -208,7 +212,7 @@ func (o *StorageHitachiSnapshot) GetIsMultistageableOk() (*bool, bool) {
 
 // HasIsMultistageable returns a boolean if a field has been set.
 func (o *StorageHitachiSnapshot) HasIsMultistageable() bool {
-	if o != nil && o.IsMultistageable != nil {
+	if o != nil && !IsNil(o.IsMultistageable) {
 		return true
 	}
 
@@ -222,7 +226,7 @@ func (o *StorageHitachiSnapshot) SetIsMultistageable(v bool) {
 
 // GetMuNumber returns the MuNumber field value if set, zero value otherwise.
 func (o *StorageHitachiSnapshot) GetMuNumber() int64 {
-	if o == nil || o.MuNumber == nil {
+	if o == nil || IsNil(o.MuNumber) {
 		var ret int64
 		return ret
 	}
@@ -232,7 +236,7 @@ func (o *StorageHitachiSnapshot) GetMuNumber() int64 {
 // GetMuNumberOk returns a tuple with the MuNumber field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageHitachiSnapshot) GetMuNumberOk() (*int64, bool) {
-	if o == nil || o.MuNumber == nil {
+	if o == nil || IsNil(o.MuNumber) {
 		return nil, false
 	}
 	return o.MuNumber, true
@@ -240,7 +244,7 @@ func (o *StorageHitachiSnapshot) GetMuNumberOk() (*int64, bool) {
 
 // HasMuNumber returns a boolean if a field has been set.
 func (o *StorageHitachiSnapshot) HasMuNumber() bool {
-	if o != nil && o.MuNumber != nil {
+	if o != nil && !IsNil(o.MuNumber) {
 		return true
 	}
 
@@ -254,7 +258,7 @@ func (o *StorageHitachiSnapshot) SetMuNumber(v int64) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *StorageHitachiSnapshot) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -264,7 +268,7 @@ func (o *StorageHitachiSnapshot) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageHitachiSnapshot) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -272,7 +276,7 @@ func (o *StorageHitachiSnapshot) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *StorageHitachiSnapshot) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -286,7 +290,7 @@ func (o *StorageHitachiSnapshot) SetName(v string) {
 
 // GetPvolLdevId returns the PvolLdevId field value if set, zero value otherwise.
 func (o *StorageHitachiSnapshot) GetPvolLdevId() int64 {
-	if o == nil || o.PvolLdevId == nil {
+	if o == nil || IsNil(o.PvolLdevId) {
 		var ret int64
 		return ret
 	}
@@ -296,7 +300,7 @@ func (o *StorageHitachiSnapshot) GetPvolLdevId() int64 {
 // GetPvolLdevIdOk returns a tuple with the PvolLdevId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageHitachiSnapshot) GetPvolLdevIdOk() (*int64, bool) {
-	if o == nil || o.PvolLdevId == nil {
+	if o == nil || IsNil(o.PvolLdevId) {
 		return nil, false
 	}
 	return o.PvolLdevId, true
@@ -304,7 +308,7 @@ func (o *StorageHitachiSnapshot) GetPvolLdevIdOk() (*int64, bool) {
 
 // HasPvolLdevId returns a boolean if a field has been set.
 func (o *StorageHitachiSnapshot) HasPvolLdevId() bool {
-	if o != nil && o.PvolLdevId != nil {
+	if o != nil && !IsNil(o.PvolLdevId) {
 		return true
 	}
 
@@ -318,7 +322,7 @@ func (o *StorageHitachiSnapshot) SetPvolLdevId(v int64) {
 
 // GetSnapshotGroupName returns the SnapshotGroupName field value if set, zero value otherwise.
 func (o *StorageHitachiSnapshot) GetSnapshotGroupName() string {
-	if o == nil || o.SnapshotGroupName == nil {
+	if o == nil || IsNil(o.SnapshotGroupName) {
 		var ret string
 		return ret
 	}
@@ -328,7 +332,7 @@ func (o *StorageHitachiSnapshot) GetSnapshotGroupName() string {
 // GetSnapshotGroupNameOk returns a tuple with the SnapshotGroupName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageHitachiSnapshot) GetSnapshotGroupNameOk() (*string, bool) {
-	if o == nil || o.SnapshotGroupName == nil {
+	if o == nil || IsNil(o.SnapshotGroupName) {
 		return nil, false
 	}
 	return o.SnapshotGroupName, true
@@ -336,7 +340,7 @@ func (o *StorageHitachiSnapshot) GetSnapshotGroupNameOk() (*string, bool) {
 
 // HasSnapshotGroupName returns a boolean if a field has been set.
 func (o *StorageHitachiSnapshot) HasSnapshotGroupName() bool {
-	if o != nil && o.SnapshotGroupName != nil {
+	if o != nil && !IsNil(o.SnapshotGroupName) {
 		return true
 	}
 
@@ -350,7 +354,7 @@ func (o *StorageHitachiSnapshot) SetSnapshotGroupName(v string) {
 
 // GetSnapshotPoolId returns the SnapshotPoolId field value if set, zero value otherwise.
 func (o *StorageHitachiSnapshot) GetSnapshotPoolId() int64 {
-	if o == nil || o.SnapshotPoolId == nil {
+	if o == nil || IsNil(o.SnapshotPoolId) {
 		var ret int64
 		return ret
 	}
@@ -360,7 +364,7 @@ func (o *StorageHitachiSnapshot) GetSnapshotPoolId() int64 {
 // GetSnapshotPoolIdOk returns a tuple with the SnapshotPoolId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageHitachiSnapshot) GetSnapshotPoolIdOk() (*int64, bool) {
-	if o == nil || o.SnapshotPoolId == nil {
+	if o == nil || IsNil(o.SnapshotPoolId) {
 		return nil, false
 	}
 	return o.SnapshotPoolId, true
@@ -368,7 +372,7 @@ func (o *StorageHitachiSnapshot) GetSnapshotPoolIdOk() (*int64, bool) {
 
 // HasSnapshotPoolId returns a boolean if a field has been set.
 func (o *StorageHitachiSnapshot) HasSnapshotPoolId() bool {
-	if o != nil && o.SnapshotPoolId != nil {
+	if o != nil && !IsNil(o.SnapshotPoolId) {
 		return true
 	}
 
@@ -382,7 +386,7 @@ func (o *StorageHitachiSnapshot) SetSnapshotPoolId(v int64) {
 
 // GetSplitTime returns the SplitTime field value if set, zero value otherwise.
 func (o *StorageHitachiSnapshot) GetSplitTime() string {
-	if o == nil || o.SplitTime == nil {
+	if o == nil || IsNil(o.SplitTime) {
 		var ret string
 		return ret
 	}
@@ -392,7 +396,7 @@ func (o *StorageHitachiSnapshot) GetSplitTime() string {
 // GetSplitTimeOk returns a tuple with the SplitTime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageHitachiSnapshot) GetSplitTimeOk() (*string, bool) {
-	if o == nil || o.SplitTime == nil {
+	if o == nil || IsNil(o.SplitTime) {
 		return nil, false
 	}
 	return o.SplitTime, true
@@ -400,7 +404,7 @@ func (o *StorageHitachiSnapshot) GetSplitTimeOk() (*string, bool) {
 
 // HasSplitTime returns a boolean if a field has been set.
 func (o *StorageHitachiSnapshot) HasSplitTime() bool {
-	if o != nil && o.SplitTime != nil {
+	if o != nil && !IsNil(o.SplitTime) {
 		return true
 	}
 
@@ -414,7 +418,7 @@ func (o *StorageHitachiSnapshot) SetSplitTime(v string) {
 
 // GetStatus returns the Status field value if set, zero value otherwise.
 func (o *StorageHitachiSnapshot) GetStatus() string {
-	if o == nil || o.Status == nil {
+	if o == nil || IsNil(o.Status) {
 		var ret string
 		return ret
 	}
@@ -424,7 +428,7 @@ func (o *StorageHitachiSnapshot) GetStatus() string {
 // GetStatusOk returns a tuple with the Status field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageHitachiSnapshot) GetStatusOk() (*string, bool) {
-	if o == nil || o.Status == nil {
+	if o == nil || IsNil(o.Status) {
 		return nil, false
 	}
 	return o.Status, true
@@ -432,7 +436,7 @@ func (o *StorageHitachiSnapshot) GetStatusOk() (*string, bool) {
 
 // HasStatus returns a boolean if a field has been set.
 func (o *StorageHitachiSnapshot) HasStatus() bool {
-	if o != nil && o.Status != nil {
+	if o != nil && !IsNil(o.Status) {
 		return true
 	}
 
@@ -446,7 +450,7 @@ func (o *StorageHitachiSnapshot) SetStatus(v string) {
 
 // GetSvolLdevId returns the SvolLdevId field value if set, zero value otherwise.
 func (o *StorageHitachiSnapshot) GetSvolLdevId() int64 {
-	if o == nil || o.SvolLdevId == nil {
+	if o == nil || IsNil(o.SvolLdevId) {
 		var ret int64
 		return ret
 	}
@@ -456,7 +460,7 @@ func (o *StorageHitachiSnapshot) GetSvolLdevId() int64 {
 // GetSvolLdevIdOk returns a tuple with the SvolLdevId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageHitachiSnapshot) GetSvolLdevIdOk() (*int64, bool) {
-	if o == nil || o.SvolLdevId == nil {
+	if o == nil || IsNil(o.SvolLdevId) {
 		return nil, false
 	}
 	return o.SvolLdevId, true
@@ -464,7 +468,7 @@ func (o *StorageHitachiSnapshot) GetSvolLdevIdOk() (*int64, bool) {
 
 // HasSvolLdevId returns a boolean if a field has been set.
 func (o *StorageHitachiSnapshot) HasSvolLdevId() bool {
-	if o != nil && o.SvolLdevId != nil {
+	if o != nil && !IsNil(o.SvolLdevId) {
 		return true
 	}
 
@@ -476,134 +480,182 @@ func (o *StorageHitachiSnapshot) SetSvolLdevId(v int64) {
 	o.SvolLdevId = &v
 }
 
-// GetArray returns the Array field value if set, zero value otherwise.
+// GetArray returns the Array field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *StorageHitachiSnapshot) GetArray() StorageHitachiArrayRelationship {
-	if o == nil || o.Array == nil {
+	if o == nil || IsNil(o.Array.Get()) {
 		var ret StorageHitachiArrayRelationship
 		return ret
 	}
-	return *o.Array
+	return *o.Array.Get()
 }
 
 // GetArrayOk returns a tuple with the Array field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StorageHitachiSnapshot) GetArrayOk() (*StorageHitachiArrayRelationship, bool) {
-	if o == nil || o.Array == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Array, true
+	return o.Array.Get(), o.Array.IsSet()
 }
 
 // HasArray returns a boolean if a field has been set.
 func (o *StorageHitachiSnapshot) HasArray() bool {
-	if o != nil && o.Array != nil {
+	if o != nil && o.Array.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetArray gets a reference to the given StorageHitachiArrayRelationship and assigns it to the Array field.
+// SetArray gets a reference to the given NullableStorageHitachiArrayRelationship and assigns it to the Array field.
 func (o *StorageHitachiSnapshot) SetArray(v StorageHitachiArrayRelationship) {
-	o.Array = &v
+	o.Array.Set(&v)
 }
 
-// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise.
+// SetArrayNil sets the value for Array to be an explicit nil
+func (o *StorageHitachiSnapshot) SetArrayNil() {
+	o.Array.Set(nil)
+}
+
+// UnsetArray ensures that no value is present for Array, not even an explicit nil
+func (o *StorageHitachiSnapshot) UnsetArray() {
+	o.Array.Unset()
+}
+
+// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *StorageHitachiSnapshot) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil || IsNil(o.RegisteredDevice.Get()) {
 		var ret AssetDeviceRegistrationRelationship
 		return ret
 	}
-	return *o.RegisteredDevice
+	return *o.RegisteredDevice.Get()
 }
 
 // GetRegisteredDeviceOk returns a tuple with the RegisteredDevice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StorageHitachiSnapshot) GetRegisteredDeviceOk() (*AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.RegisteredDevice, true
+	return o.RegisteredDevice.Get(), o.RegisteredDevice.IsSet()
 }
 
 // HasRegisteredDevice returns a boolean if a field has been set.
 func (o *StorageHitachiSnapshot) HasRegisteredDevice() bool {
-	if o != nil && o.RegisteredDevice != nil {
+	if o != nil && o.RegisteredDevice.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRegisteredDevice gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
+// SetRegisteredDevice gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
 func (o *StorageHitachiSnapshot) SetRegisteredDevice(v AssetDeviceRegistrationRelationship) {
-	o.RegisteredDevice = &v
+	o.RegisteredDevice.Set(&v)
+}
+
+// SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+func (o *StorageHitachiSnapshot) SetRegisteredDeviceNil() {
+	o.RegisteredDevice.Set(nil)
+}
+
+// UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
+func (o *StorageHitachiSnapshot) UnsetRegisteredDevice() {
+	o.RegisteredDevice.Unset()
 }
 
 func (o StorageHitachiSnapshot) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o StorageHitachiSnapshot) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.ConcordanceRate != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.ConcordanceRate) {
 		toSerialize["ConcordanceRate"] = o.ConcordanceRate
 	}
-	if o.IsConsistencyGroup != nil {
+	if !IsNil(o.IsConsistencyGroup) {
 		toSerialize["IsConsistencyGroup"] = o.IsConsistencyGroup
 	}
-	if o.IsMultistageable != nil {
+	if !IsNil(o.IsMultistageable) {
 		toSerialize["IsMultistageable"] = o.IsMultistageable
 	}
-	if o.MuNumber != nil {
+	if !IsNil(o.MuNumber) {
 		toSerialize["MuNumber"] = o.MuNumber
 	}
-	if o.Name != nil {
+	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
 	}
-	if o.PvolLdevId != nil {
+	if !IsNil(o.PvolLdevId) {
 		toSerialize["PvolLdevId"] = o.PvolLdevId
 	}
-	if o.SnapshotGroupName != nil {
+	if !IsNil(o.SnapshotGroupName) {
 		toSerialize["SnapshotGroupName"] = o.SnapshotGroupName
 	}
-	if o.SnapshotPoolId != nil {
+	if !IsNil(o.SnapshotPoolId) {
 		toSerialize["SnapshotPoolId"] = o.SnapshotPoolId
 	}
-	if o.SplitTime != nil {
+	if !IsNil(o.SplitTime) {
 		toSerialize["SplitTime"] = o.SplitTime
 	}
-	if o.Status != nil {
+	if !IsNil(o.Status) {
 		toSerialize["Status"] = o.Status
 	}
-	if o.SvolLdevId != nil {
+	if !IsNil(o.SvolLdevId) {
 		toSerialize["SvolLdevId"] = o.SvolLdevId
 	}
-	if o.Array != nil {
-		toSerialize["Array"] = o.Array
+	if o.Array.IsSet() {
+		toSerialize["Array"] = o.Array.Get()
 	}
-	if o.RegisteredDevice != nil {
-		toSerialize["RegisteredDevice"] = o.RegisteredDevice
+	if o.RegisteredDevice.IsSet() {
+		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *StorageHitachiSnapshot) UnmarshalJSON(bytes []byte) (err error) {
+func (o *StorageHitachiSnapshot) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type StorageHitachiSnapshotWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -630,14 +682,14 @@ func (o *StorageHitachiSnapshot) UnmarshalJSON(bytes []byte) (err error) {
 		// Pair status. Pair status changes according to the pair operation.
 		Status *string `json:"Status,omitempty"`
 		// LDEV number of the secondary volume.
-		SvolLdevId       *int64                               `json:"SvolLdevId,omitempty"`
-		Array            *StorageHitachiArrayRelationship     `json:"Array,omitempty"`
-		RegisteredDevice *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+		SvolLdevId       *int64                                      `json:"SvolLdevId,omitempty"`
+		Array            NullableStorageHitachiArrayRelationship     `json:"Array,omitempty"`
+		RegisteredDevice NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	}
 
 	varStorageHitachiSnapshotWithoutEmbeddedStruct := StorageHitachiSnapshotWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varStorageHitachiSnapshotWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varStorageHitachiSnapshotWithoutEmbeddedStruct)
 	if err == nil {
 		varStorageHitachiSnapshot := _StorageHitachiSnapshot{}
 		varStorageHitachiSnapshot.ClassId = varStorageHitachiSnapshotWithoutEmbeddedStruct.ClassId
@@ -662,7 +714,7 @@ func (o *StorageHitachiSnapshot) UnmarshalJSON(bytes []byte) (err error) {
 
 	varStorageHitachiSnapshot := _StorageHitachiSnapshot{}
 
-	err = json.Unmarshal(bytes, &varStorageHitachiSnapshot)
+	err = json.Unmarshal(data, &varStorageHitachiSnapshot)
 	if err == nil {
 		o.MoBaseMo = varStorageHitachiSnapshot.MoBaseMo
 	} else {
@@ -671,7 +723,7 @@ func (o *StorageHitachiSnapshot) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "ConcordanceRate")

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the AdapterHostIscsiInterface type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &AdapterHostIscsiInterface{}
 
 // AdapterHostIscsiInterface Iscsi interface on a server adapter.
 type AdapterHostIscsiInterface struct {
@@ -41,10 +45,10 @@ type AdapterHostIscsiInterface struct {
 	// Operability status of Host ISCSI Interface.
 	Operability *string `json:"Operability,omitempty"`
 	// PeerPort Dn of Host ISCSI Interface.
-	PeerDn               *string                              `json:"PeerDn,omitempty"`
-	AdapterUnit          *AdapterUnitRelationship             `json:"AdapterUnit,omitempty"`
-	InventoryDeviceInfo  *InventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
-	RegisteredDevice     *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+	PeerDn               *string                                     `json:"PeerDn,omitempty"`
+	AdapterUnit          NullableAdapterUnitRelationship             `json:"AdapterUnit,omitempty"`
+	InventoryDeviceInfo  NullableInventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
+	RegisteredDevice     NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -123,7 +127,7 @@ func (o *AdapterHostIscsiInterface) SetObjectType(v string) {
 
 // GetAdminState returns the AdminState field value if set, zero value otherwise.
 func (o *AdapterHostIscsiInterface) GetAdminState() string {
-	if o == nil || o.AdminState == nil {
+	if o == nil || IsNil(o.AdminState) {
 		var ret string
 		return ret
 	}
@@ -133,7 +137,7 @@ func (o *AdapterHostIscsiInterface) GetAdminState() string {
 // GetAdminStateOk returns a tuple with the AdminState field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AdapterHostIscsiInterface) GetAdminStateOk() (*string, bool) {
-	if o == nil || o.AdminState == nil {
+	if o == nil || IsNil(o.AdminState) {
 		return nil, false
 	}
 	return o.AdminState, true
@@ -141,7 +145,7 @@ func (o *AdapterHostIscsiInterface) GetAdminStateOk() (*string, bool) {
 
 // HasAdminState returns a boolean if a field has been set.
 func (o *AdapterHostIscsiInterface) HasAdminState() bool {
-	if o != nil && o.AdminState != nil {
+	if o != nil && !IsNil(o.AdminState) {
 		return true
 	}
 
@@ -155,7 +159,7 @@ func (o *AdapterHostIscsiInterface) SetAdminState(v string) {
 
 // GetEpDn returns the EpDn field value if set, zero value otherwise.
 func (o *AdapterHostIscsiInterface) GetEpDn() string {
-	if o == nil || o.EpDn == nil {
+	if o == nil || IsNil(o.EpDn) {
 		var ret string
 		return ret
 	}
@@ -165,7 +169,7 @@ func (o *AdapterHostIscsiInterface) GetEpDn() string {
 // GetEpDnOk returns a tuple with the EpDn field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AdapterHostIscsiInterface) GetEpDnOk() (*string, bool) {
-	if o == nil || o.EpDn == nil {
+	if o == nil || IsNil(o.EpDn) {
 		return nil, false
 	}
 	return o.EpDn, true
@@ -173,7 +177,7 @@ func (o *AdapterHostIscsiInterface) GetEpDnOk() (*string, bool) {
 
 // HasEpDn returns a boolean if a field has been set.
 func (o *AdapterHostIscsiInterface) HasEpDn() bool {
-	if o != nil && o.EpDn != nil {
+	if o != nil && !IsNil(o.EpDn) {
 		return true
 	}
 
@@ -187,7 +191,7 @@ func (o *AdapterHostIscsiInterface) SetEpDn(v string) {
 
 // GetHostIscsiInterfaceId returns the HostIscsiInterfaceId field value if set, zero value otherwise.
 func (o *AdapterHostIscsiInterface) GetHostIscsiInterfaceId() int64 {
-	if o == nil || o.HostIscsiInterfaceId == nil {
+	if o == nil || IsNil(o.HostIscsiInterfaceId) {
 		var ret int64
 		return ret
 	}
@@ -197,7 +201,7 @@ func (o *AdapterHostIscsiInterface) GetHostIscsiInterfaceId() int64 {
 // GetHostIscsiInterfaceIdOk returns a tuple with the HostIscsiInterfaceId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AdapterHostIscsiInterface) GetHostIscsiInterfaceIdOk() (*int64, bool) {
-	if o == nil || o.HostIscsiInterfaceId == nil {
+	if o == nil || IsNil(o.HostIscsiInterfaceId) {
 		return nil, false
 	}
 	return o.HostIscsiInterfaceId, true
@@ -205,7 +209,7 @@ func (o *AdapterHostIscsiInterface) GetHostIscsiInterfaceIdOk() (*int64, bool) {
 
 // HasHostIscsiInterfaceId returns a boolean if a field has been set.
 func (o *AdapterHostIscsiInterface) HasHostIscsiInterfaceId() bool {
-	if o != nil && o.HostIscsiInterfaceId != nil {
+	if o != nil && !IsNil(o.HostIscsiInterfaceId) {
 		return true
 	}
 
@@ -219,7 +223,7 @@ func (o *AdapterHostIscsiInterface) SetHostIscsiInterfaceId(v int64) {
 
 // GetHostVisible returns the HostVisible field value if set, zero value otherwise.
 func (o *AdapterHostIscsiInterface) GetHostVisible() string {
-	if o == nil || o.HostVisible == nil {
+	if o == nil || IsNil(o.HostVisible) {
 		var ret string
 		return ret
 	}
@@ -229,7 +233,7 @@ func (o *AdapterHostIscsiInterface) GetHostVisible() string {
 // GetHostVisibleOk returns a tuple with the HostVisible field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AdapterHostIscsiInterface) GetHostVisibleOk() (*string, bool) {
-	if o == nil || o.HostVisible == nil {
+	if o == nil || IsNil(o.HostVisible) {
 		return nil, false
 	}
 	return o.HostVisible, true
@@ -237,7 +241,7 @@ func (o *AdapterHostIscsiInterface) GetHostVisibleOk() (*string, bool) {
 
 // HasHostVisible returns a boolean if a field has been set.
 func (o *AdapterHostIscsiInterface) HasHostVisible() bool {
-	if o != nil && o.HostVisible != nil {
+	if o != nil && !IsNil(o.HostVisible) {
 		return true
 	}
 
@@ -251,7 +255,7 @@ func (o *AdapterHostIscsiInterface) SetHostVisible(v string) {
 
 // GetMacAddress returns the MacAddress field value if set, zero value otherwise.
 func (o *AdapterHostIscsiInterface) GetMacAddress() string {
-	if o == nil || o.MacAddress == nil {
+	if o == nil || IsNil(o.MacAddress) {
 		var ret string
 		return ret
 	}
@@ -261,7 +265,7 @@ func (o *AdapterHostIscsiInterface) GetMacAddress() string {
 // GetMacAddressOk returns a tuple with the MacAddress field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AdapterHostIscsiInterface) GetMacAddressOk() (*string, bool) {
-	if o == nil || o.MacAddress == nil {
+	if o == nil || IsNil(o.MacAddress) {
 		return nil, false
 	}
 	return o.MacAddress, true
@@ -269,7 +273,7 @@ func (o *AdapterHostIscsiInterface) GetMacAddressOk() (*string, bool) {
 
 // HasMacAddress returns a boolean if a field has been set.
 func (o *AdapterHostIscsiInterface) HasMacAddress() bool {
-	if o != nil && o.MacAddress != nil {
+	if o != nil && !IsNil(o.MacAddress) {
 		return true
 	}
 
@@ -283,7 +287,7 @@ func (o *AdapterHostIscsiInterface) SetMacAddress(v string) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *AdapterHostIscsiInterface) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -293,7 +297,7 @@ func (o *AdapterHostIscsiInterface) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AdapterHostIscsiInterface) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -301,7 +305,7 @@ func (o *AdapterHostIscsiInterface) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *AdapterHostIscsiInterface) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -315,7 +319,7 @@ func (o *AdapterHostIscsiInterface) SetName(v string) {
 
 // GetOperState returns the OperState field value if set, zero value otherwise.
 func (o *AdapterHostIscsiInterface) GetOperState() string {
-	if o == nil || o.OperState == nil {
+	if o == nil || IsNil(o.OperState) {
 		var ret string
 		return ret
 	}
@@ -325,7 +329,7 @@ func (o *AdapterHostIscsiInterface) GetOperState() string {
 // GetOperStateOk returns a tuple with the OperState field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AdapterHostIscsiInterface) GetOperStateOk() (*string, bool) {
-	if o == nil || o.OperState == nil {
+	if o == nil || IsNil(o.OperState) {
 		return nil, false
 	}
 	return o.OperState, true
@@ -333,7 +337,7 @@ func (o *AdapterHostIscsiInterface) GetOperStateOk() (*string, bool) {
 
 // HasOperState returns a boolean if a field has been set.
 func (o *AdapterHostIscsiInterface) HasOperState() bool {
-	if o != nil && o.OperState != nil {
+	if o != nil && !IsNil(o.OperState) {
 		return true
 	}
 
@@ -347,7 +351,7 @@ func (o *AdapterHostIscsiInterface) SetOperState(v string) {
 
 // GetOperability returns the Operability field value if set, zero value otherwise.
 func (o *AdapterHostIscsiInterface) GetOperability() string {
-	if o == nil || o.Operability == nil {
+	if o == nil || IsNil(o.Operability) {
 		var ret string
 		return ret
 	}
@@ -357,7 +361,7 @@ func (o *AdapterHostIscsiInterface) GetOperability() string {
 // GetOperabilityOk returns a tuple with the Operability field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AdapterHostIscsiInterface) GetOperabilityOk() (*string, bool) {
-	if o == nil || o.Operability == nil {
+	if o == nil || IsNil(o.Operability) {
 		return nil, false
 	}
 	return o.Operability, true
@@ -365,7 +369,7 @@ func (o *AdapterHostIscsiInterface) GetOperabilityOk() (*string, bool) {
 
 // HasOperability returns a boolean if a field has been set.
 func (o *AdapterHostIscsiInterface) HasOperability() bool {
-	if o != nil && o.Operability != nil {
+	if o != nil && !IsNil(o.Operability) {
 		return true
 	}
 
@@ -379,7 +383,7 @@ func (o *AdapterHostIscsiInterface) SetOperability(v string) {
 
 // GetPeerDn returns the PeerDn field value if set, zero value otherwise.
 func (o *AdapterHostIscsiInterface) GetPeerDn() string {
-	if o == nil || o.PeerDn == nil {
+	if o == nil || IsNil(o.PeerDn) {
 		var ret string
 		return ret
 	}
@@ -389,7 +393,7 @@ func (o *AdapterHostIscsiInterface) GetPeerDn() string {
 // GetPeerDnOk returns a tuple with the PeerDn field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AdapterHostIscsiInterface) GetPeerDnOk() (*string, bool) {
-	if o == nil || o.PeerDn == nil {
+	if o == nil || IsNil(o.PeerDn) {
 		return nil, false
 	}
 	return o.PeerDn, true
@@ -397,7 +401,7 @@ func (o *AdapterHostIscsiInterface) GetPeerDnOk() (*string, bool) {
 
 // HasPeerDn returns a boolean if a field has been set.
 func (o *AdapterHostIscsiInterface) HasPeerDn() bool {
-	if o != nil && o.PeerDn != nil {
+	if o != nil && !IsNil(o.PeerDn) {
 		return true
 	}
 
@@ -409,163 +413,222 @@ func (o *AdapterHostIscsiInterface) SetPeerDn(v string) {
 	o.PeerDn = &v
 }
 
-// GetAdapterUnit returns the AdapterUnit field value if set, zero value otherwise.
+// GetAdapterUnit returns the AdapterUnit field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *AdapterHostIscsiInterface) GetAdapterUnit() AdapterUnitRelationship {
-	if o == nil || o.AdapterUnit == nil {
+	if o == nil || IsNil(o.AdapterUnit.Get()) {
 		var ret AdapterUnitRelationship
 		return ret
 	}
-	return *o.AdapterUnit
+	return *o.AdapterUnit.Get()
 }
 
 // GetAdapterUnitOk returns a tuple with the AdapterUnit field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *AdapterHostIscsiInterface) GetAdapterUnitOk() (*AdapterUnitRelationship, bool) {
-	if o == nil || o.AdapterUnit == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.AdapterUnit, true
+	return o.AdapterUnit.Get(), o.AdapterUnit.IsSet()
 }
 
 // HasAdapterUnit returns a boolean if a field has been set.
 func (o *AdapterHostIscsiInterface) HasAdapterUnit() bool {
-	if o != nil && o.AdapterUnit != nil {
+	if o != nil && o.AdapterUnit.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetAdapterUnit gets a reference to the given AdapterUnitRelationship and assigns it to the AdapterUnit field.
+// SetAdapterUnit gets a reference to the given NullableAdapterUnitRelationship and assigns it to the AdapterUnit field.
 func (o *AdapterHostIscsiInterface) SetAdapterUnit(v AdapterUnitRelationship) {
-	o.AdapterUnit = &v
+	o.AdapterUnit.Set(&v)
 }
 
-// GetInventoryDeviceInfo returns the InventoryDeviceInfo field value if set, zero value otherwise.
+// SetAdapterUnitNil sets the value for AdapterUnit to be an explicit nil
+func (o *AdapterHostIscsiInterface) SetAdapterUnitNil() {
+	o.AdapterUnit.Set(nil)
+}
+
+// UnsetAdapterUnit ensures that no value is present for AdapterUnit, not even an explicit nil
+func (o *AdapterHostIscsiInterface) UnsetAdapterUnit() {
+	o.AdapterUnit.Unset()
+}
+
+// GetInventoryDeviceInfo returns the InventoryDeviceInfo field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *AdapterHostIscsiInterface) GetInventoryDeviceInfo() InventoryDeviceInfoRelationship {
-	if o == nil || o.InventoryDeviceInfo == nil {
+	if o == nil || IsNil(o.InventoryDeviceInfo.Get()) {
 		var ret InventoryDeviceInfoRelationship
 		return ret
 	}
-	return *o.InventoryDeviceInfo
+	return *o.InventoryDeviceInfo.Get()
 }
 
 // GetInventoryDeviceInfoOk returns a tuple with the InventoryDeviceInfo field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *AdapterHostIscsiInterface) GetInventoryDeviceInfoOk() (*InventoryDeviceInfoRelationship, bool) {
-	if o == nil || o.InventoryDeviceInfo == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.InventoryDeviceInfo, true
+	return o.InventoryDeviceInfo.Get(), o.InventoryDeviceInfo.IsSet()
 }
 
 // HasInventoryDeviceInfo returns a boolean if a field has been set.
 func (o *AdapterHostIscsiInterface) HasInventoryDeviceInfo() bool {
-	if o != nil && o.InventoryDeviceInfo != nil {
+	if o != nil && o.InventoryDeviceInfo.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetInventoryDeviceInfo gets a reference to the given InventoryDeviceInfoRelationship and assigns it to the InventoryDeviceInfo field.
+// SetInventoryDeviceInfo gets a reference to the given NullableInventoryDeviceInfoRelationship and assigns it to the InventoryDeviceInfo field.
 func (o *AdapterHostIscsiInterface) SetInventoryDeviceInfo(v InventoryDeviceInfoRelationship) {
-	o.InventoryDeviceInfo = &v
+	o.InventoryDeviceInfo.Set(&v)
 }
 
-// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise.
+// SetInventoryDeviceInfoNil sets the value for InventoryDeviceInfo to be an explicit nil
+func (o *AdapterHostIscsiInterface) SetInventoryDeviceInfoNil() {
+	o.InventoryDeviceInfo.Set(nil)
+}
+
+// UnsetInventoryDeviceInfo ensures that no value is present for InventoryDeviceInfo, not even an explicit nil
+func (o *AdapterHostIscsiInterface) UnsetInventoryDeviceInfo() {
+	o.InventoryDeviceInfo.Unset()
+}
+
+// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *AdapterHostIscsiInterface) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil || IsNil(o.RegisteredDevice.Get()) {
 		var ret AssetDeviceRegistrationRelationship
 		return ret
 	}
-	return *o.RegisteredDevice
+	return *o.RegisteredDevice.Get()
 }
 
 // GetRegisteredDeviceOk returns a tuple with the RegisteredDevice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *AdapterHostIscsiInterface) GetRegisteredDeviceOk() (*AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.RegisteredDevice, true
+	return o.RegisteredDevice.Get(), o.RegisteredDevice.IsSet()
 }
 
 // HasRegisteredDevice returns a boolean if a field has been set.
 func (o *AdapterHostIscsiInterface) HasRegisteredDevice() bool {
-	if o != nil && o.RegisteredDevice != nil {
+	if o != nil && o.RegisteredDevice.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRegisteredDevice gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
+// SetRegisteredDevice gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
 func (o *AdapterHostIscsiInterface) SetRegisteredDevice(v AssetDeviceRegistrationRelationship) {
-	o.RegisteredDevice = &v
+	o.RegisteredDevice.Set(&v)
+}
+
+// SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+func (o *AdapterHostIscsiInterface) SetRegisteredDeviceNil() {
+	o.RegisteredDevice.Set(nil)
+}
+
+// UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
+func (o *AdapterHostIscsiInterface) UnsetRegisteredDevice() {
+	o.RegisteredDevice.Unset()
 }
 
 func (o AdapterHostIscsiInterface) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o AdapterHostIscsiInterface) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedEquipmentBase, errEquipmentBase := json.Marshal(o.EquipmentBase)
 	if errEquipmentBase != nil {
-		return []byte{}, errEquipmentBase
+		return map[string]interface{}{}, errEquipmentBase
 	}
 	errEquipmentBase = json.Unmarshal([]byte(serializedEquipmentBase), &toSerialize)
 	if errEquipmentBase != nil {
-		return []byte{}, errEquipmentBase
+		return map[string]interface{}{}, errEquipmentBase
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.AdminState != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.AdminState) {
 		toSerialize["AdminState"] = o.AdminState
 	}
-	if o.EpDn != nil {
+	if !IsNil(o.EpDn) {
 		toSerialize["EpDn"] = o.EpDn
 	}
-	if o.HostIscsiInterfaceId != nil {
+	if !IsNil(o.HostIscsiInterfaceId) {
 		toSerialize["HostIscsiInterfaceId"] = o.HostIscsiInterfaceId
 	}
-	if o.HostVisible != nil {
+	if !IsNil(o.HostVisible) {
 		toSerialize["HostVisible"] = o.HostVisible
 	}
-	if o.MacAddress != nil {
+	if !IsNil(o.MacAddress) {
 		toSerialize["MacAddress"] = o.MacAddress
 	}
-	if o.Name != nil {
+	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
 	}
-	if o.OperState != nil {
+	if !IsNil(o.OperState) {
 		toSerialize["OperState"] = o.OperState
 	}
-	if o.Operability != nil {
+	if !IsNil(o.Operability) {
 		toSerialize["Operability"] = o.Operability
 	}
-	if o.PeerDn != nil {
+	if !IsNil(o.PeerDn) {
 		toSerialize["PeerDn"] = o.PeerDn
 	}
-	if o.AdapterUnit != nil {
-		toSerialize["AdapterUnit"] = o.AdapterUnit
+	if o.AdapterUnit.IsSet() {
+		toSerialize["AdapterUnit"] = o.AdapterUnit.Get()
 	}
-	if o.InventoryDeviceInfo != nil {
-		toSerialize["InventoryDeviceInfo"] = o.InventoryDeviceInfo
+	if o.InventoryDeviceInfo.IsSet() {
+		toSerialize["InventoryDeviceInfo"] = o.InventoryDeviceInfo.Get()
 	}
-	if o.RegisteredDevice != nil {
-		toSerialize["RegisteredDevice"] = o.RegisteredDevice
+	if o.RegisteredDevice.IsSet() {
+		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *AdapterHostIscsiInterface) UnmarshalJSON(bytes []byte) (err error) {
+func (o *AdapterHostIscsiInterface) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type AdapterHostIscsiInterfaceWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -588,15 +651,15 @@ func (o *AdapterHostIscsiInterface) UnmarshalJSON(bytes []byte) (err error) {
 		// Operability status of Host ISCSI Interface.
 		Operability *string `json:"Operability,omitempty"`
 		// PeerPort Dn of Host ISCSI Interface.
-		PeerDn              *string                              `json:"PeerDn,omitempty"`
-		AdapterUnit         *AdapterUnitRelationship             `json:"AdapterUnit,omitempty"`
-		InventoryDeviceInfo *InventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
-		RegisteredDevice    *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+		PeerDn              *string                                     `json:"PeerDn,omitempty"`
+		AdapterUnit         NullableAdapterUnitRelationship             `json:"AdapterUnit,omitempty"`
+		InventoryDeviceInfo NullableInventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
+		RegisteredDevice    NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	}
 
 	varAdapterHostIscsiInterfaceWithoutEmbeddedStruct := AdapterHostIscsiInterfaceWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varAdapterHostIscsiInterfaceWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varAdapterHostIscsiInterfaceWithoutEmbeddedStruct)
 	if err == nil {
 		varAdapterHostIscsiInterface := _AdapterHostIscsiInterface{}
 		varAdapterHostIscsiInterface.ClassId = varAdapterHostIscsiInterfaceWithoutEmbeddedStruct.ClassId
@@ -620,7 +683,7 @@ func (o *AdapterHostIscsiInterface) UnmarshalJSON(bytes []byte) (err error) {
 
 	varAdapterHostIscsiInterface := _AdapterHostIscsiInterface{}
 
-	err = json.Unmarshal(bytes, &varAdapterHostIscsiInterface)
+	err = json.Unmarshal(data, &varAdapterHostIscsiInterface)
 	if err == nil {
 		o.EquipmentBase = varAdapterHostIscsiInterface.EquipmentBase
 	} else {
@@ -629,7 +692,7 @@ func (o *AdapterHostIscsiInterface) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "AdminState")

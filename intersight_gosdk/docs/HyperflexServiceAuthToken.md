@@ -10,9 +10,9 @@ Name | Type | Description | Notes
 **CsiVersion** | Pointer to **string** | Version of Container Storage Interface (CSI) that the tokenOwner is associated with. | [optional] 
 **ServiceAuthToken** | Pointer to **string** | Service auth token that has been created by HyperFlex cluster. | [optional] [readonly] 
 **Status** | Pointer to **string** | Represents status of ervice auth claim or revocation. * &#x60;Unknown&#x60; - Unknown claim state of the service auth token. * &#x60;Claiming&#x60; - The service auth token claim is in progress. * &#x60;Claimed&#x60; - The service auth token has been successfully claimed. * &#x60;FailedToClaim&#x60; - Cannot claim the service auth token on the underlying HyperFlex cluster. * &#x60;Revoking&#x60; - The service auth token revocation is in progress. * &#x60;Revoked&#x60; - The service auth token revocation has been successfully revoked. * &#x60;FailedToRevoke&#x60; - Cannot revoke the service auth token on the underlying HyperFlex cluster. | [optional] [readonly] [default to "Unknown"]
-**Cluster** | Pointer to [**HyperflexClusterRelationship**](HyperflexClusterRelationship.md) |  | [optional] 
-**Organization** | Pointer to [**OrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
-**TokenOwner** | Pointer to [**MoBaseMoRelationship**](MoBaseMoRelationship.md) |  | [optional] 
+**Cluster** | Pointer to [**NullableHyperflexClusterRelationship**](HyperflexClusterRelationship.md) |  | [optional] 
+**Organization** | Pointer to [**NullableOrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
+**TokenOwner** | Pointer to [**NullableMoBaseMoRelationship**](MoBaseMoRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -198,6 +198,16 @@ SetCluster sets Cluster field to given value.
 
 HasCluster returns a boolean if a field has been set.
 
+### SetClusterNil
+
+`func (o *HyperflexServiceAuthToken) SetClusterNil(b bool)`
+
+ SetClusterNil sets the value for Cluster to be an explicit nil
+
+### UnsetCluster
+`func (o *HyperflexServiceAuthToken) UnsetCluster()`
+
+UnsetCluster ensures that no value is present for Cluster, not even an explicit nil
 ### GetOrganization
 
 `func (o *HyperflexServiceAuthToken) GetOrganization() OrganizationOrganizationRelationship`
@@ -223,6 +233,16 @@ SetOrganization sets Organization field to given value.
 
 HasOrganization returns a boolean if a field has been set.
 
+### SetOrganizationNil
+
+`func (o *HyperflexServiceAuthToken) SetOrganizationNil(b bool)`
+
+ SetOrganizationNil sets the value for Organization to be an explicit nil
+
+### UnsetOrganization
+`func (o *HyperflexServiceAuthToken) UnsetOrganization()`
+
+UnsetOrganization ensures that no value is present for Organization, not even an explicit nil
 ### GetTokenOwner
 
 `func (o *HyperflexServiceAuthToken) GetTokenOwner() MoBaseMoRelationship`
@@ -248,6 +268,16 @@ SetTokenOwner sets TokenOwner field to given value.
 
 HasTokenOwner returns a boolean if a field has been set.
 
+### SetTokenOwnerNil
+
+`func (o *HyperflexServiceAuthToken) SetTokenOwnerNil(b bool)`
+
+ SetTokenOwnerNil sets the value for TokenOwner to be an explicit nil
+
+### UnsetTokenOwner
+`func (o *HyperflexServiceAuthToken) UnsetTokenOwner()`
+
+UnsetTokenOwner ensures that no value is present for TokenOwner, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the FirmwareUnsupportedVersionUpgrade type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &FirmwareUnsupportedVersionUpgrade{}
 
 // FirmwareUnsupportedVersionUpgrade This represents an operation managed object used for upgrading equipment that cannot be discovered due to unsupported firmware. Currently, it only supports blade upgrades.
 type FirmwareUnsupportedVersionUpgrade struct {
@@ -25,10 +29,10 @@ type FirmwareUnsupportedVersionUpgrade struct {
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
 	// Workflow status of firmware upgrade. * `None` - Upgrade status is none when upgrade is in progress. * `Completed` - Upgrade completed successfully. * `Failed` - Upgrade status is failed when upgrade has failed.
-	UpgradeStatus        *string                                `json:"UpgradeStatus,omitempty"`
-	Device               *AssetDeviceRegistrationRelationship   `json:"Device,omitempty"`
-	Distributable        *FirmwareDistributableRelationship     `json:"Distributable,omitempty"`
-	PhysicalIdentity     *EquipmentPhysicalIdentityRelationship `json:"PhysicalIdentity,omitempty"`
+	UpgradeStatus        *string                                       `json:"UpgradeStatus,omitempty"`
+	Device               NullableAssetDeviceRegistrationRelationship   `json:"Device,omitempty"`
+	Distributable        NullableFirmwareDistributableRelationship     `json:"Distributable,omitempty"`
+	PhysicalIdentity     NullableEquipmentPhysicalIdentityRelationship `json:"PhysicalIdentity,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -111,7 +115,7 @@ func (o *FirmwareUnsupportedVersionUpgrade) SetObjectType(v string) {
 
 // GetUpgradeStatus returns the UpgradeStatus field value if set, zero value otherwise.
 func (o *FirmwareUnsupportedVersionUpgrade) GetUpgradeStatus() string {
-	if o == nil || o.UpgradeStatus == nil {
+	if o == nil || IsNil(o.UpgradeStatus) {
 		var ret string
 		return ret
 	}
@@ -121,7 +125,7 @@ func (o *FirmwareUnsupportedVersionUpgrade) GetUpgradeStatus() string {
 // GetUpgradeStatusOk returns a tuple with the UpgradeStatus field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FirmwareUnsupportedVersionUpgrade) GetUpgradeStatusOk() (*string, bool) {
-	if o == nil || o.UpgradeStatus == nil {
+	if o == nil || IsNil(o.UpgradeStatus) {
 		return nil, false
 	}
 	return o.UpgradeStatus, true
@@ -129,7 +133,7 @@ func (o *FirmwareUnsupportedVersionUpgrade) GetUpgradeStatusOk() (*string, bool)
 
 // HasUpgradeStatus returns a boolean if a field has been set.
 func (o *FirmwareUnsupportedVersionUpgrade) HasUpgradeStatus() bool {
-	if o != nil && o.UpgradeStatus != nil {
+	if o != nil && !IsNil(o.UpgradeStatus) {
 		return true
 	}
 
@@ -141,154 +145,213 @@ func (o *FirmwareUnsupportedVersionUpgrade) SetUpgradeStatus(v string) {
 	o.UpgradeStatus = &v
 }
 
-// GetDevice returns the Device field value if set, zero value otherwise.
+// GetDevice returns the Device field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *FirmwareUnsupportedVersionUpgrade) GetDevice() AssetDeviceRegistrationRelationship {
-	if o == nil || o.Device == nil {
+	if o == nil || IsNil(o.Device.Get()) {
 		var ret AssetDeviceRegistrationRelationship
 		return ret
 	}
-	return *o.Device
+	return *o.Device.Get()
 }
 
 // GetDeviceOk returns a tuple with the Device field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *FirmwareUnsupportedVersionUpgrade) GetDeviceOk() (*AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.Device == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Device, true
+	return o.Device.Get(), o.Device.IsSet()
 }
 
 // HasDevice returns a boolean if a field has been set.
 func (o *FirmwareUnsupportedVersionUpgrade) HasDevice() bool {
-	if o != nil && o.Device != nil {
+	if o != nil && o.Device.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetDevice gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the Device field.
+// SetDevice gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the Device field.
 func (o *FirmwareUnsupportedVersionUpgrade) SetDevice(v AssetDeviceRegistrationRelationship) {
-	o.Device = &v
+	o.Device.Set(&v)
 }
 
-// GetDistributable returns the Distributable field value if set, zero value otherwise.
+// SetDeviceNil sets the value for Device to be an explicit nil
+func (o *FirmwareUnsupportedVersionUpgrade) SetDeviceNil() {
+	o.Device.Set(nil)
+}
+
+// UnsetDevice ensures that no value is present for Device, not even an explicit nil
+func (o *FirmwareUnsupportedVersionUpgrade) UnsetDevice() {
+	o.Device.Unset()
+}
+
+// GetDistributable returns the Distributable field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *FirmwareUnsupportedVersionUpgrade) GetDistributable() FirmwareDistributableRelationship {
-	if o == nil || o.Distributable == nil {
+	if o == nil || IsNil(o.Distributable.Get()) {
 		var ret FirmwareDistributableRelationship
 		return ret
 	}
-	return *o.Distributable
+	return *o.Distributable.Get()
 }
 
 // GetDistributableOk returns a tuple with the Distributable field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *FirmwareUnsupportedVersionUpgrade) GetDistributableOk() (*FirmwareDistributableRelationship, bool) {
-	if o == nil || o.Distributable == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Distributable, true
+	return o.Distributable.Get(), o.Distributable.IsSet()
 }
 
 // HasDistributable returns a boolean if a field has been set.
 func (o *FirmwareUnsupportedVersionUpgrade) HasDistributable() bool {
-	if o != nil && o.Distributable != nil {
+	if o != nil && o.Distributable.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetDistributable gets a reference to the given FirmwareDistributableRelationship and assigns it to the Distributable field.
+// SetDistributable gets a reference to the given NullableFirmwareDistributableRelationship and assigns it to the Distributable field.
 func (o *FirmwareUnsupportedVersionUpgrade) SetDistributable(v FirmwareDistributableRelationship) {
-	o.Distributable = &v
+	o.Distributable.Set(&v)
 }
 
-// GetPhysicalIdentity returns the PhysicalIdentity field value if set, zero value otherwise.
+// SetDistributableNil sets the value for Distributable to be an explicit nil
+func (o *FirmwareUnsupportedVersionUpgrade) SetDistributableNil() {
+	o.Distributable.Set(nil)
+}
+
+// UnsetDistributable ensures that no value is present for Distributable, not even an explicit nil
+func (o *FirmwareUnsupportedVersionUpgrade) UnsetDistributable() {
+	o.Distributable.Unset()
+}
+
+// GetPhysicalIdentity returns the PhysicalIdentity field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *FirmwareUnsupportedVersionUpgrade) GetPhysicalIdentity() EquipmentPhysicalIdentityRelationship {
-	if o == nil || o.PhysicalIdentity == nil {
+	if o == nil || IsNil(o.PhysicalIdentity.Get()) {
 		var ret EquipmentPhysicalIdentityRelationship
 		return ret
 	}
-	return *o.PhysicalIdentity
+	return *o.PhysicalIdentity.Get()
 }
 
 // GetPhysicalIdentityOk returns a tuple with the PhysicalIdentity field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *FirmwareUnsupportedVersionUpgrade) GetPhysicalIdentityOk() (*EquipmentPhysicalIdentityRelationship, bool) {
-	if o == nil || o.PhysicalIdentity == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.PhysicalIdentity, true
+	return o.PhysicalIdentity.Get(), o.PhysicalIdentity.IsSet()
 }
 
 // HasPhysicalIdentity returns a boolean if a field has been set.
 func (o *FirmwareUnsupportedVersionUpgrade) HasPhysicalIdentity() bool {
-	if o != nil && o.PhysicalIdentity != nil {
+	if o != nil && o.PhysicalIdentity.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetPhysicalIdentity gets a reference to the given EquipmentPhysicalIdentityRelationship and assigns it to the PhysicalIdentity field.
+// SetPhysicalIdentity gets a reference to the given NullableEquipmentPhysicalIdentityRelationship and assigns it to the PhysicalIdentity field.
 func (o *FirmwareUnsupportedVersionUpgrade) SetPhysicalIdentity(v EquipmentPhysicalIdentityRelationship) {
-	o.PhysicalIdentity = &v
+	o.PhysicalIdentity.Set(&v)
+}
+
+// SetPhysicalIdentityNil sets the value for PhysicalIdentity to be an explicit nil
+func (o *FirmwareUnsupportedVersionUpgrade) SetPhysicalIdentityNil() {
+	o.PhysicalIdentity.Set(nil)
+}
+
+// UnsetPhysicalIdentity ensures that no value is present for PhysicalIdentity, not even an explicit nil
+func (o *FirmwareUnsupportedVersionUpgrade) UnsetPhysicalIdentity() {
+	o.PhysicalIdentity.Unset()
 }
 
 func (o FirmwareUnsupportedVersionUpgrade) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o FirmwareUnsupportedVersionUpgrade) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedConnectorDownloadStatus, errConnectorDownloadStatus := json.Marshal(o.ConnectorDownloadStatus)
 	if errConnectorDownloadStatus != nil {
-		return []byte{}, errConnectorDownloadStatus
+		return map[string]interface{}{}, errConnectorDownloadStatus
 	}
 	errConnectorDownloadStatus = json.Unmarshal([]byte(serializedConnectorDownloadStatus), &toSerialize)
 	if errConnectorDownloadStatus != nil {
-		return []byte{}, errConnectorDownloadStatus
+		return map[string]interface{}{}, errConnectorDownloadStatus
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.UpgradeStatus != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.UpgradeStatus) {
 		toSerialize["UpgradeStatus"] = o.UpgradeStatus
 	}
-	if o.Device != nil {
-		toSerialize["Device"] = o.Device
+	if o.Device.IsSet() {
+		toSerialize["Device"] = o.Device.Get()
 	}
-	if o.Distributable != nil {
-		toSerialize["Distributable"] = o.Distributable
+	if o.Distributable.IsSet() {
+		toSerialize["Distributable"] = o.Distributable.Get()
 	}
-	if o.PhysicalIdentity != nil {
-		toSerialize["PhysicalIdentity"] = o.PhysicalIdentity
+	if o.PhysicalIdentity.IsSet() {
+		toSerialize["PhysicalIdentity"] = o.PhysicalIdentity.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *FirmwareUnsupportedVersionUpgrade) UnmarshalJSON(bytes []byte) (err error) {
+func (o *FirmwareUnsupportedVersionUpgrade) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type FirmwareUnsupportedVersionUpgradeWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 		ObjectType string `json:"ObjectType"`
 		// Workflow status of firmware upgrade. * `None` - Upgrade status is none when upgrade is in progress. * `Completed` - Upgrade completed successfully. * `Failed` - Upgrade status is failed when upgrade has failed.
-		UpgradeStatus    *string                                `json:"UpgradeStatus,omitempty"`
-		Device           *AssetDeviceRegistrationRelationship   `json:"Device,omitempty"`
-		Distributable    *FirmwareDistributableRelationship     `json:"Distributable,omitempty"`
-		PhysicalIdentity *EquipmentPhysicalIdentityRelationship `json:"PhysicalIdentity,omitempty"`
+		UpgradeStatus    *string                                       `json:"UpgradeStatus,omitempty"`
+		Device           NullableAssetDeviceRegistrationRelationship   `json:"Device,omitempty"`
+		Distributable    NullableFirmwareDistributableRelationship     `json:"Distributable,omitempty"`
+		PhysicalIdentity NullableEquipmentPhysicalIdentityRelationship `json:"PhysicalIdentity,omitempty"`
 	}
 
 	varFirmwareUnsupportedVersionUpgradeWithoutEmbeddedStruct := FirmwareUnsupportedVersionUpgradeWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varFirmwareUnsupportedVersionUpgradeWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varFirmwareUnsupportedVersionUpgradeWithoutEmbeddedStruct)
 	if err == nil {
 		varFirmwareUnsupportedVersionUpgrade := _FirmwareUnsupportedVersionUpgrade{}
 		varFirmwareUnsupportedVersionUpgrade.ClassId = varFirmwareUnsupportedVersionUpgradeWithoutEmbeddedStruct.ClassId
@@ -304,7 +367,7 @@ func (o *FirmwareUnsupportedVersionUpgrade) UnmarshalJSON(bytes []byte) (err err
 
 	varFirmwareUnsupportedVersionUpgrade := _FirmwareUnsupportedVersionUpgrade{}
 
-	err = json.Unmarshal(bytes, &varFirmwareUnsupportedVersionUpgrade)
+	err = json.Unmarshal(data, &varFirmwareUnsupportedVersionUpgrade)
 	if err == nil {
 		o.ConnectorDownloadStatus = varFirmwareUnsupportedVersionUpgrade.ConnectorDownloadStatus
 	} else {
@@ -313,7 +376,7 @@ func (o *FirmwareUnsupportedVersionUpgrade) UnmarshalJSON(bytes []byte) (err err
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "UpgradeStatus")

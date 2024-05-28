@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the OsCatalog type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &OsCatalog{}
 
 // OsCatalog A catalog of operating systems related objects such as configuration files and post install scripts. Each user account will have a local OS catalog where account users can store their private configuration files and post install scripts. Cisco provides validated answer files and post install scripts to Intersight users via shared catalogs. Intersight users will be able to read, use these files and scripts in OS installation within their account context. The shared catalogs will be managed entirely by Cisco. Contributions to shared catalogs will need to be provided to Cisco who will publish them at their own discretion.
 type OsCatalog struct {
@@ -29,8 +33,8 @@ type OsCatalog struct {
 	// An array of relationships to osConfigurationFile resources.
 	ConfigurationFiles []OsConfigurationFileRelationship `json:"ConfigurationFiles,omitempty"`
 	// An array of relationships to osDistribution resources.
-	Distributions        []OsDistributionRelationship          `json:"Distributions,omitempty"`
-	Organization         *OrganizationOrganizationRelationship `json:"Organization,omitempty"`
+	Distributions        []OsDistributionRelationship                 `json:"Distributions,omitempty"`
+	Organization         NullableOrganizationOrganizationRelationship `json:"Organization,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -109,7 +113,7 @@ func (o *OsCatalog) SetObjectType(v string) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *OsCatalog) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -119,7 +123,7 @@ func (o *OsCatalog) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OsCatalog) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -127,7 +131,7 @@ func (o *OsCatalog) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *OsCatalog) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -152,7 +156,7 @@ func (o *OsCatalog) GetConfigurationFiles() []OsConfigurationFileRelationship {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *OsCatalog) GetConfigurationFilesOk() ([]OsConfigurationFileRelationship, bool) {
-	if o == nil || o.ConfigurationFiles == nil {
+	if o == nil || IsNil(o.ConfigurationFiles) {
 		return nil, false
 	}
 	return o.ConfigurationFiles, true
@@ -160,7 +164,7 @@ func (o *OsCatalog) GetConfigurationFilesOk() ([]OsConfigurationFileRelationship
 
 // HasConfigurationFiles returns a boolean if a field has been set.
 func (o *OsCatalog) HasConfigurationFiles() bool {
-	if o != nil && o.ConfigurationFiles != nil {
+	if o != nil && IsNil(o.ConfigurationFiles) {
 		return true
 	}
 
@@ -185,7 +189,7 @@ func (o *OsCatalog) GetDistributions() []OsDistributionRelationship {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *OsCatalog) GetDistributionsOk() ([]OsDistributionRelationship, bool) {
-	if o == nil || o.Distributions == nil {
+	if o == nil || IsNil(o.Distributions) {
 		return nil, false
 	}
 	return o.Distributions, true
@@ -193,7 +197,7 @@ func (o *OsCatalog) GetDistributionsOk() ([]OsDistributionRelationship, bool) {
 
 // HasDistributions returns a boolean if a field has been set.
 func (o *OsCatalog) HasDistributions() bool {
-	if o != nil && o.Distributions != nil {
+	if o != nil && IsNil(o.Distributions) {
 		return true
 	}
 
@@ -205,55 +209,70 @@ func (o *OsCatalog) SetDistributions(v []OsDistributionRelationship) {
 	o.Distributions = v
 }
 
-// GetOrganization returns the Organization field value if set, zero value otherwise.
+// GetOrganization returns the Organization field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *OsCatalog) GetOrganization() OrganizationOrganizationRelationship {
-	if o == nil || o.Organization == nil {
+	if o == nil || IsNil(o.Organization.Get()) {
 		var ret OrganizationOrganizationRelationship
 		return ret
 	}
-	return *o.Organization
+	return *o.Organization.Get()
 }
 
 // GetOrganizationOk returns a tuple with the Organization field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *OsCatalog) GetOrganizationOk() (*OrganizationOrganizationRelationship, bool) {
-	if o == nil || o.Organization == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Organization, true
+	return o.Organization.Get(), o.Organization.IsSet()
 }
 
 // HasOrganization returns a boolean if a field has been set.
 func (o *OsCatalog) HasOrganization() bool {
-	if o != nil && o.Organization != nil {
+	if o != nil && o.Organization.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetOrganization gets a reference to the given OrganizationOrganizationRelationship and assigns it to the Organization field.
+// SetOrganization gets a reference to the given NullableOrganizationOrganizationRelationship and assigns it to the Organization field.
 func (o *OsCatalog) SetOrganization(v OrganizationOrganizationRelationship) {
-	o.Organization = &v
+	o.Organization.Set(&v)
+}
+
+// SetOrganizationNil sets the value for Organization to be an explicit nil
+func (o *OsCatalog) SetOrganizationNil() {
+	o.Organization.Set(nil)
+}
+
+// UnsetOrganization ensures that no value is present for Organization, not even an explicit nil
+func (o *OsCatalog) UnsetOrganization() {
+	o.Organization.Unset()
 }
 
 func (o OsCatalog) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o OsCatalog) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Name != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
 	}
 	if o.ConfigurationFiles != nil {
@@ -262,18 +281,40 @@ func (o OsCatalog) MarshalJSON() ([]byte, error) {
 	if o.Distributions != nil {
 		toSerialize["Distributions"] = o.Distributions
 	}
-	if o.Organization != nil {
-		toSerialize["Organization"] = o.Organization
+	if o.Organization.IsSet() {
+		toSerialize["Organization"] = o.Organization.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *OsCatalog) UnmarshalJSON(bytes []byte) (err error) {
+func (o *OsCatalog) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type OsCatalogWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -284,13 +325,13 @@ func (o *OsCatalog) UnmarshalJSON(bytes []byte) (err error) {
 		// An array of relationships to osConfigurationFile resources.
 		ConfigurationFiles []OsConfigurationFileRelationship `json:"ConfigurationFiles,omitempty"`
 		// An array of relationships to osDistribution resources.
-		Distributions []OsDistributionRelationship          `json:"Distributions,omitempty"`
-		Organization  *OrganizationOrganizationRelationship `json:"Organization,omitempty"`
+		Distributions []OsDistributionRelationship                 `json:"Distributions,omitempty"`
+		Organization  NullableOrganizationOrganizationRelationship `json:"Organization,omitempty"`
 	}
 
 	varOsCatalogWithoutEmbeddedStruct := OsCatalogWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varOsCatalogWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varOsCatalogWithoutEmbeddedStruct)
 	if err == nil {
 		varOsCatalog := _OsCatalog{}
 		varOsCatalog.ClassId = varOsCatalogWithoutEmbeddedStruct.ClassId
@@ -306,7 +347,7 @@ func (o *OsCatalog) UnmarshalJSON(bytes []byte) (err error) {
 
 	varOsCatalog := _OsCatalog{}
 
-	err = json.Unmarshal(bytes, &varOsCatalog)
+	err = json.Unmarshal(data, &varOsCatalog)
 	if err == nil {
 		o.MoBaseMo = varOsCatalog.MoBaseMo
 	} else {
@@ -315,7 +356,7 @@ func (o *OsCatalog) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Name")

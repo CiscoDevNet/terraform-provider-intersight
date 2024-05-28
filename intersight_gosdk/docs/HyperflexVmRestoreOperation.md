@@ -9,10 +9,10 @@ Name | Type | Description | Notes
 **NewName** | Pointer to **string** | New name for the Virtual Machine after recovery. | [optional] 
 **PowerOn** | Pointer to **bool** | Power on the Virtual Machine after recovery. | [optional] [default to true]
 **StartTime** | Pointer to **int64** | Start time for the replication. | [optional] 
-**Organization** | Pointer to [**OrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
-**RestoreEdgeClusterMoid** | Pointer to [**HyperflexClusterRelationship**](HyperflexClusterRelationship.md) |  | [optional] 
-**VmBackupInfoMoid** | Pointer to [**HyperflexVmBackupInfoRelationship**](HyperflexVmBackupInfoRelationship.md) |  | [optional] 
-**VmSnapshotInfoMoid** | Pointer to [**HyperflexVmSnapshotInfoRelationship**](HyperflexVmSnapshotInfoRelationship.md) |  | [optional] 
+**Organization** | Pointer to [**NullableOrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
+**RestoreEdgeClusterMoid** | Pointer to [**NullableHyperflexClusterRelationship**](HyperflexClusterRelationship.md) |  | [optional] 
+**VmBackupInfoMoid** | Pointer to [**NullableHyperflexVmBackupInfoRelationship**](HyperflexVmBackupInfoRelationship.md) |  | [optional] 
+**VmSnapshotInfoMoid** | Pointer to [**NullableHyperflexVmSnapshotInfoRelationship**](HyperflexVmSnapshotInfoRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -173,6 +173,16 @@ SetOrganization sets Organization field to given value.
 
 HasOrganization returns a boolean if a field has been set.
 
+### SetOrganizationNil
+
+`func (o *HyperflexVmRestoreOperation) SetOrganizationNil(b bool)`
+
+ SetOrganizationNil sets the value for Organization to be an explicit nil
+
+### UnsetOrganization
+`func (o *HyperflexVmRestoreOperation) UnsetOrganization()`
+
+UnsetOrganization ensures that no value is present for Organization, not even an explicit nil
 ### GetRestoreEdgeClusterMoid
 
 `func (o *HyperflexVmRestoreOperation) GetRestoreEdgeClusterMoid() HyperflexClusterRelationship`
@@ -198,6 +208,16 @@ SetRestoreEdgeClusterMoid sets RestoreEdgeClusterMoid field to given value.
 
 HasRestoreEdgeClusterMoid returns a boolean if a field has been set.
 
+### SetRestoreEdgeClusterMoidNil
+
+`func (o *HyperflexVmRestoreOperation) SetRestoreEdgeClusterMoidNil(b bool)`
+
+ SetRestoreEdgeClusterMoidNil sets the value for RestoreEdgeClusterMoid to be an explicit nil
+
+### UnsetRestoreEdgeClusterMoid
+`func (o *HyperflexVmRestoreOperation) UnsetRestoreEdgeClusterMoid()`
+
+UnsetRestoreEdgeClusterMoid ensures that no value is present for RestoreEdgeClusterMoid, not even an explicit nil
 ### GetVmBackupInfoMoid
 
 `func (o *HyperflexVmRestoreOperation) GetVmBackupInfoMoid() HyperflexVmBackupInfoRelationship`
@@ -223,6 +243,16 @@ SetVmBackupInfoMoid sets VmBackupInfoMoid field to given value.
 
 HasVmBackupInfoMoid returns a boolean if a field has been set.
 
+### SetVmBackupInfoMoidNil
+
+`func (o *HyperflexVmRestoreOperation) SetVmBackupInfoMoidNil(b bool)`
+
+ SetVmBackupInfoMoidNil sets the value for VmBackupInfoMoid to be an explicit nil
+
+### UnsetVmBackupInfoMoid
+`func (o *HyperflexVmRestoreOperation) UnsetVmBackupInfoMoid()`
+
+UnsetVmBackupInfoMoid ensures that no value is present for VmBackupInfoMoid, not even an explicit nil
 ### GetVmSnapshotInfoMoid
 
 `func (o *HyperflexVmRestoreOperation) GetVmSnapshotInfoMoid() HyperflexVmSnapshotInfoRelationship`
@@ -248,6 +278,16 @@ SetVmSnapshotInfoMoid sets VmSnapshotInfoMoid field to given value.
 
 HasVmSnapshotInfoMoid returns a boolean if a field has been set.
 
+### SetVmSnapshotInfoMoidNil
+
+`func (o *HyperflexVmRestoreOperation) SetVmSnapshotInfoMoidNil(b bool)`
+
+ SetVmSnapshotInfoMoidNil sets the value for VmSnapshotInfoMoid to be an explicit nil
+
+### UnsetVmSnapshotInfoMoid
+`func (o *HyperflexVmRestoreOperation) UnsetVmSnapshotInfoMoid()`
+
+UnsetVmSnapshotInfoMoid ensures that no value is present for VmSnapshotInfoMoid, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

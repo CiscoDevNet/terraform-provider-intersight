@@ -13,10 +13,10 @@ Name | Type | Description | Notes
 **OperState** | Pointer to **string** | Denotes if the operating is pending, in_progress, completed_ok, completed_error. * &#x60;Pending&#x60; - The initial value of the OperStatus. * &#x60;InProgress&#x60; - The OperStatus value will be InProgress during execution. * &#x60;CompletedOk&#x60; - The API is successful with operation then OperStatus will be marked as CompletedOk. * &#x60;CompletedError&#x60; - The API is failed with operation then OperStatus will be marked as CompletedError. * &#x60;CompletedWarning&#x60; - The API is completed with some warning then OperStatus will be CompletedWarning. | [optional] [readonly] [default to "Pending"]
 **ServerConfigs** | Pointer to [**[]OsServerConfig**](OsServerConfig.md) |  | [optional] 
 **ValidationInfos** | Pointer to [**[]OsValidationInformation**](OsValidationInformation.md) |  | [optional] 
-**ConfigurationFile** | Pointer to [**OsConfigurationFileRelationship**](OsConfigurationFileRelationship.md) |  | [optional] 
-**Organization** | Pointer to [**OrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
-**OsImage** | Pointer to [**SoftwarerepositoryOperatingSystemFileRelationship**](SoftwarerepositoryOperatingSystemFileRelationship.md) |  | [optional] 
-**ScuImage** | Pointer to [**FirmwareServerConfigurationUtilityDistributableRelationship**](FirmwareServerConfigurationUtilityDistributableRelationship.md) |  | [optional] 
+**ConfigurationFile** | Pointer to [**NullableOsConfigurationFileRelationship**](OsConfigurationFileRelationship.md) |  | [optional] 
+**Organization** | Pointer to [**NullableOrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
+**OsImage** | Pointer to [**NullableSoftwarerepositoryOperatingSystemFileRelationship**](SoftwarerepositoryOperatingSystemFileRelationship.md) |  | [optional] 
+**ScuImage** | Pointer to [**NullableFirmwareServerConfigurationUtilityDistributableRelationship**](FirmwareServerConfigurationUtilityDistributableRelationship.md) |  | [optional] 
 **Servers** | Pointer to [**[]ComputePhysicalRelationship**](ComputePhysicalRelationship.md) | An array of relationships to computePhysical resources. | [optional] 
 
 ## Methods
@@ -308,6 +308,16 @@ SetConfigurationFile sets ConfigurationFile field to given value.
 
 HasConfigurationFile returns a boolean if a field has been set.
 
+### SetConfigurationFileNil
+
+`func (o *OsBulkInstallInfo) SetConfigurationFileNil(b bool)`
+
+ SetConfigurationFileNil sets the value for ConfigurationFile to be an explicit nil
+
+### UnsetConfigurationFile
+`func (o *OsBulkInstallInfo) UnsetConfigurationFile()`
+
+UnsetConfigurationFile ensures that no value is present for ConfigurationFile, not even an explicit nil
 ### GetOrganization
 
 `func (o *OsBulkInstallInfo) GetOrganization() OrganizationOrganizationRelationship`
@@ -333,6 +343,16 @@ SetOrganization sets Organization field to given value.
 
 HasOrganization returns a boolean if a field has been set.
 
+### SetOrganizationNil
+
+`func (o *OsBulkInstallInfo) SetOrganizationNil(b bool)`
+
+ SetOrganizationNil sets the value for Organization to be an explicit nil
+
+### UnsetOrganization
+`func (o *OsBulkInstallInfo) UnsetOrganization()`
+
+UnsetOrganization ensures that no value is present for Organization, not even an explicit nil
 ### GetOsImage
 
 `func (o *OsBulkInstallInfo) GetOsImage() SoftwarerepositoryOperatingSystemFileRelationship`
@@ -358,6 +378,16 @@ SetOsImage sets OsImage field to given value.
 
 HasOsImage returns a boolean if a field has been set.
 
+### SetOsImageNil
+
+`func (o *OsBulkInstallInfo) SetOsImageNil(b bool)`
+
+ SetOsImageNil sets the value for OsImage to be an explicit nil
+
+### UnsetOsImage
+`func (o *OsBulkInstallInfo) UnsetOsImage()`
+
+UnsetOsImage ensures that no value is present for OsImage, not even an explicit nil
 ### GetScuImage
 
 `func (o *OsBulkInstallInfo) GetScuImage() FirmwareServerConfigurationUtilityDistributableRelationship`
@@ -383,6 +413,16 @@ SetScuImage sets ScuImage field to given value.
 
 HasScuImage returns a boolean if a field has been set.
 
+### SetScuImageNil
+
+`func (o *OsBulkInstallInfo) SetScuImageNil(b bool)`
+
+ SetScuImageNil sets the value for ScuImage to be an explicit nil
+
+### UnsetScuImage
+`func (o *OsBulkInstallInfo) UnsetScuImage()`
+
+UnsetScuImage ensures that no value is present for ScuImage, not even an explicit nil
 ### GetServers
 
 `func (o *OsBulkInstallInfo) GetServers() []ComputePhysicalRelationship`

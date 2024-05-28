@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,10 +13,14 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 	"time"
 )
+
+// checks if the MoVersionContext type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &MoVersionContext{}
 
 // MoVersionContext VersionContext contains the versioning info for an object.
 type MoVersionContext struct {
@@ -124,7 +128,7 @@ func (o *MoVersionContext) GetInterestedMos() []MoMoRef {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *MoVersionContext) GetInterestedMosOk() ([]MoMoRef, bool) {
-	if o == nil || o.InterestedMos == nil {
+	if o == nil || IsNil(o.InterestedMos) {
 		return nil, false
 	}
 	return o.InterestedMos, true
@@ -132,7 +136,7 @@ func (o *MoVersionContext) GetInterestedMosOk() ([]MoMoRef, bool) {
 
 // HasInterestedMos returns a boolean if a field has been set.
 func (o *MoVersionContext) HasInterestedMos() bool {
-	if o != nil && o.InterestedMos != nil {
+	if o != nil && IsNil(o.InterestedMos) {
 		return true
 	}
 
@@ -146,7 +150,7 @@ func (o *MoVersionContext) SetInterestedMos(v []MoMoRef) {
 
 // GetMarkedForDeletion returns the MarkedForDeletion field value if set, zero value otherwise.
 func (o *MoVersionContext) GetMarkedForDeletion() bool {
-	if o == nil || o.MarkedForDeletion == nil {
+	if o == nil || IsNil(o.MarkedForDeletion) {
 		var ret bool
 		return ret
 	}
@@ -156,7 +160,7 @@ func (o *MoVersionContext) GetMarkedForDeletion() bool {
 // GetMarkedForDeletionOk returns a tuple with the MarkedForDeletion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *MoVersionContext) GetMarkedForDeletionOk() (*bool, bool) {
-	if o == nil || o.MarkedForDeletion == nil {
+	if o == nil || IsNil(o.MarkedForDeletion) {
 		return nil, false
 	}
 	return o.MarkedForDeletion, true
@@ -164,7 +168,7 @@ func (o *MoVersionContext) GetMarkedForDeletionOk() (*bool, bool) {
 
 // HasMarkedForDeletion returns a boolean if a field has been set.
 func (o *MoVersionContext) HasMarkedForDeletion() bool {
-	if o != nil && o.MarkedForDeletion != nil {
+	if o != nil && !IsNil(o.MarkedForDeletion) {
 		return true
 	}
 
@@ -178,7 +182,7 @@ func (o *MoVersionContext) SetMarkedForDeletion(v bool) {
 
 // GetRefMo returns the RefMo field value if set, zero value otherwise.
 func (o *MoVersionContext) GetRefMo() MoMoRef {
-	if o == nil || o.RefMo == nil {
+	if o == nil || IsNil(o.RefMo) {
 		var ret MoMoRef
 		return ret
 	}
@@ -188,7 +192,7 @@ func (o *MoVersionContext) GetRefMo() MoMoRef {
 // GetRefMoOk returns a tuple with the RefMo field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *MoVersionContext) GetRefMoOk() (*MoMoRef, bool) {
-	if o == nil || o.RefMo == nil {
+	if o == nil || IsNil(o.RefMo) {
 		return nil, false
 	}
 	return o.RefMo, true
@@ -196,7 +200,7 @@ func (o *MoVersionContext) GetRefMoOk() (*MoMoRef, bool) {
 
 // HasRefMo returns a boolean if a field has been set.
 func (o *MoVersionContext) HasRefMo() bool {
-	if o != nil && o.RefMo != nil {
+	if o != nil && !IsNil(o.RefMo) {
 		return true
 	}
 
@@ -210,7 +214,7 @@ func (o *MoVersionContext) SetRefMo(v MoMoRef) {
 
 // GetTimestamp returns the Timestamp field value if set, zero value otherwise.
 func (o *MoVersionContext) GetTimestamp() time.Time {
-	if o == nil || o.Timestamp == nil {
+	if o == nil || IsNil(o.Timestamp) {
 		var ret time.Time
 		return ret
 	}
@@ -220,7 +224,7 @@ func (o *MoVersionContext) GetTimestamp() time.Time {
 // GetTimestampOk returns a tuple with the Timestamp field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *MoVersionContext) GetTimestampOk() (*time.Time, bool) {
-	if o == nil || o.Timestamp == nil {
+	if o == nil || IsNil(o.Timestamp) {
 		return nil, false
 	}
 	return o.Timestamp, true
@@ -228,7 +232,7 @@ func (o *MoVersionContext) GetTimestampOk() (*time.Time, bool) {
 
 // HasTimestamp returns a boolean if a field has been set.
 func (o *MoVersionContext) HasTimestamp() bool {
-	if o != nil && o.Timestamp != nil {
+	if o != nil && !IsNil(o.Timestamp) {
 		return true
 	}
 
@@ -242,7 +246,7 @@ func (o *MoVersionContext) SetTimestamp(v time.Time) {
 
 // GetVersion returns the Version field value if set, zero value otherwise.
 func (o *MoVersionContext) GetVersion() string {
-	if o == nil || o.Version == nil {
+	if o == nil || IsNil(o.Version) {
 		var ret string
 		return ret
 	}
@@ -252,7 +256,7 @@ func (o *MoVersionContext) GetVersion() string {
 // GetVersionOk returns a tuple with the Version field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *MoVersionContext) GetVersionOk() (*string, bool) {
-	if o == nil || o.Version == nil {
+	if o == nil || IsNil(o.Version) {
 		return nil, false
 	}
 	return o.Version, true
@@ -260,7 +264,7 @@ func (o *MoVersionContext) GetVersionOk() (*string, bool) {
 
 // HasVersion returns a boolean if a field has been set.
 func (o *MoVersionContext) HasVersion() bool {
-	if o != nil && o.Version != nil {
+	if o != nil && !IsNil(o.Version) {
 		return true
 	}
 
@@ -274,7 +278,7 @@ func (o *MoVersionContext) SetVersion(v string) {
 
 // GetVersionType returns the VersionType field value if set, zero value otherwise.
 func (o *MoVersionContext) GetVersionType() string {
-	if o == nil || o.VersionType == nil {
+	if o == nil || IsNil(o.VersionType) {
 		var ret string
 		return ret
 	}
@@ -284,7 +288,7 @@ func (o *MoVersionContext) GetVersionType() string {
 // GetVersionTypeOk returns a tuple with the VersionType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *MoVersionContext) GetVersionTypeOk() (*string, bool) {
-	if o == nil || o.VersionType == nil {
+	if o == nil || IsNil(o.VersionType) {
 		return nil, false
 	}
 	return o.VersionType, true
@@ -292,7 +296,7 @@ func (o *MoVersionContext) GetVersionTypeOk() (*string, bool) {
 
 // HasVersionType returns a boolean if a field has been set.
 func (o *MoVersionContext) HasVersionType() bool {
-	if o != nil && o.VersionType != nil {
+	if o != nil && !IsNil(o.VersionType) {
 		return true
 	}
 
@@ -305,37 +309,41 @@ func (o *MoVersionContext) SetVersionType(v string) {
 }
 
 func (o MoVersionContext) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o MoVersionContext) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
 	errMoBaseComplexType = json.Unmarshal([]byte(serializedMoBaseComplexType), &toSerialize)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
 	if o.InterestedMos != nil {
 		toSerialize["InterestedMos"] = o.InterestedMos
 	}
-	if o.MarkedForDeletion != nil {
+	if !IsNil(o.MarkedForDeletion) {
 		toSerialize["MarkedForDeletion"] = o.MarkedForDeletion
 	}
-	if o.RefMo != nil {
+	if !IsNil(o.RefMo) {
 		toSerialize["RefMo"] = o.RefMo
 	}
-	if o.Timestamp != nil {
+	if !IsNil(o.Timestamp) {
 		toSerialize["Timestamp"] = o.Timestamp
 	}
-	if o.Version != nil {
+	if !IsNil(o.Version) {
 		toSerialize["Version"] = o.Version
 	}
-	if o.VersionType != nil {
+	if !IsNil(o.VersionType) {
 		toSerialize["VersionType"] = o.VersionType
 	}
 
@@ -343,10 +351,32 @@ func (o MoVersionContext) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *MoVersionContext) UnmarshalJSON(bytes []byte) (err error) {
+func (o *MoVersionContext) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type MoVersionContextWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -366,7 +396,7 @@ func (o *MoVersionContext) UnmarshalJSON(bytes []byte) (err error) {
 
 	varMoVersionContextWithoutEmbeddedStruct := MoVersionContextWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varMoVersionContextWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varMoVersionContextWithoutEmbeddedStruct)
 	if err == nil {
 		varMoVersionContext := _MoVersionContext{}
 		varMoVersionContext.ClassId = varMoVersionContextWithoutEmbeddedStruct.ClassId
@@ -384,7 +414,7 @@ func (o *MoVersionContext) UnmarshalJSON(bytes []byte) (err error) {
 
 	varMoVersionContext := _MoVersionContext{}
 
-	err = json.Unmarshal(bytes, &varMoVersionContext)
+	err = json.Unmarshal(data, &varMoVersionContext)
 	if err == nil {
 		o.MoBaseComplexType = varMoVersionContext.MoBaseComplexType
 	} else {
@@ -393,7 +423,7 @@ func (o *MoVersionContext) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "InterestedMos")

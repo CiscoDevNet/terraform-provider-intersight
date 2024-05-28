@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the NiatelemetryMsoSiteDetails type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &NiatelemetryMsoSiteDetails{}
 
 // NiatelemetryMsoSiteDetails Details of sites in Multi-Site Orchestrator.
 type NiatelemetryMsoSiteDetails struct {
@@ -39,8 +43,8 @@ type NiatelemetryMsoSiteDetails struct {
 	// Name of the site in Multi-Site Orchestrator.
 	SiteName *string `json:"SiteName,omitempty"`
 	// Version of the controller in the site.
-	SiteVersion          *string                              `json:"SiteVersion,omitempty"`
-	RegisteredDevice     *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+	SiteVersion          *string                                     `json:"SiteVersion,omitempty"`
+	RegisteredDevice     NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -119,7 +123,7 @@ func (o *NiatelemetryMsoSiteDetails) SetObjectType(v string) {
 
 // GetIsCloudSecEnabled returns the IsCloudSecEnabled field value if set, zero value otherwise.
 func (o *NiatelemetryMsoSiteDetails) GetIsCloudSecEnabled() string {
-	if o == nil || o.IsCloudSecEnabled == nil {
+	if o == nil || IsNil(o.IsCloudSecEnabled) {
 		var ret string
 		return ret
 	}
@@ -129,7 +133,7 @@ func (o *NiatelemetryMsoSiteDetails) GetIsCloudSecEnabled() string {
 // GetIsCloudSecEnabledOk returns a tuple with the IsCloudSecEnabled field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryMsoSiteDetails) GetIsCloudSecEnabledOk() (*string, bool) {
-	if o == nil || o.IsCloudSecEnabled == nil {
+	if o == nil || IsNil(o.IsCloudSecEnabled) {
 		return nil, false
 	}
 	return o.IsCloudSecEnabled, true
@@ -137,7 +141,7 @@ func (o *NiatelemetryMsoSiteDetails) GetIsCloudSecEnabledOk() (*string, bool) {
 
 // HasIsCloudSecEnabled returns a boolean if a field has been set.
 func (o *NiatelemetryMsoSiteDetails) HasIsCloudSecEnabled() bool {
-	if o != nil && o.IsCloudSecEnabled != nil {
+	if o != nil && !IsNil(o.IsCloudSecEnabled) {
 		return true
 	}
 
@@ -151,7 +155,7 @@ func (o *NiatelemetryMsoSiteDetails) SetIsCloudSecEnabled(v string) {
 
 // GetNumberOfLeafsPerSiteInMso returns the NumberOfLeafsPerSiteInMso field value if set, zero value otherwise.
 func (o *NiatelemetryMsoSiteDetails) GetNumberOfLeafsPerSiteInMso() int64 {
-	if o == nil || o.NumberOfLeafsPerSiteInMso == nil {
+	if o == nil || IsNil(o.NumberOfLeafsPerSiteInMso) {
 		var ret int64
 		return ret
 	}
@@ -161,7 +165,7 @@ func (o *NiatelemetryMsoSiteDetails) GetNumberOfLeafsPerSiteInMso() int64 {
 // GetNumberOfLeafsPerSiteInMsoOk returns a tuple with the NumberOfLeafsPerSiteInMso field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryMsoSiteDetails) GetNumberOfLeafsPerSiteInMsoOk() (*int64, bool) {
-	if o == nil || o.NumberOfLeafsPerSiteInMso == nil {
+	if o == nil || IsNil(o.NumberOfLeafsPerSiteInMso) {
 		return nil, false
 	}
 	return o.NumberOfLeafsPerSiteInMso, true
@@ -169,7 +173,7 @@ func (o *NiatelemetryMsoSiteDetails) GetNumberOfLeafsPerSiteInMsoOk() (*int64, b
 
 // HasNumberOfLeafsPerSiteInMso returns a boolean if a field has been set.
 func (o *NiatelemetryMsoSiteDetails) HasNumberOfLeafsPerSiteInMso() bool {
-	if o != nil && o.NumberOfLeafsPerSiteInMso != nil {
+	if o != nil && !IsNil(o.NumberOfLeafsPerSiteInMso) {
 		return true
 	}
 
@@ -183,7 +187,7 @@ func (o *NiatelemetryMsoSiteDetails) SetNumberOfLeafsPerSiteInMso(v int64) {
 
 // GetNumberOfPodsPerSiteInMso returns the NumberOfPodsPerSiteInMso field value if set, zero value otherwise.
 func (o *NiatelemetryMsoSiteDetails) GetNumberOfPodsPerSiteInMso() int64 {
-	if o == nil || o.NumberOfPodsPerSiteInMso == nil {
+	if o == nil || IsNil(o.NumberOfPodsPerSiteInMso) {
 		var ret int64
 		return ret
 	}
@@ -193,7 +197,7 @@ func (o *NiatelemetryMsoSiteDetails) GetNumberOfPodsPerSiteInMso() int64 {
 // GetNumberOfPodsPerSiteInMsoOk returns a tuple with the NumberOfPodsPerSiteInMso field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryMsoSiteDetails) GetNumberOfPodsPerSiteInMsoOk() (*int64, bool) {
-	if o == nil || o.NumberOfPodsPerSiteInMso == nil {
+	if o == nil || IsNil(o.NumberOfPodsPerSiteInMso) {
 		return nil, false
 	}
 	return o.NumberOfPodsPerSiteInMso, true
@@ -201,7 +205,7 @@ func (o *NiatelemetryMsoSiteDetails) GetNumberOfPodsPerSiteInMsoOk() (*int64, bo
 
 // HasNumberOfPodsPerSiteInMso returns a boolean if a field has been set.
 func (o *NiatelemetryMsoSiteDetails) HasNumberOfPodsPerSiteInMso() bool {
-	if o != nil && o.NumberOfPodsPerSiteInMso != nil {
+	if o != nil && !IsNil(o.NumberOfPodsPerSiteInMso) {
 		return true
 	}
 
@@ -215,7 +219,7 @@ func (o *NiatelemetryMsoSiteDetails) SetNumberOfPodsPerSiteInMso(v int64) {
 
 // GetNumberOfSpinesPerSiteInMso returns the NumberOfSpinesPerSiteInMso field value if set, zero value otherwise.
 func (o *NiatelemetryMsoSiteDetails) GetNumberOfSpinesPerSiteInMso() int64 {
-	if o == nil || o.NumberOfSpinesPerSiteInMso == nil {
+	if o == nil || IsNil(o.NumberOfSpinesPerSiteInMso) {
 		var ret int64
 		return ret
 	}
@@ -225,7 +229,7 @@ func (o *NiatelemetryMsoSiteDetails) GetNumberOfSpinesPerSiteInMso() int64 {
 // GetNumberOfSpinesPerSiteInMsoOk returns a tuple with the NumberOfSpinesPerSiteInMso field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryMsoSiteDetails) GetNumberOfSpinesPerSiteInMsoOk() (*int64, bool) {
-	if o == nil || o.NumberOfSpinesPerSiteInMso == nil {
+	if o == nil || IsNil(o.NumberOfSpinesPerSiteInMso) {
 		return nil, false
 	}
 	return o.NumberOfSpinesPerSiteInMso, true
@@ -233,7 +237,7 @@ func (o *NiatelemetryMsoSiteDetails) GetNumberOfSpinesPerSiteInMsoOk() (*int64, 
 
 // HasNumberOfSpinesPerSiteInMso returns a boolean if a field has been set.
 func (o *NiatelemetryMsoSiteDetails) HasNumberOfSpinesPerSiteInMso() bool {
-	if o != nil && o.NumberOfSpinesPerSiteInMso != nil {
+	if o != nil && !IsNil(o.NumberOfSpinesPerSiteInMso) {
 		return true
 	}
 
@@ -247,7 +251,7 @@ func (o *NiatelemetryMsoSiteDetails) SetNumberOfSpinesPerSiteInMso(v int64) {
 
 // GetRecordType returns the RecordType field value if set, zero value otherwise.
 func (o *NiatelemetryMsoSiteDetails) GetRecordType() string {
-	if o == nil || o.RecordType == nil {
+	if o == nil || IsNil(o.RecordType) {
 		var ret string
 		return ret
 	}
@@ -257,7 +261,7 @@ func (o *NiatelemetryMsoSiteDetails) GetRecordType() string {
 // GetRecordTypeOk returns a tuple with the RecordType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryMsoSiteDetails) GetRecordTypeOk() (*string, bool) {
-	if o == nil || o.RecordType == nil {
+	if o == nil || IsNil(o.RecordType) {
 		return nil, false
 	}
 	return o.RecordType, true
@@ -265,7 +269,7 @@ func (o *NiatelemetryMsoSiteDetails) GetRecordTypeOk() (*string, bool) {
 
 // HasRecordType returns a boolean if a field has been set.
 func (o *NiatelemetryMsoSiteDetails) HasRecordType() bool {
-	if o != nil && o.RecordType != nil {
+	if o != nil && !IsNil(o.RecordType) {
 		return true
 	}
 
@@ -279,7 +283,7 @@ func (o *NiatelemetryMsoSiteDetails) SetRecordType(v string) {
 
 // GetSiteId returns the SiteId field value if set, zero value otherwise.
 func (o *NiatelemetryMsoSiteDetails) GetSiteId() string {
-	if o == nil || o.SiteId == nil {
+	if o == nil || IsNil(o.SiteId) {
 		var ret string
 		return ret
 	}
@@ -289,7 +293,7 @@ func (o *NiatelemetryMsoSiteDetails) GetSiteId() string {
 // GetSiteIdOk returns a tuple with the SiteId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryMsoSiteDetails) GetSiteIdOk() (*string, bool) {
-	if o == nil || o.SiteId == nil {
+	if o == nil || IsNil(o.SiteId) {
 		return nil, false
 	}
 	return o.SiteId, true
@@ -297,7 +301,7 @@ func (o *NiatelemetryMsoSiteDetails) GetSiteIdOk() (*string, bool) {
 
 // HasSiteId returns a boolean if a field has been set.
 func (o *NiatelemetryMsoSiteDetails) HasSiteId() bool {
-	if o != nil && o.SiteId != nil {
+	if o != nil && !IsNil(o.SiteId) {
 		return true
 	}
 
@@ -311,7 +315,7 @@ func (o *NiatelemetryMsoSiteDetails) SetSiteId(v string) {
 
 // GetSiteName returns the SiteName field value if set, zero value otherwise.
 func (o *NiatelemetryMsoSiteDetails) GetSiteName() string {
-	if o == nil || o.SiteName == nil {
+	if o == nil || IsNil(o.SiteName) {
 		var ret string
 		return ret
 	}
@@ -321,7 +325,7 @@ func (o *NiatelemetryMsoSiteDetails) GetSiteName() string {
 // GetSiteNameOk returns a tuple with the SiteName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryMsoSiteDetails) GetSiteNameOk() (*string, bool) {
-	if o == nil || o.SiteName == nil {
+	if o == nil || IsNil(o.SiteName) {
 		return nil, false
 	}
 	return o.SiteName, true
@@ -329,7 +333,7 @@ func (o *NiatelemetryMsoSiteDetails) GetSiteNameOk() (*string, bool) {
 
 // HasSiteName returns a boolean if a field has been set.
 func (o *NiatelemetryMsoSiteDetails) HasSiteName() bool {
-	if o != nil && o.SiteName != nil {
+	if o != nil && !IsNil(o.SiteName) {
 		return true
 	}
 
@@ -343,7 +347,7 @@ func (o *NiatelemetryMsoSiteDetails) SetSiteName(v string) {
 
 // GetSiteVersion returns the SiteVersion field value if set, zero value otherwise.
 func (o *NiatelemetryMsoSiteDetails) GetSiteVersion() string {
-	if o == nil || o.SiteVersion == nil {
+	if o == nil || IsNil(o.SiteVersion) {
 		var ret string
 		return ret
 	}
@@ -353,7 +357,7 @@ func (o *NiatelemetryMsoSiteDetails) GetSiteVersion() string {
 // GetSiteVersionOk returns a tuple with the SiteVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryMsoSiteDetails) GetSiteVersionOk() (*string, bool) {
-	if o == nil || o.SiteVersion == nil {
+	if o == nil || IsNil(o.SiteVersion) {
 		return nil, false
 	}
 	return o.SiteVersion, true
@@ -361,7 +365,7 @@ func (o *NiatelemetryMsoSiteDetails) GetSiteVersionOk() (*string, bool) {
 
 // HasSiteVersion returns a boolean if a field has been set.
 func (o *NiatelemetryMsoSiteDetails) HasSiteVersion() bool {
-	if o != nil && o.SiteVersion != nil {
+	if o != nil && !IsNil(o.SiteVersion) {
 		return true
 	}
 
@@ -373,90 +377,127 @@ func (o *NiatelemetryMsoSiteDetails) SetSiteVersion(v string) {
 	o.SiteVersion = &v
 }
 
-// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise.
+// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *NiatelemetryMsoSiteDetails) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil || IsNil(o.RegisteredDevice.Get()) {
 		var ret AssetDeviceRegistrationRelationship
 		return ret
 	}
-	return *o.RegisteredDevice
+	return *o.RegisteredDevice.Get()
 }
 
 // GetRegisteredDeviceOk returns a tuple with the RegisteredDevice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *NiatelemetryMsoSiteDetails) GetRegisteredDeviceOk() (*AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.RegisteredDevice, true
+	return o.RegisteredDevice.Get(), o.RegisteredDevice.IsSet()
 }
 
 // HasRegisteredDevice returns a boolean if a field has been set.
 func (o *NiatelemetryMsoSiteDetails) HasRegisteredDevice() bool {
-	if o != nil && o.RegisteredDevice != nil {
+	if o != nil && o.RegisteredDevice.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRegisteredDevice gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
+// SetRegisteredDevice gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
 func (o *NiatelemetryMsoSiteDetails) SetRegisteredDevice(v AssetDeviceRegistrationRelationship) {
-	o.RegisteredDevice = &v
+	o.RegisteredDevice.Set(&v)
+}
+
+// SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+func (o *NiatelemetryMsoSiteDetails) SetRegisteredDeviceNil() {
+	o.RegisteredDevice.Set(nil)
+}
+
+// UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
+func (o *NiatelemetryMsoSiteDetails) UnsetRegisteredDevice() {
+	o.RegisteredDevice.Unset()
 }
 
 func (o NiatelemetryMsoSiteDetails) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o NiatelemetryMsoSiteDetails) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.IsCloudSecEnabled != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.IsCloudSecEnabled) {
 		toSerialize["IsCloudSecEnabled"] = o.IsCloudSecEnabled
 	}
-	if o.NumberOfLeafsPerSiteInMso != nil {
+	if !IsNil(o.NumberOfLeafsPerSiteInMso) {
 		toSerialize["NumberOfLeafsPerSiteInMso"] = o.NumberOfLeafsPerSiteInMso
 	}
-	if o.NumberOfPodsPerSiteInMso != nil {
+	if !IsNil(o.NumberOfPodsPerSiteInMso) {
 		toSerialize["NumberOfPodsPerSiteInMso"] = o.NumberOfPodsPerSiteInMso
 	}
-	if o.NumberOfSpinesPerSiteInMso != nil {
+	if !IsNil(o.NumberOfSpinesPerSiteInMso) {
 		toSerialize["NumberOfSpinesPerSiteInMso"] = o.NumberOfSpinesPerSiteInMso
 	}
-	if o.RecordType != nil {
+	if !IsNil(o.RecordType) {
 		toSerialize["RecordType"] = o.RecordType
 	}
-	if o.SiteId != nil {
+	if !IsNil(o.SiteId) {
 		toSerialize["SiteId"] = o.SiteId
 	}
-	if o.SiteName != nil {
+	if !IsNil(o.SiteName) {
 		toSerialize["SiteName"] = o.SiteName
 	}
-	if o.SiteVersion != nil {
+	if !IsNil(o.SiteVersion) {
 		toSerialize["SiteVersion"] = o.SiteVersion
 	}
-	if o.RegisteredDevice != nil {
-		toSerialize["RegisteredDevice"] = o.RegisteredDevice
+	if o.RegisteredDevice.IsSet() {
+		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *NiatelemetryMsoSiteDetails) UnmarshalJSON(bytes []byte) (err error) {
+func (o *NiatelemetryMsoSiteDetails) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type NiatelemetryMsoSiteDetailsWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -477,13 +518,13 @@ func (o *NiatelemetryMsoSiteDetails) UnmarshalJSON(bytes []byte) (err error) {
 		// Name of the site in Multi-Site Orchestrator.
 		SiteName *string `json:"SiteName,omitempty"`
 		// Version of the controller in the site.
-		SiteVersion      *string                              `json:"SiteVersion,omitempty"`
-		RegisteredDevice *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+		SiteVersion      *string                                     `json:"SiteVersion,omitempty"`
+		RegisteredDevice NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	}
 
 	varNiatelemetryMsoSiteDetailsWithoutEmbeddedStruct := NiatelemetryMsoSiteDetailsWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varNiatelemetryMsoSiteDetailsWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varNiatelemetryMsoSiteDetailsWithoutEmbeddedStruct)
 	if err == nil {
 		varNiatelemetryMsoSiteDetails := _NiatelemetryMsoSiteDetails{}
 		varNiatelemetryMsoSiteDetails.ClassId = varNiatelemetryMsoSiteDetailsWithoutEmbeddedStruct.ClassId
@@ -504,7 +545,7 @@ func (o *NiatelemetryMsoSiteDetails) UnmarshalJSON(bytes []byte) (err error) {
 
 	varNiatelemetryMsoSiteDetails := _NiatelemetryMsoSiteDetails{}
 
-	err = json.Unmarshal(bytes, &varNiatelemetryMsoSiteDetails)
+	err = json.Unmarshal(data, &varNiatelemetryMsoSiteDetails)
 	if err == nil {
 		o.MoBaseMo = varNiatelemetryMsoSiteDetails.MoBaseMo
 	} else {
@@ -513,7 +554,7 @@ func (o *NiatelemetryMsoSiteDetails) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "IsCloudSecEnabled")

@@ -11,8 +11,8 @@ Name | Type | Description | Notes
 **FileName** | Pointer to **string** | The end point log file name. | [optional] [readonly] 
 **LogType** | Pointer to **string** | The end point log file type. * &#x60;None&#x60; - End point log file type None. * &#x60;SEL&#x60; - End point log file type SEL. | [optional] [readonly] [default to "None"]
 **Status** | Pointer to **string** | The end point log collection status. * &#x60;None&#x60; - Log collection not started. * &#x60;CollectionInProgress&#x60; - Log file collection is in progress. * &#x60;CollectionCompleted&#x60; - Log file collection completed. * &#x60;CollectionFailed&#x60; - Log file collection failed. * &#x60;UploadInProgress&#x60; - Log file upload is in progress. * &#x60;UploadCompleted&#x60; - Log file upload completed. * &#x60;UploadFailed&#x60; - Log file upload failed to complete. * &#x60;DownloadUrlCreationFailed&#x60; - Download Url creation failed. * &#x60;Completed&#x60; - Log collection and upload completed. | [optional] [readonly] [default to "None"]
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
-**Server** | Pointer to [**ComputePhysicalRelationship**](ComputePhysicalRelationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
+**Server** | Pointer to [**NullableComputePhysicalRelationship**](ComputePhysicalRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -223,6 +223,16 @@ SetRegisteredDevice sets RegisteredDevice field to given value.
 
 HasRegisteredDevice returns a boolean if a field has been set.
 
+### SetRegisteredDeviceNil
+
+`func (o *EquipmentEndPointLog) SetRegisteredDeviceNil(b bool)`
+
+ SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+
+### UnsetRegisteredDevice
+`func (o *EquipmentEndPointLog) UnsetRegisteredDevice()`
+
+UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
 ### GetServer
 
 `func (o *EquipmentEndPointLog) GetServer() ComputePhysicalRelationship`
@@ -248,6 +258,16 @@ SetServer sets Server field to given value.
 
 HasServer returns a boolean if a field has been set.
 
+### SetServerNil
+
+`func (o *EquipmentEndPointLog) SetServerNil(b bool)`
+
+ SetServerNil sets the value for Server to be an explicit nil
+
+### UnsetServer
+`func (o *EquipmentEndPointLog) UnsetServer()`
+
+UnsetServer ensures that no value is present for Server, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

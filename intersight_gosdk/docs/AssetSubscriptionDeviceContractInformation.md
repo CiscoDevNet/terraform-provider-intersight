@@ -10,8 +10,8 @@ Name | Type | Description | Notes
 **DeviceInformation** | Pointer to [**NullableAssetDeviceInformation**](AssetDeviceInformation.md) |  | [optional] 
 **DevicePid** | Pointer to **string** | Product identifier for the specified Cisco device. It is used to distinguish between HyperFlex and UCS devices. | [optional] [readonly] 
 **SubscriptionRefId** | Pointer to **string** | Identifies the consumption-based subscription. | [optional] [readonly] 
-**DeviceContractInformation** | Pointer to [**AssetDeviceContractInformationRelationship**](AssetDeviceContractInformationRelationship.md) |  | [optional] 
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
+**DeviceContractInformation** | Pointer to [**NullableAssetDeviceContractInformationRelationship**](AssetDeviceContractInformationRelationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -207,6 +207,16 @@ SetDeviceContractInformation sets DeviceContractInformation field to given value
 
 HasDeviceContractInformation returns a boolean if a field has been set.
 
+### SetDeviceContractInformationNil
+
+`func (o *AssetSubscriptionDeviceContractInformation) SetDeviceContractInformationNil(b bool)`
+
+ SetDeviceContractInformationNil sets the value for DeviceContractInformation to be an explicit nil
+
+### UnsetDeviceContractInformation
+`func (o *AssetSubscriptionDeviceContractInformation) UnsetDeviceContractInformation()`
+
+UnsetDeviceContractInformation ensures that no value is present for DeviceContractInformation, not even an explicit nil
 ### GetRegisteredDevice
 
 `func (o *AssetSubscriptionDeviceContractInformation) GetRegisteredDevice() AssetDeviceRegistrationRelationship`
@@ -232,6 +242,16 @@ SetRegisteredDevice sets RegisteredDevice field to given value.
 
 HasRegisteredDevice returns a boolean if a field has been set.
 
+### SetRegisteredDeviceNil
+
+`func (o *AssetSubscriptionDeviceContractInformation) SetRegisteredDeviceNil(b bool)`
+
+ SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+
+### UnsetRegisteredDevice
+`func (o *AssetSubscriptionDeviceContractInformation) UnsetRegisteredDevice()`
+
+UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

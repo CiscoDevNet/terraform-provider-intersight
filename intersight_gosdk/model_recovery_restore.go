@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the RecoveryRestore type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &RecoveryRestore{}
 
 // RecoveryRestore Triggers a restore operation on the target endpoint.
 type RecoveryRestore struct {
@@ -23,12 +27,12 @@ type RecoveryRestore struct {
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
-	ObjectType           string                                  `json:"ObjectType"`
-	ConfigParams         NullableRecoveryConfigParams            `json:"ConfigParams,omitempty"`
-	BackupInfo           *RecoveryAbstractBackupInfoRelationship `json:"BackupInfo,omitempty"`
-	Device               *AssetDeviceRegistrationRelationship    `json:"Device,omitempty"`
-	Organization         *OrganizationOrganizationRelationship   `json:"Organization,omitempty"`
-	Workflow             *WorkflowWorkflowInfoRelationship       `json:"Workflow,omitempty"`
+	ObjectType           string                                         `json:"ObjectType"`
+	ConfigParams         NullableRecoveryConfigParams                   `json:"ConfigParams,omitempty"`
+	BackupInfo           NullableRecoveryAbstractBackupInfoRelationship `json:"BackupInfo,omitempty"`
+	Device               NullableAssetDeviceRegistrationRelationship    `json:"Device,omitempty"`
+	Organization         NullableOrganizationOrganizationRelationship   `json:"Organization,omitempty"`
+	Workflow             NullableWorkflowWorkflowInfoRelationship       `json:"Workflow,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -107,7 +111,7 @@ func (o *RecoveryRestore) SetObjectType(v string) {
 
 // GetConfigParams returns the ConfigParams field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *RecoveryRestore) GetConfigParams() RecoveryConfigParams {
-	if o == nil || o.ConfigParams.Get() == nil {
+	if o == nil || IsNil(o.ConfigParams.Get()) {
 		var ret RecoveryConfigParams
 		return ret
 	}
@@ -148,189 +152,259 @@ func (o *RecoveryRestore) UnsetConfigParams() {
 	o.ConfigParams.Unset()
 }
 
-// GetBackupInfo returns the BackupInfo field value if set, zero value otherwise.
+// GetBackupInfo returns the BackupInfo field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *RecoveryRestore) GetBackupInfo() RecoveryAbstractBackupInfoRelationship {
-	if o == nil || o.BackupInfo == nil {
+	if o == nil || IsNil(o.BackupInfo.Get()) {
 		var ret RecoveryAbstractBackupInfoRelationship
 		return ret
 	}
-	return *o.BackupInfo
+	return *o.BackupInfo.Get()
 }
 
 // GetBackupInfoOk returns a tuple with the BackupInfo field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *RecoveryRestore) GetBackupInfoOk() (*RecoveryAbstractBackupInfoRelationship, bool) {
-	if o == nil || o.BackupInfo == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.BackupInfo, true
+	return o.BackupInfo.Get(), o.BackupInfo.IsSet()
 }
 
 // HasBackupInfo returns a boolean if a field has been set.
 func (o *RecoveryRestore) HasBackupInfo() bool {
-	if o != nil && o.BackupInfo != nil {
+	if o != nil && o.BackupInfo.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetBackupInfo gets a reference to the given RecoveryAbstractBackupInfoRelationship and assigns it to the BackupInfo field.
+// SetBackupInfo gets a reference to the given NullableRecoveryAbstractBackupInfoRelationship and assigns it to the BackupInfo field.
 func (o *RecoveryRestore) SetBackupInfo(v RecoveryAbstractBackupInfoRelationship) {
-	o.BackupInfo = &v
+	o.BackupInfo.Set(&v)
 }
 
-// GetDevice returns the Device field value if set, zero value otherwise.
+// SetBackupInfoNil sets the value for BackupInfo to be an explicit nil
+func (o *RecoveryRestore) SetBackupInfoNil() {
+	o.BackupInfo.Set(nil)
+}
+
+// UnsetBackupInfo ensures that no value is present for BackupInfo, not even an explicit nil
+func (o *RecoveryRestore) UnsetBackupInfo() {
+	o.BackupInfo.Unset()
+}
+
+// GetDevice returns the Device field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *RecoveryRestore) GetDevice() AssetDeviceRegistrationRelationship {
-	if o == nil || o.Device == nil {
+	if o == nil || IsNil(o.Device.Get()) {
 		var ret AssetDeviceRegistrationRelationship
 		return ret
 	}
-	return *o.Device
+	return *o.Device.Get()
 }
 
 // GetDeviceOk returns a tuple with the Device field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *RecoveryRestore) GetDeviceOk() (*AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.Device == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Device, true
+	return o.Device.Get(), o.Device.IsSet()
 }
 
 // HasDevice returns a boolean if a field has been set.
 func (o *RecoveryRestore) HasDevice() bool {
-	if o != nil && o.Device != nil {
+	if o != nil && o.Device.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetDevice gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the Device field.
+// SetDevice gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the Device field.
 func (o *RecoveryRestore) SetDevice(v AssetDeviceRegistrationRelationship) {
-	o.Device = &v
+	o.Device.Set(&v)
 }
 
-// GetOrganization returns the Organization field value if set, zero value otherwise.
+// SetDeviceNil sets the value for Device to be an explicit nil
+func (o *RecoveryRestore) SetDeviceNil() {
+	o.Device.Set(nil)
+}
+
+// UnsetDevice ensures that no value is present for Device, not even an explicit nil
+func (o *RecoveryRestore) UnsetDevice() {
+	o.Device.Unset()
+}
+
+// GetOrganization returns the Organization field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *RecoveryRestore) GetOrganization() OrganizationOrganizationRelationship {
-	if o == nil || o.Organization == nil {
+	if o == nil || IsNil(o.Organization.Get()) {
 		var ret OrganizationOrganizationRelationship
 		return ret
 	}
-	return *o.Organization
+	return *o.Organization.Get()
 }
 
 // GetOrganizationOk returns a tuple with the Organization field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *RecoveryRestore) GetOrganizationOk() (*OrganizationOrganizationRelationship, bool) {
-	if o == nil || o.Organization == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Organization, true
+	return o.Organization.Get(), o.Organization.IsSet()
 }
 
 // HasOrganization returns a boolean if a field has been set.
 func (o *RecoveryRestore) HasOrganization() bool {
-	if o != nil && o.Organization != nil {
+	if o != nil && o.Organization.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetOrganization gets a reference to the given OrganizationOrganizationRelationship and assigns it to the Organization field.
+// SetOrganization gets a reference to the given NullableOrganizationOrganizationRelationship and assigns it to the Organization field.
 func (o *RecoveryRestore) SetOrganization(v OrganizationOrganizationRelationship) {
-	o.Organization = &v
+	o.Organization.Set(&v)
 }
 
-// GetWorkflow returns the Workflow field value if set, zero value otherwise.
+// SetOrganizationNil sets the value for Organization to be an explicit nil
+func (o *RecoveryRestore) SetOrganizationNil() {
+	o.Organization.Set(nil)
+}
+
+// UnsetOrganization ensures that no value is present for Organization, not even an explicit nil
+func (o *RecoveryRestore) UnsetOrganization() {
+	o.Organization.Unset()
+}
+
+// GetWorkflow returns the Workflow field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *RecoveryRestore) GetWorkflow() WorkflowWorkflowInfoRelationship {
-	if o == nil || o.Workflow == nil {
+	if o == nil || IsNil(o.Workflow.Get()) {
 		var ret WorkflowWorkflowInfoRelationship
 		return ret
 	}
-	return *o.Workflow
+	return *o.Workflow.Get()
 }
 
 // GetWorkflowOk returns a tuple with the Workflow field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *RecoveryRestore) GetWorkflowOk() (*WorkflowWorkflowInfoRelationship, bool) {
-	if o == nil || o.Workflow == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Workflow, true
+	return o.Workflow.Get(), o.Workflow.IsSet()
 }
 
 // HasWorkflow returns a boolean if a field has been set.
 func (o *RecoveryRestore) HasWorkflow() bool {
-	if o != nil && o.Workflow != nil {
+	if o != nil && o.Workflow.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetWorkflow gets a reference to the given WorkflowWorkflowInfoRelationship and assigns it to the Workflow field.
+// SetWorkflow gets a reference to the given NullableWorkflowWorkflowInfoRelationship and assigns it to the Workflow field.
 func (o *RecoveryRestore) SetWorkflow(v WorkflowWorkflowInfoRelationship) {
-	o.Workflow = &v
+	o.Workflow.Set(&v)
+}
+
+// SetWorkflowNil sets the value for Workflow to be an explicit nil
+func (o *RecoveryRestore) SetWorkflowNil() {
+	o.Workflow.Set(nil)
+}
+
+// UnsetWorkflow ensures that no value is present for Workflow, not even an explicit nil
+func (o *RecoveryRestore) UnsetWorkflow() {
+	o.Workflow.Unset()
 }
 
 func (o RecoveryRestore) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o RecoveryRestore) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
 	if o.ConfigParams.IsSet() {
 		toSerialize["ConfigParams"] = o.ConfigParams.Get()
 	}
-	if o.BackupInfo != nil {
-		toSerialize["BackupInfo"] = o.BackupInfo
+	if o.BackupInfo.IsSet() {
+		toSerialize["BackupInfo"] = o.BackupInfo.Get()
 	}
-	if o.Device != nil {
-		toSerialize["Device"] = o.Device
+	if o.Device.IsSet() {
+		toSerialize["Device"] = o.Device.Get()
 	}
-	if o.Organization != nil {
-		toSerialize["Organization"] = o.Organization
+	if o.Organization.IsSet() {
+		toSerialize["Organization"] = o.Organization.Get()
 	}
-	if o.Workflow != nil {
-		toSerialize["Workflow"] = o.Workflow
+	if o.Workflow.IsSet() {
+		toSerialize["Workflow"] = o.Workflow.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *RecoveryRestore) UnmarshalJSON(bytes []byte) (err error) {
+func (o *RecoveryRestore) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type RecoveryRestoreWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
-		ObjectType   string                                  `json:"ObjectType"`
-		ConfigParams NullableRecoveryConfigParams            `json:"ConfigParams,omitempty"`
-		BackupInfo   *RecoveryAbstractBackupInfoRelationship `json:"BackupInfo,omitempty"`
-		Device       *AssetDeviceRegistrationRelationship    `json:"Device,omitempty"`
-		Organization *OrganizationOrganizationRelationship   `json:"Organization,omitempty"`
-		Workflow     *WorkflowWorkflowInfoRelationship       `json:"Workflow,omitempty"`
+		ObjectType   string                                         `json:"ObjectType"`
+		ConfigParams NullableRecoveryConfigParams                   `json:"ConfigParams,omitempty"`
+		BackupInfo   NullableRecoveryAbstractBackupInfoRelationship `json:"BackupInfo,omitempty"`
+		Device       NullableAssetDeviceRegistrationRelationship    `json:"Device,omitempty"`
+		Organization NullableOrganizationOrganizationRelationship   `json:"Organization,omitempty"`
+		Workflow     NullableWorkflowWorkflowInfoRelationship       `json:"Workflow,omitempty"`
 	}
 
 	varRecoveryRestoreWithoutEmbeddedStruct := RecoveryRestoreWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varRecoveryRestoreWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varRecoveryRestoreWithoutEmbeddedStruct)
 	if err == nil {
 		varRecoveryRestore := _RecoveryRestore{}
 		varRecoveryRestore.ClassId = varRecoveryRestoreWithoutEmbeddedStruct.ClassId
@@ -347,7 +421,7 @@ func (o *RecoveryRestore) UnmarshalJSON(bytes []byte) (err error) {
 
 	varRecoveryRestore := _RecoveryRestore{}
 
-	err = json.Unmarshal(bytes, &varRecoveryRestore)
+	err = json.Unmarshal(data, &varRecoveryRestore)
 	if err == nil {
 		o.MoBaseMo = varRecoveryRestore.MoBaseMo
 	} else {
@@ -356,7 +430,7 @@ func (o *RecoveryRestore) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "ConfigParams")

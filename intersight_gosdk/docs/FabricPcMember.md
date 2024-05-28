@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "fabric.PcMember"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "fabric.PcMember"]
 **PcId** | Pointer to **int64** | Port Channel Identifier for the collection of ports. | [optional] 
-**PortPolicy** | Pointer to [**FabricPortPolicyRelationship**](FabricPortPolicyRelationship.md) |  | [optional] 
+**PortPolicy** | Pointer to [**NullableFabricPortPolicyRelationship**](FabricPortPolicyRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -118,6 +118,16 @@ SetPortPolicy sets PortPolicy field to given value.
 
 HasPortPolicy returns a boolean if a field has been set.
 
+### SetPortPolicyNil
+
+`func (o *FabricPcMember) SetPortPolicyNil(b bool)`
+
+ SetPortPolicyNil sets the value for PortPolicy to be an explicit nil
+
+### UnsetPortPolicy
+`func (o *FabricPcMember) UnsetPortPolicy()`
+
+UnsetPortPolicy ensures that no value is present for PortPolicy, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

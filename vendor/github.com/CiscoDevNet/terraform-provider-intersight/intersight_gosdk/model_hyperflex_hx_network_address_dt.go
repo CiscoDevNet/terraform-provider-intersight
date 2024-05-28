@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the HyperflexHxNetworkAddressDt type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &HyperflexHxNetworkAddressDt{}
 
 // HyperflexHxNetworkAddressDt A network address. If both IP and FQDN are specified, IP is used. If only IP is specified, IP is used. If only FQDN is specified, FQDN is used. If both are not specified, it is an error.
 type HyperflexHxNetworkAddressDt struct {
@@ -108,7 +112,7 @@ func (o *HyperflexHxNetworkAddressDt) SetObjectType(v string) {
 
 // GetAddress returns the Address field value if set, zero value otherwise.
 func (o *HyperflexHxNetworkAddressDt) GetAddress() string {
-	if o == nil || o.Address == nil {
+	if o == nil || IsNil(o.Address) {
 		var ret string
 		return ret
 	}
@@ -118,7 +122,7 @@ func (o *HyperflexHxNetworkAddressDt) GetAddress() string {
 // GetAddressOk returns a tuple with the Address field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexHxNetworkAddressDt) GetAddressOk() (*string, bool) {
-	if o == nil || o.Address == nil {
+	if o == nil || IsNil(o.Address) {
 		return nil, false
 	}
 	return o.Address, true
@@ -126,7 +130,7 @@ func (o *HyperflexHxNetworkAddressDt) GetAddressOk() (*string, bool) {
 
 // HasAddress returns a boolean if a field has been set.
 func (o *HyperflexHxNetworkAddressDt) HasAddress() bool {
-	if o != nil && o.Address != nil {
+	if o != nil && !IsNil(o.Address) {
 		return true
 	}
 
@@ -140,7 +144,7 @@ func (o *HyperflexHxNetworkAddressDt) SetAddress(v string) {
 
 // GetFqdn returns the Fqdn field value if set, zero value otherwise.
 func (o *HyperflexHxNetworkAddressDt) GetFqdn() string {
-	if o == nil || o.Fqdn == nil {
+	if o == nil || IsNil(o.Fqdn) {
 		var ret string
 		return ret
 	}
@@ -150,7 +154,7 @@ func (o *HyperflexHxNetworkAddressDt) GetFqdn() string {
 // GetFqdnOk returns a tuple with the Fqdn field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexHxNetworkAddressDt) GetFqdnOk() (*string, bool) {
-	if o == nil || o.Fqdn == nil {
+	if o == nil || IsNil(o.Fqdn) {
 		return nil, false
 	}
 	return o.Fqdn, true
@@ -158,7 +162,7 @@ func (o *HyperflexHxNetworkAddressDt) GetFqdnOk() (*string, bool) {
 
 // HasFqdn returns a boolean if a field has been set.
 func (o *HyperflexHxNetworkAddressDt) HasFqdn() bool {
-	if o != nil && o.Fqdn != nil {
+	if o != nil && !IsNil(o.Fqdn) {
 		return true
 	}
 
@@ -172,7 +176,7 @@ func (o *HyperflexHxNetworkAddressDt) SetFqdn(v string) {
 
 // GetIp returns the Ip field value if set, zero value otherwise.
 func (o *HyperflexHxNetworkAddressDt) GetIp() string {
-	if o == nil || o.Ip == nil {
+	if o == nil || IsNil(o.Ip) {
 		var ret string
 		return ret
 	}
@@ -182,7 +186,7 @@ func (o *HyperflexHxNetworkAddressDt) GetIp() string {
 // GetIpOk returns a tuple with the Ip field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexHxNetworkAddressDt) GetIpOk() (*string, bool) {
-	if o == nil || o.Ip == nil {
+	if o == nil || IsNil(o.Ip) {
 		return nil, false
 	}
 	return o.Ip, true
@@ -190,7 +194,7 @@ func (o *HyperflexHxNetworkAddressDt) GetIpOk() (*string, bool) {
 
 // HasIp returns a boolean if a field has been set.
 func (o *HyperflexHxNetworkAddressDt) HasIp() bool {
-	if o != nil && o.Ip != nil {
+	if o != nil && !IsNil(o.Ip) {
 		return true
 	}
 
@@ -203,28 +207,32 @@ func (o *HyperflexHxNetworkAddressDt) SetIp(v string) {
 }
 
 func (o HyperflexHxNetworkAddressDt) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o HyperflexHxNetworkAddressDt) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
 	errMoBaseComplexType = json.Unmarshal([]byte(serializedMoBaseComplexType), &toSerialize)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Address != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Address) {
 		toSerialize["Address"] = o.Address
 	}
-	if o.Fqdn != nil {
+	if !IsNil(o.Fqdn) {
 		toSerialize["Fqdn"] = o.Fqdn
 	}
-	if o.Ip != nil {
+	if !IsNil(o.Ip) {
 		toSerialize["Ip"] = o.Ip
 	}
 
@@ -232,10 +240,32 @@ func (o HyperflexHxNetworkAddressDt) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *HyperflexHxNetworkAddressDt) UnmarshalJSON(bytes []byte) (err error) {
+func (o *HyperflexHxNetworkAddressDt) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type HyperflexHxNetworkAddressDtWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -251,7 +281,7 @@ func (o *HyperflexHxNetworkAddressDt) UnmarshalJSON(bytes []byte) (err error) {
 
 	varHyperflexHxNetworkAddressDtWithoutEmbeddedStruct := HyperflexHxNetworkAddressDtWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varHyperflexHxNetworkAddressDtWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varHyperflexHxNetworkAddressDtWithoutEmbeddedStruct)
 	if err == nil {
 		varHyperflexHxNetworkAddressDt := _HyperflexHxNetworkAddressDt{}
 		varHyperflexHxNetworkAddressDt.ClassId = varHyperflexHxNetworkAddressDtWithoutEmbeddedStruct.ClassId
@@ -266,7 +296,7 @@ func (o *HyperflexHxNetworkAddressDt) UnmarshalJSON(bytes []byte) (err error) {
 
 	varHyperflexHxNetworkAddressDt := _HyperflexHxNetworkAddressDt{}
 
-	err = json.Unmarshal(bytes, &varHyperflexHxNetworkAddressDt)
+	err = json.Unmarshal(data, &varHyperflexHxNetworkAddressDt)
 	if err == nil {
 		o.MoBaseComplexType = varHyperflexHxNetworkAddressDt.MoBaseComplexType
 	} else {
@@ -275,7 +305,7 @@ func (o *HyperflexHxNetworkAddressDt) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Address")

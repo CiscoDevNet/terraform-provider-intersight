@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the TechsupportmanagementNiaParam type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &TechsupportmanagementNiaParam{}
 
 // TechsupportmanagementNiaParam NIA parameter object for Tech Support requests.
 type TechsupportmanagementNiaParam struct {
@@ -128,7 +132,7 @@ func (o *TechsupportmanagementNiaParam) SetObjectType(v string) {
 
 // GetCollectionClass returns the CollectionClass field value if set, zero value otherwise.
 func (o *TechsupportmanagementNiaParam) GetCollectionClass() int32 {
-	if o == nil || o.CollectionClass == nil {
+	if o == nil || IsNil(o.CollectionClass) {
 		var ret int32
 		return ret
 	}
@@ -138,7 +142,7 @@ func (o *TechsupportmanagementNiaParam) GetCollectionClass() int32 {
 // GetCollectionClassOk returns a tuple with the CollectionClass field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TechsupportmanagementNiaParam) GetCollectionClassOk() (*int32, bool) {
-	if o == nil || o.CollectionClass == nil {
+	if o == nil || IsNil(o.CollectionClass) {
 		return nil, false
 	}
 	return o.CollectionClass, true
@@ -146,7 +150,7 @@ func (o *TechsupportmanagementNiaParam) GetCollectionClassOk() (*int32, bool) {
 
 // HasCollectionClass returns a boolean if a field has been set.
 func (o *TechsupportmanagementNiaParam) HasCollectionClass() bool {
-	if o != nil && o.CollectionClass != nil {
+	if o != nil && !IsNil(o.CollectionClass) {
 		return true
 	}
 
@@ -160,7 +164,7 @@ func (o *TechsupportmanagementNiaParam) SetCollectionClass(v int32) {
 
 // GetCollectionLevel returns the CollectionLevel field value if set, zero value otherwise.
 func (o *TechsupportmanagementNiaParam) GetCollectionLevel() int32 {
-	if o == nil || o.CollectionLevel == nil {
+	if o == nil || IsNil(o.CollectionLevel) {
 		var ret int32
 		return ret
 	}
@@ -170,7 +174,7 @@ func (o *TechsupportmanagementNiaParam) GetCollectionLevel() int32 {
 // GetCollectionLevelOk returns a tuple with the CollectionLevel field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TechsupportmanagementNiaParam) GetCollectionLevelOk() (*int32, bool) {
-	if o == nil || o.CollectionLevel == nil {
+	if o == nil || IsNil(o.CollectionLevel) {
 		return nil, false
 	}
 	return o.CollectionLevel, true
@@ -178,7 +182,7 @@ func (o *TechsupportmanagementNiaParam) GetCollectionLevelOk() (*int32, bool) {
 
 // HasCollectionLevel returns a boolean if a field has been set.
 func (o *TechsupportmanagementNiaParam) HasCollectionLevel() bool {
-	if o != nil && o.CollectionLevel != nil {
+	if o != nil && !IsNil(o.CollectionLevel) {
 		return true
 	}
 
@@ -192,7 +196,7 @@ func (o *TechsupportmanagementNiaParam) SetCollectionLevel(v int32) {
 
 // GetFilename returns the Filename field value if set, zero value otherwise.
 func (o *TechsupportmanagementNiaParam) GetFilename() string {
-	if o == nil || o.Filename == nil {
+	if o == nil || IsNil(o.Filename) {
 		var ret string
 		return ret
 	}
@@ -202,7 +206,7 @@ func (o *TechsupportmanagementNiaParam) GetFilename() string {
 // GetFilenameOk returns a tuple with the Filename field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TechsupportmanagementNiaParam) GetFilenameOk() (*string, bool) {
-	if o == nil || o.Filename == nil {
+	if o == nil || IsNil(o.Filename) {
 		return nil, false
 	}
 	return o.Filename, true
@@ -210,7 +214,7 @@ func (o *TechsupportmanagementNiaParam) GetFilenameOk() (*string, bool) {
 
 // HasFilename returns a boolean if a field has been set.
 func (o *TechsupportmanagementNiaParam) HasFilename() bool {
-	if o != nil && o.Filename != nil {
+	if o != nil && !IsNil(o.Filename) {
 		return true
 	}
 
@@ -224,7 +228,7 @@ func (o *TechsupportmanagementNiaParam) SetFilename(v string) {
 
 // GetForceFresh returns the ForceFresh field value if set, zero value otherwise.
 func (o *TechsupportmanagementNiaParam) GetForceFresh() bool {
-	if o == nil || o.ForceFresh == nil {
+	if o == nil || IsNil(o.ForceFresh) {
 		var ret bool
 		return ret
 	}
@@ -234,7 +238,7 @@ func (o *TechsupportmanagementNiaParam) GetForceFresh() bool {
 // GetForceFreshOk returns a tuple with the ForceFresh field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TechsupportmanagementNiaParam) GetForceFreshOk() (*bool, bool) {
-	if o == nil || o.ForceFresh == nil {
+	if o == nil || IsNil(o.ForceFresh) {
 		return nil, false
 	}
 	return o.ForceFresh, true
@@ -242,7 +246,7 @@ func (o *TechsupportmanagementNiaParam) GetForceFreshOk() (*bool, bool) {
 
 // HasForceFresh returns a boolean if a field has been set.
 func (o *TechsupportmanagementNiaParam) HasForceFresh() bool {
-	if o != nil && o.ForceFresh != nil {
+	if o != nil && !IsNil(o.ForceFresh) {
 		return true
 	}
 
@@ -256,7 +260,7 @@ func (o *TechsupportmanagementNiaParam) SetForceFresh(v bool) {
 
 // GetPeriod returns the Period field value if set, zero value otherwise.
 func (o *TechsupportmanagementNiaParam) GetPeriod() int64 {
-	if o == nil || o.Period == nil {
+	if o == nil || IsNil(o.Period) {
 		var ret int64
 		return ret
 	}
@@ -266,7 +270,7 @@ func (o *TechsupportmanagementNiaParam) GetPeriod() int64 {
 // GetPeriodOk returns a tuple with the Period field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TechsupportmanagementNiaParam) GetPeriodOk() (*int64, bool) {
-	if o == nil || o.Period == nil {
+	if o == nil || IsNil(o.Period) {
 		return nil, false
 	}
 	return o.Period, true
@@ -274,7 +278,7 @@ func (o *TechsupportmanagementNiaParam) GetPeriodOk() (*int64, bool) {
 
 // HasPeriod returns a boolean if a field has been set.
 func (o *TechsupportmanagementNiaParam) HasPeriod() bool {
-	if o != nil && o.Period != nil {
+	if o != nil && !IsNil(o.Period) {
 		return true
 	}
 
@@ -299,7 +303,7 @@ func (o *TechsupportmanagementNiaParam) GetPids() []string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *TechsupportmanagementNiaParam) GetPidsOk() ([]string, bool) {
-	if o == nil || o.Pids == nil {
+	if o == nil || IsNil(o.Pids) {
 		return nil, false
 	}
 	return o.Pids, true
@@ -307,7 +311,7 @@ func (o *TechsupportmanagementNiaParam) GetPidsOk() ([]string, bool) {
 
 // HasPids returns a boolean if a field has been set.
 func (o *TechsupportmanagementNiaParam) HasPids() bool {
-	if o != nil && o.Pids != nil {
+	if o != nil && IsNil(o.Pids) {
 		return true
 	}
 
@@ -332,7 +336,7 @@ func (o *TechsupportmanagementNiaParam) GetSerialNumbers() []string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *TechsupportmanagementNiaParam) GetSerialNumbersOk() ([]string, bool) {
-	if o == nil || o.SerialNumbers == nil {
+	if o == nil || IsNil(o.SerialNumbers) {
 		return nil, false
 	}
 	return o.SerialNumbers, true
@@ -340,7 +344,7 @@ func (o *TechsupportmanagementNiaParam) GetSerialNumbersOk() ([]string, bool) {
 
 // HasSerialNumbers returns a boolean if a field has been set.
 func (o *TechsupportmanagementNiaParam) HasSerialNumbers() bool {
-	if o != nil && o.SerialNumbers != nil {
+	if o != nil && IsNil(o.SerialNumbers) {
 		return true
 	}
 
@@ -354,7 +358,7 @@ func (o *TechsupportmanagementNiaParam) SetSerialNumbers(v []string) {
 
 // GetUpgradeLogs returns the UpgradeLogs field value if set, zero value otherwise.
 func (o *TechsupportmanagementNiaParam) GetUpgradeLogs() bool {
-	if o == nil || o.UpgradeLogs == nil {
+	if o == nil || IsNil(o.UpgradeLogs) {
 		var ret bool
 		return ret
 	}
@@ -364,7 +368,7 @@ func (o *TechsupportmanagementNiaParam) GetUpgradeLogs() bool {
 // GetUpgradeLogsOk returns a tuple with the UpgradeLogs field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TechsupportmanagementNiaParam) GetUpgradeLogsOk() (*bool, bool) {
-	if o == nil || o.UpgradeLogs == nil {
+	if o == nil || IsNil(o.UpgradeLogs) {
 		return nil, false
 	}
 	return o.UpgradeLogs, true
@@ -372,7 +376,7 @@ func (o *TechsupportmanagementNiaParam) GetUpgradeLogsOk() (*bool, bool) {
 
 // HasUpgradeLogs returns a boolean if a field has been set.
 func (o *TechsupportmanagementNiaParam) HasUpgradeLogs() bool {
-	if o != nil && o.UpgradeLogs != nil {
+	if o != nil && !IsNil(o.UpgradeLogs) {
 		return true
 	}
 
@@ -385,34 +389,38 @@ func (o *TechsupportmanagementNiaParam) SetUpgradeLogs(v bool) {
 }
 
 func (o TechsupportmanagementNiaParam) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o TechsupportmanagementNiaParam) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedConnectorPlatformParamBase, errConnectorPlatformParamBase := json.Marshal(o.ConnectorPlatformParamBase)
 	if errConnectorPlatformParamBase != nil {
-		return []byte{}, errConnectorPlatformParamBase
+		return map[string]interface{}{}, errConnectorPlatformParamBase
 	}
 	errConnectorPlatformParamBase = json.Unmarshal([]byte(serializedConnectorPlatformParamBase), &toSerialize)
 	if errConnectorPlatformParamBase != nil {
-		return []byte{}, errConnectorPlatformParamBase
+		return map[string]interface{}{}, errConnectorPlatformParamBase
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.CollectionClass != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.CollectionClass) {
 		toSerialize["CollectionClass"] = o.CollectionClass
 	}
-	if o.CollectionLevel != nil {
+	if !IsNil(o.CollectionLevel) {
 		toSerialize["CollectionLevel"] = o.CollectionLevel
 	}
-	if o.Filename != nil {
+	if !IsNil(o.Filename) {
 		toSerialize["Filename"] = o.Filename
 	}
-	if o.ForceFresh != nil {
+	if !IsNil(o.ForceFresh) {
 		toSerialize["ForceFresh"] = o.ForceFresh
 	}
-	if o.Period != nil {
+	if !IsNil(o.Period) {
 		toSerialize["Period"] = o.Period
 	}
 	if o.Pids != nil {
@@ -421,7 +429,7 @@ func (o TechsupportmanagementNiaParam) MarshalJSON() ([]byte, error) {
 	if o.SerialNumbers != nil {
 		toSerialize["SerialNumbers"] = o.SerialNumbers
 	}
-	if o.UpgradeLogs != nil {
+	if !IsNil(o.UpgradeLogs) {
 		toSerialize["UpgradeLogs"] = o.UpgradeLogs
 	}
 
@@ -429,10 +437,32 @@ func (o TechsupportmanagementNiaParam) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *TechsupportmanagementNiaParam) UnmarshalJSON(bytes []byte) (err error) {
+func (o *TechsupportmanagementNiaParam) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type TechsupportmanagementNiaParamWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -456,7 +486,7 @@ func (o *TechsupportmanagementNiaParam) UnmarshalJSON(bytes []byte) (err error) 
 
 	varTechsupportmanagementNiaParamWithoutEmbeddedStruct := TechsupportmanagementNiaParamWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varTechsupportmanagementNiaParamWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varTechsupportmanagementNiaParamWithoutEmbeddedStruct)
 	if err == nil {
 		varTechsupportmanagementNiaParam := _TechsupportmanagementNiaParam{}
 		varTechsupportmanagementNiaParam.ClassId = varTechsupportmanagementNiaParamWithoutEmbeddedStruct.ClassId
@@ -476,7 +506,7 @@ func (o *TechsupportmanagementNiaParam) UnmarshalJSON(bytes []byte) (err error) 
 
 	varTechsupportmanagementNiaParam := _TechsupportmanagementNiaParam{}
 
-	err = json.Unmarshal(bytes, &varTechsupportmanagementNiaParam)
+	err = json.Unmarshal(data, &varTechsupportmanagementNiaParam)
 	if err == nil {
 		o.ConnectorPlatformParamBase = varTechsupportmanagementNiaParam.ConnectorPlatformParamBase
 	} else {
@@ -485,7 +515,7 @@ func (o *TechsupportmanagementNiaParam) UnmarshalJSON(bytes []byte) (err error) 
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "CollectionClass")

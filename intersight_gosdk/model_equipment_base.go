@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the EquipmentBase type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &EquipmentBase{}
 
 // EquipmentBase Abstract base class for all equipments which have a vendor /model / serial.
 type EquipmentBase struct {
@@ -35,8 +39,8 @@ type EquipmentBase struct {
 	// This field displays the serial number of the associated component or hardware.
 	Serial *string `json:"Serial,omitempty"`
 	// This field displays the vendor information of the associated component or hardware.
-	Vendor               *string                   `json:"Vendor,omitempty"`
-	PreviousFru          *EquipmentFruRelationship `json:"PreviousFru,omitempty"`
+	Vendor               *string                          `json:"Vendor,omitempty"`
+	PreviousFru          NullableEquipmentFruRelationship `json:"PreviousFru,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -111,7 +115,7 @@ func (o *EquipmentBase) SetObjectType(v string) {
 
 // GetIsUpgraded returns the IsUpgraded field value if set, zero value otherwise.
 func (o *EquipmentBase) GetIsUpgraded() bool {
-	if o == nil || o.IsUpgraded == nil {
+	if o == nil || IsNil(o.IsUpgraded) {
 		var ret bool
 		return ret
 	}
@@ -121,7 +125,7 @@ func (o *EquipmentBase) GetIsUpgraded() bool {
 // GetIsUpgradedOk returns a tuple with the IsUpgraded field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EquipmentBase) GetIsUpgradedOk() (*bool, bool) {
-	if o == nil || o.IsUpgraded == nil {
+	if o == nil || IsNil(o.IsUpgraded) {
 		return nil, false
 	}
 	return o.IsUpgraded, true
@@ -129,7 +133,7 @@ func (o *EquipmentBase) GetIsUpgradedOk() (*bool, bool) {
 
 // HasIsUpgraded returns a boolean if a field has been set.
 func (o *EquipmentBase) HasIsUpgraded() bool {
-	if o != nil && o.IsUpgraded != nil {
+	if o != nil && !IsNil(o.IsUpgraded) {
 		return true
 	}
 
@@ -143,7 +147,7 @@ func (o *EquipmentBase) SetIsUpgraded(v bool) {
 
 // GetModel returns the Model field value if set, zero value otherwise.
 func (o *EquipmentBase) GetModel() string {
-	if o == nil || o.Model == nil {
+	if o == nil || IsNil(o.Model) {
 		var ret string
 		return ret
 	}
@@ -153,7 +157,7 @@ func (o *EquipmentBase) GetModel() string {
 // GetModelOk returns a tuple with the Model field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EquipmentBase) GetModelOk() (*string, bool) {
-	if o == nil || o.Model == nil {
+	if o == nil || IsNil(o.Model) {
 		return nil, false
 	}
 	return o.Model, true
@@ -161,7 +165,7 @@ func (o *EquipmentBase) GetModelOk() (*string, bool) {
 
 // HasModel returns a boolean if a field has been set.
 func (o *EquipmentBase) HasModel() bool {
-	if o != nil && o.Model != nil {
+	if o != nil && !IsNil(o.Model) {
 		return true
 	}
 
@@ -175,7 +179,7 @@ func (o *EquipmentBase) SetModel(v string) {
 
 // GetPresence returns the Presence field value if set, zero value otherwise.
 func (o *EquipmentBase) GetPresence() string {
-	if o == nil || o.Presence == nil {
+	if o == nil || IsNil(o.Presence) {
 		var ret string
 		return ret
 	}
@@ -185,7 +189,7 @@ func (o *EquipmentBase) GetPresence() string {
 // GetPresenceOk returns a tuple with the Presence field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EquipmentBase) GetPresenceOk() (*string, bool) {
-	if o == nil || o.Presence == nil {
+	if o == nil || IsNil(o.Presence) {
 		return nil, false
 	}
 	return o.Presence, true
@@ -193,7 +197,7 @@ func (o *EquipmentBase) GetPresenceOk() (*string, bool) {
 
 // HasPresence returns a boolean if a field has been set.
 func (o *EquipmentBase) HasPresence() bool {
-	if o != nil && o.Presence != nil {
+	if o != nil && !IsNil(o.Presence) {
 		return true
 	}
 
@@ -207,7 +211,7 @@ func (o *EquipmentBase) SetPresence(v string) {
 
 // GetRevision returns the Revision field value if set, zero value otherwise.
 func (o *EquipmentBase) GetRevision() string {
-	if o == nil || o.Revision == nil {
+	if o == nil || IsNil(o.Revision) {
 		var ret string
 		return ret
 	}
@@ -217,7 +221,7 @@ func (o *EquipmentBase) GetRevision() string {
 // GetRevisionOk returns a tuple with the Revision field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EquipmentBase) GetRevisionOk() (*string, bool) {
-	if o == nil || o.Revision == nil {
+	if o == nil || IsNil(o.Revision) {
 		return nil, false
 	}
 	return o.Revision, true
@@ -225,7 +229,7 @@ func (o *EquipmentBase) GetRevisionOk() (*string, bool) {
 
 // HasRevision returns a boolean if a field has been set.
 func (o *EquipmentBase) HasRevision() bool {
-	if o != nil && o.Revision != nil {
+	if o != nil && !IsNil(o.Revision) {
 		return true
 	}
 
@@ -239,7 +243,7 @@ func (o *EquipmentBase) SetRevision(v string) {
 
 // GetSerial returns the Serial field value if set, zero value otherwise.
 func (o *EquipmentBase) GetSerial() string {
-	if o == nil || o.Serial == nil {
+	if o == nil || IsNil(o.Serial) {
 		var ret string
 		return ret
 	}
@@ -249,7 +253,7 @@ func (o *EquipmentBase) GetSerial() string {
 // GetSerialOk returns a tuple with the Serial field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EquipmentBase) GetSerialOk() (*string, bool) {
-	if o == nil || o.Serial == nil {
+	if o == nil || IsNil(o.Serial) {
 		return nil, false
 	}
 	return o.Serial, true
@@ -257,7 +261,7 @@ func (o *EquipmentBase) GetSerialOk() (*string, bool) {
 
 // HasSerial returns a boolean if a field has been set.
 func (o *EquipmentBase) HasSerial() bool {
-	if o != nil && o.Serial != nil {
+	if o != nil && !IsNil(o.Serial) {
 		return true
 	}
 
@@ -271,7 +275,7 @@ func (o *EquipmentBase) SetSerial(v string) {
 
 // GetVendor returns the Vendor field value if set, zero value otherwise.
 func (o *EquipmentBase) GetVendor() string {
-	if o == nil || o.Vendor == nil {
+	if o == nil || IsNil(o.Vendor) {
 		var ret string
 		return ret
 	}
@@ -281,7 +285,7 @@ func (o *EquipmentBase) GetVendor() string {
 // GetVendorOk returns a tuple with the Vendor field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EquipmentBase) GetVendorOk() (*string, bool) {
-	if o == nil || o.Vendor == nil {
+	if o == nil || IsNil(o.Vendor) {
 		return nil, false
 	}
 	return o.Vendor, true
@@ -289,7 +293,7 @@ func (o *EquipmentBase) GetVendorOk() (*string, bool) {
 
 // HasVendor returns a boolean if a field has been set.
 func (o *EquipmentBase) HasVendor() bool {
-	if o != nil && o.Vendor != nil {
+	if o != nil && !IsNil(o.Vendor) {
 		return true
 	}
 
@@ -301,84 +305,121 @@ func (o *EquipmentBase) SetVendor(v string) {
 	o.Vendor = &v
 }
 
-// GetPreviousFru returns the PreviousFru field value if set, zero value otherwise.
+// GetPreviousFru returns the PreviousFru field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *EquipmentBase) GetPreviousFru() EquipmentFruRelationship {
-	if o == nil || o.PreviousFru == nil {
+	if o == nil || IsNil(o.PreviousFru.Get()) {
 		var ret EquipmentFruRelationship
 		return ret
 	}
-	return *o.PreviousFru
+	return *o.PreviousFru.Get()
 }
 
 // GetPreviousFruOk returns a tuple with the PreviousFru field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *EquipmentBase) GetPreviousFruOk() (*EquipmentFruRelationship, bool) {
-	if o == nil || o.PreviousFru == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.PreviousFru, true
+	return o.PreviousFru.Get(), o.PreviousFru.IsSet()
 }
 
 // HasPreviousFru returns a boolean if a field has been set.
 func (o *EquipmentBase) HasPreviousFru() bool {
-	if o != nil && o.PreviousFru != nil {
+	if o != nil && o.PreviousFru.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetPreviousFru gets a reference to the given EquipmentFruRelationship and assigns it to the PreviousFru field.
+// SetPreviousFru gets a reference to the given NullableEquipmentFruRelationship and assigns it to the PreviousFru field.
 func (o *EquipmentBase) SetPreviousFru(v EquipmentFruRelationship) {
-	o.PreviousFru = &v
+	o.PreviousFru.Set(&v)
+}
+
+// SetPreviousFruNil sets the value for PreviousFru to be an explicit nil
+func (o *EquipmentBase) SetPreviousFruNil() {
+	o.PreviousFru.Set(nil)
+}
+
+// UnsetPreviousFru ensures that no value is present for PreviousFru, not even an explicit nil
+func (o *EquipmentBase) UnsetPreviousFru() {
+	o.PreviousFru.Unset()
 }
 
 func (o EquipmentBase) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o EquipmentBase) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedInventoryBase, errInventoryBase := json.Marshal(o.InventoryBase)
 	if errInventoryBase != nil {
-		return []byte{}, errInventoryBase
+		return map[string]interface{}{}, errInventoryBase
 	}
 	errInventoryBase = json.Unmarshal([]byte(serializedInventoryBase), &toSerialize)
 	if errInventoryBase != nil {
-		return []byte{}, errInventoryBase
+		return map[string]interface{}{}, errInventoryBase
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.IsUpgraded != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.IsUpgraded) {
 		toSerialize["IsUpgraded"] = o.IsUpgraded
 	}
-	if o.Model != nil {
+	if !IsNil(o.Model) {
 		toSerialize["Model"] = o.Model
 	}
-	if o.Presence != nil {
+	if !IsNil(o.Presence) {
 		toSerialize["Presence"] = o.Presence
 	}
-	if o.Revision != nil {
+	if !IsNil(o.Revision) {
 		toSerialize["Revision"] = o.Revision
 	}
-	if o.Serial != nil {
+	if !IsNil(o.Serial) {
 		toSerialize["Serial"] = o.Serial
 	}
-	if o.Vendor != nil {
+	if !IsNil(o.Vendor) {
 		toSerialize["Vendor"] = o.Vendor
 	}
-	if o.PreviousFru != nil {
-		toSerialize["PreviousFru"] = o.PreviousFru
+	if o.PreviousFru.IsSet() {
+		toSerialize["PreviousFru"] = o.PreviousFru.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *EquipmentBase) UnmarshalJSON(bytes []byte) (err error) {
+func (o *EquipmentBase) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type EquipmentBaseWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type.
 		ClassId string `json:"ClassId"`
@@ -395,13 +436,13 @@ func (o *EquipmentBase) UnmarshalJSON(bytes []byte) (err error) {
 		// This field displays the serial number of the associated component or hardware.
 		Serial *string `json:"Serial,omitempty"`
 		// This field displays the vendor information of the associated component or hardware.
-		Vendor      *string                   `json:"Vendor,omitempty"`
-		PreviousFru *EquipmentFruRelationship `json:"PreviousFru,omitempty"`
+		Vendor      *string                          `json:"Vendor,omitempty"`
+		PreviousFru NullableEquipmentFruRelationship `json:"PreviousFru,omitempty"`
 	}
 
 	varEquipmentBaseWithoutEmbeddedStruct := EquipmentBaseWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varEquipmentBaseWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varEquipmentBaseWithoutEmbeddedStruct)
 	if err == nil {
 		varEquipmentBase := _EquipmentBase{}
 		varEquipmentBase.ClassId = varEquipmentBaseWithoutEmbeddedStruct.ClassId
@@ -420,7 +461,7 @@ func (o *EquipmentBase) UnmarshalJSON(bytes []byte) (err error) {
 
 	varEquipmentBase := _EquipmentBase{}
 
-	err = json.Unmarshal(bytes, &varEquipmentBase)
+	err = json.Unmarshal(data, &varEquipmentBase)
 	if err == nil {
 		o.InventoryBase = varEquipmentBase.InventoryBase
 	} else {
@@ -429,7 +470,7 @@ func (o *EquipmentBase) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "IsUpgraded")

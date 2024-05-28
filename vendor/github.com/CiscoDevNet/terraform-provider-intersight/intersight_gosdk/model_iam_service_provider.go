@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the IamServiceProvider type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &IamServiceProvider{}
 
 // IamServiceProvider SAML Service provider related information in Intersight.
 type IamServiceProvider struct {
@@ -29,8 +33,8 @@ type IamServiceProvider struct {
 	// Metadata of the Intersight Service Provider. User downloads the Intersight Service Provider metadata and integrates it with their IdP for authentication.
 	Metadata *string `json:"Metadata,omitempty"`
 	// Name of the Intersight Service Provider.
-	Name                 *string                `json:"Name,omitempty"`
-	System               *IamSystemRelationship `json:"System,omitempty"`
+	Name                 *string                       `json:"Name,omitempty"`
+	System               NullableIamSystemRelationship `json:"System,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -109,7 +113,7 @@ func (o *IamServiceProvider) SetObjectType(v string) {
 
 // GetEntityId returns the EntityId field value if set, zero value otherwise.
 func (o *IamServiceProvider) GetEntityId() string {
-	if o == nil || o.EntityId == nil {
+	if o == nil || IsNil(o.EntityId) {
 		var ret string
 		return ret
 	}
@@ -119,7 +123,7 @@ func (o *IamServiceProvider) GetEntityId() string {
 // GetEntityIdOk returns a tuple with the EntityId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IamServiceProvider) GetEntityIdOk() (*string, bool) {
-	if o == nil || o.EntityId == nil {
+	if o == nil || IsNil(o.EntityId) {
 		return nil, false
 	}
 	return o.EntityId, true
@@ -127,7 +131,7 @@ func (o *IamServiceProvider) GetEntityIdOk() (*string, bool) {
 
 // HasEntityId returns a boolean if a field has been set.
 func (o *IamServiceProvider) HasEntityId() bool {
-	if o != nil && o.EntityId != nil {
+	if o != nil && !IsNil(o.EntityId) {
 		return true
 	}
 
@@ -141,7 +145,7 @@ func (o *IamServiceProvider) SetEntityId(v string) {
 
 // GetMetadata returns the Metadata field value if set, zero value otherwise.
 func (o *IamServiceProvider) GetMetadata() string {
-	if o == nil || o.Metadata == nil {
+	if o == nil || IsNil(o.Metadata) {
 		var ret string
 		return ret
 	}
@@ -151,7 +155,7 @@ func (o *IamServiceProvider) GetMetadata() string {
 // GetMetadataOk returns a tuple with the Metadata field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IamServiceProvider) GetMetadataOk() (*string, bool) {
-	if o == nil || o.Metadata == nil {
+	if o == nil || IsNil(o.Metadata) {
 		return nil, false
 	}
 	return o.Metadata, true
@@ -159,7 +163,7 @@ func (o *IamServiceProvider) GetMetadataOk() (*string, bool) {
 
 // HasMetadata returns a boolean if a field has been set.
 func (o *IamServiceProvider) HasMetadata() bool {
-	if o != nil && o.Metadata != nil {
+	if o != nil && !IsNil(o.Metadata) {
 		return true
 	}
 
@@ -173,7 +177,7 @@ func (o *IamServiceProvider) SetMetadata(v string) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *IamServiceProvider) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -183,7 +187,7 @@ func (o *IamServiceProvider) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IamServiceProvider) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -191,7 +195,7 @@ func (o *IamServiceProvider) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *IamServiceProvider) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -203,75 +207,112 @@ func (o *IamServiceProvider) SetName(v string) {
 	o.Name = &v
 }
 
-// GetSystem returns the System field value if set, zero value otherwise.
+// GetSystem returns the System field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *IamServiceProvider) GetSystem() IamSystemRelationship {
-	if o == nil || o.System == nil {
+	if o == nil || IsNil(o.System.Get()) {
 		var ret IamSystemRelationship
 		return ret
 	}
-	return *o.System
+	return *o.System.Get()
 }
 
 // GetSystemOk returns a tuple with the System field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *IamServiceProvider) GetSystemOk() (*IamSystemRelationship, bool) {
-	if o == nil || o.System == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.System, true
+	return o.System.Get(), o.System.IsSet()
 }
 
 // HasSystem returns a boolean if a field has been set.
 func (o *IamServiceProvider) HasSystem() bool {
-	if o != nil && o.System != nil {
+	if o != nil && o.System.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetSystem gets a reference to the given IamSystemRelationship and assigns it to the System field.
+// SetSystem gets a reference to the given NullableIamSystemRelationship and assigns it to the System field.
 func (o *IamServiceProvider) SetSystem(v IamSystemRelationship) {
-	o.System = &v
+	o.System.Set(&v)
+}
+
+// SetSystemNil sets the value for System to be an explicit nil
+func (o *IamServiceProvider) SetSystemNil() {
+	o.System.Set(nil)
+}
+
+// UnsetSystem ensures that no value is present for System, not even an explicit nil
+func (o *IamServiceProvider) UnsetSystem() {
+	o.System.Unset()
 }
 
 func (o IamServiceProvider) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o IamServiceProvider) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.EntityId != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.EntityId) {
 		toSerialize["EntityId"] = o.EntityId
 	}
-	if o.Metadata != nil {
+	if !IsNil(o.Metadata) {
 		toSerialize["Metadata"] = o.Metadata
 	}
-	if o.Name != nil {
+	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
 	}
-	if o.System != nil {
-		toSerialize["System"] = o.System
+	if o.System.IsSet() {
+		toSerialize["System"] = o.System.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *IamServiceProvider) UnmarshalJSON(bytes []byte) (err error) {
+func (o *IamServiceProvider) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type IamServiceProviderWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -282,13 +323,13 @@ func (o *IamServiceProvider) UnmarshalJSON(bytes []byte) (err error) {
 		// Metadata of the Intersight Service Provider. User downloads the Intersight Service Provider metadata and integrates it with their IdP for authentication.
 		Metadata *string `json:"Metadata,omitempty"`
 		// Name of the Intersight Service Provider.
-		Name   *string                `json:"Name,omitempty"`
-		System *IamSystemRelationship `json:"System,omitempty"`
+		Name   *string                       `json:"Name,omitempty"`
+		System NullableIamSystemRelationship `json:"System,omitempty"`
 	}
 
 	varIamServiceProviderWithoutEmbeddedStruct := IamServiceProviderWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varIamServiceProviderWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varIamServiceProviderWithoutEmbeddedStruct)
 	if err == nil {
 		varIamServiceProvider := _IamServiceProvider{}
 		varIamServiceProvider.ClassId = varIamServiceProviderWithoutEmbeddedStruct.ClassId
@@ -304,7 +345,7 @@ func (o *IamServiceProvider) UnmarshalJSON(bytes []byte) (err error) {
 
 	varIamServiceProvider := _IamServiceProvider{}
 
-	err = json.Unmarshal(bytes, &varIamServiceProvider)
+	err = json.Unmarshal(data, &varIamServiceProvider)
 	if err == nil {
 		o.MoBaseMo = varIamServiceProvider.MoBaseMo
 	} else {
@@ -313,7 +354,7 @@ func (o *IamServiceProvider) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "EntityId")

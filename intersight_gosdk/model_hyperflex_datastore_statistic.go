@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the HyperflexDatastoreStatistic type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &HyperflexDatastoreStatistic{}
 
 // HyperflexDatastoreStatistic Datastore Statistic describing more detailed information about the Data Protection Peer.
 type HyperflexDatastoreStatistic struct {
@@ -54,10 +58,10 @@ type HyperflexDatastoreStatistic struct {
 	// Unshared used capacity of the datastore in bytes.
 	UnsharedUsedBytes *int64 `json:"UnsharedUsedBytes,omitempty"`
 	// UUID for the datastore object.
-	Uuid                 *string                                  `json:"Uuid,omitempty"`
-	DataProtectionPeer   *HyperflexDataProtectionPeerRelationship `json:"DataProtectionPeer,omitempty"`
-	SrcCluster           *HyperflexClusterRelationship            `json:"SrcCluster,omitempty"`
-	TgtCluster           *HyperflexClusterRelationship            `json:"TgtCluster,omitempty"`
+	Uuid                 *string                                         `json:"Uuid,omitempty"`
+	DataProtectionPeer   NullableHyperflexDataProtectionPeerRelationship `json:"DataProtectionPeer,omitempty"`
+	SrcCluster           NullableHyperflexClusterRelationship            `json:"SrcCluster,omitempty"`
+	TgtCluster           NullableHyperflexClusterRelationship            `json:"TgtCluster,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -136,7 +140,7 @@ func (o *HyperflexDatastoreStatistic) SetObjectType(v string) {
 
 // GetAccessibilitySummary returns the AccessibilitySummary field value if set, zero value otherwise.
 func (o *HyperflexDatastoreStatistic) GetAccessibilitySummary() string {
-	if o == nil || o.AccessibilitySummary == nil {
+	if o == nil || IsNil(o.AccessibilitySummary) {
 		var ret string
 		return ret
 	}
@@ -146,7 +150,7 @@ func (o *HyperflexDatastoreStatistic) GetAccessibilitySummary() string {
 // GetAccessibilitySummaryOk returns a tuple with the AccessibilitySummary field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexDatastoreStatistic) GetAccessibilitySummaryOk() (*string, bool) {
-	if o == nil || o.AccessibilitySummary == nil {
+	if o == nil || IsNil(o.AccessibilitySummary) {
 		return nil, false
 	}
 	return o.AccessibilitySummary, true
@@ -154,7 +158,7 @@ func (o *HyperflexDatastoreStatistic) GetAccessibilitySummaryOk() (*string, bool
 
 // HasAccessibilitySummary returns a boolean if a field has been set.
 func (o *HyperflexDatastoreStatistic) HasAccessibilitySummary() bool {
-	if o != nil && o.AccessibilitySummary != nil {
+	if o != nil && !IsNil(o.AccessibilitySummary) {
 		return true
 	}
 
@@ -168,7 +172,7 @@ func (o *HyperflexDatastoreStatistic) SetAccessibilitySummary(v string) {
 
 // GetCreationTime returns the CreationTime field value if set, zero value otherwise.
 func (o *HyperflexDatastoreStatistic) GetCreationTime() string {
-	if o == nil || o.CreationTime == nil {
+	if o == nil || IsNil(o.CreationTime) {
 		var ret string
 		return ret
 	}
@@ -178,7 +182,7 @@ func (o *HyperflexDatastoreStatistic) GetCreationTime() string {
 // GetCreationTimeOk returns a tuple with the CreationTime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexDatastoreStatistic) GetCreationTimeOk() (*string, bool) {
-	if o == nil || o.CreationTime == nil {
+	if o == nil || IsNil(o.CreationTime) {
 		return nil, false
 	}
 	return o.CreationTime, true
@@ -186,7 +190,7 @@ func (o *HyperflexDatastoreStatistic) GetCreationTimeOk() (*string, bool) {
 
 // HasCreationTime returns a boolean if a field has been set.
 func (o *HyperflexDatastoreStatistic) HasCreationTime() bool {
-	if o != nil && o.CreationTime != nil {
+	if o != nil && !IsNil(o.CreationTime) {
 		return true
 	}
 
@@ -200,7 +204,7 @@ func (o *HyperflexDatastoreStatistic) SetCreationTime(v string) {
 
 // GetDatastoreKind returns the DatastoreKind field value if set, zero value otherwise.
 func (o *HyperflexDatastoreStatistic) GetDatastoreKind() string {
-	if o == nil || o.DatastoreKind == nil {
+	if o == nil || IsNil(o.DatastoreKind) {
 		var ret string
 		return ret
 	}
@@ -210,7 +214,7 @@ func (o *HyperflexDatastoreStatistic) GetDatastoreKind() string {
 // GetDatastoreKindOk returns a tuple with the DatastoreKind field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexDatastoreStatistic) GetDatastoreKindOk() (*string, bool) {
-	if o == nil || o.DatastoreKind == nil {
+	if o == nil || IsNil(o.DatastoreKind) {
 		return nil, false
 	}
 	return o.DatastoreKind, true
@@ -218,7 +222,7 @@ func (o *HyperflexDatastoreStatistic) GetDatastoreKindOk() (*string, bool) {
 
 // HasDatastoreKind returns a boolean if a field has been set.
 func (o *HyperflexDatastoreStatistic) HasDatastoreKind() bool {
-	if o != nil && o.DatastoreKind != nil {
+	if o != nil && !IsNil(o.DatastoreKind) {
 		return true
 	}
 
@@ -232,7 +236,7 @@ func (o *HyperflexDatastoreStatistic) SetDatastoreKind(v string) {
 
 // GetDatastoreStatus returns the DatastoreStatus field value if set, zero value otherwise.
 func (o *HyperflexDatastoreStatistic) GetDatastoreStatus() string {
-	if o == nil || o.DatastoreStatus == nil {
+	if o == nil || IsNil(o.DatastoreStatus) {
 		var ret string
 		return ret
 	}
@@ -242,7 +246,7 @@ func (o *HyperflexDatastoreStatistic) GetDatastoreStatus() string {
 // GetDatastoreStatusOk returns a tuple with the DatastoreStatus field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexDatastoreStatistic) GetDatastoreStatusOk() (*string, bool) {
-	if o == nil || o.DatastoreStatus == nil {
+	if o == nil || IsNil(o.DatastoreStatus) {
 		return nil, false
 	}
 	return o.DatastoreStatus, true
@@ -250,7 +254,7 @@ func (o *HyperflexDatastoreStatistic) GetDatastoreStatusOk() (*string, bool) {
 
 // HasDatastoreStatus returns a boolean if a field has been set.
 func (o *HyperflexDatastoreStatistic) HasDatastoreStatus() bool {
-	if o != nil && o.DatastoreStatus != nil {
+	if o != nil && !IsNil(o.DatastoreStatus) {
 		return true
 	}
 
@@ -264,7 +268,7 @@ func (o *HyperflexDatastoreStatistic) SetDatastoreStatus(v string) {
 
 // GetDsconfig returns the Dsconfig field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *HyperflexDatastoreStatistic) GetDsconfig() HyperflexHxPlatformDatastoreConfigDt {
-	if o == nil || o.Dsconfig.Get() == nil {
+	if o == nil || IsNil(o.Dsconfig.Get()) {
 		var ret HyperflexHxPlatformDatastoreConfigDt
 		return ret
 	}
@@ -307,7 +311,7 @@ func (o *HyperflexDatastoreStatistic) UnsetDsconfig() {
 
 // GetFreeCapacityInBytes returns the FreeCapacityInBytes field value if set, zero value otherwise.
 func (o *HyperflexDatastoreStatistic) GetFreeCapacityInBytes() int64 {
-	if o == nil || o.FreeCapacityInBytes == nil {
+	if o == nil || IsNil(o.FreeCapacityInBytes) {
 		var ret int64
 		return ret
 	}
@@ -317,7 +321,7 @@ func (o *HyperflexDatastoreStatistic) GetFreeCapacityInBytes() int64 {
 // GetFreeCapacityInBytesOk returns a tuple with the FreeCapacityInBytes field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexDatastoreStatistic) GetFreeCapacityInBytesOk() (*int64, bool) {
-	if o == nil || o.FreeCapacityInBytes == nil {
+	if o == nil || IsNil(o.FreeCapacityInBytes) {
 		return nil, false
 	}
 	return o.FreeCapacityInBytes, true
@@ -325,7 +329,7 @@ func (o *HyperflexDatastoreStatistic) GetFreeCapacityInBytesOk() (*int64, bool) 
 
 // HasFreeCapacityInBytes returns a boolean if a field has been set.
 func (o *HyperflexDatastoreStatistic) HasFreeCapacityInBytes() bool {
-	if o != nil && o.FreeCapacityInBytes != nil {
+	if o != nil && !IsNil(o.FreeCapacityInBytes) {
 		return true
 	}
 
@@ -350,7 +354,7 @@ func (o *HyperflexDatastoreStatistic) GetHostMountStatus() []HyperflexHxHostMoun
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *HyperflexDatastoreStatistic) GetHostMountStatusOk() ([]HyperflexHxHostMountStatusDt, bool) {
-	if o == nil || o.HostMountStatus == nil {
+	if o == nil || IsNil(o.HostMountStatus) {
 		return nil, false
 	}
 	return o.HostMountStatus, true
@@ -358,7 +362,7 @@ func (o *HyperflexDatastoreStatistic) GetHostMountStatusOk() ([]HyperflexHxHostM
 
 // HasHostMountStatus returns a boolean if a field has been set.
 func (o *HyperflexDatastoreStatistic) HasHostMountStatus() bool {
-	if o != nil && o.HostMountStatus != nil {
+	if o != nil && IsNil(o.HostMountStatus) {
 		return true
 	}
 
@@ -372,7 +376,7 @@ func (o *HyperflexDatastoreStatistic) SetHostMountStatus(v []HyperflexHxHostMoun
 
 // GetIsEncrypted returns the IsEncrypted field value if set, zero value otherwise.
 func (o *HyperflexDatastoreStatistic) GetIsEncrypted() bool {
-	if o == nil || o.IsEncrypted == nil {
+	if o == nil || IsNil(o.IsEncrypted) {
 		var ret bool
 		return ret
 	}
@@ -382,7 +386,7 @@ func (o *HyperflexDatastoreStatistic) GetIsEncrypted() bool {
 // GetIsEncryptedOk returns a tuple with the IsEncrypted field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexDatastoreStatistic) GetIsEncryptedOk() (*bool, bool) {
-	if o == nil || o.IsEncrypted == nil {
+	if o == nil || IsNil(o.IsEncrypted) {
 		return nil, false
 	}
 	return o.IsEncrypted, true
@@ -390,7 +394,7 @@ func (o *HyperflexDatastoreStatistic) GetIsEncryptedOk() (*bool, bool) {
 
 // HasIsEncrypted returns a boolean if a field has been set.
 func (o *HyperflexDatastoreStatistic) HasIsEncrypted() bool {
-	if o != nil && o.IsEncrypted != nil {
+	if o != nil && !IsNil(o.IsEncrypted) {
 		return true
 	}
 
@@ -404,7 +408,7 @@ func (o *HyperflexDatastoreStatistic) SetIsEncrypted(v bool) {
 
 // GetLastAccessTime returns the LastAccessTime field value if set, zero value otherwise.
 func (o *HyperflexDatastoreStatistic) GetLastAccessTime() string {
-	if o == nil || o.LastAccessTime == nil {
+	if o == nil || IsNil(o.LastAccessTime) {
 		var ret string
 		return ret
 	}
@@ -414,7 +418,7 @@ func (o *HyperflexDatastoreStatistic) GetLastAccessTime() string {
 // GetLastAccessTimeOk returns a tuple with the LastAccessTime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexDatastoreStatistic) GetLastAccessTimeOk() (*string, bool) {
-	if o == nil || o.LastAccessTime == nil {
+	if o == nil || IsNil(o.LastAccessTime) {
 		return nil, false
 	}
 	return o.LastAccessTime, true
@@ -422,7 +426,7 @@ func (o *HyperflexDatastoreStatistic) GetLastAccessTimeOk() (*string, bool) {
 
 // HasLastAccessTime returns a boolean if a field has been set.
 func (o *HyperflexDatastoreStatistic) HasLastAccessTime() bool {
-	if o != nil && o.LastAccessTime != nil {
+	if o != nil && !IsNil(o.LastAccessTime) {
 		return true
 	}
 
@@ -436,7 +440,7 @@ func (o *HyperflexDatastoreStatistic) SetLastAccessTime(v string) {
 
 // GetLastModifiedTime returns the LastModifiedTime field value if set, zero value otherwise.
 func (o *HyperflexDatastoreStatistic) GetLastModifiedTime() string {
-	if o == nil || o.LastModifiedTime == nil {
+	if o == nil || IsNil(o.LastModifiedTime) {
 		var ret string
 		return ret
 	}
@@ -446,7 +450,7 @@ func (o *HyperflexDatastoreStatistic) GetLastModifiedTime() string {
 // GetLastModifiedTimeOk returns a tuple with the LastModifiedTime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexDatastoreStatistic) GetLastModifiedTimeOk() (*string, bool) {
-	if o == nil || o.LastModifiedTime == nil {
+	if o == nil || IsNil(o.LastModifiedTime) {
 		return nil, false
 	}
 	return o.LastModifiedTime, true
@@ -454,7 +458,7 @@ func (o *HyperflexDatastoreStatistic) GetLastModifiedTimeOk() (*string, bool) {
 
 // HasLastModifiedTime returns a boolean if a field has been set.
 func (o *HyperflexDatastoreStatistic) HasLastModifiedTime() bool {
-	if o != nil && o.LastModifiedTime != nil {
+	if o != nil && !IsNil(o.LastModifiedTime) {
 		return true
 	}
 
@@ -468,7 +472,7 @@ func (o *HyperflexDatastoreStatistic) SetLastModifiedTime(v string) {
 
 // GetMountSummary returns the MountSummary field value if set, zero value otherwise.
 func (o *HyperflexDatastoreStatistic) GetMountSummary() string {
-	if o == nil || o.MountSummary == nil {
+	if o == nil || IsNil(o.MountSummary) {
 		var ret string
 		return ret
 	}
@@ -478,7 +482,7 @@ func (o *HyperflexDatastoreStatistic) GetMountSummary() string {
 // GetMountSummaryOk returns a tuple with the MountSummary field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexDatastoreStatistic) GetMountSummaryOk() (*string, bool) {
-	if o == nil || o.MountSummary == nil {
+	if o == nil || IsNil(o.MountSummary) {
 		return nil, false
 	}
 	return o.MountSummary, true
@@ -486,7 +490,7 @@ func (o *HyperflexDatastoreStatistic) GetMountSummaryOk() (*string, bool) {
 
 // HasMountSummary returns a boolean if a field has been set.
 func (o *HyperflexDatastoreStatistic) HasMountSummary() bool {
-	if o != nil && o.MountSummary != nil {
+	if o != nil && !IsNil(o.MountSummary) {
 		return true
 	}
 
@@ -500,7 +504,7 @@ func (o *HyperflexDatastoreStatistic) SetMountSummary(v string) {
 
 // GetParentUuid returns the ParentUuid field value if set, zero value otherwise.
 func (o *HyperflexDatastoreStatistic) GetParentUuid() string {
-	if o == nil || o.ParentUuid == nil {
+	if o == nil || IsNil(o.ParentUuid) {
 		var ret string
 		return ret
 	}
@@ -510,7 +514,7 @@ func (o *HyperflexDatastoreStatistic) GetParentUuid() string {
 // GetParentUuidOk returns a tuple with the ParentUuid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexDatastoreStatistic) GetParentUuidOk() (*string, bool) {
-	if o == nil || o.ParentUuid == nil {
+	if o == nil || IsNil(o.ParentUuid) {
 		return nil, false
 	}
 	return o.ParentUuid, true
@@ -518,7 +522,7 @@ func (o *HyperflexDatastoreStatistic) GetParentUuidOk() (*string, bool) {
 
 // HasParentUuid returns a boolean if a field has been set.
 func (o *HyperflexDatastoreStatistic) HasParentUuid() bool {
-	if o != nil && o.ParentUuid != nil {
+	if o != nil && !IsNil(o.ParentUuid) {
 		return true
 	}
 
@@ -532,7 +536,7 @@ func (o *HyperflexDatastoreStatistic) SetParentUuid(v string) {
 
 // GetSite returns the Site field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *HyperflexDatastoreStatistic) GetSite() HyperflexHxSiteDt {
-	if o == nil || o.Site.Get() == nil {
+	if o == nil || IsNil(o.Site.Get()) {
 		var ret HyperflexHxSiteDt
 		return ret
 	}
@@ -575,7 +579,7 @@ func (o *HyperflexDatastoreStatistic) UnsetSite() {
 
 // GetTotalCapacityInBytes returns the TotalCapacityInBytes field value if set, zero value otherwise.
 func (o *HyperflexDatastoreStatistic) GetTotalCapacityInBytes() int64 {
-	if o == nil || o.TotalCapacityInBytes == nil {
+	if o == nil || IsNil(o.TotalCapacityInBytes) {
 		var ret int64
 		return ret
 	}
@@ -585,7 +589,7 @@ func (o *HyperflexDatastoreStatistic) GetTotalCapacityInBytes() int64 {
 // GetTotalCapacityInBytesOk returns a tuple with the TotalCapacityInBytes field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexDatastoreStatistic) GetTotalCapacityInBytesOk() (*int64, bool) {
-	if o == nil || o.TotalCapacityInBytes == nil {
+	if o == nil || IsNil(o.TotalCapacityInBytes) {
 		return nil, false
 	}
 	return o.TotalCapacityInBytes, true
@@ -593,7 +597,7 @@ func (o *HyperflexDatastoreStatistic) GetTotalCapacityInBytesOk() (*int64, bool)
 
 // HasTotalCapacityInBytes returns a boolean if a field has been set.
 func (o *HyperflexDatastoreStatistic) HasTotalCapacityInBytes() bool {
-	if o != nil && o.TotalCapacityInBytes != nil {
+	if o != nil && !IsNil(o.TotalCapacityInBytes) {
 		return true
 	}
 
@@ -607,7 +611,7 @@ func (o *HyperflexDatastoreStatistic) SetTotalCapacityInBytes(v int64) {
 
 // GetUnCompressedUsedBytes returns the UnCompressedUsedBytes field value if set, zero value otherwise.
 func (o *HyperflexDatastoreStatistic) GetUnCompressedUsedBytes() int64 {
-	if o == nil || o.UnCompressedUsedBytes == nil {
+	if o == nil || IsNil(o.UnCompressedUsedBytes) {
 		var ret int64
 		return ret
 	}
@@ -617,7 +621,7 @@ func (o *HyperflexDatastoreStatistic) GetUnCompressedUsedBytes() int64 {
 // GetUnCompressedUsedBytesOk returns a tuple with the UnCompressedUsedBytes field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexDatastoreStatistic) GetUnCompressedUsedBytesOk() (*int64, bool) {
-	if o == nil || o.UnCompressedUsedBytes == nil {
+	if o == nil || IsNil(o.UnCompressedUsedBytes) {
 		return nil, false
 	}
 	return o.UnCompressedUsedBytes, true
@@ -625,7 +629,7 @@ func (o *HyperflexDatastoreStatistic) GetUnCompressedUsedBytesOk() (*int64, bool
 
 // HasUnCompressedUsedBytes returns a boolean if a field has been set.
 func (o *HyperflexDatastoreStatistic) HasUnCompressedUsedBytes() bool {
-	if o != nil && o.UnCompressedUsedBytes != nil {
+	if o != nil && !IsNil(o.UnCompressedUsedBytes) {
 		return true
 	}
 
@@ -639,7 +643,7 @@ func (o *HyperflexDatastoreStatistic) SetUnCompressedUsedBytes(v int64) {
 
 // GetUnsharedUsedBytes returns the UnsharedUsedBytes field value if set, zero value otherwise.
 func (o *HyperflexDatastoreStatistic) GetUnsharedUsedBytes() int64 {
-	if o == nil || o.UnsharedUsedBytes == nil {
+	if o == nil || IsNil(o.UnsharedUsedBytes) {
 		var ret int64
 		return ret
 	}
@@ -649,7 +653,7 @@ func (o *HyperflexDatastoreStatistic) GetUnsharedUsedBytes() int64 {
 // GetUnsharedUsedBytesOk returns a tuple with the UnsharedUsedBytes field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexDatastoreStatistic) GetUnsharedUsedBytesOk() (*int64, bool) {
-	if o == nil || o.UnsharedUsedBytes == nil {
+	if o == nil || IsNil(o.UnsharedUsedBytes) {
 		return nil, false
 	}
 	return o.UnsharedUsedBytes, true
@@ -657,7 +661,7 @@ func (o *HyperflexDatastoreStatistic) GetUnsharedUsedBytesOk() (*int64, bool) {
 
 // HasUnsharedUsedBytes returns a boolean if a field has been set.
 func (o *HyperflexDatastoreStatistic) HasUnsharedUsedBytes() bool {
-	if o != nil && o.UnsharedUsedBytes != nil {
+	if o != nil && !IsNil(o.UnsharedUsedBytes) {
 		return true
 	}
 
@@ -671,7 +675,7 @@ func (o *HyperflexDatastoreStatistic) SetUnsharedUsedBytes(v int64) {
 
 // GetUuid returns the Uuid field value if set, zero value otherwise.
 func (o *HyperflexDatastoreStatistic) GetUuid() string {
-	if o == nil || o.Uuid == nil {
+	if o == nil || IsNil(o.Uuid) {
 		var ret string
 		return ret
 	}
@@ -681,7 +685,7 @@ func (o *HyperflexDatastoreStatistic) GetUuid() string {
 // GetUuidOk returns a tuple with the Uuid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexDatastoreStatistic) GetUuidOk() (*string, bool) {
-	if o == nil || o.Uuid == nil {
+	if o == nil || IsNil(o.Uuid) {
 		return nil, false
 	}
 	return o.Uuid, true
@@ -689,7 +693,7 @@ func (o *HyperflexDatastoreStatistic) GetUuidOk() (*string, bool) {
 
 // HasUuid returns a boolean if a field has been set.
 func (o *HyperflexDatastoreStatistic) HasUuid() bool {
-	if o != nil && o.Uuid != nil {
+	if o != nil && !IsNil(o.Uuid) {
 		return true
 	}
 
@@ -701,187 +705,246 @@ func (o *HyperflexDatastoreStatistic) SetUuid(v string) {
 	o.Uuid = &v
 }
 
-// GetDataProtectionPeer returns the DataProtectionPeer field value if set, zero value otherwise.
+// GetDataProtectionPeer returns the DataProtectionPeer field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *HyperflexDatastoreStatistic) GetDataProtectionPeer() HyperflexDataProtectionPeerRelationship {
-	if o == nil || o.DataProtectionPeer == nil {
+	if o == nil || IsNil(o.DataProtectionPeer.Get()) {
 		var ret HyperflexDataProtectionPeerRelationship
 		return ret
 	}
-	return *o.DataProtectionPeer
+	return *o.DataProtectionPeer.Get()
 }
 
 // GetDataProtectionPeerOk returns a tuple with the DataProtectionPeer field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *HyperflexDatastoreStatistic) GetDataProtectionPeerOk() (*HyperflexDataProtectionPeerRelationship, bool) {
-	if o == nil || o.DataProtectionPeer == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.DataProtectionPeer, true
+	return o.DataProtectionPeer.Get(), o.DataProtectionPeer.IsSet()
 }
 
 // HasDataProtectionPeer returns a boolean if a field has been set.
 func (o *HyperflexDatastoreStatistic) HasDataProtectionPeer() bool {
-	if o != nil && o.DataProtectionPeer != nil {
+	if o != nil && o.DataProtectionPeer.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetDataProtectionPeer gets a reference to the given HyperflexDataProtectionPeerRelationship and assigns it to the DataProtectionPeer field.
+// SetDataProtectionPeer gets a reference to the given NullableHyperflexDataProtectionPeerRelationship and assigns it to the DataProtectionPeer field.
 func (o *HyperflexDatastoreStatistic) SetDataProtectionPeer(v HyperflexDataProtectionPeerRelationship) {
-	o.DataProtectionPeer = &v
+	o.DataProtectionPeer.Set(&v)
 }
 
-// GetSrcCluster returns the SrcCluster field value if set, zero value otherwise.
+// SetDataProtectionPeerNil sets the value for DataProtectionPeer to be an explicit nil
+func (o *HyperflexDatastoreStatistic) SetDataProtectionPeerNil() {
+	o.DataProtectionPeer.Set(nil)
+}
+
+// UnsetDataProtectionPeer ensures that no value is present for DataProtectionPeer, not even an explicit nil
+func (o *HyperflexDatastoreStatistic) UnsetDataProtectionPeer() {
+	o.DataProtectionPeer.Unset()
+}
+
+// GetSrcCluster returns the SrcCluster field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *HyperflexDatastoreStatistic) GetSrcCluster() HyperflexClusterRelationship {
-	if o == nil || o.SrcCluster == nil {
+	if o == nil || IsNil(o.SrcCluster.Get()) {
 		var ret HyperflexClusterRelationship
 		return ret
 	}
-	return *o.SrcCluster
+	return *o.SrcCluster.Get()
 }
 
 // GetSrcClusterOk returns a tuple with the SrcCluster field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *HyperflexDatastoreStatistic) GetSrcClusterOk() (*HyperflexClusterRelationship, bool) {
-	if o == nil || o.SrcCluster == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.SrcCluster, true
+	return o.SrcCluster.Get(), o.SrcCluster.IsSet()
 }
 
 // HasSrcCluster returns a boolean if a field has been set.
 func (o *HyperflexDatastoreStatistic) HasSrcCluster() bool {
-	if o != nil && o.SrcCluster != nil {
+	if o != nil && o.SrcCluster.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetSrcCluster gets a reference to the given HyperflexClusterRelationship and assigns it to the SrcCluster field.
+// SetSrcCluster gets a reference to the given NullableHyperflexClusterRelationship and assigns it to the SrcCluster field.
 func (o *HyperflexDatastoreStatistic) SetSrcCluster(v HyperflexClusterRelationship) {
-	o.SrcCluster = &v
+	o.SrcCluster.Set(&v)
 }
 
-// GetTgtCluster returns the TgtCluster field value if set, zero value otherwise.
+// SetSrcClusterNil sets the value for SrcCluster to be an explicit nil
+func (o *HyperflexDatastoreStatistic) SetSrcClusterNil() {
+	o.SrcCluster.Set(nil)
+}
+
+// UnsetSrcCluster ensures that no value is present for SrcCluster, not even an explicit nil
+func (o *HyperflexDatastoreStatistic) UnsetSrcCluster() {
+	o.SrcCluster.Unset()
+}
+
+// GetTgtCluster returns the TgtCluster field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *HyperflexDatastoreStatistic) GetTgtCluster() HyperflexClusterRelationship {
-	if o == nil || o.TgtCluster == nil {
+	if o == nil || IsNil(o.TgtCluster.Get()) {
 		var ret HyperflexClusterRelationship
 		return ret
 	}
-	return *o.TgtCluster
+	return *o.TgtCluster.Get()
 }
 
 // GetTgtClusterOk returns a tuple with the TgtCluster field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *HyperflexDatastoreStatistic) GetTgtClusterOk() (*HyperflexClusterRelationship, bool) {
-	if o == nil || o.TgtCluster == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.TgtCluster, true
+	return o.TgtCluster.Get(), o.TgtCluster.IsSet()
 }
 
 // HasTgtCluster returns a boolean if a field has been set.
 func (o *HyperflexDatastoreStatistic) HasTgtCluster() bool {
-	if o != nil && o.TgtCluster != nil {
+	if o != nil && o.TgtCluster.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetTgtCluster gets a reference to the given HyperflexClusterRelationship and assigns it to the TgtCluster field.
+// SetTgtCluster gets a reference to the given NullableHyperflexClusterRelationship and assigns it to the TgtCluster field.
 func (o *HyperflexDatastoreStatistic) SetTgtCluster(v HyperflexClusterRelationship) {
-	o.TgtCluster = &v
+	o.TgtCluster.Set(&v)
+}
+
+// SetTgtClusterNil sets the value for TgtCluster to be an explicit nil
+func (o *HyperflexDatastoreStatistic) SetTgtClusterNil() {
+	o.TgtCluster.Set(nil)
+}
+
+// UnsetTgtCluster ensures that no value is present for TgtCluster, not even an explicit nil
+func (o *HyperflexDatastoreStatistic) UnsetTgtCluster() {
+	o.TgtCluster.Unset()
 }
 
 func (o HyperflexDatastoreStatistic) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o HyperflexDatastoreStatistic) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.AccessibilitySummary != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.AccessibilitySummary) {
 		toSerialize["AccessibilitySummary"] = o.AccessibilitySummary
 	}
-	if o.CreationTime != nil {
+	if !IsNil(o.CreationTime) {
 		toSerialize["CreationTime"] = o.CreationTime
 	}
-	if o.DatastoreKind != nil {
+	if !IsNil(o.DatastoreKind) {
 		toSerialize["DatastoreKind"] = o.DatastoreKind
 	}
-	if o.DatastoreStatus != nil {
+	if !IsNil(o.DatastoreStatus) {
 		toSerialize["DatastoreStatus"] = o.DatastoreStatus
 	}
 	if o.Dsconfig.IsSet() {
 		toSerialize["Dsconfig"] = o.Dsconfig.Get()
 	}
-	if o.FreeCapacityInBytes != nil {
+	if !IsNil(o.FreeCapacityInBytes) {
 		toSerialize["FreeCapacityInBytes"] = o.FreeCapacityInBytes
 	}
 	if o.HostMountStatus != nil {
 		toSerialize["HostMountStatus"] = o.HostMountStatus
 	}
-	if o.IsEncrypted != nil {
+	if !IsNil(o.IsEncrypted) {
 		toSerialize["IsEncrypted"] = o.IsEncrypted
 	}
-	if o.LastAccessTime != nil {
+	if !IsNil(o.LastAccessTime) {
 		toSerialize["LastAccessTime"] = o.LastAccessTime
 	}
-	if o.LastModifiedTime != nil {
+	if !IsNil(o.LastModifiedTime) {
 		toSerialize["LastModifiedTime"] = o.LastModifiedTime
 	}
-	if o.MountSummary != nil {
+	if !IsNil(o.MountSummary) {
 		toSerialize["MountSummary"] = o.MountSummary
 	}
-	if o.ParentUuid != nil {
+	if !IsNil(o.ParentUuid) {
 		toSerialize["ParentUuid"] = o.ParentUuid
 	}
 	if o.Site.IsSet() {
 		toSerialize["Site"] = o.Site.Get()
 	}
-	if o.TotalCapacityInBytes != nil {
+	if !IsNil(o.TotalCapacityInBytes) {
 		toSerialize["TotalCapacityInBytes"] = o.TotalCapacityInBytes
 	}
-	if o.UnCompressedUsedBytes != nil {
+	if !IsNil(o.UnCompressedUsedBytes) {
 		toSerialize["UnCompressedUsedBytes"] = o.UnCompressedUsedBytes
 	}
-	if o.UnsharedUsedBytes != nil {
+	if !IsNil(o.UnsharedUsedBytes) {
 		toSerialize["UnsharedUsedBytes"] = o.UnsharedUsedBytes
 	}
-	if o.Uuid != nil {
+	if !IsNil(o.Uuid) {
 		toSerialize["Uuid"] = o.Uuid
 	}
-	if o.DataProtectionPeer != nil {
-		toSerialize["DataProtectionPeer"] = o.DataProtectionPeer
+	if o.DataProtectionPeer.IsSet() {
+		toSerialize["DataProtectionPeer"] = o.DataProtectionPeer.Get()
 	}
-	if o.SrcCluster != nil {
-		toSerialize["SrcCluster"] = o.SrcCluster
+	if o.SrcCluster.IsSet() {
+		toSerialize["SrcCluster"] = o.SrcCluster.Get()
 	}
-	if o.TgtCluster != nil {
-		toSerialize["TgtCluster"] = o.TgtCluster
+	if o.TgtCluster.IsSet() {
+		toSerialize["TgtCluster"] = o.TgtCluster.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *HyperflexDatastoreStatistic) UnmarshalJSON(bytes []byte) (err error) {
+func (o *HyperflexDatastoreStatistic) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type HyperflexDatastoreStatisticWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -917,15 +980,15 @@ func (o *HyperflexDatastoreStatistic) UnmarshalJSON(bytes []byte) (err error) {
 		// Unshared used capacity of the datastore in bytes.
 		UnsharedUsedBytes *int64 `json:"UnsharedUsedBytes,omitempty"`
 		// UUID for the datastore object.
-		Uuid               *string                                  `json:"Uuid,omitempty"`
-		DataProtectionPeer *HyperflexDataProtectionPeerRelationship `json:"DataProtectionPeer,omitempty"`
-		SrcCluster         *HyperflexClusterRelationship            `json:"SrcCluster,omitempty"`
-		TgtCluster         *HyperflexClusterRelationship            `json:"TgtCluster,omitempty"`
+		Uuid               *string                                         `json:"Uuid,omitempty"`
+		DataProtectionPeer NullableHyperflexDataProtectionPeerRelationship `json:"DataProtectionPeer,omitempty"`
+		SrcCluster         NullableHyperflexClusterRelationship            `json:"SrcCluster,omitempty"`
+		TgtCluster         NullableHyperflexClusterRelationship            `json:"TgtCluster,omitempty"`
 	}
 
 	varHyperflexDatastoreStatisticWithoutEmbeddedStruct := HyperflexDatastoreStatisticWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varHyperflexDatastoreStatisticWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varHyperflexDatastoreStatisticWithoutEmbeddedStruct)
 	if err == nil {
 		varHyperflexDatastoreStatistic := _HyperflexDatastoreStatistic{}
 		varHyperflexDatastoreStatistic.ClassId = varHyperflexDatastoreStatisticWithoutEmbeddedStruct.ClassId
@@ -957,7 +1020,7 @@ func (o *HyperflexDatastoreStatistic) UnmarshalJSON(bytes []byte) (err error) {
 
 	varHyperflexDatastoreStatistic := _HyperflexDatastoreStatistic{}
 
-	err = json.Unmarshal(bytes, &varHyperflexDatastoreStatistic)
+	err = json.Unmarshal(data, &varHyperflexDatastoreStatistic)
 	if err == nil {
 		o.MoBaseMo = varHyperflexDatastoreStatistic.MoBaseMo
 	} else {
@@ -966,7 +1029,7 @@ func (o *HyperflexDatastoreStatistic) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "AccessibilitySummary")

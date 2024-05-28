@@ -16,13 +16,13 @@ Name | Type | Description | Notes
 **SelectionCriteriaInputs** | Pointer to [**[]ServiceitemSelectionCriteriaInput**](ServiceitemSelectionCriteriaInput.md) |  | [optional] 
 **Status** | Pointer to **string** | Status of the catalog service request instance which determines the actions that are allowed on this instance. * &#x60;NotCreated&#x60; - The service item is not yet created and it is in a draft mode. A service item instance can be deleted in this state. * &#x60;InProgress&#x60; - An action is in progress and until that action has reached a final state, another action cannot be started. * &#x60;Failed&#x60; - The last action on the service item instance failed and corrective measures need to be taken to bring the service item instance back to valid state. * &#x60;Okay&#x60; - The last action on the service item instance completed and the service item instance is in Okay state. * &#x60;Decommissioned&#x60; - The service item is decommissioned and can be safely deleted. A service item instance in any other state after it has been created cannot be deleted until it has been decommissioned. | [optional] [readonly] [default to "NotCreated"]
 **UserIdOrEmail** | Pointer to **string** | The user identifier who invoked the request to create the catalog service request. | [optional] [readonly] 
-**CatalogItemDefinition** | Pointer to [**WorkflowCatalogItemDefinitionRelationship**](WorkflowCatalogItemDefinitionRelationship.md) |  | [optional] 
-**Idp** | Pointer to [**IamIdpRelationship**](IamIdpRelationship.md) |  | [optional] 
-**IdpReference** | Pointer to [**IamIdpReferenceRelationship**](IamIdpReferenceRelationship.md) |  | [optional] 
-**Organization** | Pointer to [**OrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
+**CatalogItemDefinition** | Pointer to [**NullableWorkflowCatalogItemDefinitionRelationship**](WorkflowCatalogItemDefinitionRelationship.md) |  | [optional] 
+**Idp** | Pointer to [**NullableIamIdpRelationship**](IamIdpRelationship.md) |  | [optional] 
+**IdpReference** | Pointer to [**NullableIamIdpReferenceRelationship**](IamIdpReferenceRelationship.md) |  | [optional] 
+**Organization** | Pointer to [**NullableOrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
 **ServiceItemActionInstances** | Pointer to [**[]WorkflowServiceItemActionInstanceRelationship**](WorkflowServiceItemActionInstanceRelationship.md) | An array of relationships to workflowServiceItemActionInstance resources. | [optional] [readonly] 
 **ServiceItemInstances** | Pointer to [**[]WorkflowServiceItemInstanceRelationship**](WorkflowServiceItemInstanceRelationship.md) | An array of relationships to workflowServiceItemInstance resources. | [optional] [readonly] 
-**User** | Pointer to [**IamUserRelationship**](IamUserRelationship.md) |  | [optional] 
+**User** | Pointer to [**NullableIamUserRelationship**](IamUserRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -398,6 +398,16 @@ SetCatalogItemDefinition sets CatalogItemDefinition field to given value.
 
 HasCatalogItemDefinition returns a boolean if a field has been set.
 
+### SetCatalogItemDefinitionNil
+
+`func (o *WorkflowCatalogServiceRequest) SetCatalogItemDefinitionNil(b bool)`
+
+ SetCatalogItemDefinitionNil sets the value for CatalogItemDefinition to be an explicit nil
+
+### UnsetCatalogItemDefinition
+`func (o *WorkflowCatalogServiceRequest) UnsetCatalogItemDefinition()`
+
+UnsetCatalogItemDefinition ensures that no value is present for CatalogItemDefinition, not even an explicit nil
 ### GetIdp
 
 `func (o *WorkflowCatalogServiceRequest) GetIdp() IamIdpRelationship`
@@ -423,6 +433,16 @@ SetIdp sets Idp field to given value.
 
 HasIdp returns a boolean if a field has been set.
 
+### SetIdpNil
+
+`func (o *WorkflowCatalogServiceRequest) SetIdpNil(b bool)`
+
+ SetIdpNil sets the value for Idp to be an explicit nil
+
+### UnsetIdp
+`func (o *WorkflowCatalogServiceRequest) UnsetIdp()`
+
+UnsetIdp ensures that no value is present for Idp, not even an explicit nil
 ### GetIdpReference
 
 `func (o *WorkflowCatalogServiceRequest) GetIdpReference() IamIdpReferenceRelationship`
@@ -448,6 +468,16 @@ SetIdpReference sets IdpReference field to given value.
 
 HasIdpReference returns a boolean if a field has been set.
 
+### SetIdpReferenceNil
+
+`func (o *WorkflowCatalogServiceRequest) SetIdpReferenceNil(b bool)`
+
+ SetIdpReferenceNil sets the value for IdpReference to be an explicit nil
+
+### UnsetIdpReference
+`func (o *WorkflowCatalogServiceRequest) UnsetIdpReference()`
+
+UnsetIdpReference ensures that no value is present for IdpReference, not even an explicit nil
 ### GetOrganization
 
 `func (o *WorkflowCatalogServiceRequest) GetOrganization() OrganizationOrganizationRelationship`
@@ -473,6 +503,16 @@ SetOrganization sets Organization field to given value.
 
 HasOrganization returns a boolean if a field has been set.
 
+### SetOrganizationNil
+
+`func (o *WorkflowCatalogServiceRequest) SetOrganizationNil(b bool)`
+
+ SetOrganizationNil sets the value for Organization to be an explicit nil
+
+### UnsetOrganization
+`func (o *WorkflowCatalogServiceRequest) UnsetOrganization()`
+
+UnsetOrganization ensures that no value is present for Organization, not even an explicit nil
 ### GetServiceItemActionInstances
 
 `func (o *WorkflowCatalogServiceRequest) GetServiceItemActionInstances() []WorkflowServiceItemActionInstanceRelationship`
@@ -568,6 +608,16 @@ SetUser sets User field to given value.
 
 HasUser returns a boolean if a field has been set.
 
+### SetUserNil
+
+`func (o *WorkflowCatalogServiceRequest) SetUserNil(b bool)`
+
+ SetUserNil sets the value for User to be an explicit nil
+
+### UnsetUser
+`func (o *WorkflowCatalogServiceRequest) UnsetUser()`
+
+UnsetUser ensures that no value is present for User, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

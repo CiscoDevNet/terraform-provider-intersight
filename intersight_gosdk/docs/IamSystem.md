@@ -8,11 +8,11 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "iam.System"]
 **EndPointPrivileges** | Pointer to [**[]IamEndPointPrivilegeRelationship**](IamEndPointPrivilegeRelationship.md) | An array of relationships to iamEndPointPrivilege resources. | [optional] [readonly] 
 **EndPointRoles** | Pointer to [**[]IamEndPointRoleRelationship**](IamEndPointRoleRelationship.md) | An array of relationships to iamEndPointRole resources. | [optional] [readonly] 
-**Idp** | Pointer to [**IamIdpRelationship**](IamIdpRelationship.md) |  | [optional] 
+**Idp** | Pointer to [**NullableIamIdpRelationship**](IamIdpRelationship.md) |  | [optional] 
 **PrivilegeSets** | Pointer to [**[]IamPrivilegeSetRelationship**](IamPrivilegeSetRelationship.md) | An array of relationships to iamPrivilegeSet resources. | [optional] [readonly] 
 **Privileges** | Pointer to [**[]IamPrivilegeRelationship**](IamPrivilegeRelationship.md) | An array of relationships to iamPrivilege resources. | [optional] [readonly] 
 **Roles** | Pointer to [**[]IamRoleRelationship**](IamRoleRelationship.md) | An array of relationships to iamRole resources. | [optional] [readonly] 
-**ServiceProvider** | Pointer to [**IamServiceProviderRelationship**](IamServiceProviderRelationship.md) |  | [optional] 
+**ServiceProvider** | Pointer to [**NullableIamServiceProviderRelationship**](IamServiceProviderRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -168,6 +168,16 @@ SetIdp sets Idp field to given value.
 
 HasIdp returns a boolean if a field has been set.
 
+### SetIdpNil
+
+`func (o *IamSystem) SetIdpNil(b bool)`
+
+ SetIdpNil sets the value for Idp to be an explicit nil
+
+### UnsetIdp
+`func (o *IamSystem) UnsetIdp()`
+
+UnsetIdp ensures that no value is present for Idp, not even an explicit nil
 ### GetPrivilegeSets
 
 `func (o *IamSystem) GetPrivilegeSets() []IamPrivilegeSetRelationship`
@@ -298,6 +308,16 @@ SetServiceProvider sets ServiceProvider field to given value.
 
 HasServiceProvider returns a boolean if a field has been set.
 
+### SetServiceProviderNil
+
+`func (o *IamSystem) SetServiceProviderNil(b bool)`
+
+ SetServiceProviderNil sets the value for ServiceProvider to be an explicit nil
+
+### UnsetServiceProvider
+`func (o *IamSystem) UnsetServiceProvider()`
+
+UnsetServiceProvider ensures that no value is present for ServiceProvider, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

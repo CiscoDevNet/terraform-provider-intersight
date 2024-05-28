@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type. | [default to "hyperflex.Cluster"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. The enum values provides the list of concrete types that can be instantiated from this abstract type. | [default to "hyperflex.Cluster"]
 **StorageCapacity** | Pointer to **int64** | The storage capacity in this cluster. | [optional] [readonly] 
-**ParentCluster** | Pointer to [**ComputeBaseClusterRelationship**](ComputeBaseClusterRelationship.md) |  | [optional] 
+**ParentCluster** | Pointer to [**NullableComputeBaseClusterRelationship**](ComputeBaseClusterRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -118,6 +118,16 @@ SetParentCluster sets ParentCluster field to given value.
 
 HasParentCluster returns a boolean if a field has been set.
 
+### SetParentClusterNil
+
+`func (o *StorageBaseCluster) SetParentClusterNil(b bool)`
+
+ SetParentClusterNil sets the value for ParentCluster to be an explicit nil
+
+### UnsetParentCluster
+`func (o *StorageBaseCluster) UnsetParentCluster()`
+
+UnsetParentCluster ensures that no value is present for ParentCluster, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

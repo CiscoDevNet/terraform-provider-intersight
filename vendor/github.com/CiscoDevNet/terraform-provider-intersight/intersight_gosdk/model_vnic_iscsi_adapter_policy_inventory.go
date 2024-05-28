@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the VnicIscsiAdapterPolicyInventory type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &VnicIscsiAdapterPolicyInventory{}
 
 // VnicIscsiAdapterPolicyInventory Set of iSCSI properties that govern the host-side behavior of the adapter.
 type VnicIscsiAdapterPolicyInventory struct {
@@ -29,8 +33,8 @@ type VnicIscsiAdapterPolicyInventory struct {
 	// The number of seconds to wait before the initiator assumes that the DHCP server is unavailable.
 	DhcpTimeout *int64 `json:"DhcpTimeout,omitempty"`
 	// The number of times to retry the connection in case of a failure during iSCSI LUN discovery.
-	LunBusyRetryCount    *int64                `json:"LunBusyRetryCount,omitempty"`
-	TargetMo             *MoBaseMoRelationship `json:"TargetMo,omitempty"`
+	LunBusyRetryCount    *int64                       `json:"LunBusyRetryCount,omitempty"`
+	TargetMo             NullableMoBaseMoRelationship `json:"TargetMo,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -109,7 +113,7 @@ func (o *VnicIscsiAdapterPolicyInventory) SetObjectType(v string) {
 
 // GetConnectionTimeOut returns the ConnectionTimeOut field value if set, zero value otherwise.
 func (o *VnicIscsiAdapterPolicyInventory) GetConnectionTimeOut() int64 {
-	if o == nil || o.ConnectionTimeOut == nil {
+	if o == nil || IsNil(o.ConnectionTimeOut) {
 		var ret int64
 		return ret
 	}
@@ -119,7 +123,7 @@ func (o *VnicIscsiAdapterPolicyInventory) GetConnectionTimeOut() int64 {
 // GetConnectionTimeOutOk returns a tuple with the ConnectionTimeOut field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VnicIscsiAdapterPolicyInventory) GetConnectionTimeOutOk() (*int64, bool) {
-	if o == nil || o.ConnectionTimeOut == nil {
+	if o == nil || IsNil(o.ConnectionTimeOut) {
 		return nil, false
 	}
 	return o.ConnectionTimeOut, true
@@ -127,7 +131,7 @@ func (o *VnicIscsiAdapterPolicyInventory) GetConnectionTimeOutOk() (*int64, bool
 
 // HasConnectionTimeOut returns a boolean if a field has been set.
 func (o *VnicIscsiAdapterPolicyInventory) HasConnectionTimeOut() bool {
-	if o != nil && o.ConnectionTimeOut != nil {
+	if o != nil && !IsNil(o.ConnectionTimeOut) {
 		return true
 	}
 
@@ -141,7 +145,7 @@ func (o *VnicIscsiAdapterPolicyInventory) SetConnectionTimeOut(v int64) {
 
 // GetDhcpTimeout returns the DhcpTimeout field value if set, zero value otherwise.
 func (o *VnicIscsiAdapterPolicyInventory) GetDhcpTimeout() int64 {
-	if o == nil || o.DhcpTimeout == nil {
+	if o == nil || IsNil(o.DhcpTimeout) {
 		var ret int64
 		return ret
 	}
@@ -151,7 +155,7 @@ func (o *VnicIscsiAdapterPolicyInventory) GetDhcpTimeout() int64 {
 // GetDhcpTimeoutOk returns a tuple with the DhcpTimeout field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VnicIscsiAdapterPolicyInventory) GetDhcpTimeoutOk() (*int64, bool) {
-	if o == nil || o.DhcpTimeout == nil {
+	if o == nil || IsNil(o.DhcpTimeout) {
 		return nil, false
 	}
 	return o.DhcpTimeout, true
@@ -159,7 +163,7 @@ func (o *VnicIscsiAdapterPolicyInventory) GetDhcpTimeoutOk() (*int64, bool) {
 
 // HasDhcpTimeout returns a boolean if a field has been set.
 func (o *VnicIscsiAdapterPolicyInventory) HasDhcpTimeout() bool {
-	if o != nil && o.DhcpTimeout != nil {
+	if o != nil && !IsNil(o.DhcpTimeout) {
 		return true
 	}
 
@@ -173,7 +177,7 @@ func (o *VnicIscsiAdapterPolicyInventory) SetDhcpTimeout(v int64) {
 
 // GetLunBusyRetryCount returns the LunBusyRetryCount field value if set, zero value otherwise.
 func (o *VnicIscsiAdapterPolicyInventory) GetLunBusyRetryCount() int64 {
-	if o == nil || o.LunBusyRetryCount == nil {
+	if o == nil || IsNil(o.LunBusyRetryCount) {
 		var ret int64
 		return ret
 	}
@@ -183,7 +187,7 @@ func (o *VnicIscsiAdapterPolicyInventory) GetLunBusyRetryCount() int64 {
 // GetLunBusyRetryCountOk returns a tuple with the LunBusyRetryCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VnicIscsiAdapterPolicyInventory) GetLunBusyRetryCountOk() (*int64, bool) {
-	if o == nil || o.LunBusyRetryCount == nil {
+	if o == nil || IsNil(o.LunBusyRetryCount) {
 		return nil, false
 	}
 	return o.LunBusyRetryCount, true
@@ -191,7 +195,7 @@ func (o *VnicIscsiAdapterPolicyInventory) GetLunBusyRetryCountOk() (*int64, bool
 
 // HasLunBusyRetryCount returns a boolean if a field has been set.
 func (o *VnicIscsiAdapterPolicyInventory) HasLunBusyRetryCount() bool {
-	if o != nil && o.LunBusyRetryCount != nil {
+	if o != nil && !IsNil(o.LunBusyRetryCount) {
 		return true
 	}
 
@@ -203,75 +207,112 @@ func (o *VnicIscsiAdapterPolicyInventory) SetLunBusyRetryCount(v int64) {
 	o.LunBusyRetryCount = &v
 }
 
-// GetTargetMo returns the TargetMo field value if set, zero value otherwise.
+// GetTargetMo returns the TargetMo field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *VnicIscsiAdapterPolicyInventory) GetTargetMo() MoBaseMoRelationship {
-	if o == nil || o.TargetMo == nil {
+	if o == nil || IsNil(o.TargetMo.Get()) {
 		var ret MoBaseMoRelationship
 		return ret
 	}
-	return *o.TargetMo
+	return *o.TargetMo.Get()
 }
 
 // GetTargetMoOk returns a tuple with the TargetMo field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *VnicIscsiAdapterPolicyInventory) GetTargetMoOk() (*MoBaseMoRelationship, bool) {
-	if o == nil || o.TargetMo == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.TargetMo, true
+	return o.TargetMo.Get(), o.TargetMo.IsSet()
 }
 
 // HasTargetMo returns a boolean if a field has been set.
 func (o *VnicIscsiAdapterPolicyInventory) HasTargetMo() bool {
-	if o != nil && o.TargetMo != nil {
+	if o != nil && o.TargetMo.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetTargetMo gets a reference to the given MoBaseMoRelationship and assigns it to the TargetMo field.
+// SetTargetMo gets a reference to the given NullableMoBaseMoRelationship and assigns it to the TargetMo field.
 func (o *VnicIscsiAdapterPolicyInventory) SetTargetMo(v MoBaseMoRelationship) {
-	o.TargetMo = &v
+	o.TargetMo.Set(&v)
+}
+
+// SetTargetMoNil sets the value for TargetMo to be an explicit nil
+func (o *VnicIscsiAdapterPolicyInventory) SetTargetMoNil() {
+	o.TargetMo.Set(nil)
+}
+
+// UnsetTargetMo ensures that no value is present for TargetMo, not even an explicit nil
+func (o *VnicIscsiAdapterPolicyInventory) UnsetTargetMo() {
+	o.TargetMo.Unset()
 }
 
 func (o VnicIscsiAdapterPolicyInventory) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o VnicIscsiAdapterPolicyInventory) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedPolicyAbstractPolicyInventory, errPolicyAbstractPolicyInventory := json.Marshal(o.PolicyAbstractPolicyInventory)
 	if errPolicyAbstractPolicyInventory != nil {
-		return []byte{}, errPolicyAbstractPolicyInventory
+		return map[string]interface{}{}, errPolicyAbstractPolicyInventory
 	}
 	errPolicyAbstractPolicyInventory = json.Unmarshal([]byte(serializedPolicyAbstractPolicyInventory), &toSerialize)
 	if errPolicyAbstractPolicyInventory != nil {
-		return []byte{}, errPolicyAbstractPolicyInventory
+		return map[string]interface{}{}, errPolicyAbstractPolicyInventory
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.ConnectionTimeOut != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.ConnectionTimeOut) {
 		toSerialize["ConnectionTimeOut"] = o.ConnectionTimeOut
 	}
-	if o.DhcpTimeout != nil {
+	if !IsNil(o.DhcpTimeout) {
 		toSerialize["DhcpTimeout"] = o.DhcpTimeout
 	}
-	if o.LunBusyRetryCount != nil {
+	if !IsNil(o.LunBusyRetryCount) {
 		toSerialize["LunBusyRetryCount"] = o.LunBusyRetryCount
 	}
-	if o.TargetMo != nil {
-		toSerialize["TargetMo"] = o.TargetMo
+	if o.TargetMo.IsSet() {
+		toSerialize["TargetMo"] = o.TargetMo.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *VnicIscsiAdapterPolicyInventory) UnmarshalJSON(bytes []byte) (err error) {
+func (o *VnicIscsiAdapterPolicyInventory) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type VnicIscsiAdapterPolicyInventoryWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -282,13 +323,13 @@ func (o *VnicIscsiAdapterPolicyInventory) UnmarshalJSON(bytes []byte) (err error
 		// The number of seconds to wait before the initiator assumes that the DHCP server is unavailable.
 		DhcpTimeout *int64 `json:"DhcpTimeout,omitempty"`
 		// The number of times to retry the connection in case of a failure during iSCSI LUN discovery.
-		LunBusyRetryCount *int64                `json:"LunBusyRetryCount,omitempty"`
-		TargetMo          *MoBaseMoRelationship `json:"TargetMo,omitempty"`
+		LunBusyRetryCount *int64                       `json:"LunBusyRetryCount,omitempty"`
+		TargetMo          NullableMoBaseMoRelationship `json:"TargetMo,omitempty"`
 	}
 
 	varVnicIscsiAdapterPolicyInventoryWithoutEmbeddedStruct := VnicIscsiAdapterPolicyInventoryWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varVnicIscsiAdapterPolicyInventoryWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varVnicIscsiAdapterPolicyInventoryWithoutEmbeddedStruct)
 	if err == nil {
 		varVnicIscsiAdapterPolicyInventory := _VnicIscsiAdapterPolicyInventory{}
 		varVnicIscsiAdapterPolicyInventory.ClassId = varVnicIscsiAdapterPolicyInventoryWithoutEmbeddedStruct.ClassId
@@ -304,7 +345,7 @@ func (o *VnicIscsiAdapterPolicyInventory) UnmarshalJSON(bytes []byte) (err error
 
 	varVnicIscsiAdapterPolicyInventory := _VnicIscsiAdapterPolicyInventory{}
 
-	err = json.Unmarshal(bytes, &varVnicIscsiAdapterPolicyInventory)
+	err = json.Unmarshal(data, &varVnicIscsiAdapterPolicyInventory)
 	if err == nil {
 		o.PolicyAbstractPolicyInventory = varVnicIscsiAdapterPolicyInventory.PolicyAbstractPolicyInventory
 	} else {
@@ -313,7 +354,7 @@ func (o *VnicIscsiAdapterPolicyInventory) UnmarshalJSON(bytes []byte) (err error
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "ConnectionTimeOut")
